@@ -1,0 +1,4 @@
+#!/bin/bash
+pkill -9 node 2>/dev/null
+rm -rf .next
+echo "Dev state cleaned."
