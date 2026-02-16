@@ -1,65 +1,71 @@
-import { getLogs } from "@/runtime/job-logs";
-import { getJob } from "@/runtime/jobs";
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+type RouteContext = {
+  params: Promise<{ jobId: string }>;
+};
 
-function sseLine(event: string, data: unknown) {
-  return `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
+function getJobFile(jobId: string) {
+  return path.join(process.cwd(), "runtime", "jobs", `${jobId}.json`);
 }
 
 export async function GET(
-  req: Request,
-  context: { params: Promise<{ jobId: string }> }
+  _req: Request,
+  context: RouteContext
 ) {
   const { jobId } = await context.params;
+  const jobFile = getJobFile(jobId);
+
+  if (!fs.existsSync(jobFile)) {
+    return new NextResponse("Job not found", { status: 404 });
+  }
 
   const encoder = new TextEncoder();
-  let cursor = 0;
 
-  const stream = new ReadableStream<Uint8Array>({
+  const stream = new ReadableStream({
     start(controller) {
-      const send = (chunk: string) =>
-        controller.enqueue(encoder.encode(chunk));
-
-      const initial = getLogs(jobId);
-      cursor = initial.length;
-      send(sseLine("logs", initial));
+      let lastLength = 0;
 
       const interval = setInterval(() => {
-        const logs = getLogs(jobId);
-        const job = getJob(jobId);
-
-        if (logs.length > cursor) {
-          const next = logs.slice(cursor);
-          cursor = logs.length;
-          send(sseLine("logs", next));
-        }
-
-        if (job && (job.status === "completed" || job.status === "failed")) {
-          send(
-            sseLine("done", {
-              status: job.status,
-              error: job.error,
-              result: job.result,
-            })
-          );
-          clearInterval(interval);
+        if (!fs.existsSync(jobFile)) {
           controller.close();
+          clearInterval(interval);
+          return;
         }
-      }, 500);
 
-      req.signal?.addEventListener("abort", () => {
-        clearInterval(interval);
-        try { controller.close(); } catch {}
-      });
+        const raw = fs.readFileSync(jobFile, "utf-8");
+        const job = JSON.parse(raw);
+
+        const logs = job.logs || [];
+
+        if (logs.length > lastLength) {
+          const newLogs = logs.slice(lastLength);
+          newLogs.forEach((log: string) => {
+            controller.enqueue(
+              encoder.encode(`data: ${JSON.stringify({ log })}\n\n`)
+            );
+          });
+          lastLength = logs.length;
+        }
+
+        if (job.status === "completed" || job.status === "failed") {
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ status: job.status })}\n\n`
+            )
+          );
+          controller.close();
+          clearInterval(interval);
+        }
+      }, 1000);
     },
   });
 
-  return new Response(stream, {
+  return new NextResponse(stream, {
     headers: {
       "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache, no-transform",
+      "Cache-Control": "no-cache",
       Connection: "keep-alive",
     },
   });

@@ -49,5 +49,12 @@
       "Error: <Html> should not be imported outside of pages/_document.\nRead more: https://nextjs.org/docs/messages/no-document-import-in-page\n    at x (.next/server/chunks/611.js:6:1351)\nExport encountered an error on /_error: /404, exiting the build.\n ⨯ Next.js build worker exited with code: 1 and signal: null\n"
     ],
     "createdAt": 1771221140886
+  },
+  "kid-transit-eye": {
+    "projectId": "kid-transit-eye",
+    "running": false,
+    "startedAt": 1771260428317,
+    "finishedAt": 1771260442461,
+    "exitCode": 0
   }
 }
