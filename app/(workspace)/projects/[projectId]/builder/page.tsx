@@ -1,72 +1,20 @@
-"use client";
+import { notFound } from "next/navigation";
 
-import { useEffect, useState } from "react";
+interface BuilderPageProps {
+  params: Promise<{ projectId: string }>;
+}
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export default async function BuilderPage({ params }: BuilderPageProps) {
+  const { projectId } = await params;
 
-export default function BuilderPage({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  const { projectId } = params;
-
-  const [status, setStatus] = useState<any>(null);
-  const [logs, setLogs] = useState<string[]>([]);
-  const [polling, setPolling] = useState(false);
-
-  const fetchStatus = async () => {
-    const res = await fetch(`/api/projects/${projectId}/status`);
-    const data = await res.json();
-    setStatus(data);
-
-    if (!data.running) {
-      setPolling(false);
-    }
-  };
-
-  const fetchLogs = async () => {
-    const res = await fetch(`/api/projects/${projectId}/logs`);
-    const data = await res.json();
-    setLogs(data.logs || []);
-  };
-
-  const startBuild = async () => {
-    await fetch(`/api/projects/${projectId}/build`, { method: "POST" });
-    setPolling(true);
-  };
-
-  useEffect(() => {
-    if (!polling) return;
-
-    const interval = setInterval(() => {
-      fetchStatus();
-      fetchLogs();
-    }, 2000); // poll every 2 seconds
-
-    return () => clearInterval(interval);
-  }, [polling]);
+  if (!projectId) {
+    notFound();
+  }
 
   return (
-    <div style={{ padding: 30 }}>
-      <h2>Builder: {projectId}</h2>
-
-      <button onClick={startBuild} style={{ marginTop: 10 }}>
-        Start Build
-      </button>
-
-      <div style={{ marginTop: 20 }}>
-        <strong>Status:</strong>
-        <pre>{JSON.stringify(status, null, 2)}</pre>
-      </div>
-
-      <div style={{ marginTop: 20 }}>
-        <strong>Logs:</strong>
-        <pre style={{ background: "#111", color: "#0f0", padding: 10 }}>
-          {logs.join("\n")}
-        </pre>
-      </div>
+    <div style={{ padding: 24 }}>
+      <h1>Builder: {projectId}</h1>
+      <p>Workspace build interface ready.</p>
     </div>
   );
 }
