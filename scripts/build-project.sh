@@ -1,45 +1,27 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
-
-PROJECT_ID="$1"
-
-BASE_DIR="$HOME/Documents/korelumina/projects"
-SOURCE_DIR="$BASE_DIR/$PROJECT_ID"
-
-RUNTIME_DIR="$(pwd)/runtime"
-WORKSPACE_DIR="$RUNTIME_DIR/workspaces/$PROJECT_ID"
-LOG_DIR="$RUNTIME_DIR/projects/$PROJECT_ID"
-LOG_FILE="$LOG_DIR/build.log"
-
-mkdir -p "$WORKSPACE_DIR"
-mkdir -p "$LOG_DIR"
-
-echo "=== Build Started ===" > "$LOG_FILE"
-
-if [ ! -d "$SOURCE_DIR" ]; then
-  echo "Source project not found: $SOURCE_DIR" >> "$LOG_FILE"
+PROJECT_ID="${1:-}"
+if [[ -z "${PROJECT_ID}" ]]; then
+  echo "Missing project id"
   exit 1
 fi
 
-# Clean previous workspace
-rm -rf "$WORKSPACE_DIR"
-mkdir -p "$WORKSPACE_DIR"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PROJECT_DIR="${REPO_ROOT}/projects/${PROJECT_ID}"
 
-# Copy project into isolated workspace
-cp -R "$SOURCE_DIR"/. "$WORKSPACE_DIR"/
-
-cd "$WORKSPACE_DIR"
-
-if [ ! -f "package.json" ]; then
-  echo "No package.json in workspace" >> "$LOG_FILE"
+if [[ ! -d "${PROJECT_DIR}" ]]; then
+  echo "Project directory not found: ${PROJECT_DIR}"
   exit 1
 fi
 
-echo "Installing dependencies..." >> "$LOG_FILE"
-npm install --legacy-peer-deps >> "$LOG_FILE" 2>&1
+cd "${PROJECT_DIR}"
 
-echo "Running build..." >> "$LOG_FILE"
-npm run build >> "$LOG_FILE" 2>&1
+# Install + build
+if [[ -f package-lock.json ]]; then
+  npm ci
+else
+  npm install
+fi
 
-echo "=== Build Finished with code $? ===" >> "$LOG_FILE"
+npm run build
