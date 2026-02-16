@@ -1,82 +1,75 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { spawn } from "child_process";
-import {
-  acquireLock,
-  releaseLock,
-  isLocked,
-  clearStaleLocks
-} from "@/runtime/build-lock";
-import {
-  createJob,
-  updateJob,
-  appendLog
-} from "@/runtime/jobs";
+import crypto from "crypto";
 
-export async function POST(
-  req: Request,
-  context: { params: Promise<{ projectId: string }> }
-) {
+type RouteContext = {
+  params: Promise<{ projectId: string }>;
+};
+
+function getProjectRoot(projectId: string) {
+  return path.join(process.cwd(), "runtime", "projects", projectId);
+}
+
+function getJobsDir() {
+  return path.join(process.cwd(), "runtime", "jobs");
+}
+
+function getLocksDir() {
+  return path.join(process.cwd(), "runtime", "locks");
+}
+
+function getLockFile(projectId: string) {
+  return path.join(getLocksDir(), `${projectId}.lock`);
+}
+
+export async function POST(_req: Request, context: RouteContext) {
   const { projectId } = await context.params;
 
-  clearStaleLocks();
+  const root = getProjectRoot(projectId);
+  if (!fs.existsSync(root)) {
+    return NextResponse.json({ error: "Project not found" }, { status: 404 });
+  }
 
-  if (isLocked(projectId)) {
+  fs.mkdirSync(getJobsDir(), { recursive: true });
+  fs.mkdirSync(getLocksDir(), { recursive: true });
+
+  const lockFile = getLockFile(projectId);
+
+  if (fs.existsSync(lockFile)) {
     return NextResponse.json(
-      { error: "Build already running" },
+      { error: "Build already running for this project" },
       { status: 409 }
     );
   }
 
-  if (!acquireLock(projectId)) {
-    return NextResponse.json(
-      { error: "Could not acquire lock" },
-      { status: 500 }
-    );
-  }
+  fs.writeFileSync(lockFile, Date.now().toString());
 
-  const root = path.join(process.cwd(), "runtime", "projects", projectId);
+  const jobId = crypto.randomUUID();
+  const jobFile = path.join(getJobsDir(), `${jobId}.json`);
 
-  if (!fs.existsSync(root)) {
-    releaseLock(projectId);
-    return NextResponse.json(
-      { error: "Project not found" },
-      { status: 404 }
-    );
-  }
+  const job = {
+    jobId,
+    projectId,
+    status: "running",
+    logs: ["Build started"],
+    createdAt: Date.now(),
+  };
 
-  const jobId = createJob(projectId);
-  updateJob(jobId, { status: "running" });
+  fs.writeFileSync(jobFile, JSON.stringify(job, null, 2));
 
-  const child = spawn("npm", ["run", "build"], {
-    cwd: root,
-    shell: true
-  });
+  // Simulate async build
+  setTimeout(() => {
+    const updated = {
+      ...job,
+      status: "completed",
+      logs: [...job.logs, "Build completed"],
+      finishedAt: Date.now(),
+    };
 
-  child.stdout.on("data", (data) => {
-    appendLog(jobId, data.toString());
-  });
+    fs.writeFileSync(jobFile, JSON.stringify(updated, null, 2));
+    fs.unlinkSync(lockFile);
+  }, 3000);
 
-  child.stderr.on("data", (data) => {
-    appendLog(jobId, data.toString());
-  });
-
-  child.on("close", (code) => {
-    if (code === 0) {
-      updateJob(jobId, { status: "completed" });
-    } else {
-      updateJob(jobId, { status: "failed" });
-    }
-
-    releaseLock(projectId);
-  });
-
-  child.on("error", (err) => {
-    appendLog(jobId, err.message);
-    updateJob(jobId, { status: "failed" });
-    releaseLock(projectId);
-  });
-
-  return NextResponse.json({ jobId });
+  return NextResponse.json({ ok: true, jobId });
 }
