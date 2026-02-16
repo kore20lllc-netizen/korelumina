@@ -1,85 +1,75 @@
 import { NextResponse } from "next/server";
-import { randomUUID } from "crypto";
-import { spawn } from "child_process";
-import path from "path";
 import fs from "fs";
+import path from "path";
+import crypto from "crypto";
 
-import { createJob, updateJob } from "@/runtime/jobs";
+type RouteContext = {
+  params: Promise<{ projectId: string }>;
+};
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
-function getProjectRoot(id: string) {
-  return path.join(process.cwd(), "projects", id);
+function getProjectRoot(projectId: string) {
+  return path.join(process.cwd(), "runtime", "projects", projectId);
 }
 
-export async function POST(
-  _req: Request,
-  { params }: { params: { projectId: string } }
-) {
-  const { projectId } = params;
-  const root = getProjectRoot(projectId);
+function getJobsDir() {
+  return path.join(process.cwd(), "runtime", "jobs");
+}
 
+function getLocksDir() {
+  return path.join(process.cwd(), "runtime", "locks");
+}
+
+function getLockFile(projectId: string) {
+  return path.join(getLocksDir(), `${projectId}.lock`);
+}
+
+export async function POST(_req: Request, context: RouteContext) {
+  const { projectId } = await context.params;
+
+  const root = getProjectRoot(projectId);
   if (!fs.existsSync(root)) {
+    return NextResponse.json({ error: "Project not found" }, { status: 404 });
+  }
+
+  fs.mkdirSync(getJobsDir(), { recursive: true });
+  fs.mkdirSync(getLocksDir(), { recursive: true });
+
+  const lockFile = getLockFile(projectId);
+
+  if (fs.existsSync(lockFile)) {
     return NextResponse.json(
-      { error: "Project not found" },
-      { status: 404 }
+      { error: "Build already running for this project" },
+      { status: 409 }
     );
   }
 
-  const jobId = randomUUID();
+  fs.writeFileSync(lockFile, Date.now().toString());
 
-  // 1️⃣ Create DB job
-  await createJob(jobId);
+  const jobId = crypto.randomUUID();
+  const jobFile = path.join(getJobsDir(), `${jobId}.json`);
 
-  // 2️⃣ Run async build (non-blocking)
-  (async () => {
-    try {
-      await updateJob(jobId, { status: "running" });
+  const job = {
+    jobId,
+    projectId,
+    status: "running",
+    logs: ["Build started"],
+    createdAt: Date.now(),
+  };
 
-      const child = spawn(
-        "./scripts/build-project.sh",
-        [projectId],
-        {
-          cwd: process.cwd(),
-          shell: true,
-        }
-      );
+  fs.writeFileSync(jobFile, JSON.stringify(job, null, 2));
 
-      child.stdout.on("data", async (data) => {
-        await updateJob(jobId, {
-          status: "running"
-        });
-      });
+  // Simulate async build
+  setTimeout(() => {
+    const updated = {
+      ...job,
+      status: "completed",
+      logs: [...job.logs, "Build completed"],
+      finishedAt: Date.now(),
+    };
 
-      child.stderr.on("data", async (data) => {
-        await updateJob(jobId, {
-          status: "running"
-        });
-      });
+    fs.writeFileSync(jobFile, JSON.stringify(updated, null, 2));
+    fs.unlinkSync(lockFile);
+  }, 3000);
 
-      child.on("close", async (code) => {
-        if (code === 0) {
-          await updateJob(jobId, {
-            status: "completed",
-            result: { success: true }
-          });
-        } else {
-          await updateJob(jobId, {
-            status: "failed",
-            error: `Build exited with code ${code}`
-          });
-        }
-      });
-
-    } catch (err: any) {
-      await updateJob(jobId, {
-        status: "failed",
-        error: err?.message || "Build failed"
-      });
-    }
-  })();
-
-  // 3️⃣ Immediate response (non-blocking)
-  return NextResponse.json({ jobId });
+  return NextResponse.json({ ok: true, jobId });
 }
