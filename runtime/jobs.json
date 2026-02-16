@@ -1,7 +1,10 @@
 {
-  "ff426520-19ea-4123-8d04-1b52207c3b04": {
-    "id": "ff426520-19ea-4123-8d04-1b52207c3b04",
+  "69181e5a-00c0-4f55-897f-921ec8d7b3a4": {
+    "projectId": "test",
     "status": "completed",
-    "logs": []
+    "logs": [
+      "Building...\n",
+      "Done\n"
+    ]
   }
 }
