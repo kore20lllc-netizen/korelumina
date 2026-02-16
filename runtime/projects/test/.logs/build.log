@@ -1,0 +1,14 @@
+=== Build Started ===
+
+up to date, audited 1 package in 241ms
+
+found 0 vulnerabilities
+
+=== Install Finished ===
+
+> test-project@1.0.0 build
+> echo Build successful
+
+Build successful
+
+=== Build Finished ===

@@ -1,82 +1,71 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function BuilderPage() {
-  const { projectId } = useParams<{ projectId: string }>();
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default function BuilderPage({
+  params,
+}: {
+  params: { projectId: string };
+}) {
+  const { projectId } = params;
+
+  const [status, setStatus] = useState<any>(null);
   const [logs, setLogs] = useState<string[]>([]);
-  const [jobId, setJobId] = useState<string | null>(null);
-  const [status, setStatus] = useState<string>("idle");
-  const eventSourceRef = useRef<EventSource | null>(null);
+  const [polling, setPolling] = useState(false);
 
-  async function startBuild() {
-    setLogs([]);
-    setStatus("starting");
-
-    const res = await fetch(`/api/projects/${projectId}/build`, {
-      method: "POST",
-    });
-
+  const fetchStatus = async () => {
+    const res = await fetch(`/api/projects/${projectId}/status`);
     const data = await res.json();
-    setJobId(data.jobId);
-    setStatus("streaming");
-  }
+    setStatus(data);
+
+    if (!data.running) {
+      setPolling(false);
+    }
+  };
+
+  const fetchLogs = async () => {
+    const res = await fetch(`/api/projects/${projectId}/logs`);
+    const data = await res.json();
+    setLogs(data.logs || []);
+  };
+
+  const startBuild = async () => {
+    await fetch(`/api/projects/${projectId}/build`, { method: "POST" });
+    setPolling(true);
+  };
 
   useEffect(() => {
-    if (!jobId) return;
+    if (!polling) return;
 
-    const es = new EventSource(`/api/jobs/${jobId}/stream`);
-    eventSourceRef.current = es;
+    const interval = setInterval(() => {
+      fetchStatus();
+      fetchLogs();
+    }, 2000); // poll every 2 seconds
 
-    es.onmessage = (event) => {
-      const payload = JSON.parse(event.data);
-
-      if (payload.log) {
-        setLogs((prev) => [...prev, payload.log]);
-      }
-
-      if (payload.status === "completed") {
-        setStatus("completed");
-        es.close();
-      }
-
-      if (payload.status === "failed") {
-        setStatus("failed");
-        es.close();
-      }
-    };
-
-    es.onerror = () => {
-      setStatus("connection-lost");
-      es.close();
-    };
-
-    return () => {
-      es.close();
-    };
-  }, [jobId]);
+    return () => clearInterval(interval);
+  }, [polling]);
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-black text-green-400 font-mono text-sm">
-      <div className="p-4 border-b border-gray-800 flex justify-between">
-        <div>Project: {projectId}</div>
-        <button
-          onClick={startBuild}
-          className="bg-green-600 px-3 py-1 rounded text-black"
-        >
-          Start Build
-        </button>
+    <div style={{ padding: 30 }}>
+      <h2>Builder: {projectId}</h2>
+
+      <button onClick={startBuild} style={{ marginTop: 10 }}>
+        Start Build
+      </button>
+
+      <div style={{ marginTop: 20 }}>
+        <strong>Status:</strong>
+        <pre>{JSON.stringify(status, null, 2)}</pre>
       </div>
 
-      <div className="flex-1 overflow-auto p-4">
-        {logs.map((log, i) => (
-          <div key={i}>{log}</div>
-        ))}
-      </div>
-
-      <div className="p-2 border-t border-gray-800 text-xs">
-        Status: {status}
+      <div style={{ marginTop: 20 }}>
+        <strong>Logs:</strong>
+        <pre style={{ background: "#111", color: "#0f0", padding: 10 }}>
+          {logs.join("\n")}
+        </pre>
       </div>
     </div>
   );
