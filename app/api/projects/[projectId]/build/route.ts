@@ -1,74 +1,81 @@
 import { NextResponse } from "next/server";
-import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
-import crypto from "crypto";
-
-const RUNTIME_ROOT = path.join(process.cwd(), "runtime", "projects");
-const JOBS_FILE = path.join(process.cwd(), "runtime", "jobs.json");
-
-function getProjectRoot(projectId: string) {
-  return path.join(RUNTIME_ROOT, projectId);
-}
-
-function readJobs() {
-  if (!fs.existsSync(JOBS_FILE)) {
-    fs.writeFileSync(JOBS_FILE, JSON.stringify({}));
-  }
-  return JSON.parse(fs.readFileSync(JOBS_FILE, "utf-8"));
-}
-
-function writeJobs(data: any) {
-  fs.writeFileSync(JOBS_FILE, JSON.stringify(data, null, 2));
-}
+import { spawn } from "child_process";
+import {
+  acquireLock,
+  releaseLock,
+  isLocked,
+  clearStaleLocks
+} from "@/runtime/build-lock";
+import {
+  createJob,
+  updateJob,
+  appendLog
+} from "@/runtime/jobs";
 
 export async function POST(
   req: Request,
   context: { params: Promise<{ projectId: string }> }
 ) {
   const { projectId } = await context.params;
-  const root = getProjectRoot(projectId);
+
+  clearStaleLocks();
+
+  if (isLocked(projectId)) {
+    return NextResponse.json(
+      { error: "Build already running" },
+      { status: 409 }
+    );
+  }
+
+  if (!acquireLock(projectId)) {
+    return NextResponse.json(
+      { error: "Could not acquire lock" },
+      { status: 500 }
+    );
+  }
+
+  const root = path.join(process.cwd(), "runtime", "projects", projectId);
 
   if (!fs.existsSync(root)) {
+    releaseLock(projectId);
     return NextResponse.json(
       { error: "Project not found" },
       { status: 404 }
     );
   }
 
-  const jobId = crypto.randomUUID();
-  const jobs = readJobs();
+  const jobId = createJob(projectId);
+  updateJob(jobId, { status: "running" });
 
-  jobs[jobId] = {
-    projectId,
-    status: "running",
-    logs: [],
-  };
-
-  writeJobs(jobs);
-
-  const child = spawn(
-    "bash",
-    ["-c", "echo Building... && sleep 2 && echo Done"],
-    { cwd: root }
-  );
+  const child = spawn("npm", ["run", "build"], {
+    cwd: root,
+    shell: true
+  });
 
   child.stdout.on("data", (data) => {
-    const jobs = readJobs();
-    jobs[jobId].logs.push(data.toString());
-    writeJobs(jobs);
+    appendLog(jobId, data.toString());
   });
 
   child.stderr.on("data", (data) => {
-    const jobs = readJobs();
-    jobs[jobId].logs.push("ERROR: " + data.toString());
-    writeJobs(jobs);
+    appendLog(jobId, data.toString());
   });
 
-  child.on("close", () => {
-    const jobs = readJobs();
-    jobs[jobId].status = "completed";
-    writeJobs(jobs);
+  child.on("close", (code) => {
+    if (code === 0) {
+      updateJob(jobId, { status: "completed" });
+    } else {
+      updateJob(jobId, { status: "failed" });
+    }
+
+    releaseLock(projectId);
+  });
+
+  child.on("error", (err) => {
+    appendLog(jobId, err.message);
+    updateJob(jobId, { status: "failed" });
+    releaseLock(projectId);
   });
 
   return NextResponse.json({ jobId });

@@ -1,33 +1,51 @@
-export type JobStatus = "queued" | "running" | "completed" | "failed";
+import fs from "fs";
+import path from "path";
 
-export interface Job {
-  id: string;
-  status: JobStatus;
-  logs: string[];
-  result?: any;
-  error?: string;
+const JOB_FILE = path.join(process.cwd(), "runtime", "jobs.json");
+
+function readJobs() {
+  if (!fs.existsSync(JOB_FILE)) {
+    fs.writeFileSync(JOB_FILE, JSON.stringify({}));
+  }
+  return JSON.parse(fs.readFileSync(JOB_FILE, "utf8"));
 }
 
-const jobs = new Map<string, Job>();
-
-export function createJob(id: string) {
-  const job: Job = { id, status: "queued", logs: [] };
-  jobs.set(id, job);
-  return job;
+function writeJobs(data: any) {
+  fs.writeFileSync(JOB_FILE, JSON.stringify(data, null, 2));
 }
 
-export function updateJob(id: string, data: Partial<Job>) {
-  const job = jobs.get(id);
-  if (!job) return;
-  jobs.set(id, { ...job, ...data });
+export function createJob(projectId: string) {
+  const jobs = readJobs();
+  const jobId = crypto.randomUUID();
+
+  jobs[jobId] = {
+    projectId,
+    status: "queued",
+    logs: [],
+    createdAt: Date.now(),
+  };
+
+  writeJobs(jobs);
+  return jobId;
 }
 
-export function appendLog(id: string, line: string) {
-  const job = jobs.get(id);
-  if (!job) return;
-  jobs.set(id, { ...job, logs: [...job.logs, line] });
+export function updateJob(jobId: string, update: any) {
+  const jobs = readJobs();
+  if (!jobs[jobId]) return;
+
+  jobs[jobId] = { ...jobs[jobId], ...update };
+  writeJobs(jobs);
 }
 
-export function getJob(id: string) {
-  return jobs.get(id);
+export function appendLog(jobId: string, line: string) {
+  const jobs = readJobs();
+  if (!jobs[jobId]) return;
+
+  jobs[jobId].logs.push(line);
+  writeJobs(jobs);
+}
+
+export function getJob(jobId: string) {
+  const jobs = readJobs();
+  return jobs[jobId];
 }

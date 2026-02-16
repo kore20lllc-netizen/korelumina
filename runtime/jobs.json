@@ -6,5 +6,48 @@
       "Building...\n",
       "Done\n"
     ]
+  },
+  "c1835ff4-8d59-423e-9b0f-054431c86937": {
+    "projectId": "test",
+    "status": "completed",
+    "logs": [],
+    "createdAt": 1771220745538
+  },
+  "701737cc-8bbf-4331-b150-c8ae5f599dce": {
+    "projectId": "test",
+    "status": "failed",
+    "logs": [
+      "\n> ai-builder@0.1.0 build\n> next build\n\n",
+      " ⚠ You are using a non-standard \"NODE_ENV\" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env\n",
+      "   ▲ Next.js 15.5.12\n",
+      "   - Environments: .env.local\n\n",
+      "   Creating an optimized production build ...\n",
+      " ✓ Compiled successfully in 2.8s\n",
+      "   Linting and checking validity of types ...\n",
+      "   Collecting page data ...\n",
+      "   Generating static pages (0/7) ...\n",
+      "Error: <Html> should not be imported outside of pages/_document.\nRead more: https://nextjs.org/docs/messages/no-document-import-in-page\n    at x (.next/server/chunks/611.js:6:1351)\nError occurred prerendering page \"/500\". Read more: https://nextjs.org/docs/messages/prerender-error\n",
+      "Error: <Html> should not be imported outside of pages/_document.\nRead more: https://nextjs.org/docs/messages/no-document-import-in-page\n    at x (.next/server/chunks/611.js:6:1351)\nExport encountered an error on /_error: /500, exiting the build.\n",
+      " ⨯ Next.js build worker exited with code: 1 and signal: null\n"
+    ],
+    "createdAt": 1771220888033
+  },
+  "d55d2186-0024-4d5d-9870-da23a889ab2e": {
+    "projectId": "test",
+    "status": "failed",
+    "logs": [
+      "\n> ai-builder@0.1.0 build\n> next build\n\n",
+      " ⚠ You are using a non-standard \"NODE_ENV\" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env\n",
+      "   ▲ Next.js 15.5.12\n",
+      "   - Environments: .env.local\n\n",
+      "   Creating an optimized production build ...\n",
+      " ✓ Compiled successfully in 2.9s\n",
+      "   Linting and checking validity of types ...\n",
+      "   Collecting page data ...\n",
+      "   Generating static pages (0/7) ...\n",
+      "Error: <Html> should not be imported outside of pages/_document.\nRead more: https://nextjs.org/docs/messages/no-document-import-in-page\n    at x (.next/server/chunks/611.js:6:1351)\nError occurred prerendering page \"/404\". Read more: https://nextjs.org/docs/messages/prerender-error\n",
+      "Error: <Html> should not be imported outside of pages/_document.\nRead more: https://nextjs.org/docs/messages/no-document-import-in-page\n    at x (.next/server/chunks/611.js:6:1351)\nExport encountered an error on /_error: /404, exiting the build.\n ⨯ Next.js build worker exited with code: 1 and signal: null\n"
+    ],
+    "createdAt": 1771221140886
   }
 }
