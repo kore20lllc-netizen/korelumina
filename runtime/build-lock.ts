@@ -1,14 +1,11 @@
-let activeBuilds = 0;
-const MAX_CONCURRENT_BUILDS = 2;
+const locks = new Set<string>();
 
-export function canStartBuild() {
-  return activeBuilds < MAX_CONCURRENT_BUILDS;
+export function acquireLock(id: string) {
+  if (locks.has(id)) return false;
+  locks.add(id);
+  return true;
 }
 
-export function startBuild() {
-  activeBuilds++;
-}
-
-export function endBuild() {
-  if (activeBuilds > 0) activeBuilds--;
+export function releaseLock(id: string) {
+  locks.delete(id);
 }
