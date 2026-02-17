@@ -1,61 +1,48 @@
-import fs from "fs";
 import path from "path";
+import { acquireLock, releaseLock, touchLock } from "./locks";
 
-const TIMEOUT_MS = 10 * 60 * 1000;
+const STALE_MS = 15 * 60 * 1000; // 15 minutes
 
-type LockData = {
-  pid: number;
-  startedAt: number;
-};
-
-function isProcessAlive(pid: number) {
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch {
-    return false;
-  }
+function getProjectLockPath(workspaceId: string, projectId: string) {
+  return path.resolve(
+    "runtime",
+    "locks",
+    workspaceId,
+    `${projectId}.lock`
+  );
 }
 
-function getLockPath(projectId: string) {
-  return path.join(process.cwd(), "runtime", "projects", projectId, "lock.json");
+export function acquireProjectLock(
+  workspaceId: string,
+  projectId: string,
+  jobId: string
+) {
+  const lockPath = getProjectLockPath(workspaceId, projectId);
+
+  return acquireLock(
+    lockPath,
+    {
+      pid: process.pid,
+      jobId,
+      workspaceId,
+      projectId,
+      startedAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    { staleMs: STALE_MS }
+  );
 }
 
-export function acquireProjectLock(projectId: string): boolean {
-  const lockPath = getLockPath(projectId);
-
-  if (fs.existsSync(lockPath)) {
-    const raw = fs.readFileSync(lockPath, "utf8");
-    const data: LockData = JSON.parse(raw);
-
-    const isAlive = isProcessAlive(data.pid);
-    const expired = Date.now() - data.startedAt > TIMEOUT_MS;
-
-    if (isAlive && !expired) {
-      return false;
-    }
-
-    fs.unlinkSync(lockPath);
-  }
-
-  const payload: LockData = {
-    pid: process.pid,
-    startedAt: Date.now()
-  };
-
-  fs.writeFileSync(lockPath, JSON.stringify(payload, null, 2));
-  return true;
+export function heartbeatProject(workspaceId: string, projectId: string) {
+  const lockPath = getProjectLockPath(workspaceId, projectId);
+  touchLock(lockPath);
 }
 
-export function releaseProjectLock(projectId: string) {
-  const lockPath = getLockPath(projectId);
-
-  if (!fs.existsSync(lockPath)) return;
-
-  const raw = fs.readFileSync(lockPath, "utf8");
-  const data: LockData = JSON.parse(raw);
-
-  if (data.pid === process.pid) {
-    fs.unlinkSync(lockPath);
-  }
+export function releaseProjectLock(
+  workspaceId: string,
+  projectId: string,
+  jobId: string
+) {
+  const lockPath = getProjectLockPath(workspaceId, projectId);
+  releaseLock(lockPath, jobId);
 }
