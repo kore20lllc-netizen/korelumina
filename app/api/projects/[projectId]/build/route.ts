@@ -8,13 +8,17 @@ export async function POST(
 ) {
   const { projectId } = await context.params;
 
-  const workspacePath = resolveWorkspacePath(projectId);
+  // Temporary default workspace until auth layer is added
+  const workspaceId = "default";
+
+  const workspacePath = resolveWorkspacePath(workspaceId, projectId);
   assertProjectExists(workspacePath);
 
   const job = createJob(projectId);
 
   return NextResponse.json({
     ok: true,
+    workspaceId,
     projectId,
     jobId: job.id
   });
