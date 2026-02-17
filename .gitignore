@@ -11,11 +11,14 @@ out
 # logs
 *.log
 
-# runtime generated state ONLY
+# runtime generated STATE only (keep code tracked)
 runtime/workspaces/
 runtime/projects/
 runtime/jobs/
-runtime/global-lock.ts
+runtime/logs/
+runtime/locks/
+runtime/watchdog.log
+runtime/jobs.json
 
 # mac
 .DS_Store
