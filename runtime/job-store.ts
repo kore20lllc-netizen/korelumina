@@ -61,3 +61,23 @@ export function getJob(id: string) {
   const store = readStore();
   return store.jobs.find(j => j.id === id) || null;
 }
+
+export function getRunningJobForProject(projectId: string) {
+  const storePath = path.join(process.cwd(), "runtime", "jobs.json");
+
+  if (!fs.existsSync(storePath)) return null;
+
+  const raw = fs.readFileSync(storePath, "utf8");
+  if (!raw) return null;
+
+  const state = JSON.parse(raw);
+
+  if (!state.jobs) return null;
+
+  const running = state.jobs.find(
+    (j: any) => j.projectId === projectId && j.status === "running"
+  );
+
+  return running || null;
+}
+
