@@ -1,20 +1,17 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
+import { workspaceRoot, assertSafeProjectId } from "@/lib/runtime/paths";
 import path from "path";
+import fs from "fs";
 
 export async function GET(
-  req: Request,
-  context: { params: Promise<{ projectId: string }> }
+  _req: Request,
+  ctx: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = await context.params;
+  const { projectId } = await ctx.params;
+  assertSafeProjectId(projectId);
 
-  const logPath = path.join(
-    process.cwd(),
-    "runtime",
-    "projects",
-    projectId,
-    "watchdog.log"
-  );
+  const root = workspaceRoot(projectId);
+  const logPath = path.join(root, "build.log");
 
   if (!fs.existsSync(logPath)) {
     return NextResponse.json({ logs: [] });

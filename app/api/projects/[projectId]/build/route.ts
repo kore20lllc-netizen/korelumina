@@ -1,85 +1,45 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
+import { workspaceRoot, requirePackageJson, assertSafeProjectId } from "@/lib/runtime/paths";
 import path from "path";
-import { spawn } from "child_process";
+import fs from "fs";
 
-function getProjectRoot(projectId: string) {
-  return path.join(process.cwd(), "projects", projectId);
-}
-
-function getLockPath(projectId: string) {
-  return path.join(process.cwd(), "runtime", "locks", `${projectId}.lock`);
-}
-
-function ensureDir(dir: string) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+function ensureDir(p: string) {
+  fs.mkdirSync(p, { recursive: true });
 }
 
 export async function POST(
-  req: Request,
-  context: { params: Promise<{ projectId: string }> }
+  _req: Request,
+  ctx: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = await context.params;
+  const { projectId } = await ctx.params;
+  assertSafeProjectId(projectId);
 
-  const root = getProjectRoot(projectId);
-  const lockPath = getLockPath(projectId);
+  const root = workspaceRoot(projectId);
+  const logPath = path.join(root, "build.log");
 
-  if (!fs.existsSync(root)) {
+  try {
+    requirePackageJson(root);
+  } catch (e: any) {
     return NextResponse.json(
-      { error: "Project not found" },
-      { status: 404 }
+      { error: e?.message ?? "Missing package.json", root },
+      { status: 400 }
     );
   }
 
-  ensureDir(path.dirname(lockPath));
+  ensureDir(root);
 
-  // 🔒 HARD LOCK CHECK
-  if (fs.existsSync(lockPath)) {
-    return NextResponse.json(
-      { error: "Build already running" },
-      { status: 409 }
-    );
-  }
+  // Fire-and-forget build script (writes to build.log)
+  // NOTE: this endpoint only starts build. status/logs endpoints read the log.
+  const { spawn } = await import("child_process");
 
-  // 🔒 CREATE LOCK IMMEDIATELY
-  fs.writeFileSync(
-    lockPath,
-    JSON.stringify({
-      pid: process.pid,
-      startedAt: Date.now()
-    }),
-    "utf8"
-  );
-
-  const logPath = path.join(
-    process.cwd(),
-    "runtime",
-    "projects",
-    projectId,
-    "build.log"
-  );
-
-  ensureDir(path.dirname(logPath));
-
-  const out = fs.createWriteStream(logPath, { flags: "a" });
-
-  const child = spawn("bash", ["scripts/build-project.sh", projectId], {
+  const child = spawn("bash", ["./scripts/build-project.sh", projectId], {
     cwd: process.cwd(),
-    stdio: ["ignore", "pipe", "pipe"]
+    env: process.env,
+    stdio: ["ignore", "ignore", "ignore"],
+    detached: true
   });
 
-  child.stdout.on("data", d => out.write(d));
-  child.stderr.on("data", d => out.write(d));
+  child.unref();
 
-  child.on("close", () => {
-    if (fs.existsSync(lockPath)) {
-      fs.unlinkSync(lockPath);
-    }
-    out.end();
-  });
-
-  return NextResponse.json({
-    ok: true,
-    projectId
-  });
+  return NextResponse.json({ ok: true, projectId, root, logPath });
 }

@@ -1,12 +1,9 @@
-node_modules
+# Next
 .next
-.env.local
-node_modules_old
-runtime/previews
+out
 
-# Runtime build system
-runtime/projects/*
-runtime/workspaces/*
-runtime/jobs/*
-runtime/*.json
-runtime/*.log
+# Logs
+*.log
+
+# Runtime (generated)
+runtime/
