@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
+import { spawn } from "child_process";
+import path from "path";
+import fs from "fs";
+
 import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
-import { createJob } from "@/runtime/job-store";
+import { createJob, completeJob } from "@/runtime/job-store";
 import {
   acquireGlobalLock,
   releaseGlobalLock,
-  heartbeatGlobal,
 } from "@/runtime/global-lock";
 import {
   acquireProjectLock,
   releaseProjectLock,
-  heartbeatProject,
 } from "@/runtime/project-lock";
 
 type Ctx = {
@@ -19,52 +21,55 @@ type Ctx = {
 export async function POST(req: Request, context: Ctx) {
   const { workspaceId, projectId } = await context.params;
 
-  // 1. Validate project
   const projectRoot = resolveWorkspacePath(workspaceId, projectId);
   assertProjectExists(projectRoot);
 
-  // 2. Create job
   const job = createJob(workspaceId, projectId);
 
-  // 3. Acquire project lock
   const projectLock = acquireProjectLock(workspaceId, projectId, job.id);
   if (!projectLock.acquired) {
     return NextResponse.json(
-      {
-        error: "Project already building",
-        runningJobId: projectLock.jobId,
-      },
+      { error: "Project already building" },
       { status: 409 }
     );
   }
 
-  // 4. Acquire global lock
   const globalLock = acquireGlobalLock(job.id, workspaceId);
   if (!globalLock.acquired) {
     releaseProjectLock(workspaceId, projectId, job.id);
-
     return NextResponse.json(
-      {
-        error: "Another workspace is building",
-        runningJobId: globalLock.jobId,
-      },
+      { error: "Another workspace is building" },
       { status: 409 }
     );
   }
 
-  // 5. Simulate build async (replace with real execution later)
-  setTimeout(() => {
+  const logDir = path.join(process.cwd(), "runtime", "logs", workspaceId);
+  fs.mkdirSync(logDir, { recursive: true });
+
+  const logPath = path.join(logDir, `${projectId}.log`);
+  fs.writeFileSync(logPath, "=== Build Started ===\n");
+
+  const child = spawn("npm", ["run", "build"], {
+    cwd: projectRoot,
+    shell: true,
+  });
+
+  child.stdout.on("data", (data) => {
+    fs.appendFileSync(logPath, data.toString());
+  });
+
+  child.stderr.on("data", (data) => {
+    fs.appendFileSync(logPath, data.toString());
+  });
+
+  child.on("close", (code) => {
+    fs.appendFileSync(logPath, `\n=== Build Finished (${code}) ===\n`);
+
+    completeJob(job.id, code === 0);
+
     releaseProjectLock(workspaceId, projectId, job.id);
     releaseGlobalLock(job.id);
-  }, 5000);
-
-  // 6. Heartbeat while running
-  const heartbeat = setInterval(() => {
-    heartbeatProject(workspaceId, projectId);
-    heartbeatGlobal();
-  }, 5000);
-
-  setTimeout(() => clearInterval(heartbeat), 15000);
+  });
 
   return NextResponse.json({
     ok: true,
