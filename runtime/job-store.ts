@@ -1,83 +1,124 @@
 import fs from "fs";
 import path from "path";
-import { randomUUID } from "crypto";
-
-const JOBS_FILE = path.join(process.cwd(), "runtime", "jobs.json");
+import crypto from "crypto";
 
 export type JobStatus = "queued" | "running" | "success" | "failed";
 
-export interface Job {
+export type JobRecord = {
   id: string;
+  workspaceId: string;
   projectId: string;
   status: JobStatus;
-  createdAt: number;
+  startedAt?: number;
   finishedAt?: number;
+  pid?: number;
+  exitCode?: number | null;
+  error?: string;
   logPath?: string;
+};
+
+const RUNTIME_DIR = path.resolve(process.cwd(), "runtime");
+const JOBS_PATH = path.join(RUNTIME_DIR, "jobs.json");
+const LOGS_DIR = path.join(RUNTIME_DIR, "logs");
+
+function ensureDir(p: string) {
+  fs.mkdirSync(p, { recursive: true });
 }
 
-function ensureFile() {
-  if (!fs.existsSync(JOBS_FILE)) {
-    fs.mkdirSync(path.dirname(JOBS_FILE), { recursive: true });
-    fs.writeFileSync(JOBS_FILE, JSON.stringify({ jobs: [] }, null, 2));
+function readJobs(): JobRecord[] {
+  try {
+    if (!fs.existsSync(JOBS_PATH)) return [];
+    const raw = fs.readFileSync(JOBS_PATH, "utf8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as JobRecord[]) : [];
+  } catch {
+    return [];
   }
 }
 
-function readStore(): { jobs: Job[] } {
-  ensureFile();
-  return JSON.parse(fs.readFileSync(JOBS_FILE, "utf8"));
+function writeJobs(jobs: JobRecord[]) {
+  ensureDir(path.dirname(JOBS_PATH));
+  fs.writeFileSync(JOBS_PATH, JSON.stringify(jobs, null, 2), "utf8");
 }
 
-function writeStore(data: { jobs: Job[] }) {
-  fs.writeFileSync(JOBS_FILE, JSON.stringify(data, null, 2));
+function now() {
+  return Date.now();
 }
 
-export function createJob(projectId: string): Job {
-  const store = readStore();
+export function getRunningJobForProject(workspaceId: string, projectId: string) {
+  const jobs = readJobs();
+  return (
+    jobs.find(
+      (j) =>
+        j.workspaceId === workspaceId &&
+        j.projectId === projectId &&
+        (j.status === "queued" || j.status === "running")
+    ) || null
+  );
+}
 
-  const job: Job = {
-    id: randomUUID(),
+export function createJob(workspaceId: string, projectId: string): JobRecord {
+  const jobs = readJobs();
+
+  const id =
+    typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${now()}-${Math.random().toString(16).slice(2)}`;
+
+  const logPath = path.join(LOGS_DIR, workspaceId, `${projectId}.log`);
+  ensureDir(path.dirname(logPath));
+
+  const job: JobRecord = {
+    id,
+    workspaceId,
     projectId,
-    status: "queued",
-    createdAt: Date.now(),
+    status: "running",
+    startedAt: now(),
+    logPath,
   };
 
-  store.jobs.push(job);
-  writeStore(store);
-
+  jobs.push(job);
+  writeJobs(jobs);
   return job;
 }
 
-export function updateJob(id: string, patch: Partial<Job>) {
-  const store = readStore();
-  const job = store.jobs.find(j => j.id === id);
-  if (!job) return null;
-
-  Object.assign(job, patch);
-  writeStore(store);
-  return job;
+export function setJobPid(jobId: string, pid: number) {
+  const jobs = readJobs();
+  const j = jobs.find((x) => x.id === jobId);
+  if (!j) return;
+  j.pid = pid;
+  writeJobs(jobs);
 }
 
-export function getJob(id: string) {
-  const store = readStore();
-  return store.jobs.find(j => j.id === id) || null;
+export function completeJob(jobId: string, exitCode: number | null) {
+  const jobs = readJobs();
+  const j = jobs.find((x) => x.id === jobId);
+  if (!j) return;
+
+  j.exitCode = exitCode;
+  j.finishedAt = now();
+  j.status = exitCode === 0 ? "success" : "failed";
+
+  writeJobs(jobs);
 }
 
-export function getRunningJobForProject(projectId: string) {
-  const storePath = path.join(process.cwd(), "runtime", "jobs.json");
+export function failJob(jobId: string, error: string) {
+  const jobs = readJobs();
+  const j = jobs.find((x) => x.id === jobId);
+  if (!j) return;
 
-  if (!fs.existsSync(storePath)) return null;
+  j.status = "failed";
+  j.error = error;
+  j.finishedAt = now();
 
-  const raw = fs.readFileSync(storePath, "utf8");
-  if (!raw) return null;
-
-  const state = JSON.parse(raw);
-
-  if (!state.jobs) return null;
-
-  const running = state.jobs.find(
-    (j: any) => j.projectId === projectId && j.status === "running"
-  );
-
-  return running || null;
+  writeJobs(jobs);
 }
 
+export function appendJobLog(jobId: string, line: string) {
+  const jobs = readJobs();
+  const j = jobs.find((x) => x.id === jobId);
+  if (!j?.logPath) return;
+
+  ensureDir(path.dirname(j.logPath));
+  fs.appendFileSync(j.logPath, line.endsWith("\n") ? line : line + "\n", "utf8");
+}

@@ -1,31 +1,20 @@
+import fs from "fs";
 import path from "path";
-import { acquireLock, releaseLock, touchLock } from "./locks";
 
-const GLOBAL_LOCK_PATH = path.resolve("runtime/locks/global.lock");
-const STALE_MS = 15 * 60 * 1000; // 15 minutes
+const LOCK_PATH = path.join(process.cwd(), "runtime", "global.lock");
 
-export function acquireGlobalLock(jobId: string, workspaceId: string) {
-  return acquireLock(
-    GLOBAL_LOCK_PATH,
-    {
-      pid: process.pid,
-      jobId,
-      workspaceId,
-      startedAt: Date.now(),
-      updatedAt: Date.now(),
-    },
-    { staleMs: STALE_MS }
-  );
+export function acquireGlobalLock(): boolean {
+  if (fs.existsSync(LOCK_PATH)) {
+    return false;
+  }
+
+  fs.mkdirSync(path.dirname(LOCK_PATH), { recursive: true });
+  fs.writeFileSync(LOCK_PATH, String(process.pid), "utf8");
+  return true;
 }
 
-export function heartbeatGlobal() {
-  touchLock(GLOBAL_LOCK_PATH);
-}
-
-export function releaseGlobalLock(jobId: string) {
-  releaseLock(GLOBAL_LOCK_PATH, jobId);
-}
-
-export function getGlobalLockPath() {
-  return GLOBAL_LOCK_PATH;
+export function releaseGlobalLock() {
+  if (fs.existsSync(LOCK_PATH)) {
+    fs.unlinkSync(LOCK_PATH);
+  }
 }
