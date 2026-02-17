@@ -1,45 +1,30 @@
 import { NextResponse } from "next/server";
-import { workspaceRoot, requirePackageJson, assertSafeProjectId } from "@/lib/runtime/paths";
-import path from "path";
-import fs from "fs";
-
-function ensureDir(p: string) {
-  fs.mkdirSync(p, { recursive: true });
-}
+import { startBuild } from "@/lib/build-executor";
 
 export async function POST(
-  _req: Request,
-  ctx: { params: Promise<{ projectId: string }> }
+  req: Request,
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = await ctx.params;
-  assertSafeProjectId(projectId);
+  const { projectId } = await params;
 
-  const root = workspaceRoot(projectId);
-  const logPath = path.join(root, "build.log");
-
-  try {
-    requirePackageJson(root);
-  } catch (e: any) {
+  // 🔒 Production Guard
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.ALLOW_RUNTIME_BUILDS !== "true"
+  ) {
     return NextResponse.json(
-      { error: e?.message ?? "Missing package.json", root },
-      { status: 400 }
+      { error: "Runtime builds disabled in production" },
+      { status: 403 }
     );
   }
 
-  ensureDir(root);
-
-  // Fire-and-forget build script (writes to build.log)
-  // NOTE: this endpoint only starts build. status/logs endpoints read the log.
-  const { spawn } = await import("child_process");
-
-  const child = spawn("bash", ["./scripts/build-project.sh", projectId], {
-    cwd: process.cwd(),
-    env: process.env,
-    stdio: ["ignore", "ignore", "ignore"],
-    detached: true
-  });
-
-  child.unref();
-
-  return NextResponse.json({ ok: true, projectId, root, logPath });
+  try {
+    const job = await startBuild(projectId);
+    return NextResponse.json({ ok: true, projectId, jobId: job.id });
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message || "Build failed" },
+      { status: 500 }
+    );
+  }
 }
