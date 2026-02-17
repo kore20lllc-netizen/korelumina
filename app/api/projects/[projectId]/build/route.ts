@@ -1,28 +1,21 @@
 import { NextResponse } from "next/server";
 import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
-import { createJob } from "../../../../runtime/job-store";
+import { createJob } from "../../../../../runtime/job-store";
 
 export async function POST(
-  _req: Request,
-  { params }: { params: { projectId: string } }
+  req: Request,
+  context: { params: Promise<{ projectId: string }> }
 ) {
-  try {
-    const { projectId } = params;
+  const { projectId } = await context.params;
 
-    const projectRoot = resolveWorkspacePath(projectId);
-    assertProjectExists(projectRoot);
+  const workspacePath = resolveWorkspacePath(projectId);
+  assertProjectExists(workspacePath);
 
-    const job = createJob(projectId);
+  const job = createJob(projectId);
 
-    return NextResponse.json({
-      ok: true,
-      projectId,
-      jobId: job.id,
-    });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err.message || "Build failed" },
-      { status: 400 }
-    );
-  }
+  return NextResponse.json({
+    ok: true,
+    projectId,
+    jobId: job.id
+  });
 }
