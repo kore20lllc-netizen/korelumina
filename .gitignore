@@ -1,9 +1,21 @@
-# Next
+# dependencies
+node_modules/
+
+# next build
 .next
 out
 
-# Logs
+# env
+.env.local
+
+# logs
 *.log
 
-# Runtime (generated)
-runtime/
+# runtime generated state ONLY
+runtime/workspaces/
+runtime/projects/
+runtime/jobs/
+runtime/global-lock.ts
+
+# mac
+.DS_Store
