@@ -2,26 +2,26 @@
 set -euo pipefail
 
 PROJECT_ID="${1:-}"
-if [[ -z "${PROJECT_ID}" ]]; then
-  echo "Missing project id"
+if [[ -z "$PROJECT_ID" ]]; then
+  echo "Missing projectId"
   exit 1
 fi
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PROJECT_DIR="${REPO_ROOT}/projects/${PROJECT_ID}"
+ROOT="$(pwd)/runtime/workspaces/$PROJECT_ID"
+LOG="$ROOT/build.log"
 
-if [[ ! -d "${PROJECT_DIR}" ]]; then
-  echo "Project directory not found: ${PROJECT_DIR}"
+mkdir -p "$ROOT"
+
+if [[ ! -f "$ROOT/package.json" ]]; then
+  echo "No package.json in workspace: $ROOT" > "$LOG"
   exit 1
 fi
 
-cd "${PROJECT_DIR}"
-
-# Install + build
-if [[ -f package-lock.json ]]; then
-  npm ci
-else
+{
+  echo "=== Build Started ==="
+  echo "Root: $ROOT"
+  cd "$ROOT"
   npm install
-fi
-
-npm run build
+  npm run build
+  echo "=== Build Finished with code 0 ==="
+} > "$LOG" 2>&1

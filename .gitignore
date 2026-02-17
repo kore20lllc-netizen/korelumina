@@ -1,12 +1,21 @@
-node_modules
-.next
-.env.local
-node_modules_old
-runtime/previews
+# dependencies
+node_modules/
 
-# Runtime build system
-runtime/projects/*
-runtime/workspaces/*
-runtime/jobs/*
-runtime/*.json
-runtime/*.log
+# next build
+.next
+out
+
+# env
+.env.local
+
+# logs
+*.log
+
+# runtime generated state ONLY
+runtime/workspaces/
+runtime/projects/
+runtime/jobs/
+runtime/global-lock.ts
+
+# mac
+.DS_Store

@@ -1,27 +1,26 @@
 import { NextResponse } from "next/server";
+import { workspaceRoot, assertSafeProjectId } from "@/lib/runtime/paths";
 import path from "path";
 import fs from "fs";
-import { getJob } from "@/runtime/job-store";
 
 export async function GET(
   _req: Request,
-  context: { params: Promise<{ projectId: string }> }
+  ctx: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = await context.params;
+  const { projectId } = await ctx.params;
+  assertSafeProjectId(projectId);
 
-  const root = path.join(process.cwd(), "runtime", "projects", projectId);
+  const root = workspaceRoot(projectId);
   const logPath = path.join(root, "build.log");
 
-  const job = getJob(projectId);
+  const exists = fs.existsSync(logPath);
+  const logSize = exists ? fs.statSync(logPath).size : 0;
 
-  const logSize = fs.existsSync(logPath)
-    ? fs.statSync(logPath).size
-    : 0;
-
+  // Minimal status for now (Phase 3 will add PID + stale lock)
   return NextResponse.json({
     projectId,
-    running: job?.running ?? false,
-    exitCode: job?.exitCode ?? null,
+    root,
+    running: false,
     logPath,
     logSize
   });
