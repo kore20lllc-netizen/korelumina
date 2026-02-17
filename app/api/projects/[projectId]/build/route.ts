@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
-import { createJob } from "../../../../../runtime/job-store";
+import { createJob, getRunningJobForProject } from "../../../../../runtime/job-store";
 
 export async function POST(
   req: Request,
@@ -8,11 +10,27 @@ export async function POST(
 ) {
   const { projectId } = await context.params;
 
-  // Temporary default workspace until auth layer is added
   const workspaceId = "default";
 
   const workspacePath = resolveWorkspacePath(workspaceId, projectId);
   assertProjectExists(workspacePath);
+
+  const packageJsonPath = path.join(workspacePath, "package.json");
+
+  if (!fs.existsSync(packageJsonPath)) {
+    return NextResponse.json(
+      { error: "No package.json found in project root" },
+      { status: 400 }
+    );
+  }
+
+  const existing = getRunningJobForProject(projectId);
+  if (existing) {
+    return NextResponse.json(
+      { error: "Build already running for this project" },
+      { status: 409 }
+    );
+  }
 
   const job = createJob(projectId);
 
