@@ -1,53 +1,63 @@
 import fs from "fs";
 import path from "path";
+import { randomUUID } from "crypto";
 
-const STORE_PATH = path.join(process.cwd(), "runtime", "jobs.json");
+const JOBS_FILE = path.join(process.cwd(), "runtime", "jobs.json");
 
-type JobRecord = {
+export type JobStatus = "queued" | "running" | "success" | "failed";
+
+export interface Job {
+  id: string;
   projectId: string;
-  running: boolean;
-  startedAt?: number;
+  status: JobStatus;
+  createdAt: number;
   finishedAt?: number;
-  exitCode?: number;
-};
-
-function readStore(): Record<string, JobRecord> {
-  if (!fs.existsSync(STORE_PATH)) return {};
-  return JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
+  logPath?: string;
 }
 
-function writeStore(data: Record<string, JobRecord>) {
-  fs.writeFileSync(STORE_PATH, JSON.stringify(data, null, 2));
+function ensureFile() {
+  if (!fs.existsSync(JOBS_FILE)) {
+    fs.mkdirSync(path.dirname(JOBS_FILE), { recursive: true });
+    fs.writeFileSync(JOBS_FILE, JSON.stringify({ jobs: [] }, null, 2));
+  }
 }
 
-export function startJob(projectId: string) {
+function readStore(): { jobs: Job[] } {
+  ensureFile();
+  return JSON.parse(fs.readFileSync(JOBS_FILE, "utf8"));
+}
+
+function writeStore(data: { jobs: Job[] }) {
+  fs.writeFileSync(JOBS_FILE, JSON.stringify(data, null, 2));
+}
+
+export function createJob(projectId: string): Job {
   const store = readStore();
-  store[projectId] = {
+
+  const job: Job = {
+    id: randomUUID(),
     projectId,
-    running: true,
-    startedAt: Date.now()
+    status: "queued",
+    createdAt: Date.now(),
   };
+
+  store.jobs.push(job);
   writeStore(store);
+
+  return job;
 }
 
-export function finishJob(projectId: string, exitCode: number) {
+export function updateJob(id: string, patch: Partial<Job>) {
   const store = readStore();
-  if (!store[projectId]) return;
+  const job = store.jobs.find(j => j.id === id);
+  if (!job) return null;
 
-  store[projectId] = {
-    ...store[projectId],
-    running: false,
-    finishedAt: Date.now(),
-    exitCode
-  };
-
+  Object.assign(job, patch);
   writeStore(store);
+  return job;
 }
 
-export function getJob(projectId: string) {
+export function getJob(id: string) {
   const store = readStore();
-  return store[projectId] || {
-    projectId,
-    running: false
-  };
+  return store.jobs.find(j => j.id === id) || null;
 }
