@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
+import { ensureManifest } from "@/lib/project-manifest";
 
 type Ctx = {
   params: Promise<{ workspaceId: string; projectId: string }>;
@@ -13,20 +12,9 @@ export async function GET(_req: Request, context: Ctx) {
   const projectRoot = resolveWorkspacePath(workspaceId, projectId);
   assertProjectExists(projectRoot);
 
-  const pkgPath = path.join(projectRoot, "package.json");
-
-  let pkg: any = null;
-  if (fs.existsSync(pkgPath)) {
-    pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
-  }
-
-  return NextResponse.json({
-    workspaceId,
-    projectId,
-    exists: true,
-    hasPackageJson: !!pkg,
-    scripts: pkg?.scripts ?? {},
-    dependencies: Object.keys(pkg?.dependencies ?? {}),
-    devDependencies: Object.keys(pkg?.devDependencies ?? {}),
+  const manifest = ensureManifest(projectRoot, projectId, {
+    strict: process.env.NODE_ENV === "production",
   });
+
+  return NextResponse.json(manifest);
 }

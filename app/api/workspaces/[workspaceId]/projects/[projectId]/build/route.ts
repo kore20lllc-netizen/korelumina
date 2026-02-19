@@ -1,151 +1,82 @@
 import { NextResponse } from "next/server";
-import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
+import { spawn } from "child_process";
+
 import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
+import { ensureManifest, resolveManifestCommand } from "@/lib/project-manifest";
+
+import { createJob, completeJob, failJob, getRunningJobForProject, setJobPid, appendJobLog } from "@/runtime/job-store";
+import { acquireGlobalLock, releaseGlobalLock } from "@/runtime/global-lock";
+import { acquireProjectLock, releaseProjectLock } from "@/runtime/locks";
+
 import { isPidRunning } from "@/lib/pid";
-import {
-  createJob,
-  getRunningJobForProject,
-  setJobPid,
-  completeJob,
-  failJob,
-  appendJobLog,
-} from "@/runtime/job-store";
 
 type Ctx = {
   params: Promise<{ workspaceId: string; projectId: string }>;
 };
 
-function safeWrite(jobId: string, msg: string) {
-  try {
-    appendJobLog(jobId, msg);
-  } catch {}
+function ensureDir(p: string) {
+  fs.mkdirSync(p, { recursive: true });
 }
 
-function hasScript(projectRoot: string, script: string) {
-  try {
-    const pkgPath = path.join(projectRoot, "package.json");
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
-    return Boolean(pkg?.scripts?.[script]);
-  } catch {
-    return false;
-  }
-}
-
-function runCmd(
-  jobId: string,
-  cwd: string,
-  cmd: string,
-  args: string[],
-  onPid?: (pid: number) => void
-): Promise<number> {
-  return new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, {
-      cwd,
-      stdio: ["ignore", "pipe", "pipe"],
-      shell: false,
-      env: {
-        ...process.env,
-        // Make installs quieter + deterministic in CI-like environments
-        npm_config_loglevel: "warn",
-      },
-    });
-
-    if (child.pid && onPid) onPid(child.pid);
-
-    child.stdout.on("data", (b) => safeWrite(jobId, String(b)));
-    child.stderr.on("data", (b) => safeWrite(jobId, String(b)));
-
-    child.on("error", (err) => reject(err));
-    child.on("close", (code) => resolve(code ?? 1));
-  });
-}
-
-export async function POST(req: Request, context: Ctx) {
+export async function POST(_req: Request, context: Ctx) {
   const { workspaceId, projectId } = await context.params;
 
-  // If a job is marked running, verify PID. If PID is dead, allow rebuild.
-  const existing = getRunningJobForProject(workspaceId, projectId);
-  if (existing?.pid) {
-    if (isPidRunning(existing.pid)) {
-      return NextResponse.json(
-        { error: "Project already building", jobId: existing.id },
-        { status: 409 }
-      );
+  const releaseProject = acquireProjectLock(workspaceId, projectId);
+  const releaseGlobal = acquireGlobalLock();
+  try {
+    const projectRoot = resolveWorkspacePath(workspaceId, projectId);
+    assertProjectExists(projectRoot);
+
+    const manifest = ensureManifest(projectRoot, projectId, {
+      strict: process.env.NODE_ENV === "production",
+    });
+
+    // If a job is marked running, verify PID. If PID is dead, allow rebuild.
+    const existing = getRunningJobForProject(workspaceId, projectId);
+    if (existing?.pid && isPidRunning(existing.pid)) {
+      return NextResponse.json({ error: "Project already building" }, { status: 409 });
     }
-    // PID dead -> finish as failed (stale)
-    completeJob(existing.id, 1);
-  } else if (existing) {
-    // No pid recorded yet; treat as running to be safe.
-    return NextResponse.json(
-      { error: "Project already building", jobId: existing.id },
-      { status: 409 }
-    );
+
+    const job = createJob(workspaceId, projectId);
+
+    const { cmd, args } = resolveManifestCommand(manifest, "build");
+
+    ensureDir(path.dirname(job.logPath));
+    fs.writeFileSync(job.logPath, "", "utf8");
+    appendJobLog(job.id, `[build] starting ${projectId}`);
+    appendJobLog(job.id, `[build] cmd=${cmd} args=${args.join(" ")}`);
+
+    const child = spawn(cmd, args, {
+      cwd: projectRoot,
+      env: {
+        ...process.env,
+        KORELUMINA_BUILD: "1",
+      },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+
+    if (!child.pid) {
+      failJob(job.id, "failed-to-spawn-build");
+      return NextResponse.json({ error: "Failed to start build" }, { status: 500 });
+    }
+
+    setJobPid(job.id, child.pid);
+
+    child.stdout.on("data", d => appendJobLog(job.id, String(d)));
+    child.stderr.on("data", d => appendJobLog(job.id, String(d)));
+
+    child.on("exit", code => {
+      if (code === 0) completeJob(job.id, 0);
+      else failJob(job.id, `exit-${code ?? "null"}`, code ?? 1);
+    });
+
+    return NextResponse.json({ ok: true, workspaceId, projectId, jobId: job.id });
+  } catch (e: any) {
+    return NextResponse.json({ error: e?.message ?? "Build failed" }, { status: 500 });
+  } finally {
+    releaseGlobalLock(releaseGlobal);
+    releaseProjectLock(releaseProject);
   }
-
-  const projectRoot = resolveWorkspacePath(workspaceId, projectId);
-  assertProjectExists(projectRoot);
-
-  const job = createJob(workspaceId, projectId);
-
-  safeWrite(job.id, `== build start ==`);
-  safeWrite(job.id, `workspace=${workspaceId}`);
-  safeWrite(job.id, `project=${projectId}`);
-  safeWrite(job.id, `root=${projectRoot}`);
-
-  // Fire-and-forget build process, API returns immediately.
-  (async () => {
-    try {
-      // Install
-      safeWrite(job.id, `\n== npm install ==\n`);
-      let pidCaptured = false;
-
-      const installCode = await runCmd(
-        job.id,
-        projectRoot,
-        "npm",
-        ["install", "--no-audit", "--no-fund"],
-        (pid) => {
-          if (!pidCaptured) {
-            setJobPid(job.id, pid);
-            pidCaptured = true;
-          }
-        }
-      );
-
-      if (installCode !== 0) {
-        safeWrite(job.id, `\n== install failed (code ${installCode}) ==\n`);
-        completeJob(job.id, installCode);
-        return;
-      }
-
-      // Build
-      const buildScript = hasScript(projectRoot, "build")
-        ? "build"
-        : hasScript(projectRoot, "build:dev")
-        ? "build:dev"
-        : null;
-
-      if (!buildScript) {
-        safeWrite(job.id, `\n== no build script found in package.json ==\n`);
-        failJob(job.id, "No build script found");
-        return;
-      }
-
-      safeWrite(job.id, `\n== npm run ${buildScript} ==\n`);
-      const buildCode = await runCmd(job.id, projectRoot, "npm", ["run", buildScript]);
-
-      safeWrite(job.id, `\n== build finished (code ${buildCode}) ==\n`);
-      completeJob(job.id, buildCode);
-    } catch (e: any) {
-      safeWrite(job.id, `\n== build crashed ==\n${String(e?.stack || e)}\n`);
-      failJob(job.id, String(e?.message || e));
-    }
-  })();
-
-  return NextResponse.json(
-    { ok: true, workspaceId, projectId, jobId: job.id, logPath: job.logPath },
-    { status: 200 }
-  );
 }

@@ -1,41 +1,26 @@
 import fs from "fs";
 import path from "path";
 
-export type LockRecord = {
-  pid: number;
-  jobId: string;
-  workspaceId: string;
-  projectId?: string; // undefined for global lock
-  startedAt: number;
-  updatedAt: number;
-};
+const RUNTIME_ROOT = path.resolve(process.cwd(), "runtime");
+const LOCKS_DIR = path.resolve(RUNTIME_ROOT, "locks");
 
-export type AcquireResult =
-  | { ok: true; lock: LockRecord }
-  | { ok: false; reason: "locked"; lock: LockRecord }
-  | { ok: false; reason: "invalid"; message: string };
+type LockFile = {
+  scope: "global" | "project";
+  workspaceId?: string;
+  projectId?: string;
+
+  holderPid: number;
+  acquiredAt: number;
+  expiresAt: number;
+};
 
 function ensureDir(dir: string) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function readJson<T>(file: string): T | null {
+function isPidRunning(pid: number) {
   try {
-    if (!fs.existsSync(file)) return null;
-    return JSON.parse(fs.readFileSync(file, "utf8")) as T;
-  } catch {
-    return null;
-  }
-}
-
-function writeJson(file: string, data: unknown) {
-  ensureDir(path.dirname(file));
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
-}
-
-export function isPidAlive(pid: number): boolean {
-  try {
-    // signal 0 does not kill the process; it only checks existence/permission
+    // signal 0 checks existence without killing
     process.kill(pid, 0);
     return true;
   } catch {
@@ -43,57 +28,130 @@ export function isPidAlive(pid: number): boolean {
   }
 }
 
-export function isStale(lock: LockRecord, staleMs: number): boolean {
-  const now = Date.now();
-  const updatedAt = typeof lock.updatedAt === "number" ? lock.updatedAt : lock.startedAt;
-  return now - updatedAt > staleMs;
-}
-
-export function acquireLock(
-  lockPath: string,
-  next: LockRecord,
-  opts: { staleMs: number }
-): AcquireResult {
-  if (!lockPath) return { ok: false, reason: "invalid", message: "Missing lockPath" };
-
-  const existing = readJson<LockRecord>(lockPath);
-
-  if (!existing) {
-    writeJson(lockPath, next);
-    return { ok: true, lock: next };
-  }
-
-  // stale by time OR dead PID → clear
-  const pidAlive = typeof existing.pid === "number" && isPidAlive(existing.pid);
-  if (!pidAlive || isStale(existing, opts.staleMs)) {
-    try {
-      fs.unlinkSync(lockPath);
-    } catch {
-      // ignore
-    }
-    writeJson(lockPath, next);
-    return { ok: true, lock: next };
-  }
-
-  return { ok: false, reason: "locked", lock: existing };
-}
-
-export function touchLock(lockPath: string) {
-  const existing = readJson<LockRecord>(lockPath);
-  if (!existing) return;
-  existing.updatedAt = Date.now();
-  writeJson(lockPath, existing);
-}
-
-export function releaseLock(lockPath: string, jobId?: string) {
-  const existing = readJson<LockRecord>(lockPath);
-  if (!existing) return;
-
-  // If jobId is provided, only release if it matches (prevents another job from nuking a newer lock)
-  if (jobId && existing.jobId !== jobId) return;
-
+function readLock(lockPath: string): LockFile | null {
   try {
-    fs.unlinkSync(lockPath);
+    if (!fs.existsSync(lockPath)) return null;
+    const raw = fs.readFileSync(lockPath, "utf8");
+    const v = JSON.parse(raw);
+    if (!v || typeof v !== "object") return null;
+    return v as LockFile;
+  } catch {
+    return null;
+  }
+}
+
+function writeLock(lockPath: string, lock: LockFile) {
+  ensureDir(path.dirname(lockPath));
+  fs.writeFileSync(lockPath, JSON.stringify(lock, null, 2), "utf8");
+}
+
+function removeLock(lockPath: string) {
+  try {
+    if (fs.existsSync(lockPath)) fs.unlinkSync(lockPath);
+  } catch {
+    // ignore
+  }
+}
+
+function isLockActive(lock: LockFile) {
+  const now = Date.now();
+  if (lock.expiresAt <= now) return false;
+  if (!lock.holderPid) return false;
+  return isPidRunning(lock.holderPid);
+}
+
+function lockPathGlobal() {
+  return path.resolve(LOCKS_DIR, "global.lock.json");
+}
+
+function lockPathProject(workspaceId: string, projectId: string) {
+  return path.resolve(LOCKS_DIR, "projects", workspaceId, `${projectId}.lock.json`);
+}
+
+export function acquireGlobalLock(ttlMs: number = 60_000) {
+  const lockPath = lockPathGlobal();
+  const existing = readLock(lockPath);
+
+  if (existing && isLockActive(existing)) {
+    throw new Error("Global lock is active");
+  }
+
+  const lock: LockFile = {
+    scope: "global",
+    holderPid: process.pid,
+    acquiredAt: Date.now(),
+    expiresAt: Date.now() + ttlMs,
+  };
+
+  writeLock(lockPath, lock);
+
+  return () => {
+    const cur = readLock(lockPath);
+    if (cur?.holderPid === process.pid) removeLock(lockPath);
+  };
+}
+
+export function acquireProjectLock(
+  workspaceId: string,
+  projectId: string,
+  ttlMs: number = 60_000
+) {
+  const lockPath = lockPathProject(workspaceId, projectId);
+  const existing = readLock(lockPath);
+
+  if (existing && isLockActive(existing)) {
+    throw new Error("Project lock is active");
+  }
+
+  const lock: LockFile = {
+    scope: "project",
+    workspaceId,
+    projectId,
+    holderPid: process.pid,
+    acquiredAt: Date.now(),
+    expiresAt: Date.now() + ttlMs,
+  };
+
+  writeLock(lockPath, lock);
+
+  return () => {
+    const cur = readLock(lockPath);
+    if (cur?.holderPid === process.pid) removeLock(lockPath);
+  };
+}
+
+export function releaseProjectLock(release: (() => void) | null | undefined) {
+  try {
+    release?.();
+  } catch {
+    // ignore
+  }
+}
+
+export function cleanupExpiredLocks() {
+  // Best-effort sweep
+  try {
+    if (!fs.existsSync(LOCKS_DIR)) return;
+
+    // global
+    const g = readLock(lockPathGlobal());
+    if (g && !isLockActive(g)) removeLock(lockPathGlobal());
+
+    // project locks
+    const projectsDir = path.resolve(LOCKS_DIR, "projects");
+    if (!fs.existsSync(projectsDir)) return;
+
+    for (const workspaceId of fs.readdirSync(projectsDir)) {
+      const wdir = path.resolve(projectsDir, workspaceId);
+      if (!fs.statSync(wdir).isDirectory()) continue;
+
+      for (const file of fs.readdirSync(wdir)) {
+        if (!file.endsWith(".lock.json")) continue;
+        const lp = path.resolve(wdir, file);
+        const lock = readLock(lp);
+        if (lock && !isLockActive(lock)) removeLock(lp);
+      }
+    }
   } catch {
     // ignore
   }
