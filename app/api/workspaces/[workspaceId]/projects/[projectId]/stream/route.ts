@@ -1,6 +1,7 @@
 import fs from "fs";
+import path from "path";
 import { NextResponse } from "next/server";
-import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
+
 import { readJobs } from "@/runtime/job-store";
 
 type Ctx = {
@@ -10,60 +11,83 @@ type Ctx = {
 export async function GET(_req: Request, context: Ctx) {
   const { workspaceId, projectId } = await context.params;
 
-  const projectRoot = resolveWorkspacePath(workspaceId, projectId);
-  assertProjectExists(projectRoot);
-
   const jobs = readJobs().filter(
-    j => j.workspaceId === workspaceId && j.projectId === projectId
+    (j) => j.workspaceId === workspaceId && j.projectId === projectId
   );
 
   const latestJob = jobs.length ? jobs[jobs.length - 1] : null;
+  const logPath = latestJob?.logPath ? path.resolve(latestJob.logPath) : null;
 
-  if (!latestJob?.logPath || !fs.existsSync(latestJob.logPath)) {
-    return NextResponse.json({ error: "No active build" }, { status: 404 });
+  if (!latestJob || !logPath) {
+    return NextResponse.json({ error: "No job log available" }, { status: 404 });
   }
 
-  const stream = new ReadableStream({
-    start(controller) {
-      const send = (data: string) => {
-        controller.enqueue(`data: ${data}\n\n`);
-      };
+  const encoder = new TextEncoder();
 
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
       let lastSize = 0;
 
-      const interval = setInterval(() => {
-        if (!fs.existsSync(latestJob.logPath)) return;
+      const push = () => {
+        if (!fs.existsSync(logPath)) return;
 
-        const stats = fs.statSync(latestJob.logPath);
-        if (stats.size > lastSize) {
-          const fd = fs.openSync(latestJob.logPath, "r");
-          const buffer = Buffer.alloc(stats.size - lastSize);
-          fs.readSync(fd, buffer, 0, buffer.length, lastSize);
-          fs.closeSync(fd);
+        const stats = fs.statSync(logPath);
+        if (stats.size <= lastSize) return;
 
+        const fd = fs.openSync(logPath, "r");
+        try {
+          const buf = Buffer.alloc(stats.size - lastSize);
+          fs.readSync(fd, buf, 0, buf.length, lastSize);
           lastSize = stats.size;
-          send(buffer.toString());
+          controller.enqueue(encoder.encode(buf.toString("utf8")));
+        } finally {
+          fs.closeSync(fd);
         }
+      };
 
-        const updatedJobs = readJobs();
-        const updated = updatedJobs.find(j => j.id === latestJob.id);
+      // initial push
+      push();
 
-        if (updated?.status === "success" || updated?.status === "failed") {
-          send("[BUILD_COMPLETE]");
-          clearInterval(interval);
+      const interval = setInterval(push, 500);
+
+      // keepalive
+      const keepalive = setInterval(() => {
+        controller.enqueue(encoder.encode(""));
+      }, 15_000);
+
+      const cleanup = () => {
+        clearInterval(interval);
+        clearInterval(keepalive);
+      };
+
+      // stop streaming when job finishes
+      const stopCheck = setInterval(() => {
+        const refreshed = readJobs().filter(
+          (j) => j.workspaceId === workspaceId && j.projectId === projectId
+        );
+        const cur = refreshed.length ? refreshed[refreshed.length - 1] : null;
+
+        if (!cur || (cur.status !== "running" && cur.status !== "pending")) {
+          clearInterval(stopCheck);
+          cleanup();
           controller.close();
         }
-      }, 1000);
+      }, 500);
 
-      return () => clearInterval(interval);
-    }
+      (controller as any).cleanup = () => {
+        clearInterval(stopCheck);
+        cleanup();
+      };
+    },
+    cancel(controller) {
+      (controller as any).cleanup?.();
+    },
   });
 
   return new NextResponse(stream, {
     headers: {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
-      Connection: "keep-alive",
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "no-cache, no-transform",
     },
   });
 }

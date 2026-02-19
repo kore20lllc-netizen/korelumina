@@ -1,83 +1,72 @@
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 
 export type JobStatus = "pending" | "running" | "success" | "failed";
-export type JobKind = "build" | "preview";
 
 export type JobRecord = {
   id: string;
   workspaceId: string;
   projectId: string;
-  kind: JobKind;
   status: JobStatus;
-
-  createdAt: number;
-  startedAt: number | null;
+  startedAt: number;
   finishedAt: number | null;
-
+  logPath: string;
   pid: number | null;
   exitCode: number | null;
-
-  logPath: string | null;
-  lastError: string | null;
 };
 
-const RUNTIME_ROOT = path.resolve(process.cwd(), "runtime");
-const JOBS_PATH = path.resolve(RUNTIME_ROOT, "jobs.json");
+const ROOT = process.cwd();
+const JOBS_FILE = path.resolve(ROOT, "runtime", "jobs.json");
 
-function ensureDir(dir: string) {
-  fs.mkdirSync(dir, { recursive: true });
+function ensureDir(p: string) {
+  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
 }
 
-function safeParseArray(raw: string): any[] {
-  try {
-    const v = JSON.parse(raw);
-    return Array.isArray(v) ? v : [];
-  } catch {
-    return [];
+function ensureJobsFile() {
+  ensureDir(path.dirname(JOBS_FILE));
+  if (!fs.existsSync(JOBS_FILE)) {
+    fs.writeFileSync(JOBS_FILE, "[]", "utf8");
   }
 }
 
 export function readJobs(): JobRecord[] {
+  ensureJobsFile();
   try {
-    if (!fs.existsSync(JOBS_PATH)) return [];
-    const raw = fs.readFileSync(JOBS_PATH, "utf8");
-    return safeParseArray(raw) as JobRecord[];
+    const raw = fs.readFileSync(JOBS_FILE, "utf8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
   }
 }
 
 export function writeJobs(jobs: JobRecord[]) {
-  ensureDir(path.dirname(JOBS_PATH));
-  fs.writeFileSync(JOBS_PATH, JSON.stringify(jobs, null, 2), "utf8");
+  ensureJobsFile();
+  fs.writeFileSync(JOBS_FILE, JSON.stringify(jobs, null, 2), "utf8");
 }
 
-function uuid() {
-  // good enough for local runtime; real UUID not required here
-  return `${Date.now().toString(16)}-${Math.random().toString(16).slice(2)}`;
+function buildLogPath(workspaceId: string, projectId: string, jobId: string) {
+  const dir = path.resolve(ROOT, "runtime", "logs", workspaceId);
+  ensureDir(dir);
+  return path.join(dir, `${projectId}.${jobId}.log`);
 }
 
-export function createJob(
-  workspaceId: string,
-  projectId: string,
-  kind: JobKind = "build"
-): JobRecord {
+export function createJob(workspaceId: string, projectId: string): JobRecord {
   const jobs = readJobs();
+  const id = crypto.randomUUID();
+  const logPath = buildLogPath(workspaceId, projectId, id);
 
   const job: JobRecord = {
-    id: uuid(),
+    id,
     workspaceId,
     projectId,
-    kind,
     status: "pending",
-    createdAt: Date.now(),
     startedAt: Date.now(),
     finishedAt: null,
+    logPath,
     pid: null,
     exitCode: null,
-    logPath: null,
-    lastError: null,
   };
 
   jobs.push(job);
@@ -85,72 +74,37 @@ export function createJob(
   return job;
 }
 
-export function getRunningJobForProject(workspaceId: string, projectId: string) {
-  const jobs = readJobs().filter(
-    j => j.workspaceId === workspaceId && j.projectId === projectId
-  );
-  const latest = jobs.length ? jobs[jobs.length - 1] : null;
-  if (!latest) return null;
-  if (latest.status === "pending" || latest.status === "running") return latest;
-  return null;
+export function getJobById(jobId: string): JobRecord | null {
+  return readJobs().find(j => j.id === jobId) ?? null;
 }
 
-export function setJobPid(jobId: string, pid: number, logPath?: string) {
+export function getRunningJobForProject(
+  workspaceId: string,
+  projectId: string
+): JobRecord | null {
+  return (
+    readJobs().find(
+      j =>
+        j.workspaceId === workspaceId &&
+        j.projectId === projectId &&
+        (j.status === "running" || j.status === "pending")
+    ) ?? null
+  );
+}
+
+export function updateJob(jobId: string, patch: Partial<JobRecord>) {
   const jobs = readJobs();
   const idx = jobs.findIndex(j => j.id === jobId);
-  if (idx === -1) return;
+  if (idx === -1) return null;
 
-  jobs[idx] = {
-    ...jobs[idx],
-    pid,
-    status: "running",
-    logPath: logPath ?? jobs[idx].logPath ?? null,
-  };
-
+  jobs[idx] = { ...jobs[idx], ...patch };
   writeJobs(jobs);
+  return jobs[idx];
 }
 
 export function appendJobLog(jobId: string, line: string) {
-  const jobs = readJobs();
-  const job = jobs.find(j => j.id === jobId);
-  if (!job?.logPath) return;
+  const job = getJobById(jobId);
+  if (!job) return;
 
-  try {
-    ensureDir(path.dirname(job.logPath));
-    fs.appendFileSync(job.logPath, line.endsWith("\n") ? line : line + "\n", "utf8");
-  } catch {
-    // ignore log write failures (should not crash the API route)
-  }
-}
-
-export function completeJob(jobId: string, exitCode: number) {
-  const jobs = readJobs();
-  const idx = jobs.findIndex(j => j.id === jobId);
-  if (idx === -1) return;
-
-  jobs[idx] = {
-    ...jobs[idx],
-    status: exitCode === 0 ? "success" : "failed",
-    exitCode,
-    finishedAt: Date.now(),
-    lastError: exitCode === 0 ? null : `exit-${exitCode}`,
-  };
-
-  writeJobs(jobs);
-}
-
-export function failJob(jobId: string, reason: string) {
-  const jobs = readJobs();
-  const idx = jobs.findIndex(j => j.id === jobId);
-  if (idx === -1) return;
-
-  jobs[idx] = {
-    ...jobs[idx],
-    status: "failed",
-    exitCode: jobs[idx].exitCode ?? 1,
-    finishedAt: Date.now(),
-    lastError: reason,
-  };
-
-  writeJobs(jobs);
+  fs.appendFileSync(job.logPath, line + "\n", "utf8");
 }

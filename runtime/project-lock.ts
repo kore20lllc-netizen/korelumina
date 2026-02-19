@@ -1,48 +1,19 @@
-import path from "path";
-import { acquireLock, releaseLock, touchLock } from "./locks";
+import { acquireProjectLock, releaseProjectLock } from "./locks";
 
-const STALE_MS = 15 * 60 * 1000; // 15 minutes
+/**
+ * Thin wrapper so older code can keep using projectLock()
+ * while internally delegating to the new lock system.
+ */
 
-function getProjectLockPath(workspaceId: string, projectId: string) {
-  return path.resolve(
-    "runtime",
-    "locks",
-    workspaceId,
-    `${projectId}.lock`
-  );
+export function acquireLock(workspaceId: string, projectId: string) {
+  return acquireProjectLock(workspaceId, projectId);
 }
 
-export function acquireProjectLock(
-  workspaceId: string,
-  projectId: string,
-  jobId: string
-) {
-  const lockPath = getProjectLockPath(workspaceId, projectId);
-
-  return acquireLock(
-    lockPath,
-    {
-      pid: process.pid,
-      jobId,
-      workspaceId,
-      projectId,
-      startedAt: Date.now(),
-      updatedAt: Date.now(),
-    },
-    { staleMs: STALE_MS }
-  );
+export function releaseLock(release: () => void) {
+  releaseProjectLock(release);
 }
 
-export function heartbeatProject(workspaceId: string, projectId: string) {
-  const lockPath = getProjectLockPath(workspaceId, projectId);
-  touchLock(lockPath);
-}
-
-export function releaseProjectLock(
-  workspaceId: string,
-  projectId: string,
-  jobId: string
-) {
-  const lockPath = getProjectLockPath(workspaceId, projectId);
-  releaseLock(lockPath, jobId);
+export function touchLock() {
+  // no-op in new lock model
+  return;
 }
