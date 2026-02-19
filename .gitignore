@@ -22,3 +22,8 @@ runtime/jobs.json
 
 # mac
 .DS_Store
+
+# runtime state (DO NOT COMMIT)
+runtime/previews.json
+runtime/jobs.json
+runtime/logs/
