@@ -1,0 +1,10 @@
+import { NextResponse } from "next/server";
+
+export async function GET(
+  req: Request,
+  context: { params: Promise<{ workspaceId: string; projectId: string }> }
+) {
+  const { workspaceId, projectId } = await context.params;
+
+  // existing logic here
+}
