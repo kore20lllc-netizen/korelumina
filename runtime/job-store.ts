@@ -4,107 +4,94 @@ import crypto from "crypto";
 
 export type JobStatus = "pending" | "running" | "success" | "failed";
 
-export type JobRecord = {
+export interface JobRecord {
   id: string;
   workspaceId: string;
   projectId: string;
+  type: "build";
   status: JobStatus;
-  startedAt: number;
-  finishedAt: number | null;
-  logPath: string;
   pid: number | null;
-  exitCode: number | null;
-};
-
-const ROOT = process.cwd();
-const JOBS_FILE = path.resolve(ROOT, "runtime", "jobs.json");
-
-function ensureDir(p: string) {
-  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+  logPath: string | null;
+  startedAt: number;
+  finishedAt?: number;
 }
 
-function ensureJobsFile() {
-  ensureDir(path.dirname(JOBS_FILE));
-  if (!fs.existsSync(JOBS_FILE)) {
-    fs.writeFileSync(JOBS_FILE, "[]", "utf8");
-  }
+const JOB_FILE = path.join(process.cwd(), "runtime", "jobs.json");
+
+function readJobs(): JobRecord[] {
+  if (!fs.existsSync(JOB_FILE)) return [];
+  return JSON.parse(fs.readFileSync(JOB_FILE, "utf8"));
 }
 
-export function readJobs(): JobRecord[] {
-  ensureJobsFile();
-  try {
-    const raw = fs.readFileSync(JOBS_FILE, "utf8");
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
+function writeJobs(jobs: JobRecord[]) {
+  fs.mkdirSync(path.dirname(JOB_FILE), { recursive: true });
+  fs.writeFileSync(JOB_FILE, JSON.stringify(jobs, null, 2));
 }
 
-export function writeJobs(jobs: JobRecord[]) {
-  ensureJobsFile();
-  fs.writeFileSync(JOBS_FILE, JSON.stringify(jobs, null, 2), "utf8");
-}
-
-function buildLogPath(workspaceId: string, projectId: string, jobId: string) {
-  const dir = path.resolve(ROOT, "runtime", "logs", workspaceId);
-  ensureDir(dir);
-  return path.join(dir, `${projectId}.${jobId}.log`);
-}
-
-export function createJob(workspaceId: string, projectId: string): JobRecord {
-  const jobs = readJobs();
+export function createJob(
+  workspaceId: string,
+  projectId: string,
+  type: "build"
+): JobRecord {
   const id = crypto.randomUUID();
-  const logPath = buildLogPath(workspaceId, projectId, id);
+
+  const logPath = path.join(
+    process.cwd(),
+    "runtime",
+    "logs",
+    workspaceId,
+    `${projectId}.${id}.log`
+  );
 
   const job: JobRecord = {
     id,
     workspaceId,
     projectId,
+    type,
     status: "pending",
-    startedAt: Date.now(),
-    finishedAt: null,
-    logPath,
     pid: null,
-    exitCode: null,
+    logPath,
+    startedAt: Date.now(),
   };
 
+  const jobs = readJobs();
   jobs.push(job);
   writeJobs(jobs);
+
   return job;
 }
 
-export function getJobById(jobId: string): JobRecord | null {
-  return readJobs().find(j => j.id === jobId) ?? null;
+export function updateJobStatus(
+  jobId: string,
+  status: JobStatus,
+  pid?: number | null
+) {
+  const jobs = readJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  job.status = status;
+
+  if (typeof pid !== "undefined") {
+    job.pid = pid;
+  }
+
+  if (status === "success" || status === "failed") {
+    job.finishedAt = Date.now();
+  }
+
+  writeJobs(jobs);
 }
 
-export function getRunningJobForProject(
+export function getLatestJobForProject(
   workspaceId: string,
   projectId: string
 ): JobRecord | null {
-  return (
-    readJobs().find(
-      j =>
-        j.workspaceId === workspaceId &&
-        j.projectId === projectId &&
-        (j.status === "running" || j.status === "pending")
-    ) ?? null
-  );
-}
+  const jobs = readJobs()
+    .filter(
+      (j) => j.workspaceId === workspaceId && j.projectId === projectId
+    )
+    .sort((a, b) => b.startedAt - a.startedAt);
 
-export function updateJob(jobId: string, patch: Partial<JobRecord>) {
-  const jobs = readJobs();
-  const idx = jobs.findIndex(j => j.id === jobId);
-  if (idx === -1) return null;
-
-  jobs[idx] = { ...jobs[idx], ...patch };
-  writeJobs(jobs);
-  return jobs[idx];
-}
-
-export function appendJobLog(jobId: string, line: string) {
-  const job = getJobById(jobId);
-  if (!job) return;
-
-  fs.appendFileSync(job.logPath, line + "\n", "utf8");
+  return jobs[0] ?? null;
 }

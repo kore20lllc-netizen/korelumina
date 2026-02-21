@@ -1,112 +1,92 @@
 import fs from "fs";
 import path from "path";
+import { spawn } from "child_process";
 
-export type PreviewStatus = "running" | "stopped" | "failed";
-
-export type PreviewRecord = {
+export interface PreviewRecord {
   workspaceId: string;
   projectId: string;
-  status: PreviewStatus;
+  status: "running" | "stopped";
   pid: number | null;
-  port: number | null;
-  url: string | null;
-  logPath: string | null;
-  startedAt: number | null;
-  stoppedAt: number | null;
-  lastError: string | null;
-};
-
-const PREVIEWS_FILE = path.resolve(process.cwd(), "runtime", "previews.json");
-
-function ensureFile() {
-  const dir = path.dirname(PREVIEWS_FILE);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  if (!fs.existsSync(PREVIEWS_FILE)) fs.writeFileSync(PREVIEWS_FILE, "[]", "utf8");
-}
-
-function readAll(): PreviewRecord[] {
-  ensureFile();
-  try {
-    const raw = fs.readFileSync(PREVIEWS_FILE, "utf8");
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as PreviewRecord[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(rows: PreviewRecord[]) {
-  ensureFile();
-  fs.writeFileSync(PREVIEWS_FILE, JSON.stringify(rows, null, 2), "utf8");
-}
-
-export function getPreview(workspaceId: string, projectId: string) {
-  return readAll().find((p) => p.workspaceId === workspaceId && p.projectId === projectId) ?? null;
-}
-
-export function upsertPreview(rec: PreviewRecord) {
-  const all = readAll();
-  const idx = all.findIndex((p) => p.workspaceId === rec.workspaceId && p.projectId === rec.projectId);
-  if (idx >= 0) all[idx] = rec;
-  else all.push(rec);
-  writeAll(all);
-  return rec;
-}
-
-// Optional helpers (safe to keep even if you don't use them yet)
-export function markPreviewRunning(opts: {
-  workspaceId: string;
-  projectId: string;
-  pid: number;
   port: number;
   url: string;
   logPath: string;
-}) {
-  const rec: PreviewRecord = {
-    workspaceId: opts.workspaceId,
-    projectId: opts.projectId,
+  startedAt: number | null;
+  stoppedAt: number | null;
+  lastError: string | null;
+}
+
+const PREVIEWS_FILE = path.join(process.cwd(), "runtime", "previews.json");
+
+function ensureFile() {
+  if (!fs.existsSync(PREVIEWS_FILE)) {
+    fs.mkdirSync(path.dirname(PREVIEWS_FILE), { recursive: true });
+    fs.writeFileSync(PREVIEWS_FILE, "[]", "utf8");
+  }
+}
+
+export function readPreviews(): PreviewRecord[] {
+  ensureFile();
+  return JSON.parse(fs.readFileSync(PREVIEWS_FILE, "utf8"));
+}
+
+export function writePreviews(previews: PreviewRecord[]) {
+  fs.writeFileSync(PREVIEWS_FILE, JSON.stringify(previews, null, 2));
+}
+
+export function getPreview(workspaceId: string, projectId: string) {
+  return readPreviews().find(
+    (p) => p.workspaceId === workspaceId && p.projectId === projectId
+  );
+}
+
+export function startPreviewProcess(
+  workspaceId: string,
+  projectId: string,
+  cwd: string,
+  port: number,
+  cmd: string,
+  args: string[]
+) {
+  const logPath = path.join(
+    process.cwd(),
+    "runtime",
+    "logs",
+    workspaceId,
+    `${projectId}.preview.log`
+  );
+
+  fs.mkdirSync(path.dirname(logPath), { recursive: true });
+
+  const child = spawn(cmd, args, {
+    cwd,
+    env: { ...process.env, PORT: String(port) },
+    shell: true,
+  });
+
+  const stream = fs.createWriteStream(logPath, { flags: "a" });
+
+  child.stdout?.pipe(stream);
+  child.stderr?.pipe(stream);
+
+  const record: PreviewRecord = {
+    workspaceId,
+    projectId,
     status: "running",
-    pid: opts.pid,
-    port: opts.port,
-    url: opts.url,
-    logPath: opts.logPath,
+    pid: child.pid ?? null,
+    port,
+    url: `http://localhost:${port}`,
+    logPath,
     startedAt: Date.now(),
     stoppedAt: null,
     lastError: null,
   };
-  return upsertPreview(rec);
-}
 
-export function markPreviewStopped(opts: { workspaceId: string; projectId: string; reason: string }) {
-  const cur = getPreview(opts.workspaceId, opts.projectId);
-  const rec: PreviewRecord = {
-    workspaceId: opts.workspaceId,
-    projectId: opts.projectId,
-    status: "stopped",
-    pid: null,
-    port: null,
-    url: null,
-    logPath: cur?.logPath ?? null,
-    startedAt: cur?.startedAt ?? null,
-    stoppedAt: Date.now(),
-    lastError: opts.reason,
-  };
-  return upsertPreview(rec);
-}
+  const previews = readPreviews().filter(
+    (p) => !(p.workspaceId === workspaceId && p.projectId === projectId)
+  );
 
-export function markPreviewFailed(opts: { workspaceId: string; projectId: string; reason: string }) {
-  const cur = getPreview(opts.workspaceId, opts.projectId);
-  const rec: PreviewRecord = {
-    workspaceId: opts.workspaceId,
-    projectId: opts.projectId,
-    status: "failed",
-    pid: null,
-    port: null,
-    url: null,
-    logPath: cur?.logPath ?? null,
-    startedAt: cur?.startedAt ?? null,
-    stoppedAt: Date.now(),
-    lastError: opts.reason,
-  };
-  return upsertPreview(rec);
+  previews.push(record);
+  writePreviews(previews);
+
+  return record;
 }

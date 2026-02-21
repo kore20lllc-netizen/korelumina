@@ -1,49 +1,61 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
+import { spawn } from "child_process";
 
-import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
 import { ensureManifest, resolveManifestCommand } from "@/lib/project-manifest";
-import { createJob, appendJobLog } from "@/runtime/job-store";
+import { createJob, updateJobStatus } from "@/runtime/job-store";
 
-type Ctx = {
-  params: Promise<{ workspaceId: string; projectId: string }>;
-};
-
-function ensureDir(dir: string) {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+function ensureDir(p: string) {
+  if (!fs.existsSync(p)) {
+    fs.mkdirSync(p, { recursive: true });
   }
 }
 
-export async function POST(_req: Request, context: Ctx) {
+export async function POST(
+  req: Request,
+  context: { params: Promise<{ workspaceId: string; projectId: string }> }
+) {
   const { workspaceId, projectId } = await context.params;
 
-  const projectRoot = resolveWorkspacePath(workspaceId, projectId);
-  assertProjectExists(projectRoot);
+  const manifest = ensureManifest(workspaceId, projectId);
+  const { cmd, args } = resolveManifestCommand(manifest, "build");
 
-  const manifest = ensureManifest(projectRoot, projectId, {
-    strict: process.env.NODE_ENV === "production",
-  });
-
-  const job = createJob(workspaceId, projectId);
+  const job = createJob(workspaceId, projectId, "build");
 
   if (!job.logPath) {
-    throw new Error("Job logPath missing");
+    return NextResponse.json({ error: "Job logPath missing" }, { status: 500 });
   }
 
   ensureDir(path.dirname(job.logPath));
   fs.writeFileSync(job.logPath, "", "utf8");
 
-  appendJobLog(job.id, `[build] starting ${projectId}`);
-
-  const { cmd, args } = resolveManifestCommand(manifest, "build");
-  appendJobLog(job.id, `[build] cmd=${cmd} args=${args.join(" ")}`);
-
-  return NextResponse.json({
-    ok: true,
+  const projectRoot = path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
     workspaceId,
-    projectId,
-    jobId: job.id,
+    "projects",
+    projectId
+  );
+
+  const child = spawn(cmd, args, {
+    cwd: projectRoot,
+    env: { ...process.env },
+    stdio: ["ignore", "pipe", "pipe"],
   });
+
+  child.stdout.on("data", (d) =>
+    fs.appendFileSync(job.logPath!, String(d))
+  );
+
+  child.stderr.on("data", (d) =>
+    fs.appendFileSync(job.logPath!, String(d))
+  );
+
+  child.on("exit", (code) => {
+    updateJobStatus(job.id, code === 0 ? "success" : "failed");
+  });
+
+  return NextResponse.json({ ok: true });
 }

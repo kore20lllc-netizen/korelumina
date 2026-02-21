@@ -1,48 +1,41 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-type Props = {
+export default function LogPanel({
+  workspaceId,
+  projectId,
+}: {
   workspaceId: string;
   projectId: string;
-};
-
-export default function LogPanel({ workspaceId, projectId }: Props) {
+}) {
   const [logs, setLogs] = useState<string>("");
-  const ref = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
     const es = new EventSource(
       `/api/workspaces/${workspaceId}/projects/${projectId}/events`
     );
 
-    es.onmessage = (e) => {
-      setLogs((prev) => prev + e.data + "\n");
-    };
+    const append = (text: string) => setLogs((prev) => prev + text);
+
+    es.addEventListener("build", (e: MessageEvent) => {
+      append(String(e.data ?? ""));
+    });
+
+    es.addEventListener("preview", (e: MessageEvent) => {
+      append(String(e.data ?? ""));
+    });
 
     es.onerror = () => {
       es.close();
     };
 
-    return () => {
-      es.close();
-    };
+    return () => es.close();
   }, [workspaceId, projectId]);
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight;
-    }
-  }, [logs]);
-
   return (
-    <div className="border rounded bg-black text-green-400 text-sm h-96 overflow-hidden">
-      <pre
-        ref={ref}
-        className="p-4 overflow-auto h-full whitespace-pre-wrap"
-      >
-        {logs || "Waiting for logs..."}
-      </pre>
+    <div className="h-64 w-full overflow-auto rounded-md border bg-black p-3 font-mono text-sm whitespace-pre-wrap text-green-400">
+      {logs || "Waiting for logs..."}
     </div>
   );
 }

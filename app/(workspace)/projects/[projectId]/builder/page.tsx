@@ -1,4 +1,4 @@
-import BuilderClient from "@/components/builder/BuilderClient";
+import BuilderClient from "./BuilderClient";
 
 export default async function BuilderPage({
   params,
@@ -6,12 +6,5 @@ export default async function BuilderPage({
   params: Promise<{ projectId: string }>;
 }) {
   const { projectId } = await params;
-  const workspaceId = "default";
-
-  return (
-    <BuilderClient
-      projectId={projectId}
-      workspaceId={workspaceId}
-    />
-  );
+  return <BuilderClient projectId={projectId} />;
 }
