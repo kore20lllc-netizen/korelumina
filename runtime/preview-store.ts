@@ -1,3 +1,4 @@
+import { isPidRunning } from "./process-utils";
 import fs from "fs";
 import path from "path";
 import { spawn } from "child_process";
@@ -33,11 +34,6 @@ export function writePreviews(previews: PreviewRecord[]) {
   fs.writeFileSync(PREVIEWS_FILE, JSON.stringify(previews, null, 2));
 }
 
-export function getPreview(workspaceId: string, projectId: string) {
-  return readPreviews().find(
-    (p) => p.workspaceId === workspaceId && p.projectId === projectId
-  );
-}
 
 export function startPreviewProcess(
   workspaceId: string,
@@ -89,4 +85,23 @@ export function startPreviewProcess(
   writePreviews(previews);
 
   return record;
+}
+export function getActivePreview(workspaceId: string, projectId: string) {
+  const preview = readPreviews().find(
+    (p) => p.workspaceId === workspaceId && p.projectId === projectId
+  );
+
+  if (!preview) return null;
+
+  if (preview.pid && isPidRunning(preview.pid)) {
+    return preview;
+  }
+
+  const cleaned = readPreviews().filter(
+    (p) => !(p.workspaceId === workspaceId && p.projectId === projectId)
+  );
+
+  writePreviews(cleaned);
+
+  return null;
 }
