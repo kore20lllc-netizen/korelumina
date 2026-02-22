@@ -105,3 +105,15 @@ export function getActivePreview(workspaceId: string, projectId: string) {
 
   return null;
 }
+
+export function cleanupDeadPreviews() {
+  const previews = readPreviews();
+  const alive = previews.filter((p) => {
+    if (!p.pid) return false;
+    return isPidRunning(p.pid);
+  });
+
+  writePreviews(alive);
+  return alive.length;
+}
+

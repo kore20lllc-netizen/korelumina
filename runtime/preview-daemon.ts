@@ -1,3 +1,4 @@
+import { cleanupDeadPreviews } from "./preview-store";
 import http from "http";
 import { getFreePort } from "./port-utils";
 import { startPreviewProcess } from "./preview-store";
@@ -67,6 +68,8 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`previewd running on ${HOST}:${PORT}`);
+cleanupDeadPreviews();
+console.log("[previewd] cleaned stale previews");
 });
 
 /* Health monitor loop */
