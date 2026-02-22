@@ -1,22 +1,47 @@
 "use client";
 
-type Health = "idle" | "building" | "previewing" | "error" | "ready";
+type Job = {
+  status?: "pending" | "running" | "success" | "failed";
+};
 
-export default function StatusBadge({ health }: { health: Health }) {
-  const map: Record<Health, { label: string; color: string }> = {
-    idle: { label: "Idle", color: "bg-gray-500" },
-    building: { label: "Building", color: "bg-yellow-500 animate-pulse" },
-    previewing: { label: "Previewing", color: "bg-blue-500 animate-pulse" },
-    error: { label: "Error", color: "bg-red-600" },
-    ready: { label: "Ready", color: "bg-green-600" },
+type Preview = {
+  status?: "running" | "stopped";
+};
+
+export default function StatusBadge({
+  job,
+  preview
+}: {
+  job: Job | null;
+  preview: Preview | null;
+}) {
+  const health =
+    job?.status === "running"
+      ? "building"
+      : preview?.status === "running"
+      ? "preview"
+      : job?.status === "failed"
+      ? "failed"
+      : job?.status === "success"
+      ? "success"
+      : "idle";
+
+  const map: Record<
+    string,
+    { label: string; color: string }
+  > = {
+    idle: { label: "Idle", color: "text-gray-500" },
+    building: { label: "Building", color: "text-yellow-500" },
+    preview: { label: "Previewing", color: "text-blue-500" },
+    success: { label: "Success", color: "text-green-600" },
+    failed: { label: "Failed", color: "text-red-600" }
   };
 
-  const { label, color } = map[health];
+  const status = map[health] ?? map["idle"];
 
   return (
-    <div className="flex items-center gap-2 text-sm font-medium">
-      <span className={`w-2 h-2 rounded-full ${color}`} />
-      <span>{label}</span>
+    <div className={`text-sm font-medium ${status.color}`}>
+      {status.label}
     </div>
   );
 }

@@ -117,3 +117,29 @@ export function cleanupDeadPreviews() {
   return alive.length;
 }
 
+
+import net from "net";
+
+export function isPortInUse(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const server = net.createServer();
+
+    server.once("error", () => resolve(true));
+    server.once("listening", () => {
+      server.close();
+      resolve(false);
+    });
+
+    server.listen(port, "127.0.0.1");
+  });
+}
+
+export async function findFreePort(start: number, end: number): Promise<number> {
+  for (let port = start; port <= end; port++) {
+    const used = await isPortInUse(port);
+    if (!used) return port;
+  }
+
+  throw new Error("No free preview ports available");
+}
+

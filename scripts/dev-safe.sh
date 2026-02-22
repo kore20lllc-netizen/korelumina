@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-PREVIEWD_PORT=3101
+echo "🧹 cleaning ports 3000 and 3101..."
 
-echo "🧹 killing old previewd..."
-pkill -f "node scripts/previewd.js" 2>/dev/null || true
-
-echo "🚀 starting previewd on ${PREVIEWD_PORT}..."
-node scripts/previewd.js > /tmp/previewd.log 2>&1 &
-
-sleep 1
-
-if lsof -i :${PREVIEWD_PORT} >/dev/null; then
-  echo "✅ previewd running on ${PREVIEWD_PORT}"
-else
-  echo "❌ previewd failed to start"
-  exit 1
+# Kill anything on 3000
+if lsof -i :3000 >/dev/null 2>&1; then
+  lsof -ti :3000 | xargs kill -9 || true
 fi
 
+# Kill anything on 3101
+if lsof -i :3101 >/dev/null 2>&1; then
+  lsof -ti :3101 | xargs kill -9 || true
+fi
+
+# Kill any stray node processes (safe in dev)
+pkill -9 node || true
+
+rm -rf .next
+
+echo "🚀 starting previewd on 3101..."
+export KORELUMINA_PREVIEWD_HOST=127.0.0.1
+export KORELUMINA_PREVIEWD_PORT=3101
+npx tsx runtime/preview-daemon.ts >/dev/null 2>&1 &
+sleep 1
+echo "✅ previewd running on 3101"
+
 echo "🚀 starting Next dev..."
-node ./node_modules/next/dist/bin/next dev -p 3000
+npm run dev

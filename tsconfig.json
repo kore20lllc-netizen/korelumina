@@ -29,7 +29,7 @@
       }
     ]
   },
-  "include": [
+  "include": ["types", 
     "app",
     "lib",
     "next-env.d.ts",

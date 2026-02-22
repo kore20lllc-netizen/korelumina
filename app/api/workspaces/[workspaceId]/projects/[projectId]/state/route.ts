@@ -1,79 +1,18 @@
-import fs from "fs";
-import path from "path";
-import { NextResponse } from "next/server";
-import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
-import { ensureManifest } from "@/lib/project-manifest";
-import { readJobs } from "@/runtime/job-store";
-import { getPreview } from "@/runtime/preview-store";
+import { NextRequest } from "next/server";
+import { getActivePreview } from "@/runtime/preview-store";
+import { getLatestJobForProject } from "@/runtime/job-store";
 
-type Ctx = {
-  params: Promise<{ workspaceId: string; projectId: string }>;
-};
-
-function tailFile(filePath: string, maxLines = 200): string[] {
-  try {
-    const data = fs.readFileSync(filePath, "utf8");
-    const lines = data.split(/\r?\n/).filter(Boolean);
-    return lines.slice(-maxLines);
-  } catch {
-    return [];
-  }
-}
-
-export async function GET(_req: Request, context: Ctx) {
+export async function GET(
+  _req: NextRequest,
+  context: { params: Promise<{ workspaceId: string; projectId: string }> }
+) {
   const { workspaceId, projectId } = await context.params;
 
-  const projectRoot = resolveWorkspacePath(workspaceId, projectId);
-  assertProjectExists(projectRoot);
+  const preview = getActivePreview(workspaceId, projectId);
+  const job = getLatestJobForProject(workspaceId, projectId);
 
-  const manifest = ensureManifest(projectRoot, projectId, {
-    strict: process.env.NODE_ENV === "production",
-  });
-
-  const jobs = readJobs().filter(
-    (j) => j.workspaceId === workspaceId && j.projectId === projectId
-  );
-
-  const latestJob = jobs.length ? jobs[jobs.length - 1] : null;
-
-  const isBuilding =
-    latestJob?.status === "running" || latestJob?.status === "pending";
-
-  const lastSuccess = [...jobs]
-    .reverse()
-    .find((j) => j.status === "success");
-
-  const lastSuccessAt = lastSuccess?.finishedAt ?? null;
-
-  const logExists =
-    latestJob?.logPath ? fs.existsSync(latestJob.logPath) : false;
-
-  const logs =
-    logExists && latestJob?.logPath
-      ? tailFile(path.resolve(latestJob.logPath))
-      : [];
-
-  let health: "idle" | "building" | "error" | "ready" = "idle";
-  if (isBuilding) health = "building";
-  else if (latestJob?.status === "failed") health = "error";
-  else if (lastSuccessAt) health = "ready";
-
-  const canBuild = !isBuilding;
-
-  const preview = getPreview(workspaceId, projectId);
-  const previewUrl = preview?.status === "running" ? preview.url : null;
-
-  return NextResponse.json({
-    projectId,
-    workspaceId,
-    manifest,
-    latestJob,
-    lastSuccessAt,
-    isBuilding,
-    canBuild,
-    logExists,
-    health,
-    logs,
-    previewUrl,
+  return Response.json({
+    preview,
+    job
   });
 }
