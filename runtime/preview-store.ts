@@ -1,4 +1,3 @@
-import { isPidRunning } from "./process-utils";
 import fs from "fs";
 import path from "path";
 import { spawn } from "child_process";
@@ -34,6 +33,25 @@ export function writePreviews(previews: PreviewRecord[]) {
   fs.writeFileSync(PREVIEWS_FILE, JSON.stringify(previews, null, 2));
 }
 
+export function getActivePreview(workspaceId: string, projectId: string) {
+  const previews = readPreviews();
+  const preview = previews.find(
+    p => p.workspaceId === workspaceId && p.projectId === projectId
+  );
+
+  if (!preview) return null;
+
+  try {
+    if (preview.pid) process.kill(preview.pid, 0);
+    return preview;
+  } catch {
+    const cleaned = previews.filter(
+      p => !(p.workspaceId === workspaceId && p.projectId === projectId)
+    );
+    writePreviews(cleaned);
+    return null;
+  }
+}
 
 export function startPreviewProcess(
   workspaceId: string,
@@ -57,10 +75,13 @@ export function startPreviewProcess(
     cwd,
     env: { ...process.env, PORT: String(port) },
     shell: true,
+    detached: true,
+    stdio: ["ignore", "pipe", "pipe"]
   });
 
-  const stream = fs.createWriteStream(logPath, { flags: "a" });
+  child.unref();
 
+  const stream = fs.createWriteStream(logPath, { flags: "a" });
   child.stdout?.pipe(stream);
   child.stderr?.pipe(stream);
 
@@ -74,11 +95,11 @@ export function startPreviewProcess(
     logPath,
     startedAt: Date.now(),
     stoppedAt: null,
-    lastError: null,
+    lastError: null
   };
 
   const previews = readPreviews().filter(
-    (p) => !(p.workspaceId === workspaceId && p.projectId === projectId)
+    p => !(p.workspaceId === workspaceId && p.projectId === projectId)
   );
 
   previews.push(record);
@@ -86,60 +107,59 @@ export function startPreviewProcess(
 
   return record;
 }
-export function getActivePreview(workspaceId: string, projectId: string) {
-  const preview = readPreviews().find(
-    (p) => p.workspaceId === workspaceId && p.projectId === projectId
+
+export function stopPreviewProcess(workspaceId: string, projectId: string) {
+  const previews = readPreviews();
+  const preview = previews.find(
+    p => p.workspaceId === workspaceId && p.projectId === projectId
   );
 
-  if (!preview) return null;
-
-  if (preview.pid && isPidRunning(preview.pid)) {
-    return preview;
+  if (!preview || !preview.pid) {
+    return { ok: true, stopped: false };
   }
 
-  const cleaned = readPreviews().filter(
-    (p) => !(p.workspaceId === workspaceId && p.projectId === projectId)
+  try {
+    process.kill(-preview.pid, "SIGTERM");
+  } catch {
+    return { ok: true, stopped: false };
+  }
+
+  const timeout = Date.now() + 5000;
+
+  while (Date.now() < timeout) {
+    try {
+      process.kill(preview.pid, 0);
+    } catch {
+      break;
+    }
+  }
+
+  try {
+    process.kill(-preview.pid, "SIGKILL");
+  } catch {}
+
+  const cleaned = previews.filter(
+    p => !(p.workspaceId === workspaceId && p.projectId === projectId)
   );
 
   writePreviews(cleaned);
 
-  return null;
+  return { ok: true, stopped: true };
 }
 
 export function cleanupDeadPreviews() {
   const previews = readPreviews();
-  const alive = previews.filter((p) => {
+
+  const alive = previews.filter(p => {
     if (!p.pid) return false;
-    return isPidRunning(p.pid);
+    try {
+      process.kill(p.pid, 0);
+      return true;
+    } catch {
+      return false;
+    }
   });
 
   writePreviews(alive);
   return alive.length;
 }
-
-
-import net from "net";
-
-export function isPortInUse(port: number): Promise<boolean> {
-  return new Promise((resolve) => {
-    const server = net.createServer();
-
-    server.once("error", () => resolve(true));
-    server.once("listening", () => {
-      server.close();
-      resolve(false);
-    });
-
-    server.listen(port, "127.0.0.1");
-  });
-}
-
-export async function findFreePort(start: number, end: number): Promise<number> {
-  for (let port = start; port <= end; port++) {
-    const used = await isPortInUse(port);
-    if (!used) return port;
-  }
-
-  throw new Error("No free preview ports available");
-}
-

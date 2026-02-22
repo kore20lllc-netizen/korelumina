@@ -1,12 +1,12 @@
 import net from "net";
 
-export function getFreePort(start = 4100, end = 5000): Promise<number> {
-  return new Promise((resolve, reject) => {
+export function findFreePort(start: number): Promise<number> {
+  return new Promise((resolve) => {
     const tryPort = (port: number) => {
-      if (port > end) return reject(new Error("No free ports"));
-
       const server = net.createServer();
+
       server.once("error", () => {
+        server.close();
         tryPort(port + 1);
       });
 

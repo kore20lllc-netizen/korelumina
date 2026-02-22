@@ -1,38 +1,34 @@
 import http from "http";
+import path from "path";
 import { resolveWorkspacePath } from "../lib/workspace-jail";
 import {
-  getActivePreview,
   startPreviewProcess,
-  cleanupDeadPreviews,
-  findFreePort
+  stopPreviewProcess,
+  getActivePreview,
+  cleanupDeadPreviews
 } from "./preview-store";
+import { findFreePort } from "./port-utils";
 
-const HOST = process.env.KORELUMINA_PREVIEWD_HOST || "127.0.0.1";
-const PORT = Number(process.env.KORELUMINA_PREVIEWD_PORT || 3101);
-
-cleanupDeadPreviews();
-console.log("[previewd] cleaned stale previews");
+const HOST = "127.0.0.1";
+const PORT = 3101;
 
 function send(res: http.ServerResponse, status: number, payload: any) {
   res.writeHead(status, { "content-type": "application/json" });
   res.end(JSON.stringify(payload));
 }
 
-const server = http.createServer((req, res) => {
-  if (!req.url) return send(res, 404, { error: "Not found" });
+cleanupDeadPreviews();
+console.log("[previewd] cleaned stale previews");
+
+const server = http.createServer(async (req, res) => {
+  if (!req.url) return send(res, 404, { error: "not found" });
 
   if (req.method === "POST" && req.url === "/preview/start") {
     let body = "";
-
     req.on("data", chunk => (body += chunk));
-
     req.on("end", async () => {
       try {
         const { workspaceId, projectId } = JSON.parse(body);
-
-        if (!workspaceId || !projectId) {
-          return send(res, 400, { error: "workspaceId and projectId required" });
-        }
 
         const existing = getActivePreview(workspaceId, projectId);
         if (existing) {
@@ -40,18 +36,18 @@ const server = http.createServer((req, res) => {
             ok: true,
             workspaceId,
             projectId,
-            preview: existing
+            port: existing.port,
+            pid: existing.pid
           });
         }
 
-        const projectRoot = resolveWorkspacePath(workspaceId, projectId);
+        const cwd = resolveWorkspacePath(workspaceId, projectId);
+        const port = await findFreePort(4100);
 
-        const port = await findFreePort(4100, 4200);
-
-        const preview = startPreviewProcess(
+        const record = startPreviewProcess(
           workspaceId,
           projectId,
-          projectRoot,
+          cwd,
           port,
           "npm",
           ["run", "dev", "--", "--host", "0.0.0.0", "--port", String(port)]
@@ -61,13 +57,29 @@ const server = http.createServer((req, res) => {
           ok: true,
           workspaceId,
           projectId,
-          preview
+          port: record.port,
+          pid: record.pid
         });
       } catch (e: any) {
-        return send(res, 500, { error: e?.message ?? "start failed" });
+        return send(res, 500, { error: e?.message });
       }
     });
+    return;
+  }
 
+  if (req.method === "POST" && req.url === "/preview/stop") {
+    let body = "";
+    req.on("data", chunk => (body += chunk));
+    req.on("end", async () => {
+      try {
+        const { workspaceId, projectId } = JSON.parse(body);
+
+        const result = stopPreviewProcess(workspaceId, projectId);
+        return send(res, 200, result);
+      } catch (e: any) {
+        return send(res, 500, { error: e?.message });
+      }
+    });
     return;
   }
 
@@ -75,7 +87,7 @@ const server = http.createServer((req, res) => {
     return send(res, 200, { ok: true });
   }
 
-  return send(res, 404, { error: "Unknown route" });
+  return send(res, 404, { error: "not found" });
 });
 
 server.listen(PORT, HOST, () => {
