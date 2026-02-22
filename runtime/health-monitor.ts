@@ -1,7 +1,6 @@
-import fs from "fs";
 import { readPreviews, startPreviewProcess } from "./preview-store";
 import { resolveWorkspacePath } from "../lib/workspace-jail";
-import { getFreePort } from "./port-utils";
+import { findFreePort } from "./port-utils";
 
 function isPidAlive(pid: number | null) {
   if (!pid) return false;
@@ -13,19 +12,13 @@ function isPidAlive(pid: number | null) {
   }
 }
 
-export async function monitorPreviews() {
+export async function recoverStalePreviews() {
   const previews = readPreviews();
 
   for (const p of previews) {
-    if (p.status !== "running") continue;
-
-    const alive = isPidAlive(p.pid);
-
-    if (!alive) {
-      console.log(`[monitor] Restarting ${p.projectId}`);
-
+    if (!isPidAlive(p.pid)) {
       const cwd = resolveWorkspacePath(p.workspaceId, p.projectId);
-      const port = await getFreePort();
+      const port = await findFreePort(4100);
 
       startPreviewProcess(
         p.workspaceId,
