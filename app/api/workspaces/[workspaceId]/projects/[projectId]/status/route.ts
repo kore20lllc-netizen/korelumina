@@ -13,8 +13,7 @@ export async function GET(
   const projectRoot = resolveWorkspacePath(workspaceId, projectId);
   assertProjectExists(projectRoot);
 
-  const manifest = ensureManifest(projectRoot, projectId);
-
+  const manifest = ensureManifest(workspaceId, projectId);
   const preview = getActivePreview(workspaceId, projectId);
   const job = getLatestJobForProject(workspaceId, projectId);
 
@@ -24,6 +23,6 @@ export async function GET(
     projectId,
     manifest,
     preview,
-    job,
+    job
   });
 }

@@ -1,21 +1,16 @@
 import fs from "fs";
 import path from "path";
 
-export interface ManifestCommand {
-  cmd: string;
-  args: string[];
-}
-
 export interface ProjectManifest {
   name: string;
-  framework: string;
-  commands: {
-    build: ManifestCommand;
-    preview: ManifestCommand;
-  };
+  build: string;
+  dev: string;
 }
 
-export function ensureManifest(workspaceId: string, projectId: string): ProjectManifest {
+export function ensureManifest(
+  workspaceId: string,
+  projectId: string
+): ProjectManifest {
   const projectRoot = path.join(
     process.cwd(),
     "runtime",
@@ -29,47 +24,41 @@ export function ensureManifest(workspaceId: string, projectId: string): ProjectM
     throw new Error("Project not found in workspace");
   }
 
-  const manifestPath = path.join(projectRoot, "korelumina.manifest.json");
+  const manifestPath = path.join(
+    projectRoot,
+    "korelumina.manifest.json"
+  );
 
   if (fs.existsSync(manifestPath)) {
-    return JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    return JSON.parse(
+      fs.readFileSync(manifestPath, "utf8")
+    );
   }
 
   const manifest: ProjectManifest = {
     name: projectId,
-    framework: "vite",
-    commands: {
-      build: { cmd: "npm", args: ["run", "build"] },
-      preview: {
-        cmd: "npm",
-        args: ["run", "dev", "--", "--host", "0.0.0.0", "--port", "$PORT"],
-      },
-    },
+    build: "npm run build",
+    dev: "npm run dev"
   };
 
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf8");
+  fs.writeFileSync(
+    manifestPath,
+    JSON.stringify(manifest, null, 2),
+    "utf8"
+  );
+
   return manifest;
 }
 
 export function resolveManifestCommand(
   manifest: ProjectManifest,
-  type: "build" | "preview",
-  port?: number
-): ManifestCommand {
-  const command = manifest.commands[type];
+  type: "build" | "dev"
+) {
+  const command = type === "build" ? manifest.build : manifest.dev;
 
-  if (!command) {
-    throw new Error(`Command '${type}' not defined in manifest`);
-  }
+  const parts = command.split(" ");
+  const cmd = parts[0];
+  const args = parts.slice(1);
 
-  if (type === "preview" && port) {
-    return {
-      cmd: command.cmd,
-      args: command.args.map((a) =>
-        a === "$PORT" ? String(port) : a
-      ),
-    };
-  }
-
-  return command;
+  return { cmd, args };
 }

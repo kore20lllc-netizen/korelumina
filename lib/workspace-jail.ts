@@ -1,21 +1,26 @@
 import path from "path";
 import fs from "fs";
 
-const RUNTIME_ROOT = path.resolve(process.cwd(), "runtime/workspaces");
+const WORKSPACES_ROOT = path.join(
+  process.cwd(),
+  "runtime",
+  "workspaces"
+);
 
-export function resolveWorkspacePath(workspaceId: string, projectId: string) {
-  const projectRoot = path.resolve(
-    RUNTIME_ROOT,
+export function resolveWorkspacePath(
+  workspaceId: string,
+  projectId?: string
+) {
+  if (!projectId) {
+    return path.resolve(WORKSPACES_ROOT, workspaceId);
+  }
+
+  return path.resolve(
+    WORKSPACES_ROOT,
     workspaceId,
     "projects",
     projectId
   );
-
-  if (!projectRoot.startsWith(RUNTIME_ROOT)) {
-    throw new Error("Invalid project path resolution");
-  }
-
-  return projectRoot;
 }
 
 export function assertProjectExists(projectRoot: string) {

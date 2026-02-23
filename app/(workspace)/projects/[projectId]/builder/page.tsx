@@ -6,5 +6,11 @@ export default async function BuilderPage({
   params: Promise<{ projectId: string }>;
 }) {
   const { projectId } = await params;
-  return <BuilderClient projectId={projectId} />;
+
+  return (
+    <BuilderClient
+      workspaceId="default"
+      projectId={projectId}
+    />
+  );
 }

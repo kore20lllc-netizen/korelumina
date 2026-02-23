@@ -1,49 +1,110 @@
+import { NextRequest } from "next/server";
 import fs from "fs";
 import path from "path";
-import { NextResponse } from "next/server";
-import { resolveWorkspacePath, assertProjectExists } from "@/lib/workspace-jail";
-import { readJobs } from "@/runtime/job-store";
 
-type Ctx = {
-  params: Promise<{ workspaceId: string; projectId: string }>;
-};
+export const dynamic = "force-dynamic";
 
-function tailFile(filePath: string, maxLines = 200): string[] {
-  if (!fs.existsSync(filePath)) return [];
-
-  const content = fs.readFileSync(filePath, "utf8");
-  const lines = content.split("\n");
-  return lines.slice(-maxLines);
-}
-
-export async function GET(_req: Request, context: Ctx) {
-  const { workspaceId, projectId } = await context.params;
-
-  const projectRoot = resolveWorkspacePath(workspaceId, projectId);
-  assertProjectExists(projectRoot);
-
-  const jobs = readJobs().filter(
-    j => j.workspaceId === workspaceId && j.projectId === projectId
+function resolveLogPath(
+  workspaceId: string,
+  projectId: string,
+  kind: string
+) {
+  const base = path.join(
+    process.cwd(),
+    "runtime",
+    "logs",
+    workspaceId
   );
 
-  if (!jobs.length) {
-    return NextResponse.json({ logs: [], message: "No jobs yet" });
+  if (kind === "preview") {
+    return path.join(base, `${projectId}.preview.log`);
   }
 
-  const latest = jobs[jobs.length - 1];
+  if (!fs.existsSync(base)) return null;
 
-  if (!latest.logPath) {
-    return NextResponse.json({ logs: [], message: "No log file" });
-  }
+  const files = fs.readdirSync(base);
 
-  const safeLogPath = path.resolve(latest.logPath);
-  const logs = tailFile(safeLogPath);
+  const buildLogs = files
+    .filter(
+      (f) =>
+        f.startsWith(`${projectId}.`) &&
+        f.endsWith(".log") &&
+        !f.endsWith(".preview.log")
+    )
+    .sort()
+    .reverse();
 
-  return NextResponse.json({
-    projectId,
+  if (buildLogs.length === 0) return null;
+
+  return path.join(base, buildLogs[0]);
+}
+
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ workspaceId: string; projectId: string }> }
+) {
+  const { workspaceId, projectId } = await context.params;
+
+  const { searchParams } = new URL(req.url);
+  const kind = searchParams.get("kind") || "preview";
+  const follow = searchParams.get("follow") === "1";
+
+  const logPath = resolveLogPath(
     workspaceId,
-    jobId: latest.id,
-    status: latest.status,
-    logs,
+    projectId,
+    kind
+  );
+
+  if (!logPath || !fs.existsSync(logPath)) {
+    return Response.json({
+      logs: [],
+      message: "No log file"
+    });
+  }
+
+  if (!follow) {
+    const content = fs.readFileSync(logPath, "utf8");
+    return Response.json({
+      logs: content.split("\n")
+    });
+  }
+
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    start(controller) {
+      const send = (data: string) => {
+        controller.enqueue(
+          encoder.encode(`data: ${data}\n\n`)
+        );
+      };
+
+      let position = 0;
+
+      const interval = setInterval(() => {
+        if (!fs.existsSync(logPath)) return;
+
+        const content = fs.readFileSync(logPath, "utf8");
+        const newContent = content.slice(position);
+
+        if (newContent.length > 0) {
+          position = content.length;
+          send(newContent);
+        }
+      }, 500);
+
+      req.signal.addEventListener("abort", () => {
+        clearInterval(interval);
+        controller.close();
+      });
+    }
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive"
+    }
   });
 }
