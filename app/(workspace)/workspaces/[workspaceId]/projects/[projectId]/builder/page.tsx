@@ -1,5 +1,15 @@
-"use client";
+import Shell from "./shell";
 
-import BuilderPage from "@/app/(workspace)/projects/[projectId]/builder/page";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-export default BuilderPage;
+type PageProps = {
+  params: {
+    workspaceId: string;
+    projectId: string;
+  };
+};
+
+export default function BuilderPage({ params }: PageProps) {
+  return <Shell workspaceId={params.workspaceId} projectId={params.projectId} />;
+}
