@@ -3,98 +3,88 @@ import path from "path";
 import crypto from "crypto";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
 
-export type ApplyFileChange = {
+export interface ApplyFileChange {
   path: string;
   content: string;
-};
-
-function ensureDir(p: string) {
-  fs.mkdirSync(p, { recursive: true });
 }
 
-function safeRel(p: string): string {
-  const rel = p.replace(/\\/g, "/").replace(/^\.\/+/, "");
-  if (rel.startsWith("../") || rel.includes("..")) {
-    throw new Error(`Path traversal not allowed: ${p}`);
-  }
-  if (rel.startsWith("/")) {
-    throw new Error(`Absolute paths not allowed: ${p}`);
-  }
-  return rel;
+interface ApplyResult {
+  ok: boolean;
+  compiled: boolean;
+  rolledBack?: boolean;
+  backupId?: string;
+  error?: string;
 }
 
-function rollbackFromBackup(workspaceRoot: string, backupRoot: string, touched: string[]) {
-  for (const rel of touched) {
-    const fullPath = path.join(workspaceRoot, rel);
-    const backupPath = path.join(backupRoot, rel);
+function backupFiles(root: string, files: string[]) {
+  const backupId = crypto.randomUUID();
+  const backupRoot = path.join(
+    process.cwd(),
+    "runtime",
+    "backups",
+    backupId
+  );
 
-    if (fs.existsSync(backupPath)) {
-      ensureDir(path.dirname(fullPath));
-      fs.copyFileSync(backupPath, fullPath);
-    } else {
-      if (fs.existsSync(fullPath)) fs.rmSync(fullPath, { force: true });
-    }
+  for (const file of files) {
+    const fullPath = path.join(root, file);
+    if (!fs.existsSync(fullPath)) continue;
+
+    const target = path.join(backupRoot, file);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(fullPath, target);
+  }
+
+  return { backupId, backupRoot };
+}
+
+function rollbackFromBackup(
+  root: string,
+  backupRoot: string,
+  files: string[]
+) {
+  for (const file of files) {
+    const backupFile = path.join(backupRoot, file);
+    if (!fs.existsSync(backupFile)) continue;
+
+    const fullPath = path.join(root, file);
+    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+    fs.copyFileSync(backupFile, fullPath);
   }
 }
 
-export function applyChangesAtomic(workspaceRoot: string, files: ApplyFileChange[]) {
-  const backupId =
-    typeof crypto.randomUUID === "function"
-      ? crypto.randomUUID()
-      : crypto.randomBytes(16).toString("hex");
+export async function applyWithGuard(
+  workspaceRoot: string,
+  changes: ApplyFileChange[]
+): Promise<ApplyResult> {
 
-  const backupRoot = path.join(process.cwd(), "runtime", "backups", backupId);
-  ensureDir(backupRoot);
+  const touched = changes.map(f => f.path);
 
-  const touched: string[] = [];
-  const writtenFiles: string[] = [];
+  const { backupId, backupRoot } = backupFiles(workspaceRoot, touched);
 
-  try {
-    // Write + backup
-    for (const f of files) {
-      const rel = safeRel(f.path);
-      const fullPath = path.join(workspaceRoot, rel);
-      touched.push(rel);
+  for (const change of changes) {
+    const fullPath = path.join(workspaceRoot, change.path);
+    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+    fs.writeFileSync(fullPath, change.content, "utf8");
+  }
 
-      if (fs.existsSync(fullPath)) {
-        const backupPath = path.join(backupRoot, rel);
-        ensureDir(path.dirname(backupPath));
-        fs.copyFileSync(fullPath, backupPath);
-      }
+  // ✅ CORRECT — await the compile guard
+  const guard = await runCompileGuard(workspaceRoot);
 
-      ensureDir(path.dirname(fullPath));
-      fs.writeFileSync(fullPath, String(f.content ?? ""), "utf8");
-      writtenFiles.push(fullPath);
-    }
-
-    // Compile guard (projectRoot == workspaceRoot)
-    const guard = runCompileGuard(workspaceRoot, touched);
-    if (!guard.ok) {
-      rollbackFromBackup(workspaceRoot, backupRoot, touched);
-      return {
-        ok: false,
-        compiled: false,
-        rolledBack: true,
-        backupId,
-        error: guard.output || "Compile guard failed",
-      };
-    }
-
-    return {
-      ok: true,
-      compiled: true,
-      rolledBack: false,
-      backupId,
-      writtenFiles,
-    };
-  } catch (err: any) {
+  if (!guard.ok) {
     rollbackFromBackup(workspaceRoot, backupRoot, touched);
+
     return {
       ok: false,
       compiled: false,
       rolledBack: true,
       backupId,
-      error: err?.message ?? "Apply failed",
+      error: guard.output ?? "Compile failed"
     };
   }
+
+  return {
+    ok: true,
+    compiled: true,
+    backupId
+  };
 }

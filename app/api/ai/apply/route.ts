@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
 
 interface FileChange {
@@ -26,41 +25,14 @@ function resolveProjectRoot(workspaceId: string, projectId: string) {
   );
 }
 
-function safeRel(p: string) {
-  if (!p || typeof p !== "string") {
-    throw new Error("Invalid file path");
-  }
-  if (p.includes("..")) {
-    throw new Error("Path traversal not allowed");
-  }
-  if (path.isAbsolute(p)) {
-    throw new Error("Absolute paths not allowed");
-  }
-  return p.replace(/\\/g, "/");
+function backupFile(filePath: string): string | null {
+  if (!fs.existsSync(filePath)) return null;
+  return fs.readFileSync(filePath, "utf8");
 }
 
-function ensureDir(dir: string) {
-  fs.mkdirSync(dir, { recursive: true });
-}
-
-function rollbackFromBackup(
-  projectRoot: string,
-  backupRoot: string,
-  touched: string[]
-) {
-  for (const rel of touched) {
-    const fullPath = path.join(projectRoot, rel);
-    const backupPath = path.join(backupRoot, rel);
-
-    if (fs.existsSync(backupPath)) {
-      ensureDir(path.dirname(fullPath));
-      fs.copyFileSync(backupPath, fullPath);
-    } else {
-      if (fs.existsSync(fullPath)) {
-        fs.rmSync(fullPath, { force: true });
-      }
-    }
-  }
+function restoreFile(filePath: string, content: string | null) {
+  if (content === null) return;
+  fs.writeFileSync(filePath, content, "utf8");
 }
 
 export async function POST(req: Request) {
@@ -68,7 +40,7 @@ export async function POST(req: Request) {
     const body = (await req.json()) as ApplyRequest;
     const { workspaceId, projectId, files } = body;
 
-    if (!workspaceId || !projectId || !Array.isArray(files) || files.length === 0) {
+    if (!workspaceId || !projectId || !files?.length) {
       return NextResponse.json(
         { error: "Invalid apply payload" },
         { status: 400 }
@@ -84,51 +56,30 @@ export async function POST(req: Request) {
       );
     }
 
-    const backupId =
-      typeof crypto.randomUUID === "function"
-        ? crypto.randomUUID()
-        : crypto.randomBytes(16).toString("hex");
+    const backups: Record<string, string | null> = {};
 
-    const backupRoot = path.join(
-      process.cwd(),
-      "runtime",
-      "backups",
-      backupId
-    );
-
-    ensureDir(backupRoot);
-
-    const touched: string[] = [];
-
-    // Write + backup
     for (const change of files) {
-      const rel = safeRel(change.path);
-      const fullPath = path.join(projectRoot, rel);
-      touched.push(rel);
+      const fullPath = path.join(projectRoot, change.path);
+      backups[fullPath] = backupFile(fullPath);
 
-      if (fs.existsSync(fullPath)) {
-        const backupPath = path.join(backupRoot, rel);
-        ensureDir(path.dirname(backupPath));
-        fs.copyFileSync(fullPath, backupPath);
-      }
-
-      ensureDir(path.dirname(fullPath));
-      fs.writeFileSync(fullPath, String(change.content ?? ""), "utf8");
+      fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+      fs.writeFileSync(fullPath, change.content, "utf8");
     }
 
-    // STRICT TypeScript compile guard
-    const guard = runCompileGuard(projectRoot, touched);
+    // ✅ FIX: await compile guard
+    const guard = await runCompileGuard(projectRoot);
 
     if (!guard.ok) {
-      rollbackFromBackup(projectRoot, backupRoot, touched);
+      for (const filePath of Object.keys(backups)) {
+        restoreFile(filePath, backups[filePath]);
+      }
 
       return NextResponse.json(
         {
           ok: false,
           compiled: false,
           rolledBack: true,
-          backupId,
-          error: guard.output ?? "Compile failed",
+          error: guard.output ?? "Compile failed"
         },
         { status: 400 }
       );
@@ -136,9 +87,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
-      compiled: true,
-      rolledBack: false,
-      backupId,
+      compiled: true
     });
 
   } catch (err: any) {

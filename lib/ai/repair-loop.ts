@@ -1,19 +1,19 @@
 import path from "path";
-import fs from "fs";
-import { enforceManifestGate } from "@/lib/manifest-enforce";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
+import { applyWithGuard, type ApplyFileChange } from "@/lib/ai/apply";
 
-export type ApplyFileChange = {
-  path: string;
-  content: string;
-};
-
-export type RepairRequest = {
+export interface RepairRequest {
   workspaceId: string;
   projectId: string;
   maxAttempts?: number;
   files: ApplyFileChange[];
-};
+}
+
+export interface RepairResult {
+  ok: boolean;
+  attempts: number;
+  error?: string;
+}
 
 function resolveProjectRoot(workspaceId: string, projectId: string) {
   return path.join(
@@ -26,72 +26,44 @@ function resolveProjectRoot(workspaceId: string, projectId: string) {
   );
 }
 
-export async function repairLoop(body: RepairRequest) {
-  const { workspaceId, projectId, files } = body;
+export async function runRepairLoop(
+  req: RepairRequest
+): Promise<RepairResult> {
 
-  if (!workspaceId || !projectId || !files?.length) {
-    return { ok: false, error: "Invalid repair payload" };
-  }
+  const { workspaceId, projectId, files } = req;
+  const maxAttempts = req.maxAttempts ?? 3;
 
   const projectRoot = resolveProjectRoot(workspaceId, projectId);
 
-  if (!fs.existsSync(projectRoot)) {
-    return { ok: false, error: "Project not found" };
-  }
+  let attempt = 0;
+  let lastError: string | undefined;
 
-  try {
-    // ✅ PASS STRING ARRAY ONLY
-    enforceManifestGate(files.map(f => f.path));
-  } catch (err: any) {
-    return {
-      ok: false,
-      attempts: [
-        {
-          attempt: 0,
-          applied: false,
-          compiled: false,
-          rollback: false,
-          tscOutput: err?.message ?? "Manifest rejected initial files"
-        }
-      ],
-      final: {
-        compiled: false,
-        tscOutput: err?.message ?? "Manifest rejected"
-      }
-    };
-  }
+  while (attempt < maxAttempts) {
+    attempt++;
 
-  // Apply changes
-  for (const change of files) {
-    const fullPath = path.join(projectRoot, change.path);
-    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
-    fs.writeFileSync(fullPath, change.content, "utf8");
-  }
+    const result = await applyWithGuard(projectRoot, files);
 
-  const compile = await runCompileGuard(projectRoot);
+    if (!result.ok) {
+      lastError = result.error;
+      continue;
+    }
 
-  if (!compile.ok) {
-    return {
-      ok: false,
-      attempts: [
-        {
-          attempt: 1,
-          applied: true,
-          compiled: false,
-          rollback: false,
-          tscOutput: compile.error ?? "Compile failed"
-        }
-      ],
-      final: {
-        compiled: false,
-        tscOutput: compile.error ?? "Compile failed"
-      }
-    };
+    // ✅ FIX — await compile guard
+    const compile = await runCompileGuard(projectRoot);
+
+    if (compile.ok) {
+      return {
+        ok: true,
+        attempts: attempt
+      };
+    }
+
+    lastError = compile.output ?? "Compile failed";
   }
 
   return {
-    ok: true,
-    attempts: [],
-    final: { compiled: true }
+    ok: false,
+    attempts: attempt,
+    error: lastError
   };
 }

@@ -17,6 +17,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    // 🔑 REQUIRED FOR @/ ALIAS
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -29,16 +30,18 @@
       }
     ]
   },
-  "include": ["types", 
+  "include": [
     "app",
+    "korelumina.manifest.json",
     "lib",
-    "next-env.d.ts",
     "runtime",
-    "scripts",
     ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
+    ".next",
+    "runtime/backups",
+    "runtime/logs",
     "runtime/workspaces"
   ]
 }

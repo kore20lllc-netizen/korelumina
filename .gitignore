@@ -27,3 +27,14 @@ runtime/jobs.json
 runtime/previews.json
 runtime/jobs.json
 runtime/logs/
+
+# runtime artifacts
+runtime/backups/
+runtime/logs/
+runtime/jobs.json
+
+# ts incremental build
+tsconfig.tsbuildinfo
+
+# next build
+.next/
