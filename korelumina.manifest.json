@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "rules": {
+    "allow": [
+      "app/**",
+      "components/**",
+      "lib/**",
+      "runtime/**",
+      "data/**"
+    ],
+    "deny": [
+      ".env*",
+      "**/*.pem",
+      "**/*.key",
+      "node_modules/**",
+      ".next/**",
+      "dist/**"
+    ],
+    "maxFilesTouched": 20,
+    "maxFileBytes": 500000
+  }
+}

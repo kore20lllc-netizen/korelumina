@@ -7,11 +7,14 @@ export async function POST(
 ) {
   const { workspaceId, projectId } = await context.params;
 
-  await enqueueBuild(workspaceId, projectId);
+  const result = await enqueueBuild(workspaceId, projectId);
 
   return NextResponse.json({
-    ok: true,
+    ok: result.ok,
     workspaceId,
     projectId,
+    jobId: result.jobId,
+    logPath: result.logPath,
+    code: result.code,
   });
 }
