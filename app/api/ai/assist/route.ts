@@ -1,87 +1,33 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import path from "path";
-import type { AiMode } from "@/lib/ai/types";
-import { parseStrictJson } from "@/lib/ai/parse";
-import { validateAiResponse } from "@/lib/ai/manifest";
-import { generateDiff } from "@/lib/ai/diff";
 
 export const dynamic = "force-dynamic";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-interface AssistRequest {
-  task: string;
-  mode: AiMode;
-  workspaceId?: string;
-  projectId?: string;
-}
-
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as AssistRequest;
+    const apiKey = process.env.OPENAI_API_KEY;
 
-    if (!body.task || !body.mode) {
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "Missing task or mode" },
-        { status: 400 }
+        { error: "OPENAI_API_KEY not configured" },
+        { status: 500 }
       );
     }
 
-    const systemPrompt = `
-You are Korelumina AI.
+    const client = new OpenAI({ apiKey });
 
-Return JSON only.
-No markdown.
-No explanation text.
+    const body = await req.json();
 
-{
-  "summary": string,
-  "files": [
-    {
-      "path": string,
-      "content": string
-    }
-  ]
-}
-`;
-
-    const completion = await client.chat.completions.create({
-      model: "gpt-5",
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: body.task },
-      ],
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: body.messages ?? [],
     });
-
-    const raw = completion.choices[0]?.message?.content ?? "";
-    const parsed = parseStrictJson(raw);
-    validateAiResponse(parsed, body.mode);
-
-    // Resolve workspace root
-    const root = process.cwd();
-    const workspaceRoot =
-      body.workspaceId && body.projectId
-        ? path.join(
-            root,
-            "runtime",
-            "workspaces",
-            body.workspaceId,
-            "projects",
-            body.projectId
-          )
-        : root;
-
-    const diff = generateDiff(workspaceRoot, parsed.files);
 
     return NextResponse.json({
       ok: true,
-      summary: parsed.summary,
-      diff,
+      output: response.choices[0]?.message?.content ?? "",
     });
+
   } catch (err: any) {
     return NextResponse.json(
       { error: err?.message ?? "AI error" },
