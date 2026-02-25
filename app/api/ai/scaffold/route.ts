@@ -1,72 +1,104 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { appendJournalEvent } from "@/lib/ai/journal";
+import path from "path";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
+import { applyWithGuard } from "@/lib/ai/apply";
 
 export const dynamic = "force-dynamic";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function resolveProjectRoot(workspaceId: string, projectId: string) {
+  return path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
+    workspaceId,
+    "projects",
+    projectId
+  );
+}
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
+  try {
+    const body = await req.json().catch(() => null);
 
-  const workspaceId = body?.workspaceId as string | undefined;
-  const projectId = body?.projectId as string | undefined;
-  const spec = body?.spec as string | undefined;
+    const workspaceId = body?.workspaceId as string | undefined;
+    const projectId = body?.projectId as string | undefined;
+    const spec = body?.spec as string | undefined;
 
-  if (!workspaceId || !projectId || !spec) {
-    return NextResponse.json(
-      { error: "workspaceId, projectId and spec are required" },
-      { status: 400 }
-    );
-  }
+    if (!workspaceId || !projectId || !spec) {
+      return NextResponse.json(
+        { error: "workspaceId, projectId and spec are required" },
+        { status: 400 }
+      );
+    }
 
-  enforceManifestGate({ workspaceId, projectId });
+    enforceManifestGate({ workspaceId, projectId });
 
-  appendJournalEvent({
-    t: Date.now(),
-    kind: "ai.scaffold.request",
-    workspaceId,
-    projectId,
-    payload: { spec },
-  });
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY not configured" },
+        { status: 500 }
+      );
+    }
 
-  const completion = await client.responses.create({
-    model: "gpt-4.1",
-    input: `
-You are generating file patches for a Next.js TypeScript project.
+    const client = new OpenAI({ apiKey });
+
+    const completion = await client.responses.create({
+      model: "gpt-4.1-mini",
+      input: `
+You are a code generator.
+
+Generate FILE blocks only.
 
 Rules:
-- Only output FILE blocks.
-- Only write inside src/.
-- Never write README.md.
-- Never write package.json.
-- Never write root files.
-
-Format strictly:
-
-FILE: relative/path
-ACTION: create|update
-CONTENT:
-<file content>
+- Only write inside src/
+- Never write README.md
+- Never write package.json
+- Never write root files
 
 Task:
 ${spec}
-`,
-  });
+`
+    });
 
-  // ✅ Stable and fully supported by SDK
-  const output = completion.output_text ?? "";
+    const output = completion.output_text ?? "";
 
-  appendJournalEvent({
-    t: Date.now(),
-    kind: "ai.scaffold.response",
-    workspaceId,
-    projectId,
-    payload: { output },
-  });
+    const files = parseFileBlocks(output);
 
-  return NextResponse.json({ ok: true, output });
+    const projectRoot = resolveProjectRoot(workspaceId, projectId);
+
+    const applied = await applyWithGuard(projectRoot, files);
+
+    return NextResponse.json({
+      ok: true,
+      applied
+    });
+
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message ?? "Scaffold failed" },
+      { status: 500 }
+    );
+  }
+}
+
+function parseFileBlocks(text: string) {
+  const blocks = text.split("FILE:");
+  const files: { path: string; content: string }[] = [];
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    const firstLineEnd = trimmed.indexOf("\n");
+    if (firstLineEnd === -1) continue;
+
+    const path = trimmed.slice(0, firstLineEnd).trim();
+    const content = trimmed.slice(firstLineEnd + 1);
+
+    files.push({ path, content });
+  }
+
+  return files;
 }
