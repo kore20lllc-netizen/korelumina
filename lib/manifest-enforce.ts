@@ -1,17 +1,24 @@
-const ALLOWED_PREFIXES = ["src/", "generated/", "components/", "lib/"];
+export interface ManifestGateInput {
+  workspaceId: string;
+  projectId: string;
+}
 
-export function enforceManifestGate(paths: unknown[]) {
-  for (const raw of paths) {
-    if (typeof raw !== "string") {
-      throw new Error(`Path not allowed by manifest: non-string value`);
-    }
-    const p = raw;
+/**
+ * Enforces that a workspace + project exist.
+ * This is a guard — not a file path validator.
+ */
+export function enforceManifestGate(input: ManifestGateInput): void {
+  if (!input) {
+    throw new Error("Manifest gate: missing input");
+  }
 
-    if (p.includes("..")) throw new Error(`Path traversal detected: ${p}`);
-    if (p.startsWith("/")) throw new Error(`Absolute paths not allowed: ${p}`);
+  const { workspaceId, projectId } = input;
 
-    if (!ALLOWED_PREFIXES.some((prefix) => p.startsWith(prefix))) {
-      throw new Error(`Path not allowed by manifest: ${p}`);
-    }
+  if (!workspaceId || typeof workspaceId !== "string") {
+    throw new Error("Manifest gate: invalid workspaceId");
+  }
+
+  if (!projectId || typeof projectId !== "string") {
+    throw new Error("Manifest gate: invalid projectId");
   }
 }

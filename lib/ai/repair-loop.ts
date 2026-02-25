@@ -1,19 +1,20 @@
+import fs from "fs";
 import path from "path";
+import { applyWithGuard } from "@/lib/ai/apply";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
-import { applyWithGuard, type ApplyFileChange } from "@/lib/ai/apply";
 
-export interface RepairRequest {
+export type RepairRequest = {
   workspaceId: string;
   projectId: string;
+  files: { path: string; content: string }[];
   maxAttempts?: number;
-  files: ApplyFileChange[];
-}
+};
 
-export interface RepairResult {
+export type RepairResult = {
   ok: boolean;
   attempts: number;
   error?: string;
-}
+};
 
 function resolveProjectRoot(workspaceId: string, projectId: string) {
   return path.join(
@@ -31,7 +32,7 @@ export async function runRepairLoop(
 ): Promise<RepairResult> {
 
   const { workspaceId, projectId, files } = req;
-  const maxAttempts = req.maxAttempts ?? 3;
+  const maxAttempts = Math.min(req.maxAttempts ?? 3, 6);
 
   const projectRoot = resolveProjectRoot(workspaceId, projectId);
 
@@ -41,14 +42,13 @@ export async function runRepairLoop(
   while (attempt < maxAttempts) {
     attempt++;
 
-    const result = await applyWithGuard(projectRoot, files);
+    const applied = await applyWithGuard(projectRoot, files);
 
-    if (!result.ok) {
-      lastError = result.error;
+    if (!applied.ok) {
+      lastError = applied.error;
       continue;
     }
 
-    // ✅ FIX — await compile guard
     const compile = await runCompileGuard(projectRoot);
 
     if (compile.ok) {
@@ -64,6 +64,6 @@ export async function runRepairLoop(
   return {
     ok: false,
     attempts: attempt,
-    error: lastError
+    error: lastError ?? "Repair loop exhausted"
   };
 }

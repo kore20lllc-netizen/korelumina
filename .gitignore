@@ -38,3 +38,14 @@ tsconfig.tsbuildinfo
 
 # next build
 .next/
+
+# Local AI patch artifacts
+diff.json
+patch.json
+raw-patch.txt
+scaffold.json
+
+# Script outputs
+runtime/ai-journal/
+runtime/backups/
+

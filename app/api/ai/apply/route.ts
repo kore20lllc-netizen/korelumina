@@ -58,15 +58,17 @@ export async function POST(req: Request) {
 
     const backups: Record<string, string | null> = {};
 
+    // Backup + apply
     for (const change of files) {
       const fullPath = path.join(projectRoot, change.path);
+
       backups[fullPath] = backupFile(fullPath);
 
       fs.mkdirSync(path.dirname(fullPath), { recursive: true });
       fs.writeFileSync(fullPath, change.content, "utf8");
     }
 
-    // ✅ FIX: await compile guard
+    // ✅ STRICT TSC GUARD (NO NEXT BUILD)
     const guard = await runCompileGuard(projectRoot);
 
     if (!guard.ok) {
@@ -77,9 +79,8 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           ok: false,
-          compiled: false,
           rolledBack: true,
-          error: guard.output ?? "Compile failed"
+          error: guard.output ?? "TypeScript compile failed"
         },
         { status: 400 }
       );
