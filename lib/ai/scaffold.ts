@@ -1,23 +1,12 @@
-import path from "path";
-import { runCompileGuard } from "@/lib/ai/compile-guard";
+import OpenAI from "openai";
 import { applyWithGuard } from "@/lib/ai/apply";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
-import { parseStrictJson } from "@/lib/ai/parse";
-import OpenAI from "openai";
+import path from "path";
 
-export type ScaffoldRequest = {
-  workspaceId: string;
-  projectId: string;
-  appName: string;
-  spec: string;
-  maxFiles?: number;
-};
+type ApplyFileChange = { path: string; content: string };
 
-export async function runScaffold(req: ScaffoldRequest) {
-  const { workspaceId, projectId, appName, spec } = req;
-  const maxFiles = req.maxFiles ?? 25;
-
-  const projectRoot = path.join(
+export function resolveProjectRoot(workspaceId: string, projectId: string) {
+  return path.join(
     process.cwd(),
     "runtime",
     "workspaces",
@@ -25,82 +14,118 @@ export async function runScaffold(req: ScaffoldRequest) {
     "projects",
     projectId
   );
+}
 
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("OPENAI_API_KEY not configured");
+// Parse strict FILE blocks produced by the model
+export function parseFileBlocks(text: string): ApplyFileChange[] {
+  const lines = text.split(/\r?\n/);
+  const files: ApplyFileChange[] = [];
+
+  let i = 0;
+
+  const startsWithLabel = (line: string, label: string) =>
+    line.startsWith(label);
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    if (!startsWithLabel(line, "FILE:")) {
+      i++;
+      continue;
+    }
+
+    const filePath = line.slice("FILE:".length).trim();
+    i++;
+
+    // optional ACTION:
+    if (i < lines.length && startsWithLabel(lines[i], "ACTION:")) {
+      i++;
+    }
+
+    // require CONTENT:
+    if (i >= lines.length || !startsWithLabel(lines[i], "CONTENT:")) {
+      // malformed block; skip
+      continue;
+    }
+
+    i++; // first content line
+
+    const contentLines: string[] = [];
+    while (i < lines.length) {
+      const l = lines[i];
+      if (startsWithLabel(l, "FILE:")) break;
+      contentLines.push(l);
+      i++;
+    }
+
+    const content = contentLines.join("\n");
+    if (filePath) files.push({ path: filePath, content });
+  }
+
+  return files;
+}
+
+export async function scaffoldProject(opts: {
+  apiKey: string;
+  workspaceId: string;
+  projectId: string;
+  spec: string;
+}) {
+  const { apiKey, workspaceId, projectId, spec } = opts;
+
+  enforceManifestGate({ workspaceId, projectId });
 
   const client = new OpenAI({ apiKey });
 
-  const system = `
-You are scaffolding a feature inside an isolated project directory.
+  const completion = await client.responses.create({
+    model: "gpt-4.1-mini",
+    input: `
+You are generating file patches for a Next.js TypeScript project.
 
-CRITICAL:
-- ALL file paths MUST be relative to the project root.
-- NEVER generate root-level files.
-- NEVER generate paths starting with '/'.
-- NEVER generate README.md at repository root.
-- README must be created inside the project root.
+Rules:
+- Only output FILE blocks.
+- Only write inside src/.
+- Never write README.md.
+- Never write package.json.
+- Never write root files.
 
-Allowed example:
-README.md
-app/feature/page.tsx
-app/api/contacts/route.ts
+Format strictly:
 
-Return strict JSON:
-{
-  "files": [
-    { "path": "relative/path", "content": "file content" }
-  ]
-}
-  `.trim();
+FILE: relative/path
+ACTION: create|update
+CONTENT:
+<file content>
 
-  const user = `
-APP NAME:
-${appName}
-
-GOAL:
-Scaffold the foundational structure for this app so a developer can start building features immediately.
-
-SPEC:
+Task:
 ${spec}
-
-REQUIRED OUTPUT FILES (minimum set):
-1) README.md (project root only)
-2) One API route (e.g. app/api/contacts/route.ts)
-3) One UI page (e.g. app/contacts/page.tsx)
-4) Minimal example module aligned to spec
-
-Strict JSON only.
-  `.trim();
-
-  const completion = await client.chat.completions.create({
-    model: "gpt-4o-mini",
-    temperature: 0.2,
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: user }
-    ]
+`,
   });
 
-  const raw = completion.choices[0]?.message?.content ?? "";
-  const parsed = parseStrictJson(raw);
+  const output = completion.output_text ?? "";
+  const files = parseFileBlocks(output);
 
-  const files = parsed?.files?.slice(0, maxFiles);
-
-  if (!Array.isArray(files) || files.length === 0) {
-    throw new Error("No files generated");
+  // Basic safety: only allow src/
+  for (const f of files) {
+    if (!f.path.startsWith("src/")) {
+      throw new Error(`Path not allowed by scaffold rules: ${f.path}`);
+    }
   }
 
-  // Enforce manifest safety
-
+  const projectRoot = resolveProjectRoot(workspaceId, projectId);
   const applied = await applyWithGuard(projectRoot, files);
 
+  // ApplyResult is not a discriminated union in your current lib/ai/apply.ts,
+  // so treat error as optional.
+  const maybeError =
+    typeof (applied as any)?.error === "string" ? (applied as any).error : undefined;
+
   return {
-    ok: applied.ok,
-    compiled: applied.compiled,
-    rolledBack: applied.rolledBack,
-    backupId: applied.backupId,
-    createdFiles: files.map((f: any) => f.path),
-    error: applied.error
+    ok: Boolean((applied as any)?.ok),
+    compiled: Boolean((applied as any)?.compiled),
+    rolledBack: Boolean((applied as any)?.rolledBack),
+    backupId: (applied as any)?.backupId,
+    createdFiles: files.map((f) => f.path),
+    ...(maybeError ? { error: maybeError } : {}),
+    output,
   };
 }

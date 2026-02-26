@@ -1,28 +1,23 @@
 import fs from "fs";
 import path from "path";
 
-export type AiJournalEvent =
-  | {
-      t: number;
-      kind: "ai.scaffold.request" | "ai.scaffold.response";
-      workspaceId: string;
-      projectId: string;
-      payload: any;
-    }
-  | {
-      t: number;
-      kind: "ai.apply.request" | "ai.apply.result";
-      workspaceId: string;
-      projectId: string;
-      payload: any;
-    }
-  | {
-      t: number;
-      kind: "ai.repair.request" | "ai.repair.result";
-      workspaceId: string;
-      projectId: string;
-      payload: any;
-    };
+export type AiJournalEvent = {
+  t: number;
+  kind:
+    | "ai.scaffold.request"
+    | "ai.scaffold.response"
+    | "ai.apply.request"
+    | "ai.apply.result"
+    | "ai.repair.request"
+    | "ai.repair.result"
+    | "ai.task.request"
+    | "ai.task.generated"
+    | "ai.task.applied"
+    | "ai.task.repair";
+  workspaceId: string;
+  projectId: string;
+  payload?: any;
+};
 
 function ensureDir(p: string) {
   fs.mkdirSync(p, { recursive: true });
@@ -49,13 +44,16 @@ export function readJournal(
   const text = fs.readFileSync(file, "utf8");
   const lines = text.split("\n").filter(Boolean);
   const tail = lines.slice(Math.max(0, lines.length - limit));
+
   const out: AiJournalEvent[] = [];
+
   for (const line of tail) {
     try {
       out.push(JSON.parse(line));
     } catch {
-      // skip bad line
+      // skip invalid lines
     }
   }
+
   return out;
 }
