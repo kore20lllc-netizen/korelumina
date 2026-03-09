@@ -1,16 +1,16 @@
-import Shell from "./shell";
+import Shell from "./shell"
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ workspaceId: string; projectId: string }>
+}) {
+  const { workspaceId, projectId } = await params
 
-type PageProps = {
-  params: Promise<{
-    workspaceId: string;
-    projectId: string;
-  }>;
-};
-
-export default async function BuilderPage({ params }: PageProps) {
-  const { workspaceId, projectId } = await params;
-  return <Shell workspaceId={workspaceId} projectId={projectId} />;
+  return (
+    <Shell
+      workspaceId={workspaceId}
+      projectId={projectId}
+    />
+  )
 }

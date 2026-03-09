@@ -1,140 +1,141 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import { useState } from "react"
+import DiffViewer from "@/components/DiffViewer"
 
-type Props = { workspaceId: string; projectId: string };
+export default function Shell({workspaceId,projectId}:{workspaceId:string;projectId:string}){
 
-type StateResp = {
-  workspaceId: string;
-  projectId: string;
-  manifest?: any;
-  latestJob?: any;
-  isBuilding?: boolean;
-  canBuild?: boolean;
-  logExists?: boolean;
-  health?: "idle" | "building" | "error" | "ready";
-  previewUrl?: string | null;
-  logs?: string[];
-};
+  const [spec,setSpec] = useState("")
+  const [plan,setPlan] = useState<any[]>([])
+  const [files,setFiles] = useState<any[]>([])
+  const [selected,setSelected] = useState<number>(0)
 
-async function getState(workspaceId: string, projectId: string): Promise<StateResp> {
-  const r = await fetch(`/api/workspaces/${workspaceId}/projects/${projectId}/state`, {
-    cache: "no-store",
-  });
-  if (!r.ok) throw new Error(await r.text());
-  return r.json();
-}
+  async function generatePlan(){
 
-async function startPreview(workspaceId: string, projectId: string): Promise<any> {
-  const r = await fetch(`/api/workspaces/${workspaceId}/projects/${projectId}/preview/start`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    cache: "no-store",
-  });
-  if (!r.ok) throw new Error(await r.text());
-  return r.json();
-}
+    const r = await fetch("/api/ai/plan",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({workspaceId,projectId,spec})
+    })
 
-export default function BuilderShell({ workspaceId, projectId }: Props) {
-  const [state, setState] = React.useState<StateResp | null>(null);
-  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
-  const [err, setErr] = React.useState<string | null>(null);
-  const [loading, setLoading] = React.useState(false);
-
-  const refresh = React.useCallback(async () => {
-    setErr(null);
-    try {
-      const s = await getState(workspaceId, projectId);
-      setState(s);
-      if (s.previewUrl) setPreviewUrl(s.previewUrl);
-    } catch (e: any) {
-      setErr(e?.message ?? "Failed to load state");
-    }
-  }, [workspaceId, projectId]);
-
-  React.useEffect(() => {
-    refresh();
-    const t = setInterval(refresh, 1500);
-    return () => clearInterval(t);
-  }, [refresh]);
-
-  async function onStartPreview() {
-    setLoading(true);
-    setErr(null);
-    try {
-      const res = await startPreview(workspaceId, projectId);
-      const url = res?.preview?.url ?? res?.url ?? null;
-      if (url) setPreviewUrl(url);
-      await refresh();
-    } catch (e: any) {
-      setErr(e?.message ?? "Preview start failed");
-    } finally {
-      setLoading(false);
-    }
+    const d = await r.json()
+    setPlan(d.plan || [])
   }
 
-  return (
-    <div className="h-screen w-screen overflow-hidden flex">
-      {/* Left: Project info / file tree placeholder */}
-      <aside className="w-72 border-r p-3 flex flex-col gap-3">
-        <div className="font-semibold">Korelumina Builder</div>
-        <div className="text-sm text-muted-foreground">
-          Workspace: <span className="font-mono">{workspaceId}</span><br />
-          Project: <span className="font-mono">{projectId}</span>
-        </div>
+  async function generateDiff(){
 
-        <div className="text-sm">
-          Health: <span className="font-mono">{state?.health ?? "..."}</span>
-        </div>
+    const r = await fetch("/api/ai/task",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        workspaceId,
+        projectId,
+        mode:"draft",
+        spec
+      })
+    })
 
-        <button
-          onClick={onStartPreview}
-          disabled={loading}
-          className="px-3 py-2 rounded border text-sm"
-        >
-          {loading ? "Starting preview..." : "Start / Ensure Preview"}
-        </button>
+    const d = await r.json()
 
-        {err ? (
-          <div className="text-sm text-red-600 whitespace-pre-wrap">{err}</div>
-        ) : null}
+    setFiles(d.files || [])
+    setSelected(0)
+  }
 
-        <div className="mt-2 text-xs text-muted-foreground">
-          (File tree next)
-        </div>
-      </aside>
+  async function applySelected(){
 
-      {/* Middle: Editor placeholder */}
-      <main className="flex-1 border-r p-3">
-        <div className="font-semibold mb-2">Editor</div>
-        <div className="text-sm text-muted-foreground">
-          (Editor next — Monaco / file read-write pipeline)
-        </div>
-      </main>
+    const file = files[selected]
 
-      {/* Right: Live Preview */}
-      <section className="w-[48%] min-w-[520px] p-3 flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <div className="font-semibold">Preview</div>
-          <div className="text-xs text-muted-foreground font-mono">
-            {previewUrl ?? "(not running)"}
+    if(!file) return
+
+    const r = await fetch("/api/ai/apply",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        workspaceId,
+        projectId,
+        files:[file]
+      })
+    })
+
+    const d = await r.json()
+
+    alert(JSON.stringify(d,null,2))
+  }
+
+  const selectedFile = files[selected]
+
+  return(
+
+    <div style={{display:"flex",height:"100vh"}}>
+
+      <div style={{width:260,borderRight:"1px solid #ddd",padding:10}}>
+
+        <h3>Plan</h3>
+
+        {plan.map((f,i)=>(
+          <div key={i}>{f.path}</div>
+        ))}
+
+        <h3 style={{marginTop:20}}>Files</h3>
+
+        {files.map((f,i)=>(
+          <div
+            key={i}
+            onClick={()=>setSelected(i)}
+            style={{
+              cursor:"pointer",
+              fontFamily:"monospace",
+              padding:4,
+              background:i===selected?"#eee":"transparent"
+            }}
+          >
+            {f.path}
           </div>
+        ))}
+
+      </div>
+
+      <div style={{flex:1,padding:20}}>
+
+        <textarea
+          value={spec}
+          onChange={e=>setSpec(e.target.value)}
+          style={{width:"100%",height:100}}
+        />
+
+        <div style={{marginTop:10}}>
+
+          <button onClick={generatePlan}>
+            Generate Plan
+          </button>
+
+          <button onClick={generateDiff} style={{marginLeft:10}}>
+            Generate Diff
+          </button>
+
+          <button onClick={applySelected} style={{marginLeft:10}}>
+            Apply Selected
+          </button>
+
         </div>
 
-        <div className="flex-1 border rounded overflow-hidden bg-black/5">
-          {previewUrl ? (
-            <iframe
-              src={previewUrl}
-              className="w-full h-full"
-              allow="clipboard-read; clipboard-write"
+        <div style={{marginTop:20}}>
+
+          {selectedFile && (
+            <DiffViewer
+              oldCode=""
+              newCode={selectedFile.content}
             />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center text-sm text-muted-foreground">
-              Click “Start / Ensure Preview”
-            </div>
           )}
+
         </div>
-      </section>
+
+      </div>
+
+      <div style={{width:300,borderLeft:"1px solid #ddd",padding:10}}>
+        <h3>Journal</h3>
+      </div>
+
     </div>
-  );
+  )
 }

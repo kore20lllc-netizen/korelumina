@@ -1,54 +1,35 @@
-import { spawn } from "child_process";
+import { exec } from "child_process";
+import path from "path";
 
-export type CompileGuardResult = {
+export interface CompileGuardResult {
   ok: boolean;
   output?: string;
-};
+}
 
-/**
- * Compile guard for AI apply/repair flows.
- *
- * Backward-compatible signature:
- * - runCompileGuard(projectRoot)
- * - runCompileGuard(projectRoot, opts)
- *
- * opts may contain:
- * - cmd: string
- * - args: string[]
- *
- * Defaults to: npm run build
- */
-export async function runCompileGuard(
-  projectRoot: string,
-  opts?: any
-): Promise<CompileGuardResult> {
-  const cmd: string = opts?.cmd ?? "npm";
-  const args: string[] = opts?.args ?? ["run", "build"];
+export function runCompileGuard(projectRoot: string): Promise<CompileGuardResult> {
+  return new Promise((resolve) => {
+    const cmd = "npx tsc --noEmit";
 
-  return await new Promise<CompileGuardResult>((resolve) => {
-    const child = spawn(cmd, args, {
-      cwd: projectRoot,
-      env: process.env,
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-
-    let out = "";
-
-    child.stdout?.on("data", (chunk) => {
-      out += chunk.toString();
-    });
-
-    child.stderr?.on("data", (chunk) => {
-      out += chunk.toString();
-    });
-
-    child.on("close", (code) => {
-      if (code === 0) resolve({ ok: true, output: out });
-      else resolve({ ok: false, output: out });
-    });
-
-    child.on("error", (err) => {
-      resolve({ ok: false, output: String((err as any)?.message ?? err) });
-    });
+    exec(
+      cmd,
+      {
+        cwd: projectRoot,
+        timeout: 20000,
+        maxBuffer: 1024 * 1024
+      },
+      (error, stdout, stderr) => {
+        if (error) {
+          resolve({
+            ok: false,
+            output: stderr || stdout || error.message
+          });
+        } else {
+          resolve({
+            ok: true,
+            output: stdout
+          });
+        }
+      }
+    );
   });
 }
