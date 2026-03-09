@@ -1,0 +1,6 @@
+{
+  "workspaceId":"default",
+  "projectId":"kid-transit-eye",
+  "mode":"apply_repair",
+  "spec":"Create src/lib/bad.ts with a syntax error: export const broken = ; Only touch src/"
+}

@@ -1,4 +1,4 @@
-import { applyWithGuard } from "./apply";
+import { applyWithGuard } from "./apply-guard";
 import { runRepairLoop } from "./repair-loop";
 import { appendJournalEvent } from "./journal";
 import path from "path";
@@ -24,7 +24,7 @@ export async function runTaskOrchestrator({
     payload: applied,
   });
 
-  if (!applied.compiled) {
+  if (!applied.ok) {
     const repaired = await runRepairLoop({
       workspaceId,
       projectId,

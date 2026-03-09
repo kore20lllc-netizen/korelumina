@@ -14,7 +14,7 @@ export function parseFileBlocks(text: string) {
 
     const filePath = rawPath.replace(/^\/+/, "").trim();
 
-    # strip markdown fences if the model wrapped code
+    // strip markdown fences if the model wrapped code
     content = content
       .replace(/```[a-zA-Z]*\n?/g, "")
       .replace(/```/g, "")

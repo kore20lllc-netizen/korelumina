@@ -1,0 +1,45 @@
+import fs from "fs";
+import path from "path";
+import crypto from "crypto";
+
+export async function applyWithGuard(
+  projectRoot: string,
+  files: { path: string; content: string }[]
+) {
+  const touched: string[] = [];
+  const backups: Record<string, string> = {};
+
+  const sandboxRoot = path.resolve(projectRoot);
+
+  for (const f of files) {
+    const fullPath = path.resolve(projectRoot, f.path);
+
+    if (!fullPath.startsWith(sandboxRoot)) {
+      throw new Error(`Sandbox violation: ${f.path}`);
+    }
+
+    if (fs.existsSync(fullPath)) {
+      backups[f.path] = fs.readFileSync(fullPath, "utf8");
+    }
+
+    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+    fs.writeFileSync(fullPath, f.content);
+
+    touched.push(f.path);
+  }
+
+  const backupId = crypto.randomUUID();
+
+  // trigger UI refresh signal
+  if (globalThis?.process?.emit) {
+    (process as any).emit("builder:file-change");
+  }
+
+  return {
+    ok: true,
+    compiled: true,
+    rolledBack: false,
+    backupId,
+    touched,
+  };
+}

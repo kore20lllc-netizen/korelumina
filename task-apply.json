@@ -1,0 +1,6 @@
+{
+  "workspaceId":"default",
+  "projectId":"kid-transit-eye",
+  "mode":"apply",
+  "spec":"Create src/lib/test2.ts exporting: export const y = 2; Only touch files under src/."
+}

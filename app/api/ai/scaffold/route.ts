@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import path from "path";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
-import { applyWithGuard } from "@/lib/ai/apply";
+import { applyWithGuard } from "@/lib/ai/apply-guard";
 
 export const dynamic = "force-dynamic";
 

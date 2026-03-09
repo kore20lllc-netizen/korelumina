@@ -1,45 +1,26 @@
 import fs from "fs";
 import path from "path";
-import crypto from "crypto";
+import { runCompileGuard } from "./compile-guard";
 
-export async function applyWithGuard(
-  projectRoot: string,
-  files: { path: string; content: string }[]
-) {
-  const touched: string[] = [];
-  const backups: Record<string, string> = {};
-
-  const sandboxRoot = path.resolve(projectRoot);
+export async function applyFiles({
+  projectRoot,
+  files,
+}: {
+  projectRoot: string;
+  files: { path: string; content: string }[];
+}) {
 
   for (const f of files) {
-    const fullPath = path.resolve(projectRoot, f.path);
+    const abs = path.join(projectRoot, f.path);
 
-    if (!fullPath.startsWith(sandboxRoot)) {
-      throw new Error(`Sandbox violation: ${f.path}`);
-    }
-
-    if (fs.existsSync(fullPath)) {
-      backups[f.path] = fs.readFileSync(fullPath, "utf8");
-    }
-
-    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
-    fs.writeFileSync(fullPath, f.content);
-
-    touched.push(f.path);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, f.content, "utf8");
   }
 
-  const backupId = crypto.randomUUID();
+  const result = await runCompileGuard(projectRoot);
 
   // trigger UI refresh signal
-  if (globalThis?.process?.emit) {
-    process.emit("builder:file-change");
-  }
+  (process as any).emit("builder:file-change");
 
-  return {
-    ok: true,
-    compiled: true,
-    rolledBack: false,
-    backupId,
-    touched,
-  };
+  return result;
 }

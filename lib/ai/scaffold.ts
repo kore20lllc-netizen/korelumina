@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
-import { applyWithGuard } from "@/lib/ai/apply";
+import { applyWithGuard } from "@/lib/ai/apply-guard";
 import path from "path";
 
 function resolveProjectRoot(workspaceId: string, projectId: string) {

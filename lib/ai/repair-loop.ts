@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { applyWithGuard } from "@/lib/ai/apply";
+import { applyWithGuard } from "@/lib/ai/apply-guard";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
 
 export type RepairRequest = {
@@ -45,7 +45,7 @@ export async function runRepairLoop(
     const applied = await applyWithGuard(projectRoot, files);
 
     if (!applied.ok) {
-      lastError = applied.error;
+      lastError = "apply failed and was rolled back";
       continue;
     }
 

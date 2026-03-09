@@ -151,10 +151,10 @@ ${JSON.stringify(context.files ?? [], null, 2)}
     });
 
     return NextResponse.json({
-      ok: true,
-      mode: "orchestrated",
-      ...result,
-    });
+  ...result,
+  ok: true,
+  mode: "orchestrated",
+  });
 
   } catch (err: any) {
     return NextResponse.json(
