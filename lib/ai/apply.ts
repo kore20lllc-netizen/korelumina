@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
 import { runCompileGuard } from "./compile-guard";
@@ -22,5 +23,12 @@ export async function applyFiles({
   // trigger UI refresh signal
   (process as any).emit("builder:file-change");
 
-  return result;
+  
+    try {
+      execSync("npm install", { cwd: projectRoot, stdio: "inherit" });
+    } catch (e) {
+      console.error("dependency install failed", e);
+    }
+
+return result;
 }

@@ -1,0 +1,13 @@
+{
+  "name": "korelumina-app",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "dependencies": {
+    "next": "15.5.12",
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}

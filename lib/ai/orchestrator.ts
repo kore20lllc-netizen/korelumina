@@ -1,3 +1,5 @@
+import { scanProjectTree } from "./repo-context";
+import { generateArchitecturePlan } from "./architecture-plan";
 import { applyWithGuard } from "./apply-guard";
 import { runRepairLoop } from "./repair-loop";
 import { appendJournalEvent } from "./journal";
