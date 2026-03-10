@@ -1,3 +1,5 @@
+import fs from "fs";
+import { copyTemplate } from "@/lib/ai/template-copy";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import path from "path";
@@ -71,6 +73,23 @@ ${spec}
     });
 
     const projectRoot = resolveProjectRoot(workspaceId, projectId);
+
+    const templateRoot = path.join(process.cwd(),"templates","next-saas");
+
+    if (!fs.existsSync(projectRoot)) {
+      fs.mkdirSync(projectRoot,{recursive:true});
+    }
+
+    copyTemplate(templateRoot,projectRoot);
+
+
+
+    if (!fs.existsSync(projectRoot)) {
+      fs.mkdirSync(projectRoot,{recursive:true});
+    }
+
+    copyTemplate(templateRoot,projectRoot);
+
     const applied = await applyWithGuard(projectRoot, files);
 
     return NextResponse.json({
