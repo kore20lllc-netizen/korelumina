@@ -1,3 +1,4 @@
+import { buildProjectContext } from "@/lib/ai/context";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import path from "path";
@@ -66,7 +67,6 @@ export async function POST(req: Request) {
     const projectId = body?.projectId;
     const spec = body?.spec;
     const mode = body?.mode ?? "draft";
-    const context = body?.context ?? {};
 
     if (!workspaceId || !projectId || !spec) {
       return NextResponse.json(
@@ -106,7 +106,7 @@ Task:
 ${spec}
 
 Project Files:
-${JSON.stringify(context.files ?? [], null, 2)}
+[]
 `
     });
 
@@ -135,6 +135,7 @@ ${JSON.stringify(context.files ?? [], null, 2)}
     }
 
     const projectRoot = resolveProjectRoot(workspaceId, projectId);
+
 
     if (!fs.existsSync(projectRoot)) {
       return NextResponse.json(
