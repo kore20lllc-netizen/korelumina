@@ -1,4 +1,3 @@
-import { buildProjectContext } from "@/lib/ai/context";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import path from "path";
