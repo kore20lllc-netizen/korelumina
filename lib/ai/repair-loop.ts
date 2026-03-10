@@ -3,6 +3,8 @@ import path from "path";
 import { applyWithGuard } from "@/lib/ai/apply-guard";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
 
+const MAX_REPAIR_ATTEMPTS = 3;
+
 export type RepairRequest = {
   workspaceId: string;
   projectId: string;
@@ -39,6 +41,8 @@ export async function runRepairLoop(
   let attempt = 0;
   let lastError: string | undefined;
 
+  for (let attempt = 0; attempt < MAX_REPAIR_ATTEMPTS; attempt++) {
+
   while (attempt < maxAttempts) {
     attempt++;
 
@@ -60,6 +64,8 @@ export async function runRepairLoop(
 
     lastError = compile.output ?? "Compile failed";
   }
+  }
+
 
   return {
     ok: false,
