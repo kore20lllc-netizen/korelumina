@@ -1,29 +1,34 @@
-import fs from "fs";
+import { NextRequest, NextResponse } from "next/server";
+import fs from "fs/promises";
 import path from "path";
-import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  const body = await req.json();
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
 
-  const { projectId, path: filePath, content } = body;
+    const projectId = body?.projectId;
+    const filePath = body?.path;
+    const content = body?.content;
 
-  if (!projectId || !filePath) {
-    return NextResponse.json({ error: "missing params" }, { status: 400 });
+    if (!projectId || !filePath) {
+      return NextResponse.json(
+        { ok: false, error: "missing params" },
+        { status: 400 }
+      );
+    }
+
+    const baseDir = path.join(process.cwd(), "projects", projectId);
+    const fullPath = path.join(baseDir, filePath);
+
+    await fs.mkdir(path.dirname(fullPath), { recursive: true });
+    await fs.writeFile(fullPath, content ?? "", "utf8");
+
+    return NextResponse.json({ ok: true });
+
+  } catch (e: any) {
+    return NextResponse.json(
+      { ok: false, error: e.message },
+      { status: 500 }
+    );
   }
-
-  const root = path.join(
-    process.cwd(),
-    "runtime",
-    "workspaces",
-    "default",
-    "projects",
-    projectId
-  );
-
-  const full = path.join(root, filePath);
-
-  fs.mkdirSync(path.dirname(full), { recursive: true });
-  fs.writeFileSync(full, content ?? "", "utf8");
-
-  return NextResponse.json({ ok: true });
 }

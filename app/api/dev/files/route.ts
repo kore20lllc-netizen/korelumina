@@ -7,26 +7,24 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
 
     const projectId = url.searchParams.get("projectId");
-    const filePath = url.searchParams.get("path");
 
-    if (!projectId || !filePath) {
-      return NextResponse.json({ error: "missing params" }, { status: 400 });
+    if (!projectId) {
+      return NextResponse.json({ error: "missing projectId" }, { status: 400 });
     }
 
     const baseDir = path.join(process.cwd(), "projects", projectId);
-    const fullPath = path.join(baseDir, filePath);
 
-    const content = await fs.readFile(fullPath, "utf8");
+    const files = await fs.readdir(baseDir, { recursive: true });
 
     return NextResponse.json({
       ok: true,
-      content
+      files
     });
 
   } catch (e: any) {
-    return NextResponse.json({
-      ok: false,
-      error: e.message
-    }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: e.message },
+      { status: 500 }
+    );
   }
 }

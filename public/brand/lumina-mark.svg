@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Definitions -->
+  <defs>
+    <!-- Clip path to keep gradient inside blob silhouette -->
+    <clipPath id="lumina-blob-clip">
+      <path d="M100,20 
+               C140,20 160,40 170,70 
+               C180,100 175,130 160,150 
+               C145,170 120,180 100,180 
+               C80,180 55,170 40,150 
+               C25,130 20,100 30,70 
+               C40,40 60,20 100,20 Z"/>
+    </clipPath>
+    
+    <!-- Animated radial gradient -->
+    <radialGradient id="lumina-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5DE2E7" stop-opacity="1">
+        <animate attributeName="stop-color" 
+          values="#5DE2E7;#4A90E2;#C85BFF;#F5A623;#5DE2E7" 
+          dur="4.5s" 
+          repeatCount="indefinite"/>
+      </stop>
+      <stop offset="35%" stop-color="#4A90E2" stop-opacity="1">
+        <animate attributeName="stop-color" 
+          values="#4A90E2;#C85BFF;#F5A623;#5DE2E7;#4A90E2" 
+          dur="4.5s" 
+          repeatCount="indefinite"/>
+      </stop>
+      <stop offset="70%" stop-color="#C85BFF" stop-opacity="0.8">
+        <animate attributeName="stop-color" 
+          values="#C85BFF;#F5A623;#5DE2E7;#4A90E2;#C85BFF" 
+          dur="4.5s" 
+          repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#F5A623" stop-opacity="0.6">
+        <animate attributeName="stop-color" 
+          values="#F5A623;#5DE2E7;#4A90E2;#C85BFF;#F5A623" 
+          dur="4.5s" 
+          repeatCount="indefinite"/>
+      </stop>
+      
+      <!-- Gradient drift animation -->
+      <animateTransform
+        attributeName="gradientTransform"
+        type="translate"
+        values="0 0; 0.02 0.02; 0 0"
+        dur="4.5s"
+        repeatCount="indefinite"/>
+    </radialGradient>
+    
+    <!-- Soft glow filter with pulsing opacity -->
+    <filter id="lumina-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#4A90E2" flood-opacity="0.75">
+        <animate attributeName="flood-opacity" 
+          values="0.6;0.9;0.6" 
+          dur="4.5s" 
+          repeatCount="indefinite"/>
+      </feFlood>
+      <feComposite in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Subtle grain texture overlay at 3% opacity -->
+    <filter id="lumina-grain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="discrete" tableValues="0 0 0 0 0.03"/>
+      </feComponentTransfer>
+      <feBlend mode="overlay" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  
+  <!-- Single blob silhouette with gradient fill -->
+  <g clip-path="url(#lumina-blob-clip)">
+    <rect width="200" height="200" fill="url(#lumina-gradient)" filter="url(#lumina-glow) url(#lumina-grain)"/>
+  </g>
+  
+  <!-- Blob outline path for subtle definition -->
+  <path 
+    d="M100,20 
+       C140,20 160,40 170,70 
+       C180,100 175,130 160,150 
+       C145,170 120,180 100,180 
+       C80,180 55,170 40,150 
+       C25,130 20,100 30,70 
+       C40,40 60,20 100,20 Z"
+    fill="none"
+    stroke="url(#lumina-gradient)"
+    stroke-width="1"
+    opacity="0.3"/>
+</svg>
