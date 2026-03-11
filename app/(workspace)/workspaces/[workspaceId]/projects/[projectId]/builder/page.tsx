@@ -1,16 +1,7 @@
-import Shell from "./shell"
+import Shell from "./shell";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ workspaceId: string; projectId: string }>
-}) {
-  const { workspaceId, projectId } = await params
+export const dynamic = "force-dynamic";
 
-  return (
-    <Shell
-      workspaceId={workspaceId}
-      projectId={projectId}
-    />
-  )
+export default function Page() {
+  return <Shell />;
 }
