@@ -1,19 +1,23 @@
 import fs from "fs";
 import path from "path";
 
-export function copyTemplate(src: string, dest: string) {
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
+export function copyTemplate(src:string,dst:string){
 
-  for (const item of fs.readdirSync(src, { withFileTypes: true })) {
-    const s = path.join(src, item.name);
-    const d = path.join(dest, item.name);
+  if(!fs.existsSync(src)) return;
 
-    if (item.isDirectory()) {
-      copyTemplate(s, d);
-    } else {
-      fs.copyFileSync(s, d);
+  fs.mkdirSync(dst,{recursive:true});
+
+  for(const item of fs.readdirSync(src)){
+
+    const s = path.join(src,item);
+    const d = path.join(dst,item);
+
+    const stat = fs.statSync(s);
+
+    if(stat.isDirectory()){
+      copyTemplate(s,d);
+    }else{
+      fs.copyFileSync(s,d);
     }
   }
 }

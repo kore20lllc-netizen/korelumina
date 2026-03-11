@@ -2,97 +2,34 @@
 
 import { useEffect, useState } from "react";
 
-function buildTree(files: string[]) {
-  const root: any = {};
+export default function FileTree({projectId,onSelect}:{projectId:string,onSelect:(p:string)=>void}){
 
-  for (const file of files) {
-    const parts = file.split("/");
-    let node = root;
+  const [files,setFiles] = useState<string[]>([]);
 
-    for (const part of parts) {
-      if (!node[part]) node[part] = {};
-      node = node[part];
+  useEffect(()=>{
+    async function load(){
+      const r = await fetch(`/api/dev/files/list?projectId=${projectId}`);
+      const d = await r.json();
+      setFiles(d.files || []);
     }
-  }
-
-  return root;
-}
-
-function TreeNode({ node, path = "", onSelect }: any) {
-  const [open, setOpen] = useState(false);
-
-  return Object.keys(node).map((key) => {
-    const fullPath = path ? `${path}/${key}` : key;
-    const children = node[key];
-    const isFile = Object.keys(children).length === 0;
-
-    if (isFile) {
-      return (
-        <div
-          key={fullPath}
-          style={{ paddingLeft: 16, cursor: "pointer" }}
-          onClick={() => onSelect(fullPath)}
-        >
-          {key}
-        </div>
-      );
-    }
-
-    return (
-      <div key={fullPath}>
-        <div
-          style={{ cursor: "pointer", fontWeight: "bold" }}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "▼" : "▶"} {key}
-        </div>
-
-        {open && (
-          <div style={{ paddingLeft: 12 }}>
-            <TreeNode node={children} path={fullPath} onSelect={onSelect} />
-          </div>
-        )}
-      </div>
-    );
-  });
-}
-
-export default function FileTree({
-  workspaceId,
-  projectId,
-  onSelect,
-}: {
-  workspaceId: string;
-  projectId: string;
-  onSelect: (path: string) => void;
-}) {
-  const [tree, setTree] = useState<any>({});
-
-  async function load() {
-    const res = await fetch(
-      `/api/files?workspaceId=${workspaceId}&projectId=${projectId}`
-    );
-
-    const data = await res.json();
-    setTree(buildTree(data.files || []));
-  }
-
-  useEffect(() => {
     load();
+  },[projectId]);
 
-    const handler = () => load();
-
-    window.addEventListener("builder:file-change", handler);
-
-    return () => {
-      window.removeEventListener("builder:file-change", handler);
-    };
-  }, [workspaceId, projectId]);
-
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>Files</h2>
-      <TreeNode node={tree} onSelect={onSelect} />
+  return(
+    <div>
+      {files.map(f=>(
+        <div
+          key={f}
+          style={{
+            cursor:"pointer",
+            fontFamily:"monospace",
+            padding:4
+          }}
+          onClick={()=>onSelect(f)}
+        >
+          {f}
+        </div>
+      ))}
     </div>
   );
 }

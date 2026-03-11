@@ -30,5 +30,13 @@ export async function applyFiles({
       console.error("dependency install failed", e);
     }
 
+
+try {
+  const { execSync } = require("child_process");
+  execSync("npm run build", { cwd: projectRoot, stdio: "inherit" });
+} catch(e) {
+  console.error("project rebuild failed",e);
+}
+
 return result;
 }

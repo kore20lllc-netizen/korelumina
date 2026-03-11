@@ -1,46 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
+import { useState, useEffect } from "react";
 
-export default function CodeEditor({
-  workspaceId,
-  projectId,
-  file,
-}: {
-  workspaceId: string;
-  projectId: string;
-  file: string | null;
-}) {
+export default function CodeEditor({ projectId, path }: any) {
   const [code, setCode] = useState("");
 
   useEffect(() => {
     async function load() {
-      if (!file) return;
-
-      const res = await fetch(
-        `/api/file?workspaceId=${workspaceId}&projectId=${projectId}&path=${file}`
-      );
-
-      const text = await res.text();
-      setCode(text);
+      const res = await fetch(`/api/dev/files/read?projectId=${projectId}&path=${path}`);
+      const json = await res.json();
+      setCode(json.content || "");
     }
-
     load();
-  }, [file]);
+  }, [projectId, path]);
 
-  if (!file) {
-    return <div style={{ padding: 20 }}>Select a file</div>;
+  async function save(value: string | undefined) {
+    setCode(value || "");
+
+    await fetch("/api/dev/files/write", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        projectId,
+        path,
+        content: value
+      })
+    });
   }
 
   return (
-    <div style={{ height: "100%" }}>
-      <Editor
-        height="100%"
-        language="typescript"
-        value={code}
-        onChange={(v) => setCode(v || "")}
-      />
-    </div>
+    <Editor
+      height="100%"
+      defaultLanguage="typescript"
+      value={code}
+      onChange={save}
+      theme="vs-dark"
+    />
   );
 }
