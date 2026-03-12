@@ -1,32 +1,34 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url);
-
-    const projectId = url.searchParams.get("projectId");
-    const filePath = url.searchParams.get("path");
+    const projectId = req.nextUrl.searchParams.get("projectId");
+    const filePath = req.nextUrl.searchParams.get("path");
 
     if (!projectId || !filePath) {
-      return NextResponse.json({ error: "missing params" }, { status: 400 });
+      return NextResponse.json({ ok: false, error: "missing params" });
     }
 
-    const baseDir = path.join(process.cwd(), "projects", projectId);
-    const fullPath = path.join(baseDir, filePath);
+    const full = path.join(
+      process.cwd(),
+      "runtime",
+      "workspaces",
+      "default",
+      "projects",
+      projectId,
+      filePath
+    );
 
-    const content = await fs.readFile(fullPath, "utf8");
-
-    return NextResponse.json({
-      ok: true,
-      content
-    });
+    try {
+      const content = await fs.readFile(full, "utf8");
+      return NextResponse.json({ ok: true, content });
+    } catch {
+      return NextResponse.json({ ok: false, error: "file not found", full });
+    }
 
   } catch (e: any) {
-    return NextResponse.json({
-      ok: false,
-      error: e.message
-    }, { status: 500 });
+    return NextResponse.json({ ok: false, error: e?.message || "unknown" });
   }
 }

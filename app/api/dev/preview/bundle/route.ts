@@ -1,50 +1,58 @@
-import fs from "fs"
-import path from "path"
 import { NextResponse } from "next/server"
+import fs from "fs/promises"
+import path from "path"
 
 export async function GET(req: Request) {
-
   const { searchParams } = new URL(req.url)
   const projectId = searchParams.get("projectId")
+  const instance = searchParams.get("instance")
+  const seq = searchParams.get("seq")
+  const reason = searchParams.get("reason")
+
+  console.log("[preview/bundle]", {
+    t: Date.now(),
+    projectId,
+    instance,
+    seq,
+    reason,
+    referer: req.headers.get("referer"),
+    secFetchDest: req.headers.get("sec-fetch-dest"),
+    secFetchMode: req.headers.get("sec-fetch-mode"),
+  })
 
   if (!projectId) {
-    return NextResponse.json({ error: "missing projectId" }, { status: 400 })
+    return new NextResponse("missing projectId", { status: 400 })
   }
 
-  const projectRoot = path.join(
+  const file = path.join(
     process.cwd(),
     "runtime",
     "workspaces",
     "default",
     "projects",
-    projectId
+    projectId,
+    "app",
+    "page.tsx"
   )
 
-  const entry = path.join(projectRoot,"app","page.tsx")
+  let source = ""
 
-  if (!fs.existsSync(entry)) {
-    return NextResponse.json({
-      error: "project entry not found",
-      path: entry
-    })
+  try {
+    source = await fs.readFile(file, "utf8")
+  } catch {
+    return new NextResponse("entry not found", { status: 404 })
   }
 
-  const source = fs.readFileSync(entry,"utf8")
-
-  const titleMatch = source.match(/<h1>(.*?)<\/h1>/)
-  const textMatch = source.match(/<p>(.*?)<\/p>/)
-
-  const title = titleMatch ? titleMatch[1] : "Preview"
-  const text = textMatch ? textMatch[1] : ""
-
   const html = `
-<html>
-<body style="font-family:sans-serif;padding:40px">
-<h1>${title}</h1>
-<p>${text}</p>
-</body>
-</html>
-`
+  <html>
+  <body style="margin:0;font-family:system-ui">
+    <pre style="padding:24px">LIVE PREVIEW
+
+${source.replace(/</g,"&lt;")}
+    </pre>
+  </body>
+  </html>
+  `
 
   return new NextResponse(html,{
     headers:{ "Content-Type":"text/html" }

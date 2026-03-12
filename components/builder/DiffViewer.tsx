@@ -1,4 +1,6 @@
-"use client";
+"use client"
+import { useEffect, useRef, useState } from "react"
+;
 
 import ReactDiffViewer from "react-diff-viewer-continued";
 

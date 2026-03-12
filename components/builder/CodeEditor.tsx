@@ -1,7 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import Editor from "@monaco-editor/react";
-import { useState, useEffect } from "react";
 
 export default function CodeEditor({ projectId, path }: any) {
   const [code, setCode] = useState("");

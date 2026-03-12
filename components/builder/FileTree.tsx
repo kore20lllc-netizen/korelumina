@@ -2,30 +2,50 @@
 
 import { useEffect, useState } from "react";
 
-export default function FileTree({projectId,onSelect}:{projectId:string,onSelect:(p:string)=>void}){
+export default function FileTree({
+  projectId,
+  onSelect,
+}: {
+  projectId: string;
+  onSelect: (p: string) => void;
+}) {
+  const [files, setFiles] = useState<string[]>([]);
 
-  const [files,setFiles] = useState<string[]>([]);
+  async function loadFiles() {
+    const r = await fetch(`/api/dev/files?projectId=${projectId}`, {
+      cache: "no-store",
+    });
+    const d = await r.json();
+    setFiles(d.files || []);
+  }
 
-  useEffect(()=>{
-    async function load(){
-      const r = await fetch(`/api/dev/files/list?projectId=${projectId}`);
-      const d = await r.json();
-      setFiles(d.files || []);
-    }
-    load();
-  },[projectId]);
+  useEffect(() => {
+    loadFiles();
+  }, [projectId]);
 
-  return(
+  useEffect(() => {
+    const reload = () => {
+      console.log("FileTree reload");
+      loadFiles();
+    };
+
+    window.addEventListener("korelumina:fs-change", reload);
+
+    return () =>
+      window.removeEventListener("korelumina:fs-change", reload);
+  }, [projectId]);
+
+  return (
     <div>
-      {files.map(f=>(
+      {files.map((f) => (
         <div
           key={f}
           style={{
-            cursor:"pointer",
-            fontFamily:"monospace",
-            padding:4
+            cursor: "pointer",
+            fontFamily: "monospace",
+            padding: 4,
           }}
-          onClick={()=>onSelect(f)}
+          onClick={() => onSelect(f)}
         >
           {f}
         </div>

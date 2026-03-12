@@ -1,4 +1,6 @@
-"use client";
+"use client"
+import { useEffect, useRef, useState } from "react"
+;
 
 export default function DiffPanel({ result }: { result: any }) {
   if (!result) {

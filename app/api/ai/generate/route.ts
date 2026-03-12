@@ -1,42 +1,63 @@
 import { NextResponse } from "next/server";
+import fs from "fs/promises";
+import path from "path";
 
-export async function POST(req: Request) {
+export async function POST(req: Request){
 
-  const body = await req.json();
+  const { prompt, projectId } = await req.json();
 
-  const prompt = body?.prompt || "build a simple SaaS dashboard";
+  if(!prompt || !projectId){
+    return NextResponse.json({ ok:false, error:"missing prompt/projectId" });
+  }
 
-  const projectId =
-    "gen-" + Math.floor(Date.now()/1000);
+  const id = Date.now();
+  const componentName = "AIGenerated" + id;
 
-  await fetch("http://localhost:3000/api/ai/scaffold", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ projectId })
-  });
+  const componentCode = `
+export default function ${componentName}(){
+  return (
+    <div style={{padding:40}}>
+      <h2>${componentName}</h2>
+      <p>${prompt}</p>
+    </div>
+  )
+}
+`;
 
-  await fetch("http://localhost:3000/api/ai/plan", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({
-      workspaceId:"default",
-      projectId,
-      spec:prompt
-    })
-  });
+  const projectRoot = path.join(
+    process.cwd(),
+    "runtime/workspaces/default/projects",
+    projectId
+  );
 
-  await fetch("http://localhost:3000/api/ai/task", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({
-      workspaceId:"default",
-      projectId
-    })
-  });
+  const compFile = path.join(
+    projectRoot,
+    "app",
+    "ai-generated-" + id + ".tsx"
+  );
 
-  return NextResponse.json({
-    ok:true,
-    projectId,
-    builderUrl:`/workspaces/default/projects/${projectId}/builder`
-  });
+  await fs.writeFile(compFile, componentCode);
+
+  const pageFile = path.join(projectRoot,"app","page.tsx");
+
+  let page = await fs.readFile(pageFile,"utf-8");
+
+  const importLine = `import ${componentName} from "./ai-generated-${id}";`;
+
+  page = importLine + "\n" + page;
+
+  page = page.replace(
+    "<div>",
+    `<div>
+      <${componentName} />`
+  );
+
+  await fs.writeFile(pageFile,page);
+
+  
+return NextResponse.json({
+  ok: true,
+  newFile: "ai-generated-" + id + ".tsx"
+});
+
 }
