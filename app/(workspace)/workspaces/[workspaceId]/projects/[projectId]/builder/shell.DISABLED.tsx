@@ -80,7 +80,7 @@ export default function BuilderShell(){
         </div>
 
         <div style={{height:260,marginTop:10}}>
-          <PreviewFrame projectId={projectId}/>
+          <PreviewFrame projectId={projectId} refreshTick={0}/>
         </div>
 
       </div>
