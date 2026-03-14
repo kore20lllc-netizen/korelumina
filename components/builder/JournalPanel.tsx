@@ -1,42 +1,49 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
-
 export default function JournalPanel({
-  workspaceId,
   projectId,
-}: {
-  workspaceId: string;
-  projectId: string;
-}) {
-  const [events, setEvents] = useState<any[]>([]);
+  refreshTick
+}:{
+  projectId:string
+  refreshTick:number
+}){
 
-  useEffect(() => {
-    async function load() {
-      const res = await fetch(
-        `/api/ai/journal?workspaceId=${workspaceId}&projectId=${projectId}`
+  const [rows,setRows] = useState<any[]>([]);
+
+  useEffect(()=>{
+    async function load(){
+      const r = await fetch(
+        "/api/dev/journal?projectId=" + projectId,
+        { cache:"no-store" }
       );
 
-      const data = await res.json();
-      setEvents(data.events ?? []);
+      const j = await r.json();
+      setRows(j.entries || []);
     }
 
     load();
-  }, [workspaceId, projectId]);
+  },[projectId,refreshTick]);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Task Journal</h2>
+    <div style={{overflow:"auto",height:"100%"}}>
+      <div style={{fontWeight:700,padding:8}}>
+        Journal ({rows.length})
+      </div>
 
-      <pre
-        style={{
-          background: "#f6f6f6",
-          padding: 20,
-          overflow: "auto",
-        }}
-      >
-        {JSON.stringify(events, null, 2)}
-      </pre>
+      {rows.map((r,i)=>(
+        <div
+          key={i}
+          style={{
+            fontSize:12,
+            padding:6,
+            borderBottom:"1px solid #eee"
+          }}
+        >
+          {r.type} → {r.file}
+        </div>
+      ))}
     </div>
   );
 }

@@ -1,5 +1,7 @@
+import { ensureProjectRoot } from "@/runtime/fs/ensureProjectRoot";
 import fs from "fs";
 import path from "path";
+import { bumpPreviewVersion } from "@/runtime/preview-version"
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -48,6 +50,8 @@ export async function GET(req: Request) {
           pendingFile = file;
           timeout = setTimeout(() => {
             lastSent = Date.now();
+            bumpPreviewVersion(projectId)
+
             send({
               type: "fs-change",
               file: pendingFile,
@@ -58,7 +62,9 @@ export async function GET(req: Request) {
         }
 
         lastSent = now;
-        send({
+        bumpPreviewVersion(projectId)
+
+          send({
           type: "fs-change",
           file,
           ts: now,

@@ -1,63 +1,82 @@
-import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { pushEntry } from "@/runtime/journal"
+import { NextResponse } from "next/server"
+import fs from "fs/promises"
+import path from "path"
 
-export async function POST(req: Request){
+export async function POST(req:Request){
 
-  const { prompt, projectId } = await req.json();
+  const body = await req.json()
+  const { projectId, prompt } = body
 
-  if(!prompt || !projectId){
-    return NextResponse.json({ ok:false, error:"missing prompt/projectId" });
-  }
+  const root = path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId
+  )
 
-  const id = Date.now();
-  const componentName = "AIGenerated" + id;
+  const ts = Date.now()
+  const fileName = `ai-generated-${ts}.tsx`
+  const filePath = path.join(root,"app",fileName)
 
-  const componentCode = `
-export default function ${componentName}(){
+  // --- create component
+  const code = `
+export default function AIGenerated(){
   return (
     <div style={{padding:40}}>
-      <h2>${componentName}</h2>
-      <p>${prompt}</p>
+      <h1>AI Generated</h1>
+      <pre>${prompt}</pre>
     </div>
   )
 }
-`;
+`
 
-  const projectRoot = path.join(
-    process.cwd(),
-    "runtime/workspaces/default/projects",
-    projectId
-  );
+  await fs.mkdir(path.dirname(filePath),{recursive:true})
+  await fs.writeFile(filePath,code,"utf8")
 
-  const compFile = path.join(
-    projectRoot,
-    "app",
-    "ai-generated-" + id + ".tsx"
-  );
+  // --- rewrite ENTRY PAGE
+  const entry = `
+import AIGenerated from "./${fileName}"
 
-  await fs.writeFile(compFile, componentCode);
+export default function Page(){
+  return <AIGenerated/>
+}
+`
 
-  const pageFile = path.join(projectRoot,"app","page.tsx");
+  await fs.writeFile(
+    path.join(root,"app","page.tsx"),
+    entry,
+    "utf8"
+  )
 
-  let page = await fs.readFile(pageFile,"utf-8");
+  // --- append journal
+  const journalPath = path.join(root,".journal.json")
 
-  const importLine = `import ${componentName} from "./ai-generated-${id}";`;
+  let journal:any[] = []
 
-  page = importLine + "\n" + page;
+  try{
+    const raw = await fs.readFile(journalPath,"utf8")
+    journal = JSON.parse(raw)
+  }catch{}
 
-  page = page.replace(
-    "<div>",
-    `<div>
-      <${componentName} />`
-  );
+  journal.push({
+    t: Date.now(),
+    type:"ai-generate",
+    file:fileName,
+    prompt
+  })
 
-  await fs.writeFile(pageFile,page);
+  await fs.writeFile(
+    journalPath,
+    JSON.stringify(journal,null,2),
+    "utf8"
+  )
 
-  
+  pushEntry(projectId,{ t:Date.now(), type:"ai-generate", file:fileName, prompt });
 return NextResponse.json({
-  ok: true,
-  newFile: "ai-generated-" + id + ".tsx"
-});
-
+    ok:true,
+    newFile:fileName
+  })
 }

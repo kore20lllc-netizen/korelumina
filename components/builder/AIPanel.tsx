@@ -1,64 +1,57 @@
 "use client";
+
 import { useState } from "react";
 
-export default function AIPanel({ projectId }: { projectId: string }) {
-  const [prompt, setPrompt] = useState("");
-  const [loading, setLoading] = useState(false);
+export default function AIPanel({
+  projectId,
+  onGenerated
+}:{
+  projectId:string
+  onGenerated?:(path:string)=>void
+}){
 
-  async function runAI() {
-    if (!prompt.trim()) return;
+  const [prompt,setPrompt] = useState("");
+  const [loading,setLoading] = useState(false);
+
+  async function runAI(){
+    if(!prompt.trim()) return;
 
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/ai/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ projectId, prompt }),
+    try{
+      const r = await fetch("/api/ai/generate",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({
+          projectId,
+          prompt
+        })
       });
 
-      const data = await res.json();
-      console.log("AI RESULT:", data);
+      const j = await r.json();
 
+      // ⭐ refresh builder (file tree / preview / journal listeners)
       window.dispatchEvent(new Event("korelumina:fs-change"));
-      console.log("korelumina:fs-change");
 
-      if (data?.newFile) {
-        window.dispatchEvent(
-          new CustomEvent("korelumina:open-file", {
-            detail: `app/${data.newFile}`,
-          })
-        );
-        console.log("korelumina:open-file", `app/${data.newFile}`);
+      if(j?.newFile && onGenerated){
+        onGenerated("app/" + j.newFile);
       }
 
-      alert("AI step complete — preview refreshed");
-    } catch (e) {
-      console.error(e);
-      alert("AI error");
+    }catch(e){
+      console.error("AI generate failed",e);
+    }finally{
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   return (
-    <div
-      style={{
-        width: 320,
-        borderLeft: "1px solid #ddd",
-        padding: 12,
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}
-    >
-      <b>AI Builder</b>
+    <div style={{padding:12,borderTop:"1px solid #ddd"}}>
+      <div style={{fontWeight:700,marginBottom:8}}>AI</div>
 
       <textarea
         value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Describe what to build..."
-        style={{ height: 140 }}
+        onChange={e=>setPrompt(e.target.value)}
+        style={{width:"100%",height:120}}
       />
 
       <button onClick={runAI} disabled={loading}>

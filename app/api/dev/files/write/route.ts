@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { ensureProjectRoot } from "@/runtime/fs/ensureProjectRoot";
+import { NextRequest, NextResponse } from "next/server"
+import { pushPatch } from "@/runtime/preview-patches";
 import fs from "fs/promises";
 import path from "path";
 
@@ -23,7 +25,15 @@ export async function POST(req: NextRequest) {
     await fs.mkdir(path.dirname(fullPath), { recursive: true });
     await fs.writeFile(fullPath, content ?? "", "utf8");
 
-    return NextResponse.json({ ok: true });
+    
+pushPatch(projectId,{
+  type:"file-update",
+  path,
+  ts: Date.now()
+})
+
+return NextResponse.json({ ok:true })
+;
 
   } catch (e: any) {
     return NextResponse.json(
