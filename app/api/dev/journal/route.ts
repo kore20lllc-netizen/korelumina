@@ -1,40 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { NextRequest, NextResponse } from "next/server"
+import { getJournal } from "@/runtime/journal/store"
 
 export async function GET(req: NextRequest){
 
   const projectId =
-    req.nextUrl.searchParams.get("projectId") || "default";
+    req.nextUrl.searchParams.get("projectId") || "demo-project"
 
-  try{
+  const raw = await getJournal(projectId)
 
-    const file = path.join(
-      process.cwd(),
-      "runtime",
-      "workspaces",
-      "default",
-      "projects",
-      projectId,
-      ".journal.json"
-    );
+  const entries = Array.isArray(raw)
+    ? raw
+    : Array.isArray(raw?.entries)
+      ? raw.entries
+      : []
 
-    const raw = await fs.readFile(file,"utf8");
-
-    const entries = JSON.parse(raw);
-
-    return NextResponse.json({
-      ok:true,
-      entries
-    });
-
-  }catch{
-
-    return NextResponse.json({
-      ok:true,
-      entries:[]
-    });
-
-  }
-
+  return NextResponse.json({
+    ok: true,
+    entries
+  })
 }

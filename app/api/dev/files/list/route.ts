@@ -1,41 +1,58 @@
-import fs from "fs";
-import path from "path";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server"
+import fs from "fs/promises"
+import path from "path"
 
-function walk(dir:string,base:string,acc:string[]=[]){
-  const items = fs.readdirSync(dir);
-  for(const item of items){
-    const full = path.join(dir,item);
-    const rel = path.relative(base,full);
-    const stat = fs.statSync(full);
-    if(stat.isDirectory()){
-      walk(full,base,acc);
-    } else {
-      acc.push(rel);
-    }
-  }
-  return acc;
-}
+export async function GET(req:NextRequest){
 
-export async function GET(req:Request){
-  const { searchParams } = new URL(req.url);
-  const projectId = searchParams.get("projectId");
+  const { searchParams } = new URL(req.url)
+
+  const projectId = searchParams.get("projectId")
 
   if(!projectId){
-    return NextResponse.json({error:"missing projectId"},{status:400});
+    return NextResponse.json({ ok:false })
   }
 
   const root = path.join(
     process.cwd(),
-    "runtime/workspaces/default/projects",
-    projectId
-  );
+    ".kore_runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
+    "app"
+  )
 
-  if(!fs.existsSync(root)){
-    return NextResponse.json({files:[]});
+  async function walk(dir:string, base=""){
+
+    const items = await fs.readdir(dir,{ withFileTypes:true })
+
+    let files:string[] = []
+
+    for(const item of items){
+
+      const full = path.join(dir,item.name)
+      const rel = path.join(base,item.name)
+
+      if(item.isDirectory()){
+        files = files.concat(await walk(full,rel))
+      }else{
+        files.push(rel)
+      }
+
+    }
+
+    return files
   }
 
-  const files = walk(root,root);
+  try{
+    const files = await walk(root)
 
-  return NextResponse.json({files});
+    return NextResponse.json({
+      ok:true,
+      files
+    })
+  }catch{
+    return NextResponse.json({ ok:false })
+  }
+
 }

@@ -10,8 +10,7 @@ export const dynamic = "force-dynamic";
 
 function resolveProjectRoot(workspaceId: string, projectId: string) {
   return path.join(
-    process.cwd(),
-    "runtime",
+    process.env.KORE_RUNTIME_ROOT!,
     "workspaces",
     workspaceId,
     "projects",

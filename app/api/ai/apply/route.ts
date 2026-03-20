@@ -1,29 +1,37 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import path from "path"
-import { applyWithGuard } from "@/lib/ai/apply-guard"
+import { applyPatch } from "@/runtime/patch/applyPatch"
 
-export const dynamic = "force-dynamic"
-
-export async function POST(req:Request){
+export async function POST(req:NextRequest){
 
   const body = await req.json()
 
-  const {workspaceId,projectId,files} = body
+  const { projectId, patches } = body
 
-  if(!workspaceId || !projectId || !files){
-    return NextResponse.json({error:"invalid input"},{status:400})
+  if(!projectId || !patches){
+    return NextResponse.json({ ok:false,error:"missing" })
   }
 
-  const projectRoot = path.join(
+  const root = path.join(
     process.cwd(),
-    "runtime",
+    ".kore_runtime",
     "workspaces",
-    workspaceId,
+    "default",
     "projects",
-    projectId
+    projectId,
+    "app"
   )
 
-  const result = applyWithGuard(projectRoot,files)
+  for(const p of patches){
 
-  return NextResponse.json(result)
+    await applyPatch(
+      root,
+      p.path,
+      p.content
+    )
+
+  }
+
+  return NextResponse.json({ ok:true })
+
 }

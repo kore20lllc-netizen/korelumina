@@ -8,9 +8,8 @@ export default function ProjectsPage() {
   const router = useRouter();
 
   function createProject() {
-    // DEV MODE: fake project id
     const projectId = 'dev-project-' + Date.now();
-    router.push(`/projects/${projectId}/builder`);
+    router.push(`/studio-projects/${projectId}/builder`);
   }
 
   return (

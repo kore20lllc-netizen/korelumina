@@ -1,13 +1,21 @@
-const patches = new Map<string, any[]>()
+import path from "path"
+import fs from "fs/promises"
 
-export function pushPatch(projectId: string, patch: any){
-  const list = patches.get(projectId) || []
-  list.push(patch)
-  patches.set(projectId, list)
-}
+export async function pushPatch(opts:{
+  projectRoot:string
+  file:string
+  content:string
+}){
 
-export function drainPatches(projectId: string){
-  const list = patches.get(projectId) || []
-  patches.set(projectId, [])
-  return list
+  if(!opts.file){
+    console.log("🔥 PATCH SKIPPED — NO FILE")
+    return
+  }
+
+  const full = path.join(opts.projectRoot, opts.file)
+
+  await fs.mkdir(path.dirname(full),{ recursive:true })
+
+  await fs.writeFile(full, opts.content, "utf8")
+
 }

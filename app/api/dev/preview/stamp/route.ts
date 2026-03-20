@@ -11,8 +11,7 @@ export async function GET(req: Request) {
   }
 
   const projectRoot = path.join(
-    process.cwd(),
-    "runtime",
+    process.env.KORE_RUNTIME_ROOT!,
     "workspaces",
     "default",
     "projects",

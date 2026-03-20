@@ -13,17 +13,30 @@ export default function JournalPanel({
   const [rows,setRows] = useState<any[]>([]);
 
   useEffect(()=>{
+
     async function load(){
+
       const r = await fetch(
-        "/api/dev/journal?projectId=" + projectId,
+        "/api/dev/journal?projectId=" +
+        projectId +
+        "&r=" +
+        refreshTick,
         { cache:"no-store" }
       );
 
       const j = await r.json();
-      setRows(j.entries || []);
+
+      const arr =
+        Array.isArray(j?.entries)
+          ? [...j.entries]   // ⭐ FORCE NEW REFERENCE
+          : [];
+
+      setRows(arr);
+
     }
 
     load();
+
   },[projectId,refreshTick]);
 
   return (
@@ -41,7 +54,7 @@ export default function JournalPanel({
             borderBottom:"1px solid #eee"
           }}
         >
-          {r.type} → {r.file}
+          {r.type} → {r.path || r.file}
         </div>
       ))}
     </div>

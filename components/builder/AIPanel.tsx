@@ -1,62 +1,59 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 export default function AIPanel({
   projectId,
   onGenerated
 }:{
   projectId:string
-  onGenerated?:(path:string)=>void
+  onGenerated:(draftId:string)=>void
 }){
 
-  const [prompt,setPrompt] = useState("");
-  const [loading,setLoading] = useState(false);
+  const [prompt,setPrompt] = useState("")
+  const [loading,setLoading] = useState(false)
 
-  async function runAI(){
-    if(!prompt.trim()) return;
+  async function generate(){
 
-    setLoading(true);
+    if(!prompt.trim()) return
 
-    try{
-      const r = await fetch("/api/ai/generate",{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({
-          projectId,
-          prompt
-        })
-      });
+    setLoading(true)
 
-      const j = await r.json();
+    const res = await fetch("/api/ai/draft",{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({
+        projectId,
+        prompt
+      })
+    })
 
-      // ⭐ refresh builder (file tree / preview / journal listeners)
-      window.dispatchEvent(new Event("korelumina:fs-change"));
+    const json = await res.json()
 
-      if(j?.newFile && onGenerated){
-        onGenerated("app/" + j.newFile);
-      }
+    setLoading(false)
 
-    }catch(e){
-      console.error("AI generate failed",e);
-    }finally{
-      setLoading(false);
+    if(json?.draftId){
+      onGenerated(json.draftId)
     }
+
   }
 
   return (
     <div style={{padding:12,borderTop:"1px solid #ddd"}}>
-      <div style={{fontWeight:700,marginBottom:8}}>AI</div>
-
       <textarea
         value={prompt}
         onChange={e=>setPrompt(e.target.value)}
-        style={{width:"100%",height:120}}
+        style={{width:"100%",height:80}}
       />
 
-      <button onClick={runAI} disabled={loading}>
-        {loading ? "Running..." : "Run AI"}
+      <button
+        onClick={generate}
+        disabled={loading}
+        style={{marginTop:8,width:"100%"}}
+      >
+        {loading ? "Generating..." : "Generate Draft"}
       </button>
     </div>
-  );
+  )
+
 }

@@ -1,44 +1,52 @@
-import { ensureProjectRoot } from "@/runtime/fs/ensureProjectRoot";
+export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
+
 import { NextRequest, NextResponse } from "next/server"
-import { pushPatch } from "@/runtime/preview-patches";
-import fs from "fs/promises";
-import path from "path";
+import fs from "fs/promises"
+import path from "path"
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
+function sanitize(content:any){
 
-    const projectId = body?.projectId;
-    const filePath = body?.path;
-    const content = body?.content;
+  if(typeof content !== "string") return ""
 
-    if (!projectId || !filePath) {
-      return NextResponse.json(
-        { ok: false, error: "missing params" },
-        { status: 400 }
-      );
-    }
+  // 🔥 AI sometimes returns JSON envelope
+  if(content.trim().startsWith("{")){
+    try{
+      const j = JSON.parse(content)
 
-    const baseDir = path.join(process.cwd(), "projects", projectId);
-    const fullPath = path.join(baseDir, filePath);
+      if(j.content) return j.content
+      if(j.code) return j.code
+      if(j.next) return j.next
 
-    await fs.mkdir(path.dirname(fullPath), { recursive: true });
-    await fs.writeFile(fullPath, content ?? "", "utf8");
-
-    
-pushPatch(projectId,{
-  type:"file-update",
-  path,
-  ts: Date.now()
-})
-
-return NextResponse.json({ ok:true })
-;
-
-  } catch (e: any) {
-    return NextResponse.json(
-      { ok: false, error: e.message },
-      { status: 500 }
-    );
+    }catch{}
   }
+
+  return content
+}
+
+export async function POST(req:NextRequest){
+
+  const body = await req.json()
+
+  const { projectId, file, content } = body
+
+  const ROOT = path.join(
+    process.cwd(),
+    ".kore_runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
+    "app"
+  )
+
+  const full = path.join(ROOT, file)
+
+  await fs.mkdir(path.dirname(full), { recursive:true })
+
+  const safe = sanitize(content)
+
+  await fs.writeFile(full, safe, "utf8")
+
+  return NextResponse.json({ ok:true })
 }
