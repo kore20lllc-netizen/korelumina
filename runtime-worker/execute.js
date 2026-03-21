@@ -23,16 +23,20 @@ async function run(){
 
   const result = await esbuild.build({
     entryPoints:[entry],
-    bundle:false,
+    bundle:true,
     write:false,
-    format:"esm",
+    format:"iife",
     platform:"browser",
-
-    loader:{ ".ts":"ts",".tsx":"tsx" },
-
-    # 🔥 CRITICAL
-    external:["react","react-dom","next","next/navigation"],
-
+    loader:{
+      ".ts":"ts",
+      ".tsx":"tsx"
+    },
+    external:[
+      "react",
+      "react-dom",
+      "next",
+      "next/navigation"
+    ],
     globalName:"RuntimeApp"
   })
 

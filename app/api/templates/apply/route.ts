@@ -1,37 +1,12 @@
-export const runtime = "nodejs"
-export const dynamic = "force-dynamic"
-
 import { NextRequest, NextResponse } from "next/server"
 import fs from "fs/promises"
 import path from "path"
 
-async function copyDir(src:string,dst:string){
-  await fs.mkdir(dst,{ recursive:true })
-  const entries = await fs.readdir(src,{ withFileTypes:true })
+export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 
-  for(const entry of entries){
-    const from = path.join(src,entry.name)
-    const to = path.join(dst,entry.name)
-
-    if(entry.isDirectory()){
-      await copyDir(from,to)
-    }else{
-      await fs.copyFile(from,to)
-    }
-  }
-}
-
-export async function POST(req:NextRequest){
-
-  const body = await req.json()
-  const { projectId, template } = body
-
-  if(!projectId || !template){
-    return NextResponse.json({ ok:false, error:"missing projectId or template" },{ status:400 })
-  }
-
-  const src = path.join(process.cwd(),"templates","websites",template)
-  const dst = path.join(
+function runtimeProjectRoot(projectId:string){
+  return path.join(
     process.cwd(),
     ".kore_runtime",
     "workspaces",
@@ -39,15 +14,63 @@ export async function POST(req:NextRequest){
     "projects",
     projectId
   )
+}
 
-  try{
-    await fs.access(src)
-  }catch{
-    return NextResponse.json({ ok:false, error:"template not found" },{ status:404 })
+async function copyDir(src:string, dest:string){
+  await fs.mkdir(dest,{recursive:true})
+  const entries = await fs.readdir(src,{withFileTypes:true})
+
+  for(const entry of entries){
+    const s = path.join(src,entry.name)
+    const d = path.join(dest,entry.name)
+
+    if(entry.isDirectory()){
+      await copyDir(s,d)
+    }else{
+      await fs.copyFile(s,d)
+    }
+  }
+}
+
+export async function POST(req:NextRequest){
+
+  const body = await req.json()
+
+  const projectId = body.projectId
+  const templatePath = body.templatePath
+
+  if(!projectId || !templatePath){
+    return NextResponse.json({ok:false,error:"missing params"})
   }
 
-  await fs.rm(dst,{ recursive:true, force:true })
-  await copyDir(src,dst)
+  const templateAbs = path.join(process.cwd(),templatePath)
 
-  return NextResponse.json({ ok:true, projectId, template })
+  const runtimeRoot = runtimeProjectRoot(projectId)
+  const runtimeApp = path.join(runtimeRoot,"app")
+
+  await fs.mkdir(runtimeApp,{recursive:true})
+
+  const entries = await fs.readdir(templateAbs,{withFileTypes:true})
+
+  const hasAppFolder = entries.some(e=>e.isDirectory() && e.name==="app")
+
+  if(hasAppFolder){
+
+    // copy CONTENT of template/app → runtime/app
+    await copyDir(
+      path.join(templateAbs,"app"),
+      runtimeApp
+    )
+
+  }else{
+
+    // copy template root → runtime/app
+    await copyDir(
+      templateAbs,
+      runtimeApp
+    )
+
+  }
+
+  return NextResponse.json({ok:true})
 }

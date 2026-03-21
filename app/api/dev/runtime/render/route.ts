@@ -1,41 +1,34 @@
-export const runtime = "nodejs"
-export const dynamic = "force-dynamic"
-
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import path from "path"
-import { spawn } from "child_process"
+import fs from "fs/promises"
 
-export async function GET(req: NextRequest){
+export async function GET(req: Request){
 
   const { searchParams } = new URL(req.url)
   const projectId = searchParams.get("projectId")
 
   if(!projectId){
-    return new NextResponse("missing projectId",{ status:400 })
+    return NextResponse.json({ ok:false, error:"missing projectId" })
   }
 
-  const executor = path.join(process.cwd(),"runtime-executor.js")
+  const projectRoot = path.join(
+    process.cwd(),
+    ".kore_runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
+    "app"
+  )
 
-  return await new Promise<Response>((resolve)=>{
+  try{
+    await fs.access(projectRoot)
+  }catch{
+    return NextResponse.json({ ok:false, error:"project not found" })
+  }
 
-    const child = spawn("node",[executor,projectId])
-
-    let out = ""
-    let err = ""
-
-    child.stdout.on("data",(d)=> out += d.toString())
-    child.stderr.on("data",(d)=> err += d.toString())
-
-    child.on("close",()=>{
-
-      if(err){
-        resolve(new NextResponse(err,{ status:500 }))
-        return
-      }
-
-      resolve(new NextResponse(out,{
-        headers:{ "content-type":"text/html" }
-      }))
-    })
+  return NextResponse.json({
+    ok:true,
+    previewUrl: `/runtime-renderer/${projectId}`
   })
 }
