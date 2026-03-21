@@ -1,27 +1,25 @@
-import fs from "fs/promises"
-import path from "path"
-import type { IntentState } from "./types"
+export type IntentTarget =
+  | "website"
+  | "app"
+  | "mobile"
 
-function statePath(projectId:string){
-  return path.join(
-    process.cwd(),
-    ".kore_runtime",
-    "intent-state",
-    `${projectId}.json`
-  )
+export type IntentMode =
+  | "dev"
+  | "designer"
+  | "nontech"
+
+export type IntentState = {
+  projectId: string
+  target: IntentTarget
+  mode: IntentMode
 }
 
-export async function saveIntentState(projectId:string, state:IntentState){
-  const file = statePath(projectId)
-  await fs.mkdir(path.dirname(file), { recursive:true })
-  await fs.writeFile(file, JSON.stringify(state, null, 2), "utf8")
+const store = new Map<string, IntentState>()
+
+export async function getIntentState(projectId: string): Promise<IntentState | null> {
+  return store.get(projectId) || null
 }
 
-export async function loadIntentState(projectId:string):Promise<IntentState | null>{
-  try{
-    const raw = await fs.readFile(statePath(projectId), "utf8")
-    return JSON.parse(raw)
-  }catch{
-    return null
-  }
+export async function setIntentState(intent: IntentState): Promise<void> {
+  store.set(intent.projectId, intent)
 }

@@ -1,19 +1,29 @@
+import { NextRequest, NextResponse } from "next/server"
+import { setIntentState } from "@/runtime/intent/state"
+
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-import { NextRequest, NextResponse } from "next/server"
-import { saveIntentState } from "@/runtime/intent/state"
-
-export async function POST(req:NextRequest){
+export async function POST(req: NextRequest){
 
   const body = await req.json()
-  const { projectId, buildIntent, userMode } = body
 
-  if(!projectId || !buildIntent || !userMode){
-    return NextResponse.json({ ok:false, error:"missing params" }, { status:400 })
-  }
+  const projectId =
+    body.projectId || "demo-project"
 
-  await saveIntentState(projectId, { buildIntent, userMode })
+  const target =
+    body.target || "website"
 
-  return NextResponse.json({ ok:true })
+  const mode =
+    body.mode || "dev"
+
+  await setIntentState({
+    projectId,
+    target,
+    mode
+  })
+
+  return NextResponse.json({
+    ok: true
+  })
 }

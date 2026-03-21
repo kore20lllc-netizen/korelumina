@@ -1,32 +1,37 @@
-import type { IntentState } from "./types"
+import { getIntentState } from "./state"
 
-export function resolveIntentRoute(projectId:string, state:IntentState){
+export async function resolveWorkspace(projectId: string){
 
-  const { buildIntent, userMode } = state
+  const intent = await getIntentState(projectId)
 
-  if(buildIntent === "website" && userMode === "nontech"){
-    return `/studio-projects/${projectId}/website-builder`
+  if(!intent){
+    return {
+      workspace:"dev",
+      target:"app"
+    }
   }
 
-  if(buildIntent === "website" && userMode === "designer"){
-    return `/studio-projects/${projectId}/workspace-designer-website`
+  const { target, mode } = intent
+
+  // WEBSITE → designer workspace
+  if(target === "website" && mode === "designer"){
+    return {
+      workspace:"designer",
+      target:"website"
+    }
   }
 
-  if(userMode === "dev"){
-    return `/studio-projects/${projectId}/builder`
+  // APP → dev workspace
+  if(target === "app" && mode === "dev"){
+    return {
+      workspace:"dev",
+      target:"app"
+    }
   }
 
-  if(buildIntent === "webapp" && userMode === "nontech"){
-    return `/studio-projects/${projectId}/app-builder`
+  // fallback
+  return {
+    workspace:"dev",
+    target:"app"
   }
-
-  if(buildIntent === "mobile" && userMode === "nontech"){
-    return `/studio-projects/${projectId}/mobile-builder`
-  }
-
-  if(buildIntent === "backend" && userMode === "nontech"){
-    return `/studio-projects/${projectId}/backend-builder`
-  }
-
-  return `/studio-projects/${projectId}/builder`
 }

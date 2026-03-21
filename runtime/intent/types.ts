@@ -1,15 +1,17 @@
-export type BuildIntent =
+export type IntentTarget =
   | "website"
   | "webapp"
   | "mobile"
   | "backend"
+  | "import"
 
-export type UserMode =
+export type IntentMode =
   | "nontech"
   | "designer"
-  | "dev"
+  | "developer"
 
 export type IntentState = {
-  buildIntent: BuildIntent
-  userMode: UserMode
+  projectId: string
+  target: IntentTarget
+  mode: IntentMode
 }
