@@ -1,34 +1,51 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import useVersionStream from "@/hooks/useVersionStream"
 
-export default function JournalPanel({ projectId }:{ projectId:string }){
+type Entry = {
+  t:number
+  type:string
+  path:string
+}
 
-  const [entries,setEntries] = useState<any[]>([])
+export default function JournalPanel({
+  projectId,
+  version
+}:{
+  projectId:string
+  version:number
+}){
+
+  const [entries,setEntries] = useState<Entry[]>([])
 
   async function load(){
     const r = await fetch(
-      `/api/dev/journal?projectId=${projectId}`
+      "/api/dev/journal?projectId=" + projectId,
+      { cache:"no-store" }
     )
     const j = await r.json()
     setEntries(j.entries || [])
   }
 
-  useEffect(()=>{ load() },[])
+  useEffect(()=>{
+    load()
+  },[version])
 
-  useVersionStream(projectId,load)
+  return(
+    <div className="p-3">
+      <div className="font-bold mb-2">Journal</div>
 
-  return (
-    <div style={{padding:12}}>
-      <b>Journal</b>
-      <div style={{marginTop:8}}>
-        {entries.map((e,i)=>(
-          <div key={i} style={{fontSize:12}}>
-            {e.type} → {e.path}
-          </div>
-        ))}
-      </div>
+      {entries.length === 0 && (
+        <div className="text-xs text-gray-500">
+          No journal activity
+        </div>
+      )}
+
+      {entries.map((e,i)=>(
+        <div key={i} className="text-xs mb-1">
+          {e.type} → {e.path}
+        </div>
+      ))}
     </div>
   )
 
