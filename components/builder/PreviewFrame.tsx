@@ -1,30 +1,34 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react"
 
-export default function PreviewFrame({ projectId, refreshTick }:{ projectId:string, refreshTick:number }){
+export default function PreviewFrame({
+  projectId,
+  version
+}:{
+  projectId:string
+  version:number
+}){
 
-  const [html,setHtml] = useState("");
-
-  useEffect(()=>{
-    async function load(){
-      const r = await fetch(
-        "/api/dev/preview/run?projectId=" + projectId,
-        { cache:"no-store" }
-      );
-
-      const t = await r.text();
-      setHtml(t);
-    }
-
-    load();
-  },[projectId,refreshTick]);
+  const src = useMemo(()=>{
+    return `/api/dev/preview?projectId=${projectId}&v=${version}`
+  },[projectId,version])
 
   return (
-    <iframe
-      srcDoc={html}
-      style={{width:"100%",height:"100%",border:0}}
-      sandbox="allow-scripts allow-same-origin"
-    />
-  );
+    <div style={{
+      marginTop:20,
+      border:"1px solid #ddd",
+      height:500
+    }}>
+      <iframe
+        src={src}
+        style={{
+          width:"100%",
+          height:"100%",
+          border:"none"
+        }}
+      />
+    </div>
+  )
+
 }

@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react"
 import useVersionStream from "@/hooks/useVersionStream"
 
-export default function JournalPanel({ projectId }:{ projectId:string }){
+export default function DraftPanel({ projectId }:{ projectId:string }){
 
-  const [entries,setEntries] = useState<any[]>([])
+  const [drafts,setDrafts] = useState<any[]>([])
 
   async function load(){
     const r = await fetch(
-      `/api/dev/journal?projectId=${projectId}`
+      `/api/dev/drafts?projectId=${projectId}`
     )
     const j = await r.json()
-    setEntries(j.entries || [])
+    setDrafts(j.drafts || [])
   }
 
   useEffect(()=>{ load() },[])
@@ -21,11 +21,11 @@ export default function JournalPanel({ projectId }:{ projectId:string }){
 
   return (
     <div style={{padding:12}}>
-      <b>Journal</b>
+      <b>Drafts</b>
       <div style={{marginTop:8}}>
-        {entries.map((e,i)=>(
-          <div key={i} style={{fontSize:12}}>
-            {e.type} → {e.path}
+        {drafts.map(d=>(
+          <div key={d.id} style={{fontSize:12}}>
+            {d.path}
           </div>
         ))}
       </div>

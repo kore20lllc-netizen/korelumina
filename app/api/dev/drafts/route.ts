@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server"
-import { readJournal } from "@/runtime/journal/fileJournal"
+import { readDrafts } from "@/runtime/drafts/fileDrafts"
 
 export async function GET(req: NextRequest){
 
   const projectId =
     req.nextUrl.searchParams.get("projectId") || "demo-project"
 
-  const entries = await readJournal(projectId)
+  const drafts = await readDrafts(projectId)
 
   return NextResponse.json({
     ok:true,
-    entries
+    drafts
   })
 
 }
