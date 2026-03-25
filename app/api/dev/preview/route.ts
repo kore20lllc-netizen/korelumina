@@ -1,15 +1,17 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest } from "next/server"
 import fs from "fs/promises"
 import path from "path"
 
-export async function GET(req: NextRequest){
+export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
+
+export async function GET(req:NextRequest){
 
   const { searchParams } = new URL(req.url)
-
   const projectId = searchParams.get("projectId")
 
   if(!projectId){
-    return NextResponse.json({ ok:false })
+    return new Response("missing projectId",{status:400})
   }
 
   const root = path.join(
@@ -19,44 +21,43 @@ export async function GET(req: NextRequest){
     "default",
     "projects",
     projectId,
-    "app"
+    "app",
+    "page.tsx"
   )
 
-  let files:string[] = []
+  let code = ""
 
   try{
-    files = await fs.readdir(root)
+    code = await fs.readFile(root,"utf8")
   }catch{
-    return new NextResponse(
-      "<div style='padding:40;font-family:sans-serif'>No runtime app</div>",
-      { headers:{ "content-type":"text/html" } }
-    )
+    return new Response("no runtime file",{status:404})
   }
 
-  const pages = files.filter(f => f.endsWith(".tsx"))
+  // VERY IMPORTANT: transform runtime page
+  code = code
+    .replace(/export\s+default\s+function\s+Page\s*\(/,"function Page(")
 
-  const list = pages.map(f=>{
-    return `<li>${f}</li>`
-  }).join("")
+  return new Response(`<!doctype html>
+<html>
+<body style="margin:0">
 
-  const html = `
-  <!doctype html>
-  <html>
-  <body style="font-family:sans-serif;padding:30px">
-    <h2>Runtime Preview</h2>
-    <div>Files in runtime:</div>
-    <ul>${list}</ul>
-  </body>
-  </html>
-  `
+<div id="root"></div>
 
-  return new NextResponse(
-    html,
-    {
-      headers:{
-        "content-type":"text/html"
-      }
-    }
-  )
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+${code}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Page/>)
+
+</script>
+
+</body>
+</html>`,{
+    headers:{ "Content-Type":"text/html" }
+  })
 
 }

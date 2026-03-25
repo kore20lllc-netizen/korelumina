@@ -1,69 +1,40 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Editor from "@monaco-editor/react"
-import PreviewFrame from "./components/PreviewFrame"
 
-type JournalEntry = {
-  t:number
-  type:string
-  path:string
-}
-
-export default function BuilderPage(){
+export default function Page(){
 
   const projectId = "demo-project"
 
   const [files,setFiles] = useState<string[]>([])
-  const [active,setActive] = useState<string | null>(null)
+  const [active,setActive] = useState("page.tsx")
   const [code,setCode] = useState("")
   const [version,setVersion] = useState(0)
-  const [journal,setJournal] = useState<JournalEntry[]>([])
-
-  const initializedRef = useRef(false)
-
-  const sortedFiles = useMemo(()=>{
-    return [...files].sort((a,b)=> b.localeCompare(a))
-  },[files])
+  const [previewKey,setPreviewKey] = useState(0)
+  const [journal,setJournal] = useState<any[]>([])
 
   async function loadFiles(){
-    const r = await fetch(
-      "/api/dev/fs/list?projectId=" + projectId,
-      { cache:"no-store" }
-    )
+    const r = await fetch("/api/dev/fs/list?projectId="+projectId,{cache:"no-store"})
     const j = await r.json()
-    const nextFiles = Array.isArray(j.files) ? j.files : []
-    setFiles(nextFiles)
-    return nextFiles
+    setFiles(j.files || [])
   }
 
-  async function loadJournal(){
-    const r = await fetch(
-      "/api/dev/journal?projectId=" + projectId,
-      { cache:"no-store" }
-    )
+  async function loadFile(file:string){
+    const r = await fetch("/api/dev/fs/read?projectId="+projectId+"&file="+file,{cache:"no-store"})
     const j = await r.json()
-    const nextJournal = Array.isArray(j.entries) ? j.entries : []
-    setJournal(nextJournal)
-    return nextJournal
-  }
-
-  async function openFile(file:string){
-    setActive(file)
-
-    const r = await fetch(
-      "/api/dev/fs/read?projectId=" + projectId + "&file=" + encodeURIComponent(file),
-      { cache:"no-store" }
-    )
-    const j = await r.json()
-
     setCode(j.content || "")
   }
 
-  async function save(){
-    if(!active) return
+  async function refreshJournal(){
+    const r = await fetch("/api/dev/journal?projectId="+projectId,{cache:"no-store"})
+    const j = await r.json()
+    setJournal(j.entries || [])
+  }
 
-    await fetch("/api/dev/fs/write",{
+  async function save(){
+
+    const r = await fetch("/api/dev/fs/write",{
       method:"POST",
       headers:{ "content-type":"application/json" },
       body: JSON.stringify({
@@ -72,167 +43,74 @@ export default function BuilderPage(){
         content: code
       })
     })
+
+    const j = await r.json()
+
+    const v = j.version ?? (version + 1)
+
+    setVersion(v)
+    setPreviewKey(k=>k+1)
+
+    refreshJournal()
   }
 
-  async function refreshAll(autoFocusNewest:boolean){
-    const [nextFiles,nextJournal] = await Promise.all([
-      loadFiles(),
-      loadJournal()
-    ])
-
-    if(!nextFiles.length) return
-
-    const newestFile = [...nextFiles].sort((a,b)=> b.localeCompare(a))[0]
-
-    if(autoFocusNewest){
-      if(active !== newestFile){
-        await openFile(newestFile)
-      }
-      return
-    }
-
-    if(active){
-      const stillExists = nextFiles.includes(active)
-      if(stillExists){
-        await openFile(active)
-        return
-      }
-    }
-
-    await openFile(newestFile)
-  }
- 
-   useEffect(()=>{
- 
-     if(!projectId) return
- 
-     refreshAll(true)
- 
-     const es = new EventSource(
-       "/api/dev/version/stream?projectId=" + projectId
-     )
- 
-     es.onmessage = async (ev)=>{
-       try{
-         const data = JSON.parse(ev.data || "{}")
-         const nextVersion = Number(data.version || 0)
- 
-         setVersion(nextVersion)
- 
-         if(!initializedRef.current){
-           initializedRef.current = true
-           return
-         }
-
-         await refreshAll(true)
-
-       }catch{}
-     }
-
-     return ()=> es.close()
-
-   },[projectId])
+  useEffect(()=>{
+    loadFiles()
+    loadFile(active)
+    refreshJournal()
+  },[])
 
   return (
-    <div style={{display:"flex",height:"100vh",fontFamily:"sans-serif"}}>
+    <div style={{display:"flex",height:"100vh"}}>
 
-      {/* FILE TREE */}
-      <div style={{
-        width:240,
-        borderRight:"1px solid #ddd",
-        padding:12,
-        overflow:"auto"
-      }}>
-        <div style={{fontWeight:700,marginBottom:10}}>FILES</div>
-
-        {sortedFiles.map(file=>(
+      <div style={{width:220,borderRight:"1px solid #333",padding:10}}>
+        {files.map(f=>(
           <div
-            key={file}
-            onClick={()=>openFile(file)}
+            key={f}
             style={{
+              padding:8,
               cursor:"pointer",
-              padding:"6px 8px",
-              borderRadius:6,
-              background: active === file ? "#eef2ff" : "transparent",
-              marginBottom:4,
-              fontSize:13,
-              wordBreak:"break-all"
+              background:f===active ? "#eee" : "transparent"
+            }}
+            onClick={()=>{
+              setActive(f)
+              loadFile(f)
             }}
           >
-            {file}
+            {f}
           </div>
         ))}
       </div>
 
-      {/* MONACO */}
       <div style={{flex:1,display:"flex",flexDirection:"column"}}>
-        <div style={{
-          height:48,
-          borderBottom:"1px solid #ddd",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"space-between",
-          padding:"0 12px"
-        }}>
-          <div style={{fontSize:13}}>
-            {active || "No file selected"}
-          </div>
-
-          <button onClick={save}>SAVE</button>
-        </div>
+        <button onClick={save}>SAVE</button>
 
         <div style={{flex:1}}>
           <Editor
-            height="100%"
+            theme="vs-dark"
             language="typescript"
             value={code}
             onChange={(v)=>setCode(v || "")}
-            onMount={(editor,monaco)=>{
-              editor.addCommand(
-                monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
-                ()=> save()
-              )
-            }}
+            options={{automaticLayout:true}}
           />
         </div>
       </div>
 
-      {/* RIGHT PANEL */}
-      <div style={{
-        width:"42%",
-        borderLeft:"1px solid #ddd",
-        display:"flex",
-        flexDirection:"column"
-      }}>
-
-        <div style={{
-          padding:12,
-          borderBottom:"1px solid #ddd"
-        }}>
-          <div style={{fontWeight:700}}>VERSION</div>
-          <div style={{fontSize:28}}>{version}</div>
+      <div style={{width:520,borderLeft:"1px solid #333",display:"flex",flexDirection:"column"}}>
+        <div style={{padding:10,background:"#111",color:"#fff"}}>
+          VERSION {version}
         </div>
 
-        <div style={{
-          padding:12,
-          borderBottom:"1px solid #ddd",
-          maxHeight:180,
-          overflow:"auto"
-        }}>
-          <div style={{fontWeight:700,marginBottom:8}}>JOURNAL</div>
+        <iframe
+          key={previewKey}
+          src={"/api/dev/preview?projectId="+projectId+"&v="+version}
+          style={{flex:1,width:"100%",border:"none",background:"#fff"}}
+        />
 
+        <div style={{height:200,overflow:"auto",borderTop:"1px solid #333"}}>
           {journal.map((e,i)=>(
-            <div key={i} style={{fontSize:12,marginBottom:6}}>
-              {e.type} → {e.path}
-            </div>
+            <div key={i}>{e.op || e.type} → {e.file}</div>
           ))}
-        </div>
-
-        <div style={{flex:1}}>
-          <PreviewFrame
-            projectId={projectId}
-            version={version}
-          />
         </div>
 
       </div>
