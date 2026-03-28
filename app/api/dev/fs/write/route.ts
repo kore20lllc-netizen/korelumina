@@ -1,41 +1,72 @@
-import { NextRequest, NextResponse } from "next/server"
-import fs from "fs/promises"
-import path from "path"
+import { NextRequest } from "next/server";
+import fs from "fs";
+import path from "path";
 
-import { appendJournal } from "@/runtime/journal/fileJournal"
-import { bumpVersion } from "@/runtime/version/store"
+export const dynamic = "force-dynamic";
 
-export async function POST(req: NextRequest){
+function unwrap(input: any): string {
+  let s = typeof input === "string" ? input : "";
 
-  const { projectId, file, content } = await req.json()
-
-  if(!projectId || !file){
-    return NextResponse.json({ ok:false })
+  for (let i = 0; i < 10; i++) {
+    try {
+      const p = JSON.parse(s);
+      if (p?.content) {
+        s = p.content;
+        continue;
+      }
+    } catch {}
+    break;
   }
 
-  const full = path.join(
+  return s
+    .replace(/^```[a-z]*\n?/i, "")
+    .replace(/```$/, "")
+    .trim();
+}
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+
+  const projectId = body.projectId || "demo-project";
+  const relFile = (body.file || "app/page.tsx").replace(/^\/+/, "");
+  const raw = body.content || "";
+
+  const clean = unwrap(raw);
+
+  const root = path.join(
     process.cwd(),
     "runtime",
     "workspaces",
     "default",
     "projects",
-    projectId,
-    "app",
-    file
-  )
+    projectId
+  );
 
-  await fs.mkdir(path.dirname(full),{ recursive:true })
+  const full = path.join(root, relFile);
 
-  await fs.writeFile(full,content,"utf8")
+  fs.mkdirSync(path.dirname(full), { recursive: true });
+  fs.writeFileSync(full, clean, "utf8");
 
-  await appendJournal(projectId,{
-    t:Date.now(),
-    type:"fs-write",
-    path:"app/"+file
-  })
+  // 🔥 WRITE JOURNAL ENTRY (PERSISTENT)
+  const journalPath = path.join(root, "journal.json");
 
-  await bumpVersion(projectId)
+  let entries: any[] = [];
+  try {
+    if (fs.existsSync(journalPath)) {
+      entries = JSON.parse(fs.readFileSync(journalPath, "utf8"));
+    }
+  } catch {}
 
-  return NextResponse.json({ ok:true })
+  entries.unshift({
+    t: Date.now(),
+    op: "write",
+    path: relFile,
+  });
 
+  fs.writeFileSync(journalPath, JSON.stringify(entries.slice(0, 50), null, 2));
+
+  return Response.json({
+    ok: true,
+    written: relFile,
+  });
 }

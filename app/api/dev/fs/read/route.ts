@@ -1,42 +1,38 @@
-import { NextRequest, NextResponse } from "next/server"
-import fs from "fs/promises"
-import path from "path"
+import { NextRequest } from "next/server";
+import fs from "fs";
+import path from "path";
 
-export async function GET(req: NextRequest){
+export const dynamic = "force-dynamic";
 
-  const projectId = req.nextUrl.searchParams.get("projectId")
-  const file = req.nextUrl.searchParams.get("file")
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
 
-  if(!projectId || !file){
-    return NextResponse.json({ ok:false })
-  }
+  const projectId = searchParams.get("projectId") || "demo-project";
+  const file = (searchParams.get("file") || "app/page.tsx").replace(/^\/+/, "");
 
-  const full = path.join(
+  const root = path.join(
     process.cwd(),
     "runtime",
     "workspaces",
     "default",
     "projects",
-    projectId,
-    "app",
-    file
-  )
+    projectId
+  );
 
-  try{
+  const full = path.join(root, file);
 
-    const content = await fs.readFile(full,"utf8")
+  let content = "";
+  let exists = false;
 
-    return NextResponse.json({
-      ok:true,
-      content
-    })
+  try {
+    exists = fs.existsSync(full);
+    if (exists) {
+      content = fs.readFileSync(full, "utf8");
+    }
+  } catch {}
 
-  }catch{
-
-    return NextResponse.json({
-      ok:false
-    })
-
-  }
-
+  // 🔥 CRITICAL: return RAW content (no wrapping)
+  return new Response(content, {
+    headers: { "Content-Type": "text/plain" },
+  });
 }

@@ -1,16 +1,30 @@
-import { NextRequest, NextResponse } from "next/server"
-import { readJournal } from "@/runtime/journal/fileJournal"
+import fs from "fs";
+import path from "path";
 
-export async function GET(req: NextRequest){
+export const dynamic = "force-dynamic";
 
-  const projectId =
-    req.nextUrl.searchParams.get("projectId") || "demo-project"
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const projectId = searchParams.get("projectId") || "demo-project";
 
-  const entries = await readJournal(projectId)
+  const file = path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
+    "journal.json"
+  );
 
-  return NextResponse.json({
-    ok:true,
-    entries
-  })
+  let entries: any[] = [];
 
+  try {
+    if (fs.existsSync(file)) {
+      const raw = fs.readFileSync(file, "utf8");
+      entries = JSON.parse(raw);
+    }
+  } catch {}
+
+  return Response.json({ entries });
 }
