@@ -1,120 +1,150 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Editor from "@monaco-editor/react"
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-export default function Page(){
+const Monaco = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
-  const projectId = "demo-project"
+export default function Builder() {
+  const projectId = "demo-project";
 
-  const [files,setFiles] = useState<string[]>([])
-  const [active,setActive] = useState("page.tsx")
-  const [code,setCode] = useState("")
-  const [version,setVersion] = useState(0)
-  const [previewKey,setPreviewKey] = useState(0)
-  const [journal,setJournal] = useState<any[]>([])
+  const [files, setFiles] = useState<string[]>([]);
+  const [active, setActive] = useState("app/page.tsx");
+  const [code, setCode] = useState("");
+  const [version, setVersion] = useState(0);
+  const [journal, setJournal] = useState<any[]>([]);
 
-  async function loadFiles(){
-    const r = await fetch("/api/dev/fs/list?projectId="+projectId,{cache:"no-store"})
-    const j = await r.json()
-    setFiles(j.files || [])
+  // load files
+  useEffect(() => {
+    fetch("/api/dev/fs/list?projectId=" + projectId)
+      .then((r) => r.json())
+      .then((d) => {
+        const normalized = (d.files || []).map((f: string) =>
+          f.startsWith("app/") ? f : "app/" + f
+        );
+        setFiles(normalized);
+      });
+  }, []);
+
+  // load file
+  useEffect(() => {
+    fetch(
+      "/api/dev/fs/read?projectId=" +
+        projectId +
+        "&file=" +
+        active
+    )
+      .then((r) => r.text())
+      .then(setCode);
+  }, [active]);
+
+  function loadJournal() {
+    fetch("/api/dev/journal?projectId=" + projectId)
+      .then((r) => r.json())
+      .then((d) => setJournal(d.entries || []));
   }
 
-  async function loadFile(file:string){
-    const r = await fetch("/api/dev/fs/read?projectId="+projectId+"&file="+file,{cache:"no-store"})
-    const j = await r.json()
-    setCode(j.content || "")
-  }
+  useEffect(loadJournal, []);
 
-  async function refreshJournal(){
-    const r = await fetch("/api/dev/journal?projectId="+projectId,{cache:"no-store"})
-    const j = await r.json()
-    setJournal(j.entries || [])
-  }
-
-  async function save(){
-
-    const r = await fetch("/api/dev/fs/write",{
-      method:"POST",
-      headers:{ "content-type":"application/json" },
+  async function save() {
+    await fetch("/api/dev/fs/write", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
         projectId,
         file: active,
-        content: code
-      })
-    })
+        content: code,
+      }),
+    });
 
-    const j = await r.json()
-
-    const v = j.version ?? (version + 1)
-
-    setVersion(v)
-    setPreviewKey(k=>k+1)
-
-    refreshJournal()
+    setVersion((v) => v + 1);
+    loadJournal();
   }
 
-  useEffect(()=>{
-    loadFiles()
-    loadFile(active)
-    refreshJournal()
-  },[])
-
   return (
-    <div style={{display:"flex",height:"100vh"}}>
-
-      <div style={{width:220,borderRight:"1px solid #333",padding:10}}>
-        {files.map(f=>(
+    <div style={{ display: "flex", height: "100vh" }}>
+      
+      {/* FILE TREE */}
+      <div style={{ width: 220, borderRight: "1px solid #333" }}>
+        {files.map((f) => (
           <div
             key={f}
-            style={{
-              padding:8,
-              cursor:"pointer",
-              background:f===active ? "#eee" : "transparent"
-            }}
-            onClick={()=>{
-              setActive(f)
-              loadFile(f)
-            }}
+            onClick={() => setActive(f)}
+            style={{ padding: 8, cursor: "pointer" }}
           >
             {f}
           </div>
         ))}
       </div>
 
-      <div style={{flex:1,display:"flex",flexDirection:"column"}}>
-        <button onClick={save}>SAVE</button>
-
-        <div style={{flex:1}}>
-          <Editor
+      {/* EDITOR */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Monaco
             theme="vs-dark"
-            language="typescript"
             value={code}
-            onChange={(v)=>setCode(v || "")}
-            options={{automaticLayout:true}}
+            onChange={(v) => setCode(v || "")}
           />
+        </div>
+
+        <button
+          onClick={save}
+          style={{
+            height: 40,
+            background: "#0a84ff",
+            color: "#fff",
+            border: "none",
+          }}
+        >
+          SAVE
+        </button>
+
+        <div
+          style={{
+            height: 140,
+            overflow: "auto",
+            background: "#111",
+            color: "#fff",
+            padding: 8,
+          }}
+        >
+          {journal.map((e, i) => (
+            <div key={i}>
+              {e.op} → {e.path}
+            </div>
+          ))}
         </div>
       </div>
 
-      <div style={{width:520,borderLeft:"1px solid #333",display:"flex",flexDirection:"column"}}>
-        <div style={{padding:10,background:"#111",color:"#fff"}}>
+      {/* PREVIEW */}
+      <div
+        style={{
+          width: 520,
+          borderLeft: "1px solid #333",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ padding: 10, background: "#000", color: "#fff" }}>
           VERSION {version}
         </div>
 
         <iframe
-          key={previewKey}
-          src={"/api/dev/preview?projectId="+projectId+"&v="+version}
-          style={{flex:1,width:"100%",border:"none",background:"#fff"}}
+          src={
+            "/api/dev/preview?projectId=" +
+            projectId +
+            "&v=" +
+            version
+          }
+          style={{ flex: 1, border: "none", background: "#fff" }}
         />
-
-        <div style={{height:200,overflow:"auto",borderTop:"1px solid #333"}}>
-          {journal.map((e,i)=>(
-            <div key={i}>{e.op || e.type} → {e.file}</div>
-          ))}
-        </div>
-
       </div>
-
     </div>
-  )
+  );
 }

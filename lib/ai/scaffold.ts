@@ -1,9 +1,11 @@
 import OpenAI from "openai";
+import { applyWithGuard } from "@/lib/ai/apply";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
-import { applyWithGuard } from "@/lib/ai/apply-guard";
 import path from "path";
 
-function resolveProjectRoot(workspaceId: string, projectId: string) {
+type ApplyFileChange = { path: string; content: string };
+
+export function resolveProjectRoot(workspaceId: string, projectId: string) {
   return path.join(
     process.cwd(),
     "runtime",
@@ -14,86 +16,116 @@ function resolveProjectRoot(workspaceId: string, projectId: string) {
   );
 }
 
-type ScaffoldOpts = {
+// Parse strict FILE blocks produced by the model
+export function parseFileBlocks(text: string): ApplyFileChange[] {
+  const lines = text.split(/\r?\n/);
+  const files: ApplyFileChange[] = [];
+
+  let i = 0;
+
+  const startsWithLabel = (line: string, label: string) =>
+    line.startsWith(label);
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    if (!startsWithLabel(line, "FILE:")) {
+      i++;
+      continue;
+    }
+
+    const filePath = line.slice("FILE:".length).trim();
+    i++;
+
+    // optional ACTION:
+    if (i < lines.length && startsWithLabel(lines[i], "ACTION:")) {
+      i++;
+    }
+
+    // require CONTENT:
+    if (i >= lines.length || !startsWithLabel(lines[i], "CONTENT:")) {
+      // malformed block; skip
+      continue;
+    }
+
+    i++; // first content line
+
+    const contentLines: string[] = [];
+    while (i < lines.length) {
+      const l = lines[i];
+      if (startsWithLabel(l, "FILE:")) break;
+      contentLines.push(l);
+      i++;
+    }
+
+    const content = contentLines.join("\n");
+    if (filePath) files.push({ path: filePath, content });
+  }
+
+  return files;
+}
+
+export async function scaffoldProject(opts: {
   apiKey: string;
   workspaceId: string;
   projectId: string;
   spec: string;
-};
-
-export async function runScaffold(opts: ScaffoldOpts) {
+}) {
   const { apiKey, workspaceId, projectId, spec } = opts;
+
+  enforceManifestGate({ workspaceId, projectId });
 
   const client = new OpenAI({ apiKey });
 
   const completion = await client.responses.create({
     model: "gpt-4.1-mini",
     input: `
-You are a code generator.
-
-Generate FILE blocks only.
+You are generating file patches for a Next.js TypeScript project.
 
 Rules:
-- Only write inside src/
-- Never write README.md
-- Never write package.json
-- Never write root files
+- Only output FILE blocks.
+- Only write inside src/.
+- Never write README.md.
+- Never write package.json.
+- Never write root files.
+
+Format strictly:
+
+FILE: relative/path
+ACTION: create|update
+CONTENT:
+<file content>
 
 Task:
 ${spec}
-`
+`,
   });
 
   const output = completion.output_text ?? "";
   const files = parseFileBlocks(output);
 
-  // ✅ Manifest gate now requires paths
-  enforceManifestGate({
-    workspaceId,
-    projectId,
-    paths: files.map(f => f.path),
-  });
+  // Basic safety: only allow src/
+  for (const f of files) {
+    if (!f.path.startsWith("src/")) {
+      throw new Error(`Path not allowed by scaffold rules: ${f.path}`);
+    }
+  }
 
   const projectRoot = resolveProjectRoot(workspaceId, projectId);
-
   const applied = await applyWithGuard(projectRoot, files);
 
-  return applied;
-}
+  // ApplyResult is not a discriminated union in your current lib/ai/apply.ts,
+  // so treat error as optional.
+  const maybeError =
+    typeof (applied as any)?.error === "string" ? (applied as any).error : undefined;
 
-function cleanPath(p: string) {
-  let s = String(p).trim();
-
-  if (s.startsWith("FILE:")) s = s.slice(5).trim();
-  s = s.replace(/`+/g, "");
-  s = s.replace(/^\/+/, "");
-  s = s.replace(/\\/g, "/");
-
-  if (!s.startsWith("src/")) {
-    if (s === "src") s = "src/";
-    else throw new Error(`Scaffold path must start with src/: ${p}`);
-  }
-
-  return s;
-}
-
-function parseFileBlocks(text: string) {
-  const blocks = text.split("FILE:");
-  const files: { path: string; content: string }[] = [];
-
-  for (const block of blocks) {
-    const trimmed = block.trim();
-    if (!trimmed) continue;
-
-    const firstLineEnd = trimmed.indexOf("\n");
-    if (firstLineEnd === -1) continue;
-
-    const rawPath = trimmed.slice(0, firstLineEnd).trim();
-    const content = trimmed.slice(firstLineEnd + 1);
-
-    const filePath = cleanPath(rawPath);
-    files.push({ path: filePath, content });
-  }
-
-  return files;
+  return {
+    ok: Boolean((applied as any)?.ok),
+    compiled: Boolean((applied as any)?.compiled),
+    rolledBack: Boolean((applied as any)?.rolledBack),
+    backupId: (applied as any)?.backupId,
+    createdFiles: files.map((f) => f.path),
+    ...(maybeError ? { error: maybeError } : {}),
+    output,
+  };
 }

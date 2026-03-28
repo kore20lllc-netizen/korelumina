@@ -1,63 +1,66 @@
-import { NextRequest } from "next/server"
-import fs from "fs/promises"
-import path from "path"
+import { NextRequest } from "next/server";
+import fs from "fs/promises";
+import path from "path";
+import { build } from "esbuild";
+import { resolveProjectRoot } from "@/lib/runtime/guardrails";
 
-export const runtime = "nodejs"
-export const dynamic = "force-dynamic"
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-export async function GET(req:NextRequest){
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const projectId = searchParams.get("projectId") || "demo-project";
+  const workspaceId = "default";
 
-  const { searchParams } = new URL(req.url)
-  const projectId = searchParams.get("projectId")
+  const root = resolveProjectRoot(workspaceId, projectId);
+  const entryFile = path.join(root, "__entry__.tsx");
 
-  if(!projectId){
-    return new Response("missing projectId",{status:400})
-  }
+  const entry = `
+    import React from "react";
+    import ReactDOM from "react-dom/client";
+    import App from "./app/page.tsx";
 
-  const root = path.join(
-    process.cwd(),
-    "runtime",
-    "workspaces",
-    "default",
-    "projects",
-    projectId,
-    "app",
-    "page.tsx"
-  )
+    const root = document.getElementById("root");
 
-  let code = ""
+    ReactDOM.createRoot(root).render(
+      React.createElement(App)
+    );
+  `;
 
-  try{
-    code = await fs.readFile(root,"utf8")
-  }catch{
-    return new Response("no runtime file",{status:404})
-  }
+  await fs.writeFile(entryFile, entry);
 
-  // VERY IMPORTANT: transform runtime page
-  code = code
-    .replace(/export\s+default\s+function\s+Page\s*\(/,"function Page(")
+  const result = await build({
+    entryPoints: [entryFile],
+    bundle: true,
+    write: false,
+    format: "iife",
+    platform: "browser",
+    target: "es2017",
+    loader: { ".tsx": "tsx", ".ts": "ts" },
+    external: ["react", "react-dom", "react-dom/client"],
+  });
 
-  return new Response(`<!doctype html>
-<html>
-<body style="margin:0">
+  const code = result.outputFiles[0].text;
 
-<div id="root"></div>
-
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<script type="text/babel">
-
-${code}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<Page/>)
-
-</script>
-
-</body>
-</html>`,{
-    headers:{ "Content-Type":"text/html" }
-  })
-
+  return new Response(
+    "<!doctype html>" +
+      "<html><body style='margin:0'>" +
+      "<div id='root'></div>" +
+      "<pre id='err' style='position:fixed;bottom:0;left:0;width:100%;max-height:40%;overflow:auto;background:#111;color:#ff5555;padding:10px'></pre>" +
+      "<script src='https://unpkg.com/react@18/umd/react.production.min.js'></script>" +
+      "<script src='https://unpkg.com/react-dom@18/umd/react-dom.production.min.js'></script>" +
+      "<script>" +
+      "window.require=(n)=>{" +
+      "if(n==='react')return window.React;" +
+      "if(n==='react-dom'||n==='react-dom/client')return window.ReactDOM;" +
+      "};" +
+      "try{" +
+      code +
+      "}catch(e){" +
+      "document.getElementById('err').textContent = e && e.stack ? e.stack : e;" +
+      "}" +
+      "</script>" +
+      "</body></html>",
+    { headers: { "Content-Type": "text/html" } }
+  );
 }

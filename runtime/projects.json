@@ -1,0 +1,10 @@
+{
+  "default": {
+    "demo-project": {
+      "root": "src",
+      "files": [
+        "src/app/page.tsx"
+      ]
+    }
+  }
+}
