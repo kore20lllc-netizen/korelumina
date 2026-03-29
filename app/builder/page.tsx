@@ -33,6 +33,7 @@ export default function BuilderPage() {
   const [code, setCode] = useState("");
   const [version, setVersion] = useState(0);
   const [journal, setJournal] = useState<any[]>([]);
+  const [prompt, setPrompt] = useState("");
 
   const booted = useRef(false);
 
@@ -49,7 +50,7 @@ export default function BuilderPage() {
 
   function loadFile(file: string) {
     fetch(`/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(file)}`)
-      .then(r => r.text()) // 🔥 RAW TEXT NOW
+      .then(r => r.text())
       .then(txt => setCode(unwrap(txt)));
   }
 
@@ -73,8 +74,8 @@ export default function BuilderPage() {
     loadFile(active);
   }, [active]);
 
-  async function handleSave() {
-    const clean = unwrap(code);
+  async function handleSave(newCode?: string) {
+    const clean = unwrap(newCode ?? code);
 
     await fetch("/api/dev/fs/write", {
       method: "POST",
@@ -87,14 +88,47 @@ export default function BuilderPage() {
     });
 
     setVersion(v => v + 1);
-
-    // 🔥 refresh journal AFTER save
     loadJournal();
+  }
+
+  // 🔥 FIX: remove ANY possibility of malformed string
+  async function handleAI() {
+    try {
+      const safePrompt = (prompt || "").replace(/[\u0000-\u001F]/g, "");
+
+      const res = await fetch("/api/dev/ai/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: safePrompt,
+        }),
+      });
+
+      const text = await res.text(); // 🔥 avoid JSON parsing crash
+      let data: any = {};
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        console.error("AI response not JSON:", text);
+        return;
+      }
+
+      if (!data?.code) return;
+
+      const clean = unwrap(data.code);
+
+      setCode(clean);
+      await handleSave(clean);
+    } catch (e) {
+      console.error("AI ERROR:", e);
+    }
   }
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
-      {/* FILE TREE */}
       <div style={{ width: 220, borderRight: "1px solid #333" }}>
         {files.map(f => (
           <div key={f} onClick={() => setActive(f)} style={{ padding: 8 }}>
@@ -103,7 +137,6 @@ export default function BuilderPage() {
         ))}
       </div>
 
-      {/* EDITOR */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <div style={{ flex: 1 }}>
           <Monaco
@@ -114,12 +147,21 @@ export default function BuilderPage() {
           />
         </div>
 
-        <button onClick={handleSave}>SAVE</button>
+        <button onClick={() => handleSave()}>SAVE</button>
+
+        <div style={{ display: "flex", gap: 8, padding: 8 }}>
+          <input
+            value={prompt}
+            onChange={e => setPrompt(e.target.value)}
+            placeholder="Ask AI..."
+            style={{ flex: 1 }}
+          />
+          <button onClick={handleAI}>AI APPLY</button>
+        </div>
+
         <div>VERSION {version}</div>
 
-        {/* 🔥 JOURNAL PANEL */}
         <div style={{ height: 150, overflow: "auto", background: "#111", color: "#fff", padding: 8 }}>
-          {journal.length === 0 && <div>No journal entries</div>}
           {journal.map((e, i) => (
             <div key={i}>
               {new Date(e.t).toLocaleTimeString()} → {e.op} → {e.path}
@@ -128,7 +170,6 @@ export default function BuilderPage() {
         </div>
       </div>
 
-      {/* PREVIEW */}
       <div style={{ width: 520 }}>
         <iframe
           key={version}
