@@ -40,12 +40,13 @@ export default function Builder() {
   const [code, setCode] = useState("");
   const [version, setVersion] = useState(0);
   const [journal, setJournal] = useState<any[]>([]);
+
   const [prompt, setPrompt] = useState("");
-  const [diff, setDiff] = useState<{
-    before: string;
-    after: string;
-    lines: { type: "same" | "add" | "remove"; line: string }[];
-  } | null>(null);
+  const [diff, setDiff] = useState<any>(null);
+
+  // ✅ NEW (isolated planner state)
+  const [plan, setPlan] = useState<string[]>([]);
+  const [selectedPlanFile, setSelectedPlanFile] = useState<string | null>(null);
 
   const booted = useRef(false);
 
@@ -106,17 +107,25 @@ export default function Builder() {
     loadJournal();
   }
 
-  async function runDiff() {
-    const before = code;
+  async function runDiff(targetFile?: string) {
+    const fileToUse = targetFile || active;
+
+    const currentFile = await fetch(
+      `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(fileToUse)}`
+    ).then(r => r.text());
+
+    const before = unwrap(currentFile);
 
     const r = await fetch("/api/dev/ai/generate", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ prompt, file: fileToUse }),
     });
 
     const d = await r.json();
     if (!d?.code) return;
+
+    setActive(fileToUse);
 
     setDiff({
       before,
@@ -131,6 +140,26 @@ export default function Builder() {
     setCode(diff.after);
     await save(diff.after);
     setDiff(null);
+  }
+
+  // ✅ NEW (planner — UI only, no system impact)
+  async function runPlanner() {
+    const r = await fetch("/api/dev/ai/generate", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        prompt: `PLAN FILES:\n${prompt}\n\nReturn JSON: { "files": ["path1", "path2"] }`,
+      }),
+    });
+
+    const d = await r.json();
+
+    try {
+      const parsed = typeof d.code === "string" ? JSON.parse(d.code) : d;
+      setPlan(parsed.files || []);
+    } catch {
+      console.error("Planner parse failed", d);
+    }
   }
 
   return (
@@ -213,11 +242,49 @@ export default function Builder() {
               style={{ flex: 1 }}
             />
 
-            <button onClick={runDiff}>DIFF</button>
+            <button onClick={() => runDiff()}>DIFF</button>
+            <button onClick={runPlanner}>PLAN</button>
           </div>
 
           <div style={{ marginTop: 6 }}>VERSION {version}</div>
         </div>
+
+        {/* ✅ NEW PLANNER PANEL (SAFE) */}
+        {plan.length > 0 && (
+          <div
+            style={{
+              height: 140,
+              overflow: "auto",
+              borderTop: "1px solid #222",
+              background: "#1a1a1a",
+              color: "#fff",
+              padding: 6,
+              flexShrink: 0,
+            }}
+          >
+            <div style={{ marginBottom: 4, fontWeight: "bold" }}>
+              PLAN FILES
+            </div>
+
+            {plan.map((f, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 4,
+                  cursor: "pointer",
+                  background:
+                    selectedPlanFile === f ? "#333" : "transparent",
+                }}
+                onClick={() => {
+                  setSelectedPlanFile(f);
+                  runDiff(f);
+                }}
+              >
+                {f}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* DIFF */}
         {diff && (

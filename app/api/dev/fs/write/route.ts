@@ -1,37 +1,38 @@
-import { NextRequest } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export const dynamic = "force-dynamic";
-
-function unwrap(input: any): string {
-  let s = typeof input === "string" ? input : "";
-
-  for (let i = 0; i < 10; i++) {
-    try {
-      const p = JSON.parse(s);
-      if (p?.content) {
-        s = p.content;
-        continue;
-      }
-    } catch {}
-    break;
-  }
-
-  return s
-    .replace(/^```[a-z]*\n?/i, "")
-    .replace(/```$/, "")
-    .trim();
+function unwrap(s: string) {
+  try {
+    const p = JSON.parse(s);
+    if (p?.content) return p.content;
+  } catch {}
+  return s;
 }
 
-export async function POST(req: NextRequest) {
+// 🔥 CRITICAL: remove duplicate exports
+function sanitize(code: string) {
+  const lines = code.split("\n");
+
+  let seenDefault = false;
+
+  return lines.filter(line => {
+    if (line.includes("export default")) {
+      if (seenDefault) return false;
+      seenDefault = true;
+      return true;
+    }
+    return true;
+  }).join("\n");
+}
+
+export async function POST(req: Request) {
   const body = await req.json();
 
   const projectId = body.projectId || "demo-project";
   const relFile = (body.file || "app/page.tsx").replace(/^\/+/, "");
   const raw = body.content || "";
 
-  const clean = unwrap(raw);
+  const clean = sanitize(unwrap(raw));
 
   const root = path.join(
     process.cwd(),
@@ -45,9 +46,11 @@ export async function POST(req: NextRequest) {
   const full = path.join(root, relFile);
 
   fs.mkdirSync(path.dirname(full), { recursive: true });
+
+  // overwrite only
   fs.writeFileSync(full, clean, "utf8");
 
-  // 🔥 WRITE JOURNAL ENTRY (PERSISTENT)
+  // journal
   const journalPath = path.join(root, "journal.json");
 
   let entries: any[] = [];
@@ -65,8 +68,5 @@ export async function POST(req: NextRequest) {
 
   fs.writeFileSync(journalPath, JSON.stringify(entries.slice(0, 50), null, 2));
 
-  return Response.json({
-    ok: true,
-    written: relFile,
-  });
+  return Response.json({ ok: true });
 }
