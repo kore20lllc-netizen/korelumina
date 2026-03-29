@@ -15,6 +15,26 @@ function unwrap(s: string) {
   return s;
 }
 
+/* 🔥 SIMPLE LINE DIFF */
+function buildDiff(before: string, after: string) {
+  const b = before.split("\n");
+  const a = after.split("\n");
+
+  const max = Math.max(b.length, a.length);
+  const result: { type: "same" | "add" | "remove"; line: string }[] = [];
+
+  for (let i = 0; i < max; i++) {
+    if (b[i] === a[i]) {
+      result.push({ type: "same", line: b[i] || "" });
+    } else {
+      if (b[i]) result.push({ type: "remove", line: b[i] });
+      if (a[i]) result.push({ type: "add", line: a[i] });
+    }
+  }
+
+  return result;
+}
+
 export default function Builder() {
   const [files, setFiles] = useState<string[]>([]);
   const [active, setActive] = useState("app/page.tsx");
@@ -23,8 +43,11 @@ export default function Builder() {
   const [journal, setJournal] = useState<any[]>([]);
   const [prompt, setPrompt] = useState("");
 
-  // 🔥 NEW
-  const [diff, setDiff] = useState<{ before: string; after: string } | null>(null);
+  const [diff, setDiff] = useState<{
+    before: string;
+    after: string;
+    lines: { type: "same" | "add" | "remove"; line: string }[];
+  } | null>(null);
 
   const booted = useRef(false);
 
@@ -76,7 +99,6 @@ export default function Builder() {
     loadJournal();
   }
 
-  // 🔥 UPDATED DIFF
   async function runDiff() {
     const before = code;
 
@@ -89,9 +111,12 @@ export default function Builder() {
     const d = await r.json();
     if (!d?.code) return;
 
+    const lines = buildDiff(before, d.code);
+
     setDiff({
       before,
       after: d.code,
+      lines,
     });
   }
 
@@ -170,40 +195,48 @@ export default function Builder() {
           <div style={{ marginTop: 6 }}>VERSION {version}</div>
         </div>
 
-        {/* 🔥 SIDE-BY-SIDE DIFF */}
+        {/* 🔥 REAL DIFF */}
         {diff && (
           <div style={{
             height: 220,
             display: "flex",
             borderTop: "1px solid #222"
           }}>
-            {/* BEFORE */}
-            <div style={{
-              flex: 1,
-              background: "#1e1e1e",
-              color: "#ff6b6b",
-              overflow: "auto",
-              padding: 6,
-              borderRight: "1px solid #333"
-            }}>
-              <div style={{ fontSize: 12, marginBottom: 4 }}>BEFORE</div>
-              <pre style={{ margin: 0, whiteSpace: "pre-wrap" }}>
-                {diff.before}
-              </pre>
-            </div>
-
-            {/* AFTER */}
             <div style={{
               flex: 1,
               background: "#111",
-              color: "#0f0",
               overflow: "auto",
-              padding: 6
+              padding: 6,
+              fontFamily: "monospace",
+              fontSize: 12
             }}>
-              <div style={{ fontSize: 12, marginBottom: 4 }}>AFTER</div>
-              <pre style={{ margin: 0, whiteSpace: "pre-wrap" }}>
-                {diff.after}
-              </pre>
+              {diff.lines.map((l, i) => (
+                <div
+                  key={i}
+                  style={{
+                    color:
+                      l.type === "add"
+                        ? "#0f0"
+                        : l.type === "remove"
+                        ? "#ff6b6b"
+                        : "#aaa",
+                    background:
+                      l.type === "add"
+                        ? "rgba(0,255,0,0.1)"
+                        : l.type === "remove"
+                        ? "rgba(255,0,0,0.1)"
+                        : "transparent",
+                    padding: "2px 4px"
+                  }}
+                >
+                  {l.type === "add"
+                    ? "+ "
+                    : l.type === "remove"
+                    ? "- "
+                    : "  "}
+                  {l.line}
+                </div>
+              ))}
             </div>
 
             {/* APPLY */}
