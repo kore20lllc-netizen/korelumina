@@ -15,20 +15,19 @@ function unwrap(s: string) {
   return s;
 }
 
-/* 🔥 SIMPLE LINE DIFF */
 function buildDiff(before: string, after: string) {
   const b = before.split("\n");
   const a = after.split("\n");
-
   const max = Math.max(b.length, a.length);
+
   const result: { type: "same" | "add" | "remove"; line: string }[] = [];
 
   for (let i = 0; i < max; i++) {
     if (b[i] === a[i]) {
       result.push({ type: "same", line: b[i] || "" });
     } else {
-      if (b[i]) result.push({ type: "remove", line: b[i] });
-      if (a[i]) result.push({ type: "add", line: a[i] });
+      if (b[i] !== undefined) result.push({ type: "remove", line: b[i] });
+      if (a[i] !== undefined) result.push({ type: "add", line: a[i] });
     }
   }
 
@@ -42,7 +41,6 @@ export default function Builder() {
   const [version, setVersion] = useState(0);
   const [journal, setJournal] = useState<any[]>([]);
   const [prompt, setPrompt] = useState("");
-
   const [diff, setDiff] = useState<{
     before: string;
     after: string;
@@ -51,41 +49,45 @@ export default function Builder() {
 
   const booted = useRef(false);
 
-  function loadFiles() {
-    fetch(`/api/dev/fs/list?projectId=${projectId}`)
-      .then(r => r.json())
-      .then(d => setFiles(d.files || []));
+  async function loadFiles() {
+    const r = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
+    const d = await r.json();
+    setFiles(d.files || []);
   }
 
-  function loadFile(file: string) {
-    fetch(`/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(file)}`)
-      .then(r => r.text())
-      .then(t => setCode(unwrap(t)));
+  async function loadFile(file: string) {
+    const r = await fetch(
+      `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(file)}`
+    );
+    const t = await r.text();
+    setCode(unwrap(t));
   }
 
-  function loadJournal() {
-    fetch(`/api/dev/journal?projectId=${projectId}`)
-      .then(r => r.json())
-      .then(d => setJournal(d.entries || []));
+  async function loadJournal() {
+    const r = await fetch(`/api/dev/journal?projectId=${projectId}`);
+    const d = await r.json();
+    setJournal(d.entries || []);
   }
 
   useEffect(() => {
     if (booted.current) return;
     booted.current = true;
 
-    loadFiles();
-    loadFile(active);
-    loadJournal();
+    (async () => {
+      await Promise.all([loadFiles(), loadJournal()]);
+      await loadFile("app/page.tsx");
+    })();
   }, []);
 
   useEffect(() => {
+    if (!booted.current) return;
     loadFile(active);
   }, [active]);
 
   async function save(newCode?: string) {
     const clean = unwrap(newCode || code);
 
-    await fetch("/api/dev/fs/write", {
+    const res = await fetch("/api/dev/fs/write", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -95,7 +97,12 @@ export default function Builder() {
       }),
     });
 
-    setVersion(v => v + 1);
+    if (!res.ok) {
+      console.error("WRITE FAILED", await res.text());
+      return;
+    }
+
+    setVersion((v) => v + 1);
     loadJournal();
   }
 
@@ -111,12 +118,10 @@ export default function Builder() {
     const d = await r.json();
     if (!d?.code) return;
 
-    const lines = buildDiff(before, d.code);
-
     setDiff({
       before,
       after: d.code,
-      lines,
+      lines: buildDiff(before, d.code),
     });
   }
 
@@ -129,23 +134,32 @@ export default function Builder() {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+      }}
+    >
       {/* FILETREE */}
-      <div style={{
-        width: 220,
-        borderRight: "1px solid #222",
-        overflow: "auto",
-        background: "#f3f3f3"
-      }}>
-        {files.map(f => (
+      <div
+        style={{
+          width: 220,
+          borderRight: "1px solid #222",
+          overflow: "auto",
+          background: "#f3f3f3",
+          flexShrink: 0,
+        }}
+      >
+        {files.map((f) => (
           <div
             key={f}
             onClick={() => setActive(f)}
             style={{
               padding: 8,
               cursor: "pointer",
-              background: active === f ? "#ddd" : "transparent"
+              background: active === f ? "#ddd" : "transparent",
             }}
           >
             {f}
@@ -154,37 +168,47 @@ export default function Builder() {
       </div>
 
       {/* CENTER */}
-      <div style={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        minWidth: 0,
-        minHeight: 0
-      }}>
-
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 0,
+          minHeight: 0,
+        }}
+      >
         {/* EDITOR */}
         <div style={{ flex: 1, minHeight: 0 }}>
           <Monaco
+            height="100%"
+            defaultLanguage="typescript"
             theme="vs-dark"
-            language="typescript"
             value={code}
-            onChange={v => setCode(v || "")}
+            onChange={(v) => setCode(v || "")}
+            options={{
+              minimap: { enabled: false },
+              fontSize: 14,
+              automaticLayout: true,
+            }}
           />
         </div>
 
         {/* CONTROLS */}
-        <div style={{
-          padding: 8,
-          borderTop: "1px solid #222",
-          background: "#111",
-          color: "#fff"
-        }}>
-          <div style={{ display: "flex", gap: 8 }}>
+        <div
+          style={{
+            padding: 8,
+            borderTop: "1px solid #222",
+            background: "#111",
+            color: "#fff",
+            flexShrink: 0,
+          }}
+        >
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <button onClick={() => save()}>SAVE</button>
 
             <input
               value={prompt}
-              onChange={e => setPrompt(e.target.value)}
+              onChange={(e) => setPrompt(e.target.value)}
               placeholder="Ask AI..."
               style={{ flex: 1 }}
             />
@@ -195,21 +219,27 @@ export default function Builder() {
           <div style={{ marginTop: 6 }}>VERSION {version}</div>
         </div>
 
-        {/* 🔥 REAL DIFF */}
+        {/* DIFF */}
         {diff && (
-          <div style={{
-            height: 220,
-            display: "flex",
-            borderTop: "1px solid #222"
-          }}>
-            <div style={{
-              flex: 1,
-              background: "#111",
-              overflow: "auto",
-              padding: 6,
-              fontFamily: "monospace",
-              fontSize: 12
-            }}>
+          <div
+            style={{
+              height: 220,
+              display: "flex",
+              borderTop: "1px solid #222",
+              flexShrink: 0,
+              minHeight: 0,
+            }}
+          >
+            <div
+              style={{
+                flex: 1,
+                background: "#111",
+                overflow: "auto",
+                padding: 6,
+                fontFamily: "monospace",
+                fontSize: 12,
+              }}
+            >
               {diff.lines.map((l, i) => (
                 <div
                   key={i}
@@ -226,28 +256,27 @@ export default function Builder() {
                         : l.type === "remove"
                         ? "rgba(255,0,0,0.1)"
                         : "transparent",
-                    padding: "2px 4px"
+                    padding: "2px 4px",
+                    whiteSpace: "pre-wrap",
                   }}
                 >
-                  {l.type === "add"
-                    ? "+ "
-                    : l.type === "remove"
-                    ? "- "
-                    : "  "}
+                  {l.type === "add" ? "+ " : l.type === "remove" ? "- " : "  "}
                   {l.line}
                 </div>
               ))}
             </div>
 
-            {/* APPLY */}
-            <div style={{
-              width: 120,
-              borderLeft: "1px solid #222",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "#111"
-            }}>
+            <div
+              style={{
+                width: 120,
+                borderLeft: "1px solid #222",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#111",
+                flexShrink: 0,
+              }}
+            >
               <button
                 onClick={applyDiff}
                 style={{
@@ -256,7 +285,7 @@ export default function Builder() {
                   border: "none",
                   padding: "8px 14px",
                   fontWeight: "bold",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 APPLY
@@ -266,41 +295,44 @@ export default function Builder() {
         )}
 
         {/* JOURNAL */}
-        <div style={{
-          height: 150,
-          overflow: "auto",
-          background: "#000",
-          color: "#0f0",
-          fontSize: 12,
-          padding: 6,
-          borderTop: "1px solid #222"
-        }}>
+        <div
+          style={{
+            height: 150,
+            overflow: "auto",
+            background: "#000",
+            color: "#0f0",
+            fontSize: 12,
+            padding: 6,
+            borderTop: "1px solid #222",
+            flexShrink: 0,
+          }}
+        >
           {journal.map((e, i) => (
             <div key={i}>
               {new Date(e.t).toLocaleTimeString()} → {e.op} → {e.path}
             </div>
           ))}
         </div>
-
       </div>
 
       {/* PREVIEW */}
-      <div style={{
-        width: 600,
-        borderLeft: "1px solid #222",
-        background: "#fff"
-      }}>
+      <div
+        style={{
+          width: 600,
+          borderLeft: "1px solid #222",
+          background: "#fff",
+          flexShrink: 0,
+        }}
+      >
         <iframe
-          key={version}
           src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
           style={{
             width: "100%",
             height: "100%",
-            border: "none"
+            border: "none",
           }}
         />
       </div>
-
     </div>
   );
 }
