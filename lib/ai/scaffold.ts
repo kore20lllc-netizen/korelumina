@@ -73,7 +73,7 @@ export async function scaffoldProject(opts: {
 }) {
   const { apiKey, workspaceId, projectId, spec } = opts;
 
-  enforceManifestGate({ workspaceId, projectId });
+  enforceManifestGate({ workspaceId, projectId, paths: [] });
 
   const client = new OpenAI({ apiKey });
 

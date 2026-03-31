@@ -1,194 +1,205 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Editor from "@monaco-editor/react";
 
-const Monaco = dynamic(() => import("@monaco-editor/react"), { ssr: false });
-
-const projectId = "demo-project";
-
-function unwrap(s: string) {
-  try {
-    const p = JSON.parse(s);
-    if (p?.content) return p.content;
-  } catch {}
-  return s;
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
-function buildDiff(before: string, after: string) {
-  const b = before.split("\n");
-  const a = after.split("\n");
-  const max = Math.max(b.length, a.length);
+function renderDiffHtml(before: string, after: string) {
+  const a = before.split("\n");
+  const b = after.split("\n");
+  const max = Math.max(a.length, b.length);
+  const rows: string[] = [];
 
-  const result: { type: "same" | "add" | "remove"; line: string }[] = [];
+  for (let i = 0; i < max; i += 1) {
+    const left = a[i] ?? "";
+    const right = b[i] ?? "";
 
-  for (let i = 0; i < max; i++) {
-    if (b[i] === a[i]) {
-      result.push({ type: "same", line: b[i] || "" });
-    } else {
-      if (b[i] !== undefined) result.push({ type: "remove", line: b[i] });
-      if (a[i] !== undefined) result.push({ type: "add", line: a[i] });
-    }
-  }
+    let bg = "transparent";
+    if (left !== right && left && right) bg = "#3a2a00";
+    if (left && !right) bg = "#3a0000";
+    if (!left && right) bg = "#002a00";
 
-  return result;
-}
-
-export default function Builder() {
-  const [files, setFiles] = useState<string[]>([]);
-  const [active, setActive] = useState("app/page.tsx");
-  const [code, setCode] = useState("");
-  const [version, setVersion] = useState(0);
-  const [journal, setJournal] = useState<any[]>([]);
-
-  const [prompt, setPrompt] = useState("");
-  const [diff, setDiff] = useState<any>(null);
-
-  // ✅ NEW (isolated planner state)
-  const [plan, setPlan] = useState<string[]>([]);
-  const [selectedPlanFile, setSelectedPlanFile] = useState<string | null>(null);
-
-  const booted = useRef(false);
-
-  async function loadFiles() {
-    const r = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
-    const d = await r.json();
-    setFiles(d.files || []);
-  }
-
-  async function loadFile(file: string) {
-    const r = await fetch(
-      `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(file)}`
+    rows.push(
+      `<tr style="background:${bg}">
+        <td style="width:50%;vertical-align:top;padding:6px 8px;border-right:1px solid #333;white-space:pre-wrap;font-family:monospace;">${escapeHtml(left)}</td>
+        <td style="width:50%;vertical-align:top;padding:6px 8px;white-space:pre-wrap;font-family:monospace;">${escapeHtml(right)}</td>
+      </tr>`
     );
-    const t = await r.text();
-    setCode(unwrap(t));
   }
 
-  async function loadJournal() {
-    const r = await fetch(`/api/dev/journal?projectId=${projectId}`);
-    const d = await r.json();
-    setJournal(d.entries || []);
-  }
+  return `
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#161616">
+          <th style="text-align:left;padding:8px;border-right:1px solid #333;">Current</th>
+          <th style="text-align:left;padding:8px;">Proposed</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+export default function BuilderPage() {
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId") || "repo-test";
+
+  const [files, setFiles] = useState<string[]>([]);
+  const [activeFile, setActiveFile] = useState("app/page.tsx");
+  const [code, setCode] = useState("");
+  const [savedCode, setSavedCode] = useState("");
+  const [version, setVersion] = useState(0);
+  const [aiInput, setAiInput] = useState("");
+  const [draftCode, setDraftCode] = useState("");
+  const [draftPath, setDraftPath] = useState("");
+  const [isRunningAi, setIsRunningAi] = useState(false);
+  const [isApplying, setIsApplying] = useState(false);
+  const [status, setStatus] = useState("idle");
 
   useEffect(() => {
-    if (booted.current) return;
-    booted.current = true;
-
-    (async () => {
-      await Promise.all([loadFiles(), loadJournal()]);
-      await loadFile("app/page.tsx");
-    })();
-  }, []);
+    fetch(`/api/dev/fs/list?projectId=${projectId}`)
+      .then((r) => r.json())
+      .then((d) => setFiles(d.files || []));
+  }, [projectId]);
 
   useEffect(() => {
-    if (!booted.current) return;
-    loadFile(active);
-  }, [active]);
+    fetch(`/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        const content = d.content || "";
+        setCode(content);
+        setSavedCode(content);
+        setDraftCode("");
+        setDraftPath("");
+        setStatus("idle");
+      });
+  }, [projectId, activeFile]);
 
-  async function save(newCode?: string) {
-    const clean = unwrap(newCode || code);
-
-    const res = await fetch("/api/dev/fs/write", {
+  async function handleSave() {
+    await fetch("/api/dev/fs/write", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         projectId,
-        file: active,
-        content: clean,
+        file: activeFile,
+        content: code,
       }),
     });
 
-    if (!res.ok) {
-      console.error("WRITE FAILED", await res.text());
-      return;
-    }
-
+    setSavedCode(code);
     setVersion((v) => v + 1);
-    loadJournal();
+    setStatus("saved");
   }
 
-  async function runDiff(targetFile?: string) {
-    const fileToUse = targetFile || active;
+  async function runAI() {
+    if (!aiInput.trim()) return;
 
-    const currentFile = await fetch(
-      `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(fileToUse)}`
-    ).then(r => r.text());
-
-    const before = unwrap(currentFile);
-
-    const r = await fetch("/api/dev/ai/generate", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ prompt, file: fileToUse }),
-    });
-
-    const d = await r.json();
-    if (!d?.code) return;
-
-    setActive(fileToUse);
-
-    setDiff({
-      before,
-      after: d.code,
-      lines: buildDiff(before, d.code),
-    });
-  }
-
-  async function applyDiff() {
-    if (!diff?.after) return;
-
-    setCode(diff.after);
-    await save(diff.after);
-    setDiff(null);
-  }
-
-  // ✅ NEW (planner — UI only, no system impact)
-  async function runPlanner() {
-    const r = await fetch("/api/dev/ai/generate", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        prompt: `PLAN FILES:\n${prompt}\n\nReturn JSON: { "files": ["path1", "path2"] }`,
-      }),
-    });
-
-    const d = await r.json();
+    setIsRunningAi(true);
+    setStatus("drafting");
 
     try {
-      const parsed = typeof d.code === "string" ? JSON.parse(d.code) : d;
-      setPlan(parsed.files || []);
-    } catch {
-      console.error("Planner parse failed", d);
+      const res = await fetch("/api/ai/draft", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          workspaceId: "default",
+          projectId,
+          spec: aiInput,
+        }),
+      });
+
+      const data = await res.json();
+      const draftFiles = Array.isArray(data?.files) ? data.files : [];
+      const match =
+        draftFiles.find((f: any) => f?.path === activeFile) ||
+        draftFiles[0];
+
+      if (!match || typeof match.content !== "string") {
+        setStatus("no-draft");
+        setDraftCode("");
+        setDraftPath("");
+        return;
+      }
+
+      setDraftCode(match.content);
+      setDraftPath(match.path || activeFile);
+      setStatus("draft-ready");
+    } catch (err) {
+      console.error(err);
+      setStatus("draft-error");
+    } finally {
+      setIsRunningAi(false);
     }
   }
 
+  async function applyDraft() {
+    if (!draftCode || !draftPath) return;
+
+    setIsApplying(true);
+    setStatus("applying");
+
+    try {
+      await fetch("/api/dev/fs/write", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          projectId,
+          file: draftPath,
+          content: draftCode,
+        }),
+      });
+
+      if (draftPath === activeFile) {
+        setCode(draftCode);
+        setSavedCode(draftCode);
+      } else {
+        setActiveFile(draftPath);
+      }
+
+      setDraftCode("");
+      setDraftPath("");
+      setVersion((v) => v + 1);
+      setStatus("applied");
+    } catch (err) {
+      console.error(err);
+      setStatus("apply-error");
+    } finally {
+      setIsApplying(false);
+    }
+  }
+
+  const diffHtml = useMemo(() => {
+    const right = draftCode || code;
+    return renderDiffHtml(savedCode, right);
+  }, [savedCode, code, draftCode]);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-      }}
-    >
-      {/* FILETREE */}
-      <div
-        style={{
-          width: 220,
-          borderRight: "1px solid #222",
-          overflow: "auto",
-          background: "#f3f3f3",
-          flexShrink: 0,
-        }}
-      >
+    <div style={{ display: "flex", height: "100vh", background: "#0b0b0b", color: "#eaeaea" }}>
+      {/* FILE TREE */}
+      <div style={{ width: 250, borderRight: "1px solid #222", padding: 10, overflow: "auto" }}>
+        <div style={{ marginBottom: 10, fontWeight: 700 }}>Files</div>
         {files.map((f) => (
           <div
             key={f}
-            onClick={() => setActive(f)}
+            onClick={() => setActiveFile(f)}
             style={{
-              padding: 8,
               cursor: "pointer",
-              background: active === f ? "#ddd" : "transparent",
+              padding: "6px 8px",
+              borderRadius: 6,
+              background: f === activeFile ? "#1b1b1b" : "transparent",
+              color: f === activeFile ? "#fff" : "#bbb",
+              marginBottom: 2,
+              fontFamily: "monospace",
+              fontSize: 12,
             }}
           >
             {f}
@@ -197,23 +208,43 @@ export default function Builder() {
       </div>
 
       {/* CENTER */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          minWidth: 0,
-          minHeight: 0,
-        }}
-      >
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        {/* HEADER */}
+        <div style={{ padding: 10, borderBottom: "1px solid #222", display: "flex", gap: 10, alignItems: "center" }}>
+          <div>
+            Project: <b>{projectId}</b>
+          </div>
+          <div style={{ color: "#999" }}>|</div>
+          <div style={{ fontFamily: "monospace" }}>{activeFile}</div>
+          <button onClick={handleSave}>SAVE</button>
+          <button
+  onClick={applyDraft}
+  disabled={!draftCode || isApplying}
+  style={{
+    background: draftCode ? "#22c55e" : "#555",
+    color: "#000",
+    padding: "6px 12px",
+    borderRadius: 6,
+    border: "none",
+    fontWeight: 600,
+    cursor: draftCode ? "pointer" : "not-allowed"
+  }}
+>
+            {isApplying ? "APPLYING..." : "APPLY DRAFT"}
+          </button>
+          <div style={{ marginLeft: "auto", fontSize: 12, color: "#aaa" }}>
+            status: {status}
+          </div>
+        </div>
+
         {/* EDITOR */}
-        <div style={{ flex: 1, minHeight: 0 }}>
-          <Monaco
+        <div style={{ height: "42%" }}>
+          <Editor
             height="100%"
             defaultLanguage="typescript"
-            theme="vs-dark"
             value={code}
             onChange={(v) => setCode(v || "")}
+            theme="vs-dark"
             options={{
               minimap: { enabled: false },
               fontSize: 14,
@@ -222,183 +253,54 @@ export default function Builder() {
           />
         </div>
 
-        {/* CONTROLS */}
-        <div
-          style={{
-            padding: 8,
-            borderTop: "1px solid #222",
-            background: "#111",
-            color: "#fff",
-            flexShrink: 0,
-          }}
-        >
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <button onClick={() => save()}>SAVE</button>
-
-            <input
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Ask AI..."
-              style={{ flex: 1 }}
-            />
-
-            <button onClick={() => runDiff()}>DIFF</button>
-            <button onClick={runPlanner}>PLAN</button>
-          </div>
-
-          <div style={{ marginTop: 6 }}>VERSION {version}</div>
+        {/* PREVIEW */}
+        <div style={{ height: "28%", borderTop: "1px solid #222" }}>
+          <iframe
+            key={version}
+            src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
+            style={{ width: "100%", height: "100%", border: "none", background: "#fff" }}
+          />
         </div>
 
-        {/* ✅ NEW PLANNER PANEL (SAFE) */}
-        {plan.length > 0 && (
-          <div
-            style={{
-              height: 140,
-              overflow: "auto",
-              borderTop: "1px solid #222",
-              background: "#1a1a1a",
-              color: "#fff",
-              padding: 6,
-              flexShrink: 0,
-            }}
-          >
-            <div style={{ marginBottom: 4, fontWeight: "bold" }}>
-              PLAN FILES
-            </div>
-
-            {plan.map((f, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: 4,
-                  cursor: "pointer",
-                  background:
-                    selectedPlanFile === f ? "#333" : "transparent",
-                }}
-                onClick={() => {
-                  setSelectedPlanFile(f);
-                  runDiff(f);
-                }}
-              >
-                {f}
-              </div>
-            ))}
+        {/* REAL DIFF PANEL */}
+        <div style={{ height: "30%", borderTop: "1px solid #222", overflow: "auto", background: "#111" }}>
+          <div style={{ padding: "8px 10px", borderBottom: "1px solid #222", fontWeight: 700 }}>
+            Diff {draftPath ? `— ${draftPath}` : ""}
           </div>
-        )}
-
-        {/* DIFF */}
-        {diff && (
           <div
-            style={{
-              height: 220,
-              display: "flex",
-              borderTop: "1px solid #222",
-              flexShrink: 0,
-              minHeight: 0,
-            }}
-          >
-            <div
-              style={{
-                flex: 1,
-                background: "#111",
-                overflow: "auto",
-                padding: 6,
-                fontFamily: "monospace",
-                fontSize: 12,
-              }}
-            >
-              {diff.lines.map((l, i) => (
-                <div
-                  key={i}
-                  style={{
-                    color:
-                      l.type === "add"
-                        ? "#0f0"
-                        : l.type === "remove"
-                        ? "#ff6b6b"
-                        : "#aaa",
-                    background:
-                      l.type === "add"
-                        ? "rgba(0,255,0,0.1)"
-                        : l.type === "remove"
-                        ? "rgba(255,0,0,0.1)"
-                        : "transparent",
-                    padding: "2px 4px",
-                    whiteSpace: "pre-wrap",
-                  }}
-                >
-                  {l.type === "add" ? "+ " : l.type === "remove" ? "- " : "  "}
-                  {l.line}
-                </div>
-              ))}
-            </div>
-
-            <div
-              style={{
-                width: 120,
-                borderLeft: "1px solid #222",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#111",
-                flexShrink: 0,
-              }}
-            >
-              <button
-                onClick={applyDiff}
-                style={{
-                  background: "#ff6b00",
-                  color: "#fff",
-                  border: "none",
-                  padding: "8px 14px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                APPLY
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* JOURNAL */}
-        <div
-          style={{
-            height: 150,
-            overflow: "auto",
-            background: "#000",
-            color: "#0f0",
-            fontSize: 12,
-            padding: 6,
-            borderTop: "1px solid #222",
-            flexShrink: 0,
-          }}
-        >
-          {journal.map((e, i) => (
-            <div key={i}>
-              {new Date(e.t).toLocaleTimeString()} → {e.op} → {e.path}
-            </div>
-          ))}
+            dangerouslySetInnerHTML={{ __html: diffHtml }}
+          />
         </div>
       </div>
 
-      {/* PREVIEW */}
-      <div
-        style={{
-          width: 600,
-          borderLeft: "1px solid #222",
-          background: "#fff",
-          flexShrink: 0,
-        }}
-      >
-        <iframe
-          src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
+      {/* AI PANEL */}
+      <div style={{ width: 320, borderLeft: "1px solid #222", padding: 12 }}>
+        <div style={{ fontWeight: 700, marginBottom: 10 }}>AI Panel</div>
+
+        <textarea
+          value={aiInput}
+          onChange={(e) => setAiInput(e.target.value)}
+          placeholder="Describe the change you want..."
           style={{
             width: "100%",
-            height: "100%",
-            border: "none",
+            height: 120,
+            marginBottom: 10,
+            background: "#111",
+            color: "#fff",
+            border: "1px solid #333",
+            padding: 10,
           }}
         />
+
+        <button onClick={runAI} disabled={isRunningAi} style={{ width: "100%", marginBottom: 10 }}>
+          {isRunningAi ? "RUNNING..." : "RUN AI DRAFT"}
+        </button>
+
+        <div style={{ fontSize: 12, color: "#aaa", lineHeight: 1.5 }}>
+          <div>Draft target: {draftPath || "none"}</div>
+          <div>Draft loaded: {draftCode ? "yes" : "no"}</div>
+          <div>Apply only after reviewing the diff panel.</div>
+        </div>
       </div>
     </div>
   );

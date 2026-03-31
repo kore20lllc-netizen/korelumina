@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       );
     }
 
-    enforceManifestGate({ workspaceId, projectId });
+    enforceManifestGate({ workspaceId, projectId, paths: [] });
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {

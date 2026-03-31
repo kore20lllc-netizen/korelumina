@@ -1,14 +1,9 @@
-import { NextRequest, NextResponse } from "next/server"
-import fs from "fs/promises"
-import path from "path"
+import fs from "fs";
+import path from "path";
 
-export async function GET(req: NextRequest){
-
-  const projectId = req.nextUrl.searchParams.get("projectId")
-
-  if(!projectId){
-    return NextResponse.json({ ok:false })
-  }
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const projectId = url.searchParams.get("projectId") || "demo-project";
 
   const root = path.join(
     process.cwd(),
@@ -16,26 +11,36 @@ export async function GET(req: NextRequest){
     "workspaces",
     "default",
     "projects",
-    projectId,
-    "app"
-  )
+    projectId
+  );
 
-  try{
+  function walk(dir: string, base = ""): string[] {
+    let results: string[] = [];
 
-    const files = await fs.readdir(root)
+    if (!fs.existsSync(dir)) return [];
 
-    return NextResponse.json({
-      ok:true,
-      files
-    })
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  }catch{
+    for (const entry of entries) {
+      if (entry.name === ".git") continue;
 
-    return NextResponse.json({
-      ok:true,
-      files:[]
-    })
+      const full = path.join(dir, entry.name);
+      const rel = path.join(base, entry.name);
 
+      if (entry.isDirectory()) {
+        results = results.concat(walk(full, rel));
+      } else {
+        results.push(rel.replace(/\\/g, "/"));
+      }
+    }
+
+    return results;
   }
 
+  const files = walk(root);
+
+  return Response.json({
+    ok: true,
+    files,
+  });
 }
