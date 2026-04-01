@@ -13,6 +13,10 @@ export default function BuilderInner({ projectId }: Props) {
   const [content, setContent] = useState<string>("");
   const [version, setVersion] = useState(0);
 
+  const [prompt, setPrompt] = useState("");
+  const [drafts, setDrafts] = useState<any[]>([]);
+  const [plan, setPlan] = useState<string[]>([]);
+
   // LOAD FILE LIST
   useEffect(() => {
     async function loadFiles() {
@@ -72,6 +76,39 @@ export default function BuilderInner({ projectId }: Props) {
 
     // force preview refresh
     setVersion((v) => v + 1);
+  }
+
+  async function runAI() {
+    if (!prompt.trim()) return;
+
+    const res = await fetch("/api/ai/orchestrate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        projectId,
+        prompt,
+      }),
+    });
+
+    const text = await res.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.error("Invalid AI response:", text);
+      return;
+    }
+
+    if (!data?.ok) {
+      console.error("AI error:", data);
+      return;
+    }
+
+    setPlan(data.files || []);
+    setDrafts(data.drafts || []);
   }
 
   function getLanguage(file: string | null) {
@@ -157,6 +194,33 @@ export default function BuilderInner({ projectId }: Props) {
       {/* AI PANEL */}
       <div style={{ width: 300, borderLeft: "1px solid #222", padding: 10 }}>
         <div style={{ fontWeight: 700, color: "#fff" }}>AI Panel</div>
+
+        <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Describe what to build..."
+          style={{ width: "100%", height: 80, marginTop: 10 }}
+        />
+
+        <button onClick={runAI} style={{ marginTop: 10 }}>
+          Run AI
+        </button>
+
+        <div style={{ marginTop: 10 }}>
+          {plan.map((f) => (
+            <div key={f} style={{ fontSize: 12 }}>
+              {f}
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 10 }}>
+          {drafts.map((d, i) => (
+            <pre key={i} style={{ fontSize: 10 }}>
+              {JSON.stringify(d, null, 2)}
+            </pre>
+          ))}
+        </div>
         <div style={{ color: "#888", marginTop: 8 }}>Ready</div>
       </div>
     </div>
