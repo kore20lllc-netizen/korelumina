@@ -7,7 +7,7 @@ type RouteContext = {
 };
 
 function getJobFile(jobId: string) {
-  return path.join(process.cwd(), "runtime", "jobs", `${jobId}.json`);
+  return path.join(process.env.KORE_RUNTIME_ROOT!, "jobs", `${jobId}.json`);
 }
 
 export async function GET(_req: Request, context: RouteContext) {

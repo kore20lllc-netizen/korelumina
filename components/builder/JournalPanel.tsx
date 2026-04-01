@@ -7,6 +7,7 @@ export default function JournalPanel({ projectId }:{ projectId:string }){
 
   const [entries,setEntries] = useState<any[]>([])
 
+<<<<<<< HEAD
   async function load(){
     const r = await fetch(
       `/api/dev/journal?projectId=${projectId}`
@@ -18,6 +19,34 @@ export default function JournalPanel({ projectId }:{ projectId:string }){
   useEffect(()=>{ load() },[])
 
   useVersionStream(projectId,load)
+=======
+  useEffect(()=>{
+
+    async function load(){
+
+      const r = await fetch(
+        "/api/dev/journal?projectId=" +
+        projectId +
+        "&r=" +
+        refreshTick,
+        { cache:"no-store" }
+      );
+
+      const j = await r.json();
+
+      const arr =
+        Array.isArray(j?.entries)
+          ? [...j.entries]   // ⭐ FORCE NEW REFERENCE
+          : [];
+
+      setRows(arr);
+
+    }
+
+    load();
+
+  },[projectId,refreshTick]);
+>>>>>>> origin/main
 
   return (
     <div style={{padding:12}}>
@@ -29,6 +58,22 @@ export default function JournalPanel({ projectId }:{ projectId:string }){
           </div>
         ))}
       </div>
+<<<<<<< HEAD
+=======
+
+      {rows.map((r,i)=>(
+        <div
+          key={i}
+          style={{
+            fontSize:12,
+            padding:6,
+            borderBottom:"1px solid #eee"
+          }}
+        >
+          {r.type} → {r.path || r.file}
+        </div>
+      ))}
+>>>>>>> origin/main
     </div>
   )
 

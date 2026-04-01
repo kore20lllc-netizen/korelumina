@@ -141,7 +141,7 @@ export default function DashboardPage() {
 
               <div className="flex gap-2 mt-2">
                 <Link
-                  href={`/projects/${projectId}/builder`}
+                  href={`/studio-projects/${projectId}/builder`}
                   className="text-sm bg-black text-white px-3 py-1 rounded"
                 >
                   Builder

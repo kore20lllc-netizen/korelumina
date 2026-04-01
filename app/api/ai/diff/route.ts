@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
 import { generateDiffPreview, type DiffFile } from "@/lib/ai/diff";
+=======
+import { NextRequest, NextResponse } from "next/server"
+import fs from "fs/promises"
+import path from "path"
+import { runtimeRoot } from "@/runtime/root"
+>>>>>>> origin/main
 
-export const dynamic = "force-dynamic";
+export async function POST(req:NextRequest){
 
+<<<<<<< HEAD
 type Body = {
   workspaceId?: string;
   projectId?: string;
@@ -36,11 +44,15 @@ function validateFiles(files: any): DiffFile[] {
 
   return out;
 }
+=======
+  const body = await req.json()
 
-export async function POST(req: Request) {
-  try {
-    const body = (await req.json()) as Body;
+  const { projectId, draftId } = body
+>>>>>>> origin/main
 
+  const ROOT = runtimeRoot()
+
+<<<<<<< HEAD
     const workspaceId = body?.workspaceId;
     const projectId = body?.projectId;
     const files = validateFiles(body?.files);
@@ -76,5 +88,27 @@ export async function POST(req: Request) {
       { error: err?.message ?? "Diff error" },
       { status: 500 }
     );
+=======
+  const draftDir = path.join(
+    ROOT,
+    "drafts",
+    projectId,
+    draftId
+  )
+
+  try{
+    await fs.access(draftDir)
+  }catch{
+    return NextResponse.json({ ok:false, error:"draft not found in diff" })
+>>>>>>> origin/main
   }
+
+  return NextResponse.json({
+    ok:true,
+    diffs:[
+      { path:"app/components/GeneratedNote.tsx", patch:"mock" },
+      { path:"app/page.tsx", patch:"mock" }
+    ]
+  })
+
 }

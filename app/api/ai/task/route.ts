@@ -9,6 +9,7 @@ import { enforceManifestGate } from "@/lib/manifest-enforce";
 
 export const dynamic = "force-dynamic";
 
+<<<<<<< HEAD
 type Body = {
   workspaceId?: string;
   projectId?: string;
@@ -17,6 +18,17 @@ type Body = {
   spec?: string;
   files?: ApplyFileChange[];
 };
+=======
+function resolveProjectRoot(workspaceId: string, projectId: string) {
+  return path.join(
+    process.env.KORE_RUNTIME_ROOT!,
+    "workspaces",
+    workspaceId,
+    "projects",
+    projectId
+  );
+}
+>>>>>>> origin/main
 
 function validateFiles(input: unknown): ApplyFileChange[] {
   const out: ApplyFileChange[] = [];

@@ -1,23 +1,20 @@
-import fs from "fs";
-import path from "path";
-import { bootstrapProject } from "./bootstrapProject";
+import fs from "fs/promises"
+import path from "path"
+import { runtimeRoot } from "../root"
 
-export function ensureProjectRoot(projectId:string){
+export async function ensureProjectRoot(projectId:string){
 
-  const root = path.join(
-    process.cwd(),
-    "runtime",
+  const root = runtimeRoot()
+
+  const projectRoot = path.join(
+    root,
     "workspaces",
     "default",
     "projects",
     projectId
-  );
+  )
 
-  if(!fs.existsSync(root)){
-    fs.mkdirSync(root,{ recursive:true });
-  }
+  await fs.mkdir(projectRoot,{ recursive:true })
 
-  bootstrapProject(root);
-
-  return root;
+  return projectRoot
 }

@@ -1,74 +1,72 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 export default function FileTree({
   projectId,
+  refreshTick,
   onSelect
 }:{
   projectId:string
+  refreshTick:number
   onSelect:(p:string)=>void
 }){
 
   const [files,setFiles] = useState<string[]>([])
 
-  async function load(){
-    try{
+  useEffect(()=>{
+
+  console.log("🔥 FILETREE LOAD", projectId, refreshTick)
+
+    let cancelled = false
+
+    async function load(){
+
       const r = await fetch(
-        "/api/dev/files?projectId="+projectId,
+        "/api/dev/files/list?projectId=" + projectId,
         { cache:"no-store" }
       )
 
       const j = await r.json()
 
-      console.log("FILETREE API RAW:", j)
+      if(!cancelled){
+        setFiles(j.files || [])
+      }
 
-      const next = Array.isArray(j?.files) ? j.files : []
-
-      console.log("FILETREE NEXT:", next)
-
-      setFiles(next)
-    }catch(e){
-      console.error("FILETREE LOAD FAILED", e)
-      setFiles([])
     }
-  }
 
-  useEffect(()=>{
     load()
 
-    const refresh = ()=>{
-      console.log("FILETREE REFRESH EVENT")
-      load()
-    }
-
-    window.addEventListener("korelumina:fs-change", refresh)
-
     return ()=>{
-      window.removeEventListener("korelumina:fs-change", refresh)
+      cancelled = true
     }
-  },[projectId])
+
+  },[projectId,refreshTick])
 
   return (
-    <div style={{overflow:"auto",height:"100%",padding:8}}>
-      <div style={{fontWeight:700,marginBottom:8}}>
-        Files ({files.length})
-      </div>
+    <div style={{width:220,borderRight:"1px solid #ddd",padding:8}}>
+      <div style={{fontWeight:600,marginBottom:8}}>Files</div>
 
-      {files.map(f=>(
-        <div
-          key={f}
-          onClick={()=>onSelect(f)}
-          style={{
-            cursor:"pointer",
-            padding:6,
-            fontFamily:"monospace",
-            borderBottom:"1px solid #eee"
-          }}
-        >
-          {f}
-        </div>
-      ))}
+      {files.length === 0 ? (
+        <div style={{opacity:0.6}}>No files</div>
+      ) : (
+        files.map(f=>(
+          <div
+            key={f}
+            onClick={()=>onSelect(f)}
+            style={{
+              padding:"6px 8px",
+              cursor:"pointer",
+              borderBottom:"1px solid #eee",
+              fontFamily:"monospace",
+              fontSize:13
+            }}
+          >
+            {f}
+          </div>
+        ))
+      )}
     </div>
   )
+
 }

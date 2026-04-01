@@ -1,10 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.externals = config.externals || []
-    config.externals.push({
-      esbuild: "commonjs esbuild"
-    })
+  webpack: (config, { dev }) => {
+
+    if (dev) {
+      config.watchOptions = {
+        ignored: [
+          "**/runtime/**",
+          "**/workspaces/**",
+          "**/projects/**"
+        ]
+      }
+    }
+
     return config
   }
 }

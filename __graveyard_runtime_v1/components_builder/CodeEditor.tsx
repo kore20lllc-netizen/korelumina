@@ -1,43 +1,74 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Editor from "@monaco-editor/react";
+import { useEffect, useState } from "react"
+import { useRefreshBus } from "@/app/(studio)/studio-projects/[projectId]/builder/refreshBus"
 
-export default function CodeEditor({projectId,path}:{projectId:string,path:string}){
+export default function CodeEditor({
+  projectId,
+  path,
+  onSaved
+}:{
+  projectId:string
+  path:string
+  onSaved:()=>void
+}){
 
-  const [code,setCode] = useState("")
+  const [content,setContent] = useState("")
+  const [version,setVersion] = useState(0)
+
+  useRefreshBus(()=>{
+    setVersion(v=>v+1)
+  })
 
   useEffect(()=>{
+
     async function load(){
-      const r = await fetch(`/api/dev/files/read?projectId=${projectId}&path=${path}`,{cache:"no-store"})
+
+      const r = await fetch(
+        "/api/dev/files/read?projectId=" + projectId + "&path=" + path,
+        { cache:"no-store" }
+      )
+
       const j = await r.json()
-      setCode(j.content || "")
+      setContent(j.content || "")
     }
+
     load()
-  },[projectId,path])
+
+  },[projectId,path,version])
 
   async function save(){
+
     await fetch("/api/dev/files/write",{
       method:"POST",
-      headers:{ "Content-Type":"application/json"},
-      body:JSON.stringify({
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({
         projectId,
         path,
-        content:code
+        content
       })
     })
+
+    onSaved()
   }
 
   return (
-    <div style={{height:"100%"}}>
-      <Editor
-        height="90%"
-        value={code}
-        onChange={(v)=>setCode(v||"")}
-        defaultLanguage="typescript"
-        theme="vs-dark"
+    <div style={{height:"100%",display:"flex",flexDirection:"column"}}>
+
+      <textarea
+        value={content}
+        onChange={e=>setContent(e.target.value)}
+        style={{flex:1,width:"100%",fontFamily:"monospace"}}
       />
-      <button onClick={save}>Save</button>
+
+      <button
+        onClick={save}
+        style={{height:40}}
+      >
+        Save
+      </button>
+
     </div>
   )
+
 }
