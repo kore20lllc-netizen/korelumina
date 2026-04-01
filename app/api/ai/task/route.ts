@@ -1,13 +1,24 @@
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
-import path from "path";
 import fs from "fs";
+import { NextResponse } from "next/server";
 
+import { appendJournalEvent } from "@/lib/ai/journal";
+// removed invalid imports (applyWithGuard, resolveProjectRoot)
+import { runRepairLoop } from "@/lib/ai/repair-loop";
+import type { ApplyFileChange } from "@/lib/ai/apply";
 import { enforceManifestGate } from "@/lib/manifest-enforce";
-import { runTaskOrchestrator } from "@/lib/ai/orchestrator";
 
 export const dynamic = "force-dynamic";
 
+<<<<<<< HEAD
+type Body = {
+  workspaceId?: string;
+  projectId?: string;
+  mode?: "draft" | "apply" | "apply_repair";
+  maxAttempts?: number;
+  spec?: string;
+  files?: ApplyFileChange[];
+};
+=======
 function resolveProjectRoot(workspaceId: string, projectId: string) {
   return path.join(
     process.env.KORE_RUNTIME_ROOT!,
@@ -17,103 +28,48 @@ function resolveProjectRoot(workspaceId: string, projectId: string) {
     projectId
   );
 }
+>>>>>>> origin/main
 
-function cleanPath(p: string) {
-  let s = String(p).trim();
-  s = s.replace(/`+/g, "");
-  s = s.replace(/^FILE:/, "").trim();
-  s = s.replace(/^\/+/, "");
-  s = s.replace(/\\/g, "/");
+function validateFiles(input: unknown): ApplyFileChange[] {
+  const out: ApplyFileChange[] = [];
+  if (!Array.isArray(input)) return out;
 
-  if (!s.startsWith("src/")) {
-    throw new Error(`Task path must start with src/: ${p}`);
+  for (const f of input) {
+    const p = (f as any)?.path;
+    const c = (f as any)?.content;
+
+    if (typeof p === "string" && typeof c === "string") {
+      out.push({ path: p, content: c });
+    }
   }
 
-  return s;
-}
-
-function parseFileBlocks(text: string) {
-  const blocks = text.split("FILE:");
-  const files: { path: string; content: string }[] = [];
-
-  for (const block of blocks) {
-    const trimmed = block.trim();
-    if (!trimmed) continue;
-
-    const firstLineEnd = trimmed.indexOf("\n");
-    if (firstLineEnd === -1) continue;
-
-    const rawPath = trimmed.slice(0, firstLineEnd).trim();
-    const content = trimmed.slice(firstLineEnd + 1);
-
-    const filePath = cleanPath(rawPath);
-
-    files.push({
-      path: filePath,
-      content: content.trim(),
-    });
-  }
-
-  return files;
+  return out;
 }
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = (await req.json().catch(() => null)) as Body | null;
 
-    const workspaceId = body?.workspaceId;
-    const projectId = body?.projectId;
-    const spec = body?.spec;
-    const mode = body?.mode ?? "draft";
+    const workspaceId = body?.workspaceId || "";
+    const projectId = body?.projectId || "";
+    const mode = body?.mode ?? "apply";
+    const maxAttempts = Math.max(
+      1,
+      Math.min(Number(body?.maxAttempts ?? 2), 5)
+    );
 
-    if (!workspaceId || !projectId || !spec) {
+    if (!workspaceId || !projectId) {
       return NextResponse.json(
-        { error: "workspaceId, projectId, spec required" },
+        { error: "workspaceId and projectId are required" },
         { status: 400 }
       );
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
+    const files = validateFiles(body?.files);
+
+    if (files.length === 0) {
       return NextResponse.json(
-        { error: "Missing OPENAI_API_KEY" },
-        { status: 500 }
-      );
-    }
-
-    const client = new OpenAI({ apiKey });
-
-    const completion = await client.responses.create({
-      model: "gpt-4.1-mini",
-      input: `
-You are a code generator.
-
-Respond ONLY using FILE blocks.
-
-Format:
-
-FILE: src/path/to/file.ts
-<file contents>
-
-Rules:
-- Only FILE blocks
-- No explanations
-- Only write inside src/
-
-Task:
-${spec}
-
-Project Files:
-[]
-`
-    });
-
-    const output = completion.output_text ?? "";
-    const files = parseFileBlocks(output);
-
-    if (!files.length) {
-      return NextResponse.json(
-        { error: "No FILE blocks returned" },
+        { error: "files[] are required" },
         { status: 400 }
       );
     }
@@ -124,7 +80,23 @@ Project Files:
       paths: files.map((f) => f.path),
     });
 
+    appendJournalEvent({
+      t: Date.now(),
+      kind: "ai.task.request",
+      workspaceId,
+      projectId,
+      payload: { mode, maxAttempts, fileCount: files.length },
+    });
+
     if (mode === "draft") {
+      appendJournalEvent({
+        t: Date.now(),
+        kind: "ai.task.generated",
+        workspaceId,
+        projectId,
+        payload: { fileCount: files.length },
+      });
+
       return NextResponse.json({
         ok: true,
         mode,
@@ -132,8 +104,14 @@ Project Files:
       });
     }
 
-    const projectRoot = resolveProjectRoot(workspaceId, projectId);
-
+    const projectRoot = require("path").join(
+  process.cwd(),
+  "runtime",
+  "workspaces",
+  workspaceId,
+  "projects",
+  projectId
+);
 
     if (!fs.existsSync(projectRoot)) {
       return NextResponse.json(
@@ -142,19 +120,52 @@ Project Files:
       );
     }
 
-    const result = await runTaskOrchestrator({
+    const applied = files.map((f: any) => {
+  const fullPath = require("path").join(projectRoot, f.path);
+  require("fs").mkdirSync(require("path").dirname(fullPath), { recursive: true });
+  require("fs").writeFileSync(fullPath, f.content || "", "utf8");
+  return f.path;
+});
+
+    appendJournalEvent({
+      t: Date.now(),
+      kind: "ai.task.applied",
       workspaceId,
       projectId,
-      files,
-      projectRoot,
+      payload: applied,
     });
 
-    return NextResponse.json({
-  ...result,
-  ok: true,
-  mode: "orchestrated",
-  });
+    if (mode === "apply_repair") {
+      const repaired = await runRepairLoop({
+        workspaceId,
+        projectId,
+        maxAttempts,
+        files,
+      } as any);
 
+      appendJournalEvent({
+        t: Date.now(),
+        kind: "ai.task.repair",
+        workspaceId,
+        projectId,
+        payload: repaired,
+      });
+
+      return NextResponse.json({
+        ok: true,
+        mode,
+        files,
+        applied,
+        repaired,
+      });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      mode,
+      files,
+      applied,
+    });
   } catch (err: any) {
     return NextResponse.json(
       { error: err?.message ?? "Task failed" },

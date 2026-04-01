@@ -1,17 +1,25 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import useVersionStream from "@/hooks/useVersionStream"
 
-export default function JournalPanel({
-  projectId,
-  refreshTick
-}:{
-  projectId:string
-  refreshTick:number
-}){
+export default function JournalPanel({ projectId }:{ projectId:string }){
 
-  const [rows,setRows] = useState<any[]>([]);
+  const [entries,setEntries] = useState<any[]>([])
 
+<<<<<<< HEAD
+  async function load(){
+    const r = await fetch(
+      `/api/dev/journal?projectId=${projectId}`
+    )
+    const j = await r.json()
+    setEntries(j.entries || [])
+  }
+
+  useEffect(()=>{ load() },[])
+
+  useVersionStream(projectId,load)
+=======
   useEffect(()=>{
 
     async function load(){
@@ -38,12 +46,20 @@ export default function JournalPanel({
     load();
 
   },[projectId,refreshTick]);
+>>>>>>> origin/main
 
   return (
-    <div style={{overflow:"auto",height:"100%"}}>
-      <div style={{fontWeight:700,padding:8}}>
-        Journal ({rows.length})
+    <div style={{padding:12}}>
+      <b>Journal</b>
+      <div style={{marginTop:8}}>
+        {entries.map((e,i)=>(
+          <div key={i} style={{fontSize:12}}>
+            {e.type} → {e.path}
+          </div>
+        ))}
       </div>
+<<<<<<< HEAD
+=======
 
       {rows.map((r,i)=>(
         <div
@@ -57,6 +73,8 @@ export default function JournalPanel({
           {r.type} → {r.path || r.file}
         </div>
       ))}
+>>>>>>> origin/main
     </div>
-  );
+  )
+
 }

@@ -1,39 +1,104 @@
-import path from "path";
-import fs from "fs";
 import { NextResponse } from "next/server";
-import { copyTemplate } from "@/lib/ai/template-copy";
+import OpenAI from "openai";
+import path from "path";
+import { enforceManifestGate } from "@/lib/manifest-enforce";
+import { applyWithGuard } from "@/lib/ai/apply";
 
-export async function POST(req:Request){
+export const dynamic = "force-dynamic";
 
-  const body = await req.json();
-  const { workspaceId="default", projectId } = body;
-
-  if(!projectId){
-    return NextResponse.json({error:"missing projectId"},{status:400});
-  }
-
-  const projectRoot = path.join(
+function resolveProjectRoot(workspaceId: string, projectId: string) {
+  return path.join(
     process.cwd(),
-    "runtime/workspaces",
+    "runtime",
+    "workspaces",
     workspaceId,
     "projects",
     projectId
   );
+}
 
-  const templateRoot = path.join(
-    process.cwd(),
-    "templates",
-    "next-saas"
-  );
+export async function POST(req: Request) {
+  try {
+    const body = await req.json().catch(() => null);
 
-  if(!fs.existsSync(projectRoot)){
-    fs.mkdirSync(projectRoot,{recursive:true});
+    const workspaceId = body?.workspaceId as string | undefined;
+    const projectId = body?.projectId as string | undefined;
+    const spec = body?.spec as string | undefined;
+
+    if (!workspaceId || !projectId || !spec) {
+      return NextResponse.json(
+        { error: "workspaceId, projectId and spec are required" },
+        { status: 400 }
+      );
+    }
+
+    enforceManifestGate({ workspaceId, projectId, paths: [] });
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY not configured" },
+        { status: 500 }
+      );
+    }
+
+    const client = new OpenAI({ apiKey });
+
+    const completion = await client.responses.create({
+      model: "gpt-4.1-mini",
+      input: `
+You are a code generator.
+
+Generate FILE blocks only.
+
+Rules:
+- Only write inside src/
+- Never write README.md
+- Never write package.json
+- Never write root files
+
+Task:
+${spec}
+`
+    });
+
+    const output = completion.output_text ?? "";
+
+    const files = parseFileBlocks(output);
+
+    const projectRoot = resolveProjectRoot(workspaceId, projectId);
+
+    const applied = await applyWithGuard(projectRoot, files);
+
+    return NextResponse.json({
+      ok: true,
+      applied
+    });
+
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message ?? "Scaffold failed" },
+      { status: 500 }
+    );
+  }
+}
+
+function parseFileBlocks(text: string) {
+  const blocks = text.split("FILE:");
+  const files: { path: string; content: string }[] = [];
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    const firstLineEnd = trimmed.indexOf("\n");
+    if (firstLineEnd === -1) continue;
+
+    const path = trimmed.slice(0, firstLineEnd).trim();
+    const content = trimmed.slice(firstLineEnd + 1);
+
+    files.push({ path, content });
   }
 
-  copyTemplate(templateRoot,projectRoot);
-
-  return NextResponse.json({
-    ok:true,
-    projectId
-  });
+  return files;
 }

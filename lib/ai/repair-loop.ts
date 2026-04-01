@@ -1,9 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { applyWithGuard } from "@/lib/ai/apply-guard";
+import { applyWithGuard } from "@/lib/ai/apply";
 import { runCompileGuard } from "@/lib/ai/compile-guard";
-
-const MAX_REPAIR_ATTEMPTS = 3;
 
 export type RepairRequest = {
   workspaceId: string;
@@ -41,15 +39,13 @@ export async function runRepairLoop(
   let attempt = 0;
   let lastError: string | undefined;
 
-  for (let attempt = 0; attempt < MAX_REPAIR_ATTEMPTS; attempt++) {
-
   while (attempt < maxAttempts) {
     attempt++;
 
     const applied = await applyWithGuard(projectRoot, files);
 
     if (!applied.ok) {
-      lastError = "apply failed and was rolled back";
+      lastError = applied.error;
       continue;
     }
 
@@ -64,8 +60,6 @@ export async function runRepairLoop(
 
     lastError = compile.output ?? "Compile failed";
   }
-  }
-
 
   return {
     ok: false,
