@@ -33,7 +33,7 @@ export default function BuilderInner({ projectId }: Props) {
 
     async function loadContent() {
       const res = await fetch(
-        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile)}`
+        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile as string)}`
       );
 
       const text = await res.text();
