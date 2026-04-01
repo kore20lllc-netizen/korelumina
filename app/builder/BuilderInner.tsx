@@ -13,33 +13,30 @@ export default function BuilderInner({ projectId }: Props) {
   const [content, setContent] = useState<string>("");
   const [version, setVersion] = useState(0);
 
-  const [spec: prompt, setPrompt] = useState("");
-  const [drafts, setDrafts] = useState<any[]>([]);
+  const [prompt, setPrompt] = useState("");
   const [plan, setPlan] = useState<string[]>([]);
+  const [drafts, setDrafts] = useState<any[]>([]);
 
-  // LOAD FILE LIST
+  // LOAD FILES
   useEffect(() => {
     async function loadFiles() {
       const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
       const data = await res.json();
-
       const list = data.files || [];
       setFiles(list);
       setActiveFile(list[0] || null);
     }
-
     loadFiles();
   }, [projectId]);
 
-  // LOAD FILE CONTENT
+  // LOAD CONTENT
   useEffect(() => {
     if (!activeFile) return;
 
     async function loadContent() {
       const res = await fetch(
-        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile as string)}`
+        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile)}`
       );
-
       const text = await res.text();
 
       try {
@@ -53,11 +50,11 @@ export default function BuilderInner({ projectId }: Props) {
     loadContent();
   }, [activeFile, projectId]);
 
-  // SAVE FILE
+  // SAVE
   async function handleSave() {
     if (!activeFile) return;
 
-    const res = await fetch("/api/dev/fs/write", {
+    await fetch("/api/dev/fs/write", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,18 +66,30 @@ export default function BuilderInner({ projectId }: Props) {
       }),
     });
 
-    if (!res.ok) {
-      console.error("Save failed");
-      return;
-    }
-
-    // force preview refresh
     setVersion((v) => v + 1);
   }
 
-  async function runAI() {
-    if (!prompt.trim()) return;
+  // APPLY
+  async function applyDraft(draft: any) {
+    await fetch("/api/dev/fs/write", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        projectId,
+        file: draft.file,
+        content: draft.content,
+      }),
+    });
 
+    setVersion((v) => v + 1);
+    setActiveFile(draft.file);
+    setContent(draft.content);
+  }
+
+  // AI
+  async function runAI() {
     const res = await fetch("/api/ai/orchestrate", {
       method: "POST",
       headers: {
@@ -92,137 +101,156 @@ export default function BuilderInner({ projectId }: Props) {
       }),
     });
 
-    const text = await res.text();
-
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      console.error("Invalid AI response:", text);
-      return;
-    }
-
-    if (!data?.ok) {
-      console.error("AI error:", data);
-      return;
-    }
-
+    const data = await res.json();
     setPlan(data.files || []);
     setDrafts(data.drafts || []);
   }
 
   function getLanguage(file: string | null) {
     if (!file) return "plaintext";
-
     if (file.endsWith(".ts") || file.endsWith(".tsx")) return "typescript";
-    if (file.endsWith(".js") || file.endsWith(".jsx")) return "javascript";
+    if (file.endsWith(".js")) return "javascript";
     if (file.endsWith(".json")) return "json";
-    if (file.endsWith(".css")) return "css";
-    if (file.endsWith(".html")) return "html";
-    if (file.endsWith(".md")) return "markdown";
-    if (file.endsWith(".yml") || file.endsWith(".yaml")) return "yaml";
-
     return "plaintext";
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", background: "#0b0b0b" }}>
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        background: "#0a0a0a",
+        color: "#e5e5e5"
+      }}
+    >
       
       {/* FILE TREE */}
-      <div style={{ width: 250, borderRight: "1px solid #222", padding: 10, overflow: "auto" }}>
-        <div style={{ fontWeight: 700, marginBottom: 10, color: "#fff" }}>Files</div>
-
-        {files.map((file) => (
-          <div
-            key={file}
-            onClick={() => setActiveFile(file)}
-            style={{
-              padding: "8px 10px",
-              cursor: "pointer",
-              color: activeFile === file ? "#fff" : "#ccc",
-              background: activeFile === file ? "#161616" : "transparent",
-              borderRadius: 6,
-              marginBottom: 4,
-            }}
-          >
-            {file}
+      <div
+        style={{
+          width: 250,
+          borderRight: "1px solid #222",
+          padding: 10,
+          background: "#0f0f0f",
+          overflow: "auto",
+          flexShrink: 0
+        }}
+      >
+        {files.map((f) => (
+          <div key={f} onClick={() => setActiveFile(f)} style={{ cursor: "pointer" }}>
+            {f}
           </div>
         ))}
       </div>
 
-      {/* EDITOR + PREVIEW */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        
-        {/* TOOLBAR */}
-        <div style={{ padding: 8, borderBottom: "1px solid #222" }}>
-          <button
-            onClick={handleSave}
-            style={{
-              background: "#2563eb",
-              color: "#fff",
-              border: "none",
-              padding: "6px 12px",
-              borderRadius: 6,
-              cursor: "pointer",
-              fontWeight: 600
-            }}
-          >
-            Save
-          </button>
-        </div>
+      {/* EDITOR */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          background: "#0a0a0a"
+        }}
+      >
+        <button onClick={handleSave}>Save</button>
 
-        {/* MONACO EDITOR */}
-        <div style={{ flex: 1 }}>
-          <Editor
-            height="100%"
-            theme="vs-dark"
-            language={getLanguage(activeFile)}
-            value={content}
-            onChange={(value) => setContent(value || "")}
-          />
-        </div>
+        <Editor
+          height="50%"
+          theme="vs-dark"
+          language={getLanguage(activeFile)}
+          value={content}
+          onChange={(v) => setContent(v || "")}
+        />
 
-        {/* PREVIEW */}
-        <div style={{ flex: 1, background: "#fff" }}>
-          <iframe
-            src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
-            style={{ width: "100%", height: "100%", border: "none" }}
-          />
-        </div>
+        <iframe
+          src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
+          style={{ flex: 1, background: "#fff" }}
+        />
       </div>
 
       {/* AI PANEL */}
-      <div style={{ width: 300, borderLeft: "1px solid #222", padding: 10 }}>
-        <div style={{ fontWeight: 700, color: "#fff" }}>AI Panel</div>
-
+      <div
+        style={{
+          width: 300,
+          padding: 10,
+          background: "#0f0f0f",
+          borderLeft: "1px solid #222"
+        }}
+      >
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Describe what to build..."
-          style={{ width: "100%", height: 80, marginTop: 10 }}
+          style={{ width: "100%", height: 80 }}
         />
 
-        <button onClick={runAI} style={{ marginTop: 10 }}>
-          Run AI
-        </button>
+        <button
+  onClick={runAI}
+  style={{
+    background: "#16a34a",
+    color: "#ffffff",
+    border: "none",
+    padding: "10px",
+    width: "100%",
+    borderRadius: 6,
+    fontWeight: 600,
+    cursor: "pointer",
+    marginTop: 8
+  }}
+>
+  Run AI
+</button>
 
-        <div style={{ marginTop: 10 }}>
+        <div>
           {plan.map((f) => (
-            <div key={f} style={{ fontSize: 12 }}>
-              {f}
-            </div>
+            <div key={f}>{f}</div>
           ))}
         </div>
 
-        <div style={{ marginTop: 10 }}>
-          {drafts.map((d, i) => (
-            <pre key={i} style={{ fontSize: 10 }}>
-              {JSON.stringify(d, null, 2)}
-            </pre>
-          ))}
-        </div>
-        <div style={{ color: "#888", marginTop: 8 }}>Ready</div>
+        {/* CLEAN DIFF VIEW */}
+        {drafts.map((d, i) => (
+          <div key={i} style={{ marginTop: 10 }}>
+            <button
+  onClick={() => applyDraft(d)}
+  style={{
+    background: "#f59e0b",
+    color: "#000",
+    border: "none",
+    padding: "6px 10px",
+    borderRadius: 4,
+    fontWeight: 600,
+    cursor: "pointer",
+    marginBottom: 6
+  }}
+>
+  Apply
+</button>
+
+            <div style={{ fontSize: 10 }}>
+              <div>Current:</div>
+              <pre style={{
+  background: "#111",
+  color: "#9ca3af",
+  padding: "8px",
+  borderRadius: 4,
+  overflow: "auto"
+}}>
+  {content}
+</pre>
+
+              <div>Proposed:</div>
+              <pre style={{
+  background: "#052e16",
+  color: "#bbf7d0",
+  padding: "8px",
+  borderRadius: 4,
+  overflow: "auto"
+}}>
+  {d.content}
+</pre>
+            </div>
+          </div>
+        ))}
       </div>
+
     </div>
   );
 }
