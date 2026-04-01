@@ -1,19 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config, { dev }) => {
-
-    if (dev) {
-      config.watchOptions = {
-        ignored: [
-          "**/runtime/**",
-          "**/workspaces/**",
-          "**/projects/**"
-        ]
-      }
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push("esbuild");
     }
+    return config;
+  },
+};
 
-    return config
-  }
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;
