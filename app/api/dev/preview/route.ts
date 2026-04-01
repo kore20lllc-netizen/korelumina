@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-import { build } from "esbuild";
 import { resolveProjectRoot } from "@/lib/runtime/guardrails";
 
 export const runtime = "nodejs";
@@ -29,7 +28,7 @@ export async function GET(req: NextRequest) {
 
   await fs.writeFile(entryFile, entry);
 
-  const result = await build({
+  const result = await (await import('esbuild')).build({
     entryPoints: [entryFile],
     bundle: true,
     write: false,
