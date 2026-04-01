@@ -1,19 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config, { dev }) => {
+  webpack: (config) => {
+    config.externals = config.externals || [];
+    config.externals.push({
+      esbuild: "commonjs esbuild",
+    });
+    return config;
+  },
+};
 
-    if (dev) {
-      config.watchOptions = {
-        ignored: [
-          "**/runtime/**",
-          "**/workspaces/**",
-          "**/projects/**"
-        ]
-      }
-    }
-
-    return config
-  }
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;
