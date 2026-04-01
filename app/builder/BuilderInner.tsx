@@ -13,7 +13,7 @@ export default function BuilderInner({ projectId }: Props) {
   const [content, setContent] = useState<string>("");
   const [version, setVersion] = useState(0);
 
-  const [prompt, setPrompt] = useState("");
+  const [spec: prompt, setPrompt] = useState("");
   const [drafts, setDrafts] = useState<any[]>([]);
   const [plan, setPlan] = useState<string[]>([]);
 
@@ -88,7 +88,7 @@ export default function BuilderInner({ projectId }: Props) {
       },
       body: JSON.stringify({
         projectId,
-        prompt,
+        spec: prompt,
       }),
     });
 
