@@ -1,159 +1,187 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-const modules = [
+const MODULES = [
   "builder-core",
   "ai-planner-diff",
   "repo-import",
   "runtime-preview",
   "production-hardening",
-] as const;
+];
 
-type ModuleName = (typeof modules)[number];
-type Status = "green" | "yellow" | "red";
-
-type DiffItem = {
+type Draft = {
   file: string;
-  oldCode: string;
-  newCode: string;
+  code: string;
+  approved?: boolean;
 };
 
-export default function MasterOSPage() {
+export default function MasterOS() {
   const [state, setState] = useState<any>({});
-  const [taskTitle, setTaskTitle] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
-  const [owner, setOwner] = useState<ModuleName>("builder-core");
-  const [selectedModule, setSelectedModule] = useState<ModuleName>("builder-core");
-  const [drafts, setDrafts] = useState<any[]>([]);
-  const [diffs, setDiffs] = useState<DiffItem[]>([]);
+  const [input, setInput] = useState("");
+  const [drafts, setDrafts] = useState<Draft[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
+  const [activeModule, setActiveModule] = useState("builder-core");
+  const [previewKey, setPreviewKey] = useState(0);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isApplying, setIsApplying] = useState(false);
+  const [refreshSpin, setRefreshSpin] = useState(false);
 
-  const logRef = useRef<HTMLDivElement>(null);
-
-  function addLog(msg: string) {
-    setLogs((prev) => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+  function log(msg: string) {
+    setLogs((p) => [...p, `[${new Date().toLocaleTimeString()}] ${msg}`]);
   }
 
-  function load() {
-    fetch("/api/master-os", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((d) => setState(d.state || {}))
-      .catch(() => setState({}));
+  async function load() {
+    setRefreshSpin(true);
+    try {
+      const res = await fetch("/api/master-os");
+      const data = await res.json();
+      setState(data.state || {});
+    } finally {
+      setTimeout(() => setRefreshSpin(false), 400);
+    }
   }
 
   useEffect(() => {
     load();
   }, []);
 
-  useEffect(() => {
-    if (logRef.current) {
-      logRef.current.scrollTop = logRef.current.scrollHeight;
-    }
-  }, [logs]);
+  async function saveSystem(owner: string) {
+    await fetch("/api/master-os", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        currentTask: {
+          title: input,
+          owner,
+        },
+      }),
+    });
 
-  async function getOriginalFile(file: string) {
-    const projectId = state.currentProject || "demo-project";
-    const res = await fetch(
-      `/api/dev/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
-      { cache: "no-store" }
-    );
-
-    if (!res.ok) {
-      return "// original not found";
-    }
-
-    const text = await res.text();
-    return text || "// original not found";
+    await load();
   }
 
-  async function generateDraft() {
-    addLog("Generating drafts...");
+  async function generatePlan() {
+    if (!input.trim() || isGenerating) return;
+
+    setIsGenerating(true);
+    log("Generating plan...");
 
     try {
       const res = await fetch("/api/ai/orchestrate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          projectId: state.currentProject || "demo-project",
-          prompt: taskTitle || taskDescription,
+          projectId: "repo-test",
+          prompt: input,
         }),
       });
 
       const data = await res.json();
-      const nextDrafts = data.drafts || [];
-      setDrafts(nextDrafts);
 
-      const enriched = await Promise.all(
-        nextDrafts.map(async (d: any) => ({
-          file: d.file,
-          newCode: d.code,
-          oldCode: await getOriginalFile(d.file),
-        }))
-      );
+      const owner = data.owner || "builder-core";
+      setActiveModule(owner);
+      await saveSystem(owner);
 
-      setDiffs(enriched);
-      addLog(`Drafts ready: ${enriched.length} file(s)`);
-    } catch (e) {
-      addLog("Draft generation failed");
-      console.error(e);
+      const next = (data.drafts || []).map((d: Draft) => ({
+        ...d,
+        approved: false,
+      }));
+
+      setDrafts(next);
+      log(`Plan ready: ${next.length} file(s)`);
+    } catch (error) {
+      console.error(error);
+      log("Plan generation failed");
+    } finally {
+      setIsGenerating(false);
     }
   }
 
-  async function applyChanges() {
-    if (!drafts.length) {
-      addLog("No drafts to apply");
+  function toggle(file: string) {
+    setDrafts((prev) =>
+      prev.map((d) => (d.file === file ? { ...d, approved: !d.approved } : d))
+    );
+  }
+
+  async function apply() {
+    if (isApplying) return;
+
+    const approved = drafts.filter((d) => d.approved);
+
+    if (!approved.length) {
+      log("No approved files");
       return;
     }
 
-    addLog("Applying changes...");
+    setIsApplying(true);
+    log("Applying...");
 
     try {
       await fetch("/api/ai/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          projectId: state.currentProject || "demo-project",
-          drafts,
+          projectId: "repo-test",
+          drafts: approved,
         }),
       });
 
-      addLog("Applied successfully");
+      log("Applied");
 
-      await fetch(
-        `/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project"}`
-      );
+      setPreviewKey(Date.now());
 
-      addLog("Preview refreshed");
-      setDrafts([]);
-      setDiffs([]);
-    } catch (e) {
-      addLog("Apply failed");
-      console.error(e);
+      log("Preview refreshed");
+    } catch (error) {
+      console.error(error);
+      log("Apply failed");
+    } finally {
+      setIsApplying(false);
     }
   }
 
-  function statusColor(s?: Status) {
-    if (s === "green") return "#22c55e";
-    if (s === "yellow") return "#eab308";
+  function statusColor(m: string) {
+    if (state.currentTask?.owner === m) return "#22c55e";
     return "#ef4444";
   }
 
   return (
     <div style={styles.container}>
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes pulseGlow {
+          0% { box-shadow: 0 0 0 rgba(59,130,246,0.0); }
+          50% { box-shadow: 0 0 18px rgba(59,130,246,0.30); }
+          100% { box-shadow: 0 0 0 rgba(59,130,246,0.0); }
+        }
+      `}</style>
+
       <div style={styles.header}>
         <div>
           <div style={styles.title}>KoreLumina Master OS</div>
-          <div style={styles.meta}>
-            {state.currentProject || "repo-test"} · {state.currentBranch || "main"} ·{" "}
-            {state.lastStableTag || "master-os-v1-stable"}
+          <div style={styles.sub}>
+            {state.currentProject || "repo-test"} · main
           </div>
         </div>
 
         <div style={styles.headerRight}>
-          <span style={styles.ok}>BUILD OK</span>
-          <span style={styles.ok}>PREVIEW OK</span>
-          <button onClick={load} style={styles.refresh}>↻</button>
+          <span style={{ ...styles.status, color: "#22c55e" }}>BUILD</span>
+          <span style={{ ...styles.status, color: "#eab308" }}>AI</span>
+          <span style={{ ...styles.status, color: "#22c55e" }}>PREVIEW</span>
+
+          <button
+            onClick={load}
+            style={{
+              ...styles.refresh,
+              transform: refreshSpin ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.35s ease, box-shadow 0.2s ease, border-color 0.2s ease",
+            }}
+          >
+            ↻
+          </button>
         </div>
       </div>
 
@@ -161,284 +189,305 @@ export default function MasterOSPage() {
         <div style={styles.panel}>
           <div style={styles.panelTitle}>Modules</div>
 
-          {modules.map((m) => {
-            const info = state.modules?.[m] || {};
-            const active = selectedModule === m;
-
-            return (
-              <div
-                key={m}
-                onClick={() => {
-                  setSelectedModule(m);
-                  setOwner(m);
-                }}
+          {MODULES.map((m) => (
+            <div
+              key={m}
+              onClick={() => setActiveModule(m)}
+              style={{
+                ...styles.module,
+                border: activeModule === m ? "1px solid #3b82f6" : "1px solid transparent",
+                background: activeModule === m ? "rgba(59,130,246,0.15)" : "transparent",
+                boxShadow:
+                  activeModule === m ? "0 0 18px rgba(59,130,246,0.25)" : "none",
+                transform: activeModule === m ? "translateY(-1px)" : "translateY(0)",
+              }}
+            >
+              <span>{m}</span>
+              <span
                 style={{
-                  ...styles.module,
-                  border: active ? "1px solid #3b82f6" : "1px solid rgba(255,255,255,0.05)",
-                  background: active ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.02)",
+                  ...styles.dot,
+                  background: statusColor(m),
                 }}
-              >
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span>{m}</span>
-                  <span
-                    style={{
-                      ...styles.dot,
-                      background: statusColor(info.status),
-                    }}
-                  />
-                </div>
-
-                <div style={styles.moduleTask}>{info.task || "idle"}</div>
-              </div>
-            );
-          })}
+              />
+            </div>
+          ))}
         </div>
 
         <div style={styles.panel}>
-          <div style={styles.panelTitle}>Command Console</div>
-
-          <input
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}
-            placeholder="Enter command..."
-            style={styles.input}
-          />
+          <div style={styles.panelTitle}>AI Command Center</div>
 
           <textarea
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-            placeholder="Execution details..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Describe what you want to build..."
             style={styles.textarea}
           />
 
-          <select
-            value={owner}
-            onChange={(e) => {
-              const v = e.target.value as ModuleName;
-              setOwner(v);
-              setSelectedModule(v);
-            }}
-            style={styles.input}
-          >
-            {modules.map((m) => (
-              <option key={m} value={m}>{m}</option>
-            ))}
-          </select>
+          <div style={styles.row}>
+            <button
+              style={{
+                ...styles.btnPrimary,
+                opacity: isGenerating ? 0.75 : 1,
+                cursor: isGenerating ? "not-allowed" : "pointer",
+                animation: isGenerating ? "pulseGlow 1.2s ease-in-out infinite" : "none",
+              }}
+              onClick={generatePlan}
+              disabled={isGenerating}
+            >
+              {isGenerating ? "Generating..." : "Send"}
+            </button>
 
-          <button style={styles.primary} onClick={generateDraft}>
-            Generate Draft
-          </button>
-
-          <button
-            style={{ ...styles.primary, marginTop: 8, background: "#16a34a" }}
-            onClick={applyChanges}
-          >
-            Apply Changes
-          </button>
-
-          <div style={{ marginTop: 12 }}>
-            {diffs.map((d, i) => (
-              <div key={i} style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 12, marginBottom: 6 }}>{d.file}</div>
-
-                <div style={styles.diffGrid}>
-                  <pre style={styles.diffOld}>{d.oldCode}</pre>
-                  <pre style={styles.diffNew}>{d.newCode}</pre>
-                </div>
-              </div>
-            ))}
+            <button
+              style={{
+                ...styles.btnSecondary,
+                opacity: isApplying ? 0.75 : 1,
+                cursor: isApplying ? "not-allowed" : "pointer",
+                animation: isApplying ? "pulseGlow 1.2s ease-in-out infinite" : "none",
+              }}
+              onClick={apply}
+              disabled={isApplying}
+            >
+              {isApplying ? "Applying..." : "Approve & Execute"}
+            </button>
           </div>
+
+          {drafts.map((d) => (
+            <div key={d.file} style={styles.diffCard}>
+              <div style={styles.fileHeader}>
+                {d.file}
+
+                <button
+                  onClick={() => toggle(d.file)}
+                  style={{
+                    ...styles.approveBtn,
+                    background: d.approved
+                      ? "linear-gradient(135deg,#16a34a,#22c55e)"
+                      : "rgba(255,255,255,0.04)",
+                    color: d.approved ? "#fff" : "#cbd5e1",
+                    border: d.approved
+                      ? "1px solid rgba(34,197,94,0.5)"
+                      : "1px solid rgba(255,255,255,0.08)",
+                    boxShadow: d.approved
+                      ? "0 0 14px rgba(34,197,94,0.22)"
+                      : "none",
+                    transform: d.approved ? "translateY(-1px)" : "translateY(0)",
+                  }}
+                >
+                  {d.approved ? "Approved" : "Approve"}
+                </button>
+              </div>
+
+              <pre style={styles.code}>{d.code}</pre>
+            </div>
+          ))}
         </div>
 
         <div style={styles.panel}>
           <div style={styles.panelTitle}>System State</div>
 
-          <div style={styles.systemItem}>
-            Current Task: {state.currentTask?.title || "none"}
+          <div style={styles.systemItem}>Task: {state.currentTask?.title || "none"}</div>
+          <div style={styles.systemItem}>Owner: {state.currentTask?.owner || "-"}</div>
+          <div style={styles.systemItem}>Approved: {drafts.filter((d) => d.approved).length}</div>
+
+          <div style={{ marginTop: 20 }}>
+            <div style={styles.panelTitle}>Live Preview</div>
+
+            <iframe
+              key={previewKey}
+              src="/builder?projectId=repo-test"
+              style={styles.preview}
+            />
           </div>
-
-          <div style={styles.systemItem}>
-            Owner: {state.currentTask?.owner || "-"}
-          </div>
-
-          <div style={styles.divider} />
-
-          <div style={styles.systemItem}>Builder: OK</div>
-          <div style={styles.systemItem}>Preview: OK</div>
-          <div style={styles.systemItem}>Runtime: OK</div>
         </div>
       </div>
 
-      <div style={styles.terminal}>
-        <div style={styles.terminalHeader}>Execution Log</div>
+      <div style={styles.logPanel}>
+        <div style={styles.panelTitle}>Execution Log</div>
 
-        <div ref={logRef} style={styles.logBox}>
-          {logs.map((l, i) => (
-            <div key={i} style={styles.logLine}>{l}</div>
-          ))}
-        </div>
+        {logs.map((l, i) => (
+          <div key={i} style={styles.logLine}>
+            {l}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-const styles: Record<string, React.CSSProperties> = {
+const styles: any = {
   container: {
-    minHeight: "100vh",
-    background: "radial-gradient(circle at top, #0f172a, #020617)",
-    color: "#fff",
     padding: 20,
-    fontFamily: "Inter, sans-serif",
+    background: "radial-gradient(circle at top, #0b1220, #020617)",
+    color: "#fff",
+    minHeight: "100vh",
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
     marginBottom: 20,
-    padding: 16,
-    borderRadius: 12,
-    background: "rgba(255,255,255,0.03)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    backdropFilter: "blur(12px)",
+  },
+
+  headerRight: {
+    display: "flex",
+    gap: 12,
+    alignItems: "center",
+  },
+
+  status: {
+    fontSize: 11,
+    letterSpacing: 1,
+    transition: "opacity 0.2s ease",
+  },
+
+  refresh: {
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    borderRadius: 8,
+    padding: "4px 10px",
+    color: "#fff",
+    cursor: "pointer",
+    boxShadow: "0 0 0 rgba(59,130,246,0)",
   },
 
   title: { fontSize: 18, fontWeight: 600 },
-  meta: { fontSize: 12, color: "#777" },
-
-  headerRight: { display: "flex", gap: 10, alignItems: "center" },
-
-  ok: { color: "#22c55e", fontSize: 12 },
-
-  refresh: {
-    background: "transparent",
-    border: "1px solid rgba(255,255,255,0.2)",
-    color: "#fff",
-    padding: "4px 10px",
-    borderRadius: 6,
-    cursor: "pointer",
-  },
+  sub: { fontSize: 12, color: "#94a3b8" },
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "260px 1fr 300px",
+    gridTemplateColumns: "260px 1fr 380px",
     gap: 20,
   },
 
   panel: {
-    borderRadius: 12,
     padding: 16,
-    background: "rgba(255,255,255,0.03)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    backdropFilter: "blur(16px)",
+    background: "rgba(255,255,255,0.04)",
+    backdropFilter: "blur(10px)",
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.06)",
+    transition: "box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease",
   },
 
-  panelTitle: { marginBottom: 12, fontWeight: 600 },
+  panelTitle: {
+    marginBottom: 12,
+    fontSize: 13,
+    color: "#94a3b8",
+    fontWeight: 600,
+  },
 
   module: {
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
+    display: "flex",
+    justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 10,
     cursor: "pointer",
+    transition: "all 0.2s ease",
   },
 
-  moduleTask: { fontSize: 11, color: "#aaa" },
-
-  dot: { width: 8, height: 8, borderRadius: "50%" },
-
-  input: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 10,
-    background: "#111",
-    border: "1px solid #222",
-    color: "#fff",
-    borderRadius: 8,
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    transition: "background 0.2s ease, box-shadow 0.2s ease",
+    boxShadow: "0 0 10px rgba(255,255,255,0.12)",
   },
 
   textarea: {
     width: "100%",
-    height: 90,
-    padding: 10,
-    marginBottom: 10,
-    background: "#111",
-    border: "1px solid #222",
+    height: 100,
+    background: "rgba(0,0,0,0.4)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    borderRadius: 10,
     color: "#fff",
-    borderRadius: 8,
-  },
-
-  primary: {
-    width: "100%",
-    padding: 12,
-    background: "#2563eb",
-    border: "none",
-    borderRadius: 8,
-    fontWeight: 600,
-    cursor: "pointer",
-    color: "#fff",
-  },
-
-  divider: {
-    height: 1,
-    background: "#111",
-    margin: "12px 0",
-  },
-
-  systemItem: {
-    marginBottom: 8,
-    fontSize: 13,
-  },
-
-  terminal: {
-    marginTop: 20,
-    borderRadius: 12,
-    background: "#020617",
-    border: "1px solid #111",
-    overflow: "hidden",
-  },
-
-  terminalHeader: {
     padding: 10,
-    borderBottom: "1px solid #111",
-    fontSize: 12,
-    color: "#888",
+    marginBottom: 12,
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
   },
 
-  logBox: {
-    maxHeight: 200,
-    overflowY: "auto",
-    padding: 10,
-    fontFamily: "monospace",
-    fontSize: 12,
-  },
-
-  logLine: {
-    marginBottom: 4,
-    color: "#22c55e",
-  },
-
-  diffGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+  row: {
+    display: "flex",
     gap: 10,
   },
 
-  diffOld: {
-    background: "#020617",
-    padding: 10,
-    borderRadius: 6,
+  btnPrimary: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 12,
+    background: "linear-gradient(135deg,#3b82f6,#6366f1)",
+    border: "none",
+    color: "#fff",
+    fontWeight: 500,
+    cursor: "pointer",
+    transition: "transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease",
+    boxShadow: "0 8px 20px rgba(59,130,246,0.22)",
+  },
+
+  btnSecondary: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 12,
+    background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
+    border: "none",
+    color: "#fff",
+    fontWeight: 500,
+    cursor: "pointer",
+    transition: "transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease",
+    boxShadow: "0 8px 20px rgba(37,99,235,0.22)",
+  },
+
+  approveBtn: {
     fontSize: 11,
-    overflow: "auto",
-    border: "1px solid rgba(255,255,255,0.05)",
+    padding: "4px 10px",
+    borderRadius: 999,
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+  },
+
+  systemItem: {
+    fontSize: 13,
+    marginBottom: 6,
+  },
+
+  diffCard: {
+    marginTop: 10,
+    padding: 10,
+    background: "#020617",
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.06)",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+  },
+
+  fileHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+
+  code: {
+    fontSize: 12,
+    fontFamily: "monospace",
     whiteSpace: "pre-wrap",
   },
 
-  diffNew: {
-    background: "#022c22",
-    padding: 10,
-    borderRadius: 6,
-    fontSize: 11,
-    overflow: "auto",
-    border: "1px solid #16a34a",
-    whiteSpace: "pre-wrap",
+  preview: {
+    width: "100%",
+    height: 400,
+    border: "none",
+    borderRadius: 10,
+    background: "#fff",
+    boxShadow: "0 10px 24px rgba(0,0,0,0.22)",
+  },
+
+  logPanel: {
+    marginTop: 20,
+    padding: 12,
+    background: "rgba(0,0,0,0.6)",
+    borderRadius: 12,
+    border: "1px solid rgba(255,255,255,0.06)",
+  },
+
+  logLine: {
+    color: "#22c55e",
+    fontSize: 12,
   },
 };
