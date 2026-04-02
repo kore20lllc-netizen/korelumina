@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const modules = [
   "builder-core",
@@ -8,194 +8,340 @@ const modules = [
   "repo-import",
   "runtime-preview",
   "production-hardening",
-];
+] as const;
 
-export default function MasterOS() {
-  const [selectedModule, setSelectedModule] = useState("builder-core");
+type ModuleName = (typeof modules)[number];
+type Status = "green" | "yellow" | "red";
+
+export default function MasterOSPage() {
+  const [state, setState] = useState<any>({});
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [owner, setOwner] = useState<ModuleName>("builder-core");
+  const [selectedModule, setSelectedModule] = useState<ModuleName>("builder-core");
+  const [logs, setLogs] = useState<string[]>([]);
+
+  const logRef = useRef<HTMLDivElement>(null);
+
+  function addLog(msg: string) {
+    setLogs((prev) => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+  }
+
+  function load() {
+    fetch("/api/master-os", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => setState(d.state || {}))
+      .catch(() => setState({}));
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  useEffect(() => {
+    if (logRef.current) {
+      logRef.current.scrollTop = logRef.current.scrollHeight;
+    }
+  }, [logs]);
+
+  async function executeTask() {
+    addLog("Starting execution...");
+
+    try {
+      const res = await fetch("/api/ai/orchestrate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectId: state.currentProject || "demo-project",
+          prompt: taskTitle || taskDescription,
+        }),
+      });
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        addLog("Streaming not supported");
+        return;
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        chunk.split("\\n").forEach((line) => {
+          if (line.trim()) addLog(line);
+        });
+      }
+
+      addLog("Execution complete");
+    } catch (error) {
+      addLog("Execution failed");
+      console.error(error);
+    }
+  }
+
+  function statusColor(s?: Status) {
+    if (s === "green") return "#22c55e";
+    if (s === "yellow") return "#eab308";
+    return "#ef4444";
+  }
 
   return (
     <div style={styles.container}>
-      {/* TOP BAR */}
-      <div style={styles.topBar}>
-        <div>Project: repo-test</div>
-        <div>Branch: stable</div>
-        <div>Tag: ai-ide-core-stable</div>
-        <div style={styles.green}>Build: OK</div>
-        <div style={styles.green}>Preview: OK</div>
-      </div>
-
-      <div style={styles.main}>
-        {/* LEFT: MODULES */}
-        <div style={styles.panel}>
-          <h3>Modules</h3>
-          {modules.map((m) => (
-            <div
-              key={m}
-              onClick={() => setSelectedModule(m)}
-              style={{
-                ...styles.moduleItem,
-                background:
-                  selectedModule === m ? "#1f2937" : "transparent",
-              }}
-            >
-              <span>{m}</span>
-              <span style={styles.greenDot}></span>
-            </div>
-          ))}
+      <div style={styles.header}>
+        <div>
+          <div style={styles.title}>KoreLumina Master OS</div>
+          <div style={styles.meta}>
+            {state.currentProject || "repo-test"} · {state.currentBranch || "main"} ·{" "}
+            {state.lastStableTag || "master-os-v1-stable"}
+          </div>
         </div>
 
-        {/* CENTER: TASK ROUTER */}
-        <div style={styles.panel}>
-          <h3>Task Router</h3>
+        <div style={styles.headerRight}>
+          <span style={styles.ok}>BUILD OK</span>
+          <span style={styles.ok}>PREVIEW OK</span>
+          <button onClick={load} style={styles.refresh}>↻</button>
+        </div>
+      </div>
 
-          <input placeholder="Task title" style={styles.input} />
+      <div style={styles.grid}>
+        <div style={styles.panel}>
+          <div style={styles.panelTitle}>Modules</div>
+
+          {modules.map((m) => {
+            const info = state.modules?.[m] || {};
+            const active = selectedModule === m;
+
+            return (
+              <div
+                key={m}
+                onClick={() => {
+                  setSelectedModule(m);
+                  setOwner(m);
+                }}
+                style={{
+                  ...styles.module,
+                  border: active ? "1px solid #3b82f6" : "1px solid rgba(255,255,255,0.05)",
+                  background: active ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.02)",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>{m}</span>
+                  <span
+                    style={{
+                      ...styles.dot,
+                      background: statusColor(info.status),
+                    }}
+                  />
+                </div>
+
+                <div style={styles.moduleTask}>{info.task || "idle"}</div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={styles.panel}>
+          <div style={styles.panelTitle}>Command Console</div>
+
+          <input
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+            placeholder="Enter command..."
+            style={styles.input}
+          />
+
           <textarea
-            placeholder="Task description"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+            placeholder="Execution details..."
             style={styles.textarea}
           />
 
           <select
-              style={styles.input}
-              value={selectedModule}
-              onChange={(e) => setSelectedModule(e.target.value)}
-            >
+            value={owner}
+            onChange={(e) => {
+              const v = e.target.value as ModuleName;
+              setOwner(v);
+              setSelectedModule(v);
+            }}
+            style={styles.input}
+          >
             {modules.map((m) => (
-              <option key={m}>{m}</option>
+              <option key={m} value={m}>{m}</option>
             ))}
           </select>
 
-          <input
-            placeholder="Expected outcome"
-            style={styles.input}
-          />
-
-          <input
-            placeholder="Do not touch (comma separated)"
-            style={styles.input}
-          />
-
-          <div style={{ display: "flex", gap: 10 }}>
-            <button style={styles.primaryBtn}>Assign</button>
-            <button style={styles.secondaryBtn}>Reset</button>
-          </div>
+          <button style={styles.primary} onClick={executeTask}>
+            Execute Task
+          </button>
         </div>
 
-        {/* RIGHT: SYSTEM STATE */}
         <div style={styles.panel}>
-          <h3>System State</h3>
+          <div style={styles.panelTitle}>System State</div>
 
-          <div>Build: OK</div>
-          <div>Preview: OK</div>
-          <div>Editor: OK</div>
-          <div>Filetree: OK</div>
+          <div style={styles.systemItem}>
+            Current Task: {state.currentTask?.title || "none"}
+          </div>
 
-          <hr style={styles.hr} />
+          <div style={styles.systemItem}>
+            Owner: {state.currentTask?.owner || "-"}
+          </div>
 
-          <div>Blockers:</div>
-          <ul>
-            <li>None</li>
-          </ul>
+          <div style={styles.divider} />
 
-          <hr style={styles.hr} />
-
-          <div>Current Task:</div>
-          <div>Fix project switching</div>
+          <div style={styles.systemItem}>Builder: OK</div>
+          <div style={styles.systemItem}>Preview: OK</div>
+          <div style={styles.systemItem}>Runtime: OK</div>
         </div>
       </div>
 
-      {/* BOTTOM: LOG */}
-      <div style={styles.logPanel}>
-        <h3>Execution Log</h3>
-        <div>• System initialized</div>
-        <div>• Builder stable</div>
+      <div style={styles.terminal}>
+        <div style={styles.terminalHeader}>Execution Log</div>
+
+        <div ref={logRef} style={styles.logBox}>
+          {logs.map((l, i) => (
+            <div key={i} style={styles.logLine}>{l}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-const styles: any = {
+const styles: Record<string, React.CSSProperties> = {
   container: {
     minHeight: "100vh",
-    background: "#0b0b0b",
+    background: "radial-gradient(circle at top, #0f172a, #020617)",
     color: "#fff",
     padding: 20,
-    fontFamily: "sans-serif",
+    fontFamily: "Inter, sans-serif",
   },
-  topBar: {
-    display: "flex",
-    gap: 20,
-    marginBottom: 20,
-    padding: 10,
-    background: "#111",
-    borderRadius: 8,
-  },
-  main: {
-    display: "grid",
-    gridTemplateColumns: "250px 1fr 300px",
-    gap: 20,
-  },
-  panel: {
-    background: "#111",
-    padding: 15,
-    borderRadius: 10,
-    border: "1px solid #222",
-  },
-  moduleItem: {
-    padding: 10,
-    borderRadius: 6,
-    cursor: "pointer",
+
+  header: {
     display: "flex",
     justifyContent: "space-between",
+    marginBottom: 20,
+    padding: 16,
+    borderRadius: 12,
+    background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    backdropFilter: "blur(12px)",
   },
-  greenDot: {
-    width: 10,
-    height: 10,
-    background: "green",
-    borderRadius: "50%",
+
+  title: { fontSize: 18, fontWeight: 600 },
+  meta: { fontSize: 12, color: "#777" },
+
+  headerRight: { display: "flex", gap: 10, alignItems: "center" },
+
+  ok: { color: "#22c55e", fontSize: 12 },
+
+  refresh: {
+    background: "transparent",
+    border: "1px solid rgba(255,255,255,0.2)",
+    color: "#fff",
+    padding: "4px 10px",
+    borderRadius: 6,
+    cursor: "pointer",
   },
+
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "260px 1fr 300px",
+    gap: 20,
+  },
+
+  panel: {
+    borderRadius: 12,
+    padding: 16,
+    background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    backdropFilter: "blur(16px)",
+  },
+
+  panelTitle: { marginBottom: 12, fontWeight: 600 },
+
+  module: {
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+    cursor: "pointer",
+  },
+
+  moduleTask: { fontSize: 11, color: "#aaa" },
+
+  dot: { width: 8, height: 8, borderRadius: "50%" },
+
   input: {
     width: "100%",
-    padding: 8,
+    padding: 10,
     marginBottom: 10,
-    background: "#1a1a1a",
-    border: "1px solid #333",
+    background: "#111",
+    border: "1px solid #222",
     color: "#fff",
+    borderRadius: 8,
   },
+
   textarea: {
     width: "100%",
-    padding: 8,
-    height: 80,
+    height: 90,
+    padding: 10,
     marginBottom: 10,
-    background: "#1a1a1a",
-    border: "1px solid #333",
+    background: "#111",
+    border: "1px solid #222",
     color: "#fff",
+    borderRadius: 8,
   },
-  primaryBtn: {
-    padding: "8px 12px",
+
+  primary: {
+    width: "100%",
+    padding: 12,
     background: "#2563eb",
     border: "none",
-    color: "#fff",
+    borderRadius: 8,
+    fontWeight: 600,
     cursor: "pointer",
-  },
-  secondaryBtn: {
-    padding: "8px 12px",
-    background: "#333",
-    border: "none",
     color: "#fff",
-    cursor: "pointer",
   },
-  logPanel: {
-    marginTop: 20,
+
+  divider: {
+    height: 1,
     background: "#111",
-    padding: 15,
-    borderRadius: 10,
-    border: "1px solid #222",
+    margin: "12px 0",
   },
-  hr: {
-    borderColor: "#222",
-    margin: "10px 0",
+
+  systemItem: {
+    marginBottom: 8,
+    fontSize: 13,
   },
-  green: {
+
+  terminal: {
+    marginTop: 20,
+    borderRadius: 12,
+    background: "#020617",
+    border: "1px solid #111",
+    overflow: "hidden",
+  },
+
+  terminalHeader: {
+    padding: 10,
+    borderBottom: "1px solid #111",
+    fontSize: 12,
+    color: "#888",
+  },
+
+  logBox: {
+    maxHeight: 200,
+    overflowY: "auto",
+    padding: 10,
+    fontFamily: "monospace",
+    fontSize: 12,
+  },
+
+  logLine: {
+    marginBottom: 4,
     color: "#22c55e",
   },
 };
