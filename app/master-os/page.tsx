@@ -45,7 +45,12 @@ export default function MasterOSPage() {
   }, [logs]);
 
   async function executeTask() {
-    addLog("Starting execution...");
+    addLog("Execution complete");
+
+// 🔥 force preview refresh
+fetch(`/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project"}`)
+  .then(() => addLog("Preview refreshed"))
+  .catch(() => addLog("Preview refresh failed"));
 
     try {
       const res = await fetch("/api/ai/orchestrate", {
