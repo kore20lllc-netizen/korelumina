@@ -1,34 +1,42 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const { projectId, spec } = body;
+  const { projectId, prompt } = await req.json();
 
-  if (!projectId || !spec) {
-    return NextResponse.json({ ok: false, error: "Missing input" }, { status: 400 });
-  }
-
-  const safeText = String(spec).replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  return NextResponse.json({
-    ok: true,
-    files: ["app/page.tsx"],
-    drafts: [
-      {
-        file: "app/page.tsx",
-        content: `export default function Page() {
-  return (
-    <div style={{
-      fontSize: "32px",
-      fontWeight: 600,
-      padding: "40px",
-      textAlign: "center"
-    }}>
-      ${safeText}
-    </div>
-  );
-}`
+  const stream = new ReadableStream({
+    async start(controller) {
+      function send(msg: string) {
+        controller.enqueue(new TextEncoder().encode(msg + "\n"));
       }
-    ]
+
+      send("Starting orchestrator...");
+      await sleep(500);
+
+      send(`Project: ${projectId}`);
+      await sleep(500);
+
+      send("Planning...");
+      await sleep(800);
+
+      send("Generating code...");
+      await sleep(1000);
+
+      send("Applying changes...");
+      await sleep(800);
+
+      send("Done");
+
+      controller.close();
+    },
   });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
+}
+
+function sleep(ms: number) {
+  return new Promise(res => setTimeout(res, ms));
 }
