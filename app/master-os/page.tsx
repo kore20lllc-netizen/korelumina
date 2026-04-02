@@ -13,12 +13,20 @@ const modules = [
 type ModuleName = (typeof modules)[number];
 type Status = "green" | "yellow" | "red";
 
+type DiffItem = {
+  file: string;
+  oldCode: string;
+  newCode: string;
+};
+
 export default function MasterOSPage() {
   const [state, setState] = useState<any>({});
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [owner, setOwner] = useState<ModuleName>("builder-core");
   const [selectedModule, setSelectedModule] = useState<ModuleName>("builder-core");
+  const [drafts, setDrafts] = useState<any[]>([]);
+  const [diffs, setDiffs] = useState<DiffItem[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
 
   const logRef = useRef<HTMLDivElement>(null);
@@ -44,13 +52,23 @@ export default function MasterOSPage() {
     }
   }, [logs]);
 
-  async function executeTask() {
-    addLog("Execution complete");
+  async function getOriginalFile(file: string) {
+    const projectId = state.currentProject || "demo-project";
+    const res = await fetch(
+      `/api/dev/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
+      { cache: "no-store" }
+    );
 
-// 🔥 force preview refresh
-fetch(`/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project"}`)
-  .then(() => addLog("Preview refreshed"))
-  .catch(() => addLog("Preview refresh failed"));
+    if (!res.ok) {
+      return "// original not found";
+    }
+
+    const text = await res.text();
+    return text || "// original not found";
+  }
+
+  async function generateDraft() {
+    addLog("Generating drafts...");
 
     try {
       const res = await fetch("/api/ai/orchestrate", {
@@ -62,28 +80,56 @@ fetch(`/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project
         }),
       });
 
-      const reader = res.body?.getReader();
-      const decoder = new TextDecoder();
+      const data = await res.json();
+      const nextDrafts = data.drafts || [];
+      setDrafts(nextDrafts);
 
-      if (!reader) {
-        addLog("Streaming not supported");
-        return;
-      }
+      const enriched = await Promise.all(
+        nextDrafts.map(async (d: any) => ({
+          file: d.file,
+          newCode: d.code,
+          oldCode: await getOriginalFile(d.file),
+        }))
+      );
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+      setDiffs(enriched);
+      addLog(`Drafts ready: ${enriched.length} file(s)`);
+    } catch (e) {
+      addLog("Draft generation failed");
+      console.error(e);
+    }
+  }
 
-        const chunk = decoder.decode(value, { stream: true });
-        chunk.split("\\n").forEach((line) => {
-          if (line.trim()) addLog(line);
-        });
-      }
+  async function applyChanges() {
+    if (!drafts.length) {
+      addLog("No drafts to apply");
+      return;
+    }
 
-      addLog("Execution complete");
-    } catch (error) {
-      addLog("Execution failed");
-      console.error(error);
+    addLog("Applying changes...");
+
+    try {
+      await fetch("/api/ai/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectId: state.currentProject || "demo-project",
+          drafts,
+        }),
+      });
+
+      addLog("Applied successfully");
+
+      await fetch(
+        `/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project"}`
+      );
+
+      addLog("Preview refreshed");
+      setDrafts([]);
+      setDiffs([]);
+    } catch (e) {
+      addLog("Apply failed");
+      console.error(e);
     }
   }
 
@@ -179,9 +225,29 @@ fetch(`/api/dev/preview/bundle?projectId=${state.currentProject || "demo-project
             ))}
           </select>
 
-          <button style={styles.primary} onClick={executeTask}>
-            Execute Task
+          <button style={styles.primary} onClick={generateDraft}>
+            Generate Draft
           </button>
+
+          <button
+            style={{ ...styles.primary, marginTop: 8, background: "#16a34a" }}
+            onClick={applyChanges}
+          >
+            Apply Changes
+          </button>
+
+          <div style={{ marginTop: 12 }}>
+            {diffs.map((d, i) => (
+              <div key={i} style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 12, marginBottom: 6 }}>{d.file}</div>
+
+                <div style={styles.diffGrid}>
+                  <pre style={styles.diffOld}>{d.oldCode}</pre>
+                  <pre style={styles.diffNew}>{d.newCode}</pre>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div style={styles.panel}>
@@ -348,5 +414,31 @@ const styles: Record<string, React.CSSProperties> = {
   logLine: {
     marginBottom: 4,
     color: "#22c55e",
+  },
+
+  diffGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 10,
+  },
+
+  diffOld: {
+    background: "#020617",
+    padding: 10,
+    borderRadius: 6,
+    fontSize: 11,
+    overflow: "auto",
+    border: "1px solid rgba(255,255,255,0.05)",
+    whiteSpace: "pre-wrap",
+  },
+
+  diffNew: {
+    background: "#022c22",
+    padding: 10,
+    borderRadius: 6,
+    fontSize: 11,
+    overflow: "auto",
+    border: "1px solid #16a34a",
+    whiteSpace: "pre-wrap",
   },
 };
