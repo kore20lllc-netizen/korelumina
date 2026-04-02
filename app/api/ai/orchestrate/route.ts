@@ -1,42 +1,50 @@
-import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 export async function POST(req: Request) {
   const { projectId, prompt } = await req.json();
 
   const stream = new ReadableStream({
     async start(controller) {
+      const enc = new TextEncoder();
+
       function send(msg: string) {
-        controller.enqueue(new TextEncoder().encode(msg + "\n"));
+        controller.enqueue(enc.encode(msg + "\n"));
       }
 
       send("Starting orchestrator...");
-      await sleep(500);
 
-      send(`Project: ${projectId}`);
-      await sleep(500);
+      // ⚠️ DEMO: fake draft (replace with real planner later)
+      const drafts = [
+        {
+          file: "app/page.tsx",
+          code: `export default function Page() {
+  return <div style={{padding:40,fontSize:32}}>AI: ${prompt}</div>;
+}`,
+        },
+      ];
 
-      send("Planning...");
-      await sleep(800);
+      send("Writing files...");
 
-      send("Generating code...");
-      await sleep(1000);
+      const baseDir = path.join(process.cwd(), "runtime/workspaces/default/projects", projectId);
 
-      send("Applying changes...");
-      await sleep(800);
+      for (const d of drafts) {
+        const filePath = path.join(baseDir, d.file);
+
+        fs.mkdirSync(path.dirname(filePath), { recursive: true });
+        fs.writeFileSync(filePath, d.code);
+
+        send(`Updated: ${d.file}`);
+      }
+
+      send("Rebuilding preview...");
 
       send("Done");
-
       controller.close();
     },
   });
 
   return new Response(stream, {
-    headers: {
-      "Content-Type": "text/plain",
-    },
+    headers: { "Content-Type": "text/plain" },
   });
-}
-
-function sleep(ms: number) {
-  return new Promise(res => setTimeout(res, ms));
 }
