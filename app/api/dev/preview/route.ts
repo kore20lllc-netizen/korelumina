@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import * as esbuild from "esbuild";
+import fs from "fs";
+
+const EXTENSIONS = [".tsx", ".ts", ".jsx", ".js"];
+
+function resolveWithExtensions(basePath: string) {
+  for (const ext of EXTENSIONS) {
+    const full = basePath + ext;
+    if (fs.existsSync(full)) return full;
+  }
+  return null;
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -11,12 +22,13 @@ export async function GET(req: NextRequest) {
     return new NextResponse("Missing projectId", { status: 400 });
   }
 
-  const entryFile = path.join(
+  const projectRoot = path.join(
     process.cwd(),
     "runtime/workspaces/default/projects",
-    projectId,
-    "app/page.tsx"
+    projectId
   );
+
+  const entryFile = path.join(projectRoot, "app/page.tsx");
 
   let code = "";
 
@@ -27,12 +39,38 @@ export async function GET(req: NextRequest) {
       write: false,
       platform: "browser",
       format: "iife",
-      globalName: "KoreApp",   // 🔥 THIS IS THE FIX
+      globalName: "KoreApp",
       jsx: "transform",
       loader: {
         ".ts": "ts",
         ".tsx": "tsx",
+        ".css": "empty",
       },
+      resolveExtensions: EXTENSIONS,
+
+      plugins: [
+        {
+          name: "resolve-local",
+          setup(build) {
+            // alias @/
+            build.onResolve({ filter: /^@\// }, args => {
+              const base = path.join(projectRoot, args.path.replace("@/", ""));
+              const resolved = resolveWithExtensions(base);
+              if (!resolved) throw new Error("Cannot resolve " + base);
+              return { path: resolved };
+            });
+
+            // relative imports
+            build.onResolve({ filter: /^\.\.?\// }, args => {
+              const base = path.join(path.dirname(args.importer), args.path);
+              const resolved = resolveWithExtensions(base);
+              if (!resolved) throw new Error("Cannot resolve " + base);
+              return { path: resolved };
+            });
+          }
+        }
+      ],
+
       external: ["react", "react-dom"],
     });
 
@@ -57,7 +95,10 @@ export async function GET(req: NextRequest) {
       ${code}
 
       try {
-        const App = window.KoreApp?.default || window.KoreApp || window.Page || null;
+        const App =
+          window.KoreApp?.default ||
+          window.KoreApp ||
+          null;
 
         if (!App) {
           document.body.innerHTML = "<pre>No component found</pre>";
