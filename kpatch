@@ -1,0 +1,31 @@
+#!/bin/bash
+
+FILE="$1"
+
+if [ -z "$FILE" ]; then
+  echo "Usage: kpatch <file>"
+  exit 1
+fi
+
+TMP_FILE="$(mktemp)"
+
+echo ">>> Paste FULL file content. Press CTRL+D when done:"
+cat > "$TMP_FILE"
+
+# basic validation (prevents empty file wipe)
+if [ ! -s "$TMP_FILE" ]; then
+  echo "❌ Empty input. Aborting."
+  rm "$TMP_FILE"
+  exit 1
+fi
+
+# backup current file
+if [ -f "$FILE" ]; then
+  cp "$FILE" "$FILE.bak"
+  echo "✔ Backup created: $FILE.bak"
+fi
+
+# overwrite safely
+mv "$TMP_FILE" "$FILE"
+
+echo "✔ Patched: $FILE"

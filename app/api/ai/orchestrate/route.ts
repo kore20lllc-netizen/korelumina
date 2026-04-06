@@ -1,19 +1,25 @@
 export async function POST(req: Request) {
-  const { projectId, prompt } = await req.json();
+  const { projectId, spec } = await req.json();
 
-  // ❌ NO file writes here
-  const drafts = [
+  // 🔥 TEMP: echo prompt into code (proves pipeline works)
+  const code = `
+export default function Page() {
+  return <div style={{padding:40,fontSize:32}}>AI: ${spec}</div>;
+}
+`;
+
+  return new Response(
+    JSON.stringify({
+      ok: true,
+      files: [
+        {
+          file: "app/page.tsx",
+          code,
+        },
+      ],
+    }),
     {
-      file: "app/page.tsx",
-      code: `export default function Page() {
-  return <div style={{padding:40,fontSize:32}}>AI: ${prompt}</div>;
-}`,
-    },
-  ];
-
-  return Response.json({
-    ok: true,
-    projectId,
-    drafts,
-  });
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 }

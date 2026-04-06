@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import * as esbuild from "esbuild";
+import fs from "fs";
+import { resolveEntry } from "../resolveEntry";
 
 export async function GET(req: NextRequest) {
-  const projectId =
-    req.nextUrl.searchParams.get("projectId") || "repo-test";
-
-  const entryParam = req.nextUrl.searchParams.get("entry");
+  const projectId = req.nextUrl.searchParams.get("projectId") || "repo-test";
 
   const projectRoot = path.join(
     process.cwd(),
@@ -14,12 +13,7 @@ export async function GET(req: NextRequest) {
     projectId
   );
 
-  // 🔥 FORCE ENTRY (NO resolveEntry ANYWHERE)
-  const entryFile = entryParam
-    ? path.join(projectRoot, entryParam)
-    : path.join(projectRoot, "app/page.tsx");
-
-  console.log("ENTRY USED:", entryFile);
+  const entryFile = resolveEntry(projectRoot);
 
   const result = await esbuild.build({
     entryPoints: [entryFile],
@@ -29,7 +23,10 @@ export async function GET(req: NextRequest) {
     format: "iife",
     globalName: "KoreApp",
 
+    // ✅ SAME FIX
     jsx: "transform",
+    jsxFactory: "React.createElement",
+    jsxFragment: "React.Fragment",
 
     loader: {
       ".ts": "ts",
@@ -39,6 +36,19 @@ export async function GET(req: NextRequest) {
 
     external: ["react", "react-dom"],
 
+    plugins: [
+      {
+        name: "strip-use-client",
+        setup(build) {
+          build.onLoad({ filter: /\.(tsx|ts|js|jsx)$/ }, async (args) => {
+            let contents = fs.readFileSync(args.path, "utf8");
+            contents = contents.replace(/["']use client["'];?/g, "");
+            return { contents, loader: "tsx" };
+          });
+        },
+      },
+    ],
+
     banner: {
       js: `
         var require = (name) => {
@@ -47,8 +57,15 @@ export async function GET(req: NextRequest) {
 
           if (name === "react/jsx-runtime") {
             return {
-              jsx: (t, p) => window.React.createElement(t, p),
-              jsxs: (t, p) => window.React.createElement(t, p),
+              jsx: (type, props) => window.React.createElement(type, props),
+              jsxs: (type, props) => window.React.createElement(type, props),
+              Fragment: window.React.Fragment
+            };
+          }
+
+          if (name === "react/jsx-dev-runtime") {
+            return {
+              jsxDEV: (type, props) => window.React.createElement(type, props),
               Fragment: window.React.Fragment
             };
           }
@@ -69,30 +86,7 @@ export async function GET(req: NextRequest) {
     },
   });
 
-  const code = result.outputFiles[0].text;
-
-  return new NextResponse(`
-<!doctype html>
-<html>
-  <body style="margin:0">
-    <div id="root"></div>
-
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <script>
-      ${code}
-
-      const App = window.KoreApp;
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(React.createElement(App));
-    </script>
-  </body>
-</html>
-`, {
-    headers: {
-      "Content-Type": "text/html",
-      "Cache-Control": "no-store",
-    },
+  return new NextResponse(result.outputFiles[0].text, {
+    headers: { "Content-Type": "text/plain" },
   });
 }

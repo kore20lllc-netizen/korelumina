@@ -1,24 +1,24 @@
-import path from "path";
 import fs from "fs";
+import path from "path";
 
-export function resolveEntry(projectRoot: string) {
+export function resolveEntry(projectRoot: string): string {
   const candidates = [
+    // 🔥 PRIORITY: imported repo entry
+    "dashboard/final-example/app/page.tsx",
+
+    // fallback
     "app/page.tsx",
     "app/page.ts",
-    "app/page.jsx",
-    "app/page.js",
-    "src/app/page.tsx",
-    "src/app/page.ts",
-    "src/app/page.jsx",
-    "src/app/page.js",
   ];
 
   for (const file of candidates) {
-    const fullPath = path.join(projectRoot, file);
-    if (fs.existsSync(fullPath)) {
-      return fullPath;
+    const full = path.join(projectRoot, file);
+
+    if (fs.existsSync(full)) {
+      console.log("ENTRY:", file); // debug visibility
+      return full;
     }
   }
 
-  throw new Error("No valid entry file found");
+  throw new Error("No valid entry found");
 }
