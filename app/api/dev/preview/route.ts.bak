@@ -1,0 +1,194 @@
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
+import * as esbuild from "esbuild";
+import { resolveEntry } from "./resolveEntry";
+
+export async function GET(req: NextRequest) {
+  const projectId = req.nextUrl.searchParams.get("projectId") || "repo-test";
+
+  const projectRoot = path.join(
+    process.cwd(),
+    "runtime/workspaces/default/projects",
+    projectId
+  );
+
+  let code = "";
+
+  try {
+    const entryFile = resolveEntry(projectRoot);
+
+    const result = await esbuild.build({
+      entryPoints: [entryFile],
+      bundle: true,
+      write: false,
+      platform: "browser",
+      format: "iife",
+      globalName: "KoreApp",
+      jsx: "transform",
+      loader: {
+        ".ts": "ts",
+        ".tsx": "tsx",
+        ".css": "empty",
+      },
+      external: ["react", "react-dom"],
+      plugins: [
+        {
+          name: "strip-use-client",
+          setup(build) {
+            build.onLoad({ filter: /\.(tsx|ts|jsx|js)$/ }, async (args) => {
+              let contents = fs.readFileSync(args.path, "utf8");
+              contents = contents.replace(/["']use client["'];?\s*/g, "");
+              return {
+                contents,
+                loader: args.path.endsWith("tsx")
+                  ? "tsx"
+                  : args.path.endsWith("ts")
+                  ? "ts"
+                  : args.path.endsWith("jsx")
+                  ? "jsx"
+                  : "js",
+              };
+            });
+          },
+        },
+        {
+          name: "alias-and-next-stub",
+          setup(build) {
+            build.onResolve({ filter: /^@\// }, (args) => ({
+              path: path.join(projectRoot, args.path.replace("@/", "")),
+            }));
+
+            build.onResolve({ filter: /^next\/link$/ }, () => ({
+              path: "next-link",
+              namespace: "stub",
+            }));
+
+            build.onResolve({ filter: /^next\/image$/ }, () => ({
+              path: "next-image",
+              namespace: "stub",
+            }));
+
+            build.onResolve({ filter: /^next($|\/)/ }, () => ({
+              path: "next-generic",
+              namespace: "stub",
+            }));
+
+            build.onLoad({ filter: /.*/, namespace: "stub" }, (args) => {
+              if (args.path === "next-link") {
+                return {
+                  contents: `
+                    import * as React from "react";
+                    export default function Link({href, children}) {
+                      return React.createElement("a", { href: href || "#" }, children);
+                    }
+                  `,
+                  loader: "tsx",
+                };
+              }
+
+              if (args.path === "next-image") {
+                return {
+                  contents: `
+                    import * as React from "react";
+                    export default function Image(props) {
+                      return React.createElement("img", props);
+                    }
+                  `,
+                  loader: "tsx",
+                };
+              }
+
+              return {
+                contents: `
+                  export default function Stub(props) {
+                    return props?.children ?? null;
+                  }
+                `,
+                loader: "tsx",
+              };
+            });
+          },
+        },
+      ],
+      banner: {
+        js: `
+          var require = (name) => {
+            if (name === "react") return window.React;
+            if (name === "react-dom") return window.ReactDOM;
+
+            if (name === "react/jsx-runtime") {
+              return {
+                jsx: (type, props) => window.React.createElement(type, props),
+                jsxs: (type, props) => window.React.createElement(type, props),
+                Fragment: window.React.Fragment
+              };
+            }
+
+            if (name === "react/jsx-dev-runtime") {
+              return {
+                jsxDEV: (type, props) => window.React.createElement(type, props),
+                Fragment: window.React.Fragment
+              };
+            }
+
+            throw new Error("Module not supported: " + name);
+          };
+
+          var process = { env: { NODE_ENV: "development" } };
+        `,
+      },
+      footer: {
+        js: `
+          if (typeof KoreApp !== "undefined") {
+            window.KoreApp = KoreApp.default || KoreApp;
+          }
+        `,
+      },
+    });
+
+    code = result.outputFiles[0].text;
+  } catch (err) {
+    return new NextResponse(
+      "<pre style='color:red'>" + (err?.message || err) + "</pre>",
+      { headers: { "Content-Type": "text/html" } }
+    );
+  }
+
+  const html = `
+<!doctype html>
+<html>
+  <body style="margin:0">
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script>
+      try {
+        ${code}
+
+        const App = window.KoreApp;
+        const container = document.getElementById("root");
+
+        if (!container) {
+          document.body.innerHTML = "<pre>Root not found</pre>";
+        } else if (!App) {
+          document.body.innerHTML = "<pre>No component found</pre>";
+        } else {
+          const root = ReactDOM.createRoot(container);
+          root.render(React.createElement(App, { key: Date.now() }));
+        }
+      } catch (e) {
+        document.body.innerHTML =
+          "<pre style='color:red'>" + (e.stack || e) + "</pre>";
+      }
+    </script>
+  </body>
+</html>
+`;
+
+  return new NextResponse(html, {
+    headers: { "Content-Type": "text/html" },
+  });
+}

@@ -3,254 +3,193 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 
-type Props = {
-  projectId: string;
+type Props = { projectId: string };
+
+type DraftFile = {
+  path?: string;
+  file?: string;
+  content?: string;
+  code?: string;
 };
 
 export default function BuilderInner({ projectId }: Props) {
   const [files, setFiles] = useState<string[]>([]);
-  const [activeFile, setActiveFile] = useState<string | null>(null);
-  const [content, setContent] = useState<string>("");
+  const [activeFile, setActiveFile] = useState<string>("app/page.tsx");
+  const [content, setContent] = useState("");
   const [version, setVersion] = useState(0);
 
   const [prompt, setPrompt] = useState("");
-  const [plan, setPlan] = useState<string[]>([]);
-  const [drafts, setDrafts] = useState<any[]>([]);
+  const [drafts, setDrafts] = useState<DraftFile[]>([]);
 
-  // LOAD FILES
   useEffect(() => {
-    async function loadFiles() {
+    (async () => {
       const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
       const data = await res.json();
       const list = data.files || [];
       setFiles(list);
-      setActiveFile(list[0] || null);
-    }
-    loadFiles();
+
+      if (list.includes("app/page.tsx")) {
+        setActiveFile("app/page.tsx");
+      } else if (list.length) {
+        setActiveFile(list[0]);
+      }
+    })();
   }, [projectId]);
 
-  // LOAD CONTENT
   useEffect(() => {
     if (!activeFile) return;
 
-    async function loadContent() {
+    (async () => {
       const res = await fetch(
-        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile!)}`
+        `/api/dev/fs/read?projectId=${projectId}&file=${encodeURIComponent(activeFile)}`
       );
+
       const text = await res.text();
 
       try {
-        const data = JSON.parse(text);
-        setContent(data.content || "");
+        const json = JSON.parse(text);
+        setContent(json.content || "");
       } catch {
         setContent(text);
       }
-    }
+    })();
+  }, [activeFile, version]);
 
-    loadContent();
-  }, [activeFile, projectId]);
-
-  // SAVE
   async function handleSave() {
-    if (!activeFile) return;
-
     await fetch("/api/dev/fs/write", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        projectId,
-        file: activeFile,
-        content,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, file: activeFile, content }),
     });
 
     setVersion((v) => v + 1);
   }
 
-  // APPLY
-  async function applyDraft(draft: any) {
+  async function applyDraft() {
+    const draft = drafts[0];
+    if (!draft) return;
+
+    const next = draft.content || draft.code || "";
+
     await fetch("/api/dev/fs/write", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        projectId,
-        file: draft.file,
-        content: draft.content,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, file: activeFile, content: next }),
     });
 
+    setDrafts([]);
+    setContent(next);
     setVersion((v) => v + 1);
-    setActiveFile(draft.file);
-    setContent(draft.content);
   }
 
-  // AI
   async function runAI() {
     const res = await fetch("/api/ai/orchestrate", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        projectId,
-        spec: prompt,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, spec: prompt }),
     });
 
     const data = await res.json();
-    setPlan(data.files || []);
-    setDrafts(data.drafts || []);
+
+    const nextDrafts = (data.drafts || data.files || []).map((d: any) => ({
+      path: activeFile,
+      file: activeFile,
+      content: d.content || d.code || "",
+      code: d.code || d.content || "",
+    }));
+
+    setDrafts(nextDrafts);
+    setVersion((v) => v + 1);
   }
 
-  function getLanguage(file: string | null) {
-    if (!file) return "plaintext";
-    if (file.endsWith(".ts") || file.endsWith(".tsx")) return "typescript";
+  function getLanguage(file: string) {
+    if (file.endsWith(".tsx") || file.endsWith(".ts")) return "typescript";
     if (file.endsWith(".js")) return "javascript";
-    if (file.endsWith(".json")) return "json";
     return "plaintext";
   }
 
+  const previewUrl = `/api/dev/preview?projectId=${projectId}&entry=${encodeURIComponent(activeFile)}&v=${version}${
+    drafts.length
+      ? `&drafts=${encodeURIComponent(
+          btoa(
+            JSON.stringify([
+              {
+                path: activeFile,
+                content: drafts[0].content || drafts[0].code || "",
+              },
+            ])
+          )
+        )}`
+      : ""
+  }`;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        background: "#0a0a0a",
-        color: "#e5e5e5"
-      }}
-    >
+    <div style={{ display: "flex", height: "100vh" }}>
       
       {/* FILE TREE */}
-      <div
-        style={{
-          width: 250,
-          borderRight: "1px solid #222",
-          padding: 10,
-          background: "#0f0f0f",
-          overflow: "auto",
-          flexShrink: 0
-        }}
-      >
+      <div style={{ width: 220, borderRight: "1px solid #ddd", padding: 10 }}>
         {files.map((f) => (
-          <div key={f} onClick={() => setActiveFile(f)} style={{ cursor: "pointer" }}>
+          <div
+            key={f}
+            onClick={() => setActiveFile(f)}
+            style={{
+              cursor: "pointer",
+              padding: 4,
+              color: f === activeFile ? "#0070f3" : "#000",
+            }}
+          >
             {f}
           </div>
         ))}
       </div>
 
-      {/* EDITOR */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          background: "#0a0a0a"
-        }}
-      >
+      {/* CENTER */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <button onClick={handleSave}>Save</button>
 
         <Editor
           height="50%"
-          theme="vs-dark"
           language={getLanguage(activeFile)}
           value={content}
           onChange={(v) => setContent(v || "")}
         />
 
         <iframe
-          src={`/api/dev/preview?projectId=${projectId}&v=${version}`}
-          style={{ flex: 1, background: "#fff" }}
+          key={version}
+          src={previewUrl}
+          style={{ flex: 1, border: "none", background: "#fff" }}
         />
       </div>
 
-      {/* AI PANEL */}
-      <div
-        style={{
-          width: 300,
-          padding: 10,
-          background: "#0f0f0f",
-          borderLeft: "1px solid #222"
-        }}
-      >
+      {/* RIGHT PANEL */}
+      <div style={{ width: 280, padding: 10, borderLeft: "1px solid #ddd" }}>
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           style={{ width: "100%", height: 80 }}
         />
 
-        <button
-  onClick={runAI}
-  style={{
-    background: "#16a34a",
-    color: "#ffffff",
-    border: "none",
-    padding: "10px",
-    width: "100%",
-    borderRadius: 6,
-    fontWeight: 600,
-    cursor: "pointer",
-    marginTop: 8
-  }}
->
-  Run AI
-</button>
+        <button onClick={runAI}>Run AI</button>
 
-        <div>
-          {plan.map((f) => (
-            <div key={f}>{f}</div>
-          ))}
-        </div>
+        {drafts.length > 0 && (
+          <div style={{ marginTop: 10 }}>
+            <div>Diff: {activeFile}</div>
 
-        {/* CLEAN DIFF VIEW */}
-        {drafts.map((d, i) => (
-          <div key={i} style={{ marginTop: 10 }}>
-            <button
-  onClick={() => applyDraft(d)}
-  style={{
-    background: "#f59e0b",
-    color: "#000",
-    border: "none",
-    padding: "6px 10px",
-    borderRadius: 4,
-    fontWeight: 600,
-    cursor: "pointer",
-    marginBottom: 6
-  }}
->
-  Apply
-</button>
-
-            <div style={{ fontSize: 10 }}>
-              <div>Current:</div>
-              <pre style={{
-  background: "#111",
-  color: "#9ca3af",
-  padding: "8px",
-  borderRadius: 4,
-  overflow: "auto"
-}}>
-  {content}
-</pre>
-
-              <div>Proposed:</div>
-              <pre style={{
-  background: "#052e16",
-  color: "#bbf7d0",
-  padding: "8px",
-  borderRadius: 4,
-  overflow: "auto"
-}}>
-  {d.content}
-</pre>
+            <div style={{ display: "flex", height: 200 }}>
+              <textarea value={content} readOnly style={{ width: "50%" }} />
+              <textarea
+                value={drafts[0].content || drafts[0].code || ""}
+                readOnly
+                style={{ width: "50%" }}
+              />
             </div>
-          </div>
-        ))}
-      </div>
 
+            <button onClick={applyDraft} style={{ marginTop: 10 }}>
+              Apply
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
