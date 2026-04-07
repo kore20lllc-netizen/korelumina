@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import SnapshotPanel from "@/components/master-os/SnapshotPanel";
 
 type Draft = {
   file?: string;
@@ -395,7 +396,11 @@ export default function MasterOS() {
                 background: "#fff",
               }}
             />
-          </div>
+            <SnapshotPanel
+  refreshKey={previewKey}
+  onRestore={() => setPreviewKey(Date.now())}
+/>         
+         </div>
         </div>
       </div>
     </div>
