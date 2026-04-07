@@ -2,30 +2,71 @@ export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const spec = body?.spec || "No input";
+    const { spec } = await req.json();
 
-    // ALWAYS return valid, standalone React page
-    const code = `
+    // 🔥 Simple multi-file generator (deterministic, no AI yet)
+    // Later you replace with real LLM
+
+    const drafts = [];
+
+    // Always include main page
+    drafts.push({
+      file: "app/page.tsx",
+      code: `
+import Layout from "../components/Layout";
+
 export default function Page() {
   return (
-    <div style={{ padding: 40, fontSize: 24 }}>
-      <h1>AI Output</h1>
-      <p>${spec}</p>
+    <Layout>
+      <h1>${spec}</h1>
+    </Layout>
+  );
+}
+`,
+    });
+
+    // Add layout
+    drafts.push({
+      file: "components/Layout.tsx",
+      code: `
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ padding: 40 }}>
+      <div style={{ marginBottom: 20, fontWeight: 700 }}>
+        KoreLumina App
+      </div>
+      {children}
     </div>
   );
 }
-`;
+`,
+    });
+
+    // Optional component (based on spec keyword)
+    if ((spec || "").toLowerCase().includes("card")) {
+      drafts.push({
+        file: "components/Card.tsx",
+        code: `
+export default function Card({ title }: { title: string }) {
+  return (
+    <div style={{
+      padding: 20,
+      border: "1px solid #ddd",
+      borderRadius: 10,
+      marginTop: 20
+    }}>
+      {title}
+    </div>
+  );
+}
+`,
+      });
+    }
 
     return new Response(
       JSON.stringify({
         ok: true,
-        drafts: [
-          {
-            file: "app/page.tsx",
-            code,
-          },
-        ],
+        drafts,
       }),
       {
         headers: { "Content-Type": "application/json" },
