@@ -1,21 +1,79 @@
-import fs from "fs";
-import path from "path";
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+type Draft = {
+  file?: string;
+  path?: string;
+  code?: string;
+  content?: string;
+};
 
 export async function POST(req: Request) {
-  const { projectId, drafts } = await req.json();
+  try {
+    const body = await req.json();
+    const projectId = body?.projectId;
+    const drafts: Draft[] = body?.drafts || [];
 
-  const baseDir = path.join(
-    process.cwd(),
-    "runtime/workspaces/default/projects",
-    projectId
-  );
+    if (!projectId) {
+      return NextResponse.json(
+        { ok: false, error: "Missing projectId" },
+        { status: 400 }
+      );
+    }
 
-  for (const d of drafts) {
-    const filePath = path.join(baseDir, d.file);
+    if (!Array.isArray(drafts) || drafts.length === 0) {
+      return NextResponse.json(
+        { ok: false, error: "No drafts provided" },
+        { status: 400 }
+      );
+    }
 
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, d.code);
+    const results: Array<{ file: string; ok: boolean; error?: string }> = [];
+
+    for (const draft of drafts) {
+      const file = draft.file || draft.path || "app/page.tsx";
+      const content = draft.code ?? draft.content ?? "";
+
+      if (!content) {
+        results.push({ file, ok: false, error: "Empty content" });
+        continue;
+      }
+
+      const res = await fetch("http://localhost:3000/api/dev/fs/write", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          projectId,
+          file,
+          content,
+        }),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        results.push({ file, ok: false, error: text || "fs/write failed" });
+        continue;
+      }
+
+      results.push({ file, ok: true });
+    }
+
+    const failed = results.filter((r) => !r.ok);
+
+    return NextResponse.json({
+      ok: failed.length === 0,
+      results,
+    });
+  } catch (err: any) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: err?.message || "apply failed",
+      },
+      { status: 500 }
+    );
   }
-
-  return Response.json({ ok: true });
 }
