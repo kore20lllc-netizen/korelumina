@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import SnapshotPanel from "@/components/master-os/SnapshotPanel";
+import DiffPanel from "@/components/master-os/DiffPanel";
 
 type Draft = {
   file?: string;
@@ -298,20 +299,39 @@ export default function MasterOS() {
                         {file}
                       </div>
 
-                      <button
-                        onClick={() => toggleApprove(key)}
-                        style={{
-                          padding: "8px 12px",
-                          background: approved[key] ? "#22c55e" : "#334155",
-                          color: approved[key] ? "#000" : "#fff",
-                          border: "none",
-                          borderRadius: 8,
-                          cursor: "pointer",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {approved[key] ? "Approved" : "Approve"}
-                      </button>
+                      <div style={{ display: "flex", gap: 8 }}>
+  <button
+    onClick={() => toggleApprove(key)}
+    style={{
+      padding: "8px 12px",
+      background: approved[key] ? "#22c55e" : "#334155",
+      color: approved[key] ? "#000" : "#fff",
+      border: "none",
+      borderRadius: 8,
+      cursor: "pointer",
+      fontWeight: 700,
+    }}
+  >
+    {approved[key] ? "Approved" : "Approve"}
+  </button>
+
+  <button
+    onClick={() =>
+      setDrafts((prev) => prev.filter((_, idx) => idx !== i))
+    }
+    style={{
+      padding: "8px 12px",
+      background: "#ef4444",
+      color: "#fff",
+      border: "none",
+      borderRadius: 8,
+      cursor: "pointer",
+      fontWeight: 700,
+    }}
+  >
+    Reject
+  </button>
+</div>
                     </div>
 
                     <pre
@@ -326,7 +346,7 @@ export default function MasterOS() {
                         color: "#cbd5e1",
                       }}
                     >
-                      {code}
+                      <DiffPanel file={file} newCode={code} />
                     </pre>
                   </div>
                 );
