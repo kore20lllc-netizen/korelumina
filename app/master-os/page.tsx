@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import SnapshotPanel from "@/components/master-os/SnapshotPanel";
+import DiffPanel from "@/components/master-os/DiffPanel";
+
+type Draft = {
+  file?: string;
+  path?: string;
+  code?: string;
+  content?: string;
+};
 
 const MODULES = [
   "builder-core",
@@ -10,14 +19,7 @@ const MODULES = [
   "production-hardening",
 ];
 
-type Draft = {
-  file: string;
-  code: string;
-  approved?: boolean;
-};
-
 export default function MasterOS() {
-  const [state, setState] = useState<any>({});
   const [input, setInput] = useState("");
   const [drafts, setDrafts] = useState<Draft[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
@@ -25,469 +27,402 @@ export default function MasterOS() {
   const [previewKey, setPreviewKey] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
-  const [refreshSpin, setRefreshSpin] = useState(false);
+  const [approved, setApproved] = useState<Record<string, boolean>>({});
 
   function log(msg: string) {
-    setLogs((p) => [...p, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+    setLogs((prev) => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
   }
 
-  async function load() {
-    setRefreshSpin(true);
-    try {
-      const res = await fetch("/api/master-os");
-      const data = await res.json();
-      setState(data.state || {});
-    } finally {
-      setTimeout(() => setRefreshSpin(false), 400);
-    }
+  function draftKey(d: Draft, index: number) {
+    return `${d.file || d.path || "app/page.tsx"}::${index}`;
   }
 
-  useEffect(() => {
-    load();
-  }, []);
-
-  async function saveSystem(owner: string) {
-    await fetch("/api/master-os", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        currentTask: {
-          title: input,
-          owner,
-        },
-      }),
-    });
-
-    await load();
+  function toggleApprove(key: string) {
+    setApproved((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   }
 
-  async function generatePlan() {
+  async function generate() {
     if (!input.trim() || isGenerating) return;
 
     setIsGenerating(true);
-    log("Generating plan...");
+    log("Generating drafts...");
 
     try {
       const res = await fetch("/api/ai/orchestrate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           projectId: "repo-test",
-          prompt: input,
+          spec: input,
         }),
       });
 
       const data = await res.json();
+      const nextDrafts: Draft[] = data?.drafts || [];
 
-      const owner = data.owner || "builder-core";
-      setActiveModule(owner);
-      await saveSystem(owner);
+      setDrafts(nextDrafts);
 
-      const next = (data.drafts || []).map((d: Draft) => ({
-        ...d,
-        approved: false,
-      }));
+      const nextApproved: Record<string, boolean> = {};
+      nextDrafts.forEach((d, i) => {
+        nextApproved[draftKey(d, i)] = false;
+      });
+      setApproved(nextApproved);
 
-      setDrafts(next);
-      log(`Plan ready: ${next.length} file(s)`);
-    } catch (error) {
-      console.error(error);
-      log("Plan generation failed");
+      log(`Generated ${nextDrafts.length} draft(s)`);
+    } catch (err) {
+      console.error(err);
+      log("Generation failed");
     } finally {
       setIsGenerating(false);
     }
   }
 
-  function toggle(file: string) {
-    setDrafts((prev) =>
-      prev.map((d) => (d.file === file ? { ...d, approved: !d.approved } : d))
-    );
-  }
-
-  async function apply() {
+  async function applyApproved() {
     if (isApplying) return;
 
-    const approved = drafts.filter((d) => d.approved);
-
-    if (!approved.length) {
-      log("No approved files");
+    const selected = drafts.filter((d, i) => approved[draftKey(d, i)]);
+    if (selected.length === 0) {
+      log("No approved drafts");
       return;
     }
 
     setIsApplying(true);
-    log("Applying...");
+    log(`Applying ${selected.length} draft(s)...`);
 
     try {
-      await fetch("/api/ai/apply", {
+      const res = await fetch("/api/ai/apply", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           projectId: "repo-test",
-          drafts: approved,
+          drafts: selected,
         }),
       });
 
-      log("Applied");
+      const data = await res.json();
 
+      if (!data?.ok) {
+        log("Apply completed with errors");
+      } else {
+        log("Apply successful");
+      }
+
+      setDrafts([]);
+      setApproved({});
       setPreviewKey(Date.now());
-
-      log("Preview refreshed");
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       log("Apply failed");
     } finally {
       setIsApplying(false);
     }
   }
 
-  function statusColor(m: string) {
-    if (state.currentTask?.owner === m) return "#22c55e";
-    return "#ef4444";
-  }
+  const approvedCount = useMemo(
+    () => Object.values(approved).filter(Boolean).length,
+    [approved]
+  );
+
+  useEffect(() => {
+    log("Master OS ready");
+  }, []);
 
   return (
-    <div style={styles.container}>
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes pulseGlow {
-          0% { box-shadow: 0 0 0 rgba(59,130,246,0.0); }
-          50% { box-shadow: 0 0 18px rgba(59,130,246,0.30); }
-          100% { box-shadow: 0 0 0 rgba(59,130,246,0.0); }
-        }
-      `}</style>
-
-      <div style={styles.header}>
-        <div>
-          <div style={styles.title}>KoreLumina Master OS</div>
-          <div style={styles.sub}>
-            {state.currentProject || "repo-test"} · main
-          </div>
-        </div>
-
-        <div style={styles.headerRight}>
-          <span style={{ ...styles.status, color: "#22c55e" }}>BUILD</span>
-          <span style={{ ...styles.status, color: "#eab308" }}>AI</span>
-          <span style={{ ...styles.status, color: "#22c55e" }}>PREVIEW</span>
-
-          <button
-            onClick={load}
-            style={{
-              ...styles.refresh,
-              transform: refreshSpin ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.35s ease, box-shadow 0.2s ease, border-color 0.2s ease",
-            }}
-          >
-            ↻
-          </button>
-        </div>
-      </div>
-
-      <div style={styles.grid}>
-        <div style={styles.panel}>
-          <div style={styles.panelTitle}>Modules</div>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#020617",
+        color: "#fff",
+        padding: 20,
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "240px 1fr 420px",
+          gap: 20,
+          height: "calc(100vh - 40px)",
+        }}
+      >
+        {/* LEFT */}
+        <div
+          style={{
+            background: "#0b1220",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: 12,
+            padding: 14,
+            overflow: "auto",
+          }}
+        >
+          <div style={{ fontWeight: 700, marginBottom: 12 }}>Modules</div>
 
           {MODULES.map((m) => (
             <div
               key={m}
               onClick={() => setActiveModule(m)}
               style={{
-                ...styles.module,
-                border: activeModule === m ? "1px solid #3b82f6" : "1px solid transparent",
-                background: activeModule === m ? "rgba(59,130,246,0.15)" : "transparent",
-                boxShadow:
-                  activeModule === m ? "0 0 18px rgba(59,130,246,0.25)" : "none",
-                transform: activeModule === m ? "translateY(-1px)" : "translateY(0)",
+                padding: 10,
+                marginBottom: 8,
+                borderRadius: 10,
+                cursor: "pointer",
+                background:
+                  activeModule === m ? "rgba(59,130,246,0.18)" : "transparent",
+                border:
+                  activeModule === m
+                    ? "1px solid rgba(59,130,246,0.5)"
+                    : "1px solid rgba(255,255,255,0.05)",
               }}
             >
-              <span>{m}</span>
-              <span
-                style={{
-                  ...styles.dot,
-                  background: statusColor(m),
-                }}
-              />
+              {m}
             </div>
           ))}
         </div>
 
-        <div style={styles.panel}>
-          <div style={styles.panelTitle}>AI Command Center</div>
+        {/* CENTER */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            minWidth: 0,
+          }}
+        >
+          <div
+            style={{
+              background: "#0b1220",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: 16,
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: 12 }}>
+              Master OS Command Center
+            </div>
 
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Describe what you want to build..."
-            style={styles.textarea}
-          />
-
-          <div style={styles.row}>
-            <button
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Describe what to build..."
               style={{
-                ...styles.btnPrimary,
-                opacity: isGenerating ? 0.75 : 1,
-                cursor: isGenerating ? "not-allowed" : "pointer",
-                animation: isGenerating ? "pulseGlow 1.2s ease-in-out infinite" : "none",
+                width: "100%",
+                minHeight: 90,
+                background: "#020617",
+                color: "#fff",
+                border: "1px solid rgba(255,255,255,0.12)",
+                borderRadius: 10,
+                padding: 12,
+                resize: "vertical",
+                outline: "none",
               }}
-              onClick={generatePlan}
-              disabled={isGenerating}
-            >
-              {isGenerating ? "Generating..." : "Send"}
-            </button>
+            />
 
-            <button
-              style={{
-                ...styles.btnSecondary,
-                opacity: isApplying ? 0.75 : 1,
-                cursor: isApplying ? "not-allowed" : "pointer",
-                animation: isApplying ? "pulseGlow 1.2s ease-in-out infinite" : "none",
-              }}
-              onClick={apply}
-              disabled={isApplying}
-            >
-              {isApplying ? "Applying..." : "Approve & Execute"}
-            </button>
+            <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
+              <button
+                onClick={generate}
+                style={{
+                  padding: "10px 14px",
+                  background: "#3b82f6",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: 8,
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
+              >
+                {isGenerating ? "Generating..." : "Generate Drafts"}
+              </button>
+
+              <button
+                onClick={applyApproved}
+                style={{
+                  padding: "10px 14px",
+                  background: "#22c55e",
+                  color: "#000",
+                  border: "none",
+                  borderRadius: 8,
+                  cursor: "pointer",
+                  fontWeight: 700,
+                }}
+              >
+                {isApplying ? "Applying..." : `Apply Approved (${approvedCount})`}
+              </button>
+            </div>
           </div>
 
-          {drafts.map((d) => (
-            <div key={d.file} style={styles.diffCard}>
-              <div style={styles.fileHeader}>
-                {d.file}
+          <div
+            style={{
+              flex: 1,
+              background: "#0b1220",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: 16,
+              overflow: "auto",
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: 12 }}>Drafts</div>
 
-                <button
-                  onClick={() => toggle(d.file)}
-                  style={{
-                    ...styles.approveBtn,
-                    background: d.approved
-                      ? "linear-gradient(135deg,#16a34a,#22c55e)"
-                      : "rgba(255,255,255,0.04)",
-                    color: d.approved ? "#fff" : "#cbd5e1",
-                    border: d.approved
-                      ? "1px solid rgba(34,197,94,0.5)"
-                      : "1px solid rgba(255,255,255,0.08)",
-                    boxShadow: d.approved
-                      ? "0 0 14px rgba(34,197,94,0.22)"
-                      : "none",
-                    transform: d.approved ? "translateY(-1px)" : "translateY(0)",
-                  }}
-                >
-                  {d.approved ? "Approved" : "Approve"}
-                </button>
-              </div>
+            {drafts.length === 0 ? (
+              <div style={{ opacity: 0.65 }}>No drafts</div>
+            ) : (
+              drafts.map((d, i) => {
+                const key = draftKey(d, i);
+                const file = d.file || d.path || "app/page.tsx";
+                const code = d.code || d.content || "";
 
-              <pre style={styles.code}>{d.code}</pre>
-            </div>
-          ))}
+                return (
+                  <div
+                    key={key}
+                    style={{
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: 12,
+                      marginBottom: 14,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: 12,
+                        background: "rgba(255,255,255,0.03)",
+                      }}
+                    >
+                      <div style={{ fontFamily: "monospace", fontSize: 13 }}>
+                        {file}
+                      </div>
+
+                      <div style={{ display: "flex", gap: 8 }}>
+  <button
+    onClick={() => toggleApprove(key)}
+    style={{
+      padding: "8px 12px",
+      background: approved[key] ? "#22c55e" : "#334155",
+      color: approved[key] ? "#000" : "#fff",
+      border: "none",
+      borderRadius: 8,
+      cursor: "pointer",
+      fontWeight: 700,
+    }}
+  >
+    {approved[key] ? "Approved" : "Approve"}
+  </button>
+
+  <button
+    onClick={() =>
+      setDrafts((prev) => prev.filter((_, idx) => idx !== i))
+    }
+    style={{
+      padding: "8px 12px",
+      background: "#ef4444",
+      color: "#fff",
+      border: "none",
+      borderRadius: 8,
+      cursor: "pointer",
+      fontWeight: 700,
+    }}
+  >
+    Reject
+  </button>
+</div>
+                    </div>
+
+                    <pre
+                      style={{
+                        margin: 0,
+                        padding: 12,
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        overflow: "auto",
+                        fontSize: 12,
+                        background: "#020617",
+                        color: "#cbd5e1",
+                      }}
+                    >
+                      <DiffPanel file={file} newCode={code} />
+                    </pre>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
 
-        <div style={styles.panel}>
-          <div style={styles.panelTitle}>System State</div>
+        {/* RIGHT */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <div
+            style={{
+              background: "#0b1220",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: 16,
+              minHeight: 220,
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: 12 }}>Execution Log</div>
 
-          <div style={styles.systemItem}>Task: {state.currentTask?.title || "none"}</div>
-          <div style={styles.systemItem}>Owner: {state.currentTask?.owner || "-"}</div>
-          <div style={styles.systemItem}>Approved: {drafts.filter((d) => d.approved).length}</div>
+            <div
+              style={{
+                maxHeight: 220,
+                overflow: "auto",
+                fontFamily: "monospace",
+                fontSize: 12,
+                color: "#93c5fd",
+              }}
+            >
+              {logs.map((l, i) => (
+                <div key={i} style={{ marginBottom: 8 }}>
+                  {l}
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <div style={{ marginTop: 20 }}>
-            <div style={styles.panelTitle}>Live Preview</div>
+          <div
+            style={{
+              flex: 1,
+              background: "#0b1220",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: 16,
+              display: "flex",
+              flexDirection: "column",
+              minHeight: 0,
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: 12 }}>Builder Preview</div>
 
             <iframe
               key={previewKey}
-              src="/builder?projectId=repo-test"
-              style={styles.preview}
+              src={`/builder?projectId=repo-test&v=${previewKey}`}
+              style={{
+                width: "100%",
+                flex: 1,
+                border: "none",
+                borderRadius: 10,
+                background: "#fff",
+              }}
             />
-          </div>
+            <SnapshotPanel
+  refreshKey={previewKey}
+  onRestore={() => setPreviewKey(Date.now())}
+/>         
+         </div>
         </div>
-      </div>
-
-      <div style={styles.logPanel}>
-        <div style={styles.panelTitle}>Execution Log</div>
-
-        {logs.map((l, i) => (
-          <div key={i} style={styles.logLine}>
-            {l}
-          </div>
-        ))}
       </div>
     </div>
   );
 }
-
-const styles: any = {
-  container: {
-    padding: 20,
-    background: "radial-gradient(circle at top, #0b1220, #020617)",
-    color: "#fff",
-    minHeight: "100vh",
-  },
-
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-
-  headerRight: {
-    display: "flex",
-    gap: 12,
-    alignItems: "center",
-  },
-
-  status: {
-    fontSize: 11,
-    letterSpacing: 1,
-    transition: "opacity 0.2s ease",
-  },
-
-  refresh: {
-    background: "rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: 8,
-    padding: "4px 10px",
-    color: "#fff",
-    cursor: "pointer",
-    boxShadow: "0 0 0 rgba(59,130,246,0)",
-  },
-
-  title: { fontSize: 18, fontWeight: 600 },
-  sub: { fontSize: 12, color: "#94a3b8" },
-
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "260px 1fr 380px",
-    gap: 20,
-  },
-
-  panel: {
-    padding: 16,
-    background: "rgba(255,255,255,0.04)",
-    backdropFilter: "blur(10px)",
-    borderRadius: 14,
-    border: "1px solid rgba(255,255,255,0.06)",
-    transition: "box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease",
-  },
-
-  panelTitle: {
-    marginBottom: 12,
-    fontSize: 13,
-    color: "#94a3b8",
-    fontWeight: 600,
-  },
-
-  module: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: 10,
-    borderRadius: 10,
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-  },
-
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    transition: "background 0.2s ease, box-shadow 0.2s ease",
-    boxShadow: "0 0 10px rgba(255,255,255,0.12)",
-  },
-
-  textarea: {
-    width: "100%",
-    height: 100,
-    background: "rgba(0,0,0,0.4)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: 10,
-    color: "#fff",
-    padding: 10,
-    marginBottom: 12,
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-  },
-
-  row: {
-    display: "flex",
-    gap: 10,
-  },
-
-  btnPrimary: {
-    flex: 1,
-    padding: 12,
-    borderRadius: 12,
-    background: "linear-gradient(135deg,#3b82f6,#6366f1)",
-    border: "none",
-    color: "#fff",
-    fontWeight: 500,
-    cursor: "pointer",
-    transition: "transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease",
-    boxShadow: "0 8px 20px rgba(59,130,246,0.22)",
-  },
-
-  btnSecondary: {
-    flex: 1,
-    padding: 12,
-    borderRadius: 12,
-    background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-    border: "none",
-    color: "#fff",
-    fontWeight: 500,
-    cursor: "pointer",
-    transition: "transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease",
-    boxShadow: "0 8px 20px rgba(37,99,235,0.22)",
-  },
-
-  approveBtn: {
-    fontSize: 11,
-    padding: "4px 10px",
-    borderRadius: 999,
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-  },
-
-  systemItem: {
-    fontSize: 13,
-    marginBottom: 6,
-  },
-
-  diffCard: {
-    marginTop: 10,
-    padding: 10,
-    background: "#020617",
-    borderRadius: 10,
-    border: "1px solid rgba(255,255,255,0.06)",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-  },
-
-  fileHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: 6,
-  },
-
-  code: {
-    fontSize: 12,
-    fontFamily: "monospace",
-    whiteSpace: "pre-wrap",
-  },
-
-  preview: {
-    width: "100%",
-    height: 400,
-    border: "none",
-    borderRadius: 10,
-    background: "#fff",
-    boxShadow: "0 10px 24px rgba(0,0,0,0.22)",
-  },
-
-  logPanel: {
-    marginTop: 20,
-    padding: 12,
-    background: "rgba(0,0,0,0.6)",
-    borderRadius: 12,
-    border: "1px solid rgba(255,255,255,0.06)",
-  },
-
-  logLine: {
-    color: "#22c55e",
-    fontSize: 12,
-  },
-};

@@ -52,3 +52,4 @@ runtime/backups/
 task-draft.json
 nature-crest-climate-solutions/
 .kore_runtime
+runtime/snapshots/
