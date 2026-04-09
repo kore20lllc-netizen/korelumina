@@ -2,10 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
+import PreviewFrame from "@/components/builder/PreviewFrame";
 
 export default function BuilderInner({ projectId }: { projectId: string }) {
   const [files, setFiles] = useState<string[]>([]);
   const [activeFile, setActiveFile] = useState("app/page.tsx");
+  const [selectedFile, setSelectedFile] = useState<string>("app/page.tsx");
 
   const [editorValue, setEditorValue] = useState("");
   const [draftValue, setDraftValue] = useState("");
@@ -27,10 +29,12 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
 
       setFiles(list);
 
-      if (list.includes("app/page.tsx")) {
+         if (list.includes("app/page.tsx")) {
         setActiveFile("app/page.tsx");
+        setSelectedFile("app/page.tsx");
       } else if (list.length > 0) {
         setActiveFile(list[0]);
+        setSelectedFile(list[0]);
       }
     })();
   }, [projectId]);
@@ -266,14 +270,18 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
           borderLeft: "1px solid #222",
         }}
       >
-        <iframe
-          src={previewUrl}
-          style={{
-            width: "100%",
-            height: "100%",
-            border: "none",
-          }}
-        />
+        <PreviewFrame
+  projectId={projectId}
+  version={previewVersion}
+  file={selectedFile}
+/>
+<div style={{ flex: 1, borderLeft: "1px solid #eee" }}>
+  <PreviewFrame
+    projectId={projectId}
+    version={previewVersion}
+    file={selectedFile}
+  />
+</div>
       </div>
     </div>
   );

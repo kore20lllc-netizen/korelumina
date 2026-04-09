@@ -1,3 +1,4 @@
+import { safeParse } from "@/lib/safe-json";
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
@@ -19,7 +20,7 @@ export async function GET(_req: Request, context: RouteContext) {
   }
 
   const raw = fs.readFileSync(jobFile, "utf-8");
-  const job = JSON.parse(raw);
+  const job = safeParse(raw, {});
 
   return NextResponse.json(job, { status: 200 });
 }

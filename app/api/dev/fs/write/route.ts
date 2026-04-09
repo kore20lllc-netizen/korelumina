@@ -1,40 +1,10 @@
-import fs from "fs";
+import { NextRequest, NextResponse } from "next/server";
 import path from "path";
+import fs from "fs/promises";
+import { isLockedFile } from "@/lib/guardrails/builder-lock";
 
-function unwrap(s: string) {
-  try {
-    const p = JSON.parse(s);
-    if (p?.content) return p.content;
-  } catch {}
-  return s;
-}
-
-// 🔥 CRITICAL: remove duplicate exports
-function sanitize(code: string) {
-  const lines = code.split("\n");
-
-  let seenDefault = false;
-
-  return lines.filter(line => {
-    if (line.includes("export default")) {
-      if (seenDefault) return false;
-      seenDefault = true;
-      return true;
-    }
-    return true;
-  }).join("\n");
-}
-
-export async function POST(req: Request) {
-  const body = await req.json();
-
-  const projectId = body.projectId || "demo-project";
-  const relFile = (body.file || "app/page.tsx").replace(/^\/+/, "");
-  const raw = body.content || "";
-
-  const clean = sanitize(unwrap(raw));
-
-  const root = path.join(
+function resolveSafePath(projectId: string, filePath: string) {
+  const projectRoot = path.join(
     process.cwd(),
     "runtime",
     "workspaces",
@@ -43,30 +13,69 @@ export async function POST(req: Request) {
     projectId
   );
 
-  const full = path.join(root, relFile);
+  const fullPath = path.join(projectRoot, filePath);
 
-  fs.mkdirSync(path.dirname(full), { recursive: true });
+  if (!fullPath.startsWith(projectRoot)) {
+    throw new Error("Invalid path");
+  }
 
-  // overwrite only
-  fs.writeFileSync(full, clean, "utf8");
+  return { fullPath };
+}
 
-  // journal
-  const journalPath = path.join(root, "journal.json");
-
-  let entries: any[] = [];
+export async function POST(req: NextRequest) {
   try {
-    if (fs.existsSync(journalPath)) {
-      entries = JSON.parse(fs.readFileSync(journalPath, "utf8"));
+    const body = await req.json();
+
+    console.log("[FS WRITE BODY]", body);
+
+    const projectId = body.projectId;
+    const filePath = body.filePath || body.file;
+    const content = body.content;
+
+    if (!projectId || !filePath) {
+      return NextResponse.json(
+        { ok: false, error: "Missing projectId or filePath" },
+        { status: 400 }
+      );
     }
-  } catch {}
 
-  entries.unshift({
-    t: Date.now(),
-    op: "write",
-    path: relFile,
-  });
+    if (typeof content !== "string") {
+      return NextResponse.json(
+        { ok: false, error: "Content must be string" },
+        { status: 400 }
+      );
+    }
 
-  fs.writeFileSync(journalPath, JSON.stringify(entries.slice(0, 50), null, 2));
+    const { fullPath } = resolveSafePath(projectId, filePath);
 
-  return Response.json({ ok: true });
+if (isLockedFile(filePath)) {
+  return NextResponse.json(
+    {
+      ok: false,
+      error: "Protected system file (builder/master-os locked)",
+      file: filePath,
+    },
+    { status: 403 }
+  );
+}
+    await fs.mkdir(path.dirname(fullPath), { recursive: true });
+
+    await fs.writeFile(fullPath, content, "utf-8");
+
+    return NextResponse.json({
+      ok: true,
+      projectId,
+      filePath,
+    });
+  } catch (err: any) {
+    console.error("[FS WRITE ERROR]", err);
+
+    return NextResponse.json(
+      {
+        ok: false,
+        error: err?.message || "Write failed",
+      },
+      { status: 500 }
+    );
+  }
 }

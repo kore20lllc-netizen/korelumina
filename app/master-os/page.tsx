@@ -9,6 +9,7 @@ type Draft = {
   path?: string;
   code?: string;
   content?: string;
+  explanation?: string;
 };
 
 const MODULES = [
@@ -20,6 +21,13 @@ const MODULES = [
 ];
 
 export default function MasterOS() {
+
+ // 🔒 MASTER OS GUARD (ADD EXACTLY HERE)
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.warn("[MASTER OS] env not fully configured");
+  }
+  console.warn("[MASTER OS LOCK ACTIVE]");
+  
   const [input, setInput] = useState("");
   const [drafts, setDrafts] = useState<Draft[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
@@ -66,7 +74,8 @@ export default function MasterOS() {
       const nextDrafts: Draft[] = data?.drafts || [];
 
       setDrafts(nextDrafts);
-
+     autoExplainDrafts(nextDrafts);
+     
       const nextApproved: Record<string, boolean> = {};
       nextDrafts.forEach((d, i) => {
         nextApproved[draftKey(d, i)] = false;
@@ -79,8 +88,8 @@ export default function MasterOS() {
       log("Generation failed");
     } finally {
       setIsGenerating(false);
-    }
-  }
+    }  
+}
 
   async function applyApproved() {
     if (isApplying) return;
@@ -124,7 +133,41 @@ export default function MasterOS() {
       setIsApplying(false);
     }
   }
+async function autoExplainDrafts(drafts: Draft[]) {
+  try {
+    const results = await Promise.all(
+      drafts.map(async (d) => {
+        const file = d.file || d.path || "app/page.tsx";
+        const newCode = d.code || d.content || "";
 
+        let oldCode = "";
+        try {
+          const res = await fetch(
+            `/api/dev/fs/read?projectId=repo-test&file=${encodeURIComponent(file)}`
+          );
+          oldCode = await res.text();
+        } catch {}
+
+        const res = await fetch("/api/ai/explain", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ file, oldCode, newCode }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        return {
+          ...d,
+          explanation: data?.text || "",
+        };
+      })
+    );
+
+    setDrafts(results);
+  } catch (err) {
+    console.error(err);
+  }
+}
   const approvedCount = useMemo(
     () => Object.values(approved).filter(Boolean).length,
     [approved]
@@ -272,85 +315,98 @@ export default function MasterOS() {
               <div style={{ opacity: 0.65 }}>No drafts</div>
             ) : (
               drafts.map((d, i) => {
-                const key = draftKey(d, i);
-                const file = d.file || d.path || "app/page.tsx";
-                const code = d.code || d.content || "";
+  const key = draftKey(d, i);
+  const file = d.file || d.path || "app/page.tsx";
+  const code = d.code || d.content || "";
 
-                return (
-                  <div
-                    key={key}
-                    style={{
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      borderRadius: 12,
-                      marginBottom: 14,
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: 12,
-                        background: "rgba(255,255,255,0.03)",
-                      }}
-                    >
-                      <div style={{ fontFamily: "monospace", fontSize: 13 }}>
-                        {file}
-                      </div>
+  return (
+    <div
+      key={key}
+      style={{
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: 12,
+        marginBottom: 14,
+        overflow: "hidden",
+      }}
+    >
+      {/* HEADER */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: 12,
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
+        <div style={{ fontFamily: "monospace", fontSize: 13 }}>
+          {file}
+        </div>
 
-                      <div style={{ display: "flex", gap: 8 }}>
-  <button
-    onClick={() => toggleApprove(key)}
-    style={{
-      padding: "8px 12px",
-      background: approved[key] ? "#22c55e" : "#334155",
-      color: approved[key] ? "#000" : "#fff",
-      border: "none",
-      borderRadius: 8,
-      cursor: "pointer",
-      fontWeight: 700,
-    }}
-  >
-    {approved[key] ? "Approved" : "Approve"}
-  </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button
+            onClick={() => toggleApprove(key)}
+            style={{
+              padding: "8px 12px",
+              background: approved[key] ? "#22c55e" : "#334155",
+              color: approved[key] ? "#000" : "#fff",
+              border: "none",
+              borderRadius: 8,
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            {approved[key] ? "Approved" : "Approve"}
+          </button>
 
-  <button
-    onClick={() =>
-      setDrafts((prev) => prev.filter((_, idx) => idx !== i))
-    }
-    style={{
-      padding: "8px 12px",
-      background: "#ef4444",
-      color: "#fff",
-      border: "none",
-      borderRadius: 8,
-      cursor: "pointer",
-      fontWeight: 700,
-    }}
-  >
-    Reject
-  </button>
-</div>
-                    </div>
+          <button
+            onClick={() =>
+              setDrafts((prev) => prev.filter((_, idx) => idx !== i))
+            }
+            style={{
+              padding: "8px 12px",
+              background: "#ef4444",
+              color: "#fff",
+              border: "none",
+              borderRadius: 8,
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            Reject
+          </button>
+        </div>
+      </div>
 
-                    <pre
-                      style={{
-                        margin: 0,
-                        padding: 12,
-                        whiteSpace: "pre-wrap",
-                        wordBreak: "break-word",
-                        overflow: "auto",
-                        fontSize: 12,
-                        background: "#020617",
-                        color: "#cbd5e1",
-                      }}
-                    >
-                      <DiffPanel file={file} newCode={code} />
-                    </pre>
-                  </div>
-                );
-              })
+      {/* EXPLANATION (OUTSIDE HEADER) */}
+      {d.explanation && (
+        <div
+          style={{
+            fontSize: 12,
+            padding: 10,
+            background: "#020617",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {d.explanation}
+        </div>
+      )}
+
+      {/* DIFF PANEL */}
+      <div
+        style={{
+          padding: 12,
+          overflow: "auto",
+          fontSize: 12,
+          background: "#020617",
+        }}
+      >
+        <DiffPanel file={file} newCode={code} />
+      </div>
+    </div>
+  );
+})   
             )}
           </div>
         </div>

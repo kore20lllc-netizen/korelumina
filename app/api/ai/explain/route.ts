@@ -1,69 +1,54 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
-
 export async function POST(req: Request) {
   try {
-    let body: any = {};
+    const body = await req.json();
+    const file = body.file || "";
+    const oldCode = body.oldCode || "";
+    const newCode = body.newCode || "";
 
-    // 🔒 Safe body parsing (no crash)
-    try {
-      const text = await req.text();
-      if (text && text.trim().length > 0) {
-        body = JSON.parse(text);
-      }
-    } catch {
-      body = {};
-    }
+    const systemPrompt =
+      "You are a senior software engineer. " +
+      "Explain ONLY the actual code differences. " +
+      "Rules: max 5 bullets, no filler, no generic statements, " +
+      "no describing unchanged code. " +
+      "If no changes, return: No changes detected.";
 
-    const { file, oldCode, newCode } = body;
-
-    if (!file) {
-      return NextResponse.json(
-        { ok: false, error: "Missing file" },
-        { status: 400 }
-      );
-    }
-
-    const prompt = `
-Explain the code changes clearly.
-
-File: ${file}
-
-OLD:
-${oldCode || ""}
-
-NEW:
-${newCode || ""}
-
-Return:
-- bullet points
-- max 5
-`;
+    const userPrompt =
+      "Compare OLD vs NEW and list only real differences.\n\n" +
+      "OLD:\n" + oldCode + "\n\n" +
+      "NEW:\n" + newCode;
 
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: "Bearer " + process.env.OPENAI_API_KEY,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
+        temperature: 0,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
       }),
     });
 
     const data = await res.json().catch(() => ({}));
-    console.log("OPENAI RAW:", JSON.stringify(data, null, 2));
-    
+
     const text =
-      data?.choices?.[0]?.message?.content ||
+      (data &&
+        data.choices &&
+        data.choices[0] &&
+        data.choices[0].message &&
+        data.choices[0].message.content &&
+        data.choices[0].message.content.trim()) ||
       "No explanation generated";
 
     return NextResponse.json({ ok: true, text });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Explain error:", err);
-
     return NextResponse.json(
       { ok: false, error: "Explain failed" },
       { status: 500 }
