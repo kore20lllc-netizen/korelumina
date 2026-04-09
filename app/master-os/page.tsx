@@ -21,6 +21,13 @@ const MODULES = [
 ];
 
 export default function MasterOS() {
+
+ // 🔒 MASTER OS GUARD (ADD EXACTLY HERE)
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.warn("[MASTER OS] env not fully configured");
+  }
+  console.warn("[MASTER OS LOCK ACTIVE]");
+  
   const [input, setInput] = useState("");
   const [drafts, setDrafts] = useState<Draft[]>([]);
   const [logs, setLogs] = useState<string[]>([]);

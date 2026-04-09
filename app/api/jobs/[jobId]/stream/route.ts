@@ -1,71 +1,88 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import fs from "fs";
 import path from "path";
 
-type RouteContext = {
-  params: Promise<{ jobId: string }>;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+type Log = {
+  message: string;
+  timestamp?: number;
 };
 
+type Job = {
+  logs?: Log[];
+};
+
+function safeParse<T>(input: string, fallback: T): T {
+  try {
+    return JSON.parse(input) as T;
+  } catch {
+    return fallback;
+  }
+}
+
 function getJobFile(jobId: string) {
-  return path.join(process.env.KORE_RUNTIME_ROOT!, "jobs", `${jobId}.json`);
+  return path.join(process.cwd(), "runtime", "jobs", `${jobId}.json`);
 }
 
 export async function GET(
-  _req: Request,
-  context: RouteContext
+  req: NextRequest,
+  { params }: { params: { jobId: string } }
 ) {
-  const { jobId } = await context.params;
-  const jobFile = getJobFile(jobId);
+  const { jobId } = params;
 
-  if (!fs.existsSync(jobFile)) {
-    return new NextResponse("Job not found", { status: 404 });
-  }
-
-  const encoder = new TextEncoder();
+  let lastLength = 0;
 
   const stream = new ReadableStream({
-    start(controller) {
-      let lastLength = 0;
+    async start(controller) {
+      const encoder = new TextEncoder();
+
+      const send = (data: any) => {
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify(data)}\n\n`)
+        );
+      };
 
       const interval = setInterval(() => {
-        if (!fs.existsSync(jobFile)) {
-          controller.close();
-          clearInterval(interval);
-          return;
-        }
+        try {
+          const filePath = getJobFile(jobId);
 
-        const raw = fs.readFileSync(jobFile, "utf-8");
-        const job = JSON.parse(raw);
+          if (!fs.existsSync(filePath)) {
+            send({ type: "waiting" });
+            return;
+          }
 
-        const logs = job.logs || [];
+          const raw = fs.readFileSync(filePath, "utf-8");
+          const job = safeParse<Job>(raw, { logs: [] });
 
-        if (logs.length > lastLength) {
-          const newLogs = logs.slice(lastLength);
-          newLogs.forEach((log: string) => {
-            controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ log })}\n\n`)
-            );
+          const logs = job.logs ?? [];
+
+          if (logs.length > lastLength) {
+            const newLogs = logs.slice(lastLength);
+            lastLength = logs.length;
+
+            send({ type: "logs", data: newLogs });
+          }
+        } catch {
+          send({
+            type: "error",
+            message: "stream failure",
           });
-          lastLength = logs.length;
-        }
-
-        if (job.status === "completed" || job.status === "failed") {
-          controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({ status: job.status })}\n\n`
-            )
-          );
-          controller.close();
-          clearInterval(interval);
         }
       }, 1000);
+
+      req.signal.addEventListener("abort", () => {
+        clearInterval(interval);
+        controller.close();
+      });
     },
   });
 
-  return new NextResponse(stream, {
+  return new Response(stream, {
     headers: {
       "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
+      "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
     },
   });

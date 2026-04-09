@@ -1,3 +1,4 @@
+import { safeParse } from "@/lib/safe-json";
 import fs from "fs";
 import path from "path";
 
@@ -22,7 +23,7 @@ export async function GET(req: Request) {
   try {
     if (fs.existsSync(file)) {
       const raw = fs.readFileSync(file, "utf8");
-      entries = JSON.parse(raw);
+      entries = safeParse(raw, []);
     }
   } catch {}
 
