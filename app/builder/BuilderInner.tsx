@@ -27,8 +27,8 @@ function detectLanguage(file?: string) {
 }
 export default function BuilderInner({ projectId }: { projectId: string }) {
   const [files, setFiles] = useState<string[]>([]);
-  const [activeFile, setActiveFile] = useState("app/page.tsx");
-  const [selectedFile, setSelectedFile] = useState<string>("app/page.tsx");
+  const [activeFile, setActiveFile] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   const [editorValue, setEditorValue] = useState("");
   const [draftValue, setDraftValue] = useState("");
@@ -39,28 +39,48 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
-      const data = await res.json();
+  (async () => {
+    const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
+    const data = await res.json();
 
-      const list = (data.files || []).filter(
-  (f: string) =>
-    (f.endsWith(".tsx") || f.endsWith(".ts") || f.endsWith(".js")) &&
-    !f.includes("__preview__") &&
-    !f.includes("__preview_wrapper__")
-);
+    const list = (data.files || []).filter(
+      (f: string) =>
+        (f.endsWith(".tsx") || f.endsWith(".ts") || f.endsWith(".js")) &&
+        !f.includes("__preview__") &&
+        !f.includes("__preview_wrapper__")
+    );
 
-      setFiles(list);
+    setFiles(list);
 
-         if (list.includes("app/page.tsx")) {
-  setActiveFile("app/page.tsx");
-  setSelectedFile("app/page.tsx");
-} else if (list.length > 0) {
-  setActiveFile(list[0]);
-  setSelectedFile(list[0]); // 🔥 THIS is the missing piece
-}
-    })();
-  }, [projectId]);
+    // ✅ define helper
+    function pickBestFile(files: string[]) {
+      const priorities = [
+        "app/page.tsx",
+        "app/(dashboard)/page.tsx",
+      ];
+
+      for (const p of priorities) {
+        if (files.includes(p)) return p;
+      }
+
+      const page = files.find((f) => f.endsWith("/page.tsx"));
+      if (page) return page;
+
+      const tsx = files.find((f) => f.endsWith(".tsx"));
+      if (tsx) return tsx;
+
+      return files[0];
+    }
+
+      // 🔥 LOCK: only set once
+    setActiveFile((prev) => {
+      if (prev) return prev; // ← prevents override
+      const best = pickBestFile(list);
+      setSelectedFile(best);
+      return best;
+    });
+  })();
+}, [projectId]);
 
   useEffect(() => {
     if (!activeFile) return;
@@ -368,25 +388,18 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
       </div>
 
       <div
-        style={{
-          width: 420,
-          background: "#fff",
-          borderLeft: "1px solid #222",
-        }}
-      >
-        <PreviewFrame
-  projectId={projectId}
-  version={previewVersion}
-  file={selectedFile}
-/>
-<div style={{ flex: 1, borderLeft: "1px solid #eee" }}>
+  style={{
+    width: 420,
+    background: "#fff",
+    borderLeft: "1px solid #222",
+  }}
+>
   <PreviewFrame
     projectId={projectId}
     version={previewVersion}
-    file={selectedFile}
+    file={activeFile}
   />
 </div>
       </div>
-    </div>
   );
 }

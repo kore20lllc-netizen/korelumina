@@ -6,14 +6,34 @@ type Props = {
   file?: string;
 };
 
-export default function PreviewFrame({ projectId, version, file }: Props) {
-  const entry = file ? `&entry=${encodeURIComponent(file)}` : "";
+export default function PreviewFrame({
+  projectId,
+  version,
+  file,
+}: Props) {
+  // 🔥 ONLY use actual selected/active file
+  if (!file) {
+    return (
+      <div style={{ padding: 20, fontFamily: "sans-serif" }}>
+        No file selected
+      </div>
+    );
+  }
+
+  const src = `/api/dev/preview?projectId=${projectId}&entry=${encodeURIComponent(
+    file
+  )}&v=${version}`;
 
   return (
     <iframe
-      key={version + (file || "")}
-      src={`/api/dev/preview?projectId=${projectId}${entry}&v=${version}`}
-      style={{ width: "100%", height: "100%", border: "none" }}
+      key={`${projectId}-${file}-${version}`}
+      src={src}
+      style={{
+        width: "100%",
+        height: "100%",
+        border: "none",
+        background: "#fff",
+      }}
     />
   );
 }
