@@ -309,7 +309,6 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
         scrollBeyondLastLine: false,
         lineNumbers: "on",
         cursorSmoothCaretAnimation: "on",
-        semanticHighlighting: true,
       }}
       onChange={(v) => setEditorValue(v || "")}
     />
