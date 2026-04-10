@@ -16,7 +16,21 @@ export default function FileTree({ projectId, onSelect }: Props) {
         `/api/dev/fs/list?projectId=${projectId}`
       );
       const data = await res.json();
-      setFiles(data.files || []);
+      const raw = data.files || [];
+
+const filtered = raw.filter((f: string) => {
+  if (!f.endsWith(".tsx") && !f.endsWith(".jsx")) return false;
+
+  if (
+    f.includes("layout") ||
+    f.includes("provider") ||
+    f.includes("config")
+  ) return false;
+
+  return true;
+});
+
+setFiles(filtered);
     }
 
     load();

@@ -36,64 +36,85 @@ function scoreFile(filePath: string): number {
 
     // ✅ SAFE ENTRY RESOLUTION (Next.js aware)
     function resolveEntry(): string | null {
-      if (entryParam) {
-        return path.join(projectRoot, entryParam);
-      }
+  // 1. explicit entry (SAFE)
+  if (entryParam) {
+    const explicit = path.join(projectRoot, entryParam);
+    if (fs.existsSync(explicit)) return explicit;
+  }
 
-      const appDir = path.join(projectRoot, "app");
+  const appDir = path.join(projectRoot, "app");
 
-      if (fs.existsSync(appDir)) {
-        // 1. app/page.tsx
-        const rootPage = path.join(appDir, "page.tsx");
-        if (fs.existsSync(rootPage)) return rootPage;
+  if (fs.existsSync(appDir)) {
+    // 2. root page
+    const rootPage = path.join(appDir, "page.tsx");
+    if (fs.existsSync(rootPage)) return rootPage;
 
-        // 2. shallow scan (app/*/page.tsx)
-        const dirs = fs.readdirSync(appDir);
-        for (const dir of dirs) {
-          const fullDir = path.join(appDir, dir);
-          if (fs.statSync(fullDir).isDirectory()) {
-            const candidate = path.join(fullDir, "page.tsx");
-            if (fs.existsSync(candidate)) return candidate;
-          }
+    // 3. route groups (app/(...)/page.tsx)
+    const stack = [appDir];
+
+    while (stack.length) {
+      const current = stack.pop()!;
+      const items = fs.readdirSync(current);
+
+      for (const item of items) {
+        const full = path.join(current, item);
+        const stat = fs.statSync(full);
+
+        if (stat.isDirectory()) {
+          const candidate = path.join(full, "page.tsx");
+          if (fs.existsSync(candidate)) return candidate;
+
+          stack.push(full);
         }
-      }
-
-      // 3. fallback recursive search
-      function findBestFile(dir: string): string | null {
-  let bestFile: string | null = null;
-  let bestScore = -Infinity;
-
-  const items = fs.readdirSync(dir);
-
-  for (const item of items) {
-    const full = path.join(dir, item);
-    const stat = fs.statSync(full);
-
-    if (stat.isDirectory()) {
-      const candidate = findBestFile(full);
-      if (candidate) {
-        const score = scoreFile(candidate);
-        if (score > bestScore) {
-          bestScore = score;
-          bestFile = candidate;
-        }
-      }
-    }
-
-    if (item.endsWith(".tsx") || item.endsWith(".jsx")) {
-      const score = scoreFile(full);
-      if (score > bestScore) {
-        bestScore = score;
-        bestFile = full;
       }
     }
   }
 
-  return bestFile;
-}
+  // 4. fallback: best TSX file
+  function findBestFile(dir: string): string | null {
+    let bestFile: string | null = null;
+    let bestScore = -Infinity;
 
-      return findBestFile(projectRoot);
+    const items = fs.readdirSync(dir);
+
+    for (const item of items) {
+      const full = path.join(dir, item);
+      const stat = fs.statSync(full);
+
+      if (stat.isDirectory()) {
+        const candidate = findBestFile(full);
+        if (candidate) {
+          const score = scoreFile(candidate);
+          if (score > bestScore) {
+            bestScore = score;
+            bestFile = candidate;
+          }
+        }
+      } else if (
+        item.endsWith(".tsx") ||
+        item.endsWith(".jsx")
+      ) {
+        // ❌ skip junk files
+        if (
+          item.includes("actions") ||
+          item.includes("schema") ||
+          item.includes("types") ||
+          item.includes("config")
+        ) continue;
+
+        const score = scoreFile(full);
+        if (score > bestScore) {
+          bestScore = score;
+          bestFile = full;
+        }
+      }
     }
+
+    return bestFile;
+  }
+
+  return findBestFile(projectRoot);
+}
 
     let entryFile = resolveEntry();
 
@@ -138,7 +159,33 @@ export default function Preview() {
 
   external: [
   "react",
-  "react-dom"
+  "react-dom",
+
+  // UI / utils
+  "clsx",
+  "tailwind-merge",
+  "lucide-react",
+  "class-variance-authority",
+
+  // radix
+  "@radix-ui/react-dropdown-menu",
+  "@radix-ui/react-slot",
+  "@radix-ui/react-tabs",
+  "@radix-ui/react-tooltip",
+
+  // DB / server (critical)
+  "drizzle-orm",
+  "drizzle-orm/*",
+  "drizzle-orm/pg-core",
+  "drizzle-orm/neon-http",
+  "drizzle-zod",
+  "@neondatabase/serverless",
+
+  // next / server
+  "next",
+  "next/*",
+  "next-auth",
+  "server-only",
 ],
 
   banner: {
@@ -174,9 +221,11 @@ export default function Preview() {
     const html = `
 <!doctype html>
 <html>
-  <body style="margin:0;font-family:sans-serif">
+  <body style="margin:0;background:#0b0b0b;color:#fff">
     <div id="root"></div>
-
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 

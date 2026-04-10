@@ -3,7 +3,28 @@
 import { useEffect, useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
 import PreviewFrame from "@/components/builder/PreviewFrame";
+import { DiffEditor } from "@monaco-editor/react";
 
+function detectLanguage(file?: string) {
+  if (!file) return "typescript";
+
+  const ext = file.split(".").pop()?.toLowerCase();
+
+  switch (ext) {
+    case "ts":
+    case "tsx":
+      return "typescript";
+    case "js":
+    case "jsx":
+      return "javascript";
+    case "css":
+      return "css";
+    case "json":
+      return "json";
+    default:
+      return "plaintext";
+  }
+}
 export default function BuilderInner({ projectId }: { projectId: string }) {
   const [files, setFiles] = useState<string[]>([]);
   const [activeFile, setActiveFile] = useState("app/page.tsx");
@@ -23,19 +44,21 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
       const data = await res.json();
 
       const list = (data.files || []).filter(
-        (f: string) =>
-          f.endsWith(".tsx") || f.endsWith(".ts") || f.endsWith(".js")
-      );
+  (f: string) =>
+    (f.endsWith(".tsx") || f.endsWith(".ts") || f.endsWith(".js")) &&
+    !f.includes("__preview__") &&
+    !f.includes("__preview_wrapper__")
+);
 
       setFiles(list);
 
          if (list.includes("app/page.tsx")) {
-        setActiveFile("app/page.tsx");
-        setSelectedFile("app/page.tsx");
-      } else if (list.length > 0) {
-        setActiveFile(list[0]);
-        setSelectedFile(list[0]);
-      }
+  setActiveFile("app/page.tsx");
+  setSelectedFile("app/page.tsx");
+} else if (list.length > 0) {
+  setActiveFile(list[0]);
+  setSelectedFile(list[0]); // 🔥 THIS is the missing piece
+}
     })();
   }, [projectId]);
 
@@ -148,7 +171,10 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
         {files.map((f) => (
           <div
             key={f}
-            onClick={() => setActiveFile(f)}
+            onClick={() => {
+  setActiveFile(f);
+  setSelectedFile(f);
+}}
             style={{
               padding: 8,
               cursor: "pointer",
@@ -219,25 +245,103 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
           )}
         </div>
 
-        <div style={{ flex: 1, display: "flex" }}>
-          <div style={{ width: "50%", borderRight: "1px solid #222" }}>
-            <Editor
-              height="100%"
-              theme="vs-dark"
-              value={editorValue}
-              onChange={(v) => setEditorValue(v || "")}
-            />
-          </div>
+        <div style={{ flex: 1, display: "flex", background: "#0b0b0b" }}>
+  {/* LEFT: MAIN EDITOR */}
+  <div
+    style={{
+      width: hasDraft ? "50%" : "100%",
+      borderRight: hasDraft ? "1px solid #1e293b" : "none",
+    }}
+  >
+    <div
+      style={{
+        padding: "6px 10px",
+        background: "#020617",
+        borderBottom: "1px solid #1e293b",
+        fontSize: 12,
+        color: "#94a3b8",
+        fontWeight: 600,
+      }}
+    >
+      Editor
+    </div>
 
-          <div style={{ width: "50%" }}>
-            <Editor
-              height="100%"
-              theme="vs-dark"
-              value={hasDraft ? draftValue : "// AI output will appear here"}
-              options={{ readOnly: true }}
-            />
-          </div>
-        </div>
+    <Editor
+      height="100%"
+      defaultLanguage={detectLanguage(activeFile)}
+      theme="kore-dark"
+      value={editorValue}
+      beforeMount={(monaco) => {
+        monaco.editor.defineTheme("kore-dark", {
+          base: "vs-dark",
+          inherit: true,
+          rules: [
+            { token: "comment", foreground: "6A9955" },
+            { token: "keyword", foreground: "C586C0" },
+            { token: "string", foreground: "CE9178" },
+            { token: "number", foreground: "B5CEA8" },
+            { token: "type.identifier", foreground: "4EC9B0" },
+            { token: "identifier", foreground: "9CDCFE" },
+          ],
+          colors: {
+            "editor.background": "#0b0b0b",
+          },
+        });
+      }}
+      options={{
+        fontSize: 14,
+        minimap: { enabled: false },
+        wordWrap: "on",
+        automaticLayout: true,
+        tabSize: 2,
+        scrollBeyondLastLine: false,
+        lineNumbers: "on",
+        cursorSmoothCaretAnimation: "on",
+        semanticHighlighting: true,
+      }}
+      onChange={(v) => setEditorValue(v || "")}
+    />
+  </div>
+
+  {/* RIGHT: DIFF VIEW */}
+  {hasDraft && (
+    <div style={{ width: "50%", background: "#020617" }}>
+      <div
+        style={{
+          padding: "6px 10px",
+          background: "#020617",
+          borderBottom: "1px solid #1e293b",
+          fontSize: 12,
+          color: "#f59e0b",
+          fontWeight: 600,
+        }}
+      >
+        AI Diff (Changes)
+      </div>
+
+      <DiffEditor
+        height="100%"
+        original={editorValue}
+        modified={draftValue}
+        language={detectLanguage(activeFile)}
+        theme="vs-dark"
+        options={{
+          readOnly: true,
+          renderSideBySide: true,
+          minimap: { enabled: false },
+          fontSize: 14,
+          scrollBeyondLastLine: false,
+          automaticLayout: true,
+
+          // 🔥 diff visuals
+          renderIndicators: true,
+          renderLineHighlight: "all",
+          ignoreTrimWhitespace: false,
+        }}
+      />
+    </div>
+  )}
+</div>
 
         <div
           style={{

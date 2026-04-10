@@ -63,7 +63,7 @@ export default function Shell({
       </div>
 
       <div>
-        <DiffPanel result={result} />
+        <DiffPanel drafts={drafts} onApply={applyChange} />
       </div>
     </div>
   );

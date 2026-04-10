@@ -1,56 +1,61 @@
-"use client"
-import { useEffect, useRef, useState } from "react"
-;
+"use client";
 
-export default function DiffPanel({ result }: { result: any }) {
-  if (!result) {
+type DiffItem = {
+  file: string;
+  content: string;
+};
+
+type Props = {
+  drafts: DiffItem[];
+  onApply: (file: string, content: string) => void;
+};
+
+export default function DiffPanel({ drafts, onApply }: Props) {
+  if (!drafts || drafts.length === 0) {
     return (
-      <div style={{ padding: 20 }}>
-        <h2>Changes</h2>
-        <p>No task executed yet</p>
+      <div style={{ padding: 10, fontSize: 12 }}>
+        No changes
       </div>
     );
   }
 
-  const files = result?.files || [];
-
   return (
-    <div style={{ padding: 20, overflow: "auto" }}>
-      <h2>Changes</h2>
-
-      {files.length === 0 && <p>No files returned</p>}
-
-      {files.map((f: any, i: number) => (
+    <div style={{ padding: 10 }}>
+      {drafts.map((d) => (
         <div
-          key={i}
+          key={d.file}
           style={{
-            marginBottom: 20,
-            border: "1px solid #ddd",
-            borderRadius: 6,
+            border: "1px solid #eee",
+            marginBottom: 10,
             padding: 10,
           }}
         >
-          <div
-            style={{
-              fontWeight: "bold",
-              marginBottom: 6,
-              fontFamily: "monospace",
-            }}
-          >
-            {f.path}
+          <div style={{ fontWeight: 600, marginBottom: 6 }}>
+            {d.file}
           </div>
 
           <pre
             style={{
-              background: "#111",
-              color: "#0f0",
+              fontSize: 12,
+              background: "#f9f9f9",
               padding: 10,
               overflow: "auto",
-              fontSize: 12,
+              maxHeight: 200,
             }}
           >
-{f.content}
+            {d.content}
           </pre>
+
+          <button
+            onClick={() => onApply(d.file, d.content)}
+            style={{
+              marginTop: 8,
+              padding: "6px 10px",
+              cursor: "pointer",
+            }}
+          >
+            Apply
+          </button>
         </div>
       ))}
     </div>
