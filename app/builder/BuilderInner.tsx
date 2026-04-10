@@ -3,12 +3,33 @@
 import { useEffect, useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
 import PreviewFrame from "@/components/builder/PreviewFrame";
+import { DiffEditor } from "@monaco-editor/react";
 
+function detectLanguage(file?: string) {
+  if (!file) return "typescript";
+
+  const ext = file.split(".").pop()?.toLowerCase();
+
+  switch (ext) {
+    case "ts":
+    case "tsx":
+      return "typescript";
+    case "js":
+    case "jsx":
+      return "javascript";
+    case "css":
+      return "css";
+    case "json":
+      return "json";
+    default:
+      return "plaintext";
+  }
+}
 export default function BuilderInner({ projectId }: { projectId: string }) {
   const [files, setFiles] = useState<string[]>([]);
-  const [activeFile, setActiveFile] = useState("app/page.tsx");
-  const [selectedFile, setSelectedFile] = useState<string>("app/page.tsx");
-
+  const [activeFile, setActiveFile] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
+  
   const [editorValue, setEditorValue] = useState("");
   const [draftValue, setDraftValue] = useState("");
   const [hasDraft, setHasDraft] = useState(false);
@@ -18,26 +39,39 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
-      const data = await res.json();
+  (async () => {
+    const res = await fetch(`/api/dev/fs/list?projectId=${projectId}`);
+    const data = await res.json();
 
-      const list = (data.files || []).filter(
-        (f: string) =>
-          f.endsWith(".tsx") || f.endsWith(".ts") || f.endsWith(".js")
-      );
+    const list = (data.files || []).filter((f: string) => {
+  return (
+    (f.endsWith(".tsx") || f.endsWith(".jsx")) &&
+    f.includes("page") &&              // 🔥 ONLY pages
+    !f.includes("actions") &&
+    !f.includes("layout") &&
+    !f.includes("providers") &&
+    !f.includes("config") &&
+    !f.includes("table") &&
+    !f.includes("item") &&
+    !f.includes("product")
+  );
+});
+   
 
-      setFiles(list);
+    setFiles(list);
 
-         if (list.includes("app/page.tsx")) {
-        setActiveFile("app/page.tsx");
-        setSelectedFile("app/page.tsx");
-      } else if (list.length > 0) {
-        setActiveFile(list[0]);
-        setSelectedFile(list[0]);
-      }
-    })();
-  }, [projectId]);
+    // 🔥 smart selection (CRITICAL FIX)
+    const best =
+      list.find((f: string) => f.endsWith("/page.tsx")) ||
+      list.find((f: string) => f.endsWith("/page.jsx")) ||
+      list[0];
+
+    if (best) {
+      setActiveFile(best);
+      setSelectedFile(best);
+    }
+  })();
+}, [projectId]);
 
   useEffect(() => {
     if (!activeFile) return;
@@ -148,7 +182,11 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
         {files.map((f) => (
           <div
             key={f}
-            onClick={() => setActiveFile(f)}
+            onClick={() => {
+  if (!f.includes("page")) return; // 🔥 HARD BLOCK
+  setActiveFile(f);
+  setSelectedFile(f);
+}}
             style={{
               padding: 8,
               cursor: "pointer",
@@ -219,25 +257,102 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
           )}
         </div>
 
-        <div style={{ flex: 1, display: "flex" }}>
-          <div style={{ width: "50%", borderRight: "1px solid #222" }}>
-            <Editor
-              height="100%"
-              theme="vs-dark"
-              value={editorValue}
-              onChange={(v) => setEditorValue(v || "")}
-            />
-          </div>
+        <div style={{ flex: 1, display: "flex", background: "#0b0b0b" }}>
+  {/* LEFT: MAIN EDITOR */}
+  <div
+    style={{
+      width: hasDraft ? "50%" : "100%",
+      borderRight: hasDraft ? "1px solid #1e293b" : "none",
+    }}
+  >
+    <div
+      style={{
+        padding: "6px 10px",
+        background: "#020617",
+        borderBottom: "1px solid #1e293b",
+        fontSize: 12,
+        color: "#94a3b8",
+        fontWeight: 600,
+      }}
+    >
+      Editor
+    </div>
 
-          <div style={{ width: "50%" }}>
-            <Editor
-              height="100%"
-              theme="vs-dark"
-              value={hasDraft ? draftValue : "// AI output will appear here"}
-              options={{ readOnly: true }}
-            />
-          </div>
-        </div>
+    <Editor
+      height="100%"
+      defaultLanguage={detectLanguage(activeFile)}
+      theme="kore-dark"
+      value={editorValue}
+      beforeMount={(monaco) => {
+        monaco.editor.defineTheme("kore-dark", {
+          base: "vs-dark",
+          inherit: true,
+          rules: [
+            { token: "comment", foreground: "6A9955" },
+            { token: "keyword", foreground: "C586C0" },
+            { token: "string", foreground: "CE9178" },
+            { token: "number", foreground: "B5CEA8" },
+            { token: "type.identifier", foreground: "4EC9B0" },
+            { token: "identifier", foreground: "9CDCFE" },
+          ],
+          colors: {
+            "editor.background": "#0b0b0b",
+          },
+        });
+      }}
+      options={{
+        fontSize: 14,
+        minimap: { enabled: false },
+        wordWrap: "on",
+        automaticLayout: true,
+        tabSize: 2,
+        scrollBeyondLastLine: false,
+        lineNumbers: "on",
+        cursorSmoothCaretAnimation: "on",
+      }}
+      onChange={(v) => setEditorValue(v || "")}
+    />
+  </div>
+
+  {/* RIGHT: DIFF VIEW */}
+  {hasDraft && (
+    <div style={{ width: "50%", background: "#020617" }}>
+      <div
+        style={{
+          padding: "6px 10px",
+          background: "#020617",
+          borderBottom: "1px solid #1e293b",
+          fontSize: 12,
+          color: "#f59e0b",
+          fontWeight: 600,
+        }}
+      >
+        AI Diff (Changes)
+      </div>
+
+      <DiffEditor
+        height="100%"
+        original={editorValue}
+        modified={draftValue}
+        language={detectLanguage(activeFile)}
+        theme="vs-dark"
+        options={{
+          readOnly: true,
+          renderSideBySide: true,
+          minimap: { enabled: false },
+          fontSize: 14,
+          scrollBeyondLastLine: false,
+          automaticLayout: true,
+
+          // 🔥 diff visuals
+          renderIndicators: true,
+          renderLineHighlight: "all",
+          ignoreTrimWhitespace: false,
+        }}
+      />
+    </div>
+  )}
+</div>
 
         <div
           style={{
