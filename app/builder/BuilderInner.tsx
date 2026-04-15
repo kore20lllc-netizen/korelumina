@@ -152,10 +152,10 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
   }
 
   const previewUrl = useMemo(() => {
-    return `/api/dev/preview?projectId=${projectId}&entry=${encodeURIComponent(
-      activeFile
-    )}&v=${previewVersion}`;
-  }, [projectId, activeFile, previewVersion]);
+  return `http://127.0.0.1:5173/__preview_bundle?projectId=${projectId}&entry=${encodeURIComponent(
+    activeFile || "app/page.tsx"
+  )}&v=${previewVersion}`;
+}, [projectId, activeFile, previewVersion]);
 
   return (
     <div style={{ display: "flex", height: "100vh", background: "#111" }}>
@@ -374,16 +374,13 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
           borderLeft: "1px solid #222",
         }}
       >
-        <PreviewFrame
-  projectId={projectId}
-  version={previewVersion}
-  file={selectedFile}
-/>
+        
+ {/* RIGHT PANEL — PREVIEW */}
 <div style={{ flex: 1, borderLeft: "1px solid #eee" }}>
   <PreviewFrame
     projectId={projectId}
     version={previewVersion}
-    file={selectedFile}
+    file={selectedFile || "app/page.tsx"}
   />
 </div>
       </div>
