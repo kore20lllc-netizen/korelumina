@@ -14,9 +14,14 @@ export async function GET(req: Request) {
   try {
     let project = getProject(projectId);
 
-    // ✅ ensure project is fully started and READY
+    // ensure project is started and ready
     if (!project || !project.ready) {
       project = await startProject(projectId, projectPath);
+    }
+
+    // final safety check
+    if (!project || !project.port) {
+      throw new Error("Preview not initialized");
     }
 
     return NextResponse.json({
