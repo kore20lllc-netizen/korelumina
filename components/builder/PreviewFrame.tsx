@@ -1,50 +1,95 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function PreviewFrame({
   projectId,
-  file,
-  version,
 }: {
   projectId: string;
-  file?: string;
-  version?: number;
 }) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [src, setSrc] = useState("");
+  const [error, setError] = useState("");
 
-  const src = `http://127.0.0.1:5173/__preview_bundle?projectId=${projectId}&entry=${encodeURIComponent(
-    file || "app/page.tsx"
-  )}&v=${version || 0}`;
-
-  // 🔥 listen for refresh event
   useEffect(() => {
-    const handler = () => {
-      if (!iframeRef.current) return;
+    let mounted = true;
 
-      iframeRef.current.src =
-        `http://127.0.0.1:5173/__preview_bundle?projectId=${projectId}` +
-        `&entry=${encodeURIComponent(file || "app/page.tsx")}` +
-        `&v=${Date.now()}`; // force reload
-    };
+    async function boot() {
+      try {
+        setError("");
 
-    window.addEventListener("kore-refresh-preview", handler);
+        const res = await fetch(
+          `/api/dev/preview?projectId=${projectId}`,
+          { cache: "no-store" },
+        );
+
+        const data = await res.json();
+
+        if (!mounted) return;
+
+        if (!data?.ok || !data?.url) {
+          setError(data?.error || "Preview failed");
+          return;
+        }
+
+        setSrc(data.url);
+      } catch (err) {
+        console.error("[PreviewFrame]", err);
+
+        if (!mounted) return;
+
+        setError("Failed to connect to preview");
+      }
+    }
+
+    boot();
 
     return () => {
-      window.removeEventListener("kore-refresh-preview", handler);
+      mounted = false;
     };
-  }, [projectId, file]);
+  }, [projectId]);
 
   return (
-    <iframe
-      ref={iframeRef}
-      src={src}
+    <div
       style={{
+        position: "relative",
         width: "100%",
         height: "100%",
-        border: "none",
-        background: "#fff",
+        minHeight: 600,
+        background: "#000",
+        overflow: "hidden",
       }}
-    />
+    >
+      <div
+        style={{
+          height: 28,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 10px",
+          fontSize: 11,
+          color: error ? "#f87171" : "#94a3b8",
+          background: "#020617",
+          borderBottom: "1px solid #1e293b",
+          fontFamily: "monospace",
+        }}
+      >
+        {error || src || "Starting preview..."}
+      </div>
+
+      {src && !error ? (
+        <iframe
+          src={src}
+          title={`${projectId} preview`}
+          style={{
+            display: "block",
+            width: "100%",
+            height: "calc(100% - 28px)",
+            minHeight: 572,
+            border: 0,
+            background: "#fff",
+          }}
+          allow="clipboard-read; clipboard-write"
+        />
+      ) : null}
+    </div>
   );
 }

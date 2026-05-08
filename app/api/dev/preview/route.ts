@@ -1,39 +1,87 @@
 import { NextResponse } from "next/server";
-const { startProject, getProject } = require("@/runtime/preview-manager");
+
+const {
+  startProject,
+  getProject,
+} = require("../../../../runtime/preview-manager");
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const projectId = searchParams.get("projectId");
-
-  if (!projectId) {
-    return NextResponse.json({ ok: false, error: "Missing projectId" });
-  }
-
-  const projectPath = `/Users/erictouko/dev/korelumina/runtime/workspaces/default/projects/${projectId}`;
-
   try {
-    let project = getProject(projectId);
+    const { searchParams } =
+      new URL(req.url);
 
-    // ensure project is started and ready
-    if (!project || !project.ready) {
-      project = await startProject(projectId, projectPath);
+    const projectId =
+      searchParams.get("projectId");
+
+    if (!projectId) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "Missing projectId",
+        },
+        { status: 400 }
+      );
     }
 
-    // final safety check
-    if (!project || !project.port) {
-      throw new Error("Preview not initialized");
+    let runtime =
+      getProject(projectId);
+
+    if (!runtime) {
+      runtime =
+        await startProject(
+          projectId
+        );
+    }
+
+    if (!runtime) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "Runtime unavailable",
+        },
+        { status: 500 }
+      );
+    }
+
+    if (
+      runtime.status === "crashed"
+    ) {
+      return NextResponse.json(
+        {
+          ok: false,
+          status: "crashed",
+          error:
+            runtime.error ||
+            "Runtime crashed",
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
       ok: true,
-      url: `http://localhost:${project.port}`,
+      projectId,
+      framework:
+        runtime.framework,
+      port: runtime.port,
+      url: `http://localhost:${runtime.port}`,
     });
-  } catch (err) {
-    console.error("[preview API error]", err);
+  } catch (err: any) {
+    console.error(
+      "[preview API error]",
+      err
+    );
 
-    return NextResponse.json({
-      ok: false,
-      error: "Preview failed to start",
-    });
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          err?.message ||
+          "Preview failed",
+      },
+      { status: 500 }
+    );
   }
 }

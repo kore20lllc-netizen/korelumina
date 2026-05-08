@@ -168,8 +168,31 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
   )}&v=${previewVersion}`;
 }, [projectId, activeFile, previewVersion]);
 
-  return (
-    <div style={{ display: "flex", height: "100vh", background: "#111" }}>
+    return (
+  <>
+    <div
+      style={{
+        position: "fixed",
+        top: 20,
+        right: 20,
+        zIndex: 999999,
+        background: "red",
+        color: "white",
+        padding: 20,
+        fontSize: 24,
+        fontWeight: 700,
+      }}
+    >
+      BUILDER INNER LIVE
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        background: "#111",
+      }}
+    >
       <div
         style={{
           width: 240,
@@ -387,14 +410,48 @@ export default function BuilderInner({ projectId }: { projectId: string }) {
       >
         
  {/* RIGHT PANEL — PREVIEW */}
-<div style={{ flex: 1, borderLeft: "1px solid #eee" }}>
+<div
+  style={{
+    flex: 1,
+    borderLeft: "1px solid #eee",
+    height: "calc(100vh - 120px)",
+    minHeight: 600,
+  }}
+>
+  <div
+  style={{
+    height: "100%",
+    minHeight: 600,
+    background: "#111",
+    color: "#fff",
+    padding: 20,
+  }}
+>
+  <div
+    style={{
+      marginBottom: 12,
+      fontSize: 18,
+      fontWeight: 700,
+    }}
+  >
+    PREVIEW PANEL ACTIVE
+  </div>
+
+  <div
+    style={{
+      marginBottom: 12,
+    }}
+  >
+    projectId: {projectId}
+  </div>
+
   <PreviewFrame
     projectId={projectId}
-    version={previewVersion}
-    file={selectedFile || "app/page.tsx"}
   />
-</div>
+        </div>
       </div>
     </div>
-  );
+      </div>
+  </>
+);
 }

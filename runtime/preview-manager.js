@@ -3,6 +3,14 @@ const net = require("net");
 const path = require("path");
 
 const {
+  detectProject,
+} = require("./framework-detector");
+
+const {
+  installDependencies,
+} = require("./install-manager");
+
+const {
   watchProject,
   unwatchProject,
 } = require("./preview-events");
@@ -13,8 +21,19 @@ const starting = new Map();
 const BASE_PORT = 3001;
 
 function sleep(ms) {
-  return new Promise((r) =>
-    setTimeout(r, ms),
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+function getProjectPath(projectId) {
+  return path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
   );
 }
 
@@ -48,137 +67,129 @@ function isPortOpen(port) {
 
 async function waitForServer(
   port,
-  retries = 50,
+  retries = 60,
 ) {
-  for (
-    let i = 0;
-    i < retries;
-    i++
-  ) {
-    const ready =
-      await isPortOpen(port);
-
-    if (ready) {
+  for (let i = 0; i < retries; i++) {
+    if (await isPortOpen(port)) {
       return true;
     }
 
-    await sleep(300);
+    await sleep(500);
   }
 
   return false;
 }
 
-async function killExistingNextDev(
-  projectPath,
+async function findAvailablePort(
+  start = BASE_PORT,
 ) {
-  const fs = require("fs");
+  let port = start;
 
-  const logPath = path.join(
-    projectPath,
-    ".next/dev/logs/next-development.log",
-  );
-
-  if (!fs.existsSync(logPath)) {
-    return;
+  while (await isPortOpen(port)) {
+    port++;
   }
 
-  try {
-    const text =
-      fs.readFileSync(
-        logPath,
-        "utf8",
-      );
-
-    const pidMatch =
-      text.match(/"pid":\s*(\d+)/);
-
-    if (!pidMatch) {
-      return;
-    }
-
-    const pid = Number(
-      pidMatch[1],
-    );
-
-    if (!pid) {
-      return;
-    }
-
-    try {
-      process.kill(pid, 0);
-
-      console.log(
-        `[preview-manager] killing stale next dev pid=${pid}`,
-      );
-
-      process.kill(
-        pid,
-        "SIGTERM",
-      );
-
-      await sleep(1200);
-    } catch {
-      // already dead
-    }
-  } catch (err) {
-    console.error(
-      "[preview-manager] failed reading next log",
-      err,
-    );
-  }
+  return port;
 }
 
-async function startProject(
-  projectId,
-  projectPath,
-) {
+function normalizeCommand(command) {
+  if (!command || typeof command !== "string") {
+    throw new Error("Missing runtime command");
+  }
+
+  return command.trim();
+}
+
+async function startProject(projectId) {
+  if (!projectId) {
+    throw new Error("Missing projectId");
+  }
+
   const existing =
     projects.get(projectId);
 
-  // critical:
-  // NEVER spawn another preview
-  // if one already exists
   if (
     existing &&
-    isProcessAlive(
-      existing.process,
-    )
+    isProcessAlive(existing.process)
   ) {
-    return existing;
+    const alive =
+      await isPortOpen(existing.port);
+
+    if (alive) {
+      return existing;
+    }
+
+    try {
+      existing.process.kill("SIGTERM");
+    } catch {
+      // ignore stale process cleanup errors
+    }
+
+    projects.delete(projectId);
+    unwatchProject(projectId);
   }
 
-  // critical:
-  // if already starting,
-  // reuse same promise
   if (starting.has(projectId)) {
-    return starting.get(
-      projectId,
-    );
+    return starting.get(projectId);
   }
 
   const startPromise =
     (async () => {
-      // hard cleanup of stale next dev
-      await killExistingNextDev(
-        projectPath,
-      );
+      const projectPath =
+        getProjectPath(projectId);
 
-      const port = BASE_PORT;
+      const projectInfo =
+        detectProject(projectPath);
+
+      const installResult =
+        await installDependencies({
+          projectId,
+          projectPath,
+          packageManager:
+            projectInfo.packageManager,
+        });
+
+      if (
+        installResult &&
+        installResult.ok === false &&
+        !installResult.skipped
+      ) {
+        throw new Error(
+          installResult.error ||
+            installResult.reason ||
+            "Dependency install failed",
+        );
+      }
+
+      const port =
+        await findAvailablePort();
+
+      const framework =
+        projectInfo.framework;
+
+      const rawCommand =
+        normalizeCommand(
+          projectInfo.devCommand,
+        ).replace(
+          /\{PORT\}/g,
+          String(port),
+        );
 
       console.log(
-        `[preview-manager] starting ${projectId} on ${port}...`,
+        `[preview-manager] framework=${framework}`,
+      );
+
+      console.log(
+        `[preview-manager] starting ${projectId} on ${port}`,
+      );
+
+      console.log(
+        `[preview-manager] command=${rawCommand}`,
       );
 
       const proc = spawn(
-        "npm",
-        [
-          "run",
-          "dev",
-          "--",
-          "--webpack",
-          "-p",
-          String(port),
-        ],
+        rawCommand,
+        [],
         {
           cwd: projectPath,
           stdio: "inherit",
@@ -186,6 +197,7 @@ async function startProject(
           env: {
             ...process.env,
             PORT: String(port),
+            HOST: "0.0.0.0",
             FORCE_COLOR: "1",
           },
         },
@@ -194,11 +206,22 @@ async function startProject(
       const record = {
         projectId,
         projectPath,
+        framework,
+        runtime:
+          projectInfo.runtime,
+        packageManager:
+          projectInfo.packageManager,
+        entry:
+          projectInfo.entry,
         port,
         process: proc,
         ready: false,
+        status: "starting",
         startedAt:
           Date.now(),
+        pid:
+          proc.pid,
+        error: null,
       };
 
       projects.set(
@@ -206,54 +229,46 @@ async function startProject(
         record,
       );
 
-      proc.on(
-        "exit",
-        (code) => {
-          const current =
-            projects.get(
-              projectId,
-            );
-
-          if (
-            current?.process ===
-            proc
-          ) {
-            projects.delete(
-              projectId,
-            );
-
-            unwatchProject(
-              projectId,
-            );
-          }
-
-          console.log(
-            `[preview-manager] ${projectId} stopped (code=${code})`,
-          );
-        },
-      );
-
-      const ready =
-        await waitForServer(
-          port,
+      proc.on("exit", (code) => {
+        console.log(
+          `[preview-manager] ${projectId} stopped (${code})`,
         );
 
-      if (!ready) {
+        const current =
+          projects.get(projectId);
+
         if (
-          isProcessAlive(proc)
+          current &&
+          current.process === proc
         ) {
-          proc.kill(
-            "SIGTERM",
-          );
+          current.ready = false;
+          current.status =
+            code === 0
+              ? "stopped"
+              : "crashed";
+          current.error =
+            code === 0
+              ? null
+              : `Process exited with code ${code}`;
+
+          projects.delete(projectId);
         }
 
-        projects.delete(
-          projectId,
-        );
+        unwatchProject(projectId);
+      });
 
-        unwatchProject(
-          projectId,
-        );
+      const ready =
+        await waitForServer(port);
+
+      if (!ready) {
+        try {
+          proc.kill("SIGTERM");
+        } catch {
+          // ignore cleanup errors
+        }
+
+        projects.delete(projectId);
+        unwatchProject(projectId);
 
         throw new Error(
           `Preview failed on ${port}`,
@@ -261,6 +276,11 @@ async function startProject(
       }
 
       record.ready = true;
+      record.status = "running";
+      record.readyAt = Date.now();
+      record.bootDuration =
+        record.readyAt -
+        record.startedAt;
 
       watchProject(
         projectId,
@@ -282,15 +302,11 @@ async function startProject(
   try {
     return await startPromise;
   } finally {
-    starting.delete(
-      projectId,
-    );
+    starting.delete(projectId);
   }
 }
 
-function getProject(
-  projectId,
-) {
+function getProject(projectId) {
   const record =
     projects.get(projectId);
 
@@ -299,17 +315,10 @@ function getProject(
   }
 
   if (
-    !isProcessAlive(
-      record.process,
-    )
+    !isProcessAlive(record.process)
   ) {
-    projects.delete(
-      projectId,
-    );
-
-    unwatchProject(
-      projectId,
-    );
+    projects.delete(projectId);
+    unwatchProject(projectId);
 
     return null;
   }
@@ -317,9 +326,7 @@ function getProject(
   return record;
 }
 
-function stopProject(
-  projectId,
-) {
+function stopProject(projectId) {
   const record =
     projects.get(projectId);
 
@@ -327,23 +334,18 @@ function stopProject(
     return false;
   }
 
-  if (
-    isProcessAlive(
-      record.process,
-    )
-  ) {
-    record.process.kill(
-      "SIGTERM",
-    );
+  try {
+    if (
+      isProcessAlive(record.process)
+    ) {
+      record.process.kill("SIGTERM");
+    }
+  } catch {
+    // ignore stop errors
   }
 
-  projects.delete(
-    projectId,
-  );
-
-  unwatchProject(
-    projectId,
-  );
+  projects.delete(projectId);
+  unwatchProject(projectId);
 
   return true;
 }
