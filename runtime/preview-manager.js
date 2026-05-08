@@ -1,7 +1,14 @@
 const { spawn } = require("child_process");
 const net = require("net");
 const path = require("path");
-const fs = require("fs");
+
+const {
+  detectProject,
+} = require("./framework-detector");
+
+const {
+  installDependencies,
+} = require("./install-manager");
 
 const {
   watchProject,
@@ -14,7 +21,20 @@ const starting = new Map();
 const BASE_PORT = 3001;
 
 function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+function getProjectPath(projectId) {
+  return path.join(
+    process.cwd(),
+    "runtime",
+    "workspaces",
+    "default",
+    "projects",
+    projectId,
+  );
 }
 
 function isProcessAlive(proc) {
@@ -50,10 +70,7 @@ async function waitForServer(
   retries = 60,
 ) {
   for (let i = 0; i < retries; i++) {
-    const ready =
-      await isPortOpen(port);
-
-    if (ready) {
+    if (await isPortOpen(port)) {
       return true;
     }
 
@@ -75,117 +92,88 @@ async function findAvailablePort(
   return port;
 }
 
-function detectFramework(projectPath) {
-  const packageJsonPath = path.join(
-    projectPath,
-    "package.json",
-  );
-
-  if (!fs.existsSync(packageJsonPath)) {
-    throw new Error(
-      "package.json not found",
-    );
+function normalizeCommand(command) {
+  if (!command || typeof command !== "string") {
+    throw new Error("Missing runtime command");
   }
 
-  const pkg = JSON.parse(
-    fs.readFileSync(
-      packageJsonPath,
-      "utf8",
-    ),
-  );
-
-  const deps = {
-    ...pkg.dependencies,
-    ...pkg.devDependencies,
-  };
-
-  if (deps.next) {
-    return "next";
-  }
-
-  if (deps.vite) {
-    return "vite";
-  }
-
-  throw new Error(
-    "Unsupported framework",
-  );
+  return command.trim();
 }
 
-function buildCommand(
-  framework,
-  port,
-) {
-  if (framework === "next") {
-    return [
-      "run",
-      "dev",
-      "--",
-      "--webpack",
-      "-p",
-      String(port),
-    ];
+async function startProject(projectId) {
+  if (!projectId) {
+    throw new Error("Missing projectId");
   }
 
-  if (framework === "vite") {
-    return [
-      "run",
-      "dev",
-      "--",
-      "--port",
-      String(port),
-    ];
-  }
-
-  throw new Error(
-    `Unknown framework ${framework}`,
-  );
-}
-
-async function startProject(
-  projectId,
-  projectPath,
-) {
   const existing =
     projects.get(projectId);
 
   if (
     existing &&
-    isProcessAlive(
-      existing.process,
-    )
+    isProcessAlive(existing.process)
   ) {
     const alive =
-      await isPortOpen(
-        existing.port,
-      );
+      await isPortOpen(existing.port);
 
     if (alive) {
       return existing;
     }
 
     try {
-      existing.process.kill(
-        "SIGTERM",
-      );
-    } catch {}
+      existing.process.kill("SIGTERM");
+    } catch {
+      // ignore stale process cleanup errors
+    }
+
+    projects.delete(projectId);
+    unwatchProject(projectId);
   }
 
   if (starting.has(projectId)) {
-    return starting.get(
-      projectId,
-    );
+    return starting.get(projectId);
   }
 
   const startPromise =
     (async () => {
-      const framework =
-        detectFramework(
+      const projectPath =
+        getProjectPath(projectId);
+
+      const projectInfo =
+        detectProject(projectPath);
+
+      const installResult =
+        await installDependencies({
+          projectId,
           projectPath,
+          packageManager:
+            projectInfo.packageManager,
+        });
+
+      if (
+        installResult &&
+        installResult.ok === false &&
+        !installResult.skipped
+      ) {
+        throw new Error(
+          installResult.error ||
+            installResult.reason ||
+            "Dependency install failed",
         );
+      }
 
       const port =
         await findAvailablePort();
+
+      const framework =
+        projectInfo.framework;
+
+      const rawCommand =
+        normalizeCommand(
+          projectInfo.devCommand,
+        ).replace(
+          /\{PORT\}/g,
+          String(port),
+        );
 
       console.log(
         `[preview-manager] framework=${framework}`,
@@ -195,15 +183,13 @@ async function startProject(
         `[preview-manager] starting ${projectId} on ${port}`,
       );
 
-      const commandArgs =
-        buildCommand(
-          framework,
-          port,
-        );
+      console.log(
+        `[preview-manager] command=${rawCommand}`,
+      );
 
       const proc = spawn(
-        "npm",
-        commandArgs,
+        rawCommand,
+        [],
         {
           cwd: projectPath,
           stdio: "inherit",
@@ -211,6 +197,7 @@ async function startProject(
           env: {
             ...process.env,
             PORT: String(port),
+            HOST: "0.0.0.0",
             FORCE_COLOR: "1",
           },
         },
@@ -220,11 +207,21 @@ async function startProject(
         projectId,
         projectPath,
         framework,
+        runtime:
+          projectInfo.runtime,
+        packageManager:
+          projectInfo.packageManager,
+        entry:
+          projectInfo.entry,
         port,
         process: proc,
         ready: false,
+        status: "starting",
         startedAt:
           Date.now(),
+        pid:
+          proc.pid,
+        error: null,
       };
 
       projects.set(
@@ -232,52 +229,46 @@ async function startProject(
         record,
       );
 
-      proc.on(
-        "exit",
-        (code) => {
-          console.log(
-            `[preview-manager] ${projectId} stopped (${code})`,
-          );
+      proc.on("exit", (code) => {
+        console.log(
+          `[preview-manager] ${projectId} stopped (${code})`,
+        );
 
-          const current =
-            projects.get(
-              projectId,
-            );
+        const current =
+          projects.get(projectId);
 
-          if (
-            current?.process ===
-            proc
-          ) {
-            projects.delete(
-              projectId,
-            );
-          }
+        if (
+          current &&
+          current.process === proc
+        ) {
+          current.ready = false;
+          current.status =
+            code === 0
+              ? "stopped"
+              : "crashed";
+          current.error =
+            code === 0
+              ? null
+              : `Process exited with code ${code}`;
 
-          unwatchProject(
-            projectId,
-          );
-        },
-      );
+          projects.delete(projectId);
+        }
+
+        unwatchProject(projectId);
+      });
 
       const ready =
-        await waitForServer(
-          port,
-        );
+        await waitForServer(port);
 
       if (!ready) {
         try {
-          proc.kill(
-            "SIGTERM",
-          );
-        } catch {}
+          proc.kill("SIGTERM");
+        } catch {
+          // ignore cleanup errors
+        }
 
-        projects.delete(
-          projectId,
-        );
-
-        unwatchProject(
-          projectId,
-        );
+        projects.delete(projectId);
+        unwatchProject(projectId);
 
         throw new Error(
           `Preview failed on ${port}`,
@@ -285,6 +276,11 @@ async function startProject(
       }
 
       record.ready = true;
+      record.status = "running";
+      record.readyAt = Date.now();
+      record.bootDuration =
+        record.readyAt -
+        record.startedAt;
 
       watchProject(
         projectId,
@@ -306,15 +302,11 @@ async function startProject(
   try {
     return await startPromise;
   } finally {
-    starting.delete(
-      projectId,
-    );
+    starting.delete(projectId);
   }
 }
 
-function getProject(
-  projectId,
-) {
+function getProject(projectId) {
   const record =
     projects.get(projectId);
 
@@ -323,17 +315,10 @@ function getProject(
   }
 
   if (
-    !isProcessAlive(
-      record.process,
-    )
+    !isProcessAlive(record.process)
   ) {
-    projects.delete(
-      projectId,
-    );
-
-    unwatchProject(
-      projectId,
-    );
+    projects.delete(projectId);
+    unwatchProject(projectId);
 
     return null;
   }
@@ -341,9 +326,7 @@ function getProject(
   return record;
 }
 
-function stopProject(
-  projectId,
-) {
+function stopProject(projectId) {
   const record =
     projects.get(projectId);
 
@@ -353,23 +336,16 @@ function stopProject(
 
   try {
     if (
-      isProcessAlive(
-        record.process,
-      )
+      isProcessAlive(record.process)
     ) {
-      record.process.kill(
-        "SIGTERM",
-      );
+      record.process.kill("SIGTERM");
     }
-  } catch {}
+  } catch {
+    // ignore stop errors
+  }
 
-  projects.delete(
-    projectId,
-  );
-
-  unwatchProject(
-    projectId,
-  );
+  projects.delete(projectId);
+  unwatchProject(projectId);
 
   return true;
 }
