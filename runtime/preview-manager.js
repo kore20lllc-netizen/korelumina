@@ -1,6 +1,7 @@
 const { spawn } = require("child_process");
 const net = require("net");
 const path = require("path");
+const fs = require("fs");
 
 const {
   watchProject,
@@ -13,9 +14,7 @@ const starting = new Map();
 const BASE_PORT = 3001;
 
 function sleep(ms) {
-  return new Promise((r) =>
-    setTimeout(r, ms),
-  );
+  return new Promise((r) => setTimeout(r, ms));
 }
 
 function isProcessAlive(proc) {
@@ -48,13 +47,9 @@ function isPortOpen(port) {
 
 async function waitForServer(
   port,
-  retries = 50,
+  retries = 60,
 ) {
-  for (
-    let i = 0;
-    i < retries;
-    i++
-  ) {
+  for (let i = 0; i < retries; i++) {
     const ready =
       await isPortOpen(port);
 
@@ -62,70 +57,89 @@ async function waitForServer(
       return true;
     }
 
-    await sleep(300);
+    await sleep(500);
   }
 
   return false;
 }
 
-async function killExistingNextDev(
-  projectPath,
+async function findAvailablePort(
+  start = BASE_PORT,
 ) {
-  const fs = require("fs");
+  let port = start;
 
-  const logPath = path.join(
+  while (await isPortOpen(port)) {
+    port++;
+  }
+
+  return port;
+}
+
+function detectFramework(projectPath) {
+  const packageJsonPath = path.join(
     projectPath,
-    ".next/dev/logs/next-development.log",
+    "package.json",
   );
 
-  if (!fs.existsSync(logPath)) {
-    return;
-  }
-
-  try {
-    const text =
-      fs.readFileSync(
-        logPath,
-        "utf8",
-      );
-
-    const pidMatch =
-      text.match(/"pid":\s*(\d+)/);
-
-    if (!pidMatch) {
-      return;
-    }
-
-    const pid = Number(
-      pidMatch[1],
-    );
-
-    if (!pid) {
-      return;
-    }
-
-    try {
-      process.kill(pid, 0);
-
-      console.log(
-        `[preview-manager] killing stale next dev pid=${pid}`,
-      );
-
-      process.kill(
-        pid,
-        "SIGTERM",
-      );
-
-      await sleep(1200);
-    } catch {
-      // already dead
-    }
-  } catch (err) {
-    console.error(
-      "[preview-manager] failed reading next log",
-      err,
+  if (!fs.existsSync(packageJsonPath)) {
+    throw new Error(
+      "package.json not found",
     );
   }
+
+  const pkg = JSON.parse(
+    fs.readFileSync(
+      packageJsonPath,
+      "utf8",
+    ),
+  );
+
+  const deps = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+  };
+
+  if (deps.next) {
+    return "next";
+  }
+
+  if (deps.vite) {
+    return "vite";
+  }
+
+  throw new Error(
+    "Unsupported framework",
+  );
+}
+
+function buildCommand(
+  framework,
+  port,
+) {
+  if (framework === "next") {
+    return [
+      "run",
+      "dev",
+      "--",
+      "--webpack",
+      "-p",
+      String(port),
+    ];
+  }
+
+  if (framework === "vite") {
+    return [
+      "run",
+      "dev",
+      "--",
+      "--port",
+      String(port),
+    ];
+  }
+
+  throw new Error(
+    `Unknown framework ${framework}`,
+  );
 }
 
 async function startProject(
@@ -135,21 +149,28 @@ async function startProject(
   const existing =
     projects.get(projectId);
 
-  // critical:
-  // NEVER spawn another preview
-  // if one already exists
   if (
     existing &&
     isProcessAlive(
       existing.process,
     )
   ) {
-    return existing;
+    const alive =
+      await isPortOpen(
+        existing.port,
+      );
+
+    if (alive) {
+      return existing;
+    }
+
+    try {
+      existing.process.kill(
+        "SIGTERM",
+      );
+    } catch {}
   }
 
-  // critical:
-  // if already starting,
-  // reuse same promise
   if (starting.has(projectId)) {
     return starting.get(
       projectId,
@@ -158,27 +179,31 @@ async function startProject(
 
   const startPromise =
     (async () => {
-      // hard cleanup of stale next dev
-      await killExistingNextDev(
-        projectPath,
-      );
+      const framework =
+        detectFramework(
+          projectPath,
+        );
 
-      const port = BASE_PORT;
+      const port =
+        await findAvailablePort();
 
       console.log(
-        `[preview-manager] starting ${projectId} on ${port}...`,
+        `[preview-manager] framework=${framework}`,
       );
+
+      console.log(
+        `[preview-manager] starting ${projectId} on ${port}`,
+      );
+
+      const commandArgs =
+        buildCommand(
+          framework,
+          port,
+        );
 
       const proc = spawn(
         "npm",
-        [
-          "run",
-          "dev",
-          "--",
-          "--webpack",
-          "-p",
-          String(port),
-        ],
+        commandArgs,
         {
           cwd: projectPath,
           stdio: "inherit",
@@ -194,6 +219,7 @@ async function startProject(
       const record = {
         projectId,
         projectPath,
+        framework,
         port,
         process: proc,
         ready: false,
@@ -209,6 +235,10 @@ async function startProject(
       proc.on(
         "exit",
         (code) => {
+          console.log(
+            `[preview-manager] ${projectId} stopped (${code})`,
+          );
+
           const current =
             projects.get(
               projectId,
@@ -221,14 +251,10 @@ async function startProject(
             projects.delete(
               projectId,
             );
-
-            unwatchProject(
-              projectId,
-            );
           }
 
-          console.log(
-            `[preview-manager] ${projectId} stopped (code=${code})`,
+          unwatchProject(
+            projectId,
           );
         },
       );
@@ -239,13 +265,11 @@ async function startProject(
         );
 
       if (!ready) {
-        if (
-          isProcessAlive(proc)
-        ) {
+        try {
           proc.kill(
             "SIGTERM",
           );
-        }
+        } catch {}
 
         projects.delete(
           projectId,
@@ -327,15 +351,17 @@ function stopProject(
     return false;
   }
 
-  if (
-    isProcessAlive(
-      record.process,
-    )
-  ) {
-    record.process.kill(
-      "SIGTERM",
-    );
-  }
+  try {
+    if (
+      isProcessAlive(
+        record.process,
+      )
+    ) {
+      record.process.kill(
+        "SIGTERM",
+      );
+    }
+  } catch {}
 
   projects.delete(
     projectId,
