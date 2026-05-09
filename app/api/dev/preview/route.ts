@@ -1,17 +1,21 @@
 import { NextResponse } from "next/server";
 
 const {
-  startProject,
   getProject,
-} = require("../../../../runtime/preview-manager");
+  startProject,
+} = require("@/runtime/preview-manager");
 
-export async function GET(req: Request) {
+export async function GET(
+  request: Request,
+) {
   try {
     const { searchParams } =
-      new URL(req.url);
+      new URL(request.url);
 
     const projectId =
-      searchParams.get("projectId");
+      searchParams.get(
+        "projectId",
+      );
 
     if (!projectId) {
       return NextResponse.json(
@@ -20,17 +24,19 @@ export async function GET(req: Request) {
           error:
             "Missing projectId",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
+    // Reuse existing runtime if it is already running.
     let runtime =
       getProject(projectId);
 
+    // Only boot a new runtime if none exists.
     if (!runtime) {
       runtime =
         await startProject(
-          projectId
+          projectId,
         );
     }
 
@@ -39,49 +45,38 @@ export async function GET(req: Request) {
         {
           ok: false,
           error:
-            "Runtime unavailable",
+            "Preview failed to start",
         },
-        { status: 500 }
-      );
-    }
-
-    if (
-      runtime.status === "crashed"
-    ) {
-      return NextResponse.json(
-        {
-          ok: false,
-          status: "crashed",
-          error:
-            runtime.error ||
-            "Runtime crashed",
-        },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     return NextResponse.json({
       ok: true,
-      projectId,
+      projectId:
+        runtime.projectId,
       framework:
         runtime.framework,
-      port: runtime.port,
-      url: `http://localhost:${runtime.port}`,
+      port:
+        runtime.port,
+      url:
+        `http://localhost:${runtime.port}`,
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error(
       "[preview API error]",
-      err
+      err,
     );
 
     return NextResponse.json(
       {
         ok: false,
         error:
-          err?.message ||
-          "Preview failed",
+          err instanceof Error
+            ? err.message
+            : "Preview failed",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

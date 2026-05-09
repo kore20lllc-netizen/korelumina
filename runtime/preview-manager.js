@@ -15,8 +15,20 @@ const {
   unwatchProject,
 } = require("./preview-events");
 
-const projects = new Map();
-const starting = new Map();
+/**
+ * Persist state across Next.js hot reloads.
+ */
+const globalState =
+  global.__KORELUMINA_PREVIEW_STATE__ ||
+  (global.__KORELUMINA_PREVIEW_STATE__ = {
+    projects: new Map(),
+    starting: new Map(),
+    projectLocks: new Set(),
+  });
+
+const projects = globalState.projects;
+const starting = globalState.starting;
+const projectLocks = globalState.projectLocks;
 
 const BASE_PORT = 3001;
 
@@ -58,10 +70,7 @@ function isPortOpen(port) {
         resolve(false);
       });
 
-    socket.connect(
-      port,
-      "127.0.0.1",
-    );
+    socket.connect(port, "127.0.0.1");
   });
 }
 
@@ -86,15 +95,20 @@ async function findAvailablePort(
   let port = start;
 
   while (await isPortOpen(port)) {
-    port++;
+    port += 1;
   }
 
   return port;
 }
 
 function normalizeCommand(command) {
-  if (!command || typeof command !== "string") {
-    throw new Error("Missing runtime command");
+  if (
+    !command ||
+    typeof command !== "string"
+  ) {
+    throw new Error(
+      "Missing runtime command",
+    );
   }
 
   return command.trim();
@@ -110,17 +124,23 @@ async function startProject(projectId) {
 
   if (
     existing &&
-    isProcessAlive(existing.process)
+    isProcessAlive(
+      existing.process,
+    )
   ) {
     const alive =
-      await isPortOpen(existing.port);
+      await isPortOpen(
+        existing.port,
+      );
 
     if (alive) {
       return existing;
     }
 
     try {
-      existing.process.kill("SIGTERM");
+      existing.process.kill(
+        "SIGTERM",
+      );
     } catch {
       // ignore stale process cleanup errors
     }
@@ -133,47 +153,46 @@ async function startProject(projectId) {
     return starting.get(projectId);
   }
 
+  if (projectLocks.has(projectId)) {
+    await sleep(1500);
+
+    const locked =
+      projects.get(projectId);
+
+    if (
+      locked &&
+      isProcessAlive(
+        locked.process,
+      )
+    ) {
+      return locked;
+    }
+  }
+
+  projectLocks.add(projectId);
+
   const startPromise =
     (async () => {
       const projectPath =
         getProjectPath(projectId);
 
       const projectInfo =
-        detectProject(projectPath);
-
-      const installResult =
-        await installDependencies({
-          projectId,
+        detectProject(
           projectPath,
-          packageManager:
-            projectInfo.packageManager,
-        });
-
-      if (
-        installResult &&
-        installResult.ok === false &&
-        !installResult.skipped
-      ) {
-        throw new Error(
-          installResult.error ||
-            installResult.reason ||
-            "Dependency install failed",
         );
-      }
 
-      const port =
-        await findAvailablePort();
+      await installDependencies({
+        projectId,
+        projectPath,
+        packageManager:
+          projectInfo.packageManager,
+      });
 
       const framework =
         projectInfo.framework;
 
-      const rawCommand =
-        normalizeCommand(
-          projectInfo.devCommand,
-        ).replace(
-          /\{PORT\}/g,
-          String(port),
-        );
+      const port =
+        await findAvailablePort();
 
       console.log(
         `[preview-manager] framework=${framework}`,
@@ -183,13 +202,20 @@ async function startProject(projectId) {
         `[preview-manager] starting ${projectId} on ${port}`,
       );
 
+      const rawCommand =
+        normalizeCommand(
+          projectInfo.devCommand,
+        ).replace(
+          "{PORT}",
+          String(port),
+        );
+
       console.log(
         `[preview-manager] command=${rawCommand}`,
       );
 
       const proc = spawn(
         rawCommand,
-        [],
         {
           cwd: projectPath,
           stdio: "inherit",
@@ -197,7 +223,6 @@ async function startProject(projectId) {
           env: {
             ...process.env,
             PORT: String(port),
-            HOST: "0.0.0.0",
             FORCE_COLOR: "1",
           },
         },
@@ -207,21 +232,11 @@ async function startProject(projectId) {
         projectId,
         projectPath,
         framework,
-        runtime:
-          projectInfo.runtime,
-        packageManager:
-          projectInfo.packageManager,
-        entry:
-          projectInfo.entry,
         port,
         process: proc,
         ready: false,
-        status: "starting",
         startedAt:
           Date.now(),
-        pid:
-          proc.pid,
-        error: null,
       };
 
       projects.set(
@@ -229,33 +244,32 @@ async function startProject(projectId) {
         record,
       );
 
-      proc.on("exit", (code) => {
-        console.log(
-          `[preview-manager] ${projectId} stopped (${code})`,
-        );
+      proc.on(
+        "exit",
+        (code) => {
+          console.log(
+            `[preview-manager] ${projectId} stopped (${code})`,
+          );
 
-        const current =
-          projects.get(projectId);
+          const current =
+            projects.get(
+              projectId,
+            );
 
-        if (
-          current &&
-          current.process === proc
-        ) {
-          current.ready = false;
-          current.status =
-            code === 0
-              ? "stopped"
-              : "crashed";
-          current.error =
-            code === 0
-              ? null
-              : `Process exited with code ${code}`;
+          if (
+            current &&
+            current.process === proc
+          ) {
+            projects.delete(
+              projectId,
+            );
+          }
 
-          projects.delete(projectId);
-        }
-
-        unwatchProject(projectId);
-      });
+          unwatchProject(
+            projectId,
+          );
+        },
+      );
 
       const ready =
         await waitForServer(port);
@@ -276,11 +290,6 @@ async function startProject(projectId) {
       }
 
       record.ready = true;
-      record.status = "running";
-      record.readyAt = Date.now();
-      record.bootDuration =
-        record.readyAt -
-        record.startedAt;
 
       watchProject(
         projectId,
@@ -303,6 +312,7 @@ async function startProject(projectId) {
     return await startPromise;
   } finally {
     starting.delete(projectId);
+    projectLocks.delete(projectId);
   }
 }
 
@@ -315,11 +325,12 @@ function getProject(projectId) {
   }
 
   if (
-    !isProcessAlive(record.process)
+    !isProcessAlive(
+      record.process,
+    )
   ) {
     projects.delete(projectId);
     unwatchProject(projectId);
-
     return null;
   }
 
@@ -336,9 +347,13 @@ function stopProject(projectId) {
 
   try {
     if (
-      isProcessAlive(record.process)
+      isProcessAlive(
+        record.process,
+      )
     ) {
-      record.process.kill("SIGTERM");
+      record.process.kill(
+        "SIGTERM",
+      );
     }
   } catch {
     // ignore stop errors
