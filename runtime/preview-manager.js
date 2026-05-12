@@ -1,5 +1,6 @@
 const { spawn } = require("child_process");
 const net = require("net");
+const http = require("http");
 const path = require("path");
 
 const {
@@ -15,9 +16,6 @@ const {
   unwatchProject,
 } = require("./preview-events");
 
-/**
- * Persist state across Next.js hot reloads.
- */
 const globalState =
   global.__KORELUMINA_PREVIEW_STATE__ ||
   (global.__KORELUMINA_PREVIEW_STATE__ = {
@@ -61,26 +59,78 @@ function isPortOpen(port) {
   return new Promise((resolve) => {
     const socket = new net.Socket();
 
+    socket.setTimeout(1000);
+
     socket
       .once("connect", () => {
         socket.destroy();
         resolve(true);
       })
+      .once("timeout", () => {
+        socket.destroy();
+        resolve(false);
+      })
       .once("error", () => {
         resolve(false);
       });
 
-    socket.connect(port, "127.0.0.1");
+    socket.connect(
+      port,
+      "127.0.0.1",
+    );
+  });
+}
+
+function isHttpReady(port) {
+  return new Promise((resolve) => {
+    const req = http.get(
+      {
+        hostname: "127.0.0.1",
+        port,
+        path: "/",
+        timeout: 2500,
+        headers: {
+          "User-Agent":
+            "KoreLumina-Preview-Healthcheck",
+        },
+      },
+      (res) => {
+        res.resume();
+
+        resolve(
+          res.statusCode &&
+            res.statusCode >= 200 &&
+            res.statusCode < 500,
+        );
+      },
+    );
+
+    req.on("timeout", () => {
+      req.destroy();
+      resolve(false);
+    });
+
+    req.on("error", () => {
+      resolve(false);
+    });
   });
 }
 
 async function waitForServer(
   port,
-  retries = 60,
+  retries = 120,
 ) {
   for (let i = 0; i < retries; i++) {
-    if (await isPortOpen(port)) {
-      return true;
+    const portOpen =
+      await isPortOpen(port);
+
+    if (portOpen) {
+      const httpReady =
+        await isHttpReady(port);
+
+      if (httpReady) {
+        return true;
+      }
     }
 
     await sleep(500);
@@ -95,7 +145,7 @@ async function findAvailablePort(
   let port = start;
 
   while (await isPortOpen(port)) {
-    port += 1;
+    port++;
   }
 
   return port;
@@ -114,9 +164,69 @@ function normalizeCommand(command) {
   return command.trim();
 }
 
+function appendLog(record, chunk) {
+  if (!record || !chunk) {
+    return;
+  }
+
+  const text = String(chunk);
+
+  record.logs.push(text);
+
+  if (record.logs.length > 200) {
+    record.logs =
+      record.logs.slice(-200);
+  }
+}
+
+async function stopProject(projectId) {
+  const record =
+    projects.get(projectId);
+
+  if (!record) {
+    return false;
+  }
+
+  try {
+    if (
+      isProcessAlive(
+        record.process,
+      )
+    ) {
+      record.process.kill(
+        "SIGTERM",
+      );
+
+      await sleep(700);
+
+      if (
+        isProcessAlive(
+          record.process,
+        )
+      ) {
+        record.process.kill(
+          "SIGKILL",
+        );
+      }
+    }
+  } catch {
+    // ignore stop errors
+  }
+
+  projects.delete(projectId);
+
+  unwatchProject(
+    projectId,
+  );
+
+  return true;
+}
+
 async function startProject(projectId) {
   if (!projectId) {
-    throw new Error("Missing projectId");
+    throw new Error(
+      "Missing projectId",
+    );
   }
 
   const existing =
@@ -128,25 +238,16 @@ async function startProject(projectId) {
       existing.process,
     )
   ) {
-    const alive =
-      await isPortOpen(
+    const ready =
+      await isHttpReady(
         existing.port,
       );
 
-    if (alive) {
+    if (ready) {
       return existing;
     }
 
-    try {
-      existing.process.kill(
-        "SIGTERM",
-      );
-    } catch {
-      // ignore stale process cleanup errors
-    }
-
-    projects.delete(projectId);
-    unwatchProject(projectId);
+    await stopProject(projectId);
   }
 
   if (starting.has(projectId)) {
@@ -154,7 +255,14 @@ async function startProject(projectId) {
   }
 
   if (projectLocks.has(projectId)) {
-    await sleep(1500);
+    const activeStart =
+      starting.get(projectId);
+
+    if (activeStart) {
+      return activeStart;
+    }
+
+    await sleep(1000);
 
     const locked =
       projects.get(projectId);
@@ -163,7 +271,8 @@ async function startProject(projectId) {
       locked &&
       isProcessAlive(
         locked.process,
-      )
+      ) &&
+      (await isHttpReady(locked.port))
     ) {
       return locked;
     }
@@ -181,18 +290,39 @@ async function startProject(projectId) {
           projectPath,
         );
 
-      await installDependencies({
-        projectId,
-        projectPath,
-        packageManager:
-          projectInfo.packageManager,
-      });
+      const installResult =
+        await installDependencies({
+          projectId,
+          projectPath,
+          packageManager:
+            projectInfo.packageManager,
+        });
+
+      if (
+        installResult &&
+        installResult.ok === false &&
+        !installResult.skipped
+      ) {
+        throw new Error(
+          installResult.error ||
+            installResult.reason ||
+            "Dependency install failed",
+        );
+      }
 
       const framework =
         projectInfo.framework;
 
       const port =
         await findAvailablePort();
+
+      const rawCommand =
+        normalizeCommand(
+          projectInfo.devCommand,
+        ).replace(
+          /\{PORT\}/g,
+          String(port),
+        );
 
       console.log(
         `[preview-manager] framework=${framework}`,
@@ -202,29 +332,27 @@ async function startProject(projectId) {
         `[preview-manager] starting ${projectId} on ${port}`,
       );
 
-      const rawCommand =
-        normalizeCommand(
-          projectInfo.devCommand,
-        ).replace(
-          "{PORT}",
-          String(port),
-        );
-
       console.log(
         `[preview-manager] command=${rawCommand}`,
       );
 
       const proc = spawn(
         rawCommand,
+        [],
         {
           cwd: projectPath,
-          stdio: "inherit",
           shell: true,
           env: {
             ...process.env,
             PORT: String(port),
+            HOST: "0.0.0.0",
             FORCE_COLOR: "1",
           },
+          stdio: [
+            "ignore",
+            "pipe",
+            "pipe",
+          ],
         },
       );
 
@@ -232,16 +360,44 @@ async function startProject(projectId) {
         projectId,
         projectPath,
         framework,
+        runtime:
+          projectInfo.runtime,
+        packageManager:
+          projectInfo.packageManager,
+        entry:
+          projectInfo.entry,
         port,
         process: proc,
         ready: false,
+        status: "starting",
         startedAt:
           Date.now(),
+        readyAt: null,
+        pid:
+          proc.pid,
+        error: null,
+        logs: [],
       };
 
       projects.set(
         projectId,
         record,
+      );
+
+      proc.stdout.on(
+        "data",
+        (chunk) => {
+          appendLog(record, chunk);
+          process.stdout.write(chunk);
+        },
+      );
+
+      proc.stderr.on(
+        "data",
+        (chunk) => {
+          appendLog(record, chunk);
+          process.stderr.write(chunk);
+        },
       );
 
       proc.on(
@@ -252,17 +408,23 @@ async function startProject(projectId) {
           );
 
           const current =
-            projects.get(
-              projectId,
-            );
+            projects.get(projectId);
 
           if (
             current &&
             current.process === proc
           ) {
-            projects.delete(
-              projectId,
-            );
+            current.ready = false;
+            current.status =
+              code === 0
+                ? "stopped"
+                : "crashed";
+            current.error =
+              code === 0
+                ? null
+                : `Process exited with code ${code}`;
+
+            projects.delete(projectId);
           }
 
           unwatchProject(
@@ -275,14 +437,32 @@ async function startProject(projectId) {
         await waitForServer(port);
 
       if (!ready) {
+        record.ready = false;
+        record.status = "crashed";
+        record.error =
+          `Preview failed on ${port}`;
+
         try {
           proc.kill("SIGTERM");
         } catch {
           // ignore cleanup errors
         }
 
+        await sleep(700);
+
+        try {
+          if (isProcessAlive(proc)) {
+            proc.kill("SIGKILL");
+          }
+        } catch {
+          // ignore cleanup errors
+        }
+
         projects.delete(projectId);
-        unwatchProject(projectId);
+
+        unwatchProject(
+          projectId,
+        );
 
         throw new Error(
           `Preview failed on ${port}`,
@@ -290,6 +470,8 @@ async function startProject(projectId) {
       }
 
       record.ready = true;
+      record.status = "running";
+      record.readyAt = Date.now();
 
       watchProject(
         projectId,
@@ -330,39 +512,15 @@ function getProject(projectId) {
     )
   ) {
     projects.delete(projectId);
-    unwatchProject(projectId);
+
+    unwatchProject(
+      projectId,
+    );
+
     return null;
   }
 
   return record;
-}
-
-function stopProject(projectId) {
-  const record =
-    projects.get(projectId);
-
-  if (!record) {
-    return false;
-  }
-
-  try {
-    if (
-      isProcessAlive(
-        record.process,
-      )
-    ) {
-      record.process.kill(
-        "SIGTERM",
-      );
-    }
-  } catch {
-    // ignore stop errors
-  }
-
-  projects.delete(projectId);
-  unwatchProject(projectId);
-
-  return true;
 }
 
 module.exports = {
