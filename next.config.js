@@ -1,12 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.externals = config.externals || [];
-    config.externals.push({
-      esbuild: "commonjs esbuild",
-    });
-    return config;
-  },
+  allowedDevOrigins: ["127.0.0.1"],
 };
 
 module.exports = nextConfig;
