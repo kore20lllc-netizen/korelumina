@@ -1,54 +1,130 @@
 import fs from "fs";
 import path from "path";
+import { NextRequest, NextResponse } from "next/server";
 
-function resolveProjectRoot(workspaceId: string, projectId: string) {
+export const dynamic = "force-dynamic";
+
+function getProjectRoot(
+  workspaceId: string,
+  projectId: string,
+) {
   return path.join(
-    process.env.KORE_RUNTIME_ROOT!,
+    process.cwd(),
+    "runtime",
     "workspaces",
     workspaceId,
     "projects",
-    projectId
+    projectId,
   );
 }
 
-function walk(dir: string, base = ""): string[] {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
 
-  let files: string[] = [];
+  const workspaceId =
+    searchParams.get("workspaceId") || "default";
 
-  for (const e of entries) {
-    const full = path.join(dir, e.name);
-    const rel = path.join(base, e.name);
+  const projectId =
+    searchParams.get("projectId");
 
-    if (e.isDirectory()) {
-      files = files.concat(walk(full, rel));
-    } else {
-      files.push(rel);
+  const file =
+    searchParams.get("file");
+
+  if (!projectId) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Missing projectId",
+      },
+      { status: 400 },
+    );
+  }
+
+  const root = getProjectRoot(
+    workspaceId,
+    projectId,
+  );
+
+  if (!fs.existsSync(root)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: `Project not found: ${projectId}`,
+      },
+      { status: 404 },
+    );
+  }
+
+  // Read a single file
+  if (file) {
+    const fullPath = path.join(root, file);
+
+    if (!fs.existsSync(fullPath)) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "File not found",
+        },
+        { status: 404 },
+      );
+    }
+
+    const content = fs.readFileSync(
+      fullPath,
+      "utf8",
+    );
+
+    return NextResponse.json({
+      ok: true,
+      projectId,
+      file,
+      content,
+    });
+  }
+
+  // List all files
+  const files: string[] = [];
+
+  function walk(dir: string) {
+    const entries = fs.readdirSync(
+      dir,
+      { withFileTypes: true },
+    );
+
+    for (const entry of entries) {
+      if (
+        entry.name === "node_modules" ||
+        entry.name === ".git" ||
+        entry.name === ".next" ||
+        entry.name === "dist" ||
+        entry.name === "build"
+      ) {
+        continue;
+      }
+
+      const fullPath = path.join(
+        dir,
+        entry.name,
+      );
+
+      const relativePath = path
+        .relative(root, fullPath)
+        .replace(/\\/g, "/");
+
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else {
+        files.push(relativePath);
+      }
     }
   }
 
-  return files;
-}
+  walk(root);
+  files.sort();
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-
-  const workspaceId = searchParams.get("workspaceId");
-  const projectId = searchParams.get("projectId");
-
-  if (!workspaceId || !projectId) {
-    return new Response("Missing params", { status: 400 });
-  }
-
-  const root = resolveProjectRoot(workspaceId, projectId);
-
-  const src = path.join(root, "src");
-
-  if (!fs.existsSync(src)) {
-    return Response.json({ files: [] });
-  }
-
-  const files = walk(src).map((f) => `src/${f}`);
-
-  return Response.json({ files });
+  return NextResponse.json({
+    ok: true,
+    projectId,
+    files,
+  });
 }

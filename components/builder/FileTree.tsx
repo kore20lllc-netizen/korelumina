@@ -4,56 +4,102 @@ import { useEffect, useState } from "react";
 
 type Props = {
   projectId: string;
+  workspaceId?: string;
+  refreshTick?: number;
   onSelect?: (file: string) => void;
 };
 
-export default function FileTree({ projectId, onSelect }: Props) {
+export default function FileTree({
+  projectId,
+  workspaceId = "default",
+  refreshTick = 0,
+  onSelect = () => {},
+}: Props) {
   const [files, setFiles] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function load() {
-      const res = await fetch(
-        `/api/dev/fs/list?projectId=${projectId}`
-      );
-      const data = await res.json();
-      const raw = data.files || [];
+      setLoading(true);
 
-const filtered = raw.filter((f: string) => {
-  if (!f.endsWith(".tsx") && !f.endsWith(".jsx")) return false;
+      try {
+        const params = new URLSearchParams({
+          workspaceId,
+          projectId,
+        });
 
-  if (
-    f.includes("layout") ||
-    f.includes("provider") ||
-    f.includes("config")
-  ) return false;
+        const response = await fetch(
+          `/api/dev/fs/list?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
 
-  return true;
-});
+        const data = await response.json();
 
-setFiles(filtered);
+        if (!cancelled) {
+          setFiles(
+            Array.isArray(data.files)
+              ? data.files
+              : [],
+          );
+        }
+      } catch (error) {
+        console.error(
+          "[FileTree] load failed:",
+          error,
+        );
+
+        if (!cancelled) {
+          setFiles([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
     }
 
     load();
-  }, [projectId]);
 
-  function openFile(f: string) {
-    onSelect?.(f);
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    workspaceId,
+    projectId,
+    refreshTick,
+  ]);
+
+  if (loading && files.length === 0) {
+    return (
+      <div className="p-3 text-sm text-gray-500">
+        Loading files...
+      </div>
+    );
+  }
+
+  if (files.length === 0) {
+    return (
+      <div className="p-3 text-sm text-gray-500">
+        No files found.
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: 10 }}>
-      {files.map((f) => (
-        <div
-          key={f}
-          onClick={() => openFile(f)}
-          style={{
-            cursor: "pointer",
-            padding: "4px 8px",
-            borderRadius: 4,
-          }}
+    <div className="h-full overflow-auto">
+      {files.map((file) => (
+        <button
+          key={file}
+          type="button"
+          onClick={() => onSelect(file)}
+          className="block w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
         >
-          {f}
-        </div>
+          {file}
+        </button>
       ))}
     </div>
   );

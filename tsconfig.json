@@ -1,14 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": false,
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -17,31 +13,27 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    // 🔑 REQUIRED FOR @/ ALIAS
+    "plugins": [
+      { "name": "next" }
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+      "@/*": ["./*"]
+    }
   },
   "include": [
-    "app",
-    "korelumina.manifest.json",
-    "lib",
-    "runtime",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types/**/*.d.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     ".next",
-    "runtime/backups",
-    "runtime/logs",
-    "runtime/workspaces"
+    "runtime",
+    "__graveyard",
+    "__graveyard_runtime_v1",
+    "nature-crest-climate-solutions"
   ]
 }

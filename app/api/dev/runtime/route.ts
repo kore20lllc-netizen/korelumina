@@ -1,86 +1,86 @@
-import { NextResponse } from "next/server";
-
-const {
-  getProject,
+import { NextRequest, NextResponse } from "next/server";
+import {
   startProject,
-} = require("@/runtime/preview-manager");
+  getProject,
+} from "@/runtime/preview-manager";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
+export const dynamic = "force-dynamic";
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
 
   const projectId =
     searchParams.get("projectId");
 
   if (!projectId) {
-    return NextResponse.json({
-      ok: false,
-      error: "Missing projectId",
-    });
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Missing projectId",
+      },
+      { status: 400 },
+    );
   }
-
-  const projectPath =
-    `/Users/erictouko/dev/korelumina/runtime/workspaces/default/projects/${projectId}`;
 
   try {
     let runtime =
       getProject(projectId);
 
-    // auto boot runtime if missing
     if (!runtime) {
       runtime =
         await startProject(
           projectId,
-          projectPath,
         );
     }
 
     if (!runtime) {
-      return NextResponse.json({
-        ok: false,
-        status: "stopped",
-      });
+      return NextResponse.json(
+        {
+          ok: false,
+          status: "crashed",
+          error:
+            "Preview failed to start",
+        },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json({
       ok: true,
-
-      status:
-        runtime.ready
-          ? "running"
-          : "booting",
-
+      status: "running",
       projectId:
         runtime.projectId,
-
       framework:
         runtime.framework,
-
       port:
         runtime.port,
-
       pid:
-        runtime.process?.pid,
-
+        runtime.pid ?? null,
       startedAt:
-        runtime.startedAt,
-
+        runtime.startedAt ??
+        null,
       uptime:
-        Date.now() -
-        runtime.startedAt,
+        runtime.startedAt
+          ? Date.now() -
+            runtime.startedAt
+          : null,
     });
   } catch (err) {
     console.error(
-      "[runtime route]",
+      "[runtime API error]",
       err,
     );
 
-    return NextResponse.json({
-      ok: false,
-      status: "crashed",
-      error:
-        err instanceof Error
-          ? err.message
-          : "Runtime failed",
-    });
+    return NextResponse.json(
+      {
+        ok: false,
+        status: "crashed",
+        error:
+          err instanceof Error
+            ? err.message
+            : "Runtime failed",
+      },
+      { status: 500 },
+    );
   }
 }

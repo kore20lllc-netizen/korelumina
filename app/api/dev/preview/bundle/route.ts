@@ -1,70 +1,44 @@
-import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs/promises";
-import * as esbuild from "esbuild";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const projectId = searchParams.get("projectId");
-    const entry = searchParams.get("entry") || "app/page.tsx";
+export const dynamic = "force-dynamic";
 
-    if (!projectId) {
-      return NextResponse.json({ ok: false, error: "Missing projectId" }, { status: 400 });
-    }
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
 
-    const projectRoot = path.join(
-      process.cwd(),
-      "runtime/workspaces/default/projects",
-      projectId
-    );
+  const projectId = searchParams.get("projectId");
+  const entry = searchParams.get("entry");
 
-    const entryPath = path.join(projectRoot, entry);
-
-    try {
-      await fs.access(entryPath);
-    } catch {
-      return NextResponse.json(
-        { ok: false, error: `Entry not found: ${entry}` },
-        { status: 404 }
-      );
-    }
-
-    const result = await esbuild.build({
-      entryPoints: [entryPath],
-      bundle: true,
-      write: false,
-      platform: "browser",
-      format: "iife",
-      jsx: "automatic",
-      loader: {
-        ".ts": "ts",
-        ".tsx": "tsx",
-        ".js": "js",
-        ".jsx": "jsx",
-        ".css": "empty",
-      },
-      define: {
-        "process.env.NODE_ENV": `"development"`,
-      },
-      external: ["react", "react-dom", "next/*"],
-    });
-
-    const code = result.outputFiles[0].text;
-
-    return new NextResponse(code, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/javascript",
-      },
-    });
-  } catch (err: any) {
+  if (!projectId) {
     return NextResponse.json(
       {
         ok: false,
-        error: err.message || "Build failed",
+        error: "Missing projectId",
       },
-      { status: 500 }
+      { status: 400 },
     );
   }
+
+  // Delegate to the stable preview route.
+  const proxyUrl = new URL("/api/dev/preview", req.url);
+  proxyUrl.searchParams.set("projectId", projectId);
+
+  if (entry) {
+    proxyUrl.searchParams.set("entry", entry);
+  }
+
+  const response = await fetch(proxyUrl.toString(), {
+    cache: "no-store",
+  });
+
+  const payload = await response.text();
+
+  return new NextResponse(payload, {
+    status: response.status,
+    headers: {
+      "Content-Type":
+        response.headers.get("content-type") ||
+        "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+    },
+  });
 }

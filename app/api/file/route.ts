@@ -1,35 +1,59 @@
 import fs from "fs";
 import path from "path";
+import { NextRequest, NextResponse } from "next/server";
 
-function resolveProjectRoot(workspaceId: string, projectId: string) {
-  return path.join(
-    process.env.KORE_RUNTIME_ROOT!,
+export const dynamic = "force-dynamic";
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
+
+  const workspaceId =
+    searchParams.get("workspaceId") || "default";
+
+  const projectId =
+    searchParams.get("projectId");
+
+  const file =
+    searchParams.get("file");
+
+  if (!projectId || !file) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Missing projectId or file",
+      },
+      { status: 400 },
+    );
+  }
+
+  const fullPath = path.join(
+    process.cwd(),
+    "runtime",
     "workspaces",
     workspaceId,
     "projects",
-    projectId
+    projectId,
+    file,
   );
-}
-
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-
-  const workspaceId = searchParams.get("workspaceId");
-  const projectId = searchParams.get("projectId");
-  const filePath = searchParams.get("path");
-
-  if (!workspaceId || !projectId || !filePath) {
-    return new Response("Missing parameters", { status: 400 });
-  }
-
-  const root = resolveProjectRoot(workspaceId, projectId);
-  const fullPath = path.join(root, filePath);
 
   if (!fs.existsSync(fullPath)) {
-    return new Response("", { status: 404 });
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "File not found",
+      },
+      { status: 404 },
+    );
   }
 
-  const content = fs.readFileSync(fullPath, "utf8");
+  const content = fs.readFileSync(
+    fullPath,
+    "utf8",
+  );
 
-  return new Response(content);
+  return NextResponse.json({
+    ok: true,
+    file,
+    content,
+  });
 }

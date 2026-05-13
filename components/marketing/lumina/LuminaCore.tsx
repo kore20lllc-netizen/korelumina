@@ -1,84 +1,84 @@
-/**
- * LUMINA CORE COMPONENT
- * =====================================================
- * Hero variant of the Lumina brand system
- * 
- * USAGE RULES:
- * - Only ONE Lumina Core per page
- * - Use for hero sections only
- * - Do not override sizing props
- * - Animation is GPU-accelerated and verified
- * 
- * @example
- * ```tsx
- * <LuminaCore>
- *   <YourHeroContent />
- * </LuminaCore>
- * ```
- */
+"use client";
 
-import React from 'react';
-import { LUMINA_TOKENS } from '@/lib/lumina-tokens';
-import { LuminaCoreProps } from './types';
+import type { CSSProperties } from "react";
+import { LUMINA_TOKENS } from "./LuminaTokens";
+import type { LuminaCoreProps } from "./types";
 
-export const LuminaCore: React.FC<LuminaCoreProps> = ({
-  children,
-  className = '',
+export function LuminaCore({
+  className = "",
+  opacity,
   disableAnimation = false,
-}) => {
-  const { core, animation, asset } = LUMINA_TOKENS;
+}: LuminaCoreProps) {
+  // Defensive fallback so the component still works even if tokens are partial.
+  const tokens = LUMINA_TOKENS as any;
 
-  const animationStyle = disableAnimation
-    ? {}
-    : { animation: `${animation.name} ${animation.duration} ${animation.timing} ${animation.iteration}` };
+  const core = tokens.core ?? {
+    size: 160,
+    opacity: 1,
+    scale: 1,
+    blur: 0,
+  };
+
+  const animation = tokens.animation ?? {
+    duration: 18,
+    ease: "ease-in-out",
+  };
+
+  const asset = tokens.asset ?? {
+    defaultSrc: "/lumina/lumina-orb.png",
+  };
+
+  const finalOpacity = opacity ?? core.opacity ?? 1;
+  const baseScale = core.scale ?? 1;
+  const size = core.size ?? 160;
+
+  const style: CSSProperties = {
+    width: size,
+    height: size,
+    opacity: finalOpacity,
+    filter: `blur(${core.blur ?? 0}px)`,
+    transform: `scale(${baseScale})`,
+    backgroundImage: `url(${asset.defaultSrc})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    pointerEvents: "none",
+  };
+
+  if (!disableAnimation) {
+    style.animation = `lumina-core-pulse ${
+      animation.duration ?? 18
+    }s ${animation.ease ?? "ease-in-out"} infinite`;
+  }
 
   return (
-    <div
-      className={`relative ${className}`}
-      style={{
-        aspectRatio: core.wrapper.aspectRatio,
-        width: core.wrapper.width,
-        height: 'auto',
-        minHeight: core.wrapper.minHeight,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingLeft: core.wrapper.paddingLeft,
-        paddingRight: core.wrapper.paddingRight,
-        overflow: core.wrapper.overflow,
-      }}
-      data-lumina-variant="core"
-    >
-      {/* Layer 1: Lumina Background */}
+    <>
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `url("${asset.image}")`,
-          backgroundSize: core.background.size,
-          backgroundPosition: core.background.position,
-          backgroundRepeat: core.background.repeat,
-          opacity: core.background.opacity,
-          zIndex: core.background.zIndex,
-          ...animationStyle,
-        }}
+        className={`relative ${className}`}
+        style={style}
         aria-hidden="true"
       />
 
-      {/* Layer 2: Subtle Dark Overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: core.overlay.gradient,
-          zIndex: core.overlay.zIndex,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Layer 3: Content */}
-      <div className="relative z-10 h-full">
-        {children}
-      </div>
-    </div>
+      {!disableAnimation && (
+        <style jsx>{`
+          @keyframes lumina-core-pulse {
+            0% {
+              transform: scale(${baseScale});
+              opacity: ${finalOpacity};
+            }
+            50% {
+              transform: scale(${baseScale * 1.04});
+              opacity: ${Math.min(finalOpacity + 0.08, 1)};
+            }
+            100% {
+              transform: scale(${baseScale});
+              opacity: ${finalOpacity};
+            }
+          }
+        `}</style>
+      )}
+    </>
   );
-};
+}
 
-LuminaCore.displayName = 'LuminaCore';
+export default LuminaCore;
