@@ -1,12 +1,14 @@
-import { safeParse } from "@/lib/safe-json";
 import fs from "fs";
 import path from "path";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const projectId = searchParams.get("projectId") || "demo-project";
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
+
+  const projectId =
+    searchParams.get("projectId") || "demo-project";
 
   const file = path.join(
     process.cwd(),
@@ -15,17 +17,37 @@ export async function GET(req: Request) {
     "default",
     "projects",
     projectId,
-    "journal.json"
+    ".korelumina",
+    "journal.json",
   );
 
-  let entries: any[] = [];
+  if (!fs.existsSync(file)) {
+    return NextResponse.json({
+      ok: true,
+      entries: [],
+    });
+  }
 
   try {
-    if (fs.existsSync(file)) {
-      const raw = fs.readFileSync(file, "utf8");
-      entries = safeParse(raw, []);
-    }
-  } catch {}
+    const raw = fs.readFileSync(
+      file,
+      "utf8",
+    );
 
-  return Response.json({ entries });
+    const entries =
+      JSON.parse(raw);
+
+    return NextResponse.json({
+      ok: true,
+      entries:
+        Array.isArray(entries)
+          ? entries
+          : [],
+    });
+  } catch {
+    return NextResponse.json({
+      ok: true,
+      entries: [],
+    });
+  }
 }

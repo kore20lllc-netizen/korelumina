@@ -1,82 +1,66 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { startProject, getProject } from "@/runtime/preview-manager";
 
-const {
-  getProject,
-  startProject,
-} = require("@/runtime/preview-manager");
+export const dynamic = "force-dynamic";
 
-export async function GET(
-  request: Request,
-) {
+export async function GET(request: NextRequest) {
   try {
-    const { searchParams } =
-      new URL(request.url);
-
     const projectId =
-      searchParams.get(
-        "projectId",
-      );
+      request.nextUrl.searchParams.get("projectId") ||
+      "korelumina-dogfood";
 
-    if (!projectId) {
-      return NextResponse.json(
-        {
-          ok: false,
-          error:
-            "Missing projectId",
-        },
-        { status: 400 },
-      );
-    }
-
-    // Reuse existing runtime if it is already running.
-    let runtime =
-      getProject(projectId);
-
-    // Only boot a new runtime if none exists.
-    if (!runtime) {
-      runtime =
-        await startProject(
-          projectId,
-        );
-    }
+    let runtime = getProject(projectId);
 
     if (!runtime) {
-      return NextResponse.json(
-        {
-          ok: false,
-          error:
-            "Preview failed to start",
-        },
-        { status: 500 },
-      );
+      runtime = await startProject(projectId);
     }
 
-    return NextResponse.json({
-      ok: true,
-      projectId:
-        runtime.projectId,
-      framework:
-        runtime.framework,
-      port:
-        runtime.port,
-      url:
-        `http://localhost:${runtime.port}`,
+    const url = runtime.url || `http://localhost:${runtime.port}`;
+
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b0b0f;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    src="${url}"
+    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals"
+  ></iframe>
+</body>
+</html>`;
+
+    return new NextResponse(html, {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
     });
-  } catch (err) {
-    console.error(
-      "[preview API error]",
-      err,
-    );
-
+  } catch (error: any) {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          err instanceof Error
-            ? err.message
-            : "Preview failed",
+        error: error?.message || "Preview failed",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

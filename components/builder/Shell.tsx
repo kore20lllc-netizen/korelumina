@@ -1,69 +1,73 @@
 "use client";
-import { useEffect, useState } from "react";
 
-import FileTree from "./FileTree";
-import TaskPanel from "./TaskPanel";
-import DiffPanel from "./DiffPanel";
+import { useState } from "react";
+
+import FileTree from "@/components/builder/FileTree";
+import CodeEditor from "@/components/builder/CodeEditor";
+import PreviewFrame from "@/components/builder/PreviewFrame";
+import DiffPanel from "@/components/builder/DiffPanel";
+
+type Props = {
+  workspaceId?: string;
+  projectId: string;
+};
+
+type DiffItem = {
+  file: string;
+  content: string;
+};
 
 export default function Shell({
-  workspaceId,
+  workspaceId = "default",
   projectId,
-}: {
-  workspaceId: string;
-  projectId: string;
-}) {
-  const [result, setResult] = useState<any>(null);
+}: Props) {
+  const [selectedFile, setSelectedFile] = useState("");
+  const [refreshTick, setRefreshTick] = useState(0);
 
-  async function loadLatest() {
-    const res = await fetch(
-      `/api/ai/journal?workspaceId=${workspaceId}&projectId=${projectId}`
-    );
+  // Placeholder until AI draft generation is wired in.
+  // DiffPanel expects items with: { file, content }.
+  const drafts: DiffItem[] = [];
 
-    const data = await res.json();
-
-    const events = data?.events || [];
-
-    if (events.length) {
-      const last = events[events.length - 1];
-      setResult(last?.payload || null);
-    }
+  function applyChange() {
+    setRefreshTick((prev) => prev + 1);
   }
-
-  useEffect(() => {
-    loadLatest();
-
-    const handler = () => loadLatest();
-    window.addEventListener("builder:file-change", handler);
-
-    return () => {
-      window.removeEventListener("builder:file-change", handler);
-    };
-  }, []);
 
   return (
     <div
+      className="grid h-screen"
       style={{
-        display: "grid",
-        gridTemplateColumns: "260px 1fr 1fr",
-        height: "100vh",
+        gridTemplateColumns: "280px 1fr 1fr 420px",
       }}
     >
       <div style={{ borderRight: "1px solid #ddd" }}>
-        <FileTree workspaceId={workspaceId} projectId={projectId} />
+        <FileTree
+          workspaceId={workspaceId}
+          projectId={projectId}
+          refreshTick={refreshTick}
+          onSelect={setSelectedFile}
+        />
       </div>
 
       <div style={{ borderRight: "1px solid #ddd" }}>
-        <TaskPanel
-          workspaceId={workspaceId}
+        <CodeEditor
           projectId={projectId}
-          onResult={() => {
-            window.dispatchEvent(new Event("builder:file-change"));
-          }}
+          path={selectedFile}
+          onSaved={applyChange}
+        />
+      </div>
+
+      <div style={{ borderRight: "1px solid #ddd" }}>
+        <PreviewFrame
+          projectId={projectId}
+          refreshTick={refreshTick}
         />
       </div>
 
       <div>
-        <DiffPanel drafts={drafts} onApply={applyChange} />
+        <DiffPanel
+          drafts={drafts}
+          onApply={applyChange}
+        />
       </div>
     </div>
   );
