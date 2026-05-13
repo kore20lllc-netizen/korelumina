@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { startProject, getProject } from "@/runtime/preview-manager";
+import { getProject, startProject } from "@/runtime/preview-manager";
 
 export const dynamic = "force-dynamic";
 
@@ -15,13 +15,20 @@ export async function GET(request: NextRequest) {
       runtime = await startProject(projectId);
     }
 
-    const url = runtime.url || `http://localhost:${runtime.port}`;
+    const runtimeUrl =
+      runtime.url || `http://127.0.0.1:${runtime.port}`;
 
-    const html = `
-<!DOCTYPE html>
+    // Validate URL to prevent "The string did not match the expected pattern."
+    const validatedUrl = new URL(runtimeUrl).toString();
+
+    const html = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
   <style>
     html, body {
       margin: 0;
@@ -36,31 +43,34 @@ export async function GET(request: NextRequest) {
       width: 100%;
       height: 100%;
       border: 0;
-      background: white;
+      background: #ffffff;
     }
   </style>
 </head>
 <body>
   <iframe
-    src="${url}"
+    src="${validatedUrl}"
+    title="KoreLumina Preview"
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals"
   ></iframe>
 </body>
 </html>`;
 
     return new NextResponse(html, {
+      status: 200,
       headers: {
         "Content-Type": "text/html; charset=utf-8",
-        "Cache-Control": "no-store",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
       },
     });
   } catch (error: any) {
     return NextResponse.json(
       {
         ok: false,
-        error: error?.message || "Preview failed",
+        error:
+          error?.message || "Preview failed",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
