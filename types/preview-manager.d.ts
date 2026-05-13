@@ -3,6 +3,7 @@ declare module "@/runtime/preview-manager" {
     projectId: string;
     framework: string;
     port: number;
+    url?: string;
     pid?: number;
     startedAt?: number;
     process?: unknown;
