@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-dialog": "^1.1.15",
     "@supabase/supabase-js": "^2.99.3",
     "adm-zip": "^0.5.17",
+    "class-variance-authority": "^0.7.1",
     "esbuild": "^0.27.4",
     "lodash": "^4.18.1",
+    "lucide-react": "^1.14.0",
     "monaco-editor": "^0.55.1",
     "next": "15.5.12",
     "openai": "^6.32.0",
@@ -22,6 +26,7 @@
     "react-diff-viewer-continued": "^4.2.2",
     "react-dom": "18.3.1",
     "react-syntax-highlighter": "^16.1.1",
+    "tailwind-merge": "^3.6.0",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
