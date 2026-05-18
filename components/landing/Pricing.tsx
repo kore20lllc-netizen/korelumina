@@ -1,0 +1,304 @@
+import { useReveal } from "@/hooks/use-reveal";
+import { Check, KeyRound, Sparkles, Gauge, Wallet, Wrench, Rocket, Layers, Users, Building2, Smartphone } from "lucide-react";
+import { pricingTiers } from "./data";
+import { LuminaButton } from "@/components/lumina/LuminaButton";
+import { startBuilding, contactSales } from "@/services/navigationService";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+const providers = [
+  { name: "OpenAI", glyph: "AI" },
+  { name: "Anthropic", glyph: "A" },
+  { name: "Google AI", glyph: "G" },
+];
+
+const usageCards = [
+  { icon: Sparkles, title: "Included Credits", body: "Each paid plan includes monthly AI credits." },
+  { icon: Gauge, title: "Usage-Based Overage", body: "Additional AI usage is billed transparently." },
+  { icon: KeyRound, title: "BYO API Keys", body: "Use your own keys and avoid token charges from KoreLumina." },
+];
+
+const escalationServices = [
+  { icon: Wrench, title: "Quick Fix", price: "Starting at $500" },
+  { icon: Rocket, title: "Feature Sprint", price: "Starting at $2,500" },
+  { icon: Layers, title: "Modernization Project", price: "Starting at $10,000" },
+  { icon: Users, title: "Dedicated Development", price: "Starting at $7,500/month" },
+  { icon: Building2, title: "Enterprise Transformation", price: "Custom Quote" },
+  {
+    icon: Smartphone,
+    title: "Mobile App Packaging",
+    price: "Starting at $2,500",
+    description: "Convert your KoreLumina web app into production-ready iOS and Android applications using Capacitor. Includes native project setup, app icons, splash screens, and store-ready builds.",
+    badge: "APP STORE + PLAY STORE",
+    hoverDetails: [
+      "iOS + Android builds",
+      "Capacitor integration",
+      "Native plugin setup",
+      "App icons & splash screens",
+      "Store-ready packages",
+    ],
+  },
+];
+
+const pricingFaq = [
+  { q: "What happens when I exceed my AI credits?", a: "Additional usage is billed automatically based on actual model consumption." },
+  { q: "Can I use my own API keys?", a: "Yes. Connect OpenAI, Anthropic, or Google AI keys and pay providers directly." },
+  { q: "Do I still pay for KoreLumina if I use my own keys?", a: "Yes. Your subscription covers access to the KoreLumina platform and orchestration engine." },
+  { q: "What is the In-House Developer Escalation Layer?", a: "A premium service where our engineering team implements complex requirements for you." },
+];
+
+function ctaFor(cta: string) {
+  return cta === "Talk to Sales" ? contactSales : startBuilding;
+}
+
+export function Pricing() {
+  const ref = useReveal<HTMLDivElement>();
+  return (
+    <section id="pricing" className="py-24 md:py-32 px-6">
+      <div ref={ref} className="max-w-6xl mx-auto opacity-0 space-y-20 md:space-y-28">
+        {/* Plans */}
+        <div>
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-royal-blue royal-glow">Simple plans. Real software.</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {pricingTiers.map((t) => (
+              <div
+                key={t.name}
+                className={`group relative glass-panel p-8 rounded-2xl flex flex-col transition-all duration-500 hover:-translate-y-1 hover:border-white/20 ${t.highlighted ? "border-white/20" : ""}`}
+              >
+                {t.highlighted && (
+                  <>
+                    <div
+                      className="absolute -inset-px rounded-2xl pointer-events-none"
+                      style={{ background: "var(--gradient-lumina)", opacity: 0.18, filter: "blur(20px)" }}
+                      aria-hidden
+                    />
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-medium tracking-wide text-primary-foreground bg-button-lumina shadow-[var(--glow-violet)]">
+                      Most Popular
+                    </span>
+                  </>
+                )}
+                <div className="relative flex-1 flex flex-col">
+                  <h3 className="text-xl font-semibold tracking-tight mb-2">{t.name}</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-semibold tracking-tight">{t.price}</span>
+                    {t.cadence && <span className="text-muted-foreground ml-1 text-sm">{t.cadence}</span>}
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-6">{t.body}</p>
+                  <ul className="flex flex-col gap-2.5 mb-8">
+                    {t.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto">
+                    <LuminaButton
+                      variant={t.highlighted ? "primary" : "outline"}
+                      size="lg"
+                      className="w-full"
+                      onClick={ctaFor(t.cta)}
+                    >
+                      {t.cta}
+                    </LuminaButton>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* BYO API Keys */}
+        <div className="relative glass-panel rounded-3xl p-8 md:p-12 overflow-hidden">
+          <div
+            className="absolute -inset-px rounded-3xl pointer-events-none"
+            style={{ background: "var(--gradient-lumina)", opacity: 0.1, filter: "blur(40px)" }}
+            aria-hidden
+          />
+          <div className="relative grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <div className="text-center mb-3">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina">BYO API Keys</p>
+              </div>
+              <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 text-royal-blue royal-glow">Bring Your Own API Keys</h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Connect your own OpenAI, Anthropic, or Google API keys and pay model providers directly while continuing to use all KoreLumina platform features.
+              </p>
+              <ul className="grid sm:grid-cols-2 gap-2.5">
+                {[
+                  "Full cost transparency",
+                  "No token markup",
+                  "Use your preferred models",
+                  "Enterprise-friendly billing",
+                  "Optional cost savings",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="text-center">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina">Supported providers</p>
+              </div>
+              <div className="grid gap-3">
+                {providers.map((p) => (
+                  <div
+                    key={p.name}
+                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-all hover:border-white/20 hover:bg-white/[0.06]"
+                  >
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-semibold text-primary-foreground"
+                      style={{ background: "var(--gradient-lumina)" }}
+                    >
+                      {p.glyph}
+                    </div>
+                    <div className="font-medium tracking-tight">{p.name}</div>
+                    <KeyRound className="ml-auto w-4 h-4 text-muted-foreground" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* AI Usage Billing */}
+        <div>
+          <div className="text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">AI Usage</p>
+            <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-3 text-royal-blue royal-glow">Transparent AI Usage Billing</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Every paid plan includes AI credits. When credits are exhausted, additional usage is billed automatically based on actual model consumption. BYO API key users pay providers directly.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {usageCards.map(({ icon: Icon, title, body }) => (
+              <div
+                key={title}
+                className="glass-panel rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:border-white/20"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: "var(--gradient-lumina)" }}
+                >
+                  <Icon className="w-5 h-5 text-primary-foreground" />
+                </div>
+                <h4 className="font-semibold tracking-tight mb-1.5">{title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* In-House Developer Escalation */}
+        <div>
+          <div className="text-center mb-10 max-w-3xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">In-House Developer Escalation</p>
+            <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-3 text-royal-blue royal-glow">
+              AI when you want speed. Experts when you need certainty.
+            </h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Escalate your project to KoreLumina's in-house engineering team for custom development, integrations, modernization, and enterprise delivery.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {escalationServices.map(({ icon: Icon, title, price, description, badge, hoverDetails }) => (
+              <div
+                key={title}
+                className="group glass-panel rounded-2xl p-6 flex flex-col transition-all duration-500 hover:-translate-y-1 hover:border-white/20"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: "var(--gradient-lumina)" }}
+                >
+                  <Icon className="w-5 h-5 text-primary-foreground" />
+                </div>
+                <h4 className="font-semibold tracking-tight">{title}</h4>
+                {badge && (
+                  <span className="mt-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide text-primary-foreground bg-button-lumina border border-white/10 w-fit">
+                    {badge}
+                  </span>
+                )}
+                <p className="text-sm text-muted-foreground mt-1">{price}</p>
+                {description && (
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-2">{description}</p>
+                )}
+                {hoverDetails && (
+                  <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ul className="space-y-1">
+                      {hoverDetails.map((d) => (
+                        <li key={d} className="flex items-start gap-1.5 text-xs text-muted-foreground">
+                          <span className="w-1 h-1 rounded-full bg-cyan mt-1.5 flex-shrink-0" />
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+            <LuminaButton variant="primary" size="lg" onClick={contactSales}>
+              Book a Consultation
+            </LuminaButton>
+            <LuminaButton variant="outline" size="lg" onClick={contactSales}>
+              Request a Custom Quote
+            </LuminaButton>
+          </div>
+        </div>
+
+        {/* Pricing FAQ */}
+        <div className="max-w-3xl mx-auto w-full">
+          <div className="text-center mb-8">
+            <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">Pricing FAQ</p>
+            <h3 className="text-3xl md:text-5xl font-semibold tracking-tight text-royal-blue royal-glow">Common questions</h3>
+          </div>
+          <div className="glass-panel rounded-2xl px-2 sm:px-6">
+            <Accordion type="single" collapsible className="w-full">
+              {pricingFaq.map((f, i) => (
+                <AccordionItem key={f.q} value={`pf-${i}`} className="border-white/10">
+                  <AccordionTrigger className="text-left text-foreground hover:text-foreground hover:no-underline py-5">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+
+        {/* Final pricing CTA */}
+        <div className="relative glass-panel rounded-3xl p-10 md:p-14 text-center overflow-hidden">
+          <div
+            className="absolute -inset-px rounded-3xl pointer-events-none"
+            style={{ background: "var(--gradient-lumina)", opacity: 0.15, filter: "blur(40px)" }}
+            aria-hidden
+          />
+          <div className="relative">
+            <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 text-royal-blue royal-glow">
+              Build with AI. Scale with Experts.
+            </h3>
+            <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
+              Start free, upgrade as you grow, and escalate to our engineering team whenever your project requires deeper expertise.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <LuminaButton variant="primary" size="lg" onClick={startBuilding}>
+                Start Free
+              </LuminaButton>
+              <LuminaButton variant="outline" size="lg" onClick={contactSales}>
+                Book a Consultation
+              </LuminaButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

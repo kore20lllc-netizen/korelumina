@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -14,33 +14,27 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
-      { "name": "next" }
+      {
+        "name": "next"
+      }
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
   },
   "include": [
     "next-env.d.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "components/**/*.ts",
-    "components/**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "runtime/**/*.ts",
-    "runtime/**/*.tsx",
-    "types/**/*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     ".next",
-    "runtime/workspaces",
-    "__graveyard",
-    "__graveyard_runtime_v1",
-    "nature-crest-climate-solutions",
-    "preview-v2"
+    "runtime",
+    "preview-v2",
+    "dist",
+    "out",
+    ".vercel"
   ]
 }

@@ -1,19 +1,19 @@
-export const LOCKED_CORE_FILES = [
-  // Builder
-  "app/builder/BuilderInner.tsx",
-  "app/builder/BuilderClient.tsx",
-  "components/builder/PreviewFrame.tsx",
-
-  // Preview engine
-  "app/api/dev/preview/route.ts",
-
-  // 🔥 Master OS (NEW)
-  "app/master-os/page.tsx",
-  "components/master-os/DiffPanel.tsx",
-  "components/master-os/SnapshotPanel.tsx",
-  "components/master-os/TaskPanel.tsx",
+/**
+ * Files that should never be overwritten by the Builder.
+ * Extend this list as needed.
+ */
+const LOCKED_PATTERNS = [
+  /^\.env/,
+  /^\.git\//,
+  /^node_modules\//,
+  /^\.next\//,
 ];
 
-export function isLockedFile(filePath: string) {
-  return LOCKED_CORE_FILES.some(f => filePath.includes(f));
+/**
+ * Returns true if the given relative file path is protected.
+ */
+export function isLockedFile(filePath: string): boolean {
+  const normalized = filePath.replace(/^\/+/, "");
+
+  return LOCKED_PATTERNS.some((pattern) => pattern.test(normalized));
 }

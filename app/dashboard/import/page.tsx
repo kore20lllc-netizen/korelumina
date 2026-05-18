@@ -44,7 +44,7 @@ export default function ImportPage() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Import GitHub Project</h1>
+      <h1 className="text-2xl font-bold mb-6">Import FolderGit2 Project</h1>
 
       <form
         onSubmit={handleSubmit}
@@ -65,7 +65,7 @@ export default function ImportPage() {
         </div>
 
         <div>
-          <label className="block text-sm mb-1">GitHub Repo URL</label>
+          <label className="block text-sm mb-1">FolderGit2 Repo URL</label>
           <input
             className="w-full border px-3 py-2 rounded"
             value={repo}

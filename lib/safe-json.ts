@@ -1,9 +1,23 @@
-export function safeParse<T = any>(input: string | null | undefined, fallback: T): T {
+/**
+ * Safely parse JSON without throwing.
+ */
+export function safeParse<T = unknown>(
+  input: string
+):
+  | { ok: true; data: T }
+  | { ok: false; error: Error } {
   try {
-    if (!input) return fallback;
-    return JSON.parse(input);
-  } catch (err) {
-    console.error("JSON parse failed:", err, input);
-    return fallback;
+    return {
+      ok: true,
+      data: JSON.parse(input) as T,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error:
+        error instanceof Error
+          ? error
+          : new Error("Invalid JSON"),
+    };
   }
 }

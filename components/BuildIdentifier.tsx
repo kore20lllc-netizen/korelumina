@@ -1,5 +1,3 @@
-"use client";
-
-export default function BuildIdentifier(){
+export default function BuildIdentifier() {
   return null;
 }

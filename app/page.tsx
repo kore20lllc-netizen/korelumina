@@ -1,5 +1,7 @@
-import Hero from "@/components/marketing/Hero";
+"use client";
 
-export default function Page() {
-  return <Hero />;
+import { LandingPage } from "@/src/pages/LandingPage";
+
+export default function HomePage() {
+  return <LandingPage />;
 }

@@ -1,35 +1,43 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useParams } from "next/navigation"
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function StudioRuntime(){
+export default function StudioRuntime() {
+  const params = useParams();
 
-  const { projectId } = useParams()
+  const projectId =
+    typeof params?.projectId === "string"
+      ? params.projectId
+      : Array.isArray(params?.projectId)
+      ? params.projectId[0]
+      : "korelumina-dogfood";
 
-  const [html,setHtml] = useState<string>("Loading runtime...")
+  const [html, setHtml] = useState<string>("Loading runtime...");
 
-  useEffect(()=>{
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(
+          `/api/dev/preview?projectId=${encodeURIComponent(projectId)}`
+        );
 
-    fetch(`/api/dev/runtime/execute?projectId=${projectId}`)
-      .then(r=>r.text())
-      .then(t=>{
-        setHtml(t)
-      })
+        const text = await res.text();
+        setHtml(text);
+      } catch (error) {
+        console.error("Studio runtime failed:", error);
+        setHtml("<div>Failed to load runtime.</div>");
+      }
+    }
 
-  },[projectId])
+    load();
+  }, [projectId]);
 
   return (
-    <div style={{height:"100vh"}}>
-      <iframe
-        srcDoc={html}
-        style={{
-          width:"100%",
-          height:"100%",
-          border:"none",
-          background:"#fff"
-        }}
-      />
-    </div>
-  )
+    <iframe
+      title={`Studio Runtime - ${projectId}`}
+      srcDoc={html}
+      className="w-full h-screen border-0"
+    />
+  );
 }

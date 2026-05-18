@@ -1,149 +1,58 @@
-import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { NextResponse } from "next/server";
+import { detectProject } from "@/lib/project-detection";
 
-const {
-  detectProject,
-} = require("@/runtime/framework-detector");
+const PROJECTS_ROOT = path.join(
+  process.cwd(),
+  "runtime/workspaces/default/projects"
+);
 
-const {
-  getProject,
-} = require("@/runtime/preview-manager");
+type DetectedProject = ReturnType<typeof detectProject>;
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
-function getProjectsRoot() {
-  return path.join(
-    process.cwd(),
-    "runtime",
-    "workspaces",
-    "default",
-    "projects",
-  );
-}
-
-function isProjectFolder(projectPath: string) {
-  if (!fs.existsSync(projectPath)) {
-    return false;
-  }
-
-  if (!fs.statSync(projectPath).isDirectory()) {
-    return false;
-  }
-
-  return (
-    fs.existsSync(path.join(projectPath, "package.json")) ||
-    fs.existsSync(path.join(projectPath, "index.html")) ||
-    fs.existsSync(path.join(projectPath, "src")) ||
-    fs.existsSync(path.join(projectPath, "app")) ||
-    fs.existsSync(path.join(projectPath, "pages"))
-  );
-}
+const FALLBACK_DETECTED: DetectedProject = {
+  framework: "unknown",
+  runtime: "unknown",
+  packageManager: "unknown",
+  installCommand: null,
+  devCommand: null,
+  entry: null,
+};
 
 export async function GET() {
-  try {
-    const root = getProjectsRoot();
-
-    fs.mkdirSync(root, {
-      recursive: true,
-    });
-
-    const entries = fs
-      .readdirSync(root)
-      .filter((name) => {
-        if (name.startsWith(".")) {
-          return false;
-        }
-
-        if (name.endsWith(".zip")) {
-          return false;
-        }
-
-        return isProjectFolder(
-          path.join(root, name),
-        );
-      });
-
-    const projects = entries.map((projectId) => {
-      const projectPath = path.join(
-        root,
-        projectId,
-      );
-
-      let detected = null;
-
-      try {
-        detected = detectProject(projectPath);
-      } catch (err) {
-        detected = {
-          framework: "unknown",
-          runtime: "unknown",
-          packageManager: "unknown",
-          installCommand: null,
-          devCommand: null,
-          entry: null,
-        };
-      }
-
-      const runtimeState =
-        getProject(projectId);
-
-      return {
-        projectId,
-        name: projectId,
-        path: projectPath,
-
-        framework:
-          detected.framework,
-
-        runtime:
-          detected.runtime,
-
-        packageManager:
-          detected.packageManager,
-
-        entry:
-          detected.entry,
-
-        status:
-          runtimeState?.ready
-            ? "running"
-            : "stopped",
-
-        port:
-          runtimeState?.port ?? null,
-
-        pid:
-          runtimeState?.process?.pid ?? null,
-
-        builderUrl:
-          `/builder?projectId=${projectId}`,
-
-        previewUrl:
-          runtimeState?.port
-            ? `http://localhost:${runtimeState.port}`
-            : null,
-      };
-    });
-
+  if (!fs.existsSync(PROJECTS_ROOT)) {
     return NextResponse.json({
       ok: true,
-      count: projects.length,
-      projects,
+      projects: [],
     });
-  } catch (err) {
-    console.error("[projects api]", err);
-
-    return NextResponse.json(
-      {
-        ok: false,
-        error:
-          err instanceof Error
-            ? err.message
-            : "Failed to list projects",
-      },
-      { status: 500 },
-    );
   }
+
+  const entries = fs
+    .readdirSync(PROJECTS_ROOT, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory());
+
+  const projects = entries.map((entry) => {
+    const projectId = entry.name;
+    const projectPath = path.join(PROJECTS_ROOT, projectId);
+
+    let detected: DetectedProject;
+
+    try {
+      detected = detectProject(projectPath);
+    } catch {
+      detected = FALLBACK_DETECTED;
+    }
+
+    return {
+      id: projectId,
+      name: projectId,
+      path: projectPath,
+      detected,
+    };
+  });
+
+  return NextResponse.json({
+    ok: true,
+    projects,
+  });
 }

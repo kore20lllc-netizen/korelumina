@@ -6,8 +6,7 @@ import BuilderInner from "./BuilderInner";
 
 export default function BuilderClient() {
   const searchParams = useSearchParams();
-  const projectId =
-    searchParams.get("projectId");
+  const projectId = searchParams?.get("projectId") ?? "korelumina-dogfood";
 
   const [repoUrl, setRepoUrl] =
     useState("");
@@ -95,7 +94,7 @@ export default function BuilderClient() {
               marginBottom: 12,
             }}
           >
-            Import GitHub Repository
+            Import FolderGit2 Repository
           </h1>
 
           <p
@@ -104,7 +103,7 @@ export default function BuilderClient() {
               marginBottom: 24,
             }}
           >
-            Paste any public GitHub
+            Paste any public FolderGit2
             repository URL to import,
             analyze, and continue
             building inside

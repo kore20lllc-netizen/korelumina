@@ -20,7 +20,9 @@ export async function GET(_req: Request, context: RouteContext) {
   }
 
   const raw = fs.readFileSync(jobFile, "utf-8");
-  const job = safeParse(raw, {});
+  const parsed = safeParse(raw);
+
+  const job = parsed.ok ? parsed.data : {};
 
   return NextResponse.json(job, { status: 200 });
 }
