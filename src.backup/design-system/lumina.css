@@ -1,0 +1,178 @@
+:root {
+  /* =========================
+     CORE COLORS (LUMINA)
+  ========================= */
+
+  --lumina-bg: #05070f;
+  --lumina-bg-soft: #0b0f1c;
+
+  --lumina-white: #ffffff;
+  --lumina-muted: #a3aed0;
+
+  /* Gradient stops */
+  --lumina-pink: #ff2d8d;
+  --lumina-violet: #7b5cff;
+  --lumina-blue: #2f6bff;
+  --lumina-cyan: #22d3ee;
+  --lumina-gold: #f5c16c;
+
+  /* =========================
+     GRADIENTS
+  ========================= */
+
+  --lumina-gradient-primary: radial-gradient(
+    circle at 30% 30%,
+    var(--lumina-pink),
+    var(--lumina-violet),
+    var(--lumina-blue)
+  );
+
+  --lumina-gradient-accent: radial-gradient(
+    circle at 70% 70%,
+    var(--lumina-cyan),
+    var(--lumina-violet),
+    var(--lumina-pink)
+  );
+
+  /* =========================
+     GLOW SYSTEM
+  ========================= */
+
+  --lumina-glow-sm: 0 0 12px rgba(123, 92, 255, 0.35);
+  --lumina-glow-md: 0 0 25px rgba(123, 92, 255, 0.45);
+  --lumina-glow-lg: 0 0 60px rgba(123, 92, 255, 0.6);
+
+  --lumina-glow-pink: 0 0 40px rgba(255, 45, 141, 0.5);
+  --lumina-glow-cyan: 0 0 40px rgba(34, 211, 238, 0.5);
+
+  /* =========================
+     SURFACES
+  ========================= */
+
+  --lumina-surface: rgba(15, 20, 40, 0.65);
+  --lumina-surface-strong: rgba(20, 25, 50, 0.85);
+
+  --lumina-border: rgba(255, 255, 255, 0.08);
+
+  --lumina-blur: blur(18px);
+
+  /* =========================
+     RADIUS
+  ========================= */
+
+  --lumina-radius-lg: 20px;
+  --lumina-radius-xl: 28px;
+
+  /* =========================
+     TRANSITIONS
+  ========================= */
+
+  --lumina-transition: all 0.25s ease;
+}
+
+/* =========================
+   BASE BACKGROUND (uses lumina.png)
+========================= */
+
+.lumina-bg {
+  background:
+    url("/lumina.png") center/cover no-repeat,
+    radial-gradient(circle at 20% 20%, rgba(255, 45, 141, 0.25), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.2), transparent 40%),
+    var(--lumina-bg);
+  color: var(--lumina-white);
+}
+
+/* =========================
+   GLASS PANEL
+========================= */
+
+.lumina-panel {
+  background: var(--lumina-surface);
+  backdrop-filter: var(--lumina-blur);
+  border: 1px solid var(--lumina-border);
+  border-radius: var(--lumina-radius-xl);
+  box-shadow: var(--lumina-glow-sm);
+  transition: var(--lumina-transition);
+}
+
+.lumina-panel:hover {
+  box-shadow: var(--lumina-glow-md);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.lumina-button {
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 500;
+  background: linear-gradient(
+    135deg,
+    var(--lumina-violet),
+    var(--lumina-pink)
+  );
+  color: white;
+  box-shadow: var(--lumina-glow-sm);
+  transition: var(--lumina-transition);
+}
+
+.lumina-button:hover {
+  box-shadow: var(--lumina-glow-lg);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.lumina-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--lumina-border);
+  border-radius: var(--lumina-radius-lg);
+  padding: 10px 14px;
+  color: var(--lumina-white);
+  outline: none;
+}
+
+.lumina-input:focus {
+  border-color: var(--lumina-violet);
+  box-shadow: var(--lumina-glow-sm);
+}
+
+/* =========================
+   PREVIEW CONTAINER
+========================= */
+
+.lumina-preview {
+  border-radius: var(--lumina-radius-xl);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--lumina-border);
+  box-shadow: var(--lumina-glow-md);
+}
+
+/* =========================
+   BLOBS (optional overlay)
+========================= */
+
+.lumina-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.lumina-blob.pink {
+  background: var(--lumina-pink);
+}
+
+.lumina-blob.cyan {
+  background: var(--lumina-cyan);
+}
+
+.lumina-blob.violet {
+  background: var(--lumina-violet);
+}

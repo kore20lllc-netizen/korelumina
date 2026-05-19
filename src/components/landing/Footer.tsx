@@ -1,5 +1,5 @@
-import { goToPricing, goToTemplates, goToDocs, contactSales, goToSignIn } from "../../services/navigationService";
-import luminaLogo from "../../assets/lumina.png";
+import { goToPricing, goToTemplates, goToDocs, contactSales, goToSignIn } from "@/services/navigationService";
+import luminaLogo from "@/assets/lumina.webp";
 
 const cols = [
   { title: "Product", links: [
@@ -25,7 +25,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <span className="relative h-8 w-8 rounded-xl overflow-hidden grid place-items-center ring-1 ring-white/10">
-              <img src={luminaLogo.src} alt="KoreLumina" className="h-full w-full object-cover" />
+              <img src={luminaLogo} alt="KoreLumina" className="h-full w-full object-cover" />
             </span>
             <span className="font-display font-bold tracking-tight text-[17px]">
               Kore<span className="text-gradient-lumina">Lumina</span>

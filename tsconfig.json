@@ -1,46 +1,6 @@
 {
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      { "name": "next" }
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-  "include": [
-    "next-env.d.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "components/**/*.ts",
-    "components/**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "runtime/**/*.ts",
-    "runtime/**/*.tsx",
-    "types/**/*.d.ts",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "runtime/workspaces",
-    "__graveyard",
-    "__graveyard_runtime_v1",
-    "nature-crest-climate-solutions",
-    "preview-v2"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" }
   ]
 }
