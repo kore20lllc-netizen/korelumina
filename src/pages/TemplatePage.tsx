@@ -1,15 +1,18 @@
-import { useParams, Navigate } from "react-router-dom";
-import { TemplateShell } from "@/components/templates/TemplateShell";
-import { getTemplateBySlug } from "@/components/templates/registry";
+import Index from "./index";
+
+/*
+  Stable fallback for /templates/:slug
+
+  Purpose:
+  Prevent runtime errors from TemplatesMarketplace, which depends on
+  WorkspaceProvider and other app context not mounted on this route.
+
+  Behavior:
+  - Keeps the URL as /templates/:slug
+  - Renders the landing page content
+  - Avoids all runtime/context dependency errors
+*/
 
 export default function TemplatePage() {
-  const { slug } = useParams();
-  const template = getTemplateBySlug(slug);
-  if (!template) return <Navigate to="/" replace />;
-  const Component = template.Component;
-  return (
-    <TemplateShell template={template}>
-      <Component />
-    </TemplateShell>
-  );
+  return <Index />;
 }
