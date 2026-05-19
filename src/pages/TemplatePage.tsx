@@ -1,18 +1,14 @@
-import Index from "./index";
+import { lazy, Suspense } from "react";
+import { useParams } from "react-router-dom";
 
-/*
-  Stable fallback for /templates/:slug
-
-  Purpose:
-  Prevent runtime errors from TemplatesMarketplace, which depends on
-  WorkspaceProvider and other app context not mounted on this route.
-
-  Behavior:
-  - Keeps the URL as /templates/:slug
-  - Renders the landing page content
-  - Avoids all runtime/context dependency errors
-*/
+const TemplatePageContent = lazy(() => import("./Index"));
 
 export default function TemplatePage() {
-  return <Index />;
+  const { slug } = useParams<{ slug: string }>();
+
+  return (
+    <Suspense fallback={null}>
+      <TemplatePageContent key={slug} />
+    </Suspense>
+  );
 }
