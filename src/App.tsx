@@ -4,26 +4,18 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { RequireAuth } from "@/components/RequireAuth";
 
-const Index = lazy(() => import("./pages/index"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const Index = lazy(() => import("./pages/Index"));
 const TemplatePage = lazy(() => import("./pages/TemplatePage"));
 const PreviewPage = lazy(() => import("./pages/PreviewPage"));
 const InviteAcceptPage = lazy(() => import("./pages/InviteAcceptPage"));
-
-function RouteLoader() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-      Loading...
-    </div>
-  );
-}
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => (
   <ErrorBoundary>
     <Sonner />
     <BrowserRouter>
-      <Suspense fallback={<RouteLoader />}>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/templates/:slug" element={<TemplatePage />} />
