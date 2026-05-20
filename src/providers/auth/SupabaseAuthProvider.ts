@@ -10,6 +10,7 @@ import type {
 function toUser(raw: {
   id: string;
   email?: string;
+  created_at?: string;
   user_metadata?: Record<string, unknown>;
 }): User {
   return {
@@ -27,7 +28,9 @@ function toUser(raw: {
       typeof raw.user_metadata?.role === "string"
         ? (raw.user_metadata.role as Role)
         : "free",
-    createdAt: Date.now(),
+    createdAt: raw.created_at
+      ? new Date(raw.created_at).getTime()
+      : Date.now(),
   };
 }
 
@@ -39,13 +42,14 @@ function toSession(raw: {
   return {
     userId: raw.user.id,
     token: raw.access_token,
-    expiresAt: raw.expires_at
-      ? raw.expires_at * 1000
-      : Date.now() + 60 * 60 * 1000,
+    expiresAt:
+      raw.expires_at
+        ? raw.expires_at * 1000
+        : Date.now() + 3600_000,
   };
 }
 
-function normalizeError(error: { message?: string } | null): never {
+function fail(error: { message?: string } | null): never {
   throw new AppError(
     "AUTH_ERROR",
     error?.message || "Authentication request failed.",
@@ -54,13 +58,54 @@ function normalizeError(error: { message?: string } | null): never {
 
 export class SupabaseAuthProvider implements AuthProvider {
   getSession(): Session | null {
-    // Synchronous API required by interface.
-    // Runtime state is handled via onChange().
-    return null;
+    if (!supabase) return null;
+
+    const storageKey = Object.keys(localStorage).find(
+      (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
+    );
+
+    if (!storageKey) return null;
+
+    try {
+      const raw = JSON.parse(
+        localStorage.getItem(storageKey) || "{}",
+      );
+
+      const session = raw?.currentSession ?? raw;
+
+      if (!session?.access_token || !session?.user?.id) {
+        return null;
+      }
+
+      return toSession(session);
+    } catch {
+      return null;
+    }
   }
 
   getUser(): User | null {
-    return null;
+    if (!supabase) return null;
+
+    const storageKey = Object.keys(localStorage).find(
+      (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
+    );
+
+    if (!storageKey) return null;
+
+    try {
+      const raw = JSON.parse(
+        localStorage.getItem(storageKey) || "{}",
+      );
+
+      const session = raw?.currentSession ?? raw;
+      const user = session?.user;
+
+      if (!user) return null;
+
+      return toUser(user);
+    } catch {
+      return null;
+    }
   }
 
   async signUp({
@@ -72,6 +117,13 @@ export class SupabaseAuthProvider implements AuthProvider {
     password: string;
     name: string;
   }) {
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -83,11 +135,13 @@ export class SupabaseAuthProvider implements AuthProvider {
       },
     });
 
-    if (error || !data.user) normalizeError(error);
+    if (error || !data.user) fail(error);
 
     return {
       user: toUser(data.user),
-      session: data.session ? toSession(data.session) : null,
+      session: data.session
+        ? toSession(data.session)
+        : null,
     };
   }
 
@@ -98,6 +152,13 @@ export class SupabaseAuthProvider implements AuthProvider {
     email: string;
     password: string;
   }) {
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
+
     const { data, error } =
       await supabase.auth.signInWithPassword({
         email,
@@ -105,7 +166,7 @@ export class SupabaseAuthProvider implements AuthProvider {
       });
 
     if (error || !data.user || !data.session) {
-      normalizeError(error);
+      fail(error);
     }
 
     return {
@@ -115,28 +176,46 @@ export class SupabaseAuthProvider implements AuthProvider {
   }
 
   async signOut() {
+    if (!supabase) return;
+
     const { error } = await supabase.auth.signOut();
-    if (error) normalizeError(error);
+
+    if (error) fail(error);
   }
 
   async resetPassword(email: string) {
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      email,
-    );
-    if (error) normalizeError(error);
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
+
+    const { error } =
+      await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) fail(error);
   }
 
   async updateProfile(
     patch: Partial<Pick<User, "name" | "avatarUrl">>,
   ) {
-    const { data, error } = await supabase.auth.updateUser({
-      data: {
-        name: patch.name,
-        avatar_url: patch.avatarUrl,
-      },
-    });
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
 
-    if (error || !data.user) normalizeError(error);
+    const { data, error } =
+      await supabase.auth.updateUser({
+        data: {
+          name: patch.name,
+          avatar_url: patch.avatarUrl,
+        },
+      });
+
+    if (error || !data.user) fail(error);
 
     return toUser(data.user);
   }
@@ -145,24 +224,42 @@ export class SupabaseAuthProvider implements AuthProvider {
     _oldPassword: string,
     newPassword: string,
   ) {
-    const { error } = await supabase.auth.updateUser({
-      password: newPassword,
-    });
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
 
-    if (error) normalizeError(error);
+    const { error } =
+      await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+    if (error) fail(error);
   }
 
   async setRole(role: Role) {
-    const { data, error } = await supabase.auth.updateUser({
-      data: { role },
-    });
+    if (!supabase) {
+      throw new AppError(
+        "AUTH_ERROR",
+        "Supabase is not configured.",
+      );
+    }
 
-    if (error || !data.user) normalizeError(error);
+    const { data, error } =
+      await supabase.auth.updateUser({
+        data: { role },
+      });
+
+    if (error || !data.user) fail(error);
 
     return toUser(data.user);
   }
 
   onChange(callback: () => void) {
+    if (!supabase) return () => {};
+
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(() => {
