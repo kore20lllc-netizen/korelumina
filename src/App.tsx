@@ -1,37 +1,27 @@
-import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { RequireAuth } from "@/components/RequireAuth";
-
-const Index = lazy(() => import("./pages/Index"));
-const TemplatePage = lazy(() => import("./pages/TemplatePage"));
-const PreviewPage = lazy(() => import("./pages/PreviewPage"));
-const InviteAcceptPage = lazy(() => import("./pages/InviteAcceptPage"));
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import Index from "./pages/Index.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
+import TemplatePage from "./pages/TemplatePage.tsx";
+import PreviewPage from "./pages/PreviewPage.tsx";
+import InviteAcceptPage from "./pages/InviteAcceptPage.tsx";
 
 const App = () => (
   <ErrorBoundary>
     <Sonner />
     <BrowserRouter>
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/templates/:slug" element={<TemplatePage />} />
-          <Route
-            path="/preview/:projectSlug"
-            element={
-              <RequireAuth>
-                <PreviewPage />
-              </RequireAuth>
-            }
-          />
-          <Route path="/invite/:token" element={<InviteAcceptPage />} />
-          <Route path="/error" element={<ErrorPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/templates/:slug" element={<TemplatePage />} />
+        <Route path="/preview/:projectSlug" element={<RequireAuth><PreviewPage /></RequireAuth>} />
+        <Route path="/invite/:token" element={<InviteAcceptPage />} />
+        <Route path="/error" element={<ErrorPage />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   </ErrorBoundary>
 );

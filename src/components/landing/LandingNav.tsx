@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { cn } from "@/lib/utils";
 import { startBuilding, goToSignIn, goToTemplates, goToDocs } from "@/services/navigationService";
-import luminaLogo from "@/assets/lumina.webp";
+import luminaLogo from "@/assets/lumina.png";
 
 const links: Array<{ label: string; onClick: () => void }> = [
   { label: "Features", onClick: () => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" }) },
