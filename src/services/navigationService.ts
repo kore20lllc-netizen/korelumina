@@ -1,33 +1,115 @@
-// Lightweight event-bus navigation service consumed by landing components.
-// LandingPage subscribes and translates events into WorkspaceContext setView calls.
+import { isAuthenticated } from "@/lib/auth";
+
+export type AppView =
+  | "landing"
+  | "entry"
+  | "dashboard"
+  | "workspace"
+  | "auth"
+  | "settings"
+  | "pricing"
+  | "templates"
+  | "repo-audit";
 
 export type NavEvent =
-  | "startBuilding"
-  | "watchDemo"
-  | "goToPricing"
-  | "goToTemplates"
-  | "goToDocs"
-  | "goToSignIn"
-  | "contactSales"
-  | "goToRepoAudit";
+  | { type: "view"; view: AppView }
+  | { type: "scroll"; targetId: string; block?: ScrollLogicalPosition }
+  | { type: "external"; url: string; target?: string; features?: string }
+  | { type: "mailto"; href: string };
 
-type Listener = (e: NavEvent) => void;
+type Listener = (event: NavEvent) => void;
+
 const listeners = new Set<Listener>();
 
-function emit(e: NavEvent) {
-  listeners.forEach((l) => l(e));
+export function onNav(listener: Listener): () => void {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
 }
 
-export function onNav(l: Listener) {
-  listeners.add(l);
-  return () => listeners.delete(l);
+function emit(event: NavEvent): void {
+  for (const listener of listeners) {
+    try {
+      listener(event);
+    } catch (error) {
+      console.error("navigation listener failed:", error);
+    }
+  }
 }
 
-export const startBuilding = () => emit("startBuilding");
-export const watchDemo = () => emit("watchDemo");
-export const goToPricing = () => emit("goToPricing");
-export const goToTemplates = () => emit("goToTemplates");
-export const goToDocs = () => emit("goToDocs");
-export const goToSignIn = () => emit("goToSignIn");
-export const contactSales = () => emit("contactSales");
-export const goToRepoAudit = () => emit("goToRepoAudit");
+function navigate(view: AppView): void {
+  emit({ type: "view", view });
+}
+
+/**
+ * CRITICAL BUSINESS RULE
+ *
+ * In the original Lovable build:
+ * - Clicking "Start Building" from the landing page ALWAYS opens the Auth card.
+ * - It does NOT check authentication state.
+ * - It does NOT open Dashboard.
+ * - It does NOT open Workspace.
+ *
+ * After successful login, AuthView itself routes to Dashboard.
+ */
+export function startBuilding(): void {
+  navigate("auth");
+}
+
+export function goToSignIn(): void {
+  navigate("auth");
+}
+
+export function goToDashboard(): void {
+  if (isAuthenticated()) {
+    navigate("dashboard");
+  } else {
+    navigate("auth");
+  }
+}
+
+export function goToWorkspace(): void {
+  if (isAuthenticated()) {
+    navigate("workspace");
+  } else {
+    navigate("auth");
+  }
+}
+
+export function goToPricing(): void {
+  navigate("pricing");
+}
+
+export function goToTemplates(): void {
+  navigate("templates");
+}
+
+export function goToSettings(): void {
+  navigate("settings");
+}
+
+export function goToDocs(): void {
+  emit({
+    type: "scroll",
+    targetId: "faq",
+    block: "start",
+  });
+}
+
+export function watchDemo(): void {
+  emit({
+    type: "scroll",
+    targetId: "demo",
+    block: "center",
+  });
+}
+
+export function contactSales(): void {
+  emit({
+    type: "mailto",
+    href: "mailto:sales@korelumina.app?subject=KoreLumina%20Enterprise",
+  });
+}
+
+export function goToRepoAudit(): void {
+  navigate("repo-audit");
+}

@@ -22,39 +22,43 @@ export function LandingPage() {
   const { setView } = useWorkspace();
 
   useEffect(() => {
-    const off = onNav((e: NavEvent) => {
-      switch (e) {
-        case "startBuilding":
-          setView("entry");
+    const unsubscribe = onNav((event: NavEvent) => {
+      switch (event.type) {
+        case "view":
+          setView(event.view);
           break;
-        case "goToSignIn":
-          setView("auth");
+
+        case "scroll":
+          document
+            .getElementById(event.targetId)
+            ?.scrollIntoView({
+              behavior: "smooth",
+              block: event.block ?? "start",
+            });
           break;
-        case "goToPricing":
-          setView("pricing");
+
+        case "external":
+          window.open(
+            event.url,
+            event.target ?? "_blank",
+            event.features ?? "noopener,noreferrer",
+          );
           break;
-        case "goToTemplates":
-          setView("templates");
+
+        case "mailto":
+          window.location.href = event.href;
           break;
-        case "goToDocs":
-          document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" });
-          break;
-        case "watchDemo":
-          document.getElementById("demo")?.scrollIntoView({ behavior: "smooth", block: "center" });
-          break;
-        case "contactSales":
-          window.location.href = "mailto:sales@korelumina.app?subject=KoreLumina%20Enterprise";
-          break;
-        case "goToRepoAudit":
-          setView("repo-audit");
+
+        default:
           break;
       }
     });
-    return () => { off; };
+
+    return unsubscribe;
   }, [setView]);
 
   return (
-    <div className="relative min-h-screen text-foreground overflow-x-hidden bg-transparent">
+    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-foreground">
       {/* Centered background video at original aspect ratio */}
       <div
         aria-hidden
@@ -65,8 +69,10 @@ export function LandingPage() {
           className="w-[60%] max-w-[900px] h-auto object-contain"
         />
       </div>
+
       <div className="relative z-10">
         <LandingNav />
+
         <main>
           <Hero />
           <InfrastructureYourWay />
@@ -82,6 +88,7 @@ export function LandingPage() {
           <FAQ />
           <FinalCTA />
         </main>
+
         <Footer />
       </div>
     </div>
