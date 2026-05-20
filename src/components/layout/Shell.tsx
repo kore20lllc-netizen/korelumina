@@ -4,7 +4,7 @@ import { Sidebar } from "./Sidebar";
 import { CommandPalette } from "@/components/shell/CommandPalette";
 import { PublishDialog } from "@/components/shell/PublishDialog";
 import { BottomDock } from "@/components/shell/BottomDock";
-import luminaBg from "@/assets/lumina.webp";
+import luminaBg from "@/assets/lumina.png";
 
 export function Shell({ children }: { children: ReactNode; blobs?: "hero" | "ambient" | "soft" }) {
   return (

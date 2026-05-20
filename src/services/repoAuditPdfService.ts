@@ -7,7 +7,7 @@ import {
   type Severity,
   type Category,
 } from "@/components/workspaces/repo-audit/FindingsFilters";
-import luminaLogo from "@/assets/lumina.webp";
+import luminaLogo from "@/assets/lumina.png";
 
 type RGB = [number, number, number];
 

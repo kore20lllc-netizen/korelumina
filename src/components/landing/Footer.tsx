@@ -1,5 +1,5 @@
 import { goToPricing, goToTemplates, goToDocs, contactSales, goToSignIn } from "@/services/navigationService";
-import luminaLogo from "@/assets/lumina.webp";
+import luminaLogo from "@/assets/lumina.png";
 
 const cols = [
   { title: "Product", links: [

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { NotificationsCenter } from "@/components/notifications/NotificationsCenter";
 import { TeamSwitcher } from "./TeamSwitcher";
-import luminaLogo from "@/assets/lumina.webp";
+import luminaLogo from "@/assets/lumina.png";
 import { useIsAuthenticated } from "@/hooks/use-auth";
 import { toast } from "sonner";
 

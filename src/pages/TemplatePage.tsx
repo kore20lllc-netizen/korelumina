@@ -1,14 +1,15 @@
-import { lazy, Suspense } from "react";
-import { useParams } from "react-router-dom";
-
-const TemplatePageContent = lazy(() => import("./Index"));
+import { useParams, Navigate } from "react-router-dom";
+import { TemplateShell } from "@/components/templates/TemplateShell";
+import { getTemplateBySlug } from "@/components/templates/registry";
 
 export default function TemplatePage() {
-  const { slug } = useParams<{ slug: string }>();
-
+  const { slug } = useParams();
+  const template = getTemplateBySlug(slug);
+  if (!template) return <Navigate to="/" replace />;
+  const Component = template.Component;
   return (
-    <Suspense fallback={null}>
-      <TemplatePageContent key={slug} />
-    </Suspense>
+    <TemplateShell template={template}>
+      <Component />
+    </TemplateShell>
   );
 }
