@@ -5,6 +5,10 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "npm run dev:builder",
+    "build": "npm run build:builder",
+    "preview": "npm run preview:builder",
+
     "dev:builder": "npm --workspace apps/lumina-builder run dev",
     "build:builder": "npm --workspace apps/lumina-builder run build",
     "preview:builder": "npm --workspace apps/lumina-builder run preview"
