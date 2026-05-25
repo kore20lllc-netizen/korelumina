@@ -1,27 +1,59 @@
 import type { ChildProcess } from "node:child_process";
 
-export type RuntimeInstance = {
+export type RuntimeRecord = {
   projectId: string;
+  framework: string;
   port: number;
+  pid?: number;
+  startedAt: number;
   url: string;
   process: ChildProcess;
-  startedAt: number;
 };
 
-const runtimes = new Map<string, RuntimeInstance>();
+const runtimeMap = new Map<string, RuntimeRecord>();
 
-export function setRuntime(runtime: RuntimeInstance) {
-  runtimes.set(runtime.projectId, runtime);
+export function setRuntime(runtime: RuntimeRecord) {
+  runtimeMap.set(runtime.projectId, runtime);
+  return runtime;
 }
 
 export function getRuntime(projectId: string) {
-  return runtimes.get(projectId);
-}
-
-export function getAllRuntimes() {
-  return Array.from(runtimes.values());
+  return runtimeMap.get(projectId) || null;
 }
 
 export function removeRuntime(projectId: string) {
-  runtimes.delete(projectId);
+  runtimeMap.delete(projectId);
+}
+
+export function listRuntimes() {
+  return Array.from(runtimeMap.values());
+}
+
+export function stopRuntime(projectId: string) {
+  const runtime = getRuntime(projectId);
+
+  if (!runtime) {
+    return false;
+  }
+
+  try {
+    runtime.process.kill("SIGTERM");
+  } catch {
+    // noop
+  }
+
+  removeRuntime(projectId);
+  return true;
+}
+
+export function stopAllRuntimes() {
+  for (const runtime of listRuntimes()) {
+    try {
+      runtime.process.kill("SIGTERM");
+    } catch {
+      // noop
+    }
+
+    removeRuntime(runtime.projectId);
+  }
 }

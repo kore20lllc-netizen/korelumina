@@ -1,110 +1,109 @@
-import path from "node:path";
+import fs from "node:fs";
 import { spawn } from "node:child_process";
-import { fileURLToPath } from "node:url";
 
 import getPort from "get-port";
 
-const runtimeRegistry = new Map();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-/*
-  /apps/lumina-runtime/src/runtime
-  -> go back to repo root
-*/
-const REPO_ROOT = path.resolve(
-  __dirname,
-  "../../../..",
-);
+import { detectFramework } from "../detect/detectFramework.js";
+import { getProjectPath } from "../projects/getProjectPath.js";
+import { ensureProjectIsolation } from "./ensureProjectIsolation.js";
+import { getRuntime, removeRuntime, setRuntime } from "./registry.js";
+import { waitForRuntime } from "./waitForRuntime.js";
 
 export async function startProject(projectId: string) {
-  const existing =
-    runtimeRegistry.get(projectId);
+  const existing = getRuntime(projectId);
 
   if (existing) {
-    return existing;
+    return {
+      projectId: existing.projectId,
+      framework: existing.framework,
+      port: existing.port,
+      pid: existing.pid,
+      startedAt: existing.startedAt,
+      url: existing.url,
+    };
+  }
+
+  const projectPath = getProjectPath(projectId);
+
+  console.log("[runtime] projectPath =", projectPath);
+
+  if (!fs.existsSync(projectPath)) {
+    throw new Error(`Project not found: ${projectPath}`);
+  }
+
+  ensureProjectIsolation(projectPath);
+
+  const framework = detectFramework(projectPath);
+
+  console.log("[runtime] framework =", framework);
+
+  if (framework === "unknown") {
+    throw new Error("Unsupported framework");
   }
 
   const port = await getPort({
-    port: Array.from(
-      { length: 100 },
-      (_, i) => 4200 + i,
-    ),
+    port: Array.from({ length: 100 }, (_, i) => 4200 + i),
   });
 
-  const builderPath = path.join(
-    REPO_ROOT,
-    "apps",
-    "lumina-builder",
-  );
+  const command =
+    framework === "next"
+      ? ["run", "dev", "--", "--hostname", "0.0.0.0", "--port", String(port)]
+      : ["run", "dev", "--", "--host", "0.0.0.0", "--port", String(port)];
 
-  console.log(
-    "[runtime] builderPath =",
-    builderPath,
-  );
-
-  const proc = spawn(
-    process.platform === "win32"
-      ? "npm.cmd"
-      : "npm",
-    [
-      "run",
-      "dev",
-      "--",
-      "--host",
-      "0.0.0.0",
-      "--port",
-      String(port),
-    ],
-    {
-      cwd: builderPath,
-      shell: true,
-      stdio: "inherit",
-      env: {
-        ...process.env,
-        PORT: String(port),
-      },
+  const proc = spawn("npm", command, {
+    cwd: projectPath,
+    shell: false,
+    detached: false,
+    stdio: "inherit",
+    env: {
+      ...process.env,
+      PORT: String(port),
     },
-  );
-
-  proc.on("error", (error) => {
-    console.error(
-      "[runtime] spawn error:",
-      error,
-    );
-
-    runtimeRegistry.delete(projectId);
-  });
-
-  proc.on("exit", (code) => {
-    console.log(
-      `[runtime] ${projectId} exited with code ${code}`,
-    );
-
-    runtimeRegistry.delete(projectId);
   });
 
   const runtime = {
     projectId,
+    framework,
     port,
     pid: proc.pid,
     startedAt: Date.now(),
     url: `http://localhost:${port}`,
+    process: proc,
   };
 
-  runtimeRegistry.set(
-    projectId,
-    runtime,
-  );
+  proc.on("error", (error) => {
+    console.error("[runtime] spawn error:", error);
+    removeRuntime(projectId);
+  });
 
-  return runtime;
-}
+  proc.on("exit", (code) => {
+    console.log(`[runtime] exited ${projectId} with code ${code}`);
+    removeRuntime(projectId);
+  });
 
-export async function getProjectRuntime(
-  projectId: string,
-) {
-  return (
-    runtimeRegistry.get(projectId) || null
-  );
+  const ready = await waitForRuntime(runtime.url);
+
+  if (!ready) {
+    try {
+      proc.kill("SIGTERM");
+    } catch {
+      // noop
+    }
+
+    removeRuntime(projectId);
+    throw new Error(`Runtime readiness timeout: ${runtime.url}`);
+  }
+
+  setRuntime(runtime);
+
+  console.log("[runtime] ready:", runtime.url);
+
+  return {
+    projectId: runtime.projectId,
+    framework: runtime.framework,
+    port: runtime.port,
+    pid: runtime.pid,
+    startedAt: runtime.startedAt,
+    url: runtime.url,
+  };
 }

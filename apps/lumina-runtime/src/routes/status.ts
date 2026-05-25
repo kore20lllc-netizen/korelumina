@@ -5,6 +5,13 @@ export function registerStatusRoute(app: Express) {
   app.get("/api/runtime/status", (req, res) => {
     const projectId = String(req.query.projectId || "");
 
+    if (!projectId) {
+      return res.status(400).json({
+        ok: false,
+        error: "missing_projectId",
+      });
+    }
+
     const runtime = getRuntime(projectId);
 
     if (!runtime) {
@@ -18,7 +25,9 @@ export function registerStatusRoute(app: Express) {
       ok: true,
       running: true,
       projectId: runtime.projectId,
+      framework: runtime.framework,
       port: runtime.port,
+      pid: runtime.pid,
       url: runtime.url,
       startedAt: runtime.startedAt,
     });
