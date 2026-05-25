@@ -1,0 +1,168 @@
+/* ============================================================
+   LuminaThinking Component Styles
+   Premium thinking/loading indicator with pulse and orbit modes
+   ============================================================ */
+
+/* Container */
+.container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Core mark wrapper */
+.mark {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   PULSE MODE
+   Gentle scale and glow animation over 1.4s
+   ============================================================ */
+
+.modePulse .mark {
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   ORBIT MODE
+   3 dots circling around the mark at 2.4s
+   ============================================================ */
+
+.orbitContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.orbitDot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: orbit 2.4s ease-in-out infinite, dotFade 2.4s ease-in-out infinite;
+}
+
+/* Color each dot with brand colors */
+.dot1 {
+  background-color: #4A90E2; /* Royal Blue */
+  animation-delay: 0s;
+}
+
+.dot2 {
+  background-color: #5DE2E7; /* Cyan */
+  animation-delay: 0.8s;
+}
+
+.dot3 {
+  background-color: #F5A623; /* Warm Gold */
+  animation-delay: 1.6s;
+}
+
+@keyframes orbit {
+  0% {
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-100%);
+  }
+  100% {
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(360deg) translateY(-100%);
+  }
+}
+
+@keyframes dotFade {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   LABEL STYLES
+   ============================================================ */
+
+.labelVisible {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.labelHidden {
+  /* Visually hidden but accessible to screen readers */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   ACCESSIBILITY: prefers-reduced-motion
+   Disable all animations for users who prefer reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .modePulse .mark {
+    animation: none;
+  }
+
+  .orbitDot {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  /* Show dots in static positions */
+  .dot1 {
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -150%);
+  }
+
+  .dot2 {
+    top: 50%;
+    left: 100%;
+    transform: translate(-150%, -50%);
+  }
+
+  .dot3 {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
