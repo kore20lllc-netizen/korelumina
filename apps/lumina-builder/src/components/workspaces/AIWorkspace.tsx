@@ -162,7 +162,7 @@ export function AIWorkspace() {
       </div>
 
       {/* Right column: preview fills the full right side */}
-      <div className="relative flex flex-col gap-4 shrink-0 w-full md:w-[50vw] min-h-0">
+      <div className="relative flex flex-1 flex-col gap-4 min-w-0 min-h-0">
         {/* Expand/collapse preview toggle */}
         <div className="flex items-center justify-end shrink-0">
           <button

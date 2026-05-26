@@ -12,6 +12,7 @@ import {
   Lock as LockIcon,
   Sparkles,
   Check,
+  AlertTriangle,
 } from "lucide-react";
 
 import {
@@ -61,10 +62,8 @@ const DEVICE_WIDTHS: Record<
   string
 > = {
   desktop: "w-full h-full",
-  tablet:
-    "w-[768px] max-w-full h-full",
-  mobile:
-    "w-[390px] max-w-full h-full",
+  tablet: "w-[768px] max-w-full h-full",
+  mobile: "w-[390px] max-w-full h-full",
 };
 
 const LOCK_TOOLTIPS: Record<
@@ -76,8 +75,7 @@ const LOCK_TOOLTIPS: Record<
   }
 > = {
   fullscreen: {
-    title:
-      "Fullscreen Preview",
+    title: "Fullscreen Preview",
     tier: "Pro · $99/month",
     perks: [
       "Distraction-free fullscreen workspace",
@@ -88,8 +86,7 @@ const LOCK_TOOLTIPS: Record<
   },
 
   browser: {
-    title:
-      "Browser Preview",
+    title: "Browser Preview",
     tier: "Pro · $99/month",
     perks: [
       "Dedicated full-page browser shell",
@@ -103,28 +100,32 @@ const LOCK_TOOLTIPS: Record<
 function normalizePreviewUrl(
   input?: string,
 ): string | undefined {
-  if (!input) {
+  if (!input?.trim()) {
     return undefined;
   }
 
+  const trimmed = input.trim();
+
   if (
-    /^https?:\/\//i.test(input)
+    /^https?:\/\//i.test(
+      trimmed,
+    )
   ) {
-    return input;
+    return trimmed;
   }
 
   if (
-    input.startsWith(
+    trimmed.startsWith(
       "localhost:",
     ) ||
-    input.startsWith(
+    trimmed.startsWith(
       "127.0.0.1:",
     )
   ) {
-    return `http://${input}`;
+    return `http://${trimmed}`;
   }
 
-  return `https://${input}`;
+  return `https://${trimmed}`;
 }
 
 function LockedTooltip({
@@ -140,9 +141,7 @@ function LockedTooltip({
     LOCK_TOOLTIPS[feature];
 
   return (
-    <TooltipProvider
-      delayDuration={150}
-    >
+    <TooltipProvider delayDuration={150}>
       <Tooltip>
         <TooltipTrigger asChild>
           {children}
@@ -176,6 +175,7 @@ function LockedTooltip({
                   className="flex items-start gap-1.5 text-[11px] text-muted-foreground"
                 >
                   <Check className="mt-0.5 h-3 w-3 shrink-0 text-cyan" />
+
                   <span>
                     {perk}
                   </span>
@@ -212,10 +212,18 @@ export function PreviewFrame({
     setReloading,
   ] = useState(false);
 
+
   const [
-    iframeKey,
-    setIframeKey,
-  ] = useState(0);
+    iframeLoaded,
+    setIframeLoaded,
+  ] = useState(false);
+
+  const [
+    iframeError,
+    setIframeError,
+  ] = useState<string | null>(
+    null,
+  );
 
   const [
     fullscreen,
@@ -254,11 +262,9 @@ export function PreviewFrame({
       ? "Free"
       : role === "pro"
         ? "Pro"
-        : role ===
-            "business"
+        : role === "business"
           ? "Business"
-          : role ===
-              "enterprise"
+          : role === "enterprise"
             ? "Enterprise"
             : "Dev";
 
@@ -274,9 +280,52 @@ export function PreviewFrame({
       [url],
     );
 
+  useEffect(() => {
+    console.log(
+      "[PreviewFrame]",
+      {
+        incomingUrl: url,
+        navigableUrl,
+      },
+    );
+  }, [url, navigableUrl]);
+
   const displayUrl =
     navigableUrl ??
     `${PREVIEW_HOST}/${slug}`;
+
+  useEffect(() => {
+  setIframeLoaded(false);
+  setIframeError(null);
+}, [navigableUrl]);
+
+  useEffect(() => {
+    if (!navigableUrl) {
+      return;
+    }
+
+    const timeout =
+      window.setTimeout(
+        () => {
+          if (
+            !iframeLoaded
+          ) {
+            setIframeError(
+              "Preview runtime unreachable",
+            );
+          }
+        },
+        12000,
+      );
+
+    return () =>
+      window.clearTimeout(
+        timeout,
+      );
+  }, [
+  navigableUrl,
+  iframeLoaded,
+]);
 
   const promptUpgrade = (
     reason: UpgradeReason,
@@ -304,11 +353,13 @@ export function PreviewFrame({
           reason ===
           "browser"
         ) {
-          window.open(
-            `/preview/${slug}`,
-            "_blank",
-            "noopener,noreferrer",
-          );
+          if (navigableUrl) {
+            window.open(
+              navigableUrl,
+              "_blank",
+              "noopener,noreferrer",
+            );
+          }
         }
 
         if (
@@ -321,7 +372,8 @@ export function PreviewFrame({
         }
 
         if (
-          reason === "slug"
+          reason ===
+          "slug"
         ) {
           setSettingsOpen(
             true,
@@ -447,15 +499,23 @@ export function PreviewFrame({
     () => {
       setReloading(true);
 
-      setIframeKey(
-        (current) =>
-          current + 1,
-      );
+      setIframeLoaded(false);
+      setIframeError(null);
+
+      try {
+  iframeRef.current?.contentWindow?.location.reload();
+} catch {
+  if (
+    iframeRef.current &&
+    navigableUrl
+  ) {
+    iframeRef.current.src =
+      navigableUrl;
+  }
+}
 
       setTimeout(() => {
-        setReloading(
-          false,
-        );
+        setReloading(false);
       }, 700);
     };
 
@@ -486,11 +546,15 @@ export function PreviewFrame({
         return;
       }
 
-      window.open(
-        `/preview/${slug}`,
-        "_blank",
-        "noopener,noreferrer",
-      );
+      if (
+        navigableUrl
+      ) {
+        window.open(
+          navigableUrl,
+          "_blank",
+          "noopener,noreferrer",
+        );
+      }
     };
 
   return (
@@ -526,27 +590,6 @@ export function PreviewFrame({
             {displayUrl}
           </span>
         </div>
-
-        <button
-          onClick={() =>
-            isFreePlan &&
-            promptUpgrade(
-              "browser",
-            )
-          }
-          className={cn(
-            "hidden h-7 shrink-0 items-center gap-1 rounded-md border px-2 text-[10px] uppercase tracking-[0.16em] transition lg:inline-flex",
-            isFreePlan
-              ? "border-gold/40 bg-gold/10 text-gold hover:bg-gold/15"
-              : "cursor-default border-border bg-surface-1 text-muted-foreground",
-          )}
-        >
-          {isFreePlan && (
-            <Sparkles className="h-3 w-3" />
-          )}
-
-          {planLabel}
-        </button>
 
         <div className="hidden shrink-0 items-center gap-0.5 rounded-lg border border-border bg-surface-1 p-0.5 xl:flex">
           {[
@@ -587,83 +630,26 @@ export function PreviewFrame({
           )}
         </div>
 
-        <div className="hidden shrink-0 items-center gap-0.5 rounded-lg border border-border bg-surface-1 p-0.5 2xl:flex">
-          <div className="inline-flex h-7 items-center gap-1 rounded-md bg-surface-3 px-2 text-[11px] text-foreground">
-            <Monitor className="h-3.5 w-3.5" />
-            <span>
-              Embedded
-            </span>
-          </div>
-
-          {caps.fullscreenPreview ? (
-            <button
-              onClick={() =>
-                setFullscreen(
-                  true,
-                )
-              }
-              className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-[11px] text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
-            >
-              <Maximize2 className="h-3.5 w-3.5" />
-              <span>
-                Fullscreen
-              </span>
-            </button>
-          ) : (
-            <LockedTooltip feature="fullscreen">
-              <button
-                onClick={() =>
-                  promptUpgrade(
-                    "fullscreen",
-                  )
-                }
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-dashed border-gold/30 px-2 text-[11px] text-muted-foreground/70 transition hover:bg-gold/5"
-              >
-                <Maximize2 className="h-3.5 w-3.5" />
-
-                <span>
-                  Fullscreen
-                </span>
-
-                <LockIcon className="h-3 w-3 text-gold" />
-              </button>
-            </LockedTooltip>
+        <button
+          onClick={() =>
+            isFreePlan &&
+            promptUpgrade(
+              "browser",
+            )
+          }
+          className={cn(
+            "hidden h-7 shrink-0 items-center gap-1 rounded-md border px-2 text-[10px] uppercase tracking-[0.16em] transition lg:inline-flex",
+            isFreePlan
+              ? "border-gold/40 bg-gold/10 text-gold hover:bg-gold/15"
+              : "cursor-default border-border bg-surface-1 text-muted-foreground",
+          )}
+        >
+          {isFreePlan && (
+            <Sparkles className="h-3 w-3" />
           )}
 
-          {caps.browserPreview ? (
-            <button
-              onClick={
-                handleOpenInBrowser
-              }
-              className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-[11px] text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
-            >
-              <Globe className="h-3.5 w-3.5" />
-
-              <span>
-                Browser
-              </span>
-            </button>
-          ) : (
-            <LockedTooltip feature="browser">
-              <button
-                onClick={() =>
-                  promptUpgrade(
-                    "browser",
-                  )
-                }
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-dashed border-gold/30 px-2 text-[11px] text-muted-foreground/70 transition hover:bg-gold/5"
-              >
-                <Globe className="h-3.5 w-3.5" />
-
-                <span>
-                  Browser
-                </span>
-
-                <LockIcon className="h-3 w-3 text-gold" />
-              </button>
-            </LockedTooltip>
-          )}
-        </div>
+          {planLabel}
+        </button>
 
         <button
           onClick={
@@ -757,22 +743,61 @@ export function PreviewFrame({
           >
             <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl" />
 
-            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-background">
               {navigableUrl ? (
-                <iframe
-                  ref={
-                    iframeRef
-                  }
-                  key={
-                    iframeKey
-                  }
-                  src={
-                    navigableUrl
-                  }
-                  title="Preview"
-                  className="block h-full w-full border-0"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                />
+                <div className="relative h-full w-full">
+                  <iframe
+                    ref={iframeRef}
+                    src={navigableUrl}
+                    title="Preview"
+                    className="block h-full w-full border-0 bg-white"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                    allow="clipboard-read; clipboard-write"
+                    onLoad={() => {
+                      console.log(
+                        "[PreviewFrame] iframe loaded:",
+                        navigableUrl,
+                      );
+
+                      setIframeLoaded(
+                        true,
+                      );
+
+                      setIframeError(
+                        null,
+                      );
+                    }}
+                    onError={() => {
+                      setIframeError(
+                        "Preview failed to load",
+                      );
+                    }}
+                  />
+
+                  {!iframeLoaded && (
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-background/80 backdrop-blur-sm">
+                      <div className="text-sm text-muted-foreground">
+                        Loading preview...
+                      </div>
+                    </div>
+                  )}
+
+                  {iframeError && (
+                    <div className="absolute inset-0 z-20">
+                      <PreviewError
+                        message={
+                          iframeError
+                        }
+                        url={
+                          navigableUrl
+                        }
+                        onReload={
+                          handleReload
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
               ) : (
                 children ?? (
                   <PreviewSkeleton />
@@ -806,6 +831,82 @@ export function PreviewFrame({
           )
         }
       />
+    </div>
+  );
+}
+
+function PreviewLoading() {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-background">
+      <div className="text-center">
+        <div className="mx-auto mb-4 h-10 w-10 rounded-full border-2 border-cyan/20 border-t-cyan animate-spin" />
+
+        <div className="text-sm text-muted-foreground">
+          Connecting runtime...
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PreviewError({
+  message,
+  url,
+  onReload,
+}: {
+  message: string;
+  url?: string;
+  onReload: () => void;
+}) {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-background px-6">
+      <div className="max-w-md text-center">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/10">
+          <AlertTriangle className="h-7 w-7 text-red-400" />
+        </div>
+
+        <h3 className="text-lg font-semibold">
+          Preview unavailable
+        </h3>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          {message}
+        </p>
+
+        {url && (
+          <div className="mt-3 rounded-lg border border-border bg-surface-1 px-3 py-2 text-xs text-muted-foreground break-all">
+            {url}
+          </div>
+        )}
+
+        <div className="mt-5 flex items-center justify-center gap-2">
+          <button
+            onClick={
+              onReload
+            }
+            className="inline-flex items-center gap-2 rounded-lg bg-surface-2 px-4 py-2 text-sm transition hover:bg-surface-3"
+          >
+            <RotateCw className="h-4 w-4" />
+            Reload
+          </button>
+
+          {url && (
+            <button
+              onClick={() =>
+                window.open(
+                  url,
+                  "_blank",
+                  "noopener,noreferrer",
+                )
+              }
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-surface-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Open
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

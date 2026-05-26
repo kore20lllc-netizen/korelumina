@@ -3,107 +3,262 @@ import { spawn } from "node:child_process";
 
 import getPort from "get-port";
 
-import { detectFramework } from "../detect/detectFramework.js";
-import { getProjectPath } from "../projects/getProjectPath.js";
-import { ensureProjectIsolation } from "./ensureProjectIsolation.js";
-import { getRuntime, removeRuntime, setRuntime } from "./registry.js";
-import { waitForRuntime } from "./waitForRuntime.js";
+import { detectFramework } from "../detect/detectFramework";
+import { getProjectPath } from "../projects/getProjectPath";
+import { ensureProjectIsolation } from "./ensureProjectIsolation";
+import {
+  appendRuntimeLog,
+  getRuntime,
+  removeRuntime,
+  serializeRuntime,
+  setRuntime,
+} from "./registry";
+import { waitForRuntime } from "./waitForRuntime";
 
-export async function startProject(projectId: string) {
-  const existing = getRuntime(projectId);
+const pendingStarts =
+  new Map<string, Promise<ReturnType<typeof serializeRuntime>>>();
+
+export async function startProject(
+  projectId: string,
+) {
+  const existing =
+    getRuntime(projectId);
 
   if (existing) {
-    return {
-      projectId: existing.projectId,
-      framework: existing.framework,
-      port: existing.port,
-      pid: existing.pid,
-      startedAt: existing.startedAt,
-      url: existing.url,
-    };
+    return serializeRuntime(
+      existing,
+    );
   }
 
-  const projectPath = getProjectPath(projectId);
+  const pending =
+    pendingStarts.get(
+      projectId,
+    );
 
-  console.log("[runtime] projectPath =", projectPath);
-
-  if (!fs.existsSync(projectPath)) {
-    throw new Error(`Project not found: ${projectPath}`);
+  if (pending) {
+    return pending;
   }
 
-  ensureProjectIsolation(projectPath);
+  const promise =
+    startProjectInternal(
+      projectId,
+    ).finally(() => {
+      pendingStarts.delete(
+        projectId,
+      );
+    });
 
-  const framework = detectFramework(projectPath);
+  pendingStarts.set(
+    projectId,
+    promise,
+  );
 
-  console.log("[runtime] framework =", framework);
+  return promise;
+}
 
-  if (framework === "unknown") {
-    throw new Error("Unsupported framework");
+async function startProjectInternal(
+  projectId: string,
+) {
+  const projectPath =
+    getProjectPath(projectId);
+
+  console.log(
+    "[runtime] projectPath =",
+    projectPath,
+  );
+
+  if (
+    !fs.existsSync(projectPath)
+  ) {
+    throw new Error(
+      `Project not found: ${projectPath}`,
+    );
   }
 
-  const port = await getPort({
-    port: Array.from({ length: 100 }, (_, i) => 4200 + i),
-  });
+  ensureProjectIsolation(
+    projectPath,
+  );
+
+  const framework =
+    detectFramework(projectPath);
+
+  console.log(
+    "[runtime] framework =",
+    framework,
+  );
+
+  if (
+    framework === "unknown"
+  ) {
+    throw new Error(
+      "Unsupported framework",
+    );
+  }
+
+  const port =
+    await getPort({
+      port: Array.from(
+        { length: 100 },
+        (_, i) => 4200 + i,
+      ),
+    });
 
   const command =
     framework === "next"
-      ? ["run", "dev", "--", "--hostname", "0.0.0.0", "--port", String(port)]
-      : ["run", "dev", "--", "--host", "0.0.0.0", "--port", String(port)];
+      ? [
+          "run",
+          "dev",
+          "--",
+          "--hostname",
+          "0.0.0.0",
+          "--port",
+          String(port),
+        ]
+      : [
+          "run",
+          "dev",
+          "--",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          String(port),
+        ];
 
-  const proc = spawn("npm", command, {
-    cwd: projectPath,
-    shell: false,
-    detached: false,
-    stdio: "inherit",
-    env: {
-      ...process.env,
-      PORT: String(port),
+  const proc =
+    spawn("npm", command, {
+      cwd: projectPath,
+      shell: false,
+      detached: true,
+      stdio: [
+        "ignore",
+        "pipe",
+        "pipe",
+      ],
+      env: {
+        ...process.env,
+        PORT: String(port),
+        FORCE_COLOR: "1",
+      },
+    });
+
+  const runtime =
+    setRuntime({
+      projectId,
+      framework,
+      port,
+      pid: proc.pid,
+      startedAt: Date.now(),
+      url: `http://localhost:${port}`,
+      process: proc,
+      logs: [],
+      status: "starting",
+    });
+
+  proc.stdout?.on(
+    "data",
+    (chunk) => {
+      const text =
+        chunk.toString();
+
+      process.stdout.write(text);
+
+      for (const line of text.split(
+        "\n",
+      )) {
+        if (line.trim()) {
+          appendRuntimeLog(
+            projectId,
+            line,
+          );
+        }
+      }
     },
-  });
+  );
 
-  const runtime = {
-    projectId,
-    framework,
-    port,
-    pid: proc.pid,
-    startedAt: Date.now(),
-    url: `http://localhost:${port}`,
-    process: proc,
-  };
+  proc.stderr?.on(
+    "data",
+    (chunk) => {
+      const text =
+        chunk.toString();
+
+      process.stderr.write(text);
+
+      for (const line of text.split(
+        "\n",
+      )) {
+        if (line.trim()) {
+          appendRuntimeLog(
+            projectId,
+            line,
+          );
+        }
+      }
+    },
+  );
 
   proc.on("error", (error) => {
-    console.error("[runtime] spawn error:", error);
+    console.error(
+      "[runtime] spawn error:",
+      error,
+    );
+
+    runtime.status = "error";
+    appendRuntimeLog(
+      projectId,
+      `[spawn error] ${error.message}`,
+    );
+
     removeRuntime(projectId);
   });
 
-  proc.on("exit", (code) => {
-    console.log(`[runtime] exited ${projectId} with code ${code}`);
+  proc.on("exit", (code, signal) => {
+    console.log(
+      `[runtime] exited ${projectId} with code ${code} signal ${signal}`,
+    );
+
+    runtime.status = "exited";
+    appendRuntimeLog(
+      projectId,
+      `[exit] code=${code} signal=${signal}`,
+    );
+
     removeRuntime(projectId);
   });
 
-  const ready = await waitForRuntime(runtime.url);
+  try {
+    await waitForRuntime(
+      runtime.url,
+    );
 
-  if (!ready) {
+    runtime.status =
+      "running";
+
+    console.log(
+      "[runtime] ready:",
+      runtime.url,
+    );
+
+    return serializeRuntime(
+      runtime,
+    );
+  } catch (error) {
     try {
-      proc.kill("SIGTERM");
+      if (proc.pid) {
+        process.kill(
+          -proc.pid,
+          "SIGTERM",
+        );
+      } else {
+        proc.kill(
+          "SIGTERM",
+        );
+      }
     } catch {
       // noop
     }
 
     removeRuntime(projectId);
-    throw new Error(`Runtime readiness timeout: ${runtime.url}`);
+
+    throw error;
   }
-
-  setRuntime(runtime);
-
-  console.log("[runtime] ready:", runtime.url);
-
-  return {
-    projectId: runtime.projectId,
-    framework: runtime.framework,
-    port: runtime.port,
-    pid: runtime.pid,
-    startedAt: runtime.startedAt,
-    url: runtime.url,
-  };
 }

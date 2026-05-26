@@ -1,12 +1,13 @@
 import type { Express } from "express";
 
+import { stopRuntime } from "../runtime/registry";
 import { startProject } from "../runtime/startProject";
 
-export function registerStartRoute(
+export function registerRestartRoute(
   app: Express,
 ) {
   app.post(
-    "/api/runtime/start",
+    "/api/runtime/restart",
     async (req, res) => {
       try {
         const projectId =
@@ -19,11 +20,18 @@ export function registerStartRoute(
           });
         }
 
+        await stopRuntime(
+          projectId,
+        );
+
         const runtime =
-          await startProject(projectId);
+          await startProject(
+            projectId,
+          );
 
         return res.json({
           ok: true,
+          restarted: true,
           runtime,
         });
       } catch (error) {
@@ -34,7 +42,7 @@ export function registerStartRoute(
           error:
             error instanceof Error
               ? error.message
-              : "failed_to_start_runtime",
+              : "failed_to_restart_runtime",
         });
       }
     },

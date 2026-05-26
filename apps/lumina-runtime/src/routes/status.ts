@@ -1,35 +1,70 @@
 import type { Express } from "express";
-import { getRuntime } from "../runtime/registry.js";
 
-export function registerStatusRoute(app: Express) {
-  app.get("/api/runtime/status", (req, res) => {
-    const projectId = String(req.query.projectId || "");
+import {
+  getRuntime,
+  listRuntimes,
+  serializeRuntime,
+} from "../runtime/registry";
 
-    if (!projectId) {
-      return res.status(400).json({
-        ok: false,
-        error: "missing_projectId",
-      });
-    }
+export function registerStatusRoute(
+  app: Express,
+) {
+  app.get(
+    "/api/runtime/status",
+    (req, res) => {
+      try {
+        const projectId =
+          req.query.projectId as string | undefined;
 
-    const runtime = getRuntime(projectId);
+        if (!projectId) {
+          const runtimes =
+            listRuntimes().map(
+              serializeRuntime,
+            );
 
-    if (!runtime) {
-      return res.status(404).json({
-        ok: false,
-        error: "runtime_not_found",
-      });
-    }
+          return res.json({
+            ok: true,
+            running:
+              runtimes.length > 0,
+            runtimes,
+          });
+        }
 
-    return res.json({
-      ok: true,
-      running: true,
-      projectId: runtime.projectId,
-      framework: runtime.framework,
-      port: runtime.port,
-      pid: runtime.pid,
-      url: runtime.url,
-      startedAt: runtime.startedAt,
-    });
-  });
+        const runtime =
+          getRuntime(projectId);
+
+        if (!runtime) {
+          return res.status(404).json({
+            ok: false,
+            running: false,
+            error: "runtime_not_found",
+            projectId,
+          });
+        }
+
+        const publicRuntime =
+          serializeRuntime(runtime);
+
+        return res.json({
+          ok: true,
+          running:
+            publicRuntime.status ===
+            "running",
+          ...publicRuntime,
+          runtime:
+            publicRuntime,
+        });
+      } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+          ok: false,
+          error:
+            error instanceof Error
+              ? error.message
+              : "failed_to_get_status",
+        });
+      }
+    },
+  );
 }

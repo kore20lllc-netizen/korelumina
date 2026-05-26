@@ -1,16 +1,19 @@
 import type { Express } from "express";
 
-import { startProject } from "../runtime/startProject";
+import {
+  getRuntime,
+  serializeRuntime,
+} from "../runtime/registry";
 
-export function registerStartRoute(
+export function registerLogsRoute(
   app: Express,
 ) {
-  app.post(
-    "/api/runtime/start",
-    async (req, res) => {
+  app.get(
+    "/api/runtime/logs",
+    (req, res) => {
       try {
         const projectId =
-          req.body?.projectId;
+          req.query.projectId as string;
 
         if (!projectId) {
           return res.status(400).json({
@@ -20,11 +23,23 @@ export function registerStartRoute(
         }
 
         const runtime =
-          await startProject(projectId);
+          getRuntime(projectId);
+
+        if (!runtime) {
+          return res.status(404).json({
+            ok: false,
+            error: "runtime_not_found",
+          });
+        }
 
         return res.json({
           ok: true,
-          runtime,
+          runtime:
+            serializeRuntime(
+              runtime,
+            ),
+          logs:
+            runtime.logs,
         });
       } catch (error) {
         console.error(error);
@@ -34,7 +49,7 @@ export function registerStartRoute(
           error:
             error instanceof Error
               ? error.message
-              : "failed_to_start_runtime",
+              : "failed_to_get_logs",
         });
       }
     },

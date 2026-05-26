@@ -216,7 +216,7 @@ export function TopBar() {
         title="Usage"
       >
         <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_6px_hsl(255_90%_65%/0.7)]" />
-        {usage.aiExecutions}/{usage.aiLimit} AI
+        {usage?.aiExecutions ?? 0}/{usage?.aiLimit ?? 0} AI
       </button>
       <NotificationsCenter />
 
