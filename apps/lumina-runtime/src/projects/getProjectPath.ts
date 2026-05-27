@@ -8,11 +8,13 @@ const REPO_ROOT = path.resolve(
 );
 
 const PROJECTS_ROOT = path.resolve(
-  REPO_ROOT,
-  "runtime",
-  "workspaces",
-  "default",
-  "projects",
+  path.join(
+    REPO_ROOT,
+    "runtime",
+    "workspaces",
+    "default",
+    "projects",
+  ),
 );
 
 function assertSafeProjectId(
@@ -38,6 +40,25 @@ function assertSafeProjectId(
   }
 }
 
+function ensureWithinProjectsRoot(
+  resolvedPath: string,
+) {
+  const relative = path.relative(
+    PROJECTS_ROOT,
+    resolvedPath,
+  );
+
+  const escaped =
+    relative.startsWith("..") ||
+    path.isAbsolute(relative);
+
+  if (escaped) {
+    throw new Error(
+      "project_path_escape_detected",
+    );
+  }
+}
+
 export function getProjectPath(
   projectId: string,
 ) {
@@ -45,40 +66,41 @@ export function getProjectPath(
     projectId,
   );
 
-  const normalizedId =
-    projectId.trim();
+  const joinedPath = path.join(
+    PROJECTS_ROOT,
+    projectId,
+  );
 
-  const candidatePath =
-    path.resolve(
-      PROJECTS_ROOT,
-      normalizedId,
-    );
+  const normalizedPath =
+    path.resolve(joinedPath);
 
-  const relative =
-    path.relative(
-      PROJECTS_ROOT,
-      candidatePath,
-    );
+  ensureWithinProjectsRoot(
+    normalizedPath,
+  );
 
   if (
-    relative.startsWith("..") ||
-    path.isAbsolute(relative)
+    !fs.existsSync(
+      normalizedPath,
+    )
   ) {
     throw new Error(
-      "project_path_escape_detected",
+      `project_not_found:${projectId}`,
     );
   }
 
-  if (
-    !fs.existsSync(candidatePath)
-  ) {
-    throw new Error(
-      `project_not_found:${normalizedId}`,
+  const realProjectPath =
+    fs.realpathSync(
+      normalizedPath,
     );
-  }
+
+  ensureWithinProjectsRoot(
+    realProjectPath,
+  );
 
   const stats =
-    fs.lstatSync(candidatePath);
+    fs.statSync(
+      realProjectPath,
+    );
 
   if (!stats.isDirectory()) {
     throw new Error(
@@ -86,11 +108,5 @@ export function getProjectPath(
     );
   }
 
-  if (stats.isSymbolicLink()) {
-    throw new Error(
-      "symlinked_project_not_allowed",
-    );
-  }
-
-  return candidatePath;
+  return realProjectPath;
 }
