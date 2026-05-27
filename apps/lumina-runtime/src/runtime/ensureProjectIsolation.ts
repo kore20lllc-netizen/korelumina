@@ -2,8 +2,32 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
-function exists(filePath: string) {
+const INSTALL_TIMEOUT_MS =
+  1000 * 60 * 10;
+
+function exists(
+  filePath: string,
+) {
   return fs.existsSync(filePath);
+}
+
+function validateProjectPath(
+  projectPath: string,
+) {
+  const stats =
+    fs.lstatSync(projectPath);
+
+  if (!stats.isDirectory()) {
+    throw new Error(
+      "project_path_not_directory",
+    );
+  }
+
+  if (stats.isSymbolicLink()) {
+    throw new Error(
+      "symlinked_project_not_allowed",
+    );
+  }
 }
 
 function detectPackageManager(
@@ -19,6 +43,23 @@ function detectPackageManager(
   ) {
     return {
       command: "pnpm",
+      installArgs: [
+        "install",
+        "--frozen-lockfile",
+      ],
+    };
+  }
+
+  if (
+    exists(
+      path.join(
+        projectPath,
+        "yarn.lock",
+      ),
+    )
+  ) {
+    return {
+      command: "yarn",
       installArgs: [
         "install",
         "--frozen-lockfile",
@@ -48,27 +89,12 @@ function detectPackageManager(
     };
   }
 
-  if (
-    exists(
-      path.join(
-        projectPath,
-        "yarn.lock",
-      ),
-    )
-  ) {
-    return {
-      command: "yarn",
-      installArgs: [
-        "install",
-        "--frozen-lockfile",
-      ],
-    };
-  }
-
   return {
     command: "npm",
     installArgs: [
       "install",
+      "--no-audit",
+      "--no-fund",
     ],
   };
 }
@@ -80,9 +106,13 @@ export function ensureProjectIsolation(
     !exists(projectPath)
   ) {
     throw new Error(
-      `Project path does not exist: ${projectPath}`,
+      `project_path_missing:${projectPath}`,
     );
   }
+
+  validateProjectPath(
+    projectPath,
+  );
 
   const packageJsonPath =
     path.join(
@@ -94,7 +124,7 @@ export function ensureProjectIsolation(
     !exists(packageJsonPath)
   ) {
     throw new Error(
-      `Missing package.json: ${projectPath}`,
+      "missing_package_json",
     );
   }
 
@@ -109,8 +139,8 @@ export function ensureProjectIsolation(
   ) {
     return {
       isolated: true,
-      projectPath,
       dependenciesInstalled: true,
+      projectPath,
     };
   }
 
@@ -120,7 +150,7 @@ export function ensureProjectIsolation(
     );
 
   console.log(
-    `[runtime] installing dependencies using ${packageManager.command} in ${projectPath}`,
+    `[runtime/isolation] installing dependencies using ${packageManager.command}`,
   );
 
   const install =
@@ -131,17 +161,30 @@ export function ensureProjectIsolation(
         cwd: projectPath,
         shell: false,
         stdio: "inherit",
+        timeout:
+          INSTALL_TIMEOUT_MS,
         env: {
           ...process.env,
           CI: "true",
+          NODE_ENV:
+            "development",
+          BROWSER:
+            "none",
         },
-        timeout: 1000 * 60 * 10,
       },
     );
 
   if (install.error) {
     throw new Error(
-      `[runtime] dependency install failed: ${install.error.message}`,
+      `[runtime/install_failed] ${install.error.message}`,
+    );
+  }
+
+  if (
+    install.signal
+  ) {
+    throw new Error(
+      `[runtime/install_terminated] ${install.signal}`,
     );
   }
 
@@ -149,7 +192,7 @@ export function ensureProjectIsolation(
     install.status !== 0
   ) {
     throw new Error(
-      `[runtime] dependency install exited with code ${install.status}`,
+      `[runtime/install_exit_code] ${install.status}`,
     );
   }
 
@@ -157,13 +200,13 @@ export function ensureProjectIsolation(
     !exists(nodeModulesPath)
   ) {
     throw new Error(
-      "[runtime] install completed but node_modules missing",
+      "node_modules_missing_after_install",
     );
   }
 
   return {
     isolated: true,
-    projectPath,
     dependenciesInstalled: true,
+    projectPath,
   };
 }

@@ -731,57 +731,82 @@ export function PreviewFrame({
         </button>
       </div>
 
-            <div className="relative flex-1 min-h-0 overflow-hidden rounded-3xl glass-strong">
-        <div className="absolute inset-0 overflow-hidden bg-background">
-            <div
-  className={cn(
-    "relative h-full w-full min-w-0 overflow-hidden transition-all duration-500 ease-fluid",
-    device === "tablet" && "mx-auto max-w-[768px]",
-    device === "mobile" && "mx-auto max-w-[390px]",
-  )}
->
-            {navigableUrl ? (
-              <iframe
-                ref={iframeRef}
-                src={navigableUrl}
-                title="Preview"
-                className="absolute inset-0 block h-full min-h-full w-full min-w-full border-0 bg-background"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
-                allow="clipboard-read; clipboard-write"
-                onLoad={() => {
-                  console.log("[PreviewFrame] iframe loaded:", navigableUrl);
-                  setIframeLoaded(true);
-                  setIframeError(null);
-                }}
-                onError={() => {
-                  setIframeError("Preview failed to load");
-                }}
-              />
-            ) : (
-              children ?? <PreviewSkeleton />
+      <div className="relative flex-1 min-h-0 overflow-hidden rounded-3xl glass-strong p-4 md:p-6">
+        <div className="grid h-full w-full place-items-center overflow-auto">
+          <div
+            className={cn(
+              "relative h-full transition-all duration-500 ease-fluid",
+              DEVICE_WIDTHS[
+                device
+              ],
             )}
+          >
+            <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl" />
 
-            {navigableUrl && !iframeLoaded && (
-              <div className="absolute inset-0 z-10 grid place-items-center bg-background/80 backdrop-blur-sm">
-                <div className="text-sm text-muted-foreground">
-                  Loading preview...
+            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-background">
+              {navigableUrl ? (
+                <div className="relative h-full w-full">
+                  <iframe
+                    ref={iframeRef}
+                    src={navigableUrl}
+                    title="Preview"
+                    className="block h-full w-full border-0 bg-white"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                    allow="clipboard-read; clipboard-write"
+                    onLoad={() => {
+                      console.log(
+                        "[PreviewFrame] iframe loaded:",
+                        navigableUrl,
+                      );
+
+                      setIframeLoaded(
+                        true,
+                      );
+
+                      setIframeError(
+                        null,
+                      );
+                    }}
+                    onError={() => {
+                      setIframeError(
+                        "Preview failed to load",
+                      );
+                    }}
+                  />
+
+                  {!iframeLoaded && (
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-background/80 backdrop-blur-sm">
+                      <div className="text-sm text-muted-foreground">
+                        Loading preview...
+                      </div>
+                    </div>
+                  )}
+
+                  {iframeError && (
+                    <div className="absolute inset-0 z-20">
+                      <PreviewError
+                        message={
+                          iframeError
+                        }
+                        url={
+                          navigableUrl
+                        }
+                        onReload={
+                          handleReload
+                        }
+                      />
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-
-            {iframeError && (
-              <div className="absolute inset-0 z-20">
-                <PreviewError
-                  message={iframeError}
-                  url={navigableUrl}
-                  onReload={handleReload}
-                />
-              </div>
-            )}
+              ) : (
+                children ?? (
+                  <PreviewSkeleton />
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
-                         
 
       <ProjectSettingsDialog
         open={

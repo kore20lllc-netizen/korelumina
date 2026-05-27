@@ -5,6 +5,18 @@ import {
   stopRuntime,
 } from "../runtime/registry";
 
+function normalizeProjectId(
+  value: unknown,
+) {
+  if (
+    typeof value !== "string"
+  ) {
+    return "";
+  }
+
+  return value.trim();
+}
+
 export function registerStopRoute(
   app: Express,
 ) {
@@ -13,7 +25,9 @@ export function registerStopRoute(
     async (req, res) => {
       try {
         const projectId =
-          req.body?.projectId;
+          normalizeProjectId(
+            req.body?.projectId,
+          );
 
         if (!projectId) {
           return res.status(400).json({
@@ -33,7 +47,9 @@ export function registerStopRoute(
           });
         }
 
-        await stopRuntime(projectId);
+        await stopRuntime(
+          projectId,
+        );
 
         return res.json({
           ok: true,
@@ -41,7 +57,10 @@ export function registerStopRoute(
           projectId,
         });
       } catch (error) {
-        console.error(error);
+        console.error(
+          "[runtime/stop]",
+          error,
+        );
 
         return res.status(500).json({
           ok: false,

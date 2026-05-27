@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import { spawn } from "node:child_process";
 
 import getPort from "get-port";
@@ -12,19 +13,182 @@ import {
   removeRuntime,
   serializeRuntime,
   setRuntime,
+  type PublicRuntimeRecord,
 } from "./registry";
 import { waitForRuntime } from "./waitForRuntime";
 
-const pendingStarts =
-  new Map<string, Promise<ReturnType<typeof serializeRuntime>>>();
+const pendingStarts = new Map<
+  string,
+  Promise<PublicRuntimeRecord>
+>();
+
+const START_TIMEOUT_MS = 45_000;
+
+const MAX_AUTO_RESTARTS = 3;
+const AUTO_RESTART_WINDOW_MS = 60_000;
+const AUTO_RESTART_DELAY_MS = 1_500;
+
+type RestartState = {
+  count: number;
+  windowStartedAt: number;
+};
+
+const restartState = new Map<
+  string,
+  RestartState
+>();
+
+function assertSafeProjectId(
+  projectId: string,
+) {
+  if (
+    !/^[a-zA-Z0-9._-]+$/.test(
+      projectId,
+    )
+  ) {
+    throw new Error(
+      "invalid_projectId",
+    );
+  }
+}
+
+function assertProjectReady(
+  projectPath: string,
+) {
+  const packageJsonPath =
+    path.join(
+      projectPath,
+      "package.json",
+    );
+
+  if (
+    !fs.existsSync(projectPath)
+  ) {
+    throw new Error(
+      `project_not_found:${projectPath}`,
+    );
+  }
+
+  if (
+    !fs.existsSync(
+      packageJsonPath,
+    )
+  ) {
+    throw new Error(
+      "missing_package_json",
+    );
+  }
+
+  const packageJson =
+    JSON.parse(
+      fs.readFileSync(
+        packageJsonPath,
+        "utf8",
+      ),
+    );
+
+  if (
+    !packageJson.scripts?.dev
+  ) {
+    throw new Error(
+      "missing_dev_script",
+    );
+  }
+}
+
+function buildCommand(
+  framework: string,
+  port: number,
+): string[] {
+  if (
+    framework === "next"
+  ) {
+    return [
+      "run",
+      "dev",
+      "--",
+      "--hostname",
+      "0.0.0.0",
+      "--port",
+      String(port),
+    ];
+  }
+
+  return [
+    "run",
+    "dev",
+    "--",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    String(port),
+    "--strictPort",
+  ];
+}
+
+function shouldAutoRestart(
+  projectId: string,
+): boolean {
+  const now =
+    Date.now();
+
+  const current =
+    restartState.get(
+      projectId,
+    );
+
+  if (
+    !current ||
+    now -
+      current.windowStartedAt >
+      AUTO_RESTART_WINDOW_MS
+  ) {
+    restartState.set(
+      projectId,
+      {
+        count: 1,
+        windowStartedAt: now,
+      },
+    );
+
+    return true;
+  }
+
+  if (
+    current.count >=
+    MAX_AUTO_RESTARTS
+  ) {
+    return false;
+  }
+
+  current.count += 1;
+
+  return true;
+}
+
+function clearRestartState(
+  projectId: string,
+) {
+  restartState.delete(
+    projectId,
+  );
+}
 
 export async function startProject(
   projectId: string,
-) {
+): Promise<PublicRuntimeRecord> {
+  assertSafeProjectId(
+    projectId,
+  );
+
   const existing =
     getRuntime(projectId);
 
-  if (existing) {
+  if (
+    existing &&
+    existing.status ===
+      "running"
+  ) {
     return serializeRuntime(
       existing,
     );
@@ -42,6 +206,7 @@ export async function startProject(
   const promise =
     startProjectInternal(
       projectId,
+      false,
     ).finally(() => {
       pendingStarts.delete(
         projectId,
@@ -56,76 +221,145 @@ export async function startProject(
   return promise;
 }
 
-async function startProjectInternal(
+async function restartProject(
   projectId: string,
-) {
-  const projectPath =
-    getProjectPath(projectId);
+): Promise<void> {
+  const pending =
+    pendingStarts.get(
+      projectId,
+    );
 
-  console.log(
-    "[runtime] projectPath =",
-    projectPath,
+  if (pending) {
+    return;
+  }
+
+  const promise =
+    startProjectInternal(
+      projectId,
+      true,
+    )
+      .catch((error) => {
+        const runtime =
+          getRuntime(
+            projectId,
+          );
+
+        if (!runtime) {
+          return serializeRuntime({
+            projectId,
+            framework:
+              "unknown",
+            port: 0,
+            startedAt:
+              Date.now(),
+            url: "",
+            process:
+              {} as never,
+            logs: [],
+            status:
+              "error",
+          });
+        }
+
+        runtime.status =
+          "error";
+
+        runtime.lastError =
+          error instanceof Error
+            ? error.message
+            : "auto_restart_failed";
+
+        appendRuntimeLog(
+          projectId,
+          `[lumina-runtime] auto-restart failed: ${runtime.lastError}`,
+        );
+
+        return serializeRuntime(
+          runtime,
+        );
+      })
+      .finally(() => {
+        pendingStarts.delete(
+          projectId,
+        );
+      });
+
+  pendingStarts.set(
+    projectId,
+    promise,
   );
 
-  if (
-    !fs.existsSync(projectPath)
-  ) {
-    throw new Error(
-      `Project not found: ${projectPath}`,
+  await promise;
+}
+
+async function startProjectInternal(
+  projectId: string,
+  isAutoRestart = false,
+): Promise<PublicRuntimeRecord> {
+  const projectPath =
+    getProjectPath(
+      projectId,
     );
-  }
 
   ensureProjectIsolation(
     projectPath,
   );
 
-  const framework =
-    detectFramework(projectPath);
-
-  console.log(
-    "[runtime] framework =",
-    framework,
+  assertProjectReady(
+    projectPath,
   );
 
+  const framework =
+    detectFramework(
+      projectPath,
+    );
+
   if (
-    framework === "unknown"
+    framework ===
+    "unknown"
   ) {
     throw new Error(
-      "Unsupported framework",
+      "unsupported_framework",
     );
   }
 
   const port =
     await getPort({
       port: Array.from(
-        { length: 100 },
-        (_, i) => 4200 + i,
+        {
+          length: 200,
+        },
+        (_, i) =>
+          4200 + i,
       ),
     });
 
   const command =
-    framework === "next"
-      ? [
-          "run",
-          "dev",
-          "--",
-          "--hostname",
-          "0.0.0.0",
-          "--port",
-          String(port),
-        ]
-      : [
-          "run",
-          "dev",
-          "--",
-          "--host",
-          "0.0.0.0",
-          "--port",
-          String(port),
-        ];
+    buildCommand(
+      framework,
+      port,
+    );
 
-  const proc =
-    spawn("npm", command, {
+  console.log(
+    "[runtime/start]",
+    {
+      projectId,
+      framework,
+      port,
+      projectPath,
+      autoRestart:
+        isAutoRestart,
+      command: [
+        "npm",
+        ...command,
+      ].join(" "),
+    },
+  );
+
+  const proc = spawn(
+    "npm",
+    command,
+    {
       cwd: projectPath,
       shell: false,
       detached: true,
@@ -136,10 +370,21 @@ async function startProjectInternal(
       ],
       env: {
         ...process.env,
-        PORT: String(port),
-        FORCE_COLOR: "1",
+        NODE_ENV:
+          "development",
+        PORT:
+          String(port),
+        VITE_PORT:
+          String(port),
+        HOST:
+          "0.0.0.0",
+        FORCE_COLOR:
+          "1",
+        BROWSER:
+          "none",
       },
-    });
+    },
+  );
 
   const runtime =
     setRuntime({
@@ -147,12 +392,33 @@ async function startProjectInternal(
       framework,
       port,
       pid: proc.pid,
-      startedAt: Date.now(),
+      startedAt:
+        Date.now(),
       url: `http://localhost:${port}`,
       process: proc,
       logs: [],
-      status: "starting",
+      status:
+        "starting",
     });
+
+  appendRuntimeLog(
+    projectId,
+    `[lumina-runtime] ${
+      isAutoRestart
+        ? "restarting"
+        : "starting"
+    } ${projectId}`,
+  );
+
+  appendRuntimeLog(
+    projectId,
+    `[lumina-runtime] framework=${framework}`,
+  );
+
+  appendRuntimeLog(
+    projectId,
+    `[lumina-runtime] url=http://localhost:${port}`,
+  );
 
   proc.stdout?.on(
     "data",
@@ -160,18 +426,14 @@ async function startProjectInternal(
       const text =
         chunk.toString();
 
-      process.stdout.write(text);
+      process.stdout.write(
+        text,
+      );
 
-      for (const line of text.split(
-        "\n",
-      )) {
-        if (line.trim()) {
-          appendRuntimeLog(
-            projectId,
-            line,
-          );
-        }
-      }
+      appendRuntimeLog(
+        projectId,
+        text,
+      );
     },
   );
 
@@ -181,67 +443,143 @@ async function startProjectInternal(
       const text =
         chunk.toString();
 
-      process.stderr.write(text);
+      process.stderr.write(
+        text,
+      );
 
-      for (const line of text.split(
-        "\n",
-      )) {
-        if (line.trim()) {
-          appendRuntimeLog(
-            projectId,
-            line,
-          );
-        }
-      }
+      appendRuntimeLog(
+        projectId,
+        text,
+      );
     },
   );
 
-  proc.on("error", (error) => {
-    console.error(
-      "[runtime] spawn error:",
-      error,
-    );
+  proc.on(
+    "error",
+    (error) => {
+      runtime.status =
+        "error";
 
-    runtime.status = "error";
-    appendRuntimeLog(
-      projectId,
-      `[spawn error] ${error.message}`,
-    );
+      runtime.lastError =
+        error.message;
 
-    removeRuntime(projectId);
-  });
+      appendRuntimeLog(
+        projectId,
+        `[spawn error] ${error.message}`,
+      );
 
-  proc.on("exit", (code, signal) => {
-    console.log(
-      `[runtime] exited ${projectId} with code ${code} signal ${signal}`,
-    );
+      removeRuntime(
+        projectId,
+      );
+    },
+  );
 
-    runtime.status = "exited";
-    appendRuntimeLog(
-      projectId,
-      `[exit] code=${code} signal=${signal}`,
-    );
+  proc.on(
+    "exit",
+    (
+      code,
+      signal,
+    ) => {
+      runtime.status =
+        "exited";
 
-    removeRuntime(projectId);
-  });
+      runtime.exitedAt =
+        Date.now();
+
+      runtime.lastError =
+        `process_exit code=${code} signal=${signal}`;
+
+      appendRuntimeLog(
+        projectId,
+        `[exit] code=${code} signal=${signal}`,
+      );
+
+      const intentionalStop =
+        signal ===
+          "SIGTERM" ||
+        signal ===
+          "SIGKILL";
+
+      if (
+        intentionalStop
+      ) {
+        removeRuntime(
+          projectId,
+        );
+
+        return;
+      }
+
+      if (
+        !shouldAutoRestart(
+          projectId,
+        )
+      ) {
+        runtime.status =
+          "error";
+
+        runtime.lastError =
+          "auto_restart_limit_reached";
+
+        appendRuntimeLog(
+          projectId,
+          "[lumina-runtime] auto-restart disabled: limit reached",
+        );
+
+        return;
+      }
+
+      appendRuntimeLog(
+        projectId,
+        `[lumina-runtime] auto-restart scheduled in ${AUTO_RESTART_DELAY_MS}ms`,
+      );
+
+      setTimeout(() => {
+        void restartProject(
+          projectId,
+        );
+      }, AUTO_RESTART_DELAY_MS).unref();
+    },
+  );
 
   try {
     await waitForRuntime(
       runtime.url,
+      START_TIMEOUT_MS,
     );
 
     runtime.status =
       "running";
 
-    console.log(
-      "[runtime] ready:",
-      runtime.url,
+    clearRestartState(
+      projectId,
+    );
+
+    appendRuntimeLog(
+      projectId,
+      `[lumina-runtime] ready ${runtime.url}`,
     );
 
     return serializeRuntime(
       runtime,
     );
   } catch (error) {
+    runtime.status =
+      "error";
+
+    runtime.exitedAt =
+      Date.now();
+
+    runtime.lastError =
+      error instanceof Error
+        ? error.message
+        : "runtime_start_timeout";
+
+    appendRuntimeLog(
+      projectId,
+      `[lumina-runtime] failed ${runtime.lastError}`,
+    );
+
     try {
       if (proc.pid) {
         process.kill(
@@ -256,8 +594,6 @@ async function startProjectInternal(
     } catch {
       // noop
     }
-
-    removeRuntime(projectId);
 
     throw error;
   }

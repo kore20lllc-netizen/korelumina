@@ -6,65 +6,78 @@ import {
   serializeRuntime,
 } from "../runtime/registry";
 
-export function registerStatusRoute(
-  app: Express,
-) {
-  app.get(
-    "/api/runtime/status",
-    (req, res) => {
-      try {
-        const projectId =
-          req.query.projectId as string | undefined;
+function runtimeStatusResponse(projectId: string) {
+  const runtime = getRuntime(projectId);
 
-        if (!projectId) {
-          const runtimes =
-            listRuntimes().map(
-              serializeRuntime,
-            );
+  if (!runtime) {
+    return {
+      status: 404,
+      body: {
+        ok: false,
+        running: false,
+        error: "runtime_not_found",
+        projectId,
+      },
+    };
+  }
 
-          return res.json({
-            ok: true,
-            running:
-              runtimes.length > 0,
-            runtimes,
-          });
-        }
+  const publicRuntime = serializeRuntime(runtime);
 
-        const runtime =
-          getRuntime(projectId);
+  return {
+    status: 200,
+    body: {
+      ok: true,
+      running: publicRuntime.status === "running",
+      ...publicRuntime,
+      runtime: publicRuntime,
+    },
+  };
+}
 
-        if (!runtime) {
-          return res.status(404).json({
-            ok: false,
-            running: false,
-            error: "runtime_not_found",
-            projectId,
-          });
-        }
+export function registerStatusRoute(app: Express) {
+  app.get("/api/runtime/status", (req, res) => {
+    try {
+      const projectId = req.query.projectId as string | undefined;
 
-        const publicRuntime =
-          serializeRuntime(runtime);
+      if (!projectId) {
+        const runtimes = listRuntimes().map(serializeRuntime);
 
         return res.json({
           ok: true,
-          running:
-            publicRuntime.status ===
-            "running",
-          ...publicRuntime,
-          runtime:
-            publicRuntime,
-        });
-      } catch (error) {
-        console.error(error);
-
-        return res.status(500).json({
-          ok: false,
-          error:
-            error instanceof Error
-              ? error.message
-              : "failed_to_get_status",
+          running: runtimes.some((runtime) => runtime.status === "running"),
+          runtimes,
         });
       }
-    },
-  );
+
+      const result = runtimeStatusResponse(projectId);
+      return res.status(result.status).json(result.body);
+    } catch (error) {
+      console.error("[runtime/status]", error);
+
+      return res.status(500).json({
+        ok: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "failed_to_get_status",
+      });
+    }
+  });
+
+  app.get("/api/runtime/status/:projectId", (req, res) => {
+    try {
+      const result = runtimeStatusResponse(req.params.projectId);
+      return res.status(result.status).json(result.body);
+    } catch (error) {
+      console.error("[runtime/status/:projectId]", error);
+
+      return res.status(500).json({
+        ok: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "failed_to_get_status",
+      });
+    }
+  });
 }

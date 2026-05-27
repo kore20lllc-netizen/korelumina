@@ -3,6 +3,18 @@ import type { Express } from "express";
 import { stopRuntime } from "../runtime/registry";
 import { startProject } from "../runtime/startProject";
 
+function normalizeProjectId(
+  value: unknown,
+) {
+  if (
+    typeof value !== "string"
+  ) {
+    return "";
+  }
+
+  return value.trim();
+}
+
 export function registerRestartRoute(
   app: Express,
 ) {
@@ -11,7 +23,9 @@ export function registerRestartRoute(
     async (req, res) => {
       try {
         const projectId =
-          req.body?.projectId;
+          normalizeProjectId(
+            req.body?.projectId,
+          );
 
         if (!projectId) {
           return res.status(400).json({
@@ -35,7 +49,10 @@ export function registerRestartRoute(
           runtime,
         });
       } catch (error) {
-        console.error(error);
+        console.error(
+          "[runtime/restart]",
+          error,
+        );
 
         return res.status(500).json({
           ok: false,

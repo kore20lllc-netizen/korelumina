@@ -11,9 +11,15 @@ import { generateDraft } from "@/services/api";
 import { normalizeError } from "@/lib/errors";
 import { notificationService } from "@/services/notificationService";
 import { toast } from "sonner";
+import { useRuntimeBoot } from "@/hooks/useRuntimeBoot";
 
 export function AIWorkspace() {
   const { rightPanelOpen, activeProject } = useWorkspace();
+  const projectId =
+  activeProject?.id ??
+  null;
+  const { runtimeUrl } =
+      useRuntimeBoot(projectId);  
   const [prompt, setPrompt] = useState("");
   const [generating, setGenerating] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -182,7 +188,7 @@ export function AIWorkspace() {
         </div>
 
         <div className="flex-1 min-h-0">
-          <PreviewFrame />
+          <PreviewFrame url={runtimeUrl} />
         </div>
 
         {rightPanelOpen && !previewExpanded && (

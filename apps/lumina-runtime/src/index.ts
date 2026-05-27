@@ -7,8 +7,10 @@ import { registerStatusRoute } from "./routes/status";
 import { registerStopRoute } from "./routes/stop";
 import { registerRestartRoute } from "./routes/restart";
 import { registerLogsRoute } from "./routes/logs";
+import { registerMetricsRoute } from "./routes/metrics";
 
 import { stopAllRuntimes } from "./runtime/registry";
+import { startRuntimeSupervisor, stopRuntimeSupervisor } from "./runtime/supervisor";
 
 const app = express();
 
@@ -50,11 +52,17 @@ registerLogsRoute(
   app,
 );
 
+registerMetricsRoute(
+  app,
+);
+
 const PORT =
   Number(
     process.env
       .LUMINA_RUNTIME_PORT,
   ) || 4100;
+
+startRuntimeSupervisor();
 
 const server =
   app.listen(
@@ -81,6 +89,8 @@ async function shutdown(
   console.log(
     `[lumina-runtime] shutting down: ${signal}`,
   );
+
+  stopRuntimeSupervisor();
 
   await stopAllRuntimes();
 

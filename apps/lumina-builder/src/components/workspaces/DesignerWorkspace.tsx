@@ -15,6 +15,7 @@ import { useWorkspace } from "@/context/WorkspaceContext";
 import { useTransform } from "@/context/TransformContext";
 import { TEMPLATES } from "@/lib/transformPages";
 import { track } from "@/lib/analytics";
+import { useRuntimeBoot } from "@/hooks/useRuntimeBoot";
 
 const kindIcon: Record<ElementKind, any> = {
   headline: Type, subhead: Type, button: Square, image: ImageIcon, badge: Sparkles, card: Layout,
@@ -29,21 +30,78 @@ export function DesignerWorkspace() {
 }
 
 function DesignerWorkspaceInner() {
-  const [breakpoint, setBreakpoint] = useState<"mobile" | "tablet" | "desktop">("desktop");
-  const [aiOpen, setAiOpen] = useState(false);
-  const { elements, selected, toggleSelected, setSelected, remove, add, replaceAll } = useCanvas();
-  const { activeProject } = useWorkspace();
-  const { generatedPages, activePageId, setActivePage, clearGenerated, setPageTemplate } = useTransform();
-  const primary: CanvasElement | undefined = elements.find((e) => e.id === selected[0]);
+  const [breakpoint, setBreakpoint] =
+    useState<
+      "mobile" | "tablet" | "desktop"
+    >("desktop");
+
+  const [aiOpen, setAiOpen] =
+    useState(false);
+
+  const {
+    elements,
+    selected,
+    toggleSelected,
+    setSelected,
+    remove,
+    add,
+    replaceAll,
+  } = useCanvas();
+
+  const { activeProject } =
+    useWorkspace();
+
+  const projectId =
+    activeProject?.id ??
+    null;
+
+  const { runtimeUrl } =
+    useRuntimeBoot(projectId);
+
+  const {
+    generatedPages,
+    activePageId,
+    setActivePage,
+    clearGenerated,
+    setPageTemplate,
+  } = useTransform();
+
+  const primary:
+    | CanvasElement
+    | undefined =
+    elements.find(
+      (e) =>
+        e.id === selected[0],
+    );
 
   // When generated pages exist (after Transform → Website), load the active page
   // into the editable canvas. Switching pages swaps the canvas instantly.
   useEffect(() => {
-    if (!generatedPages.length || !activePageId) return;
-    const page = generatedPages.find((p) => p.id === activePageId);
-    if (page) replaceAll(page.sections);
+    if (
+      !generatedPages.length ||
+      !activePageId
+    ) {
+      return;
+    }
+
+    const page =
+      generatedPages.find(
+        (p) =>
+          p.id ===
+          activePageId,
+      );
+
+    if (page) {
+      replaceAll(
+        page.sections,
+      );
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePageId, generatedPages]);
+  }, [
+    activePageId,
+    generatedPages,
+  ]);
 
   const usingGenerated = generatedPages.length > 0;
   const activePage = usingGenerated ? generatedPages.find((p) => p.id === activePageId) ?? null : null;
@@ -253,9 +311,9 @@ function DesignerWorkspaceInner() {
       </aside>
 
       {/* Center: canvas / preview */}
-      <div className="flex-1 min-h-[360px]">
-        <PreviewFrame>
-          <DesignerCanvas />
+      <div className="relative flex flex-1 min-h-[420px] lg:min-h-0 overflow-hidden">
+        <PreviewFrame url={runtimeUrl}>
+           <DesignerCanvas />
         </PreviewFrame>
       </div>
 
