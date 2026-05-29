@@ -812,16 +812,14 @@ const [iframeError, setIframeError] =
 
         <div className="flex h-full min-h-0 w-full items-center justify-center overflow-hidden">
           <div
-  className="relative flex h-full min-h-0 w-full items-center justify-center transition-all duration-500 ease-fluid"
-  style={{
-    maxWidth: widthMap[device],
-  }}
->
+            className={cn(
+              "relative flex h-full min-h-0 items-center justify-center transition-all duration-500 ease-fluid",
+              widthMap[device],
+            )}
+          >
             <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl" />
 
-            <div
-  className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]"
->
+            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-background shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]">
               {navigableUrl ? (
                 <iframe
                   ref={iframeRef}
