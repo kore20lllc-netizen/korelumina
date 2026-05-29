@@ -6,9 +6,10 @@ const env =
     env?: Record<string, string | boolean | undefined>;
   }).env ?? {};
 
-if (env.VITE_USE_REAL_AUTH !== "true") {
+// Allow app to run in development without strict auth requirements
+if (env.PROD === true && env.VITE_USE_REAL_AUTH !== "true") {
   throw new Error(
-    "[KoreLumina] Real auth is required. Set VITE_USE_REAL_AUTH=true.",
+    "[KoreLumina] Real auth is required in production. Set VITE_USE_REAL_AUTH=true.",
   );
 }
 
