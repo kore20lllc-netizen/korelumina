@@ -1,5 +1,5 @@
 const RUNTIME_API =
-  "http://localhost:4100";
+  import.meta.env.VITE_RUNTIME_API_URL || "http://localhost:4100";
 
 export interface RuntimeSession {
   projectId: string;
@@ -80,24 +80,29 @@ function normalizeRuntimePayload(
 export async function getRuntimeStatus(
   projectId: string,
 ): Promise<RuntimeSession | null> {
-  const response =
-    await fetch(
-      `${RUNTIME_API}/api/runtime/status?projectId=${encodeURIComponent(projectId)}`,
-      {
-        method: "GET",
-      },
-    );
+  try {
+    const response =
+      await fetch(
+        `${RUNTIME_API}/api/runtime/status?projectId=${encodeURIComponent(projectId)}`,
+        {
+          method: "GET",
+        },
+      );
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return null;
+    }
+
+    const data =
+      await response.json();
+
+    return normalizeRuntimePayload(
+      data,
+    );
+  } catch (error) {
+    console.warn('[runtimeService] Failed to get runtime status:', error);
     return null;
   }
-
-  const data =
-    await response.json();
-
-  return normalizeRuntimePayload(
-    data,
-  );
 }
 
 export async function getRuntime(
@@ -111,52 +116,57 @@ export async function getRuntime(
 export async function startRuntime(
   projectId: string,
 ): Promise<RuntimeSession> {
-  const existing =
-    await getRuntimeStatus(
-      projectId,
-    );
+  try {
+    const existing =
+      await getRuntimeStatus(
+        projectId,
+      );
 
-  if (existing?.url) {
-    return existing;
-  }
+    if (existing?.url) {
+      return existing;
+    }
 
-  const response =
-    await fetch(
-      `${RUNTIME_API}/api/runtime/start`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
+    const response =
+      await fetch(
+        `${RUNTIME_API}/api/runtime/start`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            projectId,
+          }),
         },
-        body: JSON.stringify({
-          projectId,
-        }),
-      },
-    );
+      );
 
-  const data =
-    await response.json();
+    const data =
+      await response.json();
 
-  if (!response.ok) {
-    throw new Error(
-      data?.error ??
-        "Failed to start runtime",
-    );
+    if (!response.ok) {
+      throw new Error(
+        data?.error ??
+          "Failed to start runtime",
+      );
+    }
+
+    const runtime =
+      normalizeRuntimePayload(
+        data,
+      );
+
+    if (!runtime?.url) {
+      throw new Error(
+        "Runtime URL missing",
+      );
+    }
+
+    return runtime;
+  } catch (error) {
+    console.error('[runtimeService] Failed to start runtime:', error);
+    throw error;
   }
-
-  const runtime =
-    normalizeRuntimePayload(
-      data,
-    );
-
-  if (!runtime?.url) {
-    throw new Error(
-      "Runtime URL missing",
-    );
-  }
-
-  return runtime;
 }
 
 export async function restartRuntime(

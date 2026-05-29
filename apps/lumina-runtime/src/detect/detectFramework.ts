@@ -4,6 +4,10 @@ import path from "node:path";
 export type Framework =
   | "next"
   | "vite"
+  | "react"
+  | "vue"
+  | "nuxt"
+  | "monorepo"
   | "unknown";
 
 export function detectFramework(
