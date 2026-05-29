@@ -42,5 +42,22 @@ export function detectFramework(
     return "vite";
   }
 
+  if (deps.react && !deps.next && !deps.vite) {
+    return "react";
+  }
+
+  if (deps.vue) {
+    return "vue";
+  }
+
+  if (deps.nuxt) {
+    return "nuxt";
+  }
+
+  // Check for monorepo indicators
+  if (pkg.workspaces || fs.existsSync(path.join(projectPath, "pnpm-workspace.yaml"))) {
+    return "monorepo";
+  }
+
   return "unknown";
 }
