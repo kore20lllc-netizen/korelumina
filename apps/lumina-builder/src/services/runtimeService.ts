@@ -12,6 +12,33 @@ export interface RuntimeSession {
   logs?: string[];
 }
 
+export type RuntimeEvent =
+  | {
+      type: "runtime:log";
+      projectId: string;
+      line: string;
+      timestamp: number;
+    }
+  | {
+      type: "runtime:state";
+      projectId: string;
+      status: string;
+      timestamp: number;
+    }
+  | {
+      type: "runtime:error";
+      projectId: string;
+      error: string;
+      timestamp: number;
+    }
+  | {
+      type: "runtime:file-changed";
+      projectId: string;
+      file: string;
+      sha256?: string;
+      timestamp: number;
+    };
+
 function normalizeRuntimeUrl(
   url?: string | null,
 ) {
@@ -19,7 +46,8 @@ function normalizeRuntimeUrl(
     return "";
   }
 
-  const trimmed = url.trim();
+  const trimmed =
+    url.trim();
 
   if (
     trimmed.startsWith("http://") ||
@@ -69,6 +97,14 @@ export async function getRuntimeStatus(
 
   return normalizeRuntimePayload(
     data,
+  );
+}
+
+export async function getRuntime(
+  projectId: string,
+): Promise<RuntimeSession | null> {
+  return getRuntimeStatus(
+    projectId,
   );
 }
 
@@ -180,7 +216,9 @@ export async function getRuntimeLogs(
   const data =
     await response.json();
 
-  return Array.isArray(data?.logs)
+  return Array.isArray(
+    data?.logs,
+  )
     ? data.logs
     : [];
 }
@@ -198,4 +236,121 @@ export async function getActiveRuntime(): Promise<RuntimeSession | null> {
   return getRuntimeStatus(
     projectId,
   );
+}
+
+export function connectRuntimeEvents(
+  onEvent: (
+    event: RuntimeEvent,
+  ) => void,
+  onError?: (
+    error: Event,
+  ) => void,
+) {
+  const source =
+    new EventSource(
+      `${RUNTIME_API}/api/runtime/events`,
+    );
+
+  source.onmessage =
+    (
+      raw,
+    ) => {
+      try {
+        const event =
+          JSON.parse(
+            raw.data,
+          ) as RuntimeEvent;
+
+        onEvent(
+          event,
+        );
+      } catch {
+        // ignore malformed event payloads
+      }
+    };
+
+  source.onerror =
+    (
+      error,
+    ) => {
+      onError?.(
+        error,
+      );
+    };
+
+  return () => {
+    source.close();
+  };
+}
+
+export interface RuntimeFileRead {
+  ok?: boolean;
+  projectId?: string;
+  file: string;
+  content: string;
+  sha256?: string;
+}
+
+export async function readRuntimeFile(
+  projectId: string,
+  file: string,
+): Promise<RuntimeFileRead> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/runtime/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok || !data?.ok) {
+    throw new Error(
+      data?.error ??
+        "Failed to read runtime file",
+    );
+  }
+
+  return data as RuntimeFileRead;
+}
+
+export async function writeRuntimeFile(
+  projectId: string,
+  file: string,
+  content: string,
+  expectedSha256?: string,
+): Promise<{
+  ok: true;
+  projectId: string;
+  file: string;
+  sha256: string;
+}> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/runtime/fs/write`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          projectId,
+          file,
+          content,
+          expectedSha256,
+        }),
+      },
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok || !data?.ok) {
+    throw new Error(
+      data?.error ??
+        "Failed to write runtime file",
+    );
+  }
+
+  return data;
 }
