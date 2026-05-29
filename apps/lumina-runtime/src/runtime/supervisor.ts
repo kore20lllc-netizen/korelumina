@@ -7,6 +7,7 @@ import {
   listRuntimes,
   removeRuntime,
 } from "./registry";
+import { runtimeState } from "./runtimeState";
 
 const SUPERVISOR_INTERVAL_MS = 5_000;
 const HEALTH_TIMEOUT_MS = 2_500;
@@ -87,6 +88,10 @@ async function superviseOnce() {
 
       const healthy = await checkUrl(runtime.url);
 
+      // Update unified state
+      runtimeState.updateHealth(projectId, healthy);
+
+      // Keep legacy healthState for backward compatibility
       const current =
         healthState.get(projectId) ?? {
           failedChecks: 0,

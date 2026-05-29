@@ -1,11 +1,18 @@
+import { runtimeState } from "../apps/lumina-runtime/src/runtime/runtimeState";
+
 let listeners: (()=>void)[] = []
 
 export function subscribeReload(fn:()=>void){
-  listeners.push(fn)
+  // Register with unified state system
+  runtimeState.subscribeReload(fn);
+  
+  // Keep legacy array for backward compatibility
+  listeners.push(fn);
 }
 
 export function triggerReload(){
-  for(const fn of listeners){
-    try{ fn() }catch{}
-  }
+  // Use unified state system
+  runtimeState.triggerReload();
+  
+  // Legacy listeners are handled by runtimeState now
 }

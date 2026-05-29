@@ -3,6 +3,7 @@ import type { ChildProcess } from "node:child_process";
 import { persistRuntimeState, removeRuntimeState } from "./persistence";
 import { publishRuntimeEvent } from "./eventBus";
 import { unwatchWorkspace } from "./workspaceWatcher";
+import { runtimeState } from "./runtimeState";
 
 export type RuntimeStatus =
   | "starting"
@@ -235,6 +236,9 @@ export function setRuntime(
     runtime,
   );
 
+  // Initialize unified state
+  runtimeState.initState(runtime.projectId, runtime.status);
+
   persistRecord(runtime);
   publishState(runtime.projectId, runtime.status);
 
@@ -280,6 +284,9 @@ export function removeRuntime(
   );
 
   void unwatchWorkspace(projectId);
+
+  // Remove unified state
+  runtimeState.removeState(projectId);
 
   removeRuntimeState(projectId);
   publishState(projectId, "exited");
