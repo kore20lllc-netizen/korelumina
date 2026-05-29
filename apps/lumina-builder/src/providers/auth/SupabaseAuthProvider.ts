@@ -58,15 +58,17 @@ function fail(error: { message?: string } | null): never {
 
 export class SupabaseAuthProvider implements AuthProvider {
   getSession(): Session | null {
-    if (!supabase) return null;
-
-    const storageKey = Object.keys(localStorage).find(
-      (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
-    );
-
-    if (!storageKey) return null;
+    if (!supabase) {
+      return null;
+    }
 
     try {
+      const storageKey = Object.keys(localStorage).find(
+        (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
+      );
+
+      if (!storageKey) return null;
+
       const raw = JSON.parse(
         localStorage.getItem(storageKey) || "{}",
       );
@@ -78,21 +80,24 @@ export class SupabaseAuthProvider implements AuthProvider {
       }
 
       return toSession(session);
-    } catch {
+    } catch (error) {
+      console.error("[SupabaseAuthProvider] Failed to get session:", error);
       return null;
     }
   }
 
   getUser(): User | null {
-    if (!supabase) return null;
-
-    const storageKey = Object.keys(localStorage).find(
-      (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
-    );
-
-    if (!storageKey) return null;
+    if (!supabase) {
+      return null;
+    }
 
     try {
+      const storageKey = Object.keys(localStorage).find(
+        (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
+      );
+
+      if (!storageKey) return null;
+
       const raw = JSON.parse(
         localStorage.getItem(storageKey) || "{}",
       );
@@ -103,7 +108,8 @@ export class SupabaseAuthProvider implements AuthProvider {
       if (!user) return null;
 
       return toUser(user);
-    } catch {
+    } catch (error) {
+      console.error("[SupabaseAuthProvider] Failed to get user:", error);
       return null;
     }
   }
@@ -279,14 +285,21 @@ export class SupabaseAuthProvider implements AuthProvider {
   }
 
   onChange(callback: () => void) {
-    if (!supabase) return () => {};
+    if (!supabase) {
+      return () => {};
+    }
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      callback();
-    });
+    try {
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange(() => {
+        callback();
+      });
 
-    return () => subscription.unsubscribe();
+      return () => subscription.unsubscribe();
+    } catch (error) {
+      console.error("[SupabaseAuthProvider] Failed to setup auth listener:", error);
+      return () => {};
+    }
   }
 }

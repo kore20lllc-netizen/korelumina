@@ -39,15 +39,21 @@ export function AuthProvider({
 
   useEffect(() => {
     const sync = () => {
-      const current = auth.getUser?.() ?? null;
+      try {
+        const current = auth.getUser?.() ?? null;
 
-      setUser(current);
+        setUser(current);
 
-      setStatus(
-        current
-          ? "authenticated"
-          : "signed_out",
-      );
+        setStatus(
+          current
+            ? "authenticated"
+            : "signed_out",
+        );
+      } catch (error) {
+        console.error("[AuthContext] Failed to sync auth state:", error);
+        setUser(null);
+        setStatus("signed_out");
+      }
     };
 
     sync();
