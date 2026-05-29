@@ -10,10 +10,12 @@ import {
 
 const SUPERVISOR_INTERVAL_MS = 5_000;
 const HEALTH_TIMEOUT_MS = 2_500;
-const MAX_FAILED_HEALTH_CHECKS = 3;
+const STARTUP_GRACE_PERIOD_MS = 30_000;
+const MAX_FAILED_HEALTH_CHECKS = 5;
 
 type RuntimeHealthState = {
   failedChecks: number;
+  firstFailureAt?: number;
   lastCheckedAt: number;
 };
 
@@ -28,7 +30,10 @@ function checkUrl(url: string): Promise<boolean> {
 
     const req = client.get(url, (res) => {
       res.resume();
-      resolve(Boolean(res.statusCode && res.statusCode < 500));
+
+      const status = res.statusCode ?? 500;
+
+      resolve(status < 500);
     });
 
     req.setTimeout(HEALTH_TIMEOUT_MS, () => {
@@ -43,7 +48,10 @@ function checkUrl(url: string): Promise<boolean> {
 }
 
 async function superviseOnce() {
-  if (sweeping) return;
+  if (sweeping) {
+    return;
+  }
+
   sweeping = true;
 
   try {
@@ -51,14 +59,21 @@ async function superviseOnce() {
 
     for (const runtime of runtimes) {
       const projectId = runtime.projectId;
+      const runtimeAge = Date.now() - runtime.startedAt;
 
       if (!runtime.pid || !isPidAlive(runtime.pid)) {
-        appendRuntimeLog(projectId, "[lumina-runtime] supervisor detected dead process");
+        appendRuntimeLog(
+          projectId,
+          "[lumina-runtime] supervisor detected dead process",
+        );
+
         runtime.status = "exited";
         runtime.exitedAt = Date.now();
         runtime.lastError = "supervisor_process_not_alive";
+
         removeRuntime(projectId);
         healthState.delete(projectId);
+
         continue;
       }
 
@@ -66,7 +81,12 @@ async function superviseOnce() {
         continue;
       }
 
+      if (runtimeAge < STARTUP_GRACE_PERIOD_MS) {
+        continue;
+      }
+
       const healthy = await checkUrl(runtime.url);
+
       const current =
         healthState.get(projectId) ?? {
           failedChecks: 0,
@@ -74,38 +94,51 @@ async function superviseOnce() {
         };
 
       current.lastCheckedAt = Date.now();
-      current.failedChecks = healthy ? 0 : current.failedChecks + 1;
+
+      if (healthy) {
+        current.failedChecks = 0;
+        current.firstFailureAt = undefined;
+
+        healthState.set(projectId, current);
+
+        continue;
+      }
+
+      current.failedChecks += 1;
+
+      if (!current.firstFailureAt) {
+        current.firstFailureAt = Date.now();
+      }
+
       healthState.set(projectId, current);
 
-      if (!healthy) {
-        appendRuntimeLog(
-          projectId,
-          `[lumina-runtime] supervisor health check failed ${current.failedChecks}/${MAX_FAILED_HEALTH_CHECKS}`,
-        );
+      appendRuntimeLog(
+        projectId,
+        `[lumina-runtime] health check failed ${current.failedChecks}/${MAX_FAILED_HEALTH_CHECKS}`,
+      );
+
+      if (current.failedChecks < MAX_FAILED_HEALTH_CHECKS) {
+        continue;
       }
 
-      if (current.failedChecks >= MAX_FAILED_HEALTH_CHECKS) {
-        runtime.status = "error";
-        runtime.lastError = "runtime_health_check_failed";
-        runtime.exitedAt = Date.now();
+      runtime.status = "error";
+      runtime.lastError = "runtime_health_check_failed";
+      runtime.exitedAt = Date.now();
 
-        appendRuntimeLog(projectId, "[lumina-runtime] supervisor marked runtime unhealthy");
+      appendRuntimeLog(projectId, "[lumina-runtime] runtime marked unhealthy");
 
-        try {
-          if (runtime.pid) {
-            process.kill(-runtime.pid, "SIGTERM");
-          }
-        } catch {
-          try {
-            runtime.process.kill("SIGTERM");
-          } catch {
-            // Process may already be gone.
-          }
+      try {
+        if (runtime.pid) {
+          process.kill(-runtime.pid, "SIGTERM");
+        } else {
+          runtime.process.kill("SIGTERM");
         }
-
-        removeRuntime(projectId);
-        healthState.delete(projectId);
+      } catch {
+        // Process may already be gone.
       }
+
+      removeRuntime(projectId);
+      healthState.delete(projectId);
     }
   } finally {
     sweeping = false;
@@ -113,7 +146,9 @@ async function superviseOnce() {
 }
 
 export function startRuntimeSupervisor() {
-  if (interval) return;
+  if (interval) {
+    return;
+  }
 
   interval = setInterval(() => {
     void superviseOnce();
@@ -125,7 +160,9 @@ export function startRuntimeSupervisor() {
 }
 
 export function stopRuntimeSupervisor() {
-  if (!interval) return;
+  if (!interval) {
+    return;
+  }
 
   clearInterval(interval);
   interval = null;
