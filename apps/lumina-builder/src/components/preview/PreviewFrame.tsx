@@ -812,10 +812,10 @@ const [iframeError, setIframeError] =
 
         <div className="flex h-full min-h-0 w-full items-center justify-center overflow-hidden">
           <div
-            className={cn(
-              "relative flex h-full min-h-0 items-center justify-center transition-all duration-500 ease-fluid",
-              widthMap[device],
-            )}
+            className="relative flex h-full min-h-0 w-full items-center justify-center transition-all duration-500 ease-fluid"
+            style={{
+              maxWidth: widthMap[device],
+            }}
           >
             <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl" />
 
