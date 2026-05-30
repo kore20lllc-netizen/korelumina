@@ -311,7 +311,7 @@ function DesignerWorkspaceInner() {
       </aside>
 
       {/* Center: canvas / preview */}
-      <div className="relative flex flex-1 min-h-[420px] lg:min-h-0 overflow-hidden">
+      <div className="relative grid place-items-center flex-1 min-h-[420px] lg:min-h-0 overflow-x-auto">
         <PreviewFrame url={runtimeUrl}>
            <DesignerCanvas />
         </PreviewFrame>
