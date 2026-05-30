@@ -1017,7 +1017,7 @@ export function DeveloperWorkspace() {
           </div>
         </div>
 
-        <div className="relative flex h-full min-h-[420px] lg:min-h-0 w-full lg:w-[380px] xl:w-[460px] shrink-0 overflow-hidden">
+        <div className="relative flex h-full min-h-[420px] lg:min-h-0 w-full lg:w-[45%] xl:w-[50%] shrink-0 overflow-hidden">
           <PreviewFrame
             url={runtimeUrl}
           />
