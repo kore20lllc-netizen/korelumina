@@ -802,7 +802,7 @@ export function DeveloperWorkspace() {
 
         {/* Preview */}
         <div className="w-full lg:w-[380px] xl:w-[460px] shrink-0 min-h-[300px]">
-          <PreviewFrame url="localhost:5173" />
+          <PreviewFrame url="localhost:5173" projectId={activeProject?.id} />
         </div>
       </div>
 

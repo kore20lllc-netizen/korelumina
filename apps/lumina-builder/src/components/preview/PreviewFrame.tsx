@@ -1,6 +1,7 @@
 import { RotateCw, ExternalLink, Smartphone, Monitor, Tablet, Lock, Maximize2, Minimize2, Settings, Globe, Lock as LockIcon, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { connectRuntimeEvents, type RuntimeEvent } from "@/services/runtimeEvents";
 import { useProjectSettings } from "@/hooks/use-project-settings";
 import { ProjectSettingsDialog } from "@/components/preview/ProjectSettingsDialog";
 import { PREVIEW_HOST } from "@/lib/projectSettings";
@@ -20,9 +21,11 @@ type Device = "desktop" | "tablet" | "mobile";
 export function PreviewFrame({
   url,
   children,
+  projectId,
 }: {
   url?: string;
   children?: React.ReactNode;
+  projectId?: string;
 }) {
   const [device, setDevice] = useState<Device>("desktop");
   const [reloading, setReloading] = useState(false);
@@ -35,6 +38,7 @@ export function PreviewFrame({
   const { slug } = useProjectSettings();
   const [role] = useCurrentRole();
   const caps = getCapabilities(role);
+  const reloadTimeoutRef = useRef<number | null>(null);
 
   const promptUpgrade = (reason: UpgradeReason) => {
     setPendingUpgradeAction(reason, slug);
@@ -168,6 +172,49 @@ export function PreviewFrame({
     }
     setTimeout(() => setReloading(false), 700);
   };
+
+  // Auto-reload on file changes (debounced)
+  useEffect(() => {
+    if (!projectId || !navigableUrl) return;
+
+    const disconnect = connectRuntimeEvents(
+      (event: RuntimeEvent) => {
+        // Only react to events for this project
+        if (event.projectId !== projectId) return;
+
+        // File changed - debounce reload to avoid flicker on multi-file saves
+        if (event.type === "runtime:file-changed") {
+          if (reloadTimeoutRef.current) {
+            window.clearTimeout(reloadTimeoutRef.current);
+          }
+          
+          reloadTimeoutRef.current = window.setTimeout(() => {
+            setReloading(true);
+            setIframeKey((k) => k + 1);
+            setTimeout(() => setReloading(false), 700);
+            reloadTimeoutRef.current = null;
+          }, 500); // 500ms debounce
+        }
+
+        // Runtime state changed to running - reload to show new version
+        if (event.type === "runtime:state" && event.state === "running") {
+          setReloading(true);
+          setIframeKey((k) => k + 1);
+          setTimeout(() => setReloading(false), 700);
+        }
+      },
+      () => {
+        // Connection lost - no action needed, useRuntimeBoot handles reconnection
+      }
+    );
+
+    return () => {
+      disconnect();
+      if (reloadTimeoutRef.current) {
+        window.clearTimeout(reloadTimeoutRef.current);
+      }
+    };
+  }, [projectId, navigableUrl]);
 
   const handleOpenExternal = () => {
     if (navigableUrl) window.open(navigableUrl, "_blank", "noopener,noreferrer");

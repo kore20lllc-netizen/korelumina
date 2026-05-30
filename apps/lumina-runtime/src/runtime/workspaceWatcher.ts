@@ -2,6 +2,7 @@ import path from "node:path";
 import chokidar, { type FSWatcher } from "chokidar";
 
 import { publishFileChanged } from "./fsEvents";
+import { runtimeState } from "./runtimeState";
 
 const watchers = new Map<string, FSWatcher>();
 
@@ -50,17 +51,21 @@ export function watchWorkspace(
   });
 
   const publish = (filePath: string) => {
-  const relativePath = normalizeRelativePath(projectPath, filePath);
+    const relativePath = normalizeRelativePath(projectPath, filePath);
 
-  if (!relativePath || shouldIgnore(relativePath)) {
-    return;
-  }
+    if (!relativePath || shouldIgnore(relativePath)) {
+      return;
+    }
 
-  publishFileChanged({
-    projectId,
-    file: relativePath,
-  });
-};
+    // Publish to event bus for preview refresh
+    publishFileChanged({
+      projectId,
+      file: relativePath,
+    });
+
+    // Record in unified state for tracking
+    runtimeState.recordPreviewChange(projectId, relativePath, "change");
+  };
 
 watcher.on("add", publish);
 watcher.on("change", publish);

@@ -596,6 +596,9 @@ async function startProjectInternal(
       projectId,
     );
 
+    // Start watching workspace for file changes
+    watchWorkspace(projectId, projectPath);
+
     appendRuntimeLog(
       projectId,
       `[lumina-runtime] ready ${runtime.url}`,
