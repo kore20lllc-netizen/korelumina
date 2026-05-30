@@ -803,14 +803,14 @@ const [iframeError, setIframeError] =
         </button>
       </div>
       {/* Preview viewport */}
-      <div className="relative min-h-0 flex-1 overflow-hidden rounded-3xl glass-strong p-4 md:p-6">
+      <div className="relative min-h-0 flex-1 rounded-3xl glass-strong p-4 md:p-6">
         {(reloading || !iframeLoaded) && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#050816]/40 text-sm text-white/80 backdrop-blur-sm">
             Rendering preview...
           </div>
         )}
 
-        <div className="flex h-full min-h-0 w-full items-center justify-center overflow-hidden">
+        <div className="flex h-full min-h-0 w-full items-center justify-center">
           <div
             className="relative flex h-full min-h-0 max-w-full items-center justify-center transition-all duration-500 ease-fluid"
             style={{
