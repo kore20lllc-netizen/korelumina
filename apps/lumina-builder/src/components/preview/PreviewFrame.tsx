@@ -63,9 +63,9 @@ type PreviewFrameProps = {
 };
 
 const widthMap: Record<Device, string> = {
-  desktop: "w-full h-full",
-  tablet: "w-[768px] max-w-full h-full",
-  mobile: "w-[390px] max-w-full h-full",
+  desktop: "100%",
+  tablet: "768px",
+  mobile: "390px",
 };
 
 const LOCK_TOOLTIPS: Record<
