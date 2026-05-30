@@ -16,6 +16,12 @@ import {
   type PublicRuntimeRecord,
 } from "./registry";
 import { waitForRuntime } from "./waitForRuntime";
+import { watchWorkspace } from "./workspaceWatcher";
+import {
+  acquireRuntimeLock,
+  getRuntimeLock,
+  releaseRuntimeLock,
+} from "./runtimeLock";
 
 const pendingStarts = new Map<
   string,
@@ -180,6 +186,41 @@ export async function startProject(
   assertSafeProjectId(
     projectId,
   );
+
+  const existingLock =
+    getRuntimeLock(
+      projectId,
+    );
+
+  if (
+    existingLock?.pid
+  ) {
+    try {
+      process.kill(
+        existingLock.pid,
+        0,
+      );
+
+      const lockedRuntime =
+        getRuntime(
+          projectId,
+        );
+
+      if (lockedRuntime) {
+        return serializeRuntime(
+          lockedRuntime,
+        );
+      }
+
+      throw new Error(
+        "runtime_lock_exists",
+      );
+    } catch {
+      releaseRuntimeLock(
+        projectId,
+      );
+    }
+  }
 
   const existing =
     getRuntime(projectId);
@@ -578,6 +619,10 @@ async function startProjectInternal(
     appendRuntimeLog(
       projectId,
       `[lumina-runtime] failed ${runtime.lastError}`,
+    );
+
+    releaseRuntimeLock(
+      projectId,
     );
 
     try {
