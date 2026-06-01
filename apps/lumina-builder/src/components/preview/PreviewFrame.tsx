@@ -1,7 +1,7 @@
+import React from "react";
 import { RotateCw, ExternalLink, Smartphone, Monitor, Tablet, Lock, Maximize2, Minimize2, Settings, Globe, Lock as LockIcon, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { connectRuntimeEvents, type RuntimeEvent } from "@/services/runtimeEvents";
 import { connectRuntimeEvents, type RuntimeEvent } from "@/services/runtimeEvents";
 import { useProjectSettings } from "@/hooks/use-project-settings";
 import { ProjectSettingsDialog } from "@/components/preview/ProjectSettingsDialog";
@@ -217,49 +217,6 @@ export function PreviewFrame({
     };
   }, [projectId, navigableUrl]);
 
-  // Auto-reload on file changes (debounced)
-  useEffect(() => {
-    if (!projectId || !navigableUrl) return;
-
-    const disconnect = connectRuntimeEvents(
-      (event: RuntimeEvent) => {
-        // Only react to events for this project
-        if (event.projectId !== projectId) return;
-
-        // File changed - debounce reload to avoid flicker on multi-file saves
-        if (event.type === "runtime:file-changed") {
-          if (reloadTimeoutRef.current) {
-            window.clearTimeout(reloadTimeoutRef.current);
-          }
-          
-          reloadTimeoutRef.current = window.setTimeout(() => {
-            setReloading(true);
-            setIframeKey((k) => k + 1);
-            setTimeout(() => setReloading(false), 700);
-            reloadTimeoutRef.current = null;
-          }, 500); // 500ms debounce
-        }
-
-        // Runtime state changed to running - reload to show new version
-        if (event.type === "runtime:state" && event.state === "running") {
-          setReloading(true);
-          setIframeKey((k) => k + 1);
-          setTimeout(() => setReloading(false), 700);
-        }
-      },
-      () => {
-        // Connection lost - no action needed, useRuntimeBoot handles reconnection
-      }
-    );
-
-    return () => {
-      disconnect();
-      if (reloadTimeoutRef.current) {
-        window.clearTimeout(reloadTimeoutRef.current);
-      }
-    };
-  }, [projectId, navigableUrl]);
-
   const handleOpenExternal = () => {
     if (navigableUrl) window.open(navigableUrl, "_blank", "noopener,noreferrer");
   };
@@ -287,10 +244,10 @@ export function PreviewFrame({
   }, [fullscreen]);
 
   const widthMap: Record<Device, string> = {
-    desktop: "w-full h-full",
-    tablet: "w-[768px] max-w-full h-full",
-    mobile: "w-[390px] max-w-full h-full",
-  };
+  desktop: "w-full h-full",
+  tablet: "w-full max-w-[768px] h-full",
+  mobile: "w-full max-w-[390px] h-full",
+};
 
   return (
     <div
@@ -364,7 +321,7 @@ export function PreviewFrame({
             title="Embedded preview (included on all plans)"
           >
             <Monitor className="h-3.5 w-3.5" />
-            <span>Embedded</span>
+            <span className="hidden 2xl:inline">Embedded</span>
           </div>
           {caps.fullscreenPreview ? (
             <button
@@ -375,7 +332,7 @@ export function PreviewFrame({
               aria-label="Fullscreen preview"
             >
               <Maximize2 className="h-3.5 w-3.5" />
-              <span>Fullscreen</span>
+              <span className="hidden 2xl:inline">Fullscreen</span>
             </button>
           ) : (
             <LockedTooltip feature="fullscreen">
@@ -385,7 +342,7 @@ export function PreviewFrame({
                 aria-label="Fullscreen preview — locked, upgrade to Pro"
               >
                 <Maximize2 className="h-3.5 w-3.5" />
-                <span>Fullscreen</span>
+                <span className="hidden 2xl:inline">Fullscreen</span>
                 <LockIcon className="h-3 w-3 text-gold" />
               </button>
             </LockedTooltip>
@@ -397,7 +354,7 @@ export function PreviewFrame({
               aria-label="Browser preview"
             >
               <Globe className="h-3.5 w-3.5" />
-              <span>Browser</span>
+              <span className="hidden 2xl:inline">Browser</span>
             </button>
           ) : (
             <LockedTooltip feature="browser">
@@ -407,7 +364,7 @@ export function PreviewFrame({
                 aria-label="Browser preview — locked, upgrade to Pro"
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span>Browser</span>
+                <span className="hidden 2xl:inline">Browser</span>
                 <LockIcon className="h-3 w-3 text-gold" />
               </button>
             </LockedTooltip>
@@ -473,29 +430,22 @@ export function PreviewFrame({
         </button>
       </div>
 
-      {/* Preview viewport */}
-      <div className="flex-1 min-h-0 relative rounded-3xl overflow-hidden glass-strong p-4 md:p-6 grid place-items-center">
-        <div
-          className={cn(
-            "relative transition-all duration-500 ease-fluid",
-            widthMap[device]
+                  {/* Preview viewport */}
+      <div className="flex-1 min-h-0 relative rounded-3xl overflow-hidden glass-strong flex items-center justify-center">
+        <div className="absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl pointer-events-none" />
+        <div className="relative h-full w-full flex items-center justify-center overflow-hidden">
+          {navigableUrl ? (
+            <ScaledIframe
+              src={navigableUrl}
+              iframeRef={iframeRef}
+              iframeKey={iframeKey}
+              device={device}
+            />
+          ) : (
+            <div className="relative h-full w-full rounded-2xl overflow-hidden bg-background border border-border shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]">
+              {children ?? <PreviewSkeleton />}
+            </div>
           )}
-        >
-          <div className="absolute -inset-2 rounded-3xl bg-button-lumina opacity-20 blur-2xl pointer-events-none" />
-          <div className="relative h-full w-full rounded-2xl overflow-hidden bg-background border border-border shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]">
-            {navigableUrl ? (
-              <iframe
-                ref={iframeRef}
-                key={iframeKey}
-                src={navigableUrl}
-                title="Preview"
-                className="block w-full h-full border-0"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              />
-            ) : (
-              children ?? <PreviewSkeleton />
-            )}
-          </div>
         </div>
       </div>
 
@@ -506,6 +456,97 @@ export function PreviewFrame({
         reason={upgradeReason}
         onUpgraded={() => resumeAfterUpgrade(upgradeReason)}
       />
+    </div>
+  );
+}
+
+const DEVICE_WIDTHS: Record<Device, number> = {
+  desktop: 0, // no scaling
+  tablet: 768,
+  mobile: 390,
+};
+
+function ScaledIframe({
+  src,
+  iframeRef,
+  iframeKey,
+  device,
+}: {
+  src: string;
+  iframeRef: React.RefObject<HTMLIFrameElement>;
+  iframeKey: number;
+  device: Device;
+}) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState(1);
+  const [containerSize, setContainerSize] = React.useState({ w: 0, h: 0 });
+
+  const iframeWidth = DEVICE_WIDTHS[device] || null;
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        setContainerSize({ w: width, h: height });
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!iframeWidth || containerSize.w === 0) {
+      setScale(1);
+      return;
+    }
+    setScale(Math.min(1, containerSize.w / iframeWidth));
+  }, [iframeWidth, containerSize.w]);
+
+  if (!iframeWidth) {
+    // Desktop — full width, no scaling
+    return (
+      <div className="relative h-full w-full rounded-2xl overflow-hidden bg-background border border-border shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]">
+        <iframe
+          ref={iframeRef}
+          key={iframeKey}
+          src={src}
+          title="Preview"
+          className="absolute inset-0 block h-full w-full border-0 bg-background"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+        />
+      </div>
+    );
+  }
+
+  const scaledHeight = scale > 0 ? containerSize.h / scale : containerSize.h || 0;
+  return (
+    <div
+      ref={containerRef}
+      className="relative h-full w-full rounded-2xl overflow-hidden bg-background border border-border shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)]"
+    >
+      <div
+        style={{
+          width: iframeWidth,
+          height: scaledHeight || "100%",
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <iframe
+          ref={iframeRef}
+          key={iframeKey}
+          src={src}
+          title="Preview"
+          style={{ width: iframeWidth, height: scaledHeight || "100%" }}
+          className="block border-0 bg-background"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+        />
+      </div>
     </div>
   );
 }

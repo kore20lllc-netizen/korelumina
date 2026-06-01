@@ -10,6 +10,10 @@ import { ai, repo as repoProvider } from "@/providers/api-temp";
 import { auth } from "@/providers/auth-registry";
 import { usage } from "@/providers/usage-registry";
 import { projectRepository } from "@/services/projectRepository";
+import {
+  readRuntimeFile,
+  writeRuntimeFile,
+} from "@/services/runtimeService";
 import { notificationService } from "@/services/notificationService";
 import { requireEntitlement } from "@/services/entitlements";
 import { AppError, normalizeError } from "@/lib/errors";
@@ -99,15 +103,28 @@ export async function importZip(file: File, signal?: AbortSignal): Promise<Impor
 }
 
 export async function readFile(projectId: string, file: string): Promise<FileReadResponse> {
-  const p = projectRepository.get(projectId);
-  if (!p) throw new AppError("NOT_FOUND", "Project not found.");
-  return { path: file, content: p.files?.[file] ?? "" };
+  try {
+    const runtimeFile = await readRuntimeFile(projectId, file);
+
+    return {
+      path: runtimeFile.file,
+      content: runtimeFile.content,
+    };
+  } catch {
+    return {
+      path: file,
+      content: projectRepository.readFile(projectId, file),
+    };
+  }
 }
 
 export async function writeFile(projectId: string, file: string, content: string): Promise<{ ok: true }> {
-  const p = projectRepository.get(projectId);
-  if (!p) throw new AppError("NOT_FOUND", "Project not found.");
-  projectRepository.saveFiles(projectId, { ...(p.files ?? {}), [file]: content });
+  try {
+    await writeRuntimeFile(projectId, file, content);
+  } catch {
+    projectRepository.writeFile(projectId, file, content);
+  }
+
   return { ok: true };
 }
 

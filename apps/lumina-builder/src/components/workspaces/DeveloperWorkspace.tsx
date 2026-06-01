@@ -10,6 +10,7 @@ import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { cn } from "@/lib/utils";
 import { DevAIAssistPanel, DevAIAssistTrigger } from "./dev/DevAIAssistPanel";
 import { TransformButton } from "@/components/transform/TransformButton";
+import { useRuntimeBoot } from "@/hooks/useRuntimeBoot";
 
 export interface EditorSelection {
   text: string;
@@ -127,6 +128,8 @@ export function DeveloperWorkspace() {
   const [openTabs, setOpenTabs] = useState<string[]>(["Home.tsx", "Hero.tsx"]);
   const [active, setActive] = useState("Home.tsx");
   const { setBottomDockOpen, setCommandOpen, activeProject } = useWorkspace();
+  const projectId = activeProject?.id ?? null;
+  const { runtimeUrl } = useRuntimeBoot(projectId);
   // Per-file editable buffers so AI Assist can refactor / insert into them.
   const [buffers, setBuffers] = useState<Record<string, string>>({ "Home.tsx": sampleCode });
   const [aiOpen, setAiOpen] = useState(false);
@@ -339,21 +342,20 @@ export function DeveloperWorkspace() {
   return (
     <div className="flex-1 min-h-0 flex flex-col gap-3 p-4 md:p-6">
       {/* Action bar */}
-      <div className="flex items-center gap-2 anim-in">
-        <LuminaButton size="sm" variant="primary" onClick={() => { setBottomDockOpen(true); toast.success("Build started"); }}>
-          <Play className="h-3.5 w-3.5" />Run
-        </LuminaButton>
+      <div className="flex items-center gap-2 shrink-0">
         <LuminaButton size="sm" variant="ghost" onClick={() => toast.success(`${active} saved`)}>
-          <Save className="h-3.5 w-3.5" />Save
+          <Save className="h-3.5 w-3.5" /><span className="hidden md:inline">Save</span>
         </LuminaButton>
         <LuminaButton size="sm" variant="ghost" onClick={() => toast("Reverted to last saved")}>
-          <RotateCcw className="h-3.5 w-3.5" />Reset
+          <RotateCcw className="h-3.5 w-3.5" /><span className="hidden md:inline">Revert</span>
         </LuminaButton>
         <LuminaButton size="sm" variant="ghost" onClick={() => setCommandOpen(true)} className="hidden md:inline-flex">
-          ⌘K
+          <Search className="h-3.5 w-3.5" />Command
         </LuminaButton>
-        <div className="flex-1" />
-          <TransformButton source="builder" project={activeProject} />
+        <TransformButton source="builder" project={activeProject} />
+        <LuminaButton size="sm" variant="primary" onClick={() => { setBottomDockOpen(true); toast.success("Build started"); }}>
+          <Play className="h-3.5 w-3.5" /><span className="hidden sm:inline">Build</span>
+        </LuminaButton>
       </div>
 
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-3">
@@ -802,7 +804,7 @@ export function DeveloperWorkspace() {
 
         {/* Preview */}
         <div className="w-full lg:w-[380px] xl:w-[460px] shrink-0 min-h-[300px]">
-          <PreviewFrame url="localhost:5173" projectId={activeProject?.id} />
+          <PreviewFrame url={runtimeUrl} projectId={projectId ?? undefined} />
         </div>
       </div>
 
