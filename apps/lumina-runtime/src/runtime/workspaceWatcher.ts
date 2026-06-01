@@ -1,8 +1,8 @@
 import path from "node:path";
 import chokidar, { type FSWatcher } from "chokidar";
 
-import { publishFileChanged } from "./fsEvents";
-import { runtimeState } from "./runtimeState";
+import { publishFileChanged } from "./fsEvents.js";
+import { runtimeState } from "./runtimeState.js";
 
 const watchers = new Map<string, FSWatcher>();
 

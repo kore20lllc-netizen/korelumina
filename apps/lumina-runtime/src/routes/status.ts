@@ -4,7 +4,7 @@ import {
   getRuntime,
   listRuntimes,
   serializeRuntime,
-} from "../runtime/registry";
+} from "../runtime/registry.js";
 
 function runtimeStatusResponse(projectId: string) {
   const runtime = getRuntime(projectId);

@@ -1,6 +1,6 @@
 import type { Express } from "express";
 
-import { startProject } from "../runtime/startProject";
+import { startProject } from "../runtime/startProject.js";
 
 export function registerStartRoute(app: Express) {
   app.post("/api/runtime/start", async (req, res) => {

@@ -3,7 +3,7 @@ import type { Express } from "express";
 import {
   getRuntime,
   stopRuntime,
-} from "../runtime/registry";
+} from "../runtime/registry.js";
 
 function normalizeProjectId(
   value: unknown,

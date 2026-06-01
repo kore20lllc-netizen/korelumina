@@ -6,8 +6,8 @@ import {
   isPidAlive,
   listRuntimes,
   removeRuntime,
-} from "./registry";
-import { runtimeState } from "./runtimeState";
+} from "./registry.js";
+import { runtimeState } from "./runtimeState.js";
 
 const SUPERVISOR_INTERVAL_MS = 5_000;
 const HEALTH_TIMEOUT_MS = 2_500;

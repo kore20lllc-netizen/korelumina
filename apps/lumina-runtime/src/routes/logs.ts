@@ -3,7 +3,7 @@ import type { Express } from "express";
 import {
   getRuntime,
   serializeRuntime,
-} from "../runtime/registry";
+} from "../runtime/registry.js";
 
 export function registerLogsRoute(app: Express) {
   app.get("/api/runtime/logs", (req, res) => {

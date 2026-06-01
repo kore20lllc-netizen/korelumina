@@ -1,7 +1,7 @@
 import type { Express } from "express";
 
-import { stopRuntime } from "../runtime/registry";
-import { startProject } from "../runtime/startProject";
+import { stopRuntime } from "../runtime/registry.js";
+import { startProject } from "../runtime/startProject.js";
 
 function normalizeProjectId(
   value: unknown,

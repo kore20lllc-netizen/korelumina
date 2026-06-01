@@ -1,16 +1,28 @@
 import express from "express";
 import cors from "cors";
 
-import { registerProjectsRoute } from "./routes/projects";
-import { registerStartRoute } from "./routes/start";
-import { registerStatusRoute } from "./routes/status";
-import { registerStopRoute } from "./routes/stop";
-import { registerRestartRoute } from "./routes/restart";
-import { registerLogsRoute } from "./routes/logs";
-import { registerMetricsRoute } from "./routes/metrics";
+import { registerProjectsRoute } from "./routes/projects.js";
+import { registerStartRoute } from "./routes/start.js";
+import { registerStatusRoute } from "./routes/status.js";
+import { registerStopRoute } from "./routes/stop.js";
+import { registerRestartRoute } from "./routes/restart.js";
+import { registerLogsRoute } from "./routes/logs.js";
+import { registerMetricsRoute } from "./routes/metrics.js";
+import { registerEventsRoute } from "./routes/events.js";
+import { registerFsRoute } from "./routes/fs.js";
+import { registerAuditRoute } from "./routes/audit.js";
+import { registerFixPlanRoute } from "./routes/fixPlan.js";
+import { registerGenerateFixesRoute } from "./routes/generateFixes.js";
+import { registerDraftsRoute } from "./routes/drafts.js";
+import { registerRevertDraftRoute } from "./routes/revertDraft.js";
+import { registerCreateDraftRoute } from "./routes/createDraft.js";
+import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 
-import { stopAllRuntimes } from "./runtime/registry";
-import { startRuntimeSupervisor, stopRuntimeSupervisor } from "./runtime/supervisor";
+import { stopAllRuntimes } from "./runtime/registry.js";
+import { startRuntimeSupervisor, stopRuntimeSupervisor } from "./runtime/supervisor.js";
+import { recoverPersistedRuntimes } from "./runtime/recovery.js";
+import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
+import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 
 const app = express();
 
@@ -56,13 +68,59 @@ registerMetricsRoute(
   app,
 );
 
+registerEventsRoute(
+  app,
+);
+
+registerFsRoute(
+  app,
+);
+
+registerAuditRoute(
+  app,
+);
+
+registerFixPlanRoute(
+  app,
+);
+
+registerGenerateFixesRoute(
+  app,
+);
+
+registerDraftsRoute(
+  app,
+);
+
+registerRevertDraftRoute(
+  app,
+);
+
+registerCreateDraftRoute(
+  app,
+);
+
+registerApplyDraftRoute(
+  app,
+);
+
 const PORT =
   Number(
     process.env
       .LUMINA_RUNTIME_PORT,
   ) || 4100;
 
-startRuntimeSupervisor();
+const shouldBootstrap =
+  claimRuntimeBootstrap();
+
+if (shouldBootstrap) {
+  recoverPersistedRuntimes();
+  startRuntimeSupervisor();
+} else {
+  console.warn(
+    "[lumina-runtime] bootstrap already claimed; skipping recovery/supervisor",
+  );
+}
 
 const server =
   app.listen(
@@ -91,6 +149,8 @@ async function shutdown(
   );
 
   stopRuntimeSupervisor();
+
+  await stopAllWorkspaceWatchers();
 
   await stopAllRuntimes();
 

@@ -1,10 +1,13 @@
 import type { Express } from "express";
 
+import { getRuntimeEventClientCount } from "../runtime/eventBus.js";
+import { getWorkspaceWatcherCount } from "../runtime/workspaceWatcher.js";
+
 import {
   isPidAlive,
   listRuntimes,
   serializeRuntime,
-} from "../runtime/registry";
+} from "../runtime/registry.js";
 
 function getMemoryMb() {
   const usage = process.memoryUsage();
@@ -52,6 +55,8 @@ export function registerMetricsRoute(app: Express) {
           memory: getMemoryMb(),
         },
         totals: {
+          eventClients: getRuntimeEventClientCount(),
+          workspaceWatchers: getWorkspaceWatcherCount(),
           runtimes: runtimes.length,
           running: runtimes.filter((r) => r.status === "running").length,
           starting: runtimes.filter((r) => r.status === "starting").length,

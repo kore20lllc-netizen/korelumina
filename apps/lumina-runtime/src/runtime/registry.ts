@@ -1,9 +1,9 @@
 import type { ChildProcess } from "node:child_process";
 
-import { persistRuntimeState, removeRuntimeState } from "./persistence";
-import { publishRuntimeEvent } from "./eventBus";
-import { unwatchWorkspace } from "./workspaceWatcher";
-import { runtimeState } from "./runtimeState";
+import { persistRuntimeState, removeRuntimeState } from "./persistence.js";
+import { publishRuntimeEvent } from "./eventBus.js";
+import { unwatchWorkspace } from "./workspaceWatcher.js";
+import { runtimeState } from "./runtimeState.js";
 
 export type RuntimeStatus =
   | "starting"

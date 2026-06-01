@@ -1,5 +1,5 @@
 import type { Express } from "express";
-import { listProjects } from "../projects/listProjects";
+import { listProjects } from "../projects/listProjects.js";
 
 export function registerProjectsRoute(
   app: Express,

@@ -4,9 +4,9 @@ import { spawn } from "node:child_process";
 
 import getPort from "get-port";
 
-import { detectFramework } from "../detect/detectFramework";
-import { getProjectPath } from "../projects/getProjectPath";
-import { ensureProjectIsolation } from "./ensureProjectIsolation";
+import { detectFramework } from "../detect/detectFramework.js";
+import { getProjectPath } from "../projects/getProjectPath.js";
+import { ensureProjectIsolation } from "./ensureProjectIsolation.js";
 import {
   appendRuntimeLog,
   getRuntime,
@@ -14,14 +14,15 @@ import {
   serializeRuntime,
   setRuntime,
   type PublicRuntimeRecord,
-} from "./registry";
-import { waitForRuntime } from "./waitForRuntime";
-import { watchWorkspace } from "./workspaceWatcher";
+} from "./registry.js";
+import { waitForRuntime } from "./waitForRuntime.js";
+import { watchWorkspace } from "./workspaceWatcher.js";
+import { runLayoutSafetyEngine } from "./layoutSafetyEngine.js";
 import {
   acquireRuntimeLock,
   getRuntimeLock,
   releaseRuntimeLock,
-} from "./runtimeLock";
+} from "./runtimeLock.js";
 
 const pendingStarts = new Map<
   string,
@@ -345,6 +346,8 @@ async function startProjectInternal(
   ensureProjectIsolation(
     projectPath,
   );
+
+  runLayoutSafetyEngine(projectId, projectPath);
 
   assertProjectReady(
     projectPath,
