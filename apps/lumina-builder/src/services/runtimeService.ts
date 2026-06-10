@@ -293,73 +293,80 @@ export function connectRuntimeEvents(
   };
 }
 
-export interface RuntimeFileRead {
-  ok?: boolean;
-  projectId?: string;
+export interface RuntimeFileListResponse {
+  ok: boolean;
+  projectId: string;
+  files: string[];
+  error?: string;
+}
+
+export interface RuntimeFileReadResponse {
+  ok: boolean;
+  projectId: string;
   file: string;
   content: string;
+  sha256: string;
+  error?: string;
+}
+
+export interface RuntimeFileWriteResponse {
+  ok: boolean;
+  projectId: string;
+  file: string;
   sha256?: string;
+  currentSha256?: string;
+  error?: string;
+}
+
+export async function listRuntimeFiles(projectId: string): Promise<string[]> {
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/fs/list?projectId=${encodeURIComponent(projectId)}`,
+  );
+
+  const data = (await response.json()) as RuntimeFileListResponse;
+
+  if (!response.ok || !data.ok) {
+    throw new Error(data.error ?? "failed_to_list_files");
+  }
+
+  return Array.isArray(data.files) ? data.files : [];
 }
 
 export async function readRuntimeFile(
   projectId: string,
   file: string,
-): Promise<RuntimeFileRead> {
-  const response =
-    await fetch(
-      `${RUNTIME_API}/api/runtime/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
-    );
+): Promise<RuntimeFileReadResponse> {
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
+  );
 
-  const data =
-    await response.json();
+  const data = (await response.json()) as RuntimeFileReadResponse;
 
-  if (!response.ok || !data?.ok) {
-    throw new Error(
-      data?.error ??
-        "Failed to read runtime file",
-    );
+  if (!response.ok || !data.ok) {
+    throw new Error(data.error ?? "failed_to_read_file");
   }
 
-  return data as RuntimeFileRead;
+  return data;
 }
 
-export async function writeRuntimeFile(
-  projectId: string,
-  file: string,
-  content: string,
-  expectedSha256?: string,
-): Promise<{
-  ok: true;
+export async function writeRuntimeFile(input: {
   projectId: string;
   file: string;
-  sha256: string;
-}> {
-  const response =
-    await fetch(
-      `${RUNTIME_API}/api/runtime/fs/write`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: JSON.stringify({
-          projectId,
-          file,
-          content,
-          expectedSha256,
-        }),
-      },
-    );
+  content: string;
+  expectedSha256?: string;
+}): Promise<RuntimeFileWriteResponse> {
+  const response = await fetch(`${RUNTIME_API}/api/runtime/fs/write`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
 
-  const data =
-    await response.json();
+  const data = (await response.json()) as RuntimeFileWriteResponse;
 
-  if (!response.ok || !data?.ok) {
-    throw new Error(
-      data?.error ??
-        "Failed to write runtime file",
-    );
+  if (!response.ok || !data.ok) {
+    throw new Error(data.error ?? "failed_to_write_file");
   }
 
   return data;
