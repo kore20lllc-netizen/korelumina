@@ -4,7 +4,8 @@ export type WorkspaceRole =
   | "business"
   | "enterprise"
   | "inhouse-dev"
-  | "admin";
+  | "admin"
+  | "super_admin";
 
 export interface WorkspaceCapabilities {
   dashboard: boolean;
@@ -68,6 +69,7 @@ export function setCurrentRole(role: WorkspaceRole) {
 
 export function getCapabilities(role: WorkspaceRole = getCurrentRole()): WorkspaceCapabilities {
   switch (role) {
+    case "super_admin":
     case "admin":
       return {
         dashboard: true, designer: true, developer: true, ai: true,
