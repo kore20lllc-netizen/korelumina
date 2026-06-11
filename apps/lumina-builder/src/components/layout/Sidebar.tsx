@@ -66,7 +66,8 @@ export function Sidebar() {
   // Admin-only group (Repo Audit, In-House Dev, Admin) is rendered as a
   // separate, labeled section below the main nav — visible only to admins.
   const adminItems: NavItemDef[] =
-    role === "admin" && view !== "workspace"
+    (role === "admin" || role === "super_admin") &&
+    view !== "workspace"
       ? [
           { icon: Activity, label: "Repo Audit", active: view === "repo-audit" },
           { icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" },
