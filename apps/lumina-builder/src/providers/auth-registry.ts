@@ -1,3 +1,4 @@
+import { MockAuthProvider } from "@/providers/auth/MockAuthProvider";
 import { SupabaseAuthProvider } from "@/providers/auth/SupabaseAuthProvider";
 import type { AuthProvider } from "@/providers/types";
 
@@ -6,17 +7,28 @@ const env =
     env?: Record<string, string | boolean | undefined>;
   }).env ?? {};
 
-// Allow app to run in development without strict auth requirements
-if (env.PROD === true && env.VITE_USE_REAL_AUTH !== "true") {
+const isProduction =
+  env.PROD === true ||
+  env.MODE === "production";
+
+const useRealAuth =
+  env.VITE_USE_REAL_AUTH === "true";
+
+const allowMockProviders =
+  env.VITE_ALLOW_MOCK_PROVIDERS === "true";
+
+if (isProduction && !useRealAuth) {
   throw new Error(
     "[KoreLumina] Real auth is required in production. Set VITE_USE_REAL_AUTH=true.",
   );
 }
 
-if (env.PROD === true && env.VITE_ALLOW_MOCK_PROVIDERS === "true") {
+if (isProduction && allowMockProviders) {
   throw new Error(
     "[KoreLumina] Mock providers are forbidden in production.",
   );
 }
 
-export const auth: AuthProvider = new SupabaseAuthProvider();
+export const auth: AuthProvider = useRealAuth
+  ? new SupabaseAuthProvider()
+  : new MockAuthProvider();
