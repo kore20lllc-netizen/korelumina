@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 8080",
+    "dev:runtime": "tsx watch src/runtime/runtime-server.ts",
+    "dev:all": "concurrently -k \"npm run dev\" \"npm run dev:runtime\"",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "test": "vitest run"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -27,25 +30,32 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
     "embla-carousel-react": "^8.6.0",
+    "express": "^5.1.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8",
     "lucide-react": "^0.462.0",
+    "monaco-editor": "^0.55.1",
     "next-themes": "^0.4.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.1",
-    "recharts": "^3.8.1",
+    "recharts": "^3.0.2",
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.8.3",
-    "vite": "^5.4.19"
+    "vite": "^5.4.21"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "postcss": "^8.5.15",
-    "tailwindcss": "^3.4.17"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.22.3"
   }
 }

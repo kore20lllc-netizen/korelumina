@@ -24,8 +24,10 @@ const ROLES: { id: WorkspaceRole; label: string; description: string }[] = [
   { id: "user",        label: "User",         description: "Free tier. Core build tools only." },
   { id: "pro",         label: "Pro",          description: "Pro tier. Core build tools only." },
   { id: "business",    label: "Business",     description: "Team tier. Collaboration and shared workspaces." },
-  { id: "enterprise",  label: "Enterprise",   description: "Enterprise tier. Includes in-house Repo Audit access." },
-  { id: "inhouse-dev", label: "In-house dev", description: "Super admin. Unlocks every capability." },
+  { id: "enterprise",  label: "Enterprise",   description: "Enterprise tier. Includes enterprise preview controls." },
+  { id: "inhouse-dev", label: "In-house dev", description: "Internal engineering tools, diagnostics, and repair surfaces." },
+  { id: "admin",       label: "Admin",        description: "Platform operations: users, billing, projects, providers, and audit logs." },
+  { id: "super_admin", label: "Super admin",  description: "Platform owner. Full access to admin and internal engineering surfaces." },
 ];
 
 const CAPS: { key: keyof WorkspaceCapabilities; label: string }[] = [
@@ -44,7 +46,7 @@ export function RoleSwitcher() {
   const [role, setRole] = useCurrentRole();
   const caps = getCapabilities(role);
   const current = ROLES.find((r) => r.id === role)!;
-  const [pendingInhouse, setPendingInhouse] = useState(false);
+  const [pendingRole, setPendingRole] = useState<WorkspaceRole | null>(null);
 
   const applyRole = (next: WorkspaceRole) => {
     setRole(next);
@@ -73,8 +75,8 @@ export function RoleSwitcher() {
               key={r.id}
               onClick={() => {
                 if (r.id === role) return;
-                if (r.id === "inhouse-dev") {
-                  setPendingInhouse(true);
+                if (r.id === "inhouse-dev" || r.id === "admin" || r.id === "super_admin") {
+                  setPendingRole(r.id);
                   return;
                 }
                 applyRole(r.id);
@@ -108,19 +110,18 @@ export function RoleSwitcher() {
         })}
       </div>
 
-      <AlertDialog open={pendingInhouse} onOpenChange={setPendingInhouse}>
+      <AlertDialog open={pendingRole !== null} onOpenChange={(open) => { if (!open) setPendingRole(null); }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Switch to In-house dev?</AlertDialogTitle>
+            <AlertDialogTitle>Switch to privileged role?</AlertDialogTitle>
             <AlertDialogDescription>
-              This grants super-admin access and unlocks every capability, including admin tools,
-              repair console, and deployment diagnostics. Only switch if you intend to test or use
-              privileged surfaces.
+              This grants privileged access for testing protected platform surfaces. Only switch
+              if you intend to test admin, super-admin, diagnostics, or internal engineering tools.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => applyRole("inhouse-dev")}>
+            <AlertDialogAction onClick={() => { if (pendingRole) applyRole(pendingRole); setPendingRole(null); }}>
               Grant super admin
             </AlertDialogAction>
           </AlertDialogFooter>

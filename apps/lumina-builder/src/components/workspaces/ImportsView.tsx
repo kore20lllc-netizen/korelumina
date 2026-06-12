@@ -16,6 +16,13 @@ import {
   Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  getRuntimeLogs,
+  getRuntimeStatus,
+  restartRuntime,
+  startRuntime,
+  stopRuntime,
+} from "@/services/runtimeService";
 
 const statusStyle = {
   live: "bg-cyan/10 text-cyan border-cyan/25",
@@ -190,6 +197,9 @@ export function ImportsView() {
   const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialPrefs.timeFilter);
   const [sortDir, setSortDir] = useState<SortDir>(initialPrefs.sortDir);
   const [tzMode, setTzMode] = useState<TzMode>(loadTzMode);
+  const [runtimeLogs, setRuntimeLogs] = useState<Record<string, string[]>>({});
+  const [runtimeBusy, setRuntimeBusy] = useState<Record<string, string>>({});
+  const [runtimeUrls, setRuntimeUrls] = useState<Record<string, string>>({});
 
   useEffect(() => {
     try {
@@ -364,6 +374,87 @@ export function ImportsView() {
     cold: "bg-muted-foreground/40",
     warm: "bg-gold shadow-[0_0_8px_hsl(var(--gold))]",
     live: "bg-cyan shadow-[0_0_8px_hsl(var(--cyan))]",
+  };
+
+  const runtimeProjectId = (p: Project) => p.projectId ?? p.id;
+
+  const loadRuntimePreview = async (p: Project) => {
+    const id = runtimeProjectId(p);
+
+    try {
+      const [status, logs] = await Promise.all([
+        getRuntimeStatus(id).catch(() => null),
+        getRuntimeLogs(id).catch(() => []),
+      ]);
+
+      setRuntimeLogs((prev) => ({
+        ...prev,
+        [id]: logs.slice(-8).map((line) => String(line)),
+      }));
+
+      if (status?.url) {
+        setRuntimeUrls((prev) => ({
+          ...prev,
+          [id]: status.url,
+        }));
+      }
+    } catch {
+      setRuntimeLogs((prev) => ({
+        ...prev,
+        [id]: [],
+      }));
+    }
+  };
+
+  const runRuntimeAction = async (
+    p: Project,
+    action: "start" | "restart" | "stop" | "open",
+  ) => {
+    const id = runtimeProjectId(p);
+
+    setRuntimeBusy((prev) => ({
+      ...prev,
+      [id]: action,
+    }));
+
+    try {
+      if (action === "stop") {
+        await stopRuntime(id);
+        toast.success("Runtime stopped", { description: p.name });
+        setRuntimeUrls((prev) => {
+          const next = { ...prev };
+          delete next[id];
+          return next;
+        });
+      } else if (action === "restart") {
+        const runtime = await restartRuntime(id);
+        if (runtime.url) {
+          setRuntimeUrls((prev) => ({ ...prev, [id]: runtime.url }));
+        }
+        toast.success("Runtime restarted", { description: p.name });
+      } else {
+        const runtime = await startRuntime(id);
+        if (runtime.url) {
+          setRuntimeUrls((prev) => ({ ...prev, [id]: runtime.url }));
+          if (action === "open") window.open(runtime.url, "_blank", "noopener,noreferrer");
+        }
+        toast.success(action === "open" ? "Runtime opened" : "Runtime started", {
+          description: p.name,
+        });
+      }
+
+      await loadRuntimePreview(p);
+    } catch (error) {
+      toast.error("Runtime action failed", {
+        description: error instanceof Error ? error.message : p.name,
+      });
+    } finally {
+      setRuntimeBusy((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+    }
   };
 
   const openProject = (p: Project) => { setActiveProject(p); setView("workspace"); };
@@ -548,7 +639,7 @@ export function ImportsView() {
               const SrcIcon = src.icon;
               const isSelected = selectedId === p.id;
               return (
-              <HoverCard key={p.id} openDelay={250} closeDelay={80}>
+              <HoverCard key={p.id} openDelay={250} closeDelay={80} onOpenChange={(open) => { if (open) void loadRuntimePreview(p); }}>
                 <HoverCardTrigger asChild>
               <div
                 role="button"
@@ -643,24 +734,97 @@ export function ImportsView() {
                 </div>
               </div>
                 </HoverCardTrigger>
-                <HoverCardContent side="top" align="start" className="w-72 p-0 glass-strong border-border overflow-hidden">
-                  <div className="px-4 py-3 border-b border-border/60">
-                    <div className="font-display font-semibold text-[13px] truncate">{p.name}</div>
-                    <div className="text-[11px] text-muted-foreground mt-0.5">Quick preview</div>
-                  </div>
-                  <div className="p-3 space-y-2 text-[12px]">
-                    <DetailRow icon={Activity} label="Status" value={<span className="capitalize">{p.status}</span>} />
-                    <DetailRow icon={Clock} label="Edited" value={
-                      <time dateTime={toIso(p.lastEditedAt)} title={formatExactDateTime(p.lastEditedAt, tzMode)}>
-                        {p.lastEdited}
-                      </time>
-                    } />
-                    <DetailRow icon={SrcIcon} label="Source" value={src.label} />
-                    {p.runtime && <DetailRow icon={GitBranch} label="Runtime" value={<span className="capitalize">{p.runtime}</span>} />}
-                  </div>
-                  <div className="px-3 pb-3 pt-1 text-[11px] text-muted-foreground">
-                    Click to pin details · Double-click to open
-                  </div>
+                <HoverCardContent side="top" align="start" className="w-[360px] p-0 glass-strong border-border overflow-hidden">
+                  {(() => {
+                    const rid = runtimeProjectId(p);
+                    const logs = runtimeLogs[rid] ?? [];
+                    const busy = runtimeBusy[rid];
+                    const runtimeUrl = runtimeUrls[rid];
+
+                    return (
+                      <>
+                        <div className="px-4 py-3 border-b border-border/60">
+                          <div className="font-display font-semibold text-[13px] truncate">{p.name}</div>
+                          <div className="text-[11px] text-muted-foreground mt-0.5">
+                            Runtime inspector · {rid}
+                          </div>
+                        </div>
+
+                        <div className="p-3 space-y-2 text-[12px]">
+                          <DetailRow icon={Activity} label="Status" value={<span className="capitalize">{p.status}</span>} />
+                          <DetailRow icon={Clock} label="Edited" value={
+                            <time dateTime={toIso(p.lastEditedAt)} title={formatExactDateTime(p.lastEditedAt, tzMode)}>
+                              {p.lastEdited}
+                            </time>
+                          } />
+                          <DetailRow icon={SrcIcon} label="Source" value={src.label} />
+                          {p.runtime && <DetailRow icon={GitBranch} label="Runtime" value={<span className="capitalize">{p.runtime}</span>} />}
+                        </div>
+
+                        <div className="px-3 pb-3">
+                          <div className="grid grid-cols-4 gap-1.5">
+                            <button
+                              type="button"
+                              disabled={!!busy}
+                              onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "start"); }}
+                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                            >
+                              {busy === "start" ? "..." : "Start"}
+                            </button>
+                            <button
+                              type="button"
+                              disabled={!!busy}
+                              onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "restart"); }}
+                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                            >
+                              {busy === "restart" ? "..." : "Restart"}
+                            </button>
+                            <button
+                              type="button"
+                              disabled={!!busy}
+                              onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "stop"); }}
+                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                            >
+                              {busy === "stop" ? "..." : "Stop"}
+                            </button>
+                            <button
+                              type="button"
+                              disabled={!!busy}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (runtimeUrl) window.open(runtimeUrl, "_blank", "noopener,noreferrer");
+                                else void runRuntimeAction(p, "open");
+                              }}
+                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                            >
+                              Open
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="px-3 pb-3">
+                          <div className="text-[10px] uppercase tracking-[0.16em] text-gold/60 mb-1.5">
+                            Latest logs
+                          </div>
+                          <div className="max-h-32 overflow-auto rounded-lg bg-black/35 border border-white/10 p-2 font-mono text-[10px] leading-relaxed text-muted-foreground">
+                            {logs.length > 0 ? (
+                              logs.map((line, index) => (
+                                <div key={`${rid}-log-${index}`} className="whitespace-pre-wrap break-words">
+                                  {line}
+                                </div>
+                              ))
+                            ) : (
+                              <div>No runtime logs yet. Start the project to generate logs.</div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="px-3 pb-3 pt-1 text-[11px] text-muted-foreground">
+                          Click to pin details · Double-click to open project
+                        </div>
+                      </>
+                    );
+                  })()}
                 </HoverCardContent>
               </HoverCard>
               );

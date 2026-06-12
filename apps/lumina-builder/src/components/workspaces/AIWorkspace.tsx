@@ -11,9 +11,20 @@ import { generateDraft } from "@/services/api";
 import { normalizeError } from "@/lib/errors";
 import { notificationService } from "@/services/notificationService";
 import { toast } from "sonner";
+import { useRuntimeBoot } from "@/hooks/useRuntimeBoot";
 
 export function AIWorkspace() {
   const { rightPanelOpen, activeProject } = useWorkspace();
+  const projectId =
+  activeProject?.id ??
+  null;
+  const {
+    runtimeUrl,
+    runtimePhase,
+    runtimeMessage,
+    runtimeProgress,
+    runtimeError,
+  } = useRuntimeBoot(projectId);  
   const [prompt, setPrompt] = useState("");
   const [generating, setGenerating] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -162,7 +173,7 @@ export function AIWorkspace() {
       </div>
 
       {/* Right column: preview fills the full right side */}
-      <div className="relative flex flex-col gap-4 shrink-0 w-full md:w-[50vw] min-h-0">
+      <div className="relative flex flex-1 flex-col gap-4 min-w-0 min-h-0">
         {/* Expand/collapse preview toggle */}
         <div className="flex items-center justify-end shrink-0">
           <button
@@ -182,7 +193,14 @@ export function AIWorkspace() {
         </div>
 
         <div className="flex-1 min-h-0">
-          <PreviewFrame />
+          <PreviewFrame
+            url={runtimeUrl}
+            projectId={projectId ?? undefined}
+            runtimePhase={runtimePhase}
+            runtimeMessage={runtimeMessage}
+            runtimeProgress={runtimeProgress}
+            runtimeError={runtimeError}
+          />
         </div>
 
         {rightPanelOpen && !previewExpanded && (

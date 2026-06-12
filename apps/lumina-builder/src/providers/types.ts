@@ -1,6 +1,6 @@
 /* Provider contracts — UI/services depend only on these interfaces. */
 
-export type Role = "free" | "pro" | "business" | "enterprise" | "inhouse-dev" | "admin";
+export type Role = "free" | "pro" | "business" | "enterprise" | "inhouse-dev" | "admin" | "super_admin";
 
 export interface User {
   id: string;
