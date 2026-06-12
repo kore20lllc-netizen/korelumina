@@ -35,7 +35,13 @@ function DesignerWorkspaceInner() {
   const { elements, selected, toggleSelected, setSelected, remove, add, replaceAll } = useCanvas();
   const { activeProject } = useWorkspace();
   const projectId = activeProject?.id ?? null;
-  const { runtimeUrl } = useRuntimeBoot(projectId);
+  const {
+    runtimeUrl,
+    runtimePhase,
+    runtimeMessage,
+    runtimeProgress,
+    runtimeError,
+  } = useRuntimeBoot(projectId);
   const { generatedPages, activePageId, setActivePage, clearGenerated, setPageTemplate } = useTransform();
   const primary: CanvasElement | undefined = elements.find((e) => e.id === selected[0]);
 
@@ -257,7 +263,14 @@ function DesignerWorkspaceInner() {
 
       {/* Center: canvas / preview */}
       <div className="flex-1 min-h-[360px]">
-        <PreviewFrame url={runtimeUrl} projectId={projectId ?? undefined}>
+        <PreviewFrame
+          url={runtimeUrl}
+          projectId={projectId ?? undefined}
+          runtimePhase={runtimePhase}
+          runtimeMessage={runtimeMessage}
+          runtimeProgress={runtimeProgress}
+          runtimeError={runtimeError}
+        >
           <DesignerCanvas />
         </PreviewFrame>
       </div>

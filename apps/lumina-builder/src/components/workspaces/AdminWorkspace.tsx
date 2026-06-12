@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useWorkspace } from "@/context/WorkspaceContext";
-import { getCurrentRole } from "@/services/workspaceAccessService";
+import { getCapabilities, getCurrentRole } from "@/services/workspaceAccessService";
 import { OverviewTab } from "@/components/workspaces/admin/OverviewTab";
 import { UsersTab } from "@/components/workspaces/admin/UsersTab";
 import { BillingTab } from "@/components/workspaces/admin/BillingTab";
@@ -37,11 +37,14 @@ export function AdminWorkspace() {
 
   useEffect(() => auth.onChange(() => setRole(getCurrentRole())), []);
 
-  useEffect(() => {
-    if (role !== "admin") setView("dashboard");
-  }, [role, setView]);
+  const canUseAdminTools =
+    getCapabilities(role).adminTools;
 
-  if (role !== "admin") {
+  useEffect(() => {
+    if (!canUseAdminTools) setView("dashboard");
+  }, [canUseAdminTools, setView]);
+
+  if (!canUseAdminTools) {
     return (
       <div className="p-8">
         <div className="glass rounded-xl p-6 max-w-md mx-auto text-center">

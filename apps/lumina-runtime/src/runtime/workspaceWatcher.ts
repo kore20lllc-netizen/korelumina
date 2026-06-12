@@ -16,13 +16,35 @@ function normalizeRelativePath(
 }
 
 function shouldIgnore(relativePath: string) {
+  const normalized =
+    relativePath
+      .replace(/\\/g, "/")
+      .replace(/^\.\//, "");
+
   return (
-    relativePath.startsWith("node_modules/") ||
-    relativePath.startsWith(".git/") ||
-    relativePath.startsWith("dist/") ||
-    relativePath.startsWith(".next/") ||
-    relativePath.includes("/node_modules/") ||
-    relativePath.endsWith(".tmp")
+    normalized === "node_modules" ||
+    normalized.startsWith("node_modules/") ||
+    normalized.includes("/node_modules/") ||
+    normalized === ".git" ||
+    normalized.startsWith(".git/") ||
+    normalized.includes("/.git/") ||
+    normalized === "dist" ||
+    normalized.startsWith("dist/") ||
+    normalized.includes("/dist/") ||
+    normalized === "build" ||
+    normalized.startsWith("build/") ||
+    normalized.includes("/build/") ||
+    normalized === ".next" ||
+    normalized.startsWith(".next/") ||
+    normalized.includes("/.next/") ||
+    normalized === ".turbo" ||
+    normalized.startsWith(".turbo/") ||
+    normalized.includes("/.turbo/") ||
+    normalized === "coverage" ||
+    normalized.startsWith("coverage/") ||
+    normalized.includes("/coverage/") ||
+    normalized.endsWith(".tmp") ||
+    normalized.endsWith(".log")
   );
 }
 
@@ -37,17 +59,18 @@ export function watchWorkspace(
   const watcher = chokidar.watch(projectPath, {
     ignoreInitial: true,
     persistent: true,
+    followSymlinks: false,
+    depth: 20,
     awaitWriteFinish: {
       stabilityThreshold: 150,
       pollInterval: 50,
     },
-    ignored: [
-      "**/node_modules/**",
-      "**/.git/**",
-      "**/dist/**",
-      "**/.next/**",
-      "**/*.tmp",
-    ],
+    ignored: (filePath: string) => {
+      const relativePath =
+        normalizeRelativePath(projectPath, filePath);
+
+      return shouldIgnore(relativePath);
+    },
   });
 
   const publish = (filePath: string) => {

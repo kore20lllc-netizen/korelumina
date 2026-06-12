@@ -227,7 +227,13 @@ function TreeNode({
 export function DeveloperWorkspace() {
   const { setBottomDockOpen, setCommandOpen, activeProject } = useWorkspace();
   const projectId = activeProject?.id ?? null;
-  const { runtimeUrl } = useRuntimeBoot(projectId);
+  const {
+    runtimeUrl,
+    runtimePhase,
+    runtimeMessage,
+    runtimeProgress,
+    runtimeError,
+  } = useRuntimeBoot(projectId);
 
   const [runtimeFiles, setRuntimeFiles] = useState<string[]>([]);
   const [loadingFiles, setLoadingFiles] = useState(false);
@@ -688,7 +694,14 @@ export function DeveloperWorkspace() {
 
         {/* Preview */}
         <div className="w-full lg:w-[380px] xl:w-[460px] shrink-0 min-h-[300px]">
-          <PreviewFrame url={runtimeUrl} projectId={projectId ?? undefined} />
+          <PreviewFrame
+            url={runtimeUrl}
+            projectId={projectId ?? undefined}
+            runtimePhase={runtimePhase}
+            runtimeMessage={runtimeMessage}
+            runtimeProgress={runtimeProgress}
+            runtimeError={runtimeError}
+          />
         </div>
       </div>
 

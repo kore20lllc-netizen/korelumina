@@ -13,6 +13,15 @@ import {
   projectRepository,
 } from "@/services/projectRepository";
 
+import {
+  canAccess,
+} from "@/services/workspaceAccessService";
+
+import {
+  listRuntimeProjects,
+  type RuntimeProject,
+} from "@/services/runtimeService";
+
 import type {
   Project,
 } from "@/services/projectRepository";
@@ -53,6 +62,26 @@ const DEFAULT_USAGE: UsageSnapshot = {
 };
 
 const seedProjects: Project[] = [];
+
+function titleFromProjectId(projectId: string) {
+  return projectId
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function runtimeProjectToProject(project: RuntimeProject): Project {
+  return {
+    id: project.projectId,
+    name: titleFromProjectId(project.projectId),
+    type: "import",
+    status: "draft",
+    accent: "violet",
+    runtime: "warm",
+    lastEdited: "Runtime project",
+    lastEditedAt: Date.now(),
+    previewUrl: undefined,
+  } as Project;
+}
 
 export function formatLastEdited(
   value?: string | number | Date | null,
@@ -358,6 +387,75 @@ export function WorkspaceProvider({
         );
       },
     );
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshRuntimeProjects() {
+      try {
+        const runtimeProjects = await listRuntimeProjects();
+
+        if (cancelled) {
+          return;
+        }
+
+        const localProjects = listProjects();
+        const ownedProjectIds = new Set(
+          localProjects.map((project) => project.id),
+        );
+
+        const canSeeAllRuntimeProjects = canAccess("adminTools");
+
+        const runtimeMapped = runtimeProjects
+          .map(runtimeProjectToProject)
+          .filter(
+            (project) =>
+              canSeeAllRuntimeProjects || ownedProjectIds.has(project.id),
+          );
+
+        const localOnly = localProjects.filter(
+          (project) =>
+            !runtimeMapped.some(
+              (runtimeProject) => runtimeProject.id === project.id,
+            ),
+        );
+
+        const nextProjects = [
+          ...runtimeMapped,
+          ...localOnly,
+        ];
+
+        setStoredProjects(nextProjects);
+
+        setActiveProjectState((current) =>
+          resolveProjectFromList(nextProjects, current),
+        );
+      } catch (error) {
+        console.warn(
+          "[WorkspaceContext] failed to refresh runtime projects",
+          error,
+        );
+
+        const fallbackProjects = listProjects();
+
+        if (!cancelled) {
+          setStoredProjects(fallbackProjects);
+          setActiveProjectState((current) =>
+            resolveProjectFromList(fallbackProjects, current),
+          );
+        }
+      }
+    }
+
+    void refreshRuntimeProjects();
+
+    const interval = window.setInterval(refreshRuntimeProjects, 5000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, []);
 
   const setActiveProject = (

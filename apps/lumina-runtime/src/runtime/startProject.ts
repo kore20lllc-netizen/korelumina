@@ -19,6 +19,10 @@ import { waitForRuntime } from "./waitForRuntime.js";
 import { watchWorkspace } from "./workspaceWatcher.js";
 import { runLayoutSafetyEngine } from "./layoutSafetyEngine.js";
 import {
+  clearRuntimeManualStop,
+  isRuntimeManualStop,
+} from "./manualStop.js";
+import {
   acquireRuntimeLock,
   getRuntimeLock,
   releaseRuntimeLock,
@@ -537,6 +541,29 @@ async function startProjectInternal(
         projectId,
         `[exit] code=${code} signal=${signal}`,
       );
+
+      console.log(
+        "[runtime/exit]",
+        {
+          projectId,
+          code,
+          signal,
+          pid: runtime.pid,
+          status: runtime.status,
+        },
+      );
+
+      if (
+        isRuntimeManualStop(projectId)
+      ) {
+        clearRuntimeManualStop(projectId);
+
+        removeRuntime(
+          projectId,
+        );
+
+        return;
+      }
 
       const intentionalStop =
         signal ===

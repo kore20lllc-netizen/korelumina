@@ -4,6 +4,7 @@ import { persistRuntimeState, removeRuntimeState } from "./persistence.js";
 import { publishRuntimeEvent } from "./eventBus.js";
 import { unwatchWorkspace } from "./workspaceWatcher.js";
 import { runtimeState } from "./runtimeState.js";
+import { markRuntimeManualStop } from "./manualStop.js";
 
 export type RuntimeStatus =
   | "starting"
@@ -365,6 +366,8 @@ export async function stopRuntime(
     return false;
   }
 
+  markRuntimeManualStop(projectId);
+
   runtime.status =
     "stopping";
 
@@ -374,11 +377,24 @@ export async function stopRuntime(
   );
 
   try {
-    runtime.process.kill(
-      "SIGTERM",
-    );
+    if (runtime.pid) {
+      process.kill(
+        -runtime.pid,
+        "SIGTERM",
+      );
+    } else {
+      runtime.process.kill(
+        "SIGTERM",
+      );
+    }
   } catch {
-    // noop
+    try {
+      runtime.process.kill(
+        "SIGTERM",
+      );
+    } catch {
+      // noop
+    }
   }
 
   killProcess(
@@ -397,6 +413,17 @@ export async function stopRuntime(
       projectId,
       `[lumina-runtime] force killing runtime ${projectId}`,
     );
+
+    try {
+      if (runtime.pid) {
+        process.kill(
+          -runtime.pid,
+          "SIGKILL",
+        );
+      }
+    } catch {
+      // noop
+    }
 
     killProcess(
       runtime.pid,

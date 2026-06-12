@@ -70,7 +70,6 @@ export function setCurrentRole(role: WorkspaceRole) {
 export function getCapabilities(role: WorkspaceRole = getCurrentRole()): WorkspaceCapabilities {
   switch (role) {
     case "super_admin":
-    case "admin":
       return {
         dashboard: true, designer: true, developer: true, ai: true,
         repoAudit: true, securityAudit: true, repairConsole: true,
@@ -78,15 +77,21 @@ export function getCapabilities(role: WorkspaceRole = getCurrentRole()): Workspa
         fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
         mobilePackaging: true, inhouseDevDashboard: true,
       };
-    case "inhouse-dev":
-      // In-house devs keep general workspace access, but Repo Audit and the
-      // In-House Dev Dashboard are admin-only surfaces now.
+    case "admin":
       return {
         dashboard: true, designer: true, developer: true, ai: true,
-        repoAudit: false, securityAudit: true, repairConsole: true,
-        deploymentDiagnostics: true, adminTools: false,
+        repoAudit: false, securityAudit: false, repairConsole: false,
+        deploymentDiagnostics: true, adminTools: true,
         fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
         mobilePackaging: true, inhouseDevDashboard: false,
+      };
+    case "inhouse-dev":
+      return {
+        dashboard: true, designer: true, developer: true, ai: true,
+        repoAudit: true, securityAudit: true, repairConsole: true,
+        deploymentDiagnostics: true, adminTools: false,
+        fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
+        mobilePackaging: true, inhouseDevDashboard: true,
       };
     case "enterprise":
       return { ...BASE, fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true };

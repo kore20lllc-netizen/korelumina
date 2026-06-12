@@ -9,6 +9,7 @@ import { TeamSwitcher } from "./TeamSwitcher";
 import luminaLogo from "@/assets/optimized/lumina.webp";
 import { useIsAuthenticated } from "@/hooks/use-auth";
 import { toast } from "sonner";
+import { RuntimeToolbar } from "@/components/runtime/RuntimeToolbar";
 
 const modes: { id: SkillMode; label: string; hint: string }[] = [
   { id: "ai", label: "AI", hint: "Non-tech" },
@@ -92,6 +93,7 @@ export function TopBar() {
             <span className="font-medium">{activeProject.name}</span>
             <ChevronDown className="h-3 w-3 text-muted-foreground/60 ml-0.5" />
           </button>
+          <RuntimeToolbar projectId={activeProject.id} />
         </>
       )}
 

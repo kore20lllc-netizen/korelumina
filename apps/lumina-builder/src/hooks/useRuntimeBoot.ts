@@ -12,9 +12,19 @@ import {
 import {
   getActiveRuntime,
   getRuntimeStatus,
+  isRuntimeManuallyStopped,
   startRuntime,
   type RuntimeSession,
 } from "@/services/runtimeService";
+
+export type RuntimeBootPhase =
+  | "idle"
+  | "discovering"
+  | "starting"
+  | "waiting-port"
+  | "running"
+  | "rebuilding"
+  | "error";
 
 interface RuntimeBootState {
   runtimeUrl: string;
@@ -24,6 +34,9 @@ interface RuntimeBootState {
   runtime: RuntimeSession | null;
   runtimeHealthy: boolean;
   reconnecting: boolean;
+  runtimePhase: RuntimeBootPhase;
+  runtimeMessage: string;
+  runtimeProgress: number;
 }
 
 const runtimeStartCache =
@@ -42,6 +55,106 @@ function rememberRuntime(
     "lumina:last-runtime-project",
     runtime.projectId,
   );
+}
+
+function forgetRuntime(
+  projectId?: string | null,
+) {
+  const remembered =
+    localStorage.getItem(
+      "lumina:last-runtime-project",
+    );
+
+  if (
+    !projectId ||
+    remembered === projectId
+  ) {
+    localStorage.removeItem(
+      "lumina:last-runtime-project",
+    );
+  }
+
+  if (projectId) {
+    runtimeStartCache.delete(
+      projectId,
+    );
+  }
+}
+
+function phaseForStatus(
+  status?: string | null,
+): RuntimeBootPhase {
+  if (status === "running") {
+    return "running";
+  }
+
+  if (
+    status === "starting" ||
+    status === "pending"
+  ) {
+    return "waiting-port";
+  }
+
+  if (
+    status === "restarting" ||
+    status === "rebuilding"
+  ) {
+    return "rebuilding";
+  }
+
+  if (
+    status === "error" ||
+    status === "exited"
+  ) {
+    return "error";
+  }
+
+  return "discovering";
+}
+
+function messageForPhase(
+  phase: RuntimeBootPhase,
+  projectId?: string | null,
+) {
+  if (phase === "idle") {
+    return "Select a project to start preview.";
+  }
+
+  if (phase === "discovering") {
+    return projectId
+      ? `Detecting runtime for ${projectId}...`
+      : "Detecting active runtime...";
+  }
+
+  if (phase === "starting") {
+    return "Launching development server...";
+  }
+
+  if (phase === "waiting-port") {
+    return "Waiting for preview server...";
+  }
+
+  if (phase === "running") {
+    return "Preview ready.";
+  }
+
+  if (phase === "rebuilding") {
+    return "Refreshing application...";
+  }
+
+  return "Runtime failed to start.";
+}
+
+function progressForPhase(
+  phase: RuntimeBootPhase,
+) {
+  if (phase === "idle") return 0;
+  if (phase === "discovering") return 15;
+  if (phase === "starting") return 40;
+  if (phase === "waiting-port") return 72;
+  if (phase === "rebuilding") return 82;
+  if (phase === "running") return 100;
+  return 100;
 }
 
 async function getOrStartRuntime(
@@ -139,6 +252,30 @@ export function useRuntimeBoot(
     setReconnecting,
   ] = useState(false);
 
+  const [
+    runtimePhase,
+    setRuntimePhase,
+  ] = useState<RuntimeBootPhase>(
+    "idle",
+  );
+
+  const runtimePhaseRef =
+    useRef<RuntimeBootPhase>(
+      "idle",
+    );
+
+  const [
+    runtimeMessage,
+    setRuntimeMessage,
+  ] = useState(
+    messageForPhase("idle"),
+  );
+
+  const [
+    runtimeProgress,
+    setRuntimeProgress,
+  ] = useState(0);
+
   const heartbeatRef =
     useRef<number | null>(
       null,
@@ -152,39 +289,221 @@ export function useRuntimeBoot(
       null,
     );
 
+  const manualStopGenerationRef =
+    useRef(0);
+
+  function setPhase(
+    phase: RuntimeBootPhase,
+    projectId?: string | null,
+    message?: string,
+  ) {
+    runtimePhaseRef.current =
+      phase;
+
+    setRuntimePhase(phase);
+    setRuntimeMessage(
+      message ??
+        messageForPhase(
+          phase,
+          projectId,
+        ),
+    );
+    setRuntimeProgress(
+      progressForPhase(
+        phase,
+      ),
+    );
+  }
+
   async function resolveRuntime(
     projectId: string,
   ) {
-    const nextRuntime =
-      await getOrStartRuntime(
+    if (
+      isRuntimeManuallyStopped(
         projectId,
+      )
+    ) {
+      lastResolvedKey.current =
+        projectId;
+
+      setRuntimeUrl("");
+      setRuntimeProjectId(projectId);
+      setRuntime(null);
+      setRuntimeHealthy(false);
+      setReconnecting(false);
+      setRuntimeError(null);
+      setRuntimeLoading(false);
+      setPhase(
+        "idle",
+        projectId,
+        "Runtime stopped. Use Start to launch preview.",
       );
 
-    if (!mountedRef.current) {
       return;
     }
 
-    lastResolvedKey.current =
-      projectId;
+    const stopGeneration =
+      manualStopGenerationRef.current;
 
-    setRuntime(
-      nextRuntime,
-    );
+    try {
+      setRuntimeLoading(true);
+      setRuntimeError(null);
+      setPhase(
+        "discovering",
+        projectId,
+      );
 
-    setRuntimeProjectId(
-      nextRuntime.projectId,
-    );
+      const existing =
+        await getRuntimeStatus(
+          projectId,
+        );
 
-    setRuntimeUrl(
-      nextRuntime.url,
-    );
+      if (
+        existing?.url &&
+        existing.status === "running"
+      ) {
+        if (!mountedRef.current) {
+          return;
+        }
 
-    setRuntimeHealthy(
-      nextRuntime.status ===
-        "running",
-    );
+        rememberRuntime(
+          existing,
+        );
 
-    setRuntimeError(null);
+        lastResolvedKey.current =
+          projectId;
+
+        setRuntime(existing);
+        setRuntimeProjectId(
+          existing.projectId,
+        );
+        setRuntimeUrl(existing.url);
+        setRuntimeHealthy(true);
+        setReconnecting(false);
+        setPhase(
+          "running",
+          projectId,
+        );
+
+        return;
+      }
+
+      if (!mountedRef.current) {
+        return;
+      }
+
+      if (
+        stopGeneration !==
+          manualStopGenerationRef.current ||
+        isRuntimeManuallyStopped(projectId)
+      ) {
+        setRuntimeUrl("");
+        setRuntimeProjectId(projectId);
+        setRuntime(null);
+        setRuntimeHealthy(false);
+        setReconnecting(false);
+        setRuntimeError(null);
+        setPhase(
+          "idle",
+          projectId,
+          "Runtime stopped. Use Start to launch preview.",
+        );
+
+        return;
+      }
+
+      setPhase(
+        "starting",
+        projectId,
+      );
+
+      const started =
+        await getOrStartRuntime(
+          projectId,
+        );
+
+      if (
+        !mountedRef.current
+      ) {
+        return;
+      }
+
+      if (
+        stopGeneration !==
+          manualStopGenerationRef.current ||
+        isRuntimeManuallyStopped(projectId)
+      ) {
+        setRuntimeUrl("");
+        setRuntimeProjectId(projectId);
+        setRuntime(null);
+        setRuntimeHealthy(false);
+        setReconnecting(false);
+        setRuntimeError(null);
+        setPhase(
+          "idle",
+          projectId,
+          "Runtime stopped. Use Start to launch preview.",
+        );
+
+        return;
+      }
+
+      rememberRuntime(
+        started,
+      );
+
+      lastResolvedKey.current =
+        projectId;
+
+      setRuntime(started);
+      setRuntimeProjectId(
+        started.projectId,
+      );
+      setRuntimeUrl(started.url);
+      setRuntimeHealthy(
+        started.status === "running",
+      );
+      setReconnecting(
+        started.status !== "running",
+      );
+      setRuntimeError(null);
+      setPhase(
+        started.status === "running"
+          ? "running"
+          : phaseForStatus(started.status),
+        projectId,
+      );
+    } catch (error) {
+      if (!mountedRef.current) {
+        return;
+      }
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : "failed_to_start_runtime";
+
+      forgetRuntime(projectId);
+
+      lastResolvedKey.current =
+        null;
+
+      setRuntimeUrl("");
+      setRuntimeProjectId(null);
+      setRuntime(null);
+      setRuntimeHealthy(false);
+      setReconnecting(false);
+      setRuntimeError(message);
+      setPhase(
+        "error",
+        projectId,
+        message,
+      );
+    } finally {
+      if (mountedRef.current) {
+        setRuntimeLoading(false);
+      }
+    }
   }
 
   useEffect(() => {
@@ -198,7 +517,88 @@ export function useRuntimeBoot(
   }, []);
 
   useEffect(() => {
+    function handleManualStop(
+      event: Event,
+    ) {
+      const detail =
+        (event as CustomEvent<{
+          projectId?: string;
+        }>).detail;
+
+      if (
+        !incomingProjectId ||
+        detail?.projectId !== incomingProjectId
+      ) {
+        return;
+      }
+
+      manualStopGenerationRef.current += 1;
+
+      forgetRuntime(
+        incomingProjectId,
+      );
+
+      runtimeStartCache.delete(
+        incomingProjectId,
+      );
+
+      lastResolvedKey.current =
+        incomingProjectId;
+
+      setRuntimeUrl("");
+      setRuntimeLoading(false);
+      setRuntimeError(null);
+      setRuntimeProjectId(
+        incomingProjectId,
+      );
+      setRuntime(null);
+      setRuntimeHealthy(false);
+      setReconnecting(false);
+      setPhase(
+        "idle",
+        incomingProjectId,
+        "Runtime stopped. Use Start to launch preview.",
+      );
+    }
+
+    window.addEventListener(
+      "lumina:runtime-stopped",
+      handleManualStop,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "lumina:runtime-stopped",
+        handleManualStop,
+      );
+    };
+  }, [incomingProjectId]);
+
+  useEffect(() => {
     if (!incomingProjectId) {
+      if (heartbeatRef.current) {
+        window.clearInterval(
+          heartbeatRef.current,
+        );
+
+        heartbeatRef.current =
+          null;
+      }
+
+      lastResolvedKey.current =
+        null;
+
+      forgetRuntime(null);
+
+      setRuntimeUrl("");
+      setRuntimeLoading(false);
+      setRuntimeError(null);
+      setRuntimeProjectId(null);
+      setRuntime(null);
+      setRuntimeHealthy(false);
+      setReconnecting(false);
+      setPhase("idle");
+
       return;
     }
 
@@ -218,27 +618,27 @@ export function useRuntimeBoot(
             event.type ===
             "runtime:error"
           ) {
-            setRuntimeHealthy(
-              false,
-            );
-
-            setRuntimeError(
+            setRuntimeHealthy(false);
+            setRuntimeError(event.error);
+            setReconnecting(true);
+            setPhase(
+              "error",
+              incomingProjectId,
               event.error,
             );
 
-            setReconnecting(
-              true,
-            );
+            return;
+          }
 
-            try {
-              await resolveRuntime(
-                incomingProjectId,
-              );
-            } finally {
-              setReconnecting(
-                false,
-              );
-            }
+          if (
+            event.type ===
+            "runtime:file-changed"
+          ) {
+            setReconnecting(true);
+            setPhase(
+              "rebuilding",
+              incomingProjectId,
+            );
 
             return;
           }
@@ -247,49 +647,57 @@ export function useRuntimeBoot(
             event.type ===
             "runtime:state"
           ) {
+            const nextPhase =
+              phaseForStatus(
+                event.status,
+              );
+
             const healthy =
-              event.status ===
-              "running";
+              nextPhase === "running";
 
             setRuntimeHealthy(
               healthy,
             );
 
-            if (!healthy) {
-              setReconnecting(
-                true,
-              );
-            }
+            setReconnecting(
+              !healthy,
+            );
 
-            if (
+            setPhase(
               healthy
-            ) {
-              setReconnecting(
-                false,
-              );
+                ? "running"
+                : nextPhase,
+              incomingProjectId,
+            );
 
+            if (healthy) {
               const latest =
                 await getRuntimeStatus(
                   incomingProjectId,
                 );
 
               if (
-                latest?.url
+                latest?.url &&
+                mountedRef.current
               ) {
-                setRuntime(
-                  latest,
-                );
-
+                setRuntime(latest);
                 setRuntimeUrl(
                   latest.url,
+                );
+                setRuntimeProjectId(
+                  latest.projectId,
                 );
               }
             }
           }
         },
         () => {
-          setRuntimeHealthy(
-            false,
+          setRuntimeHealthy(false);
+          setReconnecting(true);
+          setPhase(
+            "rebuilding",
+            incomingProjectId,
+            "Runtime connection interrupted. Reconnecting...",
           );
         },
       );
@@ -310,6 +718,12 @@ export function useRuntimeBoot(
         if (
           !incomingProjectId
         ) {
+          setPhase(
+            "discovering",
+            null,
+            "Looking for active runtime...",
+          );
+
           const activeRuntime =
             await getActiveRuntime();
 
@@ -338,9 +752,23 @@ export function useRuntimeBoot(
               activeRuntime.url,
             );
 
+            const phase =
+              phaseForStatus(
+                activeRuntime.status,
+              );
+
+            const healthy =
+              phase === "running";
+
             setRuntimeHealthy(
-              activeRuntime.status ===
-                "running",
+              healthy,
+            );
+
+            setPhase(
+              healthy
+                ? "running"
+                : phase,
+              activeRuntime.projectId,
             );
 
             return;
@@ -350,9 +778,38 @@ export function useRuntimeBoot(
           setRuntimeProjectId(null);
           setRuntimeUrl("");
           setRuntimeHealthy(false);
-
           setRuntimeError(
             "No active runtime",
+          );
+          setPhase(
+            "idle",
+            null,
+            "No active runtime.",
+          );
+
+          return;
+        }
+
+        if (
+          isRuntimeManuallyStopped(
+            incomingProjectId,
+          )
+        ) {
+          lastResolvedKey.current =
+            incomingProjectId;
+
+          setRuntime(null);
+          setRuntimeUrl("");
+          setRuntimeProjectId(
+            incomingProjectId,
+          );
+          setRuntimeHealthy(false);
+          setReconnecting(false);
+          setRuntimeError(null);
+          setPhase(
+            "idle",
+            incomingProjectId,
+            "Runtime stopped. Use Start to launch preview.",
           );
 
           return;
@@ -379,30 +836,28 @@ export function useRuntimeBoot(
           return;
         }
 
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Runtime failed";
+
         setRuntime(null);
-
         setRuntimeUrl("");
-
-        setRuntimeHealthy(
-          false,
-        );
-
+        setRuntimeHealthy(false);
         setRuntimeProjectId(
           incomingProjectId ?? null,
         );
-
-        setRuntimeError(
-          error instanceof Error
-            ? error.message
-            : "Runtime failed",
+        setRuntimeError(message);
+        setPhase(
+          "error",
+          incomingProjectId,
+          message,
         );
       } finally {
         if (
           !cancelled
         ) {
-          setRuntimeLoading(
-            false,
-          );
+          setRuntimeLoading(false);
         }
       }
     }
@@ -422,6 +877,28 @@ export function useRuntimeBoot(
     }
 
     async function heartbeat() {
+      if (
+        isRuntimeManuallyStopped(
+          incomingProjectId,
+        )
+      ) {
+        setRuntime(null);
+        setRuntimeUrl("");
+        setRuntimeProjectId(
+          incomingProjectId,
+        );
+        setRuntimeHealthy(false);
+        setReconnecting(false);
+        setRuntimeError(null);
+        setPhase(
+          "idle",
+          incomingProjectId,
+          "Runtime stopped. Use Start to launch preview.",
+        );
+
+        return;
+      }
+
       try {
         const nextRuntime =
           await getRuntimeStatus(
@@ -437,12 +914,18 @@ export function useRuntimeBoot(
         if (
           !nextRuntime
         ) {
-          setRuntimeHealthy(
-            false,
+          setRuntime(null);
+          setRuntimeUrl("");
+          setRuntimeProjectId(
+            incomingProjectId,
           );
-
-          setReconnecting(
-            true,
+          setRuntimeHealthy(false);
+          setReconnecting(false);
+          setRuntimeError(null);
+          setPhase(
+            "idle",
+            incomingProjectId,
+            "Runtime stopped. Use Start to launch preview.",
           );
 
           return;
@@ -456,25 +939,42 @@ export function useRuntimeBoot(
           nextRuntime.url,
         );
 
-        setRuntimeHealthy(
-          nextRuntime.status ===
-            "running",
+        setRuntimeProjectId(
+          nextRuntime.projectId,
         );
 
-        if (
-          nextRuntime.status ===
-          "running"
-        ) {
-          setReconnecting(
-            false,
+        const phase =
+          phaseForStatus(
+            nextRuntime.status,
           );
-        }
+
+        const healthy =
+          phase === "running";
+
+        setRuntimeHealthy(
+          healthy,
+        );
+
+        setReconnecting(
+          !healthy,
+        );
+
+        setPhase(
+          healthy
+            ? "running"
+            : phase,
+          incomingProjectId,
+        );
       } catch {
         if (
           mountedRef.current
         ) {
-          setRuntimeHealthy(
-            false,
+          setRuntimeHealthy(false);
+          setReconnecting(true);
+          setPhase(
+            "waiting-port",
+            incomingProjectId,
+            "Waiting for runtime service...",
           );
         }
       }
@@ -499,6 +999,19 @@ export function useRuntimeBoot(
     };
   }, [incomingProjectId]);
 
+  console.log("[useRuntimeBoot:return]", {
+    incomingProjectId,
+    runtimeUrl,
+    runtimeLoading,
+    runtimeError,
+    runtimeProjectId,
+    runtimeHealthy,
+    reconnecting,
+    runtimePhase,
+    runtimeMessage,
+    runtimeProgress,
+  });
+
   return {
     runtimeUrl,
     runtimeLoading,
@@ -507,5 +1020,8 @@ export function useRuntimeBoot(
     runtime,
     runtimeHealthy,
     reconnecting,
+    runtimePhase,
+    runtimeMessage,
+    runtimeProgress,
   };
 }

@@ -114,7 +114,7 @@ const shouldBootstrap =
   claimRuntimeBootstrap();
 
 if (shouldBootstrap) {
-  recoverPersistedRuntimes();
+  await recoverPersistedRuntimes();
   startRuntimeSupervisor();
 } else {
   console.warn(

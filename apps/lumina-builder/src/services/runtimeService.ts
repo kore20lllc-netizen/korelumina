@@ -1,6 +1,51 @@
 const RUNTIME_API =
   import.meta.env.VITE_RUNTIME_API_URL || "http://localhost:4100";
 
+
+const MANUAL_RUNTIME_STOP_PREFIX =
+  "lumina:runtime-manual-stop:";
+
+const manuallyStoppedRuntimes =
+  new Set<string>();
+
+function manualStopKey(
+  projectId: string,
+) {
+  return `${MANUAL_RUNTIME_STOP_PREFIX}${projectId}`;
+}
+
+export function markRuntimeManuallyStopped(
+  projectId: string,
+) {
+  manuallyStoppedRuntimes.add(projectId);
+}
+
+export function clearRuntimeManuallyStopped(
+  projectId: string,
+) {
+  manuallyStoppedRuntimes.delete(projectId);
+
+  try {
+    localStorage.removeItem(
+      manualStopKey(projectId),
+    );
+  } catch {
+    // ignore
+  }
+}
+
+export function isRuntimeManuallyStopped(
+  projectId: string,
+) {
+  return manuallyStoppedRuntimes.has(projectId);
+}
+
+export interface RuntimeProject {
+  projectId: string;
+  path: string;
+  hasPackageJson: boolean;
+}
+
 export interface RuntimeSession {
   projectId: string;
   framework?: string;
@@ -38,6 +83,17 @@ export type RuntimeEvent =
       sha256?: string;
       timestamp: number;
     };
+
+export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
+  const response = await fetch(`${RUNTIME_API}/api/runtime/projects`);
+  const data = await response.json();
+
+  if (!response.ok || !data?.ok || !Array.isArray(data.projects)) {
+    throw new Error(data?.error ?? "failed_to_list_runtime_projects");
+  }
+
+  return data.projects as RuntimeProject[];
+}
 
 function normalizeRuntimeUrl(
   url?: string | null,
@@ -116,6 +172,10 @@ export async function getRuntime(
 export async function startRuntime(
   projectId: string,
 ): Promise<RuntimeSession> {
+  clearRuntimeManuallyStopped(
+    projectId,
+  );
+
   try {
     const existing =
       await getRuntimeStatus(
@@ -168,6 +228,40 @@ export async function startRuntime(
     throw error;
   }
 }
+
+export async function stopRuntime(
+  projectId: string,
+): Promise<void> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/runtime/stop`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          projectId,
+        }),
+      },
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data?.error ??
+        "Failed to stop runtime",
+    );
+  }
+
+  markRuntimeManuallyStopped(
+    projectId,
+  );
+}
+
 
 export async function restartRuntime(
   projectId: string,
