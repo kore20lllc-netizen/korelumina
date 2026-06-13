@@ -256,14 +256,16 @@ function resolveProjectFromList(
     return null;
   }
 
-  if (
-    current &&
-    projects.some(
-      (project) =>
-        project.id === current.id,
-    )
-  ) {
-    return current;
+  if (current) {
+    const refreshed =
+      projects.find(
+        (project) =>
+          project.id === current.id,
+      );
+
+    if (refreshed) {
+      return refreshed;
+    }
   }
 
   const savedId =
@@ -407,18 +409,39 @@ export function WorkspaceProvider({
 
         const canSeeAllRuntimeProjects = canAccess("adminTools");
 
+        const localById = new Map(
+          localProjects.map((project) => [
+            project.id,
+            project,
+          ]),
+        );
+
         const runtimeMapped = runtimeProjects
-          .map(runtimeProjectToProject)
           .filter(
-            (project) =>
-              canSeeAllRuntimeProjects || ownedProjectIds.has(project.id),
-          );
+            (runtimeProject) =>
+              canSeeAllRuntimeProjects ||
+              ownedProjectIds.has(runtimeProject.projectId),
+          )
+          .map((runtimeProject) => {
+            const localProject =
+              localById.get(runtimeProject.projectId);
+
+            if (localProject) {
+              return {
+                ...localProject,
+                runtime: "warm",
+              } as Project;
+            }
+
+            return runtimeProjectToProject(runtimeProject);
+          });
+
+        const runtimeIds = new Set(
+          runtimeMapped.map((project) => project.id),
+        );
 
         const localOnly = localProjects.filter(
-          (project) =>
-            !runtimeMapped.some(
-              (runtimeProject) => runtimeProject.id === project.id,
-            ),
+          (project) => !runtimeIds.has(project.id),
         );
 
         const nextProjects = [

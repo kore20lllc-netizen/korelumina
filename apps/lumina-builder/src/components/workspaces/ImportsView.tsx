@@ -19,16 +19,64 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import {
   getRuntimeLogs,
   getRuntimeStatus,
+  listRuntimeFiles,
+  readRuntimeFile,
   restartRuntime,
   startRuntime,
   stopRuntime,
 } from "@/services/runtimeService";
+
+
+import {
+  buildRepoKnowledgeGraphFromFiles,
+  getRepoIntelligenceSummary,
+} from "@/services/repoIntelligenceService";
 
 const statusStyle = {
   live: "bg-cyan/10 text-cyan border-cyan/25",
   building: "bg-gold/10 text-gold border-gold/25",
   draft: "bg-surface-2 text-muted-foreground border-border",
 };
+
+const INTELLIGENCE_TEXT_FILE_RE =
+  /\.(tsx|ts|jsx|js|mjs|cjs|css|scss|sass|less|html|json|md|mdx|txt|yml|yaml|toml|env|gitignore|dockerignore|config|svg)$/i;
+
+const INTELLIGENCE_SKIP_PATH_RE =
+  /(^|\/)(node_modules|\.git|dist|build|\.next|coverage|\.turbo|\.cache)(\/|$)/;
+
+function isRepoIntelligenceReadableFile(file: string) {
+  const normalized = file.replace(/\\/g, "/");
+
+  if (INTELLIGENCE_SKIP_PATH_RE.test(normalized)) return false;
+  if (normalized.includes("\0")) return false;
+  if (normalized.endsWith("/")) return false;
+  if (INTELLIGENCE_TEXT_FILE_RE.test(normalized)) return true;
+
+  const base = normalized.split("/").pop() ?? "";
+
+  return [
+    "Dockerfile",
+    "Procfile",
+    "Makefile",
+    "README",
+    "LICENSE",
+    ".env",
+    ".env.example",
+    ".gitignore",
+  ].includes(base);
+}
+
+function summarizeRepoGraph(
+  graph: ReturnType<typeof buildRepoKnowledgeGraphFromFiles>,
+) {
+  return {
+    projectId: graph.projectId,
+    framework: graph.framework,
+    packageManager: graph.packageManager,
+    entryFiles: graph.entryFiles,
+    summary: graph.summary,
+  };
+}
 
 type SourceKind = "github" | "zip" | "folder";
 export type SourceOverride = { sourceUrl?: string; previewUrl?: string; readmeUrl?: string };
@@ -201,6 +249,9 @@ export function ImportsView() {
   const [runtimeBusy, setRuntimeBusy] = useState<Record<string, string>>({});
   const [runtimeUrls, setRuntimeUrls] = useState<Record<string, string>>({});
 
+  const [runtimeIntelligence, setRuntimeIntelligence] =
+    useState<Record<string, ReturnType<typeof getRepoIntelligenceSummary>>>({});
+
   useEffect(() => {
     try {
       window.localStorage.setItem(PREFS_KEY, JSON.stringify({ sortBy, sortDir, timeFilter }));
@@ -275,6 +326,79 @@ export function ImportsView() {
     });
     return sortDir === "asc" ? sorted : sorted.reverse();
   }, [allImports, q, statusFilter, sourceFilter, timeFilter, sortBy, sortDir, overrides]);
+
+  useEffect(() => {
+    if (!selectedId) return;
+
+    const selected =
+      imports.find((project) => project.id === selectedId) ??
+      allImports.find((project) => project.id === selectedId);
+
+    if (!selected) return;
+
+    const projectId = selected.projectId ?? selected.id;
+
+    if (runtimeIntelligence[projectId]) return;
+
+    let cancelled = false;
+
+    async function loadRuntimeIntelligence() {
+      const fallback = getRepoIntelligenceSummary(projectId);
+
+      if (fallback.summary.fileCount > 0) {
+        if (!cancelled) {
+          setRuntimeIntelligence((current) => ({
+            ...current,
+            [projectId]: fallback,
+          }));
+        }
+
+        return;
+      }
+
+      try {
+        const files =
+          (await listRuntimeFiles(projectId)).filter(
+            isRepoIntelligenceReadableFile,
+          );
+
+        const fileMap: Record<string, string> = {};
+
+        for (const file of files) {
+          if (cancelled) return;
+
+          try {
+            const result = await readRuntimeFile(projectId, file);
+            fileMap[file] = result.content ?? "";
+          } catch {
+            // Ignore unreadable files.
+          }
+        }
+
+        if (cancelled) return;
+
+        const graph = buildRepoKnowledgeGraphFromFiles(projectId, fileMap);
+
+        setRuntimeIntelligence((current) => ({
+          ...current,
+          [projectId]: summarizeRepoGraph(graph),
+        }));
+      } catch {
+        if (!cancelled) {
+          setRuntimeIntelligence((current) => ({
+            ...current,
+            [projectId]: fallback,
+          }));
+        }
+      }
+    }
+
+    void loadRuntimeIntelligence();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedId, imports, allImports, runtimeIntelligence]);
 
   const activeFilterCount =
     (statusFilter !== "all" ? 1 : 0) +
@@ -837,6 +961,14 @@ export function ImportsView() {
           if (!p) return null;
           const src = sourceFor(p, overrides[p.id]);
           const SrcIcon = src.icon;
+
+          const intelligenceProjectId = p.projectId ?? p.id;
+
+          const intelligence =
+            runtimeIntelligence[intelligenceProjectId] ??
+            getRepoIntelligenceSummary(
+              intelligenceProjectId,
+            );
           return (
             <aside
               className="fixed right-4 bottom-4 top-20 w-[340px] z-40 rounded-2xl glass-strong border border-border shadow-[0_30px_80px_-20px_hsl(230_80%_2%/0.9)] flex flex-col overflow-hidden anim-in"
@@ -912,6 +1044,50 @@ export function ImportsView() {
                   </div>
                 } />
                 {p.runtime && <DetailRow icon={GitBranch} label="Runtime" value={<span className="capitalize">{p.runtime}</span>} />}
+
+                <div className="pt-3 mt-3 border-t border-border/60">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-gold/60 mb-3">
+                    Architecture
+                  </div>
+
+                  <DetailRow
+                    icon={Activity}
+                    label="Framework"
+                    value={intelligence.framework}
+                  />
+
+                  <DetailRow
+                    icon={FolderOpen}
+                    label="Files"
+                    value={String(
+                      intelligence.summary.fileCount,
+                    )}
+                  />
+
+                  <DetailRow
+                    icon={BookOpen}
+                    label="Routes"
+                    value={String(
+                      intelligence.summary.routeCount,
+                    )}
+                  />
+
+                  <DetailRow
+                    icon={GitBranch}
+                    label="Dependencies"
+                    value={String(
+                      intelligence.summary.dependencyCount,
+                    )}
+                  />
+
+                  <DetailRow
+                    icon={Globe}
+                    label="Domains"
+                    value={String(
+                      intelligence.summary.domainCount ?? 0,
+                    )}
+                  />
+                </div>
 
                 <div className="pt-3 mt-3 border-t border-border/60">
                   <div className="flex items-center justify-between mb-2">
