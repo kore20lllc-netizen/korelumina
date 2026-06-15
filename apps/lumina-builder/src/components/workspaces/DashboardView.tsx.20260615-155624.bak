@@ -163,11 +163,6 @@ export function DashboardView() {
     string | null
   >(null);
 
-  console.log(
-    "[Dashboard:projects]",
-    projects,
-  );
-
   const filtered =
     useMemo(() => {
       return projects

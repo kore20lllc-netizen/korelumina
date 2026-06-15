@@ -305,6 +305,63 @@ export async function restartRuntime(
   return runtime;
 }
 
+
+export interface RuntimeMetricsResponse {
+  ok: boolean;
+  service: string;
+  timestamp: number;
+  process: {
+    pid: number;
+    uptimeMs: number;
+    memory: {
+      rssMb: number;
+      heapUsedMb: number;
+      heapTotalMb: number;
+      externalMb: number;
+    };
+  };
+  totals: {
+    eventClients: number;
+    workspaceWatchers: number;
+    runtimes: number;
+    running: number;
+    starting: number;
+    exited: number;
+    error: number;
+  };
+  runtimes: Array<{
+    projectId: string;
+    framework: string | null;
+    status: string;
+    port: number | null;
+    pid: number | null;
+    url: string | null;
+    alive: boolean;
+    uptimeMs: number;
+    startedAt: number | null;
+    exitedAt: number | null;
+    lastError: string | null;
+    logLines: number;
+  }>;
+}
+
+export async function getRuntimeMetrics(): Promise<RuntimeMetricsResponse> {
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/metrics`,
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data?.error ??
+      "failed_to_get_runtime_metrics",
+    );
+  }
+
+  return data as RuntimeMetricsResponse;
+}
+
 export async function getRuntimeLogs(
   projectId: string,
 ) {
@@ -355,9 +412,9 @@ export function connectRuntimeEvents(
       `${RUNTIME_API}/api/runtime/events`,
     );
 
-  source.onmessage =
+  const handleEvent =
     (
-      raw,
+      raw: MessageEvent,
     ) => {
       try {
         const event =
@@ -372,6 +429,26 @@ export function connectRuntimeEvents(
         // ignore malformed event payloads
       }
     };
+
+  source.addEventListener(
+    "runtime:log",
+    handleEvent,
+  );
+
+  source.addEventListener(
+    "runtime:state",
+    handleEvent,
+  );
+
+  source.addEventListener(
+    "runtime:error",
+    handleEvent,
+  );
+
+  source.addEventListener(
+    "runtime:file-changed",
+    handleEvent,
+  );
 
   source.onerror =
     (

@@ -105,8 +105,16 @@ export function TopBar() {
           <button
             key={m.id}
             onClick={() => {
+              if (!activeProject) {
+                setView("dashboard");
+                return;
+              }
+
               setMode(m.id);
-              if (view !== "workspace") setView("workspace");
+
+              if (view !== "workspace") {
+                setView("workspace");
+              }
             }}
             className={cn(
               "relative px-3 h-7 rounded-lg text-[11px] font-medium tracking-tight transition-all duration-300 ease-fluid",

@@ -81,19 +81,6 @@ function forgetRuntime(
   }
 }
 
-
-function isValidProjectId(
-  projectId?: string | null,
-) {
-  if (!projectId) {
-    return false;
-  }
-
-  return !/^\d+$/.test(
-    projectId,
-  );
-}
-
 function phaseForStatus(
   status?: string | null,
 ): RuntimeBootPhase {
@@ -419,9 +406,7 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           projectId,
-          isValidProjectId(projectId)
-            ? "Runtime stopped. Use Start to launch preview."
-            : "Select a project to start preview.",
+          "Runtime stopped. Use Start to launch preview.",
         );
 
         return;
@@ -457,9 +442,7 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           projectId,
-          isValidProjectId(projectId)
-            ? "Runtime stopped. Use Start to launch preview."
-            : "Select a project to start preview.",
+          "Runtime stopped. Use Start to launch preview.",
         );
 
         return;
@@ -826,9 +809,7 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            isValidProjectId(projectId)
-            ? "Runtime stopped. Use Start to launch preview."
-            : "Select a project to start preview.",
+            "Runtime stopped. Use Start to launch preview.",
           );
 
           return;
@@ -912,9 +893,7 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           incomingProjectId,
-          isValidProjectId(projectId)
-            ? "Runtime stopped. Use Start to launch preview."
-            : "Select a project to start preview.",
+          "Runtime stopped. Use Start to launch preview.",
         );
 
         return;
@@ -946,9 +925,7 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            isValidProjectId(projectId)
-            ? "Runtime stopped. Use Start to launch preview."
-            : "Select a project to start preview.",
+            "Runtime stopped. Use Start to launch preview.",
           );
 
           return;

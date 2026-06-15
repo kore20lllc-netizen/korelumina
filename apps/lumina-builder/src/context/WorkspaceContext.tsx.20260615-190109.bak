@@ -253,18 +253,6 @@ function resolveInitialProject() {
       ACTIVE_PROJECT_STORAGE_KEY,
     );
 
-  if (
-    savedId &&
-    !projects.some(
-      (project) =>
-        project.id === savedId,
-    )
-  ) {
-    localStorage.removeItem(
-      ACTIVE_PROJECT_STORAGE_KEY,
-    );
-  }
-
   return (
     projects.find(
       (project) =>

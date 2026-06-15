@@ -59,6 +59,14 @@ const TemplatesMarketplace = lazy(() =>
   })),
 );
 
+
+const RuntimeDiagnosticsWorkspace = lazy(() =>
+  import("@/components/workspaces/RuntimeDiagnosticsWorkspace").then((m) => ({
+    default: m.RuntimeDiagnosticsWorkspace,
+  })),
+);
+
+
 const LoadingView = () => (
   <div className="p-6 text-sm text-muted-foreground">Loading...</div>
 );
@@ -234,6 +242,17 @@ function Router() {
       </Shell>
     );
   }
+
+  if (view === "deployment-diagnostics") {
+    return (
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <RuntimeDiagnosticsWorkspace />
+        </Suspense>
+      </Shell>
+    );
+  }
+
 
   if (view === "admin") {
     return (
