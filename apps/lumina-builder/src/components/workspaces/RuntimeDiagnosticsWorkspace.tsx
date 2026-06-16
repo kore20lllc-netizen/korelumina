@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,7 @@ import {
 import {
   getRuntimeLogs,
   getRuntimeMetrics,
+  connectRuntimeEvents,
   listRuntimeProjects,
   restartRuntime,
   startRuntime,
@@ -77,6 +78,11 @@ export function RuntimeDiagnosticsWorkspace() {
 
   const [logs, setLogs] =
     useState<string[]>([]);
+
+  const logContainerRef =
+    useRef<HTMLPreElement | null>(
+      null,
+    );
 
   const [startProjectId, setStartProjectId] =
     useState("");
@@ -161,6 +167,45 @@ export function RuntimeDiagnosticsWorkspace() {
   }
 
   useEffect(() => {
+    const disconnect =
+      connectRuntimeEvents(
+        (event) => {
+          if (
+            event.type !==
+              "runtime:log" ||
+            !selectedProject ||
+            event.projectId !==
+              selectedProject
+          ) {
+            return;
+          }
+
+          setLogs((current) => {
+            const next = [
+              ...current,
+              event.line,
+            ];
+
+            if (
+              next.length > 300
+            ) {
+              next.splice(
+                0,
+                next.length - 300,
+              );
+            }
+
+            return next;
+          });
+        },
+      );
+
+    return () => {
+      disconnect();
+    };
+  }, [selectedProject]);
+
+  useEffect(() => {
     if (!allowed) {
       setView("dashboard");
       return;
@@ -219,6 +264,18 @@ export function RuntimeDiagnosticsWorkspace() {
       window.clearInterval(timer);
     };
   }, [allowed, setView, startProjectId]);
+
+  useEffect(() => {
+    const node =
+      logContainerRef.current;
+
+    if (!node) {
+      return;
+    }
+
+    node.scrollTop =
+      node.scrollHeight;
+  }, [logs]);
 
   if (!allowed) {
     return null;
@@ -530,7 +587,10 @@ export function RuntimeDiagnosticsWorkspace() {
                   Runtime Logs · {selectedProject}
                 </div>
 
-                <pre className="text-xs overflow-auto max-h-[400px] whitespace-pre-wrap">
+                <pre
+                  ref={logContainerRef}
+                  className="text-xs overflow-auto max-h-[400px] whitespace-pre-wrap"
+                >
                   {logs.length > 0
                     ? logs.join("\n")
                     : "No logs available"}
