@@ -44,6 +44,21 @@ type RestartState = {
   windowStartedAt: number;
 };
 
+type RestartHistory = {
+  projectId: string;
+  count: number;
+  windowStartedAt: number;
+  lastRestartAt: number;
+  lastRecoveredAt?: number;
+  lastFailureReason?: string;
+};
+
+const restartHistory =
+  new Map<
+    string,
+    RestartHistory
+  >();
+
 const restartState = new Map<
   string,
   RestartState
@@ -162,6 +177,16 @@ function shouldAutoRestart(
       },
     );
 
+    restartHistory.set(
+      projectId,
+      {
+        projectId,
+        count: 1,
+        windowStartedAt: now,
+        lastRestartAt: now,
+      },
+    );
+
     return true;
   }
 
@@ -174,6 +199,17 @@ function shouldAutoRestart(
 
   current.count += 1;
 
+  const history =
+    restartHistory.get(
+      projectId,
+    );
+
+  if (history) {
+    history.count += 1;
+    history.lastRestartAt =
+      now;
+  }
+
   return true;
 }
 
@@ -182,6 +218,36 @@ function clearRestartState(
 ) {
   restartState.delete(
     projectId,
+  );
+}
+
+function recordRestartHistory(
+  projectId: string,
+  reason: "manual" | "auto-recovery",
+) {
+  const now =
+    Date.now();
+
+  const existing =
+    restartHistory.get(
+      projectId,
+    );
+
+  restartHistory.set(
+    projectId,
+    {
+      projectId,
+      count:
+        (existing?.count ?? 0) + 1,
+      windowStartedAt:
+        existing?.windowStartedAt ?? now,
+      lastRestartAt:
+        now,
+      lastRecoveredAt:
+        existing?.lastRecoveredAt,
+      lastFailureReason:
+        reason,
+    },
   );
 }
 
@@ -206,12 +272,7 @@ export function getRestartState(
 
 export function getAllRestartStates() {
   return Array.from(
-    restartState.entries(),
-  ).map(
-    ([projectId, state]) => ({
-      projectId,
-      ...state,
-    }),
+    restartHistory.values(),
   );
 }
 
@@ -297,9 +358,14 @@ export async function startProject(
   return promise;
 }
 
-async function restartProject(
+export async function restartProject(
   projectId: string,
 ): Promise<void> {
+  recordRestartHistory(
+    projectId,
+    "manual",
+  );
+
   const pending =
     pendingStarts.get(
       projectId,
@@ -630,6 +696,11 @@ async function startProjectInternal(
         return;
       }
 
+      recordRestartHistory(
+        projectId,
+        "auto-recovery",
+      );
+
       appendRuntimeLog(
         projectId,
         `[lumina-runtime] auto-restart scheduled in ${AUTO_RESTART_DELAY_MS}ms`,
@@ -651,6 +722,16 @@ async function startProjectInternal(
 
     runtime.status =
       "running";
+
+    const history =
+      restartHistory.get(
+        projectId,
+      );
+
+    if (history) {
+      history.lastRecoveredAt =
+        Date.now();
+    }
 
     clearRestartState(
       projectId,
@@ -678,6 +759,16 @@ async function startProjectInternal(
       error instanceof Error
         ? error.message
         : "runtime_start_timeout";
+
+    const history =
+      restartHistory.get(
+        projectId,
+      );
+
+    if (history) {
+      history.lastFailureReason =
+        runtime.lastError;
+    }
 
     appendRuntimeLog(
       projectId,

@@ -358,7 +358,7 @@ export function RuntimeDiagnosticsWorkspace() {
               </div>
             )}
 
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-5 gap-4">
               <div className="rounded-2xl backdrop-blur-xl border border-cyan-500/20 bg-slate-950/95 p-5">
                 <div className="text-xs text-muted-foreground">
                   Supervisor PID
@@ -398,7 +398,74 @@ export function RuntimeDiagnosticsWorkspace() {
                   {metrics.totals.workspaceWatchers}
                 </div>
               </div>
+
+              <div className="rounded-2xl backdrop-blur-xl border border-rose-500/20 bg-rose-950/90 p-5">
+                <div className="text-xs text-muted-foreground">
+                  Restarts
+                </div>
+
+                <div className="text-4xl font-bold tracking-tight mt-2">
+                  {metrics.restarts.length}
+                </div>
+              </div>
             </div>
+
+            {metrics.restarts.length > 0 && (
+              <div className="rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
+                <div className="px-4 py-3 border-b border-white/10">
+                  <div className="font-semibold">
+                    Runtime Recovery
+                  </div>
+                </div>
+
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="text-left p-3">Project</th>
+                      <th className="text-left p-3">Restarts</th>
+                      <th className="text-left p-3">Last Restart</th>
+                      <th className="text-left p-3">Last Recovery</th>
+                      <th className="text-left p-3">Reason</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {metrics.restarts.map((restart) => (
+                      <tr
+                        key={restart.projectId}
+                        className="border-b border-white/5"
+                      >
+                        <td className="p-3">
+                          {restart.projectId}
+                        </td>
+
+                        <td className="p-3">
+                          {restart.count}
+                        </td>
+
+                        <td className="p-3">
+                          {new Date(
+                            restart.lastRestartAt,
+                          ).toLocaleString()}
+                        </td>
+
+                        <td className="p-3">
+                          {restart.lastRecoveredAt
+                            ? new Date(
+                                restart.lastRecoveredAt,
+                              ).toLocaleString()
+                            : "—"}
+                        </td>
+
+                        <td className="p-3">
+                          {restart.lastFailureReason ?? "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
             {metrics.runtimes.length === 0 ? (
               <div className="rounded-2xl bg-black/75 backdrop-blur-2xl border border-white/10 p-8 space-y-4">
