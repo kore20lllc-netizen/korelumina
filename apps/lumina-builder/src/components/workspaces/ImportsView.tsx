@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { Github, Plus, Upload, FolderGit2, MoreHorizontal, ArrowLeft, Search, ExternalLink, Pencil, Copy, Trash2, Archive, FolderOpen, Clock, Activity, GitBranch, Globe, BookOpen, X, Link2, RotateCcw, SlidersHorizontal, ArrowDownAZ, ArrowUpAZ, ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 import { toast } from "sonner";
-import { useWorkspace, type Project, formatLastEdited } from "@/context/WorkspaceContext";
+import {
+  useWorkspace,
+  type Project,
+} from "@/context/WorkspaceContext";
+
+import {
+  formatLastEdited,
+} from "@/lib/formatLastEdited";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { cn } from "@/lib/utils";
 import { luminaFrame } from "@/lib/luminaPalette";
