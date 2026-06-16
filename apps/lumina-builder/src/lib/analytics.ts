@@ -56,16 +56,6 @@ export function track(event: AnalyticsEvent, props?: AnalyticsProps) {
     window.dispatchEvent(new CustomEvent("kl:analytics", { detail: payload }));
   }
   listeners.forEach((fn) => { try { fn(payload); } catch { /* noop */ } });
-  if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
-    if (import.meta.env.DEV) {
-      console.debug(
-        "[analytics]",
-        event,
-        props ?? {},
-      );
-    }
-  }
 }
 
 export function getAnalyticsBuffer(): AnalyticsEntry[] {
