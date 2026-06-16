@@ -31,11 +31,35 @@ export function connectRuntimeEvents(
 
   const handleEvent = (raw: MessageEvent) => {
     try {
-      const event = JSON.parse(
+      const parsed = JSON.parse(
         raw.data,
-      ) as RuntimeEvent;
+      ) as RuntimeEvent & {
+        message?: string;
+        state?: string;
+      };
 
-      onEvent(event);
+      const event =
+        parsed.type === "runtime:log"
+          ? {
+              ...parsed,
+              line:
+                parsed.line ??
+                parsed.message ??
+                "",
+            }
+          : parsed.type === "runtime:state"
+            ? {
+                ...parsed,
+                status:
+                  parsed.status ??
+                  parsed.state ??
+                  "unknown",
+              }
+            : parsed;
+
+      onEvent(
+        event as RuntimeEvent,
+      );
     } catch {
       // Ignore malformed runtime event payloads.
     }
