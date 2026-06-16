@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { LuminaButton } from "@/components/lumina/LuminaButton";
+import { Badge } from "@/components/ui/badge";
 import { useWorkspace } from "@/context/WorkspaceContext";
 import {
   canAccess,
@@ -100,51 +101,103 @@ export function RuntimeDiagnosticsWorkspace() {
 
         {metrics && (
           <>
+            <div className={
+              metrics.totals.error > 0
+                ? "rounded-2xl border border-red-500/20 bg-gradient-to-r from-red-950/80 via-red-950/90 to-slate-950/95 backdrop-blur-2xl p-4"
+                : metrics.totals.running > 0
+                ? "rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-950/80 via-emerald-950/90 to-slate-950/95 backdrop-blur-2xl p-4"
+                : metrics.totals.runtimes > 0
+                ? "rounded-2xl border border-amber-500/20 bg-gradient-to-r from-amber-950/80 via-amber-950/90 to-slate-950/95 backdrop-blur-2xl p-4"
+                : "rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-cyan-950/80 via-cyan-950/90 to-slate-950/95 backdrop-blur-2xl p-4"
+            }>
+              <div
+                className={
+                  metrics.totals.error > 0
+                    ? "font-medium text-red-300"
+                    : metrics.totals.running > 0
+                    ? "font-medium text-emerald-300"
+                    : metrics.totals.runtimes > 0
+                    ? "font-medium text-amber-300"
+                    : "font-medium text-cyan-300"
+                }
+              >
+                {
+                  metrics.totals.error > 0
+                    ? "Runtime Error"
+                    : metrics.totals.running > 0
+                    ? "Runtime Healthy"
+                    : metrics.totals.runtimes > 0
+                    ? "Runtime Idle"
+                    : "No Active Runtime"
+                }
+              </div>
+
+              <div className="text-sm text-muted-foreground">
+                {metrics.totals.runtimes === 0
+                  ? "Start a project preview to launch a runtime."
+                  : metrics.totals.running > 0
+                  ? `${metrics.totals.running} running · ${metrics.totals.runtimes} registered · RSS ${metrics.process.memory.rssMb} MB`
+                  : `${metrics.totals.runtimes} registered · waiting for startup`}
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-4 gap-4">
 
-              <div className="rounded-xl border p-4">
+              <div className="rounded-2xl backdrop-blur-xl border border-cyan-500/20 bg-cyan-950/90 p-5">
                 <div className="text-xs text-muted-foreground">
-                  Runtime PID
+                  Supervisor PID
                 </div>
 
-                <div className="text-xl font-semibold">
+                <div className="text-4xl font-bold tracking-tight mt-2">
                   {metrics.process.pid}
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4">
+              <div className="rounded-2xl backdrop-blur-xl border border-emerald-500/20 bg-emerald-950/90 p-5">
                 <div className="text-xs text-muted-foreground">
                   Runtime Count
                 </div>
 
-                <div className="text-xl font-semibold">
+                <div className="text-5xl font-black tracking-tight mt-2">
                   {metrics.totals.runtimes}
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4">
+              <div className="rounded-2xl backdrop-blur-xl border border-violet-500/20 bg-violet-950/90 p-5">
                 <div className="text-xs text-muted-foreground">
                   Event Clients
                 </div>
 
-                <div className="text-xl font-semibold">
+                <div className="text-4xl font-bold tracking-tight mt-2">
                   {metrics.totals.eventClients}
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4">
+              <div className="rounded-2xl backdrop-blur-xl border border-amber-500/20 bg-amber-950/90 p-5">
                 <div className="text-xs text-muted-foreground">
                   Watchers
                 </div>
 
-                <div className="text-xl font-semibold">
+                <div className="text-4xl font-bold tracking-tight mt-2">
                   {metrics.totals.workspaceWatchers}
                 </div>
               </div>
 
             </div>
 
-            <div className="rounded-xl border overflow-hidden">
+            {metrics.runtimes.length === 0 ? (
+              <div className="rounded-2xl bg-black/75 backdrop-blur-2xl border border-white/10 p-10 text-center">
+                <div className="text-xl font-semibold">
+                  No active runtimes
+                </div>
+
+                <div className="mt-2 text-sm text-muted-foreground">
+                  Start a project preview to view runtime activity,
+                  ports, process information and health status.
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
@@ -167,7 +220,20 @@ export function RuntimeDiagnosticsWorkspace() {
                       </td>
 
                       <td className="p-3">
-                        {runtime.status}
+                        <Badge
+                          variant="outline"
+                          className={
+                            runtime.status === "running"
+                              ? "border-emerald-500/30 text-emerald-300"
+                              : runtime.status === "starting"
+                              ? "border-amber-500/30 text-amber-300"
+                              : runtime.status === "error"
+                              ? "border-red-500/30 text-red-300"
+                              : "border-slate-500/30 text-slate-300"
+                          }
+                        >
+                          {runtime.status}
+                        </Badge>
                       </td>
 
                       <td className="p-3">
@@ -179,13 +245,23 @@ export function RuntimeDiagnosticsWorkspace() {
                       </td>
 
                       <td className="p-3">
-                        {String(runtime.alive)}
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={
+                              runtime.alive
+                                ? "h-2 w-2 rounded-full bg-emerald-400"
+                                : "h-2 w-2 rounded-full bg-red-400"
+                            }
+                          />
+                          {runtime.alive ? "Alive" : "Dead"}
+                        </div>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            )}
           </>
         )}
 
