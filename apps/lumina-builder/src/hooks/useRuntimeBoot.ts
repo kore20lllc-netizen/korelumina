@@ -7,7 +7,7 @@ import {
 import {
   connectRuntimeEvents,
   type RuntimeEvent,
-} from "@/services/runtimeEvents";
+} from "@/services/runtimeService";
 
 import {
   getActiveRuntime,
@@ -79,6 +79,19 @@ function forgetRuntime(
       projectId,
     );
   }
+}
+
+
+function isValidProjectId(
+  projectId?: string | null,
+) {
+  if (!projectId) {
+    return false;
+  }
+
+  return !/^\d+$/.test(
+    projectId,
+  );
 }
 
 function phaseForStatus(
@@ -406,7 +419,9 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           projectId,
-          "Runtime stopped. Use Start to launch preview.",
+          isValidProjectId(projectId)
+            ? "Runtime stopped. Use Start to launch preview."
+            : "Select a project to start preview.",
         );
 
         return;
@@ -442,7 +457,9 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           projectId,
-          "Runtime stopped. Use Start to launch preview.",
+          isValidProjectId(projectId)
+            ? "Runtime stopped. Use Start to launch preview."
+            : "Select a project to start preview.",
         );
 
         return;
@@ -809,7 +826,9 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            "Runtime stopped. Use Start to launch preview.",
+            isValidProjectId(projectId)
+            ? "Runtime stopped. Use Start to launch preview."
+            : "Select a project to start preview.",
           );
 
           return;
@@ -893,7 +912,9 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           incomingProjectId,
-          "Runtime stopped. Use Start to launch preview.",
+          isValidProjectId(projectId)
+            ? "Runtime stopped. Use Start to launch preview."
+            : "Select a project to start preview.",
         );
 
         return;
@@ -925,7 +946,9 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            "Runtime stopped. Use Start to launch preview.",
+            isValidProjectId(projectId)
+            ? "Runtime stopped. Use Start to launch preview."
+            : "Select a project to start preview.",
           );
 
           return;
@@ -999,18 +1022,6 @@ export function useRuntimeBoot(
     };
   }, [incomingProjectId]);
 
-  console.log("[useRuntimeBoot:return]", {
-    incomingProjectId,
-    runtimeUrl,
-    runtimeLoading,
-    runtimeError,
-    runtimeProjectId,
-    runtimeHealthy,
-    reconnecting,
-    runtimePhase,
-    runtimeMessage,
-    runtimeProgress,
-  });
 
   return {
     runtimeUrl,

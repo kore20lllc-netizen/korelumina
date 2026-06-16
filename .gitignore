@@ -64,3 +64,9 @@ _snapshots/
 .env
 .env.local
 .aider*
+
+# reconstruction backups
+*.bak
+*.backup
+*.orig
+

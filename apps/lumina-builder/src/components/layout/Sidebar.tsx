@@ -1,6 +1,6 @@
 import {
   LayoutGrid, Sparkles, Palette, Code2, FolderGit2, Settings, X,
-  Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity, ShieldCheck, Crown, ChevronDown, LogOut, User as UserIcon,
+  Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity, ShieldCheck, Gauge, Crown, ChevronDown, LogOut, User as UserIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -71,6 +71,11 @@ export function Sidebar() {
       ? [
           { icon: Activity, label: "Repo Audit", active: view === "repo-audit" },
           { icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" },
+          {
+            icon: Gauge,
+            label: "Deployment Diagnostics",
+            active: view === "deployment-diagnostics",
+          },
           { icon: Crown, label: "Admin", active: view === "admin" },
         ]
       : [];
@@ -198,6 +203,10 @@ export function Sidebar() {
                     setView("repo-audit");
                   } else if (item.label === "In-House Dev") {
                     setView("inhouse-dev");
+                  } else if (
+                    item.label === "Deployment Diagnostics"
+                  ) {
+                    setView("deployment-diagnostics");
                   } else if (item.label === "Admin") {
                     setView("admin");
                   } else {

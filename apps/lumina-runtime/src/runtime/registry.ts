@@ -307,12 +307,14 @@ export function listRuntimes(): RuntimeRecord[] {
       runtime.status =
         "exited";
 
-      runtimeMap.delete(
-        projectId,
-      );
+      runtime.exitedAt ??=
+        Date.now();
 
-      removeRuntimeState(projectId);
-  publishState(projectId, "exited");
+      runtime.lastError ??=
+        "runtime_process_not_alive";
+
+      persistRecord(runtime);
+      publishState(projectId, "exited");
     }
   }
 

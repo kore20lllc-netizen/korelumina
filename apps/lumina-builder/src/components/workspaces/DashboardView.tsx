@@ -522,6 +522,7 @@ export function DashboardView() {
                   role="button"
                   tabIndex={0}
                   onClick={() => {
+
                     setActiveProject(
                       p,
                     );

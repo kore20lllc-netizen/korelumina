@@ -185,6 +185,36 @@ function clearRestartState(
   );
 }
 
+
+export function getRestartState(
+  projectId: string,
+) {
+  const state =
+    restartState.get(
+      projectId,
+    );
+
+  if (!state) {
+    return null;
+  }
+
+  return {
+    projectId,
+    ...state,
+  };
+}
+
+export function getAllRestartStates() {
+  return Array.from(
+    restartState.entries(),
+  ).map(
+    ([projectId, state]) => ({
+      projectId,
+      ...state,
+    }),
+  );
+}
+
 export async function startProject(
   projectId: string,
 ): Promise<PublicRuntimeRecord> {

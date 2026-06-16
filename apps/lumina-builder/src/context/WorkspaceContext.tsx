@@ -34,6 +34,21 @@ export type BuildIntent =
   | "import"
   | "mobile";
 
+export type View =
+  | "landing"
+  | "entry"
+  | "dashboard"
+  | "auth"
+  | "settings"
+  | "pricing"
+  | "templates"
+  | "imports"
+  | "workspace"
+  | "repo-audit"
+  | "inhouse-dev"
+  | "deployment-diagnostics"
+  | "admin";
+
 export interface UsageSnapshot {
   aiExecutions: number;
   aiLimit: number;
@@ -112,9 +127,9 @@ export function formatLastEdited(
 }
 
 interface WorkspaceContextValue {
-  view: string;
+  view: View;
   setView: (
-    view: string,
+    view: View,
   ) => void;
 
   mode: string;
@@ -238,6 +253,18 @@ function resolveInitialProject() {
       ACTIVE_PROJECT_STORAGE_KEY,
     );
 
+  if (
+    savedId &&
+    !projects.some(
+      (project) =>
+        project.id === savedId,
+    )
+  ) {
+    localStorage.removeItem(
+      ACTIVE_PROJECT_STORAGE_KEY,
+    );
+  }
+
   return (
     projects.find(
       (project) =>
@@ -287,7 +314,7 @@ export function WorkspaceProvider({
   children: ReactNode;
 }) {
   const [view, setView] =
-    useState("dashboard");
+    useState<View>("dashboard");
 
   const [mode, setMode] =
     useState("dev");

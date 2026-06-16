@@ -301,14 +301,6 @@ export function PreviewFrame({
       [url],
     );
 
-  console.log("[PreviewFrame]", {
-    projectId,
-    url,
-    navigableUrl,
-    runtimePhase,
-    runtimeMessage,
-    runtimeError,
-  });
 
   const displayUrl =
     navigableUrl ??

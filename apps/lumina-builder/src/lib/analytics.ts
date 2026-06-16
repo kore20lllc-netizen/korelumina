@@ -58,7 +58,13 @@ export function track(event: AnalyticsEvent, props?: AnalyticsProps) {
   listeners.forEach((fn) => { try { fn(payload); } catch { /* noop */ } });
   if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
-    console.debug("[analytics]", event, props ?? {});
+    if (import.meta.env.DEV) {
+      console.debug(
+        "[analytics]",
+        event,
+        props ?? {},
+      );
+    }
   }
 }
 

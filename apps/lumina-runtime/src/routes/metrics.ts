@@ -9,6 +9,10 @@ import {
   serializeRuntime,
 } from "../runtime/registry.js";
 
+import {
+  getAllRestartStates,
+} from "../runtime/startProject.js";
+
 function getMemoryMb() {
   const usage = process.memoryUsage();
 
@@ -63,6 +67,7 @@ export function registerMetricsRoute(app: Express) {
           exited: runtimes.filter((r) => r.status === "exited").length,
           error: runtimes.filter((r) => r.status === "error").length,
         },
+        restarts: getAllRestartStates(),
         runtimes,
       });
     } catch (error) {
