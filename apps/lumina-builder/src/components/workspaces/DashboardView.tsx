@@ -163,11 +163,6 @@ export function DashboardView() {
     string | null
   >(null);
 
-  console.log(
-    "[Dashboard:projects]",
-    projects,
-  );
-
   const filtered =
     useMemo(() => {
       return projects
@@ -527,10 +522,6 @@ export function DashboardView() {
                   role="button"
                   tabIndex={0}
                   onClick={() => {
-                    console.log(
-                      "[Dashboard:selectedProject]",
-                      p,
-                    );
 
                     setActiveProject(
                       p,

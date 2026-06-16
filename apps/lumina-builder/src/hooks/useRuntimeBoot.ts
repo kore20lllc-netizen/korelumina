@@ -1022,18 +1022,6 @@ export function useRuntimeBoot(
     };
   }, [incomingProjectId]);
 
-  console.log("[useRuntimeBoot:return]", {
-    incomingProjectId,
-    runtimeUrl,
-    runtimeLoading,
-    runtimeError,
-    runtimeProjectId,
-    runtimeHealthy,
-    reconnecting,
-    runtimePhase,
-    runtimeMessage,
-    runtimeProgress,
-  });
 
   return {
     runtimeUrl,

@@ -476,19 +476,6 @@ export function WorkspaceProvider({
           ...localOnly,
         ];
 
-
-        console.log(
-          "[WorkspaceContext]",
-          {
-            runtimeProjects,
-            localProjects,
-            ownedProjectIds: [...ownedProjectIds],
-            canSeeAllRuntimeProjects,
-            runtimeMapped,
-            nextProjects,
-          },
-        );
-
         setStoredProjects(nextProjects);
 
         setActiveProjectState((current) =>
