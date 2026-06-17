@@ -11,11 +11,27 @@ import { listAllProjects, deleteProject, transferProjectOwnership, listUsers } f
 import { projectRepository } from "@/services/projectRepository";
 import { useWorkspace } from "@/context/WorkspaceContext";
 
+import { AdminProjectDeleteDialog } from "./dialogs/AdminProjectDeleteDialog";
+
+
 export function ProjectsTab() {
   const { setView, setActiveProject } = useWorkspace();
   const [projects, setProjects] = useState(listAllProjects());
   const [users] = useState(listUsers());
   const [q, setQ] = useState("");
+
+  const [
+    deleteTarget,
+    setDeleteTarget,
+  ] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
+  const [
+    deleting,
+    setDeleting,
+  ] = useState(false);
   const refresh = () => setProjects(listAllProjects());
   useEffect(() => projectRepository.onChange(refresh), []);
   const filtered = useMemo(() => projects.filter((p) => !q || p.name.toLowerCase().includes(q.toLowerCase())), [projects, q]);
@@ -62,34 +78,17 @@ export function ProjectsTab() {
                           </div>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
+
                         <DropdownMenuItem
                           className="text-destructive"
-                          onClick={async () => {
-                            if (
-                              !confirm(
-                                `Delete "${p.name}"?`,
-                              )
-                            ) {
-                              return;
-                            }
+                          onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-                            try {
-                              await deleteProject(
-                                p.id,
-                              );
-
-                              toast.success(
-                                "Project deleted",
-                              );
-                            } catch (
-                              error
-                            ) {
-                              toast.error(
-                                error instanceof Error
-                                  ? error.message
-                                  : "Delete failed",
-                              );
-                            }
+                            setDeleteTarget({
+                              id: p.id,
+                              name: p.name,
+                            });
                           }}
                         >
                           Delete
@@ -103,6 +102,45 @@ export function ProjectsTab() {
           </TableBody>
         </Table>
       </div>
+      <AdminProjectDeleteDialog
+        open={deleteTarget !== null}
+        project={deleteTarget}
+        deleting={deleting}
+        onOpenChange={(open) => {
+          if (!open && !deleting) {
+            setDeleteTarget(null);
+          }
+        }}
+        onConfirm={async () => {
+          if (!deleteTarget) {
+            return;
+          }
+
+          try {
+            setDeleting(true);
+
+            await deleteProject(
+              deleteTarget.id,
+            );
+
+            toast.success(
+              "Project deleted",
+            );
+
+            refresh();
+
+            setDeleteTarget(null);
+          } catch (error) {
+            toast.error(
+              error instanceof Error
+                ? error.message
+                : "Delete failed",
+            );
+          } finally {
+            setDeleting(false);
+          }
+        }}
+      />
     </div>
   );
 }
