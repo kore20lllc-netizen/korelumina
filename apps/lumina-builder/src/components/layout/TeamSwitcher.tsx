@@ -10,19 +10,44 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { CreateWorkspaceDialog } from "@/components/layout/dialogs/CreateWorkspaceDialog";
 
 export function TeamSwitcher() {
   const { teams, activeTeam, setActiveTeam, createTeam } = useActiveTeam();
   const [creating, setCreating] = useState(false);
 
+  const [dialogOpen, setDialogOpen] =
+    useState(false);
+
+  const [workspaceName, setWorkspaceName] =
+    useState("");
+
   if (!activeTeam) return null;
 
   const handleCreate = () => {
     if (creating) return;
-    const name = window.prompt("New workspace name");
-    if (!name?.trim()) return;
+
+    setWorkspaceName("");
+    setDialogOpen(true);
+  };
+
+  const handleSubmit = () => {
+    if (!workspaceName.trim()) {
+      return;
+    }
+
     setCreating(true);
-    try { createTeam(name.trim()); } finally { setCreating(false); }
+
+    try {
+      createTeam(
+        workspaceName.trim(),
+      );
+
+      setDialogOpen(false);
+      setWorkspaceName("");
+    } finally {
+      setCreating(false);
+    }
   };
 
   return (
@@ -74,6 +99,13 @@ export function TeamSwitcher() {
           New workspace
         </DropdownMenuItem>
       </DropdownMenuContent>
+      <CreateWorkspaceDialog
+        open={dialogOpen}
+        value={workspaceName}
+        onValueChange={setWorkspaceName}
+        onOpenChange={setDialogOpen}
+        onSubmit={handleSubmit}
+      />
     </DropdownMenu>
   );
 }
