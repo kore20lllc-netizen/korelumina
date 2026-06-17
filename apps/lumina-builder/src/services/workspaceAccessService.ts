@@ -16,6 +16,7 @@ export interface WorkspaceCapabilities {
   securityAudit: boolean;
   repairConsole: boolean;
   deploymentDiagnostics: boolean;
+  supportAccess: boolean;
   adminTools: boolean;
   fullscreenPreview: boolean;
   browserPreview: boolean;
@@ -34,6 +35,7 @@ const BASE: WorkspaceCapabilities = {
   securityAudit: false,
   repairConsole: false,
   deploymentDiagnostics: false,
+  supportAccess: false,
   adminTools: false,
   fullscreenPreview: false,
   browserPreview: false,
@@ -73,7 +75,7 @@ export function getCapabilities(role: WorkspaceRole = getCurrentRole()): Workspa
       return {
         dashboard: true, designer: true, developer: true, ai: true,
         repoAudit: true, securityAudit: true, repairConsole: true,
-        deploymentDiagnostics: true, adminTools: true,
+        deploymentDiagnostics: true, supportAccess: true, adminTools: true,
         fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
         mobilePackaging: true, inhouseDevDashboard: true,
       };
@@ -81,7 +83,7 @@ export function getCapabilities(role: WorkspaceRole = getCurrentRole()): Workspa
       return {
         dashboard: true, designer: true, developer: true, ai: true,
         repoAudit: false, securityAudit: false, repairConsole: false,
-        deploymentDiagnostics: true, adminTools: true,
+        deploymentDiagnostics: true, supportAccess: true, adminTools: true,
         fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
         mobilePackaging: true, inhouseDevDashboard: false,
       };
@@ -89,7 +91,7 @@ export function getCapabilities(role: WorkspaceRole = getCurrentRole()): Workspa
       return {
         dashboard: true, designer: true, developer: true, ai: true,
         repoAudit: true, securityAudit: true, repairConsole: true,
-        deploymentDiagnostics: true, adminTools: false,
+        deploymentDiagnostics: true, supportAccess: true, adminTools: false,
         fullscreenPreview: true, browserPreview: true, customSlug: true, brandedPreviewUrl: true,
         mobilePackaging: true, inhouseDevDashboard: true,
       };
@@ -111,5 +113,5 @@ export function canAccess(capability: keyof WorkspaceCapabilities): boolean {
 
 export function hasAnyInternalCapability(caps = getCapabilities()): boolean {
   return caps.repoAudit || caps.securityAudit || caps.repairConsole ||
-    caps.deploymentDiagnostics || caps.adminTools;
+    caps.deploymentDiagnostics || caps.supportAccess || caps.adminTools;
 }

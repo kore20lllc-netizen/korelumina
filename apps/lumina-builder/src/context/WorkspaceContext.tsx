@@ -408,7 +408,7 @@ export function WorkspaceProvider({
           localProjects.map((project) => project.id),
         );
 
-        const canSeeAllRuntimeProjects = canAccess("adminTools");
+        const canSeeAllRuntimeProjects = canAccess("adminTools") || canAccess("supportAccess");
 
         const localById = new Map(
           localProjects.map((project) => [
