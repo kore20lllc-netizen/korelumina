@@ -115,7 +115,7 @@ export function RoleSwitcher() {
       </div>
 
       <AlertDialog open={pendingRole !== null} onOpenChange={(open) => { if (!open) setPendingRole(null); }}>
-        <AlertDialogContent>
+        <AlertDialogContent className="glass-strong border-border">
           <AlertDialogHeader>
             <AlertDialogTitle>Switch to privileged role?</AlertDialogTitle>
             <AlertDialogDescription>

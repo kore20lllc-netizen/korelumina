@@ -504,7 +504,7 @@ export function MobilePackagingCard({ projectId }: { projectId: string }) {
       )}
 
       <AlertDialog open={!!confirmRemove} onOpenChange={(o) => !o && setConfirmRemove(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent className="glass-strong border-border">
           <AlertDialogHeader>
             <AlertDialogTitle>Uninstall {confirmRemove?.label}?</AlertDialogTitle>
             <AlertDialogDescription>

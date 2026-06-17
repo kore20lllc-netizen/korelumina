@@ -108,7 +108,7 @@ export function FindingsFilters({
               <Trash2 className="h-3 w-3" /> Clear history
             </button>
           </AlertDialogTrigger>
-          <AlertDialogContent>
+          <AlertDialogContent className="glass-strong border-border">
             <AlertDialogHeader>
               <AlertDialogTitle>Clear undo history?</AlertDialogTitle>
               <AlertDialogDescription>
