@@ -17,12 +17,19 @@ import {
 } from "@/services/adminService";
 import { auth } from "@/providers/auth-registry";
 import type { Role } from "@/providers/types";
+import { AdminUserDeleteDialog } from "@/components/workspaces/admin/dialogs/AdminUserDeleteDialog";
 
 const ROLES: Role[] = ["free", "pro", "business", "enterprise", "inhouse-dev", "admin"];
 
 export function UsersTab() {
   const [rows, setRows] = useState<AdminUserRow[]>([]);
   const [q, setQ] = useState("");
+
+  const [deleteTarget, setDeleteTarget] =
+    useState<AdminUserRow | null>(null);
+
+  const [deleting, setDeleting] =
+    useState(false);
   const refresh = () => setRows(listUsers());
   useEffect(() => { refresh(); return auth.onChange(refresh); }, []);
 
@@ -87,7 +94,12 @@ export function UsersTab() {
                         ? <DropdownMenuItem onClick={() => { reactivateUser(u.id); refresh(); }}>Reactivate</DropdownMenuItem>
                         : <DropdownMenuItem onClick={() => { suspendUser(u.id); refresh(); }}>Suspend</DropdownMenuItem>}
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive" onClick={() => { if (confirm(`Delete ${u.email}?`)) { deleteUser(u.id); refresh(); } }}>
+                      <DropdownMenuItem
+                        className="text-destructive"
+                        onClick={() => {
+                          setDeleteTarget(u);
+                        }}
+                      >
                         Delete user
                       </DropdownMenuItem>
                     </DropdownMenuContent>
