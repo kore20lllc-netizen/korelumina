@@ -137,31 +137,6 @@ export function DashboardView() {
     "status"
   >("recent");
 
-  const [
-    renameId,
-    setRenameId,
-  ] = useState<
-    string | null
-  >(null);
-
-  const [
-    renameValue,
-    setRenameValue,
-  ] = useState("");
-
-  const [
-    deleteId,
-    setDeleteId,
-  ] = useState<
-    string | null
-  >(null);
-
-
-  const [
-    deleting,
-    setDeleting,
-  ] = useState(false);
-
   const filtered =
     useMemo(() => {
       return projects
@@ -677,36 +652,18 @@ export function DashboardView() {
                               }
 
                               try {
-                                setDeleting(
-                                  true,
-                                );
+  await deleteRuntimeProject(p.id);
 
-                                await deleteRuntimeProject(
-                                  p.id,
-                                );
+  projectRepository.remove(p.id);
 
-                                projectRepository.remove(
-                                  p.id,
-                                );
+  toast.success("Project deleted");
 
-                                toast.success(
-                                  "Project deleted",
-                                );
-
-                                window.dispatchEvent(
-                                  new Event(
-                                    "storage",
-                                  ),
-                                );
-                              } catch {
-                                toast.error(
-                                  "Delete failed",
-                                );
-                              } finally {
-                                setDeleting(
-                                  false,
-                                );
-                              }
+  window.dispatchEvent(
+    new Event("storage"),
+  );
+} catch {
+  toast.error("Delete failed");
+}
                             }}
                             className="text-destructive focus:text-destructive"
                           >
