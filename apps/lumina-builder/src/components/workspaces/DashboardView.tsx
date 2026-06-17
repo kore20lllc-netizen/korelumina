@@ -45,18 +45,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 
 import { projectRepository } from "@/services/projectRepository";
+import {
+  deleteRuntimeProject,
+} from "@/services/runtimeService";
 import { toast } from "sonner";
 
 const typeIcon: Record<BuildIntent, any> = {
@@ -162,6 +155,12 @@ export function DashboardView() {
   ] = useState<
     string | null
   >(null);
+
+
+  const [
+    deleting,
+    setDeleting,
+  ] = useState(false);
 
   const filtered =
     useMemo(() => {
@@ -630,14 +629,35 @@ export function DashboardView() {
                           </DropdownMenuItem>
 
                           <DropdownMenuItem
-                            onSelect={() => {
-                              setRenameId(
-                                p.id,
-                              );
-
-                              setRenameValue(
+                            onClick={() => {
+                              const nextName = window.prompt(
+                                "Rename project",
                                 p.name,
                               );
+
+                              if (
+                                !nextName ||
+                                !nextName.trim()
+                              ) {
+                                return;
+                              }
+
+                              try {
+                                projectRepository.update(
+                                  p.id,
+                                  {
+                                    name: nextName.trim(),
+                                  },
+                                );
+
+                                toast.success(
+                                  "Renamed",
+                                );
+                              } catch {
+                                toast.error(
+                                  "Rename failed",
+                                );
+                              }
                             }}
                           >
                             <Pencil className="h-3.5 w-3.5 mr-2" />
@@ -647,11 +667,47 @@ export function DashboardView() {
                           <DropdownMenuSeparator />
 
                           <DropdownMenuItem
-                            onSelect={() =>
-                              setDeleteId(
-                                p.id,
-                              )
-                            }
+                            onClick={async () => {
+                              const confirmed = window.confirm(
+                                `Delete "${p.name}"? This will stop the runtime, delete project files from disk, and remove it from KoreLumina. This cannot be undone.`,
+                              );
+
+                              if (!confirmed) {
+                                return;
+                              }
+
+                              try {
+                                setDeleting(
+                                  true,
+                                );
+
+                                await deleteRuntimeProject(
+                                  p.id,
+                                );
+
+                                projectRepository.remove(
+                                  p.id,
+                                );
+
+                                toast.success(
+                                  "Project deleted",
+                                );
+
+                                window.dispatchEvent(
+                                  new Event(
+                                    "storage",
+                                  ),
+                                );
+                              } catch {
+                                toast.error(
+                                  "Delete failed",
+                                );
+                              } finally {
+                                setDeleting(
+                                  false,
+                                );
+                              }
+                            }}
                             className="text-destructive focus:text-destructive"
                           >
                             <Trash2 className="h-3.5 w-3.5 mr-2" />
@@ -677,159 +733,7 @@ export function DashboardView() {
         source="dashboard:repo-audit-locked"
       />
 
-      <AlertDialog
-        open={
-          renameId !==
-          null
-        }
-        onOpenChange={(
-          o,
-        ) => {
-          if (!o) {
-            setRenameId(
-              null,
-            );
-          }
-        }}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Rename
-              project
-            </AlertDialogTitle>
 
-            <AlertDialogDescription>
-              Choose a
-              new name
-              for this
-              project.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-
-          <input
-            value={
-              renameValue
-            }
-            onChange={(e) =>
-              setRenameValue(
-                e.target
-                  .value,
-              )
-            }
-            autoFocus
-            className="h-10 px-3 rounded-lg bg-surface-1 border border-border text-[13px] outline-none focus:border-violet/50 transition w-full"
-          />
-
-          <AlertDialogFooter>
-            <AlertDialogCancel>
-              Cancel
-            </AlertDialogCancel>
-
-            <AlertDialogAction
-              onClick={() => {
-                if (
-                  !renameId ||
-                  !renameValue.trim()
-                ) {
-                  return;
-                }
-
-                try {
-                  projectRepository.update(
-                    renameId,
-                    {
-                      name: renameValue.trim(),
-                    },
-                  );
-
-                  toast.success(
-                    "Renamed",
-                  );
-                } catch {
-                  toast.error(
-                    "Rename failed",
-                  );
-                }
-
-                setRenameId(
-                  null,
-                );
-              }}
-            >
-              Save
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <AlertDialog
-        open={
-          deleteId !==
-          null
-        }
-        onOpenChange={(
-          o,
-        ) => {
-          if (!o) {
-            setDeleteId(
-              null,
-            );
-          }
-        }}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Delete
-              project?
-            </AlertDialogTitle>
-
-            <AlertDialogDescription>
-              This
-              cannot be
-              undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-
-          <AlertDialogFooter>
-            <AlertDialogCancel>
-              Cancel
-            </AlertDialogCancel>
-
-            <AlertDialogAction
-              onClick={() => {
-                if (
-                  !deleteId
-                ) {
-                  return;
-                }
-
-                try {
-                  projectRepository.remove(
-                    deleteId,
-                  );
-
-                  toast.success(
-                    "Project deleted",
-                  );
-                } catch {
-                  toast.error(
-                    "Delete failed",
-                  );
-                }
-
-                setDeleteId(
-                  null,
-                );
-              }}
-              className="bg-destructive hover:bg-destructive/90"
-            >
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 }
