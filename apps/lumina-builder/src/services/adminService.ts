@@ -10,6 +10,7 @@ import { setConfig, getConfig, type ProviderConfig } from "@/services/providerCo
 import { isFeatureEnabled, setFeatureFlagOverride, type FeatureFlag } from "@/lib/featureFlags";
 import type { Payment, Plan, Role, Subscription, User } from "@/providers/types";
 import { notificationService } from "@/services/notificationService";
+import { deleteRuntimeProject } from "@/services/runtimeService";
 
 /* ============================================================
  * Users
@@ -68,9 +69,22 @@ export function createUser(input: { email: string; name: string; role: Role; pas
  * ============================================================ */
 
 export function listAllProjects() { return projectRepository.list(); }
-export function deleteProject(id: string) {
-  projectRepository.remove(id);
-  logAction("project.delete", { entityType: "project", entityId: id });
+export async function deleteProject(id: string) {
+  await deleteRuntimeProject(
+    id,
+  );
+
+  projectRepository.remove(
+    id,
+  );
+
+  logAction(
+    "project.delete",
+    {
+      entityType: "project",
+      entityId: id,
+    },
+  );
 }
 export function transferProjectOwnership(id: string, newOwnerId: string) {
   projectRepository.update(id, { ownerId: newOwnerId });

@@ -1,7 +1,12 @@
 import type { Express } from "express";
 
-import { stopRuntime } from "../runtime/registry.js";
-import { startProject } from "../runtime/startProject.js";
+import {
+  getRuntime,
+} from "../runtime/registry.js";
+
+import {
+  restartProject,
+} from "../runtime/startProject.js";
 
 function normalizeProjectId(
   value: unknown,
@@ -34,12 +39,12 @@ export function registerRestartRoute(
           });
         }
 
-        await stopRuntime(
+        await restartProject(
           projectId,
         );
 
         const runtime =
-          await startProject(
+          getRuntime(
             projectId,
           );
 

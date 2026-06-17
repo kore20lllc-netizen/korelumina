@@ -263,6 +263,32 @@ export async function stopRuntime(
 }
 
 
+export async function deleteRuntimeProject(
+  projectId: string,
+): Promise<void> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/runtime/projects/${encodeURIComponent(
+        projectId,
+      )}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data?.error ??
+        "failed_to_delete_project",
+    );
+  }
+}
+
+
+
 export async function restartRuntime(
   projectId: string,
 ): Promise<RuntimeSession> {
@@ -329,6 +355,14 @@ export interface RuntimeMetricsResponse {
     exited: number;
     error: number;
   };
+  restarts: Array<{
+    projectId: string;
+    count: number;
+    windowStartedAt: number;
+    lastRestartAt: number;
+    lastRecoveredAt?: number;
+    lastFailureReason?: string;
+  }>;
   runtimes: Array<{
     projectId: string;
     framework: string | null;
@@ -417,13 +451,35 @@ export function connectRuntimeEvents(
       raw: MessageEvent,
     ) => {
       try {
-        const event =
+        const parsed =
           JSON.parse(
             raw.data,
-          ) as RuntimeEvent;
+          ) as RuntimeEvent & {
+            message?: string;
+            state?: string;
+          };
+
+        const event =
+          parsed.type === "runtime:log"
+            ? {
+                ...parsed,
+                line:
+                  parsed.line ??
+                  parsed.message ??
+                  "",
+              }
+            : parsed.type === "runtime:state"
+              ? {
+                  ...parsed,
+                  status:
+                    parsed.status ??
+                    parsed.state ??
+                    "unknown",
+                }
+              : parsed;
 
         onEvent(
-          event,
+          event as RuntimeEvent,
         );
       } catch {
         // ignore malformed event payloads

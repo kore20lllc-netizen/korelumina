@@ -62,7 +62,38 @@ export function ProjectsTab() {
                           </div>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive" onClick={() => { if (confirm(`Delete "${p.name}"?`)) { deleteProject(p.id); } }}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="text-destructive"
+                          onClick={async () => {
+                            if (
+                              !confirm(
+                                `Delete "${p.name}"?`,
+                              )
+                            ) {
+                              return;
+                            }
+
+                            try {
+                              await deleteProject(
+                                p.id,
+                              );
+
+                              toast.success(
+                                "Project deleted",
+                              );
+                            } catch (
+                              error
+                            ) {
+                              toast.error(
+                                error instanceof Error
+                                  ? error.message
+                                  : "Delete failed",
+                              );
+                            }
+                          }}
+                        >
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
