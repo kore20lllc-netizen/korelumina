@@ -36,6 +36,8 @@ import {
 } from "@/components/ui/tooltip";
 
 import { SalesRequestDialog } from "@/components/sales/SalesRequestDialog";
+import { ProjectRenameDialog } from "@/components/workspaces/dialogs/ProjectRenameDialog";
+import { ProjectDeleteDialog } from "@/components/workspaces/dialogs/ProjectDeleteDialog";
 
 import {
   DropdownMenu,
@@ -136,6 +138,33 @@ export function DashboardView() {
     "name" |
     "status"
   >("recent");
+
+
+  const [
+    renameTarget,
+    setRenameTarget,
+  ] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
+  const [
+    renameValue,
+    setRenameValue,
+  ] = useState("");
+
+  const [
+    deleteTarget,
+    setDeleteTarget,
+  ] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
+  const [
+    deleting,
+    setDeleting,
+  ] = useState(false);
 
   const filtered =
     useMemo(() => {
@@ -581,9 +610,17 @@ export function DashboardView() {
                           </button>
                         </DropdownMenuTrigger>
 
-                        <DropdownMenuContent align="end">
+                        <DropdownMenuContent
+                          align="end"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                          }}
+                        >
                           <DropdownMenuItem
-                            onSelect={() => {
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+
                               try {
                                 projectRepository.duplicate(
                                   p.id,
@@ -604,35 +641,18 @@ export function DashboardView() {
                           </DropdownMenuItem>
 
                           <DropdownMenuItem
-                            onClick={() => {
-                              const nextName = window.prompt(
-                                "Rename project",
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+
+                              setRenameTarget({
+                                id: p.id,
+                                name: p.name,
+                              });
+
+                              setRenameValue(
                                 p.name,
                               );
-
-                              if (
-                                !nextName ||
-                                !nextName.trim()
-                              ) {
-                                return;
-                              }
-
-                              try {
-                                projectRepository.update(
-                                  p.id,
-                                  {
-                                    name: nextName.trim(),
-                                  },
-                                );
-
-                                toast.success(
-                                  "Renamed",
-                                );
-                              } catch {
-                                toast.error(
-                                  "Rename failed",
-                                );
-                              }
                             }}
                           >
                             <Pencil className="h-3.5 w-3.5 mr-2" />
@@ -642,28 +662,14 @@ export function DashboardView() {
                           <DropdownMenuSeparator />
 
                           <DropdownMenuItem
-                            onClick={async () => {
-                              const confirmed = window.confirm(
-                                `Delete "${p.name}"? This will stop the runtime, delete project files from disk, and remove it from KoreLumina. This cannot be undone.`,
-                              );
+                            onClick={async (event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
 
-                              if (!confirmed) {
-                                return;
-                              }
-
-                              try {
-  await deleteRuntimeProject(p.id);
-
-  projectRepository.remove(p.id);
-
-  toast.success("Project deleted");
-
-  window.dispatchEvent(
-    new Event("storage"),
-  );
-} catch {
-  toast.error("Delete failed");
-}
+                              setDeleteTarget({
+                                id: p.id,
+                                name: p.name,
+                              });
                             }}
                             className="text-destructive focus:text-destructive"
                           >
@@ -680,6 +686,84 @@ export function DashboardView() {
           )}
         </div>
       </div>
+
+      <ProjectRenameDialog
+        open={renameTarget !== null}
+        project={renameTarget}
+        value={renameValue}
+        onValueChange={setRenameValue}
+        onOpenChange={(open) => {
+          if (!open) {
+            setRenameTarget(null);
+            setRenameValue("");
+          }
+        }}
+        onSubmit={() => {
+          if (!renameTarget || !renameValue.trim()) {
+            return;
+          }
+
+          try {
+            projectRepository.update(
+              renameTarget.id,
+              {
+                name: renameValue.trim(),
+              },
+            );
+
+            toast.success("Renamed");
+
+            setRenameTarget(null);
+            setRenameValue("");
+          } catch {
+            toast.error("Rename failed");
+          }
+        }}
+      />
+
+      <ProjectDeleteDialog
+        open={deleteTarget !== null}
+        project={deleteTarget}
+        deleting={deleting}
+        onOpenChange={(open) => {
+          if (!open && !deleting) {
+            setDeleteTarget(null);
+          }
+        }}
+        onConfirm={async () => {
+          if (!deleteTarget) {
+            return;
+          }
+
+          try {
+            setDeleting(true);
+
+            await deleteRuntimeProject(
+              deleteTarget.id,
+            );
+
+            projectRepository.remove(
+              deleteTarget.id,
+            );
+
+            toast.success(
+              "Project deleted",
+            );
+
+            setDeleteTarget(null);
+
+            window.dispatchEvent(
+              new Event("storage"),
+            );
+          } catch {
+            toast.error(
+              "Delete failed",
+            );
+          } finally {
+            setDeleting(false);
+          }
+        }}
+      />
 
       <SalesRequestDialog
         open={salesOpen}
