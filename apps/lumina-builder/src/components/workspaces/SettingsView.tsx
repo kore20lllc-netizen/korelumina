@@ -20,6 +20,7 @@ import { projectRepository } from "@/services/projectRepository";
 import { setPricingPrefill } from "@/services/pricingPrefill";
 import { ArrowUpRight } from "lucide-react";
 import { resetAllData } from "@/services/adminService";
+import { LeaveWorkspaceDialog } from "@/components/workspaces/settings/dialogs/LeaveWorkspaceDialog";
 
 interface ApiKey { id: string; preview: string; createdAt: number; secret: string }
 
@@ -53,6 +54,12 @@ export function SettingsView() {
   const [email] = useState(user?.email ?? "");
   useEffect(() => { if (user) setName(user.name); }, [user]);
   const [savingProfile, setSavingProfile] = useState(false);
+
+  const [leaveDialogOpen, setLeaveDialogOpen] =
+    useState(false);
+
+  const [leavingWorkspace, setLeavingWorkspace] =
+    useState(false);
 
   const [apiKeys, setApiKeys] = useState<ApiKey[]>(() => loadKeys());
   const [revealed, setRevealed] = useState<string | null>(null);
@@ -110,10 +117,7 @@ export function SettingsView() {
     catch (e) { toast.error(normalizeError(e).userMessage); }
   };
   const leaveTeam = () => {
-    if (!activeTeam || !user) return;
-    if (!confirm(`Leave ${activeTeam.name}?`)) return;
-    try { teamProvider.leaveTeam(activeTeam.id, user.id); refreshTeam(); toast("You left the workspace"); }
-    catch (e) { toast.error(normalizeError(e).userMessage); }
+    setLeaveDialogOpen(true);
   };
 
   const saveProfile = async () => {
@@ -509,6 +513,54 @@ await mod.resetAllData();
           </div>
         </div>
       </div>
+      <LeaveWorkspaceDialog
+        open={leaveDialogOpen}
+        workspaceName={
+          activeTeam?.name ?? "Workspace"
+        }
+        leaving={leavingWorkspace}
+        onOpenChange={
+          setLeaveDialogOpen
+        }
+        onConfirm={() => {
+          if (
+            !activeTeam ||
+            !user
+          ) {
+            return;
+          }
+
+          try {
+            setLeavingWorkspace(
+              true,
+            );
+
+            teamProvider.leaveTeam(
+              activeTeam.id,
+              user.id,
+            );
+
+            refreshTeam();
+
+            toast(
+              "You left the workspace",
+            );
+
+            setLeaveDialogOpen(
+              false,
+            );
+          } catch (e) {
+            toast.error(
+              normalizeError(e)
+                .userMessage,
+            );
+          } finally {
+            setLeavingWorkspace(
+              false,
+            );
+          }
+        }}
+      />
     </div>
   );
 }
