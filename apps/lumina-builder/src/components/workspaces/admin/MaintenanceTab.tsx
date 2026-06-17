@@ -10,9 +10,12 @@ import {
   clearAuditLog,
 } from "@/services/adminMaintenanceService";
 import { getSystemHealth, type SystemHealth } from "@/services/systemHealthService";
+import { AdminResetDataDialog } from "@/components/workspaces/admin/dialogs/AdminResetDataDialog";
 
 export function MaintenanceTab() {
   const [health, setHealth] = useState<SystemHealth>(() => getSystemHealth());
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   useEffect(() => { const t = setInterval(() => setHealth(getSystemHealth()), 2000); return () => clearInterval(t); }, []);
 
@@ -38,7 +41,12 @@ export function MaintenanceTab() {
         <GlowCard className="p-4 space-y-2">
           <h3 className="text-sm font-semibold">Data</h3>
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={() => { if (confirm("Wipe ALL local data?")) resetAllData(); }}>Reset all data</Button>
+            <Button
+              variant="outline"
+              onClick={() => setResetDialogOpen(true)}
+            >
+              Reset all data
+            </Button>
             <Button variant="outline" onClick={() => { rerunSeed(); toast.success("Re-seeded"); }}>Re-seed</Button>
             <Button variant="outline" onClick={doExport}>Export snapshot</Button>
             <Button variant="outline" onClick={() => fileRef.current?.click()}>Import snapshot</Button>
@@ -90,6 +98,30 @@ export function MaintenanceTab() {
           </div>
         </div>
       </section>
+      <AdminResetDataDialog
+        open={resetDialogOpen}
+        resetting={resetting}
+        onOpenChange={(open) => {
+          if (!resetting) {
+            setResetDialogOpen(open);
+          }
+        }}
+        onConfirm={() => {
+          try {
+            setResetting(true);
+
+            resetAllData();
+
+            toast.success(
+              "All data reset",
+            );
+
+            setResetDialogOpen(false);
+          } finally {
+            setResetting(false);
+          }
+        }}
+      />
     </div>
   );
 }
