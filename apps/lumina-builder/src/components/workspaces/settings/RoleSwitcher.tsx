@@ -48,6 +48,10 @@ export function RoleSwitcher() {
   const current = ROLES.find((r) => r.id === role)!;
   const [pendingRole, setPendingRole] = useState<WorkspaceRole | null>(null);
 
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const [resettingMockData, setResettingMockData] = useState(false);
+
+
   const applyRole = (next: WorkspaceRole) => {
     setRole(next);
     const label = ROLES.find((r) => r.id === next)?.label ?? next;
@@ -134,20 +138,50 @@ export function RoleSwitcher() {
           <div className="text-[10px] text-muted-foreground/70">Clears projects, usage, billing, and notifications.</div>
         </div>
         <button
-          onClick={async () => {
-  if (confirm("Reset all local mock data?")) {
-    toast("Resetting…");
-
-    const mod = await import("@/lib/seed");
-
-    mod.resetAllData();
-  }
-}}
+          onClick={() => {
+            setResetDialogOpen(
+              true,
+            );
+          }}
           className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[11px] border border-border bg-surface-1 hover:text-foreground text-muted-foreground transition"
         >
           <RotateCcw className="h-3 w-3" /> Reset
         </button>
       </div>
+      <ResetMockDataDialog
+        open={resetDialogOpen}
+        resetting={resettingMockData}
+        onOpenChange={(open) => {
+          if (!resettingMockData) {
+            setResetDialogOpen(open);
+          }
+        }}
+        onConfirm={async () => {
+          try {
+            setResettingMockData(
+              true,
+            );
+
+            toast(
+              "Resetting…",
+            );
+
+            const mod = await import(
+              "@/lib/seed"
+            );
+
+            mod.resetAllData();
+
+            setResetDialogOpen(
+              false,
+            );
+          } finally {
+            setResettingMockData(
+              false,
+            );
+          }
+        }}
+      />
     </div>
   );
 }
