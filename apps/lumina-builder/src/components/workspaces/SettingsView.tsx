@@ -21,6 +21,7 @@ import { setPricingPrefill } from "@/services/pricingPrefill";
 import { ArrowUpRight } from "lucide-react";
 import { resetAllData } from "@/services/adminService";
 import { LeaveWorkspaceDialog } from "@/components/workspaces/settings/dialogs/LeaveWorkspaceDialog";
+import { ResetAppDataDialog } from "@/components/workspaces/settings/dialogs/ResetAppDataDialog";
 
 interface ApiKey { id: string; preview: string; createdAt: number; secret: string }
 
@@ -54,6 +55,12 @@ export function SettingsView() {
   const [email] = useState(user?.email ?? "");
   useEffect(() => { if (user) setName(user.name); }, [user]);
   const [savingProfile, setSavingProfile] = useState(false);
+
+  const [resetDialogOpen, setResetDialogOpen] =
+    useState(false);
+
+  const [resettingData, setResettingData] =
+    useState(false);
 
   const [leaveDialogOpen, setLeaveDialogOpen] =
     useState(false);
@@ -492,18 +499,11 @@ export function SettingsView() {
                   <LuminaButton
                     variant="ghost"
                     size="sm"
-                    onClick={async () => {
-  const confirmed = confirm(
-    "Wipe all local app data and re-seed demo content? This reloads the page.",
-  );
-
-  if (!confirmed) {
-    return;
-  }
-
-  const mod = await import("@/services/adminMaintenanceService");
-await mod.resetAllData();
-}}
+                    onClick={() =>
+                      setResetDialogOpen(
+                        true,
+                      )
+                    }
                   >
                     Reset data
                   </LuminaButton>
@@ -556,6 +556,34 @@ await mod.resetAllData();
             );
           } finally {
             setLeavingWorkspace(
+              false,
+            );
+          }
+        }}
+      />
+      <ResetAppDataDialog
+        open={resetDialogOpen}
+        resetting={resettingData}
+        onOpenChange={
+          setResetDialogOpen
+        }
+        onConfirm={async () => {
+          try {
+            setResettingData(
+              true,
+            );
+
+            const mod = await import(
+              "@/services/adminMaintenanceService"
+            );
+
+            await mod.resetAllData();
+
+            setResetDialogOpen(
+              false,
+            );
+          } finally {
+            setResettingData(
               false,
             );
           }
