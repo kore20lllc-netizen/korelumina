@@ -7,6 +7,7 @@ import {
 import {
   restartProject,
 } from "../runtime/startProject.js";
+import { requireRuntimeAccess } from "./runtimeAccess.js";
 
 function normalizeProjectId(
   value: unknown,
@@ -25,6 +26,7 @@ export function registerRestartRoute(
 ) {
   app.post(
     "/api/runtime/restart",
+    requireRuntimeAccess,
     async (req, res) => {
       try {
         const projectId =

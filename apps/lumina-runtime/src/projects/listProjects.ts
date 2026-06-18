@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { upsertProjectRegistryEntry } from "./projectRegistry.js";
 
 function findProjectsRoot() {
   let current =
@@ -74,6 +75,11 @@ export function listProjects() {
           PROJECTS_ROOT,
           entry.name,
         );
+
+      upsertProjectRegistryEntry({
+        projectId: entry.name,
+        visibility: "private",
+      });
 
       return {
         projectId: entry.name,

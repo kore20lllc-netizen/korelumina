@@ -1,9 +1,10 @@
 import type { Express } from "express";
 
 import { startProject } from "../runtime/startProject.js";
+import { requireRuntimeAccess } from "./runtimeAccess.js";
 
 export function registerStartRoute(app: Express) {
-  app.post("/api/runtime/start", async (req, res) => {
+  app.post("/api/runtime/start", requireRuntimeAccess, async (req, res) => {
     try {
       const projectId =
         typeof req.body?.projectId === "string"

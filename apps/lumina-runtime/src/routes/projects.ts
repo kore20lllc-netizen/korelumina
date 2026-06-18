@@ -4,6 +4,7 @@ import { rm } from "node:fs/promises";
 import { getProjectPath } from "../projects/getProjectPath.js";
 import { listProjects } from "../projects/listProjects.js";
 import { stopRuntime } from "../runtime/registry.js";
+import { requireRuntimeAccess } from "./runtimeAccess.js";
 
 function normalizeProjectId(
   value: unknown,
@@ -22,6 +23,7 @@ export function registerProjectsRoute(
 ) {
   app.get(
     "/api/runtime/projects",
+    requireRuntimeAccess,
     (_req, res) => {
       return res.json({
         ok: true,
@@ -32,6 +34,7 @@ export function registerProjectsRoute(
 
   app.delete(
     "/api/runtime/projects/:projectId",
+    requireRuntimeAccess,
     async (req, res) => {
       try {
         const projectId =
