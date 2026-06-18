@@ -3,6 +3,14 @@ import { rm } from "node:fs/promises";
 
 import { getProjectPath } from "../projects/getProjectPath.js";
 import { listProjects } from "../projects/listProjects.js";
+
+import { getProjectMetadata } from "../projects/projectMetadataStore.js";
+import { getRuntimeCaller } from "./runtimeCaller.js";
+import {
+  canViewProject,
+  canManageProject,
+} from "./runtimeAuthorization.js";
+
 import { stopRuntime } from "../runtime/registry.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
 
@@ -24,10 +32,24 @@ export function registerProjectsRoute(
   app.get(
     "/api/runtime/projects",
     requireRuntimeAccess,
-    (_req, res) => {
+    (req, res) => {
+      const caller =
+        getRuntimeCaller(req);
+
+      const projects =
+        listProjects().filter(
+          (project) =>
+            canViewProject(
+              caller,
+              getProjectMetadata(
+                project.projectId,
+              ),
+            ),
+        );
+
       return res.json({
         ok: true,
-        projects: listProjects(),
+        projects,
       });
     },
   );
@@ -59,6 +81,27 @@ export function registerProjectsRoute(
           return res.status(404).json({
             ok: false,
             error: "project_not_found",
+            projectId,
+          });
+        }
+
+        const caller =
+          getRuntimeCaller(req);
+
+        const metadata =
+          getProjectMetadata(
+            projectId,
+          );
+
+        if (
+          !canManageProject(
+            caller,
+            metadata,
+          )
+        ) {
+          return res.status(403).json({
+            ok: false,
+            error: "forbidden",
             projectId,
           });
         }

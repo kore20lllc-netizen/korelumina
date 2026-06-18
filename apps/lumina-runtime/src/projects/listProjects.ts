@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { upsertProjectRegistryEntry } from "./projectRegistry.js";
+import { getProjectMetadata } from "./projectMetadataStore.js";
 
 function findProjectsRoot() {
   let current =
@@ -81,7 +82,13 @@ export function listProjects() {
         visibility: "private",
       });
 
+      const metadata =
+        getProjectMetadata(
+          entry.name,
+        );
+
       return {
+        ...metadata,
         projectId: entry.name,
         path: projectPath,
         hasPackageJson:

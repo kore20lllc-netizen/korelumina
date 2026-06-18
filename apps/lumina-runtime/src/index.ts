@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { registerProjectsRoute } from "./routes/projects.js";
+import { registerProjectMetadataRoute } from "./routes/projectMetadata.js";
 import { registerStartRoute } from "./routes/start.js";
 import { registerStatusRoute } from "./routes/status.js";
 import { registerStopRoute } from "./routes/stop.js";
@@ -40,9 +41,8 @@ app.get(
   },
 );
 
-registerProjectsRoute(
-  app,
-);
+registerProjectsRoute(app);
+registerProjectMetadataRoute(app);
 
 registerStartRoute(
   app,

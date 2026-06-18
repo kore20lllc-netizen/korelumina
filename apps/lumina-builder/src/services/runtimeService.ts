@@ -1,3 +1,7 @@
+import { auth } from "@/providers/auth-registry";
+import { getActiveTeamId } from "@/context/ActiveTeamContext";
+import { getCurrentRole } from "@/services/workspaceAccessService";
+
 const RUNTIME_API =
   import.meta.env.VITE_RUNTIME_API_URL || "http://localhost:4100";
 
@@ -57,6 +61,27 @@ export interface RuntimeSession {
   logs?: string[];
 }
 
+
+function runtimeCallerHeaders(
+  extra?: HeadersInit,
+): HeadersInit {
+  const user =
+    auth.getUser?.();
+
+  const teamId =
+    getActiveTeamId();
+
+  return {
+    ...(extra ?? {}),
+    "x-korelumina-user-id":
+      user?.id ?? "",
+    "x-korelumina-team-id":
+      teamId ?? "",
+    "x-korelumina-role":
+      getCurrentRole(),
+  };
+}
+
 export type RuntimeEvent =
   | {
       type: "runtime:log";
@@ -85,7 +110,12 @@ export type RuntimeEvent =
     };
 
 export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
-  const response = await fetch(`${RUNTIME_API}/api/runtime/projects`);
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/projects`,
+    {
+      headers: runtimeCallerHeaders(),
+    },
+  );
   const data = await response.json();
 
   if (!response.ok || !data?.ok || !Array.isArray(data.projects)) {
@@ -93,6 +123,29 @@ export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
   }
 
   return data.projects as RuntimeProject[];
+}
+
+
+export async function syncRuntimeProjectMetadata(input: {
+  projectId: string;
+  ownerId?: string;
+  teamId?: string;
+  createdBy?: string;
+  visibility?: "private" | "team" | "support";
+}): Promise<void> {
+  const response = await fetch(`${RUNTIME_API}/api/runtime/projects/metadata`, {
+    method: "POST",
+    headers: runtimeCallerHeaders({
+      "Content-Type": "application/json",
+    }),
+    body: JSON.stringify(input),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok || !data?.ok) {
+    throw new Error(data?.error ?? "failed_to_sync_runtime_project_metadata");
+  }
 }
 
 function normalizeRuntimeUrl(
@@ -237,10 +290,10 @@ export async function stopRuntime(
       `${RUNTIME_API}/api/runtime/stop`,
       {
         method: "POST",
-        headers: {
+        headers: runtimeCallerHeaders({
           "Content-Type":
             "application/json",
-        },
+        }),
         body: JSON.stringify({
           projectId,
         }),
@@ -273,6 +326,7 @@ export async function deleteRuntimeProject(
       )}`,
       {
         method: "DELETE",
+        headers: runtimeCallerHeaders(),
       },
     );
 
@@ -297,10 +351,10 @@ export async function restartRuntime(
       `${RUNTIME_API}/api/runtime/restart`,
       {
         method: "POST",
-        headers: {
+        headers: runtimeCallerHeaders({
           "Content-Type":
             "application/json",
-        },
+        }),
         body: JSON.stringify({
           projectId,
         }),

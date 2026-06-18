@@ -14,6 +14,10 @@ import {
   readRuntimeFile,
   writeRuntimeFile,
 } from "@/services/runtimeService";
+
+import {
+  syncRuntimeProjectMetadata,
+} from "@/services/runtimeService";
 import { notificationService } from "@/services/notificationService";
 import { requireEntitlement } from "@/services/entitlements";
 import { AppError, normalizeError } from "@/lib/errors";
@@ -85,7 +89,16 @@ export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise
     );
     const u = auth.getUser(); if (u) usage.recordProjectCreated(u.id);
     notificationService.push({ title: "Import completed", body: `${r.name} (${r.framework}) is ready.`, kind: "success" });
-    return { projectId: project.id, name: r.name, framework: r.framework };
+    
+    await syncRuntimeProjectMetadata({
+      projectId: project.id,
+      ownerId: project.ownerId,
+      teamId: project.teamId,
+      createdBy: project.createdBy,
+      visibility: project.visibility,
+    });
+
+return { projectId: project.id, name: r.name, framework: r.framework };
   } catch (e) { throw normalizeError(e); }
 }
 
@@ -99,7 +112,16 @@ export async function importZip(file: File, signal?: AbortSignal): Promise<Impor
     );
     const u = auth.getUser(); if (u) usage.recordProjectCreated(u.id);
     notificationService.push({ title: "Import completed", body: `${r.name} (${r.framework}) is ready.`, kind: "success" });
-    return { projectId: project.id, name: r.name, framework: r.framework };
+    
+    await syncRuntimeProjectMetadata({
+      projectId: project.id,
+      ownerId: project.ownerId,
+      teamId: project.teamId,
+      createdBy: project.createdBy,
+      visibility: project.visibility,
+    });
+
+return { projectId: project.id, name: r.name, framework: r.framework };
   } catch (e) { throw normalizeError(e); }
 }
 
