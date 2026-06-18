@@ -18,6 +18,10 @@ import {
 } from "@/services/workspaceAccessService";
 
 import {
+  getProjectScope,
+} from "@/services/projectScope";
+
+import {
   listRuntimeProjects,
   type RuntimeProject,
 } from "@/services/runtimeService";
@@ -189,7 +193,7 @@ const WorkspaceContext =
 
 function listProjects() {
   const existing =
-    projectRepository.list();
+    projectRepository.list(getProjectScope());
 
   if (
     existing.length === 0 &&
@@ -206,7 +210,7 @@ function listProjects() {
       },
     );
 
-    return projectRepository.list();
+    return projectRepository.list(getProjectScope());
   }
 
   return existing;
@@ -214,7 +218,7 @@ function listProjects() {
 
 function resolveInitialProject() {
   const projects =
-    projectRepository.list();
+    projectRepository.list(getProjectScope());
 
   if (
     projects.length === 0
@@ -375,7 +379,7 @@ export function WorkspaceProvider({
     return projectRepository.onChange(
       () => {
         const nextProjects =
-          projectRepository.list();
+          projectRepository.list(getProjectScope());
 
         setStoredProjects(
           nextProjects,

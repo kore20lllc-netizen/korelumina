@@ -19,6 +19,7 @@ import { requireEntitlement } from "@/services/entitlements";
 import { AppError, normalizeError } from "@/lib/errors";
 import type { BuildStepEvent } from "@/providers/types";
 import { getActiveTeamId } from "@/context/ActiveTeamContext";
+import { getProjectScope } from "@/services/projectScope";
 
 /**
  * Wrap an async producer with bounded retry + exponential backoff.
@@ -48,7 +49,7 @@ async function withRetry<T>(fn: () => Promise<T>, opts: { retries?: number; sign
  */
 
 export async function fetchProjects(): Promise<Project[]> {
-  return projectRepository.list().map((p) => ({
+  return projectRepository.list(getProjectScope()).map((p) => ({
     id: p.id, name: p.name, type: p.type, lastEdited: p.lastEdited,
     status: p.status, accent: p.accent, previewUrl: p.previewUrl,
   }));
