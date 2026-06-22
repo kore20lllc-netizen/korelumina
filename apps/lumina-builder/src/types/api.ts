@@ -11,6 +11,9 @@ export interface Project {
   previewUrl?: string;
   builderUrl?: string;
   framework?: string;
+  packageManager?: string;
+  entryFile?: string;
+  sourceUrl?: string;
 }
 
 export interface RuntimeStatus {

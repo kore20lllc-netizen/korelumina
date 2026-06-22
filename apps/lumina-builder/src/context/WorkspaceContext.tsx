@@ -88,16 +88,30 @@ function titleFromProjectId(projectId: string) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function runtimeProjectToProject(project: RuntimeProject): Project {
+function runtimeProjectToProject(
+  project: RuntimeProject,
+): Project {
   return {
     id: project.projectId,
-    name: titleFromProjectId(project.projectId),
+    projectId: project.projectId,
+
+    name:
+      project.repoName
+        ? project.repoName
+        : titleFromProjectId(project.projectId),
+
     type: "import",
     status: "draft",
     accent: "violet",
     runtime: "warm",
+
+    framework: project.framework,
+
+    sourceUrl: project.sourceUrl,
+
     lastEdited: "Runtime project",
     lastEditedAt: Date.now(),
+
     previewUrl: undefined,
   } as Project;
 }
@@ -403,17 +417,13 @@ export function WorkspaceProvider({
       try {
         const runtimeProjects = await listRuntimeProjects();
 
+        
+
         if (cancelled) {
           return;
         }
 
         const localProjects = listProjects();
-        const ownedProjectIds = new Set(
-          localProjects.map((project) => project.id),
-        );
-
-        const canSeeAllRuntimeProjects = canAccess("adminTools") || canAccess("supportAccess");
-
         const localById = new Map(
           localProjects.map((project) => [
             project.id,
@@ -422,11 +432,6 @@ export function WorkspaceProvider({
         );
 
         const runtimeMapped = runtimeProjects
-          .filter(
-            (runtimeProject) =>
-              canSeeAllRuntimeProjects ||
-              ownedProjectIds.has(runtimeProject.projectId),
-          )
           .map((runtimeProject) => {
             const localProject =
               localById.get(runtimeProject.projectId);

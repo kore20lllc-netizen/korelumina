@@ -104,6 +104,8 @@ export function DashboardView() {
     usage,
   } = workspace;
 
+  
+
   const safeUsage = {
     ...defaultUsage,
     ...(usage ?? {}),

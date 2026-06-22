@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Github, Upload, FolderOpen, LayoutTemplate, Loader2, FileCode2, Package, CheckCircle2, AlertCircle, X, FileArchive, Ban, Trash2, Timer, Sparkles } from "lucide-react";
-import { ImportSuccessPanel } from "./ImportSuccessPanel";
+import { Github, Upload, FolderOpen, LayoutTemplate, Loader2, CheckCircle2, AlertCircle, X, FileArchive, Ban, Trash2, Timer, Sparkles } from "lucide-react";
+import {
+  ImportSuccessPanel,
+  type DetectedRepo,
+} from "./ImportSuccessPanel";
 import { useWorkspace } from "@/context/WorkspaceContext";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { toast } from "sonner";
+import { importRepo as importRepositoryAction } from "@/services/actions";
 import { cn } from "@/lib/utils";
 import { mockTemplates } from "@/lib/mockData";
 
@@ -33,6 +37,7 @@ interface Progress {
   message: string;
   error?: string;
   label: string;
+  detected?: DetectedRepo;
 }
 
 interface FileProgress {
@@ -154,10 +159,6 @@ export function ImportModal() {
 
   const busy = progress?.status === "running"
     || filesProgress?.some((f) => f.status === "uploading" || f.status === "processing" || f.status === "queued");
-
-  const detected = url.trim()
-    ? { framework: "Next.js", packageManager: "pnpm", entryFile: "app/page.tsx" }
-    : null;
 
   useEffect(() => () => {
     timers.current.forEach((arr) => arr.forEach(clearTimeout));
@@ -338,9 +339,117 @@ export function ImportModal() {
     });
   };
 
-  const submitUrl = () => {
-    if (!url.trim()) return;
-    runUrlImport(url.trim(), !isValidGitUrl(url));
+  const submitUrl = async () => {
+    const value = url.trim();
+
+    if (!value) {
+      return;
+    }
+
+    if (!isValidGitUrl(value)) {
+      const err = "Repository not found or access denied.";
+
+      setProgress({
+        stage: "connect",
+        pct: STAGES[0].pct,
+        status: "error",
+        message: "Import failed",
+        error: err,
+        label: value,
+      });
+
+      toast.error("Import failed", {
+        description: err,
+      });
+
+      return;
+    }
+
+    reset();
+
+    setProgress({
+      stage: "connect",
+      pct: STAGES[0].pct,
+      status: "running",
+      message: STAGES[0].label,
+      label: value,
+    });
+
+    try {
+      setProgress((current) =>
+        current && {
+          ...current,
+          stage: "fetch",
+          pct: STAGES[1].pct,
+          message: STAGES[1].label,
+        },
+      );
+
+      const imported =
+        await importRepositoryAction(value);
+
+      setProgress((current) =>
+        current && {
+          ...current,
+          stage: "analyze",
+          pct: STAGES[2].pct,
+          message: STAGES[2].label,
+        },
+      );
+
+      setProgress((current) =>
+        current && {
+          ...current,
+          stage: "finalize",
+          pct: STAGES[3].pct,
+          message: STAGES[3].label,
+        },
+      );
+
+      const framework =
+        imported.framework && imported.framework !== "unknown"
+          ? imported.framework
+          : "Unknown";
+
+      setProgress((current) =>
+        current && {
+          ...current,
+          status: "success",
+          pct: 100,
+          message: "Import complete",
+          label: imported.name || value,
+          detected: {
+            framework,
+            appType: "Imported repository",
+            pages: 0,
+            components: 0,
+            designScore: 0,
+          },
+        },
+      );
+
+      toast.success("Import complete", {
+        description: imported.name || value,
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Import failed";
+
+      setProgress((current) =>
+        current && {
+          ...current,
+          status: "error",
+          message: "Import failed",
+          error: message,
+        },
+      );
+
+      toast.error("Import failed", {
+        description: message,
+      });
+    }
   };
 
   const submitZip = () => {
@@ -653,6 +762,7 @@ export function ImportModal() {
             progress.status === "success" ? (
               <ImportSuccessPanel
                 label={progress.label}
+                detected={progress.detected}
                 onOpenImports={() => {
                   setImportOpen(false);
                   setUrl("");
@@ -688,13 +798,6 @@ export function ImportModal() {
                     placeholder={tab === "github" ? "https://github.com/owner/repo" : "https://git.example.com/owner/repo.git"}
                     className="w-full h-10 px-3 rounded-lg bg-surface-1 border border-border text-[13px] outline-none focus:border-violet/50 transition"
                   />
-                  {detected && (
-                    <div className="grid grid-cols-3 gap-2 mt-2">
-                      <Detected label="Framework"     value={detected.framework}     Icon={FileCode2} />
-                      <Detected label="Package mgr"   value={detected.packageManager} Icon={Package} />
-                      <Detected label="Entry"         value={detected.entryFile}     Icon={FileCode2} />
-                    </div>
-                  )}
                   <div className="flex justify-end pt-3">
                     <LuminaButton size="md" onClick={submitUrl} disabled={!url.trim()}>
                       <Github className="h-3.5 w-3.5" />

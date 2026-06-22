@@ -3,6 +3,7 @@ import cors from "cors";
 
 import { registerProjectsRoute } from "./routes/projects.js";
 import { registerProjectMetadataRoute } from "./routes/projectMetadata.js";
+import { registerImportProjectRoute } from "./routes/importProject.js";
 import { registerStartRoute } from "./routes/start.js";
 import { registerStatusRoute } from "./routes/status.js";
 import { registerStopRoute } from "./routes/stop.js";
@@ -43,6 +44,7 @@ app.get(
 
 registerProjectsRoute(app);
 registerProjectMetadataRoute(app);
+registerImportProjectRoute(app);
 
 registerStartRoute(
   app,

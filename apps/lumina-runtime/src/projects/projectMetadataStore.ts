@@ -7,6 +7,13 @@ export interface ProjectMetadata {
   teamId?: string;
   createdBy?: string;
   visibility?: "private" | "team" | "support";
+
+  framework?: string;
+
+  sourceUrl?: string;
+  repoOwner?: string;
+  repoName?: string;
+
   createdAt: number;
   updatedAt: number;
 }

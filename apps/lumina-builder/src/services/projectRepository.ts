@@ -15,6 +15,10 @@ export interface StoredProject extends Project {
   files?: Record<string, string>;
   settings?: Record<string, unknown>;
   previewUrl?: string;
+  framework?: string;
+  packageManager?: string;
+  entryFile?: string;
+  sourceUrl?: string;
   ownerId?: string;
   teamId?: string;
   createdBy?: string;
@@ -100,6 +104,10 @@ export const projectRepository = {
       files: input.files ?? {},
       settings: input.settings ?? {},
       previewUrl: input.previewUrl,
+      framework: input.framework,
+      packageManager: input.packageManager,
+      entryFile: input.entryFile,
+      sourceUrl: input.sourceUrl,
       ownerId: scope?.ownerId ?? input.ownerId,
       teamId: scope?.teamId ?? input.teamId,
       createdBy:

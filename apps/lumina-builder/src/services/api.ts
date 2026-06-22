@@ -11,12 +11,10 @@ import { auth } from "@/providers/auth-registry";
 import { usage } from "@/providers/usage-registry";
 import { projectRepository } from "@/services/projectRepository";
 import {
+  importRuntimeProject,
   readRuntimeFile,
-  writeRuntimeFile,
-} from "@/services/runtimeService";
-
-import {
   syncRuntimeProjectMetadata,
+  writeRuntimeFile,
 } from "@/services/runtimeService";
 import { notificationService } from "@/services/notificationService";
 import { requireEntitlement } from "@/services/entitlements";
@@ -82,24 +80,47 @@ export async function getPreview(projectId: string): Promise<PreviewResponse> {
 export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise<ImportResponse> {
   try {
     requireEntitlement("project.create");
-    const r = await withRetry(() => repoProvider.importFromGithub(repoUrl), { signal });
-    const project = projectRepository.create(
-      { name: r.name, type: "import", status: "draft", accent: "violet", files: r.files, description: r.summary },
-      { ownerId: auth.getUser()?.id, teamId: getActiveTeamId() ?? undefined },
-    );
-    const u = auth.getUser(); if (u) usage.recordProjectCreated(u.id);
-    notificationService.push({ title: "Import completed", body: `${r.name} (${r.framework}) is ready.`, kind: "success" });
-    
-    await syncRuntimeProjectMetadata({
-      projectId: project.id,
-      ownerId: project.ownerId,
-      teamId: project.teamId,
-      createdBy: project.createdBy,
-      visibility: project.visibility,
+
+    if (signal?.aborted) {
+      throw new AppError("INTERNAL", "Canceled.");
+    }
+
+    const imported = await importRuntimeProject({
+      repoUrl,
     });
 
-return { projectId: project.id, name: r.name, framework: r.framework };
-  } catch (e) { throw normalizeError(e); }
+    const name =
+      imported.repo?.repo ??
+      imported.projectId;
+
+    const u = auth.getUser();
+
+    if (u) {
+      usage.recordProjectCreated(u.id);
+    }
+
+    await syncRuntimeProjectMetadata({
+      projectId: imported.projectId,
+      ownerId: u?.id,
+      teamId: getActiveTeamId() ?? undefined,
+      createdBy: u?.id,
+      visibility: getActiveTeamId() ? "team" : "private",
+    });
+
+    notificationService.push({
+      title: "Import completed",
+      body: `${name} (${imported.framework ?? "unknown"}) is ready.`,
+      kind: "success",
+    });
+
+    return {
+      projectId: imported.projectId,
+      name,
+      framework: imported.framework ?? "unknown",
+    };
+  } catch (e) {
+    throw normalizeError(e);
+  }
 }
 
 export async function importZip(file: File, signal?: AbortSignal): Promise<ImportResponse> {
@@ -107,7 +128,18 @@ export async function importZip(file: File, signal?: AbortSignal): Promise<Impor
     requireEntitlement("project.create");
     const r = await withRetry(() => repoProvider.importFromZip(file), { signal });
     const project = projectRepository.create(
-      { name: r.name, type: "import", status: "draft", accent: "violet", files: r.files, description: r.summary },
+      {
+        name: r.name,
+        type: "import",
+        status: "draft",
+        accent: "violet",
+        files: r.files,
+        description: r.summary,
+        framework: r.framework,
+        packageManager: r.packageManager,
+        entryFile: r.entryFile,
+        sourceUrl: repoUrl,
+      },
       { ownerId: auth.getUser()?.id, teamId: getActiveTeamId() ?? undefined },
     );
     const u = auth.getUser(); if (u) usage.recordProjectCreated(u.id);

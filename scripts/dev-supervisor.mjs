@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 
 const children = [];
+let shuttingDown = false;
 
 function run(name, command, args, cwd = process.cwd()) {
   const child = spawn(command, args, {
@@ -22,13 +23,21 @@ function run(name, command, args, cwd = process.cwd()) {
       console.log(`[dev-supervisor] ${name} exited with code ${code}`);
     }
 
-    shutdown();
+    if (!shuttingDown) {
+      process.exitCode = code ?? 1;
+    }
   });
 
   return child;
 }
 
 function shutdown() {
+  if (shuttingDown) {
+    return;
+  }
+
+  shuttingDown = true;
+
   for (const child of children) {
     if (!child.killed && child.exitCode === null) {
       child.kill("SIGTERM");

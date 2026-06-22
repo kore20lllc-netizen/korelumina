@@ -106,23 +106,28 @@ const hash = (s: string) => {
 };
 const KINDS: SourceKind[] = ["github", "zip", "folder"];
 const sourceFor = (p: Project, override?: SourceOverride): ImportSource => {
-  const slug = slugify(p.name);
-  const kind = KINDS[hash(p.id) % KINDS.length];
-  const sourceUrl = override?.sourceUrl?.trim() || `https://github.com/acme/${slug}`;
-  const previewUrl = override?.previewUrl?.trim() || `https://${slug}.lovable.app`;
-  const readmeUrl = override?.readmeUrl?.trim() || `https://github.com/acme/${slug}#readme`;
+  const sourceUrl = override?.sourceUrl?.trim() || p.sourceUrl || "";
+  const previewUrl = override?.previewUrl?.trim() || p.previewUrl || "";
+  const readmeUrl =
+    override?.readmeUrl?.trim() ||
+    (sourceUrl.includes("github.com") ? `${sourceUrl.replace(/\.git$/, "")}#readme` : "");
+
   const isOverridden = !!(override?.sourceUrl || override?.previewUrl || override?.readmeUrl);
-  const detail = override?.sourceUrl
-    ? override.sourceUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
-    : kind === "github" ? `github.com/acme/${slug}`
-    : kind === "zip" ? `${slug}.zip · 4.2 MB`
-    : `~/Projects/${slug}`;
-  const icon = override?.sourceUrl
-    ? Github
-    : kind === "github" ? Github : kind === "zip" ? Archive : FolderOpen;
-  const label = override?.sourceUrl
-    ? "GitHub"
-    : kind === "github" ? "GitHub" : kind === "zip" ? "ZIP archive" : "Local folder";
+
+  const kind: SourceKind =
+    sourceUrl.includes("github.com")
+      ? "github"
+      : p.sourceUrl
+        ? "github"
+        : "folder";
+
+  const detail = sourceUrl
+    ? sourceUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+    : "Runtime import";
+
+  const icon = kind === "github" ? Github : kind === "zip" ? Archive : FolderOpen;
+  const label = kind === "github" ? "GitHub" : kind === "zip" ? "ZIP archive" : "Runtime";
+
   return { kind, label, detail, icon, sourceUrl, previewUrl, readmeUrl, isOverridden };
 };
 

@@ -19,11 +19,11 @@ interface Props {
 }
 
 const DEFAULT_DETECTED: DetectedRepo = {
-  framework: "Next.js",
-  appType: "SaaS Dashboard",
-  pages: 27,
-  components: 94,
-  designScore: 7.8,
+  framework: "Unknown",
+  appType: "Imported repository",
+  pages: 0,
+  components: 0,
+  designScore: 0,
 };
 
 /**
@@ -33,7 +33,29 @@ const DEFAULT_DETECTED: DetectedRepo = {
  */
 export function ImportSuccessPanel({ label, detected = DEFAULT_DETECTED, onOpenImports }: Props) {
   const { setView, setMode } = useWorkspace();
-  const scoreAccent = detected.designScore >= 8 ? "text-cyan" : detected.designScore >= 6.5 ? "text-gold" : "text-rose-400";
+  const scoreAccent =
+    detected.designScore <= 0
+      ? "text-muted-foreground"
+      : detected.designScore >= 8
+        ? "text-cyan"
+        : detected.designScore >= 6.5
+          ? "text-gold"
+          : "text-rose-400";
+
+  const pagesValue =
+    detected.pages > 0
+      ? String(detected.pages)
+      : "Not scanned";
+
+  const componentsValue =
+    detected.components > 0
+      ? String(detected.components)
+      : "Not scanned";
+
+  const designValue =
+    detected.designScore > 0
+      ? `${detected.designScore}/10`
+      : "Not scored";
 
   return (
     <div className="space-y-5 anim-in">
@@ -54,9 +76,9 @@ export function ImportSuccessPanel({ label, detected = DEFAULT_DETECTED, onOpenI
       <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
         <Stat icon={FileCode2} label="Framework" value={detected.framework} />
         <Stat icon={Layers}    label="Type"      value={detected.appType} />
-        <Stat icon={Layers}    label="Pages"     value={String(detected.pages)} />
-        <Stat icon={Sparkles}  label="Components" value={String(detected.components)} />
-        <Stat icon={Palette}   label="Design"    value={`${detected.designScore}/10`} valueClassName={scoreAccent} accent="gold" />
+        <Stat icon={Layers}    label="Pages"     value={pagesValue} />
+        <Stat icon={Sparkles}  label="Components" value={componentsValue} />
+        <Stat icon={Palette}   label="Design"    value={designValue} valueClassName={scoreAccent} accent="gold" />
       </div>
 
       {/* Suggested actions */}

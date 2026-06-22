@@ -48,6 +48,16 @@ export interface RuntimeProject {
   projectId: string;
   path: string;
   hasPackageJson: boolean;
+
+  framework?: string;
+
+  sourceUrl?: string;
+  repoOwner?: string;
+  repoName?: string;
+
+  ownerId?: string;
+  teamId?: string;
+  createdBy?: string;
 }
 
 export interface RuntimeSession {
@@ -125,6 +135,43 @@ export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
   return data.projects as RuntimeProject[];
 }
 
+export interface RuntimeImportResult {
+  ok: true;
+  action: "cloned" | "pulled";
+  projectId: string;
+  projectPath: string;
+  framework?: string;
+  repo?: {
+    repoUrl: string;
+    owner: string;
+    repo: string;
+  };
+}
+
+export async function importRuntimeProject(input: {
+  repoUrl: string;
+  projectId?: string;
+}): Promise<RuntimeImportResult> {
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/projects/import`,
+    {
+      method: "POST",
+      headers: runtimeCallerHeaders({
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify(input),
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok || !data?.ok || !data?.import?.projectId) {
+    throw new Error(data?.error ?? "failed_to_import_runtime_project");
+  }
+
+  return data.import as RuntimeImportResult;
+}
+
 
 export async function syncRuntimeProjectMetadata(input: {
   projectId: string;
@@ -195,6 +242,7 @@ export async function getRuntimeStatus(
         `${RUNTIME_API}/api/runtime/status?projectId=${encodeURIComponent(projectId)}`,
         {
           method: "GET",
+          headers: runtimeCallerHeaders(),
         },
       );
 
@@ -244,10 +292,10 @@ export async function startRuntime(
         `${RUNTIME_API}/api/runtime/start`,
         {
           method: "POST",
-          headers: {
+          headers: runtimeCallerHeaders({
             "Content-Type":
               "application/json",
-          },
+          }),
           body: JSON.stringify({
             projectId,
           }),
@@ -436,6 +484,9 @@ export interface RuntimeMetricsResponse {
 export async function getRuntimeMetrics(): Promise<RuntimeMetricsResponse> {
   const response = await fetch(
     `${RUNTIME_API}/api/runtime/metrics`,
+    {
+      headers: runtimeCallerHeaders(),
+    },
   );
 
   const data = await response.json();
@@ -456,6 +507,9 @@ export async function getRuntimeLogs(
   const response =
     await fetch(
       `${RUNTIME_API}/api/runtime/logs?projectId=${encodeURIComponent(projectId)}`,
+      {
+        headers: runtimeCallerHeaders(),
+      },
     );
 
   if (!response.ok) {
@@ -602,6 +656,9 @@ export interface RuntimeFileWriteResponse {
 export async function listRuntimeFiles(projectId: string): Promise<string[]> {
   const response = await fetch(
     `${RUNTIME_API}/api/runtime/fs/list?projectId=${encodeURIComponent(projectId)}`,
+    {
+      headers: runtimeCallerHeaders(),
+    },
   );
 
   const data = (await response.json()) as RuntimeFileListResponse;
@@ -619,6 +676,9 @@ export async function readRuntimeFile(
 ): Promise<RuntimeFileReadResponse> {
   const response = await fetch(
     `${RUNTIME_API}/api/runtime/fs/read?projectId=${encodeURIComponent(projectId)}&file=${encodeURIComponent(file)}`,
+    {
+      headers: runtimeCallerHeaders(),
+    },
   );
 
   const data = (await response.json()) as RuntimeFileReadResponse;
@@ -638,9 +698,9 @@ export async function writeRuntimeFile(input: {
 }): Promise<RuntimeFileWriteResponse> {
   const response = await fetch(`${RUNTIME_API}/api/runtime/fs/write`, {
     method: "POST",
-    headers: {
+    headers: runtimeCallerHeaders({
       "Content-Type": "application/json",
-    },
+    }),
     body: JSON.stringify(input),
   });
 
