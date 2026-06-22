@@ -145,9 +145,3 @@ export function setProjectMetadata(
 
   return record;
 }
-
-export function listProjectMetadata(): ProjectMetadata[] {
-  return Object.values(
-    readStore(),
-  );
-}
