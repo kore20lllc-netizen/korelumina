@@ -4,7 +4,7 @@ import { rm } from "node:fs/promises";
 import { getProjectPath } from "../projects/getProjectPath.js";
 import { listProjects } from "../projects/listProjects.js";
 
-import { getProjectMetadata } from "../projects/projectMetadataStore.js";
+import { getProjectMetadata, removeProjectMetadata } from "../projects/projectMetadataStore.js";
 import { getRuntimeCaller } from "./runtimeCaller.js";
 import {
   canViewProject,
@@ -121,6 +121,10 @@ export function registerProjectsRoute(
             recursive: true,
             force: true,
           },
+        );
+
+        removeProjectMetadata(
+          projectId,
         );
 
         return res.json({

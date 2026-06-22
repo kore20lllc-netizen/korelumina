@@ -145,3 +145,21 @@ export function setProjectMetadata(
 
   return record;
 }
+
+
+export function removeProjectMetadata(
+  projectId: string,
+) {
+  const store =
+    readStore();
+
+  if (
+    !store[projectId]
+  ) {
+    return;
+  }
+
+  delete store[projectId];
+
+  writeStore(store);
+}
