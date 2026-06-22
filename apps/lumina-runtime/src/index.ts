@@ -25,6 +25,7 @@ import { startRuntimeSupervisor, stopRuntimeSupervisor } from "./runtime/supervi
 import { recoverPersistedRuntimes } from "./runtime/recovery.js";
 import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
+import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
 
 const app = express();
 
@@ -116,6 +117,7 @@ const shouldBootstrap =
   claimRuntimeBootstrap();
 
 if (shouldBootstrap) {
+  backfillMissingProjectMetadata();
   await recoverPersistedRuntimes();
   startRuntimeSupervisor();
 } else {
