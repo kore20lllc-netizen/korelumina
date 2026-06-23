@@ -48,7 +48,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 
-import { projectRepository } from "@/services/projectRepository";
 import {
   deleteRuntimeProject,
 } from "@/services/runtimeService";
@@ -623,19 +622,9 @@ export function DashboardView() {
                               event.preventDefault();
                               event.stopPropagation();
 
-                              try {
-                                projectRepository.duplicate(
-                                  p.id,
-                                );
-
-                                toast.success(
-                                  "Project duplicated",
-                                );
-                              } catch {
-                                toast.error(
-                                  "Could not duplicate",
-                                );
-                              }
+                              toast.error(
+                                "Duplicate requires a runtime clone endpoint.",
+                              );
                             }}
                           >
                             <Copy className="h-3.5 w-3.5 mr-2" />
@@ -705,21 +694,9 @@ export function DashboardView() {
             return;
           }
 
-          try {
-            projectRepository.update(
-              renameTarget.id,
-              {
-                name: renameValue.trim(),
-              },
-            );
-
-            toast.success("Renamed");
-
-            setRenameTarget(null);
-            setRenameValue("");
-          } catch {
-            toast.error("Rename failed");
-          }
+          toast.error(
+            "Rename requires a runtime metadata update endpoint.",
+          );
         }}
       />
 
@@ -744,19 +721,11 @@ export function DashboardView() {
               deleteTarget.id,
             );
 
-            projectRepository.remove(
-              deleteTarget.id,
-            );
-
             toast.success(
               "Project deleted",
             );
 
             setDeleteTarget(null);
-
-            window.dispatchEvent(
-              new Event("storage"),
-            );
           } catch {
             toast.error(
               "Delete failed",
