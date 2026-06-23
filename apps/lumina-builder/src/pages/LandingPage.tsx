@@ -8,6 +8,7 @@ import { ProblemSolution } from "@/components/landing/ProblemSolution";
 import { FutureOfSoftware } from "@/components/landing/FutureOfSoftware";
 import { BuiltForExistingSoftware } from "@/components/landing/BuiltForExistingSoftware";
 import { OwnEverything } from "@/components/landing/OwnEverything";
+import { EnterpriseGovernance } from "@/components/landing/EnterpriseGovernance";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PlatformArchitecture } from "@/components/landing/PlatformArchitecture";
 import { Features } from "@/components/landing/Features";
@@ -86,6 +87,7 @@ export function LandingPage() {
           <Features />
           <InfrastructureYourWay />
           <OwnEverything />
+          <EnterpriseGovernance />
           <Comparison />
           <Templates />
           <InHouseDevelopers />
