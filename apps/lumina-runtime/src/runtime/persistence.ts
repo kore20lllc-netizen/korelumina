@@ -71,7 +71,12 @@ export function listPersistedRuntimes(): PersistedRuntime[] {
 
   return fs
     .readdirSync(DATA_DIR)
-    .filter((file) => file.endsWith(".json"))
+    .filter(
+      (file) =>
+        file.endsWith(".json") &&
+        file !== "project-metadata.json" &&
+        file !== "project-registry.json",
+    )
     .flatMap((file) => {
       const filePath = path.join(DATA_DIR, file);
 

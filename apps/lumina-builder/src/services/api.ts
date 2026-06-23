@@ -50,33 +50,6 @@ async function withRetry<T>(fn: () => Promise<T>, opts: { retries?: number; sign
  * providers/registry.ts. All errors are normalized to AppError.
  */
 
-export async function fetchProjects(): Promise<Project[]> {
-  return projectRepository.list(getProjectScope()).map((p) => ({
-    id: p.id, name: p.name, type: p.type, lastEdited: p.lastEdited,
-    status: p.status, accent: p.accent, previewUrl: p.previewUrl,
-  }));
-}
-
-export async function startRuntime(projectId: string): Promise<RuntimeStatus> {
-  await new Promise((r) => setTimeout(r, 250));
-  const p = projectRepository.get(projectId);
-  if (!p) return { ready: false, state: "error", message: "Project not found." };
-  projectRepository.update(projectId, { runtime: "warm" });
-  return { ready: true, state: "running", url: p.previewUrl ?? `https://preview.lumina.app/${projectId}` };
-}
-
-export async function getRuntime(projectId?: string): Promise<RuntimeStatus> {
-  if (!projectId) return { ready: false, state: "idle" };
-  const p = projectRepository.get(projectId);
-  if (!p) return { ready: false, state: "idle" };
-  return { ready: p.runtime !== "cold", state: p.runtime === "live" ? "running" : p.runtime === "warm" ? "running" : "idle", url: p.previewUrl };
-}
-
-export async function getPreview(projectId: string): Promise<PreviewResponse> {
-  const p = projectRepository.get(projectId);
-  return { url: p?.previewUrl ?? `https://preview.lumina.app/${projectId}` };
-}
-
 export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise<ImportResponse> {
   try {
     requireEntitlement("project.create");
