@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { auth } from "@/providers/auth-registry";
 import { billing } from "@/providers/billing-registry";
 import { team as teamProvider } from "@/providers/team-registry";
-import { projectRepository } from "@/services/projectRepository";
 import { can, type TeamAction } from "@/services/teamPermissions";
 import { checkWorkspaceLimit } from "@/services/workspaceEntitlements";
 import { AppError } from "@/lib/errors";
@@ -45,59 +44,43 @@ export interface ActiveTeamState {
 
 const Ctx = createContext<ActiveTeamState | null>(null);
 
-const DEMO_TEAM_NAME = "Demo Workspace";
-
-function ensureDemoTeam(): Team {
-  const all = teamProvider.listTeamsForUser("__demo_seed__");
-  const existing = all.find((t) => t.slug === "demo-workspace");
-  if (existing) return existing;
-  return teamProvider.createTeam({
-    name: DEMO_TEAM_NAME,
-    ownerUserId: "__demo_seed__",
-    personal: false,
-    plan: "free",
-  });
-}
-
 export function ActiveTeamProvider({ children }: { children: ReactNode }) {
   const [tick, setTick] = useState(0);
   const refresh = useCallback(() => setTick((t) => t + 1), []);
   const [activeId, _setActiveId] = useState<string | null>(readActiveTeamId);
 
-  // Boot: ensure every signed-in user has a personal workspace and that
-  // legacy projects without a teamId get assigned to a default workspace.
+  // Boot: ensure every signed-in user has a personal workspace.
+  // Project ownership now belongs to runtime metadata, not local projectRepository.
   useEffect(() => {
     const sync = () => {
       const user = auth.getUser();
+
       if (user) {
-        const personal = teamProvider.ensurePersonalTeam({
-          id: user.id, name: user.name, email: user.email,
+        teamProvider.ensurePersonalTeam({
+          id: user.id,
+          name: user.name,
+          email: user.email,
         });
-        // One-time: pull any orphaned demo projects into the user's personal
-        // workspace so the dashboard isn't empty on first sign-in.
-        const projects = projectRepository.list();
-        const orphaned = projects.some((p) => !p.teamId);
-        if (orphaned) projectRepository.assignOrphansToTeam(personal.id);
-      } else {
-        // Anonymous demo: park orphaned seed projects on a shared demo team
-        // so list(teamId) keeps working consistently.
-        const orphaned = projectRepository.list().some((p) => !p.teamId);
-        if (orphaned) projectRepository.assignOrphansToTeam(ensureDemoTeam().id);
       }
+
       refresh();
     };
+
     sync();
+
     const offAuth = auth.onChange(sync);
     const offTeam = teamProvider.onChange(refresh);
-    return () => { offAuth(); offTeam(); };
+
+    return () => {
+      offAuth();
+      offTeam();
+    };
   }, [refresh]);
 
   const user = auth.getUser();
   const teams = useMemo<Team[]>(() => {
     if (user) return teamProvider.listTeamsForUser(user.id);
-    // Anonymous: expose only the demo team so previews work.
-    const demo = teamProvider.listTeamsForUser("__demo_seed__");
-    return demo;
+    return [];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, tick]);
 
