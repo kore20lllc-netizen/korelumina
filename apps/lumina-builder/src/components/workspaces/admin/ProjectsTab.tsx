@@ -8,7 +8,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { MoreVertical, Search } from "lucide-react";
 import { toast } from "sonner";
 import { listAllProjects, deleteProject, transferProjectOwnership, listUsers } from "@/services/adminService";
-import { projectRepository } from "@/services/projectRepository";
 import { useWorkspace } from "@/context/WorkspaceContext";
 
 import { AdminProjectDeleteDialog } from "./dialogs/AdminProjectDeleteDialog";
@@ -16,7 +15,7 @@ import { AdminProjectDeleteDialog } from "./dialogs/AdminProjectDeleteDialog";
 
 export function ProjectsTab() {
   const { setView, setActiveProject } = useWorkspace();
-  const [projects, setProjects] = useState(listAllProjects());
+  const [projects, setProjects] = useState<any[]>([]);
   const [users] = useState(listUsers());
   const [q, setQ] = useState("");
 
@@ -32,8 +31,18 @@ export function ProjectsTab() {
     deleting,
     setDeleting,
   ] = useState(false);
-  const refresh = () => setProjects(listAllProjects());
-  useEffect(() => projectRepository.onChange(refresh), []);
+  const refresh = async () => {
+    try {
+      const runtimeProjects = await listAllProjects();
+      setProjects(runtimeProjects);
+    } catch (error) {
+      console.error("[ProjectsTab] Failed to load runtime projects", error);
+    }
+  };
+
+  useEffect(() => {
+    void refresh();
+  }, []);
   const filtered = useMemo(() => projects.filter((p) => !q || p.name.toLowerCase().includes(q.toLowerCase())), [projects, q]);
 
   return (
@@ -71,7 +80,19 @@ export function ProjectsTab() {
                         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                           <div className="flex items-center gap-2 w-full">
                             <span className="text-xs">Transfer to</span>
-                            <Select onValueChange={(v) => { transferProjectOwnership(p.id, v); refresh(); toast.success("Ownership transferred"); }}>
+                            <Select onValueChange={async (v) => {
+                              try {
+                                transferProjectOwnership(p.id, v);
+                                await refresh();
+                                toast.success("Ownership transferred");
+                              } catch (error) {
+                                toast.error(
+                                  error instanceof Error
+                                    ? error.message
+                                    : "Transfer failed",
+                                );
+                              }
+                            }}>
                               <SelectTrigger className="h-7 w-40"><SelectValue placeholder="user…" /></SelectTrigger>
                               <SelectContent>{users.map((u) => <SelectItem key={u.id} value={u.id}>{u.email}</SelectItem>)}</SelectContent>
                             </Select>
@@ -127,7 +148,7 @@ export function ProjectsTab() {
               "Project deleted",
             );
 
-            refresh();
+            await refresh();
 
             setDeleteTarget(null);
           } catch (error) {
