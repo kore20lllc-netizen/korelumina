@@ -50,7 +50,7 @@ export function ActiveTeamProvider({ children }: { children: ReactNode }) {
   const [activeId, _setActiveId] = useState<string | null>(readActiveTeamId);
 
   // Boot: ensure every signed-in user has a personal workspace.
-  // Project ownership now belongs to runtime metadata, not local projectRepository.
+  // Project ownership now belongs to runtime metadata.
   useEffect(() => {
     const sync = () => {
       const user = auth.getUser();
