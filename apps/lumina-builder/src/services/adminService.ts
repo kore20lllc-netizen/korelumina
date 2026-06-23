@@ -4,7 +4,6 @@ import {
   mockAllUsers, mockCreateUser, mockDeleteUser, mockUpdateUser,
   mockSetImpersonation, mockGetImpersonation, mockResetPasswordTo,
 } from "@/providers/auth/MockAuthProvider";
-import { projectRepository } from "@/services/projectRepository";
 import { logAction, clearLogs as clearAuditLogs } from "@/services/auditLogService";
 import { setConfig, getConfig, type ProviderConfig } from "@/services/providerConfigService";
 import { isFeatureEnabled, setFeatureFlagOverride, type FeatureFlag } from "@/lib/featureFlags";
@@ -31,11 +30,10 @@ function saveSuspended(s: Set<string>) { writeJSON("admin", "suspended", Array.f
 
 export function listUsers(): AdminUserRow[] {
   const suspended = suspendedSet();
-  const projects = projectRepository.list();
   return mockAllUsers().map((u) => ({
     ...u,
     suspended: suspended.has(u.id),
-    projectCount: projects.filter((p) => p.ownerId === u.id).length,
+    projectCount: 0,
   }));
 }
 
