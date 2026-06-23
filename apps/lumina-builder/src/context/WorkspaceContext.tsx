@@ -80,8 +80,6 @@ const DEFAULT_USAGE: UsageSnapshot = {
   projects: 0,
 };
 
-const seedProjects: Project[] = [];
-
 function titleFromProjectId(projectId: string) {
   return projectId
     .replace(/[-_]+/g, " ")
@@ -204,66 +202,6 @@ const WorkspaceContext =
   createContext<WorkspaceContextValue | null>(
     null,
   );
-
-function listProjects() {
-  const existing =
-    projectRepository.list(getProjectScope());
-
-  if (
-    existing.length === 0 &&
-    seedProjects.length > 0
-  ) {
-    seedProjects.forEach(
-      (project) => {
-        projectRepository.create(
-          {
-            ...project,
-          },
-          undefined,
-        );
-      },
-    );
-
-    return projectRepository.list(getProjectScope());
-  }
-
-  return existing;
-}
-
-function resolveInitialProject() {
-  const projects =
-    projectRepository.list(getProjectScope());
-
-  if (
-    projects.length === 0
-  ) {
-    return null;
-  }
-
-  const savedId =
-    localStorage.getItem(
-      ACTIVE_PROJECT_STORAGE_KEY,
-    );
-
-  if (
-    savedId &&
-    !projects.some(
-      (project) =>
-        project.id === savedId,
-    )
-  ) {
-    localStorage.removeItem(
-      ACTIVE_PROJECT_STORAGE_KEY,
-    );
-  }
-
-  return (
-    projects.find(
-      (project) =>
-        project.id === savedId,
-    ) ?? projects[0]
-  );
-}
 
 function resolveProjectFromList(
   projects: Project[],
@@ -408,33 +346,10 @@ export function WorkspaceProvider({
           return;
         }
 
-        const localProjects = listProjects();
-        const localById = new Map(
-          localProjects.map((project) => [
-            project.id,
-            project,
-          ]),
-        );
-
-        const runtimeMapped = runtimeProjects
-          .map((runtimeProject) => {
-            const localProject =
-              localById.get(runtimeProject.projectId);
-
-            if (localProject) {
-              return {
-                ...localProject,
-                runtime: "warm",
-              } as Project;
-            }
-
-            return runtimeProjectToProject(runtimeProject);
-          });
-
         const nextProjects =
-          runtimeMapped.length > 0
-            ? runtimeMapped
-            : localProjects;
+          runtimeProjects.map(
+            runtimeProjectToProject,
+          );
 
         setStoredProjects(nextProjects);
 
@@ -447,13 +362,9 @@ export function WorkspaceProvider({
           error,
         );
 
-        const fallbackProjects = listProjects();
-
         if (!cancelled) {
-          setStoredProjects(fallbackProjects);
-          setActiveProjectState((current) =>
-            resolveProjectFromList(fallbackProjects, current),
-          );
+          setStoredProjects([]);
+          setActiveProjectState(null);
         }
       }
     }
