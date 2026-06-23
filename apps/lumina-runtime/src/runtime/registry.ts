@@ -5,6 +5,7 @@ import { publishRuntimeEvent } from "./eventBus.js";
 import { unwatchWorkspace } from "./workspaceWatcher.js";
 import { runtimeState } from "./runtimeState.js";
 import { markRuntimeManualStop } from "./manualStop.js";
+import { releaseRuntimeLock } from "./runtimeLock.js";
 
 export type RuntimeStatus =
   | "starting"
@@ -285,6 +286,8 @@ export function removeRuntime(
   );
 
   void unwatchWorkspace(projectId);
+
+  releaseRuntimeLock(projectId);
 
   // Remove unified state
   runtimeState.removeState(projectId);
