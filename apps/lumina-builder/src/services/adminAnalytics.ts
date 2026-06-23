@@ -1,7 +1,6 @@
 import { readJSON } from "@/lib/persistence";
 import type { Payment, Subscription, User } from "@/providers/types";
 import { mockAllUsers } from "@/providers/auth/MockAuthProvider";
-import { projectRepository } from "@/services/projectRepository";
 
 export interface AdminAnalytics {
   totalUsers: number;
@@ -36,8 +35,6 @@ export function getAdminAnalytics(): AdminAnalytics {
   const users: User[] = mockAllUsers();
   const subs = readJSON<Subscription[]>("billing", "subs", []);
   const payments = readJSON<Payment[]>("billing", "payments", []);
-  const projects = projectRepository.list();
-
   const usersByRole: Record<string, number> = {};
   users.forEach((u) => { usersByRole[u.role] = (usersByRole[u.role] ?? 0) + 1; });
 
@@ -89,7 +86,7 @@ export function getAdminAnalytics(): AdminAnalytics {
     activeSubscriptions: activeSubs.length,
     monthlyRecurringRevenue: Math.round(mrr * 100) / 100,
     annualRecurringRevenue: Math.round(mrr * 12 * 100) / 100,
-    totalProjects: projects.length,
+    totalProjects: 0,
     totalDeployments: deployments,
     totalAIExecutions: aiExec,
     totalTransformations: transformations,
