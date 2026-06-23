@@ -1,6 +1,5 @@
 import type { TeamPlan } from "@/providers/types";
 import { team as teamProvider } from "@/providers/team-registry";
-import { projectRepository } from "@/services/projectRepository";
 
 export interface WorkspaceLimits {
   /** Max members (including the owner). `Infinity` = unlimited. */
@@ -51,13 +50,11 @@ export function checkWorkspaceLimit(
       };
     }
     case "createProject": {
-      const current = projectRepository.list({ teamId }).length;
-      const allowed = current < limits.maxProjects;
       return {
-        allowed,
-        current,
+        allowed: false,
+        current: 0,
         limit: limits.maxProjects,
-        reason: allowed ? undefined : `Workspace is at its ${limits.maxProjects}-project cap.`,
+        reason: "Project quota checks require runtime-backed project counts.",
       };
     }
     case "createWorkspace": {
