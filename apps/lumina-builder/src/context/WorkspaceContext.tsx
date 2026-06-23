@@ -10,10 +10,6 @@ import {
 } from "react";
 
 import {
-  projectRepository,
-} from "@/services/projectRepository";
-
-import {
   canAccess,
 } from "@/services/workspaceAccessService";
 
@@ -322,16 +318,6 @@ export function WorkspaceProvider({
     activeProject,
     setActiveProjectState,
   ] = useState<Project | null>(null);
-
-  useEffect(() => {
-    return projectRepository.onChange(
-      () => {
-        console.warn(
-          "[WorkspaceContext] local projectRepository changed; runtime remains project source of truth",
-        );
-      },
-    );
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
