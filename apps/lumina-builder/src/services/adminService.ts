@@ -10,7 +10,10 @@ import { setConfig, getConfig, type ProviderConfig } from "@/services/providerCo
 import { isFeatureEnabled, setFeatureFlagOverride, type FeatureFlag } from "@/lib/featureFlags";
 import type { Payment, Plan, Role, Subscription, User } from "@/providers/types";
 import { notificationService } from "@/services/notificationService";
-import { deleteRuntimeProject } from "@/services/runtimeService";
+import {
+  deleteRuntimeProject,
+  listRuntimeProjects,
+} from "@/services/runtimeService";
 
 /* ============================================================
  * Users
@@ -68,17 +71,15 @@ export function createUser(input: { email: string; name: string; role: Role; pas
  * Projects
  * ============================================================ */
 
-export function listAllProjects() { return projectRepository.list(); }
+export async function listAllProjects() {
+  return listRuntimeProjects();
+}
 export async function deleteProject(id: string) {
   await deleteRuntimeProject(
     id,
   );
 
-  projectRepository.remove(
-    id,
-  );
-
-  logAction(
+    logAction(
     "project.delete",
     {
       entityType: "project",
@@ -87,8 +88,15 @@ export async function deleteProject(id: string) {
   );
 }
 export function transferProjectOwnership(id: string, newOwnerId: string) {
-  projectRepository.update(id, { ownerId: newOwnerId });
-  logAction("project.transfer", { entityType: "project", entityId: id, metadata: { newOwnerId } });
+  logAction("project.transfer.blocked", {
+    entityType: "project",
+    entityId: id,
+    metadata: { newOwnerId },
+  });
+
+  throw new Error(
+    "Project ownership transfer requires a runtime metadata update endpoint.",
+  );
 }
 
 /* ============================================================
