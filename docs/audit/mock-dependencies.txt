@@ -1,0 +1,73 @@
+apps/lumina-builder/src/__tests__/services.test.ts:120:describe("MockAIProvider", () => {
+apps/lumina-builder/src/__tests__/services.test.ts:122:    const ai = new MockAIProvider();
+apps/lumina-builder/src/__tests__/services.test.ts:130:    const ai = new MockAIProvider();
+apps/lumina-builder/src/__tests__/services.test.ts:136:    const ai = new MockAIProvider();
+apps/lumina-builder/src/__tests__/services.test.ts:190:    // MockAIProvider rejects empty prompts with VALIDATION; generateDraft must surface immediately.
+apps/lumina-builder/src/__tests__/services.test.ts:9:import { MockAIProvider } from "@/providers/ai/MockAIProvider";
+apps/lumina-builder/src/components/import/ImportModal.tsx:1014:                  {mockTemplates.map((t) => (
+apps/lumina-builder/src/components/import/ImportModal.tsx:13:import { mockTemplates } from "@/lib/mockData";
+apps/lumina-builder/src/components/templates/TemplatesMarketplace.tsx:34:  const filtered = mockTemplates
+apps/lumina-builder/src/components/templates/TemplatesMarketplace.tsx:6:import { mockTemplates } from "@/lib/mockData";
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx:221:                  {mockIntegrations.map((i) => { const connected = integrations[i.id]; return (
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx:30:function loadIntegrations(): Record<string, boolean> { return readJSON<Record<string, boolean>>("settings", "integrations", Object.fromEntries(mockIntegrations.map((i) => [i.id, i.connected]))); }
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx:5:import { mockIntegrations, type Integration } from "@/lib/mockData";
+apps/lumina-builder/src/lib/mockData.ts:10:export const mockNotifications: Notification[] = [
+apps/lumina-builder/src/lib/mockData.ts:25:export const mockTemplates: Template[] = [
+apps/lumina-builder/src/lib/mockData.ts:41:export const mockIntegrations: Integration[] = [
+apps/lumina-builder/src/lib/mockData.ts:49:export const mockUsage = { plan: "free" as const, aiExecutions: 2, aiLimit: 5 };
+apps/lumina-builder/src/lib/seed.ts:113:      writeJSON("notifications", "all", mockNotifications);
+apps/lumina-builder/src/lib/seed.ts:17:  const existing = mockAllUsers();
+apps/lumina-builder/src/lib/seed.ts:2:import { mockNotifications } from "@/lib/mockData";
+apps/lumina-builder/src/lib/seed.ts:22:    mockCreateUser({ email, name, role: rand(DEMO_ROLES), password: "demo1234" });
+apps/lumina-builder/src/lib/seed.ts:27:  const users = mockAllUsers().filter((u) => !u.email.startsWith("admin"));
+apps/lumina-builder/src/lib/seed.ts:3:import { seedAdminUser, mockCreateUser, mockAllUsers } from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/lib/seed.ts:42:  const users = mockAllUsers();
+apps/lumina-builder/src/lib/seed.ts:82:  const owners = mockAllUsers().filter((u) => u.role === "business" || u.role === "enterprise");
+apps/lumina-builder/src/lib/seed.ts:97:    const teammates = mockAllUsers()
+apps/lumina-builder/src/providers/ai-registry.ts:3:class MockAIProvider implements AIProvider {
+apps/lumina-builder/src/providers/ai-registry.ts:31:      "[KoreLumina] AI provider fallback: MockAIProvider",
+apps/lumina-builder/src/providers/ai-registry.ts:35:  return new MockAIProvider();
+apps/lumina-builder/src/providers/ai-registry.ts:6:      "[KoreLumina] MockAIProvider.chat placeholder active.",
+apps/lumina-builder/src/providers/ai/MockAIProvider.ts:25:export class MockAIProvider implements AIProvider {
+apps/lumina-builder/src/providers/auth-registry.ts:1:import { MockAuthProvider } from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/providers/auth-registry.ts:34:  : new MockAuthProvider();
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:39:export function mockAllUsers(): User[] { return loadUsers().map(stripPw); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:40:export function mockUpdateUser(id: string, patch: Partial<StoredUser>) {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:47:export function mockDeleteUser(id: string) { saveUsers(loadUsers().filter((u) => u.id !== id)); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:48:export function mockCreateUser(input: { email: string; name: string; role: Role; password?: string }): User {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:57:export function mockSetImpersonation(userId: string | null) { saveImpersonation(userId); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:58:export function mockGetImpersonation(): string | null { return loadImpersonation(); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:59:export function mockResetPasswordTo(id: string, newPw: string) {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:67:export class MockAuthProvider implements AuthProvider {
+apps/lumina-builder/src/services/adminAnalytics.ts:3:import { mockAllUsers } from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/services/adminAnalytics.ts:36:  const users: User[] = mockAllUsers();
+apps/lumina-builder/src/services/adminService.ts:113:  mockUpdateUser(userId, { role });
+apps/lumina-builder/src/services/adminService.ts:124:  mockUpdateUser(userId, { role: "free" });
+apps/lumina-builder/src/services/adminService.ts:230:  mockSetImpersonation(userId);
+apps/lumina-builder/src/services/adminService.ts:238:  const id = mockGetImpersonation();
+apps/lumina-builder/src/services/adminService.ts:239:  mockSetImpersonation(null);
+apps/lumina-builder/src/services/adminService.ts:244:export function getImpersonatedUserId() { return mockGetImpersonation(); }
+apps/lumina-builder/src/services/adminService.ts:32:  return mockAllUsers().map((u) => ({
+apps/lumina-builder/src/services/adminService.ts:4:  mockAllUsers, mockCreateUser, mockDeleteUser, mockUpdateUser,
+apps/lumina-builder/src/services/adminService.ts:40:  mockUpdateUser(userId, { role });
+apps/lumina-builder/src/services/adminService.ts:5:  mockSetImpersonation, mockGetImpersonation, mockResetPasswordTo,
+apps/lumina-builder/src/services/adminService.ts:53:  mockDeleteUser(userId);
+apps/lumina-builder/src/services/adminService.ts:57:  mockResetPasswordTo(userId, newPw);
+apps/lumina-builder/src/services/adminService.ts:6:} from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/services/adminService.ts:62:  const u = mockCreateUser(input);
+apps/lumina-builder/src/services/auditLogService.ts:3:import { mockGetImpersonation } from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/services/auditLogService.ts:31:    const impId = mockGetImpersonation();
+apps/lumina-builder/src/services/capacitorService.ts:106:    mockStore.set(projectId, s);
+apps/lumina-builder/src/services/capacitorService.ts:112:  const arr = mockLogs.get(projectId) ?? [];
+apps/lumina-builder/src/services/capacitorService.ts:121:  mockLogs.set(projectId, merged);
+apps/lumina-builder/src/services/capacitorService.ts:246:    () => mockLogs.get(projectId) ?? [],
+apps/lumina-builder/src/services/capacitorService.ts:74:const mockStore = new Map<string, CapacitorStatus>();
+apps/lumina-builder/src/services/capacitorService.ts:75:const mockLogs = new Map<string, CapacitorLogEntry[]>();
+apps/lumina-builder/src/services/capacitorService.ts:89:  let s = mockStore.get(projectId);
+apps/lumina-builder/src/services/notificationService.ts:2:import type { Notification } from "@/lib/mockData";
+apps/lumina-builder/src/services/repoAuditService.ts:397:    diffs: MOCK.repairPlan.map((s) => mockDiffForStep(s.id, s.title)),
+apps/lumina-builder/src/services/repoAuditService.ts:405:  return mockDiffForStep(stepId, title);
+apps/lumina-builder/src/services/repoAuditService.ts:408:function mockDiffForStep(stepId: string, title?: string): DiffPreview {
+apps/lumina-builder/src/services/systemHealthService.ts:3:import { mockAllUsers } from "@/providers/auth/MockAuthProvider";
+apps/lumina-builder/src/services/systemHealthService.ts:53:    adminSeeded: mockAllUsers().some((u) => u.email === "admin@lumina.app"),
+apps/lumina-builder/src/services/systemHealthService.ts:54:    totalUsers: mockAllUsers().length,

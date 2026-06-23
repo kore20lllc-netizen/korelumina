@@ -1,0 +1,297 @@
+
+===== BackgroundVideo.tsx =====
+
+{ if (!video) return; try { video.muted = true; video.playsInline = true; if (video.readyState
+
+===== BuiltForExistingSoftware.tsx =====
+
+(); return (
+Built for existing software
+Most businesses do not start from a blank page.
+Designed for real-world codebases
+{realities.map((item) => (
+
+===== Comparison.tsx =====
+
+(); return (
+How we compare
+An OS, not a code generator.
+Capability
+{comparisonCols.map((c, i) => (
+{comparisonRows.map((r, idx) => (
+{r.feature}
+{[r.korelumina, r.lovable, r.bolt, r.v0, r.cursor].map((v, i) => (
+
+===== DeliveryConfidence.tsx =====
+
+Delivery Confidence
+Built around outcomes, not demos.
+{pillars.map(({ icon: Icon, title, body }) => (
+
+===== EnterpriseGovernance.tsx =====
+
+(); return (
+Enterprise Governance
+Enterprise governance built in.
+Security, compliance, auditability, and operational control designed for production environments.
+{capabilities.map(({ icon: Icon, title, body }) => (
+
+===== FAQ.tsx =====
+
+(); return (
+Questions, answered.
+{faq.map((f, i) => (
+
+===== Features.tsx =====
+
+(); return (
+Everything your team needs in one studio.
+{features.map((f, i) => { const Icon = f.icon; return (
+
+===== FinalCTA.tsx =====
+
+(); return (
+Stop managing toolchains. Start operating software.
+Bring a repo, an idea, or a blank page. Build, modernize, deploy, and operate software with the operating system designed for AI-native teams.
+Start Building
+Talk to Sales
+
+===== Footer.tsx =====
+
+{} }, { label: "Terms", onClick: () => {} }, ]}, ]; export function Footer() { return (
+The operating system for AI-native software development.
+{cols.map((c) => (
+{c.links.map((l) => (
+{l.label}
+© {new Date().getFullYear()} KoreLumina. All rights reserved.
+Built with Lumina.
+
+===== FutureOfSoftware.tsx =====
+
+(); return (
+The future of software
+Software teams do not need another isolated tool.
+The next generation of software companies will be built around operating systems that coordinate intelligence, infrastructure, execution, governance, and people.
+KoreLumina exists to become that operating system: one control plane for building, modernizing, deploying, and operating software.
+
+===== Hero.tsx =====
+
+The software operating system for AI-native teams
+The Operating System for Modern Software Development
+Import existing repositories, build with AI, orchestrate infrastructure, deploy to production, and evolve software from a single platform.
+Start Building
+{trustBadges.map((b) => (
+
+===== HeroVideoFrame.tsx =====
+
+setHasVideo(false); v.addEventListener("error", onErr); return () => v.removeEventListener("error", onErr); }, []); // Subtle parallax on scroll const wrapRef = useRef
+{ window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); }; }, []); return (
+{hasVideo ? (
+
+===== HowItWorks.tsx =====
+
+(); return (
+How it works
+From repo to running software, in four moves.
+{howItWorks.map((s, i) => { const Icon = s.icon; return (
+Step {i + 1}
+
+===== InHouseDevelopers.tsx =====
+
+(); return (
+In-House Developers
+AI + Human Execution When Software Gets Complex
+Routine work is accelerated by AI. Complex work escalates to senior engineers who use KoreLumina's internal tools to audit, repair, and modernize your codebase.
+AI when speed matters. Experts when certainty matters.
+Talk to Our Team
+{highlights.map(({ icon: Icon, title }) => (
+
+===== InfrastructureYourWay.tsx =====
+
+(); return (
+Infrastructure
+Infrastructure Freedom
+Use KoreLumina-managed infrastructure, bring your own providers, or move between both as your company grows.
+{/* Fully Managed */}
+Recommended
+Fully Managed
+Provisioned, configured, and operated for you. Build the moment you sign in.
+{managed.map((f) => (
+{/* Bring Your Own Stack */}
+Bring Your Own Stack
+Connect the providers and pipelines you already trust. Your keys, your perimeter.
+{byos.map((f) => (
+Start managed. Connect your own tools anytime. Keep your code, data, and deployment path portable.
+
+===== LandingNav.tsx =====
+
+8); onScroll(); window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll); }, []); return (
+window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group" >
+{links.map((l) => (
+{l.label}
+Start Building
+setOpen((o) => !o)} aria-label="Toggle menu" > {open ?
+{open && (
+{links.map((l) => (
+{ setOpen(false); l.onClick(); }} className="eyebrow-lumina text-left px-3 py-3 text-sm rounded-lg hover:bg-surface-1" > {l.label}
+{ setOpen(false); goToSignIn(); }}>
+{ setOpen(false); startBuilding(); }}>Start Building
+
+===== OwnEverything.tsx =====
+
+(); return (
+Ownership
+KoreLumina helps operate your software. It never owns it.
+Build managed or bring your own stack. Connect your preferred tools. Keep your code, infrastructure, data, and deployment path under your control.
+{ownership.map((item) => (
+
+===== PlatformArchitecture.tsx =====
+
+(); const [activeCategory, setActiveCategory] = useState
+p.category === activeCategory), [activeCategory], ); const counts = useMemo(() => { const map: Record
+= { All: enterpriseLayer.length }; for (const p of enterpriseLayer) map[p.category] = (map[p.category] ?? 0) + 1; return map; }, []); return (
+Platform architecture
+Six systems. One software operating system.
+From repository intelligence to live runtime orchestration, every layer works together to turn ideas and existing codebases into production software.
+{architectureSystems.map((s, i) => { const Icon = s.icon; return (
+Enterprise layer
+Built for teams that ship at scale
+{CATEGORIES.map((cat) => { const isActive = activeCategory === cat; return (
+{counts[cat] ?? 0}
+{filtered.length === 0 && (
+No items in this category yet.
+)} {filtered.map((p, i) => { const Icon = p.icon; const tile = luminaTile(i); return (
+{p.benefit}
+
+===== Pricing.tsx =====
+
+(); const [billing, setBilling] = useState
+("monthly"); return (
+{/* Plans */}
+Simple plans. Real software ownership.
+Build with AI, own your stack, and scale on your terms.
+{t.highlighted && (
+Most Popular
+{t.highlighted && (
+)} {!t.highlighted && tier.badge && (
+{tier.badge}
+{cadence &&
+{note && (
+{t.features.map((f) => (
+))} {tier.addOnLine && (
+{tier.addOnLine}
+{tier.footnote && (
+{tier.footnote}
+{/* Transform App → Website one-time add-on */}
+One-time add-on · Free users
+{transformAddOn.title}
+{transformAddOn.subtitle}
+{transformAddOn.description}
+{transformAddOn.price}
+{transformAddOn.cadence}
+{/* TODO: wire to Stripe one-time checkout once Lovable Payments is enabled */}
+{transformAddOn.cta}
+{transformAddOn.note}
+{transformAddOn.features.map((f) => (
+{/* Feature Matrix */}
+Feature Matrix
+What's included by plan
+Enterprise
+{featureComparison.map((row) => (
+{row.feature}
+{[row.free, row.pro, row.biz, row.ent].map((v, i) => (
+{v === true ? (
+) : v === false ? (
+{/* BYO API Keys */}
+BYO API Keys
+Bring Your Own API Keys
+Connect your own OpenAI, Anthropic, or Google API keys and pay model providers directly while continuing to use all KoreLumina platform features.
+Supported providers
+{providers.map((p) => (
+{p.glyph}
+{/* AI Usage Billing */}
+Transparent AI Usage Billing
+{usageCards.map(({ icon: Icon, title, body }) => (
+{/* In-House Developer Escalation */}
+In-House Developer Escalation
+AI when you want speed. Experts when you need certainty.
+Escalate your project to KoreLumina's in-house engineering team for custom development, integrations, modernization, and enterprise delivery.
+{escalationServices.map(({ icon: Icon, title, price, description, badge, hoverDetails }) => (
+{badge && (
+{description && (
+{description}
+)} {hoverDetails && (
+{hoverDetails.map((d) => (
+Book a Consultation
+Request a Custom Quote
+{/* Pricing FAQ */}
+Pricing FAQ
+Common questions
+{pricingFaq.map((f, i) => (
+{/* Final pricing CTA */}
+{finalPricingCta.headline}
+{finalPricingCta.subheadline}
+{finalPricingCta.primary}
+{finalPricingCta.secondary}
+{/* SEO: pricing schema */}
+
+===== ProblemSolution.tsx =====
+
+(); return (
+AI builders generate code. Software companies ship systems.
+KoreLumina
+KoreLumina coordinates the whole lifecycle.
+Repo intelligence, AI orchestration, transformation, runtime, deployment, expert escalation, and enterprise hardening — one operating system from idea to production.
+
+===== RepoAuditFeature.tsx =====
+
+(); const canRun = canAccess("repoAudit"); return (
+Repo Audit Engine
+Import Any Repository. Instantly Understand What's Broken.
+KoreLumina analyzes dependencies, build failures, type errors, environment requirements, and security issues, then generates a step-by-step repair plan.
+{cards.map(({ icon: Icon, title, body }) => (
+{/* Workflow visualization */}
+How it flows
+{workflow.map(({ icon: Icon, label }, i) => (
+{canRun ? (
+Run a Repo Audit
+{/* Wrap the disabled button in a span so the tooltip trigger still receives pointer events (disabled buttons swallow them). */}
+Run a Repo Audit
+Requires the
+capability.
+Repo Audit is unavailable
+Your account doesn't include the
+capability. It's available on Business and Enterprise plans, or with an active in-house developer engagement.
+Contact sales to unlock →
+
+===== SocialProof.tsx =====
+
+(); const [openIndex, setOpenIndex] = useState
+(null); const active = openIndex !== null ? socialMetrics[openIndex] : null; const ActiveIcon = active?.icon; return (
+Built for serious software teams
+{socialMetrics.map((m, i) => { const Icon = m.icon; return (
+Learn more
+!o && setOpenIndex(null)}>
+{active && ActiveIcon && (
+{active.label}
+{active.summary}
+{active.details.map((d) => (
+
+===== Templates.tsx =====
+
+); } if (kind === "dashboard") { return (
+); } if (kind === "crm") { return (
+{[0, 1, 2, 3].map((r) => (
+); } return (
+); } export function Templates() { const ref = useReveal
+(); const navigate = useNavigate(); return (
+Start from a production-ready scaffold.
+Hand-crafted starters wired with auth, payments, and design tokens — ready to fork and ship.
+Browse all templates
+{templateTeasers.map((t) => (
+{t.category}
+{t.badge && (
+{t.badge === "New" &&
+} {t.badge}
+{t.tags.map((tag) => (
+{t.stack.join(" · ")}

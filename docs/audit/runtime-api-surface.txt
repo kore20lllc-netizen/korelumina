@@ -1,0 +1,24 @@
+apps/lumina-runtime/src/routes/status.ts:38:  app.get("/api/runtime/status", (req, res) => {
+apps/lumina-runtime/src/routes/status.ts:67:  app.get("/api/runtime/status/:projectId", (req, res) => {
+apps/lumina-runtime/src/routes/projects.ts:32:  app.get(
+apps/lumina-runtime/src/routes/projects.ts:57:  app.delete(
+apps/lumina-runtime/src/routes/generateFixes.ts:14:  app.post("/api/runtime/generate-fixes", async (req, res) => {
+apps/lumina-runtime/src/routes/drafts.ts:6:  app.get("/api/runtime/drafts/:draftId", (req, res) => {
+apps/lumina-runtime/src/routes/fs.ts:93:  app.get("/api/runtime/fs/list", (req, res) => {
+apps/lumina-runtime/src/routes/fs.ts:115:  app.get("/api/runtime/fs/read", (req, res) => {
+apps/lumina-runtime/src/routes/fs.ts:175:  app.post("/api/runtime/fs/write", (req, res) => {
+apps/lumina-runtime/src/routes/logs.ts:9:  app.get("/api/runtime/logs", (req, res) => {
+apps/lumina-runtime/src/routes/restart.ts:27:  app.post(
+apps/lumina-runtime/src/routes/start.ts:7:  app.post("/api/runtime/start", requireRuntimeAccess, async (req, res) => {
+apps/lumina-runtime/src/routes/fixPlan.ts:47:  app.get("/api/runtime/fix-plan", async (req, res) => {
+apps/lumina-runtime/src/routes/fixPlan.ts:64:  app.post("/api/runtime/fix-plan", async (req, res) => {
+apps/lumina-runtime/src/routes/stop.ts:23:  app.post(
+apps/lumina-runtime/src/routes/events.ts:6:  app.get("/api/runtime/events", (_req, res) => {
+apps/lumina-runtime/src/routes/audit.ts:44:  app.get("/api/runtime/audit", async (req, res) => {
+apps/lumina-runtime/src/routes/audit.ts:61:  app.post("/api/runtime/audit", async (req, res) => {
+apps/lumina-runtime/src/routes/importProject.ts:9:  app.post(
+apps/lumina-runtime/src/routes/createDraft.ts:14:  app.post("/api/runtime/drafts/create", async (req, res) => {
+apps/lumina-runtime/src/routes/metrics.ts:28:  app.get("/api/runtime/metrics", (_req, res) => {
+apps/lumina-runtime/src/routes/revertDraft.ts:13:  app.post("/api/runtime/revert-draft", async (req, res) => {
+apps/lumina-runtime/src/routes/applyDraft.ts:13:  app.post("/api/runtime/apply-draft", async (req, res) => {
+apps/lumina-runtime/src/routes/projectMetadata.ts:25:  app.post(

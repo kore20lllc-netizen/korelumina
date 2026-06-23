@@ -1,0 +1,356 @@
+apps/lumina-builder/src/context/GlassTintContext.tsx:20:export function GlassTintProvider({ children }: { children: ReactNode }) {
+apps/lumina-builder/src/context/GlassTintContext.tsx:40:export function useGlassTint() {
+apps/lumina-builder/src/context/TransformContext.tsx:38:export function TransformProvider({ children }: { children: ReactNode }) {
+apps/lumina-builder/src/context/TransformContext.tsx:84:export function useTransform() {
+apps/lumina-builder/src/context/WorkspaceContext.tsx:303:export function WorkspaceProvider({
+apps/lumina-builder/src/context/WorkspaceContext.tsx:621:export function useWorkspace() {
+apps/lumina-builder/src/context/AuthContext.tsx:28:export function AuthProvider({
+apps/lumina-builder/src/context/AuthContext.tsx:85:export function useAuth() {
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:27:export function getActiveTeamId(): string | null { return readActiveTeamId(); }
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:62:export function ActiveTeamProvider({ children }: { children: ReactNode }) {
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:192:export function useActiveTeam(): ActiveTeamState {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:25:export function seedAdminUser() {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:39:export function mockAllUsers(): User[] { return loadUsers().map(stripPw); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:40:export function mockUpdateUser(id: string, patch: Partial<StoredUser>) {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:47:export function mockDeleteUser(id: string) { saveUsers(loadUsers().filter((u) => u.id !== id)); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:48:export function mockCreateUser(input: { email: string; name: string; role: Role; password?: string }): User {
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:57:export function mockSetImpersonation(userId: string | null) { saveImpersonation(userId); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:58:export function mockGetImpersonation(): string | null { return loadImpersonation(); }
+apps/lumina-builder/src/providers/auth/MockAuthProvider.ts:59:export function mockResetPasswordTo(id: string, newPw: string) {
+apps/lumina-builder/src/providers/ai/MockAIProvider.ts:18:  add("src/components/Generated.tsx", `export function Generated() {\n  return <div className=\"p-6\">${prompt.slice(0, 80).replace(/[<>]/g, "")}</div>;\n}\n`);
+apps/lumina-builder/src/components/ui/toaster.tsx:4:export function Toaster() {
+apps/lumina-builder/src/components/landing/LandingNav.tsx:15:export function LandingNav() {
+apps/lumina-builder/src/components/landing/Templates.tsx:81:export function Templates() {
+apps/lumina-builder/src/components/landing/Hero.tsx:7:export function Hero() {
+apps/lumina-builder/src/components/landing/RepoAuditFeature.tsx:43:export function RepoAuditFeature() {
+apps/lumina-builder/src/components/landing/HeroVideoFrame.tsx:3:export function HeroVideoFrame() {
+apps/lumina-builder/src/components/landing/Pricing.tsx:80:export function Pricing() {
+apps/lumina-builder/src/components/landing/EnterpriseGovernance.tsx:44:export function EnterpriseGovernance() {
+apps/lumina-builder/src/components/landing/OwnEverything.tsx:15:export function OwnEverything() {
+apps/lumina-builder/src/components/landing/Features.tsx:5:export function Features() {
+apps/lumina-builder/src/components/landing/SocialProof.tsx:14:export function SocialProof() {
+apps/lumina-builder/src/components/landing/HowItWorks.tsx:6:export function HowItWorks() {
+apps/lumina-builder/src/components/landing/Comparison.tsx:5:export function Comparison() {
+apps/lumina-builder/src/components/landing/FinalCTA.tsx:5:export function FinalCTA() {
+apps/lumina-builder/src/components/landing/InHouseDevelopers.tsx:14:export function InHouseDevelopers() {
+apps/lumina-builder/src/components/landing/BuiltForExistingSoftware.tsx:13:export function BuiltForExistingSoftware() {
+apps/lumina-builder/src/components/landing/PlatformArchitecture.tsx:11:export function PlatformArchitecture() {
+apps/lumina-builder/src/components/landing/InfrastructureYourWay.tsx:22:export function InfrastructureYourWay() {
+apps/lumina-builder/src/components/landing/Footer.tsx:21:export function Footer() {
+apps/lumina-builder/src/components/landing/DeliveryConfidence.tsx:50:export function DeliveryConfidence() {
+apps/lumina-builder/src/components/landing/FutureOfSoftware.tsx:3:export function FutureOfSoftware() {
+apps/lumina-builder/src/components/landing/ProblemSolution.tsx:4:export function ProblemSolution() {
+apps/lumina-builder/src/components/landing/FAQ.tsx:5:export function FAQ() {
+apps/lumina-builder/src/components/landing/BackgroundVideo.tsx:15:export function BackgroundVideo({ src, className }: BackgroundVideoProps) {
+apps/lumina-builder/src/components/sales/SalesRequestDialog.tsx:36:export function SalesRequestDialog({ open, onOpenChange, reason, source }: Props) {
+apps/lumina-builder/src/components/shell/PublishDialog.tsx:9:export function PublishDialog() {
+apps/lumina-builder/src/components/shell/CommandPalette.tsx:15:export function CommandPalette() {
+apps/lumina-builder/src/components/shell/BottomDock.tsx:16:export function BottomDock() {
+apps/lumina-builder/src/components/deploy/DeployModal.tsx:18:export function DeployModal() {
+apps/lumina-builder/src/components/layout/TeamSwitcher.tsx:15:export function TeamSwitcher() {
+apps/lumina-builder/src/components/layout/Shell.tsx:9:export function Shell({ children }: { children: ReactNode; blobs?: "hero" | "ambient" | "soft" }) {
+apps/lumina-builder/src/components/layout/TopBar.tsx:26:export function TopBar() {
+apps/lumina-builder/src/components/layout/dialogs/CreateWorkspaceDialog.tsx:20:export function CreateWorkspaceDialog({
+apps/lumina-builder/src/components/layout/Sidebar.tsx:16:export function Sidebar() {
+apps/lumina-builder/src/components/runtime/RuntimeToolbar.tsx:27:export function RuntimeToolbar({
+apps/lumina-builder/src/components/runtime/RuntimeStatusCard.tsx:48:export function RuntimeStatusCard({
+apps/lumina-builder/src/components/RequireAuth.tsx:7:export function rememberIntendedPath(path: string) {
+apps/lumina-builder/src/components/RequireAuth.tsx:10:export function consumeIntendedPath(): string | null {
+apps/lumina-builder/src/components/RequireAuth.tsx:20:export function RequireAuth({ children }: { children: ReactNode }) {
+apps/lumina-builder/src/components/lumina/Blobs.tsx:12:export function Blobs({ variant = "ambient", className }: BlobsProps) {
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:24:export function DesignerWorkspace() {
+apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx:45:export function RoleSwitcher() {
+apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx:19:export function ResetAppDataDialog({
+apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx:19:export function ResetMockDataDialog({
+apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx:20:export function LeaveWorkspaceDialog({
+apps/lumina-builder/src/components/workspaces/AuthView.tsx:13:export function AuthView() {
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditPdfThemeEditor.tsx:63:export function AuditPdfThemeEditor({ open, onOpenChange, value, onSave, onReset }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/FixUntilGreenPanel.tsx:31:export function FixUntilGreenPanel({ iterations, current, onCancel, done, passed }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildErrorsCard.tsx:6:export function BuildErrorsCard({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/RepoSourcePicker.tsx:25:export function RepoSourcePicker({ projects, defaultProjectId, loading, loadingMode, onRun }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/SecurityAuditCard.tsx:13:export function SecurityAuditCard({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/RepairActionBar.tsx:17:export function RepairActionBar({
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildPassedBanner.tsx:10:export function BuildPassedBanner({ onExportPdf, onOpenBuilder, onDeploy }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/fixSteps.ts:16:export function dependencyFix(d: MissingDependency): FixGuide {
+apps/lumina-builder/src/components/workspaces/repo-audit/fixSteps.ts:38:export function buildErrorFix(e: BuildError): FixGuide {
+apps/lumina-builder/src/components/workspaces/repo-audit/fixSteps.ts:72:export function envFix(e: EnvVar): FixGuide {
+apps/lumina-builder/src/components/workspaces/repo-audit/fixSteps.ts:88:export function securityFix(f: SecurityFinding): FixGuide {
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditSummary.tsx:10:export function AuditSummary({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditPdfPreviewDialog.tsx:16:export function AuditPdfPreviewDialog({ open, onOpenChange, preview, loading, onConfirmDownload, onRetryLogo, retryingLogo }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/StepDiffPanel.tsx:18:export function StepDiffPanel({ report }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/RepairPlanCard.tsx:8:export function RepairPlanCard({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/DeepAuditProgress.tsx:40:export function DeepAuditProgress({
+apps/lumina-builder/src/components/workspaces/repo-audit/FindingsFilters.tsx:52:export function FindingsFilters({
+apps/lumina-builder/src/components/workspaces/repo-audit/DiffPreviewDialog.tsx:16:export function DiffPreviewDialog({ open, onOpenChange, diff, loading, applying, onApply }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/FindingFixSteps.tsx:27:export function FindingFixSteps({ id, guide, defaultOpen = false }: Props) {
+apps/lumina-builder/src/components/workspaces/repo-audit/AutoFixModal.tsx:18:export function AutoFixModal({
+apps/lumina-builder/src/components/workspaces/repo-audit/EnvironmentAuditCard.tsx:6:export function EnvironmentAuditCard({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/DependencyAuditCard.tsx:13:export function DependencyAuditCard({ report }: { report: AuditReport }) {
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildLogsDrawer.tsx:14:export function BuildLogsDrawer({ open, onOpenChange, projectId }: Props) {
+apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx:143:export function RepoAuditWorkspace() {
+apps/lumina-builder/src/components/workspaces/AdminWorkspace.tsx:29:export function AdminWorkspace() {
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx:50:export function SettingsView() {
+apps/lumina-builder/src/components/workspaces/admin/OverviewTab.tsx:38:export function OverviewTab() {
+apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx:24:export function UsersTab() {
+apps/lumina-builder/src/components/workspaces/admin/ProvidersTab.tsx:10:export function ProvidersTab() {
+apps/lumina-builder/src/components/workspaces/admin/MaintenanceTab.tsx:15:export function MaintenanceTab() {
+apps/lumina-builder/src/components/workspaces/admin/FeatureFlagsTab.tsx:7:export function FeatureFlagsTab() {
+apps/lumina-builder/src/components/workspaces/admin/AuditLogsTab.tsx:6:export function AuditLogsTab() {
+apps/lumina-builder/src/components/workspaces/admin/DeploymentsTab.tsx:8:export function DeploymentsTab() {
+apps/lumina-builder/src/components/workspaces/admin/ProjectsTab.tsx:17:export function ProjectsTab() {
+apps/lumina-builder/src/components/workspaces/admin/AIUsageTab.tsx:10:export function AIUsageTab() {
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx:21:export function AdminResetDataDialog({
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminProjectDeleteDialog.tsx:23:export function AdminProjectDeleteDialog({
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx:25:export function AdminUserDeleteDialog({
+apps/lumina-builder/src/components/workspaces/admin/BillingTab.tsx:19:export function BillingTab() {
+apps/lumina-builder/src/components/workspaces/admin/ImpersonationBanner.tsx:8:export function ImpersonationBanner() {
+apps/lumina-builder/src/components/workspaces/EntryView.tsx:194:export function EntryView() {
+apps/lumina-builder/src/components/workspaces/PricingView.tsx:23:export function PricingView() {
+apps/lumina-builder/src/components/workspaces/AIWorkspace.tsx:16:export function AIWorkspace() {
+apps/lumina-builder/src/components/workspaces/DashboardView.tsx:95:export function DashboardView() {
+apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx:227:export function DeveloperWorkspace() {
+apps/lumina-builder/src/components/workspaces/ai/ActivityPanel.tsx:8:export function ActivityPanel({ generating }: ActivityPanelProps) {
+apps/lumina-builder/src/components/workspaces/ai/TemplateGrid.tsx:6:export function TemplateGrid() {
+apps/lumina-builder/src/components/workspaces/ai/PromptComposer.tsx:13:export function PromptComposer({ prompt, onPromptChange, onGenerate, generating, onStop }: PromptComposerProps) {
+apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx:58:export function RuntimeDiagnosticsWorkspace() {
+apps/lumina-builder/src/components/workspaces/designer/DesignerCanvas.tsx:32:export function DesignerCanvas() {
+apps/lumina-builder/src/components/workspaces/designer/canvasStore.tsx:44:export function CanvasProvider({ children }: { children: ReactNode }) {
+apps/lumina-builder/src/components/workspaces/designer/canvasStore.tsx:91:export function useCanvas() {
+apps/lumina-builder/src/components/workspaces/designer/AIAssistPanel.tsx:99:export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+apps/lumina-builder/src/components/workspaces/designer/AIAssistPanel.tsx:534:export function AIAssistTrigger({ onClick, open }: { onClick: () => void; open: boolean }) {
+apps/lumina-builder/src/components/workspaces/dialogs/ProjectDeleteDialog.tsx:25:export function ProjectDeleteDialog({
+apps/lumina-builder/src/components/workspaces/dialogs/ProjectRenameDialog.tsx:26:export function ProjectRenameDialog({
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:108:export function useDebounced<T>(value: T, delay = 250): T {
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:138:export function ${Comp}({ title, onAction }: ${Comp}Props) {
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:222:export function DevAIAssistPanel({
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:870:export function DevAIAssistTrigger({ onClick, open }: { onClick: () => void; open: boolean }) {
+apps/lumina-builder/src/components/workspaces/dev/diff.ts:4:export function diffLines(a: string, b: string): DiffLine[] {
+apps/lumina-builder/src/components/workspaces/dev/BuildSteps.tsx:179:export function BuildSteps({ steps, defaultOpen = false }: BuildStepsProps) {
+apps/lumina-builder/src/components/workspaces/InHouseDevDashboard.tsx:16:export function InHouseDevDashboard() {
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:240:export function ImportsView() {
+apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx:76:export function MobilePackagingCard({ projectId }: { projectId: string }) {
+apps/lumina-builder/src/components/templates/TemplatesMarketplace.tsx:27:export function TemplatesMarketplace() {
+apps/lumina-builder/src/components/templates/starters/LumenAI.tsx:66:export function LumenAI() {
+apps/lumina-builder/src/components/templates/starters/PulseAnalytics.tsx:73:export function PulseAnalytics() {
+apps/lumina-builder/src/components/templates/starters/AuroraMarketing.tsx:31:export function AuroraMarketing() {
+apps/lumina-builder/src/components/templates/starters/HelixCRM.tsx:70:export function HelixCRM() {
+apps/lumina-builder/src/components/templates/TemplateShell.tsx:27:export function TemplateShell({ template, children }: TemplateShellProps) {
+apps/lumina-builder/src/components/templates/registry.ts:61:export function getTemplateBySlug(slug: string | undefined) {
+apps/lumina-builder/src/components/templates/registry.ts:65:export function getTemplateByName(name: string) {
+apps/lumina-builder/src/components/preview/PreviewFrame.tsx:213:export function PreviewFrame({
+apps/lumina-builder/src/components/preview/ProjectSettingsDialog.tsx:27:export function ProjectSettingsDialog({
+apps/lumina-builder/src/components/preview/UpgradeModal.tsx:70:export function UpgradeModal({
+apps/lumina-builder/src/components/preview/RuntimeStatusBanner.tsx:10:export function RuntimeStatusBanner({
+apps/lumina-builder/src/components/import/ImportSuccessPanel.tsx:34:export function ImportSuccessPanel({ label, detected = DEFAULT_DETECTED, onOpenImports }: Props) {
+apps/lumina-builder/src/components/import/GlobalImportDropZone.tsx:46:export function GlobalImportDropZone() {
+apps/lumina-builder/src/components/import/ImportModal.tsx:128:export function ImportModal() {
+apps/lumina-builder/src/components/transform/TransformAnalyticsMount.tsx:33:export function openTransformAnalytics() {
+apps/lumina-builder/src/components/transform/TransformAnalyticsMount.tsx:42:export function TransformAnalyticsMount() {
+apps/lumina-builder/src/components/transform/TransformModal.tsx:182:export function TransformModal() {
+apps/lumina-builder/src/components/transform/TransformModal.tsx:1013:export function ${name}() {
+apps/lumina-builder/src/components/transform/TransformButton.tsx:28:export function TransformButton({ source, project = null, detected = null, size = "sm", label = "Transform to Website", className }: Props) {
+apps/lumina-builder/src/components/transform/TransformAnalyticsPanel.tsx:46:export function TransformAnalyticsPanel({ open, onOpenChange }: Props) {
+apps/lumina-builder/src/components/notifications/NotificationsCenter.tsx:6:export function NotificationsCenter() {
+apps/lumina-builder/src/hooks/use-project-settings.ts:9:export function useProjectSettings() {
+apps/lumina-builder/src/hooks/use-mobile.tsx:5:export function useIsMobile() {
+apps/lumina-builder/src/hooks/use-ime-safe-key-handler.ts:23:export function useImeSafeKeyHandler<T extends HTMLElement = HTMLTextAreaElement>(
+apps/lumina-builder/src/hooks/use-auth.ts:5:export function useIsAuthenticated() {
+apps/lumina-builder/src/hooks/use-auth.ts:17:export function useCurrentUser(): User | null {
+apps/lumina-builder/src/hooks/useTypewriter.ts:15:export function useTypewriter(phrases: string[], opts: Opts = {}) {
+apps/lumina-builder/src/hooks/useTypewriter.ts:75:export function usePrefersReducedMotion() {
+apps/lumina-builder/src/hooks/use-current-role.ts:8:export function useCurrentRole(): [WorkspaceRole, (role: WorkspaceRole) => void] {
+apps/lumina-builder/src/hooks/useRuntimeBoot.ts:224:export function useRuntimeBoot(
+apps/lumina-builder/src/hooks/use-reveal.ts:3:export function useReveal<T extends HTMLElement = HTMLDivElement>(threshold = 0) {
+apps/lumina-builder/src/lib/errors.ts:37:export function normalizeError(e: unknown): AppError {
+apps/lumina-builder/src/lib/analytics.ts:48:export function track(event: AnalyticsEvent, props?: AnalyticsProps) {
+apps/lumina-builder/src/lib/analytics.ts:61:export function getAnalyticsBuffer(): AnalyticsEntry[] {
+apps/lumina-builder/src/lib/analytics.ts:65:export function subscribeAnalytics(fn: (entry: AnalyticsEntry) => void): () => void {
+apps/lumina-builder/src/lib/projectSettings.ts:7:export function slugify(input: string): string {
+apps/lumina-builder/src/lib/projectSettings.ts:17:export function validateSlug(slug: string): string | null {
+apps/lumina-builder/src/lib/projectSettings.ts:27:export function getProjectName(): string {
+apps/lumina-builder/src/lib/projectSettings.ts:32:export function getProjectSlug(): string {
+apps/lumina-builder/src/lib/projectSettings.ts:40:export function setProjectName(name: string) {
+apps/lumina-builder/src/lib/projectSettings.ts:45:export function setProjectSlug(slug: string) {
+apps/lumina-builder/src/lib/projectSettings.ts:50:export function getPreviewUrl(slug = getProjectSlug()): string {
+apps/lumina-builder/src/lib/projectSettings.ts:54:export function subscribeProjectSettings(cb: () => void): () => void {
+apps/lumina-builder/src/lib/utils.ts:4:export function cn(...inputs: ClassValue[]) {
+apps/lumina-builder/src/lib/seed.ts:109:export function runSeed() {
+apps/lumina-builder/src/lib/seed.ts:127:export function resetSeed() {
+apps/lumina-builder/src/lib/featureFlags.ts:26:export function isFeatureEnabled(flag: FeatureFlag): boolean {
+apps/lumina-builder/src/lib/featureFlags.ts:37:export function setFeatureFlagOverride(flag: FeatureFlag, value: boolean | null) {
+apps/lumina-builder/src/lib/transformPages.ts:286:export function buildSections(kind: PageKind, templateId: string, brand: string, mode: TransformMode): CanvasElement[] {
+apps/lumina-builder/src/lib/transformPages.ts:299:export function generatePages(mode: TransformMode, projectName: string): GeneratedPage[] {
+apps/lumina-builder/src/lib/persistence.ts:27:export function readJSON<T>(namespace: string, key: string, fallback: T): T {
+apps/lumina-builder/src/lib/persistence.ts:40:export function writeJSON<T>(namespace: string, key: string, value: T): void {
+apps/lumina-builder/src/lib/persistence.ts:50:export function removeKey(namespace: string, key: string): void {
+apps/lumina-builder/src/lib/persistence.ts:58:export function clearNamespace(namespace: string): void {
+apps/lumina-builder/src/lib/persistence.ts:72:export function subscribe(namespace: string, cb: Listener): () => void {
+apps/lumina-builder/src/lib/persistence.ts:92:export function migrate(namespace: string, version: number, fn: () => void): void {
+apps/lumina-builder/src/lib/persistence.ts:108:export function registerMigration(namespace: string, version: number, up: () => void) {
+apps/lumina-builder/src/lib/persistence.ts:116:export function runMigrations(): void {
+apps/lumina-builder/src/lib/persistence.ts:128:export function uid(prefix = "id"): string {
+apps/lumina-builder/src/lib/formatLastEdited.ts:1:export function formatLastEdited(
+apps/lumina-builder/src/lib/auth.ts:6:export function isAuthenticated(): boolean {
+apps/lumina-builder/src/lib/auth.ts:13:export function setAuthenticated(v: boolean) {
+apps/lumina-builder/src/lib/auth.ts:19:export function subscribeAuth(cb: () => void) {
+apps/lumina-builder/src/pages/LandingPage.tsx:26:export function LandingPage() {
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:8:export function setPendingUpgradeAction(reason: PendingUpgradeReason, slug?: string) {
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:15:export function getPendingUpgradeAction(): Stored | null {
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:30:export function clearPendingUpgradeAction() {
+apps/lumina-builder/src/services/systemHealthService.ts:18:export function getSystemHealth(): SystemHealth {
+apps/lumina-builder/src/services/repoAuditPdfService.ts:728:export function rgbToHex(rgb: RGB): string {
+apps/lumina-builder/src/services/repoAuditPdfService.ts:733:export function hexToRgb(hex: string): RGB | null {
+apps/lumina-builder/src/services/runtimeService.ts:21:export function markRuntimeManuallyStopped(
+apps/lumina-builder/src/services/runtimeService.ts:27:export function clearRuntimeManuallyStopped(
+apps/lumina-builder/src/services/runtimeService.ts:41:export function isRuntimeManuallyStopped(
+apps/lumina-builder/src/services/runtimeService.ts:544:export function connectRuntimeEvents(
+apps/lumina-builder/src/services/repoAuditBridge.ts:11:export function auditStoredProject(projectId: string): RepairPlan {
+apps/lumina-builder/src/services/repoIntelligenceService.ts:543:export function buildRepoKnowledgeGraphFromFiles(
+apps/lumina-builder/src/services/repoIntelligenceService.ts:550:export function buildRepoKnowledgeGraph(projectId: string): RepoKnowledgeGraph {
+apps/lumina-builder/src/services/repoIntelligenceService.ts:560:export function getRepoIntelligenceSummary(projectId: string) {
+apps/lumina-builder/src/services/workspaceAccessService.ts:59:export function getCurrentRole(): WorkspaceRole {
+apps/lumina-builder/src/services/workspaceAccessService.ts:65:export function setCurrentRole(role: WorkspaceRole) {
+apps/lumina-builder/src/services/workspaceAccessService.ts:72:export function getCapabilities(role: WorkspaceRole = getCurrentRole()): WorkspaceCapabilities {
+apps/lumina-builder/src/services/workspaceAccessService.ts:110:export function canAccess(capability: keyof WorkspaceCapabilities): boolean {
+apps/lumina-builder/src/services/workspaceAccessService.ts:114:export function hasAnyInternalCapability(caps = getCapabilities()): boolean {
+apps/lumina-builder/src/services/navigationService.ts:24:export function onNav(listener: Listener): () => void {
+apps/lumina-builder/src/services/navigationService.ts:54:export function startBuilding(): void {
+apps/lumina-builder/src/services/navigationService.ts:58:export function goToSignIn(): void {
+apps/lumina-builder/src/services/navigationService.ts:62:export function goToDashboard(): void {
+apps/lumina-builder/src/services/navigationService.ts:70:export function goToWorkspace(): void {
+apps/lumina-builder/src/services/navigationService.ts:78:export function goToPricing(): void {
+apps/lumina-builder/src/services/navigationService.ts:82:export function goToTemplates(): void {
+apps/lumina-builder/src/services/navigationService.ts:86:export function goToSettings(): void {
+apps/lumina-builder/src/services/navigationService.ts:90:export function goToDocs(): void {
+apps/lumina-builder/src/services/navigationService.ts:98:export function watchDemo(): void {
+apps/lumina-builder/src/services/navigationService.ts:106:export function contactSales(): void {
+apps/lumina-builder/src/services/navigationService.ts:113:export function goToRepoAudit(): void {
+apps/lumina-builder/src/services/projectScope.ts:10:export function getProjectScope(): ProjectScope | undefined {
+apps/lumina-builder/src/services/runtimeEvents.ts:24:export function connectRuntimeEvents(
+apps/lumina-builder/src/services/entitlements.ts:22:export function checkEntitlement(action: EntitlementAction): EntitlementResult {
+apps/lumina-builder/src/services/entitlements.ts:58:export function requireEntitlement(action: EntitlementAction): void {
+apps/lumina-builder/src/services/adminAnalytics.ts:35:export function getAdminAnalytics(): AdminAnalytics {
+apps/lumina-builder/src/services/repoAuditService.ts:526: export function getBaseUrl(): string {
+apps/lumina-builder/src/services/pricingPrefill.ts:25:export function setPricingPrefill(p: Omit<PricingPrefill, "seatsLeft" | "seatCap"> & { seatsLeft: number; seatCap: number }) {
+apps/lumina-builder/src/services/pricingPrefill.ts:34:export function getPricingPrefill(): PricingPrefill | null {
+apps/lumina-builder/src/services/pricingPrefill.ts:42:export function clearPricingPrefill() {
+apps/lumina-builder/src/services/teamPermissions.ts:67:export function can(role: TeamRole | null | undefined, action: TeamAction): boolean {
+apps/lumina-builder/src/services/teamPermissions.ts:74:export function roleLabel(role: TeamRole): string {
+apps/lumina-builder/src/services/actions.ts:48:export function openSettings(setView: (v: "settings") => void) { setView("settings"); }
+apps/lumina-builder/src/services/actions.ts:49:export function upgradePlan(setView: (v: "pricing") => void) { setView("pricing"); }
+apps/lumina-builder/src/services/actions.ts:50:export function switchMode(setMode: (m: "ai" | "designer" | "developer") => void, m: "ai" | "designer" | "developer") { setMode(m); }
+apps/lumina-builder/src/services/actions.ts:51:export function openCommandPalette(setCommandOpen: (b: boolean) => void) { setCommandOpen(true); }
+apps/lumina-builder/src/services/adminService.ts:29:export function listUsers(): AdminUserRow[] {
+apps/lumina-builder/src/services/adminService.ts:39:export function updateUserRole(userId: string, role: Role) {
+apps/lumina-builder/src/services/adminService.ts:44:export function suspendUser(userId: string) {
+apps/lumina-builder/src/services/adminService.ts:48:export function reactivateUser(userId: string) {
+apps/lumina-builder/src/services/adminService.ts:52:export function deleteUser(userId: string) {
+apps/lumina-builder/src/services/adminService.ts:56:export function resetUserPassword(userId: string, newPw = "Lumina!2026") {
+apps/lumina-builder/src/services/adminService.ts:61:export function createUser(input: { email: string; name: string; role: Role; password?: string }) {
+apps/lumina-builder/src/services/adminService.ts:71:export function listAllProjects() { return projectRepository.list(); }
+apps/lumina-builder/src/services/adminService.ts:89:export function transferProjectOwnership(id: string, newOwnerId: string) {
+apps/lumina-builder/src/services/adminService.ts:103:export function listSubscriptions() { return loadSubs(); }
+apps/lumina-builder/src/services/adminService.ts:104:export function listPayments() { return loadPayments(); }
+apps/lumina-builder/src/services/adminService.ts:106:export function grantPlan(userId: string, plan: Plan, role: Role) {
+apps/lumina-builder/src/services/adminService.ts:117:export function revokePlan(userId: string) {
+apps/lumina-builder/src/services/adminService.ts:128:export function refundPayment(paymentId: string) {
+apps/lumina-builder/src/services/adminService.ts:138:export function getProviderConfiguration(): ProviderConfig { return getConfig(); }
+apps/lumina-builder/src/services/adminService.ts:139:export function setProviderConfiguration(patch: Partial<ProviderConfig>) {
+apps/lumina-builder/src/services/adminService.ts:150:export function listFeatureFlags() {
+apps/lumina-builder/src/services/adminService.ts:153:export function updateFeatureFlag(flag: FeatureFlag, enabled: boolean) {
+apps/lumina-builder/src/services/adminService.ts:197:export function clearNotifications() {
+apps/lumina-builder/src/services/adminService.ts:202:export function clearAuditLog() { clearAuditLogs(); logAction("maintenance.clear_audit_logs"); }
+apps/lumina-builder/src/services/adminService.ts:204:export function exportSnapshot(): string {
+apps/lumina-builder/src/services/adminService.ts:217:export function importSnapshot(json: string) {
+apps/lumina-builder/src/services/adminService.ts:229:export function impersonateUser(userId: string) {
+apps/lumina-builder/src/services/adminService.ts:237:export function stopImpersonation() {
+apps/lumina-builder/src/services/adminService.ts:244:export function getImpersonatedUserId() { return mockGetImpersonation(); }
+apps/lumina-builder/src/services/workspaceEntitlements.ts:23:export function getWorkspaceLimits(plan: TeamPlan): WorkspaceLimits {
+apps/lumina-builder/src/services/workspaceEntitlements.ts:31:export function checkWorkspaceLimit(
+apps/lumina-builder/src/services/providerConfigService.ts:15:export function getConfig(): ProviderConfig {
+apps/lumina-builder/src/services/providerConfigService.ts:19:export function setConfig(patch: Partial<ProviderConfig>) {
+apps/lumina-builder/src/services/providerConfigService.ts:27:export function resetConfig() {
+apps/lumina-builder/src/services/providerConfigService.ts:32:export function onConfigChange(cb: () => void) { return subscribe(NS, cb); }
+apps/lumina-builder/src/services/providerConfigService.ts:35:export function applyConfigToRuntime() {
+apps/lumina-builder/src/services/auditLogService.ts:23:export function logAction(
+apps/lumina-builder/src/services/auditLogService.ts:48:export function listLogs(limit = 500): AuditLog[] { return load().slice(0, limit); }
+apps/lumina-builder/src/services/auditLogService.ts:50:export function searchLogs(filter: {
+apps/lumina-builder/src/services/auditLogService.ts:68:export function clearLogs() { save([]); }
+apps/lumina-builder/src/services/auditLogService.ts:69:export function onLogsChange(cb: () => void) { return subscribe(NS, cb); }
+apps/lumina-builder/src/services/adminMaintenanceService.ts:23:export function clearNotifications(): void {
+apps/lumina-builder/src/services/adminMaintenanceService.ts:29:export function clearAuditLog(): void {
+apps/lumina-builder/src/services/auditEngine.ts:11:export function runAudit(repo: ImportedRepo): RepairPlan {
+apps/lumina-runtime/src/detect/detectFramework.ts:13:export function detectFramework(
+apps/lumina-runtime/src/autofix/generateFixPlan.ts:31:export function generateFixPlan(report: AuditReport): FixPlan {
+apps/lumina-runtime/src/autofix/patchBuilders.ts:8:export function generate100vwFix(
+apps/lumina-runtime/src/autofix/patchBuilders.ts:39:export function generateLockfileFix(
+apps/lumina-runtime/src/autofix/patchBuilders.ts:80:export function generateFaviconFix(
+apps/lumina-runtime/src/autofix/patchBuilders.ts:104:export function generateFixedPositionReview(
+apps/lumina-runtime/src/drafts/draftStore.ts:6:export function createDraft(projectId: string, patches: DraftPatch[]): FixDraft {
+apps/lumina-runtime/src/drafts/draftStore.ts:21:export function getDraft(draftId: string): FixDraft | undefined {
+apps/lumina-runtime/src/drafts/draftStore.ts:25:export function markDraftApplied(
+apps/lumina-runtime/src/drafts/draftStore.ts:40:export function markDraftReverted(draftId: string): FixDraft | undefined {
+apps/lumina-runtime/src/drafts/generateFixDrafts.ts:85:export function generateDraftPatches(projectPath: string, plan: FixPlan): DraftPatch[] {
+apps/lumina-runtime/src/drafts/revertDraft.ts:24:export function revertDraft(projectPath: string, draft: FixDraft): RevertDraftResult {
+apps/lumina-runtime/src/drafts/applyDraft.ts:102:export function applyDraft(projectPath: string, draft: FixDraft): ApplyDraftResult {
+apps/lumina-runtime/src/projects/listProjects.ts:51:export function listProjects() {
+apps/lumina-runtime/src/projects/projectMetadataStore.ts:105:export function getProjectMetadata(
+apps/lumina-runtime/src/projects/projectMetadataStore.ts:117:export function setProjectMetadata(
+apps/lumina-runtime/src/projects/projectMetadataStore.ts:152:export function removeProjectMetadata(
+apps/lumina-runtime/src/projects/projectMetadataMigration.ts:7:export function backfillMissingProjectMetadata() {
+apps/lumina-runtime/src/projects/getProjectPath.ts:62:export function getProjectPath(
+apps/lumina-runtime/src/runtime/startProject.ts:255:export function getRestartState(
+apps/lumina-runtime/src/runtime/startProject.ts:273:export function getAllRestartStates() {
+apps/lumina-runtime/src/runtime/bootstrapGuard.ts:9:export function claimRuntimeBootstrap() {
+apps/lumina-runtime/src/runtime/eventBus.ts:36:export function publishRuntimeEvent(
+apps/lumina-runtime/src/runtime/eventBus.ts:51:export function subscribeRuntimeEvents(
+apps/lumina-runtime/src/runtime/eventBus.ts:61:export function attachRuntimeEventStream(
+apps/lumina-runtime/src/runtime/eventBus.ts:116:export function getRuntimeEventClientCount() {
+apps/lumina-runtime/src/runtime/runtimeLock.ts:32:export function acquireRuntimeLock(
+apps/lumina-runtime/src/runtime/runtimeLock.ts:52:export function releaseRuntimeLock(
+apps/lumina-runtime/src/runtime/runtimeLock.ts:65:export function getRuntimeLock(
+apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts:121:export function ensureProjectIsolation(projectPath: string) {
+apps/lumina-runtime/src/runtime/scaffoldNormalizer.ts:142:export function normalizeProjectScaffold(projectPath: string): void {
+apps/lumina-runtime/src/runtime/workspaceWatcher.ts:51:export function watchWorkspace(
+apps/lumina-runtime/src/runtime/workspaceWatcher.ts:125:export function getWorkspaceWatcherCount() {
+apps/lumina-runtime/src/runtime/registry.ts:125:export function isPidAlive(
+apps/lumina-runtime/src/runtime/registry.ts:140:export function serializeRuntime(
+apps/lumina-runtime/src/runtime/registry.ts:173:export function appendRuntimeLog(
+apps/lumina-runtime/src/runtime/registry.ts:229:export function setRuntime(
+apps/lumina-runtime/src/runtime/registry.ts:250:export function getRuntime(
+apps/lumina-runtime/src/runtime/registry.ts:281:export function removeRuntime(
+apps/lumina-runtime/src/runtime/registry.ts:299:export function listRuntimes(): RuntimeRecord[] {
+apps/lumina-runtime/src/runtime/supervisor.ts:153:export function startRuntimeSupervisor() {
+apps/lumina-runtime/src/runtime/supervisor.ts:167:export function stopRuntimeSupervisor() {
+apps/lumina-runtime/src/runtime/layoutSafetyEngine.ts:405:export function runLayoutSafetyEngine(
+apps/lumina-runtime/src/runtime/manualStop.ts:3:export function markRuntimeManualStop(projectId: string): void {
+apps/lumina-runtime/src/runtime/manualStop.ts:7:export function isRuntimeManualStop(projectId: string): boolean {
+apps/lumina-runtime/src/runtime/manualStop.ts:11:export function clearRuntimeManualStop(projectId: string): void {
+apps/lumina-runtime/src/runtime/persistence.ts:37:export function runtimeStatePath(projectId: string) {
+apps/lumina-runtime/src/runtime/persistence.ts:46:export function persistRuntimeState(runtime: PersistedRuntime) {
+apps/lumina-runtime/src/runtime/persistence.ts:61:export function removeRuntimeState(projectId: string) {
+apps/lumina-runtime/src/runtime/persistence.ts:69:export function listPersistedRuntimes(): PersistedRuntime[] {
+apps/lumina-runtime/src/runtime/fsEvents.ts:3:export function publishFileChanged(payload: {
+apps/lumina-runtime/src/audit/auditProject.ts:248:export function auditProject(projectId: string, projectPath: string): AuditReport {
+apps/lumina-runtime/src/routes/status.ts:37:export function registerStatusRoute(app: Express) {
+apps/lumina-runtime/src/routes/runtimeCaller.ts:49:export function getRuntimeCaller(
+apps/lumina-runtime/src/routes/projects.ts:29:export function registerProjectsRoute(
+apps/lumina-runtime/src/routes/runtimeAuthorization.ts:9:export function canViewProject(
+apps/lumina-runtime/src/routes/runtimeAuthorization.ts:44:export function canManageProject(
+apps/lumina-runtime/src/routes/generateFixes.ts:13:export function registerGenerateFixesRoute(app: Express) {
+apps/lumina-runtime/src/routes/drafts.ts:5:export function registerDraftsRoute(app: Express) {
+apps/lumina-runtime/src/routes/fs.ts:92:export function registerFsRoute(app: Express) {
+apps/lumina-runtime/src/routes/logs.ts:8:export function registerLogsRoute(app: Express) {
+apps/lumina-runtime/src/routes/restart.ts:24:export function registerRestartRoute(
+apps/lumina-runtime/src/routes/runtimeAccess.ts:20:export function requireRuntimeAccess(
+apps/lumina-runtime/src/routes/start.ts:6:export function registerStartRoute(app: Express) {
+apps/lumina-runtime/src/routes/fixPlan.ts:46:export function registerFixPlanRoute(app: Express) {
+apps/lumina-runtime/src/routes/stop.ts:20:export function registerStopRoute(
+apps/lumina-runtime/src/routes/events.ts:5:export function registerEventsRoute(app: Express) {
+apps/lumina-runtime/src/routes/audit.ts:43:export function registerAuditRoute(app: Express) {
+apps/lumina-runtime/src/routes/importProject.ts:6:export function registerImportProjectRoute(
+apps/lumina-runtime/src/routes/createDraft.ts:13:export function registerCreateDraftRoute(app: Express) {
+apps/lumina-runtime/src/routes/metrics.ts:27:export function registerMetricsRoute(app: Express) {
+apps/lumina-runtime/src/routes/revertDraft.ts:12:export function registerRevertDraftRoute(app: Express) {
+apps/lumina-runtime/src/routes/applyDraft.ts:12:export function registerApplyDraftRoute(app: Express) {
+apps/lumina-runtime/src/routes/projectMetadata.ts:22:export function registerProjectMetadataRoute(

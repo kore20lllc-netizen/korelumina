@@ -1,0 +1,52 @@
+apps/lumina-builder/src/__tests__/services.test.ts:    const dup = projectRepository.duplicate(p.id);
+apps/lumina-builder/src/__tests__/services.test.ts:    const p = projectRepository.create({
+apps/lumina-builder/src/__tests__/services.test.ts:    const p = projectRepository.create({ name: "R", type: "webapp" });
+apps/lumina-builder/src/__tests__/services.test.ts:    const p = projectRepository.create({ name: "R", type: "webapp" });
+apps/lumina-builder/src/__tests__/services.test.ts:    const p = projectRepository.create({ name: "X", type: "webapp" });
+apps/lumina-builder/src/__tests__/services.test.ts:    const updated = projectRepository.update(p.id, { status: "live" });
+apps/lumina-builder/src/__tests__/services.test.ts:    expect(projectRepository.list()).toHaveLength(1);
+apps/lumina-builder/src/__tests__/services.test.ts:    expect(projectRepository.list()).toHaveLength(1);
+apps/lumina-builder/src/__tests__/services.test.ts:    expect(projectRepository.list()).toHaveLength(2);
+apps/lumina-builder/src/__tests__/services.test.ts:    projectRepository.remove(p.id);
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:      projectRepository.create({ name: `p${i}`, type: "webapp" }, { teamId: t.id, ownerId: "u1" });
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    const a = projectRepository.create({ name: "A", type: "webapp" }, { teamId: "t1", createdBy: "u1" });
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    const scoped = projectRepository.list({ teamId: "t1" });
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    expect(projectRepository.list({ teamId: "home" })).toHaveLength(1);
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    projectRepository.assignOrphansToTeam("home");
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    projectRepository.create({ name: "B", type: "webapp" }, { teamId: "t2", createdBy: "u2" });
+apps/lumina-builder/src/__tests__/teamWorkspace.test.ts:    projectRepository.create({ name: "Legacy", type: "webapp" });
+apps/lumina-builder/src/components/templates/TemplateShell.tsx:    projectRepository.create({
+apps/lumina-builder/src/components/templates/TemplatesMarketplace.tsx:                      const proj = projectRepository.create({
+apps/lumina-builder/src/components/transform/TransformModal.tsx:                    projectRepository.saveFiles(targetId, next);
+apps/lumina-builder/src/components/transform/TransformModal.tsx:                  const existing = projectRepository.get(targetId);
+apps/lumina-builder/src/components/transform/TransformModal.tsx:        projectRepository.saveFiles(targetId, next);
+apps/lumina-builder/src/components/transform/TransformModal.tsx:      const existing = projectRepository.get(targetId);
+apps/lumina-builder/src/components/workspaces/admin/ProjectsTab.tsx:  useEffect(() => projectRepository.onChange(refresh), []);
+apps/lumina-builder/src/components/workspaces/DashboardView.tsx:                                projectRepository.duplicate(
+apps/lumina-builder/src/components/workspaces/DashboardView.tsx:            projectRepository.remove(
+apps/lumina-builder/src/components/workspaces/DashboardView.tsx:            projectRepository.update(
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx:                      const projectCurrent = projectRepository.list({ teamId: activeTeam.id }).length;
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:        const orphaned = projectRepository.list().some((p) => !p.teamId);
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:        const projects = projectRepository.list();
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:        if (orphaned) projectRepository.assignOrphansToTeam(ensureDemoTeam().id);
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:        if (orphaned) projectRepository.assignOrphansToTeam(personal.id);
+apps/lumina-builder/src/context/WorkspaceContext.tsx:          projectRepository.list(getProjectScope());
+apps/lumina-builder/src/context/WorkspaceContext.tsx:        projectRepository.create(
+apps/lumina-builder/src/context/WorkspaceContext.tsx:    projectRepository.list(getProjectScope());
+apps/lumina-builder/src/context/WorkspaceContext.tsx:    projectRepository.list(getProjectScope());
+apps/lumina-builder/src/context/WorkspaceContext.tsx:    return projectRepository.list(getProjectScope());
+apps/lumina-builder/src/context/WorkspaceContext.tsx:    return projectRepository.onChange(
+apps/lumina-builder/src/lib/seed.ts:    projectRepository.create({
+apps/lumina-builder/src/lib/seed.ts:  const projects = projectRepository.list().slice(0, 15);
+apps/lumina-builder/src/lib/seed.ts:  if (projectRepository.list().length >= 30) return;
+apps/lumina-builder/src/services/adminAnalytics.ts:  const projects = projectRepository.list();
+apps/lumina-builder/src/services/adminService.ts:  const projects = projectRepository.list();
+apps/lumina-builder/src/services/adminService.ts:  projectRepository.remove(
+apps/lumina-builder/src/services/adminService.ts:  projectRepository.update(id, { ownerId: newOwnerId });
+apps/lumina-builder/src/services/adminService.ts:export function listAllProjects() { return projectRepository.list(); }
+apps/lumina-builder/src/services/api.ts:      content: projectRepository.readFile(projectId, file),
+apps/lumina-builder/src/services/api.ts:    const project = projectRepository.create(
+apps/lumina-builder/src/services/api.ts:    projectRepository.writeFile(projectId, file, content);
+apps/lumina-builder/src/services/repoAuditBridge.ts:  const p = projectRepository.get(projectId);
+apps/lumina-builder/src/services/repoIntelligenceService.ts:  const project = projectRepository.get(projectId);
+apps/lumina-builder/src/services/workspaceEntitlements.ts:      const current = projectRepository.list({ teamId }).length;

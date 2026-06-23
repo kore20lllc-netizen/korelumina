@@ -1,0 +1,82 @@
+apps/lumina-builder/src/components/layout/Sidebar.tsx:23:    try { return window.localStorage.getItem("korelumina:sidebarAdminOpen") !== "0"; } catch { return true; }
+apps/lumina-builder/src/components/layout/Sidebar.tsx:28:      try { window.localStorage.setItem("korelumina:sidebarAdminOpen", next ? "1" : "0"); } catch {}
+apps/lumina-builder/src/components/layout/Sidebar.tsx:288:    localStorage.removeItem("korelumina:view");
+apps/lumina-builder/src/components/layout/Sidebar.tsx:289:    localStorage.removeItem("korelumina:activeTeam");
+apps/lumina-builder/src/components/templates/TemplateShell.tsx:34:        window.localStorage.setItem("korelumina:view", "auth");
+apps/lumina-builder/src/components/templates/TemplateShell.tsx:43:      try { window.localStorage.setItem("korelumina:view", "pricing"); } catch {}
+apps/lumina-builder/src/components/templates/TemplateShell.tsx:58:    try { window.localStorage.setItem("korelumina:view", "workspace"); } catch {}
+apps/lumina-builder/src/components/transform/TransformAnalyticsMount.tsx:16:    const raw = window.localStorage.getItem(STORAGE_KEY);
+apps/lumina-builder/src/components/transform/TransformAnalyticsMount.tsx:26:    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+apps/lumina-builder/src/components/workspaces/AdminWorkspace.tsx:23:    const v = window.localStorage.getItem(ADMIN_TAB_KEY) as AdminTab | null;
+apps/lumina-builder/src/components/workspaces/AdminWorkspace.tsx:35:    try { window.localStorage.setItem(ADMIN_TAB_KEY, v); } catch {}
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:160:    const v = window.localStorage.getItem(STEPS_PREF_KEY);
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:242:    try { window.localStorage.setItem(STEPS_PREF_KEY, visible ? "1" : "0"); } catch {}
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx:628:                  try { window.localStorage.setItem(STEPS_PREF_KEY, next ? "1" : "0"); } catch {}
+apps/lumina-builder/src/components/workspaces/EntryView.tsx:168:    const raw = window.localStorage.getItem(CHIPS_KEY);
+apps/lumina-builder/src/components/workspaces/EntryView.tsx:176:  try { window.localStorage.setItem(CHIPS_KEY, JSON.stringify(s)); } catch { /* ignore */ }
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:138:    const raw = window.localStorage.getItem(OVERRIDES_KEY);
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:166:  try { const v = window.localStorage.getItem(TZ_KEY); return v === "utc" ? "utc" : "local"; } catch { return "local"; }
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:183:    const raw = window.localStorage.getItem(RESET_SNAPSHOT_KEY);
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:194:  try { window.localStorage.removeItem(RESET_SNAPSHOT_KEY); } catch { /* ignore */ }
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:198:  try { window.localStorage.setItem(RESET_SNAPSHOT_KEY, JSON.stringify(s)); } catch { /* ignore */ }
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:208:    const raw = window.localStorage.getItem(PREFS_KEY);
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:269:      window.localStorage.setItem(PREFS_KEY, JSON.stringify({ sortBy, sortDir, timeFilter }));
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:274:    try { window.localStorage.setItem(TZ_KEY, tzMode); } catch { /* ignore */ }
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx:278:    try { window.localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides)); } catch { /* ignore */ }
+apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx:45:    const all = JSON.parse(window.localStorage.getItem(PIN_STORAGE_KEY) || "{}");
+apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx:55:    const all = JSON.parse(window.localStorage.getItem(PIN_STORAGE_KEY) || "{}");
+apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx:57:    window.localStorage.setItem(PIN_STORAGE_KEY, JSON.stringify(next));
+apps/lumina-builder/src/components/workspaces/repo-audit/StepDiffPanel.tsx:26:    try { const v = localStorage.getItem("diff-highlight-mode"); return v === "focus" ? "focus" : "normal"; } catch { return "normal"; }
+apps/lumina-builder/src/components/workspaces/repo-audit/StepDiffPanel.tsx:33:    try { localStorage.setItem("diff-highlight-mode", highlightMode); } catch { /* noop */ }
+apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx:187:          window.localStorage.getItem(
+apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx:570:              window.localStorage.setItem(
+apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx:584:              window.localStorage.removeItem(
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:15:  try { return window.localStorage.getItem(ACTIVE_KEY); } catch { return null; }
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:20:    if (id) window.localStorage.setItem(ACTIVE_KEY, id);
+apps/lumina-builder/src/context/ActiveTeamContext.tsx:21:    else window.localStorage.removeItem(ACTIVE_KEY);
+apps/lumina-builder/src/context/GlassTintContext.tsx:23:    const stored = window.localStorage.getItem(STORAGE_KEY) as TintIntensity | null;
+apps/lumina-builder/src/context/GlassTintContext.tsx:30:    window.localStorage.setItem(STORAGE_KEY, intensity);
+apps/lumina-builder/src/context/WorkspaceContext.tsx:244:    localStorage.getItem(
+apps/lumina-builder/src/context/WorkspaceContext.tsx:255:    localStorage.removeItem(
+apps/lumina-builder/src/context/WorkspaceContext.tsx:291:    localStorage.getItem(
+apps/lumina-builder/src/context/WorkspaceContext.tsx:502:      localStorage.removeItem(
+apps/lumina-builder/src/context/WorkspaceContext.tsx:509:    localStorage.setItem(
+apps/lumina-builder/src/hooks/useRuntimeBoot.ts:54:  localStorage.setItem(
+apps/lumina-builder/src/hooks/useRuntimeBoot.ts:64:    localStorage.getItem(
+apps/lumina-builder/src/hooks/useRuntimeBoot.ts:72:    localStorage.removeItem(
+apps/lumina-builder/src/lib/featureFlags.ts:39:  if (value === null) window.localStorage.removeItem(`ff:${flag}`);
+apps/lumina-builder/src/lib/featureFlags.ts:40:  else window.localStorage.setItem(`ff:${flag}`, String(value));
+apps/lumina-builder/src/lib/featureFlags.ts:5: *   localStorage.setItem("ff:transform_to_website", "false")
+apps/lumina-builder/src/lib/persistence.ts:30:    const raw = window.localStorage.getItem(fullKey(namespace, key));
+apps/lumina-builder/src/lib/persistence.ts:35:    try { window.localStorage.removeItem(fullKey(namespace, key)); } catch {}
+apps/lumina-builder/src/lib/persistence.ts:43:    window.localStorage.setItem(fullKey(namespace, key), JSON.stringify(value));
+apps/lumina-builder/src/lib/persistence.ts:53:    window.localStorage.removeItem(fullKey(namespace, key));
+apps/lumina-builder/src/lib/persistence.ts:63:    for (let i = 0; i < window.localStorage.length; i++) {
+apps/lumina-builder/src/lib/persistence.ts:64:      const k = window.localStorage.key(i);
+apps/lumina-builder/src/lib/persistence.ts:67:    toDel.forEach((k) => window.localStorage.removeItem(k));
+apps/lumina-builder/src/lib/projectSettings.ts:29:  return window.localStorage.getItem(NAME_KEY) || "Untitled Project";
+apps/lumina-builder/src/lib/projectSettings.ts:34:  const stored = window.localStorage.getItem(SLUG_KEY);
+apps/lumina-builder/src/lib/projectSettings.ts:41:  try { window.localStorage.setItem(NAME_KEY, name); } catch {}
+apps/lumina-builder/src/lib/projectSettings.ts:46:  try { window.localStorage.setItem(SLUG_KEY, slug); } catch {}
+apps/lumina-builder/src/pages/InviteAcceptPage.tsx:50:      try { window.localStorage.setItem(ACTIVE_KEY, team.id); } catch {}
+apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts:102:        localStorage.getItem(storageKey) || "{}",
+apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts:201:        localStorage.removeItem(k);
+apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts:73:        localStorage.getItem(storageKey) || "{}",
+apps/lumina-builder/src/services/adminService.ts:208:    for (let i = 0; i < window.localStorage.length; i++) {
+apps/lumina-builder/src/services/adminService.ts:209:      const k = window.localStorage.key(i);
+apps/lumina-builder/src/services/adminService.ts:210:      if (k && k.startsWith(prefix)) dump[k] = window.localStorage.getItem(k) ?? "";
+apps/lumina-builder/src/services/adminService.ts:220:  Object.entries(parsed.data).forEach(([k, v]) => window.localStorage.setItem(k, v));
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:11:    window.localStorage.setItem(KEY, JSON.stringify(payload));
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:17:    const raw = window.localStorage.getItem(KEY);
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:21:      window.localStorage.removeItem(KEY);
+apps/lumina-builder/src/services/pendingUpgradeAction.ts:31:  try { window.localStorage.removeItem(KEY); } catch {}
+apps/lumina-builder/src/services/runtimeService.ts:33:    localStorage.removeItem(
+apps/lumina-builder/src/services/runtimeService.ts:531:    localStorage.getItem(
+apps/lumina-builder/src/services/systemHealthService.ts:22:    for (let i = 0; i < window.localStorage.length; i++) {
+apps/lumina-builder/src/services/systemHealthService.ts:23:      const k = window.localStorage.key(i);
+apps/lumina-builder/src/services/systemHealthService.ts:25:      const v = window.localStorage.getItem(k) ?? "";
+apps/lumina-builder/src/services/systemHealthService.ts:39:    for (let i = 0; i < window.localStorage.length; i++) {
+apps/lumina-builder/src/services/systemHealthService.ts:40:      const k = window.localStorage.key(i);
+apps/lumina-builder/src/services/systemHealthService.ts:43:      try { schemaVersions[ns] = JSON.parse(window.localStorage.getItem(k) ?? "0"); } catch {}
+apps/lumina-builder/src/services/workspaceAccessService.ts:54:    (window.localStorage.getItem("korelumina:role") as WorkspaceRole | null)) ||
+apps/lumina-builder/src/services/workspaceAccessService.ts:67:  try { window.localStorage.setItem("korelumina:role", role); } catch {}
