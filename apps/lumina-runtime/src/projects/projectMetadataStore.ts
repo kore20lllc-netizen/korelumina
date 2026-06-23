@@ -99,6 +99,7 @@ function writeStore(
     ),
     "utf8",
   );
+
 }
 
 export function getProjectMetadata(
@@ -119,6 +120,7 @@ export function setProjectMetadata(
     "createdAt" | "updatedAt"
   >,
 ): ProjectMetadata {
+
   const store =
     readStore();
 
