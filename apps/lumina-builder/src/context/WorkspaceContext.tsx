@@ -378,33 +378,18 @@ export function WorkspaceProvider({
   const [
     storedProjects,
     setStoredProjects,
-  ] = useState<Project[]>(
-    () => listProjects(),
-  );
+  ] = useState<Project[]>([]);
 
   const [
     activeProject,
     setActiveProjectState,
-  ] = useState<Project | null>(
-    () => resolveInitialProject(),
-  );
+  ] = useState<Project | null>(null);
 
   useEffect(() => {
     return projectRepository.onChange(
       () => {
-        const nextProjects =
-          projectRepository.list(getProjectScope());
-
-        setStoredProjects(
-          nextProjects,
-        );
-
-        setActiveProjectState(
-          (current) =>
-            resolveProjectFromList(
-              nextProjects,
-              current,
-            ),
+        console.warn(
+          "[WorkspaceContext] local projectRepository changed; runtime remains project source of truth",
         );
       },
     );
@@ -446,18 +431,10 @@ export function WorkspaceProvider({
             return runtimeProjectToProject(runtimeProject);
           });
 
-        const runtimeIds = new Set(
-          runtimeMapped.map((project) => project.id),
-        );
-
-        const localOnly = localProjects.filter(
-          (project) => !runtimeIds.has(project.id),
-        );
-
-        const nextProjects = [
-          ...runtimeMapped,
-          ...localOnly,
-        ];
+        const nextProjects =
+          runtimeMapped.length > 0
+            ? runtimeMapped
+            : localProjects;
 
         setStoredProjects(nextProjects);
 
