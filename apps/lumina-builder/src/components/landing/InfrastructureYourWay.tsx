@@ -27,11 +27,10 @@ export function InfrastructureYourWay() {
         <div className="text-center mb-12 max-w-2xl mx-auto">
           <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">Infrastructure</p>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-gradient-royal-gold">
-            Infrastructure Your Way
+            Infrastructure Freedom
           </h2>
           <p className="text-muted-foreground leading-relaxed mt-4">
-            Start instantly with fully managed infrastructure, or connect your own Supabase, GitHub,
-            and deployment stack when you're ready.
+            Use KoreLumina-managed infrastructure, bring your own providers, or move between both as your company grows.
           </p>
         </div>
 
@@ -100,7 +99,7 @@ export function InfrastructureYourWay() {
         </div>
 
         <p className="text-center text-sm md:text-base text-muted-foreground mt-10">
-          Start managed. Connect your own tools anytime. Export your code whenever you want.
+          Start managed. Connect your own tools anytime. Keep your code, data, and deployment path portable.
         </p>
       </div>
     </section>

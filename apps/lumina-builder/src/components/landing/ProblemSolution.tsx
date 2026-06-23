@@ -10,9 +10,9 @@ export function ProblemSolution() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-surface-1 text-xs text-muted-foreground mb-5">
             <AlertTriangle className="w-3.5 h-3.5 text-gold" /> Today
           </div>
-          <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-3 text-gradient-royal-gold">AI builders stop at code.</h3>
+          <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-3 text-gradient-royal-gold">AI builders generate code. Software companies ship systems.</h3>
           <p className="text-muted-foreground leading-relaxed">
-            They generate components and call it done. Real software needs runtime, refactors across many files, governance, and a team that can operate it once it ships.
+            Most tools stop after generation. Real software needs repository intelligence, multi-file transformation, runtime, deployment, governance, and a team that can operate it once it ships.
           </p>
         </div>
         <div className="glass-panel-landing p-8 md:p-10 rounded-2xl">
@@ -21,10 +21,10 @@ export function ProblemSolution() {
               <Sparkles className="w-3.5 h-3.5 text-cyan" /> KoreLumina
             </div>
             <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-3 text-gradient-royal-gold">
-              We run the whole system.
+              KoreLumina coordinates the whole lifecycle.
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Repo intelligence, runtime, AI orchestration, transformation, expert escalation, and enterprise hardening — one operating system from idea to production.
+              Repo intelligence, AI orchestration, transformation, runtime, deployment, expert escalation, and enterprise hardening — one operating system from idea to production.
             </p>
           </div>
         </div>

@@ -15,17 +15,17 @@ export function Hero() {
               <span className="lumina-pill self-center inline-flex w-fit items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-surface-1 tracking-tight">
                 <span className="w-1.5 h-1.5 rounded-full bg-button-lumina" />
                 <span className="eyebrow-lumina text-[12px]">
-                  The operating system for AI-native software development
+                  The software operating system for AI-native teams
                 </span>
               </span>
               <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-gradient-royal-gold">
-                Import any project. Build with AI. Deploy on your terms.
+                The Operating System for Modern Software Development
               </h1>
               <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Create, modernize, and operate production software with AI while keeping full ownership of your code, infrastructure, and data.
+                Import existing repositories, build with AI, orchestrate infrastructure, deploy to production, and evolve software from a single platform.
               </p>
               <p className="text-sm md:text-base text-muted-foreground/90 max-w-xl leading-relaxed">
-                No infrastructure required. KoreLumina can provision everything for you, or connect to the tools you already use.
+                KoreLumina connects repository intelligence, AI orchestration, runtime infrastructure, deployment automation, governance, and expert engineering into one operating system.
               </p>
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <LuminaButton variant="primary" size="lg" onClick={startBuilding}>Start Building</LuminaButton>

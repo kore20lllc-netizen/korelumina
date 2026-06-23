@@ -5,6 +5,9 @@ import { Hero } from "@/components/landing/Hero";
 import { InfrastructureYourWay } from "@/components/landing/InfrastructureYourWay";
 import { SocialProof } from "@/components/landing/SocialProof";
 import { ProblemSolution } from "@/components/landing/ProblemSolution";
+import { FutureOfSoftware } from "@/components/landing/FutureOfSoftware";
+import { BuiltForExistingSoftware } from "@/components/landing/BuiltForExistingSoftware";
+import { OwnEverything } from "@/components/landing/OwnEverything";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PlatformArchitecture } from "@/components/landing/PlatformArchitecture";
 import { Features } from "@/components/landing/Features";
@@ -75,12 +78,14 @@ export function LandingPage() {
 
         <main>
           <Hero />
-          <InfrastructureYourWay />
-          <SocialProof />
           <ProblemSolution />
-          <HowItWorks />
+          <FutureOfSoftware />
           <PlatformArchitecture />
+          <HowItWorks />
+          <BuiltForExistingSoftware />
           <Features />
+          <InfrastructureYourWay />
+          <OwnEverything />
           <Comparison />
           <Templates />
           <InHouseDevelopers />

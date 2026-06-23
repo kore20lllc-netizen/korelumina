@@ -26,14 +26,13 @@ export function InHouseDevelopers() {
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">In-House Developers</p>
               <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-gradient-royal-gold">
-                When AI Hits a Wall, Our In-House Developers Take Over
+                AI + Human Execution When Software Gets Complex
               </h2>
               <p className="text-muted-foreground leading-relaxed mt-5">
-                Every Business and Enterprise plan includes access to senior engineers who use KoreLumina's internal tools
-                to audit, repair, and modernize your codebase.
+                Routine work is accelerated by AI. Complex work escalates to senior engineers who use KoreLumina's internal tools to audit, repair, and modernize your codebase.
               </p>
               <p className="mt-5 text-sm text-gold eyebrow-lumina tracking-[0.18em] uppercase">
-                AI-first when possible. Senior engineers when needed.
+                AI when speed matters. Experts when certainty matters.
               </p>
               <div className="mt-7">
                 <LuminaButton variant="primary" size="lg" onClick={contactSales}>
