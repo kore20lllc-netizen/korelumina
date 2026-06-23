@@ -6,10 +6,9 @@ import type {
   FileReadResponse,
   DraftResponse,
 } from "@/types/api";
-import { ai, repo as repoProvider } from "@/providers/api-temp";
+import { ai } from "@/providers/api-temp";
 import { auth } from "@/providers/auth-registry";
 import { usage } from "@/providers/usage-registry";
-import { projectRepository } from "@/services/projectRepository";
 import {
   importRuntimeProject,
   readRuntimeFile,
@@ -21,7 +20,6 @@ import { requireEntitlement } from "@/services/entitlements";
 import { AppError, normalizeError } from "@/lib/errors";
 import type { BuildStepEvent } from "@/providers/types";
 import { getActiveTeamId } from "@/context/ActiveTeamContext";
-import { getProjectScope } from "@/services/projectScope";
 
 /**
  * Wrap an async producer with bounded retry + exponential backoff.
@@ -96,38 +94,11 @@ export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise
   }
 }
 
-export async function importZip(file: File, signal?: AbortSignal): Promise<ImportResponse> {
-  try {
-    requireEntitlement("project.create");
-    const r = await withRetry(() => repoProvider.importFromZip(file), { signal });
-    const project = projectRepository.create(
-      {
-        name: r.name,
-        type: "import",
-        status: "draft",
-        accent: "violet",
-        files: r.files,
-        description: r.summary,
-        framework: r.framework,
-        packageManager: r.packageManager,
-        entryFile: r.entryFile,
-        sourceUrl: repoUrl,
-      },
-      { ownerId: auth.getUser()?.id, teamId: getActiveTeamId() ?? undefined },
-    );
-    const u = auth.getUser(); if (u) usage.recordProjectCreated(u.id);
-    notificationService.push({ title: "Import completed", body: `${r.name} (${r.framework}) is ready.`, kind: "success" });
-    
-    await syncRuntimeProjectMetadata({
-      projectId: project.id,
-      ownerId: project.ownerId,
-      teamId: project.teamId,
-      createdBy: project.createdBy,
-      visibility: project.visibility,
-    });
-
-return { projectId: project.id, name: r.name, framework: r.framework };
-  } catch (e) { throw normalizeError(e); }
+export async function importZip(_file: File, _signal?: AbortSignal): Promise<ImportResponse> {
+  throw new AppError(
+    "VALIDATION",
+    "ZIP import requires a runtime-backed ZIP import endpoint.",
+  );
 }
 
 export async function readFile(projectId: string, file: string): Promise<FileReadResponse> {
@@ -138,22 +109,18 @@ export async function readFile(projectId: string, file: string): Promise<FileRea
       path: runtimeFile.file,
       content: runtimeFile.content,
     };
-  } catch {
-    return {
-      path: file,
-      content: projectRepository.readFile(projectId, file),
-    };
+  } catch (e) {
+    throw normalizeError(e);
   }
 }
 
 export async function writeFile(projectId: string, file: string, content: string): Promise<{ ok: true }> {
   try {
     await writeRuntimeFile(projectId, file, content);
-  } catch {
-    projectRepository.writeFile(projectId, file, content);
+    return { ok: true };
+  } catch (e) {
+    throw normalizeError(e);
   }
-
-  return { ok: true };
 }
 
 export async function generateDraft(
