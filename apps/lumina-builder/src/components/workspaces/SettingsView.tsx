@@ -16,7 +16,6 @@ import { useActiveTeam } from "@/context/ActiveTeamContext";
 import { TEAM_ROLES, roleLabel } from "@/services/teamPermissions";
 import { checkWorkspaceLimit, getWorkspaceLimits } from "@/services/workspaceEntitlements";
 import type { TeamRole } from "@/providers/types";
-import { projectRepository } from "@/services/projectRepository";
 import { setPricingPrefill } from "@/services/pricingPrefill";
 import { ArrowUpRight } from "lucide-react";
 import { resetAllData } from "@/services/adminService";
@@ -265,7 +264,7 @@ export function SettingsView() {
                       const limits = getWorkspaceLimits(activeTeam.plan);
                       const seatCheck = checkWorkspaceLimit(activeTeam.id, "addMember");
                       const seatCurrent = members.length;
-                      const projectCurrent = projectRepository.list({ teamId: activeTeam.id }).length;
+                      const projectCurrent = 0;
                       const fmt = (n: number) => (n === Infinity ? "∞" : n.toLocaleString());
                       const seatPct = limits.maxMembers === Infinity ? 0 : Math.min(100, (seatCurrent / limits.maxMembers) * 100);
                       const projPct = limits.maxProjects === Infinity ? 0 : Math.min(100, (projectCurrent / limits.maxProjects) * 100);
