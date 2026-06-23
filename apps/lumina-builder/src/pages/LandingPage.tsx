@@ -9,6 +9,7 @@ import { FutureOfSoftware } from "@/components/landing/FutureOfSoftware";
 import { BuiltForExistingSoftware } from "@/components/landing/BuiltForExistingSoftware";
 import { OwnEverything } from "@/components/landing/OwnEverything";
 import { EnterpriseGovernance } from "@/components/landing/EnterpriseGovernance";
+import { DeliveryConfidence } from "@/components/landing/DeliveryConfidence";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PlatformArchitecture } from "@/components/landing/PlatformArchitecture";
 import { Features } from "@/components/landing/Features";
@@ -88,6 +89,7 @@ export function LandingPage() {
           <InfrastructureYourWay />
           <OwnEverything />
           <EnterpriseGovernance />
+          <DeliveryConfidence />
           <Comparison />
           <Templates />
           <InHouseDevelopers />
