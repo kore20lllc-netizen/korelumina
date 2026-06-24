@@ -36,7 +36,6 @@ import {
 
 import {
   buildRepoKnowledgeGraphFromFiles,
-  getRepoIntelligenceSummary,
 } from "@/services/repoIntelligenceService";
 
 const statusStyle = {
@@ -355,19 +354,6 @@ export function ImportsView() {
     let cancelled = false;
 
     async function loadRuntimeIntelligence() {
-      const fallback = getRepoIntelligenceSummary(projectId);
-
-      if (fallback.summary.fileCount > 0) {
-        if (!cancelled) {
-          setRuntimeIntelligence((current) => ({
-            ...current,
-            [projectId]: fallback,
-          }));
-        }
-
-        return;
-      }
-
       try {
         const files =
           (await listRuntimeFiles(projectId)).filter(
@@ -978,8 +964,11 @@ export function ImportsView() {
 
           const intelligence =
             runtimeIntelligence[intelligenceProjectId] ??
-            getRepoIntelligenceSummary(
-              intelligenceProjectId,
+            summarizeRepoGraph(
+              buildRepoKnowledgeGraphFromFiles(
+                intelligenceProjectId,
+                {},
+              ),
             );
           return (
             <aside
