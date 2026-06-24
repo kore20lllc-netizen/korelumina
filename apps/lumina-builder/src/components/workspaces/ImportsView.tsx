@@ -260,8 +260,10 @@ export function ImportsView() {
   const [runtimeBusy, setRuntimeBusy] = useState<Record<string, string>>({});
   const [runtimeUrls, setRuntimeUrls] = useState<Record<string, string>>({});
 
+  type RepoIntelligenceSummary = ReturnType<typeof summarizeRepoGraph>;
+
   const [runtimeIntelligence, setRuntimeIntelligence] =
-    useState<Record<string, ReturnType<typeof getRepoIntelligenceSummary>>>({});
+    useState<Record<string, RepoIntelligenceSummary>>({});
 
   useEffect(() => {
     try {
@@ -385,7 +387,12 @@ export function ImportsView() {
         if (!cancelled) {
           setRuntimeIntelligence((current) => ({
             ...current,
-            [projectId]: fallback,
+            [projectId]: summarizeRepoGraph(
+              buildRepoKnowledgeGraphFromFiles(
+                projectId,
+                {},
+              ),
+            ),
           }));
         }
       }
