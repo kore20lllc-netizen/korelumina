@@ -74,11 +74,6 @@ export interface RepositoryProvider {
 
 /* Deployment */
 export interface Deployment { id: string; projectId: string; provider: "vercel" | "netlify" | "custom"; status: "queued" | "building" | "ready" | "error"; url?: string; logs: string[]; createdAt: number; customDomain?: string }
-export interface DeploymentProvider {
-  deploy(input: { projectId: string; provider: Deployment["provider"]; customDomain?: string; onLog?: (line: string) => void }): Promise<Deployment>;
-  list(projectId: string): Deployment[];
-  validateDomain(domain: string): Promise<{ ok: boolean; records?: { type: string; name: string; value: string }[]; reason?: string }>;
-}
 
 /* Storage */
 export interface StorageProvider {
