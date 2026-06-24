@@ -1,14 +1,11 @@
 import { clearNamespace, migrate, readJSON, writeJSON } from "@/lib/persistence";
 import { mockNotifications } from "@/lib/mockData";
 import { seedAdminUser, mockCreateUser, mockAllUsers } from "@/providers/auth/MockAuthProvider";
-import type { Payment, Subscription, Role, Plan, Deployment } from "@/providers/types";
-import { projectRepository } from "@/services/projectRepository";
+import type { Payment, Subscription, Role, Plan } from "@/providers/types";
 import { team as teamProvider } from "@/providers/team-registry";
 
 const DEMO_FIRSTNAMES = ["Ava","Liam","Mia","Noah","Zoe","Eli","Ivy","Leo","Nora","Owen","Aria","Kai","Maya","Theo","Rio","Sage","Jade","Finn","Lila","Ezra"];
 const DEMO_ROLES: Role[] = ["free","free","free","pro","pro","pro","business","enterprise"];
-const ACCENTS = ["magenta","violet","cyan","gold"] as const;
-const TYPES = ["website","webapp","dashboard","ai-tool","import","mobile"] as const;
 
 function rand<T>(arr: readonly T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }
 function daysAgo(d: number) { return Date.now() - d * 86400_000; }
@@ -21,21 +18,6 @@ function seedDemoUsers() {
     if (existing.some((u) => u.email === email)) return;
     mockCreateUser({ email, name, role: rand(DEMO_ROLES), password: "demo1234" });
   });
-}
-
-function seedDemoProjects() {
-  const users = mockAllUsers().filter((u) => !u.email.startsWith("admin"));
-  if (projectRepository.list().length >= 30) return;
-  for (let i = 0; i < 50; i++) {
-    const owner = users[i % users.length];
-    if (!owner) break;
-    projectRepository.create({
-      name: `${owner.name}'s ${rand(["Studio","Portfolio","Dashboard","Site","Agent","Atlas"])} ${i + 1}`,
-      type: rand(TYPES),
-      status: rand(["draft","live","building"]),
-      accent: rand(ACCENTS),
-    }, { ownerId: owner.id });
-  }
 }
 
 function seedDemoBillingAndDeployments() {
@@ -66,14 +48,6 @@ function seedDemoBillingAndDeployments() {
   }
   writeJSON("billing", "payments", payments);
 
-  // Deployments
-  const projects = projectRepository.list().slice(0, 15);
-  const deps: Deployment[] = projects.map((p, i) => ({
-    id: `dep_demo_${i}`, projectId: p.id, provider: i % 2 === 0 ? "vercel" : "netlify",
-    status: "ready", url: `https://${p.name.toLowerCase().replace(/\s+/g, "-")}.lumina.app`,
-    logs: ["Build complete"], createdAt: daysAgo(Math.floor(Math.random() * 60)),
-  }));
-  writeJSON("deploy", "all", deps);
 }
 
 /** Bootstrap a sample Team Workspace for every Business/Enterprise demo user
@@ -116,7 +90,7 @@ export function runSeed() {
   // Ensure the super-admin account is always available for the mock auth provider.
   try { seedAdminUser(); } catch {}
   migrate("admin_demo", 1, () => {
-    try { seedDemoUsers(); seedDemoProjects(); seedDemoBillingAndDeployments(); } catch {}
+    try { seedDemoUsers(); seedDemoBillingAndDeployments(); } catch {}
   });
   migrate("business_team_workspaces", 1, () => {
     try { seedBusinessTeamWorkspaces(); } catch {}
