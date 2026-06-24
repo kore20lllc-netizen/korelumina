@@ -6,11 +6,6 @@ import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { luminaTile } from "@/lib/luminaPalette";
 import { useIsAuthenticated } from "@/hooks/use-auth";
 import type { TemplateRegistryEntry } from "./registry";
-import { projectRepository } from "@/services/projectRepository";
-import { getActiveTeamId } from "@/context/ActiveTeamContext";
-import { auth } from "@/providers/auth-registry";
-import { usage } from "@/providers/usage-registry";
-import { notificationService } from "@/services/notificationService";
 import { checkEntitlement } from "@/services/entitlements";
 
 const CAT_TO_INTENT: Record<string, "website" | "webapp" | "dashboard" | "ai-tool" | "mobile"> = {
@@ -44,19 +39,9 @@ export function TemplateShell({ template, children }: TemplateShellProps) {
       navigate("/");
       return;
     }
-    const u = auth.getUser();
-    projectRepository.create({
-      name: template.name,
-      type: CAT_TO_INTENT[template.category] ?? "webapp",
-      status: "draft",
-      accent: ACCENT[template.accent % ACCENT.length],
-      description: template.tagline,
-    }, { ownerId: u?.id, teamId: getActiveTeamId() ?? undefined });
-    if (u) usage.recordProjectCreated(u.id);
-    notificationService.push({ title: "Template added", body: `${template.name} is ready to edit.`, kind: "success" });
-    toast.success(`Using ${template.name}`);
-    try { window.localStorage.setItem("korelumina:view", "workspace"); } catch {}
-    navigate("/");
+    toast.error(
+      "Template forking requires a runtime-backed project creation endpoint.",
+    );
   };
 
   return (

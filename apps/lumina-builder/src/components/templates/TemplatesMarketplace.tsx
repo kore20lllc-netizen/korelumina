@@ -9,11 +9,6 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { getTemplateByName } from "./registry";
 import { useIsAuthenticated } from "@/hooks/use-auth";
-import { projectRepository } from "@/services/projectRepository";
-import { getActiveTeamId } from "@/context/ActiveTeamContext";
-import { auth } from "@/providers/auth-registry";
-import { usage } from "@/providers/usage-registry";
-import { notificationService } from "@/services/notificationService";
 import { checkEntitlement } from "@/services/entitlements";
 import type { BuildIntent } from "@/context/WorkspaceContext";
 
@@ -119,19 +114,9 @@ export function TemplatesMarketplace() {
                         setView("pricing");
                         return;
                       }
-                      const u = auth.getUser();
-                      const proj = projectRepository.create({
-                        name: t.name,
-                        type: CATEGORY_TO_INTENT[t.category] ?? "webapp",
-                        status: "draft",
-                        accent: t.accent,
-                        description: t.description,
-                      }, { ownerId: u?.id, teamId: getActiveTeamId() ?? undefined });
-                      if (u) usage.recordProjectCreated(u.id);
-                      notificationService.push({ title: "Template added", body: `${t.name} is ready to edit.`, kind: "success" });
-                      setActiveProject(proj);
-                      toast.success(`Using ${t.name}`);
-                      setView("workspace");
+                      toast.error(
+                        "Template forking requires a runtime-backed project creation endpoint.",
+                      );
                     }}
                   >
                     {authed ? "Use template" : (<><Lock className="h-3.5 w-3.5" /> Sign in to use</>)}
