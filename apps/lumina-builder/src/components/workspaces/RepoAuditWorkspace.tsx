@@ -59,7 +59,6 @@ import {
 } from "./repo-audit/FindingsFilters";
 
 import { toast } from "sonner";
-import { auditStoredProject } from "@/services/repoAuditBridge";
 import { auth } from "@/providers/auth-registry";
 import { usage as usageProvider } from "@/providers/usage-registry";
 
@@ -372,28 +371,13 @@ export function RepoAuditWorkspace() {
                     source.projectId,
                   );
 
-                  try {
-                    const plan =
-                      auditStoredProject(
-                        source.projectId,
-                      );
+                  const u = auth.getUser();
 
-                    const u = auth.getUser();
-
-                    if (u) {
-                      usageProvider.recordAudit(
-                        u.id,
-                      );
-                    }
-
-                    if (
-                      plan.findings.length > 0
-                    ) {
-                      toast.message(
-                        `Repair plan: ${plan.findings.length} findings`,
-                      );
-                    }
-                  } catch {}
+                  if (u) {
+                    usageProvider.recordAudit(
+                      u.id,
+                    );
+                  }
                 }
               } catch (err) {
                 toast.error("Audit failed", {
