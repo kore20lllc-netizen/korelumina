@@ -6,7 +6,7 @@ import {
   uid,
   registerMigration,
 } from "@/lib/persistence";
-import type { Project } from "@/context/WorkspaceContext";
+import type { Project } from "@/types/api";
 
 const NS = "projects";
 

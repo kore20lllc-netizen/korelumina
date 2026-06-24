@@ -24,7 +24,7 @@ import {
 
 import type {
   Project,
-} from "@/services/projectRepository";
+} from "@/types/api";
 
 export type BuildIntent =
   | "website"
