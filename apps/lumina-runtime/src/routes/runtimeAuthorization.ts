@@ -6,6 +6,24 @@ import type {
   ProjectMetadata,
 } from "../projects/projectMetadataStore.js";
 
+function isLocalDevelopmentRuntime(): boolean {
+  return (
+    process.env.NODE_ENV !== "production" ||
+    process.env.LUMINA_ALLOW_OWNERLESS_PROJECTS === "true"
+  );
+}
+
+function isOwnerlessLegacyProject(
+  metadata: ProjectMetadata | null,
+): boolean {
+  return Boolean(
+    metadata &&
+      !metadata.ownerId &&
+      !metadata.teamId &&
+      metadata.visibility === "private",
+  );
+}
+
 export function canViewProject(
   caller: RuntimeCaller,
   metadata: ProjectMetadata | null,
@@ -19,6 +37,13 @@ export function canViewProject(
 
   if (!metadata) {
     return false;
+  }
+
+  if (
+    isLocalDevelopmentRuntime() &&
+    isOwnerlessLegacyProject(metadata)
+  ) {
+    return true;
   }
 
   if (
@@ -53,6 +78,13 @@ export function canManageProject(
 
   if (!metadata) {
     return false;
+  }
+
+  if (
+    isLocalDevelopmentRuntime() &&
+    isOwnerlessLegacyProject(metadata)
+  ) {
+    return true;
   }
 
   return (

@@ -6,9 +6,7 @@ import { runTransform } from "@/services/transformEngine";
 import { checkEntitlement } from "@/services/entitlements";
 import { isFeatureEnabled, setFeatureFlagOverride } from "@/lib/featureFlags";
 import { MockDeploymentProvider } from "@/providers/deploy/MockDeploymentProvider";
-import { MockAIProvider } from "@/providers/ai/MockAIProvider";
 import { MockBillingProvider } from "@/providers/billing/MockBillingProvider";
-import { OpenAIProvider } from "@/providers/ai/OpenAIProvider";
 import { StripeBillingProvider } from "@/providers/billing/StripeBillingProvider";
 import { GitHubRepositoryProvider } from "@/providers/repo/GitHubRepositoryProvider";
 import { VercelDeploymentProvider } from "@/providers/deploy/VercelDeploymentProvider";
@@ -117,26 +115,6 @@ describe("MockDeploymentProvider", () => {
   }, 10000);
 });
 
-describe("MockAIProvider", () => {
-  it("emits build step events and returns diffs", async () => {
-    const ai = new MockAIProvider();
-    const events: string[] = [];
-    const draft = await ai.orchestrate({ projectId: "p", prompt: "build dashboard with api", onEvent: (e) => events.push(e.status) });
-    expect(draft.diffs.length).toBeGreaterThan(0);
-    expect(events).toContain("running");
-    expect(events).toContain("done");
-  }, 15000);
-  it("aborts mid-run when signal fires", async () => {
-    const ai = new MockAIProvider();
-    const ctl = new AbortController();
-    setTimeout(() => ctl.abort(), 50);
-    await expect(ai.orchestrate({ projectId: "p", prompt: "x", signal: ctl.signal })).rejects.toBeInstanceOf(AppError);
-  });
-  it("rejects empty prompts", async () => {
-    const ai = new MockAIProvider();
-    await expect(ai.orchestrate({ projectId: "p", prompt: "" })).rejects.toBeInstanceOf(AppError);
-  });
-});
 
 describe("MockBillingProvider", () => {
   it("performs checkout → confirm → cancel cycle", async () => {
@@ -160,8 +138,6 @@ describe("MockBillingProvider", () => {
 
 describe("real-provider stubs", () => {
   it("throw NotImplementedError on every method", () => {
-    expect(() => new OpenAIProvider().orchestrate()).toThrow(NotImplementedError);
-    expect(() => new OpenAIProvider().applyDraft()).toThrow(NotImplementedError);
     expect(() => new StripeBillingProvider().listProducts()).toThrow(NotImplementedError);
     expect(() => new GitHubRepositoryProvider().importFromGithub()).toThrow(NotImplementedError);
     expect(() => new VercelDeploymentProvider().deploy()).toThrow(NotImplementedError);

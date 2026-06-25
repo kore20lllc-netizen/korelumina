@@ -1,9 +1,6 @@
 import type { Express } from "express";
 
-import { auditProject } from "../audit/auditProject.js";
-import { generateFixPlan } from "../autofix/generateFixPlan.js";
-import { createDraft } from "../drafts/draftStore.js";
-import { generateDraftPatches } from "../drafts/generateFixDrafts.js";
+import { generateAIDraft } from "../ai/AIOrchestrator.js";
 import { getProjectPath } from "../projects/getProjectPath.js";
 
 function readString(input: unknown): string {
@@ -38,20 +35,16 @@ export function registerCreateDraftRoute(app: Express) {
       }
 
       const projectPath = getProjectPath(projectId);
-      const report = auditProject(projectId, projectPath);
-      const plan = generateFixPlan(report);
-      const patches = generateDraftPatches(projectPath, plan);
-      const draft = createDraft(projectId, patches);
+
+      const result = await generateAIDraft({
+        projectId,
+        projectPath,
+        prompt,
+      });
 
       return res.json({
         ok: true,
-        mode: "rule_based_draft",
-        note:
-          "AI provider is not wired yet. This endpoint creates a safe rule-based draft from audit findings.",
-        prompt,
-        report,
-        plan,
-        draft,
+        ...result,
       });
     } catch (error) {
       console.error("[runtime/drafts/create]", error);

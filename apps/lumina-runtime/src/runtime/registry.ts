@@ -23,7 +23,7 @@ export type RuntimeRecord = {
   exitedAt?: number;
   lastError?: string;
   url: string;
-  process: ChildProcess;
+  process?: ChildProcess;
   logs: string[];
   status: RuntimeStatus;
 };
@@ -388,13 +388,13 @@ export async function stopRuntime(
         "SIGTERM",
       );
     } else {
-      runtime.process.kill(
+      runtime.process?.kill(
         "SIGTERM",
       );
     }
   } catch {
     try {
-      runtime.process.kill(
+      runtime.process?.kill(
         "SIGTERM",
       );
     } catch {

@@ -1,6 +1,5 @@
 import http from "node:http";
 import https from "node:https";
-import { spawn } from "node:child_process";
 
 import {
   isPidAlive,
@@ -66,9 +65,6 @@ export async function recoverPersistedRuntimes() {
       logs: [
         `[lumina-runtime] restored persisted runtime ${record.projectId}`,
       ],
-      process: spawn(process.execPath, ["-e", "setInterval(() => {}, 1 << 30)"], {
-        stdio: "ignore",
-      }),
     });
 
     console.log(

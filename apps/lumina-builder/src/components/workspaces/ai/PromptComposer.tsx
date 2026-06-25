@@ -1,3 +1,13 @@
+const PROMPT_PHRASES = [
+  "Describe what you want to build…",
+  "Paste a GitHub repository URL…",
+  "A SaaS dashboard for analytics…",
+  "An AI copilot for customer support…",
+  "A mobile-first portfolio site…",
+];
+const STATIC_PLACEHOLDER = "Describe what you want to build or paste a repository URL.";
+
+import { useTypewriter, usePrefersReducedMotion } from "@/hooks/useTypewriter";
 import { Sparkles, Send, Wand2, Image as ImageIcon, Layers, Square } from "lucide-react";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { cn } from "@/lib/utils";
@@ -11,6 +21,18 @@ type PromptComposerProps = {
 };
 
 export function PromptComposer({ prompt, onPromptChange, onGenerate, generating, onStop }: PromptComposerProps) {
+
+  const reducedMotion = usePrefersReducedMotion();
+
+  const animatedPlaceholder = useTypewriter(
+    PROMPT_PHRASES,
+    {
+      typingSpeed: 28,
+      deletingSpeed: 16,
+      pauseMs: 2200,
+    },
+  );
+
   return (
     <>
       <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-4">
@@ -26,7 +48,11 @@ export function PromptComposer({ prompt, onPromptChange, onGenerate, generating,
           <textarea
             value={prompt}
             onChange={(e) => onPromptChange(e.target.value)}
-            placeholder="A serene meditation app with calming gradients, daily streaks, and audio sessions…"
+            placeholder={
+              reducedMotion
+                ? STATIC_PLACEHOLDER
+                : (animatedPlaceholder || " ")
+            }
             rows={4}
             className="w-full resize-none bg-transparent outline-none px-4 py-3 text-[14px] leading-relaxed placeholder:text-muted-foreground/60"
           />

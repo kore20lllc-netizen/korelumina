@@ -18,7 +18,6 @@ import { checkWorkspaceLimit, getWorkspaceLimits } from "@/services/workspaceEnt
 import type { TeamRole } from "@/providers/types";
 import { setPricingPrefill } from "@/services/pricingPrefill";
 import { ArrowUpRight } from "lucide-react";
-import { resetAllData } from "@/services/adminService";
 import { LeaveWorkspaceDialog } from "@/components/workspaces/settings/dialogs/LeaveWorkspaceDialog";
 import { ResetAppDataDialog } from "@/components/workspaces/settings/dialogs/ResetAppDataDialog";
 
@@ -572,11 +571,7 @@ export function SettingsView() {
               true,
             );
 
-            const mod = await import(
-              "@/services/adminMaintenanceService"
-            );
-
-            await mod.resetAllData();
+            await resetAllData();
 
             setResetDialogOpen(
               false,

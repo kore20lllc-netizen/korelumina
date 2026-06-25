@@ -48,19 +48,31 @@ function findProjectsRoot() {
 const PROJECTS_ROOT =
   findProjectsRoot();
 
+
+
 export function listProjects() {
   if (
     !fs.existsSync(
       PROJECTS_ROOT,
     )
   ) {
+    console.warn(
+      "[listProjects] PROJECTS_ROOT does not exist",
+      PROJECTS_ROOT,
+    );
+
     return [];
   }
 
-  return fs
-    .readdirSync(PROJECTS_ROOT, {
-      withFileTypes: true,
-    })
+  const entries =
+    fs.readdirSync(
+      PROJECTS_ROOT,
+      {
+        withFileTypes: true,
+      },
+    );
+
+  return entries
     .filter((entry) =>
       entry.isDirectory(),
     )
@@ -75,6 +87,7 @@ export function listProjects() {
           PROJECTS_ROOT,
           entry.name,
         );
+
       const metadata =
         getProjectMetadata(
           entry.name,

@@ -6,10 +6,11 @@ import type {
   FileReadResponse,
   DraftResponse,
 } from "@/types/api";
-import { ai } from "@/providers/api-temp";
 import { auth } from "@/providers/auth-registry";
 import { usage } from "@/providers/usage-registry";
 import {
+  applyRuntimeDraft,
+  createRuntimeDraft,
   importRuntimeProject,
   readRuntimeFile,
   syncRuntimeProjectMetadata,
@@ -130,13 +131,65 @@ export async function generateDraft(
 ): Promise<DraftResponse> {
   try {
     requireEntitlement("ai.execute");
-    const draft = await ai.orchestrate({ projectId, prompt, onEvent: opts.onEvent, signal: opts.signal });
-    const u = auth.getUser(); if (u) usage.recordAIExecution(u.id);
-    return { draftId: draft.id, files: draft.diffs.map((d) => ({ path: d.path, content: d.after })), summary: draft.summary };
-  } catch (e) { throw normalizeError(e); }
+
+    if (opts.signal?.aborted) {
+      throw new AppError("INTERNAL", "Canceled.");
+    }
+
+    if (!prompt.trim()) {
+      throw new AppError("VALIDATION", "Prompt cannot be empty.");
+    }
+
+    opts.onEvent?.({
+      id: "runtime-draft-create",
+      label: "Creating runtime draft",
+      status: "running",
+      at: Date.now(),
+    });
+
+    const runtimeDraft = await createRuntimeDraft({
+      projectId,
+      prompt,
+    });
+
+    opts.onEvent?.({
+      id: "runtime-draft-create",
+      label: "Runtime draft ready",
+      status: "done",
+      at: Date.now(),
+    });
+
+    const u = auth.getUser();
+    if (u) usage.recordAIExecution(u.id);
+
+    const files =
+      runtimeDraft.draft.patches.map((patch) => ({
+        path: patch.file,
+        content:
+          patch.content ??
+          patch.replace ??
+          patch.diffPreview ??
+          "",
+      }));
+
+    return {
+      draftId: runtimeDraft.draft.id,
+      files,
+      summary:
+        runtimeDraft.note ??
+        `Runtime draft created with ${runtimeDraft.draft.patches.length} patch${runtimeDraft.draft.patches.length === 1 ? "" : "es"}.`,
+    };
+  } catch (e) {
+    throw normalizeError(e);
+  }
 }
 
-export async function applyDraft(projectId: string, draftId?: string): Promise<{ ok: true }> {
-  await ai.applyDraft(projectId, draftId ?? "");
+export async function applyDraft(_projectId: string, draftId?: string): Promise<{ ok: true }> {
+  if (!draftId) {
+    throw new AppError("VALIDATION", "Missing draft id.");
+  }
+
+  await applyRuntimeDraft(draftId);
+
   return { ok: true };
 }

@@ -47,12 +47,6 @@ export interface BillingProvider {
 
 /* AI */
 export interface BuildStepEvent { id: string; label: string; status: "queued" | "running" | "done" | "error"; detail?: string; at: number }
-export interface FileDiff { path: string; before: string; after: string; kind: "add" | "modify" | "delete" }
-export interface DraftResult { id: string; summary: string; steps: BuildStepEvent[]; diffs: FileDiff[]; explanation: string }
-export interface AIProvider {
-  orchestrate(input: { projectId: string; prompt: string; onEvent?: (e: BuildStepEvent) => void; signal?: AbortSignal }): Promise<DraftResult>;
-  applyDraft(projectId: string, draftId: string): Promise<{ ok: true }>;
-}
 
 /* Repository / Import */
 export type Framework = "next" | "vite" | "react" | "vue" | "nuxt" | "monorepo" | "unknown";

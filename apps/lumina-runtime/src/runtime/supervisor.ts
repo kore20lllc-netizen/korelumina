@@ -136,7 +136,7 @@ async function superviseOnce() {
         if (runtime.pid) {
           process.kill(-runtime.pid, "SIGTERM");
         } else {
-          runtime.process.kill("SIGTERM");
+          runtime.process?.kill("SIGTERM");
         }
       } catch {
         // Process may already be gone.

@@ -8,7 +8,7 @@ import {
   rerunSeed,
   clearNotifications,
   clearAuditLog,
-} from "@/services/adminMaintenanceService";
+} from "@/services/adminService";
 import { getSystemHealth, type SystemHealth } from "@/services/systemHealthService";
 import { AdminResetDataDialog } from "@/components/workspaces/admin/dialogs/AdminResetDataDialog";
 

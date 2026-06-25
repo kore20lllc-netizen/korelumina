@@ -1,5 +1,4 @@
 import { AppError } from "@/lib/errors";
-import { projectRepository } from "@/services/projectRepository";
 
 export type RepoFramework =
   | "next"
@@ -547,42 +546,3 @@ export function buildRepoKnowledgeGraphFromFiles(
   return buildRepoKnowledgeGraphFromFileMap(projectId, files);
 }
 
-export function buildRepoKnowledgeGraph(projectId: string): RepoKnowledgeGraph {
-  const project = projectRepository.get(projectId);
-
-  if (!project) {
-    throw new AppError("NOT_FOUND", "Project not found.");
-  }
-
-  return buildRepoKnowledgeGraphFromFileMap(projectId, project.files ?? {});
-}
-
-export function getRepoIntelligenceSummary(projectId: string) {
-  try {
-    const graph = buildRepoKnowledgeGraph(projectId);
-
-    return {
-      projectId: graph.projectId,
-      framework: graph.framework,
-      packageManager: graph.packageManager,
-      entryFiles: graph.entryFiles,
-      summary: graph.summary,
-    };
-  } catch {
-    return {
-      projectId,
-      framework: "unknown" as RepoFramework,
-      packageManager: "unknown" as RepoKnowledgeGraph["packageManager"],
-      entryFiles: [],
-      summary: {
-        fileCount: 0,
-        dependencyCount: 0,
-        routeCount: 0,
-        componentCount: 0,
-        apiCount: 0,
-        envCount: 0,
-        domainCount: 0,
-      },
-    };
-  }
-}
