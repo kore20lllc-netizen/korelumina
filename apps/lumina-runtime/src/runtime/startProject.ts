@@ -698,8 +698,14 @@ async function startProjectInternal(
           projectId,
         )
       ) {
-        runtime.status =
-          "error";
+        markRuntimeStatus(
+          projectId,
+          "error",
+          {
+            lastError:
+              "auto_restart_limit_reached",
+          },
+        );
 
         runtime.lastError =
           "auto_restart_limit_reached";
