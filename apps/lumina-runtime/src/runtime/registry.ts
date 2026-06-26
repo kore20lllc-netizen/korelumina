@@ -349,17 +349,18 @@ export function listRuntimes(): RuntimeRecord[] {
         runtime.pid,
       )
     ) {
-      runtime.status =
-        "exited";
-
-      runtime.exitedAt ??=
-        Date.now();
-
-      runtime.lastError ??=
-        "runtime_process_not_alive";
-
-      persistRecord(runtime);
-      publishState(projectId, "exited");
+      markRuntimeStatus(
+        projectId,
+        "exited",
+        {
+          exitedAt:
+            runtime.exitedAt ??
+            Date.now(),
+          lastError:
+            runtime.lastError ??
+            "runtime_process_not_alive",
+        },
+      );
     }
   }
 
