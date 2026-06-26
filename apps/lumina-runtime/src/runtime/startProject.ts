@@ -530,6 +530,13 @@ async function startProjectInternal(
     },
   );
 
+  if (proc.pid) {
+    acquireRuntimeLock(
+      projectId,
+      proc.pid,
+    );
+  }
+
   const runtime =
     setRuntime({
       projectId,
