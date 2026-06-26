@@ -5,6 +5,7 @@ import {
   appendRuntimeLog,
   isPidAlive,
   listRuntimes,
+  markRuntimeStatus,
   removeRuntime,
 } from "./registry.js";
 import { runtimeState } from "./runtimeState.js";
@@ -68,9 +69,15 @@ async function superviseOnce() {
           "[lumina-runtime] supervisor detected dead process",
         );
 
-        runtime.status = "exited";
-        runtime.exitedAt = Date.now();
-        runtime.lastError = "supervisor_process_not_alive";
+        markRuntimeStatus(
+          projectId,
+          "exited",
+          {
+            exitedAt: Date.now(),
+            lastError:
+              "supervisor_process_not_alive",
+          },
+        );
 
         removeRuntime(projectId);
         healthState.delete(projectId);
@@ -126,9 +133,15 @@ async function superviseOnce() {
         continue;
       }
 
-      runtime.status = "error";
-      runtime.lastError = "runtime_health_check_failed";
-      runtime.exitedAt = Date.now();
+      markRuntimeStatus(
+        projectId,
+        "error",
+        {
+          exitedAt: Date.now(),
+          lastError:
+            "runtime_health_check_failed",
+        },
+      );
 
       appendRuntimeLog(projectId, "[lumina-runtime] runtime marked unhealthy");
 
