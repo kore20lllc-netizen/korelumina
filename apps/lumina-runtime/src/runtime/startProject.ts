@@ -14,6 +14,7 @@ import {
   removeRuntime,
   serializeRuntime,
   setRuntime,
+  stopRuntime,
   type PublicRuntimeRecord,
 } from "./registry.js";
 import { waitForRuntime } from "./waitForRuntime.js";
@@ -374,6 +375,13 @@ export async function restartProject(
 
   if (pending) {
     return;
+  }
+
+  const existing =
+    getRuntime(projectId);
+
+  if (existing) {
+    await stopRuntime(projectId);
   }
 
   const promise =
