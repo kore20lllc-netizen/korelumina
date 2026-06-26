@@ -415,8 +415,10 @@ export async function stopRuntime(
 
   markRuntimeManualStop(projectId);
 
-  runtime.status =
-    "stopping";
+  markRuntimeStatus(
+    projectId,
+    "stopping",
+  );
 
   appendRuntimeLog(
     projectId,
@@ -478,11 +480,14 @@ export async function stopRuntime(
     );
   }
 
-  runtime.status =
-    "exited";
-
-  runtime.exitedAt =
-    Date.now();
+  markRuntimeStatus(
+    projectId,
+    "exited",
+    {
+      exitedAt:
+        Date.now(),
+    },
+  );
 
   runtimeMap.delete(
     projectId,
