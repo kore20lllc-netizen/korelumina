@@ -2,50 +2,45 @@ import type { Express } from "express";
 import { rm } from "node:fs/promises";
 
 import { getProjectPath } from "../projects/getProjectPath.js";
-import { listProjects } from "../projects/listProjects.js";
+import { removeProjectMetadata } from "../projects/projectMetadataStore.js";
 
-import { getProjectMetadata, removeProjectMetadata } from "../projects/projectMetadataStore.js";
-import { getRuntimeCaller } from "./runtimeCaller.js";
+import {
+  listRuntimeProjects,
+  getRuntimeProject,
+} from "../runtime/projectRegistry.js";
+
 import {
   canViewProject,
   canManageProject,
 } from "./runtimeAuthorization.js";
 
+import { getRuntimeCaller } from "./runtimeCaller.js";
 import { stopRuntime } from "../runtime/registry.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
 
-function normalizeProjectId(
-  value: unknown,
-) {
-  if (
-    typeof value !== "string"
-  ) {
+function normalizeProjectId(value: unknown) {
+  if (typeof value !== "string") {
     return "";
   }
 
   return value.trim();
 }
 
-export function registerProjectsRoute(
-  app: Express,
-) {
+export function registerProjectsRoute(app: Express) {
   app.get(
     "/api/runtime/projects",
     requireRuntimeAccess,
     (req, res) => {
-      const caller =
-        getRuntimeCaller(req);
+      const caller = getRuntimeCaller(req);
 
-      const projects =
-        listProjects().filter(
-          (project) =>
-            canViewProject(
-              caller,
-              getProjectMetadata(
-                project.projectId,
-              ),
-            ),
+      const projects = listRuntimeProjects().filter((project) => {
+        const record = getRuntimeProject(project.projectId);
+
+        return canViewProject(
+          caller,
+          record?.metadata ?? null,
         );
+      });
 
       return res.json({
         ok: true,
@@ -59,10 +54,9 @@ export function registerProjectsRoute(
     requireRuntimeAccess,
     async (req, res) => {
       try {
-        const projectId =
-          normalizeProjectId(
-            req.params.projectId,
-          );
+        const projectId = normalizeProjectId(
+          req.params.projectId,
+        );
 
         if (!projectId) {
           return res.status(400).json({
@@ -71,13 +65,10 @@ export function registerProjectsRoute(
           });
         }
 
-        const projectExists =
-          listProjects().some(
-            (project) =>
-              project.projectId === projectId,
-          );
+        const record =
+          getRuntimeProject(projectId);
 
-        if (!projectExists) {
+        if (!record) {
           return res.status(404).json({
             ok: false,
             error: "project_not_found",
@@ -88,15 +79,10 @@ export function registerProjectsRoute(
         const caller =
           getRuntimeCaller(req);
 
-        const metadata =
-          getProjectMetadata(
-            projectId,
-          );
-
         if (
           !canManageProject(
             caller,
-            metadata,
+            record.metadata,
           )
         ) {
           return res.status(403).json({
@@ -106,26 +92,17 @@ export function registerProjectsRoute(
           });
         }
 
-        const projectPath =
-          getProjectPath(
-            projectId,
-          );
-
-        await stopRuntime(
-          projectId,
-        );
+        await stopRuntime(projectId);
 
         await rm(
-          projectPath,
+          getProjectPath(projectId),
           {
             recursive: true,
             force: true,
           },
         );
 
-        removeProjectMetadata(
-          projectId,
-        );
+        removeProjectMetadata(projectId);
 
         return res.json({
           ok: true,
