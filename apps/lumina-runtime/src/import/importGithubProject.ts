@@ -4,22 +4,10 @@ import { spawn } from "node:child_process";
 
 import { detectFramework } from "../detect/detectFramework.js";
 import { setProjectMetadata } from "../projects/projectMetadataStore.js";
-
-const REPO_ROOT =
-  path.resolve(
-    process.cwd(),
-    "..",
-    "..",
-  );
+import { getProjectsRoot } from "../projects/workspacePaths.js";
 
 const PROJECTS_ROOT =
-  path.resolve(
-    REPO_ROOT,
-    "runtime",
-    "workspaces",
-    "default",
-    "projects",
-  );
+  getProjectsRoot();
 
 type ValidatedRepo = {
   repoUrl: string;
