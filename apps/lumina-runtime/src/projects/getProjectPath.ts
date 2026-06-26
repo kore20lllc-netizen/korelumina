@@ -1,63 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const REPO_ROOT = path.resolve(
-  process.cwd(),
-  "..",
-  "..",
-);
+import {
+  assertSafeProjectId,
+  ensureWithinRoot,
+  getProjectsRoot,
+} from "./workspacePaths.js";
 
-const PROJECTS_ROOT = path.resolve(
-  path.join(
-    REPO_ROOT,
-    "runtime",
-    "workspaces",
-    "default",
-    "projects",
-  ),
-);
-
-function assertSafeProjectId(
-  projectId: string,
-) {
-  if (
-    typeof projectId !== "string" ||
-    !projectId.trim()
-  ) {
-    throw new Error(
-      "missing_projectId",
-    );
-  }
-
-  if (
-    !/^[a-zA-Z0-9._-]+$/.test(
-      projectId,
-    )
-  ) {
-    throw new Error(
-      "invalid_projectId",
-    );
-  }
-}
-
-function ensureWithinProjectsRoot(
-  resolvedPath: string,
-) {
-  const relative = path.relative(
-    PROJECTS_ROOT,
-    resolvedPath,
-  );
-
-  const escaped =
-    relative.startsWith("..") ||
-    path.isAbsolute(relative);
-
-  if (escaped) {
-    throw new Error(
-      "project_path_escape_detected",
-    );
-  }
-}
+const PROJECTS_ROOT =
+  getProjectsRoot();
 
 export function getProjectPath(
   projectId: string,
@@ -74,8 +25,10 @@ export function getProjectPath(
   const normalizedPath =
     path.resolve(joinedPath);
 
-  ensureWithinProjectsRoot(
+  ensureWithinRoot(
+    PROJECTS_ROOT,
     normalizedPath,
+    "project_path_escape_detected",
   );
 
   if (
@@ -93,8 +46,10 @@ export function getProjectPath(
       normalizedPath,
     );
 
-  ensureWithinProjectsRoot(
+  ensureWithinRoot(
+    PROJECTS_ROOT,
     realProjectPath,
+    "project_path_escape_detected",
   );
 
   const stats =
