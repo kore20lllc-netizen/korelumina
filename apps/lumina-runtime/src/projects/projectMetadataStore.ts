@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { getRuntimeDataRoot } from "./workspacePaths.js";
+
 export interface ProjectMetadata {
   projectId: string;
   ownerId?: string;
@@ -18,42 +20,13 @@ export interface ProjectMetadata {
   updatedAt: number;
 }
 
-function findRuntimeDataRoot() {
-  let current = process.cwd();
-
-  for (let i = 0; i < 8; i++) {
-    const candidate = path.join(
-      current,
-      "runtime-data",
-    );
-
-    if (fs.existsSync(candidate)) {
-      return candidate;
-    }
-
-    const parent = path.dirname(current);
-
-    if (parent === current) {
-      break;
-    }
-
-    current = parent;
-  }
-
-  return path.resolve(
-    process.cwd(),
-    "runtime-data",
-  );
-}
-
 const DATA_ROOT =
-  findRuntimeDataRoot();
+  getRuntimeDataRoot();
 
-const METADATA_FILE =
-  path.join(
-    DATA_ROOT,
-    "project-metadata.json",
-  );
+const METADATA_FILE = path.join(
+  DATA_ROOT,
+  "project-metadata.json",
+);
 
 function ensureStore() {
   fs.mkdirSync(
@@ -99,7 +72,6 @@ function writeStore(
     ),
     "utf8",
   );
-
 }
 
 export function getProjectMetadata(
@@ -120,7 +92,6 @@ export function setProjectMetadata(
     "createdAt" | "updatedAt"
   >,
 ): ProjectMetadata {
-
   const store =
     readStore();
 
@@ -136,8 +107,7 @@ export function setProjectMetadata(
     createdAt:
       existing?.createdAt ??
       now,
-    updatedAt:
-      now,
+    updatedAt: now,
   };
 
   store[input.projectId] =
@@ -148,16 +118,13 @@ export function setProjectMetadata(
   return record;
 }
 
-
 export function removeProjectMetadata(
   projectId: string,
 ) {
   const store =
     readStore();
 
-  if (
-    !store[projectId]
-  ) {
+  if (!store[projectId]) {
     return;
   }
 
