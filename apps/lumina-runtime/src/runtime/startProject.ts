@@ -10,6 +10,7 @@ import { ensureProjectIsolation } from "./ensureProjectIsolation.js";
 import {
   appendRuntimeLog,
   getRuntime,
+  markRuntimeStatus,
   removeRuntime,
   serializeRuntime,
   setRuntime,
@@ -403,13 +404,21 @@ export async function restartProject(
           });
         }
 
-        runtime.status =
-          "error";
-
-        runtime.lastError =
+        const lastError =
           error instanceof Error
             ? error.message
             : "auto_restart_failed";
+
+        markRuntimeStatus(
+          projectId,
+          "error",
+          {
+            lastError,
+          },
+        );
+
+        runtime.lastError =
+          lastError;
 
         appendRuntimeLog(
           projectId,
