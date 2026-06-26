@@ -1,20 +1,13 @@
 import type { Express } from "express";
 
-import {
-  getRuntime,
-} from "../runtime/registry.js";
+import { getRuntime } from "../runtime/registry.js";
+import { restartProject } from "../runtime/startProject.js";
+import { getRuntimeProject } from "../runtime/projectRegistry.js";
 
-import {
-  restartProject,
-} from "../runtime/startProject.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
 
-function normalizeProjectId(
-  value: unknown,
-) {
-  if (
-    typeof value !== "string"
-  ) {
+function normalizeProjectId(value: unknown) {
+  if (typeof value !== "string") {
     return "";
   }
 
@@ -29,10 +22,9 @@ export function registerRestartRoute(
     requireRuntimeAccess,
     async (req, res) => {
       try {
-        const projectId =
-          normalizeProjectId(
-            req.body?.projectId,
-          );
+        const projectId = normalizeProjectId(
+          req.body?.projectId,
+        );
 
         if (!projectId) {
           return res.status(400).json({
@@ -41,14 +33,14 @@ export function registerRestartRoute(
           });
         }
 
-        await restartProject(
-          projectId,
-        );
+        // Validate through the Runtime Project Registry façade.
+        // Preserve existing behavior by still returning
+        // runtime_not_found when no runtime exists.
+        getRuntimeProject(projectId);
 
-        const runtime =
-          getRuntime(
-            projectId,
-          );
+        await restartProject(projectId);
+
+        const runtime = getRuntime(projectId);
 
         return res.json({
           ok: true,
