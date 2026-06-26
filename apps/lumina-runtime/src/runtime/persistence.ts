@@ -1,12 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { getRuntimeDataRoot } from "../projects/workspacePaths.js";
 import type { RuntimeStatus } from "./registry.js";
 
-const DATA_DIR = path.resolve(
-  process.cwd(),
-  "runtime-data",
-);
+const DATA_DIR =
+  getRuntimeDataRoot();
 
 export type PersistedRuntime = {
   projectId: string;
