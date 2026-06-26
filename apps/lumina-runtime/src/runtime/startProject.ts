@@ -736,8 +736,10 @@ async function startProjectInternal(
       START_TIMEOUT_MS,
     );
 
-    runtime.status =
-      "running";
+    markRuntimeStatus(
+      projectId,
+      "running",
+    );
 
     const history =
       restartHistory.get(
