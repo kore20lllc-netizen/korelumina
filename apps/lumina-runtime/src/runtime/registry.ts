@@ -296,6 +296,48 @@ export function removeRuntime(
   publishState(projectId, "exited");
 }
 
+
+export function markRuntimeStatus(
+  projectId: string,
+  status: RuntimeStatus,
+  options?: {
+    exitedAt?: number;
+    lastError?: string;
+  },
+): RuntimeRecord | null {
+  const runtime =
+    runtimeMap.get(projectId);
+
+  if (!runtime) {
+    return null;
+  }
+
+  runtime.status = status;
+
+  if (options?.exitedAt !== undefined) {
+    runtime.exitedAt =
+      options.exitedAt;
+  }
+
+  if (options?.lastError !== undefined) {
+    runtime.lastError =
+      options.lastError;
+  }
+
+  runtimeState.initState(
+    projectId,
+    status,
+  );
+
+  persistRecord(runtime);
+  publishState(
+    projectId,
+    status,
+  );
+
+  return runtime;
+}
+
 export function listRuntimes(): RuntimeRecord[] {
   for (const [
     projectId,
