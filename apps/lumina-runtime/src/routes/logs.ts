@@ -5,6 +5,10 @@ import {
   serializeRuntime,
 } from "../runtime/registry.js";
 
+import {
+  projectExists,
+} from "../runtime/projectRegistry.js";
+
 export function registerLogsRoute(app: Express) {
   app.get("/api/runtime/logs", (req, res) => {
     try {
@@ -17,6 +21,15 @@ export function registerLogsRoute(app: Express) {
         return res.status(400).json({
           ok: false,
           error: "missing_projectId",
+        });
+      }
+
+      if (!projectExists(projectId)) {
+        return res.status(404).json({
+          ok: false,
+          error: "project_not_found",
+          projectId,
+          logs: [],
         });
       }
 
