@@ -7,7 +7,7 @@ import {
 } from "./repository/index.js";
 
 import {
-  populateImportKnowledgeGraph,
+  synchronizeImportGraph,
 } from "./graph/index.js";
 
 export interface KnowledgeImportContext {
@@ -61,7 +61,7 @@ export async function recordImportKnowledge(
       context.repoUrl,
   });
 
-  populateImportKnowledgeGraph({
+  synchronizeImportGraph({
     repositoryId:
       context.repositoryId,
     repositoryLabel:
