@@ -6,3 +6,4 @@ export * from "./SearchProvider.js";
 export * from "./SearchProviderRegistry.js";
 export * from "./RetrievalEngine.js";
 export * from "./GraphSearchProvider.js";
+export * from "./registerBuiltinProviders.js";
