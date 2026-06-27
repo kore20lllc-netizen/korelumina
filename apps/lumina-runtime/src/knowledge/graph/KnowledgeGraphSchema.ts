@@ -30,6 +30,18 @@ export const KnowledgeEdgeTypes = {
 
   references:
     "references",
+
+  produces:
+    "produces",
+
+
+  hasEngineering:
+    "hasEngineering",
+
+
+  hasArchitecture:
+    "hasArchitecture",
+
 } as const;
 
 export type KnowledgeNodeType =

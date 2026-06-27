@@ -5,3 +5,4 @@ export * from "./KnowledgeGraphService.js";
 export * from "./KnowledgeGraphSchema.js";
 export * from "./KnowledgeGraphBuilder.js";
 export * from "./KnowledgeGraphIndex.js";
+export * from "./KnowledgeGraphPopulationService.js";
