@@ -89,9 +89,14 @@ export function saveTicket(
 
 export function loadTicket(
   id: string,
-) {
-  return store.load<EngineeringTicket>(
-    id,
+): EngineeringTicket | null {
+  const record =
+    store.load<EngineeringTicket>(
+      id,
+    );
+
+  return (
+    record?.data ?? null
   );
 }
 
