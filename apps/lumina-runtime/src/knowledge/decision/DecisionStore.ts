@@ -60,3 +60,21 @@ export function deleteDecision(
     id,
   );
 }
+
+
+export function listDecisions(): Decision[] {
+  return store
+    .list()
+    .map((file) =>
+      file.endsWith(".json")
+        ? file.slice(0, -5)
+        : file,
+    )
+    .map((id) =>
+      loadDecision(id),
+    )
+    .filter(
+      (decision): decision is Decision =>
+        decision !== null,
+    );
+}
