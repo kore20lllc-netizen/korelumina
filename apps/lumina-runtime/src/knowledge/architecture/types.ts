@@ -10,3 +10,18 @@ export interface ArchitectureDocument {
 export interface ArchitectureManifest {
   documents: ArchitectureDocument[];
 }
+
+export type ArchitectureChangeType =
+  | "new"
+  | "modified"
+  | "deleted"
+  | "unchanged";
+
+export interface ArchitectureChange {
+  type: ArchitectureChangeType;
+  document: ArchitectureDocument;
+}
+
+export interface ArchitectureChangeSet {
+  changes: ArchitectureChange[];
+}
