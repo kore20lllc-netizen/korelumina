@@ -6,6 +6,9 @@ import { unwatchWorkspace } from "./workspaceWatcher.js";
 import { runtimeState } from "./runtimeState.js";
 import { markRuntimeManualStop } from "./manualStop.js";
 import { releaseRuntimeLock } from "./runtimeLock.js";
+import {
+  recordRuntimeEvent,
+} from "../knowledge/runtime/index.js";
 
 export type RuntimeStatus =
   | "starting"
@@ -421,6 +424,12 @@ export async function stopRuntime(
     "stopping",
   );
 
+  recordRuntimeEvent({
+    projectId,
+    type:
+      "runtime_stopping",
+  });
+
   appendRuntimeLog(
     projectId,
     `[lumina-runtime] stopping runtime ${projectId}`,
@@ -480,6 +489,12 @@ export async function stopRuntime(
       "SIGKILL",
     );
   }
+
+  recordRuntimeEvent({
+    projectId,
+    type:
+      "runtime_stopped",
+  });
 
   markRuntimeStatus(
     projectId,

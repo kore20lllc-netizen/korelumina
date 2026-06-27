@@ -9,6 +9,9 @@ import {
   removeRuntime,
 } from "./registry.js";
 import { runtimeState } from "./runtimeState.js";
+import {
+  recordRuntimeEvent,
+} from "../knowledge/runtime/index.js";
 
 const SUPERVISOR_INTERVAL_MS = 5_000;
 const HEALTH_TIMEOUT_MS = 2_500;
@@ -78,6 +81,16 @@ async function superviseOnce() {
               "supervisor_process_not_alive",
           },
         );
+
+        recordRuntimeEvent({
+          projectId,
+          type:
+            "runtime_crashed",
+          metadata: {
+            reason:
+              runtime.lastError,
+          },
+        });
 
         removeRuntime(projectId);
         healthState.delete(projectId);

@@ -9,6 +9,9 @@ import {
   listPersistedRuntimes,
   removeRuntimeState,
 } from "./persistence.js";
+import {
+  recordRuntimeEvent,
+} from "../knowledge/runtime/index.js";
 
 function isRecoverableStatus(status: string | undefined): boolean {
   return status === "running";
@@ -65,6 +68,12 @@ export async function recoverPersistedRuntimes() {
       logs: [
         `[lumina-runtime] restored persisted runtime ${record.projectId}`,
       ],
+    });
+
+    recordRuntimeEvent({
+      projectId: record.projectId,
+      type:
+        "runtime_recovered",
     });
 
     console.log(
