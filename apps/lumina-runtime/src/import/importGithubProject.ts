@@ -7,12 +7,8 @@ import { setProjectMetadata } from "../projects/projectMetadataStore.js";
 import { getProjectsRoot } from "../projects/workspacePaths.js";
 
 import {
-  recordRepositoryKnowledge,
-} from "../knowledge/repository/index.js";
-
-import {
-  recordProjectKnowledge,
-} from "../knowledge/project/index.js";
+  recordImportKnowledge,
+} from "../knowledge/index.js";
 
 
 const PROJECTS_ROOT =
@@ -328,9 +324,11 @@ export async function importGithubProject(
   });
 
   try {
-    await recordRepositoryKnowledge({
+    await recordImportKnowledge({
       projectId,
       projectPath,
+      repositoryId:
+        `github:${repo.owner}/${repo.repo}`.toLowerCase(),
       repoUrl:
         repo.repoUrl,
       owner:
@@ -341,34 +339,10 @@ export async function importGithubProject(
     });
   } catch (error) {
     console.error(
-      "[knowledge] repository recording failed",
+      "[knowledge] import recording failed",
       error,
     );
   }
-
-
-  try {
-    await recordProjectKnowledge({
-      projectId,
-      repositoryId:
-        `github:${repo.owner}/${repo.repo}`.toLowerCase(),
-      name:
-        repo.repo,
-      framework,
-      workspace:
-        "default",
-      runtimeRoot:
-        projectPath,
-      sourceUrl:
-        repo.repoUrl,
-    });
-  } catch (error) {
-    console.error(
-      "[knowledge] project recording failed",
-      error,
-    );
-  }
-
 
   return {
     ok: true,

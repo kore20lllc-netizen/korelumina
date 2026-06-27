@@ -1,3 +1,15 @@
+import {
+  recordProjectKnowledge,
+} from "./project/index.js";
+
+import {
+  recordRepositoryKnowledge,
+} from "./repository/index.js";
+
+import {
+  buildRepositoryProjectGraph,
+} from "./graph/index.js";
+
 export interface KnowledgeImportContext {
   projectId: string;
 
@@ -15,7 +27,48 @@ export interface KnowledgeImportContext {
 }
 
 export async function recordImportKnowledge(
-  _context: KnowledgeImportContext,
+  context: KnowledgeImportContext,
 ): Promise<void> {
-  // Integration will be added incrementally.
+  await recordRepositoryKnowledge({
+    projectId:
+      context.projectId,
+    projectPath:
+      context.projectPath,
+    repoUrl:
+      context.repoUrl,
+    owner:
+      context.owner,
+    repo:
+      context.repo,
+    framework:
+      context.framework,
+  });
+
+  await recordProjectKnowledge({
+    projectId:
+      context.projectId,
+    repositoryId:
+      context.repositoryId,
+    name:
+      context.repo,
+    framework:
+      context.framework,
+    workspace:
+      "default",
+    runtimeRoot:
+      context.projectPath,
+    sourceUrl:
+      context.repoUrl,
+  });
+
+  buildRepositoryProjectGraph({
+    repositoryId:
+      context.repositoryId,
+    repositoryLabel:
+      `${context.owner}/${context.repo}`,
+    projectId:
+      context.projectId,
+    projectLabel:
+      context.repo,
+  });
 }
