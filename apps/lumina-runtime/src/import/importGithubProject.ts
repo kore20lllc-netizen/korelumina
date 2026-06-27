@@ -10,6 +10,10 @@ import {
   recordRepositoryKnowledge,
 } from "../knowledge/repository/index.js";
 
+import {
+  recordProjectKnowledge,
+} from "../knowledge/project/index.js";
+
 
 const PROJECTS_ROOT =
   getProjectsRoot();
@@ -338,6 +342,29 @@ export async function importGithubProject(
   } catch (error) {
     console.error(
       "[knowledge] repository recording failed",
+      error,
+    );
+  }
+
+
+  try {
+    await recordProjectKnowledge({
+      projectId,
+      repositoryId:
+        `github:${repo.owner}/${repo.repo}`.toLowerCase(),
+      name:
+        repo.repo,
+      framework,
+      workspace:
+        "default",
+      runtimeRoot:
+        projectPath,
+      sourceUrl:
+        repo.repoUrl,
+    });
+  } catch (error) {
+    console.error(
+      "[knowledge] project recording failed",
       error,
     );
   }
