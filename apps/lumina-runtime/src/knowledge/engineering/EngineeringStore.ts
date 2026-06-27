@@ -12,6 +12,15 @@ import type {
   EngineeringTicket,
 } from "./types.js";
 
+import {
+  loadEngineeringManifest,
+  saveEngineeringManifest,
+} from "./EngineeringManifestStore.js";
+
+import type {
+  EngineeringManifestEntry,
+} from "./EngineeringManifest.js";
+
 const fileStore =
   new FileStore(
     getEngineeringKnowledgeRoot(),
@@ -27,6 +36,42 @@ const store =
     jsonStore,
   );
 
+
+
+function updateManifest(
+  ticket: EngineeringTicket,
+) {
+  const manifest =
+    loadEngineeringManifest();
+
+  const entry: EngineeringManifestEntry = {
+    id: ticket.id,
+    title: ticket.title,
+    status: ticket.status,
+    updatedAt: ticket.updatedAt,
+  };
+
+  const index =
+    manifest.tickets.findIndex(
+      (t) => t.id === ticket.id,
+    );
+
+  if (index >= 0) {
+    manifest.tickets[index] = entry;
+  } else {
+    manifest.tickets.push(entry);
+  }
+
+  manifest.tickets.sort(
+    (a, b) =>
+      b.updatedAt - a.updatedAt,
+  );
+
+  saveEngineeringManifest(
+    manifest,
+  );
+}
+
 export function saveTicket(
   ticket: EngineeringTicket,
 ) {
@@ -38,6 +83,8 @@ export function saveTicket(
     updatedAt: ticket.updatedAt,
     data: ticket,
   });
+
+  updateManifest(ticket);
 }
 
 export function loadTicket(
@@ -56,4 +103,16 @@ export function removeTicket(
   id: string,
 ) {
   store.remove(id);
+
+  const manifest =
+    loadEngineeringManifest();
+
+  manifest.tickets =
+    manifest.tickets.filter(
+      (t) => t.id !== id,
+    );
+
+  saveEngineeringManifest(
+    manifest,
+  );
 }
