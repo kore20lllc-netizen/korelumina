@@ -81,3 +81,8 @@ export function getKnowledgeSearchRoot() {
 export function getKnowledgeCacheRoot() {
   return dir("cache");
 }
+
+
+export function getDecisionKnowledgeRoot() {
+  return dir("decisions");
+}
