@@ -18,6 +18,9 @@ import {
   type PublicRuntimeRecord,
 } from "./registry.js";
 import { waitForRuntime } from "./waitForRuntime.js";
+import {
+  recordRuntimeEvent,
+} from "../knowledge/runtime/index.js";
 import { watchWorkspace } from "./workspaceWatcher.js";
 import { runLayoutSafetyEngine } from "./layoutSafetyEngine.js";
 import {
@@ -554,6 +557,12 @@ async function startProjectInternal(
     );
   }
 
+  recordRuntimeEvent({
+    projectId,
+    type:
+      "runtime_starting",
+  });
+
   const runtime =
     setRuntime({
       projectId,
@@ -755,6 +764,12 @@ async function startProjectInternal(
       "running",
     );
 
+    recordRuntimeEvent({
+      projectId,
+      type:
+        "runtime_started",
+    });
+
     const history =
       restartHistory.get(
         projectId,
@@ -776,6 +791,16 @@ async function startProjectInternal(
       projectId,
       `[lumina-runtime] ready ${runtime.url}`,
     );
+
+    recordRuntimeEvent({
+      projectId,
+      type:
+        "runtime_ready",
+      metadata: {
+        url: runtime.url,
+        port: runtime.port,
+      },
+    });
 
     return serializeRuntime(
       runtime,
