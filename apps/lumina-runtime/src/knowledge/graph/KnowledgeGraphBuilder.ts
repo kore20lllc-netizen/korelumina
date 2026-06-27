@@ -4,9 +4,8 @@ import {
 } from "./KnowledgeGraphSchema.js";
 
 import {
-  upsertKnowledgeEdge,
-  upsertKnowledgeNode,
-} from "./KnowledgeGraphService.js";
+  ingestGraph,
+} from "./KnowledgeGraphIngestionService.js";
 
 import type {
   KnowledgeEdge,
@@ -80,17 +79,15 @@ export function buildRepositoryProjectGraph(
       timestamp,
   };
 
-  upsertKnowledgeNode(
-    repositoryNode,
-  );
-
-  upsertKnowledgeNode(
-    projectNode,
-  );
-
-  upsertKnowledgeEdge(
-    edge,
-  );
+  ingestGraph({
+    nodes: [
+      repositoryNode,
+      projectNode,
+    ],
+    edges: [
+      edge,
+    ],
+  });
 
   return {
     nodes: [
