@@ -25,3 +25,15 @@ export interface ArchitectureChange {
 export interface ArchitectureChangeSet {
   changes: ArchitectureChange[];
 }
+
+export interface ParsedArchitectureSection {
+  level: number;
+  heading: string;
+  content: string;
+}
+
+export interface ParsedArchitectureDocument {
+  id: string;
+  title: string;
+  sections: ParsedArchitectureSection[];
+}
