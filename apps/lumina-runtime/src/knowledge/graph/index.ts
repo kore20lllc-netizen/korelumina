@@ -3,3 +3,4 @@ export * from "./KnowledgeEdge.js";
 export * from "./KnowledgeGraphStore.js";
 export * from "./KnowledgeGraphService.js";
 export * from "./KnowledgeGraphSchema.js";
+export * from "./KnowledgeGraphBuilder.js";
