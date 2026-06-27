@@ -6,3 +6,5 @@ export * from "./project/index.js";
 export * from "./KnowledgeOrchestrator.js";
 export * from "./query/index.js";
 export * from "./decision/index.js";
+
+export * from "./retrieval/index.js";
