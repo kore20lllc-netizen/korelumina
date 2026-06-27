@@ -6,6 +6,11 @@ import { detectFramework } from "../detect/detectFramework.js";
 import { setProjectMetadata } from "../projects/projectMetadataStore.js";
 import { getProjectsRoot } from "../projects/workspacePaths.js";
 
+import {
+  recordRepositoryKnowledge,
+} from "../knowledge/repository/index.js";
+
+
 const PROJECTS_ROOT =
   getProjectsRoot();
 
@@ -317,6 +322,26 @@ export async function importGithubProject(
     repoName:
       repo.repo,
   });
+
+  try {
+    await recordRepositoryKnowledge({
+      projectId,
+      projectPath,
+      repoUrl:
+        repo.repoUrl,
+      owner:
+        repo.owner,
+      repo:
+        repo.repo,
+      framework,
+    });
+  } catch (error) {
+    console.error(
+      "[knowledge] repository recording failed",
+      error,
+    );
+  }
+
 
   return {
     ok: true,
