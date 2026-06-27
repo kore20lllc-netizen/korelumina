@@ -22,4 +22,9 @@ export interface EngineeringTicket {
 
   createdAt: number;
   updatedAt: number;
+
+  startedAt?: number;
+  pausedAt?: number;
+  completedAt?: number;
+  cancelledAt?: number;
 }
