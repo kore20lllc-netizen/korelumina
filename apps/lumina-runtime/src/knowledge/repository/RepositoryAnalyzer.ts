@@ -1,10 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import {
-  detectFramework,
-} from "../../detect/detectFramework.js";
-
 import type {
   RepositoryManifest,
 } from "./RepositoryManifest.js";
@@ -23,10 +19,27 @@ const ROOT_FILES = [
   "next.config.ts",
 ];
 
+export type RepositoryAnalysisInput = {
+  projectId: string;
+  projectPath: string;
+  repoUrl: string;
+  owner: string;
+  repo: string;
+  framework: string;
+};
+
 export function analyzeRepository(
-  projectId: string,
-  projectPath: string,
+  input: RepositoryAnalysisInput,
 ): RepositoryManifest {
+  const {
+    projectId,
+    projectPath,
+    framework,
+    repoUrl,
+    owner,
+    repo,
+  } = input;
+
   const rootFiles =
     ROOT_FILES.filter((file) =>
       fs.existsSync(
@@ -38,15 +51,17 @@ export function analyzeRepository(
     );
 
   const languages =
-    detectLanguages(projectPath);
+    detectLanguages(
+      projectPath,
+    );
 
   return {
     id: projectId,
     projectId,
-    framework:
-      detectFramework(
-        projectPath,
-      ),
+    framework,
+    repoUrl,
+    repoOwner: owner,
+    repoName: repo,
     packageManager:
       detectPackageManager(
         rootFiles,
@@ -108,9 +123,12 @@ function walk(
   dir: string,
   languages: Set<string>,
 ) {
-  for (const entry of fs.readdirSync(dir, {
-    withFileTypes: true,
-  })) {
+  for (const entry of fs.readdirSync(
+    dir,
+    {
+      withFileTypes: true,
+    },
+  )) {
     if (
       entry.name === "node_modules" ||
       entry.name === ".git"

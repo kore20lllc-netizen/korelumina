@@ -10,14 +10,21 @@ import type {
   RepositoryManifest,
 } from "./RepositoryManifest.js";
 
-export function recordRepositoryKnowledge(
-  projectId: string,
-  projectPath: string,
-): RepositoryManifest {
+export type RepositoryKnowledgeInput = {
+  projectId: string;
+  projectPath: string;
+  repoUrl: string;
+  owner: string;
+  repo: string;
+  framework: string;
+};
+
+export async function recordRepositoryKnowledge(
+  input: RepositoryKnowledgeInput,
+): Promise<RepositoryManifest> {
   const manifest =
     analyzeRepository(
-      projectId,
-      projectPath,
+      input,
     );
 
   saveRepositoryManifest(

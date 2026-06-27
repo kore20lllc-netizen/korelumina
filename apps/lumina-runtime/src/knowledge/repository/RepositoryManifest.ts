@@ -1,9 +1,13 @@
 export interface RepositoryManifest {
   id: string;
 
-  repositoryUrl?: string;
-
   projectId: string;
+
+  repoUrl: string;
+
+  repoOwner: string;
+
+  repoName: string;
 
   framework: string;
 
