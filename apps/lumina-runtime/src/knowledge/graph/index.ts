@@ -8,3 +8,4 @@ export * from "./KnowledgeGraphIndex.js";
 export * from "./KnowledgeGraphPopulationService.js";
 export * from "./KnowledgeGraphIngestionService.js";
 export * from "./KnowledgeGraphSynchronizationService.js";
+export * from "./KnowledgeGraphValidator.js";
