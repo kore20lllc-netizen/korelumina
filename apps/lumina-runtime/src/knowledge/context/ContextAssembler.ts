@@ -2,6 +2,10 @@ import {
   getContextProviders,
 } from "./ContextProviderRegistry.js";
 
+import {
+  retrieve,
+} from "../retrieval/RetrievalEngine.js";
+
 import type {
   ContextDocument,
 } from "./ContextDocument.js";
@@ -13,6 +17,14 @@ import type {
 export function assembleContext(
   request: ContextRequest,
 ): ContextDocument {
+  const retrieval =
+    retrieve({
+      query:
+        request.retrievalQuery,
+    });
+
+  void retrieval;
+
   const sections =
     getContextProviders()
       .flatMap(
