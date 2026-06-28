@@ -37,3 +37,9 @@ export type {
 export {
   runOrganizationalMemoryPipeline,
 } from "./OrganizationalMemoryPipeline.js";
+export type {
+  OrganizationalMemoryLearningAdapterInput,
+} from "./OrganizationalMemoryLearningAdapter.js";
+export {
+  adaptLearningOutputToOrganizationalMemoryRecords,
+} from "./OrganizationalMemoryLearningAdapter.js";
