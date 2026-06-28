@@ -43,3 +43,10 @@ export type {
 export {
   adaptLearningOutputToOrganizationalMemoryRecords,
 } from "./OrganizationalMemoryLearningAdapter.js";
+export type {
+  OrganizationalMemoryValidationIssue,
+  OrganizationalMemoryValidationResult,
+} from "./OrganizationalMemoryValidation.js";
+export {
+  validateOrganizationalMemoryPipelineResult,
+} from "./OrganizationalMemoryValidation.js";
