@@ -17,3 +17,10 @@ export { listReasoningProviders } from "./listReasoningProviders.js";
 
 export type { ReasoningPipelineResult } from "./ReasoningPipeline.js";
 export { runReasoningPipeline } from "./ReasoningPipeline.js";
+
+export type {
+  ReasoningLearningAdapterInput,
+} from "./ReasoningLearningAdapter.js";
+export {
+  adaptLearningOutputToReasoningInput,
+} from "./ReasoningLearningAdapter.js";
