@@ -31,3 +31,10 @@ export type {
 export {
   adaptReasoningOutputToPlanningInput,
 } from "./PlanningReasoningAdapter.js";
+export type {
+  PlanningValidationIssue,
+  PlanningValidationResult,
+} from "./PlanningValidation.js";
+export {
+  validatePlanningPipelineResult,
+} from "./PlanningValidation.js";
