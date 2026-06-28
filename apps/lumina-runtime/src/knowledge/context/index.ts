@@ -4,3 +4,4 @@ export * from "./ContextDocument.js";
 export * from "./ContextProvider.js";
 export * from "./ContextProviderRegistry.js";
 export * from "./ContextAssembler.js";
+export * from "./ContextValidator.js";
