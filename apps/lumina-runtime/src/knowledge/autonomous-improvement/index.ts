@@ -31,3 +31,9 @@ export {
 export {
   listAutonomousImprovementProviders,
 } from "./listAutonomousImprovementProviders.js";
+export type {
+  AutonomousImprovementPipelineResult,
+} from "./AutonomousImprovementPipeline.js";
+export {
+  runAutonomousImprovementPipeline,
+} from "./AutonomousImprovementPipeline.js";
