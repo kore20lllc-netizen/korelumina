@@ -14,3 +14,6 @@ export {
 export { registerReasoningProvider } from "./registerReasoningProvider.js";
 export { getReasoningProvider } from "./getReasoningProvider.js";
 export { listReasoningProviders } from "./listReasoningProviders.js";
+
+export type { ReasoningPipelineResult } from "./ReasoningPipeline.js";
+export { runReasoningPipeline } from "./ReasoningPipeline.js";
