@@ -37,3 +37,9 @@ export type {
 export {
   runEngineerAgentPipeline,
 } from "./EngineerAgentPipeline.js";
+export type {
+  EngineerAgentPlanningAdapterInput,
+} from "./EngineerAgentPlanningAdapter.js";
+export {
+  adaptPlanningOutputToEngineerAgentInput,
+} from "./EngineerAgentPlanningAdapter.js";
