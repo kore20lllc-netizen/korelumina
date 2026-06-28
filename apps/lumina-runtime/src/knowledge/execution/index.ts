@@ -31,3 +31,9 @@ export {
 export {
   listExecutionProviders,
 } from "./listExecutionProviders.js";
+export type {
+  ExecutionPipelineResult,
+} from "./ExecutionPipeline.js";
+export {
+  runExecutionPipeline,
+} from "./ExecutionPipeline.js";
