@@ -6,3 +6,16 @@ export type {
   PlanningProvider,
   PlanningProviderResult,
 } from "./PlanningProvider.js";
+export {
+  PlanningProviderRegistry,
+  planningProviderRegistry,
+} from "./PlanningProviderRegistry.js";
+export {
+  registerPlanningProvider,
+} from "./registerPlanningProvider.js";
+export {
+  getPlanningProvider,
+} from "./getPlanningProvider.js";
+export {
+  listPlanningProviders,
+} from "./listPlanningProviders.js";
