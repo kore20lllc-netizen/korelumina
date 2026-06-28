@@ -7,7 +7,7 @@ const providers = new Map<
   SearchProvider
 >();
 
-export function registerProvider(
+export function registerSearchProvider(
   provider: SearchProvider,
 ) {
   providers.set(
@@ -18,7 +18,7 @@ export function registerProvider(
   return provider;
 }
 
-export function unregisterProvider(
+export function unregisterSearchProvider(
   providerId: string,
 ) {
   return providers.delete(
@@ -26,7 +26,7 @@ export function unregisterProvider(
   );
 }
 
-export function getProvider(
+export function getSearchProvider(
   providerId: string,
 ): SearchProvider | undefined {
   return providers.get(
@@ -34,16 +34,16 @@ export function getProvider(
   );
 }
 
-export function getProviders(): readonly SearchProvider[] {
+export function getSearchProviders(): readonly SearchProvider[] {
   return [
     ...providers.values(),
   ];
 }
 
-export function clearProviders() {
+export function clearSearchProviders() {
   providers.clear();
 }
 
-export function providerCount() {
+export function searchProviderCount() {
   return providers.size;
 }

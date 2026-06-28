@@ -1,5 +1,5 @@
 import {
-  getProviders,
+  getSearchProviders,
 } from "./SearchProviderRegistry.js";
 
 import type {
@@ -17,7 +17,7 @@ export function retrieve(
     Date.now();
 
   const results =
-    getProviders()
+    getSearchProviders()
       .flatMap(
         (provider) =>
           provider.search(

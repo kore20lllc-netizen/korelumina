@@ -1,5 +1,5 @@
 import {
-  registerProvider,
+  registerSearchProvider,
 } from "./SearchProviderRegistry.js";
 
 import {
@@ -13,7 +13,7 @@ export function registerBuiltinProviders() {
     return;
   }
 
-  registerProvider(
+  registerSearchProvider(
     graphSearchProvider,
   );
 
