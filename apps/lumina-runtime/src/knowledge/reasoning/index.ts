@@ -6,3 +6,11 @@ export type {
   ReasoningProvider,
   ReasoningProviderResult,
 } from "./ReasoningProvider.js";
+
+export {
+  ReasoningProviderRegistry,
+  reasoningProviderRegistry,
+} from "./ReasoningProviderRegistry.js";
+export { registerReasoningProvider } from "./registerReasoningProvider.js";
+export { getReasoningProvider } from "./getReasoningProvider.js";
+export { listReasoningProviders } from "./listReasoningProviders.js";
