@@ -43,3 +43,10 @@ export type {
 export {
   adaptOrganizationalMemoryToAutonomousImprovementInput,
 } from "./AutonomousImprovementMemoryAdapter.js";
+export type {
+  AutonomousImprovementValidationIssue,
+  AutonomousImprovementValidationResult,
+} from "./AutonomousImprovementValidation.js";
+export {
+  validateAutonomousImprovementPipelineResult,
+} from "./AutonomousImprovementValidation.js";
