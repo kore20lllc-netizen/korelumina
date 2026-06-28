@@ -31,3 +31,9 @@ export {
 export {
   listOrganizationalMemoryProviders,
 } from "./listOrganizationalMemoryProviders.js";
+export type {
+  OrganizationalMemoryPipelineResult,
+} from "./OrganizationalMemoryPipeline.js";
+export {
+  runOrganizationalMemoryPipeline,
+} from "./OrganizationalMemoryPipeline.js";
