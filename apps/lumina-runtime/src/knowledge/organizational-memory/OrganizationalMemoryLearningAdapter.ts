@@ -50,7 +50,7 @@ export function adaptLearningOutputToOrganizationalMemoryRecords(
           pattern.title,
 
         summary:
-          pattern.description,
+          pattern.title,
 
         source:
           "architecture",
