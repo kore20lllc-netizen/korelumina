@@ -4,3 +4,4 @@ export * from "./LearningInsight.js";
 export * from "./LearningProvider.js";
 export * from "./LearningProviderRegistry.js";
 export * from "./LearningPipeline.js";
+export * from "./ContextLearningAdapter.js";
