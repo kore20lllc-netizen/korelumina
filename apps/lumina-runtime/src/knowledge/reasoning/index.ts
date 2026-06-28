@@ -24,3 +24,11 @@ export type {
 export {
   adaptLearningOutputToReasoningInput,
 } from "./ReasoningLearningAdapter.js";
+
+export type {
+  ReasoningValidationIssue,
+  ReasoningValidationResult,
+} from "./ReasoningValidation.js";
+export {
+  validateReasoningPipelineResult,
+} from "./ReasoningValidation.js";
