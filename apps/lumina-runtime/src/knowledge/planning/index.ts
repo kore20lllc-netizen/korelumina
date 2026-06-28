@@ -19,3 +19,9 @@ export {
 export {
   listPlanningProviders,
 } from "./listPlanningProviders.js";
+export type {
+  PlanningPipelineResult,
+} from "./PlanningPipeline.js";
+export {
+  runPlanningPipeline,
+} from "./PlanningPipeline.js";
