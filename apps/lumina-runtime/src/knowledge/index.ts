@@ -9,3 +9,4 @@ export * from "./decision/index.js";
 
 export * from "./retrieval/index.js";
 export * from "./context/index.js";
+export * from "./learning/index.js";
