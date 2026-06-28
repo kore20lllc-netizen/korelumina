@@ -18,3 +18,16 @@ export type {
   OrganizationalMemoryProvider,
   OrganizationalMemoryProviderResult,
 } from "./OrganizationalMemoryProvider.js";
+export {
+  OrganizationalMemoryProviderRegistry,
+  organizationalMemoryProviderRegistry,
+} from "./OrganizationalMemoryProviderRegistry.js";
+export {
+  registerOrganizationalMemoryProvider,
+} from "./registerOrganizationalMemoryProvider.js";
+export {
+  getOrganizationalMemoryProvider,
+} from "./getOrganizationalMemoryProvider.js";
+export {
+  listOrganizationalMemoryProviders,
+} from "./listOrganizationalMemoryProviders.js";
