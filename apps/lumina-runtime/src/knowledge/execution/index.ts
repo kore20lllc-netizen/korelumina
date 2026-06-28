@@ -37,3 +37,9 @@ export type {
 export {
   runExecutionPipeline,
 } from "./ExecutionPipeline.js";
+export type {
+  ExecutionEngineerAgentAdapterInput,
+} from "./ExecutionEngineerAgentAdapter.js";
+export {
+  adaptEngineerAgentRunToExecutionInput,
+} from "./ExecutionEngineerAgentAdapter.js";
