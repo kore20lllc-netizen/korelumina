@@ -18,3 +18,16 @@ export type {
   EngineerAgentProvider,
   EngineerAgentProviderResult,
 } from "./EngineerAgentProvider.js";
+export {
+  EngineerAgentProviderRegistry,
+  engineerAgentProviderRegistry,
+} from "./EngineerAgentProviderRegistry.js";
+export {
+  registerEngineerAgentProvider,
+} from "./registerEngineerAgentProvider.js";
+export {
+  getEngineerAgentProvider,
+} from "./getEngineerAgentProvider.js";
+export {
+  listEngineerAgentProviders,
+} from "./listEngineerAgentProviders.js";
