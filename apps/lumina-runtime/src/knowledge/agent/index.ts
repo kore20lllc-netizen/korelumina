@@ -31,3 +31,9 @@ export {
 export {
   listEngineerAgentProviders,
 } from "./listEngineerAgentProviders.js";
+export type {
+  EngineerAgentPipelineResult,
+} from "./EngineerAgentPipeline.js";
+export {
+  runEngineerAgentPipeline,
+} from "./EngineerAgentPipeline.js";
