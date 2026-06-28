@@ -18,3 +18,16 @@ export type {
   ExecutionProvider,
   ExecutionProviderResult,
 } from "./ExecutionProvider.js";
+export {
+  ExecutionProviderRegistry,
+  executionProviderRegistry,
+} from "./ExecutionProviderRegistry.js";
+export {
+  registerExecutionProvider,
+} from "./registerExecutionProvider.js";
+export {
+  getExecutionProvider,
+} from "./getExecutionProvider.js";
+export {
+  listExecutionProviders,
+} from "./listExecutionProviders.js";
