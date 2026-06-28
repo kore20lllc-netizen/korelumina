@@ -43,3 +43,10 @@ export type {
 export {
   adaptPlanningOutputToEngineerAgentInput,
 } from "./EngineerAgentPlanningAdapter.js";
+export type {
+  EngineerAgentValidationIssue,
+  EngineerAgentValidationResult,
+} from "./EngineerAgentValidation.js";
+export {
+  validateEngineerAgentPipelineResult,
+} from "./EngineerAgentValidation.js";
