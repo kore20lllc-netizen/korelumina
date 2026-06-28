@@ -25,3 +25,9 @@ export type {
 export {
   runPlanningPipeline,
 } from "./PlanningPipeline.js";
+export type {
+  PlanningReasoningAdapterInput,
+} from "./PlanningReasoningAdapter.js";
+export {
+  adaptReasoningOutputToPlanningInput,
+} from "./PlanningReasoningAdapter.js";
