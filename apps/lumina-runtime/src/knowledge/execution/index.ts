@@ -43,3 +43,10 @@ export type {
 export {
   adaptEngineerAgentRunToExecutionInput,
 } from "./ExecutionEngineerAgentAdapter.js";
+export type {
+  ExecutionValidationIssue,
+  ExecutionValidationResult,
+} from "./ExecutionValidation.js";
+export {
+  validateExecutionPipelineResult,
+} from "./ExecutionValidation.js";
