@@ -37,3 +37,9 @@ export type {
 export {
   runAutonomousImprovementPipeline,
 } from "./AutonomousImprovementPipeline.js";
+export type {
+  AutonomousImprovementMemoryAdapterInput,
+} from "./AutonomousImprovementMemoryAdapter.js";
+export {
+  adaptOrganizationalMemoryToAutonomousImprovementInput,
+} from "./AutonomousImprovementMemoryAdapter.js";
