@@ -1079,3 +1079,16 @@ A package introduction SHALL NOT be merged unless:
 
 -------------------------------------------------------------------------------
 
+
+-------------------------------------------------------------------------------
+## Reconstruction Engine
+
+The Reconstruction Engine is the canonical workflow for repository
+reconstruction.
+
+Repository modifications shall be generated, reviewed, validated and
+committed through tools/reconstruction.
+
+Architectural Owner:
+Platform Infrastructure
+-------------------------------------------------------------------------------
