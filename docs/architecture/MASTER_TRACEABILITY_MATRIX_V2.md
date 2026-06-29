@@ -194,3 +194,25 @@ No implementation is considered complete until both the platform and the
 Knowledge Platform have demonstrably improved.
 
 -------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------
+Traceability Amendment
+
+Every capability shall trace to:
+
+• Architectural Owner
+
+• Package Owner
+
+• Capability Registry
+
+• Knowledge Outputs
+
+• Knowledge Graph Nodes
+
+• Engineer Learning Artifacts
+
+-------------------------------------------------------------------------------
+

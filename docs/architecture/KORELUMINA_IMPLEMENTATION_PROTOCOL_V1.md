@@ -948,3 +948,134 @@ No implementation is considered complete until both the platform and the
 Knowledge Platform have demonstrably improved.
 
 -------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------
+TITLE VIII — PRODUCTION CAPABILITY OWNERSHIP
+
+Purpose
+
+KoreLumina is a production-first Software Operating System.
+
+Packages, subsystems and architectural layers exist to own production
+capabilities, not placeholders.
+
+Every package introduced into the repository shall own at least one
+validated production capability before the implementation ticket is
+considered complete.
+
+Empty scaffolding is prohibited.
+
+-------------------------------------------------------------------------------
+
+Engineering Principles
+
+Every capability shall have exactly one architectural owner.
+
+Shared capabilities belong to the Platform Infrastructure Layer.
+
+Higher layers consume shared capabilities rather than duplicating them.
+
+Infrastructure duplication is prohibited.
+
+-------------------------------------------------------------------------------
+
+Package Ownership Contract
+
+Every package shall explicitly declare:
+
+• Purpose
+
+• Architectural Owner
+
+• Capabilities Owned
+
+• Dependencies
+
+• Consumers
+
+• Knowledge Produced
+
+• Extension Points
+
+This information becomes part of the Knowledge Platform capability graph.
+
+-------------------------------------------------------------------------------
+
+Capability Ownership Rules
+
+Platform Infrastructure owns reusable engineering capabilities.
+
+Examples include:
+
+• Repository Paths
+
+• Workspace Paths
+
+• Filesystem Services
+
+• Configuration
+
+• Logging
+
+• Diagnostics
+
+• Validation
+
+• Observability
+
+• Contracts
+
+• Security Infrastructure
+
+Higher layers shall consume these services.
+
+They shall not reimplement them.
+
+-------------------------------------------------------------------------------
+
+Production Completion Rule
+
+A package scaffold is not complete until it owns at least one
+production capability.
+
+Definition of Done
+
+A ticket is complete only when all of the following are satisfied:
+
+1. Production capability implemented.
+
+2. Build passes.
+
+3. Validation passes.
+
+4. Architectural ownership established.
+
+5. Knowledge extracted.
+
+6. Knowledge Graph updated.
+
+7. Engineer learning synchronized.
+
+8. Repository committed.
+
+9. Repository pushed.
+
+-------------------------------------------------------------------------------
+
+Merge Gate
+
+A package introduction SHALL NOT be merged unless:
+
+• it owns at least one validated production capability;
+
+• ownership has been declared;
+
+• dependencies have been declared;
+
+• consumers have been declared;
+
+• knowledge outputs have been defined.
+
+-------------------------------------------------------------------------------
+

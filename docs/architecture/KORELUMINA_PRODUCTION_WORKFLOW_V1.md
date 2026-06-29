@@ -658,3 +658,65 @@ No implementation is considered complete until both the platform and the
 Knowledge Platform have demonstrably improved.
 
 -------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------
+Production Workflow Amendment
+
+Architecture
+
+↓
+
+Capability Ownership Verification
+
+↓
+
+Investigation
+
+↓
+
+Root Cause
+
+↓
+
+Patch Generation
+
+↓
+
+Patch Execution
+
+↓
+
+Validation
+
+↓
+
+Production Build
+
+↓
+
+Knowledge Extraction
+
+↓
+
+Knowledge Validation
+
+↓
+
+Knowledge Graph Update
+
+↓
+
+Engineer Learning
+
+↓
+
+Commit
+
+↓
+
+Push
+
+-------------------------------------------------------------------------------
+
