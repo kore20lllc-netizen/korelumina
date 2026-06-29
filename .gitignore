@@ -69,4 +69,6 @@ _snapshots/
 *.bak
 *.backup
 *.orig
-
+__pycache__/
+*.py[cod]
+.pytest_cache/
