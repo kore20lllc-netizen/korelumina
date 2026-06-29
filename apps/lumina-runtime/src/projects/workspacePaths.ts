@@ -1,63 +1,13 @@
-import fs from "node:fs";
 import path from "node:path";
+
+import {
+  findUpward,
+  getProjectsRoot,
+  getRepoRoot,
+} from "@korelumina/platform-sdk";
 
 const PROJECT_ID_PATTERN =
   /^[a-zA-Z0-9._-]+$/;
-
-function findUpward(
-  target: string,
-): string | null {
-  let current = process.cwd();
-
-  for (let i = 0; i < 8; i++) {
-    const candidate = path.join(
-      current,
-      target,
-    );
-
-    if (fs.existsSync(candidate)) {
-      return candidate;
-    }
-
-    const parent = path.dirname(current);
-
-    if (parent === current) {
-      break;
-    }
-
-    current = parent;
-  }
-
-  return null;
-}
-
-export function getRepoRoot(): string {
-  return path.resolve(
-    process.cwd(),
-    "..",
-    "..",
-  );
-}
-
-export function getProjectsRoot(): string {
-  return (
-    findUpward(
-      path.join(
-        "runtime",
-        "workspaces",
-        "default",
-        "projects",
-      ),
-    ) ??
-    path.resolve(
-      getRepoRoot(),
-      "runtime",
-      "workspaces",
-      "default",
-      "projects",
-    )
-  );
-}
 
 export function getRuntimeDataRoot(): string {
   return (
@@ -130,3 +80,9 @@ export function ensureWithinRoot(
     throw new Error(errorCode);
   }
 }
+
+export {
+  findUpward,
+  getProjectsRoot,
+  getRepoRoot,
+};
