@@ -2,6 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
 
+import {
+  assertSafeProjectId,
+  resolveProjectPath,
+} from "@korelumina/platform-sdk";
+
+
 import { detectFramework } from "../detect/detectFramework.js";
 import { setProjectMetadata } from "../projects/projectMetadataStore.js";
 import { getProjectsRoot } from "../projects/workspacePaths.js";
@@ -10,9 +16,6 @@ import {
   recordImportKnowledge,
 } from "../knowledge/index.js";
 
-
-const PROJECTS_ROOT =
-  getProjectsRoot();
 
 type ValidatedRepo = {
   repoUrl: string;
@@ -44,44 +47,6 @@ function normalizeProjectId(
     .replace(/[^a-zA-Z0-9._-]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .toLowerCase();
-}
-
-function assertSafeProjectId(
-  projectId: string,
-) {
-  if (
-    !projectId ||
-    !/^[a-zA-Z0-9._-]+$/.test(projectId)
-  ) {
-    throw new Error("invalid_projectId");
-  }
-}
-
-function resolveProjectPath(
-  projectId: string,
-) {
-  assertSafeProjectId(projectId);
-
-  const projectPath =
-    path.resolve(
-      PROJECTS_ROOT,
-      projectId,
-    );
-
-  const relative =
-    path.relative(
-      PROJECTS_ROOT,
-      projectPath,
-    );
-
-  if (
-    relative.startsWith("..") ||
-    path.isAbsolute(relative)
-  ) {
-    throw new Error("project_path_escape_detected");
-  }
-
-  return projectPath;
 }
 
 function validateGithubRepoUrl(
@@ -226,8 +191,12 @@ export async function importGithubProject(
       projectId,
     );
 
+
+  const projectsRoot =
+    getProjectsRoot();
+
   fs.mkdirSync(
-    PROJECTS_ROOT,
+    projectsRoot,
     {
       recursive: true,
     },
@@ -277,7 +246,7 @@ export async function importGithubProject(
         projectPath,
       ],
       {
-        cwd: PROJECTS_ROOT,
+        cwd: projectsRoot,
       },
     );
   }
