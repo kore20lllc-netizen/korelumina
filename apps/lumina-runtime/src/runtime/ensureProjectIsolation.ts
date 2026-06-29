@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
+
+import {
+  runCommandSync,
+} from "@korelumina/platform-sdk";
+
 
 const INSTALL_TIMEOUT_MS = 1000 * 60 * 10;
 
@@ -143,31 +147,24 @@ export function ensureProjectIsolation(projectPath: string) {
     `[runtime/isolation] installing dependencies using ${packageManager.command} --ignore-scripts`,
   );
 
-  const install = spawnSync(packageManager.command, packageManager.installArgs, {
-    cwd: projectPath,
-    shell: false,
-    stdio: "inherit",
-    timeout: INSTALL_TIMEOUT_MS,
-    env: {
-      ...process.env,
-      CI: "true",
-      NODE_ENV: "development",
-      BROWSER: "none",
-      npm_config_ignore_scripts: "true",
+  runCommandSync(
+    packageManager.command,
+    packageManager.installArgs,
+    {
+      cwd: projectPath,
+      shell: false,
+      stdio: "inherit",
+      timeout: INSTALL_TIMEOUT_MS,
+      env: {
+        ...process.env,
+        CI: "true",
+        NODE_ENV: "development",
+        BROWSER: "none",
+        npm_config_ignore_scripts: "true",
+      },
     },
-  });
+  );
 
-  if (install.error) {
-    throw new Error(`[runtime/install_failed] ${install.error.message}`);
-  }
-
-  if (install.signal) {
-    throw new Error(`[runtime/install_terminated] ${install.signal}`);
-  }
-
-  if (install.status !== 0) {
-    throw new Error(`[runtime/install_exit_code] ${install.status}`);
-  }
 
   if (!exists(nodeModulesPath)) {
     throw new Error("node_modules_missing_after_install");
