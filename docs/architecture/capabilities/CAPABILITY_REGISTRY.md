@@ -54,7 +54,7 @@ Production
 | ID | Capability | Architectural Owner | Status |
 |----|------------|---------------------|--------|
 | FOUNDATION | Foundation Layer | Foundation | Planned |
-| PLATFORM-SDK | Platform SDK | Platform Infrastructure | Planned |
+| PLATFORM-SDK | Platform SDK | Platform Infrastructure | Active |
 | RUNTIME | Universal Runtime | Runtime | Planned |
 | KP | Knowledge Platform | Knowledge Platform | Planned |
 | RI | Repository Intelligence | Repository Intelligence | Planned |
