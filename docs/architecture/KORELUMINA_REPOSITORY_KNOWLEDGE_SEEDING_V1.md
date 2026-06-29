@@ -1096,3 +1096,40 @@ Improved Engineering Standards
 
 Better Future Implementations
 
+
+
+-------------------------------------------------------------------------------
+## Constitutional Amendment — Continuous Engineering Evolution
+
+KoreLumina shall continuously evolve toward production excellence.
+
+Every implementation shall improve one or more of the following:
+
+- Platform capability
+- Engineering quality
+- Customer experience
+- Operational reliability
+- Security
+- Performance
+- Observability
+- Testability
+- Maintainability
+- Knowledge Platform
+- Engineer Agent capability
+
+Engineering quality alone is insufficient.
+
+Customer experience is considered part of production quality.
+
+Every completed implementation must:
+
+- preserve architectural integrity
+- eliminate identified architectural gaps where practical
+- extract validated engineering knowledge
+- synchronize the Knowledge Graph
+- improve future engineering capability
+
+No implementation is considered complete until both the platform and the
+Knowledge Platform have demonstrably improved.
+
+-------------------------------------------------------------------------------
