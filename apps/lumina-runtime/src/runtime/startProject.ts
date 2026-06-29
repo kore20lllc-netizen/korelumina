@@ -33,6 +33,11 @@ import {
   releaseRuntimeLock,
 } from "./runtimeLock.js";
 
+import {
+  assertSafeProjectId,
+} from "@korelumina/platform-sdk";
+
+
 const pendingStarts = new Map<
   string,
   Promise<PublicRuntimeRecord>
@@ -68,20 +73,6 @@ const restartState = new Map<
   string,
   RestartState
 >();
-
-function assertSafeProjectId(
-  projectId: string,
-) {
-  if (
-    !/^[a-zA-Z0-9._-]+$/.test(
-      projectId,
-    )
-  ) {
-    throw new Error(
-      "invalid_projectId",
-    );
-  }
-}
 
 function assertProjectReady(
   projectPath: string,
