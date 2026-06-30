@@ -1,6 +1,10 @@
 export * from "./types.js";
-export * from "./FileStore.js";
-export * from "./JsonStore.js";
+
+export {
+  FileStore,
+  JsonStore,
+} from "@korelumina/platform-sdk";
+
 export * from "./KnowledgeStore.js";
 export * from "./project/index.js";
 export * from "./KnowledgeOrchestrator.js";

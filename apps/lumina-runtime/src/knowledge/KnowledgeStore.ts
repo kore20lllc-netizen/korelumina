@@ -1,4 +1,4 @@
-import { JsonStore } from "./JsonStore.js";
+import { JsonStore } from "@korelumina/platform-sdk";
 import type { KnowledgeRecord } from "./types.js";
 
 export class KnowledgeStore {
