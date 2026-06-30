@@ -1,392 +1,88 @@
-# KoreLumina Architecture Changelog
+## 2026-06-30 — PLAT-010 Phase 3
+### Platform SDK: DirectoryWalker v2
 
-This document is the chronological record of architectural evolution.
+**Status**
+Completed
 
-Unlike Git history, this log records architectural intent, capability ownership, validation, and resulting system changes.
+**Summary**
+Introduced a production-grade `DirectoryWalker` abstraction in the Platform SDK to centralize recursive filesystem traversal while supporting consumer-specific traversal policies.
 
----
+**Motivation**
+Multiple runtime modules implemented nearly identical recursive directory walking with minor variations for directory exclusion, relative path generation, filtering, and error handling. This duplication violated the Platform SDK architecture goal of shared infrastructure.
 
-## 2026-06-29
+**Implementation**
+Added:
 
-### PLAT-002A — Repository Path Extraction
+- `walkDirectory(root, options)`
+- `WalkDirectoryOptions`
+  - `skipDirectories`
+  - `relative`
+  - `include()`
+  - `onError()`
 
-Status
-- Complete
+Behavior:
+- recursive traversal
+- deterministic sorted output
+- optional relative paths
+- directory pruning
+- consumer-controlled filtering
+- graceful directory read failures
 
-Capability
-- Repository Discovery
+**Architecture Impact**
+- Introduces the canonical filesystem traversal abstraction.
+- Runtime consumers remain unchanged during this phase.
+- No behavioral changes to runtime.
+- Establishes the migration target for future filesystem consumers.
 
-Summary
-- Introduced the Platform SDK as the owner of repository path discovery.
-- Centralized repository root resolution.
-- Runtime migrated to consume Platform SDK.
+**Compatibility**
+No runtime behavior changed.
 
-Owner
-- packages/platform-sdk/src/paths/RepositoryPaths.ts
+No consumer migrations performed.
 
-Validation
-- Platform SDK build ✓
-- Runtime build ✓
-- Builder build ✓
-- Workspace build ✓
+No API removals.
 
----
+**Validation**
+- Platform SDK build ✅
+- Runtime build ✅
+- Builder build ✅
+- Workspace build ✅
 
-### PLAT-002B — Filesystem Safety Extraction
+**Follow-up Tickets**
+- PLAT-011 — RepositoryAnalyzer migration
+- PLAT-012 — ArchitectureDiscovery migration
+- PLAT-013 — Runtime FS route migration
+- PLAT-014 — Audit engine migration
+- PLAT-015 — OpenAI context walker migration
 
-Status
-- Complete
+## 2026-06-30 — PLAT-012 Phase 1
 
-Capability
-- Filesystem Safety
+### Platform SDK: ArchitectureDiscovery Migration
 
-Summary
-- Centralized:
-  - assertSafeProjectId()
-  - resolveProjectPath()
-  - ensureWithinRoot()
+**Status**
+Completed
 
-Owner
-- packages/platform-sdk/src/paths/RepositoryPaths.ts
+**Summary**
+Migrated `ArchitectureDiscovery` to the Platform SDK `DirectoryWalker` abstraction, removing duplicated recursive filesystem traversal.
 
-Validation
-- Platform SDK build ✓
-- Runtime build ✓
-- Builder build ✓
-- Workspace build ✓
+**Implementation**
+- Replaced custom recursive walker with `walkDirectory()`.
+- Preserved markdown filtering.
+- Preserved checksum generation.
+- Preserved deterministic document ordering.
+- No behavioral changes.
 
----
+**Architecture Impact**
+- Architecture discovery now consumes the Platform SDK traversal abstraction.
+- Eliminates duplicated traversal logic.
+- Advances adoption of the shared filesystem layer.
 
-### PLAT-002C — Runtime Filesystem Migration
+**Compatibility**
+No runtime behavior changed.
 
-Status
-- Complete
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
 
-Summary
-- Runtime startProject now consumes Platform SDK filesystem validation.
+**Follow-up**
+- PLAT-013 — Runtime FS route migration
 
----
-
-### PLAT-002D — Workspace Path Cleanup
-
-Status
-- Complete
-
-Summary
-- Runtime workspace paths reduced to runtime-specific responsibilities.
-- Filesystem safety ownership fully centralized.
-
----
-
-### PLAT-003A — Async Process Runner
-
-Status
-- Complete
-
-Capability
-- Generic Process Execution
-
-Summary
-- Introduced ProcessRunner.
-- Runtime importer migrated to consume Platform SDK.
-
-Owner
-- packages/platform-sdk/src/process/ProcessRunner.ts
-
-Validation
-- Platform SDK build ✓
-- Runtime build ✓
-- Builder build ✓
-- Workspace build ✓
-
----
-
-### PLAT-004A — Sync Process Runner
-
-Status
-- Complete
-
-Capability
-- Synchronous Process Execution
-
-Summary
-- Introduced ProcessRunnerSync.
-
----
-
-### PLAT-004B — Runtime Package Installer Migration
-
-Status
-- Complete
-
-Summary
-- Runtime project isolation now consumes ProcessRunnerSync.
-- Generic spawnSync execution removed from Runtime ownership.
-
-Owner
-- packages/platform-sdk/src/process/ProcessRunnerSync.ts
-
-Validation
-- Platform SDK build ✓
-- Runtime build ✓
-- Builder build ✓
-- Workspace build ✓
-
----
-
-## 2026-06-29
-
-### PLAT-006 — Provider Registry Investigation
-
-Status
-- Complete (Investigation)
-
-Capability
-- Provider Registry Architecture
-
-Summary
-- Audited all provider registry implementations.
-- Identified two distinct implementation patterns.
-
-Findings
-
-Pattern A
-- Functional module registries
-- Module-level Map
-- register()
-- unregister()
-- get()
-- list()
-- clear()
-- count()
-
-Pattern B
-- Class-based singleton registries
-- Internal Map
-- register()
-- get()
-- list()
-
-Decision
-- Generic ProviderRegistry<T> will not be introduced yet.
-- Provider lifecycle APIs must first be standardized.
-- Consolidation deferred until convergence is complete.
-
-Result
-- Investigation complete.
-- No implementation performed.
-
-
----
-
-## 2026-06-29
-
-### PLAT-007 — Configuration Platform Investigation
-
-Status
-- Investigation
-
-Capability
-- Configuration Platform
-
-Summary
-- Audited configuration usage across Builder, Runtime, and Platform SDK.
-- Evaluated whether a shared configuration capability belongs in Platform SDK.
-
-Result
-- Pending investigation outcome.
-
-
----
-
-## 2026-06-29
-
-### PLAT-007 — Configuration Platform Investigation
-
-Status
-- Complete (Investigation)
-
-Capability
-- Configuration Platform
-
-Summary
-- Audited Runtime and Builder configuration responsibilities.
-
-Findings
-
-Infrastructure Configuration
-- Environment variables
-- Runtime URLs
-- API keys
-
-Application Configuration
-- Provider configuration
-- Capacitor configuration
-- Builder preferences
-
-Runtime Configuration
-- Runtime execution environment
-- Runtime authorization
-- AI provider selection
-
-Decision
-- Do not introduce a generic Configuration Platform.
-- Configuration responsibilities are intentionally separated.
-- Future extraction should target an Environment Platform responsible only for environment access.
-
-Result
-- Investigation complete.
-- Extraction deferred.
-
-
----
-
-## 2026-06-29
-
-### PLAT-008 — Environment Platform Investigation
-
-Status
-- Investigation
-
-Capability
-- Environment Platform
-
-Summary
-- Auditing direct environment access across Runtime, Builder, and shared packages.
-- Determining whether a typed Environment Platform should become part of Platform SDK.
-
-Result
-- Pending investigation outcome.
-
-
----
-
-## 2026-06-29
-
-### PLAT-008 — Environment Platform Investigation
-
-Status
-- Complete (Investigation)
-
-Capability
-- Environment Platform
-
-Summary
-- Audited all direct environment access across Runtime, Builder, and Platform SDK.
-
-Findings
-
-Runtime
-- 7 direct process.env reads
-- 2 runtime environment clones
-
-Builder
-- 3 direct import.meta.env reads
-
-Platform SDK
-- No existing environment abstraction
-
-Decision
-- Introduce an Environment Platform.
-- Platform SDK will own typed environment access.
-- Runtime and Builder will consume the Environment Platform instead of directly reading process.env or import.meta.env where practical.
-
-Scope
-- Infrastructure environment only.
-- Application configuration remains application-owned.
-
-Result
-- Investigation complete.
-- Approved for implementation.
-
-
----
-
-## 2026-06-29
-
-### PLAT-009 — Storage Platform Investigation
-
-Status
-- Investigation
-
-Capability
-- Storage Platform
-
-Summary
-- Auditing filesystem and storage responsibilities across Runtime, Builder, and Platform SDK.
-- Determining whether reusable storage infrastructure belongs in Platform SDK.
-
-Result
-- Pending investigation outcome.
-
-
----
-
-## 2026-06-29
-
-### PLAT-009 — Storage Platform Investigation
-
-Status
-- Complete (Investigation)
-
-Capability
-- Storage Platform
-
-Summary
-- Audited Runtime storage abstractions and filesystem usage.
-
-Findings
-- FileStore is generic file-backed string storage.
-- JsonStore is generic JSON storage over FileStore.
-- KnowledgeStore is domain-specific because it depends on KnowledgeRecord.
-
-Decision
-- Extract FileStore and JsonStore into Platform SDK.
-- Keep KnowledgeStore in Runtime/Knowledge Platform until KnowledgeRecord ownership is clarified.
-
-Result
-- Approved for Storage Core extraction.
-
-
-## 2026-06-30 — PLAT-010 Phase 1: Filesystem SDK Foundation
-
-### Summary
-Introduced a reusable filesystem layer into the Platform SDK.
-
-### Added
-- packages/platform-sdk/src/filesystem/FileSystem.ts
-- packages/platform-sdk/src/filesystem/AtomicWriter.ts
-- packages/platform-sdk/src/filesystem/DirectoryWalker.ts
-- packages/platform-sdk/src/filesystem/PathUtils.ts
-- packages/platform-sdk/src/filesystem/index.ts
-
-### SDK
-- Exported filesystem module from packages/platform-sdk/src/index.ts.
-
-### Architectural impact
-The Platform SDK now owns reusable filesystem primitives alongside:
-- Repository paths
-- Process execution
-- Storage
-
-No runtime behavior changed in this phase. Runtime modules still use native fs directly and will be migrated incrementally in subsequent phases.
-
-### Status
-PLAT-010 Phase 1 complete.
-
-## 2026-06-30 — PLAT-010 Phase 2: Atomic Writer Consolidation
-
-### Summary
-Migrated runtime atomic file persistence to the Platform SDK.
-
-### Changes
-- Replaced duplicated atomic write implementations in:
-  - apps/lumina-runtime/src/routes/fs.ts
-  - apps/lumina-runtime/src/runtime/persistence.ts
-- Adopted `atomicWrite()` from `@korelumina/platform-sdk`.
-
-### Architectural impact
-Atomic file persistence now has a single implementation owned by the Platform SDK, eliminating duplicate persistence logic and establishing the SDK as the source of truth for reusable filesystem primitives.
-
-### Status
-PLAT-010 Phase 2 complete.
