@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  walkDirectory,
+} from "@korelumina/platform-sdk";
+
 import { auditProject } from "../../audit/auditProject.js";
 import { generateFixPlan } from "../../autofix/generateFixPlan.js";
 import { createDraft } from "../../drafts/draftStore.js";
@@ -62,27 +66,26 @@ function safeJoin(projectPath: string, file: string): string {
   return full;
 }
 
-function walkFiles(projectPath: string, dir = "."): string[] {
-  const absolute = safeJoin(projectPath, dir);
-  const entries = fs.readdirSync(absolute, { withFileTypes: true });
-  const files: string[] = [];
-
-  for (const entry of entries) {
-    const relative = dir === "." ? entry.name : `${dir}/${entry.name}`;
-
-    if (entry.isDirectory()) {
-      if (SKIP_DIRS.has(entry.name)) continue;
-      files.push(...walkFiles(projectPath, relative));
-      continue;
-    }
-
-    if (!entry.isFile()) continue;
-    if (!isTextFile(relative)) continue;
-
-    files.push(relative);
-  }
-
-  return files;
+function walkFiles(
+  projectPath: string,
+): string[] {
+  return walkDirectory(
+    projectPath,
+    {
+      relative: true,
+      skipDirectories: [
+        ".git",
+        "node_modules",
+        ".next",
+        "dist",
+        "build",
+        ".turbo",
+        ".cache",
+        "coverage",
+      ],
+      include: isTextFile,
+    },
+  );
 }
 
 function readContextFiles(projectPath: string): Array<{

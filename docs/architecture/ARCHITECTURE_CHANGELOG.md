@@ -190,3 +190,37 @@ No runtime behavior changed.
 - PLAT-016 — OpenAI context walker migration
 - Continue remaining filesystem abstraction migrations
 
+
+## 2026-06-30 — PLAT-016 Phase 1
+
+### Platform SDK: OpenAI Context Walker Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated the OpenAI context file discovery pipeline to the Platform SDK `DirectoryWalker` abstraction, removing duplicated recursive filesystem traversal while preserving AI context generation behavior.
+
+**Implementation**
+- Replaced the custom `walkFiles()` implementation with `walkDirectory()`.
+- Configured directory exclusions for `.git`, `node_modules`, `.next`, `dist`, `build`, `.turbo`, `.cache`, and `coverage`.
+- Preserved relative path generation.
+- Preserved text file filtering.
+- Preserved deterministic ordering.
+- Preserved context file prioritization.
+- No API changes.
+
+**Architecture Impact**
+- OpenAI context discovery now consumes the shared Platform SDK traversal abstraction.
+- Eliminates another duplicated recursive filesystem implementation.
+- Continues consolidation of filesystem infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- Continue remaining Platform SDK filesystem migrations
