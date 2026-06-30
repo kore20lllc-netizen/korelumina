@@ -1,11 +1,19 @@
-import fs from "node:fs";
 import path from "node:path";
 
 import { getRuntimeDataRoot } from "../projects/workspacePaths.js";
 import type { RuntimeStatus } from "./registry.js";
+import {
+  FileStore,
+  JsonStore,
+} from "@korelumina/platform-sdk";
 
 const DATA_DIR =
   getRuntimeDataRoot();
+
+const store =
+  new JsonStore(
+    new FileStore(DATA_DIR),
+  );
 
 export type PersistedRuntime = {
   projectId: string;
@@ -19,11 +27,7 @@ export type PersistedRuntime = {
   status: RuntimeStatus;
 };
 
-function ensureDataDir() {
-  fs.mkdirSync(DATA_DIR, {
-    recursive: true,
-  });
-}
+function ensureDataDir() {}
 
 function safeFileName(projectId: string) {
   if (!/^[a-zA-Z0-9._-]+$/.test(projectId)) {
@@ -45,54 +49,43 @@ export function runtimeStatePath(projectId: string) {
 export function persistRuntimeState(runtime: PersistedRuntime) {
   ensureDataDir();
 
-  const filePath = runtimeStatePath(runtime.projectId);
-  const tmpPath = `${filePath}.tmp`;
-
-  fs.writeFileSync(
-    tmpPath,
-    JSON.stringify(runtime, null, 2),
-    "utf8",
+  store.write(
+    safeFileName(runtime.projectId),
+    runtime,
   );
-
-  fs.renameSync(tmpPath, filePath);
 }
 
 export function removeRuntimeState(projectId: string) {
-  const filePath = runtimeStatePath(projectId);
-
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
-  }
+  store.remove(
+    safeFileName(projectId),
+  );
 }
 
 export function listPersistedRuntimes(): PersistedRuntime[] {
   ensureDataDir();
 
-  return fs
-    .readdirSync(DATA_DIR)
+  return store
+    .list()
     .filter(
       (file) =>
         file.endsWith(".json") &&
         file !== "project-metadata.json" &&
-        file !== "project-registry.json",
+        file != "project-registry.json",
     )
     .flatMap((file) => {
-      const filePath = path.join(DATA_DIR, file);
+      const parsed =
+        store.read<PersistedRuntime>(file);
 
-      try {
-        const parsed = JSON.parse(
-          fs.readFileSync(filePath, "utf8"),
-        ) as PersistedRuntime;
-
-        if (!parsed.projectId || !parsed.url || !parsed.port) {
-          fs.unlinkSync(filePath);
-          return [];
-        }
-
-        return [parsed];
-      } catch {
-        fs.unlinkSync(filePath);
+      if (
+        !parsed ||
+        !parsed.projectId ||
+        !parsed.url ||
+        !parsed.port
+      ) {
+        store.remove(file);
         return [];
       }
+
+      return [parsed];
     });
 }

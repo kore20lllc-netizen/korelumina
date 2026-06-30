@@ -120,3 +120,37 @@ No runtime behavior changed.
 - PLAT-014 — Audit engine migration
 - PLAT-015 — OpenAI context walker migration
 
+
+## 2026-06-30 — PLAT-014 Phase 1
+
+### Platform SDK: Runtime Persistence Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated runtime persistence to the Platform SDK storage layer, removing duplicated filesystem and JSON persistence logic.
+
+**Implementation**
+- Replaced direct filesystem persistence with Platform SDK storage.
+- Continued using `atomicWrite()` through the shared storage layer.
+- Preserved runtime state format.
+- Preserved validation and cleanup behavior.
+- No API changes.
+
+**Architecture Impact**
+- Runtime persistence now consumes the Platform SDK storage abstraction.
+- Removes another duplicated persistence implementation.
+- Continues consolidation into the shared Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- PLAT-015 — Audit engine migration
+- PLAT-016 — OpenAI context walker migration
+
