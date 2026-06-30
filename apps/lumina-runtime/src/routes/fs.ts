@@ -4,6 +4,10 @@ import crypto from "node:crypto";
 import type { Express } from "express";
 
 import { getProjectPath } from "../projects/getProjectPath.js";
+import {
+  atomicWrite,
+  walkDirectory,
+} from "@korelumina/platform-sdk";
 
 const MAX_FILE_BYTES = 1024 * 1024 * 2;
 
@@ -48,45 +52,23 @@ function hashContent(content: string) {
   return crypto.createHash("sha256").update(content).digest("hex");
 }
 
-function atomicWriteFile(targetPath: string, content: string) {
-  const dir = path.dirname(targetPath);
-  fs.mkdirSync(dir, { recursive: true });
 
-  const tmpPath = `${targetPath}.${process.pid}.${Date.now()}.tmp`;
-  fs.writeFileSync(tmpPath, content, "utf8");
-  fs.renameSync(tmpPath, targetPath);
-}
 
-function listFiles(root: string) {
-  const files: string[] = [];
-
-  function walk(dir: string) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (
-        entry.name === "node_modules" ||
-        entry.name === ".git" ||
-        entry.name === "dist" ||
-        entry.name === ".next"
-      ) {
-        continue;
-      }
-
-      const full = path.join(dir, entry.name);
-      const relative = path.relative(root, full).replace(/\\/g, "/");
-
-      if (entry.isDirectory()) {
-        walk(full);
-        continue;
-      }
-
-      if (entry.isFile()) {
-        files.push(relative);
-      }
-    }
-  }
-
-  walk(root);
-  return files.sort();
+function listFiles(
+  root: string,
+) {
+  return walkDirectory(
+    root,
+    {
+      relative: true,
+      skipDirectories: [
+        ".git",
+        "node_modules",
+        ".next",
+        "dist",
+      ],
+    },
+  );
 }
 
 export function registerFsRoute(app: Express) {
@@ -211,7 +193,7 @@ const { file, targetPath } = resolveProjectFile(
         });
       }
 
-      atomicWriteFile(targetPath, content);
+      atomicWrite(targetPath, content);
 
       return res.json({
         ok: true,

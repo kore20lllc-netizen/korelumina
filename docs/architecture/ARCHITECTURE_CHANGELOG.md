@@ -86,3 +86,37 @@ No runtime behavior changed.
 **Follow-up**
 - PLAT-013 — Runtime FS route migration
 
+
+## 2026-06-30 — PLAT-013 Phase 1
+
+### Platform SDK: Runtime FS Route Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated the runtime filesystem route to the Platform SDK `DirectoryWalker` abstraction, removing duplicated recursive traversal logic while preserving API behavior.
+
+**Implementation**
+- Replaced the custom `listFiles()` recursive walker with `walkDirectory()`.
+- Configured directory exclusions for `.git`, `node_modules`, `.next`, and `dist`.
+- Preserved relative path generation.
+- Preserved deterministic ordering.
+- Left route validation, hashing, optimistic concurrency checks, and atomic writes unchanged.
+
+**Architecture Impact**
+- Runtime filesystem listing now consumes the shared Platform SDK traversal abstraction.
+- Eliminates another duplicated filesystem implementation.
+- Continues consolidation of shared infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- PLAT-014 — Audit engine migration
+- PLAT-015 — OpenAI context walker migration
+
