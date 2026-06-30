@@ -154,3 +154,39 @@ No runtime behavior changed.
 - PLAT-015 — Audit engine migration
 - PLAT-016 — OpenAI context walker migration
 
+
+## 2026-06-30 — PLAT-015 Phase 1
+
+### Platform SDK: Audit Engine Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated the audit engine to the Platform SDK `DirectoryWalker` abstraction, removing duplicated recursive filesystem traversal while preserving audit behavior.
+
+**Implementation**
+- Replaced the custom `walkFiles()` implementation with `walkDirectory()`.
+- Configured directory exclusions for `.git`, `.next`, `dist`, `build`, `node_modules`, `coverage`, `.turbo`, and `.vercel`.
+- Preserved import analysis.
+- Preserved layout analysis.
+- Preserved audit scoring.
+- Preserved deterministic file ordering.
+- No API changes.
+
+**Architecture Impact**
+- Audit engine now consumes the shared Platform SDK traversal abstraction.
+- Eliminates another duplicated filesystem walker.
+- Continues consolidation of filesystem infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- PLAT-016 — OpenAI context walker migration
+- Continue remaining filesystem abstraction migrations
+
