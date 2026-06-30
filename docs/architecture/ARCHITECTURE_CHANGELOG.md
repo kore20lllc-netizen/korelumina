@@ -328,3 +328,65 @@ No runtime behavior changed.
 - PLAT-020 — Project discovery filesystem migration
 - Continue remaining Platform SDK abstraction migrations
 
+## 2026-06-30 — PLAT-020 Phase 1
+
+### Platform SDK: Project Discovery Filesystem Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated project discovery to the Platform SDK filesystem abstraction, removing duplicated filesystem operations while preserving project discovery behavior.
+
+**Implementation**
+- Replaced direct filesystem operations with Platform SDK filesystem APIs.
+- Preserved project metadata lookup.
+- Preserved package.json detection.
+- No API changes.
+
+**Architecture Impact**
+- Project discovery now consumes the shared Platform SDK filesystem abstraction.
+- Eliminates another duplicated filesystem implementation.
+- Continues consolidation of filesystem infrastructure into the Platform SDK.
+
+**Compatibility**
+- No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- Continue remaining Platform SDK abstraction migrations.
+
+## 2026-06-30 — PLAT-021 Phase 1
+
+### Platform SDK: Storage Layer Internal Refactor
+
+**Status**
+Completed
+
+**Summary**
+Refactored the Platform SDK FileStore to consume the shared FileSystem abstraction, eliminating duplicated filesystem operations while preserving the public storage API.
+
+**Implementation**
+- Refactored FileStore to delegate filesystem operations to the shared FileSystem abstraction.
+- Replaced direct filesystem writes with writeTextAtomic().
+- Preserved the FileStore public API.
+- No runtime API changes.
+
+**Architecture Impact**
+- Platform SDK storage now consumes the shared FileSystem abstraction.
+- Removes duplicated filesystem logic from FileStore.
+- Continues consolidation of filesystem infrastructure inside the Platform SDK.
+
+**Compatibility**
+- No runtime behavior changed.
+
+**Validation**
+- Platform SDK build ✅
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- Continue remaining Platform SDK abstraction migrations.

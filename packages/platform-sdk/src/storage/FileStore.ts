@@ -1,5 +1,8 @@
-import fs from "node:fs";
 import path from "node:path";
+
+import {
+  fileSystem,
+} from "../filesystem/FileSystem.js";
 
 export class FileStore {
   constructor(
@@ -7,45 +10,53 @@ export class FileStore {
   ) {}
 
   private ensureRoot() {
-    fs.mkdirSync(this.root, {
-      recursive: true,
-    });
+    fileSystem.mkdir(
+      this.root,
+    );
   }
 
   private resolve(file: string) {
     this.ensureRoot();
-    return path.join(this.root, file);
+
+    return path.join(
+      this.root,
+      file,
+    );
   }
 
   read(file: string): string | null {
-    const full = this.resolve(file);
+    const full =
+      this.resolve(file);
 
-    if (!fs.existsSync(full)) {
+    if (!fileSystem.exists(full)) {
       return null;
     }
 
-    return fs.readFileSync(full, "utf8");
+    return fileSystem.readText(full);
   }
 
   write(file: string, contents: string) {
-    const full = this.resolve(file);
-    const tmp = `${full}.tmp`;
+    const full =
+      this.resolve(file);
 
-    fs.writeFileSync(tmp, contents, "utf8");
-    fs.renameSync(tmp, full);
+    fileSystem.writeTextAtomic(
+      full,
+      contents,
+    );
   }
 
   remove(file: string) {
-    const full = this.resolve(file);
+    const full =
+      this.resolve(file);
 
-    if (fs.existsSync(full)) {
-      fs.unlinkSync(full);
-    }
+    fileSystem.remove(full);
   }
 
   list(): string[] {
     this.ensureRoot();
 
-    return fs.readdirSync(this.root);
+    return fileSystem.list(
+      this.root,
+    );
   }
 }
