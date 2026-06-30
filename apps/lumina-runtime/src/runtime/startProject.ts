@@ -19,6 +19,29 @@ import {
 } from "./registry.js";
 import { waitForRuntime } from "./waitForRuntime.js";
 import {
+  assertProjectReady,
+} from "./startup/RuntimeStartupValidator.js";
+import {
+  buildRuntimeCommand,
+} from "./startup/RuntimeCommandBuilder.js";
+import {
+  launchRuntimeProcess,
+} from "./startup/RuntimeProcessLauncher.js";
+import {
+  AUTO_RESTART_DELAY_MS,
+  shouldAutoRestart,
+  clearRestartState,
+  recordRestartHistory,
+  getRestartState,
+  getAllRestartStates,
+  getRestartHistory,
+} from "./startup/RuntimeRestartPolicy.js";
+
+export {
+  getRestartState,
+  getAllRestartStates,
+} from "./startup/RuntimeRestartPolicy.js";
+import {
   recordRuntimeEvent,
 } from "../knowledge/runtime/index.js";
 import { watchWorkspace } from "./workspaceWatcher.js";
@@ -44,233 +67,6 @@ const pendingStarts = new Map<
 >();
 
 const START_TIMEOUT_MS = 45_000;
-
-const MAX_AUTO_RESTARTS = 3;
-const AUTO_RESTART_WINDOW_MS = 60_000;
-const AUTO_RESTART_DELAY_MS = 1_500;
-
-type RestartState = {
-  count: number;
-  windowStartedAt: number;
-};
-
-type RestartHistory = {
-  projectId: string;
-  count: number;
-  windowStartedAt: number;
-  lastRestartAt: number;
-  lastRecoveredAt?: number;
-  lastFailureReason?: string;
-};
-
-const restartHistory =
-  new Map<
-    string,
-    RestartHistory
-  >();
-
-const restartState = new Map<
-  string,
-  RestartState
->();
-
-function assertProjectReady(
-  projectPath: string,
-) {
-  const packageJsonPath =
-    path.join(
-      projectPath,
-      "package.json",
-    );
-
-  if (
-    !fs.existsSync(projectPath)
-  ) {
-    throw new Error(
-      `project_not_found:${projectPath}`,
-    );
-  }
-
-  if (
-    !fs.existsSync(
-      packageJsonPath,
-    )
-  ) {
-    throw new Error(
-      "missing_package_json",
-    );
-  }
-
-  const packageJson =
-    JSON.parse(
-      fs.readFileSync(
-        packageJsonPath,
-        "utf8",
-      ),
-    );
-
-  if (
-    !packageJson.scripts?.dev
-  ) {
-    throw new Error(
-      "missing_dev_script",
-    );
-  }
-}
-
-function buildCommand(
-  framework: string,
-  port: number,
-): string[] {
-  if (
-    framework === "next"
-  ) {
-    return [
-      "run",
-      "dev",
-      "--",
-      "--hostname",
-      "0.0.0.0",
-      "--port",
-      String(port),
-    ];
-  }
-
-  return [
-    "run",
-    "dev",
-    "--",
-    "--host",
-    "0.0.0.0",
-    "--port",
-    String(port),
-    "--strictPort",
-  ];
-}
-
-function shouldAutoRestart(
-  projectId: string,
-): boolean {
-  const now =
-    Date.now();
-
-  const current =
-    restartState.get(
-      projectId,
-    );
-
-  if (
-    !current ||
-    now -
-      current.windowStartedAt >
-      AUTO_RESTART_WINDOW_MS
-  ) {
-    restartState.set(
-      projectId,
-      {
-        count: 1,
-        windowStartedAt: now,
-      },
-    );
-
-    restartHistory.set(
-      projectId,
-      {
-        projectId,
-        count: 1,
-        windowStartedAt: now,
-        lastRestartAt: now,
-      },
-    );
-
-    return true;
-  }
-
-  if (
-    current.count >=
-    MAX_AUTO_RESTARTS
-  ) {
-    return false;
-  }
-
-  current.count += 1;
-
-  const history =
-    restartHistory.get(
-      projectId,
-    );
-
-  if (history) {
-    history.count += 1;
-    history.lastRestartAt =
-      now;
-  }
-
-  return true;
-}
-
-function clearRestartState(
-  projectId: string,
-) {
-  restartState.delete(
-    projectId,
-  );
-}
-
-function recordRestartHistory(
-  projectId: string,
-  reason: "manual" | "auto-recovery",
-) {
-  const now =
-    Date.now();
-
-  const existing =
-    restartHistory.get(
-      projectId,
-    );
-
-  restartHistory.set(
-    projectId,
-    {
-      projectId,
-      count:
-        (existing?.count ?? 0) + 1,
-      windowStartedAt:
-        existing?.windowStartedAt ?? now,
-      lastRestartAt:
-        now,
-      lastRecoveredAt:
-        existing?.lastRecoveredAt,
-      lastFailureReason:
-        reason,
-    },
-  );
-}
-
-
-export function getRestartState(
-  projectId: string,
-) {
-  const state =
-    restartState.get(
-      projectId,
-    );
-
-  if (!state) {
-    return null;
-  }
-
-  return {
-    projectId,
-    ...state,
-  };
-}
-
-export function getAllRestartStates() {
-  return Array.from(
-    restartHistory.values(),
-  );
-}
 
 export async function startProject(
   projectId: string,
@@ -490,7 +286,7 @@ async function startProjectInternal(
     });
 
   const command =
-    buildCommand(
+    buildRuntimeCommand(
       framework,
       port,
     );
@@ -511,116 +307,19 @@ async function startProjectInternal(
     },
   );
 
-  const proc = spawn(
-    "npm",
-    command,
-    {
-      cwd: projectPath,
-      shell: false,
-      detached: true,
-      stdio: [
-        "ignore",
-        "pipe",
-        "pipe",
-      ],
-      env: {
-        ...process.env,
-        NODE_ENV:
-          "development",
-        PORT:
-          String(port),
-        VITE_PORT:
-          String(port),
-        HOST:
-          "0.0.0.0",
-        FORCE_COLOR:
-          "1",
-        BROWSER:
-          "none",
-      },
-    },
-  );
-
-  if (proc.pid) {
-    acquireRuntimeLock(
-      projectId,
-      proc.pid,
-    );
-  }
-
-  recordRuntimeEvent({
-    projectId,
-    type:
-      "runtime_starting",
-  });
-
-  const runtime =
-    setRuntime({
+  const {
+    proc,
+    runtime,
+  } =
+    launchRuntimeProcess({
       projectId,
       framework,
       port,
-      pid: proc.pid,
-      startedAt:
-        Date.now(),
-      url: `http://localhost:${port}`,
-      process: proc,
-      logs: [],
-      status:
-        "starting",
+      projectPath,
+      command,
+      isAutoRestart,
     });
 
-  appendRuntimeLog(
-    projectId,
-    `[lumina-runtime] ${
-      isAutoRestart
-        ? "restarting"
-        : "starting"
-    } ${projectId}`,
-  );
-
-  appendRuntimeLog(
-    projectId,
-    `[lumina-runtime] framework=${framework}`,
-  );
-
-  appendRuntimeLog(
-    projectId,
-    `[lumina-runtime] url=http://localhost:${port}`,
-  );
-
-  proc.stdout?.on(
-    "data",
-    (chunk) => {
-      const text =
-        chunk.toString();
-
-      process.stdout.write(
-        text,
-      );
-
-      appendRuntimeLog(
-        projectId,
-        text,
-      );
-    },
-  );
-
-  proc.stderr?.on(
-    "data",
-    (chunk) => {
-      const text =
-        chunk.toString();
-
-      process.stderr.write(
-        text,
-      );
-
-      appendRuntimeLog(
-        projectId,
-        text,
-      );
-    },
-  );
 
   proc.on(
     "error",
@@ -762,7 +461,7 @@ async function startProjectInternal(
     });
 
     const history =
-      restartHistory.get(
+      getRestartHistory(
         projectId,
       );
 
@@ -809,7 +508,7 @@ async function startProjectInternal(
         : "runtime_start_timeout";
 
     const history =
-      restartHistory.get(
+      getRestartHistory(
         projectId,
       );
 
