@@ -14,6 +14,17 @@ export class FileSystem {
     return fs.readdirSync(dirPath);
   }
 
+  listEntries(
+    dirPath: string,
+  ) {
+    return fs.readdirSync(
+      dirPath,
+      {
+        withFileTypes: true,
+      },
+    );
+  }
+
   readText(
     filePath: string,
     encoding: BufferEncoding = "utf8",

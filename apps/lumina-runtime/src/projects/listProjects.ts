@@ -1,5 +1,8 @@
-import fs from "node:fs";
 import path from "node:path";
+
+import {
+  fileSystem,
+} from "@korelumina/platform-sdk";
 
 import { getProjectMetadata } from "./projectMetadataStore.js";
 import { getProjectsRoot } from "./workspacePaths.js";
@@ -8,7 +11,7 @@ const PROJECTS_ROOT =
   getProjectsRoot();
 
 export function listProjects() {
-  if (!fs.existsSync(PROJECTS_ROOT)) {
+  if (!fileSystem.exists(PROJECTS_ROOT)) {
     console.warn(
       "[listProjects] PROJECTS_ROOT does not exist",
       PROJECTS_ROOT,
@@ -17,11 +20,8 @@ export function listProjects() {
     return [];
   }
 
-  const entries = fs.readdirSync(
+  const entries = fileSystem.listEntries(
     PROJECTS_ROOT,
-    {
-      withFileTypes: true,
-    },
   );
 
   return entries
@@ -47,7 +47,7 @@ export function listProjects() {
         projectId: entry.name,
         path: projectPath,
         hasPackageJson:
-          fs.existsSync(
+          fileSystem.exists(
             path.join(
               projectPath,
               "package.json",
