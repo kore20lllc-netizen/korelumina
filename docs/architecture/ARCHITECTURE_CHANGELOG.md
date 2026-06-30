@@ -257,3 +257,37 @@ No runtime behavior changed.
 
 **Follow-up**
 - Continue remaining Platform SDK abstraction migrations
+
+## 2026-06-30 — PLAT-018 Phase 1
+
+### Platform SDK: Project Metadata Store Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated project metadata persistence to the Platform SDK storage layer, removing duplicated filesystem and JSON persistence logic while preserving project metadata behavior.
+
+**Implementation**
+- Replaced direct filesystem metadata persistence with `JsonStore<FileStore>`.
+- Preserved metadata schema.
+- Preserved read/write behavior.
+- Preserved update semantics.
+- No API changes.
+
+**Architecture Impact**
+- Project metadata persistence now consumes the shared Platform SDK storage abstraction.
+- Eliminates another duplicated persistence implementation.
+- Continues consolidation of persistence infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- PLAT-019 — Draft storage migration
+- Continue remaining Platform SDK abstraction migrations
+
