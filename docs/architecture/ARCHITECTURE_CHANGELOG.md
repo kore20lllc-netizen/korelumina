@@ -224,3 +224,36 @@ No runtime behavior changed.
 
 **Follow-up**
 - Continue remaining Platform SDK filesystem migrations
+
+## 2026-06-30 — PLAT-017 Phase 1
+
+### Platform SDK: Runtime Lock Storage Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated runtime lock persistence to the Platform SDK storage layer, removing duplicated filesystem and JSON persistence logic while preserving runtime lock behavior.
+
+**Implementation**
+- Replaced direct filesystem lock persistence with `JsonStore<FileStore>`.
+- Preserved project ID validation.
+- Preserved lock filename format (`<projectId>.lock`).
+- Preserved lock acquisition, lookup, and release behavior.
+- Preserved automatic cleanup of invalid lock files.
+- No API changes.
+
+**Architecture Impact**
+- Runtime lock persistence now consumes the shared Platform SDK storage abstraction.
+- Eliminates another duplicated persistence implementation.
+- Continues consolidation of persistence infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- Continue remaining Platform SDK abstraction migrations

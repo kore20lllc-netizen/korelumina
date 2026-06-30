@@ -1,16 +1,17 @@
-import fs from "node:fs";
-import path from "node:path";
+import {
+  FileStore,
+  JsonStore,
+} from "@korelumina/platform-sdk";
 
 import { getRuntimeLockRoot } from "../projects/workspacePaths.js";
 
 const LOCK_DIR =
   getRuntimeLockRoot();
 
-function ensureLockDir() {
-  fs.mkdirSync(LOCK_DIR, {
-    recursive: true,
-  });
-}
+const store =
+  new JsonStore(
+    new FileStore(LOCK_DIR),
+  );
 
 function validateProjectId(projectId: string) {
   if (!/^[a-zA-Z0-9._-]+$/.test(projectId)) {
@@ -18,22 +19,17 @@ function validateProjectId(projectId: string) {
   }
 }
 
-function lockPath(projectId: string) {
-  ensureLockDir();
-
+function lockFile(projectId: string) {
   validateProjectId(projectId);
 
-  return path.join(
-    LOCK_DIR,
-    `${projectId}.lock`,
-  );
+  return `${projectId}.lock`;
 }
 
 export function acquireRuntimeLock(
   projectId: string,
   pid: number,
 ) {
-  const file = lockPath(projectId);
+  const file = lockFile(projectId);
 
   const payload = {
     projectId,
@@ -41,42 +37,38 @@ export function acquireRuntimeLock(
     createdAt: Date.now(),
   };
 
-  fs.writeFileSync(
+  store.write(
     file,
-    JSON.stringify(payload, null, 2),
-    "utf8",
+    payload,
   );
 }
 
 export function releaseRuntimeLock(
   projectId: string,
 ) {
-  const file = lockPath(projectId);
+  const file = lockFile(projectId);
 
-  if (fs.existsSync(file)) {
-    fs.unlinkSync(file);
-  }
+  store.remove(file);
 }
 
 export function getRuntimeLock(
   projectId: string,
 ): { pid: number } | null {
-  const file = lockPath(projectId);
-
-  if (!fs.existsSync(file)) {
-    return null;
-  }
+  const file = lockFile(projectId);
 
   try {
-    const parsed = JSON.parse(
-      fs.readFileSync(file, "utf8"),
-    );
+    const parsed =
+      store.read<{ pid?: unknown }>(file);
+
+    if (!parsed) {
+      return null;
+    }
 
     return {
       pid: Number(parsed.pid) || 0,
     };
   } catch {
-    fs.unlinkSync(file);
+    store.remove(file);
     return null;
   }
 }
