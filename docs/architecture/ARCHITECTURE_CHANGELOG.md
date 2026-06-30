@@ -291,3 +291,40 @@ No runtime behavior changed.
 - PLAT-019 — Draft storage migration
 - Continue remaining Platform SDK abstraction migrations
 
+
+## 2026-06-30 — PLAT-019 Phase 1
+
+### Platform SDK: Draft Filesystem Migration
+
+**Status**
+Completed
+
+**Summary**
+Migrated draft application and draft rollback operations to the Platform SDK filesystem abstraction, removing duplicated filesystem operations while preserving draft behavior.
+
+**Implementation**
+- Replaced direct filesystem operations in `applyDraft.ts` with Platform SDK filesystem APIs.
+- Replaced direct filesystem operations in `revertDraft.ts` with Platform SDK filesystem APIs.
+- Preserved path safety validation.
+- Preserved snapshot generation.
+- Preserved draft application semantics.
+- Preserved rollback semantics.
+- Continued using atomic writes through the Platform SDK.
+- No API changes.
+
+**Architecture Impact**
+- Draft application and rollback now consume the shared Platform SDK filesystem abstraction.
+- Eliminates another duplicated filesystem implementation.
+- Continues consolidation of filesystem infrastructure into the Platform SDK.
+
+**Compatibility**
+No runtime behavior changed.
+
+**Validation**
+- Runtime build ✅
+- Workspace build ✅
+
+**Follow-up**
+- PLAT-020 — Project discovery filesystem migration
+- Continue remaining Platform SDK abstraction migrations
+
