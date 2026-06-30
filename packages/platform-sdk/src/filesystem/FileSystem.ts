@@ -1,39 +1,83 @@
 import fs from "node:fs";
+import path from "node:path";
 
 export class FileSystem {
-  exists(path: string) {
-    return fs.existsSync(path);
+  exists(filePath: string) {
+    return fs.existsSync(filePath);
   }
 
-  read(path: string, encoding: BufferEncoding = "utf8") {
-    return fs.readFileSync(path, encoding);
+  stat(filePath: string) {
+    return fs.statSync(filePath);
   }
 
-  write(
-    path: string,
+  list(dirPath: string) {
+    return fs.readdirSync(dirPath);
+  }
+
+  readText(
+    filePath: string,
+    encoding: BufferEncoding = "utf8",
+  ) {
+    return fs.readFileSync(
+      filePath,
+      encoding,
+    );
+  }
+
+  writeText(
+    filePath: string,
     contents: string,
     encoding: BufferEncoding = "utf8",
   ) {
-    fs.writeFileSync(path, contents, encoding);
+    fs.writeFileSync(
+      filePath,
+      contents,
+      encoding,
+    );
   }
 
-  remove(path: string) {
-    if (fs.existsSync(path)) {
-      fs.unlinkSync(path);
+  writeTextAtomic(
+    filePath: string,
+    contents: string,
+  ) {
+    this.ensureParent(filePath);
+
+    const tmpPath =
+      `${filePath}.${process.pid}.${Date.now()}.tmp`;
+
+    fs.writeFileSync(
+      tmpPath,
+      contents,
+      "utf8",
+    );
+
+    fs.renameSync(
+      tmpPath,
+      filePath,
+    );
+  }
+
+  remove(filePath: string) {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
     }
   }
 
-  mkdir(path: string) {
-    fs.mkdirSync(path, {
-      recursive: true,
-    });
+  mkdir(dirPath: string) {
+    fs.mkdirSync(
+      dirPath,
+      {
+        recursive: true,
+      },
+    );
   }
 
-  list(path: string) {
-    return fs.readdirSync(path);
-  }
-
-  stat(path: string) {
-    return fs.statSync(path);
+  ensureParent(filePath: string) {
+    this.mkdir(
+      path.dirname(filePath),
+    );
   }
 }
+
+export const fileSystem =
+  new FileSystem();

@@ -1,36 +1,30 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "===== Remaining duplicated filesystem APIs ====="
-grep -R \
-"readdirSync\|writeFileSync\|readFileSync\|mkdirSync\|renameSync\|unlinkSync" \
+echo "===== Project Metadata Store ====="
+sed -n '1,220p' \
+apps/lumina-runtime/src/projects/projectMetadataStore.ts
+
+echo
+echo "===== Draft Apply ====="
+sed -n '1,220p' \
+apps/lumina-runtime/src/drafts/applyDraft.ts
+
+echo
+echo "===== Draft Revert ====="
+sed -n '1,220p' \
+apps/lumina-runtime/src/drafts/revertDraft.ts
+
+echo
+echo "===== Remaining JsonStore usage ====="
+grep -R "JsonStore" \
 apps/lumina-runtime/src \
-packages \
+packages/platform-sdk/src \
 -n || true
 
 echo
-echo "===== Remaining Platform SDK candidates ====="
-grep -R \
-"JSON.parse(fs.readFileSync\|JSON.stringify(.*null, 2" \
+echo "===== Remaining FileStore usage ====="
+grep -R "FileStore" \
 apps/lumina-runtime/src \
-packages \
+packages/platform-sdk/src \
 -n || true
-
-echo
-echo "===== Remaining custom recursive walkers ====="
-grep -R \
-"function walk\|function walkFiles\|function visit" \
-apps/lumina-runtime/src \
-packages \
--n || true
-
-echo
-echo "===== Platform SDK adoption ====="
-grep -R \
-"@korelumina/platform-sdk" \
-apps/lumina-runtime/src \
--n || true
-
-echo
-echo "===== Architecture changelog ====="
-tail -80 docs/architecture/ARCHITECTURE_CHANGELOG.md
