@@ -1,5 +1,8 @@
-import fs from "node:fs";
 import path from "node:path";
+
+import {
+  fileSystem,
+} from "@korelumina/platform-sdk";
 
 import type { FixDraft } from "./types.js";
 
@@ -36,8 +39,8 @@ export function revertDraft(projectPath: string, draft: FixDraft): RevertDraftRe
       const fullPath = ensureInsideProject(projectPath, snapshot.file);
 
       if (!snapshot.existedBefore) {
-        if (fs.existsSync(fullPath)) {
-          fs.unlinkSync(fullPath);
+        if (fileSystem.exists(fullPath)) {
+          fileSystem.remove(fullPath);
           result.reverted += 1;
           result.files.push(snapshot.file);
         } else {
@@ -47,11 +50,9 @@ export function revertDraft(projectPath: string, draft: FixDraft): RevertDraftRe
         continue;
       }
 
-      fs.mkdirSync(path.dirname(fullPath), {
-        recursive: true,
-      });
+      fileSystem.ensureParent(fullPath);
 
-      fs.writeFileSync(fullPath, snapshot.before, "utf8");
+      fileSystem.writeTextAtomic(fullPath, snapshot.before);
       result.reverted += 1;
       result.files.push(snapshot.file);
     } catch (error) {

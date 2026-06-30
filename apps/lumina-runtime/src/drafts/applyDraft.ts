@@ -1,5 +1,8 @@
-import fs from "node:fs";
 import path from "node:path";
+
+import {
+  fileSystem,
+} from "@korelumina/platform-sdk";
 
 import type { DraftPatch, DraftSnapshot, FixDraft } from "./types.js";
 
@@ -26,21 +29,21 @@ function readFileIfExists(fullPath: string): {
   existedBefore: boolean;
   content: string;
 } {
-  if (!fs.existsSync(fullPath)) {
+  if (!fileSystem.exists(fullPath)) {
     return {
       existedBefore: false,
       content: "",
     };
   }
 
-  const stat = fs.statSync(fullPath);
+  const stat = fileSystem.stat(fullPath);
   if (!stat.isFile()) {
     throw new Error(`patch_target_not_file:${fullPath}`);
   }
 
   return {
     existedBefore: true,
-    content: fs.readFileSync(fullPath, "utf8"),
+    content: fileSystem.readText(fullPath),
   };
 }
 
@@ -54,7 +57,7 @@ function applyPatch(
   if (patch.type === "delete-file") {
     if (!beforeState.existedBefore) return null;
 
-    fs.unlinkSync(fullPath);
+    fileSystem.remove(fullPath);
 
     return {
       file: patch.file,
@@ -67,11 +70,9 @@ function applyPatch(
   if (patch.type === "create-file") {
     if (beforeState.existedBefore) return null;
 
-    fs.mkdirSync(path.dirname(fullPath), {
-      recursive: true,
-    });
+    fileSystem.ensureParent(fullPath);
 
-    fs.writeFileSync(fullPath, patch.content, "utf8");
+    fileSystem.writeTextAtomic(fullPath, patch.content);
 
     return {
       file: patch.file,
@@ -89,7 +90,7 @@ function applyPatch(
 
   if (after === beforeState.content) return null;
 
-  fs.writeFileSync(fullPath, after, "utf8");
+  fileSystem.writeTextAtomic(fullPath, after);
 
   return {
     file: patch.file,
