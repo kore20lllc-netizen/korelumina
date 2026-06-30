@@ -1,0 +1,17 @@
+{
+  "id": "b9212047-4a4f-463b-a13c-9ecdf2106f5f",
+  "type": "runtime-event",
+  "version": 1,
+  "createdAt": 1782838138793,
+  "updatedAt": 1782838138793,
+  "data": {
+    "id": "b9212047-4a4f-463b-a13c-9ecdf2106f5f",
+    "projectId": "kore20lllc-netizen-premium-ride-app",
+    "type": "runtime_ready",
+    "timestamp": 1782838138793,
+    "metadata": {
+      "url": "http://localhost:4200",
+      "port": 4200
+    }
+  }
+}
