@@ -299,3 +299,94 @@ Result
 - Investigation complete.
 - Approved for implementation.
 
+
+---
+
+## 2026-06-29
+
+### PLAT-009 — Storage Platform Investigation
+
+Status
+- Investigation
+
+Capability
+- Storage Platform
+
+Summary
+- Auditing filesystem and storage responsibilities across Runtime, Builder, and Platform SDK.
+- Determining whether reusable storage infrastructure belongs in Platform SDK.
+
+Result
+- Pending investigation outcome.
+
+
+---
+
+## 2026-06-29
+
+### PLAT-009 — Storage Platform Investigation
+
+Status
+- Complete (Investigation)
+
+Capability
+- Storage Platform
+
+Summary
+- Audited Runtime storage abstractions and filesystem usage.
+
+Findings
+- FileStore is generic file-backed string storage.
+- JsonStore is generic JSON storage over FileStore.
+- KnowledgeStore is domain-specific because it depends on KnowledgeRecord.
+
+Decision
+- Extract FileStore and JsonStore into Platform SDK.
+- Keep KnowledgeStore in Runtime/Knowledge Platform until KnowledgeRecord ownership is clarified.
+
+Result
+- Approved for Storage Core extraction.
+
+
+## 2026-06-30 — PLAT-010 Phase 1: Filesystem SDK Foundation
+
+### Summary
+Introduced a reusable filesystem layer into the Platform SDK.
+
+### Added
+- packages/platform-sdk/src/filesystem/FileSystem.ts
+- packages/platform-sdk/src/filesystem/AtomicWriter.ts
+- packages/platform-sdk/src/filesystem/DirectoryWalker.ts
+- packages/platform-sdk/src/filesystem/PathUtils.ts
+- packages/platform-sdk/src/filesystem/index.ts
+
+### SDK
+- Exported filesystem module from packages/platform-sdk/src/index.ts.
+
+### Architectural impact
+The Platform SDK now owns reusable filesystem primitives alongside:
+- Repository paths
+- Process execution
+- Storage
+
+No runtime behavior changed in this phase. Runtime modules still use native fs directly and will be migrated incrementally in subsequent phases.
+
+### Status
+PLAT-010 Phase 1 complete.
+
+## 2026-06-30 — PLAT-010 Phase 2: Atomic Writer Consolidation
+
+### Summary
+Migrated runtime atomic file persistence to the Platform SDK.
+
+### Changes
+- Replaced duplicated atomic write implementations in:
+  - apps/lumina-runtime/src/routes/fs.ts
+  - apps/lumina-runtime/src/runtime/persistence.ts
+- Adopted `atomicWrite()` from `@korelumina/platform-sdk`.
+
+### Architectural impact
+Atomic file persistence now has a single implementation owned by the Platform SDK, eliminating duplicate persistence logic and establishing the SDK as the source of truth for reusable filesystem primitives.
+
+### Status
+PLAT-010 Phase 2 complete.
