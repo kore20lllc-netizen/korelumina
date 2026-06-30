@@ -1,5 +1,9 @@
-import fs from "node:fs";
 import path from "node:path";
+import { existsSync } from "node:fs";
+
+import {
+  walkDirectory,
+} from "@korelumina/platform-sdk";
 
 import type {
   RepositoryManifest,
@@ -42,7 +46,7 @@ export function analyzeRepository(
 
   const rootFiles =
     ROOT_FILES.filter((file) =>
-      fs.existsSync(
+      existsSync(
         path.join(
           projectPath,
           file,
@@ -109,85 +113,47 @@ function detectLanguages(
   const languages =
     new Set<string>();
 
-  walk(
-    projectPath,
-    languages,
-  );
+  const files =
+    walkDirectory(
+      projectPath,
+      {
+        relative: true,
+        skipDirectories: [
+          ".git",
+          "node_modules",
+        ],
+      },
+    );
 
-  return Array.from(
-    languages,
-  ).sort();
-}
-
-function walk(
-  dir: string,
-  languages: Set<string>,
-) {
-  for (const entry of fs.readdirSync(
-    dir,
-    {
-      withFileTypes: true,
-    },
-  )) {
-    if (
-      entry.name === "node_modules" ||
-      entry.name === ".git"
-    ) {
-      continue;
-    }
-
-    const full =
-      path.join(
-        dir,
-        entry.name,
-      );
-
-    if (
-      entry.isDirectory()
-    ) {
-      walk(
-        full,
-        languages,
-      );
-      continue;
-    }
-
+  for (const file of files) {
     switch (
-      path.extname(
-        entry.name,
-      )
+      path.extname(file)
     ) {
       case ".ts":
       case ".tsx":
-        languages.add(
-          "TypeScript",
-        );
+        languages.add("TypeScript");
         break;
 
       case ".js":
       case ".jsx":
-        languages.add(
-          "JavaScript",
-        );
+        languages.add("JavaScript");
         break;
 
       case ".json":
-        languages.add(
-          "JSON",
-        );
+        languages.add("JSON");
         break;
 
       case ".css":
-        languages.add(
-          "CSS",
-        );
+        languages.add("CSS");
         break;
 
       case ".md":
-        languages.add(
-          "Markdown",
-        );
+        languages.add("Markdown");
         break;
     }
   }
+
+  return Array.from(
+    languages,
+  ).sort();
 }
