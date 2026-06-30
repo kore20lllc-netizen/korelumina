@@ -159,3 +159,69 @@ Runtime-specific orchestration remains in Runtime.
 
 Builder-specific presentation remains in Builder.
 
+
+---
+
+## Provider Registry Consolidation
+
+Status
+- Deferred
+
+Investigation
+- Complete (PLAT-006)
+
+Decision
+- Standardize provider lifecycle APIs before introducing a generic ProviderRegistry<T>.
+
+Prerequisites
+- Common register API
+- Common unregister API
+- Common list API
+- Common clear API
+- Common count API
+
+
+---
+
+## Environment Platform
+
+Status
+- Ready for Investigation
+
+Purpose
+- Centralize environment variable access.
+- Provide typed runtime and builder environment APIs.
+- Remove direct process.env and import.meta.env access from application code.
+
+Candidate Scope
+- Runtime environment
+- Builder environment
+- Platform environment contracts
+
+Non-Goals
+- Provider configuration
+- Application preferences
+- Runtime state
+
+
+---
+
+## Environment Platform
+
+Status
+- Approved
+
+Investigation
+- PLAT-008 complete.
+
+Scope
+- Typed Runtime environment.
+- Typed Builder environment.
+- Shared environment contracts.
+- Environment validation helpers.
+
+Consumers
+- Runtime
+- Builder
+- Future packages
+
