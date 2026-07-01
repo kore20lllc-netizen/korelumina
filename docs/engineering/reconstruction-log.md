@@ -255,3 +255,25 @@ Move shared knowledge path resolution into the Platform SDK.
 ### Result
 Knowledge directory resolution is now owned by the Platform SDK, reducing shared infrastructure inside the runtime while maintaining backward compatibility.
 
+
+---
+
+## Phase 035 — Canonical Knowledge Architecture
+
+**Status:** ✅ Complete
+
+### Objective
+
+Establish canonical ownership boundaries for persistent knowledge, documentation, runtime implementation, and shared platform infrastructure.
+
+### Completed
+
+- Declared `runtime/knowledge` as the canonical persistent knowledge store.
+- Defined `docs` as human-facing documentation.
+- Defined `apps/lumina-runtime/src/knowledge` as implementation only.
+- Defined `packages/platform-sdk` as the owner of shared infrastructure and contracts.
+- Established the single-owner rule for persistent artifacts.
+
+### Result
+
+KoreLumina now has explicit architectural ownership boundaries that will guide all future Platform SDK extraction and runtime refactoring work.
