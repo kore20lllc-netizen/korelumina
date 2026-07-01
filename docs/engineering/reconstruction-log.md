@@ -543,3 +543,31 @@ Introduce the Runtime Recovery pipeline boundary using the shared Platform SDK E
 ### Result
 
 Runtime recovery now has an Execution SDK-compatible pipeline scaffold. Future phases can migrate recovery behavior incrementally without changing runtime behavior in one large refactor.
+
+---
+
+## Phase 064 — Runtime Startup Execution SDK Migration
+
+**Status:** ✅ Complete
+
+### Objective
+
+Migrate the production runtime startup coordinator to the shared Platform SDK Execution SDK.
+
+### Completed
+
+- Replaced hand-written RuntimeCoordinator sequencing with RuntimeStartupPipeline.
+- Reused existing production startup modules.
+- Preserved startProject public API behavior.
+- Preserved runtime launch, lifecycle binding, readiness, and event behavior.
+- Preserved runtime startup logging.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime startup is now a production consumer of the Execution SDK rather than a parallel custom orchestration path.
