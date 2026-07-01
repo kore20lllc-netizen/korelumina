@@ -500,3 +500,17 @@ Introduce the Runtime Startup pipeline boundary using the shared Platform SDK Ex
 ### Result
 
 Runtime startup now has an Execution SDK-compatible pipeline scaffold. Future phases can migrate startup stages incrementally without changing runtime behavior in one large refactor.
+
+---
+
+## Phase 062 — Canonical Execution Architecture
+
+**Status:** ✅ Complete
+
+### Completed
+
+- Added ADR-0037.
+- Defined the canonical execution architecture.
+- Defined the canonical stage lifecycle.
+- Established Execution SDK governance.
+
