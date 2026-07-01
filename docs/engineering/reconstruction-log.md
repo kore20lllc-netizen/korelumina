@@ -514,3 +514,32 @@ Runtime startup now has an Execution SDK-compatible pipeline scaffold. Future ph
 - Defined the canonical stage lifecycle.
 - Established Execution SDK governance.
 
+
+---
+
+## Phase 063 — Runtime Recovery Execution Pipeline Scaffold
+
+**Status:** ✅ Complete
+
+### Objective
+
+Introduce the Runtime Recovery pipeline boundary using the shared Platform SDK Execution SDK.
+
+### Completed
+
+- Added RuntimeRecoveryInput.
+- Added RuntimeRecoveryState.
+- Added RuntimeRecoveryContext.
+- Added runRuntimeRecoveryPipeline.
+- Added initial Resolve, Validate, and Report stages.
+- Exported recovery pipeline primitives.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime recovery now has an Execution SDK-compatible pipeline scaffold. Future phases can migrate recovery behavior incrementally without changing runtime behavior in one large refactor.
