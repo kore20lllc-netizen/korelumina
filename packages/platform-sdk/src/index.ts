@@ -5,3 +5,4 @@ export * from "./filesystem/index.js";
 export * from "./contracts/index.js";
 export * from "./project/index.js";
 export * from "./repository/index.js";
+export * from "./decision/index.js";
