@@ -1,3 +1,8 @@
+import {
+  runExecutionPipeline,
+  type ExecutionStage,
+} from "../execution/index.js";
+
 import type {
   KnowledgeObject,
 } from "./KnowledgeObject.js";
@@ -26,11 +31,45 @@ export async function runKnowledgePipeline(
   const processors =
     getKnowledgeProcessors(object);
 
-  for (const processor of processors) {
-    await processor.process(
-      object,
+  const stages: ExecutionStage<
+    KnowledgeObject
+  >[] =
+    processors.map(
+      (processor) => ({
+        name:
+          processor.constructor.name,
+        async run(context) {
+          await processor.process(
+            context.input,
+          );
+
+          return {
+            stage:
+              processor.constructor.name,
+            success: true,
+          };
+        },
+      }),
     );
-  }
+
+  await runExecutionPipeline(
+    {
+      id: [
+        "knowledge",
+        object.type,
+        object.id,
+      ].join(":"),
+      input: object,
+      state: {},
+      metadata: {
+        objectType:
+          object.type,
+        objectId:
+          object.id,
+      },
+    },
+    stages,
+  );
 
   await publishKnowledgeEvent({
     id: createKnowledgeEventId(

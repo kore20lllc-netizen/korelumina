@@ -417,3 +417,30 @@ Begin turning the Engineering Completion Orchestrator into an executable pipelin
 ### Result
 
 KoreLumina now has the first executable engineering completion pipeline. Future phases can add journal, milestone, documentation, git, and tag stages without changing the orchestration model.
+
+---
+
+## Phase 059 — Knowledge Pipeline Execution Convergence
+
+**Status:** ✅ Complete
+
+### Objective
+
+Refactor the Knowledge Pipeline to use the shared Platform SDK Execution Pipeline instead of maintaining a separate orchestration model.
+
+### Completed
+
+- Replaced direct processor loop with Execution SDK stages.
+- Preserved KnowledgePublisher behavior.
+- Preserved KnowledgeEventBus publication.
+- Preserved processor registry compatibility.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Knowledge publication now runs through the shared Execution SDK, reducing orchestration duplication and moving KoreLumina toward a single execution model.
