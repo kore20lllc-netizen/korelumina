@@ -305,3 +305,30 @@ Add the first replay projection that derives milestone records from event journa
 ### Result
 
 KoreLumina can now project milestone knowledge from the Event Journal replay system.
+
+---
+
+## Phase 054 — Milestone Capabilities
+
+**Status:** ✅ Complete
+
+### Objective
+
+Complete the core Milestone domain before introducing Engineering Eras.
+
+### Completed
+
+- Added Milestone query layer.
+- Added Milestone service layer.
+- Added Milestone lifecycle transitions.
+- Exported milestone capabilities from the domain index.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Milestones now support storage, lookup, status filtering, tag/commit/ADR queries, creation, update, activation, and completion.
