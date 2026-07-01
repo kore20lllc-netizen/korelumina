@@ -33,3 +33,11 @@ export function appendEventJournalEntry(
 export function listEventJournalEntries(): string[] {
   return jsonStore.list();
 }
+
+export function loadEventJournalEntry(
+  file: string,
+): EventJournalEntry | null {
+  return jsonStore.read<EventJournalEntry>(
+    file,
+  );
+}
