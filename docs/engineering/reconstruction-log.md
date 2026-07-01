@@ -123,3 +123,27 @@ Extract runtime readiness/finalization from `startProject.ts` into a dedicated s
 
 ### Next Phase
 Phase 030 — Runtime Coordinator extraction.
+
+---
+
+## Phase 030 — Runtime Lifecycle Binder
+
+**Status:** ✅ Complete
+
+### Objective
+Extract runtime process lifecycle handling from `startProject.ts`.
+
+### Completed
+- Introduced `RuntimeLifecycleBinder.ts`.
+- Moved process error handling.
+- Moved process exit handling.
+- Moved auto-restart scheduling.
+- `startProject.ts` now delegates lifecycle binding through `attachRuntimeLifecycle()`.
+
+### Validation
+- Runtime TypeScript build: ✅
+- Builder production build: ✅
+- Monorepo build: ✅
+
+### Next Phase
+Phase 031 — Runtime Coordinator extraction.
