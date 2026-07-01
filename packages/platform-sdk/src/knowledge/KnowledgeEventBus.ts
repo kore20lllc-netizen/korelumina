@@ -3,18 +3,13 @@ import type {
 } from "./KnowledgeEvent.js";
 
 import {
-  getKnowledgeSubscribers,
-} from "./KnowledgeSubscriberRegistry.js";
+  dispatchKnowledgeEvent,
+} from "./KnowledgeEventDispatcher.js";
 
 export async function publishKnowledgeEvent(
   event: KnowledgeEvent,
 ): Promise<void> {
-  const subscribers =
-    getKnowledgeSubscribers(event);
-
-  for (const subscriber of subscribers) {
-    await subscriber.handle(
-      event,
-    );
-  }
+  await dispatchKnowledgeEvent(
+    event,
+  );
 }
