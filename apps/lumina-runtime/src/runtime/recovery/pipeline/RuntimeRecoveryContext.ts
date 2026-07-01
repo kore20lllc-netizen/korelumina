@@ -3,11 +3,16 @@ import type {
 } from "@korelumina/platform-sdk";
 
 import type {
+  PersistedRuntime,
+} from "../../persistence.js";
+
+import type {
   PublicRuntimeRecord,
 } from "../../registry.js";
 
 export interface RuntimeRecoveryInput {
   projectId: string;
+  record: PersistedRuntime;
   reason?: string;
 }
 

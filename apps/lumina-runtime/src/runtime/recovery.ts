@@ -3,81 +3,119 @@ import https from "node:https";
 
 import {
   isPidAlive,
-  setRuntime,
 } from "./registry.js";
+
 import {
   listPersistedRuntimes,
   removeRuntimeState,
 } from "./persistence.js";
-import {
-  recordRuntimeEvent,
-} from "../knowledge/runtime/index.js";
 
-function isRecoverableStatus(status: string | undefined): boolean {
+import {
+  runRuntimeRecoveryPipeline,
+  ResolveRuntimeStage,
+  ValidateRecoveryStage,
+  RestoreRuntimeStage,
+  PublishRecoveryStage,
+  ReportStage,
+} from "./recovery/pipeline/index.js";
+
+function isRecoverableStatus(
+  status: string | undefined,
+): boolean {
   return status === "running";
 }
 
-function canReachUrl(url: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    const client = url.startsWith("https://") ? https : http;
+function canReachUrl(
+  url: string,
+): Promise<boolean> {
+  return new Promise(
+    (resolve) => {
+      const client =
+        url.startsWith("https://")
+          ? https
+          : http;
 
-    const req = client.get(url, (res) => {
-      res.resume();
-      resolve((res.statusCode ?? 500) < 500);
-    });
+      const req =
+        client.get(
+          url,
+          (res) => {
+            res.resume();
+            resolve(
+              (res.statusCode ?? 500) <
+                500,
+            );
+          },
+        );
 
-    req.setTimeout(1500, () => {
-      req.destroy();
-      resolve(false);
-    });
+      req.setTimeout(
+        1500,
+        () => {
+          req.destroy();
+          resolve(false);
+        },
+      );
 
-    req.on("error", () => {
-      resolve(false);
-    });
-  });
+      req.on(
+        "error",
+        () => {
+          resolve(false);
+        },
+      );
+    },
+  );
+}
+
+async function isRecoverableRuntime(
+  record: ReturnType<
+    typeof listPersistedRuntimes
+  >[number],
+) {
+  return (
+    isRecoverableStatus(
+      record.status,
+    ) &&
+    Boolean(record.pid) &&
+    isPidAlive(record.pid) &&
+    (await canReachUrl(record.url))
+  );
 }
 
 export async function recoverPersistedRuntimes() {
-  const persisted = listPersistedRuntimes();
+  const persisted =
+    listPersistedRuntimes();
 
   for (const record of persisted) {
     if (
-      !isRecoverableStatus(record.status) ||
-      !record.pid ||
-      !isPidAlive(record.pid) ||
-      !(await canReachUrl(record.url))
+      !(await isRecoverableRuntime(
+        record,
+      ))
     ) {
       console.log(
         `[lumina-runtime] removing stale runtime record ${record.projectId}`,
       );
 
-      removeRuntimeState(record.projectId);
+      removeRuntimeState(
+        record.projectId,
+      );
+
       continue;
     }
 
-    setRuntime({
-      projectId: record.projectId,
-      framework: record.framework,
-      port: record.port,
-      pid: record.pid,
-      startedAt: record.startedAt,
-      exitedAt: record.exitedAt,
-      lastError: record.lastError,
-      url: record.url,
-      status: record.status,
-      logs: [
-        `[lumina-runtime] restored persisted runtime ${record.projectId}`,
+    await runRuntimeRecoveryPipeline(
+      {
+        projectId:
+          record.projectId,
+        record,
+        reason:
+          "runtime-startup-recovery",
+      },
+      [
+        ResolveRuntimeStage,
+        ValidateRecoveryStage,
+        RestoreRuntimeStage,
+        PublishRecoveryStage,
+        ReportStage,
       ],
-    });
-
-    recordRuntimeEvent({
-      projectId: record.projectId,
-      type:
-        "runtime_recovered",
-    });
-
-    console.log(
-      `[lumina-runtime] restored runtime ${record.projectId} pid=${record.pid}`,
     );
   }
 }

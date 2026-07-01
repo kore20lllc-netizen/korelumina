@@ -571,3 +571,33 @@ Migrate the production runtime startup coordinator to the shared Platform SDK Ex
 ### Result
 
 Runtime startup is now a production consumer of the Execution SDK rather than a parallel custom orchestration path.
+
+---
+
+## Phase 065 — Runtime Recovery Execution SDK Migration
+
+**Status:** ✅ Complete
+
+### Objective
+
+Migrate runtime recovery orchestration to the shared Platform SDK Execution SDK.
+
+### Completed
+
+- Added RestoreRuntimeStage.
+- Added PublishRecoveryStage.
+- Updated recovery stage exports.
+- Refactored recoverPersistedRuntimes into a dispatcher over RuntimeRecoveryPipeline.
+- Preserved runtime restoration behavior.
+- Preserved stale runtime removal behavior.
+- Preserved runtime_recovered event publication.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime recovery is now a production consumer of the Execution SDK while preserving existing recovery semantics.
