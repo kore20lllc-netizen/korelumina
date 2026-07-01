@@ -3,6 +3,7 @@ export * from "./EventJournalStore.js";
 export * from "./EventJournalSubscriber.js";
 export * from "./EventJournalQuery.js";
 export * from "./EventJournalReplay.js";
+export * from "./EventJournalReplayExecution.js";
 export * from "./EventJournalIterator.js";
 export * from "./EventJournalProjection.js";
 export * from "./EventJournalProjectionRegistry.js";

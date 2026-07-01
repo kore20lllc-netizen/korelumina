@@ -444,3 +444,31 @@ Refactor the Knowledge Pipeline to use the shared Platform SDK Execution Pipelin
 ### Result
 
 Knowledge publication now runs through the shared Execution SDK, reducing orchestration duplication and moving KoreLumina toward a single execution model.
+
+---
+
+## Phase 060 — Replay Execution Pipeline
+
+**Status:** ✅ Complete
+
+### Objective
+
+Refactor Event Journal replay to use the shared Platform SDK Execution Pipeline.
+
+### Completed
+
+- Added EventJournalReplayExecution.
+- Converted replay handlers into execution stages.
+- Converted replay projections into execution stages.
+- Preserved existing replay API.
+- Preserved event journal projection behavior.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Event Journal replay now runs through the shared Execution SDK, aligning replay with Knowledge publication and Engineering completion.
