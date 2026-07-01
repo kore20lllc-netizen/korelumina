@@ -1,61 +1,28 @@
-import fs from "node:fs";
-import path from "node:path";
-import { spawn } from "node:child_process";
-
-import getPort from "get-port";
-
-import { detectFramework } from "../detect/detectFramework.js";
-import { getProjectPath } from "../projects/getProjectPath.js";
-import { ensureProjectIsolation } from "./ensureProjectIsolation.js";
 import {
   appendRuntimeLog,
   getRuntime,
   markRuntimeStatus,
-  removeRuntime,
   serializeRuntime,
-  setRuntime,
   stopRuntime,
   type PublicRuntimeRecord,
 } from "./registry.js";
+
 import {
-  assertProjectReady,
-} from "./startup/RuntimeStartupValidator.js";
+  coordinateRuntimeStartup,
+} from "./startup/RuntimeCoordinator.js";
+
 import {
-  buildRuntimeCommand,
-} from "./startup/RuntimeCommandBuilder.js";
-import {
-  launchRuntimeProcess,
-} from "./startup/RuntimeProcessLauncher.js";
-import {
-  attachRuntimeLifecycle,
-} from "./startup/RuntimeLifecycleBinder.js";
-import {
-  finalizeRuntimeStartup,
-} from "./startup/RuntimeReadiness.js";
-import {
-  AUTO_RESTART_DELAY_MS,
-  shouldAutoRestart,
-  clearRestartState,
   recordRestartHistory,
   getRestartState,
   getAllRestartStates,
-  getRestartHistory,
 } from "./startup/RuntimeRestartPolicy.js";
 
 export {
   getRestartState,
   getAllRestartStates,
 } from "./startup/RuntimeRestartPolicy.js";
+
 import {
-  recordRuntimeEvent,
-} from "../knowledge/runtime/index.js";
-import { runLayoutSafetyEngine } from "./layoutSafetyEngine.js";
-import {
-  clearRuntimeManualStop,
-  isRuntimeManualStop,
-} from "./manualStop.js";
-import {
-  acquireRuntimeLock,
   getRuntimeLock,
   releaseRuntimeLock,
 } from "./runtimeLock.js";
@@ -63,7 +30,6 @@ import {
 import {
   assertSafeProjectId,
 } from "@korelumina/platform-sdk";
-
 
 const pendingStarts = new Map<
   string,
@@ -249,102 +215,9 @@ async function startProjectInternal(
   projectId: string,
   isAutoRestart = false,
 ): Promise<PublicRuntimeRecord> {
-  const projectPath =
-    getProjectPath(
-      projectId,
-    );
-
-  ensureProjectIsolation(
-    projectPath,
-  );
-
-  runLayoutSafetyEngine(projectId, projectPath);
-
-  assertProjectReady(
-    projectPath,
-  );
-
-  const framework =
-    detectFramework(
-      projectPath,
-    );
-
-  if (
-    framework ===
-    "unknown"
-  ) {
-    throw new Error(
-      "unsupported_framework",
-    );
-  }
-
-  const port =
-    await getPort({
-      port: Array.from(
-        {
-          length: 200,
-        },
-        (_, i) =>
-          4200 + i,
-      ),
-    });
-
-  const command =
-    buildRuntimeCommand(
-      framework,
-      port,
-    );
-
-  console.log(
-    "[runtime/start]",
-    {
-      projectId,
-      framework,
-      port,
-      projectPath,
-      autoRestart:
-        isAutoRestart,
-      command: [
-        "npm",
-        ...command,
-      ].join(" "),
-    },
-  );
-
-  const {
-    proc,
-    runtime,
-  } =
-    launchRuntimeProcess({
-      projectId,
-      framework,
-      port,
-      projectPath,
-      command,
-      isAutoRestart,
-    });
-
-
-  attachRuntimeLifecycle({
-    proc,
-    runtime,
+  return coordinateRuntimeStartup({
     projectId,
+    isAutoRestart,
     restartProject,
-    removeRuntime,
-    appendRuntimeLog,
-    markRuntimeStatus,
-    isRuntimeManualStop,
-    clearRuntimeManualStop,
-    shouldAutoRestart,
-    recordRestartHistory,
-    autoRestartDelayMs:
-      AUTO_RESTART_DELAY_MS,
-  });
-
-  return finalizeRuntimeStartup({
-    projectId,
-    projectPath,
-    proc,
-    runtime,
   });
 }
