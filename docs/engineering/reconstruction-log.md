@@ -601,3 +601,34 @@ Migrate runtime recovery orchestration to the shared Platform SDK Execution SDK.
 ### Result
 
 Runtime recovery is now a production consumer of the Execution SDK while preserving existing recovery semantics.
+
+---
+
+## Phase 066 — Runtime Shutdown Execution SDK Migration
+
+**Status:** ✅ Complete
+
+### Objective
+
+Migrate runtime shutdown orchestration to the shared Platform SDK Execution SDK.
+
+### Completed
+
+- Added Runtime Shutdown pipeline scaffold.
+- Added ResolveRuntimeStage.
+- Added ValidateShutdownStage.
+- Added TerminateRuntimeStage.
+- Added CleanupRuntimeStage.
+- Replaced stopRuntime orchestration with RuntimeShutdownPipeline.
+- Preserved stopRuntime public API behavior.
+- Preserved shutdown events, process termination, cleanup, and stale runtime handling.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime shutdown is now a production consumer of the Execution SDK. Runtime startup, recovery, and shutdown now share the same orchestration foundation.
