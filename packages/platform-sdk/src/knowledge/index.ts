@@ -3,4 +3,8 @@ export * from "./KnowledgeProcessor.js";
 export * from "./KnowledgeProcessorRegistry.js";
 export * from "./KnowledgePipeline.js";
 export * from "./KnowledgePublisher.js";
+export * from "./KnowledgeEvent.js";
+export * from "./KnowledgeEventBus.js";
+export * from "./KnowledgeSubscriber.js";
+export * from "./KnowledgeSubscriberRegistry.js";
 export * from "./bootstrap.js";
