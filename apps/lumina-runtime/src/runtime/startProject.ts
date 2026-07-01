@@ -17,7 +17,6 @@ import {
   stopRuntime,
   type PublicRuntimeRecord,
 } from "./registry.js";
-import { waitForRuntime } from "./waitForRuntime.js";
 import {
   assertProjectReady,
 } from "./startup/RuntimeStartupValidator.js";
@@ -27,6 +26,9 @@ import {
 import {
   launchRuntimeProcess,
 } from "./startup/RuntimeProcessLauncher.js";
+import {
+  finalizeRuntimeStartup,
+} from "./startup/RuntimeReadiness.js";
 import {
   AUTO_RESTART_DELAY_MS,
   shouldAutoRestart,
@@ -44,7 +46,6 @@ export {
 import {
   recordRuntimeEvent,
 } from "../knowledge/runtime/index.js";
-import { watchWorkspace } from "./workspaceWatcher.js";
 import { runLayoutSafetyEngine } from "./layoutSafetyEngine.js";
 import {
   clearRuntimeManualStop,
@@ -443,104 +444,10 @@ async function startProjectInternal(
     },
   );
 
-  try {
-    await waitForRuntime(
-      runtime.url,
-      START_TIMEOUT_MS,
-    );
-
-    markRuntimeStatus(
-      projectId,
-      "running",
-    );
-
-    recordRuntimeEvent({
-      projectId,
-      type:
-        "runtime_started",
-    });
-
-    const history =
-      getRestartHistory(
-        projectId,
-      );
-
-    if (history) {
-      history.lastRecoveredAt =
-        Date.now();
-    }
-
-    clearRestartState(
-      projectId,
-    );
-
-    // Start watching workspace for file changes
-    watchWorkspace(projectId, projectPath);
-
-    appendRuntimeLog(
-      projectId,
-      `[lumina-runtime] ready ${runtime.url}`,
-    );
-
-    recordRuntimeEvent({
-      projectId,
-      type:
-        "runtime_ready",
-      metadata: {
-        url: runtime.url,
-        port: runtime.port,
-      },
-    });
-
-    return serializeRuntime(
-      runtime,
-    );
-  } catch (error) {
-    runtime.status =
-      "error";
-
-    runtime.exitedAt =
-      Date.now();
-
-    runtime.lastError =
-      error instanceof Error
-        ? error.message
-        : "runtime_start_timeout";
-
-    const history =
-      getRestartHistory(
-        projectId,
-      );
-
-    if (history) {
-      history.lastFailureReason =
-        runtime.lastError;
-    }
-
-    appendRuntimeLog(
-      projectId,
-      `[lumina-runtime] failed ${runtime.lastError}`,
-    );
-
-    releaseRuntimeLock(
-      projectId,
-    );
-
-    try {
-      if (proc.pid) {
-        process.kill(
-          -proc.pid,
-          "SIGTERM",
-        );
-      } else {
-        proc.kill(
-          "SIGTERM",
-        );
-      }
-    } catch {
-      // noop
-    }
-
-    throw error;
-  }
+  return finalizeRuntimeStartup({
+    projectId,
+    projectPath,
+    proc,
+    runtime,
+  });
 }
