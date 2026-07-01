@@ -6,6 +6,10 @@ import {
   listEventJournalEntryRecords,
 } from "./EventJournalQuery.js";
 
+import {
+  getEventJournalProjections,
+} from "./EventJournalProjectionRegistry.js";
+
 export interface EventJournalReplayHandler {
   supports(
     entry: EventJournalEntry,
@@ -17,7 +21,7 @@ export interface EventJournalReplayHandler {
 }
 
 export async function replayEventJournal(
-  handlers: EventJournalReplayHandler[],
+  handlers: EventJournalReplayHandler[] = [],
 ): Promise<void> {
   const entries =
     listEventJournalEntryRecords();
@@ -29,6 +33,17 @@ export async function replayEventJournal(
       }
 
       await handler.handle(entry);
+    }
+
+    const projections =
+      getEventJournalProjections(
+        entry,
+      );
+
+    for (const projection of projections) {
+      await projection.project(
+        entry,
+      );
     }
   }
 }
