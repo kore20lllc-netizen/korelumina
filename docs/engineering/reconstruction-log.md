@@ -277,3 +277,31 @@ Establish canonical ownership boundaries for persistent knowledge, documentation
 ### Result
 
 KoreLumina now has explicit architectural ownership boundaries that will guide all future Platform SDK extraction and runtime refactoring work.
+
+---
+
+## Phase 053 — Milestone Projection
+
+**Status:** ✅ Complete
+
+### Objective
+
+Add the first replay projection that derives milestone records from event journal entries.
+
+### Completed
+
+- Added `MilestoneStore`.
+- Added `MilestoneProjection`.
+- Connected milestone projection exports.
+- Preserved Event Journal as the immutable source.
+- Preserved Milestone as derived engineering knowledge.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+KoreLumina can now project milestone knowledge from the Event Journal replay system.
