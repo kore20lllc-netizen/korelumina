@@ -147,3 +147,32 @@ Extract runtime process lifecycle handling from `startProject.ts`.
 
 ### Next Phase
 Phase 031 — Runtime Coordinator extraction.
+
+---
+
+## Phase 031 — Runtime Coordinator
+
+**Status:** ✅ Complete
+
+### Objective
+Extract the remaining runtime startup orchestration from `startProject.ts`.
+
+### Completed
+- Added `RuntimeCoordinator.ts`.
+- Centralized project preparation.
+- Centralized framework detection.
+- Centralized port allocation.
+- Centralized command construction.
+- Centralized process launch.
+- Centralized lifecycle attachment.
+- Centralized readiness finalization.
+- Reduced `startProject.ts` to a thin orchestration entry point.
+
+### Validation
+- Runtime TypeScript build: ✅
+- Builder production build: ✅
+- Monorepo build: ✅
+
+### Architectural Result
+The runtime startup pipeline is now composed of dedicated modules with `startProject.ts` serving primarily as the public entry point.
+
