@@ -6,3 +6,4 @@ export * from "./contracts/index.js";
 export * from "./project/index.js";
 export * from "./repository/index.js";
 export * from "./decision/index.js";
+export * from "./engineering/index.js";
