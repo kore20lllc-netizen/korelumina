@@ -1,0 +1,14 @@
+{
+  "id": "358de9ba-f625-4b27-8518-388d8f5873ba",
+  "type": "runtime-event",
+  "version": 1,
+  "createdAt": 1782868935041,
+  "updatedAt": 1782868935041,
+  "data": {
+    "id": "358de9ba-f625-4b27-8518-388d8f5873ba",
+    "projectId": "kore20lllc-netizen-premium-ride-app",
+    "type": "runtime_starting",
+    "timestamp": 1782868935041,
+    "metadata": {}
+  }
+}
