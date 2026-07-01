@@ -6,6 +6,10 @@ import {
   StorageProcessor,
 } from "./processors/StorageProcessor.js";
 
+import {
+  DecisionStorageProcessor,
+} from "./processors/DecisionStorageProcessor.js";
+
 let initialized = false;
 
 export function initializeKnowledgePublisher() {
@@ -15,6 +19,10 @@ export function initializeKnowledgePublisher() {
 
   registerKnowledgeProcessor(
     new StorageProcessor(),
+  );
+
+  registerKnowledgeProcessor(
+    new DecisionStorageProcessor(),
   );
 
   initialized = true;
