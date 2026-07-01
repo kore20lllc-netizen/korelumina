@@ -472,3 +472,31 @@ Refactor Event Journal replay to use the shared Platform SDK Execution Pipeline.
 ### Result
 
 Event Journal replay now runs through the shared Execution SDK, aligning replay with Knowledge publication and Engineering completion.
+
+---
+
+## Phase 061 — Runtime Startup Execution Pipeline Scaffold
+
+**Status:** ✅ Complete
+
+### Objective
+
+Introduce the Runtime Startup pipeline boundary using the shared Platform SDK Execution SDK.
+
+### Completed
+
+- Added RuntimeStartupInput.
+- Added RuntimeStartupState.
+- Added RuntimeStartupContext.
+- Added runRuntimeStartupPipeline.
+- Exported startup pipeline primitives.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime startup now has an Execution SDK-compatible pipeline scaffold. Future phases can migrate startup stages incrementally without changing runtime behavior in one large refactor.
