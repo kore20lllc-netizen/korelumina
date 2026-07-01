@@ -235,3 +235,23 @@ Validate the refactored runtime startup architecture against a live project.
 ### Result
 The modular runtime startup pipeline has been verified end-to-end in a live environment. Runtime startup, registration, readiness, metrics, logging, and lifecycle management operate correctly after the architectural refactor.
 
+
+---
+
+## Phase 034 — Platform SDK Knowledge Paths
+
+**Status:** ✅ Complete
+
+### Objective
+Move shared knowledge path resolution into the Platform SDK.
+
+### Completed
+- Added `packages/platform-sdk/src/paths/KnowledgePaths.ts`.
+- Exported knowledge path utilities through the SDK.
+- Replaced runtime implementation with a compatibility wrapper.
+- Preserved all existing runtime imports.
+- Validated Platform SDK, Runtime, and Builder builds.
+
+### Result
+Knowledge directory resolution is now owned by the Platform SDK, reducing shared infrastructure inside the runtime while maintaining backward compatibility.
+
