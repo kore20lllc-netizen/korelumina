@@ -2,6 +2,10 @@ import type {
   ExecutionContext,
 } from "@korelumina/platform-sdk";
 
+import type {
+  EngineeringExecution,
+} from "../execution/index.js";
+
 export interface EngineeringAutomationInput {
   objective: string;
   projectId?: string;
@@ -9,13 +13,7 @@ export interface EngineeringAutomationInput {
 
 export interface EngineeringAutomationState
   extends Record<string, unknown> {
-  initialized?: boolean;
-  validated?: boolean;
-  executed?: boolean;
-  knowledgeCaptured?: boolean;
-  knowledgeProjected?: boolean;
-  governanceVerified?: boolean;
-  finalized?: boolean;
+  execution?: EngineeringExecution;
 }
 
 export type EngineeringAutomationContext =

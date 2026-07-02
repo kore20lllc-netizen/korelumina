@@ -1,6 +1,16 @@
+import { randomUUID } from "node:crypto";
+
 import type {
   ExecutionStage,
 } from "@korelumina/platform-sdk";
+
+import {
+  createExecution,
+} from "../../execution/index.js";
+
+import type {
+  EngineeringExecution,
+} from "../../execution/index.js";
 
 import type {
   EngineeringAutomationInput,
@@ -14,14 +24,33 @@ export const InitializeStage: ExecutionStage<
   name: "initialize",
 
   async run(context) {
-    context.state.initialized = true;
+    const now = Date.now();
+
+    const execution: EngineeringExecution = {
+      executionId: randomUUID(),
+      objective: context.input.objective,
+      projectId: context.input.projectId,
+      status: "created",
+      createdAt: now,
+      updatedAt: now,
+      metadata: {},
+    };
+
+    createExecution(
+      execution,
+    );
+
+    context.state.execution =
+      execution;
 
     return {
       stage: "initialize",
       success: true,
       metadata: {
-        projectId: context.input.projectId,
-        objective: context.input.objective,
+        executionId:
+          execution.executionId,
+        projectId:
+          execution.projectId,
       },
     };
   },
