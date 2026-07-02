@@ -7,6 +7,10 @@ import {
   failExecution,
 } from "../../execution/index.js";
 
+import {
+  executeEngineeringWork,
+} from "../../EngineeringService.js";
+
 import type {
   EngineeringAutomationInput,
   EngineeringAutomationState,
@@ -32,12 +36,12 @@ export const ExecuteStage: ExecutionStage<
       };
     }
 
-    const updated =
+    const started =
       startExecution(
         execution.executionId,
       );
 
-    if (!updated) {
+    if (!started) {
       failExecution(
         execution.executionId,
         "failed_to_start_execution",
@@ -52,6 +56,11 @@ export const ExecuteStage: ExecutionStage<
         },
       };
     }
+
+    const updated =
+      await executeEngineeringWork(
+        started,
+      );
 
     context.state.execution =
       updated;
