@@ -15,22 +15,41 @@ import {
   shutdownAllRuntimeLifecycles,
 } from "../runtime/lifecycle/index.js";
 
+import type {
+  EngineeringExecution,
+} from "./execution/index.js";
+
+export async function executeEngineeringWork(
+  execution: EngineeringExecution,
+): Promise<EngineeringExecution> {
+  return {
+    ...execution,
+    updatedAt: Date.now(),
+  };
+}
+
 export async function completeEngineeringWork(
   input: EngineeringCompletionInput,
 ): Promise<EngineeringCompletionReport> {
-  return completeEngineeringPhase(input);
+  return completeEngineeringPhase(
+    input,
+  );
 }
 
 export async function startEngineeringRuntime(
   projectId: string,
 ) {
-  return startRuntimeLifecycle(projectId);
+  return startRuntimeLifecycle(
+    projectId,
+  );
 }
 
 export async function restartEngineeringRuntime(
   projectId: string,
 ) {
-  return restartRuntimeLifecycle(projectId);
+  return restartRuntimeLifecycle(
+    projectId,
+  );
 }
 
 export async function recoverEngineeringRuntimes() {
@@ -40,7 +59,9 @@ export async function recoverEngineeringRuntimes() {
 export async function shutdownEngineeringRuntime(
   projectId: string,
 ) {
-  return shutdownRuntimeLifecycle(projectId);
+  return shutdownRuntimeLifecycle(
+    projectId,
+  );
 }
 
 export async function shutdownAllEngineeringRuntimes() {
