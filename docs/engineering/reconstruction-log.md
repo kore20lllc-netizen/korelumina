@@ -741,3 +741,24 @@ Audit runtime, engineering, and knowledge service boundaries before adding auton
 ### Result
 
 KoreLumina now has an explicit service-boundary audit checkpoint before building higher-level autonomous engineering workflows.
+
+---
+
+## Master OS Architecture
+
+**Status:** ✅ Complete
+
+### Objective
+
+Define KoreLumina as an Engineering Operating System after Core Reconstruction.
+
+### Completed
+
+- Added `KORELUMINA_MASTER_OS.md`.
+- Defined Platform, Runtime, Knowledge, Governance, Engineering, and Autonomous kernels.
+- Defined layering, execution, knowledge, runtime, and governance rules.
+- Established the Autonomous Engineering Platform roadmap.
+
+### Result
+
+KoreLumina now has a canonical post-reconstruction architecture document for future autonomous engineering work.
