@@ -19,13 +19,16 @@ import type {
   EngineeringExecution,
 } from "./execution/index.js";
 
+import {
+  executeEngineering,
+} from "./EngineeringExecutor.js";
+
 export async function executeEngineeringWork(
   execution: EngineeringExecution,
 ): Promise<EngineeringExecution> {
-  return {
-    ...execution,
-    updatedAt: Date.now(),
-  };
+  return executeEngineering(
+    execution,
+  );
 }
 
 export async function completeEngineeringWork(
