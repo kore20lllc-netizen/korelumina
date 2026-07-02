@@ -1,29 +1,43 @@
 # Autonomous Engineering Roadmap
 
-## Capability A1
+## A1 — Engineering Automation Kernel
 
-Engineering Automation Pipeline
+Status: Complete
 
-## Capability A2
+Provides the execution model, lifecycle, pipeline, orchestration stages, and convergence audit for deterministic engineering automation.
 
-Autonomous Engineering Engine
+## A2 — Engineering Service Integration
 
-## Capability A3
+Status: Next
 
-Continuous Engineering Loop
+Integrate the Engineering Automation Pipeline with real EngineeringService operations.
 
-## Capability A4
+## A3 — Organizational Memory Integration
 
-Engineering Era
+Status: Planned
 
-## Capability A5
+Capture engineering executions into organizational memory and learning systems.
 
-Knowledge Projection
+## A4 — Autonomous Engineering Agent
 
-## Capability A6
+Status: Planned
 
-Organizational Memory Automation
+Introduce an agent that can convert engineering objectives into execution plans.
 
-## Capability A7
+## A5 — Multi-Agent Collaboration
 
-Self-Improvement Engine
+Status: Planned
+
+Coordinate specialized agents across planning, implementation, validation, governance, and documentation.
+
+## A6 — Continuous Learning
+
+Status: Planned
+
+Use execution outcomes to improve future plans, standards, and validation behavior.
+
+## A7 — Self-Improvement Engine
+
+Status: Planned
+
+Generate, validate, and execute platform improvement proposals through governed automation.
