@@ -41,15 +41,7 @@ export async function runEngineeringAutomation(
     {
       id: `engineering:${input.projectId ?? "global"}:${Date.now()}`,
       input,
-      state: {
-        initialized: false,
-        validated: false,
-        executed: false,
-        knowledgeCaptured: false,
-        knowledgeProjected: false,
-        governanceVerified: false,
-        finalized: false,
-      },
+      state: {},
       metadata: {
         projectId: input.projectId,
         objective: input.objective,
