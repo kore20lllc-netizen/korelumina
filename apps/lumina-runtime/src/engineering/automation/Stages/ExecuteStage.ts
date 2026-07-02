@@ -2,6 +2,11 @@ import type {
   ExecutionStage,
 } from "@korelumina/platform-sdk";
 
+import {
+  startExecution,
+  failExecution,
+} from "../../execution/index.js";
+
 import type {
   EngineeringAutomationInput,
   EngineeringAutomationState,
@@ -14,14 +19,51 @@ export const ExecuteStage: ExecutionStage<
   name: "execute",
 
   async run(context) {
-    context.state.executed = true;
+    const execution =
+      context.state.execution;
+
+    if (!execution) {
+      return {
+        stage: "execute",
+        success: false,
+        metadata: {
+          error: "missing_execution",
+        },
+      };
+    }
+
+    const updated =
+      startExecution(
+        execution.executionId,
+      );
+
+    if (!updated) {
+      failExecution(
+        execution.executionId,
+        "failed_to_start_execution",
+      );
+
+      return {
+        stage: "execute",
+        success: false,
+        metadata: {
+          error:
+            "failed_to_start_execution",
+        },
+      };
+    }
+
+    context.state.execution =
+      updated;
 
     return {
       stage: "execute",
       success: true,
       metadata: {
-        projectId: context.input.projectId,
-        objective: context.input.objective,
+        executionId:
+          updated.executionId,
+        status:
+          updated.status,
       },
     };
   },
