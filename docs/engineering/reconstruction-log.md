@@ -632,3 +632,30 @@ Migrate runtime shutdown orchestration to the shared Platform SDK Execution SDK.
 ### Result
 
 Runtime shutdown is now a production consumer of the Execution SDK. Runtime startup, recovery, and shutdown now share the same orchestration foundation.
+
+---
+
+## Phase 067 — Runtime Lifecycle Service
+
+**Status:** ✅ Complete
+
+### Objective
+
+Introduce a high-level Runtime Lifecycle Service that exposes startup, restart, recovery, shutdown, and shutdown-all as a stable runtime domain API.
+
+### Completed
+
+- Added RuntimeLifecycleService.
+- Added lifecycle module exports.
+- Exposed lifecycle functions over the already-migrated Runtime Startup, Recovery, and Shutdown execution flows.
+- Preserved existing runtime behavior.
+
+### Validation
+
+- Platform SDK build: ✅
+- Runtime build: ✅
+- Builder build: ✅
+
+### Result
+
+Runtime lifecycle operations now have a stable service boundary. Higher-level automation can depend on the lifecycle service instead of coupling directly to individual runtime pipelines.
