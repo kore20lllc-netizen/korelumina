@@ -9,18 +9,47 @@ import type {
   EngineeringAutomationState,
 } from "./EngineeringAutomationContext.js";
 
-export async function runEngineeringAutomationPipeline(
+import {
+  InitializeStage,
+  ValidateStage,
+  ExecuteStage,
+  CaptureKnowledgeStage,
+  ProjectKnowledgeStage,
+  GovernStage,
+  ReportStage,
+  FinalizeStage,
+} from "./Stages/index.js";
+
+export async function runEngineeringAutomation(
   input: EngineeringAutomationInput,
-  stages: ExecutionStage<
+): Promise<ExecutionResult> {
+  const stages: ExecutionStage<
     EngineeringAutomationInput,
     EngineeringAutomationState
-  >[],
-): Promise<ExecutionResult> {
+  >[] = [
+    InitializeStage,
+    ValidateStage,
+    ExecuteStage,
+    CaptureKnowledgeStage,
+    ProjectKnowledgeStage,
+    GovernStage,
+    ReportStage,
+    FinalizeStage,
+  ];
+
   return runExecutionPipeline(
     {
-      id: `engineering:${Date.now()}`,
+      id: `engineering:${input.projectId ?? "global"}:${Date.now()}`,
       input,
-      state: {},
+      state: {
+        initialized: false,
+        validated: false,
+        executed: false,
+        knowledgeCaptured: false,
+        knowledgeProjected: false,
+        governanceVerified: false,
+        finalized: false,
+      },
       metadata: {
         projectId: input.projectId,
         objective: input.objective,
