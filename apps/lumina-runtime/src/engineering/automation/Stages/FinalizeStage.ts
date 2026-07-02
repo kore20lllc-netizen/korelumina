@@ -7,6 +7,10 @@ import {
   failExecution,
 } from "../../execution/index.js";
 
+import {
+  completeEngineeringWork,
+} from "../../EngineeringService.js";
+
 import type {
   EngineeringAutomationInput,
   EngineeringAutomationState,
@@ -32,12 +36,12 @@ export const FinalizeStage: ExecutionStage<
       };
     }
 
-    const updated =
+    const completed =
       completeExecution(
         execution.executionId,
       );
 
-    if (!updated) {
+    if (!completed) {
       failExecution(
         execution.executionId,
         "failed_to_complete_execution",
@@ -53,19 +57,37 @@ export const FinalizeStage: ExecutionStage<
       };
     }
 
+    const report =
+      await completeEngineeringWork({
+        phase: 1,
+        title: execution.objective,
+        commit: "pending",
+        validation: [
+          {
+            name: "engineering-execution",
+            passed: true,
+          },
+        ],
+      });
+
+    completed.metadata = {
+      ...completed.metadata,
+      completionReport: report,
+    };
+
     context.state.execution =
-      updated;
+      completed;
 
     return {
       stage: "finalize",
       success: true,
       metadata: {
         executionId:
-          updated.executionId,
+          completed.executionId,
         status:
-          updated.status,
-        completedAt:
-          updated.completedAt,
+          completed.status,
+        reportGenerated:
+          report.completed,
       },
     };
   },
