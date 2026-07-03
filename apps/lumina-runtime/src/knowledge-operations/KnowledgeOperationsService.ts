@@ -3,6 +3,10 @@ import {
 } from "../knowledge-acquisition/index.js";
 
 import type {
+  KnowledgeAcquisitionMetrics,
+} from "../knowledge-acquisition/index.js";
+
+import type {
   KnowledgeOperationsSnapshot,
 } from "./KnowledgeOperationsSnapshot.js";
 
@@ -14,6 +18,32 @@ export interface KnowledgeProviderSummary {
 }
 
 export class KnowledgeOperationsService {
+  async acquireRepository(
+    repositoryId: string,
+    repositoryRoot: string,
+  ) {
+    return repositoryAcquisitionService.acquire(
+      repositoryId,
+      repositoryRoot,
+    );
+  }
+
+  getRepositoryStatus(
+    repositoryId: string,
+  ) {
+    return repositoryAcquisitionService.getStatus(
+      repositoryId,
+    );
+  }
+
+  getRepositoryMetrics(
+    repositoryId: string,
+  ): readonly KnowledgeAcquisitionMetrics[] {
+    return repositoryAcquisitionService.getMetrics(
+      repositoryId,
+    );
+  }
+
   getSnapshot(): KnowledgeOperationsSnapshot {
     const statuses =
       repositoryAcquisitionService.listStatuses();
@@ -22,8 +52,7 @@ export class KnowledgeOperationsService {
       statuses.at(-1);
 
     return {
-      generatedAt:
-        Date.now(),
+      generatedAt: Date.now(),
 
       recovery: {
         status:
@@ -49,9 +78,7 @@ export class KnowledgeOperationsService {
       evidence: {
         total:
           latest?.acquiredEvidence ?? 0,
-
-        byType:
-          {},
+        byType: {},
       },
 
       knowledge: {
@@ -70,22 +97,12 @@ export class KnowledgeOperationsService {
 
       coverage: {
         documentation:
-          latest?.preservedEvidence ? 1 : 0,
-
-        git:
-          0,
-
-        conversations:
-          0,
-
-        runtime:
-          0,
-
-        issues:
-          0,
-
-        pullRequests:
-          0,
+          latest ? 1 : 0,
+        git: 0,
+        conversations: 0,
+        runtime: 0,
+        issues: 0,
+        pullRequests: 0,
       },
     };
   }
@@ -93,56 +110,28 @@ export class KnowledgeOperationsService {
   listProviders(): KnowledgeProviderSummary[] {
     return [
       {
-        id:
-          "repository",
-
-        name:
-          "Repository",
-
-        sourceType:
-          "repository",
-
-        status:
-          "available",
+        id: "repository",
+        name: "Repository",
+        sourceType: "repository",
+        status: "available",
       },
       {
-        id:
-          "conversation",
-
-        name:
-          "Conversation",
-
-        sourceType:
-          "conversation",
-
-        status:
-          "planned",
+        id: "conversation",
+        name: "Conversation",
+        sourceType: "conversation",
+        status: "planned",
       },
       {
-        id:
-          "git",
-
-        name:
-          "Git",
-
-        sourceType:
-          "git",
-
-        status:
-          "planned",
+        id: "git",
+        name: "Git",
+        sourceType: "git",
+        status: "planned",
       },
       {
-        id:
-          "runtime",
-
-        name:
-          "Runtime",
-
-        sourceType:
-          "runtime",
-
-        status:
-          "planned",
+        id: "runtime",
+        name: "Runtime",
+        sourceType: "runtime",
+        status: "planned",
       },
     ];
   }
