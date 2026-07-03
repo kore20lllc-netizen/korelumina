@@ -2,17 +2,16 @@ import type {
   EvidenceItem,
 } from "../evidence/index.js";
 
-import type {
-  KnowledgeIRItem,
-} from "../ir/index.js";
-
 import {
   createKnowledgePreservationPlatform,
 } from "./createKnowledgePreservationPlatform.js";
 
 export interface PlatformSmokeResult {
-  registeredCompilers: string[];
-  compiledItems: KnowledgeIRItem[];
+  compilerCount: number;
+  normalizationCount: number;
+  validationCount: number;
+  publisherCount: number;
+  compilerNames: string[];
 }
 
 export async function runKnowledgePreservationPlatformSmokeTest(
@@ -21,21 +20,33 @@ export async function runKnowledgePreservationPlatformSmokeTest(
   const platform =
     createKnowledgePreservationPlatform();
 
-  const registeredCompilers =
-    platform.compilerRegistry
-      .list()
-      .map(
-        (compiler) =>
-          compiler.name,
-      );
-
-  const compiledItems =
-    await platform.compilerPipeline.compile(
-      evidence,
-    );
+  await platform.preserve(
+    evidence,
+  );
 
   return {
-    registeredCompilers,
-    compiledItems,
+    compilerCount:
+      platform.compilerRegistry
+        .list().length,
+
+    normalizationCount:
+      platform.normalizationRegistry
+        .list().length,
+
+    validationCount:
+      platform.validationRegistry
+        .list().length,
+
+    publisherCount:
+      platform.publisherRegistry
+        .list().length,
+
+    compilerNames:
+      platform.compilerRegistry
+        .list()
+        .map(
+          (compiler) =>
+            compiler.name,
+        ),
   };
 }
