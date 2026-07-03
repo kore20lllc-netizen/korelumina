@@ -4,3 +4,4 @@ export * from "./KnowledgeAcquisitionPipeline.js";
 export * from "./orchestration/index.js";
 export * from "./providers/repository/index.js";
 export * from "./jobs/index.js";
+export * from "./metrics/index.js";
