@@ -22,11 +22,75 @@ export class ADRKnowledgeExtractor
   }
 
   async extract(
-    _title: string,
-    _content: string,
+    title: string,
+    content: string,
   ): Promise<
     KnowledgeIRItem[]
   > {
-    return [];
+    const now =
+      Date.now();
+
+    const summary =
+      content
+        .split(/\r?\n/)
+        .find(
+          (line) =>
+            line.trim().length > 0 &&
+            !line.startsWith("#"),
+        ) ??
+      "Recovered architectural decision.";
+
+    return [
+      {
+        id:
+          `adr:${title}`,
+
+        candidateType:
+          "CandidateDecision",
+
+        title,
+
+        summary:
+          summary.trim(),
+
+        confidence:
+          0.8,
+
+        evidenceRefs:
+          [],
+
+        proposedRelationships:
+          {},
+
+        extractedAt:
+          now,
+
+        compiler: {
+          compilerName:
+            this.name,
+
+          compilerVersion:
+            "1.0.0",
+
+          evidenceSourceType:
+            "ADR",
+
+          extractedAt:
+            now,
+
+          extractionMethod:
+            "adr-extractor",
+
+          confidenceBasis:
+            "document-analysis",
+        },
+
+        status:
+          "extracted",
+
+        metadata:
+          {},
+      },
+    ];
   }
 }
