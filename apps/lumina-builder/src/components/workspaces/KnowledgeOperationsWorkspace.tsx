@@ -4,11 +4,7 @@ import {
 } from "react";
 
 import {
-  Activity,
   ArrowLeft,
-  Brain,
-  Database,
-  FolderGit2,
 } from "lucide-react";
 
 import type {
@@ -24,15 +20,12 @@ import {
 } from "../ui/button";
 
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-
-import {
   getKnowledgeOverview,
 } from "../../services/knowledgeOperationsService";
+
+import {
+  KnowledgeOverviewPanel,
+} from "./knowledge/KnowledgeOverviewPanel";
 
 interface Props {
   setView(
@@ -104,62 +97,9 @@ export default function KnowledgeOperationsWorkspace({
         </Badge>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              <Database className="mr-2 inline h-4 w-4" />
-              Evidence
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {snapshot?.evidence.total ?? 0}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              <Brain className="mr-2 inline h-4 w-4" />
-              Knowledge
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {snapshot?.knowledge.canonicalItems ?? 0}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              <FolderGit2 className="mr-2 inline h-4 w-4" />
-              Repository
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {snapshot?.recovery.status ?? "idle"}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              <Activity className="mr-2 inline h-4 w-4" />
-              Progress
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {Math.round(
-              snapshot?.recovery.progress ?? 0,
-            )}
-            %
-          </CardContent>
-        </Card>
-      </div>
+      <KnowledgeOverviewPanel
+        snapshot={snapshot}
+      />
     </div>
   );
 }
