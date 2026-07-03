@@ -3,8 +3,8 @@ import type {
 } from "../evidence/index.js";
 
 import {
-  KnowledgeCompilerRegistry,
   KnowledgeCompilerPipeline,
+  KnowledgeCompilerRegistry,
 } from "../compiler/index.js";
 
 import {
@@ -22,6 +22,10 @@ import {
   KnowledgePublishingPipeline,
 } from "../publisher/index.js";
 
+import {
+  CanonicalKnowledgeStore,
+} from "../../canonical-knowledge/index.js";
+
 export class KnowledgePreservationPlatform {
   readonly compilerRegistry =
     new KnowledgeCompilerRegistry();
@@ -34,6 +38,9 @@ export class KnowledgePreservationPlatform {
 
   readonly publisherRegistry =
     new KnowledgePublisherRegistry();
+
+  readonly canonicalKnowledgeStore =
+    new CanonicalKnowledgeStore();
 
   readonly compilerPipeline =
     new KnowledgeCompilerPipeline(
@@ -72,6 +79,10 @@ export class KnowledgePreservationPlatform {
       await this.validationPipeline.validate(
         normalized,
       );
+
+    this.canonicalKnowledgeStore.promoteAll(
+      validated,
+    );
 
     await this.publishingPipeline.publish(
       validated,
