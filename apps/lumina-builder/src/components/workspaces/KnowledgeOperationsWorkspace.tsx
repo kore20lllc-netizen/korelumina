@@ -4,12 +4,20 @@ import {
 } from "react";
 
 import {
-  ArrowLeft,
-  Database,
-  Brain,
   Activity,
+  ArrowLeft,
+  Brain,
+  Database,
   FolderGit2,
 } from "lucide-react";
+
+import type {
+  KnowledgeOperationsSnapshot,
+} from "@korelumina/platform-sdk";
+
+import {
+  Badge,
+} from "../ui/badge";
 
 import {
   Button,
@@ -23,16 +31,8 @@ import {
 } from "../ui/card";
 
 import {
-  Badge,
-} from "../ui/badge";
-
-import {
-  runtimeApi,
-} from "../../services/runtimeApi";
-
-import type {
-  KnowledgeOperationsSnapshot,
-} from "@korelumina/platform-sdk";
+  getKnowledgeOverview,
+} from "../../services/knowledgeOperationsService";
 
 interface Props {
   setView(
@@ -40,45 +40,39 @@ interface Props {
   ): void;
 }
 
-export default function KnowledgeOperationsWorkspace(
-  {
-    setView,
-  }: Props,
-) {
+export default function KnowledgeOperationsWorkspace({
+  setView,
+}: Props) {
   const [
     snapshot,
     setSnapshot,
   ] =
-    useState<
-      KnowledgeOperationsSnapshot | null
-    >(null);
+    useState<KnowledgeOperationsSnapshot | null>(
+      null,
+    );
 
-  useEffect(
-    () => {
-      let cancelled =
-        false;
+  useEffect(() => {
+    let cancelled = false;
 
-      async function load() {
-        try {
-          const data =
-            await runtimeApi.getKnowledgeOverview();
+    async function load() {
+      try {
+        const data =
+          await getKnowledgeOverview();
 
-          if (
-            !cancelled
-          ) {
-            setSnapshot(
-              data,
-            );
-          }
-        } catch {
-          // ignore for now
+        if (!cancelled) {
+          setSnapshot(data);
         }
+      } catch {
+        // Ignore until runtime endpoint is available.
       }
+    }
 
-      load();
-    },
-    [],
-  );
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="flex h-full flex-col gap-6 p-6">
@@ -88,9 +82,7 @@ export default function KnowledgeOperationsWorkspace(
             variant="ghost"
             size="icon"
             onClick={() =>
-              setView(
-                "dashboard",
-              )
+              setView("dashboard")
             }
           >
             <ArrowLeft className="h-4 w-4" />
@@ -135,10 +127,7 @@ export default function KnowledgeOperationsWorkspace(
           </CardHeader>
 
           <CardContent>
-            {
-              snapshot?.knowledge
-                .canonicalItems ?? 0
-            }
+            {snapshot?.knowledge.canonicalItems ?? 0}
           </CardContent>
         </Card>
 
@@ -151,10 +140,7 @@ export default function KnowledgeOperationsWorkspace(
           </CardHeader>
 
           <CardContent>
-            {
-              snapshot?.recovery
-                .status ?? "idle"
-            }
+            {snapshot?.recovery.status ?? "idle"}
           </CardContent>
         </Card>
 
@@ -168,8 +154,7 @@ export default function KnowledgeOperationsWorkspace(
 
           <CardContent>
             {Math.round(
-              snapshot?.recovery
-                .progress ?? 0,
+              snapshot?.recovery.progress ?? 0,
             )}
             %
           </CardContent>
