@@ -27,6 +27,10 @@ import {
   KnowledgeOverviewPanel,
 } from "./knowledge/KnowledgeOverviewPanel";
 
+import {
+  AcquisitionActivityPanel,
+} from "./knowledge/AcquisitionActivityPanel";
+
 interface Props {
   setView(
     view: string,
@@ -56,7 +60,7 @@ export default function KnowledgeOperationsWorkspace({
           setSnapshot(data);
         }
       } catch {
-        // Ignore until runtime endpoint is available.
+        // Runtime not available yet.
       }
     }
 
@@ -100,6 +104,12 @@ export default function KnowledgeOperationsWorkspace({
       <KnowledgeOverviewPanel
         snapshot={snapshot}
       />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <AcquisitionActivityPanel
+          snapshot={snapshot}
+        />
+      </div>
     </div>
   );
 }
