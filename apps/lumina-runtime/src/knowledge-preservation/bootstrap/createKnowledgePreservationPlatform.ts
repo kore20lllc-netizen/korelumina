@@ -14,6 +14,10 @@ import {
   ADRCompiler,
 } from "../compiler/adr/index.js";
 
+import {
+  SourceCompiler,
+} from "../compiler/source/index.js";
+
 export function createKnowledgePreservationPlatform() {
   const platform =
     new KnowledgePreservationPlatform();
@@ -28,6 +32,10 @@ export function createKnowledgePreservationPlatform() {
 
   platform.compilerRegistry.register(
     new ADRCompiler(),
+  );
+
+  platform.compilerRegistry.register(
+    new SourceCompiler(),
   );
 
   return platform;
