@@ -10,6 +10,10 @@ import {
   ConversationCompiler,
 } from "../compiler/conversation/index.js";
 
+import {
+  ADRCompiler,
+} from "../compiler/adr/index.js";
+
 export function createKnowledgePreservationPlatform() {
   const platform =
     new KnowledgePreservationPlatform();
@@ -20,6 +24,10 @@ export function createKnowledgePreservationPlatform() {
 
   platform.compilerRegistry.register(
     new ConversationCompiler(),
+  );
+
+  platform.compilerRegistry.register(
+    new ADRCompiler(),
   );
 
   return platform;
