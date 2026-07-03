@@ -6,8 +6,13 @@ import {
   KnowledgePlatform,
 } from "../KnowledgePlatform.js";
 
+import type {
+  AgentContextRequest,
+} from "./AgentContextRequest.js";
+
 export interface KnowledgeContext {
   generatedAt: number;
+  request: AgentContextRequest;
   knowledge: CanonicalKnowledgeItem[];
 }
 
@@ -16,24 +21,30 @@ export class KnowledgeContextBuilder {
     private readonly platform: KnowledgePlatform,
   ) {}
 
-  build(): KnowledgeContext {
-    return {
-      generatedAt:
-        Date.now(),
-      knowledge:
-        this.platform.list(),
-    };
-  }
-
-  buildByQuery(
-    query: string,
+  build(
+    request: AgentContextRequest,
   ): KnowledgeContext {
+    const knowledge =
+      request.query
+        ? this.platform.search(
+            request.query,
+          )
+        : this.platform.list();
+
+    const max =
+      request.maxKnowledgeItems ??
+      knowledge.length;
+
     return {
       generatedAt:
         Date.now(),
+
+      request,
+
       knowledge:
-        this.platform.search(
-          query,
+        knowledge.slice(
+          0,
+          max,
         ),
     };
   }
