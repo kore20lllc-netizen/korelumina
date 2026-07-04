@@ -2,7 +2,7 @@ import { auth } from "@/providers/auth-registry";
 import { getActiveTeamId } from "@/context/ActiveTeamContext";
 import { getCurrentRole } from "@/services/workspaceAccessService";
 
-const RUNTIME_API =
+export const RUNTIME_API =
   import.meta.env.VITE_RUNTIME_API_URL || "http://localhost:4100";
 
 
@@ -118,6 +118,13 @@ export type RuntimeEvent =
       sha256?: string;
       timestamp: number;
     };
+
+
+export function getRuntimeCallerHeaders(
+  extra?: HeadersInit,
+): HeadersInit {
+  return runtimeCallerHeaders(extra);
+}
 
 export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
   const response = await fetch(

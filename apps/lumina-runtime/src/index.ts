@@ -19,9 +19,13 @@ import { registerDraftsRoute } from "./routes/drafts.js";
 import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
+import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 
 import { stopAllRuntimes } from "./runtime/registry.js";
-import { startRuntimeSupervisor, stopRuntimeSupervisor } from "./runtime/supervisor.js";
+import {
+  startRuntimeSupervisor,
+  stopRuntimeSupervisor,
+} from "./runtime/supervisor.js";
 import { recoverPersistedRuntimes } from "./runtime/recovery.js";
 import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
@@ -37,8 +41,7 @@ app.get(
   (_req, res) => {
     return res.json({
       ok: true,
-      service:
-        "lumina-runtime",
+      service: "lumina-runtime",
     });
   },
 );
@@ -47,74 +50,32 @@ registerProjectsRoute(app);
 registerProjectMetadataRoute(app);
 registerImportProjectRoute(app);
 
-registerStartRoute(
-  app,
-);
+registerStartRoute(app);
+registerStatusRoute(app);
+registerStopRoute(app);
+registerRestartRoute(app);
 
-registerStatusRoute(
-  app,
-);
+registerLogsRoute(app);
+registerMetricsRoute(app);
+registerEventsRoute(app);
 
-registerStopRoute(
-  app,
-);
+registerFsRoute(app);
 
-registerRestartRoute(
-  app,
-);
+registerAuditRoute(app);
+registerFixPlanRoute(app);
+registerGenerateFixesRoute(app);
 
-registerLogsRoute(
-  app,
-);
+registerDraftsRoute(app);
+registerRevertDraftRoute(app);
+registerCreateDraftRoute(app);
+registerApplyDraftRoute(app);
 
-registerMetricsRoute(
-  app,
-);
-
-registerEventsRoute(
-  app,
-);
-
-registerFsRoute(
-  app,
-);
-
-registerAuditRoute(
-  app,
-);
-
-registerFixPlanRoute(
-  app,
-);
-
-registerGenerateFixesRoute(
-  app,
-);
-
-registerDraftsRoute(
-  app,
-);
-
-registerRevertDraftRoute(
-  app,
-);
-
-registerCreateDraftRoute(
-  app,
-);
-
-registerApplyDraftRoute(
-  app,
-);
+registerKnowledgeOperationsRoutes(app);
 
 const PORT =
-  Number(
-    process.env
-      .LUMINA_RUNTIME_PORT,
-  ) || 4100;
+  Number(process.env.LUMINA_RUNTIME_PORT) || 4100;
 
-const shouldBootstrap =
-  claimRuntimeBootstrap();
+const shouldBootstrap = claimRuntimeBootstrap();
 
 if (shouldBootstrap) {
   backfillMissingProjectMetadata();
@@ -126,22 +87,15 @@ if (shouldBootstrap) {
   );
 }
 
-const server =
-  app.listen(
-    PORT,
-    () => {
-      console.log(
-        `[lumina-runtime] listening on ${PORT}`,
-      );
-    },
+const server = app.listen(PORT, () => {
+  console.log(
+    `[lumina-runtime] listening on ${PORT}`,
   );
+});
 
-let shuttingDown =
-  false;
+let shuttingDown = false;
 
-async function shutdown(
-  signal: string,
-) {
+async function shutdown(signal: string) {
   if (shuttingDown) {
     return;
   }
@@ -167,40 +121,24 @@ async function shutdown(
   }, 5000).unref();
 }
 
-process.on(
-  "SIGINT",
-  () => {
-    void shutdown(
-      "SIGINT",
-    );
-  },
-);
+process.on("SIGINT", () => {
+  void shutdown("SIGINT");
+});
 
-process.on(
-  "SIGTERM",
-  () => {
-    void shutdown(
-      "SIGTERM",
-    );
-  },
-);
+process.on("SIGTERM", () => {
+  void shutdown("SIGTERM");
+});
 
-process.on(
-  "uncaughtException",
-  (error) => {
-    console.error(
-      "[runtime] uncaughtException",
-      error,
-    );
-  },
-);
+process.on("uncaughtException", (error) => {
+  console.error(
+    "[runtime] uncaughtException",
+    error,
+  );
+});
 
-process.on(
-  "unhandledRejection",
-  (error) => {
-    console.error(
-      "[runtime] unhandledRejection",
-      error,
-    );
-  },
-);
+process.on("unhandledRejection", (error) => {
+  console.error(
+    "[runtime] unhandledRejection",
+    error,
+  );
+});
