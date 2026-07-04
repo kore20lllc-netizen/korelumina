@@ -11,18 +11,14 @@ import {
 
 interface Props {
   snapshot:
-    KnowledgeOperationsSnapshot | null;
+    | KnowledgeOperationsSnapshot
+    | null;
 }
 
 export function KnowledgeOverviewPanel({
   snapshot,
 }: Props) {
   const cards = [
-    {
-      title: "Repositories",
-      value:
-        snapshot?.repositories.total ?? 0,
-    },
     {
       title: "Evidence",
       value:
@@ -31,7 +27,7 @@ export function KnowledgeOverviewPanel({
     {
       title: "Candidate Knowledge",
       value:
-        snapshot?.knowledge.candidates ?? 0,
+        snapshot?.knowledge.candidateItems ?? 0,
     },
     {
       title: "Canonical Knowledge",
@@ -39,14 +35,22 @@ export function KnowledgeOverviewPanel({
         snapshot?.knowledge.canonicalItems ?? 0,
     },
     {
-      title: "Provider Coverage",
+      title: "Promotion Rate",
+      value: `${Math.round(
+        (snapshot?.knowledge.promotionRate ?? 0) *
+          100,
+      )}%`,
+    },
+    {
+      title: "Documentation Coverage",
       value:
-        `${snapshot?.providers.active ?? 0}/${snapshot?.providers.total ?? 0}`,
+        snapshot?.coverage.documentation ?? 0,
     },
     {
       title: "Recovery",
       value:
-        snapshot?.recovery.status ?? "Idle",
+        snapshot?.recovery.status ??
+        "idle",
     },
   ];
 

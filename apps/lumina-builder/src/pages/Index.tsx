@@ -35,6 +35,10 @@ const AdminWorkspace = lazy(() =>
   })),
 );
 
+const KnowledgeOperationsWorkspace = lazy(() =>
+  import("@/components/workspaces/KnowledgeOperationsWorkspace"),
+);
+
 const DesignerWorkspace = lazy(() =>
   import("@/components/workspaces/DesignerWorkspace").then((m) => ({
     default: m.DesignerWorkspace,
@@ -243,7 +247,18 @@ function Router() {
     );
   }
 
-  if (view === "deployment-diagnostics") {
+  
+  if (view === "knowledge-operations") {
+    return (
+      <Suspense fallback={<LoadingView />}>
+        <KnowledgeOperationsWorkspace
+          setView={setView}
+        />
+      </Suspense>
+    );
+  }
+
+if (view === "deployment-diagnostics") {
     return (
       <Shell blobs="ambient">
         <Suspense fallback={<LoadingView />}>

@@ -1,19 +1,18 @@
 import {
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
 import {
-  ArrowLeft,
+  Database,
+  RefreshCw,
+  Settings2,
 } from "lucide-react";
 
 import type {
   KnowledgeOperationsSnapshot,
 } from "@korelumina/platform-sdk";
-
-import {
-  Badge,
-} from "../ui/badge";
 
 import {
   Button,
@@ -22,6 +21,14 @@ import {
 import {
   getKnowledgeOverview,
 } from "../../services/knowledgeOperationsService";
+
+import {
+  GlassWorkspaceHero,
+} from "./shared/GlassWorkspaceHero";
+
+import {
+  WorkspaceTabBar,
+} from "./shared/WorkspaceTabBar";
 
 import {
   KnowledgeOverviewPanel,
@@ -37,6 +44,37 @@ interface Props {
   ): void;
 }
 
+const TABS = [
+  {
+    id: "overview",
+    label: "Overview",
+  },
+  {
+    id: "repositories",
+    label: "Repositories",
+  },
+  {
+    id: "acquisition",
+    label: "Acquisition",
+  },
+  {
+    id: "graph",
+    label: "Knowledge Graph",
+  },
+  {
+    id: "coverage",
+    label: "Coverage",
+  },
+  {
+    id: "providers",
+    label: "Providers",
+  },
+  {
+    id: "activity",
+    label: "Activity",
+  },
+] as const;
+
 export default function KnowledgeOperationsWorkspace({
   setView,
 }: Props) {
@@ -48,58 +86,72 @@ export default function KnowledgeOperationsWorkspace({
       null,
     );
 
-  useEffect(() => {
-    let cancelled = false;
+  const [
+    activeTab,
+    setActiveTab,
+  ] =
+    useState("overview");
 
-    async function load() {
-      try {
-        const data =
-          await getKnowledgeOverview();
-
-        if (!cancelled) {
-          setSnapshot(data);
-        }
-      } catch {
-        // Runtime not available yet.
-      }
+  async function refresh() {
+    try {
+      setSnapshot(
+        await getKnowledgeOverview(),
+      );
+    } catch {
+      // Runtime unavailable.
     }
+  }
 
-    load();
-
-    return () => {
-      cancelled = true;
-    };
+  useEffect(() => {
+    void refresh();
   }, []);
+
+  const badge =
+    useMemo(
+      () => "Phase II",
+      [],
+    );
 
   return (
     <div className="flex h-full flex-col gap-6 p-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() =>
-              setView("dashboard")
-            }
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
+      <GlassWorkspaceHero
+        eyebrow="Master OS"
+        title="Knowledge Operations"
+        subtitle="Repository Intelligence • Knowledge Graph • Organizational Memory"
+        badge={badge}
+        onBack={() =>
+          setView("dashboard")
+        }
+        actions={
+          <>
+            <Button
+              variant="outline"
+              onClick={() =>
+                void refresh()
+              }
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Refresh
+            </Button>
 
-          <div>
-            <h1 className="text-2xl font-semibold">
-              Knowledge Operations
-            </h1>
+            <Button variant="outline">
+              <Database className="mr-2 h-4 w-4" />
+              Providers
+            </Button>
 
-            <p className="text-muted-foreground">
-              Engineering Intelligence Platform
-            </p>
-          </div>
-        </div>
+            <Button variant="default">
+              <Settings2 className="mr-2 h-4 w-4" />
+              Settings
+            </Button>
+          </>
+        }
+      />
 
-        <Badge>
-          Phase II
-        </Badge>
-      </div>
+      <WorkspaceTabBar
+        tabs={TABS}
+        active={activeTab}
+        onChange={setActiveTab}
+      />
 
       <KnowledgeOverviewPanel
         snapshot={snapshot}

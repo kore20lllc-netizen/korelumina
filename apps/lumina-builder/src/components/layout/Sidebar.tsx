@@ -1,6 +1,7 @@
 import {
   LayoutGrid, Sparkles, Palette, Code2, FolderGit2, Settings, X,
-  Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity, ShieldCheck, Gauge, Crown, ChevronDown, LogOut, User as UserIcon,
+  Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity,
+  BookOpen, ShieldCheck, Gauge, Crown, ChevronDown, LogOut, User as UserIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -75,6 +76,11 @@ export function Sidebar() {
             icon: Gauge,
             label: "Deployment Diagnostics",
             active: view === "deployment-diagnostics",
+          },
+          {
+            icon: BookOpen,
+            label: "Knowledge Operations",
+            active: view === "knowledge-operations",
           },
           { icon: Crown, label: "Admin", active: view === "admin" },
         ]
@@ -207,6 +213,10 @@ export function Sidebar() {
                     item.label === "Deployment Diagnostics"
                   ) {
                     setView("deployment-diagnostics");
+                  } else if (
+                    item.label === "Knowledge Operations"
+                  ) {
+                    setView("knowledge-operations");
                   } else if (item.label === "Admin") {
                     setView("admin");
                   } else {

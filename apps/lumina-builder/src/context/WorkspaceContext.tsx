@@ -47,6 +47,7 @@ export type View =
   | "repo-audit"
   | "inhouse-dev"
   | "deployment-diagnostics"
+  | "knowledge-operations"
   | "admin";
 
 export interface UsageSnapshot {
