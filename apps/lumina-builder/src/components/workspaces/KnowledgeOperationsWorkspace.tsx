@@ -1,6 +1,5 @@
 import {
   useEffect,
-  useMemo,
   useState,
 } from "react";
 
@@ -30,10 +29,18 @@ import {
   LuminaButton,
 } from "@/components/lumina/LuminaButton";
 
-
 import {
   getKnowledgeOverview,
 } from "@/services/knowledgeOperationsService";
+
+import {
+  KnowledgeActivityFeed,
+  KnowledgeCoveragePanel,
+  KnowledgeExecutiveSummary,
+  KnowledgeHealthOverview,
+  KnowledgePipelineOverview,
+  KnowledgeSystemStatus,
+} from "./knowledge/overview";
 
 interface Props {
   setView(view: string): void;
@@ -57,75 +64,17 @@ const TABS: Array<{
   description: string;
   icon: typeof Database;
 }> = [
-  {
-    value: "overview",
-    label: "Overview",
-    description: "Engineering intelligence health",
-    icon: Activity,
-  },
-  {
-    value: "acquisition",
-    label: "Acquisition",
-    description: "Source ingestion and evidence flow",
-    icon: Database,
-  },
-  {
-    value: "evidence",
-    label: "Evidence",
-    description: "Immutable source records",
-    icon: Search,
-  },
-  {
-    value: "ir",
-    label: "Knowledge IR",
-    description: "Candidate knowledge review",
-    icon: Workflow,
-  },
-  {
-    value: "canonical",
-    label: "Canonical",
-    description: "Promoted institutional memory",
-    icon: Sparkles,
-  },
-  {
-    value: "graph",
-    label: "Graph",
-    description: "Relationships and lineage",
-    icon: Network,
-  },
-  {
-    value: "learning",
-    label: "Learning",
-    description: "Patterns and insight generation",
-    icon: Brain,
-  },
-  {
-    value: "reasoning",
-    label: "Reasoning",
-    description: "Findings and recommendations",
-    icon: GitBranch,
-  },
-  {
-    value: "automation",
-    label: "Automation",
-    description: "Improvement and recovery loops",
-    icon: ShieldCheck,
-  },
-  {
-    value: "settings",
-    label: "Settings",
-    description: "Policies, scopes, and providers",
-    icon: Settings2,
-  },
+  { value: "overview", label: "Overview", description: "Engineering intelligence health", icon: Activity },
+  { value: "acquisition", label: "Acquisition", description: "Source ingestion and evidence flow", icon: Database },
+  { value: "evidence", label: "Evidence", description: "Immutable source records", icon: Search },
+  { value: "ir", label: "Knowledge IR", description: "Candidate knowledge review", icon: Workflow },
+  { value: "canonical", label: "Canonical", description: "Promoted institutional memory", icon: Sparkles },
+  { value: "graph", label: "Graph", description: "Relationships and lineage", icon: Network },
+  { value: "learning", label: "Learning", description: "Patterns and insight generation", icon: Brain },
+  { value: "reasoning", label: "Reasoning", description: "Findings and recommendations", icon: GitBranch },
+  { value: "automation", label: "Automation", description: "Improvement and recovery loops", icon: ShieldCheck },
+  { value: "settings", label: "Settings", description: "Policies, scopes, and providers", icon: Settings2 },
 ];
-
-function num(value: number | undefined) {
-  return (value ?? 0).toLocaleString();
-}
-
-function pct(value: number | undefined) {
-  return `${Math.round((value ?? 0) * 100)}%`;
-}
 
 function fallback(value: string | number | undefined) {
   return value ?? "—";
@@ -134,15 +83,11 @@ function fallback(value: string | number | undefined) {
 export default function KnowledgeOperationsWorkspace({
   setView,
 }: Props) {
-  const [
-    snapshot,
-    setSnapshot,
-  ] = useState<KnowledgeOperationsSnapshot | null>(null);
+  const [snapshot, setSnapshot] =
+    useState<KnowledgeOperationsSnapshot | null>(null);
 
-  const [
-    activeTab,
-    setActiveTab,
-  ] = useState<KnowledgeTab>("overview");
+  const [activeTab, setActiveTab] =
+    useState<KnowledgeTab>("overview");
 
   async function refresh() {
     try {
@@ -157,40 +102,6 @@ export default function KnowledgeOperationsWorkspace({
   }, []);
 
   const acquisition = snapshot?.acquisition;
-
-  const metrics = useMemo(
-    () => [
-      {
-        label: "Evidence",
-        value: num(snapshot?.evidence.total),
-        hint: "Immutable source records",
-        icon: Database,
-        accent: "violet" as const,
-      },
-      {
-        label: "Candidate IR",
-        value: num(snapshot?.knowledge.candidateItems),
-        hint: "Compiled knowledge candidates",
-        icon: Workflow,
-        accent: "cyan" as const,
-      },
-      {
-        label: "Canonical",
-        value: num(snapshot?.knowledge.canonicalItems),
-        hint: "Promoted platform knowledge",
-        icon: Sparkles,
-        accent: "gold" as const,
-      },
-      {
-        label: "Promotion",
-        value: pct(snapshot?.knowledge.promotionRate),
-        hint: "Candidate to canonical ratio",
-        icon: Activity,
-        accent: "magenta" as const,
-      },
-    ],
-    [snapshot],
-  );
 
   return (
     <div className="flex-1 overflow-y-auto">
@@ -240,59 +151,18 @@ export default function KnowledgeOperationsWorkspace({
                 Refresh
               </LuminaButton>
 
-              <LuminaButton
-                variant="glow"
-                size="sm"
-              >
+              <LuminaButton variant="glow" size="sm">
                 <Database className="h-3.5 w-3.5" />
                 Providers
               </LuminaButton>
 
-              <LuminaButton
-                variant="primary"
-                size="sm"
-              >
+              <LuminaButton variant="primary" size="sm">
                 <Settings2 className="h-3.5 w-3.5" />
                 Settings
               </LuminaButton>
             </div>
           </div>
         </GlowCard>
-
-
-
-        <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {metrics.map((metric) => {
-            const Icon = metric.icon;
-
-            return (
-              <GlowCard
-                key={metric.label}
-                accent={metric.accent}
-                className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-5 backdrop-blur-xl"
-                interactive
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    <div className="text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                      {metric.label}
-                    </div>
-                    <div className="mt-2 font-display text-3xl font-semibold tracking-tight tabular-nums">
-                      {metric.value}
-                    </div>
-                    <div className="mt-2 truncate text-[11px] text-muted-foreground">
-                      {metric.hint}
-                    </div>
-                  </div>
-
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl">
-                    <Icon className="h-5 w-5 text-muted-foreground" />
-                  </div>
-                </div>
-              </GlowCard>
-            );
-          })}
-        </section>
 
         <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
           <GlowCard className="glass-runtime p-0">
@@ -398,7 +268,7 @@ export default function KnowledgeOperationsWorkspace({
 function sectionTitle(tab: KnowledgeTab) {
   switch (tab) {
     case "overview":
-      return "Platform knowledge health";
+      return "Executive knowledge overview";
     case "acquisition":
       return "Evidence acquisition pipeline";
     case "evidence":
@@ -431,13 +301,17 @@ function KnowledgeSection({
 
   if (tab === "overview") {
     return (
-      <div className="grid gap-4 lg:grid-cols-2">
-        <PipelineCard />
-        <SystemCard
-          icon={Brain}
-          title="Chief Agent Readiness"
-          description="Every evidence item, engineering decision, implementation session, and important conversation must be preserved before it can improve Chief Agent maturity."
-        />
+      <div className="space-y-5">
+        <KnowledgeExecutiveSummary />
+        <KnowledgeHealthOverview snapshot={snapshot} />
+        <KnowledgePipelineOverview />
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          <KnowledgeCoveragePanel />
+          <KnowledgeActivityFeed />
+        </div>
+
+        <KnowledgeSystemStatus />
       </div>
     );
   }
@@ -445,7 +319,7 @@ function KnowledgeSection({
   if (tab === "acquisition") {
     return (
       <div className="space-y-4">
-        <PipelineCard />
+        <KnowledgePipelineOverview />
         <SystemCard
           icon={GitBranch}
           title={String(fallback(acquisition?.repository))}
@@ -478,45 +352,6 @@ function KnowledgeSection({
       title={sectionTitle(tab)}
       description="Premium UI shell is ready. Backend wiring will follow stable frontend contracts without changing the workspace experience."
     />
-  );
-}
-
-function PipelineCard() {
-  const steps = [
-    "Source",
-    "Evidence",
-    "Compiler",
-    "Knowledge IR",
-    "Validation",
-    "Canonical",
-    "Learning",
-    "Reasoning",
-    "Memory",
-    "Chief Agent",
-  ];
-
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5">
-      <div className="mb-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-        Canonical Pipeline
-      </div>
-
-      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
-        {steps.map((step, index) => (
-          <div
-            key={step}
-            className="rounded-2xl border border-white/8 bg-white/[0.035] px-3 py-3"
-          >
-            <div className="text-[10px] tabular-nums text-muted-foreground">
-              {String(index + 1).padStart(2, "0")}
-            </div>
-            <div className="mt-1 text-[12px] font-semibold tracking-tight">
-              {step}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
