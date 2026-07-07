@@ -26,6 +26,10 @@ import {
 } from "@/components/lumina/GlowCard";
 
 import {
+  LuminaBackground,
+} from "@/components/lumina/background";
+
+import {
   LuminaButton,
 } from "@/components/lumina/LuminaButton";
 
@@ -104,7 +108,8 @@ export default function KnowledgeOperationsWorkspace({
   const acquisition = snapshot?.acquisition;
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <LuminaBackground>
+      <div className="flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-7 px-4 py-8 md:px-10 md:py-12">
         <GlowCard className="relative overflow-hidden p-7">
           <span
@@ -262,6 +267,7 @@ export default function KnowledgeOperationsWorkspace({
         </section>
       </div>
     </div>
+    </LuminaBackground>
   );
 }
 
