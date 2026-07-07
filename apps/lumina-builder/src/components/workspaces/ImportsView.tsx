@@ -1176,7 +1176,6 @@ export function ImportsView() {
           );
         })()}
       </div>
-
       <Dialog open={!!renameTarget} onOpenChange={(o) => { if (!o) setRenameTarget(null); }}>
         <DialogContent className="glass-strong border-border max-w-sm">
           <DialogHeader>
@@ -1195,7 +1194,6 @@ export function ImportsView() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
       <Dialog open={!!editTarget} onOpenChange={(o) => { if (!o) setEditTarget(null); }}>
         <DialogContent className="glass-strong border-border max-w-md">
           <DialogHeader>
@@ -1267,7 +1265,6 @@ export function ImportsView() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
       <AlertDialog open={!!removeTarget} onOpenChange={(o) => { if (!o) setRemoveTarget(null); }}>
         <AlertDialogContent className="glass-strong border-border">
           <AlertDialogHeader>

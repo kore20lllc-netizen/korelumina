@@ -1,15 +1,7 @@
 import { isAuthenticated } from "@/lib/auth";
 
 export type AppView =
-  | "landing"
-  | "entry"
-  | "dashboard"
-  | "workspace"
-  | "auth"
-  | "settings"
-  | "pricing"
-  | "templates"
-  | "repo-audit";
+  "landing" | "entry" | "dashboard" | "workspace" | "auth" | "settings" | "pricing" | "templates" | "repo-audit" | "deployment-diagnostics" | "runtime-operations" | "knowledge-operations" | "admin";
 
 export type NavEvent =
   | { type: "view"; view: AppView }

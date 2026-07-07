@@ -70,6 +70,14 @@ const RuntimeDiagnosticsWorkspace = lazy(() =>
   })),
 );
 
+const RuntimeOperationsWorkspace = lazy(() =>
+  import(
+    "@/components/workspaces/runtime/RuntimeOperationsWorkspace"
+  ).then((m) => ({
+    default: m.RuntimeOperationsWorkspace,
+  })),
+);
+
 
 const LoadingView = () => (
   <div className="p-6 text-sm text-muted-foreground">Loading...</div>
@@ -268,6 +276,17 @@ if (view === "deployment-diagnostics") {
     );
   }
 
+
+
+  if (view === "runtime-operations") {
+    return (
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <RuntimeOperationsWorkspace />
+        </Suspense>
+      </Shell>
+    );
+  }
 
   if (view === "admin") {
     return (

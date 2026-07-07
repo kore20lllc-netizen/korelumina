@@ -5,7 +5,7 @@ import type {
 import {
   getRuntimeCallerHeaders,
   RUNTIME_API,
-} from "./runtimeService";
+} from "@/services/runtime/client";
 
 export async function getKnowledgeOverview():
 Promise<KnowledgeOperationsSnapshot> {

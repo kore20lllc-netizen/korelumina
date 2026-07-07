@@ -1,3 +1,4 @@
+import { isRuntimeManuallyStopped } from "@/services/runtime/manualStop";
 import {
   useEffect,
   useRef,
@@ -9,13 +10,7 @@ import {
   type RuntimeEvent,
 } from "@/services/runtimeService";
 
-import {
-  getActiveRuntime,
-  getRuntimeStatus,
-  isRuntimeManuallyStopped,
-  startRuntime,
-  type RuntimeSession,
-} from "@/services/runtimeService";
+import { getActiveRuntime, getRuntimeStatus, startRuntime, type RuntimeSession } from "@/services/runtimeService";
 
 export type RuntimeBootPhase =
   | "idle"

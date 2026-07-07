@@ -1,0 +1,11 @@
+{
+  "name": "@korelumina/codemods",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "jscodeshift": "^17.3.0"
+  },
+  "scripts": {
+    "run": "jscodeshift"
+  }
+}

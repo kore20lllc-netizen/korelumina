@@ -1,3 +1,4 @@
+import { isRuntimeManuallyStopped } from "@/services/runtime/manualStop";
 import {
   ExternalLink,
   Play,
@@ -13,7 +14,6 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import {
   getRuntimeStatus,
-  isRuntimeManuallyStopped,
   restartRuntime,
   startRuntime,
   stopRuntime,

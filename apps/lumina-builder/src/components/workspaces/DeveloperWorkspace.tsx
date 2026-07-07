@@ -500,7 +500,6 @@ export function DeveloperWorkspace() {
           {active && <span className="truncate max-w-[360px]">{active}</span>}
         </div>
       </div>
-
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-3">
         {/* File tree */}
         <aside className="w-full lg:w-60 shrink-0 glass-panel p-3 max-h-[30vh] lg:max-h-none overflow-y-auto">
@@ -704,7 +703,6 @@ export function DeveloperWorkspace() {
           />
         </div>
       </div>
-
       {/* AI Assist (Dev) */}
       <DevAIAssistTrigger open={aiOpen} onClick={() => setAiOpen(true)} />
       <DevAIAssistPanel
