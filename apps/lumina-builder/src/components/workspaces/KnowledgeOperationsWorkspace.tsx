@@ -26,6 +26,10 @@ import {
 } from "@/components/lumina/GlowCard";
 
 import {
+  LuminaSurface,
+} from "@/components/lumina/surface";
+
+import {
   LuminaBackground,
 } from "@/components/lumina/background";
 
@@ -169,6 +173,7 @@ export default function KnowledgeOperationsWorkspace({
           </div>
         </GlowCard>
 
+        <LuminaSurface variant="panel">
         <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
           <GlowCard className="glass-runtime p-0">
             <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
@@ -265,6 +270,7 @@ export default function KnowledgeOperationsWorkspace({
             </div>
           </GlowCard>
         </section>
+      </LuminaSurface>
       </div>
     </div>
     </LuminaBackground>
