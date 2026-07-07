@@ -175,8 +175,11 @@ export default function KnowledgeOperationsWorkspace({
 
         <LuminaSurface variant="panel">
         <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
-          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
-            <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
+          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
+            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
+            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
               <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Knowledge OS
               </div>
@@ -227,8 +230,11 @@ export default function KnowledgeOperationsWorkspace({
             </nav>
           </GlowCard>
 
-          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
-            <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
+          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
+            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
+            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
@@ -250,8 +256,11 @@ export default function KnowledgeOperationsWorkspace({
             </div>
           </GlowCard>
 
-          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
-            <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
+          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
+            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
+            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
               <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Inspector
               </div>
