@@ -13,6 +13,7 @@ import {
   RefreshCw,
   Search,
   Settings2,
+  ShieldCheck,
   Sparkles,
   Workflow,
 } from "lucide-react";
@@ -29,9 +30,6 @@ import {
   LuminaButton,
 } from "@/components/lumina/LuminaButton";
 
-import {
-  LuminaSegmentedControl,
-} from "@/components/lumina/LuminaSegmentedControl";
 
 import {
   getKnowledgeOverview,
@@ -56,17 +54,69 @@ type KnowledgeTab =
 const TABS: Array<{
   value: KnowledgeTab;
   label: string;
+  description: string;
+  icon: typeof Database;
 }> = [
-  { value: "overview", label: "Overview" },
-  { value: "acquisition", label: "Acquisition" },
-  { value: "evidence", label: "Evidence" },
-  { value: "ir", label: "IR" },
-  { value: "canonical", label: "Canonical" },
-  { value: "graph", label: "Graph" },
-  { value: "learning", label: "Learning" },
-  { value: "reasoning", label: "Reasoning" },
-  { value: "automation", label: "Automation" },
-  { value: "settings", label: "Settings" },
+  {
+    value: "overview",
+    label: "Overview",
+    description: "Engineering intelligence health",
+    icon: Activity,
+  },
+  {
+    value: "acquisition",
+    label: "Acquisition",
+    description: "Source ingestion and evidence flow",
+    icon: Database,
+  },
+  {
+    value: "evidence",
+    label: "Evidence",
+    description: "Immutable source records",
+    icon: Search,
+  },
+  {
+    value: "ir",
+    label: "Knowledge IR",
+    description: "Candidate knowledge review",
+    icon: Workflow,
+  },
+  {
+    value: "canonical",
+    label: "Canonical",
+    description: "Promoted institutional memory",
+    icon: Sparkles,
+  },
+  {
+    value: "graph",
+    label: "Graph",
+    description: "Relationships and lineage",
+    icon: Network,
+  },
+  {
+    value: "learning",
+    label: "Learning",
+    description: "Patterns and insight generation",
+    icon: Brain,
+  },
+  {
+    value: "reasoning",
+    label: "Reasoning",
+    description: "Findings and recommendations",
+    icon: GitBranch,
+  },
+  {
+    value: "automation",
+    label: "Automation",
+    description: "Improvement and recovery loops",
+    icon: ShieldCheck,
+  },
+  {
+    value: "settings",
+    label: "Settings",
+    description: "Policies, scopes, and providers",
+    icon: Settings2,
+  },
 ];
 
 function num(value: number | undefined) {
@@ -209,24 +259,7 @@ export default function KnowledgeOperationsWorkspace({
           </div>
         </GlowCard>
 
-        <div className="overflow-x-auto pb-1">
-          <LuminaSegmentedControl
-            aria-label="Knowledge operations sections"
-            value={activeTab}
-            onValueChange={setActiveTab}
-            options={TABS.map((tab) => ({
-              ...tab,
-              dotClassName:
-                tab.value === "overview"
-                  ? "bg-violet text-violet"
-                  : tab.value === "acquisition"
-                    ? "bg-cyan text-cyan"
-                    : tab.value === "graph"
-                      ? "bg-gold text-gold"
-                      : "bg-white/60 text-white/60",
-            }))}
-          />
-        </div>
+
 
         <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {metrics.map((metric) => {
@@ -261,7 +294,59 @@ export default function KnowledgeOperationsWorkspace({
           })}
         </section>
 
-        <section className="grid min-h-[560px] grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,420px)]">
+        <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
+          <GlowCard className="glass-runtime p-0">
+            <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                Knowledge OS
+              </div>
+              <h2 className="mt-1 font-display text-xl font-semibold tracking-tight">
+                Intelligence Layers
+              </h2>
+            </div>
+
+            <nav aria-label="Knowledge operations navigation" className="space-y-2 p-3">
+              {TABS.map((tab) => {
+                const Icon = tab.icon;
+                const active = activeTab === tab.value;
+
+                return (
+                  <button
+                    key={tab.value}
+                    type="button"
+                    onClick={() => setActiveTab(tab.value)}
+                    className={[
+                      "group flex w-full items-start gap-3 rounded-2xl border px-3 py-3 text-left transition-all duration-200",
+                      active
+                        ? "border-violet/35 bg-violet/15 shadow-[0_14px_36px_-20px_hsl(var(--violet)/.80)]"
+                        : "border-white/8 bg-white/[0.025] hover:border-white/16 hover:bg-white/[0.05]",
+                    ].join(" ")}
+                  >
+                    <span
+                      className={[
+                        "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-200",
+                        active
+                          ? "border-violet/35 bg-violet/20 text-white"
+                          : "border-white/8 bg-white/[0.035] text-muted-foreground group-hover:text-white",
+                      ].join(" ")}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block text-[13px] font-semibold tracking-tight">
+                        {tab.label}
+                      </span>
+                      <span className="mt-0.5 block text-[11px] leading-4 text-muted-foreground">
+                        {tab.description}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </nav>
+          </GlowCard>
+
           <GlowCard className="glass-runtime p-0">
             <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
               <div className="flex items-center justify-between gap-4">
