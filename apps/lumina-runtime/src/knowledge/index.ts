@@ -28,3 +28,4 @@ export * from "./reasoning/index.js";
 export * from "./repository/index.js";
 export * from "./retrieval/index.js";
 export * from "./runtime/index.js";
+export * from "./ir/index.js";
