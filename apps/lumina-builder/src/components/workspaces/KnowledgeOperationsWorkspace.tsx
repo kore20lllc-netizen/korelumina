@@ -175,7 +175,7 @@ export default function KnowledgeOperationsWorkspace({
 
         <LuminaSurface variant="panel">
         <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
-          <GlowCard className="glass-runtime p-0">
+          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
             <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
               <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Knowledge OS
@@ -227,7 +227,7 @@ export default function KnowledgeOperationsWorkspace({
             </nav>
           </GlowCard>
 
-          <GlowCard className="glass-runtime p-0">
+          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
             <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
               <div className="flex items-center justify-between gap-4">
                 <div>
@@ -250,7 +250,7 @@ export default function KnowledgeOperationsWorkspace({
             </div>
           </GlowCard>
 
-          <GlowCard className="glass-runtime p-0">
+          <GlowCard className="glass-runtime group relative overflow-hidden p-0 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(0,0,0,.55)]">
             <div className="border-b border-white/8 bg-white/[0.025] px-5 py-4">
               <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Inspector
