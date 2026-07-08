@@ -50,6 +50,19 @@ import {
   KnowledgeSystemStatus,
 } from "./knowledge/overview";
 
+
+
+import {
+  KnowledgeGraphPanel,
+} from "./knowledge/graph";
+
+import {
+  KnowledgeAcquisitionPanel,
+} from "./knowledge/acquisition";
+
+import {
+  KnowledgeReasoningPanel,
+} from "./knowledge/reasoning";
 interface Props {
   setView(view: string): void;
 }
@@ -174,110 +187,70 @@ export default function KnowledgeOperationsWorkspace({
         </GlowCard>
 
         <LuminaSurface variant="panel">
-        <section className="grid min-h-[620px] grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_minmax(360px,420px)]">
-          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
-            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
-            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
-            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                Knowledge OS
-              </div>
-              <h2 className="mt-1 font-display text-xl font-semibold tracking-tight">
-                Intelligence Layers
-              </h2>
+        <section className="grid gap-6">
+
+          <div className="grid grid-cols-12 gap-6">
+
+            <div className="col-span-12 xl:col-span-3 flex flex-col gap-6">
+
+              <KnowledgeExecutiveSummary
+                snapshot={snapshot}
+              />
+
+              <KnowledgeCoveragePanel
+                snapshot={snapshot}
+              />
+
             </div>
 
-            <nav aria-label="Knowledge operations navigation" className="space-y-2 p-3">
-              {TABS.map((tab) => {
-                const Icon = tab.icon;
-                const active = activeTab === tab.value;
+            <div className="col-span-12 xl:col-span-6">
 
-                return (
-                  <button
-                    key={tab.value}
-                    type="button"
-                    onClick={() => setActiveTab(tab.value)}
-                    className={[
-                      "group flex w-full items-start gap-3 rounded-2xl border px-3 py-3 text-left transition-all duration-200",
-                      active
-                        ? "border-violet/35 bg-violet/15 shadow-[0_14px_36px_-20px_hsl(var(--violet)/.80)]"
-                        : "border-white/8 bg-white/[0.025] hover:border-white/16 hover:bg-white/[0.05]",
-                    ].join(" ")}
-                  >
-                    <span
-                      className={[
-                        "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-200",
-                        active
-                          ? "border-violet/35 bg-violet/20 text-white"
-                          : "border-white/8 bg-white/[0.035] text-muted-foreground group-hover:text-white",
-                      ].join(" ")}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </span>
+              <GlowCard className="glass-runtime h-full min-h-[720px] rounded-[32px] overflow-hidden">
+                <KnowledgeGraphPanel
+                  snapshot={snapshot}
+                />
+              </GlowCard>
 
-                    <span className="min-w-0">
-                      <span className="block text-[13px] font-semibold tracking-tight">
-                        {tab.label}
-                      </span>
-                      <span className="mt-0.5 block text-[11px] leading-4 text-muted-foreground">
-                        {tab.description}
-                      </span>
-                    </span>
-                  </button>
-                );
-              })}
-            </nav>
-          </GlowCard>
-
-          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
-            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
-            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
-            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    {activeTab}
-                  </div>
-                  <h2 className="mt-1 font-display text-2xl font-semibold tracking-tight">
-                    {sectionTitle(activeTab)}
-                  </h2>
-                </div>
-
-                <LuminaButton variant="ghost" size="icon" aria-label="Search knowledge">
-                  <Search className="h-4 w-4" />
-                </LuminaButton>
-              </div>
             </div>
 
-            <div className="p-5">
-              <KnowledgeSection tab={activeTab} snapshot={snapshot} />
-            </div>
-          </GlowCard>
+            <div className="col-span-12 xl:col-span-3 flex flex-col gap-6">
 
-          <GlowCard className="glass-runtime group relative overflow-hidden rounded-3xl border border-violet/15 bg-[linear-gradient(180deg,rgba(30,35,52,.92),rgba(15,18,28,.95))] p-0 transition-all duration-500 hover:-translate-y-1 hover:border-violet/35 hover:shadow-[0_35px_90px_-28px_rgba(124,92,255,.38)]">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/60 to-transparent" />
-            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet/15 blur-3xl" />
-            <div className="pointer-events-none absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-cyan/10 blur-3xl" />
-            <div className="relative border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))] px-5 py-4">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                Inspector
-              </div>
-              <h2 className="mt-1 font-display text-2xl font-semibold tracking-tight">
-                Acquisition State
-              </h2>
+              <KnowledgeActivityFeed
+                snapshot={snapshot}
+              />
+
+              <KnowledgeHealthOverview
+                snapshot={snapshot}
+              />
+
             </div>
 
-            <div className="space-y-3 p-5">
-              <InspectorRow label="Status" value={fallback(acquisition?.status)} />
-              <InspectorRow label="Repository" value={fallback(acquisition?.repository)} />
-              <InspectorRow label="Stage" value={fallback(acquisition?.stage)} />
-              <InspectorRow label="Files Scanned" value={fallback(acquisition?.filesScanned)} />
-              <InspectorRow label="Evidence" value={fallback(acquisition?.evidenceExtracted)} />
-              <InspectorRow label="Elapsed" value={fallback(acquisition?.elapsed)} />
+          </div>
+
+          <div className="grid grid-cols-12 gap-6">
+
+            <div className="col-span-12 xl:col-span-8">
+
+              <GlowCard className="glass-runtime rounded-[28px]">
+                <KnowledgeAcquisitionPanel
+                  acquisition={acquisition}
+                />
+              </GlowCard>
+
             </div>
-          </GlowCard>
+
+            <div className="col-span-12 xl:col-span-4">
+
+              <GlowCard className="glass-runtime rounded-[28px]">
+                <KnowledgeReasoningPanel
+                  snapshot={snapshot}
+                />
+              </GlowCard>
+
+            </div>
+
+          </div>
+
         </section>
       </LuminaSurface>
       </div>
