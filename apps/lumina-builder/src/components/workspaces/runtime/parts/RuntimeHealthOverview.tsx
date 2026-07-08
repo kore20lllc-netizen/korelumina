@@ -1,4 +1,5 @@
 import { Activity, Cpu, MemoryStick, Gauge } from "lucide-react";
+import { LuminaMetricGrid } from "@/components/lumina/workspace";
 import { RuntimeMetricTile } from "./RuntimeMetricTile";
 import type { RuntimeOverall, RuntimeProject } from "@/services/runtime/types";
 
@@ -9,7 +10,7 @@ export function RuntimeHealthOverview({ overall, projects }: { overall: RuntimeO
   const rpsTrend = aggregateSeries(projects.map((p) => scaleSeries(p.metrics.cpuSeries, p.metrics.rps / Math.max(1, avg(p.metrics.cpuSeries)))));
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+    <LuminaMetricGrid>
       <RuntimeMetricTile
         label="Global Health" value={`${overall.health.score}`}
         hint={`${overall.running}/${overall.total} running`}
@@ -31,7 +32,7 @@ export function RuntimeHealthOverview({ overall, projects }: { overall: RuntimeO
         hint="Live throughput"
         icon={Gauge} accent="gold" trend={rpsTrend}
       />
-    </div>
+    </LuminaMetricGrid>
   );
 }
 
