@@ -1,392 +1,478 @@
 # Lumina Design System
 
-Status: Active
+Version: 1.0
+Status: Foundation Architecture
+Owner: KoreLumina
 
-Owner: KoreLumina Platform
+---
+
+# Purpose
+
+The Lumina Design System defines the permanent visual language of KoreLumina.
+
+It separates visual identity from application functionality so every workspace, tool, and future product shares one cohesive environment.
+
+This document captures the design language originally established by the imported Lovable workspace and formalizes it into a production-grade architecture that KoreLumina owns and evolves independently.
+
+---
+
+# Core Philosophy
+
+Lumina is not a collection of pages.
+
+Lumina is a continuous digital environment.
+
+Users do not move between different applications.
+
+They move between tools built inside the same visual world.
+
+The background never changes.
+
+Only the workspace changes.
+
+The environment is part of the product identity.
+
+---
+
+# Visual Architecture
+
+Environment
+
+↓
+
+Surface System
+
+↓
+
+Design Tokens
+
+↓
+
+Foundation Components
+
+↓
+
+Workspace Components
+
+↓
+
+Feature Components
+
+↓
+
+Content
+
+Each layer depends only on the layer beneath it.
+
+Higher layers never redefine lower layers.
+
+Business logic never owns visual identity.
+
+---
+
+# Layer 1 — Environment
 
 Purpose
 
-The Lumina Design System is the canonical UI framework for every
-KoreLumina application.
+Provide the permanent visual identity of KoreLumina.
 
-Its purpose is to provide a unified visual language,
-shared interaction patterns,
-reusable UI primitives,
-and consistent accessibility across the platform.
+Components
 
-The design system is a platform subsystem.
+• LuminaBackground
 
-It is maintained with the same rigor as Runtime,
-Knowledge Preservation,
-Workspace Management,
-and AI Orchestration.
+• LuminaAmbient
 
---------------------------------------------------
-Goals
---------------------------------------------------
+• LuminaGlassLayer
 
-• Eliminate duplicated UI implementations.
+Responsibilities
 
-• Prevent visual drift.
-
-• Improve developer productivity.
-
-• Maintain accessibility.
-
-• Support future theming.
-
-• Support white-labeling.
-
-• Support desktop, tablet, and mobile.
-
---------------------------------------------------
-Architecture
---------------------------------------------------
-
-The design system is composed of six layers.
-
-Theme
-
-↓
-
-Background
-
-↓
-
-Surfaces
-
-↓
-
-Controls
-
-↓
-
-Feedback
-
-↓
-
-Application
-
-Every layer depends only on the layers beneath it.
-
-Application code must never bypass lower layers.
-
---------------------------------------------------
-Directory Structure
---------------------------------------------------
-
-apps/lumina-builder/src/components/lumina/
-
-    background/
-
-    controls/
-
-    feedback/
-
-    forms/
-
-    layout/
-
-    navigation/
-
-    overlays/
-
-    surfaces/
-
-    typography/
-
-    index.ts
-
---------------------------------------------------
-Background Layer
---------------------------------------------------
-
-Responsible for:
-
-• Workspace backgrounds
+• Aurora gradients
 
 • Ambient lighting
 
-• Aurora effects
+• Background motion
 
-• Noise
+• Depth perception
 
-• Grid overlays
+• Global atmosphere
 
-• Vignettes
+Rules
 
-Canonical components
+Always mounted.
 
-LuminaBackground
+Never replaced by individual workspaces.
 
-LuminaAmbient
+Never modified by feature components.
 
-LuminaGrid
+---
 
-LuminaNoise
+# Layer 2 — Surface System
 
-LuminaGlow
+Purpose
 
---------------------------------------------------
-Surface Layer
---------------------------------------------------
+Provide reusable glass surfaces that every workspace shares.
 
-Responsible for:
+Current Components
 
-• Glass panels
+GlowCard
 
-• Cards
+LuminaSurface
 
-• Sections
+glass-panel
 
-• Containers
+glass-strong
 
-• Dialog shells
+glass-ripple
 
-Canonical components
+Responsibilities
 
-LuminaGlass
-
-LuminaCard
-
-LuminaPanel
-
-LuminaSection
-
---------------------------------------------------
-Controls
---------------------------------------------------
-
-Responsible for every interactive element.
-
-Examples
-
-LuminaButton
-
-LuminaInput
-
-LuminaTextarea
-
-LuminaCheckbox
-
-LuminaSwitch
-
-LuminaSelect
-
-LuminaSegmentedControl
-
-LuminaTabs
-
-Raw HTML controls should not be used directly in application code.
-
---------------------------------------------------
-Feedback
---------------------------------------------------
-
-Shared feedback primitives.
-
-LuminaSpinner
-
-LuminaBadge
-
-LuminaProgress
-
-LuminaToast
-
-LuminaEmptyState
-
-LuminaSkeleton
-
---------------------------------------------------
-Navigation
---------------------------------------------------
-
-LuminaSidebar
-
-LuminaBreadcrumb
-
-LuminaTopBar
-
-LuminaCommandPalette
-
-LuminaMenu
-
---------------------------------------------------
-Overlays
---------------------------------------------------
-
-LuminaDialog
-
-LuminaDrawer
-
-LuminaPopover
-
-LuminaTooltip
-
-LuminaDropdown
-
---------------------------------------------------
-Theme Tokens
---------------------------------------------------
-
-No component should hardcode colors.
-
-Theme tokens define:
-
-Background
-
-Surface
-
-Text
-
-Border
-
-Shadow
-
-Radius
-
-Spacing
-
-Typography
-
-Motion
-
-Opacity
+Glass appearance
 
 Blur
 
---------------------------------------------------
+Transparency
+
+Borders
+
 Elevation
---------------------------------------------------
 
-Level 0
+Depth
 
-Application background
+Hover interaction
 
-Level 1
+Rules
 
-Workspace background
+Surface components own visual elevation.
 
-Level 2
+Workspace components never recreate glass effects.
 
-Panels
+---
 
-Level 3
+# Layer 3 — Design Tokens
 
-Cards
+The following tokens define Lumina's visual language.
 
-Level 4
+## Gradients
 
-Dialogs
+gradient-lumina
 
-Level 5
+gradient-brand
 
-Floating menus
+gradient-button
 
-Level 6
+gradient-text
 
-Notifications
+gradient-gold
 
---------------------------------------------------
-Motion
---------------------------------------------------
+gradient-aurora
 
-Motion should communicate state.
+## Glass
 
-Avoid decorative animations.
+glass-panel
 
-Shared durations
+glass-strong
 
-Fast
+glass-ripple
 
-Normal
+glass-tint-scale
 
-Slow
+## Shadows
 
-Shared easing
+shadow-soft
 
-Standard
+shadow-float
 
-Emphasized
+## Typography
 
-Exit
+text-gradient-lumina
 
---------------------------------------------------
-Accessibility
---------------------------------------------------
+text-gradient-royal-gold
 
-Every Lumina component must support:
+## Background Helpers
 
-keyboard navigation
+bg-lumina
 
-screen readers
+bg-brand
 
-focus visibility
+bg-button-lumina
 
-reduced motion
+bg-aurora
 
-high contrast themes
+Future semantic tokens
 
-proper ARIA attributes
+colors.ts
 
---------------------------------------------------
-Extraction Rule
---------------------------------------------------
+spacing.ts
 
-If the same UI pattern appears three times,
-it should be extracted into the Lumina Design System.
+radius.ts
 
---------------------------------------------------
-Modification Rule
---------------------------------------------------
+motion.ts
 
-Existing Lumina primitives should be extended
-rather than duplicated.
+glass.ts
 
---------------------------------------------------
-Migration Rule
---------------------------------------------------
+typography.ts
 
-Migration is incremental.
+elevation.ts
 
-Improve one primitive.
+opacity.ts
 
-Build.
+zIndex.ts
 
-Validate.
+---
 
-Commit.
+# Layer 4 — Foundation Components
 
-Adopt.
+These components establish the reusable UI vocabulary.
 
-Repeat.
+Current
 
---------------------------------------------------
-Non-Negotiable Rules
---------------------------------------------------
+GlowCard
 
-No duplicated button systems.
+LuminaButton
 
-No duplicated card systems.
+LuminaSegmentedControl
 
-No duplicated dialog systems.
+NavigationRail
 
-No duplicated backgrounds.
+NavigationSection
 
-No workspace-specific UI frameworks.
+NavigationFooter
 
-No hardcoded gradients outside theme tokens.
+LuminaSurface
 
-No direct HTML controls in application code
-when a Lumina primitive exists.
+Future
 
---------------------------------------------------
-Long-Term Objective
---------------------------------------------------
+LuminaBadge
 
-Every production UI inside KoreLumina should be composed from Lumina
-primitives.
+LuminaInput
 
-Applications should assemble interfaces rather than implement their own
-visual systems.
+LuminaDialog
+
+LuminaToolbar
+
+LuminaTable
+
+LuminaMetricCard
+
+LuminaHero
+
+LuminaSection
+
+LuminaTabs
+
+LuminaStatusBadge
+
+LuminaAvatar
+
+LuminaDropdown
+
+Rule
+
+Foundation components consume design tokens.
+
+They never hardcode visual constants.
+
+---
+
+# Layer 5 — Workspace Components
+
+Workspace components compose foundation components into reusable layouts.
+
+Current
+
+WorkspaceCard
+
+WorkspaceMetricCard
+
+WorkspaceSection
+
+WorkspaceEmptyState
+
+GlassWorkspaceHero
+
+RuntimeHeader
+
+RuntimeInspector
+
+RuntimeMetricTile
+
+RuntimeActionsToolbar
+
+RuntimeHealthBadge
+
+RuntimeEmptyState
+
+KnowledgeMetricTile
+
+KnowledgeOverviewSkeleton
+
+Responsibilities
+
+Workspace layout
+
+Workspace headers
+
+Workspace metrics
+
+Workspace navigation
+
+Workspace empty states
+
+Workspace skeletons
+
+Rule
+
+Workspace components compose.
+
+They do not redefine foundational styling.
+
+---
+
+# Layer 6 — Feature Components
+
+Feature components implement business capabilities.
+
+Current
+
+Runtime Operations
+
+Runtime Diagnostics
+
+Repo Audit
+
+Knowledge Operations
+
+Developer Workspace
+
+Designer Workspace
+
+AI Workspace
+
+Admin Workspace
+
+Future
+
+Deployment Center
+
+Marketplace
+
+Organization Memory
+
+Knowledge Preservation
+
+Automation Center
+
+AI Orchestrator
+
+Rule
+
+Feature components own business logic only.
+
+Visual identity comes from the lower layers.
+
+---
+
+# Design Principles
+
+Environment is permanent.
+
+Background never changes.
+
+Glass owns elevation.
+
+Components consume tokens.
+
+Workspaces compose components.
+
+Features compose workspaces.
+
+Visual identity is independent from business logic.
+
+No workspace may redefine the application identity.
+
+---
+
+# Current Visual Assets
+
+Extracted from the imported Lovable workspace.
+
+Primary Components
+
+GlowCard
+
+LuminaButton
+
+LuminaSurface
+
+NavigationRail
+
+NavigationSection
+
+NavigationFooter
+
+WorkspaceCard
+
+WorkspaceMetricCard
+
+GlassWorkspaceHero
+
+RuntimeHeader
+
+RuntimeInspector
+
+RuntimeMetricTile
+
+AuditSummary
+
+DependencyAuditCard
+
+EnvironmentAuditCard
+
+SecurityAuditCard
+
+RepairPlanCard
+
+BuildErrorsCard
+
+KnowledgeMetricTile
+
+---
+
+# Migration Strategy
+
+Phase 1
+
+Freeze current appearance.
+
+Phase 2
+
+Create semantic design tokens.
+
+Phase 3
+
+Refactor foundation components to consume tokens.
+
+Phase 4
+
+Refactor workspace components.
+
+Phase 5
+
+Refactor feature workspaces.
+
+Phase 6
+
+Remove duplicated visual styles.
+
+No visual regressions are permitted during migration.
+
+---
+
+# Long-Term Goal
+
+The Lumina Design System becomes the single source of truth for every KoreLumina product.
+
+Future applications should inherit Lumina automatically by consuming the design system rather than implementing their own visual language.
+
+The visual identity should remain stable even as products, features, and technologies evolve.
 
