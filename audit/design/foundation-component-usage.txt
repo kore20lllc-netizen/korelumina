@@ -1,0 +1,891 @@
+=================================================
+apps/lumina-builder/src/components/ui/aspect-ratio.tsx
+=================================================
+apps/lumina-builder/src/components/ui/alert-dialog.tsx
+=================================================
+apps/lumina-builder/src/components/ui/pagination.tsx
+=================================================
+apps/lumina-builder/src/components/ui/tabs.tsx
+=================================================
+apps/lumina-builder/src/components/ui/card.tsx
+=================================================
+apps/lumina-builder/src/components/ui/slider.tsx
+=================================================
+apps/lumina-builder/src/components/ui/popover.tsx
+=================================================
+apps/lumina-builder/src/components/ui/progress.tsx
+=================================================
+apps/lumina-builder/src/components/ui/toaster.tsx
+=================================================
+apps/lumina-builder/src/components/ui/input-otp.tsx
+=================================================
+apps/lumina-builder/src/components/ui/chart.tsx
+=================================================
+apps/lumina-builder/src/components/ui/hover-card.tsx
+=================================================
+apps/lumina-builder/src/components/ui/sheet.tsx
+=================================================
+apps/lumina-builder/src/components/ui/scroll-area.tsx
+=================================================
+apps/lumina-builder/src/components/ui/resizable.tsx
+=================================================
+apps/lumina-builder/src/components/ui/label.tsx
+=================================================
+apps/lumina-builder/src/components/ui/sonner.tsx
+=================================================
+apps/lumina-builder/src/components/ui/navigation-menu.tsx
+=================================================
+apps/lumina-builder/src/components/ui/accordion.tsx
+=================================================
+apps/lumina-builder/src/components/ui/drawer.tsx
+=================================================
+apps/lumina-builder/src/components/ui/tooltip.tsx
+=================================================
+apps/lumina-builder/src/components/ui/alert.tsx
+=================================================
+apps/lumina-builder/src/components/ui/switch.tsx
+=================================================
+apps/lumina-builder/src/components/ui/calendar.tsx
+=================================================
+apps/lumina-builder/src/components/ui/breadcrumb.tsx
+=================================================
+apps/lumina-builder/src/components/ui/radio-group.tsx
+=================================================
+apps/lumina-builder/src/components/ui/command.tsx
+=================================================
+apps/lumina-builder/src/components/ui/toggle-group.tsx
+=================================================
+apps/lumina-builder/src/components/ui/avatar.tsx
+=================================================
+apps/lumina-builder/src/components/ui/menubar.tsx
+=================================================
+apps/lumina-builder/src/components/ui/dialog.tsx
+=================================================
+apps/lumina-builder/src/components/ui/badge.tsx
+=================================================
+apps/lumina-builder/src/components/ui/sidebar.tsx
+=================================================
+apps/lumina-builder/src/components/ui/table.tsx
+=================================================
+apps/lumina-builder/src/components/ui/separator.tsx
+=================================================
+apps/lumina-builder/src/components/ui/button.tsx
+=================================================
+apps/lumina-builder/src/components/ui/toggle.tsx
+=================================================
+apps/lumina-builder/src/components/ui/toast.tsx
+=================================================
+apps/lumina-builder/src/components/ui/checkbox.tsx
+=================================================
+apps/lumina-builder/src/components/ui/collapsible.tsx
+=================================================
+apps/lumina-builder/src/components/ui/dropdown-menu.tsx
+=================================================
+apps/lumina-builder/src/components/ui/select.tsx
+=================================================
+apps/lumina-builder/src/components/ui/textarea.tsx
+=================================================
+apps/lumina-builder/src/components/ui/input.tsx
+=================================================
+apps/lumina-builder/src/components/ui/skeleton.tsx
+=================================================
+apps/lumina-builder/src/components/ui/context-menu.tsx
+=================================================
+apps/lumina-builder/src/components/ui/form.tsx
+=================================================
+apps/lumina-builder/src/components/ui/carousel.tsx
+=================================================
+apps/lumina-builder/src/components/landing/LandingNav.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+59:          <LuminaButton variant="subtle" size="md" onClick={goToSignIn}>
+61:          </LuminaButton>
+62:          <LuminaButton variant="primary" size="md" onClick={startBuilding}>Start Building</LuminaButton>
+87:              <LuminaButton variant="ghost" size="md" className="flex-1" onClick={() => { setOpen(false); goToSignIn(); }}>
+89:              </LuminaButton>
+90:              <LuminaButton variant="primary" size="md" className="flex-1" onClick={() => { setOpen(false); startBuilding(); }}>Start Building</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/Templates.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+97:          <LuminaButton variant="ghost" size="md" onClick={goToTemplates}>
+99:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/Hero.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+31:                <LuminaButton variant="primary" size="lg" onClick={startBuilding}>Start Building</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/RepoAuditFeature.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+112:            <LuminaButton variant="primary" size="lg" onClick={goToRepoAudit}>
+114:            </LuminaButton>
+135:                    <LuminaButton
+143:                    </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/HeroVideoFrame.tsx
+=================================================
+apps/lumina-builder/src/components/landing/Pricing.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+179:                    <LuminaButton
+186:                    </LuminaButton>
+234:                  <LuminaButton variant="primary" size="lg" onClick={startBuilding}>
+236:                  </LuminaButton>
+428:            <LuminaButton variant="primary" size="lg" onClick={contactSales}>
+430:            </LuminaButton>
+431:            <LuminaButton variant="outline" size="lg" onClick={contactSales}>
+433:            </LuminaButton>
+474:              <LuminaButton variant="primary" size="lg" onClick={startBuilding}>
+476:              </LuminaButton>
+477:              <LuminaButton variant="outline" size="lg" onClick={contactSales}>
+479:              </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/EnterpriseGovernance.tsx
+=================================================
+apps/lumina-builder/src/components/landing/OwnEverything.tsx
+=================================================
+apps/lumina-builder/src/components/landing/Features.tsx
+=================================================
+apps/lumina-builder/src/components/landing/SocialProof.tsx
+=================================================
+apps/lumina-builder/src/components/landing/HowItWorks.tsx
+=================================================
+apps/lumina-builder/src/components/landing/Comparison.tsx
+=================================================
+apps/lumina-builder/src/components/landing/FinalCTA.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+20:              <LuminaButton variant="primary" size="lg" onClick={startBuilding}>Start Building</LuminaButton>
+21:              <LuminaButton variant="outline" size="lg" onClick={contactSales}>Talk to Sales</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/InHouseDevelopers.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+38:                <LuminaButton variant="primary" size="lg" onClick={contactSales}>
+40:                </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/landing/BuiltForExistingSoftware.tsx
+=================================================
+apps/lumina-builder/src/components/landing/PlatformArchitecture.tsx
+=================================================
+apps/lumina-builder/src/components/landing/InfrastructureYourWay.tsx
+=================================================
+apps/lumina-builder/src/components/landing/Footer.tsx
+=================================================
+apps/lumina-builder/src/components/landing/DeliveryConfidence.tsx
+=================================================
+apps/lumina-builder/src/components/landing/FutureOfSoftware.tsx
+=================================================
+apps/lumina-builder/src/components/landing/ProblemSolution.tsx
+=================================================
+apps/lumina-builder/src/components/landing/FAQ.tsx
+=================================================
+apps/lumina-builder/src/components/landing/BackgroundVideo.tsx
+=================================================
+apps/lumina-builder/src/components/sales/SalesRequestDialog.tsx
+23:import { LuminaButton } from "@/components/lumina/LuminaButton";
+275:            <LuminaButton
+283:            </LuminaButton>
+284:            <LuminaButton
+291:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/shell/PublishDialog.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+73:            <LuminaButton variant="ghost" size="md" className="flex-1" onClick={reset}>
+75:            </LuminaButton>
+76:            <LuminaButton
+87:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/shell/CommandPalette.tsx
+=================================================
+apps/lumina-builder/src/components/shell/BottomDock.tsx
+=================================================
+apps/lumina-builder/src/components/deploy/DeployModal.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+125:            <LuminaButton variant="ghost" size="md" onClick={close}>Cancel</LuminaButton>
+126:            <LuminaButton size="md" onClick={deploy} disabled={stage === "deploying"}>
+131:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/layout/TeamSwitcher.tsx
+=================================================
+apps/lumina-builder/src/components/layout/Shell.tsx
+=================================================
+apps/lumina-builder/src/components/layout/TopBar.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+233:      <LuminaButton size="sm" variant="primary" className="hidden sm:inline-flex" onClick={guard("publish", () => setPublishOpen(true))}>
+236:      </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/layout/dialogs/CreateWorkspaceDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+46:          <LuminaButton
+51:          </LuminaButton>
+53:          <LuminaButton onClick={onSubmit}>
+55:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/layout/Sidebar.tsx
+=================================================
+apps/lumina-builder/src/components/runtime/RuntimeToolbar.tsx
+=================================================
+apps/lumina-builder/src/components/runtime/RuntimeStatusCard.tsx
+=================================================
+apps/lumina-builder/src/components/RequireAuth.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/background/LuminaBackground.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/background/LuminaGlassLayer.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/background/LuminaAmbient.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/navigation/NavigationItem.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/navigation/NavigationFooter.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/navigation/NavigationSection.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/navigation/NavigationRail.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/LuminaSegmentedControl.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx
+7:export interface LuminaSurfaceProps
+34:export function LuminaSurface({
+39:}: LuminaSurfaceProps) {
+=================================================
+apps/lumina-builder/src/components/lumina/Blobs.tsx
+=================================================
+apps/lumina-builder/src/components/lumina/GlowCard.tsx
+10:interface GlowCardProps
+38:export const GlowCard =
+39:forwardRef<HTMLDivElement, GlowCardProps>(
+40:function GlowCard(
+195:GlowCard.displayName="GlowCard";
+=================================================
+apps/lumina-builder/src/components/lumina/LuminaButton.tsx
+74:export interface LuminaButtonProps
+78:export const LuminaButton = forwardRef<
+80:  LuminaButtonProps
+99:LuminaButton.displayName = "LuminaButton";
+=================================================
+apps/lumina-builder/src/components/NavLink.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+46:          <LuminaButton
+52:          </LuminaButton>
+54:          <LuminaButton
+62:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+46:          <LuminaButton
+52:          </LuminaButton>
+54:          <LuminaButton
+62:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+43:          <LuminaButton
+49:          </LuminaButton>
+51:          <LuminaButton
+57:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/AuthView.tsx
+4:import { LuminaButton } from "@/components/lumina/LuminaButton";
+105:          <LuminaButton size="lg" className="w-full mt-2" type="submit" disabled={busy}>
+107:          </LuminaButton>
+115:        <LuminaButton variant="ghost" size="lg" className="w-full" onClick={googleContinue} disabled={busy}>
+117:        </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditPdfThemeEditor.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/FixUntilGreenPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildErrorsCard.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/RepoSourcePicker.tsx
+4:import { LuminaButton } from "@/components/lumina/LuminaButton";
+53:      <LuminaButton
+64:      </LuminaButton>
+65:      <LuminaButton
+76:      </LuminaButton>
+207:              <LuminaButton variant="ghost" size="md" onClick={() => inputRef.current?.click()}>
+209:              </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/SecurityAuditCard.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/RepairActionBar.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildPassedBanner.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+38:          <LuminaButton size="md" onClick={onDeploy}>
+40:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditSummary.tsx
+10:export function AuditSummary({ report }: { report: AuditReport }) {
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/AuditPdfPreviewDialog.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/StepDiffPanel.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+225:                <LuminaButton
+238:                </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/RepairPlanCard.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+107:      <LuminaButton size="md" className="w-full" onClick={apply} disabled={applying}>
+110:      </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/DeepAuditProgress.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/FindingsFilters.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/DiffPreviewDialog.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+51:            <LuminaButton size="md" onClick={onApply} disabled={applying || loading || !diff}>
+54:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/FindingFixSteps.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/AutoFixModal.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+131:                <LuminaButton size="md" onClick={handleGenerate} disabled={generating}>
+134:                </LuminaButton>
+136:                <LuminaButton size="md" onClick={handleApply} disabled={applying}>
+139:                </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/EnvironmentAuditCard.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/DependencyAuditCard.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/repo-audit/BuildLogsDrawer.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx
+16:import { LuminaButton } from "@/components/lumina/LuminaButton";
+37:import { AuditSummary } from "./repo-audit/AuditSummary";
+302:          <LuminaButton
+307:          </LuminaButton>
+418:              <AuditSummary report={report} />
+=================================================
+apps/lumina-builder/src/components/workspaces/AdminWorkspace.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx
+25:  GlowCard,
+26:} from "@/components/lumina/GlowCard";
+29:  LuminaSurface,
+37:  LuminaButton,
+38:} from "@/components/lumina/LuminaButton";
+131:        <GlowCard className="relative overflow-hidden p-7">
+159:              <LuminaButton
+165:              </LuminaButton>
+167:              <LuminaButton
+174:              </LuminaButton>
+176:              <LuminaButton variant="glow" size="sm">
+179:              </LuminaButton>
+181:              <LuminaButton variant="primary" size="sm">
+184:              </LuminaButton>
+187:        </GlowCard>
+189:        <LuminaSurface variant="panel">
+208:              <GlowCard className="glass-runtime h-full min-h-[720px] rounded-[32px] overflow-hidden">
+212:              </GlowCard>
+234:              <GlowCard className="glass-runtime rounded-[28px]">
+238:              </GlowCard>
+244:              <GlowCard className="glass-runtime rounded-[28px]">
+248:              </GlowCard>
+255:      </LuminaSurface>
+=================================================
+apps/lumina-builder/src/components/workspaces/SettingsView.tsx
+4:import { LuminaButton } from "@/components/lumina/LuminaButton";
+180:                  <LuminaButton size="md" onClick={saveProfile} disabled={savingProfile || !user}>{savingProfile ? "Saving…" : "Save"}</LuminaButton>
+192:                    {usage.plan !== "free" && (<LuminaButton variant="ghost" size="sm" onClick={cancelSubscription}>Cancel</LuminaButton>)}
+193:                    <LuminaButton size="md" onClick={() => setView("pricing")}>Upgrade</LuminaButton>
+201:                  <LuminaButton size="sm" onClick={generateKey}>Generate key</LuminaButton>
+209:                      <LuminaButton variant="ghost" size="sm" onClick={() => setRevealed(revealed === k.id ? null : k.id)}>{revealed === k.id ? "Hide" : "Reveal"}</LuminaButton>
+210:                      <LuminaButton variant="ghost" size="sm" onClick={() => revokeKey(k.id)}>Revoke</LuminaButton>
+225:                      <LuminaButton variant={connected ? "ghost" : "primary"} size="sm" onClick={() => toggleIntegration(i)}>
+227:                      </LuminaButton>
+247:                    <LuminaButton variant={prefs[k] ? "primary" : "ghost"} size="sm" onClick={() => togglePref(k)}>
+249:                    </LuminaButton>
+285:                              <LuminaButton size="sm" onClick={() => setView("pricing")}>Upgrade</LuminaButton>
+369:                                <LuminaButton size="sm" variant="ghost" onClick={() => setView("pricing")}>
+371:                                </LuminaButton>
+402:                        <LuminaButton size="sm" onClick={inviteMember}>
+404:                        </LuminaButton>
+437:                            <LuminaButton variant="ghost" size="sm" onClick={() => removeMember(m.userId)} disabled={!canRemove}>
+439:                            </LuminaButton>
+458:                                <LuminaButton
+468:                                </LuminaButton>
+469:                                <LuminaButton variant="ghost" size="sm" onClick={() => revokeInvite(inv.id)}>
+471:                                </LuminaButton>
+481:                        <LuminaButton variant="ghost" size="sm" onClick={leaveTeam}>
+483:                        </LuminaButton>
+493:                <Row label="Two-factor auth"><LuminaButton variant="ghost" size="sm">Enable</LuminaButton></Row>
+495:                <Row label="Sign out everywhere"><LuminaButton variant="ghost" size="sm" onClick={signOutEverywhere}>Sign out</LuminaButton></Row>
+497:                  <LuminaButton
+507:                  </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx
+4:import { LuminaButton } from "@/components/lumina/LuminaButton";
+5:import { GlowCard } from "@/components/lumina/GlowCard";
+12:import { RuntimeHeader } from "./parts/RuntimeHeader";
+108:            <GlowCard className="p-0 min-h-[360px] overflow-hidden"><FeedSkeleton /></GlowCard>
+109:            <GlowCard className="p-0 min-h-[360px]"><InspectorSkeleton /></GlowCard>
+122:        <RuntimeHeader
+150:                  <LuminaButton variant="ghost" size="sm" className="lg:hidden text-gold hover:text-gold" aria-label="Open inspector">
+152:                  </LuminaButton>
+170:          <GlowCard className="glass-runtime p-4 h-[560px] overflow-hidden flex flex-col">
+186:          </GlowCard>
+189:          <GlowCard className="glass-runtime p-0 h-[560px] overflow-hidden flex flex-col">
+216:          </GlowCard>
+219:          <GlowCard className="glass-runtime p-0 h-[560px] overflow-hidden hidden xl:flex flex-col">
+227:          </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthOverview.tsx
+2:import { RuntimeMetricTile } from "./RuntimeMetricTile";
+13:      <RuntimeMetricTile
+19:      <RuntimeMetricTile
+24:      <RuntimeMetricTile
+29:      <RuntimeMetricTile
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSkeletons.tsx
+2:import { GlowCard } from "@/components/lumina/GlowCard";
+7:    <GlowCard className={cn("p-5", className)}>
+17:    </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeErrorState.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+23:            <LuminaButton variant="glow" onClick={onRetry}>Retry</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx
+4:import { GlowCard } from "@/components/lumina/GlowCard";
+13:interface RuntimeHeaderProps {
+24:export const RuntimeHeader = forwardRef<
+26:  RuntimeHeaderProps
+48:      <GlowCard className="relative overflow-hidden p-7">
+109:      </GlowCard>
+114:RuntimeHeader.displayName = "RuntimeHeader";
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx
+8:import { LuminaButton } from "@/components/lumina/LuminaButton";
+135:          <LuminaButton
+173:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectsList.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx
+20:import { LuminaButton } from "@/components/lumina/LuminaButton";
+122:            <LuminaButton
+160:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx
+2:import { GlowCard } from "@/components/lumina/GlowCard";
+6:export interface RuntimeMetricTileProps {
+16:const ACCENT_STROKE: Record<NonNullable<RuntimeMetricTileProps["accent"]>, string> = {
+23:export function RuntimeMetricTile({
+25:}: RuntimeMetricTileProps) {
+27:    <GlowCard accent={accent} className={cn("relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-5 backdrop-blur-xl transition-all duration-200 hover:border-white/20 hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(0,0,0,.18)]", className)}>
+54:    </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLifecycleTimeline.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx
+2:import { GlowCard } from "@/components/lumina/GlowCard";
+71:            <GlowCard className="rounded-2xl p-5">
+76:            </GlowCard>
+81:          <GlowCard className="rounded-2xl p-5">
+87:          </GlowCard>
+88:          <GlowCard className="rounded-2xl p-5">
+94:          </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/OverviewTab.tsx
+3:import { GlowCard } from "@/components/lumina/GlowCard";
+8:    <GlowCard className="p-4">
+14:    </GlowCard>
+21:    <GlowCard className="p-4">
+34:    </GlowCard>
+63:        <GlowCard className="p-4">
+73:        </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/ProvidersTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/MaintenanceTab.tsx
+3:import { GlowCard } from "@/components/lumina/GlowCard";
+41:        <GlowCard className="p-4 space-y-2">
+55:        </GlowCard>
+56:        <GlowCard className="p-4 space-y-2">
+63:        </GlowCard>
+69:          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Storage used</div><div className="text-lg font-semibold">{(health.localStorageBytes / 1024).toFixed(1)} KB</div></GlowCard>
+70:          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Quota est.</div><div className="text-lg font-semibold">{(health.localStorageQuotaEstimate / (1024 * 1024)).toFixed(0)} MB</div></GlowCard>
+71:          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Users seeded</div><div className="text-lg font-semibold">{health.totalUsers}</div></GlowCard>
+72:          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Admin seeded</div><div className="text-lg font-semibold">{health.adminSeeded ? "Yes" : "No"}</div></GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/FeatureFlagsTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/AuditLogsTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/DeploymentsTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/ProjectsTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/AIUsageTab.tsx
+3:import { GlowCard } from "@/components/lumina/GlowCard";
+25:        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Total executions</div><div className="text-2xl font-semibold">{analytics.totalAIExecutions}</div></GlowCard>
+26:        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Estimated cost</div><div className="text-2xl font-semibold">${estCost.toFixed(2)}</div></GlowCard>
+27:        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Days with activity</div><div className="text-2xl font-semibold">{analytics.aiUsageByDay.length}</div></GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx
+12:import { LuminaButton } from "@/components/lumina/LuminaButton";
+46:          <LuminaButton
+52:          </LuminaButton>
+54:          <LuminaButton
+62:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminProjectDeleteDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+65:            <LuminaButton
+72:            </LuminaButton>
+74:            <LuminaButton
+81:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+56:          <LuminaButton
+64:          </LuminaButton>
+66:          <LuminaButton
+74:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/BillingTab.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/admin/ImpersonationBanner.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx
+7:import { WorkspaceCard } from "./WorkspaceCard";
+25:    <WorkspaceCard
+50:    </WorkspaceCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceLayout.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceMetricCard.tsx
+6:  WorkspaceCard,
+7:} from "./WorkspaceCard";
+9:interface WorkspaceMetricCardProps {
+17:export function WorkspaceMetricCard({
+23:}: WorkspaceMetricCardProps) {
+25:    <WorkspaceCard
+54:    </WorkspaceCard>
+58:export default WorkspaceMetricCard;
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceTabBar.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceGrid.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx
+1:import { WorkspaceCard } from "./WorkspaceCard";
+23:          <WorkspaceCard
+36:          </WorkspaceCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/GlassWorkspaceHero.tsx
+19:export interface GlassWorkspaceHeroProps {
+30:export function GlassWorkspaceHero({
+39:}: GlassWorkspaceHeroProps) {
+=================================================
+apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx
+5:interface WorkspaceCardProps
+10:export function WorkspaceCard({
+15:}: WorkspaceCardProps) {
+36:export default WorkspaceCard;
+=================================================
+apps/lumina-builder/src/components/workspaces/EntryView.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+6:import { GlowCard } from "@/components/lumina/GlowCard";
+284:              <LuminaButton size="sm" disabled={!prompt.trim()} onClick={submitPrompt}>
+287:              </LuminaButton>
+473:          <LuminaButton variant="ghost" size="lg" onClick={() => setView("dashboard")}>
+475:          </LuminaButton>
+476:          <LuminaButton variant="primary" size="lg" disabled={!pickedIntent} onClick={handleStart}>
+479:          </LuminaButton>
+716:          <LuminaButton variant="ghost" size="sm" onClick={() => onOpenChange(false)}>
+718:          </LuminaButton>
+719:          <LuminaButton
+727:          </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/PricingView.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+154:                <LuminaButton
+162:                </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/AIWorkspace.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/DashboardView.tsx
+26:import { LuminaButton } from "@/components/lumina/LuminaButton";
+399:            <LuminaButton
+411:            </LuminaButton>
+413:            <LuminaButton
+423:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx
+19:import { LuminaButton } from "@/components/lumina/LuminaButton";
+449:        <LuminaButton
+457:        </LuminaButton>
+459:        <LuminaButton
+467:        </LuminaButton>
+469:        <LuminaButton
+477:        </LuminaButton>
+481:        <LuminaButton
+491:        </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/acquisition/KnowledgeAcquisitionPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/graph/KnowledgeGraphPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/reasoning/KnowledgeReasoningPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/KnowledgeOverviewPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/AcquisitionActivityPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeOverviewSkeleton.tsx
+2:import { GlowCard } from "@/components/lumina/GlowCard";
+7:      <GlowCard className="p-6">
+12:      </GlowCard>
+16:          <GlowCard key={index} className="p-5">
+20:          </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeMetricTile.tsx
+3:import { GlowCard } from "@/components/lumina/GlowCard";
+6:export interface KnowledgeMetricTileProps {
+15:export function KnowledgeMetricTile({
+22:}: KnowledgeMetricTileProps) {
+24:    <GlowCard
+54:    </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx
+3:import { GlowCard } from "@/components/lumina/GlowCard";
+30:    <GlowCard className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-6">
+73:    </GlowCard>
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgePipelineOverview.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeActivityFeed.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeSystemStatus.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeHealthOverview.tsx
+14:import { KnowledgeMetricTile } from "./KnowledgeMetricTile";
+31:      <KnowledgeMetricTile
+39:      <KnowledgeMetricTile
+47:      <KnowledgeMetricTile
+55:      <KnowledgeMetricTile
+63:      <KnowledgeMetricTile
+71:      <KnowledgeMetricTile
+79:      <KnowledgeMetricTile
+87:      <KnowledgeMetricTile
+=================================================
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeCoveragePanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/ai/ActivityPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/ai/TemplateGrid.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/ai/PromptComposer.tsx
+12:import { LuminaButton } from "@/components/lumina/LuminaButton";
+72:                <LuminaButton variant="ghost" size="md" onClick={onStop} aria-label="Stop generation">
+75:                </LuminaButton>
+77:              <LuminaButton onClick={onGenerate} disabled={!prompt.trim() || generating} size="md">
+81:              </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+299:          <LuminaButton
+304:          </LuminaButton>
+502:                  <LuminaButton
+517:                  </LuminaButton>
+586:                          <LuminaButton
+596:                          </LuminaButton>
+601:                            <LuminaButton
+620:                            </LuminaButton>
+622:                            <LuminaButton
+641:                            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/designer/DesignerCanvas.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/designer/canvasStore.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/designer/AIAssistPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/dialogs/ProjectDeleteDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+68:            <LuminaButton
+75:            </LuminaButton>
+77:            <LuminaButton
+84:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/dialogs/ProjectRenameDialog.tsx
+10:import { LuminaButton } from "@/components/lumina/LuminaButton";
+78:            <LuminaButton
+84:            </LuminaButton>
+86:            <LuminaButton
+92:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/dev/DevAIAssistPanel.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/dev/BuildSteps.tsx
+=================================================
+apps/lumina-builder/src/components/workspaces/InHouseDevDashboard.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+56:          <LuminaButton variant="ghost" onClick={() => setView("dashboard")}>← Back to Projects</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/ImportsView.tsx
+12:import { LuminaButton } from "@/components/lumina/LuminaButton";
+721:            <LuminaButton size="md" onClick={() => setImportOpen(true)}>
+724:            </LuminaButton>
+738:              <LuminaButton size="md" onClick={() => setImportOpen(true)}>
+741:              </LuminaButton>
+742:              <LuminaButton variant="ghost" size="md" onClick={() => setImportOpen(true)}>
+745:              </LuminaButton>
+1143:                <LuminaButton size="md" className="flex-1" onClick={() => openProject(p)}>
+1145:                </LuminaButton>
+1192:            <LuminaButton variant="ghost" size="md" onClick={() => setRenameTarget(null)}>Cancel</LuminaButton>
+1193:            <LuminaButton size="md" onClick={commitRename}>Save</LuminaButton>
+1258:            <LuminaButton variant="ghost" size="md" onClick={resetEditLinks} disabled={!editTarget || !overrides[editTarget.id]}>
+1260:            </LuminaButton>
+1262:              <LuminaButton variant="ghost" size="md" onClick={() => setEditTarget(null)}>Cancel</LuminaButton>
+1263:              <LuminaButton size="md" onClick={commitEditLinks}>Save</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx
+8:import { LuminaButton } from "@/components/lumina/LuminaButton";
+206:          <LuminaButton variant="ghost" size="sm" onClick={() => refresh()} title="Refresh status">
+208:          </LuminaButton>
+226:          <LuminaButton onClick={() => run("init", () => initializeCapacitor(projectId), "Capacitor initialized")} disabled={!!busy}>
+229:          </LuminaButton>
+230:          <LuminaButton variant="glow" onClick={() => run("sync", () => syncCapacitor(projectId))} disabled={!!busy}>
+233:          </LuminaButton>
+234:          <LuminaButton variant="glow" onClick={() => run("ios", () => openIOS(projectId))} disabled={!!busy}>
+237:          </LuminaButton>
+238:          <LuminaButton variant="glow" onClick={() => run("android", () => openAndroid(projectId))} disabled={!!busy}>
+241:          </LuminaButton>
+242:          <LuminaButton variant="outline" onClick={() => run("build", () => buildMobileBundle(projectId))} disabled={!!busy}>
+245:          </LuminaButton>
+295:            <LuminaButton
+302:            </LuminaButton>
+338:                      <LuminaButton
+353:                      </LuminaButton>
+370:                    <LuminaButton
+385:                    </LuminaButton>
+402:                          <LuminaButton
+409:                          </LuminaButton>
+456:            <LuminaButton variant="outline" size="sm" onClick={() => setDrawerOpen(true)} className="w-full">
+458:            </LuminaButton>
+474:                <LuminaButton size="sm" variant="ghost" onClick={() => { navigator.clipboard.writeText(logText); toast.success("Logs copied"); }}>
+476:                </LuminaButton>
+477:                <LuminaButton size="sm" variant="ghost" onClick={() => {
+485:                </LuminaButton>
+486:                <LuminaButton size="sm" variant="outline" onClick={() => setDrawerOpen(false)}>Close</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/templates/TemplatesMarketplace.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+98:                    <LuminaButton variant="ghost" size="sm" onClick={() => navigate(`/templates/${live.slug}`)}>
+100:                    </LuminaButton>
+102:                  <LuminaButton
+123:                  </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/templates/starters/LumenAI.tsx
+=================================================
+apps/lumina-builder/src/components/templates/starters/PulseAnalytics.tsx
+=================================================
+apps/lumina-builder/src/components/templates/starters/AuroraMarketing.tsx
+=================================================
+apps/lumina-builder/src/components/templates/starters/HelixCRM.tsx
+=================================================
+apps/lumina-builder/src/components/templates/TemplateShell.tsx
+5:import { LuminaButton } from "@/components/lumina/LuminaButton";
+76:            <LuminaButton variant="ghost" size="sm" onClick={() => navigate("/")}>
+78:            </LuminaButton>
+79:            <LuminaButton size="sm" onClick={handleUse}>
+81:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/preview/PreviewFrame.tsx
+=================================================
+apps/lumina-builder/src/components/preview/ProjectSettingsDialog.tsx
+=================================================
+apps/lumina-builder/src/components/preview/UpgradeModal.tsx
+=================================================
+apps/lumina-builder/src/components/preview/RuntimeStatusBanner.tsx
+=================================================
+apps/lumina-builder/src/components/import/ImportSuccessPanel.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+138:        <LuminaButton variant="ghost" size="md" onClick={onOpenImports}>
+140:        </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/import/GlobalImportDropZone.tsx
+=================================================
+apps/lumina-builder/src/components/import/ImportModal.tsx
+9:import { LuminaButton } from "@/components/lumina/LuminaButton";
+802:                    <LuminaButton size="md" onClick={submitUrl} disabled={!url.trim()}>
+805:                    </LuminaButton>
+841:                    <LuminaButton size="md" onClick={submitZip} disabled={files.length === 0}>
+844:                    </LuminaButton>
+1004:                    <LuminaButton size="md" onClick={submitFolder} disabled={!folder || folder.entries.length === 0}>
+1007:                    </LuminaButton>
+1112:          <LuminaButton variant="ghost" size="md" onClick={onCancel}>Cancel</LuminaButton>
+1116:            <LuminaButton variant="ghost" size="md" onClick={onCancel}>Back</LuminaButton>
+1117:            <LuminaButton size="md" onClick={onRetry}>Try again</LuminaButton>
+1121:          <LuminaButton size="md" onClick={onClose}>Open imports</LuminaButton>
+1302:          <LuminaButton variant="ghost" size="md" onClick={onCancel}>Cancel</LuminaButton>
+1305:            <LuminaButton variant="ghost" size="md" onClick={onCancel}>Back</LuminaButton>
+1306:            <LuminaButton size="md" onClick={onClose}>
+1308:            </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/transform/TransformAnalyticsMount.tsx
+=================================================
+apps/lumina-builder/src/components/transform/TransformModal.tsx
+9:import { LuminaButton } from "@/components/lumina/LuminaButton";
+515:        <LuminaButton onClick={onNext} size="md">
+517:        </LuminaButton>
+614:        <LuminaButton variant="ghost" onClick={onBack} size="md"><ArrowLeft className="h-3.5 w-3.5" />Back</LuminaButton>
+615:        <LuminaButton onClick={onNext} size="md">Review changes <ArrowRight className="h-3.5 w-3.5" /></LuminaButton>
+758:        <LuminaButton variant="ghost" onClick={onBack} size="md"><ArrowLeft className="h-3.5 w-3.5" />Back</LuminaButton>
+759:        <LuminaButton onClick={onApply} size="md" disabled={selectedCount === 0}>
+762:        </LuminaButton>
+813:        <LuminaButton variant="ghost" onClick={onClose}>Close</LuminaButton>
+814:        <LuminaButton onClick={onOpen}>
+816:        </LuminaButton>
+855:          <LuminaButton onClick={onUpgrade} size="md" className="w-full mt-4">
+857:          </LuminaButton>
+888:          <LuminaButton variant="primary" onClick={onUpgrade} size="md" className="w-full mt-4">
+890:          </LuminaButton>
+895:        <LuminaButton variant="ghost" onClick={onClose}>Not now</LuminaButton>
+=================================================
+apps/lumina-builder/src/components/transform/TransformButton.tsx
+2:import { LuminaButton } from "@/components/lumina/LuminaButton";
+32:    <LuminaButton
+55:    </LuminaButton>
+=================================================
+apps/lumina-builder/src/components/transform/TransformAnalyticsPanel.tsx
+=================================================
+apps/lumina-builder/src/components/notifications/NotificationsCenter.tsx
+=================================================
+apps/lumina-builder/src/components/ErrorBoundary.tsx
+3:import { LuminaButton } from "@/components/lumina/LuminaButton";
+102:            <LuminaButton onClick={this.retry} className="w-full sm:w-auto">
+105:            </LuminaButton>
+106:            <LuminaButton
+113:            </LuminaButton>
+114:            <LuminaButton
+120:            </LuminaButton>
