@@ -374,3 +374,77 @@ All workspaces inherit one premium visual identity.
 
 Future products consume Lumina instead of inventing their own UI language.
 
+---
+
+# Runtime Workspace v2 Reference Implementation
+
+Runtime Operations is the first full Lumina workspace rebuild.
+
+It is not a visual patch.
+
+It is the reference implementation of the Lumina Design System.
+
+Runtime v2 must preserve:
+
+Runtime APIs
+
+Runtime state
+
+Runtime events
+
+Runtime services
+
+Runtime operations
+
+Runtime lifecycle behavior
+
+Runtime logs
+
+Runtime inspector data
+
+Runtime actions
+
+Runtime v2 must replace:
+
+Custom visual structure
+
+Ad hoc layout
+
+Raw glass usage
+
+Raw shadows
+
+Raw radius values
+
+Raw blur values
+
+Raw metric cards
+
+Raw toolbar styling
+
+Runtime v2 must consume:
+
+Lumina tokens
+
+Lumina glass system
+
+Lumina surface system
+
+Lumina workspace shell
+
+Lumina metric cards
+
+Lumina toolbar
+
+Lumina inspector
+
+Lumina timeline
+
+Lumina empty states
+
+Lumina skeletons
+
+Runtime v2 becomes the canonical workspace example.
+
+Repo Audit v2 and Knowledge Operations v2 will follow the same pattern.
+
