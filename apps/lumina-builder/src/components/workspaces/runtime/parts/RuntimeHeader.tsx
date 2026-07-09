@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import { Activity, Cpu } from "lucide-react";
 
 import {
+  LuminaMetricCard,
   LuminaWorkspaceHero,
 } from "@/components/lumina/workspace";
 
@@ -63,12 +64,8 @@ export const RuntimeHeader = forwardRef<
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
         metrics={
           <div className="flex flex-wrap items-center gap-4">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 backdrop-blur-xl">
-              <div className="text-[10px] uppercase tracking-[0.20em] text-muted-foreground">
-                Active Services
-              </div>
-
-              <div className="mt-2 flex items-center gap-2">
+            <LuminaMetricCard label="Active Services">
+              <div className="flex items-center gap-2">
                 <Cpu className="h-5 w-5 text-cyan-300" />
 
                 <span className="text-3xl font-semibold">
@@ -79,17 +76,13 @@ export const RuntimeHeader = forwardRef<
                   / {overall.total}
                 </span>
               </div>
-            </div>
+            </LuminaMetricCard>
 
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 backdrop-blur-xl">
-              <div className="text-[10px] uppercase tracking-[0.20em] text-muted-foreground">
-                Updated
-              </div>
-
-              <div className="mt-2 text-sm font-medium tabular-nums">
+            <LuminaMetricCard label="Updated">
+              <div className="text-sm font-medium tabular-nums">
                 {updatedLabel}
               </div>
-            </div>
+            </LuminaMetricCard>
           </div>
         }
       >
