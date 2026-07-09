@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 import {
   LuminaBadge,
-  LuminaFeedCard,
+  LuminaServiceCard,
 } from "@/components/lumina/workspace";
 
 import { cn } from "@/lib/utils";
@@ -59,43 +59,23 @@ export const RuntimeProjectRow = forwardRef<
     ref,
   ) => {
     return (
-      <button
+      <LuminaServiceCard
         ref={ref}
-        type="button"
+        selected={selected}
         onClick={onSelect}
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
         aria-pressed={selected}
         aria-label={`${p.name}, ${p.env}, ${STATE_LABEL[p.state]}, health ${p.health.status}`}
-        className={cn(
-          "group relative overflow-hidden w-full rounded-2xl",
-          "border backdrop-blur-xl",
-          "text-left",
-          "transition-all duration-300",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-violet/60",
-
-          selected
-            ? [
-                "border-violet/30",
-                "bg-[linear-gradient(180deg,rgba(124,92,255,.12),rgba(255,255,255,.03))]",
-                "shadow-[0_20px_50px_-24px_rgba(124,92,255,.55),inset_0_1px_0_rgba(255,255,255,.08)]",
-                "-translate-y-[2px]",
-              ]
-            : [
-                "border-white/8",
-                "bg-[linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))]",
-                "hover:border-violet/18",
-                "hover:-translate-y-[2px]",
-                "hover:shadow-[0_18px_42px_-24px_rgba(0,0,0,.65)]",
-              ],
-
-          className,
-        )}
-      >
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-        <LuminaFeedCard className="border-0 bg-transparent shadow-none">
-          <div className="flex items-center gap-4 p-4">
+        title={p.name}
+        badge={
+          <LuminaBadge className={ENV_CHIP[p.env]}>
+            {p.env}
+          </LuminaBadge>
+        }
+        className={className}
+        status={
+          <div className="flex items-center gap-4">
           <RuntimeStatusDot
             status={p.health.status}
             className="h-2.5 w-2.5"
@@ -143,8 +123,8 @@ export const RuntimeProjectRow = forwardRef<
             </div>
           </div>
           </div>
-        </LuminaFeedCard>
-      </button>
+        }
+      />
     );
   },
 );
