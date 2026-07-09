@@ -7,6 +7,11 @@ import {
 
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import {
+  LuminaBadge,
+  LuminaFeedCard,
+  LuminaPanelHeader,
+} from "@/components/lumina/workspace";
+import {
   LuminaSegmentedControl,
   type LuminaSegmentOption,
 } from "@/components/lumina/LuminaSegmentedControl";
@@ -113,18 +118,11 @@ export function RuntimeLogsPanel({
         className,
       )}
     >
-      <div className="flex flex-col gap-3 border-b border-white/6 bg-white/[0.025] p-3 backdrop-blur-xl xl:flex-row xl:items-center xl:justify-between">
-        <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Runtime Logs
-          </div>
-
-          <div className="mt-1 text-[11px] text-muted-foreground/80">
-            {filtered.length} visible · {logs.length} total
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+      <LuminaPanelHeader
+        title="Runtime Logs"
+        subtitle={`${filtered.length} visible · ${logs.length} total`}
+        trailing={
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
           <LuminaSegmentedControl
             value={level}
             onValueChange={setLevel}
@@ -171,8 +169,9 @@ export function RuntimeLogsPanel({
               )}
             />
           </LuminaButton>
-        </div>
-      </div>
+          </div>
+        }
+      />
 
       {filtered.length === 0 ? (
         <RuntimeEmptyState
@@ -188,29 +187,24 @@ export function RuntimeLogsPanel({
             className="space-y-1.5 px-3 py-3 font-mono text-[11.5px] leading-relaxed"
           >
             {[...filtered].reverse().map((entry) => (
-              <div
+              <LuminaFeedCard
                 key={entry.id}
-                className={cn(
-                  "grid grid-cols-[auto,auto,auto,1fr] gap-3",
-                  "rounded-xl border border-white/6",
-                  "bg-white/[0.025] px-3 py-2",
-                  "transition-all duration-200",
-                  "hover:border-violet/18 hover:bg-white/[0.05]",
-                )}
+                className="px-3 py-2"
               >
+                <div
+                  className={cn(
+                    "grid grid-cols-[auto,auto,auto,1fr] gap-3",
+                  )}
+                >
                 <span className="tabular-nums text-muted-foreground/70">
                   {fmtTime(entry.at)}
                 </span>
 
-                <span
-                  className={cn(
-                    "rounded-full border px-2 py-0.5",
-                    "text-[9px] font-semibold uppercase tracking-[0.16em]",
-                    LEVEL_BADGE[entry.level],
-                  )}
+                <LuminaBadge
+                  className={LEVEL_BADGE[entry.level]}
                 >
                   {entry.level}
-                </span>
+                </LuminaBadge>
 
                 <span className="text-muted-foreground/80">
                   {entry.source}
@@ -219,7 +213,8 @@ export function RuntimeLogsPanel({
                 <span className="truncate font-medium text-foreground/95">
                   {entry.message}
                 </span>
-              </div>
+                </div>
+              </LuminaFeedCard>
             ))}
 
             <div ref={bottomRef} />
