@@ -1,5 +1,10 @@
 import { forwardRef } from "react";
 
+import {
+  LuminaBadge,
+  LuminaFeedCard,
+} from "@/components/lumina/workspace";
+
 import { cn } from "@/lib/utils";
 
 import { RuntimeSparkline } from "./RuntimeSparkline";
@@ -89,7 +94,8 @@ export const RuntimeProjectRow = forwardRef<
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-        <div className="flex items-center gap-4 p-4">
+        <LuminaFeedCard className="border-0 bg-transparent shadow-none">
+          <div className="flex items-center gap-4 p-4">
           <RuntimeStatusDot
             status={p.health.status}
             className="h-2.5 w-2.5"
@@ -101,15 +107,11 @@ export const RuntimeProjectRow = forwardRef<
                 {p.name}
               </h3>
 
-              <span
-                className={cn(
-                  "inline-flex items-center rounded-full px-2.5 py-1",
-                  "text-[10px] font-semibold uppercase tracking-[0.18em]",
-                  ENV_CHIP[p.env],
-                )}
+              <LuminaBadge
+                className={ENV_CHIP[p.env]}
               >
                 {p.env}
-              </span>
+              </LuminaBadge>
             </div>
 
             <div className="mt-1 text-[11px] text-muted-foreground tabular-nums">
@@ -140,7 +142,8 @@ export const RuntimeProjectRow = forwardRef<
               CPU
             </div>
           </div>
-        </div>
+          </div>
+        </LuminaFeedCard>
       </button>
     );
   },
