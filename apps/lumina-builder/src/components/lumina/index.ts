@@ -7,3 +7,4 @@ export * from "./appearance";
 export * from "./input";
 export * from "./inspector";
 export * from "./surface";
+export * from "./composition";
