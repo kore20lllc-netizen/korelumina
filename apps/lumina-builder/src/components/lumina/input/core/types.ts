@@ -8,3 +8,21 @@ export interface LuminaInputBaseProps {
 
   className?: string;
 }
+
+export interface LuminaValueInputProps<T>
+  extends LuminaInputBaseProps {
+  value: T;
+
+  onValueChange(
+    value: T,
+  ): void;
+}
+
+export interface LuminaBooleanInputProps
+  extends LuminaInputBaseProps {
+  checked: boolean;
+
+  onCheckedChange(
+    checked: boolean,
+  ): void;
+}
