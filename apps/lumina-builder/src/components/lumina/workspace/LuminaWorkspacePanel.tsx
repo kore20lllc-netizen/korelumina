@@ -29,7 +29,7 @@ export function LuminaWorkspacePanel({
     <LuminaSurface
       variant="panel"
       className={cn(
-        "flex h-full flex-col overflow-hidden",
+        "glass-panel flex h-full flex-col overflow-hidden rounded-3xl",
         className,
       )}
     >
