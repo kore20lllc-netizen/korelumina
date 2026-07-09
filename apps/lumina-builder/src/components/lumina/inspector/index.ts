@@ -8,3 +8,4 @@ export * from "./LuminaInspectorBody";
 export * from "./LuminaInspectorFooter";
 export * from "./LuminaInspectorTitle";
 export * from "./LuminaInspectorDescription";
+export * from "./model";
