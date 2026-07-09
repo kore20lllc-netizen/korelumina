@@ -14,3 +14,5 @@ export * from "./LuminaSkeleton";
 
 export * from "./framework";
 export * from "./primitives";
+
+export * from "./LuminaServiceCard";
