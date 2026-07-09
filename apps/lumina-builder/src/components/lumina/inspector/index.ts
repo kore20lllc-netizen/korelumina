@@ -11,3 +11,4 @@ export * from "./LuminaInspectorDescription";
 export * from "./model";
 export * from "./factory";
 export * from "./registry";
+export * from "./renderer";
