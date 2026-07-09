@@ -1,5 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { GlowCard } from "@/components/lumina/GlowCard";
+import {
+  LuminaInspectorSection,
+  LuminaMetricCard,
+  LuminaPanelHeader,
+} from "@/components/lumina/workspace";
 import { RuntimeHealthBadge } from "./RuntimeHealthBadge";
 import { RuntimeSparkline } from "./RuntimeSparkline";
 import { RuntimeActionsToolbar } from "./RuntimeActionsToolbar";
@@ -38,18 +42,25 @@ export function RuntimeInspector({ project, logs, pending, onDispatch, className
 
   return (
     <div className={cn("flex flex-col h-full min-h-0", className)}>
-      <div className="border-b border-white/8 bg-white/[0.025] px-5 py-5 backdrop-blur-xl">
-        <div className="flex items-start justify-between gap-3 flex-wrap">
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">Inspector</div>
-            <h3 className="font-display text-2xl font-semibold tracking-tight truncate">{project.name}</h3>
-            <div className="mt-1 text-[12px] text-muted-foreground truncate">
-              {project.env} · {project.region} · {project.version}
-            </div>
+      <LuminaPanelHeader
+        title={project.name}
+        subtitle={
+          <>
+            {project.env} · {project.region} · {project.version}
+          </>
+        }
+        leading={
+          <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+            Inspector
           </div>
-          <RuntimeHealthBadge status={project.health.status} score={project.health.score} />
-        </div>
-      </div>
+        }
+        trailing={
+          <RuntimeHealthBadge
+            status={project.health.status}
+            score={project.health.score}
+          />
+        }
+      />
 
       <Tabs defaultValue="overview" className="flex-1 flex flex-col min-h-0">
         <TabsList className="mx-5 mt-4 self-start rounded-2xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl">
@@ -68,30 +79,30 @@ export function RuntimeInspector({ project, logs, pending, onDispatch, className
             <Stat label="Error rate"   value={`${project.metrics.errorRatePct.toFixed(2)}%`} />
           </div>
           {project.health.reasons.length > 0 && (
-            <GlowCard className="rounded-2xl p-5">
+            <LuminaInspectorSection>
               <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground mb-2">Health signals</div>
               <ul className="text-[12.5px] space-y-1">
                 {project.health.reasons.map((r, i) => <li key={i}>• {r}</li>)}
               </ul>
-            </GlowCard>
+            </LuminaInspectorSection>
           )}
         </TabsContent>
 
         <TabsContent value="metrics" className="flex-1 min-h-0 overflow-auto p-5 space-y-5">
-          <GlowCard className="rounded-2xl p-5">
+          <LuminaInspectorSection>
             <div className="flex items-center justify-between mb-2">
               <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">CPU</div>
               <div className="text-[12px] tabular-nums">{project.metrics.cpuPct.toFixed(0)}%</div>
             </div>
             <RuntimeSparkline data={project.metrics.cpuSeries} width={520} height={64} stroke="hsl(var(--cyan))" fill="hsl(var(--cyan) / 0.14)" className="w-full" />
-          </GlowCard>
-          <GlowCard className="rounded-2xl p-5">
+          </LuminaInspectorSection>
+          <LuminaInspectorSection>
             <div className="flex items-center justify-between mb-2">
               <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">Memory</div>
               <div className="text-[12px] tabular-nums">{memPct.toFixed(0)}%</div>
             </div>
             <RuntimeSparkline data={project.metrics.memSeries} width={520} height={64} stroke="hsl(var(--magenta))" fill="hsl(var(--magenta) / 0.14)" className="w-full" />
-          </GlowCard>
+          </LuminaInspectorSection>
         </TabsContent>
 
         <TabsContent value="env" className="flex-1 min-h-0 overflow-auto p-4 md:p-5">
@@ -118,10 +129,11 @@ export function RuntimeInspector({ project, logs, pending, onDispatch, className
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-xl transition-all duration-200 hover:border-white/20">
-      <div className="text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground">{label}</div>
-      <div className="mt-2 font-display text-2xl font-semibold tracking-tight tabular-nums">{value}</div>
-    </div>
+    <LuminaMetricCard label={label}>
+      <div className="font-display text-2xl font-semibold tracking-tight tabular-nums">
+        {value}
+      </div>
+    </LuminaMetricCard>
   );
 }
 
