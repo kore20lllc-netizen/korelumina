@@ -18,6 +18,9 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
+import {
+  LuminaInspectorSection,
+} from "@/components/lumina/workspace";
 import { cn } from "@/lib/utils";
 import type {
   RuntimeAction,
@@ -100,14 +103,14 @@ export function RuntimeActionsToolbar({
 
   return (
     <>
-      <div
-        role="toolbar"
-        aria-label="Runtime actions"
-        className={cn(
-          "flex items-center gap-1.5 flex-wrap",
-          className,
-        )}
+      <LuminaInspectorSection
+        className={className}
       >
+        <div
+          role="toolbar"
+          aria-label="Runtime actions"
+          className="flex flex-wrap items-center gap-2"
+        >
         {CONFIG.map((item) => {
           const Icon = item.icon;
 
@@ -160,7 +163,8 @@ export function RuntimeActionsToolbar({
             </LuminaButton>
           );
         })}
-      </div>
+        </div>
+      </LuminaInspectorSection>
 
       <AlertDialog
         open={!!confirm}
