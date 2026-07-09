@@ -16,18 +16,28 @@ import {
   writeLuminaAppearance,
 } from "./storage";
 
+import {
+  resolveAppearance,
+} from "./resolver";
+
+import {
+  applyAppearance,
+} from "./css";
+
 import type {
   LuminaAppearanceSettings,
 } from "./types";
 
 interface LuminaAppearanceContextValue {
   settings: LuminaAppearanceSettings;
-  setSettings: (
+
+  setSettings(
     settings: LuminaAppearanceSettings,
-  ) => void;
-  updateSettings: (
+  ): void;
+
+  updateSettings(
     patch: Partial<LuminaAppearanceSettings>,
-  ) => void;
+  ): void;
 }
 
 const LuminaAppearanceContext =
@@ -43,29 +53,44 @@ export function LuminaAppearanceProvider({
   children: ReactNode;
 }) {
   const [settings, setSettingsState] =
-    useState<LuminaAppearanceSettings>(
+    useState(
       DEFAULT_LUMINA_APPEARANCE,
     );
 
   useEffect(() => {
-    setSettingsState(readLuminaAppearance());
+    setSettingsState(
+      readLuminaAppearance(),
+    );
   }, []);
 
-  const setSettings = (
-    next: LuminaAppearanceSettings,
-  ) => {
-    setSettingsState(next);
-    writeLuminaAppearance(next);
-  };
+  useEffect(() => {
+    writeLuminaAppearance(
+      settings,
+    );
 
-  const updateSettings = (
+    applyAppearance(
+      resolveAppearance(
+        settings,
+      ),
+    );
+  }, [settings]);
+
+  function setSettings(
+    next: LuminaAppearanceSettings,
+  ) {
+    setSettingsState(next);
+  }
+
+  function updateSettings(
     patch: Partial<LuminaAppearanceSettings>,
-  ) => {
-    setSettings({
-      ...settings,
-      ...patch,
-    });
-  };
+  ) {
+    setSettingsState(
+      current => ({
+        ...current,
+        ...patch,
+      }),
+    );
+  }
 
   const value = useMemo(
     () => ({
@@ -86,5 +111,7 @@ export function LuminaAppearanceProvider({
 }
 
 export function useLuminaAppearance() {
-  return useContext(LuminaAppearanceContext);
+  return useContext(
+    LuminaAppearanceContext,
+  );
 }
