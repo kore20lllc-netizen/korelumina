@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface LuminaStatusBadgeProps {
+export interface LuminaBadgeProps {
   children: ReactNode;
   variant?:
     | "default"
@@ -26,11 +26,11 @@ const VARIANTS = {
     "border border-violet/30 bg-violet/10 text-violet-100",
 } as const;
 
-export function LuminaStatusBadge({
+export function LuminaBadge({
   children,
   variant = "default",
   className,
-}: LuminaStatusBadgeProps) {
+}: LuminaBadgeProps) {
   return (
     <span
       className={cn(
@@ -50,4 +50,4 @@ export function LuminaStatusBadge({
   );
 }
 
-export default LuminaStatusBadge;
+export default LuminaBadge;
