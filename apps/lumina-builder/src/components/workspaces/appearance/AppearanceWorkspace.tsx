@@ -1,16 +1,24 @@
 import {
+  LuminaInspectorRenderer,
   LuminaWorkspaceComposer,
 } from "@/components/lumina";
 
+import {
+  appearanceInspectorModel,
+} from "./model";
+
 import { AppearancePreview } from "./parts/AppearancePreview";
-import { AppearanceSidebar } from "./parts/AppearanceSidebar";
 import { AppearanceToolbar } from "./parts/AppearanceToolbar";
 
 export function AppearanceWorkspace() {
   return (
     <LuminaWorkspaceComposer
       toolbar={<AppearanceToolbar />}
-      sidebar={<AppearanceSidebar />}
+      sidebar={
+        <LuminaInspectorRenderer
+          model={appearanceInspectorModel}
+        />
+      }
       content={<AppearancePreview />}
     />
   );
