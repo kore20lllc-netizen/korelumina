@@ -1,11 +1,18 @@
 import {
-  LayoutGrid, Sparkles, Palette, Code2, FolderGit2, Settings, X,
+  LayoutGrid, Sparkles, Lightbulb, Palette, Code2, FolderGit2, Settings, X,
   Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity,
   BookOpen, ShieldCheck, Gauge, ServerCog, Crown, ChevronDown, LogOut, User as UserIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { useWorkspace } from "@/context/WorkspaceContext";
+import {
+  useWorkspace,
+} from "@/context/WorkspaceContext";
+
+import {
+  useLuminaAppearance,
+} from "@/components/lumina/appearance";
+
 import { cn } from "@/lib/utils";
 import { getCurrentRole } from "@/services/workspaceAccessService";
 import { auth } from "@/providers/auth-registry";
@@ -17,7 +24,17 @@ import { NavigationItem, NavigationSection, NavigationFooter } from "@/component
 interface NavItemDef { icon: any; label: string; active?: boolean; badge?: string }
 
 export function Sidebar() {
-  const { mode, view, setView, sidebarOpen, setSidebarOpen, activeProject, setImportOpen } = useWorkspace();
+  const {
+    mode,
+    view,
+    setView,
+    sidebarOpen,
+    setSidebarOpen,
+    activeProject,
+    setImportOpen,
+    appearancePanelOpen,
+    toggleAppearancePanel,
+  } = useWorkspace();
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [focusIndex, setFocusIndex] = useState(0);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -219,7 +236,55 @@ export function Sidebar() {
             <NavigationSection title="Admin" collapsed={!adminOpen} onToggle={toggleAdmin} />
           )}
         </nav>
+
         <div className="flex-1" />
+
+        <button
+          onClick={toggleAppearancePanel}
+          className="
+            group
+            relative
+            mb-3
+            h-10
+            w-10
+            rounded-xl
+            grid
+            place-items-center
+            transition-all
+            duration-300
+            hover:bg-white/5
+          "
+        >
+          <Lightbulb
+            className={
+              appearancePanelOpen
+                ? "h-5 w-5 text-amber-300"
+                : "h-5 w-5 text-white/70"
+            }
+          />
+
+          <span
+            className="
+              absolute
+              left-full
+              ml-3
+              whitespace-nowrap
+              rounded-lg
+              border
+              border-white/10
+              bg-[rgba(8,10,18,.85)]
+              px-3
+              py-1
+              text-xs
+              opacity-0
+              transition
+              group-hover:opacity-100
+              pointer-events-none
+            "
+          >
+            Workspace Appearance
+          </span>
+        </button>
 
         <NavigationFooter>
           {activeProject && (

@@ -71,15 +71,24 @@ const borderByVariant: Record<
   LuminaSurfaceVariant,
   string
 > = {
-  default: "border border-white/12",
-  panel: "border border-white/12",
-  hero: "border border-white/12",
-  sidebar: "border border-white/12",
-  toolbar: "border border-white/12",
-  card: "border border-white/14",
-  interactive: "border border-white/14",
-  selected: "border border-amber-500/35",
-  compact: "border border-white/12",
+  default:
+    "border [border-color:var(--lumina-border-standard)]",
+  panel:
+    "border [border-color:var(--lumina-border-standard)]",
+  hero:
+    "border [border-color:var(--lumina-border-standard)]",
+  sidebar:
+    "border [border-color:var(--lumina-border-standard)]",
+  toolbar:
+    "border [border-color:var(--lumina-border-standard)]",
+  card:
+    "border [border-color:var(--lumina-border-emphasis)]",
+  interactive:
+    "border [border-color:var(--lumina-border-emphasis)]",
+  selected:
+    "border [border-color:var(--lumina-border-emphasis)]",
+  compact:
+    "border [border-color:var(--lumina-border-standard)]",
 };
 
 const shadowByVariant: Record<
@@ -87,23 +96,23 @@ const shadowByVariant: Record<
   string
 > = {
   default:
-    "shadow-[0_24px_80px_-30px_rgba(0,0,0,.62)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   panel:
-    "shadow-[0_24px_80px_-30px_rgba(0,0,0,.62)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   hero:
-    "shadow-[0_40px_120px_-45px_rgba(0,0,0,.65)]",
+    "[box-shadow:var(--lumina-shadow-hero)]",
   sidebar:
-    "shadow-[0_24px_80px_-30px_rgba(0,0,0,.58)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   toolbar:
-    "shadow-[0_16px_48px_-26px_rgba(0,0,0,.58)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   card:
-    "shadow-[0_26px_80px_-30px_rgba(0,0,0,.58)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   interactive:
-    "shadow-[0_26px_80px_-30px_rgba(0,0,0,.58)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
   selected:
-    "shadow-[0_28px_90px_-28px_rgba(201,130,18,.36)]",
+    "[box-shadow:var(--lumina-shadow-selected)]",
   compact:
-    "shadow-[0_16px_48px_-26px_rgba(0,0,0,.58)]",
+    "[box-shadow:var(--lumina-shadow-panel)]",
 };
 
 export function LuminaSurface({

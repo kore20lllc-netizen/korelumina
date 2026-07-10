@@ -10,8 +10,14 @@ import {
 import { AppearancePreview } from "./parts/AppearancePreview";
 import { AppearanceToolbar } from "./parts/AppearanceToolbar";
 
+import {
+  WorkspaceAppearancePanel,
+} from "./WorkspaceAppearancePanel";
+
 export function AppearanceWorkspace() {
   return (
+    <>
+      <WorkspaceAppearancePanel />
     <LuminaWorkspaceComposer
       toolbar={<AppearanceToolbar />}
       sidebar={
@@ -21,6 +27,7 @@ export function AppearanceWorkspace() {
       }
       content={<AppearancePreview />}
     />
+    </>
   );
 }
 

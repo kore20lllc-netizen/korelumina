@@ -1,12 +1,28 @@
-import { type ReactNode } from "react";
+import {
+  type ReactNode,
+} from "react";
 import { TopBar } from "./TopBar";
 import { Sidebar } from "./Sidebar";
 import { CommandPalette } from "@/components/shell/CommandPalette";
 import { PublishDialog } from "@/components/shell/PublishDialog";
 import { BottomDock } from "@/components/shell/BottomDock";
+import {
+  WorkspaceAppearanceDrawer,
+} from "@/components/workspace-appearance";
 import luminaBg from "@/assets/optimized/lumina.webp";
+import { useWorkspace } from "@/context/WorkspaceContext";
 
-export function Shell({ children }: { children: ReactNode; blobs?: "hero" | "ambient" | "soft" }) {
+export function Shell({
+  children,
+}: {
+  children: ReactNode;
+  blobs?: "hero" | "ambient" | "soft";
+}) {
+  const {
+    appearancePanelOpen,
+    setAppearancePanelOpen,
+  } = useWorkspace();
+
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden">
       {/* Fixed background image */}
@@ -41,6 +57,13 @@ export function Shell({ children }: { children: ReactNode; blobs?: "hero" | "amb
             {children}
             <BottomDock />
           </main>
+
+          <WorkspaceAppearanceDrawer
+            open={appearancePanelOpen}
+            onClose={() =>
+              setAppearancePanelOpen(false)
+            }
+          />
         </div>
       </div>
       <CommandPalette />
