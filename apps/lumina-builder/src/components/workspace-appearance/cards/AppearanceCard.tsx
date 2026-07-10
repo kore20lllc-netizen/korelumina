@@ -16,11 +16,14 @@ export function AppearanceCard({
   return (
     <section
       className="
+        flex
+        h-full
+        flex-col
         rounded-[28px]
         border
         border-white/15
         bg-[rgba(12,14,24,.72)]
-        p-5
+        p-6
         backdrop-blur-2xl
         shadow-[0_0_40px_rgba(98,76,255,.12)]
       "
@@ -54,7 +57,14 @@ export function AppearanceCard({
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div
+        className="
+          flex
+          flex-1
+          flex-col
+          gap-4
+        "
+      >
         {children}
       </div>
     </section>
