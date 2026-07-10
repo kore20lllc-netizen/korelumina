@@ -116,13 +116,14 @@ className={cn(
 
 "rounded-[30px]",
 
-"border border-white/10",
+        "border",
+        "[border-color:var(--lumina-border-standard)]",
 
-"bg-[rgba(12,14,24,.42)]",
+        "[background:var(--lumina-surface-card)]",
 
-"backdrop-blur-[34px]",
+        "[backdrop-filter:var(--lumina-blur-surface)]",
 
-"shadow-[0_20px_70px_rgba(0,0,0,.38)]",
+        "[box-shadow:var(--lumina-shadow-panel)]",
 
 "transition-all duration-500",
 
@@ -155,7 +156,8 @@ bg-[linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.02)_22%,trans
 <div
 className="pointer-events-none absolute inset-[1px]
 rounded-[29px]
-border border-white/[0.08]"
+border
+[border-color:var(--lumina-border-standard)]"
 />
 
 <div
