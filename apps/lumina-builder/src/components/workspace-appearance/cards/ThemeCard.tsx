@@ -10,7 +10,17 @@ import {
   AppearanceCard,
 } from "./AppearanceCard";
 
+import {
+  useWorkspaceAppearance,
+} from "../context";
+
 export function ThemeCard() {
+  const {
+    appearance,
+    updateAppearance,
+  } =
+    useWorkspaceAppearance();
+
   return (
     <AppearanceCard
       icon={<Palette className="h-4 w-4" />}
@@ -26,6 +36,7 @@ export function ThemeCard() {
           {label:"Purple",value:"purple"},
           {label:"Emerald",value:"emerald"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -36,6 +47,7 @@ export function ThemeCard() {
           {label:"Balanced",value:"balanced"},
           {label:"High",value:"high"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -47,6 +59,7 @@ export function ThemeCard() {
           {label:"Medium",value:"medium"},
           {label:"High",value:"high"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -57,6 +70,7 @@ export function ThemeCard() {
           {label:"Reduced",value:"reduced"},
           {label:"Standard",value:"standard"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
     </AppearanceCard>
   );

@@ -22,6 +22,7 @@ import { LandingPage } from "@/pages/LandingPage";
 import { TransformProvider } from "@/context/TransformContext";
 import { TransformModal } from "@/components/transform/TransformModal";
 import { TransformAnalyticsMount } from "@/components/transform/TransformAnalyticsMount";
+import { WorkspaceAppearanceProvider } from "@/components/workspace-appearance";
 
 const RepoAuditWorkspace = lazy(() =>
   import("@/components/workspaces/RepoAuditWorkspace").then((m) => ({
@@ -323,14 +324,16 @@ export default function Index() {
       <GlassTintProvider>
         <ActiveTeamProvider>
           <WorkspaceProvider>
-            <TransformProvider>
-              <ImpersonationBanner />
-              <Router />
-              <ImportModal />
-              <DeployModal />
-              <TransformModal />
-              <TransformAnalyticsMount />
-            </TransformProvider>
+            <WorkspaceAppearanceProvider>
+              <TransformProvider>
+                <ImpersonationBanner />
+                <Router />
+                <ImportModal />
+                <DeployModal />
+                <TransformModal />
+                <TransformAnalyticsMount />
+              </TransformProvider>
+            </WorkspaceAppearanceProvider>
           </WorkspaceProvider>
         </ActiveTeamProvider>
       </GlassTintProvider>

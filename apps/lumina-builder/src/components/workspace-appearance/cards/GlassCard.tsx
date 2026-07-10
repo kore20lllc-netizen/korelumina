@@ -10,7 +10,17 @@ import {
   AppearanceCard,
 } from "./AppearanceCard";
 
+import {
+  useWorkspaceAppearance,
+} from "../context";
+
 export function GlassCard() {
+  const {
+    appearance,
+    updateAppearance,
+  } =
+    useWorkspaceAppearance();
+
   return (
     <AppearanceCard
       icon={<PanelsTopLeft className="h-4 w-4" />}
@@ -25,6 +35,7 @@ export function GlassCard() {
           { label:"Solid", value:"solid" },
           { label:"Mica", value:"mica" },
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -37,6 +48,7 @@ export function GlassCard() {
           { label:"Warm", value:"warm" },
           { label:"Cool", value:"cool" },
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -47,6 +59,7 @@ export function GlassCard() {
           { label:"Standard", value:"standard" },
           { label:"Heavy", value:"heavy" },
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -58,6 +71,7 @@ export function GlassCard() {
           { label:"Medium", value:"medium" },
           { label:"Strong", value:"strong" },
         ]}
+        onChange={(value) => updateAppearance({})}
       />
     </AppearanceCard>
   );

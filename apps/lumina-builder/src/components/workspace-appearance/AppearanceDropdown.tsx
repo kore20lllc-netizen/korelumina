@@ -18,6 +18,7 @@ interface AppearanceDropdownProps {
   title: string;
   value: string;
   options: Option[];
+  onChange(value: string): void;
 }
 
 export function AppearanceDropdown({
@@ -28,9 +29,6 @@ export function AppearanceDropdown({
 
   const [open, setOpen] =
     useState(false);
-
-  const [selected, setSelected] =
-    useState(value);
 
   const ref =
     useRef<HTMLDivElement>(null);
@@ -63,7 +61,7 @@ export function AppearanceDropdown({
 
   const current =
     options.find(
-      o => o.value === selected,
+      o => o.value === value,
     ) ?? options[0];
 
   return (
@@ -156,7 +154,7 @@ export function AppearanceDropdown({
               key={option.value}
               type="button"
               onClick={() => {
-                setSelected(
+                onChange(
                   option.value,
                 );
                 setOpen(false);
@@ -175,7 +173,7 @@ export function AppearanceDropdown({
             >
               <Check
                 className={
-                  option.value === selected
+                  option.value === value
                     ? "h-4 w-4 text-amber-300"
                     : "h-4 w-4 opacity-0"
                 }

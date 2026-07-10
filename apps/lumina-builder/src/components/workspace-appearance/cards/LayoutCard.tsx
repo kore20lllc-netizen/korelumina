@@ -10,7 +10,17 @@ import {
   AppearanceCard,
 } from "./AppearanceCard";
 
+import {
+  useWorkspaceAppearance,
+} from "../context";
+
 export function LayoutCard() {
+  const {
+    appearance,
+    updateAppearance,
+  } =
+    useWorkspaceAppearance();
+
   return (
     <AppearanceCard
       icon={<LayoutGrid className="h-4 w-4" />}
@@ -26,6 +36,7 @@ export function LayoutCard() {
           {label:"Dense",value:"dense"},
           {label:"Ultra",value:"ultra"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -36,6 +47,7 @@ export function LayoutCard() {
           {label:"Comfortable",value:"comfortable"},
           {label:"Relaxed",value:"relaxed"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -46,6 +58,7 @@ export function LayoutCard() {
           {label:"Medium",value:"medium"},
           {label:"Large",value:"large"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
 
       <AppearanceDropdown
@@ -56,6 +69,7 @@ export function LayoutCard() {
           {label:"Raised",value:"raised"},
           {label:"Floating",value:"floating"},
         ]}
+        onChange={(value) => updateAppearance({})}
       />
     </AppearanceCard>
   );
