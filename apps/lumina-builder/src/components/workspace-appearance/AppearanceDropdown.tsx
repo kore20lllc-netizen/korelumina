@@ -81,10 +81,11 @@ export function AppearanceDropdown({
           setOpen(v => !v)
         }
         className="
-          flex
+          grid
           w-full
+          grid-cols-[1fr_auto]
           items-center
-          justify-between
+          gap-3
           rounded-2xl
           border
           border-white/15
@@ -96,7 +97,7 @@ export function AppearanceDropdown({
           hover:bg-white/5
         "
       >
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <Check
             className="
               h-4
@@ -105,7 +106,9 @@ export function AppearanceDropdown({
             "
           />
 
-          <span>
+          <span
+            className="truncate"
+          >
             {current.label}
           </span>
         </div>
@@ -114,6 +117,8 @@ export function AppearanceDropdown({
           className={`
             h-4
             w-4
+            shrink-0
+            text-white/70
             transition-transform
             duration-200
             ${
