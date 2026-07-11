@@ -2,6 +2,8 @@ import type {
   HTMLAttributes,
 } from "react";
 
+import { Slot } from "@radix-ui/react-slot";
+
 import { cn } from "@/lib/utils";
 
 type LuminaSurfaceVariant =
@@ -112,11 +114,15 @@ export function LuminaSurface({
   className,
   variant = "panel",
   children,
-  asChild: _asChild,
+  asChild = false,
   ...props
 }: LuminaSurfaceProps) {
+  const Comp = asChild
+    ? Slot
+    : "div";
+
   return (
-    <div
+    <Comp
       className={cn(
         "transition-all duration-300",
         backgroundByVariant[variant],
@@ -129,6 +135,6 @@ export function LuminaSurface({
       {...props}
     >
       {children}
-    </div>
+    </Comp>
   );
 }
