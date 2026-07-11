@@ -24,15 +24,11 @@ const ambient = {
     "from-amber/18 via-yellow/8 to-transparent",
 };
 
-const hover = {
-  violet:
-    "hover:border-violet/40 hover:shadow-[0_35px_90px_-30px_rgba(120,90,255,.45)]",
-  magenta:
-    "hover:border-fuchsia/40 hover:shadow-[0_35px_90px_-30px_rgba(255,80,190,.45)]",
-  cyan:
-    "hover:border-cyan/40 hover:shadow-[0_35px_90px_-30px_rgba(0,220,255,.40)]",
-  gold:
-    "hover:border-amber/40 hover:shadow-[0_35px_90px_-30px_rgba(255,190,70,.40)]",
+const hoverBorder = {
+  violet: "hover:border-violet/40",
+  magenta: "hover:border-fuchsia/40",
+  cyan: "hover:border-cyan/40",
+  gold: "hover:border-amber/40",
 };
 
 export const GlowCard =
@@ -116,14 +112,14 @@ className={cn(
 
 "rounded-[30px]",
 
-        "border",
-        "[border-color:var(--lumina-border-standard)]",
+"border",
+"[border-color:var(--lumina-border-standard)]",
 
-        "[background:var(--lumina-surface-card)]",
+"[background:var(--lumina-surface-card)]",
 
-        "[backdrop-filter:var(--lumina-blur-surface)]",
+"[backdrop-filter:var(--lumina-blur-surface)]",
 
-        "[box-shadow:var(--lumina-shadow-panel)]",
+"[box-shadow:var(--lumina-shadow-panel)]",
 
 "transition-all duration-500",
 
@@ -131,7 +127,7 @@ interactive &&
 "cursor-pointer hover:-translate-y-1",
 
 interactive &&
-hover[accent],
+hoverBorder[accent],
 
 className,
 
@@ -150,7 +146,7 @@ ambient[accent],
 
 <div
 className="pointer-events-none absolute inset-0 rounded-[30px]
-bg-[linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.02)_22%,transparent_55%)]"
+[background:var(--lumina-highlight-overlay)]"
 />
 
 <div
@@ -167,7 +163,8 @@ className="pointer-events-none absolute
 h-64
 w-64
 rounded-full
-bg-white/6
+[background:var(--lumina-ambient-primary)]
+opacity-[var(--lumina-ambient-opacity)]
 blur-3xl"
 />
 
@@ -178,7 +175,8 @@ className="pointer-events-none absolute
 h-56
 w-56
 rounded-full
-bg-violet/10
+[background:var(--lumina-ambient-secondary)]
+opacity-[calc(var(--lumina-ambient-opacity)*0.8)]
 blur-3xl"
 />
 

@@ -30,6 +30,9 @@ export const LUMINA_CSS_VARIABLES = {
       "--lumina-shadow-hero",
     selected:
       "--lumina-shadow-selected",
+
+    hover:
+      "--lumina-shadow-hover",
   },
 
   blur: {
@@ -37,9 +40,32 @@ export const LUMINA_CSS_VARIABLES = {
       "--lumina-blur-surface",
   },
 
+  highlight: {
+    overlay:
+      "--lumina-highlight-overlay",
+  },
+
+  ambient: {
+    primary:
+      "--lumina-ambient-primary",
+
+    secondary:
+      "--lumina-ambient-secondary",
+
+    opacity:
+      "--lumina-ambient-opacity",
+
+    motion:
+      "--lumina-ambient-motion",
+
+    transparency:
+      "--lumina-ambient-transparency",
+  },
+
   radius: {
     surface:
       "--lumina-radius-surface",
+
     inner:
       "--lumina-radius-inner",
   },
@@ -47,8 +73,10 @@ export const LUMINA_CSS_VARIABLES = {
   spacing: {
     compact:
       "--lumina-spacing-compact",
+
     standard:
       "--lumina-spacing-standard",
+
     relaxed:
       "--lumina-spacing-relaxed",
   },
@@ -56,6 +84,7 @@ export const LUMINA_CSS_VARIABLES = {
   accent: {
     color:
       "--lumina-accent-color",
+
     rgb:
       "--lumina-accent-rgb",
   },
@@ -63,6 +92,7 @@ export const LUMINA_CSS_VARIABLES = {
   glow: {
     surface:
       "--lumina-glow-surface",
+
     opacity:
       "--lumina-glow-opacity",
   },
@@ -70,16 +100,8 @@ export const LUMINA_CSS_VARIABLES = {
   motion: {
     duration:
       "--lumina-motion-duration",
+
     scale:
       "--lumina-motion-scale",
-  },
-
-  ambient: {
-    opacity:
-      "--lumina-ambient-opacity",
-    motion:
-      "--lumina-ambient-motion",
-    transparency:
-      "--lumina-ambient-transparency",
   },
 } as const;

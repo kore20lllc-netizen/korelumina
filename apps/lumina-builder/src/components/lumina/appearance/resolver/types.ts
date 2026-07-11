@@ -25,6 +25,11 @@ export interface LuminaResolvedAppearance {
     panel: string;
     hero: string;
     selected: string;
+    hover: string;
+  };
+
+  highlight: {
+    overlay: string;
   };
 
   radius: {
@@ -54,6 +59,8 @@ export interface LuminaResolvedAppearance {
   };
 
   ambient: {
+    primary: string;
+    secondary: string;
     opacity: number;
     motion: number;
     transparency: number;
