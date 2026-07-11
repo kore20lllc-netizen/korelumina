@@ -1,3 +1,5 @@
+import { LuminaSurface } from "@/components/lumina/surface/LuminaSurface";
+
 import {
   LuminaInspector,
   LuminaInspectorBody,
@@ -45,13 +47,10 @@ export function LuminaInspectorRenderer({
                 title={section.title}
               >
                 {section.controls.map((control) => (
-                  <div
+                  <LuminaSurface
                     key={control.id}
-                    className={[
-                      "rounded-xl border px-3 py-2",
-                      "[border-color:var(--lumina-border-standard)]",
-                      "[background:var(--lumina-surface-compact)]",
-                    ].join(" ")}
+                    variant="compact"
+                    className="px-3 py-2"
                   >
                     <div className="text-sm font-medium">
                       {control.label}
@@ -62,7 +61,7 @@ export function LuminaInspectorRenderer({
                         {control.description}
                       </div>
                     )}
-                  </div>
+                  </LuminaSurface>
                 ))}
               </LuminaInspectorSection>
             ))}
