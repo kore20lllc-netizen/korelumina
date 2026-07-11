@@ -13,12 +13,8 @@ export interface LuminaSurfaceProfile {
 }
 
 /**
- * Legacy Tailwind class profiles.
- *
- * These remain temporarily available for getLuminaSurfaceClass()
- * and existing class-based consumers such as LuminaSurface.
- *
- * Do not use these values for CSS custom properties.
+ * Tailwind utility profiles retained for components that intentionally
+ * compose appearance with utility classes rather than CSS variables.
  */
 export const densitySurfaceProfiles:
   Record<LuminaDensityMode, LuminaSurfaceProfile> = {
@@ -60,10 +56,7 @@ export const densitySurfaceProfiles:
   };
 
 /**
- * Legacy Tailwind blur classes.
- *
- * These remain temporarily available for class-based consumers.
- * CSS-variable consumers must use materialBackdropFilterProfiles.
+ * Tailwind backdrop utility profiles.
  */
 export const materialBlurProfiles:
   Record<LuminaMaterialMode, string> = {

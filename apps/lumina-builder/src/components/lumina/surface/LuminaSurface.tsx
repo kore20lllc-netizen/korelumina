@@ -2,11 +2,6 @@ import type {
   HTMLAttributes,
 } from "react";
 
-import {
-  getLuminaSurfaceClass,
-  useLuminaAppearance,
-} from "@/components/lumina/appearance";
-
 import { cn } from "@/lib/utils";
 
 type LuminaSurfaceVariant =
@@ -23,33 +18,31 @@ type LuminaSurfaceVariant =
 export interface LuminaSurfaceProps
   extends HTMLAttributes<HTMLDivElement> {
   variant?: LuminaSurfaceVariant;
-
-  /**
-   * Reserved for future slot-based composition.
-   * Kept here so existing consumers do not leak `asChild`
-   * onto the DOM.
-   */
   asChild?: boolean;
 }
 
-const variantMap: Record<
+const backgroundByVariant: Record<
   LuminaSurfaceVariant,
-  | "hero"
-  | "panel"
-  | "card"
-  | "interactive"
-  | "selected"
-  | "compact"
+  string
 > = {
-  default: "panel",
-  panel: "panel",
-  hero: "hero",
-  sidebar: "panel",
-  toolbar: "compact",
-  card: "card",
-  interactive: "interactive",
-  selected: "selected",
-  compact: "compact",
+  default:
+    "[background:var(--lumina-surface-panel)]",
+  panel:
+    "[background:var(--lumina-surface-panel)]",
+  hero:
+    "[background:var(--lumina-surface-hero)]",
+  sidebar:
+    "[background:var(--lumina-surface-panel)]",
+  toolbar:
+    "[background:var(--lumina-surface-compact)]",
+  card:
+    "[background:var(--lumina-surface-card)]",
+  interactive:
+    "[background:var(--lumina-surface-interactive)]",
+  selected:
+    "[background:var(--lumina-surface-selected)]",
+  compact:
+    "[background:var(--lumina-surface-compact)]",
 };
 
 const shapeByVariant: Record<
@@ -122,21 +115,12 @@ export function LuminaSurface({
   asChild: _asChild,
   ...props
 }: LuminaSurfaceProps) {
-  const { settings } =
-    useLuminaAppearance();
-
-  const surfaceVariant =
-    variantMap[variant];
-
   return (
     <div
       className={cn(
-        "glass-panel",
         "transition-all duration-300",
-        getLuminaSurfaceClass(
-          surfaceVariant,
-          settings,
-        ),
+        backgroundByVariant[variant],
+        "[backdrop-filter:var(--lumina-blur-surface)]",
         shapeByVariant[variant],
         borderByVariant[variant],
         shadowByVariant[variant],
