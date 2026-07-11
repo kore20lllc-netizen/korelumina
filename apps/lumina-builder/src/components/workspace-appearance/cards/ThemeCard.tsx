@@ -7,70 +7,136 @@ import {
 } from "../AppearanceDropdown";
 
 import {
-  AppearanceCard,
-} from "./AppearanceCard";
-
-import {
   useWorkspaceAppearance,
 } from "../context";
 
+import type {
+  AppearanceAccent,
+  AppearanceAnimation,
+  AppearanceContrast,
+  AppearanceGlow,
+} from "../model";
+
+import {
+  AppearanceCard,
+} from "./AppearanceCard";
+
 export function ThemeCard() {
   const {
-    appearance,
-    updateAppearance,
-  } =
-    useWorkspaceAppearance();
+    state,
+    actions,
+  } = useWorkspaceAppearance();
 
   return (
     <AppearanceCard
-      icon={<Palette className="h-4 w-4" />}
+      icon={
+        <Palette className="h-4 w-4" />
+      }
       title="Theme"
       description="Color language"
     >
       <AppearanceDropdown
         title="Accent"
-        value="amber"
+        value={state.accent}
         options={[
-          {label:"Amber",value:"amber"},
-          {label:"Blue",value:"blue"},
-          {label:"Purple",value:"purple"},
-          {label:"Emerald",value:"emerald"},
+          {
+            label: "Amber",
+            value: "amber",
+          },
+          {
+            label: "Blue",
+            value: "blue",
+          },
+          {
+            label: "Purple",
+            value: "purple",
+          },
+          {
+            label: "Emerald",
+            value: "emerald",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setAccent(
+            value as AppearanceAccent,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Contrast"
-        value="balanced"
+        value={state.contrast}
         options={[
-          {label:"Soft",value:"soft"},
-          {label:"Balanced",value:"balanced"},
-          {label:"High",value:"high"},
+          {
+            label: "Soft",
+            value: "soft",
+          },
+          {
+            label: "Balanced",
+            value: "balanced",
+          },
+          {
+            label: "High",
+            value: "high",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setContrast(
+            value as AppearanceContrast,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Glow"
-        value="medium"
+        value={state.glow}
         options={[
-          {label:"None",value:"none"},
-          {label:"Low",value:"low"},
-          {label:"Medium",value:"medium"},
-          {label:"High",value:"high"},
+          {
+            label: "None",
+            value: "none",
+          },
+          {
+            label: "Low",
+            value: "low",
+          },
+          {
+            label: "Medium",
+            value: "medium",
+          },
+          {
+            label: "High",
+            value: "high",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setGlow(
+            value as AppearanceGlow,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Animation"
-        value="standard"
+        value={state.animation}
         options={[
-          {label:"Off",value:"off"},
-          {label:"Reduced",value:"reduced"},
-          {label:"Standard",value:"standard"},
+          {
+            label: "Off",
+            value: "off",
+          },
+          {
+            label: "Reduced",
+            value: "reduced",
+          },
+          {
+            label: "Standard",
+            value: "standard",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setAnimation(
+            value as AppearanceAnimation,
+          )
+        }
       />
     </AppearanceCard>
   );

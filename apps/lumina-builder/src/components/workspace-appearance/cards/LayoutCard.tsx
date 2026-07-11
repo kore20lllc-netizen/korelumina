@@ -7,69 +7,132 @@ import {
 } from "../AppearanceDropdown";
 
 import {
-  AppearanceCard,
-} from "./AppearanceCard";
-
-import {
   useWorkspaceAppearance,
 } from "../context";
 
+import type {
+  AppearanceDensity,
+  AppearanceElevation,
+  AppearanceRadius,
+  AppearanceSpacing,
+} from "../model";
+
+import {
+  AppearanceCard,
+} from "./AppearanceCard";
+
 export function LayoutCard() {
   const {
-    appearance,
-    updateAppearance,
-  } =
-    useWorkspaceAppearance();
+    state,
+    actions,
+  } = useWorkspaceAppearance();
 
   return (
     <AppearanceCard
-      icon={<LayoutGrid className="h-4 w-4" />}
+      icon={
+        <LayoutGrid className="h-4 w-4" />
+      }
       title="Layout"
       description="Density and spacing"
     >
       <AppearanceDropdown
         title="Density"
-        value="standard"
+        value={state.density}
         options={[
-          {label:"Light",value:"light"},
-          {label:"Standard",value:"standard"},
-          {label:"Dense",value:"dense"},
-          {label:"Ultra",value:"ultra"},
+          {
+            label: "Light",
+            value: "light",
+          },
+          {
+            label: "Standard",
+            value: "standard",
+          },
+          {
+            label: "Dense",
+            value: "dense",
+          },
+          {
+            label: "Ultra",
+            value: "ultra",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setDensity(
+            value as AppearanceDensity,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Spacing"
-        value="comfortable"
+        value={state.spacing}
         options={[
-          {label:"Compact",value:"compact"},
-          {label:"Comfortable",value:"comfortable"},
-          {label:"Relaxed",value:"relaxed"},
+          {
+            label: "Compact",
+            value: "compact",
+          },
+          {
+            label: "Comfortable",
+            value: "comfortable",
+          },
+          {
+            label: "Relaxed",
+            value: "relaxed",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setSpacing(
+            value as AppearanceSpacing,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Radius"
-        value="large"
+        value={state.radius}
         options={[
-          {label:"Small",value:"small"},
-          {label:"Medium",value:"medium"},
-          {label:"Large",value:"large"},
+          {
+            label: "Small",
+            value: "small",
+          },
+          {
+            label: "Medium",
+            value: "medium",
+          },
+          {
+            label: "Large",
+            value: "large",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setRadius(
+            value as AppearanceRadius,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Elevation"
-        value="floating"
+        value={state.elevation}
         options={[
-          {label:"Flat",value:"flat"},
-          {label:"Raised",value:"raised"},
-          {label:"Floating",value:"floating"},
+          {
+            label: "Flat",
+            value: "flat",
+          },
+          {
+            label: "Raised",
+            value: "raised",
+          },
+          {
+            label: "Floating",
+            value: "floating",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={value =>
+          actions.setElevation(
+            value as AppearanceElevation,
+          )
+        }
       />
     </AppearanceCard>
   );

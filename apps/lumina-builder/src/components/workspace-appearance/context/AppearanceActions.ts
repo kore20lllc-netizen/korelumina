@@ -3,38 +3,57 @@ import type {
 } from "../model";
 
 export interface AppearanceActions {
-
   setMaterial(
-    material: WorkspaceAppearanceModel["material"],
+    value: WorkspaceAppearanceModel["material"],
   ): void;
 
   setTint(
-    tint: WorkspaceAppearanceModel["tint"],
+    value: WorkspaceAppearanceModel["tint"],
   ): void;
 
-  setTintStrength(
-    value: number,
-  ): void;
+  setTintStrength(value: number): void;
 
-  setTransparency(
-    value: number,
-  ): void;
+  setTransparency(value: number): void;
 
-  setBlur(
-    value: number,
-  ): void;
+  setBlur(value: number): void;
+
+  setShadowIntensity(value: number): void;
+
+  setGlowIntensity(value: number): void;
 
   setDensity(
-    density: WorkspaceAppearanceModel["density"],
+    value: WorkspaceAppearanceModel["density"],
   ): void;
 
   setSpacing(
-    spacing: WorkspaceAppearanceModel["spacing"],
+    value: WorkspaceAppearanceModel["spacing"],
   ): void;
 
   setRadius(
-    radius: WorkspaceAppearanceModel["radius"],
+    value: WorkspaceAppearanceModel["radius"],
   ): void;
+
+  setElevation(
+    value: WorkspaceAppearanceModel["elevation"],
+  ): void;
+
+  setAccent(
+    value: WorkspaceAppearanceModel["accent"],
+  ): void;
+
+  setContrast(
+    value: WorkspaceAppearanceModel["contrast"],
+  ): void;
+
+  setGlow(
+    value: WorkspaceAppearanceModel["glow"],
+  ): void;
+
+  setAnimation(
+    value: WorkspaceAppearanceModel["animation"],
+  ): void;
+
+  setMotion(value: number): void;
 
   reset(): void;
 }

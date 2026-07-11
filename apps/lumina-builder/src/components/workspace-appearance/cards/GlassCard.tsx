@@ -56,7 +56,7 @@ function resolveBlurValue(
 
 export function GlassCard() {
   const {
-    appearance,
+    state,
     actions,
   } = useWorkspaceAppearance();
 
@@ -70,7 +70,7 @@ export function GlassCard() {
     >
       <AppearanceDropdown
         title="Material"
-        value={appearance.material}
+        value={state.material}
         options={[
           {
             label: "Glass",
@@ -85,7 +85,7 @@ export function GlassCard() {
             value: "mica",
           },
         ]}
-        onChange={(value) =>
+        onChange={value =>
           actions.setMaterial(
             value as AppearanceMaterial,
           )
@@ -94,7 +94,7 @@ export function GlassCard() {
 
       <AppearanceDropdown
         title="Tint"
-        value={appearance.tint}
+        value={state.tint}
         options={[
           {
             label: "None",
@@ -117,7 +117,7 @@ export function GlassCard() {
             value: "cool",
           },
         ]}
-        onChange={(value) =>
+        onChange={value =>
           actions.setTint(
             value as AppearanceTint,
           )
@@ -127,7 +127,7 @@ export function GlassCard() {
       <AppearanceDropdown
         title="Blur Mode"
         value={resolveBlurPreset(
-          appearance.blur,
+          state.blur,
         )}
         options={[
           {
@@ -143,7 +143,7 @@ export function GlassCard() {
             value: "heavy",
           },
         ]}
-        onChange={(value) =>
+        onChange={value =>
           actions.setBlur(
             resolveBlurValue(value),
           )

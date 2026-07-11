@@ -3,16 +3,16 @@ import {
 } from "react";
 
 import {
-  useWorkspaceAppearance,
-} from "../context";
-
-import {
   useLuminaAppearance,
 } from "@/components/lumina/appearance";
 
+import {
+  useWorkspaceAppearance,
+} from "../context";
+
 export function WorkspaceAppearanceAdapter() {
   const {
-    appearance,
+    state,
   } = useWorkspaceAppearance();
 
   const {
@@ -21,28 +21,32 @@ export function WorkspaceAppearanceAdapter() {
 
   useEffect(() => {
     updateSettings({
-      material: appearance.material,
+      material:
+        state.material,
 
       density:
-        appearance.density === "compact"
-          ? "dense"
-          : appearance.density === "comfortable"
-            ? "standard"
-            : "standard",
+        state.density,
 
       contrast:
-        appearance.contrast === "high"
+        state.contrast === "high"
           ? "high"
           : "standard",
 
       transparency:
-        appearance.transparency,
+        state.transparency,
 
       motion:
-        appearance.motion,
+        state.animation === "off"
+          ? 0
+          : state.animation === "reduced"
+            ? Math.min(
+                state.motion,
+                35,
+              )
+            : state.motion,
     });
   }, [
-    appearance,
+    state,
     updateSettings,
   ]);
 
