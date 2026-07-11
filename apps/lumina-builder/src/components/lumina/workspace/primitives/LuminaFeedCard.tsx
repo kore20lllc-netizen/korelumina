@@ -19,7 +19,12 @@ export function LuminaFeedCard({
       className={cn(
         "overflow-hidden",
         interactive &&
-          "transition-all duration-200 hover:border-white/20 hover:bg-white/[0.05]",
+          [
+            "transition-all duration-200",
+            "hover:[border-color:var(--lumina-border-emphasis)]",
+            "hover:[background:var(--lumina-surface-interactive)]",
+            "hover:[box-shadow:var(--lumina-shadow-hover)]",
+          ],
         className,
       )}
     >

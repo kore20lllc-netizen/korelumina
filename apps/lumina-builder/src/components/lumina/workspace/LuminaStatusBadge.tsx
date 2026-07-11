@@ -1,44 +1,52 @@
-import type { ReactNode } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-export type LuminaStatus =
-  | "success"
-  | "warning"
-  | "danger"
-  | "info"
-  | "neutral";
+const statusBadge = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
+  {
+    variants: {
+      variant: {
+        neutral: [
+          "[border-color:var(--lumina-border-standard)]",
+          "[background:var(--lumina-surface-interactive)]",
+          "text-muted-foreground",
+        ].join(" "),
 
-export interface LuminaStatusBadgeProps {
-  status?: LuminaStatus;
-  children: ReactNode;
-  className?: string;
-}
+        accent: [
+          "[border-color:var(--lumina-border-emphasis)]",
+          "[background:var(--lumina-surface-selected)]",
+          "[box-shadow:var(--lumina-shadow-selected)]",
+          "text-white",
+        ].join(" "),
+      },
+    },
 
-const STATUS_CLASS: Record<LuminaStatus, string> = {
-  success: "border-emerald-500/25 bg-emerald-500/10 text-emerald-300",
-  warning: "border-amber-500/25 bg-amber-500/10 text-amber-300",
-  danger: "border-rose-500/25 bg-rose-500/10 text-rose-300",
-  info: "border-cyan-500/25 bg-cyan-500/10 text-cyan-300",
-  neutral: "border-white/10 bg-white/5 text-muted-foreground",
-};
+    defaultVariants: {
+      variant: "neutral",
+    },
+  },
+);
+
+export interface LuminaStatusBadgeProps
+  extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof statusBadge> {}
 
 export function LuminaStatusBadge({
-  status = "neutral",
-  children,
   className,
+  variant,
+  ...props
 }: LuminaStatusBadgeProps) {
   return (
-    <Badge
+    <span
       className={cn(
-        "rounded-full px-3 py-1 text-[11px] font-medium tracking-wide",
-        STATUS_CLASS[status],
+        statusBadge({
+          variant,
+        }),
         className,
       )}
-    >
-      {children}
-    </Badge>
+      {...props}
+    />
   );
 }
 

@@ -3,24 +3,38 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export interface LuminaInspectorHeaderProps {
-  children: ReactNode;
+  title: ReactNode;
+  actions?: ReactNode;
   className?: string;
 }
 
 export function LuminaInspectorHeader({
-  children,
+  title,
+  actions,
   className,
 }: LuminaInspectorHeaderProps) {
   return (
     <header
       className={cn(
-        "border-b border-white/10",
-        "px-5 py-5",
-        "space-y-2",
+        "flex items-center justify-between gap-3",
+        "border-b",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-panel)]",
+        "px-5 py-4",
         className,
       )}
     >
-      {children}
+      <h2 className="text-sm font-semibold tracking-wide">
+        {title}
+      </h2>
+
+      {actions && (
+        <div className="flex items-center gap-2">
+          {actions}
+        </div>
+      )}
     </header>
   );
 }
+
+export default LuminaInspectorHeader;

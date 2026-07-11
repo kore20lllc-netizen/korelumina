@@ -1,64 +1,69 @@
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
-import { LuminaWorkspacePanel } from "./LuminaWorkspacePanel";
 
 export interface LuminaWorkspaceHeaderProps {
   eyebrow?: ReactNode;
   title: ReactNode;
-  subtitle?: ReactNode;
+  description?: ReactNode;
   actions?: ReactNode;
-  metrics?: ReactNode;
   className?: string;
 }
 
 export function LuminaWorkspaceHeader({
   eyebrow,
   title,
-  subtitle,
+  description,
   actions,
-  metrics,
   className,
 }: LuminaWorkspaceHeaderProps) {
   return (
-    <LuminaWorkspacePanel
+    <header
       className={cn(
-        "relative min-h-[180px]",
+        "flex flex-col gap-6",
         className,
       )}
     >
-      <div className="relative flex flex-col gap-6 p-7 lg:flex-row lg:items-end lg:justify-between">
-        <div className="min-w-0">
+      <div className="flex items-start justify-between gap-6">
+        <div className="min-w-0 flex-1">
           {eyebrow && (
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            <div
+              className={cn(
+                "mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1",
+                "text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground",
+                "[border-color:var(--lumina-border-standard)]",
+                "[background:var(--lumina-surface-interactive)]",
+              )}
+            >
               {eyebrow}
             </div>
           )}
 
-          <h1 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
+          <h1 className="text-3xl font-semibold tracking-tight">
             {title}
           </h1>
 
-          {subtitle && (
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-              {subtitle}
+          {description && (
+            <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
+              {description}
             </p>
           )}
         </div>
 
         {actions && (
-          <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <div className="shrink-0">
             {actions}
           </div>
         )}
       </div>
 
-      {metrics && (
-        <div className="border-t border-white/8 px-7 py-5">
-          {metrics}
-        </div>
-      )}
-    </LuminaWorkspacePanel>
+      <div
+        className={cn(
+          "border-t px-7 py-5",
+          "[border-color:var(--lumina-border-standard)]",
+        )}
+      />
+    </header>
   );
 }
 

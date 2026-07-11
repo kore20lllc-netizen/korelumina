@@ -4,35 +4,55 @@ export interface LuminaSkeletonProps {
   className?: string;
 }
 
-export function LuminaSkeleton({
+function SkeletonLine({
   className,
-}: LuminaSkeletonProps) {
+}: {
+  className?: string;
+}) {
   return (
     <div
       className={cn(
-        "animate-pulse rounded-2xl bg-white/[0.06]",
+        "animate-pulse rounded-2xl",
+        "[background:var(--lumina-surface-interactive)]",
         className,
       )}
     />
   );
 }
 
-export function LuminaSkeletonCard() {
+export function LuminaSkeleton({
+  className,
+}: LuminaSkeletonProps) {
   return (
-    <div className="space-y-4 rounded-3xl border border-white/10 p-5">
-      <LuminaSkeleton className="h-4 w-32" />
-      <LuminaSkeleton className="h-10 w-48" />
-      <LuminaSkeleton className="h-3 w-full" />
-      <LuminaSkeleton className="h-3 w-3/4" />
+    <div
+      className={cn(
+        "space-y-4 rounded-3xl border p-5",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-panel)]",
+        className,
+      )}
+    >
+      <SkeletonLine className="h-6 w-1/3" />
+      <SkeletonLine className="h-4 w-3/4" />
+      <SkeletonLine className="h-4 w-1/2" />
     </div>
   );
 }
 
-export function LuminaSkeletonMetric() {
+export function LuminaSkeletonCard() {
   return (
-    <div className="rounded-3xl border border-white/10 p-5">
-      <LuminaSkeleton className="h-3 w-24" />
-      <LuminaSkeleton className="mt-5 h-10 w-28" />
+    <div
+      className={cn(
+        "rounded-3xl border p-5",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-card)]",
+      )}
+    >
+      <div className="space-y-4">
+        <SkeletonLine className="h-5 w-1/2" />
+        <SkeletonLine className="h-4 w-full" />
+        <SkeletonLine className="h-4 w-2/3" />
+      </div>
     </div>
   );
 }

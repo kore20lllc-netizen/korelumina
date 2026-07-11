@@ -9,11 +9,24 @@ export function LuminaGlassLayer({
 }: Props) {
   return (
     <>
-      <div className="absolute inset-0 bg-[#07080d]/58 backdrop-blur-[2px]" />
+      <div
+        className={[
+          "absolute inset-0",
+          "[background:var(--lumina-tint-overlay)]",
+          "[backdrop-filter:var(--lumina-blur-surface)]",
+        ].join(" ")}
+      />
 
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,6,10,.18),rgba(5,6,10,.58))]" />
+      <div
+        className={[
+          "absolute inset-0",
+          "[background:var(--lumina-highlight-overlay)]",
+        ].join(" ")}
+      />
 
       {children}
     </>
   );
 }
+
+export default LuminaGlassLayer;

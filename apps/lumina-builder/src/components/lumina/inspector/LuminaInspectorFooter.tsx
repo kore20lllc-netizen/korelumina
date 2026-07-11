@@ -14,7 +14,9 @@ export function LuminaInspectorFooter({
   return (
     <footer
       className={cn(
-        "border-t border-white/10",
+        "border-t",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-panel)]",
         "px-5 py-4",
         className,
       )}
@@ -23,3 +25,5 @@ export function LuminaInspectorFooter({
     </footer>
   );
 }
+
+export default LuminaInspectorFooter;

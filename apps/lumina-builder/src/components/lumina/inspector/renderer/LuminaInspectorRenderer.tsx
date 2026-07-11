@@ -47,7 +47,11 @@ export function LuminaInspectorRenderer({
                 {section.controls.map((control) => (
                   <div
                     key={control.id}
-                    className="rounded-xl border border-white/10 px-3 py-2"
+                    className={[
+                      "rounded-xl border px-3 py-2",
+                      "[border-color:var(--lumina-border-standard)]",
+                      "[background:var(--lumina-surface-compact)]",
+                    ].join(" ")}
                   >
                     <div className="text-sm font-medium">
                       {control.label}
@@ -68,3 +72,5 @@ export function LuminaInspectorRenderer({
     </LuminaInspector>
   );
 }
+
+export default LuminaInspectorRenderer;

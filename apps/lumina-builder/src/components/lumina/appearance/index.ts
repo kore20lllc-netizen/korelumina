@@ -1,6 +1,5 @@
 export * from "./types";
 export * from "./defaults";
-export * from "./profiles";
 export * from "./storage";
 export * from "./LuminaAppearanceProvider";
 export * from "./registry";

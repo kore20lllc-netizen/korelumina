@@ -36,15 +36,16 @@ export function LuminaServiceCard({
         "transition-all duration-300",
         selected
           ? [
-              "border-amber-500/35",
-              "bg-white/[0.09]",
-              "shadow-[0_18px_50px_rgba(201,130,18,.18)]",
+              "[border-color:var(--lumina-border-emphasis)]",
+              "[background:var(--lumina-surface-selected)]",
+              "[box-shadow:var(--lumina-shadow-selected)]",
             ]
           : [
-              "border-white/10",
-              "bg-white/[0.075]",
-              "hover:border-white/20",
-              "hover:bg-white/[0.09]",
+              "[border-color:var(--lumina-border-standard)]",
+              "[background:var(--lumina-surface-card)]",
+              "hover:[border-color:var(--lumina-border-emphasis)]",
+              "hover:[background:var(--lumina-surface-interactive)]",
+              "hover:[box-shadow:var(--lumina-shadow-hover)]",
             ],
         className,
       )}
@@ -83,7 +84,12 @@ export function LuminaServiceCard({
         )}
 
         {footer && (
-          <footer className="border-t border-white/8 pt-4">
+          <footer
+            className={cn(
+              "border-t pt-4",
+              "[border-color:var(--lumina-border-standard)]",
+            )}
+          >
             {footer}
           </footer>
         )}

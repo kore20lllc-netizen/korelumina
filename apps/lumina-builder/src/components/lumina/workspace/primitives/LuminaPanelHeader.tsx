@@ -31,10 +31,11 @@ export function LuminaPanelHeader({
     <header
       className={cn(
         "flex items-start justify-between gap-4",
-        "border-b border-white/10",
-        "bg-white/[0.025]",
+        "border-b",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-compact)]",
+        "[backdrop-filter:var(--lumina-blur-surface)]",
         "px-5 py-5",
-        "backdrop-blur-xl",
         className,
       )}
     >
