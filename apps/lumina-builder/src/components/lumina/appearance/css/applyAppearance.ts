@@ -1,15 +1,17 @@
-import {
-  LUMINA_CSS_VARIABLES,
-} from "./variables";
-
 import type {
   LuminaResolvedAppearance,
 } from "../resolver";
 
+import {
+  LUMINA_CSS_VARIABLES,
+} from "./variables";
+
 export function applyAppearance(
   appearance: LuminaResolvedAppearance,
 ) {
-  if (typeof document === "undefined") {
+  if (
+    typeof document === "undefined"
+  ) {
     return;
   }
 
@@ -47,6 +49,16 @@ export function applyAppearance(
   );
 
   root.setProperty(
+    LUMINA_CSS_VARIABLES.tint.overlay,
+    appearance.tint.overlay,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.blur.surface,
+    appearance.blur.surface,
+  );
+
+  root.setProperty(
     LUMINA_CSS_VARIABLES.border.standard,
     appearance.border.standard,
   );
@@ -72,8 +84,62 @@ export function applyAppearance(
   );
 
   root.setProperty(
-    LUMINA_CSS_VARIABLES.blur.surface,
-    appearance.blur.surface,
+    LUMINA_CSS_VARIABLES.radius.surface,
+    appearance.radius.surface,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.radius.inner,
+    appearance.radius.inner,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.spacing.compact,
+    appearance.spacing.compact,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.spacing.standard,
+    appearance.spacing.standard,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.spacing.relaxed,
+    appearance.spacing.relaxed,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.accent.color,
+    appearance.accent.color,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.accent.rgb,
+    appearance.accent.rgb,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.glow.surface,
+    appearance.glow.surface,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.glow.opacity,
+    String(
+      appearance.glow.opacity,
+    ),
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.motion.duration,
+    appearance.motion.duration,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.motion.scale,
+    String(
+      appearance.motion.scale,
+    ),
   );
 
   root.setProperty(

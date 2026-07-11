@@ -11,6 +11,11 @@ export const LUMINA_CSS_VARIABLES = {
       "--lumina-surface-compact",
   },
 
+  tint: {
+    overlay:
+      "--lumina-tint-overlay",
+  },
+
   border: {
     standard:
       "--lumina-border-standard",
@@ -30,6 +35,43 @@ export const LUMINA_CSS_VARIABLES = {
   blur: {
     surface:
       "--lumina-blur-surface",
+  },
+
+  radius: {
+    surface:
+      "--lumina-radius-surface",
+    inner:
+      "--lumina-radius-inner",
+  },
+
+  spacing: {
+    compact:
+      "--lumina-spacing-compact",
+    standard:
+      "--lumina-spacing-standard",
+    relaxed:
+      "--lumina-spacing-relaxed",
+  },
+
+  accent: {
+    color:
+      "--lumina-accent-color",
+    rgb:
+      "--lumina-accent-rgb",
+  },
+
+  glow: {
+    surface:
+      "--lumina-glow-surface",
+    opacity:
+      "--lumina-glow-opacity",
+  },
+
+  motion: {
+    duration:
+      "--lumina-motion-duration",
+    scale:
+      "--lumina-motion-scale",
   },
 
   ambient: {

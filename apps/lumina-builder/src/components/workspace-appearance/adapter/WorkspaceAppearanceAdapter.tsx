@@ -24,26 +24,52 @@ export function WorkspaceAppearanceAdapter() {
       material:
         state.material,
 
-      density:
-        state.density,
+      tint:
+        state.tint,
 
-      contrast:
-        state.contrast === "high"
-          ? "high"
-          : "standard",
+      tintStrength:
+        state.tintStrength,
 
       transparency:
         state.transparency,
 
+      blur:
+        state.blur,
+
+      shadowIntensity:
+        state.shadowIntensity,
+
+      glowIntensity:
+        state.glowIntensity,
+
+      density:
+        state.density,
+
+      spacing:
+        state.spacing,
+
+      radius:
+        state.radius,
+
+      elevation:
+        state.elevation,
+
+      accent:
+        state.accent,
+
+      contrast:
+        state.contrast === "balanced"
+          ? "standard"
+          : state.contrast,
+
+      glow:
+        state.glow,
+
+      animation:
+        state.animation,
+
       motion:
-        state.animation === "off"
-          ? 0
-          : state.animation === "reduced"
-            ? Math.min(
-                state.motion,
-                35,
-              )
-            : state.motion,
+        state.motion,
     });
   }, [
     state,

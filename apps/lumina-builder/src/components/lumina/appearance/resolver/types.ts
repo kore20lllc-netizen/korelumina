@@ -8,6 +8,10 @@ export interface LuminaResolvedAppearance {
     compact: string;
   };
 
+  tint: {
+    overlay: string;
+  };
+
   blur: {
     surface: string;
   };
@@ -21,6 +25,32 @@ export interface LuminaResolvedAppearance {
     panel: string;
     hero: string;
     selected: string;
+  };
+
+  radius: {
+    surface: string;
+    inner: string;
+  };
+
+  spacing: {
+    compact: string;
+    standard: string;
+    relaxed: string;
+  };
+
+  accent: {
+    color: string;
+    rgb: string;
+  };
+
+  glow: {
+    surface: string;
+    opacity: number;
+  };
+
+  motion: {
+    duration: string;
+    scale: number;
   };
 
   ambient: {
