@@ -18,6 +18,8 @@ export function applyAppearance(
   const root =
     document.documentElement.style;
 
+  try {
+
   root.setProperty(
     LUMINA_CSS_VARIABLES.surface.hero,
     appearance.surface.hero,
@@ -54,6 +56,11 @@ export function applyAppearance(
   );
 
   root.setProperty(
+    LUMINA_CSS_VARIABLES.highlight.overlay,
+    appearance.highlight.overlay,
+  );
+
+  root.setProperty(
     LUMINA_CSS_VARIABLES.blur.surface,
     appearance.blur.surface,
   );
@@ -81,6 +88,11 @@ export function applyAppearance(
   root.setProperty(
     LUMINA_CSS_VARIABLES.shadow.selected,
     appearance.shadow.selected,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.shadow.hover,
+    appearance.shadow.hover,
   );
 
   root.setProperty(
@@ -143,6 +155,16 @@ export function applyAppearance(
   );
 
   root.setProperty(
+    LUMINA_CSS_VARIABLES.ambient.primary,
+    appearance.ambient.primary,
+  );
+
+  root.setProperty(
+    LUMINA_CSS_VARIABLES.ambient.secondary,
+    appearance.ambient.secondary,
+  );
+
+  root.setProperty(
     LUMINA_CSS_VARIABLES.ambient.opacity,
     String(
       appearance.ambient.opacity,
@@ -162,4 +184,8 @@ export function applyAppearance(
       appearance.ambient.transparency,
     ),
   );
+  } catch (error) {
+    console.error("applyAppearance failed", error, appearance);
+    throw error;
+  }
 }

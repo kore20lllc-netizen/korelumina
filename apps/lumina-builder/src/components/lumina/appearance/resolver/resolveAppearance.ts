@@ -304,6 +304,11 @@ export function resolveAppearance(
         motionScale * 480,
     );
 
+  const ambientOpacity =
+    percent(
+      settings.ambient,
+    );
+
   return {
     surface: {
       hero:
@@ -420,6 +425,41 @@ export function resolveAppearance(
             0.68,
           ),
         )}`,
+
+      hover:
+        `0 30px 96px -30px ${rgba(
+          [0, 0, 0],
+          resolveShadowAlpha(
+            settings,
+            1.18,
+          ),
+        )}, 0 0 36px -12px ${rgba(
+          accentRgb,
+          clamp(
+            glowOpacity * 0.34,
+            0,
+            0.48,
+          ),
+        )}`,
+    },
+
+    highlight: {
+      overlay:
+        `linear-gradient(135deg, ${rgba(
+          [255, 255, 255],
+          settings.contrast === "high"
+            ? 0.14
+            : settings.contrast === "soft"
+              ? 0.05
+              : 0.09,
+        )} 0%, ${rgba(
+          accentRgb,
+          clamp(
+            glowOpacity * 0.12,
+            0,
+            0.16,
+          ),
+        )} 46%, transparent 100%)`,
     },
 
     radius: {
@@ -478,10 +518,30 @@ export function resolveAppearance(
     },
 
     ambient: {
-      opacity:
-        percent(
-          settings.ambient,
+      primary:
+        rgba(
+          accentRgb,
+          clamp(
+            ambientOpacity *
+              (0.12 + glowOpacity * 0.18),
+            0,
+            0.36,
+          ),
         ),
+
+      secondary:
+        rgba(
+          tintRgb,
+          clamp(
+            ambientOpacity *
+              (0.08 + tintStrength * 0.14),
+            0,
+            0.28,
+          ),
+        ),
+
+      opacity:
+        ambientOpacity,
 
       motion:
         motionScale,
