@@ -16,3 +16,5 @@ export * from "./sections";
 export * from "./model";
 
 export * from "./context";
+
+export * from "./adapter/WorkspaceAppearanceAdapter";

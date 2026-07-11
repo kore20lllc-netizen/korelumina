@@ -11,16 +11,13 @@ import {
   type WorkspaceAppearanceModel,
 } from "../model";
 
+import type {
+  AppearanceActions,
+} from "./AppearanceActions";
+
 interface WorkspaceAppearanceContextValue {
   appearance: WorkspaceAppearanceModel;
-
-  setAppearance(
-    next: WorkspaceAppearanceModel,
-  ): void;
-
-  updateAppearance(
-    updates: Partial<WorkspaceAppearanceModel>,
-  ): void;
+  actions: AppearanceActions;
 }
 
 const WorkspaceAppearanceContext =
@@ -52,12 +49,74 @@ export function WorkspaceAppearanceProvider({
     );
   }
 
+  const actions: AppearanceActions = {
+
+    setMaterial(material: WorkspaceAppearanceModel["material"]) {
+      updateAppearance({
+        material,
+      });
+    },
+
+    setTint(tint: WorkspaceAppearanceModel["tint"]) {
+      updateAppearance({
+        tint,
+      });
+    },
+
+    setTintStrength(value: number) {
+      updateAppearance({
+        tintStrength: value,
+      });
+    },
+
+    setTransparency(value: number) {
+      updateAppearance({
+        transparency: value,
+      });
+    },
+
+    setBlur(value: number) {
+      updateAppearance({
+        blur: value,
+      });
+    },
+
+    setDensity(
+      density: WorkspaceAppearanceModel["density"],
+    ) {
+      updateAppearance({
+        density,
+      });
+    },
+
+    setSpacing(
+      spacing: WorkspaceAppearanceModel["spacing"],
+    ) {
+      updateAppearance({
+        spacing,
+      });
+    },
+
+    setRadius(
+      radius: WorkspaceAppearanceModel["radius"],
+    ) {
+      updateAppearance({
+        radius,
+      });
+    },
+
+    reset() {
+      setAppearance(
+        DEFAULT_WORKSPACE_APPEARANCE,
+      );
+    },
+  };
+
   const value =
     useMemo(
       () => ({
         appearance,
-        setAppearance,
-        updateAppearance,
+        actions,
       }),
       [appearance],
     );

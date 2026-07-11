@@ -25,6 +25,7 @@ export function AppearanceDropdown({
   title,
   value,
   options,
+  onChange,
 }: AppearanceDropdownProps) {
 
   const [open, setOpen] =

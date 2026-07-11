@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -75,22 +76,62 @@ export function LuminaAppearanceProvider({
     );
   }, [settings]);
 
-  function setSettings(
-    next: LuminaAppearanceSettings,
-  ) {
-    setSettingsState(next);
-  }
+  const setSettings =
+    useCallback(
+      (
+        next: LuminaAppearanceSettings,
+      ) => {
+        setSettingsState(
+          current => {
+            for (const key of Object.keys(
+              current,
+            ) as Array<
+              keyof LuminaAppearanceSettings
+            >) {
+              if (
+                current[key] !== next[key]
+              ) {
+                return next;
+              }
+            }
 
-  function updateSettings(
-    patch: Partial<LuminaAppearanceSettings>,
-  ) {
-    setSettingsState(
-      current => ({
-        ...current,
-        ...patch,
-      }),
+            return current;
+          },
+        );
+      },
+      [],
     );
-  }
+
+  const updateSettings =
+    useCallback(
+      (
+        patch: Partial<LuminaAppearanceSettings>,
+      ) => {
+        setSettingsState(
+          current => {
+            const next = {
+              ...current,
+              ...patch,
+            };
+
+            for (const key of Object.keys(
+              next,
+            ) as Array<
+              keyof LuminaAppearanceSettings
+            >) {
+              if (
+                current[key] !== next[key]
+              ) {
+                return next;
+              }
+            }
+
+            return current;
+          },
+        );
+      },
+      [],
+    );
 
   const value = useMemo(
     () => ({
@@ -98,7 +139,11 @@ export function LuminaAppearanceProvider({
       setSettings,
       updateSettings,
     }),
-    [settings],
+    [
+      settings,
+      setSettings,
+      updateSettings,
+    ],
   );
 
   return (

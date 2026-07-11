@@ -7,71 +7,147 @@ import {
 } from "../AppearanceDropdown";
 
 import {
+  useWorkspaceAppearance,
+} from "../context";
+
+import type {
+  AppearanceMaterial,
+  AppearanceTint,
+} from "../model";
+
+import {
   AppearanceCard,
 } from "./AppearanceCard";
 
-import {
-  useWorkspaceAppearance,
-} from "../context";
+type BlurPreset =
+  | "light"
+  | "standard"
+  | "heavy";
+
+function resolveBlurPreset(
+  blur: number,
+): BlurPreset {
+  if (blur < 40) {
+    return "light";
+  }
+
+  if (blur >= 75) {
+    return "heavy";
+  }
+
+  return "standard";
+}
+
+function resolveBlurValue(
+  preset: string,
+): number {
+  switch (preset) {
+    case "light":
+      return 25;
+
+    case "heavy":
+      return 90;
+
+    case "standard":
+    default:
+      return 60;
+  }
+}
 
 export function GlassCard() {
   const {
     appearance,
-    updateAppearance,
-  } =
-    useWorkspaceAppearance();
+    actions,
+  } = useWorkspaceAppearance();
 
   return (
     <AppearanceCard
-      icon={<PanelsTopLeft className="h-4 w-4" />}
+      icon={
+        <PanelsTopLeft className="h-4 w-4" />
+      }
       title="Glass"
       description="Material and surface"
     >
       <AppearanceDropdown
         title="Material"
-        value="glass"
+        value={appearance.material}
         options={[
-          { label:"Glass", value:"glass" },
-          { label:"Solid", value:"solid" },
-          { label:"Mica", value:"mica" },
+          {
+            label: "Glass",
+            value: "glass",
+          },
+          {
+            label: "Solid",
+            value: "solid",
+          },
+          {
+            label: "Mica",
+            value: "mica",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={(value) =>
+          actions.setMaterial(
+            value as AppearanceMaterial,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Tint"
-        value="dark"
+        value={appearance.tint}
         options={[
-          { label:"None", value:"none" },
-          { label:"Dark", value:"dark" },
-          { label:"Frost", value:"frost" },
-          { label:"Warm", value:"warm" },
-          { label:"Cool", value:"cool" },
+          {
+            label: "None",
+            value: "none",
+          },
+          {
+            label: "Dark",
+            value: "dark",
+          },
+          {
+            label: "Frost",
+            value: "frost",
+          },
+          {
+            label: "Warm",
+            value: "warm",
+          },
+          {
+            label: "Cool",
+            value: "cool",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={(value) =>
+          actions.setTint(
+            value as AppearanceTint,
+          )
+        }
       />
 
       <AppearanceDropdown
         title="Blur Mode"
-        value="standard"
+        value={resolveBlurPreset(
+          appearance.blur,
+        )}
         options={[
-          { label:"Light", value:"light" },
-          { label:"Standard", value:"standard" },
-          { label:"Heavy", value:"heavy" },
+          {
+            label: "Light",
+            value: "light",
+          },
+          {
+            label: "Standard",
+            value: "standard",
+          },
+          {
+            label: "Heavy",
+            value: "heavy",
+          },
         ]}
-        onChange={(value) => updateAppearance({})}
-      />
-
-      <AppearanceDropdown
-        title="Shadow"
-        value="soft"
-        options={[
-          { label:"None", value:"none" },
-          { label:"Soft", value:"soft" },
-          { label:"Medium", value:"medium" },
-          { label:"Strong", value:"strong" },
-        ]}
-        onChange={(value) => updateAppearance({})}
+        onChange={(value) =>
+          actions.setBlur(
+            resolveBlurValue(value),
+          )
+        }
       />
     </AppearanceCard>
   );

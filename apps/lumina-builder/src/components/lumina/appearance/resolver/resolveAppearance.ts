@@ -1,6 +1,6 @@
 import {
-  densitySurfaceProfiles,
-  materialBlurProfiles,
+  densitySurfaceCssProfiles,
+  materialBackdropFilterProfiles,
 } from "../profiles";
 
 import type {
@@ -15,10 +15,14 @@ export function resolveAppearance(
   settings: LuminaAppearanceSettings,
 ): LuminaResolvedAppearance {
   const surface =
-    densitySurfaceProfiles[settings.density];
+    densitySurfaceCssProfiles[
+      settings.density
+    ];
 
   const blur =
-    materialBlurProfiles[settings.material];
+    materialBackdropFilterProfiles[
+      settings.material
+    ];
 
   return {
     surface,
@@ -28,22 +32,24 @@ export function resolveAppearance(
     },
 
     border: {
-      standard: "border-white/12",
+      standard:
+        "rgba(255, 255, 255, 0.12)",
+
       emphasis:
         settings.contrast === "high"
-          ? "border-white/20"
-          : "border-white/14",
+          ? "rgba(255, 255, 255, 0.20)"
+          : "rgba(255, 255, 255, 0.14)",
     },
 
     shadow: {
       panel:
-        "shadow-[0_24px_80px_-30px_rgba(0,0,0,.62)]",
+        "0 24px 80px -30px rgba(0, 0, 0, 0.62)",
 
       hero:
-        "shadow-[0_40px_120px_-45px_rgba(0,0,0,.65)]",
+        "0 40px 120px -45px rgba(0, 0, 0, 0.65)",
 
       selected:
-        "shadow-[0_28px_90px_-28px_rgba(201,130,18,.36)]",
+        "0 28px 90px -28px rgba(201, 130, 18, 0.36)",
     },
 
     ambient: {

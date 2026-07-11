@@ -21,6 +21,10 @@ export interface WorkspaceAppearanceModel {
 
   blur: number;
 
+  shadowIntensity: number;
+
+  glowIntensity: number;
+
   density: string;
 
   spacing: string;

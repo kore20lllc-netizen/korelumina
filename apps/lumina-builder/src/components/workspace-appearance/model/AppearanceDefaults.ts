@@ -13,6 +13,10 @@ export const DEFAULT_WORKSPACE_APPEARANCE: WorkspaceAppearanceModel = {
 
   blur: 70,
 
+  shadowIntensity: 45,
+
+  glowIntensity: 35,
+
   density: "standard",
 
   spacing: "comfortable",
