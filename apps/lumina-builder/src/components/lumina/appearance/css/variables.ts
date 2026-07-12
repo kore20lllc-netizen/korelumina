@@ -26,8 +26,10 @@ export const LUMINA_CSS_VARIABLES = {
   shadow: {
     panel:
       "--lumina-shadow-panel",
+
     hero:
       "--lumina-shadow-hero",
+
     selected:
       "--lumina-shadow-selected",
 
@@ -35,9 +37,28 @@ export const LUMINA_CSS_VARIABLES = {
       "--lumina-shadow-hover",
   },
 
+  elevation: {
+    level:
+      "--lumina-elevation-level",
+  },
+
   blur: {
     surface:
       "--lumina-blur-surface",
+  },
+
+  material: {
+    saturation:
+      "--lumina-material-saturation",
+
+    contrast:
+      "--lumina-material-contrast",
+
+    brightness:
+      "--lumina-material-brightness",
+
+    layerOpacity:
+      "--lumina-material-layer-opacity",
   },
 
   highlight: {

@@ -16,6 +16,13 @@ export interface LuminaResolvedAppearance {
     surface: string;
   };
 
+  material: {
+    saturation: string;
+    contrast: string;
+    brightness: string;
+    layerOpacity: number;
+  };
+
   border: {
     standard: string;
     emphasis: string;
@@ -26,6 +33,10 @@ export interface LuminaResolvedAppearance {
     hero: string;
     selected: string;
     hover: string;
+  };
+
+  elevation: {
+    level: number;
   };
 
   highlight: {

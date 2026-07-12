@@ -102,6 +102,34 @@ const MATERIAL_BLUR:
     mica: 0.92,
   };
 
+const MATERIAL_SATURATION:
+  Record<LuminaMaterialMode, number> = {
+    glass: 1.18,
+    solid: 1,
+    mica: 1.32,
+  };
+
+const MATERIAL_CONTRAST:
+  Record<LuminaMaterialMode, number> = {
+    glass: 1.02,
+    solid: 1,
+    mica: 1.08,
+  };
+
+const MATERIAL_BRIGHTNESS:
+  Record<LuminaMaterialMode, number> = {
+    glass: 1.02,
+    solid: 1,
+    mica: 1.05,
+  };
+
+const MATERIAL_LAYER_OPACITY:
+  Record<LuminaMaterialMode, number> = {
+    glass: 1,
+    solid: 0.18,
+    mica: 0.86,
+  };
+
 const RADIUS:
   Record<LuminaRadiusMode, number> = {
     small: 12,
@@ -309,6 +337,14 @@ export function resolveAppearance(
       settings.ambient,
     );
 
+  const elevationLevel =
+    ELEVATION[
+      settings.elevation
+    ];
+
+  const borderElevationBoost =
+    elevationLevel * 0.06;
+
   return {
     surface: {
       hero:
@@ -381,20 +417,60 @@ export function resolveAppearance(
         `blur(${blurPixels}px)`,
     },
 
+    material: {
+      saturation:
+        `saturate(${MATERIAL_SATURATION[
+          settings.material
+        ]})`,
+
+      contrast:
+        `contrast(${MATERIAL_CONTRAST[
+          settings.material
+        ]})`,
+
+      brightness:
+        `brightness(${MATERIAL_BRIGHTNESS[
+          settings.material
+        ]})`,
+
+      layerOpacity:
+        MATERIAL_LAYER_OPACITY[
+          settings.material
+        ],
+    },
+
     border: {
       standard:
-        settings.contrast === "soft"
-          ? "rgba(255, 255, 255, 0.08)"
-          : settings.contrast === "high"
-            ? "rgba(255, 255, 255, 0.18)"
-            : "rgba(255, 255, 255, 0.12)",
+        rgba(
+          [255, 255, 255],
+          clamp(
+            (
+              settings.contrast === "soft"
+                ? 0.08
+                : settings.contrast === "high"
+                  ? 0.18
+                  : 0.12
+            ) + borderElevationBoost,
+            0,
+            0.30,
+          ),
+        ),
 
       emphasis:
-        settings.contrast === "soft"
-          ? "rgba(255, 255, 255, 0.12)"
-          : settings.contrast === "high"
-            ? "rgba(255, 255, 255, 0.26)"
-            : "rgba(255, 255, 255, 0.18)",
+        rgba(
+          [255, 255, 255],
+          clamp(
+            (
+              settings.contrast === "soft"
+                ? 0.12
+                : settings.contrast === "high"
+                  ? 0.26
+                  : 0.18
+            ) + borderElevationBoost,
+            0,
+            0.38,
+          ),
+        ),
     },
 
     shadow: {
@@ -441,6 +517,11 @@ export function resolveAppearance(
             0.48,
           ),
         )}`,
+    },
+
+    elevation: {
+      level:
+        elevationLevel,
     },
 
     highlight: {

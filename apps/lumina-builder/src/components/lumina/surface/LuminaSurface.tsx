@@ -119,6 +119,30 @@ const shadowByVariant: Record<
     "[box-shadow:var(--lumina-shadow-panel)]",
 };
 
+const elevationByVariant: Record<
+  LuminaSurfaceVariant,
+  string
+> = {
+  default:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+  panel:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+  hero:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-2px))]",
+  sidebar:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+  toolbar:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-0.5px))]",
+  card:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+  interactive:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-0.75px))]",
+  selected:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-1.5px))]",
+  compact:
+    "[transform:translateY(calc(var(--lumina-elevation-level)*-0.5px))]",
+};
+
 export function LuminaSurface({
   className,
   variant = "panel",
@@ -133,12 +157,14 @@ export function LuminaSurface({
   return (
     <Comp
       className={cn(
-        "transition-all duration-300",
+        "transition-[background-color,border-color,box-shadow,transform,backdrop-filter] duration-300",
+        "will-change-transform",
         backgroundByVariant[variant],
         "[backdrop-filter:var(--lumina-blur-surface)]",
         radiusByVariant[variant],
         borderByVariant[variant],
         shadowByVariant[variant],
+        elevationByVariant[variant],
         className,
       )}
       {...props}
