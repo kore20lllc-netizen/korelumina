@@ -1,45 +1,73 @@
 import { WorkspaceCard } from "./WorkspaceCard";
 
-interface WorkspaceLoadingProps {
-  title?: string;
-  cards?: number;
-}
-
-export function WorkspaceLoading({
-  title = "Loading workspace…",
-  cards = 6,
-}: WorkspaceLoadingProps) {
+export function WorkspaceLoading() {
   return (
-    <div className="space-y-8 animate-pulse">
-      <div className="space-y-3">
-        <div className="h-10 w-72 rounded-xl bg-white/10" />
-        <div className="h-4 w-[32rem] max-w-full rounded bg-white/5" />
+    <div className="space-y-6 animate-pulse">
+      <div className="space-y-4">
+        <div
+          className="
+            h-10
+            w-72
+            [border-radius:var(--lumina-radius-inner)]
+            [background:var(--lumina-surface-interactive)]
+          "
+        />
+
+        <div
+          className="
+            h-4
+            w-[32rem]
+            max-w-full
+            [border-radius:var(--lumina-radius-xs)]
+            [background:var(--lumina-surface-panel)]
+          "
+        />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from({
-          length: cards,
-        }).map((_, index) => (
+      <div className="grid gap-4 md:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, index) => (
           <WorkspaceCard
             key={index}
-            className="p-6"
+            className="space-y-4 p-5"
           >
-            <div className="space-y-4">
-              <div className="h-4 w-28 rounded bg-white/10" />
+            <div
+              className="
+                h-4
+                w-28
+                [border-radius:var(--lumina-radius-xs)]
+                [background:var(--lumina-surface-interactive)]
+              "
+            />
 
-              <div className="h-10 w-20 rounded bg-white/10" />
+            <div
+              className="
+                h-10
+                w-20
+                [border-radius:var(--lumina-radius-xs)]
+                [background:var(--lumina-surface-interactive)]
+              "
+            />
 
-              <div className="h-3 w-full rounded bg-white/5" />
+            <div
+              className="
+                h-3
+                w-full
+                [border-radius:var(--lumina-radius-xs)]
+                [background:var(--lumina-surface-panel)]
+              "
+            />
 
-              <div className="h-3 w-2/3 rounded bg-white/5" />
-            </div>
+            <div
+              className="
+                h-3
+                w-2/3
+                [border-radius:var(--lumina-radius-xs)]
+                [background:var(--lumina-surface-panel)]
+              "
+            />
           </WorkspaceCard>
         ))}
       </div>
-
-      <p className="text-center text-sm text-muted-foreground">
-        {title}
-      </p>
     </div>
   );
 }

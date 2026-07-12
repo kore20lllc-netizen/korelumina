@@ -5,29 +5,31 @@ import {
 
 import {
   appearanceInspectorModel,
-} from "./model";
-
-import { AppearancePreview } from "./parts/AppearancePreview";
-import { AppearanceToolbar } from "./parts/AppearanceToolbar";
+} from "./model/appearanceInspectorModel";
 
 import {
-  WorkspaceAppearancePanel,
-} from "./WorkspaceAppearancePanel";
+  AppearancePreview,
+} from "./parts/AppearancePreview";
+
+import {
+  AppearanceToolbar,
+} from "./parts/AppearanceToolbar";
 
 export function AppearanceWorkspace() {
   return (
-    <>
-      <WorkspaceAppearancePanel />
     <LuminaWorkspaceComposer
-      toolbar={<AppearanceToolbar />}
+      toolbar={
+        <AppearanceToolbar />
+      }
       sidebar={
         <LuminaInspectorRenderer
           model={appearanceInspectorModel}
         />
       }
-      content={<AppearancePreview />}
+      content={
+        <AppearancePreview />
+      }
     />
-    </>
   );
 }
 

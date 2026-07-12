@@ -53,7 +53,15 @@ export function LuminaServiceCard({
       <button
         type="button"
         onClick={onClick}
-        className="flex w-full flex-col gap-5 rounded-3xl p-5 text-left"
+        className="
+          flex
+          w-full
+          flex-col
+          gap-5
+          p-5
+          text-left
+          [border-radius:var(--lumina-radius-surface)]
+        "
       >
         <header className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">

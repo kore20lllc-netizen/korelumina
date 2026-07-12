@@ -47,19 +47,28 @@ const backgroundByVariant: Record<
     "[background:var(--lumina-surface-compact)]",
 };
 
-const shapeByVariant: Record<
+const radiusByVariant: Record<
   LuminaSurfaceVariant,
   string
 > = {
-  default: "rounded-3xl",
-  panel: "rounded-3xl",
-  hero: "rounded-[2rem]",
-  sidebar: "rounded-3xl",
-  toolbar: "rounded-2xl",
-  card: "rounded-3xl",
-  interactive: "rounded-3xl",
-  selected: "rounded-3xl",
-  compact: "rounded-2xl",
+  default:
+    "[border-radius:var(--lumina-radius-surface)]",
+  panel:
+    "[border-radius:var(--lumina-radius-surface)]",
+  hero:
+    "[border-radius:calc(var(--lumina-radius-surface)*1.15)]",
+  sidebar:
+    "[border-radius:var(--lumina-radius-surface)]",
+  toolbar:
+    "[border-radius:var(--lumina-radius-inner)]",
+  card:
+    "[border-radius:var(--lumina-radius-surface)]",
+  interactive:
+    "[border-radius:var(--lumina-radius-surface)]",
+  selected:
+    "[border-radius:var(--lumina-radius-surface)]",
+  compact:
+    "[border-radius:var(--lumina-radius-inner)]",
 };
 
 const borderByVariant: Record<
@@ -127,7 +136,7 @@ export function LuminaSurface({
         "transition-all duration-300",
         backgroundByVariant[variant],
         "[backdrop-filter:var(--lumina-blur-surface)]",
-        shapeByVariant[variant],
+        radiusByVariant[variant],
         borderByVariant[variant],
         shadowByVariant[variant],
         className,

@@ -29,12 +29,12 @@ export function WorkspaceMetricCard({
       )}
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-2 flex-1">
+        <div className="flex-1 space-y-2">
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             {label}
           </p>
 
-          <div className="font-display text-4xl font-semibold tracking-tight text-white">
+          <div className="font-display text-4xl font-semibold tracking-tight">
             {value}
           </div>
 
@@ -46,7 +46,19 @@ export function WorkspaceMetricCard({
         </div>
 
         {icon && (
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+          <div
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              [border-radius:var(--lumina-radius-inner)]
+              border
+              [border-color:var(--lumina-border-standard)]
+              [background:var(--lumina-surface-interactive)]
+            "
+          >
             {icon}
           </div>
         )}

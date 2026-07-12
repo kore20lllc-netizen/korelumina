@@ -23,8 +23,11 @@ export function WorkspaceTabBar({
     <nav
       className={cn(
         "flex flex-wrap items-center gap-2",
-        "rounded-2xl border border-white/10",
-        "bg-white/[0.04] backdrop-blur-xl",
+        "[border-radius:var(--lumina-radius-surface)]",
+        "border",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-card)]",
+        "[backdrop-filter:var(--lumina-blur-surface)]",
         "p-2",
         className,
       )}
@@ -42,20 +45,23 @@ export function WorkspaceTabBar({
               onChange(tab.id)
             }
             className={cn(
-              "rounded-xl px-4 py-2",
+              "[border-radius:var(--lumina-radius-inner)]",
+              "px-4 py-2",
               "text-sm font-medium",
               "transition-all duration-200",
               "disabled:opacity-40",
+
               selected
                 ? [
-                    "bg-white/10",
-                    "border border-violet-400/20",
+                    "border",
+                    "[border-color:var(--lumina-border-emphasis)]",
+                    "[background:var(--lumina-surface-selected)]",
+                    "[box-shadow:var(--lumina-shadow-selected)]",
                     "text-white",
-                    "shadow-[0_0_30px_rgba(139,92,246,0.15)]",
                   ]
                 : [
                     "text-muted-foreground",
-                    "hover:bg-white/5",
+                    "hover:[background:var(--lumina-surface-interactive)]",
                     "hover:text-white",
                   ],
             )}
@@ -67,3 +73,5 @@ export function WorkspaceTabBar({
     </nav>
   );
 }
+
+export default WorkspaceTabBar;

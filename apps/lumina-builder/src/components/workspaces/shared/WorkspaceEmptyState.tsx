@@ -28,13 +28,26 @@ export function WorkspaceEmptyState({
         className,
       )}
     >
-      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/5">
+      <div
+        className="
+          mb-6
+          flex
+          h-16
+          w-16
+          items-center
+          justify-center
+          [border-radius:var(--lumina-radius-surface)]
+          border
+          [border-color:var(--lumina-border-standard)]
+          [background:var(--lumina-surface-interactive)]
+        "
+      >
         {icon ?? (
           <Inbox className="h-8 w-8 text-muted-foreground" />
         )}
       </div>
 
-      <h3 className="font-display text-2xl font-semibold tracking-tight text-white">
+      <h3 className="font-display text-2xl font-semibold tracking-tight">
         {title}
       </h3>
 

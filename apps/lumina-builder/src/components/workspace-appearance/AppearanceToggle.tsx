@@ -1,11 +1,15 @@
 interface AppearanceToggleProps {
   label: string;
   checked?: boolean;
+  disabled?: boolean;
+  onChange?(checked: boolean): void;
 }
 
 export function AppearanceToggle({
   label,
   checked = false,
+  disabled = false,
+  onChange,
 }: AppearanceToggleProps) {
   return (
     <label className="flex items-center justify-between rounded-xl border border-white/10 px-3 py-2">
@@ -16,7 +20,12 @@ export function AppearanceToggle({
       <input
         type="checkbox"
         checked={checked}
-        readOnly
+        disabled={disabled}
+        onChange={(event) =>
+          onChange?.(
+            event.currentTarget.checked,
+          )
+        }
       />
     </label>
   );

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 export interface LuminaToggleProps {
@@ -31,10 +29,17 @@ export function LuminaToggle({
         }
       }}
       className={cn(
-        "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+        "relative inline-flex h-6 w-11 items-center rounded-full transition-all",
+        "border",
         checked
-          ? "bg-violet"
-          : "bg-white/15",
+          ? [
+              "[background:var(--lumina-surface-selected)]",
+              "[border-color:var(--lumina-border-emphasis)]",
+            ]
+          : [
+              "[background:var(--lumina-surface-interactive)]",
+              "[border-color:var(--lumina-border-standard)]",
+            ],
         disabled &&
           "cursor-not-allowed opacity-50",
         className,
@@ -42,7 +47,9 @@ export function LuminaToggle({
     >
       <span
         className={cn(
-          "inline-block h-5 w-5 rounded-full bg-white transition-transform",
+          "inline-block h-5 w-5 rounded-full",
+          "bg-white",
+          "transition-transform",
           checked
             ? "translate-x-5"
             : "translate-x-0.5",
@@ -51,3 +58,5 @@ export function LuminaToggle({
     </button>
   );
 }
+
+export default LuminaToggle;

@@ -1,4 +1,6 @@
-import type { HTMLAttributes } from "react";
+import type {
+  HTMLAttributes,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -16,14 +18,19 @@ export function WorkspaceCard({
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-2xl",
-        "border border-white/10",
-        "bg-white/[0.04]",
-        "backdrop-blur-2xl",
-        "shadow-[0_20px_60px_-20px_rgba(0,0,0,0.55)]",
+        "relative overflow-hidden",
+        "[border-radius:var(--lumina-radius-surface)]",
+        "border",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-card)]",
+        "[backdrop-filter:var(--lumina-blur-surface)]",
+        "[box-shadow:var(--lumina-shadow-panel)]",
         "transition-all duration-300",
-        hover &&
-          "hover:border-violet-500/30 hover:bg-white/[0.06]",
+        hover && [
+          "hover:[border-color:var(--lumina-border-emphasis)]",
+          "hover:[background:var(--lumina-surface-interactive)]",
+          "hover:[box-shadow:var(--lumina-shadow-hover)]",
+        ],
         className,
       )}
       {...props}
