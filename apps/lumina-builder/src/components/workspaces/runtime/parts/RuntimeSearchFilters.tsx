@@ -85,7 +85,7 @@ export const RuntimeSearchFilters = forwardRef<
               <button
                 type="button"
                 onClick={() => onQuery("")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-1 hover:bg-white/10"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-1 [&:hover]:[background:var(--lumina-surface-interactive)]"
               >
                 <X className="h-4 w-4" />
               </button>
