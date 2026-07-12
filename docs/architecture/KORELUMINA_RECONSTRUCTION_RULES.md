@@ -307,3 +307,234 @@ Features third.
 
 Never sacrifice the first two for the third.
 
+
+-------------------------------------------------------------------------------
+RECONSTRUCTION TOOLING STANDARD
+-------------------------------------------------------------------------------
+
+Status
+
+Production Requirement
+
+The reconstruction workflow shall use standardized engineering tooling.
+
+Temporary utilities located in /tmp are prohibited except for local debugging.
+
+-------------------------------------------------------------------------------
+PATCH TOOL
+-------------------------------------------------------------------------------
+
+Canonical Location
+
+tools/reconstruction/patch.py
+
+Purpose
+
+Apply localized reconstruction patches safely.
+
+Requirements
+
+• Validate patch context before modification.
+• Fail without modifying files if context differs.
+• Support multiple hunks.
+• Preserve formatting.
+• Never partially apply a failed patch.
+• Return non-zero exit code on failure.
+
+Usage
+
+python tools/reconstruction/patch.py <file> <<'PATCH'
+...
+PATCH
+
+Do not use temporary patch utilities stored under /tmp.
+
+-------------------------------------------------------------------------------
+FILE REPLACEMENT
+-------------------------------------------------------------------------------
+
+Full file rewrites shall use:
+
+cat > <path> <<'EOF'
+...
+
+-------------------------------------------------------------------------------
+RECONSTRUCTION TOOLING STANDARD
+-------------------------------------------------------------------------------
+
+Status
+
+Production Requirement
+
+The reconstruction workflow shall use standardized engineering tooling.
+
+Temporary utilities located in /tmp are prohibited except for local debugging.
+
+-------------------------------------------------------------------------------
+PATCH TOOL
+-------------------------------------------------------------------------------
+
+Canonical Location
+
+tools/reconstruction/patch.py
+
+Purpose
+
+Apply localized reconstruction patches safely.
+
+Requirements
+
+• Validate patch context before modification.
+• Fail without modifying files if context differs.
+• Support multiple hunks.
+• Preserve formatting.
+• Never partially apply a failed patch.
+• Return non-zero exit code on failure.
+
+Usage
+
+python tools/reconstruction/patch.py <file> <<'PATCH'
+...
+PATCH
+
+Do not use temporary patch utilities stored under /tmp.
+
+-------------------------------------------------------------------------------
+FILE REPLACEMENT
+-------------------------------------------------------------------------------
+
+Full file rewrites shall use:
+
+cat > <path> <<'EOF'
+...
+
+-------------------------------------------------------------------------------
+RECONSTRUCTION TOOLING STANDARD
+-------------------------------------------------------------------------------
+
+Status
+
+Production Requirement
+
+The reconstruction workflow shall use standardized engineering tooling.
+
+Temporary utilities located in /tmp are prohibited except for local debugging.
+
+-------------------------------------------------------------------------------
+PATCH TOOL
+-------------------------------------------------------------------------------
+
+Canonical Location
+
+tools/reconstruction/patch.py
+
+Purpose
+
+Apply localized reconstruction patches safely.
+
+Requirements
+
+• Validate patch context before modification.
+• Fail without modifying files if context differs.
+• Support multiple hunks.
+• Preserve formatting.
+• Never partially apply a failed patch.
+• Return non-zero exit code on failure.
+
+Usage
+
+python tools/reconstruction/patch.py <file> <<'PATCH'
+...
+PATCH
+
+Do not use temporary patch utilities stored under /tmp.
+
+-------------------------------------------------------------------------------
+FILE REPLACEMENT
+-------------------------------------------------------------------------------
+
+Full file rewrites shall use a heredoc with a delimiter that does not appear
+inside the document.
+
+Example
+
+cat > <path> <<'FILE_CONTENT'
+...
+FILE_CONTENT
+
+Never use "EOF" as the outer delimiter if the document itself contains "EOF"
+examples.
+
+Never perform manual editing for architectural reconstruction.
+
+-------------------------------------------------------------------------------
+RECONSTRUCTION INSPECTION
+-------------------------------------------------------------------------------
+
+Repository investigations shall use standardized inspection tooling.
+
+Canonical Location
+
+tools/reconstruction/inspect.sh
+
+Purpose
+
+Provide deterministic repository inspection commands including:
+
+• Architecture inventory
+• Dependency inspection
+• Import graph inspection
+• Runtime inspection
+• UI inspection
+• Duplicate implementation detection
+• Placeholder detection
+• Technical debt discovery
+
+Investigation always precedes implementation.
+
+-------------------------------------------------------------------------------
+WORKFLOW
+-------------------------------------------------------------------------------
+
+Every reconstruction ticket follows this sequence.
+
+1. inspect.sh
+2. Root Cause Analysis
+3. Implementation Strategy
+4. patch.py OR cat > FILE_CONTENT
+5. Build
+6. Runtime Validation
+7. Commit
+8. Push
+
+-------------------------------------------------------------------------------
+PATCH STRATEGY
+-------------------------------------------------------------------------------
+
+Use patch.py only when ALL are true.
+
+• Localized modification.
+• Public API unchanged.
+• Approximately 20% or less of file changes.
+• File remains architecturally consistent.
+
+Otherwise:
+
+Rewrite the complete file.
+
+-------------------------------------------------------------------------------
+ENGINEERING PHILOSOPHY
+-------------------------------------------------------------------------------
+
+Reconstruction tooling is part of the KoreLumina architecture.
+
+Engineering tools shall be:
+
+• Version controlled.
+• Production quality.
+• Deterministic.
+• Reusable.
+• Repository owned.
+
+Do not depend on ephemeral session-specific utilities.
+

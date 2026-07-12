@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
-import subprocess
-import sys
+from patch import main
 
-subprocess.run(
-    [sys.executable, "/tmp/patch.py"],
-    check=True,
-)
+
+if __name__ == "__main__":
+    raise SystemExit(main())
