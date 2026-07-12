@@ -24,12 +24,9 @@ import {
 
 import {
   LuminaButton,
-} from "@/components/lumina/LuminaButton";
-
-import {
   LuminaWorkspacePanel,
   LuminaWorkspaceToolbar,
-} from "@/components/lumina/workspace";
+} from "@/components/lumina";
 
 import {
   LuminaWorkspaceLayout,
@@ -43,46 +40,14 @@ import {
   useRuntimeOperations,
 } from "@/hooks/useRuntimeOperations";
 
-import {
-  cn,
-} from "@/lib/utils";
-
 import type {
   Environment,
   HealthStatus,
 } from "@/services/runtime/types";
 
 import {
-  RuntimeHeader,
-} from "./parts/RuntimeHeader";
-
-import {
-  RuntimeHealthOverview,
-} from "./parts/RuntimeHealthOverview";
-
-import {
-  RuntimeProjectsList,
-} from "./parts/RuntimeProjectsList";
-
-import {
-  RuntimeEventStream,
-} from "./parts/RuntimeEventStream";
-
-import {
-  RuntimeLifecycleTimeline,
-} from "./parts/RuntimeLifecycleTimeline";
-
-import {
-  RuntimeLogsPanel,
-} from "./parts/RuntimeLogsPanel";
-
-import {
   RuntimeActionsToolbar,
 } from "./parts/RuntimeActionsToolbar";
-
-import {
-  RuntimeInspector,
-} from "./parts/RuntimeInspector";
 
 import {
   RuntimeEmptyState,
@@ -93,11 +58,42 @@ import {
 } from "./parts/RuntimeErrorState";
 
 import {
+  RuntimeEventStream,
+} from "./parts/RuntimeEventStream";
+
+import {
+  RuntimeHeader,
+} from "./parts/RuntimeHeader";
+
+import {
+  RuntimeHealthOverview,
+} from "./parts/RuntimeHealthOverview";
+
+import {
+  RuntimeInspector,
+} from "./parts/RuntimeInspector";
+
+import {
+  RuntimeLifecycleTimeline,
+} from "./parts/RuntimeLifecycleTimeline";
+
+import {
+  RuntimeLogsPanel,
+} from "./parts/RuntimeLogsPanel";
+
+import {
+  RuntimeProjectsList,
+} from "./parts/RuntimeProjectsList";
+
+import {
   FeedSkeleton,
   InspectorSkeleton,
   RowSkeleton,
   TileSkeleton,
 } from "./parts/RuntimeSkeletons";
+
+const PANEL_HEIGHT_CLASS =
+  "min-h-[34rem] lg:h-[clamp(34rem,68vh,48rem)]";
 
 export function RuntimeOperationsWorkspace() {
   const {
@@ -115,7 +111,7 @@ export function RuntimeOperationsWorkspace() {
   const [query, setQuery] =
     useState("");
 
-  const [env, setEnv] =
+  const [environment, setEnvironment] =
     useState<Environment | "all">("all");
 
   const [health, setHealth] =
@@ -124,91 +120,145 @@ export function RuntimeOperationsWorkspace() {
   const [inspectorOpen, setInspectorOpen] =
     useState(false);
 
-  const isMobile = useIsMobile();
+  const isMobile =
+    useIsMobile();
 
   const searchRef =
     useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (
-      !selectedId &&
-      snapshot?.projects.length
+      selectedId ||
+      !snapshot?.projects.length
     ) {
-      setSelectedId(
-        snapshot.projects[0].id,
-      );
+      return;
     }
-  }, [snapshot, selectedId]);
 
-  const filtered = useMemo(() => {
+    setSelectedId(
+      snapshot.projects[0].id,
+    );
+  }, [
+    selectedId,
+    snapshot,
+  ]);
+
+  const filteredProjects = useMemo(() => {
     if (!snapshot) {
       return [];
     }
 
-    const q =
+    const normalizedQuery =
       query.trim().toLowerCase();
 
-    return snapshot.projects.filter((project) => {
-      if (
-        env !== "all" &&
-        project.env !== env
-      ) {
-        return false;
-      }
+    return snapshot.projects.filter(
+      (project) => {
+        if (
+          environment !== "all" &&
+          project.env !== environment
+        ) {
+          return false;
+        }
 
-      if (
-        health !== "all" &&
-        project.health.status !== health
-      ) {
-        return false;
-      }
+        if (
+          health !== "all" &&
+          project.health.status !== health
+        ) {
+          return false;
+        }
 
-      if (!q) {
-        return true;
-      }
+        if (!normalizedQuery) {
+          return true;
+        }
 
-      return (
-        project.name.toLowerCase().includes(q) ||
-        project.region.toLowerCase().includes(q) ||
-        project.version.toLowerCase().includes(q) ||
-        project.env.toLowerCase().includes(q)
-      );
-    });
-  }, [snapshot, query, env, health]);
+        return [
+          project.name,
+          project.region,
+          project.version,
+          project.env,
+        ].some((value) =>
+          value
+            .toLowerCase()
+            .includes(normalizedQuery),
+        );
+      },
+    );
+  }, [
+    environment,
+    health,
+    query,
+    snapshot,
+  ]);
 
   const selectedProject = useMemo(
     () =>
       snapshot?.projects.find(
-        (project) => project.id === selectedId,
+        (project) =>
+          project.id === selectedId,
       ) ?? null,
-    [snapshot, selectedId],
+    [
+      selectedId,
+      snapshot,
+    ],
   );
 
-  const projectEvents = useMemo(
+  const selectedEvents = useMemo(
     () =>
       (snapshot?.events ?? []).filter(
         (event) =>
           !selectedProject ||
-          event.projectId === selectedProject.id ||
-          !selectedProject,
+          event.projectId ===
+            selectedProject.id,
       ),
-    [snapshot, selectedProject],
+    [
+      selectedProject,
+      snapshot,
+    ],
+  );
+
+  const selectedTimeline = useMemo(
+    () =>
+      (snapshot?.timeline ?? []).filter(
+        (event) =>
+          !selectedProject ||
+          event.projectId ===
+            selectedProject.id,
+      ),
+    [
+      selectedProject,
+      snapshot,
+    ],
+  );
+
+  const selectedLogs = useMemo(
+    () =>
+      (snapshot?.logs ?? []).filter(
+        (log) =>
+          !selectedProject ||
+          log.projectId ===
+            selectedProject.id,
+      ),
+    [
+      selectedProject,
+      snapshot,
+    ],
   );
 
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
+    const handleKeyboardShortcut = (
+      event: KeyboardEvent,
+    ) => {
       const target =
         event.target as HTMLElement | null;
 
-      const typing =
-        !!target &&
+      const isTyping =
+        Boolean(target) &&
         (
-          target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable
+          target?.tagName === "INPUT" ||
+          target?.tagName === "TEXTAREA" ||
+          target?.isContentEditable
         );
 
-      if (typing) {
+      if (isTyping) {
         return;
       }
 
@@ -227,74 +277,104 @@ export function RuntimeOperationsWorkspace() {
 
       if (key === "r") {
         event.preventDefault();
-        dispatch(
+
+        void dispatch(
           "restart",
           selectedProject.id,
-        ).catch(() => {});
-      } else if (key === "s") {
+        );
+
+        return;
+      }
+
+      if (key === "s") {
         event.preventDefault();
-        dispatch(
+
+        void dispatch(
           "shutdown",
           selectedProject.id,
-        ).catch(() => {});
-      } else if (key === "enter") {
+        );
+
+        return;
+      }
+
+      if (key === "enter") {
+        event.preventDefault();
         setInspectorOpen(true);
       }
     };
 
     window.addEventListener(
       "keydown",
-      onKey,
+      handleKeyboardShortcut,
     );
 
-    return () =>
+    return () => {
       window.removeEventListener(
         "keydown",
-        onKey,
+        handleKeyboardShortcut,
       );
-  }, [selectedProject, dispatch]);
+    };
+  }, [
+    dispatch,
+    selectedProject,
+  ]);
 
   if (status === "error") {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-10">
+        <div className="mx-auto max-w-7xl px-4 py-10 md:px-10 md:py-14">
           <RuntimeErrorState
-            onRetry={reload}
             message={error?.message}
+            onRetry={reload}
           />
         </div>
       </div>
     );
   }
 
-  if (status === "loading" || !snapshot) {
+  if (
+    status === "loading" ||
+    !snapshot
+  ) {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-7xl space-y-6 px-4 py-10 md:px-10 md:py-14">
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-7 px-4 py-8 md:px-10 md:py-12">
           <div className="space-y-3">
-            <div className="h-3 w-40 animate-pulse rounded-md bg-surface-2" />
-            <div className="h-10 w-72 animate-pulse rounded-md bg-surface-2" />
-            <div className="h-3 w-96 animate-pulse rounded-md bg-surface-2" />
+            <div className="h-3 w-40 animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
+
+            <div className="h-10 w-72 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-card)]" />
+
+            <div className="h-3 w-96 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
           </div>
 
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <TileSkeleton key={index} />
-            ))}
+            {Array.from(
+              { length: 4 },
+              (_, index) => (
+                <TileSkeleton
+                  key={index}
+                />
+              ),
+            )}
           </div>
 
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,320px)_1fr_minmax(0,360px)]">
+          <div className="grid min-h-[34rem] grid-cols-1 gap-5 lg:grid-cols-[minmax(0,330px)_1fr] xl:grid-cols-[minmax(0,330px)_1fr_minmax(0,400px)]">
             <div className="space-y-2">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <RowSkeleton key={index} />
-              ))}
+              {Array.from(
+                { length: 5 },
+                (_, index) => (
+                  <RowSkeleton
+                    key={index}
+                  />
+                ),
+              )}
             </div>
 
-            <LuminaWorkspacePanel className="min-h-[360px] p-0">
+            <LuminaWorkspacePanel className="min-h-[34rem] p-0">
               <FeedSkeleton />
             </LuminaWorkspacePanel>
 
-            <LuminaWorkspacePanel className="min-h-[360px] p-0">
+            <LuminaWorkspacePanel className="hidden min-h-[34rem] p-0 xl:flex">
               <InspectorSkeleton />
             </LuminaWorkspacePanel>
           </div>
@@ -304,7 +384,7 @@ export function RuntimeOperationsWorkspace() {
   }
 
   const hasMatches =
-    filtered.length > 0;
+    filteredProjects.length > 0;
 
   return (
     <LuminaWorkspaceLayout
@@ -315,8 +395,8 @@ export function RuntimeOperationsWorkspace() {
           updatedAt={snapshot.updatedAt}
           query={query}
           onQuery={setQuery}
-          env={env}
-          onEnv={setEnv}
+          env={environment}
+          onEnv={setEnvironment}
           health={health}
           onHealth={setHealth}
         />
@@ -360,8 +440,8 @@ export function RuntimeOperationsWorkspace() {
                   <LuminaButton
                     variant="ghost"
                     size="sm"
-                    className="lg:hidden text-gold hover:text-gold"
-                    aria-label="Open inspector"
+                    className="text-gold hover:text-gold xl:hidden"
+                    aria-label="Open runtime inspector"
                   >
                     <PanelRightOpen className="h-3.5 w-3.5" />
                     Inspector
@@ -370,7 +450,14 @@ export function RuntimeOperationsWorkspace() {
 
                 <SheetContent
                   side="right"
-                  className="glass-strong w-full border-l border-white/10 p-0 sm:max-w-[420px]"
+                  className={[
+                    "w-full p-0 sm:max-w-[420px]",
+                    "border-l",
+                    "[border-color:var(--lumina-border-standard)]",
+                    "[background:var(--lumina-surface-panel)]",
+                    "[backdrop-filter:var(--lumina-blur-surface)]",
+                    "[box-shadow:var(--lumina-shadow-panel)]",
+                  ].join(" ")}
                 >
                   <RuntimeInspector
                     project={selectedProject}
@@ -385,26 +472,25 @@ export function RuntimeOperationsWorkspace() {
         />
       }
       sidebar={
-        <LuminaWorkspacePanel className="h-[560px] p-4">
-          <div className="flex items-center justify-between px-1 pb-3">
-            <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-              Services
-            </div>
-
+        <LuminaWorkspacePanel
+          title="Services"
+          toolbar={
             <div className="text-[10.5px] tabular-nums text-muted-foreground">
-              {filtered.length}/{snapshot.projects.length}
+              {filteredProjects.length}/
+              {snapshot.projects.length}
             </div>
-          </div>
-
+          }
+          className={`${PANEL_HEIGHT_CLASS} p-0`}
+        >
           {hasMatches ? (
             <RuntimeProjectsList
-              projects={filtered}
+              projects={filteredProjects}
               selectedId={selectedId}
               onSelect={setSelectedId}
               onOpenInspector={() =>
                 setInspectorOpen(true)
               }
-              className="flex-1"
+              className="flex-1 p-4"
             />
           ) : (
             <RuntimeEmptyState
@@ -415,13 +501,31 @@ export function RuntimeOperationsWorkspace() {
         </LuminaWorkspacePanel>
       }
       content={
-        <LuminaWorkspacePanel className="h-[560px] p-0">
+        <LuminaWorkspacePanel
+          className={`${PANEL_HEIGHT_CLASS} p-0`}
+        >
           <Tabs
             defaultValue="events"
             className="flex min-h-0 flex-1 flex-col"
           >
-            <div className="flex items-center justify-between border-b border-white/8 bg-white/[0.025] px-4 pb-3 pt-4 backdrop-blur-xl">
-              <TabsList className="rounded-2xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl">
+            <div
+              className={[
+                "flex flex-col gap-3 border-b px-4 py-4",
+                "sm:flex-row sm:items-center sm:justify-between",
+                "[border-color:var(--lumina-border-standard)]",
+                "[background:var(--lumina-surface-compact)]",
+                "[backdrop-filter:var(--lumina-blur-surface)]",
+              ].join(" ")}
+            >
+              <TabsList
+                className={[
+                  "self-start rounded-2xl border p-1",
+                  "[border-color:var(--lumina-border-standard)]",
+                  "[background:var(--lumina-surface-interactive)]",
+                  "[backdrop-filter:var(--lumina-blur-surface)]",
+                  "[box-shadow:var(--lumina-shadow-panel)]",
+                ].join(" ")}
+              >
                 <TabsTrigger value="events">
                   Events
                 </TabsTrigger>
@@ -436,19 +540,17 @@ export function RuntimeOperationsWorkspace() {
               </TabsList>
 
               <div className="text-[10.5px] tabular-nums text-muted-foreground">
-                {snapshot.events.length} events ·{" "}
-                {snapshot.logs.length} logs
+                {selectedEvents.length} events ·{" "}
+                {selectedLogs.length} logs
               </div>
             </div>
 
             <TabsContent
               value="events"
-              className={cn(
-                "m-0 min-h-0 flex-1",
-              )}
+              className="m-0 min-h-0 flex-1"
             >
               <RuntimeEventStream
-                events={projectEvents}
+                events={selectedEvents}
               />
             </TabsContent>
 
@@ -457,11 +559,7 @@ export function RuntimeOperationsWorkspace() {
               className="m-0 min-h-0 flex-1"
             >
               <RuntimeLifecycleTimeline
-                events={snapshot.timeline.filter(
-                  (event) =>
-                    !selectedProject ||
-                    event.projectId === selectedProject.id,
-                )}
+                events={selectedTimeline}
               />
             </TabsContent>
 
@@ -470,18 +568,16 @@ export function RuntimeOperationsWorkspace() {
               className="m-0 min-h-0 flex-1"
             >
               <RuntimeLogsPanel
-                logs={snapshot.logs.filter(
-                  (log) =>
-                    !selectedProject ||
-                    log.projectId === selectedProject.id,
-                )}
+                logs={selectedLogs}
               />
             </TabsContent>
           </Tabs>
         </LuminaWorkspacePanel>
       }
       inspector={
-        <LuminaWorkspacePanel className="hidden h-[560px] p-0 xl:flex">
+        <LuminaWorkspacePanel
+          className={`hidden ${PANEL_HEIGHT_CLASS} p-0 xl:flex`}
+        >
           <RuntimeInspector
             project={selectedProject}
             logs={snapshot.logs}
