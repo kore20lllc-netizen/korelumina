@@ -17,11 +17,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { LuminaButton } from "@/components/lumina/LuminaButton";
+
+import {
+  LuminaButton,
+  type LuminaButtonProps,
+} from "@/components/lumina/LuminaButton";
+
 import {
   LuminaInspectorSection,
 } from "@/components/lumina/workspace";
+
 import { cn } from "@/lib/utils";
+
 import type {
   RuntimeAction,
   RuntimeProject,
@@ -31,6 +38,9 @@ const CONFIG: Array<{
   action: RuntimeAction;
   label: string;
   icon: any;
+  variant: NonNullable<
+    LuminaButtonProps["variant"]
+  >;
   destructive?: boolean;
   confirm?: boolean;
 }> = [
@@ -38,21 +48,25 @@ const CONFIG: Array<{
     action: "restart",
     label: "Restart",
     icon: RotateCw,
+    variant: "primary",
   },
   {
     action: "start",
     label: "Start",
     icon: PlayCircle,
+    variant: "success",
   },
   {
     action: "drain",
     label: "Drain",
     icon: PauseCircle,
+    variant: "warning",
   },
   {
     action: "shutdown",
     label: "Shutdown",
     icon: PowerOff,
+    variant: "danger",
     destructive: true,
     confirm: true,
   },
@@ -60,6 +74,7 @@ const CONFIG: Array<{
     action: "rollback",
     label: "Rollback",
     icon: Undo2,
+    variant: "toolbar",
     confirm: true,
   },
 ];
@@ -82,7 +97,10 @@ export function RuntimeActionsToolbar({
   className,
   compact,
 }: RuntimeActionsToolbarProps) {
-  const [confirm, setConfirm] = useState<
+  const [
+    confirm,
+    setConfirm,
+  ] = useState<
     | null
     | {
         action: RuntimeAction;
@@ -93,12 +111,17 @@ export function RuntimeActionsToolbar({
 
   const disabled = !project;
 
-  const run = (action: RuntimeAction) => {
+  const run = (
+    action: RuntimeAction,
+  ) => {
     if (!project) {
       return;
     }
 
-    return onDispatch(action, project.id);
+    return onDispatch(
+      action,
+      project.id,
+    );
   };
 
   return (
@@ -111,66 +134,98 @@ export function RuntimeActionsToolbar({
           aria-label="Runtime actions"
           className="flex flex-wrap items-center gap-2"
         >
-        {CONFIG.map((item) => {
-          const Icon = item.icon;
+          {CONFIG.map((item) => {
+            const Icon = item.icon;
 
-          const pendingKey = project
-            ? `${project.id}:${item.action}`
-            : "";
+            const pendingKey =
+              project
+                ? `${project.id}:${item.action}`
+                : "";
 
-          const isPending =
-            !!pending[pendingKey];
+            const isPending =
+              !!pending[pendingKey];
 
-          return (
-            <LuminaButton
-              key={item.action}
-              type="button"
-              variant="glow"
-              size={compact ? "sm" : "md"}
-              disabled={disabled || isPending}
-              aria-label={item.label}
-              title={item.label}
-              className={cn(
-                "gap-2",
-                (disabled || isPending) &&
-                  "opacity-50 pointer-events-none",
-              )}
-              onClick={() => {
-                if (item.confirm) {
-                  setConfirm({
-                    action: item.action,
-                    label: item.label,
-                    destructive: item.destructive,
-                  });
-                  return;
+            return (
+              <LuminaButton
+                key={item.action}
+                type="button"
+                variant={item.variant}
+                size={
+                  compact
+                    ? "sm"
+                    : "md"
                 }
-
-                void run(item.action);
-              }}
-            >
-              <Icon
+                disabled={
+                  disabled ||
+                  isPending
+                }
+                aria-label={
+                  item.label
+                }
+                title={
+                  item.label
+                }
                 className={cn(
-                  "h-3.5 w-3.5",
+                  "gap-2 transition-all",
                   isPending &&
-                    "animate-spin",
+                    "animate-pulse",
+                  (
+                    disabled ||
+                    isPending
+                  ) &&
+                    "pointer-events-none opacity-60",
                 )}
-                strokeWidth={1.75}
-              />
+                onClick={() => {
+                  if (
+                    item.confirm
+                  ) {
+                    setConfirm({
+                      action:
+                        item.action,
+                      label:
+                        item.label,
+                      destructive:
+                        item.destructive,
+                    });
+                    return;
+                  }
 
-              {!compact && (
-                <span>{item.label}</span>
-              )}
-            </LuminaButton>
-          );
-        })}
+                  void run(
+                    item.action,
+                  );
+                }}
+              >
+                <Icon
+                  className={cn(
+                    "h-3.5 w-3.5",
+                    isPending &&
+                      "animate-spin motion-safe:animate-spin",
+                  )}
+                  strokeWidth={
+                    1.75
+                  }
+                />
+
+                {!compact && (
+                  <span>
+                    {item.label}
+                  </span>
+                )}
+              </LuminaButton>
+            );
+          })}
         </div>
       </LuminaInspectorSection>
 
       <AlertDialog
         open={!!confirm}
-        onOpenChange={(open) => {
+        onOpenChange={(
+          open,
+        ) => {
           if (!open) {
-            setConfirm(null);
+            setConfirm(
+              null,
+            );
           }
         }}
       >
@@ -184,9 +239,13 @@ export function RuntimeActionsToolbar({
             </AlertDialogTitle>
 
             <AlertDialogDescription>
-              This action affects the{" "}
-              {project?.env} environment.
-              It can be resumed later.
+              This action
+              affects the{" "}
+              {project?.env}
+              {" "}
+              environment.
+              It can be
+              resumed later.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
@@ -210,7 +269,9 @@ export function RuntimeActionsToolbar({
                   );
                 }
 
-                setConfirm(null);
+                setConfirm(
+                  null,
+                );
               }}
             >
               {confirm?.label}

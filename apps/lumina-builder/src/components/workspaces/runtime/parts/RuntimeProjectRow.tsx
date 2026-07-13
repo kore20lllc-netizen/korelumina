@@ -1,16 +1,27 @@
-import { forwardRef } from "react";
+import {
+  forwardRef,
+} from "react";
 
 import {
   LuminaBadge,
   LuminaServiceCard,
 } from "@/components/lumina/workspace";
 
-import { cn } from "@/lib/utils";
+import {
+  cn,
+} from "@/lib/utils";
 
-import { RuntimeSparkline } from "./RuntimeSparkline";
-import { RuntimeStatusDot } from "./RuntimeStatusDot";
+import type {
+  RuntimeProject,
+} from "@/services/runtime/types";
 
-import type { RuntimeProject } from "@/services/runtime/types";
+import {
+  RuntimeSparkline,
+} from "./RuntimeSparkline";
+
+import {
+  RuntimeStatusDot,
+} from "./RuntimeStatusDot";
 
 export interface RuntimeProjectRowProps {
   project: RuntimeProject;
@@ -18,23 +29,41 @@ export interface RuntimeProjectRowProps {
   onSelect?: () => void;
   tabIndex?: number;
   onKeyDown?: (
-    e: React.KeyboardEvent<HTMLButtonElement>,
+    event: React.KeyboardEvent<HTMLButtonElement>,
   ) => void;
   className?: string;
 }
 
-const ENV_CHIP: Record<string, string> = {
-  production:
-    "border border-violet/30 bg-[linear-gradient(180deg,rgba(124,92,255,.28),rgba(124,92,255,.10))] text-violet-100 shadow-[0_0_22px_rgba(124,92,255,.28)]",
+const ENVIRONMENT_CLASS: Record<
+  RuntimeProject["env"],
+  string
+> = {
+  production: [
+    "border",
+    "[border-color:hsl(var(--cyan)/0.34)]",
+    "[background:hsl(var(--cyan)/0.12)]",
+    "text-cyan",
+  ].join(" "),
 
-  staging:
-    "border border-cyan/30 bg-[linear-gradient(180deg,rgba(34,211,238,.26),rgba(34,211,238,.08))] text-cyan-100 shadow-[0_0_22px_rgba(34,211,238,.24)]",
+  staging: [
+    "border",
+    "[border-color:hsl(var(--gold)/0.34)]",
+    "[background:hsl(var(--gold)/0.12)]",
+    "text-gold",
+  ].join(" "),
 
-  preview:
-    "border border-rose/30 bg-[linear-gradient(180deg,rgba(244,63,94,.24),rgba(244,63,94,.08))] text-rose-100 shadow-[0_0_22px_rgba(244,63,94,.22)]",
+  preview: [
+    "border",
+    "[border-color:hsl(var(--violet)/0.34)]",
+    "[background:hsl(var(--violet)/0.12)]",
+    "text-violet-200",
+  ].join(" "),
 };
 
-const STATE_LABEL: Record<string, string> = {
+const STATE_LABEL: Record<
+  RuntimeProject["state"],
+  string
+> = {
   running: "Running",
   idle: "Idle",
   starting: "Starting",
@@ -43,14 +72,87 @@ const STATE_LABEL: Record<string, string> = {
   error: "Error",
 };
 
+function formatUptime(
+  uptimeMs: number,
+): string {
+  if (
+    !Number.isFinite(uptimeMs) ||
+    uptimeMs <= 0
+  ) {
+    return "—";
+  }
+
+  const totalMinutes =
+    Math.floor(
+      uptimeMs / 60_000,
+    );
+
+  const days =
+    Math.floor(
+      totalMinutes / 1_440,
+    );
+
+  const hours =
+    Math.floor(
+      (totalMinutes % 1_440) / 60,
+    );
+
+  const minutes =
+    totalMinutes % 60;
+
+  if (days > 0) {
+    return `${days}d ${hours}h`;
+  }
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  }
+
+  return `${minutes}m`;
+}
+
+function formatMetric(
+  value: number,
+  suffix: string,
+  decimals = 0,
+): string {
+  if (!Number.isFinite(value)) {
+    return "—";
+  }
+
+  return `${value.toFixed(decimals)}${suffix}`;
+}
+
+interface MetricProps {
+  label: string;
+  value: string;
+}
+
+function RuntimeCardMetric({
+  label,
+  value,
+}: MetricProps) {
+  return (
+    <div className="min-w-0">
+      <div className="truncate text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+        {label}
+      </div>
+
+      <div className="mt-1 truncate text-[13px] font-semibold tabular-nums text-foreground">
+        {value}
+      </div>
+    </div>
+  );
+}
+
 export const RuntimeProjectRow = forwardRef<
   HTMLButtonElement,
   RuntimeProjectRowProps
 >(
   (
     {
-      project: p,
-      selected,
+      project,
+      selected = false,
       onSelect,
       tabIndex,
       onKeyDown,
@@ -58,6 +160,13 @@ export const RuntimeProjectRow = forwardRef<
     },
     ref,
   ) => {
+    const memoryLabel =
+      Number.isFinite(
+        project.metrics.memUsedMb,
+      )
+        ? `${project.metrics.memUsedMb.toFixed(0)} MB`
+        : "—";
+
     return (
       <LuminaServiceCard
         ref={ref}
@@ -66,62 +175,121 @@ export const RuntimeProjectRow = forwardRef<
         onKeyDown={onKeyDown}
         tabIndex={tabIndex}
         aria-pressed={selected}
-        aria-label={`${p.name}, ${p.env}, ${STATE_LABEL[p.state]}, health ${p.health.status}`}
-        title={p.name}
+        aria-label={[
+          project.name,
+          project.env,
+          STATE_LABEL[project.state],
+          `health ${project.health.status}`,
+          `CPU ${project.metrics.cpuPct.toFixed(0)} percent`,
+        ].join(", ")}
+        title={project.name}
+        subtitle={
+          <span className="tabular-nums">
+            {project.version}
+            {" • "}
+            {project.region}
+          </span>
+        }
         badge={
-          <LuminaBadge className={ENV_CHIP[p.env]}>
-            {p.env}
+          <LuminaBadge
+            className={ENVIRONMENT_CLASS[project.env]}
+          >
+            {project.env}
           </LuminaBadge>
         }
-        className={className}
+        className={cn(
+          "shrink-0",
+          className,
+        )}
         status={
-          <div className="flex items-center gap-4">
-          <RuntimeStatusDot
-            status={p.health.status}
-            className="h-2.5 w-2.5"
-          />
+          <div className="flex items-center gap-2">
+            <RuntimeStatusDot
+              status={project.health.status}
+              className="h-2.5 w-2.5"
+            />
 
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-3">
-              <h3 className="truncate text-[14px] font-semibold tracking-tight text-foreground">
-                {p.name}
-              </h3>
+            <span className="text-xs font-medium text-foreground">
+              {STATE_LABEL[project.state]}
+            </span>
 
-              <LuminaBadge
-                className={ENV_CHIP[p.env]}
-              >
-                {p.env}
-              </LuminaBadge>
-            </div>
+            <span
+              aria-hidden="true"
+              className="text-muted-foreground/60"
+            >
+              •
+            </span>
 
-            <div className="mt-1 text-[11px] text-muted-foreground tabular-nums">
-              {STATE_LABEL[p.state]}
-              {" • "}
-              {p.version}
-              {" • "}
-              {p.region}
-            </div>
+            <span className="text-[11px] capitalize text-muted-foreground">
+              {project.health.status}
+            </span>
           </div>
-
-          <div className="hidden sm:block">
+        }
+        sparkline={
+          <div
+            className={cn(
+              "overflow-hidden border px-2 py-1.5",
+              "[border-radius:var(--lumina-radius-inner)]",
+              "[border-color:var(--lumina-border-standard)]",
+              "[background:var(--lumina-surface-compact)]",
+            )}
+          >
             <RuntimeSparkline
-              data={p.metrics.cpuSeries.slice(-30)}
-              width={96}
-              height={28}
+              data={project.metrics.cpuSeries.slice(-40)}
+              width={260}
+              height={64}
               stroke="hsl(var(--cyan))"
-              fill="hsl(var(--cyan) / 0.14)"
+              fill="hsl(var(--cyan) / 0.16)"
+              label={`${project.name} CPU activity`}
             />
           </div>
+        }
+        metrics={
+          <div className="grid grid-cols-3 gap-x-3 gap-y-4">
+            <RuntimeCardMetric
+              label="CPU"
+              value={formatMetric(
+                project.metrics.cpuPct,
+                "%",
+              )}
+            />
 
-          <div className="hidden md:flex min-w-[72px] flex-col items-end">
-            <div className="text-[16px] font-semibold tabular-nums">
-              {p.metrics.cpuPct.toFixed(0)}%
-            </div>
+            <RuntimeCardMetric
+              label="Memory"
+              value={memoryLabel}
+            />
 
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              CPU
-            </div>
-          </div>
+            <RuntimeCardMetric
+              label="RPS"
+              value={formatMetric(
+                project.metrics.rps,
+                "",
+                1,
+              )}
+            />
+
+            <RuntimeCardMetric
+              label="P95"
+              value={formatMetric(
+                project.metrics.p95Ms,
+                " ms",
+              )}
+            />
+
+            <RuntimeCardMetric
+              label="Errors"
+              value={formatMetric(
+                project.metrics.errorRatePct,
+                "%",
+                1,
+              )}
+            />
+
+            <RuntimeCardMetric
+              label="Uptime"
+              value={formatUptime(
+                project.uptimeMs,
+              )}
+            />
           </div>
         }
       />

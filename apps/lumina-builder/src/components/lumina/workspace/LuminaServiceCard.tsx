@@ -1,9 +1,22 @@
-import type { ReactNode } from "react";
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type ReactNode,
+} from "react";
 
-import { cn } from "@/lib/utils";
-import { LuminaSurface } from "@/components/lumina/surface/LuminaSurface";
+import {
+  LuminaSurface,
+} from "@/components/lumina/surface/LuminaSurface";
 
-export interface LuminaServiceCardProps {
+import {
+  cn,
+} from "@/lib/utils";
+
+export interface LuminaServiceCardProps
+  extends Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    "children" | "title"
+  > {
   title: ReactNode;
   status: ReactNode;
   badge?: ReactNode;
@@ -12,98 +25,121 @@ export interface LuminaServiceCardProps {
   sparkline?: ReactNode;
   footer?: ReactNode;
   selected?: boolean;
-  onClick?: () => void;
-  className?: string;
 }
 
-export function LuminaServiceCard({
-  title,
-  status,
-  badge,
-  subtitle,
-  metrics,
-  sparkline,
-  footer,
-  selected,
-  onClick,
-  className,
-}: LuminaServiceCardProps) {
-  return (
-    <LuminaSurface
-      asChild
-      variant="panel"
-      className={cn(
-        "transition-all duration-300",
-        selected
-          ? [
-              "[border-color:var(--lumina-border-emphasis)]",
-              "[background:var(--lumina-surface-selected)]",
-              "[box-shadow:var(--lumina-shadow-selected)]",
-            ]
-          : [
-              "[border-color:var(--lumina-border-standard)]",
-              "[background:var(--lumina-surface-card)]",
-              "hover:[border-color:var(--lumina-border-emphasis)]",
-              "hover:[background:var(--lumina-surface-interactive)]",
-              "hover:[box-shadow:var(--lumina-shadow-hover)]",
-            ],
-        className,
-      )}
-    >
-      <button
-        type="button"
-        onClick={onClick}
-        className="
-          flex
-          w-full
-          flex-col
-          gap-5
-          p-5
-          text-left
-          [border-radius:var(--lumina-radius-surface)]
-        "
+export const LuminaServiceCard = forwardRef<
+  HTMLButtonElement,
+  LuminaServiceCardProps
+>(
+  (
+    {
+      title,
+      status,
+      badge,
+      subtitle,
+      metrics,
+      sparkline,
+      footer,
+      selected = false,
+      className,
+      type = "button",
+      ...buttonProps
+    },
+    ref,
+  ) => {
+    return (
+      <LuminaSurface
+        asChild
+        variant={selected ? "selected" : "card"}
+        className={cn(
+          "group w-full overflow-hidden",
+          "transition-all duration-300",
+          selected
+            ? [
+                "[border-color:var(--lumina-border-emphasis)]",
+                "[background:var(--lumina-surface-selected)]",
+                "[box-shadow:var(--lumina-shadow-selected)]",
+                "scale-[1.005]",
+              ]
+            : [
+                "[border-color:var(--lumina-border-standard)]",
+                "[background:var(--lumina-surface-card)]",
+                "hover:[border-color:var(--lumina-border-emphasis)]",
+                "hover:[background:var(--lumina-surface-interactive)]",
+                "hover:[box-shadow:var(--lumina-shadow-hover)]",
+              ],
+          className,
+        )}
       >
-        <header className="flex items-start justify-between gap-4">
-          <div className="min-w-0 flex-1">
-            <div className="line-clamp-2 text-lg font-semibold tracking-tight">
-              {title}
+        <button
+          ref={ref}
+          type={type}
+          className={cn(
+            "flex w-full flex-col gap-4 p-4 text-left",
+            "[border-radius:var(--lumina-radius-surface)]",
+            "focus-visible:outline-none",
+            "focus-visible:ring-2",
+            "focus-visible:[--tw-ring-color:var(--lumina-accent-color)]",
+          )}
+          {...buttonProps}
+        >
+          <header className="flex w-full items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="line-clamp-2 text-[15px] font-semibold tracking-tight text-foreground">
+                {title}
+              </div>
+
+              {subtitle && (
+                <div className="mt-1 text-xs text-muted-foreground">
+                  {subtitle}
+                </div>
+              )}
             </div>
 
-            {subtitle && (
-              <div className="mt-1 text-sm text-muted-foreground">
-                {subtitle}
+            {badge && (
+              <div className="shrink-0">
+                {badge}
               </div>
             )}
+          </header>
+
+          <div className="w-full">
+            {status}
           </div>
 
-          {badge}
-        </header>
+          {(metrics || sparkline) && (
+            <div className="flex w-full flex-col gap-4">
+              {sparkline && (
+                <div className="w-full">
+                  {sparkline}
+                </div>
+              )}
 
-        <div>{status}</div>
-
-        {(metrics || sparkline) && (
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex-1">
-              {metrics}
+              {metrics && (
+                <div className="w-full">
+                  {metrics}
+                </div>
+              )}
             </div>
+          )}
 
-            {sparkline}
-          </div>
-        )}
+          {footer && (
+            <footer
+              className={cn(
+                "w-full border-t pt-4",
+                "[border-color:var(--lumina-border-standard)]",
+              )}
+            >
+              {footer}
+            </footer>
+          )}
+        </button>
+      </LuminaSurface>
+    );
+  },
+);
 
-        {footer && (
-          <footer
-            className={cn(
-              "border-t pt-4",
-              "[border-color:var(--lumina-border-standard)]",
-            )}
-          >
-            {footer}
-          </footer>
-        )}
-      </button>
-    </LuminaSurface>
-  );
-}
+LuminaServiceCard.displayName =
+  "LuminaServiceCard";
 
 export default LuminaServiceCard;
