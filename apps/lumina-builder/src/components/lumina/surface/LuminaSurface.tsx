@@ -2,9 +2,13 @@ import type {
   HTMLAttributes,
 } from "react";
 
-import { Slot } from "@radix-ui/react-slot";
+import {
+  Slot,
+} from "@radix-ui/react-slot";
 
-import { cn } from "@/lib/utils";
+import {
+  cn,
+} from "@/lib/utils";
 
 type LuminaSurfaceVariant =
   | "default"
@@ -28,23 +32,31 @@ const backgroundByVariant: Record<
   string
 > = {
   default:
-    "[background:var(--lumina-surface-panel)]",
+    "[background:var(--lumina-surface-hero)]",
+
   panel:
-    "[background:var(--lumina-surface-panel)]",
+    "[background:var(--lumina-surface-hero)]",
+
   hero:
     "[background:var(--lumina-surface-hero)]",
+
   sidebar:
-    "[background:var(--lumina-surface-panel)]",
+    "[background:var(--lumina-surface-hero)]",
+
   toolbar:
-    "[background:var(--lumina-surface-compact)]",
+    "[background:var(--lumina-surface-hero)]",
+
   card:
-    "[background:var(--lumina-surface-card)]",
+    "[background:var(--lumina-surface-hero)]",
+
   interactive:
     "[background:var(--lumina-surface-interactive)]",
+
   selected:
     "[background:var(--lumina-surface-selected)]",
+
   compact:
-    "[background:var(--lumina-surface-compact)]",
+    "[background:var(--lumina-surface-hero)]",
 };
 
 const radiusByVariant: Record<
@@ -53,20 +65,28 @@ const radiusByVariant: Record<
 > = {
   default:
     "[border-radius:var(--lumina-radius-surface)]",
+
   panel:
     "[border-radius:var(--lumina-radius-surface)]",
+
   hero:
     "[border-radius:calc(var(--lumina-radius-surface)*1.15)]",
+
   sidebar:
     "[border-radius:var(--lumina-radius-surface)]",
+
   toolbar:
     "[border-radius:var(--lumina-radius-inner)]",
+
   card:
     "[border-radius:var(--lumina-radius-surface)]",
+
   interactive:
     "[border-radius:var(--lumina-radius-surface)]",
+
   selected:
     "[border-radius:var(--lumina-radius-surface)]",
+
   compact:
     "[border-radius:var(--lumina-radius-inner)]",
 };
@@ -77,20 +97,28 @@ const borderByVariant: Record<
 > = {
   default:
     "border [border-color:var(--lumina-border-standard)]",
+
   panel:
     "border [border-color:var(--lumina-border-standard)]",
+
   hero:
-    "border [border-color:var(--lumina-border-standard)]",
+    "border [border-color:var(--lumina-border-emphasis)]",
+
   sidebar:
     "border [border-color:var(--lumina-border-standard)]",
+
   toolbar:
     "border [border-color:var(--lumina-border-standard)]",
+
   card:
-    "border [border-color:var(--lumina-border-emphasis)]",
+    "border [border-color:var(--lumina-border-standard)]",
+
   interactive:
     "border [border-color:var(--lumina-border-emphasis)]",
+
   selected:
     "border [border-color:var(--lumina-border-emphasis)]",
+
   compact:
     "border [border-color:var(--lumina-border-standard)]",
 };
@@ -101,20 +129,28 @@ const shadowByVariant: Record<
 > = {
   default:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   panel:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   hero:
     "[box-shadow:var(--lumina-shadow-hero)]",
+
   sidebar:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   toolbar:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   card:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   interactive:
     "[box-shadow:var(--lumina-shadow-panel)]",
+
   selected:
     "[box-shadow:var(--lumina-shadow-selected)]",
+
   compact:
     "[box-shadow:var(--lumina-shadow-panel)]",
 };
@@ -125,20 +161,28 @@ const elevationByVariant: Record<
 > = {
   default:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+
   panel:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+
   hero:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-2px))]",
+
   sidebar:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+
   toolbar:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-0.5px))]",
+
   card:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-1px))]",
+
   interactive:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-0.75px))]",
+
   selected:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-1.5px))]",
+
   compact:
     "[transform:translateY(calc(var(--lumina-elevation-level)*-0.5px))]",
 };
@@ -150,9 +194,10 @@ export function LuminaSurface({
   asChild = false,
   ...props
 }: LuminaSurfaceProps) {
-  const Comp = asChild
-    ? Slot
-    : "div";
+  const Comp =
+    asChild
+      ? Slot
+      : "div";
 
   return (
     <Comp
@@ -173,3 +218,5 @@ export function LuminaSurface({
     </Comp>
   );
 }
+
+export default LuminaSurface;

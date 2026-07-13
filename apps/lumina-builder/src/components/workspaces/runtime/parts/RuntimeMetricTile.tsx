@@ -1,23 +1,57 @@
-import type { LucideIcon } from "lucide-react";
+import type {
+  LucideIcon,
+} from "lucide-react";
 
-import { LuminaMetricCard } from "@/components/lumina/workspace";
-import { RuntimeSparkline } from "./RuntimeSparkline";
+import {
+  LuminaMetricCard,
+} from "@/components/lumina/workspace";
+
+import {
+  RuntimeSparkline,
+  type RuntimeTelemetryMode,
+} from "./RuntimeSparkline";
 
 export interface RuntimeMetricTileProps {
   label: string;
   value: string;
   hint?: string;
   icon?: LucideIcon;
-  accent?: "violet" | "magenta" | "cyan" | "gold";
+  accent?:
+    | "violet"
+    | "magenta"
+    | "cyan"
+    | "gold";
+  visualization?: RuntimeTelemetryMode;
   trend?: number[];
   className?: string;
 }
 
 const ACCENT_STROKE = {
-  violet: "hsl(var(--violet))",
-  magenta: "hsl(var(--magenta))",
-  cyan: "hsl(var(--cyan))",
-  gold: "hsl(var(--gold))",
+  violet:
+    "hsl(var(--violet))",
+
+  magenta:
+    "hsl(var(--magenta))",
+
+  cyan:
+    "hsl(var(--cyan))",
+
+  gold:
+    "hsl(var(--gold))",
+} as const;
+
+const ACCENT_FILL = {
+  violet:
+    "hsl(var(--violet) / 0.14)",
+
+  magenta:
+    "hsl(var(--magenta) / 0.14)",
+
+  cyan:
+    "hsl(var(--cyan) / 0.14)",
+
+  gold:
+    "hsl(var(--gold) / 0.14)",
 } as const;
 
 export function RuntimeMetricTile({
@@ -25,7 +59,8 @@ export function RuntimeMetricTile({
   value,
   hint,
   icon: Icon,
-  accent="violet",
+  accent = "violet",
+  visualization = "signal",
   trend,
   className,
 }: RuntimeMetricTileProps) {
@@ -46,11 +81,21 @@ export function RuntimeMetricTile({
         trend?.length ? (
           <RuntimeSparkline
             data={trend}
+            mode={visualization}
             width={220}
             height={36}
-            stroke={ACCENT_STROKE[accent]}
-            fill={ACCENT_STROKE[accent].replace(")", " / 0.14)")}
-            className="w-full"
+            stroke={
+              ACCENT_STROKE[
+                accent
+              ]
+            }
+            fill={
+              ACCENT_FILL[
+                accent
+              ]
+            }
+            className="h-14 w-full"
+            label={`${label} telemetry`}
           />
         ) : null
       }

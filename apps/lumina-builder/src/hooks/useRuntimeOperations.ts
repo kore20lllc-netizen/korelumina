@@ -1,76 +1,252 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
-import { runtimeOperationsService } from "@/services/runtime";
-import type { RuntimeAction, RuntimeSnapshot } from "@/services/runtime/types";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-export type UseRuntimeStatus = "loading" | "ready" | "error";
+import {
+  toast,
+} from "sonner";
+
+import {
+  runtimeOperationsService,
+} from "@/services/runtime";
+
+import type {
+  RuntimeAction,
+  RuntimeScenario,
+  RuntimeSnapshot,
+} from "@/services/runtime/types";
+
+export type UseRuntimeStatus =
+  | "loading"
+  | "ready"
+  | "error";
 
 export interface UseRuntimeOperationsReturn {
   snapshot: RuntimeSnapshot | null;
   status: UseRuntimeStatus;
   error: Error | null;
-  dispatch: (action: RuntimeAction, projectId: string) => Promise<void>;
+
+  dispatch: (
+    action: RuntimeAction,
+    projectId: string,
+  ) => Promise<void>;
+
+  setScenario: (
+    scenario: RuntimeScenario,
+    projectId: string,
+  ) => Promise<void>;
+
+  scenarioPending:
+    RuntimeScenario | null;
+
   reload: () => void;
-  pending: Record<string, boolean>;
+
+  pending: Record<
+    string,
+    boolean
+  >;
 }
 
-/**
- * Presentation-layer hook wrapping the Runtime Operations service. This is the
- * ONLY module (besides `services/runtime/*`) that touches the service — every
- * component in `workspaces/runtime/parts/*` accepts data via props.
- */
-export function useRuntimeOperations(): UseRuntimeOperationsReturn {
-  const [snapshot, setSnapshot] = useState<RuntimeSnapshot | null>(null);
-  const [status, setStatus] = useState<UseRuntimeStatus>("loading");
-  const [error, setError] = useState<Error | null>(null);
-  const [pending, setPending] = useState<Record<string, boolean>>({});
-  const bumpRef = useRef(0);
+export function useRuntimeOperations():
+  UseRuntimeOperationsReturn {
+  const [
+    snapshot,
+    setSnapshot,
+  ] = useState<RuntimeSnapshot | null>(
+    null,
+  );
+
+  const [
+    status,
+    setStatus,
+  ] = useState<UseRuntimeStatus>(
+    "loading",
+  );
+
+  const [
+    error,
+    setError,
+  ] = useState<Error | null>(
+    null,
+  );
+
+  const [
+    pending,
+    setPending,
+  ] = useState<
+    Record<string, boolean>
+  >({});
+
+  const [
+    scenarioPending,
+    setScenarioPending,
+  ] = useState<
+    RuntimeScenario | null
+  >(null);
+
+  const [
+    reloadGeneration,
+    setReloadGeneration,
+  ] = useState(0);
 
   useEffect(() => {
+    let active = true;
+    let firstSnapshotDelivered =
+      false;
+
     setStatus("loading");
     setError(null);
-    let alive = true;
-    let firstDelivered = false;
+
     try {
-      const off = runtimeOperationsService.subscribe((s) => {
-        if (!alive) return;
-        setSnapshot(s);
-        if (!firstDelivered) {
-          firstDelivered = true;
-          setStatus("ready");
-        }
-      });
-      return () => { alive = false; off(); };
-    } catch (e) {
-      setError(e as Error);
+      const unsubscribe =
+        runtimeOperationsService.subscribe(
+          (nextSnapshot) => {
+            if (!active) {
+              return;
+            }
+
+            setSnapshot(
+              nextSnapshot,
+            );
+
+            if (
+              !firstSnapshotDelivered
+            ) {
+              firstSnapshotDelivered =
+                true;
+
+              setStatus("ready");
+            }
+          },
+        );
+
+      return () => {
+        active = false;
+        unsubscribe();
+      };
+    } catch (caughtError) {
+      setError(
+        caughtError as Error,
+      );
+
       setStatus("error");
     }
-  }, [bumpRef.current]);
 
-  const dispatch = useCallback(async (action: RuntimeAction, projectId: string) => {
-    const key = `${projectId}:${action}`;
-    setPending((p) => ({ ...p, [key]: true }));
-    try {
-      await runtimeOperationsService.dispatch(action, projectId);
-      toast.success(`${action} dispatched`);
-    } catch (e) {
-      const err = e as Error;
-      toast.error(err.message || `Failed to ${action}`);
-      throw err;
-    } finally {
-      setPending((p) => {
-        const { [key]: _, ...rest } = p;
-        return rest;
-      });
-    }
-  }, []);
+    return () => {
+      active = false;
+    };
+  }, [reloadGeneration]);
 
+  const dispatch =
+    useCallback(
+      async (
+        action: RuntimeAction,
+        projectId: string,
+      ) => {
+        const pendingKey =
+          `${projectId}:${action}`;
 
-  const reload = useCallback(() => {
-    bumpRef.current += 1;
-    setSnapshot(null);
-    setStatus("loading");
-  }, []);
+        setPending(
+          (current) => ({
+            ...current,
+            [pendingKey]: true,
+          }),
+        );
 
-  return { snapshot, status, error, dispatch, reload, pending };
+        try {
+          await runtimeOperationsService.dispatch(
+            action,
+            projectId,
+          );
+
+          toast.success(
+            `${action} dispatched`,
+          );
+        } catch (caughtError) {
+          const runtimeError =
+            caughtError as Error;
+
+          toast.error(
+            runtimeError.message ||
+              `Failed to ${action}`,
+          );
+
+          throw runtimeError;
+        } finally {
+          setPending(
+            (current) => {
+              const {
+                [pendingKey]: _removed,
+                ...remaining
+              } = current;
+
+              return remaining;
+            },
+          );
+        }
+      },
+      [],
+    );
+
+  const setScenario =
+    useCallback(
+      async (
+        scenario: RuntimeScenario,
+        projectId: string,
+      ) => {
+        setScenarioPending(
+          scenario,
+        );
+
+        try {
+          await runtimeOperationsService.setScenario(
+            projectId,
+            scenario,
+          );
+
+          toast.success(
+            `${scenario} scenario applied`,
+          );
+        } catch (caughtError) {
+          const runtimeError =
+            caughtError as Error;
+
+          toast.error(
+            runtimeError.message ||
+              `Failed to apply ${scenario}`,
+          );
+
+          throw runtimeError;
+        } finally {
+          setScenarioPending(
+            null,
+          );
+        }
+      },
+      [],
+    );
+
+  const reload =
+    useCallback(() => {
+      setSnapshot(null);
+      setStatus("loading");
+
+      setReloadGeneration(
+        (current) =>
+          current + 1,
+      );
+    }, []);
+
+  return {
+    snapshot,
+    status,
+    error,
+    dispatch,
+    setScenario,
+    scenarioPending,
+    reload,
+    pending,
+  };
 }

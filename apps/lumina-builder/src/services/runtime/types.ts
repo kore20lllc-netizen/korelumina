@@ -6,7 +6,19 @@ export type Environment = "production" | "staging" | "preview";
 export type EventSeverity = "info" | "warn" | "error" | "success";
 export type LogLevel = "debug" | "info" | "warn" | "error";
 export type LifecyclePhase = "build" | "boot" | "ready" | "drain" | "stop";
-export type RuntimeAction = "restart" | "shutdown" | "start" | "drain" | "rollback";
+export type RuntimeAction =
+  | "restart"
+  | "shutdown"
+  | "start"
+  | "drain"
+  | "rollback";
+
+export type RuntimeScenario =
+  | "normal"
+  | "idle"
+  | "spike"
+  | "outage"
+  | "recover";
 
 export interface RuntimeHealth {
   status: HealthStatus;
@@ -38,6 +50,7 @@ export interface RuntimeProject {
   startedAt: number;
   uptimeMs: number;
   metrics: RuntimeMetrics;
+  scenario?: RuntimeScenario;
 }
 
 export interface RuntimeEvent {
@@ -97,4 +110,9 @@ export interface RuntimeOperationsService {
   getSnapshot(): RuntimeSnapshot;
   subscribe(cb: (s: RuntimeSnapshot) => void): () => void;
   dispatch(action: RuntimeAction, projectId: string, opts?: { version?: string }): Promise<void>;
+
+  setScenario(
+    projectId: string,
+    scenario: RuntimeScenario,
+  ): Promise<void>;
 }

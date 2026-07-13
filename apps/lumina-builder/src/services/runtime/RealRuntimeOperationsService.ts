@@ -1,4 +1,8 @@
 import {
+  setRuntimeScenario,
+} from "@/services/runtime/setRuntimeScenario";
+
+import {
   connectRuntimeEvents,
   getRuntimeLogs,
   getRuntimeMetrics,
@@ -24,7 +28,11 @@ import type {
   RuntimeProject,
   RuntimeSnapshot,
   RuntimeState,
+  RuntimeScenario,
 } from "./types";
+
+const HISTORY_LIMIT = 60;
+const REFRESH_INTERVAL_MS = 1_000;
 
 function titleFromProjectId(projectId: string) {
   return projectId
@@ -157,9 +165,64 @@ function emptyRuntimeMetrics(): RuntimeMetrics {
     rps: 0,
     p95Ms: 0,
     errorRatePct: 0,
-    cpuSeries: Array.from({ length: 60 }, () => 0),
-    memSeries: Array.from({ length: 60 }, () => 0),
+    cpuSeries: [],
+    memSeries: [],
   };
+}
+
+function finiteOrZero(
+  value: number | null | undefined,
+): number {
+  return (
+    typeof value === "number" &&
+    Number.isFinite(value)
+      ? value
+      : 0
+  );
+}
+
+function clamp(
+  value: number,
+  minimum: number,
+  maximum: number,
+): number {
+  return Math.min(
+    maximum,
+    Math.max(minimum, value),
+  );
+}
+
+function roundMetric(
+  value: number,
+): number {
+  return Math.round(value * 100) / 100;
+}
+
+function appendHistory(
+  values: number[],
+  sample: number,
+): number[] {
+  return [
+    ...values.slice(
+      -(HISTORY_LIMIT - 1),
+    ),
+    roundMetric(sample),
+  ];
+}
+
+function average(
+  values: number[],
+): number {
+  if (!values.length) {
+    return 0;
+  }
+
+  return (
+    values.reduce(
+      (sum, value) => sum + value,
+      0,
+    ) / values.length
+  );
 }
 
 function eventSeverity(
@@ -334,6 +397,18 @@ export class RealRuntimeOperationsService
     await this.refresh();
   }
 
+  async setScenario(
+    projectId: string,
+    scenario: RuntimeScenario,
+  ): Promise<void> {
+    await setRuntimeScenario(
+      projectId,
+      scenario,
+    );
+
+    await this.refresh();
+  }
+
   private start() {
     if (!this.disconnectEvents) {
       this.disconnectEvents =
@@ -353,7 +428,7 @@ export class RealRuntimeOperationsService
           () => {
             void this.refresh();
           },
-          5000,
+          REFRESH_INTERVAL_MS,
         );
     }
   }
@@ -465,6 +540,7 @@ export class RealRuntimeOperationsService
         return this.mapProject(
           project,
           runtime,
+          metrics,
         );
       });
 
@@ -485,6 +561,7 @@ export class RealRuntimeOperationsService
                 runtime.framework ?? undefined,
             },
             runtime,
+            metrics,
           ),
         );
       }
@@ -553,10 +630,61 @@ export class RealRuntimeOperationsService
           metrics.totals.running,
         total:
           projects.length,
-        avgCpu: 0,
+        avgCpu:
+          roundMetric(
+            average(
+              projects
+                .filter(
+                  (project) =>
+                    project.state === "running",
+                )
+                .map(
+                  (project) =>
+                    project.metrics.cpuPct,
+                ),
+            ),
+          ),
         avgMem:
-          metrics.process.memory.rssMb,
-        totalRps: 0,
+          roundMetric(
+            average(
+              projects
+                .filter(
+                  (project) =>
+                    project.state === "running",
+                )
+                .map((project) => {
+                  const total =
+                    project.metrics.memTotalMb;
+
+                  if (total <= 0) {
+                    return 0;
+                  }
+
+                  return clamp(
+                    (
+                      project.metrics.memUsedMb /
+                      total
+                    ) * 100,
+                    0,
+                    100,
+                  );
+                }),
+            ),
+          ),
+        totalRps:
+          roundMetric(
+            projects
+              .filter(
+                (project) =>
+                  project.state === "running",
+              )
+              .reduce(
+                (sum, project) =>
+                  sum +
+                  project.metrics.rps,
+                0,
+              ),
+          ),
       },
       updatedAt:
         metrics.timestamp ?? Date.now(),
@@ -568,6 +696,7 @@ export class RealRuntimeOperationsService
     runtime:
       | RuntimeMetricsResponse["runtimes"][number]
       | undefined,
+    response: RuntimeMetricsResponse,
   ): RuntimeProject {
     const health =
       mapHealth({
@@ -578,6 +707,71 @@ export class RealRuntimeOperationsService
         lastError:
           runtime?.lastError,
       });
+
+    const previousMetrics =
+      this.snapshot.projects.find(
+        (candidate) =>
+          candidate.id ===
+          project.projectId,
+      )?.metrics ??
+      emptyRuntimeMetrics();
+
+    const cpuPct =
+      finiteOrZero(
+        runtime?.cpuPct,
+      );
+
+    const memUsedMb =
+      finiteOrZero(
+        runtime?.rssMb,
+      );
+
+    const memTotalMb =
+      finiteOrZero(
+        runtime?.systemMemoryMb ??
+          response.system?.memoryTotalMb,
+      );
+
+    const memoryPct =
+      memTotalMb > 0
+        ? clamp(
+            (
+              memUsedMb /
+              memTotalMb
+            ) * 100,
+            0,
+            100,
+          )
+        : 0;
+
+    const runtimeMetrics:
+      RuntimeMetrics =
+      runtime
+        ? {
+            cpuPct:
+              roundMetric(cpuPct),
+            memUsedMb:
+              roundMetric(memUsedMb),
+            memTotalMb:
+              roundMetric(memTotalMb),
+            rps:
+              previousMetrics.rps,
+            p95Ms:
+              previousMetrics.p95Ms,
+            errorRatePct:
+              previousMetrics.errorRatePct,
+            cpuSeries:
+              appendHistory(
+                previousMetrics.cpuSeries,
+                cpuPct,
+              ),
+            memSeries:
+              appendHistory(
+                previousMetrics.memSeries,
+                memoryPct,
+              ),
+          }
+        : previousMetrics;
 
     return {
       id: project.projectId,
@@ -604,8 +798,14 @@ export class RealRuntimeOperationsService
         runtime?.startedAt ?? 0,
       uptimeMs:
         runtime?.uptimeMs ?? 0,
-      metrics:
-        emptyRuntimeMetrics(),
+      metrics: runtimeMetrics,
+
+
+      scenario:
+
+        runtime?.scenario ??
+
+        "normal",
     };
   }
 

@@ -76,7 +76,9 @@ function formatUptime(
   uptimeMs: number,
 ): string {
   if (
-    !Number.isFinite(uptimeMs) ||
+    !Number.isFinite(
+      uptimeMs,
+    ) ||
     uptimeMs <= 0
   ) {
     return "—";
@@ -94,7 +96,9 @@ function formatUptime(
 
   const hours =
     Math.floor(
-      (totalMinutes % 1_440) / 60,
+      (totalMinutes %
+        1_440) /
+        60,
     );
 
   const minutes =
@@ -116,11 +120,16 @@ function formatMetric(
   suffix: string,
   decimals = 0,
 ): string {
-  if (!Number.isFinite(value)) {
+  if (
+    !Number.isFinite(value)
+  ) {
     return "—";
   }
 
-  return `${value.toFixed(decimals)}${suffix}`;
+  return (
+    `${value.toFixed(decimals)}` +
+    suffix
+  );
 }
 
 interface MetricProps {
@@ -162,7 +171,8 @@ export const RuntimeProjectRow = forwardRef<
   ) => {
     const memoryLabel =
       Number.isFinite(
-        project.metrics.memUsedMb,
+        project.metrics
+          .memUsedMb,
       )
         ? `${project.metrics.memUsedMb.toFixed(0)} MB`
         : "—";
@@ -172,13 +182,19 @@ export const RuntimeProjectRow = forwardRef<
         ref={ref}
         selected={selected}
         onClick={onSelect}
-        onKeyDown={onKeyDown}
+        onKeyDown={
+          onKeyDown
+        }
         tabIndex={tabIndex}
-        aria-pressed={selected}
+        aria-pressed={
+          selected
+        }
         aria-label={[
           project.name,
           project.env,
-          STATE_LABEL[project.state],
+          STATE_LABEL[
+            project.state
+          ],
           `health ${project.health.status}`,
           `CPU ${project.metrics.cpuPct.toFixed(0)} percent`,
         ].join(", ")}
@@ -192,7 +208,11 @@ export const RuntimeProjectRow = forwardRef<
         }
         badge={
           <LuminaBadge
-            className={ENVIRONMENT_CLASS[project.env]}
+            className={
+              ENVIRONMENT_CLASS[
+                project.env
+              ]
+            }
           >
             {project.env}
           </LuminaBadge>
@@ -204,12 +224,19 @@ export const RuntimeProjectRow = forwardRef<
         status={
           <div className="flex items-center gap-2">
             <RuntimeStatusDot
-              status={project.health.status}
+              status={
+                project.health
+                  .status
+              }
               className="h-2.5 w-2.5"
             />
 
             <span className="text-xs font-medium text-foreground">
-              {STATE_LABEL[project.state]}
+              {
+                STATE_LABEL[
+                  project.state
+                ]
+              }
             </span>
 
             <span
@@ -220,7 +247,10 @@ export const RuntimeProjectRow = forwardRef<
             </span>
 
             <span className="text-[11px] capitalize text-muted-foreground">
-              {project.health.status}
+              {
+                project.health
+                  .status
+              }
             </span>
           </div>
         }
@@ -234,12 +264,21 @@ export const RuntimeProjectRow = forwardRef<
             )}
           >
             <RuntimeSparkline
-              data={project.metrics.cpuSeries.slice(-40)}
+              data={
+                project.metrics
+                  .cpuSeries
+              }
+              secondaryData={
+                project.metrics
+                  .memSeries
+              }
+              mode="service"
               width={260}
               height={64}
               stroke="hsl(var(--cyan))"
-              fill="hsl(var(--cyan) / 0.16)"
-              label={`${project.name} CPU activity`}
+              secondaryStroke="hsl(var(--magenta))"
+              fill="hsl(var(--cyan) / 0.10)"
+              label={`${project.name} CPU and memory telemetry`}
             />
           </div>
         }
@@ -248,20 +287,24 @@ export const RuntimeProjectRow = forwardRef<
             <RuntimeCardMetric
               label="CPU"
               value={formatMetric(
-                project.metrics.cpuPct,
+                project.metrics
+                  .cpuPct,
                 "%",
               )}
             />
 
             <RuntimeCardMetric
               label="Memory"
-              value={memoryLabel}
+              value={
+                memoryLabel
+              }
             />
 
             <RuntimeCardMetric
               label="RPS"
               value={formatMetric(
-                project.metrics.rps,
+                project.metrics
+                  .rps,
                 "",
                 1,
               )}
@@ -270,7 +313,8 @@ export const RuntimeProjectRow = forwardRef<
             <RuntimeCardMetric
               label="P95"
               value={formatMetric(
-                project.metrics.p95Ms,
+                project.metrics
+                  .p95Ms,
                 " ms",
               )}
             />
@@ -278,7 +322,8 @@ export const RuntimeProjectRow = forwardRef<
             <RuntimeCardMetric
               label="Errors"
               value={formatMetric(
-                project.metrics.errorRatePct,
+                project.metrics
+                  .errorRatePct,
                 "%",
                 1,
               )}

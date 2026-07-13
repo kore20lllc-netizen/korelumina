@@ -1,7 +1,10 @@
-import type { ReactNode } from "react";
+import type {
+  ReactNode,
+} from "react";
 
-import { cn } from "@/lib/utils";
-import { LuminaWorkspaceHeader } from "./LuminaWorkspaceHeader";
+import {
+  LuminaWorkspaceHeader,
+} from "./LuminaWorkspaceHeader";
 
 export interface LuminaWorkspaceHeroProps {
   eyebrow?: ReactNode;
@@ -9,6 +12,7 @@ export interface LuminaWorkspaceHeroProps {
   subtitle?: ReactNode;
   actions?: ReactNode;
   metrics?: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -18,6 +22,7 @@ export function LuminaWorkspaceHero({
   subtitle,
   actions,
   metrics,
+  children,
   className,
 }: LuminaWorkspaceHeroProps) {
   return (
@@ -27,8 +32,10 @@ export function LuminaWorkspaceHero({
       subtitle={subtitle}
       actions={actions}
       metrics={metrics}
-      className={cn(className)}
-    />
+      className={className}
+    >
+      {children}
+    </LuminaWorkspaceHeader>
   );
 }
 

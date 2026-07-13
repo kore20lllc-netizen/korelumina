@@ -103,6 +103,8 @@ export function RuntimeOperationsWorkspace() {
     dispatch,
     reload,
     pending,
+    setScenario,
+    scenarioPending,
   } = useRuntimeOperations();
 
   const [selectedId, setSelectedId] =
@@ -464,6 +466,18 @@ export function RuntimeOperationsWorkspace() {
                     logs={snapshot.logs}
                     pending={pending}
                     onDispatch={dispatch}
+                  onScenario={(
+                    scenario,
+                    projectId,
+                  ) =>
+                    setScenario(
+                      scenario,
+                      projectId,
+                    )
+                  }
+                  scenarioPending={
+                    scenarioPending
+                  }
                   />
                 </SheetContent>
               </Sheet>
@@ -583,7 +597,19 @@ export function RuntimeOperationsWorkspace() {
             logs={snapshot.logs}
             pending={pending}
             onDispatch={dispatch}
-          />
+          onScenario={(
+                    scenario,
+                    projectId,
+                  ) =>
+                    setScenario(
+                      scenario,
+                      projectId,
+                    )
+                  }
+                  scenarioPending={
+                    scenarioPending
+                  }
+                  />
         </LuminaWorkspacePanel>
       }
     />

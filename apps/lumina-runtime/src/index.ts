@@ -1,3 +1,7 @@
+import {
+  registerRuntimeScenarioRoute,
+} from "./routes/runtimeScenario.js";
+
 import express from "express";
 import cors from "cors";
 
@@ -57,6 +61,7 @@ registerRestartRoute(app);
 
 registerLogsRoute(app);
 registerMetricsRoute(app);
+registerRuntimeScenarioRoute(app);
 registerEventsRoute(app);
 
 registerFsRoute(app);

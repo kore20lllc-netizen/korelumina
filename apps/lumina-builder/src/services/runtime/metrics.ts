@@ -7,6 +7,7 @@ export interface RuntimeMetricsResponse {
   ok: boolean;
   service: string;
   timestamp: number;
+
   process: {
     pid: number;
     uptimeMs: number;
@@ -17,6 +18,11 @@ export interface RuntimeMetricsResponse {
       externalMb: number;
     };
   };
+
+  system?: {
+    memoryTotalMb: number;
+  };
+
   totals: {
     eventClients: number;
     workspaceWatchers: number;
@@ -26,6 +32,7 @@ export interface RuntimeMetricsResponse {
     exited: number;
     error: number;
   };
+
   restarts: Array<{
     projectId: string;
     count: number;
@@ -34,6 +41,7 @@ export interface RuntimeMetricsResponse {
     lastRecoveredAt?: number;
     lastFailureReason?: string;
   }>;
+
   runtimes: Array<{
     projectId: string;
     framework: string | null;
@@ -47,23 +55,35 @@ export interface RuntimeMetricsResponse {
     exitedAt: number | null;
     lastError: string | null;
     logLines: number;
-  }>;
+
+    cpuPct?: number;
+    rssMb?: number;
+    systemMemoryMb?: number;
+
+    scenario?:
+      | "normal"
+      | "idle"
+      | "spike"
+      | "outage"
+      | "recover";}>;
 }
 
 export async function getRuntimeMetrics(): Promise<RuntimeMetricsResponse> {
   const response = await fetch(
     `${RUNTIME_API}/api/runtime/metrics`,
     {
-      headers: getRuntimeCallerHeaders(),
+      headers:
+        getRuntimeCallerHeaders(),
     },
   );
 
-  const data = await response.json();
+  const data =
+    await response.json();
 
   if (!response.ok) {
     throw new Error(
       data?.error ??
-      "failed_to_get_runtime_metrics",
+        "failed_to_get_runtime_metrics",
     );
   }
 
