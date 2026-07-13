@@ -1,24 +1,42 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+
 import {
   ChevronDown,
   Pause,
   Play,
 } from "lucide-react";
 
-import { LuminaButton } from "@/components/lumina/LuminaButton";
+import {
+  LuminaButton,
+} from "@/components/lumina/LuminaButton";
+
+import {
+  LuminaBadge,
+  LuminaFeedCard,
+} from "@/components/lumina/workspace";
+
 import {
   LuminaSegmentedControl,
   type LuminaSegmentOption,
 } from "@/components/lumina/LuminaSegmentedControl";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 
-import { RuntimeEmptyState } from "./RuntimeEmptyState";
+import {
+  cn,
+} from "@/lib/utils";
 
 import type {
   LogEntry,
   LogLevel,
 } from "@/services/runtime/types";
+
+import {
+  RuntimeEmptyState,
+} from "./RuntimeEmptyState";
 
 const LEVELS: LogLevel[] = [
   "debug",
@@ -50,182 +68,275 @@ const LEVEL_OPTIONS: LuminaSegmentOption<LogLevel>[] = [
   },
 ];
 
-const LEVEL_BADGE: Record<LogLevel, string> = {
-  debug:
-    "border-white/10 bg-white/[0.04] text-muted-foreground",
-  info:
-    "border-cyan/25 bg-cyan/10 text-cyan",
-  warn:
-    "border-gold/25 bg-gold/10 text-gold",
-  error:
-    "border-rose-400/25 bg-rose-500/10 text-rose-300",
+const LEVEL_BADGE: Record<
+  LogLevel,
+  string
+> = {
+  debug: [
+    "border",
+    "[border-color:var(--lumina-border-standard)]",
+    "[background:var(--lumina-surface-compact)]",
+    "text-muted-foreground",
+  ].join(" "),
+
+  info: [
+    "border",
+    "[border-color:hsl(var(--cyan)/0.28)]",
+    "[background:hsl(var(--cyan)/0.10)]",
+    "text-cyan",
+  ].join(" "),
+
+  warn: [
+    "border",
+    "[border-color:hsl(var(--gold)/0.28)]",
+    "[background:hsl(var(--gold)/0.10)]",
+    "text-gold",
+  ].join(" "),
+
+  error: [
+    "border",
+    "[border-color:hsl(var(--destructive)/0.30)]",
+    "[background:hsl(var(--destructive)/0.12)]",
+    "text-rose-300",
+  ].join(" "),
 };
 
-function fmtTime(ms: number) {
-  const d = new Date(ms);
+function formatTime(
+  timestamp: number,
+): string {
+  const date =
+    new Date(timestamp);
 
-  return `${d.toLocaleTimeString([], {
+  return `${date.toLocaleTimeString([], {
     hour12: false,
-  })}.${d
+  })}.${date
     .getMilliseconds()
     .toString()
     .padStart(3, "0")}`;
 }
 
+export interface RuntimeLogsPanelProps {
+  logs: LogEntry[];
+  className?: string;
+}
+
 export function RuntimeLogsPanel({
   logs,
   className,
-}: {
-  logs: LogEntry[];
-  className?: string;
-}) {
-  const [level, setLevel] =
-    useState<LogLevel>("debug");
-
-  const [follow, setFollow] =
-    useState(true);
-
-  const bottomRef =
-    useRef<HTMLDivElement>(null);
-
-  const minIdx = LEVELS.indexOf(level);
-
-  const filtered = logs.filter(
-    (entry) =>
-      LEVELS.indexOf(entry.level) >= minIdx,
+}: RuntimeLogsPanelProps) {
+  const [
+    level,
+    setLevel,
+  ] = useState<LogLevel>(
+    "debug",
   );
+
+  const [
+    follow,
+    setFollow,
+  ] = useState(true);
+
+  const viewportRef =
+    useRef<HTMLDivElement>(
+      null,
+    );
+
+  const filteredLogs =
+    useMemo(() => {
+      const minimumLevelIndex =
+        LEVELS.indexOf(level);
+
+      return logs.filter(
+        (entry) =>
+          LEVELS.indexOf(
+            entry.level,
+          ) >=
+          minimumLevelIndex,
+      );
+    }, [
+      level,
+      logs,
+    ]);
 
   useEffect(() => {
     if (!follow) {
       return;
     }
 
-    bottomRef.current?.scrollIntoView({
-      block: "end",
-    });
-  }, [logs, follow]);
+    const viewport =
+      viewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    const frame =
+      window.requestAnimationFrame(
+        () => {
+          viewport.scrollTop =
+            viewport.scrollHeight;
+        },
+      );
+
+    return () => {
+      window.cancelAnimationFrame(
+        frame,
+      );
+    };
+  }, [
+    filteredLogs,
+    follow,
+  ]);
 
   return (
-    <div
+    <section
       className={cn(
-        "flex h-full min-h-0 flex-col",
-        "bg-[radial-gradient(circle_at_top_left,rgba(124,92,255,.10),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,.08),transparent_30%)]",
+        "flex h-full min-h-0 min-w-0 flex-col overflow-hidden",
+        "[background:var(--lumina-surface-panel)]",
         className,
       )}
+      aria-label="Runtime logs"
     >
-      <div className="flex flex-col gap-3 border-b border-white/6 bg-white/[0.025] p-3 backdrop-blur-xl xl:flex-row xl:items-center xl:justify-between">
-        <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Runtime Logs
-          </div>
+      <header
+        className={cn(
+          "shrink-0 border-b px-4 py-4",
+          "[border-color:var(--lumina-border-standard)]",
+          "[background:var(--lumina-surface-compact)]",
+          "[backdrop-filter:var(--lumina-blur-surface)]",
+        )}
+      >
+        <div className="flex min-w-0 flex-col gap-4">
+          <div className="flex min-w-0 items-start justify-between gap-4">
+            <div className="min-w-0">
+              <h3 className="truncate text-base font-semibold tracking-tight text-foreground">
+                Runtime Logs
+              </h3>
 
-          <div className="mt-1 text-[11px] text-muted-foreground/80">
-            {filtered.length} visible · {logs.length} total
-          </div>
-        </div>
+              <p className="mt-1 whitespace-nowrap text-xs tabular-nums text-muted-foreground">
+                {filteredLogs.length} visible
+                {" · "}
+                {logs.length} total
+              </p>
+            </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <LuminaSegmentedControl
-            value={level}
-            onValueChange={setLevel}
-            aria-label="Log level"
-            options={LEVEL_OPTIONS}
-          />
-
-          <LuminaButton
-            variant="glow"
-            size="sm"
-            onClick={() =>
-              setFollow((current) => !current)
-            }
-            aria-pressed={follow}
-            aria-label={
-              follow
-                ? "Pause tail"
-                : "Follow tail"
-            }
-            title={
-              follow
-                ? "Pause tail (L)"
-                : "Follow tail (L)"
-            }
-          >
-            {follow ? (
-              <Pause className="h-3.5 w-3.5" />
-            ) : (
-              <Play className="h-3.5 w-3.5" />
-            )}
-
-            <span className="text-[11px]">
-              {follow
-                ? "Following"
-                : "Paused"}
-            </span>
-
-            <ChevronDown
-              className={cn(
-                "h-3.5 w-3.5 transition-transform",
+            <LuminaButton
+              variant="glow"
+              size="sm"
+              onClick={() =>
+                setFollow(
+                  (current) =>
+                    !current,
+                )
+              }
+              aria-pressed={follow}
+              aria-label={
                 follow
-                  ? "rotate-0"
-                  : "-rotate-90",
+                  ? "Pause log following"
+                  : "Resume log following"
+              }
+              title={
+                follow
+                  ? "Pause log following"
+                  : "Resume log following"
+              }
+              className="shrink-0"
+            >
+              {follow ? (
+                <Pause className="h-3.5 w-3.5" />
+              ) : (
+                <Play className="h-3.5 w-3.5" />
               )}
-            />
-          </LuminaButton>
-        </div>
-      </div>
 
-      {filtered.length === 0 ? (
+              <span className="text-[11px]">
+                {follow
+                  ? "Following"
+                  : "Paused"}
+              </span>
+
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 transition-transform",
+                  !follow &&
+                    "-rotate-90",
+                )}
+              />
+            </LuminaButton>
+          </div>
+
+          <div className="min-w-0 overflow-x-auto pb-1">
+            <LuminaSegmentedControl
+              value={level}
+              onValueChange={
+                setLevel
+              }
+              aria-label="Minimum log level"
+              options={
+                LEVEL_OPTIONS
+              }
+            />
+          </div>
+        </div>
+      </header>
+
+      {filteredLogs.length === 0 ? (
         <RuntimeEmptyState
           variant="logs"
-          className="flex-1"
+          className="min-h-0 flex-1"
         />
       ) : (
-        <ScrollArea className="flex-1">
+        <div
+          ref={viewportRef}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+        >
           <div
             role="log"
-            aria-live="polite"
+            aria-live={
+              follow
+                ? "polite"
+                : "off"
+            }
             aria-relevant="additions"
             className="space-y-1.5 px-3 py-3 font-mono text-[11.5px] leading-relaxed"
           >
-            {[...filtered].reverse().map((entry) => (
-              <div
-                key={entry.id}
-                className={cn(
-                  "grid grid-cols-[auto,auto,auto,1fr] gap-3",
-                  "rounded-xl border border-white/6",
-                  "bg-white/[0.025] px-3 py-2",
-                  "transition-all duration-200",
-                  "hover:border-violet/18 hover:bg-white/[0.05]",
-                )}
-              >
-                <span className="tabular-nums text-muted-foreground/70">
-                  {fmtTime(entry.at)}
-                </span>
-
-                <span
-                  className={cn(
-                    "rounded-full border px-2 py-0.5",
-                    "text-[9px] font-semibold uppercase tracking-[0.16em]",
-                    LEVEL_BADGE[entry.level],
-                  )}
+            {filteredLogs.map(
+              (entry) => (
+                <LuminaFeedCard
+                  key={entry.id}
+                  className="px-3 py-2"
                 >
-                  {entry.level}
-                </span>
+                  <div className="grid min-w-0 grid-cols-[auto,auto,minmax(0,auto),minmax(0,1fr)] items-start gap-3">
+                    <span className="whitespace-nowrap tabular-nums text-muted-foreground/70">
+                      {formatTime(
+                        entry.at,
+                      )}
+                    </span>
 
-                <span className="text-muted-foreground/80">
-                  {entry.source}
-                </span>
+                    <LuminaBadge
+                      className={
+                        LEVEL_BADGE[
+                          entry.level
+                        ]
+                      }
+                    >
+                      {entry.level}
+                    </LuminaBadge>
 
-                <span className="truncate font-medium text-foreground/95">
-                  {entry.message}
-                </span>
-              </div>
-            ))}
+                    <span className="max-w-32 truncate text-muted-foreground/80">
+                      {entry.source}
+                    </span>
 
-            <div ref={bottomRef} />
+                    <span className="min-w-0 break-words font-medium text-foreground/95">
+                      {entry.message}
+                    </span>
+                  </div>
+                </LuminaFeedCard>
+              ),
+            )}
           </div>
-        </ScrollArea>
+        </div>
       )}
-    </div>
+    </section>
   );
 }
+
+export default RuntimeLogsPanel;

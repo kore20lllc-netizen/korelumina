@@ -1,53 +1,253 @@
-import { Activity, Cpu, MemoryStick, Gauge } from "lucide-react";
-import { RuntimeMetricTile } from "./RuntimeMetricTile";
-import type { RuntimeOverall, RuntimeProject } from "@/services/runtime/types";
+import {
+  Activity,
+  Cpu,
+  Gauge,
+  MemoryStick,
+} from "lucide-react";
 
-export function RuntimeHealthOverview({ overall, projects }: { overall: RuntimeOverall; projects: RuntimeProject[] }) {
-  // Derive aggregate sparklines from the average across projects.
-  const cpuTrend = aggregateSeries(projects.map((p) => p.metrics.cpuSeries));
-  const memTrend = aggregateSeries(projects.map((p) => p.metrics.memSeries));
-  const rpsTrend = aggregateSeries(projects.map((p) => scaleSeries(p.metrics.cpuSeries, p.metrics.rps / Math.max(1, avg(p.metrics.cpuSeries)))));
+import {
+  LuminaMetricGrid,
+} from "@/components/lumina/workspace";
+
+import type {
+  RuntimeOverall,
+  RuntimeProject,
+} from "@/services/runtime/types";
+
+import {
+  RuntimeMetricTile,
+} from "./RuntimeMetricTile";
+
+export interface RuntimeHealthOverviewProps {
+  overall: RuntimeOverall;
+  projects: RuntimeProject[];
+}
+
+function average(
+  values: number[],
+): number {
+  if (!values.length) {
+    return 0;
+  }
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-      <RuntimeMetricTile
-        label="Global Health" value={`${overall.health.score}`}
-        hint={`${overall.running}/${overall.total} running`}
-        icon={Activity} accent="violet"
-        trend={aggregateSeries([cpuTrend, memTrend]).map((v) => 100 - v * 0.4)}
-      />
-      <RuntimeMetricTile
-        label="Avg CPU" value={`${overall.avgCpu.toFixed(0)}%`}
-        hint={`${overall.total} services`}
-        icon={Cpu} accent="cyan" trend={cpuTrend}
-      />
-      <RuntimeMetricTile
-        label="Avg Memory" value={`${overall.avgMem.toFixed(0)}%`}
-        hint={`${(projects.reduce((s, p) => s + p.metrics.memUsedMb, 0) / 1024).toFixed(1)} GB total`}
-        icon={MemoryStick} accent="magenta" trend={memTrend}
-      />
-      <RuntimeMetricTile
-        label="Requests / sec" value={overall.totalRps.toLocaleString()}
-        hint="Live throughput"
-        icon={Gauge} accent="gold" trend={rpsTrend}
-      />
-    </div>
+    values.reduce(
+      (sum, value) =>
+        sum + value,
+      0,
+    ) / values.length
   );
 }
 
-function avg(a: number[]) { return a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0; }
-function scaleSeries(a: number[], k: number) { return a.map((v) => v * k); }
-function aggregateSeries(series: number[][]): number[] {
-  const len = series.reduce((m, s) => Math.max(m, s.length), 0);
-  if (!len) return [];
-  const out: number[] = new Array(len).fill(0);
-  for (let i = 0; i < len; i++) {
-    let sum = 0, n = 0;
-    for (const s of series) {
-      const v = s[i + Math.max(0, s.length - len)];
-      if (typeof v === "number") { sum += v; n += 1; }
-    }
-    out[i] = n ? sum / n : 0;
+function aggregateSeries(
+  series: number[][],
+): number[] {
+  const length =
+    series.reduce(
+      (maximum, current) =>
+        Math.max(
+          maximum,
+          current.length,
+        ),
+      0,
+    );
+
+  if (!length) {
+    return [];
   }
-  return out;
+
+  const output =
+    new Array<number>(
+      length,
+    ).fill(0);
+
+  for (
+    let index = 0;
+    index < length;
+    index += 1
+  ) {
+    let total = 0;
+    let count = 0;
+
+    for (
+      const current of series
+    ) {
+      const offset =
+        Math.max(
+          0,
+          current.length -
+            length,
+        );
+
+      const value =
+        current[
+          index + offset
+        ];
+
+      if (
+        typeof value ===
+        "number"
+      ) {
+        total += value;
+        count += 1;
+      }
+    }
+
+    output[index] =
+      count
+        ? total / count
+        : 0;
+  }
+
+  return output;
 }
+
+function createHealthTrend(
+  cpuTrend: number[],
+  memoryTrend: number[],
+  score: number,
+): number[] {
+  const combined =
+    aggregateSeries([
+      cpuTrend,
+      memoryTrend,
+    ]);
+
+  if (!combined.length) {
+    return [score, score];
+  }
+
+  return combined.map(
+    (value) =>
+      Math.max(
+        0,
+        Math.min(
+          100,
+          score -
+            value * 0.08,
+        ),
+      ),
+  );
+}
+
+function createRpsTrend(
+  projects: RuntimeProject[],
+): number[] {
+  const scaled =
+    projects.map(
+      (project) => {
+        const cpuAverage =
+          average(
+            project.metrics
+              .cpuSeries,
+          );
+
+        const scale =
+          project.metrics.rps /
+          Math.max(
+            1,
+            cpuAverage,
+          );
+
+        return project.metrics
+          .cpuSeries.map(
+            (value) =>
+              value * scale,
+          );
+      },
+    );
+
+  return aggregateSeries(
+    scaled,
+  );
+}
+
+export function RuntimeHealthOverview({
+  overall,
+  projects,
+}: RuntimeHealthOverviewProps) {
+  const cpuTrend =
+    aggregateSeries(
+      projects.map(
+        (project) =>
+          project.metrics
+            .cpuSeries,
+      ),
+    );
+
+  const memoryTrend =
+    aggregateSeries(
+      projects.map(
+        (project) =>
+          project.metrics
+            .memSeries,
+      ),
+    );
+
+  const rpsTrend =
+    createRpsTrend(
+      projects,
+    );
+
+  const healthTrend =
+    createHealthTrend(
+      cpuTrend,
+      memoryTrend,
+      overall.health.score,
+    );
+
+  const totalMemoryGb =
+    projects.reduce(
+      (sum, project) =>
+        sum +
+        project.metrics
+          .memUsedMb,
+      0,
+    ) / 1024;
+
+  return (
+    <LuminaMetricGrid>
+      <RuntimeMetricTile
+        label="Global Health"
+        value={`${overall.health.score}`}
+        hint={`${overall.running}/${overall.total} running`}
+        icon={Activity}
+        accent="violet"
+        visualization="health"
+        trend={healthTrend}
+      />
+
+      <RuntimeMetricTile
+        label="Avg CPU"
+        value={`${overall.avgCpu.toFixed(0)}%`}
+        hint={`${overall.total} services`}
+        icon={Cpu}
+        accent="cyan"
+        visualization="cpu"
+        trend={cpuTrend}
+      />
+
+      <RuntimeMetricTile
+        label="Avg Memory"
+        value={`${overall.avgMem.toFixed(0)}%`}
+        hint={`${totalMemoryGb.toFixed(1)} GB total`}
+        icon={MemoryStick}
+        accent="magenta"
+        visualization="memory"
+        trend={memoryTrend}
+      />
+
+      <RuntimeMetricTile
+        label="Requests / sec"
+        value={overall.totalRps.toLocaleString()}
+        hint="Live throughput"
+        icon={Gauge}
+        accent="gold"
+        visualization="throughput"
+        trend={rpsTrend}
+      />
+    </LuminaMetricGrid>
+  );
+}
+
+export default RuntimeHealthOverview;

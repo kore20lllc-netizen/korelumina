@@ -45,7 +45,7 @@ export function RuntimeProjectsList({ projects, selectedId, onSelect, onOpenInsp
         role="listbox"
         aria-label="Runtime projects"
         aria-activedescendant={selectedId ? `runtime-project-${selectedId}` : undefined}
-        className="flex flex-col gap-1.5 pb-2"
+        className="flex flex-col gap-3 px-1 pb-8 pt-1"
       >
         {projects.map((p, i) => (
           <div key={p.id} id={`runtime-project-${p.id}`} role="option" aria-selected={p.id === selectedId}>

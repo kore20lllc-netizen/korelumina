@@ -153,6 +153,14 @@ interface WorkspaceContextValue {
     value: boolean,
   ) => void;
 
+  appearancePanelOpen: boolean;
+
+  setAppearancePanelOpen: (
+    value: boolean,
+  ) => void;
+
+  toggleAppearancePanel: () => void;
+
   importPrefill?: string;
   setImportPrefill: (
     value?: string,
@@ -272,6 +280,17 @@ export function WorkspaceProvider({
     importOpen,
     setImportOpen,
   ] = useState(false);
+
+  const [
+    appearancePanelOpen,
+    setAppearancePanelOpen,
+  ] = useState(false);
+
+  const toggleAppearancePanel =
+    () =>
+      setAppearancePanelOpen(
+        current => !current,
+      );
 
   const [
     importPrefill,
@@ -431,6 +450,10 @@ export function WorkspaceProvider({
         importOpen,
         setImportOpen,
 
+        appearancePanelOpen,
+        setAppearancePanelOpen,
+        toggleAppearancePanel,
+
         importPrefill,
         setImportPrefill,
 
@@ -444,8 +467,7 @@ export function WorkspaceProvider({
         setNotifications,
 
         usage,
-        usageSnap:
-          usage,
+        usageSnap,
         setUsageSnap,
 
         recentProjectIds,
@@ -462,6 +484,8 @@ export function WorkspaceProvider({
         commandOpen,
         publishOpen,
         importOpen,
+        appearancePanelOpen,
+        toggleAppearancePanel,
         importPrefill,
         deployOpen,
         notificationsOpen,

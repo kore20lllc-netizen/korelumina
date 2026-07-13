@@ -1,0 +1,8 @@
+  38 backdrop-blur-xl
+  20 blur-3xl
+  15 backdrop-blur-md
+   8 backdrop-blur-2xl
+   7 backdrop-blur-sm
+   2 backdrop-blur-[2px]
+   1 blur-2xl
+   1 backdrop-blur-[34px]

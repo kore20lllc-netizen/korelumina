@@ -1,233 +1,618 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { PanelRightOpen } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { LuminaButton } from "@/components/lumina/LuminaButton";
-import { GlowCard } from "@/components/lumina/GlowCard";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useRuntimeOperations } from "@/hooks/useRuntimeOperations";
-import { cn } from "@/lib/utils";
-import type { Environment, HealthStatus } from "@/services/runtime/types";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import { RuntimeHeader } from "./parts/RuntimeHeader";
-import { RuntimeHealthOverview } from "./parts/RuntimeHealthOverview";
-import { RuntimeProjectsList } from "./parts/RuntimeProjectsList";
-import { RuntimeEventStream } from "./parts/RuntimeEventStream";
-import { RuntimeLifecycleTimeline } from "./parts/RuntimeLifecycleTimeline";
-import { RuntimeLogsPanel } from "./parts/RuntimeLogsPanel";
-import { RuntimeActionsToolbar } from "./parts/RuntimeActionsToolbar";
-import { RuntimeInspector } from "./parts/RuntimeInspector";
-import { RuntimeEmptyState } from "./parts/RuntimeEmptyState";
-import { RuntimeErrorState } from "./parts/RuntimeErrorState";
-import { TileSkeleton, RowSkeleton, FeedSkeleton, InspectorSkeleton } from "./parts/RuntimeSkeletons";
+import {
+  PanelRightOpen,
+} from "lucide-react";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+
+import {
+  LuminaButton,
+  LuminaWorkspacePanel,
+  LuminaWorkspaceToolbar,
+} from "@/components/lumina";
+
+import {
+  LuminaWorkspaceLayout,
+} from "@/components/lumina/workspace/framework";
+
+import {
+  useIsMobile,
+} from "@/hooks/use-mobile";
+
+import {
+  useRuntimeOperations,
+} from "@/hooks/useRuntimeOperations";
+
+import type {
+  Environment,
+  HealthStatus,
+} from "@/services/runtime/types";
+
+import {
+  RuntimeActionsToolbar,
+} from "./parts/RuntimeActionsToolbar";
+
+import {
+  RuntimeEmptyState,
+} from "./parts/RuntimeEmptyState";
+
+import {
+  RuntimeErrorState,
+} from "./parts/RuntimeErrorState";
+
+import {
+  RuntimeEventStream,
+} from "./parts/RuntimeEventStream";
+
+import {
+  RuntimeHeader,
+} from "./parts/RuntimeHeader";
+
+import {
+  RuntimeHealthOverview,
+} from "./parts/RuntimeHealthOverview";
+
+import {
+  RuntimeInspector,
+} from "./parts/RuntimeInspector";
+
+import {
+  RuntimeLifecycleTimeline,
+} from "./parts/RuntimeLifecycleTimeline";
+
+import {
+  RuntimeLogsPanel,
+} from "./parts/RuntimeLogsPanel";
+
+import {
+  RuntimeProjectsList,
+} from "./parts/RuntimeProjectsList";
+
+import {
+  FeedSkeleton,
+  InspectorSkeleton,
+  RowSkeleton,
+  TileSkeleton,
+} from "./parts/RuntimeSkeletons";
+
+const PANEL_HEIGHT_CLASS =
+  "min-h-[34rem] lg:h-[clamp(34rem,68vh,48rem)]";
 
 export function RuntimeOperationsWorkspace() {
-  const { snapshot, status, error, dispatch, reload, pending } = useRuntimeOperations();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const [env, setEnv] = useState<Environment | "all">("all");
-  const [health, setHealth] = useState<HealthStatus | "all">("all");
-  const [inspectorOpen, setInspectorOpen] = useState(false);
-  const isMobile = useIsMobile();
-  const searchRef = useRef<HTMLInputElement>(null);
+  const {
+    snapshot,
+    status,
+    error,
+    dispatch,
+    reload,
+    pending,
+    setScenario,
+    scenarioPending,
+  } = useRuntimeOperations();
 
-  // Auto-select first project when snapshot arrives.
+  const [selectedId, setSelectedId] =
+    useState<string | null>(null);
+
+  const [query, setQuery] =
+    useState("");
+
+  const [environment, setEnvironment] =
+    useState<Environment | "all">("all");
+
+  const [health, setHealth] =
+    useState<HealthStatus | "all">("all");
+
+  const [inspectorOpen, setInspectorOpen] =
+    useState(false);
+
+  const isMobile =
+    useIsMobile();
+
+  const searchRef =
+    useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    if (!selectedId && snapshot?.projects.length) setSelectedId(snapshot.projects[0].id);
-  }, [snapshot, selectedId]);
+    if (
+      selectedId ||
+      !snapshot?.projects.length
+    ) {
+      return;
+    }
 
-  const filtered = useMemo(() => {
-    if (!snapshot) return [];
-    const q = query.trim().toLowerCase();
-    return snapshot.projects.filter((p) => {
-      if (env !== "all" && p.env !== env) return false;
-      if (health !== "all" && p.health.status !== health) return false;
-      if (!q) return true;
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.region.toLowerCase().includes(q) ||
-        p.version.toLowerCase().includes(q) ||
-        p.env.toLowerCase().includes(q)
-      );
-    });
-  }, [snapshot, query, env, health]);
+    setSelectedId(
+      snapshot.projects[0].id,
+    );
+  }, [
+    selectedId,
+    snapshot,
+  ]);
+
+  const filteredProjects = useMemo(() => {
+    if (!snapshot) {
+      return [];
+    }
+
+    const normalizedQuery =
+      query.trim().toLowerCase();
+
+    return snapshot.projects.filter(
+      (project) => {
+        if (
+          environment !== "all" &&
+          project.env !== environment
+        ) {
+          return false;
+        }
+
+        if (
+          health !== "all" &&
+          project.health.status !== health
+        ) {
+          return false;
+        }
+
+        if (!normalizedQuery) {
+          return true;
+        }
+
+        return [
+          project.name,
+          project.region,
+          project.version,
+          project.env,
+        ].some((value) =>
+          value
+            .toLowerCase()
+            .includes(normalizedQuery),
+        );
+      },
+    );
+  }, [
+    environment,
+    health,
+    query,
+    snapshot,
+  ]);
 
   const selectedProject = useMemo(
-    () => snapshot?.projects.find((p) => p.id === selectedId) ?? null,
-    [snapshot, selectedId],
+    () =>
+      snapshot?.projects.find(
+        (project) =>
+          project.id === selectedId,
+      ) ?? null,
+    [
+      selectedId,
+      snapshot,
+    ],
   );
 
-  const projectEvents = useMemo(
-    () => (snapshot?.events ?? []).filter((e) => !selectedProject || e.projectId === selectedProject.id || !selectedProject),
-    [snapshot, selectedProject],
+  const selectedEvents = useMemo(
+    () =>
+      (snapshot?.events ?? []).filter(
+        (event) =>
+          !selectedProject ||
+          event.projectId ===
+            selectedProject.id,
+      ),
+    [
+      selectedProject,
+      snapshot,
+    ],
   );
 
-  // Keyboard shortcuts, ignoring typing targets.
+  const selectedTimeline = useMemo(
+    () =>
+      (snapshot?.timeline ?? []).filter(
+        (event) =>
+          !selectedProject ||
+          event.projectId ===
+            selectedProject.id,
+      ),
+    [
+      selectedProject,
+      snapshot,
+    ],
+  );
+
+  const selectedLogs = useMemo(
+    () =>
+      (snapshot?.logs ?? []).filter(
+        (log) =>
+          !selectedProject ||
+          log.projectId ===
+            selectedProject.id,
+      ),
+    [
+      selectedProject,
+      snapshot,
+    ],
+  );
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null;
-      const typing = !!t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
-      if (typing) return;
-      if (e.key === "/") { e.preventDefault(); searchRef.current?.focus(); return; }
-      if (!selectedProject) return;
-      const key = e.key.toLowerCase();
-      if (key === "r") { e.preventDefault(); dispatch("restart", selectedProject.id).catch(() => {}); }
-      else if (key === "s") { e.preventDefault(); dispatch("shutdown", selectedProject.id).catch(() => {}); }
-      else if (key === "enter") { setInspectorOpen(true); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [selectedProject, dispatch]);
+    const handleKeyboardShortcut = (
+      event: KeyboardEvent,
+    ) => {
+      const target =
+        event.target as HTMLElement | null;
 
-  // ---------- ERROR ----------
+      const isTyping =
+        Boolean(target) &&
+        (
+          target?.tagName === "INPUT" ||
+          target?.tagName === "TEXTAREA" ||
+          target?.isContentEditable
+        );
+
+      if (isTyping) {
+        return;
+      }
+
+      if (event.key === "/") {
+        event.preventDefault();
+        searchRef.current?.focus();
+        return;
+      }
+
+      if (!selectedProject) {
+        return;
+      }
+
+      const key =
+        event.key.toLowerCase();
+
+      if (key === "r") {
+        event.preventDefault();
+
+        void dispatch(
+          "restart",
+          selectedProject.id,
+        );
+
+        return;
+      }
+
+      if (key === "s") {
+        event.preventDefault();
+
+        void dispatch(
+          "shutdown",
+          selectedProject.id,
+        );
+
+        return;
+      }
+
+      if (key === "enter") {
+        event.preventDefault();
+        setInspectorOpen(true);
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyboardShortcut,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyboardShortcut,
+      );
+    };
+  }, [
+    dispatch,
+    selectedProject,
+  ]);
+
   if (status === "error") {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-7xl mx-auto px-4 md:px-10 py-10">
-          <RuntimeErrorState onRetry={reload} message={error?.message} />
+        <div className="mx-auto max-w-7xl px-4 py-10 md:px-10 md:py-14">
+          <RuntimeErrorState
+            message={error?.message}
+            onRetry={reload}
+          />
         </div>
       </div>
     );
   }
 
-  // ---------- LOADING ----------
-  if (status === "loading" || !snapshot) {
+  if (
+    status === "loading" ||
+    !snapshot
+  ) {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-7xl mx-auto px-4 md:px-10 py-10 md:py-14 space-y-6">
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-7 px-4 py-8 md:px-10 md:py-12">
           <div className="space-y-3">
-            <div className="h-3 w-40 rounded-md bg-surface-2 animate-pulse" />
-            <div className="h-10 w-72 rounded-md bg-surface-2 animate-pulse" />
-            <div className="h-3 w-96 rounded-md bg-surface-2 animate-pulse" />
+            <div className="h-3 w-40 animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
+
+            <div className="h-10 w-72 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-card)]" />
+
+            <div className="h-3 w-96 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 4 }).map((_, i) => <TileSkeleton key={i} />)}
+
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {Array.from(
+              { length: 4 },
+              (_, index) => (
+                <TileSkeleton
+                  key={index}
+                />
+              ),
+            )}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,320px)_1fr_minmax(0,360px)] gap-4">
-            <div className="space-y-2">{Array.from({ length: 5 }).map((_, i) => <RowSkeleton key={i} />)}</div>
-            <GlowCard className="p-0 min-h-[360px] overflow-hidden"><FeedSkeleton /></GlowCard>
-            <GlowCard className="p-0 min-h-[360px]"><InspectorSkeleton /></GlowCard>
+
+          <div className="grid min-h-[34rem] grid-cols-1 gap-5 lg:grid-cols-[minmax(0,330px)_1fr] xl:grid-cols-[minmax(0,330px)_1fr_minmax(0,400px)]">
+            <div className="space-y-2">
+              {Array.from(
+                { length: 5 },
+                (_, index) => (
+                  <RowSkeleton
+                    key={index}
+                  />
+                ),
+              )}
+            </div>
+
+            <LuminaWorkspacePanel className="min-h-[34rem] p-0">
+              <FeedSkeleton />
+            </LuminaWorkspacePanel>
+
+            <LuminaWorkspacePanel className="hidden min-h-[34rem] p-0 xl:flex">
+              <InspectorSkeleton />
+            </LuminaWorkspacePanel>
           </div>
         </div>
       </div>
     );
   }
 
-  const hasMatches = filtered.length > 0;
+  const hasMatches =
+    filteredProjects.length > 0;
 
-  // ---------- READY ----------
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-10 py-8 md:py-12 space-y-7">
+    <LuminaWorkspaceLayout
+      header={
         <RuntimeHeader
           ref={searchRef}
           overall={snapshot.overall}
           updatedAt={snapshot.updatedAt}
-          query={query} onQuery={setQuery}
-          env={env} onEnv={setEnv}
-          health={health} onHealth={setHealth}
+          query={query}
+          onQuery={setQuery}
+          env={environment}
+          onEnv={setEnvironment}
+          health={health}
+          onHealth={setHealth}
         />
+      }
+      metrics={
+        <RuntimeHealthOverview
+          overall={snapshot.overall}
+          projects={snapshot.projects}
+        />
+      }
+      toolbar={
+        <LuminaWorkspaceToolbar
+          leading={
+            <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              {selectedProject ? (
+                <>
+                  Selected ·{" "}
+                  <span className="font-medium text-foreground">
+                    {selectedProject.name}
+                  </span>
+                </>
+              ) : (
+                "Select a service to see actions and details."
+              )}
+            </div>
+          }
+          trailing={
+            <>
+              <RuntimeActionsToolbar
+                project={selectedProject}
+                pending={pending}
+                onDispatch={dispatch}
+                compact={isMobile}
+              />
 
-        <RuntimeHealthOverview overall={snapshot.overall} projects={snapshot.projects} />
-
-        {/* Actions row */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 rounded-3xl border border-white/10 bg-white/[0.025] px-4 py-3 backdrop-blur-xl">
-          <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-            {selectedProject
-              ? <>Selected · <span className="text-foreground font-medium">{selectedProject.name}</span></>
-              : "Select a service to see actions and details."}
-          </div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <RuntimeActionsToolbar
-              project={selectedProject}
-              pending={pending}
-              onDispatch={dispatch}
-              compact={isMobile}
-            />
-            {(isMobile || true) && (
-              <Sheet open={inspectorOpen} onOpenChange={setInspectorOpen}>
+              <Sheet
+                open={inspectorOpen}
+                onOpenChange={setInspectorOpen}
+              >
                 <SheetTrigger asChild>
-                  <LuminaButton variant="ghost" size="sm" className="lg:hidden text-gold hover:text-gold" aria-label="Open inspector">
-                    <PanelRightOpen className="h-3.5 w-3.5" /> Inspector
+                  <LuminaButton
+                    variant="ghost"
+                    size="sm"
+                    className="text-gold hover:text-gold xl:hidden"
+                    aria-label="Open runtime inspector"
+                  >
+                    <PanelRightOpen className="h-3.5 w-3.5" />
+                    Inspector
                   </LuminaButton>
                 </SheetTrigger>
-                <SheetContent side="right" className="p-0 w-full sm:max-w-[420px] glass-strong border-l border-white/10">
+
+                <SheetContent
+                  side="right"
+                  className={[
+                    "w-full p-0 sm:max-w-[420px]",
+                    "border-l",
+                    "[border-color:var(--lumina-border-standard)]",
+                    "[background:var(--lumina-surface-panel)]",
+                    "[backdrop-filter:var(--lumina-blur-surface)]",
+                    "[box-shadow:var(--lumina-shadow-panel)]",
+                  ].join(" ")}
+                >
                   <RuntimeInspector
                     project={selectedProject}
                     logs={snapshot.logs}
                     pending={pending}
                     onDispatch={dispatch}
+                  onScenario={(
+                    scenario,
+                    projectId,
+                  ) =>
+                    setScenario(
+                      scenario,
+                      projectId,
+                    )
+                  }
+                  scenarioPending={
+                    scenarioPending
+                  }
                   />
                 </SheetContent>
               </Sheet>
-            )}
-          </div>
-        </div>
-
-        {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,330px)_1fr] xl:grid-cols-[minmax(0,330px)_1fr_minmax(0,400px)] gap-5 min-h-[560px]">
-          {/* Projects rail */}
-          <GlowCard className="glass-runtime p-4 h-[560px] overflow-hidden flex flex-col">
-            <span className="glass-runtime-noise" aria-hidden />
-            <div className="flex items-center justify-between px-1 pb-3">
-              <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">Services</div>
-              <div className="text-[10.5px] text-muted-foreground tabular-nums">{filtered.length}/{snapshot.projects.length}</div>
+            </>
+          }
+        />
+      }
+      sidebar={
+        <LuminaWorkspacePanel
+          title="Services"
+          toolbar={
+            <div className="text-[10.5px] tabular-nums text-muted-foreground">
+              {filteredProjects.length}/
+              {snapshot.projects.length}
             </div>
-            {hasMatches
-              ? <RuntimeProjectsList
-                  projects={filtered}
-                  selectedId={selectedId}
-                  onSelect={setSelectedId}
-                  onOpenInspector={() => setInspectorOpen(true)}
-                  className="flex-1"
-                />
-              : <RuntimeEmptyState variant="search" className="flex-1" />
-            }
-          </GlowCard>
-
-          {/* Center: events + timeline + logs */}
-          <GlowCard className="glass-runtime p-0 h-[560px] overflow-hidden flex flex-col">
-            <span className="glass-runtime-noise" aria-hidden />
-            <Tabs defaultValue="events" className="flex-1 flex flex-col min-h-0">
-              <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-white/8 bg-white/[0.025] backdrop-blur-xl">
-                <TabsList className="rounded-2xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl">
-                  <TabsTrigger value="events">Events</TabsTrigger>
-                  <TabsTrigger value="timeline">Lifecycle</TabsTrigger>
-                  <TabsTrigger value="logs">Logs</TabsTrigger>
-                </TabsList>
-                <div className="text-[10.5px] text-muted-foreground tabular-nums">
-                  {snapshot.events.length} events · {snapshot.logs.length} logs
-                </div>
-              </div>
-              <TabsContent value="events" className={cn("flex-1 min-h-0 m-0")}>
-                <RuntimeEventStream events={projectEvents} />
-              </TabsContent>
-              <TabsContent value="timeline" className="flex-1 min-h-0 m-0">
-                <RuntimeLifecycleTimeline
-                  events={snapshot.timeline.filter((t) => !selectedProject || t.projectId === selectedProject.id)}
-                />
-              </TabsContent>
-              <TabsContent value="logs" className="flex-1 min-h-0 m-0">
-                <RuntimeLogsPanel
-                  logs={snapshot.logs.filter((l) => !selectedProject || l.projectId === selectedProject.id)}
-                />
-              </TabsContent>
-            </Tabs>
-          </GlowCard>
-
-          {/* Inspector (desktop) */}
-          <GlowCard className="glass-runtime p-0 h-[560px] overflow-hidden hidden xl:flex flex-col">
-            <span className="glass-runtime-noise" aria-hidden />
-            <RuntimeInspector
-              project={selectedProject}
-              logs={snapshot.logs}
-              pending={pending}
-              onDispatch={dispatch}
+          }
+          className={`${PANEL_HEIGHT_CLASS} p-0`}
+        >
+          {hasMatches ? (
+            <RuntimeProjectsList
+              projects={filteredProjects}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+              onOpenInspector={() =>
+                setInspectorOpen(true)
+              }
+              className="flex-1 p-4"
             />
-          </GlowCard>
-        </div>
-      </div>
-    </div>
+          ) : (
+            <RuntimeEmptyState
+              variant="search"
+              className="flex-1"
+            />
+          )}
+        </LuminaWorkspacePanel>
+      }
+      content={
+        <LuminaWorkspacePanel
+          className={`${PANEL_HEIGHT_CLASS} p-0`}
+        >
+          <Tabs
+            defaultValue="events"
+            className="flex min-h-0 flex-1 flex-col"
+          >
+            <div
+              className={[
+                "flex flex-col gap-3 border-b px-4 py-4",
+                "sm:flex-row sm:items-center sm:justify-between",
+                "[border-color:var(--lumina-border-standard)]",
+                "[background:var(--lumina-surface-compact)]",
+                "[backdrop-filter:var(--lumina-blur-surface)]",
+              ].join(" ")}
+            >
+              <TabsList
+                className={[
+                  "self-start rounded-2xl border p-1",
+                  "[border-color:var(--lumina-border-standard)]",
+                  "[background:var(--lumina-surface-interactive)]",
+                  "[backdrop-filter:var(--lumina-blur-surface)]",
+                  "[box-shadow:var(--lumina-shadow-panel)]",
+                ].join(" ")}
+              >
+                <TabsTrigger value="events">
+                  Events
+                </TabsTrigger>
+
+                <TabsTrigger value="timeline">
+                  Lifecycle
+                </TabsTrigger>
+
+                <TabsTrigger value="logs">
+                  Logs
+                </TabsTrigger>
+              </TabsList>
+
+              <div className="text-[10.5px] tabular-nums text-muted-foreground">
+                {selectedEvents.length} events ·{" "}
+                {selectedLogs.length} logs
+              </div>
+            </div>
+
+            <TabsContent
+              value="events"
+              className="m-0 min-h-0 flex-1"
+            >
+              <RuntimeEventStream
+                events={selectedEvents}
+              />
+            </TabsContent>
+
+            <TabsContent
+              value="timeline"
+              className="m-0 min-h-0 flex-1"
+            >
+              <RuntimeLifecycleTimeline
+                events={selectedTimeline}
+              />
+            </TabsContent>
+
+            <TabsContent
+              value="logs"
+              className="m-0 min-h-0 flex-1"
+            >
+              <RuntimeLogsPanel
+                logs={selectedLogs}
+              />
+            </TabsContent>
+          </Tabs>
+        </LuminaWorkspacePanel>
+      }
+      inspector={
+        <LuminaWorkspacePanel
+          className={`hidden ${PANEL_HEIGHT_CLASS} p-0 xl:flex`}
+        >
+          <RuntimeInspector
+            project={selectedProject}
+            logs={snapshot.logs}
+            pending={pending}
+            onDispatch={dispatch}
+          onScenario={(
+                    scenario,
+                    projectId,
+                  ) =>
+                    setScenario(
+                      scenario,
+                      projectId,
+                    )
+                  }
+                  scenarioPending={
+                    scenarioPending
+                  }
+                  />
+        </LuminaWorkspacePanel>
+      }
+    />
   );
 }
 

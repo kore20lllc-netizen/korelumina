@@ -8,13 +8,52 @@ import type {
 
 import type {
   KnowledgeOperationsSnapshot,
-} from "./KnowledgeOperationsSnapshot.js";
+  KnowledgeOperationsStatus,
+} from "@korelumina/platform-sdk";
 
 export interface KnowledgeProviderSummary {
   id: string;
   name: string;
   sourceType: string;
   status: "available" | "planned";
+}
+
+function normalizeStatus(
+  status: string | undefined,
+): KnowledgeOperationsStatus {
+  if (
+    status === "running" ||
+    status === "completed" ||
+    status === "failed"
+  ) {
+    return status;
+  }
+
+  return "idle";
+}
+
+function healthScore(input: {
+  evidenceTotal: number;
+  canonicalItems: number;
+  promotionRate: number;
+}) {
+  if (input.evidenceTotal === 0) {
+    return 0;
+  }
+
+  const preservation =
+    input.canonicalItems / input.evidenceTotal;
+
+  return Math.round(
+    Math.min(
+      100,
+      Math.max(
+        0,
+        ((preservation + input.promotionRate) / 2) *
+          100,
+      ),
+    ),
+  );
 }
 
 export class KnowledgeOperationsService {
@@ -51,48 +90,80 @@ export class KnowledgeOperationsService {
     const latest =
       statuses.at(-1);
 
+    const status =
+      normalizeStatus(latest?.status);
+
+    const totalEvidence =
+      latest?.acquiredEvidence ?? 0;
+
+    const processedEvidence =
+      latest?.preservedEvidence ?? 0;
+
+    const promotionRate =
+      totalEvidence > 0
+        ? processedEvidence / totalEvidence
+        : 0;
+
+    const progress =
+      totalEvidence > 0
+        ? (processedEvidence / totalEvidence) * 100
+        : 0;
+
+    const canonicalItems =
+      processedEvidence;
+
+    const score =
+      healthScore({
+        evidenceTotal: totalEvidence,
+        canonicalItems,
+        promotionRate,
+      });
+
     return {
       generatedAt: Date.now(),
 
-      recovery: {
-        status:
-          latest?.status ?? "idle",
+      summary: {
+        totalKnowledgeItems:
+          canonicalItems,
+        totalEvidence,
+        healthScore:
+          score,
+        promotionRate,
+      },
 
+      acquisition: {
+        status,
+        repository:
+          latest?.repositoryRoot,
+        stage:
+          status,
+        filesScanned:
+          totalEvidence,
+        evidenceExtracted:
+          totalEvidence,
+        progress,
+      },
+
+      recovery: {
+        status,
         repositoryRoot:
           latest?.repositoryRoot,
-
-        processedEvidence:
-          latest?.preservedEvidence ?? 0,
-
-        totalEvidence:
-          latest?.acquiredEvidence ?? 0,
-
-        progress:
-          latest?.acquiredEvidence
-            ? (latest.preservedEvidence /
-                latest.acquiredEvidence) *
-              100
-            : 0,
+        processedEvidence,
+        totalEvidence,
+        progress,
       },
 
       evidence: {
         total:
-          latest?.acquiredEvidence ?? 0,
+          totalEvidence,
         byType: {},
       },
 
       knowledge: {
         candidateItems:
-          latest?.preservedEvidence ?? 0,
-
-        canonicalItems:
-          latest?.preservedEvidence ?? 0,
-
-        promotionRate:
-          latest?.acquiredEvidence
-            ? latest.preservedEvidence /
-              latest.acquiredEvidence
-            : 0,
+          processedEvidence,
+        canonicalItems,
+        promotionRate,
       },
 
       coverage: {

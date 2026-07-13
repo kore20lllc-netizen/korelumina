@@ -1,5 +1,10 @@
 import { Hammer, PlayCircle, CheckCircle2, PauseCircle, StopCircle } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+import {
+  LuminaTimelineCard,
+} from "@/components/lumina/workspace";
+
 import { cn } from "@/lib/utils";
 import { RuntimeEmptyState } from "./RuntimeEmptyState";
 import type { LifecycleEvent } from "@/services/runtime/types";
@@ -26,13 +31,31 @@ export function RuntimeLifecycleTimeline({ events, className }: { events: Lifecy
           const Icon = PHASE_ICON[e.phase];
           return (
             <li key={e.id} className="relative pb-5 last:pb-0">
-              <span className={cn("absolute left-0 top-2 flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,.18)]", PHASE_COLOR[e.phase])}>
-                <Icon className="h-4 w-4" strokeWidth={2} />
-              </span>
-              <div className="ml-12 rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3 backdrop-blur-xl transition-all duration-200 hover:border-white/16 hover:bg-white/[0.05]"><div className="text-[13px] font-semibold tracking-tight">{e.label}</div>
-              <div className="mt-1 text-[11px] text-muted-foreground tabular-nums uppercase tracking-[0.08em]">
-                {fmtTime(e.at)} {fmtDur(e.durationMs) && <>· {fmtDur(e.durationMs)}</>}
-              </div></div>
+              <LuminaTimelineCard
+                className="ml-12"
+                icon={
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center",
+                      PHASE_COLOR[e.phase],
+                    )}
+                  >
+                    <Icon
+                      className="h-4 w-4"
+                      strokeWidth={2}
+                    />
+                  </span>
+                }
+                title={e.label}
+                subtitle={
+                  <>
+                    {fmtTime(e.at)}
+                    {fmtDur(e.durationMs) && (
+                      <> · {fmtDur(e.durationMs)}</>
+                    )}
+                  </>
+                }
+              />
             </li>
           );
         })}
