@@ -30,12 +30,12 @@ import {
 } from "@/components/lumina/surface";
 
 import {
-  LuminaBackground,
-} from "@/components/lumina/background";
-
-import {
   LuminaButton,
 } from "@/components/lumina/LuminaButton";
+
+import {
+  LuminaWorkspaceBrand,
+} from "@/components/lumina/workspace";
 
 import {
   getKnowledgeOverview,
@@ -125,8 +125,7 @@ export default function KnowledgeOperationsWorkspace({
   const acquisition = snapshot?.acquisition;
 
   return (
-    <LuminaBackground>
-      <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-7 px-4 py-8 md:px-10 md:py-12">
         <GlowCard className="relative overflow-hidden p-7">
           <span
@@ -139,21 +138,18 @@ export default function KnowledgeOperationsWorkspace({
           />
 
           <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="min-w-0">
-              <div className="mb-3 inline-flex rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                Master OS · Internal
-              </div>
+            <LuminaWorkspaceBrand
+              workspace="Knowledge Operations"
+              family="Master OS · Internal"
+              tagline="Evidence • Learn • Reason"
+              className="min-w-0"
+            />
 
-              <h1 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-                Knowledge Operations
-              </h1>
-
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-                Evidence acquisition, Knowledge IR, canonical memory, learning,
-                reasoning, automation, and Chief Agent growth in one governed
-                operating console.
-              </p>
-            </div>
+            <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+              Evidence acquisition, Knowledge IR, canonical memory, learning,
+              reasoning, automation, and Chief Agent growth in one governed
+              operating console.
+            </p>
 
             <div className="flex flex-wrap items-center gap-2">
               <LuminaButton
@@ -255,7 +251,6 @@ export default function KnowledgeOperationsWorkspace({
       </LuminaSurface>
       </div>
     </div>
-    </LuminaBackground>
   );
 }
 

@@ -25,6 +25,12 @@ export interface LuminaSurfaceProps
   extends HTMLAttributes<HTMLDivElement> {
   variant?: LuminaSurfaceVariant;
   asChild?: boolean;
+
+  /**
+   * Enables the certified Lumina hover, elevation, focus,
+   * reflection, and press interaction model.
+   */
+  interactive?: boolean;
 }
 
 const backgroundByVariant: Record<
@@ -187,11 +193,62 @@ const elevationByVariant: Record<
     "[transform:translateY(calc(var(--lumina-elevation-level)*-0.5px))]",
 };
 
+const interactiveByVariant: Record<
+  LuminaSurfaceVariant,
+  boolean
+> = {
+  default: true,
+  panel: true,
+  hero: false,
+  sidebar: false,
+  toolbar: false,
+  card: true,
+  interactive: true,
+  selected: true,
+  compact: true,
+};
+
+const interactionClasses = [
+  "relative isolate",
+
+  "before:pointer-events-none",
+  "before:absolute",
+  "before:inset-0",
+  "before:z-0",
+  "before:rounded-[inherit]",
+  "before:opacity-0",
+  "before:[background:var(--lumina-highlight-overlay)]",
+  "before:transition-opacity",
+  "before:duration-300",
+
+  "hover:-translate-y-1",
+  "hover:[border-color:var(--lumina-border-emphasis)]",
+  "hover:[background:var(--lumina-surface-interactive)]",
+  "hover:[box-shadow:var(--lumina-shadow-hover)]",
+  "hover:before:opacity-100",
+
+  "active:-translate-y-0.5",
+  "active:[box-shadow:var(--lumina-shadow-selected)]",
+
+  "focus-visible:outline-none",
+  "focus-visible:[border-color:var(--lumina-border-emphasis)]",
+  "focus-visible:[box-shadow:var(--lumina-shadow-hover)]",
+  "focus-visible:ring-2",
+  "focus-visible:[--tw-ring-color:var(--lumina-accent-color)]",
+  "focus-visible:ring-offset-2",
+  "focus-visible:ring-offset-background",
+
+  "motion-reduce:transform-none",
+  "motion-reduce:transition-none",
+  "motion-reduce:before:transition-none",
+].join(" ");
+
 export function LuminaSurface({
   className,
   variant = "panel",
   children,
   asChild = false,
+  interactive = true,
   ...props
 }: LuminaSurfaceProps) {
   const Comp =
@@ -199,10 +256,15 @@ export function LuminaSurface({
       ? Slot
       : "div";
 
+  const hasInteraction =
+    interactive &&
+    interactiveByVariant[variant];
+
   return (
     <Comp
       className={cn(
-        "transition-[background-color,border-color,box-shadow,transform,backdrop-filter] duration-300",
+        "transition-[background,border-color,box-shadow,transform,backdrop-filter]",
+        "duration-300 ease-out",
         "will-change-transform",
         backgroundByVariant[variant],
         "[backdrop-filter:var(--lumina-blur-surface)]",
@@ -210,6 +272,8 @@ export function LuminaSurface({
         borderByVariant[variant],
         shadowByVariant[variant],
         elevationByVariant[variant],
+        hasInteraction &&
+          interactionClasses,
         className,
       )}
       {...props}

@@ -16,3 +16,4 @@ export * from "./framework";
 export * from "./primitives";
 
 export * from "./LuminaServiceCard";
+export * from "./LuminaWorkspaceBrand";

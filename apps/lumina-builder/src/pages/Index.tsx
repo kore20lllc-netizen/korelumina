@@ -262,11 +262,13 @@ function Router() {
   
   if (view === "knowledge-operations") {
     return (
-      <Suspense fallback={<LoadingView />}>
-        <KnowledgeOperationsWorkspace
-          setView={setView}
-        />
-      </Suspense>
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <KnowledgeOperationsWorkspace
+            setView={setView}
+          />
+        </Suspense>
+      </Shell>
     );
   }
 

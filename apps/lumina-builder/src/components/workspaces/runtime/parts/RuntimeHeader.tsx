@@ -13,16 +13,9 @@ import {
 
 import {
   LuminaMetricCard,
+  LuminaWorkspaceBrand,
   LuminaWorkspaceHero,
 } from "@/components/lumina/workspace";
-
-import {
-  LuminaBrand,
-} from "@/components/lumina/brand";
-
-import {
-  workspaceAccents,
-} from "@/components/lumina/tokens/workspaceAccents";
 
 import type {
   Environment,
@@ -48,9 +41,6 @@ interface RuntimeHeaderProps {
     value: HealthStatus | "all",
   ) => void;
 }
-
-const runtimeAccent =
-  workspaceAccents.runtime;
 
 const HEALTH_LABEL: Record<
   HealthStatus,
@@ -241,25 +231,10 @@ export const RuntimeHeader = forwardRef<
       <LuminaWorkspaceHero
         eyebrow={null}
         title={
-          <div className="flex flex-col">
-            <LuminaBrand
-              size="hero"
-              className="text-5xl"
-            />
-
-            <h2
-              className={[
-                "mt-3 text-4xl font-bold tracking-tight",
-                runtimeAccent.text,
-              ].join(" ")}
-            >
-              Runtime Operations
-            </h2>
-
-            <div className="mt-4 text-xs font-semibold uppercase tracking-[0.42em] text-muted-foreground">
-              Observe • Operate • Recover
-            </div>
-          </div>
+          <LuminaWorkspaceBrand
+            workspace="Runtime Operations"
+            tagline="Observe • Operate • Recover"
+          />
         }
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
         metrics={
