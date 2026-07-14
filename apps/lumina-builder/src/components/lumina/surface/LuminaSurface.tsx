@@ -7,6 +7,10 @@ import {
 } from "@radix-ui/react-slot";
 
 import {
+  luminaMotion,
+} from "@/components/lumina/appearance/motion";
+
+import {
   cn,
 } from "@/lib/utils";
 
@@ -208,7 +212,7 @@ const interactiveByVariant: Record<
   compact: true,
 };
 
-const interactionClasses = [
+const interactionClasses = cn(
   "relative isolate",
 
   "before:pointer-events-none",
@@ -218,8 +222,7 @@ const interactionClasses = [
   "before:rounded-[inherit]",
   "before:opacity-0",
   "before:[background:var(--lumina-highlight-overlay)]",
-  "before:transition-opacity",
-  "before:duration-300",
+  luminaMotion.reflection,
 
   "hover:-translate-y-1",
   "hover:[border-color:var(--lumina-border-emphasis)]",
@@ -229,6 +232,7 @@ const interactionClasses = [
 
   "active:-translate-y-0.5",
   "active:[box-shadow:var(--lumina-shadow-selected)]",
+  luminaMotion.press,
 
   "focus-visible:outline-none",
   "focus-visible:[border-color:var(--lumina-border-emphasis)]",
@@ -237,11 +241,7 @@ const interactionClasses = [
   "focus-visible:[--tw-ring-color:var(--lumina-accent-color)]",
   "focus-visible:ring-offset-2",
   "focus-visible:ring-offset-background",
-
-  "motion-reduce:transform-none",
-  "motion-reduce:transition-none",
-  "motion-reduce:before:transition-none",
-].join(" ");
+);
 
 export function LuminaSurface({
   className,
@@ -263,8 +263,7 @@ export function LuminaSurface({
   return (
     <Comp
       className={cn(
-        "transition-[background,border-color,box-shadow,transform,backdrop-filter]",
-        "duration-300 ease-out",
+        luminaMotion.surface,
         "will-change-transform",
         backgroundByVariant[variant],
         "[backdrop-filter:var(--lumina-blur-surface)]",
