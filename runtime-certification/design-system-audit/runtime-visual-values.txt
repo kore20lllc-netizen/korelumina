@@ -1,0 +1,180 @@
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:345:            <div className="h-3 w-40 animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:347:            <div className="h-10 w-72 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-card)]" />
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:349:            <div className="h-3 w-96 max-w-full animate-pulse rounded-md [background:var(--lumina-surface-compact)]" />
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:415:            <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:419:                  <span className="font-medium text-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:445:                    className="text-gold hover:text-gold xl:hidden"
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:457:                    "border-l",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:458:                    "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:460:                    "[backdrop-filter:var(--lumina-blur-surface)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:461:                    "[box-shadow:var(--lumina-shadow-panel)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:492:            <div className="text-[10.5px] tabular-nums text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:527:                "flex flex-col gap-3 border-b px-4 py-4",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:529:                "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:531:                "[backdrop-filter:var(--lumina-blur-surface)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:536:                  "self-start rounded-2xl border p-1",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:537:                  "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:539:                  "[backdrop-filter:var(--lumina-blur-surface)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:540:                  "[box-shadow:var(--lumina-shadow-panel)]",
+apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx:556:              <div className="text-[10.5px] tabular-nums text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:43:    "[border-color:hsl(var(--cyan)/0.34)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:44:    "[background:hsl(var(--cyan)/0.12)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:45:    "text-cyan",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:50:    "[border-color:hsl(var(--gold)/0.34)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:51:    "[background:hsl(var(--gold)/0.12)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:52:    "text-gold",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:57:    "[border-color:hsl(var(--violet)/0.34)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:58:    "[background:hsl(var(--violet)/0.12)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:59:    "text-violet-200",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:146:      <div className="truncate text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:150:      <div className="mt-1 truncate text-[13px] font-semibold tabular-nums text-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:234:            <span className="text-xs font-medium text-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:244:              className="text-muted-foreground/60"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:249:            <span className="text-[11px] capitalize text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:261:              "[border-radius:var(--lumina-radius-inner)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:262:              "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:278:              stroke="hsl(var(--cyan))"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:279:              secondaryStroke="hsl(var(--magenta))"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx:280:              fill="hsl(var(--cyan) / 0.10)"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:18:  info:    "text-cyan",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:19:  warn:    "text-gold",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:20:  error:   "text-rose-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:21:  success: "text-emerald-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:54:                    <div className="truncate text-[13px] font-medium tracking-tight">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx:65:                  <div className="shrink-0 text-[11px] font-medium tabular-nums text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSkeletons.tsx:14:        <Skeleton className="h-8 w-8 rounded-lg" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSkeletons.tsx:23:    <div className={cn("rounded-xl border border-white/8 bg-surface-1/60 p-3 flex items-center gap-3", className)}>
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSkeletons.tsx:24:      <Skeleton className="h-2 w-2 rounded-full" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSkeletons.tsx:39:          <Skeleton className="h-3.5 w-3.5 rounded-full mt-0.5" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeErrorState.tsx:15:      <div className="text-center max-w-sm">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeErrorState.tsx:16:        <div className="h-11 w-11 mx-auto rounded-xl bg-rose-500/10 border border-rose-500/25 grid place-items-center text-rose-300">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeErrorState.tsx:19:        <div className="mt-3 font-display text-lg font-semibold">{title}</div>
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeErrorState.tsx:20:        <p className="text-[12.5px] text-muted-foreground mt-1">{message}</p>
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx:276:      stroke="var(--lumina-border-standard)"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx:313:  stroke = "hsl(var(--cyan))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx:315:    "hsl(var(--magenta))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx:317:    "hsl(var(--cyan) / 0.12)",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx:482:          stroke="var(--lumina-border-standard)"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx:47:        className="mr-2 h-2 w-2 ring-0"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx:56:            className="mx-2 h-4 w-px bg-current/25"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx:59:          <span className="font-display tabular-nums text-[12px] tracking-tight">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:69:  healthy: "text-emerald-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:70:  degraded: "text-amber-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:71:  critical: "text-rose-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:72:  offline: "text-muted-foreground",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:80:    "bg-emerald-400",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:81:    "shadow-[0_0_16px_rgba(52,211,153,0.72)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:85:    "bg-amber-400",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:86:    "shadow-[0_0_16px_rgba(251,191,36,0.68)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:90:    "bg-rose-400",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:91:    "shadow-[0_0_16px_rgba(251,113,133,0.72)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:95:    "bg-muted-foreground/50",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:247:              className="text-5xl"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:252:                "mt-3 text-4xl font-bold tracking-tight",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:259:            <div className="mt-4 text-xs font-semibold uppercase tracking-[0.42em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:271:                  <Cpu className="h-5 w-5 text-cyan-300" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:278:                        "h-2 w-2 rounded-full",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:279:                        "animate-pulse bg-emerald-400",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:280:                        "shadow-[0_0_12px_rgba(52,211,153,0.72)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:288:                  <span className="text-4xl font-bold tabular-nums">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:292:                  <span className="pb-1 text-base font-medium text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:298:                <div className="text-[11px] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:309:                <Clock3 className="h-5 w-5 text-violet-300" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:312:                <div className="text-xl font-semibold tabular-nums">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:317:                <div className="text-[11px] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:339:                      "text-xl font-semibold",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:355:                      "ml-auto h-2.5 w-2.5 rounded-full",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:364:                <div className="text-[11px] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:375:                <Activity className="h-5 w-5 text-amber-300" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:378:                <div className="text-3xl font-bold tabular-nums">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:385:                <div className="text-[11px] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:52:    dotClassName: "bg-muted-foreground",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:57:    dotClassName: "bg-cyan",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:62:    dotClassName: "bg-gold",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:67:    dotClassName: "bg-rose-400",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:77:    "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:79:    "text-muted-foreground",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:84:    "[border-color:hsl(var(--cyan)/0.28)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:85:    "[background:hsl(var(--cyan)/0.10)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:86:    "text-cyan",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:91:    "[border-color:hsl(var(--gold)/0.28)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:92:    "[background:hsl(var(--gold)/0.10)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:93:    "text-gold",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:98:    "[border-color:hsl(var(--destructive)/0.30)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:99:    "[background:hsl(var(--destructive)/0.12)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:100:    "text-rose-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:202:          "shrink-0 border-b px-4 py-4",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:203:          "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:205:          "[backdrop-filter:var(--lumina-blur-surface)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:211:              <h3 className="truncate text-base font-semibold tracking-tight text-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:215:              <p className="mt-1 whitespace-nowrap text-xs tabular-nums text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:250:              <span className="text-[11px]">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:299:            className="space-y-1.5 px-3 py-3 font-mono text-[11.5px] leading-relaxed"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:308:                    <span className="whitespace-nowrap tabular-nums text-muted-foreground/70">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:324:                    <span className="max-w-32 truncate text-muted-foreground/80">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx:328:                    <span className="min-w-0 break-words font-medium text-foreground/95">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:19:  { value: "production", label: "Production", dotClassName: "bg-violet" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:20:  { value: "staging", label: "Staging", dotClassName: "bg-cyan" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:21:  { value: "preview", label: "Preview", dotClassName: "bg-rose" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:26:  { value: "healthy", label: "Healthy", dotClassName: "bg-cyan" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:27:  { value: "degraded", label: "Degraded", dotClassName: "bg-gold" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:28:  { value: "critical", label: "Critical", dotClassName: "bg-magenta" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:29:  { value: "offline", label: "Offline", dotClassName: "bg-muted-foreground" },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:68:          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:73:            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:81:              className="pl-10 pr-14 h-11 rounded-xl"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSearchFilters.tsx:88:                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-1 [&:hover]:[background:var(--lumina-surface-interactive)]"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx:20:    icon: <Boxes className="h-10 w-10 text-muted-foreground" />,
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx:27:    icon: <Inbox className="h-10 w-10 text-muted-foreground" />,
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx:35:      <ListChecks className="h-10 w-10 text-muted-foreground" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx:44:      <SearchX className="h-10 w-10 text-muted-foreground" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx:210:                      "pointer-events-none opacity-60",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx:302:                  "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:31:    "hsl(var(--violet))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:34:    "hsl(var(--magenta))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:37:    "hsl(var(--cyan))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:40:    "hsl(var(--gold))",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:45:    "hsl(var(--violet) / 0.14)",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:48:    "hsl(var(--magenta) / 0.14)",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:51:    "hsl(var(--cyan) / 0.14)",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:54:    "hsl(var(--gold) / 0.14)",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx:75:            className="h-5 w-5 text-muted-foreground"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx:5:  healthy:  { bg: "bg-emerald-400", ring: "ring-emerald-400/30", pulse: false },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx:6:  degraded: { bg: "bg-gold",        ring: "ring-gold/30",        pulse: true  },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx:7:  critical: { bg: "bg-rose-500",    ring: "ring-rose-500/30",    pulse: true  },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx:8:  offline:  { bg: "bg-muted-foreground/50", ring: "ring-white/10", pulse: false },
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeStatusDot.tsx:17:        "inline-block h-2 w-2 rounded-full ring-2",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLifecycleTimeline.tsx:17:  build: "text-cyan", boot: "text-violet", ready: "text-emerald-300", drain: "text-gold", stop: "text-rose-300",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLifecycleTimeline.tsx:29:        <span aria-hidden className="absolute left-[18px] top-6 bottom-6 w-px bg-gradient-to-b from-cyan/40 via-violet/30 to-transparent" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:292:          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:314:            "mx-5 mt-4 self-start rounded-2xl border p-1",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:315:            "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:408:                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:423:                          "[border-radius:var(--lumina-radius-inner)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:424:                          "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:428:                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:430:                        <span className="text-xs leading-5 text-foreground/90">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:543:                <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:550:              <p className="mt-2 text-xs leading-5 text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:585:                            "ring-2",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:586:                            "ring-cyan/80",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:588:                            "[box-shadow:0_0_24px_hsl(var(--cyan)/0.48)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:593:                            "cursor-wait opacity-75",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:619:                <div className="mt-3 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3 py-2 text-[11px] text-rose-200">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:673:    <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:688:        "[border-radius:var(--lumina-radius-inner)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:689:        "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:691:        "[&>*]:[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:718:        className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:730:        <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:736:            "min-w-0 text-xs font-medium tabular-nums text-foreground",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:739:              : "truncate text-right",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:761:        "[border-radius:var(--lumina-radius-inner)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:762:        "[border-color:var(--lumina-border-standard)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:766:      <span className="text-xs text-foreground/90">
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:772:          "h-2 w-2 rounded-full",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:774:            ? "bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.62)]"
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:775:            : "bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,.58)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:790:        "border px-4 py-5 text-center text-xs text-muted-foreground",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:791:        "[border-radius:var(--lumina-radius-inner)]",
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx:792:        "[border-color:var(--lumina-border-standard)]",

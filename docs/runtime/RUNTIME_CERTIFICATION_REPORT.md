@@ -64,9 +64,23 @@ Runtime process
 - Restart lifecycle
 - Stop lifecycle
 - PID and process liveness
-- CPU and RSS telemetry contract\n- Runtime scenario persistence\n- Server-sent event connectivity\n- Runtime lock cleanup\n- Runtime production build\n- Builder production build\n- Restoration of the initial runtime state\n\n## Certification boundaries
+- CPU and RSS telemetry contract
+- Runtime scenario persistence
+- Server-sent event connectivity
+- Runtime lock cleanup
+- Runtime production build
+- Builder production build
+- Restoration of the initial runtime state
 
-- Scenario state persistence is certified.\n- Synthetic CPU, latency, request-rate, and error-rate generation is not required for runtime-control certification.\n- Browser UI acceptance was completed separately and reported green.\n- Rollback is excluded until versioned deployment rollback is implemented.\n- Drain is excluded from lifecycle certification while the runtime reports it as unsupported.\n\n## Risk assessment
+## Certification boundaries
+
+- Scenario state persistence is certified.
+- Synthetic CPU, latency, request-rate, and error-rate generation is not required for runtime-control certification.
+- Browser UI acceptance was completed separately and reported green.
+- Rollback is excluded until versioned deployment rollback is implemented.
+- Drain is excluded from lifecycle certification while the runtime reports it as unsupported.
+
+## Risk assessment
 
 **Low operational integration risk.**
 
@@ -84,3 +98,49 @@ Runtime Operations passed its automated certification gates and may now be used 
 | Runtime Operations UI acceptance | PASS |
 | Automated Runtime Operations certification | CERTIFIED |
 | Chief Agent runtime integration | OPEN |
+
+---
+
+# Runtime UI Certification Cache Verification
+
+## Purpose
+
+Before declaring any Runtime Operations visual regression, the
+development environment shall be verified to eliminate stale build
+artifacts.
+
+## Verification Sequence
+
+1. Verify current Git branch.
+2. Verify current HEAD commit.
+3. Verify Runtime source parity.
+4. Clear Builder cache.
+5. Clear Next.js cache (when applicable).
+6. Restart Builder.
+7. Restart Runtime.
+8. Hard refresh the browser.
+9. Compare against the certified Runtime baseline.
+
+A Runtime UI regression SHALL NOT be declared until all verification
+steps have completed successfully.
+
+## Builder Cache Reset
+
+Run:
+
+    rm -rf apps/lumina-builder/node_modules/.vite
+    rm -rf apps/lumina-builder/dist
+    rm -rf .next
+
+## Runtime Restart
+
+Restart both Builder and Runtime after cache removal.
+
+## Certification Rule
+
+Environmental issues (cached assets, stale bundles, browser cache, or
+development server state) must be eliminated before investigating source
+code.
+
+Runtime Operations remains the certified visual benchmark for the
+Lumina Design System.
