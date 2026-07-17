@@ -21,11 +21,27 @@ export function LuminaWorkspaceLayout({
   inspector,
   className,
 }: LuminaWorkspaceLayoutProps) {
+  const hasSidebar =
+    sidebar !== undefined &&
+    sidebar !== null;
+
+  const hasInspector =
+    inspector !== undefined &&
+    inspector !== null;
+
+  const layoutClass = hasSidebar
+    ? hasInspector
+      ? "grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_400px]"
+      : "grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)]"
+    : hasInspector
+      ? "grid-cols-1 xl:grid-cols-[minmax(0,1fr)_400px]"
+      : "grid-cols-1";
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div
         className={cn(
-          "mx-auto flex max-w-[1600px] flex-col gap-7 px-4 py-8 md:px-10 md:py-12",
+          "mx-auto flex max-w-[1800px] flex-col gap-7 px-4 py-8 md:px-8 xl:px-10",
           className,
         )}
       >
@@ -35,12 +51,23 @@ export function LuminaWorkspaceLayout({
 
         {toolbar}
 
-        <div className="grid min-h-[560px] grid-cols-1 gap-5 lg:grid-cols-[minmax(0,330px)_1fr] xl:grid-cols-[minmax(0,330px)_1fr_minmax(0,400px)]">
-          {sidebar}
+        <div
+          className={cn(
+            "grid min-h-[560px] gap-6",
+            layoutClass,
+          )}
+        >
+          {hasSidebar && sidebar}
 
-          {content}
+          <main className="min-w-0">
+            {content}
+          </main>
 
-          {inspector}
+          {hasInspector && (
+            <aside className="min-w-0 xl:w-[400px]">
+              {inspector}
+            </aside>
+          )}
         </div>
       </div>
     </div>

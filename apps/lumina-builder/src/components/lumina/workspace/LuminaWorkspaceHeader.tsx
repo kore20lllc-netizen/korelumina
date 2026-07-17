@@ -100,8 +100,14 @@ export function LuminaWorkspaceHeader({
         />
 
         <header className="relative z-10 flex min-h-full flex-col gap-8">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="min-w-0 flex-1">
+          <div
+            className={cn(
+              "grid gap-8",
+              "lg:grid-cols-[minmax(0,1fr)_auto]",
+              "lg:items-start",
+            )}
+          >
+            <div className="min-w-0">
               {eyebrow && (
                 <div
                   className={cn(
@@ -130,7 +136,15 @@ export function LuminaWorkspaceHeader({
             </div>
 
             {(actions || metrics) && (
-              <div className="flex shrink-0 flex-col items-stretch gap-4 lg:max-w-[46%] lg:items-end">
+              <div
+                className={cn(
+                  "flex flex-col gap-4",
+                  "w-fit",
+                  "max-w-full",
+                  "justify-self-end",
+                  "lg:items-end",
+                )}
+              >
                 {actions && (
                   <div className="flex flex-wrap items-center justify-start gap-2 lg:justify-end">
                     {actions}
@@ -138,7 +152,13 @@ export function LuminaWorkspaceHeader({
                 )}
 
                 {metrics && (
-                  <div className="flex flex-wrap items-stretch justify-start gap-4 lg:justify-end">
+                  <div
+                    className={cn(
+                      "w-full",
+                      "lg:w-auto",
+                      "lg:min-w-[42rem]",
+                    )}
+                  >
                     {metrics}
                   </div>
                 )}

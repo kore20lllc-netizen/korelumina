@@ -6,6 +6,8 @@ const luminaButton = cva(
   [
     "relative inline-flex items-center justify-center gap-2",
     "whitespace-nowrap font-medium tracking-tight",
+    "transform-gpu",
+    "will-change-transform",
     "transition-all duration-300 ease-fluid",
     "select-none active:scale-[0.98]",
     "disabled:pointer-events-none disabled:opacity-50",
@@ -23,7 +25,11 @@ const luminaButton = cva(
           "[background:var(--lumina-surface-selected)]",
           "[box-shadow:var(--lumina-shadow-selected)]",
           "hover:-translate-y-[1px]",
+          "hover:-translate-y-[2px]",
+          "hover:scale-[1.02]",
           "hover:[box-shadow:var(--lumina-shadow-hover)]",
+          "active:translate-y-0",
+          "active:scale-[0.98]",
         ].join(" "),
 
         success: [
@@ -60,7 +66,11 @@ const luminaButton = cva(
           "[background:var(--lumina-surface-panel)]",
           "[box-shadow:var(--lumina-shadow-panel)]",
           "hover:[border-color:var(--lumina-border-emphasis)]",
+          "hover:-translate-y-[2px]",
+          "hover:scale-[1.02]",
           "hover:[box-shadow:var(--lumina-shadow-hover)]",
+          "active:translate-y-0",
+          "active:scale-[0.98]",
         ].join(" "),
 
         glow: [
@@ -72,7 +82,11 @@ const luminaButton = cva(
           "[box-shadow:var(--lumina-shadow-panel)]",
           "hover:[border-color:var(--lumina-border-emphasis)]",
           "hover:[background:var(--lumina-surface-selected)]",
+          "hover:-translate-y-[2px]",
+          "hover:scale-[1.02]",
           "hover:[box-shadow:var(--lumina-shadow-hover)]",
+          "active:translate-y-0",
+          "active:scale-[0.98]",
         ].join(" "),
 
         outline: [
@@ -88,7 +102,11 @@ const luminaButton = cva(
           "text-foreground/80",
           "bg-transparent",
           "hover:text-white",
+          "hover:-translate-y-[2px]",
           "hover:[background:var(--lumina-surface-interactive)]",
+          "hover:[box-shadow:var(--lumina-shadow-hover)]",
+          "active:translate-y-0",
+          "active:scale-[0.98]",
         ].join(" "),
 
         subtle: [

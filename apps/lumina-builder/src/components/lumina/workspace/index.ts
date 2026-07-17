@@ -7,6 +7,7 @@ export * from "./LuminaWorkspacePanel";
 export * from "./LuminaMetricGrid";
 export * from "./LuminaMetricCard";
 export * from "./LuminaWorkspaceToolbar";
+export * from "./LuminaWorkspaceTabs";
 
 export * from "./LuminaStatusBadge";
 export * from "./LuminaEmptyState";
