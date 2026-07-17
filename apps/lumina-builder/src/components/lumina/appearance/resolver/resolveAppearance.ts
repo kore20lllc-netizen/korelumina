@@ -14,6 +14,10 @@ import type {
   LuminaResolvedAppearance,
 } from "./types";
 
+import {
+  resolveMaterial,
+} from "./resolveMaterial";
+
 type Rgb = readonly [
   number,
   number,
@@ -224,6 +228,7 @@ function rgbString(
 function resolveSurfaceOpacity(
   base: number,
   settings: LuminaAppearanceSettings,
+  materialOpacity: number,
 ): number {
   const transparency =
     1 - percent(
@@ -233,9 +238,7 @@ function resolveSurfaceOpacity(
   return clamp(
     base *
       transparency *
-      MATERIAL_OPACITY[
-        settings.material
-      ],
+      materialOpacity,
     0.02,
     settings.material === "solid"
       ? 0.96
@@ -278,6 +281,11 @@ export function resolveAppearance(
       settings.accent
     ];
 
+  const material =
+    resolveMaterial(
+      settings.material,
+    );
+
   const tintStrength =
     percent(
       settings.tintStrength,
@@ -289,9 +297,7 @@ export function resolveAppearance(
         settings.blur,
       ) *
         100 *
-        MATERIAL_BLUR[
-          settings.material
-        ],
+        material.optics.blur,
     );
 
   const radius =
@@ -353,6 +359,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.hero,
             settings,
+            material.optics.opacity,
           ),
         ),
 
@@ -362,6 +369,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.panel,
             settings,
+            material.optics.opacity,
           ),
         ),
 
@@ -371,6 +379,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.card,
             settings,
+            material.optics.opacity,
           ),
         ),
 
@@ -380,6 +389,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.interactive,
             settings,
+            material.optics.opacity,
           ),
         ),
 
@@ -389,6 +399,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.selected,
             settings,
+            material.optics.opacity,
           ),
         ),
 
@@ -398,6 +409,7 @@ export function resolveAppearance(
           resolveSurfaceOpacity(
             opacity.compact,
             settings,
+            material.optics.opacity,
           ),
         ),
     },
@@ -419,24 +431,16 @@ export function resolveAppearance(
 
     material: {
       saturation:
-        `saturate(${MATERIAL_SATURATION[
-          settings.material
-        ]})`,
+        `saturate(${material.optics.saturation})`,
 
       contrast:
-        `contrast(${MATERIAL_CONTRAST[
-          settings.material
-        ]})`,
+        `contrast(${material.optics.contrast})`,
 
       brightness:
-        `brightness(${MATERIAL_BRIGHTNESS[
-          settings.material
-        ]})`,
+        `brightness(${material.optics.brightness})`,
 
       layerOpacity:
-        MATERIAL_LAYER_OPACITY[
-          settings.material
-        ],
+        material.optics.layerOpacity,
     },
 
     border: {
