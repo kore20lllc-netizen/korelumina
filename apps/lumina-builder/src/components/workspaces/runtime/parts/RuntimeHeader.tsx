@@ -13,6 +13,7 @@ import {
 
 import {
   LuminaMetricCard,
+  LuminaMetricGrid,
   LuminaWorkspaceBrand,
   LuminaWorkspaceHero,
 } from "@/components/lumina/workspace";
@@ -238,7 +239,9 @@ export const RuntimeHeader = forwardRef<
         }
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
         metrics={
-          <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:min-w-[34rem]">
+          <LuminaMetricGrid
+            className="grid-cols-1 sm:grid-cols-2"
+          >
             <LuminaMetricCard
               label="Active Services"
               icon={
@@ -362,7 +365,7 @@ export const RuntimeHeader = forwardRef<
                 </div>
               }
             />
-          </div>
+          </LuminaMetricGrid>
         }
       >
         <RuntimeSearchFilters

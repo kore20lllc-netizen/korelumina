@@ -26,7 +26,8 @@ export function LuminaSegmentedControl<T extends string>({
     <div
       role="group"
       className={cn(
-        "inline-flex items-center gap-1 rounded-2xl",
+        "flex w-full flex-wrap items-center gap-1 rounded-2xl",
+        "sm:flex-nowrap",
         "border",
         "[border-color:var(--lumina-border-standard)]",
         "[background:var(--lumina-surface-interactive)]",
@@ -48,8 +49,9 @@ export function LuminaSegmentedControl<T extends string>({
             onClick={() => onValueChange(option.value)}
             className={cn(
               "group relative overflow-hidden",
-              "inline-flex items-center gap-2",
-              "h-9 px-4 rounded-xl",
+              "inline-flex min-w-0 flex-1 items-center justify-center gap-2",
+              "sm:flex-none",
+              "h-9 rounded-xl px-4 whitespace-nowrap",
               "text-[11px] font-medium uppercase tracking-[0.16em]",
               "transition-all duration-200",
               "border",

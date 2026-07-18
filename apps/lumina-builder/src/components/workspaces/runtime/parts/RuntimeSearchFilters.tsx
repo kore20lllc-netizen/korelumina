@@ -60,7 +60,8 @@ export const RuntimeSearchFilters = forwardRef<
     return (
       <div
         className={cn(
-          "flex flex-col lg:flex-row lg:items-end gap-4",
+          "flex flex-col gap-6",
+          "xl:flex-row xl:items-end xl:justify-between",
           className,
         )}
       >
@@ -78,7 +79,7 @@ export const RuntimeSearchFilters = forwardRef<
               value={query}
               onChange={(e) => onQuery(e.target.value)}
               placeholder="Search runtime services..."
-              className="pl-10 pr-14 h-11 rounded-xl"
+              className="h-12 rounded-xl pl-10 pr-14"
             />
 
             {query && (
@@ -93,20 +94,39 @@ export const RuntimeSearchFilters = forwardRef<
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
-          <LuminaSegmentedControl
+        <div
+          className={cn(
+            "grid gap-5",
+            "sm:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]",
+            "xl:flex-shrink-0",
+          )}
+        >
+          <div>
+            <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Environment
+            </div>
+
+            <LuminaSegmentedControl
             aria-label="Environment"
             value={env}
             options={ENV_OPTIONS}
             onValueChange={onEnv}
           />
 
-          <LuminaSegmentedControl
+          </div>
+
+          <div>
+            <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Health
+            </div>
+
+            <LuminaSegmentedControl
             aria-label="Health"
             value={health}
             options={HEALTH_OPTIONS}
             onValueChange={onHealth}
           />
+          </div>
         </div>
       </div>
     );

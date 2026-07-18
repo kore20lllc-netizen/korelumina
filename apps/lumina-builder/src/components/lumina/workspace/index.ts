@@ -18,3 +18,5 @@ export * from "./primitives";
 
 export * from "./LuminaServiceCard";
 export * from "./LuminaWorkspaceBrand";
+
+export * from "./LuminaCompositionSurface";
