@@ -62,24 +62,6 @@ export function LuminaCompositionSurface({
         <div
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute -left-20 -top-24 z-0",
-            "h-72 w-72 rounded-full blur-3xl",
-            "[background:rgba(124,92,255,0.27)]",
-          )}
-        />
-
-        <div
-          aria-hidden="true"
-          className={cn(
-            "pointer-events-none absolute -bottom-32 -right-16 z-0",
-            "h-72 w-72 rounded-full blur-3xl",
-            "[background:rgba(34,211,238,0.21)]",
-          )}
-        />
-
-        <div
-          aria-hidden="true"
-          className={cn(
             "pointer-events-none absolute left-1/2 top-[42%] z-0",
             "h-64 w-[34rem] max-w-[86%]",
             "-translate-x-1/2 -translate-y-1/2",
