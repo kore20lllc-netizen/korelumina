@@ -3,13 +3,7 @@ import { ExecutiveMetricCard } from "./ExecutiveMetricCard";
 
 export function ExecutiveMetrics() {
   return (
-    <div
-      className="
-        grid
-        gap-4
-        sm:grid-cols-3
-      "
-    >
+    <div className="grid min-w-0 gap-4">
       {RIBBON_METRICS.map((metric) => (
         <ExecutiveMetricCard
           key={metric.id}

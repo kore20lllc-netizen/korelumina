@@ -14,6 +14,8 @@ export function ExecutiveRibbon() {
       className={[
         "group",
         "relative",
+        "h-full",
+        "min-w-0",
         "overflow-hidden",
         radius.panel,
         border.hero,
@@ -25,7 +27,9 @@ export function ExecutiveRibbon() {
       ].join(" ")}
     >
       <div
+        aria-hidden="true"
         className={[
+          "pointer-events-none",
           "absolute",
           "inset-0",
           gradients.executive,
@@ -37,7 +41,7 @@ export function ExecutiveRibbon() {
         className="
           pointer-events-none
           absolute
-          inset-x-[8%]
+          inset-x-[10%]
           top-0
           h-px
           [background:linear-gradient(90deg,transparent,rgba(247,215,116,.95),rgba(255,255,255,.92),rgba(90,200,255,.90),transparent)]
@@ -50,28 +54,18 @@ export function ExecutiveRibbon() {
           relative
           z-10
           flex
-          min-h-[172px]
+          h-full
+          min-w-0
           flex-col
-          justify-between
-          gap-8
           px-8
           py-8
-          lg:flex-row
-          lg:items-center
         "
       >
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0">
           <ExecutiveIdentity />
         </div>
 
-        <div
-          className="
-            relative
-            z-10
-            w-full
-            lg:max-w-[720px]
-          "
-        >
+        <div className="mt-8 min-w-0">
           <ExecutiveMetrics />
         </div>
       </div>

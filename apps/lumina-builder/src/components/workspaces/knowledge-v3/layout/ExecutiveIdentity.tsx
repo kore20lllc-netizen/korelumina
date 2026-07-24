@@ -49,19 +49,27 @@ export function ExecutiveIdentity() {
 
       <h1
         className="
-          bg-gradient-to-r
-          from-[#F7D774]
-          via-white
-          to-[#67D4FF]
-          bg-clip-text
           text-4xl
           font-black
           tracking-tight
-          text-transparent
           sm:text-5xl
         "
       >
-        Knowledge Operations
+        <span className="text-gradient-lumina">
+          Knowledge
+        </span>{" "}
+        <span
+          className="
+            bg-gradient-to-r
+            from-[#D9A441]
+            via-[#C98212]
+            to-[#9C5F08]
+            bg-clip-text
+            text-transparent
+          "
+        >
+          Operations
+        </span>
       </h1>
 
       <p
