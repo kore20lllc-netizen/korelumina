@@ -1,8 +1,29 @@
-import { border, glass, radius, shadow } from "../theme/appearance";
+import { KnowledgeExecutiveCard } from "../primitives/KnowledgeExecutiveCard";
 import type { RibbonMetric } from "./ExecutiveRibbon.metrics";
 
 interface ExecutiveMetricCardProps {
   metric: RibbonMetric;
+}
+
+type AccentKey =
+  | "slate"
+  | "cyan"
+  | "emerald"
+  | "violet"
+  | "amber"
+  | "rose"
+  | "blue"
+  | "orange";
+
+function resolveAccentKey(accent: string): AccentKey {
+  if (accent.includes("amber")) return "amber";
+  if (accent.includes("emerald")) return "emerald";
+  if (accent.includes("violet")) return "violet";
+  if (accent.includes("rose")) return "rose";
+  if (accent.includes("orange")) return "orange";
+  if (accent.includes("blue")) return "blue";
+  if (accent.includes("slate")) return "slate";
+  return "cyan";
 }
 
 export function ExecutiveMetricCard({
@@ -11,46 +32,12 @@ export function ExecutiveMetricCard({
   const Icon = metric.icon;
 
   return (
-    <section
-      className={[
-        "relative",
-        "overflow-hidden",
-        radius.card,
-        glass.card,
-        border.subtle,
-        shadow.soft,
-        "px-5",
-        "py-4",
-        "transition-all",
-        "duration-300",
-        "hover:-translate-y-1",
-        "hover:border-white/16",
-      ].join(" ")}
-    >
-      <div
-        aria-hidden="true"
-        className="
-          absolute
-          inset-0
-          opacity-0
-          transition-opacity
-          duration-300
-          group-hover:opacity-100
-          [background:radial-gradient(circle_at_top_right,rgba(255,255,255,.08),transparent_55%)]
-        "
-      />
-
-      <div className="relative flex items-start justify-between">
-        <div className="min-w-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/52">
-            {metric.label}
-          </p>
-
-          <p className="mt-2 text-2xl font-bold tracking-tight text-white">
-            {metric.value}
-          </p>
-        </div>
-
+    <KnowledgeExecutiveCard
+      title={metric.label}
+      value={metric.value}
+      description={metric.detail}
+      accentKey={resolveAccentKey(metric.accent)}
+      icon={
         <span
           className={[
             "flex",
@@ -71,11 +58,7 @@ export function ExecutiveMetricCard({
             ].join(" ")}
           />
         </span>
-      </div>
-
-      <p className="relative mt-4 text-[11px] leading-5 text-white/46">
-        {metric.detail}
-      </p>
-    </section>
+      }
+    />
   );
 }

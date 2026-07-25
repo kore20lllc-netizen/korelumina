@@ -1,12 +1,11 @@
 import {
-  border,
-  glass,
+  executiveMaterial,
   gradients,
-  radius,
-  shadow,
+  lighting,
 } from "../theme/appearance";
 import { ExecutiveIdentity } from "./ExecutiveIdentity";
 import { ExecutiveMetrics } from "./ExecutiveMetrics";
+import { ExecutiveOperationsDeck } from "./ExecutiveOperationsDeck";
 
 export function ExecutiveRibbon() {
   return (
@@ -17,13 +16,10 @@ export function ExecutiveRibbon() {
         "h-full",
         "min-w-0",
         "overflow-hidden",
-        radius.panel,
-        border.hero,
-        glass.hero,
-        shadow.floating,
-        "ring-1",
-        "ring-inset",
-        "ring-white/10",
+        executiveMaterial.hero.radius,
+        executiveMaterial.hero.border,
+        executiveMaterial.hero.glass,
+        executiveMaterial.hero.shadow,
       ].join(" ")}
     >
       <div
@@ -38,15 +34,7 @@ export function ExecutiveRibbon() {
 
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-x-[10%]
-          top-0
-          h-px
-          [background:linear-gradient(90deg,transparent,rgba(247,215,116,.95),rgba(255,255,255,.92),rgba(90,200,255,.90),transparent)]
-          [box-shadow:0_0_44px_rgba(90,200,255,.45),0_0_68px_rgba(247,215,116,.22)]
-        "
+        className={lighting.executiveReflection}
       />
 
       <div
@@ -65,7 +53,11 @@ export function ExecutiveRibbon() {
           <ExecutiveIdentity />
         </div>
 
-        <div className="mt-8 min-w-0">
+        <div className="mt-7 min-w-0">
+          <ExecutiveOperationsDeck />
+        </div>
+
+        <div className="mt-7 min-w-0">
           <ExecutiveMetrics />
         </div>
       </div>

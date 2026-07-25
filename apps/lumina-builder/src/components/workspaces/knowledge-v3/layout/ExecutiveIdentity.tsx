@@ -11,15 +11,15 @@ export function ExecutiveIdentity() {
             gap-2
             rounded-full
             border
-            border-cyan-300/20
-            bg-cyan-400/10
+            border-cyan-300/10
+            bg-cyan-400/5
             px-3.5
             py-1.5
             text-[10px]
             font-semibold
             uppercase
-            tracking-[0.22em]
-            text-cyan-100
+            tracking-[0.28em]
+            text-cyan-100/80
             backdrop-blur-xl
           "
         >
@@ -31,15 +31,15 @@ export function ExecutiveIdentity() {
           className="
             rounded-full
             border
-            border-emerald-300/20
-            bg-emerald-400/10
+            border-emerald-300/10
+            bg-emerald-400/5
             px-3.5
             py-1.5
             text-[10px]
             font-semibold
             uppercase
-            tracking-[0.18em]
-            text-emerald-100
+            tracking-[0.24em]
+            text-emerald-100/80
             backdrop-blur-xl
           "
         >
@@ -49,10 +49,10 @@ export function ExecutiveIdentity() {
 
       <h1
         className="
-          text-4xl
+          text-5xl
           font-black
-          tracking-tight
-          sm:text-5xl
+          tracking-[-0.045em]
+          sm:text-6xl
         "
       >
         <span className="text-gradient-lumina">
@@ -62,8 +62,8 @@ export function ExecutiveIdentity() {
           className="
             bg-gradient-to-r
             from-[#D9A441]
-            via-[#C98212]
-            to-[#9C5F08]
+            via-[#B97A18]
+            to-[#7A4B05]
             bg-clip-text
             text-transparent
           "
@@ -75,10 +75,10 @@ export function ExecutiveIdentity() {
       <p
         className="
           mt-5
-          max-w-3xl
-          text-[15px]
-          leading-8
-          text-white/70
+          max-w-2xl
+          text-base
+          leading-7
+          text-white/78
         "
       >
         Production environment for institutional knowledge
