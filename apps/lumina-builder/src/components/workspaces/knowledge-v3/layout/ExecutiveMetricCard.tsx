@@ -52,8 +52,8 @@ export function ExecutiveMetricCard({
         >
           <Icon
             className={[
-              "h-5",
-              "w-5",
+              "h-4.5",
+              "w-4.5",
               metric.accent,
             ].join(" ")}
           />

@@ -46,7 +46,7 @@ export function ExecutiveRibbon() {
           min-w-0
           flex-col
           px-8
-          py-8
+          py-9
         "
       >
         <div className="min-w-0">

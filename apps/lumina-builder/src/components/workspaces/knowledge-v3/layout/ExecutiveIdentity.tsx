@@ -3,7 +3,7 @@ import { Radio } from "lucide-react";
 export function ExecutiveIdentity() {
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+      <div className="mb-5 flex flex-wrap items-center gap-2.5">
         <span
           className="
             inline-flex
@@ -74,7 +74,7 @@ export function ExecutiveIdentity() {
 
       <p
         className="
-          mt-5
+          mt-6
           max-w-2xl
           text-base
           leading-7
