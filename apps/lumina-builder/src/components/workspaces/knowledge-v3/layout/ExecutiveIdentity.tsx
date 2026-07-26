@@ -9,7 +9,7 @@ export function ExecutiveIdentity() {
             inline-flex
             items-center
             gap-2
-            rounded-full
+            rounded-full shadow-[0_18px_48px_rgba(15,23,42,.30)]
             border
             border-cyan-300/10
             bg-cyan-400/5

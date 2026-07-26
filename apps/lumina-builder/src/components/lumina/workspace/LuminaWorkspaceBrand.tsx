@@ -85,7 +85,6 @@ export function LuminaWorkspaceBrand({
       <h1
         className={cn(
           "mt-3 text-4xl font-bold tracking-tight",
-          "text-gold",
           workspaceClassName,
         )}
       >

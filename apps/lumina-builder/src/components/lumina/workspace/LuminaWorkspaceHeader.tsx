@@ -49,7 +49,7 @@ export function LuminaWorkspaceHeader({
         <div
           className={cn(
             "grid gap-8",
-            "lg:grid-cols-[minmax(0,1fr)_auto]",
+            "lg:grid-cols-[minmax(0,1fr)_minmax(24rem,40rem)]",
             "lg:items-start",
           )}
         >
@@ -84,8 +84,8 @@ export function LuminaWorkspaceHeader({
           {(actions || metrics) && (
             <div
               className={cn(
-                "flex w-full min-w-0 flex-col gap-4",
-                "lg:w-full",
+                "flex w-full min-w-0 flex-col gap-5",
+                "lg:w-full","lg:max-w-[40rem]",
                 "lg:items-stretch",
               )}
             >
@@ -112,7 +112,7 @@ export function LuminaWorkspaceHeader({
         {children && (
           <div
             className={cn(
-              "mt-auto border-t pt-6",
+              "mt-auto border-t pt-8",
               "[border-color:var(--lumina-border-standard)]",
             )}
           >

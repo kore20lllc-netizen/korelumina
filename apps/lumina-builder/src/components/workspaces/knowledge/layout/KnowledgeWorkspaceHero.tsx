@@ -90,7 +90,18 @@ export function KnowledgeWorkspaceHero({
       eyebrow="Master OS · Internal"
       title={
         <LuminaWorkspaceBrand
-          workspace="Knowledge Operations"
+          workspace={
+              <>
+                <span className="text-gradient-lumina">
+                  Knowledge
+                </span>{" "}
+                <span
+                  className="bg-gradient-to-r from-[#D9A441] via-[#C98212] to-[#9C5F08] bg-clip-text text-transparent"
+                >
+                  Operations
+                </span>
+              </>
+            }
           tagline="Evidence • Learn • Reason • Govern"
           className="min-w-0 max-w-2xl"
         />
@@ -112,7 +123,7 @@ export function KnowledgeWorkspaceHero({
             value={formatNumber(summary?.totalEvidence)}
             footer={`Stage: ${acquisition?.stage ?? "Idle"}`}
             icon={
-              <Database className="h-5 w-5 text-cyan-300"/>
+              <Database className="h-5 w-5 text-cyan"/>
             }
           />
 
@@ -121,7 +132,7 @@ export function KnowledgeWorkspaceHero({
             value={formatNumber(knowledge?.canonicalItems)}
             footer={`${formatNumber(knowledge?.candidateItems)} awaiting governance`}
             icon={
-              <BookOpenCheck className="h-5 w-5 text-violet-300"/>
+              <BookOpenCheck className="h-5 w-5 text-violet"/>
             }
           />
 

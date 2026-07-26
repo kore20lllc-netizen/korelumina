@@ -331,7 +331,7 @@ export function RuntimeDiagnosticsWorkspace() {
                     ? "font-medium text-emerald-300"
                     : metrics.totals.runtimes > 0
                     ? "font-medium text-amber-300"
-                    : "font-medium text-cyan-300"
+                    : "font-medium text-cyan"
                 }
               >
                 {metrics.totals.error > 0

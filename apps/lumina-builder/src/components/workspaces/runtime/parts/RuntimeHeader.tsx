@@ -18,9 +18,12 @@ import {
 } from "@/components/ui/input";
 
 import {
-  LuminaMetricCard,
   LuminaWorkspaceHero,
 } from "@/components/lumina/workspace";
+
+import {
+  RuntimeMetricTile,
+} from "./RuntimeMetricTile";
 
 import {
   LuminaBrand,
@@ -73,8 +76,8 @@ const HEALTH_TEXT_CLASS: Record<
   string
 > = {
   healthy: "text-emerald-300",
-  degraded: "text-amber-300",
-  critical: "text-rose-300",
+  degraded: "text-gold",
+  critical: "text-rose",
   offline: "text-muted-foreground",
 };
 
@@ -111,16 +114,16 @@ function formatUpdatedTime(
     return "—";
   }
 
-  return new Date(
-    timestamp,
-  ).toLocaleTimeString(
-    [],
-    {
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-    },
-  );
+  
+return new Date(
+  timestamp,
+).toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+});
+
 }
 
 function formatRelativeTime(
@@ -245,8 +248,8 @@ export const RuntimeHeader = forwardRef<
 
 
     const searchControl = (
-      <div className="mt-6 max-w-2xl">
-        <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+      <div className="mt-8 max-w-2xl">
+        <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           Search
         </div>
 
@@ -299,14 +302,14 @@ export const RuntimeHeader = forwardRef<
 
             <h2
               className={[
-                "mt-3 text-4xl font-bold tracking-tight",
+                "mt-4 text-[2.75rem] font-bold leading-none tracking-[-0.04em]",
                 runtimeAccent.text,
               ].join(" ")}
             >
               Runtime Operations
             </h2>
 
-            <div className="mt-4 text-xs font-semibold uppercase tracking-[0.42em] text-muted-foreground">
+            <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.30em] text-gold/80">
               Observe • Operate • Recover
             </div>
 
@@ -316,11 +319,11 @@ export const RuntimeHeader = forwardRef<
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
         metrics={
           <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:min-w-[34rem]">
-            <LuminaMetricCard
+            <RuntimeMetricTile
               label="Active Services"
               icon={
                 <div className="relative">
-                  <Cpu className="h-5 w-5 text-cyan-300" />
+                  <Cpu className="h-5 w-5 text-cyan" />
 
                   {overall.running > 0 && (
                     <span
@@ -336,12 +339,12 @@ export const RuntimeHeader = forwardRef<
                 </div>
               }
               value={
-                <div className="flex items-end gap-2">
-                  <span className="text-4xl font-bold tabular-nums">
+                <div className="flex items-end gap-3">
+                  <span className="text-5xl font-bold leading-none tracking-[-0.04em] tabular-nums">
                     {overall.running}
                   </span>
 
-                  <span className="pb-1 text-base font-medium text-muted-foreground">
+                  <span className="pb-1.5 text-lg font-medium text-muted-foreground">
                     / {overall.total}
                   </span>
                 </div>
@@ -355,10 +358,10 @@ export const RuntimeHeader = forwardRef<
               }
             />
 
-            <LuminaMetricCard
+            <RuntimeMetricTile
               label="Updated"
               icon={
-                <Clock3 className="h-5 w-5 text-violet-300" />
+                <Clock3 className="h-5 w-5 text-violet" />
               }
               value={
                 <div className="text-xl font-semibold tabular-nums">
@@ -372,7 +375,7 @@ export const RuntimeHeader = forwardRef<
               }
             />
 
-            <LuminaMetricCard
+            <RuntimeMetricTile
               label="Runtime Health"
               icon={
                 <HeartPulse
@@ -421,10 +424,10 @@ export const RuntimeHeader = forwardRef<
               }
             />
 
-            <LuminaMetricCard
+            <RuntimeMetricTile
               label="Average CPU"
               icon={
-                <Activity className="h-5 w-5 text-amber-300" />
+                <Activity className="h-5 w-5 text-gold" />
               }
               value={
                 <div className="text-3xl font-bold tabular-nums">

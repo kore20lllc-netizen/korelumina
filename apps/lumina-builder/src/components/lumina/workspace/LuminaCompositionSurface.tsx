@@ -30,7 +30,7 @@ export function LuminaCompositionSurface({
         className={cn(
           "pointer-events-none absolute -inset-6",
           "rounded-[calc(var(--lumina-radius-surface)*1.35)]",
-          "opacity-80 blur-3xl",
+          "opacity-34 blur-3xl",
           "[background:radial-gradient(circle_at_14%_20%,rgba(124,92,255,0.43),transparent_40%),radial-gradient(circle_at_86%_72%,rgba(34,211,238,0.31),transparent_38%),radial-gradient(circle_at_48%_110%,rgba(230,167,42,0.28),transparent_44%)]",
         )}
       />

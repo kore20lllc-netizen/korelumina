@@ -39,8 +39,10 @@ const AdminWorkspace = lazy(() =>
   })),
 );
 
-const KnowledgeOperationsWorkspace = lazy(() =>
-  import("@/components/workspaces/KnowledgeOperationsWorkspace"),
+const KnowledgeOperationsV3Workspace = lazy(() =>
+  import(
+    "@/components/workspaces/knowledge-v3"
+  ),
 );
 
 const DesignerWorkspace = lazy(() =>
@@ -77,6 +79,14 @@ const RuntimeDiagnosticsWorkspace = lazy(() =>
 const RuntimeOperationsWorkspace = lazy(() =>
   import(
     "@/components/workspaces/runtime/RuntimeOperationsWorkspace"
+  ).then((m) => ({
+    default: m.RuntimeOperationsWorkspace,
+  })),
+);
+
+const RuntimeOperationsWorkspacePreview = lazy(() =>
+  import(
+    "@/components/workspaces/runtime-v2/RuntimeOperationsWorkspace"
   ).then((m) => ({
     default: m.RuntimeOperationsWorkspace,
   })),
@@ -264,7 +274,7 @@ function Router() {
     return (
       <Shell blobs="ambient">
         <Suspense fallback={<LoadingView />}>
-          <KnowledgeOperationsWorkspace
+          <KnowledgeOperationsV3Workspace
             setView={setView}
           />
         </Suspense>
@@ -283,6 +293,16 @@ if (view === "deployment-diagnostics") {
   }
 
 
+
+  if (view === "runtime-v2-reference") {
+    return (
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <RuntimeOperationsWorkspacePreview />
+        </Suspense>
+      </Shell>
+    );
+  }
 
   if (view === "runtime-operations") {
     return (

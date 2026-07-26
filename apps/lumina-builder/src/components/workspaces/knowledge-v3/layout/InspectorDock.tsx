@@ -6,6 +6,14 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import {
+  border,
+  glass,
+  radius,
+  shadow,
+  executiveMaterial
+} from "../theme/appearance";
+
 interface Section {
   id: string;
   title: string;
@@ -42,23 +50,25 @@ const SECTIONS: Section[] = [
 export function InspectorDock() {
   return (
     <section
-      className="
-        flex
-        h-full
-        flex-col
-        overflow-hidden
-        rounded-[28px]
-        border
-        border-white/10
-        bg-slate-950/42
-        shadow-[0_18px_60px_rgba(0,0,0,.32),0_1px_0_rgba(255,255,255,.05)_inset]
-        backdrop-blur-2xl
-      "
+      className={[
+        "flex",
+        "h-full",
+        "flex-col",
+        "overflow-hidden",
+        executiveMaterial.secondary.radius,
+        executiveMaterial.secondary.border,
+        executiveMaterial.secondary.glass,
+        executiveMaterial.secondary.shadow,
+        "ring-1",
+        "ring-inset",
+        "ring-cyan-300/18",
+        "shadow-[0_0_48px_rgba(56,189,248,.12),0_28px_72px_rgba(0,0,0,.36)]",
+      ].join(" ")}
     >
       <header
         className="
           border-b
-          border-white/8
+          border-white/[0.11]
           px-5
           py-5
         "
@@ -107,31 +117,32 @@ export function InspectorDock() {
       <div
         className="
           flex-1
-          overflow-y-auto
+          
           px-4
           py-4
         "
       >
         <div
-          className="
-            rounded-2xl
-            border
-            border-dashed
-            border-white/10
-            bg-white/[0.03]
-            p-5
-          "
+          className={[
+            "p-5",
+            "border-dashed",
+            executiveMaterial.tertiary.radius,
+            executiveMaterial.tertiary.border,
+            executiveMaterial.tertiary.glass,
+            executiveMaterial.tertiary.shadow,
+          ].join(" ")}
         >
           <div
-            className="
-              flex
-              h-12
-              w-12
-              items-center
-              justify-center
-              rounded-2xl
-              bg-white/[0.05]
-            "
+            className={[
+              "flex",
+              "h-12",
+              "w-12",
+              "items-center",
+              "justify-center",
+              executiveMaterial.chip.radius,
+              executiveMaterial.chip.glass,
+              executiveMaterial.chip.border,
+            ].join(" ")}
           >
             <Eye className="h-6 w-6 text-white/60" />
           </div>
@@ -149,7 +160,7 @@ export function InspectorDock() {
 
           <p
             className="
-              mt-2
+              mt-3
               text-sm
               leading-6
               text-white/45
@@ -161,19 +172,20 @@ export function InspectorDock() {
           </p>
         </div>
 
-        <div className="mt-6 space-y-3">
+        <div className="mt-8 space-y-4">
           {SECTIONS.map((section) => (
             <section
               key={section.id}
-              className="
-                rounded-2xl
-                border
-                border-white/8
-                bg-white/[0.04]
-                p-4
-              "
+              className={[
+                "px-5",
+                "py-5",
+                executiveMaterial.tertiary.radius,
+                executiveMaterial.tertiary.border,
+                executiveMaterial.tertiary.glass,
+                executiveMaterial.tertiary.shadow,
+              ].join(" ")}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Info className="h-4 w-4 text-cyan-200/70" />
 
                 <h4
@@ -189,7 +201,7 @@ export function InspectorDock() {
 
               <p
                 className="
-                  mt-2
+                  mt-3
                   text-xs
                   leading-6
                   text-white/45
@@ -205,7 +217,7 @@ export function InspectorDock() {
             <footer
         className="
           border-t
-          border-white/8
+          border-white/[0.11]
           px-5
           py-4
         "
@@ -227,7 +239,7 @@ export function InspectorDock() {
 
         <div
           className="
-            mt-3
+            mt-4
             flex
             items-center
             gap-2

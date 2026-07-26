@@ -1,4 +1,7 @@
 import type { LucideIcon } from "lucide-react";
+
+
+import { cn } from "@/lib/utils";
 import {
   Activity,
   Binary,
@@ -7,6 +10,11 @@ import {
   FileSearch,
   GitBranch,
 } from "lucide-react";
+
+import {
+  executiveMaterial,
+  iconSurface,
+} from "../theme/appearance";
 
 interface ActivityItem {
   id: string;
@@ -51,39 +59,33 @@ const ITEMS: ActivityItem[] = [
 export function ActivityRail() {
   return (
     <section
-      className="
-        flex
-        h-full
-        flex-col
-        rounded-[28px]
-        border
-        border-white/10
-        bg-slate-950/42
-        shadow-[0_18px_60px_rgba(0,0,0,.32),0_1px_0_rgba(255,255,255,.05)_inset]
-        backdrop-blur-2xl
-      "
+      className={cn(
+        executiveMaterial.primary.radius,
+        executiveMaterial.primary.border,
+        executiveMaterial.primary.glass,
+        executiveMaterial.primary.shadow,
+        "ring-1",
+        "ring-inset",
+        "ring-cyan-300/18",
+        "shadow-[0_0_48px_rgba(56,189,248,.12),0_28px_72px_rgba(0,0,0,.36)]",
+        "flex h-full flex-col",
+      )}
     >
       <header
         className="
           border-b
-          border-white/8
+          border-white/[0.10]
           px-5
           py-5
         "
       >
         <div className="flex items-center gap-3">
           <span
-            className="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-2xl
-              border
-              border-cyan-300/15
-              bg-cyan-400/10
-            "
+            className={cn(
+              executiveMaterial.chip.radius,
+              iconSurface.cyan,
+              "flex h-10 w-10 items-center justify-center border",
+            )}
           >
             <Activity className="h-5 w-5 text-cyan-100" />
           </span>
@@ -114,7 +116,7 @@ export function ActivityRail() {
       <div
         className="
           flex-1
-          overflow-y-auto
+          
           px-4
           py-4
         "
@@ -126,33 +128,22 @@ export function ActivityRail() {
             return (
               <article
                 key={item.id}
-                className="
-                  group
-                  rounded-2xl
-                  border
-                  border-white/8
-                  bg-white/[0.04]
-                  p-4
-                  transition-all
-                  duration-200
-                  hover:border-white/15
-                  hover:bg-white/[0.07]
-                "
+                className={cn(
+                  executiveMaterial.tertiary.radius,
+                  executiveMaterial.tertiary.border,
+                  executiveMaterial.tertiary.glass,
+                  executiveMaterial.tertiary.shadow,
+                  "group p-4 transition-all duration-200 hover:border-white/15 hover:bg-white/[0.07]",
+                )}
               >
                 <div className="flex items-start gap-3">
                   <span
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-xl
-                      border
-                      border-white/8
-                      bg-white/[0.05]
-                    "
+                    className={cn(
+                      executiveMaterial.chip.radius,
+                      executiveMaterial.chip.border,
+                      executiveMaterial.chip.glass,
+                      "flex h-10 w-10 shrink-0 items-center justify-center",
+                    )}
                   >
                     <Icon className="h-5 w-5 text-white/65" />
                   </span>
@@ -189,7 +180,7 @@ export function ActivityRail() {
       <footer
         className="
           border-t
-          border-white/8
+          border-white/[0.10]
           px-5
           py-4
         "

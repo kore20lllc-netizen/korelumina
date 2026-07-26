@@ -213,7 +213,7 @@ const interactiveByVariant: Record<
 };
 
 const interactionClasses = cn(
-  "relative isolate",
+  "relative isolate","overflow-hidden",
 
   "before:pointer-events-none",
   "before:absolute",
@@ -224,13 +224,13 @@ const interactionClasses = cn(
   "before:[background:var(--lumina-highlight-overlay)]",
   luminaMotion.reflection,
 
-  "hover:-translate-y-1",
+  "transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out","hover:-translate-y-1",
   "hover:[border-color:var(--lumina-border-emphasis)]",
   "hover:[background:var(--lumina-surface-interactive)]",
-  "hover:[box-shadow:var(--lumina-shadow-hover)]",
+  "hover:[box-shadow:var(--lumina-shadow-hover)]","hover:before:duration-300",
   "hover:before:opacity-100",
 
-  "active:-translate-y-0.5",
+  "active:scale-[0.995]","active:-translate-y-0.5",
   "active:[box-shadow:var(--lumina-shadow-selected)]",
   luminaMotion.press,
 

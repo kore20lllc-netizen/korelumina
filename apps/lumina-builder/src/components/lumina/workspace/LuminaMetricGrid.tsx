@@ -14,7 +14,7 @@ export function LuminaMetricGrid({
   return (
     <div
       className={cn(
-        "grid items-stretch gap-4 lg:gap-5",
+        "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-stretch gap-4 lg:gap-5",
         className,
       )}
     >

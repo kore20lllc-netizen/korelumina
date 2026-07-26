@@ -23,7 +23,7 @@ export function LuminaBackground({
         aria-hidden
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(${luminaBackground})`,
+          backgroundImage: `url(${backgroundImage})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
