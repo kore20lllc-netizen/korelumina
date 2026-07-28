@@ -93,33 +93,38 @@ export function WorkspaceShell({
 
       <div
         className="
-          relative z-10 grid flex-none
-          grid-cols-1 gap-6 px-6 pb-6 pt-5
-          lg:grid-cols-[240px_minmax(0,1fr)_340px]
-          lg:px-6 lg:pb-6
-          xl:grid-cols-[260px_minmax(0,1fr)_360px]
+          relative z-10
+          flex flex-col
+          gap-6
+          px-6 pb-6 pt-5
         "
       >
-        <aside
-          aria-label="Knowledge production activity"
-          className="hidden min-h-0 lg:block"
-        >
-          {activityRail}
-        </aside>
-
         <main
           aria-label="Knowledge production canvas"
-          className="min-h-0 min-w-0"
+          className="min-w-0"
         >
           {spatialCanvas}
         </main>
 
-        <aside
-          aria-label="Knowledge inspector"
-          className="hidden min-h-0 lg:block"
+        <section
+          className="
+            grid
+            gap-6
+            lg:grid-cols-[minmax(0,1fr)_360px]
+          "
         >
-          {inspectorDock}
-        </aside>
+          <section
+            aria-label="Knowledge production activity"
+          >
+            {activityRail}
+          </section>
+
+          <aside
+            aria-label="Knowledge inspector"
+          >
+            {inspectorDock}
+          </aside>
+        </section>
       </div>
 
       {statusLayer ? (

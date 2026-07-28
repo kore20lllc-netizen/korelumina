@@ -1,3 +1,5 @@
+import { KnowledgeCanvas } from "./KnowledgeCanvas";
+
 import {
   Focus,
   Maximize2,
@@ -53,81 +55,7 @@ export function SpatialCanvas() {
         {/* Viewport */}
         <div className="absolute inset-0">
           {/* Content Layer */}
-          <div
-            className="
-              flex
-              h-full
-              items-center
-              justify-center
-              px-8
-            "
-          >
-            <div className="max-w-lg text-center">
-              <div
-                className="
-                  relative
-                  mx-auto
-                  flex
-                  h-28
-                  w-28
-                  items-center
-                  justify-center
-                  rounded-[32px]
-                  border border-white/12 ring-1 ring-inset ring-white/6
-                  bg-white/[0.05]
-                "
-              >
-                <div
-                  className="
-                    absolute
-                    inset-3
-                    rounded-[24px]
-                    border border-cyan-300/10
-                    bg-gradient-to-br
-                    from-blue-500/10
-                    via-violet-500/10
-                    to-amber-500/10
-                  "
-                />
-
-                <Focus
-                  className="
-                    relative
-                    h-8
-                    w-8
-                    text-amber-300
-                    drop-shadow-[0_0_18px_rgba(245,158,11,.25)]
-                  "
-                />
-              </div>
-
-              <h2
-                className="
-                  mt-8
-                  text-2xl
-                  font-semibold
-                  tracking-[-0.03em]
-                  text-white
-                "
-              >
-                Spatial Knowledge Environment
-              </h2>
-
-              <p
-                className="
-                  mt-3
-                  text-sm
-                  leading-7
-                  text-white/45
-                "
-              >
-                This persistent spatial surface will host evidence,
-                knowledge objects, provenance, validation,
-                organizational memory and compiler output without
-                requiring structural redesign.
-              </p>
-            </div>
-          </div>
+          <KnowledgeCanvas />
 
           {/* Overlay Layer */}
           <div
