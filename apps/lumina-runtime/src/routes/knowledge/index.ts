@@ -4,6 +4,10 @@ import {
   knowledgeOperationsService,
 } from "../../knowledge-operations/index.js";
 
+import {
+  listCapabilityProviders,
+} from "../../knowledge/capability/index.js";
+
 const router = Router();
 
 router.get(
@@ -12,6 +16,22 @@ router.get(
     res.json(
       knowledgeOperationsService.getSnapshot(),
     );
+  },
+);
+
+
+
+router.get(
+  "/capabilities",
+  (_req, res) => {
+    res.json({
+      ok: true,
+      providers: listCapabilityProviders().map(
+        (provider) => ({
+          id: provider.id,
+        }),
+      ),
+    });
   },
 );
 

@@ -34,8 +34,11 @@ import { recoverPersistedRuntimes } from "./runtime/recovery.js";
 import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
+import { registerBuiltinCapabilityProviders } from "./knowledge/capability/index.js";
 
 const app = express();
+registerBuiltinCapabilityProviders();
+
 
 app.use(cors());
 app.use(express.json());

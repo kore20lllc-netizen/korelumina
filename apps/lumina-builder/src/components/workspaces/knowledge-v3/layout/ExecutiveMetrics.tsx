@@ -1,10 +1,13 @@
-import { getExecutiveRibbonMetrics } from "./ExecutiveRibbon.metrics";
 import { ExecutiveMetricCard } from "./ExecutiveMetricCard";
+import { useExecutiveRibbon } from "./ExecutiveRibbonProvider";
 
 export function ExecutiveMetrics() {
+  const { metrics } =
+    useExecutiveRibbon();
+
   return (
     <div className="grid min-w-0 gap-4">
-      {getExecutiveRibbonMetrics().map((metric) => (
+      {metrics.map((metric) => (
         <ExecutiveMetricCard
           key={metric.id}
           metric={metric}

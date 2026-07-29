@@ -36,3 +36,5 @@ export type {
 export {
   validateCapabilityPipelineResult,
 } from "./CapabilityValidation.js";
+
+export * from "./registerBuiltinProviders.js";
