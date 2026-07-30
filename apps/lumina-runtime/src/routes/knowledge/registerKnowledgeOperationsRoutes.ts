@@ -7,7 +7,6 @@ import type {
 import {
   knowledgeOperationsService,
 } from "../../knowledge-operations/KnowledgeOperationsService.js";
-import { listCapabilityProviders } from "../../knowledge/capability/index.js";
 
 export function registerKnowledgeOperationsRoutes(
   app: Express,
@@ -23,18 +22,4 @@ export function registerKnowledgeOperationsRoutes(
       );
     },
   );
-
-
-  app.get(
-    "/api/knowledge/capabilities",
-    (_req, res) => {
-      res.json({
-        ok: true,
-        providers: listCapabilityProviders().map(provider => ({
-          id: provider.id,
-        })),
-      });
-    },
-  );
-
 }

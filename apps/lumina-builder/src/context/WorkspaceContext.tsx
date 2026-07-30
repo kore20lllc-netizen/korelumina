@@ -35,7 +35,7 @@ export type BuildIntent =
   | "mobile";
 
 export type View =
-  "landing" | "entry" | "dashboard" | "auth" | "settings" | "pricing" | "templates" | "imports" | "workspace" | "repo-audit" | "inhouse-dev" | "deployment-diagnostics" | "knowledge-operations" | "admin" | "runtime-operations";
+  "landing" | "entry" | "dashboard" | "auth" | "settings" | "pricing" | "templates" | "imports" | "workspace" | "repo-audit" | "inhouse-dev" | "deployment-diagnostics" | "knowledge-operations" | "admin" | "runtime-operations" | "runtime-v2-reference";
 
 export interface UsageSnapshot {
   aiExecutions: number;
