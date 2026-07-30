@@ -11,7 +11,6 @@ export * from "./KnowledgeOrchestrator.js";
 export * from "./agent/index.js";
 export * from "./architecture/index.js";
 export * from "./automation/index.js";
-export * from "./capability/index.js";
 export * from "./autonomous-improvement/index.js";
 export * from "./context/index.js";
 export * from "./decision/index.js";

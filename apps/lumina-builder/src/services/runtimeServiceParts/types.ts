@@ -62,6 +62,53 @@ export interface RuntimeImportResult {
   };
 }
 
+export interface RuntimeMetricsResponse {
+  ok: boolean;
+  service: string;
+  timestamp: number;
+  process: {
+    pid: number;
+    uptimeMs: number;
+    memory: {
+      rssMb: number;
+      heapUsedMb: number;
+      heapTotalMb: number;
+      externalMb: number;
+    };
+  };
+  totals: {
+    eventClients: number;
+    workspaceWatchers: number;
+    runtimes: number;
+    running: number;
+    starting: number;
+    exited: number;
+    error: number;
+  };
+  restarts: Array<{
+    projectId: string;
+    count: number;
+    windowStartedAt: number;
+    lastRestartAt: number;
+    lastRecoveredAt?: number;
+    lastFailureReason?: string;
+  }>;
+  runtimes: Array<{
+    projectId: string;
+    framework: string | null;
+    status: string;
+    port: number | null;
+    pid: number | null;
+    url: string | null;
+    alive: boolean;
+    uptimeMs: number;
+    startedAt: number | null;
+    exitedAt: number | null;
+    lastError: string | null;
+    logLines: number;
+  }>;
+}
+
 export interface RuntimeFileListResponse {
   ok: boolean;
   projectId: string;

@@ -133,44 +133,6 @@ export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
   return data.projects as RuntimeProject[];
 }
 
-
-export interface RuntimeCapabilityProvider {
-  id: string;
-  displayName?: string;
-}
-
-export interface RuntimeCapabilitiesResponse {
-  ok: true;
-  providers: RuntimeCapabilityProvider[];
-}
-
-
-
-export async function getKnowledgeCapabilities(): Promise<RuntimeCapabilityProvider[]> {
-  const response = await fetch(
-    `${RUNTIME_API}/api/knowledge/capabilities`,
-    {
-      headers: getRuntimeCallerHeaders(),
-    },
-  );
-
-  const data = await response.json();
-
-  if (
-    !response.ok ||
-    !data?.ok ||
-    !Array.isArray(data.providers)
-  ) {
-    throw new Error(
-      data?.error ??
-      "failed_to_get_knowledge_capabilities",
-    );
-  }
-
-  return data.providers as RuntimeCapabilityProvider[];
-}
-
-
 export interface RuntimeImportResult {
   ok: true;
   action: "cloned" | "pulled";
