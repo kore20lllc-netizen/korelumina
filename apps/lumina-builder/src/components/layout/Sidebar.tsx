@@ -102,11 +102,6 @@ export function Sidebar() {
             active: view === "runtime-operations",
           },
           {
-            icon: ServerCog,
-            label: "Runtime Operations Preview",
-            active: false,
-          },
-          {
             icon: BookOpen,
             label: "Knowledge Operations",
             active: view === "knowledge-operations",
@@ -222,7 +217,7 @@ export function Sidebar() {
                     ) {
                       setView("runtime-operations");
                     } else if (
-                      item.label === "Runtime Operations Preview"
+                      false
                     ) {
                       
                     } else if (
