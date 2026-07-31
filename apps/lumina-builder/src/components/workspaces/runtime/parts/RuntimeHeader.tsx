@@ -292,6 +292,7 @@ export const RuntimeHeader = forwardRef<
 
     return (
       <LuminaWorkspaceHero
+        presentation="executive"
         eyebrow={null}
         title={
           <div className="flex flex-col">

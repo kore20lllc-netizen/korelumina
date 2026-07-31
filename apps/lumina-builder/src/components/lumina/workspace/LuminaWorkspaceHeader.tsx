@@ -6,6 +6,10 @@ import {
   cn,
 } from "@/lib/utils";
 
+import type {
+  LuminaCompositionPresentation,
+} from "./LuminaCompositionSurface";
+
 import {
   LuminaCompositionSurface,
 } from "./LuminaCompositionSurface";
@@ -19,6 +23,7 @@ export interface LuminaWorkspaceHeaderProps {
   metrics?: ReactNode;
   children?: ReactNode;
   className?: string;
+  presentation?: LuminaCompositionPresentation;
 }
 
 export function LuminaWorkspaceHeader({
@@ -30,6 +35,7 @@ export function LuminaWorkspaceHeader({
   metrics,
   children,
   className,
+  presentation = "default",
 }: LuminaWorkspaceHeaderProps) {
   const supportingText =
     subtitle ?? description;
@@ -37,6 +43,7 @@ export function LuminaWorkspaceHeader({
   return (
     <LuminaCompositionSurface
       variant="hero"
+      presentation={presentation}
       className={cn(
         "min-h-[24rem]",
         "px-6 py-7",
@@ -85,7 +92,8 @@ export function LuminaWorkspaceHeader({
             <div
               className={cn(
                 "flex w-full min-w-0 flex-col gap-5",
-                "lg:w-full","lg:max-w-[40rem]",
+                "lg:w-full",
+                "lg:max-w-[40rem]",
                 "lg:items-stretch",
               )}
             >
