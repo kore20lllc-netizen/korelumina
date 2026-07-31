@@ -11,8 +11,8 @@ import {
 } from "@/lib/utils";
 
 export interface LuminaWorkspaceBrandProps {
+  showProductBrand?: boolean;
   splitTitle?: boolean;
-
   workspace: ReactNode;
   family?: ReactNode;
   tagline?: ReactNode;
@@ -27,6 +27,7 @@ export interface LuminaWorkspaceBrandProps {
 }
 
 export function LuminaWorkspaceBrand({
+  showProductBrand = false,
   splitTitle = false,
   workspace,
   family,
@@ -47,29 +48,35 @@ export function LuminaWorkspaceBrand({
         className,
       )}
     >
-      <div className="flex flex-wrap items-center gap-3">
-        <LuminaBrand
-          size="hero"
-          className={cn(
-            "text-5xl",
-            productClassName,
+      {(showProductBrand ||
+        status ||
+        certification) && (
+        <div className="flex flex-wrap items-center gap-3">
+          {showProductBrand && (
+            <LuminaBrand
+              size="hero"
+              className={cn(
+                "text-5xl",
+                productClassName,
+              )}
+            />
           )}
-        />
 
-        {(status ||
-          certification) && (
-          <div className="flex flex-wrap items-center gap-2">
-            {status}
-
-            {certification}
-          </div>
-        )}
-      </div>
+          {(status ||
+            certification) && (
+            <div className="flex flex-wrap items-center gap-2">
+              {status}
+              {certification}
+            </div>
+          )}
+        </div>
+      )}
 
       {(family || icon) && (
         <div
           className={cn(
-            "mt-4 flex items-center gap-2",
+            showProductBrand ? "mt-4" : "mb-3",
+            "flex items-center gap-2",
             "text-[10px] font-semibold uppercase",
             "tracking-[0.22em] text-muted-foreground",
             familyClassName,
@@ -87,17 +94,26 @@ export function LuminaWorkspaceBrand({
 
       <h1
         className={cn(
-          "mt-3 text-4xl font-bold tracking-tight",
+          showProductBrand || family || icon
+            ? "mt-3"
+            : undefined,
+          "text-4xl font-bold tracking-tight",
           workspaceClassName,
         )}
       >
-        {splitTitle && typeof workspace === "string"
-  ? workspace.split(" ").map((part) => (
-      <span key={part} className="block">
-        {part}
-      </span>
-    ))
-  : workspace}
+        {splitTitle &&
+        typeof workspace === "string"
+          ? workspace
+              .split(" ")
+              .map((part) => (
+                <span
+                  key={part}
+                  className="block"
+                >
+                  {part}
+                </span>
+              ))
+          : workspace}
       </h1>
 
       {tagline && (
