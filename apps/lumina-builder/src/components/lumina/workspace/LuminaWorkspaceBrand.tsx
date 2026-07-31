@@ -11,6 +11,8 @@ import {
 } from "@/lib/utils";
 
 export interface LuminaWorkspaceBrandProps {
+  splitTitle?: boolean;
+
   workspace: ReactNode;
   family?: ReactNode;
   tagline?: ReactNode;
@@ -25,6 +27,7 @@ export interface LuminaWorkspaceBrandProps {
 }
 
 export function LuminaWorkspaceBrand({
+  splitTitle = false,
   workspace,
   family,
   tagline,
@@ -88,7 +91,13 @@ export function LuminaWorkspaceBrand({
           workspaceClassName,
         )}
       >
-        {workspace}
+        {splitTitle && typeof workspace === "string"
+  ? workspace.split(" ").map((part) => (
+      <span key={part} className="block">
+        {part}
+      </span>
+    ))
+  : workspace}
       </h1>
 
       {tagline && (
