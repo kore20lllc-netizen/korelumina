@@ -296,25 +296,8 @@ export const RuntimeHeader = forwardRef<
         eyebrow={null}
         title={
           <div className="flex flex-col">
-            <LuminaBrand
-              size="hero"
-              className="text-5xl"
-            />
-
-            <h2
-              className={[
-                "mt-4 text-[2.75rem] font-bold leading-none tracking-[-0.04em]",
-                runtimeAccent.text,
-              ].join(" ")}
-            >
-              Runtime Operations
-            </h2>
-
-            <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.30em] text-gold/80">
-              Observe • Operate • Recover
-            </div>
-
-            {searchControl}
+            <span>Runtime</span>
+            <span>Operations</span>
           </div>
         }
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
