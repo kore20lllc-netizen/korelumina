@@ -5,6 +5,14 @@ import {
 } from "react";
 
 import {
+  workspaceAccents,
+} from "@/components/lumina/tokens/workspaceAccents";
+
+import {
+  LuminaWorkspaceBrand,
+} from "@/components/lumina/workspace/LuminaWorkspaceBrand";
+
+import {
   Activity,
   Clock3,
   Cpu,
@@ -25,13 +33,6 @@ import {
   RuntimeMetricTile,
 } from "./RuntimeMetricTile";
 
-import {
-  LuminaBrand,
-} from "@/components/lumina/brand";
-
-import {
-  workspaceAccents,
-} from "@/components/lumina/tokens/workspaceAccents";
 
 import type {
   Environment,
@@ -295,9 +296,20 @@ export const RuntimeHeader = forwardRef<
         presentation="executive"
         eyebrow={null}
         title={
-          <div className="flex flex-col">
-            <span>Runtime</span>
-            <span>Operations</span>
+          <div className="flex min-w-0 max-w-2xl flex-col">
+            <h1 className="text-5xl font-bold leading-[0.92] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              <span className="block text-gradient-lumina">
+                Runtime
+              </span>
+
+              <span className="block bg-gradient-to-r from-[#F7D774] via-[#C98212] to-[#9C5F08] bg-clip-text text-transparent">
+                Operations
+              </span>
+            </h1>
+
+            <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.42em] text-violet-200/75">
+              OBSERVE • OPERATE • RECOVER
+            </div>
           </div>
         }
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
