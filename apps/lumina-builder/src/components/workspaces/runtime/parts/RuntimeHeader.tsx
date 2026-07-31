@@ -296,21 +296,16 @@ export const RuntimeHeader = forwardRef<
         presentation="executive"
         eyebrow={null}
         title={
-          <div className="flex min-w-0 max-w-2xl flex-col">
-            <h1 className="text-5xl font-bold leading-[0.92] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
-              <span className="block text-gradient-lumina">
-                Runtime
-              </span>
-
-              <span className="block bg-gradient-to-r from-[#F7D774] via-[#C98212] to-[#9C5F08] bg-clip-text text-transparent">
-                Operations
-              </span>
-            </h1>
-
-            <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.42em] text-violet-200/75">
-              OBSERVE • OPERATE • RECOVER
-            </div>
-          </div>
+          <LuminaWorkspaceBrand
+            executive
+            splitTitle
+            workspace="Runtime Operations"
+            tagline="OBSERVE • OPERATE • RECOVER"
+            className="min-w-0 max-w-2xl"
+            primaryTitleClassName="text-gradient-lumina"
+            secondaryTitleClassName="bg-gradient-to-r from-[#F7D774] via-[#C98212] to-[#9C5F08] bg-clip-text text-transparent"
+            taglineClassName="text-violet-200/75"
+          />
         }
         subtitle="Monitor services, inspect health, review logs, and control deployments from a unified runtime dashboard."
         metrics={

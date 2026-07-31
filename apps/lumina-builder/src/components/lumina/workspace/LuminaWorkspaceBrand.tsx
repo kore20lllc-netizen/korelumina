@@ -13,6 +13,7 @@ import {
 export interface LuminaWorkspaceBrandProps {
   showProductBrand?: boolean;
   splitTitle?: boolean;
+  executive?: boolean;
   workspace: ReactNode;
   family?: ReactNode;
   tagline?: ReactNode;
@@ -24,11 +25,14 @@ export interface LuminaWorkspaceBrandProps {
   workspaceClassName?: string;
   familyClassName?: string;
   taglineClassName?: string;
+  primaryTitleClassName?: string;
+  secondaryTitleClassName?: string;
 }
 
 export function LuminaWorkspaceBrand({
   showProductBrand = false,
   splitTitle = false,
+  executive = false,
   workspace,
   family,
   tagline,
@@ -40,7 +44,15 @@ export function LuminaWorkspaceBrand({
   workspaceClassName,
   familyClassName,
   taglineClassName,
+  primaryTitleClassName,
+  secondaryTitleClassName,
 }: LuminaWorkspaceBrandProps) {
+  const splitWorkspace =
+    splitTitle &&
+    typeof workspace === "string"
+      ? workspace.split(" ")
+      : null;
+
   return (
     <div
       className={cn(
@@ -97,29 +109,43 @@ export function LuminaWorkspaceBrand({
           showProductBrand || family || icon
             ? "mt-3"
             : undefined,
-          "text-4xl font-bold tracking-tight",
+          executive
+            ? [
+                "text-5xl font-bold",
+                "leading-[0.92]",
+                "tracking-[-0.045em]",
+                "sm:text-6xl lg:text-7xl",
+              ]
+            : "text-4xl font-bold tracking-tight",
           workspaceClassName,
         )}
       >
-        {splitTitle &&
-        typeof workspace === "string"
-          ? workspace
-              .split(" ")
-              .map((part) => (
+        {splitWorkspace
+          ? splitWorkspace.map(
+              (part, index) => (
                 <span
-                  key={part}
-                  className="block"
+                  key={`${part}-${index}`}
+                  className={cn(
+                    "block",
+                    index === 0
+                      ? primaryTitleClassName
+                      : secondaryTitleClassName,
+                  )}
                 >
                   {part}
                 </span>
-              ))
+              ),
+            )
           : workspace}
       </h1>
 
       {tagline && (
         <div
           className={cn(
-            "mt-4 text-xs font-semibold uppercase",
+            executive
+              ? "mt-8 text-[11px]"
+              : "mt-4 text-xs",
+            "font-semibold uppercase",
             "tracking-[0.42em] text-muted-foreground",
             taglineClassName,
           )}
