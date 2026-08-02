@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
 import { KnowledgeExecutiveCard } from "../primitives/KnowledgeExecutiveCard";
 import { ExecutionFrame } from "./ExecutionFrame";
 import { ExecutionCursor } from "./ExecutionCursor";
@@ -320,17 +324,14 @@ const cursor = STAGE_GRID[selected] ?? {
           }[stage.status] ?? stage.status.toUpperCase();
 
 
-          const iconClass = {
-            sources: "bg-cyan-400/15 text-cyan-100",
-            acquisition: "bg-sky-400/15 text-sky-100",
-            evidence: "bg-violet-400/15 text-violet-100",
-            compiler: "bg-indigo-400/15 text-indigo-100",
-            ir: "bg-blue-400/15 text-blue-100",
-            validation: "bg-emerald-400/15 text-emerald-100",
-            canonical: "bg-amber-400/15 text-amber-100",
-            graph: "bg-fuchsia-400/15 text-fuchsia-100",
-            memory: "bg-slate-400/15 text-slate-100",
-          }[stage.id] ?? "bg-cyan-400/15 text-cyan-100";
+          const iconState =
+            stage.status === "complete"
+              ? "healthy"
+              : stage.status === "blocked"
+                ? "warning"
+                : stage.status === "active"
+                  ? "active"
+                  : "active";
 
 
 
@@ -357,21 +358,10 @@ const cursor = STAGE_GRID[selected] ?? {
   onClick={() => setSelected(stage.id)}
   className="h-full min-h-[120px]"
   header={
-    <span
-      className={`
-        flex
-        h-10
-        w-10
-        items-center
-        justify-center
-        rounded-xl
-        border
-        border-white/10
-        ${iconClass}
-      `}
-    >
-      <Icon className="h-5 w-5" />
-    </span>
+    <ExecutivePremiumIcon
+      icon={Icon}
+      state={iconState}
+    />
   }
   footer={
     <div className="space-y-3">

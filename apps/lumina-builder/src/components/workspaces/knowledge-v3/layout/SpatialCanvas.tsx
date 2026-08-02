@@ -9,6 +9,10 @@ import {
   Scan,
 } from "lucide-react";
 
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
 export function SpatialCanvas() {
   return (
     <section
@@ -74,7 +78,10 @@ export function SpatialCanvas() {
               backdrop-blur-xl
             "
           >
-            <Scan className="h-4 w-4 text-cyan-300" />
+            <ExecutivePremiumIcon
+              icon={Scan}
+              state="active"
+            />
 
             <div>
               <div

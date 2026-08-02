@@ -7,6 +7,10 @@ import {
 } from "lucide-react";
 
 import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+import {
   border,
   glass,
   radius,
@@ -74,21 +78,12 @@ export function InspectorDock() {
         "
       >
         <div className="flex items-center gap-3">
-          <span
-            className="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-2xl
-              border
-              border-violet-300/20
-              bg-violet-400/10
-            "
-          >
-            <PanelRightOpen className="h-5 w-5 text-violet-100" />
-          </span>
+          <div className="shrink-0">
+            <ExecutivePremiumIcon
+              icon={PanelRightOpen}
+              state="active"
+            />
+          </div>
 
           <div className="min-w-0">
             <h2
@@ -132,19 +127,11 @@ export function InspectorDock() {
             executiveMaterial.tertiary.shadow,
           ].join(" ")}
         >
-          <div
-            className={[
-              "flex",
-              "h-12",
-              "w-12",
-              "items-center",
-              "justify-center",
-              executiveMaterial.chip.radius,
-              executiveMaterial.chip.glass,
-              executiveMaterial.chip.border,
-            ].join(" ")}
-          >
-            <Eye className="h-6 w-6 text-white/60" />
+          <div className="shrink-0">
+            <ExecutivePremiumIcon
+              icon={Eye}
+              state="active"
+            />
           </div>
 
           <h3
@@ -186,7 +173,10 @@ export function InspectorDock() {
               ].join(" ")}
             >
               <div className="flex items-center gap-3">
-                <Info className="h-4 w-4 text-cyan-200/70" />
+                <ExecutivePremiumIcon
+                  icon={Info}
+                  state="active"
+                />
 
                 <h4
                   className="
@@ -223,7 +213,12 @@ export function InspectorDock() {
         "
       >
         <div className="flex items-start gap-3">
-          <Sparkles className="mt-0.5 h-4 w-4 text-amber-300/70" />
+          <div className="mt-0.5 shrink-0">
+            <ExecutivePremiumIcon
+              icon={Sparkles}
+              state="warning"
+            />
+          </div>
 
           <p
             className="
@@ -247,7 +242,10 @@ export function InspectorDock() {
             text-white/35
           "
         >
-          <CircleHelp className="h-3.5 w-3.5" />
+          <ExecutivePremiumIcon
+            icon={CircleHelp}
+            state="warning"
+          />
           Milestone 1 • Shell Infrastructure
         </div>
       </footer>

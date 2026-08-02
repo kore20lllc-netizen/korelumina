@@ -1,5 +1,9 @@
 import { Radio } from "lucide-react";
 
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
 export function ExecutiveIdentity() {
   return (
     <>
@@ -8,7 +12,7 @@ export function ExecutiveIdentity() {
           className="
             inline-flex
             items-center
-            gap-2
+            gap-3
             rounded-full shadow-[0_18px_48px_rgba(15,23,42,.30)]
             border
             border-cyan-300/10
@@ -23,7 +27,10 @@ export function ExecutiveIdentity() {
             backdrop-blur-xl
           "
         >
-          <Radio className="h-3.5 w-3.5" />
+          <ExecutivePremiumIcon
+            icon={Radio}
+            state="active"
+          />
           Knowledge Operations
         </span>
 

@@ -1,5 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import { cn } from "@/lib/utils";
 import {
@@ -13,7 +16,6 @@ import {
 
 import {
   executiveMaterial,
-  iconSurface,
 } from "../theme/appearance";
 
 interface ActivityItem {
@@ -21,6 +23,11 @@ interface ActivityItem {
   title: string;
   subtitle: string;
   icon: LucideIcon;
+  iconState:
+    | "healthy"
+    | "active"
+    | "warning"
+    | "error";
 }
 
 const ITEMS: ActivityItem[] = [
@@ -29,30 +36,35 @@ const ITEMS: ActivityItem[] = [
     title: "Sources",
     subtitle: "Waiting",
     icon: Database,
+    iconState: "warning",
   },
   {
     id: "evidence",
     title: "Evidence",
     subtitle: "Pending",
     icon: FileSearch,
+    iconState: "warning",
   },
   {
     id: "compiler",
     title: "Compiler",
     subtitle: "Idle",
     icon: Binary,
+    iconState: "active",
   },
   {
     id: "knowledge",
     title: "Knowledge",
     subtitle: "Not Published",
     icon: BookOpenCheck,
+    iconState: "warning",
   },
   {
     id: "graph",
     title: "Knowledge Graph",
     subtitle: "Offline",
     icon: GitBranch,
+    iconState: "error",
   },
 ];
 
@@ -80,15 +92,12 @@ export function ActivityRail() {
         "
       >
         <div className="flex items-center gap-3">
-          <span
-            className={cn(
-              executiveMaterial.chip.radius,
-              iconSurface.cyan,
-              "flex h-10 w-10 items-center justify-center border",
-            )}
-          >
-            <Activity className="h-5 w-5 text-cyan-100" />
-          </span>
+          <div className="shrink-0">
+            <ExecutivePremiumIcon
+              icon={Activity}
+              state="active"
+            />
+          </div>
 
           <div>
             <h2
@@ -137,16 +146,12 @@ export function ActivityRail() {
                 )}
               >
                 <div className="flex items-start gap-3">
-                  <span
-                    className={cn(
-                      executiveMaterial.chip.radius,
-                      executiveMaterial.chip.border,
-                      executiveMaterial.chip.glass,
-                      "flex h-10 w-10 shrink-0 items-center justify-center",
-                    )}
-                  >
-                    <Icon className="h-5 w-5 text-white/65" />
-                  </span>
+                  <div className="shrink-0">
+                    <ExecutivePremiumIcon
+                      icon={Icon}
+                      state={item.iconState}
+                    />
+                  </div>
 
                   <div className="min-w-0 flex-1">
                     <h3
