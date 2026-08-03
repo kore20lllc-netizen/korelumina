@@ -15,6 +15,10 @@ import {
 } from "../distribution";
 
 import {
+  CanonicalKnowledge,
+} from "../canonical";
+
+import {
   CanonicalReview,
 } from "../governance";
 
@@ -78,6 +82,8 @@ export function KnowledgeProductionCommandCenter() {
       ) : null}
 
       <CanonicalReview />
+
+      <CanonicalKnowledge />
 
       <KnowledgeDistributionHub
         capsules={knowledgeCapsules}
