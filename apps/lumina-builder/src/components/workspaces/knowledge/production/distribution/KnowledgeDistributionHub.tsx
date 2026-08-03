@@ -16,6 +16,11 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  electricContour,
+  premiumSurfaces,
+} from "@/components/design-system/lumina";
+
+import {
   KnowledgeCapsule,
 } from "../capsules";
 
@@ -63,6 +68,42 @@ const statusClasses = {
     "border-slate-400/24 bg-slate-400/[0.05] text-slate-300",
 } as const;
 
+const shellClass = [
+  "overflow-hidden rounded-[30px]",
+  premiumSurfaces.base.shell,
+  electricContour.strength.flagship,
+].join(" ");
+
+const panelClass = [
+  "rounded-[24px] p-5",
+  premiumSurfaces.base.panel,
+  electricContour.strength.standard,
+].join(" ");
+
+const topologyClass = [
+  "relative overflow-hidden rounded-[28px] p-4 sm:p-5",
+  premiumSurfaces.base.panel,
+  electricContour.strength.prominent,
+].join(" ");
+
+const cardClass = [
+  "rounded-[18px] p-4",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
+const consumerCardClass = [
+  "relative overflow-hidden rounded-[20px] p-4",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
+const compactCardClass = [
+  "rounded-[14px] px-3 py-2 text-center",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
 export function KnowledgeDistributionHub({
   capsules,
   records,
@@ -93,7 +134,7 @@ export function KnowledgeDistributionHub({
   return (
     <section
       aria-label="Knowledge Distribution and Consumption Hub"
-      className="overflow-hidden rounded-[30px] border border-blue-400/70 ring-1 ring-inset ring-cyan-300/20 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.18),inset_0_0_18px_rgba(56,189,248,.05)] bg-[radial-gradient(circle_at_50%_4%,rgba(139,92,246,.15),transparent_30%),radial-gradient(circle_at_10%_70%,rgba(34,211,238,.10),transparent_32%),linear-gradient(135deg,rgba(2,6,23,.84),rgba(15,8,40,.82),rgba(2,10,30,.84))] shadow-[0_28px_90px_rgba(2,6,23,.46),inset_0_1px_0_rgba(255,255,255,.06)]"
+      className={shellClass}
     >
       <header className="border-b border-violet-300/18 p-5 sm:p-6">
         <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-violet-300/72">
@@ -113,7 +154,7 @@ export function KnowledgeDistributionHub({
       <div className="grid gap-6 p-5 sm:p-6">
         <section
           aria-label="Governed knowledge distribution topology"
-          className="relative overflow-hidden rounded-[28px] border border-blue-400/65 ring-1 ring-inset ring-cyan-300/18 shadow-[0_0_0_1px_rgba(59,130,246,.14),0_0_22px_rgba(37,99,235,.15),inset_0_0_16px_rgba(56,189,248,.045)] bg-[radial-gradient(circle_at_50%_45%,rgba(139,92,246,.14),transparent_26%),radial-gradient(circle_at_15%_20%,rgba(34,211,238,.08),transparent_25%),linear-gradient(145deg,rgba(3,9,29,.92),rgba(13,8,38,.88),rgba(3,12,32,.92))] p-4 shadow-[0_28px_80px_rgba(2,6,23,.42),inset_0_1px_0_rgba(255,255,255,.05)] sm:p-5"
+          className={topologyClass}
         >
           <div
             aria-hidden="true"
@@ -139,7 +180,7 @@ export function KnowledgeDistributionHub({
                     return (
                       <article
                         key={consumer.id}
-                        className="relative overflow-hidden rounded-[20px] border border-blue-400/60 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.14),0_0_20px_rgba(37,99,235,.14),inset_0_0_16px_rgba(56,189,248,.045)] bg-[linear-gradient(145deg,rgba(7,18,43,.84),rgba(17,10,45,.80))] p-4 shadow-[0_14px_34px_rgba(2,6,23,.30),inset_0_1px_0_rgba(255,255,255,.04)]"
+                        className={consumerCardClass}
                       >
                         <div className="flex items-start gap-3">
                           <ExecutivePremiumIcon
@@ -208,7 +249,7 @@ export function KnowledgeDistributionHub({
                   />
 
                   <div className="mt-4 grid grid-cols-2 gap-2">
-                    <div className="rounded-[14px] border border-blue-400/60 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-emerald-300/[0.035] px-3 py-2 text-center">
+                    <div className={compactCardClass}>
                       <div className="text-[9px] uppercase tracking-[0.12em] text-emerald-300/58">
                         Consuming
                       </div>
@@ -222,7 +263,7 @@ export function KnowledgeDistributionHub({
                       </div>
                     </div>
 
-                    <div className="rounded-[14px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-cyan-300/[0.035] px-3 py-2 text-center">
+                    <div className={compactCardClass}>
                       <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/58">
                         Authorized
                       </div>
@@ -250,7 +291,7 @@ export function KnowledgeDistributionHub({
                     return (
                       <article
                         key={consumer.id}
-                        className="relative overflow-hidden rounded-[20px] border border-blue-400/60 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.14),0_0_20px_rgba(37,99,235,.14),inset_0_0_16px_rgba(56,189,248,.045)] bg-[linear-gradient(145deg,rgba(17,10,45,.80),rgba(7,18,43,.84))] p-4 shadow-[0_14px_34px_rgba(2,6,23,.30),inset_0_1px_0_rgba(255,255,255,.04)]"
+                        className={consumerCardClass}
                       >
                         <div className="flex items-start gap-3">
                           <ExecutivePremiumIcon
@@ -300,7 +341,7 @@ export function KnowledgeDistributionHub({
         </section>
 
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,.65fr)]">
-          <section className="rounded-[24px] border border-blue-400/65 ring-1 ring-inset ring-cyan-300/18 shadow-[0_0_0_1px_rgba(59,130,246,.14),0_0_22px_rgba(37,99,235,.15),inset_0_0_16px_rgba(56,189,248,.045)] bg-cyan-300/[0.035] p-5">
+          <section className={panelClass}>
             <div className="flex flex-col gap-2 border-b border-cyan-300/12 pb-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
@@ -321,7 +362,7 @@ export function KnowledgeDistributionHub({
               {record.history.map((event) => (
                 <article
                   key={event.id}
-                  className="rounded-[18px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-slate-950/24 p-4"
+                  className={cardClass}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-xs font-semibold text-amber-300">
@@ -341,13 +382,13 @@ export function KnowledgeDistributionHub({
             </div>
           </section>
 
-          <section className="rounded-[24px] border border-blue-400/65 ring-1 ring-inset ring-cyan-300/18 shadow-[0_0_0_1px_rgba(59,130,246,.14),0_0_22px_rgba(37,99,235,.15),inset_0_0_16px_rgba(56,189,248,.045)] bg-violet-300/[0.035] p-5">
+          <section className={panelClass}>
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
               Capsule genealogy
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <div className="rounded-[18px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-slate-950/24 p-4">
+              <div className={cardClass}>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-violet-300/58">
                   Parents
                 </div>
@@ -356,7 +397,7 @@ export function KnowledgeDistributionHub({
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-slate-950/24 p-4">
+              <div className={cardClass}>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/58">
                   Children
                 </div>
@@ -365,7 +406,7 @@ export function KnowledgeDistributionHub({
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-slate-950/24 p-4">
+              <div className={cardClass}>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-cyan-300/58">
                   Missions
                 </div>
@@ -374,7 +415,7 @@ export function KnowledgeDistributionHub({
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/58 ring-1 ring-inset ring-cyan-300/16 shadow-[0_0_0_1px_rgba(59,130,246,.12),0_0_16px_rgba(37,99,235,.12),inset_0_0_14px_rgba(56,189,248,.04)] bg-slate-950/24 p-4">
+              <div className={cardClass}>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-amber-300/58">
                   Educational influence
                 </div>
