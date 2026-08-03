@@ -12,6 +12,10 @@ import {
   X,
 } from "lucide-react";
 
+import {
+  ExecutiveFilterSurface,
+} from "@/components/design-system/lumina";
+
 import type {
   KnowledgeCapsule,
 } from "./types";
@@ -274,15 +278,9 @@ export function KnowledgeCapsuleFilters({
   }
 
   return (
-    <section
-      aria-label="Executive knowledge capsule filters"
-      className={[
-        "rounded-[20px] border border-blue-400/60 ring-1 ring-inset ring-cyan-300/16",
-        "bg-[linear-gradient(135deg,rgba(8,15,38,.62),rgba(20,11,48,.54),rgba(7,17,40,.62))]",
-        "px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]",
-      ].join(" ")}
-    >
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
+    <ExecutiveFilterSurface
+      ariaLabel="Executive knowledge capsule filters"
+      summary={
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[13px] border border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-violet-300/[0.07]">
             <Filter
@@ -310,8 +308,9 @@ export function KnowledgeCapsuleFilters({
             </div>
           </div>
         </div>
-
-        <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      }
+      primaryControls={
+        <>
           {primaryDefinitions.map(
             (definition) => (
               <label
@@ -359,9 +358,10 @@ export function KnowledgeCapsuleFilters({
               </label>
             ),
           )}
-        </div>
-
-        <div className="flex shrink-0 flex-wrap items-center gap-2">
+        </>
+      }
+      actions={
+        <>
           <button
             type="button"
             aria-expanded={
@@ -424,109 +424,102 @@ export function KnowledgeCapsuleFilters({
 
             Clear
           </button>
-        </div>
-      </div>
-
-      {activeEntries.length > 0 ? (
-        <div
-          aria-live="polite"
-          className="mt-3 flex flex-wrap items-center gap-2 border-t border-cyan-300/10 pt-3"
-        >
-          {activeEntries.map(
-            (definition) => (
-              <button
-                key={
-                  definition.key
-                }
-                type="button"
-                onClick={() =>
-                  updateFilter(
-                    definition.key,
-                    "",
-                  )
-                }
-                className={[
-                  "inline-flex items-center gap-2 rounded-full border px-3 py-1.5",
-                  "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.055]",
-                  "text-[10px] font-semibold text-violet-100",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/50",
-                ].join(" ")}
-              >
-                <span>
-                  {definition.label}:{" "}
-                  {
-                    filters[
-                      definition.key
-                    ]
+        </>
+      }
+      activeFilters={
+        activeEntries.length > 0 ? (
+          <>
+            {activeEntries.map(
+              (definition) => (
+                <button
+                  key={
+                    definition.key
                   }
-                </span>
-
-                <X
-                  aria-hidden="true"
-                  className="h-3 w-3 text-violet-300"
-                />
-              </button>
-            ),
-          )}
-        </div>
-      ) : null}
-
-      {advancedOpen ? (
-        <div
-          id={advancedPanelId}
-          className={[
-            "mt-3 grid gap-3 border-t border-violet-300/12 pt-3",
-            "sm:grid-cols-2 lg:grid-cols-4",
-          ].join(" ")}
-        >
-          {advancedDefinitions.map(
-            (definition) => (
-              <label
-                key={definition.key}
-                className="grid gap-1.5"
-              >
-                <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-400/62">
-                  {definition.label}
-                </span>
-
-                <select
-                  value={
-                    filters[
-                      definition.key
-                    ]
-                  }
-                  onChange={(event) =>
+                  type="button"
+                  onClick={() =>
                     updateFilter(
                       definition.key,
-                      event.target.value,
+                      "",
                     )
                   }
                   className={[
-                    "h-9 min-w-0 rounded-xl border border-blue-400/48",
-                    "appearance-none bg-[linear-gradient(145deg,rgba(5,13,34,.98),rgba(11,10,39,.96))] px-3 pr-8 text-[11px] text-sky-100",
-                    "outline-none [color-scheme:dark] focus-visible:ring-2 focus-visible:ring-cyan-300/40",
+                    "inline-flex items-center gap-2 rounded-full border px-3 py-1.5",
+                    "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.055]",
+                    "text-[10px] font-semibold text-violet-100",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/50",
                   ].join(" ")}
                 >
-                  <option value="">
-                    All {definition.label}
-                  </option>
+                  <span>
+                    {definition.label}:{" "}
+                    {
+                      filters[
+                        definition.key
+                      ]
+                    }
+                  </span>
 
-                  {definition.options.map(
-                    (option) => (
-                      <option
-                        key={option}
-                        value={option}
-                      >
-                        {option}
-                      </option>
-                    ),
-                  )}
-                </select>
-              </label>
-            ),
-          )}
-        </div>
-      ) : null}
-    </section>
+                  <X
+                    aria-hidden="true"
+                    className="h-3 w-3 text-violet-300"
+                  />
+                </button>
+              ),
+            )}
+          </>
+        ) : undefined
+      }
+      advancedControls={
+        advancedOpen ? (
+          <>
+            {advancedDefinitions.map(
+              (definition) => (
+                <label
+                  key={definition.key}
+                  className="grid gap-1.5"
+                >
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-400/62">
+                    {definition.label}
+                  </span>
+
+                  <select
+                    value={
+                      filters[
+                        definition.key
+                      ]
+                    }
+                    onChange={(event) =>
+                      updateFilter(
+                        definition.key,
+                        event.target.value,
+                      )
+                    }
+                    className={[
+                      "h-9 min-w-0 rounded-xl border border-blue-400/48",
+                      "appearance-none bg-[linear-gradient(145deg,rgba(5,13,34,.98),rgba(11,10,39,.96))] px-3 pr-8 text-[11px] text-sky-100",
+                      "outline-none [color-scheme:dark] focus-visible:ring-2 focus-visible:ring-cyan-300/40",
+                    ].join(" ")}
+                  >
+                    <option value="">
+                      All {definition.label}
+                    </option>
+
+                    {definition.options.map(
+                      (option) => (
+                        <option
+                          key={option}
+                          value={option}
+                        >
+                          {option}
+                        </option>
+                      ),
+                    )}
+                  </select>
+                </label>
+              ),
+            )}
+          </>
+        ) : undefined
+      }
+    />
   );
 }
