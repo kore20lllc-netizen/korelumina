@@ -9,8 +9,10 @@ import {
 } from "lucide-react";
 
 import {
+  electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
+  premiumSurfaces,
 } from "@/components/design-system/lumina";
 
 import {
@@ -104,13 +106,37 @@ function StatusBadge({
   );
 }
 
+const panelClass = [
+  "rounded-[26px] p-5",
+  premiumSurfaces.base.panel,
+  electricContour.strength.standard,
+].join(" ");
+
+const prominentPanelClass = [
+  "rounded-[28px] p-6",
+  premiumSurfaces.base.panel,
+  electricContour.strength.prominent,
+].join(" ");
+
+const cardClass = [
+  "rounded-[18px] p-4",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
+const compactCardClass = [
+  "rounded-[16px] p-3",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
 export function CanonicalKnowledge() {
   return (
     <section
       aria-labelledby="canonical-knowledge-title"
       className="grid gap-5"
     >
-      <header className="rounded-[28px] border border-blue-400/48 bg-[linear-gradient(145deg,rgba(4,14,36,.88),rgba(13,21,51,.84),rgba(4,16,38,.88))] p-6 shadow-[0_28px_90px_rgba(0,0,0,.34)] ring-1 ring-inset ring-cyan-300/12">
+      <header className={prominentPanelClass}>
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -141,7 +167,7 @@ export function CanonicalKnowledge() {
           </div>
 
           <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-2">
-            <div className="rounded-[18px] border border-emerald-300/20 bg-emerald-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                 Published
               </div>
@@ -150,7 +176,7 @@ export function CanonicalKnowledge() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-cyan-300/20 bg-cyan-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                 Collections
               </div>
@@ -159,7 +185,7 @@ export function CanonicalKnowledge() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-violet-300/20 bg-violet-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-violet-200/58">
                 Constitutional
               </div>
@@ -168,7 +194,7 @@ export function CanonicalKnowledge() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-slate-300/18 bg-slate-300/[0.045] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-slate-300/54">
                 Retiring
               </div>
@@ -215,7 +241,7 @@ export function CanonicalKnowledge() {
       </LuminaExecutiveMetricGrid>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
-        <section className="rounded-[26px] border border-blue-400/44 bg-[linear-gradient(145deg,rgba(4,14,35,.82),rgba(11,22,48,.74))] p-5 ring-1 ring-inset ring-cyan-300/10">
+        <section className={panelClass}>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Published capsules
@@ -229,7 +255,7 @@ export function CanonicalKnowledge() {
             {CANONICAL_CAPSULES.map((capsule) => (
               <article
                 key={capsule.id}
-                className="rounded-[22px] border border-blue-400/42 bg-slate-950/28 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
+                className="rounded-[22px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
               >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
@@ -250,7 +276,7 @@ export function CanonicalKnowledge() {
                   </div>
 
                   <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[420px]">
-                    <div className="rounded-[16px] border border-violet-300/14 bg-violet-300/[0.03] p-3">
+                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                         Trust level
                       </div>
@@ -259,7 +285,7 @@ export function CanonicalKnowledge() {
                       </div>
                     </div>
 
-                    <div className="rounded-[16px] border border-cyan-300/14 bg-cyan-300/[0.03] p-3">
+                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Scope
                       </div>
@@ -268,7 +294,7 @@ export function CanonicalKnowledge() {
                       </div>
                     </div>
 
-                    <div className="rounded-[16px] border border-amber-300/14 bg-amber-300/[0.03] p-3">
+                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                         Constitutional authority
                       </div>
@@ -277,7 +303,7 @@ export function CanonicalKnowledge() {
                       </div>
                     </div>
 
-                    <div className="rounded-[16px] border border-slate-300/14 bg-slate-300/[0.025] p-3">
+                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
                         Retirement posture
                       </div>
@@ -289,7 +315,7 @@ export function CanonicalKnowledge() {
                 </div>
 
                 <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(260px,.42fr)]">
-                  <div className="rounded-[18px] border border-emerald-300/16 bg-emerald-300/[0.025] p-4">
+                  <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                     <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-emerald-300/58">
                       Canonical rationale
                     </div>
@@ -308,7 +334,7 @@ export function CanonicalKnowledge() {
                   </div>
 
                   <div className="grid gap-3">
-                    <div className="rounded-[18px] border border-cyan-300/14 bg-cyan-300/[0.025] p-4">
+                    <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Supersession
                       </div>
@@ -317,7 +343,7 @@ export function CanonicalKnowledge() {
                       </div>
                     </div>
 
-                    <div className="rounded-[18px] border border-violet-300/14 bg-violet-300/[0.025] p-4">
+                    <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                         Version
                       </div>
@@ -333,7 +359,7 @@ export function CanonicalKnowledge() {
         </section>
 
         <div className="grid gap-5">
-          <section className="rounded-[26px] border border-cyan-300/22 bg-cyan-300/[0.025] p-5">
+          <section className={panelClass}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={LibraryBig}
@@ -354,7 +380,7 @@ export function CanonicalKnowledge() {
               {COLLECTIONS.map((collection) => (
                 <div
                   key={collection.title}
-                  className="rounded-[18px] border border-cyan-300/16 bg-slate-950/24 p-4"
+                  className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4"
                 >
                   <div className="text-sm font-semibold text-white">
                     {collection.title}
@@ -370,7 +396,7 @@ export function CanonicalKnowledge() {
             </div>
           </section>
 
-          <section className="rounded-[26px] border border-slate-300/18 bg-slate-300/[0.025] p-5">
+          <section className={panelClass}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Archive}
@@ -400,7 +426,7 @@ export function CanonicalKnowledge() {
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-slate-300/14 bg-slate-300/[0.025] p-4">
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                 <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
                   Retirement scheduled
                 </div>

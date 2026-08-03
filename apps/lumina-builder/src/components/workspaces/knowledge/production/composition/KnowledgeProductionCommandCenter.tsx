@@ -22,6 +22,10 @@ import {
   CanonicalReview,
 } from "../governance";
 
+import {
+  OrganizationalMemory,
+} from "../memory";
+
 export function KnowledgeProductionCommandCenter() {
   const [
     selectedCapsuleId,
@@ -84,6 +88,8 @@ export function KnowledgeProductionCommandCenter() {
       <CanonicalReview />
 
       <CanonicalKnowledge />
+
+      <OrganizationalMemory />
 
       <KnowledgeDistributionHub
         capsules={knowledgeCapsules}

@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 
 import {
+  electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
+  premiumSurfaces,
 } from "@/components/design-system/lumina";
 
 import {
@@ -110,13 +112,37 @@ function readinessTone(
   return "bg-rose-300";
 }
 
+const panelClass = [
+  "rounded-[26px] p-5",
+  premiumSurfaces.base.panel,
+  electricContour.strength.standard,
+].join(" ");
+
+const prominentPanelClass = [
+  "rounded-[28px] p-6",
+  premiumSurfaces.base.panel,
+  electricContour.strength.prominent,
+].join(" ");
+
+const cardClass = [
+  "rounded-[18px] p-4",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
+const compactCardClass = [
+  "rounded-[16px] p-3",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
 export function CanonicalReview() {
   return (
     <section
       aria-labelledby="canonical-review-title"
       className="grid gap-5"
     >
-      <header className="rounded-[28px] border border-blue-400/48 bg-[linear-gradient(145deg,rgba(4,14,36,.88),rgba(18,10,48,.82),rgba(4,16,38,.88))] p-6 shadow-[0_28px_90px_rgba(0,0,0,.34)] ring-1 ring-inset ring-cyan-300/12">
+      <header className={prominentPanelClass}>
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -148,7 +174,7 @@ export function CanonicalReview() {
           </div>
 
           <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-2">
-            <div className="rounded-[18px] border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
                 Awaiting review
               </div>
@@ -157,7 +183,7 @@ export function CanonicalReview() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-rose-300/20 bg-rose-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
                 Conflicts
               </div>
@@ -166,7 +192,7 @@ export function CanonicalReview() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-cyan-300/20 bg-cyan-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                 Reviewers active
               </div>
@@ -175,7 +201,7 @@ export function CanonicalReview() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-emerald-300/20 bg-emerald-300/[0.06] px-4 py-3">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                 Ready to publish
               </div>
@@ -224,7 +250,7 @@ export function CanonicalReview() {
       </LuminaExecutiveMetricGrid>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
-        <section className="rounded-[26px] border border-blue-400/44 bg-[linear-gradient(145deg,rgba(4,14,35,.82),rgba(15,10,42,.74))] p-5 ring-1 ring-inset ring-cyan-300/10">
+        <section className={panelClass}>
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -244,7 +270,7 @@ export function CanonicalReview() {
             {REVIEW_QUEUE.map((item) => (
               <article
                 key={item.id}
-                className="rounded-[22px] border border-blue-400/42 bg-slate-950/28 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
+                className="rounded-[22px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
               >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
@@ -277,7 +303,7 @@ export function CanonicalReview() {
                   </div>
 
                   <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[360px]">
-                    <div className="rounded-[16px] border border-cyan-300/14 bg-cyan-300/[0.03] p-3">
+                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Required reviewers
                       </div>
@@ -286,7 +312,7 @@ export function CanonicalReview() {
                       </div>
                     </div>
 
-                    <div className="rounded-[16px] border border-rose-300/14 bg-rose-300/[0.025] p-3">
+                    <div className={compactCardClass}>
                       <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
                         Conflict posture
                       </div>
@@ -325,7 +351,7 @@ export function CanonicalReview() {
         </section>
 
         <div className="grid gap-5">
-          <section className="rounded-[26px] border border-violet-300/24 bg-violet-300/[0.035] p-5">
+          <section className={panelClass}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -346,7 +372,7 @@ export function CanonicalReview() {
               {AUTHORITIES.map((authority, index) => (
                 <div
                   key={authority.title}
-                  className="relative rounded-[18px] border border-violet-300/16 bg-slate-950/24 p-4"
+                  className="relative rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4"
                 >
                   {index < AUTHORITIES.length - 1 ? (
                     <div className="absolute left-7 top-full h-3 w-px bg-violet-300/24" />
@@ -368,7 +394,7 @@ export function CanonicalReview() {
             </div>
           </section>
 
-          <section className="rounded-[26px] border border-cyan-300/22 bg-cyan-300/[0.025] p-5">
+          <section className={panelClass}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={GitCompareArrows}
@@ -386,7 +412,7 @@ export function CanonicalReview() {
             </div>
 
             <div className="mt-5 grid gap-3">
-              <div className="rounded-[18px] border border-slate-300/14 bg-slate-300/[0.025] p-4">
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                 <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/48">
                   Current canonical capsule
                 </div>
@@ -399,7 +425,7 @@ export function CanonicalReview() {
                 <GitCompareArrows className="h-4 w-4 text-cyan-300/70" />
               </div>
 
-              <div className="rounded-[18px] border border-amber-300/20 bg-amber-300/[0.045] p-4">
+              <div className={cardClass}>
                 <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                   Proposed replacement
                 </div>
@@ -413,7 +439,7 @@ export function CanonicalReview() {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,.7fr)]">
-        <section className="rounded-[26px] border border-blue-400/42 bg-slate-950/26 p-5">
+        <section className={panelClass}>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Clock3}
@@ -473,7 +499,7 @@ export function CanonicalReview() {
           </div>
         </section>
 
-        <section className="rounded-[26px] border border-rose-300/22 bg-rose-300/[0.025] p-5">
+        <section className={panelClass}>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={AlertTriangle}
@@ -491,7 +517,7 @@ export function CanonicalReview() {
           </div>
 
           <div className="mt-5 grid gap-3">
-            <div className="rounded-[18px] border border-rose-300/14 bg-slate-950/22 p-4">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
               <div className="text-xs font-semibold text-white">
                 Resolve constitutional interpretation
               </div>
@@ -501,7 +527,7 @@ export function CanonicalReview() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-amber-300/14 bg-slate-950/22 p-4">
+            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
               <div className="text-xs font-semibold text-white">
                 Confirm supersession boundary
               </div>
