@@ -4,10 +4,6 @@ import {
 } from "lucide-react";
 
 import {
-  ExecutivePremiumIcon,
-} from "@/components/design-system/executive/ExecutivePremiumIcon";
-
-import {
   useKnowledgeV3Workspace,
 } from "../state";
 
@@ -44,123 +40,150 @@ export function KnowledgeDomainNavigator() {
   return (
     <nav
       aria-label="Knowledge Operations domains"
-      className="
-        relative grid gap-3 overflow-hidden rounded-[28px]
-        border border-cyan-300/34 p-3
-        bg-[radial-gradient(circle_at_18%_0%,rgba(37,99,235,0.12),transparent_34%),radial-gradient(circle_at_82%_100%,rgba(147,51,234,0.11),transparent_36%),linear-gradient(135deg,rgba(2,6,23,0.70),rgba(17,10,45,0.64),rgba(2,8,26,0.68))]
-        ring-1 ring-inset ring-cyan-100/10
-        shadow-[0_0_0_1px_rgba(59,130,246,0.10),0_18px_58px_rgba(2,6,23,0.34),inset_0_1px_0_rgba(255,255,255,0.06)]
-        backdrop-blur-[36px] backdrop-saturate-[170%]
-        sm:grid-cols-2
-      "
+      className={[
+        "relative overflow-hidden rounded-[24px] border border-blue-400/56",
+        "bg-[linear-gradient(135deg,rgba(3,10,30,.84),rgba(14,9,39,.78),rgba(3,12,34,.84))]",
+        "p-1.5 ring-1 ring-inset ring-cyan-300/16",
+        "shadow-[0_0_0_1px_rgba(59,130,246,.13),0_0_22px_rgba(37,99,235,.12),inset_0_1px_0_rgba(255,255,255,.05)]",
+        "backdrop-blur-[34px]",
+      ].join(" ")}
     >
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none absolute inset-x-[8%] top-0 h-px
-          bg-gradient-to-r
-          from-transparent via-cyan-200/46 to-transparent
-        "
+        className="pointer-events-none absolute inset-x-[8%] top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/48 to-transparent"
       />
 
-      {DOMAINS.map((domain) => {
-        const Icon =
-          DOMAIN_ICONS[domain.id];
+      <div
+        role="group"
+        aria-label="Select knowledge workspace"
+        className="grid gap-1.5 sm:grid-cols-2"
+      >
+        {DOMAINS.map((domain) => {
+          const Icon =
+            DOMAIN_ICONS[domain.id];
 
-        const selected =
-          domain.id === activeDomain;
+          const selected =
+            domain.id === activeDomain;
 
-        return (
-          <button
-            key={domain.id}
-            type="button"
-            aria-pressed={selected}
-            onClick={() => {
-              setActiveDomain(domain.id);
-            }}
-            className={[
-              "group relative flex min-w-0 items-start gap-3 overflow-hidden rounded-[21px] border px-4 py-3.5 text-left",
-              "transition-[transform,border-color,background-color,box-shadow] duration-200",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/46",
-              "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-              "motion-reduce:transform-none motion-reduce:transition-none",
-              selected
-                ? [
-                    "border-cyan-200/62",
-                    "bg-[linear-gradient(135deg,rgba(8,27,62,0.84),rgba(31,17,67,0.72),rgba(6,24,55,0.80))]",
-                    "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_28px_rgba(34,211,238,0.14),0_16px_34px_rgba(2,6,23,0.24)]",
-                  ].join(" ")
-                : [
-                    "border-cyan-300/20",
-                    "bg-[linear-gradient(135deg,rgba(3,12,35,0.60),rgba(15,12,42,0.52),rgba(3,14,37,0.58))]",
-                    "shadow-[inset_0_1px_0_rgba(186,230,253,0.04),0_10px_24px_rgba(2,6,23,0.16)]",
-                    "hover:-translate-y-0.5 hover:border-cyan-200/44",
-                    "hover:bg-[linear-gradient(135deg,rgba(5,18,49,0.74),rgba(24,16,58,0.62),rgba(5,20,48,0.70))]",
-                    "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.07),0_14px_30px_rgba(2,6,23,0.22)]",
-                  ].join(" "),
-            ].join(" ")}
-          >
-            <div
-              aria-hidden="true"
+          const learning =
+            domain.id === "learning";
+
+          return (
+            <button
+              key={domain.id}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => {
+                setActiveDomain(domain.id);
+              }}
               className={[
-                "pointer-events-none absolute inset-x-5 top-0 h-px",
+                "group relative min-w-0 overflow-hidden rounded-[18px] border px-4 py-3.5 text-left",
+                "transition-[transform,border-color,background-color,box-shadow] duration-200",
+                "focus-visible:outline-none focus-visible:ring-2",
+                learning
+                  ? "focus-visible:ring-amber-300/60"
+                  : "focus-visible:ring-violet-300/60",
+                "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                "motion-reduce:transform-none motion-reduce:transition-none",
                 selected
-                  ? "bg-gradient-to-r from-transparent via-cyan-100/68 to-transparent"
-                  : "bg-gradient-to-r from-transparent via-cyan-200/16 to-transparent",
+                  ? learning
+                    ? [
+                        "border-amber-300/72",
+                        "bg-[radial-gradient(circle_at_18%_0%,rgba(245,158,11,.18),transparent_38%),linear-gradient(135deg,rgba(52,27,8,.90),rgba(51,24,66,.82),rgba(42,24,8,.88))]",
+                        "ring-1 ring-inset ring-amber-200/18",
+                        "shadow-[0_0_0_1px_rgba(245,158,11,.16),0_0_28px_rgba(245,158,11,.15),inset_0_1px_0_rgba(254,243,199,.08)]",
+                      ].join(" ")
+                    : [
+                        "border-violet-400/78",
+                        "bg-[radial-gradient(circle_at_18%_0%,rgba(167,139,250,.26),transparent_40%),linear-gradient(135deg,rgba(45,20,84,.96),rgba(74,30,111,.90),rgba(38,18,78,.94))]",
+                        "ring-1 ring-inset ring-violet-200/24",
+                        "shadow-[0_0_0_1px_rgba(139,92,246,.24),0_0_34px_rgba(139,92,246,.24),inset_0_1px_0_rgba(237,233,254,.10)]",
+                      ].join(" ")
+                  : [
+                      "border-slate-600/42",
+                      "bg-[linear-gradient(135deg,rgba(5,12,30,.66),rgba(17,12,42,.58),rgba(5,14,33,.64))]",
+                      "text-sky-400/76",
+                      "hover:-translate-y-0.5 hover:border-blue-400/44",
+                      "hover:bg-[linear-gradient(135deg,rgba(7,20,48,.76),rgba(24,16,57,.68),rgba(7,21,47,.74))]",
+                    ].join(" "),
               ].join(" ")}
-            />
-
-            <span className="relative shrink-0">
-              <ExecutivePremiumIcon
-                icon={Icon}
-                state={
+            >
+              <div
+                aria-hidden="true"
+                className={[
+                  "pointer-events-none absolute inset-x-5 top-0 h-px",
                   selected
-                    ? domain.id === "learning"
-                      ? "active"
-                      : "warning"
-                    : "active"
-                }
+                    ? learning
+                      ? "bg-gradient-to-r from-transparent via-amber-200/76 to-transparent"
+                      : "bg-gradient-to-r from-transparent via-violet-200/84 to-transparent"
+                    : "bg-gradient-to-r from-transparent via-sky-200/12 to-transparent",
+                ].join(" ")}
               />
-            </span>
 
-            <span className="relative min-w-0 flex-1">
-              <span
-                className={[
-                  "block text-sm font-semibold tracking-[-0.01em]",
-                  selected
-                    ? "text-amber-400"
-                    : "text-sky-300/78 group-hover:text-sky-200",
-                ].join(" ")}
-              >
-                {domain.label}
-              </span>
+              <div className="relative flex items-center gap-3">
+                <span
+                  className={[
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] border",
+                    "ring-1 ring-inset",
+                    selected
+                      ? learning
+                        ? "border-amber-300/58 bg-amber-300/[0.10] text-amber-300 ring-amber-200/14 shadow-[0_0_18px_rgba(245,158,11,.18)]"
+                        : "border-violet-400/70 bg-violet-300/[0.12] text-violet-200 ring-violet-200/18 shadow-[0_0_20px_rgba(139,92,246,.24)]"
+                      : "border-slate-600/42 bg-slate-900/52 text-sky-500/58 ring-slate-500/10",
+                  ].join(" ")}
+                >
+                  <Icon
+                    aria-hidden="true"
+                    className="h-4.5 w-4.5"
+                  />
+                </span>
 
-              <span
-                className={[
-                  "mt-1 block text-xs leading-5",
-                  selected
-                    ? "text-sky-400/82"
-                    : "text-sky-500/66 group-hover:text-sky-400/76",
-                ].join(" ")}
-              >
-                {domain.description}
-              </span>
-            </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center justify-between gap-3">
+                    <span
+                      className={[
+                        "block text-sm font-semibold tracking-[-0.01em]",
+                        selected
+                          ? learning
+                            ? "text-amber-300"
+                            : "text-violet-100"
+                          : "text-sky-300/72 group-hover:text-sky-200",
+                      ].join(" ")}
+                    >
+                      {domain.label}
+                    </span>
 
-            <span
-              aria-hidden="true"
-              className={[
-                "relative mt-1 h-2.5 w-2.5 shrink-0 rounded-full border",
-                selected
-                  ? domain.id === "learning"
-                    ? "border-cyan-200/72 bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.72)]"
-                    : "border-violet-200/72 bg-violet-300 shadow-[0_0_12px_rgba(167,139,250,0.72)]"
-                  : "border-sky-300/18 bg-slate-800/78",
-              ].join(" ")}
-            />
-          </button>
-        );
-      })}
+                    <span
+                      aria-hidden="true"
+                      className={[
+                        "h-2.5 w-2.5 shrink-0 rounded-full border",
+                        selected
+                          ? learning
+                            ? "border-amber-200/80 bg-amber-300 shadow-[0_0_12px_rgba(245,158,11,.72)]"
+                            : "border-violet-100/88 bg-violet-300 shadow-[0_0_14px_rgba(139,92,246,.82)]"
+                          : "border-slate-500/34 bg-slate-800/78",
+                      ].join(" ")}
+                    />
+                  </span>
+
+                  <span
+                    className={[
+                      "mt-1 block text-xs leading-5",
+                      selected
+                        ? learning
+                          ? "text-amber-100/68"
+                          : "text-violet-100/74"
+                        : "text-sky-500/60 group-hover:text-sky-400/74",
+                    ].join(" ")}
+                  >
+                    {domain.description}
+                  </span>
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
     </nav>
   );
 }

@@ -46,16 +46,18 @@ export function WorkspaceShell({
       "
     >
       <section
-        className="
-          relative z-30
-          grid gap-6
-          px-6 pt-6
-          xl:grid-cols-[380px_minmax(0,1fr)]
-        "
+        className={[
+          "relative z-30 grid gap-6 px-6 pt-6",
+          compactContent
+            ? "xl:grid-cols-[380px_minmax(0,1fr)]"
+            : "grid-cols-1",
+        ].join(" ")}
       >
-        <div className="flex h-full min-w-0">
-          {executiveRibbon}
-        </div>
+        {compactContent ? (
+          <div className="flex h-full min-w-0">
+            {executiveRibbon}
+          </div>
+        ) : null}
 
         <div className="space-y-4">
           {domainNavigator}
@@ -75,20 +77,34 @@ export function WorkspaceShell({
               <div className="absolute inset-0 rounded-[32px] ring-1 ring-inset ring-cyan-300/20" />
             </div>
 
-            <div className="relative h-full px-8 py-8">
+            <div
+              className={[
+                "relative h-full",
+                compactContent
+                  ? "px-8 py-8"
+                  : "px-6 py-5 lg:px-8 lg:py-6",
+              ].join(" ")}
+            >
               {workspaceHeader}
 
-          {educationalCommandDeck ? (
-            <div className="mt-6">
-              {educationalCommandDeck}
-            </div>
-          ) : null}
+              {educationalCommandDeck ? (
+                <div className="mt-6">
+                  {educationalCommandDeck}
+                </div>
+              ) : null}
 
               {hasProductionNavigator && (
                 <>
-                  <div className="my-8 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
+                  <div
+                    className={[
+                      "h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent",
+                      compactContent
+                        ? "my-8"
+                        : "my-5",
+                    ].join(" ")}
+                  />
 
-                  <div className="mt-2">
+                  <div>
                     {productionNavigator}
                   </div>
                 </>

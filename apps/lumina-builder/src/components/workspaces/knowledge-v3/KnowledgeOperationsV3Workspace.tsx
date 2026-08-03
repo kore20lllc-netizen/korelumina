@@ -12,28 +12,16 @@ import {
 } from "./hero";
 
 import {
-  ActivityRail,
-} from "./layout/ActivityRail";
+  KnowledgeProductionCommandCenter,
+} from "../knowledge/production";
 
 import {
   ExecutiveRibbon,
 } from "./layout/ExecutiveRibbon";
 
 import {
-  InspectorDock,
-} from "./layout/InspectorDock";
-
-import {
   KnowledgeWorkspaceHeader,
 } from "./layout/KnowledgeWorkspaceHeader";
-
-import {
-  ProductionNavigator,
-} from "./layout/ProductionNavigator";
-
-import {
-  SpatialCanvas,
-} from "./layout/SpatialCanvas";
 
 import {
   WorkspaceShell,
@@ -85,28 +73,16 @@ function KnowledgeOperationsV3Content() {
       workspaceHeader={
         <KnowledgeWorkspaceHeader />
       }
-      productionNavigator={
-        learning
-          ? null
-          : <ProductionNavigator />
-      }
-      activityRail={
-        learning
-          ? null
-          : <ActivityRail />
-      }
+      productionNavigator={null}
+      activityRail={null}
       spatialCanvas={
         learning ? (
           <EducationalCommandCenter />
         ) : (
-          <SpatialCanvas />
+          <KnowledgeProductionCommandCenter />
         )
       }
-      inspectorDock={
-        learning
-          ? null
-          : <InspectorDock />
-      }
+      inspectorDock={null}
       compactContent={learning}
     />
   );
