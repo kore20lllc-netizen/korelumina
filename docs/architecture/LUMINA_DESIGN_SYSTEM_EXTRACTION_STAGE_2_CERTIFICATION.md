@@ -146,3 +146,117 @@ The Lumina Design System was audited for the following Knowledge-specific concep
 - `Canonical Knowledge`
 - Knowledge lifecycle
 - Knowledge genealogy
+
+No identifier-level semantic leakage was found within:
+
+```text
+apps/lumina-builder/src/components/design-system/lumina
+```
+
+Identifier checks alone are not sufficient.
+
+Lumina must not own constitutional meaning, lifecycle rules, governance rules, provenance semantics, educational semantics, or organizational intelligence semantics, even when no Knowledge-specific identifiers appear in the code.
+
+Semantic ownership is determined by behavior and responsibility, not only by names.
+
+## 8. Certified Adapter Boundary
+
+Knowledge Operations currently consumes shared Lumina components through thin domain adapters, including:
+
+- `ExecutiveIdentity`
+- `ExecutiveMetrics`
+- `ExecutiveOperationsDeck`
+- `ExecutiveRibbon`
+- `KnowledgeDomainNavigator`
+- `KnowledgeExecutiveCard`
+- `FlowLayer`
+- `CanvasSurface`
+
+These adapters preserve domain naming and state ownership while delegating shared visual behavior to Lumina.
+
+## 9. Regression Validation
+
+Stage 2 was validated through:
+
+- full runtime TypeScript build
+- full builder production build
+- visual validation after every extraction milestone
+- active-state validation
+- inactive-state validation
+- focus-state validation
+- responsive-layout validation
+- canvas overflow validation
+- spacing validation
+- connector alignment validation
+- semantic leak audit
+- scoped commit validation
+
+The certified build completed successfully at commit:
+
+```text
+f727e1a feat(lumina): extract flow canvas
+```
+
+## 10. Certified Extraction Sequence
+
+The final Stage 2 extraction sequence is:
+
+```text
+03a92f4 feat(lumina): extract segmented domain navigator
+56459af feat(lumina): extract flow connector
+f727e1a feat(lumina): extract flow canvas
+```
+
+These follow the earlier certified executive extraction milestones.
+
+## 11. Knowledge Operations Design Laboratory
+
+Knowledge Operations is the flagship workspace for validating new Lumina interaction patterns.
+
+New shared primitives must first achieve production certification within Knowledge Operations or another explicitly designated flagship workspace.
+
+Lumina evolves from proven implementations, not speculative abstractions.
+
+A flagship workspace must prove the visual, behavioral, responsive, accessibility, and operational integrity of a component before it can become part of the shared design system.
+
+## 12. UI Certification Rule
+
+A shared component may only be extracted after:
+
+1. Architecture approval is complete.
+2. The production UI is implemented.
+3. Visual certification is complete.
+4. Behavioral certification is complete.
+5. Extraction can be performed without redesign.
+6. The originating workspace remains regression-free.
+
+The UI is the contract.
+
+The backend and runtime must conform to the certified interface rather than constrain it.
+
+## 13. Future Extraction Rule
+
+A future component may enter Lumina only when all of the following are true:
+
+1. It has been visually certified in a production workspace.
+2. Its behavior has been certified.
+3. Its appearance and behavior can be preserved without redesign.
+4. Its API can remain truthful without domain terminology.
+5. At least one additional KoreLumina workspace can use it without importing domain-specific types.
+6. Extraction does not invent new interaction behavior.
+7. Extraction does not weaken the originating workspace.
+8. The full build remains green.
+9. The originating workspace passes visual regression validation.
+10. Cross-workspace reuse is demonstrated rather than assumed.
+
+## 14. Certification Result
+
+Stage 2 is certified complete.
+
+Knowledge Operations remains the owner of Knowledge meaning.
+
+Knowledge Operations remains the flagship design laboratory for proving future Lumina patterns.
+
+Lumina owns the certified shared executive, navigation, and flow language proven by production-grade workspace implementations.
+
+Further extraction shall occur only after a future flagship workspace produces a visually certified, behaviorally stable, domain-neutral component whose reuse is demonstrated across KoreLumina.
