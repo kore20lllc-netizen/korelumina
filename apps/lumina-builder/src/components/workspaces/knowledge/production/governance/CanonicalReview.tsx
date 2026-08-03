@@ -1,0 +1,518 @@
+import {
+  AlertTriangle,
+  BadgeCheck,
+  CheckCircle2,
+  Clock3,
+  FileClock,
+  GitCompareArrows,
+  Scale,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
+
+import {
+  LuminaExecutiveCard,
+  LuminaExecutiveMetricGrid,
+} from "@/components/design-system/lumina";
+
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+const REVIEW_QUEUE = [
+  {
+    id: "KCAP-2026-042",
+    title: "Runtime Isolation Recovery Standard",
+    domain: "Runtime Architecture",
+    authority: "Architecture Council",
+    reviewers: "3 of 4 assigned",
+    conflict: "No unresolved conflicts",
+    readiness: 92,
+    state: "Ready for final review",
+    tone: "emerald" as const,
+  },
+  {
+    id: "KCAP-2026-039",
+    title: "Knowledge Package Integrity Protocol",
+    domain: "Knowledge Constitution",
+    authority: "Constitutional Review Board",
+    reviewers: "4 of 5 assigned",
+    conflict: "1 constitutional interpretation",
+    readiness: 74,
+    state: "Decision required",
+    tone: "amber" as const,
+  },
+  {
+    id: "KCAP-2026-036",
+    title: "Mission Recovery Evidence Standard",
+    domain: "Mission System",
+    authority: "Mission Governance",
+    reviewers: "2 of 4 assigned",
+    conflict: "Supersession scope disputed",
+    readiness: 58,
+    state: "Review blocked",
+    tone: "rose" as const,
+  },
+];
+
+const TIMELINE = [
+  {
+    label: "Evidence certified",
+    detail: "Validation Council · 09:14",
+    state: "complete",
+  },
+  {
+    label: "Constitutional scope reviewed",
+    detail: "Chief Systems Architect · 10:02",
+    state: "complete",
+  },
+  {
+    label: "Authority review",
+    detail: "Architecture Council · In progress",
+    state: "active",
+  },
+  {
+    label: "Publication decision",
+    detail: "Required before canonical promotion",
+    state: "waiting",
+  },
+];
+
+const AUTHORITIES = [
+  {
+    title: "Constitutional authority",
+    value: "Knowledge Constitution",
+    detail: "Defines admissibility and canonical constraints.",
+  },
+  {
+    title: "Domain authority",
+    value: "Architecture Council",
+    detail: "Owns technical scope and supersession decisions.",
+  },
+  {
+    title: "Publication authority",
+    value: "Chief Systems Architect",
+    detail: "Certifies organizational publication readiness.",
+  },
+];
+
+function readinessTone(
+  value: number,
+) {
+  if (value >= 85) {
+    return "bg-emerald-300";
+  }
+
+  if (value >= 70) {
+    return "bg-amber-300";
+  }
+
+  return "bg-rose-300";
+}
+
+export function CanonicalReview() {
+  return (
+    <section
+      aria-labelledby="canonical-review-title"
+      className="grid gap-5"
+    >
+      <header className="rounded-[28px] border border-blue-400/48 bg-[linear-gradient(145deg,rgba(4,14,36,.88),rgba(18,10,48,.82),rgba(4,16,38,.88))] p-6 shadow-[0_28px_90px_rgba(0,0,0,.34)] ring-1 ring-inset ring-cyan-300/12">
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+          <div className="min-w-0">
+            <div className="flex items-center gap-3">
+              <ExecutivePremiumIcon
+                icon={Scale}
+                state="warning"
+              />
+
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
+                  Governance threshold
+                </div>
+
+                <h2
+                  id="canonical-review-title"
+                  className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
+                >
+                  Canonical Review
+                </h2>
+              </div>
+            </div>
+
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
+              Knowledge Packages leave production and enter constitutional
+              governance. Authority, conflict resolution, reviewer coverage,
+              supersession, and publication readiness become visible before
+              canonical promotion.
+            </p>
+          </div>
+
+          <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-2">
+            <div className="rounded-[18px] border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
+                Awaiting review
+              </div>
+              <div className="mt-1 text-xl font-semibold text-amber-100">
+                12
+              </div>
+            </div>
+
+            <div className="rounded-[18px] border border-rose-300/20 bg-rose-300/[0.06] px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
+                Conflicts
+              </div>
+              <div className="mt-1 text-xl font-semibold text-rose-100">
+                3
+              </div>
+            </div>
+
+            <div className="rounded-[18px] border border-cyan-300/20 bg-cyan-300/[0.06] px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
+                Reviewers active
+              </div>
+              <div className="mt-1 text-xl font-semibold text-cyan-100">
+                18
+              </div>
+            </div>
+
+            <div className="rounded-[18px] border border-emerald-300/20 bg-emerald-300/[0.06] px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
+                Ready to publish
+              </div>
+              <div className="mt-1 text-xl font-semibold text-emerald-100">
+                5
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <LuminaExecutiveMetricGrid
+        columns={4}
+      >
+        <LuminaExecutiveCard
+          title="Review queue"
+          value="12"
+          description="Knowledge Packages awaiting governance."
+          accentKey="amber"
+          icon={<FileClock className="h-4 w-4 text-amber-300" />}
+        />
+
+        <LuminaExecutiveCard
+          title="Required reviewers"
+          value="18"
+          description="Assigned authorities across active reviews."
+          accentKey="cyan"
+          icon={<Users className="h-4 w-4 text-cyan-300" />}
+        />
+
+        <LuminaExecutiveCard
+          title="Pending decisions"
+          value="7"
+          description="Authority decisions required before promotion."
+          accentKey="violet"
+          icon={<Clock3 className="h-4 w-4 text-violet-300" />}
+        />
+
+        <LuminaExecutiveCard
+          title="Publication readiness"
+          value="82%"
+          description="Average readiness across the governance queue."
+          accentKey="emerald"
+          icon={<BadgeCheck className="h-4 w-4 text-emerald-300" />}
+        />
+      </LuminaExecutiveMetricGrid>
+
+      <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
+        <section className="rounded-[26px] border border-blue-400/44 bg-[linear-gradient(145deg,rgba(4,14,35,.82),rgba(15,10,42,.74))] p-5 ring-1 ring-inset ring-cyan-300/10">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
+                Governance queue
+              </div>
+              <h3 className="mt-1 text-lg font-semibold text-sky-100">
+                Capsules awaiting canonical decision
+              </h3>
+            </div>
+
+            <div className="rounded-full border border-cyan-300/18 bg-cyan-300/[0.05] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
+              3 priority reviews
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-4">
+            {REVIEW_QUEUE.map((item) => (
+              <article
+                key={item.id}
+                className="rounded-[22px] border border-blue-400/42 bg-slate-950/28 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
+              >
+                <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
+                        {item.id}
+                      </span>
+
+                      <span
+                        className={[
+                          "rounded-full border px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em]",
+                          item.tone === "emerald"
+                            ? "border-emerald-300/24 bg-emerald-300/[0.07] text-emerald-100"
+                            : item.tone === "amber"
+                              ? "border-amber-300/24 bg-amber-300/[0.07] text-amber-100"
+                              : "border-rose-300/24 bg-rose-300/[0.07] text-rose-100",
+                        ].join(" ")}
+                      >
+                        {item.state}
+                      </span>
+                    </div>
+
+                    <h4 className="mt-2 text-base font-semibold text-white">
+                      {item.title}
+                    </h4>
+
+                    <div className="mt-2 text-xs text-sky-400/68">
+                      {item.domain} · {item.authority}
+                    </div>
+                  </div>
+
+                  <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[360px]">
+                    <div className="rounded-[16px] border border-cyan-300/14 bg-cyan-300/[0.03] p-3">
+                      <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                        Required reviewers
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-cyan-100">
+                        {item.reviewers}
+                      </div>
+                    </div>
+
+                    <div className="rounded-[16px] border border-rose-300/14 bg-rose-300/[0.025] p-3">
+                      <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
+                        Conflict posture
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-rose-100">
+                        {item.conflict}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div className="flex items-center justify-between text-[10px]">
+                    <span className="font-semibold uppercase tracking-[0.14em] text-sky-400/56">
+                      Publication readiness
+                    </span>
+                    <span className="font-semibold text-white">
+                      {item.readiness}%
+                    </span>
+                  </div>
+
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-950/72">
+                    <div
+                      className={[
+                        "h-full rounded-full",
+                        readinessTone(item.readiness),
+                      ].join(" ")}
+                      style={{
+                        width: `${item.readiness}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div className="grid gap-5">
+          <section className="rounded-[26px] border border-violet-300/24 bg-violet-300/[0.035] p-5">
+            <div className="flex items-center gap-3">
+              <ExecutivePremiumIcon
+                icon={ShieldCheck}
+                state="active"
+              />
+
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-200/58">
+                  Authority hierarchy
+                </div>
+                <h3 className="mt-1 text-base font-semibold text-violet-100">
+                  Governance chain
+                </h3>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3">
+              {AUTHORITIES.map((authority, index) => (
+                <div
+                  key={authority.title}
+                  className="relative rounded-[18px] border border-violet-300/16 bg-slate-950/24 p-4"
+                >
+                  {index < AUTHORITIES.length - 1 ? (
+                    <div className="absolute left-7 top-full h-3 w-px bg-violet-300/24" />
+                  ) : null}
+
+                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-300/52">
+                    {authority.title}
+                  </div>
+
+                  <div className="mt-1 text-sm font-semibold text-white">
+                    {authority.value}
+                  </div>
+
+                  <div className="mt-2 text-xs leading-5 text-violet-200/56">
+                    {authority.detail}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-[26px] border border-cyan-300/22 bg-cyan-300/[0.025] p-5">
+            <div className="flex items-center gap-3">
+              <ExecutivePremiumIcon
+                icon={GitCompareArrows}
+                state="warning"
+              />
+
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
+                  Supersession preview
+                </div>
+                <h3 className="mt-1 text-base font-semibold text-cyan-100">
+                  Current versus proposed authority
+                </h3>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-[18px] border border-slate-300/14 bg-slate-300/[0.025] p-4">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/48">
+                  Current canonical capsule
+                </div>
+                <div className="mt-1 text-sm font-semibold text-slate-100">
+                  KCAP-2025-118 · Runtime Recovery Standard v2.4
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <GitCompareArrows className="h-4 w-4 text-cyan-300/70" />
+              </div>
+
+              <div className="rounded-[18px] border border-amber-300/20 bg-amber-300/[0.045] p-4">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                  Proposed replacement
+                </div>
+                <div className="mt-1 text-sm font-semibold text-amber-100">
+                  KCAP-2026-042 · Runtime Isolation Recovery Standard v3.0
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,.7fr)]">
+        <section className="rounded-[26px] border border-blue-400/42 bg-slate-950/26 p-5">
+          <div className="flex items-center gap-3">
+            <ExecutivePremiumIcon
+              icon={Clock3}
+              state="active"
+            />
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
+                Approval timeline
+              </div>
+              <h3 className="mt-1 text-base font-semibold text-cyan-100">
+                Governance progression
+              </h3>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            {TIMELINE.map((item, index) => (
+              <div
+                key={item.label}
+                className="relative"
+              >
+                {index < TIMELINE.length - 1 ? (
+                  <div className="absolute left-[calc(50%+18px)] top-4 hidden h-px w-[calc(100%-36px)] bg-cyan-300/18 md:block" />
+                ) : null}
+
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div
+                    className={[
+                      "flex h-8 w-8 items-center justify-center rounded-full border",
+                      item.state === "complete"
+                        ? "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-200"
+                        : item.state === "active"
+                          ? "border-cyan-300/36 bg-cyan-300/[0.10] text-cyan-100 shadow-[0_0_16px_rgba(34,211,238,.18)]"
+                          : "border-slate-300/16 bg-slate-300/[0.035] text-slate-400",
+                    ].join(" ")}
+                  >
+                    {item.state === "complete" ? (
+                      <CheckCircle2 className="h-4 w-4" />
+                    ) : item.state === "active" ? (
+                      <Clock3 className="h-4 w-4" />
+                    ) : (
+                      <FileClock className="h-4 w-4" />
+                    )}
+                  </div>
+
+                  <div className="mt-3 text-xs font-semibold text-white">
+                    {item.label}
+                  </div>
+
+                  <div className="mt-1 text-[10px] leading-4 text-sky-400/56">
+                    {item.detail}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[26px] border border-rose-300/22 bg-rose-300/[0.025] p-5">
+          <div className="flex items-center gap-3">
+            <ExecutivePremiumIcon
+              icon={AlertTriangle}
+              state="warning"
+            />
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rose-300/58">
+                Pending decisions
+              </div>
+              <h3 className="mt-1 text-base font-semibold text-rose-100">
+                Governance attention required
+              </h3>
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-3">
+            <div className="rounded-[18px] border border-rose-300/14 bg-slate-950/22 p-4">
+              <div className="text-xs font-semibold text-white">
+                Resolve constitutional interpretation
+              </div>
+              <div className="mt-2 text-[11px] leading-5 text-rose-200/56">
+                Determine whether integrity remediation history must remain
+                visible after canonical resealing.
+              </div>
+            </div>
+
+            <div className="rounded-[18px] border border-amber-300/14 bg-slate-950/22 p-4">
+              <div className="text-xs font-semibold text-white">
+                Confirm supersession boundary
+              </div>
+              <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
+                Decide whether the proposed capsule replaces the full runtime
+                recovery standard or only isolation recovery guidance.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}

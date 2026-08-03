@@ -14,6 +14,10 @@ import {
   KnowledgeDistributionHub,
 } from "../distribution";
 
+import {
+  CanonicalReview,
+} from "../governance";
+
 export function KnowledgeProductionCommandCenter() {
   const [
     selectedCapsuleId,
@@ -72,6 +76,8 @@ export function KnowledgeProductionCommandCenter() {
           />
         </div>
       ) : null}
+
+      <CanonicalReview />
 
       <KnowledgeDistributionHub
         capsules={knowledgeCapsules}
