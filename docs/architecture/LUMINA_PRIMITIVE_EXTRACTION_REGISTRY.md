@@ -559,12 +559,23 @@ Extraction must stop when:
 - Primitive name: Standard Premium Card
 - Current locations: Repeated local `cardClass` definitions
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge, Runtime, diagnostics, audit, admin, developer, and designer surfaces
 - Dependencies: Premium surface and contour tokens
 - Semantic boundary: Domain-neutral
-- Extraction readiness: Requires certification and visual baseline
+- Extraction readiness: Certified for future extraction after screenshot baselines and Regression Safety Gate completion
 - Evidence: High repetition of `rounded-[18px] p-4`, base card, and standard contour
+- Certified baseline: Current production implementation
+- Certified rendering contract:
+  - `rounded-[18px] p-4`
+  - `premiumSurfaces.base.card`
+  - `electricContour.strength.standard`
+- Permitted extraction delta: Ownership and import location only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: The latest explicitly approved production rendering remains authoritative until a later polish milestone is separately certified
 
 ### LPR-011 — Executive Title and Metrics Composition
 
