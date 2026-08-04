@@ -16,6 +16,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaStandardPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -105,12 +109,6 @@ function StatusBadge({
     </span>
   );
 }
-
-const panelClass = [
-  "rounded-[26px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
-].join(" ");
 
 const prominentPanelClass = [
   "rounded-[28px] p-6",
@@ -241,7 +239,7 @@ export function CanonicalKnowledge() {
       </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Published capsules
@@ -356,10 +354,10 @@ export function CanonicalKnowledge() {
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
         <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={LibraryBig}
@@ -394,9 +392,9 @@ export function CanonicalKnowledge() {
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
 
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Archive}
@@ -438,7 +436,7 @@ export function CanonicalKnowledge() {
                 </div>
               </div>
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
         </div>
       </div>
     </section>
