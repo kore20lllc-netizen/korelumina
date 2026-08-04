@@ -643,14 +643,38 @@ Extraction must stop when:
 ### LPR-013 — Panel Header
 
 - Primitive name: Panel Header
-- Current locations: Repeated icon, eyebrow, title, and optional badge structures
+- Current locations: Repeated icon, eyebrow, title, and optional badge or action structures
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge, Runtime, Admin, Repo Audit, Developer, Designer
 - Dependencies: Executive Premium Icon and typography tokens
-- Semantic boundary: Domain-neutral
-- Extraction readiness: Requires contract consolidation
-- Evidence: Cross-workspace structural convergence
+- Semantic boundary: Domain-neutral structure only; all labels, titles, badges, controls, and domain language remain Domain-Owned
+- Extraction readiness: Certified for future extraction after screenshot baselines, explicit variant preservation, and Regression Safety Gate completion
+- Evidence: Cross-workspace structural convergence across all audited flagship workspaces
+- Certified baseline: Current production implementations
+- Certified structural contract:
+  - optional leading icon region
+  - eyebrow region
+  - title region
+  - optional trailing badge or action region
+  - injected content only
+  - no embedded workspace terminology
+- Certified alignment variants:
+  - `inline`: icon and text aligned with `flex items-center gap-3`
+  - `top-aligned`: icon and text aligned with `flex items-start gap-3`
+  - `responsive-action`: stacked by default with `sm:items-end sm:justify-between`
+- Typography rule: Preserve each consumer current approved eyebrow tracking, title scale, color, and spacing
+- Permitted extraction delta: Ownership, import location, and explicit selection of an already-approved structural variant only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Prohibited consolidation:
+  - Do not force one title size across all consumers
+  - Do not force one eyebrow tracking value across all consumers
+  - Do not require an icon, badge, or action where none currently exists
+  - Do not move workspace-owned actions into the shared primitive
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: Each consumer retains its latest explicitly approved production rendering until a later polish milestone is separately certified
 
 ### LPR-014 — Status Badge and State Surface
 
