@@ -22,6 +22,10 @@ import {
   premiumSurfaces,
 } from "@/components/design-system/lumina";
 
+import {
+  LuminaStandardPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
+
 import type {
   KnowledgeCapsuleModel,
   KnowledgeDistributionRecord,
@@ -36,12 +40,6 @@ const prominentPanelClass = [
   "rounded-[28px] p-6",
   premiumSurfaces.base.panel,
   electricContour.strength.prominent,
-].join(" ");
-
-const panelClass = [
-  "rounded-[26px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
 ].join(" ");
 
 const cardClass = [
@@ -238,7 +236,7 @@ export function OrganizationalImpact({
         </LuminaExecutiveMetricGrid>
       </div>
 
-      <section className={panelClass}>
+      <LuminaStandardPremiumPanel>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -298,10 +296,10 @@ export function OrganizationalImpact({
             </article>
           ))}
         </div>
-      </section>
+      </LuminaStandardPremiumPanel>
 
       <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <section className={[panelClass, "h-full"].join(" ")}>
+        <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Sparkles}
@@ -343,9 +341,9 @@ export function OrganizationalImpact({
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
-        <section className={[panelClass, "h-full"].join(" ")}>
+        <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={ShieldCheck}
@@ -385,10 +383,10 @@ export function OrganizationalImpact({
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
       </div>
 
-      <section className={panelClass}>
+      <LuminaStandardPremiumPanel>
         <div className="flex items-center gap-3">
           <ExecutivePremiumIcon
             icon={GitBranch}
@@ -427,7 +425,7 @@ export function OrganizationalImpact({
             </div>
           ))}
         </div>
-      </section>
+      </LuminaStandardPremiumPanel>
     </section>
   );
 }
