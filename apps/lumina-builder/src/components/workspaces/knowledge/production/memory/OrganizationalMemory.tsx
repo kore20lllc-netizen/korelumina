@@ -15,6 +15,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaStandardPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -92,12 +96,6 @@ const summaries = [
     lineage: "Derived from 3 active projections",
   },
 ];
-
-const panelClass = [
-  "rounded-[26px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
-].join(" ");
 
 const prominentPanelClass = [
   "rounded-[28px] p-6",
@@ -207,7 +205,7 @@ export function OrganizationalMemory() {
       </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.38fr)_minmax(340px,.62fr)]">
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Memory adaptation
@@ -289,10 +287,10 @@ export function OrganizationalMemory() {
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
         <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -343,9 +341,9 @@ export function OrganizationalMemory() {
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
 
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Network}
@@ -384,12 +382,12 @@ export function OrganizationalMemory() {
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
         </div>
       </div>
 
       <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <section className={[panelClass, "h-full"].join(" ")}>
+        <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Sparkles}
@@ -424,9 +422,9 @@ export function OrganizationalMemory() {
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
-        <section className={[panelClass, "h-full"].join(" ")}>
+        <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={History}
@@ -467,7 +465,7 @@ export function OrganizationalMemory() {
               </div>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
       </div>
     </section>
   );
