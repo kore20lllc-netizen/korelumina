@@ -18,6 +18,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaStandardPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -111,12 +115,6 @@ function readinessTone(
 
   return "bg-rose-300";
 }
-
-const panelClass = [
-  "rounded-[26px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
-].join(" ");
 
 const prominentPanelClass = [
   "rounded-[28px] p-6",
@@ -250,7 +248,7 @@ export function CanonicalReview() {
       </div>
 
       <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <section className={[panelClass, "h-full"].join(" ")}>
+        <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -348,10 +346,10 @@ export function CanonicalReview() {
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
         <div className="grid h-full gap-5 xl:grid-rows-2">
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -392,9 +390,9 @@ export function CanonicalReview() {
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
 
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={GitCompareArrows}
@@ -434,12 +432,12 @@ export function CanonicalReview() {
                 </div>
               </div>
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
         </div>
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,.7fr)]">
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Clock3}
@@ -497,9 +495,9 @@ export function CanonicalReview() {
               </div>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={AlertTriangle}
@@ -537,7 +535,7 @@ export function CanonicalReview() {
               </div>
             </div>
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
       </div>
     </section>
   );
