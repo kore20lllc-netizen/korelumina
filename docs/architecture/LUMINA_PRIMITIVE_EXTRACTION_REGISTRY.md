@@ -582,12 +582,34 @@ Extraction must stop when:
 - Primitive name: Executive Title and Metrics Composition
 - Current locations: Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, Organizational Impact
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
-- Consumers: Knowledge flagship; potential Runtime consumer after certification
-- Dependencies: Prominent panel, Executive Metric Grid, responsive split layout
-- Semantic boundary: Domain-neutral only when title, copy, posture content, and metrics are injected
-- Extraction readiness: Requires API consolidation and regression baselines
-- Evidence: Five-plus visually approved implementations
+- Maturity: Certified
+- Consumers: Knowledge flagship; potential Runtime consumer after separate certification
+- Dependencies: Prominent Premium Panel, Executive Metric Grid, responsive split layout
+- Semantic boundary: Domain-neutral only when title, description, posture content, metrics, and layout variant are injected
+- Extraction readiness: Certified for future extraction after screenshot baselines, explicit variant preservation, and Regression Safety Gate completion
+- Evidence: Six visually approved production implementations
+- Certified baseline: Current production implementations
+- Certified composition contract:
+  - prominent title panel on the left
+  - `LuminaExecutiveMetricGrid columns={2}` on the right
+  - `grid items-stretch gap-5`
+  - stacked layout below the certified responsive breakpoint
+  - equal-height title and metric regions
+- Certified responsive variants:
+  - `balanced`: `xl:grid-cols-2`
+  - `balanced-explicit`: `xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]`
+  - `content-led`: `xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]`
+- Variant evidence:
+  - `balanced`: Knowledge Genealogy, Organizational Impact
+  - `balanced-explicit`: Organizational Memory
+  - `content-led`: Canonical Review, Canonical Knowledge, Consumer Intelligence
+- Permitted extraction delta: Ownership, import location, and explicit selection of the already-approved layout variant only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Prohibited consolidation: Do not force all consumers into one column ratio
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: Each consumer retains its latest explicitly approved production variant until a later polish milestone is separately certified
 
 ### LPR-012 — Balanced Split Panel Composition
 
