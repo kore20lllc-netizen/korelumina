@@ -7,6 +7,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveCard,
+} from "@/components/design-system/lumina";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -19,7 +23,6 @@ import type {
 } from "../model";
 
 import {
-  FlagshipPanel,
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -67,12 +70,18 @@ export function EducationalProgress({
   onModuleSelect,
 }: EducationalProgressProps) {
   return (
-    <FlagshipPanel
-      title="Educational Progress"
-      description="Curriculum modules, dependency gates, competency objectives, coverage gaps and unresolved conflicts"
-      emphasis="strong"
-      className="h-auto"
-    >
+    <section className="group relative h-auto min-w-0 overflow-hidden rounded-[30px] border border-blue-400/70 bg-slate-950/48 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_30px_rgba(37,99,235,.16),0_28px_160px_rgba(0,0,0,.40),inset_0_0_22px_rgba(56,189,248,.05)] ring-1 ring-inset ring-cyan-300/20 backdrop-blur-[44px] backdrop-saturate-[170%]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_2%,rgba(124,58,237,.30),transparent_36%),radial-gradient(circle_at_29%_42%,rgba(217,119,6,.17),transparent_27%),radial-gradient(circle_at_74%_64%,rgba(67,56,202,.13),transparent_30%),radial-gradient(circle_at_91%_14%,rgba(34,211,238,.035),transparent_22%),radial-gradient(circle_at_57%_86%,rgba(236,72,153,.075),transparent_18%),linear-gradient(180deg,rgba(255,255,255,.018),transparent_24%,rgba(2,6,23,.10))]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-[7%] top-0 h-px opacity-90 [background:linear-gradient(90deg,transparent_0%,rgba(96,165,250,.10)_12%,rgba(247,215,116,.42)_34%,rgba(255,255,255,.62)_50%,rgba(125,211,252,.28)_69%,rgba(59,130,246,.08)_88%,transparent_100%)] [box-shadow:0_0_22px_rgba(125,211,252,.14),0_0_40px_rgba(247,215,116,.08)]" />
+
+      <div className="relative z-10 border-b border-white/[0.06] px-5 py-5">
+        <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/82">
+          Educational Progress
+        </h2>
+        <p className="mt-2 max-w-4xl text-xs leading-5 text-white/48">
+          Curriculum modules, dependency gates, competency objectives, coverage gaps and unresolved conflicts
+        </p>
+      </div>
       <div className="grid gap-3 p-4">
         {modules.map((module) => {
           const Icon =
@@ -82,34 +91,16 @@ export function EducationalProgress({
             module.id === selectedModuleId;
 
           return (
-            <button
+            <LuminaExecutiveCard
               key={module.id}
-              type="button"
+              as="button"
+              interactive
+              selected={selected}
               onClick={() => {
                 onModuleSelect(module.id);
               }}
-              aria-pressed={selected}
-              className={cn(
-                "group relative overflow-hidden rounded-[20px] border p-4 text-left",
-                "transition-[transform,border-color,background-color,box-shadow] duration-200",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/42",
-                "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-                "motion-reduce:transform-none motion-reduce:transition-none",
-                selected
-                  ? [
-                      "border-cyan-200/62",
-                      "bg-[linear-gradient(135deg,rgba(8,27,62,0.82),rgba(31,17,67,0.70),rgba(6,24,55,0.78))]",
-                      "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_28px_rgba(34,211,238,0.13),0_16px_36px_rgba(2,6,23,0.24)]",
-                    ].join(" ")
-                  : [
-                      "border-cyan-300/24",
-                      "bg-[linear-gradient(135deg,rgba(3,12,35,0.66),rgba(15,12,42,0.56),rgba(3,14,37,0.64))]",
-                      "shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_12px_28px_rgba(2,6,23,0.17)]",
-                      "hover:-translate-y-0.5 hover:border-cyan-200/48",
-                      "hover:bg-[linear-gradient(135deg,rgba(5,18,49,0.78),rgba(24,16,58,0.66),rgba(5,20,48,0.74))]",
-                      "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.08),0_16px_34px_rgba(2,6,23,0.24)]",
-                    ].join(" "),
-              )}
+              className="p-4"
+              bodyClassName="gap-0"
             >
               <div
                 aria-hidden="true"
@@ -302,7 +293,7 @@ export function EducationalProgress({
                   </div>
                 </div>
               )}
-            </button>
+            </LuminaExecutiveCard>
           );
         })}
 
@@ -323,6 +314,6 @@ export function EducationalProgress({
           </div>
         ) : null}
       </div>
-    </FlagshipPanel>
+    </section>
   );
 }
