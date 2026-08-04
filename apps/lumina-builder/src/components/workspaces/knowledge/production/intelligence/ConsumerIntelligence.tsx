@@ -23,6 +23,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaStandardPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -46,12 +50,6 @@ const consumerIcons = {
   "executive-office": ShieldCheck,
   "engineering-workspace": Users,
 } as const;
-
-const panelClass = [
-  "rounded-[26px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
-].join(" ");
 
 const prominentPanelClass = [
   "rounded-[28px] p-6",
@@ -271,7 +269,7 @@ export function ConsumerIntelligence({
       </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.42fr)_minmax(340px,.58fr)]">
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -367,10 +365,10 @@ export function ConsumerIntelligence({
               );
             })}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
         <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={TrendingUp}
@@ -408,9 +406,9 @@ export function ConsumerIntelligence({
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
 
-          <section className={[panelClass, "h-full"].join(" ")}>
+          <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Sparkles}
@@ -448,12 +446,12 @@ export function ConsumerIntelligence({
                 </div>
               ))}
             </div>
-          </section>
+          </LuminaStandardPremiumPanel>
         </div>
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.18fr)_minmax(360px,.82fr)]">
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Activity}
@@ -492,9 +490,9 @@ export function ConsumerIntelligence({
               </article>
             ))}
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
 
-        <section className={panelClass}>
+        <LuminaStandardPremiumPanel>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={AlertTriangle}
@@ -550,7 +548,7 @@ export function ConsumerIntelligence({
               </div>
             </div>
           </div>
-        </section>
+        </LuminaStandardPremiumPanel>
       </div>
     </section>
   );
