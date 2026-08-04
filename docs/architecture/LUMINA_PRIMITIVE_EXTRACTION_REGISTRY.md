@@ -681,12 +681,58 @@ Extraction must stop when:
 - Primitive name: Status Badge and State Surface
 - Current locations: Distributed pills and state treatments across certified workspaces
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge, Runtime, Admin, Repo Audit, Developer, Designer
-- Dependencies: Semantic state tokens
-- Semantic boundary: Domain-neutral
-- Extraction readiness: Requires state vocabulary certification
-- Evidence: Broad repetition with partially inconsistent mappings
+- Dependencies:
+  - `semanticStatusLanguage`
+  - `semanticStateLanguage`
+  - `semanticIconFrame`
+  - `executiveIconTheme`
+- Semantic boundary: Domain-neutral state vocabulary and rendering shell only; workspace state names, labels, meanings, transitions, and business rules remain Domain-Owned
+- Extraction readiness: Certified for future extraction after screenshot baselines, consumer-specific state mapping inventories, and Regression Safety Gate completion
+- Evidence:
+  - broad repetition of rounded status pills and state surfaces
+  - existing shared semantic status and state foundations
+  - repeated healthy, active, warning, error, pending, restricted, superseded, archived, connected, consuming, running, starting, stopped, and failed treatments
+- Certified baseline: Current production implementations
+- Certified structural contract:
+  - optional compact rounded badge shell
+  - optional bordered state surface
+  - injected label or content
+  - semantic tone selected explicitly by the consumer
+  - no embedded workspace terminology
+- Certified semantic tone family:
+  - `healthy`
+  - `active`
+  - `warning`
+  - `error`
+  - `neutral`
+- Existing extended workspace states:
+  - pending
+  - restricted
+  - superseded
+  - archived
+  - connected
+  - consuming
+  - running
+  - starting
+  - stopped
+  - failed
+- State mapping rule: Extended workspace states must map explicitly to a shared semantic tone without changing their domain meaning
+- Typography rule: Preserve each consumer current approved label size, weight, tracking, casing, and spacing
+- Color rule: Preserve each consumer current approved color mapping during extraction; no global recoloring is permitted
+- Permitted extraction delta: Ownership, import location, and explicit mapping to an already-approved semantic tone only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Prohibited consolidation:
+  - Do not rename workspace states
+  - Do not collapse distinct business states into one domain state
+  - Do not force one badge size or typography treatment across all consumers
+  - Do not replace consumer-approved colors during extraction
+  - Do not move state-transition logic into the shared visual primitive
+- Future polish: Permitted only as a separate semantic and visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: Each consumer retains its latest explicitly approved state rendering until a later polish milestone is separately certified
 
 ### LPR-015 — Activity Feed Row
 
