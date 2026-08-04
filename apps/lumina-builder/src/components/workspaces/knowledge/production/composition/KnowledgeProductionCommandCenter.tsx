@@ -34,6 +34,10 @@ import {
   KnowledgeGenealogy,
 } from "../genealogy";
 
+import {
+  OrganizationalImpact,
+} from "../impact";
+
 export function KnowledgeProductionCommandCenter() {
   const [
     selectedCapsuleId,
@@ -114,6 +118,11 @@ export function KnowledgeProductionCommandCenter() {
         capsules={knowledgeCapsules}
         selectedCapsuleId={selectedCapsuleId}
         onCapsuleSelect={handleCapsuleSelect}
+      />
+
+      <OrganizationalImpact
+        capsules={knowledgeCapsules}
+        records={knowledgeDistributionRecords}
       />
     </div>
   );

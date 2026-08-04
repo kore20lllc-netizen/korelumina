@@ -1,0 +1,3 @@
+export {
+  OrganizationalImpact,
+} from "./OrganizationalImpact";
