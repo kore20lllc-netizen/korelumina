@@ -513,12 +513,23 @@ Extraction must stop when:
 - Primitive name: Standard Premium Panel
 - Current locations: Repeated local `panelClass` definitions
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge lifecycle and other premium workspaces
 - Dependencies: Premium surface and contour tokens
 - Semantic boundary: Domain-neutral
-- Extraction readiness: Requires certification and visual baseline
+- Extraction readiness: Certified for future extraction after screenshot baselines and Regression Safety Gate completion
 - Evidence: High repetition of `rounded-[26px] p-5`, base panel, and standard contour
+- Certified baseline: Current production implementation
+- Certified rendering contract:
+  - `rounded-[26px] p-5`
+  - `premiumSurfaces.base.panel`
+  - `electricContour.strength.standard`
+- Permitted extraction delta: Ownership and import location only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: The latest explicitly approved production rendering remains authoritative until a later polish milestone is separately certified
 
 ### LPR-009 — Prominent Premium Panel
 
