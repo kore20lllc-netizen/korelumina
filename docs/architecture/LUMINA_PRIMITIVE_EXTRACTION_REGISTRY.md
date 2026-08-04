@@ -734,17 +734,58 @@ Extraction must stop when:
 - Future polish: Permitted only as a separate semantic and visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
 - Baseline authority: Each consumer retains its latest explicitly approved state rendering until a later polish milestone is separately certified
 
-### LPR-015 — Activity Feed Row
+### LPR-015 — Activity Feed Row Shell
 
-- Primitive name: Activity Feed Row
-- Current locations: Knowledge history, Runtime event stream, Runtime Diagnostics logs/activity, Repo Audit findings
+- Primitive name: Activity Feed Row Shell
+- Current locations: Knowledge history, Runtime Event Stream, Runtime Diagnostics logs/activity, Repo Audit findings
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
-- Consumers: Knowledge, Runtime, Diagnostics, Repo Audit
-- Dependencies: Standard card, status badge, metadata typography
-- Semantic boundary: Domain-neutral at row-shell level
-- Extraction readiness: Requires metadata and state contract consolidation
-- Evidence: Repeated event-oriented visual hierarchy
+- Maturity: Certified
+- Consumers: Knowledge, Runtime, Runtime Diagnostics, Repo Audit
+- Dependencies:
+  - Standard Premium Card
+  - Status Badge and State Surface
+  - metadata typography
+- Semantic boundary: Domain-neutral row shell only; event meaning, source models, severity, timestamps, actions, selection, live updates, and accessibility behavior remain Domain-Owned
+- Extraction readiness: Certified for future row-shell extraction after screenshot baselines, explicit variant inventories, and Regression Safety Gate completion
+- Evidence:
+  - repeated event-oriented visual hierarchy
+  - repeated leading marker, description, metadata, timestamp, and state regions
+  - repeated stacked row collections across four audited consumers
+- Certified baseline: Current production implementations
+- Certified structural contract:
+  - optional leading icon or state-marker region
+  - primary description region
+  - optional secondary metadata region
+  - optional timestamp region
+  - optional trailing status or action region
+  - injected content only
+  - no embedded workspace terminology
+- Certified presentation variants:
+  - `passive`: informational row with no row-level action
+  - `interactive`: row retaining its consumer-owned click, selection, hover, focus, and keyboard behavior
+  - `stream`: append-oriented row used inside a consumer-owned live region
+  - `log`: monospace or log-oriented content retained by the consumer
+- Metadata rule: Consumers retain ownership of actors, sources, project identifiers, capsule identifiers, findings, severities, timestamps, and event descriptions
+- Accessibility rule:
+  - Runtime Event Stream retains its consumer-owned `aria-live` and `aria-relevant` behavior
+  - interactive rows retain their existing roles, labels, selection state, focus behavior, and keyboard handling
+  - the shared shell must not create a live region or interaction role implicitly
+- Typography rule: Preserve each consumer current approved font family, size, weight, tracking, casing, wrapping, and spacing
+- State rule: Preserve each consumer current approved semantic tone and state mapping
+- Permitted extraction delta: Ownership, import location, and explicit selection of an already-approved presentation variant only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Prohibited consolidation:
+  - Do not create one universal activity event model
+  - Do not move event subscription or stream behavior into the shared row shell
+  - Do not move log filtering, follow mode, severity filtering, or autoscroll into the shared row shell
+  - Do not move Repo Audit finding actions into the shared row shell
+  - Do not normalize timestamps, metadata ordering, or event language during extraction
+  - Do not make passive rows interactive
+  - Do not remove existing interaction or accessibility behavior from interactive rows
+- Future polish: Permitted only as a separate visual or interaction refinement milestone with its own baseline, build, visual validation, accessibility validation, approval, commit, and push
+- Baseline authority: Each consumer retains its latest explicitly approved production rendering and behavior until a later refinement milestone is separately certified
 
 ## Architectural Conflicts
 
