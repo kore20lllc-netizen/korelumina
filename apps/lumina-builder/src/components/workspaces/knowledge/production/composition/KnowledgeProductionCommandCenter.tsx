@@ -26,6 +26,10 @@ import {
   OrganizationalMemory,
 } from "../memory";
 
+import {
+  ConsumerIntelligence,
+} from "../intelligence";
+
 export function KnowledgeProductionCommandCenter() {
   const [
     selectedCapsuleId,
@@ -96,6 +100,10 @@ export function KnowledgeProductionCommandCenter() {
         records={knowledgeDistributionRecords}
         selectedCapsuleId={selectedCapsuleId}
         onCapsuleSelect={handleCapsuleSelect}
+      />
+
+      <ConsumerIntelligence
+        records={knowledgeDistributionRecords}
       />
     </div>
   );

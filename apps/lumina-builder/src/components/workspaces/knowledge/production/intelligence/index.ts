@@ -1,0 +1,1 @@
+export { ConsumerIntelligence } from "./ConsumerIntelligence";
