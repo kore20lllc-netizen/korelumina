@@ -59,7 +59,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive metric grid | `LuminaExecutiveMetricGrid` across Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, Organizational Impact | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive premium icon | `ExecutivePremiumIcon` across Knowledge lifecycle and executive surfaces | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive title-and-metrics composition | Repeated side-by-side title panel plus 2×2 executive metric grid across five Knowledge lifecycle workspaces | 5+ | High | Stable | Needs consolidation | Domain-neutral at composition level | Candidate after lower-level primitives |
-| Standard premium panel | Repeated `rounded-[26px] p-5` plus `premiumSurfaces.base.panel` and standard electric contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
+| Standard premium panel | `LuminaStandardPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Prominent premium panel | Repeated `rounded-[28px] p-6` plus prominent contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
 | Standard premium card | Repeated `rounded-[18px] p-4` plus base card and standard contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
 | Compact premium card | Repeated `rounded-[14px]` or `rounded-[16px]` compact card variants | Medium | Medium | Emerging | Needs consolidation | Domain-neutral | Not ready |
@@ -120,7 +120,7 @@ Legend:
 | Executive ribbon | ✓ | ✓ | ~ | — | — | — | Certified |
 | Executive operations deck | ✓ | ✓ | — | — | — | — | Certified |
 | Executive title-and-metrics composition | ✓ | ~ | — | — | — | — | Stable |
-| Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
+| Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
 | Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
 | Panel header | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
@@ -165,12 +165,14 @@ Legend:
    - Not yet a certified component contract.
 
 2. **Standard panel composition**
-   - Repeated local constants:
+   - Centralized as `LuminaStandardPremiumPanel`.
+   - Contract:
      - `rounded-[26px] p-5`
      - `premiumSurfaces.base.panel`
      - `electricContour.strength.standard`
-   - High repetition.
-   - Candidate for future certification.
+   - Migrated one certified consumer at a time across six Knowledge lifecycle workspaces.
+   - Regression Safety Gate passed after every migration.
+   - Knowledge Distribution Hub remains excluded because its distinct contract is `rounded-[24px] p-5`.
 
 3. **Standard card composition**
    - Repeated local constants:
@@ -257,7 +259,7 @@ The following remain workspace-owned and must not be promoted directly:
 | `LuminaExecutiveRibbon` | Stable | Existing reusable implementation and certified consumers |
 | `LuminaExecutiveOperationsDeck` | Stable | Existing reusable implementation and certified consumers |
 | Prominent panel | Needs consolidation | Repeated local class constants, no shared component contract |
-| Standard panel | Needs consolidation | Repeated local class constants, no shared component contract |
+| `LuminaStandardPremiumPanel` | Stable | Explicit shared component contract with six certified consumers and completed regression validation |
 | Standard card | Needs consolidation | Repeated local class constants, no shared component contract |
 | Executive title-and-metrics composition | Needs consolidation | Stable visual pattern, varying local ratios and content structure |
 | Balanced split-panel composition | Needs consolidation | Repeated layout contract, not centrally owned |
