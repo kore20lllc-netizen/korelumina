@@ -616,12 +616,29 @@ Extraction must stop when:
 - Primitive name: Balanced Split Panel Composition
 - Current locations: Repeated `grid items-stretch gap-5 xl:grid-cols-2`
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge lifecycle and selected Runtime/detail surfaces
-- Dependencies: Standard panel primitive
-- Semantic boundary: Domain-neutral
-- Extraction readiness: Requires certification
+- Dependencies: Standard Premium Panel
+- Semantic boundary: Domain-neutral outer layout only; all panel content remains Domain-Owned
+- Extraction readiness: Certified for future extraction after screenshot baselines and Regression Safety Gate completion
 - Evidence: Repeated visually approved equal-width panel compositions
+- Certified baseline: Current production implementations
+- Certified rendering contract:
+  - `grid`
+  - `items-stretch`
+  - `gap-5`
+  - `xl:grid-cols-2`
+  - single-column stacking below `xl`
+  - equal-width columns at and above `xl`
+  - equal-height panel participation through stretch alignment
+- Permitted extraction delta: Ownership and import location only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Domain ownership rule: Titles, metrics, controls, cards, timelines, governance content, runtime content, and all other children remain owned by their workspaces
+- Prohibited consolidation: Do not replace asymmetric or explicitly fractional layouts with this primitive
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: Each consumer retains its latest explicitly approved production rendering until a later polish milestone is separately certified
 
 ### LPR-013 — Panel Header
 
