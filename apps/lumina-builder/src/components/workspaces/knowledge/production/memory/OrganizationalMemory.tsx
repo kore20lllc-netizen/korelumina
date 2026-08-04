@@ -123,8 +123,9 @@ export function OrganizationalMemory() {
       aria-labelledby="organizational-memory-title"
       className="grid gap-5"
     >
-      <header className={prominentPanelClass}>
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <header className={prominentPanelClass}>
+          <div className="flex h-full flex-col gap-5 xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -167,10 +168,10 @@ export function OrganizationalMemory() {
               canonical authority.
             </div>
           </div>
-        </div>
-      </header>
+          </div>
+        </header>
 
-      <LuminaExecutiveMetricGrid columns={4}>
+        <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Active projections"
           value="18"
@@ -202,7 +203,8 @@ export function OrganizationalMemory() {
           accentKey="amber"
           icon={<History className="h-4 w-4 text-amber-300" />}
         />
-      </LuminaExecutiveMetricGrid>
+        </LuminaExecutiveMetricGrid>
+      </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.38fr)_minmax(340px,.62fr)]">
         <section className={panelClass}>
@@ -289,8 +291,8 @@ export function OrganizationalMemory() {
           </div>
         </section>
 
-        <div className="grid gap-5">
-          <section className={panelClass}>
+        <div className="grid items-stretch gap-5 xl:grid-cols-2">
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -343,7 +345,7 @@ export function OrganizationalMemory() {
             </div>
           </section>
 
-          <section className={panelClass}>
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Network}
@@ -386,8 +388,8 @@ export function OrganizationalMemory() {
         </div>
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.22fr)_minmax(360px,.78fr)]">
-        <section className={panelClass}>
+      <div className="grid items-stretch gap-5 xl:grid-cols-2">
+        <section className={[panelClass, "h-full"].join(" ")}>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Sparkles}
@@ -404,7 +406,7 @@ export function OrganizationalMemory() {
             </div>
           </div>
 
-          <div className="mt-5 grid gap-3 lg:grid-cols-3">
+          <div className="mt-5 grid gap-3">
             {summaries.map((summary) => (
               <article
                 key={summary.title}
@@ -424,7 +426,7 @@ export function OrganizationalMemory() {
           </div>
         </section>
 
-        <section className={panelClass}>
+        <section className={[panelClass, "h-full"].join(" ")}>
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={History}

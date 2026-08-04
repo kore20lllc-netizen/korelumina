@@ -136,8 +136,8 @@ export function CanonicalKnowledge() {
       aria-labelledby="canonical-knowledge-title"
       className="grid gap-5"
     >
-      <header className={prominentPanelClass}>
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
+        <header className={prominentPanelClass}>
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -203,10 +203,9 @@ export function CanonicalKnowledge() {
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <LuminaExecutiveMetricGrid columns={4}>
+        <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Published capsules"
           value="59"
@@ -238,7 +237,8 @@ export function CanonicalKnowledge() {
           accentKey="amber"
           icon={<GitCompareArrows className="h-4 w-4 text-amber-300" />}
         />
-      </LuminaExecutiveMetricGrid>
+        </LuminaExecutiveMetricGrid>
+      </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
         <section className={panelClass}>
@@ -358,8 +358,8 @@ export function CanonicalKnowledge() {
           </div>
         </section>
 
-        <div className="grid gap-5">
-          <section className={panelClass}>
+        <div className="grid items-stretch gap-5 xl:grid-cols-2">
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={LibraryBig}
@@ -396,7 +396,7 @@ export function CanonicalKnowledge() {
             </div>
           </section>
 
-          <section className={panelClass}>
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Archive}

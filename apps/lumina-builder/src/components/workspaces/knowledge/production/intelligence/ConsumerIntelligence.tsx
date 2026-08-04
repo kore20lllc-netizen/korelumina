@@ -187,8 +187,9 @@ export function ConsumerIntelligence({
       aria-labelledby="consumer-intelligence-title"
       className="grid gap-5"
     >
-      <header className={prominentPanelClass}>
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
+        <header className={prominentPanelClass}>
+          <div className="flex h-full flex-col gap-5 xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -231,10 +232,10 @@ export function ConsumerIntelligence({
               signals, but never silently modifies canonical knowledge.
             </div>
           </div>
-        </div>
-      </header>
+          </div>
+        </header>
 
-      <LuminaExecutiveMetricGrid columns={4}>
+        <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Active consumers"
           value={String(activeConsumers)}
@@ -266,7 +267,8 @@ export function ConsumerIntelligence({
           accentKey="violet"
           icon={<Activity className="h-4 w-4 text-violet-300" />}
         />
-      </LuminaExecutiveMetricGrid>
+        </LuminaExecutiveMetricGrid>
+      </div>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.42fr)_minmax(340px,.58fr)]">
         <section className={panelClass}>
@@ -367,8 +369,8 @@ export function ConsumerIntelligence({
           </div>
         </section>
 
-        <div className="grid gap-5">
-          <section className={panelClass}>
+        <div className="grid items-stretch gap-5 xl:grid-cols-2">
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={TrendingUp}
@@ -408,7 +410,7 @@ export function ConsumerIntelligence({
             </div>
           </section>
 
-          <section className={panelClass}>
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Sparkles}

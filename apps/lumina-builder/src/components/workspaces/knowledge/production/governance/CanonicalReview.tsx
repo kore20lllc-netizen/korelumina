@@ -142,8 +142,8 @@ export function CanonicalReview() {
       aria-labelledby="canonical-review-title"
       className="grid gap-5"
     >
-      <header className={prominentPanelClass}>
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
+        <header className={prominentPanelClass}>
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -171,51 +171,50 @@ export function CanonicalReview() {
               supersession, and publication readiness become visible before
               canonical promotion.
             </p>
+
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
+                  Awaiting review
+                </div>
+                <div className="mt-1 text-xl font-semibold text-amber-100">
+                  12
+                </div>
+              </div>
+
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
+                  Conflicts
+                </div>
+                <div className="mt-1 text-xl font-semibold text-rose-100">
+                  3
+                </div>
+              </div>
+
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
+                  Reviewers active
+                </div>
+                <div className="mt-1 text-xl font-semibold text-cyan-100">
+                  18
+                </div>
+              </div>
+
+              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
+                  Ready to publish
+                </div>
+                <div className="mt-1 text-xl font-semibold text-emerald-100">
+                  5
+                </div>
+              </div>
+            </div>
           </div>
+        </header>
 
-          <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-2">
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
-              <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
-                Awaiting review
-              </div>
-              <div className="mt-1 text-xl font-semibold text-amber-100">
-                12
-              </div>
-            </div>
-
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
-              <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
-                Conflicts
-              </div>
-              <div className="mt-1 text-xl font-semibold text-rose-100">
-                3
-              </div>
-            </div>
-
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
-              <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
-                Reviewers active
-              </div>
-              <div className="mt-1 text-xl font-semibold text-cyan-100">
-                18
-              </div>
-            </div>
-
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 px-4 py-3">
-              <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
-                Ready to publish
-              </div>
-              <div className="mt-1 text-xl font-semibold text-emerald-100">
-                5
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <LuminaExecutiveMetricGrid
-        columns={4}
-      >
+        <LuminaExecutiveMetricGrid
+          columns={2}
+        >
         <LuminaExecutiveCard
           title="Review queue"
           value="12"
@@ -247,10 +246,11 @@ export function CanonicalReview() {
           accentKey="emerald"
           icon={<BadgeCheck className="h-4 w-4 text-emerald-300" />}
         />
-      </LuminaExecutiveMetricGrid>
+        </LuminaExecutiveMetricGrid>
+      </div>
 
-      <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
-        <section className={panelClass}>
+      <div className="grid items-stretch gap-5 xl:grid-cols-2">
+        <section className={[panelClass, "h-full"].join(" ")}>
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -350,8 +350,8 @@ export function CanonicalReview() {
           </div>
         </section>
 
-        <div className="grid gap-5">
-          <section className={panelClass}>
+        <div className="grid h-full gap-5 xl:grid-rows-2">
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -394,7 +394,7 @@ export function CanonicalReview() {
             </div>
           </section>
 
-          <section className={panelClass}>
+          <section className={[panelClass, "h-full"].join(" ")}>
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={GitCompareArrows}

@@ -30,6 +30,10 @@ import {
   ConsumerIntelligence,
 } from "../intelligence";
 
+import {
+  KnowledgeGenealogy,
+} from "../genealogy";
+
 export function KnowledgeProductionCommandCenter() {
   const [
     selectedCapsuleId,
@@ -104,6 +108,12 @@ export function KnowledgeProductionCommandCenter() {
 
       <ConsumerIntelligence
         records={knowledgeDistributionRecords}
+      />
+
+      <KnowledgeGenealogy
+        capsules={knowledgeCapsules}
+        selectedCapsuleId={selectedCapsuleId}
+        onCapsuleSelect={handleCapsuleSelect}
       />
     </div>
   );
