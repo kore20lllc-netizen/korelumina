@@ -536,12 +536,23 @@ Extraction must stop when:
 - Primitive name: Prominent Premium Panel
 - Current locations: Repeated local `prominentPanelClass` definitions
 - Owner: Candidate for Lumina Design System
-- Maturity: Stable
+- Maturity: Certified
 - Consumers: Knowledge lifecycle title panels and other premium workspace headers
 - Dependencies: Premium surface and contour tokens
 - Semantic boundary: Domain-neutral
-- Extraction readiness: Requires certification and visual baseline
+- Extraction readiness: Certified for future extraction after screenshot baselines and Regression Safety Gate completion
 - Evidence: High repetition of `rounded-[28px] p-6`, base panel, and prominent contour
+- Certified baseline: Current production implementation
+- Certified rendering contract:
+  - `rounded-[28px] p-6`
+  - `premiumSurfaces.base.panel`
+  - `electricContour.strength.prominent`
+- Permitted extraction delta: Ownership and import location only
+- Permitted visual delta during extraction: None
+- Permitted behavioral delta during extraction: None
+- Permitted responsive delta during extraction: None
+- Future polish: Permitted only as a separate visual refinement milestone with its own baseline, build, visual validation, approval, commit, and push
+- Baseline authority: The latest explicitly approved production rendering remains authoritative until a later polish milestone is separately certified
 
 ### LPR-010 — Standard Premium Card
 
