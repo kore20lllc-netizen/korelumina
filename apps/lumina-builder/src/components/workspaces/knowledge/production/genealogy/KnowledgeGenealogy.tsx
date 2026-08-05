@@ -25,6 +25,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -37,12 +41,6 @@ type KnowledgeGenealogyProps = {
   selectedCapsuleId: string;
   onCapsuleSelect: (capsuleId: string) => void;
 };
-
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 export function KnowledgeGenealogy({
   capsules,
@@ -152,7 +150,7 @@ export function KnowledgeGenealogy({
               </p>
             </div>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
                 Active lineage
               </div>
@@ -164,7 +162,7 @@ export function KnowledgeGenealogy({
               <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
                 {capsule.id} · {capsule.stage} · {capsule.state}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
           </div>
         </LuminaProminentPremiumPanel>
 
@@ -229,9 +227,9 @@ export function KnowledgeGenealogy({
             const Icon = step.icon;
 
             return (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={step.label}
-                className={cardClass}
               >
                 <div className="flex items-start gap-3">
                   <ExecutivePremiumIcon
@@ -253,7 +251,7 @@ export function KnowledgeGenealogy({
                     </div>
                   </div>
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             );
           })}
         </div>
@@ -271,9 +269,9 @@ export function KnowledgeGenealogy({
 
           <div className="mt-5 grid gap-3">
             {capsule.layers.map((layer) => (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={layer.id}
-                className={cardClass}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -290,7 +288,7 @@ export function KnowledgeGenealogy({
                     {layer.status}
                   </div>
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             ))}
           </div>
         </LuminaStandardPremiumPanel>
@@ -305,41 +303,41 @@ export function KnowledgeGenealogy({
           </h3>
 
           <div className="mt-5 grid gap-3">
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                 Responsible authority
               </div>
               <div className="mt-2 text-sm font-semibold text-cyan-100">
                 {capsule.responsibleAuthority ?? capsule.authority}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                 Remediation lineage
               </div>
               <div className="mt-2 text-sm font-semibold text-amber-100">
                 {capsule.remediation ?? "No active remediation required"}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                 Blocked dependencies
               </div>
               <div className="mt-2 text-sm font-semibold text-violet-100">
                 {capsule.blockedDependencies?.join(", ") || "No blocked dependencies"}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/52">
                 Integrity posture
               </div>
               <div className="mt-2 text-sm font-semibold text-emerald-100">
                 {capsule.integrity}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
           </div>
         </LuminaStandardPremiumPanel>
       </div>
