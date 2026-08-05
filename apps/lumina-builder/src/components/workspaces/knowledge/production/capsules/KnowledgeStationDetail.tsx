@@ -20,6 +20,10 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
 type KnowledgeStationDetailProps = {
   station: string;
 };
@@ -207,7 +211,10 @@ function DocumentationStationDetail() {
         {stages.map((stage, index) => (
           <article
             key={stage}
-            className="rounded-[18px] border border-cyan-300/22 bg-cyan-300/[0.035] p-4"
+            className={[
+              flagshipAppearance.inspectorDetailCard,
+              "rounded-[18px] bg-cyan-300/[0.035] p-4",
+            ].join(" ")}
           >
             <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/62">
               Stage {index + 1}
@@ -220,7 +227,10 @@ function DocumentationStationDetail() {
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
-        <div className="rounded-[18px] border border-cyan-300/24 bg-cyan-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-cyan-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/66">
             Current candidate
           </div>
@@ -232,7 +242,10 @@ function DocumentationStationDetail() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-violet-300/24 bg-violet-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-violet-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/66">
             Educational mapping
           </div>
@@ -244,7 +257,10 @@ function DocumentationStationDetail() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-amber-300/24 bg-amber-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-amber-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.16em] text-amber-300/66">
             Manual review
           </div>
@@ -277,7 +293,10 @@ function ConversationStationDetail() {
         {stages.map((stage, index) => (
           <article
             key={stage}
-            className="rounded-[18px] border border-violet-300/22 bg-violet-300/[0.035] p-4"
+            className={[
+              flagshipAppearance.inspectorDetailCard,
+              "rounded-[18px] bg-violet-300/[0.035] p-4",
+            ].join(" ")}
           >
             <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/62">
               Stage {index + 1}
@@ -290,7 +309,10 @@ function ConversationStationDetail() {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-[18px] border border-cyan-300/24 bg-cyan-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-cyan-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.15em] text-cyan-300/66">
             Selected conversation
           </div>
@@ -299,7 +321,10 @@ function ConversationStationDetail() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-violet-300/24 bg-violet-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-violet-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.15em] text-violet-300/66">
             Educational relevance
           </div>
@@ -308,7 +333,10 @@ function ConversationStationDetail() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-amber-300/24 bg-amber-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-amber-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.15em] text-amber-300/66">
             Decisions extracted
           </div>
@@ -317,7 +345,10 @@ function ConversationStationDetail() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-emerald-300/24 bg-emerald-300/[0.05] p-4">
+        <div className={[
+            flagshipAppearance.inspectorDetailCard,
+            "rounded-[18px] bg-emerald-300/[0.05] p-4",
+          ].join(" ")}>
           <div className="text-[10px] uppercase tracking-[0.15em] text-emerald-300/66">
             Package posture
           </div>
@@ -349,7 +380,10 @@ export function KnowledgeStationDetail({
 
   return (
     <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(260px,.6fr)]">
-      <article className="rounded-[20px] border border-cyan-300/22 bg-cyan-300/[0.035] p-5">
+      <article className={[
+        flagshipAppearance.inspectorDetailCard,
+        "rounded-[20px] bg-cyan-300/[0.035] p-5",
+      ].join(" ")}>
         <div className="flex items-start gap-4">
           <ExecutivePremiumIcon
             icon={Icon}
@@ -373,7 +407,10 @@ export function KnowledgeStationDetail({
       </article>
 
       <div className="grid gap-3">
-        <div className="rounded-[18px] border border-violet-300/22 bg-violet-300/[0.04] p-4">
+        <div className={[
+          flagshipAppearance.inspectorDetailCard,
+          "rounded-[18px] bg-violet-300/[0.04] p-4",
+        ].join(" ")}>
           <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/62">
             Authority
           </div>
@@ -382,7 +419,10 @@ export function KnowledgeStationDetail({
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-amber-300/22 bg-amber-300/[0.04] p-4">
+        <div className={[
+          flagshipAppearance.inspectorDetailCard,
+          "rounded-[18px] bg-amber-300/[0.04] p-4",
+        ].join(" ")}>
           <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/62">
             Output
           </div>
