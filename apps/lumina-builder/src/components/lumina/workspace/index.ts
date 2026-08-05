@@ -20,3 +20,5 @@ export * from "./LuminaServiceCard";
 export * from "./LuminaWorkspaceBrand";
 
 export * from "./LuminaCompositionSurface";
+export { LuminaStatusBadge } from "./LuminaStatusBadge";
+export { LuminaStateSurface } from "./LuminaStateSurface";
