@@ -10,6 +10,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -118,88 +122,91 @@ export function KnowledgeGenealogy({
       aria-labelledby="knowledge-genealogy-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaProminentPremiumPanel>
-          <div className="flex h-full flex-col justify-between gap-5">
-            <div>
-              <div className="flex items-center gap-3">
-                <ExecutivePremiumIcon
-                  icon={GitBranch}
-                  state="active"
-                />
+      <LuminaExecutiveTitleMetricsComposition
+        titleRegion={
+          <LuminaProminentPremiumPanel>
+            <div className="flex h-full flex-col justify-between gap-5">
+              <div>
+                <div className="flex items-center gap-3">
+                  <ExecutivePremiumIcon
+                    icon={GitBranch}
+                    state="active"
+                  />
 
-                <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
-                    Permanent knowledge lineage
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
+                      Permanent knowledge lineage
+                    </div>
+
+                    <h2
+                      id="knowledge-genealogy-title"
+                      className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
+                    >
+                      Knowledge Genealogy
+                    </h2>
                   </div>
-
-                  <h2
-                    id="knowledge-genealogy-title"
-                    className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
-                  >
-                    Knowledge Genealogy
-                  </h2>
                 </div>
+
+                <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
+                  Knowledge Genealogy preserves the complete ancestry of every
+                  Knowledge Capsule from source identity and compiler generation
+                  through governance, canonical promotion, adaptation,
+                  distribution, and organizational consumption.
+                </p>
               </div>
 
-              <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
-                Knowledge Genealogy preserves the complete ancestry of every
-                Knowledge Capsule from source identity and compiler generation
-                through governance, canonical promotion, adaptation,
-                distribution, and organizational consumption.
-              </p>
+              <LuminaStandardPremiumCard>
+                <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
+                  Active lineage
+                </div>
+
+                <div className="mt-2 text-sm font-semibold text-violet-100">
+                  {capsule.title}
+                </div>
+
+                <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
+                  {capsule.id} · {capsule.stage} · {capsule.state}
+                </div>
+              </LuminaStandardPremiumCard>
             </div>
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid columns={2}>
+            <LuminaExecutiveCard
+              title="Lineage layers"
+              value={String(capsule.layers.length)}
+              description="Traceable preservation layers in this capsule."
+              accentKey="cyan"
+              icon={<GitBranch className="h-4 w-4 text-cyan-300" />}
+            />
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
-                Active lineage
-              </div>
+            <LuminaExecutiveCard
+              title="Healthy layers"
+              value={String(healthyLayers)}
+              description="Layers currently preserving expected integrity."
+              accentKey="emerald"
+              icon={<ShieldCheck className="h-4 w-4 text-emerald-300" />}
+            />
 
-              <div className="mt-2 text-sm font-semibold text-violet-100">
-                {capsule.title}
-              </div>
+            <LuminaExecutiveCard
+              title="Governed layers"
+              value={String(guardedLayers)}
+              description="Layers retained without a failed lineage state."
+              accentKey="violet"
+              icon={<BookOpenCheck className="h-4 w-4 text-violet-300" />}
+            />
 
-              <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
-                {capsule.id} · {capsule.stage} · {capsule.state}
-              </div>
-            </LuminaStandardPremiumCard>
-          </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid columns={2}>
-          <LuminaExecutiveCard
-            title="Lineage layers"
-            value={String(capsule.layers.length)}
-            description="Traceable preservation layers in this capsule."
-            accentKey="cyan"
-            icon={<GitBranch className="h-4 w-4 text-cyan-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Healthy layers"
-            value={String(healthyLayers)}
-            description="Layers currently preserving expected integrity."
-            accentKey="emerald"
-            icon={<ShieldCheck className="h-4 w-4 text-emerald-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Governed layers"
-            value={String(guardedLayers)}
-            description="Layers retained without a failed lineage state."
-            accentKey="violet"
-            icon={<BookOpenCheck className="h-4 w-4 text-violet-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Confidence"
-            value={`${capsule.confidence}%`}
-            description="Current confidence across the capsule genealogy."
-            accentKey="amber"
-            icon={<BrainCircuit className="h-4 w-4 text-amber-300" />}
-          />
-        </LuminaExecutiveMetricGrid>
-      </div>
+            <LuminaExecutiveCard
+              title="Confidence"
+              value={`${capsule.confidence}%`}
+              description="Current confidence across the capsule genealogy."
+              accentKey="amber"
+              icon={<BrainCircuit className="h-4 w-4 text-amber-300" />}
+            />
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <LuminaStandardPremiumPanel>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
