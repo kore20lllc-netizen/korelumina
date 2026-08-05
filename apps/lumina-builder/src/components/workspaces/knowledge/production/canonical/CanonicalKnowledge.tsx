@@ -36,6 +36,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
 import {
+  LuminaStatusBadge,
+} from "@/components/lumina/workspace";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -113,18 +117,6 @@ const COLLECTIONS = [
     scope: "Mission system",
   },
 ];
-
-function StatusBadge({
-  children,
-}: {
-  children: string;
-}) {
-  return (
-    <span className="rounded-full border border-emerald-300/24 bg-emerald-300/[0.07] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-emerald-100">
-      {children}
-    </span>
-  );
-}
 
 const compactCardClass = [
   "rounded-[16px] p-3",
@@ -269,7 +261,7 @@ export function CanonicalKnowledge() {
                       <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
                         {capsule.id}
                       </span>
-                      <StatusBadge>{capsule.status}</StatusBadge>
+                      <LuminaStatusBadge variant="healthy">{capsule.status}</LuminaStatusBadge>
                     </div>
 
                     <h4 className="mt-2 text-base font-semibold text-white">
