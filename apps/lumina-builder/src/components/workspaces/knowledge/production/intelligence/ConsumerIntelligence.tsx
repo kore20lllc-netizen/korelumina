@@ -16,6 +16,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -371,8 +375,9 @@ export function ConsumerIntelligence({
           </div>
         </LuminaStandardPremiumPanel>
 
-        <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <LuminaStandardPremiumPanel className="h-full">
+        <LuminaBalancedSplitPanelComposition
+          primaryRegion={
+            <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={TrendingUp}
@@ -409,9 +414,10 @@ export function ConsumerIntelligence({
                 </LuminaStandardPremiumCard>
               ))}
             </div>
-          </LuminaStandardPremiumPanel>
-
-          <LuminaStandardPremiumPanel className="h-full">
+            </LuminaStandardPremiumPanel>
+          }
+          secondaryRegion={
+            <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Sparkles}
@@ -448,8 +454,9 @@ export function ConsumerIntelligence({
                 </LuminaStandardPremiumCard>
               ))}
             </div>
-          </LuminaStandardPremiumPanel>
-        </div>
+            </LuminaStandardPremiumPanel>
+          }
+        />
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.18fr)_minmax(360px,.82fr)]">
