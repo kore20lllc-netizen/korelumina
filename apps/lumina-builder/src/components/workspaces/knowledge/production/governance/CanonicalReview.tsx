@@ -22,6 +22,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -119,12 +123,6 @@ function readinessTone(
 
   return "bg-rose-300";
 }
-
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 const compactCardClass = [
   "rounded-[16px] p-3",
@@ -421,14 +419,14 @@ export function CanonicalReview() {
                 <GitCompareArrows className="h-4 w-4 text-cyan-300/70" />
               </div>
 
-              <div className={cardClass}>
+              <LuminaStandardPremiumCard>
                 <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                   Proposed replacement
                 </div>
                 <div className="mt-1 text-sm font-semibold text-amber-100">
                   KCAP-2026-042 · Runtime Isolation Recovery Standard v3.0
                 </div>
-              </div>
+              </LuminaStandardPremiumCard>
             </div>
           </LuminaStandardPremiumPanel>
         </div>
