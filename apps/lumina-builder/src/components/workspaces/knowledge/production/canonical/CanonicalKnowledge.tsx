@@ -9,6 +9,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -356,8 +360,9 @@ export function CanonicalKnowledge() {
           </div>
         </LuminaStandardPremiumPanel>
 
-        <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <LuminaStandardPremiumPanel className="h-full">
+        <LuminaBalancedSplitPanelComposition
+          primaryRegion={
+            <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={LibraryBig}
@@ -392,9 +397,10 @@ export function CanonicalKnowledge() {
                 </div>
               ))}
             </div>
-          </LuminaStandardPremiumPanel>
-
-          <LuminaStandardPremiumPanel className="h-full">
+            </LuminaStandardPremiumPanel>
+          }
+          secondaryRegion={
+            <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={Archive}
@@ -436,8 +442,9 @@ export function CanonicalKnowledge() {
                 </div>
               </div>
             </div>
-          </LuminaStandardPremiumPanel>
-        </div>
+            </LuminaStandardPremiumPanel>
+          }
+        />
       </div>
     </section>
   );
