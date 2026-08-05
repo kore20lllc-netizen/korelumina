@@ -9,6 +9,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -126,8 +130,10 @@ export function CanonicalKnowledge() {
       aria-labelledby="canonical-knowledge-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
-        <LuminaProminentPremiumPanel>
+      <LuminaExecutiveTitleMetricsComposition
+        variant="content-led"
+        titleRegion={
+          <LuminaProminentPremiumPanel>
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -193,9 +199,10 @@ export function CanonicalKnowledge() {
               </div>
             </div>
           </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid columns={2}>
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Published capsules"
           value="59"
@@ -227,8 +234,9 @@ export function CanonicalKnowledge() {
           accentKey="amber"
           icon={<GitCompareArrows className="h-4 w-4 text-amber-300" />}
         />
-        </LuminaExecutiveMetricGrid>
-      </div>
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
         <LuminaStandardPremiumPanel>
