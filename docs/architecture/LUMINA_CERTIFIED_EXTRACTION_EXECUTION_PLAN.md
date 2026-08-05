@@ -5,8 +5,8 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-017 complete
-- Extraction status: LPR-008 through LPR-017 completed and regression-certified
+- Execution status: Extraction cycle closed
+- Extraction status: LPR-008 through LPR-017 completed, regression-certified, and frozen
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
@@ -35,6 +35,7 @@
 - LPR-015 final consumer commit: `a089e94f7b24dc564d38d440cdfa903194ba5995`
 - LPR-016 result: no separate primitive; absorbed by `LuminaStateSurface`
 - LPR-017 result: not ready; overlapping ownership and unconverged visual contracts
+- Closure result: no additional primitive is eligible without a new certification baseline
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -798,6 +799,73 @@ Final certification:
 - Separate primitive created: No
 - Existing component modified: No
 - Consumer migration required: No
+- Visual delta: None
+- Behavioral delta: None
+- Responsive delta: None
+- Runtime Header remains excluded
+
+## Certified Extraction Cycle Closure
+
+The Lumina certified extraction cycle covering LPR-008 through LPR-017 is closed.
+
+Closure basis:
+
+- all authorized extraction milestones are complete
+- every migrated consumer passed the Regression Safety Gate
+- all reconciliation milestones introduced zero production delta
+- no remaining registry candidate satisfies the full extraction eligibility contract
+- remaining candidates are Emerging, Experimental, workspace-specific, Domain-Owned, or explicitly Not Ready
+
+Frozen certified results:
+
+- LPR-008 — Standard Premium Panel
+- LPR-009 — Prominent Premium Panel
+- LPR-010 — Standard Premium Card
+- LPR-011 — Executive Title and Metrics Composition
+- LPR-012 — Balanced Split Panel Composition
+- LPR-013 — Panel Header Composition
+- LPR-014 — Status Badge and State Surface
+- LPR-015 — Activity Feed Row Shell
+- LPR-016 — Warning Surface Reconciliation
+- LPR-017 — Section Header Block Reconciliation
+
+Post-closure rules:
+
+- no new LPR milestone may begin from the current registry alone
+- no Emerging or Experimental candidate may be promoted by implementation pressure
+- no workspace-specific composition may be extracted directly
+- no existing certified primitive may be redesigned during closure
+- no consumer migration may occur without a new visual certification baseline
+- future extraction requires:
+  - updated duplication evidence
+  - updated cross-workspace convergence evidence
+  - explicit semantic-boundary review
+  - API stability review
+  - screenshot baselines
+  - rollback SHA
+  - one-consumer-at-a-time migration plan
+  - Regression Safety Gate approval
+
+Deferred candidates:
+
+- Compact premium card
+- Asymmetric detail-panel composition
+- Timeline card
+- Inspector shell
+- Command bar
+- Filter bar
+- Graph/topology container
+- Empty state
+- Loading state
+- Detail panel
+- Section header block
+
+Final closure certification:
+
+- Current extraction queue: Closed
+- Additional eligible primitives: None
+- Production component changes in closure milestone: None
+- Consumer migrations in closure milestone: None
 - Visual delta: None
 - Behavioral delta: None
 - Responsive delta: None

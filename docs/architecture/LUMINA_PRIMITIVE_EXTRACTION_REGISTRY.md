@@ -10,7 +10,7 @@
 - Scope: Documentation-only
 - Existing unrelated local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
-- Extraction status: Prohibited until future certification milestones
+- Extraction status: Current certified cycle closed; future extraction requires a new certification baseline
 - Baseline remote validation: Vercel success
 
 ## Governing Rules
