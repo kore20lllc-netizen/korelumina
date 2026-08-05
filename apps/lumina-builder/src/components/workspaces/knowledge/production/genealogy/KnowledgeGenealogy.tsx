@@ -10,6 +10,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -264,8 +268,9 @@ export function KnowledgeGenealogy({
         </div>
       </LuminaStandardPremiumPanel>
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaStandardPremiumPanel className="h-full">
+      <LuminaBalancedSplitPanelComposition
+        primaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-300/62">
             Provenance integrity
           </div>
@@ -298,9 +303,10 @@ export function KnowledgeGenealogy({
               </LuminaStandardPremiumCard>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-
-        <LuminaStandardPremiumPanel className="h-full">
+          </LuminaStandardPremiumPanel>
+        }
+        secondaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-300/62">
             Authority continuity
           </div>
@@ -346,8 +352,9 @@ export function KnowledgeGenealogy({
               </div>
             </LuminaStandardPremiumCard>
           </div>
-        </LuminaStandardPremiumPanel>
-      </div>
+          </LuminaStandardPremiumPanel>
+        }
+      />
     </section>
   );
 }
