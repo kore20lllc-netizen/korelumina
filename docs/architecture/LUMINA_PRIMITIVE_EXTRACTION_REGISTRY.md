@@ -60,7 +60,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive premium icon | `ExecutivePremiumIcon` across Knowledge lifecycle and executive surfaces | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive title-and-metrics composition | Repeated side-by-side title panel plus 2×2 executive metric grid across five Knowledge lifecycle workspaces | 5+ | High | Stable | Needs consolidation | Domain-neutral at composition level | Candidate after lower-level primitives |
 | Standard premium panel | `LuminaStandardPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
-| Prominent premium panel | Repeated `rounded-[28px] p-6` plus prominent contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
+| Prominent premium panel | `LuminaProminentPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Standard premium card | Repeated `rounded-[18px] p-4` plus base card and standard contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
 | Compact premium card | Repeated `rounded-[14px]` or `rounded-[16px]` compact card variants | Medium | Medium | Emerging | Needs consolidation | Domain-neutral | Not ready |
 | Balanced split-panel composition | Repeated equal two-column panel layouts using `xl:grid-cols-2` and `items-stretch` | High in Knowledge lifecycle | High | Stable | Needs consolidation | Domain-neutral | Candidate after panel primitives |
@@ -156,13 +156,13 @@ Legend:
 ### Stable duplicated implementations
 
 1. **Prominent panel composition**
-   - Repeated local constants:
+   - Centralized as `LuminaProminentPremiumPanel`.
+   - Contract:
      - `rounded-[28px] p-6`
      - `premiumSurfaces.base.panel`
      - `electricContour.strength.prominent`
-   - Repeated across Knowledge lifecycle workspaces.
-   - Visually convergent.
-   - Not yet a certified component contract.
+   - Migrated one certified consumer at a time across six Knowledge lifecycle workspaces.
+   - Regression Safety Gate passed after every migration.
 
 2. **Standard panel composition**
    - Centralized as `LuminaStandardPremiumPanel`.
@@ -258,7 +258,7 @@ The following remain workspace-owned and must not be promoted directly:
 | `ExecutivePremiumIcon` | Stable | Repeated state-based icon contract |
 | `LuminaExecutiveRibbon` | Stable | Existing reusable implementation and certified consumers |
 | `LuminaExecutiveOperationsDeck` | Stable | Existing reusable implementation and certified consumers |
-| Prominent panel | Needs consolidation | Repeated local class constants, no shared component contract |
+| `LuminaProminentPremiumPanel` | Stable | Explicit shared semantic header contract with six certified consumers and completed regression validation |
 | `LuminaStandardPremiumPanel` | Stable | Explicit shared component contract with six certified consumers and completed regression validation |
 | Standard card | Needs consolidation | Repeated local class constants, no shared component contract |
 | Executive title-and-metrics composition | Needs consolidation | Stable visual pattern, varying local ratios and content structure |
