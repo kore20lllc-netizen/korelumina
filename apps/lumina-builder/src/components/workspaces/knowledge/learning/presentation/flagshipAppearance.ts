@@ -299,6 +299,54 @@ export const flagshipAppearance = {
       "text-emerald-200",
   },
 
+  capsuleFilterIcon: [
+    "flex h-9 w-9 shrink-0 items-center justify-center",
+    "rounded-[13px] border border-blue-400/55",
+    "ring-1 ring-inset ring-cyan-300/14",
+    "bg-violet-300/[0.07]",
+  ].join(" "),
+
+  capsuleFilterSelect: [
+    "h-9 min-w-0 rounded-xl border border-blue-400/48",
+    "appearance-none",
+    "bg-[linear-gradient(145deg,rgba(5,13,34,.98),rgba(11,10,39,.96))]",
+    "px-3 pr-8 text-[11px] text-sky-100",
+    "outline-none transition-colors [color-scheme:dark]",
+    "focus-visible:border-cyan-300/48",
+    "focus-visible:ring-2 focus-visible:ring-cyan-300/40",
+  ].join(" "),
+
+  capsuleFilterAction: [
+    "inline-flex h-9 items-center gap-2 rounded-xl border px-3",
+    "ring-1 ring-inset ring-cyan-300/12",
+    "text-[11px] font-semibold",
+    "transition-[border-color,background-color]",
+    "focus-visible:outline-none focus-visible:ring-2",
+  ].join(" "),
+
+  capsuleFilterActionTone: {
+    advanced: [
+      "border-blue-400/52 bg-violet-300/[0.055] text-violet-100",
+      "hover:border-violet-300/40 hover:bg-violet-300/[0.09]",
+      "focus-visible:ring-violet-300/50",
+    ].join(" "),
+    clear: [
+      "border-blue-400/50 bg-cyan-300/[0.035] text-cyan-200",
+      "disabled:cursor-not-allowed disabled:opacity-35",
+      "focus-visible:ring-cyan-300/50",
+    ].join(" "),
+  },
+
+  capsuleFilterPill: [
+    "inline-flex items-center gap-2 rounded-full border px-3 py-1.5",
+    "border-blue-400/52",
+    "ring-1 ring-inset ring-cyan-300/12",
+    "bg-violet-300/[0.055]",
+    "text-[10px] font-semibold text-violet-100",
+    "focus-visible:outline-none",
+    "focus-visible:ring-2 focus-visible:ring-violet-300/50",
+  ].join(" "),
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 

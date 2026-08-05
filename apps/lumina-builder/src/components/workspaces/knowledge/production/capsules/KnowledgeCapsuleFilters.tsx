@@ -16,6 +16,10 @@ import {
   ExecutiveFilterSurface,
 } from "@/components/design-system/lumina";
 
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
 import type {
   KnowledgeCapsule,
 } from "./types";
@@ -282,7 +286,9 @@ export function KnowledgeCapsuleFilters({
       ariaLabel="Executive knowledge capsule filters"
       summary={
         <div className="flex min-w-0 items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[13px] border border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-violet-300/[0.07]">
+          <div className={
+            flagshipAppearance.capsuleFilterIcon
+          }>
             <Filter
               aria-hidden="true"
               className="h-4 w-4 text-violet-200"
@@ -334,10 +340,8 @@ export function KnowledgeCapsuleFilters({
                     )
                   }
                   className={[
-                    "h-9 w-full min-w-0 rounded-xl border border-blue-400/48",
-                    "appearance-none bg-[linear-gradient(145deg,rgba(5,13,34,.98),rgba(11,10,39,.96))] px-3 pr-8 text-[11px] text-sky-100",
-                    "outline-none transition-colors [color-scheme:dark]",
-                    "focus-visible:border-cyan-300/48 focus-visible:ring-2 focus-visible:ring-cyan-300/40",
+                    flagshipAppearance.capsuleFilterSelect,
+                    "w-full",
                   ].join(" ")}
                 >
                   <option value="">
@@ -377,12 +381,8 @@ export function KnowledgeCapsuleFilters({
               )
             }
             className={[
-              "inline-flex h-9 items-center gap-2 rounded-xl border px-3",
-              "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.055]",
-              "text-[11px] font-semibold text-violet-100",
-              "transition-[border-color,background-color]",
-              "hover:border-violet-300/40 hover:bg-violet-300/[0.09]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/50",
+              flagshipAppearance.capsuleFilterAction,
+              flagshipAppearance.capsuleFilterActionTone.advanced,
             ].join(" ")}
           >
             <SlidersHorizontal
@@ -410,11 +410,8 @@ export function KnowledgeCapsuleFilters({
               activeEntries.length === 0
             }
             className={[
-              "inline-flex h-9 items-center gap-2 rounded-xl border px-3",
-              "border-blue-400/50 ring-1 ring-inset ring-cyan-300/12 bg-cyan-300/[0.035]",
-              "text-[11px] font-semibold text-cyan-200",
-              "disabled:cursor-not-allowed disabled:opacity-35",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/50",
+              flagshipAppearance.capsuleFilterAction,
+              flagshipAppearance.capsuleFilterActionTone.clear,
             ].join(" ")}
           >
             <RotateCcw
@@ -442,12 +439,9 @@ export function KnowledgeCapsuleFilters({
                       "",
                     )
                   }
-                  className={[
-                    "inline-flex items-center gap-2 rounded-full border px-3 py-1.5",
-                    "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.055]",
-                    "text-[10px] font-semibold text-violet-100",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/50",
-                  ].join(" ")}
+                  className={
+                    flagshipAppearance.capsuleFilterPill
+                  }
                 >
                   <span>
                     {definition.label}:{" "}
@@ -493,11 +487,9 @@ export function KnowledgeCapsuleFilters({
                         event.target.value,
                       )
                     }
-                    className={[
-                      "h-9 min-w-0 rounded-xl border border-blue-400/48",
-                      "appearance-none bg-[linear-gradient(145deg,rgba(5,13,34,.98),rgba(11,10,39,.96))] px-3 pr-8 text-[11px] text-sky-100",
-                      "outline-none [color-scheme:dark] focus-visible:ring-2 focus-visible:ring-cyan-300/40",
-                    ].join(" ")}
+                    className={
+                      flagshipAppearance.capsuleFilterSelect
+                    }
                   >
                     <option value="">
                       All {definition.label}
