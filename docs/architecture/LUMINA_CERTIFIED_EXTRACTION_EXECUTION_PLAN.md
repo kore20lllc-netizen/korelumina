@@ -5,8 +5,8 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-014 complete
-- Extraction status: LPR-008 through LPR-014 extracted, migrated, and regression-certified
+- Execution status: LPR-015 complete
+- Extraction status: LPR-008 through LPR-015 extracted, migrated, and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
@@ -15,6 +15,7 @@
   - LPR-012 — Balanced Split Panel Composition
   - LPR-013 — Panel Header Composition
   - LPR-014 — Status Badge and State Surface
+  - LPR-015 — Activity Feed Row Shell
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -28,6 +29,8 @@
 - LPR-013 final consumer commit: `98bd55f9378b676da1de4153ff4985601307bcad`
 - LPR-014 ownership integration commit: `2684ea53c4385345d51be5e77251e7bc02cb93d6`
 - LPR-014 final consumer commit: `20938b92a21dc9fdd3552282b75d8d543b7d7f60`
+- LPR-015 primitive commit: `4fd17fcfae2a68252ac5f60c24169dfa4b593b5f`
+- LPR-015 final consumer commit: `a089e94f7b24dc564d38d440cdfa903194ba5995`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -615,4 +618,66 @@ Final certification:
 - Capsule-engine and other non-matching pills remain consumer-owned
 - Regression Safety Gate passed after every migration
 - Production build remained green at 3192 transformed modules
+- Runtime Header remains excluded
+
+## LPR-015 Completion Record
+
+LPR-015 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
+
+Shared primitive:
+
+- `LuminaActivityFeedRow`
+
+Existing-system ownership:
+
+- `apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaActivityFeedRow.tsx`
+- `apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts`
+
+Certified row-shell contract:
+
+- optional `markerRegion`
+- required `primaryRegion`
+- optional `descriptionRegion`
+- optional `metadataRegion`
+- optional `timestampRegion`
+- optional `trailingRegion`
+- optional caller-provided `className`
+- inherited `HTMLAttributes<HTMLDivElement>`
+
+Certified variants:
+
+- `feed`
+  - `flex items-start gap-3`
+- `stream`
+  - `flex items-start gap-4`
+- `log`
+  - `grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-3`
+- `progress`
+  - `flex items-start gap-4`
+
+Completed sequence:
+
+1. Primitive creation — `4fd17fcfae2a68252ac5f60c24169dfa4b593b5f`
+2. Knowledge Activity Feed — `f6cf8a224151606d863d568490b115bad608703e`
+3. Runtime Event Stream — `a089e94f7b24dc564d38d440cdfa903194ba5995`
+
+Explicit exclusions:
+
+- Knowledge Genealogy lineage cards are not feed rows.
+- Knowledge V3 Activity Rail retains semantic `article` ownership, tertiary material, and hover behavior.
+- Repo Audit Deep Audit Progress retains progress state, transport state, actions, animated status, and audit-domain behavior.
+- Event models, severity mapping, timestamp formatting, live updates, selection, actions, and domain labels remain consumer-owned.
+
+Final certification:
+
+- Primitive maturity: Certified
+- API stability: Stable
+- Certified consumers: 2
+- Remaining exact eligible feed or stream rows in audited scope: 0
+- `LuminaFeedCard` retains outer card ownership
+- list and live-region accessibility remain consumer-owned
+- semantic interactive cards remain excluded
+- stateful progress compositions remain excluded
+- Regression Safety Gate passed after every migration
+- Production build remained green at 3193 transformed modules
 - Runtime Header remains excluded

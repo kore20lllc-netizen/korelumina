@@ -72,7 +72,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Status badge | `LuminaStatusBadge` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge, Organizational Memory, and Knowledge Genealogy | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | State surface | `LuminaStateSurface` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge warning lifecycle treatment | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Warning surface | Repeated amber/rose alert and review-required surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
-| Activity feed row | Repeated event/history/log/feed rows across Knowledge, Runtime, and diagnostics | Medium-high | Medium | Stable | Needs consolidation | Domain-neutral at row level | Candidate after panel and state primitives |
+| Activity feed row | `LuminaActivityFeedRow` consumed by Knowledge Activity Feed and Runtime Event Stream | 2 | High | Certified | Stable | Domain-neutral at row-shell level | Extracted and regression-certified |
 | Timeline card | Governance timeline, memory evolution, event history, runtime event stream | Medium | Medium | Emerging | Needs consolidation | Mixed | Not ready |
 | Inspector shell | Knowledge Capsule Inspector, Runtime Inspector, Repo Audit detail regions, developer/designer side detail panes | Medium | Medium | Emerging | Experimental | Domain-owned compositions | Not ready |
 | Command bar | Runtime toolbar, developer/designer controls, audit controls | Medium | Low-medium | Emerging | Experimental | Mixed | Not ready |
@@ -127,7 +127,7 @@ Legend:
 | Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
 | State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
 | Warning surface | ✓ | ✓ | ✓ | ✓ | ~ | ~ | Stable |
-| Activity feed row | ✓ | ✓ | ~ | ✓ | ~ | ~ | Stable |
+| Activity feed row | ✓ | ✓ | ~ | ✓ | ~ | ~ | Certified |
 | Timeline card | ✓ | ✓ | — | ~ | — | — | Emerging |
 | Inspector shell | ✓ | ✓ | ~ | ✓ | ✓ | ✓ | Emerging |
 | Command bar | ~ | ✓ | ~ | ✓ | ✓ | ✓ | Emerging |
