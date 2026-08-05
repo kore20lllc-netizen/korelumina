@@ -5,17 +5,20 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-010 complete
-- Extraction status: LPR-008, LPR-009, and LPR-010 extracted, migrated, regression-certified, and pending final documentation commit
+- Execution status: LPR-011 complete
+- Extraction status: LPR-008 through LPR-011 extracted, migrated, and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
   - LPR-010 — Standard Premium Card
+  - LPR-011 — Executive Title and Metrics Composition
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
 - LPR-010 primitive commit: `d6c52e7929480e0821dcca294de3a9d865447078`
 - LPR-010 final consumer commit: `a6e160eda39fae01db4d2e73ef459781afb15cce`
+- LPR-011 primitive commit: `8f53ec525bab9187014e77a2c640529781d6c169`
+- LPR-011 final consumer commit: `c6638b87abf01aba3dda0847802573f9144b1058`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -379,4 +382,60 @@ Final certification:
 - Remaining matching local contracts: 0
 - Supported semantics: `div`, `article`
 - Domain content, inner layout, responsive behavior, and interactions remain consumer-owned
+- Runtime Header remains excluded
+
+## LPR-011 Completion Record
+
+LPR-011 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
+
+Shared primitive:
+
+`LuminaExecutiveTitleMetricsComposition`
+
+Certified composition contract:
+
+- base layout: `grid items-stretch gap-5`
+- responsive stacking below `xl`
+- injected `titleRegion`
+- injected `metricsRegion`
+- no Knowledge, Governance, Runtime, Mission, or other domain ownership
+
+Certified variants:
+
+- `balanced`
+  - `xl:grid-cols-2`
+- `balanced-explicit`
+  - `xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]`
+- `content-led`
+  - `xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]`
+
+Consumer inventory:
+
+1. Organizational Impact
+2. Knowledge Genealogy
+3. Consumer Intelligence
+4. Organizational Memory
+5. Canonical Knowledge
+6. Canonical Review
+
+Completed sequence:
+
+1. Primitive creation — `8f53ec525bab9187014e77a2c640529781d6c169`
+2. Organizational Impact — `d59754fac1652082730c750c1a4498474fd5e603`
+3. Knowledge Genealogy — `cd4b00697918b1f8e792cceb47e461f6874ebde6`
+4. Consumer Intelligence — `e8e348f3d4cca01e71821b452344edad9bba1597`
+5. Organizational Memory — `45e144f69d876029c48c07fba5aa85249806c87a`
+6. Canonical Knowledge — `948f08669ea09416ee190febe78682f22cce4df8`
+7. Canonical Review — `c6638b87abf01aba3dda0847802573f9144b1058`
+
+Final certification:
+
+- Shared primitive: `LuminaExecutiveTitleMetricsComposition`
+- Certified consumers: 6
+- Remaining matching title-and-metrics wrappers in certified consumers: 0
+- Supported layout variants: `balanced`, `balanced-explicit`, `content-led`
+- Prominent panels, executive metric grids, cards, typography, content, behavior, and inner responsive structure remain consumer-owned
+- Non-target balanced and asymmetric workspace layouts remain unchanged
+- Regression Safety Gate passed before and after every migration
+- Production build remained green at 3189 transformed modules
 - Runtime Header remains excluded

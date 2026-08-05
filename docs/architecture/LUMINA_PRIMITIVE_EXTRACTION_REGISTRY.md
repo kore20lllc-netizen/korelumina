@@ -58,7 +58,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive metric card | `LuminaExecutiveCard` across Knowledge lifecycle and executive compositions | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive metric grid | `LuminaExecutiveMetricGrid` across Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, Organizational Impact | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive premium icon | `ExecutivePremiumIcon` across Knowledge lifecycle and executive surfaces | High | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
-| Executive title-and-metrics composition | Repeated side-by-side title panel plus 2×2 executive metric grid across five Knowledge lifecycle workspaces | 5+ | High | Stable | Needs consolidation | Domain-neutral at composition level | Candidate after lower-level primitives |
+| Executive title-and-metrics composition | `LuminaExecutiveTitleMetricsComposition` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | 6 | High | Certified | Stable | Domain-neutral at composition level | Extracted and regression-certified |
 | Standard premium panel | `LuminaStandardPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Prominent premium panel | `LuminaProminentPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Standard premium card | `LuminaStandardPremiumCard` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Review, and Knowledge Distribution Hub | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
@@ -119,7 +119,7 @@ Legend:
 | Executive premium icon | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Executive ribbon | ✓ | ✓ | ~ | — | — | — | Certified |
 | Executive operations deck | ✓ | ✓ | — | — | — | — | Certified |
-| Executive title-and-metrics composition | ✓ | ~ | — | — | — | — | Stable |
+| Executive title-and-metrics composition | ✓ | ~ | — | — | — | — | Certified |
 | Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
@@ -186,10 +186,18 @@ Legend:
    - Regression Safety Gate passed after every migration.
 
 4. **Side-by-side title and metric composition**
-   - Repeated across Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact.
-   - Uses a prominent title panel and 2×2 metric grid.
-   - Layout ratios still vary in some workspaces.
-   - Requires contract consolidation before certification.
+   - Centralized as `LuminaExecutiveTitleMetricsComposition`.
+   - Contract:
+     - base layout: `grid items-stretch gap-5`
+     - responsive stacking below `xl`
+     - injected `titleRegion`
+     - injected `metricsRegion`
+     - `balanced`: `xl:grid-cols-2`
+     - `balanced-explicit`: `xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]`
+     - `content-led`: `xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]`
+   - Migrated one certified consumer at a time across six Knowledge lifecycle workspaces.
+   - Regression Safety Gate passed after every migration.
+   - Domain content, panels, metric cards, typography, behavior, and inner responsive layout remain consumer-owned.
 
 5. **Balanced dual-panel section**
    - Repeated `grid items-stretch gap-5 xl:grid-cols-2`.
@@ -262,6 +270,7 @@ The following remain workspace-owned and must not be promoted directly:
 | `LuminaExecutiveRibbon` | Stable | Existing reusable implementation and certified consumers |
 | `LuminaExecutiveOperationsDeck` | Stable | Existing reusable implementation and certified consumers |
 | `LuminaProminentPremiumPanel` | Stable | Explicit shared semantic header contract with six certified consumers and completed regression validation |
+| `LuminaExecutiveTitleMetricsComposition` | Stable | Explicit region-based composition contract with three certified layout variants and six regression-certified Knowledge consumers |
 | `LuminaStandardPremiumPanel` | Stable | Explicit shared component contract with six certified consumers and completed regression validation |
 | `LuminaStandardPremiumCard` | Stable | Explicit shared semantic card contract with six certified consumers and completed regression validation |
 | Executive title-and-metrics composition | Needs consolidation | Stable visual pattern, varying local ratios and content structure |
