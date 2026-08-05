@@ -2,8 +2,9 @@ import { AlertTriangle, CheckCircle2, Info, Rocket, RotateCw, Scaling } from "lu
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import {
-  LuminaFeedCard,
+  LuminaActivityFeedRow,
   LuminaBadge,
+  LuminaFeedCard,
 } from "@/components/lumina/workspace";
 
 import { cn } from "@/lib/utils";
@@ -44,28 +45,31 @@ export function RuntimeEventStream({ events, className }: { events: RuntimeEvent
           return (
             <li key={e.id}>
               <LuminaFeedCard>
-                <div className="anim-in flex items-start gap-4">
-                  <Icon
-                    className={cn("h-5 w-5 shrink-0", SEV[e.severity])}
-                    strokeWidth={1.75}
-                  />
-
-                  <div className="min-w-0 flex-1">
+                <LuminaActivityFeedRow
+                  variant="stream"
+                  className="anim-in"
+                  markerRegion={
+                    <Icon
+                      className={cn("h-5 w-5 shrink-0", SEV[e.severity])}
+                      strokeWidth={1.75}
+                    />
+                  }
+                  primaryRegion={
                     <div className="truncate text-[13px] font-medium tracking-tight">
                       {e.message}
                     </div>
-
-                    <div className="mt-2">
-                      <LuminaBadge>
-                        {e.kind}
-                      </LuminaBadge>
+                  }
+                  metadataRegion={
+                    <LuminaBadge>
+                      {e.kind}
+                    </LuminaBadge>
+                  }
+                  timestampRegion={
+                    <div className="text-[11px] font-medium tabular-nums text-muted-foreground">
+                      {relative(e.at)}
                     </div>
-                  </div>
-
-                  <div className="shrink-0 text-[11px] font-medium tabular-nums text-muted-foreground">
-                    {relative(e.at)}
-                  </div>
-                </div>
+                  }
+                />
               </LuminaFeedCard>
             </li>
           );
