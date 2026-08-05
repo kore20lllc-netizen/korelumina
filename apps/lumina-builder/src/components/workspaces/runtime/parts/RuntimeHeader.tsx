@@ -4,9 +4,6 @@ import {
   useState,
 } from "react";
 
-import {
-  workspaceAccents,
-} from "@/components/lumina/tokens/workspaceAccents";
 
 import {
   LuminaWorkspaceBrand,
@@ -59,8 +56,6 @@ interface RuntimeHeaderProps {
   ) => void;
 }
 
-const runtimeAccent =
-  workspaceAccents.runtime;
 
 const HEALTH_LABEL: Record<
   HealthStatus,
@@ -247,49 +242,6 @@ export const RuntimeHeader = forwardRef<
         now,
       );
 
-
-    const searchControl = (
-      <div className="mt-8 max-w-2xl">
-        <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-          Search
-        </div>
-
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-
-          <Input
-            ref={ref}
-            value={query}
-            onChange={(e) => onQuery(e.target.value)}
-            placeholder="Search runtime services..."
-            className={[
-              "h-12",
-              "rounded-full",
-              "pl-10",
-              "pr-14",
-              "border",
-              "border-white/15",
-              "bg-white/[0.08]",
-              "backdrop-blur-2xl",
-              "shadow-[0_12px_40px_rgba(0,0,0,0.18),inset_0_1px_rgba(255,255,255,0.10)]",
-              "focus-visible:border-white/25",
-              "focus-visible:ring-2",
-              "focus-visible:ring-violet-400/30",
-            ].join(" ")}
-          />
-
-          {query && (
-            <button
-              type="button"
-              onClick={() => onQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-1 [&:hover]:[background:var(--lumina-surface-interactive)]"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          )}
-        </div>
-      </div>
-    );
 
     return (
       <LuminaWorkspaceHero
