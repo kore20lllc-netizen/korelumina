@@ -8,6 +8,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -389,8 +393,9 @@ export function OrganizationalMemory() {
         </div>
       </div>
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaStandardPremiumPanel className="h-full">
+      <LuminaBalancedSplitPanelComposition
+        primaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Sparkles}
@@ -425,9 +430,10 @@ export function OrganizationalMemory() {
               </LuminaStandardPremiumCard>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-
-        <LuminaStandardPremiumPanel className="h-full">
+          </LuminaStandardPremiumPanel>
+        }
+        secondaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={History}
@@ -468,8 +474,9 @@ export function OrganizationalMemory() {
               </div>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-      </div>
+          </LuminaStandardPremiumPanel>
+        }
+      />
     </section>
   );
 }
