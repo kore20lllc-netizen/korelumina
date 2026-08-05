@@ -18,6 +18,10 @@ import {
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
 import {
+  LuminaPanelHeaderComposition,
+} from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -131,25 +135,28 @@ export function KnowledgeGenealogy({
           <LuminaProminentPremiumPanel>
             <div className="flex h-full flex-col justify-between gap-5">
               <div>
-                <div className="flex items-center gap-3">
-                  <ExecutivePremiumIcon
-                    icon={GitBranch}
-                    state="active"
-                  />
+                <LuminaPanelHeaderComposition
+                  iconRegion={
+                    <ExecutivePremiumIcon
+                      icon={GitBranch}
+                      state="active"
+                    />
+                  }
+                  copyRegion={
+                    <>
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
+                        Permanent knowledge lineage
+                      </div>
 
-                  <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
-                      Permanent knowledge lineage
-                    </div>
-
-                    <h2
-                      id="knowledge-genealogy-title"
-                      className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
-                    >
-                      Knowledge Genealogy
-                    </h2>
-                  </div>
-                </div>
+                      <h2
+                        id="knowledge-genealogy-title"
+                        className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
+                      >
+                        Knowledge Genealogy
+                      </h2>
+                    </>
+                  }
+                />
 
                 <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
                   Knowledge Genealogy preserves the complete ancestry of every
