@@ -61,7 +61,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive title-and-metrics composition | Repeated side-by-side title panel plus 2×2 executive metric grid across five Knowledge lifecycle workspaces | 5+ | High | Stable | Needs consolidation | Domain-neutral at composition level | Candidate after lower-level primitives |
 | Standard premium panel | `LuminaStandardPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Prominent premium panel | `LuminaProminentPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
-| Standard premium card | Repeated `rounded-[18px] p-4` plus base card and standard contour | High | High | Stable | Needs consolidation | Domain-neutral | Candidate after token certification |
+| Standard premium card | `LuminaStandardPremiumCard` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Review, and Knowledge Distribution Hub | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Compact premium card | Repeated `rounded-[14px]` or `rounded-[16px]` compact card variants | Medium | Medium | Emerging | Needs consolidation | Domain-neutral | Not ready |
 | Balanced split-panel composition | Repeated equal two-column panel layouts using `xl:grid-cols-2` and `items-stretch` | High in Knowledge lifecycle | High | Stable | Needs consolidation | Domain-neutral | Candidate after panel primitives |
 | Asymmetric detail-panel composition | Repeated domain-tuned split ratios such as `1.45fr/.55fr`, `1.38fr/.62fr`, and `1.42fr/.58fr` | Medium | Medium | Emerging | Experimental | Often workspace-specific | Not ready |
@@ -121,7 +121,7 @@ Legend:
 | Executive operations deck | ✓ | ✓ | — | — | — | — | Certified |
 | Executive title-and-metrics composition | ✓ | ~ | — | — | — | — | Stable |
 | Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
-| Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
+| Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
 | Panel header | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
 | Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
@@ -175,12 +175,15 @@ Legend:
    - Knowledge Distribution Hub remains excluded because its distinct contract is `rounded-[24px] p-5`.
 
 3. **Standard card composition**
-   - Repeated local constants:
+   - Centralized as `LuminaStandardPremiumCard`.
+   - Contract:
+     - semantic element: `div` by default
+     - optional semantic element: `article`
      - `rounded-[18px] p-4`
      - `premiumSurfaces.base.card`
      - `electricContour.strength.standard`
-   - High repetition.
-   - Candidate for future certification.
+   - Migrated one certified consumer at a time across six Knowledge lifecycle consumers.
+   - Regression Safety Gate passed after every migration.
 
 4. **Side-by-side title and metric composition**
    - Repeated across Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact.
@@ -260,7 +263,7 @@ The following remain workspace-owned and must not be promoted directly:
 | `LuminaExecutiveOperationsDeck` | Stable | Existing reusable implementation and certified consumers |
 | `LuminaProminentPremiumPanel` | Stable | Explicit shared semantic header contract with six certified consumers and completed regression validation |
 | `LuminaStandardPremiumPanel` | Stable | Explicit shared component contract with six certified consumers and completed regression validation |
-| Standard card | Needs consolidation | Repeated local class constants, no shared component contract |
+| `LuminaStandardPremiumCard` | Stable | Explicit shared semantic card contract with six certified consumers and completed regression validation |
 | Executive title-and-metrics composition | Needs consolidation | Stable visual pattern, varying local ratios and content structure |
 | Balanced split-panel composition | Needs consolidation | Repeated layout contract, not centrally owned |
 | Panel header | Needs consolidation | Consistent structure but no stable prop contract |
@@ -813,3 +816,49 @@ Extraction must stop when:
 9. Defer Inspector Shell, Command Bar, Filter Bar, Timeline, Empty State, Loading State, and Graph Container extraction.
 10. Preserve all domain-owned workspace components.
 11. Require the Regression Safety Gate for every future primitive and every migrated consumer.
+
+
+## LPR-010 Completion Record
+
+LPR-010 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
+
+Certified rendering contract:
+
+- semantic element: `div` by default
+- optional semantic element: `article`
+- `rounded-[18px] p-4`
+- `premiumSurfaces.base.card`
+- `electricContour.strength.standard`
+
+Certified consumer inventory:
+
+1. Organizational Impact
+2. Knowledge Genealogy
+3. Consumer Intelligence
+4. Organizational Memory
+5. Canonical Review
+6. Knowledge Distribution Hub
+
+Explicit exclusion:
+
+- Canonical Knowledge contained no active matching JSX consumer after its unused local declaration was removed.
+
+Completed sequence:
+
+1. Canonical Knowledge unused-contract cleanup — `3fc50be482a6242ab00efa2892b51f2ebd14f0f1`
+2. Primitive creation — `d6c52e7929480e0821dcca294de3a9d865447078`
+3. Organizational Impact — `dc6cecedaacf49b19e85ba4096ad2e96d8641d21`
+4. Knowledge Genealogy — `8c6d5b90542462fa776d82c5bd5aa5c653a68ffb`
+5. Consumer Intelligence — `0d5e0defff67f121d242a7da1a04055244d41683`
+6. Organizational Memory — `cfd81bc545a7eedfe8c171258698753443ccdb85`
+7. Canonical Review — `b3edafd70e2897f0a62924d0d139ae77b1144693`
+8. Knowledge Distribution Hub — `a6e160eda39fae01db4d2e73ef459781afb15cce`
+
+Final certification:
+
+- Shared primitive: `LuminaStandardPremiumCard`
+- Certified consumers: 6
+- Remaining matching local contracts: 0
+- Supported semantics: `div`, `article`
+- Domain content, inner layout, responsive behavior, and interactions remain consumer-owned
+- Runtime Header remains excluded
