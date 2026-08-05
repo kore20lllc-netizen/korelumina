@@ -140,6 +140,31 @@ export const flagshipAppearance = {
     "hover:text-sky-100",
   ].join(" "),
 
+  inspectorMetric: [
+    "rounded-[18px] border border-blue-400/48",
+    "bg-cyan-300/[0.04]",
+    "px-4 py-3",
+    "ring-1 ring-inset ring-cyan-300/10",
+    "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
+  ].join(" "),
+
+  inspectorIconButton: [
+    "inline-flex h-10 w-10 items-center justify-center rounded-full border",
+    "border-blue-400/55",
+    "bg-cyan-300/[0.045]",
+    "text-cyan-100",
+    "ring-1 ring-inset ring-cyan-300/14",
+    "transition-[border-color,background-color,box-shadow,transform] duration-200",
+    "hover:-translate-y-1 hover:scale-[1.03]",
+    "hover:border-cyan-200/72",
+    "hover:bg-cyan-300/[0.12]",
+    "hover:shadow-[0_0_0_1px_rgba(103,232,249,0.20),0_0_26px_rgba(34,211,238,0.24),0_10px_22px_rgba(2,6,23,0.34)]",
+    "focus-visible:outline-none",
+    "focus-visible:ring-2",
+    "focus-visible:ring-cyan-300/60",
+    "motion-reduce:transition-none",
+  ].join(" "),
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 

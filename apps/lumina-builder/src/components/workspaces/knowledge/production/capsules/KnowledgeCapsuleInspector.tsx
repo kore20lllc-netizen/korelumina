@@ -249,7 +249,11 @@ export function KnowledgeCapsuleInspector({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="rounded-[18px] border border-blue-400/48 bg-cyan-300/[0.04] px-4 py-3">
+            <div
+              className={
+                flagshipAppearance.inspectorMetric
+              }
+            >
               <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/56">
                 Current stage
               </div>
@@ -263,14 +267,9 @@ export function KnowledgeCapsuleInspector({
                 type="button"
                 aria-label="Close capsule inspector"
                 onClick={onClose}
-                className={[
-                  "inline-flex h-10 w-10 items-center justify-center rounded-full border",
-                  "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-cyan-300/[0.045] text-cyan-100",
-                  "transition-[border-color,background-color,transform] duration-200",
-                  "hover:-translate-y-0.5 hover:border-cyan-300/42 hover:bg-cyan-300/[0.08]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60",
-                  "motion-reduce:transition-none",
-                ].join(" ")}
+                className={
+                  flagshipAppearance.inspectorIconButton
+                }
               >
                 <X className="h-4 w-4" />
               </button>
