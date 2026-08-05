@@ -473,7 +473,12 @@ export function KnowledgeCapsuleInspector({
               </div>
             </section>
 
-            <section className="rounded-[22px] border border-blue-400/48 bg-slate-950/24 p-4 lg:col-span-2">
+            <section
+              className={[
+                flagshipAppearance.innerPanel,
+                "bg-slate-950/24 p-4 lg:col-span-2",
+              ].join(" ")}
+            >
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
                 Source register
               </div>
@@ -848,7 +853,12 @@ export function KnowledgeCapsuleInspector({
               </div>
             </section>
 
-            <section className="rounded-[22px] border border-amber-300/18 bg-amber-300/[0.025] p-4">
+            <section
+              className={[
+                flagshipAppearance.innerPanel,
+                "bg-amber-300/[0.025] p-4",
+              ].join(" ")}
+            >
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
                   icon={CheckCircle2}
