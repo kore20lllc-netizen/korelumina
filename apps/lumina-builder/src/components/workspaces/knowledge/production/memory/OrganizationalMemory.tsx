@@ -15,6 +15,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaProminentPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -97,12 +101,6 @@ const summaries = [
   },
 ];
 
-const prominentPanelClass = [
-  "rounded-[28px] p-6",
-  premiumSurfaces.base.panel,
-  electricContour.strength.prominent,
-].join(" ");
-
 const cardClass = [
   "rounded-[18px] p-4",
   premiumSurfaces.base.card,
@@ -122,7 +120,7 @@ export function OrganizationalMemory() {
       className="grid gap-5"
     >
       <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <header className={prominentPanelClass}>
+        <LuminaProminentPremiumPanel>
           <div className="flex h-full flex-col gap-5 xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -167,7 +165,7 @@ export function OrganizationalMemory() {
             </div>
           </div>
           </div>
-        </header>
+        </LuminaProminentPremiumPanel>
 
         <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
