@@ -247,6 +247,58 @@ export const flagshipAppearance = {
       "border-rose-300/24 bg-rose-300/[0.06] text-rose-100",
   },
 
+  capsuleButton: [
+    "group relative w-full text-left",
+    "focus-visible:outline-none",
+    "focus-visible:ring-2 focus-visible:ring-cyan-300",
+    "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+  ].join(" "),
+
+  capsuleShell: [
+    "relative min-h-[112px] overflow-visible rounded-full border bg-gradient-to-r",
+    "transition-[transform,box-shadow,border-color] duration-300",
+    "group-hover:-translate-y-1",
+    "group-hover:shadow-[0_22px_60px_rgba(2,6,23,.48)]",
+    "motion-reduce:transition-none",
+    "motion-reduce:group-hover:translate-y-0",
+  ].join(" "),
+
+  capsuleShellSelected:
+    "ring-2 ring-cyan-200/72 shadow-[0_0_34px_rgba(34,211,238,.22)]",
+
+  capsuleShellIdle:
+    "ring-1 ring-inset ring-white/8 shadow-[0_16px_48px_rgba(2,6,23,.40)]",
+
+  capsuleResealingBadge: [
+    "rounded-full border border-emerald-300/30",
+    "bg-emerald-300/8 px-2 py-1",
+    "text-[9px] font-semibold uppercase tracking-[0.12em]",
+    "text-emerald-200",
+  ].join(" "),
+
+  capsuleLayer: [
+    "rounded-[14px] border border-blue-400/48 px-3 py-2",
+    "ring-1 ring-inset ring-cyan-300/10",
+  ].join(" "),
+
+  capsuleLayerTone: {
+    failed:
+      "bg-rose-300/10",
+    warning:
+      "bg-amber-300/8",
+    healthy:
+      "bg-emerald-300/7",
+  },
+
+  capsuleLayerLabelTone: {
+    failed:
+      "text-rose-200",
+    warning:
+      "text-amber-200",
+    healthy:
+      "text-emerald-200",
+  },
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 

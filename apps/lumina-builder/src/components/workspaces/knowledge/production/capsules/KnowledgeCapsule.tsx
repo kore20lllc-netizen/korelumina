@@ -10,6 +10,10 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
 import type {
   KnowledgeCapsule as KnowledgeCapsuleModel,
   KnowledgeCapsuleState,
@@ -152,21 +156,17 @@ export function KnowledgeCapsule({
       aria-label={`${capsule.identity}, ${presentation.label}`}
       onClick={() => onSelect?.(capsule.id)}
       className={[
-        "group relative w-full text-left",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+        flagshipAppearance.capsuleButton,
         compact ? "max-w-[280px]" : "max-w-[360px]",
       ].join(" ")}
     >
       <div
         className={[
-          "relative min-h-[112px] overflow-visible rounded-full border bg-gradient-to-r",
+          flagshipAppearance.capsuleShell,
           presentation.shell,
           selected
-            ? "ring-2 ring-cyan-200/72 shadow-[0_0_34px_rgba(34,211,238,.22)]"
-            : "ring-1 ring-inset ring-white/8 shadow-[0_16px_48px_rgba(2,6,23,.40)]",
-          "transition-[transform,box-shadow,border-color] duration-300",
-          "group-hover:-translate-y-1 group-hover:shadow-[0_22px_60px_rgba(2,6,23,.48)]",
-          "motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
+            ? flagshipAppearance.capsuleShellSelected
+            : flagshipAppearance.capsuleShellIdle,
           peeled ? "px-5 py-4" : "px-4 py-3",
         ].join(" ")}
       >
@@ -215,7 +215,11 @@ export function KnowledgeCapsule({
               </span>
 
               {resealing ? (
-                <span className="rounded-full border border-emerald-300/30 bg-emerald-300/8 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-emerald-200">
+                <span
+                  className={
+                    flagshipAppearance.capsuleResealingBadge
+                  }
+                >
                   Resealing
                 </span>
               ) : null}
@@ -240,22 +244,22 @@ export function KnowledgeCapsule({
               <div
                 key={layer.id}
                 className={[
-                  "rounded-[14px] border px-3 py-2",
+                  flagshipAppearance.capsuleLayer,
                   layer.status === "failed"
-                    ? "border-rose-300/38 bg-rose-300/10"
+                    ? flagshipAppearance.capsuleLayerTone.failed
                     : layer.status === "warning"
-                      ? "border-amber-300/30 bg-amber-300/8"
-                      : "border-emerald-300/24 bg-emerald-300/7",
+                      ? flagshipAppearance.capsuleLayerTone.warning
+                      : flagshipAppearance.capsuleLayerTone.healthy,
                 ].join(" ")}
               >
                 <div
                   className={[
                     "text-[9px] font-semibold uppercase tracking-[0.12em]",
                     layer.status === "failed"
-                      ? "text-rose-200"
+                      ? flagshipAppearance.capsuleLayerLabelTone.failed
                       : layer.status === "warning"
-                        ? "text-amber-200"
-                        : "text-emerald-200",
+                        ? flagshipAppearance.capsuleLayerLabelTone.warning
+                        : flagshipAppearance.capsuleLayerLabelTone.healthy,
                   ].join(" ")}
                 >
                   {layer.label}
