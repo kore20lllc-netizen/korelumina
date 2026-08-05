@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -148,89 +152,92 @@ export function OrganizationalImpact({
       aria-labelledby="organizational-impact-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaProminentPremiumPanel>
-          <div className="flex h-full flex-col justify-between gap-5">
-            <div>
-              <div className="flex items-center gap-3">
-                <ExecutivePremiumIcon
-                  icon={Target}
-                  state="healthy"
-                />
+      <LuminaExecutiveTitleMetricsComposition
+        titleRegion={
+          <LuminaProminentPremiumPanel>
+            <div className="flex h-full flex-col justify-between gap-5">
+              <div>
+                <div className="flex items-center gap-3">
+                  <ExecutivePremiumIcon
+                    icon={Target}
+                    state="healthy"
+                  />
 
-                <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
-                    Governed value realization
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
+                      Governed value realization
+                    </div>
+
+                    <h2
+                      id="organizational-impact-title"
+                      className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
+                    >
+                      Organizational Impact
+                    </h2>
                   </div>
-
-                  <h2
-                    id="organizational-impact-title"
-                    className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
-                  >
-                    Organizational Impact
-                  </h2>
                 </div>
+
+                <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
+                  Organizational Impact connects governed knowledge to measurable
+                  mission outcomes, operational improvement, risk reduction,
+                  decision quality, and institutional leverage without breaking
+                  traceability to the originating canonical capsule.
+                </p>
               </div>
 
-              <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
-                Organizational Impact connects governed knowledge to measurable
-                mission outcomes, operational improvement, risk reduction,
-                decision quality, and institutional leverage without breaking
-                traceability to the originating canonical capsule.
-              </p>
+              <LuminaStandardPremiumCard>
+                <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
+                  Measurement boundary
+                </div>
+
+                <div className="mt-2 text-sm font-semibold text-violet-100">
+                  Impact informs governance. It does not rewrite authority.
+                </div>
+
+                <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
+                  Outcome evidence may trigger reinforcement, adaptation,
+                  reassessment, or retirement while preserving canonical lineage.
+                </div>
+              </LuminaStandardPremiumCard>
             </div>
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid columns={2}>
+            <LuminaExecutiveCard
+              title="Canonical assets measured"
+              value={String(canonicalCapsules.length)}
+              description="Published capsules included in impact evaluation."
+              accentKey="cyan"
+              icon={<BadgeCheck className="h-4 w-4 text-cyan-300" />}
+            />
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
-                Measurement boundary
-              </div>
+            <LuminaExecutiveCard
+              title="Active consumers"
+              value={String(activeConsumers)}
+              description="Connected systems contributing usage evidence."
+              accentKey="emerald"
+              icon={<Users className="h-4 w-4 text-emerald-300" />}
+            />
 
-              <div className="mt-2 text-sm font-semibold text-violet-100">
-                Impact informs governance. It does not rewrite authority.
-              </div>
+            <LuminaExecutiveCard
+              title="Governed evidence events"
+              value={String(governedEvents)}
+              description="Traceable events supporting impact assessment."
+              accentKey="violet"
+              icon={<Activity className="h-4 w-4 text-violet-300" />}
+            />
 
-              <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
-                Outcome evidence may trigger reinforcement, adaptation,
-                reassessment, or retirement while preserving canonical lineage.
-              </div>
-            </LuminaStandardPremiumCard>
-          </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid columns={2}>
-          <LuminaExecutiveCard
-            title="Canonical assets measured"
-            value={String(canonicalCapsules.length)}
-            description="Published capsules included in impact evaluation."
-            accentKey="cyan"
-            icon={<BadgeCheck className="h-4 w-4 text-cyan-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Active consumers"
-            value={String(activeConsumers)}
-            description="Connected systems contributing usage evidence."
-            accentKey="emerald"
-            icon={<Users className="h-4 w-4 text-emerald-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Governed evidence events"
-            value={String(governedEvents)}
-            description="Traceable events supporting impact assessment."
-            accentKey="violet"
-            icon={<Activity className="h-4 w-4 text-violet-300" />}
-          />
-
-          <LuminaExecutiveCard
-            title="Verified outcome rate"
-            value="78%"
-            description="Measured outcomes with sufficient lineage evidence."
-            accentKey="amber"
-            icon={<CircleGauge className="h-4 w-4 text-amber-300" />}
-          />
-        </LuminaExecutiveMetricGrid>
-      </div>
+            <LuminaExecutiveCard
+              title="Verified outcome rate"
+              value="78%"
+              description="Measured outcomes with sufficient lineage evidence."
+              accentKey="amber"
+              icon={<CircleGauge className="h-4 w-4 text-amber-300" />}
+            />
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <LuminaStandardPremiumPanel>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
