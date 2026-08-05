@@ -21,6 +21,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   KnowledgeCapsule,
 } from "../capsules";
 
@@ -84,12 +88,6 @@ const topologyClass = [
   "relative overflow-hidden rounded-[28px] p-4 sm:p-5",
   premiumSurfaces.base.panel,
   electricContour.strength.prominent,
-].join(" ");
-
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
 ].join(" ");
 
 const consumerCardClass = [
@@ -360,9 +358,9 @@ export function KnowledgeDistributionHub({
 
             <div className="mt-4 grid gap-3 lg:grid-cols-2">
               {record.history.map((event) => (
-                <article
+                <LuminaStandardPremiumCard
+                  as="article"
                   key={event.id}
-                  className={cardClass}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-xs font-semibold text-amber-300">
@@ -377,7 +375,7 @@ export function KnowledgeDistributionHub({
                   <p className="mt-2 text-xs leading-5 text-sky-400/72">
                     {event.detail}
                   </p>
-                </article>
+                </LuminaStandardPremiumCard>
               ))}
             </div>
           </section>
@@ -388,41 +386,41 @@ export function KnowledgeDistributionHub({
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <div className={cardClass}>
+              <LuminaStandardPremiumCard>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-violet-300/58">
                   Parents
                 </div>
                 <div className="mt-2 text-sm font-semibold text-violet-100">
                   {record.genealogy.parentCapsuleIds.length}
                 </div>
-              </div>
+              </LuminaStandardPremiumCard>
 
-              <div className={cardClass}>
+              <LuminaStandardPremiumCard>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/58">
                   Children
                 </div>
                 <div className="mt-2 text-sm font-semibold text-emerald-100">
                   {record.genealogy.childCapsuleIds.length}
                 </div>
-              </div>
+              </LuminaStandardPremiumCard>
 
-              <div className={cardClass}>
+              <LuminaStandardPremiumCard>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-cyan-300/58">
                   Missions
                 </div>
                 <div className="mt-2 text-sm font-semibold text-cyan-100">
                   {record.genealogy.relatedMissions.length}
                 </div>
-              </div>
+              </LuminaStandardPremiumCard>
 
-              <div className={cardClass}>
+              <LuminaStandardPremiumCard>
                 <div className="text-[9px] uppercase tracking-[0.13em] text-amber-300/58">
                   Educational influence
                 </div>
                 <div className="mt-2 text-sm font-semibold text-amber-100">
                   {record.genealogy.educationalInfluence.length}
                 </div>
-              </div>
+              </LuminaStandardPremiumCard>
             </div>
           </section>
         </div>
