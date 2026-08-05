@@ -16,6 +16,10 @@ import {
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
 import {
+  LuminaPanelHeaderComposition,
+} from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -396,21 +400,24 @@ export function OrganizationalMemory() {
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
           <LuminaStandardPremiumPanel className="h-full">
-          <div className="flex items-center gap-3">
-            <ExecutivePremiumIcon
-              icon={Sparkles}
-              state="healthy"
-            />
-
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300/58">
-                Institutional learning
-              </div>
-              <h3 className="mt-1 text-base font-semibold text-emerald-100">
-                Organizational summaries
-              </h3>
-            </div>
-          </div>
+          <LuminaPanelHeaderComposition
+            iconRegion={
+              <ExecutivePremiumIcon
+                icon={Sparkles}
+                state="healthy"
+              />
+            }
+            copyRegion={
+              <>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300/58">
+                  Institutional learning
+                </div>
+                <h3 className="mt-1 text-base font-semibold text-emerald-100">
+                  Organizational summaries
+                </h3>
+              </>
+            }
+          />
 
           <div className="mt-5 grid gap-3">
             {summaries.map((summary) => (
