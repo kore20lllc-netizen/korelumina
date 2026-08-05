@@ -173,7 +173,11 @@ export function KnowledgeCapsuleInspector({
       aria-label={`${capsule.identity} executive inspector`}
       className="overflow-hidden"
     >
-      <header className="border-b border-blue-400/50 ring-1 ring-inset ring-cyan-300/12 bg-[linear-gradient(145deg,rgba(4,14,36,.88),rgba(17,10,46,.84),rgba(4,15,38,.88))] p-5 sm:p-6">
+      <header
+        className={
+          flagshipAppearance.inspectorHeader
+        }
+      >
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/72">
@@ -195,7 +199,11 @@ export function KnowledgeCapsuleInspector({
                 {capsule.state.replace("-", " ")}
               </div>
 
-              <div className="inline-flex rounded-full border border-blue-400/60 ring-1 ring-inset ring-cyan-300/16 bg-violet-300/[0.06] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-100">
+              <div
+                className={
+                  flagshipAppearance.inspectorIntegrityBadge
+                }
+              >
                 {capsule.integrity}
               </div>
             </div>
@@ -563,11 +571,10 @@ export function KnowledgeCapsuleInspector({
 
                       <div
                         className={[
-                          "rounded-full border px-2.5 py-1",
-                          "text-[9px] font-semibold uppercase tracking-[0.12em]",
+                          flagshipAppearance.inspectorLayerStatusBadge,
                           layer.status === "validated"
-                            ? "border-emerald-300/24 bg-emerald-300/[0.06] text-emerald-100"
-                            : "border-rose-300/24 bg-rose-300/[0.06] text-rose-100",
+                            ? flagshipAppearance.inspectorLayerStatusTone.validated
+                            : flagshipAppearance.inspectorLayerStatusTone.disputed,
                         ].join(" ")}
                       >
                         {layer.status}

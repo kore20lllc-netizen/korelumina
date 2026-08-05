@@ -219,6 +219,34 @@ export const flagshipAppearance = {
       "border-slate-300/20 bg-slate-300/[0.05] text-slate-300",
   },
 
+  inspectorHeader: [
+    "border-b border-blue-400/50",
+    "ring-1 ring-inset ring-cyan-300/12",
+    "bg-[linear-gradient(145deg,rgba(4,14,36,.88),rgba(17,10,46,.84),rgba(4,15,38,.88))]",
+    "p-5 sm:p-6",
+  ].join(" "),
+
+  inspectorIntegrityBadge: [
+    "inline-flex rounded-full border px-3 py-1.5",
+    "border-blue-400/60",
+    "ring-1 ring-inset ring-cyan-300/16",
+    "bg-violet-300/[0.06]",
+    "text-[9px] font-semibold uppercase tracking-[0.13em]",
+    "text-violet-100",
+  ].join(" "),
+
+  inspectorLayerStatusBadge: [
+    "rounded-full border px-2.5 py-1",
+    "text-[9px] font-semibold uppercase tracking-[0.12em]",
+  ].join(" "),
+
+  inspectorLayerStatusTone: {
+    validated:
+      "border-emerald-300/24 bg-emerald-300/[0.06] text-emerald-100",
+    disputed:
+      "border-rose-300/24 bg-rose-300/[0.06] text-rose-100",
+  },
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 
