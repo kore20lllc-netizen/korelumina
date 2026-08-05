@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -301,8 +305,9 @@ export function OrganizationalImpact({
         </div>
       </LuminaStandardPremiumPanel>
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaStandardPremiumPanel className="h-full">
+      <LuminaBalancedSplitPanelComposition
+        primaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Sparkles}
@@ -344,9 +349,10 @@ export function OrganizationalImpact({
               </LuminaStandardPremiumCard>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-
-        <LuminaStandardPremiumPanel className="h-full">
+          </LuminaStandardPremiumPanel>
+        }
+        secondaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={ShieldCheck}
@@ -386,8 +392,9 @@ export function OrganizationalImpact({
               </LuminaStandardPremiumCard>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-      </div>
+          </LuminaStandardPremiumPanel>
+        }
+      />
 
       <LuminaStandardPremiumPanel>
         <div className="flex items-center gap-3">
