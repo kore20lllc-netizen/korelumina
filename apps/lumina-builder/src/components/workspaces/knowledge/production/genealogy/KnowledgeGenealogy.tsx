@@ -21,6 +21,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaProminentPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -33,12 +37,6 @@ type KnowledgeGenealogyProps = {
   selectedCapsuleId: string;
   onCapsuleSelect: (capsuleId: string) => void;
 };
-
-const prominentPanelClass = [
-  "rounded-[28px] p-6",
-  premiumSurfaces.base.panel,
-  electricContour.strength.prominent,
-].join(" ");
 
 const cardClass = [
   "rounded-[18px] p-4",
@@ -123,7 +121,7 @@ export function KnowledgeGenealogy({
       className="grid gap-5"
     >
       <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <header className={prominentPanelClass}>
+        <LuminaProminentPremiumPanel>
           <div className="flex h-full flex-col justify-between gap-5">
             <div>
               <div className="flex items-center gap-3">
@@ -168,7 +166,7 @@ export function KnowledgeGenealogy({
               </div>
             </div>
           </div>
-        </header>
+        </LuminaProminentPremiumPanel>
 
         <LuminaExecutiveMetricGrid columns={2}>
           <LuminaExecutiveCard
