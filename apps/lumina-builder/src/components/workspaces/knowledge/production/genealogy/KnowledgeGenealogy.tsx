@@ -44,6 +44,10 @@ import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
+import {
+  LuminaStatusBadge,
+} from "@/components/lumina/workspace";
+
 import type {
   KnowledgeCapsuleModel,
 } from "../capsules";
@@ -303,9 +307,9 @@ export function KnowledgeGenealogy({
                     </div>
                   </div>
 
-                  <div className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.05] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-cyan-100">
+                  <LuminaStatusBadge variant="active">
                     {layer.status}
-                  </div>
+                  </LuminaStatusBadge>
                 </div>
               </LuminaStandardPremiumCard>
             ))}
