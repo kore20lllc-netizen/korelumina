@@ -16,6 +16,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaProminentPremiumPanel,
+} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -110,12 +114,6 @@ function StatusBadge({
   );
 }
 
-const prominentPanelClass = [
-  "rounded-[28px] p-6",
-  premiumSurfaces.base.panel,
-  electricContour.strength.prominent,
-].join(" ");
-
 const cardClass = [
   "rounded-[18px] p-4",
   premiumSurfaces.base.card,
@@ -135,7 +133,7 @@ export function CanonicalKnowledge() {
       className="grid gap-5"
     >
       <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
-        <header className={prominentPanelClass}>
+        <LuminaProminentPremiumPanel>
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -201,7 +199,7 @@ export function CanonicalKnowledge() {
               </div>
             </div>
           </div>
-        </header>
+        </LuminaProminentPremiumPanel>
 
         <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
