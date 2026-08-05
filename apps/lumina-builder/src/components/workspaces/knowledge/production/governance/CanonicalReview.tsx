@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaBalancedSplitPanelComposition,
+} from "@/components/design-system/compositions/LuminaBalancedSplitPanelComposition";
+
+import {
   LuminaExecutiveTitleMetricsComposition,
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
@@ -251,8 +255,9 @@ export function CanonicalReview() {
         }
       />
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-2">
-        <LuminaStandardPremiumPanel className="h-full">
+      <LuminaBalancedSplitPanelComposition
+        primaryRegion={
+          <LuminaStandardPremiumPanel className="h-full">
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -350,9 +355,10 @@ export function CanonicalReview() {
               </article>
             ))}
           </div>
-        </LuminaStandardPremiumPanel>
-
-        <div className="grid h-full gap-5 xl:grid-rows-2">
+          </LuminaStandardPremiumPanel>
+        }
+        secondaryRegion={
+          <div className="grid h-full gap-5 xl:grid-rows-2">
           <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -437,8 +443,9 @@ export function CanonicalReview() {
               </LuminaStandardPremiumCard>
             </div>
           </LuminaStandardPremiumPanel>
-        </div>
-      </div>
+          </div>
+        }
+      />
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,.7fr)]">
         <LuminaStandardPremiumPanel>
