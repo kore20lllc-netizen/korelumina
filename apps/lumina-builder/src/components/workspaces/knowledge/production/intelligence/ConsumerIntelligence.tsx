@@ -24,6 +24,10 @@ import {
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
 import {
+  LuminaPanelHeaderComposition,
+} from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -378,21 +382,24 @@ export function ConsumerIntelligence({
         <LuminaBalancedSplitPanelComposition
           primaryRegion={
             <LuminaStandardPremiumPanel className="h-full">
-            <div className="flex items-center gap-3">
-              <ExecutivePremiumIcon
-                icon={TrendingUp}
-                state="active"
-              />
-
-              <div>
-                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
-                  Usage patterns
-                </div>
-                <h3 className="mt-1 text-base font-semibold text-cyan-100">
-                  Organizational adoption mix
-                </h3>
-              </div>
-            </div>
+            <LuminaPanelHeaderComposition
+              iconRegion={
+                <ExecutivePremiumIcon
+                  icon={TrendingUp}
+                  state="active"
+                />
+              }
+              copyRegion={
+                <>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
+                    Usage patterns
+                  </div>
+                  <h3 className="mt-1 text-base font-semibold text-cyan-100">
+                    Organizational adoption mix
+                  </h3>
+                </>
+              }
+            />
 
             <div className="mt-5 grid gap-3">
               {usagePatterns.map((pattern) => (
