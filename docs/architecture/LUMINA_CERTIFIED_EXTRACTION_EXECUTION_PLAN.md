@@ -5,8 +5,8 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-013 complete
-- Extraction status: LPR-008 through LPR-013 extracted, migrated, and regression-certified
+- Execution status: LPR-014 complete
+- Extraction status: LPR-008 through LPR-014 extracted, migrated, and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
@@ -14,6 +14,7 @@
   - LPR-011 — Executive Title and Metrics Composition
   - LPR-012 — Balanced Split Panel Composition
   - LPR-013 — Panel Header Composition
+  - LPR-014 — Status Badge and State Surface
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -25,6 +26,8 @@
 - LPR-012 final consumer commit: `ada158db2e1ba8b7e936d5ae13bb4c5e9a5086cb`
 - LPR-013 primitive commit: `a943cf186945a6655dfb0f677158a519a9a4532e`
 - LPR-013 final consumer commit: `98bd55f9378b676da1de4153ff4985601307bcad`
+- LPR-014 ownership integration commit: `2684ea53c4385345d51be5e77251e7bc02cb93d6`
+- LPR-014 final consumer commit: `20938b92a21dc9fdd3552282b75d8d543b7d7f60`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -550,4 +553,66 @@ Final certification:
 - LPR-011 and LPR-012 compositions remained unchanged
 - Regression Safety Gate passed before and after every migration
 - Production build remained green at 3191 transformed modules
+- Runtime Header remains excluded
+
+## LPR-014 Completion Record
+
+LPR-014 completed through corrective ownership integration followed by one certified consumer per migration milestone.
+
+Shared primitives:
+
+- `LuminaStatusBadge`
+- `LuminaStateSurface`
+
+Existing-system ownership:
+
+- `apps/lumina-builder/src/components/lumina/workspace/LuminaStatusBadge.tsx`
+- `apps/lumina-builder/src/components/lumina/workspace/LuminaStateSurface.tsx`
+- `apps/lumina-builder/src/components/lumina/workspace/index.ts`
+
+Certified status badge contract:
+
+- preserves existing `neutral` and `accent` variants
+- certified semantic variants:
+  - `healthy`
+  - `active`
+  - `warning`
+  - `error`
+- exact rounded pill rendering
+- consumer-owned labels and state selection
+- no domain transition logic
+
+Certified state surface contract:
+
+- semantic tones:
+  - `healthy`
+  - `active`
+  - `warning`
+  - `error`
+  - `neutral`
+- `rounded-[18px] border p-4`
+- consumer-owned content and state selection
+- no domain transition logic
+
+Completed sequence:
+
+1. Corrective ownership integration — `2684ea53c4385345d51be5e77251e7bc02cb93d6`
+2. Canonical Knowledge healthy badge — `593b58c1c69880c99b24523ca484026d3d851c14`
+3. Organizational Memory healthy badge — `ea60cbc147077e1b63aa163c8c3770f655c48ebd`
+4. Knowledge Genealogy active badge — `929fa47019e88a20648caee3b9ba293eb3d1a696`
+5. Canonical Knowledge warning state surface — `20938b92a21dc9fdd3552282b75d8d543b7d7f60`
+
+Final certification:
+
+- Status badge maturity: Certified
+- State surface maturity: Certified
+- API stability: Stable
+- Remaining exact certified badge duplicates in active Knowledge Operations: 0
+- Remaining exact certified state-surface duplicates in active Knowledge Operations: 0
+- Existing `neutral` and `accent` consumers remain backward-compatible
+- Distinct violet privacy pills remain consumer-owned
+- Distinct blue premium surfaces remain consumer-owned
+- Capsule-engine and other non-matching pills remain consumer-owned
+- Regression Safety Gate passed after every migration
+- Production build remained green at 3192 transformed modules
 - Runtime Header remains excluded

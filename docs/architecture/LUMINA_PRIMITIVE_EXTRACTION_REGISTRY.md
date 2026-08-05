@@ -69,8 +69,8 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive operations deck | Existing `LuminaExecutiveOperationsDeck` and certified executive workspace usage | Multiple | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Section header block | Eyebrow, title, description, optional icon, optional right-side posture card | High | Medium-high | Stable | Needs consolidation | Domain-neutral when content is injected | Candidate after panel primitives |
 | Panel header composition | `LuminaPanelHeaderComposition` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Knowledge, and Canonical Review | 6 | High | Certified | Stable | Domain-neutral at composition level | Extracted and regression-certified |
-| Status badge | Repeated rounded status pills across Knowledge, Runtime, diagnostics, and audit surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
-| State surface | Warning, healthy, active, restricted, error, pending, superseded, archived visual treatments | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after semantic token audit |
+| Status badge | `LuminaStatusBadge` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge, Organizational Memory, and Knowledge Genealogy | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
+| State surface | `LuminaStateSurface` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge warning lifecycle treatment | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Warning surface | Repeated amber/rose alert and review-required surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
 | Activity feed row | Repeated event/history/log/feed rows across Knowledge, Runtime, and diagnostics | Medium-high | Medium | Stable | Needs consolidation | Domain-neutral at row level | Candidate after panel and state primitives |
 | Timeline card | Governance timeline, memory evolution, event history, runtime event stream | Medium | Medium | Emerging | Needs consolidation | Mixed | Not ready |
@@ -124,8 +124,8 @@ Legend:
 | Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Panel header composition | ✓ | ~ | ~ | ~ | ~ | ~ | Certified |
-| Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
-| State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
+| Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
+| State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
 | Warning surface | ✓ | ✓ | ✓ | ✓ | ~ | ~ | Stable |
 | Activity feed row | ✓ | ✓ | ~ | ✓ | ~ | ~ | Stable |
 | Timeline card | ✓ | ✓ | — | ~ | — | — | Emerging |
@@ -226,10 +226,28 @@ Legend:
    - Typography, content, state logic, actions, badges, and domain meaning remain consumer-owned.
    - Regression Safety Gate passed after every migration.
 
-7. **Status and state treatments**
-   - Repeated pills and semantic surfaces.
-   - Visual vocabulary converges, but color/state mappings remain distributed.
-   - Requires semantic-token audit before extraction.
+7. **Status badge and state surface**
+   - Centralized in the existing Lumina workspace component system.
+   - `LuminaStatusBadge` preserves the existing `neutral` and `accent` variants.
+   - Certified semantic badge variants:
+     - `healthy`
+     - `active`
+     - `warning`
+     - `error`
+   - `LuminaStateSurface` provides:
+     - `healthy`
+     - `active`
+     - `warning`
+     - `error`
+     - `neutral`
+   - Certified Knowledge consumers:
+     - Canonical Knowledge — healthy status badge
+     - Organizational Memory — healthy status badge
+     - Knowledge Genealogy — active status badge
+     - Canonical Knowledge — warning state surface
+   - Consumer-owned state selection, transition logic, labels, privacy semantics, and domain meaning remain outside the primitives.
+   - Distinct violet privacy pills, blue premium surfaces, capsule-engine pills, and other non-matching treatments remain intentionally excluded.
+   - Regression Safety Gate passed after every migration.
 
 ## Domain-Owned Registry
 
