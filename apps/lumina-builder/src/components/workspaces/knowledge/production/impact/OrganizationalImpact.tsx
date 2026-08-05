@@ -27,6 +27,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -39,12 +43,6 @@ type OrganizationalImpactProps = {
   capsules: KnowledgeCapsuleModel[];
   records: KnowledgeDistributionRecord[];
 };
-
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 const impactOutcomes = [
   {
@@ -182,7 +180,7 @@ export function OrganizationalImpact({
               </p>
             </div>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
                 Measurement boundary
               </div>
@@ -195,7 +193,7 @@ export function OrganizationalImpact({
                 Outcome evidence may trigger reinforcement, adaptation,
                 reassessment, or retirement while preserving canonical lineage.
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
           </div>
         </LuminaProminentPremiumPanel>
 
@@ -253,9 +251,9 @@ export function OrganizationalImpact({
 
         <div className="mt-5 grid gap-4 xl:grid-cols-3">
           {impactOutcomes.map((impact) => (
-            <article
+            <LuminaStandardPremiumCard
+              as="article"
               key={impact.capsule}
-              className={cardClass}
             >
               <div className="flex items-start gap-3">
                 <ExecutivePremiumIcon
@@ -291,7 +289,7 @@ export function OrganizationalImpact({
               <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-300/56">
                 {impact.confidence}
               </div>
-            </article>
+            </LuminaStandardPremiumCard>
           ))}
         </div>
       </LuminaStandardPremiumPanel>
@@ -317,9 +315,9 @@ export function OrganizationalImpact({
 
           <div className="mt-5 grid gap-3">
             {leverageSignals.map((signal) => (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={signal.title}
-                className={cardClass}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -336,7 +334,7 @@ export function OrganizationalImpact({
                     {signal.value}
                   </div>
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             ))}
           </div>
         </LuminaStandardPremiumPanel>
@@ -361,9 +359,9 @@ export function OrganizationalImpact({
 
           <div className="mt-5 grid gap-3">
             {reviewSignals.map((signal) => (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={signal.title}
-                className={cardClass}
               >
                 <div className="flex items-start gap-3">
                   <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
@@ -378,7 +376,7 @@ export function OrganizationalImpact({
                     </div>
                   </div>
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             ))}
           </div>
         </LuminaStandardPremiumPanel>
@@ -409,9 +407,8 @@ export function OrganizationalImpact({
             "Governed evidence",
             "Measured outcome",
           ].map((step, index) => (
-            <div
+            <LuminaStandardPremiumCard
               key={step}
-              className={cardClass}
             >
               <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/52">
                 {String(index + 1).padStart(2, "0")}
@@ -420,7 +417,7 @@ export function OrganizationalImpact({
               <div className="mt-2 text-sm font-semibold text-white">
                 {step}
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
           ))}
         </div>
       </LuminaStandardPremiumPanel>
