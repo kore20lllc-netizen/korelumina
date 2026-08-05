@@ -19,6 +19,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -101,12 +105,6 @@ const summaries = [
   },
 ];
 
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
-
 const compactCardClass = [
   "rounded-[16px] p-3",
   premiumSurfaces.base.card,
@@ -150,7 +148,7 @@ export function OrganizationalMemory() {
             </p>
           </div>
 
-          <div className={cardClass}>
+          <LuminaStandardPremiumCard>
             <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
               Stewardship boundary
             </div>
@@ -163,7 +161,7 @@ export function OrganizationalMemory() {
               No memory projection replaces, overrides, or silently mutates
               canonical authority.
             </div>
-          </div>
+          </LuminaStandardPremiumCard>
           </div>
         </LuminaProminentPremiumPanel>
 
@@ -244,14 +242,14 @@ export function OrganizationalMemory() {
                     </div>
                   </div>
 
-                  <div className={cardClass}>
+                  <LuminaStandardPremiumCard>
                     <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                       Adaptation purpose
                     </div>
                     <div className="mt-2 text-xs leading-5 text-cyan-100/72">
                       {projection.detail}
                     </div>
-                  </div>
+                  </LuminaStandardPremiumCard>
                 </div>
 
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -323,9 +321,8 @@ export function OrganizationalMemory() {
                   "Canonical authority remains external to adapted memory.",
                 ],
               ].map(([label, title, detail]) => (
-                <div
+                <LuminaStandardPremiumCard
                   key={label}
-                  className={cardClass}
                 >
                   <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                     {label}
@@ -336,7 +333,7 @@ export function OrganizationalMemory() {
                   <div className="mt-2 text-[11px] leading-5 text-sky-300/56">
                     {detail}
                   </div>
-                </div>
+                </LuminaStandardPremiumCard>
               ))}
             </div>
           </LuminaStandardPremiumPanel>
@@ -365,14 +362,14 @@ export function OrganizationalMemory() {
                 ["Active projections", "3 governed adaptations"],
               ].map(([label, value], index) => (
                 <div key={label}>
-                  <div className={cardClass}>
+                  <LuminaStandardPremiumCard>
                     <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                       {label}
                     </div>
                     <div className="mt-1 text-sm font-semibold text-white">
                       {value}
                     </div>
-                  </div>
+                  </LuminaStandardPremiumCard>
 
                   {index < 2 ? (
                     <div className="mx-auto h-4 w-px bg-cyan-300/28" />
@@ -404,9 +401,9 @@ export function OrganizationalMemory() {
 
           <div className="mt-5 grid gap-3">
             {summaries.map((summary) => (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={summary.title}
-                className={cardClass}
               >
                 <div className="text-sm font-semibold text-white">
                   {summary.title}
@@ -417,7 +414,7 @@ export function OrganizationalMemory() {
                 <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/52">
                   {summary.lineage}
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             ))}
           </div>
         </LuminaStandardPremiumPanel>
@@ -445,7 +442,7 @@ export function OrganizationalMemory() {
                 key={entry.version}
                 className="relative"
               >
-                <div className={cardClass}>
+                <LuminaStandardPremiumCard>
                   <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/54">
                     {entry.version}
                   </div>
@@ -455,7 +452,7 @@ export function OrganizationalMemory() {
                   <div className="mt-2 text-[11px] leading-5 text-sky-400/58">
                     {entry.detail}
                   </div>
-                </div>
+                </LuminaStandardPremiumCard>
 
                 {index < evolution.length - 1 ? (
                   <div className="mx-auto h-3 w-px bg-cyan-300/24" />
