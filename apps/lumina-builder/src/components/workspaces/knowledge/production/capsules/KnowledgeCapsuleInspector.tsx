@@ -83,34 +83,6 @@ const tabs: Array<{
   },
 ];
 
-const stateClasses = {
-  queued:
-    "border-sky-300/26 bg-sky-300/[0.07] text-sky-100",
-  processing:
-    "border-cyan-300/28 bg-cyan-300/[0.08] text-cyan-100",
-  waiting:
-    "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-violet-300/[0.08] text-violet-100",
-  blocked:
-    "border-rose-300/30 bg-rose-300/[0.08] text-rose-100",
-  failed:
-    "border-rose-300/34 bg-rose-300/[0.10] text-rose-100",
-  "needs-review":
-    "border-amber-300/32 bg-amber-300/[0.09] text-amber-100",
-  validated:
-    "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-100",
-  approved:
-    "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-100",
-  published:
-    "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-100",
-  adapted:
-    "border-violet-300/30 bg-violet-300/[0.08] text-violet-100",
-  consumed:
-    "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-100",
-  superseded:
-    "border-slate-300/24 bg-slate-300/[0.06] text-slate-200",
-  archived:
-    "border-slate-300/20 bg-slate-300/[0.05] text-slate-300",
-} as const;
 
 function DetailCard({
   label,
@@ -121,24 +93,11 @@ function DetailCard({
   value: string;
   tone?: "cyan" | "violet" | "amber" | "emerald" | "rose";
 }) {
-  const toneClasses = {
-    cyan:
-      "border-blue-400/48 ring-1 ring-inset ring-cyan-300/10 bg-cyan-300/[0.035] text-cyan-100",
-    violet:
-      "border-blue-400/48 ring-1 ring-inset ring-cyan-300/10 bg-violet-300/[0.035] text-violet-100",
-    amber:
-      "border-blue-400/48 ring-1 ring-inset ring-cyan-300/10 bg-amber-300/[0.035] text-amber-100",
-    emerald:
-      "border-blue-400/48 ring-1 ring-inset ring-cyan-300/10 bg-emerald-300/[0.035] text-emerald-100",
-    rose:
-      "border-blue-400/48 ring-1 ring-inset ring-cyan-300/10 bg-rose-300/[0.035] text-rose-100",
-  } as const;
-
   return (
     <div
       className={[
-        "rounded-[16px] border p-3",
-        toneClasses[tone],
+        flagshipAppearance.inspectorDetailCard,
+        flagshipAppearance.inspectorDetailTone[tone],
       ].join(" ")}
     >
       <div className="text-[9px] font-semibold uppercase tracking-[0.14em] opacity-60">
@@ -158,7 +117,11 @@ function EmptyValue({
   label: string;
 }) {
   return (
-    <div className="rounded-[16px] border border-dashed border-cyan-300/12 bg-cyan-300/[0.015] px-3 py-4 text-center text-[10px] leading-5 text-sky-500/52">
+    <div
+      className={
+        flagshipAppearance.inspectorEmptyState
+      }
+    >
       {label}
     </div>
   );
@@ -226,7 +189,7 @@ export function KnowledgeCapsuleInspector({
                 className={[
                   "inline-flex rounded-full border px-3 py-1.5",
                   "text-[9px] font-semibold uppercase tracking-[0.13em]",
-                  stateClasses[capsule.state],
+                  flagshipAppearance.inspectorStateTone[capsule.state],
                 ].join(" ")}
               >
                 {capsule.state.replace("-", " ")}
@@ -534,7 +497,12 @@ export function KnowledgeCapsuleInspector({
 
         {activeTab === "validation" ? (
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <section className="rounded-[22px] border border-amber-300/20 bg-amber-300/[0.025] p-4">
+            <section
+              className={[
+                flagshipAppearance.innerPanel,
+                "bg-amber-300/[0.025] p-4",
+              ].join(" ")}
+            >
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 <DetailCard
                   label="Validated layers"
@@ -570,10 +538,11 @@ export function KnowledgeCapsuleInspector({
                   <article
                     key={layer.id}
                     className={[
-                      "rounded-[18px] border p-4",
+                      flagshipAppearance.inspectorDetailCard,
+                      "rounded-[18px] p-4",
                       layer.status === "validated"
-                        ? "border-emerald-300/18 bg-emerald-300/[0.035]"
-                        : "border-rose-300/18 bg-rose-300/[0.035]",
+                        ? "bg-emerald-300/[0.035]"
+                        : "bg-rose-300/[0.035]",
                     ].join(" ")}
                   >
                     <div className="flex flex-wrap items-start justify-between gap-3">

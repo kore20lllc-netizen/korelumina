@@ -165,6 +165,60 @@ export const flagshipAppearance = {
     "motion-reduce:transition-none",
   ].join(" "),
 
+  inspectorDetailCard: [
+    "rounded-[16px] border border-blue-400/48 p-3",
+    "ring-1 ring-inset ring-cyan-300/10",
+  ].join(" "),
+
+  inspectorDetailTone: {
+    cyan:
+      "bg-cyan-300/[0.035] text-cyan-100",
+    violet:
+      "bg-violet-300/[0.035] text-violet-100",
+    amber:
+      "bg-amber-300/[0.035] text-amber-100",
+    emerald:
+      "bg-emerald-300/[0.035] text-emerald-100",
+    rose:
+      "bg-rose-300/[0.035] text-rose-100",
+  },
+
+  inspectorEmptyState: [
+    "rounded-[16px] border border-dashed",
+    "border-cyan-300/12 bg-cyan-300/[0.015]",
+    "px-3 py-4 text-center",
+    "text-[10px] leading-5 text-sky-500/52",
+  ].join(" "),
+
+  inspectorStateTone: {
+    queued:
+      "border-sky-300/26 bg-sky-300/[0.07] text-sky-100",
+    processing:
+      "border-cyan-300/28 bg-cyan-300/[0.08] text-cyan-100",
+    waiting:
+      "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-violet-300/[0.08] text-violet-100",
+    blocked:
+      "border-rose-300/30 bg-rose-300/[0.08] text-rose-100",
+    failed:
+      "border-rose-300/34 bg-rose-300/[0.10] text-rose-100",
+    "needs-review":
+      "border-amber-300/32 bg-amber-300/[0.09] text-amber-100",
+    validated:
+      "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-100",
+    approved:
+      "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-100",
+    published:
+      "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-100",
+    adapted:
+      "border-violet-300/30 bg-violet-300/[0.08] text-violet-100",
+    consumed:
+      "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-100",
+    superseded:
+      "border-slate-300/24 bg-slate-300/[0.06] text-slate-200",
+    archived:
+      "border-slate-300/20 bg-slate-300/[0.05] text-slate-300",
+  },
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 
