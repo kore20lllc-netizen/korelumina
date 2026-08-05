@@ -63,7 +63,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Prominent premium panel | `LuminaProminentPremiumPanel` consumed by Canonical Review, Canonical Knowledge, Organizational Memory, Consumer Intelligence, Knowledge Genealogy, and Organizational Impact | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Standard premium card | `LuminaStandardPremiumCard` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Review, and Knowledge Distribution Hub | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | Compact premium card | Repeated `rounded-[14px]` or `rounded-[16px]` compact card variants | Medium | Medium | Emerging | Needs consolidation | Domain-neutral | Not ready |
-| Balanced split-panel composition | Repeated equal two-column panel layouts using `xl:grid-cols-2` and `items-stretch` | High in Knowledge lifecycle | High | Stable | Needs consolidation | Domain-neutral | Candidate after panel primitives |
+| Balanced split-panel composition | `LuminaBalancedSplitPanelComposition` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Knowledge, and Canonical Review | 6 | High | Certified | Stable | Domain-neutral at composition level | Extracted and regression-certified |
 | Asymmetric detail-panel composition | Repeated domain-tuned split ratios such as `1.45fr/.55fr`, `1.38fr/.62fr`, and `1.42fr/.58fr` | Medium | Medium | Emerging | Experimental | Often workspace-specific | Not ready |
 | Executive ribbon | Existing `LuminaExecutiveRibbon` and Knowledge Executive Ribbon usage | Multiple | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive operations deck | Existing `LuminaExecutiveOperationsDeck` and certified executive workspace usage | Multiple | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
@@ -122,7 +122,7 @@ Legend:
 | Executive title-and-metrics composition | ✓ | ~ | — | — | — | — | Certified |
 | Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
-| Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Stable |
+| Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Panel header | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
 | Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
 | State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
@@ -200,10 +200,16 @@ Legend:
    - Domain content, panels, metric cards, typography, behavior, and inner responsive layout remain consumer-owned.
 
 5. **Balanced dual-panel section**
-   - Repeated `grid items-stretch gap-5 xl:grid-cols-2`.
-   - Common across approved Knowledge lifecycle refinements.
-   - Domain-neutral at composition level.
-   - Candidate after panel primitives.
+   - Centralized as `LuminaBalancedSplitPanelComposition`.
+   - Contract:
+     - `grid items-stretch gap-5 xl:grid-cols-2`
+     - responsive stacking below `xl`
+     - injected `primaryRegion`
+     - injected `secondaryRegion`
+     - optional caller-provided `className`
+   - Migrated one certified consumer at a time across six Knowledge lifecycle workspaces.
+   - Regression Safety Gate passed after every migration.
+   - Domain content, panel ownership, inner responsive structure, asymmetric layouts, and behavior remain consumer-owned.
 
 6. **Panel header block**
    - Repeated icon, uppercase eyebrow, title, and optional badge.

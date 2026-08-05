@@ -5,13 +5,14 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-011 complete
-- Extraction status: LPR-008 through LPR-011 extracted, migrated, and regression-certified
+- Execution status: LPR-012 complete
+- Extraction status: LPR-008 through LPR-012 extracted, migrated, and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
   - LPR-010 — Standard Premium Card
   - LPR-011 — Executive Title and Metrics Composition
+  - LPR-012 — Balanced Split Panel Composition
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -19,6 +20,8 @@
 - LPR-010 final consumer commit: `a6e160eda39fae01db4d2e73ef459781afb15cce`
 - LPR-011 primitive commit: `8f53ec525bab9187014e77a2c640529781d6c169`
 - LPR-011 final consumer commit: `c6638b87abf01aba3dda0847802573f9144b1058`
+- LPR-012 primitive commit: `2805756862321de6d5c681ad1c09884993d9f1f8`
+- LPR-012 final consumer commit: `ada158db2e1ba8b7e936d5ae13bb4c5e9a5086cb`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -438,4 +441,56 @@ Final certification:
 - Non-target balanced and asymmetric workspace layouts remain unchanged
 - Regression Safety Gate passed before and after every migration
 - Production build remained green at 3189 transformed modules
+- Runtime Header remains excluded
+
+## LPR-012 Completion Record
+
+LPR-012 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
+
+Shared primitive:
+
+`LuminaBalancedSplitPanelComposition`
+
+Certified composition contract:
+
+- base layout: `grid items-stretch gap-5 xl:grid-cols-2`
+- responsive stacking below `xl`
+- equal-width column participation at `xl` and above
+- equal-height participation through `items-stretch`
+- injected `primaryRegion`
+- injected `secondaryRegion`
+- optional caller-provided `className`
+- no Knowledge, Governance, Runtime, Mission, or other domain ownership
+
+Consumer inventory:
+
+1. Organizational Impact
+2. Knowledge Genealogy
+3. Consumer Intelligence
+4. Organizational Memory
+5. Canonical Knowledge
+6. Canonical Review
+
+Completed sequence:
+
+1. Primitive creation — `2805756862321de6d5c681ad1c09884993d9f1f8`
+2. Organizational Impact — `d58da2b57154538a36e64cd6040c7bd6e566e758`
+3. Knowledge Genealogy — `bd859f244d8916a6fd1b3416068c64e6106a26f2`
+4. Consumer Intelligence — `dc6c7916c6e0bb1ce1ce07ebb8b4a87ca5a537fa`
+5. Organizational Memory — `3fcdbae4e32b7f5526279adfef1ac9ee8a098b77`
+6. Canonical Knowledge — `f100b0061400594dd1ad9ecc29c29a4faf5a7067`
+7. Canonical Review — `ada158db2e1ba8b7e936d5ae13bb4c5e9a5086cb`
+
+Final certification:
+
+- Shared primitive: `LuminaBalancedSplitPanelComposition`
+- Certified consumers: 6
+- Remaining targeted legacy balanced wrappers in migrated locations: 0
+- Supported layout contract: equal two-column split at `xl`, stacked below `xl`
+- Panels, content, typography, state, behavior, and inner responsive layout remain consumer-owned
+- Asymmetric and fractional workspace layouts remain unchanged
+- Organizational Memory retained its separate non-target nested balanced wrapper by explicit milestone scope
+- Canonical Review retained its right-side `xl:grid-rows-2` authority stack
+- Regression Safety Gate passed before and after every migration
+- Production build remained green at 3190 transformed modules
 - Runtime Header remains excluded
