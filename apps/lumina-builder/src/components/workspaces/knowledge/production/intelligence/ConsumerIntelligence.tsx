@@ -16,6 +16,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -181,8 +185,10 @@ export function ConsumerIntelligence({
       aria-labelledby="consumer-intelligence-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
-        <LuminaProminentPremiumPanel>
+      <LuminaExecutiveTitleMetricsComposition
+        variant="content-led"
+        titleRegion={
+          <LuminaProminentPremiumPanel>
           <div className="flex h-full flex-col gap-5 xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -227,9 +233,10 @@ export function ConsumerIntelligence({
             </div>
           </LuminaStandardPremiumCard>
           </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid columns={2}>
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Active consumers"
           value={String(activeConsumers)}
@@ -261,8 +268,9 @@ export function ConsumerIntelligence({
           accentKey="violet"
           icon={<Activity className="h-4 w-4 text-violet-300" />}
         />
-        </LuminaExecutiveMetricGrid>
-      </div>
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.42fr)_minmax(340px,.58fr)]">
         <LuminaStandardPremiumPanel>
