@@ -5,8 +5,8 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-016 complete
-- Extraction status: LPR-008 through LPR-016 completed and regression-certified
+- Execution status: LPR-017 complete
+- Extraction status: LPR-008 through LPR-017 completed and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
@@ -17,6 +17,7 @@
   - LPR-014 — Status Badge and State Surface
   - LPR-015 — Activity Feed Row Shell
   - LPR-016 — Warning Surface Reconciliation
+  - LPR-017 — Section Header Block Reconciliation
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -33,6 +34,7 @@
 - LPR-015 primitive commit: `4fd17fcfae2a68252ac5f60c24169dfa4b593b5f`
 - LPR-015 final consumer commit: `a089e94f7b24dc564d38d440cdfa903194ba5995`
 - LPR-016 result: no separate primitive; absorbed by `LuminaStateSurface`
+- LPR-017 result: not ready; overlapping ownership and unconverged visual contracts
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -727,6 +729,74 @@ Final certification:
 - Warning surface maturity: Certified through `LuminaStateSurface`
 - Error surface maturity: Certified through `LuminaStateSurface`
 - Separate primitive created: No
+- Consumer migration required: No
+- Visual delta: None
+- Behavioral delta: None
+- Responsive delta: None
+- Runtime Header remains excluded
+
+## LPR-017 Completion Record
+
+LPR-017 completed as a registry and architecture reconciliation milestone.
+
+Decision:
+
+- Do not create a new section-header primitive.
+- Do not extend `LuminaWorkspaceSection` during this milestone.
+- Do not modify `workspaces/shared/WorkspaceSection`.
+- The section-header family is not sufficiently converged for safe extraction.
+
+Existing overlapping ownership:
+
+- `apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceSection.tsx`
+- `apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx`
+
+Observed contract divergence:
+
+- `LuminaWorkspaceSection`
+  - optional ReactNode title
+  - optional ReactNode subtitle
+  - optional actions
+  - `section` root with `space-y-4`
+  - `text-lg font-semibold tracking-tight`
+- `workspaces/shared/WorkspaceSection`
+  - required string title
+  - optional string description
+  - optional actions
+  - `section` root with `flex flex-col gap-4`
+  - `font-display text-xl font-semibold tracking-tight text-white`
+- richer workspace headers vary in:
+  - eyebrow typography
+  - accent color
+  - icon ownership
+  - responsive layout
+  - trailing posture cards
+  - border and divider treatment
+  - spacing and semantic hierarchy
+
+Audit result:
+
+- No single exact rendering contract spans the audited consumers.
+- Existing section abstractions overlap but are not visually or semantically interchangeable.
+- Richer Knowledge, Runtime, Repo Audit, Admin, and other workspace headers remain consumer-owned.
+- Extending either existing component would require API redesign or visual normalization.
+- Creating a third abstraction would increase duplication and ownership ambiguity.
+
+Required future work before extraction:
+
+- establish one canonical section ownership boundary
+- reconcile string and ReactNode content APIs
+- certify typography variants
+- certify responsive trailing-region behavior
+- separate simple section headings from premium posture headers
+- migrate only after exact consumer families are identified
+
+Final certification:
+
+- Primitive maturity: Not Ready
+- API stability: Experimental
+- Separate primitive created: No
+- Existing component modified: No
 - Consumer migration required: No
 - Visual delta: None
 - Behavioral delta: None
