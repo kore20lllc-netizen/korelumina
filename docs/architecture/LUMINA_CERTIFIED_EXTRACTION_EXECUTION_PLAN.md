@@ -5,9 +5,10 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: Planning only
-- Extraction status: Not started
-- First candidate: LPR-008 — Standard Premium Panel
+- Execution status: Complete
+- Extraction status: Extracted, migrated, regression-certified, and documented
+- Completed primitive: LPR-008 — Standard Premium Panel
+- Completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -93,15 +94,18 @@ No consumer may migrate without a complete applicable baseline set.
 
 The exact LPR-008 consumer inventory must be verified from repository evidence immediately before extraction.
 
-Initial Knowledge Operations candidates:
+Certified Knowledge Operations consumers:
 
-1. Canonical Review
-2. Canonical Knowledge
-3. Organizational Memory
-4. Knowledge Distribution Hub
-5. Consumer Intelligence
-6. Knowledge Genealogy
-7. Organizational Impact
+1. Organizational Impact
+2. Knowledge Genealogy
+3. Consumer Intelligence
+4. Organizational Memory
+5. Canonical Knowledge
+6. Canonical Review
+
+Explicit exclusion:
+
+- Knowledge Distribution Hub uses the distinct `rounded-[24px] p-5` panel contract and is not an LPR-008 consumer.
 
 Additional consumers discovered in Runtime, Runtime Diagnostics, Repo Audit, Admin, Developer, or Designer require separate certification before migration.
 
@@ -135,9 +139,9 @@ Migrate exactly one consumer per milestone:
 4. Organizational Memory
 5. Canonical Knowledge
 6. Canonical Review
-7. Knowledge Distribution Hub only after its unique full-width composition is separately verified
+Knowledge Distribution Hub was audited and excluded because its panel contract does not match LPR-008.
 
-This order is provisional until the exact repository inventory and baseline screenshots are complete.
+The migration sequence is complete.
 
 ## Validation Matrix
 
@@ -194,7 +198,7 @@ Suggested commit messages:
 - `refactor(knowledge): migrate canonical knowledge panel`
 - `refactor(knowledge): migrate canonical review panel`
 
-Knowledge Distribution Hub requires its own approved commit message after separate verification.
+Knowledge Distribution Hub required no migration because it is not an LPR-008 consumer.
 
 ## Stop Conditions
 
@@ -269,14 +273,27 @@ It must remain:
 - outside all screenshot comparisons
 - outside all extraction decisions
 
-## Authorization Boundary
+## Completion Record
 
-This document authorizes planning only.
+LPR-008 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
 
-Before the first code change, a separate milestone must:
+Completed sequence:
 
-1. verify the exact LPR-008 consumer inventory
-2. capture screenshot baselines
-3. confirm the rollback SHA
-4. identify the first consumer
-5. obtain explicit authorization to create the primitive
+1. Primitive creation
+2. Organizational Impact
+3. Knowledge Genealogy
+4. Consumer Intelligence
+5. Organizational Memory
+6. Canonical Knowledge
+7. Canonical Review
+8. Remaining-consumer inventory audit
+9. Knowledge Distribution Hub exclusion validation
+10. Registry reconciliation
+
+Final certification:
+
+- Shared primitive: `LuminaStandardPremiumPanel`
+- Certified consumers: 6
+- Remaining matching local contracts: 0
+- Excluded distinct consumer: Knowledge Distribution Hub
+- Final certification commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
