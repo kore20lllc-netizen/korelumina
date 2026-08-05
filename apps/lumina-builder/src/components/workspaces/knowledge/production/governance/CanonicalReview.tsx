@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -136,8 +140,10 @@ export function CanonicalReview() {
       aria-labelledby="canonical-review-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(420px,.85fr)]">
-        <LuminaProminentPremiumPanel>
+      <LuminaExecutiveTitleMetricsComposition
+        variant="content-led"
+        titleRegion={
+          <LuminaProminentPremiumPanel>
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -204,11 +210,12 @@ export function CanonicalReview() {
               </div>
             </div>
           </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid
-          columns={2}
-        >
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid
+            columns={2}
+          >
         <LuminaExecutiveCard
           title="Review queue"
           value="12"
@@ -240,8 +247,9 @@ export function CanonicalReview() {
           accentKey="emerald"
           icon={<BadgeCheck className="h-4 w-4 text-emerald-300" />}
         />
-        </LuminaExecutiveMetricGrid>
-      </div>
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <div className="grid items-stretch gap-5 xl:grid-cols-2">
         <LuminaStandardPremiumPanel className="h-full">
