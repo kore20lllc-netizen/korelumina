@@ -5,14 +5,15 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-012 complete
-- Extraction status: LPR-008 through LPR-012 extracted, migrated, and regression-certified
+- Execution status: LPR-013 complete
+- Extraction status: LPR-008 through LPR-013 extracted, migrated, and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
   - LPR-010 — Standard Premium Card
   - LPR-011 — Executive Title and Metrics Composition
   - LPR-012 — Balanced Split Panel Composition
+  - LPR-013 — Panel Header Composition
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -22,6 +23,8 @@
 - LPR-011 final consumer commit: `c6638b87abf01aba3dda0847802573f9144b1058`
 - LPR-012 primitive commit: `2805756862321de6d5c681ad1c09884993d9f1f8`
 - LPR-012 final consumer commit: `ada158db2e1ba8b7e936d5ae13bb4c5e9a5086cb`
+- LPR-013 primitive commit: `a943cf186945a6655dfb0f677158a519a9a4532e`
+- LPR-013 final consumer commit: `98bd55f9378b676da1de4153ff4985601307bcad`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -493,4 +496,58 @@ Final certification:
 - Canonical Review retained its right-side `xl:grid-rows-2` authority stack
 - Regression Safety Gate passed before and after every migration
 - Production build remained green at 3190 transformed modules
+- Runtime Header remains excluded
+
+## LPR-013 Completion Record
+
+LPR-013 completed through one primitive-creation milestone followed by one certified consumer per migration milestone.
+
+Shared primitive:
+
+`LuminaPanelHeaderComposition`
+
+Certified composition contract:
+
+- optional injected `iconRegion`
+- required injected `copyRegion`
+- optional injected `trailingRegion`
+- `alignment="center"` by default
+- optional `alignment="start"`
+- optional `responsiveAction`
+- optional caller-provided `className`
+- inline icon-and-copy layout when no trailing region is supplied
+- non-responsive trailing-region layout with `justify-between`
+- responsive trailing action layout stacking below `sm`
+- no Knowledge, Governance, Runtime, Mission, or other domain ownership
+
+Consumer inventory:
+
+1. Organizational Impact
+2. Knowledge Genealogy
+3. Consumer Intelligence
+4. Organizational Memory
+5. Canonical Knowledge
+6. Canonical Review
+
+Completed sequence:
+
+1. Primitive creation — `a943cf186945a6655dfb0f677158a519a9a4532e`
+2. Organizational Impact — `cea2941aec73e9507f8ea76edc6d8f9a86775816`
+3. Knowledge Genealogy — `dedd43afbe7a17c5249a9231e643875d5ee30c24`
+4. Consumer Intelligence — `8aa52f77cfbafe08f319a091042dcafda55f9068`
+5. Organizational Memory — `7f712f1d805c2d88499a2e9bfb842a36a5787c70`
+6. Canonical Knowledge — `b21e1c8c4242600142a868a87bc7d9a9a07aa634`
+7. Canonical Review — `98bd55f9378b676da1de4153ff4985601307bcad`
+
+Final certification:
+
+- Shared primitive: `LuminaPanelHeaderComposition`
+- Certified consumers: 6
+- Inline icon-and-copy consumers certified: 5
+- Trailing-region consumer certified: 1
+- Remaining targeted certified-consumer wrappers: 0
+- Typography, icons, badges, actions, copy, semantic meaning, and state logic remain consumer-owned
+- LPR-011 and LPR-012 compositions remained unchanged
+- Regression Safety Gate passed before and after every migration
+- Production build remained green at 3191 transformed modules
 - Runtime Header remains excluded

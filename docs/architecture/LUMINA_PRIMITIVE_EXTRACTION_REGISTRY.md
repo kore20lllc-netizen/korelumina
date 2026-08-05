@@ -68,7 +68,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Executive ribbon | Existing `LuminaExecutiveRibbon` and Knowledge Executive Ribbon usage | Multiple | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Executive operations deck | Existing `LuminaExecutiveOperationsDeck` and certified executive workspace usage | Multiple | High | Certified | Stable | Domain-neutral | Ready after regression baseline |
 | Section header block | Eyebrow, title, description, optional icon, optional right-side posture card | High | Medium-high | Stable | Needs consolidation | Domain-neutral when content is injected | Candidate after panel primitives |
-| Panel header | Icon, eyebrow, heading, optional badge/action | High | Medium-high | Stable | Needs consolidation | Domain-neutral | Candidate after icon and surface primitives |
+| Panel header composition | `LuminaPanelHeaderComposition` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Knowledge, and Canonical Review | 6 | High | Certified | Stable | Domain-neutral at composition level | Extracted and regression-certified |
 | Status badge | Repeated rounded status pills across Knowledge, Runtime, diagnostics, and audit surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
 | State surface | Warning, healthy, active, restricted, error, pending, superseded, archived visual treatments | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after semantic token audit |
 | Warning surface | Repeated amber/rose alert and review-required surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
@@ -123,7 +123,7 @@ Legend:
 | Standard premium panel | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Standard premium card | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
 | Balanced split-panel composition | ✓ | ✓ | ~ | ~ | ~ | ~ | Certified |
-| Panel header | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
+| Panel header composition | ✓ | ~ | ~ | ~ | ~ | ~ | Certified |
 | Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
 | State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Stable |
 | Warning surface | ✓ | ✓ | ✓ | ✓ | ~ | ~ | Stable |
@@ -211,10 +211,20 @@ Legend:
    - Regression Safety Gate passed after every migration.
    - Domain content, panel ownership, inner responsive structure, asymmetric layouts, and behavior remain consumer-owned.
 
-6. **Panel header block**
-   - Repeated icon, uppercase eyebrow, title, and optional badge.
-   - Visual convergence is high.
-   - API is not yet explicit.
+6. **Panel header composition**
+   - Centralized as `LuminaPanelHeaderComposition`.
+   - Contract:
+     - optional injected `iconRegion`
+     - required injected `copyRegion`
+     - optional injected `trailingRegion`
+     - `alignment="center"` by default
+     - optional `alignment="start"`
+     - optional `responsiveAction`
+     - optional caller-provided `className`
+   - Migrated one certified consumer at a time across six Knowledge lifecycle workspaces.
+   - Inline icon-and-copy and trailing-region header families are supported.
+   - Typography, content, state logic, actions, badges, and domain meaning remain consumer-owned.
+   - Regression Safety Gate passed after every migration.
 
 7. **Status and state treatments**
    - Repeated pills and semantic surfaces.
