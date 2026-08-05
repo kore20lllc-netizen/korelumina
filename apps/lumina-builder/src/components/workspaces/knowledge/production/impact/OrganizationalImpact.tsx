@@ -20,6 +20,10 @@ import {
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
 import {
+  LuminaPanelHeaderComposition,
+} from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -308,22 +312,25 @@ export function OrganizationalImpact({
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
           <LuminaStandardPremiumPanel className="h-full">
-          <div className="flex items-center gap-3">
-            <ExecutivePremiumIcon
-              icon={Sparkles}
-              state="active"
-            />
+          <LuminaPanelHeaderComposition
+            iconRegion={
+              <ExecutivePremiumIcon
+                icon={Sparkles}
+                state="active"
+              />
+            }
+            copyRegion={
+              <>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
+                  Organizational leverage
+                </div>
 
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/58">
-                Organizational leverage
-              </div>
-
-              <h3 className="mt-1 text-base font-semibold text-cyan-100">
-                Value created through governed reuse
-              </h3>
-            </div>
-          </div>
+                <h3 className="mt-1 text-base font-semibold text-cyan-100">
+                  Value created through governed reuse
+                </h3>
+              </>
+            }
+          />
 
           <div className="mt-5 grid gap-3">
             {leverageSignals.map((signal) => (
