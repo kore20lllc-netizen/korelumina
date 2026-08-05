@@ -39,6 +39,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
 import {
+  LuminaStatusBadge,
+} from "@/components/lumina/workspace";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -240,9 +244,9 @@ export function OrganizationalMemory() {
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-full border border-emerald-300/24 bg-emerald-300/[0.07] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-emerald-100">
+                      <LuminaStatusBadge variant="healthy">
                         {projection.status}
-                      </span>
+                      </LuminaStatusBadge>
 
                       <span className="rounded-full border border-violet-300/20 bg-violet-300/[0.05] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-violet-100">
                         {projection.privacy}
