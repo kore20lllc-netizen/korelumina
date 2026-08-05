@@ -114,12 +114,6 @@ function StatusBadge({
   );
 }
 
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
-
 const compactCardClass = [
   "rounded-[16px] p-3",
   premiumSurfaces.base.card,
