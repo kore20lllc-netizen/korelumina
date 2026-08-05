@@ -19,6 +19,10 @@ import {
 } from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
 
 import {
+  LuminaPanelHeaderComposition,
+} from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -258,20 +262,23 @@ export function CanonicalReview() {
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
           <LuminaStandardPremiumPanel className="h-full">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
-                Governance queue
+          <LuminaPanelHeaderComposition
+            copyRegion={
+              <>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
+                  Governance queue
+                </div>
+                <h3 className="mt-1 text-lg font-semibold text-sky-100">
+                  Capsules awaiting canonical decision
+                </h3>
+              </>
+            }
+            trailingRegion={
+              <div className="rounded-full border border-cyan-300/18 bg-cyan-300/[0.05] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
+                3 priority reviews
               </div>
-              <h3 className="mt-1 text-lg font-semibold text-sky-100">
-                Capsules awaiting canonical decision
-              </h3>
-            </div>
-
-            <div className="rounded-full border border-cyan-300/18 bg-cyan-300/[0.05] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
-              3 priority reviews
-            </div>
-          </div>
+            }
+          />
 
           <div className="mt-5 grid gap-4">
             {REVIEW_QUEUE.map((item) => (
