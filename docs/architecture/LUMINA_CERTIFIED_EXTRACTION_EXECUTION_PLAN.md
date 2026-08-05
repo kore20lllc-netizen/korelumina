@@ -5,8 +5,8 @@
 - Repository: `kore20lllc-netizen/korelumina`
 - Branch: `inspect/runtime-certified-main`
 - Certified registry commit: `21a4dc3c4087ff5f58a4ef3799fec6680c533db0`
-- Execution status: LPR-015 complete
-- Extraction status: LPR-008 through LPR-015 extracted, migrated, and regression-certified
+- Execution status: LPR-016 complete
+- Extraction status: LPR-008 through LPR-016 completed and regression-certified
 - Completed primitives:
   - LPR-008 — Standard Premium Panel
   - LPR-009 — Prominent Premium Panel
@@ -16,6 +16,7 @@
   - LPR-013 — Panel Header Composition
   - LPR-014 — Status Badge and State Surface
   - LPR-015 — Activity Feed Row Shell
+  - LPR-016 — Warning Surface Reconciliation
 - LPR-008 completion commit: `4325576867b221a8cc843f0df21e57a7df36ea6d`
 - LPR-009 primitive commit: `e2f6b8b3b572f2c74ec8eaa2c285dd7abacd3c94`
 - LPR-009 final consumer commit: `46050ef20bc2c76dae8b6592f3b99b9509283b12`
@@ -31,6 +32,7 @@
 - LPR-014 final consumer commit: `20938b92a21dc9fdd3552282b75d8d543b7d7f60`
 - LPR-015 primitive commit: `4fd17fcfae2a68252ac5f60c24169dfa4b593b5f`
 - LPR-015 final consumer commit: `a089e94f7b24dc564d38d440cdfa903194ba5995`
+- LPR-016 result: no separate primitive; absorbed by `LuminaStateSurface`
 - Excluded local modification:
   - `apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx`
 
@@ -680,4 +682,53 @@ Final certification:
 - stateful progress compositions remain excluded
 - Regression Safety Gate passed after every migration
 - Production build remained green at 3193 transformed modules
+- Runtime Header remains excluded
+
+## LPR-016 Completion Record
+
+LPR-016 completed as a registry and architecture reconciliation milestone.
+
+Decision:
+
+- Do not create a separate warning-surface primitive.
+- The exact domain-neutral warning and error contracts are already owned by `LuminaStateSurface`.
+- LPR-016 therefore introduces no production component and migrates no consumer.
+
+Existing certified ownership:
+
+- `apps/lumina-builder/src/components/lumina/workspace/LuminaStateSurface.tsx`
+
+Exact certified contracts:
+
+- shared geometry:
+  - `rounded-[18px] border p-4`
+- warning:
+  - `border-amber-300/14 bg-amber-300/[0.025] text-amber-100`
+- error:
+  - `border-rose-300/14 bg-rose-300/[0.025] text-rose-100`
+
+Audit result:
+
+- Canonical Knowledge already consumes the exact warning contract through `LuminaStateSurface tone="warning"`.
+- No remaining exact duplicate of the certified warning wrapper exists in the audited workspace scope.
+- No remaining exact duplicate of the certified error wrapper exists in the audited workspace scope.
+
+Explicit exclusions:
+
+- Knowledge IR uses a distinct error surface with stronger border and background opacity.
+- Runtime error compositions retain their own layout, iconography, messaging, and recovery semantics.
+- Repo Audit severity pills, destructive-action hover states, and findings indicators are not state surfaces.
+- Capsule, inspector, learning, compiler, and governance treatments remain domain-owned.
+- Status badges and pills remain owned by their respective badge systems.
+- Non-matching radius, padding, opacity, interaction, or semantic behavior must not be normalized under LPR-016.
+
+Final certification:
+
+- Warning surface maturity: Certified through `LuminaStateSurface`
+- Error surface maturity: Certified through `LuminaStateSurface`
+- Separate primitive created: No
+- Consumer migration required: No
+- Visual delta: None
+- Behavioral delta: None
+- Responsive delta: None
 - Runtime Header remains excluded

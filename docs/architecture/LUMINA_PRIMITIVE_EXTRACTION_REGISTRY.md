@@ -71,7 +71,7 @@ Only their domain-neutral lower-level visual patterns may be considered independ
 | Panel header composition | `LuminaPanelHeaderComposition` consumed by Organizational Impact, Knowledge Genealogy, Consumer Intelligence, Organizational Memory, Canonical Knowledge, and Canonical Review | 6 | High | Certified | Stable | Domain-neutral at composition level | Extracted and regression-certified |
 | Status badge | `LuminaStatusBadge` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge, Organizational Memory, and Knowledge Genealogy | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
 | State surface | `LuminaStateSurface` integrated into the existing Lumina workspace system and consumed by Canonical Knowledge warning lifecycle treatment | High | High | Certified | Stable | Domain-neutral | Extracted and regression-certified |
-| Warning surface | Repeated amber/rose alert and review-required surfaces | High | Medium | Stable | Needs consolidation | Domain-neutral | Candidate after state-token audit |
+| Warning surface | Absorbed by the certified `LuminaStateSurface` warning/error contract; remaining amber and rose treatments are non-matching or domain-owned | High | High | Certified | Stable | Domain-neutral only at the exact state-surface contract | Reconciled; no separate primitive |
 | Activity feed row | `LuminaActivityFeedRow` consumed by Knowledge Activity Feed and Runtime Event Stream | 2 | High | Certified | Stable | Domain-neutral at row-shell level | Extracted and regression-certified |
 | Timeline card | Governance timeline, memory evolution, event history, runtime event stream | Medium | Medium | Emerging | Needs consolidation | Mixed | Not ready |
 | Inspector shell | Knowledge Capsule Inspector, Runtime Inspector, Repo Audit detail regions, developer/designer side detail panes | Medium | Medium | Emerging | Experimental | Domain-owned compositions | Not ready |
@@ -126,7 +126,7 @@ Legend:
 | Panel header composition | ✓ | ~ | ~ | ~ | ~ | ~ | Certified |
 | Status badge | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
 | State surface | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Certified |
-| Warning surface | ✓ | ✓ | ✓ | ✓ | ~ | ~ | Stable |
+| Warning surface | ✓ | ✓ | ✓ | ✓ | ~ | ~ | Certified |
 | Activity feed row | ✓ | ✓ | ~ | ✓ | ~ | ~ | Certified |
 | Timeline card | ✓ | ✓ | — | ~ | — | — | Emerging |
 | Inspector shell | ✓ | ✓ | ~ | ✓ | ✓ | ✓ | Emerging |
