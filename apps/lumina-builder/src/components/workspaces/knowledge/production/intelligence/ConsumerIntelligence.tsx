@@ -27,6 +27,10 @@ import {
 } from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
 
 import {
+  LuminaStandardPremiumCard,
+} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
+
+import {
   LuminaStandardPremiumPanel,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
@@ -54,12 +58,6 @@ const consumerIcons = {
   "executive-office": ShieldCheck,
   "engineering-workspace": Users,
 } as const;
-
-const cardClass = [
-  "rounded-[18px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 const compactCardClass = [
   "rounded-[16px] p-3",
@@ -214,7 +212,7 @@ export function ConsumerIntelligence({
             </p>
           </div>
 
-          <div className={cardClass}>
+          <LuminaStandardPremiumCard>
             <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
               Intelligence posture
             </div>
@@ -227,7 +225,7 @@ export function ConsumerIntelligence({
               Consumer behavior may trigger review, adaptation, or retirement
               signals, but never silently modifies canonical knowledge.
             </div>
-          </div>
+          </LuminaStandardPremiumCard>
           </div>
         </LuminaProminentPremiumPanel>
 
@@ -385,9 +383,8 @@ export function ConsumerIntelligence({
 
             <div className="mt-5 grid gap-3">
               {usagePatterns.map((pattern) => (
-                <div
+                <LuminaStandardPremiumCard
                   key={pattern.title}
-                  className={cardClass}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-sm font-semibold text-white">
@@ -401,7 +398,7 @@ export function ConsumerIntelligence({
                   <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
                     {pattern.detail}
                   </div>
-                </div>
+                </LuminaStandardPremiumCard>
               ))}
             </div>
           </LuminaStandardPremiumPanel>
@@ -425,9 +422,8 @@ export function ConsumerIntelligence({
 
             <div className="mt-5 grid gap-3">
               {demandSignals.map((signal) => (
-                <div
+                <LuminaStandardPremiumCard
                   key={signal.title}
-                  className={cardClass}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-sm font-semibold text-white">
@@ -441,7 +437,7 @@ export function ConsumerIntelligence({
                   <div className="mt-2 text-[11px] leading-5 text-violet-200/58">
                     {signal.detail}
                   </div>
-                </div>
+                </LuminaStandardPremiumCard>
               ))}
             </div>
           </LuminaStandardPremiumPanel>
@@ -468,9 +464,9 @@ export function ConsumerIntelligence({
 
           <div className="mt-5 grid gap-3 lg:grid-cols-2">
             {record.history.map((event) => (
-              <article
+              <LuminaStandardPremiumCard
+                as="article"
                 key={event.id}
-                className={cardClass}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="text-sm font-semibold text-white">
@@ -485,7 +481,7 @@ export function ConsumerIntelligence({
                 <div className="mt-2 text-[11px] leading-5 text-sky-300/60">
                   {event.detail}
                 </div>
-              </article>
+              </LuminaStandardPremiumCard>
             ))}
           </div>
         </LuminaStandardPremiumPanel>
@@ -508,7 +504,7 @@ export function ConsumerIntelligence({
           </div>
 
           <div className="mt-5 grid gap-3">
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                 Underused projection
               </div>
@@ -519,9 +515,9 @@ export function ConsumerIntelligence({
                 Restricted summary-only access is limiting broader strategic
                 adoption.
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                 Waiting consumer
               </div>
@@ -531,9 +527,9 @@ export function ConsumerIntelligence({
               <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
                 Consumption remains blocked by educational corpus publication.
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
 
-            <div className={cardClass}>
+            <LuminaStandardPremiumCard>
               <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
                 Staleness watch
               </div>
@@ -544,7 +540,7 @@ export function ConsumerIntelligence({
                 No governed retrieval event has been recorded in the current
                 observation window.
               </div>
-            </div>
+            </LuminaStandardPremiumCard>
           </div>
         </LuminaStandardPremiumPanel>
       </div>
