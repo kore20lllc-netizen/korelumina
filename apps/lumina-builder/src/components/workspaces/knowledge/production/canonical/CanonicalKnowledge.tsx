@@ -36,6 +36,7 @@ import {
 } from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
 import {
+  LuminaStateSurface,
   LuminaStatusBadge,
 } from "@/components/lumina/workspace";
 
@@ -417,7 +418,7 @@ export function CanonicalKnowledge() {
             </div>
 
             <div className="mt-5 grid gap-3">
-              <div className="rounded-[18px] border border-amber-300/14 bg-amber-300/[0.025] p-4">
+              <LuminaStateSurface tone="warning">
                 <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                   Superseded
                 </div>
@@ -427,7 +428,7 @@ export function CanonicalKnowledge() {
                 <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
                   Preserved for lineage, audit, and historical interpretation.
                 </div>
-              </div>
+              </LuminaStateSurface>
 
               <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
                 <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
