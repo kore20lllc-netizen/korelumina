@@ -8,6 +8,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
@@ -117,8 +121,10 @@ export function OrganizationalMemory() {
       aria-labelledby="organizational-memory-title"
       className="grid gap-5"
     >
-      <div className="grid items-stretch gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <LuminaProminentPremiumPanel>
+      <LuminaExecutiveTitleMetricsComposition
+        variant="balanced-explicit"
+        titleRegion={
+          <LuminaProminentPremiumPanel>
           <div className="flex h-full flex-col gap-5 xl:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -163,9 +169,10 @@ export function OrganizationalMemory() {
             </div>
           </LuminaStandardPremiumCard>
           </div>
-        </LuminaProminentPremiumPanel>
-
-        <LuminaExecutiveMetricGrid columns={2}>
+          </LuminaProminentPremiumPanel>
+        }
+        metricsRegion={
+          <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Active projections"
           value="18"
@@ -197,8 +204,9 @@ export function OrganizationalMemory() {
           accentKey="amber"
           icon={<History className="h-4 w-4 text-amber-300" />}
         />
-        </LuminaExecutiveMetricGrid>
-      </div>
+          </LuminaExecutiveMetricGrid>
+        }
+      />
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.38fr)_minmax(340px,.62fr)]">
         <LuminaStandardPremiumPanel>
