@@ -563,9 +563,9 @@ export function CanonicalReview() {
 
           <div className="mt-5 grid gap-3">
             <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalPanelSurface,
-              ].join(" ")}>
+              flagshipAppearance.canonicalSurface,
+              flagshipAppearance.canonicalPanelSurface,
+            ].join(" ")}>
               <div className="text-xs font-semibold text-white">
                 Resolve constitutional interpretation
               </div>
@@ -576,9 +576,9 @@ export function CanonicalReview() {
             </div>
 
             <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalPanelSurface,
-              ].join(" ")}>
+              flagshipAppearance.canonicalSurface,
+              flagshipAppearance.canonicalPanelSurface,
+            ].join(" ")}>
               <div className="text-xs font-semibold text-white">
                 Confirm supersession boundary
               </div>
