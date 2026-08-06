@@ -39,6 +39,9 @@ type KnowledgeCapsuleFlowEngineProps = {
   selectedStationId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
   onStationSelect: (stationId: string) => void;
+  onVisibleCapsuleChange: (
+    capsuleId: string | null,
+  ) => void;
 };
 
 import {
@@ -73,6 +76,7 @@ export function KnowledgeCapsuleFlowEngine({
   selectedStationId,
   onCapsuleSelect,
   onStationSelect,
+  onVisibleCapsuleChange,
 }: KnowledgeCapsuleFlowEngineProps) {
   const [
     filters,
@@ -144,6 +148,23 @@ export function KnowledgeCapsuleFlowEngine({
       selectedCapsuleId,
     ],
   );
+
+  useEffect(() => {
+    const visibleCapsuleId =
+      selectedCapsule?.id ?? null;
+
+    if (visibleCapsuleId === selectedCapsuleId) {
+      return;
+    }
+
+    onVisibleCapsuleChange(
+      visibleCapsuleId,
+    );
+  }, [
+    onVisibleCapsuleChange,
+    selectedCapsule,
+    selectedCapsuleId,
+  ]);
 
   const capsuleById = useMemo(
     () =>
