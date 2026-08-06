@@ -145,6 +145,7 @@ function getScrollBehavior(): ScrollBehavior {
 
 function ProductionSectionNavigator() {
   const navigatorRef = useRef<HTMLElement | null>(null);
+  const navigatorContentRef = useRef<HTMLDivElement | null>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
 
@@ -185,6 +186,15 @@ function ProductionSectionNavigator() {
       );
 
     resizeObserver.observe(navigator);
+
+    const navigatorContent =
+      navigatorContentRef.current;
+
+    if (navigatorContent) {
+      resizeObserver.observe(
+        navigatorContent,
+      );
+    }
 
     return () => {
       navigator.removeEventListener(
@@ -241,7 +251,10 @@ function ProductionSectionNavigator() {
         ].join(" ")}
       />
 
-      <div className="grid min-w-[1040px] grid-cols-8 items-center gap-2 xl:min-w-0">
+      <div
+        ref={navigatorContentRef}
+        className="grid min-w-[1040px] grid-cols-8 items-center gap-2 xl:min-w-0"
+      >
         {PRODUCTION_SECTIONS.map((section) => {
           const Icon = section.icon;
 
