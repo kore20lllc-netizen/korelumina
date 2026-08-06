@@ -449,7 +449,10 @@ export function KnowledgeCapsuleInspector({
                             event.id,
                           )
                         }
-                        className="block w-full text-left"
+                        className={[
+                          "block w-full rounded-[18px] text-left",
+                          flagshipAppearance.focusRing,
+                        ].join(" ")}
                       >
                         <LuminaTimelineCard
                         icon={
