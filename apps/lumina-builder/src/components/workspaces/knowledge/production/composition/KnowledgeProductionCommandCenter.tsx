@@ -175,6 +175,9 @@ function ProductionSectionNavigator() {
                 "hover:border-cyan-200/90 hover:bg-[linear-gradient(180deg,rgba(146,64,14,0.98),rgba(92,36,5,0.98))] hover:text-amber-50",
                 "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(37,99,235,0.24)]",
                 "active:translate-y-px",
+                "focus-visible:outline-none",
+                "focus-visible:ring-2 focus-visible:ring-amber-300/90",
+                "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
               ].join(" ")}
             >
               <Icon className="h-3.5 w-3.5" />
