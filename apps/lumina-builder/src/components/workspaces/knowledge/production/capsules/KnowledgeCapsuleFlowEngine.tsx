@@ -157,6 +157,10 @@ export function KnowledgeCapsuleFlowEngine({
   );
 
   useEffect(() => {
+    if (!selectedCapsuleId) {
+      return;
+    }
+
     const visibleCapsuleId =
       selectedCapsule?.id ?? null;
 
