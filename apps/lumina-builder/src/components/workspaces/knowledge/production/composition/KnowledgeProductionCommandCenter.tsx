@@ -147,6 +147,8 @@ function ProductionSectionNavigator() {
   const navigatorRef = useRef<HTMLElement | null>(null);
   const navigatorContentRef = useRef<HTMLDivElement | null>(null);
   const scrollFrameRef = useRef<number | null>(null);
+  const programmaticTargetRef =
+    useRef<string | null>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
   const [activeSectionId, setActiveSectionId] =
@@ -260,6 +262,36 @@ function ProductionSectionNavigator() {
       sectionFrame = null;
 
       const activationLine = 112;
+      const programmaticTarget =
+        programmaticTargetRef.current;
+
+      if (programmaticTarget) {
+        const targetSection =
+          document.getElementById(
+            programmaticTarget,
+          );
+
+        if (targetSection) {
+          const targetRect =
+            targetSection.getBoundingClientRect();
+
+          if (
+            Math.abs(
+              targetRect.top -
+                activationLine,
+            ) <= 8
+          ) {
+            programmaticTargetRef.current =
+              null;
+          } else {
+            return;
+          }
+        } else {
+          programmaticTargetRef.current =
+            null;
+        }
+      }
+
       const atDocumentBottom =
         window.innerHeight +
           window.scrollY >=
@@ -350,12 +382,19 @@ function ProductionSectionNavigator() {
   }, []);
 
   function handleNavigate(sectionId: string) {
+    const behavior = getScrollBehavior();
+
     setActiveSectionId(sectionId);
+
+    programmaticTargetRef.current =
+      behavior === "smooth"
+        ? sectionId
+        : null;
 
     document
       .getElementById(sectionId)
       ?.scrollIntoView({
-        behavior: getScrollBehavior(),
+        behavior,
         block: "start",
       });
   }
