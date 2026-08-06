@@ -47,6 +47,24 @@ import {
   OrganizationalImpact,
 } from "../impact";
 
+type KnowledgeSelectionKind =
+  | "capsule"
+  | "station"
+  | "graph-node"
+  | "graph-edge"
+  | "genealogy-node"
+  | "distribution-consumer";
+
+interface KnowledgeProductionSelection {
+  capsuleId: string;
+  kind: KnowledgeSelectionKind;
+  stationId?: string;
+  graphNodeId?: string;
+  graphEdgeId?: string;
+  genealogyNodeId?: string;
+  consumerId?: string;
+}
+
 const PRODUCTION_SECTIONS = [
   {
     id: "knowledge-flow-engine",
@@ -136,9 +154,14 @@ function ProductionSectionNavigator() {
 
 export function KnowledgeProductionCommandCenter() {
   const [
-    selectedCapsuleId,
-    setSelectedCapsuleId,
-  ] = useState("");
+    selection,
+    setSelection,
+  ] = useState<KnowledgeProductionSelection | null>(
+    null,
+  );
+
+  const selectedCapsuleId =
+    selection?.capsuleId ?? "";
 
   const selectedCapsule = useMemo(
     () =>
@@ -152,11 +175,14 @@ export function KnowledgeProductionCommandCenter() {
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
-    setSelectedCapsuleId(
-      (current) =>
-        current === capsuleId
-          ? current
-          : capsuleId,
+    setSelection((current) =>
+      current?.capsuleId === capsuleId &&
+      current.kind === "capsule"
+        ? current
+        : {
+            capsuleId,
+            kind: "capsule",
+          },
     );
 
     requestAnimationFrame(() => {
@@ -194,7 +220,7 @@ export function KnowledgeProductionCommandCenter() {
           <KnowledgeCapsuleInspector
             capsule={selectedCapsule}
             onClose={() =>
-              setSelectedCapsuleId("")
+              setSelection(null)
             }
           />
         </div>
