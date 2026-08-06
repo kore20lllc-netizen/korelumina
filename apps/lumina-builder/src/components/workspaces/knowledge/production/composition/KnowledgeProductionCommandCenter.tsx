@@ -101,7 +101,7 @@ function ProductionSectionNavigator() {
         "backdrop-blur-2xl",
       ].join(" ")}
     >
-      <div className="flex min-w-max items-center gap-2">
+      <div className="grid min-w-[1120px] grid-cols-6 items-center gap-2 xl:min-w-0">
         {PRODUCTION_SECTIONS.map((section) => {
           const Icon = section.icon;
 
@@ -111,7 +111,7 @@ function ProductionSectionNavigator() {
               type="button"
               onClick={() => handleNavigate(section.id)}
               className={[
-                "inline-flex h-9 items-center gap-2 rounded-xl border px-3",
+                "inline-flex h-9 w-full min-w-0 items-center justify-center gap-2 rounded-xl border px-3",
                 "text-[10px] font-semibold uppercase tracking-[0.12em]",
                 "border-cyan-300/62 ring-1 ring-inset ring-blue-400/28",
                 "bg-[linear-gradient(180deg,rgba(146,64,14,0.96),rgba(92,36,5,0.96))] text-amber-100",

@@ -28,10 +28,6 @@ import {
 } from "./layout/WorkspaceShell";
 
 import {
-  KnowledgeDomainNavigator,
-} from "./navigation";
-
-import {
   KnowledgeV3WorkspaceProvider,
   useKnowledgeV3Workspace,
 } from "./state";
@@ -67,9 +63,7 @@ function KnowledgeOperationsV3Content() {
             )
           : null
       }
-      domainNavigator={
-        <KnowledgeDomainNavigator />
-      }
+      domainNavigator={null}
       workspaceHeader={
         <KnowledgeWorkspaceHeader />
       }
