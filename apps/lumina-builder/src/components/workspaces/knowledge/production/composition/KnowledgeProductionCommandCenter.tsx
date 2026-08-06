@@ -260,6 +260,23 @@ function ProductionSectionNavigator() {
       sectionFrame = null;
 
       const activationLine = 112;
+      const atDocumentBottom =
+        window.innerHeight +
+          window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+
+      if (atDocumentBottom) {
+        const lastSectionId =
+          sections[sections.length - 1].id;
+
+        setActiveSectionId((current) =>
+          current === lastSectionId
+            ? current
+            : lastSectionId,
+        );
+
+        return;
+      }
 
       let nextSectionId =
         sections[0].id;
