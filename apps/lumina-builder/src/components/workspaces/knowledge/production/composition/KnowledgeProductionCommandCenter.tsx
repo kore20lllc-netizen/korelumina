@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -59,6 +60,7 @@ type KnowledgeSelectionKind =
   | "graph-edge"
   | "timeline-event"
   | "genealogy-node"
+  | "impact-outcome"
   | "distribution-consumer";
 
 interface KnowledgeProductionSelection {
@@ -69,6 +71,7 @@ interface KnowledgeProductionSelection {
   graphEdgeId?: string;
   timelineEventId?: string;
   genealogyNodeId?: string;
+  impactOutcomeId?: string;
   consumerId?: string;
 }
 
@@ -189,8 +192,12 @@ export function KnowledgeProductionCommandCenter() {
     [selectedCapsuleId],
   );
 
-  function revealInspector() {
-    requestAnimationFrame(() => {
+  useEffect(() => {
+    if (!selection || !selectedCapsule) {
+      return;
+    }
+
+    const frame = requestAnimationFrame(() => {
       document
         .getElementById(
           "knowledge-capsule-inspector",
@@ -200,7 +207,11 @@ export function KnowledgeProductionCommandCenter() {
           block: "start",
         });
     });
-  }
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [selection, selectedCapsule]);
 
   function handleGraphNodeSelect(
     capsuleId: string,
@@ -212,7 +223,6 @@ export function KnowledgeProductionCommandCenter() {
       graphNodeId,
     });
 
-    revealInspector();
   }
 
   function handleTimelineEventSelect(
@@ -236,7 +246,18 @@ export function KnowledgeProductionCommandCenter() {
       genealogyNodeId,
     });
 
-    revealInspector();
+  }
+
+  function handleImpactOutcomeSelect(
+    capsuleId: string,
+    impactOutcomeId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "impact-outcome",
+      impactOutcomeId,
+    });
+
   }
 
   function handleCapsuleSelect(
@@ -252,7 +273,6 @@ export function KnowledgeProductionCommandCenter() {
           },
     );
 
-    revealInspector();
   }
 
   return (
@@ -367,6 +387,14 @@ export function KnowledgeProductionCommandCenter() {
         <OrganizationalImpact
           capsules={knowledgeCapsules}
           records={knowledgeDistributionRecords}
+          selectedImpactOutcomeId={
+            selection?.kind === "impact-outcome"
+              ? selection.impactOutcomeId
+              : undefined
+          }
+          onImpactOutcomeSelect={
+            handleImpactOutcomeSelect
+          }
         />
       </section>
     </div>

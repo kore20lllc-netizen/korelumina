@@ -54,12 +54,19 @@ import type {
 type OrganizationalImpactProps = {
   capsules: KnowledgeCapsuleModel[];
   records: KnowledgeDistributionRecord[];
+  selectedImpactOutcomeId?: string;
+  onImpactOutcomeSelect: (
+    capsuleId: string,
+    impactOutcomeId: string,
+  ) => void;
 };
 
 const impactOutcomes = [
   {
+    id: "impact-runtime-recovery",
     title: "Runtime recovery effectiveness",
-    capsule: "KCAP-2026-042",
+    capsuleId: "capsule-144",
+    capsuleReference: "KCAP-2026-042",
     mission: "Runtime Operations",
     outcome: "Recovery time reduced by 31%",
     confidence: "High confidence",
@@ -67,8 +74,10 @@ const impactOutcomes = [
       "Governed recovery standards now guide isolation, ownership, and restart decisions across active runtime incidents.",
   },
   {
+    id: "impact-mission-planning",
     title: "Mission planning consistency",
-    capsule: "KCAP-2026-031",
+    capsuleId: "capsule-145",
+    capsuleReference: "KCAP-2026-031",
     mission: "Mission System",
     outcome: "Decision variance reduced by 24%",
     confidence: "Validated",
@@ -76,8 +85,10 @@ const impactOutcomes = [
       "Canonical planning guidance is reducing inconsistent mission framing and repeated corrective review.",
   },
   {
+    id: "impact-knowledge-preservation",
     title: "Knowledge preservation quality",
-    capsule: "KCAP-2026-018",
+    capsuleId: "capsule-146",
+    capsuleReference: "KCAP-2026-018",
     mission: "Chief Agent Program",
     outcome: "Lineage coverage increased to 92%",
     confidence: "High confidence",
@@ -131,6 +142,8 @@ const reviewSignals = [
 export function OrganizationalImpact({
   capsules,
   records,
+  selectedImpactOutcomeId,
+  onImpactOutcomeSelect,
 }: OrganizationalImpactProps) {
   const canonicalCapsules = capsules.filter(
     (capsule) =>
@@ -265,47 +278,72 @@ export function OrganizationalImpact({
         </div>
 
         <div className="mt-5 grid gap-4 xl:grid-cols-3">
-          {impactOutcomes.map((impact) => (
-            <LuminaStandardPremiumCard
-              as="article"
-              key={impact.capsule}
-            >
-              <div className="flex items-start gap-3">
-                <ExecutivePremiumIcon
-                  icon={TrendingUp}
-                  state="healthy"
-                />
+          {impactOutcomes.map((impact) => {
+            const selected =
+              selectedImpactOutcomeId ===
+              impact.id;
 
-                <div className="min-w-0">
-                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
-                    {impact.capsule} · {impact.mission}
+            return (
+              <button
+                type="button"
+                key={impact.id}
+                aria-pressed={selected}
+                onClick={() =>
+                  onImpactOutcomeSelect(
+                    impact.capsuleId,
+                    impact.id,
+                  )
+                }
+                className="block w-full text-left"
+              >
+                <LuminaStandardPremiumCard
+                  as="article"
+                  className={[
+                    electricContour.card,
+                    "h-full transition-[border-color,box-shadow,transform] duration-200",
+                    selected
+                      ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                      : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                  ].join(" ")}
+                >
+                  <div className="flex items-start gap-3">
+                    <ExecutivePremiumIcon
+                      icon={TrendingUp}
+                      state="healthy"
+                    />
+
+                    <div className="min-w-0">
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
+                        {impact.capsuleReference} · {impact.mission}
+                      </div>
+
+                      <h4 className="mt-2 text-sm font-semibold text-white">
+                        {impact.title}
+                      </h4>
+                    </div>
                   </div>
 
-                  <h4 className="mt-2 text-sm font-semibold text-white">
-                    {impact.title}
-                  </h4>
-                </div>
-              </div>
+                  <div className="mt-4 rounded-[16px] border border-emerald-300/20 bg-emerald-300/[0.05] p-3">
+                    <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/56">
+                      Measured outcome
+                    </div>
 
-              <div className="mt-4 rounded-[16px] border border-emerald-300/20 bg-emerald-300/[0.05] p-3">
-                <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/56">
-                  Measured outcome
-                </div>
+                    <div className="mt-1 text-sm font-semibold text-emerald-100">
+                      {impact.outcome}
+                    </div>
+                  </div>
 
-                <div className="mt-1 text-sm font-semibold text-emerald-100">
-                  {impact.outcome}
-                </div>
-              </div>
+                  <div className="mt-3 text-[11px] leading-5 text-sky-300/60">
+                    {impact.detail}
+                  </div>
 
-              <div className="mt-3 text-[11px] leading-5 text-sky-300/60">
-                {impact.detail}
-              </div>
-
-              <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-300/56">
-                {impact.confidence}
-              </div>
-            </LuminaStandardPremiumCard>
-          ))}
+                  <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-300/56">
+                    {impact.confidence}
+                  </div>
+                </LuminaStandardPremiumCard>
+              </button>
+            );
+          })}
         </div>
       </LuminaStandardPremiumPanel>
 
