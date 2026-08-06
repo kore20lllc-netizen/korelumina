@@ -56,6 +56,7 @@ type KnowledgeSelectionKind =
   | "station"
   | "graph-node"
   | "graph-edge"
+  | "timeline-event"
   | "genealogy-node"
   | "distribution-consumer";
 
@@ -65,6 +66,7 @@ interface KnowledgeProductionSelection {
   stationId?: string;
   graphNodeId?: string;
   graphEdgeId?: string;
+  timelineEventId?: string;
   genealogyNodeId?: string;
   consumerId?: string;
 }
@@ -202,6 +204,17 @@ export function KnowledgeProductionCommandCenter() {
     revealInspector();
   }
 
+  function handleTimelineEventSelect(
+    capsuleId: string,
+    timelineEventId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "timeline-event",
+      timelineEventId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -240,6 +253,14 @@ export function KnowledgeProductionCommandCenter() {
         >
           <KnowledgeCapsuleInspector
             capsule={selectedCapsule}
+            selectedTimelineEventId={
+              selection?.kind === "timeline-event"
+                ? selection.timelineEventId
+                : undefined
+            }
+            onTimelineEventSelect={
+              handleTimelineEventSelect
+            }
             onClose={() =>
               setSelection(null)
             }

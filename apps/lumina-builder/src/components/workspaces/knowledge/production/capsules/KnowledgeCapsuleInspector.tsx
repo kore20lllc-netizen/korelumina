@@ -48,6 +48,11 @@ type InspectorTab =
 
 interface KnowledgeCapsuleInspectorProps {
   capsule: KnowledgeCapsule | null;
+  selectedTimelineEventId?: string;
+  onTimelineEventSelect?: (
+    capsuleId: string,
+    timelineEventId: string,
+  ) => void;
   onClose?: () => void;
 }
 
@@ -219,6 +224,8 @@ function EmptyValue({
 
 export function KnowledgeCapsuleInspector({
   capsule,
+  selectedTimelineEventId,
+  onTimelineEventSelect,
   onClose,
 }: KnowledgeCapsuleInspectorProps) {
   const [
@@ -430,7 +437,21 @@ export function KnowledgeCapsuleInspector({
                         />
                       ) : null}
 
-                      <LuminaTimelineCard
+                      <button
+                        type="button"
+                        aria-pressed={
+                          selectedTimelineEventId ===
+                          event.id
+                        }
+                        onClick={() =>
+                          onTimelineEventSelect?.(
+                            capsule.id,
+                            event.id,
+                          )
+                        }
+                        className="block w-full text-left"
+                      >
+                        <LuminaTimelineCard
                         icon={
                           <ExecutivePremiumIcon
                             icon={
@@ -457,15 +478,20 @@ export function KnowledgeCapsuleInspector({
                         subtitle={event.subtitle}
                         className={[
                           "!border-cyan-300/50",
-                          event.state === "current"
-                            ? "ring-1 ring-inset ring-cyan-300/45"
-                            : "",
+                          "transition-[border-color,box-shadow,transform] duration-200",
+                          selectedTimelineEventId ===
+                          event.id
+                            ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_24px_rgba(37,99,235,0.24)]"
+                            : event.state === "current"
+                              ? "ring-1 ring-inset ring-cyan-300/45"
+                              : "",
                         ].join(" ")}
                       >
                         <p className="text-xs leading-5 text-sky-300/70">
                           {event.detail}
                         </p>
-                      </LuminaTimelineCard>
+                        </LuminaTimelineCard>
+                      </button>
                     </div>
                   ),
                 )}
