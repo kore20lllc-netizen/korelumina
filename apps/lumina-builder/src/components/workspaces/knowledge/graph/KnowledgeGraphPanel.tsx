@@ -368,6 +368,62 @@ function GraphMinimap() {
   );
 }
 
+function GraphViewportControls() {
+  return (
+    <div
+      className={[
+        "flex items-center gap-1 rounded-xl border p-1",
+        "[border-color:var(--lumina-border-standard)]",
+        "[background:var(--lumina-surface-interactive)]",
+      ].join(" ")}
+    >
+      <LuminaButton
+        type="button"
+        variant="ghost"
+        size="icon"
+        disabled
+        aria-label="Zoom out"
+        title="Zoom out"
+      >
+        <ZoomOut className="h-4 w-4" />
+      </LuminaButton>
+
+      <LuminaButton
+        type="button"
+        variant="ghost"
+        size="icon"
+        disabled
+        aria-label="Zoom in"
+        title="Zoom in"
+      >
+        <ZoomIn className="h-4 w-4" />
+      </LuminaButton>
+
+      <LuminaButton
+        type="button"
+        variant="ghost"
+        size="icon"
+        disabled
+        aria-label="Fit graph to viewport"
+        title="Fit graph to viewport"
+      >
+        <Maximize2 className="h-4 w-4" />
+      </LuminaButton>
+
+      <LuminaButton
+        type="button"
+        variant="ghost"
+        size="icon"
+        disabled
+        aria-label="Reset graph viewport"
+        title="Reset graph viewport"
+      >
+        <RotateCcw className="h-4 w-4" />
+      </LuminaButton>
+    </div>
+  );
+}
+
 function GraphLegend() {
   return (
     <aside
@@ -559,57 +615,7 @@ export function KnowledgeGraphPanel({
             </option>
           </select>
 
-          <div
-            className={[
-              "flex items-center gap-1 rounded-xl border p-1",
-              "[border-color:var(--lumina-border-standard)]",
-              "[background:var(--lumina-surface-interactive)]",
-            ].join(" ")}
-          >
-            <LuminaButton
-              type="button"
-              variant="ghost"
-              size="icon"
-              disabled
-              aria-label="Zoom out"
-              title="Zoom out"
-            >
-              <ZoomOut className="h-4 w-4" />
-            </LuminaButton>
-
-            <LuminaButton
-              type="button"
-              variant="ghost"
-              size="icon"
-              disabled
-              aria-label="Zoom in"
-              title="Zoom in"
-            >
-              <ZoomIn className="h-4 w-4" />
-            </LuminaButton>
-
-            <LuminaButton
-              type="button"
-              variant="ghost"
-              size="icon"
-              disabled
-              aria-label="Fit graph to viewport"
-              title="Fit graph to viewport"
-            >
-              <Maximize2 className="h-4 w-4" />
-            </LuminaButton>
-
-            <LuminaButton
-              type="button"
-              variant="ghost"
-              size="icon"
-              disabled
-              aria-label="Reset graph viewport"
-              title="Reset graph viewport"
-            >
-              <RotateCcw className="h-4 w-4" />
-            </LuminaButton>
-          </div>
+          <GraphViewportControls />
         </div>
       </header>
 
