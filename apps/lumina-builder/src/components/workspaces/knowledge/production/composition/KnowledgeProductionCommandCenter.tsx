@@ -210,8 +210,8 @@ function BackToTopButton() {
       aria-label="Back to top"
       onClick={handleBackToTop}
       className={[
-        "fixed bottom-6 right-6 z-50",
-        "inline-flex h-12 items-center gap-2 rounded-2xl border px-4",
+        "fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-50",
+        "inline-flex h-11 w-11 items-center justify-center rounded-2xl border sm:h-12 sm:w-auto sm:gap-2 sm:px-4",
         "border-cyan-300/72 ring-1 ring-inset ring-blue-400/38",
         "bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.96))]",
         "text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-100",
@@ -225,7 +225,9 @@ function BackToTopButton() {
       ].join(" ")}
     >
       <ArrowUp className="h-4 w-4" />
-      <span>Back to top</span>
+      <span className="hidden sm:inline">
+        Back to top
+      </span>
     </button>
   );
 }
