@@ -45,6 +45,9 @@ type KnowledgeCapsuleFlowEngineProps = {
   onVisibleCapsuleChange: (
     capsuleId: string | null,
   ) => void;
+  onVisibleStationChange: (
+    stationId: string | null,
+  ) => void;
 };
 
 import {
@@ -80,6 +83,7 @@ export function KnowledgeCapsuleFlowEngine({
   onCapsuleSelect,
   onStationSelect,
   onVisibleCapsuleChange,
+  onVisibleStationChange,
 }: KnowledgeCapsuleFlowEngineProps) {
   const [
     filters,
@@ -218,6 +222,37 @@ export function KnowledgeCapsuleFlowEngine({
       },
     );
   }, [capsuleById]);
+
+  useEffect(() => {
+    if (!selectedStationId) {
+      return;
+    }
+
+    const selectedStation =
+      occupancyByStation.find(
+        (record) =>
+          record.station === selectedStationId,
+      );
+
+    const hasVisibleOccupancy =
+      Boolean(
+        selectedStation &&
+          (
+            selectedStation.positions.length > 0 ||
+            selectedStation.branchPositions.length > 0
+          ),
+      );
+
+    if (hasVisibleOccupancy) {
+      return;
+    }
+
+    onVisibleStationChange(null);
+  }, [
+    occupancyByStation,
+    onVisibleStationChange,
+    selectedStationId,
+  ]);
 
   return (
     <section

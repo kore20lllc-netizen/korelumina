@@ -507,6 +507,30 @@ export function KnowledgeProductionCommandCenter() {
     [],
   );
 
+  const handleVisibleStationChange = useCallback(
+    (
+      stationId: string | null,
+    ) => {
+      if (stationId) {
+        return;
+      }
+
+      setSelection((current) => {
+        if (current?.kind !== "station") {
+          return current;
+        }
+
+        return current.capsuleId
+          ? {
+              capsuleId: current.capsuleId,
+              kind: "capsule",
+            }
+          : null;
+      });
+    },
+    [],
+  );
+
   return (
     <div
       id="knowledge-production-top"
@@ -531,6 +555,9 @@ export function KnowledgeProductionCommandCenter() {
           onStationSelect={handleStationSelect}
           onVisibleCapsuleChange={
             handleVisibleCapsuleChange
+          }
+          onVisibleStationChange={
+            handleVisibleStationChange
           }
         />
       </section>
