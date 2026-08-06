@@ -573,7 +573,7 @@ export function KnowledgeProductionCommandCenter() {
       {selectedCapsule ? (
         <div
           id="knowledge-capsule-inspector"
-          className="scroll-mt-6"
+          className="scroll-mt-24"
         >
           <KnowledgeCapsuleInspector
             capsule={selectedCapsule}
