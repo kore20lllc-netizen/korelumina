@@ -400,6 +400,26 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleStationSelect(
+    stationId: string,
+  ) {
+    const capsule =
+      knowledgeCapsules.find(
+        (candidate) =>
+          candidate.stage === stationId,
+      ) ?? selectedCapsule;
+
+    if (!capsule) {
+      return;
+    }
+
+    setSelection({
+      capsuleId: capsule.id,
+      kind: "station",
+      stationId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -428,10 +448,16 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <KnowledgeCapsuleFlowEngine
-        capsules={knowledgeCapsules}
-        selectedCapsuleId={selectedCapsuleId}
-        onCapsuleSelect={handleCapsuleSelect}
-      />
+          capsules={knowledgeCapsules}
+          selectedCapsuleId={selectedCapsuleId}
+          selectedStationId={
+            selection?.kind === "station"
+              ? selection.stationId
+              : undefined
+          }
+          onCapsuleSelect={handleCapsuleSelect}
+          onStationSelect={handleStationSelect}
+        />
       </section>
 
       {selectedCapsule ? (

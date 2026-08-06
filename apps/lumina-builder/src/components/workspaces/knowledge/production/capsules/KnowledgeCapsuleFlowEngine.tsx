@@ -31,7 +31,9 @@ import type {
 type KnowledgeCapsuleFlowEngineProps = {
   capsules: KnowledgeCapsuleModel[];
   selectedCapsuleId: string;
+  selectedStationId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
+  onStationSelect: (stationId: string) => void;
 };
 
 import {
@@ -63,7 +65,9 @@ const stateByStation: Record<
 export function KnowledgeCapsuleFlowEngine({
   capsules,
   selectedCapsuleId,
+  selectedStationId,
   onCapsuleSelect,
+  onStationSelect,
 }: KnowledgeCapsuleFlowEngineProps) {
   const [
     filters,
@@ -362,16 +366,27 @@ export function KnowledgeCapsuleFlowEngine({
                           <article
                             key={station}
                             aria-label={`${station} station`}
-                            className={
-                              flagshipAppearance.capsuleFlowStation
-                            }
+                            className={[
+                              flagshipAppearance.capsuleFlowStation,
+                              "transition-[border-color,box-shadow,transform] duration-200",
+                              selectedStationId === station
+                                ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                                : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                            ].join(" ")}
                           >
                             <div
                               aria-hidden="true"
                               className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/42 to-transparent"
                             />
 
-                            <div className="flex items-start justify-between gap-3">
+                            <button
+                              type="button"
+                              aria-pressed={selectedStationId === station}
+                              onClick={() =>
+                                onStationSelect(station)
+                              }
+                              className="flex w-full items-start justify-between gap-3 text-left"
+                            >
                               <div>
                                 <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/55">
                                   Node {String(stationIndex + 1).padStart(2, "0")}
@@ -389,7 +404,7 @@ export function KnowledgeCapsuleFlowEngine({
                               >
                                 {totalOccupancy}
                               </div>
-                            </div>
+                            </button>
 
                             <div className="mt-4 grid gap-3">
                               {positions.map(
