@@ -179,19 +179,7 @@ function ProductionSectionNavigator() {
   }, []);
 
   useEffect(() => {
-    scrollFrameRef.current =
-      requestAnimationFrame(() => {
-        scrollFrameRef.current = null;
-        updateOverflowAffordance();
-      });
-
-    const navigator = navigatorRef.current;
-
-    if (!navigator) {
-      return;
-    }
-
-    const handleScroll = () => {
+    const scheduleOverflowUpdate = () => {
       if (scrollFrameRef.current !== null) {
         return;
       }
@@ -203,15 +191,23 @@ function ProductionSectionNavigator() {
         });
     };
 
+    scheduleOverflowUpdate();
+
+    const navigator = navigatorRef.current;
+
+    if (!navigator) {
+      return;
+    }
+
     navigator.addEventListener(
       "scroll",
-      handleScroll,
+      scheduleOverflowUpdate,
       { passive: true },
     );
 
     const resizeObserver =
       new ResizeObserver(
-        updateOverflowAffordance,
+        scheduleOverflowUpdate,
       );
 
     resizeObserver.observe(navigator);
@@ -228,7 +224,7 @@ function ProductionSectionNavigator() {
     return () => {
       navigator.removeEventListener(
         "scroll",
-        handleScroll,
+        scheduleOverflowUpdate,
       );
 
       if (scrollFrameRef.current !== null) {
