@@ -20,6 +20,10 @@ import {
   KnowledgeCapsuleFilters,
 } from "./KnowledgeCapsuleFilters";
 
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
 import type {
   KnowledgeCapsuleModel,
 } from "./types";
@@ -163,9 +167,15 @@ export function KnowledgeCapsuleFlowEngine({
   return (
     <section
       aria-label="Knowledge Capsule Flow Engine"
-      className="overflow-hidden rounded-[30px] border border-blue-400/70 ring-1 ring-inset ring-cyan-300/20 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.18),inset_0_0_18px_rgba(56,189,248,.05)] bg-[radial-gradient(circle_at_12%_0%,rgba(34,211,238,.12),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(139,92,246,.13),transparent_30%),linear-gradient(135deg,rgba(2,6,23,.82),rgba(12,8,34,.78),rgba(2,10,30,.82))] shadow-[0_28px_90px_rgba(2,6,23,.46),inset_0_1px_0_rgba(255,255,255,.06)]"
+      className={
+        flagshipAppearance.capsuleFlowShell
+      }
     >
-      <header className="border-b border-blue-400/50 ring-1 ring-inset ring-cyan-300/12 p-5 sm:p-6">
+      <header
+        className={
+          flagshipAppearance.capsuleFlowHeader
+        }
+      >
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/72">
@@ -183,7 +193,11 @@ export function KnowledgeCapsuleFlowEngine({
             </p>
           </div>
 
-          <div className="rounded-[18px] border border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-cyan-300/[0.05] px-4 py-3">
+          <div
+            className={
+              flagshipAppearance.capsuleFlowMetric
+            }
+          >
             <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
               Live manufacturing posture
             </div>
@@ -209,7 +223,11 @@ export function KnowledgeCapsuleFlowEngine({
       </header>
 
       <div className="p-5 sm:p-6">
-        <div className="relative overflow-hidden rounded-[28px] border border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-[radial-gradient(circle_at_48%_0%,rgba(34,211,238,.10),transparent_30%),radial-gradient(circle_at_88%_72%,rgba(139,92,246,.10),transparent_32%),linear-gradient(145deg,rgba(3,10,30,.90),rgba(10,8,35,.86),rgba(3,13,34,.90))] p-4 shadow-[0_28px_80px_rgba(2,6,23,.42),inset_0_1px_0_rgba(255,255,255,.05)] sm:p-5">
+        <div
+          className={
+            flagshipAppearance.capsuleFlowCanvas
+          }
+        >
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(125,211,252,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(125,211,252,.045)_1px,transparent_1px)] [background-size:34px_34px]"

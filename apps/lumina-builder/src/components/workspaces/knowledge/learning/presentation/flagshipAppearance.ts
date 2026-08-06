@@ -347,6 +347,35 @@ export const flagshipAppearance = {
     "focus-visible:ring-2 focus-visible:ring-violet-300/50",
   ].join(" "),
 
+  capsuleFlowShell: [
+    "overflow-hidden rounded-[30px] border border-blue-400/70",
+    "ring-1 ring-inset ring-cyan-300/20",
+    "bg-[radial-gradient(circle_at_12%_0%,rgba(34,211,238,.12),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(139,92,246,.13),transparent_30%),linear-gradient(135deg,rgba(2,6,23,.82),rgba(12,8,34,.78),rgba(2,10,30,.82))]",
+    "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.18),0_28px_90px_rgba(2,6,23,.46),inset_0_0_18px_rgba(56,189,248,.05),inset_0_1px_0_rgba(255,255,255,.06)]",
+  ].join(" "),
+
+  capsuleFlowHeader: [
+    "border-b border-blue-400/50",
+    "ring-1 ring-inset ring-cyan-300/12",
+    "p-5 sm:p-6",
+  ].join(" "),
+
+  capsuleFlowMetric: [
+    "rounded-[18px] border border-blue-400/55",
+    "ring-1 ring-inset ring-cyan-300/14",
+    "bg-cyan-300/[0.05]",
+    "px-4 py-3",
+  ].join(" "),
+
+  capsuleFlowCanvas: [
+    "relative overflow-hidden rounded-[28px]",
+    "border border-blue-400/55",
+    "ring-1 ring-inset ring-cyan-300/14",
+    "bg-[radial-gradient(circle_at_48%_0%,rgba(34,211,238,.10),transparent_30%),radial-gradient(circle_at_88%_72%,rgba(139,92,246,.10),transparent_32%),linear-gradient(145deg,rgba(3,10,30,.90),rgba(10,8,35,.86),rgba(3,13,34,.90))]",
+    "p-4 sm:p-5",
+    "shadow-[0_28px_80px_rgba(2,6,23,.42),inset_0_1px_0_rgba(255,255,255,.05)]",
+  ].join(" "),
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 
