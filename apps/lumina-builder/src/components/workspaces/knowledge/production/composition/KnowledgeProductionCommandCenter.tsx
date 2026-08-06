@@ -179,7 +179,11 @@ function ProductionSectionNavigator() {
   }, []);
 
   useEffect(() => {
-    updateOverflowAffordance();
+    scrollFrameRef.current =
+      requestAnimationFrame(() => {
+        scrollFrameRef.current = null;
+        updateOverflowAffordance();
+      });
 
     const navigator = navigatorRef.current;
 
