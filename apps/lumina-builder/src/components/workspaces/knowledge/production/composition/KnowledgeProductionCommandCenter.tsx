@@ -547,8 +547,16 @@ export function KnowledgeProductionCommandCenter() {
             ? selection.intelligenceConsumerId
             : undefined
         }
+        selectedHistoryEventId={
+          selection?.kind === "distribution-event"
+            ? selection.distributionEventId
+            : undefined
+        }
         onConsumerSelect={
           handleConsumerIntelligenceSelect
+        }
+        onHistoryEventSelect={
+          handleDistributionEventSelect
         }
       />
 

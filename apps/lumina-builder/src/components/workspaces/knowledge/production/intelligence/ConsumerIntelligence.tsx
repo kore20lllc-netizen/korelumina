@@ -57,9 +57,14 @@ import type {
 type ConsumerIntelligenceProps = {
   records: KnowledgeDistributionRecord[];
   selectedConsumerId?: string;
+  selectedHistoryEventId?: string;
   onConsumerSelect: (
     capsuleId: string,
     consumerId: string,
+  ) => void;
+  onHistoryEventSelect: (
+    capsuleId: string,
+    eventId: string,
   ) => void;
 };
 
@@ -168,7 +173,9 @@ const usagePatterns = [
 export function ConsumerIntelligence({
   records,
   selectedConsumerId,
+  selectedHistoryEventId,
   onConsumerSelect,
+  onHistoryEventSelect,
 }: ConsumerIntelligenceProps) {
   const record = records[0];
 
@@ -512,26 +519,51 @@ export function ConsumerIntelligence({
           </div>
 
           <div className="mt-5 grid gap-3 lg:grid-cols-2">
-            {record.history.map((event) => (
-              <LuminaStandardPremiumCard
-                as="article"
-                key={event.id}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="text-sm font-semibold text-white">
-                    {event.consumer}
-                  </div>
+            {record.history.map((event) => {
+              const selected =
+                selectedHistoryEventId ===
+                event.id;
 
-                  <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/54">
-                    {event.action}
-                  </div>
-                </div>
+              return (
+                <button
+                  type="button"
+                  key={event.id}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    onHistoryEventSelect(
+                      record.capsuleId,
+                      event.id,
+                    )
+                  }
+                  className="block w-full text-left"
+                >
+                  <LuminaStandardPremiumCard
+                    as="article"
+                    className={[
+                      electricContour.card,
+                      "h-full transition-[border-color,box-shadow,transform] duration-200",
+                      selected
+                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                    ].join(" ")}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="text-sm font-semibold text-white">
+                        {event.consumer}
+                      </div>
 
-                <div className="mt-2 text-[11px] leading-5 text-sky-300/60">
-                  {event.detail}
-                </div>
-              </LuminaStandardPremiumCard>
-            ))}
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/54">
+                        {event.action}
+                      </div>
+                    </div>
+
+                    <div className="mt-2 text-[11px] leading-5 text-sky-300/60">
+                      {event.detail}
+                    </div>
+                  </LuminaStandardPremiumCard>
+                </button>
+              );
+            })}
           </div>
         </LuminaStandardPremiumPanel>
 
