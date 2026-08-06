@@ -51,9 +51,14 @@ import {
 
 type CanonicalReviewProps = {
   selectedReviewId?: string;
+  selectedTimelineEventId?: string;
   onReviewSelect: (
     capsuleId: string,
     reviewId: string,
+  ) => void;
+  onTimelineEventSelect: (
+    capsuleId: string,
+    eventId: string,
   ) => void;
 };
 
@@ -98,21 +103,29 @@ const REVIEW_QUEUE = [
 
 const TIMELINE = [
   {
+    id: "canonical-review-event-evidence-certified",
+    capsuleId: "capsule-144",
     label: "Evidence certified",
     detail: "Validation Council · 09:14",
     state: "complete",
   },
   {
+    id: "canonical-review-event-scope-reviewed",
+    capsuleId: "capsule-144",
     label: "Constitutional scope reviewed",
     detail: "Chief Systems Architect · 10:02",
     state: "complete",
   },
   {
+    id: "canonical-review-event-authority-review",
+    capsuleId: "capsule-144",
     label: "Authority review",
     detail: "Architecture Council · In progress",
     state: "active",
   },
   {
+    id: "canonical-review-event-publication-decision",
+    capsuleId: "capsule-144",
     label: "Publication decision",
     detail: "Required before canonical promotion",
     state: "waiting",
@@ -159,7 +172,9 @@ const compactCardClass = [
 
 export function CanonicalReview({
   selectedReviewId,
+  selectedTimelineEventId,
   onReviewSelect,
+  onTimelineEventSelect,
 }: CanonicalReviewProps) {
   return (
     <section
@@ -556,45 +571,67 @@ export function CanonicalReview({
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            {TIMELINE.map((item, index) => (
-              <div
-                key={item.label}
-                className="relative"
-              >
-                {index < TIMELINE.length - 1 ? (
-                  <div className="absolute left-[calc(50%+18px)] top-4 hidden h-px w-[calc(100%-36px)] bg-cyan-300/18 md:block" />
-                ) : null}
+            {TIMELINE.map((item, index) => {
+              const selected =
+                selectedTimelineEventId ===
+                item.id;
 
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div
+              return (
+                <div
+                  key={item.id}
+                  className="relative"
+                >
+                  {index < TIMELINE.length - 1 ? (
+                    <div className="absolute left-[calc(50%+18px)] top-4 hidden h-px w-[calc(100%-36px)] bg-cyan-300/18 md:block" />
+                  ) : null}
+
+                  <button
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onTimelineEventSelect(
+                        item.capsuleId,
+                        item.id,
+                      )
+                    }
                     className={[
-                      "flex h-8 w-8 items-center justify-center rounded-full border",
-                      item.state === "complete"
-                        ? "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-200"
-                        : item.state === "active"
-                          ? "border-cyan-300/36 bg-cyan-300/[0.10] text-cyan-100 shadow-[0_0_16px_rgba(34,211,238,.18)]"
-                          : "border-slate-300/16 bg-slate-300/[0.035] text-slate-400",
+                      "relative z-10 flex w-full flex-col items-center rounded-[18px] px-2 py-3 text-center",
+                      "transition-[border-color,box-shadow,transform] duration-200",
+                      selected
+                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_24px_rgba(37,99,235,0.22)]"
+                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                     ].join(" ")}
                   >
-                    {item.state === "complete" ? (
-                      <CheckCircle2 className="h-4 w-4" />
-                    ) : item.state === "active" ? (
-                      <Clock3 className="h-4 w-4" />
-                    ) : (
-                      <FileClock className="h-4 w-4" />
-                    )}
-                  </div>
+                    <div
+                      className={[
+                        "flex h-8 w-8 items-center justify-center rounded-full border",
+                        item.state === "complete"
+                          ? "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-200"
+                          : item.state === "active"
+                            ? "border-cyan-300/36 bg-cyan-300/[0.10] text-cyan-100 shadow-[0_0_16px_rgba(34,211,238,.18)]"
+                            : "border-slate-300/16 bg-slate-300/[0.035] text-slate-400",
+                      ].join(" ")}
+                    >
+                      {item.state === "complete" ? (
+                        <CheckCircle2 className="h-4 w-4" />
+                      ) : item.state === "active" ? (
+                        <Clock3 className="h-4 w-4" />
+                      ) : (
+                        <FileClock className="h-4 w-4" />
+                      )}
+                    </div>
 
-                  <div className="mt-3 text-xs font-semibold text-white">
-                    {item.label}
-                  </div>
+                    <div className="mt-3 text-xs font-semibold text-white">
+                      {item.label}
+                    </div>
 
-                  <div className="mt-1 text-[10px] leading-4 text-sky-400/56">
-                    {item.detail}
-                  </div>
+                    <div className="mt-1 text-[10px] leading-4 text-sky-400/56">
+                      {item.detail}
+                    </div>
+                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </LuminaStandardPremiumPanel>
 

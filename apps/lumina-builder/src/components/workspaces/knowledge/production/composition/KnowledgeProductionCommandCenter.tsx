@@ -68,7 +68,8 @@ type KnowledgeSelectionKind =
   | "consumer-intelligence"
   | "memory-projection"
   | "canonical-review"
-  | "canonical-knowledge";
+  | "canonical-knowledge"
+  | "canonical-review-event";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -86,6 +87,7 @@ interface KnowledgeProductionSelection {
   memoryProjectionId?: string;
   canonicalReviewId?: string;
   canonicalKnowledgeId?: string;
+  canonicalReviewEventId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -387,6 +389,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleCanonicalReviewEventSelect(
+    capsuleId: string,
+    canonicalReviewEventId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "canonical-review-event",
+      canonicalReviewEventId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -453,8 +466,16 @@ export function KnowledgeProductionCommandCenter() {
               ? selection.canonicalReviewId
               : undefined
           }
+          selectedTimelineEventId={
+            selection?.kind === "canonical-review-event"
+              ? selection.canonicalReviewEventId
+              : undefined
+          }
           onReviewSelect={
             handleCanonicalReviewSelect
+          }
+          onTimelineEventSelect={
+            handleCanonicalReviewEventSelect
           }
         />
       </section>
