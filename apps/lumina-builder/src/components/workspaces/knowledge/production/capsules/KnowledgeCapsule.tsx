@@ -184,11 +184,17 @@ export function KnowledgeCapsule({
           <>
             <div
               aria-hidden="true"
-              className="absolute inset-y-0 left-0 w-[48%] -translate-x-4 -rotate-6 rounded-l-full rounded-r-[24px] border border-rose-300/44 bg-gradient-to-r from-rose-400/18 to-amber-300/8 shadow-[0_0_26px_rgba(251,113,133,.14)]"
+              className={[
+                flagshipAppearance.capsulePeelHalf,
+                flagshipAppearance.capsulePeelHalfTone.left,
+              ].join(" ")}
             />
             <div
               aria-hidden="true"
-              className="absolute inset-y-0 right-0 w-[48%] translate-x-4 rotate-6 rounded-r-full rounded-l-[24px] border border-amber-300/44 bg-gradient-to-l from-amber-400/18 to-rose-300/8 shadow-[0_0_26px_rgba(251,191,36,.14)]"
+              className={[
+                flagshipAppearance.capsulePeelHalf,
+                flagshipAppearance.capsulePeelHalfTone.right,
+              ].join(" ")}
             />
           </>
         ) : null}
