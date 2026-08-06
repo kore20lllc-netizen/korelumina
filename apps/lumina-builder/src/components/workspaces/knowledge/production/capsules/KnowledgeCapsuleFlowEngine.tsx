@@ -528,7 +528,10 @@ export function KnowledgeCapsuleFlowEngine({
                                   visibleCapsule?.id ?? null,
                                 );
                               }}
-                              className="flex w-full items-start justify-between gap-3 text-left"
+                              className={[
+                                "flex w-full items-start justify-between gap-3 text-left",
+                                flagshipAppearance.focusRing,
+                              ].join(" ")}
                             >
                               <div>
                                 <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/55">
