@@ -8,6 +8,7 @@ import {
   BookOpenCheck,
   BrainCircuit,
   CheckCircle2,
+  CircleDot,
   Clock3,
   DatabaseZap,
   GitBranch,
@@ -20,6 +21,10 @@ import {
 import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+import {
+  LuminaTimelineCard,
+} from "@/components/lumina/workspace/primitives/LuminaTimelineCard";
 
 import {
   FlagshipPanel,
@@ -111,6 +116,91 @@ function DetailCard({
   );
 }
 
+interface CapsuleLifecycleEvent {
+  id: string;
+  title: string;
+  subtitle: string;
+  detail: string;
+  state: "complete" | "current" | "pending";
+}
+
+function getCapsuleLifecycleEvents(
+  capsule: KnowledgeCapsule,
+): CapsuleLifecycleEvent[] {
+  const validationComplete =
+    capsule.layers.every(
+      (layer) =>
+        layer.status === "validated",
+    );
+
+  const approvalComplete =
+    capsule.approval
+      .toLowerCase()
+      .includes("approved");
+
+  const distributionComplete = [
+    "published",
+    "adapted",
+    "consumed",
+    "superseded",
+    "archived",
+  ].includes(capsule.state);
+
+  return [
+    {
+      id: `${capsule.id}:captured`,
+      title: "Knowledge captured",
+      subtitle: capsule.owner,
+      detail: `Package identity ${capsule.identity} established under ${capsule.authority}.`,
+      state: "complete",
+    },
+    {
+      id: `${capsule.id}:compiled`,
+      title: "Semantic compilation",
+      subtitle: capsule.compiler,
+      detail: `${capsule.packageType} prepared for ${capsule.destination}.`,
+      state: "complete",
+    },
+    {
+      id: `${capsule.id}:validated`,
+      title: "Validation review",
+      subtitle: `${validationComplete ? "All" : "Partial"} layers validated`,
+      detail: validationComplete
+        ? "Every governed knowledge layer passed validation."
+        : `${capsule.layers.filter((layer) => layer.status !== "validated").length} layer exception remains active.`,
+      state: validationComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("validation")
+          ? "current"
+          : "pending",
+    },
+    {
+      id: `${capsule.id}:approved`,
+      title: "Authority approval",
+      subtitle: capsule.approval,
+      detail: approvalComplete
+        ? "Package authority approved the governed knowledge state."
+        : "Authority approval remains part of the active lifecycle.",
+      state: approvalComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("approval")
+          ? "current"
+          : "pending",
+    },
+    {
+      id: `${capsule.id}:distributed`,
+      title: "Knowledge distribution",
+      subtitle: capsule.consumer,
+      detail: `Mission destination: ${capsule.mission}.`,
+      state: distributionComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("distribution")
+          ? "current"
+          : "pending",
+    },
+  ];
+}
+
 function EmptyValue({
   label,
 }: {
@@ -167,6 +257,9 @@ export function KnowledgeCapsuleInspector({
       (layer) =>
         layer.status !== "validated",
     ).length;
+
+  const lifecycleEvents =
+    getCapsuleLifecycleEvents(capsule);
 
   return (
     <FlagshipPanel
@@ -311,77 +404,146 @@ export function KnowledgeCapsuleInspector({
         </div>
 
         {activeTab === "lifecycle" ? (
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,.65fr)]">
+          <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,.6fr)]">
             <section
               className={[
                 flagshipAppearance.innerPanel,
                 "bg-slate-950/24 p-4",
               ].join(" ")}
             >
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                <DetailCard
-                  label="Stable identity"
-                  value={capsule.identity}
-                />
-                <DetailCard
-                  label="Current stage"
-                  value={capsule.stage}
-                  tone="violet"
-                />
-                <DetailCard
-                  label="Lifecycle state"
-                  value={capsule.state.replace("-", " ")}
-                  tone="emerald"
-                />
-                <DetailCard
-                  label="Integrity posture"
-                  value={capsule.integrity}
-                  tone={
-                    capsule.integrity === "sealed"
-                      ? "emerald"
-                      : "rose"
-                  }
-                />
-                <DetailCard
-                  label="Package type"
-                  value={capsule.type}
-                  tone="amber"
-                />
-                <DetailCard
-                  label="Authority"
-                  value={capsule.authority}
-                />
-              </div>
-            </section>
-
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-violet-300/[0.03] p-4",
-              ].join(" ")}
-            >
-              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/64">
-                Lifecycle assurance
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
+                Package history
               </div>
 
               <div className="mt-4 grid gap-3">
-                <DetailCard
-                  label="Identity continuity"
-                  value="Preserved"
-                  tone="emerald"
-                />
-                <DetailCard
-                  label="Capsule replacement"
-                  value="Prohibited"
-                  tone="amber"
-                />
-                <DetailCard
-                  label="Lineage retention"
-                  value="Permanent"
-                  tone="violet"
-                />
+                {lifecycleEvents.map(
+                  (event, index) => (
+                    <div
+                      key={event.id}
+                      className="relative"
+                    >
+                      {index <
+                      lifecycleEvents.length - 1 ? (
+                        <div
+                          aria-hidden="true"
+                          className="absolute left-[19px] top-10 h-[calc(100%+12px)] w-px bg-cyan-300/18"
+                        />
+                      ) : null}
+
+                      <LuminaTimelineCard
+                        icon={
+                          <ExecutivePremiumIcon
+                            icon={
+                              event.state === "complete"
+                                ? CheckCircle2
+                                : event.state === "current"
+                                  ? CircleDot
+                                  : Clock3
+                            }
+                            state={
+                              event.state === "complete"
+                                ? "healthy"
+                                : event.state === "current"
+                                  ? "active"
+                                  : "warning"
+                            }
+                          />
+                        }
+                        title={
+                          <span className="text-sky-100">
+                            {event.title}
+                          </span>
+                        }
+                        subtitle={event.subtitle}
+                        className={[
+                          "!border-cyan-300/50",
+                          event.state === "current"
+                            ? "ring-1 ring-inset ring-cyan-300/45"
+                            : "",
+                        ].join(" ")}
+                      >
+                        <p className="text-xs leading-5 text-sky-300/70">
+                          {event.detail}
+                        </p>
+                      </LuminaTimelineCard>
+                    </div>
+                  ),
+                )}
               </div>
             </section>
+
+            <div className="grid gap-4">
+              <section
+                className={[
+                  flagshipAppearance.innerPanel,
+                  "bg-slate-950/24 p-4",
+                ].join(" ")}
+              >
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                  <DetailCard
+                    label="Stable identity"
+                    value={capsule.identity}
+                  />
+                  <DetailCard
+                    label="Current stage"
+                    value={capsule.stage}
+                    tone="violet"
+                  />
+                  <DetailCard
+                    label="Lifecycle state"
+                    value={capsule.state.replace("-", " ")}
+                    tone="emerald"
+                  />
+                  <DetailCard
+                    label="Integrity posture"
+                    value={capsule.integrity}
+                    tone={
+                      capsule.integrity === "sealed"
+                        ? "emerald"
+                        : "rose"
+                    }
+                  />
+                  <DetailCard
+                    label="Package type"
+                    value={capsule.packageType}
+                    tone="amber"
+                  />
+                  <DetailCard
+                    label="Authority"
+                    value={capsule.authority}
+                  />
+                </div>
+              </section>
+
+              <section
+                className={[
+                  flagshipAppearance.innerPanel,
+                  "bg-violet-300/[0.03] p-4",
+                ].join(" ")}
+              >
+                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/64">
+                  Lifecycle assurance
+                </div>
+
+                <div className="mt-4 grid gap-3">
+                  <DetailCard
+                    label="Identity continuity"
+                    value="Preserved"
+                    tone="emerald"
+                  />
+                  <DetailCard
+                    label="Capsule replacement"
+                    value="Prohibited"
+                    tone="amber"
+                  />
+                  <DetailCard
+                    label="Lineage retention"
+                    value="Permanent"
+                    tone="violet"
+                  />
+                </div>
+              </section>
+            </div>
           </div>
         ) : null}
 
