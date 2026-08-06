@@ -65,7 +65,8 @@ type KnowledgeSelectionKind =
   | "distribution-consumer"
   | "distribution-event"
   | "distribution-genealogy-summary"
-  | "consumer-intelligence";
+  | "consumer-intelligence"
+  | "memory-projection";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -80,6 +81,7 @@ interface KnowledgeProductionSelection {
   distributionEventId?: string;
   distributionGenealogySummaryId?: string;
   intelligenceConsumerId?: string;
+  memoryProjectionId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -348,6 +350,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleMemoryProjectionSelect(
+    capsuleId: string,
+    memoryProjectionId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "memory-projection",
+      memoryProjectionId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -434,7 +447,16 @@ export function KnowledgeProductionCommandCenter() {
         id="organizational-memory"
         className="scroll-mt-24"
       >
-        <OrganizationalMemory />
+        <OrganizationalMemory
+          selectedProjectionId={
+            selection?.kind === "memory-projection"
+              ? selection.memoryProjectionId
+              : undefined
+          }
+          onProjectionSelect={
+            handleMemoryProjectionSelect
+          }
+        />
       </section>
 
       <section

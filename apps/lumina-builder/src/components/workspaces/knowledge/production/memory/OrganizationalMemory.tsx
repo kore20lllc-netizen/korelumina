@@ -46,8 +46,18 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+type OrganizationalMemoryProps = {
+  selectedProjectionId?: string;
+  onProjectionSelect: (
+    capsuleId: string,
+    projectionId: string,
+  ) => void;
+};
+
 const projections = [
   {
+    id: "memory-projection-executive",
+    capsuleId: "capsule-144",
     title: "Executive summary projection",
     audience: "Executive Office",
     privacy: "Strategic",
@@ -56,6 +66,8 @@ const projections = [
       "Condenses canonical runtime recovery guidance into decision-ready organizational context.",
   },
   {
+    id: "memory-projection-mission",
+    capsuleId: "capsule-144",
     title: "Mission operating projection",
     audience: "Mission System",
     privacy: "Operational",
@@ -64,6 +76,8 @@ const projections = [
       "Adapts canonical evidence into mission planning constraints and recovery expectations.",
   },
   {
+    id: "memory-projection-chief-agent",
+    capsuleId: "capsule-144",
     title: "Chief Agent competency projection",
     audience: "Chief Agent",
     privacy: "Restricted",
@@ -133,7 +147,10 @@ const compactCardClass = [
   electricContour.strength.standard,
 ].join(" ");
 
-export function OrganizationalMemory() {
+export function OrganizationalMemory({
+  selectedProjectionId,
+  onProjectionSelect,
+}: OrganizationalMemoryProps) {
   return (
     <section
       aria-labelledby="organizational-memory-title"
@@ -238,11 +255,33 @@ export function OrganizationalMemory() {
           </div>
 
           <div className="mt-5 grid gap-4">
-            {projections.map((projection) => (
-              <article
-                key={projection.title}
-                className={projectionArticleClass}
-              >
+            {projections.map((projection) => {
+              const selected =
+                selectedProjectionId ===
+                projection.id;
+
+              return (
+                <button
+                  type="button"
+                  key={projection.id}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    onProjectionSelect(
+                      projection.capsuleId,
+                      projection.id,
+                    )
+                  }
+                  className="block w-full text-left"
+                >
+                  <article
+                    className={[
+                      projectionArticleClass,
+                      "transition-[border-color,box-shadow,transform] duration-200",
+                      selected
+                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                    ].join(" ")}
+                  >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -302,8 +341,10 @@ export function OrganizationalMemory() {
                     </div>
                   </div>
                 </div>
-              </article>
-            ))}
+                  </article>
+                </button>
+              );
+            })}
           </div>
         </LuminaStandardPremiumPanel>
 
