@@ -4,6 +4,15 @@ import {
 } from "react";
 
 import {
+  BookOpenCheck,
+  Boxes,
+  GitBranch,
+  Network,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react";
+
+import {
   KnowledgeCapsuleFlowEngine,
   KnowledgeCapsuleInspector,
   knowledgeCapsules,
@@ -37,6 +46,93 @@ import {
 import {
   OrganizationalImpact,
 } from "../impact";
+
+const PRODUCTION_SECTIONS = [
+  {
+    id: "knowledge-flow-engine",
+    label: "Flow Engine",
+    icon: Workflow,
+  },
+  {
+    id: "canonical-review",
+    label: "Canonical Review",
+    icon: ShieldCheck,
+  },
+  {
+    id: "canonical-knowledge",
+    label: "Canonical Knowledge",
+    icon: BookOpenCheck,
+  },
+  {
+    id: "knowledge-graph",
+    label: "Knowledge Graph",
+    icon: Network,
+  },
+  {
+    id: "organizational-memory",
+    label: "Organizational Memory",
+    icon: Boxes,
+  },
+  {
+    id: "knowledge-distribution",
+    label: "Distribution",
+    icon: GitBranch,
+  },
+] as const;
+
+function ProductionSectionNavigator() {
+  function handleNavigate(sectionId: string) {
+    document
+      .getElementById(sectionId)
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }
+
+  return (
+    <nav
+      aria-label="Knowledge production sections"
+      className={[
+        "sticky top-4 z-40 overflow-x-auto rounded-2xl border p-2",
+        "border-cyan-300/70 ring-1 ring-inset ring-blue-400/35",
+        "bg-slate-950/88",
+        "shadow-[0_0_0_1px_rgba(34,211,238,0.16),0_0_30px_rgba(37,99,235,0.22),0_20px_60px_rgba(2,6,23,0.48)]",
+        "backdrop-blur-2xl",
+      ].join(" ")}
+    >
+      <div className="flex min-w-max items-center gap-2">
+        {PRODUCTION_SECTIONS.map((section) => {
+          const Icon = section.icon;
+
+          return (
+            <button
+              key={section.id}
+              type="button"
+              onClick={() => handleNavigate(section.id)}
+              className={[
+                "inline-flex h-9 items-center gap-2 rounded-xl border px-3",
+                "text-[10px] font-semibold uppercase tracking-[0.12em]",
+                "border-cyan-300/62 ring-1 ring-inset ring-blue-400/28",
+                "bg-[linear-gradient(180deg,rgba(146,64,14,0.96),rgba(92,36,5,0.96))] text-amber-100",
+                "shadow-[inset_0_1px_0_rgba(251,191,36,0.16),0_0_18px_rgba(37,99,235,0.16)]",
+                "transition-[border-color,background-color,color,box-shadow,transform] duration-200",
+                "hover:border-cyan-200/90 hover:bg-[linear-gradient(180deg,rgba(146,64,14,0.98),rgba(92,36,5,0.98))] hover:text-amber-50",
+                "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(37,99,235,0.24)]",
+                "active:translate-y-px",
+              ].join(" ")}
+            >
+              <Icon className="h-3.5 w-3.5" />
+              <span className="text-cyan">
+                {section.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
 
 export function KnowledgeProductionCommandCenter() {
   const [
@@ -77,11 +173,18 @@ export function KnowledgeProductionCommandCenter() {
 
   return (
     <div className="grid gap-6">
-      <KnowledgeCapsuleFlowEngine
+      <ProductionSectionNavigator />
+
+      <section
+        id="knowledge-flow-engine"
+        className="scroll-mt-24"
+      >
+        <KnowledgeCapsuleFlowEngine
         capsules={knowledgeCapsules}
         selectedCapsuleId={selectedCapsuleId}
         onCapsuleSelect={handleCapsuleSelect}
       />
+      </section>
 
       {selectedCapsule ? (
         <div
@@ -97,18 +200,67 @@ export function KnowledgeProductionCommandCenter() {
         </div>
       ) : null}
 
-      <CanonicalReview />
+      <section
+        id="canonical-review"
+        className="scroll-mt-24"
+      >
+        <CanonicalReview />
+      </section>
 
-      <CanonicalKnowledge />
+      <section
+        id="canonical-knowledge"
+        className="scroll-mt-24"
+      >
+        <CanonicalKnowledge />
+      </section>
 
-      <OrganizationalMemory />
+      <section
+        id="knowledge-graph"
+        className="scroll-mt-24"
+        aria-label="Knowledge Graph"
+      >
+        <div
+          className={[
+            "rounded-[28px] border p-6",
+            "[border-color:var(--lumina-border-emphasis)]",
+            "[background:var(--lumina-surface-panel)]",
+            "[box-shadow:var(--lumina-shadow-panel)]",
+          ].join(" ")}
+        >
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan">
+            Alternate operational lens
+          </div>
 
-      <KnowledgeDistributionHub
-        capsules={knowledgeCapsules}
-        records={knowledgeDistributionRecords}
-        selectedCapsuleId={selectedCapsuleId}
-        onCapsuleSelect={handleCapsuleSelect}
-      />
+          <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-foreground">
+            Knowledge Graph
+          </h2>
+
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+            Relationship, lineage, topology, and traversal context for the same
+            knowledge moving through the Flow Engine. Graph interaction wiring
+            remains fixture-only in the next milestone.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="organizational-memory"
+        className="scroll-mt-24"
+      >
+        <OrganizationalMemory />
+      </section>
+
+      <section
+        id="knowledge-distribution"
+        className="scroll-mt-24"
+      >
+        <KnowledgeDistributionHub
+          capsules={knowledgeCapsules}
+          records={knowledgeDistributionRecords}
+          selectedCapsuleId={selectedCapsuleId}
+          onCapsuleSelect={handleCapsuleSelect}
+        />
+      </section>
 
       <ConsumerIntelligence
         records={knowledgeDistributionRecords}
