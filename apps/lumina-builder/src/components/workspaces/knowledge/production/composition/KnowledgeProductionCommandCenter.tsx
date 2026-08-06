@@ -135,12 +135,20 @@ const PRODUCTION_SECTIONS = [
   },
 ] as const;
 
+function getScrollBehavior(): ScrollBehavior {
+  return window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches
+    ? "auto"
+    : "smooth";
+}
+
 function ProductionSectionNavigator() {
   function handleNavigate(sectionId: string) {
     document
       .getElementById(sectionId)
       ?.scrollIntoView({
-        behavior: "smooth",
+        behavior: getScrollBehavior(),
         block: "start",
       });
   }
@@ -199,7 +207,7 @@ function BackToTopButton() {
         "knowledge-production-top",
       )
       ?.scrollIntoView({
-        behavior: "smooth",
+        behavior: getScrollBehavior(),
         block: "start",
       });
   }
@@ -266,7 +274,7 @@ export function KnowledgeProductionCommandCenter() {
           "knowledge-capsule-inspector",
         )
         ?.scrollIntoView({
-          behavior: "smooth",
+          behavior: getScrollBehavior(),
           block: "start",
         });
     });
