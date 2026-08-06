@@ -1,6 +1,8 @@
 import {
+  useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -233,6 +235,9 @@ export function KnowledgeProductionCommandCenter() {
     null,
   );
 
+  const inspectorClosedByUserRef =
+    useRef(false);
+
   const selectedCapsuleId =
     selection?.capsuleId ?? "";
 
@@ -270,6 +275,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     graphNodeId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "graph-node",
@@ -282,6 +290,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     timelineEventId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "timeline-event",
@@ -293,6 +304,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     genealogyNodeId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "genealogy-node",
@@ -305,6 +319,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     impactOutcomeId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "impact-outcome",
@@ -316,6 +333,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     consumerId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "distribution-consumer",
@@ -327,6 +347,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     distributionEventId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "distribution-event",
@@ -338,6 +361,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     distributionGenealogySummaryId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "distribution-genealogy-summary",
@@ -349,6 +375,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     intelligenceConsumerId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "consumer-intelligence",
@@ -360,6 +389,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     memoryProjectionId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "memory-projection",
@@ -371,6 +403,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     canonicalReviewId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "canonical-review",
@@ -382,6 +417,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     canonicalKnowledgeId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "canonical-knowledge",
@@ -393,6 +431,9 @@ export function KnowledgeProductionCommandCenter() {
     capsuleId: string,
     canonicalReviewEventId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
       capsuleId,
       kind: "canonical-review-event",
@@ -403,6 +444,9 @@ export function KnowledgeProductionCommandCenter() {
   function handleStationSelect(
     stationId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     const capsule =
       knowledgeCapsules.find(
         (candidate) =>
@@ -423,6 +467,9 @@ export function KnowledgeProductionCommandCenter() {
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection((current) =>
       current?.capsuleId === capsuleId &&
       current.kind === "capsule"
@@ -435,26 +482,35 @@ export function KnowledgeProductionCommandCenter() {
 
   }
 
-  function handleVisibleCapsuleChange(
-    capsuleId: string | null,
-  ) {
-    setSelection((current) => {
-      if (!capsuleId) {
-        return null;
-      }
-
+  const handleVisibleCapsuleChange = useCallback(
+    (
+      capsuleId: string | null,
+    ) => {
       if (
-        current?.capsuleId === capsuleId
+        inspectorClosedByUserRef.current
       ) {
-        return current;
+        return;
       }
 
-      return {
-        capsuleId,
-        kind: "capsule",
-      };
-    });
-  }
+      setSelection((current) => {
+        if (!capsuleId) {
+          return null;
+        }
+
+        if (
+          current?.capsuleId === capsuleId
+        ) {
+          return current;
+        }
+
+        return {
+          capsuleId,
+          kind: "capsule",
+        };
+      });
+    },
+    [],
+  );
 
   return (
     <div
@@ -499,9 +555,11 @@ export function KnowledgeProductionCommandCenter() {
             onTimelineEventSelect={
               handleTimelineEventSelect
             }
-            onClose={() =>
-              setSelection(null)
-            }
+            onClose={() => {
+              inspectorClosedByUserRef.current =
+                true;
+              setSelection(null);
+            }}
           />
         </div>
       ) : null}
