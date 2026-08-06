@@ -47,6 +47,10 @@ import {
   OrganizationalImpact,
 } from "../impact";
 
+import {
+  ProductionKnowledgeGraph,
+} from "../graph";
+
 type KnowledgeSelectionKind =
   | "capsule"
   | "station"
@@ -172,6 +176,17 @@ export function KnowledgeProductionCommandCenter() {
     [selectedCapsuleId],
   );
 
+  function handleGraphNodeSelect(
+    capsuleId: string,
+    graphNodeId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "graph-node",
+      graphNodeId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -245,28 +260,11 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
         aria-label="Knowledge Graph"
       >
-        <div
-          className={[
-            "rounded-[28px] border p-6",
-            "[border-color:var(--lumina-border-emphasis)]",
-            "[background:var(--lumina-surface-panel)]",
-            "[box-shadow:var(--lumina-shadow-panel)]",
-          ].join(" ")}
-        >
-          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan">
-            Alternate operational lens
-          </div>
-
-          <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-foreground">
-            Knowledge Graph
-          </h2>
-
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-            Relationship, lineage, topology, and traversal context for the same
-            knowledge moving through the Flow Engine. Graph interaction wiring
-            remains fixture-only in the next milestone.
-          </p>
-        </div>
+        <ProductionKnowledgeGraph
+          capsules={knowledgeCapsules}
+          selectedCapsuleId={selectedCapsuleId}
+          onCapsuleSelect={handleGraphNodeSelect}
+        />
       </section>
 
       <section
