@@ -249,7 +249,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Execution Compiler",
                 ],
                 classes:
-                  "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-cyan-300/[0.025]",
+                  flagshipAppearance.capsuleFlowZoneTone.source,
               },
               {
                 id: "transformation",
@@ -259,7 +259,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Knowledge IR",
                 ],
                 classes:
-                  "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.03]",
+                  flagshipAppearance.capsuleFlowZoneTone.transformation,
               },
               {
                 id: "governance",
@@ -271,7 +271,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Canonical Review",
                 ],
                 classes:
-                  "border-amber-300/22 bg-amber-300/[0.025]",
+                  flagshipAppearance.capsuleFlowZoneTone.governance,
               },
               {
                 id: "canonical",
@@ -281,7 +281,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Canonical Knowledge",
                 ],
                 classes:
-                  "border-emerald-300/24 bg-emerald-300/[0.025]",
+                  flagshipAppearance.capsuleFlowZoneTone.canonical,
               },
             ].map((zone, zoneIndex) => {
               const stationRecords =
@@ -308,7 +308,7 @@ export function KnowledgeCapsuleFlowEngine({
                   key={zone.id}
                   aria-labelledby={`${zone.id}-zone-title`}
                   className={[
-                    "relative overflow-hidden rounded-[24px] border p-4 sm:p-5",
+                    flagshipAppearance.capsuleFlowZone,
                     zone.classes,
                   ].join(" ")}
                 >
@@ -330,7 +330,11 @@ export function KnowledgeCapsuleFlowEngine({
                       </p>
                     </div>
 
-                    <div className="inline-flex w-fit items-center gap-2 rounded-full border border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-cyan-300/[0.045] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
+                    <div
+                      className={
+                        flagshipAppearance.capsuleFlowOccupancyBadge
+                      }
+                    >
                       <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,.75)]" />
                       {zoneOccupancy} active
                     </div>
@@ -358,14 +362,9 @@ export function KnowledgeCapsuleFlowEngine({
                           <article
                             key={station}
                             aria-label={`${station} station`}
-                            className={[
-                              "group relative min-h-[210px] overflow-hidden rounded-[20px] border p-4",
-                              "border-blue-400/50 ring-1 ring-inset ring-cyan-300/12 bg-[linear-gradient(160deg,rgba(8,19,44,.80),rgba(7,11,29,.72))]",
-                              "shadow-[inset_0_1px_0_rgba(255,255,255,.045)]",
-                              "transition-[border-color,box-shadow,transform] duration-200",
-                              "hover:-translate-y-0.5 hover:border-cyan-300/34 hover:shadow-[0_18px_42px_rgba(2,6,23,.34)]",
-                              "motion-reduce:transition-none",
-                            ].join(" ")}
+                            className={
+                              flagshipAppearance.capsuleFlowStation
+                            }
                           >
                             <div
                               aria-hidden="true"
@@ -383,7 +382,11 @@ export function KnowledgeCapsuleFlowEngine({
                                 </h3>
                               </div>
 
-                              <div className="rounded-full border border-blue-400/48 bg-cyan-300/[0.045] px-2.5 py-1 text-[9px] font-semibold text-cyan-100">
+                              <div
+                                className={
+                                  flagshipAppearance.capsuleFlowStationCount
+                                }
+                              >
                                 {totalOccupancy}
                               </div>
                             </div>
@@ -435,11 +438,11 @@ export function KnowledgeCapsuleFlowEngine({
                                     <div
                                       key={branch.id}
                                       className={[
-                                        "relative overflow-hidden rounded-[18px] border p-2.5",
+                                        flagshipAppearance.capsuleFlowBranch,
                                         branch.kind ===
                                         "remediation"
-                                          ? "border-rose-300/36 bg-rose-300/[0.055]"
-                                          : "border-emerald-300/32 bg-emerald-300/[0.045]",
+                                          ? flagshipAppearance.capsuleFlowBranchTone.remediation
+                                          : flagshipAppearance.capsuleFlowBranchTone.validated,
                                       ].join(" ")}
                                     >
                                       <div
@@ -498,7 +501,11 @@ export function KnowledgeCapsuleFlowEngine({
                               )}
 
                               {totalOccupancy === 0 ? (
-                                <div className="flex min-h-[96px] items-center justify-center rounded-[16px] border border-dashed border-cyan-300/12 bg-cyan-300/[0.015] px-4 text-center text-[10px] leading-5 text-sky-500/48">
+                                <div
+                                  className={
+                                    flagshipAppearance.capsuleFlowEmptyStation
+                                  }
+                                >
                                   Available manufacturing node
                                 </div>
                               ) : null}

@@ -376,6 +376,72 @@ export const flagshipAppearance = {
     "shadow-[0_28px_80px_rgba(2,6,23,.42),inset_0_1px_0_rgba(255,255,255,.05)]",
   ].join(" "),
 
+  capsuleFlowZone: [
+    "relative overflow-hidden rounded-[24px] border",
+    "p-4 sm:p-5",
+  ].join(" "),
+
+  capsuleFlowZoneTone: {
+    source:
+      "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-cyan-300/[0.025]",
+    transformation:
+      "border-blue-400/52 ring-1 ring-inset ring-cyan-300/12 bg-violet-300/[0.03]",
+    governance:
+      "border-amber-300/22 bg-amber-300/[0.025]",
+    canonical:
+      "border-emerald-300/24 bg-emerald-300/[0.025]",
+  },
+
+  capsuleFlowOccupancyBadge: [
+    "inline-flex w-fit items-center gap-2 rounded-full border",
+    "border-blue-400/55",
+    "ring-1 ring-inset ring-cyan-300/14",
+    "bg-cyan-300/[0.045]",
+    "px-3 py-1.5",
+    "text-[10px] font-semibold text-cyan-100",
+  ].join(" "),
+
+  capsuleFlowStation: [
+    "group relative min-h-[210px] overflow-hidden rounded-[20px] border p-4",
+    "border-blue-400/50",
+    "ring-1 ring-inset ring-cyan-300/12",
+    "bg-[linear-gradient(160deg,rgba(8,19,44,.80),rgba(7,11,29,.72))]",
+    "shadow-[inset_0_1px_0_rgba(255,255,255,.045)]",
+    "transition-[border-color,box-shadow,transform] duration-200",
+    "hover:-translate-y-0.5",
+    "hover:border-cyan-300/34",
+    "hover:shadow-[0_18px_42px_rgba(2,6,23,.34)]",
+    "motion-reduce:transition-none",
+  ].join(" "),
+
+  capsuleFlowStationCount: [
+    "rounded-full border border-blue-400/48",
+    "bg-cyan-300/[0.045]",
+    "px-2.5 py-1",
+    "text-[9px] font-semibold text-cyan-100",
+  ].join(" "),
+
+  capsuleFlowBranch: [
+    "relative overflow-hidden rounded-[18px] border border-blue-400/48",
+    "ring-1 ring-inset ring-cyan-300/10",
+    "p-2.5",
+  ].join(" "),
+
+  capsuleFlowBranchTone: {
+    remediation:
+      "bg-rose-300/[0.055]",
+    validated:
+      "bg-emerald-300/[0.045]",
+  },
+
+  capsuleFlowEmptyStation: [
+    "flex min-h-[96px] items-center justify-center",
+    "rounded-[16px] border border-dashed",
+    "border-cyan-300/12 bg-cyan-300/[0.015]",
+    "px-4 text-center",
+    "text-[10px] leading-5 text-sky-500/48",
+  ].join(" "),
+
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 
