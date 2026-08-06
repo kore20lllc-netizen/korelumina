@@ -179,10 +179,12 @@ function ProductionSectionNavigator() {
       { passive: true },
     );
 
-    window.addEventListener(
-      "resize",
-      updateOverflowAffordance,
-    );
+    const resizeObserver =
+      new ResizeObserver(
+        updateOverflowAffordance,
+      );
+
+    resizeObserver.observe(navigator);
 
     return () => {
       navigator.removeEventListener(
@@ -190,10 +192,7 @@ function ProductionSectionNavigator() {
         updateOverflowAffordance,
       );
 
-      window.removeEventListener(
-        "resize",
-        updateOverflowAffordance,
-      );
+      resizeObserver.disconnect();
     };
   }, [updateOverflowAffordance]);
 
