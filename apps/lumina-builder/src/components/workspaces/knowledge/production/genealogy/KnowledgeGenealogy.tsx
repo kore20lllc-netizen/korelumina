@@ -55,13 +55,20 @@ import type {
 type KnowledgeGenealogyProps = {
   capsules: KnowledgeCapsuleModel[];
   selectedCapsuleId: string;
+  selectedGenealogyNodeId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
+  onGenealogyNodeSelect: (
+    capsuleId: string,
+    genealogyNodeId: string,
+  ) => void;
 };
 
 export function KnowledgeGenealogy({
   capsules,
   selectedCapsuleId,
+  selectedGenealogyNodeId,
   onCapsuleSelect,
+  onGenealogyNodeSelect,
 }: KnowledgeGenealogyProps) {
   const capsule =
     capsules.find(
@@ -86,6 +93,7 @@ export function KnowledgeGenealogy({
 
   const lineageSteps = [
     {
+      id: `${capsule.id}:identity`,
       label: "Knowledge identity",
       value: capsule.identity,
       detail: capsule.id,
@@ -93,6 +101,7 @@ export function KnowledgeGenealogy({
       state: "active" as const,
     },
     {
+      id: `${capsule.id}:compiler`,
       label: "Compiler generation",
       value: capsule.compiler,
       detail: capsule.packageType,
@@ -100,6 +109,7 @@ export function KnowledgeGenealogy({
       state: "active" as const,
     },
     {
+      id: `${capsule.id}:mission`,
       label: "Mission lineage",
       value: capsule.mission,
       detail: capsule.summary,
@@ -107,6 +117,7 @@ export function KnowledgeGenealogy({
       state: "healthy" as const,
     },
     {
+      id: `${capsule.id}:authority`,
       label: "Governance authority",
       value: capsule.authority,
       detail: capsule.approval,
@@ -114,6 +125,7 @@ export function KnowledgeGenealogy({
       state: "healthy" as const,
     },
     {
+      id: `${capsule.id}:education`,
       label: "Educational mapping",
       value: capsule.educationalModule,
       detail: "Competency and learning projection retained.",
@@ -121,6 +133,7 @@ export function KnowledgeGenealogy({
       state: "active" as const,
     },
     {
+      id: `${capsule.id}:consumer`,
       label: "Distribution consumer",
       value: capsule.consumer,
       detail: capsule.destination,
@@ -248,12 +261,34 @@ export function KnowledgeGenealogy({
           {lineageSteps.map((step, index) => {
             const Icon = step.icon;
 
+            const selected =
+              selectedGenealogyNodeId ===
+              step.id;
+
             return (
-              <LuminaStandardPremiumCard
-                as="article"
-                key={step.label}
+              <button
+                type="button"
+                key={step.id}
+                aria-pressed={selected}
+                onClick={() =>
+                  onGenealogyNodeSelect(
+                    capsule.id,
+                    step.id,
+                  )
+                }
+                className="block w-full text-left"
               >
-                <div className="flex items-start gap-3">
+                <LuminaStandardPremiumCard
+                  as="article"
+                  className={[
+                    electricContour.card,
+                    "h-full transition-[border-color,box-shadow,transform] duration-200",
+                    selected
+                      ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                      : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                  ].join(" ")}
+                >
+                  <div className="flex items-start gap-3">
                   <ExecutivePremiumIcon
                     icon={Icon}
                     state={step.state}
@@ -272,8 +307,9 @@ export function KnowledgeGenealogy({
                       {step.detail}
                     </div>
                   </div>
-                </div>
-              </LuminaStandardPremiumCard>
+                  </div>
+                </LuminaStandardPremiumCard>
+              </button>
             );
           })}
         </div>

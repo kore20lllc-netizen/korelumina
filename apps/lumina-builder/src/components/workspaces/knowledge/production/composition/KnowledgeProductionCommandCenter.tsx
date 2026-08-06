@@ -9,6 +9,7 @@ import {
   GitBranch,
   Network,
   ShieldCheck,
+  Target,
   Workflow,
 } from "lucide-react";
 
@@ -102,6 +103,16 @@ const PRODUCTION_SECTIONS = [
     label: "Distribution",
     icon: GitBranch,
   },
+  {
+    id: "knowledge-genealogy",
+    label: "Knowledge Genealogy",
+    icon: GitBranch,
+  },
+  {
+    id: "organizational-impact",
+    label: "Organizational Impact",
+    icon: Target,
+  },
 ] as const;
 
 function ProductionSectionNavigator() {
@@ -125,7 +136,7 @@ function ProductionSectionNavigator() {
         "backdrop-blur-2xl",
       ].join(" ")}
     >
-      <div className="grid min-w-[1120px] grid-cols-6 items-center gap-2 xl:min-w-0">
+      <div className="grid grid-cols-2 items-center gap-2 sm:grid-cols-4 xl:grid-cols-8">
         {PRODUCTION_SECTIONS.map((section) => {
           const Icon = section.icon;
 
@@ -213,6 +224,19 @@ export function KnowledgeProductionCommandCenter() {
       kind: "timeline-event",
       timelineEventId,
     });
+  }
+
+  function handleGenealogyNodeSelect(
+    capsuleId: string,
+    genealogyNodeId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "genealogy-node",
+      genealogyNodeId,
+    });
+
+    revealInspector();
   }
 
   function handleCapsuleSelect(
@@ -317,16 +341,34 @@ export function KnowledgeProductionCommandCenter() {
         records={knowledgeDistributionRecords}
       />
 
-      <KnowledgeGenealogy
+      <section
+        id="knowledge-genealogy"
+        className="scroll-mt-24"
+      >
+        <KnowledgeGenealogy
         capsules={knowledgeCapsules}
         selectedCapsuleId={selectedCapsuleId}
+        selectedGenealogyNodeId={
+          selection?.kind === "genealogy-node"
+            ? selection.genealogyNodeId
+            : undefined
+        }
         onCapsuleSelect={handleCapsuleSelect}
-      />
+        onGenealogyNodeSelect={
+          handleGenealogyNodeSelect
+        }
+        />
+      </section>
 
-      <OrganizationalImpact
-        capsules={knowledgeCapsules}
-        records={knowledgeDistributionRecords}
-      />
+      <section
+        id="organizational-impact"
+        className="scroll-mt-24"
+      >
+        <OrganizationalImpact
+          capsules={knowledgeCapsules}
+          records={knowledgeDistributionRecords}
+        />
+      </section>
     </div>
   );
 }
