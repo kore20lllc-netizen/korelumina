@@ -138,10 +138,8 @@ export function KnowledgeCapsuleFlowEngine({
         (capsule) =>
           capsule.id === selectedCapsuleId,
       ) ??
-      filteredCapsules[0] ??
-      capsules[0],
+      filteredCapsules[0],
     [
-      capsules,
       filteredCapsules,
       selectedCapsuleId,
     ],
@@ -261,6 +259,32 @@ export function KnowledgeCapsuleFlowEngine({
           />
 
           <div className="relative grid gap-5">
+            {filteredCapsules.length === 0 ? (
+              <div
+                role="status"
+                className={[
+                  flagshipAppearance.capsuleFlowEmptyStation,
+                  "relative z-10 grid min-h-[220px] place-items-center rounded-[24px] px-6 py-12 text-center",
+                ].join(" ")}
+              >
+                <div className="max-w-xl">
+                  <ExecutivePremiumIcon
+                    icon={CircleAlert}
+                    state="warning"
+                  />
+
+                  <div className="mt-4 text-sm font-semibold text-amber-300">
+                    No Knowledge Packages match the active filters
+                  </div>
+
+                  <p className="mt-2 text-xs leading-5 text-sky-400/68">
+                    Remove one or more filters or clear the filter set to restore
+                    package visibility.
+                  </p>
+                </div>
+              </div>
+            ) : null}
+
             {[
               {
                 id: "source",
