@@ -159,9 +159,21 @@ function ProductionSectionNavigator() {
     const maxScrollLeft =
       navigator.scrollWidth - navigator.clientWidth;
 
-    setShowLeftFade(navigator.scrollLeft > 4);
-    setShowRightFade(
-      maxScrollLeft - navigator.scrollLeft > 4,
+    const nextShowLeftFade =
+      navigator.scrollLeft > 4;
+    const nextShowRightFade =
+      maxScrollLeft - navigator.scrollLeft > 4;
+
+    setShowLeftFade((current) =>
+      current === nextShowLeftFade
+        ? current
+        : nextShowLeftFade,
+    );
+
+    setShowRightFade((current) =>
+      current === nextShowRightFade
+        ? current
+        : nextShowRightFade,
     );
   }, []);
 
