@@ -346,9 +346,9 @@ export function CanonicalKnowledge() {
 
                 <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(260px,.42fr)]">
                   <div className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}>
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalPanelSurface,
+              ].join(" ")}>
                     <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-emerald-300/58">
                       Canonical rationale
                     </div>
@@ -368,9 +368,9 @@ export function CanonicalKnowledge() {
 
                   <div className="grid gap-3">
                     <div className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}>
+                      flagshipAppearance.canonicalSurface,
+                      flagshipAppearance.canonicalPanelSurface,
+                    ].join(" ")}>
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Supersession
                       </div>
@@ -380,9 +380,9 @@ export function CanonicalKnowledge() {
                     </div>
 
                     <div className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}>
+                      flagshipAppearance.canonicalSurface,
+                      flagshipAppearance.canonicalPanelSurface,
+                    ].join(" ")}>
                       <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                         Version
                       </div>
@@ -474,9 +474,9 @@ export function CanonicalKnowledge() {
               </LuminaStateSurface>
 
               <div className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}>
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalPanelSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
                   Retirement scheduled
                 </div>
