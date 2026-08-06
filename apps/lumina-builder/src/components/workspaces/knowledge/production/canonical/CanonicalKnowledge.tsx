@@ -48,9 +48,18 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+type CanonicalKnowledgeProps = {
+  selectedCanonicalId?: string;
+  onCanonicalSelect: (
+    capsuleId: string,
+    canonicalId: string,
+  ) => void;
+};
+
 const CANONICAL_CAPSULES = [
   {
     id: "KCAP-2026-042",
+    capsuleId: "capsule-144",
     title: "Runtime Isolation Recovery Standard",
     collection: "Runtime Architecture Canon",
     authority: "Architecture Council",
@@ -68,6 +77,7 @@ const CANONICAL_CAPSULES = [
   },
   {
     id: "KCAP-2026-031",
+    capsuleId: "capsule-145",
     title: "Knowledge Package Integrity Protocol",
     collection: "Knowledge Constitution",
     authority: "Constitutional Review Board",
@@ -85,6 +95,7 @@ const CANONICAL_CAPSULES = [
   },
   {
     id: "KCAP-2026-018",
+    capsuleId: "capsule-146",
     title: "Mission Recovery Evidence Standard",
     collection: "Mission Operations Canon",
     authority: "Mission Governance",
@@ -129,7 +140,10 @@ const compactCardClass = [
   electricContour.strength.standard,
 ].join(" ");
 
-export function CanonicalKnowledge() {
+export function CanonicalKnowledge({
+  selectedCanonicalId,
+  onCanonicalSelect,
+}: CanonicalKnowledgeProps) {
   return (
     <section
       aria-labelledby="canonical-knowledge-title"
@@ -267,14 +281,34 @@ export function CanonicalKnowledge() {
           </div>
 
           <div className="mt-5 grid gap-4">
-            {CANONICAL_CAPSULES.map((capsule) => (
-              <article
-                key={capsule.id}
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalArticleSurface,
-                ].join(" ")}
-              >
+            {CANONICAL_CAPSULES.map((capsule) => {
+              const selected =
+                selectedCanonicalId ===
+                capsule.id;
+
+              return (
+                <button
+                  type="button"
+                  key={capsule.id}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    onCanonicalSelect(
+                      capsule.capsuleId,
+                      capsule.id,
+                    )
+                  }
+                  className="block w-full text-left"
+                >
+                  <article
+                    className={[
+                      flagshipAppearance.canonicalSurface,
+                      flagshipAppearance.canonicalArticleSurface,
+                      "transition-[border-color,box-shadow,transform] duration-200",
+                      selected
+                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                    ].join(" ")}
+                  >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -392,8 +426,10 @@ export function CanonicalKnowledge() {
                     </div>
                   </div>
                 </div>
-              </article>
-            ))}
+                  </article>
+                </button>
+              );
+            })}
           </div>
         </LuminaStandardPremiumPanel>
 

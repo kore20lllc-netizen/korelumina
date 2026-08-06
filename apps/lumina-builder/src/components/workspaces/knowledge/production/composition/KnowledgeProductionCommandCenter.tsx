@@ -67,7 +67,8 @@ type KnowledgeSelectionKind =
   | "distribution-genealogy-summary"
   | "consumer-intelligence"
   | "memory-projection"
-  | "canonical-review";
+  | "canonical-review"
+  | "canonical-knowledge";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -84,6 +85,7 @@ interface KnowledgeProductionSelection {
   intelligenceConsumerId?: string;
   memoryProjectionId?: string;
   canonicalReviewId?: string;
+  canonicalKnowledgeId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -374,6 +376,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleCanonicalKnowledgeSelect(
+    capsuleId: string,
+    canonicalKnowledgeId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "canonical-knowledge",
+      canonicalKnowledgeId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -450,7 +463,16 @@ export function KnowledgeProductionCommandCenter() {
         id="canonical-knowledge"
         className="scroll-mt-24"
       >
-        <CanonicalKnowledge />
+        <CanonicalKnowledge
+          selectedCanonicalId={
+            selection?.kind === "canonical-knowledge"
+              ? selection.canonicalKnowledgeId
+              : undefined
+          }
+          onCanonicalSelect={
+            handleCanonicalKnowledgeSelect
+          }
+        />
       </section>
 
       <section
