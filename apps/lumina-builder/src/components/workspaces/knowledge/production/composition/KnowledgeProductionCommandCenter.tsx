@@ -157,13 +157,31 @@ function ProductionSectionNavigator() {
     <nav
       aria-label="Knowledge production sections"
       className={[
-        "sticky top-4 z-40 overflow-x-auto rounded-2xl border p-2",
+        "group relative sticky top-4 z-40 overflow-x-auto rounded-2xl border p-2",
         "border-cyan-300/70 ring-1 ring-inset ring-blue-400/35",
         "bg-slate-950/88",
         "shadow-[0_0_0_1px_rgba(34,211,238,0.16),0_0_30px_rgba(37,99,235,0.22),0_20px_60px_rgba(2,6,23,0.48)]",
         "backdrop-blur-2xl",
       ].join(" ")}
     >
+      <div
+        aria-hidden="true"
+        className={[
+          "pointer-events-none sticky left-0 z-10 -mb-full h-full w-8",
+          "bg-gradient-to-r from-slate-950/95 to-transparent",
+          "xl:hidden",
+        ].join(" ")}
+      />
+
+      <div
+        aria-hidden="true"
+        className={[
+          "pointer-events-none sticky right-0 z-10 float-right -mb-full h-full w-8",
+          "bg-gradient-to-l from-slate-950/95 to-transparent",
+          "xl:hidden",
+        ].join(" ")}
+      />
+
       <div className="grid min-w-[1040px] grid-cols-8 items-center gap-2 xl:min-w-0">
         {PRODUCTION_SECTIONS.map((section) => {
           const Icon = section.icon;
