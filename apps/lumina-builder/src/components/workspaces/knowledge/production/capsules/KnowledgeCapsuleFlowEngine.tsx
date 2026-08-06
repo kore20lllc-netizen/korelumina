@@ -169,7 +169,7 @@ export function KnowledgeCapsuleFlowEngine({
   const capsuleById = useMemo(
     () =>
       new Map(
-        capsules.flatMap((capsule) => [
+        filteredCapsules.flatMap((capsule) => [
           [
             capsule.id.toLowerCase(),
             capsule,
@@ -180,7 +180,7 @@ export function KnowledgeCapsuleFlowEngine({
           ] as const,
         ]),
       ),
-    [capsules],
+    [filteredCapsules],
   );
 
   const occupancyByStation = useMemo(() => {
@@ -189,7 +189,10 @@ export function KnowledgeCapsuleFlowEngine({
         const positions =
           capsuleManufacturingPositions.filter(
             (position) =>
-              position.station === station,
+              position.station === station &&
+              capsuleById.has(
+                position.capsuleId.toLowerCase(),
+              ),
           );
 
         const branchPositions =
@@ -197,7 +200,10 @@ export function KnowledgeCapsuleFlowEngine({
             (position) =>
               position.branches.filter(
                 (branch) =>
-                  branch.station === station,
+                  branch.station === station &&
+                  capsuleById.has(
+                    branch.parentCapsuleId.toLowerCase(),
+                  ),
               ),
           );
 
@@ -208,7 +214,7 @@ export function KnowledgeCapsuleFlowEngine({
         };
       },
     );
-  }, []);
+  }, [capsuleById]);
 
   return (
     <section
