@@ -39,6 +39,7 @@ type KnowledgeDistributionHubProps = {
   selectedCapsuleId: string;
   selectedConsumerId?: string;
   selectedHistoryEventId?: string;
+  selectedGenealogySummaryId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
   onConsumerSelect: (
     capsuleId: string,
@@ -47,6 +48,10 @@ type KnowledgeDistributionHubProps = {
   onHistoryEventSelect: (
     capsuleId: string,
     eventId: string,
+  ) => void;
+  onGenealogySummarySelect: (
+    capsuleId: string,
+    summaryId: string,
   ) => void;
 };
 
@@ -214,9 +219,11 @@ export function KnowledgeDistributionHub({
   selectedCapsuleId,
   selectedConsumerId,
   selectedHistoryEventId,
+  selectedGenealogySummaryId,
   onCapsuleSelect,
   onConsumerSelect,
   onHistoryEventSelect,
+  onGenealogySummarySelect,
 }: KnowledgeDistributionHubProps) {
   const record =
     records.find(
@@ -441,41 +448,99 @@ export function KnowledgeDistributionHub({
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] uppercase tracking-[0.13em] text-violet-300/58">
-                  Parents
-                </div>
-                <div className="mt-2 text-sm font-semibold text-violet-100">
-                  {record.genealogy.parentCapsuleIds.length}
-                </div>
-              </LuminaStandardPremiumCard>
+              {[
+                {
+                  id: "distribution-genealogy-parents",
+                  label: "Parents",
+                  value:
+                    record.genealogy.parentCapsuleIds
+                      .length,
+                  tone:
+                    "text-violet-300/58",
+                  valueTone:
+                    "text-violet-100",
+                },
+                {
+                  id: "distribution-genealogy-children",
+                  label: "Children",
+                  value:
+                    record.genealogy.childCapsuleIds
+                      .length,
+                  tone:
+                    "text-emerald-300/58",
+                  valueTone:
+                    "text-emerald-100",
+                },
+                {
+                  id: "distribution-genealogy-missions",
+                  label: "Missions",
+                  value:
+                    record.genealogy.relatedMissions
+                      .length,
+                  tone:
+                    "text-cyan-300/58",
+                  valueTone:
+                    "text-cyan-100",
+                },
+                {
+                  id: "distribution-genealogy-education",
+                  label: "Educational influence",
+                  value:
+                    record.genealogy
+                      .educationalInfluence.length,
+                  tone:
+                    "text-amber-300/58",
+                  valueTone:
+                    "text-amber-100",
+                },
+              ].map((summary) => {
+                const selected =
+                  selectedGenealogySummaryId ===
+                  summary.id;
 
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/58">
-                  Children
-                </div>
-                <div className="mt-2 text-sm font-semibold text-emerald-100">
-                  {record.genealogy.childCapsuleIds.length}
-                </div>
-              </LuminaStandardPremiumCard>
+                return (
+                  <button
+                    type="button"
+                    key={summary.id}
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onGenealogySummarySelect(
+                        record.capsuleId,
+                        summary.id,
+                      )
+                    }
+                    className="block w-full text-left"
+                  >
+                    <LuminaStandardPremiumCard
+                      className={[
+                        electricContour.card,
+                        "h-full transition-[border-color,box-shadow,transform] duration-200",
+                        selected
+                          ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                          : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                      ].join(" ")}
+                    >
+                      <div
+                        className={[
+                          "text-[9px] uppercase tracking-[0.13em]",
+                          summary.tone,
+                        ].join(" ")}
+                      >
+                        {summary.label}
+                      </div>
 
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] uppercase tracking-[0.13em] text-cyan-300/58">
-                  Missions
-                </div>
-                <div className="mt-2 text-sm font-semibold text-cyan-100">
-                  {record.genealogy.relatedMissions.length}
-                </div>
-              </LuminaStandardPremiumCard>
-
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] uppercase tracking-[0.13em] text-amber-300/58">
-                  Educational influence
-                </div>
-                <div className="mt-2 text-sm font-semibold text-amber-100">
-                  {record.genealogy.educationalInfluence.length}
-                </div>
-              </LuminaStandardPremiumCard>
+                      <div
+                        className={[
+                          "mt-2 text-sm font-semibold",
+                          summary.valueTone,
+                        ].join(" ")}
+                      >
+                        {summary.value}
+                      </div>
+                    </LuminaStandardPremiumCard>
+                  </button>
+                );
+              })}
             </div>
           </section>
         </div>

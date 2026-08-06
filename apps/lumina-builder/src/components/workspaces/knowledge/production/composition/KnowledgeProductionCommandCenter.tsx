@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import {
+  ArrowUp,
   BookOpenCheck,
   Boxes,
   GitBranch,
@@ -62,7 +63,8 @@ type KnowledgeSelectionKind =
   | "genealogy-node"
   | "impact-outcome"
   | "distribution-consumer"
-  | "distribution-event";
+  | "distribution-event"
+  | "distribution-genealogy-summary";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -75,6 +77,7 @@ interface KnowledgeProductionSelection {
   impactOutcomeId?: string;
   consumerId?: string;
   distributionEventId?: string;
+  distributionGenealogySummaryId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -171,6 +174,44 @@ function ProductionSectionNavigator() {
         })}
       </div>
     </nav>
+  );
+}
+
+function BackToTopButton() {
+  function handleBackToTop() {
+    document
+      .getElementById(
+        "knowledge-production-top",
+      )
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }
+
+  return (
+    <button
+      type="button"
+      aria-label="Back to top"
+      onClick={handleBackToTop}
+      className={[
+        "fixed bottom-6 right-6 z-50",
+        "inline-flex h-12 items-center gap-2 rounded-2xl border px-4",
+        "border-cyan-300/72 ring-1 ring-inset ring-blue-400/38",
+        "bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.96))]",
+        "text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-100",
+        "shadow-[0_0_0_1px_rgba(34,211,238,0.16),0_0_28px_rgba(37,99,235,0.28),0_18px_48px_rgba(2,6,23,0.52)]",
+        "backdrop-blur-2xl",
+        "transition-[border-color,color,box-shadow,transform] duration-200",
+        "hover:border-cyan-200/95 hover:text-white",
+        "hover:shadow-[0_0_0_1px_rgba(34,211,238,0.22),0_0_34px_rgba(37,99,235,0.36),0_20px_54px_rgba(2,6,23,0.58)]",
+        "active:translate-y-px",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/80",
+      ].join(" ")}
+    >
+      <ArrowUp className="h-4 w-4" />
+      <span>Back to top</span>
+    </button>
   );
 }
 
@@ -283,6 +324,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleDistributionGenealogySummarySelect(
+    capsuleId: string,
+    distributionGenealogySummaryId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "distribution-genealogy-summary",
+      distributionGenealogySummaryId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -299,8 +351,12 @@ export function KnowledgeProductionCommandCenter() {
   }
 
   return (
-    <div className="grid gap-6">
+    <div
+      id="knowledge-production-top"
+      className="grid scroll-mt-6 gap-6"
+    >
       <ProductionSectionNavigator />
+      <BackToTopButton />
 
       <section
         id="knowledge-flow-engine"
@@ -386,12 +442,21 @@ export function KnowledgeProductionCommandCenter() {
               ? selection.distributionEventId
               : undefined
           }
+          selectedGenealogySummaryId={
+            selection?.kind ===
+            "distribution-genealogy-summary"
+              ? selection.distributionGenealogySummaryId
+              : undefined
+          }
           onCapsuleSelect={handleCapsuleSelect}
           onConsumerSelect={
             handleDistributionConsumerSelect
           }
           onHistoryEventSelect={
             handleDistributionEventSelect
+          }
+          onGenealogySummarySelect={
+            handleDistributionGenealogySummarySelect
           }
         />
       </section>
