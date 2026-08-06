@@ -144,12 +144,19 @@ export function KnowledgeCapsuleFlowEngine({
   ]);
 
   const selectedCapsule = useMemo(
-    () =>
-      filteredCapsules.find(
-        (capsule) =>
-          capsule.id === selectedCapsuleId,
-      ) ??
-      filteredCapsules[0],
+    () => {
+      if (!selectedCapsuleId) {
+        return undefined;
+      }
+
+      return (
+        filteredCapsules.find(
+          (capsule) =>
+            capsule.id === selectedCapsuleId,
+        ) ??
+        filteredCapsules[0]
+      );
+    },
     [
       filteredCapsules,
       selectedCapsuleId,
