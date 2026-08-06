@@ -93,6 +93,33 @@ export const flagshipAppearance = {
     "ring-1 ring-inset ring-cyan-100/6",
   ].join(" "),
 
+  canonicalSurface: [
+    "border border-blue-400/56",
+    "bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))]",
+    "ring-1 ring-inset ring-cyan-300/14",
+  ].join(" "),
+
+  canonicalMetricSurface: [
+    "rounded-[18px]",
+    "px-4 py-3",
+  ].join(" "),
+
+  canonicalArticleSurface: [
+    "rounded-[22px]",
+    "p-4",
+    "shadow-[0_16px_38px_rgba(2,8,23,.24)]",
+  ].join(" "),
+
+  canonicalDetailSurface: [
+    "rounded-[16px]",
+    "p-3",
+  ].join(" "),
+
+  canonicalPanelSurface: [
+    "rounded-[18px]",
+    "p-4",
+  ].join(" "),
+
   iconBox: [
     "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border",
     "border-cyan-300/38 bg-cyan-300/[0.08] text-cyan-200",
