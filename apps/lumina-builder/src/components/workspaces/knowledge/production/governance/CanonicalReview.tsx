@@ -1,4 +1,8 @@
 import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
+import {
   AlertTriangle,
   BadgeCheck,
   CheckCircle2,
@@ -181,7 +185,10 @@ export function CanonicalReview() {
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+              <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalMetricSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
                   Awaiting review
                 </div>
@@ -190,7 +197,10 @@ export function CanonicalReview() {
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+              <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalMetricSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
                   Conflicts
                 </div>
@@ -199,7 +209,10 @@ export function CanonicalReview() {
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+              <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalMetricSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                   Reviewers active
                 </div>
@@ -208,7 +221,10 @@ export function CanonicalReview() {
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] px-4 py-3 ring-1 ring-inset ring-cyan-300/14">
+              <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalMetricSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                   Ready to publish
                 </div>
@@ -284,7 +300,10 @@ export function CanonicalReview() {
             {REVIEW_QUEUE.map((item) => (
               <article
                 key={item.id}
-                className="rounded-[22px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4 shadow-[0_16px_38px_rgba(2,8,23,.24)]"
+                className={[
+                  flagshipAppearance.canonicalSurface,
+                  flagshipAppearance.canonicalArticleSurface,
+                ].join(" ")}
               >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
@@ -317,7 +336,10 @@ export function CanonicalReview() {
                   </div>
 
                   <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[360px]">
-                    <div className="rounded-[16px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-3">
+                    <div className={[
+                      flagshipAppearance.canonicalSurface,
+                      flagshipAppearance.canonicalDetailSurface,
+                    ].join(" ")}>
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Required reviewers
                       </div>
@@ -387,7 +409,11 @@ export function CanonicalReview() {
               {AUTHORITIES.map((authority, index) => (
                 <div
                   key={authority.title}
-                  className="relative rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4"
+                  className={[
+                    "relative",
+                    flagshipAppearance.canonicalSurface,
+                    flagshipAppearance.canonicalPanelSurface,
+                  ].join(" ")}
                 >
                   {index < AUTHORITIES.length - 1 ? (
                     <div className="absolute left-7 top-full h-3 w-px bg-violet-300/24" />
@@ -427,7 +453,10 @@ export function CanonicalReview() {
             </div>
 
             <div className="mt-5 grid gap-3">
-              <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
+              <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalPanelSurface,
+              ].join(" ")}>
                 <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/48">
                   Current canonical capsule
                 </div>
@@ -533,7 +562,10 @@ export function CanonicalReview() {
           </div>
 
           <div className="mt-5 grid gap-3">
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
+            <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalPanelSurface,
+              ].join(" ")}>
               <div className="text-xs font-semibold text-white">
                 Resolve constitutional interpretation
               </div>
@@ -543,7 +575,10 @@ export function CanonicalReview() {
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-blue-400/56 bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))] ring-1 ring-inset ring-cyan-300/14 p-4">
+            <div className={[
+                flagshipAppearance.canonicalSurface,
+                flagshipAppearance.canonicalPanelSurface,
+              ].join(" ")}>
               <div className="text-xs font-semibold text-white">
                 Confirm supersession boundary
               </div>
