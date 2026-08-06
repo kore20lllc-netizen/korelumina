@@ -64,7 +64,8 @@ type KnowledgeSelectionKind =
   | "impact-outcome"
   | "distribution-consumer"
   | "distribution-event"
-  | "distribution-genealogy-summary";
+  | "distribution-genealogy-summary"
+  | "consumer-intelligence";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -78,6 +79,7 @@ interface KnowledgeProductionSelection {
   consumerId?: string;
   distributionEventId?: string;
   distributionGenealogySummaryId?: string;
+  intelligenceConsumerId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -335,6 +337,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleConsumerIntelligenceSelect(
+    capsuleId: string,
+    intelligenceConsumerId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "consumer-intelligence",
+      intelligenceConsumerId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -463,6 +476,14 @@ export function KnowledgeProductionCommandCenter() {
 
       <ConsumerIntelligence
         records={knowledgeDistributionRecords}
+        selectedConsumerId={
+          selection?.kind === "consumer-intelligence"
+            ? selection.intelligenceConsumerId
+            : undefined
+        }
+        onConsumerSelect={
+          handleConsumerIntelligenceSelect
+        }
       />
 
       <section

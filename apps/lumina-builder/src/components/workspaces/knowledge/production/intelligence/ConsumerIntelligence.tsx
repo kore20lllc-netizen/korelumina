@@ -56,6 +56,11 @@ import type {
 
 type ConsumerIntelligenceProps = {
   records: KnowledgeDistributionRecord[];
+  selectedConsumerId?: string;
+  onConsumerSelect: (
+    capsuleId: string,
+    consumerId: string,
+  ) => void;
 };
 
 const consumerIcons = {
@@ -162,6 +167,8 @@ const usagePatterns = [
 
 export function ConsumerIntelligence({
   records,
+  selectedConsumerId,
+  onConsumerSelect,
 }: ConsumerIntelligenceProps) {
   const record = records[0];
 
@@ -304,15 +311,34 @@ export function ConsumerIntelligence({
                   row.consumerId as keyof typeof consumerIcons
                 ] ?? Network;
 
+              const selected =
+                selectedConsumerId ===
+                row.consumerId;
+
               return (
-                <article
+                <button
+                  type="button"
                   key={row.consumerId}
-                  className={[
-                    "rounded-[22px] p-4",
-                    premiumSurfaces.base.card,
-                    electricContour.strength.standard,
-                  ].join(" ")}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    onConsumerSelect(
+                      record.capsuleId,
+                      row.consumerId,
+                    )
+                  }
+                  className="block w-full text-left"
                 >
+                  <article
+                    className={[
+                      "rounded-[22px] p-4",
+                      premiumSurfaces.base.card,
+                      electricContour.strength.standard,
+                      "transition-[border-color,box-shadow,transform] duration-200",
+                      selected
+                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                    ].join(" ")}
+                  >
                   <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                     <div className="flex min-w-0 items-start gap-3">
                       <ExecutivePremiumIcon
@@ -373,7 +399,8 @@ export function ConsumerIntelligence({
                       </div>
                     </div>
                   </div>
-                </article>
+                  </article>
+                </button>
               );
             })}
           </div>
