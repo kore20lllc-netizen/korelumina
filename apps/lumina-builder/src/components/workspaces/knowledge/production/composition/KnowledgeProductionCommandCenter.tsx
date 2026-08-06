@@ -251,7 +251,7 @@ export function KnowledgeProductionCommandCenter() {
   );
 
   useEffect(() => {
-    if (!selection || !selectedCapsule) {
+    if (!selectedCapsuleId || !selectedCapsule) {
       return;
     }
 
@@ -269,7 +269,10 @@ export function KnowledgeProductionCommandCenter() {
     return () => {
       cancelAnimationFrame(frame);
     };
-  }, [selection, selectedCapsule]);
+  }, [
+    selectedCapsule,
+    selectedCapsuleId,
+  ]);
 
   function handleGraphNodeSelect(
     capsuleId: string,
