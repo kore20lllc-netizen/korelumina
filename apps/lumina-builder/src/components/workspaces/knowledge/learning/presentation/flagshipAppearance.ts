@@ -277,8 +277,9 @@ export const flagshipAppearance = {
   capsuleButton: [
     "group relative w-full text-left",
     "focus-visible:outline-none",
-    "focus-visible:ring-2 focus-visible:ring-cyan-300",
+    "focus-visible:ring-2 focus-visible:ring-amber-300/90",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+    "focus-visible:shadow-[0_0_24px_rgba(251,191,36,0.22)]",
   ].join(" "),
 
   capsuleShell: [
