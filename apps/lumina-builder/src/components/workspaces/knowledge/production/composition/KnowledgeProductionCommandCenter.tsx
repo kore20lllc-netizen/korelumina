@@ -156,7 +156,7 @@ function ProductionSectionNavigator() {
         "backdrop-blur-2xl",
       ].join(" ")}
     >
-      <div className="grid grid-cols-2 items-center gap-2 sm:grid-cols-4 xl:grid-cols-8">
+      <div className="grid min-w-[1040px] grid-cols-8 items-center gap-2 xl:min-w-0">
         {PRODUCTION_SECTIONS.map((section) => {
           const Icon = section.icon;
 
