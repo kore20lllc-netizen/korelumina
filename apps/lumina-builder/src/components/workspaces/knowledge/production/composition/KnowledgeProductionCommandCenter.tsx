@@ -149,6 +149,8 @@ function ProductionSectionNavigator() {
   const scrollFrameRef = useRef<number | null>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
+  const [activeSectionId, setActiveSectionId] =
+    useState<string>(PRODUCTION_SECTIONS[0].id);
 
   const updateOverflowAffordance = useCallback(() => {
     const navigator = navigatorRef.current;
@@ -238,7 +240,101 @@ function ProductionSectionNavigator() {
     };
   }, [updateOverflowAffordance]);
 
+  useEffect(() => {
+    const sections = PRODUCTION_SECTIONS
+      .map((section) =>
+        document.getElementById(section.id),
+      )
+      .filter(
+        (section): section is HTMLElement =>
+          section !== null,
+      );
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    let sectionFrame: number | null = null;
+
+    const updateActiveSection = () => {
+      sectionFrame = null;
+
+      const activationLine = 112;
+
+      let nextSectionId =
+        sections[0].id;
+      let nearestDistance =
+        Number.POSITIVE_INFINITY;
+
+      for (const section of sections) {
+        const rect =
+          section.getBoundingClientRect();
+
+        if (rect.bottom <= activationLine) {
+          continue;
+        }
+
+        const distance =
+          Math.abs(rect.top - activationLine);
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nextSectionId = section.id;
+        }
+      }
+
+      setActiveSectionId((current) =>
+        current === nextSectionId
+          ? current
+          : nextSectionId,
+      );
+    };
+
+    const scheduleActiveSectionUpdate = () => {
+      if (sectionFrame !== null) {
+        return;
+      }
+
+      sectionFrame =
+        requestAnimationFrame(
+          updateActiveSection,
+        );
+    };
+
+    updateActiveSection();
+
+    window.addEventListener(
+      "scroll",
+      scheduleActiveSectionUpdate,
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "resize",
+      scheduleActiveSectionUpdate,
+      { passive: true },
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        scheduleActiveSectionUpdate,
+      );
+
+      window.removeEventListener(
+        "resize",
+        scheduleActiveSectionUpdate,
+      );
+
+      if (sectionFrame !== null) {
+        cancelAnimationFrame(sectionFrame);
+      }
+    };
+  }, []);
+
   function handleNavigate(sectionId: string) {
+    setActiveSectionId(sectionId);
+
     document
       .getElementById(sectionId)
       ?.scrollIntoView({
@@ -294,13 +390,19 @@ function ProductionSectionNavigator() {
             <button
               key={section.id}
               type="button"
+              aria-current={
+                activeSectionId === section.id
+                  ? "location"
+                  : undefined
+              }
               onClick={() => handleNavigate(section.id)}
               className={[
                 "inline-flex h-9 w-full min-w-0 items-center justify-center gap-2 rounded-xl border px-3",
                 "text-[10px] font-semibold uppercase tracking-[0.12em]",
                 "border-cyan-300/62 ring-1 ring-inset ring-blue-400/28",
-                "bg-[linear-gradient(180deg,rgba(146,64,14,0.96),rgba(92,36,5,0.96))] text-amber-100",
-                "shadow-[inset_0_1px_0_rgba(251,191,36,0.16),0_0_18px_rgba(37,99,235,0.16)]",
+                activeSectionId === section.id
+                  ? "border-amber-200 bg-[linear-gradient(180deg,rgba(217,119,6,0.99),rgba(146,64,14,0.99))] text-amber-50 ring-1 ring-inset ring-amber-300/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_0_30px_rgba(251,191,36,0.34),0_0_18px_rgba(37,99,235,0.18)]"
+                  : "border-cyan-300/62 bg-[linear-gradient(180deg,rgba(146,64,14,0.96),rgba(92,36,5,0.96))] text-amber-100 ring-1 ring-inset ring-blue-400/28 shadow-[inset_0_1px_0_rgba(251,191,36,0.16),0_0_18px_rgba(37,99,235,0.16)]",
                 "transition-[border-color,background-color,color,box-shadow,transform] duration-200",
                 "hover:border-cyan-200/90 hover:bg-[linear-gradient(180deg,rgba(146,64,14,0.98),rgba(92,36,5,0.98))] hover:text-amber-50",
                 "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_24px_rgba(37,99,235,0.24)]",
