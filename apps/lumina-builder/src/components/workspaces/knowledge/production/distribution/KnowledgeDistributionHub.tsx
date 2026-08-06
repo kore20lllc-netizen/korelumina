@@ -38,10 +38,15 @@ type KnowledgeDistributionHubProps = {
   records: KnowledgeDistributionRecord[];
   selectedCapsuleId: string;
   selectedConsumerId?: string;
+  selectedHistoryEventId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
   onConsumerSelect: (
     capsuleId: string,
     consumerId: string,
+  ) => void;
+  onHistoryEventSelect: (
+    capsuleId: string,
+    eventId: string,
   ) => void;
 };
 
@@ -208,8 +213,10 @@ export function KnowledgeDistributionHub({
   records,
   selectedCapsuleId,
   selectedConsumerId,
+  selectedHistoryEventId,
   onCapsuleSelect,
   onConsumerSelect,
+  onHistoryEventSelect,
 }: KnowledgeDistributionHubProps) {
   const record =
     records.find(
@@ -380,26 +387,51 @@ export function KnowledgeDistributionHub({
             </div>
 
             <div className="mt-4 grid gap-3 lg:grid-cols-2">
-              {record.history.map((event) => (
-                <LuminaStandardPremiumCard
-                  as="article"
-                  key={event.id}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs font-semibold text-amber-300">
-                      {event.consumer}
-                    </div>
+              {record.history.map((event) => {
+                const selected =
+                  selectedHistoryEventId ===
+                  event.id;
 
-                    <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/54">
-                      {event.action}
-                    </div>
-                  </div>
+                return (
+                  <button
+                    type="button"
+                    key={event.id}
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onHistoryEventSelect(
+                        record.capsuleId,
+                        event.id,
+                      )
+                    }
+                    className="block w-full text-left"
+                  >
+                    <LuminaStandardPremiumCard
+                      as="article"
+                      className={[
+                        electricContour.card,
+                        "h-full transition-[border-color,box-shadow,transform] duration-200",
+                        selected
+                          ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                          : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                      ].join(" ")}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="text-xs font-semibold text-amber-300">
+                          {event.consumer}
+                        </div>
 
-                  <p className="mt-2 text-xs leading-5 text-sky-400/72">
-                    {event.detail}
-                  </p>
-                </LuminaStandardPremiumCard>
-              ))}
+                        <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/54">
+                          {event.action}
+                        </div>
+                      </div>
+
+                      <p className="mt-2 text-xs leading-5 text-sky-400/72">
+                        {event.detail}
+                      </p>
+                    </LuminaStandardPremiumCard>
+                  </button>
+                );
+              })}
             </div>
           </section>
 

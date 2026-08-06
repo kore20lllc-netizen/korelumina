@@ -61,7 +61,8 @@ type KnowledgeSelectionKind =
   | "timeline-event"
   | "genealogy-node"
   | "impact-outcome"
-  | "distribution-consumer";
+  | "distribution-consumer"
+  | "distribution-event";
 
 interface KnowledgeProductionSelection {
   capsuleId: string;
@@ -73,6 +74,7 @@ interface KnowledgeProductionSelection {
   genealogyNodeId?: string;
   impactOutcomeId?: string;
   consumerId?: string;
+  distributionEventId?: string;
 }
 
 const PRODUCTION_SECTIONS = [
@@ -270,6 +272,17 @@ export function KnowledgeProductionCommandCenter() {
     });
   }
 
+  function handleDistributionEventSelect(
+    capsuleId: string,
+    distributionEventId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "distribution-event",
+      distributionEventId,
+    });
+  }
+
   function handleCapsuleSelect(
     capsuleId: string,
   ) {
@@ -368,9 +381,17 @@ export function KnowledgeProductionCommandCenter() {
               ? selection.consumerId
               : undefined
           }
+          selectedHistoryEventId={
+            selection?.kind === "distribution-event"
+              ? selection.distributionEventId
+              : undefined
+          }
           onCapsuleSelect={handleCapsuleSelect}
           onConsumerSelect={
             handleDistributionConsumerSelect
+          }
+          onHistoryEventSelect={
+            handleDistributionEventSelect
           }
         />
       </section>
