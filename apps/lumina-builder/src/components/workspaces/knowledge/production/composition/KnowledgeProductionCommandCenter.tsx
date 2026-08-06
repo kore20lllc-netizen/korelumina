@@ -146,6 +146,7 @@ function getScrollBehavior(): ScrollBehavior {
 function ProductionSectionNavigator() {
   const navigatorRef = useRef<HTMLElement | null>(null);
   const navigatorContentRef = useRef<HTMLDivElement | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
 
@@ -186,9 +187,21 @@ function ProductionSectionNavigator() {
       return;
     }
 
+    const handleScroll = () => {
+      if (scrollFrameRef.current !== null) {
+        return;
+      }
+
+      scrollFrameRef.current =
+        requestAnimationFrame(() => {
+          scrollFrameRef.current = null;
+          updateOverflowAffordance();
+        });
+    };
+
     navigator.addEventListener(
       "scroll",
-      updateOverflowAffordance,
+      handleScroll,
       { passive: true },
     );
 
@@ -211,8 +224,15 @@ function ProductionSectionNavigator() {
     return () => {
       navigator.removeEventListener(
         "scroll",
-        updateOverflowAffordance,
+        handleScroll,
       );
+
+      if (scrollFrameRef.current !== null) {
+        cancelAnimationFrame(
+          scrollFrameRef.current,
+        );
+        scrollFrameRef.current = null;
+      }
 
       resizeObserver.disconnect();
     };
