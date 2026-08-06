@@ -38,7 +38,10 @@ type KnowledgeCapsuleFlowEngineProps = {
   selectedCapsuleId: string;
   selectedStationId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
-  onStationSelect: (stationId: string) => void;
+  onStationSelect: (
+    stationId: string,
+    capsuleId: string | null,
+  ) => void;
   onVisibleCapsuleChange: (
     capsuleId: string | null,
   ) => void;
@@ -456,9 +459,29 @@ export function KnowledgeCapsuleFlowEngine({
                             <button
                               type="button"
                               aria-pressed={selectedStationId === station}
-                              onClick={() =>
-                                onStationSelect(station)
-                              }
+                              onClick={() => {
+                                const visibleCapsule =
+                                  positions
+                                    .map((position) =>
+                                      capsuleById.get(
+                                        position.capsuleId.toLowerCase(),
+                                      ),
+                                    )
+                                    .find(Boolean) ??
+                                  branchPositions
+                                    .map((branch) =>
+                                      capsuleById.get(
+                                        branch.parentCapsuleId.toLowerCase(),
+                                      ),
+                                    )
+                                    .find(Boolean) ??
+                                  null;
+
+                                onStationSelect(
+                                  station,
+                                  visibleCapsule?.id ?? null,
+                                );
+                              }}
                               className="flex w-full items-start justify-between gap-3 text-left"
                             >
                               <div>

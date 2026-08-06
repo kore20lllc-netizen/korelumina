@@ -443,22 +443,17 @@ export function KnowledgeProductionCommandCenter() {
 
   function handleStationSelect(
     stationId: string,
+    capsuleId: string | null,
   ) {
-    inspectorClosedByUserRef.current =
-      false;
-
-    const capsule =
-      knowledgeCapsules.find(
-        (candidate) =>
-          candidate.stage === stationId,
-      ) ?? selectedCapsule;
-
-    if (!capsule) {
+    if (!capsuleId) {
       return;
     }
 
+    inspectorClosedByUserRef.current =
+      false;
+
     setSelection({
-      capsuleId: capsule.id,
+      capsuleId,
       kind: "station",
       stationId,
     });
