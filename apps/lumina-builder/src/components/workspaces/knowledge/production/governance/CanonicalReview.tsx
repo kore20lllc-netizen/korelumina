@@ -49,9 +49,18 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+type CanonicalReviewProps = {
+  selectedReviewId?: string;
+  onReviewSelect: (
+    capsuleId: string,
+    reviewId: string,
+  ) => void;
+};
+
 const REVIEW_QUEUE = [
   {
     id: "KCAP-2026-042",
+    capsuleId: "capsule-144",
     title: "Runtime Isolation Recovery Standard",
     domain: "Runtime Architecture",
     authority: "Architecture Council",
@@ -63,6 +72,7 @@ const REVIEW_QUEUE = [
   },
   {
     id: "KCAP-2026-039",
+    capsuleId: null,
     title: "Knowledge Package Integrity Protocol",
     domain: "Knowledge Constitution",
     authority: "Constitutional Review Board",
@@ -74,6 +84,7 @@ const REVIEW_QUEUE = [
   },
   {
     id: "KCAP-2026-036",
+    capsuleId: null,
     title: "Mission Recovery Evidence Standard",
     domain: "Mission System",
     authority: "Mission Governance",
@@ -146,7 +157,10 @@ const compactCardClass = [
   electricContour.strength.standard,
 ].join(" ");
 
-export function CanonicalReview() {
+export function CanonicalReview({
+  selectedReviewId,
+  onReviewSelect,
+}: CanonicalReviewProps) {
   return (
     <section
       aria-labelledby="canonical-review-title"
@@ -297,14 +311,28 @@ export function CanonicalReview() {
           />
 
           <div className="mt-5 grid gap-4">
-            {REVIEW_QUEUE.map((item) => (
-              <article
-                key={item.id}
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalArticleSurface,
-                ].join(" ")}
-              >
+            {REVIEW_QUEUE.map((item) => {
+              const selectable =
+                item.capsuleId !== null;
+              const selected =
+                selectable &&
+                selectedReviewId === item.id;
+
+              const article = (
+                <article
+                  className={[
+                    flagshipAppearance.canonicalSurface,
+                    flagshipAppearance.canonicalArticleSurface,
+                    selectable
+                      ? "transition-[border-color,box-shadow,transform] duration-200"
+                      : "",
+                    selected
+                      ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                      : selectable
+                        ? "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45"
+                        : "",
+                  ].join(" ")}
+                >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -381,8 +409,34 @@ export function CanonicalReview() {
                     />
                   </div>
                 </div>
-              </article>
-            ))}
+                </article>
+              );
+
+              if (!item.capsuleId) {
+                return (
+                  <div key={item.id}>
+                    {article}
+                  </div>
+                );
+              }
+
+              return (
+                <button
+                  type="button"
+                  key={item.id}
+                  aria-pressed={selected}
+                  onClick={() =>
+                    onReviewSelect(
+                      item.capsuleId,
+                      item.id,
+                    )
+                  }
+                  className="block w-full text-left"
+                >
+                  {article}
+                </button>
+              );
+            })}
           </div>
           </LuminaStandardPremiumPanel>
         }
