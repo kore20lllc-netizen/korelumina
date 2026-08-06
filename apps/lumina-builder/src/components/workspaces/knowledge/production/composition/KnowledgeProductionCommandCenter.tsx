@@ -144,6 +144,59 @@ function getScrollBehavior(): ScrollBehavior {
 }
 
 function ProductionSectionNavigator() {
+  const navigatorRef = useRef<HTMLElement | null>(null);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(false);
+
+  const updateOverflowAffordance = useCallback(() => {
+    const navigator = navigatorRef.current;
+
+    if (!navigator) {
+      return;
+    }
+
+    const maxScrollLeft =
+      navigator.scrollWidth - navigator.clientWidth;
+
+    setShowLeftFade(navigator.scrollLeft > 4);
+    setShowRightFade(
+      maxScrollLeft - navigator.scrollLeft > 4,
+    );
+  }, []);
+
+  useEffect(() => {
+    updateOverflowAffordance();
+
+    const navigator = navigatorRef.current;
+
+    if (!navigator) {
+      return;
+    }
+
+    navigator.addEventListener(
+      "scroll",
+      updateOverflowAffordance,
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "resize",
+      updateOverflowAffordance,
+    );
+
+    return () => {
+      navigator.removeEventListener(
+        "scroll",
+        updateOverflowAffordance,
+      );
+
+      window.removeEventListener(
+        "resize",
+        updateOverflowAffordance,
+      );
+    };
+  }, [updateOverflowAffordance]);
+
   function handleNavigate(sectionId: string) {
     document
       .getElementById(sectionId)
@@ -155,6 +208,7 @@ function ProductionSectionNavigator() {
 
   return (
     <nav
+      ref={navigatorRef}
       aria-label="Knowledge production sections"
       className={[
         "group relative sticky top-4 z-40 overflow-x-auto rounded-2xl border p-2",
@@ -169,7 +223,10 @@ function ProductionSectionNavigator() {
         className={[
           "pointer-events-none sticky left-0 z-10 -mb-full h-full w-8",
           "bg-gradient-to-r from-slate-950/95 to-transparent",
-          "xl:hidden",
+          "transition-opacity duration-200 xl:hidden",
+          showLeftFade
+            ? "opacity-100"
+            : "opacity-0",
         ].join(" ")}
       />
 
@@ -178,7 +235,10 @@ function ProductionSectionNavigator() {
         className={[
           "pointer-events-none sticky right-0 z-10 float-right -mb-full h-full w-8",
           "bg-gradient-to-l from-slate-950/95 to-transparent",
-          "xl:hidden",
+          "transition-opacity duration-200 xl:hidden",
+          showRightFade
+            ? "opacity-100"
+            : "opacity-0",
         ].join(" ")}
       />
 
