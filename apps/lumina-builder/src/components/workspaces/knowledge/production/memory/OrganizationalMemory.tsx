@@ -121,6 +121,12 @@ const summaries = [
   },
 ];
 
+const projectionArticleClass = [
+  "rounded-[22px] p-4",
+  premiumSurfaces.base.card,
+  electricContour.strength.standard,
+].join(" ");
+
 const compactCardClass = [
   "rounded-[16px] p-3",
   premiumSurfaces.base.card,
@@ -235,11 +241,7 @@ export function OrganizationalMemory() {
             {projections.map((projection) => (
               <article
                 key={projection.title}
-                className={[
-                  "rounded-[22px] p-4",
-                  premiumSurfaces.base.card,
-                  electricContour.strength.standard,
-                ].join(" ")}
+                className={projectionArticleClass}
               >
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
