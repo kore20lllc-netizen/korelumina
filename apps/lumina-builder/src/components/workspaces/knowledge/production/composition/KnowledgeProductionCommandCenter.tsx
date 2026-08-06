@@ -176,6 +176,19 @@ export function KnowledgeProductionCommandCenter() {
     [selectedCapsuleId],
   );
 
+  function revealInspector() {
+    requestAnimationFrame(() => {
+      document
+        .getElementById(
+          "knowledge-capsule-inspector",
+        )
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    });
+  }
+
   function handleGraphNodeSelect(
     capsuleId: string,
     graphNodeId: string,
@@ -185,6 +198,8 @@ export function KnowledgeProductionCommandCenter() {
       kind: "graph-node",
       graphNodeId,
     });
+
+    revealInspector();
   }
 
   function handleCapsuleSelect(
@@ -200,16 +215,7 @@ export function KnowledgeProductionCommandCenter() {
           },
     );
 
-    requestAnimationFrame(() => {
-      document
-        .getElementById(
-          "knowledge-capsule-inspector",
-        )
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-    });
+    revealInspector();
   }
 
   return (
