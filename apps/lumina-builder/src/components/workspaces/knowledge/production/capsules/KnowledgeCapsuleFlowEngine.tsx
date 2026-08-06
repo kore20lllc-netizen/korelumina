@@ -17,7 +17,12 @@ import {
 } from "./KnowledgeCapsule";
 
 import {
+  emptyKnowledgeCapsuleFilters,
   KnowledgeCapsuleFilters,
+} from "./KnowledgeCapsuleFilters";
+
+import type {
+  KnowledgeCapsuleFilterState,
 } from "./KnowledgeCapsuleFilters";
 
 import {
@@ -72,36 +77,54 @@ export function KnowledgeCapsuleFlowEngine({
   const [
     filters,
     setFilters,
-  ] = useState<Record<string, string[]>>({});
+  ] = useState<KnowledgeCapsuleFilterState>(
+    emptyKnowledgeCapsuleFilters,
+  );
 
   const filteredCapsules = useMemo(() => {
-    const activeValues =
-      Object.values(filters).flat();
-
-    if (activeValues.length === 0) {
-      return capsules;
-    }
+    const matchesConfidence = (
+      confidence: number,
+    ) => {
+      switch (filters.confidence) {
+        case "90–100%":
+          return confidence >= 90;
+        case "75–89%":
+          return confidence >= 75 && confidence <= 89;
+        case "Below 75%":
+          return confidence < 75;
+        default:
+          return true;
+      }
+    };
 
     return capsules.filter((capsule) => {
-      const haystack = [
-        capsule.stage,
-        capsule.authority,
-        capsule.approval,
-        capsule.packageType,
-        capsule.mission,
-        capsule.conversation,
-        capsule.compiler,
-        capsule.owner,
-        capsule.educationalModule,
-        capsule.consumer,
-        capsule.state,
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      return activeValues.every((value) =>
-        haystack.includes(value.toLowerCase()),
+      return (
+        (!filters.stage ||
+          capsule.stage === filters.stage) &&
+        (!filters.authority ||
+          capsule.authority === filters.authority) &&
+        (!filters.approval ||
+          capsule.approval === filters.approval) &&
+        (!filters.packageType ||
+          capsule.packageType === filters.packageType) &&
+        (!filters.mission ||
+          capsule.title === filters.mission ||
+          capsule.mission === filters.mission) &&
+        (!filters.conversation ||
+          capsule.title === filters.conversation ||
+          capsule.conversation === filters.conversation) &&
+        (!filters.compiler ||
+          capsule.compiler === filters.compiler) &&
+        (!filters.owner ||
+          capsule.owner === filters.owner) &&
+        (!filters.educationalModule ||
+          capsule.educationalModule ===
+            filters.educationalModule) &&
+        (!filters.consumer ||
+          capsule.consumer === filters.consumer) &&
+        (!filters.status ||
+          capsule.state === filters.status) &&
+        matchesConfidence(capsule.confidence)
       );
     });
   }, [
