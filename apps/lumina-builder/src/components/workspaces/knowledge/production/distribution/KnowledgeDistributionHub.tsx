@@ -40,6 +40,14 @@ type KnowledgeDistributionHubProps = {
   onCapsuleSelect: (capsuleId: string) => void;
 };
 
+type DistributionConsumer =
+  KnowledgeDistributionRecord["consumers"][number];
+
+type DistributionConsumerCardProps = {
+  consumer: DistributionConsumer;
+  side: "left" | "right";
+};
+
 const consumerIcons = {
   "organizational-memory": Building2,
   "knowledge-graph": Network,
@@ -101,6 +109,65 @@ const compactCardClass = [
   premiumSurfaces.base.card,
   electricContour.strength.standard,
 ].join(" ");
+
+function DistributionConsumerCard({
+  consumer,
+  side,
+}: DistributionConsumerCardProps) {
+  const Icon =
+    consumerIcons[
+      consumer.id as keyof typeof consumerIcons
+    ] ?? Network;
+
+  return (
+    <article className={consumerCardClass}>
+      <div className="flex items-start gap-3">
+        <ExecutivePremiumIcon
+          icon={Icon}
+          state={
+            consumer.status === "consuming"
+              ? "healthy"
+              : consumer.status === "restricted"
+                ? "warning"
+                : "active"
+          }
+        />
+
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <h3 className="text-sm font-semibold text-sky-100">
+              {consumer.label}
+            </h3>
+
+            <div
+              className={[
+                "inline-flex rounded-full border px-2 py-1",
+                "text-[9px] font-semibold uppercase tracking-[0.12em]",
+                statusClasses[consumer.status],
+              ].join(" ")}
+            >
+              {consumer.status}
+            </div>
+          </div>
+
+          <p className="mt-2 text-[11px] leading-5 text-sky-400/72">
+            {consumer.detail}
+          </p>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className={[
+          "pointer-events-none absolute top-1/2 hidden h-px w-5 xl:block",
+          side === "left"
+            ? "right-0 translate-x-full bg-gradient-to-r from-cyan-300/46 to-violet-300/18"
+            : "left-0 -translate-x-full bg-gradient-to-l from-violet-300/46 to-cyan-300/18",
+        ].join(" ")}
+      />
+    </article>
+  );
+}
 
 export function KnowledgeDistributionHub({
   capsules,
@@ -169,59 +236,13 @@ export function KnowledgeDistributionHub({
                       record.consumers.length / 2,
                     ),
                   )
-                  .map((consumer) => {
-                    const Icon =
-                      consumerIcons[
-                        consumer.id as keyof typeof consumerIcons
-                      ] ?? Network;
-
-                    return (
-                      <article
-                        key={consumer.id}
-                        className={consumerCardClass}
-                      >
-                        <div className="flex items-start gap-3">
-                          <ExecutivePremiumIcon
-                            icon={Icon}
-                            state={
-                              consumer.status === "consuming"
-                                ? "healthy"
-                                : consumer.status === "restricted"
-                                  ? "warning"
-                                  : "active"
-                            }
-                          />
-
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-start justify-between gap-2">
-                              <h3 className="text-sm font-semibold text-sky-100">
-                                {consumer.label}
-                              </h3>
-
-                              <div
-                                className={[
-                                  "inline-flex rounded-full border px-2 py-1",
-                                  "text-[9px] font-semibold uppercase tracking-[0.12em]",
-                                  statusClasses[consumer.status],
-                                ].join(" ")}
-                              >
-                                {consumer.status}
-                              </div>
-                            </div>
-
-                            <p className="mt-2 text-[11px] leading-5 text-sky-400/72">
-                              {consumer.detail}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          aria-hidden="true"
-                          className="pointer-events-none absolute right-0 top-1/2 hidden h-px w-5 translate-x-full bg-gradient-to-r from-cyan-300/46 to-violet-300/18 xl:block"
-                        />
-                      </article>
-                    );
-                  })}
+                  .map((consumer) => (
+                    <DistributionConsumerCard
+                      key={consumer.id}
+                      consumer={consumer}
+                      side="left"
+                    />
+                  ))}
               </div>
 
               <div className="relative mx-auto w-full max-w-[340px]">
@@ -280,59 +301,13 @@ export function KnowledgeDistributionHub({
                       record.consumers.length / 2,
                     ),
                   )
-                  .map((consumer) => {
-                    const Icon =
-                      consumerIcons[
-                        consumer.id as keyof typeof consumerIcons
-                      ] ?? Network;
-
-                    return (
-                      <article
-                        key={consumer.id}
-                        className={consumerCardClass}
-                      >
-                        <div className="flex items-start gap-3">
-                          <ExecutivePremiumIcon
-                            icon={Icon}
-                            state={
-                              consumer.status === "consuming"
-                                ? "healthy"
-                                : consumer.status === "restricted"
-                                  ? "warning"
-                                  : "active"
-                            }
-                          />
-
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-start justify-between gap-2">
-                              <h3 className="text-sm font-semibold text-sky-100">
-                                {consumer.label}
-                              </h3>
-
-                              <div
-                                className={[
-                                  "inline-flex rounded-full border px-2 py-1",
-                                  "text-[9px] font-semibold uppercase tracking-[0.12em]",
-                                  statusClasses[consumer.status],
-                                ].join(" ")}
-                              >
-                                {consumer.status}
-                              </div>
-                            </div>
-
-                            <p className="mt-2 text-[11px] leading-5 text-sky-400/72">
-                              {consumer.detail}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          aria-hidden="true"
-                          className="pointer-events-none absolute left-0 top-1/2 hidden h-px w-5 -translate-x-full bg-gradient-to-l from-violet-300/46 to-cyan-300/18 xl:block"
-                        />
-                      </article>
-                    );
-                  })}
+                  .map((consumer) => (
+                    <DistributionConsumerCard
+                      key={consumer.id}
+                      consumer={consumer}
+                      side="right"
+                    />
+                  ))}
               </div>
             </div>
           </div>
