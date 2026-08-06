@@ -37,15 +37,26 @@ type KnowledgeDistributionHubProps = {
   capsules: KnowledgeCapsuleModel[];
   records: KnowledgeDistributionRecord[];
   selectedCapsuleId: string;
+  selectedConsumerId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
+  onConsumerSelect: (
+    capsuleId: string,
+    consumerId: string,
+  ) => void;
 };
 
 type DistributionConsumer =
   KnowledgeDistributionRecord["consumers"][number];
 
 type DistributionConsumerCardProps = {
+  capsuleId: string;
   consumer: DistributionConsumer;
+  selected: boolean;
   side: "left" | "right";
+  onSelect: (
+    capsuleId: string,
+    consumerId: string,
+  ) => void;
 };
 
 const consumerIcons = {
@@ -111,8 +122,11 @@ const compactCardClass = [
 ].join(" ");
 
 function DistributionConsumerCard({
+  capsuleId,
   consumer,
+  selected,
   side,
+  onSelect,
 }: DistributionConsumerCardProps) {
   const Icon =
     consumerIcons[
@@ -120,7 +134,26 @@ function DistributionConsumerCard({
     ] ?? Network;
 
   return (
-    <article className={consumerCardClass}>
+    <button
+      type="button"
+      aria-pressed={selected}
+      onClick={() =>
+        onSelect(
+          capsuleId,
+          consumer.id,
+        )
+      }
+      className="block w-full text-left"
+    >
+      <article
+        className={[
+          consumerCardClass,
+          "transition-[border-color,box-shadow,transform] duration-200",
+          selected
+            ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+            : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+        ].join(" ")}
+      >
       <div className="flex items-start gap-3">
         <ExecutivePremiumIcon
           icon={Icon}
@@ -165,7 +198,8 @@ function DistributionConsumerCard({
             : "left-0 -translate-x-full bg-gradient-to-l from-violet-300/46 to-cyan-300/18",
         ].join(" ")}
       />
-    </article>
+      </article>
+    </button>
   );
 }
 
@@ -173,7 +207,9 @@ export function KnowledgeDistributionHub({
   capsules,
   records,
   selectedCapsuleId,
+  selectedConsumerId,
   onCapsuleSelect,
+  onConsumerSelect,
 }: KnowledgeDistributionHubProps) {
   const record =
     records.find(
@@ -239,8 +275,14 @@ export function KnowledgeDistributionHub({
                   .map((consumer) => (
                     <DistributionConsumerCard
                       key={consumer.id}
+                      capsuleId={record.capsuleId}
                       consumer={consumer}
+                      selected={
+                        selectedConsumerId ===
+                        consumer.id
+                      }
                       side="left"
+                      onSelect={onConsumerSelect}
                     />
                   ))}
               </div>
@@ -304,8 +346,14 @@ export function KnowledgeDistributionHub({
                   .map((consumer) => (
                     <DistributionConsumerCard
                       key={consumer.id}
+                      capsuleId={record.capsuleId}
                       consumer={consumer}
+                      selected={
+                        selectedConsumerId ===
+                        consumer.id
+                      }
                       side="right"
+                      onSelect={onConsumerSelect}
                     />
                   ))}
               </div>

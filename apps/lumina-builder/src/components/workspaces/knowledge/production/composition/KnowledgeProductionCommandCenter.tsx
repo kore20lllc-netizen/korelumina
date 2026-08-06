@@ -257,7 +257,17 @@ export function KnowledgeProductionCommandCenter() {
       kind: "impact-outcome",
       impactOutcomeId,
     });
+  }
 
+  function handleDistributionConsumerSelect(
+    capsuleId: string,
+    consumerId: string,
+  ) {
+    setSelection({
+      capsuleId,
+      kind: "distribution-consumer",
+      consumerId,
+    });
   }
 
   function handleCapsuleSelect(
@@ -353,7 +363,15 @@ export function KnowledgeProductionCommandCenter() {
           capsules={knowledgeCapsules}
           records={knowledgeDistributionRecords}
           selectedCapsuleId={selectedCapsuleId}
+          selectedConsumerId={
+            selection?.kind === "distribution-consumer"
+              ? selection.consumerId
+              : undefined
+          }
           onCapsuleSelect={handleCapsuleSelect}
+          onConsumerSelect={
+            handleDistributionConsumerSelect
+          }
         />
       </section>
 
