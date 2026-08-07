@@ -4,3 +4,4 @@ export * from "./LuminaFeedCard";
 export * from "./LuminaTimelineCard";
 export * from "./LuminaInspectorSection";
 export * from "./LuminaActivityFeedRow";
+export * from "./LuminaFlagshipPanel";
