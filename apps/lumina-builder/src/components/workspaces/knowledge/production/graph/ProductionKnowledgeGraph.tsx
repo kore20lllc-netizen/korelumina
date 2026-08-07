@@ -10,8 +10,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
   flagshipAppearance,
@@ -125,7 +125,7 @@ export function ProductionKnowledgeGraph({
   );
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Knowledge Graph"
       description={
         <>
@@ -255,6 +255,6 @@ export function ProductionKnowledgeGraph({
           </div>
         </div>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
