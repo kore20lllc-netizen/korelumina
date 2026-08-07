@@ -13,8 +13,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 const conversationStages = [
   {
@@ -63,7 +63,7 @@ const conversationStages = [
 
 export function ConversationCompiler() {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Conversation Compiler"
       description="Conversation is treated as a first-class educational source with visible relevance, architectural impact, decision lineage and package contribution."
     >
@@ -134,6 +134,6 @@ export function ConversationCompiler() {
           </div>
         </div>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
