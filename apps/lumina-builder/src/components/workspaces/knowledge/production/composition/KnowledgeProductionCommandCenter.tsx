@@ -256,81 +256,44 @@ function ProductionSectionNavigator() {
       return;
     }
 
-    let sectionFrame: number | null = null;
+    const visibleSections =
+      new Map<string, IntersectionObserverEntry>();
 
-    const updateActiveSection = () => {
-      sectionFrame = null;
-
-      const activationLine = 112;
-      const programmaticTarget =
-        programmaticTargetRef.current;
-
-      if (programmaticTarget) {
-        const targetSection =
-          document.getElementById(
-            programmaticTarget,
-          );
-
-        if (targetSection) {
-          const targetRect =
-            targetSection.getBoundingClientRect();
-
-          if (
-            Math.abs(
-              targetRect.top -
-                activationLine,
-            ) <= 8
-          ) {
-            programmaticTargetRef.current =
-              null;
-          } else {
-            return;
-          }
-        } else {
-          programmaticTargetRef.current =
-            null;
-        }
-      }
-
-      const atDocumentBottom =
-        window.innerHeight +
-          window.scrollY >=
-        document.documentElement.scrollHeight - 2;
-
-      if (atDocumentBottom) {
-        const lastSectionId =
-          sections[sections.length - 1].id;
-
-        setActiveSectionId((current) =>
-          current === lastSectionId
-            ? current
-            : lastSectionId,
-        );
-
+    const updateFromVisibleSections = () => {
+      if (programmaticTargetRef.current) {
         return;
       }
 
-      let nextSectionId =
-        sections[0].id;
-      let nearestDistance =
-        Number.POSITIVE_INFINITY;
+      const candidates = Array.from(
+        visibleSections.values(),
+      ).filter(
+        (entry) =>
+          entry.isIntersecting,
+      );
 
-      for (const section of sections) {
-        const rect =
-          section.getBoundingClientRect();
-
-        if (rect.bottom <= activationLine) {
-          continue;
-        }
-
-        const distance =
-          Math.abs(rect.top - activationLine);
-
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nextSectionId = section.id;
-        }
+      if (candidates.length === 0) {
+        return;
       }
+
+      const activationLine = 112;
+
+      const next = candidates
+        .slice()
+        .sort((a, b) => {
+          const aDistance = Math.abs(
+            a.boundingClientRect.top -
+              activationLine,
+          );
+          const bDistance = Math.abs(
+            b.boundingClientRect.top -
+              activationLine,
+          );
+
+          return aDistance - bDistance;
+        })[0];
+
+      const nextSectionId =
+        (next.target as HTMLElement).id;
 
       setActiveSectionId((current) =>
         current === nextSectionId
@@ -339,76 +302,71 @@ function ProductionSectionNavigator() {
       );
     };
 
-    const scheduleActiveSectionUpdate = () => {
-      if (sectionFrame !== null) {
-        return;
-      }
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            visibleSections.set(
+              (entry.target as HTMLElement).id,
+              entry,
+            );
+          }
 
-      sectionFrame =
-        requestAnimationFrame(
-          updateActiveSection,
-        );
-    };
+          updateFromVisibleSections();
+        },
+        {
+          root: null,
+          rootMargin:
+            "-112px 0px -55% 0px",
+          threshold: [
+            0,
+            0.01,
+            0.1,
+            0.25,
+            0.5,
+          ],
+        },
+      );
 
-    updateActiveSection();
+    for (const section of sections) {
+      observer.observe(section);
+    }
 
-    window.addEventListener(
-      "scroll",
-      scheduleActiveSectionUpdate,
-      { passive: true },
-    );
-
-    window.addEventListener(
-      "resize",
-      scheduleActiveSectionUpdate,
-      { passive: true },
-    );
-
-    const cancelProgrammaticNavigation = () => {
-      if (programmaticTargetRef.current === null) {
+    const releaseProgrammaticNavigation = () => {
+      if (
+        programmaticTargetRef.current === null
+      ) {
         return;
       }
 
       programmaticTargetRef.current = null;
-      scheduleActiveSectionUpdate();
+      updateFromVisibleSections();
     };
 
     window.addEventListener(
       "wheel",
-      cancelProgrammaticNavigation,
+      releaseProgrammaticNavigation,
       { passive: true },
     );
 
     window.addEventListener(
       "touchstart",
-      cancelProgrammaticNavigation,
+      releaseProgrammaticNavigation,
       { passive: true },
     );
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        scheduleActiveSectionUpdate,
-      );
-
-      window.removeEventListener(
-        "resize",
-        scheduleActiveSectionUpdate,
-      );
+      observer.disconnect();
 
       window.removeEventListener(
         "wheel",
-        cancelProgrammaticNavigation,
+        releaseProgrammaticNavigation,
       );
 
       window.removeEventListener(
         "touchstart",
-        cancelProgrammaticNavigation,
+        releaseProgrammaticNavigation,
       );
-
-      if (sectionFrame !== null) {
-        cancelAnimationFrame(sectionFrame);
-      }
     };
   }, []);
 
