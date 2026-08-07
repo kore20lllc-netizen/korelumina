@@ -800,18 +800,29 @@ export function KnowledgeProductionCommandCenter() {
   ) {
     inspectorClosedByUserRef.current =
       false;
+
+    if (
+      selection?.capsuleId === capsuleId &&
+      selection.kind === "capsule"
+    ) {
+      document
+        .getElementById(
+          "knowledge-capsule-inspector",
+        )
+        ?.scrollIntoView({
+          behavior: getScrollBehavior(),
+          block: "start",
+        });
+
+      return;
+    }
+
     revealInspectorRef.current = true;
 
-    setSelection((current) =>
-      current?.capsuleId === capsuleId &&
-      current.kind === "capsule"
-        ? current
-        : {
-            capsuleId,
-            kind: "capsule",
-          },
-    );
-
+    setSelection({
+      capsuleId,
+      kind: "capsule",
+    });
   }
 
   const handleVisibleCapsuleChange = useCallback(
