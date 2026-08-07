@@ -838,6 +838,12 @@ export function KnowledgeProductionCommandCenter() {
     (
       stationId: string | null,
     ) => {
+      if (
+        inspectorClosedByUserRef.current
+      ) {
+        return;
+      }
+
       if (stationId) {
         return;
       }
