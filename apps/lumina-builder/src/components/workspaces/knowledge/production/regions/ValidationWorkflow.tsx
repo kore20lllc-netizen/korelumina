@@ -12,8 +12,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 const validations = [
   {
@@ -68,7 +68,7 @@ const validations = [
 
 export function ValidationWorkflow() {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Validation"
       description="Visible validation posture across passed, warning, failed, manual review, awaiting evidence and conflict states."
     >
@@ -124,6 +124,6 @@ export function ValidationWorkflow() {
         <CircleHelp className="h-4 w-4 text-amber-300" />
         Validation remains a visual contract only. No engine or live review workflow is implemented.
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
