@@ -561,6 +561,8 @@ export function KnowledgeProductionCommandCenter() {
 
   const inspectorClosedByUserRef =
     useRef(false);
+  const revealInspectorRef =
+    useRef(false);
 
   const selectedCapsuleId =
     selection?.capsuleId ?? "";
@@ -575,9 +577,15 @@ export function KnowledgeProductionCommandCenter() {
   );
 
   useEffect(() => {
-    if (!selectedCapsuleId || !selectedCapsule) {
+    if (
+      !revealInspectorRef.current ||
+      !selectedCapsuleId ||
+      !selectedCapsule
+    ) {
       return;
     }
+
+    revealInspectorRef.current = false;
 
     const frame = requestAnimationFrame(() => {
       document
@@ -778,6 +786,7 @@ export function KnowledgeProductionCommandCenter() {
 
     inspectorClosedByUserRef.current =
       false;
+    revealInspectorRef.current = true;
 
     setSelection({
       capsuleId,
@@ -791,6 +800,7 @@ export function KnowledgeProductionCommandCenter() {
   ) {
     inspectorClosedByUserRef.current =
       false;
+    revealInspectorRef.current = true;
 
     setSelection((current) =>
       current?.capsuleId === capsuleId &&
