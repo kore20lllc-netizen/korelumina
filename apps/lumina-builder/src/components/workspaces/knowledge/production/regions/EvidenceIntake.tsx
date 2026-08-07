@@ -8,8 +8,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import type {
   EvidenceSource,
@@ -34,7 +34,7 @@ export function EvidenceIntake({
   onSourceSelect,
 }: EvidenceIntakeProps) {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Evidence Intake"
       description="Governed source visibility across authority, provenance, ownership, scope, confidence, lifecycle and educational contribution."
       toolbar={
@@ -151,6 +151,6 @@ export function EvidenceIntake({
           );
         })}
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
