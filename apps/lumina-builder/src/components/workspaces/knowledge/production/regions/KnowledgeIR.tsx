@@ -12,8 +12,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 const concepts = [
   "Human authorization boundary",
@@ -32,7 +32,7 @@ const relationships = [
 
 export function KnowledgeIR() {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Knowledge IR"
       description="Inspectable intermediate representation of extracted concepts, relationships, authority, provenance, dependencies, educational mapping and unresolved conflicts."
     >
@@ -152,6 +152,6 @@ export function KnowledgeIR() {
           </div>
         </div>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
