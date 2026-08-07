@@ -22,6 +22,10 @@ export const knowledgeCapsules: KnowledgeCapsule[] = [
     compiler: "Documentation Compiler",
     educationalModule: "Governance Foundations",
     consumer: "Chief Agent Education",
+    sources: [
+      "Architecture Decision Records",
+      "Governance specification corpus",
+    ],
     failedLayer: "Provenance",
     remediation:
       "Confirm conversation lineage and attach the governing architectural decision.",
@@ -76,6 +80,10 @@ export const knowledgeCapsules: KnowledgeCapsule[] = [
     compiler: "Git Compiler",
     educationalModule: "Repository Operations",
     consumer: "Engineering Standards",
+    sources: [
+      "Repository history",
+      "Build and validation records",
+    ],
     layers: [
       {
         id: "authority",
@@ -122,6 +130,10 @@ export const knowledgeCapsules: KnowledgeCapsule[] = [
     compiler: "Mission Compiler",
     educationalModule: "Genesis Corpus",
     consumer: "Mission Planning",
+    sources: [
+      "Mission corpus",
+      "Constitutional operating directives",
+    ],
     layers: [
       {
         id: "authority",
@@ -168,6 +180,10 @@ export const knowledgeCapsules: KnowledgeCapsule[] = [
     compiler: "Conversation Compiler",
     educationalModule: "Decision Intelligence",
     consumer: "Educational Corpus",
+    sources: [
+      "Conversation thread",
+      "Decision lineage",
+    ],
     layers: [
       {
         id: "authority",

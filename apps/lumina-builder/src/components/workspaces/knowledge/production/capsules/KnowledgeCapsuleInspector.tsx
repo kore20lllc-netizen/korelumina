@@ -27,8 +27,8 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaTimelineCard";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
   flagshipAppearance,
@@ -275,7 +275,7 @@ export function KnowledgeCapsuleInspector({
     getCapsuleLifecycleEvents(capsule);
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       aria-label={`${capsule.identity} executive inspector`}
       className="overflow-hidden"
     >
@@ -1150,6 +1150,6 @@ export function KnowledgeCapsuleInspector({
           </div>
         ) : null}
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }

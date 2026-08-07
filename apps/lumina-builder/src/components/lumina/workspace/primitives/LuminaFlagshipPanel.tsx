@@ -1,4 +1,5 @@
 import type {
+  ComponentPropsWithoutRef,
   ReactNode,
 } from "react";
 
@@ -6,12 +7,15 @@ import {
   cn,
 } from "@/lib/utils";
 
-export interface LuminaFlagshipPanelProps {
+export interface LuminaFlagshipPanelProps
+  extends Omit<
+    ComponentPropsWithoutRef<"section">,
+    "title"
+  > {
   title: ReactNode;
   description?: ReactNode;
   toolbar?: ReactNode;
   children: ReactNode;
-  className?: string;
 }
 
 const flagshipPanelAppearance = {
@@ -48,9 +52,11 @@ export function LuminaFlagshipPanel({
   toolbar,
   children,
   className,
+  ...sectionProps
 }: LuminaFlagshipPanelProps) {
   return (
     <section
+      {...sectionProps}
       className={cn(
         flagshipPanelAppearance.panel,
         className,

@@ -46,6 +46,7 @@ export interface KnowledgeCapsule {
   compiler: string;
   educationalModule: string;
   consumer: string;
+  sources: string[];
   failedLayer?: string;
   remediation?: string;
   responsibleAuthority?: string;
