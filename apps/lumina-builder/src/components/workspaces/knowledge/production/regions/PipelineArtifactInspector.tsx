@@ -13,8 +13,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 interface PipelineArtifactInspectorProps {
   sourceLabel: string;
@@ -94,7 +94,7 @@ export function PipelineArtifactInspector({
   compilerLabel,
 }: PipelineArtifactInspectorProps) {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Pipeline Artifact Inspector"
       description="Fully populated inspection contract for the currently selected source and compiler artifact."
     >
@@ -219,6 +219,6 @@ export function PipelineArtifactInspector({
           </div>
         </section>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
