@@ -895,7 +895,8 @@ export function KnowledgeProductionCommandCenter() {
 
       <section
         id="knowledge-flow-engine"
-        className="scroll-mt-24"
+        tabIndex={-1}
+        className="scroll-mt-24 focus:outline-none"
       >
         <KnowledgeCapsuleFlowEngine
           capsules={knowledgeCapsules}
@@ -935,6 +936,16 @@ export function KnowledgeProductionCommandCenter() {
               inspectorClosedByUserRef.current =
                 true;
               setSelection(null);
+
+              requestAnimationFrame(() => {
+                document
+                  .getElementById(
+                    "knowledge-flow-engine",
+                  )
+                  ?.focus({
+                    preventScroll: true,
+                  });
+              });
             }}
           />
         </div>
