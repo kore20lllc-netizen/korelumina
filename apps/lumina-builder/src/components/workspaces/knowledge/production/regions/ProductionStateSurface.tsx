@@ -14,8 +14,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import type {
   ProductionSurfaceState,
@@ -99,7 +99,7 @@ export function ProductionStateSurface({
     stateContent[state];
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Production State"
       description="Stable visual treatment across every required pipeline state."
     >
@@ -140,6 +140,6 @@ export function ProductionStateSurface({
           </div>
         </section>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
