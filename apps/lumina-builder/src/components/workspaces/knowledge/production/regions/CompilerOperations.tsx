@@ -10,8 +10,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import type {
   CompilerOperation,
@@ -41,7 +41,7 @@ export function CompilerOperations({
   onCompilerSelect,
 }: CompilerOperationsProps) {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Compiler Operations"
       description="Unified production visibility across current detailed compilers and certified future stages."
     >
@@ -145,6 +145,6 @@ export function CompilerOperations({
           );
         })}
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
