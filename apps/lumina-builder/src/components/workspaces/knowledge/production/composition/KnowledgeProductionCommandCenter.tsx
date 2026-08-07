@@ -364,6 +364,27 @@ function ProductionSectionNavigator() {
       { passive: true },
     );
 
+    const cancelProgrammaticNavigation = () => {
+      if (programmaticTargetRef.current === null) {
+        return;
+      }
+
+      programmaticTargetRef.current = null;
+      scheduleActiveSectionUpdate();
+    };
+
+    window.addEventListener(
+      "wheel",
+      cancelProgrammaticNavigation,
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "touchstart",
+      cancelProgrammaticNavigation,
+      { passive: true },
+    );
+
     return () => {
       window.removeEventListener(
         "scroll",
@@ -373,6 +394,16 @@ function ProductionSectionNavigator() {
       window.removeEventListener(
         "resize",
         scheduleActiveSectionUpdate,
+      );
+
+      window.removeEventListener(
+        "wheel",
+        cancelProgrammaticNavigation,
+      );
+
+      window.removeEventListener(
+        "touchstart",
+        cancelProgrammaticNavigation,
       );
 
       if (sectionFrame !== null) {
