@@ -12,12 +12,12 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 export function KnowledgePackage() {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Knowledge Package"
       description="Visual contract for package identity, lifecycle, confidence, authority, provenance, dependencies and educational contribution."
     >
@@ -141,6 +141,6 @@ export function KnowledgePackage() {
         <Box className="h-4 w-4 text-emerald-300" />
         Package generation is not implemented. This surface represents the approved UI contract only.
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
