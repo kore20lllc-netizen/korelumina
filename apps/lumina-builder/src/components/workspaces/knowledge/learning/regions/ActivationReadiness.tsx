@@ -16,8 +16,11 @@ import {
 } from "@/lib/utils";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   FlagshipCard,
-  FlagshipPanel,
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -136,7 +139,7 @@ export function ActivationReadiness() {
     ).length;
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Activation Readiness"
       description="Informational readiness only — no activation, certification or authority control is available."
       toolbar={
@@ -314,6 +317,6 @@ export function ActivationReadiness() {
           Activation unavailable
         </button>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
