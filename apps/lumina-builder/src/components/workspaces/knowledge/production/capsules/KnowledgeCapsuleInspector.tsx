@@ -367,12 +367,55 @@ export function KnowledgeCapsuleInspector({
             return (
               <button
                 key={tab.id}
+                id={`knowledge-inspector-tab-${tab.id}`}
                 type="button"
                 role="tab"
                 aria-selected={active}
+                aria-controls="knowledge-inspector-tabpanel"
+                tabIndex={active ? 0 : -1}
                 onClick={() =>
                   setActiveTab(tab.id)
                 }
+                onKeyDown={(event) => {
+                  if (
+                    event.key !== "ArrowLeft" &&
+                    event.key !== "ArrowRight"
+                  ) {
+                    return;
+                  }
+
+                  event.preventDefault();
+
+                  const currentIndex =
+                    tabs.findIndex(
+                      (candidate) =>
+                        candidate.id === tab.id,
+                    );
+
+                  const direction =
+                    event.key === "ArrowRight"
+                      ? 1
+                      : -1;
+
+                  const nextIndex =
+                    (currentIndex +
+                      direction +
+                      tabs.length) %
+                    tabs.length;
+
+                  const nextTab =
+                    tabs[nextIndex];
+
+                  setActiveTab(nextTab.id);
+
+                  requestAnimationFrame(() => {
+                    document
+                      .getElementById(
+                        `knowledge-inspector-tab-${nextTab.id}`,
+                      )
+                      ?.focus();
+                  });
+                }}
                 className={[
                   flagshipAppearance.segmentedTab,
                   active
@@ -389,7 +432,9 @@ export function KnowledgeCapsuleInspector({
       </header>
 
       <div
+        id="knowledge-inspector-tabpanel"
         role="tabpanel"
+        aria-labelledby={`knowledge-inspector-tab-${activeTab}`}
         className="p-5 sm:p-6"
       >
         <div className="mb-5 flex items-center gap-3">
