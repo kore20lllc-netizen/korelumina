@@ -14,8 +14,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  FlagshipPanel,
-} from "../../learning/presentation/FlagshipPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 const stages = [
   {
@@ -78,7 +78,7 @@ const stages = [
 
 export function DocumentationCompiler() {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Documentation Compiler"
       description="Detailed visual contract for transforming governed documentation into inspectable Knowledge IR candidates."
     >
@@ -155,6 +155,6 @@ export function DocumentationCompiler() {
           </div>
         </div>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
