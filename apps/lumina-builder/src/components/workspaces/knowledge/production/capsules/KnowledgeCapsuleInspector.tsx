@@ -237,6 +237,12 @@ export function KnowledgeCapsuleInspector({
     setActiveTab("lifecycle");
   }, [capsule?.id]);
 
+  useEffect(() => {
+    if (selectedTimelineEventId) {
+      setActiveTab("lifecycle");
+    }
+  }, [selectedTimelineEventId]);
+
   const activeTabDefinition = useMemo(
     () =>
       tabs.find(
