@@ -16,9 +16,12 @@ import type {
 } from "../model";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   FlagshipCard,
   FlagshipInput,
-  FlagshipPanel,
   FlagshipSelect,
   LearningStatusBadge,
   flagshipAppearance,
@@ -113,7 +116,7 @@ export function EducationalCorpusExplorer({
   onArtifactSelect,
 }: EducationalCorpusExplorerProps) {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Educational Corpus Explorer"
       description="Governed curriculum with authority, approval, ownership, scope, version, provenance, dependencies and supersession."
       toolbar={
@@ -319,10 +322,11 @@ export function EducationalCorpusExplorer({
                 aria-pressed={selected}
                 selected={selected}
                 interactive
-                className="p-4 text-left"
+                className={cn(
+                  "p-4 text-left",
+                  selected && "ring-0",
+                )}
               >
-                <div className={flagshipAppearance.cardHighlight} />
-
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 rounded-[20px] bg-[radial-gradient(circle_at_20%_0%,rgba(34,211,238,0.08),transparent_34%)] opacity-0 transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none"
@@ -424,6 +428,6 @@ export function EducationalCorpusExplorer({
           })
         )}
       </div>
-  </FlagshipPanel>
+  </LuminaFlagshipPanel>
   );
 }
