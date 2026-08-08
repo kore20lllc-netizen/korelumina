@@ -100,23 +100,6 @@ export const flagshipAppearance = {
     "ring-1 ring-inset ring-cyan-100/8",
   ].join(" "),
 
-  control: [
-    "h-10 rounded-[14px] border px-3 text-sm",
-    "border-cyan-300/44",
-    "bg-slate-950/52",
-    "text-sky-200",
-    "placeholder:text-sky-600/72",
-    "ring-1 ring-inset ring-cyan-100/8",
-    "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
-    "transition-[border-color,background-color,box-shadow] duration-200",
-    "hover:border-cyan-200/68 hover:bg-slate-950/66",
-    "focus-visible:outline-none focus-visible:border-cyan-100/88",
-    "focus-visible:ring-2 focus-visible:ring-cyan-200/38",
-    "focus-visible:shadow-[0_0_24px_rgba(34,211,238,0.12)]",
-    "disabled:cursor-not-allowed disabled:opacity-45",
-    "motion-reduce:transition-none",
-  ].join(" "),
-
   segmentedTab: [
     "inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2",
     "text-[10px] font-semibold",
