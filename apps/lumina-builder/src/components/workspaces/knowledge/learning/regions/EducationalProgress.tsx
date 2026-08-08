@@ -259,10 +259,12 @@ export function EducationalProgress({
                   "
                 >
                   <div
-                    className={cn(
-                      "p-3",
-                      flagshipAppearance.mutedSurface,
-                    )}
+                    className="
+                      rounded-[18px] border border-blue-400/56
+                      bg-slate-950/34 p-3
+                      ring-1 ring-inset ring-cyan-300/14
+                      shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+                    "
                   >
                     <div className={flagshipAppearance.governanceLabel}>
                       Dependency gates
@@ -276,10 +278,12 @@ export function EducationalProgress({
                   </div>
 
                   <div
-                    className={cn(
-                      "p-3",
-                      flagshipAppearance.mutedSurface,
-                    )}
+                    className="
+                      rounded-[18px] border border-blue-400/56
+                      bg-slate-950/34 p-3
+                      ring-1 ring-inset ring-cyan-300/14
+                      shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+                    "
                   >
                     <div className={flagshipAppearance.governanceLabel}>
                       Current gap
