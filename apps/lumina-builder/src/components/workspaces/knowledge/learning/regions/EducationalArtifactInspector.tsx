@@ -23,6 +23,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   LuminaFlagshipTabs,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipTabs";
 
@@ -69,17 +73,16 @@ function ItemList({
 }) {
   if (items.length === 0) {
     return (
-      <div
+      <LuminaFlagshipSurface
+        dashed
         className="
-          rounded-[18px] border border-dashed border-blue-400/56
-          bg-slate-950/34 px-4 py-5
+          px-4 py-5
           text-xs leading-5 text-sky-500/68
-          ring-1 ring-inset ring-cyan-300/14
           shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
         "
       >
         {emptyLabel}
-      </div>
+      </LuminaFlagshipSurface>
     );
   }
 
