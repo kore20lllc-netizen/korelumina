@@ -27,6 +27,10 @@ import {
 } from "@/lib/utils";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   FlagshipPanel,
   flagshipAppearance,
 } from "../presentation";
@@ -145,7 +149,7 @@ export function EducationalCommandCenter() {
   "
 >
   <div className="min-w-0 [&>*]:h-full">
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Executive Educational Dashboard"
       description="What has educated the Chief Agent, what is its current educational posture, and what remains before activation?"
       emphasis="strong"
@@ -285,7 +289,7 @@ export function EducationalCommandCenter() {
           </p>
         </div>
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   </div>
 
   <div
