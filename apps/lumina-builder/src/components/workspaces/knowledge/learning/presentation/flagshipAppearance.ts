@@ -1,30 +1,4 @@
 export const flagshipAppearance = {
-  panel: [
-    "relative overflow-hidden rounded-[30px] border",
-    "border-cyan-300/58",
-    "bg-[radial-gradient(circle_at_14%_0%,rgba(37,99,235,0.14),transparent_34%),radial-gradient(circle_at_78%_14%,rgba(147,51,234,0.11),transparent_32%),radial-gradient(circle_at_38%_90%,rgba(180,83,9,0.08),transparent_28%),linear-gradient(135deg,rgba(2,6,23,0.60),rgba(15,10,40,0.57),rgba(2,8,26,0.59))]",
-    "ring-1 ring-inset ring-cyan-100/18",
-    "shadow-[0_0_0_1px_rgba(59,130,246,0.14),0_0_34px_rgba(37,99,235,0.12),0_24px_72px_rgba(2,6,23,0.40),inset_0_1px_0_rgba(255,255,255,0.07)]",
-    "backdrop-blur-[50px] backdrop-saturate-[180%]",
-  ].join(" "),
-
-  panelReflection:
-    "pointer-events-none absolute inset-x-[8%] top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/48 to-transparent",
-
-  panelHeader: [
-    "relative border-b border-cyan-300/18",
-    "bg-[linear-gradient(180deg,rgba(15,23,42,0.20),rgba(2,6,23,0.04))]",
-  ].join(" "),
-
-  panelTitle: [
-    "text-xl font-semibold tracking-[-0.025em]",
-    "text-amber-500",
-    "drop-shadow-[0_0_20px_rgba(180,83,9,0.22)]",
-  ].join(" "),
-
-  description:
-    "text-sm leading-6 text-sky-400/78",
-
   eyebrow:
     "text-[10px] font-semibold uppercase tracking-[0.20em] text-cyan-300/82",
 
