@@ -230,10 +230,12 @@ export function EducationalCommandCenter() {
     >
       <div className="grid grid-cols-1 gap-4 p-4">
         <div
-          className={cn(
-            "group p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            group rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className="flex items-center gap-3 text-xs font-semibold text-amber-400">
             <ExecutivePremiumIcon
@@ -252,10 +254,12 @@ export function EducationalCommandCenter() {
         </div>
 
         <div
-          className={cn(
-            "group p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            group rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className="flex items-center gap-3 text-xs font-semibold text-amber-400">
             <ExecutivePremiumIcon
@@ -273,10 +277,12 @@ export function EducationalCommandCenter() {
         </div>
 
         <div
-          className={cn(
-            "group p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            group rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className="text-xs font-semibold text-amber-400">
             No backend implication
