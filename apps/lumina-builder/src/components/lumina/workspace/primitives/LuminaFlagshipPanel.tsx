@@ -20,16 +20,17 @@ export interface LuminaFlagshipPanelProps
 
 const flagshipPanelAppearance = {
   panel: [
-    "relative overflow-hidden rounded-[30px] border",
-    "border-cyan-300/58",
-    "bg-[radial-gradient(circle_at_14%_0%,rgba(37,99,235,0.14),transparent_34%),radial-gradient(circle_at_78%_14%,rgba(147,51,234,0.11),transparent_32%),radial-gradient(circle_at_38%_90%,rgba(180,83,9,0.08),transparent_28%),linear-gradient(135deg,rgba(2,6,23,0.60),rgba(15,10,40,0.57),rgba(2,8,26,0.59))]",
-    "ring-1 ring-inset ring-cyan-100/18",
-    "shadow-[0_0_0_1px_rgba(59,130,246,0.14),0_0_34px_rgba(37,99,235,0.12),0_24px_72px_rgba(2,6,23,0.40),inset_0_1px_0_rgba(255,255,255,0.07)]",
-    "backdrop-blur-[50px] backdrop-saturate-[180%]",
+    "group relative overflow-hidden rounded-[30px]",
+    "border border-blue-400/70 ring-1 ring-inset ring-cyan-300/20",
+    "bg-slate-950/48 backdrop-blur-[44px] backdrop-saturate-[170%]",
+    "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_30px_rgba(37,99,235,.16),0_28px_160px_rgba(0,0,0,.40),inset_0_0_22px_rgba(56,189,248,.05)]",
   ].join(" "),
 
+  ambient:
+    "pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_2%,rgba(124,58,237,.30),transparent_36%),radial-gradient(circle_at_29%_42%,rgba(217,119,6,.17),transparent_27%),radial-gradient(circle_at_74%_64%,rgba(67,56,202,.13),transparent_30%),radial-gradient(circle_at_91%_14%,rgba(34,211,238,.035),transparent_22%),radial-gradient(circle_at_57%_86%,rgba(236,72,153,.075),transparent_18%),linear-gradient(180deg,rgba(255,255,255,.018),transparent_24%,rgba(2,6,23,.10))]",
+
   reflection:
-    "pointer-events-none absolute inset-x-[8%] top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/48 to-transparent",
+    "pointer-events-none absolute inset-x-[7%] top-0 h-px opacity-90 [background:linear-gradient(90deg,transparent_0%,rgba(96,165,250,.10)_12%,rgba(247,215,116,.42)_34%,rgba(255,255,255,.62)_50%,rgba(125,211,252,.28)_69%,rgba(59,130,246,.08)_88%,transparent_100%)] [box-shadow:0_0_22px_rgba(125,211,252,.14),0_0_40px_rgba(247,215,116,.08)]",
 
   header: [
     "relative border-b border-cyan-300/18",
@@ -63,6 +64,14 @@ export function LuminaFlagshipPanel({
       )}
     >
       <div
+        aria-hidden="true"
+        className={
+          flagshipPanelAppearance.ambient
+        }
+      />
+
+      <div
+        aria-hidden="true"
         className={
           flagshipPanelAppearance.reflection
         }
