@@ -16,11 +16,14 @@ import {
 } from "@/lib/utils";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
-  FlagshipCard,
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -206,14 +209,10 @@ export function ActivationReadiness() {
                 : CircleOff;
 
           return (
-            <FlagshipCard
+            <LuminaFlagshipCard
               key={item.label}
-              className={cn(
-                flagshipAppearance.card,
-                "group flex items-start gap-3 p-4",
-              )}
+              className="group flex items-start gap-3 p-4"
             >
-              <div className={flagshipAppearance.cardHighlight} />
 
               <div
                 aria-hidden="true"
@@ -254,7 +253,7 @@ export function ActivationReadiness() {
                   {item.detail}
                 </p>
               </div>
-            </FlagshipCard>
+            </LuminaFlagshipCard>
           );
         })}
       </div>
