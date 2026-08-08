@@ -24,6 +24,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -153,11 +157,9 @@ export function ActivationReadiness() {
       emphasis="strong"
     >
       <div className="grid gap-3 border-b border-cyan-300/14 p-4 sm:grid-cols-3">
-        <div
+        <LuminaFlagshipSurface
           className="
-            rounded-[18px] border border-blue-400/56
-            bg-slate-950/34 p-4
-            ring-1 ring-inset ring-cyan-300/14
+            p-4
             shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
           "
         >
@@ -168,13 +170,11 @@ export function ActivationReadiness() {
           <div className="mt-2 text-2xl font-semibold text-amber-400">
             Partial
           </div>
-        </div>
+        </LuminaFlagshipSurface>
 
-        <div
+        <LuminaFlagshipSurface
           className="
-            rounded-[18px] border border-blue-400/56
-            bg-slate-950/34 p-4
-            ring-1 ring-inset ring-cyan-300/14
+            p-4
             shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
           "
         >
@@ -185,13 +185,11 @@ export function ActivationReadiness() {
           <div className="mt-2 text-2xl font-semibold text-emerald-300">
             {completed}
           </div>
-        </div>
+        </LuminaFlagshipSurface>
 
-        <div
+        <LuminaFlagshipSurface
           className="
-            rounded-[18px] border border-blue-400/56
-            bg-slate-950/34 p-4
-            ring-1 ring-inset ring-cyan-300/14
+            p-4
             shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
           "
         >
@@ -202,7 +200,7 @@ export function ActivationReadiness() {
           <div className="mt-2 text-2xl font-semibold text-rose-300">
             {blocked}
           </div>
-        </div>
+        </LuminaFlagshipSurface>
       </div>
 
       <div className="grid gap-3 p-4 xl:grid-cols-2">
@@ -265,11 +263,9 @@ export function ActivationReadiness() {
       </div>
 
       <div className="grid gap-3 border-t border-cyan-300/14 p-4 sm:grid-cols-2">
-        <div
+        <LuminaFlagshipSurface
           className="
-            rounded-[18px] border border-blue-400/56
-            bg-slate-950/34 p-4
-            ring-1 ring-inset ring-cyan-300/14
+            p-4
             shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
           "
         >
@@ -284,13 +280,11 @@ export function ActivationReadiness() {
           <p className="mt-2 text-xs leading-5 text-sky-500/76">
             Human governance remains authoritative. Educational state must never be interpreted as Runtime truth.
           </p>
-        </div>
+        </LuminaFlagshipSurface>
 
-        <div
+        <LuminaFlagshipSurface
           className="
-            rounded-[18px] border border-blue-400/56
-            bg-slate-950/34 p-4
-            ring-1 ring-inset ring-cyan-300/14
+            p-4
             shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
           "
         >
@@ -305,7 +299,7 @@ export function ActivationReadiness() {
           <p className="mt-2 text-xs leading-5 text-sky-500/76">
             Authorization registry, certification and activation controls are explicitly outside this milestone.
           </p>
-        </div>
+        </LuminaFlagshipSurface>
       </div>
 
       <div className="px-4 pb-4">
