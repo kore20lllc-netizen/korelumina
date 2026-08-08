@@ -23,7 +23,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
-  FlagshipTabs,
+  LuminaFlagshipTabs,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipTabs";
+
+import {
   flagshipAppearance,
 } from "../presentation";
 
@@ -184,7 +187,8 @@ export function EducationalArtifactInspector({
           </div>
         </div>
       ) : (
-        <FlagshipTabs
+        <LuminaFlagshipTabs
+          ariaLabel="Educational artifact details"
           tabs={[
             "overview",
             "authority",
@@ -365,7 +369,7 @@ export function EducationalArtifactInspector({
               </InspectorSection>
             )}
           </div>
-        </FlagshipTabs>
+        </LuminaFlagshipTabs>
       )}
     </LuminaFlagshipPanel>
   );
