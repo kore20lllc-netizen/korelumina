@@ -28,8 +28,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
 import {
-  FlagshipInput,
-  FlagshipSelect,
+  LuminaFlagshipSelect,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipControl";
+
+import {
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -86,7 +88,7 @@ function FilterSelect({
         {label}
       </span>
 
-      <FlagshipSelect
+      <LuminaFlagshipSelect
         value={value}
         onChange={(event) => {
           onChange(event.target.value);
@@ -107,7 +109,7 @@ function FilterSelect({
               : option}
           </option>
         ))}
-      </FlagshipSelect>
+      </LuminaFlagshipSelect>
     </label>
   );
 }
