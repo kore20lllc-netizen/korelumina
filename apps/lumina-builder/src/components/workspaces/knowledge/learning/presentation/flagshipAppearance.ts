@@ -13,21 +13,6 @@ export const flagshipAppearance = {
     "shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_34px_rgba(2,6,23,0.20)]",
   ].join(" "),
 
-  cardInteractive: [
-    "transition-[transform,border-color,background-color,box-shadow] duration-200",
-    "hover:-translate-y-0.5 hover:border-cyan-200/72",
-    "hover:bg-[linear-gradient(135deg,rgba(5,18,48,0.76),rgba(23,13,58,0.70),rgba(4,19,49,0.74))]",
-    "hover:shadow-[0_0_26px_rgba(34,211,238,0.12),0_18px_42px_rgba(2,6,23,0.34)]",
-    "motion-reduce:transition-none",
-  ].join(" "),
-
-  cardSelected: [
-    "border-cyan-100/88",
-    "bg-[radial-gradient(circle_at_14%_0%,rgba(34,211,238,0.13),transparent_42%),linear-gradient(135deg,rgba(6,22,55,0.82),rgba(28,15,65,0.76),rgba(5,24,58,0.80))]",
-    "ring-cyan-100/24",
-    "shadow-[0_0_0_1px_rgba(125,211,252,0.22),0_0_32px_rgba(34,211,238,0.16),0_18px_44px_rgba(2,6,23,0.36)]",
-  ].join(" "),
-
   cardHighlight:
     "pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent",
 
