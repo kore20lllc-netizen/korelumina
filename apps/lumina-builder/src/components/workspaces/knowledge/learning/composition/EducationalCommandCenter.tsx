@@ -331,7 +331,7 @@ export function EducationalCommandCenter() {
       {dashboard.uiState === "success" && (
         <div className="grid items-start gap-6 2xl:grid-cols-[minmax(0,1.7fr)_minmax(380px,0.8fr)]">
           <div className="space-y-6">
-            <FlagshipPanel
+            <LuminaFlagshipPanel
               title="Genesis Source Drill-down"
               description={`${visibleGenesisArtifacts.length} modeled sources in the selected corpus category`}
               emphasis="strong"
@@ -366,10 +366,10 @@ export function EducationalCommandCenter() {
                                 "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_26px_rgba(34,211,238,0.12),0_16px_36px_rgba(2,6,23,0.24)]",
                               ].join(" ")
                             : [
-                                "border-cyan-300/24",
+                                "border-cyan-300/60 ring-1 ring-inset ring-blue-400/36",
                                 "bg-[linear-gradient(135deg,rgba(3,12,35,0.64),rgba(15,12,42,0.54),rgba(3,14,37,0.62))]",
-                                "shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_12px_28px_rgba(2,6,23,0.17)]",
-                                "hover:-translate-y-0.5 hover:border-cyan-200/48",
+                                "shadow-[inset_0_1px_0_rgba(186,230,253,0.07),0_0_18px_rgba(37,99,235,0.10),0_12px_28px_rgba(2,6,23,0.17)]",
+                                "hover:-translate-y-0.5 hover:border-cyan-200/78 hover:ring-blue-300/52",
                                 "hover:bg-[linear-gradient(135deg,rgba(5,18,49,0.76),rgba(24,16,58,0.64),rgba(5,20,48,0.72))]",
                                 "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.08),0_16px_34px_rgba(2,6,23,0.24)]",
                               ].join(" "),
@@ -447,7 +447,7 @@ export function EducationalCommandCenter() {
                   </div>
                 ) : null}
               </div>
-            </FlagshipPanel>
+            </LuminaFlagshipPanel>
 
             <EducationalDashboardMain
               dashboard={dashboard}
