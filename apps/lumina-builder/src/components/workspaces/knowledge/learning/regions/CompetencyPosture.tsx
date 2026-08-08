@@ -19,8 +19,11 @@ import type {
 } from "../model";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   FlagshipCard,
-  FlagshipPanel,
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -81,7 +84,7 @@ export function CompetencyPosture({
   competencies,
 }: CompetencyPostureProps) {
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Initial Competency Posture"
       description="Constitutional competency expectations represented without certification or activation logic"
       emphasis="strong"
@@ -202,6 +205,6 @@ export function CompetencyPosture({
           </div>
         ) : null}
       </div>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
