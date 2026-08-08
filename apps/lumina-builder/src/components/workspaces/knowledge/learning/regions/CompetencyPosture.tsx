@@ -27,6 +27,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -186,11 +190,10 @@ export function CompetencyPosture({
         })}
 
         {competencies.length === 0 ? (
-          <div
+          <LuminaFlagshipSurface
+            dashed
             className="
-              rounded-[18px] border border-dashed border-blue-400/56
-              bg-slate-950/34 px-5 py-8 text-center md:col-span-2
-              ring-1 ring-inset ring-cyan-300/14
+              px-5 py-8 text-center md:col-span-2
               shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
             "
           >
@@ -201,7 +204,7 @@ export function CompetencyPosture({
             <p className="mt-2 text-xs leading-5 text-sky-500/72">
               The modeled educational state does not currently expose competency evidence.
             </p>
-          </div>
+          </LuminaFlagshipSurface>
         ) : null}
       </div>
     </LuminaFlagshipPanel>
