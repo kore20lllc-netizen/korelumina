@@ -154,10 +154,12 @@ export function ActivationReadiness() {
     >
       <div className="grid gap-3 border-b border-cyan-300/14 p-4 sm:grid-cols-3">
         <div
-          className={cn(
-            "p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className={flagshipAppearance.eyebrow}>
             Readiness posture
@@ -169,10 +171,12 @@ export function ActivationReadiness() {
         </div>
 
         <div
-          className={cn(
-            "p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className={flagshipAppearance.eyebrow}>
             Completed gates
@@ -184,10 +188,12 @@ export function ActivationReadiness() {
         </div>
 
         <div
-          className={cn(
-            "p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className={flagshipAppearance.eyebrow}>
             Blocking gates
@@ -260,10 +266,12 @@ export function ActivationReadiness() {
 
       <div className="grid gap-3 border-t border-cyan-300/14 p-4 sm:grid-cols-2">
         <div
-          className={cn(
-            "p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className="flex items-center gap-3 text-xs font-semibold text-amber-400">
             <ExecutivePremiumIcon
@@ -279,10 +287,12 @@ export function ActivationReadiness() {
         </div>
 
         <div
-          className={cn(
-            "p-4",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 p-4
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+          "
         >
           <div className="flex items-center gap-3 text-xs font-semibold text-amber-400">
             <ExecutivePremiumIcon
