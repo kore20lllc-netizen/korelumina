@@ -24,6 +24,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   FlagshipInput,
   FlagshipSelect,
   LearningStatusBadge,
@@ -293,11 +297,12 @@ export function EducationalCorpusExplorer({
 
       <div className="relative block min-h-[620px] w-full grid gap-3 p-4">
         {artifacts.length === 0 ? (
-          <div
-            className={cn(
-              "flex min-h-[320px] items-center justify-center border-dashed px-6 text-center",
-              flagshipAppearance.card,
-            )}
+          <LuminaFlagshipSurface
+            dashed
+            className="
+              flex min-h-[320px] items-center justify-center px-6 text-center
+              shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+            "
           >
             <div className="max-w-sm">
               <div className="text-sm font-semibold text-sky-200">
@@ -308,7 +313,7 @@ export function EducationalCorpusExplorer({
                 Adjust search, authority, approval or category filters.
               </div>
             </div>
-          </div>
+          </LuminaFlagshipSurface>
         ) : (
           artifacts.map((artifact) => {
             const selected =
