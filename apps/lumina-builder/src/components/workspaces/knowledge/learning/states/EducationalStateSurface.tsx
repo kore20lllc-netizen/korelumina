@@ -25,8 +25,8 @@ import type {
 } from "../model";
 
 import {
-  FlagshipPanel,
-} from "../presentation";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 interface EducationalStateSurfaceProps {
   state: EducationalUiState;
@@ -206,7 +206,7 @@ export function EducationalStateSurface({
     statePresentation(state);
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       emphasis="strong"
       className="overflow-hidden"
     >
@@ -288,6 +288,6 @@ export function EducationalStateSurface({
           {STATE_COPY[state].affordance}
         </LuminaButton>
       </section>
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
