@@ -15,6 +15,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -254,11 +258,9 @@ export function EducationalProgress({
                     sm:grid-cols-2
                   "
                 >
-                  <div
+                  <LuminaFlagshipSurface
                     className="
-                      rounded-[18px] border border-blue-400/56
-                      bg-slate-950/34 p-3
-                      ring-1 ring-inset ring-cyan-300/14
+                      p-3
                       shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
                     "
                   >
@@ -271,13 +273,11 @@ export function EducationalProgress({
                         ? "No prerequisite modules"
                         : module.dependencyIds.join(" • ")}
                     </div>
-                  </div>
+                  </LuminaFlagshipSurface>
 
-                  <div
+                  <LuminaFlagshipSurface
                     className="
-                      rounded-[18px] border border-blue-400/56
-                      bg-slate-950/34 p-3
-                      ring-1 ring-inset ring-cyan-300/14
+                      p-3
                       shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
                     "
                   >
@@ -290,7 +290,7 @@ export function EducationalProgress({
                         module.coverageGap ??
                         "No unresolved gap"}
                     </div>
-                  </div>
+                  </LuminaFlagshipSurface>
                 </div>
               )}
             </LuminaExecutiveCard>
@@ -298,11 +298,10 @@ export function EducationalProgress({
         })}
 
         {modules.length === 0 ? (
-          <div
+          <LuminaFlagshipSurface
+            dashed
             className="
-              rounded-[18px] border border-dashed border-blue-400/56
-              bg-slate-950/34 px-5 py-8 text-center
-              ring-1 ring-inset ring-cyan-300/14
+              px-5 py-8 text-center
               shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
             "
           >
@@ -313,7 +312,7 @@ export function EducationalProgress({
             <p className="mt-2 text-xs leading-5 text-sky-500/72">
               The modeled curriculum does not currently expose progress modules.
             </p>
-          </div>
+          </LuminaFlagshipSurface>
         ) : null}
       </div>
     </LuminaFlagshipPanel>
