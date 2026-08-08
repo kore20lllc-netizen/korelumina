@@ -247,10 +247,12 @@ export function EducationalTimeline({
 
         {events.length === 0 ? (
           <div
-            className={cn(
-              "border-dashed px-5 py-8 text-center",
-              flagshipAppearance.mutedSurface,
-            )}
+            className="
+              rounded-[18px] border border-dashed border-blue-400/56
+              bg-slate-950/34 px-5 py-8 text-center
+              ring-1 ring-inset ring-cyan-300/14
+              shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+            "
           >
             <div className="text-sm font-semibold text-amber-500">
               No timeline events match this filter
