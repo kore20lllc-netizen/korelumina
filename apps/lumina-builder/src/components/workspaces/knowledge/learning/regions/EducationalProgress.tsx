@@ -11,6 +11,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
@@ -70,18 +74,10 @@ export function EducationalProgress({
   onModuleSelect,
 }: EducationalProgressProps) {
   return (
-    <section className="group relative h-auto min-w-0 overflow-hidden rounded-[30px] border border-blue-400/70 bg-slate-950/48 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_30px_rgba(37,99,235,.16),0_28px_160px_rgba(0,0,0,.40),inset_0_0_22px_rgba(56,189,248,.05)] ring-1 ring-inset ring-cyan-300/20 backdrop-blur-[44px] backdrop-saturate-[170%]">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_2%,rgba(124,58,237,.30),transparent_36%),radial-gradient(circle_at_29%_42%,rgba(217,119,6,.17),transparent_27%),radial-gradient(circle_at_74%_64%,rgba(67,56,202,.13),transparent_30%),radial-gradient(circle_at_91%_14%,rgba(34,211,238,.035),transparent_22%),radial-gradient(circle_at_57%_86%,rgba(236,72,153,.075),transparent_18%),linear-gradient(180deg,rgba(255,255,255,.018),transparent_24%,rgba(2,6,23,.10))]" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-[7%] top-0 h-px opacity-90 [background:linear-gradient(90deg,transparent_0%,rgba(96,165,250,.10)_12%,rgba(247,215,116,.42)_34%,rgba(255,255,255,.62)_50%,rgba(125,211,252,.28)_69%,rgba(59,130,246,.08)_88%,transparent_100%)] [box-shadow:0_0_22px_rgba(125,211,252,.14),0_0_40px_rgba(247,215,116,.08)]" />
-
-      <div className="relative z-10 border-b border-white/[0.06] px-5 py-5">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/82">
-          Educational Progress
-        </h2>
-        <p className="mt-2 max-w-4xl text-xs leading-5 text-white/48">
-          Curriculum modules, dependency gates, competency objectives, coverage gaps and unresolved conflicts
-        </p>
-      </div>
+    <LuminaFlagshipPanel
+      title="Educational Progress"
+      description="Curriculum modules, dependency gates, competency objectives, coverage gaps and unresolved conflicts"
+    >
       <div className="grid gap-3 p-4">
         {modules.map((module) => {
           const Icon =
@@ -320,6 +316,6 @@ export function EducationalProgress({
           </div>
         ) : null}
       </div>
-    </section>
+    </LuminaFlagshipPanel>
   );
 }
