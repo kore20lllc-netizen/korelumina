@@ -16,11 +16,14 @@ import type {
 } from "../model";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
-  FlagshipCard,
   FlagshipInput,
   FlagshipSelect,
   LearningStatusBadge,
@@ -312,7 +315,7 @@ export function EducationalCorpusExplorer({
               artifact.id === selectedArtifactId;
 
             return (
-              <FlagshipCard
+              <LuminaFlagshipCard
                 key={artifact.id}
                 onClick={() => {
                   onArtifactSelect(
@@ -323,8 +326,11 @@ export function EducationalCorpusExplorer({
                 selected={selected}
                 interactive
                 className={cn(
-                  "p-4 text-left",
-                  selected && "ring-0",
+                  "group p-4 text-left",
+                  selected && [
+                    "ring-1 ring-inset ring-cyan-200/38",
+                    "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_24px_rgba(34,211,238,0.12),0_18px_44px_rgba(2,6,23,0.30)]",
+                  ].join(" "),
                 )}
               >
                 <div
@@ -423,7 +429,7 @@ export function EducationalCorpusExplorer({
                     )}
                   />
                 </div>
-              </FlagshipCard>
+              </LuminaFlagshipCard>
             );
           })
         )}
