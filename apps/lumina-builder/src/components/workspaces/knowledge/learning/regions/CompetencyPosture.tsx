@@ -19,11 +19,14 @@ import type {
 } from "../model";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
-  FlagshipCard,
   LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
@@ -100,18 +103,11 @@ export function CompetencyPosture({
             );
 
           return (
-            <FlagshipCard
+            <LuminaFlagshipCard
               key={competency.id}
-              className={cn(
-                flagshipAppearance.card,
-                "group relative overflow-hidden p-4",
-                "transition-[border-color,background-color,box-shadow,transform] duration-200",
-                "hover:-translate-y-0.5 hover:border-cyan-200/48",
-                "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.08),0_16px_34px_rgba(2,6,23,0.24)]",
-                "motion-reduce:transform-none motion-reduce:transition-none",
-              )}
+              interactive
+              className="group relative p-4"
             >
-              <div className={flagshipAppearance.cardHighlight} />
 
               <div
                 aria-hidden="true"
@@ -166,9 +162,10 @@ export function CompetencyPosture({
                   <div
                     className={cn(
                       "mt-3 rounded-xl border px-3 py-2.5",
-                      "border-cyan-300/18 bg-slate-950/34",
+                      "border-blue-400/56 bg-slate-950/34",
+                      "ring-1 ring-inset ring-cyan-300/14",
                       "text-[11px] leading-5 text-sky-300/72",
-                      "shadow-[inset_0_1px_5px_rgba(0,0,0,0.26),inset_0_1px_0_rgba(186,230,253,0.04)]",
+                      "shadow-[inset_0_1px_5px_rgba(0,0,0,0.26),inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]",
                     )}
                   >
                     <div
@@ -184,7 +181,7 @@ export function CompetencyPosture({
                   </div>
                 </div>
               </div>
-            </FlagshipCard>
+            </LuminaFlagshipCard>
           );
         })}
 
