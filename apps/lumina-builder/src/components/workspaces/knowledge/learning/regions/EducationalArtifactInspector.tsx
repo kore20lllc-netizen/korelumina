@@ -67,10 +67,13 @@ function ItemList({
   if (items.length === 0) {
     return (
       <div
-        className={cn(
-          "border-dashed px-4 py-5 text-xs leading-5 text-sky-500/68",
-          flagshipAppearance.mutedSurface,
-        )}
+        className="
+          rounded-[18px] border border-dashed border-blue-400/56
+          bg-slate-950/34 px-4 py-5
+          text-xs leading-5 text-sky-500/68
+          ring-1 ring-inset ring-cyan-300/14
+          shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+        "
       >
         {emptyLabel}
       </div>
@@ -82,14 +85,18 @@ function ItemList({
       {items.map((item) => (
         <div
           key={item}
-          className={cn(
-            "px-4 py-3 text-xs leading-5 text-sky-200/80",
-            "transition-[border-color,background-color,box-shadow] duration-200",
-            "hover:border-cyan-200/52 hover:bg-cyan-300/[0.04]",
-            "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.06),0_8px_20px_rgba(2,6,23,0.18)]",
-            "motion-reduce:transition-none",
-            flagshipAppearance.mutedSurface,
-          )}
+          className="
+            rounded-[18px] border border-blue-400/56
+            bg-slate-950/34 px-4 py-3
+            text-xs leading-5 text-sky-200/80
+            ring-1 ring-inset ring-cyan-300/14
+            shadow-[inset_0_1px_0_rgba(186,230,253,0.05),0_0_16px_rgba(37,99,235,0.08)]
+            transition-[border-color,background-color,box-shadow] duration-200
+            hover:border-cyan-200/72 hover:bg-cyan-300/[0.04]
+            hover:ring-blue-300/44
+            hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.06),0_0_18px_rgba(37,99,235,0.10),0_8px_20px_rgba(2,6,23,0.18)]
+            motion-reduce:transition-none
+          "
         >
           {item}
         </div>
@@ -128,11 +135,13 @@ function InspectorSection({
       </p>
 
       <div
-        className={cn(
-          "mt-5 overflow-hidden p-5",
-          "shadow-[inset_0_2px_8px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(186,230,253,0.06)]",
-          flagshipAppearance.innerSurface,
-        )}
+        className="
+          mt-5 overflow-hidden rounded-[18px]
+          border border-blue-400/56
+          bg-slate-950/34 p-5
+          ring-1 ring-inset ring-cyan-300/14
+          shadow-[inset_0_2px_8px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(186,230,253,0.06),0_0_16px_rgba(37,99,235,0.08)]
+        "
       >
         {children}
       </div>
