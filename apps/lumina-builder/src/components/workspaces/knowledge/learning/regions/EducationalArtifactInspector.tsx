@@ -19,7 +19,10 @@ import type {
 } from "../model";
 
 import {
-  FlagshipPanel,
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   FlagshipTabs,
   flagshipAppearance,
 } from "../presentation";
@@ -146,7 +149,7 @@ export function EducationalArtifactInspector({
   ] = useState("overview");
 
   return (
-    <FlagshipPanel
+    <LuminaFlagshipPanel
       title="Educational Artifact Inspector"
       description="Authority • Provenance • Lineage • Educational impact"
       emphasis="strong"
@@ -355,6 +358,6 @@ export function EducationalArtifactInspector({
           </div>
         </FlagshipTabs>
       )}
-    </FlagshipPanel>
+    </LuminaFlagshipPanel>
   );
 }
