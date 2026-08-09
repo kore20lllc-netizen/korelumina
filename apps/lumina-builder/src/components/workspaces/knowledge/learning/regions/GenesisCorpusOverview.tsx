@@ -20,6 +20,10 @@ import type {
 } from "../model";
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -28,7 +32,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -150,9 +153,12 @@ export function GenesisCorpusOverview({
       description="Historical educational foundation assembled from governed repository, documentation, decision and conversation sources"
       emphasis="strong"
       toolbar={
-        <LearningStatusBadge tone="complete">
+        <LuminaBadge
+          variant="complete"
+          className="min-h-7 text-[11px] leading-none"
+        >
           Lineage continuous
-        </LearningStatusBadge>
+        </LuminaBadge>
       }
     >
       <div className="grid gap-3 p-4 sm:grid-cols-2 xl:grid-cols-3">
