@@ -19,6 +19,10 @@ import type {
 } from "../model";
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -31,7 +35,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -47,11 +50,11 @@ const STATUS_ICON = {
   "needs-review": AlertCircle,
 };
 
-const STATUS_TONE = {
+const STATUS_VARIANT = {
   completed: "complete",
   active: "active",
   blocked: "blocked",
-  "not-started": "neutral",
+  "not-started": "muted",
   "needs-review": "review",
 } as const;
 
@@ -148,15 +151,16 @@ export function CompetencyPosture({
                       {competency.title}
                     </h3>
 
-                    <LearningStatusBadge
-                      tone={
-                        STATUS_TONE[
+                    <LuminaBadge
+                      variant={
+                        STATUS_VARIANT[
                           competency.status
                         ]
                       }
+                      className="min-h-7 text-[11px] leading-none"
                     >
                       {competency.status}
-                    </LearningStatusBadge>
+                    </LuminaBadge>
                   </div>
 
                   <p className="mt-2 text-xs leading-5 text-sky-500/76">
