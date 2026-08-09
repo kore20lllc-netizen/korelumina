@@ -37,6 +37,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaSectionNavigator,
 } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
 
@@ -418,9 +422,11 @@ export function EducationalCommandCenter() {
                       artifact.id;
 
                     return (
-                      <button
+                      <LuminaFlagshipCard
                         key={artifact.id}
-                        type="button"
+                        as="button"
+                        interactive
+                        selected={selected}
                         aria-pressed={selected}
                         onClick={() => {
                           dashboard.selection.setArtifactId(
@@ -428,36 +434,22 @@ export function EducationalCommandCenter() {
                           );
                         }}
                         className={cn(
-                          "group relative overflow-hidden rounded-[22px] border p-5 text-left",
-                          "transition-[transform,border-color,background-color,box-shadow] duration-200",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/42",
-                          "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-                          "motion-reduce:transform-none motion-reduce:transition-none",
+                          "p-5 text-left",
                           selected
                             ? [
                                 "border-cyan-200/62",
+                                "ring-0",
                                 "bg-[linear-gradient(135deg,rgba(8,27,62,0.80),rgba(31,17,67,0.68),rgba(6,24,55,0.76))]",
                                 "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_26px_rgba(34,211,238,0.12),0_16px_36px_rgba(2,6,23,0.24)]",
                               ].join(" ")
                             : [
-                                "border-cyan-300/60 ring-1 ring-inset ring-blue-400/36",
                                 "bg-[linear-gradient(135deg,rgba(3,12,35,0.64),rgba(15,12,42,0.54),rgba(3,14,37,0.62))]",
                                 "shadow-[inset_0_1px_0_rgba(186,230,253,0.07),0_0_18px_rgba(37,99,235,0.10),0_12px_28px_rgba(2,6,23,0.17)]",
-                                "hover:-translate-y-0.5 hover:border-cyan-200/78 hover:ring-blue-300/52",
                                 "hover:bg-[linear-gradient(135deg,rgba(5,18,49,0.76),rgba(24,16,58,0.64),rgba(5,20,48,0.72))]",
                                 "hover:shadow-[inset_0_1px_0_rgba(186,230,253,0.08),0_16px_34px_rgba(2,6,23,0.24)]",
                               ].join(" "),
                         )}
                       >
-                        <div
-                          aria-hidden="true"
-                          className={cn(
-                            "pointer-events-none absolute inset-x-5 top-0 h-px",
-                            selected
-                              ? "bg-gradient-to-r from-transparent via-cyan-200/66 to-transparent"
-                              : flagshipAppearance.cardHighlight,
-                          )}
-                        />
 
                         <div
                           className="
@@ -499,7 +491,7 @@ export function EducationalCommandCenter() {
                             {artifact.version}
                           </span>
                         </div>
-                      </button>
+                      </LuminaFlagshipCard>
                     );
                   },
                 )}
