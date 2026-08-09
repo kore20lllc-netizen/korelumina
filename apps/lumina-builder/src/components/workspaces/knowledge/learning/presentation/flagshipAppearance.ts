@@ -5,6 +5,9 @@ export const flagshipAppearance = {
   panelMeta:
     "text-[11px] font-medium text-sky-400/72",
 
+  cardHighlight:
+    "pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent",
+
   cardTitle:
     "text-sm font-semibold tracking-[-0.01em] text-sky-200",
 
