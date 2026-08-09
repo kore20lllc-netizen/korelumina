@@ -16,6 +16,10 @@ import {
 } from "@/lib/utils";
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -28,7 +32,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -150,9 +153,12 @@ export function ActivationReadiness() {
       title="Activation Readiness"
       description="Informational readiness only — no activation, certification or authority control is available."
       toolbar={
-        <LearningStatusBadge tone="blocked">
+        <LuminaBadge
+          variant="blocked"
+          className="min-h-7 text-[11px] leading-none"
+        >
           Not ready
-        </LearningStatusBadge>
+        </LuminaBadge>
       }
       emphasis="strong"
     >
@@ -244,13 +250,14 @@ export function ActivationReadiness() {
                     {item.label}
                   </h3>
 
-                  <LearningStatusBadge
-                    tone={toneForState(
+                  <LuminaBadge
+                    variant={toneForState(
                       item.state,
                     )}
+                    className="min-h-7 text-[11px] leading-none"
                   >
                     {item.state}
-                  </LearningStatusBadge>
+                  </LuminaBadge>
                 </div>
 
                 <p className="mt-2 text-xs leading-5 text-sky-500/76">
