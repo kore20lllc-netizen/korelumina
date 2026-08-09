@@ -5,17 +5,6 @@ export const flagshipAppearance = {
   panelMeta:
     "text-[11px] font-medium text-sky-400/72",
 
-  card: [
-    "relative overflow-hidden rounded-[22px] border",
-    "border-cyan-300/40",
-    "bg-[linear-gradient(135deg,rgba(3,12,35,0.68),rgba(17,10,45,0.62),rgba(3,14,37,0.66))]",
-    "ring-1 ring-inset ring-cyan-100/10",
-    "shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_34px_rgba(2,6,23,0.20)]",
-  ].join(" "),
-
-  cardHighlight:
-    "pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent",
-
   cardTitle:
     "text-sm font-semibold tracking-[-0.01em] text-sky-200",
 
