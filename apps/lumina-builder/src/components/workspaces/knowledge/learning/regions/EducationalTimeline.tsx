@@ -16,6 +16,10 @@ import type {
 } from "../model";
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -24,7 +28,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -42,7 +45,7 @@ const STATUS_MAP = {
   completed: "complete",
   active: "active",
   blocked: "blocked",
-  "not-started": "neutral",
+  "not-started": "muted",
   "needs-review": "review",
 } as const;
 
@@ -182,11 +185,12 @@ export function EducationalTimeline({
                   {event.type}
                 </span>
 
-                <LearningStatusBadge
-                  tone={STATUS_MAP[event.status]}
+                <LuminaBadge
+                  variant={STATUS_MAP[event.status]}
+                  className="min-h-7 text-[11px] leading-none"
                 >
                   {event.status}
-                </LearningStatusBadge>
+                </LuminaBadge>
 
                 <span
                   className="
