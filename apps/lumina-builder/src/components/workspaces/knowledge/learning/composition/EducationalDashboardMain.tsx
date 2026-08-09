@@ -26,7 +26,11 @@ export function EducationalDashboardMain({
           2xl:grid-cols-[minmax(0,1.55fr)_minmax(420px,0.85fr)]
         "
       >
-        <EducationalCorpusExplorer
+        <div
+          id="learning-corpus-explorer"
+          className="scroll-mt-32"
+        >
+          <EducationalCorpusExplorer
           artifacts={
             dashboard.filters.visibleArtifacts
           }
@@ -52,15 +56,25 @@ export function EducationalDashboardMain({
             dashboard.selection.setArtifactId
           }
         />
+        </div>
 
         <div className="min-w-0 space-y-6">
-          <EducationalArtifactInspector
+          <div
+            id="learning-artifact-inspector"
+            className="scroll-mt-32"
+          >
+            <EducationalArtifactInspector
             artifact={
               dashboard.selection.selectedArtifact
             }
           />
+          </div>
 
-          <EducationalTimeline
+          <div
+            id="learning-timeline"
+            className="scroll-mt-32"
+          >
+            <EducationalTimeline
             events={
               dashboard.visibleTimeline
             }
@@ -84,6 +98,7 @@ export function EducationalDashboardMain({
               dashboard.selection.setArtifactId
             }
           />
+          </div>
         </div>
       </section>
 
@@ -94,7 +109,10 @@ export function EducationalDashboardMain({
           xl:grid-cols-2
         "
       >
-        <div className="min-w-0 [&>*]:h-full">
+        <div
+          id="learning-competency"
+          className="min-w-0 scroll-mt-32 [&>*]:h-full"
+        >
           <CompetencyPosture
             competencies={
               dashboard.competencies
@@ -102,7 +120,10 @@ export function EducationalDashboardMain({
           />
         </div>
 
-        <div className="min-w-0 [&>*]:h-full">
+        <div
+          id="learning-activation"
+          className="min-w-0 scroll-mt-32 [&>*]:h-full"
+        >
           <ActivationReadiness />
         </div>
       </section>
