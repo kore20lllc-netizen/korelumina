@@ -16,6 +16,10 @@ import type {
 } from "../model";
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -32,7 +36,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipControl";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -65,7 +68,7 @@ function statusTone(
     case "needs-review":
       return "review" as const;
     default:
-      return "neutral" as const;
+      return "muted" as const;
   }
 }
 
@@ -129,9 +132,12 @@ export function EducationalCorpusExplorer({
       title="Educational Corpus Explorer"
       description="Governed curriculum with authority, approval, ownership, scope, version, provenance, dependencies and supersession."
       toolbar={
-        <LearningStatusBadge tone="active">
+        <LuminaBadge
+          variant="active"
+          className="min-h-7 text-[11px] leading-none"
+        >
           Fixture curriculum
-        </LearningStatusBadge>
+        </LuminaBadge>
       }
       emphasis="strong"
     >
@@ -352,13 +358,14 @@ export function EducationalCorpusExplorer({
                         {artifact.category}
                       </span>
 
-                      <LearningStatusBadge
-                        tone={statusTone(
+                      <LuminaBadge
+                        variant={statusTone(
                           artifact.educationalStatus,
                         )}
+                        className="min-h-7 text-[11px] leading-none"
                       >
                         {artifact.educationalStatus}
-                      </LearningStatusBadge>
+                      </LuminaBadge>
 
                       <span className={flagshipAppearance.metadataLabel}>
                         {artifact.version}
