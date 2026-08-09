@@ -95,6 +95,14 @@ interface KnowledgeProductionSelection {
   canonicalReviewEventId?: string;
 }
 
+function getScrollBehavior(): ScrollBehavior {
+  return window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches
+    ? "auto"
+    : "smooth";
+}
+
 const PRODUCTION_SECTIONS = [
   {
     id: "knowledge-flow-engine",
