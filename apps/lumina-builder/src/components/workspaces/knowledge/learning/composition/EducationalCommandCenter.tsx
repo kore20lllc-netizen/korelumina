@@ -4,15 +4,9 @@ import {
 } from "react";
 
 import {
-  BookOpenCheck,
-  BrainCircuit,
   Eye,
-  FileSearch,
-  Gauge,
   Layers3,
-  ListTree,
   RotateCcw,
-  Clock3,
 } from "lucide-react";
 
 import {
@@ -41,10 +35,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
-  LuminaSectionNavigator,
-} from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
-
-import {
   FlagshipPanel,
   flagshipAppearance,
 } from "../presentation";
@@ -65,44 +55,6 @@ import {
 import {
   useEducationalDashboardState,
 } from "../state";
-
-const LEARNING_SECTIONS = [
-  {
-    id: "learning-genesis-corpus",
-    label: "Genesis Corpus",
-    icon: BookOpenCheck,
-  },
-  {
-    id: "learning-genesis-sources",
-    label: "Genesis Sources",
-    icon: Layers3,
-  },
-  {
-    id: "learning-corpus-explorer",
-    label: "Corpus Explorer",
-    icon: ListTree,
-  },
-  {
-    id: "learning-artifact-inspector",
-    label: "Artifact Inspector",
-    icon: FileSearch,
-  },
-  {
-    id: "learning-timeline",
-    label: "Timeline",
-    icon: Clock3,
-  },
-  {
-    id: "learning-competency",
-    label: "Competency",
-    icon: BrainCircuit,
-  },
-  {
-    id: "learning-activation",
-    label: "Activation",
-    icon: Gauge,
-  },
-] as const;
 
 export function EducationalCommandCenter() {
   const dashboard =
@@ -370,15 +322,6 @@ export function EducationalCommandCenter() {
     </div>
   </div>
 
-  <div className="xl:col-span-2">
-    <LuminaSectionNavigator
-      items={LEARNING_SECTIONS}
-      ariaLabel="Educational learning sections"
-      topTargetId="learning-command-center-top"
-      minWidthClassName="min-w-[920px]"
-      gridColumnsClassName="grid-cols-7"
-    />
-  </div>
 </section>
       </div>
 

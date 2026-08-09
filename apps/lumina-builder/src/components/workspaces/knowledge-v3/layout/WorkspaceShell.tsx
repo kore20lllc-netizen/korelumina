@@ -13,6 +13,7 @@ interface WorkspaceShellProps {
   compactContent?: boolean;
   statusLayer?: ReactNode;
   educationalCommandDeck?: ReactNode;
+  learningNavigator?: ReactNode;
 }
 
 export function WorkspaceShell({
@@ -26,6 +27,7 @@ export function WorkspaceShell({
   compactContent = false,
   statusLayer,
   educationalCommandDeck,
+  learningNavigator,
 }: WorkspaceShellProps) {
   const hasProductionNavigator =
     productionNavigator !== null;
@@ -113,6 +115,19 @@ export function WorkspaceShell({
           </section>
         </div>
       </section>
+
+      {learningNavigator ? (
+        <div
+          className={[
+            "sticky top-4 z-40 px-6",
+            compactContent
+              ? "max-w-[1800px]"
+              : "",
+          ].join(" ")}
+        >
+          {learningNavigator}
+        </div>
+      ) : null}
 
       <div
         className={[
