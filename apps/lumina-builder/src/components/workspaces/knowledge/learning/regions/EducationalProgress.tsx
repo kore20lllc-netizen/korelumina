@@ -6,13 +6,14 @@ import {
   LockKeyhole,
 } from "lucide-react";
 
-import {
-  LuminaExecutiveCard,
-} from "@/components/design-system/lumina";
 
 import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
   LuminaFlagshipSurface,
@@ -91,7 +92,7 @@ export function EducationalProgress({
             module.id === selectedModuleId;
 
           return (
-            <LuminaExecutiveCard
+            <LuminaFlagshipCard
               key={module.id}
               as="button"
               interactive
@@ -99,18 +100,18 @@ export function EducationalProgress({
               onClick={() => {
                 onModuleSelect(module.id);
               }}
-              className="p-4"
-              bodyClassName="gap-0"
+              className={cn(
+                "p-4",
+                selected
+                  ? [
+                      "border-cyan-200/62",
+                      "ring-0",
+                      "bg-[linear-gradient(135deg,rgba(8,27,62,0.80),rgba(31,17,67,0.68),rgba(6,24,55,0.76))]",
+                      "shadow-[inset_0_1px_0_rgba(186,230,253,0.10),0_0_26px_rgba(34,211,238,0.12),0_16px_36px_rgba(2,6,23,0.24)]",
+                    ].join(" ")
+                  : "",
+              )}
             >
-              <div
-                aria-hidden="true"
-                className={cn(
-                  "pointer-events-none absolute inset-x-5 top-0 h-px",
-                  selected
-                    ? "bg-gradient-to-r from-transparent via-cyan-200/66 to-transparent"
-                    : flagshipAppearance.cardHighlight,
-                )}
-              />
 
               <div className="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex min-w-0 gap-3">
@@ -293,7 +294,7 @@ export function EducationalProgress({
                   </LuminaFlagshipSurface>
                 </div>
               )}
-            </LuminaExecutiveCard>
+            </LuminaFlagshipCard>
           );
         })}
 
