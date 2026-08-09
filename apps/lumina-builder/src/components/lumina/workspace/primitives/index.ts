@@ -5,4 +5,8 @@ export * from "./LuminaTimelineCard";
 export * from "./LuminaInspectorSection";
 export * from "./LuminaActivityFeedRow";
 export * from "./LuminaFlagshipPanel";
+export * from "./LuminaFlagshipCard";
+export * from "./LuminaFlagshipControl";
+export * from "./LuminaFlagshipSurface";
+export * from "./LuminaFlagshipTabs";
 export * from "./LuminaSectionNavigator";
