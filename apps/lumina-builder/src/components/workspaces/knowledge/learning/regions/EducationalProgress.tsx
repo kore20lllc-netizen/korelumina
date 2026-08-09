@@ -8,6 +8,10 @@ import {
 
 
 import {
+  LuminaBadge,
+} from "@/components/lumina/workspace/primitives/LuminaBadge";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -32,7 +36,6 @@ import type {
 } from "../model";
 
 import {
-  LearningStatusBadge,
   flagshipAppearance,
 } from "../presentation";
 
@@ -50,11 +53,11 @@ const STATUS_ICON = {
   "needs-review": AlertCircle,
 };
 
-const STATUS_TONE = {
+const STATUS_VARIANT = {
   completed: "complete",
   active: "active",
   blocked: "blocked",
-  "not-started": "neutral",
+  "not-started": "muted",
   "needs-review": "review",
 } as const;
 
@@ -144,15 +147,16 @@ export function EducationalProgress({
                         {module.title}
                       </h3>
 
-                      <LearningStatusBadge
-                        tone={
-                          STATUS_TONE[
+                      <LuminaBadge
+                        variant={
+                          STATUS_VARIANT[
                             module.status
                           ]
                         }
+                        className="min-h-7 text-[11px] leading-none"
                       >
                         {module.status}
-                      </LearningStatusBadge>
+                      </LuminaBadge>
                     </div>
 
                     <p className="mt-2 text-xs leading-5 text-sky-500/76">
