@@ -23,12 +23,6 @@ export const flagshipAppearance = {
   governanceValue:
     "mt-1 text-sm font-medium text-amber-300/90",
 
-  mutedSurface: [
-    "rounded-[18px] border border-cyan-300/24",
-    "bg-slate-950/28",
-    "ring-1 ring-inset ring-cyan-100/6",
-  ].join(" "),
-
   canonicalSurface: [
     "border border-blue-400/56",
     "bg-[linear-gradient(135deg,rgba(5,14,38,.68),rgba(20,12,48,.60),rgba(5,16,39,.66))]",
