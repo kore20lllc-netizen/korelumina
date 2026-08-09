@@ -23,18 +23,6 @@ export const flagshipAppearance = {
   governanceValue:
     "mt-1 text-sm font-medium text-amber-300/90",
 
-  innerPanel: [
-    "rounded-[22px] border border-blue-400/48",
-    "ring-1 ring-inset ring-cyan-300/10",
-    "shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_30px_rgba(2,6,23,0.18)]",
-  ].join(" "),
-
-  innerSurface: [
-    "rounded-[18px] border border-cyan-300/32",
-    "bg-slate-950/34",
-    "ring-1 ring-inset ring-cyan-100/8",
-  ].join(" "),
-
   mutedSurface: [
     "rounded-[18px] border border-cyan-300/24",
     "bg-slate-950/28",
