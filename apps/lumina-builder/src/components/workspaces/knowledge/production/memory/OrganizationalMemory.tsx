@@ -289,15 +289,17 @@ export function OrganizationalMemory({
                   }
                   className="block w-full text-left"
                 >
-                  <article
+                  <LuminaFlagshipCard
+                    as="article"
                     className={[
-                      projectionArticleClass,
+                      "rounded-[22px] p-4",
                       "transition-[border-color,box-shadow,transform] duration-200",
                       selected
                         ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                         : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                     ].join(" ")}
                   >
+                <div className="relative z-10">
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -357,7 +359,8 @@ export function OrganizationalMemory({
                     </div>
                   </div>
                 </div>
-                  </article>
+                </div>
+                  </LuminaFlagshipCard>
                 </button>
               );
             })}
