@@ -599,7 +599,11 @@ export function ConsumerIntelligence({
           </div>
         </LuminaFlagshipPanel>
 
-        <LuminaStandardPremiumPanel>
+        <LuminaFlagshipPanel
+          title={null}
+          className="[&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={AlertTriangle}
@@ -655,7 +659,8 @@ export function ConsumerIntelligence({
               </div>
             </LuminaStandardPremiumCard>
           </div>
-        </LuminaStandardPremiumPanel>
+          </div>
+        </LuminaFlagshipPanel>
       </div>
     </section>
   );
