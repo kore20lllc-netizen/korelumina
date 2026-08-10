@@ -312,51 +312,52 @@ export function OrganizationalImpact({
                 }
                 className="block w-full text-left"
               >
-                <LuminaStandardPremiumCard
+                <LuminaFlagshipCard
                   as="article"
                   className={[
-                    electricContour.card,
-                    "h-full transition-[border-color,box-shadow,transform] duration-200",
+                    "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
                     selected
                       ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                       : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                   ].join(" ")}
                 >
-                  <div className="flex items-start gap-3">
-                    <ExecutivePremiumIcon
-                      icon={TrendingUp}
-                      state="healthy"
-                    />
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-3">
+                      <ExecutivePremiumIcon
+                        icon={TrendingUp}
+                        state="healthy"
+                      />
 
-                    <div className="min-w-0">
-                      <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
-                        {impact.capsuleReference} · {impact.mission}
+                      <div className="min-w-0">
+                        <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
+                          {impact.capsuleReference} · {impact.mission}
+                        </div>
+
+                        <h4 className="mt-2 text-sm font-semibold text-white">
+                          {impact.title}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 rounded-[16px] border border-emerald-300/20 bg-emerald-300/[0.05] p-3">
+                      <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/56">
+                        Measured outcome
                       </div>
 
-                      <h4 className="mt-2 text-sm font-semibold text-white">
-                        {impact.title}
-                      </h4>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 rounded-[16px] border border-emerald-300/20 bg-emerald-300/[0.05] p-3">
-                    <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/56">
-                      Measured outcome
+                      <div className="mt-1 text-sm font-semibold text-emerald-100">
+                        {impact.outcome}
+                      </div>
                     </div>
 
-                    <div className="mt-1 text-sm font-semibold text-emerald-100">
-                      {impact.outcome}
+                    <div className="mt-3 text-[11px] leading-5 text-sky-300/60">
+                      {impact.detail}
+                    </div>
+
+                    <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-300/56">
+                      {impact.confidence}
                     </div>
                   </div>
-
-                  <div className="mt-3 text-[11px] leading-5 text-sky-300/60">
-                    {impact.detail}
-                  </div>
-
-                  <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-violet-300/56">
-                    {impact.confidence}
-                  </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
               </button>
             );
           })}
