@@ -23,6 +23,10 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaSegmentedTabs,
+} from "@/components/lumina/workspace/primitives/LuminaSegmentedTabs";
+
+import {
   LuminaTimelineCard,
 } from "@/components/lumina/workspace/primitives/LuminaTimelineCard";
 
@@ -354,81 +358,15 @@ export function KnowledgeCapsuleInspector({
           </div>
         </div>
 
-        <div
-          role="tablist"
-          aria-label="Knowledge capsule inspector sections"
-          className="mt-6 flex gap-2 overflow-x-auto pb-1"
-        >
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const active =
-              activeTab === tab.id;
-
-            return (
-              <button
-                key={tab.id}
-                id={`knowledge-inspector-tab-${tab.id}`}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                aria-controls="knowledge-inspector-tabpanel"
-                tabIndex={active ? 0 : -1}
-                onClick={() =>
-                  setActiveTab(tab.id)
-                }
-                onKeyDown={(event) => {
-                  if (
-                    event.key !== "ArrowLeft" &&
-                    event.key !== "ArrowRight"
-                  ) {
-                    return;
-                  }
-
-                  event.preventDefault();
-
-                  const currentIndex =
-                    tabs.findIndex(
-                      (candidate) =>
-                        candidate.id === tab.id,
-                    );
-
-                  const direction =
-                    event.key === "ArrowRight"
-                      ? 1
-                      : -1;
-
-                  const nextIndex =
-                    (currentIndex +
-                      direction +
-                      tabs.length) %
-                    tabs.length;
-
-                  const nextTab =
-                    tabs[nextIndex];
-
-                  setActiveTab(nextTab.id);
-
-                  requestAnimationFrame(() => {
-                    document
-                      .getElementById(
-                        `knowledge-inspector-tab-${nextTab.id}`,
-                      )
-                      ?.focus();
-                  });
-                }}
-                className={[
-                  flagshipAppearance.segmentedTab,
-                  active
-                    ? flagshipAppearance.segmentedTabActive
-                    : flagshipAppearance.segmentedTabInactive,
-                ].join(" ")}
-              >
-                <Icon className="h-3.5 w-3.5" />
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
+        <LuminaSegmentedTabs
+          tabs={tabs}
+          activeTab={activeTab}
+          ariaLabel="Knowledge capsule inspector sections"
+          tabIdPrefix="knowledge-inspector-tab"
+          panelId="knowledge-inspector-tabpanel"
+          onChange={setActiveTab}
+          className="mt-6 pb-1"
+        />
       </header>
 
       <div
