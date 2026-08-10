@@ -348,11 +348,12 @@ export function KnowledgeGenealogy({
 
           <div className="mt-5 grid gap-3">
             {capsule.layers.map((layer) => (
-              <LuminaStandardPremiumCard
+              <LuminaFlagshipCard
                 as="article"
                 key={layer.id}
+                className="rounded-[18px] p-4"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="relative z-10 flex items-start justify-between gap-3">
                   <div>
                     <div className="text-sm font-semibold text-white">
                       {layer.label}
@@ -367,7 +368,7 @@ export function KnowledgeGenealogy({
                     {layer.status}
                   </LuminaStatusBadge>
                 </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             ))}
           </div>
           </div>
