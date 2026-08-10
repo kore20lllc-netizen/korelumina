@@ -375,7 +375,11 @@ export function KnowledgeGenealogy({
           </LuminaFlagshipPanel>
         }
         secondaryRegion={
-          <LuminaStandardPremiumPanel className="h-full">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+          <div className="p-5 sm:p-6">
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-300/62">
             Authority continuity
           </div>
@@ -421,7 +425,8 @@ export function KnowledgeGenealogy({
               </div>
             </LuminaStandardPremiumCard>
           </div>
-          </LuminaStandardPremiumPanel>
+          </div>
+          </LuminaFlagshipPanel>
         }
       />
     </section>
