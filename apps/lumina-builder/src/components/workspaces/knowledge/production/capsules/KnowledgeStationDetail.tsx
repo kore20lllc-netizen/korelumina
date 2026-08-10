@@ -21,6 +21,10 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   flagshipAppearance,
 } from "../../learning/presentation/flagshipAppearance";
 
@@ -209,68 +213,74 @@ function DocumentationStationDetail() {
     <div className="grid gap-4">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {stages.map((stage, index) => (
-          <article
+          <LuminaFlagshipCard
+            as="article"
             key={stage}
-            className={[
-              flagshipAppearance.inspectorDetailCard,
-              "rounded-[18px] bg-cyan-300/[0.035] p-4",
-            ].join(" ")}
+            className="rounded-[18px] bg-cyan-300/[0.035] p-4"
           >
-            <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/62">
-              Stage {index + 1}
+            <div className="relative z-10">
+              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/62">
+                Stage {index + 1}
+              </div>
+              <div className="mt-2 text-sm font-semibold text-amber-400">
+                {stage}
+              </div>
             </div>
-            <div className="mt-2 text-sm font-semibold text-amber-400">
-              {stage}
-            </div>
-          </article>
+          </LuminaFlagshipCard>
         ))}
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-cyan-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/66">
-            Current candidate
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-cyan-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/66">
+              Current candidate
+            </div>
+            <div className="mt-2 text-sm font-semibold text-sky-200">
+              Knowledge Constitution v1
+            </div>
+            <div className="mt-1 text-xs text-sky-500/72">
+              14 concepts · 23 relationships · 96% confidence
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-sky-200">
-            Knowledge Constitution v1
-          </div>
-          <div className="mt-1 text-xs text-sky-500/72">
-            14 concepts · 23 relationships · 96% confidence
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-violet-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/66">
-            Educational mapping
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-violet-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/66">
+              Educational mapping
+            </div>
+            <div className="mt-2 text-sm font-semibold text-violet-200">
+              Governance Foundations
+            </div>
+            <div className="mt-1 text-xs text-sky-500/72">
+              Authority, approval, provenance and activation boundaries
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-violet-200">
-            Governance Foundations
-          </div>
-          <div className="mt-1 text-xs text-sky-500/72">
-            Authority, approval, provenance and activation boundaries
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-amber-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.16em] text-amber-300/66">
-            Manual review
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-amber-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.16em] text-amber-300/66">
+              Manual review
+            </div>
+            <div className="mt-2 text-sm font-semibold text-amber-300">
+              2 unresolved fragments
+            </div>
+            <div className="mt-1 text-xs text-sky-500/72">
+              Source authority and supersession require confirmation
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-amber-300">
-            2 unresolved fragments
-          </div>
-          <div className="mt-1 text-xs text-sky-500/72">
-            Source authority and supersession require confirmation
-          </div>
-        </div>
+        </LuminaFlagshipCard>
       </div>
     </div>
   );
