@@ -31,6 +31,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaTimelineCard";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -112,20 +116,23 @@ function DetailCard({
   tone?: "cyan" | "violet" | "amber" | "emerald" | "rose";
 }) {
   return (
-    <div
+    <LuminaFlagshipCard
+      as="article"
       className={[
-        flagshipAppearance.inspectorDetailCard,
+        "rounded-[16px] p-3",
         flagshipAppearance.inspectorDetailTone[tone],
       ].join(" ")}
     >
-      <div className="text-[9px] font-semibold uppercase tracking-[0.14em] opacity-60">
-        {label}
-      </div>
+      <div className="relative z-10">
+        <div className="text-[9px] font-semibold uppercase tracking-[0.14em] opacity-60">
+          {label}
+        </div>
 
-      <div className="mt-1.5 text-sm font-semibold leading-5">
-        {value}
+        <div className="mt-1.5 text-sm font-semibold leading-5">
+          {value}
+        </div>
       </div>
-    </div>
+    </LuminaFlagshipCard>
   );
 }
 
