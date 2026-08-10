@@ -449,7 +449,11 @@ export function KnowledgeDistributionHub({
             </div>
           </LuminaFlagshipPanel>
 
-          <section className={panelClass}>
+          <LuminaFlagshipPanel
+            title={null}
+            className="[&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
               Capsule genealogy
             </div>
@@ -549,7 +553,8 @@ export function KnowledgeDistributionHub({
                 );
               })}
             </div>
-          </section>
+            </div>
+          </LuminaFlagshipPanel>
         </div>
       </div>
     </LuminaFlagshipPanel>
