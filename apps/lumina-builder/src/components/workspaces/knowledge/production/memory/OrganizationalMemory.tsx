@@ -337,32 +337,47 @@ export function OrganizationalMemory({
                 </div>
 
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  <div className={compactCardClass}>
-                    <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/52">
-                      Canonical source
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[16px] p-3"
+                  >
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/52">
+                        Canonical source
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-emerald-100">
+                        KCAP-2026-042
+                      </div>
                     </div>
-                    <div className="mt-1 text-xs font-semibold text-emerald-100">
-                      KCAP-2026-042
-                    </div>
-                  </div>
+                  </LuminaFlagshipCard>
 
-                  <div className={compactCardClass}>
-                    <div className="text-[9px] uppercase tracking-[0.13em] text-violet-300/52">
-                      Adaptation lineage
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[16px] p-3"
+                  >
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.13em] text-violet-300/52">
+                        Adaptation lineage
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-violet-100">
+                        Memory v1.3
+                      </div>
                     </div>
-                    <div className="mt-1 text-xs font-semibold text-violet-100">
-                      Memory v1.3
-                    </div>
-                  </div>
+                  </LuminaFlagshipCard>
 
-                  <div className={compactCardClass}>
-                    <div className="text-[9px] uppercase tracking-[0.13em] text-amber-300/52">
-                      Authority posture
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[16px] p-3"
+                  >
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.13em] text-amber-300/52">
+                        Authority posture
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-amber-100">
+                        Stewarded, not canonical
+                      </div>
                     </div>
-                    <div className="mt-1 text-xs font-semibold text-amber-100">
-                      Stewarded, not canonical
-                    </div>
-                  </div>
+                  </LuminaFlagshipCard>
                 </div>
                 </div>
                   </LuminaFlagshipCard>
