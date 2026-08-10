@@ -25,6 +25,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   LuminaStandardPremiumCard,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
 
@@ -109,12 +113,6 @@ const panelClass = [
   "rounded-[24px] p-5",
   premiumSurfaces.base.panel,
   electricContour.strength.standard,
-].join(" ");
-
-const topologyClass = [
-  "relative overflow-hidden rounded-[28px] p-4 sm:p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.prominent,
 ].join(" ");
 
 const consumerCardClass = [
@@ -266,9 +264,9 @@ export function KnowledgeDistributionHub({
       </header>
 
       <div className="grid gap-6 p-5 sm:p-6">
-        <section
+        <LuminaFlagshipSurface
           aria-label="Governed knowledge distribution topology"
-          className={topologyClass}
+          className="relative overflow-hidden rounded-[28px] p-4 sm:p-5"
         >
           <div
             aria-hidden="true"
@@ -372,7 +370,7 @@ export function KnowledgeDistributionHub({
               </div>
             </div>
           </div>
-        </section>
+        </LuminaFlagshipSurface>
 
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,.65fr)]">
           <section className={panelClass}>
