@@ -425,18 +425,23 @@ export function ConsumerIntelligence({
                     </div>
                   </div>
 
-                  <div className="mt-4 flex items-start gap-3 rounded-[16px] border border-blue-400/46 bg-cyan-300/[0.025] p-3 ring-1 ring-inset ring-cyan-300/10">
-                    <MessageSquareText className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="mt-4 rounded-[16px] p-3"
+                  >
+                    <div className="relative z-10 flex items-start gap-3">
+                      <MessageSquareText className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
 
-                    <div>
-                      <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-amber-300/56">
-                        Feedback signal
-                      </div>
-                      <div className="mt-1 text-xs leading-5 text-sky-200/68">
-                        {row.signal}
+                      <div>
+                        <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-amber-300/56">
+                          Feedback signal
+                        </div>
+                        <div className="mt-1 text-xs leading-5 text-sky-200/68">
+                          {row.signal}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </LuminaFlagshipCard>
                     </div>
                   </LuminaFlagshipCard>
                 </button>
