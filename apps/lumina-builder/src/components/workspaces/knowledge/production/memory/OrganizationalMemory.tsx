@@ -256,7 +256,11 @@ export function OrganizationalMemory({
       />
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.38fr)_minmax(340px,.62fr)]">
-        <LuminaStandardPremiumPanel>
+        <LuminaFlagshipPanel
+          title={null}
+          className="[&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="p-5 sm:p-6">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Memory adaptation
@@ -358,7 +362,8 @@ export function OrganizationalMemory({
               );
             })}
           </div>
-        </LuminaStandardPremiumPanel>
+          </div>
+        </LuminaFlagshipPanel>
 
         <div className="grid items-stretch gap-5 xl:grid-cols-2">
           <LuminaStandardPremiumPanel className="h-full">
