@@ -13,6 +13,10 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipSurface,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
@@ -488,14 +492,16 @@ export function KnowledgeCapsuleFlowEngine({
                           branchPositions.length;
 
                         return (
-                          <article
+                          <LuminaFlagshipCard
+                            as="article"
                             key={station}
                             aria-label={`${station} station`}
+                            selected={selectedStationId === station}
                             className={[
-                              flagshipAppearance.capsuleFlowStation,
+                              "min-h-[210px] rounded-[20px] p-4",
                               "transition-[border-color,box-shadow,transform] duration-200",
                               selectedStationId === station
-                                ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                                ? ""
                                 : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                             ].join(" ")}
                           >
@@ -681,7 +687,7 @@ export function KnowledgeCapsuleFlowEngine({
                                 className="pointer-events-none absolute -right-4 top-1/2 hidden h-px w-4 bg-gradient-to-r from-cyan-300/48 to-violet-300/16 xl:block"
                               />
                             ) : null}
-                          </article>
+                          </LuminaFlagshipCard>
                         );
                       },
                     )}
