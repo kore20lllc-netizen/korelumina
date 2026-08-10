@@ -16,11 +16,6 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  electricContour,
-  premiumSurfaces,
-} from "@/components/design-system/lumina";
-
-import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -31,10 +26,6 @@ import {
 import {
   LuminaFlagshipSurface,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
-
-import {
-  LuminaStandardPremiumCard,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
 
 import {
   KnowledgeCapsule,
@@ -112,12 +103,6 @@ const statusClasses = {
   archived:
     "border-slate-400/24 bg-slate-400/[0.05] text-slate-300",
 } as const;
-
-const panelClass = [
-  "rounded-[24px] p-5",
-  premiumSurfaces.base.panel,
-  electricContour.strength.standard,
-].join(" ");
 
 function DistributionConsumerCard({
   capsuleId,
