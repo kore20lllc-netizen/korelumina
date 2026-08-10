@@ -389,41 +389,61 @@ export function KnowledgeGenealogy({
           </h3>
 
           <div className="mt-5 grid gap-3">
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
-                Responsible authority
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                  Responsible authority
+                </div>
+                <div className="mt-2 text-sm font-semibold text-cyan-100">
+                  {capsule.responsibleAuthority ?? capsule.authority}
+                </div>
               </div>
-              <div className="mt-2 text-sm font-semibold text-cyan-100">
-                {capsule.responsibleAuthority ?? capsule.authority}
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
-                Remediation lineage
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                  Remediation lineage
+                </div>
+                <div className="mt-2 text-sm font-semibold text-amber-100">
+                  {capsule.remediation ?? "No active remediation required"}
+                </div>
               </div>
-              <div className="mt-2 text-sm font-semibold text-amber-100">
-                {capsule.remediation ?? "No active remediation required"}
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
-                Blocked dependencies
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
+                  Blocked dependencies
+                </div>
+                <div className="mt-2 text-sm font-semibold text-violet-100">
+                  {capsule.blockedDependencies?.join(", ") || "No blocked dependencies"}
+                </div>
               </div>
-              <div className="mt-2 text-sm font-semibold text-violet-100">
-                {capsule.blockedDependencies?.join(", ") || "No blocked dependencies"}
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/52">
-                Integrity posture
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/52">
+                  Integrity posture
+                </div>
+                <div className="mt-2 text-sm font-semibold text-emerald-100">
+                  {capsule.integrity}
+                </div>
               </div>
-              <div className="mt-2 text-sm font-semibold text-emerald-100">
-                {capsule.integrity}
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
           </div>
           </div>
           </LuminaFlagshipPanel>
