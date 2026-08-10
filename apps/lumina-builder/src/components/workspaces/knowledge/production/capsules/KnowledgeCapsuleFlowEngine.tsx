@@ -433,11 +433,11 @@ export function KnowledgeCapsuleFlowEngine({
                 );
 
               return (
-                <section
+                <LuminaFlagshipSurface
                   key={zone.id}
                   aria-labelledby={`${zone.id}-zone-title`}
                   className={[
-                    flagshipAppearance.capsuleFlowZone,
+                    "relative overflow-hidden rounded-[24px] p-4 sm:p-5",
                     zone.classes,
                   ].join(" ")}
                 >
@@ -686,7 +686,7 @@ export function KnowledgeCapsuleFlowEngine({
                       },
                     )}
                   </div>
-                </section>
+                </LuminaFlagshipSurface>
               );
             })}
           </div>
