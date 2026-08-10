@@ -301,71 +301,79 @@ function ConversationStationDetail() {
     <div className="grid gap-4">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {stages.map((stage, index) => (
-          <article
+          <LuminaFlagshipCard
+            as="article"
             key={stage}
-            className={[
-              flagshipAppearance.inspectorDetailCard,
-              "rounded-[18px] bg-violet-300/[0.035] p-4",
-            ].join(" ")}
+            className="rounded-[18px] bg-violet-300/[0.035] p-4"
           >
-            <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/62">
-              Stage {index + 1}
+            <div className="relative z-10">
+              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/62">
+                Stage {index + 1}
+              </div>
+              <div className="mt-2 text-sm font-semibold text-amber-400">
+                {stage}
+              </div>
             </div>
-            <div className="mt-2 text-sm font-semibold text-amber-400">
-              {stage}
-            </div>
-          </article>
+          </LuminaFlagshipCard>
         ))}
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-cyan-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.15em] text-cyan-300/66">
-            Selected conversation
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-cyan-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.15em] text-cyan-300/66">
+              Selected conversation
+            </div>
+            <div className="mt-2 text-sm font-semibold text-sky-200">
+              Phase 1A certification thread
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-sky-200">
-            Phase 1A certification thread
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-violet-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.15em] text-violet-300/66">
-            Educational relevance
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-violet-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.15em] text-violet-300/66">
+              Educational relevance
+            </div>
+            <div className="mt-2 text-sm font-semibold text-violet-200">
+              High · 94%
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-violet-200">
-            High · 94%
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-amber-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.15em] text-amber-300/66">
-            Decisions extracted
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-amber-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.15em] text-amber-300/66">
+              Decisions extracted
+            </div>
+            <div className="mt-2 text-sm font-semibold text-amber-300">
+              7 durable decisions
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-amber-300">
-            7 durable decisions
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-            flagshipAppearance.inspectorDetailCard,
-            "rounded-[18px] bg-emerald-300/[0.05] p-4",
-          ].join(" ")}>
-          <div className="text-[10px] uppercase tracking-[0.15em] text-emerald-300/66">
-            Package posture
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-emerald-300/[0.05] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[10px] uppercase tracking-[0.15em] text-emerald-300/66">
+              Package posture
+            </div>
+            <div className="mt-2 text-sm font-semibold text-emerald-300">
+              Candidate
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-emerald-300">
-            Candidate
-          </div>
-        </div>
+        </LuminaFlagshipCard>
       </div>
     </div>
   );
