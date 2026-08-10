@@ -267,7 +267,11 @@ export function CanonicalKnowledge({
       />
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
-        <LuminaStandardPremiumPanel>
+        <LuminaFlagshipPanel
+          title={null}
+          className="[&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="p-5 sm:p-6">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Published capsules
@@ -428,7 +432,8 @@ export function CanonicalKnowledge({
               );
             })}
           </div>
-        </LuminaStandardPremiumPanel>
+          </div>
+        </LuminaFlagshipPanel>
 
         <LuminaBalancedSplitPanelComposition
           primaryRegion={
