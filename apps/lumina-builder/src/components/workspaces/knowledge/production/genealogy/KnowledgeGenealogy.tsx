@@ -33,8 +33,8 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
-  LuminaProminentPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
   LuminaStandardPremiumCard,
@@ -149,8 +149,11 @@ export function KnowledgeGenealogy({
     >
       <LuminaExecutiveTitleMetricsComposition
         titleRegion={
-          <LuminaProminentPremiumPanel>
-            <div className="flex h-full flex-col justify-between gap-5">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="flex h-full flex-col justify-between gap-5 p-5 sm:p-6">
               <div>
                 <LuminaPanelHeaderComposition
                   iconRegion={
@@ -197,7 +200,7 @@ export function KnowledgeGenealogy({
                 </div>
               </LuminaStandardPremiumCard>
             </div>
-          </LuminaProminentPremiumPanel>
+          </LuminaFlagshipPanel>
         }
         metricsRegion={
           <LuminaExecutiveMetricGrid columns={2}>
