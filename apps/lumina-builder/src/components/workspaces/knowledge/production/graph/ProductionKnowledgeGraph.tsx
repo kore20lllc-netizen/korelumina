@@ -10,8 +10,16 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
 import {
   flagshipAppearance,
@@ -138,11 +146,8 @@ export function ProductionKnowledgeGraph({
       className="overflow-hidden"
     >
       <div className="border-t border-white/[0.06] px-5 py-5 sm:px-6 sm:py-6">
-        <div
-          className={[
-            "relative overflow-x-auto",
-            flagshipAppearance.capsuleFlowCanvas,
-          ].join(" ")}
+        <LuminaFlagshipSurface
+          className="relative overflow-x-auto p-0"
         >
           <div
             aria-hidden="true"
@@ -172,9 +177,10 @@ export function ProductionKnowledgeGraph({
                         />
                       ) : null}
 
-                      <button
-                        type="button"
+                      <LuminaFlagshipCard
                         aria-pressed={selected}
+                        selected={selected}
+                        interactive
                         onClick={() =>
                           onCapsuleSelect(
                             capsule.id,
@@ -184,24 +190,10 @@ export function ProductionKnowledgeGraph({
                           )
                         }
                         className={[
-                          "group relative z-20 flex min-h-[210px] w-full flex-col rounded-2xl border p-4 text-left",
-                          "transition-[border-color,background-color,box-shadow,transform] duration-200",
+                          "group relative z-20 flex min-h-[210px] w-full flex-col p-4 text-left",
                           STATE_TONES[
                             capsule.state
                           ],
-                          "!border-cyan-300/80 ring-1 ring-inset ring-blue-400/45",
-                          "shadow-[0_0_0_1px_rgba(34,211,238,0.14),0_0_22px_rgba(37,99,235,0.12)]",
-                          selected
-                            ? [
-                                flagshipAppearance.capsuleSelected,
-                                "border-cyan-200/90 ring-cyan-300/60",
-                                "shadow-[0_0_0_1px_rgba(34,211,238,0.28),0_0_30px_rgba(37,99,235,0.24)]",
-                              ].join(" ")
-                            : [
-                                flagshipAppearance.capsuleInteractive,
-                                "hover:border-cyan-200/90 hover:ring-blue-300/55",
-                                "hover:shadow-[0_0_0_1px_rgba(34,211,238,0.22),0_0_28px_rgba(37,99,235,0.2)]",
-                              ].join(" "),
                         ].join(" ")}
                       >
                         <div className="flex items-start justify-between gap-3">
@@ -246,14 +238,14 @@ export function ProductionKnowledgeGraph({
                             </span>
                           </div>
                         </div>
-                      </button>
+                      </LuminaFlagshipCard>
                     </div>
                   );
                 },
               )}
             </div>
           </div>
-        </div>
+        </LuminaFlagshipSurface>
       </div>
     </LuminaFlagshipPanel>
   );
