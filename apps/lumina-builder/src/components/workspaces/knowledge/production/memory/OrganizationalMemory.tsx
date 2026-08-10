@@ -389,7 +389,11 @@ export function OrganizationalMemory({
         </LuminaFlagshipPanel>
 
         <div className="grid items-stretch gap-5 xl:grid-cols-2">
-          <LuminaStandardPremiumPanel className="h-full">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={ShieldCheck}
@@ -439,7 +443,8 @@ export function OrganizationalMemory({
                 </LuminaStandardPremiumCard>
               ))}
             </div>
-          </LuminaStandardPremiumPanel>
+            </div>
+          </LuminaFlagshipPanel>
 
           <LuminaStandardPremiumPanel className="h-full">
             <div className="flex items-center gap-3">
