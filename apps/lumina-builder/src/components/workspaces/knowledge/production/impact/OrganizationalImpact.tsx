@@ -394,11 +394,12 @@ export function OrganizationalImpact({
 
           <div className="mt-5 grid gap-3">
             {leverageSignals.map((signal) => (
-              <LuminaStandardPremiumCard
+              <LuminaFlagshipCard
                 as="article"
                 key={signal.title}
+                className="rounded-[18px] p-4"
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="relative z-10 flex items-start justify-between gap-4">
                   <div>
                     <div className="text-sm font-semibold text-white">
                       {signal.title}
@@ -413,7 +414,7 @@ export function OrganizationalImpact({
                     {signal.value}
                   </div>
                 </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             ))}
           </div>
           </div>
