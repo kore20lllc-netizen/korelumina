@@ -248,7 +248,11 @@ export function KnowledgeGenealogy({
         }
       />
 
-      <LuminaStandardPremiumPanel>
+      <LuminaFlagshipPanel
+        title={null}
+        className="[&>div:nth-of-type(3)]:hidden"
+      >
+        <div className="p-5 sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
@@ -325,7 +329,8 @@ export function KnowledgeGenealogy({
             );
           })}
         </div>
-      </LuminaStandardPremiumPanel>
+        </div>
+      </LuminaFlagshipPanel>
 
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
