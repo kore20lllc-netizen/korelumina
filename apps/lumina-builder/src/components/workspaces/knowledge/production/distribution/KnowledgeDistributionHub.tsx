@@ -373,7 +373,11 @@ export function KnowledgeDistributionHub({
         </LuminaFlagshipSurface>
 
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,.65fr)]">
-          <section className={panelClass}>
+          <LuminaFlagshipPanel
+            title={null}
+            className="[&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
             <div className="flex flex-col gap-2 border-b border-cyan-300/12 pb-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
@@ -437,7 +441,8 @@ export function KnowledgeDistributionHub({
                 );
               })}
             </div>
-          </section>
+            </div>
+          </LuminaFlagshipPanel>
 
           <section className={panelClass}>
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
