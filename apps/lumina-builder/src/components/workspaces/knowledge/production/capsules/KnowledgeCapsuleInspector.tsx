@@ -35,6 +35,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   flagshipAppearance,
 } from "../../learning/presentation/flagshipAppearance";
 
@@ -401,11 +405,9 @@ export function KnowledgeCapsuleInspector({
 
         {activeTab === "lifecycle" ? (
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,.6fr)]">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4",
-              ].join(" ")}
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
             >
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
                 Package history
@@ -488,15 +490,10 @@ export function KnowledgeCapsuleInspector({
                   ),
                 )}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
             <div className="grid gap-4">
-              <section
-                className={[
-                  flagshipAppearance.innerPanel,
-                  "bg-slate-950/24 p-4",
-                ].join(" ")}
-              >
+              <LuminaFlagshipSurface className="p-4">
                 <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
                   <DetailCard
                     label="Stable identity"
@@ -531,14 +528,9 @@ export function KnowledgeCapsuleInspector({
                     value={capsule.authority}
                   />
                 </div>
-              </section>
+              </LuminaFlagshipSurface>
 
-              <section
-                className={[
-                  flagshipAppearance.innerPanel,
-                  "bg-violet-300/[0.03] p-4",
-                ].join(" ")}
-              >
+              <LuminaFlagshipSurface className="p-4">
                 <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/64">
                   Lifecycle assurance
                 </div>
@@ -560,18 +552,16 @@ export function KnowledgeCapsuleInspector({
                     tone="violet"
                   />
                 </div>
-              </section>
+              </LuminaFlagshipSurface>
             </div>
           </div>
         ) : null}
 
         {activeTab === "provenance" ? (
           <div className="grid gap-4 lg:grid-cols-2">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4",
-              ].join(" ")}
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
             >
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
@@ -618,14 +608,9 @@ export function KnowledgeCapsuleInspector({
                   }
                 />
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-violet-300/[0.03] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
                   icon={BrainCircuit}
@@ -659,14 +644,9 @@ export function KnowledgeCapsuleInspector({
                   />
                 ))}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4 lg:col-span-2",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4 lg:col-span-2">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
                 Source register
               </div>
@@ -684,18 +664,13 @@ export function KnowledgeCapsuleInspector({
                   <EmptyValue label="No source records available in this fixture." />
                 )}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
           </div>
         ) : null}
 
         {activeTab === "validation" ? (
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-amber-300/[0.025] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 <DetailCard
                   label="Validated layers"
@@ -769,14 +744,9 @@ export function KnowledgeCapsuleInspector({
                   </article>
                 ))}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-violet-300/[0.03] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/62">
                 Review controls
               </div>
@@ -806,17 +776,15 @@ export function KnowledgeCapsuleInspector({
                   }
                 />
               </div>
-            </section>
+            </LuminaFlagshipSurface>
           </div>
         ) : null}
 
         {activeTab === "distribution" ? (
           <div className="grid gap-4 lg:grid-cols-2">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4",
-              ].join(" ")}
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
             >
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
@@ -852,14 +820,9 @@ export function KnowledgeCapsuleInspector({
                   />
                 ))}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-violet-300/[0.03] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
                   icon={BookOpenCheck}
@@ -904,18 +867,13 @@ export function KnowledgeCapsuleInspector({
                   tone="amber"
                 />
               </div>
-            </section>
+            </LuminaFlagshipSurface>
           </div>
         ) : null}
 
         {activeTab === "genealogy" ? (
           <div className="grid gap-4 lg:grid-cols-2">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-violet-300/[0.03] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
                   icon={GitBranch}
@@ -954,13 +912,11 @@ export function KnowledgeCapsuleInspector({
                   tone="amber"
                 />
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4",
-              ].join(" ")}
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
             >
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
@@ -994,17 +950,15 @@ export function KnowledgeCapsuleInspector({
                   />
                 ))}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
           </div>
         ) : null}
 
         {activeTab === "mission-impact" ? (
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-slate-950/24 p-4",
-              ].join(" ")}
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
             >
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
@@ -1038,14 +992,9 @@ export function KnowledgeCapsuleInspector({
                   />
                 ))}
               </div>
-            </section>
+            </LuminaFlagshipSurface>
 
-            <section
-              className={[
-                flagshipAppearance.innerPanel,
-                "bg-amber-300/[0.025] p-4",
-              ].join(" ")}
-            >
+            <LuminaFlagshipSurface className="p-4">
               <div className="flex items-center gap-3">
                 <ExecutivePremiumIcon
                   icon={CheckCircle2}
@@ -1084,7 +1033,7 @@ export function KnowledgeCapsuleInspector({
                   tone="emerald"
                 />
               </div>
-            </section>
+            </LuminaFlagshipSurface>
           </div>
         ) : null}
       </div>
