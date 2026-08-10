@@ -398,11 +398,11 @@ export function KnowledgeStationDetail({
 
   return (
     <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(260px,.6fr)]">
-      <article className={[
-        flagshipAppearance.inspectorDetailCard,
-        "rounded-[20px] bg-cyan-300/[0.035] p-5",
-      ].join(" ")}>
-        <div className="flex items-start gap-4">
+      <LuminaFlagshipCard
+        as="article"
+        className="rounded-[20px] bg-cyan-300/[0.035] p-5"
+      >
+        <div className="relative z-10 flex items-start gap-4">
           <ExecutivePremiumIcon
             icon={Icon}
             state="active"
@@ -422,35 +422,39 @@ export function KnowledgeStationDetail({
             </p>
           </div>
         </div>
-      </article>
+      </LuminaFlagshipCard>
 
       <div className="grid gap-3">
-        <div className={[
-          flagshipAppearance.inspectorDetailCard,
-          "rounded-[18px] bg-violet-300/[0.04] p-4",
-        ].join(" ")}>
-          <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/62">
-            Authority
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-violet-300/[0.04] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/62">
+              Authority
+            </div>
+            <div className="mt-2 text-xs leading-5 text-violet-100/82">
+              {detail.authority}
+            </div>
           </div>
-          <div className="mt-2 text-xs leading-5 text-violet-100/82">
-            {detail.authority}
-          </div>
-        </div>
+        </LuminaFlagshipCard>
 
-        <div className={[
-          flagshipAppearance.inspectorDetailCard,
-          "rounded-[18px] bg-amber-300/[0.04] p-4",
-        ].join(" ")}>
-          <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/62">
-            Output
+        <LuminaFlagshipCard
+          as="article"
+          className="rounded-[18px] bg-amber-300/[0.04] p-4"
+        >
+          <div className="relative z-10">
+            <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/62">
+              Output
+            </div>
+            <div className="mt-2 text-sm font-semibold text-amber-200">
+              {detail.output}
+            </div>
+            <div className="mt-1 text-xs text-sky-500/72">
+              {detail.posture}
+            </div>
           </div>
-          <div className="mt-2 text-sm font-semibold text-amber-200">
-            {detail.output}
-          </div>
-          <div className="mt-1 text-xs text-sky-500/72">
-            {detail.posture}
-          </div>
-        </div>
+        </LuminaFlagshipCard>
       </div>
     </div>
   );
