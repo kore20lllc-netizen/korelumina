@@ -522,33 +522,35 @@ export function KnowledgeDistributionHub({
                     }
                     className="block w-full text-left"
                   >
-                    <LuminaStandardPremiumCard
+                    <LuminaFlagshipCard
+                      as="article"
                       className={[
-                        electricContour.card,
-                        "h-full transition-[border-color,box-shadow,transform] duration-200",
+                        "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
                         selected
                           ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                           : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                       ].join(" ")}
                     >
-                      <div
-                        className={[
-                          "text-[9px] uppercase tracking-[0.13em]",
-                          summary.tone,
-                        ].join(" ")}
-                      >
-                        {summary.label}
-                      </div>
+                      <div className="relative z-10">
+                        <div
+                          className={[
+                            "text-[9px] uppercase tracking-[0.13em]",
+                            summary.tone,
+                          ].join(" ")}
+                        >
+                          {summary.label}
+                        </div>
 
-                      <div
-                        className={[
-                          "mt-2 text-sm font-semibold",
-                          summary.valueTone,
-                        ].join(" ")}
-                      >
-                        {summary.value}
+                        <div
+                          className={[
+                            "mt-2 text-sm font-semibold",
+                            summary.valueTone,
+                          ].join(" ")}
+                        >
+                          {summary.value}
+                        </div>
                       </div>
-                    </LuminaStandardPremiumCard>
+                    </LuminaFlagshipCard>
                   </button>
                 );
               })}
