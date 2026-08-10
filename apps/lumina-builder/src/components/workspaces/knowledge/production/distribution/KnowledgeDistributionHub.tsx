@@ -21,6 +21,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -413,30 +417,31 @@ export function KnowledgeDistributionHub({
                     }
                     className="block w-full text-left"
                   >
-                    <LuminaStandardPremiumCard
+                    <LuminaFlagshipCard
                       as="article"
                       className={[
-                        electricContour.card,
-                        "h-full transition-[border-color,box-shadow,transform] duration-200",
+                        "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
                         selected
                           ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                           : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                       ].join(" ")}
                     >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="text-xs font-semibold text-amber-300">
-                          {event.consumer}
+                      <div className="relative z-10">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-xs font-semibold text-amber-300">
+                            {event.consumer}
+                          </div>
+
+                          <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/54">
+                            {event.action}
+                          </div>
                         </div>
 
-                        <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/54">
-                          {event.action}
-                        </div>
+                        <p className="mt-2 text-xs leading-5 text-sky-400/72">
+                          {event.detail}
+                        </p>
                       </div>
-
-                      <p className="mt-2 text-xs leading-5 text-sky-400/72">
-                        {event.detail}
-                      </p>
-                    </LuminaStandardPremiumCard>
+                    </LuminaFlagshipCard>
                   </button>
                 );
               })}
