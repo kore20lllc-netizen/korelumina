@@ -445,11 +445,12 @@ export function OrganizationalImpact({
 
           <div className="mt-5 grid gap-3">
             {reviewSignals.map((signal) => (
-              <LuminaStandardPremiumCard
+              <LuminaFlagshipCard
                 as="article"
                 key={signal.title}
+                className="rounded-[18px] p-4"
               >
-                <div className="flex items-start gap-3">
+                <div className="relative z-10 flex items-start gap-3">
                   <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
 
                   <div>
@@ -462,7 +463,7 @@ export function OrganizationalImpact({
                     </div>
                   </div>
                 </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             ))}
           </div>
           </div>
