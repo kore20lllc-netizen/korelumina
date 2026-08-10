@@ -119,12 +119,6 @@ const panelClass = [
   electricContour.strength.standard,
 ].join(" ");
 
-const consumerCardClass = [
-  "relative overflow-hidden rounded-[20px] p-4",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
-
 const compactCardClass = [
   "rounded-[14px] px-3 py-2 text-center",
   premiumSurfaces.base.card,
@@ -155,16 +149,16 @@ function DistributionConsumerCard({
       }
       className="block w-full text-left"
     >
-      <article
+      <LuminaFlagshipCard
+        as="article"
         className={[
-          consumerCardClass,
-          "transition-[border-color,box-shadow,transform] duration-200",
+          "relative overflow-hidden rounded-[20px] p-4 transition-[border-color,box-shadow,transform] duration-200",
           selected
             ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
             : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
         ].join(" ")}
       >
-      <div className="flex items-start gap-3">
+      <div className="relative z-10 flex items-start gap-3">
         <ExecutivePremiumIcon
           icon={Icon}
           state={
@@ -208,7 +202,7 @@ function DistributionConsumerCard({
             : "left-0 -translate-x-full bg-gradient-to-l from-violet-300/46 to-cyan-300/18",
         ].join(" ")}
       />
-      </article>
+      </LuminaFlagshipCard>
     </button>
   );
 }
