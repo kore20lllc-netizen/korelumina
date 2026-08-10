@@ -479,22 +479,26 @@ export function ConsumerIntelligence({
 
             <div className="mt-5 grid gap-3">
               {usagePatterns.map((pattern) => (
-                <LuminaStandardPremiumCard
+                <LuminaFlagshipCard
                   key={pattern.title}
+                  as="article"
+                  className="rounded-[18px] p-4"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-white">
-                      {pattern.title}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-sm font-semibold text-white">
+                        {pattern.title}
+                      </div>
+                      <div className="text-sm font-semibold text-cyan-100">
+                        {pattern.value}
+                      </div>
                     </div>
-                    <div className="text-sm font-semibold text-cyan-100">
-                      {pattern.value}
-                    </div>
-                  </div>
 
-                  <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
-                    {pattern.detail}
+                    <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
+                      {pattern.detail}
+                    </div>
                   </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
               ))}
             </div>
             </div>
