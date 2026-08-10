@@ -13,6 +13,10 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
   KnowledgeCapsule,
 } from "./KnowledgeCapsule";
 
@@ -324,10 +328,8 @@ export function KnowledgeCapsuleFlowEngine({
       </header>
 
       <div className="p-5 sm:p-6">
-        <div
-          className={
-            flagshipAppearance.capsuleFlowCanvas
-          }
+        <LuminaFlagshipSurface
+          className="relative overflow-hidden rounded-[28px] p-4 sm:p-5"
         >
           <div
             aria-hidden="true"
@@ -688,7 +690,7 @@ export function KnowledgeCapsuleFlowEngine({
               );
             })}
           </div>
-        </div>
+        </LuminaFlagshipSurface>
       </div>
     </section>
   );
