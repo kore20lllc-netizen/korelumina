@@ -355,10 +355,10 @@ export function CanonicalReview({
                 selectedReviewId === item.id;
 
               const article = (
-                <article
+                <LuminaFlagshipCard
+                  as="article"
                   className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalArticleSurface,
+                    "rounded-[18px] p-4",
                     selectable
                       ? "transition-[border-color,box-shadow,transform] duration-200"
                       : "",
@@ -369,6 +369,7 @@ export function CanonicalReview({
                         : "",
                   ].join(" ")}
                 >
+                  <div className="relative z-10">
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
@@ -433,19 +434,32 @@ export function CanonicalReview({
                     </span>
                   </div>
 
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-950/72">
+                  <div
+                    className={[
+                      "mt-2 h-2 overflow-hidden rounded-full",
+                      item.tone === "rose"
+                        ? "bg-rose-950/72 ring-1 ring-inset ring-rose-400/18"
+                        : "bg-slate-950/72",
+                    ].join(" ")}
+                  >
                     <div
                       className={[
                         "h-full rounded-full",
-                        readinessTone(item.readiness),
+                        item.tone === "rose"
+                          ? "shadow-[0_0_14px_rgba(244,63,94,0.55)]"
+                          : readinessTone(item.readiness),
                       ].join(" ")}
                       style={{
                         width: `${item.readiness}%`,
+                        ...(item.tone === "rose"
+                          ? { backgroundColor: "#f43f5e" }
+                          : {}),
                       }}
                     />
                   </div>
                 </div>
-                </article>
+                  </div>
+                </LuminaFlagshipCard>
               );
 
               if (!item.capsuleId) {
