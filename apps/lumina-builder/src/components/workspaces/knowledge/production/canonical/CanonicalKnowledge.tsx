@@ -152,84 +152,72 @@ export function CanonicalKnowledge({
       <LuminaExecutiveTitleMetricsComposition
         variant="content-led"
         titleRegion={
-          <LuminaProminentPremiumPanel>
-          <div className="min-w-0">
-            <div className="flex items-center gap-3">
-              <ExecutivePremiumIcon
-                icon={BookMarked}
-                state="healthy"
-              />
+          <LuminaProminentPremiumPanel className="flex h-full flex-col">
+            <div className="min-w-0">
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={BookMarked}
+                  state="healthy"
+                />
 
-              <div>
-                <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
-                  Published organizational authority
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/68">
+                    Published organizational authority
+                  </div>
+
+                  <h2
+                    id="canonical-knowledge-title"
+                    className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
+                  >
+                    Canonical Knowledge
+                  </h2>
                 </div>
-
-                <h2
-                  id="canonical-knowledge-title"
-                  className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-amber-400"
-                >
-                  Canonical Knowledge
-                </h2>
               </div>
+
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
+                Published Knowledge Capsules become stable organizational
+                authority only after evidence, governance, scope, trust,
+                supersession, and publication lineage are made explicit.
+              </p>
             </div>
 
-            <p className="mt-4 max-w-3xl text-sm leading-6 text-sky-300/68">
-              Published Knowledge Capsules become stable organizational
-              authority only after evidence, governance, scope, trust,
-              supersession, and publication lineage are made explicit.
-            </p>
-          </div>
-
-          <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-2">
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalMetricSurface,
-            ].join(" ")}>
-              <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
-                Published
+            <div className="mb-auto mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 xl:mt-10 xl:grid-cols-2">
+              <div className="rounded-[20px] border border-blue-400/72 bg-slate-950/38 px-4 py-4 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
+                  Published
+                </div>
+                <div className="mt-1 text-xl font-semibold text-emerald-100">
+                  59
+                </div>
               </div>
-              <div className="mt-1 text-xl font-semibold text-emerald-100">
-                59
+
+              <div className="rounded-[20px] border border-blue-400/72 bg-slate-950/38 px-4 py-4 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
+                  Collections
+                </div>
+                <div className="mt-1 text-xl font-semibold text-cyan-100">
+                  9
+                </div>
+              </div>
+
+              <div className="rounded-[20px] border border-blue-400/72 bg-slate-950/38 px-4 py-4 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-violet-200/58">
+                  Constitutional
+                </div>
+                <div className="mt-1 text-xl font-semibold text-violet-100">
+                  23
+                </div>
+              </div>
+
+              <div className="rounded-[20px] border border-blue-400/72 bg-slate-950/38 px-4 py-4 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+                <div className="text-[9px] uppercase tracking-[0.16em] text-slate-300/54">
+                  Retiring
+                </div>
+                <div className="mt-1 text-xl font-semibold text-slate-100">
+                  4
+                </div>
               </div>
             </div>
-
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalMetricSurface,
-            ].join(" ")}>
-              <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
-                Collections
-              </div>
-              <div className="mt-1 text-xl font-semibold text-cyan-100">
-                9
-              </div>
-            </div>
-
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalMetricSurface,
-            ].join(" ")}>
-              <div className="text-[9px] uppercase tracking-[0.16em] text-violet-200/58">
-                Constitutional
-              </div>
-              <div className="mt-1 text-xl font-semibold text-violet-100">
-                23
-              </div>
-            </div>
-
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalMetricSurface,
-            ].join(" ")}>
-              <div className="text-[9px] uppercase tracking-[0.16em] text-slate-300/54">
-                Retiring
-              </div>
-              <div className="mt-1 text-xl font-semibold text-slate-100">
-                4
-              </div>
-            </div>
-          </div>
           </LuminaProminentPremiumPanel>
         }
         metricsRegion={

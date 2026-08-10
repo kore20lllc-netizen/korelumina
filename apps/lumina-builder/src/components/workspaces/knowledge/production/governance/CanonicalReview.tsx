@@ -184,7 +184,7 @@ export function CanonicalReview({
       <LuminaExecutiveTitleMetricsComposition
         variant="content-led"
         titleRegion={
-          <LuminaProminentPremiumPanel>
+          <LuminaProminentPremiumPanel className="flex h-full flex-col">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -213,11 +213,18 @@ export function CanonicalReview({
               canonical promotion.
             </p>
 
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalMetricSurface,
-              ].join(" ")}>
+            <div className="mb-auto mt-8 grid grid-cols-2 gap-4 xl:mt-10">
+              <div
+                className={[
+                  flagshipAppearance.canonicalSurface,
+                  flagshipAppearance.canonicalMetricSurface,
+                  "rounded-[20px] border border-blue-400/72",
+                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
+                  "ring-1 ring-inset ring-cyan-300/22",
+                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
+                  "px-4 py-4",
+                ].join(" ")}
+              >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
                   Awaiting review
                 </div>
@@ -226,10 +233,17 @@ export function CanonicalReview({
                 </div>
               </div>
 
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalMetricSurface,
-              ].join(" ")}>
+              <div
+                className={[
+                  flagshipAppearance.canonicalSurface,
+                  flagshipAppearance.canonicalMetricSurface,
+                  "rounded-[20px] border border-blue-400/72",
+                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
+                  "ring-1 ring-inset ring-cyan-300/22",
+                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
+                  "px-4 py-4",
+                ].join(" ")}
+              >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
                   Conflicts
                 </div>
@@ -238,10 +252,17 @@ export function CanonicalReview({
                 </div>
               </div>
 
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalMetricSurface,
-              ].join(" ")}>
+              <div
+                className={[
+                  flagshipAppearance.canonicalSurface,
+                  flagshipAppearance.canonicalMetricSurface,
+                  "rounded-[20px] border border-blue-400/72",
+                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
+                  "ring-1 ring-inset ring-cyan-300/22",
+                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
+                  "px-4 py-4",
+                ].join(" ")}
+              >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                   Reviewers active
                 </div>
@@ -250,10 +271,17 @@ export function CanonicalReview({
                 </div>
               </div>
 
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalMetricSurface,
-              ].join(" ")}>
+              <div
+                className={[
+                  flagshipAppearance.canonicalSurface,
+                  flagshipAppearance.canonicalMetricSurface,
+                  "rounded-[20px] border border-blue-400/72",
+                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
+                  "ring-1 ring-inset ring-cyan-300/22",
+                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
+                  "px-4 py-4",
+                ].join(" ")}
+              >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                   Ready to publish
                 </div>
