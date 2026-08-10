@@ -34,8 +34,8 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
-  LuminaProminentPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
   LuminaStandardPremiumCard,
@@ -184,7 +184,11 @@ export function CanonicalReview({
       <LuminaExecutiveTitleMetricsComposition
         variant="content-led"
         titleRegion={
-          <LuminaProminentPremiumPanel className="flex h-full flex-col">
+          <LuminaFlagshipPanel
+            className="flex h-full flex-col"
+            title={null}
+          >
+            <div className="relative z-10 flex h-full flex-col px-6 pb-7 pt-2">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -213,16 +217,16 @@ export function CanonicalReview({
               canonical promotion.
             </p>
 
-            <div className="mb-auto mt-8 grid grid-cols-2 gap-4 xl:mt-10">
+            <div className="mb-auto mt-7 grid grid-cols-2 gap-3.5 xl:mt-8">
               <div
                 className={[
                   flagshipAppearance.canonicalSurface,
                   flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[20px] border border-blue-400/72",
+                  "rounded-[18px] border border-blue-400/72",
                   "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
                   "ring-1 ring-inset ring-cyan-300/22",
                   "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-4 py-4",
+                  "px-3.5 py-3",
                 ].join(" ")}
               >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
@@ -237,11 +241,11 @@ export function CanonicalReview({
                 className={[
                   flagshipAppearance.canonicalSurface,
                   flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[20px] border border-blue-400/72",
+                  "rounded-[18px] border border-blue-400/72",
                   "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
                   "ring-1 ring-inset ring-cyan-300/22",
                   "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-4 py-4",
+                  "px-3.5 py-3",
                 ].join(" ")}
               >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
@@ -256,11 +260,11 @@ export function CanonicalReview({
                 className={[
                   flagshipAppearance.canonicalSurface,
                   flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[20px] border border-blue-400/72",
+                  "rounded-[18px] border border-blue-400/72",
                   "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
                   "ring-1 ring-inset ring-cyan-300/22",
                   "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-4 py-4",
+                  "px-3.5 py-3",
                 ].join(" ")}
               >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
@@ -275,11 +279,11 @@ export function CanonicalReview({
                 className={[
                   flagshipAppearance.canonicalSurface,
                   flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[20px] border border-blue-400/72",
+                  "rounded-[18px] border border-blue-400/72",
                   "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
                   "ring-1 ring-inset ring-cyan-300/22",
                   "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-4 py-4",
+                  "px-3.5 py-3",
                 ].join(" ")}
               >
                 <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
@@ -291,7 +295,8 @@ export function CanonicalReview({
               </div>
             </div>
           </div>
-          </LuminaProminentPremiumPanel>
+            </div>
+          </LuminaFlagshipPanel>
         }
         metricsRegion={
           <LuminaExecutiveMetricGrid
