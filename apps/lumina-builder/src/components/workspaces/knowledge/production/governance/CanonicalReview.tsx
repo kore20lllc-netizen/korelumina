@@ -34,6 +34,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -218,81 +222,61 @@ export function CanonicalReview({
             </p>
 
             <div className="mb-auto mt-7 grid grid-cols-2 gap-3.5 xl:mt-8">
-              <div
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[18px] border border-blue-400/72",
-                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
-                  "ring-1 ring-inset ring-cyan-300/22",
-                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-3.5 py-3",
-                ].join(" ")}
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] px-3.5 py-3"
               >
+                <div className="relative z-10">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-amber-200/58">
                   Awaiting review
                 </div>
                 <div className="mt-1 text-xl font-semibold text-amber-100">
                   12
                 </div>
-              </div>
+                </div>
+              </LuminaFlagshipCard>
 
-              <div
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[18px] border border-blue-400/72",
-                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
-                  "ring-1 ring-inset ring-cyan-300/22",
-                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-3.5 py-3",
-                ].join(" ")}
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] px-3.5 py-3"
               >
+                <div className="relative z-10">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-rose-200/58">
                   Conflicts
                 </div>
                 <div className="mt-1 text-xl font-semibold text-rose-100">
                   3
                 </div>
-              </div>
+                </div>
+              </LuminaFlagshipCard>
 
-              <div
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[18px] border border-blue-400/72",
-                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
-                  "ring-1 ring-inset ring-cyan-300/22",
-                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-3.5 py-3",
-                ].join(" ")}
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] px-3.5 py-3"
               >
+                <div className="relative z-10">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                   Reviewers active
                 </div>
                 <div className="mt-1 text-xl font-semibold text-cyan-100">
                   18
                 </div>
-              </div>
+                </div>
+              </LuminaFlagshipCard>
 
-              <div
-                className={[
-                  flagshipAppearance.canonicalSurface,
-                  flagshipAppearance.canonicalMetricSurface,
-                  "rounded-[18px] border border-blue-400/72",
-                  "bg-slate-950/38 backdrop-blur-[30px] backdrop-saturate-[160%]",
-                  "ring-1 ring-inset ring-cyan-300/22",
-                  "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)]",
-                  "px-3.5 py-3",
-                ].join(" ")}
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] px-3.5 py-3"
               >
+                <div className="relative z-10">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                   Ready to publish
                 </div>
                 <div className="mt-1 text-xl font-semibold text-emerald-100">
                   5
                 </div>
-              </div>
+                </div>
+              </LuminaFlagshipCard>
             </div>
           </div>
             </div>
