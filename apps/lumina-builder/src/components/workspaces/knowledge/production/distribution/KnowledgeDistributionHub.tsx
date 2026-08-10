@@ -119,12 +119,6 @@ const panelClass = [
   electricContour.strength.standard,
 ].join(" ");
 
-const compactCardClass = [
-  "rounded-[14px] px-3 py-2 text-center",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
-
 function DistributionConsumerCard({
   capsuleId,
   consumer,
@@ -319,28 +313,38 @@ export function KnowledgeDistributionHub({
                   />
 
                   <div className="mt-4 grid grid-cols-2 gap-2">
-                    <div className={compactCardClass}>
-                      <div className="text-[9px] uppercase tracking-[0.12em] text-emerald-300/58">
-                        Consuming
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[14px] px-3 py-2 text-center"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.12em] text-emerald-300/58">
+                          Consuming
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-emerald-100">
+                          {
+                            record.consumers.filter(
+                              (consumer) =>
+                                consumer.status === "consuming",
+                            ).length
+                          }
+                        </div>
                       </div>
-                      <div className="mt-1 text-sm font-semibold text-emerald-100">
-                        {
-                          record.consumers.filter(
-                            (consumer) =>
-                              consumer.status === "consuming",
-                          ).length
-                        }
-                      </div>
-                    </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={compactCardClass}>
-                      <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/58">
-                        Authorized
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[14px] px-3 py-2 text-center"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/58">
+                          Authorized
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-cyan-100">
+                          {record.consumers.length}
+                        </div>
                       </div>
-                      <div className="mt-1 text-sm font-semibold text-cyan-100">
-                        {record.consumers.length}
-                      </div>
-                    </div>
+                    </LuminaFlagshipCard>
                   </div>
                 </div>
               </div>
