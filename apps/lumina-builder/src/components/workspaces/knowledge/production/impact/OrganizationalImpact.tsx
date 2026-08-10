@@ -367,7 +367,11 @@ export function OrganizationalImpact({
 
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
-          <LuminaStandardPremiumPanel className="h-full">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+          <div className="p-5 sm:p-6">
           <LuminaPanelHeaderComposition
             iconRegion={
               <ExecutivePremiumIcon
@@ -412,7 +416,8 @@ export function OrganizationalImpact({
               </LuminaStandardPremiumCard>
             ))}
           </div>
-          </LuminaStandardPremiumPanel>
+          </div>
+          </LuminaFlagshipPanel>
         }
         secondaryRegion={
           <LuminaStandardPremiumPanel className="h-full">
