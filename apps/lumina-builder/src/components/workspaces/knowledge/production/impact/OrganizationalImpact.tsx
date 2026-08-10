@@ -500,17 +500,21 @@ export function OrganizationalImpact({
             "Governed evidence",
             "Measured outcome",
           ].map((step, index) => (
-            <LuminaStandardPremiumCard
+            <LuminaFlagshipCard
+              as="article"
               key={step}
+              className="rounded-[18px] p-4"
             >
-              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/52">
-                {String(index + 1).padStart(2, "0")}
-              </div>
+              <div className="relative z-10">
+                <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/52">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
 
-              <div className="mt-2 text-sm font-semibold text-white">
-                {step}
+                <div className="mt-2 text-sm font-semibold text-white">
+                  {step}
+                </div>
               </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
           ))}
         </div>
         </div>
