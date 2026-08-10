@@ -329,53 +329,61 @@ export function CanonicalKnowledge({
                   </div>
 
                   <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[420px]">
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalDetailSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                         Trust level
                       </div>
                       <div className="mt-1 text-xs font-semibold text-violet-100">
                         {capsule.trust}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalDetailSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Scope
                       </div>
                       <div className="mt-1 text-xs font-semibold text-cyan-100">
                         {capsule.scope}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalDetailSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
                         Constitutional authority
                       </div>
                       <div className="mt-1 text-xs font-semibold text-amber-100">
                         {capsule.authority}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalDetailSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
                         Retirement posture
                       </div>
                       <div className="mt-1 text-xs font-semibold text-slate-100">
                         {capsule.retirement}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
                   </div>
                 </div>
 
