@@ -321,14 +321,19 @@ export function OrganizationalMemory({
                     </div>
                   </div>
 
-                  <LuminaStandardPremiumCard>
-                    <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
-                      Adaptation purpose
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[18px] p-4"
+                  >
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                        Adaptation purpose
+                      </div>
+                      <div className="mt-2 text-xs leading-5 text-cyan-100/72">
+                        {projection.detail}
+                      </div>
                     </div>
-                    <div className="mt-2 text-xs leading-5 text-cyan-100/72">
-                      {projection.detail}
-                    </div>
-                  </LuminaStandardPremiumCard>
+                  </LuminaFlagshipCard>
                 </div>
 
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
