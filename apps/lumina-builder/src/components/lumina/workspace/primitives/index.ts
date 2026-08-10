@@ -9,4 +9,5 @@ export * from "./LuminaFlagshipCard";
 export * from "./LuminaFlagshipControl";
 export * from "./LuminaFlagshipSurface";
 export * from "./LuminaFlagshipTabs";
+export * from "./LuminaSegmentedTabs";
 export * from "./LuminaSectionNavigator";
