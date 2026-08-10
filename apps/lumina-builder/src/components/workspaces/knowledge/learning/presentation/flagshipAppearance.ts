@@ -33,12 +33,6 @@ export const flagshipAppearance = {
     "p-4",
   ].join(" "),
 
-  iconBox: [
-    "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border",
-    "border-cyan-300/38 bg-cyan-300/[0.08] text-cyan-200",
-    "ring-1 ring-inset ring-cyan-100/8",
-  ].join(" "),
-
   segmentedTab: [
     "inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2",
     "text-[10px] font-semibold",
