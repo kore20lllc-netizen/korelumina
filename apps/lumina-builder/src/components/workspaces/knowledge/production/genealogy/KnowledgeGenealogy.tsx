@@ -33,6 +33,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -186,19 +190,24 @@ export function KnowledgeGenealogy({
                 </p>
               </div>
 
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
-                  Active lineage
-                </div>
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] p-4"
+              >
+                <div className="relative z-10">
+                  <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
+                    Active lineage
+                  </div>
 
-                <div className="mt-2 text-sm font-semibold text-violet-100">
-                  {capsule.title}
-                </div>
+                  <div className="mt-2 text-sm font-semibold text-violet-100">
+                    {capsule.title}
+                  </div>
 
-                <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
-                  {capsule.id} · {capsule.stage} · {capsule.state}
+                  <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
+                    {capsule.id} · {capsule.stage} · {capsule.state}
+                  </div>
                 </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             </div>
           </LuminaFlagshipPanel>
         }
