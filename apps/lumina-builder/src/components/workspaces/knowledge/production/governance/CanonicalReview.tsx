@@ -323,7 +323,11 @@ export function CanonicalReview({
 
       <LuminaBalancedSplitPanelComposition
         primaryRegion={
-          <LuminaStandardPremiumPanel className="h-full">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
           <LuminaPanelHeaderComposition
             copyRegion={
               <>
@@ -470,7 +474,8 @@ export function CanonicalReview({
               );
             })}
           </div>
-          </LuminaStandardPremiumPanel>
+            </div>
+          </LuminaFlagshipPanel>
         }
         secondaryRegion={
           <div className="grid h-full gap-5 xl:grid-rows-2">
