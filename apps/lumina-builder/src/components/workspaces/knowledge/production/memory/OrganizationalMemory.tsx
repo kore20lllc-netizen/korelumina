@@ -428,19 +428,23 @@ export function OrganizationalMemory({
                   "Canonical authority remains external to adapted memory.",
                 ],
               ].map(([label, title, detail]) => (
-                <LuminaStandardPremiumCard
+                <LuminaFlagshipCard
                   key={label}
+                  as="article"
+                  className="rounded-[18px] p-4"
                 >
-                  <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
-                    {label}
+                  <div className="relative z-10">
+                    <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                      {label}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-white">
+                      {title}
+                    </div>
+                    <div className="mt-2 text-[11px] leading-5 text-sky-300/56">
+                      {detail}
+                    </div>
                   </div>
-                  <div className="mt-1 text-sm font-semibold text-white">
-                    {title}
-                  </div>
-                  <div className="mt-2 text-[11px] leading-5 text-sky-300/56">
-                    {detail}
-                  </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
               ))}
             </div>
             </div>
