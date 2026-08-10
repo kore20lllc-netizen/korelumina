@@ -523,32 +523,39 @@ export function CanonicalKnowledge({
             </div>
 
             <div className="mt-5 grid gap-3">
-              <LuminaStateSurface tone="warning">
-                <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
-                  Superseded
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[16px] p-3"
+              >
+                <div className="relative z-10">
+                  <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                    Superseded
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-100">
+                    7 capsules
+                  </div>
+                  <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
+                    Preserved for lineage, audit, and historical interpretation.
+                  </div>
                 </div>
-                <div className="mt-1 text-sm font-semibold text-amber-100">
-                  7 capsules
-                </div>
-                <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
-                  Preserved for lineage, audit, and historical interpretation.
-                </div>
-              </LuminaStateSurface>
+              </LuminaFlagshipCard>
 
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalPanelSurface,
-              ].join(" ")}>
-                <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
-                  Retirement scheduled
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[16px] p-3"
+              >
+                <div className="relative z-10">
+                  <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/52">
+                    Retirement scheduled
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-slate-100">
+                    4 capsules
+                  </div>
+                  <div className="mt-2 text-[11px] leading-5 text-slate-300/56">
+                    Authority remains valid until the scheduled retirement date.
+                  </div>
                 </div>
-                <div className="mt-1 text-sm font-semibold text-slate-100">
-                  4 capsules
-                </div>
-                <div className="mt-2 text-[11px] leading-5 text-slate-300/56">
-                  Authority remains valid until the scheduled retirement date.
-                </div>
-              </div>
+              </LuminaFlagshipCard>
             </div>
               </div>
             </LuminaFlagshipPanel>
