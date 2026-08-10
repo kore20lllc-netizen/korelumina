@@ -652,43 +652,58 @@ export function ConsumerIntelligence({
           </div>
 
           <div className="mt-5 grid gap-3">
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
-                Underused projection
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                  Underused projection
+                </div>
+                <div className="mt-1 text-sm font-semibold text-white">
+                  Executive Office
+                </div>
+                <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
+                  Restricted summary-only access is limiting broader strategic
+                  adoption.
+                </div>
               </div>
-              <div className="mt-1 text-sm font-semibold text-white">
-                Executive Office
-              </div>
-              <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
-                Restricted summary-only access is limiting broader strategic
-                adoption.
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
-                Waiting consumer
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
+                  Waiting consumer
+                </div>
+                <div className="mt-1 text-sm font-semibold text-white">
+                  Chief Agent Context
+                </div>
+                <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
+                  Consumption remains blocked by educational corpus publication.
+                </div>
               </div>
-              <div className="mt-1 text-sm font-semibold text-white">
-                Chief Agent Context
-              </div>
-              <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
-                Consumption remains blocked by educational corpus publication.
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
 
-            <LuminaStandardPremiumCard>
-              <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
-                Staleness watch
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
+                  Staleness watch
+                </div>
+                <div className="mt-1 text-sm font-semibold text-white">
+                  Runtime Advisor projection
+                </div>
+                <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
+                  No governed retrieval event has been recorded in the current
+                  observation window.
+                </div>
               </div>
-              <div className="mt-1 text-sm font-semibold text-white">
-                Runtime Advisor projection
-              </div>
-              <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
-                No governed retrieval event has been recorded in the current
-                observation window.
-              </div>
-            </LuminaStandardPremiumCard>
+            </LuminaFlagshipCard>
           </div>
           </div>
         </LuminaFlagshipPanel>
