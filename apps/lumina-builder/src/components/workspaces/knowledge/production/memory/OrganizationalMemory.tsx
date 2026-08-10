@@ -581,17 +581,22 @@ export function OrganizationalMemory({
                 key={entry.version}
                 className="relative"
               >
-                <LuminaStandardPremiumCard>
-                  <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/54">
-                    {entry.version}
+                <LuminaFlagshipCard
+                  as="article"
+                  className="rounded-[18px] p-4"
+                >
+                  <div className="relative z-10">
+                    <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/54">
+                      {entry.version}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-white">
+                      {entry.event}
+                    </div>
+                    <div className="mt-2 text-[11px] leading-5 text-sky-400/58">
+                      {entry.detail}
+                    </div>
                   </div>
-                  <div className="mt-1 text-sm font-semibold text-white">
-                    {entry.event}
-                  </div>
-                  <div className="mt-2 text-[11px] leading-5 text-sky-400/58">
-                    {entry.detail}
-                  </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
 
                 {index < evolution.length - 1 ? (
                   <div className="mx-auto h-3 w-px bg-cyan-300/24" />
