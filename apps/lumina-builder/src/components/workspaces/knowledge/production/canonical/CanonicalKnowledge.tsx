@@ -388,10 +388,11 @@ export function CanonicalKnowledge({
                 </div>
 
                 <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(260px,.42fr)]">
-                  <div className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}>
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[16px] p-3"
+                  >
+                    <div className="relative z-10">
                     <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-emerald-300/58">
                       Canonical rationale
                     </div>
@@ -407,32 +408,37 @@ export function CanonicalKnowledge({
                         </div>
                       ))}
                     </div>
-                  </div>
+                    </div>
+                  </LuminaFlagshipCard>
 
                   <div className="grid gap-3">
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalPanelSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
                         Supersession
                       </div>
                       <div className="mt-2 text-xs font-semibold leading-5 text-cyan-100">
                         {capsule.supersession}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalPanelSurface,
-                    ].join(" ")}>
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
                       <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
                         Version
                       </div>
                       <div className="mt-2 text-xs font-semibold text-violet-100">
                         {capsule.version}
                       </div>
-                    </div>
+                      </div>
+                    </LuminaFlagshipCard>
                   </div>
                 </div>
                     </div>
