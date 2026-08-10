@@ -597,30 +597,32 @@ export function ConsumerIntelligence({
                   }
                   className="block w-full text-left"
                 >
-                  <LuminaStandardPremiumCard
+                  <LuminaFlagshipCard
                     as="article"
                     className={[
-                      electricContour.card,
-                      "h-full transition-[border-color,box-shadow,transform] duration-200",
+                      "h-full rounded-[18px] p-4",
+                      "transition-[border-color,box-shadow,transform] duration-200",
                       selected
                         ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                         : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                     ].join(" ")}
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="text-sm font-semibold text-white">
-                        {event.consumer}
+                    <div className="relative z-10">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="text-sm font-semibold text-white">
+                          {event.consumer}
+                        </div>
+
+                        <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/54">
+                          {event.action}
+                        </div>
                       </div>
 
-                      <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/54">
-                        {event.action}
+                      <div className="mt-2 text-[11px] leading-5 text-sky-300/60">
+                        {event.detail}
                       </div>
                     </div>
-
-                    <div className="mt-2 text-[11px] leading-5 text-sky-300/60">
-                      {event.detail}
-                    </div>
-                  </LuminaStandardPremiumCard>
+                  </LuminaFlagshipCard>
                 </button>
               );
             })}
