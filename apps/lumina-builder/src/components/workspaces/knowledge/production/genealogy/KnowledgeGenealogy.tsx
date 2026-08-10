@@ -294,37 +294,36 @@ export function KnowledgeGenealogy({
                 }
                 className="block w-full text-left"
               >
-                <LuminaStandardPremiumCard
+                <LuminaFlagshipCard
                   as="article"
                   className={[
-                    electricContour.card,
-                    "h-full transition-[border-color,box-shadow,transform] duration-200",
+                    "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
                     selected
                       ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
                       : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
                   ].join(" ")}
                 >
-                  <div className="flex items-start gap-3">
-                  <ExecutivePremiumIcon
-                    icon={Icon}
-                    state={step.state}
-                  />
+                  <div className="relative z-10 flex items-start gap-3">
+                    <ExecutivePremiumIcon
+                      icon={Icon}
+                      state={step.state}
+                    />
 
-                  <div className="min-w-0">
-                    <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
-                      {String(index + 1).padStart(2, "0")} · {step.label}
-                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
+                        {String(index + 1).padStart(2, "0")} · {step.label}
+                      </div>
 
-                    <div className="mt-2 text-sm font-semibold text-white">
-                      {step.value}
-                    </div>
+                      <div className="mt-2 text-sm font-semibold text-white">
+                        {step.value}
+                      </div>
 
-                    <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
-                      {step.detail}
+                      <div className="mt-2 text-[11px] leading-5 text-sky-300/58">
+                        {step.detail}
+                      </div>
                     </div>
                   </div>
-                  </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
               </button>
             );
           })}
