@@ -478,14 +478,19 @@ export function OrganizationalMemory({
                 ["Active projections", "3 governed adaptations"],
               ].map(([label, value], index) => (
                 <div key={label}>
-                  <LuminaStandardPremiumCard>
-                    <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
-                      {label}
+                  <LuminaFlagshipCard
+                    as="article"
+                    className="rounded-[18px] p-4"
+                  >
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                        {label}
+                      </div>
+                      <div className="mt-1 text-sm font-semibold text-white">
+                        {value}
+                      </div>
                     </div>
-                    <div className="mt-1 text-sm font-semibold text-white">
-                      {value}
-                    </div>
-                  </LuminaStandardPremiumCard>
+                  </LuminaFlagshipCard>
 
                   {index < 2 ? (
                     <div className="mx-auto h-4 w-px bg-cyan-300/28" />
