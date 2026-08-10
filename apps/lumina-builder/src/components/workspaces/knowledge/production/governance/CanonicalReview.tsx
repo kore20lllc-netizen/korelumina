@@ -401,26 +401,33 @@ export function CanonicalReview({
                   </div>
 
                   <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[360px]">
-                    <div className={[
-                      flagshipAppearance.canonicalSurface,
-                      flagshipAppearance.canonicalDetailSurface,
-                    ].join(" ")}>
-                      <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
-                        Required reviewers
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                          Required reviewers
+                        </div>
+                        <div className="mt-1 text-xs font-semibold text-cyan-100">
+                          {item.reviewers}
+                        </div>
                       </div>
-                      <div className="mt-1 text-xs font-semibold text-cyan-100">
-                        {item.reviewers}
-                      </div>
-                    </div>
+                    </LuminaFlagshipCard>
 
-                    <div className={compactCardClass}>
-                      <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
-                        Conflict posture
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[16px] p-3"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.14em] text-rose-300/52">
+                          Conflict posture
+                        </div>
+                        <div className="mt-1 text-xs font-semibold text-rose-100">
+                          {item.conflict}
+                        </div>
                       </div>
-                      <div className="mt-1 text-xs font-semibold text-rose-100">
-                        {item.conflict}
-                      </div>
-                    </div>
+                    </LuminaFlagshipCard>
                   </div>
                 </div>
 
