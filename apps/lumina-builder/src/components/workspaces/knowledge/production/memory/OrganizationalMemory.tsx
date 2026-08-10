@@ -531,20 +531,23 @@ export function OrganizationalMemory({
 
           <div className="mt-5 grid gap-3">
             {summaries.map((summary) => (
-              <LuminaStandardPremiumCard
+              <LuminaFlagshipCard
                 as="article"
                 key={summary.title}
+                className="rounded-[18px] p-4"
               >
-                <div className="text-sm font-semibold text-white">
-                  {summary.title}
+                <div className="relative z-10">
+                  <div className="text-sm font-semibold text-white">
+                    {summary.title}
+                  </div>
+                  <div className="mt-2 text-[11px] leading-5 text-emerald-100/62">
+                    {summary.detail}
+                  </div>
+                  <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/52">
+                    {summary.lineage}
+                  </div>
                 </div>
-                <div className="mt-2 text-[11px] leading-5 text-emerald-100/62">
-                  {summary.detail}
-                </div>
-                <div className="mt-4 text-[9px] font-semibold uppercase tracking-[0.13em] text-cyan-300/52">
-                  {summary.lineage}
-                </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             ))}
           </div>
           </div>
