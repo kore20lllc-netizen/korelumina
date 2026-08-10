@@ -28,10 +28,8 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
-  electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
-  premiumSurfaces,
 } from "@/components/design-system/lumina";
 
 import {
@@ -41,14 +39,6 @@ import {
 import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
-
-import {
-  LuminaStandardPremiumCard,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
-
-import {
-  LuminaStandardPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
 import type {
   KnowledgeCapsuleModel,
