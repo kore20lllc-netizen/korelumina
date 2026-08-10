@@ -35,8 +35,12 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
-  LuminaProminentPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaProminentPremiumPanel";
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
   LuminaStandardPremiumCard,
@@ -210,8 +214,11 @@ export function ConsumerIntelligence({
       <LuminaExecutiveTitleMetricsComposition
         variant="content-led"
         titleRegion={
-          <LuminaProminentPremiumPanel>
-          <div className="flex h-full flex-col gap-5 xl:justify-between">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+          <div className="flex h-full flex-col justify-between gap-5 p-5 sm:p-6">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
@@ -240,22 +247,27 @@ export function ConsumerIntelligence({
             </p>
           </div>
 
-          <LuminaStandardPremiumCard>
-            <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
-              Intelligence posture
-            </div>
+          <LuminaFlagshipCard
+            as="article"
+            className="rounded-[18px] p-4"
+          >
+            <div className="relative z-10">
+              <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-violet-200/58">
+                Intelligence posture
+              </div>
 
-            <div className="mt-2 text-sm font-semibold text-violet-100">
-              Usage informs stewardship, not authority.
-            </div>
+              <div className="mt-2 text-sm font-semibold text-violet-100">
+                Usage informs stewardship, not authority.
+              </div>
 
-            <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
-              Consumer behavior may trigger review, adaptation, or retirement
-              signals, but never silently modifies canonical knowledge.
+              <div className="mt-2 text-[11px] leading-5 text-violet-200/56">
+                Consumer behavior may trigger review, adaptation, or retirement
+                signals, but never silently modifies canonical knowledge.
+              </div>
             </div>
-          </LuminaStandardPremiumCard>
+          </LuminaFlagshipCard>
           </div>
-          </LuminaProminentPremiumPanel>
+          </LuminaFlagshipPanel>
         }
         metricsRegion={
           <LuminaExecutiveMetricGrid columns={2}>
