@@ -1,8 +1,4 @@
 import {
-  flagshipAppearance,
-} from "../../learning/presentation/flagshipAppearance";
-
-import {
   Archive,
   BadgeCheck,
   BookMarked,
@@ -25,10 +21,8 @@ import {
 } from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
 
 import {
-  electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
-  premiumSurfaces,
 } from "@/components/design-system/lumina";
 
 import {
@@ -40,11 +34,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
-  LuminaStandardPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
-
-import {
-  LuminaStateSurface,
   LuminaStatusBadge,
 } from "@/components/lumina/workspace";
 
@@ -137,12 +126,6 @@ const COLLECTIONS = [
     scope: "Mission system",
   },
 ];
-
-const compactCardClass = [
-  "rounded-[16px] p-3",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 export function CanonicalKnowledge({
   selectedCanonicalId,
