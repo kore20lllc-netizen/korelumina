@@ -21,6 +21,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   LuminaStandardPremiumCard,
 } from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
 
@@ -100,12 +104,6 @@ const statusClasses = {
   archived:
     "border-slate-400/24 bg-slate-400/[0.05] text-slate-300",
 } as const;
-
-const shellClass = [
-  "overflow-hidden rounded-[30px]",
-  premiumSurfaces.base.shell,
-  electricContour.strength.flagship,
-].join(" ");
 
 const panelClass = [
   "rounded-[24px] p-5",
@@ -247,9 +245,10 @@ export function KnowledgeDistributionHub({
   }
 
   return (
-    <section
+    <LuminaFlagshipPanel
+      title={null}
       aria-label="Knowledge Distribution and Consumption Hub"
-      className={shellClass}
+      className="[&>div:nth-of-type(3)]:hidden"
     >
       <header className="border-b border-violet-300/18 p-5 sm:p-6">
         <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-violet-300/72">
@@ -545,6 +544,6 @@ export function KnowledgeDistributionHub({
           </section>
         </div>
       </div>
-    </section>
+    </LuminaFlagshipPanel>
   );
 }
