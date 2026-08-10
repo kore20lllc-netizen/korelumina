@@ -32,6 +32,10 @@ import {
 } from "@/components/design-system/lumina";
 
 import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
@@ -186,41 +190,41 @@ export function CanonicalKnowledge({
             </div>
 
             <div className="mb-auto mt-7 grid grid-cols-2 gap-3.5 sm:grid-cols-4 xl:mt-8 xl:grid-cols-2">
-              <div className="rounded-[18px] border border-blue-400/72 bg-slate-950/38 px-3.5 py-3 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+              <LuminaFlagshipCard as="article" className="rounded-[18px] px-3.5 py-3">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-emerald-200/58">
                   Published
                 </div>
                 <div className="mt-1 text-xl font-semibold text-emerald-100">
                   59
                 </div>
-              </div>
+              </LuminaFlagshipCard>
 
-              <div className="rounded-[18px] border border-blue-400/72 bg-slate-950/38 px-3.5 py-3 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+              <LuminaFlagshipCard as="article" className="rounded-[18px] px-3.5 py-3">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-cyan-200/58">
                   Collections
                 </div>
                 <div className="mt-1 text-xl font-semibold text-cyan-100">
                   9
                 </div>
-              </div>
+              </LuminaFlagshipCard>
 
-              <div className="rounded-[18px] border border-blue-400/72 bg-slate-950/38 px-3.5 py-3 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+              <LuminaFlagshipCard as="article" className="rounded-[18px] px-3.5 py-3">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-violet-200/58">
                   Constitutional
                 </div>
                 <div className="mt-1 text-xl font-semibold text-violet-100">
                   23
                 </div>
-              </div>
+              </LuminaFlagshipCard>
 
-              <div className="rounded-[18px] border border-blue-400/72 bg-slate-950/38 px-3.5 py-3 ring-1 ring-inset ring-cyan-300/22 shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_24px_rgba(37,99,235,.14),inset_0_0_18px_rgba(56,189,248,.05)] backdrop-blur-[30px] backdrop-saturate-[160%]">
+              <LuminaFlagshipCard as="article" className="rounded-[18px] px-3.5 py-3">
                 <div className="text-[9px] uppercase tracking-[0.16em] text-slate-300/54">
                   Retiring
                 </div>
                 <div className="mt-1 text-xl font-semibold text-slate-100">
                   4
                 </div>
-              </div>
+              </LuminaFlagshipCard>
             </div>
             </div>
           </LuminaFlagshipPanel>
