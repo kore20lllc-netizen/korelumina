@@ -523,30 +523,29 @@ export function CanonicalReview({
 
             <div className="mt-5 grid gap-3">
               {AUTHORITIES.map((authority, index) => (
-                <div
+                <LuminaFlagshipCard
                   key={authority.title}
-                  className={[
-                    "relative",
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}
+                  as="article"
+                  className="relative rounded-[16px] p-3"
                 >
-                  {index < AUTHORITIES.length - 1 ? (
-                    <div className="absolute left-7 top-full h-3 w-px bg-violet-300/24" />
-                  ) : null}
+                  <div className="relative z-10">
+                    {index < AUTHORITIES.length - 1 ? (
+                      <div className="absolute left-4 top-full h-3 w-px bg-violet-300/24" />
+                    ) : null}
 
-                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-300/52">
-                    {authority.title}
-                  </div>
+                    <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-300/52">
+                      {authority.title}
+                    </div>
 
-                  <div className="mt-1 text-sm font-semibold text-white">
-                    {authority.value}
-                  </div>
+                    <div className="mt-1 text-sm font-semibold text-white">
+                      {authority.value}
+                    </div>
 
-                  <div className="mt-2 text-xs leading-5 text-violet-200/56">
-                    {authority.detail}
+                    <div className="mt-2 text-xs leading-5 text-violet-200/56">
+                      {authority.detail}
+                    </div>
                   </div>
-                </div>
+                </LuminaFlagshipCard>
               ))}
             </div>
             </div>
