@@ -528,22 +528,26 @@ export function ConsumerIntelligence({
 
             <div className="mt-5 grid gap-3">
               {demandSignals.map((signal) => (
-                <LuminaStandardPremiumCard
+                <LuminaFlagshipCard
                   key={signal.title}
+                  as="article"
+                  className="rounded-[18px] p-4"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-white">
-                      {signal.title}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-sm font-semibold text-white">
+                        {signal.title}
+                      </div>
+                      <div className="rounded-full border border-amber-300/24 bg-amber-300/[0.06] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-amber-100">
+                        {signal.value}
+                      </div>
                     </div>
-                    <div className="rounded-full border border-amber-300/24 bg-amber-300/[0.06] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-amber-100">
-                      {signal.value}
-                    </div>
-                  </div>
 
-                  <div className="mt-2 text-[11px] leading-5 text-violet-200/58">
-                    {signal.detail}
+                    <div className="mt-2 text-[11px] leading-5 text-violet-200/58">
+                      {signal.detail}
+                    </div>
                   </div>
-                </LuminaStandardPremiumCard>
+                </LuminaFlagshipCard>
               ))}
             </div>
             </div>
