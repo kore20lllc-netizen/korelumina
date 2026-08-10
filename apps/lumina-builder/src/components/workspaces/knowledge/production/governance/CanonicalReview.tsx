@@ -551,7 +551,11 @@ export function CanonicalReview({
             </div>
           </LuminaFlagshipPanel>
 
-          <LuminaStandardPremiumPanel className="h-full">
+          <LuminaFlagshipPanel
+            title={null}
+            className="h-full [&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
             <div className="flex items-center gap-3">
               <ExecutivePremiumIcon
                 icon={GitCompareArrows}
@@ -594,7 +598,8 @@ export function CanonicalReview({
                 </div>
               </LuminaStandardPremiumCard>
             </div>
-          </LuminaStandardPremiumPanel>
+            </div>
+          </LuminaFlagshipPanel>
           </div>
         }
       />
