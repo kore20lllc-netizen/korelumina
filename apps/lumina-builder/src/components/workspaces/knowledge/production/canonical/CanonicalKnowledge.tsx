@@ -478,23 +478,23 @@ export function CanonicalKnowledge({
 
             <div className="mt-5 grid gap-3">
               {COLLECTIONS.map((collection) => (
-                <div
+                <LuminaFlagshipCard
                   key={collection.title}
-                  className={[
-                    flagshipAppearance.canonicalSurface,
-                    flagshipAppearance.canonicalPanelSurface,
-                  ].join(" ")}
+                  as="article"
+                  className="rounded-[16px] p-3"
                 >
-                  <div className="text-sm font-semibold text-white">
-                    {collection.title}
+                  <div className="relative z-10">
+                    <div className="text-sm font-semibold text-white">
+                      {collection.title}
+                    </div>
+                    <div className="mt-2 text-[11px] leading-5 text-cyan-200/58">
+                      {collection.count} · {collection.scope}
+                    </div>
+                    <div className="mt-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-amber-300/58">
+                      {collection.authority}
+                    </div>
                   </div>
-                  <div className="mt-2 text-[11px] leading-5 text-cyan-200/58">
-                    {collection.count} · {collection.scope}
-                  </div>
-                  <div className="mt-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-amber-300/58">
-                    {collection.authority}
-                  </div>
-                </div>
+                </LuminaFlagshipCard>
               ))}
             </div>
               </div>
