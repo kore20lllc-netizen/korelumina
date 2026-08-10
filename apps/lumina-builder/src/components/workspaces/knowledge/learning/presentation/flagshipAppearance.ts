@@ -384,13 +384,6 @@ export const flagshipAppearance = {
   divider:
     "h-px bg-gradient-to-r from-transparent via-cyan-300/24 to-transparent",
 
-  badge: [
-    "inline-flex items-center rounded-full border px-2.5 py-1",
-    "text-[10px] font-semibold uppercase tracking-[0.14em]",
-    "border-cyan-300/34 bg-cyan-300/[0.08] text-cyan-200/88",
-    "ring-1 ring-inset ring-cyan-100/8",
-  ].join(" "),
-
   focusRing: [
     "focus-visible:outline-none",
     "focus-visible:ring-2 focus-visible:ring-cyan-200/74",
