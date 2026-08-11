@@ -40,7 +40,9 @@ export interface ExecutiveContextReducer {
       ExecutiveContext,
     event:
       ExecutiveEvent,
-  ): ExecutiveContext;
+  ):
+    | ExecutiveContext
+    | Promise<ExecutiveContext>;
 }
 
 export interface ExecutivePipelineResult {
@@ -278,7 +280,7 @@ export class ExecutivePipeline {
         );
 
       const context =
-        this.dependencies
+        await this.dependencies
           .contextReducer
           .reduce(
             this.dependencies
