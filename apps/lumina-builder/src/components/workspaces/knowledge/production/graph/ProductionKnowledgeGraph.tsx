@@ -21,10 +21,6 @@ import {
   LuminaFlagshipSurface,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
-import {
-  flagshipAppearance,
-} from "../../learning/presentation/flagshipAppearance";
-
 import type {
   KnowledgeCapsule,
 } from "../capsules/types";
@@ -105,13 +101,12 @@ export function ProductionKnowledgeGraph({
           icon: Target,
         },
       ].map((metric) => (
-        <div
+        <LuminaFlagshipCard
           key={metric.label}
-          className={
-            flagshipAppearance.inspectorMetric
-          }
+          as="article"
+          className="rounded-[16px] p-3"
         >
-          <div className="flex items-center gap-2">
+          <div className="relative z-10 flex items-center gap-2">
             <ExecutivePremiumIcon
               icon={metric.icon}
               state="healthy"
@@ -127,7 +122,7 @@ export function ProductionKnowledgeGraph({
               </div>
             </div>
           </div>
-        </div>
+        </LuminaFlagshipCard>
       ))}
     </div>
   );
