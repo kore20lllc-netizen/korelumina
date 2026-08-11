@@ -28,6 +28,7 @@ import { registerExecutiveRoute } from "./routes/executive.js";
 
 import {
   runtimeKnowledgeProvider,
+  rehydrateRuntimeCanonicalKnowledge,
 } from "./knowledge-platform/runtime/index.js";
 
 import {
@@ -52,6 +53,10 @@ const app = express();
 
 const knowledgePlatform =
   runtimeKnowledgeProvider.getPlatform();
+
+rehydrateRuntimeCanonicalKnowledge(
+  knowledgePlatform,
+);
 
 const knowledgeContextBuilder =
   new KnowledgeContextBuilder(
