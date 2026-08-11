@@ -25,6 +25,18 @@ import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 
+import {
+  runtimeKnowledgeProvider,
+} from "./knowledge-platform/runtime/index.js";
+
+import {
+  KnowledgeContextBuilder,
+} from "./knowledge-platform/context/index.js";
+
+import {
+  createExecutiveOrchestrator,
+} from "./executive/orchestrator/index.js";
+
 import { stopAllRuntimes } from "./runtime/registry.js";
 import {
   startRuntimeSupervisor,
@@ -36,6 +48,19 @@ import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
 
 const app = express();
+
+const knowledgePlatform =
+  runtimeKnowledgeProvider.getPlatform();
+
+const knowledgeContextBuilder =
+  new KnowledgeContextBuilder(
+    knowledgePlatform,
+  );
+
+export const executiveRuntime =
+  createExecutiveOrchestrator({
+    knowledgeContextBuilder,
+  });
 
 app.use(cors());
 app.use(express.json());
