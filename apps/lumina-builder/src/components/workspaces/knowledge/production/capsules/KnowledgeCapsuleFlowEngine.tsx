@@ -17,6 +17,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   LuminaFlagshipSurface,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
 
@@ -274,17 +278,12 @@ export function KnowledgeCapsuleFlowEngine({
   ]);
 
   return (
-    <section
+    <LuminaFlagshipPanel
+      title={null}
       aria-label="Knowledge Capsule Flow Engine"
-      className={
-        flagshipAppearance.capsuleFlowShell
-      }
+      className="[&>div:nth-of-type(3)]:hidden"
     >
-      <header
-        className={
-          flagshipAppearance.capsuleFlowHeader
-        }
-      >
+      <header className="border-b border-blue-400/50 p-5 ring-1 ring-inset ring-cyan-300/12 sm:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/72">
@@ -302,23 +301,24 @@ export function KnowledgeCapsuleFlowEngine({
             </p>
           </div>
 
-          <div
-            className={
-              flagshipAppearance.capsuleFlowMetric
-            }
+          <LuminaFlagshipCard
+            as="article"
+            className="rounded-[18px] px-4 py-3"
           >
-            <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
-              Live manufacturing posture
-            </div>
+            <div className="relative z-10">
+              <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
+                Live manufacturing posture
+              </div>
 
-            <div className="mt-1 text-sm font-semibold text-cyan-100">
-              Multi-capsule station occupancy
-            </div>
+              <div className="mt-1 text-sm font-semibold text-cyan-100">
+                Multi-capsule station occupancy
+              </div>
 
-            <div className="mt-1 text-xs text-sky-500/72">
-              Fixture-driven UI contract
+              <div className="mt-1 text-xs text-sky-500/72">
+                Fixture-driven UI contract
+              </div>
             </div>
-          </div>
+          </LuminaFlagshipCard>
         </div>
 
         <div className="mt-5">
@@ -698,6 +698,6 @@ export function KnowledgeCapsuleFlowEngine({
           </div>
         </LuminaFlagshipSurface>
       </div>
-    </section>
+    </LuminaFlagshipPanel>
   );
 }
