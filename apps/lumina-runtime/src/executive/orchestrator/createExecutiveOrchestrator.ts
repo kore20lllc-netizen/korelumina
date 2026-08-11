@@ -2,6 +2,14 @@ import {
   createExecutiveKernel,
   type ExecutiveKernel,
 } from "../kernel/index.js";
+
+import {
+  ExecutiveKnowledgeContextReducer,
+} from "../context/index.js";
+
+import type {
+  KnowledgeContextBuilder,
+} from "../../knowledge-platform/context/index.js";
 import {
   RegistryExecutiveDispatcher,
 } from "./ExecutiveDispatcher.js";
@@ -22,6 +30,9 @@ export interface CreateExecutiveOrchestratorOptions {
 
   dispatcher?:
     RegistryExecutiveDispatcher;
+
+  knowledgeContextBuilder?:
+    KnowledgeContextBuilder;
 }
 
 export interface ExecutiveOrchestratorRuntime {
@@ -47,6 +58,13 @@ export function createExecutiveOrchestrator(
     options.dispatcher ??
     new RegistryExecutiveDispatcher();
 
+  const contextReducer =
+    options.knowledgeContextBuilder
+      ? new ExecutiveKnowledgeContextReducer(
+          options.knowledgeContextBuilder,
+        )
+      : new DefaultExecutiveContextReducer();
+
   const pipeline =
     new ExecutivePipeline({
       kernel,
@@ -54,8 +72,7 @@ export function createExecutiveOrchestrator(
       validator:
         new StructuralExecutiveEventValidator(),
 
-      contextReducer:
-        new DefaultExecutiveContextReducer(),
+      contextReducer,
 
       router:
         new DefaultExecutiveRouter(),
