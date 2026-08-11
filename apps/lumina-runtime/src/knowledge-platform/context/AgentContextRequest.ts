@@ -11,4 +11,9 @@ export interface AgentContextRequest {
   objective: string;
   query?: string;
   maxKnowledgeItems?: number;
+
+  organizationId?: string;
+  projectIds?: string[];
+  teamIds?: string[];
+  references?: string[];
 }
