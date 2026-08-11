@@ -545,11 +545,7 @@ export function KnowledgeCapsuleFlowEngine({
                                 </h3>
                               </div>
 
-                              <div
-                                className={
-                                  flagshipAppearance.capsuleFlowStationCount
-                                }
-                              >
+                              <div className="rounded-full border border-blue-400/48 bg-slate-950/34 px-2.5 py-1 text-[9px] font-semibold text-cyan-100 ring-1 ring-inset ring-cyan-300/12">
                                 {totalOccupancy}
                               </div>
                             </button>
@@ -598,14 +594,13 @@ export function KnowledgeCapsuleFlowEngine({
                                   }
 
                                   return (
-                                    <div
+                                    <LuminaFlagshipSurface
                                       key={branch.id}
                                       className={[
-                                        flagshipAppearance.capsuleFlowBranch,
-                                        branch.kind ===
-                                        "remediation"
-                                          ? flagshipAppearance.capsuleFlowBranchTone.remediation
-                                          : flagshipAppearance.capsuleFlowBranchTone.validated,
+                                        "relative overflow-hidden rounded-[18px] p-2.5",
+                                        branch.kind === "remediation"
+                                          ? "bg-rose-300/[0.055]"
+                                          : "bg-emerald-300/[0.045]",
                                       ].join(" ")}
                                     >
                                       <div
@@ -658,7 +653,7 @@ export function KnowledgeCapsuleFlowEngine({
                                           {branch.note}
                                         </p>
                                       ) : null}
-                                    </div>
+                                    </LuminaFlagshipSurface>
                                   );
                                 },
                               )}
