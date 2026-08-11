@@ -150,18 +150,16 @@ export const flagshipAppearance = {
 
   capsuleShell: [
     "relative min-h-[112px] overflow-visible rounded-full border bg-gradient-to-r",
-    "transition-[transform,box-shadow,border-color] duration-300",
-    "group-hover:-translate-y-1",
-    "group-hover:shadow-[0_22px_60px_rgba(2,6,23,.48)]",
+    "transition-[box-shadow,border-color] duration-300",
+    "group-hover:shadow-[0_14px_34px_rgba(2,6,23,.38)]",
     "motion-reduce:transition-none",
-    "motion-reduce:group-hover:translate-y-0",
   ].join(" "),
 
   capsuleShellSelected:
-    "ring-2 ring-cyan-200/72 shadow-[0_0_34px_rgba(34,211,238,.22)]",
+    "ring-1 ring-cyan-200/55 shadow-[0_0_18px_rgba(34,211,238,.12)]",
 
   capsuleShellIdle:
-    "ring-1 ring-inset ring-white/8 shadow-[0_16px_48px_rgba(2,6,23,.40)]",
+    "ring-1 ring-inset ring-white/6 shadow-[0_10px_28px_rgba(2,6,23,.28)]",
 
   capsuleResealingBadge: [
     "rounded-full border border-emerald-300/30",

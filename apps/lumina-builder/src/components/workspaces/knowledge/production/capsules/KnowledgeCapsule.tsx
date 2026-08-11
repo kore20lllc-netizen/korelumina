@@ -157,6 +157,7 @@ export function KnowledgeCapsule({
       onClick={() => onSelect?.(capsule.id)}
       className={[
         flagshipAppearance.capsuleButton,
+        "transition-transform duration-300 hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0",
         compact ? "max-w-[280px]" : "max-w-[360px]",
       ].join(" ")}
     >

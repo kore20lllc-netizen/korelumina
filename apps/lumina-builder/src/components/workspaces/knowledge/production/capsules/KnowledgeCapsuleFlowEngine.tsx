@@ -342,12 +342,9 @@ export function KnowledgeCapsuleFlowEngine({
 
           <div className="relative grid gap-5">
             {filteredCapsules.length === 0 ? (
-              <div
+              <LuminaFlagshipSurface
                 role="status"
-                className={[
-                  flagshipAppearance.capsuleFlowEmptyStation,
-                  "relative z-10 grid min-h-[220px] place-items-center rounded-[24px] px-6 py-12 text-center",
-                ].join(" ")}
+                className="relative z-10 grid min-h-[220px] place-items-center rounded-[24px] px-6 py-12 text-center"
               >
                 <div className="max-w-xl">
                   <ExecutivePremiumIcon
@@ -364,7 +361,7 @@ export function KnowledgeCapsuleFlowEngine({
                     package visibility.
                   </p>
                 </div>
-              </div>
+              </LuminaFlagshipSurface>
             ) : null}
 
             {[
