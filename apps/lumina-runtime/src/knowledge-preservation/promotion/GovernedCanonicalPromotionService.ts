@@ -51,6 +51,13 @@ export interface GovernedPromotionResult {
     OrganizationalMemoryRecord[];
 }
 
+export interface OrganizationalMemoryPersistence {
+  saveAll(
+    records:
+      readonly OrganizationalMemoryRecord[],
+  ): void;
+}
+
 export class GovernedCanonicalPromotionService {
   private readonly promoter =
     new KnowledgePromoter();
@@ -61,6 +68,9 @@ export class GovernedCanonicalPromotionService {
 
     private readonly canonicalStore =
       new CanonicalKnowledgeStore(),
+
+    private readonly organizationalMemoryPersistence?:
+      OrganizationalMemoryPersistence,
   ) {}
 
   promoteApprovedPackage(
@@ -213,6 +223,17 @@ export class GovernedCanonicalPromotionService {
               canonicalItems,
           })
         : [];
+
+    if (
+      organizationalMemoryRecords.length >
+        0 &&
+      this.organizationalMemoryPersistence
+    ) {
+      this.organizationalMemoryPersistence
+        .saveAll(
+          organizationalMemoryRecords,
+        );
+    }
 
     return {
       knowledgePackage:
