@@ -8,6 +8,7 @@ export type KnowledgePackageLifecycleState =
   | "validated"
   | "awaiting_review"
   | "approved"
+  | "rejected"
   | "canonical"
   | "adapted"
   | "consumed"
