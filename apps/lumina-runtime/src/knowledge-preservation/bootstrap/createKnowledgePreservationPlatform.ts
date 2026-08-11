@@ -18,6 +18,10 @@ import {
   SourceCompiler,
 } from "../compiler/source/index.js";
 
+import {
+  DocumentationCompiler,
+} from "../compiler/documentation/index.js";
+
 export function createKnowledgePreservationPlatform() {
   const platform =
     new KnowledgePreservationPlatform();
@@ -36,6 +40,10 @@ export function createKnowledgePreservationPlatform() {
 
   platform.compilerRegistry.register(
     new SourceCompiler(),
+  );
+
+  platform.compilerRegistry.register(
+    new DocumentationCompiler(),
   );
 
   return platform;
