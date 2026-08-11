@@ -50,3 +50,4 @@ export type {
 export {
   validateOrganizationalMemoryPipelineResult,
 } from "./OrganizationalMemoryValidation.js";
+export * from "./CanonicalKnowledgeOrganizationalMemoryAdapter.js";
