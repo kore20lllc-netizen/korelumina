@@ -24,6 +24,7 @@ import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
+import { registerExecutiveRoute } from "./routes/executive.js";
 
 import {
   runtimeKnowledgeProvider,
@@ -101,6 +102,10 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+registerExecutiveRoute(
+  app,
+  executiveRuntime,
+);
 
 const PORT =
   Number(process.env.LUMINA_RUNTIME_PORT) || 4100;
