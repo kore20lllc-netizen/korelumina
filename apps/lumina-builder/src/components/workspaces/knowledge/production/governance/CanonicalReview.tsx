@@ -573,30 +573,37 @@ export function CanonicalReview({
             </div>
 
             <div className="mt-5 grid gap-3">
-              <div className={[
-                flagshipAppearance.canonicalSurface,
-                flagshipAppearance.canonicalPanelSurface,
-              ].join(" ")}>
-                <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/48">
-                  Current canonical capsule
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[16px] p-3"
+              >
+                <div className="relative z-10">
+                  <div className="text-[9px] uppercase tracking-[0.14em] text-slate-300/48">
+                    Current canonical capsule
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-slate-100">
+                    KCAP-2025-118 · Runtime Recovery Standard v2.4
+                  </div>
                 </div>
-                <div className="mt-1 text-sm font-semibold text-slate-100">
-                  KCAP-2025-118 · Runtime Recovery Standard v2.4
-                </div>
-              </div>
+              </LuminaFlagshipCard>
 
               <div className="flex justify-center">
                 <GitCompareArrows className="h-4 w-4 text-cyan-300/70" />
               </div>
 
-              <LuminaStandardPremiumCard>
-                <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
-                  Proposed replacement
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[16px] p-3"
+              >
+                <div className="relative z-10">
+                  <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                    Proposed replacement
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-100">
+                    KCAP-2026-042 · Runtime Isolation Recovery Standard v3.0
+                  </div>
                 </div>
-                <div className="mt-1 text-sm font-semibold text-amber-100">
-                  KCAP-2026-042 · Runtime Isolation Recovery Standard v3.0
-                </div>
-              </LuminaStandardPremiumCard>
+              </LuminaFlagshipCard>
             </div>
             </div>
           </LuminaFlagshipPanel>
