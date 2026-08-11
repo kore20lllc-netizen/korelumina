@@ -29,7 +29,13 @@ import { registerExecutiveRoute } from "./routes/executive.js";
 import {
   runtimeKnowledgeProvider,
   rehydrateRuntimeCanonicalKnowledge,
+  RuntimeOrganizationalMemoryProvider,
+  RuntimeOrganizationalMemoryStore,
 } from "./knowledge-platform/runtime/index.js";
+
+import {
+  registerOrganizationalMemoryProvider,
+} from "./knowledge/organizational-memory/index.js";
 
 import {
   KnowledgeContextBuilder,
@@ -56,6 +62,18 @@ const knowledgePlatform =
 
 rehydrateRuntimeCanonicalKnowledge(
   knowledgePlatform,
+);
+
+export const runtimeOrganizationalMemoryStore =
+  new RuntimeOrganizationalMemoryStore();
+
+export const runtimeOrganizationalMemoryProvider =
+  new RuntimeOrganizationalMemoryProvider(
+    runtimeOrganizationalMemoryStore,
+  );
+
+registerOrganizationalMemoryProvider(
+  runtimeOrganizationalMemoryProvider,
 );
 
 const knowledgeContextBuilder =
