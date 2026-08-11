@@ -11,6 +11,14 @@ import {
 } from "../../canonical-knowledge/KnowledgePromoter.js";
 
 import type {
+  OrganizationalMemoryRecord,
+} from "../../knowledge/organizational-memory/index.js";
+
+import {
+  adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
+} from "../../knowledge/organizational-memory/index.js";
+
+import type {
   KnowledgePackage,
 } from "../package/index.js";
 
@@ -26,12 +34,21 @@ interface ReviewMetadata {
   reason?: unknown;
 }
 
+export interface GovernedPromotionContext {
+  organizationId: string;
+  projectId?: string;
+  teamId?: string;
+}
+
 export interface GovernedPromotionResult {
   knowledgePackage:
     KnowledgePackage;
 
   canonicalItems:
     CanonicalKnowledgeItem[];
+
+  organizationalMemoryRecords:
+    OrganizationalMemoryRecord[];
 }
 
 export class GovernedCanonicalPromotionService {
@@ -48,6 +65,8 @@ export class GovernedCanonicalPromotionService {
 
   promoteApprovedPackage(
     packageId: string,
+    context?:
+      GovernedPromotionContext,
   ): GovernedPromotionResult {
     const knowledgePackage =
       this.packageService.get(
@@ -178,11 +197,30 @@ export class GovernedCanonicalPromotionService {
       updated,
     );
 
+    const organizationalMemoryRecords =
+      context
+        ? adaptCanonicalKnowledgeToOrganizationalMemoryRecords({
+            organizationId:
+              context.organizationId,
+
+            projectId:
+              context.projectId,
+
+            teamId:
+              context.teamId,
+
+            items:
+              canonicalItems,
+          })
+        : [];
+
     return {
       knowledgePackage:
         updated,
 
       canonicalItems,
+
+      organizationalMemoryRecords,
     };
   }
 }
