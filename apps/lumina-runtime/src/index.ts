@@ -24,6 +24,7 @@ import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
+import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 
 import {
@@ -40,6 +41,14 @@ import {
 import {
   KnowledgeContextBuilder,
 } from "./knowledge-platform/context/index.js";
+
+import {
+  CanonicalReviewService,
+} from "./knowledge-preservation/review/index.js";
+
+import {
+  GovernedCanonicalPromotionService,
+} from "./knowledge-preservation/promotion/index.js";
 
 import {
   createExecutiveOrchestrator,
@@ -75,6 +84,18 @@ export const runtimeOrganizationalMemoryProvider =
 registerOrganizationalMemoryProvider(
   runtimeOrganizationalMemoryProvider,
 );
+
+export const runtimeCanonicalReviewService =
+  new CanonicalReviewService(
+    knowledgePlatform.packageService,
+  );
+
+export const runtimeGovernedPromotionService =
+  new GovernedCanonicalPromotionService(
+    knowledgePlatform.packageService,
+    knowledgePlatform.store,
+    runtimeOrganizationalMemoryStore,
+  );
 
 const knowledgeContextBuilder =
   new KnowledgeContextBuilder(
@@ -125,6 +146,18 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+
+registerCanonicalReviewRoutes(
+  app,
+  {
+    reviewService:
+      runtimeCanonicalReviewService,
+
+    promotionService:
+      runtimeGovernedPromotionService,
+  },
+);
+
 registerExecutiveRoute(
   app,
   executiveRuntime,
