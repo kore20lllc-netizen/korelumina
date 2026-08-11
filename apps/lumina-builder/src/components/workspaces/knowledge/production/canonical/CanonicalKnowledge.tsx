@@ -137,7 +137,7 @@ export function CanonicalKnowledge({
       className="grid gap-5"
     >
       <LuminaExecutiveTitleMetricsComposition
-        variant="content-led"
+        variant="balanced"
         titleRegion={
           <LuminaFlagshipPanel
             className="flex h-full flex-col"
@@ -249,7 +249,8 @@ export function CanonicalKnowledge({
         }
       />
 
-      <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
+      <LuminaBalancedSplitPanelComposition
+        primaryRegion={
         <LuminaFlagshipPanel
           title={null}
           className="[&>div:nth-of-type(3)]:hidden"
@@ -432,9 +433,9 @@ export function CanonicalKnowledge({
           </div>
           </div>
         </LuminaFlagshipPanel>
-
-        <LuminaBalancedSplitPanelComposition
-          primaryRegion={
+        }
+        secondaryRegion={
+          <div className="grid h-full gap-5 xl:grid-rows-2">
             <LuminaFlagshipPanel
               title={null}
               className="h-full [&>div:nth-of-type(3)]:hidden"
@@ -482,8 +483,6 @@ export function CanonicalKnowledge({
             </div>
               </div>
             </LuminaFlagshipPanel>
-          }
-          secondaryRegion={
             <LuminaFlagshipPanel
               title={null}
               className="h-full [&>div:nth-of-type(3)]:hidden"
@@ -542,9 +541,9 @@ export function CanonicalKnowledge({
             </div>
               </div>
             </LuminaFlagshipPanel>
-          }
-        />
-      </div>
+          </div>
+        }
+      />
     </section>
   );
 }

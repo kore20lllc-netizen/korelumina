@@ -1,8 +1,4 @@
 import {
-  flagshipAppearance,
-} from "../../learning/presentation/flagshipAppearance";
-
-import {
   AlertTriangle,
   BadgeCheck,
   CheckCircle2,
@@ -27,10 +23,8 @@ import {
 } from "@/components/design-system/compositions/LuminaPanelHeaderComposition";
 
 import {
-  electricContour,
   LuminaExecutiveCard,
   LuminaExecutiveMetricGrid,
-  premiumSurfaces,
 } from "@/components/design-system/lumina";
 
 import {
@@ -40,14 +34,6 @@ import {
 import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
-
-import {
-  LuminaStandardPremiumCard,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumCard";
-
-import {
-  LuminaStandardPremiumPanel,
-} from "@/components/design-system/surfaces/LuminaStandardPremiumPanel";
 
 import {
   ExecutivePremiumIcon,
@@ -167,12 +153,6 @@ function readinessTone(
 
   return "bg-rose-300";
 }
-
-const compactCardClass = [
-  "rounded-[16px] p-3",
-  premiumSurfaces.base.card,
-  electricContour.strength.standard,
-].join(" ");
 
 export function CanonicalReview({
   selectedReviewId,
