@@ -94,10 +94,6 @@ export class KnowledgePlatform {
         normalized,
       );
 
-    this.store.promoteAll(
-      validated,
-    );
-
     await this.publishingPipeline.publish(
       validated,
     );

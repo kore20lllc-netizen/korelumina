@@ -80,10 +80,6 @@ export class KnowledgePreservationPlatform {
         normalized,
       );
 
-    this.canonicalKnowledgeStore.promoteAll(
-      validated,
-    );
-
     await this.publishingPipeline.publish(
       validated,
     );
