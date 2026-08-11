@@ -17,6 +17,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
   useKnowledgeV3Workspace,
 } from "../state";
 
@@ -66,23 +70,28 @@ export function KnowledgeWorkspaceHeader() {
     <LuminaExecutiveTitleMetricsComposition
       variant="balanced"
       titleRegion={
-        <div className="min-w-0">
-          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
-            <ExecutivePremiumIcon
-              icon={Icon}
-              state={content.iconState}
-            />
-            {content.eyebrow}
+        <LuminaFlagshipPanel
+          title={null}
+          className="h-full [&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="relative z-10 min-w-0 px-6 pb-6 pt-2">
+            <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
+              <ExecutivePremiumIcon
+                icon={Icon}
+                state={content.iconState}
+              />
+              {content.eyebrow}
+            </div>
+
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.025em] text-cyan">
+              {content.title}
+            </h2>
+
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-white/60">
+              {content.description}
+            </p>
           </div>
-
-          <h2 className="mt-3 text-2xl font-semibold tracking-[-0.025em] text-cyan">
-            {content.title}
-          </h2>
-
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-white/60">
-            {content.description}
-          </p>
-        </div>
+        </LuminaFlagshipPanel>
       }
       metricsRegion={
         <LuminaFlagshipCard
