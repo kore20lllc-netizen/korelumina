@@ -653,14 +653,19 @@ export function CanonicalReview({
                         item.id,
                       )
                     }
-                    className={[
-                      "relative z-10 flex w-full flex-col items-center rounded-[18px] px-2 py-3 text-center",
-                      "transition-[border-color,box-shadow,transform] duration-200",
-                      selected
-                        ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_24px_rgba(37,99,235,0.22)]"
-                        : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
-                    ].join(" ")}
+                    className="block w-full text-left"
                   >
+                    <LuminaFlagshipCard
+                      as="article"
+                      className={[
+                        "rounded-[18px] px-2 py-3 text-center",
+                        "transition-[border-color,box-shadow,transform] duration-200",
+                        selected
+                          ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_24px_rgba(37,99,235,0.22)]"
+                          : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                      ].join(" ")}
+                    >
+                      <div className="relative z-10 flex w-full flex-col items-center">
                     <div
                       className={[
                         "flex h-8 w-8 items-center justify-center rounded-full border",
@@ -687,6 +692,8 @@ export function CanonicalReview({
                     <div className="mt-1 text-[10px] leading-4 text-sky-400/56">
                       {item.detail}
                     </div>
+                      </div>
+                    </LuminaFlagshipCard>
                   </button>
                 </div>
               );
@@ -695,7 +702,11 @@ export function CanonicalReview({
           </div>
         </LuminaFlagshipPanel>
 
-        <LuminaStandardPremiumPanel>
+        <LuminaFlagshipPanel
+          title={null}
+          className="[&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={AlertTriangle}
@@ -713,33 +724,38 @@ export function CanonicalReview({
           </div>
 
           <div className="mt-5 grid gap-3">
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalPanelSurface,
-            ].join(" ")}>
-              <div className="text-xs font-semibold text-white">
-                Resolve constitutional interpretation
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[16px] p-3"
+            >
+              <div className="relative z-10">
+                <div className="text-xs font-semibold text-white">
+                  Resolve constitutional interpretation
+                </div>
+                <div className="mt-2 text-[11px] leading-5 text-rose-200/56">
+                  Determine whether integrity remediation history must remain
+                  visible after canonical resealing.
+                </div>
               </div>
-              <div className="mt-2 text-[11px] leading-5 text-rose-200/56">
-                Determine whether integrity remediation history must remain
-                visible after canonical resealing.
-              </div>
-            </div>
+            </LuminaFlagshipCard>
 
-            <div className={[
-              flagshipAppearance.canonicalSurface,
-              flagshipAppearance.canonicalPanelSurface,
-            ].join(" ")}>
-              <div className="text-xs font-semibold text-white">
-                Confirm supersession boundary
+            <LuminaFlagshipCard
+              as="article"
+              className="rounded-[16px] p-3"
+            >
+              <div className="relative z-10">
+                <div className="text-xs font-semibold text-white">
+                  Confirm supersession boundary
+                </div>
+                <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
+                  Decide whether the proposed capsule replaces the full runtime
+                  recovery standard or only isolation recovery guidance.
+                </div>
               </div>
-              <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
-                Decide whether the proposed capsule replaces the full runtime
-                recovery standard or only isolation recovery guidance.
-              </div>
-            </div>
+            </LuminaFlagshipCard>
           </div>
-        </LuminaStandardPremiumPanel>
+          </div>
+        </LuminaFlagshipPanel>
       </div>
     </section>
   );
