@@ -13,6 +13,10 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -284,42 +288,46 @@ export function KnowledgeCapsuleFlowEngine({
       className="[&>div:nth-of-type(3)]:hidden"
     >
       <header className="border-b border-blue-400/50 p-5 ring-1 ring-inset ring-cyan-300/12 sm:p-6">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
-          <div>
-            <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/72">
-              Knowledge Operations
+        <LuminaExecutiveTitleMetricsComposition
+          variant="balanced"
+          titleRegion={
+            <div className="min-w-0">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/72">
+                Knowledge Operations
+              </div>
+
+              <h1 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-amber-400">
+                Knowledge Capsule Flow Engine
+              </h1>
+
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-sky-300/76">
+                One persistent Knowledge Package moves through the governed lifecycle.
+                Its identity remains stable while its station, state, integrity and
+                authority posture change.
+              </p>
             </div>
+          }
+          metricsRegion={
+            <LuminaFlagshipCard
+              as="article"
+              className="h-full rounded-[18px] px-4 py-3"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
+                  Live manufacturing posture
+                </div>
 
-            <h1 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-amber-400">
-              Knowledge Capsule Flow Engine
-            </h1>
+                <div className="mt-1 text-sm font-semibold text-cyan-100">
+                  Multi-capsule station occupancy
+                </div>
 
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-sky-300/76">
-              One persistent Knowledge Package moves through the governed lifecycle.
-              Its identity remains stable while its station, state, integrity and
-              authority posture change.
-            </p>
-          </div>
-
-          <LuminaFlagshipCard
-            as="article"
-            className="rounded-[18px] px-4 py-3"
-          >
-            <div className="relative z-10">
-              <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
-                Live manufacturing posture
+                <div className="mt-1 text-xs text-sky-500/72">
+                  Fixture-driven UI contract
+                </div>
               </div>
-
-              <div className="mt-1 text-sm font-semibold text-cyan-100">
-                Multi-capsule station occupancy
-              </div>
-
-              <div className="mt-1 text-xs text-sky-500/72">
-                Fixture-driven UI contract
-              </div>
-            </div>
-          </LuminaFlagshipCard>
-        </div>
+            </LuminaFlagshipCard>
+          }
+        />
 
         <div className="mt-5">
           <KnowledgeCapsuleFilters
@@ -378,8 +386,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Mission Compiler",
                   "Execution Compiler",
                 ],
-                classes:
-                  flagshipAppearance.capsuleFlowZoneTone.source,
+                classes: "",
               },
               {
                 id: "transformation",
@@ -388,8 +395,7 @@ export function KnowledgeCapsuleFlowEngine({
                 stations: [
                   "Knowledge IR",
                 ],
-                classes:
-                  flagshipAppearance.capsuleFlowZoneTone.transformation,
+                classes: "",
               },
               {
                 id: "governance",
@@ -400,8 +406,7 @@ export function KnowledgeCapsuleFlowEngine({
                   "Knowledge Package Assembly",
                   "Canonical Review",
                 ],
-                classes:
-                  flagshipAppearance.capsuleFlowZoneTone.governance,
+                classes: "",
               },
               {
                 id: "canonical",
@@ -410,8 +415,7 @@ export function KnowledgeCapsuleFlowEngine({
                 stations: [
                   "Canonical Knowledge",
                 ],
-                classes:
-                  flagshipAppearance.capsuleFlowZoneTone.canonical,
+                classes: "",
               },
             ].map((zone, zoneIndex) => {
               const stationRecords =
@@ -460,11 +464,7 @@ export function KnowledgeCapsuleFlowEngine({
                       </p>
                     </div>
 
-                    <div
-                      className={
-                        flagshipAppearance.capsuleFlowOccupancyBadge
-                      }
-                    >
+                    <div className="inline-flex w-fit items-center gap-2 rounded-full border border-blue-400/55 bg-slate-950/34 px-3 py-1.5 text-[10px] font-semibold text-cyan-100 ring-1 ring-inset ring-cyan-300/14">
                       <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,.75)]" />
                       {zoneOccupancy} active
                     </div>
@@ -533,10 +533,7 @@ export function KnowledgeCapsuleFlowEngine({
                                   visibleCapsule?.id ?? null,
                                 );
                               }}
-                              className={[
-                                "flex w-full items-start justify-between gap-3 text-left",
-                                flagshipAppearance.focusRing,
-                              ].join(" ")}
+                              className="flex w-full items-start justify-between gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
                             >
                               <div>
                                 <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/55">
@@ -667,13 +664,9 @@ export function KnowledgeCapsuleFlowEngine({
                               )}
 
                               {totalOccupancy === 0 ? (
-                                <div
-                                  className={
-                                    flagshipAppearance.capsuleFlowEmptyStation
-                                  }
-                                >
+                                <LuminaFlagshipSurface className="rounded-[16px] px-3 py-4 text-center text-[10px] leading-5 text-sky-500/52">
                                   Available manufacturing node
-                                </div>
+                                </LuminaFlagshipSurface>
                               ) : null}
                             </div>
 
