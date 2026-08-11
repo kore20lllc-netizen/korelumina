@@ -611,8 +611,12 @@ export function CanonicalReview({
         }
       />
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(360px,.7fr)]">
-        <LuminaStandardPremiumPanel>
+      <div className="grid items-stretch gap-5 xl:grid-cols-2">
+        <LuminaFlagshipPanel
+          title={null}
+          className="[&>div:nth-of-type(3)]:hidden"
+        >
+          <div className="p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={Clock3}
@@ -629,7 +633,7 @@ export function CanonicalReview({
             </div>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {TIMELINE.map((item, index) => {
               const selected =
                 selectedTimelineEventId ===
@@ -640,10 +644,6 @@ export function CanonicalReview({
                   key={item.id}
                   className="relative"
                 >
-                  {index < TIMELINE.length - 1 ? (
-                    <div className="absolute left-[calc(50%+18px)] top-4 hidden h-px w-[calc(100%-36px)] bg-cyan-300/18 md:block" />
-                  ) : null}
-
                   <button
                     type="button"
                     aria-pressed={selected}
@@ -692,7 +692,8 @@ export function CanonicalReview({
               );
             })}
           </div>
-        </LuminaStandardPremiumPanel>
+          </div>
+        </LuminaFlagshipPanel>
 
         <LuminaStandardPremiumPanel>
           <div className="flex items-center gap-3">
