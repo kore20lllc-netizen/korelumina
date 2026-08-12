@@ -56,12 +56,17 @@ import {
 } from "./executive/orchestrator/index.js";
 
 import {
+  ChiefAgentReasoningDecisionService,
   ChiefAgentReasoningDestinationAdapter,
   ChiefAgentReasoningExecutionService,
   ChiefAgentReasoningKnowledgeMaterializer,
   ExecutiveReasoningService,
   TextGenerationChiefAgentReasoningProvider,
 } from "./executive/reasoning/index.js";
+
+import {
+  ExecutiveDecisionService,
+} from "./executive/decision/index.js";
 
 import {
   OpenAITextGenerationClient,
@@ -123,6 +128,14 @@ export const executiveRuntime =
 export const runtimeExecutiveReasoningService =
   new ExecutiveReasoningService();
 
+export const runtimeExecutiveDecisionService =
+  new ExecutiveDecisionService();
+
+export const runtimeChiefAgentReasoningDecisionService =
+  new ChiefAgentReasoningDecisionService(
+    runtimeExecutiveDecisionService,
+  );
+
 export const runtimeChiefAgentReasoningExecutionService =
   new ChiefAgentReasoningExecutionService(
     new TextGenerationChiefAgentReasoningProvider(
@@ -157,6 +170,15 @@ export const chiefAgentReasoningAdapter =
             "chief_agent_reasoning_result_not_persisted",
           );
         }
+
+        runtimeChiefAgentReasoningDecisionService
+          .createProposedDecision({
+            reasoning:
+              persisted,
+
+            requestedBy:
+              "chief-agent",
+          });
 
         return {
           title:
