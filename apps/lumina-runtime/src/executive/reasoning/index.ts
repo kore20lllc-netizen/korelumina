@@ -4,3 +4,5 @@ export * from "./ChiefAgentReasoningKnowledgeMaterializer.js";
 export * from "./ChiefAgentReasoningDestinationAdapter.js";
 export * from "./ChiefAgentReasoningExecutionService.js";
 export * from "./TextGenerationChiefAgentReasoningProvider.js";
+
+export * from "./ChiefAgentReasoningDecisionService.js";
