@@ -18,6 +18,8 @@ export interface ChiefAgentReasoningInput {
 
   query?: string;
 
+  approverId?: string;
+
   knowledge:
     ChiefAgentReasoningKnowledge;
 }
@@ -108,6 +110,18 @@ export class ChiefAgentReasoningDestinationAdapter {
               .event
               .payload
               .query
+          : undefined,
+
+      approverId:
+        typeof dispatchContext
+          .event
+          .payload
+          .approverId === "string"
+          ? dispatchContext
+              .event
+              .payload
+              .approverId
+              .trim() || undefined
           : undefined,
 
       knowledge,
