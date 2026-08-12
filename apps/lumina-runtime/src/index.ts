@@ -25,6 +25,7 @@ import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
+import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
@@ -54,6 +55,10 @@ import {
 import {
   GovernedCanonicalPromotionService,
 } from "./knowledge-preservation/promotion/index.js";
+
+import {
+  createKnowledgePreservationPlatform,
+} from "./knowledge-preservation/bootstrap/index.js";
 
 import {
   createExecutiveOrchestrator,
@@ -108,6 +113,9 @@ const app = express();
 
 const knowledgePlatform =
   runtimeKnowledgeProvider.getPlatform();
+
+export const runtimeKnowledgePreservationPlatform =
+  createKnowledgePreservationPlatform();
 
 rehydrateRuntimeCanonicalKnowledge(
   knowledgePlatform,
@@ -329,6 +337,14 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+
+registerKnowledgePreservationRoutes(
+  app,
+  {
+    preservationPlatform:
+      runtimeKnowledgePreservationPlatform,
+  },
+);
 
 registerCanonicalReviewRoutes(
   app,
