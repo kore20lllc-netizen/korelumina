@@ -54,6 +54,11 @@ import {
   createExecutiveOrchestrator,
 } from "./executive/orchestrator/index.js";
 
+import {
+  ChiefAgentReasoningDestinationAdapter,
+  ChiefAgentReasoningKnowledgeMaterializer,
+} from "./executive/reasoning/index.js";
+
 import { stopAllRuntimes } from "./runtime/registry.js";
 import {
   startRuntimeSupervisor,
@@ -106,6 +111,22 @@ export const executiveRuntime =
   createExecutiveOrchestrator({
     knowledgeContextBuilder,
   });
+
+export const chiefAgentReasoningAdapter =
+  new ChiefAgentReasoningDestinationAdapter(
+    new ChiefAgentReasoningKnowledgeMaterializer(
+      knowledgePlatform.store,
+      runtimeOrganizationalMemoryStore,
+    ),
+  );
+
+executiveRuntime.dispatcher.register(
+  "reasoning",
+  (context) =>
+    chiefAgentReasoningAdapter.handle(
+      context,
+    ),
+);
 
 app.use(cors());
 app.use(express.json());
