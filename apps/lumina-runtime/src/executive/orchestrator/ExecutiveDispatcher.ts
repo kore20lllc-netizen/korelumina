@@ -1,4 +1,8 @@
 import type {
+  ExecutiveContext,
+} from "../context/index.js";
+
+import type {
   ExecutiveEvent,
 } from "../events/index.js";
 import type {
@@ -10,6 +14,8 @@ export interface ExecutiveDispatchContext {
   event: ExecutiveEvent;
 
   route: ExecutiveRoute;
+
+  context: ExecutiveContext;
 }
 
 export interface ExecutiveDispatchRecord {

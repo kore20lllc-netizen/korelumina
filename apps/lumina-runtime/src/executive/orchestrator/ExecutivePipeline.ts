@@ -326,6 +326,7 @@ export class ExecutivePipeline {
           .dispatch({
             event,
             route,
+            context,
           });
 
       if (!dispatch.successful) {
