@@ -29,6 +29,7 @@ import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
+import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
 import { registerExecutiveApprovalRoute } from "./routes/executiveApproval.js";
 
 import {
@@ -373,6 +374,11 @@ registerExecutiveDelegationRoute(
     readinessService:
       runtimeExecutiveDelegationActionReadinessService,
   },
+);
+
+registerExecutiveActionRoute(
+  app,
+  runtimeExecutiveActionService,
 );
 
 registerExecutiveApprovalRoute(
