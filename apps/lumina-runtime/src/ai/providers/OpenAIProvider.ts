@@ -15,13 +15,9 @@ import type {
   GenerateDraftResult,
 } from "../AIProvider.js";
 
-const OPENAI_RESPONSES_URL =
-  "https://api.openai.com/v1/responses";
-
-const DEFAULT_MODEL =
-  process.env.LUMINA_OPENAI_MODEL ??
-  process.env.OPENAI_MODEL ??
-  "gpt-5.5";
+import {
+  OpenAITextGenerationClient,
+} from "../model/index.js";
 
 const MAX_FILES = 24;
 const MAX_FILE_CHARS = 6000;
@@ -115,26 +111,6 @@ function readContextFiles(projectPath: string): Array<{
     });
 }
 
-function extractOutputText(data: any): string {
-  if (typeof data?.output_text === "string") {
-    return data.output_text;
-  }
-
-  const output = Array.isArray(data?.output) ? data.output : [];
-
-  for (const item of output) {
-    const content = Array.isArray(item?.content) ? item.content : [];
-
-    for (const block of content) {
-      if (typeof block?.text === "string") {
-        return block.text;
-      }
-    }
-  }
-
-  throw new Error("openai_response_missing_text");
-}
-
 function parsePatches(text: string): DraftPatch[] {
   const cleaned = text
     .trim()
@@ -216,15 +192,14 @@ function buildPrompt(input: GenerateDraftInput, files: Array<{ path: string; con
 }
 
 export class OpenAIProvider implements AIProvider {
+  constructor(
+    private readonly textClient =
+      new OpenAITextGenerationClient(),
+  ) {}
+
   async generateDraft(
     input: GenerateDraftInput,
   ): Promise<GenerateDraftResult> {
-    const apiKey = process.env.OPENAI_API_KEY;
-
-    if (!apiKey) {
-      throw new Error("missing_OPENAI_API_KEY");
-    }
-
     const report = auditProject(
       input.projectId,
       input.projectPath,
@@ -238,33 +213,20 @@ export class OpenAIProvider implements AIProvider {
       input.projectPath,
     );
 
-    const response = await fetch(
-      OPENAI_RESPONSES_URL,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: DEFAULT_MODEL,
-          input: buildPrompt(input, files),
-        }),
-      },
-    );
+    const generated =
+      await this.textClient
+        .generateText({
+          prompt:
+            buildPrompt(
+              input,
+              files,
+            ),
+        });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data?.error?.message ??
-          data?.error ??
-          "openai_request_failed",
+    const patches =
+      parsePatches(
+        generated.text,
       );
-    }
-
-    const text = extractOutputText(data);
-    const patches = parsePatches(text);
 
     const draft = createDraft(
       input.projectId,
@@ -273,7 +235,7 @@ export class OpenAIProvider implements AIProvider {
 
     return {
       mode: "openai_draft",
-      note: `OpenAIProvider generated ${patches.length} patch${patches.length === 1 ? "" : "es"} using ${DEFAULT_MODEL}.`,
+      note: `OpenAIProvider generated ${patches.length} patch${patches.length === 1 ? "" : "es"} using ${generated.model}.`,
       prompt: input.prompt,
       report,
       plan,
