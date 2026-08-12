@@ -50,6 +50,12 @@ export function registerExecutiveRoute(
             workspace:
               body.workspace,
 
+            organizationId:
+              typeof body.organizationId ===
+                "string"
+                ? body.organizationId
+                : undefined,
+
             actor:
               body.actor,
 

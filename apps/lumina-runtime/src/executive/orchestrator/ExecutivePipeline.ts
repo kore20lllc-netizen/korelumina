@@ -156,6 +156,10 @@ export class DefaultExecutiveContextReducer
     return {
       ...current,
 
+      organizationId:
+        event.organizationId ??
+        current.organizationId,
+
       project:
         event.projectId
           ? {

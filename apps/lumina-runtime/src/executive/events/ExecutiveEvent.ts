@@ -70,6 +70,8 @@ export interface ExecutiveEvent<
 
   workspace?: string;
 
+  organizationId?: string;
+
   actor:
     ExecutiveEventActor;
 
