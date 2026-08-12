@@ -56,8 +56,15 @@ import {
 
 import {
   ChiefAgentReasoningDestinationAdapter,
+  ChiefAgentReasoningExecutionService,
   ChiefAgentReasoningKnowledgeMaterializer,
+  ExecutiveReasoningService,
+  TextGenerationChiefAgentReasoningProvider,
 } from "./executive/reasoning/index.js";
+
+import {
+  OpenAITextGenerationClient,
+} from "./ai/model/index.js";
 
 import { stopAllRuntimes } from "./runtime/registry.js";
 import {
@@ -112,12 +119,65 @@ export const executiveRuntime =
     knowledgeContextBuilder,
   });
 
+export const runtimeExecutiveReasoningService =
+  new ExecutiveReasoningService();
+
+export const runtimeChiefAgentReasoningExecutionService =
+  new ChiefAgentReasoningExecutionService(
+    new TextGenerationChiefAgentReasoningProvider(
+      new OpenAITextGenerationClient(),
+    ),
+    runtimeExecutiveReasoningService,
+  );
+
 export const chiefAgentReasoningAdapter =
   new ChiefAgentReasoningDestinationAdapter(
     new ChiefAgentReasoningKnowledgeMaterializer(
       knowledgePlatform.store,
       runtimeOrganizationalMemoryStore,
     ),
+    {
+      reason: async (input) => {
+        await runtimeChiefAgentReasoningExecutionService
+          .execute(
+            input,
+          );
+
+        const persisted =
+          runtimeExecutiveReasoningService
+            .get(
+              `reasoning:${input.eventId}`,
+            );
+
+        if (
+          !persisted
+        ) {
+          throw new Error(
+            "chief_agent_reasoning_result_not_persisted",
+          );
+        }
+
+        return {
+          title:
+            persisted.title,
+
+          conclusion:
+            persisted.conclusion,
+
+          confidence:
+            persisted.confidence,
+
+          evidence:
+            persisted.evidence,
+
+          assumptions:
+            persisted.assumptions,
+
+          metadata:
+            persisted.metadata,
+        };
+      },
+    },
   );
 
 executiveRuntime.dispatcher.register(
