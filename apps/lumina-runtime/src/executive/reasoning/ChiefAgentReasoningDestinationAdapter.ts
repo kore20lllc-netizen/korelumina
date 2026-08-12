@@ -22,12 +22,30 @@ export interface ChiefAgentReasoningInput {
     ChiefAgentReasoningKnowledge;
 }
 
+export interface ChiefAgentReasoningResult {
+  title: string;
+
+  conclusion: string;
+
+  confidence: number;
+
+  evidence:
+    readonly string[];
+
+  assumptions:
+    readonly string[];
+
+  metadata?: Readonly<
+    Record<string, unknown>
+  >;
+}
+
 export interface ChiefAgentReasoningProvider {
   reason(
     input:
       ChiefAgentReasoningInput,
   ):
-    void | Promise<void>;
+    Promise<ChiefAgentReasoningResult>;
 }
 
 export class ChiefAgentReasoningDestinationAdapter {

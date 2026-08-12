@@ -124,6 +124,23 @@ test(
           async reason(input) {
             received =
               input;
+
+            return {
+              title:
+                "Test reasoning",
+
+              conclusion:
+                "Test conclusion",
+
+              confidence:
+                1,
+
+              evidence:
+                [],
+
+              assumptions:
+                [],
+            };
           },
         },
       );
