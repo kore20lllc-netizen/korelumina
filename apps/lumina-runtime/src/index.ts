@@ -26,6 +26,7 @@ import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
+import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 
 import {
   runtimeKnowledgeProvider,
@@ -242,6 +243,11 @@ registerCanonicalReviewRoutes(
 registerExecutiveRoute(
   app,
   executiveRuntime,
+);
+
+registerExecutiveReasoningRoute(
+  app,
+  runtimeExecutiveReasoningService,
 );
 
 const PORT =
