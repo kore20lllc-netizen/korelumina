@@ -22,10 +22,20 @@ implements OrganizationalMemoryProvider {
     input:
       OrganizationalMemoryInput,
   ): Promise<OrganizationalMemoryProviderResult> {
-    const normalizedQuery =
+    const queryTerms =
       input.query
-        .trim()
-        .toLowerCase();
+        .toLowerCase()
+        .split(
+          /[^a-z0-9]+/,
+        )
+        .map(
+          (term) =>
+            term.trim(),
+        )
+        .filter(
+          (term) =>
+            term.length >= 4,
+        );
 
     const references =
       new Set(
@@ -81,7 +91,7 @@ implements OrganizationalMemoryProvider {
             }
 
             if (
-              !normalizedQuery
+              queryTerms.length === 0
             ) {
               return true;
             }
@@ -95,8 +105,11 @@ implements OrganizationalMemoryProvider {
                 .join(" ")
                 .toLowerCase();
 
-            return searchable.includes(
-              normalizedQuery,
+            return queryTerms.some(
+              (term) =>
+                searchable.includes(
+                  term,
+                ),
             );
           },
         );

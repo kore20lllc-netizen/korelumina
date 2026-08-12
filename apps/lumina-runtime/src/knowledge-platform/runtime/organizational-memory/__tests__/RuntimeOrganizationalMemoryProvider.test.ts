@@ -12,181 +12,286 @@ import {
   RuntimeOrganizationalMemoryStore,
 } from "../RuntimeOrganizationalMemoryStore.js";
 
-test(
-  "persists and recalls organizational memory by organization scope",
-  async () => {
-    const root =
-      fs.mkdtempSync(
-        path.join(
-          os.tmpdir(),
-          "korelumina-memory-",
-        ),
-      );
+const organizationId =
+  "organization:korelumina";
 
-    const store =
+const projectId =
+  "project:korelumina";
+
+function createIsolatedStore() {
+  const root =
+    fs.mkdtempSync(
+      path.join(
+        os.tmpdir(),
+        "korelumina-memory-test-",
+      ),
+    );
+
+  return {
+    root,
+    store:
       new RuntimeOrganizationalMemoryStore(
         root,
-      );
+      ),
+  };
+}
 
-    store.save({
-      id:
-        "memory:test",
-
-      organizationId:
-        "organization:korelumina",
-
-      projectId:
-        "project:korelumina",
-
-      title:
-        "KoreLumina Architecture",
-
-      summary:
-        "Canonical architecture memory.",
-
-      source:
-        "architecture",
-
-      references: [
-        "canonical:test",
-      ],
-
-      createdAt:
-        new Date(
-          1000,
-        ).toISOString(),
-    });
-
-    const provider =
-      new RuntimeOrganizationalMemoryProvider(
-        store,
-      );
-
-    const result =
-      await provider.recall({
-        requestId:
-          "request:test",
-
-        organizationId:
-          "organization:korelumina",
-
-        projectIds: [
-          "project:korelumina",
-        ],
-
-        teamIds:
-          [],
-
-        query:
-          "architecture",
-
-        references:
-          [],
-      });
-
-    assert.equal(
-      result.records.length,
-      1,
-    );
-
-    assert.equal(
-      result.records[0].id,
-      "memory:test",
-    );
-
-    assert.deepEqual(
-      result.insights,
-      [],
-    );
-
-    fs.rmSync(
+test(
+  "recalls organizational memory from natural-language query terms",
+  async () => {
+    const {
       root,
-      {
-        recursive: true,
-        force: true,
-      },
-    );
+      store,
+    } =
+      createIsolatedStore();
+
+    try {
+      store.saveAll([
+        {
+          id:
+            "memory:architecture",
+
+          organizationId,
+
+          projectId,
+
+          title:
+            "KoreLumina Master Architecture",
+
+          summary:
+            "Governed canonical architecture and organizational knowledge boundaries.",
+
+          source:
+            "architecture",
+
+          references: [
+            "canonical:architecture",
+          ],
+
+          createdAt:
+            new Date(0)
+              .toISOString(),
+        },
+      ]);
+
+      const provider =
+        new RuntimeOrganizationalMemoryProvider(
+          store,
+        );
+
+      const result =
+        await provider.recall({
+          requestId:
+            "request:test",
+
+          organizationId,
+
+          projectIds: [
+            projectId,
+          ],
+
+          teamIds:
+            [],
+
+          query:
+            "Using governed KoreLumina canonical knowledge and organizational memory, identify architecture governance boundaries.",
+
+          references:
+            [],
+        });
+
+      assert.deepEqual(
+        result.records.map(
+          (record) =>
+            record.id,
+        ),
+        [
+          "memory:architecture",
+        ],
+      );
+    } finally {
+      fs.rmSync(
+        root,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
   },
 );
 
 test(
-  "does not recall records from another organization",
+  "still honors exact canonical references",
   async () => {
-    const root =
-      fs.mkdtempSync(
-        path.join(
-          os.tmpdir(),
-          "korelumina-memory-",
-        ),
-      );
-
-    const store =
-      new RuntimeOrganizationalMemoryStore(
-        root,
-      );
-
-    store.save({
-      id:
-        "memory:other",
-
-      organizationId:
-        "organization:other",
-
-      title:
-        "Other organization",
-
-      summary:
-        "Must remain isolated.",
-
-      source:
-        "manual",
-
-      references:
-          [],
-
-      createdAt:
-        new Date(
-          1000,
-        ).toISOString(),
-    });
-
-    const provider =
-      new RuntimeOrganizationalMemoryProvider(
-        store,
-      );
-
-    const result =
-      await provider.recall({
-        requestId:
-          "request:test",
-
-        organizationId:
-          "organization:korelumina",
-
-        projectIds:
-          [],
-
-        teamIds:
-          [],
-
-        query:
-          "",
-
-        references:
-          [],
-      });
-
-    assert.deepEqual(
-      result.records,
-      [],
-    );
-
-    fs.rmSync(
+    const {
       root,
-      {
-        recursive: true,
-        force: true,
-      },
-    );
+      store,
+    } =
+      createIsolatedStore();
+
+    try {
+      store.saveAll([
+        {
+          id:
+            "memory:referenced",
+
+          organizationId,
+
+          projectId,
+
+          title:
+            "Unrelated title",
+
+          summary:
+            "Unrelated summary.",
+
+          source:
+            "architecture",
+
+          references: [
+            "canonical:architecture",
+          ],
+
+          createdAt:
+            new Date(0)
+              .toISOString(),
+        },
+      ]);
+
+      const provider =
+        new RuntimeOrganizationalMemoryProvider(
+          store,
+        );
+
+      const result =
+        await provider.recall({
+          requestId:
+            "request:reference",
+
+          organizationId,
+
+          projectIds: [
+            projectId,
+          ],
+
+          teamIds:
+            [],
+
+          query:
+            "completely unrelated wording",
+
+          references: [
+            "canonical:architecture",
+          ],
+        });
+
+      assert.deepEqual(
+        result.records.map(
+          (record) =>
+            record.id,
+        ),
+        [
+          "memory:referenced",
+        ],
+      );
+    } finally {
+      fs.rmSync(
+        root,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
+  },
+);
+
+test(
+  "does not cross organization scope",
+  async () => {
+    const {
+      root,
+      store,
+    } =
+      createIsolatedStore();
+
+    try {
+      store.saveAll([
+        {
+          id:
+            "memory:other-org",
+
+          organizationId:
+            "organization:other",
+
+          projectId,
+
+          title:
+            "KoreLumina Architecture",
+
+          summary:
+            "Architecture governance.",
+
+          source:
+            "architecture",
+
+          references:
+            [],
+
+          createdAt:
+            new Date(0)
+              .toISOString(),
+        },
+      ]);
+
+      const provider =
+        new RuntimeOrganizationalMemoryProvider(
+          store,
+        );
+
+      const result =
+        await provider.recall({
+          requestId:
+            "request:isolation",
+
+          organizationId,
+
+          projectIds: [
+            projectId,
+          ],
+
+          teamIds:
+            [],
+
+          query:
+            "architecture governance",
+
+          references:
+            [],
+        });
+
+      assert.equal(
+        result.records.length,
+        0,
+      );
+    } finally {
+      fs.rmSync(
+        root,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
   },
 );
