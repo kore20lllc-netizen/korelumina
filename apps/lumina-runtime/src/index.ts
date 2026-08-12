@@ -66,6 +66,11 @@ import {
 } from "./executive/reasoning/index.js";
 
 import {
+  ExecutiveApprovalService,
+  ExecutiveDecisionApprovalRequestService,
+} from "./executive/approval/index.js";
+
+import {
   ExecutiveDecisionService,
 } from "./executive/decision/index.js";
 
@@ -137,6 +142,14 @@ export const runtimeChiefAgentReasoningDecisionService =
     runtimeExecutiveDecisionService,
   );
 
+export const runtimeExecutiveApprovalService =
+  new ExecutiveApprovalService();
+
+export const runtimeExecutiveDecisionApprovalRequestService =
+  new ExecutiveDecisionApprovalRequestService(
+    runtimeExecutiveApprovalService,
+  );
+
 export const runtimeChiefAgentReasoningExecutionService =
   new ChiefAgentReasoningExecutionService(
     new TextGenerationChiefAgentReasoningProvider(
@@ -172,14 +185,30 @@ export const chiefAgentReasoningAdapter =
           );
         }
 
-        runtimeChiefAgentReasoningDecisionService
-          .createProposedDecision({
-            reasoning:
-              persisted,
+        const decision =
+          runtimeChiefAgentReasoningDecisionService
+            .createProposedDecision({
+              reasoning:
+                persisted,
 
-            requestedBy:
-              "chief-agent",
-          });
+              requestedBy:
+                "chief-agent",
+            });
+
+        if (
+          input.approverId
+        ) {
+          runtimeExecutiveDecisionApprovalRequestService
+            .requestApproval({
+              decision,
+
+              approverId:
+                input.approverId,
+
+              requestedBy:
+                "chief-agent",
+            });
+        }
 
         return {
           title:
