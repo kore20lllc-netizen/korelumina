@@ -1,26 +1,84 @@
 import assert from "node:assert/strict";
+import type {
+  Server,
+} from "node:http";
 import test from "node:test";
 
 import express from "express";
+
+import {
+  ExecutiveActionService,
+  ExecutiveDecisionActionProposalService,
+  ExecutiveDelegationActionProposalService,
+} from "../../executive/action/index.js";
 
 import {
   ExecutiveDecisionService,
 } from "../../executive/decision/index.js";
 
 import {
+  ExecutiveDecisionDelegationService,
+  ExecutiveDelegationService,
+} from "../../executive/delegation/index.js";
+
+import {
   registerExecutiveDecisionRoute,
 } from "../executiveDecision.js";
 
-async function startTestServer(
-  decisionService:
-    ExecutiveDecisionService,
+async function closeServer(
+  server:
+    Server,
 ) {
+  await new Promise<void>(
+    (
+      resolve,
+      reject,
+    ) =>
+      server.close(
+        (error) =>
+          error
+            ? reject(
+                error,
+              )
+            : resolve(),
+      ),
+  );
+}
+
+async function startServer() {
+  const decisionService =
+    new ExecutiveDecisionService();
+
+  const delegationService =
+    new ExecutiveDelegationService();
+
+  const actionService =
+    new ExecutiveActionService();
+
   const app =
     express();
 
+  app.use(
+    express.json(),
+  );
+
   registerExecutiveDecisionRoute(
     app,
-    decisionService,
+    {
+      decisionService,
+
+      decisionDelegationService:
+        new ExecutiveDecisionDelegationService(
+          delegationService,
+        ),
+
+      delegationActionProposalService:
+        new ExecutiveDelegationActionProposalService(
+          new ExecutiveDecisionActionProposalService(
+            actionService,
+          ),
+        ),
+    },
   );
 
   const server =
@@ -51,6 +109,9 @@ async function startTestServer(
 
   return {
     server,
+    decisionService,
+    delegationService,
+    actionService,
 
     baseUrl:
       `http://127.0.0.1:${address.port}`,
@@ -58,53 +119,106 @@ async function startTestServer(
 }
 
 test(
-  "returns an existing proposed executive decision",
+  "reads an existing executive decision",
   async () => {
-    const decisionService =
-      new ExecutiveDecisionService();
-
-    const decision =
-      decisionService.create({
-        id:
-          "decision:reasoning:event:test",
-
-        sessionId:
-          "event:test",
-
-        title:
-          "Preserve architecture boundaries",
-
-        rationale:
-          "Preserve governed architecture.",
-
-        requestedBy:
-          "chief-agent",
-
-        status:
-          "proposed",
-
-        evidence: [
-          "canonical:test",
-        ],
-      });
-
-    const {
-      server,
-      baseUrl,
-    } =
-      await startTestServer(
-        decisionService,
-      );
+    const context =
+      await startServer();
 
     try {
-      const encodedId =
-        encodeURIComponent(
-          decision.id,
-        );
+      const decision =
+        context.decisionService
+          .create({
+            id:
+              "decision:read",
+
+            sessionId:
+              "session:read",
+
+            title:
+              "Read decision",
+
+            rationale:
+              "Read only.",
+
+            requestedBy:
+              "chief-agent",
+
+            status:
+              "proposed",
+          });
 
       const response =
         await fetch(
-          `${baseUrl}/api/executive/decisions/${encodedId}`,
+          `${context.baseUrl}/api/executive/decisions/${encodeURIComponent(decision.id)}`,
+        );
+
+      assert.equal(
+        response.status,
+        200,
+      );
+    } finally {
+      await closeServer(
+        context.server,
+      );
+    }
+  },
+);
+
+test(
+  "approved human can explicitly delegate and create only a planned action",
+  async () => {
+    const context =
+      await startServer();
+
+    try {
+      context.decisionService
+        .create({
+          id:
+            "decision:delegate",
+
+          sessionId:
+            "session:delegate",
+
+          title:
+            "Governed execution",
+
+          rationale:
+            "Delegate approved work.",
+
+          requestedBy:
+            "chief-agent",
+
+          approvedBy:
+            "human:reviewer",
+
+          status:
+            "approved",
+        });
+
+      const response =
+        await fetch(
+          `${context.baseUrl}/api/executive/decisions/${encodeURIComponent("decision:delegate")}/delegate`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                actorId:
+                  "human:reviewer",
+
+                assignedTo:
+                  "agent:architecture-engineer",
+
+                priority:
+                  "high",
+              }),
+          },
         );
 
       assert.equal(
@@ -113,109 +227,194 @@ test(
       );
 
       const body =
-        await response.json() as {
-          ok: boolean;
-          decision: {
-            id: string;
-            status: string;
-            approvedBy?: string;
-          };
-        };
+        await response.json();
 
       assert.equal(
-        body.ok,
-        true,
+        body.delegation.status,
+        "assigned",
       );
 
       assert.equal(
-        body.decision.id,
-        decision.id,
+        body.delegation.assignedTo,
+        "agent:architecture-engineer",
       );
 
       assert.equal(
-        body.decision.status,
-        "proposed",
+        body.action.status,
+        "planned",
       );
 
       assert.equal(
-        body.decision.approvedBy,
+        body.action.ownerId,
+        body.delegation.assignedTo,
+      );
+
+      assert.equal(
+        body.action.delegationId,
+        body.delegation.id,
+      );
+
+      assert.equal(
+        body.action.startedAt,
+        undefined,
+      );
+
+      assert.equal(
+        body.action.completedAt,
         undefined,
       );
     } finally {
-      await new Promise<void>(
-        (
-          resolve,
-          reject,
-        ) =>
-          server.close(
-            (error) =>
-              error
-                ? reject(
-                    error,
-                  )
-                : resolve(),
-          ),
+      await closeServer(
+        context.server,
       );
     }
   },
 );
 
 test(
-  "returns 404 for an unknown executive decision",
+  "cannot delegate an unapproved decision",
   async () => {
-    const {
-      server,
-      baseUrl,
-    } =
-      await startTestServer(
-        new ExecutiveDecisionService(),
-      );
+    const context =
+      await startServer();
 
     try {
+      context.decisionService
+        .create({
+          id:
+            "decision:unapproved",
+
+          sessionId:
+            "session:unapproved",
+
+          title:
+            "Unapproved",
+
+          rationale:
+            "Still proposed.",
+
+          requestedBy:
+            "chief-agent",
+
+          status:
+            "proposed",
+        });
+
       const response =
         await fetch(
-          `${baseUrl}/api/executive/decisions/${encodeURIComponent("decision:missing")}`,
+          `${context.baseUrl}/api/executive/decisions/${encodeURIComponent("decision:unapproved")}/delegate`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                actorId:
+                  "human:reviewer",
+
+                assignedTo:
+                  "agent:executor",
+              }),
+          },
         );
 
       assert.equal(
         response.status,
-        404,
+        409,
       );
-
-      const body =
-        await response.json() as {
-          ok: boolean;
-          error: string;
-          id: string;
-        };
 
       assert.deepEqual(
-        body,
-        {
-          ok:
-            false,
+        context.delegationService.list(),
+        [],
+      );
 
-          error:
-            "executive_decision_not_found",
-
-          id:
-            "decision:missing",
-        },
+      assert.deepEqual(
+        context.actionService.list(),
+        [],
       );
     } finally {
-      await new Promise<void>(
-        (
-          resolve,
-          reject,
-        ) =>
-          server.close(
-            (error) =>
-              error
-                ? reject(
-                    error,
-                  )
-                : resolve(),
-          ),
+      await closeServer(
+        context.server,
+      );
+    }
+  },
+);
+
+test(
+  "cannot delegate using a human other than the decision approver",
+  async () => {
+    const context =
+      await startServer();
+
+    try {
+      context.decisionService
+        .create({
+          id:
+            "decision:unauthorized",
+
+          sessionId:
+            "session:unauthorized",
+
+          title:
+            "Approved",
+
+          rationale:
+            "Requires approved human delegation.",
+
+          requestedBy:
+            "chief-agent",
+
+          approvedBy:
+            "human:reviewer",
+
+          status:
+            "approved",
+        });
+
+      const response =
+        await fetch(
+          `${context.baseUrl}/api/executive/decisions/${encodeURIComponent("decision:unauthorized")}/delegate`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                actorId:
+                  "human:other",
+
+                assignedTo:
+                  "agent:executor",
+              }),
+          },
+        );
+
+      assert.equal(
+        response.status,
+        403,
+      );
+
+      assert.deepEqual(
+        context.delegationService.list(),
+        [],
+      );
+
+      assert.deepEqual(
+        context.actionService.list(),
+        [],
+      );
+    } finally {
+      await closeServer(
+        context.server,
       );
     }
   },

@@ -73,6 +73,17 @@ import {
 } from "./executive/approval/index.js";
 
 import {
+  ExecutiveDecisionDelegationService,
+  ExecutiveDelegationService,
+} from "./executive/delegation/index.js";
+
+import {
+  ExecutiveActionService,
+  ExecutiveDecisionActionProposalService,
+  ExecutiveDelegationActionProposalService,
+} from "./executive/action/index.js";
+
+import {
   ExecutiveDecisionService,
 } from "./executive/decision/index.js";
 
@@ -156,6 +167,27 @@ export const runtimeExecutiveApprovalDecisionService =
   new ExecutiveApprovalDecisionService(
     runtimeExecutiveApprovalService,
     runtimeExecutiveDecisionService,
+  );
+
+export const runtimeExecutiveDelegationService =
+  new ExecutiveDelegationService();
+
+export const runtimeExecutiveDecisionDelegationService =
+  new ExecutiveDecisionDelegationService(
+    runtimeExecutiveDelegationService,
+  );
+
+export const runtimeExecutiveActionService =
+  new ExecutiveActionService();
+
+export const runtimeExecutiveDecisionActionProposalService =
+  new ExecutiveDecisionActionProposalService(
+    runtimeExecutiveActionService,
+  );
+
+export const runtimeExecutiveDelegationActionProposalService =
+  new ExecutiveDelegationActionProposalService(
+    runtimeExecutiveDecisionActionProposalService,
   );
 
 export const runtimeChiefAgentReasoningExecutionService =
@@ -312,7 +344,16 @@ registerExecutiveReasoningRoute(
 
 registerExecutiveDecisionRoute(
   app,
-  runtimeExecutiveDecisionService,
+  {
+    decisionService:
+      runtimeExecutiveDecisionService,
+
+    decisionDelegationService:
+      runtimeExecutiveDecisionDelegationService,
+
+    delegationActionProposalService:
+      runtimeExecutiveDelegationActionProposalService,
+  },
 );
 
 registerExecutiveApprovalRoute(
