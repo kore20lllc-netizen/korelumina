@@ -67,6 +67,7 @@ import {
 } from "./executive/reasoning/index.js";
 
 import {
+  ExecutiveApprovalDecisionService,
   ExecutiveApprovalService,
   ExecutiveDecisionApprovalRequestService,
 } from "./executive/approval/index.js";
@@ -149,6 +150,12 @@ export const runtimeExecutiveApprovalService =
 export const runtimeExecutiveDecisionApprovalRequestService =
   new ExecutiveDecisionApprovalRequestService(
     runtimeExecutiveApprovalService,
+  );
+
+export const runtimeExecutiveApprovalDecisionService =
+  new ExecutiveApprovalDecisionService(
+    runtimeExecutiveApprovalService,
+    runtimeExecutiveDecisionService,
   );
 
 export const runtimeChiefAgentReasoningExecutionService =
@@ -310,7 +317,13 @@ registerExecutiveDecisionRoute(
 
 registerExecutiveApprovalRoute(
   app,
-  runtimeExecutiveApprovalService,
+  {
+    approvalService:
+      runtimeExecutiveApprovalService,
+
+    approvalDecisionService:
+      runtimeExecutiveApprovalDecisionService,
+  },
 );
 
 const PORT =
