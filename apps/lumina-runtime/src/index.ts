@@ -28,6 +28,7 @@ import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanoni
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
+import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveApprovalRoute } from "./routes/executiveApproval.js";
 
 import {
@@ -81,6 +82,7 @@ import {
   ExecutiveActionService,
   ExecutiveDecisionActionProposalService,
   ExecutiveDelegationActionProposalService,
+  ExecutiveDelegationActionReadinessService,
 } from "./executive/action/index.js";
 
 import {
@@ -188,6 +190,12 @@ export const runtimeExecutiveDecisionActionProposalService =
 export const runtimeExecutiveDelegationActionProposalService =
   new ExecutiveDelegationActionProposalService(
     runtimeExecutiveDecisionActionProposalService,
+  );
+
+export const runtimeExecutiveDelegationActionReadinessService =
+  new ExecutiveDelegationActionReadinessService(
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionService,
   );
 
 export const runtimeChiefAgentReasoningExecutionService =
@@ -353,6 +361,17 @@ registerExecutiveDecisionRoute(
 
     delegationActionProposalService:
       runtimeExecutiveDelegationActionProposalService,
+  },
+);
+
+registerExecutiveDelegationRoute(
+  app,
+  {
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    readinessService:
+      runtimeExecutiveDelegationActionReadinessService,
   },
 );
 
