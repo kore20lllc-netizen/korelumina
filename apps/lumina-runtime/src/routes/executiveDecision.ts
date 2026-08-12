@@ -64,6 +64,8 @@ function respondDomainError(
     message ===
       "executive_decision_not_approved" ||
     message ===
+      "executive_decision_evidence_required_for_delegation" ||
+    message ===
       "executive_delegation_not_assigned" ||
     message ===
       "executive_delegation_decision_mismatch"

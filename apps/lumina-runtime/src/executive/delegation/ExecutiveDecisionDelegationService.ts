@@ -53,6 +53,15 @@ export class ExecutiveDecisionDelegationService {
       );
     }
 
+    if (
+      decision.evidence.length ===
+      0
+    ) {
+      throw new Error(
+        "executive_decision_evidence_required_for_delegation",
+      );
+    }
+
     const assignedBy =
       input.assignedBy.trim();
 

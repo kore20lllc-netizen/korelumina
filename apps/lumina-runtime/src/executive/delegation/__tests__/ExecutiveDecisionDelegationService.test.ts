@@ -344,3 +344,62 @@ test(
     );
   },
 );
+
+test(
+  "does not delegate an approved decision without evidence",
+  () => {
+    const delegationService =
+      new ExecutiveDelegationService();
+
+    const service =
+      new ExecutiveDecisionDelegationService(
+        delegationService,
+      );
+
+    const decision =
+      createExecutiveDecision({
+        id:
+          "decision:no-evidence",
+
+        sessionId:
+          "session:no-evidence",
+
+        title:
+          "Insufficient Knowledge",
+
+        rationale:
+          "There is not enough governed knowledge to support action.",
+
+        requestedBy:
+          "chief-agent",
+
+        approvedBy:
+          "human:reviewer",
+
+        status:
+          "approved",
+
+        evidence:
+          [],
+      });
+
+    assert.throws(
+      () =>
+        service.delegate({
+          decision,
+
+          assignedBy:
+            "human:reviewer",
+
+          assignedTo:
+            "agent:executor",
+        }),
+      /executive_decision_evidence_required_for_delegation/,
+    );
+
+    assert.deepEqual(
+      delegationService.list(),
+      [],
+    );
+  },
+);

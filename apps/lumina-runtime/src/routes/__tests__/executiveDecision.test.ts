@@ -193,6 +193,10 @@ test(
 
           status:
             "approved",
+
+          evidence: [
+            "canonical:architecture",
+          ],
         });
 
       const response =
@@ -401,6 +405,93 @@ test(
       assert.equal(
         response.status,
         403,
+      );
+
+      assert.deepEqual(
+        context.delegationService.list(),
+        [],
+      );
+
+      assert.deepEqual(
+        context.actionService.list(),
+        [],
+      );
+    } finally {
+      await closeServer(
+        context.server,
+      );
+    }
+  },
+);
+
+test(
+  "approved decision without evidence cannot cross into delegation or planned action",
+  async () => {
+    const context =
+      await startServer();
+
+    try {
+      context.decisionService
+        .create({
+          id:
+            "decision:no-evidence",
+
+          sessionId:
+            "session:no-evidence",
+
+          title:
+            "Insufficient Knowledge",
+
+          rationale:
+            "Governed evidence is unavailable.",
+
+          requestedBy:
+            "chief-agent",
+
+          approvedBy:
+            "human:reviewer",
+
+          status:
+            "approved",
+
+          evidence:
+            [],
+        });
+
+      const response =
+        await fetch(
+          `${context.baseUrl}/api/executive/decisions/${encodeURIComponent("decision:no-evidence")}/delegate`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                actorId:
+                  "human:reviewer",
+
+                assignedTo:
+                  "agent:executor",
+              }),
+          },
+        );
+
+      assert.equal(
+        response.status,
+        409,
+      );
+
+      const body =
+        await response.json();
+
+      assert.equal(
+        body.error,
+        "executive_decision_evidence_required_for_delegation",
       );
 
       assert.deepEqual(
