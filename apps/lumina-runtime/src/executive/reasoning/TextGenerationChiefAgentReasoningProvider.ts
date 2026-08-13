@@ -10,6 +10,7 @@ import type {
 
 interface ParsedReasoningResult {
   title?: unknown;
+  disposition?: unknown;
   conclusion?: unknown;
   confidence?: unknown;
   evidence?: unknown;
@@ -50,6 +51,25 @@ function requireNonEmptyString(
   }
 
   return value.trim();
+}
+
+function requireDisposition(
+  value: unknown,
+):
+  | "authorize"
+  | "review"
+  | "deny" {
+  if (
+    value !== "authorize" &&
+    value !== "review" &&
+    value !== "deny"
+  ) {
+    throw new Error(
+      "chief_agent_reasoning_invalid_disposition",
+    );
+  }
+
+  return value;
 }
 
 function requireConfidence(
@@ -139,13 +159,17 @@ function buildPrompt(
     "Use only the governed knowledge supplied below.",
     "Do not invent evidence identifiers.",
     "Do not cite raw Evidence, IR, knowledge packages, or unreviewed material.",
-    "If the supplied knowledge is insufficient, state that limitation in the conclusion and lower confidence.",
+    "If the supplied knowledge explicitly supports proceeding, use disposition authorize.",
+    "If proceeding requires human judgment despite sufficient governed evidence, use disposition review.",
+    "If governed knowledge is insufficient, contradictory, or explicitly does not authorize the requested action, use disposition deny.",
+    "A deny disposition must never be softened merely because an approver was supplied.",
     "",
     "Return JSON only. No markdown. No commentary.",
     "",
     "Required schema:",
     "{",
     '  "title": "short reasoning title",',
+    '  "disposition": "authorize | review | deny",',
     '  "conclusion": "reasoned conclusion",',
     '  "confidence": 0.0,',
     '  "evidence": ["canonical-or-memory-id"],',
@@ -234,6 +258,11 @@ function parseResult(
       requireNonEmptyString(
         parsed.title,
         "title",
+      ),
+
+    disposition:
+      requireDisposition(
+        parsed.disposition,
       ),
 
     conclusion:

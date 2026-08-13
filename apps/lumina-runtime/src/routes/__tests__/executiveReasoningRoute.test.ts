@@ -33,6 +33,9 @@ test(
       conclusion:
         "Use canonical architecture.",
 
+      disposition:
+        "review",
+
       confidence:
         0.9,
 

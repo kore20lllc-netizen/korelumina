@@ -42,6 +42,9 @@ export class ChiefAgentReasoningExecutionService {
       conclusion:
         result.conclusion,
 
+      disposition:
+        result.disposition,
+
       confidence:
         result.confidence,
 

@@ -41,6 +41,11 @@ test(
         conclusion:
           "Preserve governance and canonical knowledge boundaries.",
 
+
+        disposition:
+
+          "review",
+
         confidence:
           0.96,
 
@@ -152,6 +157,11 @@ test(
         conclusion:
           "Not complete.",
 
+
+        disposition:
+
+          "review",
+
         confidence:
           0.5,
 
@@ -196,6 +206,11 @@ test(
 
         conclusion:
           "Recommend review.",
+
+
+        disposition:
+
+          "review",
 
         confidence:
           1,

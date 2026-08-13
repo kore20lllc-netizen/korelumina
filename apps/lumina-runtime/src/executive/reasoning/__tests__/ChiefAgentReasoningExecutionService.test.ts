@@ -23,8 +23,15 @@ test(
               title:
                 "Architecture direction",
 
+
+              disposition:
+
+                "review",
+
               conclusion:
                 "Use the canonical architecture boundary.",
+
+
 
               confidence:
                 0.94,

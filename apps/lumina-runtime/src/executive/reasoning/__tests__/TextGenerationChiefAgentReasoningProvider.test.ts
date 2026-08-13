@@ -112,8 +112,15 @@ test(
                   title:
                     "Architecture direction",
 
+
+                  disposition:
+
+                    "review",
+
                   conclusion:
                     "Use the canonical architecture boundary.",
+
+
 
                   confidence:
                     0.93,
@@ -193,8 +200,15 @@ test(
                   title:
                     "Invalid reasoning",
 
+
+                  disposition:
+
+                    "review",
+
                   conclusion:
                     "Invalid.",
+
+
 
                   confidence:
                     0.5,
@@ -236,6 +250,11 @@ test(
                 JSON.stringify({
                   title:
                     "Architecture",
+
+
+                  disposition:
+
+                    "review",
 
                   conclusion:
                     "",

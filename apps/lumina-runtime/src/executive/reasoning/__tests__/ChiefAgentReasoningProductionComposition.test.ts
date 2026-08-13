@@ -34,8 +34,15 @@ test(
               title:
                 "Preserve governed architecture",
 
+
+              disposition:
+
+                "review",
+
               conclusion:
                 "Maintain canonical knowledge and approval boundaries.",
+
+
 
               confidence:
                 0.97,

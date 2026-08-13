@@ -39,6 +39,11 @@ function createCompletedReasoning(
     conclusion:
       "Submit the proposal for review.",
 
+
+    disposition:
+
+      "review",
+
     confidence:
       0.95,
 

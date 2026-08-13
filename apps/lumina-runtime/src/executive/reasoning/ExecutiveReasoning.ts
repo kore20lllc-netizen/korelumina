@@ -1,3 +1,8 @@
+export type ExecutiveReasoningDisposition =
+  | "authorize"
+  | "review"
+  | "deny";
+
 export type ExecutiveReasoningStatus =
   | "pending"
   | "analyzing"
@@ -15,6 +20,9 @@ export interface ExecutiveReasoning {
   readonly question: string;
 
   readonly conclusion: string;
+
+  readonly disposition:
+    ExecutiveReasoningDisposition;
 
   readonly confidence: number;
 
@@ -48,6 +56,9 @@ export interface CreateExecutiveReasoningInput {
   question: string;
 
   conclusion: string;
+
+  disposition:
+    ExecutiveReasoningDisposition;
 
   confidence: number;
 
@@ -88,6 +99,9 @@ export function createExecutiveReasoning(
 
     conclusion:
       input.conclusion.trim(),
+
+    disposition:
+      input.disposition,
 
     confidence:
       Math.min(

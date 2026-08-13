@@ -320,7 +320,9 @@ export const chiefAgentReasoningAdapter =
             });
 
         if (
-          input.approverId
+          input.approverId &&
+          decision.status ===
+            "proposed"
         ) {
           runtimeExecutiveDecisionApprovalRequestService
             .requestApproval({
@@ -337,6 +339,9 @@ export const chiefAgentReasoningAdapter =
         return {
           title:
             persisted.title,
+
+          disposition:
+            persisted.disposition,
 
           conclusion:
             persisted.conclusion,

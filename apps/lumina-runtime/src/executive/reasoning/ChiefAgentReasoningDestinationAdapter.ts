@@ -24,8 +24,16 @@ export interface ChiefAgentReasoningInput {
     ChiefAgentReasoningKnowledge;
 }
 
+export type ChiefAgentReasoningDisposition =
+  | "authorize"
+  | "review"
+  | "deny";
+
 export interface ChiefAgentReasoningResult {
   title: string;
+
+  disposition:
+    ChiefAgentReasoningDisposition;
 
   conclusion: string;
 

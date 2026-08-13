@@ -34,8 +34,15 @@ test(
                 title:
                   "Governed reasoning",
 
+
+                disposition:
+
+                  "review",
+
                 conclusion:
                   "Review required.",
+
+
 
                 confidence:
                   1,
@@ -151,8 +158,15 @@ test(
                 title:
                   "Reasoning",
 
+
+                disposition:
+
+                  "review",
+
                 conclusion:
                   "No approver supplied.",
+
+
 
                 confidence:
                   1,

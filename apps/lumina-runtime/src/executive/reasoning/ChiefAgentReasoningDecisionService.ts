@@ -42,6 +42,12 @@ export class ChiefAgentReasoningDecisionService {
       );
     }
 
+    const decisionStatus =
+      reasoning.disposition ===
+        "deny"
+        ? "rejected"
+        : "proposed";
+
     return this.decisionService
       .create({
         id:
@@ -59,7 +65,7 @@ export class ChiefAgentReasoningDecisionService {
         requestedBy,
 
         status:
-          "proposed",
+          decisionStatus,
 
         evidence:
           reasoning.evidence,
@@ -76,6 +82,13 @@ export class ChiefAgentReasoningDecisionService {
 
           reasoningQuestion:
             reasoning.question,
+
+          reasoningDisposition:
+            reasoning.disposition,
+
+          executableCandidate:
+            reasoning.disposition !==
+            "deny",
 
           ...reasoning.metadata,
         },

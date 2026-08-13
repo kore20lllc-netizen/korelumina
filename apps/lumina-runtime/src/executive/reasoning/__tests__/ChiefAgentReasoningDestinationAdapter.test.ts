@@ -129,8 +129,15 @@ test(
               title:
                 "Test reasoning",
 
+
+              disposition:
+
+                "review",
+
               conclusion:
                 "Test conclusion",
+
+
 
               confidence:
                 1,
