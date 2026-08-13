@@ -7,3 +7,5 @@ export * from "./ExecutiveActionExecutionAuthorization.js";
 export * from "./ExecutiveActionExecutionAuthorizationService.js";
 export * from "./ExecutiveActionExecutionStartService.js";
 export * from "./ExecutiveActionExecutionOutcomeService.js";
+export * from "./ExecutiveActionExecutor.js";
+export * from "./ExecutiveActionExecutorService.js";
