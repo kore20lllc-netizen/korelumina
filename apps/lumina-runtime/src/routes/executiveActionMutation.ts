@@ -117,17 +117,94 @@ export function registerExecutiveActionMutationRoute(
               request.operation,
           });
 
+        if (
+          !result.executionResult.ok
+        ) {
+          const compensationSnapshot =
+            result.executionResult
+              .metadata
+              .compensationSnapshot;
+
+          const afterSha256 =
+            result.executionResult
+              .metadata
+              .afterSha256;
+
+          if (
+            result.executionResult
+              .compensationRequired ===
+              true &&
+            compensationSnapshot &&
+            typeof afterSha256 ===
+              "string"
+          ) {
+            return res.status(
+              409,
+            ).json({
+              ok:
+                false,
+
+              error:
+                result.executionResult
+                  .reason,
+
+              action:
+                result.action,
+
+              delegation:
+                result.delegation,
+
+              audit:
+                result.audit,
+
+              executionResult:
+                result.executionResult,
+
+              compensation: {
+                required:
+                  true,
+
+                plan:
+                  result.executionResult
+                    .compensationPlan ??
+                  request.compensation.plan,
+
+                snapshot:
+                  compensationSnapshot,
+
+                afterSha256,
+              },
+            });
+          }
+
+          return res.status(
+            500,
+          ).json({
+            ok:
+              false,
+
+            error:
+              "executive_action_mutation_failed",
+          });
+        }
+
         /*
-         * A mutation executor must produce compensation
-         * material before its result can cross this route.
+         * A successful mutation executor must produce
+         * compensation material before its result can cross
+         * this route. The executor service enforces this
+         * before terminal completion; this remains a second
+         * defensive boundary.
          */
         if (
-          !result.executionResult.ok ||
           result.executionResult.metadata
             .compensationRequired !==
             true ||
           !result.executionResult.metadata
-            .compensationSnapshot
+            .compensationSnapshot ||
+          typeof result.executionResult
+            .metadata
+            .afterSha256 !==
+            "string"
         ) {
           return res.status(
             500,

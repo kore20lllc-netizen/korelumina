@@ -332,6 +332,62 @@ export class ExecutiveActionExecutorService {
     }
 
     if (
+      result.ok &&
+      input.operation.type ===
+        "filesystem.replace"
+    ) {
+      const compensationSnapshot =
+        result.metadata
+          .compensationSnapshot;
+
+      const afterSha256 =
+        result.metadata
+          .afterSha256;
+
+      if (
+        result.metadata
+          .compensationRequired !==
+          true ||
+        !compensationSnapshot ||
+        typeof afterSha256 !==
+          "string" ||
+        !/^[a-f0-9]{64}$/.test(
+          afterSha256,
+        )
+      ) {
+        result = {
+          ok:
+            false,
+
+          reason:
+            "executive_mutation_compensation_evidence_missing",
+
+          evidence:
+            result.evidence,
+
+          compensationRequired:
+            true,
+
+          compensationPlan:
+            "Treat the mutation as requiring governed recovery because valid rollback evidence was not returned.",
+
+          metadata: {
+            ...result.metadata,
+
+            executor:
+              this.executor.name,
+
+            mutationResultInvalid:
+              true,
+
+            compensationRequired:
+              true,
+          },
+        };
+      }
+    }
+
+    if (
       result.ok
     ) {
       const summary =

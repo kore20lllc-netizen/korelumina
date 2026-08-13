@@ -794,3 +794,127 @@ test(
     );
   },
 );
+
+test(
+  "post-mutation failure preserves rollback snapshot and requires compensation",
+  () => {
+    const project =
+      createTempProject();
+
+    try {
+      const target =
+        path.join(
+          project.root,
+          "architecture.md",
+        );
+
+      const before =
+        Buffer.from(
+          "before architecture",
+          "utf8",
+        );
+
+      const after =
+        "after architecture";
+
+      fs.writeFileSync(
+        target,
+        before,
+      );
+
+      const executor =
+        new ProjectFilesystemReplaceExecutor({
+          resolveProjectPath:
+            () =>
+              project.root,
+
+          afterAtomicReplace:
+            (targetPath) => {
+              fs.writeFileSync(
+                targetPath,
+                "unexpected-post-mutation-change",
+                "utf8",
+              );
+            },
+        });
+
+      const result =
+        executor.execute(
+          createContext(
+            createAction(),
+            "architecture.md",
+            after,
+            sha256(
+              before,
+            ),
+          ),
+        );
+
+      assert.equal(
+        result.ok,
+        false,
+      );
+
+      if (result.ok) {
+        return;
+      }
+
+      assert.equal(
+        result.reason,
+        "project_filesystem_replace_postcondition_failed",
+      );
+
+      assert.equal(
+        result.compensationRequired,
+        true,
+      );
+
+      assert.equal(
+        result.metadata
+          .mutationCommitted,
+        true,
+      );
+
+      assert.equal(
+        result.metadata
+          .afterSha256,
+        sha256(
+          after,
+        ),
+      );
+
+      const snapshot =
+        result.metadata
+          .compensationSnapshot as {
+            encoding:
+              string;
+
+            content:
+              string;
+
+            sha256:
+              string;
+
+            bytes:
+              number;
+          };
+
+      assert.deepEqual(
+        Buffer.from(
+          snapshot.content,
+          "base64",
+        ),
+        before,
+      );
+
+      assert.equal(
+        snapshot.sha256,
+        sha256(
+          before,
+        ),
+      );
+    } finally {
+      project.cleanup();
+    }
+  },
+);

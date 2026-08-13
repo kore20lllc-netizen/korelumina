@@ -44,6 +44,14 @@ import {
 function createRunningContext(
   executor:
     ExecutiveActionExecutor,
+
+  capabilities:
+    readonly (
+      | "filesystem:read"
+      | "filesystem:write"
+    )[] = [
+      "filesystem:read",
+    ],
 ) {
   const actionService =
     new ExecutiveActionService();
@@ -171,9 +179,7 @@ function createRunningContext(
       executorName:
         executor.name,
 
-      capabilities: [
-        "filesystem:read",
-      ],
+      capabilities,
 
       scopes: [
         "project",
@@ -863,6 +869,228 @@ test(
     assert.equal(
       invoked,
       false,
+    );
+  },
+);
+
+test(
+  "filesystem replacement cannot complete without compensation evidence",
+  async () => {
+    const executor:
+      ExecutiveActionExecutor = {
+        name:
+          "invalid-mutation-result",
+
+        execute: async () => ({
+          ok:
+            true,
+
+          summary:
+            "Mutation claimed success.",
+
+          evidence: [
+            "mutation:test",
+          ],
+
+          metadata: {
+            afterSha256:
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          },
+        }),
+      };
+
+    const context =
+      createRunningContext(
+        executor,
+        [
+          "filesystem:write",
+        ],
+      );
+
+    const result =
+      await context.executorService
+        .execute({
+          actionId:
+            context.action.id,
+
+          actorId:
+            context.action.ownerId,
+
+          authorizationId:
+            context.authorization.id,
+
+          startAuditId:
+            context.startAudit.id,
+
+          operation: {
+            type:
+              "filesystem.replace",
+
+            path:
+              "docs/governed.md",
+
+            content:
+              "replacement",
+
+            expectedSha256:
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          },
+        });
+
+    assert.equal(
+      result.action.status,
+      "failed",
+    );
+
+    assert.equal(
+      result.delegation.status,
+      "failed",
+    );
+
+    assert.equal(
+      result.executionResult.ok,
+      false,
+    );
+
+    if (
+      result.executionResult.ok
+    ) {
+      return;
+    }
+
+    assert.equal(
+      result.executionResult
+        .compensationRequired,
+      true,
+    );
+
+    assert.equal(
+      result.audit.metadata
+        .compensationStatus,
+      "required",
+    );
+
+    assert.equal(
+      result.audit.status,
+      "open",
+    );
+  },
+);
+
+test(
+  "compensation-bearing replacement failure becomes governed failed outcome",
+  async () => {
+    const snapshot = {
+      encoding:
+        "base64",
+
+      content:
+        "YmVmb3Jl",
+
+      sha256:
+        "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+
+      bytes:
+        6,
+    };
+
+    const executor:
+      ExecutiveActionExecutor = {
+        name:
+          "post-mutation-failure",
+
+        execute: async () => ({
+          ok:
+            false,
+
+          reason:
+            "project_filesystem_replace_postcondition_failed",
+
+          evidence: [
+            "mutation:committed",
+          ],
+
+          compensationRequired:
+            true,
+
+          compensationPlan:
+            "Restore exact prior bytes.",
+
+          metadata: {
+            mutationCommitted:
+              true,
+
+            compensationRequired:
+              true,
+
+            compensationSnapshot:
+              snapshot,
+
+            afterSha256:
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          },
+        }),
+      };
+
+    const context =
+      createRunningContext(
+        executor,
+        [
+          "filesystem:write",
+        ],
+      );
+
+    const result =
+      await context.executorService
+        .execute({
+          actionId:
+            context.action.id,
+
+          actorId:
+            context.action.ownerId,
+
+          authorizationId:
+            context.authorization.id,
+
+          startAuditId:
+            context.startAudit.id,
+
+          operation: {
+            type:
+              "filesystem.replace",
+
+            path:
+              "docs/governed.md",
+
+            content:
+              "replacement",
+
+            expectedSha256:
+              "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          },
+        });
+
+    assert.equal(
+      result.action.status,
+      "failed",
+    );
+
+    assert.equal(
+      result.audit.status,
+      "open",
+    );
+
+    assert.equal(
+      result.audit.metadata
+        .compensationRequired,
+      true,
+    );
+
+    assert.deepEqual(
+      result.executionResult
+        .metadata
+        .compensationSnapshot,
+      snapshot,
     );
   },
 );

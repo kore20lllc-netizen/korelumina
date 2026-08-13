@@ -485,3 +485,152 @@ test(
     }
   },
 );
+
+test(
+  "post-mutation governed failure returns rollback material instead of generic error",
+  async () => {
+    const snapshot = {
+      encoding:
+        "base64",
+
+      content:
+        "YmVmb3Jl",
+
+      sha256:
+        SHA,
+
+      bytes:
+        6,
+    };
+
+    const afterSha256 =
+      "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+
+    const runtime =
+      await createServer(
+        true,
+        {
+          async dispatch() {
+            return {
+              action: {
+                status:
+                  "failed",
+              },
+
+              delegation: {
+                status:
+                  "failed",
+              },
+
+              audit: {
+                status:
+                  "open",
+
+                metadata: {
+                  compensationStatus:
+                    "required",
+                },
+              },
+
+              executionResult: {
+                ok:
+                  false,
+
+                reason:
+                  "project_filesystem_replace_postcondition_failed",
+
+                evidence:
+                  [],
+
+                compensationRequired:
+                  true,
+
+                compensationPlan:
+                  "Restore exact prior bytes.",
+
+                metadata: {
+                  mutationCommitted:
+                    true,
+
+                  compensationRequired:
+                    true,
+
+                  compensationSnapshot:
+                    snapshot,
+
+                  afterSha256,
+                },
+              },
+            };
+          },
+        },
+      );
+
+    try {
+      const response =
+        await fetch(
+          `${runtime.url}/api/executive/actions/action%3Atest/execute-mutation`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify(
+                requestBody(),
+              ),
+          },
+        );
+
+      assert.equal(
+        response.status,
+        409,
+      );
+
+      const body =
+        await response.json();
+
+      assert.equal(
+        body.error,
+        "project_filesystem_replace_postcondition_failed",
+      );
+
+      assert.equal(
+        body.action.status,
+        "failed",
+      );
+
+      assert.equal(
+        body.audit.metadata
+          .compensationStatus,
+        "required",
+      );
+
+      assert.equal(
+        body.compensation
+          .required,
+        true,
+      );
+
+      assert.deepEqual(
+        body.compensation
+          .snapshot,
+        snapshot,
+      );
+
+      assert.equal(
+        body.compensation
+          .afterSha256,
+        afterSha256,
+      );
+    } finally {
+      await closeServer(
+        runtime.server,
+      );
+    }
+  },
+);

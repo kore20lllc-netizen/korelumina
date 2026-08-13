@@ -42,6 +42,11 @@ export interface ProjectFilesystemReplaceExecutorOptions {
     (
       projectId: string,
     ) => string;
+
+  afterAtomicReplace?:
+    (
+      targetPath: string,
+    ) => void;
 }
 
 export class ProjectFilesystemReplaceExecutor
@@ -56,6 +61,11 @@ implements ExecutiveActionExecutor {
     (
       projectId: string,
     ) => string;
+
+  private readonly afterAtomicReplace:
+    (
+      targetPath: string,
+    ) => void;
 
   constructor(
     options:
@@ -80,6 +90,10 @@ implements ExecutiveActionExecutor {
     this.resolveProjectPath =
       options.resolveProjectPath ??
       getProjectPath;
+
+    this.afterAtomicReplace =
+      options.afterAtomicReplace ??
+      (() => {});
   }
 
   execute(
@@ -309,23 +323,111 @@ implements ExecutiveActionExecutor {
       }
     }
 
-    const committedBytes =
-      fs.readFileSync(
+    const compensationSnapshot =
+      Object.freeze({
+        encoding:
+          "base64" as const,
+
+        content:
+          beforeBytes.toString(
+            "base64",
+          ),
+
+        sha256:
+          beforeSha256,
+
+        bytes:
+          beforeBytes.length,
+      });
+
+    /*
+     * From this point onward the governed target has already
+     * changed. Any failure must preserve rollback material and
+     * explicitly require compensation.
+     */
+    try {
+      this.afterAtomicReplace(
         realTarget,
       );
 
-    const committedSha256 =
-      sha256(
-        committedBytes,
-      );
+      const committedBytes =
+        fs.readFileSync(
+          realTarget,
+        );
 
-    if (
-      committedSha256 !==
-      afterSha256
-    ) {
-      throw new Error(
-        "project_filesystem_replace_postcondition_failed",
-      );
+      const committedSha256 =
+        sha256(
+          committedBytes,
+        );
+
+      if (
+        committedSha256 !==
+        afterSha256
+      ) {
+        throw new Error(
+          "project_filesystem_replace_postcondition_failed",
+        );
+      }
+    } catch (error) {
+      const reason =
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            );
+
+      return Object.freeze({
+        ok:
+          false,
+
+        reason,
+
+        evidence:
+          Object.freeze([
+            `project:${projectId}`,
+            `file:${requestedPath}`,
+            `sha256:before:${beforeSha256}`,
+            `sha256:after:${afterSha256}`,
+          ]),
+
+        compensationRequired:
+          true,
+
+        compensationPlan:
+          `Restore exact pre-replacement bytes for "${requestedPath}" from the governed compensation snapshot.`,
+
+        metadata:
+          Object.freeze({
+            executor:
+              this.name,
+
+            projectId,
+
+            path:
+              requestedPath,
+
+            bytesBefore:
+              beforeBytes.length,
+
+            bytesAfter:
+              replacementBytes.length,
+
+            beforeSha256,
+
+            afterSha256,
+
+            atomic:
+              true,
+
+            mutationCommitted:
+              true,
+
+            compensationRequired:
+              true,
+
+            compensationSnapshot,
+          }),
+      });
     }
 
     return Object.freeze({
@@ -369,22 +471,7 @@ implements ExecutiveActionExecutor {
           compensationRequired:
             true,
 
-          compensationSnapshot:
-            Object.freeze({
-              encoding:
-                "base64",
-
-              content:
-                beforeBytes.toString(
-                  "base64",
-                ),
-
-              sha256:
-                beforeSha256,
-
-              bytes:
-                beforeBytes.length,
-            }),
+          compensationSnapshot,
         }),
     });
   }
