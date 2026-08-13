@@ -8,8 +8,13 @@ import express from "express";
 
 import {
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionStartService,
   ExecutiveActionService,
 } from "../../executive/action/index.js";
+
+import {
+  ExecutiveAuditService,
+} from "../../executive/audit/index.js";
 
 import {
   ExecutiveDelegationService,
@@ -56,6 +61,14 @@ async function startServer(
 
       executionAuthorizationService:
         new ExecutiveActionExecutionAuthorizationService(),
+
+      executionStartService:
+        new ExecutiveActionExecutionStartService(
+          actionService,
+          new ExecutiveDelegationService(),
+          new ExecutiveActionExecutionAuthorizationService(),
+          new ExecutiveAuditService(),
+        ),
     },
   );
 

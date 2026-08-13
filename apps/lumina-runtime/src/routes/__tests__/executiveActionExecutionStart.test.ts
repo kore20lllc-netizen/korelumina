@@ -25,8 +25,7 @@ import {
 } from "../executiveAction.js";
 
 async function closeServer(
-  server:
-    Server,
+  server: Server,
 ) {
   await new Promise<void>(
     (
@@ -36,9 +35,7 @@ async function closeServer(
       server.close(
         (error) =>
           error
-            ? reject(
-                error,
-              )
+            ? reject(error)
             : resolve(),
       ),
   );
@@ -54,12 +51,15 @@ async function startServer() {
   const executionAuthorizationService =
     new ExecutiveActionExecutionAuthorizationService();
 
+  const auditService =
+    new ExecutiveAuditService();
+
   const executionStartService =
     new ExecutiveActionExecutionStartService(
       actionService,
       delegationService,
       executionAuthorizationService,
-      new ExecutiveAuditService(),
+      auditService,
     );
 
   const app =
@@ -80,9 +80,7 @@ async function startServer() {
   );
 
   const server =
-    app.listen(
-      0,
-    );
+    app.listen(0);
 
   await new Promise<void>(
     (resolve) =>
@@ -110,17 +108,20 @@ async function startServer() {
     actionService,
     delegationService,
     executionAuthorizationService,
+    auditService,
 
     baseUrl:
       `http://127.0.0.1:${address.port}`,
   };
 }
 
-function createReadyPair(
+function createAuthorizedReadyPair(
   actionService:
     ExecutiveActionService,
   delegationService:
     ExecutiveDelegationService,
+  authorizationService:
+    ExecutiveActionExecutionAuthorizationService,
 ) {
   const delegation =
     delegationService.create({
@@ -140,13 +141,13 @@ function createReadyPair(
         "agent:architecture-engineer",
 
       title:
-        "Governed work",
+        "Governed execution",
 
       description:
         "Accepted delegated work.",
     });
 
-  const acceptedDelegation =
+  const accepted =
     delegationService.updateStatus(
       delegation.id,
       "accepted",
@@ -161,16 +162,16 @@ function createReadyPair(
         "session:test",
 
       delegationId:
-        acceptedDelegation.id,
+        accepted.id,
 
       title:
-        "Governed work",
+        "Governed execution",
 
       description:
-        "Ready for authorization.",
+        "Ready to start.",
 
       ownerId:
-        acceptedDelegation.assignedTo,
+        accepted.assignedTo,
 
       status:
         "ready",
@@ -185,29 +186,41 @@ function createReadyPair(
       },
     });
 
+  const authorization =
+    authorizationService.authorize({
+      action,
+      delegation:
+        accepted,
+
+      actorId:
+        action.ownerId,
+    });
+
   return {
     action,
     delegation:
-      acceptedDelegation,
+      accepted,
+    authorization,
   };
 }
 
 test(
-  "assigned owner can explicitly authorize ready action without starting execution",
+  "exact owner can start exact authorized action",
   async () => {
     const context =
       await startServer();
 
     try {
       const pair =
-        createReadyPair(
+        createAuthorizedReadyPair(
           context.actionService,
           context.delegationService,
+          context.executionAuthorizationService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/authorize-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
           {
             method:
               "POST",
@@ -221,6 +234,9 @@ test(
               JSON.stringify({
                 actorId:
                   pair.action.ownerId,
+
+                authorizationId:
+                  pair.authorization.id,
               }),
           },
         );
@@ -234,33 +250,34 @@ test(
         await response.json();
 
       assert.equal(
-        body.authorization.actionId,
-        pair.action.id,
-      );
-
-      assert.equal(
-        body.authorization.actorId,
-        pair.action.ownerId,
-      );
-
-      assert.equal(
-        body.authorization.consumedAt,
-        undefined,
-      );
-
-      assert.equal(
         body.action.status,
-        "ready",
+        "running",
       );
 
       assert.equal(
-        body.action.startedAt,
-        undefined,
+        typeof body.action.startedAt,
+        "number",
       );
 
       assert.equal(
         body.delegation.status,
-        "accepted",
+        "in-progress",
+      );
+
+      assert.equal(
+        typeof body.authorization.consumedAt,
+        "number",
+      );
+
+      assert.equal(
+        body.audit.source,
+        "executive-action-execution-start",
+      );
+
+      assert.ok(
+        body.audit.evidence.includes(
+          pair.authorization.id,
+        ),
       );
     } finally {
       await closeServer(
@@ -271,21 +288,22 @@ test(
 );
 
 test(
-  "non-owner cannot authorize execution",
+  "wrong actor cannot start execution",
   async () => {
     const context =
       await startServer();
 
     try {
       const pair =
-        createReadyPair(
+        createAuthorizedReadyPair(
           context.actionService,
           context.delegationService,
+          context.executionAuthorizationService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/authorize-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
           {
             method:
               "POST",
@@ -299,6 +317,9 @@ test(
               JSON.stringify({
                 actorId:
                   "agent:other",
+
+                authorizationId:
+                  pair.authorization.id,
               }),
           },
         );
@@ -318,12 +339,19 @@ test(
       );
 
       assert.equal(
-        context.actionService
+        context.executionAuthorizationService
           .get(
-            pair.action.id,
+            pair.authorization.id,
           )
-          ?.startedAt,
+          ?.consumedAt,
         undefined,
+      );
+
+      assert.equal(
+        context.auditService
+          .list()
+          .length,
+        0,
       );
     } finally {
       await closeServer(
@@ -334,20 +362,30 @@ test(
 );
 
 test(
-  "same action cannot receive duplicate execution authorization",
+  "consumed authorization cannot start execution again",
   async () => {
     const context =
       await startServer();
 
     try {
       const pair =
-        createReadyPair(
+        createAuthorizedReadyPair(
           context.actionService,
           context.delegationService,
+          context.executionAuthorizationService,
         );
 
       const url =
-        `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/authorize-execution`;
+        `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`;
+
+      const body =
+        JSON.stringify({
+          actorId:
+            pair.action.ownerId,
+
+          authorizationId:
+            pair.authorization.id,
+        });
 
       const first =
         await fetch(
@@ -361,11 +399,7 @@ test(
                 "application/json",
             },
 
-            body:
-              JSON.stringify({
-                actorId:
-                  pair.action.ownerId,
-              }),
+            body,
           },
         );
 
@@ -386,14 +420,7 @@ test(
                 "application/json",
             },
 
-            body:
-              JSON.stringify({
-                actorId:
-                  pair.action.ownerId,
-
-                authorizationId:
-                  "execution-authorization:second",
-              }),
+            body,
           },
         );
 
@@ -402,12 +429,11 @@ test(
         409,
       );
 
-      const body =
-        await second.json();
-
       assert.equal(
-        body.error,
-        "executive_action_already_execution_authorized",
+        context.auditService
+          .list()
+          .length,
+        1,
       );
     } finally {
       await closeServer(
@@ -418,21 +444,22 @@ test(
 );
 
 test(
-  "authorization endpoint never transitions action to running",
+  "start route performs no completion or external execution",
   async () => {
     const context =
       await startServer();
 
     try {
       const pair =
-        createReadyPair(
+        createAuthorizedReadyPair(
           context.actionService,
           context.delegationService,
+          context.executionAuthorizationService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/authorize-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
           {
             method:
               "POST",
@@ -446,6 +473,9 @@ test(
               JSON.stringify({
                 actorId:
                   pair.action.ownerId,
+
+                authorizationId:
+                  pair.authorization.id,
               }),
           },
         );
@@ -455,23 +485,16 @@ test(
         200,
       );
 
-      const current =
-        context.actionService.get(
-          pair.action.id,
-        );
+      const body =
+        await response.json();
 
       assert.equal(
-        current?.status,
-        "ready",
-      );
-
-      assert.notEqual(
-        current?.status,
+        body.action.status,
         "running",
       );
 
       assert.equal(
-        current?.startedAt,
+        body.action.completedAt,
         undefined,
       );
     } finally {

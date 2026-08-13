@@ -86,11 +86,16 @@ import {
 
 import {
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionStartService,
   ExecutiveActionService,
   ExecutiveDecisionActionProposalService,
   ExecutiveDelegationActionProposalService,
   ExecutiveDelegationActionReadinessService,
 } from "./executive/action/index.js";
+
+import {
+  ExecutiveAuditService,
+} from "./executive/audit/index.js";
 
 import {
   ExecutiveDecisionService,
@@ -210,6 +215,17 @@ export const runtimeExecutiveDelegationActionReadinessService =
 
 export const runtimeExecutiveActionExecutionAuthorizationService =
   new ExecutiveActionExecutionAuthorizationService();
+
+export const runtimeExecutiveAuditService =
+  new ExecutiveAuditService();
+
+export const runtimeExecutiveActionExecutionStartService =
+  new ExecutiveActionExecutionStartService(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionExecutionAuthorizationService,
+    runtimeExecutiveAuditService,
+  );
 
 export const runtimeChiefAgentReasoningExecutionService =
   new ChiefAgentReasoningExecutionService(
@@ -407,6 +423,9 @@ registerExecutiveActionRoute(
 
     executionAuthorizationService:
       runtimeExecutiveActionExecutionAuthorizationService,
+
+    executionStartService:
+      runtimeExecutiveActionExecutionStartService,
   },
 );
 

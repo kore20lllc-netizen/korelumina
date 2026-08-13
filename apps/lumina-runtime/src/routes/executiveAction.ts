@@ -6,6 +6,7 @@ import type {
 
 import type {
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionStartService,
   ExecutiveActionService,
 } from "../executive/action/index.js";
 
@@ -31,6 +32,9 @@ export interface ExecutiveActionRouteDependencies {
 
   executionAuthorizationService:
     ExecutiveActionExecutionAuthorizationService;
+
+  executionStartService:
+    ExecutiveActionExecutionStartService;
 }
 
 function respondAuthorizationError(
@@ -51,11 +55,8 @@ function respondAuthorizationError(
     return res.status(
       404,
     ).json({
-      ok:
-        false,
-
-      error:
-        message,
+      ok: false,
+      error: message,
     });
   }
 
@@ -66,11 +67,8 @@ function respondAuthorizationError(
     return res.status(
       400,
     ).json({
-      ok:
-        false,
-
-      error:
-        message,
+      ok: false,
+      error: message,
     });
   }
 
@@ -81,11 +79,8 @@ function respondAuthorizationError(
     return res.status(
       403,
     ).json({
-      ok:
-        false,
-
-      error:
-        message,
+      ok: false,
+      error: message,
     });
   }
 
@@ -108,11 +103,8 @@ function respondAuthorizationError(
     return res.status(
       409,
     ).json({
-      ok:
-        false,
-
-      error:
-        message,
+      ok: false,
+      error: message,
     });
   }
 
@@ -124,11 +116,100 @@ function respondAuthorizationError(
   return res.status(
     500,
   ).json({
-    ok:
-      false,
-
+    ok: false,
     error:
       "executive_execution_authorization_failed",
+  });
+}
+
+function respondExecutionStartError(
+  res: Response,
+  error: unknown,
+) {
+  const message =
+    error instanceof Error
+      ? error.message
+      : "executive_execution_start_failed";
+
+  if (
+    message ===
+      "executive_action_not_found" ||
+    message ===
+      "executive_delegation_not_found" ||
+    message ===
+      "executive_execution_authorization_not_found"
+  ) {
+    return res.status(
+      404,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_execution_starter_required"
+  ) {
+    return res.status(
+      400,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_execution_starter_not_authorized" ||
+    message ===
+      "executive_execution_start_actor_authorization_mismatch"
+  ) {
+    return res.status(
+      403,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_action_not_ready_for_execution_start" ||
+    message ===
+      "executive_execution_start_delegation_required" ||
+    message ===
+      "executive_delegation_not_accepted_for_execution_start" ||
+    message ===
+      "executive_execution_start_owner_mismatch" ||
+    message ===
+      "executive_execution_authorization_already_consumed" ||
+    message ===
+      "executive_execution_start_action_authorization_mismatch" ||
+    message ===
+      "executive_execution_start_delegation_authorization_mismatch" ||
+    message ===
+      "executive_execution_start_evidence_required"
+  ) {
+    return res.status(
+      409,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  console.error(
+    "[executive/action/start-execution]",
+    error,
+  );
+
+  return res.status(
+    500,
+  ).json({
+    ok: false,
+    error:
+      "executive_execution_start_failed",
   });
 }
 
@@ -141,6 +222,7 @@ export function registerExecutiveActionRoute(
     actionService,
     delegationService,
     executionAuthorizationService,
+    executionStartService,
   } =
     dependencies;
 
@@ -162,9 +244,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           400,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_action_id_required",
         });
@@ -181,20 +261,15 @@ export function registerExecutiveActionRoute(
         return res.status(
           404,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_action_not_found",
-
           id,
         });
       }
 
       return res.json({
-        ok:
-          true,
-
+        ok: true,
         action,
       });
     },
@@ -228,9 +303,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           400,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_action_id_required",
         });
@@ -243,9 +316,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           400,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_execution_authorizer_required",
         });
@@ -262,9 +333,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           404,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_action_not_found",
         });
@@ -282,9 +351,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           409,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_execution_authorization_delegation_required",
         });
@@ -301,9 +368,7 @@ export function registerExecutiveActionRoute(
         return res.status(
           404,
         ).json({
-          ok:
-            false,
-
+          ok: false,
           error:
             "executive_delegation_not_found",
         });
@@ -324,30 +389,115 @@ export function registerExecutiveActionRoute(
                   : undefined,
             });
 
-        const currentAction =
-          actionService.get(
-            action.id,
-          );
-
-        const currentDelegation =
-          delegationService.get(
-            delegation.id,
-          );
-
         return res.json({
-          ok:
-            true,
-
+          ok: true,
           authorization,
 
           action:
-            currentAction,
+            actionService.get(
+              action.id,
+            ),
 
           delegation:
-            currentDelegation,
+            delegationService.get(
+              delegation.id,
+            ),
         });
       } catch (error) {
         return respondAuthorizationError(
+          res,
+          error,
+        );
+      }
+    },
+  );
+
+  app.post(
+    "/api/executive/actions/:id/start-execution",
+    (
+      req: Request,
+      res: Response,
+    ) => {
+      const actionId =
+        readString(
+          req.params.id,
+        );
+
+      const actorId =
+        readString(
+          req.body?.actorId,
+        );
+
+      const authorizationId =
+        readString(
+          req.body?.authorizationId,
+        );
+
+      if (
+        actionId.length ===
+        0
+      ) {
+        return res.status(
+          400,
+        ).json({
+          ok: false,
+          error:
+            "executive_action_id_required",
+        });
+      }
+
+      if (
+        actorId.length ===
+        0
+      ) {
+        return res.status(
+          400,
+        ).json({
+          ok: false,
+          error:
+            "executive_execution_starter_required",
+        });
+      }
+
+      if (
+        authorizationId.length ===
+        0
+      ) {
+        return res.status(
+          400,
+        ).json({
+          ok: false,
+          error:
+            "executive_execution_authorization_id_required",
+        });
+      }
+
+      try {
+        const result =
+          executionStartService
+            .start({
+              actionId,
+              authorizationId,
+              actorId,
+            });
+
+        return res.json({
+          ok: true,
+
+          action:
+            result.action,
+
+          delegation:
+            result.delegation,
+
+          authorization:
+            result.authorization,
+
+          audit:
+            result.audit,
+        });
+      } catch (error) {
+        return respondExecutionStartError(
           res,
           error,
         );
