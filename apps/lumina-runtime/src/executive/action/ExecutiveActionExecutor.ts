@@ -2,6 +2,10 @@ import type {
   ExecutiveAction,
 } from "./ExecutiveAction.js";
 
+import type {
+  ExecutiveActionExecutionOperation,
+} from "./ExecutiveActionExecutionOperation.js";
+
 export interface ExecutiveActionExecutionContext {
   readonly action:
     ExecutiveAction;
@@ -14,6 +18,9 @@ export interface ExecutiveActionExecutionContext {
 
   readonly authorizationId:
     string;
+
+  readonly operation:
+    ExecutiveActionExecutionOperation;
 }
 
 export interface ExecutiveActionExecutionSuccess {

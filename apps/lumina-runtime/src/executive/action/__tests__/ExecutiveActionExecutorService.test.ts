@@ -255,11 +255,13 @@ test(
           startAuditId:
             context.startAudit.id,
 
-            capability:
-              "filesystem:read",
+            operation: {
+              type:
+                "filesystem.read",
 
-            scope:
-              "project",
+              path:
+                "KORELUMINA_MASTER_ARCHITECTURE.md",
+            },
         });
 
     assert.equal(
@@ -329,11 +331,13 @@ test(
           startAuditId:
             context.startAudit.id,
 
-            capability:
-              "filesystem:read",
+            operation: {
+              type:
+                "filesystem.read",
 
-            scope:
-              "project",
+              path:
+                "KORELUMINA_MASTER_ARCHITECTURE.md",
+            },
         });
 
     assert.equal(
@@ -389,11 +393,13 @@ test(
           startAuditId:
             context.startAudit.id,
 
-            capability:
-              "filesystem:read",
+            operation: {
+              type:
+                "filesystem.read",
 
-            scope:
-              "project",
+              path:
+                "KORELUMINA_MASTER_ARCHITECTURE.md",
+            },
         });
 
     assert.equal(
@@ -464,11 +470,13 @@ test(
             startAuditId:
               context.startAudit.id,
 
-              capability:
-                "filesystem:read",
+              operation: {
+                type:
+                  "filesystem.read",
 
-              scope:
-                "project",
+                path:
+                  "KORELUMINA_MASTER_ARCHITECTURE.md",
+              },
           }),
       /executive_executor_authorization_not_consumed/,
     );
@@ -535,11 +543,13 @@ test(
             startAuditId:
               context.startAudit.id,
 
-              capability:
-                "filesystem:read",
+              operation: {
+                type:
+                  "filesystem.read",
 
-              scope:
-                "project",
+                path:
+                  "KORELUMINA_MASTER_ARCHITECTURE.md",
+              },
           }),
       /executive_executor_actor_not_authorized/,
     );
@@ -603,11 +613,13 @@ test(
           startAuditId:
             context.startAudit.id,
 
-            capability:
-              "filesystem:read",
+            operation: {
+              type:
+                "filesystem.read",
 
-            scope:
-              "project",
+              path:
+                "KORELUMINA_MASTER_ARCHITECTURE.md",
+            },
         });
 
     assert.equal(
@@ -618,6 +630,236 @@ test(
     assert.equal(
       result.action.status,
       "completed",
+    );
+  },
+);
+
+test(
+  "operation determines capability instead of caller-supplied claim",
+  async () => {
+    let invoked =
+      false;
+
+    const executor:
+      ExecutiveActionExecutor = {
+        name:
+          "operation-capability-test",
+
+        execute: async () => {
+          invoked =
+            true;
+
+          return {
+            ok:
+              true,
+
+            summary:
+              "Must not execute.",
+
+            evidence:
+              [],
+
+            metadata: {},
+          };
+        },
+      };
+
+    const context =
+      createRunningContext(
+        executor,
+      );
+
+    await assert.rejects(
+      () =>
+        context.executorService
+          .execute({
+            actionId:
+              context.action.id,
+
+            actorId:
+              context.action.ownerId,
+
+            authorizationId:
+              context.authorization.id,
+
+            startAuditId:
+              context.startAudit.id,
+
+            operation: {
+              type:
+                "filesystem.write",
+
+              path:
+                "docs/governed.md",
+
+              content:
+                "mutation",
+            },
+          }),
+      /executive_executor_capability_not_declared/,
+    );
+
+    assert.equal(
+      invoked,
+      false,
+    );
+  },
+);
+
+test(
+  "executor receives the exact typed operation after policy approval",
+  async () => {
+    let receivedType =
+      "";
+
+    let receivedPath =
+      "";
+
+    const executor:
+      ExecutiveActionExecutor = {
+        name:
+          "operation-forwarding-test",
+
+        execute: async (
+          context,
+        ) => {
+          receivedType =
+            context.operation.type;
+
+          if (
+            context.operation.type ===
+            "filesystem.read"
+          ) {
+            receivedPath =
+              context.operation.path;
+          }
+
+          return {
+            ok:
+              true,
+
+            summary:
+              "Typed operation observed.",
+
+            evidence:
+              [],
+
+            metadata: {},
+          };
+        },
+      };
+
+    const context =
+      createRunningContext(
+        executor,
+      );
+
+    const result =
+      await context.executorService
+        .execute({
+          actionId:
+            context.action.id,
+
+          actorId:
+            context.action.ownerId,
+
+          authorizationId:
+            context.authorization.id,
+
+          startAuditId:
+            context.startAudit.id,
+
+          operation: {
+            type:
+              "filesystem.read",
+
+            path:
+              "KORELUMINA_MASTER_ARCHITECTURE.md",
+          },
+        });
+
+    assert.equal(
+      receivedType,
+      "filesystem.read",
+    );
+
+    assert.equal(
+      receivedPath,
+      "KORELUMINA_MASTER_ARCHITECTURE.md",
+    );
+
+    assert.equal(
+      result.action.status,
+      "completed",
+    );
+  },
+);
+
+test(
+  "project filesystem operation rejects traversal target before adapter invocation",
+  async () => {
+    let invoked =
+      false;
+
+    const executor:
+      ExecutiveActionExecutor = {
+        name:
+          "path-boundary-test",
+
+        execute: async () => {
+          invoked =
+            true;
+
+          return {
+            ok:
+              true,
+
+            summary:
+              "Must not execute.",
+
+            evidence:
+              [],
+
+            metadata: {},
+          };
+        },
+      };
+
+    const context =
+      createRunningContext(
+        executor,
+      );
+
+    await assert.rejects(
+      () =>
+        context.executorService
+          .execute({
+            actionId:
+              context.action.id,
+
+            actorId:
+              context.action.ownerId,
+
+            authorizationId:
+              context.authorization.id,
+
+            startAuditId:
+              context.startAudit.id,
+
+            operation: {
+              type:
+                "filesystem.read",
+
+              path:
+                "../outside.txt",
+            },
+          }),
+      /executive_execution_operation_path_outside_project/,
+    );
+
+    assert.equal(
+      invoked,
+      false,
     );
   },
 );

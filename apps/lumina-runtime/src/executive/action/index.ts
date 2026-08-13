@@ -11,3 +11,4 @@ export * from "./ExecutiveActionExecutor.js";
 export * from "./ExecutiveActionExecutorService.js";
 export * from "./ExecutiveActionExecutorPolicy.js";
 export * from "./ExecutiveActionExecutorPolicyRegistry.js";
+export * from "./ExecutiveActionExecutionOperation.js";

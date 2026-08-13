@@ -25,10 +25,12 @@ import {
 } from "./ExecutiveActionExecutionOutcomeService.js";
 
 
-import type {
-  ExecutiveExecutorCapability,
-  ExecutiveExecutorScope,
-} from "./ExecutiveActionExecutorPolicy.js";
+import {
+  resolveExecutiveActionExecutionOperationPolicy,
+  validateExecutiveActionExecutionOperation,
+  type ExecutiveActionExecutionOperation,
+} from "./ExecutiveActionExecutionOperation.js";
+
 
 import {
   ExecutiveActionExecutorPolicyRegistry,
@@ -47,11 +49,8 @@ export interface ExecuteExecutiveActionInput {
   startAuditId:
     string;
 
-  capability:
-    ExecutiveExecutorCapability;
-
-  scope:
-    ExecutiveExecutorScope;
+  operation:
+    ExecutiveActionExecutionOperation;
 }
 
 export class ExecutiveActionExecutorService {
@@ -245,16 +244,25 @@ export class ExecutiveActionExecutorService {
             .trim()
         : undefined;
 
+    validateExecutiveActionExecutionOperation(
+      input.operation,
+    );
+
+    const operationPolicy =
+      resolveExecutiveActionExecutionOperationPolicy(
+        input.operation,
+      );
+
     const policyDecision =
       this.policyRegistry.evaluate({
         executorName:
           this.executor.name,
 
         capability:
-          input.capability,
+          operationPolicy.capability,
 
         scope:
-          input.scope,
+          operationPolicy.scope,
 
         projectId:
           projectId ||
@@ -285,6 +293,9 @@ export class ExecutiveActionExecutorService {
             startAudit.id,
           authorizationId:
             authorization.id,
+
+          operation:
+            input.operation,
         });
     } catch (error) {
       result = {
