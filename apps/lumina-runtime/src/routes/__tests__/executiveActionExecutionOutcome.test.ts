@@ -49,17 +49,24 @@ async function startServer() {
   const delegationService =
     new ExecutiveDelegationService();
 
-  const executionAuthorizationService =
+  const authorizationService =
     new ExecutiveActionExecutionAuthorizationService();
 
   const auditService =
     new ExecutiveAuditService();
 
-  const executionStartService =
+  const startService =
     new ExecutiveActionExecutionStartService(
       actionService,
       delegationService,
-      executionAuthorizationService,
+      authorizationService,
+      auditService,
+    );
+
+  const outcomeService =
+    new ExecutiveActionExecutionOutcomeService(
+      actionService,
+      delegationService,
       auditService,
     );
 
@@ -75,15 +82,15 @@ async function startServer() {
     {
       actionService,
       delegationService,
-      executionAuthorizationService,
-      executionStartService,
+
+      executionAuthorizationService:
+        authorizationService,
+
+      executionStartService:
+        startService,
 
       executionOutcomeService:
-        new ExecutiveActionExecutionOutcomeService(
-          actionService,
-          delegationService,
-          auditService,
-        ),
+        outcomeService,
     },
   );
 
@@ -115,7 +122,7 @@ async function startServer() {
     server,
     actionService,
     delegationService,
-    executionAuthorizationService,
+    authorizationService,
     auditService,
 
     baseUrl:
@@ -123,18 +130,20 @@ async function startServer() {
   };
 }
 
-function createAuthorizedReadyPair(
+function createRunningAction(
   actionService:
     ExecutiveActionService,
   delegationService:
     ExecutiveDelegationService,
   authorizationService:
     ExecutiveActionExecutionAuthorizationService,
+  auditService:
+    ExecutiveAuditService,
 ) {
   const delegation =
     delegationService.create({
       id:
-        "delegation:decision:test",
+        `delegation:test:${Date.now()}`,
 
       sessionId:
         "session:test",
@@ -152,7 +161,7 @@ function createAuthorizedReadyPair(
         "Governed execution",
 
       description:
-        "Accepted delegated work.",
+        "Outcome route test.",
     });
 
   const accepted =
@@ -164,7 +173,7 @@ function createAuthorizedReadyPair(
   const action =
     actionService.create({
       id:
-        "action:decision:test",
+        `action:test:${Date.now()}`,
 
       sessionId:
         "session:test",
@@ -176,7 +185,7 @@ function createAuthorizedReadyPair(
         "Governed execution",
 
       description:
-        "Ready to start.",
+        "Outcome route test.",
 
       ownerId:
         accepted.assignedTo,
@@ -204,34 +213,46 @@ function createAuthorizedReadyPair(
         action.ownerId,
     });
 
-  return {
-    action,
-    delegation:
-      accepted,
-    authorization,
-  };
+  const startService =
+    new ExecutiveActionExecutionStartService(
+      actionService,
+      delegationService,
+      authorizationService,
+      auditService,
+    );
+
+  return startService.start({
+    actionId:
+      action.id,
+
+    authorizationId:
+      authorization.id,
+
+    actorId:
+      action.ownerId,
+  });
 }
 
 test(
-  "exact owner can start exact authorized action",
+  "running action can complete through live route",
   async () => {
     const context =
       await startServer();
 
     try {
-      const pair =
-        createAuthorizedReadyPair(
+      const started =
+        createRunningAction(
           context.actionService,
           context.delegationService,
-          context.executionAuthorizationService,
+          context.authorizationService,
+          context.auditService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(started.action.id)}/complete-execution`,
           {
-            method:
-              "POST",
+            method: "POST",
 
             headers: {
               "Content-Type":
@@ -241,10 +262,17 @@ test(
             body:
               JSON.stringify({
                 actorId:
-                  pair.action.ownerId,
+                  started.action.ownerId,
 
-                authorizationId:
-                  pair.authorization.id,
+                startAuditId:
+                  started.audit.id,
+
+                resultSummary:
+                  "Verified complete.",
+
+                evidence: [
+                  "verification:green",
+                ],
               }),
           },
         );
@@ -259,33 +287,22 @@ test(
 
       assert.equal(
         body.action.status,
-        "running",
-      );
-
-      assert.equal(
-        typeof body.action.startedAt,
-        "number",
+        "completed",
       );
 
       assert.equal(
         body.delegation.status,
-        "in-progress",
+        "completed",
       );
 
       assert.equal(
-        typeof body.authorization.consumedAt,
+        typeof body.action.completedAt,
         "number",
       );
 
       assert.equal(
         body.audit.source,
-        "executive-action-execution-start",
-      );
-
-      assert.ok(
-        body.audit.evidence.includes(
-          pair.authorization.id,
-        ),
+        "executive-action-execution-completed",
       );
     } finally {
       await closeServer(
@@ -296,25 +313,107 @@ test(
 );
 
 test(
-  "wrong actor cannot start execution",
+  "running action can fail through live route with compensation obligation",
   async () => {
     const context =
       await startServer();
 
     try {
-      const pair =
-        createAuthorizedReadyPair(
+      const started =
+        createRunningAction(
           context.actionService,
           context.delegationService,
-          context.executionAuthorizationService,
+          context.authorizationService,
+          context.auditService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(started.action.id)}/fail-execution`,
           {
-            method:
-              "POST",
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                actorId:
+                  started.action.ownerId,
+
+                startAuditId:
+                  started.audit.id,
+
+                failureReason:
+                  "Verification failed.",
+
+                compensationRequired:
+                  true,
+
+                compensationPlan:
+                  "Restore governed pre-execution state.",
+              }),
+          },
+        );
+
+      assert.equal(
+        response.status,
+        200,
+      );
+
+      const body =
+        await response.json();
+
+      assert.equal(
+        body.action.status,
+        "failed",
+      );
+
+      assert.equal(
+        body.delegation.status,
+        "failed",
+      );
+
+      assert.equal(
+        body.audit.metadata
+          .compensationStatus,
+        "required",
+      );
+
+      assert.equal(
+        body.audit.status,
+        "open",
+      );
+    } finally {
+      await closeServer(
+        context.server,
+      );
+    }
+  },
+);
+
+test(
+  "wrong actor cannot complete running action",
+  async () => {
+    const context =
+      await startServer();
+
+    try {
+      const started =
+        createRunningAction(
+          context.actionService,
+          context.delegationService,
+          context.authorizationService,
+          context.auditService,
+        );
+
+      const response =
+        await fetch(
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(started.action.id)}/complete-execution`,
+          {
+            method: "POST",
 
             headers: {
               "Content-Type":
@@ -326,8 +425,11 @@ test(
                 actorId:
                   "agent:other",
 
-                authorizationId:
-                  pair.authorization.id,
+                startAuditId:
+                  started.audit.id,
+
+                resultSummary:
+                  "Should fail.",
               }),
           },
         );
@@ -340,26 +442,10 @@ test(
       assert.equal(
         context.actionService
           .get(
-            pair.action.id,
+            started.action.id,
           )
           ?.status,
-        "ready",
-      );
-
-      assert.equal(
-        context.executionAuthorizationService
-          .get(
-            pair.authorization.id,
-          )
-          ?.consumedAt,
-        undefined,
-      );
-
-      assert.equal(
-        context.auditService
-          .list()
-          .length,
-        0,
+        "running",
       );
     } finally {
       await closeServer(
@@ -370,107 +456,25 @@ test(
 );
 
 test(
-  "consumed authorization cannot start execution again",
+  "compensation-required failure without plan is rejected",
   async () => {
     const context =
       await startServer();
 
     try {
-      const pair =
-        createAuthorizedReadyPair(
+      const started =
+        createRunningAction(
           context.actionService,
           context.delegationService,
-          context.executionAuthorizationService,
-        );
-
-      const url =
-        `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`;
-
-      const body =
-        JSON.stringify({
-          actorId:
-            pair.action.ownerId,
-
-          authorizationId:
-            pair.authorization.id,
-        });
-
-      const first =
-        await fetch(
-          url,
-          {
-            method:
-              "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            body,
-          },
-        );
-
-      assert.equal(
-        first.status,
-        200,
-      );
-
-      const second =
-        await fetch(
-          url,
-          {
-            method:
-              "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            body,
-          },
-        );
-
-      assert.equal(
-        second.status,
-        409,
-      );
-
-      assert.equal(
-        context.auditService
-          .list()
-          .length,
-        1,
-      );
-    } finally {
-      await closeServer(
-        context.server,
-      );
-    }
-  },
-);
-
-test(
-  "start route performs no completion or external execution",
-  async () => {
-    const context =
-      await startServer();
-
-    try {
-      const pair =
-        createAuthorizedReadyPair(
-          context.actionService,
-          context.delegationService,
-          context.executionAuthorizationService,
+          context.authorizationService,
+          context.auditService,
         );
 
       const response =
         await fetch(
-          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(pair.action.id)}/start-execution`,
+          `${context.baseUrl}/api/executive/actions/${encodeURIComponent(started.action.id)}/fail-execution`,
           {
-            method:
-              "POST",
+            method: "POST",
 
             headers: {
               "Content-Type":
@@ -480,30 +484,40 @@ test(
             body:
               JSON.stringify({
                 actorId:
-                  pair.action.ownerId,
+                  started.action.ownerId,
 
-                authorizationId:
-                  pair.authorization.id,
+                startAuditId:
+                  started.audit.id,
+
+                failureReason:
+                  "Verification failed.",
+
+                compensationRequired:
+                  true,
               }),
           },
         );
 
       assert.equal(
         response.status,
-        200,
+        400,
       );
 
       const body =
         await response.json();
 
       assert.equal(
-        body.action.status,
-        "running",
+        body.error,
+        "executive_execution_compensation_plan_required",
       );
 
       assert.equal(
-        body.action.completedAt,
-        undefined,
+        context.actionService
+          .get(
+            started.action.id,
+          )
+          ?.status,
+        "running",
       );
     } finally {
       await closeServer(

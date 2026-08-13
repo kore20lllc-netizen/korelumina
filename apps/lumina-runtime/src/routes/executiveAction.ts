@@ -6,6 +6,7 @@ import type {
 
 import type {
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionOutcomeService,
   ExecutiveActionExecutionStartService,
   ExecutiveActionService,
 } from "../executive/action/index.js";
@@ -35,6 +36,9 @@ export interface ExecutiveActionRouteDependencies {
 
   executionStartService:
     ExecutiveActionExecutionStartService;
+
+  executionOutcomeService:
+    ExecutiveActionExecutionOutcomeService;
 }
 
 function respondAuthorizationError(
@@ -119,6 +123,105 @@ function respondAuthorizationError(
     ok: false,
     error:
       "executive_execution_authorization_failed",
+  });
+}
+
+function respondExecutionOutcomeError(
+  res: Response,
+  error: unknown,
+) {
+  const message =
+    error instanceof Error
+      ? error.message
+      : "executive_execution_outcome_failed";
+
+  if (
+    message ===
+      "executive_action_not_found" ||
+    message ===
+      "executive_delegation_not_found" ||
+    message ===
+      "executive_execution_start_audit_not_found"
+  ) {
+    return res.status(
+      404,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_execution_outcome_actor_required" ||
+    message ===
+      "executive_execution_start_audit_id_required" ||
+    message ===
+      "executive_execution_result_summary_required" ||
+    message ===
+      "executive_execution_failure_reason_required" ||
+    message ===
+      "executive_execution_compensation_plan_required"
+  ) {
+    return res.status(
+      400,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_execution_outcome_actor_not_authorized" ||
+    message ===
+      "executive_execution_start_audit_actor_mismatch"
+  ) {
+    return res.status(
+      403,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  if (
+    message ===
+      "executive_action_not_running_for_execution_outcome" ||
+    message ===
+      "executive_execution_outcome_delegation_required" ||
+    message ===
+      "executive_delegation_not_in_progress_for_execution_outcome" ||
+    message ===
+      "executive_execution_outcome_owner_mismatch" ||
+    message ===
+      "executive_execution_start_audit_invalid" ||
+    message ===
+      "executive_execution_start_audit_action_mismatch" ||
+    message ===
+      "executive_execution_start_audit_delegation_mismatch" ||
+    message ===
+      "executive_execution_outcome_evidence_required"
+  ) {
+    return res.status(
+      409,
+    ).json({
+      ok: false,
+      error: message,
+    });
+  }
+
+  console.error(
+    "[executive/action/execution-outcome]",
+    error,
+  );
+
+  return res.status(
+    500,
+  ).json({
+    ok: false,
+    error:
+      "executive_execution_outcome_failed",
   });
 }
 
@@ -223,6 +326,7 @@ export function registerExecutiveActionRoute(
     delegationService,
     executionAuthorizationService,
     executionStartService,
+    executionOutcomeService,
   } =
     dependencies;
 
@@ -504,4 +608,174 @@ export function registerExecutiveActionRoute(
       }
     },
   );
+
+  app.post(
+    "/api/executive/actions/:id/complete-execution",
+    (
+      req: Request,
+      res: Response,
+    ) => {
+      const actionId =
+        readString(
+          req.params.id,
+        );
+
+      const actorId =
+        readString(
+          req.body?.actorId,
+        );
+
+      const startAuditId =
+        readString(
+          req.body?.startAuditId,
+        );
+
+      const resultSummary =
+        readString(
+          req.body?.resultSummary,
+        );
+
+      const evidence =
+        Array.isArray(
+          req.body?.evidence,
+        )
+          ? req.body.evidence.filter(
+              (
+                value: unknown,
+              ): value is string =>
+                typeof value ===
+                "string",
+            )
+          : undefined;
+
+      if (!actionId) {
+        return res.status(400).json({
+          ok: false,
+          error:
+            "executive_action_id_required",
+        });
+      }
+
+      try {
+        const result =
+          executionOutcomeService
+            .complete({
+              actionId,
+              actorId,
+              startAuditId,
+              resultSummary,
+              evidence,
+            });
+
+        return res.json({
+          ok: true,
+          action:
+            result.action,
+          delegation:
+            result.delegation,
+          audit:
+            result.audit,
+        });
+      } catch (error) {
+        return respondExecutionOutcomeError(
+          res,
+          error,
+        );
+      }
+    },
+  );
+
+  app.post(
+    "/api/executive/actions/:id/fail-execution",
+    (
+      req: Request,
+      res: Response,
+    ) => {
+      const actionId =
+        readString(
+          req.params.id,
+        );
+
+      const actorId =
+        readString(
+          req.body?.actorId,
+        );
+
+      const startAuditId =
+        readString(
+          req.body?.startAuditId,
+        );
+
+      const failureReason =
+        readString(
+          req.body?.failureReason,
+        );
+
+      const compensationPlan =
+        readString(
+          req.body?.compensationPlan,
+        );
+
+      const compensationRequired =
+        req.body?.compensationRequired ===
+        true;
+
+      const evidence =
+        Array.isArray(
+          req.body?.evidence,
+        )
+          ? req.body.evidence.filter(
+              (
+                value: unknown,
+              ): value is string =>
+                typeof value ===
+                "string",
+            )
+          : undefined;
+
+      if (!actionId) {
+        return res.status(400).json({
+          ok: false,
+          error:
+            "executive_action_id_required",
+        });
+      }
+
+      try {
+        const result =
+          executionOutcomeService
+            .fail({
+              actionId,
+              actorId,
+              startAuditId,
+              failureReason,
+              compensationRequired,
+
+              compensationPlan:
+                compensationPlan.length >
+                0
+                  ? compensationPlan
+                  : undefined,
+
+              evidence,
+            });
+
+        return res.json({
+          ok: true,
+          action:
+            result.action,
+          delegation:
+            result.delegation,
+          audit:
+            result.audit,
+        });
+      } catch (error) {
+        return respondExecutionOutcomeError(
+          res,
+          error,
+        );
+      }
+    },
+  );
+
 }

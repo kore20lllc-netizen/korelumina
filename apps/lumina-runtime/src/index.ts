@@ -86,6 +86,7 @@ import {
 
 import {
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionOutcomeService,
   ExecutiveActionExecutionStartService,
   ExecutiveActionService,
   ExecutiveDecisionActionProposalService,
@@ -224,6 +225,13 @@ export const runtimeExecutiveActionExecutionStartService =
     runtimeExecutiveActionService,
     runtimeExecutiveDelegationService,
     runtimeExecutiveActionExecutionAuthorizationService,
+    runtimeExecutiveAuditService,
+  );
+
+export const runtimeExecutiveActionExecutionOutcomeService =
+  new ExecutiveActionExecutionOutcomeService(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
     runtimeExecutiveAuditService,
   );
 
@@ -426,6 +434,9 @@ registerExecutiveActionRoute(
 
     executionStartService:
       runtimeExecutiveActionExecutionStartService,
+
+    executionOutcomeService:
+      runtimeExecutiveActionExecutionOutcomeService,
   },
 );
 
