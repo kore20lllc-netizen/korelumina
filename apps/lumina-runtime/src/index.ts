@@ -28,6 +28,7 @@ import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanoni
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
+import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -437,6 +438,32 @@ registerExecutiveRoute(
 registerExecutiveReasoningRoute(
   app,
   runtimeExecutiveReasoningService,
+);
+
+registerExecutiveOperationsSnapshotRoute(
+  app,
+  {
+    reasoningService:
+      runtimeExecutiveReasoningService,
+
+    decisionService:
+      runtimeExecutiveDecisionService,
+
+    approvalService:
+      runtimeExecutiveApprovalService,
+
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    actionService:
+      runtimeExecutiveActionService,
+
+    auditService:
+      runtimeExecutiveAuditService,
+
+    mutationEnabled:
+      executiveMutationEnabled,
+  },
 );
 
 registerExecutiveDecisionRoute(
