@@ -13,12 +13,15 @@ export type ExecutiveActionExecutionOperation =
     }
   | {
       readonly type:
-        "filesystem.write";
+        "filesystem.replace";
 
       readonly path:
         string;
 
       readonly content:
+        string;
+
+      readonly expectedSha256:
         string;
     }
   | {
@@ -106,7 +109,7 @@ const OPERATION_POLICY:
             "project",
         }),
 
-      "filesystem.write":
+      "filesystem.replace":
         Object.freeze({
           capability:
             "filesystem:write",
@@ -214,7 +217,7 @@ export function validateExecutiveActionExecutionOperation(
     operation.type ===
       "filesystem.read" ||
     operation.type ===
-      "filesystem.write" ||
+      "filesystem.replace" ||
     operation.type ===
       "filesystem.delete"
   ) {
@@ -276,12 +279,30 @@ export function validateExecutiveActionExecutionOperation(
 
   if (
     operation.type ===
-      "filesystem.write" &&
-    typeof operation.content !==
-      "string"
+      "filesystem.replace"
   ) {
-    throw new Error(
-      "executive_execution_operation_content_required",
-    );
+    if (
+      typeof operation.content !==
+        "string"
+    ) {
+      throw new Error(
+        "executive_execution_operation_content_required",
+      );
+    }
+
+    const expectedSha256 =
+      operation.expectedSha256
+        .trim()
+        .toLowerCase();
+
+    if (
+      !/^[a-f0-9]{64}$/.test(
+        expectedSha256,
+      )
+    ) {
+      throw new Error(
+        "executive_execution_operation_expected_sha256_invalid",
+      );
+    }
   }
 }

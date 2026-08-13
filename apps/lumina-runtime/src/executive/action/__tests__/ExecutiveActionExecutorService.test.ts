@@ -687,13 +687,16 @@ test(
 
             operation: {
               type:
-                "filesystem.write",
+                "filesystem.replace",
 
               path:
                 "docs/governed.md",
 
               content:
                 "mutation",
+
+              expectedSha256:
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             },
           }),
       /executive_executor_capability_not_declared/,

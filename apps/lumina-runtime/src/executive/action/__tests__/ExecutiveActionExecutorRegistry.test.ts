@@ -69,13 +69,16 @@ test(
       () =>
         registry.resolve({
           type:
-            "filesystem.write",
+            "filesystem.replace",
 
           path:
             "README.md",
 
           content:
             "mutation",
+
+          expectedSha256:
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         }),
       /executive_action_executor_operation_not_registered/,
     );
