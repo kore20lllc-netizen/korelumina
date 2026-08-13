@@ -91,9 +91,10 @@ export class ExecutiveActionService {
               now
             : existing.startedAt,
         completedAt:
-          status ===
-            "completed"
-            ? now
+          status === "completed" ||
+          status === "failed"
+            ? existing.completedAt ??
+              now
             : existing.completedAt,
         updatedAt:
           now,

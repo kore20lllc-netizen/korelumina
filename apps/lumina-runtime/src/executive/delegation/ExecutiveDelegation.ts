@@ -3,6 +3,7 @@ export type ExecutiveDelegationStatus =
   | "accepted"
   | "in-progress"
   | "completed"
+  | "failed"
   | "cancelled";
 
 export interface ExecutiveDelegation {
