@@ -10,6 +10,10 @@ import {
 } from "../../audit/index.js";
 
 import {
+  ExecutiveActionCompensationAuthorizationService,
+} from "../ExecutiveActionCompensationAuthorizationService.js";
+
+import {
   ProjectFilesystemReplacementCompensationService,
 } from "../ProjectFilesystemReplacementCompensationService.js";
 
@@ -53,6 +57,74 @@ function createTempProject() {
         },
       );
     },
+  };
+}
+
+function createCompensationAuthorization(
+  auditService:
+    ExecutiveAuditService,
+
+  actorId =
+    "agent:test",
+) {
+  const failedAudit =
+    auditService.create({
+      id:
+        `audit:execution-failed:action:test:${Date.now()}:${Math.random()}`,
+
+      sessionId:
+        "session:test",
+
+      title:
+        "Execution failed",
+
+      description:
+        "Compensation required.",
+
+      source:
+        "executive-action-execution-failed",
+
+      ownerId:
+        actorId,
+
+      severity:
+        "error",
+
+      status:
+        "open",
+
+      metadata: {
+        actionId:
+          "action:test",
+
+        compensationRequired:
+          true,
+
+        compensationStatus:
+          "required",
+      },
+    });
+
+  const authorizationService =
+    new ExecutiveActionCompensationAuthorizationService(
+      auditService,
+    );
+
+  const authorization =
+    authorizationService.authorize({
+      failedAuditId:
+        failedAudit.id,
+
+      actorId,
+
+      authorizedBy:
+        "human:architecture-reviewer",
+    });
+
+  return {
+    failedAudit,
+    authorizationService,
+    authorization,
   };
 }
 
@@ -124,14 +196,18 @@ test(
       const auditService =
         new ExecutiveAuditService();
 
-      const executionAudit =
-        createExecutionAudit(
+      const compensation =
+        createCompensationAuthorization(
           auditService,
         );
+
+      const executionAudit =
+        compensation.failedAudit;
 
       const service =
         new ProjectFilesystemReplacementCompensationService(
           auditService,
+          compensation.authorizationService,
           {
             resolveProjectPath:
               () =>
@@ -181,6 +257,9 @@ test(
 
           executionAuditId:
             executionAudit.id,
+
+          compensationAuthorizationId:
+            compensation.authorization.id,
         });
 
       assert.equal(
@@ -264,14 +343,18 @@ test(
       const auditService =
         new ExecutiveAuditService();
 
-      const executionAudit =
-        createExecutionAudit(
+      const compensation =
+        createCompensationAuthorization(
           auditService,
         );
+
+      const executionAudit =
+        compensation.failedAudit;
 
       const service =
         new ProjectFilesystemReplacementCompensationService(
           auditService,
+          compensation.authorizationService,
           {
             resolveProjectPath:
               () =>
@@ -326,6 +409,9 @@ test(
 
             executionAuditId:
               executionAudit.id,
+
+            compensationAuthorizationId:
+                compensation.authorization.id,
           }),
         /project_filesystem_compensation_precondition_failed/,
       );
@@ -376,14 +462,18 @@ test(
       const auditService =
         new ExecutiveAuditService();
 
-      const executionAudit =
-        createExecutionAudit(
+      const compensation =
+        createCompensationAuthorization(
           auditService,
         );
+
+      const executionAudit =
+        compensation.failedAudit;
 
       const service =
         new ProjectFilesystemReplacementCompensationService(
           auditService,
+          compensation.authorizationService,
           {
             resolveProjectPath:
               () =>
@@ -438,6 +528,9 @@ test(
 
             executionAuditId:
               executionAudit.id,
+
+            compensationAuthorizationId:
+                compensation.authorization.id,
           }),
         /project_filesystem_compensation_snapshot_hash_mismatch/,
       );
@@ -456,7 +549,7 @@ test(
 );
 
 test(
-  "compensation audit must belong to same action",
+  "compensation authorization must belong to same action",
   () => {
     const project =
       createTempProject();
@@ -477,14 +570,18 @@ test(
       const auditService =
         new ExecutiveAuditService();
 
-      const executionAudit =
-        createExecutionAudit(
+      const compensation =
+        createCompensationAuthorization(
           auditService,
         );
+
+      const executionAudit =
+        compensation.failedAudit;
 
       const service =
         new ProjectFilesystemReplacementCompensationService(
           auditService,
+          compensation.authorizationService,
           {
             resolveProjectPath:
               () =>
@@ -539,8 +636,11 @@ test(
 
             executionAuditId:
               executionAudit.id,
+
+            compensationAuthorizationId:
+                compensation.authorization.id,
           }),
-        /project_filesystem_compensation_execution_audit_action_mismatch/,
+        /project_filesystem_compensation_authorization_action_mismatch/,
       );
     } finally {
       project.cleanup();
@@ -586,14 +686,18 @@ test(
       const auditService =
         new ExecutiveAuditService();
 
-      const executionAudit =
-        createExecutionAudit(
+      const compensation =
+        createCompensationAuthorization(
           auditService,
         );
+
+      const executionAudit =
+        compensation.failedAudit;
 
       const service =
         new ProjectFilesystemReplacementCompensationService(
           auditService,
+          compensation.authorizationService,
           {
             resolveProjectPath:
               () =>
@@ -648,6 +752,9 @@ test(
 
             executionAuditId:
               executionAudit.id,
+
+            compensationAuthorizationId:
+                compensation.authorization.id,
           }),
         /project_filesystem_compensation_symlink_escape_detected/,
       );
@@ -681,14 +788,127 @@ test(
   () => {
     assert.throws(
       () =>
-        new ProjectFilesystemReplacementCompensationService(
-          new ExecutiveAuditService(),
-          {
-            maxCompensationBytes:
-              0,
-          },
-        ),
+        (() => {
+          const auditService =
+            new ExecutiveAuditService();
+
+          return new ProjectFilesystemReplacementCompensationService(
+            auditService,
+            new ExecutiveActionCompensationAuthorizationService(
+              auditService,
+            ),
+            {
+              maxCompensationBytes:
+                0,
+            },
+          );
+        })(),
       /project_filesystem_compensation_invalid_max_bytes/,
     );
+  },
+);
+
+test(
+  "snapshot alone cannot trigger compensation without authorization",
+  () => {
+    const project =
+      createTempProject();
+
+    try {
+      const target =
+        path.join(
+          project.root,
+          "architecture.md",
+        );
+
+      fs.writeFileSync(
+        target,
+        "replacement",
+        "utf8",
+      );
+
+      const auditService =
+        new ExecutiveAuditService();
+
+      const compensation =
+        createCompensationAuthorization(
+          auditService,
+        );
+
+      const service =
+        new ProjectFilesystemReplacementCompensationService(
+          auditService,
+          compensation.authorizationService,
+          {
+            resolveProjectPath:
+              () =>
+                project.root,
+          },
+        );
+
+      assert.throws(
+        () =>
+          service.compensate({
+            sessionId:
+              "session:test",
+
+            actionId:
+              "action:test",
+
+            actorId:
+              "agent:test",
+
+            projectId:
+              "project:test",
+
+            path:
+              "architecture.md",
+
+            expectedCurrentSha256:
+              sha256(
+                "replacement",
+              ),
+
+            snapshot: {
+              encoding:
+                "base64",
+
+              content:
+                Buffer.from(
+                  "before",
+                ).toString(
+                  "base64",
+                ),
+
+              sha256:
+                sha256(
+                  "before",
+                ),
+
+              bytes:
+                Buffer.byteLength(
+                  "before",
+                ),
+            },
+
+            executionAuditId:
+              compensation.failedAudit.id,
+
+            compensationAuthorizationId:
+              "compensation-authorization:missing",
+          }),
+        /executive_compensation_authorization_not_found/,
+      );
+
+      assert.equal(
+        fs.readFileSync(
+          target,
+          "utf8",
+        ),
+        "replacement",
+      );
+    } finally {
+      project.cleanup();
+    }
   },
 );

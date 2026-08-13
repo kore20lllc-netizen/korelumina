@@ -17,3 +17,5 @@ export * from "./ExecutiveActionExecutorRegistry.js";
 export * from "./ExecutiveActionExecutionDispatcher.js";
 export * from "./ProjectFilesystemReplaceExecutor.js";
 export * from "./ProjectFilesystemReplacementCompensationService.js";
+export * from "./ExecutiveActionCompensationAuthorization.js";
+export * from "./ExecutiveActionCompensationAuthorizationService.js";

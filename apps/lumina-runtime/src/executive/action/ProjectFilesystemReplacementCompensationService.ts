@@ -15,6 +15,10 @@ import {
   type ExecutiveAudit,
 } from "../audit/index.js";
 
+import {
+  ExecutiveActionCompensationAuthorizationService,
+} from "./ExecutiveActionCompensationAuthorizationService.js";
+
 const DEFAULT_MAX_COMPENSATION_BYTES =
   1024 * 1024;
 
@@ -71,6 +75,9 @@ export interface CompensateProjectFilesystemReplacementInput {
 
   executionAuditId:
     string;
+
+  compensationAuthorizationId:
+    string;
 }
 
 export interface ProjectFilesystemReplacementCompensationResult {
@@ -119,6 +126,9 @@ export class ProjectFilesystemReplacementCompensationService {
     private readonly auditService:
       ExecutiveAuditService,
 
+    private readonly authorizationService:
+      ExecutiveActionCompensationAuthorizationService,
+
     options:
       ProjectFilesystemReplacementCompensationServiceOptions = {},
   ) {
@@ -165,6 +175,10 @@ export class ProjectFilesystemReplacementCompensationService {
     const executionAuditId =
       input.executionAuditId.trim();
 
+    const compensationAuthorizationId =
+      input.compensationAuthorizationId
+        .trim();
+
     if (!sessionId) {
       throw new Error(
         "project_filesystem_compensation_session_id_required",
@@ -198,6 +212,59 @@ export class ProjectFilesystemReplacementCompensationService {
     if (!executionAuditId) {
       throw new Error(
         "project_filesystem_compensation_execution_audit_id_required",
+      );
+    }
+
+    if (!compensationAuthorizationId) {
+      throw new Error(
+        "project_filesystem_compensation_authorization_id_required",
+      );
+    }
+
+    const authorization =
+      this.authorizationService.get(
+        compensationAuthorizationId,
+      );
+
+    if (!authorization) {
+      throw new Error(
+        "executive_compensation_authorization_not_found",
+      );
+    }
+
+    if (
+      authorization.actionId !==
+      actionId
+    ) {
+      throw new Error(
+        "project_filesystem_compensation_authorization_action_mismatch",
+      );
+    }
+
+    if (
+      authorization.actorId !==
+      actorId
+    ) {
+      throw new Error(
+        "project_filesystem_compensation_authorization_actor_mismatch",
+      );
+    }
+
+    if (
+      authorization.failedAuditId !==
+      executionAuditId
+    ) {
+      throw new Error(
+        "project_filesystem_compensation_authorization_audit_mismatch",
+      );
+    }
+
+    if (
+      authorization.consumedAt !==
+      undefined
+    ) {
+      throw new Error(
+        "executive_compensation_authorization_already_consumed",
       );
     }
 
@@ -382,6 +449,11 @@ export class ProjectFilesystemReplacementCompensationService {
       );
     }
 
+    const consumedAuthorization =
+      this.authorizationService.consume(
+        compensationAuthorizationId,
+      );
+
     const targetDirectory =
       path.dirname(
         realTarget,
@@ -513,6 +585,15 @@ export class ProjectFilesystemReplacementCompensationService {
             requestedPath,
 
           executionAuditId,
+
+          compensationAuthorizationId:
+            consumedAuthorization.id,
+
+          compensationAuthorizedBy:
+            consumedAuthorization.authorizedBy,
+
+          compensationAuthorizationConsumedAt:
+            consumedAuthorization.consumedAt,
 
           outcome:
             "compensated",
