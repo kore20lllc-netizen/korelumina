@@ -192,6 +192,47 @@ export class ExecutiveActionExecutionAuthorizationService {
     return authorization;
   }
 
+  consume(
+    authorizationId: string,
+  ): ExecutiveActionExecutionAuthorization {
+    const authorization =
+      this.authorizations.get(
+        authorizationId,
+      );
+
+    if (
+      !authorization
+    ) {
+      throw new Error(
+        "executive_execution_authorization_not_found",
+      );
+    }
+
+    if (
+      authorization.consumedAt !==
+      undefined
+    ) {
+      throw new Error(
+        "executive_execution_authorization_already_consumed",
+      );
+    }
+
+    const consumed =
+      Object.freeze({
+        ...authorization,
+
+        consumedAt:
+          Date.now(),
+      });
+
+    this.authorizations.set(
+      authorization.id,
+      consumed,
+    );
+
+    return consumed;
+  }
+
   get(
     id: string,
   ):

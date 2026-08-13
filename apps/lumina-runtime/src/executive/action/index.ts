@@ -5,3 +5,4 @@ export * from "./ExecutiveDelegationActionProposalService.js";
 export * from "./ExecutiveDelegationActionReadinessService.js";
 export * from "./ExecutiveActionExecutionAuthorization.js";
 export * from "./ExecutiveActionExecutionAuthorizationService.js";
+export * from "./ExecutiveActionExecutionStartService.js";
