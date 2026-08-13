@@ -11,6 +11,10 @@ import type {
   KnowledgePackage,
 } from "./KnowledgePackage.js";
 
+import {
+  normalizeKnowledgePackage,
+} from "./KnowledgePackage.js";
+
 function resolveRepositoryRoot(): string {
   let current =
     process.cwd();
@@ -117,7 +121,11 @@ export function loadKnowledgePackage(
       id,
     );
 
-  return record?.data ?? null;
+  return record?.data
+    ? normalizeKnowledgePackage(
+        record.data,
+      )
+    : null;
 }
 
 export function listKnowledgePackages():
