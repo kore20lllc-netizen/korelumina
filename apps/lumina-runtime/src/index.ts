@@ -32,6 +32,7 @@ import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
 import { registerExecutiveActionExecutionRoute } from "./routes/executiveActionExecution.js";
+import { registerExecutiveActionMutationRoute } from "./routes/executiveActionMutation.js";
 import { registerExecutiveApprovalRoute } from "./routes/executiveApproval.js";
 
 import {
@@ -501,6 +502,28 @@ registerExecutiveActionRoute(
 registerExecutiveActionExecutionRoute(
   app,
   runtimeExecutiveActionExecutionDispatcher,
+);
+
+registerExecutiveActionMutationRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
+  {
+    enabled:
+      process.env
+        .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
+      "true",
+  },
+);
+
+registerExecutiveActionMutationRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
+  {
+    enabled:
+      process.env
+        .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
+      "true",
+  },
 );
 
 registerExecutiveApprovalRoute(
