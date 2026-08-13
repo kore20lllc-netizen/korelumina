@@ -195,6 +195,13 @@ export class DocumentationCompiler
           dependencies:
             evidence.metadata.dependencies,
 
+          documentClassification:
+            evidence.metadata.documentClassification ??
+            evidence.metadata.classification,
+
+          destination:
+            evidence.metadata.destination,
+
           originalMetadata: {
             ...evidence.metadata,
           },
