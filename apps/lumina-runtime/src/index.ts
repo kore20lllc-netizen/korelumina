@@ -31,6 +31,7 @@ import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js"
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
+import { registerExecutiveActionExecutionRoute } from "./routes/executiveActionExecution.js";
 import { registerExecutiveApprovalRoute } from "./routes/executiveApproval.js";
 
 import {
@@ -85,10 +86,15 @@ import {
 } from "./executive/delegation/index.js";
 
 import {
+  createExecutiveActionExecutorPolicy,
   ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionDispatcher,
   ExecutiveActionExecutionOutcomeService,
   ExecutiveActionExecutionStartService,
+  ExecutiveActionExecutorPolicyRegistry,
+  ExecutiveActionExecutorRegistry,
   ExecutiveActionService,
+  ProjectFilesystemReadExecutor,
   ExecutiveDecisionActionProposalService,
   ExecutiveDelegationActionProposalService,
   ExecutiveDelegationActionReadinessService,
@@ -233,6 +239,58 @@ export const runtimeExecutiveActionExecutionOutcomeService =
     runtimeExecutiveActionService,
     runtimeExecutiveDelegationService,
     runtimeExecutiveAuditService,
+  );
+
+export const runtimeExecutiveActionExecutorPolicyRegistry =
+  new ExecutiveActionExecutorPolicyRegistry();
+
+runtimeExecutiveActionExecutorPolicyRegistry.register(
+  createExecutiveActionExecutorPolicy({
+    executorName:
+      "project-filesystem-read",
+
+    capabilities: [
+      "filesystem:read",
+    ],
+
+    scopes: [
+      "project",
+    ],
+
+    prohibitedCapabilities: [
+      "filesystem:write",
+      "filesystem:delete",
+      "process:spawn",
+      "network:request",
+      "git:write",
+      "runtime:start",
+      "runtime:stop",
+      "runtime:restart",
+      "deployment:write",
+    ],
+
+    requiresProjectId:
+      true,
+  }),
+);
+
+export const runtimeExecutiveActionExecutorRegistry =
+  new ExecutiveActionExecutorRegistry();
+
+runtimeExecutiveActionExecutorRegistry.register(
+  "filesystem.read",
+  new ProjectFilesystemReadExecutor(),
+);
+
+export const runtimeExecutiveActionExecutionDispatcher =
+  new ExecutiveActionExecutionDispatcher(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionExecutionAuthorizationService,
+    runtimeExecutiveAuditService,
+    runtimeExecutiveActionExecutionOutcomeService,
+    runtimeExecutiveActionExecutorPolicyRegistry,
+    runtimeExecutiveActionExecutorRegistry,
   );
 
 export const runtimeChiefAgentReasoningExecutionService =
@@ -438,6 +496,11 @@ registerExecutiveActionRoute(
     executionOutcomeService:
       runtimeExecutiveActionExecutionOutcomeService,
   },
+);
+
+registerExecutiveActionExecutionRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
 );
 
 registerExecutiveApprovalRoute(

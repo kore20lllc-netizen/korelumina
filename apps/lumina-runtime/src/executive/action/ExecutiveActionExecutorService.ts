@@ -36,6 +36,12 @@ import {
   ExecutiveActionExecutorPolicyRegistry,
 } from "./ExecutiveActionExecutorPolicyRegistry.js";
 
+export interface ExecutiveActionExecutorServiceResult
+  extends ExecutiveActionExecutionOutcomeResult {
+  readonly executionResult:
+    ExecutiveActionExecutionResult;
+}
+
 export interface ExecuteExecutiveActionInput {
   actionId:
     string;
@@ -81,7 +87,7 @@ export class ExecutiveActionExecutorService {
     input:
       ExecuteExecutiveActionInput,
   ): Promise<
-    ExecutiveActionExecutionOutcomeResult
+    ExecutiveActionExecutorServiceResult
   > {
     const action =
       this.actionService.get(
@@ -340,22 +346,30 @@ export class ExecutiveActionExecutorService {
         );
       }
 
-      return this.outcomeService
-        .complete({
-          actionId:
-            action.id,
+      const outcome =
+        this.outcomeService
+          .complete({
+            actionId:
+              action.id,
 
-          actorId,
+            actorId,
 
-          startAuditId:
-            startAudit.id,
+            startAuditId:
+              startAudit.id,
 
-          resultSummary:
-            summary,
+            resultSummary:
+              summary,
 
-          evidence:
-            result.evidence,
-        });
+            evidence:
+              result.evidence,
+          });
+
+      return {
+        ...outcome,
+
+        executionResult:
+          result,
+      };
     }
 
     const reason =
@@ -370,27 +384,35 @@ export class ExecutiveActionExecutorService {
       );
     }
 
-    return this.outcomeService
-      .fail({
-        actionId:
-          action.id,
+    const outcome =
+      this.outcomeService
+        .fail({
+          actionId:
+            action.id,
 
-        actorId,
+          actorId,
 
-        startAuditId:
-          startAudit.id,
+          startAuditId:
+            startAudit.id,
 
-        failureReason:
-          reason,
+          failureReason:
+            reason,
 
-        compensationRequired:
-          result.compensationRequired,
+          compensationRequired:
+            result.compensationRequired,
 
-        compensationPlan:
-          result.compensationPlan,
+          compensationPlan:
+            result.compensationPlan,
 
-        evidence:
-          result.evidence,
-      });
+          evidence:
+            result.evidence,
+        });
+
+    return {
+      ...outcome,
+
+      executionResult:
+        result,
+    };
   }
 }
