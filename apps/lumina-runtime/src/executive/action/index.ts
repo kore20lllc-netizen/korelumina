@@ -19,3 +19,4 @@ export * from "./ProjectFilesystemReplaceExecutor.js";
 export * from "./ProjectFilesystemReplacementCompensationService.js";
 export * from "./ExecutiveActionCompensationAuthorization.js";
 export * from "./ExecutiveActionCompensationAuthorizationService.js";
+export * from "./configureExecutiveActionExecutorComposition.js";

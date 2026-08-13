@@ -87,7 +87,7 @@ import {
 } from "./executive/delegation/index.js";
 
 import {
-  createExecutiveActionExecutorPolicy,
+  configureExecutiveActionExecutorComposition,
   ExecutiveActionExecutionAuthorizationService,
   ExecutiveActionExecutionDispatcher,
   ExecutiveActionExecutionOutcomeService,
@@ -95,7 +95,6 @@ import {
   ExecutiveActionExecutorPolicyRegistry,
   ExecutiveActionExecutorRegistry,
   ExecutiveActionService,
-  ProjectFilesystemReadExecutor,
   ExecutiveDecisionActionProposalService,
   ExecutiveDelegationActionProposalService,
   ExecutiveDelegationActionReadinessService,
@@ -245,43 +244,24 @@ export const runtimeExecutiveActionExecutionOutcomeService =
 export const runtimeExecutiveActionExecutorPolicyRegistry =
   new ExecutiveActionExecutorPolicyRegistry();
 
-runtimeExecutiveActionExecutorPolicyRegistry.register(
-  createExecutiveActionExecutorPolicy({
-    executorName:
-      "project-filesystem-read",
-
-    capabilities: [
-      "filesystem:read",
-    ],
-
-    scopes: [
-      "project",
-    ],
-
-    prohibitedCapabilities: [
-      "filesystem:write",
-      "filesystem:delete",
-      "process:spawn",
-      "network:request",
-      "git:write",
-      "runtime:start",
-      "runtime:stop",
-      "runtime:restart",
-      "deployment:write",
-    ],
-
-    requiresProjectId:
-      true,
-  }),
-);
-
 export const runtimeExecutiveActionExecutorRegistry =
   new ExecutiveActionExecutorRegistry();
 
-runtimeExecutiveActionExecutorRegistry.register(
-  "filesystem.read",
-  new ProjectFilesystemReadExecutor(),
-);
+const executiveMutationEnabled =
+  process.env
+    .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
+  "true";
+
+configureExecutiveActionExecutorComposition({
+  policyRegistry:
+    runtimeExecutiveActionExecutorPolicyRegistry,
+
+  executorRegistry:
+    runtimeExecutiveActionExecutorRegistry,
+
+  mutationEnabled:
+    executiveMutationEnabled,
+});
 
 export const runtimeExecutiveActionExecutionDispatcher =
   new ExecutiveActionExecutionDispatcher(
@@ -509,9 +489,7 @@ registerExecutiveActionMutationRoute(
   runtimeExecutiveActionExecutionDispatcher,
   {
     enabled:
-      process.env
-        .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
-      "true",
+      executiveMutationEnabled,
   },
 );
 
