@@ -7,8 +7,13 @@ import test from "node:test";
 import express from "express";
 
 import {
+  ExecutiveActionExecutionAuthorizationService,
   ExecutiveActionService,
 } from "../../executive/action/index.js";
+
+import {
+  ExecutiveDelegationService,
+} from "../../executive/delegation/index.js";
 
 import {
   registerExecutiveActionRoute,
@@ -43,7 +48,15 @@ async function startServer(
 
   registerExecutiveActionRoute(
     app,
-    actionService,
+    {
+      actionService,
+
+      delegationService:
+        new ExecutiveDelegationService(),
+
+      executionAuthorizationService:
+        new ExecutiveActionExecutionAuthorizationService(),
+    },
   );
 
   const server =

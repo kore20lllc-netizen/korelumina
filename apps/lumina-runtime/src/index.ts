@@ -85,6 +85,7 @@ import {
 } from "./executive/delegation/index.js";
 
 import {
+  ExecutiveActionExecutionAuthorizationService,
   ExecutiveActionService,
   ExecutiveDecisionActionProposalService,
   ExecutiveDelegationActionProposalService,
@@ -206,6 +207,9 @@ export const runtimeExecutiveDelegationActionReadinessService =
     runtimeExecutiveDelegationService,
     runtimeExecutiveActionService,
   );
+
+export const runtimeExecutiveActionExecutionAuthorizationService =
+  new ExecutiveActionExecutionAuthorizationService();
 
 export const runtimeChiefAgentReasoningExecutionService =
   new ChiefAgentReasoningExecutionService(
@@ -394,7 +398,16 @@ registerExecutiveDelegationRoute(
 
 registerExecutiveActionRoute(
   app,
-  runtimeExecutiveActionService,
+  {
+    actionService:
+      runtimeExecutiveActionService,
+
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    executionAuthorizationService:
+      runtimeExecutiveActionExecutionAuthorizationService,
+  },
 );
 
 registerExecutiveApprovalRoute(
