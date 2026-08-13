@@ -30,6 +30,14 @@ import {
 } from "../ExecutiveActionExecutorService.js";
 
 import {
+  createExecutiveActionExecutorPolicy,
+} from "../ExecutiveActionExecutorPolicy.js";
+
+import {
+  ExecutiveActionExecutorPolicyRegistry,
+} from "../ExecutiveActionExecutorPolicyRegistry.js";
+
+import {
   ExecutiveActionService,
 } from "../ExecutiveActionService.js";
 
@@ -106,6 +114,12 @@ function createRunningContext(
         decisionId:
           "decision:test",
 
+        projectId:
+          "project:korelumina",
+
+        workspaceId:
+          "workspace:default",
+
         decisionEvidence: [
           "canonical:architecture:test",
         ],
@@ -149,6 +163,27 @@ function createRunningContext(
       auditService,
     );
 
+  const policyRegistry =
+    new ExecutiveActionExecutorPolicyRegistry();
+
+  policyRegistry.register(
+    createExecutiveActionExecutorPolicy({
+      executorName:
+        executor.name,
+
+      capabilities: [
+        "filesystem:read",
+      ],
+
+      scopes: [
+        "project",
+      ],
+
+      requiresProjectId:
+        true,
+    }),
+  );
+
   const executorService =
     new ExecutiveActionExecutorService(
       actionService,
@@ -156,6 +191,7 @@ function createRunningContext(
       authorizationService,
       auditService,
       outcomeService,
+      policyRegistry,
       executor,
     );
 
@@ -218,6 +254,12 @@ test(
 
           startAuditId:
             context.startAudit.id,
+
+            capability:
+              "filesystem:read",
+
+            scope:
+              "project",
         });
 
     assert.equal(
@@ -286,6 +328,12 @@ test(
 
           startAuditId:
             context.startAudit.id,
+
+            capability:
+              "filesystem:read",
+
+            scope:
+              "project",
         });
 
     assert.equal(
@@ -340,6 +388,12 @@ test(
 
           startAuditId:
             context.startAudit.id,
+
+            capability:
+              "filesystem:read",
+
+            scope:
+              "project",
         });
 
     assert.equal(
@@ -409,6 +463,12 @@ test(
 
             startAuditId:
               context.startAudit.id,
+
+              capability:
+                "filesystem:read",
+
+              scope:
+                "project",
           }),
       /executive_executor_authorization_not_consumed/,
     );
@@ -474,6 +534,12 @@ test(
 
             startAuditId:
               context.startAudit.id,
+
+              capability:
+                "filesystem:read",
+
+              scope:
+                "project",
           }),
       /executive_executor_actor_not_authorized/,
     );
@@ -536,6 +602,12 @@ test(
 
           startAuditId:
             context.startAudit.id,
+
+            capability:
+              "filesystem:read",
+
+            scope:
+              "project",
         });
 
     assert.equal(

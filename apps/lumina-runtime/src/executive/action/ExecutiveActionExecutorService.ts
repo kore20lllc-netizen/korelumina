@@ -24,6 +24,16 @@ import {
   type ExecutiveActionExecutionOutcomeResult,
 } from "./ExecutiveActionExecutionOutcomeService.js";
 
+
+import type {
+  ExecutiveExecutorCapability,
+  ExecutiveExecutorScope,
+} from "./ExecutiveActionExecutorPolicy.js";
+
+import {
+  ExecutiveActionExecutorPolicyRegistry,
+} from "./ExecutiveActionExecutorPolicyRegistry.js";
+
 export interface ExecuteExecutiveActionInput {
   actionId:
     string;
@@ -36,6 +46,12 @@ export interface ExecuteExecutiveActionInput {
 
   startAuditId:
     string;
+
+  capability:
+    ExecutiveExecutorCapability;
+
+  scope:
+    ExecutiveExecutorScope;
 }
 
 export class ExecutiveActionExecutorService {
@@ -54,6 +70,9 @@ export class ExecutiveActionExecutorService {
 
     private readonly outcomeService:
       ExecutiveActionExecutionOutcomeService,
+
+    private readonly policyRegistry:
+      ExecutiveActionExecutorPolicyRegistry,
 
     private readonly executor:
       ExecutiveActionExecutor,
@@ -205,6 +224,52 @@ export class ExecutiveActionExecutorService {
     ) {
       throw new Error(
         "executive_executor_start_audit_mismatch",
+      );
+    }
+
+    const projectId =
+      typeof action.metadata
+        .projectId ===
+        "string"
+        ? action.metadata
+            .projectId
+            .trim()
+        : undefined;
+
+    const workspaceId =
+      typeof action.metadata
+        .workspaceId ===
+        "string"
+        ? action.metadata
+            .workspaceId
+            .trim()
+        : undefined;
+
+    const policyDecision =
+      this.policyRegistry.evaluate({
+        executorName:
+          this.executor.name,
+
+        capability:
+          input.capability,
+
+        scope:
+          input.scope,
+
+        projectId:
+          projectId ||
+          undefined,
+
+        workspaceId:
+          workspaceId ||
+          undefined,
+      });
+
+    if (
+      !policyDecision.allowed
+    ) {
+      throw new Error(
+        policyDecision.reason,
       );
     }
 
