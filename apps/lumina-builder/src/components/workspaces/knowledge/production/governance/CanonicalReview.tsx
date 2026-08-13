@@ -166,7 +166,7 @@ export function CanonicalReview({
       className="grid gap-5"
     >
       <LuminaExecutiveTitleMetricsComposition
-        variant="content-led"
+        variant="balanced"
         titleRegion={
           <LuminaFlagshipPanel
             className="flex h-full flex-col"

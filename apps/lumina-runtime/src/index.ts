@@ -425,8 +425,9 @@ registerCanonicalReviewRoutes(
     reviewService:
       runtimeCanonicalReviewService,
 
-    promotionService:
-      runtimeGovernedPromotionService,
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
   },
 );
 

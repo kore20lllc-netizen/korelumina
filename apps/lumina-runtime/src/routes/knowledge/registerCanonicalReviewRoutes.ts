@@ -4,32 +4,170 @@ import type {
   Response,
 } from "express";
 
+import type {
+  KnowledgePackageService,
+} from "../../knowledge-preservation/package/index.js";
+
 import {
   CanonicalReviewService,
 } from "../../knowledge-preservation/review/index.js";
-
-import {
-  GovernedCanonicalPromotionService,
-} from "../../knowledge-preservation/promotion/index.js";
 
 export interface CanonicalReviewRuntime {
   reviewService:
     CanonicalReviewService;
 
-  promotionService:
-    GovernedCanonicalPromotionService;
+  packageService:
+    KnowledgePackageService;
+}
+
+function reviewStatus(
+  state:
+    string,
+
+  approvalState:
+    string,
+):
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "remediation_required"
+  | "not_reviewable" {
+  if (
+    state ===
+      "awaiting_review" &&
+    approvalState ===
+      "pending_review"
+  ) {
+    return "pending";
+  }
+
+  if (
+    state ===
+      "approved" &&
+    approvalState ===
+      "approved"
+  ) {
+    return "approved";
+  }
+
+  if (
+    state ===
+      "rejected" &&
+    approvalState ===
+      "rejected"
+  ) {
+    return "rejected";
+  }
+
+  if (
+    approvalState ===
+      "remediation_required"
+  ) {
+    return "remediation_required";
+  }
+
+  return "not_reviewable";
 }
 
 export function registerCanonicalReviewRoutes(
-  app: Express,
+  app:
+    Express,
+
   runtime:
     CanonicalReviewRuntime,
 ): void {
+  app.get(
+    "/api/knowledge/canonical-review",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      const packages =
+        runtime.packageService
+          .list()
+          .map(
+            (
+              knowledgePackage,
+            ) => ({
+              ...knowledgePackage,
+
+              reviewStatus:
+                reviewStatus(
+                  knowledgePackage.state,
+                  knowledgePackage.approvalState,
+                ),
+            }),
+          )
+          .filter(
+            (
+              knowledgePackage,
+            ) =>
+              knowledgePackage
+                .reviewStatus !==
+              "not_reviewable",
+          )
+          .sort(
+            (
+              left,
+              right,
+            ) =>
+              right.updatedAt -
+              left.updatedAt,
+          );
+
+      return res.json({
+        ok:
+          true,
+
+        packages,
+
+        summary: {
+          total:
+            packages.length,
+
+          pending:
+            packages.filter(
+              (item) =>
+                item.reviewStatus ===
+                "pending",
+            ).length,
+
+          approved:
+            packages.filter(
+              (item) =>
+                item.reviewStatus ===
+                "approved",
+            ).length,
+
+          rejected:
+            packages.filter(
+              (item) =>
+                item.reviewStatus ===
+                "rejected",
+            ).length,
+
+          remediationRequired:
+            packages.filter(
+              (item) =>
+                item.reviewStatus ===
+                "remediation_required",
+            ).length,
+        },
+      });
+    },
+  );
+
   app.post(
     "/api/knowledge/canonical-review",
     (
-      req: Request,
-      res: Response,
+      req:
+        Request,
+
+      res:
+        Response,
     ) => {
       const body =
         req.body ?? {};
@@ -39,13 +177,19 @@ export function registerCanonicalReviewRoutes(
           body.decision;
 
         if (
-          decision !== "approved" &&
-          decision !== "rejected"
+          decision !==
+            "approved" &&
+          decision !==
+            "rejected" &&
+          decision !==
+            "remediation_required"
         ) {
           return res.status(
             400,
           ).json({
-            ok: false,
+            ok:
+              false,
+
             error:
               "canonical_review_decision_invalid",
           });
@@ -63,17 +207,37 @@ export function registerCanonicalReviewRoutes(
             ? body.packageId
             : "";
 
+        const evidenceConsidered =
+          Array.isArray(
+            body.evidenceConsidered,
+          )
+            ? body.evidenceConsidered.filter(
+                (
+                  value:
+                    unknown,
+                ): value is string =>
+                  typeof value ===
+                  "string",
+              )
+            : undefined;
+
         const review =
           runtime.reviewService
             .review({
               packageId,
+
               decision,
+
               reviewerId,
+
               reviewedAt:
                 typeof body.reviewedAt ===
                   "number"
                   ? body.reviewedAt
                   : undefined,
+
+              evidenceConsidered,
+
               reason:
                 typeof body.reason ===
                   "string"
@@ -81,71 +245,41 @@ export function registerCanonicalReviewRoutes(
                   : undefined,
             });
 
-        if (
-          decision ===
-          "rejected"
-        ) {
-          return res.json({
-            ok: true,
-            review,
-            promotion: null,
-          });
-        }
-
-        const organizationId =
-          typeof body.organizationId ===
-            "string"
-            ? body.organizationId.trim()
-            : "";
-
-        if (
-          !organizationId
-        ) {
-          return res.status(
-            400,
-          ).json({
-            ok: false,
-            error:
-              "canonical_promotion_organization_required",
-          });
-        }
-
-        const promotion =
-          runtime.promotionService
-            .promoteApprovedPackage(
-              packageId,
-              {
-                organizationId,
-
-                projectId:
-                  typeof body.projectId ===
-                    "string"
-                    ? body.projectId
-                    : undefined,
-
-                teamId:
-                  typeof body.teamId ===
-                    "string"
-                    ? body.teamId
-                    : undefined,
-              },
-            );
-
+        /*
+         * Constitutional boundary:
+         *
+         * Canonical Review records a human governance
+         * decision only.
+         *
+         * It MUST NOT promote Canonical Knowledge.
+         *
+         * Promotion belongs exclusively to the governed
+         * canonical-promotion boundary.
+         */
         return res.json({
-          ok: true,
+          ok:
+            true,
+
           review,
-          promotion,
+
+          promotion:
+            null,
         });
-      } catch (error) {
+      } catch (
+        error
+      ) {
         return res.status(
           400,
         ).json({
-          ok: false,
+          ok:
+            false,
 
           error:
             error instanceof Error
               ? error.message
-              : String(error),
+              : String(
+                  error,
+                ),
         });
       }
     },

@@ -9,14 +9,50 @@ import {
 
 export type CanonicalReviewDecision =
   | "approved"
-  | "rejected";
+  | "rejected"
+  | "remediation_required";
+
+export interface CanonicalReviewRecord {
+  packageId:
+    string;
+
+  packageVersion:
+    string | null;
+
+  decision:
+    CanonicalReviewDecision;
+
+  reviewerId:
+    string;
+
+  reviewedAt:
+    number;
+
+  evidenceConsidered:
+    string[];
+
+  reason?:
+    string;
+}
 
 export interface CanonicalReviewInput {
-  packageId: string;
-  decision: CanonicalReviewDecision;
-  reviewerId: string;
-  reviewedAt?: number;
-  reason?: string;
+  packageId:
+    string;
+
+  decision:
+    CanonicalReviewDecision;
+
+  reviewerId:
+    string;
+
+  reviewedAt?:
+    number;
+
+  evidenceConsidered?:
+    string[];
+
+  reason?:
+    string;
 }
 
 export interface CanonicalReviewResult {
@@ -25,6 +61,54 @@ export interface CanonicalReviewResult {
 
   decision:
     CanonicalReviewDecision;
+
+  review:
+    CanonicalReviewRecord;
+}
+
+function uniqueStrings(
+  values:
+    readonly string[],
+): string[] {
+  return [
+    ...new Set(
+      values
+        .map(
+          (value) =>
+            value.trim(),
+        )
+        .filter(
+          Boolean,
+        ),
+    ),
+  ];
+}
+
+function existingReviewHistory(
+  knowledgePackage:
+    KnowledgePackage,
+): CanonicalReviewRecord[] {
+  const value =
+    knowledgePackage.metadata
+      .reviewHistory;
+
+  if (
+    !Array.isArray(
+      value,
+    )
+  ) {
+    return [];
+  }
+
+  return value.filter(
+    (
+      record,
+    ): record is CanonicalReviewRecord =>
+      typeof record ===
+        "object" &&
+      record !==
+        null,
+  );
 }
 
 export class CanonicalReviewService {
@@ -34,7 +118,8 @@ export class CanonicalReviewService {
   ) {}
 
   review(
-    input: CanonicalReviewInput,
+    input:
+      CanonicalReviewInput,
   ): CanonicalReviewResult {
     const knowledgePackage =
       this.packageService.get(
@@ -51,15 +136,20 @@ export class CanonicalReviewService {
 
     if (
       knowledgePackage.state !==
-      "awaiting_review"
+        "awaiting_review" ||
+      knowledgePackage.approvalState !==
+        "pending_review"
     ) {
       throw new Error(
         "knowledge_package_not_awaiting_review",
       );
     }
 
+    const reviewerId =
+      input.reviewerId.trim();
+
     if (
-      !input.reviewerId.trim()
+      !reviewerId
     ) {
       throw new Error(
         "canonical_review_reviewer_required",
@@ -70,33 +160,135 @@ export class CanonicalReviewService {
       input.reviewedAt ??
       Date.now();
 
-    const updated:
-      KnowledgePackage = {
-        ...knowledgePackage,
+    const evidenceConsidered =
+      uniqueStrings(
+        input.evidenceConsidered ??
+        knowledgePackage
+          .sourceEvidenceRefs,
+      );
 
-        state:
+    if (
+      evidenceConsidered.length ===
+      0
+    ) {
+      throw new Error(
+        "canonical_review_evidence_required",
+      );
+    }
+
+    const review:
+      CanonicalReviewRecord = {
+        packageId:
+          knowledgePackage.id,
+
+        packageVersion:
+          knowledgePackage.version,
+
+        decision:
           input.decision,
 
-        updatedAt:
-          reviewedAt,
+        reviewerId,
 
-        metadata: {
-          ...knowledgePackage.metadata,
+        reviewedAt,
 
-          review: {
-            decision:
-              input.decision,
+        evidenceConsidered,
 
-            reviewerId:
-              input.reviewerId,
+        reason:
+          input.reason,
+      };
 
+    const reviewHistory = [
+      ...existingReviewHistory(
+        knowledgePackage,
+      ),
+      review,
+    ];
+
+    const approved =
+      input.decision ===
+      "approved";
+
+    const rejected =
+      input.decision ===
+      "rejected";
+
+    const remediationRequired =
+      input.decision ===
+      "remediation_required";
+
+    const nextState:
+      KnowledgePackage["state"] =
+      approved
+        ? "approved"
+        : rejected
+          ? "rejected"
+          : "validated";
+
+    const nextApprovalState:
+      KnowledgePackage["approvalState"] =
+      approved
+        ? "approved"
+        : rejected
+          ? "rejected"
+          : "remediation_required";
+
+    const updated:
+      KnowledgePackage = {
+      ...knowledgePackage,
+
+      state:
+        nextState,
+
+      approvalState:
+        nextApprovalState,
+
+      remediation:
+        remediationRequired
+          ? {
+              ...knowledgePackage
+                .remediation,
+
+              required:
+                true,
+
+              status:
+                "required",
+
+              updatedAt:
+                reviewedAt,
+            }
+          : knowledgePackage
+              .remediation,
+
+      lifecycleHistory: [
+        ...knowledgePackage
+          .lifecycleHistory,
+
+        {
+          state:
+            nextState,
+
+          at:
             reviewedAt,
 
-            reason:
-              input.reason,
-          },
+          reason:
+            input.reason ??
+            `canonical-review:${input.decision}`,
         },
-      };
+      ],
+
+      updatedAt:
+        reviewedAt,
+
+      metadata: {
+        ...knowledgePackage
+          .metadata,
+
+        review,
+
+        reviewHistory,
+      },
+    };
 
     this.packageService
       .registry
@@ -114,6 +306,8 @@ export class CanonicalReviewService {
 
       decision:
         input.decision,
+
+      review,
     };
   }
 }
