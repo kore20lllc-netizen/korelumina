@@ -90,9 +90,5 @@ export class KnowledgePreservationPlatform {
     this.packageService.packageValidated(
       validated,
     );
-
-    await this.publishingPipeline.publish(
-      validated,
-    );
   }
 }

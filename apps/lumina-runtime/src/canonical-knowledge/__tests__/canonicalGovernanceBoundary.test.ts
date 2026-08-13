@@ -203,3 +203,235 @@ test(
     );
   },
 );
+
+test(
+  "KnowledgePreservationPlatform preserve terminates at awaiting-review package and never invokes publisher",
+  async () => {
+    const platform =
+      new KnowledgePreservationPlatform();
+
+    let publisherInvocations =
+      0;
+
+    platform.compilerRegistry.register({
+      name:
+        "governance-boundary-test-compiler",
+
+      version:
+        "1.0.0",
+
+      supports:
+        () =>
+          true,
+
+      compile:
+        async () => [
+          candidate({
+            id:
+              "candidate:preservation-boundary",
+
+            confidence:
+              1,
+
+            status:
+              "approved",
+
+            evidenceRefs: [
+              "evidence:preservation-boundary",
+            ],
+          }),
+        ],
+    });
+
+    platform.publisherRegistry.register({
+      name:
+        "forbidden-preservation-publisher",
+
+      version:
+        "1.0.0",
+
+      publish:
+        async () => {
+          publisherInvocations +=
+            1;
+        },
+    });
+
+    await platform.preserve({
+      id:
+        "evidence:preservation-boundary",
+
+      type:
+        "document",
+
+      title:
+        "Preservation governance boundary",
+
+      source:
+        "canonical-governance-boundary-test",
+
+      capturedAt:
+        1,
+
+      observedAt:
+        1,
+
+      contentRef:
+        "memory://preservation-governance-boundary",
+
+      metadata: {
+        confidence:
+          1,
+      },
+
+      relationships:
+        {},
+    });
+
+    assert.equal(
+      publisherInvocations,
+      0,
+    );
+
+    assert.deepEqual(
+      platform.canonicalKnowledgeStore.list(),
+      [],
+    );
+
+    const knowledgePackage =
+      platform.packageService
+        .list()
+        .find(
+          (item) =>
+            item.sourceEvidenceRefs
+              .includes(
+                "evidence:preservation-boundary",
+              ),
+        );
+
+    assert.ok(
+      knowledgePackage,
+    );
+
+    assert.equal(
+      knowledgePackage.state,
+      "awaiting_review",
+    );
+  },
+);
+
+test(
+  "alternate KnowledgePlatform preserve path cannot publish or canonicalize validated high-confidence IR",
+  async () => {
+    const platform =
+      new KnowledgePlatform();
+
+    let publisherInvocations =
+      0;
+
+    platform.compilerRegistry.register({
+      name:
+        "alternate-governance-boundary-test-compiler",
+
+      version:
+        "1.0.0",
+
+      supports:
+        () =>
+          true,
+
+      compile:
+        async () => [
+          candidate({
+            id:
+              "candidate:alternate-preservation-boundary",
+
+            confidence:
+              1,
+
+            status:
+              "approved",
+
+            evidenceRefs: [
+              "evidence:alternate-preservation-boundary",
+            ],
+          }),
+        ],
+    });
+
+    platform.publisherRegistry.register({
+      name:
+        "forbidden-alternate-publisher",
+
+      version:
+        "1.0.0",
+
+      publish:
+        async () => {
+          publisherInvocations +=
+            1;
+        },
+    });
+
+    await platform.preserve({
+      id:
+        "evidence:alternate-preservation-boundary",
+
+      type:
+        "document",
+
+      title:
+        "Alternate preservation governance boundary",
+
+      source:
+        "canonical-governance-boundary-test",
+
+      capturedAt:
+        1,
+
+      observedAt:
+        1,
+
+      contentRef:
+        "memory://alternate-preservation-governance-boundary",
+
+      metadata: {
+        confidence:
+          1,
+      },
+
+      relationships:
+        {},
+    });
+
+    assert.equal(
+      publisherInvocations,
+      0,
+    );
+
+    assert.deepEqual(
+      platform.list(),
+      [],
+    );
+
+    const knowledgePackage =
+      platform.packageService
+        .list()
+        .find(
+          (item) =>
+            item.sourceEvidenceRefs
+              .includes(
+                "evidence:alternate-preservation-boundary",
+              ),
+        );
+
+    assert.ok(
+      knowledgePackage,
+    );
+
+    assert.equal(
+      knowledgePackage.state,
+      "awaiting_review",
+    );
+  },
+);

@@ -104,10 +104,6 @@ export class KnowledgePlatform {
     this.packageService.packageValidated(
       validated,
     );
-
-    await this.publishingPipeline.publish(
-      validated,
-    );
   }
 
   promote(
