@@ -15,3 +15,4 @@ export * from "./ExecutiveActionExecutionOperation.js";
 export * from "./ProjectFilesystemReadExecutor.js";
 export * from "./ExecutiveActionExecutorRegistry.js";
 export * from "./ExecutiveActionExecutionDispatcher.js";
+export * from "./ProjectFilesystemReplaceExecutor.js";
