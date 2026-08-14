@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import ts from "typescript";
 
 const ROOT = process.cwd();
 
@@ -120,312 +121,6 @@ function normalizeWhitespace(
     .trim();
 }
 
-function extractBalanced(
-  source,
-  start,
-  open,
-  close,
-) {
-  let depth = 0;
-  let quote = null;
-  let escaped = false;
-
-  for (
-    let index = start;
-    index < source.length;
-    index += 1
-  ) {
-    const char =
-      source[index];
-
-    if (
-      quote
-    ) {
-      if (
-        escaped
-      ) {
-        escaped = false;
-        continue;
-      }
-
-      if (
-        char === "\\"
-      ) {
-        escaped = true;
-        continue;
-      }
-
-      if (
-        char === quote
-      ) {
-        quote = null;
-      }
-
-      continue;
-    }
-
-    if (
-      char === '"' ||
-      char === "'" ||
-      char === "`"
-    ) {
-      quote = char;
-      continue;
-    }
-
-    if (
-      char === open
-    ) {
-      depth += 1;
-      continue;
-    }
-
-    if (
-      char === close
-    ) {
-      depth -= 1;
-
-      if (
-        depth === 0
-      ) {
-        return source.slice(
-          start,
-          index + 1,
-        );
-      }
-    }
-  }
-
-  throw new Error(
-    `Unbalanced ${open}${close} expression`,
-  );
-}
-
-function extractAttribute(
-  tag,
-  name,
-) {
-  const matcher =
-    new RegExp(
-      `\\b${name}\\s*=\\s*`,
-    );
-
-  const match =
-    matcher.exec(
-      tag,
-    );
-
-  if (
-    !match
-  ) {
-    return null;
-  }
-
-  const start =
-    match.index +
-    match[0].length;
-
-  const first =
-    tag[start];
-
-  if (
-    first === '"' ||
-    first === "'"
-  ) {
-    const end =
-      tag.indexOf(
-        first,
-        start + 1,
-      );
-
-    if (
-      end === -1
-    ) {
-      return null;
-    }
-
-    return normalizeWhitespace(
-      tag.slice(
-        start,
-        end + 1,
-      ),
-    );
-  }
-
-  if (
-    first === "{"
-  ) {
-    return normalizeWhitespace(
-      extractBalanced(
-        tag,
-        start,
-        "{",
-        "}",
-      ),
-    );
-  }
-
-  return null;
-}
-
-function extractOpeningTags(
-  source,
-) {
-  const tags = [];
-
-  let index = 0;
-
-  while (
-    index < source.length
-  ) {
-    const start =
-      source.indexOf(
-        "<",
-        index,
-      );
-
-    if (
-      start === -1
-    ) {
-      break;
-    }
-
-    const next =
-      source[start + 1];
-
-    if (
-      next === "/" ||
-      next === "!" ||
-      next === ">"
-    ) {
-      index =
-        start + 1;
-
-      continue;
-    }
-
-    if (
-      !/[A-Za-z]/.test(
-        next ?? "",
-      )
-    ) {
-      index =
-        start + 1;
-
-      continue;
-    }
-
-    let cursor =
-      start + 1;
-
-    while (
-      cursor <
-        source.length &&
-      /[A-Za-z0-9_.:-]/.test(
-        source[cursor],
-      )
-    ) {
-      cursor += 1;
-    }
-
-    const name =
-      source.slice(
-        start + 1,
-        cursor,
-      );
-
-    let braceDepth = 0;
-    let quote = null;
-    let escaped = false;
-    let end = cursor;
-
-    for (
-      ;
-      end < source.length;
-      end += 1
-    ) {
-      const char =
-        source[end];
-
-      if (
-        quote
-      ) {
-        if (
-          escaped
-        ) {
-          escaped = false;
-          continue;
-        }
-
-        if (
-          char === "\\"
-        ) {
-          escaped = true;
-          continue;
-        }
-
-        if (
-          char === quote
-        ) {
-          quote = null;
-        }
-
-        continue;
-      }
-
-      if (
-        char === '"' ||
-        char === "'" ||
-        char === "`"
-      ) {
-        quote = char;
-        continue;
-      }
-
-      if (
-        char === "{"
-      ) {
-        braceDepth += 1;
-        continue;
-      }
-
-      if (
-        char === "}"
-      ) {
-        braceDepth -= 1;
-        continue;
-      }
-
-      if (
-        char === ">" &&
-        braceDepth === 0
-      ) {
-        break;
-      }
-    }
-
-    if (
-      end >= source.length
-    ) {
-      break;
-    }
-
-    tags.push({
-      name,
-      source:
-        source.slice(
-          start,
-          end + 1,
-        ),
-    });
-
-    index =
-      end + 1;
-  }
-
-  return tags;
-}
-
 const PRESENTATION_ATTRIBUTES = [
   "className",
   "variant",
@@ -437,6 +132,70 @@ const PRESENTATION_ATTRIBUTES = [
   "state",
   "layout",
 ];
+
+function getJsxTagName(
+  node,
+  sourceFile,
+) {
+  return node.tagName.getText(
+    sourceFile,
+  );
+}
+
+function getPresentationAttributes(
+  attributes,
+  sourceFile,
+) {
+  const result = {};
+
+  for (
+    const property
+    of attributes.properties
+  ) {
+    if (
+      !ts.isJsxAttribute(
+        property,
+      )
+    ) {
+      continue;
+    }
+
+    const name =
+      property.name.getText(
+        sourceFile,
+      );
+
+    if (
+      !PRESENTATION_ATTRIBUTES.includes(
+        name,
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      !property.initializer
+    ) {
+      result[name] =
+        "true";
+
+      continue;
+    }
+
+    result[name] =
+      property.initializer
+        .getText(
+          sourceFile,
+        )
+        .replace(
+          /\s+/g,
+          " ",
+        )
+        .trim();
+  }
+
+  return result;
+}
 
 function presentationFingerprint(
   relativeFile,
@@ -463,48 +222,52 @@ function presentationFingerprint(
       "utf8",
     );
 
-  const tags =
-    extractOpeningTags(
+  const sourceFile =
+    ts.createSourceFile(
+      relativeFile,
       source,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TSX,
     );
 
-  const presentation =
-    tags.map(
-      (
-        {
-          name,
-          source:
-            tagSource,
-        },
-      ) => {
-        const attributes = {};
+  const presentation = [];
 
-        for (
-          const attribute
-          of PRESENTATION_ATTRIBUTES
-        ) {
-          const value =
-            extractAttribute(
-              tagSource,
-              attribute,
-            );
+  function visit(
+    node,
+  ) {
+    if (
+      ts.isJsxOpeningElement(
+        node,
+      ) ||
+      ts.isJsxSelfClosingElement(
+        node,
+      )
+    ) {
+      presentation.push({
+        element:
+          getJsxTagName(
+            node,
+            sourceFile,
+          ),
 
-          if (
-            value !== null
-          ) {
-            attributes[
-              attribute
-            ] = value;
-          }
-        }
+        attributes:
+          getPresentationAttributes(
+            node.attributes,
+            sourceFile,
+          ),
+      });
+    }
 
-        return {
-          element:
-            name,
-          attributes,
-        };
-      },
+    ts.forEachChild(
+      node,
+      visit,
     );
+  }
+
+  visit(
+    sourceFile,
+  );
 
   const normalized =
     JSON.stringify(

@@ -87,6 +87,15 @@ import type {
 } from "../data/knowledgeCapsuleProjection";
 
 import {
+  createKnowledgeDistributionProjection,
+  emptyKnowledgeDistributionProjection,
+} from "../data/knowledgeDistributionProjection";
+
+import type {
+  KnowledgeDistributionProjection,
+} from "../data/knowledgeDistributionProjection";
+
+import {
   createCanonicalReviewProjection,
 } from "../data/canonicalReviewProjection";
 
@@ -219,6 +228,14 @@ export function KnowledgeProductionCommandCenter() {
   );
 
   const [
+    knowledgeDistributionProjection,
+    setKnowledgeDistributionProjection,
+  ] = useState<KnowledgeDistributionProjection>(
+    () =>
+      emptyKnowledgeDistributionProjection,
+  );
+
+  const [
     canonicalReviewProjection,
     setCanonicalReviewProjection,
   ] = useState<CanonicalReviewProjection>(
@@ -250,9 +267,18 @@ export function KnowledgeProductionCommandCenter() {
           return;
         }
 
-        setKnowledgeCapsuleProjection(
+        const capsuleProjection =
           createKnowledgeCapsuleProductionProjection(
             snapshot,
+          );
+
+        setKnowledgeCapsuleProjection(
+          capsuleProjection,
+        );
+
+        setKnowledgeDistributionProjection(
+          createKnowledgeDistributionProjection(
+            capsuleProjection.capsules,
           ),
         );
 
@@ -821,8 +847,8 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <KnowledgeDistributionHub
-          capsules={knowledgeCapsules}
-          records={knowledgeDistributionRecords}
+          capsules={knowledgeCapsuleProjection.capsules}
+          records={knowledgeDistributionProjection.records}
           selectedCapsuleId={selectedCapsuleId}
           selectedConsumerId={
             selection?.kind === "distribution-consumer"
@@ -854,7 +880,7 @@ export function KnowledgeProductionCommandCenter() {
       </section>
 
       <ConsumerIntelligence
-        records={knowledgeDistributionRecords}
+        records={knowledgeDistributionProjection.records}
         selectedConsumerId={
           selection?.kind === "consumer-intelligence"
             ? selection.intelligenceConsumerId
