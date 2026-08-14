@@ -23,6 +23,10 @@ import {
   CanonicalKnowledgeStore,
 } from "../../../canonical-knowledge/CanonicalKnowledgeStore.js";
 
+import {
+  adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
+} from "../../../knowledge/organizational-memory/index.js";
+
 function resolveRepositoryRoot(): string {
   let current =
     process.cwd();
@@ -264,13 +268,6 @@ test(
       promotionService
         .promoteApprovedPackage(
           packageCandidate.id,
-          {
-            organizationId:
-              "organization:korelumina",
-
-            projectId:
-              "project:korelumina",
-          },
         );
 
     assert.equal(
@@ -283,16 +280,28 @@ test(
       1,
     );
 
-    assert.equal(
-      promoted.organizationalMemoryRecords.length,
-      1,
-    );
-
     const canonical =
       promoted.canonicalItems[0];
 
+    const organizationalMemoryRecords =
+      adaptCanonicalKnowledgeToOrganizationalMemoryRecords({
+        organizationId:
+          "organization:korelumina",
+
+        projectId:
+          "project:korelumina",
+
+        items:
+          promoted.canonicalItems,
+      });
+
+    assert.equal(
+      organizationalMemoryRecords.length,
+      1,
+    );
+
     const memory =
-      promoted.organizationalMemoryRecords[0];
+      organizationalMemoryRecords[0];
 
     assert.equal(
       canonical.status,

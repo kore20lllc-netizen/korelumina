@@ -11,14 +11,6 @@ import {
 } from "../../canonical-knowledge/KnowledgePromoter.js";
 
 import type {
-  OrganizationalMemoryRecord,
-} from "../../knowledge/organizational-memory/index.js";
-
-import {
-  adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
-} from "../../knowledge/organizational-memory/index.js";
-
-import type {
   KnowledgePackage,
 } from "../package/index.js";
 
@@ -34,28 +26,12 @@ interface ReviewMetadata {
   reason?: unknown;
 }
 
-export interface GovernedPromotionContext {
-  organizationId: string;
-  projectId?: string;
-  teamId?: string;
-}
-
 export interface GovernedPromotionResult {
   knowledgePackage:
     KnowledgePackage;
 
   canonicalItems:
     CanonicalKnowledgeItem[];
-
-  organizationalMemoryRecords:
-    OrganizationalMemoryRecord[];
-}
-
-export interface OrganizationalMemoryPersistence {
-  saveAll(
-    records:
-      readonly OrganizationalMemoryRecord[],
-  ): void;
 }
 
 export class GovernedCanonicalPromotionService {
@@ -68,15 +44,10 @@ export class GovernedCanonicalPromotionService {
 
     private readonly canonicalStore =
       new CanonicalKnowledgeStore(),
-
-    private readonly organizationalMemoryPersistence?:
-      OrganizationalMemoryPersistence,
   ) {}
 
   promoteApprovedPackage(
     packageId: string,
-    context?:
-      GovernedPromotionContext,
   ): GovernedPromotionResult {
     const knowledgePackage =
       this.packageService.get(
@@ -140,10 +111,67 @@ export class GovernedCanonicalPromotionService {
                 packageId:
                   knowledgePackage.id,
 
+                packageVersion:
+                  knowledgePackage.version,
+
+                authority:
+                  knowledgePackage.authority,
+
+                owner:
+                  knowledgePackage.owner,
+
+                scope:
+                  knowledgePackage.scope,
+
+                destination:
+                  knowledgePackage.destination,
+
                 sourceEvidenceRefs:
                   [
                     ...knowledgePackage
                       .sourceEvidenceRefs,
+                  ],
+
+                provenance: {
+                  evidenceIds:
+                    [
+                      ...knowledgePackage
+                        .provenance
+                        .evidenceIds,
+                    ],
+
+                  sourceLocations:
+                    [
+                      ...knowledgePackage
+                        .provenance
+                        .sourceLocations,
+                    ],
+
+                  contentRefs:
+                    [
+                      ...knowledgePackage
+                        .provenance
+                        .contentRefs,
+                    ],
+
+                  sources:
+                    [
+                      ...knowledgePackage
+                        .provenance
+                        .sources,
+                    ],
+                },
+
+                lineage:
+                  [
+                    ...knowledgePackage
+                      .lineage,
+                  ],
+
+                dependencies:
+                  [
+                    ...knowledgePackage
+                      .dependencies,
                   ],
 
                 reviewDecision:
@@ -178,6 +206,21 @@ export class GovernedCanonicalPromotionService {
         state:
           "canonical",
 
+        lifecycleHistory: [
+          ...knowledgePackage
+            .lifecycleHistory,
+          {
+            state:
+              "canonical",
+
+            at:
+              now,
+
+            reason:
+              "governed_canonical_promotion",
+          },
+        ],
+
         updatedAt:
           now,
 
@@ -207,41 +250,11 @@ export class GovernedCanonicalPromotionService {
       updated,
     );
 
-    const organizationalMemoryRecords =
-      context
-        ? adaptCanonicalKnowledgeToOrganizationalMemoryRecords({
-            organizationId:
-              context.organizationId,
-
-            projectId:
-              context.projectId,
-
-            teamId:
-              context.teamId,
-
-            items:
-              canonicalItems,
-          })
-        : [];
-
-    if (
-      organizationalMemoryRecords.length >
-        0 &&
-      this.organizationalMemoryPersistence
-    ) {
-      this.organizationalMemoryPersistence
-        .saveAll(
-          organizationalMemoryRecords,
-        );
-    }
-
     return {
       knowledgePackage:
         updated,
 
       canonicalItems,
-
-      organizationalMemoryRecords,
     };
   }
 }

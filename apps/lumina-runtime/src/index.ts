@@ -25,6 +25,7 @@ import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
+import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
@@ -149,14 +150,15 @@ registerOrganizationalMemoryProvider(
 
 export const runtimeCanonicalReviewService =
   new CanonicalReviewService(
-    knowledgePlatform.packageService,
+    runtimeKnowledgePreservationPlatform
+      .packageService,
   );
 
 export const runtimeGovernedPromotionService =
   new GovernedCanonicalPromotionService(
-    knowledgePlatform.packageService,
+    runtimeKnowledgePreservationPlatform
+      .packageService,
     knowledgePlatform.store,
-    runtimeOrganizationalMemoryStore,
   );
 
 const knowledgeContextBuilder =
@@ -428,6 +430,14 @@ registerCanonicalReviewRoutes(
     packageService:
       runtimeKnowledgePreservationPlatform
         .packageService,
+  },
+);
+
+registerCanonicalPromotionRoutes(
+  app,
+  {
+    promotionService:
+      runtimeGovernedPromotionService,
   },
 );
 

@@ -21,6 +21,10 @@ import {
   GovernedCanonicalPromotionService,
 } from "../GovernedCanonicalPromotionService.js";
 
+import {
+  adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
+} from "../../../knowledge/organizational-memory/index.js";
+
 function candidate(
   id: string,
 ): KnowledgeIRItem {
@@ -80,7 +84,7 @@ function candidate(
 }
 
 test(
-  "governed promotion returns organizational memory records derived from canonical items",
+  "organizational memory adaptation consumes governed canonical output",
   () => {
     const packageService =
       new KnowledgePackageService();
@@ -121,16 +125,6 @@ test(
         canonicalStore,
       ).promoteApprovedPackage(
         created.id,
-        {
-          organizationId:
-            "organization:korelumina",
-
-          projectId:
-            "project:korelumina",
-
-          teamId:
-            "team:architecture",
-        },
       );
 
     assert.equal(
@@ -138,16 +132,31 @@ test(
       1,
     );
 
-    assert.equal(
-      result.organizationalMemoryRecords.length,
-      1,
-    );
-
     const canonical =
       result.canonicalItems[0];
 
+    const organizationalMemoryRecords =
+      adaptCanonicalKnowledgeToOrganizationalMemoryRecords({
+        organizationId:
+          "organization:korelumina",
+
+        projectId:
+          "project:korelumina",
+
+        teamId:
+          "team:architecture",
+
+        items:
+          result.canonicalItems,
+      });
+
+    assert.equal(
+      organizationalMemoryRecords.length,
+      1,
+    );
+
     const memory =
-      result.organizationalMemoryRecords[0];
+      organizationalMemoryRecords[0];
 
     assert.equal(
       memory.id,
@@ -189,7 +198,7 @@ test(
 );
 
 test(
-  "organizational memory projection is optional and does not gate canonicalization",
+  "canonical promotion does not require organizational memory adaptation",
   () => {
     const packageService =
       new KnowledgePackageService();
@@ -242,9 +251,9 @@ test(
       1,
     );
 
-    assert.deepEqual(
-      result.organizationalMemoryRecords,
-      [],
+    assert.equal(
+      result.knowledgePackage.state,
+      "canonical",
     );
   },
 );
@@ -276,10 +285,6 @@ test(
           canonicalStore,
         ).promoteApprovedPackage(
           created.id,
-          {
-            organizationId:
-              "organization:korelumina",
-          },
         ),
       /knowledge_package_not_approved/,
     );

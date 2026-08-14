@@ -10,6 +10,10 @@ import type {
 } from "../../../knowledge/organizational-memory/index.js";
 
 import {
+  adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
+} from "../../../knowledge/organizational-memory/index.js";
+
+import {
   KnowledgePackageService,
 } from "../../package/index.js";
 
@@ -18,7 +22,7 @@ import {
 } from "../GovernedCanonicalPromotionService.js";
 
 test(
-  "persists organizational memory only after governed canonical promotion",
+  "organizational memory can be explicitly persisted after governed canonical promotion",
   () => {
     const packageService =
       new KnowledgePackageService();
@@ -128,19 +132,11 @@ test(
       new GovernedCanonicalPromotionService(
         packageService,
         canonicalStore,
-        persistence,
       );
 
     const result =
       service.promoteApprovedPackage(
         knowledgePackage.id,
-        {
-          organizationId:
-            "organization:korelumina",
-
-          projectId:
-            "project:korelumina",
-        },
       );
 
     assert.equal(
@@ -148,8 +144,24 @@ test(
       "canonical",
     );
 
+    const organizationalMemoryRecords =
+      adaptCanonicalKnowledgeToOrganizationalMemoryRecords({
+        organizationId:
+          "organization:korelumina",
+
+        projectId:
+          "project:korelumina",
+
+        items:
+          result.canonicalItems,
+      });
+
+    persistence.saveAll(
+      organizationalMemoryRecords,
+    );
+
     assert.equal(
-      result.organizationalMemoryRecords.length,
+      organizationalMemoryRecords.length,
       1,
     );
 
@@ -160,7 +172,7 @@ test(
 
     assert.equal(
       persisted[0].id,
-      result.organizationalMemoryRecords[0].id,
+      organizationalMemoryRecords[0].id,
     );
 
     assert.equal(
@@ -171,7 +183,7 @@ test(
 );
 
 test(
-  "does not persist organizational memory without organization context",
+  "canonical promotion does not implicitly persist organizational memory",
   () => {
     const packageService =
       new KnowledgePackageService();
@@ -269,7 +281,6 @@ test(
       new GovernedCanonicalPromotionService(
         packageService,
         canonicalStore,
-        persistence,
       );
 
     const result =
@@ -277,9 +288,9 @@ test(
         knowledgePackage.id,
       );
 
-    assert.deepEqual(
-      result.organizationalMemoryRecords,
-      [],
+    assert.equal(
+      result.knowledgePackage.state,
+      "canonical",
     );
 
     assert.equal(
