@@ -26,6 +26,7 @@ import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
+import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
@@ -45,6 +46,7 @@ import {
 } from "./knowledge-platform/runtime/index.js";
 
 import {
+  GovernedCanonicalMemoryAdaptationService,
   registerOrganizationalMemoryProvider,
 } from "./knowledge/organizational-memory/index.js";
 
@@ -141,6 +143,11 @@ export const runtimeOrganizationalMemoryStore =
 
 export const runtimeOrganizationalMemoryProvider =
   new RuntimeOrganizationalMemoryProvider(
+    runtimeOrganizationalMemoryStore,
+  );
+
+export const runtimeGovernedCanonicalMemoryAdaptationService =
+  new GovernedCanonicalMemoryAdaptationService(
     runtimeOrganizationalMemoryStore,
   );
 
@@ -438,6 +445,21 @@ registerCanonicalPromotionRoutes(
   {
     promotionService:
       runtimeGovernedPromotionService,
+  },
+);
+
+registerOrganizationalMemoryAdaptationRoutes(
+  app,
+  {
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+
+    canonicalStore:
+      knowledgePlatform.store,
+
+    adaptationService:
+      runtimeGovernedCanonicalMemoryAdaptationService,
   },
 );
 

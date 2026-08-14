@@ -150,9 +150,48 @@ test(
         packageId:
           "knowledge-package:test",
 
+        packageVersion:
+          null,
+
+        authority:
+          null,
+
+        owner:
+          null,
+
+        scope:
+          null,
+
+        destination:
+          null,
+
         sourceEvidenceRefs: [
           "evidence:test",
         ],
+
+        provenance: {
+          evidenceIds: [
+            "evidence:test",
+          ],
+
+          sourceLocations:
+            [],
+
+          contentRefs:
+            [],
+
+          sources:
+            [],
+        },
+
+        lineage:
+          [],
+
+        dependencies:
+          [],
+
+        supersedes:
+          [],
 
         reviewDecision:
           "approved",

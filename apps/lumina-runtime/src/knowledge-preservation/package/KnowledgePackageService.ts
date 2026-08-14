@@ -84,6 +84,86 @@ export class KnowledgePackageService {
     return persisted;
   }
 
+  markAdapted(
+    id: string,
+    organizationalMemoryRecordIds:
+      readonly string[],
+  ): KnowledgePackage {
+    const knowledgePackage =
+      this.get(
+        id,
+      );
+
+    if (
+      !knowledgePackage
+    ) {
+      throw new Error(
+        "knowledge_package_not_found",
+      );
+    }
+
+    if (
+      knowledgePackage.state !==
+      "canonical"
+    ) {
+      throw new Error(
+        "knowledge_package_not_canonical",
+      );
+    }
+
+    const now =
+      Date.now();
+
+    const updated:
+      KnowledgePackage = {
+        ...knowledgePackage,
+
+        state:
+          "adapted",
+
+        updatedAt:
+          now,
+
+        lifecycleHistory: [
+          ...knowledgePackage
+            .lifecycleHistory,
+          {
+            state:
+              "adapted",
+
+            at:
+              now,
+
+            reason:
+              "organizational_memory_adapted",
+          },
+        ],
+
+        metadata: {
+          ...knowledgePackage.metadata,
+
+          organizationalMemoryAdaptation: {
+            adaptedAt:
+              now,
+
+            recordIds: [
+              ...organizationalMemoryRecordIds,
+            ],
+          },
+        },
+      };
+
+    this.registry.register(
+      updated,
+    );
+
+    saveKnowledgePackage(
+      updated,
+    );
+
+    return updated;
+  }
+
   list(): KnowledgePackage[] {
     const persisted =
       listKnowledgePackages();

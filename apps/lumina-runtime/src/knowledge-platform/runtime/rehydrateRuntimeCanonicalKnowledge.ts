@@ -12,6 +12,7 @@ import type {
 
 import {
   KnowledgePackageService,
+  normalizeKnowledgePackage,
 } from "../../knowledge-preservation/package/index.js";
 
 import type {
@@ -34,6 +35,11 @@ function rehydrateCanonicalItems(
   knowledgePackage:
     KnowledgePackage,
 ): CanonicalKnowledgeItem[] {
+  const normalizedPackage =
+    normalizeKnowledgePackage(
+      knowledgePackage,
+    );
+
   const review =
     knowledgePackage.metadata
       .review as
@@ -47,8 +53,12 @@ function rehydrateCanonicalItems(
       | undefined;
 
   if (
-    knowledgePackage.state !==
-      "canonical" ||
+    (
+      knowledgePackage.state !==
+        "canonical" &&
+      knowledgePackage.state !==
+        "adapted"
+    ) ||
     !review ||
     review.decision !==
       "approved" ||
@@ -111,10 +121,74 @@ function rehydrateCanonicalItems(
               packageId:
                 knowledgePackage.id,
 
+              packageVersion:
+                normalizedPackage.version,
+
+              authority:
+                normalizedPackage.authority,
+
+              owner:
+                normalizedPackage.owner,
+
+              scope:
+                normalizedPackage.scope,
+
+              destination:
+                normalizedPackage.destination,
+
               sourceEvidenceRefs:
                 [
-                  ...knowledgePackage
+                  ...normalizedPackage
                     .sourceEvidenceRefs,
+                ],
+
+              provenance: {
+                evidenceIds:
+                  [
+                    ...normalizedPackage
+                      .provenance
+                      .evidenceIds,
+                  ],
+
+                sourceLocations:
+                  [
+                    ...normalizedPackage
+                      .provenance
+                      .sourceLocations,
+                  ],
+
+                contentRefs:
+                  [
+                    ...normalizedPackage
+                      .provenance
+                      .contentRefs,
+                  ],
+
+                sources:
+                  [
+                    ...normalizedPackage
+                      .provenance
+                      .sources,
+                  ],
+              },
+
+              lineage:
+                [
+                  ...normalizedPackage
+                    .lineage,
+                ],
+
+              dependencies:
+                [
+                  ...normalizedPackage
+                    .dependencies,
+                ],
+
+              supersedes:
+                [
+                  ...normalizedPackage
+                    .supersession
+                    .supersedes,
                 ],
 
               reviewDecision:
@@ -163,7 +237,9 @@ export function rehydrateRuntimeCanonicalKnowledge(
       .filter(
         (knowledgePackage) =>
           knowledgePackage.state ===
-          "canonical",
+            "canonical" ||
+          knowledgePackage.state ===
+            "adapted",
       )
       .flatMap(
         (knowledgePackage) =>
