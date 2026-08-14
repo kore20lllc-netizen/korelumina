@@ -59,6 +59,18 @@ import {
   LuminaSectionNavigator,
 } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
 
+import {
+  createCanonicalReviewProjection,
+} from "../data/canonicalReviewProjection";
+
+import type {
+  CanonicalReviewProjection,
+} from "../data/canonicalReviewProjection";
+
+import {
+  getCanonicalReviewSnapshot,
+} from "@/services/knowledgeOperationsService";
+
 type KnowledgeSelectionKind =
   | "capsule"
   | "station"
@@ -153,6 +165,68 @@ export function KnowledgeProductionCommandCenter() {
   ] = useState<KnowledgeProductionSelection | null>(
     null,
   );
+
+  const [
+    canonicalReviewProjection,
+    setCanonicalReviewProjection,
+  ] = useState<CanonicalReviewProjection>(
+    () =>
+      createCanonicalReviewProjection({
+        ok: true,
+        packages: [],
+        summary: {
+          total: 0,
+          pending: 0,
+          approved: 0,
+          rejected: 0,
+          remediationRequired: 0,
+        },
+      }),
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshCanonicalReview() {
+      try {
+        const snapshot =
+          await getCanonicalReviewSnapshot();
+
+        if (cancelled) {
+          return;
+        }
+
+        setCanonicalReviewProjection(
+          createCanonicalReviewProjection(
+            snapshot,
+          ),
+        );
+      } catch {
+        /*
+         * Preserve the last truthful projection.
+         * Never fall back to fixture governance data.
+         */
+      }
+    }
+
+    void refreshCanonicalReview();
+
+    const intervalId =
+      window.setInterval(
+        () => {
+          void refreshCanonicalReview();
+        },
+        10_000,
+      );
+
+    return () => {
+      cancelled = true;
+
+      window.clearInterval(
+        intervalId,
+      );
+    };
+  }, []);
 
   const inspectorClosedByUserRef =
     useRef(false);
@@ -556,6 +630,7 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <CanonicalReview
+          projection={canonicalReviewProjection}
           selectedReviewId={
             selection?.kind === "canonical-review"
               ? selection.canonicalReviewId

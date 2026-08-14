@@ -39,7 +39,12 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import type {
+  CanonicalReviewProjection,
+} from "../data/canonicalReviewProjection";
+
 type CanonicalReviewProps = {
+  projection: CanonicalReviewProjection;
   selectedReviewId?: string;
   selectedTimelineEventId?: string;
   onReviewSelect: (
@@ -51,94 +56,6 @@ type CanonicalReviewProps = {
     eventId: string,
   ) => void;
 };
-
-const REVIEW_QUEUE = [
-  {
-    id: "KCAP-2026-042",
-    capsuleId: "capsule-144",
-    title: "Runtime Isolation Recovery Standard",
-    domain: "Runtime Architecture",
-    authority: "Architecture Council",
-    reviewers: "3 of 4 assigned",
-    conflict: "No unresolved conflicts",
-    readiness: 92,
-    state: "Ready for final review",
-    tone: "emerald" as const,
-  },
-  {
-    id: "KCAP-2026-039",
-    capsuleId: null,
-    title: "Knowledge Package Integrity Protocol",
-    domain: "Knowledge Constitution",
-    authority: "Constitutional Review Board",
-    reviewers: "4 of 5 assigned",
-    conflict: "1 constitutional interpretation",
-    readiness: 74,
-    state: "Decision required",
-    tone: "amber" as const,
-  },
-  {
-    id: "KCAP-2026-036",
-    capsuleId: null,
-    title: "Mission Recovery Evidence Standard",
-    domain: "Mission System",
-    authority: "Mission Governance",
-    reviewers: "2 of 4 assigned",
-    conflict: "Supersession scope disputed",
-    readiness: 58,
-    state: "Review blocked",
-    tone: "rose" as const,
-  },
-];
-
-const TIMELINE = [
-  {
-    id: "canonical-review-event-evidence-certified",
-    capsuleId: "capsule-144",
-    label: "Evidence certified",
-    detail: "Validation Council · 09:14",
-    state: "complete",
-  },
-  {
-    id: "canonical-review-event-scope-reviewed",
-    capsuleId: "capsule-144",
-    label: "Constitutional scope reviewed",
-    detail: "Chief Systems Architect · 10:02",
-    state: "complete",
-  },
-  {
-    id: "canonical-review-event-authority-review",
-    capsuleId: "capsule-144",
-    label: "Authority review",
-    detail: "Architecture Council · In progress",
-    state: "active",
-  },
-  {
-    id: "canonical-review-event-publication-decision",
-    capsuleId: "capsule-144",
-    label: "Publication decision",
-    detail: "Required before canonical promotion",
-    state: "waiting",
-  },
-];
-
-const AUTHORITIES = [
-  {
-    title: "Constitutional authority",
-    value: "Knowledge Constitution",
-    detail: "Defines admissibility and canonical constraints.",
-  },
-  {
-    title: "Domain authority",
-    value: "Architecture Council",
-    detail: "Owns technical scope and supersession decisions.",
-  },
-  {
-    title: "Publication authority",
-    value: "Chief Systems Architect",
-    detail: "Certifies organizational publication readiness.",
-  },
-];
 
 function readinessTone(
   value: number,
@@ -155,6 +72,7 @@ function readinessTone(
 }
 
 export function CanonicalReview({
+  projection,
   selectedReviewId,
   selectedTimelineEventId,
   onReviewSelect,
@@ -211,7 +129,7 @@ export function CanonicalReview({
                   Awaiting review
                 </div>
                 <div className="mt-1 text-xl font-semibold text-amber-100">
-                  12
+                  {projection.summary.awaitingReview}
                 </div>
                 </div>
               </LuminaFlagshipCard>
@@ -225,7 +143,7 @@ export function CanonicalReview({
                   Conflicts
                 </div>
                 <div className="mt-1 text-xl font-semibold text-rose-100">
-                  3
+                  {projection.summary.conflicts}
                 </div>
                 </div>
               </LuminaFlagshipCard>
@@ -239,7 +157,7 @@ export function CanonicalReview({
                   Reviewers active
                 </div>
                 <div className="mt-1 text-xl font-semibold text-cyan-100">
-                  18
+                  {projection.summary.reviewersActive}
                 </div>
                 </div>
               </LuminaFlagshipCard>
@@ -253,7 +171,7 @@ export function CanonicalReview({
                   Ready to publish
                 </div>
                 <div className="mt-1 text-xl font-semibold text-emerald-100">
-                  5
+                  {projection.summary.readyToPublish}
                 </div>
                 </div>
               </LuminaFlagshipCard>
@@ -268,7 +186,7 @@ export function CanonicalReview({
           >
         <LuminaExecutiveCard
           title="Review queue"
-          value="12"
+          value={projection.metrics.reviewQueue}
           description="Knowledge Packages awaiting governance."
           accentKey="amber"
           icon={<FileClock className="h-4 w-4 text-amber-300" />}
@@ -276,7 +194,7 @@ export function CanonicalReview({
 
         <LuminaExecutiveCard
           title="Required reviewers"
-          value="18"
+          value={projection.metrics.requiredReviewers}
           description="Assigned authorities across active reviews."
           accentKey="cyan"
           icon={<Users className="h-4 w-4 text-cyan-300" />}
@@ -284,7 +202,7 @@ export function CanonicalReview({
 
         <LuminaExecutiveCard
           title="Pending decisions"
-          value="7"
+          value={projection.metrics.pendingDecisions}
           description="Authority decisions required before promotion."
           accentKey="violet"
           icon={<Clock3 className="h-4 w-4 text-violet-300" />}
@@ -292,7 +210,7 @@ export function CanonicalReview({
 
         <LuminaExecutiveCard
           title="Publication readiness"
-          value="82%"
+          value={projection.metrics.publicationReadiness}
           description="Average readiness across the governance queue."
           accentKey="emerald"
           icon={<BadgeCheck className="h-4 w-4 text-emerald-300" />}
@@ -321,13 +239,13 @@ export function CanonicalReview({
             }
             trailingRegion={
               <div className="rounded-full border border-cyan-300/18 bg-cyan-300/[0.05] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
-                3 priority reviews
+                {projection.metrics.priorityReviews}
               </div>
             }
           />
 
           <div className="mt-5 grid gap-4">
-            {REVIEW_QUEUE.map((item) => {
+            {projection.reviewQueue.map((item) => {
               const selectable =
                 item.capsuleId !== null;
               const selected =
@@ -502,14 +420,14 @@ export function CanonicalReview({
             </div>
 
             <div className="mt-5 grid gap-3">
-              {AUTHORITIES.map((authority, index) => (
+              {projection.authorities.map((authority, index) => (
                 <LuminaFlagshipCard
                   key={authority.title}
                   as="article"
                   className="relative rounded-[16px] p-3"
                 >
                   <div className="relative z-10">
-                    {index < AUTHORITIES.length - 1 ? (
+                    {index < projection.authorities.length - 1 ? (
                       <div className="absolute left-4 top-full h-3 w-px bg-violet-300/24" />
                     ) : null}
 
@@ -614,7 +532,7 @@ export function CanonicalReview({
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {TIMELINE.map((item, index) => {
+            {projection.timeline.map((item, index) => {
               const selected =
                 selectedTimelineEventId ===
                 item.id;
