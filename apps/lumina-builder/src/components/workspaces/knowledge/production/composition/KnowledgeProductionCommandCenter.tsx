@@ -60,6 +60,33 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
 
 import {
+  createOrganizationalMemoryProjection,
+  emptyOrganizationalMemoryProjection,
+} from "../data/organizationalMemoryProjection";
+
+import type {
+  OrganizationalMemoryProjection,
+} from "../data/organizationalMemoryProjection";
+
+import {
+  createCanonicalKnowledgeProjection,
+  emptyCanonicalKnowledgeProjection,
+} from "../data/canonicalKnowledgeProjection";
+
+import type {
+  CanonicalKnowledgeProjection,
+} from "../data/canonicalKnowledgeProjection";
+
+import {
+  createKnowledgeCapsuleProductionProjection,
+  emptyKnowledgeCapsuleProductionProjection,
+} from "../data/knowledgeCapsuleProjection";
+
+import type {
+  KnowledgeCapsuleProductionProjection,
+} from "../data/knowledgeCapsuleProjection";
+
+import {
   createCanonicalReviewProjection,
 } from "../data/canonicalReviewProjection";
 
@@ -69,6 +96,7 @@ import type {
 
 import {
   getCanonicalReviewSnapshot,
+  getKnowledgeProductionLifecycleSnapshot,
 } from "@/services/knowledgeOperationsService";
 
 type KnowledgeSelectionKind =
@@ -167,6 +195,30 @@ export function KnowledgeProductionCommandCenter() {
   );
 
   const [
+    organizationalMemoryProjection,
+    setOrganizationalMemoryProjection,
+  ] = useState<OrganizationalMemoryProjection>(
+    () =>
+      emptyOrganizationalMemoryProjection,
+  );
+
+  const [
+    canonicalKnowledgeProjection,
+    setCanonicalKnowledgeProjection,
+  ] = useState<CanonicalKnowledgeProjection>(
+    () =>
+      emptyCanonicalKnowledgeProjection,
+  );
+
+  const [
+    knowledgeCapsuleProjection,
+    setKnowledgeCapsuleProjection,
+  ] = useState<KnowledgeCapsuleProductionProjection>(
+    () =>
+      emptyKnowledgeCapsuleProductionProjection,
+  );
+
+  const [
     canonicalReviewProjection,
     setCanonicalReviewProjection,
   ] = useState<CanonicalReviewProjection>(
@@ -183,6 +235,65 @@ export function KnowledgeProductionCommandCenter() {
         },
       }),
   );
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshKnowledgeCapsules() {
+      try {
+        const snapshot =
+          await getKnowledgeProductionLifecycleSnapshot();
+
+        if (
+          cancelled
+        ) {
+          return;
+        }
+
+        setKnowledgeCapsuleProjection(
+          createKnowledgeCapsuleProductionProjection(
+            snapshot,
+          ),
+        );
+
+        setCanonicalKnowledgeProjection(
+          createCanonicalKnowledgeProjection(
+            snapshot,
+          ),
+        );
+
+        setOrganizationalMemoryProjection(
+          createOrganizationalMemoryProjection(
+            snapshot,
+          ),
+        );
+      } catch {
+        /*
+         * Preserve the last truthful lifecycle projection.
+         * Never fall back to fixture packages.
+         */
+      }
+    }
+
+    void refreshKnowledgeCapsules();
+
+    const intervalId =
+      window.setInterval(
+        () => {
+          void refreshKnowledgeCapsules();
+        },
+        10_000,
+      );
+
+    return () => {
+      cancelled =
+        true;
+
+      window.clearInterval(
+        intervalId,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -238,11 +349,19 @@ export function KnowledgeProductionCommandCenter() {
 
   const selectedCapsule = useMemo(
     () =>
-      knowledgeCapsules.find(
-        (capsule) =>
-          capsule.id === selectedCapsuleId,
-      ) ?? null,
-    [selectedCapsuleId],
+      knowledgeCapsuleProjection
+        .capsules
+        .find(
+          (capsule) =>
+            capsule.id ===
+            selectedCapsuleId,
+        ) ??
+      null,
+    [
+      knowledgeCapsuleProjection
+        .capsules,
+      selectedCapsuleId,
+    ],
   );
 
   useEffect(() => {
@@ -573,7 +692,8 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24 focus:outline-none"
       >
         <KnowledgeCapsuleFlowEngine
-          capsules={knowledgeCapsules}
+          capsules={knowledgeCapsuleProjection.capsules}
+          positions={knowledgeCapsuleProjection.positions}
           selectedCapsuleId={selectedCapsuleId}
           selectedStationId={
             selection?.kind === "station"
@@ -655,6 +775,7 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <CanonicalKnowledge
+          projection={canonicalKnowledgeProjection}
           selectedCanonicalId={
             selection?.kind === "canonical-knowledge"
               ? selection.canonicalKnowledgeId
@@ -683,6 +804,7 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <OrganizationalMemory
+          projection={organizationalMemoryProjection}
           selectedProjectionId={
             selection?.kind === "memory-projection"
               ? selection.memoryProjectionId
@@ -756,7 +878,7 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <KnowledgeGenealogy
-        capsules={knowledgeCapsules}
+        capsules={knowledgeCapsuleProjection.capsules}
         selectedCapsuleId={selectedCapsuleId}
         selectedGenealogyNodeId={
           selection?.kind === "genealogy-node"

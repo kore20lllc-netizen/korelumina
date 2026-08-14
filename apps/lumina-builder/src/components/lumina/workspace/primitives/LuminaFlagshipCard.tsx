@@ -32,9 +32,12 @@ type LuminaFlagshipCardProps =
 const baseClasses = [
   "relative overflow-hidden rounded-[22px] border",
   "border-blue-400/70 ring-1 ring-inset ring-cyan-300/20",
-  "bg-slate-950/48 backdrop-blur-[44px] backdrop-saturate-[170%]",
+  "bg-slate-950/48",
   "shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_30px_rgba(37,99,235,.16),0_28px_80px_rgba(0,0,0,.34),inset_0_0_22px_rgba(56,189,248,.05)]",
 ].join(" ");
+
+const interactiveBackdropClasses =
+  "backdrop-blur-[44px] backdrop-saturate-[170%]";
 
 const interactiveClasses = [
   "transition-[transform,border-color,background-color,box-shadow] duration-200",
@@ -92,6 +95,8 @@ export function LuminaFlagshipCard(
 
   const classes = cn(
     baseClasses,
+    as === "button" &&
+      interactiveBackdropClasses,
     interactive && interactiveClasses,
     selected && selectedClasses,
     as === "button" && focusClasses,

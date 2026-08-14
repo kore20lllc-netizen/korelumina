@@ -40,7 +40,12 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import type {
+  OrganizationalMemoryProjection,
+} from "../data/organizationalMemoryProjection";
+
 type OrganizationalMemoryProps = {
+  projection: OrganizationalMemoryProjection;
   selectedProjectionId?: string;
   onProjectionSelect: (
     capsuleId: string,
@@ -48,88 +53,8 @@ type OrganizationalMemoryProps = {
   ) => void;
 };
 
-const projections = [
-  {
-    id: "memory-projection-executive",
-    capsuleId: "capsule-144",
-    title: "Executive summary projection",
-    audience: "Executive Office",
-    privacy: "Strategic",
-    status: "Active",
-    detail:
-      "Condenses canonical runtime recovery guidance into decision-ready organizational context.",
-  },
-  {
-    id: "memory-projection-mission",
-    capsuleId: "capsule-144",
-    title: "Mission operating projection",
-    audience: "Mission System",
-    privacy: "Operational",
-    status: "Active",
-    detail:
-      "Adapts canonical evidence into mission planning constraints and recovery expectations.",
-  },
-  {
-    id: "memory-projection-chief-agent",
-    capsuleId: "capsule-144",
-    title: "Chief Agent competency projection",
-    audience: "Chief Agent",
-    privacy: "Restricted",
-    status: "Governed",
-    detail:
-      "Transforms canonical guidance into competency signals without transferring authority.",
-  },
-];
-
-const evolution = [
-  {
-    version: "Memory v1.0",
-    event: "Canonical capsule received",
-    detail:
-      "Runtime Isolation Recovery Standard entered organizational stewardship.",
-  },
-  {
-    version: "Memory v1.1",
-    event: "Privacy-filtered projection created",
-    detail:
-      "Sensitive incident detail removed from executive and mission summaries.",
-  },
-  {
-    version: "Memory v1.2",
-    event: "Institutional learning incorporated",
-    detail:
-      "Repeated mission usage strengthened recovery pattern recognition.",
-  },
-  {
-    version: "Memory v1.3",
-    event: "Adaptation lineage certified",
-    detail:
-      "All projections remain traceable to the canonical source capsule.",
-  },
-];
-
-const summaries = [
-  {
-    title: "Runtime resilience posture",
-    detail:
-      "Environment isolation, dependency recovery, and process ownership now operate as one governed standard.",
-    lineage: "Derived from KCAP-2026-042",
-  },
-  {
-    title: "Mission recovery learning",
-    detail:
-      "Recovery planning increasingly favors observable runtime state and explicit ownership.",
-    lineage: "Derived from 8 governed mission uses",
-  },
-  {
-    title: "Institutional adaptation",
-    detail:
-      "Cross-workspace recovery language is converging without transferring canonical authority.",
-    lineage: "Derived from 3 active projections",
-  },
-];
-
 export function OrganizationalMemory({
+  projection,
   selectedProjectionId,
   onProjectionSelect,
 }: OrganizationalMemoryProps) {
@@ -200,7 +125,7 @@ export function OrganizationalMemory({
           <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Active projections"
-          value="18"
+          value={projection.metrics.activeProjections}
           description="Governed adaptations serving organizational consumers."
           accentKey="cyan"
           icon={<Layers3 className="h-4 w-4 text-cyan-300" />}
@@ -208,7 +133,7 @@ export function OrganizationalMemory({
 
         <LuminaExecutiveCard
           title="Privacy filters"
-          value="7"
+          value={projection.metrics.privacyFilters}
           description="Projection boundaries protecting sensitive knowledge."
           accentKey="violet"
           icon={<ShieldCheck className="h-4 w-4 text-violet-300" />}
@@ -216,7 +141,7 @@ export function OrganizationalMemory({
 
         <LuminaExecutiveCard
           title="Institutional summaries"
-          value="11"
+          value={projection.metrics.institutionalSummaries}
           description="Cross-organizational learning distilled from use."
           accentKey="emerald"
           icon={<Sparkles className="h-4 w-4 text-emerald-300" />}
@@ -224,7 +149,7 @@ export function OrganizationalMemory({
 
         <LuminaExecutiveCard
           title="Adaptation generations"
-          value="4"
+          value={projection.metrics.adaptationGenerations}
           description="Traceable memory evolution from canonical sources."
           accentKey="amber"
           icon={<History className="h-4 w-4 text-amber-300" />}
@@ -249,20 +174,20 @@ export function OrganizationalMemory({
           </div>
 
           <div className="mt-5 grid gap-4">
-            {projections.map((projection) => {
+            {projection.projections.map((memoryProjection) => {
               const selected =
                 selectedProjectionId ===
-                projection.id;
+                memoryProjection.id;
 
               return (
                 <button
                   type="button"
-                  key={projection.id}
+                  key={memoryProjection.id}
                   aria-pressed={selected}
                   onClick={() =>
                     onProjectionSelect(
-                      projection.capsuleId,
-                      projection.id,
+                      memoryProjection.capsuleId,
+                      memoryProjection.id,
                     )
                   }
                   className="block w-full text-left"
@@ -282,20 +207,20 @@ export function OrganizationalMemory({
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <LuminaStatusBadge variant="healthy">
-                        {projection.status}
+                        {memoryProjection.status}
                       </LuminaStatusBadge>
 
                       <span className="rounded-full border border-violet-300/20 bg-violet-300/[0.05] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-violet-100">
-                        {projection.privacy}
+                        {memoryProjection.privacy}
                       </span>
                     </div>
 
                     <h4 className="mt-3 text-base font-semibold text-white">
-                      {projection.title}
+                      {memoryProjection.title}
                     </h4>
 
                     <div className="mt-2 text-xs text-cyan-300/64">
-                      Consumer: {projection.audience}
+                      Consumer: {memoryProjection.audience}
                     </div>
                   </div>
 
@@ -308,7 +233,7 @@ export function OrganizationalMemory({
                         Adaptation purpose
                       </div>
                       <div className="mt-2 text-xs leading-5 text-cyan-100/72">
-                        {projection.detail}
+                        {memoryProjection.detail}
                       </div>
                     </div>
                   </LuminaFlagshipCard>
@@ -324,7 +249,7 @@ export function OrganizationalMemory({
                         Canonical source
                       </div>
                       <div className="mt-1 text-xs font-semibold text-emerald-100">
-                        KCAP-2026-042
+                        {memoryProjection.canonicalSource}
                       </div>
                     </div>
                   </LuminaFlagshipCard>
@@ -338,7 +263,7 @@ export function OrganizationalMemory({
                         Adaptation lineage
                       </div>
                       <div className="mt-1 text-xs font-semibold text-violet-100">
-                        Memory v1.3
+                        {memoryProjection.adaptationLineage}
                       </div>
                     </div>
                   </LuminaFlagshipCard>
@@ -352,7 +277,7 @@ export function OrganizationalMemory({
                         Authority posture
                       </div>
                       <div className="mt-1 text-xs font-semibold text-amber-100">
-                        Stewarded, not canonical
+                        {memoryProjection.authorityPosture}
                       </div>
                     </div>
                   </LuminaFlagshipCard>
@@ -389,23 +314,7 @@ export function OrganizationalMemory({
             </div>
 
             <div className="mt-5 grid gap-3">
-              {[
-                [
-                  "Executive projection",
-                  "Incident identities removed",
-                  "Preserves organizational learning without exposing sensitive operational details.",
-                ],
-                [
-                  "Mission projection",
-                  "Scope-limited operational detail",
-                  "Only mission-relevant recovery guidance is projected.",
-                ],
-                [
-                  "Chief Agent projection",
-                  "Competency signals only",
-                  "Canonical authority remains external to adapted memory.",
-                ],
-              ].map(([label, title, detail]) => (
+              {projection.privacy.map(({ label, title, detail }) => (
                 <LuminaFlagshipCard
                   key={label}
                   as="article"
@@ -450,11 +359,7 @@ export function OrganizationalMemory({
             </div>
 
             <div className="mt-5 grid gap-3">
-              {[
-                ["Origin", "KCAP-2026-042 · v3.0"],
-                ["Stewarded memory", "Memory v1.3"],
-                ["Active projections", "3 governed adaptations"],
-              ].map(([label, value], index) => (
+              {projection.lineage.map(({ label, value }, index) => (
                 <div key={label}>
                   <LuminaFlagshipCard
                     as="article"
@@ -508,7 +413,7 @@ export function OrganizationalMemory({
           />
 
           <div className="mt-5 grid gap-3">
-            {summaries.map((summary) => (
+            {projection.summaries.map((summary) => (
               <LuminaFlagshipCard
                 as="article"
                 key={summary.title}
@@ -554,7 +459,7 @@ export function OrganizationalMemory({
           </div>
 
           <div className="mt-5 grid gap-3">
-            {evolution.map((entry, index) => (
+            {projection.evolution.map((entry, index) => (
               <div
                 key={entry.version}
                 className="relative"
@@ -576,7 +481,7 @@ export function OrganizationalMemory({
                   </div>
                 </LuminaFlagshipCard>
 
-                {index < evolution.length - 1 ? (
+                {index < projection.evolution.length - 1 ? (
                   <div className="mx-auto h-3 w-px bg-cyan-300/24" />
                 ) : null}
               </div>

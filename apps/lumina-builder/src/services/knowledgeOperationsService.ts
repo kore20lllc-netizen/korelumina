@@ -432,3 +432,134 @@ export async function submitCanonicalReviewDecision(
 
   return body;
 }
+
+export interface KnowledgeProductionLifecycleSnapshot {
+  ok:
+    true;
+
+  packages:
+    CanonicalReviewPackageView[];
+
+  canonicalItems:
+    Array<{
+      id:
+        string;
+
+      type:
+        string;
+
+      title:
+        string;
+
+      summary:
+        string;
+
+      confidence:
+        number;
+
+      evidenceRefs:
+        string[];
+
+      relationships:
+        Record<
+          string,
+          string[]
+        >;
+
+      createdAt:
+        number;
+
+      updatedAt:
+        number;
+
+      status:
+        string;
+
+      metadata:
+        Record<
+          string,
+          unknown
+        >;
+    }>;
+
+  organizationalMemory:
+    Array<{
+      id:
+        string;
+
+      organizationId:
+        string;
+
+      projectId?:
+        string;
+
+      teamId?:
+        string;
+
+      title:
+        string;
+
+      summary:
+        string;
+
+      source:
+        string;
+
+      references:
+        string[];
+
+      governance?:
+        Record<
+          string,
+          unknown
+        >;
+
+      createdAt:
+        string;
+    }>;
+
+  summary: {
+    packages:
+      number;
+
+    awaitingReview:
+      number;
+
+    approved:
+      number;
+
+    canonical:
+      number;
+
+    adapted:
+      number;
+
+    canonicalItems:
+      number;
+
+    organizationalMemory:
+      number;
+  };
+}
+
+export async function getKnowledgeProductionLifecycleSnapshot():
+Promise<KnowledgeProductionLifecycleSnapshot> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/production-lifecycle`,
+      {
+        headers:
+          getRuntimeCallerHeaders(),
+      },
+    );
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      "failed_to_get_knowledge_production_lifecycle",
+    );
+  }
+
+  return await response.json();
+}

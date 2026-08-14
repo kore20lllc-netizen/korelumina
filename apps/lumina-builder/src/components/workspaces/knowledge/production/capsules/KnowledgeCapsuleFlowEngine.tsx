@@ -51,6 +51,7 @@ import type {
 
 type KnowledgeCapsuleFlowEngineProps = {
   capsules: KnowledgeCapsuleModel[];
+  positions: CapsuleManufacturingPosition[];
   selectedCapsuleId: string;
   selectedStationId?: string;
   onCapsuleSelect: (capsuleId: string) => void;
@@ -67,8 +68,11 @@ type KnowledgeCapsuleFlowEngineProps = {
 };
 
 import {
-  capsuleManufacturingPositions,
   manufacturingStations,
+} from "./lifecycle";
+
+import type {
+  CapsuleManufacturingPosition,
 } from "./lifecycle";
 
 const stations =
@@ -94,6 +98,7 @@ const stateByStation: Record<
 
 export function KnowledgeCapsuleFlowEngine({
   capsules,
+  positions,
   selectedCapsuleId,
   selectedStationId,
   onCapsuleSelect,
@@ -220,8 +225,8 @@ export function KnowledgeCapsuleFlowEngine({
   const occupancyByStation = useMemo(() => {
     return manufacturingStations.map(
       (station) => {
-        const positions =
-          capsuleManufacturingPositions.filter(
+        const stationPositions =
+          positions.filter(
             (position) =>
               position.station === station &&
               capsuleById.has(
@@ -230,7 +235,7 @@ export function KnowledgeCapsuleFlowEngine({
           );
 
         const branchPositions =
-          capsuleManufacturingPositions.flatMap(
+          positions.flatMap(
             (position) =>
               position.branches.filter(
                 (branch) =>
@@ -243,12 +248,13 @@ export function KnowledgeCapsuleFlowEngine({
 
         return {
           station,
-          positions,
+          positions:
+            stationPositions,
           branchPositions,
         };
       },
     );
-  }, [capsuleById]);
+  }, [capsuleById, positions]);
 
   useEffect(() => {
     if (!selectedStationId) {
@@ -550,7 +556,14 @@ export function KnowledgeCapsuleFlowEngine({
                               </div>
                             </button>
 
-                            <div className="mt-4 grid gap-3">
+                            <div
+                              className={[
+                                "mt-4 grid gap-3",
+                                "max-h-[360px] overflow-y-auto overscroll-contain pr-1",
+                                "[scrollbar-gutter:stable]",
+                                "[scrollbar-width:thin]",
+                              ].join(" ")}
+                            >
                               {positions.map(
                                 (position) => {
                                   const capsule =

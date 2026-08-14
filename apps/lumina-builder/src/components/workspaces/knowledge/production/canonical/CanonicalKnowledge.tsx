@@ -41,7 +41,12 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import type {
+  CanonicalKnowledgeProjection,
+} from "../data/canonicalKnowledgeProjection";
+
 type CanonicalKnowledgeProps = {
+  projection: CanonicalKnowledgeProjection;
   selectedCanonicalId?: string;
   onCanonicalSelect: (
     capsuleId: string,
@@ -49,85 +54,8 @@ type CanonicalKnowledgeProps = {
   ) => void;
 };
 
-const CANONICAL_CAPSULES = [
-  {
-    id: "KCAP-2026-042",
-    capsuleId: "capsule-144",
-    title: "Runtime Isolation Recovery Standard",
-    collection: "Runtime Architecture Canon",
-    authority: "Architecture Council",
-    trust: "Constitutional",
-    scope: "Platform-wide",
-    version: "v3.0",
-    status: "Published",
-    supersession: "Replaces KCAP-2025-118",
-    retirement: "No retirement scheduled",
-    rationale: [
-      "Evidence certified across runtime recovery incidents.",
-      "Supersession boundary approved by Architecture Council.",
-      "Publication authority confirmed by Chief Systems Architect.",
-    ],
-  },
-  {
-    id: "KCAP-2026-031",
-    capsuleId: "capsule-145",
-    title: "Knowledge Package Integrity Protocol",
-    collection: "Knowledge Constitution",
-    authority: "Constitutional Review Board",
-    trust: "Constitutional",
-    scope: "Knowledge Operations",
-    version: "v2.1",
-    status: "Published",
-    supersession: "Extends KCAP-2025-076",
-    retirement: "Annual constitutional review",
-    rationale: [
-      "Integrity states aligned with sealed, peeling, remediation, and resealing.",
-      "Governance interpretation conflict resolved.",
-      "Canonical lineage preserved through publication.",
-    ],
-  },
-  {
-    id: "KCAP-2026-018",
-    capsuleId: "capsule-146",
-    title: "Mission Recovery Evidence Standard",
-    collection: "Mission Operations Canon",
-    authority: "Mission Governance",
-    trust: "High",
-    scope: "Mission system",
-    version: "v1.6",
-    status: "Published",
-    supersession: "No predecessor",
-    retirement: "Review after 12 months",
-    rationale: [
-      "Mission recovery evidence reached required confidence threshold.",
-      "Operational applicability validated across multiple missions.",
-      "No unresolved constitutional conflicts remained.",
-    ],
-  },
-];
-
-const COLLECTIONS = [
-  {
-    title: "Knowledge Constitution",
-    count: "18 capsules",
-    authority: "Constitutional Review Board",
-    scope: "Platform governance",
-  },
-  {
-    title: "Runtime Architecture Canon",
-    count: "27 capsules",
-    authority: "Architecture Council",
-    scope: "Runtime and Builder",
-  },
-  {
-    title: "Mission Operations Canon",
-    count: "14 capsules",
-    authority: "Mission Governance",
-    scope: "Mission system",
-  },
-];
-
 export function CanonicalKnowledge({
+  projection,
   selectedCanonicalId,
   onCanonicalSelect,
 }: CanonicalKnowledgeProps) {
@@ -137,7 +65,7 @@ export function CanonicalKnowledge({
       className="grid gap-5"
     >
       <LuminaExecutiveTitleMetricsComposition
-        variant="balanced"
+        variant="content-led"
         titleRegion={
           <LuminaFlagshipPanel
             className="flex h-full flex-col"
@@ -178,7 +106,7 @@ export function CanonicalKnowledge({
                   Published
                 </div>
                 <div className="mt-1 text-xl font-semibold text-emerald-100">
-                  59
+                  {projection.metrics.published}
                 </div>
               </LuminaFlagshipCard>
 
@@ -187,7 +115,7 @@ export function CanonicalKnowledge({
                   Collections
                 </div>
                 <div className="mt-1 text-xl font-semibold text-cyan-100">
-                  9
+                  {projection.metrics.collections}
                 </div>
               </LuminaFlagshipCard>
 
@@ -196,7 +124,7 @@ export function CanonicalKnowledge({
                   Constitutional
                 </div>
                 <div className="mt-1 text-xl font-semibold text-violet-100">
-                  23
+                  {projection.metrics.constitutional}
                 </div>
               </LuminaFlagshipCard>
 
@@ -205,7 +133,7 @@ export function CanonicalKnowledge({
                   Retiring
                 </div>
                 <div className="mt-1 text-xl font-semibold text-slate-100">
-                  4
+                  {projection.metrics.retiring}
                 </div>
               </LuminaFlagshipCard>
             </div>
@@ -216,7 +144,7 @@ export function CanonicalKnowledge({
           <LuminaExecutiveMetricGrid columns={2}>
         <LuminaExecutiveCard
           title="Published capsules"
-          value="59"
+          value={projection.metrics.published}
           description="Active canonical authority across KoreLumina."
           accentKey="emerald"
           icon={<BadgeCheck className="h-4 w-4 text-emerald-300" />}
@@ -224,7 +152,7 @@ export function CanonicalKnowledge({
 
         <LuminaExecutiveCard
           title="Canonical collections"
-          value="9"
+          value={projection.metrics.collections}
           description="Governed bodies of organizational knowledge."
           accentKey="cyan"
           icon={<LibraryBig className="h-4 w-4 text-cyan-300" />}
@@ -232,7 +160,7 @@ export function CanonicalKnowledge({
 
         <LuminaExecutiveCard
           title="Constitutional authority"
-          value="23"
+          value={projection.metrics.constitutional}
           description="Capsules with platform-level governing force."
           accentKey="violet"
           icon={<Scale className="h-4 w-4 text-violet-300" />}
@@ -240,7 +168,7 @@ export function CanonicalKnowledge({
 
         <LuminaExecutiveCard
           title="Supersession activity"
-          value="7"
+          value={projection.metrics.supersessionActivity}
           description="Canonical replacements under active transition."
           accentKey="amber"
           icon={<GitCompareArrows className="h-4 w-4 text-amber-300" />}
@@ -249,8 +177,7 @@ export function CanonicalKnowledge({
         }
       />
 
-      <LuminaBalancedSplitPanelComposition
-        primaryRegion={
+      <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
         <LuminaFlagshipPanel
           title={null}
           className="[&>div:nth-of-type(3)]:hidden"
@@ -266,7 +193,7 @@ export function CanonicalKnowledge({
           </div>
 
           <div className="mt-5 grid gap-4">
-            {CANONICAL_CAPSULES.map((capsule) => {
+            {projection.capsules.slice(0, 3).map((capsule) => {
               const selected =
                 selectedCanonicalId ===
                 capsule.id;
@@ -298,7 +225,7 @@ export function CanonicalKnowledge({
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
-                        {capsule.id}
+                        {capsule.displayId}
                       </span>
                       <LuminaStatusBadge variant="healthy">{capsule.status}</LuminaStatusBadge>
                     </div>
@@ -433,9 +360,9 @@ export function CanonicalKnowledge({
           </div>
           </div>
         </LuminaFlagshipPanel>
-        }
-        secondaryRegion={
-          <div className="grid h-full gap-5 xl:grid-rows-2">
+
+        <LuminaBalancedSplitPanelComposition
+          primaryRegion={
             <LuminaFlagshipPanel
               title={null}
               className="h-full [&>div:nth-of-type(3)]:hidden"
@@ -461,7 +388,7 @@ export function CanonicalKnowledge({
             />
 
             <div className="mt-5 grid gap-3">
-              {COLLECTIONS.map((collection) => (
+              {projection.collections.map((collection) => (
                 <LuminaFlagshipCard
                   key={collection.title}
                   as="article"
@@ -483,6 +410,8 @@ export function CanonicalKnowledge({
             </div>
               </div>
             </LuminaFlagshipPanel>
+          }
+          secondaryRegion={
             <LuminaFlagshipPanel
               title={null}
               className="h-full [&>div:nth-of-type(3)]:hidden"
@@ -514,7 +443,7 @@ export function CanonicalKnowledge({
                     Superseded
                   </div>
                   <div className="mt-1 text-sm font-semibold text-amber-100">
-                    7 capsules
+                    {projection.metrics.superseded}
                   </div>
                   <div className="mt-2 text-[11px] leading-5 text-amber-200/56">
                     Preserved for lineage, audit, and historical interpretation.
@@ -531,7 +460,7 @@ export function CanonicalKnowledge({
                     Retirement scheduled
                   </div>
                   <div className="mt-1 text-sm font-semibold text-slate-100">
-                    4 capsules
+                    {projection.metrics.retirementScheduled}
                   </div>
                   <div className="mt-2 text-[11px] leading-5 text-slate-300/56">
                     Authority remains valid until the scheduled retirement date.
@@ -541,9 +470,9 @@ export function CanonicalKnowledge({
             </div>
               </div>
             </LuminaFlagshipPanel>
-          </div>
-        }
-      />
+          }
+        />
+      </div>
     </section>
   );
 }

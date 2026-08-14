@@ -27,6 +27,7 @@ import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKn
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
+import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
@@ -460,6 +461,21 @@ registerOrganizationalMemoryAdaptationRoutes(
 
     adaptationService:
       runtimeGovernedCanonicalMemoryAdaptationService,
+  },
+);
+
+registerKnowledgeProductionLifecycleRoutes(
+  app,
+  {
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+
+    canonicalStore:
+      knowledgePlatform.store,
+
+    memoryStore:
+      runtimeOrganizationalMemoryStore,
   },
 );
 
