@@ -19,7 +19,6 @@ import {
 import {
   KnowledgeCapsuleFlowEngine,
   KnowledgeCapsuleInspector,
-  knowledgeCapsules,
 } from "../capsules";
 
 import {
@@ -835,7 +834,7 @@ export function KnowledgeProductionCommandCenter() {
         aria-label="Knowledge Graph"
       >
         <ProductionKnowledgeGraph
-          capsules={knowledgeCapsules}
+          capsules={knowledgeCapsuleProjection.capsules}
           selectedCapsuleId={selectedCapsuleId}
           onCapsuleSelect={handleGraphNodeSelect}
         />

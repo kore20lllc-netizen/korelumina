@@ -92,7 +92,7 @@
       "elementCount": 139
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {
-      "sha256": "debb19da3e589edc72d4a8e2833274955b85415c8e788461379e4ea573027dae",
+      "sha256": "43a7d2b13de694ec2aeebdcad227a71bc199e8064f715e9143dd68961e7c858b",
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx": {

@@ -142,7 +142,7 @@ export function ProductionKnowledgeGraph({
     >
       <div className="border-t border-white/[0.06] px-5 py-5 sm:px-6 sm:py-6">
         <LuminaFlagshipSurface
-          className="relative overflow-x-auto p-0"
+          className="relative max-h-[560px] overflow-auto p-0"
         >
           <div
             aria-hidden="true"
