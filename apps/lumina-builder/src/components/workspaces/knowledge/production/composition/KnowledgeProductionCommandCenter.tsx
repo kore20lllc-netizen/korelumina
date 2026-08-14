@@ -20,7 +20,6 @@ import {
   KnowledgeCapsuleFlowEngine,
   KnowledgeCapsuleInspector,
   knowledgeCapsules,
-  knowledgeDistributionRecords,
 } from "../capsules";
 
 import {
@@ -94,6 +93,10 @@ import {
 import type {
   KnowledgeDistributionProjection,
 } from "../data/knowledgeDistributionProjection";
+
+import {
+  createOrganizationalImpactProjection,
+} from "../data/organizationalImpactProjection";
 
 import {
   createCanonicalReviewProjection,
@@ -372,6 +375,19 @@ export function KnowledgeProductionCommandCenter() {
 
   const selectedCapsuleId =
     selection?.capsuleId ?? "";
+
+  const organizationalImpactProjection =
+    useMemo(
+      () =>
+        createOrganizationalImpactProjection(
+          knowledgeCapsuleProjection.capsules,
+          knowledgeDistributionProjection.records,
+        ),
+      [
+        knowledgeCapsuleProjection.capsules,
+        knowledgeDistributionProjection.records,
+      ],
+    );
 
   const selectedCapsule = useMemo(
     () =>
@@ -923,8 +939,7 @@ export function KnowledgeProductionCommandCenter() {
         className="scroll-mt-24"
       >
         <OrganizationalImpact
-          capsules={knowledgeCapsules}
-          records={knowledgeDistributionRecords}
+          projection={organizationalImpactProjection}
           selectedImpactOutcomeId={
             selection?.kind === "impact-outcome"
               ? selection.impactOutcomeId

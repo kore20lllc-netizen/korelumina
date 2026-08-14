@@ -41,13 +41,11 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import type {
-  KnowledgeCapsuleModel,
-  KnowledgeDistributionRecord,
-} from "../capsules";
+  OrganizationalImpactProjection,
+} from "../data/organizationalImpactProjection";
 
 type OrganizationalImpactProps = {
-  capsules: KnowledgeCapsuleModel[];
-  records: KnowledgeDistributionRecord[];
+  projection: OrganizationalImpactProjection;
   selectedImpactOutcomeId?: string;
   onImpactOutcomeSelect: (
     capsuleId: string,
@@ -55,112 +53,21 @@ type OrganizationalImpactProps = {
   ) => void;
 };
 
-const impactOutcomes = [
-  {
-    id: "impact-runtime-recovery",
-    title: "Runtime recovery effectiveness",
-    capsuleId: "capsule-144",
-    capsuleReference: "KCAP-2026-042",
-    mission: "Runtime Operations",
-    outcome: "Recovery time reduced by 31%",
-    confidence: "High confidence",
-    detail:
-      "Governed recovery standards now guide isolation, ownership, and restart decisions across active runtime incidents.",
-  },
-  {
-    id: "impact-mission-planning",
-    title: "Mission planning consistency",
-    capsuleId: "capsule-145",
-    capsuleReference: "KCAP-2026-031",
-    mission: "Mission System",
-    outcome: "Decision variance reduced by 24%",
-    confidence: "Validated",
-    detail:
-      "Canonical planning guidance is reducing inconsistent mission framing and repeated corrective review.",
-  },
-  {
-    id: "impact-knowledge-preservation",
-    title: "Knowledge preservation quality",
-    capsuleId: "capsule-146",
-    capsuleReference: "KCAP-2026-018",
-    mission: "Chief Agent Program",
-    outcome: "Lineage coverage increased to 92%",
-    confidence: "High confidence",
-    detail:
-      "Compiler, governance, education, and consumer lineage are now preserved as one inspectable knowledge chain.",
-  },
-];
-
-const leverageSignals = [
-  {
-    title: "Operational leverage",
-    value: "8.4×",
-    detail:
-      "Estimated reuse value across runtime, mission, and engineering consumers.",
-  },
-  {
-    title: "Decision acceleration",
-    value: "29%",
-    detail:
-      "Average improvement in time-to-governed-decision for covered workflows.",
-  },
-  {
-    title: "Risk reduction",
-    value: "18%",
-    detail:
-      "Measured decline in repeated governance and recovery failure patterns.",
-  },
-];
-
-const reviewSignals = [
-  {
-    title: "Impact evidence incomplete",
-    detail:
-      "Three capsules have strong adoption but insufficient outcome attribution.",
-    tone: "amber",
-  },
-  {
-    title: "Low-consumption authority",
-    detail:
-      "Two canonical capsules remain valid but have limited downstream reuse.",
-    tone: "violet",
-  },
-  {
-    title: "Retirement review candidate",
-    detail:
-      "One superseded capsule no longer contributes measurable organizational value.",
-    tone: "rose",
-  },
-];
-
 export function OrganizationalImpact({
-  capsules,
-  records,
+  projection,
   selectedImpactOutcomeId,
   onImpactOutcomeSelect,
 }: OrganizationalImpactProps) {
-  const canonicalCapsules = capsules.filter(
-    (capsule) =>
-      capsule.state === "published" ||
-      capsule.stage === "Canonical Knowledge",
-  );
-
-  const activeConsumers = records.reduce(
-    (total, record) =>
-      total +
-      record.consumers.filter(
-        (consumer) =>
-          consumer.status === "connected" ||
-          consumer.status === "consuming",
-      ).length,
-    0,
-  );
-
-  const governedEvents = records.reduce(
-    (total, record) =>
-      total + record.history.length,
-    0,
-  );
+  const {
+    canonicalAssetCount,
+    activeConsumerCount,
+    governedEvidenceEventCount,
+    verifiedOutcomeCount,
+    verifiedOutcomeRate,
+    outcomes,
+    leverageSignals,
+    reviewSignals,
+  } = projection;
 
   return (
     <section
@@ -229,7 +136,7 @@ export function OrganizationalImpact({
           <LuminaExecutiveMetricGrid columns={2}>
             <LuminaExecutiveCard
               title="Canonical assets measured"
-              value={String(canonicalCapsules.length)}
+              value={String(canonicalAssetCount)}
               description="Published capsules included in impact evaluation."
               accentKey="cyan"
               icon={<BadgeCheck className="h-4 w-4 text-cyan-300" />}
@@ -237,7 +144,7 @@ export function OrganizationalImpact({
 
             <LuminaExecutiveCard
               title="Active consumers"
-              value={String(activeConsumers)}
+              value={String(activeConsumerCount)}
               description="Connected systems contributing usage evidence."
               accentKey="emerald"
               icon={<Users className="h-4 w-4 text-emerald-300" />}
@@ -245,7 +152,7 @@ export function OrganizationalImpact({
 
             <LuminaExecutiveCard
               title="Governed evidence events"
-              value={String(governedEvents)}
+              value={String(governedEvidenceEventCount)}
               description="Traceable events supporting impact assessment."
               accentKey="violet"
               icon={<Activity className="h-4 w-4 text-violet-300" />}
@@ -253,7 +160,7 @@ export function OrganizationalImpact({
 
             <LuminaExecutiveCard
               title="Verified outcome rate"
-              value="78%"
+              value={verifiedOutcomeRate}
               description="Measured outcomes with sufficient lineage evidence."
               accentKey="amber"
               icon={<CircleGauge className="h-4 w-4 text-amber-300" />}
@@ -279,12 +186,12 @@ export function OrganizationalImpact({
           </div>
 
           <div className="rounded-full border border-emerald-300/24 bg-emerald-300/[0.06] px-3 py-1.5 text-[10px] font-semibold text-emerald-100">
-            3 verified outcomes
+            {verifiedOutcomeCount} verified outcomes
           </div>
         </div>
 
         <div className="mt-5 grid gap-4 xl:grid-cols-3">
-          {impactOutcomes.map((impact) => {
+          {outcomes.map((impact) => {
             const selected =
               selectedImpactOutcomeId ===
               impact.id;
