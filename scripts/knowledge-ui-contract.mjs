@@ -8,6 +8,9 @@ const ROOT = process.cwd();
 const PRODUCTION_ROOT =
   "apps/lumina-builder/src/components/workspaces/knowledge/production";
 
+const LEARNING_ROOT =
+  "apps/lumina-builder/src/components/workspaces/knowledge/learning";
+
 const SHARED_PRESENTATION_FILES = [
   "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipPanel.tsx",
   "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx",
@@ -298,10 +301,16 @@ function createContract() {
       PRODUCTION_ROOT,
     );
 
+  const learningFiles =
+    walkTsx(
+      LEARNING_ROOT,
+    );
+
   const files =
     [
       ...new Set([
         ...productionFiles,
+        ...learningFiles,
         ...SHARED_PRESENTATION_FILES,
       ]),
     ].sort();
@@ -325,7 +334,7 @@ function createContract() {
       1,
 
     contract:
-      "KoreLumina Knowledge Operations Certified UI",
+      "KoreLumina Knowledge Operations + Education Certified UI",
 
     policy: {
       uiIsContract:
@@ -342,7 +351,7 @@ function createContract() {
         "runtime projections",
         "service wiring",
         "callbacks",
-        "state management",
+        "state management that does not change certified presentation topology",
         "text values supplied by runtime",
       ],
 
@@ -356,6 +365,10 @@ function createContract() {
         "spacing",
         "rails",
         "overflow behavior",
+        "conditional mounting of certified Education regions",
+        "removal or replacement of Educational Progress surfaces",
+        "removal or replacement of Competency Posture surfaces",
+        "changes to Education workspace presentation topology",
       ],
     },
 
@@ -380,7 +393,7 @@ function writeContract() {
   );
 
   console.log(
-    `PASS: certified Knowledge Operations UI contract locked (${Object.keys(contract.fingerprints).length} files).`,
+    `PASS: certified Knowledge Operations + Education UI contract locked (${Object.keys(contract.fingerprints).length} files).`,
   );
 }
 
@@ -526,7 +539,7 @@ function verifyContract() {
   }
 
   console.log(
-    `PASS: certified Knowledge Operations UI contract intact (${expectedFiles.length} files).`,
+    `PASS: certified Knowledge Operations + Education UI contract intact (${expectedFiles.length} files).`,
   );
 }
 

@@ -68,6 +68,14 @@ import {
 } from "./knowledge-preservation/bootstrap/index.js";
 
 import {
+  KnowledgeEducationProjectionService,
+} from "./knowledge-education/index.js";
+
+import {
+  registerKnowledgeEducationRoutes,
+} from "./routes/knowledge/registerKnowledgeEducationRoutes.js";
+
+import {
   createExecutiveOrchestrator,
 } from "./executive/orchestrator/index.js";
 
@@ -171,6 +179,11 @@ export const runtimeCanonicalReviewService =
       .packageService,
     runtimeKnowledgePreservationPlatform
       .manufacturingRunService,
+  );
+
+export const runtimeKnowledgeEducationProjectionService =
+  new KnowledgeEducationProjectionService(
+    knowledgePlatform.store,
   );
 
 export const runtimeGovernedPromotionService =
@@ -486,6 +499,14 @@ registerKnowledgeManufacturingReplayRoutes(
 
     replayService:
       knowledgeManufacturingReplayService,
+  },
+);
+
+registerKnowledgeEducationRoutes(
+  app,
+  {
+    projectionService:
+      runtimeKnowledgeEducationProjectionService,
   },
 );
 

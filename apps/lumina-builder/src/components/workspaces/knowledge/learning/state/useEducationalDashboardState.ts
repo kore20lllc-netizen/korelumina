@@ -1,16 +1,30 @@
 import {
+  useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
+
+import {
+  certifiedEducationalDashboardContract,
+} from "./contracts/CertifiedEducationalDashboardContract";
 
 import {
   createExecutiveEducationalSummary,
   filterEducationalTimeline,
 } from "../model";
 
+import type {
+  CompetencyObjective,
+  EducationalArtifact,
+  EducationalModule,
+  EducationalTimelineEvent,
+  EducationalUiState,
+} from "../model";
+
 import {
-  educationalFixture,
-} from "../fixtures";
+  getEducationalDashboard,
+} from "@/services/educationService";
 
 import {
   useEducationalFilters,
@@ -20,82 +34,224 @@ import {
   useEducationalSelection,
 } from "./useEducationalSelection";
 
-import type {
-  EducationalUiState,
-} from "../model";
+interface EducationalDashboardData {
+  state:
+    EducationalUiState;
+
+  artifacts:
+    EducationalArtifact[];
+
+  modules:
+    EducationalModule[];
+
+  competencies:
+    CompetencyObjective[];
+
+  timeline:
+    EducationalTimelineEvent[];
+}
+
+function certifiedBaseline():
+EducationalDashboardData {
+  return {
+    state:
+      certifiedEducationalDashboardContract.state,
+
+    artifacts:
+      certifiedEducationalDashboardContract.artifacts,
+
+    modules:
+      certifiedEducationalDashboardContract.modules,
+
+    competencies:
+      certifiedEducationalDashboardContract.competencies,
+
+    timeline:
+      certifiedEducationalDashboardContract.timeline,
+  };
+}
+
+function runtimeCompatibleDashboard(
+  runtime:
+    EducationalDashboardData,
+): EducationalDashboardData {
+  const baseline =
+    certifiedBaseline();
+
+  /*
+   * UI is the contract.
+   *
+   * Runtime may replace a certified data domain only when it
+   * supplies a complete compatible collection. Missing backend
+   * domains retain the certified baseline rather than altering
+   * workspace composition.
+   */
+  return {
+    state:
+      baseline.state,
+
+    artifacts:
+      runtime.artifacts.length >
+        0
+        ? runtime.artifacts
+        : baseline.artifacts,
+
+    modules:
+      runtime.modules.length ===
+        baseline.modules.length
+        ? runtime.modules
+        : baseline.modules,
+
+    competencies:
+      runtime.competencies.length ===
+        baseline.competencies.length
+        ? runtime.competencies
+        : baseline.competencies,
+
+    timeline:
+      runtime.timeline.length >
+        0
+        ? runtime.timeline
+        : baseline.timeline,
+  };
+}
 
 export function useEducationalDashboardState() {
   const [
-    uiState,
-    setUiState,
-  ] = useState<EducationalUiState>(
-    educationalFixture.state,
-  );
+    dashboard,
+    setDashboard,
+  ] =
+    useState<EducationalDashboardData>(
+      () =>
+        certifiedBaseline(),
+    );
+
+  const [
+    runtimeConnected,
+    setRuntimeConnected,
+  ] =
+    useState(
+      false,
+    );
 
   const filters =
     useEducationalFilters(
-      educationalFixture.artifacts,
+      dashboard.artifacts,
     );
 
   const selection =
     useEducationalSelection(
-      educationalFixture.artifacts,
-      educationalFixture.modules,
+      dashboard.artifacts,
+      dashboard.modules,
     );
+
+  const loadRuntime =
+    useCallback(
+      async () => {
+        try {
+          const runtime =
+            await getEducationalDashboard();
+
+          setDashboard(
+            runtimeCompatibleDashboard(
+              runtime,
+            ),
+          );
+
+          setRuntimeConnected(
+            true,
+          );
+        } catch {
+          /*
+           * Runtime availability must never mutate the certified
+           * Education composition. Keep the last compatible
+           * dashboard state.
+           */
+          setRuntimeConnected(
+            false,
+          );
+        }
+      },
+      [],
+    );
+
+  useEffect(
+    () => {
+      void loadRuntime();
+    },
+    [
+      loadRuntime,
+    ],
+  );
 
   const executiveSummary =
     useMemo(
       () =>
         createExecutiveEducationalSummary(
-          educationalFixture.artifacts,
-          educationalFixture.modules,
+          dashboard.artifacts,
+          dashboard.modules,
         ),
-      [],
+      [
+        dashboard.artifacts,
+        dashboard.modules,
+      ],
     );
 
   const visibleTimeline =
     useMemo(
       () =>
         filterEducationalTimeline(
-          educationalFixture.timeline,
+          dashboard.timeline,
           selection.timelineType,
         ),
-      [selection.timelineType],
+      [
+        dashboard.timeline,
+        selection.timelineType,
+      ],
     );
 
-  const reset = () => {
-    setUiState(
-      educationalFixture.state,
+  const reset =
+    useCallback(
+      () => {
+        filters.resetFilters();
+
+        selection.setTimelineType(
+          "all",
+        );
+
+        void loadRuntime();
+      },
+      [
+        filters,
+        selection,
+        loadRuntime,
+      ],
     );
-    filters.resetFilters();
-    selection.setArtifactId(
-      educationalFixture.artifacts[0]
-        ?.id ?? null,
-    );
-    selection.setModuleId(
-      educationalFixture.modules[0]
-        ?.id ?? null,
-    );
-    selection.setTimelineType(
-      "all",
-    );
-  };
 
   return {
-    uiState,
-    setUiState,
+    uiState:
+      dashboard.state,
+
     executiveSummary,
+
     artifacts:
-      educationalFixture.artifacts,
+      dashboard.artifacts,
+
     modules:
-      educationalFixture.modules,
+      dashboard.modules,
+
     competencies:
-      educationalFixture.competencies,
+      dashboard.competencies,
+
     timeline:
-      educationalFixture.timeline,
+      dashboard.timeline,
+
     visibleTimeline,
+
     filters,
     selection,
     reset,
+
+    runtimeConnected,
   };
 }

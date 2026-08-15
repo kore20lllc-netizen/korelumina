@@ -1,6 +1,6 @@
 import type {
   EducationalTimelineEvent,
-} from "../model";
+} from "../../../model";
 
 export const educationalTimeline: EducationalTimelineEvent[] = [
   {

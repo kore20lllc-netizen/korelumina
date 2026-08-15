@@ -1,18 +1,22 @@
 import {
-  competencyObjectives,
-} from "./competencies";
+  certifiedEducationalDashboardContract,
+} from "../state/contracts/CertifiedEducationalDashboardContract";
 
 import {
   educationalArtifacts,
-} from "./artifacts";
+} from "../state/contracts/data/artifacts";
 
 import {
   educationalModules,
-} from "./modules";
+} from "../state/contracts/data/modules";
+
+import {
+  competencyObjectives,
+} from "../state/contracts/data/competencies";
 
 import {
   educationalTimeline,
-} from "./timeline";
+} from "../state/contracts/data/timeline";
 
 import type {
   EducationalFixtureModel,
@@ -25,14 +29,20 @@ export {
   educationalTimeline,
 };
 
-export const educationalFixture: EducationalFixtureModel = {
-  state: "success",
+export const educationalFixture:
+EducationalFixtureModel = {
+  state:
+    certifiedEducationalDashboardContract.state,
+
   artifacts:
-    educationalArtifacts,
+    certifiedEducationalDashboardContract.artifacts,
+
   modules:
-    educationalModules,
+    certifiedEducationalDashboardContract.modules,
+
   competencies:
-    competencyObjectives,
+    certifiedEducationalDashboardContract.competencies,
+
   timeline:
-    educationalTimeline,
+    certifiedEducationalDashboardContract.timeline,
 };

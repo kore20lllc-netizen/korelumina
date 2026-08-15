@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contract": "KoreLumina Knowledge Operations Certified UI",
+  "contract": "KoreLumina Knowledge Operations + Education Certified UI",
   "policy": {
     "uiIsContract": true,
     "certifiedPresentationImmutable": true,
@@ -10,7 +10,7 @@
       "runtime projections",
       "service wiring",
       "callbacks",
-      "state management",
+      "state management that does not change certified presentation topology",
       "text values supplied by runtime"
     ],
     "requiresVisualRecertification": [
@@ -22,7 +22,11 @@
       "glass/material ownership",
       "spacing",
       "rails",
-      "overflow behavior"
+      "overflow behavior",
+      "conditional mounting of certified Education regions",
+      "removal or replacement of Educational Progress surfaces",
+      "removal or replacement of Competency Posture surfaces",
+      "changes to Education workspace presentation topology"
     ]
   },
   "generatedFrom": "current visually approved green working tree",
@@ -50,6 +54,54 @@
     "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipSurface.tsx": {
       "sha256": "82ca22c7a3945ce9464dd1b619d329fcb72627294e0a936a67be7fe1f4a3f263",
       "elementCount": 1
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx": {
+      "sha256": "84ec58679e6f45d288c44c98104a77a046821ea0e332c8f645d4fb298683d4e7",
+      "elementCount": 47
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalDashboardMain.tsx": {
+      "sha256": "021f88e6c0677426a291d687e8302f84e1183ed8b5c6a466bbd5b4cf8044ea63",
+      "elementCount": 14
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalDashboardSidebar.tsx": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "elementCount": 0
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx": {
+      "sha256": "ff8dd54dd05ddb13670fa5984ca6055e6e0b4c9e7705b37c2d1c52277d5db877",
+      "elementCount": 34
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx": {
+      "sha256": "548c0bd64aced5014a9647fefec3a52a420d9c0b679c1ac0fe1256cc9811e3ba",
+      "elementCount": 17
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx": {
+      "sha256": "88fbc306b25c58a7b8ab04d3e05e76c989e65adcca2d7ff66ead274c0ac42849",
+      "elementCount": 50
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx": {
+      "sha256": "df9d015740d97c9cdf4f9b085bdfe21abf6350e7733d54b00627ff2e7cc9a474",
+      "elementCount": 37
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx": {
+      "sha256": "44b4d3acd24dee7f96db5f70fa94bd8f816681255012bc5deaf16d69736e4ec0",
+      "elementCount": 29
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx": {
+      "sha256": "3ad12b28ed298d1edba8819d5eac328962d3d14373ee22d3e158422910d08416",
+      "elementCount": 26
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ExecutiveEducationalSummary.tsx": {
+      "sha256": "d7906455deb94c4bf7f263aa5b1cd7da7c5f942b56baca5dfb5d9f1493b28587",
+      "elementCount": 41
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx": {
+      "sha256": "ed2238089ac230d4f2de51aab66c154879a5923118307d53c4efeeab5eb6d06a",
+      "elementCount": 11
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/states/EducationalStateSurface.tsx": {
+      "sha256": "4b4ecd939e94afabfe579f5226d5c873973bf7d45a17e7d86520d93ed26de520",
+      "elementCount": 10
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx": {
       "sha256": "28f8f5261e4a91db273d387d9508327b9b34697ebc1b1300f3bec3342dee4743",

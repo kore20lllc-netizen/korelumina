@@ -1,6 +1,6 @@
 import type {
   EducationalArtifact,
-} from "../model";
+} from "../../../model";
 
 export const educationalArtifacts: EducationalArtifact[] = [
   {

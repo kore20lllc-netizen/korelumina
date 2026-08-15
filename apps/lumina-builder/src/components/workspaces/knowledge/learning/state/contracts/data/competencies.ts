@@ -1,6 +1,6 @@
 import type {
   CompetencyObjective,
-} from "../model";
+} from "../../../model";
 
 export const competencyObjectives: CompetencyObjective[] = [
   {

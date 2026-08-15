@@ -164,7 +164,7 @@ export function EducationalCommandCenter() {
       toolbar={
         <div className="flex w-full flex-col items-stretch gap-2 xl:w-auto">
           <LuminaStatusBadge status="warning">
-            Local fixture model
+            Runtime-backed model
           </LuminaStatusBadge>
 
           <label className="block">
@@ -292,13 +292,13 @@ export function EducationalCommandCenter() {
           "
         >
           <div className="text-xs font-semibold text-amber-400">
-            No backend implication
+            Runtime source of truth
           </div>
 
           <p className="mt-2 text-xs leading-5 text-sky-500/76">
-            All values are representative UI fixtures. No registry,
-            compiler, service, API, persistence or activation action
-            is connected.
+            Educational artifacts and timeline are projected from
+            governed Canonical Knowledge through the Runtime education
+            service. Curriculum structure remains UI-contract governed.
           </p>
         </div>
       </div>
