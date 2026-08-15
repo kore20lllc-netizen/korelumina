@@ -208,7 +208,7 @@ export function KnowledgeCapsule({
 
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-cyan-100/88">
+              <span className="relative -left-2 font-mono text-[10px] font-semibold tracking-[0.14em] text-cyan-100/88 min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                 {capsule.identity}
               </span>
 

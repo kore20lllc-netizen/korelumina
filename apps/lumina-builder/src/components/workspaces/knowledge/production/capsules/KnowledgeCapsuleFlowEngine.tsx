@@ -559,7 +559,7 @@ export function KnowledgeCapsuleFlowEngine({
                             <div
                               className={[
                                 "mt-4 grid gap-3",
-                                "max-h-[360px] overflow-y-auto overscroll-contain pr-1",
+                                "h-[360px] overflow-y-auto overscroll-contain pr-1",
                                 "[scrollbar-gutter:stable]",
                                 "[scrollbar-width:thin]",
                               ].join(" ")}

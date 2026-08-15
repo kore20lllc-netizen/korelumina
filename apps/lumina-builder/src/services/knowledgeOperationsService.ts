@@ -433,9 +433,108 @@ export async function submitCanonicalReviewDecision(
   return body;
 }
 
+export type KnowledgeManufacturingStage =
+  | "Evidence Intake"
+  | "Documentation Compiler"
+  | "Conversation Compiler"
+  | "Git Compiler"
+  | "Runtime Compiler"
+  | "Mission Compiler"
+  | "Execution Compiler"
+  | "Knowledge IR"
+  | "Validation"
+  | "Knowledge Package Assembly"
+  | "Canonical Review"
+  | "Canonical Knowledge";
+
+export type KnowledgeManufacturingStageOutcome =
+  | "entered"
+  | "processing"
+  | "completed"
+  | "not_applicable"
+  | "awaiting_human_review"
+  | "approved"
+  | "published"
+  | "blocked"
+  | "failed";
+
+export interface KnowledgeManufacturingStageEvent {
+  stage:
+    KnowledgeManufacturingStage;
+
+  outcome:
+    KnowledgeManufacturingStageOutcome;
+
+  at:
+    number;
+
+  detail?:
+    string;
+}
+
+export interface KnowledgeManufacturingRunView {
+  id:
+    string;
+
+  evidenceId:
+    string;
+
+  currentStage:
+    KnowledgeManufacturingStage;
+
+  status:
+    | "active"
+    | "blocked"
+    | "failed"
+    | "completed";
+
+  packageId?:
+    string;
+
+  canonicalKnowledgeIds:
+    string[];
+
+  stageHistory:
+    KnowledgeManufacturingStageEvent[];
+
+  createdAt:
+    number;
+
+  updatedAt:
+    number;
+}
+
 export interface KnowledgeProductionLifecycleSnapshot {
   ok:
     true;
+
+  manufacturingRuns:
+    KnowledgeManufacturingRunView[];
+
+  manufacturingReplay:
+    {
+      runId:
+        string;
+
+      stage:
+        KnowledgeManufacturingStage;
+
+      stageIndex:
+        number;
+
+      totalStages:
+        number;
+
+      active:
+        boolean;
+
+      startedAt:
+        number;
+
+      updatedAt:
+        number;
+    } |
+    null;
 
   packages:
     CanonicalReviewPackageView[];
@@ -519,6 +618,21 @@ export interface KnowledgeProductionLifecycleSnapshot {
     }>;
 
   summary: {
+    manufacturingRuns:
+      number;
+
+    activeManufacturingRuns:
+      number;
+
+    blockedManufacturingRuns:
+      number;
+
+    failedManufacturingRuns:
+      number;
+
+    completedManufacturingRuns:
+      number;
+
     packages:
       number;
 

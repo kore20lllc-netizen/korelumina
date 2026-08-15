@@ -90,6 +90,97 @@ test(
     registerKnowledgeProductionLifecycleRoutes(
       app,
       {
+        manufacturingRunService: {
+          list:
+            () => [
+              {
+                id:
+                  "KMR-001",
+
+                evidenceId:
+                  "EV-001",
+
+                currentStage:
+                  "Canonical Knowledge",
+
+                status:
+                  "completed",
+
+                packageId:
+                  "KP-2026-001",
+
+                canonicalKnowledgeIds:
+                  [
+                    "canonical:001",
+                  ],
+
+                stageHistory:
+                  [],
+
+                createdAt:
+                  1,
+
+                updatedAt:
+                  30,
+              },
+
+              {
+                id:
+                  "KMR-002",
+
+                evidenceId:
+                  "EV-002",
+
+                currentStage:
+                  "Canonical Review",
+
+                status:
+                  "active",
+
+                packageId:
+                  "KP-2026-002",
+
+                canonicalKnowledgeIds:
+                  [],
+
+                stageHistory:
+                  [],
+
+                createdAt:
+                  2,
+
+                updatedAt:
+                  25,
+              },
+
+              {
+                id:
+                  "KMR-PREPACKAGE",
+
+                evidenceId:
+                  "EV-003",
+
+                currentStage:
+                  "Git Compiler",
+
+                status:
+                  "active",
+
+                canonicalKnowledgeIds:
+                  [],
+
+                stageHistory:
+                  [],
+
+                createdAt:
+                  3,
+
+                updatedAt:
+                  22,
+              },
+            ],
+        } as never,
+
         packageService: {
           list:
             () => [
@@ -115,6 +206,12 @@ test(
                   10,
               },
             ],
+        } as never,
+
+        replayService: {
+          get:
+            () =>
+              null,
         } as never,
 
         canonicalStore: {
@@ -201,6 +298,24 @@ test(
       );
 
       assert.deepEqual(
+        body.manufacturingRuns.map(
+          (
+            item:
+              {
+                id:
+                  string;
+              },
+          ) =>
+            item.id,
+        ),
+        [
+          "KMR-001",
+          "KMR-002",
+          "KMR-PREPACKAGE",
+        ],
+      );
+
+      assert.deepEqual(
         body.packages.map(
           (
             item:
@@ -252,6 +367,21 @@ test(
       assert.deepEqual(
         body.summary,
         {
+          manufacturingRuns:
+            3,
+
+          activeManufacturingRuns:
+            2,
+
+          blockedManufacturingRuns:
+            0,
+
+          failedManufacturingRuns:
+            0,
+
+          completedManufacturingRuns:
+            1,
+
           packages:
             2,
 

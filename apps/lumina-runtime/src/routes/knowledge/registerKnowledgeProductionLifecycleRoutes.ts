@@ -17,6 +17,14 @@ import type {
   KnowledgePackageService,
 } from "../../knowledge-preservation/package/index.js";
 
+import type {
+  KnowledgeManufacturingRunService,
+} from "../../knowledge-preservation/manufacturing/index.js";
+
+import type {
+  KnowledgeManufacturingReplayService,
+} from "../../knowledge-preservation/manufacturing/index.js";
+
 export interface KnowledgeProductionLifecycleMemoryStore {
   list():
     OrganizationalMemoryRecord[];
@@ -25,6 +33,12 @@ export interface KnowledgeProductionLifecycleMemoryStore {
 export interface KnowledgeProductionLifecycleRuntime {
   packageService:
     KnowledgePackageService;
+
+  manufacturingRunService:
+    KnowledgeManufacturingRunService;
+
+  replayService:
+    KnowledgeManufacturingReplayService;
 
   canonicalStore:
     CanonicalKnowledgeStore;
@@ -84,6 +98,10 @@ export function registerKnowledgeProductionLifecycleRoutes(
       res:
         Response,
     ) => {
+      const manufacturingRuns =
+        runtime.manufacturingRunService
+          .list();
+
       const packages =
         runtime.packageService
           .list()
@@ -147,6 +165,12 @@ export function registerKnowledgeProductionLifecycleRoutes(
         ok:
           true,
 
+        manufacturingRuns,
+
+        manufacturingReplay:
+          runtime.replayService
+            .get(),
+
         packages,
 
         canonicalItems,
@@ -154,6 +178,37 @@ export function registerKnowledgeProductionLifecycleRoutes(
         organizationalMemory,
 
         summary: {
+          manufacturingRuns:
+            manufacturingRuns.length,
+
+          activeManufacturingRuns:
+            manufacturingRuns.filter(
+              (run) =>
+                run.status ===
+                "active",
+            ).length,
+
+          blockedManufacturingRuns:
+            manufacturingRuns.filter(
+              (run) =>
+                run.status ===
+                "blocked",
+            ).length,
+
+          failedManufacturingRuns:
+            manufacturingRuns.filter(
+              (run) =>
+                run.status ===
+                "failed",
+            ).length,
+
+          completedManufacturingRuns:
+            manufacturingRuns.filter(
+              (run) =>
+                run.status ===
+                "completed",
+            ).length,
+
           packages:
             packages.length,
 

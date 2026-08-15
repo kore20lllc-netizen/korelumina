@@ -127,6 +127,15 @@ import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
 
+
+import {
+  registerKnowledgeManufacturingReplayRoutes,
+} from "./routes/knowledge/registerKnowledgeManufacturingReplayRoutes.js";
+
+import {
+  knowledgeManufacturingReplayService,
+} from "./knowledge-preservation/manufacturing/index.js";
+
 const app = express();
 
 const knowledgePlatform =
@@ -160,6 +169,8 @@ export const runtimeCanonicalReviewService =
   new CanonicalReviewService(
     runtimeKnowledgePreservationPlatform
       .packageService,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
   );
 
 export const runtimeGovernedPromotionService =
@@ -167,6 +178,8 @@ export const runtimeGovernedPromotionService =
     runtimeKnowledgePreservationPlatform
       .packageService,
     knowledgePlatform.store,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
   );
 
 const knowledgeContextBuilder =
@@ -464,12 +477,31 @@ registerOrganizationalMemoryAdaptationRoutes(
   },
 );
 
+registerKnowledgeManufacturingReplayRoutes(
+  app,
+  {
+    manufacturingRunService:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    replayService:
+      knowledgeManufacturingReplayService,
+  },
+);
+
 registerKnowledgeProductionLifecycleRoutes(
   app,
   {
     packageService:
       runtimeKnowledgePreservationPlatform
         .packageService,
+
+    manufacturingRunService:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    replayService:
+      knowledgeManufacturingReplayService,
 
     canonicalStore:
       knowledgePlatform.store,

@@ -2,10 +2,6 @@ export {
   KnowledgeCapsule,
 } from "./KnowledgeCapsule";
 
-export {
-  knowledgeCapsules,
-} from "./fixtures";
-
 export type {
   KnowledgeCapsule as KnowledgeCapsuleModel,
   KnowledgeCapsuleIntegrity,

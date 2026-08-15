@@ -56,7 +56,7 @@
       "elementCount": 115
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx": {
-      "sha256": "8761f934e614ed989ccd998e1f6687d99944baf1d86a8e9fa3a503a1674648bc",
+      "sha256": "5a6ad82fbe2bee2ccd257dfc398391483d9cbe23cc520812f2f484db9935aa7c",
       "elementCount": 22
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFilters.tsx": {
@@ -64,7 +64,7 @@
       "elementCount": 27
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx": {
-      "sha256": "c548ffaa82fd7f2b2c571fbcac68856673c4db04b9e95df1359de7909c230e8b",
+      "sha256": "75e1f7c97176a8e2151a4f9109354346868955358660823d1e8f67c674e4426b",
       "elementCount": 50
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx": {

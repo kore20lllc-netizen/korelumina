@@ -7,6 +7,10 @@ import {
   saveKnowledgePackage,
 } from "../package/index.js";
 
+import type {
+  KnowledgeManufacturingRunService,
+} from "../manufacturing/index.js";
+
 export type CanonicalReviewDecision =
   | "approved"
   | "rejected"
@@ -115,6 +119,9 @@ export class CanonicalReviewService {
   constructor(
     private readonly packageService =
       new KnowledgePackageService(),
+
+    private readonly manufacturingRunService?:
+      KnowledgeManufacturingRunService,
   ) {}
 
   review(
@@ -299,6 +306,75 @@ export class CanonicalReviewService {
     saveKnowledgePackage(
       updated,
     );
+
+    const manufacturingRun =
+      this.manufacturingRunService
+        ?.findByPackageId(
+          updated.id,
+        );
+
+    if (
+      manufacturingRun &&
+      manufacturingRun.status ===
+        "active" &&
+      manufacturingRun.currentStage ===
+        "Canonical Review"
+    ) {
+      if (
+        input.decision ===
+        "approved"
+      ) {
+        this.manufacturingRunService
+          ?.advance(
+            manufacturingRun.id,
+            {
+              outcome:
+                "approved",
+
+              at:
+                reviewedAt,
+
+              detail:
+                `Canonical review approved by ${reviewerId}.`,
+            },
+          );
+      } else if (
+        input.decision ===
+        "remediation_required"
+      ) {
+        this.manufacturingRunService
+          ?.advance(
+            manufacturingRun.id,
+            {
+              outcome:
+                "blocked",
+
+              at:
+                reviewedAt,
+
+              detail:
+                input.reason ??
+                "Canonical review requires governed remediation.",
+            },
+          );
+      } else {
+        this.manufacturingRunService
+          ?.advance(
+            manufacturingRun.id,
+            {
+              outcome:
+                "failed",
+
+              at:
+                reviewedAt,
+
+              detail:
+                input.reason ??
+                "Canonical review rejected the Knowledge Package.",
+            },
+          );
+      }
+    }
 
     return {
       knowledgePackage:

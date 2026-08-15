@@ -1,4 +1,5 @@
 import type {
+  KnowledgeManufacturingRunView,
   KnowledgeProductionLifecycleSnapshot,
 } from "@/services/knowledgeOperationsService";
 
@@ -20,13 +21,16 @@ export interface KnowledgeCapsuleProductionProjection {
     CapsuleManufacturingPosition[];
 }
 
+type LifecyclePackage =
+  KnowledgeProductionLifecycleSnapshot[
+    "packages"
+  ][number];
+
 function stateForPackage(
   state:
     string,
 ): KnowledgeCapsuleState {
-  switch (
-    state
-  ) {
+  switch (state) {
     case "captured":
     case "compiled":
       return "processing";
@@ -63,13 +67,11 @@ function stateForPackage(
   }
 }
 
-function stationForPackage(
+function stationForLegacyPackage(
   state:
     string,
 ): ManufacturingStation {
-  switch (
-    state
-  ) {
+  switch (state) {
     case "captured":
       return "Evidence Intake";
 
@@ -101,6 +103,7 @@ function displayValue(
     string |
     null |
     undefined,
+
   fallback =
     "Unavailable",
 ): string {
@@ -115,7 +118,7 @@ function displayValue(
 
 function titleForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): string {
   return (
     knowledgePackage
@@ -127,7 +130,7 @@ function titleForPackage(
 
 function summaryForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): string {
   return (
     knowledgePackage
@@ -139,7 +142,7 @@ function summaryForPackage(
 
 function compilerForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): string {
   const compiler =
     knowledgePackage
@@ -149,32 +152,32 @@ function compilerForPackage(
 
   return displayValue(
     compiler,
-    "Unavailable",
   );
 }
 
 function sourcesForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): string[] {
-  const sourceLocations =
+  if (
     knowledgePackage
       .provenance
-      .sourceLocations;
-
-  if (
-    sourceLocations.length >
+      .sourceLocations
+      .length >
     0
   ) {
     return [
-      ...sourceLocations,
+      ...knowledgePackage
+        .provenance
+        .sourceLocations,
     ];
   }
 
   if (
     knowledgePackage
       .provenance
-      .sources.length >
+      .sources
+      .length >
     0
   ) {
     return [
@@ -192,7 +195,7 @@ function sourcesForPackage(
 
 function approvalForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): string {
   switch (
     knowledgePackage
@@ -215,14 +218,30 @@ function approvalForPackage(
   }
 }
 
+function confidenceForPackage(
+  knowledgePackage:
+    LifecyclePackage,
+): number {
+  const value =
+    knowledgePackage
+      .confidence;
+
+  return Math.round(
+    value <= 1
+      ? value * 100
+      : value,
+  );
+}
+
 function layersForPackage(
   knowledgePackage:
-    KnowledgeProductionLifecycleSnapshot["packages"][number],
+    LifecyclePackage,
 ): KnowledgeCapsule["layers"] {
   const provenanceHealthy =
     knowledgePackage
       .provenance
-      .evidenceIds.length >
+      .evidenceIds
+      .length >
       0 ||
     knowledgePackage
       .sourceEvidenceRefs
@@ -262,7 +281,6 @@ function layersForPackage(
           ? `Authority: ${knowledgePackage.authority}.`
           : "Authority unavailable.",
     },
-
     {
       id:
         "provenance",
@@ -280,7 +298,6 @@ function layersForPackage(
           ? "Persisted evidence provenance is available."
           : "Persisted provenance references are unavailable.",
     },
-
     {
       id:
         "validation",
@@ -298,7 +315,6 @@ function layersForPackage(
           ? "One or more validation results remain blocked."
           : "No blocked persisted validation results.",
     },
-
     {
       id:
         "governance",
@@ -319,184 +335,595 @@ function layersForPackage(
   ];
 }
 
+function latestCurrentStageOutcome(
+  run:
+    KnowledgeManufacturingRunView,
+) {
+  return [
+    ...run.stageHistory,
+  ]
+    .reverse()
+    .find(
+      (event) =>
+        event.stage ===
+        run.currentStage,
+    )
+    ?.outcome;
+}
+
+function stateForRun(
+  run:
+    KnowledgeManufacturingRunView,
+
+  knowledgePackage:
+    LifecyclePackage |
+    undefined,
+): KnowledgeCapsuleState {
+  if (
+    run.status ===
+    "blocked"
+  ) {
+    return "blocked";
+  }
+
+  if (
+    run.status ===
+    "failed"
+  ) {
+    return "failed";
+  }
+
+  if (
+    knowledgePackage
+  ) {
+    return stateForPackage(
+      knowledgePackage.state,
+    );
+  }
+
+  const latestOutcome =
+    latestCurrentStageOutcome(
+      run,
+    );
+
+  if (
+    run.currentStage ===
+    "Canonical Review"
+  ) {
+    return latestOutcome ===
+      "awaiting_human_review"
+      ? "needs-review"
+      : "waiting";
+  }
+
+  if (
+    run.currentStage ===
+    "Canonical Knowledge"
+  ) {
+    return run.status ===
+      "completed" ||
+      latestOutcome ===
+        "published"
+      ? "published"
+      : "approved";
+  }
+
+  if (
+    run.currentStage ===
+      "Validation" ||
+    run.currentStage ===
+      "Knowledge Package Assembly"
+  ) {
+    return "processing";
+  }
+
+  return "processing";
+}
+
+function prePackageLayers(
+  run:
+    KnowledgeManufacturingRunView,
+): KnowledgeCapsule["layers"] {
+  return [
+    {
+      id:
+        "evidence",
+
+      label:
+        "Evidence",
+
+      status:
+        "healthy",
+
+      detail:
+        `Persisted evidence identity: ${run.evidenceId}.`,
+    },
+    {
+      id:
+        "manufacturing",
+
+      label:
+        "Manufacturing",
+
+      status:
+        run.status ===
+          "failed"
+          ? "failed"
+          : run.status ===
+              "blocked"
+            ? "warning"
+            : "healthy",
+
+      detail:
+        `Authoritative stage: ${run.currentStage}.`,
+    },
+  ];
+}
+
+function capsuleForRun(
+  run:
+    KnowledgeManufacturingRunView,
+
+  knowledgePackage:
+    LifecyclePackage |
+    undefined,
+): KnowledgeCapsule {
+  const remediationRequired =
+    knowledgePackage
+      ?.remediation
+      .required ??
+    run.status ===
+      "blocked";
+
+  const sources =
+    knowledgePackage
+      ? sourcesForPackage(
+          knowledgePackage,
+        )
+      : [
+          run.evidenceId,
+        ];
+
+  return {
+    /*
+     * The Manufacturing Run is the capsule.
+     *
+     * This identity exists before compilation and remains stable
+     * through package assembly, review and publication.
+     */
+    id:
+      run.id,
+
+    identity:
+      run.id,
+
+    title:
+      knowledgePackage
+        ? titleForPackage(
+            knowledgePackage,
+          )
+        : run.evidenceId,
+
+    summary:
+      knowledgePackage
+        ? summaryForPackage(
+            knowledgePackage,
+          )
+        : "Persisted evidence is moving through the governed Knowledge Preservation manufacturing lifecycle.",
+
+    stage:
+      run.currentStage,
+
+    destination:
+      knowledgePackage
+        ? displayValue(
+            knowledgePackage
+              .destination,
+          )
+        : "Canonical Knowledge",
+
+    state:
+      stateForRun(
+        run,
+        knowledgePackage,
+      ),
+
+    integrity:
+      remediationRequired
+        ? "peeling"
+        : "sealed",
+
+    authority:
+      knowledgePackage
+        ? displayValue(
+            knowledgePackage
+              .authority,
+          )
+        : "Unassigned",
+
+    confidence:
+      knowledgePackage
+        ? confidenceForPackage(
+            knowledgePackage,
+          )
+        : 0,
+
+    owner:
+      knowledgePackage
+        ? displayValue(
+            knowledgePackage
+              .owner,
+          )
+        : "Unassigned",
+
+    approval:
+      knowledgePackage
+        ? approvalForPackage(
+            knowledgePackage,
+          )
+        : run.currentStage ===
+            "Canonical Review"
+          ? "Human review required"
+          : "Not yet applicable",
+
+    packageType:
+      knowledgePackage
+        ? displayValue(
+            knowledgePackage
+              .items[0]
+              ?.type,
+            "Knowledge Package",
+          )
+        : "Evidence",
+
+    mission:
+      "Unavailable",
+
+    compiler:
+      knowledgePackage
+        ? compilerForPackage(
+            knowledgePackage,
+          )
+        : "Pending compiler applicability",
+
+    educationalModule:
+      "Unavailable",
+
+    consumer:
+      "Unavailable",
+
+    sources,
+
+    failedLayer:
+      run.status ===
+        "failed"
+        ? run.currentStage
+        : remediationRequired
+          ? "Validation"
+          : undefined,
+
+    remediation:
+      run.status ===
+        "blocked"
+        ? `Manufacturing blocked at ${run.currentStage}.`
+        : knowledgePackage
+              ?.remediation
+              .required
+          ? `Remediation status: ${knowledgePackage.remediation.status}.`
+          : undefined,
+
+    responsibleAuthority:
+      remediationRequired
+        ? knowledgePackage
+          ? displayValue(
+              knowledgePackage
+                .owner,
+            )
+          : "Unassigned"
+        : undefined,
+
+    blockedDependencies:
+      knowledgePackage
+        ?.remediation
+        .required
+        ? [
+            ...knowledgePackage
+              .dependencies,
+          ]
+        : undefined,
+
+    layers:
+      knowledgePackage
+        ? layersForPackage(
+            knowledgePackage,
+          )
+        : prePackageLayers(
+            run,
+          ),
+  };
+}
+
+function capsuleForLegacyPackage(
+  knowledgePackage:
+    LifecyclePackage,
+): KnowledgeCapsule {
+  const remediationRequired =
+    knowledgePackage
+      .remediation
+      .required;
+
+  const sources =
+    sourcesForPackage(
+      knowledgePackage,
+    );
+
+  return {
+    id:
+      knowledgePackage.id,
+
+    identity:
+      knowledgePackage.id,
+
+    title:
+      titleForPackage(
+        knowledgePackage,
+      ),
+
+    summary:
+      summaryForPackage(
+        knowledgePackage,
+      ),
+
+    stage:
+      stationForLegacyPackage(
+        knowledgePackage.state,
+      ),
+
+    destination:
+      displayValue(
+        knowledgePackage
+          .destination,
+      ),
+
+    state:
+      stateForPackage(
+        knowledgePackage.state,
+      ),
+
+    integrity:
+      remediationRequired
+        ? "peeling"
+        : "sealed",
+
+    authority:
+      displayValue(
+        knowledgePackage
+          .authority,
+      ),
+
+    confidence:
+      confidenceForPackage(
+        knowledgePackage,
+      ),
+
+    owner:
+      displayValue(
+        knowledgePackage
+          .owner,
+      ),
+
+    approval:
+      approvalForPackage(
+        knowledgePackage,
+      ),
+
+    packageType:
+      displayValue(
+        knowledgePackage
+          .items[0]
+          ?.type,
+        "Knowledge Package",
+      ),
+
+    mission:
+      "Unavailable",
+
+    compiler:
+      compilerForPackage(
+        knowledgePackage,
+      ),
+
+    educationalModule:
+      "Unavailable",
+
+    consumer:
+      "Unavailable",
+
+    sources:
+      sources.length >
+      0
+        ? sources
+        : [
+            "Unavailable",
+          ],
+
+    failedLayer:
+      remediationRequired
+        ? "Validation"
+        : undefined,
+
+    remediation:
+      remediationRequired
+        ? `Remediation status: ${knowledgePackage.remediation.status}.`
+        : undefined,
+
+    responsibleAuthority:
+      remediationRequired
+        ? displayValue(
+            knowledgePackage
+              .owner,
+          )
+        : undefined,
+
+    blockedDependencies:
+      remediationRequired
+        ? [
+            ...knowledgePackage
+              .dependencies,
+          ]
+        : undefined,
+
+    layers:
+      layersForPackage(
+        knowledgePackage,
+      ),
+  };
+}
+
 export function createKnowledgeCapsuleProductionProjection(
   snapshot:
     KnowledgeProductionLifecycleSnapshot,
 ): KnowledgeCapsuleProductionProjection {
-  const capsules =
-    snapshot.packages.map(
-      (
-        knowledgePackage,
-      ): KnowledgeCapsule => {
-        const remediationRequired =
-          knowledgePackage
-            .remediation
-            .required;
+  const packageById =
+    new Map(
+      snapshot.packages.map(
+        (
+          knowledgePackage,
+        ) => [
+          knowledgePackage.id,
+          knowledgePackage,
+        ] as const,
+      ),
+    );
 
-        const sources =
-          sourcesForPackage(
-            knowledgePackage,
-          );
+  const packageIdsOwnedByRuns =
+    new Set(
+      snapshot.manufacturingRuns
+        .map(
+          (run) =>
+            run.packageId,
+        )
+        .filter(
+          (
+            id,
+          ): id is string =>
+            typeof id ===
+              "string" &&
+            id.length >
+              0,
+        ),
+    );
 
-        return {
-          id:
-            knowledgePackage.id,
+  const runCapsules =
+    snapshot.manufacturingRuns.map(
+      (run) => {
+        const replay =
+          snapshot.manufacturingReplay;
 
-          identity:
-            knowledgePackage.id,
+        const projectedRun =
+          replay?.active &&
+          replay.runId ===
+            run.id
+            ? {
+                ...run,
 
-          title:
-            titleForPackage(
-              knowledgePackage,
-            ),
+                currentStage:
+                  replay.stage,
+              }
+            : run;
 
-          summary:
-            summaryForPackage(
-              knowledgePackage,
-            ),
-
-          stage:
-            stationForPackage(
-              knowledgePackage
-                .state,
-            ),
-
-          destination:
-            displayValue(
-              knowledgePackage
-                .destination,
-            ),
-
-          state:
-            stateForPackage(
-              knowledgePackage
-                .state,
-            ),
-
-          integrity:
-            remediationRequired
-              ? "peeling"
-              : "sealed",
-
-          authority:
-            displayValue(
-              knowledgePackage
-                .authority,
-            ),
-
-          confidence:
-            Math.round(
-              knowledgePackage
-                .confidence *
-                100,
-            ) <= 100
-              ? Math.round(
-                  knowledgePackage
-                    .confidence *
-                    100,
-                )
-              : Math.round(
-                  knowledgePackage
-                    .confidence,
-                ),
-
-          owner:
-            displayValue(
-              knowledgePackage
-                .owner,
-            ),
-
-          approval:
-            approvalForPackage(
-              knowledgePackage,
-            ),
-
-          packageType:
-            displayValue(
-              knowledgePackage
-                .items[0]
-                ?.type,
-              "Knowledge Package",
-            ),
-
-          mission:
-            "Unavailable",
-
-          compiler:
-            compilerForPackage(
-              knowledgePackage,
-            ),
-
-          educationalModule:
-            "Unavailable",
-
-          consumer:
-            "Unavailable",
-
-          sources:
-            sources.length >
-            0
-              ? sources
-              : [
-                  "Unavailable",
-                ],
-
-          failedLayer:
-            remediationRequired
-              ? "Validation"
-              : undefined,
-
-          remediation:
-            remediationRequired
-              ? `Remediation status: ${knowledgePackage.remediation.status}.`
-              : undefined,
-
-          responsibleAuthority:
-            remediationRequired
-              ? displayValue(
-                  knowledgePackage
-                    .owner,
-                )
-              : undefined,
-
-          blockedDependencies:
-            remediationRequired
-              ? [
-                  ...knowledgePackage
-                    .dependencies,
-                ]
-              : undefined,
-
-          layers:
-            layersForPackage(
-              knowledgePackage,
-            ),
-        };
+        return capsuleForRun(
+          projectedRun,
+          run.packageId
+            ? packageById.get(
+                run.packageId,
+              )
+            : undefined,
+        );
       },
     );
 
-  const positions =
-    snapshot.packages.map(
-      (
-        knowledgePackage,
-        index,
-      ): CapsuleManufacturingPosition => ({
-        capsuleId:
+  /*
+   * Backward compatibility:
+   *
+   * packages created before Manufacturing Runs existed remain
+   * observable, but any package already linked to a run is not
+   * duplicated as a second capsule.
+   */
+  const legacyPackages =
+    snapshot.packages.filter(
+      (knowledgePackage) =>
+        !packageIdsOwnedByRuns.has(
           knowledgePackage.id,
-
-        station:
-          stationForPackage(
-            knowledgePackage.state,
-          ),
-
-        queuePosition:
-          index +
-          1,
-
-        branches:
-          [],
-      }),
+        ),
     );
+
+  const legacyCapsules =
+    legacyPackages.map(
+      capsuleForLegacyPackage,
+    );
+
+  const capsules = [
+    ...runCapsules,
+    ...legacyCapsules,
+  ];
+
+  const positions:
+    CapsuleManufacturingPosition[] = [
+      ...snapshot.manufacturingRuns.map(
+        (
+          run,
+          index,
+        ) => {
+          const replay =
+            snapshot.manufacturingReplay;
+
+          return {
+            capsuleId:
+              run.id,
+
+            station:
+              replay?.active &&
+              replay.runId ===
+                run.id
+                ? replay.stage
+                : run.currentStage,
+
+            queuePosition:
+              index +
+              1,
+
+            branches:
+              [],
+          };
+        },
+      ),
+
+      ...legacyPackages.map(
+        (
+          knowledgePackage,
+          index,
+        ) => ({
+          capsuleId:
+            knowledgePackage.id,
+
+          station:
+            stationForLegacyPackage(
+              knowledgePackage.state,
+            ),
+
+          queuePosition:
+            snapshot
+              .manufacturingRuns
+              .length +
+            index +
+            1,
+
+          branches:
+            [],
+        }),
+      ),
+    ];
 
   return {
     capsules,

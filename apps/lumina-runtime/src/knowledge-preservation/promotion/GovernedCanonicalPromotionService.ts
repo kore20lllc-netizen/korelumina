@@ -19,6 +19,10 @@ import {
   saveKnowledgePackage,
 } from "../package/index.js";
 
+import type {
+  KnowledgeManufacturingRunService,
+} from "../manufacturing/index.js";
+
 interface ReviewMetadata {
   decision?: unknown;
   reviewerId?: unknown;
@@ -44,6 +48,9 @@ export class GovernedCanonicalPromotionService {
 
     private readonly canonicalStore =
       new CanonicalKnowledgeStore(),
+
+    private readonly manufacturingRunService?:
+      KnowledgeManufacturingRunService,
   ) {}
 
   promoteApprovedPackage(
@@ -249,6 +256,45 @@ export class GovernedCanonicalPromotionService {
     saveKnowledgePackage(
       updated,
     );
+
+    const manufacturingRun =
+      this.manufacturingRunService
+        ?.findByPackageId(
+          updated.id,
+        );
+
+    if (
+      manufacturingRun &&
+      manufacturingRun.status ===
+        "active" &&
+      manufacturingRun.currentStage ===
+        "Canonical Knowledge"
+    ) {
+      this.manufacturingRunService
+        ?.linkCanonicalKnowledge(
+          manufacturingRun.id,
+          canonicalItems.map(
+            (item) =>
+              item.id,
+          ),
+          now,
+        );
+
+      this.manufacturingRunService
+        ?.advance(
+          manufacturingRun.id,
+          {
+            outcome:
+              "published",
+
+            at:
+              now,
+
+            detail:
+              `${canonicalItems.length} governed canonical item(s) published as Canonical Knowledge.`,
+          },
+        );
+    }
 
     return {
       knowledgePackage:
