@@ -7,6 +7,7 @@ import {
   canonicalEducationEvidenceRefs,
   canonicalEducationRelationshipRefs,
   canonicalEducationSource,
+  canonicalEducationSourceRefs,
   educationMetadataString,
   educationMetadataStrings,
 } from "../normalization/index.js";
@@ -63,6 +64,9 @@ export interface EducationalArtifactProjection {
 
   source:
     string;
+
+  sourceRefs:
+    string[];
 
   lineage:
     string[];
@@ -311,6 +315,11 @@ export function projectEducationalArtifact(
 
     source:
       canonicalEducationSource(
+        item,
+      ),
+
+    sourceRefs:
+      canonicalEducationSourceRefs(
         item,
       ),
 

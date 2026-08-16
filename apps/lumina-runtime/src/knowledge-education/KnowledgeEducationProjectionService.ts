@@ -25,6 +25,12 @@ import {
   certifiedEducationalModules,
 } from "./CertifiedEducationalCurriculum.js";
 
+import {
+  coverageRequirementsForModule,
+  educationalStatusFromCoverage,
+  measureEducationalCoverage,
+} from "./measurement/index.js";
+
 import type {
   EducationalRuntimeCompetency,
   EducationalRuntimeModule,
@@ -123,17 +129,55 @@ export class KnowledgeEducationProjectionService {
 
       modules:
         certifiedEducationalModules.map(
-          (module) => ({
-            ...module,
+          (module) => {
+            const coverage =
+              measureEducationalCoverage(
+                artifacts,
+                coverageRequirementsForModule(
+                  module.id,
+                ),
+              );
 
-            dependencyIds: [
-              ...module.dependencyIds,
-            ],
+            return {
+              ...module,
 
-            competencyObjectives: [
-              ...module.competencyObjectives,
-            ],
-          }),
+              status:
+                educationalStatusFromCoverage(
+                  coverage.completion,
+                  module.conflict,
+                ),
+
+              completion:
+                coverage.completion,
+
+              coverage: {
+                satisfiedRequirements: [
+                  ...coverage.satisfied,
+                ],
+
+                missingRequirements: [
+                  ...coverage.missing,
+                ],
+
+                satisfiedCount:
+                  coverage.satisfiedCount,
+
+                requirementCount:
+                  coverage.requirementCount,
+
+                measurementVersion:
+                  coverage.measurementVersion,
+              },
+
+              dependencyIds: [
+                ...module.dependencyIds,
+              ],
+
+              competencyObjectives: [
+                ...module.competencyObjectives,
+              ],
+            };
+          },
         ),
 
       competencies:

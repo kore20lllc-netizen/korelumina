@@ -1,7 +1,7 @@
 import {
   AlertCircle,
+  BookOpen,
   CheckCircle2,
-  Circle,
   Clock3,
   LockKeyhole,
 } from "lucide-react";
@@ -49,7 +49,7 @@ const STATUS_ICON = {
   completed: CheckCircle2,
   active: Clock3,
   blocked: LockKeyhole,
-  "not-started": Circle,
+  "not-started": BookOpen,
   "needs-review": AlertCircle,
 };
 

@@ -221,3 +221,120 @@ export function normalizedEducationString(
         .toLowerCase()
     : null;
 }
+
+function normalizedStringArray(
+  value:
+    unknown,
+): string[] {
+  if (
+    !Array.isArray(
+      value,
+    )
+  ) {
+    return [];
+  }
+
+  return value.filter(
+    (
+      entry,
+    ): entry is string =>
+      typeof entry ===
+        "string" &&
+      entry.trim().length >
+        0,
+  );
+}
+
+export function canonicalEducationSourceRefs(
+  item:
+    CanonicalKnowledgeItem,
+): string[] {
+  const metadata =
+    educationMetadataRecord(
+      item,
+    );
+
+  const direct = [
+    ...educationMetadataStrings(
+      item,
+      "sourceLocations",
+    ),
+
+    ...educationMetadataStrings(
+      item,
+      "contentRefs",
+    ),
+  ];
+
+  const contentRef =
+    educationMetadataString(
+      item,
+      "contentRef",
+    );
+
+  const sourceLocation =
+    educationMetadataString(
+      item,
+      "sourceLocation",
+    );
+
+  if (
+    contentRef
+  ) {
+    direct.push(
+      contentRef,
+    );
+  }
+
+  if (
+    sourceLocation
+  ) {
+    direct.push(
+      sourceLocation,
+    );
+  }
+
+  const governance =
+    isEducationRecord(
+      metadata.governance,
+    )
+      ? metadata.governance
+      : null;
+
+  const provenance =
+    governance &&
+    isEducationRecord(
+      governance.provenance,
+    )
+      ? governance.provenance
+      : null;
+
+  const governedRefs =
+    provenance
+      ? [
+          ...normalizedStringArray(
+            provenance.sourceLocations,
+          ),
+
+          ...normalizedStringArray(
+            provenance.contentRefs,
+          ),
+        ]
+      : [];
+
+  return [
+    ...new Set(
+      [
+        ...direct,
+        ...governedRefs,
+      ]
+        .map(
+          (value) =>
+            value.trim(),
+        )
+        .filter(
+          Boolean,
+        ),
+    ),
+  ];
+}

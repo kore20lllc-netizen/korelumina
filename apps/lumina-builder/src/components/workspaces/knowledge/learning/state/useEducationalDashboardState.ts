@@ -51,6 +51,14 @@ interface EducationalDashboardData {
     EducationalTimelineEvent[];
 }
 
+/*
+ * Certified data preserves Education presentation topology only.
+ *
+ * It must never manufacture live progress.
+ *
+ * Until Runtime measurement arrives, module progress is deliberately
+ * neutral rather than falling back to historical modeled percentages.
+ */
 function certifiedBaseline():
 EducationalDashboardData {
   return {
@@ -61,7 +69,19 @@ EducationalDashboardData {
       certifiedEducationalDashboardContract.artifacts,
 
     modules:
-      certifiedEducationalDashboardContract.modules,
+      certifiedEducationalDashboardContract.modules.map(
+        (module) => ({
+          ...module,
+
+          status:
+            module.conflict
+              ? "blocked"
+              : "not-started",
+
+          completion:
+            0,
+        }),
+      ),
 
     competencies:
       certifiedEducationalDashboardContract.competencies,
@@ -71,6 +91,62 @@ EducationalDashboardData {
   };
 }
 
+function mergeRuntimeModules(
+  baseline:
+    EducationalModule[],
+
+  runtime:
+    EducationalModule[],
+): EducationalModule[] {
+  const runtimeById =
+    new Map(
+      runtime.map(
+        (module) => [
+          module.id,
+          module,
+        ],
+      ),
+    );
+
+  return baseline.map(
+    (certifiedModule) => {
+      const live =
+        runtimeById.get(
+          certifiedModule.id,
+        );
+
+      if (
+        !live
+      ) {
+        return certifiedModule;
+      }
+
+      /*
+       * UI topology remains certified.
+       *
+       * Runtime owns live measurement state.
+       */
+      return {
+        ...certifiedModule,
+
+        status:
+          live.status,
+
+        completion:
+          live.completion,
+
+        coverageGap:
+          live.coverageGap ??
+          certifiedModule.coverageGap,
+
+        conflict:
+          live.conflict ??
+          certifiedModule.conflict,
+      };
+    },
+  );
+}
+
 function runtimeCompatibleDashboard(
   runtime:
     EducationalDashboardData,
@@ -78,14 +154,6 @@ function runtimeCompatibleDashboard(
   const baseline =
     certifiedBaseline();
 
-  /*
-   * UI is the contract.
-   *
-   * Runtime may replace a certified data domain only when it
-   * supplies a complete compatible collection. Missing backend
-   * domains retain the certified baseline rather than altering
-   * workspace composition.
-   */
   return {
     state:
       baseline.state,
@@ -97,14 +165,14 @@ function runtimeCompatibleDashboard(
         : baseline.artifacts,
 
     modules:
-      runtime.modules.length ===
-        baseline.modules.length
-        ? runtime.modules
-        : baseline.modules,
+      mergeRuntimeModules(
+        baseline.modules,
+        runtime.modules,
+      ),
 
     competencies:
-      runtime.competencies.length ===
-        baseline.competencies.length
+      runtime.competencies.length >
+        0
         ? runtime.competencies
         : baseline.competencies,
 
@@ -163,10 +231,15 @@ export function useEducationalDashboardState() {
           );
         } catch {
           /*
-           * Runtime availability must never mutate the certified
-           * Education composition. Keep the last compatible
-           * dashboard state.
+           * Runtime failure must never resurrect modeled progress.
+           *
+           * Preserve UI topology while resetting progress to the
+           * neutral certified baseline.
            */
+          setDashboard(
+            certifiedBaseline(),
+          );
+
           setRuntimeConnected(
             false,
           );

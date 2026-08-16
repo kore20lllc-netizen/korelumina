@@ -5,7 +5,24 @@ export type EducationalRuntimeStatus =
   | "not-started"
   | "needs-review";
 
-export interface EducationalRuntimeModule {
+export interface EducationalCoverageMeasurement {
+  satisfiedRequirements:
+    string[];
+
+  missingRequirements:
+    string[];
+
+  satisfiedCount:
+    number;
+
+  requirementCount:
+    number;
+
+  measurementVersion:
+    "education-coverage-v1";
+}
+
+export interface EducationalRuntimeModuleDefinition {
   id:
     string;
 
@@ -14,12 +31,6 @@ export interface EducationalRuntimeModule {
 
   description:
     string;
-
-  status:
-    EducationalRuntimeStatus;
-
-  completion:
-    number;
 
   dependencyIds:
     string[];
@@ -32,6 +43,18 @@ export interface EducationalRuntimeModule {
 
   conflict?:
     string;
+}
+
+export interface EducationalRuntimeModule
+  extends EducationalRuntimeModuleDefinition {
+  status:
+    EducationalRuntimeStatus;
+
+  completion:
+    number;
+
+  coverage:
+    EducationalCoverageMeasurement;
 }
 
 export interface EducationalRuntimeCompetency {
@@ -63,7 +86,7 @@ export interface EducationalRuntimeCompetency {
  * any UI-composition change.
  */
 export const certifiedEducationalModules:
-  readonly EducationalRuntimeModule[] = [
+  readonly EducationalRuntimeModuleDefinition[] = [
     {
       id:
         "constitutional-literacy",
@@ -73,12 +96,6 @@ export const certifiedEducationalModules:
 
       description:
         "Interpret Canon, Constitution, amendments and authority order.",
-
-      status:
-        "completed",
-
-      completion:
-        100,
 
       dependencyIds:
         [],
@@ -99,12 +116,6 @@ export const certifiedEducationalModules:
       description:
         "Understand Evidence, Knowledge IR, Knowledge Packages, Canonical Knowledge and Organizational Memory.",
 
-      status:
-        "completed",
-
-      completion:
-        100,
-
       dependencyIds: [
         "constitutional-literacy",
       ],
@@ -124,12 +135,6 @@ export const certifiedEducationalModules:
 
       description:
         "Distinguish knowledge from Runtime truth, execution authority and human approval.",
-
-      status:
-        "active",
-
-      completion:
-        78,
 
       dependencyIds: [
         "constitutional-literacy",
@@ -154,12 +159,6 @@ export const certifiedEducationalModules:
       description:
         "Review validated architectural, engineering, mission, governance, executive, design and operational conversations.",
 
-      status:
-        "active",
-
-      completion:
-        64,
-
       dependencyIds: [
         "constitutional-literacy",
         "knowledge-governance",
@@ -183,12 +182,6 @@ export const certifiedEducationalModules:
 
       description:
         "Understand organizational domains, business constraints and customer context.",
-
-      status:
-        "blocked",
-
-      completion:
-        32,
 
       dependencyIds: [
         "constitutional-literacy",

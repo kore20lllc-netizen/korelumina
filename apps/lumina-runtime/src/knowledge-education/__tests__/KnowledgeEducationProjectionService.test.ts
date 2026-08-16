@@ -127,12 +127,13 @@ test(
           module.completion,
       ),
       [
-        100,
-        100,
-        78,
-        64,
-        32,
+        0,
+        0,
+        0,
+        0,
+        0,
       ],
+      "unrelated canonical knowledge must not manufacture educational coverage",
     );
 
     assert.equal(

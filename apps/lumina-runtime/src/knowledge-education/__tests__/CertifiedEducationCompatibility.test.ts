@@ -5,95 +5,25 @@ import {
   KnowledgeEducationProjectionService,
 } from "../KnowledgeEducationProjectionService.js";
 
-const CERTIFIED_MODULE_CONTRACT = [
-  {
-    id:
-      "constitutional-literacy",
-    status:
-      "completed",
-    completion:
-      100,
-  },
-  {
-    id:
-      "knowledge-governance",
-    status:
-      "completed",
-    completion:
-      100,
-  },
-  {
-    id:
-      "operational-boundaries",
-    status:
-      "active",
-    completion:
-      78,
-  },
-  {
-    id:
-      "conversation-curriculum",
-    status:
-      "active",
-    completion:
-      64,
-  },
-  {
-    id:
-      "business-domain-literacy",
-    status:
-      "blocked",
-    completion:
-      32,
-  },
+const CERTIFIED_MODULE_IDS = [
+  "constitutional-literacy",
+  "knowledge-governance",
+  "operational-boundaries",
+  "conversation-curriculum",
+  "business-domain-literacy",
 ] as const;
 
-const CERTIFIED_COMPETENCY_CONTRACT = [
-  {
-    id:
-      "authority-interpretation",
-    status:
-      "completed",
-  },
-  {
-    id:
-      "governed-retrieval",
-    status:
-      "active",
-  },
-  {
-    id:
-      "provenance-preservation",
-    status:
-      "completed",
-  },
-  {
-    id:
-      "runtime-truth-distinction",
-    status:
-      "active",
-  },
-  {
-    id:
-      "mission-boundaries",
-    status:
-      "needs-review",
-  },
-  {
-    id:
-      "approval-boundaries",
-    status:
-      "completed",
-  },
-  {
-    id:
-      "explainable-grounding",
-    status:
-      "blocked",
-  },
+const CERTIFIED_COMPETENCY_IDS = [
+  "authority-interpretation",
+  "governed-retrieval",
+  "provenance-preservation",
+  "runtime-truth-distinction",
+  "mission-boundaries",
+  "approval-boundaries",
+  "explainable-grounding",
 ] as const;
 
-function createService() {
+function createEmptyService() {
   return new KnowledgeEducationProjectionService(
     {
       list:
@@ -103,133 +33,68 @@ function createService() {
 }
 
 test(
-  "runtime preserves the certified Educational Progress contract",
+  "runtime preserves the certified Educational Progress topology",
   () => {
     const snapshot =
-      createService()
+      createEmptyService()
         .snapshot();
 
     assert.equal(
       snapshot.state,
       "success",
-      "runtime must preserve the certified Education workspace mounting state",
-    );
-
-    assert.equal(
-      snapshot.modules.length,
-      CERTIFIED_MODULE_CONTRACT.length,
     );
 
     assert.deepEqual(
       snapshot.modules.map(
-        (module) => ({
-          id:
-            module.id,
-          status:
-            module.status,
-          completion:
-            module.completion,
-        }),
+        (module) =>
+          module.id,
       ),
-      CERTIFIED_MODULE_CONTRACT,
+      CERTIFIED_MODULE_IDS,
     );
-  },
-);
-
-test(
-  "runtime preserves the certified Competency Posture contract",
-  () => {
-    const snapshot =
-      createService()
-        .snapshot();
-
-    assert.equal(
-      snapshot.competencies.length,
-      CERTIFIED_COMPETENCY_CONTRACT.length,
-    );
-
-    assert.deepEqual(
-      snapshot.competencies.map(
-        (competency) => ({
-          id:
-            competency.id,
-          status:
-            competency.status,
-        }),
-      ),
-      CERTIFIED_COMPETENCY_CONTRACT,
-    );
-  },
-);
-
-test(
-  "runtime curriculum preserves required UI fields",
-  () => {
-    const snapshot =
-      createService()
-        .snapshot();
 
     for (
       const module
       of snapshot.modules
     ) {
-      assert.ok(
-        module.id.length >
+      assert.equal(
+        module.completion,
+        0,
+        `${module.id} must not manufacture progress when governed curriculum is absent`,
+      );
+
+      assert.equal(
+        module.coverage.satisfiedCount,
+        0,
+      );
+
+      assert.equal(
+        module.coverage.measurementVersion,
+        "education-coverage-v1",
+      );
+
+      assert.equal(
+        module.coverage.requirementCount >
           0,
-      );
-
-      assert.ok(
-        module.title.length >
-          0,
-      );
-
-      assert.ok(
-        module.description.length >
-          0,
-      );
-
-      assert.ok(
-        module.completion >=
-          0 &&
-        module.completion <=
-          100,
-      );
-
-      assert.ok(
-        Array.isArray(
-          module.dependencyIds,
-        ),
-      );
-
-      assert.ok(
-        module.competencyObjectives.length >
-          0,
+        true,
+        `${module.id} must have explicit measurable curriculum requirements`,
       );
     }
+  },
+);
 
-    for (
-      const competency
-      of snapshot.competencies
-    ) {
-      assert.ok(
-        competency.id.length >
-          0,
-      );
+test(
+  "runtime preserves the certified Competency Posture topology",
+  () => {
+    const snapshot =
+      createEmptyService()
+        .snapshot();
 
-      assert.ok(
-        competency.title.length >
-          0,
-      );
-
-      assert.ok(
-        competency.description.length >
-          0,
-      );
-
-      assert.ok(
-        competency.evidence.length >
-          0,
-      );
-    }
+    assert.deepEqual(
+      snapshot.competencies.map(
+        (competency) =>
+          competency.id,
+      ),
+      CERTIFIED_COMPETENCY_IDS,
+    );
   },
 );
