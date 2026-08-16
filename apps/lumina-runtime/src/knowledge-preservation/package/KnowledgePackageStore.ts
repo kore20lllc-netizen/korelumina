@@ -151,3 +151,99 @@ export function listKnowledgePackages():
         knowledgePackage !== null,
     );
 }
+
+
+export function allocateKnowledgePackageId(
+  year: number,
+): string {
+  const prefix =
+    `KP-${year}-`;
+
+  const sequenceFile =
+    path.join(
+      packageRoot,
+      `.sequence-${year}`,
+    );
+
+  let currentSequence =
+    0;
+
+  if (
+    fs.existsSync(
+      sequenceFile,
+    )
+  ) {
+    const raw =
+      fs.readFileSync(
+        sequenceFile,
+        "utf8",
+      ).trim();
+
+    const parsed =
+      Number.parseInt(
+        raw,
+        10,
+      );
+
+    if (
+      Number.isSafeInteger(
+        parsed,
+      ) &&
+      parsed >= 0
+    ) {
+      currentSequence =
+        parsed;
+    }
+  }
+
+  /*
+   * The sequence counter is the authority for new governed
+   * Knowledge Package identities.
+   *
+   * Historical deterministic/hash IDs remain readable but do
+   * not influence the new sequential namespace.
+   */
+  for (
+    let candidate =
+      currentSequence + 1;
+    candidate <= 999_999;
+    candidate += 1
+  ) {
+    const id =
+      `${prefix}${String(
+        candidate,
+      ).padStart(
+        6,
+        "0",
+      )}`;
+
+    if (
+      loadKnowledgePackage(
+        id,
+      )
+    ) {
+      continue;
+    }
+
+    fs.mkdirSync(
+      packageRoot,
+      {
+        recursive:
+          true,
+      },
+    );
+
+    fs.writeFileSync(
+      sequenceFile,
+      `${candidate}
+`,
+      "utf8",
+    );
+
+    return id;
+  }
+
+  throw new Error(
+    "knowledge_package_sequence_exhausted",
+  );
+}

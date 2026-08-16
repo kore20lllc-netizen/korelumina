@@ -147,7 +147,7 @@ test(
 
     assert.match(
       knowledgePackage.id,
-      /^KP-2026-\d{12}$/,
+      /^KP-2026-\d{6}$/,
     );
 
     assert.equal(
@@ -282,73 +282,57 @@ test(
   },
 );
 
-test(
-  "package identity is deterministic for identical validated IR",
-  () => {
-    const factory =
-      new KnowledgePackageFactory();
 
-    const item =
-      validatedItem();
+
+test(
+  "new packages receive distinct persistent six-digit identities",
+  () => {
+    const service =
+      new KnowledgePackageService();
 
     const first =
-      factory.createAwaitingReview([
-        item,
+      service.packageValidated([
+        validatedItem({
+          id:
+            `candidate:sequence-first:${process.pid}:${Date.now()}`,
+          evidenceRefs: [
+            `evidence:sequence-first:${process.pid}:${Date.now()}`,
+          ],
+        }),
       ]);
 
     const second =
-      factory.createAwaitingReview([
-        item,
+      service.packageValidated([
+        validatedItem({
+          id:
+            `candidate:sequence-second:${process.pid}:${Date.now()}`,
+          evidenceRefs: [
+            `evidence:sequence-second:${process.pid}:${Date.now()}`,
+          ],
+        }),
       ]);
 
-    assert.equal(
+    assert.ok(
+      first,
+    );
+
+    assert.ok(
+      second,
+    );
+
+    assert.match(
+      first.id,
+      /^KP-2026-\d{6}$/,
+    );
+
+    assert.match(
+      second.id,
+      /^KP-2026-\d{6}$/,
+    );
+
+    assert.notEqual(
       first.id,
       second.id,
-    );
-  },
-);
-
-test(
-  "package identity is independent of IR item ordering",
-  () => {
-    const factory =
-      new KnowledgePackageFactory();
-
-    const first =
-      validatedItem({
-        id:
-          "candidate:first",
-
-        evidenceRefs: [
-          "evidence:first",
-        ],
-      });
-
-    const second =
-      validatedItem({
-        id:
-          "candidate:second",
-
-        evidenceRefs: [
-          "evidence:second",
-        ],
-      });
-
-    const a =
-      factory.createAwaitingReview([
-        first,
-        second,
-      ]);
-
-    const b =
-      factory.createAwaitingReview([
-        second,
-        first,
-      ]);
-
-    assert.equal(
-      a.id,
-      b.id,
     );
   },
 );

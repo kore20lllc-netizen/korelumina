@@ -1,7 +1,3 @@
-import {
-  createHash,
-} from "node:crypto";
-
 import type {
   KnowledgeIRItem,
 } from "../ir/index.js";
@@ -9,6 +5,10 @@ import type {
 import type {
   KnowledgePackage,
 } from "./KnowledgePackage.js";
+
+import {
+  allocateKnowledgePackageId,
+} from "./KnowledgePackageStore.js";
 
 function metadataString(
   item:
@@ -155,58 +155,11 @@ function packageIdentity(
   createdAt:
     number,
 ): string {
-  const identityMaterial =
-    items
-      .map(
-        (item) =>
-          [
-            item.id,
-            ...item.evidenceRefs,
-          ].join(
-            ":",
-          ),
-      )
-      .sort()
-      .join(
-        "|",
-      );
-
-  const digest =
-    createHash(
-      "sha256",
-    )
-      .update(
-        identityMaterial,
-      )
-      .digest(
-        "hex",
-      );
-
-  const numeric =
-    (
-      BigInt(
-        `0x${digest.slice(
-          0,
-          12,
-        )}`,
-      ) %
-      1_000_000_000_000n
-    )
-      .toString()
-      .padStart(
-        12,
-        "0",
-      );
-
-  return [
-    "KP",
+  return allocateKnowledgePackageId(
     sourceYear(
       items,
       createdAt,
     ),
-    numeric,
-  ].join(
-    "-",
   );
 }
 

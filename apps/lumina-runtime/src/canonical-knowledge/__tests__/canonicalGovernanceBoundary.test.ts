@@ -210,12 +210,15 @@ test(
     const platform =
       new KnowledgePreservationPlatform();
 
+    const evidenceId =
+      `evidence:preservation-boundary:${process.pid}:${Date.now()}`;
+
     let publisherInvocations =
       0;
 
     platform.compilerRegistry.register({
       name:
-        "governance-boundary-test-compiler",
+        "DocumentationCompiler",
 
       version:
         "1.0.0",
@@ -237,8 +240,28 @@ test(
               "approved",
 
             evidenceRefs: [
-              "evidence:preservation-boundary",
+              evidenceId,
             ],
+
+            compiler: {
+              compilerName:
+                "DocumentationCompiler",
+
+              compilerVersion:
+                "1.0.0",
+
+              evidenceSourceType:
+                "document",
+
+              extractedAt:
+                0,
+
+              extractionMethod:
+                "direct-evidence",
+
+              confidenceBasis:
+                "test-fixture",
+            },
           }),
         ],
     });
@@ -259,7 +282,7 @@ test(
 
     await platform.preserve({
       id:
-        "evidence:preservation-boundary",
+        evidenceId,
 
       type:
         "document",
@@ -305,7 +328,7 @@ test(
           (item) =>
             item.sourceEvidenceRefs
               .includes(
-                "evidence:preservation-boundary",
+                evidenceId,
               ),
         );
 
