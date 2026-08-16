@@ -323,23 +323,33 @@ export function KnowledgeProductionCommandCenter() {
     };
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    async function refreshCanonicalReview() {
-      try {
+  const refreshCanonicalReviewNow =
+    useCallback(
+      async () => {
         const snapshot =
           await getCanonicalReviewSnapshot();
-
-        if (cancelled) {
-          return;
-        }
 
         setCanonicalReviewProjection(
           createCanonicalReviewProjection(
             snapshot,
           ),
         );
+      },
+      [],
+    );
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshCanonicalReview() {
+      try {
+        if (
+          cancelled
+        ) {
+          return;
+        }
+
+        await refreshCanonicalReviewNow();
       } catch {
         /*
          * Preserve the last truthful projection.
@@ -365,7 +375,9 @@ export function KnowledgeProductionCommandCenter() {
         intervalId,
       );
     };
-  }, []);
+  }, [
+    refreshCanonicalReviewNow,
+  ]);
 
   const inspectorClosedByUserRef =
     useRef(false);
@@ -807,6 +819,9 @@ export function KnowledgeProductionCommandCenter() {
           }
           onTimelineEventSelect={
             handleCanonicalReviewEventSelect
+          }
+          onDecisionComplete={
+            refreshCanonicalReviewNow
           }
         />
       </section>

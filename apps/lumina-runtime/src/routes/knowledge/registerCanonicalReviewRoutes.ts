@@ -10,6 +10,7 @@ import type {
 
 import {
   CanonicalReviewService,
+  classifyCanonicalReview,
 } from "../../knowledge-preservation/review/index.js";
 
 export interface CanonicalReviewRuntime {
@@ -99,6 +100,16 @@ export function registerCanonicalReviewRoutes(
                   knowledgePackage.state,
                   knowledgePackage.approvalState,
                 ),
+
+              reviewClassification:
+                knowledgePackage.state ===
+                    "awaiting_review" &&
+                  knowledgePackage.approvalState ===
+                    "pending_review"
+                  ? classifyCanonicalReview(
+                      knowledgePackage,
+                    )
+                  : null,
             }),
           )
           .filter(
@@ -154,6 +165,38 @@ export function registerCanonicalReviewRoutes(
               (item) =>
                 item.reviewStatus ===
                 "remediation_required",
+            ).length,
+
+          individual:
+            packages.filter(
+              (item) =>
+                item.reviewClassification
+                  ?.mode ===
+                "individual",
+            ).length,
+
+          batchCandidates:
+            packages.filter(
+              (item) =>
+                item.reviewClassification
+                  ?.mode ===
+                "batch_candidate",
+            ).length,
+
+          policyCandidates:
+            packages.filter(
+              (item) =>
+                item.reviewClassification
+                  ?.mode ===
+                "policy_candidate",
+            ).length,
+
+          blocked:
+            packages.filter(
+              (item) =>
+                item.reviewClassification
+                  ?.mode ===
+                "blocked",
             ).length,
         },
       });

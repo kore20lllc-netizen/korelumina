@@ -9,6 +9,12 @@ export interface CanonicalReviewQueueSlot {
   readiness: number;
   state: string;
   tone: "emerald" | "amber" | "rose";
+  reviewMode:
+    | "individual"
+    | "batch_candidate"
+    | "policy_candidate"
+    | "blocked"
+    | null;
 }
 
 export interface CanonicalReviewTimelineSlot {
@@ -74,6 +80,7 @@ export const canonicalReviewFixtureProjection = {
       readiness: 92,
       state: "Ready for final review",
       tone: "emerald" as const,
+      reviewMode: null,
     },
     {
       id: "KCAP-2026-039",
@@ -86,6 +93,7 @@ export const canonicalReviewFixtureProjection = {
       readiness: 74,
       state: "Decision required",
       tone: "amber" as const,
+      reviewMode: null,
     },
     {
       id: "KCAP-2026-036",
@@ -98,6 +106,7 @@ export const canonicalReviewFixtureProjection = {
       readiness: 58,
       state: "Review blocked",
       tone: "rose" as const,
+      reviewMode: null,
     },
   ],
 
@@ -155,90 +164,140 @@ import type {
   CanonicalReviewSnapshot,
 } from "@/services/knowledgeOperationsService";
 
+function pendingReviewState(
+  source:
+    CanonicalReviewSnapshot["packages"][number],
+): string {
+  switch (
+    source.reviewClassification
+      ?.mode
+  ) {
+    case "individual":
+      return "Individual human review";
+
+    case "batch_candidate":
+      return "Eligible for governed batch review";
+
+    case "policy_candidate":
+      return "Eligible for policy-governed review";
+
+    case "blocked":
+      return "Review blocked";
+
+    default:
+      return "Awaiting human review";
+  }
+}
+
 export function createCanonicalReviewProjection(
   snapshot: CanonicalReviewSnapshot,
 ): CanonicalReviewProjection {
   const pending =
     snapshot.packages.filter(
       (item) =>
-        item.reviewStatus === "pending",
+        item.reviewStatus ===
+        "pending",
     );
 
   const approved =
     snapshot.packages.filter(
       (item) =>
-        item.reviewStatus === "approved",
+        item.reviewStatus ===
+        "approved",
     );
 
   const rejected =
     snapshot.packages.filter(
       (item) =>
-        item.reviewStatus === "rejected",
+        item.reviewStatus ===
+        "rejected",
     );
 
   const remediationRequired =
     snapshot.packages.filter(
       (item) =>
-        item.reviewStatus === "remediation_required",
+        item.reviewStatus ===
+        "remediation_required",
     );
 
-  const queueSlots =
-    canonicalReviewFixtureProjection.reviewQueue.map(
-      (slot, index) => {
-        const source =
-          pending[index] ?? null;
+  const reviewQueue =
+    snapshot.packages.map(
+      (source):
+        CanonicalReviewQueueSlot => {
+        const state =
+          source.reviewStatus ===
+          "pending"
+            ? pendingReviewState(
+                source,
+              )
+            : source.reviewStatus ===
+                "approved"
+              ? "Approved for canonical promotion"
+              : source.reviewStatus ===
+                  "rejected"
+                ? "Rejected"
+                : "Remediation required";
 
-        if (!source) {
-          return {
-            ...slot,
-            id:
-              `canonical-review-empty-${index + 1}`,
-            capsuleId:
-              null,
-            title:
-              "No additional package awaiting review",
-            domain:
-              "No pending package",
-            authority:
-              "—",
-            reviewers:
-              "—",
-            conflict:
-              "—",
-            readiness:
-              0,
-            state:
-              "No active review",
-            tone:
-              "amber" as const,
-          };
-        }
+        const tone =
+          source.reviewStatus ===
+          "approved"
+            ? "emerald"
+            : source.reviewStatus ===
+                "rejected"
+              ? "rose"
+              : "amber";
 
         return {
-          ...slot,
           id:
             source.id,
+
           capsuleId:
             source.id,
+
           title:
-            source.items[0]?.title ??
+            source.items[0]
+              ?.title ??
             source.id,
+
           domain:
             source.scope ??
             "Scope unavailable",
+
           authority:
             source.authority ??
             "Authority unavailable",
+
           reviewers:
-            "—",
+            source.reviewHistory
+              .length > 0
+              ? `${source.reviewHistory.length} recorded decision${source.reviewHistory.length === 1 ? "" : "s"}`
+              : "Human decision pending",
+
           conflict:
-            "—",
+            source.reviewStatus ===
+            "rejected"
+              ? "Review rejected"
+              : source.reviewStatus ===
+                  "remediation_required"
+                ? "Remediation required"
+                : "No recorded review conflict",
+
+          /*
+           * Readiness is not yet a governed backend measurement.
+           * Keep the numeric field neutral rather than inventing
+           * a publication-readiness percentage.
+           */
           readiness:
             0,
-          state:
-            "Awaiting human review",
-          tone:
-            "amber" as const,
+
+          state,
+
+          tone,
+
+          reviewMode:
+            source.reviewClassification
+              ?.mode ??
+            null,
         };
       },
     );
@@ -250,123 +309,145 @@ export function createCanonicalReviewProjection(
     rejected[0] ??
     null;
 
-  const authorities =
-    canonicalReviewFixtureProjection.authorities.map(
-      (slot, index) => {
-        if (!focus) {
-          return {
-            ...slot,
-            value:
-              "—",
-            detail:
-              "No persisted review package available.",
-          };
-        }
+  const authorities:
+    CanonicalReviewAuthoritySlot[] =
+    focus
+      ? [
+          {
+            title:
+              "Constitutional authority",
 
-        if (index === 0) {
-          return {
-            ...slot,
             value:
               focus.authority ??
               "—",
-            detail:
-              "Persisted package authority.",
-          };
-        }
 
-        if (index === 1) {
-          return {
-            ...slot,
+            detail:
+              "Persisted Knowledge Package authority.",
+          },
+          {
+            title:
+              "Domain scope",
+
             value:
               focus.scope ??
               "—",
-            detail:
-              "Persisted package scope.",
-          };
-        }
 
-        return {
-          ...slot,
-          value:
-            focus.owner ??
-            "—",
-          detail:
-            "Persisted package owner.",
-        };
-      },
-    );
-
-  const timeline =
-    canonicalReviewFixtureProjection.timeline.map(
-      (slot, index) => {
-        if (!focus) {
-          return {
-            ...slot,
-            id:
-              `canonical-review-timeline-empty-${index + 1}`,
-            capsuleId:
-              "canonical-review-empty",
-            label:
-              index === 0
-                ? "No persisted review state"
-                : "—",
             detail:
+              "Persisted Knowledge Package scope.",
+          },
+          {
+            title:
+              "Knowledge owner",
+
+            value:
+              focus.owner ??
               "—",
-            state:
-              "waiting" as const,
-          };
-        }
 
-        const lifecycle =
-          focus.lifecycleHistory[index];
-
-        if (!lifecycle) {
-          return {
-            ...slot,
-            id:
-              `${focus.id}-timeline-${index + 1}`,
-            capsuleId:
-              focus.id,
-            label:
-              index === 3 &&
-              focus.reviewStatus === "pending"
-                ? "Human canonical decision pending"
-                : "—",
             detail:
-              "—",
-            state:
-              index === 3 &&
-              focus.reviewStatus === "pending"
-                ? "active" as const
-                : "waiting" as const,
-          };
-        }
+              "Persisted Knowledge Package owner.",
+          },
+        ]
+      : [
+          {
+            title:
+              "Constitutional authority",
 
-        return {
-          ...slot,
-          id:
-            `${focus.id}-${lifecycle.state}-${lifecycle.at}`,
-          capsuleId:
-            focus.id,
-          label:
-            lifecycle.state
-              .replaceAll("_", " ")
-              .replace(/\b\w/g, (character) =>
-                character.toUpperCase(),
-              ),
-          detail:
-            lifecycle.reason ??
-            new Date(
-              lifecycle.at,
-            ).toLocaleString(),
-          state:
-            lifecycle.state ===
-            "awaiting_review"
-              ? "active" as const
-              : "complete" as const,
-        };
-      },
-    );
+            value:
+              "—",
+
+            detail:
+              "No persisted review package available.",
+          },
+          {
+            title:
+              "Domain scope",
+
+            value:
+              "—",
+
+            detail:
+              "No persisted review package available.",
+          },
+          {
+            title:
+              "Knowledge owner",
+
+            value:
+              "—",
+
+            detail:
+              "No persisted review package available.",
+          },
+        ];
+
+  const timeline:
+    CanonicalReviewTimelineSlot[] =
+    focus
+      ? [
+          ...focus.lifecycleHistory.map(
+            (
+              lifecycle,
+            ):
+              CanonicalReviewTimelineSlot => ({
+                id:
+                  `${focus.id}-${lifecycle.state}-${lifecycle.at}`,
+
+                capsuleId:
+                  focus.id,
+
+                label:
+                  lifecycle.state
+                    .replaceAll(
+                      "_",
+                      " ",
+                    )
+                    .replace(
+                      /\b\w/g,
+                      (
+                        character,
+                      ) =>
+                        character.toUpperCase(),
+                    ),
+
+                detail:
+                  lifecycle.reason ??
+                  new Date(
+                    lifecycle.at,
+                  ).toLocaleString(),
+
+                state:
+                  lifecycle.state ===
+                  "awaiting_review"
+                    ? "active"
+                    : "complete",
+              }),
+          ),
+
+          ...(
+            focus.reviewStatus ===
+            "pending"
+              ? [
+                  {
+                    id:
+                      `${focus.id}-human-decision-pending`,
+
+                    capsuleId:
+                      focus.id,
+
+                    label:
+                      "Human canonical decision pending",
+
+                    detail:
+                      "Explicit review approval is required before canonical promotion.",
+
+                    state:
+                      "active" as const,
+                  },
+                ]
+              : []
+          ),
+        ]
+      : [];
 
   return {
     summary: {
@@ -374,12 +455,15 @@ export function createCanonicalReviewProjection(
         String(
           snapshot.summary.pending,
         ),
+
       conflicts:
         String(
           snapshot.summary.rejected,
         ),
+
       reviewersActive:
         "—",
+
       readyToPublish:
         String(
           snapshot.summary.approved,
@@ -389,27 +473,31 @@ export function createCanonicalReviewProjection(
     metrics: {
       reviewQueue:
         String(
-          snapshot.summary.pending,
+          snapshot.summary.total,
         ),
+
       requiredReviewers:
         "—",
+
       pendingDecisions:
         String(
           snapshot.summary.pending,
         ),
+
       publicationReadiness:
         "—",
+
       priorityReviews:
-        snapshot.summary.pending === 1
+        snapshot.summary.pending ===
+        1
           ? "1 priority review"
           : `${snapshot.summary.pending} priority reviews`,
     },
 
-    reviewQueue:
-      queueSlots,
+    reviewQueue,
 
     timeline,
 
     authorities,
-  } as const;
+  };
 }

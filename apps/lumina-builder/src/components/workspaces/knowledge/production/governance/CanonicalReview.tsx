@@ -1,4 +1,9 @@
 import {
+  useMemo,
+  useState,
+} from "react";
+
+import {
   AlertTriangle,
   BadgeCheck,
   CheckCircle2,
@@ -39,6 +44,16 @@ import {
   ExecutivePremiumIcon,
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
+import {
+  createCanonicalReviewBatch,
+  submitCanonicalReviewBatchDecision,
+  submitCanonicalReviewDecision,
+} from "@/services/knowledgeOperationsService";
+
+import type {
+  CanonicalReviewDecision,
+} from "@/services/knowledgeOperationsService";
+
 import type {
   CanonicalReviewProjection,
 } from "../data/canonicalReviewProjection";
@@ -55,6 +70,8 @@ type CanonicalReviewProps = {
     capsuleId: string,
     eventId: string,
   ) => void;
+
+  onDecisionComplete?: () => void | Promise<void>;
 };
 
 function readinessTone(
@@ -77,7 +94,410 @@ export function CanonicalReview({
   selectedTimelineEventId,
   onReviewSelect,
   onTimelineEventSelect,
+  onDecisionComplete,
 }: CanonicalReviewProps) {
+  const [
+    reviewerId,
+    setReviewerId,
+  ] = useState(
+    "human:knowledge-governance",
+  );
+
+  const [
+    reason,
+    setReason,
+  ] = useState("");
+
+  const [
+    decisionBusy,
+    setDecisionBusy,
+  ] = useState<
+    CanonicalReviewDecision | null
+  >(null);
+
+  const [
+    decisionError,
+    setDecisionError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    queueMode,
+    setQueueMode,
+  ] = useState<
+    | "all"
+    | "individual"
+    | "batch_candidate"
+    | "policy_candidate"
+    | "blocked"
+  >(
+    "all",
+  );
+
+  const [
+    activeBatchId,
+    setActiveBatchId,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    batchBusy,
+    setBatchBusy,
+  ] = useState(false);
+
+  const [
+    batchError,
+    setBatchError,
+  ] = useState<string | null>(
+    null,
+  );
+
+
+  const queueCounts =
+    useMemo(
+      () => ({
+        all:
+          projection.reviewQueue.filter(
+            (item) =>
+              item.capsuleId !== null,
+          ).length,
+
+        individual:
+          projection.reviewQueue.filter(
+            (item) =>
+              item.reviewMode ===
+              "individual",
+          ).length,
+
+        batch_candidate:
+          projection.reviewQueue.filter(
+            (item) =>
+              item.reviewMode ===
+              "batch_candidate",
+          ).length,
+
+        policy_candidate:
+          projection.reviewQueue.filter(
+            (item) =>
+              item.reviewMode ===
+              "policy_candidate",
+          ).length,
+
+        blocked:
+          projection.reviewQueue.filter(
+            (item) =>
+              item.reviewMode ===
+              "blocked",
+          ).length,
+      }),
+      [
+        projection.reviewQueue,
+      ],
+    );
+
+  const visibleReviewQueue =
+    useMemo(
+      () =>
+        projection.reviewQueue.filter(
+          (item) =>
+            queueMode ===
+              "all" ||
+            item.reviewMode ===
+              queueMode,
+        ),
+      [
+        projection.reviewQueue,
+        queueMode,
+      ],
+    );
+
+  const batchGroups =
+    useMemo(
+      () => {
+        const groups =
+          new Map<
+            string,
+            typeof projection.reviewQueue
+          >();
+
+        for (
+          const item
+          of projection.reviewQueue
+        ) {
+          if (
+            item.reviewMode !==
+              "batch_candidate" ||
+            !item.capsuleId
+          ) {
+            continue;
+          }
+
+          const key =
+            `${item.authority}::${item.domain}`;
+
+          const current =
+            groups.get(
+              key,
+            ) ?? [];
+
+          groups.set(
+            key,
+            [
+              ...current,
+              item,
+            ],
+          );
+        }
+
+        return [
+          ...groups.entries(),
+        ].map(
+          (
+            [
+              key,
+              items,
+            ],
+          ) => ({
+            key,
+
+            authority:
+              items[0]
+                ?.authority ??
+              "Authority unavailable",
+
+            domain:
+              items[0]
+                ?.domain ??
+              "Scope unavailable",
+
+            packageIds:
+              items
+                .map(
+                  (item) =>
+                    item.capsuleId,
+                )
+                .filter(
+                  (
+                    value,
+                  ): value is string =>
+                    value !==
+                    null,
+                ),
+
+            count:
+              items.length,
+          }),
+        );
+      },
+      [
+        projection.reviewQueue,
+      ],
+    );
+
+  const selectedReview =
+    useMemo(
+      () =>
+        projection.reviewQueue.find(
+          (item) =>
+            item.id ===
+            selectedReviewId,
+        ) ?? null,
+      [
+        projection.reviewQueue,
+        selectedReviewId,
+      ],
+    );
+
+  const canDecideIndividually =
+    selectedReview?.reviewMode ===
+    "individual";
+
+  async function submitDecision(
+    decision:
+      CanonicalReviewDecision,
+  ) {
+    if (
+      !selectedReview ||
+      !selectedReview.capsuleId ||
+      !canDecideIndividually ||
+      decisionBusy
+    ) {
+      return;
+    }
+
+    const normalizedReviewer =
+      reviewerId.trim();
+
+    if (
+      !normalizedReviewer
+    ) {
+      setDecisionError(
+        "Reviewer identity is required.",
+      );
+
+      return;
+    }
+
+    try {
+      setDecisionBusy(
+        decision,
+      );
+
+      setDecisionError(
+        null,
+      );
+
+      await submitCanonicalReviewDecision(
+        selectedReview.capsuleId,
+        decision,
+        {
+          reviewerId:
+            normalizedReviewer,
+
+          reason:
+            reason.trim() ||
+            undefined,
+        },
+      );
+
+      setReason("");
+
+      await onDecisionComplete?.();
+    } catch (
+      error
+    ) {
+      setDecisionError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setDecisionBusy(
+        null,
+      );
+    }
+  }
+
+  async function createBatch(
+    packageIds:
+      string[],
+  ) {
+    if (
+      packageIds.length ===
+        0 ||
+      batchBusy
+    ) {
+      return;
+    }
+
+    try {
+      setBatchBusy(
+        true,
+      );
+
+      setBatchError(
+        null,
+      );
+
+      const result =
+        await createCanonicalReviewBatch(
+          packageIds,
+        );
+
+      setActiveBatchId(
+        result.batch.id,
+      );
+    } catch (
+      error
+    ) {
+      setBatchError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setBatchBusy(
+        false,
+      );
+    }
+  }
+
+  async function submitBatchDecision(
+    decision:
+      CanonicalReviewDecision,
+  ) {
+    if (
+      !activeBatchId ||
+      batchBusy
+    ) {
+      return;
+    }
+
+    const normalizedReviewer =
+      reviewerId.trim();
+
+    if (
+      !normalizedReviewer
+    ) {
+      setBatchError(
+        "Reviewer identity is required.",
+      );
+
+      return;
+    }
+
+    try {
+      setBatchBusy(
+        true,
+      );
+
+      setBatchError(
+        null,
+      );
+
+      await submitCanonicalReviewBatchDecision(
+        activeBatchId,
+        decision,
+        {
+          reviewerId:
+            normalizedReviewer,
+
+          reason:
+            reason.trim() ||
+            undefined,
+        },
+      );
+
+      setActiveBatchId(
+        null,
+      );
+
+      setReason("");
+
+      await onDecisionComplete?.();
+    } catch (
+      error
+    ) {
+      setBatchError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setBatchBusy(
+        false,
+      );
+    }
+  }
+
   return (
     <section
       aria-labelledby="canonical-review-title"
@@ -244,8 +664,273 @@ export function CanonicalReview({
             }
           />
 
+          <div className="mt-5 flex flex-wrap gap-2">
+            {[
+              {
+                id: "all" as const,
+                label: "All",
+                count: queueCounts.all,
+              },
+              {
+                id: "individual" as const,
+                label: "Individual",
+                count: queueCounts.individual,
+              },
+              {
+                id: "batch_candidate" as const,
+                label: "Batch",
+                count: queueCounts.batch_candidate,
+              },
+              {
+                id: "policy_candidate" as const,
+                label: "Policy",
+                count: queueCounts.policy_candidate,
+              },
+              {
+                id: "blocked" as const,
+                label: "Blocked",
+                count: queueCounts.blocked,
+              },
+            ].map(
+              (mode) => {
+                const active =
+                  queueMode ===
+                  mode.id;
+
+                return (
+                  <button
+                    key={mode.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => {
+                      setQueueMode(
+                        mode.id,
+                      );
+
+                      setActiveBatchId(
+                        null,
+                      );
+                    }}
+                    className={[
+                      "rounded-full border px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] transition",
+                      active
+                        ? "border-cyan-200/42 bg-cyan-300/[0.11] text-cyan-50 shadow-[0_0_18px_rgba(34,211,238,0.12)]"
+                        : "border-sky-300/12 bg-slate-950/22 text-sky-300/62 hover:border-cyan-300/28 hover:text-cyan-100",
+                    ].join(
+                      " ",
+                    )}
+                  >
+                    {mode.label}
+                    <span className="ml-2 text-[9px] opacity-70">
+                      {mode.count}
+                    </span>
+                  </button>
+                );
+              },
+            )}
+          </div>
+
+          {queueMode ===
+          "batch_candidate" ? (
+            <div className="mt-4 grid gap-3">
+              {batchGroups.length >
+              0 ? (
+                batchGroups.map(
+                  (group) => (
+                    <LuminaFlagshipCard
+                      key={
+                        group.key
+                      }
+                      as="article"
+                      className="rounded-[18px] p-4"
+                    >
+                      <div className="relative z-10">
+                        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                          <div>
+                            <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/58">
+                              Governed batch candidate
+                            </div>
+
+                            <div className="mt-1 text-sm font-semibold text-white">
+                              {group.authority}
+                            </div>
+
+                            <div className="mt-1 text-xs text-sky-300/60">
+                              {group.domain}
+                              {" · "}
+                              {group.count}
+                              {" packages"}
+                            </div>
+                          </div>
+
+                          <button
+                            type="button"
+                            disabled={
+                              batchBusy
+                            }
+                            onClick={() =>
+                              void createBatch(
+                                group.packageIds,
+                              )
+                            }
+                            className="rounded-full border border-cyan-300/28 bg-cyan-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-100 transition hover:bg-cyan-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                          >
+                            {batchBusy
+                              ? "Preparing…"
+                              : `Review ${group.count} as batch`}
+                          </button>
+                        </div>
+                      </div>
+                    </LuminaFlagshipCard>
+                  ),
+                )
+              ) : (
+                <div className="rounded-[16px] border border-sky-300/10 bg-slate-950/18 px-4 py-4 text-xs text-sky-300/58">
+                  No packages are currently eligible for governed batch review.
+                </div>
+              )}
+
+              {activeBatchId ? (
+                <LuminaFlagshipCard
+                  as="article"
+                  className="rounded-[18px] p-4"
+                >
+                  <div className="relative z-10">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-300/64">
+                      Batch decision
+                    </div>
+
+                    <div className="mt-1 text-sm font-semibold text-white">
+                      {activeBatchId}
+                    </div>
+
+                    <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(220px,.38fr)_minmax(0,1fr)]">
+                      <input
+                        value={
+                          reviewerId
+                        }
+                        onChange={(
+                          event,
+                        ) =>
+                          setReviewerId(
+                            event.target.value,
+                          )
+                        }
+                        className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none focus:border-cyan-300/42"
+                        placeholder="Reviewer identity"
+                      />
+
+                      <textarea
+                        value={
+                          reason
+                        }
+                        onChange={(
+                          event,
+                        ) =>
+                          setReason(
+                            event.target.value,
+                          )
+                        }
+                        rows={2}
+                        className="min-h-[64px] resize-y rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 py-2.5 text-xs text-sky-100 outline-none focus:border-violet-300/42"
+                        placeholder="Batch governance rationale"
+                      />
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        disabled={
+                          batchBusy
+                        }
+                        onClick={() =>
+                          void submitBatchDecision(
+                            "approved",
+                          )
+                        }
+                        className="rounded-full border border-emerald-300/28 bg-emerald-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 disabled:opacity-45"
+                      >
+                        Approve batch
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={
+                          batchBusy
+                        }
+                        onClick={() =>
+                          void submitBatchDecision(
+                            "remediation_required",
+                          )
+                        }
+                        className="rounded-full border border-amber-300/28 bg-amber-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-100 disabled:opacity-45"
+                      >
+                        Require remediation
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={
+                          batchBusy
+                        }
+                        onClick={() =>
+                          void submitBatchDecision(
+                            "rejected",
+                          )
+                        }
+                        className="rounded-full border border-rose-300/28 bg-rose-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100 disabled:opacity-45"
+                      >
+                        Reject batch
+                      </button>
+                    </div>
+                  </div>
+                </LuminaFlagshipCard>
+              ) : null}
+
+              {batchError ? (
+                <div className="rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                  {batchError}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+
+          {queueMode ===
+          "policy_candidate" ? (
+            <div className="mt-4 rounded-[18px] border border-violet-300/14 bg-violet-300/[0.04] p-4">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-200/68">
+                Policy-governed review
+              </div>
+
+              <div className="mt-2 text-sm font-semibold text-white">
+                {queueCounts.policy_candidate} policy-eligible packages
+              </div>
+
+              <p className="mt-2 text-xs leading-5 text-violet-100/64">
+                Policy candidates are visible here, but policy execution remains disabled until the persisted policy-authority and policy-version governance model is activated.
+              </p>
+            </div>
+          ) : null}
+
+          {queueMode ===
+          "blocked" ? (
+            <div className="mt-4 rounded-[18px] border border-rose-300/16 bg-rose-300/[0.04] p-4">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-rose-200/68">
+                Remediation queue
+              </div>
+
+              <div className="mt-2 text-sm font-semibold text-white">
+                {queueCounts.blocked} blocked packages
+              </div>
+
+              <p className="mt-2 text-xs leading-5 text-rose-100/64">
+                Blocked packages cannot be approved. They must be remediated, revalidated, and resealed before returning to Canonical Review.
+              </p>
+            </div>
+          ) : null}
+
           <div className="mt-5 grid gap-4">
-            {projection.reviewQueue.map((item) => {
+            {visibleReviewQueue.map((item) => {
               const selectable =
                 item.capsuleId !== null;
               const selected =
@@ -393,6 +1078,154 @@ export function CanonicalReview({
               );
             })}
           </div>
+
+          {selectedReview ? (
+            <LuminaFlagshipCard
+              as="article"
+              className="mt-5 rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-300/64">
+                      Approval console
+                    </div>
+
+                    <h4 className="mt-1 text-base font-semibold text-white">
+                      {selectedReview.id}
+                    </h4>
+
+                    <div className="mt-1 text-xs text-sky-300/62">
+                      {selectedReview.state}
+                    </div>
+                  </div>
+
+                  <div className="rounded-full border border-cyan-300/18 bg-cyan-300/[0.05] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-cyan-100">
+                    {selectedReview.reviewMode ?? "classification unavailable"}
+                  </div>
+                </div>
+
+                {canDecideIndividually ? (
+                  <>
+                    <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(220px,.38fr)_minmax(0,1fr)]">
+                      <label className="grid gap-2">
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/58">
+                          Reviewer identity
+                        </span>
+
+                        <input
+                          value={reviewerId}
+                          onChange={(event) =>
+                            setReviewerId(
+                              event.target.value,
+                            )
+                          }
+                          className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none transition focus:border-cyan-300/42"
+                        />
+                      </label>
+
+                      <label className="grid gap-2">
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/58">
+                          Decision rationale
+                        </span>
+
+                        <textarea
+                          value={reason}
+                          onChange={(event) =>
+                            setReason(
+                              event.target.value,
+                            )
+                          }
+                          rows={3}
+                          placeholder="Record the human governance rationale."
+                          className="min-h-[76px] resize-y rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 py-2.5 text-xs leading-5 text-sky-100 outline-none transition placeholder:text-slate-500 focus:border-violet-300/42"
+                        />
+                      </label>
+                    </div>
+
+                    {decisionError ? (
+                      <div className="mt-3 rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                        {decisionError}
+                      </div>
+                    ) : null}
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        disabled={decisionBusy !== null}
+                        onClick={() =>
+                          void submitDecision(
+                            "approved",
+                          )
+                        }
+                        className="rounded-full border border-emerald-300/28 bg-emerald-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:bg-emerald-300/[0.14] disabled:cursor-not-allowed disabled:opacity-45"
+                      >
+                        {decisionBusy ===
+                        "approved"
+                          ? "Approving…"
+                          : "Approve"}
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={decisionBusy !== null}
+                        onClick={() =>
+                          void submitDecision(
+                            "remediation_required",
+                          )
+                        }
+                        className="rounded-full border border-amber-300/28 bg-amber-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-100 transition hover:bg-amber-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                      >
+                        {decisionBusy ===
+                        "remediation_required"
+                          ? "Routing…"
+                          : "Require remediation"}
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={decisionBusy !== null}
+                        onClick={() =>
+                          void submitDecision(
+                            "rejected",
+                          )
+                        }
+                        className="rounded-full border border-rose-300/28 bg-rose-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100 transition hover:bg-rose-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                      >
+                        {decisionBusy ===
+                        "rejected"
+                          ? "Rejecting…"
+                          : "Reject"}
+                      </button>
+                    </div>
+
+                    <div className="mt-3 text-[10px] leading-5 text-sky-400/52">
+                      This decision records Canonical Review only. It does not promote Canonical Knowledge.
+                    </div>
+                  </>
+                ) : selectedReview.reviewMode ===
+                  "batch_candidate" ? (
+                  <div className="mt-4 rounded-[14px] border border-cyan-300/14 bg-cyan-300/[0.04] px-3 py-3 text-xs leading-5 text-cyan-100/72">
+                    This package is eligible for governed batch review. Batch decision controls are the next activation milestone.
+                  </div>
+                ) : selectedReview.reviewMode ===
+                  "policy_candidate" ? (
+                  <div className="mt-4 rounded-[14px] border border-violet-300/14 bg-violet-300/[0.04] px-3 py-3 text-xs leading-5 text-violet-100/72">
+                    This package is policy-eligible. Policy execution remains disabled until the governed policy authority model is activated.
+                  </div>
+                ) : selectedReview.reviewMode ===
+                  "blocked" ? (
+                  <div className="mt-4 rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-3 text-xs leading-5 text-rose-100/76">
+                    This package is blocked and cannot be approved. Complete remediation and revalidation first.
+                  </div>
+                ) : (
+                  <div className="mt-4 rounded-[14px] border border-slate-300/12 bg-slate-300/[0.03] px-3 py-3 text-xs leading-5 text-slate-300/68">
+                    No actionable governed review mode is available for this package.
+                  </div>
+                )}
+              </div>
+            </LuminaFlagshipCard>
+          ) : null}
             </div>
           </LuminaFlagshipPanel>
         }

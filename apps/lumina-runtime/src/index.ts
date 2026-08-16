@@ -25,6 +25,7 @@ import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
+import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerCanonicalReviewBatchRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
 import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
@@ -56,6 +57,7 @@ import {
 } from "./knowledge-platform/context/index.js";
 
 import {
+  CanonicalReviewBatchService,
   CanonicalReviewService,
 } from "./knowledge-preservation/review/index.js";
 
@@ -179,6 +181,13 @@ export const runtimeCanonicalReviewService =
       .packageService,
     runtimeKnowledgePreservationPlatform
       .manufacturingRunService,
+  );
+
+export const runtimeCanonicalReviewBatchService =
+  new CanonicalReviewBatchService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeCanonicalReviewService,
   );
 
 export const runtimeKnowledgeEducationProjectionService =
@@ -464,6 +473,14 @@ registerCanonicalReviewRoutes(
     packageService:
       runtimeKnowledgePreservationPlatform
         .packageService,
+  },
+);
+
+registerCanonicalReviewBatchRoutes(
+  app,
+  {
+    batchService:
+      runtimeCanonicalReviewBatchService,
   },
 );
 

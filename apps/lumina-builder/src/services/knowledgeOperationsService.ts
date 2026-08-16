@@ -12,7 +12,11 @@ Promise<KnowledgeOperationsSnapshot> {
   const response = await fetch(
     `${RUNTIME_API}/api/knowledge/operations`,
     {
-      headers: getRuntimeCallerHeaders(),
+      method:
+        "GET",
+
+      cache:
+        "no-store",
     },
   );
 
@@ -123,6 +127,37 @@ export type CanonicalReviewDecision =
   | "rejected"
   | "remediation_required";
 
+
+export type CanonicalReviewRisk =
+  | "blocked"
+  | "critical"
+  | "standard"
+  | "low";
+
+export type CanonicalReviewMode =
+  | "blocked"
+  | "individual"
+  | "batch_candidate"
+  | "policy_candidate";
+
+export interface CanonicalReviewClassification {
+  packageId:
+    string;
+
+  risk:
+    CanonicalReviewRisk;
+
+  mode:
+    CanonicalReviewMode;
+
+  reasons:
+    string[];
+
+  policyId?:
+    string;
+}
+
+
 export interface CanonicalReviewHistoryRecord {
   packageId:
     string;
@@ -158,6 +193,10 @@ export interface CanonicalReviewPackageView {
 
   reviewStatus:
     CanonicalReviewStatus;
+
+  reviewClassification:
+    CanonicalReviewClassification | null;
+
 
   sourceEvidenceRefs:
     string[];
@@ -343,6 +382,18 @@ export interface CanonicalReviewSnapshot {
 
       remediationRequired:
         number;
+
+      individual:
+        number;
+
+      batchCandidates:
+        number;
+
+      policyCandidates:
+        number;
+
+      blocked:
+        number;
     };
 }
 
@@ -431,6 +482,194 @@ export async function submitCanonicalReviewDecision(
   }
 
   return body;
+}
+
+
+export type CanonicalReviewBatchStatus =
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "remediation_required";
+
+export interface CanonicalReviewBatchView {
+  id:
+    string;
+
+  packageIds:
+    string[];
+
+  status:
+    CanonicalReviewBatchStatus;
+
+  reviewerId:
+    string | null;
+
+  decision:
+    CanonicalReviewDecision | null;
+
+  reason:
+    string | null;
+
+  createdAt:
+    number;
+
+  reviewedAt:
+    number | null;
+}
+
+export interface CanonicalReviewBatchSnapshot {
+  ok:
+    true;
+
+  batches:
+    CanonicalReviewBatchView[];
+
+  summary: {
+    total:
+      number;
+
+    pending:
+      number;
+
+    approved:
+      number;
+
+    rejected:
+      number;
+
+    remediationRequired:
+      number;
+  };
+}
+
+export async function getCanonicalReviewBatches():
+Promise<CanonicalReviewBatchSnapshot> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/batches`,
+      {
+        headers:
+          getRuntimeCallerHeaders(),
+      },
+    );
+
+  const body =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      body?.error ??
+      "failed_to_get_canonical_review_batches",
+    );
+  }
+
+  return body;
+}
+
+export async function createCanonicalReviewBatch(
+  packageIds:
+    string[],
+) {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/batches`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            packageIds,
+          }),
+      },
+    );
+
+  const body =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      body?.error ??
+      "failed_to_create_canonical_review_batch",
+    );
+  }
+
+  return body as {
+    ok: true;
+    batch: CanonicalReviewBatchView;
+  };
+}
+
+export async function submitCanonicalReviewBatchDecision(
+  batchId:
+    string,
+
+  decision:
+    CanonicalReviewDecision,
+
+  input: {
+    reviewerId:
+      string;
+
+    reason?:
+      string;
+  },
+) {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/batches/${encodeURIComponent(
+        batchId,
+      )}/decision`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            decision,
+
+            reviewerId:
+              input.reviewerId,
+
+            reason:
+              input.reason,
+          }),
+      },
+    );
+
+  const body =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      body?.error ??
+      "failed_to_submit_canonical_review_batch_decision",
+    );
+  }
+
+  return body as {
+    ok: true;
+    batch: CanonicalReviewBatchView;
+    promotion: null;
+  };
 }
 
 export type KnowledgeManufacturingStage =
