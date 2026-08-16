@@ -52,6 +52,7 @@ import {
 
 import type {
   CanonicalReviewDecision,
+  CanonicalReviewPolicySnapshot,
 } from "@/services/knowledgeOperationsService";
 
 import type {
@@ -60,6 +61,9 @@ import type {
 
 type CanonicalReviewProps = {
   projection: CanonicalReviewProjection;
+
+  policySnapshot:
+    CanonicalReviewPolicySnapshot;
   selectedReviewId?: string;
   selectedTimelineEventId?: string;
   onReviewSelect: (
@@ -90,6 +94,7 @@ function readinessTone(
 
 export function CanonicalReview({
   projection,
+  policySnapshot,
   selectedReviewId,
   selectedTimelineEventId,
   onReviewSelect,
@@ -897,18 +902,216 @@ export function CanonicalReview({
 
           {queueMode ===
           "policy_candidate" ? (
-            <div className="mt-4 rounded-[18px] border border-violet-300/14 bg-violet-300/[0.04] p-4">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-200/68">
-                Policy-governed review
-              </div>
+            <div className="mt-4 grid gap-3">
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] p-4"
+              >
+                <div className="relative z-10">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-200/68">
+                        Policy-governed review
+                      </div>
 
-              <div className="mt-2 text-sm font-semibold text-white">
-                {queueCounts.policy_candidate} policy-eligible packages
-              </div>
+                      <div className="mt-2 text-sm font-semibold text-white">
+                        {queueCounts.policy_candidate} policy-eligible packages
+                      </div>
+                    </div>
 
-              <p className="mt-2 text-xs leading-5 text-violet-100/64">
-                Policy candidates are visible here, but policy execution remains disabled until the persisted policy-authority and policy-version governance model is activated.
-              </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="rounded-full border border-emerald-300/18 bg-emerald-300/[0.05] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-emerald-100">
+                        {policySnapshot.summary.active} active
+                      </span>
+
+                      <span className="rounded-full border border-sky-300/14 bg-sky-300/[0.04] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-100">
+                        {policySnapshot.summary.total} total
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-xs leading-5 text-violet-100/64">
+                    Policy eligibility requires a separately persisted, active, versioned authority. Eligibility does not itself approve a package or promote Canonical Knowledge.
+                  </p>
+                </div>
+              </LuminaFlagshipCard>
+
+              {policySnapshot.policies.length >
+              0 ? (
+                policySnapshot.policies.map(
+                  (policy) => {
+                    const eligibleCount =
+                      projection.reviewQueue.filter(
+                        (item) =>
+                          item.reviewMode ===
+                            "policy_candidate" &&
+                          item.policyId ===
+                            policy.id,
+                      ).length;
+
+                    return (
+                      <LuminaFlagshipCard
+                        key={`${policy.id}@${policy.version}`}
+                        as="article"
+                        className="rounded-[18px] p-4"
+                      >
+                        <div className="relative z-10">
+                          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                            <div className="min-w-0">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
+                                  {policy.id}
+                                </span>
+
+                                <span
+                                  className={[
+                                    "rounded-full border px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em]",
+                                    policy.status ===
+                                    "active"
+                                      ? "border-emerald-300/24 bg-emerald-300/[0.07] text-emerald-100"
+                                      : policy.status ===
+                                          "draft"
+                                        ? "border-amber-300/24 bg-amber-300/[0.07] text-amber-100"
+                                        : "border-slate-300/18 bg-slate-300/[0.05] text-slate-200",
+                                  ].join(
+                                    " ",
+                                  )}
+                                >
+                                  {policy.status}
+                                </span>
+                              </div>
+
+                              <h4 className="mt-2 text-base font-semibold text-white">
+                                {policy.title}
+                              </h4>
+
+                              <div className="mt-2 text-xs text-sky-300/62">
+                                Version {policy.version}
+                                {" · "}
+                                {eligibleCount} eligible packages
+                              </div>
+                            </div>
+
+                            <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[430px]">
+                              <LuminaFlagshipCard
+                                as="article"
+                                className="rounded-[16px] p-3"
+                              >
+                                <div className="relative z-10">
+                                  <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/52">
+                                    Authority
+                                  </div>
+
+                                  <div className="mt-1 text-xs font-semibold text-cyan-100">
+                                    {policy.authority}
+                                  </div>
+                                </div>
+                              </LuminaFlagshipCard>
+
+                              <LuminaFlagshipCard
+                                as="article"
+                                className="rounded-[16px] p-3"
+                              >
+                                <div className="relative z-10">
+                                  <div className="text-[9px] uppercase tracking-[0.14em] text-violet-300/52">
+                                    Scope
+                                  </div>
+
+                                  <div className="mt-1 text-xs font-semibold text-violet-100">
+                                    {policy.scope}
+                                  </div>
+                                </div>
+                              </LuminaFlagshipCard>
+
+                              <LuminaFlagshipCard
+                                as="article"
+                                className="rounded-[16px] p-3"
+                              >
+                                <div className="relative z-10">
+                                  <div className="text-[9px] uppercase tracking-[0.14em] text-amber-300/52">
+                                    Policy owner
+                                  </div>
+
+                                  <div className="mt-1 text-xs font-semibold text-amber-100">
+                                    {policy.owner}
+                                  </div>
+                                </div>
+                              </LuminaFlagshipCard>
+
+                              <LuminaFlagshipCard
+                                as="article"
+                                className="rounded-[16px] p-3"
+                              >
+                                <div className="relative z-10">
+                                  <div className="text-[9px] uppercase tracking-[0.14em] text-emerald-300/52">
+                                    Authorized by
+                                  </div>
+
+                                  <div className="mt-1 text-xs font-semibold text-emerald-100">
+                                    {policy.authorizedBy}
+                                  </div>
+                                </div>
+                              </LuminaFlagshipCard>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                            <div className="rounded-[14px] border border-sky-300/10 bg-slate-950/24 px-3 py-3">
+                              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-300/52">
+                                Governance identity
+                              </div>
+
+                              <div className="mt-1 text-xs text-sky-100/72">
+                                {policy.rules.requireCompleteGovernanceIdentity
+                                  ? "Required"
+                                  : "Not required"}
+                              </div>
+                            </div>
+
+                            <div className="rounded-[14px] border border-sky-300/10 bg-slate-950/24 px-3 py-3">
+                              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-300/52">
+                                Provenance
+                              </div>
+
+                              <div className="mt-1 text-xs text-sky-100/72">
+                                {policy.rules.requireProvenance
+                                  ? "Required"
+                                  : "Not required"}
+                              </div>
+                            </div>
+
+                            <div className="rounded-[14px] border border-sky-300/10 bg-slate-950/24 px-3 py-3">
+                              <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-300/52">
+                                Validation
+                              </div>
+
+                              <div className="mt-1 text-xs text-sky-100/72">
+                                {policy.rules.requireValidationPassed
+                                  ? "Must pass"
+                                  : "Not required"}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-3 text-[10px] leading-5 text-violet-200/54">
+                            Policy execution is not activated. This record establishes eligibility authority only.
+                          </div>
+                        </div>
+                      </LuminaFlagshipCard>
+                    );
+                  },
+                )
+              ) : (
+                <div className="rounded-[18px] border border-violet-300/12 bg-violet-300/[0.035] px-4 py-5">
+                  <div className="text-sm font-semibold text-violet-100">
+                    No governed review policies exist
+                  </div>
+
+                  <p className="mt-2 max-w-3xl text-xs leading-5 text-violet-100/58">
+                    The policy registry is empty. No package can obtain policy-governed approval authority until a versioned policy is explicitly created and authorized.
+                  </p>
+                </div>
+              )}
             </div>
           ) : null}
 

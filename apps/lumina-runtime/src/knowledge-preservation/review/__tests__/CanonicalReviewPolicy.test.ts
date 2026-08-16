@@ -202,7 +202,7 @@ test(
 );
 
 test(
-  "explicit policy metadata makes package policy candidate but does not approve it",
+  "explicit policy metadata without persisted authority does not create policy candidacy",
   () => {
     const knowledgePackage =
       packageFixture();
@@ -227,12 +227,12 @@ test(
 
     assert.equal(
       result.mode,
-      "policy_candidate",
+      "batch_candidate",
     );
 
     assert.equal(
       result.policyId,
-      "POLICY-DOC-LOW-RISK-V1",
+      undefined,
     );
 
     assert.equal(
@@ -319,5 +319,389 @@ test(
       result.mode,
       "blocked",
     );
+  },
+);
+
+import {
+  removeCanonicalReviewPolicyForTest,
+  saveCanonicalReviewPolicy,
+} from "../CanonicalReviewPolicyStore.js";
+
+test(
+  "package metadata alone cannot create policy authority",
+  () => {
+    const policyId =
+      `POLICY-UNPERSISTED-${Date.now()}`;
+
+    const knowledgePackage =
+      packageFixture();
+
+    knowledgePackage.metadata = {
+      canonicalReviewPolicy: {
+        policyId,
+
+        policyVersion:
+          "1.0.0",
+
+        authorizedBy:
+          "self-declared-package-metadata",
+      },
+    };
+
+    const result =
+      classifyCanonicalReview(
+        knowledgePackage,
+      );
+
+    assert.equal(
+      result.mode,
+      "batch_candidate",
+    );
+
+    assert.equal(
+      result.policyId,
+      undefined,
+    );
+  },
+);
+
+test(
+  "active persisted matching policy creates policy candidacy without approval",
+  () => {
+    const policyId =
+      `POLICY-DOC-${Date.now()}`;
+
+    const version =
+      "1.0.0";
+
+    saveCanonicalReviewPolicy({
+      id:
+        policyId,
+
+      version,
+
+      status:
+        "active",
+
+      title:
+        "Governed documentation review policy",
+
+      authority:
+        "architecture-specification",
+
+      scope:
+        "platform",
+
+      owner:
+        "Knowledge Governance",
+
+      authorizedBy:
+        "human:knowledge-governance",
+
+      authorizedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      createdAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      updatedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      supersedes:
+        [],
+
+      supersededBy:
+        null,
+
+      rules: {
+        requireCompleteGovernanceIdentity:
+          true,
+
+        requireProvenance:
+          true,
+
+        requireValidationPassed:
+          true,
+
+        excludedAuthorities: [
+          "constitutional",
+        ],
+      },
+    });
+
+    try {
+      const knowledgePackage =
+        packageFixture();
+
+      knowledgePackage.metadata = {
+        canonicalReviewPolicy: {
+          policyId,
+
+          policyVersion:
+            version,
+        },
+      };
+
+      const result =
+        classifyCanonicalReview(
+          knowledgePackage,
+        );
+
+      assert.equal(
+        result.mode,
+        "policy_candidate",
+      );
+
+      assert.equal(
+        result.policyId,
+        policyId,
+      );
+
+      assert.equal(
+        knowledgePackage.state,
+        "awaiting_review",
+      );
+
+      assert.equal(
+        knowledgePackage.approvalState,
+        "pending_review",
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        policyId,
+        version,
+      );
+    }
+  },
+);
+
+test(
+  "revoked policy cannot create policy candidacy",
+  () => {
+    const policyId =
+      `POLICY-REVOKED-${Date.now()}`;
+
+    const version =
+      "1.0.0";
+
+    saveCanonicalReviewPolicy({
+      id:
+        policyId,
+
+      version,
+
+      status:
+        "revoked",
+
+      title:
+        "Revoked review policy",
+
+      authority:
+        "architecture-specification",
+
+      scope:
+        "platform",
+
+      owner:
+        "Knowledge Governance",
+
+      authorizedBy:
+        "human:knowledge-governance",
+
+      authorizedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      createdAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      updatedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      supersedes:
+        [],
+
+      supersededBy:
+        null,
+
+      rules: {
+        requireCompleteGovernanceIdentity:
+          true,
+
+        requireProvenance:
+          true,
+
+        requireValidationPassed:
+          true,
+
+        excludedAuthorities: [
+          "constitutional",
+        ],
+      },
+    });
+
+    try {
+      const knowledgePackage =
+        packageFixture();
+
+      knowledgePackage.metadata = {
+        canonicalReviewPolicy: {
+          policyId,
+
+          policyVersion:
+            version,
+        },
+      };
+
+      const result =
+        classifyCanonicalReview(
+          knowledgePackage,
+        );
+
+      assert.equal(
+        result.mode,
+        "batch_candidate",
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        policyId,
+        version,
+      );
+    }
+  },
+);
+
+test(
+  "policy authority and scope mismatch requires individual review",
+  () => {
+    const policyId =
+      `POLICY-MISMATCH-${Date.now()}`;
+
+    const version =
+      "1.0.0";
+
+    saveCanonicalReviewPolicy({
+      id:
+        policyId,
+
+      version,
+
+      status:
+        "active",
+
+      title:
+        "Mismatched review policy",
+
+      authority:
+        "architecture-specification",
+
+      scope:
+        "different-scope",
+
+      owner:
+        "Knowledge Governance",
+
+      authorizedBy:
+        "human:knowledge-governance",
+
+      authorizedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      createdAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      updatedAt:
+        Date.UTC(
+          2026,
+          7,
+          16,
+        ),
+
+      supersedes:
+        [],
+
+      supersededBy:
+        null,
+
+      rules: {
+        requireCompleteGovernanceIdentity:
+          true,
+
+        requireProvenance:
+          true,
+
+        requireValidationPassed:
+          true,
+
+        excludedAuthorities: [
+          "constitutional",
+        ],
+      },
+    });
+
+    try {
+      const knowledgePackage =
+        packageFixture();
+
+      knowledgePackage.metadata = {
+        canonicalReviewPolicy: {
+          policyId,
+
+          policyVersion:
+            version,
+        },
+      };
+
+      const result =
+        classifyCanonicalReview(
+          knowledgePackage,
+        );
+
+      assert.equal(
+        result.mode,
+        "individual",
+      );
+
+      assert.equal(
+        result.risk,
+        "critical",
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        policyId,
+        version,
+      );
+    }
   },
 );

@@ -672,6 +672,118 @@ export async function submitCanonicalReviewBatchDecision(
   };
 }
 
+export type CanonicalReviewPolicyStatus =
+  | "draft"
+  | "active"
+  | "revoked"
+  | "superseded";
+
+export interface CanonicalReviewPolicyView {
+  id:
+    string;
+
+  version:
+    string;
+
+  status:
+    CanonicalReviewPolicyStatus;
+
+  title:
+    string;
+
+  authority:
+    string;
+
+  scope:
+    string;
+
+  owner:
+    string;
+
+  authorizedBy:
+    string;
+
+  authorizedAt:
+    number;
+
+  createdAt:
+    number;
+
+  updatedAt:
+    number;
+
+  supersedes:
+    string[];
+
+  supersededBy:
+    string | null;
+
+  rules: {
+    requireCompleteGovernanceIdentity:
+      boolean;
+
+    requireProvenance:
+      boolean;
+
+    requireValidationPassed:
+      boolean;
+
+    excludedAuthorities:
+      string[];
+  };
+}
+
+export interface CanonicalReviewPolicySnapshot {
+  ok:
+    true;
+
+  policies:
+    CanonicalReviewPolicyView[];
+
+  summary: {
+    total:
+      number;
+
+    active:
+      number;
+
+    draft:
+      number;
+
+    revoked:
+      number;
+
+    superseded:
+      number;
+  };
+}
+
+export async function getCanonicalReviewPolicies():
+Promise<CanonicalReviewPolicySnapshot> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/policies`,
+      {
+        headers:
+          getRuntimeCallerHeaders(),
+      },
+    );
+
+  const body =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      body?.error ??
+      "failed_to_get_canonical_review_policies",
+    );
+  }
+
+  return body;
+}
+
 export type KnowledgeManufacturingStage =
   | "Evidence Intake"
   | "Documentation Compiler"

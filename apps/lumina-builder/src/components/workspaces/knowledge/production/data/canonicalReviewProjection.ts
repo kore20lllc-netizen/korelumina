@@ -15,6 +15,9 @@ export interface CanonicalReviewQueueSlot {
     | "policy_candidate"
     | "blocked"
     | null;
+
+  policyId:
+    string | null;
 }
 
 export interface CanonicalReviewTimelineSlot {
@@ -81,6 +84,7 @@ export const canonicalReviewFixtureProjection = {
       state: "Ready for final review",
       tone: "emerald" as const,
       reviewMode: null,
+      policyId: null,
     },
     {
       id: "KCAP-2026-039",
@@ -94,6 +98,7 @@ export const canonicalReviewFixtureProjection = {
       state: "Decision required",
       tone: "amber" as const,
       reviewMode: null,
+      policyId: null,
     },
     {
       id: "KCAP-2026-036",
@@ -107,6 +112,7 @@ export const canonicalReviewFixtureProjection = {
       state: "Review blocked",
       tone: "rose" as const,
       reviewMode: null,
+      policyId: null,
     },
   ],
 
@@ -297,6 +303,11 @@ export function createCanonicalReviewProjection(
           reviewMode:
             source.reviewClassification
               ?.mode ??
+            null,
+
+          policyId:
+            source.reviewClassification
+              ?.policyId ??
             null,
         };
       },

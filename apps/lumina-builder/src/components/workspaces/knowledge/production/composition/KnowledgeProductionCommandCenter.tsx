@@ -106,8 +106,13 @@ import type {
 } from "../data/canonicalReviewProjection";
 
 import {
+  getCanonicalReviewPolicies,
   getCanonicalReviewSnapshot,
   getKnowledgeProductionLifecycleSnapshot,
+} from "@/services/knowledgeOperationsService";
+
+import type {
+  CanonicalReviewPolicySnapshot,
 } from "@/services/knowledgeOperationsService";
 
 type KnowledgeSelectionKind =
@@ -238,6 +243,34 @@ export function KnowledgeProductionCommandCenter() {
   );
 
   const [
+    canonicalReviewPolicySnapshot,
+    setCanonicalReviewPolicySnapshot,
+  ] = useState<CanonicalReviewPolicySnapshot>({
+    ok:
+      true,
+
+    policies:
+      [],
+
+    summary: {
+      total:
+        0,
+
+      active:
+        0,
+
+      draft:
+        0,
+
+      revoked:
+        0,
+
+      superseded:
+        0,
+    },
+  });
+
+  const [
     canonicalReviewProjection,
     setCanonicalReviewProjection,
   ] = useState<CanonicalReviewProjection>(
@@ -326,13 +359,23 @@ export function KnowledgeProductionCommandCenter() {
   const refreshCanonicalReviewNow =
     useCallback(
       async () => {
-        const snapshot =
-          await getCanonicalReviewSnapshot();
+        const [
+          snapshot,
+          policySnapshot,
+        ] =
+          await Promise.all([
+            getCanonicalReviewSnapshot(),
+            getCanonicalReviewPolicies(),
+          ]);
 
         setCanonicalReviewProjection(
           createCanonicalReviewProjection(
             snapshot,
           ),
+        );
+
+        setCanonicalReviewPolicySnapshot(
+          policySnapshot,
         );
       },
       [],
@@ -804,6 +847,9 @@ export function KnowledgeProductionCommandCenter() {
       >
         <CanonicalReview
           projection={canonicalReviewProjection}
+          policySnapshot={
+            canonicalReviewPolicySnapshot
+          }
           selectedReviewId={
             selection?.kind === "canonical-review"
               ? selection.canonicalReviewId

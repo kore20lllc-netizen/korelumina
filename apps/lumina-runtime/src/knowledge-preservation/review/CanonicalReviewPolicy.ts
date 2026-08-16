@@ -2,6 +2,11 @@ import type {
   KnowledgePackage,
 } from "../package/index.js";
 
+import {
+  loadCanonicalReviewPolicy,
+} from "./CanonicalReviewPolicyStore.js";
+
+
 export type CanonicalReviewRisk =
   | "blocked"
   | "critical"
@@ -307,12 +312,144 @@ export function classifyCanonicalReview(
   if (
     policy
   ) {
+    if (
+      !policy.policyVersion
+    ) {
+      reasons.push(
+        `Package references review policy ${policy.policyId} without an exact governed policy version.`,
+      );
+
+      reasons.push(
+        "Unversioned policy metadata cannot authorize policy review.",
+      );
+
+      return {
+        packageId:
+          knowledgePackage.id,
+
+        risk:
+          "standard",
+
+        mode:
+          "batch_candidate",
+
+        reasons,
+      };
+    }
+
+    const authorityPolicy =
+      loadCanonicalReviewPolicy(
+        policy.policyId,
+        policy.policyVersion,
+      );
+
+    if (
+      !authorityPolicy
+    ) {
+      reasons.push(
+        `Referenced review policy ${policy.policyId}@${policy.policyVersion} is not persisted.`,
+      );
+
+      reasons.push(
+        "Package metadata cannot create policy authority.",
+      );
+
+      return {
+        packageId:
+          knowledgePackage.id,
+
+        risk:
+          "standard",
+
+        mode:
+          "batch_candidate",
+
+        reasons,
+      };
+    }
+
+    if (
+      authorityPolicy.status !==
+      "active"
+    ) {
+      reasons.push(
+        `Review policy ${authorityPolicy.id}@${authorityPolicy.version} is ${authorityPolicy.status}.`,
+      );
+
+      return {
+        packageId:
+          knowledgePackage.id,
+
+        risk:
+          "standard",
+
+        mode:
+          "batch_candidate",
+
+        reasons,
+      };
+    }
+
+    if (
+      authorityPolicy.authority !==
+        knowledgePackage.authority ||
+      authorityPolicy.scope !==
+        knowledgePackage.scope
+    ) {
+      reasons.push(
+        `Review policy ${authorityPolicy.id}@${authorityPolicy.version} does not govern this package authority and scope.`,
+      );
+
+      return {
+        packageId:
+          knowledgePackage.id,
+
+        risk:
+          "critical",
+
+        mode:
+          "individual",
+
+        reasons,
+      };
+    }
+
+    if (
+      authorityPolicy.rules
+        .excludedAuthorities
+        .includes(
+          knowledgePackage.authority ??
+            "",
+        )
+    ) {
+      reasons.push(
+        "Package authority is explicitly excluded from policy-governed review.",
+      );
+
+      return {
+        packageId:
+          knowledgePackage.id,
+
+        risk:
+          "critical",
+
+        mode:
+          "individual",
+
+        reasons,
+      };
+    }
+
     reasons.push(
-      `Package is explicitly associated with pre-authorized review policy ${policy.policyId}.`,
+      `Package is eligible under active governed review policy ${authorityPolicy.id}@${authorityPolicy.version}.`,
     );
 
     reasons.push(
-      "Policy eligibility does not itself constitute approval.",
+      `Policy authority was explicitly granted by ${authorityPolicy.authorizedBy}.`,
+    );
+
+    reasons.push(
+      "Policy eligibility does not itself constitute approval or canonical promotion.",
     );
 
     return {
@@ -328,7 +465,7 @@ export function classifyCanonicalReview(
       reasons,
 
       policyId:
-        policy.policyId,
+        authorityPolicy.id,
     };
   }
 
