@@ -46,6 +46,7 @@ import {
 
 import {
   createCanonicalReviewBatch,
+  createCanonicalReviewPolicyDraft,
   submitCanonicalReviewBatchDecision,
   submitCanonicalReviewDecision,
 } from "@/services/knowledgeOperationsService";
@@ -158,6 +159,59 @@ export function CanonicalReview({
   ] = useState<string | null>(
     null,
   );
+
+  const [
+    policyDraftOpen,
+    setPolicyDraftOpen,
+  ] = useState(false);
+
+  const [
+    policyDraftBusy,
+    setPolicyDraftBusy,
+  ] = useState(false);
+
+  const [
+    policyDraftError,
+    setPolicyDraftError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyDraft,
+    setPolicyDraft,
+  ] = useState({
+    id:
+      "",
+
+    version:
+      "",
+
+    title:
+      "",
+
+    authority:
+      "",
+
+    scope:
+      "",
+
+    owner:
+      "",
+
+    requireCompleteGovernanceIdentity:
+      true,
+
+    requireProvenance:
+      true,
+
+    requireValidationPassed:
+      true,
+
+    excludedAuthorities:
+      "constitutional",
+  });
+
 
 
   const queueCounts =
@@ -383,6 +437,149 @@ export function CanonicalReview({
     } finally {
       setDecisionBusy(
         null,
+      );
+    }
+  }
+
+  async function createPolicyDraft() {
+    if (
+      policyDraftBusy
+    ) {
+      return;
+    }
+
+    const id =
+      policyDraft.id.trim();
+
+    const version =
+      policyDraft.version.trim();
+
+    const title =
+      policyDraft.title.trim();
+
+    const authority =
+      policyDraft.authority.trim();
+
+    const scope =
+      policyDraft.scope.trim();
+
+    const owner =
+      policyDraft.owner.trim();
+
+    if (
+      !id ||
+      !version ||
+      !title ||
+      !authority ||
+      !scope ||
+      !owner
+    ) {
+      setPolicyDraftError(
+        "Policy ID, version, title, authority, scope, and owner are required.",
+      );
+
+      return;
+    }
+
+    try {
+      setPolicyDraftBusy(
+        true,
+      );
+
+      setPolicyDraftError(
+        null,
+      );
+
+      await createCanonicalReviewPolicyDraft({
+        id,
+
+        version,
+
+        title,
+
+        authority,
+
+        scope,
+
+        owner,
+
+        rules: {
+          requireCompleteGovernanceIdentity:
+            policyDraft
+              .requireCompleteGovernanceIdentity,
+
+          requireProvenance:
+            policyDraft
+              .requireProvenance,
+
+          requireValidationPassed:
+            policyDraft
+              .requireValidationPassed,
+
+          excludedAuthorities:
+            policyDraft
+              .excludedAuthorities
+              .split(",")
+              .map(
+                (value) =>
+                  value.trim(),
+              )
+              .filter(
+                Boolean,
+              ),
+        },
+      });
+
+      setPolicyDraft({
+        id:
+          "",
+
+        version:
+          "",
+
+        title:
+          "",
+
+        authority:
+          "",
+
+        scope:
+          "",
+
+        owner:
+          "",
+
+        requireCompleteGovernanceIdentity:
+          true,
+
+        requireProvenance:
+          true,
+
+        requireValidationPassed:
+          true,
+
+        excludedAuthorities:
+          "constitutional",
+      });
+
+      setPolicyDraftOpen(
+        false,
+      );
+
+      await onDecisionComplete?.();
+    } catch (
+      error
+    ) {
+      setPolicyDraftError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setPolicyDraftBusy(
+        false,
       );
     }
   }
@@ -933,6 +1130,307 @@ export function CanonicalReview({
                   <p className="mt-3 text-xs leading-5 text-violet-100/64">
                     Policy eligibility requires a separately persisted, active, versioned authority. Eligibility does not itself approve a package or promote Canonical Knowledge.
                   </p>
+                </div>
+              </LuminaFlagshipCard>
+
+              <LuminaFlagshipCard
+                as="article"
+                className="rounded-[18px] p-4"
+              >
+                <div className="relative z-10">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
+                        Policy administration
+                      </div>
+
+                      <div className="mt-1 text-sm font-semibold text-white">
+                        Define governed review authority
+                      </div>
+
+                      <p className="mt-1 max-w-2xl text-xs leading-5 text-sky-300/58">
+                        New policies are created as drafts only. Draft creation does not authorize review decisions.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPolicyDraftOpen(
+                          (current) =>
+                            !current,
+                        );
+
+                        setPolicyDraftError(
+                          null,
+                        );
+                      }}
+                      className="rounded-full border border-cyan-300/28 bg-cyan-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-100 transition hover:bg-cyan-300/[0.13]"
+                    >
+                      {policyDraftOpen
+                        ? "Close draft editor"
+                        : "Create draft policy"}
+                    </button>
+                  </div>
+
+                  {policyDraftOpen ? (
+                    <div className="mt-5 grid gap-4">
+                      <div className="grid gap-3 lg:grid-cols-3">
+                        <label className="grid gap-2">
+                          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                            Policy ID
+                          </span>
+
+                          <input
+                            value={
+                              policyDraft.id
+                            }
+                            onChange={(event) =>
+                              setPolicyDraft(
+                                (current) => ({
+                                  ...current,
+                                  id:
+                                    event.target.value,
+                                }),
+                              )
+                            }
+                            placeholder="POLICY-DOC-LOW-RISK"
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                          />
+                        </label>
+
+                        <label className="grid gap-2">
+                          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                            Version
+                          </span>
+
+                          <input
+                            value={
+                              policyDraft.version
+                            }
+                            onChange={(event) =>
+                              setPolicyDraft(
+                                (current) => ({
+                                  ...current,
+                                  version:
+                                    event.target.value,
+                                }),
+                              )
+                            }
+                            placeholder="1.0.0"
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                          />
+                        </label>
+
+                        <label className="grid gap-2">
+                          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                            Owner
+                          </span>
+
+                          <input
+                            value={
+                              policyDraft.owner
+                            }
+                            onChange={(event) =>
+                              setPolicyDraft(
+                                (current) => ({
+                                  ...current,
+                                  owner:
+                                    event.target.value,
+                                }),
+                              )
+                            }
+                            placeholder="Knowledge Governance"
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                          />
+                        </label>
+                      </div>
+
+                      <label className="grid gap-2">
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/56">
+                          Policy title
+                        </span>
+
+                        <input
+                          value={
+                            policyDraft.title
+                          }
+                          onChange={(event) =>
+                            setPolicyDraft(
+                              (current) => ({
+                                ...current,
+                                title:
+                                  event.target.value,
+                              }),
+                            )
+                          }
+                          placeholder="Governed documentation review policy"
+                          className="h-10 rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-violet-300/42"
+                        />
+                      </label>
+
+                      <div className="grid gap-3 lg:grid-cols-2">
+                        <label className="grid gap-2">
+                          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-amber-300/56">
+                            Authority
+                          </span>
+
+                          <input
+                            value={
+                              policyDraft.authority
+                            }
+                            onChange={(event) =>
+                              setPolicyDraft(
+                                (current) => ({
+                                  ...current,
+                                  authority:
+                                    event.target.value,
+                                }),
+                              )
+                            }
+                            placeholder="architecture-specification"
+                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-amber-300/42"
+                          />
+                        </label>
+
+                        <label className="grid gap-2">
+                          <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-amber-300/56">
+                            Scope
+                          </span>
+
+                          <input
+                            value={
+                              policyDraft.scope
+                            }
+                            onChange={(event) =>
+                              setPolicyDraft(
+                                (current) => ({
+                                  ...current,
+                                  scope:
+                                    event.target.value,
+                                }),
+                              )
+                            }
+                            placeholder="platform"
+                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-amber-300/42"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="grid gap-3 lg:grid-cols-3">
+                        {[
+                          {
+                            key:
+                              "requireCompleteGovernanceIdentity" as const,
+
+                            label:
+                              "Governance identity",
+                          },
+                          {
+                            key:
+                              "requireProvenance" as const,
+
+                            label:
+                              "Provenance",
+                          },
+                          {
+                            key:
+                              "requireValidationPassed" as const,
+
+                            label:
+                              "Validation passed",
+                          },
+                        ].map(
+                          (rule) => (
+                            <label
+                              key={
+                                rule.key
+                              }
+                              className="flex items-center gap-3 rounded-[14px] border border-sky-300/10 bg-slate-950/24 px-3 py-3"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={
+                                  policyDraft[
+                                    rule.key
+                                  ]
+                                }
+                                onChange={(event) =>
+                                  setPolicyDraft(
+                                    (current) => ({
+                                      ...current,
+                                      [rule.key]:
+                                        event.target.checked,
+                                    }),
+                                  )
+                                }
+                                className="h-4 w-4"
+                              />
+
+                              <span className="text-xs font-medium text-sky-100/76">
+                                Require {rule.label}
+                              </span>
+                            </label>
+                          ),
+                        )}
+                      </div>
+
+                      <label className="grid gap-2">
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-rose-300/56">
+                          Excluded authorities
+                        </span>
+
+                        <input
+                          value={
+                            policyDraft
+                              .excludedAuthorities
+                          }
+                          onChange={(event) =>
+                            setPolicyDraft(
+                              (current) => ({
+                                ...current,
+                                excludedAuthorities:
+                                  event.target.value,
+                              }),
+                            )
+                          }
+                          placeholder="constitutional"
+                          className="h-10 rounded-[14px] border border-rose-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-rose-300/42"
+                        />
+
+                        <span className="text-[10px] text-sky-400/48">
+                          Comma-separated authority classes that this policy can never govern.
+                        </span>
+                      </label>
+
+                      {policyDraftError ? (
+                        <div className="rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                          {policyDraftError}
+                        </div>
+                      ) : null}
+
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="text-[10px] leading-5 text-amber-200/56">
+                          Creation persists a draft only. Human activation is a separate governance decision.
+                        </div>
+
+                        <button
+                          type="button"
+                          disabled={
+                            policyDraftBusy
+                          }
+                          onClick={() =>
+                            void createPolicyDraft()
+                          }
+                          className="rounded-full border border-violet-300/28 bg-violet-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-violet-100 transition hover:bg-violet-300/[0.14] disabled:cursor-not-allowed disabled:opacity-45"
+                        >
+                          {policyDraftBusy
+                            ? "Creating draft…"
+                            : "Create draft"}
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </LuminaFlagshipCard>
 

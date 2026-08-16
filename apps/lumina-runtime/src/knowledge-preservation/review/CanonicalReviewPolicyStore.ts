@@ -166,7 +166,14 @@ export function saveCanonicalReviewPolicy(
     !policy.authority.trim() ||
     !policy.scope.trim() ||
     !policy.owner.trim() ||
-    !policy.authorizedBy.trim()
+    (
+      policy.status ===
+        "active" &&
+      (
+        !policy.authorizedBy.trim() ||
+        policy.authorizedAt <= 0
+      )
+    )
   ) {
     throw new Error(
       "canonical_review_policy_governance_incomplete",

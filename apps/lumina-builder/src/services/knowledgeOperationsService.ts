@@ -784,6 +784,240 @@ Promise<CanonicalReviewPolicySnapshot> {
   return body;
 }
 
+
+export interface CreateCanonicalReviewPolicyInput {
+  id:
+    string;
+
+  version:
+    string;
+
+  title:
+    string;
+
+  authority:
+    string;
+
+  scope:
+    string;
+
+  owner:
+    string;
+
+  rules: {
+    requireCompleteGovernanceIdentity:
+      boolean;
+
+    requireProvenance:
+      boolean;
+
+    requireValidationPassed:
+      boolean;
+
+    excludedAuthorities:
+      string[];
+  };
+}
+
+export interface CanonicalReviewPolicyAuthorityDecisionInput {
+  actorId:
+    string;
+
+  timestamp?:
+    number;
+}
+
+interface CanonicalReviewPolicyAdministrationResponse {
+  ok:
+    true;
+
+  policy:
+    CanonicalReviewPolicyView;
+
+  packageDecision:
+    null;
+
+  promotion:
+    null;
+}
+
+async function policyAdministrationRequest(
+  url:
+    string,
+
+  body:
+    Record<
+      string,
+      unknown
+    >,
+): Promise<CanonicalReviewPolicyAdministrationResponse> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}${url}`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify(
+            body,
+          ),
+      },
+    );
+
+  const result =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      result?.error ??
+      "canonical_review_policy_administration_failed",
+    );
+  }
+
+  return result;
+}
+
+export async function createCanonicalReviewPolicyDraft(
+  input:
+    CreateCanonicalReviewPolicyInput,
+): Promise<CanonicalReviewPolicyAdministrationResponse> {
+  return policyAdministrationRequest(
+    "/api/knowledge/canonical-review/policies",
+    input as unknown as Record<
+      string,
+      unknown
+    >,
+  );
+}
+
+export async function activateCanonicalReviewPolicy(
+  policyId:
+    string,
+
+  version:
+    string,
+
+  input:
+    CanonicalReviewPolicyAuthorityDecisionInput,
+): Promise<CanonicalReviewPolicyAdministrationResponse> {
+  return policyAdministrationRequest(
+    `/api/knowledge/canonical-review/policies/${encodeURIComponent(
+      policyId,
+    )}/${encodeURIComponent(
+      version,
+    )}/activate`,
+    input as unknown as Record<
+      string,
+      unknown
+    >,
+  );
+}
+
+export async function revokeCanonicalReviewPolicy(
+  policyId:
+    string,
+
+  version:
+    string,
+
+  input:
+    CanonicalReviewPolicyAuthorityDecisionInput,
+): Promise<CanonicalReviewPolicyAdministrationResponse> {
+  return policyAdministrationRequest(
+    `/api/knowledge/canonical-review/policies/${encodeURIComponent(
+      policyId,
+    )}/${encodeURIComponent(
+      version,
+    )}/revoke`,
+    input as unknown as Record<
+      string,
+      unknown
+    >,
+  );
+}
+
+export async function supersedeCanonicalReviewPolicy(
+  policyId:
+    string,
+
+  version:
+    string,
+
+  replacement:
+    CreateCanonicalReviewPolicyInput,
+
+  input:
+    CanonicalReviewPolicyAuthorityDecisionInput,
+): Promise<{
+  ok:
+    true;
+
+  previous:
+    CanonicalReviewPolicyView;
+
+  replacement:
+    CanonicalReviewPolicyView;
+
+  packageDecision:
+    null;
+
+  promotion:
+    null;
+}> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/policies/${encodeURIComponent(
+        policyId,
+      )}/${encodeURIComponent(
+        version,
+      )}/supersede`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            actorId:
+              input.actorId,
+
+            timestamp:
+              input.timestamp,
+
+            replacement,
+          }),
+      },
+    );
+
+  const result =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      result?.error ??
+      "canonical_review_policy_supersession_failed",
+    );
+  }
+
+  return result;
+}
+
 export type KnowledgeManufacturingStage =
   | "Evidence Intake"
   | "Documentation Compiler"
