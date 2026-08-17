@@ -45,10 +45,16 @@ function stateForPackage(
       return "approved";
 
     case "canonical":
-      return "published";
-
     case "adapted":
-      return "adapted";
+      /*
+       * Organizational Memory adaptation occurs only after
+       * Canonical Knowledge has already been published.
+       *
+       * Keep the persisted backend lifecycle state as "adapted",
+       * while the Flow Engine truthfully presents publication as
+       * completed.
+       */
+      return "published";
 
     case "consumed":
       return "consumed";
@@ -497,7 +503,9 @@ function capsuleForRun(
     destination:
       knowledgePackage
         ? knowledgePackage.state ===
-            "canonical"
+              "canonical" ||
+            knowledgePackage.state ===
+              "adapted"
           ? displayValue(
               knowledgePackage
                 .destination,
