@@ -60,9 +60,19 @@ export default function KnowledgeOperationsWorkspace({
         setSnapshot(
           nextSnapshot,
         );
-      } catch {
-        setSnapshot(
-          null,
+
+
+      } catch (error) {
+        /*
+         * Preserve the last known-good operational snapshot.
+         *
+         * A transient Runtime request failure must never erase
+         * authoritative Knowledge Operations values and turn
+         * the certified metrics into anonymous placeholders.
+         */
+        console.error(
+          "[KnowledgeOperations] Failed to refresh authoritative snapshot:",
+          error,
         );
       }
     }, []);
