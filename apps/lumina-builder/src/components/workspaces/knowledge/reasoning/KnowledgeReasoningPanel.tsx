@@ -40,7 +40,10 @@ export function KnowledgeReasoningPanel({
 
         <div className="mt-2">
           Health:{" "}
-          {snapshot.summary.healthScore}%
+          {snapshot.summary.healthScore ===
+          null
+            ? "Not measured"
+            : `${snapshot.summary.healthScore}%`}
         </div>
       </div>
     </div>

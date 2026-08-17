@@ -24,11 +24,6 @@ export {
 
 
 export {
-  KnowledgeMetricsOverview,
-  type KnowledgeMetricsOverviewProps,
-} from "../metrics";
-
-export {
   KnowledgeOperationalMetrics,
   type KnowledgeOperationalMetricsProps,
 } from "../metrics";

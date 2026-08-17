@@ -16,6 +16,9 @@ related:
 
 # KoreLumina Canonical Document Hierarchy
 
+> Historical Knowledge Operations V1/V2 references in this document point to `docs/archive/knowledge-operations/`. Those archived documents are retained for provenance and reconciliation only and are not current implementation authority.
+
+
 ## 1. Purpose
 
 This document establishes the governing hierarchy for KoreLumina documentation.
@@ -255,7 +258,7 @@ Version number alone does not establish authority.
 
 ### Example
 
-`docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` is proposed and therefore does not govern production architecture until approved. Its `supersedes` declaration does not make V1 non-governing unless V2 itself is approved by the proper authority.
+`docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` is proposed and therefore does not govern production architecture until approved. Its `supersedes` declaration does not make V1 non-governing unless V2 itself is approved by the proper authority.
 
 ## 12. Operating models, interfaces, and mission documents
 

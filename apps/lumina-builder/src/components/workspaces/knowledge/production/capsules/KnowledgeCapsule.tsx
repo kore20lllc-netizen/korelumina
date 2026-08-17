@@ -207,33 +207,39 @@ export function KnowledgeCapsule({
           />
 
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="relative -left-2 font-mono text-[10px] font-semibold tracking-[0.14em] text-cyan-100/88 min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            {capsule.state !== "needs-review" || resealing ? (
+              <div className="flex min-h-6 items-center justify-end gap-2">
+                {capsule.state !== "needs-review" ? (
+                  <span
+                    className={[
+                      "rounded-full px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em]",
+                      presentation.core,
+                    ].join(" ")}
+                  >
+                    {presentation.label}
+                  </span>
+                ) : null}
+
+                {resealing ? (
+                  <span
+                    className={
+                      flagshipAppearance.capsuleResealingBadge
+                    }
+                  >
+                    Resealing
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
+
+            <div className="mt-2 min-w-0">
+              <div className="mb-1 overflow-hidden text-ellipsis whitespace-nowrap text-left font-mono text-[10px] font-semibold tracking-[0.14em] text-cyan-100/88">
                 {capsule.identity}
-              </span>
+              </div>
 
-              <span
-                className={[
-                  "rounded-full px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em]",
-                  presentation.core,
-                ].join(" ")}
-              >
-                {presentation.label}
-              </span>
-
-              {resealing ? (
-                <span
-                  className={
-                    flagshipAppearance.capsuleResealingBadge
-                  }
-                >
-                  Resealing
-                </span>
-              ) : null}
-            </div>
-
-            <div className="mt-2 text-sm font-semibold text-amber-400">
-              {capsule.title}
+              <div className="text-sm font-semibold text-amber-400">
+                {capsule.title}
+              </div>
             </div>
 
             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-sky-300/72">

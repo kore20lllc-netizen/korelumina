@@ -1,5 +1,4 @@
 import {
-  getRuntimeCallerHeaders,
   RUNTIME_API,
 } from "@/services/runtime/client";
 
@@ -34,14 +33,28 @@ export interface EducationalDashboardSnapshot {
     "canonical-knowledge";
 }
 
+/*
+ * Knowledge Education is an authoritative read projection.
+ *
+ * The Runtime GET route does not require caller identity and does not
+ * consume authorization headers. Keeping this read dependent on
+ * getRuntimeCallerHeaders() allowed an unrelated client-context failure
+ * to prevent the request from ever reaching Runtime, after which the
+ * Learning state correctly fell back to its neutral certified topology.
+ *
+ * Keep the certified UI topology independent from caller context.
+ */
 export async function getEducationalDashboard():
 Promise<EducationalDashboardSnapshot> {
   const response =
     await fetch(
       `${RUNTIME_API}/api/knowledge/education`,
       {
-        headers:
-          getRuntimeCallerHeaders(),
+        method:
+          "GET",
+
+        cache:
+          "no-store",
       },
     );
 
@@ -49,7 +62,7 @@ Promise<EducationalDashboardSnapshot> {
     !response.ok
   ) {
     throw new Error(
-      "failed_to_get_educational_dashboard",
+      `failed_to_get_educational_dashboard:${response.status}`,
     );
   }
 

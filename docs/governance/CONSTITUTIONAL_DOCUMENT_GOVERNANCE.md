@@ -18,6 +18,9 @@ related:
 
 # Constitutional Documentation Governance
 
+> Historical Knowledge Operations V1/V2 references in this document point to `docs/archive/knowledge-operations/`. Those archived documents are retained for provenance and reconciliation only and are not current implementation authority.
+
+
 ## 1. Repository State
 
 Branch: `inspect/runtime-certified-main`
@@ -381,7 +384,7 @@ May Not Override: Active governing documents.
 | Active | Current guidance within scope | `docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md`, metadata quoted in KR-004 | Remains active unless superseded, archived, or contradicted by higher authority |
 | Frozen | Structurally closed and governing | `docs/architecture/reconciliation/KP-014_ORGANIZATIONAL_MEMORY_RECONCILIATION.md`, **Architecture Freeze** | Changes require approved ticket, RFC, ADR, or named authority process |
 | Complete | Completed scope, not automatically constitutional authority | KP closeout and reconciliation documents | Becomes historical when superseded; completion must remain evidence-backed |
-| Proposed | Non-governing proposal | `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md`, metadata | Requires approval before governing; proposal alone cannot supersede active guidance |
+| Proposed | Non-governing proposal | `docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md`, metadata | Requires approval before governing; proposal alone cannot supersede active guidance |
 | Draft | Working, non-final document | CKM, Knowledge IR, Evidence Model, Documentation Architecture | Requires explicit approval, acceptance, or freeze to govern |
 | Review | Under review and not final unless final authority is explicitly declared | `docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md`, **Phase 0 Closeout Review** | Requires closeout, approval, or freeze for finality |
 | Superseded | Historical evidence only | ADR and specification conventions; Canonical hierarchy | Must identify a valid successor or superseding decision |
@@ -539,8 +542,8 @@ Evidence: `docs/README.md`, sections **Purpose**, **History**, **Documentation G
 | `docs/architecture/CANONICAL_KNOWLEDGE_MODEL.md` | Knowledge | Canonical Model | Draft v1 | Not explicitly declared |
 | `docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md` | Knowledge | Canonical Model | Draft v1 | Not explicitly declared |
 | `docs/architecture/knowledge-governance/EVIDENCE_MODEL.md` | Knowledge | Canonical Model | Draft v1 | Not explicitly declared |
-| `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md` | Knowledge Operations | Specification | Status requires direct metadata review | Declared or unclear |
-| `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` | Knowledge Operations | Specification | Proposed | Chief Systems Architect |
+| `docs/archive/knowledge-operations/v1/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md` | Knowledge Operations | Specification | Status requires direct metadata review | Declared or unclear |
+| `docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` | Knowledge Operations | Specification | Proposed | Chief Systems Architect |
 | `docs/runtime/RUNTIME_CERTIFICATION_REPORT.md` | Runtime | Certification | Certification record | Certifying authority in record or unclear |
 | `docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md` | Design System | Certification | Certification record | Certifying authority in record or unclear |
 | `docs/governance/GOVERNANCE_MODEL.md` | Governance | Governance | Repository status requires direct review | Governance owner or unclear |
@@ -555,7 +558,7 @@ Evidence: `docs/README.md`, sections **Purpose**, **History**, **Documentation G
 
 **DOCUMENTED FACT** — Explicit `supersedes` or `superseded by` metadata is valid supersession evidence only when the replacing document itself has sufficient approval authority.
 
-Evidence: `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` declares `supersedes` while remaining Proposed; `docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md`, section **Specifications**, states proposal status does not make the predecessor non-governing.
+Evidence: `docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` declares `supersedes` while remaining Proposed; `docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md`, section **Specifications**, states proposal status does not make the predecessor non-governing.
 
 **DOCUMENTED FACT** — Constitutional amendment may supersede constitutional provisions only through the documented amendment process.
 
@@ -684,7 +687,7 @@ Evidence: `docs/architecture/knowledge-governance/reconciliation/KR-004_KNOWLEDG
 | `docs/architecture/CANONICAL_KNOWLEDGE_MODEL.md` | Canonical Model | Draft v1 | Unclear | Knowledge | Non-final model guidance | None | None | **Status**, **Purpose** |
 | `docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md` | Canonical Model | Draft v1 | Unclear | Knowledge | Non-final IR contract | None | None | **Status**, **Core Rule** |
 | `docs/architecture/knowledge-governance/EVIDENCE_MODEL.md` | Canonical Model | Draft v1 | Unclear | Knowledge | Non-final evidence contract | None | None | **Status**, **Core Rule** |
-| `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` | Specification | Proposed | Chief Systems Architect | Knowledge Operations | Non-governing proposal | Claims V1 | None | Metadata |
+| `docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md` | Specification | Proposed | Chief Systems Architect | Knowledge Operations | Non-governing proposal | Claims V1 | None | Metadata |
 | `docs/runtime/RUNTIME_CERTIFICATION_REPORT.md` | Certification | Certification record | Certification authority unclear | Runtime | Validated status only | Prior certification if explicit | Later certification | Certification report |
 | `docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md` | Governance / Architecture | Draft | Unclear | Documentation | Non-final classification guidance | None | None | **Status**, **Document Authority Order** |
 | `docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE_AUDIT.md` | Audit | Draft audit | Unclear | Documentation | Findings only | None | None | **Status**, **Immediate Governance Decisions** |

@@ -60,9 +60,54 @@ export default function KnowledgeOperationsWorkspace({
         setSnapshot(
           nextSnapshot,
         );
-      } catch {
-        setSnapshot(
-          null,
+
+        if (
+          typeof window !==
+          "undefined"
+        ) {
+          (
+            window as typeof window & {
+              __KORELUMINA_KNOWLEDGE_SNAPSHOT__?:
+                KnowledgeOperationsSnapshot;
+            }
+          ).__KORELUMINA_KNOWLEDGE_SNAPSHOT__ =
+            nextSnapshot;
+
+          document.documentElement
+            .setAttribute(
+              "data-korelumina-knowledge-snapshot",
+              JSON.stringify({
+                evidence:
+                  nextSnapshot.evidence.total,
+
+                candidate:
+                  nextSnapshot.knowledge.candidateItems,
+
+                canonical:
+                  nextSnapshot.knowledge.canonicalItems,
+
+                totalKnowledge:
+                  nextSnapshot.summary.totalKnowledgeItems,
+
+                promotionRate:
+                  nextSnapshot.knowledge.promotionRate,
+
+                health:
+                  nextSnapshot.summary.healthScore,
+              }),
+            );
+        }
+      } catch (error) {
+        /*
+         * Preserve the last known-good operational snapshot.
+         *
+         * A transient Runtime request failure must never erase
+         * authoritative Knowledge Operations values and turn
+         * the certified metrics into anonymous placeholders.
+         */
+        console.error(
+          "[KnowledgeOperations] Failed to refresh authoritative snapshot:",
+          error,
         );
       }
     }, []);

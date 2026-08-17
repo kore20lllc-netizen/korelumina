@@ -9,12 +9,13 @@
     "dev": "node scripts/dev-supervisor.mjs",
     "dev:builder": "npm --workspace apps/lumina-builder run dev",
     "dev:runtime": "npm --workspace apps/lumina-runtime run dev",
-    "build": "npm run verify:knowledge-ui-contract && npm run build:runtime && npm run build:builder",
+    "build": "npm run verify:knowledge-doc-governance && npm run verify:knowledge-ui-contract && npm run build:runtime && npm run build:builder",
     "build:builder": "npm --workspace apps/lumina-builder run build",
     "build:runtime": "npm --workspace apps/lumina-runtime run build",
     "preview": "npm run preview:builder",
     "preview:builder": "npm --workspace apps/lumina-builder run preview",
     "verify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs",
-    "certify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs --write"
+    "certify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs --write",
+    "verify:knowledge-doc-governance": "bash scripts/verify-knowledge-operations-doc-governance.sh"
   }
 }
