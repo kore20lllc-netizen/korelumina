@@ -108,8 +108,8 @@
       "elementCount": 115
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx": {
-      "sha256": "11897fe40655ca5d02dba291343392048122367d9a27f04f71164f0aaddf158a",
-      "elementCount": 23
+      "sha256": "5a6ad82fbe2bee2ccd257dfc398391483d9cbe23cc520812f2f484db9935aa7c",
+      "elementCount": 22
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFilters.tsx": {
       "sha256": "a70428c3abeec861e14e04879b5f0f72c77f897ccebdf506b6ae836c12711cc3",
