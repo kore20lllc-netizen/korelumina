@@ -45,8 +45,11 @@ import {
 } from "@/components/design-system/executive/ExecutivePremiumIcon";
 
 import {
+  activateCanonicalReviewPolicy,
   createCanonicalReviewBatch,
   createCanonicalReviewPolicyDraft,
+  deleteCanonicalReviewPolicyDraft,
+  revokeCanonicalReviewPolicy,
   submitCanonicalReviewBatchDecision,
   submitCanonicalReviewDecision,
 } from "@/services/knowledgeOperationsService";
@@ -54,6 +57,7 @@ import {
 import type {
   CanonicalReviewDecision,
   CanonicalReviewPolicySnapshot,
+  CanonicalReviewPolicyView,
 } from "@/services/knowledgeOperationsService";
 
 import type {
@@ -77,6 +81,16 @@ type CanonicalReviewProps = {
   ) => void;
 
   onDecisionComplete?: () => void | Promise<void>;
+
+  onPolicyPersisted?: (
+    policy:
+      CanonicalReviewPolicyView,
+  ) => void;
+
+  onPolicyDeleted?: (
+    policyId: string,
+    version: string,
+  ) => void;
 };
 
 function readinessTone(
@@ -101,6 +115,8 @@ export function CanonicalReview({
   onReviewSelect,
   onTimelineEventSelect,
   onDecisionComplete,
+  onPolicyPersisted,
+  onPolicyDeleted,
 }: CanonicalReviewProps) {
   const [
     reviewerId,
@@ -176,6 +192,72 @@ export function CanonicalReview({
   ] = useState<string | null>(
     null,
   );
+
+  const [
+    policyActivationBusy,
+    setPolicyActivationBusy,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyActivationError,
+    setPolicyActivationError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyRevocationTarget,
+    setPolicyRevocationTarget,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyRevocationBusy,
+    setPolicyRevocationBusy,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyRevocationError,
+    setPolicyRevocationError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyDeletionTarget,
+    setPolicyDeletionTarget,
+  ] = useState<{
+    id: string;
+    version: string;
+  } | null>(null);
+
+  const [
+    policyDeletionActorId,
+    setPolicyDeletionActorId,
+  ] = useState(
+    "human:knowledge-governance",
+  );
+
+  const [
+    policyDeletionBusy,
+    setPolicyDeletionBusy,
+  ] = useState(false);
+
+  const [
+    policyDeletionError,
+    setPolicyDeletionError,
+  ] = useState<string | null>(
+    null,
+  );
+
+
+
+
 
   const [
     policyDraft,
@@ -441,6 +523,149 @@ export function CanonicalReview({
     }
   }
 
+  async function revokePolicy(
+    policyId:
+      string,
+
+    version:
+      string,
+  ) {
+    const key =
+      `${policyId}@${version}`;
+
+    if (
+      policyRevocationBusy
+    ) {
+      return;
+    }
+
+    const actorId =
+      reviewerId.trim();
+
+    if (
+      !actorId
+    ) {
+      setPolicyRevocationError(
+        "Human authority identity is required to revoke a review policy.",
+      );
+
+      return;
+    }
+
+    try {
+      setPolicyRevocationBusy(
+        key,
+      );
+
+      setPolicyRevocationError(
+        null,
+      );
+
+      const result =
+        await revokeCanonicalReviewPolicy(
+          policyId,
+          version,
+          {
+            actorId,
+          },
+        );
+
+      onPolicyPersisted?.(
+        result.policy,
+      );
+
+      setPolicyRevocationTarget(
+        null,
+      );
+    } catch (
+      error
+    ) {
+      setPolicyRevocationError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setPolicyRevocationBusy(
+        null,
+      );
+    }
+  }
+
+  async function activatePolicy(
+    policyId:
+      string,
+
+    version:
+      string,
+  ) {
+    const key =
+      `${policyId}@${version}`;
+
+    if (
+      policyActivationBusy
+    ) {
+      return;
+    }
+
+    const actorId =
+      reviewerId.trim();
+
+    if (
+      !actorId
+    ) {
+      setPolicyActivationError(
+        "Human authority identity is required to activate a review policy.",
+      );
+
+      return;
+    }
+
+    try {
+      setPolicyActivationBusy(
+        key,
+      );
+
+      setPolicyActivationError(
+        null,
+      );
+
+      const result =
+        await activateCanonicalReviewPolicy(
+          policyId,
+          version,
+          {
+            actorId,
+          },
+        );
+
+      onPolicyPersisted?.(
+        result.policy,
+      );
+
+      /*
+       * Activation response is persisted authoritative state.
+       * The polling read model will reconcile in the background.
+       */
+    } catch (
+      error
+    ) {
+      setPolicyActivationError(
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            ),
+      );
+    } finally {
+      setPolicyActivationBusy(
+        null,
+      );
+    }
+  }
+
   async function createPolicyDraft() {
     if (
       policyDraftBusy
@@ -466,16 +691,43 @@ export function CanonicalReview({
     const owner =
       policyDraft.owner.trim();
 
-    if (
-      !id ||
-      !version ||
-      !title ||
-      !authority ||
-      !scope ||
+    const missingFields = [
+      !id
+        ? "Policy ID"
+        : null,
+
+      !version
+        ? "Version"
+        : null,
+
+      !title
+        ? "Policy title"
+        : null,
+
+      !authority
+        ? "Authority"
+        : null,
+
+      !scope
+        ? "Scope"
+        : null,
+
       !owner
+        ? "Owner"
+        : null,
+    ].filter(
+      (
+        value,
+      ): value is string =>
+        value !== null,
+    );
+
+    if (
+      missingFields.length >
+      0
     ) {
       setPolicyDraftError(
-        "Policy ID, version, title, authority, scope, and owner are required.",
+        `Required: ${missingFields.join(", ")}.`,
       );
 
       return;
@@ -490,45 +742,50 @@ export function CanonicalReview({
         null,
       );
 
-      await createCanonicalReviewPolicyDraft({
-        id,
+      const result =
+        await createCanonicalReviewPolicyDraft({
+          id,
 
-        version,
+          version,
 
-        title,
+          title,
 
-        authority,
+          authority,
 
-        scope,
+          scope,
 
-        owner,
+          owner,
 
-        rules: {
-          requireCompleteGovernanceIdentity:
-            policyDraft
-              .requireCompleteGovernanceIdentity,
+          rules: {
+            requireCompleteGovernanceIdentity:
+              policyDraft
+                .requireCompleteGovernanceIdentity,
 
-          requireProvenance:
-            policyDraft
-              .requireProvenance,
+            requireProvenance:
+              policyDraft
+                .requireProvenance,
 
-          requireValidationPassed:
-            policyDraft
-              .requireValidationPassed,
+            requireValidationPassed:
+              policyDraft
+                .requireValidationPassed,
 
-          excludedAuthorities:
-            policyDraft
-              .excludedAuthorities
-              .split(",")
-              .map(
-                (value) =>
-                  value.trim(),
-              )
-              .filter(
-                Boolean,
-              ),
-        },
-      });
+            excludedAuthorities:
+              policyDraft
+                .excludedAuthorities
+                .split(",")
+                .map(
+                  (value) =>
+                    value.trim(),
+                )
+                .filter(
+                  Boolean,
+                ),
+          },
+        });
+
+      onPolicyPersisted?.(
+        result.policy,
+      );
 
       setPolicyDraft({
         id:
@@ -566,7 +823,14 @@ export function CanonicalReview({
         false,
       );
 
-      await onDecisionComplete?.();
+      /*
+       * The successful POST response is already persisted runtime state.
+       * onPolicyPersisted() updates the visible registry immediately.
+       *
+       * Do not synchronously refetch here: a stale/read-lagging response
+       * can overwrite the just-persisted draft before React paints it.
+       * The normal Canonical Review polling loop will reconcile shortly.
+       */
     } catch (
       error
     ) {
@@ -583,6 +847,75 @@ export function CanonicalReview({
       );
     }
   }
+
+  async function deletePolicyDraft() {
+    if (
+      !policyDeletionTarget ||
+      policyDeletionBusy
+    ) {
+      return;
+    }
+
+    const actorId =
+      policyDeletionActorId.trim();
+
+    if (!actorId) {
+      setPolicyDeletionError(
+        "Deleting human identity is required.",
+      );
+      return;
+    }
+
+    try {
+      setPolicyDeletionBusy(
+        true,
+      );
+
+      setPolicyDeletionError(
+        null,
+      );
+
+      const target = {
+        ...policyDeletionTarget,
+      };
+
+      await deleteCanonicalReviewPolicyDraft(
+        target.id,
+        target.version,
+        {
+          actorId,
+        },
+      );
+
+      /*
+       * The successful DELETE response is authoritative for
+       * this mutation. Remove the persisted draft locally now;
+       * normal polling reconciles afterward.
+       *
+       * Do not synchronously GET and overwrite this mutation.
+       */
+      onPolicyDeleted?.(
+        target.id,
+        target.version,
+      );
+
+      setPolicyDeletionTarget(
+        null,
+      );
+    } catch (error) {
+      setPolicyDeletionError(
+        error instanceof Error
+          ? error.message
+          : String(error),
+      );
+    } finally {
+      setPolicyDeletionBusy(
+        false,
+      );
+    }
+  }
+
+
 
   async function createBatch(
     packageIds:
@@ -1135,9 +1468,9 @@ export function CanonicalReview({
 
               <LuminaFlagshipCard
                 as="article"
-                className="rounded-[18px] p-4"
+                className="rounded-[18px] p-4 relative z-20 pointer-events-auto [&_button]:relative [&_button]:z-30 [&_button]:pointer-events-auto [&_input]:relative [&_input]:z-30 [&_input]:pointer-events-auto [&_input]:!bg-slate-950/90 [&_input]:!text-sky-50 [&_input]:!caret-cyan-200 [&_input]:placeholder:!text-slate-500 [&_textarea]:relative [&_textarea]:z-30 [&_textarea]:pointer-events-auto [&_textarea]:!bg-slate-950/90 [&_textarea]:!text-sky-50 [&_textarea]:!caret-cyan-200 [&_textarea]:placeholder:!text-slate-500 [&_label]:relative [&_label]:z-20 [&_label]:pointer-events-auto"
               >
-                <div className="relative z-10">
+                <div className="relative z-30 pointer-events-auto">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
@@ -1195,7 +1528,20 @@ export function CanonicalReview({
                               )
                             }
                             placeholder="POLICY-DOC-LOW-RISK"
-                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                            style={{
+                              backgroundColor:
+                                "rgba(2, 6, 23, 0.90)",
+
+                              color:
+                                "rgb(240, 249, 255)",
+
+                              caretColor:
+                                "rgb(165, 243, 252)",
+
+                              WebkitTextFillColor:
+                                "rgb(240, 249, 255)",
+                            }}
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/42"
                           />
                         </label>
 
@@ -1218,7 +1564,20 @@ export function CanonicalReview({
                               )
                             }
                             placeholder="1.0.0"
-                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                            style={{
+                              backgroundColor:
+                                "rgba(2, 6, 23, 0.90)",
+
+                              color:
+                                "rgb(240, 249, 255)",
+
+                              caretColor:
+                                "rgb(165, 243, 252)",
+
+                              WebkitTextFillColor:
+                                "rgb(240, 249, 255)",
+                            }}
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/42"
                           />
                         </label>
 
@@ -1241,7 +1600,20 @@ export function CanonicalReview({
                               )
                             }
                             placeholder="Knowledge Governance"
-                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-cyan-300/42"
+                            style={{
+                              backgroundColor:
+                                "rgba(2, 6, 23, 0.90)",
+
+                              color:
+                                "rgb(240, 249, 255)",
+
+                              caretColor:
+                                "rgb(165, 243, 252)",
+
+                              WebkitTextFillColor:
+                                "rgb(240, 249, 255)",
+                            }}
+                            className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/42"
                           />
                         </label>
                       </div>
@@ -1265,7 +1637,20 @@ export function CanonicalReview({
                             )
                           }
                           placeholder="Governed documentation review policy"
-                          className="h-10 rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-violet-300/42"
+                          style={{
+                            backgroundColor:
+                              "rgba(2, 6, 23, 0.90)",
+
+                            color:
+                              "rgb(240, 249, 255)",
+
+                            caretColor:
+                              "rgb(165, 243, 252)",
+
+                            WebkitTextFillColor:
+                              "rgb(240, 249, 255)",
+                          }}
+                          className="h-10 rounded-[14px] border border-violet-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-violet-300/42"
                         />
                       </label>
 
@@ -1289,7 +1674,20 @@ export function CanonicalReview({
                               )
                             }
                             placeholder="architecture-specification"
-                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-amber-300/42"
+                            style={{
+                              backgroundColor:
+                                "rgba(2, 6, 23, 0.90)",
+
+                              color:
+                                "rgb(240, 249, 255)",
+
+                              caretColor:
+                                "rgb(165, 243, 252)",
+
+                              WebkitTextFillColor:
+                                "rgb(240, 249, 255)",
+                            }}
+                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-amber-300/42"
                           />
                         </label>
 
@@ -1312,7 +1710,20 @@ export function CanonicalReview({
                               )
                             }
                             placeholder="platform"
-                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-amber-300/42"
+                            style={{
+                              backgroundColor:
+                                "rgba(2, 6, 23, 0.90)",
+
+                              color:
+                                "rgb(240, 249, 255)",
+
+                              caretColor:
+                                "rgb(165, 243, 252)",
+
+                              WebkitTextFillColor:
+                                "rgb(240, 249, 255)",
+                            }}
+                            className="h-10 rounded-[14px] border border-amber-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-amber-300/42"
                           />
                         </label>
                       </div>
@@ -1395,7 +1806,20 @@ export function CanonicalReview({
                             )
                           }
                           placeholder="constitutional"
-                          className="h-10 rounded-[14px] border border-rose-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none placeholder:text-slate-600 focus:border-rose-300/42"
+                          style={{
+                            backgroundColor:
+                              "rgba(2, 6, 23, 0.90)",
+
+                            color:
+                              "rgb(240, 249, 255)",
+
+                            caretColor:
+                              "rgb(165, 243, 252)",
+
+                            WebkitTextFillColor:
+                              "rgb(240, 249, 255)",
+                          }}
+                          className="h-10 rounded-[14px] border border-rose-300/14 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none placeholder:text-slate-500 focus:border-rose-300/42"
                         />
 
                         <span className="text-[10px] text-sky-400/48">
@@ -1434,9 +1858,20 @@ export function CanonicalReview({
                 </div>
               </LuminaFlagshipCard>
 
+              {policyActivationError ? (
+                <div className="rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                  {policyActivationError}
+                </div>
+              ) : null}
+
+              <div
+                className="max-h-[720px] overflow-y-auto overscroll-contain pr-2 [scrollbar-gutter:stable]"
+                aria-label="Persisted review policies"
+              >
               {policySnapshot.policies.length >
               0 ? (
-                policySnapshot.policies.map(
+                <div className="grid gap-3">
+                  {policySnapshot.policies.map(
                   (policy) => {
                     const eligibleCount =
                       projection.reviewQueue.filter(
@@ -1591,14 +2026,343 @@ export function CanonicalReview({
                             </div>
                           </div>
 
+                          {policy.status ===
+                          "draft" ? (
+                            <div className="mt-4 rounded-[16px] border border-amber-300/16 bg-amber-300/[0.045] p-4">
+                              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                                <div className="min-w-0 flex-1">
+                                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-amber-200/64">
+                                    Human authorization required
+                                  </div>
+
+                                  <div className="mt-1 text-xs leading-5 text-amber-100/68">
+                                    This policy is a draft and has no approval authority. Activation is an explicit human governance decision.
+                                  </div>
+
+                                  <label className="mt-3 grid max-w-md gap-2">
+                                    <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                                      Authorizing human
+                                    </span>
+
+                                    <input
+                                      value={
+                                        reviewerId
+                                      }
+                                      onChange={(
+                                        event,
+                                      ) =>
+                                        setReviewerId(
+                                          event.target.value,
+                                        )
+                                      }
+                                      placeholder="human:knowledge-governance"
+                                      style={{
+                                        backgroundColor:
+                                          "rgba(2, 6, 23, 0.90)",
+
+                                        color:
+                                          "rgb(240, 249, 255)",
+
+                                        caretColor:
+                                          "rgb(165, 243, 252)",
+
+                                        WebkitTextFillColor:
+                                          "rgb(240, 249, 255)",
+                                      }}
+                                      className="h-10 rounded-[14px] border border-cyan-300/20 bg-slate-950/90 px-3 text-xs font-medium text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/52 focus:ring-1 focus:ring-cyan-300/20"
+                                    />
+                                  </label>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  disabled={
+                                    policyActivationBusy !==
+                                    null
+                                  }
+                                  onClick={() =>
+                                    void activatePolicy(
+                                      policy.id,
+                                      policy.version,
+                                    )
+                                  }
+                                  className="shrink-0 rounded-full border border-emerald-300/28 bg-emerald-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:bg-emerald-300/[0.14] disabled:cursor-not-allowed disabled:opacity-45"
+                                >
+                                  {policyActivationBusy ===
+                                  `${policy.id}@${policy.version}`
+                                    ? "Activating…"
+                                    : "Activate policy"}
+                                </button>
+                              </div>
+                            </div>
+                          ) : policy.status ===
+                            "active" ? (
+                            <div className="mt-4 grid gap-3">
+                              <div className="flex flex-wrap items-center gap-2 text-[10px] leading-5 text-emerald-200/58">
+                                <span>
+                                  Authorized by
+                                </span>
+
+                                <span className="font-semibold text-emerald-100">
+                                  {policy.authorizedBy}
+                                </span>
+
+                                <span className="text-emerald-300/36">
+                                  ·
+                                </span>
+
+                                <span>
+                                  {policy.authorizedAt >
+                                  0
+                                    ? new Date(
+                                        policy.authorizedAt,
+                                      ).toLocaleString()
+                                    : "authorization timestamp unavailable"}
+                                </span>
+                              </div>
+
+                              {policyRevocationTarget ===
+                              `${policy.id}@${policy.version}` ? (
+                                <div className="rounded-[16px] border border-rose-300/18 bg-rose-300/[0.045] p-4">
+                                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-rose-200/70">
+                                    Revoke active policy
+                                  </div>
+
+                                  <p className="mt-2 text-xs leading-5 text-rose-100/68">
+                                    Revocation removes this policy from active review authority. It does not revoke previously recorded package decisions or mutate Canonical Knowledge.
+                                  </p>
+
+                                  <label className="mt-3 grid max-w-md gap-2">
+                                    <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                                      Revoking human
+                                    </span>
+
+                                    <input
+                                      value={
+                                        reviewerId
+                                      }
+                                      onChange={(
+                                        event,
+                                      ) =>
+                                        setReviewerId(
+                                          event.target.value,
+                                        )
+                                      }
+                                      placeholder="human:knowledge-governance"
+                                      style={{
+                                        backgroundColor:
+                                          "rgba(2, 6, 23, 0.90)",
+
+                                        color:
+                                          "rgb(240, 249, 255)",
+
+                                        caretColor:
+                                          "rgb(165, 243, 252)",
+
+                                        WebkitTextFillColor:
+                                          "rgb(240, 249, 255)",
+                                      }}
+                                      className="h-10 rounded-[14px] border border-cyan-300/20 bg-slate-950/90 px-3 text-xs font-medium text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/52 focus:ring-1 focus:ring-cyan-300/20"
+                                    />
+                                  </label>
+
+                                  {policyRevocationError ? (
+                                    <div className="mt-3 rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                                      {policyRevocationError}
+                                    </div>
+                                  ) : null}
+
+                                  <div className="mt-4 flex flex-wrap gap-2">
+                                    <button
+                                      type="button"
+                                      disabled={
+                                        policyRevocationBusy !==
+                                        null
+                                      }
+                                      onClick={() =>
+                                        void revokePolicy(
+                                          policy.id,
+                                          policy.version,
+                                        )
+                                      }
+                                      className="rounded-full border border-rose-300/30 bg-rose-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100 transition hover:bg-rose-300/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                                    >
+                                      {policyRevocationBusy ===
+                                      `${policy.id}@${policy.version}`
+                                        ? "Revoking…"
+                                        : "Confirm revocation"}
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      disabled={
+                                        policyRevocationBusy !==
+                                        null
+                                      }
+                                      onClick={() => {
+                                        setPolicyRevocationTarget(
+                                          null,
+                                        );
+
+                                        setPolicyRevocationError(
+                                          null,
+                                        );
+                                      }}
+                                      className="rounded-full border border-sky-300/16 bg-slate-950/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-200/72 transition hover:border-sky-300/30"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setPolicyRevocationTarget(
+                                        `${policy.id}@${policy.version}`,
+                                      );
+
+                                      setPolicyRevocationError(
+                                        null,
+                                      );
+                                    }}
+                                    className="rounded-full border border-rose-300/22 bg-rose-300/[0.055] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100/82 transition hover:border-rose-300/38 hover:bg-rose-300/[0.09]"
+                                  >
+                                    Revoke policy
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          ) : null}
+
                           <div className="mt-3 text-[10px] leading-5 text-violet-200/54">
-                            Policy execution is not activated. This record establishes eligibility authority only.
+                            Policy execution is not activated. Policy authority only determines review eligibility.
                           </div>
                         </div>
-                      </LuminaFlagshipCard>
+
+                        {policy.status === "draft" ? (
+                          <div className="mt-4 border-t border-sky-300/10 pt-4">
+                            {policyDeletionTarget?.id ===
+                              policy.id &&
+                            policyDeletionTarget?.version ===
+                              policy.version ? (
+                              <div className="rounded-[16px] border border-rose-300/18 bg-rose-300/[0.05] p-4">
+                                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-rose-200/72">
+                                  Delete draft policy
+                                </div>
+
+                                <p className="mt-2 text-xs leading-5 text-rose-100/68">
+                                  This permanently removes{" "}
+                                  <span className="font-semibold text-rose-100">
+                                    {policy.id}@{policy.version}
+                                  </span>
+                                  . Only unused, never-authorized drafts can be deleted.
+                                </p>
+
+                                <label className="mt-4 grid gap-2">
+                                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-rose-300/58">
+                                    Deleting human
+                                  </span>
+
+                                  <input
+                                    value={
+                                      policyDeletionActorId
+                                    }
+                                    onChange={(event) =>
+                                      setPolicyDeletionActorId(
+                                        event.target.value,
+                                      )
+                                    }
+                                    placeholder="human:knowledge-governance"
+                                    style={{
+                                      backgroundColor:
+                                        "rgba(2, 6, 23, 0.90)",
+
+                                      color:
+                                        "rgb(240, 249, 255)",
+
+                                      caretColor:
+                                        "rgb(165, 243, 252)",
+
+                                      WebkitTextFillColor:
+                                        "rgb(240, 249, 255)",
+                                    }}
+                                    className="h-10 rounded-[14px] border border-rose-300/20 bg-slate-950/90 px-3 text-xs font-medium text-sky-50 outline-none placeholder:text-slate-500 focus:border-rose-300/52 focus:ring-1 focus:ring-rose-300/20"
+                                  />
+                                </label>
+
+                                {policyDeletionError ? (
+                                  <div className="mt-3 rounded-[12px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                                    {policyDeletionError}
+                                  </div>
+                                ) : null}
+
+                                <div className="mt-4 flex flex-wrap gap-2">
+                                  <button
+                                    type="button"
+                                    disabled={
+                                      policyDeletionBusy
+                                    }
+                                    onClick={() =>
+                                      void deletePolicyDraft()
+                                    }
+                                    className="rounded-full border border-rose-300/32 bg-rose-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100 transition hover:bg-rose-300/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                                  >
+                                    {policyDeletionBusy
+                                      ? "Deleting…"
+                                      : "Permanently delete"}
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    disabled={
+                                      policyDeletionBusy
+                                    }
+                                    onClick={() => {
+                                      setPolicyDeletionTarget(
+                                        null,
+                                      );
+
+                                      setPolicyDeletionError(
+                                        null,
+                                      );
+                                    }}
+                                    className="rounded-full border border-sky-300/14 bg-slate-950/24 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-200/72 transition hover:border-sky-300/28 hover:text-sky-100 disabled:cursor-not-allowed disabled:opacity-45"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setPolicyDeletionTarget({
+                                    id:
+                                      policy.id,
+
+                                    version:
+                                      policy.version,
+                                  });
+
+                                  setPolicyDeletionError(
+                                    null,
+                                  );
+                                }}
+                                className="rounded-full border border-rose-300/22 bg-rose-300/[0.05] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-100/84 transition hover:border-rose-300/38 hover:bg-rose-300/[0.1]"
+                              >
+                                Delete policy
+                              </button>
+                            )}
+                          </div>
+                        ) : null}
+
+</LuminaFlagshipCard>
                     );
                   },
-                )
+                )}
+                </div>
               ) : (
                 <div className="rounded-[18px] border border-violet-300/12 bg-violet-300/[0.035] px-4 py-5">
                   <div className="text-sm font-semibold text-violet-100">
@@ -1610,6 +2374,7 @@ export function CanonicalReview({
                   </p>
                 </div>
               )}
+              </div>
             </div>
           ) : null}
 

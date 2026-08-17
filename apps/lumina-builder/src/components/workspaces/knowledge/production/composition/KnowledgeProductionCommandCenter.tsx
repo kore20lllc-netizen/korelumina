@@ -113,6 +113,7 @@ import {
 
 import type {
   CanonicalReviewPolicySnapshot,
+  CanonicalReviewPolicyView,
 } from "@/services/knowledgeOperationsService";
 
 type KnowledgeSelectionKind =
@@ -356,27 +357,180 @@ export function KnowledgeProductionCommandCenter() {
     };
   }, []);
 
+  const handleCanonicalReviewPolicyPersisted =
+    useCallback(
+      (
+        policy:
+          CanonicalReviewPolicyView,
+      ) => {
+        setCanonicalReviewPolicySnapshot(
+          (current) => {
+            const nextPolicies = [
+              policy,
+              ...current.policies.filter(
+                (existing) =>
+                  !(
+                    existing.id ===
+                      policy.id &&
+                    existing.version ===
+                      policy.version
+                  ),
+              ),
+            ];
+
+            return {
+              ok:
+                true,
+
+              policies:
+                nextPolicies,
+
+              summary: {
+                total:
+                  nextPolicies.length,
+
+                active:
+                  nextPolicies.filter(
+                    (item) =>
+                      item.status ===
+                      "active",
+                  ).length,
+
+                draft:
+                  nextPolicies.filter(
+                    (item) =>
+                      item.status ===
+                      "draft",
+                  ).length,
+
+                revoked:
+                  nextPolicies.filter(
+                    (item) =>
+                      item.status ===
+                      "revoked",
+                  ).length,
+
+                superseded:
+                  nextPolicies.filter(
+                    (item) =>
+                      item.status ===
+                      "superseded",
+                  ).length,
+              },
+            };
+          },
+        );
+      },
+      [],
+    );
+
+  const handleCanonicalReviewPolicyDeleted =
+    useCallback(
+      (
+        policyId: string,
+        version: string,
+      ) => {
+        setCanonicalReviewPolicySnapshot(
+          (current) => {
+            const policies =
+              current.policies.filter(
+                (policy) =>
+                  !(
+                    policy.id === policyId &&
+                    policy.version === version
+                  ),
+              );
+
+            return {
+              ok:
+                true,
+
+              policies,
+
+              summary: {
+                total:
+                  policies.length,
+
+                active:
+                  policies.filter(
+                    (policy) =>
+                      policy.status ===
+                      "active",
+                  ).length,
+
+                draft:
+                  policies.filter(
+                    (policy) =>
+                      policy.status ===
+                      "draft",
+                  ).length,
+
+                revoked:
+                  policies.filter(
+                    (policy) =>
+                      policy.status ===
+                      "revoked",
+                  ).length,
+
+                superseded:
+                  policies.filter(
+                    (policy) =>
+                      policy.status ===
+                      "superseded",
+                  ).length,
+              },
+            };
+          },
+        );
+      },
+      [],
+    );
+
   const refreshCanonicalReviewNow =
     useCallback(
       async () => {
-        const [
-          snapshot,
-          policySnapshot,
-        ] =
-          await Promise.all([
-            getCanonicalReviewSnapshot(),
-            getCanonicalReviewPolicies(),
-          ]);
+        const reviewRefresh =
+          getCanonicalReviewSnapshot()
+            .then(
+              (snapshot) => {
+                setCanonicalReviewProjection(
+                  createCanonicalReviewProjection(
+                    snapshot,
+                  ),
+                );
+              },
+            )
+            .catch(
+              () => {
+                /*
+                 * Preserve the last truthful Canonical Review
+                 * projection when its read boundary fails.
+                 */
+              },
+            );
 
-        setCanonicalReviewProjection(
-          createCanonicalReviewProjection(
-            snapshot,
-          ),
-        );
+        const policyRefresh =
+          getCanonicalReviewPolicies()
+            .then(
+              (policySnapshot) => {
+                setCanonicalReviewPolicySnapshot(
+                  policySnapshot,
+                );
+              },
+            )
+            .catch(
+              () => {
+                /*
+                 * Preserve the last truthful Policy Registry
+                 * projection independently of Canonical Review.
+                 */
+              },
+            );
 
-        setCanonicalReviewPolicySnapshot(
-          policySnapshot,
-        );
+        await Promise.allSettled([
+          reviewRefresh,
+          policyRefresh,
+        ]);
       },
       [],
     );
@@ -868,6 +1022,12 @@ export function KnowledgeProductionCommandCenter() {
           }
           onDecisionComplete={
             refreshCanonicalReviewNow
+          }
+          onPolicyPersisted={
+            handleCanonicalReviewPolicyPersisted
+          }
+          onPolicyDeleted={
+            handleCanonicalReviewPolicyDeleted
           }
         />
       </section>

@@ -57,6 +57,9 @@ function errorResponse(
     message.startsWith(
       "canonical_review_policy_cannot_supersede:",
     ) ||
+    message.startsWith(
+      "canonical_review_policy_cannot_delete:",
+    ) ||
     message ===
       "canonical_review_policy_supersession_id_mismatch"
   ) {
@@ -260,6 +263,64 @@ export function registerCanonicalReviewPolicyAdministrationRoutes(
             true,
 
           policy,
+
+          packageDecision:
+            null,
+
+          promotion:
+            null,
+        });
+      } catch (
+        error
+      ) {
+        return errorResponse(
+          error,
+          res,
+        );
+      }
+    },
+  );
+
+  app.delete(
+    "/api/knowledge/canonical-review/policies/:policyId/:version",
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const deleted =
+          runtime.service
+            .deleteDraft(
+              param(
+                req.params
+                  .policyId,
+              ),
+
+              param(
+                req.params
+                  .version,
+              ),
+
+              actor(
+                req.body ?? {},
+              ),
+            );
+
+        /*
+         * Governance invariant:
+         *
+         * Deleting an unused, never-authorized draft
+         * cannot decide a package and cannot promote
+         * Canonical Knowledge.
+         */
+        return res.json({
+          ok:
+            true,
+
+          deleted,
 
           packageDecision:
             null,

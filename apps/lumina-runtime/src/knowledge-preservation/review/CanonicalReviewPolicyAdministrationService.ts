@@ -1,7 +1,13 @@
 import {
+  deleteCanonicalReviewPolicy,
+  listCanonicalReviewPolicies,
   loadCanonicalReviewPolicy,
   saveCanonicalReviewPolicy,
 } from "./CanonicalReviewPolicyStore.js";
+
+import {
+  listKnowledgePackages,
+} from "../package/KnowledgePackageStore.js";
 
 import type {
   CanonicalReviewPolicyAuthority,
@@ -38,6 +44,23 @@ export interface PolicyAuthorityDecision {
     number;
 }
 
+interface CanonicalReviewPolicyReferencePackage {
+  metadata:
+    Record<string, unknown>;
+}
+
+interface CanonicalReviewPolicyPackageReader {
+  list():
+    CanonicalReviewPolicyReferencePackage[];
+}
+
+const persistedKnowledgePackageReader:
+  CanonicalReviewPolicyPackageReader = {
+    list:
+      () =>
+        listKnowledgePackages(),
+  };
+
 function required(
   value:
     string,
@@ -68,6 +91,12 @@ function now(
 }
 
 export class CanonicalReviewPolicyAdministrationService {
+  constructor(
+    private readonly packageReader:
+      CanonicalReviewPolicyPackageReader =
+        persistedKnowledgePackageReader,
+  ) {}
+
   createDraft(
     input:
       CreateCanonicalReviewPolicyInput,
@@ -159,6 +188,153 @@ export class CanonicalReviewPolicyAdministrationService {
     );
 
     return policy;
+  }
+
+  deleteDraft(
+    id:
+      string,
+
+    version:
+      string,
+
+    decision:
+      PolicyAuthorityDecision,
+  ): {
+    id:
+      string;
+
+    version:
+      string;
+  } {
+    const policy =
+      this.requirePolicy(
+        id,
+        version,
+      );
+
+    required(
+      decision.actorId,
+      "deleting_human",
+    );
+
+    if (
+      policy.status !==
+      "draft"
+    ) {
+      throw new Error(
+        `canonical_review_policy_cannot_delete:${policy.status}`,
+      );
+    }
+
+    if (
+      policy.authorizedBy
+        .trim() ||
+      policy.authorizedAt !==
+        0
+    ) {
+      throw new Error(
+        "canonical_review_policy_cannot_delete:authorized",
+      );
+    }
+
+    if (
+      policy.supersedes.length >
+        0 ||
+      policy.supersededBy !==
+        null
+    ) {
+      throw new Error(
+        "canonical_review_policy_cannot_delete:supersession_lineage",
+      );
+    }
+
+    const policyKey =
+      `${policy.id}@${policy.version}`;
+
+    const externallyLinked =
+      listCanonicalReviewPolicies()
+        .some(
+          (candidate) =>
+            (
+              candidate.id !==
+                policy.id ||
+              candidate.version !==
+                policy.version
+            ) &&
+            (
+              candidate.supersededBy ===
+                policyKey ||
+              candidate.supersedes
+                .includes(
+                  policyKey,
+                )
+            ),
+        );
+
+    if (
+      externallyLinked
+    ) {
+      throw new Error(
+        "canonical_review_policy_cannot_delete:supersession_lineage",
+      );
+    }
+
+    const referenced =
+      this.packageReader
+        .list()
+        .some(
+          (
+            knowledgePackage,
+          ) => {
+            const raw =
+              knowledgePackage
+                .metadata
+                .canonicalReviewPolicy;
+
+            if (
+              typeof raw !==
+                "object" ||
+              raw ===
+                null
+            ) {
+              return false;
+            }
+
+            const reference =
+              raw as Record<
+                string,
+                unknown
+              >;
+
+            return (
+              reference.policyId ===
+                policy.id &&
+              reference.policyVersion ===
+                policy.version
+            );
+          },
+        );
+
+    if (
+      referenced
+    ) {
+      throw new Error(
+        `canonical_review_policy_cannot_delete:package_reference:${policyKey}`,
+      );
+    }
+
+    deleteCanonicalReviewPolicy(
+      policy.id,
+      policy.version,
+    );
+
+    return {
+      id:
+        policy.id,
+
+      version:
+        policy.version,
+    };
   }
 
   activate(

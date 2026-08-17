@@ -8,6 +8,7 @@ import {
 import {
   loadCanonicalReviewPolicy,
   removeCanonicalReviewPolicyForTest,
+  saveCanonicalReviewPolicy,
 } from "../CanonicalReviewPolicyStore.js";
 
 function input(
@@ -292,6 +293,487 @@ test(
         "1.0.0",
       );
 
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "2.0.0",
+      );
+    }
+  },
+);
+
+
+test(
+  "unused never-authorized draft can be permanently deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-A`;
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      const deleted =
+        service.deleteDraft(
+          id,
+          "1.0.0",
+          {
+            actorId:
+              "human:knowledge-governance",
+          },
+        );
+
+      assert.deepEqual(
+        deleted,
+        {
+          id,
+          version:
+            "1.0.0",
+        },
+      );
+
+      assert.equal(
+        loadCanonicalReviewPolicy(
+          id,
+          "1.0.0",
+        ),
+        null,
+      );
+
+      assert.equal(
+        "packageDecision" in
+          deleted,
+        false,
+      );
+
+      assert.equal(
+        "promotion" in
+          deleted,
+        false,
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "active policy cannot be deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-B`;
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      service.activate(
+        id,
+        "1.0.0",
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "1.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:active/,
+      );
+
+      assert.equal(
+        loadCanonicalReviewPolicy(
+          id,
+          "1.0.0",
+        )?.status,
+        "active",
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "revoked policy cannot be deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-C`;
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      service.activate(
+        id,
+        "1.0.0",
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      service.revoke(
+        id,
+        "1.0.0",
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "1.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:revoked/,
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "superseded policy cannot be deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-D`;
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      service.activate(
+        id,
+        "1.0.0",
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      service.supersede(
+        id,
+        "1.0.0",
+        input(
+          id,
+          "2.0.0",
+        ),
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "1.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:superseded/,
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "2.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "authorized draft cannot be deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-E`;
+
+    try {
+      const draft =
+        service.createDraft(
+          input(
+            id,
+            "1.0.0",
+          ),
+        );
+
+      saveCanonicalReviewPolicy({
+        ...draft,
+
+        authorizedBy:
+          "human:historical-authorizer",
+
+        authorizedAt:
+          1000,
+      });
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "1.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:authorized/,
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "policy referenced by a Knowledge Package cannot be deleted",
+  () => {
+    const id =
+      `POLICY-DELETE-${Date.now()}-F`;
+
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [
+            {
+              metadata: {
+                canonicalReviewPolicy: {
+                  policyId:
+                    id,
+
+                  policyVersion:
+                    "1.0.0",
+                },
+              },
+            },
+          ],
+      });
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "1.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:package_reference/,
+      );
+
+      assert.notEqual(
+        loadCanonicalReviewPolicy(
+          id,
+          "1.0.0",
+        ),
+        null,
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "deleting one version does not delete another version",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-G`;
+
+    try {
+      service.createDraft(
+        input(
+          id,
+          "1.0.0",
+        ),
+      );
+
+      service.createDraft(
+        input(
+          id,
+          "2.0.0",
+        ),
+      );
+
+      service.deleteDraft(
+        id,
+        "1.0.0",
+        {
+          actorId:
+            "human:knowledge-governance",
+        },
+      );
+
+      assert.equal(
+        loadCanonicalReviewPolicy(
+          id,
+          "1.0.0",
+        ),
+        null,
+      );
+
+      assert.equal(
+        loadCanonicalReviewPolicy(
+          id,
+          "2.0.0",
+        )?.status,
+        "draft",
+      );
+    } finally {
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "1.0.0",
+      );
+
+      removeCanonicalReviewPolicyForTest(
+        id,
+        "2.0.0",
+      );
+    }
+  },
+);
+
+test(
+  "draft participating in supersession lineage cannot be deleted",
+  () => {
+    const service =
+      new CanonicalReviewPolicyAdministrationService({
+        list:
+          () => [],
+      });
+
+    const id =
+      `POLICY-DELETE-${Date.now()}-H`;
+
+    try {
+      const draft =
+        service.createDraft(
+          input(
+            id,
+            "2.0.0",
+          ),
+        );
+
+      saveCanonicalReviewPolicy({
+        ...draft,
+
+        supersedes: [
+          `${id}@1.0.0`,
+        ],
+      });
+
+      assert.throws(
+        () =>
+          service.deleteDraft(
+            id,
+            "2.0.0",
+            {
+              actorId:
+                "human:knowledge-governance",
+            },
+          ),
+        /cannot_delete:supersession_lineage/,
+      );
+    } finally {
       removeCanonicalReviewPolicyForTest(
         id,
         "2.0.0",

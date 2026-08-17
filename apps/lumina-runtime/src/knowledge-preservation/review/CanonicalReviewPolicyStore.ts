@@ -276,6 +276,34 @@ CanonicalReviewPolicyAuthority[] {
     );
 }
 
+export function deleteCanonicalReviewPolicy(
+  id:
+    string,
+
+  version:
+    string,
+): void {
+  const file =
+    policyPath(
+      id,
+      version,
+    );
+
+  if (
+    !fs.existsSync(
+      file,
+    )
+  ) {
+    throw new Error(
+      `canonical_review_policy_not_found:${id}@${version}`,
+    );
+  }
+
+  fs.unlinkSync(
+    file,
+  );
+}
+
 export function removeCanonicalReviewPolicyForTest(
   id:
     string,

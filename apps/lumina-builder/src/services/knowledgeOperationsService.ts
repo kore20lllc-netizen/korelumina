@@ -945,6 +945,76 @@ export async function revokeCanonicalReviewPolicy(
   );
 }
 
+export async function deleteCanonicalReviewPolicyDraft(
+  policyId:
+    string,
+
+  version:
+    string,
+
+  input:
+    CanonicalReviewPolicyAuthorityDecisionInput,
+): Promise<{
+  ok:
+    true;
+
+  deleted: {
+    id:
+      string;
+
+    version:
+      string;
+  };
+
+  packageDecision:
+    null;
+
+  promotion:
+    null;
+}> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-review/policies/${encodeURIComponent(
+        policyId,
+      )}/${encodeURIComponent(
+        version,
+      )}`,
+      {
+        method:
+          "DELETE",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            actorId:
+              input.actorId,
+
+            timestamp:
+              input.timestamp,
+          }),
+      },
+    );
+
+  const result =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      result?.error ??
+      "canonical_review_policy_deletion_failed",
+    );
+  }
+
+  return result;
+}
+
 export async function supersedeCanonicalReviewPolicy(
   policyId:
     string,
