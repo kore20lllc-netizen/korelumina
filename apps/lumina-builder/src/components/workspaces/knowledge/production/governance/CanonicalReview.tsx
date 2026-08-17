@@ -50,6 +50,7 @@ import {
   createCanonicalReviewPolicyDraft,
   deleteCanonicalReviewPolicyDraft,
   revokeCanonicalReviewPolicy,
+  supersedeCanonicalReviewPolicy,
   submitCanonicalReviewBatchDecision,
   submitCanonicalReviewDecision,
 } from "@/services/knowledgeOperationsService";
@@ -92,6 +93,21 @@ type CanonicalReviewProps = {
     version: string,
   ) => void;
 };
+
+function nextPolicyVersion(
+  version: string,
+): string {
+  const match =
+    version.match(
+      /^(\d+)\.(\d+)\.(\d+)$/,
+    );
+
+  if (!match) {
+    return "";
+  }
+
+  return `${Number(match[1]) + 1}.0.0`;
+}
 
 function readinessTone(
   value: number,
@@ -227,6 +243,57 @@ export function CanonicalReview({
   ] = useState<string | null>(
     null,
   );
+
+  const [
+    policySupersessionTarget,
+    setPolicySupersessionTarget,
+  ] = useState<CanonicalReviewPolicyView | null>(
+    null,
+  );
+
+  const [
+    policySupersessionBusy,
+    setPolicySupersessionBusy,
+  ] = useState(false);
+
+  const [
+    policySupersessionError,
+    setPolicySupersessionError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policySupersessionDraft,
+    setPolicySupersessionDraft,
+  ] = useState({
+    version:
+      "",
+
+    title:
+      "",
+
+    authority:
+      "",
+
+    scope:
+      "",
+
+    owner:
+      "",
+
+    requireCompleteGovernanceIdentity:
+      true,
+
+    requireProvenance:
+      true,
+
+    requireValidationPassed:
+      true,
+
+    excludedAuthorities:
+      "",
+  });
 
   const [
     policyDeletionTarget,
@@ -843,6 +910,159 @@ export function CanonicalReview({
       );
     } finally {
       setPolicyDraftBusy(
+        false,
+      );
+    }
+  }
+
+  async function supersedePolicy() {
+    if (
+      !policySupersessionTarget ||
+      policySupersessionBusy
+    ) {
+      return;
+    }
+
+    const actorId =
+      reviewerId.trim();
+
+    const version =
+      policySupersessionDraft
+        .version
+        .trim();
+
+    const title =
+      policySupersessionDraft
+        .title
+        .trim();
+
+    const authority =
+      policySupersessionDraft
+        .authority
+        .trim();
+
+    const scope =
+      policySupersessionDraft
+        .scope
+        .trim();
+
+    const owner =
+      policySupersessionDraft
+        .owner
+        .trim();
+
+    if (!actorId) {
+      setPolicySupersessionError(
+        "Human authority identity is required to supersede a review policy.",
+      );
+      return;
+    }
+
+    if (
+      !version ||
+      !title ||
+      !authority ||
+      !scope ||
+      !owner
+    ) {
+      setPolicySupersessionError(
+        "Version, title, authority, scope, and owner are required.",
+      );
+      return;
+    }
+
+    if (
+      version ===
+      policySupersessionTarget.version
+    ) {
+      setPolicySupersessionError(
+        "Replacement version must differ from the active policy version.",
+      );
+      return;
+    }
+
+    try {
+      setPolicySupersessionBusy(
+        true,
+      );
+
+      setPolicySupersessionError(
+        null,
+      );
+
+      const result =
+        await supersedeCanonicalReviewPolicy(
+          policySupersessionTarget.id,
+          policySupersessionTarget.version,
+          {
+            id:
+              policySupersessionTarget.id,
+
+            version,
+
+            title,
+
+            authority,
+
+            scope,
+
+            owner,
+
+            rules: {
+              requireCompleteGovernanceIdentity:
+                policySupersessionDraft
+                  .requireCompleteGovernanceIdentity,
+
+              requireProvenance:
+                policySupersessionDraft
+                  .requireProvenance,
+
+              requireValidationPassed:
+                policySupersessionDraft
+                  .requireValidationPassed,
+
+              excludedAuthorities:
+                policySupersessionDraft
+                  .excludedAuthorities
+                  .split(",")
+                  .map(
+                    (value) =>
+                      value.trim(),
+                  )
+                  .filter(
+                    Boolean,
+                  ),
+            },
+          },
+          {
+            actorId,
+          },
+        );
+
+      /*
+       * Supersession response is already persisted authoritative
+       * state. Update both policy versions immediately; normal
+       * polling reconciles afterward.
+       */
+      onPolicyPersisted?.(
+        result.previous,
+      );
+
+      onPolicyPersisted?.(
+        result.replacement,
+      );
+
+      setPolicySupersessionTarget(
+        null,
+      );
+    } catch (error) {
+      setPolicySupersessionError(
+        error instanceof Error
+          ? error.message
+          : String(error),
+      );
+    } finally {
+      setPolicySupersessionBusy(
         false,
       );
     }
@@ -1865,8 +2085,12 @@ export function CanonicalReview({
               ) : null}
 
               <div
-                className="max-h-[720px] overflow-y-auto overscroll-contain pr-2 [scrollbar-gutter:stable]"
+                className="relative z-30 max-h-[720px] min-h-0 overflow-y-scroll overscroll-contain pr-2 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
                 aria-label="Persisted review policies"
+                tabIndex={0}
+                onWheel={(event) => {
+                  event.stopPropagation();
+                }}
               >
               {policySnapshot.policies.length >
               0 ? (
@@ -1889,10 +2113,10 @@ export function CanonicalReview({
                         className="rounded-[18px] p-4"
                       >
                         <div className="relative z-10">
-                          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                          <div className="grid gap-4 xl:grid-cols-[minmax(260px,0.9fr)_minmax(0,1.35fr)] xl:items-start">
                             <div className="min-w-0">
                               <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
+                                <span className="min-w-0 break-words text-[10px] font-semibold uppercase tracking-[0.14em] text-violet-300/68 [overflow-wrap:anywhere]">
                                   {policy.id}
                                 </span>
 
@@ -1914,7 +2138,7 @@ export function CanonicalReview({
                                 </span>
                               </div>
 
-                              <h4 className="mt-2 text-base font-semibold text-white">
+                              <h4 className="mt-2 max-w-[34rem] break-words text-base font-semibold leading-6 text-white [overflow-wrap:anywhere]">
                                 {policy.title}
                               </h4>
 
@@ -1923,9 +2147,21 @@ export function CanonicalReview({
                                 {" · "}
                                 {eligibleCount} eligible packages
                               </div>
+
+                              {policy.supersededBy ? (
+                                <div className="mt-1 text-[10px] font-medium text-slate-300/68">
+                                  Superseded by {policy.supersededBy}
+                                </div>
+                              ) : null}
+
+                              {policy.supersedes.length > 0 ? (
+                                <div className="mt-1 text-[10px] font-medium text-violet-200/68">
+                                  Supersedes {policy.supersedes.join(", ")}
+                                </div>
+                              ) : null}
                             </div>
 
-                            <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[430px]">
+                            <div className="grid min-w-0 gap-2 sm:grid-cols-2">
                               <LuminaFlagshipCard
                                 as="article"
                                 className="rounded-[16px] p-3"
@@ -2120,6 +2356,335 @@ export function CanonicalReview({
                                     : "authorization timestamp unavailable"}
                                 </span>
                               </div>
+
+                              {policySupersessionTarget?.id ===
+                                policy.id &&
+                              policySupersessionTarget?.version ===
+                                policy.version ? (
+                                <div className="rounded-[16px] border border-violet-300/18 bg-violet-300/[0.045] p-4">
+                                  <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-200/70">
+                                    Supersede active policy
+                                  </div>
+
+                                  <p className="mt-2 text-xs leading-5 text-violet-100/68">
+                                    Create and authorize a replacement version without mutating the active version. The current policy becomes superseded and remains permanent governance history.
+                                  </p>
+
+                                  <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                                    <label className="grid gap-2">
+                                      <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/58">
+                                        New version
+                                      </span>
+
+                                      <input
+                                        value={policySupersessionDraft.version}
+                                        onChange={(event) =>
+                                          setPolicySupersessionDraft(
+                                            (current) => ({
+                                              ...current,
+                                              version:
+                                                event.target.value,
+                                            }),
+                                          )
+                                        }
+                                        style={{
+                                          backgroundColor:
+                                            "rgba(2, 6, 23, 0.90)",
+                                          color:
+                                            "rgb(240, 249, 255)",
+                                          caretColor:
+                                            "rgb(165, 243, 252)",
+                                          WebkitTextFillColor:
+                                            "rgb(240, 249, 255)",
+                                        }}
+                                        className="h-10 rounded-[14px] border border-violet-300/20 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none focus:border-violet-300/52"
+                                      />
+                                    </label>
+
+                                    <label className="grid gap-2 lg:col-span-2">
+                                      <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-violet-300/58">
+                                        Policy title
+                                      </span>
+
+                                      <input
+                                        value={policySupersessionDraft.title}
+                                        onChange={(event) =>
+                                          setPolicySupersessionDraft(
+                                            (current) => ({
+                                              ...current,
+                                              title:
+                                                event.target.value,
+                                            }),
+                                          )
+                                        }
+                                        style={{
+                                          backgroundColor:
+                                            "rgba(2, 6, 23, 0.90)",
+                                          color:
+                                            "rgb(240, 249, 255)",
+                                          caretColor:
+                                            "rgb(165, 243, 252)",
+                                          WebkitTextFillColor:
+                                            "rgb(240, 249, 255)",
+                                        }}
+                                        className="h-10 rounded-[14px] border border-violet-300/20 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none focus:border-violet-300/52"
+                                      />
+                                    </label>
+                                  </div>
+
+                                  <div className="mt-3 grid gap-3 lg:grid-cols-3">
+                                    {[
+                                      ["authority", "Authority"],
+                                      ["scope", "Scope"],
+                                      ["owner", "Owner"],
+                                    ].map(([key, label]) => (
+                                      <label
+                                        key={key}
+                                        className="grid gap-2"
+                                      >
+                                        <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                                          {label}
+                                        </span>
+
+                                        <input
+                                          value={
+                                            policySupersessionDraft[
+                                              key as
+                                                | "authority"
+                                                | "scope"
+                                                | "owner"
+                                            ]
+                                          }
+                                          onChange={(event) =>
+                                            setPolicySupersessionDraft(
+                                              (current) => ({
+                                                ...current,
+                                                [key]:
+                                                  event.target.value,
+                                              }),
+                                            )
+                                          }
+                                          style={{
+                                            backgroundColor:
+                                              "rgba(2, 6, 23, 0.90)",
+                                            color:
+                                              "rgb(240, 249, 255)",
+                                            caretColor:
+                                              "rgb(165, 243, 252)",
+                                            WebkitTextFillColor:
+                                              "rgb(240, 249, 255)",
+                                          }}
+                                          className="h-10 rounded-[14px] border border-cyan-300/20 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none focus:border-cyan-300/52"
+                                        />
+                                      </label>
+                                    ))}
+                                  </div>
+
+                                  <div className="mt-3 grid gap-3 lg:grid-cols-3">
+                                    {[
+                                      {
+                                        key:
+                                          "requireCompleteGovernanceIdentity" as const,
+                                        label:
+                                          "Governance identity",
+                                      },
+                                      {
+                                        key:
+                                          "requireProvenance" as const,
+                                        label:
+                                          "Provenance",
+                                      },
+                                      {
+                                        key:
+                                          "requireValidationPassed" as const,
+                                        label:
+                                          "Validation passed",
+                                      },
+                                    ].map((rule) => (
+                                      <label
+                                        key={rule.key}
+                                        className="flex items-center gap-3 rounded-[14px] border border-sky-300/10 bg-slate-950/24 px-3 py-3"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          checked={
+                                            policySupersessionDraft[
+                                              rule.key
+                                            ]
+                                          }
+                                          onChange={(event) =>
+                                            setPolicySupersessionDraft(
+                                              (current) => ({
+                                                ...current,
+                                                [rule.key]:
+                                                  event.target.checked,
+                                              }),
+                                            )
+                                          }
+                                          className="h-4 w-4"
+                                        />
+
+                                        <span className="text-xs font-medium text-sky-100/76">
+                                          Require {rule.label}
+                                        </span>
+                                      </label>
+                                    ))}
+                                  </div>
+
+                                  <label className="mt-3 grid gap-2">
+                                    <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-rose-300/58">
+                                      Excluded authorities
+                                    </span>
+
+                                    <input
+                                      value={
+                                        policySupersessionDraft
+                                          .excludedAuthorities
+                                      }
+                                      onChange={(event) =>
+                                        setPolicySupersessionDraft(
+                                          (current) => ({
+                                            ...current,
+                                            excludedAuthorities:
+                                              event.target.value,
+                                          }),
+                                        )
+                                      }
+                                      style={{
+                                        backgroundColor:
+                                          "rgba(2, 6, 23, 0.90)",
+                                        color:
+                                          "rgb(240, 249, 255)",
+                                        caretColor:
+                                          "rgb(165, 243, 252)",
+                                        WebkitTextFillColor:
+                                          "rgb(240, 249, 255)",
+                                      }}
+                                      className="h-10 rounded-[14px] border border-rose-300/20 bg-slate-950/90 px-3 text-xs text-sky-50 outline-none focus:border-rose-300/52"
+                                    />
+                                  </label>
+
+                                  <label className="mt-3 grid max-w-md gap-2">
+                                    <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                                      Authorizing human
+                                    </span>
+
+                                    <input
+                                      value={reviewerId}
+                                      onChange={(event) =>
+                                        setReviewerId(
+                                          event.target.value,
+                                        )
+                                      }
+                                      placeholder="human:knowledge-governance"
+                                      style={{
+                                        backgroundColor:
+                                          "rgba(2, 6, 23, 0.90)",
+                                        color:
+                                          "rgb(240, 249, 255)",
+                                        caretColor:
+                                          "rgb(165, 243, 252)",
+                                        WebkitTextFillColor:
+                                          "rgb(240, 249, 255)",
+                                      }}
+                                      className="h-10 rounded-[14px] border border-cyan-300/20 bg-slate-950/90 px-3 text-xs font-medium text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/52 focus:ring-1 focus:ring-cyan-300/20"
+                                    />
+                                  </label>
+
+                                  {policySupersessionError ? (
+                                    <div className="mt-3 rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                                      {policySupersessionError}
+                                    </div>
+                                  ) : null}
+
+                                  <div className="mt-4 flex flex-wrap gap-2">
+                                    <button
+                                      type="button"
+                                      disabled={policySupersessionBusy}
+                                      onClick={() =>
+                                        void supersedePolicy()
+                                      }
+                                      className="rounded-full border border-violet-300/30 bg-violet-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-violet-100 transition hover:bg-violet-300/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                                    >
+                                      {policySupersessionBusy
+                                        ? "Superseding…"
+                                        : "Authorize replacement"}
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      disabled={policySupersessionBusy}
+                                      onClick={() => {
+                                        setPolicySupersessionTarget(
+                                          null,
+                                        );
+                                        setPolicySupersessionError(
+                                          null,
+                                        );
+                                      }}
+                                      className="rounded-full border border-sky-300/16 bg-slate-950/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-200/72 transition hover:border-sky-300/30"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setPolicyRevocationTarget(
+                                      null,
+                                    );
+
+                                    setPolicySupersessionError(
+                                      null,
+                                    );
+
+                                    setPolicySupersessionTarget(
+                                      policy,
+                                    );
+
+                                    setPolicySupersessionDraft({
+                                      version:
+                                        nextPolicyVersion(
+                                          policy.version,
+                                        ),
+
+                                      title:
+                                        policy.title,
+
+                                      authority:
+                                        policy.authority,
+
+                                      scope:
+                                        policy.scope,
+
+                                      owner:
+                                        policy.owner,
+
+                                      requireCompleteGovernanceIdentity:
+                                        policy.rules
+                                          .requireCompleteGovernanceIdentity,
+
+                                      requireProvenance:
+                                        policy.rules
+                                          .requireProvenance,
+
+                                      requireValidationPassed:
+                                        policy.rules
+                                          .requireValidationPassed,
+
+                                      excludedAuthorities:
+                                        policy.rules
+                                          .excludedAuthorities
+                                          .join(", "),
+                                    });
+                                  }}
+                                  className="rounded-full border border-violet-300/24 bg-violet-300/[0.06] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-violet-100/84 transition hover:border-violet-300/40 hover:bg-violet-300/[0.1]"
+                                >
+                                  Supersede policy
+                                </button>
+                              )}
 
                               {policyRevocationTarget ===
                               `${policy.id}@${policy.version}` ? (
