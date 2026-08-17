@@ -25,6 +25,9 @@ related:
 
 # Knowledge Package Constitutional Reconciliation
 
+> Historical Knowledge Operations V1/V2 references in this document point to `docs/archive/knowledge-operations/`. Those archived documents are retained for provenance and reconciliation only and are not current implementation authority.
+
+
 ## 1. Constitutional Sources
 
 | Document | Authority | Status | Contribution |
@@ -42,7 +45,7 @@ related:
 | `docs/architecture/knowledge-governance/EVIDENCE_MODEL.md` | Canonical Model | Draft v1 | Defines immutable source evidence, provenance, evidence lifecycle, and evidence-to-knowledge flow. |
 | `docs/architecture/reconciliation/KP-014_ORGANIZATIONAL_MEMORY_RECONCILIATION.md` | Final Reconciliation | Complete and architecture frozen | Defines Organizational Memory inputs, outputs, validation, privacy boundary, and non-ownership of learning or execution state. |
 | `docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md` | Approved Operating Model | Approved | Defines mission learning outputs, human approval gates, and conversion of validated work into repository-backed institutional memory. |
-| `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md` | Accepted Specification | Accepted | Establishes operational governance over evidence, canonical knowledge, promotion, learning, reasoning, and agent activity. |
+| `docs/archive/knowledge-operations/v1/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md` | Accepted Specification | Accepted | Establishes operational governance over evidence, canonical knowledge, promotion, learning, reasoning, and agent activity. |
 | `docs/architecture/packages/PACKAGE_REGISTRY.md` | Architecture Registry | Active | Defines implementation packages and explicitly distinguishes implementation packages from knowledge artifacts. |
 
 **DOCUMENTED FACT** — The constitutional order prohibits draft CKM, IR, and Evidence documents from silently redefining approved architecture. `docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md`, sections **Canonical precedence**, **Canonical models**, and **Conflict-resolution procedure**.
@@ -208,7 +211,7 @@ Validation, mission knowledge, runtime evidence, and feedback
 
 **DOCUMENTED FACT** — `docs/chief-agent/CHIEF_AGENT_INTERFACE.md`, section **Approval Center**, includes canonical knowledge promotion among high-impact approvals and requires evidence, recommendation, risk, expected outcome, and rollback strategy.
 
-**DOCUMENTED FACT** — `docs/architecture/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md`, sections **Responsibilities** and **Canonical Knowledge Explorer**, assigns Knowledge Operations responsibility for governing promotion and exposing promoted, pending, rejected, and superseded knowledge.
+**DOCUMENTED FACT** — `docs/archive/knowledge-operations/v1/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md`, sections **Responsibilities** and **Canonical Knowledge Explorer**, assigns Knowledge Operations responsibility for governing promotion and exposing promoted, pending, rejected, and superseded knowledge.
 
 **CONFLICT** — `apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatform.ts` automatically calls `canonicalKnowledgeStore.promoteAll(validated)` after validation and before publishing. This conflicts with approved human canonical-promotion gates.
 
