@@ -247,3 +247,19 @@ export function allocateKnowledgePackageId(
     "knowledge_package_sequence_exhausted",
   );
 }
+
+
+export function removeKnowledgePackageForTest(
+  id: string,
+): void {
+  fs.rmSync(
+    path.join(
+      packageRoot,
+      `${id}.json`,
+    ),
+    {
+      force:
+        true,
+    },
+  );
+}

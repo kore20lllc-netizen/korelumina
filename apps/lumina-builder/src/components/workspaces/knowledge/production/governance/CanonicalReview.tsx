@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -49,6 +50,8 @@ import {
   createCanonicalReviewBatch,
   createCanonicalReviewPolicyDraft,
   deleteCanonicalReviewPolicyDraft,
+  executeCanonicalReviewPolicy,
+  getCanonicalReviewPolicyExecution,
   revokeCanonicalReviewPolicy,
   supersedeCanonicalReviewPolicy,
   submitCanonicalReviewBatchDecision,
@@ -57,6 +60,7 @@ import {
 
 import type {
   CanonicalReviewDecision,
+  CanonicalReviewPolicyExecutionSnapshot,
   CanonicalReviewPolicySnapshot,
   CanonicalReviewPolicyView,
 } from "@/services/knowledgeOperationsService";
@@ -327,6 +331,62 @@ export function CanonicalReview({
 
 
   const [
+    policyExecutionSnapshots,
+    setPolicyExecutionSnapshots,
+  ] = useState<
+    Record<
+      string,
+      CanonicalReviewPolicyExecutionSnapshot
+    >
+  >({});
+
+  const [
+    policyExecutionLoading,
+    setPolicyExecutionLoading,
+  ] = useState<Record<string, boolean>>(
+    {},
+  );
+
+  const [
+    policyExecutionErrors,
+    setPolicyExecutionErrors,
+  ] = useState<Record<string, string>>(
+    {},
+  );
+
+  const [
+    policyExecutionDetail,
+    setPolicyExecutionDetail,
+  ] = useState<{
+    key: string;
+    mode:
+      | "eligible"
+      | "exceptions";
+  } | null>(null);
+
+  const [
+    policyExecutionConfirmTarget,
+    setPolicyExecutionConfirmTarget,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyExecutionBusy,
+    setPolicyExecutionBusy,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    policyExecutionError,
+    setPolicyExecutionError,
+  ] = useState<string | null>(
+    null,
+  );
+
+
+  const [
     policyDraft,
     setPolicyDraft,
   ] = useState({
@@ -361,6 +421,109 @@ export function CanonicalReview({
       "constitutional",
   });
 
+
+
+  useEffect(
+    () => {
+      let cancelled =
+        false;
+
+      const activePolicies =
+        policySnapshot.policies.filter(
+          (policy) =>
+            policy.status ===
+            "active",
+        );
+
+      for (
+        const policy
+        of activePolicies
+      ) {
+        const key =
+          `${policy.id}@${policy.version}`;
+
+        setPolicyExecutionLoading(
+          (current) => ({
+            ...current,
+            [key]:
+              true,
+          }),
+        );
+
+        void getCanonicalReviewPolicyExecution(
+          policy.id,
+          policy.version,
+        )
+          .then(
+            (snapshot) => {
+              if (cancelled) {
+                return;
+              }
+
+              setPolicyExecutionSnapshots(
+                (current) => ({
+                  ...current,
+                  [key]:
+                    snapshot,
+                }),
+              );
+
+              setPolicyExecutionErrors(
+                (current) => {
+                  const next = {
+                    ...current,
+                  };
+
+                  delete next[key];
+
+                  return next;
+                },
+              );
+            },
+          )
+          .catch(
+            (error) => {
+              if (cancelled) {
+                return;
+              }
+
+              setPolicyExecutionErrors(
+                (current) => ({
+                  ...current,
+                  [key]:
+                    error instanceof Error
+                      ? error.message
+                      : String(error),
+                }),
+              );
+            },
+          )
+          .finally(
+            () => {
+              if (cancelled) {
+                return;
+              }
+
+              setPolicyExecutionLoading(
+                (current) => ({
+                  ...current,
+                  [key]:
+                    false,
+                }),
+              );
+            },
+          );
+      }
+
+      return () => {
+        cancelled =
+          true;
+      };
+    },
+    [
+      policySnapshot.policies,
+    ],
+  );
 
 
   const queueCounts =
@@ -1135,6 +1298,93 @@ export function CanonicalReview({
     }
   }
 
+
+
+  async function executePolicy(
+    policy:
+      CanonicalReviewPolicyView,
+  ) {
+    const key =
+      `${policy.id}@${policy.version}`;
+
+    if (
+      policyExecutionBusy
+    ) {
+      return;
+    }
+
+    const actorId =
+      reviewerId.trim();
+
+    if (!actorId) {
+      setPolicyExecutionError(
+        "Executing human identity is required.",
+      );
+      return;
+    }
+
+    try {
+      setPolicyExecutionBusy(
+        key,
+      );
+
+      setPolicyExecutionError(
+        null,
+      );
+
+      const result =
+        await executeCanonicalReviewPolicy(
+          policy.id,
+          policy.version,
+          {
+            actorId,
+          },
+        );
+
+      if (
+        result.promotion !==
+        null
+      ) {
+        throw new Error(
+          "policy_execution_illegal_promotion_boundary",
+        );
+      }
+
+      await onDecisionComplete?.();
+
+      const refreshed =
+        await getCanonicalReviewPolicyExecution(
+          policy.id,
+          policy.version,
+        );
+
+      setPolicyExecutionSnapshots(
+        (current) => ({
+          ...current,
+          [key]:
+            refreshed,
+        }),
+      );
+
+      setPolicyExecutionConfirmTarget(
+        null,
+      );
+
+      setPolicyExecutionDetail(
+        null,
+      );
+    } catch (error) {
+      setPolicyExecutionError(
+        error instanceof Error
+          ? error.message
+          : String(error),
+      );
+    } finally {
+      setPolicyExecutionBusy(
+        null,
+      );
+    }
+  }
 
 
   async function createBatch(
@@ -2106,6 +2356,24 @@ export function CanonicalReview({
                             policy.id,
                       ).length;
 
+                    const policyKey =
+                      `${policy.id}@${policy.version}`;
+
+                    const executionSnapshot =
+                      policyExecutionSnapshots[
+                        policyKey
+                      ];
+
+                    const executionLoading =
+                      policyExecutionLoading[
+                        policyKey
+                      ] === true;
+
+                    const executionError =
+                      policyExecutionErrors[
+                        policyKey
+                      ];
+
                     return (
                       <LuminaFlagshipCard
                         key={`${policy.id}@${policy.version}`}
@@ -2145,7 +2413,10 @@ export function CanonicalReview({
                               <div className="mt-2 text-xs text-sky-300/62">
                                 Version {policy.version}
                                 {" · "}
-                                {eligibleCount} eligible packages
+                                {executionSnapshot
+                                  ? executionSnapshot
+                                      .eligiblePackages
+                                  : eligibleCount} eligible packages
                               </div>
 
                               {policy.supersededBy ? (
@@ -2355,6 +2626,344 @@ export function CanonicalReview({
                                       ).toLocaleString()
                                     : "authorization timestamp unavailable"}
                                 </span>
+                              </div>
+
+                              <div className="rounded-[16px] border border-cyan-300/14 bg-cyan-300/[0.035] p-4">
+                                <div className="flex flex-wrap items-start justify-between gap-3">
+                                  <div>
+                                    <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-200/70">
+                                      Governed policy execution
+                                    </div>
+
+                                    <p className="mt-1 max-w-2xl text-xs leading-5 text-sky-100/62">
+                                      Apply this authorized policy only to its exact eligible package set. Execution records explicit package review decisions and cannot promote Canonical Knowledge.
+                                    </p>
+                                  </div>
+
+                                  {executionLoading ? (
+                                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-cyan-200/56">
+                                      Evaluating…
+                                    </span>
+                                  ) : null}
+                                </div>
+
+                                <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+                                  {[
+                                    {
+                                      label:
+                                        "Eligible packages",
+                                      value:
+                                        executionSnapshot
+                                          ?.eligiblePackages ??
+                                        0,
+                                    },
+                                    {
+                                      label:
+                                        "Compliant packages",
+                                      value:
+                                        executionSnapshot
+                                          ?.compliantPackages ??
+                                        0,
+                                    },
+                                    {
+                                      label:
+                                        "Exceptions",
+                                      value:
+                                        executionSnapshot
+                                          ?.exceptions ??
+                                        0,
+                                    },
+                                    {
+                                      label:
+                                        "Blocked",
+                                      value:
+                                        executionSnapshot
+                                          ?.blocked ??
+                                        0,
+                                    },
+                                  ].map(
+                                    (metric) => (
+                                      <div
+                                        key={metric.label}
+                                        className="rounded-[14px] border border-sky-300/10 bg-slate-950/28 px-3 py-3"
+                                      >
+                                        <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-sky-300/52">
+                                          {metric.label}
+                                        </div>
+
+                                        <div className="mt-1 text-lg font-semibold text-sky-50">
+                                          {metric.value}
+                                        </div>
+                                      </div>
+                                    ),
+                                  )}
+                                </div>
+
+                                {executionError ? (
+                                  <div className="mt-3 rounded-[12px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                                    {executionError}
+                                  </div>
+                                ) : null}
+
+                                {policyExecutionDetail?.key ===
+                                  policyKey ? (
+                                  <div className="mt-3 rounded-[14px] border border-sky-300/12 bg-slate-950/32 p-3">
+                                    <div className="flex items-center justify-between gap-3">
+                                      <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-sky-200/66">
+                                        {policyExecutionDetail.mode ===
+                                        "eligible"
+                                          ? "Eligible package set"
+                                          : "Policy exceptions"}
+                                      </div>
+
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          setPolicyExecutionDetail(
+                                            null,
+                                          )
+                                        }
+                                        className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-300/54 transition hover:text-sky-100"
+                                      >
+                                        Close
+                                      </button>
+                                    </div>
+
+                                    <div className="mt-3 grid gap-2">
+                                      {(
+                                        executionSnapshot
+                                          ?.evaluations ??
+                                        []
+                                      )
+                                        .filter(
+                                          (evaluation) =>
+                                            policyExecutionDetail.mode ===
+                                            "eligible"
+                                              ? evaluation.eligible
+                                              : evaluation
+                                                  .exceptions
+                                                  .length >
+                                                0,
+                                        )
+                                        .map(
+                                          (
+                                            evaluation,
+                                          ) => (
+                                            <div
+                                              key={
+                                                evaluation.packageId
+                                              }
+                                              className="rounded-[12px] border border-sky-300/10 bg-slate-950/24 px-3 py-2"
+                                            >
+                                              <div className="break-words text-xs font-semibold text-sky-50 [overflow-wrap:anywhere]">
+                                                {
+                                                  evaluation.packageId
+                                                }
+                                              </div>
+
+                                              <div className="mt-1 text-[10px] text-sky-300/58">
+                                                {
+                                                  evaluation.compliant
+                                                    ? "Compliant"
+                                                    : evaluation.blocked
+                                                      ? "Blocked"
+                                                      : "Exception"
+                                                }
+                                              </div>
+
+                                              {evaluation
+                                                .exceptions
+                                                .length >
+                                              0 ? (
+                                                <div className="mt-1 text-[10px] leading-5 text-amber-200/64">
+                                                  {evaluation.exceptions.join(
+                                                    " · ",
+                                                  )}
+                                                </div>
+                                              ) : null}
+                                            </div>
+                                          ),
+                                        )}
+
+                                      {(
+                                        executionSnapshot
+                                          ?.evaluations ??
+                                        []
+                                      ).filter(
+                                        (evaluation) =>
+                                          policyExecutionDetail.mode ===
+                                          "eligible"
+                                            ? evaluation.eligible
+                                            : evaluation
+                                                .exceptions
+                                                .length >
+                                              0,
+                                      ).length ===
+                                      0 ? (
+                                        <div className="text-xs text-sky-300/48">
+                                          No packages in this set.
+                                        </div>
+                                      ) : null}
+                                    </div>
+                                  </div>
+                                ) : null}
+
+                                {policyExecutionConfirmTarget ===
+                                policyKey ? (
+                                  <div className="mt-3 rounded-[16px] border border-emerald-300/18 bg-emerald-300/[0.045] p-4">
+                                    <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-emerald-200/72">
+                                      Execute governed policy
+                                    </div>
+
+                                    <p className="mt-2 text-xs leading-5 text-emerald-100/68">
+                                      This creates explicit Canonical Review approval decisions for the compliant package set. It does not create or promote Canonical Knowledge.
+                                    </p>
+
+                                    <label className="mt-3 grid max-w-md gap-2">
+                                      <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/56">
+                                        Executing human
+                                      </span>
+
+                                      <input
+                                        value={reviewerId}
+                                        onChange={(
+                                          event,
+                                        ) =>
+                                          setReviewerId(
+                                            event.target.value,
+                                          )
+                                        }
+                                        placeholder="human:knowledge-governance"
+                                        style={{
+                                          backgroundColor:
+                                            "rgba(2, 6, 23, 0.90)",
+                                          color:
+                                            "rgb(240, 249, 255)",
+                                          caretColor:
+                                            "rgb(165, 243, 252)",
+                                          WebkitTextFillColor:
+                                            "rgb(240, 249, 255)",
+                                        }}
+                                        className="h-10 rounded-[14px] border border-cyan-300/20 bg-slate-950/90 px-3 text-xs font-medium text-sky-50 outline-none placeholder:text-slate-500 focus:border-cyan-300/52 focus:ring-1 focus:ring-cyan-300/20"
+                                      />
+                                    </label>
+
+                                    {policyExecutionError ? (
+                                      <div className="mt-3 rounded-[12px] border border-rose-300/18 bg-rose-300/[0.05] px-3 py-2 text-xs text-rose-100">
+                                        {policyExecutionError}
+                                      </div>
+                                    ) : null}
+
+                                    <div className="mt-4 flex flex-wrap gap-2">
+                                      <button
+                                        type="button"
+                                        disabled={
+                                          policyExecutionBusy !==
+                                          null
+                                        }
+                                        onClick={() =>
+                                          void executePolicy(
+                                            policy,
+                                          )
+                                        }
+                                        className="rounded-full border border-emerald-300/30 bg-emerald-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:bg-emerald-300/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                                      >
+                                        {policyExecutionBusy ===
+                                        policyKey
+                                          ? "Executing…"
+                                          : "Confirm execution"}
+                                      </button>
+
+                                      <button
+                                        type="button"
+                                        disabled={
+                                          policyExecutionBusy !==
+                                          null
+                                        }
+                                        onClick={() => {
+                                          setPolicyExecutionConfirmTarget(
+                                            null,
+                                          );
+
+                                          setPolicyExecutionError(
+                                            null,
+                                          );
+                                        }}
+                                        className="rounded-full border border-sky-300/16 bg-slate-950/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-200/72 transition hover:border-sky-300/30"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="mt-4 flex flex-wrap gap-2">
+                                    <button
+                                      type="button"
+                                      disabled={
+                                        !executionSnapshot ||
+                                        executionSnapshot
+                                          .eligiblePackages ===
+                                          0
+                                      }
+                                      onClick={() =>
+                                        setPolicyExecutionDetail({
+                                          key:
+                                            policyKey,
+
+                                          mode:
+                                            "eligible",
+                                        })
+                                      }
+                                      className="rounded-full border border-cyan-300/22 bg-cyan-300/[0.055] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-100/82 transition hover:border-cyan-300/38 hover:bg-cyan-300/[0.09] disabled:cursor-not-allowed disabled:opacity-40"
+                                    >
+                                      Inspect eligible set
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      disabled={
+                                        !executionSnapshot ||
+                                        executionSnapshot
+                                          .exceptions ===
+                                          0
+                                      }
+                                      onClick={() =>
+                                        setPolicyExecutionDetail({
+                                          key:
+                                            policyKey,
+
+                                          mode:
+                                            "exceptions",
+                                        })
+                                      }
+                                      className="rounded-full border border-amber-300/22 bg-amber-300/[0.055] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-100/82 transition hover:border-amber-300/38 hover:bg-amber-300/[0.09] disabled:cursor-not-allowed disabled:opacity-40"
+                                    >
+                                      Review exceptions
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      disabled={
+                                        !executionSnapshot ||
+                                        executionSnapshot
+                                          .compliantPackages ===
+                                          0
+                                      }
+                                      onClick={() => {
+                                        setPolicyExecutionError(
+                                          null,
+                                        );
+
+                                        setPolicyExecutionConfirmTarget(
+                                          policyKey,
+                                        );
+                                      }}
+                                      className="rounded-full border border-emerald-300/26 bg-emerald-300/[0.07] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:border-emerald-300/42 hover:bg-emerald-300/[0.12] disabled:cursor-not-allowed disabled:opacity-40"
+                                    >
+                                      Execute governed policy
+                                    </button>
+                                  </div>
+                                )}
                               </div>
 
                               {policySupersessionTarget?.id ===
@@ -2801,9 +3410,6 @@ export function CanonicalReview({
                             </div>
                           ) : null}
 
-                          <div className="mt-3 text-[10px] leading-5 text-violet-200/54">
-                            Policy execution is not activated. Policy authority only determines review eligibility.
-                          </div>
                         </div>
 
                         {policy.status === "draft" ? (
