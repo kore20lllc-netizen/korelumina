@@ -67,37 +67,6 @@ function stateForPackage(
   }
 }
 
-function stationForLegacyPackage(
-  state:
-    string,
-): ManufacturingStation {
-  switch (state) {
-    case "captured":
-      return "Evidence Intake";
-
-    case "compiled":
-      return "Knowledge IR";
-
-    case "validated":
-      return "Knowledge Package Assembly";
-
-    case "awaiting_review":
-    case "approved":
-    case "rejected":
-      return "Canonical Review";
-
-    case "canonical":
-    case "adapted":
-    case "consumed":
-    case "superseded":
-    case "archived":
-      return "Canonical Knowledge";
-
-    default:
-      return "Knowledge Package Assembly";
-  }
-}
-
 function displayValue(
   value:
     string |
@@ -486,15 +455,26 @@ function capsuleForRun(
 
   return {
     /*
-     * The Manufacturing Run is the capsule.
+     * Manufacturing Run identity and governed Knowledge Package
+     * identity are separate contracts.
      *
-     * This identity exists before compilation and remains stable
-     * through package assembly, review and publication.
+     * Before package assembly, the manufacturing run is the only
+     * authoritative process identity available.
+     *
+     * Once a Knowledge Package exists, its persistent KP-* identity
+     * becomes the visible governed capsule identity and remains stable
+     * through review, canonical promotion, adaptation and consumption.
+     *
+     * The KMR-* identity remains authoritative for process routing.
      */
     id:
+      knowledgePackage
+        ?.id ??
       run.id,
 
     identity:
+      knowledgePackage
+        ?.id ??
       run.id,
 
     title:
@@ -516,10 +496,17 @@ function capsuleForRun(
 
     destination:
       knowledgePackage
-        ? displayValue(
-            knowledgePackage
-              .destination,
-          )
+        ? knowledgePackage.state ===
+            "canonical"
+          ? displayValue(
+              knowledgePackage
+                .destination,
+              "Organizational Memory",
+            )
+          : displayValue(
+              knowledgePackage
+                .destination,
+            )
         : "Canonical Knowledge",
 
     state:
@@ -643,143 +630,6 @@ function capsuleForRun(
   };
 }
 
-function capsuleForLegacyPackage(
-  knowledgePackage:
-    LifecyclePackage,
-): KnowledgeCapsule {
-  const remediationRequired =
-    knowledgePackage
-      .remediation
-      .required;
-
-  const sources =
-    sourcesForPackage(
-      knowledgePackage,
-    );
-
-  return {
-    id:
-      knowledgePackage.id,
-
-    identity:
-      knowledgePackage.id,
-
-    title:
-      titleForPackage(
-        knowledgePackage,
-      ),
-
-    summary:
-      summaryForPackage(
-        knowledgePackage,
-      ),
-
-    stage:
-      stationForLegacyPackage(
-        knowledgePackage.state,
-      ),
-
-    destination:
-      displayValue(
-        knowledgePackage
-          .destination,
-      ),
-
-    state:
-      stateForPackage(
-        knowledgePackage.state,
-      ),
-
-    integrity:
-      remediationRequired
-        ? "peeling"
-        : "sealed",
-
-    authority:
-      displayValue(
-        knowledgePackage
-          .authority,
-      ),
-
-    confidence:
-      confidenceForPackage(
-        knowledgePackage,
-      ),
-
-    owner:
-      displayValue(
-        knowledgePackage
-          .owner,
-      ),
-
-    approval:
-      approvalForPackage(
-        knowledgePackage,
-      ),
-
-    packageType:
-      displayValue(
-        knowledgePackage
-          .items[0]
-          ?.type,
-        "Knowledge Package",
-      ),
-
-    mission:
-      "Unavailable",
-
-    compiler:
-      compilerForPackage(
-        knowledgePackage,
-      ),
-
-    educationalModule:
-      "Unavailable",
-
-    consumer:
-      "Unavailable",
-
-    sources:
-      sources.length >
-      0
-        ? sources
-        : [
-            "Unavailable",
-          ],
-
-    failedLayer:
-      remediationRequired
-        ? "Validation"
-        : undefined,
-
-    remediation:
-      remediationRequired
-        ? `Remediation status: ${knowledgePackage.remediation.status}.`
-        : undefined,
-
-    responsibleAuthority:
-      remediationRequired
-        ? displayValue(
-            knowledgePackage
-              .owner,
-          )
-        : undefined,
-
-    blockedDependencies:
-      remediationRequired
-        ? [
-            ...knowledgePackage
-              .dependencies,
-          ]
-        : undefined,
-
-    layers:
-      layersForPackage(
-        knowledgePackage,
-      ),
-  };
-}
-
 export function createKnowledgeCapsuleProductionProjection(
   snapshot:
     KnowledgeProductionLifecycleSnapshot,
@@ -794,24 +644,6 @@ export function createKnowledgeCapsuleProductionProjection(
           knowledgePackage,
         ] as const,
       ),
-    );
-
-  const packageIdsOwnedByRuns =
-    new Set(
-      snapshot.manufacturingRuns
-        .map(
-          (run) =>
-            run.packageId,
-        )
-        .filter(
-          (
-            id,
-          ): id is string =>
-            typeof id ===
-              "string" &&
-            id.length >
-              0,
-        ),
     );
 
   const runCapsules =
@@ -844,28 +676,17 @@ export function createKnowledgeCapsuleProductionProjection(
     );
 
   /*
-   * Backward compatibility:
+   * The certified Flow Engine represents governed manufacturing
+   * lifecycle state only.
    *
-   * packages created before Manufacturing Runs existed remain
-   * observable, but any package already linked to a run is not
-   * duplicated as a second capsule.
+   * Historical packages that predate Manufacturing Runs remain
+   * persisted and readable through the lifecycle/canonical APIs,
+   * but without a Manufacturing Run they have no authoritative
+   * station history and therefore must not be projected as active
+   * Flow Engine capsules.
    */
-  const legacyPackages =
-    snapshot.packages.filter(
-      (knowledgePackage) =>
-        !packageIdsOwnedByRuns.has(
-          knowledgePackage.id,
-        ),
-    );
-
-  const legacyCapsules =
-    legacyPackages.map(
-      capsuleForLegacyPackage,
-    );
-
   const capsules = [
     ...runCapsules,
-    ...legacyCapsules,
   ];
 
   const positions:
@@ -880,7 +701,12 @@ export function createKnowledgeCapsuleProductionProjection(
 
           return {
             capsuleId:
-              run.id,
+              run.packageId &&
+              packageById.has(
+                run.packageId,
+              )
+                ? run.packageId
+                : run.id,
 
             station:
               replay?.active &&
@@ -899,30 +725,6 @@ export function createKnowledgeCapsuleProductionProjection(
         },
       ),
 
-      ...legacyPackages.map(
-        (
-          knowledgePackage,
-          index,
-        ) => ({
-          capsuleId:
-            knowledgePackage.id,
-
-          station:
-            stationForLegacyPackage(
-              knowledgePackage.state,
-            ),
-
-          queuePosition:
-            snapshot
-              .manufacturingRuns
-              .length +
-            index +
-            1,
-
-          branches:
-            [],
-        }),
-      ),
     ];
 
   return {
