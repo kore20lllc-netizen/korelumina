@@ -168,6 +168,16 @@ export class KnowledgePackageService {
     const persisted =
       listKnowledgePackages();
 
+    /*
+     * Persistence is the runtime source of truth.
+     *
+     * The registry is an in-process acceleration layer only.
+     * Reconcile it from persisted state on every authoritative
+     * list read so packages removed from operational storage do
+     * not remain visible as stale runtime knowledge.
+     */
+    this.registry.clear();
+
     for (
       const knowledgePackage
       of persisted
