@@ -619,6 +619,63 @@ Genesis MUST NOT automatically approve Canonical Review, promote Canonical Knowl
 
 Production-adapter tests MUST execute under isolated test Knowledge storage and MUST NOT mutate legitimate production `runtime/knowledge`.
 
+Governed Replay Orchestrator V1 is the explicit composition boundary for end-to-end Genesis Replay.
+
+The orchestrator MUST compose existing contracts rather than replace them:
+
+Default Historical Source Discovery
+→ Genesis Source Manifest Build
+→ Replay Plan
+→ persistence preflight
+→ explicit execution authorization
+→ persisted Replay Execution
+→ Production Evidence Admission Adapter
+→ persisted Runner Result
+
+The orchestrator supports two explicit modes: `DRY_RUN` and `PRODUCTION_ADMISSION`.
+
+`DRY_RUN` MUST perform discovery, deterministic manifest construction, Replay Plan construction, and persistence-isolation preflight only.
+
+`DRY_RUN` MUST NOT create Replay Execution state, persist replay artifacts, invoke Evidence admission, or mutate Knowledge Operations.
+
+`PRODUCTION_ADMISSION` MUST require an explicit production-admission authorization flag. Selecting production mode alone is insufficient authorization.
+
+Production execution MUST NOT begin unless all of the following are true:
+
+- Historical Source discovery produced a `READY` manifest build with no unresolved errors;
+- Replay Plan is `READY` with no `BLOCK` action;
+- Genesis replay persistence is isolated from production `runtime/knowledge`;
+- a certified Knowledge Preservation Platform is supplied;
+- production admission was explicitly authorized.
+
+Before the first production Evidence admission, the orchestrator MUST persist the manifest build and the initial Replay Execution snapshot.
+
+Persistence of those initial artifacts is a hard production-admission barrier.
+
+If manifest persistence fails:
+
+- Replay Execution MUST NOT be persisted;
+- the Production Evidence Admission Adapter MUST NOT be invoked;
+- Knowledge Operations MUST remain unchanged.
+
+If initial Replay Execution persistence fails:
+
+- production Evidence admission MUST NOT begin;
+- no Knowledge Manufacturing Run may be created for the attempted replay;
+- Knowledge Operations MUST remain unchanged.
+
+Genesis MUST therefore establish a durable recovery point before crossing the production Evidence boundary.
+
+There MUST NOT be a window in which production Knowledge Operations has changed while Genesis lacks its initial durable replay execution snapshot.
+
+The orchestrator MUST use the existing Production Evidence Admission Adapter and persisted replay-resume contract. It MUST NOT implement a second admission loop.
+
+An already-persisted replay execution MUST NOT be silently overwritten, restarted, or resumed by the start-orchestration command. Existing execution requires an explicit future resume/recovery command.
+
+The orchestrator MUST NOT expose runtime routes or UI controls in V1.
+
+Constructing an orchestrator input, building a dry-run plan, or performing preflight MUST NEVER implicitly start production replay.
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.
