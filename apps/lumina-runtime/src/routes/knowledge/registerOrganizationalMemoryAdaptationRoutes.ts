@@ -57,24 +57,29 @@ export function registerOrganizationalMemoryAdaptationRoutes(
           ? body.packageId.trim()
           : "";
 
-      const organizationId =
+      const explicitOrganizationId =
         typeof body.organizationId ===
           "string"
           ? body.organizationId.trim()
           : "";
-
-      const projectId =
-        typeof body.projectId ===
-          "string" &&
-        body.projectId.trim()
-          ? body.projectId.trim()
-          : undefined;
 
       const teamId =
         typeof body.teamId ===
           "string" &&
         body.teamId.trim()
           ? body.teamId.trim()
+          : undefined;
+
+      const organizationId =
+        explicitOrganizationId ||
+        teamId ||
+        "";
+
+      const projectId =
+        typeof body.projectId ===
+          "string" &&
+        body.projectId.trim()
+          ? body.projectId.trim()
           : undefined;
 
       if (

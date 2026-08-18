@@ -276,6 +276,148 @@ test(
 );
 
 test(
+  "team workspace scope supplies organizational identity when explicit organization is absent",
+  async () => {
+    const app =
+      express();
+
+    app.use(
+      express.json(),
+    );
+
+    let receivedOrganizationId =
+      "";
+
+    let receivedTeamId:
+      string |
+      undefined;
+
+    registerOrganizationalMemoryAdaptationRoutes(
+      app,
+      {
+        packageService: {
+          get:
+            () =>
+              canonicalPackage(),
+
+          markAdapted:
+            (
+              id:
+                string,
+            ) => ({
+              ...canonicalPackage(),
+              id,
+              state:
+                "adapted",
+            }),
+        } as never,
+
+        canonicalStore: {
+          get:
+            (
+              id:
+                string,
+            ) => ({
+              id,
+              status:
+                "canonical",
+            }),
+        } as never,
+
+        adaptationService: {
+          adaptAndPersist:
+            (
+              input:
+                {
+                  organizationId:
+                    string;
+
+                  teamId?:
+                    string;
+                },
+            ) => {
+              receivedOrganizationId =
+                input.organizationId;
+
+              receivedTeamId =
+                input.teamId;
+
+              return {
+                records: [
+                  {
+                    id:
+                      "canonical-memory:workspace-scope",
+                  },
+                ],
+              };
+            },
+        } as never,
+      },
+    );
+
+    const {
+      server,
+      baseUrl,
+    } =
+      await listen(
+        app,
+      );
+
+    try {
+      const response =
+        await fetch(
+          `${baseUrl}/api/knowledge/organizational-memory-adaptation`,
+          {
+            method:
+              "POST",
+
+            headers: {
+              "content-type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                packageId:
+                  "KP-2026-000000000501",
+
+                teamId:
+                  "team:workspace-001",
+
+                generalization: {
+                  generalized:
+                    true,
+
+                  customerSpecificContentRetained:
+                    false,
+                },
+              }),
+          },
+        );
+
+      assert.equal(
+        response.status,
+        200,
+      );
+
+      assert.equal(
+        receivedOrganizationId,
+        "team:workspace-001",
+      );
+
+      assert.equal(
+        receivedTeamId,
+        "team:workspace-001",
+      );
+    } finally {
+      await close(
+        server,
+      );
+    }
+  },
+);
+
+test(
   "non-canonical package cannot enter organizational memory",
   async () => {
     const app =
