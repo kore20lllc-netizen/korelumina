@@ -676,6 +676,52 @@ The orchestrator MUST NOT expose runtime routes or UI controls in V1.
 
 Constructing an orchestrator input, building a dry-run plan, or performing preflight MUST NEVER implicitly start production replay.
 
+Explicit Replay Resume / Recovery Orchestrator V1 is the only governed boundary for reopening an already-persisted Genesis replay.
+
+Recovery MUST be addressed by deterministic Replay Identity.
+
+Recovery MUST load the existing persisted Manifest Build and Replay Execution snapshot. It MUST NOT perform Historical Source discovery, rebuild a manifest, rebuild a Replay Plan, create a replacement initial Replay Execution, or overwrite the replay merely because recovery was requested.
+
+Loading the persisted Replay Execution MUST reuse the existing persistence integrity checks for Replay Identity, manifest identity, Replay State, checkpoint position, completed-prefix Historical Source identities, and source checksums.
+
+Recovery supports two explicit modes: `INSPECT` and `PRODUCTION_RECOVERY`.
+
+`INSPECT` MAY load and report persisted replay state and recovery preflight, but MUST NOT invoke Evidence admission or advance Replay State.
+
+`PRODUCTION_RECOVERY` MUST require explicit production-recovery authorization. Selecting recovery mode alone is insufficient authorization.
+
+Production recovery also requires the certified Knowledge Preservation Platform and isolated Genesis replay persistence.
+
+A persisted replay is resumable only when its Replay State is `running` and its persisted current manifest position is non-null.
+
+Recovery MUST continue strictly from the persisted `currentManifestIndex` through the existing persisted replay-resume contract.
+
+Already-completed manifest positions MUST NOT be replayed by recovery.
+
+A completed replay MUST NOT be restarted through the recovery orchestrator.
+
+Production recovery is failure-atomic at the persisted replay boundary.
+
+If the first resumed production admission fails:
+
+- the failed manifest position MUST NOT advance;
+- no new terminal replay disposition may be persisted;
+- the last completed manifest position MUST remain unchanged;
+- the last valid checkpoint MUST remain unchanged;
+- no later manifest position may execute;
+- the failed Runner Result MAY be persisted diagnostically without mutating the authoritative Replay Execution snapshot.
+
+A recovery failure after any later resumed position follows the same rule: durable Replay Execution may advance only through successfully completed terminal source steps.
+
+Recovery MUST NOT silently replace an existing failed or running replay with newly discovered history or a newly constructed replay identity.
+
+The start orchestrator and recovery orchestrator therefore have non-overlapping responsibilities:
+
+- start orchestration creates a new persisted replay and refuses existing execution;
+- recovery orchestration opens only an existing persisted replay and refuses rebuild/restart semantics.
+
+Replay Recovery Orchestrator V1 MUST NOT expose routes or UI controls.
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.
