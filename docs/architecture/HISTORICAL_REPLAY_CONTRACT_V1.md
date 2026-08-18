@@ -165,6 +165,14 @@ This hierarchy governs:
 - conflict interpretation;
 - recovery sequencing by source class.
 
+Historical Source discoverers MUST declare the source classes they own.
+
+Discovery aggregation MUST execute discoverers deterministically by recovery source-class priority and then stable discoverer identity.
+
+Discovery ordering is not replay chronology.
+
+After discovery and manifest construction, chronological replay ordering remains governed separately by historical timestamp, source-class priority, provenance locator, and Historical Source Identity.
+
 It does NOT redefine historical chronology.
 
 Recovery priority and historical time are separate dimensions.
@@ -450,6 +458,20 @@ Different identity + same checksum:
 - provenance MUST NOT be collapsed.
 
 Deduplication operates before Evidence admission.
+
+At the discovery boundary:
+
+- same Historical Source Identity + same checksum + compatible provenance is one discovered source;
+- same Historical Source Identity + different checksum is a mutation/conflict condition;
+- same Historical Source Identity + incompatible source class, Evidence type, or provenance is an identity-contract conflict.
+
+Discovery MUST NOT silently select one conflicting representation.
+
+When multiple discoverers independently observe the same compatible Historical Source Identity, Genesis MUST preserve the discovery multiplicity by retaining the stable identities of every discoverer that observed the source.
+
+The source record remains deduplicated.
+
+Discovery-result errors MUST be returned in deterministic canonical order so manifest/discovery diagnostics do not depend on connector or filesystem return order.
 
 Knowledge-level deduplication remains owned by Knowledge Operations.
 
