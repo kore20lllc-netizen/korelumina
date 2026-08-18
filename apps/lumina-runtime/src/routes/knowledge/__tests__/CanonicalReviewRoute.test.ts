@@ -110,6 +110,49 @@ test(
                 approvalState:
                   "pending_review",
 
+                authority:
+                  "architecture-specification",
+
+                owner:
+                  "KoreLumina Architecture",
+
+                scope:
+                  "platform",
+
+                sourceEvidenceRefs: [
+                  "evidence:canonical-review-route",
+                ],
+
+                provenance: {
+                  evidenceIds: [
+                    "evidence:canonical-review-route",
+                  ],
+
+                  sourceLocations: [],
+
+                  contentRefs: [],
+
+                  sources: [],
+                },
+
+                validationResults: [],
+
+                remediation: {
+                  required:
+                    false,
+
+                  status:
+                    "not_required",
+
+                  blockedItemIds: [],
+
+                  updatedAt:
+                    400,
+                },
+
+                metadata:
+                  {},
+
                 updatedAt:
                   400,
               },

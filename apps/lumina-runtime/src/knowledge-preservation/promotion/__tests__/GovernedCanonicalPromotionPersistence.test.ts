@@ -13,105 +13,171 @@ import {
   adaptCanonicalKnowledgeToOrganizationalMemoryRecords,
 } from "../../../knowledge/organizational-memory/index.js";
 
+import type {
+  KnowledgeIRItem,
+} from "../../ir/index.js";
+
 import {
   KnowledgePackageService,
 } from "../../package/index.js";
 
 import {
+  CanonicalReviewService,
+} from "../../review/index.js";
+
+import {
   GovernedCanonicalPromotionService,
 } from "../GovernedCanonicalPromotionService.js";
+
+function candidate(
+  id: string,
+): KnowledgeIRItem {
+  return {
+    id,
+
+    candidateType:
+      "CandidateArtifact",
+
+    title:
+      "Architecture",
+
+    summary:
+      "Governed architecture knowledge.",
+
+    confidence:
+      1,
+
+    evidenceRefs: [
+      `evidence:${id}`,
+    ],
+
+    proposedRelationships:
+      {},
+
+    extractedAt:
+      1,
+
+    compiler: {
+      compilerName:
+        "documentation-compiler",
+
+      compilerVersion:
+        "1.0.0",
+
+      evidenceSourceType:
+        "document",
+
+      extractedAt:
+        1,
+
+      extractionMethod:
+        "direct-evidence",
+
+      confidenceBasis:
+        "test-fixture",
+    },
+
+    status:
+      "approved",
+
+    metadata: {
+      authorityClass:
+        "constitutional",
+
+      approvalState:
+        "approved",
+
+      owner:
+        "KoreLumina Architecture",
+
+      scope:
+        "platform",
+
+      version:
+        "1.0.0",
+
+      source:
+        "test",
+
+      sourceLocation:
+        "test",
+
+      contentRef:
+        "test",
+
+      lineage:
+        [],
+
+      dependencies:
+        [],
+    },
+  };
+}
+
+function createApprovedPackage(
+  id: string,
+) {
+  const packageService =
+    new KnowledgePackageService();
+
+  const knowledgePackage =
+    packageService.packageValidated([
+      candidate(
+        id,
+      ),
+    ]);
+
+  assert.ok(
+    knowledgePackage,
+  );
+
+  new CanonicalReviewService(
+    packageService,
+  ).review({
+    packageId:
+      knowledgePackage.id,
+
+    decision:
+      "approved",
+
+    reviewerId:
+      "reviewer:test",
+
+    reviewedAt:
+      2,
+
+    evidenceConsidered:
+      [
+        ...knowledgePackage
+          .sourceEvidenceRefs,
+      ],
+
+    reason:
+      "Governed approval.",
+  });
+
+  return {
+    packageService,
+    knowledgePackage:
+      packageService.get(
+        knowledgePackage.id,
+      )!,
+  };
+}
 
 test(
   "organizational memory can be explicitly persisted after governed canonical promotion",
   () => {
-    const packageService =
-      new KnowledgePackageService();
+    const {
+      packageService,
+      knowledgePackage,
+    } =
+      createApprovedPackage(
+        "candidate:persistence-test",
+      );
 
     const canonicalStore =
       new CanonicalKnowledgeStore();
-
-    const knowledgePackage = {
-      id:
-        "knowledge-package:persistence-test",
-
-      state:
-        "approved",
-
-      sourceEvidenceRefs: [
-        "evidence:test",
-      ],
-
-      items: [
-        {
-          id:
-            "document:evidence:test",
-
-          type:
-            "CandidateArtifact",
-
-          title:
-            "Architecture",
-
-          summary:
-            "Governed architecture knowledge.",
-
-          confidence:
-            1,
-
-          evidenceRefs: [
-            "evidence:test",
-          ],
-
-          relationships:
-            {},
-
-          metadata: {
-            authorityClass:
-              "constitutional",
-          },
-
-          compiler: {
-            compilerName:
-              "documentation-compiler",
-          },
-
-          createdAt:
-            1,
-
-          updatedAt:
-            1,
-
-          status:
-            "validated",
-        },
-      ],
-
-      createdAt:
-        1,
-
-      updatedAt:
-        2,
-
-      metadata: {
-        review: {
-          decision:
-            "approved",
-
-          reviewerId:
-            "reviewer:test",
-
-          reviewedAt:
-            2,
-
-          reason:
-            "approved",
-        },
-      },
-    };
-
-    packageService.registry.register(
-      knowledgePackage as never,
-    );
 
     const persisted:
       OrganizationalMemoryRecord[] =
@@ -185,95 +251,24 @@ test(
 test(
   "canonical promotion does not implicitly persist organizational memory",
   () => {
-    const packageService =
-      new KnowledgePackageService();
+    const {
+      packageService,
+      knowledgePackage,
+    } =
+      createApprovedPackage(
+        "candidate:no-implicit-memory",
+      );
 
     const canonicalStore =
       new CanonicalKnowledgeStore();
 
-    const knowledgePackage = {
-      id:
-        "knowledge-package:no-context",
-
-      state:
-        "approved",
-
-      sourceEvidenceRefs: [
-        "evidence:test",
-      ],
-
-      items: [
-        {
-          id:
-            "document:evidence:test",
-
-          type:
-            "CandidateArtifact",
-
-          title:
-            "Architecture",
-
-          summary:
-            "Governed architecture knowledge.",
-
-          confidence:
-            1,
-
-          evidenceRefs: [
-            "evidence:test",
-          ],
-
-          relationships:
-            {},
-
-          metadata:
-            {},
-
-          compiler: {
-            compilerName:
-              "documentation-compiler",
-          },
-
-          createdAt:
-            1,
-
-          updatedAt:
-            1,
-
-          status:
-            "validated",
-        },
-      ],
-
-      createdAt:
-        1,
-
-      updatedAt:
-        2,
-
-      metadata: {
-        review: {
-          decision:
-            "approved",
-
-          reviewerId:
-            "reviewer:test",
-
-          reviewedAt:
-            2,
-        },
-      },
-    };
-
-    packageService.registry.register(
-      knowledgePackage as never,
-    );
-
-    let saveCalls = 0;
+    let saveCalls =
+      0;
 
     const persistence = {
       saveAll() {
-        saveCalls += 1;
+        saveCalls +=
+          1;
       },
     };
 
@@ -297,5 +292,7 @@ test(
       saveCalls,
       0,
     );
+
+    void persistence;
   },
 );

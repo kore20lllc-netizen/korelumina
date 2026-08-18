@@ -167,7 +167,7 @@ test(
 
     assert.match(
       knowledgePackage.id,
-      /^KP-\d{4}-\d{12}$/,
+      /^KP-\d{4}-\d{6}$/,
     );
 
     assert.equal(

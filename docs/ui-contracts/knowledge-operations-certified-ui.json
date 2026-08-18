@@ -104,8 +104,8 @@
       "elementCount": 10
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx": {
-      "sha256": "28f8f5261e4a91db273d387d9508327b9b34697ebc1b1300f3bec3342dee4743",
-      "elementCount": 115
+      "sha256": "e636fc8bf57eb8a296dce24e99b189f6ebbacb87f4a8d75e153e69d7d0e7c02d",
+      "elementCount": 147
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx": {
       "sha256": "5a6ad82fbe2bee2ccd257dfc398391483d9cbe23cc520812f2f484db9935aa7c",
@@ -140,8 +140,8 @@
       "elementCount": 73
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx": {
-      "sha256": "4b7cd51924512b2300dd1f8afb5f213defebf4fee6daead9387617285b4550e4",
-      "elementCount": 393
+      "sha256": "cc27a9fed5839816802462ad63a96be0366c2a8e69838094490f9de30acf9c35",
+      "elementCount": 394
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {
       "sha256": "43a7d2b13de694ec2aeebdcad227a71bc199e8064f715e9143dd68961e7c858b",
@@ -156,8 +156,8 @@
       "elementCount": 129
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx": {
-      "sha256": "3a24a48e2dbfdfd103f69d4d72501734ef7f97704cd4c174dbea6e314ceb6a9b",
-      "elementCount": 115
+      "sha256": "19c7f2e5e7985d872361a6471f36b712a04710d9e6186de3cba9f1036abbf642",
+      "elementCount": 138
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/CompilerOperations.tsx": {
       "sha256": "e6325a1afe4f3de47c736bce0e4eb76770534ba9e85cf8c4aed5a7613dffa37f",

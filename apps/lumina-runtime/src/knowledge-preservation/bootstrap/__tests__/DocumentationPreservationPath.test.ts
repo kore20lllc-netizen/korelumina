@@ -9,11 +9,13 @@ import {
   createKnowledgePreservationPlatform,
 } from "../createKnowledgePreservationPlatform.js";
 
-function approvedDocumentEvidence():
+function approvedDocumentEvidence(
+  id =
+    "evidence:approved-document:e2e",
+):
   EvidenceItem {
   return {
-    id:
-      "evidence:approved-document:e2e",
+    id,
 
     type:
       "document",
@@ -194,7 +196,9 @@ test(
       createKnowledgePreservationPlatform();
 
     const evidence =
-      approvedDocumentEvidence();
+      approvedDocumentEvidence(
+        "evidence:approved-document:persistent-reload",
+      );
 
     await platform.preserve(
       evidence,

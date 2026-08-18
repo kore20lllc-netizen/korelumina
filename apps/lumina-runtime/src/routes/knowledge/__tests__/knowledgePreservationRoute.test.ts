@@ -145,6 +145,9 @@ test(
                   version:
                     "1.0.0",
 
+                  sourceLocation:
+                    "docs/architecture/KORELUMINA_MASTER_ARCHITECTURE.md",
+
                   confidence:
                     1,
                 },

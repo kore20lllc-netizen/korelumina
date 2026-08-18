@@ -9,11 +9,13 @@ import {
   createKnowledgePreservationPlatform,
 } from "../createKnowledgePreservationPlatform.js";
 
-function approvedConversationEvidence():
+function approvedConversationEvidence(
+  id =
+    "evidence:conversation:e2e",
+):
   EvidenceItem {
   return {
-    id:
-      "evidence:conversation:e2e",
+    id,
 
     type:
       "conversation",
@@ -157,7 +159,9 @@ test(
       createKnowledgePreservationPlatform();
 
     const evidence =
-      approvedConversationEvidence();
+      approvedConversationEvidence(
+        "evidence:conversation:persistent-reload",
+      );
 
     await platform.preserve(
       evidence,
