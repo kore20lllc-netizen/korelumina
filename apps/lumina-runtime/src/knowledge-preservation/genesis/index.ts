@@ -9,3 +9,4 @@ export * from "./GenesisReplayState.js";
 export * from "./HistoricalSourceDiscovery.js";
 export * from "./DocumentationHistoricalSourceDiscoverer.js";
 export * from "./GitHistoryHistoricalSourceDiscoverer.js";
+export * from "./GenesisSourceManifestBuilder.js";

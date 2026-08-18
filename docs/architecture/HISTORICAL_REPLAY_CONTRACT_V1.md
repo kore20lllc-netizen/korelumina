@@ -345,6 +345,33 @@ Changing replay scope changes the manifest identity.
 
 Changing only replay execution time MUST NOT change the manifest identity.
 
+Genesis Source Manifest construction MUST consume the governed Historical Source discovery aggregate rather than bypassing discoverer validation or deduplication.
+
+Documentation Discovery and Git History Discovery are the first concrete V1 inputs to the default Genesis manifest builder.
+
+The manifest contains deterministic source state only. Discovery diagnostics, discoverer execution identity, and discovery-observation multiplicity remain adjacent build diagnostics and MUST NOT be injected into manifest identity unless they alter the discovered Historical Source set itself.
+
+Manifest entry order MUST follow the existing replay-order tuple:
+
+1. historical timestamp;
+2. source-class priority;
+3. provenance locator;
+4. Historical Source Identity.
+
+The manifest builder MUST NOT admit Evidence, compile Knowledge IR, create Knowledge Packages, promote Canonical Knowledge, or adapt Organizational Memory.
+
+Manifest construction MUST use the same canonical ordering implementation that governs manifest identity. A second independently maintained replay-order comparator MUST NOT become a competing source of truth.
+
+A successfully materialized manifest is not automatically replay-ready.
+
+If discovery returns any unresolved error, the manifest build result MUST be classified `BLOCKED` even when some Historical Sources were successfully discovered and a deterministic diagnostic manifest can be materialized.
+
+A `BLOCKED` manifest build MUST NOT enter replay execution until its discovery errors are reconciled.
+
+Replay orchestration MUST require an explicit manifest-build readiness gate before creating or starting replay state.
+
+Discovery errors MUST therefore never be silently converted into a smaller apparently-complete Genesis Corpus.
+
 `discoveredAt` and other operational discovery-attempt timestamps are retained for provenance and observability but MUST NOT participate in manifest identity.
 
 The manifest replay-contract version and Replay Scope replay-contract version MUST agree. A contradictory version declaration is invalid and MUST be rejected.
