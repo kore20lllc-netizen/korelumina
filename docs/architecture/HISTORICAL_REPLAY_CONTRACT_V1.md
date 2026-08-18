@@ -536,6 +536,57 @@ A later Historical Source that was never successfully admitted remains independe
 
 Runner restart therefore provides at-least-once execution attempts with effectively-once Evidence creation per repository-scoped Historical Source version.
 
+Replay Persistence V1 introduces durable Genesis replay state under the established runtime-data root.
+
+The default persistence namespace is:
+
+`runtime-data/genesis/replays/<safe-replay-storage-key>/`
+
+Genesis replay persistence MUST remain physically isolated from production `runtime/knowledge` stores.
+
+Replay persistence MUST retain separately:
+
+- Genesis Source Manifest build result;
+- current Replay Execution snapshot;
+- latest Runner Result.
+
+The persisted Replay Execution snapshot includes the existing Replay Plan, manifest, Replay State, and checkpoint. Persistence MUST NOT introduce competing lifecycle models for those artifacts.
+
+Every persisted artifact MUST remain bound to the deterministic Replay Identity.
+
+Loading persisted state MUST reject identity drift or manifest/replay mismatch rather than silently accepting tampered replay artifacts.
+
+File persistence MUST use atomic replacement semantics so a partially-written JSON document cannot become the authoritative replay artifact.
+
+If a persisted JSON artifact is corrupted or truncated, Genesis MUST fail closed with an explicit corruption error.
+
+Corrupted persistence MUST NOT be interpreted as "not found", MUST NOT be silently replaced with an empty replay, and MUST NOT be deleted automatically. The artifact remains available for diagnosis and governed recovery.
+
+A deserialized Replay Execution snapshot MUST NOT be trusted merely because its outer Replay Identity is valid.
+
+When a checkpoint exists, persistence MUST independently revalidate it through the existing checkpoint-resume integrity contract against the persisted manifest, including:
+
+- Replay Identity;
+- manifest identity;
+- replay contract version;
+- completed-prefix coverage;
+- Historical Source identities;
+- source checksums.
+
+Replay State and checkpoint MUST also agree on the last completed manifest position and disposition count.
+
+A Replay State containing a completed prefix MUST NOT load successfully if its checkpoint is absent.
+
+After every successfully resumed terminal source step, the updated Replay Execution snapshot MUST be persisted before the next manifest position is attempted.
+
+If resumed admission fails, the persisted execution snapshot MUST remain at the last successfully persisted checkpoint. The failed attempt MUST NOT advance durable replay state.
+
+A persisted failed Runner Result is diagnostic state. It MUST NOT mutate the last valid Replay Execution snapshot.
+
+Resume MUST continue from the persisted `currentManifestIndex`; it MUST NOT replay an already-completed manifest prefix merely because the process restarted.
+
+Tests for Replay Persistence MUST use isolated temporary storage roots and MUST NOT write synthetic Genesis artifacts into production `runtime-data/genesis` or production Knowledge Operations stores.
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.
