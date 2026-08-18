@@ -923,12 +923,27 @@ PARTIAL
 COMPLETE
 BLOCKED
 
+Replay execution state is distinct from corpus completeness and uses:
+
+- pending;
+- running;
+- completed;
+- blocked;
+- failed.
+
+Execution status MUST NOT be used as a substitute for corpus completeness.
+
 PARTIAL:
 - approved replay scope has not been fully processed.
 
 COMPLETE:
 - every source within approved scope reached ADMITTED or approved SKIPPED disposition;
-- no unresolved mandatory source remains blocked.
+- no unresolved source remains BLOCKED;
+- completed-source count equals the deterministic manifest source count.
+
+A replay MUST NOT claim COMPLETE while any manifest source lacks a terminal disposition.
+
+A BLOCKED terminal disposition halts deterministic forward progression until governance or source reconciliation resolves the blocker.
 
 BLOCKED:
 - one or more mandatory sources prevent completion.
