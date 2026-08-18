@@ -10,6 +10,26 @@ export type HistoricalSourceReplayEligibility =
   | "excluded"
   | "blocked";
 
+export type HistoricalSourceClass =
+  | "ADR"
+  | "RFC"
+  | "architecture-document"
+  | "document"
+  | "specification"
+  | "roadmap"
+  | "source-file"
+  | "commit"
+  | "tag"
+  | "branch"
+  | "runtime-event"
+  | "conversation"
+  | "engineering-execution"
+  | "issue"
+  | "pull-request"
+  | "incident-log"
+  | "build-output"
+  | "milestone";
+
 export interface HistoricalSourceAuthority {
   authorityClass:
     string;
@@ -56,6 +76,9 @@ export interface HistoricalSource {
   historicalSourceId:
     HistoricalSourceId;
 
+  sourceClass:
+    HistoricalSourceClass;
+
   evidenceType:
     EvidenceType;
 
@@ -70,6 +93,12 @@ export interface HistoricalSource {
 
   historicalTimestamp:
     HistoricalSourceTimestamp;
+
+  discoveredAt:
+    number;
+
+  discoveryMethod:
+    string;
 
   authority:
     HistoricalSourceAuthority;

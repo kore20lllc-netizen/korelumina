@@ -337,6 +337,10 @@ Changing replay scope changes the manifest identity.
 
 Changing only replay execution time MUST NOT change the manifest identity.
 
+`discoveredAt` and other operational discovery-attempt timestamps are retained for provenance and observability but MUST NOT participate in manifest identity.
+
+The manifest replay-contract version and Replay Scope replay-contract version MUST agree. A contradictory version declaration is invalid and MUST be rejected.
+
 ---
 
 # 10. Replay Identity
