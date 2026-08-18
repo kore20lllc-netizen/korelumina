@@ -98,7 +98,9 @@ export function registerCanonicalPromotionRoutes(
           message ===
             "knowledge_package_not_approved" ||
           message ===
-            "governed_approval_proof_missing"
+            "governed_approval_proof_missing" ||
+          message ===
+            "governed_approval_history_missing"
         ) {
           return res.status(
             409,

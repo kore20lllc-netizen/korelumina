@@ -91,6 +91,29 @@ function displayValue(
   );
 }
 
+function manufacturingRunDisplayId(
+  runId:
+    string,
+): string {
+  if (
+    !runId.startsWith(
+      "KMR-",
+    )
+  ) {
+    return runId;
+  }
+
+  const suffix =
+    runId.slice(
+      4,
+    );
+
+  return `KMR-${suffix.slice(
+    0,
+    10,
+  )}`;
+}
+
 function titleForPackage(
   knowledgePackage:
     LifecyclePackage,
@@ -481,7 +504,9 @@ function capsuleForRun(
     identity:
       knowledgePackage
         ?.id ??
-      run.id,
+      manufacturingRunDisplayId(
+        run.id,
+      ),
 
     title:
       knowledgePackage

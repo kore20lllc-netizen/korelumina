@@ -313,7 +313,11 @@ test(
 
     packageService.registry.register({
       ...created,
+
       state:
+        "approved",
+
+      approvalState:
         "approved",
     });
 
@@ -397,6 +401,341 @@ test(
     assert.equal(
       reloaded.state,
       "canonical",
+    );
+  },
+);
+
+
+test(
+  "remediation-required package cannot become canonical",
+  () => {
+    const packageService =
+      new KnowledgePackageService();
+
+    const canonicalStore =
+      new CanonicalKnowledgeStore();
+
+    const created =
+      packageService.packageValidated([
+        candidate(
+          "candidate:governed-remediation",
+        ),
+      ]);
+
+    assert.ok(
+      created,
+    );
+
+    new CanonicalReviewService(
+      packageService,
+    ).review({
+      packageId:
+        created.id,
+
+      decision:
+        "remediation_required",
+
+      reviewerId:
+        "reviewer:human",
+
+      reviewedAt:
+        4000,
+
+      reason:
+        "Requires remediation.",
+    });
+
+    assert.throws(
+      () =>
+        new GovernedCanonicalPromotionService(
+          packageService,
+          canonicalStore,
+        ).promoteApprovedPackage(
+          created.id,
+        ),
+      /knowledge_package_not_approved/,
+    );
+
+    assert.equal(
+      canonicalStore.size(),
+      0,
+    );
+  },
+);
+
+test(
+  "approved state with inconsistent approvalState cannot become canonical",
+  () => {
+    const packageService =
+      new KnowledgePackageService();
+
+    const canonicalStore =
+      new CanonicalKnowledgeStore();
+
+    const created =
+      packageService.packageValidated([
+        candidate(
+          "candidate:forged-approval-state",
+        ),
+      ]);
+
+    assert.ok(
+      created,
+    );
+
+    packageService.registry.register({
+      ...created,
+
+      state:
+        "approved",
+
+      approvalState:
+        "pending_review",
+
+      metadata: {
+        ...created.metadata,
+
+        review: {
+          packageId:
+            created.id,
+
+          packageVersion:
+            created.version,
+
+          decision:
+            "approved",
+
+          reviewerId:
+            "reviewer:forged",
+
+          reviewedAt:
+            5000,
+
+          evidenceConsidered:
+            [
+              "evidence:candidate:forged-approval-state",
+            ],
+        },
+
+        reviewHistory: [
+          {
+            packageId:
+              created.id,
+
+            packageVersion:
+              created.version,
+
+            decision:
+              "approved",
+
+            reviewerId:
+              "reviewer:forged",
+
+            reviewedAt:
+              5000,
+
+            evidenceConsidered:
+              [
+                "evidence:candidate:forged-approval-state",
+              ],
+          },
+        ],
+      },
+    });
+
+    assert.throws(
+      () =>
+        new GovernedCanonicalPromotionService(
+          packageService,
+          canonicalStore,
+        ).promoteApprovedPackage(
+          created.id,
+        ),
+      /knowledge_package_not_approved/,
+    );
+
+    assert.equal(
+      canonicalStore.size(),
+      0,
+    );
+  },
+);
+
+test(
+  "approved package without immutable review history cannot become canonical",
+  () => {
+    const packageService =
+      new KnowledgePackageService();
+
+    const canonicalStore =
+      new CanonicalKnowledgeStore();
+
+    const created =
+      packageService.packageValidated([
+        candidate(
+          "candidate:missing-review-history",
+        ),
+      ]);
+
+    assert.ok(
+      created,
+    );
+
+    new CanonicalReviewService(
+      packageService,
+    ).review({
+      packageId:
+        created.id,
+
+      decision:
+        "approved",
+
+      reviewerId:
+        "reviewer:human",
+
+      reviewedAt:
+        6000,
+    });
+
+    const approved =
+      packageService.get(
+        created.id,
+      );
+
+    assert.ok(
+      approved,
+    );
+
+    packageService.registry.register({
+      ...approved,
+
+      metadata: {
+        ...approved.metadata,
+
+        reviewHistory:
+          [],
+      },
+    });
+
+    assert.throws(
+      () =>
+        new GovernedCanonicalPromotionService(
+          packageService,
+          canonicalStore,
+        ).promoteApprovedPackage(
+          created.id,
+        ),
+      /governed_approval_history_missing/,
+    );
+
+    assert.equal(
+      canonicalStore.size(),
+      0,
+    );
+  },
+);
+
+test(
+  "canonical governance record preserves package lifecycle approval and supersession evidence",
+  () => {
+    const packageService =
+      new KnowledgePackageService();
+
+    const canonicalStore =
+      new CanonicalKnowledgeStore();
+
+    const created =
+      packageService.packageValidated([
+        candidate(
+          "candidate:canonical-lineage-proof",
+        ),
+      ]);
+
+    assert.ok(
+      created,
+    );
+
+    new CanonicalReviewService(
+      packageService,
+    ).review({
+      packageId:
+        created.id,
+
+      decision:
+        "approved",
+
+      reviewerId:
+        "reviewer:lineage",
+
+      reviewedAt:
+        7000,
+
+      reason:
+        "Approved with governed lineage.",
+    });
+
+    const result =
+      new GovernedCanonicalPromotionService(
+        packageService,
+        canonicalStore,
+      ).promoteApprovedPackage(
+        created.id,
+      );
+
+    const governance =
+      result.canonicalItems[0]
+        ?.metadata
+        .governance as
+        Record<string, unknown>;
+
+    assert.equal(
+      governance.approvalState,
+      "approved",
+    );
+
+    assert.ok(
+      Array.isArray(
+        governance.reviewHistory,
+      ),
+    );
+
+    assert.ok(
+      Array.isArray(
+        governance.lifecycleHistory,
+      ),
+    );
+
+    const supersession =
+      governance.supersession as
+        Record<string, unknown>;
+
+    assert.deepEqual(
+      supersession.supersedes,
+      [],
+    );
+
+    assert.deepEqual(
+      supersession.supersededBy,
+      [],
+    );
+
+    const reviewEvidence =
+      governance.reviewEvidence as
+        Record<string, unknown>;
+
+    assert.equal(
+      reviewEvidence.packageId,
+      created.id,
+    );
+
+    assert.equal(
+      reviewEvidence.decision,
+      "approved",
+    );
+
+    assert.equal(
+      reviewEvidence.reviewerId,
+      "reviewer:lineage",
     );
   },
 );

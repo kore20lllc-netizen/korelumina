@@ -1735,6 +1735,14 @@ export function CanonicalReview({
             )}
           </div>
 
+          <div
+            className="relative z-20 mt-4 max-h-[620px] min-h-0 overflow-y-auto overscroll-contain pr-2 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
+            aria-label="Governance queue capsules awaiting canonical decision"
+            tabIndex={0}
+            onWheel={(event) => {
+              event.stopPropagation();
+            }}
+          >
           {queueMode ===
           "batch_candidate" ? (
             <div className="mt-4 grid gap-3">
@@ -2335,12 +2343,8 @@ export function CanonicalReview({
               ) : null}
 
               <div
-                className="relative z-30 max-h-[720px] min-h-0 overflow-y-scroll overscroll-contain pr-2 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
+                className="relative z-30 min-h-0 pointer-events-auto"
                 aria-label="Persisted review policies"
-                tabIndex={0}
-                onWheel={(event) => {
-                  event.stopPropagation();
-                }}
               >
               {policySnapshot.policies.length >
               0 ? (
@@ -3863,6 +3867,7 @@ export function CanonicalReview({
               </div>
             </LuminaFlagshipCard>
           ) : null}
+          </div>
             </div>
           </LuminaFlagshipPanel>
         }

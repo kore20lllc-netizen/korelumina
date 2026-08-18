@@ -109,6 +109,7 @@ import {
   getCanonicalReviewPolicies,
   getCanonicalReviewSnapshot,
   getKnowledgeProductionLifecycleSnapshot,
+  promoteCanonicalKnowledgePackage,
 } from "@/services/knowledgeOperationsService";
 
 import type {
@@ -533,6 +534,55 @@ export function KnowledgeProductionCommandCenter() {
         ]);
       },
       [],
+    );
+
+  const handleCanonicalPromotion =
+    useCallback(
+      async (
+        packageId: string,
+      ) => {
+        await promoteCanonicalKnowledgePackage(
+          packageId,
+        );
+
+        const [
+          lifecycleSnapshot,
+        ] =
+          await Promise.all([
+            getKnowledgeProductionLifecycleSnapshot(),
+            refreshCanonicalReviewNow(),
+          ]);
+
+        const capsuleProjection =
+          createKnowledgeCapsuleProductionProjection(
+            lifecycleSnapshot,
+          );
+
+        setKnowledgeCapsuleProjection(
+          capsuleProjection,
+        );
+
+        setKnowledgeDistributionProjection(
+          createKnowledgeDistributionProjection(
+            capsuleProjection.capsules,
+          ),
+        );
+
+        setCanonicalKnowledgeProjection(
+          createCanonicalKnowledgeProjection(
+            lifecycleSnapshot,
+          ),
+        );
+
+        setOrganizationalMemoryProjection(
+          createOrganizationalMemoryProjection(
+            lifecycleSnapshot,
+          ),
+        );
+      },
+      [
+        refreshCanonicalReviewNow,
+      ],
     );
 
   useEffect(() => {
@@ -1038,6 +1088,18 @@ export function KnowledgeProductionCommandCenter() {
       >
         <CanonicalKnowledge
           projection={canonicalKnowledgeProjection}
+          promotionCandidates={
+            canonicalReviewProjection
+              .reviewQueue
+              .filter(
+                (item) =>
+                  item.state ===
+                  "Approved for canonical promotion",
+              )
+          }
+          onPromoteCanonical={
+            handleCanonicalPromotion
+          }
           selectedCanonicalId={
             selection?.kind === "canonical-knowledge"
               ? selection.canonicalKnowledgeId

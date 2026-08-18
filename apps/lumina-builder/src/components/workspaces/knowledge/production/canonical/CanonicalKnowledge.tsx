@@ -1,4 +1,8 @@
 import {
+  useState,
+} from "react";
+
+import {
   Archive,
   BadgeCheck,
   BookMarked,
@@ -45,9 +49,22 @@ import type {
   CanonicalKnowledgeProjection,
 } from "../data/canonicalKnowledgeProjection";
 
+import type {
+  CanonicalReviewQueueSlot,
+} from "../data/canonicalReviewProjection";
+
 type CanonicalKnowledgeProps = {
   projection: CanonicalKnowledgeProjection;
+
+  promotionCandidates:
+    readonly CanonicalReviewQueueSlot[];
+
+  onPromoteCanonical: (
+    packageId: string,
+  ) => Promise<void>;
+
   selectedCanonicalId?: string;
+
   onCanonicalSelect: (
     capsuleId: string,
     canonicalId: string,
@@ -56,9 +73,68 @@ type CanonicalKnowledgeProps = {
 
 export function CanonicalKnowledge({
   projection,
+  promotionCandidates,
+  onPromoteCanonical,
   selectedCanonicalId,
   onCanonicalSelect,
 }: CanonicalKnowledgeProps) {
+  const [
+    promotionConfirmTarget,
+    setPromotionConfirmTarget,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    promotionBusy,
+    setPromotionBusy,
+  ] = useState<string | null>(
+    null,
+  );
+
+  const [
+    promotionError,
+    setPromotionError,
+  ] = useState<string | null>(
+    null,
+  );
+
+  async function promote(
+    packageId: string,
+  ) {
+    if (promotionBusy) {
+      return;
+    }
+
+    try {
+      setPromotionBusy(
+        packageId,
+      );
+
+      setPromotionError(
+        null,
+      );
+
+      await onPromoteCanonical(
+        packageId,
+      );
+
+      setPromotionConfirmTarget(
+        null,
+      );
+    } catch (error) {
+      setPromotionError(
+        error instanceof Error
+          ? error.message
+          : String(error),
+      );
+    } finally {
+      setPromotionBusy(
+        null,
+      );
+    }
+  }
+
   return (
     <section
       aria-labelledby="canonical-knowledge-title"
@@ -176,6 +252,203 @@ export function CanonicalKnowledge({
           </LuminaExecutiveMetricGrid>
         }
       />
+
+      <LuminaFlagshipPanel
+        title={null}
+        className="[&>div:nth-of-type(3)]:hidden"
+      >
+        <div className="relative z-10 p-5 sm:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="min-w-0">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-300/62">
+                Canonical promotion queue
+              </div>
+
+              <h3 className="mt-1 text-lg font-semibold text-sky-100">
+                Approved authority awaiting publication
+              </h3>
+
+              <p className="mt-2 max-w-3xl text-xs leading-5 text-sky-300/62">
+                Only packages carrying explicit governed approval appear here.
+                Canonical promotion is a separate publication action and never
+                occurs as a side effect of review.
+              </p>
+            </div>
+
+            <LuminaStatusBadge
+              variant={
+                promotionCandidates.length > 0
+                  ? "healthy"
+                  : "neutral"
+              }
+            >
+              {promotionCandidates.length} awaiting promotion
+            </LuminaStatusBadge>
+          </div>
+
+          {promotionError ? (
+            <div className="mt-4 rounded-[14px] border border-rose-300/18 bg-rose-300/[0.05] px-4 py-3 text-xs text-rose-100">
+              {promotionError}
+            </div>
+          ) : null}
+
+          {promotionCandidates.length === 0 ? (
+            <LuminaFlagshipCard
+              as="article"
+              className="mt-5 rounded-[18px] p-4"
+            >
+              <div className="relative z-10">
+                <div className="text-sm font-semibold text-sky-100">
+                  No approved packages awaiting canonical promotion
+                </div>
+
+                <div className="mt-2 text-xs leading-5 text-sky-300/58">
+                  Packages appear here only after Canonical Review records
+                  persisted approval evidence.
+                </div>
+              </div>
+            </LuminaFlagshipCard>
+          ) : (
+            <div
+              className="relative z-20 mt-5 max-h-[520px] min-h-0 overflow-y-auto overscroll-contain pr-2 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
+              aria-label="Capsules awaiting canonical decision"
+              tabIndex={0}
+              onWheel={(event) => {
+                event.stopPropagation();
+              }}
+            >
+              <div className="grid gap-3">
+              {promotionCandidates.map(
+                (candidate) => {
+                  const confirming =
+                    promotionConfirmTarget ===
+                    candidate.id;
+
+                  const busy =
+                    promotionBusy ===
+                    candidate.id;
+
+                  return (
+                    <LuminaFlagshipCard
+                      key={candidate.id}
+                      as="article"
+                      className="rounded-[18px] p-4"
+                    >
+                      <div className="relative z-10">
+                        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="break-words text-[10px] font-semibold uppercase tracking-[0.15em] text-emerald-300/68 [overflow-wrap:anywhere]">
+                                {candidate.id}
+                              </span>
+
+                              <LuminaStatusBadge variant="healthy">
+                                Approved
+                              </LuminaStatusBadge>
+                            </div>
+
+                            <h4 className="mt-2 break-words text-base font-semibold text-white [overflow-wrap:anywhere]">
+                              {candidate.title}
+                            </h4>
+
+                            <div className="mt-2 text-xs text-sky-300/60">
+                              {candidate.domain}
+                              {" · "}
+                              {candidate.authority}
+                            </div>
+
+                            <div className="mt-2 text-[11px] text-emerald-200/64">
+                              {candidate.reviewers}
+                            </div>
+                          </div>
+
+                          {!confirming ? (
+                            <button
+                              type="button"
+                              disabled={
+                                promotionBusy !==
+                                null
+                              }
+                              onClick={() => {
+                                setPromotionError(
+                                  null,
+                                );
+
+                                setPromotionConfirmTarget(
+                                  candidate.id,
+                                );
+                              }}
+                              className="shrink-0 rounded-full border border-emerald-300/28 bg-emerald-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:border-emerald-300/44 hover:bg-emerald-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                            >
+                              Promote to Canonical Knowledge
+                            </button>
+                          ) : null}
+                        </div>
+
+                        {confirming ? (
+                          <div className="mt-4 rounded-[16px] border border-amber-300/18 bg-amber-300/[0.045] p-4">
+                            <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-amber-200/72">
+                              Confirm canonical publication
+                            </div>
+
+                            <p className="mt-2 max-w-3xl text-xs leading-5 text-amber-100/68">
+                              This action publishes the approved package as
+                              Canonical Knowledge and preserves its review,
+                              provenance, lifecycle, authority, and
+                              supersession evidence.
+                            </p>
+
+                            <div className="mt-4 flex flex-wrap gap-2">
+                              <button
+                                type="button"
+                                disabled={
+                                  promotionBusy !==
+                                  null
+                                }
+                                onClick={() =>
+                                  void promote(
+                                    candidate.id,
+                                  )
+                                }
+                                className="rounded-full border border-emerald-300/30 bg-emerald-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-100 transition hover:bg-emerald-300/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                              >
+                                {busy
+                                  ? "Publishing…"
+                                  : "Confirm publication"}
+                              </button>
+
+                              <button
+                                type="button"
+                                disabled={
+                                  promotionBusy !==
+                                  null
+                                }
+                                onClick={() => {
+                                  setPromotionConfirmTarget(
+                                    null,
+                                  );
+
+                                  setPromotionError(
+                                    null,
+                                  );
+                                }}
+                                className="rounded-full border border-sky-300/16 bg-slate-950/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-200/72 transition hover:border-sky-300/30"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    </LuminaFlagshipCard>
+                  );
+                },
+              )}
+              </div>
+            </div>
+          )}
+        </div>
+      </LuminaFlagshipPanel>
 
       <div className="grid gap-5 2xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.55fr)]">
         <LuminaFlagshipPanel

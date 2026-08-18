@@ -273,11 +273,16 @@ export function createCanonicalReviewProjection(
             source.authority ??
             "Authority unavailable",
 
-          reviewers:
-            source.reviewHistory
-              .length > 0
-              ? `${source.reviewHistory.length} recorded decision${source.reviewHistory.length === 1 ? "" : "s"}`
-              : "Human decision pending",
+          reviewers: (() => {
+            const reviewHistory =
+              source.metadata
+                .reviewHistory ??
+              [];
+
+            return reviewHistory.length > 0
+              ? `${reviewHistory.length} recorded decision${reviewHistory.length === 1 ? "" : "s"}`
+              : "Human decision pending";
+          })(),
 
           conflict:
             source.reviewStatus ===

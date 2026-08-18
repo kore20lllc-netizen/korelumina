@@ -24,9 +24,12 @@ import type {
 } from "../manufacturing/index.js";
 
 interface ReviewMetadata {
+  packageId?: unknown;
+  packageVersion?: unknown;
   decision?: unknown;
   reviewerId?: unknown;
   reviewedAt?: unknown;
+  evidenceConsidered?: unknown;
   reason?: unknown;
 }
 
@@ -71,7 +74,9 @@ export class GovernedCanonicalPromotionService {
 
     if (
       knowledgePackage.state !==
-      "approved"
+        "approved" ||
+      knowledgePackage.approvalState !==
+        "approved"
     ) {
       throw new Error(
         "knowledge_package_not_approved",
@@ -86,16 +91,67 @@ export class GovernedCanonicalPromotionService {
 
     if (
       !review ||
+      review.packageId !==
+        knowledgePackage.id ||
+      review.packageVersion !==
+        knowledgePackage.version ||
       review.decision !==
         "approved" ||
       typeof review.reviewerId !==
         "string" ||
       !review.reviewerId.trim() ||
       typeof review.reviewedAt !==
-        "number"
+        "number" ||
+      !Array.isArray(
+        review.evidenceConsidered,
+      ) ||
+      review.evidenceConsidered
+        .length ===
+        0
     ) {
       throw new Error(
         "governed_approval_proof_missing",
+      );
+    }
+
+    const reviewHistory =
+      knowledgePackage.metadata
+        .reviewHistory;
+
+    if (
+      !Array.isArray(
+        reviewHistory,
+      ) ||
+      !reviewHistory.some(
+        (entry) =>
+          typeof entry ===
+            "object" &&
+          entry !==
+            null &&
+          (
+            entry as ReviewMetadata
+          ).packageId ===
+            knowledgePackage.id &&
+          (
+            entry as ReviewMetadata
+          ).packageVersion ===
+            knowledgePackage.version &&
+          (
+            entry as ReviewMetadata
+          ).decision ===
+            "approved" &&
+          (
+            entry as ReviewMetadata
+          ).reviewerId ===
+            review.reviewerId &&
+          (
+            entry as ReviewMetadata
+          ).reviewedAt ===
+            review.reviewedAt,
+      )
+    ) {
+      throw new Error(
+        "governed_approval_history_missing",
       );
     }
 
@@ -192,6 +248,76 @@ export class GovernedCanonicalPromotionService {
 
                 reviewReason:
                   review.reason,
+
+                approvalState:
+                  knowledgePackage
+                    .approvalState,
+
+                reviewEvidence: {
+                  packageId:
+                    review.packageId,
+
+                  packageVersion:
+                    review.packageVersion,
+
+                  decision:
+                    review.decision,
+
+                  reviewerId:
+                    review.reviewerId,
+
+                  reviewedAt:
+                    review.reviewedAt,
+
+                  evidenceConsidered:
+                    [
+                      ...(
+                        review.evidenceConsidered as
+                          string[]
+                      ),
+                    ],
+
+                  reason:
+                    review.reason,
+                },
+
+                reviewHistory:
+                  reviewHistory.map(
+                    (entry) => ({
+                      ...(
+                        entry as
+                          Record<
+                            string,
+                            unknown
+                          >
+                      ),
+                    }),
+                  ),
+
+                lifecycleHistory:
+                  knowledgePackage
+                    .lifecycleHistory
+                    .map(
+                      (event) => ({
+                        ...event,
+                      }),
+                    ),
+
+                supersession: {
+                  supersedes:
+                    [
+                      ...knowledgePackage
+                        .supersession
+                        .supersedes,
+                    ],
+
+                  supersededBy:
+                    [
+                      ...knowledgePackage
+                        .supersession
+                        .supersededBy,
+                    ],
+                },
               },
             },
           };

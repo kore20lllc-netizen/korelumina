@@ -1311,6 +1311,133 @@ export async function executeCanonicalReviewPolicy(
   return result;
 }
 
+export interface CanonicalPromotionCanonicalItem {
+  id:
+    string;
+
+  type:
+    string;
+
+  title:
+    string;
+
+  summary:
+    string;
+
+  confidence:
+    number;
+
+  evidenceRefs:
+    string[];
+
+  relationships:
+    Record<
+      string,
+      string[]
+    >;
+
+  createdAt:
+    number;
+
+  updatedAt:
+    number;
+
+  status:
+    "canonical";
+
+  metadata:
+    Record<
+      string,
+      unknown
+    >;
+}
+
+export interface CanonicalPromotionPackageView
+  extends Omit<
+    CanonicalReviewPackageView,
+    | "reviewStatus"
+    | "reviewClassification"
+  > {
+  state:
+    "canonical";
+
+  approvalState:
+    "approved";
+
+  metadata:
+    CanonicalReviewPackageView["metadata"] & {
+      canonicalization?: {
+        canonicalizedAt:
+          number;
+
+        canonicalItemIds:
+          string[];
+      };
+    };
+}
+
+export interface CanonicalPromotionResult {
+  ok:
+    true;
+
+  knowledgePackage:
+    CanonicalPromotionPackageView;
+
+  canonicalItems:
+    CanonicalPromotionCanonicalItem[];
+}
+
+export async function promoteCanonicalKnowledgePackage(
+  packageId:
+    string,
+): Promise<CanonicalPromotionResult> {
+  const normalizedPackageId =
+    packageId.trim();
+
+  if (
+    !normalizedPackageId
+  ) {
+    throw new Error(
+      "knowledge_package_id_required",
+    );
+  }
+
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/canonical-promotion`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            packageId:
+              normalizedPackageId,
+          }),
+      },
+    );
+
+  const result =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      result?.error ??
+      "canonical_promotion_failed",
+    );
+  }
+
+  return result;
+}
+
 export type KnowledgeManufacturingStage =
   | "Evidence Intake"
   | "Documentation Compiler"

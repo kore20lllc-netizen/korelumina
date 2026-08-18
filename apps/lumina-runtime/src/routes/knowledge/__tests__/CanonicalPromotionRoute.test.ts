@@ -235,6 +235,10 @@ for (
       "forged approved state without proof cannot promote",
       "governed_approval_proof_missing",
     ],
+    [
+      "approved package without immutable review history cannot promote",
+      "governed_approval_history_missing",
+    ],
   ] as const
 ) {
   test(
