@@ -483,6 +483,75 @@ Checkpoint creation MUST continue to use the existing checksum-through-checkpoin
 
 An empty READY replay may complete without creating a checkpoint because no manifest source has reached a terminal disposition.
 
+Replay Runner V1 composes the existing governed pipeline:
+
+READY Manifest Build
+→ Replay Plan
+→ Replay Execution
+→ terminal execution steps
+→ final runner outcome
+
+The runner MUST NOT define a second manifest, planning, execution, state, checkpoint, or admission model.
+
+Replay Runner V1 MUST execute manifest positions sequentially through the existing Replay Execution contract.
+
+The runner MUST stop immediately on the first failed execution step.
+
+A runner failure MUST return:
+
+- outcome `FAILED`;
+- the failed manifest position;
+- the failed Historical Source Identity when available;
+- the failure message;
+- the last valid Replay Execution snapshot;
+- the last valid checkpoint.
+
+Runner failure MUST NOT synthesize a terminal source disposition for the failed attempt.
+
+Runner failure MUST NOT advance the failed manifest position.
+
+Runner failure MUST NOT execute any later manifest position.
+
+The last-valid execution state may therefore remain `running` at the failed position while the runner outcome is `FAILED`. Runner outcome and replay-state position are separate truths and MUST NOT be conflated.
+
+A successfully exhausted plan returns runner outcome `COMPLETED` only when the existing Replay State has reached `completed`.
+
+Replay Runner timestamps MUST be provided by an explicit execution-time source. The runner MUST NOT introduce hidden wall-clock ordering into deterministic replay behavior.
+
+Replay Runner V1 MUST remain independent from persistence, runtime routes, UI, and the production Knowledge Operations admission adapter.
+
+A failed replay MAY be restarted from the beginning of the same deterministic manifest.
+
+Runner restart safety depends on the Genesis Admission Identity idempotency contract.
+
+When a restarted replay encounters an unchanged Historical Source version that was successfully admitted during an earlier failed attempt:
+
+- it MUST resolve to the same Genesis Admission Identity;
+- the admission adapter MUST reuse the same durable Evidence identity;
+- a duplicate Evidence object MUST NOT be created;
+- the replay may reconstruct its state/checkpoint deterministically from the beginning;
+- repeating the same replay/manifest/position occurrence MUST NOT create duplicate occurrence provenance.
+
+A later Historical Source that was never successfully admitted remains independently admissible during the retry.
+
+Runner restart therefore provides at-least-once execution attempts with effectively-once Evidence creation per repository-scoped Historical Source version.
+
+A failed replay MAY be restarted from the beginning of the same deterministic manifest.
+
+Runner restart safety depends on the Genesis Admission Identity idempotency contract.
+
+When a restarted replay encounters an unchanged Historical Source version that was successfully admitted during an earlier failed attempt:
+
+- it MUST resolve to the same Genesis Admission Identity;
+- the admission adapter MUST reuse the same durable Evidence identity;
+- a duplicate Evidence object MUST NOT be created;
+- the replay may reconstruct its state/checkpoint deterministically from the beginning;
+- repeating the same replay/manifest/position occurrence MUST NOT create duplicate occurrence provenance.
+
+A later Historical Source that was never successfully admitted remains independently admissible during the retry.
+
+Runner restart therefore provides at-least-once execution attempts with effectively-once Evidence creation per repository-scoped Historical Source version.
+
 `discoveredAt` and other operational discovery-attempt timestamps are retained for provenance and observability but MUST NOT participate in manifest identity.
 
 The manifest replay-contract version and Replay Scope replay-contract version MUST agree. A contradictory version declaration is invalid and MUST be rejected.
