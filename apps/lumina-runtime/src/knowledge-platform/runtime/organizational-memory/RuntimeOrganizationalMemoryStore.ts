@@ -1,5 +1,7 @@
-import fs from "node:fs";
-import path from "node:path";
+
+import {
+  resolveKnowledgeStoragePath,
+} from "../../../knowledge-preservation/storage/index.js";
 
 import {
   FileStore,
@@ -11,66 +13,13 @@ import type {
   OrganizationalMemoryRecord,
 } from "../../../knowledge/organizational-memory/index.js";
 
-function resolveRepositoryRoot(): string {
-  let current =
-    process.cwd();
-
-  for (
-    let depth = 0;
-    depth < 8;
-    depth += 1
-  ) {
-    const packageJson =
-      path.join(
-        current,
-        "package.json",
-      );
-
-    const runtimePackage =
-      path.join(
-        current,
-        "apps",
-        "lumina-runtime",
-        "package.json",
-      );
-
-    if (
-      fs.existsSync(packageJson) &&
-      fs.existsSync(runtimePackage)
-    ) {
-      return current;
-    }
-
-    const parent =
-      path.dirname(
-        current,
-      );
-
-    if (
-      parent === current
-    ) {
-      break;
-    }
-
-    current =
-      parent;
-  }
-
-  throw new Error(
-    "korelumina_repository_root_not_found",
-  );
-}
-
 export class RuntimeOrganizationalMemoryStore {
   private readonly store:
     KnowledgeStore;
 
   constructor(
     root =
-      path.join(
-        resolveRepositoryRoot(),
-        "runtime",
-        "knowledge",
+      resolveKnowledgeStoragePath(
         "organizational-memory",
       ),
   ) {
