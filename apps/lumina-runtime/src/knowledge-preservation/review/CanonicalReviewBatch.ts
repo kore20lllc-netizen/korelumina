@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  resolveKnowledgeStoragePath,
+} from "../storage/index.js";
+
 import type {
   CanonicalReviewDecision,
   CanonicalReviewService,
@@ -46,59 +50,8 @@ export interface CanonicalReviewBatch {
     number | null;
 }
 
-function resolveRepositoryRoot(): string {
-  let current =
-    process.cwd();
-
-  for (
-    let depth = 0;
-    depth < 8;
-    depth += 1
-  ) {
-    if (
-      fs.existsSync(
-        path.join(
-          current,
-          "package.json",
-        ),
-      ) &&
-      fs.existsSync(
-        path.join(
-          current,
-          "apps",
-          "lumina-runtime",
-          "package.json",
-        ),
-      )
-    ) {
-      return current;
-    }
-
-    const parent =
-      path.dirname(
-        current,
-      );
-
-    if (
-      parent === current
-    ) {
-      break;
-    }
-
-    current =
-      parent;
-  }
-
-  throw new Error(
-    "korelumina_repository_root_not_found",
-  );
-}
-
 const batchRoot =
-  path.join(
-    resolveRepositoryRoot(),
-    "runtime",
-    "knowledge",
+  resolveKnowledgeStoragePath(
     "review-batches",
   );
 
