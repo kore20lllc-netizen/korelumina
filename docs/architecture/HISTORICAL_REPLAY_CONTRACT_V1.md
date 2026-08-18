@@ -758,6 +758,28 @@ Git parent relationships remain the authority for commit ancestry.
 
 Documentation recovery MUST preserve document authority and governance metadata.
 
+Documentation discovery MUST use deterministic repository-relative traversal and MUST NOT depend on filesystem return order.
+
+Document Historical Source Identity MUST be based on stable repository provenance rather than document content. Content checksum remains the mutation/version signal.
+
+Documentation discovery MUST NOT follow symbolic links outside the governed repository traversal.
+
+A trustworthy historical timestamp SHOULD be resolved from repository history or explicit governed document metadata. If no trustworthy historical timestamp exists, discovery MUST NOT invent one; the source remains represented but BLOCKED with a timestamp-unavailable condition.
+
+Documentation Discovery V1 represents the currently checked-out governed document version. When Git history is used for that version, its timestamp semantics are the document path's last repository change time (`git-last-change-time`), not original document creation time.
+
+Documentation Discovery V1 MUST NOT imply that earlier document versions have been reconstructed.
+
+Historical document-version reconstruction belongs to Git History Discovery and later historical reconciliation.
+
+Operational `discoveredAt` time is provenance only and MUST remain distinct from historical time.
+
+Documents outside the selected replay scope SHOULD remain represented with an explicit exclusion disposition rather than disappearing from the discovery record.
+
+The default governed-document allowlist for the first Genesis corpus includes explicit Canon, Constitution, Governance, ADR, RFC, Architecture, Specification, Roadmap, Certification, and Blueprint locations.
+
+Archived documents and handoffs are historical evidence and MUST NOT enter this current-governed-document discoverer implicitly. They require a later explicit historical-source scope.
+
 Documents MUST NOT be treated equally merely because they are Markdown files.
 
 Replay must preserve distinctions including:

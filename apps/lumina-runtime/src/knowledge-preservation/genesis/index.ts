@@ -7,3 +7,4 @@ export * from "./GenesisReplayIdentity.js";
 export * from "./GenesisReplayCheckpoint.js";
 export * from "./GenesisReplayState.js";
 export * from "./HistoricalSourceDiscovery.js";
+export * from "./DocumentationHistoricalSourceDiscoverer.js";
