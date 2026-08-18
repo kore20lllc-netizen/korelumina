@@ -385,6 +385,14 @@ A replay scope defines:
 
 A full Genesis replay uses the complete approved historical scope.
 
+Replay Scope MUST explicitly declare whether the replay is `full` or `partial`.
+
+A `full` replay scope is unbounded by historical start/end, is not restricted to a Git branch/ref, includes every governed Evidence type, and contains no source or Evidence-type exclusions.
+
+A Git branch/ref boundary is selective historical scope and therefore MUST be represented as `partial`.
+
+Any chronologically bounded or otherwise selectively scoped replay MUST be represented as `partial`.
+
 Partial replay is permitted for:
 
 - recovery;

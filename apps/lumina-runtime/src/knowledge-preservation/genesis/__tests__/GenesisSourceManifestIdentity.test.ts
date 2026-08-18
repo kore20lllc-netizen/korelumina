@@ -20,6 +20,9 @@ function scope(
     > = {},
 ): GenesisReplayScope {
   return {
+    mode:
+      "partial",
+
     repository:
       "kore20lllc-netizen/korelumina",
 
@@ -800,6 +803,69 @@ test(
       canonical.entries[1]
         .historicalSourceId,
       zEntry.historicalSourceId,
+    );
+  },
+);
+
+
+test(
+  "semantically identical normalized scope strings produce the same manifest identity",
+  () => {
+    const entries = [
+      historicalSourceToManifestEntry(
+        firstSource,
+      ),
+    ];
+
+    const normalized =
+      createGenesisSourceManifestId({
+        replayContractVersion:
+          "1.0",
+
+        scope:
+          scope({
+            repository:
+              "kore20lllc-netizen/korelumina",
+
+            ref:
+              "main",
+
+            governancePolicyVersion:
+              "constitutional-governance-v1",
+
+            replayContractVersion:
+              "1.0",
+          }),
+
+        entries,
+      });
+
+    const padded =
+      createGenesisSourceManifestId({
+        replayContractVersion:
+          " 1.0 ",
+
+        scope:
+          scope({
+            repository:
+              " kore20lllc-netizen/korelumina ",
+
+            ref:
+              " main ",
+
+            governancePolicyVersion:
+              " constitutional-governance-v1 ",
+
+            replayContractVersion:
+              " 1.0 ",
+          }),
+
+        entries,
+      });
+
+    assert.equal(
+      normalized,
+      padded,
     );
   },
 );

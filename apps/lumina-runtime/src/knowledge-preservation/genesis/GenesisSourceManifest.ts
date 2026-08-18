@@ -11,7 +11,14 @@ import type {
 export const GENESIS_REPLAY_CONTRACT_VERSION =
   "1.0";
 
+export type GenesisReplayScopeMode =
+  | "full"
+  | "partial";
+
 export interface GenesisReplayScope {
+  mode:
+    GenesisReplayScopeMode;
+
   repository:
     string;
 

@@ -7,6 +7,10 @@ import type {
   GenesisSourceManifestEntry,
 } from "./GenesisSourceManifest.js";
 
+import {
+  validateGenesisReplayScope,
+} from "./GenesisReplayScope.js";
+
 export interface GenesisSourceManifestIdentityInput {
   replayContractVersion:
     string;
@@ -125,12 +129,19 @@ function canonicalizeScope(
   scope:
     GenesisReplayScope,
 ): GenesisReplayScope {
+  validateGenesisReplayScope(
+    scope,
+  );
+
   return {
+    mode:
+      scope.mode,
+
     repository:
-      scope.repository,
+      scope.repository.trim(),
 
     ref:
-      scope.ref,
+      scope.ref?.trim(),
 
     historicalStart:
       scope.historicalStart,
@@ -154,10 +165,14 @@ function canonicalizeScope(
     ].sort(),
 
     governancePolicyVersion:
-      scope.governancePolicyVersion,
+      scope
+        .governancePolicyVersion
+        .trim(),
 
     replayContractVersion:
-      scope.replayContractVersion,
+      scope
+        .replayContractVersion
+        .trim(),
   };
 }
 
@@ -225,8 +240,8 @@ function assertReplayContractVersionConsistency(
     GenesisSourceManifestIdentityInput,
 ): void {
   if (
-    input.replayContractVersion !==
-    input.scope.replayContractVersion
+    input.replayContractVersion.trim() !==
+    input.scope.replayContractVersion.trim()
   ) {
     throw new Error(
       "genesis_manifest_replay_contract_version_mismatch",
@@ -300,7 +315,7 @@ export function canonicalizeGenesisSourceManifestIdentityInput(
 
   return {
     replayContractVersion:
-      input.replayContractVersion,
+      input.replayContractVersion.trim(),
 
     scope:
       canonicalizeScope(
