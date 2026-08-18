@@ -3,6 +3,14 @@ import type {
   GenesisReplayCheckpointDisposition,
 } from "./GenesisReplayCheckpoint.js";
 
+import type {
+  GenesisReplayAdmissionIdentity,
+} from "./GenesisReplayAdmission.js";
+
+import {
+  createGenesisReplayAdmissionIdentity,
+} from "./GenesisReplayAdmission.js";
+
 import {
   createGenesisReplayCheckpoint,
 } from "./GenesisReplayCheckpoint.js";
@@ -44,6 +52,9 @@ export interface GenesisReplayAdmissionRequest {
   manifestId:
     string;
 
+  repository:
+    string;
+
   manifestIndex:
     number;
 
@@ -52,6 +63,12 @@ export interface GenesisReplayAdmissionRequest {
 
   manifestEntry:
     GenesisSourceManifestEntry;
+
+  admissionIdentity:
+    GenesisReplayAdmissionIdentity;
+
+  executionTimestamp:
+    number;
 }
 
 export interface GenesisReplayAdmissionResult {
@@ -414,6 +431,9 @@ async function dispositionForPlanEntry(
 
     admissionAdapter:
       GenesisReplayAdmissionAdapter;
+
+    executionTimestamp:
+      number;
   },
 ): Promise<
   GenesisReplayCheckpointDisposition
@@ -422,26 +442,45 @@ async function dispositionForPlanEntry(
     input.planEntry.action
   ) {
     case "ADMIT": {
+      const admissionRequestBase = {
+        replayId:
+          input.plan.replayId,
+
+        manifestId:
+          input.manifest
+            .manifestId,
+
+        repository:
+          input.manifest
+            .scope
+            .repository,
+
+        manifestIndex:
+          input.planEntry
+            .manifestIndex,
+
+        planEntry:
+          input.planEntry,
+
+        manifestEntry:
+          input.manifestEntry,
+      };
+
+      const admissionIdentity =
+        createGenesisReplayAdmissionIdentity(
+          admissionRequestBase,
+        );
+
       const admission =
         await input
           .admissionAdapter
           .admit({
-            replayId:
-              input.plan.replayId,
+            ...admissionRequestBase,
 
-            manifestId:
-              input.manifest
-                .manifestId,
+            admissionIdentity,
 
-            manifestIndex:
-              input.planEntry
-                .manifestIndex,
-
-            planEntry:
-              input.planEntry,
-
-            manifestEntry:
-              input.manifestEntry,
+            executionTimestamp:
+              input.executionTimestamp,
           });
 
       const evidenceId =
@@ -565,6 +604,9 @@ export async function executeGenesisReplayNext(
       manifestEntry,
 
       admissionAdapter,
+
+      executionTimestamp:
+        occurredAt,
     });
 
   const state =

@@ -420,6 +420,49 @@ Execution MUST process exactly one deterministic manifest position per execution
 
 The Admission Adapter is an interface boundary, not the Knowledge Operations implementation.
 
+Every `ADMIT` request MUST carry a deterministic Genesis Admission Identity representing one repository-scoped Historical Source version.
+
+Genesis Admission Identity MUST be derived from:
+
+- repository identity;
+- Historical Source Identity;
+- source checksum;
+- Evidence type;
+- provenance locator.
+
+Genesis Admission Identity MUST NOT include Replay Identity, manifest identity, manifest position, or execution time.
+
+Replay, manifest, manifest-position, and execution-time values are admission-occurrence provenance. They MUST remain traceable but MUST NOT create a second Evidence identity for an unchanged Historical Source version.
+
+Therefore, the same unchanged Historical Source version encountered by multiple replay manifests or scopes MUST resolve to the same Genesis Admission Identity and the same durable Evidence identity.
+
+A changed source checksum represents a different Historical Source version and MUST produce a different Genesis Admission Identity.
+
+Repository namespace MUST participate in identity so equivalent native/path identities from separate repositories do not collide.
+
+Repeated admission of the same Genesis Admission Identity MUST resolve to the same durable Evidence identity or fail as an idempotency conflict.
+
+Repeated observations of that identity from different replays MUST preserve the additional replay/manifest occurrence lineage even when no new Evidence object is created.
+
+Genesis does not require the future production Evidence store to use the Genesis Admission Identity as its own Evidence ID. The production adapter MUST preserve an explicit mapping between them.
+
+Admission payload transfer MUST preserve at minimum:
+
+- Evidence type;
+- Historical Source Identity;
+- source checksum;
+- provenance/content reference;
+- historical observation timestamp;
+- execution capture timestamp;
+- Replay Identity;
+- manifest identity and manifest position;
+- authority classification;
+- historical timestamp source.
+
+Historical observation time and replay capture time MUST remain distinct.
+
+A synthetic admission adapter MAY materialize in-memory Evidence for end-to-end Genesis testing, but it MUST validate that synthetic Evidence against the existing Evidence Intake Contract and MUST NOT write to production Knowledge Operations storage.
+
 A successful admission adapter call MUST return a non-empty Evidence identity before replay state may advance to terminal `ADMITTED`.
 
 Admission failure MUST be replay-atomic.

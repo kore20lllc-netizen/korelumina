@@ -10,6 +10,7 @@ import type {
 } from "../index.js";
 
 import {
+  GenesisSyntheticReplayAdmissionAdapter,
   createGenesisReplayId,
   createGenesisSourceManifestId,
   executeGenesisReplayNext,
@@ -1323,6 +1324,81 @@ test(
       [
         "evidence:a",
       ],
+    );
+  },
+);
+
+test(
+  "synthetic admission adapter executes ADMIT end-to-end without production Evidence intake",
+  async () => {
+    const sourceManifest =
+      manifest([
+        manifestEntry({
+          id:
+            "synthetic",
+
+          checksum:
+            "sha256:synthetic",
+
+          eligibility:
+            "eligible",
+        }),
+      ]);
+
+    const syntheticAdapter =
+      new GenesisSyntheticReplayAdmissionAdapter();
+
+    const started =
+      startGenesisReplayExecution({
+        plan:
+          plan(
+            sourceManifest,
+          ),
+
+        manifest:
+          sourceManifest,
+
+        startedAt:
+          1000,
+      });
+
+    const result =
+      await executeGenesisReplayNext({
+        execution:
+          started,
+
+        admissionAdapter:
+          syntheticAdapter,
+
+        occurredAt:
+          2000,
+      });
+
+    assert.equal(
+      result.execution
+        .state.status,
+      "completed",
+    );
+
+    assert.equal(
+      result.disposition
+        ?.disposition,
+      "ADMITTED",
+    );
+
+    assert.equal(
+      syntheticAdapter
+        .listRecords()
+        .length,
+      1,
+    );
+
+    assert.equal(
+      syntheticAdapter
+        .listRecords()[0]
+        .evidence.id,
+      result.disposition
+        ?.evidenceId,
     );
   },
 );
