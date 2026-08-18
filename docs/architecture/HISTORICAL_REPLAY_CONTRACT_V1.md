@@ -372,6 +372,34 @@ Replay orchestration MUST require an explicit manifest-build readiness gate befo
 
 Discovery errors MUST therefore never be silently converted into a smaller apparently-complete Genesis Corpus.
 
+Before replay execution, a Replay Plan MUST be derived from a `READY` Genesis Source Manifest build.
+
+The Replay Plan MUST reuse the existing deterministic Replay Identity contract. It MUST NOT define a second replay identifier.
+
+Replay Plan sequence MUST preserve manifest order exactly. The planner MUST NOT independently reorder Historical Sources.
+
+Each manifest entry is classified:
+
+- `eligible` -> planned action `ADMIT`;
+- `excluded` -> planned action `SKIP_SCOPE`;
+- `blocked` -> planned action `BLOCK`.
+
+`SKIP_SCOPE` means the Historical Source is outside the already-governed Replay Scope. It is not a generic governance approval to discard knowledge.
+
+Every `SKIP_SCOPE` action MUST retain the explicit governed scope-exclusion reason.
+
+Replay planning MUST distinguish deterministic scope exclusion from any future human- or policy-approved skip decision.
+
+During later execution, a valid `SKIP_SCOPE` plan action may produce the terminal replay disposition `SKIPPED` while retaining its governed scope reason. Other forms of `SKIPPED` disposition require their own governance basis.
+
+Planning an `ADMIT` action is not Evidence admission. Planning MUST NOT create Evidence or advance replay execution state.
+
+A plan containing any `BLOCK` action is itself `BLOCKED` and MUST NOT be started until the blocked Historical Source is reconciled.
+
+A `BLOCKED` manifest build MUST NOT produce a Replay Plan.
+
+Replay Plan entries MUST retain Historical Source Identity, manifest position, and source checksum so later execution can verify that the source being processed is the source that was planned.
+
 `discoveredAt` and other operational discovery-attempt timestamps are retained for provenance and observability but MUST NOT participate in manifest identity.
 
 The manifest replay-contract version and Replay Scope replay-contract version MUST agree. A contradictory version declaration is invalid and MUST be rejected.
