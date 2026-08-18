@@ -587,6 +587,38 @@ Resume MUST continue from the persisted `currentManifestIndex`; it MUST NOT repl
 
 Tests for Replay Persistence MUST use isolated temporary storage roots and MUST NOT write synthetic Genesis artifacts into production `runtime-data/genesis` or production Knowledge Operations stores.
 
+Production Evidence Admission Adapter V1 is the first governed bridge from Genesis Replay into the certified Knowledge Operations lifecycle.
+
+The production adapter MUST reuse the existing `KnowledgePreservationPlatform.preserve()` boundary. Genesis MUST NOT create a parallel Evidence Intake implementation.
+
+The adapter MUST accept only Replay Plan action `ADMIT` for a manifest source that remains `eligible`.
+
+Before production admission, the adapter MUST preserve the deterministic Genesis Admission Identity and deterministic Evidence identity contract.
+
+A repeated unchanged Historical Source version MUST reuse the same durable Evidence identity and MUST NOT create a second Knowledge Manufacturing Run.
+
+The existing Knowledge Manufacturing Run is the durable production witness that the deterministic Evidence identity has already entered Knowledge Operations.
+
+Genesis admission is concerned with successful Evidence Intake, not with silently replacing downstream Knowledge Operations governance.
+
+If Evidence Intake completed but a later Knowledge Operations manufacturing stage fails, the existing manufacturing run remains authoritative for that downstream failure. Genesis MUST NOT manufacture a second Evidence object or second run to retry the same source version.
+
+If Evidence Intake itself did not complete, the production adapter MUST fail and Genesis Replay MUST NOT record terminal `ADMITTED`.
+
+A downstream Knowledge Operations failure that occurs after Evidence Intake completed MUST NOT cause Genesis to create a second Evidence object or second Knowledge Manufacturing Run on retry.
+
+The pre-existing failed manufacturing run remains authoritative for that source-version admission. Genesis may truthfully retain `ADMITTED` at its Evidence boundary while Knowledge Operations truthfully retains the downstream manufacturing failure.
+
+An Evidence Intake failure is different. A run whose Evidence Intake stage never completed MUST NOT be interpreted as prior successful Genesis admission.
+
+Retrying the same failed-intake source version MUST remain non-admitted unless a future governed recovery mechanism explicitly resolves that failed Knowledge Manufacturing Run. The adapter MUST NOT bypass or replace the failed run merely to force replay progress.
+
+Production admission MUST continue through the existing certified Knowledge Operations lifecycle and MUST preserve the existing Canonical Review governance boundary.
+
+Genesis MUST NOT automatically approve Canonical Review, promote Canonical Knowledge, or adapt Organizational Memory.
+
+Production-adapter tests MUST execute under isolated test Knowledge storage and MUST NOT mutate legitimate production `runtime/knowledge`.
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.

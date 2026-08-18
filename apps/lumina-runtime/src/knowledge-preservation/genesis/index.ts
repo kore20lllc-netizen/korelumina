@@ -15,3 +15,4 @@ export * from "./GenesisReplayExecution.js";
 export * from "./GenesisReplayAdmission.js";
 export * from "./GenesisReplayRunner.js";
 export * from "./GenesisReplayPersistence.js";
+export * from "./GenesisProductionReplayAdmissionAdapter.js";

@@ -312,6 +312,15 @@ export function genesisAdmissionRequestToSyntheticEvidence(
   };
 }
 
+export function genesisReplayAdmissionRequestToEvidence(
+  request:
+    GenesisReplayAdmissionRequest,
+): EvidenceItem {
+  return genesisAdmissionRequestToSyntheticEvidence(
+    request,
+  ).evidence;
+}
+
 export class GenesisSyntheticReplayAdmissionAdapter
   implements GenesisReplayAdmissionAdapter
 {
