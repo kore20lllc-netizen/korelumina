@@ -730,6 +730,20 @@ It does not override stronger governing evidence.
 
 Git history is a primary Genesis source.
 
+Git History Discovery V1 reconstructs immutable commit records reachable from the approved Replay Scope.
+
+Commit SHA is the native immutable Historical Source Identity key.
+
+Git parent topology and historical replay chronology are separate dimensions. Parent SHAs define ancestry; replay chronology uses the governed historical timestamp ordering contract.
+
+For commit sources, committer time is the V1 historical replay timestamp. Author time MUST also be retained as provenance and MUST NOT be discarded.
+
+A ref-bounded partial replay discovers commits reachable from that ref. An unbounded replay discovers commits across all local repository refs.
+
+Chronological start/end boundaries SHOULD preserve reachable commits in discovery while marking out-of-range commits excluded, rather than erasing their existence from the discovered history.
+
+Direct branch/tag refs pointing at a commit MAY be retained when recoverable. Genesis MUST NOT infer false ancestry or causation from ref names.
+
 Commit recovery MUST preserve at minimum:
 
 - commit SHA;
@@ -746,7 +760,17 @@ Commit recovery MUST preserve at minimum:
 
 Git topology MUST be preserved independently from chronological replay order.
 
+Changed-path references MUST be deterministic and MUST NOT depend on Git command return ordering.
+
+For non-root commits, Git History Discovery SHOULD retain changed paths relative to each parent. A deterministic union MAY also be exposed for indexing and search.
+
+For merge commits, parent-relative changed-path sets MUST remain distinguishable so Genesis does not erase merge topology.
+
+Annotated tag refs MUST be peeled to their referenced commit when associating refs with commit Historical Sources. The tag ref name itself remains provenance; the annotated tag object's SHA MUST NOT be mistaken for the commit SHA.
+
 Historical Replay MUST NOT flatten merge ancestry into false linear causation.
+
+Historical Replay MUST NOT reinterpret timestamp order as Git parentage.
 
 Chronological order is used for education and reconstruction.
 
