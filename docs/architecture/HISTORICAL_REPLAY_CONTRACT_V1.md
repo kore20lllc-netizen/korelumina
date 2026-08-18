@@ -501,9 +501,15 @@ A checkpoint MUST contain:
 
 Checkpoint advancement occurs only after a source reaches a terminal replay disposition:
 
-- admitted;
-- explicitly skipped;
-- explicitly blocked.
+- ADMITTED;
+- SKIPPED;
+- BLOCKED.
+
+`ADMITTED` MUST retain the admitted Evidence identity.
+
+`SKIPPED` and `BLOCKED` MUST retain an explicit reason.
+
+A checkpoint MUST represent a contiguous completed prefix of the deterministic manifest. It MUST NOT advance past a source that has no terminal disposition.
 
 A source currently being processed MUST NOT advance the checkpoint.
 
@@ -518,6 +524,14 @@ A checkpoint may resume only when:
 - replay-contract version matches;
 - replay scope matches;
 - source checksums through the checkpoint remain unchanged.
+
+The checkpoint MUST retain the Historical Source Identity and source checksum for every source in its completed manifest prefix.
+
+Resume validation MUST compare those retained source snapshots against the current manifest rather than relying only on the manifest identifier.
+
+A checksum mutation before or at the checkpoint invalidates resume.
+
+A source change strictly after the checkpoint does not invalidate the integrity of the already-completed prefix, although it may alter the resulting manifest/replay plan under higher-level reconciliation.
 
 If these conditions fail, automatic resume MUST stop.
 

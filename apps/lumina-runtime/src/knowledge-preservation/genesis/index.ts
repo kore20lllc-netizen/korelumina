@@ -4,3 +4,4 @@ export * from "./GenesisSourceManifest.js";
 export * from "./GenesisSourceManifestIdentity.js";
 export * from "./GenesisReplayScope.js";
 export * from "./GenesisReplayIdentity.js";
+export * from "./GenesisReplayCheckpoint.js";
