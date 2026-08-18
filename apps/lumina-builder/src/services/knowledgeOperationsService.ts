@@ -1438,6 +1438,150 @@ export async function promoteCanonicalKnowledgePackage(
   return result;
 }
 
+export interface OrganizationalMemoryAdaptationInput {
+  packageId:
+    string;
+
+  organizationId:
+    string;
+
+  projectId?:
+    string;
+
+  teamId?:
+    string;
+}
+
+export interface OrganizationalMemoryAdaptationRecord {
+  id:
+    string;
+
+  organizationId:
+    string;
+
+  projectId?:
+    string;
+
+  teamId?:
+    string;
+
+  title:
+    string;
+
+  summary:
+    string;
+
+  source:
+    string;
+
+  references:
+    string[];
+
+  governance?:
+    Record<
+      string,
+      unknown
+    >;
+
+  createdAt:
+    string;
+}
+
+export interface OrganizationalMemoryAdaptationResult {
+  ok:
+    true;
+
+  packageId:
+    string;
+
+  packageState:
+    "adapted";
+
+  records:
+    OrganizationalMemoryAdaptationRecord[];
+}
+
+export async function adaptCanonicalKnowledgeToOrganizationalMemory(
+  input:
+    OrganizationalMemoryAdaptationInput,
+): Promise<OrganizationalMemoryAdaptationResult> {
+  const packageId =
+    input.packageId.trim();
+
+  const organizationId =
+    input.organizationId.trim();
+
+  if (
+    !packageId
+  ) {
+    throw new Error(
+      "knowledge_package_id_required",
+    );
+  }
+
+  if (
+    !organizationId
+  ) {
+    throw new Error(
+      "organization_id_required",
+    );
+  }
+
+  const response =
+    await fetch(
+      `${RUNTIME_API}/api/knowledge/organizational-memory-adaptation`,
+      {
+        method:
+          "POST",
+
+        headers:
+          getRuntimeCallerHeaders({
+            "Content-Type":
+              "application/json",
+          }),
+
+        body:
+          JSON.stringify({
+            packageId,
+
+            organizationId,
+
+            projectId:
+              input.projectId
+                ?.trim() ||
+              undefined,
+
+            teamId:
+              input.teamId
+                ?.trim() ||
+              undefined,
+
+            generalization: {
+              generalized:
+                true,
+
+              customerSpecificContentRetained:
+                false,
+            },
+          }),
+      },
+    );
+
+  const result =
+    await response.json();
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      result?.error ??
+      "organizational_memory_adaptation_failed",
+    );
+  }
+
+  return result;
+}
+
 export type KnowledgeManufacturingStage =
   | "Evidence Intake"
   | "Documentation Compiler"
