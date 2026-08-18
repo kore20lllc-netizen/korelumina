@@ -224,7 +224,7 @@ Git:
 - commit SHA
 
 Document:
-- repository-relative path plus immutable content checksum
+- repository-relative stable provenance locator
 
 Conversation:
 - conversation identifier plus message/event sequence
@@ -276,7 +276,13 @@ Historical Source Identity MUST NOT depend on:
 - array position;
 - current machine identity.
 
-If a source lacks a native immutable identifier, its source identity MUST be deterministically derived from its provenance locator and content checksum.
+If a source lacks a native immutable identifier, its source identity MUST be deterministically derived from its stable provenance locator.
+
+The content checksum MUST remain separate from Historical Source Identity.
+
+A checksum change for the same Historical Source Identity is the signal used to detect source mutation or historical version change.
+
+The checksum MUST NOT participate in fallback Historical Source Identity because doing so would transform a mutation of an existing source into an apparently unrelated source.
 
 ---
 
