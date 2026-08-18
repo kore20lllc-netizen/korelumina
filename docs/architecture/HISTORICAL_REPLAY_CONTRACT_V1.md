@@ -400,6 +400,46 @@ A `BLOCKED` manifest build MUST NOT produce a Replay Plan.
 
 Replay Plan entries MUST retain Historical Source Identity, manifest position, and source checksum so later execution can verify that the source being processed is the source that was planned.
 
+Replay Execution V1 MUST consume only a `READY` Replay Plan.
+
+Before execution starts, and again before each source is processed, execution MUST verify:
+
+- Replay Identity matches the manifest, replay contract, and scope;
+- manifest identity matches the plan;
+- plan length matches manifest length;
+- planned manifest position matches the current manifest position;
+- Historical Source Identity matches;
+- source checksum matches;
+- planned action remains consistent with manifest replay eligibility.
+
+Execution MUST process exactly one deterministic manifest position per execution step.
+
+`SKIP_SCOPE` MUST NOT invoke Evidence admission. It becomes terminal replay disposition `SKIPPED` while retaining its governed scope-exclusion reason.
+
+`ADMIT` MUST cross only an explicit Genesis Replay Admission Adapter boundary.
+
+The Admission Adapter is an interface boundary, not the Knowledge Operations implementation.
+
+A successful admission adapter call MUST return a non-empty Evidence identity before replay state may advance to terminal `ADMITTED`.
+
+Admission failure MUST be replay-atomic.
+
+If the admission adapter throws, rejects, or fails to return a valid Evidence identity:
+
+- the current manifest position MUST NOT advance;
+- no new terminal disposition may be recorded;
+- replay state MUST remain unchanged;
+- the last valid checkpoint MUST remain unchanged;
+- no synthetic checkpoint may be created for the failed attempt.
+
+Replay Execution V1 MUST NOT directly instantiate, call, or modify the production Knowledge Operations Evidence intake implementation.
+
+After every terminal execution step, replay state and checkpoint MUST advance together over the same completed manifest prefix.
+
+Checkpoint creation MUST continue to use the existing checksum-through-checkpoint integrity contract.
+
+An empty READY replay may complete without creating a checkpoint because no manifest source has reached a terminal disposition.
+
 `discoveredAt` and other operational discovery-attempt timestamps are retained for provenance and observability but MUST NOT participate in manifest identity.
 
 The manifest replay-contract version and Replay Scope replay-contract version MUST agree. A contradictory version declaration is invalid and MUST be rejected.
