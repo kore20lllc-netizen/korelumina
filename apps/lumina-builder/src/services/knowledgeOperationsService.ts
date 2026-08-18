@@ -1442,7 +1442,7 @@ export interface OrganizationalMemoryAdaptationInput {
   packageId:
     string;
 
-  organizationId:
+  organizationId?:
     string;
 
   projectId?:
@@ -1509,7 +1509,14 @@ export async function adaptCanonicalKnowledgeToOrganizationalMemory(
     input.packageId.trim();
 
   const organizationId =
-    input.organizationId.trim();
+    input.organizationId
+      ?.trim() ||
+    undefined;
+
+  const teamId =
+    input.teamId
+      ?.trim() ||
+    undefined;
 
   if (
     !packageId
@@ -1520,10 +1527,11 @@ export async function adaptCanonicalKnowledgeToOrganizationalMemory(
   }
 
   if (
-    !organizationId
+    !organizationId &&
+    !teamId
   ) {
     throw new Error(
-      "organization_id_required",
+      "organization_or_team_id_required",
     );
   }
 
@@ -1551,10 +1559,7 @@ export async function adaptCanonicalKnowledgeToOrganizationalMemory(
                 ?.trim() ||
               undefined,
 
-            teamId:
-              input.teamId
-                ?.trim() ||
-              undefined,
+            teamId,
 
             generalization: {
               generalized:

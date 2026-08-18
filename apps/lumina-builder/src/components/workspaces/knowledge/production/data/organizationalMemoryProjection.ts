@@ -2,6 +2,23 @@ import type {
   KnowledgeProductionLifecycleSnapshot,
 } from "@/services/knowledgeOperationsService";
 
+export interface OrganizationalMemoryAdaptationCandidate {
+  id:
+    string;
+
+  title:
+    string;
+
+  authority:
+    string;
+
+  scope:
+    string;
+
+  version:
+    string;
+}
+
 export interface OrganizationalMemoryProjectionSlot {
   id: string;
   capsuleId: string;
@@ -39,6 +56,9 @@ export interface OrganizationalMemoryEvolutionSlot {
 }
 
 export interface OrganizationalMemoryProjection {
+  adaptationCandidates:
+    OrganizationalMemoryAdaptationCandidate[];
+
   metrics: {
     activeProjections: string;
     privacyFilters: string;
@@ -329,6 +349,39 @@ export function createOrganizationalMemoryProjection(
     snapshot
       .organizationalMemory;
 
+  const adaptationCandidates:
+    OrganizationalMemoryAdaptationCandidate[] =
+      snapshot.packages
+        .filter(
+          (knowledgePackage) =>
+            knowledgePackage.state ===
+            "canonical",
+        )
+        .map(
+          (knowledgePackage) => ({
+            id:
+              knowledgePackage.id,
+
+            title:
+              knowledgePackage
+                .items[0]
+                ?.title ??
+              knowledgePackage.id,
+
+            authority:
+              knowledgePackage.authority ??
+              "Unavailable",
+
+            scope:
+              knowledgePackage.scope ??
+              "Unavailable",
+
+            version:
+              knowledgePackage.version ??
+              "Unversioned",
+          }),
+        );
+
   const primary =
     records[0];
 
@@ -611,6 +664,8 @@ export function createOrganizationalMemoryProjection(
     ];
 
   return {
+    adaptationCandidates,
+
     metrics: {
       activeProjections:
         String(

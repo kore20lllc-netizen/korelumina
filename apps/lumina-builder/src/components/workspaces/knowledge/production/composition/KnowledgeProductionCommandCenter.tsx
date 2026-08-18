@@ -58,6 +58,14 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
 
 import {
+  useWorkspace,
+} from "@/context/WorkspaceContext";
+
+import {
+  useActiveTeam,
+} from "@/context/ActiveTeamContext";
+
+import {
   createOrganizationalMemoryProjection,
   emptyOrganizationalMemoryProjection,
 } from "../data/organizationalMemoryProjection";
@@ -106,6 +114,7 @@ import type {
 } from "../data/canonicalReviewProjection";
 
 import {
+  adaptCanonicalKnowledgeToOrganizationalMemory,
   getCanonicalReviewPolicies,
   getCanonicalReviewSnapshot,
   getKnowledgeProductionLifecycleSnapshot,
@@ -205,6 +214,16 @@ const PRODUCTION_SECTIONS = [
 ] as const;
 
 export function KnowledgeProductionCommandCenter() {
+  const {
+    activeProject,
+  } =
+    useWorkspace();
+
+  const {
+    activeTeam,
+  } =
+    useActiveTeam();
+
   const [
     selection,
     setSelection,
@@ -582,6 +601,72 @@ export function KnowledgeProductionCommandCenter() {
       },
       [
         refreshCanonicalReviewNow,
+      ],
+    );
+
+  const handleOrganizationalMemoryAdaptation =
+    useCallback(
+      async (
+        packageId: string,
+      ) => {
+        const teamId =
+          activeTeam?.id
+            ?.trim();
+
+        if (
+          !teamId
+        ) {
+          throw new Error(
+            "active_workspace_required",
+          );
+        }
+
+        await adaptCanonicalKnowledgeToOrganizationalMemory({
+          packageId,
+
+          teamId,
+
+          projectId:
+            activeProject
+              ?.projectId ??
+            activeProject
+              ?.id,
+        });
+
+        const lifecycleSnapshot =
+          await getKnowledgeProductionLifecycleSnapshot();
+
+        const capsuleProjection =
+          createKnowledgeCapsuleProductionProjection(
+            lifecycleSnapshot,
+          );
+
+        setKnowledgeCapsuleProjection(
+          capsuleProjection,
+        );
+
+        setKnowledgeDistributionProjection(
+          createKnowledgeDistributionProjection(
+            capsuleProjection.capsules,
+          ),
+        );
+
+        setCanonicalKnowledgeProjection(
+          createCanonicalKnowledgeProjection(
+            lifecycleSnapshot,
+          ),
+        );
+
+        setOrganizationalMemoryProjection(
+          createOrganizationalMemoryProjection(
+            lifecycleSnapshot,
+          ),
+        );
+      },
+      [
+        activeProject?.id,
+        activeProject?.projectId,
+        activeTeam?.id,
       ],
     );
 
@@ -1136,6 +1221,9 @@ export function KnowledgeProductionCommandCenter() {
           }
           onProjectionSelect={
             handleMemoryProjectionSelect
+          }
+          onAdaptCanonical={
+            handleOrganizationalMemoryAdaptation
           }
         />
       </section>
