@@ -722,6 +722,57 @@ The start orchestrator and recovery orchestrator therefore have non-overlapping 
 
 Replay Recovery Orchestrator V1 MUST NOT expose routes or UI controls.
 
+Replay Status / Inspection Service V1 is a strictly read-only projection over existing persisted Genesis replay artifacts and existing Knowledge Manufacturing Runs.
+
+The status service MUST NOT perform Historical Source discovery, build or rebuild a manifest, construct a Replay Plan, create or advance Replay Execution, invoke Evidence admission, invoke recovery, or write persistence.
+
+Its persistence dependency MUST be limited to read operations for:
+
+- persisted Manifest Build;
+- persisted Replay Execution;
+- persisted Runner Result.
+
+Its Knowledge Operations dependency MUST be limited to read-only listing of existing Knowledge Manufacturing Runs.
+
+Status inspection MAY report:
+
+- Replay Identity;
+- persisted manifest presence and readiness;
+- manifest source count;
+- Replay Execution status and corpus status;
+- current manifest position and Historical Source;
+- last completed manifest position;
+- Replay progress;
+- current checkpoint;
+- latest persisted Runner Result outcome and failure;
+- recovery eligibility;
+- admitted Evidence identities;
+- linkage from admitted Evidence identities to existing Knowledge Manufacturing Runs;
+- linked manufacturing stage, run status, package identity, and Canonical Knowledge identities when already present.
+
+Inspection MUST NOT fabricate Knowledge Manufacturing linkage when no run exists for an admitted Evidence identity.
+
+If more than one Knowledge Manufacturing Run references the same admitted Evidence identity, inspection MUST report the linkage as ambiguous.
+
+In that ambiguous condition:
+
+- every matching manufacturing-run identity MUST remain visible;
+- no single run may be presented as authoritative;
+- run status, current stage, package identity, and Canonical Knowledge linkage MUST remain unresolved in the authoritative projection;
+- aggregate "all admitted Evidence linked" status MUST remain false until ambiguity is resolved.
+
+Inspection MUST NOT silently select the newest, oldest, first, or last duplicate run.
+
+Recovery eligibility reported by inspection is informational only. It MUST NOT authorize or start recovery.
+
+A replay is inspection-recoverable only when a persisted execution exists, its state is `running`, and its persisted current manifest position is non-null.
+
+Completed replay state MUST be reported as not recovery eligible.
+
+Persistence corruption, identity drift, checkpoint corruption, or manifest mismatch discovered by existing persistence load validation MUST fail closed. Inspection MUST NOT suppress or reinterpret those integrity failures.
+
+Replay Status / Inspection Service V1 MUST NOT expose routes or UI controls.
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.
