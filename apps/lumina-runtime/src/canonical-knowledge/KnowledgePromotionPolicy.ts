@@ -13,30 +13,12 @@ export interface PromotionDecision {
 
 export class KnowledgePromotionPolicy {
   evaluate(
-    item: KnowledgeIRItem,
+    _item: KnowledgeIRItem,
     _existing: readonly CanonicalKnowledgeItem[],
   ): PromotionDecision {
-    if (
-      item.confidence < 0.5
-    ) {
-      return {
-        promote: false,
-        reason: "confidence-below-threshold",
-      };
-    }
-
-    if (
-      item.status ===
-      "rejected"
-    ) {
-      return {
-        promote: false,
-        reason: "candidate-rejected",
-      };
-    }
-
     return {
-      promote: true,
+      promote: false,
+      reason: "governed-approval-required",
     };
   }
 }

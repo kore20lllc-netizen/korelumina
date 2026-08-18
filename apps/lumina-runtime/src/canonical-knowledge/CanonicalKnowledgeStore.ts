@@ -79,6 +79,16 @@ export class CanonicalKnowledgeStore {
     return promoted;
   }
 
+  registerGoverned(
+    item: CanonicalKnowledgeItem,
+  ): CanonicalKnowledgeItem {
+    this.registry.register(
+      item,
+    );
+
+    return item;
+  }
+
   get(
     id: string,
   ): CanonicalKnowledgeItem | undefined {

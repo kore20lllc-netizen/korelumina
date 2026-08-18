@@ -6,16 +6,6 @@ import {
 } from "react";
 
 import {
-  PanelRightOpen,
-} from "lucide-react";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import {
   Tabs,
   TabsContent,
   TabsList,
@@ -23,9 +13,7 @@ import {
 } from "@/components/ui/tabs";
 
 import {
-  LuminaButton,
   LuminaWorkspacePanel,
-  LuminaWorkspaceToolbar,
 } from "@/components/lumina";
 
 import {
@@ -40,14 +28,22 @@ import {
   useRuntimeOperations,
 } from "@/hooks/useRuntimeOperations";
 
+import {
+  useRuntimeWorkspaceSelection,
+} from "@/hooks/useRuntimeWorkspaceSelection";
+
 import type {
   Environment,
   HealthStatus,
 } from "@/services/runtime/types";
 
 import {
-  RuntimeActionsToolbar,
-} from "./parts/RuntimeActionsToolbar";
+  RuntimeCommandBar,
+} from "./parts/RuntimeCommandBar";
+
+import {
+  RuntimeContentPanel,
+} from "./parts/RuntimeContentPanel";
 
 import {
   RuntimeEmptyState,
@@ -62,12 +58,8 @@ import {
 } from "./parts/RuntimeEventStream";
 
 import {
-  RuntimeHeader,
-} from "./parts/RuntimeHeader";
-
-import {
-  RuntimeHealthOverview,
-} from "./parts/RuntimeHealthOverview";
+  RuntimeExecutiveDeck,
+} from "./parts/RuntimeExecutiveDeck";
 
 import {
   RuntimeInspector,
@@ -84,6 +76,10 @@ import {
 import {
   RuntimeProjectsList,
 } from "./parts/RuntimeProjectsList";
+
+import {
+  RuntimeWorkspaceTabs,
+} from "./parts/RuntimeWorkspaceTabs";
 
 import {
   FeedSkeleton,
@@ -107,143 +103,38 @@ export function RuntimeOperationsWorkspace() {
     scenarioPending,
   } = useRuntimeOperations();
 
-  const [selectedId, setSelectedId] =
-    useState<string | null>(null);
 
-  const [query, setQuery] =
-    useState("");
+  const {
+    selectedId,
+    setSelectedId,
+    query,
+    setQuery,
+    environment,
+    setEnvironment,
+    health,
+    setHealth,
+    filteredProjects,
+    selectedProject,
+    selectedEvents,
+    selectedTimeline,
+    selectedLogs,
+  } =
+    useRuntimeWorkspaceSelection(
+      snapshot,
+    );
 
-  const [environment, setEnvironment] =
-    useState<Environment | "all">("all");
+  const searchRef =
+    useRef<HTMLInputElement>(
+      null,
+    );
 
-  const [health, setHealth] =
-    useState<HealthStatus | "all">("all");
-
-  const [inspectorOpen, setInspectorOpen] =
-    useState(false);
+  const [
+    inspectorOpen,
+    setInspectorOpen,
+  ] = useState(false);
 
   const isMobile =
     useIsMobile();
-
-  const searchRef =
-    useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (
-      selectedId ||
-      !snapshot?.projects.length
-    ) {
-      return;
-    }
-
-    setSelectedId(
-      snapshot.projects[0].id,
-    );
-  }, [
-    selectedId,
-    snapshot,
-  ]);
-
-  const filteredProjects = useMemo(() => {
-    if (!snapshot) {
-      return [];
-    }
-
-    const normalizedQuery =
-      query.trim().toLowerCase();
-
-    return snapshot.projects.filter(
-      (project) => {
-        if (
-          environment !== "all" &&
-          project.env !== environment
-        ) {
-          return false;
-        }
-
-        if (
-          health !== "all" &&
-          project.health.status !== health
-        ) {
-          return false;
-        }
-
-        if (!normalizedQuery) {
-          return true;
-        }
-
-        return [
-          project.name,
-          project.region,
-          project.version,
-          project.env,
-        ].some((value) =>
-          value
-            .toLowerCase()
-            .includes(normalizedQuery),
-        );
-      },
-    );
-  }, [
-    environment,
-    health,
-    query,
-    snapshot,
-  ]);
-
-  const selectedProject = useMemo(
-    () =>
-      snapshot?.projects.find(
-        (project) =>
-          project.id === selectedId,
-      ) ?? null,
-    [
-      selectedId,
-      snapshot,
-    ],
-  );
-
-  const selectedEvents = useMemo(
-    () =>
-      (snapshot?.events ?? []).filter(
-        (event) =>
-          !selectedProject ||
-          event.projectId ===
-            selectedProject.id,
-      ),
-    [
-      selectedProject,
-      snapshot,
-    ],
-  );
-
-  const selectedTimeline = useMemo(
-    () =>
-      (snapshot?.timeline ?? []).filter(
-        (event) =>
-          !selectedProject ||
-          event.projectId ===
-            selectedProject.id,
-      ),
-    [
-      selectedProject,
-      snapshot,
-    ],
-  );
-
-  const selectedLogs = useMemo(
-    () =>
-      (snapshot?.logs ?? []).filter(
-        (log) =>
-          !selectedProject ||
-          log.projectId ===
-            selectedProject.id,
-      ),
-    [
-      selectedProject,
-      snapshot,
-    ],
-  );
 
   useEffect(() => {
     const handleKeyboardShortcut = (
@@ -391,9 +282,10 @@ export function RuntimeOperationsWorkspace() {
   return (
     <LuminaWorkspaceLayout
       header={
-        <RuntimeHeader
+        <RuntimeExecutiveDeck
           ref={searchRef}
           overall={snapshot.overall}
+          projects={snapshot.projects}
           updatedAt={snapshot.updatedAt}
           query={query}
           onQuery={setQuery}
@@ -403,85 +295,20 @@ export function RuntimeOperationsWorkspace() {
           onHealth={setHealth}
         />
       }
-      metrics={
-        <RuntimeHealthOverview
-          overall={snapshot.overall}
-          projects={snapshot.projects}
-        />
-      }
       toolbar={
-        <LuminaWorkspaceToolbar
-          leading={
-            <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              {selectedProject ? (
-                <>
-                  Selected ·{" "}
-                  <span className="font-medium text-foreground">
-                    {selectedProject.name}
-                  </span>
-                </>
-              ) : (
-                "Select a service to see actions and details."
-              )}
-            </div>
+        <RuntimeCommandBar
+          project={selectedProject}
+          logs={snapshot.logs}
+          pending={pending}
+          compact={isMobile}
+          inspectorOpen={inspectorOpen}
+          onInspectorOpenChange={
+            setInspectorOpen
           }
-          trailing={
-            <>
-              <RuntimeActionsToolbar
-                project={selectedProject}
-                pending={pending}
-                onDispatch={dispatch}
-                compact={isMobile}
-              />
-
-              <Sheet
-                open={inspectorOpen}
-                onOpenChange={setInspectorOpen}
-              >
-                <SheetTrigger asChild>
-                  <LuminaButton
-                    variant="ghost"
-                    size="sm"
-                    className="text-gold hover:text-gold xl:hidden"
-                    aria-label="Open runtime inspector"
-                  >
-                    <PanelRightOpen className="h-3.5 w-3.5" />
-                    Inspector
-                  </LuminaButton>
-                </SheetTrigger>
-
-                <SheetContent
-                  side="right"
-                  className={[
-                    "w-full p-0 sm:max-w-[420px]",
-                    "border-l",
-                    "[border-color:var(--lumina-border-standard)]",
-                    "[background:var(--lumina-surface-panel)]",
-                    "[backdrop-filter:var(--lumina-blur-surface)]",
-                    "[box-shadow:var(--lumina-shadow-panel)]",
-                  ].join(" ")}
-                >
-                  <RuntimeInspector
-                    project={selectedProject}
-                    logs={snapshot.logs}
-                    pending={pending}
-                    onDispatch={dispatch}
-                  onScenario={(
-                    scenario,
-                    projectId,
-                  ) =>
-                    setScenario(
-                      scenario,
-                      projectId,
-                    )
-                  }
-                  scenarioPending={
-                    scenarioPending
-                  }
-                  />
-                </SheetContent>
-              </Sheet>
-            </>
+          onDispatch={dispatch}
+          onScenario={setScenario}
+          scenarioPending={
+            scenarioPending
           }
         />
       }
@@ -515,78 +342,11 @@ export function RuntimeOperationsWorkspace() {
         </LuminaWorkspacePanel>
       }
       content={
-        <LuminaWorkspacePanel
-          className={`${PANEL_HEIGHT_CLASS} p-0`}
-        >
-          <Tabs
-            defaultValue="events"
-            className="flex min-h-0 flex-1 flex-col"
-          >
-            <div
-              className={[
-                "flex flex-col gap-3 border-b px-4 py-4",
-                "sm:flex-row sm:items-center sm:justify-between",
-                "[border-color:var(--lumina-border-standard)]",
-                "[background:var(--lumina-surface-compact)]",
-                "[backdrop-filter:var(--lumina-blur-surface)]",
-              ].join(" ")}
-            >
-              <TabsList
-                className={[
-                  "self-start rounded-2xl border p-1",
-                  "[border-color:var(--lumina-border-standard)]",
-                  "[background:var(--lumina-surface-interactive)]",
-                  "[backdrop-filter:var(--lumina-blur-surface)]",
-                  "[box-shadow:var(--lumina-shadow-panel)]",
-                ].join(" ")}
-              >
-                <TabsTrigger value="events">
-                  Events
-                </TabsTrigger>
-
-                <TabsTrigger value="timeline">
-                  Lifecycle
-                </TabsTrigger>
-
-                <TabsTrigger value="logs">
-                  Logs
-                </TabsTrigger>
-              </TabsList>
-
-              <div className="text-[10.5px] tabular-nums text-muted-foreground">
-                {selectedEvents.length} events ·{" "}
-                {selectedLogs.length} logs
-              </div>
-            </div>
-
-            <TabsContent
-              value="events"
-              className="m-0 min-h-0 flex-1"
-            >
-              <RuntimeEventStream
-                events={selectedEvents}
-              />
-            </TabsContent>
-
-            <TabsContent
-              value="timeline"
-              className="m-0 min-h-0 flex-1"
-            >
-              <RuntimeLifecycleTimeline
-                events={selectedTimeline}
-              />
-            </TabsContent>
-
-            <TabsContent
-              value="logs"
-              className="m-0 min-h-0 flex-1"
-            >
-              <RuntimeLogsPanel
-                logs={selectedLogs}
-              />
-            </TabsContent>
-          </Tabs>
-        </LuminaWorkspacePanel>
+        <RuntimeContentPanel
+          events={selectedEvents}
+          timeline={selectedTimeline}
+          logs={selectedLogs}
+        />
       }
       inspector={
         <LuminaWorkspacePanel

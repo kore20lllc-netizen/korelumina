@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Knowledge Operations + Education Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "runtime projections",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout variants",
+      "panel/card geometry",
+      "glass/material ownership",
+      "spacing",
+      "rails",
+      "overflow behavior",
+      "conditional mounting of certified Education regions",
+      "removal or replacement of Educational Progress surfaces",
+      "removal or replacement of Competency Posture surfaces",
+      "changes to Education workspace presentation topology"
+    ]
+  },
+  "generatedFrom": "current visually approved green working tree",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/design-system/compositions/LuminaBalancedSplitPanelComposition.tsx": {
+      "sha256": "a8eab66a7f8bac5baf7eae1903a8fc312c6ab932b75ffb99164685f23338f40a",
+      "elementCount": 1
+    },
+    "apps/lumina-builder/src/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition.tsx": {
+      "sha256": "e897ab417362bf11f66ed6471595a6c9bb31b86a66405ca7c2e886c2753aa0f3",
+      "elementCount": 1
+    },
+    "apps/lumina-builder/src/components/design-system/compositions/LuminaPanelHeaderComposition.tsx": {
+      "sha256": "9de356b8da80da3a1d832717a47da7f0199d30a7ec3eebaaa11e336fc6d48e1c",
+      "elementCount": 4
+    },
+    "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx": {
+      "sha256": "f75c2ca8145ce2a3d5e40d48805fb4ae69d5ede53ac25e42f4a2f1a0495a7ef7",
+      "elementCount": 6
+    },
+    "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipPanel.tsx": {
+      "sha256": "76ad5943356f882c621a1a6c82d6da269033e78040c98ba6f68429d7e2ce38ca",
+      "elementCount": 8
+    },
+    "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipSurface.tsx": {
+      "sha256": "82ca22c7a3945ce9464dd1b619d329fcb72627294e0a936a67be7fe1f4a3f263",
+      "elementCount": 1
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx": {
+      "sha256": "84ec58679e6f45d288c44c98104a77a046821ea0e332c8f645d4fb298683d4e7",
+      "elementCount": 47
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalDashboardMain.tsx": {
+      "sha256": "021f88e6c0677426a291d687e8302f84e1183ed8b5c6a466bbd5b4cf8044ea63",
+      "elementCount": 14
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalDashboardSidebar.tsx": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "elementCount": 0
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx": {
+      "sha256": "ff8dd54dd05ddb13670fa5984ca6055e6e0b4c9e7705b37c2d1c52277d5db877",
+      "elementCount": 34
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx": {
+      "sha256": "548c0bd64aced5014a9647fefec3a52a420d9c0b679c1ac0fe1256cc9811e3ba",
+      "elementCount": 17
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx": {
+      "sha256": "88fbc306b25c58a7b8ab04d3e05e76c989e65adcca2d7ff66ead274c0ac42849",
+      "elementCount": 50
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx": {
+      "sha256": "df9d015740d97c9cdf4f9b085bdfe21abf6350e7733d54b00627ff2e7cc9a474",
+      "elementCount": 37
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx": {
+      "sha256": "44b4d3acd24dee7f96db5f70fa94bd8f816681255012bc5deaf16d69736e4ec0",
+      "elementCount": 29
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx": {
+      "sha256": "3ad12b28ed298d1edba8819d5eac328962d3d14373ee22d3e158422910d08416",
+      "elementCount": 26
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ExecutiveEducationalSummary.tsx": {
+      "sha256": "d7906455deb94c4bf7f263aa5b1cd7da7c5f942b56baca5dfb5d9f1493b28587",
+      "elementCount": 41
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx": {
+      "sha256": "ed2238089ac230d4f2de51aab66c154879a5923118307d53c4efeeab5eb6d06a",
+      "elementCount": 11
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/learning/states/EducationalStateSurface.tsx": {
+      "sha256": "4b4ecd939e94afabfe579f5226d5c873973bf7d45a17e7d86520d93ed26de520",
+      "elementCount": 10
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx": {
+      "sha256": "e636fc8bf57eb8a296dce24e99b189f6ebbacb87f4a8d75e153e69d7d0e7c02d",
+      "elementCount": 147
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx": {
+      "sha256": "5a6ad82fbe2bee2ccd257dfc398391483d9cbe23cc520812f2f484db9935aa7c",
+      "elementCount": 22
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFilters.tsx": {
+      "sha256": "a70428c3abeec861e14e04879b5f0f72c77f897ccebdf506b6ae836c12711cc3",
+      "elementCount": 27
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx": {
+      "sha256": "75e1f7c97176a8e2151a4f9109354346868955358660823d1e8f67c674e4426b",
+      "elementCount": 50
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx": {
+      "sha256": "b7793253a6800bd0a747435ac26f6e8e30e60c38f5020c0cb606bd3722e5a8a1",
+      "elementCount": 160
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeStationDetail.tsx": {
+      "sha256": "e4bea44821735b087021356cc9faa2a78a4cd9ff4f1dd60a6f7878d13b229215",
+      "elementCount": 65
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx": {
+      "sha256": "b25776aab7a6f35bef68fd1029aa155ad6f5e8cd84f785a0afb6573c7492b7fc",
+      "elementCount": 21
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/KnowledgeDistributionHub.tsx": {
+      "sha256": "cc8ce5382a154d6c5b54fd7907ee059ef0984f18ff12b3efbc6979d12b366ae5",
+      "elementCount": 64
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx": {
+      "sha256": "744c9769b5c6caafbc646ca52b10de875f0c4056e289ee43bbc8c039a52dd792",
+      "elementCount": 73
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx": {
+      "sha256": "cc27a9fed5839816802462ad63a96be0366c2a8e69838094490f9de30acf9c35",
+      "elementCount": 394
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {
+      "sha256": "43a7d2b13de694ec2aeebdcad227a71bc199e8064f715e9143dd68961e7c858b",
+      "elementCount": 29
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx": {
+      "sha256": "c3339fc7d13533fd6255a3a0cc4a8c35aa1ba418863364df0ee279e716697281",
+      "elementCount": 86
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx": {
+      "sha256": "57544f2b662d3e014adde78fb7ea29ea8643e07d0bf1e8bd9855e30a076a26e4",
+      "elementCount": 129
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx": {
+      "sha256": "19c7f2e5e7985d872361a6471f36b712a04710d9e6186de3cba9f1036abbf642",
+      "elementCount": 138
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/CompilerOperations.tsx": {
+      "sha256": "e6325a1afe4f3de47c736bce0e4eb76770534ba9e85cf8c4aed5a7613dffa37f",
+      "elementCount": 26
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ConversationCompiler.tsx": {
+      "sha256": "a8731ce1ded05045243c22702cd0b4cf1ffb63aa526e3a5dfd39e6c629a8fd3b",
+      "elementCount": 22
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/DocumentationCompiler.tsx": {
+      "sha256": "d9dea1d2b67ec34ec45400296e84a4fc39ee520eb73471722a750eb5cbe4a0e2",
+      "elementCount": 22
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/EvidenceIntake.tsx": {
+      "sha256": "f6f4dbc02f4026d043fa325f0f71f50ad89f9244696001abf7de1a4107943056",
+      "elementCount": 32
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgeIR.tsx": {
+      "sha256": "25ff3fac29a91b1872b0d1c7fff051e6785a9fe59cb32220e0e1907a7aaed7f7",
+      "elementCount": 37
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgePackage.tsx": {
+      "sha256": "ae30b117803ab85b4f752b9a3491e9eba9f042f5ae98f00e5e7c61e56b16a935",
+      "elementCount": 41
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/PipelineArtifactInspector.tsx": {
+      "sha256": "4a75c415a1fb22d189a7cfa113819b82266d62e2cabe5e23a5e43e16c6007e17",
+      "elementCount": 38
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ProductionStateSurface.tsx": {
+      "sha256": "7c6d77d8da4540e2050fe586f7cfa0a83bda509c1d938bf8a2a60ebc5890a14b",
+      "elementCount": 12
+    },
+    "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ValidationWorkflow.tsx": {
+      "sha256": "cf93b68e8c73e591f13e7f3b118298ff1dacd437283d30933bbf97fba2a97d56",
+      "elementCount": 18
+    }
+  }
+}

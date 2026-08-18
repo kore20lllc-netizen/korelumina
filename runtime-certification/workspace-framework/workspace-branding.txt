@@ -1,0 +1,60 @@
+apps/lumina-builder/src/context/TransformContext.tsx:26:  /** Pages produced by a completed transform, editable in Designer Space. */
+apps/lumina-builder/src/components/landing/data.ts:62:  { icon: Sparkles, title: "Build", body: "Designer, AI, and Developer modes work side by side. Live preview before apply. Multi-cursor edits and refactors." },
+apps/lumina-builder/src/components/landing/data.ts:68:  { icon: LayoutDashboard, title: "Lumina Studio", body: "Three studio modes — AI, Designer, Developer — sharing the same project model. Switch context without losing your place." },
+apps/lumina-builder/src/components/landing/data.ts:72:  { icon: Users, title: "In-House Developer Escalation Layer", body: "When AI hits its ceiling, escalate to KoreLumina engineers without leaving the workspace. Human help, on demand." },
+apps/lumina-builder/src/components/landing/data.ts:86:  { icon: Paintbrush, title: "Designer canvas", body: "Drag, snap, align, distribute. Visual composition with the same tokens your code ships with." },
+apps/lumina-builder/src/components/landing/data.ts:96:  { feature: "Designer mode", korelumina: true, lovable: false, bolt: false, v0: true,  cursor: false },
+apps/lumina-builder/src/components/landing/data.ts:97:  { feature: "Developer mode (multi-cursor)", korelumina: true, lovable: false, bolt: false, v0: false, cursor: true  },
+apps/lumina-builder/src/components/landing/data.ts:314:  { q: "Is there a free tier?", a: "Yes — Free includes 5 AI executions and full access to Designer and Developer modes so you can try the platform end to end." },
+apps/lumina-builder/src/components/landing/Pricing.tsx:64:  { q: "What is the In-House Developer Escalation Layer?", a: "A premium service where our engineering team implements complex requirements for you." },
+apps/lumina-builder/src/components/landing/Pricing.tsx:379:        {/* In-House Developer Escalation */}
+apps/lumina-builder/src/components/landing/Pricing.tsx:382:            <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">In-House Developer Escalation</p>
+apps/lumina-builder/src/components/landing/InHouseDevelopers.tsx:14:export function InHouseDevelopers() {
+apps/lumina-builder/src/components/landing/InHouseDevelopers.tsx:27:              <p className="text-xs uppercase tracking-[0.2em] text-gold eyebrow-lumina mb-3">In-House Developers</p>
+apps/lumina-builder/src/components/shell/CommandPalette.tsx:96:          <CommandItem onSelect={() => run(() => { setMode("designer"); toast.success("Switched to Designer mode"); })}>
+apps/lumina-builder/src/components/shell/CommandPalette.tsx:97:            <Palette className="mr-2 h-4 w-4" /> Designer mode
+apps/lumina-builder/src/components/shell/CommandPalette.tsx:100:            <Code2 className="mr-2 h-4 w-4" /> Developer mode
+apps/lumina-builder/src/components/layout/TopBar.tsx:16:  { id: "designer", label: "Designer", hint: "Visual" },
+apps/lumina-builder/src/components/layout/Sidebar.tsx:96:            label: "Deployment Diagnostics",
+apps/lumina-builder/src/components/layout/Sidebar.tsx:101:            label: "Runtime Operations",
+apps/lumina-builder/src/components/layout/Sidebar.tsx:106:            label: "Knowledge Operations",
+apps/lumina-builder/src/components/layout/Sidebar.tsx:212:                      item.label === "Deployment Diagnostics"
+apps/lumina-builder/src/components/layout/Sidebar.tsx:216:                      item.label === "Runtime Operations"
+apps/lumina-builder/src/components/layout/Sidebar.tsx:220:                      item.label === "Knowledge Operations"
+apps/lumina-builder/src/components/lumina/tokens/workspaceAccents.ts:3:    name: "Runtime Operations",
+apps/lumina-builder/src/components/lumina/tokens/workspaceAccents.ts:18:    name: "Knowledge Operations",
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:11:import { DesignerCanvas } from "./designer/DesignerCanvas";
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:24:export function DesignerWorkspace() {
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:27:      <DesignerWorkspaceInner />
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:32:function DesignerWorkspaceInner() {
+apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx:274:          <DesignerCanvas />
+apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx:35:  { key: "designer",               label: "Designer" },
+apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx:36:  { key: "developer",              label: "Developer" },
+apps/lumina-builder/src/components/workspaces/appearance/services/previewRegistry.ts:21:    title: "Developer",
+apps/lumina-builder/src/components/workspaces/appearance/services/previewRegistry.ts:25:    title: "Designer",
+apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx:139:                Master OS · Internal
+apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx:143:                Knowledge Operations
+apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx:256:              Runtime Operations
+apps/lumina-builder/src/components/workspaces/EntryView.tsx:190:  { id: "designer", label: "Designer Mode", desc: "Visual canvas, sections, styles.", icon: Palette, tag: "Visual" },
+apps/lumina-builder/src/components/workspaces/EntryView.tsx:191:  { id: "developer", label: "Developer Mode", desc: "Files, code, full control.", icon: Code2, tag: "Code" },
+apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx:227:export function DeveloperWorkspace() {
+apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx:55:        Knowledge Operations is the operational
+apps/lumina-builder/src/components/workspaces/designer/DesignerCanvas.tsx:32:export function DesignerCanvas() {
+apps/lumina-builder/src/components/workspaces/designer/AIAssistPanel.tsx:322:            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Designer copilot</div>
+apps/lumina-builder/src/components/import/ImportSuccessPanel.tsx:96:            title="Open in Designer"
+apps/lumina-builder/src/components/transform/TransformModal.tsx:330:    toast.success(`${pages.length} pages opened in Designer`);
+apps/lumina-builder/src/components/transform/TransformModal.tsx:335:  // Auto-navigate to Designer the moment apply finishes — skip the success step.
+apps/lumina-builder/src/components/transform/TransformModal.tsx:421:                toast.success(`${pages.length} pages opened in Designer`);
+apps/lumina-builder/src/components/transform/TransformAnalyticsPanel.tsx:29:  "transform.opened_in_designer":  { label: "Opened in Designer",   Icon: Globe,              tint: "text-gold" },
+apps/lumina-builder/src/templates/websites/saas-landing/app/components/Features.tsx:3:  { title:"Developer workspace", text:"Edit real code with preview and runtime feedback." },
+apps/lumina-builder/src/pages/Index.tsx:46:const DesignerWorkspace = lazy(() =>
+apps/lumina-builder/src/pages/Index.tsx:47:  import("@/components/workspaces/DesignerWorkspace").then((m) => ({
+apps/lumina-builder/src/pages/Index.tsx:48:    default: m.DesignerWorkspace,
+apps/lumina-builder/src/pages/Index.tsx:52:const DeveloperWorkspace = lazy(() =>
+apps/lumina-builder/src/pages/Index.tsx:53:  import("@/components/workspaces/DeveloperWorkspace").then((m) => ({
+apps/lumina-builder/src/pages/Index.tsx:54:    default: m.DeveloperWorkspace,
+apps/lumina-builder/src/pages/Index.tsx:319:        {mode === "designer" && <DesignerWorkspace />}
+apps/lumina-builder/src/pages/Index.tsx:320:        {mode === "developer" && <DeveloperWorkspace />}
+apps/lumina-builder/src/pages/LandingPage.tsx:16:import { InHouseDevelopers } from "@/components/landing/InHouseDevelopers";
+apps/lumina-builder/src/pages/LandingPage.tsx:95:          <InHouseDevelopers />
+apps/lumina-builder/src/services/transformEngine.ts:7:const STAGES = ["Analyze project", "Build architecture plan", "Generate routes", "Produce diffs", "Apply transformation", "Open in Designer"];

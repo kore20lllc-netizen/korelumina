@@ -96,8 +96,7 @@ function formatUptime(
 
   const hours =
     Math.floor(
-      (totalMinutes %
-        1_440) /
+      (totalMinutes % 1_440) /
         60,
     );
 
@@ -120,16 +119,11 @@ function formatMetric(
   suffix: string,
   decimals = 0,
 ): string {
-  if (
-    !Number.isFinite(value)
-  ) {
+  if (!Number.isFinite(value)) {
     return "—";
   }
 
-  return (
-    `${value.toFixed(decimals)}` +
-    suffix
-  );
+  return `${value.toFixed(decimals)}${suffix}`;
 }
 
 interface MetricProps {
@@ -143,11 +137,11 @@ function RuntimeCardMetric({
 }: MetricProps) {
   return (
     <div className="min-w-0">
-      <div className="truncate text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+      <div className="truncate text-[8.5px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
         {label}
       </div>
 
-      <div className="mt-1 truncate text-[13px] font-semibold tabular-nums text-foreground">
+      <div className="mt-0.5 truncate text-xs font-semibold tabular-nums text-foreground">
         {value}
       </div>
     </div>
@@ -171,8 +165,7 @@ export const RuntimeProjectRow = forwardRef<
   ) => {
     const memoryLabel =
       Number.isFinite(
-        project.metrics
-          .memUsedMb,
+        project.metrics.memUsedMb,
       )
         ? `${project.metrics.memUsedMb.toFixed(0)} MB`
         : "—";
@@ -182,19 +175,13 @@ export const RuntimeProjectRow = forwardRef<
         ref={ref}
         selected={selected}
         onClick={onSelect}
-        onKeyDown={
-          onKeyDown
-        }
+        onKeyDown={onKeyDown}
         tabIndex={tabIndex}
-        aria-pressed={
-          selected
-        }
+        aria-pressed={selected}
         aria-label={[
           project.name,
           project.env,
-          STATE_LABEL[
-            project.state
-          ],
+          STATE_LABEL[project.state],
           `health ${project.health.status}`,
           `CPU ${project.metrics.cpuPct.toFixed(0)} percent`,
         ].join(", ")}
@@ -219,45 +206,39 @@ export const RuntimeProjectRow = forwardRef<
         }
         className={cn(
           "shrink-0",
+          "[&>button]:gap-3",
+          "[&>button]:p-3.5",
           className,
         )}
         status={
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             <RuntimeStatusDot
               status={
-                project.health
-                  .status
+                project.health.status
               }
-              className="h-2.5 w-2.5"
+              className="h-2.5 w-2.5 shrink-0"
             />
 
-            <span className="text-xs font-medium text-foreground">
-              {
-                STATE_LABEL[
-                  project.state
-                ]
-              }
+            <span className="truncate text-xs font-medium text-foreground">
+              {STATE_LABEL[project.state]}
             </span>
 
             <span
               aria-hidden="true"
-              className="text-muted-foreground/60"
+              className="shrink-0 text-muted-foreground/60"
             >
               •
             </span>
 
-            <span className="text-[11px] capitalize text-muted-foreground">
-              {
-                project.health
-                  .status
-              }
+            <span className="truncate text-[11px] capitalize text-muted-foreground">
+              {project.health.status}
             </span>
           </div>
         }
         sparkline={
           <div
             className={cn(
-              "overflow-hidden border px-2 py-1.5",
+              "overflow-hidden border px-2 py-1",
               "[border-radius:var(--lumina-radius-inner)]",
               "[border-color:var(--lumina-border-standard)]",
               "[background:var(--lumina-surface-compact)]",
@@ -265,16 +246,14 @@ export const RuntimeProjectRow = forwardRef<
           >
             <RuntimeSparkline
               data={
-                project.metrics
-                  .cpuSeries
+                project.metrics.cpuSeries
               }
               secondaryData={
-                project.metrics
-                  .memSeries
+                project.metrics.memSeries
               }
               mode="service"
               width={260}
-              height={64}
+              height={44}
               stroke="hsl(var(--cyan))"
               secondaryStroke="hsl(var(--magenta))"
               fill="hsl(var(--cyan) / 0.10)"
@@ -283,28 +262,24 @@ export const RuntimeProjectRow = forwardRef<
           </div>
         }
         metrics={
-          <div className="grid grid-cols-3 gap-x-3 gap-y-4">
+          <div className="grid grid-cols-3 gap-x-3 gap-y-3">
             <RuntimeCardMetric
               label="CPU"
               value={formatMetric(
-                project.metrics
-                  .cpuPct,
+                project.metrics.cpuPct,
                 "%",
               )}
             />
 
             <RuntimeCardMetric
               label="Memory"
-              value={
-                memoryLabel
-              }
+              value={memoryLabel}
             />
 
             <RuntimeCardMetric
               label="RPS"
               value={formatMetric(
-                project.metrics
-                  .rps,
+                project.metrics.rps,
                 "",
                 1,
               )}
@@ -313,8 +288,7 @@ export const RuntimeProjectRow = forwardRef<
             <RuntimeCardMetric
               label="P95"
               value={formatMetric(
-                project.metrics
-                  .p95Ms,
+                project.metrics.p95Ms,
                 " ms",
               )}
             />
@@ -322,8 +296,7 @@ export const RuntimeProjectRow = forwardRef<
             <RuntimeCardMetric
               label="Errors"
               value={formatMetric(
-                project.metrics
-                  .errorRatePct,
+                project.metrics.errorRatePct,
                 "%",
                 1,
               )}

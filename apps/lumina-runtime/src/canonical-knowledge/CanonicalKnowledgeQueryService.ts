@@ -38,23 +38,77 @@ export class CanonicalKnowledgeQueryService {
   search(
     query: string,
   ): CanonicalKnowledgeItem[] {
-    const normalized =
-      query.toLowerCase();
+    const terms =
+      query
+        .toLowerCase()
+        .split(
+          /[^a-z0-9]+/,
+        )
+        .map(
+          (term) =>
+            term.trim(),
+        )
+        .filter(
+          (term) =>
+            term.length >= 4,
+        );
+
+    if (
+      terms.length === 0
+    ) {
+      return this.store.list();
+    }
 
     return this.store
       .list()
+      .map(
+        (item) => {
+          const searchable =
+            [
+              item.title,
+              item.summary,
+              item.type,
+            ]
+              .join(
+                " ",
+              )
+              .toLowerCase();
+
+          const score =
+            terms.reduce(
+              (
+                total,
+                term,
+              ) =>
+                searchable.includes(
+                  term,
+                )
+                  ? total + 1
+                  : total,
+              0,
+            );
+
+          return {
+            item,
+            score,
+          };
+        },
+      )
       .filter(
-        (item) =>
-          item.title
-            .toLowerCase()
-            .includes(
-              normalized,
-            ) ||
-          item.summary
-            .toLowerCase()
-            .includes(
-              normalized,
-            ),
+        (entry) =>
+          entry.score > 0,
+      )
+      .sort(
+        (
+          left,
+          right,
+        ) =>
+          right.score -
+          left.score,
+      )
+      .map(
+        (entry) =>
+          entry.item,
       );
   }
 

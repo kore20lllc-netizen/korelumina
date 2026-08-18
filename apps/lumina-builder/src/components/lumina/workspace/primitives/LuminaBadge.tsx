@@ -28,6 +28,24 @@ const badgeVariants = cva(
           "[box-shadow:var(--lumina-shadow-selected)]",
           "text-white",
         ].join(" "),
+
+        complete:
+          "border-emerald-300/22 bg-emerald-300/[0.07] text-emerald-200",
+
+        active:
+          "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-100",
+
+        partial:
+          "border-amber-300/24 bg-amber-300/[0.07] text-amber-200",
+
+        blocked:
+          "border-rose-300/22 bg-rose-300/[0.065] text-rose-200",
+
+        review:
+          "border-violet-300/22 bg-violet-300/[0.065] text-violet-200",
+
+        muted:
+          "border-white/12 bg-white/[0.035] text-white/58",
       },
     },
 

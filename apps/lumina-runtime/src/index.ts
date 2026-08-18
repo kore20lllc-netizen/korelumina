@@ -24,6 +24,113 @@ import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
+import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
+import { registerCanonicalReviewPolicyRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyRoutes.js";
+import { registerCanonicalReviewPolicyAdministrationRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyAdministrationRoutes.js";
+import { registerCanonicalReviewPolicyExecutionRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyExecutionRoutes.js";
+import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerCanonicalReviewBatchRoutes.js";
+import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
+import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
+import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
+import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
+import { registerExecutiveRoute } from "./routes/executive.js";
+import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
+import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
+import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
+import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
+import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
+import { registerExecutiveActionExecutionRoute } from "./routes/executiveActionExecution.js";
+import { registerExecutiveActionMutationRoute } from "./routes/executiveActionMutation.js";
+import { registerExecutiveApprovalRoute } from "./routes/executiveApproval.js";
+
+import {
+  runtimeKnowledgeProvider,
+  rehydrateRuntimeCanonicalKnowledge,
+  RuntimeOrganizationalMemoryProvider,
+  RuntimeOrganizationalMemoryStore,
+} from "./knowledge-platform/runtime/index.js";
+
+import {
+  GovernedCanonicalMemoryAdaptationService,
+  registerOrganizationalMemoryProvider,
+} from "./knowledge/organizational-memory/index.js";
+
+import {
+  KnowledgeContextBuilder,
+} from "./knowledge-platform/context/index.js";
+
+import {
+  CanonicalReviewBatchService,
+  CanonicalReviewPolicyAdministrationService,
+  CanonicalReviewPolicyExecutionService,
+  CanonicalReviewService,
+} from "./knowledge-preservation/review/index.js";
+
+import {
+  GovernedCanonicalPromotionService,
+} from "./knowledge-preservation/promotion/index.js";
+
+import {
+  createKnowledgePreservationPlatform,
+} from "./knowledge-preservation/bootstrap/index.js";
+
+import {
+  KnowledgeEducationProjectionService,
+} from "./knowledge-education/index.js";
+
+import {
+  registerKnowledgeEducationRoutes,
+} from "./routes/knowledge/registerKnowledgeEducationRoutes.js";
+
+import {
+  createExecutiveOrchestrator,
+} from "./executive/orchestrator/index.js";
+
+import {
+  ChiefAgentReasoningDecisionService,
+  ChiefAgentReasoningDestinationAdapter,
+  ChiefAgentReasoningExecutionService,
+  ChiefAgentReasoningKnowledgeMaterializer,
+  ExecutiveReasoningService,
+  TextGenerationChiefAgentReasoningProvider,
+} from "./executive/reasoning/index.js";
+
+import {
+  ExecutiveApprovalDecisionService,
+  ExecutiveApprovalService,
+  ExecutiveDecisionApprovalRequestService,
+} from "./executive/approval/index.js";
+
+import {
+  ExecutiveDecisionDelegationService,
+  ExecutiveDelegationService,
+} from "./executive/delegation/index.js";
+
+import {
+  configureExecutiveActionExecutorComposition,
+  ExecutiveActionExecutionAuthorizationService,
+  ExecutiveActionExecutionDispatcher,
+  ExecutiveActionExecutionOutcomeService,
+  ExecutiveActionExecutionStartService,
+  ExecutiveActionExecutorPolicyRegistry,
+  ExecutiveActionExecutorRegistry,
+  ExecutiveActionService,
+  ExecutiveDecisionActionProposalService,
+  ExecutiveDelegationActionProposalService,
+  ExecutiveDelegationActionReadinessService,
+} from "./executive/action/index.js";
+
+import {
+  ExecutiveAuditService,
+} from "./executive/audit/index.js";
+
+import {
+  ExecutiveDecisionService,
+} from "./executive/decision/index.js";
+
+import {
+  OpenAITextGenerationClient,
+} from "./ai/model/index.js";
 
 import { stopAllRuntimes } from "./runtime/registry.js";
 import {
@@ -35,7 +142,294 @@ import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
 
+
+import {
+  registerKnowledgeManufacturingReplayRoutes,
+} from "./routes/knowledge/registerKnowledgeManufacturingReplayRoutes.js";
+
+import {
+  knowledgeManufacturingReplayService,
+} from "./knowledge-preservation/manufacturing/index.js";
+
 const app = express();
+
+const knowledgePlatform =
+  runtimeKnowledgeProvider.getPlatform();
+
+export const runtimeKnowledgePreservationPlatform =
+  createKnowledgePreservationPlatform();
+
+rehydrateRuntimeCanonicalKnowledge(
+  knowledgePlatform,
+);
+
+export const runtimeOrganizationalMemoryStore =
+  new RuntimeOrganizationalMemoryStore();
+
+export const runtimeOrganizationalMemoryProvider =
+  new RuntimeOrganizationalMemoryProvider(
+    runtimeOrganizationalMemoryStore,
+  );
+
+export const runtimeGovernedCanonicalMemoryAdaptationService =
+  new GovernedCanonicalMemoryAdaptationService(
+    runtimeOrganizationalMemoryStore,
+  );
+
+registerOrganizationalMemoryProvider(
+  runtimeOrganizationalMemoryProvider,
+);
+
+export const runtimeCanonicalReviewService =
+  new CanonicalReviewService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
+  );
+
+export const runtimeCanonicalReviewPolicyAdministrationService =
+  new CanonicalReviewPolicyAdministrationService();
+
+export const runtimeCanonicalReviewPolicyExecutionService =
+  new CanonicalReviewPolicyExecutionService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeCanonicalReviewService,
+  );
+
+export const runtimeCanonicalReviewBatchService =
+  new CanonicalReviewBatchService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeCanonicalReviewService,
+  );
+
+export const runtimeKnowledgeEducationProjectionService =
+  new KnowledgeEducationProjectionService(
+    knowledgePlatform.store,
+  );
+
+export const runtimeGovernedPromotionService =
+  new GovernedCanonicalPromotionService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    knowledgePlatform.store,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
+  );
+
+const knowledgeContextBuilder =
+  new KnowledgeContextBuilder(
+    knowledgePlatform,
+  );
+
+export const executiveRuntime =
+  createExecutiveOrchestrator({
+    knowledgeContextBuilder,
+  });
+
+export const runtimeExecutiveReasoningService =
+  new ExecutiveReasoningService();
+
+export const runtimeExecutiveDecisionService =
+  new ExecutiveDecisionService();
+
+export const runtimeChiefAgentReasoningDecisionService =
+  new ChiefAgentReasoningDecisionService(
+    runtimeExecutiveDecisionService,
+  );
+
+export const runtimeExecutiveApprovalService =
+  new ExecutiveApprovalService();
+
+export const runtimeExecutiveDecisionApprovalRequestService =
+  new ExecutiveDecisionApprovalRequestService(
+    runtimeExecutiveApprovalService,
+  );
+
+export const runtimeExecutiveApprovalDecisionService =
+  new ExecutiveApprovalDecisionService(
+    runtimeExecutiveApprovalService,
+    runtimeExecutiveDecisionService,
+  );
+
+export const runtimeExecutiveDelegationService =
+  new ExecutiveDelegationService();
+
+export const runtimeExecutiveDecisionDelegationService =
+  new ExecutiveDecisionDelegationService(
+    runtimeExecutiveDelegationService,
+  );
+
+export const runtimeExecutiveActionService =
+  new ExecutiveActionService();
+
+export const runtimeExecutiveDecisionActionProposalService =
+  new ExecutiveDecisionActionProposalService(
+    runtimeExecutiveActionService,
+  );
+
+export const runtimeExecutiveDelegationActionProposalService =
+  new ExecutiveDelegationActionProposalService(
+    runtimeExecutiveDecisionActionProposalService,
+  );
+
+export const runtimeExecutiveDelegationActionReadinessService =
+  new ExecutiveDelegationActionReadinessService(
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionService,
+  );
+
+export const runtimeExecutiveActionExecutionAuthorizationService =
+  new ExecutiveActionExecutionAuthorizationService();
+
+export const runtimeExecutiveAuditService =
+  new ExecutiveAuditService();
+
+export const runtimeExecutiveActionExecutionStartService =
+  new ExecutiveActionExecutionStartService(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionExecutionAuthorizationService,
+    runtimeExecutiveAuditService,
+  );
+
+export const runtimeExecutiveActionExecutionOutcomeService =
+  new ExecutiveActionExecutionOutcomeService(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveAuditService,
+  );
+
+export const runtimeExecutiveActionExecutorPolicyRegistry =
+  new ExecutiveActionExecutorPolicyRegistry();
+
+export const runtimeExecutiveActionExecutorRegistry =
+  new ExecutiveActionExecutorRegistry();
+
+const executiveMutationEnabled =
+  process.env
+    .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
+  "true";
+
+configureExecutiveActionExecutorComposition({
+  policyRegistry:
+    runtimeExecutiveActionExecutorPolicyRegistry,
+
+  executorRegistry:
+    runtimeExecutiveActionExecutorRegistry,
+
+  mutationEnabled:
+    executiveMutationEnabled,
+});
+
+export const runtimeExecutiveActionExecutionDispatcher =
+  new ExecutiveActionExecutionDispatcher(
+    runtimeExecutiveActionService,
+    runtimeExecutiveDelegationService,
+    runtimeExecutiveActionExecutionAuthorizationService,
+    runtimeExecutiveAuditService,
+    runtimeExecutiveActionExecutionOutcomeService,
+    runtimeExecutiveActionExecutorPolicyRegistry,
+    runtimeExecutiveActionExecutorRegistry,
+  );
+
+export const runtimeChiefAgentReasoningExecutionService =
+  new ChiefAgentReasoningExecutionService(
+    new TextGenerationChiefAgentReasoningProvider(
+      new OpenAITextGenerationClient(),
+    ),
+    runtimeExecutiveReasoningService,
+  );
+
+export const chiefAgentReasoningAdapter =
+  new ChiefAgentReasoningDestinationAdapter(
+    new ChiefAgentReasoningKnowledgeMaterializer(
+      knowledgePlatform.store,
+      runtimeOrganizationalMemoryStore,
+    ),
+    {
+      reason: async (input) => {
+        await runtimeChiefAgentReasoningExecutionService
+          .execute(
+            input,
+          );
+
+        const persisted =
+          runtimeExecutiveReasoningService
+            .get(
+              `reasoning:${input.eventId}`,
+            );
+
+        if (
+          !persisted
+        ) {
+          throw new Error(
+            "chief_agent_reasoning_result_not_persisted",
+          );
+        }
+
+        const decision =
+          runtimeChiefAgentReasoningDecisionService
+            .createProposedDecision({
+              reasoning:
+                persisted,
+
+              requestedBy:
+                "chief-agent",
+            });
+
+        if (
+          input.approverId &&
+          decision.status ===
+            "proposed"
+        ) {
+          runtimeExecutiveDecisionApprovalRequestService
+            .requestApproval({
+              decision,
+
+              approverId:
+                input.approverId,
+
+              requestedBy:
+                "chief-agent",
+            });
+        }
+
+        return {
+          title:
+            persisted.title,
+
+          disposition:
+            persisted.disposition,
+
+          conclusion:
+            persisted.conclusion,
+
+          confidence:
+            persisted.confidence,
+
+          evidence:
+            persisted.evidence,
+
+          assumptions:
+            persisted.assumptions,
+
+          metadata:
+            persisted.metadata,
+        };
+      },
+    },
+  );
+
+executiveRuntime.dispatcher.register(
+  "reasoning",
+  (context) =>
+    chiefAgentReasoningAdapter.handle(
+      context,
+    ),
+);
 
 app.use(cors());
 app.use(express.json());
@@ -76,6 +470,236 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+
+registerKnowledgePreservationRoutes(
+  app,
+  {
+    preservationPlatform:
+      runtimeKnowledgePreservationPlatform,
+  },
+);
+
+registerCanonicalReviewRoutes(
+  app,
+  {
+    reviewService:
+      runtimeCanonicalReviewService,
+
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+  },
+);
+
+registerCanonicalReviewBatchRoutes(
+  app,
+  {
+    batchService:
+      runtimeCanonicalReviewBatchService,
+  },
+);
+
+registerCanonicalReviewPolicyRoutes(
+  app,
+);
+
+registerCanonicalReviewPolicyAdministrationRoutes(
+  app,
+  {
+    service:
+      runtimeCanonicalReviewPolicyAdministrationService,
+  },
+);
+
+registerCanonicalReviewPolicyExecutionRoutes(
+  app,
+  {
+    service:
+      runtimeCanonicalReviewPolicyExecutionService,
+  },
+);
+
+registerCanonicalPromotionRoutes(
+  app,
+  {
+    promotionService:
+      runtimeGovernedPromotionService,
+  },
+);
+
+registerOrganizationalMemoryAdaptationRoutes(
+  app,
+  {
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+
+    canonicalStore:
+      knowledgePlatform.store,
+
+    adaptationService:
+      runtimeGovernedCanonicalMemoryAdaptationService,
+  },
+);
+
+registerKnowledgeManufacturingReplayRoutes(
+  app,
+  {
+    manufacturingRunService:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    replayService:
+      knowledgeManufacturingReplayService,
+  },
+);
+
+registerKnowledgeEducationRoutes(
+  app,
+  {
+    projectionService:
+      runtimeKnowledgeEducationProjectionService,
+  },
+);
+
+registerKnowledgeProductionLifecycleRoutes(
+  app,
+  {
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+
+    manufacturingRunService:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    replayService:
+      knowledgeManufacturingReplayService,
+
+    canonicalStore:
+      knowledgePlatform.store,
+
+    memoryStore:
+      runtimeOrganizationalMemoryStore,
+  },
+);
+
+registerExecutiveRoute(
+  app,
+  executiveRuntime,
+);
+
+registerExecutiveReasoningRoute(
+  app,
+  runtimeExecutiveReasoningService,
+);
+
+registerExecutiveOperationsSnapshotRoute(
+  app,
+  {
+    reasoningService:
+      runtimeExecutiveReasoningService,
+
+    decisionService:
+      runtimeExecutiveDecisionService,
+
+    approvalService:
+      runtimeExecutiveApprovalService,
+
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    actionService:
+      runtimeExecutiveActionService,
+
+    auditService:
+      runtimeExecutiveAuditService,
+
+    mutationEnabled:
+      executiveMutationEnabled,
+  },
+);
+
+registerExecutiveDecisionRoute(
+  app,
+  {
+    decisionService:
+      runtimeExecutiveDecisionService,
+
+    decisionDelegationService:
+      runtimeExecutiveDecisionDelegationService,
+
+    delegationActionProposalService:
+      runtimeExecutiveDelegationActionProposalService,
+  },
+);
+
+registerExecutiveDelegationRoute(
+  app,
+  {
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    readinessService:
+      runtimeExecutiveDelegationActionReadinessService,
+  },
+);
+
+registerExecutiveActionRoute(
+  app,
+  {
+    actionService:
+      runtimeExecutiveActionService,
+
+    delegationService:
+      runtimeExecutiveDelegationService,
+
+    executionAuthorizationService:
+      runtimeExecutiveActionExecutionAuthorizationService,
+
+    executionStartService:
+      runtimeExecutiveActionExecutionStartService,
+
+    executionOutcomeService:
+      runtimeExecutiveActionExecutionOutcomeService,
+  },
+);
+
+registerExecutiveActionExecutionRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
+);
+
+registerExecutiveActionMutationRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
+  {
+    enabled:
+      executiveMutationEnabled,
+  },
+);
+
+registerExecutiveActionMutationRoute(
+  app,
+  runtimeExecutiveActionExecutionDispatcher,
+  {
+    enabled:
+      process.env
+        .LUMINA_EXECUTIVE_MUTATION_ENABLED ===
+      "true",
+  },
+);
+
+registerExecutiveApprovalRoute(
+  app,
+  {
+    approvalService:
+      runtimeExecutiveApprovalService,
+
+    approvalDecisionService:
+      runtimeExecutiveApprovalDecisionService,
+  },
+);
 
 const PORT =
   Number(process.env.LUMINA_RUNTIME_PORT) || 4100;

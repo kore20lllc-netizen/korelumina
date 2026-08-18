@@ -60,9 +60,58 @@ export class ADRCompiler
           )
         : "";
 
-    return this.extractor.extract(
-      evidence.title,
-      content,
+    const extracted =
+      await this.extractor.extract(
+        evidence.title,
+        content,
+      );
+
+    /*
+     * The extractor owns structural extraction.
+     * ADRCompiler owns the authoritative Evidence -> Knowledge IR
+     * boundary, so provenance and compiler attribution must be
+     * corrected here before IR leaves the compiler.
+     */
+    return extracted.map(
+      (item) => ({
+        ...item,
+
+        evidenceRefs: [
+          ...new Set([
+            ...item.evidenceRefs,
+            evidence.id,
+          ]),
+        ],
+
+        compiler: {
+          ...item.compiler,
+
+          compilerName:
+            this.name,
+
+          compilerVersion:
+            this.version,
+
+          evidenceSourceType:
+            evidence.type,
+
+          extractedAt:
+            item.compiler.extractedAt,
+
+          extractionMethod:
+            this.name,
+        },
+
+        metadata: {
+          ...item.metadata,
+
+          source:
+            evidence.source,
+
+          contentRef:
+            evidence.contentRef,
+        },
+      }),
     );
   }
 }

@@ -22,32 +22,47 @@ export function LuminaMetricCard({
 }: LuminaMetricCardProps) {
   return (
     <LuminaWorkspacePanel
-      className={cn("min-h-[148px]", className)}
+      className={cn(
+        "relative min-h-[120px] overflow-hidden",
+        className,
+      )}
     >
-      <div className="flex h-full flex-col p-5">
-        <div className="flex items-center justify-between">
-          <div className="text-xs font-medium text-muted-foreground">
-            {label}
-          </div>
+      {/* premium glass highlight */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/20" />
 
-          {icon}
-        </div>
+      <div className="pointer-events-none absolute inset-x-5 top-0 h-12 rounded-full bg-white/[0.04] blur-2xl" />
 
-        <div className="mt-4 flex-1">
-          <div className="text-3xl font-semibold tracking-tight">
-            {value}
-          </div>
+      <div className="relative flex h-full flex-col px-4 py-3">
 
-          {accent && (
-            <div className="mt-3">
-              {accent}
+        <div className="flex items-start justify-between">
+
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold/90">
+              {label}
             </div>
-          )}
+
+            <div className="mt-3 flex min-h-[40px] items-center text-[30px] font-semibold leading-none tracking-[-0.03em] text-white">
+              {value}
+            </div>
+          </div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05]">
+            {icon}
+          </div>
         </div>
+
+        {accent && (
+          <div className="mt-4">
+            {accent}
+          </div>
+        )}
 
         {footer && (
-          <div className="pt-4">
-            {footer}
+          <div className="mt-auto pt-3">
+            <div className="h-px bg-gradient-to-r from-white/15 via-white/6 to-transparent" />
+
+            <div className="pt-3">
+              {footer}
+            </div>
           </div>
         )}
       </div>

@@ -29,7 +29,7 @@ export function Shell({
       <div
         aria-hidden
         className="fixed inset-0 z-0 bg-center bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url(${luminaBg})` }}
+        style={{ backgroundImage: `url(${luminaBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
       />
       {/* Readability overlay */}
       <div

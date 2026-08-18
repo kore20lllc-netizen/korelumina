@@ -1,0 +1,1049 @@
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import {
+  BookOpenCheck,
+  BrainCircuit,
+  CheckCircle2,
+  CircleDot,
+  Clock3,
+  DatabaseZap,
+  GitBranch,
+  Network,
+  ShieldCheck,
+  Target,
+  X,
+} from "lucide-react";
+
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+import {
+  LuminaSegmentedTabs,
+} from "@/components/lumina/workspace/primitives/LuminaSegmentedTabs";
+
+import {
+  LuminaTimelineCard,
+} from "@/components/lumina/workspace/primitives/LuminaTimelineCard";
+
+import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
+import type {
+  KnowledgeCapsule,
+} from "./types";
+
+type InspectorTab =
+  | "lifecycle"
+  | "provenance"
+  | "validation"
+  | "distribution"
+  | "genealogy"
+  | "mission-impact";
+
+interface KnowledgeCapsuleInspectorProps {
+  capsule: KnowledgeCapsule | null;
+  selectedTimelineEventId?: string;
+  onTimelineEventSelect?: (
+    capsuleId: string,
+    timelineEventId: string,
+  ) => void;
+  onClose?: () => void;
+}
+
+const tabs: Array<{
+  id: InspectorTab;
+  label: string;
+  icon: typeof Clock3;
+}> = [
+  {
+    id: "lifecycle",
+    label: "Lifecycle",
+    icon: Clock3,
+  },
+  {
+    id: "provenance",
+    label: "Provenance",
+    icon: DatabaseZap,
+  },
+  {
+    id: "validation",
+    label: "Validation",
+    icon: ShieldCheck,
+  },
+  {
+    id: "distribution",
+    label: "Distribution",
+    icon: Network,
+  },
+  {
+    id: "genealogy",
+    label: "Genealogy",
+    icon: GitBranch,
+  },
+  {
+    id: "mission-impact",
+    label: "Mission impact",
+    icon: Target,
+  },
+];
+
+
+function DetailCard({
+  label,
+  value,
+  tone = "cyan",
+}: {
+  label: string;
+  value: string;
+  tone?: "cyan" | "violet" | "amber" | "emerald" | "rose";
+}) {
+  return (
+    <LuminaFlagshipCard
+      as="article"
+      className={[
+        "rounded-[16px] p-3",
+        flagshipAppearance.inspectorDetailTone[tone],
+      ].join(" ")}
+    >
+      <div className="relative z-10">
+        <div className="text-[9px] font-semibold uppercase tracking-[0.14em] opacity-60">
+          {label}
+        </div>
+
+        <div className="mt-1.5 text-sm font-semibold leading-5">
+          {value}
+        </div>
+      </div>
+    </LuminaFlagshipCard>
+  );
+}
+
+interface CapsuleLifecycleEvent {
+  id: string;
+  title: string;
+  subtitle: string;
+  detail: string;
+  state: "complete" | "current" | "pending";
+}
+
+function getCapsuleLifecycleEvents(
+  capsule: KnowledgeCapsule,
+): CapsuleLifecycleEvent[] {
+  const validationComplete =
+    capsule.layers.every(
+      (layer) =>
+        layer.status === "validated",
+    );
+
+  const approvalComplete =
+    capsule.approval
+      .toLowerCase()
+      .includes("approved");
+
+  const distributionComplete = [
+    "published",
+    "adapted",
+    "consumed",
+    "superseded",
+    "archived",
+  ].includes(capsule.state);
+
+  return [
+    {
+      id: `${capsule.id}:captured`,
+      title: "Knowledge captured",
+      subtitle: capsule.owner,
+      detail: `Package identity ${capsule.identity} established under ${capsule.authority}.`,
+      state: "complete",
+    },
+    {
+      id: `${capsule.id}:compiled`,
+      title: "Semantic compilation",
+      subtitle: capsule.compiler,
+      detail: `${capsule.packageType} prepared for ${capsule.destination}.`,
+      state: "complete",
+    },
+    {
+      id: `${capsule.id}:validated`,
+      title: "Validation review",
+      subtitle: `${validationComplete ? "All" : "Partial"} layers validated`,
+      detail: validationComplete
+        ? "Every governed knowledge layer passed validation."
+        : `${capsule.layers.filter((layer) => layer.status !== "validated").length} layer exception remains active.`,
+      state: validationComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("validation")
+          ? "current"
+          : "pending",
+    },
+    {
+      id: `${capsule.id}:approved`,
+      title: "Authority approval",
+      subtitle: capsule.approval,
+      detail: approvalComplete
+        ? "Package authority approved the governed knowledge state."
+        : "Authority approval remains part of the active lifecycle.",
+      state: approvalComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("approval")
+          ? "current"
+          : "pending",
+    },
+    {
+      id: `${capsule.id}:distributed`,
+      title: "Knowledge distribution",
+      subtitle: capsule.consumer,
+      detail: `Mission destination: ${capsule.mission}.`,
+      state: distributionComplete
+        ? "complete"
+        : capsule.stage.toLowerCase().includes("distribution")
+          ? "current"
+          : "pending",
+    },
+  ];
+}
+
+function EmptyValue({
+  label,
+}: {
+  label: string;
+}) {
+  return (
+    <div
+      className={
+        flagshipAppearance.inspectorEmptyState
+      }
+    >
+      {label}
+    </div>
+  );
+}
+
+export function KnowledgeCapsuleInspector({
+  capsule,
+  selectedTimelineEventId,
+  onTimelineEventSelect,
+  onClose,
+}: KnowledgeCapsuleInspectorProps) {
+  const [
+    activeTab,
+    setActiveTab,
+  ] = useState<InspectorTab>("lifecycle");
+
+  useEffect(() => {
+    setActiveTab("lifecycle");
+  }, [capsule?.id]);
+
+  useEffect(() => {
+    if (selectedTimelineEventId) {
+      setActiveTab("lifecycle");
+    }
+  }, [selectedTimelineEventId]);
+
+  const activeTabDefinition = useMemo(
+    () =>
+      tabs.find(
+        (tab) =>
+          tab.id === activeTab,
+      ) ?? tabs[0],
+    [activeTab],
+  );
+
+  if (!capsule) {
+    return null;
+  }
+
+  const ActiveIcon =
+    activeTabDefinition.icon;
+
+  const validationLayerCount =
+    capsule.layers.filter(
+      (layer) =>
+        layer.status === "validated",
+    ).length;
+
+  const disputedLayerCount =
+    capsule.layers.filter(
+      (layer) =>
+        layer.status !== "validated",
+    ).length;
+
+  const lifecycleEvents =
+    getCapsuleLifecycleEvents(capsule);
+
+  return (
+    <LuminaFlagshipPanel
+      aria-label={`${capsule.identity} executive inspector`}
+      className="overflow-hidden"
+    >
+      <header
+        className={
+          flagshipAppearance.inspectorHeader
+        }
+      >
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+          <div className="min-w-0">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/72">
+              Executive knowledge passport
+            </div>
+
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <h2 className="text-xl font-semibold tracking-[-0.02em] text-amber-400 sm:text-2xl">
+                {capsule.identity}
+              </h2>
+
+              <div
+                className={[
+                  "inline-flex rounded-full border px-3 py-1.5",
+                  "text-[9px] font-semibold uppercase tracking-[0.13em]",
+                  flagshipAppearance.inspectorStateTone[capsule.state],
+                ].join(" ")}
+              >
+                {capsule.state.replace("-", " ")}
+              </div>
+
+              <div
+                className={
+                  flagshipAppearance.inspectorIntegrityBadge
+                }
+              >
+                {capsule.integrity}
+              </div>
+            </div>
+
+            <h3 className="mt-3 text-base font-semibold text-sky-100">
+              {capsule.title}
+            </h3>
+
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-sky-400/72">
+              Stable identity, governed lineage, validation posture,
+              distribution authority and mission influence for one
+              persistent Knowledge Package.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div
+              className={
+                flagshipAppearance.inspectorMetric
+              }
+            >
+              <div className="text-[9px] uppercase tracking-[0.14em] text-cyan-300/56">
+                Current stage
+              </div>
+              <div className="mt-1 text-sm font-semibold text-cyan-100">
+                {capsule.stage}
+              </div>
+            </div>
+
+            {onClose ? (
+              <button
+                type="button"
+                aria-label="Close capsule inspector"
+                onClick={onClose}
+                className={
+                  flagshipAppearance.inspectorIconButton
+                }
+              >
+                <X className="h-4 w-4" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        <LuminaSegmentedTabs
+          tabs={tabs}
+          activeTab={activeTab}
+          ariaLabel="Knowledge capsule inspector sections"
+          tabIdPrefix="knowledge-inspector-tab"
+          panelId="knowledge-inspector-tabpanel"
+          onChange={setActiveTab}
+          className="mt-6 pb-1"
+        />
+      </header>
+
+      <div
+        id="knowledge-inspector-tabpanel"
+        role="tabpanel"
+        aria-labelledby={`knowledge-inspector-tab-${activeTab}`}
+        className="p-5 sm:p-6"
+      >
+        <div className="mb-5 flex items-center gap-3">
+          <ExecutivePremiumIcon
+            icon={ActiveIcon}
+            state={
+              activeTab === "validation" &&
+              disputedLayerCount > 0
+                ? "warning"
+                : activeTab === "distribution"
+                  ? "active"
+                  : "healthy"
+            }
+          />
+
+          <div>
+            <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/62">
+              Inspector section
+            </div>
+
+            <div className="mt-1 text-sm font-semibold text-amber-400">
+              {activeTabDefinition.label}
+            </div>
+          </div>
+        </div>
+
+        {activeTab === "lifecycle" ? (
+          <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,.6fr)]">
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
+            >
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
+                Package history
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                {lifecycleEvents.map(
+                  (event, index) => (
+                    <div
+                      key={event.id}
+                      className="relative"
+                    >
+                      {index <
+                      lifecycleEvents.length - 1 ? (
+                        <div
+                          aria-hidden="true"
+                          className="absolute left-[19px] top-10 h-[calc(100%+12px)] w-px bg-cyan-300/18"
+                        />
+                      ) : null}
+
+                      <button
+                        type="button"
+                        aria-pressed={
+                          selectedTimelineEventId ===
+                          event.id
+                        }
+                        onClick={() =>
+                          onTimelineEventSelect?.(
+                            capsule.id,
+                            event.id,
+                          )
+                        }
+                        className={[
+                          "block w-full rounded-[18px] text-left",
+                          flagshipAppearance.focusRing,
+                        ].join(" ")}
+                      >
+                        <LuminaTimelineCard
+                        icon={
+                          <ExecutivePremiumIcon
+                            icon={
+                              event.state === "complete"
+                                ? CheckCircle2
+                                : event.state === "current"
+                                  ? CircleDot
+                                  : Clock3
+                            }
+                            state={
+                              event.state === "complete"
+                                ? "healthy"
+                                : event.state === "current"
+                                  ? "active"
+                                  : "warning"
+                            }
+                          />
+                        }
+                        title={
+                          <span className="text-sky-100">
+                            {event.title}
+                          </span>
+                        }
+                        subtitle={event.subtitle}
+                        className={[
+                          "!border-cyan-300/50",
+                          "transition-[border-color,box-shadow,transform] duration-200",
+                          selectedTimelineEventId ===
+                          event.id
+                            ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_24px_rgba(37,99,235,0.24)]"
+                            : event.state === "current"
+                              ? "ring-1 ring-inset ring-cyan-300/45"
+                              : "",
+                        ].join(" ")}
+                      >
+                        <p className="text-xs leading-5 text-sky-300/70">
+                          {event.detail}
+                        </p>
+                        </LuminaTimelineCard>
+                      </button>
+                    </div>
+                  ),
+                )}
+              </div>
+            </LuminaFlagshipSurface>
+
+            <div className="grid gap-4">
+              <LuminaFlagshipSurface className="p-4">
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                  <DetailCard
+                    label="Stable identity"
+                    value={capsule.identity}
+                  />
+                  <DetailCard
+                    label="Current stage"
+                    value={capsule.stage}
+                    tone="violet"
+                  />
+                  <DetailCard
+                    label="Lifecycle state"
+                    value={capsule.state.replace("-", " ")}
+                    tone="emerald"
+                  />
+                  <DetailCard
+                    label="Integrity posture"
+                    value={capsule.integrity}
+                    tone={
+                      capsule.integrity === "sealed"
+                        ? "emerald"
+                        : "rose"
+                    }
+                  />
+                  <DetailCard
+                    label="Package type"
+                    value={capsule.packageType}
+                    tone="amber"
+                  />
+                  <DetailCard
+                    label="Authority"
+                    value={capsule.authority}
+                  />
+                </div>
+              </LuminaFlagshipSurface>
+
+              <LuminaFlagshipSurface className="p-4">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/64">
+                  Lifecycle assurance
+                </div>
+
+                <div className="mt-4 grid gap-3">
+                  <DetailCard
+                    label="Identity continuity"
+                    value="Preserved"
+                    tone="emerald"
+                  />
+                  <DetailCard
+                    label="Capsule replacement"
+                    value="Prohibited"
+                    tone="amber"
+                  />
+                  <DetailCard
+                    label="Lineage retention"
+                    value="Permanent"
+                    tone="violet"
+                  />
+                </div>
+              </LuminaFlagshipSurface>
+            </div>
+          </div>
+        ) : null}
+
+        {activeTab === "provenance" ? (
+          <div className="grid gap-4 lg:grid-cols-2">
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
+            >
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={DatabaseZap}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/62">
+                    Source provenance
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Evidentiary origin
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <DetailCard
+                  label="Owner"
+                  value={capsule.owner}
+                />
+                <DetailCard
+                  label="Compiler"
+                  value={capsule.compiler}
+                  tone="violet"
+                />
+                <DetailCard
+                  label="Source count"
+                  value={String(capsule.sources.length)}
+                  tone="amber"
+                />
+                <DetailCard
+                  label="Evidence status"
+                  value={
+                    capsule.sources.length > 0
+                      ? "Captured"
+                      : "Pending"
+                  }
+                  tone={
+                    capsule.sources.length > 0
+                      ? "emerald"
+                      : "rose"
+                  }
+                />
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface className="p-4">
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={BrainCircuit}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/62">
+                    Semantic formation
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Knowledge IR mapping
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Claims",
+                  "Concepts",
+                  "Mappings",
+                  "Confidence",
+                  "Educational mapping",
+                  "Constitutional artifacts",
+                ].map((item) => (
+                  <DetailCard
+                    key={item}
+                    label={item}
+                    value="Modeled"
+                    tone="violet"
+                  />
+                ))}
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface className="p-4 lg:col-span-2">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
+                Source register
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {capsule.sources.length > 0 ? (
+                  capsule.sources.map((source) => (
+                    <DetailCard
+                      key={source}
+                      label="Source"
+                      value={source}
+                    />
+                  ))
+                ) : (
+                  <EmptyValue label="No source records available in this fixture." />
+                )}
+              </div>
+            </LuminaFlagshipSurface>
+          </div>
+        ) : null}
+
+        {activeTab === "validation" ? (
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+            <LuminaFlagshipSurface className="p-4">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <DetailCard
+                  label="Validated layers"
+                  value={String(validationLayerCount)}
+                  tone="emerald"
+                />
+                <DetailCard
+                  label="Disputed layers"
+                  value={String(disputedLayerCount)}
+                  tone={
+                    disputedLayerCount > 0
+                      ? "rose"
+                      : "emerald"
+                  }
+                />
+                <DetailCard
+                  label="Current posture"
+                  value={
+                    disputedLayerCount > 0
+                      ? "Exception active"
+                      : "Healthy"
+                  }
+                  tone={
+                    disputedLayerCount > 0
+                      ? "amber"
+                      : "emerald"
+                  }
+                />
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                {capsule.layers.map((layer) => (
+                  <article
+                    key={layer.id}
+                    className={[
+                      flagshipAppearance.inspectorDetailCard,
+                      "rounded-[18px] p-4",
+                      layer.status === "validated"
+                        ? "bg-emerald-300/[0.035]"
+                        : "bg-rose-300/[0.035]",
+                    ].join(" ")}
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <div className="text-xs font-semibold text-sky-100">
+                          {layer.label}
+                        </div>
+
+                        <div className="mt-1 text-[10px] text-sky-400/62">
+                          {layer.id}
+                        </div>
+                      </div>
+
+                      <div
+                        className={[
+                          flagshipAppearance.inspectorLayerStatusBadge,
+                          layer.status === "validated"
+                            ? flagshipAppearance.inspectorLayerStatusTone.validated
+                            : flagshipAppearance.inspectorLayerStatusTone.disputed,
+                        ].join(" ")}
+                      >
+                        {layer.status}
+                      </div>
+                    </div>
+
+                    {layer.detail ? (
+                      <p className="mt-2 text-[11px] leading-5 text-sky-400/70">
+                        {layer.detail}
+                      </p>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface className="p-4">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-300/62">
+                Review controls
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                <DetailCard
+                  label="Approval posture"
+                  value={capsule.approval}
+                  tone="amber"
+                />
+                <DetailCard
+                  label="Confidence"
+                  value={`${capsule.confidence}%`}
+                  tone="cyan"
+                />
+                <DetailCard
+                  label="Reseal eligibility"
+                  value={
+                    disputedLayerCount > 0
+                      ? "Pending remediation"
+                      : "Eligible"
+                  }
+                  tone={
+                    disputedLayerCount > 0
+                      ? "rose"
+                      : "emerald"
+                  }
+                />
+              </div>
+            </LuminaFlagshipSurface>
+          </div>
+        ) : null}
+
+        {activeTab === "distribution" ? (
+          <div className="grid gap-4 lg:grid-cols-2">
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
+            >
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={Network}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/62">
+                    Distribution destinations
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Governed consumer access
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Organizational Memory",
+                  "Knowledge Graph",
+                  "Semantic Search",
+                  "Context Builder",
+                  "Chief Agent Educational Corpus",
+                  "Mission System",
+                  "Runtime Advisor",
+                  "Executive Office",
+                ].map((item) => (
+                  <DetailCard
+                    key={item}
+                    label="Consumer"
+                    value={item}
+                  />
+                ))}
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface className="p-4">
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={BookOpenCheck}
+                  state="healthy"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/62">
+                    Consumption posture
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Authorized organizational use
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                <DetailCard
+                  label="Distribution state"
+                  value={
+                    capsule.state === "published" ||
+                    capsule.state === "consumed" ||
+                    capsule.state === "adapted"
+                      ? "Active"
+                      : "Pending publication"
+                  }
+                  tone="emerald"
+                />
+                <DetailCard
+                  label="Canonical immutability"
+                  value="Enforced"
+                  tone="violet"
+                />
+                <DetailCard
+                  label="Consumption history"
+                  value="Preserved"
+                  tone="cyan"
+                />
+                <DetailCard
+                  label="Future consumers"
+                  value="Authorization required"
+                  tone="amber"
+                />
+              </div>
+            </LuminaFlagshipSurface>
+          </div>
+        ) : null}
+
+        {activeTab === "genealogy" ? (
+          <div className="grid gap-4 lg:grid-cols-2">
+            <LuminaFlagshipSurface className="p-4">
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={GitBranch}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-violet-300/62">
+                    Capsule genealogy
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Organizational descent
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <DetailCard
+                  label="Ancestors"
+                  value="Tracked"
+                  tone="violet"
+                />
+                <DetailCard
+                  label="Descendants"
+                  value="Tracked"
+                  tone="emerald"
+                />
+                <DetailCard
+                  label="Siblings"
+                  value="Tracked"
+                  tone="cyan"
+                />
+                <DetailCard
+                  label="Lineage continuity"
+                  value="Permanent"
+                  tone="amber"
+                />
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
+            >
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={Network}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/62">
+                    Dependency graph
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Operational relationships
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Upstream",
+                  "Downstream",
+                  "Blocking",
+                  "Related Packages",
+                  "Related Conversations",
+                  "Related Documentation",
+                ].map((item) => (
+                  <DetailCard
+                    key={item}
+                    label={item}
+                    value="Inspectable"
+                  />
+                ))}
+              </div>
+            </LuminaFlagshipSurface>
+          </div>
+        ) : null}
+
+        {activeTab === "mission-impact" ? (
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+            <LuminaFlagshipSurface
+              as={undefined}
+              className="p-4"
+            >
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={Target}
+                  state="active"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/62">
+                    Mission influence
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Operational effect surface
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {[
+                  "Planning",
+                  "Reasoning",
+                  "Execution",
+                  "Runtime",
+                  "Future Learning",
+                  "Engineering Standards",
+                ].map((item) => (
+                  <DetailCard
+                    key={item}
+                    label="Influence"
+                    value={item}
+                  />
+                ))}
+              </div>
+            </LuminaFlagshipSurface>
+
+            <LuminaFlagshipSurface className="p-4">
+              <div className="flex items-center gap-3">
+                <ExecutivePremiumIcon
+                  icon={CheckCircle2}
+                  state="healthy"
+                />
+
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-amber-300/62">
+                    Educational contribution
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-amber-400">
+                    Chief Agent readiness
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                <DetailCard
+                  label="Educational corpus"
+                  value="Contributing"
+                  tone="amber"
+                />
+                <DetailCard
+                  label="Genesis corpus"
+                  value="Mapped"
+                  tone="violet"
+                />
+                <DetailCard
+                  label="Competency effect"
+                  value="Inspectable"
+                  tone="cyan"
+                />
+                <DetailCard
+                  label="Organizational influence"
+                  value="Governed"
+                  tone="emerald"
+                />
+              </div>
+            </LuminaFlagshipSurface>
+          </div>
+        ) : null}
+      </div>
+    </LuminaFlagshipPanel>
+  );
+}

@@ -355,9 +355,10 @@ export function WorkspaceProvider({
           error,
         );
 
-        if (!cancelled) {
-          setStoredProjects([]);
-          setActiveProjectState(null);
+        // Keep the last successful workspace state.
+        // Runtime outages should not wipe the user's project list.
+        if (cancelled) {
+          return;
         }
       }
     }

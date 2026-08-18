@@ -1,0 +1,547 @@
+import {
+  Archive,
+  BrainCircuit,
+  Building2,
+  CircleDot,
+  GitBranch,
+  GraduationCap,
+  Network,
+  Search,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react";
+
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
+  KnowledgeCapsule,
+} from "../capsules";
+
+import type {
+  KnowledgeCapsuleModel,
+  KnowledgeDistributionRecord,
+} from "../capsules";
+
+type KnowledgeDistributionHubProps = {
+  capsules: KnowledgeCapsuleModel[];
+  records: KnowledgeDistributionRecord[];
+  selectedCapsuleId: string;
+  selectedConsumerId?: string;
+  selectedHistoryEventId?: string;
+  selectedGenealogySummaryId?: string;
+  onCapsuleSelect: (capsuleId: string) => void;
+  onConsumerSelect: (
+    capsuleId: string,
+    consumerId: string,
+  ) => void;
+  onHistoryEventSelect: (
+    capsuleId: string,
+    eventId: string,
+  ) => void;
+  onGenealogySummarySelect: (
+    capsuleId: string,
+    summaryId: string,
+  ) => void;
+};
+
+type DistributionConsumer =
+  KnowledgeDistributionRecord["consumers"][number];
+
+type DistributionConsumerCardProps = {
+  capsuleId: string;
+  consumer: DistributionConsumer;
+  selected: boolean;
+  side: "left" | "right";
+  onSelect: (
+    capsuleId: string,
+    consumerId: string,
+  ) => void;
+};
+
+const consumerIcons = {
+  "organizational-memory": Building2,
+  "knowledge-graph": Network,
+  "semantic-search": Search,
+  "context-builder": Workflow,
+  "chief-agent-corpus": GraduationCap,
+  "chief-agent-context": BrainCircuit,
+  "mission-system": GitBranch,
+  "runtime-advisor": CircleDot,
+  "executive-office": ShieldCheck,
+  "engineering-workspace": Archive,
+} as const;
+
+const statusClasses = {
+  connected:
+    "border-cyan-300/30 bg-cyan-300/[0.06] text-cyan-200",
+  consuming:
+    "border-emerald-300/32 bg-emerald-300/[0.07] text-emerald-200",
+  waiting:
+    "border-blue-400/55 ring-1 ring-inset ring-cyan-300/14 bg-violet-300/[0.06] text-violet-200",
+  pending:
+    "border-amber-300/30 bg-amber-300/[0.07] text-amber-200",
+  restricted:
+    "border-rose-300/30 bg-rose-300/[0.06] text-rose-200",
+  deprecated:
+    "border-slate-300/22 bg-slate-300/[0.05] text-slate-300",
+  superseded:
+    "border-orange-300/30 bg-orange-300/[0.06] text-orange-200",
+  archived:
+    "border-slate-400/24 bg-slate-400/[0.05] text-slate-300",
+} as const;
+
+function DistributionConsumerCard({
+  capsuleId,
+  consumer,
+  selected,
+  side,
+  onSelect,
+}: DistributionConsumerCardProps) {
+  const Icon =
+    consumerIcons[
+      consumer.id as keyof typeof consumerIcons
+    ] ?? Network;
+
+  return (
+    <button
+      type="button"
+      aria-pressed={selected}
+      onClick={() =>
+        onSelect(
+          capsuleId,
+          consumer.id,
+        )
+      }
+      className="block w-full text-left"
+    >
+      <LuminaFlagshipCard
+        as="article"
+        className={[
+          "relative overflow-hidden rounded-[20px] p-4 transition-[border-color,box-shadow,transform] duration-200",
+          selected
+            ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+            : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+        ].join(" ")}
+      >
+      <div className="relative z-10 flex items-start gap-3">
+        <ExecutivePremiumIcon
+          icon={Icon}
+          state={
+            consumer.status === "consuming"
+              ? "healthy"
+              : consumer.status === "restricted"
+                ? "warning"
+                : "active"
+          }
+        />
+
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <h3 className="text-sm font-semibold text-sky-100">
+              {consumer.label}
+            </h3>
+
+            <div
+              className={[
+                "inline-flex rounded-full border px-2 py-1",
+                "text-[9px] font-semibold uppercase tracking-[0.12em]",
+                statusClasses[consumer.status],
+              ].join(" ")}
+            >
+              {consumer.status}
+            </div>
+          </div>
+
+          <p className="mt-2 text-[11px] leading-5 text-sky-400/72">
+            {consumer.detail}
+          </p>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className={[
+          "pointer-events-none absolute top-1/2 hidden h-px w-5 xl:block",
+          side === "left"
+            ? "right-0 translate-x-full bg-gradient-to-r from-cyan-300/46 to-violet-300/18"
+            : "left-0 -translate-x-full bg-gradient-to-l from-violet-300/46 to-cyan-300/18",
+        ].join(" ")}
+      />
+      </LuminaFlagshipCard>
+    </button>
+  );
+}
+
+export function KnowledgeDistributionHub({
+  capsules,
+  records,
+  selectedCapsuleId,
+  selectedConsumerId,
+  selectedHistoryEventId,
+  selectedGenealogySummaryId,
+  onCapsuleSelect,
+  onConsumerSelect,
+  onHistoryEventSelect,
+  onGenealogySummarySelect,
+}: KnowledgeDistributionHubProps) {
+  const record =
+    records.find(
+      (item) =>
+        item.capsuleId === selectedCapsuleId,
+    ) ?? records[0];
+
+  const capsule =
+    capsules.find(
+      (item) =>
+        item.id === record?.capsuleId,
+    ) ??
+    capsules.find(
+      (item) =>
+        item.stage === "Canonical Knowledge",
+    ) ??
+    capsules[0];
+
+  if (!record || !capsule) {
+    return null;
+  }
+
+  return (
+    <LuminaFlagshipPanel
+      title={null}
+      aria-label="Knowledge Distribution and Consumption Hub"
+      className="[&>div:nth-of-type(3)]:hidden"
+    >
+      <header className="border-b border-violet-300/18 p-5 sm:p-6">
+        <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-violet-300/72">
+          Distribution phase
+        </div>
+
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-amber-400">
+          Knowledge Distribution & Consumption Hub
+        </h2>
+
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-sky-300/76">
+          Canonical Knowledge becomes a governed organizational asset. The capsule
+          retains one permanent identity while authorized consumers increase around it.
+        </p>
+      </header>
+
+      <div className="grid gap-6 p-5 sm:p-6">
+        <LuminaFlagshipSurface
+          aria-label="Governed knowledge distribution topology"
+          className="relative overflow-hidden rounded-[28px] p-4 sm:p-5"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(139,92,246,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.04)_1px,transparent_1px)] [background-size:36px_36px]"
+          />
+
+          <div className="relative">
+            <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px_minmax(0,1fr)] xl:items-center">
+              <div className="grid gap-3">
+                {record.consumers
+                  .slice(
+                    0,
+                    Math.ceil(
+                      record.consumers.length / 2,
+                    ),
+                  )
+                  .map((consumer) => (
+                    <DistributionConsumerCard
+                      key={consumer.id}
+                      capsuleId={record.capsuleId}
+                      consumer={consumer}
+                      selected={
+                        selectedConsumerId ===
+                        consumer.id
+                      }
+                      side="left"
+                      onSelect={onConsumerSelect}
+                    />
+                  ))}
+              </div>
+
+              <div className="relative mx-auto w-full max-w-[340px]">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-8 rounded-full border border-violet-300/10"
+                />
+
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-4 rounded-[32px] border border-amber-300/10 bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,.10),transparent_64%)]"
+                />
+
+                <div className="relative z-10 rounded-[26px] border border-amber-300/34 bg-amber-300/[0.05] p-4 shadow-[0_0_48px_rgba(245,158,11,.13),0_22px_50px_rgba(2,6,23,.38)]">
+                  <div className="mb-3 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-300/74">
+                    Canonical organizational asset
+                  </div>
+
+                  <KnowledgeCapsule
+                    capsule={capsule}
+                    selected
+                    onSelect={onCapsuleSelect}
+                  />
+
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[14px] px-3 py-2 text-center"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.12em] text-emerald-300/58">
+                          Consuming
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-emerald-100">
+                          {
+                            record.consumers.filter(
+                              (consumer) =>
+                                consumer.status === "consuming",
+                            ).length
+                          }
+                        </div>
+                      </div>
+                    </LuminaFlagshipCard>
+
+                    <LuminaFlagshipCard
+                      as="article"
+                      className="rounded-[14px] px-3 py-2 text-center"
+                    >
+                      <div className="relative z-10">
+                        <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/58">
+                          Authorized
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-cyan-100">
+                          {record.consumers.length}
+                        </div>
+                      </div>
+                    </LuminaFlagshipCard>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                {record.consumers
+                  .slice(
+                    Math.ceil(
+                      record.consumers.length / 2,
+                    ),
+                  )
+                  .map((consumer) => (
+                    <DistributionConsumerCard
+                      key={consumer.id}
+                      capsuleId={record.capsuleId}
+                      consumer={consumer}
+                      selected={
+                        selectedConsumerId ===
+                        consumer.id
+                      }
+                      side="right"
+                      onSelect={onConsumerSelect}
+                    />
+                  ))}
+              </div>
+            </div>
+          </div>
+        </LuminaFlagshipSurface>
+
+        <div className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,.65fr)]">
+          <LuminaFlagshipPanel
+            title={null}
+            className="[&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
+            <div className="flex flex-col gap-2 border-b border-cyan-300/12 pb-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
+                  Governed consumption log
+                </div>
+
+                <p className="mt-1 text-xs text-sky-400/62">
+                  Permanent record of authorized capsule use.
+                </p>
+              </div>
+
+              <div className="rounded-full border border-blue-400/48 bg-cyan-300/[0.04] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
+                {record.history.length} events
+              </div>
+            </div>
+
+            <div className="mt-4 grid gap-3 lg:grid-cols-2">
+              {record.history.map((event) => {
+                const selected =
+                  selectedHistoryEventId ===
+                  event.id;
+
+                return (
+                  <button
+                    type="button"
+                    key={event.id}
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onHistoryEventSelect(
+                        record.capsuleId,
+                        event.id,
+                      )
+                    }
+                    className="block w-full text-left"
+                  >
+                    <LuminaFlagshipCard
+                      as="article"
+                      className={[
+                        "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
+                        selected
+                          ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                          : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                      ].join(" ")}
+                    >
+                      <div className="relative z-10">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-xs font-semibold text-amber-300">
+                            {event.consumer}
+                          </div>
+
+                          <div className="text-[9px] uppercase tracking-[0.12em] text-cyan-300/54">
+                            {event.action}
+                          </div>
+                        </div>
+
+                        <p className="mt-2 text-xs leading-5 text-sky-400/72">
+                          {event.detail}
+                        </p>
+                      </div>
+                    </LuminaFlagshipCard>
+                  </button>
+                );
+              })}
+            </div>
+            </div>
+          </LuminaFlagshipPanel>
+
+          <LuminaFlagshipPanel
+            title={null}
+            className="[&>div:nth-of-type(3)]:hidden"
+          >
+            <div className="p-5 sm:p-6">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300/68">
+              Capsule genealogy
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+              {[
+                {
+                  id: "distribution-genealogy-parents",
+                  label: "Parents",
+                  value:
+                    record.genealogy.parentCapsuleIds
+                      .length,
+                  tone:
+                    "text-violet-300/58",
+                  valueTone:
+                    "text-violet-100",
+                },
+                {
+                  id: "distribution-genealogy-children",
+                  label: "Children",
+                  value:
+                    record.genealogy.childCapsuleIds
+                      .length,
+                  tone:
+                    "text-emerald-300/58",
+                  valueTone:
+                    "text-emerald-100",
+                },
+                {
+                  id: "distribution-genealogy-missions",
+                  label: "Missions",
+                  value:
+                    record.genealogy.relatedMissions
+                      .length,
+                  tone:
+                    "text-cyan-300/58",
+                  valueTone:
+                    "text-cyan-100",
+                },
+                {
+                  id: "distribution-genealogy-education",
+                  label: "Educational influence",
+                  value:
+                    record.genealogy
+                      .educationalInfluence.length,
+                  tone:
+                    "text-amber-300/58",
+                  valueTone:
+                    "text-amber-100",
+                },
+              ].map((summary) => {
+                const selected =
+                  selectedGenealogySummaryId ===
+                  summary.id;
+
+                return (
+                  <button
+                    type="button"
+                    key={summary.id}
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onGenealogySummarySelect(
+                        record.capsuleId,
+                        summary.id,
+                      )
+                    }
+                    className="block w-full text-left"
+                  >
+                    <LuminaFlagshipCard
+                      as="article"
+                      className={[
+                        "h-full rounded-[18px] p-4 transition-[border-color,box-shadow,transform] duration-200",
+                        selected
+                          ? "ring-1 ring-inset ring-cyan-200/80 shadow-[0_0_28px_rgba(37,99,235,0.24)]"
+                          : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                      ].join(" ")}
+                    >
+                      <div className="relative z-10">
+                        <div
+                          className={[
+                            "text-[9px] uppercase tracking-[0.13em]",
+                            summary.tone,
+                          ].join(" ")}
+                        >
+                          {summary.label}
+                        </div>
+
+                        <div
+                          className={[
+                            "mt-2 text-sm font-semibold",
+                            summary.valueTone,
+                          ].join(" ")}
+                        >
+                          {summary.value}
+                        </div>
+                      </div>
+                    </LuminaFlagshipCard>
+                  </button>
+                );
+              })}
+            </div>
+            </div>
+          </LuminaFlagshipPanel>
+        </div>
+      </div>
+    </LuminaFlagshipPanel>
+  );
+}

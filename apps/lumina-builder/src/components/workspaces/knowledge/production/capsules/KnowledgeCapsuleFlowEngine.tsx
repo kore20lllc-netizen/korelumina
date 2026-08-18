@@ -1,0 +1,701 @@
+import {
+  CircleAlert,
+} from "lucide-react";
+
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import {
+  ExecutivePremiumIcon,
+} from "@/components/design-system/executive/ExecutivePremiumIcon";
+
+import {
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  LuminaFlagshipSurface,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+
+import {
+  KnowledgeCapsule,
+} from "./KnowledgeCapsule";
+
+import {
+  emptyKnowledgeCapsuleFilters,
+  KnowledgeCapsuleFilters,
+} from "./KnowledgeCapsuleFilters";
+
+import type {
+  KnowledgeCapsuleFilterState,
+} from "./KnowledgeCapsuleFilters";
+
+import {
+  flagshipAppearance,
+} from "../../learning/presentation/flagshipAppearance";
+
+import type {
+  KnowledgeCapsuleModel,
+} from "./types";
+
+type KnowledgeCapsuleFlowEngineProps = {
+  capsules: KnowledgeCapsuleModel[];
+  positions: CapsuleManufacturingPosition[];
+  selectedCapsuleId: string;
+  selectedStationId?: string;
+  onCapsuleSelect: (capsuleId: string) => void;
+  onStationSelect: (
+    stationId: string,
+    capsuleId: string | null,
+  ) => void;
+  onVisibleCapsuleChange: (
+    capsuleId: string | null,
+  ) => void;
+  onVisibleStationChange: (
+    stationId: string | null,
+  ) => void;
+};
+
+import {
+  manufacturingStations,
+} from "./lifecycle";
+
+import type {
+  CapsuleManufacturingPosition,
+} from "./lifecycle";
+
+const stations =
+  manufacturingStations;
+
+const stateByStation: Record<
+  (typeof stations)[number],
+  KnowledgeCapsuleModel["state"]
+> = {
+  "Evidence Intake": "queued",
+  "Documentation Compiler": "processing",
+  "Conversation Compiler": "processing",
+  "Git Compiler": "processing",
+  "Runtime Compiler": "processing",
+  "Mission Compiler": "processing",
+  "Execution Compiler": "processing",
+  "Knowledge IR": "processing",
+  Validation: "needs-review",
+  "Knowledge Package Assembly": "validated",
+  "Canonical Review": "needs-review",
+  "Canonical Knowledge": "approved",
+};
+
+export function KnowledgeCapsuleFlowEngine({
+  capsules,
+  positions,
+  selectedCapsuleId,
+  selectedStationId,
+  onCapsuleSelect,
+  onStationSelect,
+  onVisibleCapsuleChange,
+  onVisibleStationChange,
+}: KnowledgeCapsuleFlowEngineProps) {
+  const [
+    filters,
+    setFilters,
+  ] = useState<KnowledgeCapsuleFilterState>(
+    emptyKnowledgeCapsuleFilters,
+  );
+
+  const filteredCapsules = useMemo(() => {
+    const matchesConfidence = (
+      confidence: number,
+    ) => {
+      switch (filters.confidence) {
+        case "90–100%":
+          return confidence >= 90;
+        case "75–89%":
+          return confidence >= 75 && confidence <= 89;
+        case "Below 75%":
+          return confidence < 75;
+        default:
+          return true;
+      }
+    };
+
+    return capsules.filter((capsule) => {
+      return (
+        (!filters.stage ||
+          capsule.stage === filters.stage) &&
+        (!filters.authority ||
+          capsule.authority === filters.authority) &&
+        (!filters.approval ||
+          capsule.approval === filters.approval) &&
+        (!filters.packageType ||
+          capsule.packageType === filters.packageType) &&
+        (!filters.mission ||
+          capsule.title === filters.mission ||
+          capsule.mission === filters.mission) &&
+        (!filters.conversation ||
+          capsule.title === filters.conversation ||
+          capsule.conversation === filters.conversation) &&
+        (!filters.compiler ||
+          capsule.compiler === filters.compiler) &&
+        (!filters.owner ||
+          capsule.owner === filters.owner) &&
+        (!filters.educationalModule ||
+          capsule.educationalModule ===
+            filters.educationalModule) &&
+        (!filters.consumer ||
+          capsule.consumer === filters.consumer) &&
+        (!filters.status ||
+          capsule.state === filters.status) &&
+        matchesConfidence(capsule.confidence)
+      );
+    });
+  }, [
+    capsules,
+    filters,
+  ]);
+
+  const selectedCapsule = useMemo(
+    () => {
+      if (!selectedCapsuleId) {
+        return undefined;
+      }
+
+      return (
+        filteredCapsules.find(
+          (capsule) =>
+            capsule.id === selectedCapsuleId,
+        ) ??
+        filteredCapsules[0]
+      );
+    },
+    [
+      filteredCapsules,
+      selectedCapsuleId,
+    ],
+  );
+
+  useEffect(() => {
+    if (!selectedCapsuleId) {
+      return;
+    }
+
+    const visibleCapsuleId =
+      selectedCapsule?.id ?? null;
+
+    if (visibleCapsuleId === selectedCapsuleId) {
+      return;
+    }
+
+    onVisibleCapsuleChange(
+      visibleCapsuleId,
+    );
+  }, [
+    onVisibleCapsuleChange,
+    selectedCapsule,
+    selectedCapsuleId,
+  ]);
+
+  const capsuleById = useMemo(
+    () =>
+      new Map(
+        filteredCapsules.flatMap((capsule) => [
+          [
+            capsule.id.toLowerCase(),
+            capsule,
+          ] as const,
+          [
+            capsule.identity.toLowerCase(),
+            capsule,
+          ] as const,
+        ]),
+      ),
+    [filteredCapsules],
+  );
+
+  const occupancyByStation = useMemo(() => {
+    return manufacturingStations.map(
+      (station) => {
+        const stationPositions =
+          positions.filter(
+            (position) =>
+              position.station === station &&
+              capsuleById.has(
+                position.capsuleId.toLowerCase(),
+              ),
+          );
+
+        const branchPositions =
+          positions.flatMap(
+            (position) =>
+              position.branches.filter(
+                (branch) =>
+                  branch.station === station &&
+                  capsuleById.has(
+                    branch.parentCapsuleId.toLowerCase(),
+                  ),
+              ),
+          );
+
+        return {
+          station,
+          positions:
+            stationPositions,
+          branchPositions,
+        };
+      },
+    );
+  }, [capsuleById, positions]);
+
+  useEffect(() => {
+    if (!selectedStationId) {
+      return;
+    }
+
+    const selectedStation =
+      occupancyByStation.find(
+        (record) =>
+          record.station === selectedStationId,
+      );
+
+    const hasVisibleOccupancy =
+      Boolean(
+        selectedStation &&
+          (
+            selectedStation.positions.length > 0 ||
+            selectedStation.branchPositions.length > 0
+          ),
+      );
+
+    if (hasVisibleOccupancy) {
+      return;
+    }
+
+    onVisibleStationChange(null);
+  }, [
+    occupancyByStation,
+    onVisibleStationChange,
+    selectedStationId,
+  ]);
+
+  return (
+    <LuminaFlagshipPanel
+      title={null}
+      aria-label="Knowledge Capsule Flow Engine"
+      className="[&>div:nth-of-type(3)]:hidden"
+    >
+      <header className="border-b border-blue-400/50 p-5 ring-1 ring-inset ring-cyan-300/12 sm:p-6">
+        <LuminaExecutiveTitleMetricsComposition
+          variant="balanced"
+          titleRegion={
+            <div className="min-w-0">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-300/72">
+                Knowledge Operations
+              </div>
+
+              <h1 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-amber-400">
+                Knowledge Capsule Flow Engine
+              </h1>
+
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-sky-300/76">
+                One persistent Knowledge Package moves through the governed lifecycle.
+                Its identity remains stable while its station, state, integrity and
+                authority posture change.
+              </p>
+            </div>
+          }
+          metricsRegion={
+            <LuminaFlagshipCard
+              as="article"
+              className="h-full rounded-[18px] px-4 py-3"
+            >
+              <div className="relative z-10">
+                <div className="text-[9px] font-semibold uppercase tracking-[0.16em] text-cyan-300/66">
+                  Live manufacturing posture
+                </div>
+
+                <div className="mt-1 text-sm font-semibold text-cyan-100">
+                  Multi-capsule station occupancy
+                </div>
+
+                <div className="mt-1 text-xs text-sky-500/72">
+                  Fixture-driven UI contract
+                </div>
+              </div>
+            </LuminaFlagshipCard>
+          }
+        />
+
+        <div className="mt-5">
+          <KnowledgeCapsuleFilters
+            capsules={capsules}
+            filters={filters}
+            onFiltersChange={setFilters}
+            resultCount={filteredCapsules.length}
+          />
+        </div>
+      </header>
+
+      <div className="p-5 sm:p-6">
+        <LuminaFlagshipSurface
+          className="relative overflow-hidden rounded-[28px] p-4 sm:p-5"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(125,211,252,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(125,211,252,.045)_1px,transparent_1px)] [background-size:34px_34px]"
+          />
+
+          <div className="relative grid gap-5">
+            {filteredCapsules.length === 0 ? (
+              <LuminaFlagshipSurface
+                role="status"
+                className="relative z-10 grid min-h-[220px] place-items-center rounded-[24px] px-6 py-12 text-center"
+              >
+                <div className="max-w-xl">
+                  <ExecutivePremiumIcon
+                    icon={CircleAlert}
+                    state="warning"
+                  />
+
+                  <div className="mt-4 text-sm font-semibold text-amber-300">
+                    No Knowledge Packages match the active filters
+                  </div>
+
+                  <p className="mt-2 text-xs leading-5 text-sky-400/68">
+                    Remove one or more filters or clear the filter set to restore
+                    package visibility.
+                  </p>
+                </div>
+              </LuminaFlagshipSurface>
+            ) : null}
+
+            {[
+              {
+                id: "source",
+                label: "Source Intake",
+                detail: "Evidence and operational sources enter the governed manufacturing system.",
+                stations: [
+                  "Evidence Intake",
+                  "Documentation Compiler",
+                  "Conversation Compiler",
+                  "Git Compiler",
+                  "Runtime Compiler",
+                  "Mission Compiler",
+                  "Execution Compiler",
+                ],
+                classes: "",
+              },
+              {
+                id: "transformation",
+                label: "Knowledge Transformation",
+                detail: "Compiled material is normalized into the Knowledge Intermediate Representation.",
+                stations: [
+                  "Knowledge IR",
+                ],
+                classes: "",
+              },
+              {
+                id: "governance",
+                label: "Governance & Assembly",
+                detail: "Validation, exception handling, package assembly and canonical review.",
+                stations: [
+                  "Validation",
+                  "Knowledge Package Assembly",
+                  "Canonical Review",
+                ],
+                classes: "",
+              },
+              {
+                id: "canonical",
+                label: "Canonical Knowledge",
+                detail: "Manufacturing terminates when the governed capsule becomes an immutable organizational asset.",
+                stations: [
+                  "Canonical Knowledge",
+                ],
+                classes: "",
+              },
+            ].map((zone, zoneIndex) => {
+              const stationRecords =
+                zone.stations
+                  .map((station) =>
+                    occupancyByStation.find(
+                      (record) =>
+                        record.station === station,
+                    ),
+                  )
+                  .filter(Boolean);
+
+              const zoneOccupancy =
+                stationRecords.reduce(
+                  (total, record) =>
+                    total +
+                    record.positions.length +
+                    record.branchPositions.length,
+                  0,
+                );
+
+              return (
+                <LuminaFlagshipSurface
+                  key={zone.id}
+                  aria-labelledby={`${zone.id}-zone-title`}
+                  className={[
+                    "relative overflow-hidden rounded-[24px] p-4 sm:p-5",
+                    zone.classes,
+                  ].join(" ")}
+                >
+                  <div className="flex flex-col gap-4 border-b border-white/[0.06] pb-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.18em] text-cyan-300/56">
+                        Zone {String(zoneIndex + 1).padStart(2, "0")}
+                      </div>
+
+                      <h2
+                        id={`${zone.id}-zone-title`}
+                        className="mt-2 text-lg font-semibold tracking-[-0.015em] text-amber-400"
+                      >
+                        {zone.label}
+                      </h2>
+
+                      <p className="mt-1 max-w-3xl text-xs leading-5 text-sky-400/68">
+                        {zone.detail}
+                      </p>
+                    </div>
+
+                    <div className="inline-flex w-fit items-center gap-2 rounded-full border border-blue-400/55 bg-slate-950/34 px-3 py-1.5 text-[10px] font-semibold text-cyan-100 ring-1 ring-inset ring-cyan-300/14">
+                      <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,.75)]" />
+                      {zoneOccupancy} active
+                    </div>
+                  </div>
+
+                  <div
+                    className={[
+                      "relative mt-5 grid gap-4",
+                      zone.stations.length === 1
+                        ? "grid-cols-1"
+                        : "md:grid-cols-2 xl:grid-cols-3",
+                    ].join(" ")}
+                  >
+                    {stationRecords.map(
+                      ({
+                        station,
+                        positions,
+                        branchPositions,
+                      }, stationIndex) => {
+                        const totalOccupancy =
+                          positions.length +
+                          branchPositions.length;
+
+                        return (
+                          <LuminaFlagshipCard
+                            as="article"
+                            key={station}
+                            aria-label={`${station} station`}
+                            selected={selectedStationId === station}
+                            className={[
+                              "min-h-[210px] rounded-[20px] p-4",
+                              "transition-[border-color,box-shadow,transform] duration-200",
+                              selectedStationId === station
+                                ? ""
+                                : "hover:ring-1 hover:ring-inset hover:ring-cyan-300/45",
+                            ].join(" ")}
+                          >
+                            <div
+                              aria-hidden="true"
+                              className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/42 to-transparent"
+                            />
+
+                            <button
+                              type="button"
+                              aria-pressed={selectedStationId === station}
+                              onClick={() => {
+                                const visibleCapsule =
+                                  positions
+                                    .map((position) =>
+                                      capsuleById.get(
+                                        position.capsuleId.toLowerCase(),
+                                      ),
+                                    )
+                                    .find(Boolean) ??
+                                  branchPositions
+                                    .map((branch) =>
+                                      capsuleById.get(
+                                        branch.parentCapsuleId.toLowerCase(),
+                                      ),
+                                    )
+                                    .find(Boolean) ??
+                                  null;
+
+                                onStationSelect(
+                                  station,
+                                  visibleCapsule?.id ?? null,
+                                );
+                              }}
+                              className="flex w-full items-start justify-between gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+                            >
+                              <div>
+                                <div className="text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-300/55">
+                                  Node {String(stationIndex + 1).padStart(2, "0")}
+                                </div>
+
+                                <h3 className="mt-2 text-sm font-semibold leading-5 text-sky-100">
+                                  {station}
+                                </h3>
+                              </div>
+
+                              <div className="rounded-full border border-blue-400/48 bg-slate-950/34 px-2.5 py-1 text-[9px] font-semibold text-cyan-100 ring-1 ring-inset ring-cyan-300/12">
+                                {totalOccupancy}
+                              </div>
+                            </button>
+
+                            <div
+                              className={[
+                                "mt-4 grid gap-3",
+                                "h-[360px] overflow-y-auto overscroll-contain pr-1",
+                                "[scrollbar-gutter:stable]",
+                                "[scrollbar-width:thin]",
+                              ].join(" ")}
+                            >
+                              {positions.map(
+                                (position) => {
+                                  const capsule =
+                                    capsuleById.get(
+                                      position.capsuleId.toLowerCase(),
+                                    );
+
+                                  if (!capsule) {
+                                    return null;
+                                  }
+
+                                  return (
+                                    <KnowledgeCapsule
+                                      key={position.capsuleId}
+                                      capsule={{
+                                        ...capsule,
+                                        stage: station,
+                                      }}
+                                      selected={
+                                        capsule.id ===
+                                        selectedCapsule?.id
+                                      }
+                                      compact
+                                      onSelect={
+                                        onCapsuleSelect
+                                      }
+                                    />
+                                  );
+                                },
+                              )}
+
+                              {branchPositions.map(
+                                (branch) => {
+                                  const parent =
+                                    capsuleById.get(
+                                      branch.parentCapsuleId.toLowerCase(),
+                                    );
+
+                                  if (!parent) {
+                                    return null;
+                                  }
+
+                                  return (
+                                    <LuminaFlagshipSurface
+                                      key={branch.id}
+                                      className={[
+                                        "relative overflow-hidden rounded-[18px] p-2.5",
+                                        branch.kind === "remediation"
+                                          ? "bg-rose-300/[0.055]"
+                                          : "bg-emerald-300/[0.045]",
+                                      ].join(" ")}
+                                    >
+                                      <div
+                                        aria-hidden="true"
+                                        className={[
+                                          "absolute left-0 top-0 h-full w-1",
+                                          branch.kind === "remediation"
+                                            ? "bg-rose-300/70"
+                                            : "bg-emerald-300/70",
+                                        ].join(" ")}
+                                      />
+
+                                      <div className="mb-2 flex items-center justify-between gap-2 pl-1">
+                                        <div className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-300/72">
+                                          {branch.kind ===
+                                          "remediation"
+                                            ? "Remediation branch"
+                                            : "Validated continuation"}
+                                        </div>
+
+                                        <div className="text-[9px] text-sky-500/62">
+                                          {branch.layerIds.length} layer
+                                          {branch.layerIds.length === 1
+                                            ? ""
+                                            : "s"}
+                                        </div>
+                                      </div>
+
+                                      <KnowledgeCapsule
+                                        capsule={{
+                                          ...parent,
+                                          stage: station,
+                                          state:
+                                            branch.state,
+                                          integrity:
+                                            branch.integrity,
+                                        }}
+                                        selected={
+                                          parent.id ===
+                                          selectedCapsule?.id
+                                        }
+                                        compact
+                                        onSelect={
+                                          onCapsuleSelect
+                                        }
+                                      />
+
+                                      {branch.note ? (
+                                        <p className="mt-2 pl-1 text-[10px] leading-4 text-sky-400/68">
+                                          {branch.note}
+                                        </p>
+                                      ) : null}
+                                    </LuminaFlagshipSurface>
+                                  );
+                                },
+                              )}
+
+                              {totalOccupancy === 0 ? (
+                                <LuminaFlagshipSurface className="rounded-[16px] px-3 py-4 text-center text-[10px] leading-5 text-sky-500/52">
+                                  Available manufacturing node
+                                </LuminaFlagshipSurface>
+                              ) : null}
+                            </div>
+
+                            {stationIndex <
+                            stationRecords.length - 1 ? (
+                              <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -right-4 top-1/2 hidden h-px w-4 bg-gradient-to-r from-cyan-300/48 to-violet-300/16 xl:block"
+                              />
+                            ) : null}
+                          </LuminaFlagshipCard>
+                        );
+                      },
+                    )}
+                  </div>
+                </LuminaFlagshipSurface>
+              );
+            })}
+          </div>
+        </LuminaFlagshipSurface>
+      </div>
+    </LuminaFlagshipPanel>
+  );
+}

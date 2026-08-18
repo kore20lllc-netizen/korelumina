@@ -13,6 +13,10 @@ import type {
 
 import { KnowledgeMetricTile } from "./KnowledgeMetricTile";
 
+import {
+  LuminaMetricGrid,
+} from "@/components/lumina/workspace";
+
 function num(value: number | undefined) {
   return (value ?? 0).toLocaleString();
 }
@@ -27,7 +31,7 @@ export function KnowledgeHealthOverview({
   snapshot: KnowledgeOperationsSnapshot | null;
 }) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <LuminaMetricGrid>
       <KnowledgeMetricTile
         label="Evidence"
         value={num(snapshot?.evidence.total)}
@@ -91,6 +95,6 @@ export function KnowledgeHealthOverview({
         icon={ShieldCheck}
         accent="magenta"
       />
-    </div>
+    </LuminaMetricGrid>
   );
 }

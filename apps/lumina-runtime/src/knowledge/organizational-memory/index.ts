@@ -50,3 +50,13 @@ export type {
 export {
   validateOrganizationalMemoryPipelineResult,
 } from "./OrganizationalMemoryValidation.js";
+export * from "./CanonicalKnowledgeOrganizationalMemoryAdapter.js";
+export type {
+  GovernedCanonicalMemoryAdaptationInput,
+  GovernedCanonicalMemoryAdaptationResult,
+  OrganizationalMemoryPersistence,
+} from "./GovernedCanonicalMemoryAdaptationService.js";
+
+export {
+  GovernedCanonicalMemoryAdaptationService,
+} from "./GovernedCanonicalMemoryAdaptationService.js";

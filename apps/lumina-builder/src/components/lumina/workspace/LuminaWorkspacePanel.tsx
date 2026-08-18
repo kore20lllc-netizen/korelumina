@@ -36,23 +36,23 @@ export function LuminaWorkspacePanel({
       {hasHeader && (
         <header
           className={cn(
-            "flex items-start justify-between gap-4",
+            "flex items-start justify-between gap-5",
             "border-b",
             "[border-color:var(--lumina-border-standard)]",
             "[background:var(--lumina-surface-compact)]",
             "[backdrop-filter:var(--lumina-blur-surface)]",
-            "p-5",
+            "px-6 py-5",
           )}
         >
           <div className="min-w-0 flex-1">
             {title && (
-              <div className="text-lg font-semibold">
+              <div className="text-lg font-semibold tracking-[-0.02em]">
                 {title}
               </div>
             )}
 
             {subtitle && (
-              <div className="mt-1 text-sm text-muted-foreground">
+              <div className="mt-2 text-sm leading-6 text-muted-foreground">
                 {subtitle}
               </div>
             )}
@@ -73,7 +73,7 @@ export function LuminaWorkspacePanel({
       {footer && (
         <footer
           className={cn(
-            "border-t p-5",
+            "border-t px-6 py-5",
             "[border-color:var(--lumina-border-standard)]",
           )}
         >

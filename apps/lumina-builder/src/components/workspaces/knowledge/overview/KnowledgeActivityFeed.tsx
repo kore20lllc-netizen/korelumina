@@ -6,6 +6,10 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import {
+  LuminaActivityFeedRow,
+} from "@/components/lumina/workspace";
+
 export function KnowledgeActivityFeed() {
   const events = [
     {
@@ -46,23 +50,25 @@ export function KnowledgeActivityFeed() {
           const Icon = event.icon;
 
           return (
-            <div
+            <LuminaActivityFeedRow
               key={event.label}
-              className="flex items-start gap-3 rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3"
-            >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
-                <Icon className="h-4 w-4 text-muted-foreground" />
-              </div>
-
-              <div className="min-w-0">
+              className="rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3"
+              markerRegion={
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
+                  <Icon className="h-4 w-4 text-muted-foreground" />
+                </div>
+              }
+              primaryRegion={
                 <div className="text-[13px] font-semibold tracking-tight">
                   {event.label}
                 </div>
-                <div className="mt-0.5 truncate text-[11px] text-muted-foreground">
+              }
+              descriptionRegion={
+                <div className="-mt-0.5 truncate text-[11px] text-muted-foreground">
                   {event.meta}
                 </div>
-              </div>
-            </div>
+              }
+            />
           );
         })}
       </div>

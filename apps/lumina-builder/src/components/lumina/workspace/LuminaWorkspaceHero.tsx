@@ -2,6 +2,10 @@ import type {
   ReactNode,
 } from "react";
 
+import type {
+  LuminaCompositionPresentation,
+} from "./LuminaCompositionSurface";
+
 import {
   LuminaWorkspaceHeader,
 } from "./LuminaWorkspaceHeader";
@@ -14,6 +18,7 @@ export interface LuminaWorkspaceHeroProps {
   metrics?: ReactNode;
   children?: ReactNode;
   className?: string;
+  presentation?: LuminaCompositionPresentation;
 }
 
 export function LuminaWorkspaceHero({
@@ -24,6 +29,7 @@ export function LuminaWorkspaceHero({
   metrics,
   children,
   className,
+  presentation = "default",
 }: LuminaWorkspaceHeroProps) {
   return (
     <LuminaWorkspaceHeader
@@ -33,6 +39,7 @@ export function LuminaWorkspaceHero({
       actions={actions}
       metrics={metrics}
       className={className}
+      presentation={presentation}
     >
       {children}
     </LuminaWorkspaceHeader>

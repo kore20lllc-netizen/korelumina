@@ -11,6 +11,10 @@ import type {
 } from "../canonical-knowledge/index.js";
 
 import {
+  KnowledgePackageService,
+} from "../knowledge-preservation/package/index.js";
+
+import {
   CanonicalKnowledgeStore,
   CanonicalKnowledgeQueryService,
 } from "../canonical-knowledge/index.js";
@@ -47,6 +51,9 @@ export class KnowledgePlatform {
 
   readonly publisherRegistry =
     new KnowledgePublisherRegistry();
+
+  readonly packageService =
+    new KnowledgePackageService();
 
   readonly store =
     new CanonicalKnowledgeStore();
@@ -94,11 +101,7 @@ export class KnowledgePlatform {
         normalized,
       );
 
-    this.store.promoteAll(
-      validated,
-    );
-
-    await this.publishingPipeline.publish(
+    this.packageService.packageValidated(
       validated,
     );
   }

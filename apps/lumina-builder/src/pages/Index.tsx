@@ -39,8 +39,10 @@ const AdminWorkspace = lazy(() =>
   })),
 );
 
-const KnowledgeOperationsWorkspace = lazy(() =>
-  import("@/components/workspaces/KnowledgeOperationsWorkspace"),
+const KnowledgeOperationsV3Workspace = lazy(() =>
+  import(
+    "@/components/workspaces/knowledge-v3"
+  ),
 );
 
 const DesignerWorkspace = lazy(() =>
@@ -262,11 +264,13 @@ function Router() {
   
   if (view === "knowledge-operations") {
     return (
-      <Suspense fallback={<LoadingView />}>
-        <KnowledgeOperationsWorkspace
-          setView={setView}
-        />
-      </Suspense>
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <KnowledgeOperationsV3Workspace
+            setView={setView}
+          />
+        </Suspense>
+      </Shell>
     );
   }
 
@@ -282,7 +286,7 @@ if (view === "deployment-diagnostics") {
 
 
 
-  if (view === "runtime-operations") {
+    if (view === "runtime-operations") {
     return (
       <Shell blobs="ambient">
         <Suspense fallback={<LoadingView />}>

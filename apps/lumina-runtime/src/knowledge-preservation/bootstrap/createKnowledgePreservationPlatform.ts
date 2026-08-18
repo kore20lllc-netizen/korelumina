@@ -18,6 +18,14 @@ import {
   SourceCompiler,
 } from "../compiler/source/index.js";
 
+import {
+  DocumentationCompiler,
+} from "../compiler/documentation/index.js";
+
+import {
+  DocumentationGovernanceValidator,
+} from "../validation/documentation/index.js";
+
 export function createKnowledgePreservationPlatform() {
   const platform =
     new KnowledgePreservationPlatform();
@@ -36,6 +44,14 @@ export function createKnowledgePreservationPlatform() {
 
   platform.compilerRegistry.register(
     new SourceCompiler(),
+  );
+
+  platform.compilerRegistry.register(
+    new DocumentationCompiler(),
+  );
+
+  platform.validationRegistry.register(
+    new DocumentationGovernanceValidator(),
   );
 
   return platform;

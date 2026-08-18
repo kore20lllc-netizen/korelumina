@@ -119,8 +119,20 @@ export const LUMINA_CSS_VARIABLES = {
   },
 
   motion: {
+    durationFast:
+      "--lumina-motion-duration-fast",
+
     duration:
       "--lumina-motion-duration",
+
+    durationDeliberate:
+      "--lumina-motion-duration-deliberate",
+
+    easingStandard:
+      "--lumina-motion-easing-standard",
+
+    easingEmphasized:
+      "--lumina-motion-easing-emphasized",
 
     scale:
       "--lumina-motion-scale",
