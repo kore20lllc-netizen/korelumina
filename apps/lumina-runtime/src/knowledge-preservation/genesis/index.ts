@@ -19,3 +19,4 @@ export * from "./GenesisProductionReplayAdmissionAdapter.js";
 export * from "./GenesisReplayOrchestrator.js";
 export * from "./GenesisReplayRecoveryOrchestrator.js";
 export * from "./GenesisReplayStatusService.js";
+export * from "./GenesisReplayInventoryService.js";

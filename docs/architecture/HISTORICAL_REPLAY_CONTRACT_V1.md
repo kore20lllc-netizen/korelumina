@@ -843,6 +843,45 @@ Integration certification MUST NOT weaken the Milestone 20 guarantee that the ru
 
 Milestone 21 MUST NOT add Builder UI or Builder API consumers.
 
+Genesis Replay Listing / Inventory Read Model V1 provides read-only enumeration of persisted Genesis replay identities and their certified status projections.
+
+Inventory authority comes exclusively from persisted Genesis replay artifacts.
+
+Knowledge Manufacturing Runs MUST NOT create, imply, or invent Genesis replay inventory records.
+
+The inventory service MUST NOT perform Historical Source discovery, manifest construction, Replay Plan construction, replay execution, Evidence admission, recovery, or persistence writes.
+
+The persisted replay directory name is a SHA-256 storage key and MUST NOT itself be treated as Replay Identity.
+
+Inventory MUST recover Replay Identity only from persisted replay artifacts that explicitly contain that identity.
+
+After recovering a Replay Identity, inventory MUST verify that the containing persistence-directory name equals the deterministic SHA-256 storage key for that Replay Identity.
+
+A directory/replay identity mismatch MUST fail closed.
+
+If multiple persisted artifacts in one directory declare different Replay Identities, inventory MUST fail closed as identity ambiguity.
+
+Corrupt persisted JSON encountered during inventory MUST fail closed.
+
+A manifest-only persistence directory does not explicitly store Replay Identity as a field, but Replay Identity is deterministically derivable from the persisted manifest identity contract.
+
+For manifest-only persistence, inventory MAY reconstruct Replay Identity only by applying the existing `createGenesisReplayId` contract to the persisted manifest's `manifestId`, `replayContractVersion`, and `scope`.
+
+Inventory MUST NOT derive Replay Identity from the hashed directory name.
+
+After manifest-derived Replay Identity reconstruction, inventory MUST still verify that the persistence-directory name equals the deterministic SHA-256 storage key for that Replay Identity.
+
+If manifest-derived Replay Identity conflicts with a Replay Identity declared by persisted execution or Runner Result state, inventory MUST fail closed as identity ambiguity.
+
+The existing persistence loader remains the final artifact-integrity authority. Manifest-derived inventory identity does not bypass `loadManifestBuild` validation.
+
+For each valid persisted Replay Identity, the inventory service MUST delegate its status projection to the existing Replay Status / Inspection Service.
+
+Inventory ordering MUST be deterministic.
+
+Genesis Replay Listing / Inventory Read Model V1 MUST NOT expose runtime routes or Builder UI.
+
+
 
 
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
