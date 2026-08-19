@@ -1219,6 +1219,63 @@ Milestone 29 MUST NOT add polling, timers, effects that trigger runtime access, 
 
 Milestone 29 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
 
+Genesis Replay Read Workspace Shell V1 provides the first rendered read-only presentation surface over the certified production Genesis replay hook.
+
+The workspace shell MUST consume `useGenesisReplayRead`.
+
+The workspace shell MUST NOT create or consume a lower-level Genesis runtime client, state adapter, controller, or external-store implementation directly.
+
+The workspace shell MUST use the existing Lumina workspace composition primitives rather than introducing a Genesis-specific page framework.
+
+Workspace rendering MUST NOT trigger inventory loading.
+
+Workspace rendering MUST NOT trigger selected-replay inspection.
+
+The initial shell MUST visibly distinguish inventory that has not yet been loaded from an authoritative empty persisted inventory.
+
+Milestone 30 certification MUST render controlled authoritative states for:
+
+- initial inventory not loaded;
+- loaded empty persisted inventory;
+- loaded non-empty persisted inventory;
+- selected replay inspection;
+- scoped Genesis read failure.
+
+A loaded empty inventory MUST NOT fall back to the not-yet-loaded presentation.
+
+A loaded non-empty inventory MUST surface only presentation values supplied by the certified Genesis replay view model.
+
+A selected replay inspection MUST surface the certified selected replay projection and MUST NOT independently reconstruct replay state from the inventory row.
+
+A scoped read error MUST remain visible as a read-integrity condition without erasing the distinction between inventory and selection state.
+
+Inventory reads MUST occur only after an explicit user refresh/load action.
+
+Per-replay status reads MUST occur only after explicit Replay Identity selection or explicit selected-replay refresh.
+
+The inventory surface MAY expose certified presentation fields already provided by the Genesis view model, including lifecycle, progress, recovery eligibility, and Knowledge Manufacturing linkage health.
+
+The workspace MUST NOT independently derive Replay Identity, lifecycle semantics, recovery eligibility, progress rules, or linkage-health semantics.
+
+The inspection surface MUST derive from the certified selected replay view model.
+
+The workspace MUST preserve scoped read failures and MAY expose explicit error clearing.
+
+Recovery eligibility displayed by the workspace is observational only and MUST NOT be represented as authorization to execute recovery.
+
+The workspace MUST NOT expose start, resume, recover, delete, Evidence admission, replay execution, checkpoint mutation, or Knowledge mutation controls.
+
+Milestone 30 creates the workspace shell component only.
+
+Milestone 30 MUST NOT add the workspace to the Builder `View` union, Router, Dashboard, navigation, command palette, or another application entry point.
+
+Routing and navigation exposure require a separate certified milestone.
+
+Milestone 30 MUST NOT add polling, timers, automatic refresh, or effects that perform Genesis runtime access.
+
+Milestone 30 MUST NOT modify runtime-server Genesis endpoints or certified lower Genesis read layers.
+
+
 
 
 
