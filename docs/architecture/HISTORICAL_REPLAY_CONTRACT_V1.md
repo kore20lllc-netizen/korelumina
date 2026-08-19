@@ -1072,6 +1072,59 @@ Milestone 26 MUST NOT add React components, hooks, workspace state, navigation, 
 
 Milestone 26 MUST NOT add Genesis mutation methods or modify runtime-server Genesis endpoints.
 
+Genesis Replay Read Controller V1 composes the certified Genesis read client, read-state adapter, and read view model behind one framework-neutral orchestration boundary.
+
+The controller MUST accept a `GenesisReplayReadClient` dependency.
+
+The controller MUST create and own its read-state adapter and MUST derive published snapshots exclusively through `createGenesisReplayReadViewModel`.
+
+The controller MAY expose:
+
+- current presentation snapshot;
+- framework-neutral subscription;
+- explicit inventory refresh;
+- explicit Replay Identity selection;
+- explicit selected-replay refresh;
+- selection clearing;
+- read-error clearing.
+
+Controller construction MUST NOT trigger runtime access.
+
+Controller subscription MUST NOT trigger runtime access.
+
+A subscriber MAY receive the current derived snapshot synchronously when subscribing.
+
+Network work MUST occur only through explicit controller read actions.
+
+The controller MUST NOT call `fetch`, `RUNTIME_API`, caller-header infrastructure, or Genesis runtime routes directly.
+
+The controller MUST NOT duplicate inventory, lifecycle, progress, recovery, linkage-health, or error-presentation derivation.
+
+All such presentation derivation MUST remain owned by the certified read view model.
+
+State concurrency and stale-request protection MUST remain owned by the certified read-state adapter.
+
+The controller MUST NOT weaken or bypass those protections.
+
+Clearing selection through the controller MUST invalidate any pending selected-replay request according to the state-adapter contract.
+
+After controller selection is cleared, a stale successful selected-replay response MUST NOT restore the cleared Replay Identity or selected presentation.
+
+After controller selection is cleared, a stale failed selected-replay response MUST NOT introduce a selection error or restore loading state.
+
+Controller composition MUST preserve the state adapter's generation invalidation semantics unchanged.
+
+Controller errors MUST retain the typed runtime status/error information preserved by the client and state layers.
+
+The production Genesis read binding MAY instantiate one controller over the existing production Genesis read client.
+
+Creating that production controller MUST remain side-effect free until an explicit read action is invoked.
+
+Milestone 27 MUST NOT add polling, scheduled refresh, timers, React components, React hooks, workspace state, navigation, or user controls.
+
+Milestone 27 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
+
+
 
 
 

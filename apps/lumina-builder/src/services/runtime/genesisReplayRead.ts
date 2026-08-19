@@ -51,6 +51,15 @@ export const getGenesisReplayStatus =
   genesisReplayReadClient
     .getReplayStatus;
 
+import {
+  createGenesisReplayReadController as createProductionGenesisReplayReadController,
+} from "@/services/runtime/genesisReplayReadController";
+
+export const genesisReplayReadController =
+  createProductionGenesisReplayReadController(
+    genesisReplayReadClient,
+  );
+
 export {
   createGenesisReplayReadStateAdapter,
 } from "@/services/runtime/genesisReplayReadState";
@@ -78,3 +87,12 @@ export type {
   GenesisReplaySelectedViewModel,
   GenesisReplayViewTone,
 } from "@/services/runtime/genesisReplayReadViewModel";
+
+export {
+  createGenesisReplayReadController,
+} from "@/services/runtime/genesisReplayReadController";
+
+export type {
+  GenesisReplayReadController,
+  GenesisReplayReadControllerListener,
+} from "@/services/runtime/genesisReplayReadController";
