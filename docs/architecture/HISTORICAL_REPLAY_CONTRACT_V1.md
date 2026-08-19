@@ -817,6 +817,33 @@ The runtime route dependency surface MUST remain read-only for both Genesis pers
 
 Milestone 20 MUST NOT add Builder UI or Builder API consumers.
 
+Replay Runtime API Inspection Integration V1 certifies the Milestone 20 read model across the real HTTP transport and real Genesis file-persistence implementation.
+
+Milestone 21 MUST NOT add a second production endpoint or alter the certified Milestone 20 route contract.
+
+Integration tests MUST exercise the actual `registerGenesisReplayStatusRoute` composition through an HTTP server rather than invoking the route handler directly.
+
+Integration tests MUST use `FileGenesisReplayPersistenceStore` against an isolated temporary storage root.
+
+Integration fixtures MUST NOT write into legitimate `runtime-data/genesis`, production `runtime/knowledge`, or another operational Knowledge store.
+
+Milestone 21 MUST certify at least:
+
+- malformed Replay Identity returns client error through real HTTP;
+- valid deterministic Replay Identity with no persisted replay returns not-found;
+- a controlled persisted replay fixture is projected successfully through HTTP;
+- loopback access follows the existing `requireRuntimeAccess` contract without introducing Genesis-specific authentication rules;
+- corrupt persisted Genesis JSON fails closed through HTTP and is not rewritten or deleted by inspection.
+
+The integration layer MUST NOT invoke discovery, manifest construction for production history, production Evidence admission, replay start orchestration, recovery orchestration, or any Knowledge mutation operation.
+
+Controlled manifest/execution fixture construction inside isolated test storage is permitted solely to establish deterministic read-model test state.
+
+Integration certification MUST NOT weaken the Milestone 20 guarantee that the runtime exposes exactly one Genesis HTTP path and that path is read-only.
+
+Milestone 21 MUST NOT add Builder UI or Builder API consumers.
+
+
 
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
