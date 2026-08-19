@@ -1636,6 +1636,143 @@ Milestone 31 MUST NOT:
 
 After Milestone 31 certification, repository-native Historical Replay MAY continue toward Genesis Corpus projection while preserving future conversation enrichment.
 
+# Genesis Corpus Domain / Read Model V1
+
+## Purpose
+
+Genesis Corpus Domain / Read Model V1 establishes the first governed read-only projection that presents existing Historical Replay state and cross-source reconstruction state as one inspectable Genesis Corpus.
+
+The Genesis Corpus is not a directory of replayed files.
+
+The Genesis Corpus projection MUST preserve the distinction between:
+
+- Source History;
+- Historical Events;
+- Historical Relationships;
+- Evolution Episodes;
+- Historical Replay execution;
+- governed Evidence admission;
+- Knowledge Manufacturing correlation;
+- Knowledge Package correlation;
+- Canonical Knowledge correlation;
+- Organizational Memory adaptation;
+- educational eligibility.
+
+## Projection Boundary
+
+Milestone 32 is a derived read model.
+
+It MUST NOT create a second persistence authority for replay, Evidence, Knowledge Packages, Canonical Knowledge, Organizational Memory, or education.
+
+The projection MUST consume existing certified replay/read state and Milestone 31 historical-correlation state.
+
+Projection construction MUST NOT mutate those sources.
+
+Projection identity MUST be deterministic for unchanged input state.
+
+## Source History
+
+The corpus MUST expose independently provenance-preserving source references and revisions.
+
+Each source projection MUST retain:
+
+- stable source-reference identity;
+- source-revision identity;
+- source class;
+- Evidence type;
+- external-source status;
+- acquisition status;
+- provenance;
+- related Historical Event identities;
+- related Evolution Episode identities.
+
+Multiple revisions of one historical source MUST remain distinguishable.
+
+## Evolution History
+
+The corpus MUST expose Historical Events, Historical Relationships, and Evolution Episodes without collapsing them into source evidence or governed knowledge.
+
+Historical Events MUST remain chronologically inspectable.
+
+Chronological ordering MUST NOT itself produce causality.
+
+Relationship confidence and causal semantics remain governed by Milestone 31.
+
+## Replay State
+
+Historical Replay execution state remains distinct from Genesis Corpus projection state.
+
+A replay marked `COMPLETE` does not mean the Genesis Corpus is constitutionally complete.
+
+Replay completion proves only the state defined by the existing replay contract for that replay.
+
+## Governed Knowledge Lifecycle
+
+The Genesis Corpus read model MAY expose correlations already proved by production state for:
+
+- admitted Evidence;
+- Knowledge Manufacturing;
+- Knowledge Packages;
+- Canonical Knowledge.
+
+The projection MUST NOT infer a downstream governed state merely because an upstream state exists.
+
+In particular:
+
+**Canonical Knowledge does not imply Organizational Memory adaptation.**
+
+**Organizational Memory adaptation does not imply educational eligibility.**
+
+Until those governed correlations are implemented and certified, their Corpus projection state MUST remain explicitly `not-correlated` or equivalent rather than fabricated as zero, complete, eligible, or successful.
+
+## External Context
+
+External context gaps remain first-class Genesis Corpus state.
+
+Conversation Evidence classified as `EXTERNAL SOURCE — NOT YET INGESTED` MUST remain visible.
+
+Evolution Episodes marked `EXTERNAL CONTEXT PENDING` MUST remain visible.
+
+External-context gaps MUST NOT prevent repository-native Corpus projection.
+
+## Corpus Identity
+
+The read model MUST have deterministic projection identity derived from the certified identities and governed states it represents.
+
+Unchanged replay state, source revisions, Historical Events, Historical Relationships, and Episode revisions MUST produce the same Corpus projection identity.
+
+Equivalent input collection ordering MUST NOT change Corpus projection identity.
+
+A material Episode revision MUST change Corpus projection identity.
+
+A material governed replay-state change that is represented by the Corpus projection MUST change Corpus projection identity.
+
+A material revision to those inputs MUST be capable of producing a new projection identity.
+
+The Corpus projection identity is not Canonical Knowledge identity and grants no governance authority.
+
+## Milestone 32 Stop Boundary
+
+Milestone 32 MUST NOT:
+
+- execute full Historical Replay;
+- ingest conversations;
+- manufacture Historical Events from timestamp proximity;
+- infer causality;
+- alter Genesis replay execution;
+- alter Evidence admission;
+- perform canonical promotion;
+- infer Organizational Memory adaptation;
+- infer educational eligibility;
+- activate Chief Agent education;
+- redesign the Genesis workspace;
+- add Builder routing;
+- build the Executive Office.
+
+Milestone 32 establishes the first truthful Genesis Corpus domain/read model only.
+
+Temporal chronology enrichment, documentation authority enrichment, full Knowledge Operations lifecycle correlation, readiness computation, external conversation acquisition, and operational workspace expansion remain subsequent milestones.
+
 
 
 
