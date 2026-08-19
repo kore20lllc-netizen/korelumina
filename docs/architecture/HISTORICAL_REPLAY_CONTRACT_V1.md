@@ -1124,6 +1124,65 @@ Milestone 27 MUST NOT add polling, scheduled refresh, timers, React components, 
 
 Milestone 27 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
 
+Genesis Replay React Adapter V1 provides the first React-specific bridge over the certified framework-neutral Genesis Replay Read Controller.
+
+The React adapter MUST consume `GenesisReplayReadController` and MUST NOT consume the raw runtime client, runtime endpoints, runtime caller-header infrastructure, or Genesis persistence directly.
+
+The adapter MUST use React's external-store subscription contract rather than duplicating controller state into independent React state.
+
+Because the framework-neutral controller derives view-model snapshots on demand, the React adapter MUST maintain a cached snapshot whose object identity remains stable until the controller publishes a state change.
+
+The React adapter MUST NOT pass an uncached controller `getSnapshot` projection directly to `useSyncExternalStore`.
+
+React adapter construction MUST NOT subscribe to the controller.
+
+React adapter construction MUST NOT trigger runtime access.
+
+The first active React subscriber MAY lazily establish one controller subscription.
+
+Multiple React subscribers MUST share that controller subscription.
+
+When the final React subscriber unsubscribes, the adapter MUST release its controller subscription.
+
+A later React subscriber MAY re-establish the controller subscription.
+
+While no React subscribers are attached, the cached React snapshot MAY remain unchanged even if controller state changes.
+
+When a later subscriber re-establishes the controller subscription, the adapter MUST synchronously reconcile its cached snapshot from the controller's current subscription delivery before the subscription operation returns.
+
+That reconnection reconciliation MUST NOT itself be emitted as a synthetic React change notification.
+
+After reconnection, subsequent genuine controller publications MUST notify active React subscribers normally from the reconciled snapshot baseline.
+
+The controller's synchronous initial subscription delivery MUST NOT be treated as a synthetic state change requiring an additional React notification.
+
+Controller publications MUST replace the cached React snapshot before subscribers are notified.
+
+The server snapshot and client snapshot exposed to React MUST derive from the same cached certified view model.
+
+The React adapter MAY expose explicit controller read actions:
+
+- refresh inventory;
+- select Replay Identity;
+- refresh selected replay;
+- clear selection;
+- clear read error.
+
+The adapter MUST NOT add business logic, lifecycle derivation, progress derivation, recovery derivation, linkage derivation, concurrency logic, or error reinterpretation.
+
+Those semantics remain owned by the certified controller and its underlying state/view-model layers.
+
+The React adapter MUST NOT automatically invoke any read action when created, subscribed, or imported.
+
+Milestone 28 MAY instantiate one production React adapter over the production Genesis read controller.
+
+That production adapter MUST remain side-effect free until a component explicitly invokes a read action.
+
+Milestone 28 MUST NOT add polling, timers, automatic refresh, workspace state, navigation, rendered workspace components, or user controls.
+
+Milestone 28 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
+
+
 
 
 

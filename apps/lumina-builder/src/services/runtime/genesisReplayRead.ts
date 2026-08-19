@@ -60,6 +60,15 @@ export const genesisReplayReadController =
     genesisReplayReadClient,
   );
 
+import {
+  createGenesisReplayReactAdapter as createProductionGenesisReplayReactAdapter,
+} from "@/services/runtime/genesisReplayReactAdapter";
+
+export const genesisReplayReactAdapter =
+  createProductionGenesisReplayReactAdapter(
+    genesisReplayReadController,
+  );
+
 export {
   createGenesisReplayReadStateAdapter,
 } from "@/services/runtime/genesisReplayReadState";
@@ -96,3 +105,15 @@ export type {
   GenesisReplayReadController,
   GenesisReplayReadControllerListener,
 } from "@/services/runtime/genesisReplayReadController";
+
+export {
+  createGenesisReplayReactAdapter,
+  useGenesisReplayRead,
+} from "@/services/runtime/genesisReplayReactAdapter";
+
+export type {
+  GenesisReplayReactActions,
+  GenesisReplayReactAdapter,
+  GenesisReplayReactBinding,
+  GenesisReplayReactStore,
+} from "@/services/runtime/genesisReplayReactAdapter";
