@@ -23,3 +23,4 @@ export * from "./GenesisReplayInventoryService.js";
 export * from "./GenesisHistoricalCorrelation.js";
 export * from "./GenesisHistoricalCorrelationPersistence.js";
 export * from "./GenesisCorpusReadModel.js";
+export * from "./GenesisTemporalChronology.js";

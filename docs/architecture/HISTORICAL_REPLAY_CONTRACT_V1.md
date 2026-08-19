@@ -1773,6 +1773,152 @@ Milestone 32 establishes the first truthful Genesis Corpus domain/read model onl
 
 Temporal chronology enrichment, documentation authority enrichment, full Knowledge Operations lifecycle correlation, readiness computation, external conversation acquisition, and operational workspace expansion remain subsequent milestones.
 
+# Genesis Temporal Chronology Projection V1
+
+## Purpose
+
+Genesis Temporal Chronology Projection V1 establishes a deterministic chronological read projection over the certified Genesis Corpus.
+
+Chronology exists to answer:
+
+- what happened;
+- when it happened;
+- which source evidence supports the event;
+- which Evolution Episode contains it;
+- what authority applied historically;
+- what authority applies now;
+- what explicit historical relationships are known;
+- where chronology remains incomplete, conflicted, or externally under-contextualized.
+
+Chronology does not independently establish causality.
+
+## Ordering
+
+Historical Events MUST be ordered by their explicit `occurredAt` value.
+
+Events sharing the same timestamp MUST use deterministic Historical Event identity as the tie-breaker.
+
+Tie-break ordering is a read-model ordering rule only.
+
+Equal timestamp ordering MUST NOT imply:
+
+- causality;
+- approval;
+- supersession;
+- implementation dependency;
+- validation;
+- replacement;
+- authority.
+
+Those claims require existing evidence-backed Historical Relationships.
+
+## Provenance
+
+Every chronology entry MUST retain its Historical Event identity.
+
+Every chronology entry MUST retain source-reference and source-revision identities from the Historical Event.
+
+Where an event belongs to an Evolution Episode, the chronology MUST expose the Episode identity without collapsing the Event into the Episode.
+
+Chronology MUST NOT merge independent Source Evidence.
+
+## Relationship Projection
+
+The chronology MAY expose incoming and outgoing Historical Relationships already certified by Milestone 31.
+
+The chronology MUST NOT manufacture new relationships merely because two events are adjacent in time.
+
+Chronological predecessor/successor projections MUST derive only from explicit `occurred_before` relationships.
+
+A `superseded_by`, `replaced_by`, `validated_by`, `implemented_by`, or other non-chronological relationship MUST remain that relationship type and MUST NOT be converted into `occurred_before`.
+
+## Temporal Authority
+
+Chronology MUST preserve historical authority separately from current authority.
+
+A historically authoritative event MAY be currently superseded or retired.
+
+A historically rejected proposal MAY remain historically important.
+
+A currently authoritative state MUST NOT erase superseded history.
+
+Chronology MUST NOT infer current authority from event recency.
+
+Documentation authority remains governed by Constitutional Documentation Governance.
+
+## Failed and Superseded Paths
+
+Events associated with failed validation, rejected decisions, corrections, replacements, and superseded implementations MUST remain chronologically inspectable.
+
+Chronology MUST NOT hide a failed or superseded event merely because a later accepted event exists.
+
+Historical presence does not make a failed path current practice.
+
+## Chronology Coverage
+
+Temporal chronology coverage is not Genesis Corpus completion.
+
+Coverage MAY expose:
+
+- total Historical Events;
+- earliest known Event timestamp;
+- latest known Event timestamp;
+- equal-timestamp groups;
+- source revisions with no Historical Event;
+- Evolution Episodes with external context pending;
+- conflicted Episodes;
+- unresolved Historical Relationships.
+
+Chronology coverage MUST remain incomplete while known chronology gaps, conflicts, unresolved correlations, or required external context remain.
+
+A complete chronology projection MUST NOT be represented as educational readiness.
+
+A complete chronology projection MUST NOT be represented as canonical approval.
+
+## Projection Identity
+
+Chronology projection identity MUST be deterministic.
+
+Equivalent input collection ordering MUST NOT change chronology projection identity.
+
+A material change to an Event's represented temporal authority MUST change chronology projection identity.
+
+A current-authority change MUST NOT alter the historical chronology position of an unchanged Historical Event.
+
+A superseded Historical Event MUST retain its original chronological position after a later authoritative replacement is introduced.
+
+Equivalent reordering of Corpus source, replay, Event, relationship, and Episode collections MUST NOT alter chronology positions or chronology projection identity.
+
+Historical chronology position MUST derive only from Event historical time plus deterministic Event identity tie-breaking.
+
+Current authority, current implementation status, canonical state, or educational state MUST NOT participate in chronology ordering.
+
+A material change to represented Event, relationship, Episode, or chronology-coverage state MUST be capable of changing chronology projection identity.
+
+The chronology projection identity grants no canonical or educational authority.
+
+## Milestone 33 Stop Boundary
+
+Milestone 33 MUST NOT:
+
+- execute Historical Replay;
+- ingest external conversations;
+- create Historical Events;
+- infer causality from chronology;
+- infer current authority from recency;
+- alter source evidence;
+- alter Evolution Episode identity;
+- perform Knowledge Operations mutation;
+- infer Organizational Memory adaptation;
+- infer educational eligibility;
+- redesign or route the Genesis workspace;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 33 establishes Temporal Chronology Projection V1 only.
+
+Documentation governance enrichment remains the next reconstruction concern.
+
 
 
 
