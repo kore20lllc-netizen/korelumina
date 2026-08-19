@@ -965,6 +965,56 @@ Milestone 24 MUST NOT add React components, workspace state, polling, automatic 
 
 Milestone 24 MUST NOT add Genesis mutation client methods.
 
+Genesis Replay Read State Adapter V1 provides a non-UI state boundary over the certified Genesis Replay Read API Client.
+
+The state adapter MUST depend on the typed `GenesisReplayReadClient` interface rather than calling `fetch`, `RUNTIME_API`, runtime routes, or caller-header infrastructure directly.
+
+The adapter MAY maintain:
+
+- persisted replay inventory state;
+- inventory loading and loaded state;
+- selected Replay Identity;
+- selected replay status projection;
+- selected replay loading state;
+- scoped read error state.
+
+The adapter MUST expose explicit operations for:
+
+- inventory refresh;
+- Replay Identity selection and inspection;
+- refresh of the currently selected replay;
+- clearing selection;
+- clearing read errors.
+
+The adapter MUST NOT perform network work merely because it is constructed.
+
+The adapter MUST NOT poll, schedule timers, automatically refresh, navigate, render, or depend on React.
+
+Concurrent read requests MUST be generation-safe.
+
+A stale inventory response MUST NOT overwrite a newer inventory refresh result.
+
+A stale selected-replay response MUST NOT overwrite a newer selection or restore a selection that has been cleared.
+
+A stale failed inventory request MUST NOT overwrite a newer successful inventory result or introduce a stale inventory error.
+
+A stale failed selected-replay request MUST NOT overwrite a newer successful selection or introduce a stale selection error.
+
+Read errors MUST retain their logical scope so inventory failures and selected-replay failures remain distinguishable.
+
+When the underlying typed client provides governed HTTP status and error code information, the state adapter MUST preserve that information rather than reducing it to a generic message.
+
+The adapter MAY expose a framework-neutral subscription mechanism for future UI consumers.
+
+Subscription MUST NOT itself trigger network access.
+
+Milestone 25 MAY export this state adapter through the existing Genesis runtime read binding and `runtimeService`.
+
+Milestone 25 MUST NOT add React components, hooks, workspace state, navigation, polling, automatic refresh, or user controls.
+
+Milestone 25 MUST NOT add Genesis mutation methods or modify runtime-server Genesis endpoints.
+
+
 
 
 

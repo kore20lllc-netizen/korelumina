@@ -50,3 +50,14 @@ export const listGenesisReplays =
 export const getGenesisReplayStatus =
   genesisReplayReadClient
     .getReplayStatus;
+
+export {
+  createGenesisReplayReadStateAdapter,
+} from "@/services/runtime/genesisReplayReadState";
+
+export type {
+  GenesisReplayReadState,
+  GenesisReplayReadStateAdapter,
+  GenesisReplayReadStateError,
+  GenesisReplayReadStateErrorScope,
+} from "@/services/runtime/genesisReplayReadState";
