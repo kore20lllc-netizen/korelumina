@@ -926,6 +926,46 @@ Milestone 23 integration fixtures MUST remain isolated from operational Genesis 
 
 HTTP integration certification MUST NOT create an additional Genesis route or mutation surface.
 
+Genesis Replay Read API Client Contract V1 provides a typed Builder-side client for the two certified Genesis read-only runtime endpoints.
+
+The client contract is transport-only. It MUST NOT create replay state, derive replay inventory independently, execute discovery, start replay, admit Evidence, resume replay, recover replay, or mutate Knowledge Operations.
+
+The client MUST expose exactly two operational read methods:
+
+- list persisted Genesis replays;
+- read status for one deterministic Replay Identity.
+
+The client MUST issue GET requests only.
+
+The client MUST reuse the existing Builder runtime base URL and caller-header infrastructure for its production binding.
+
+The pure client implementation MUST support injected base URL, caller-header provider, and fetch implementation so transport behavior can be certified without React, browser workspace state, or a live runtime process.
+
+Replay Identity MUST be validated client-side before the per-replay status request is issued.
+
+A malformed Replay Identity MUST fail before network access.
+
+Runtime error envelopes MUST remain distinguishable through a typed client error carrying the HTTP status and governed runtime error code.
+
+Runtime access denial MUST remain transport-visible. A `403` response carrying `runtime_access_denied` MUST be surfaced as a typed Genesis replay client error with status `403` and code `runtime_access_denied`.
+
+The client MUST NOT translate runtime access denial into a generic network failure, empty inventory, replay not-found, or another Genesis-specific error.
+
+A status error associated with one Replay Identity MAY also retain that Replay Identity in the typed error.
+
+Successful inventory responses MUST be structurally validated before being returned to consumers.
+
+Successful per-replay status responses MUST be structurally validated and MUST carry the same Replay Identity that was requested.
+
+The client MUST NOT reinterpret integrity failures as empty inventory or absent status.
+
+Milestone 24 MAY export the typed read client through the existing Builder `runtimeService` aggregation boundary.
+
+Milestone 24 MUST NOT add React components, workspace state, polling, automatic refresh, navigation, user controls, or any other Builder UI exposure.
+
+Milestone 24 MUST NOT add Genesis mutation client methods.
+
+
 
 
 

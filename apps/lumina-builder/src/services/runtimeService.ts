@@ -64,6 +64,30 @@ export {
   stopRuntime,
   restartRuntime,
 } from "@/services/runtime/lifecycle";
+
+export {
+  getGenesisReplayStatus,
+  listGenesisReplays,
+  GenesisReplayReadApiError,
+  assertGenesisReplayId,
+  createGenesisReplayReadClient,
+  type GenesisCorpusCompletionStatus,
+  type GenesisManifestReadiness,
+  type GenesisReplayAdmissionLink,
+  type GenesisReplayCheckpoint,
+  type GenesisReplayExecutionStatus,
+  type GenesisReplayId,
+  type GenesisReplayInventory,
+  type GenesisReplayProgress,
+  type GenesisReplayReadClient,
+  type GenesisReplayReadClientOptions,
+  type GenesisReplayRecoveryEligibility,
+  type GenesisReplayRecoveryEligibilityReason,
+  type GenesisReplayRunnerFailure,
+  type GenesisReplayRunnerOutcome,
+  type GenesisReplayStatusSnapshot,
+} from "@/services/runtime/genesisReplayRead";
+
 export interface RuntimeProject {
   projectId: string;
   path: string;
