@@ -148,8 +148,16 @@ import {
 } from "./routes/knowledge/registerKnowledgeManufacturingReplayRoutes.js";
 
 import {
+  registerGenesisReplayStatusRoute,
+} from "./routes/genesisReplayStatus.js";
+
+import {
   knowledgeManufacturingReplayService,
 } from "./knowledge-preservation/manufacturing/index.js";
+
+import {
+  FileGenesisReplayPersistenceStore,
+} from "./knowledge-preservation/genesis/index.js";
 
 const app = express();
 
@@ -158,6 +166,9 @@ const knowledgePlatform =
 
 export const runtimeKnowledgePreservationPlatform =
   createKnowledgePreservationPlatform();
+
+export const runtimeGenesisReplayPersistenceStore =
+  new FileGenesisReplayPersistenceStore();
 
 rehydrateRuntimeCanonicalKnowledge(
   knowledgePlatform,
@@ -470,6 +481,18 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+
+registerGenesisReplayStatusRoute(
+  app,
+  {
+    persistence:
+      runtimeGenesisReplayPersistenceStore,
+
+    manufacturingRuns:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+  },
+);
 
 registerKnowledgePreservationRoutes(
   app,

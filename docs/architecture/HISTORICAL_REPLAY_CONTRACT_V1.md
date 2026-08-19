@@ -773,6 +773,51 @@ Persistence corruption, identity drift, checkpoint corruption, or manifest misma
 
 Replay Status / Inspection Service V1 MUST NOT expose routes or UI controls.
 
+Replay Runtime API Read Model V1 exposes the certified Replay Status / Inspection Service through one read-only runtime endpoint:
+
+`GET /api/runtime/genesis/replays/:replayId/status`
+
+The runtime API MUST reuse the existing runtime access-control middleware. Genesis MUST NOT create a parallel authentication or trust model.
+
+An unauthorized non-loopback request MUST be rejected by the established runtime access boundary before the Genesis status handler is invoked.
+
+A request carrying the valid configured internal runtime token MAY pass that existing runtime access boundary according to the runtime security contract.
+
+Milestone 20 MUST NOT weaken, special-case, bypass, duplicate, or replace `requireRuntimeAccess`.
+
+The route MUST validate Replay Identity before any persistence lookup.
+
+A wire-level Replay Identity is valid only when it matches the deterministic Replay Identity format produced by Genesis: `genesis-replay:` followed by exactly 64 lowercase hexadecimal characters.
+
+Malformed Replay Identity MUST return a client error and MUST NOT access Genesis persistence.
+
+A valid Replay Identity with no persisted replay MUST return not-found.
+
+Persistence corruption, Replay Identity drift, checkpoint corruption, manifest mismatch, or another persistence-integrity failure MUST remain distinguishable from not-found.
+
+The API MUST fail closed and expose the governed integrity error rather than fabricating an empty replay status.
+
+The route MUST delegate status construction to the existing Replay Status / Inspection Service. It MUST NOT duplicate replay projection logic in the transport layer.
+
+Milestone 20 exposes no replay mutation API.
+
+Milestone 20 MUST NOT expose HTTP endpoints for:
+
+- Historical Source discovery;
+- manifest construction;
+- Replay Plan creation;
+- replay start;
+- production Evidence admission;
+- replay resume;
+- replay recovery;
+- checkpoint mutation;
+- Runner Result mutation.
+
+The runtime route dependency surface MUST remain read-only for both Genesis persistence and Knowledge Manufacturing Runs.
+
+Milestone 20 MUST NOT add Builder UI or Builder API consumers.
+
+
 A failed replay MAY be restarted from the beginning of the same deterministic manifest.
 
 Runner restart safety depends on the Genesis Admission Identity idempotency contract.
