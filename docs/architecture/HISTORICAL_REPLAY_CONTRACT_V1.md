@@ -1275,6 +1275,367 @@ Milestone 30 MUST NOT add polling, timers, automatic refresh, or effects that pe
 
 Milestone 30 MUST NOT modify runtime-server Genesis endpoints or certified lower Genesis read layers.
 
+# Genesis Cross-Source Correlation and Evolution Episode Contract
+
+## Governing Principle
+
+Genesis historical reconstruction SHALL follow:
+
+**Separate evidence. Correlated history. Governed conclusions.**
+
+Cross-source correlation MUST NOT merge independently sourced evidence.
+
+Correlation MUST NOT itself grant canonical authority.
+
+Historical Replay MUST continue with repository-native sources when external conversation sources are unavailable.
+
+Conversation absence MUST remain explicit rather than being replaced by guessed rationale or Git-derived conversation substitutes.
+
+## Four-Layer Historical Model
+
+Genesis distinguishes four layers:
+
+1. **Source Evidence** — independently provenance-preserving source observations.
+2. **Historical Events** — deterministic normalized occurrences backed by source references.
+3. **Evolution Episodes** — governed correlation containers relating historical events around one concern, capability, decision, defect, architecture, implementation, or validation sequence.
+4. **Governed Knowledge** — existing Knowledge Operations lifecycle outputs produced only after reconstruction and governed extraction.
+
+Evolution Episodes are not Canonical Knowledge.
+
+Historical reconstruction does not perform canonical promotion.
+
+## Source Independence
+
+Conversation Evidence, Documentation Evidence, Git Evidence, Runtime Evidence, Test Evidence, Mission Evidence, Certification Evidence, and Human Validation Evidence MUST retain independently traceable source identities.
+
+An Evolution Episode MUST reference source evidence rather than collapsing source artifacts into the Episode record.
+
+Genesis MUST remain capable of answering independently:
+
+- what a human requested;
+- what engineering implemented;
+- what Git recorded;
+- what Runtime executed;
+- what tests proved;
+- what visual validation accepted or rejected;
+- what governance approved.
+
+## Historical Events
+
+Historical Events MUST have deterministic identity.
+
+The same unchanged source observation replayed repeatedly MUST resolve to the same Historical Event identity.
+
+A changed source observation MUST preserve revision or lineage rather than silently replacing previous history.
+
+Historical Event kinds MAY include requirement statements, architecture proposals, approvals, rejections, delegated tasks, commits, Runtime observations, builds, tests, visual validations, corrections, replacements, document amendments, supersession, and certification.
+
+## Historical Relationships
+
+Genesis relationships MAY include:
+
+`requested`,
+`clarified`,
+`proposed`,
+`approved`,
+`rejected`,
+`corrected`,
+`delegated`,
+`implemented_by`,
+`modified_by`,
+`validated_by`,
+`failed_validation`,
+`replaced_by`,
+`superseded_by`,
+`certified_by`,
+`contradicted_by`,
+`confirmed_by`,
+`derived_from`,
+`related_to`,
+and non-causal chronological ordering.
+
+A relationship MUST retain Correlation Evidence explaining why the relationship exists.
+
+Relationship identity MUST be deterministic.
+
+## Correlation Confidence
+
+Cross-source correlation MUST classify confidence as one of:
+
+- `explicit`;
+- `strong`;
+- `probable`;
+- `possible`;
+- `unresolved`.
+
+`explicit` requires direct evidence such as a source naming a commit, document, issue, milestone, file, task, certification, or other stable artifact.
+
+`strong` requires convergent evidence that strongly identifies a relationship.
+
+`probable` indicates evidence supports the relationship without conclusively establishing it.
+
+`possible` indicates temporal or topical similarity without sufficient historical proof.
+
+`unresolved` indicates conflict or insufficient evidence prevents a reliable conclusion.
+
+`possible` and `unresolved` relationships MUST NOT be presented as historical fact.
+
+## Chronology and Causality
+
+Chronology is not causality.
+
+Genesis MAY assert `occurred_before` from reliable temporal evidence.
+
+Genesis MUST NOT infer `caused` solely because one event precedes another.
+
+Causal relationships require affirmative supporting evidence and sufficient confidence.
+
+A causal relationship MUST have `explicit` or `strong` correlation confidence.
+
+`probable`, `possible`, and `unresolved` correlations MUST NOT be represented as causal relationships.
+
+Relationship confidence and the confidence recorded by its Correlation Evidence MUST agree.
+
+## Evolution Episodes
+
+An Evolution Episode is a deterministic correlation container for related historical events and source evidence.
+
+Episode identity MUST remain stable across replay when the Episode represents the same historical evolution.
+
+Episode membership enrichment MUST produce a new Episode revision while preserving the Episode identity.
+
+Every revision after the first MUST be capable of identifying the immediately preceding Episode revision.
+
+Replaying an unchanged Episode revision MUST resolve to the same revision identity and MUST NOT create a duplicate revision.
+
+When previously separate historical threads are determined to describe one combined historical evolution, a merge MUST create a distinct deterministic Episode identity and MUST retain every merged source Episode identity in lineage.
+
+When one Episode is later determined to contain distinct historical evolutions, each split Episode MUST receive its own deterministic Episode identity and MUST retain the source Episode identity through `splitFrom` lineage.
+
+Episode supersession MUST preserve the superseded Episode as inspectable historical state and MUST identify the superseded Episode from the replacement Episode lineage.
+
+Conversation enrichment of an existing repository-native Episode MUST preserve the Episode identity where the underlying historical evolution is unchanged, while producing a new revision identity and retaining the preceding revision lineage.
+
+Episode lineage MUST support merge, split, supersession, and revision without erasing prior Episode state.
+
+Replay MUST NOT create duplicate Evolution Episodes or Episode revisions for unchanged defining history.
+
+Not every source artifact must become an Evolution Episode.
+
+Not every Evolution Episode must become Canonical Knowledge.
+
+## Episode Lifecycle
+
+Supported reconstruction lifecycle states are:
+
+- `candidate`;
+- `correlating`;
+- `correlated`;
+- `conflicted`;
+- `incomplete`;
+- `validated`;
+- `superseded`;
+- `archived`.
+
+Lifecycle status reflects reconstruction state only.
+
+It MUST NOT masquerade as canonical approval, educational eligibility, or implementation correctness.
+
+## Failed Paths
+
+Failed and superseded paths are first-class historical records.
+
+Genesis MUST preserve failed attempts after replacements are introduced.
+
+A failed implementation that was followed by correction and replacement remains inspectable as historical evidence.
+
+Historical failed approaches MUST NOT be taught as current practice merely because they are educationally useful.
+
+Educational projection MAY later mark such material as historical lessons or **DO NOT APPLY AS CURRENT PRACTICE** under Learning governance.
+
+## Temporal Authority
+
+Genesis MUST distinguish historical authority from current authority.
+
+Historical representations MAY identify material as historically proposed, rejected, implemented, validated, observed, or authoritative.
+
+Current representations MAY identify material as currently authoritative, implemented, superseded, retired, not applicable, or unknown.
+
+Superseded historical authority remains inspectable.
+
+Current authority MUST NOT be inferred solely from chronology.
+
+Documentation authority continues to be governed by Constitutional Documentation Governance.
+
+## Conflicting Evidence
+
+Genesis MUST preserve disagreement between sources.
+
+It MUST NOT automatically choose the earliest statement, latest statement, Git state, Runtime state, or conversation statement as universally authoritative.
+
+Conflict and resolution sequences remain part of the Episode history.
+
+## Human Validation Evidence
+
+Human validation statements such as `green`, `red`, `didn't work`, `approved`, `proceed`, and visual certification are historically meaningful only with retained context.
+
+A validation statement SHOULD be correlated with the artifact, revision, milestone, or implementation it evaluated where evidence supports the relationship.
+
+Bare validation text without recoverable context MUST NOT be elevated into institutional knowledge.
+
+## Documentation Correlation
+
+Documentation MAY participate through relationships including `governed_by`, `specified_by`, `amended_by`, `reconciled_by`, `superseded_by`, and `certified_by` where compatible governed relationship models exist.
+
+Document authority derives from Constitutional Documentation Governance, not document timestamp or version ordering alone.
+
+## Git Correlation
+
+Git proves repository state and commit history.
+
+Git correlation SHOULD preserve commit identity, parentage, timestamp, changed files, branch or tag context where relevant, commit message, and source revision.
+
+Git alone does not prove architectural correctness, human approval, visual certification, educational eligibility, or current authority.
+
+## Runtime and Test Correlation
+
+Runtime and Test Evidence remain distinct source classes.
+
+Build success MUST NOT be treated as UI certification.
+
+Test success MUST NOT be treated as constitutional approval.
+
+Runtime evidence MAY establish execution facts but MUST NOT independently grant canonical authority.
+
+## Certification Correlation
+
+Certification Evidence SHOULD identify the exact implementation, revision, package, workspace state, or artifact it certified.
+
+Certification without recoverable certified-state identity remains historically incomplete.
+
+## External Conversation Source Boundary
+
+Historical conversations are external sources and MUST NOT be searched for in Git.
+
+Commit messages MUST NOT substitute for conversations.
+
+Until an approved acquisition mechanism is available, Genesis SHALL represent unavailable conversation coverage as:
+
+**EXTERNAL SOURCE — NOT YET INGESTED**
+
+and Episode-level missing context as:
+
+**EXTERNAL CONTEXT PENDING**
+
+External conversation absence MUST NOT block repository-native Historical Replay.
+
+## Future Conversation Acquisition
+
+Conversation acquisition and Conversation compilation are separate responsibilities.
+
+Future acquisition MUST preserve, where available:
+
+- conversation identity;
+- message identity;
+- project or conversation association;
+- timestamp;
+- speaker or role;
+- ordering;
+- source reference;
+- acquisition/import event;
+- integrity information.
+
+The conceptual boundary is:
+
+Conversation Source
+→ Conversation Acquisition
+→ Conversation Evidence
+→ Conversation Compiler
+
+Conversation enrichment MUST preserve existing repository provenance.
+
+When enrichment concerns the same historical evolution, Episode identity SHOULD remain stable while Episode revision changes.
+
+## Genesis Corpus Projection
+
+The Genesis Corpus SHALL eventually expose both **Source History** and **Evolution History**.
+
+The projection may include:
+
+- Sources;
+- Historical Events;
+- Evolution Episodes;
+- Decisions;
+- Failed Paths;
+- Supersession;
+- Conflicts;
+- Lessons;
+- Educationally Eligible Knowledge.
+
+Source evidence, reconstruction state, governed knowledge status, and educational eligibility MUST remain distinguishable.
+
+## Educational Significance
+
+Evolution Episodes exist partly to preserve historical rationale for future Chief Agent education.
+
+A governed educational projection SHOULD eventually support:
+
+current architecture
++
+historical rationale
++
+failed alternatives
++
+corrections
++
+governance boundaries
++
+validation evidence
++
+lessons learned.
+
+Educational projection remains subject to CA-005 and the Knowledge Constitution.
+
+Genesis itself MUST NOT activate or educate the Chief Agent.
+
+## Persistence
+
+Cross-source correlation state MUST use the Genesis runtime persistence boundary.
+
+Production correlation data belongs under runtime-managed Genesis storage, not source-controlled directories.
+
+Persistence MUST support an injected root for isolated tests.
+
+Correlation persistence MUST remain deterministic, replay-safe, recoverable, auditable, provenance-preserving, and isolated from production Knowledge stores during tests.
+
+## Milestone 31 Foundation Boundary
+
+Milestone 31 establishes only the minimum durable cross-source reconstruction foundation:
+
+- `HistoricalSourceReference`;
+- `HistoricalEvent`;
+- `HistoricalRelationship`;
+- `EvolutionEpisode`;
+- `CorrelationEvidence`;
+- `CorrelationConfidence`;
+- `TemporalAuthority`;
+- replay-safe deterministic identity;
+- correlation persistence.
+
+Milestone 31 MUST NOT:
+
+- perform full Day-0 replay;
+- ingest external conversations;
+- invent unavailable conversation rationale;
+- alter the certified Genesis read workspace;
+- expose a new Builder route;
+- activate Chief Agent education;
+- build the Executive Office;
+- bypass Knowledge Operations;
+- perform canonical promotion.
+
+After Milestone 31 certification, repository-native Historical Replay MAY continue toward Genesis Corpus projection while preserving future conversation enrichment.
+
 
 
 
