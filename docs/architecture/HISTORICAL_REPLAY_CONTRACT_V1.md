@@ -1919,6 +1919,146 @@ Milestone 33 establishes Temporal Chronology Projection V1 only.
 
 Documentation governance enrichment remains the next reconstruction concern.
 
+# Genesis Documentation Governance Enrichment V1
+
+## Purpose
+
+Genesis Documentation Governance Enrichment V1 projects repository documentation through the existing Constitutional Documentation Governance model.
+
+This milestone does not create a competing document-authority hierarchy.
+
+Genesis MUST preserve declared documentation governance metadata and assess it according to the repository's existing authority rules.
+
+## Governing Rule
+
+Document authority MUST NOT be inferred from chronology, path prominence, filename, version number, or recency alone.
+
+Document class and document authority are separate concepts.
+
+A file may be classified as architecture while its authority remains draft, proposed, superseded, historical, or unresolved.
+
+## Governance Metadata
+
+Where explicitly declared, Genesis MUST preserve:
+
+- authority class;
+- approval state;
+- owner;
+- scope;
+- version;
+- effective-from declaration;
+- effective-to declaration.
+
+Genesis MUST NOT fabricate missing effective periods from Git timestamps, filesystem timestamps, discovery time, or Event chronology.
+
+A missing effective period remains a governance gap.
+
+## Governance Classes
+
+Genesis MAY project documentation into the existing repository governance concepts including:
+
+- Canon;
+- Constitution;
+- Blueprint;
+- approved decision records;
+- Architecture;
+- Reconciliation;
+- Specification;
+- Operating Model;
+- Governance;
+- Validation;
+- Certification;
+- Roadmap;
+- RFC;
+- Audit;
+- Research;
+- Historical;
+- Archive.
+
+Classification does not itself grant authority.
+
+## Authority Effects
+
+Genesis MUST distinguish governing documentation from:
+
+- evidentiary documentation;
+- planning documentation;
+- proposals;
+- historical evidence;
+- explicitly non-governing documentation;
+- unresolved authority.
+
+Validation and Certification prove their scoped validation/certification state but do not independently establish architecture.
+
+Audit reports findings but does not independently establish architecture.
+
+Roadmaps express intended execution and do not prove implementation.
+
+RFCs and Research do not govern until accepted through the applicable governance process.
+
+## Approval State
+
+Canonical, Authoritative, Approved, Active, and Frozen states MAY establish governing status where the document class and scope permit.
+
+Draft, Proposed, and Review documents MUST NOT be represented as current governing authority.
+
+Superseded, Historical, and Archived documents remain inspectable historical evidence and MUST NOT silently regain current authority.
+
+`Complete` alone MUST NOT be interpreted as constitutional or architectural authority.
+
+## Supersession
+
+Explicit source supersession MUST remain attached to the documentation governance projection.
+
+A superseded document remains historically inspectable.
+
+Genesis MUST NOT determine supersession solely because another document is newer or has a larger version number.
+
+## Historical Versus Current Authority
+
+Documentation governance MUST distinguish historical authority state from current authority state.
+
+Where current metadata proves only that a document is now superseded or archived, Genesis MUST NOT invent the document's former governing state.
+
+Unknown historical authority remains unresolved/historical rather than fabricated.
+
+## Determinism
+
+Documentation governance projection identity MUST be deterministic.
+
+Equivalent input ordering MUST NOT change projection identity.
+
+A material governance metadata change MUST be capable of changing projection identity.
+
+A governance metadata revision MUST NOT change Historical Source identity when the underlying stable source identity is unchanged.
+
+Approval-state, authority-scope, declared effective-period, or other represented governance metadata revisions MUST be capable of producing a new documentation-governance projection identity while preserving the Historical Source identity.
+
+A newer historical timestamp MUST NOT restore governing authority to a document explicitly marked superseded, historical, or archived.
+
+A larger document version number MUST NOT restore governing authority to a document explicitly marked superseded, historical, or archived.
+
+Recency and version ordering MUST NOT override explicit approval state, supersession, constitutional precedence, or authority scope.
+
+## Milestone 34 Stop Boundary
+
+Milestone 34 MUST NOT:
+
+- execute Historical Replay;
+- infer document authority from recency;
+- create Canonical Knowledge;
+- perform canonical promotion;
+- modify Organizational Memory;
+- infer educational eligibility;
+- ingest external conversations;
+- redesign Genesis UI;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 34 establishes documentation-governance enrichment only.
+
+Knowledge Operations lifecycle correlation remains the next Genesis reconstruction concern.
+
 
 
 

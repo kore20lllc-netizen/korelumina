@@ -127,6 +127,12 @@ interface ParsedDocumentMetadata {
 
   version?:
     string;
+
+  effectiveFrom?:
+    string;
+
+  effectiveTo?:
+    string;
 }
 
 function toPosixPath(
@@ -677,6 +683,12 @@ function parseDocumentMetadata(
   let version:
     string | undefined;
 
+  let effectiveFrom:
+    string | undefined;
+
+  let effectiveTo:
+    string | undefined;
+
   for (
     const line
     of lines
@@ -733,6 +745,22 @@ function parseDocumentMetadata(
         line,
         "Version",
       );
+
+    effectiveFrom ??=
+      metadataValue(
+        line,
+        "Effective From",
+      ) ??
+      metadataValue(
+        line,
+        "Effective Date",
+      );
+
+    effectiveTo ??=
+      metadataValue(
+        line,
+        "Effective To",
+      );
   }
 
   return {
@@ -756,6 +784,10 @@ function parseDocumentMetadata(
     scope,
 
     version,
+
+    effectiveFrom,
+
+    effectiveTo,
   };
 }
 
@@ -1227,6 +1259,12 @@ export class DocumentationHistoricalSourceDiscoverer
 
           version:
             parsed.version,
+
+          effectiveFrom:
+            parsed.effectiveFrom,
+
+          effectiveTo:
+            parsed.effectiveTo,
         },
 
         replayEligibility:

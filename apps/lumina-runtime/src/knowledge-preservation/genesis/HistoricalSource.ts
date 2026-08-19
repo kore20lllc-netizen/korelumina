@@ -45,6 +45,12 @@ export interface HistoricalSourceAuthority {
 
   version?:
     string;
+
+  effectiveFrom?:
+    string;
+
+  effectiveTo?:
+    string;
 }
 
 export interface HistoricalSourceTimestamp {

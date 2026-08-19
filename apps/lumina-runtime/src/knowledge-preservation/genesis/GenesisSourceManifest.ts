@@ -63,6 +63,21 @@ export interface GenesisSourceManifestEntry {
   approvalState?:
     string;
 
+  authorityOwner?:
+    string;
+
+  authorityScope?:
+    string;
+
+  authorityVersion?:
+    string;
+
+  effectiveFrom?:
+    string;
+
+  effectiveTo?:
+    string;
+
   provenanceLocator:
     string;
 
@@ -138,6 +153,21 @@ export function historicalSourceToManifestEntry(
 
     approvalState:
       source.authority.approvalState,
+
+    authorityOwner:
+      source.authority.owner,
+
+    authorityScope:
+      source.authority.scope,
+
+    authorityVersion:
+      source.authority.version,
+
+    effectiveFrom:
+      source.authority.effectiveFrom,
+
+    effectiveTo:
+      source.authority.effectiveTo,
 
     provenanceLocator:
       source.provenance.locator,
