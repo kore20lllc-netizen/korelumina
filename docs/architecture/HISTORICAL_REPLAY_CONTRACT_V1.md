@@ -1014,6 +1014,65 @@ Milestone 25 MUST NOT add React components, hooks, workspace state, navigation, 
 
 Milestone 25 MUST NOT add Genesis mutation methods or modify runtime-server Genesis endpoints.
 
+Genesis Replay Read View Model V1 provides deterministic, presentation-ready projections over `GenesisReplayReadState`.
+
+The view-model layer MUST be a pure transformation boundary.
+
+It MUST NOT call the Genesis read client, `fetch`, runtime routes, runtime caller-header infrastructure, or the state adapter's imperative operations.
+
+The view model MAY derive:
+
+- inventory row projections;
+- short Replay Identity presentation;
+- replay lifecycle labels and presentation tone;
+- manifest readiness;
+- replay progress and completion percentage;
+- recovery eligibility presentation;
+- Knowledge Manufacturing linkage-health presentation;
+- selected replay detail projection;
+- scoped error presentation.
+
+The view model MUST NOT fabricate runtime state.
+
+A manifest-only replay MUST remain distinguishable from a replay with execution state.
+
+Missing replay progress MUST NOT be represented as completed execution progress.
+
+Replay completion percentage MUST be derived from certified progress values and MUST be deterministic.
+
+Replay completion percentage presented by the view model MUST remain within the inclusive range `0` through `100`, even if malformed upstream counts escape earlier validation.
+
+Presentation-layer linkage counts MUST NOT claim more linked, ambiguous, or unresolved Evidence than the admitted Evidence population.
+
+The sum of linked, ambiguous, and unresolved Evidence counts exposed by the view model MUST NOT exceed the admitted Evidence count.
+
+Knowledge Manufacturing linkage ambiguity MUST take precedence over otherwise linked status.
+
+An admitted Evidence set with ambiguous manufacturing linkage MUST NOT be represented as healthy.
+
+A partially linked admitted Evidence set MUST remain distinguishable from fully linked Evidence.
+
+A replay with no admitted Evidence MUST remain distinguishable from a replay whose admitted Evidence is fully linked.
+
+Recovery presentation MUST be derived from the certified `recovery` projection and MUST NOT authorize recovery.
+
+Inventory row order MUST preserve the deterministic order supplied by the certified inventory/state layers.
+
+Selected-replay presentation MUST derive from `selectedReplay` rather than independently reconstructing status from an inventory row.
+
+Inventory and selected-replay errors MUST remain logically distinguishable.
+
+Governed runtime error code and HTTP status information MUST remain available in error presentation.
+
+The view-model transformation MUST be deterministic and MUST NOT mutate its input state.
+
+Milestone 26 MAY export the view-model constructor and types through the existing Genesis read binding and `runtimeService`.
+
+Milestone 26 MUST NOT add React components, hooks, workspace state, navigation, polling, subscriptions, timers, network access, or user controls.
+
+Milestone 26 MUST NOT add Genesis mutation methods or modify runtime-server Genesis endpoints.
+
+
 
 
 

@@ -61,3 +61,20 @@ export type {
   GenesisReplayReadStateError,
   GenesisReplayReadStateErrorScope,
 } from "@/services/runtime/genesisReplayReadState";
+
+export {
+  createGenesisReplayReadViewModel,
+} from "@/services/runtime/genesisReplayReadViewModel";
+
+export type {
+  GenesisReplayErrorViewModel,
+  GenesisReplayInventoryRowViewModel,
+  GenesisReplayLifecycleLabel,
+  GenesisReplayLinkageHealth,
+  GenesisReplayLinkageViewModel,
+  GenesisReplayProgressViewModel,
+  GenesisReplayReadViewModel,
+  GenesisReplayRecoveryViewModel,
+  GenesisReplaySelectedViewModel,
+  GenesisReplayViewTone,
+} from "@/services/runtime/genesisReplayReadViewModel";
