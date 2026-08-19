@@ -152,6 +152,10 @@ import {
 } from "./routes/genesisReplayStatus.js";
 
 import {
+  registerGenesisReplayInventoryRoute,
+} from "./routes/genesisReplayInventory.js";
+
+import {
   knowledgeManufacturingReplayService,
 } from "./knowledge-preservation/manufacturing/index.js";
 
@@ -483,6 +487,18 @@ registerApplyDraftRoute(app);
 registerKnowledgeOperationsRoutes(app);
 
 registerGenesisReplayStatusRoute(
+  app,
+  {
+    persistence:
+      runtimeGenesisReplayPersistenceStore,
+
+    manufacturingRuns:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+  },
+);
+
+registerGenesisReplayInventoryRoute(
   app,
   {
     persistence:

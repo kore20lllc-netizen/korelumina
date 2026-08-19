@@ -881,6 +881,53 @@ Inventory ordering MUST be deterministic.
 
 Genesis Replay Listing / Inventory Read Model V1 MUST NOT expose runtime routes or Builder UI.
 
+Genesis Replay Inventory Runtime API V1 exposes the certified replay inventory through one additional read-only runtime endpoint:
+
+`GET /api/runtime/genesis/replays`
+
+The endpoint MUST reuse the existing `requireRuntimeAccess` middleware and MUST NOT establish a Genesis-specific authentication boundary.
+
+The runtime transport MUST delegate inventory construction to `listGenesisReplayInventory`.
+
+The route MUST NOT reproduce Replay Identity derivation, directory verification, artifact validation, status projection, or Knowledge Manufacturing linkage logic.
+
+An empty persisted Genesis store MUST return a successful empty inventory.
+
+Persistence corruption, directory/replay identity mismatch, cross-artifact Replay Identity ambiguity, or another inventory integrity failure MUST fail closed and MUST NOT be represented as an empty inventory.
+
+The response ordering MUST remain the deterministic ordering established by the certified inventory service.
+
+Milestone 23 therefore exposes exactly two Genesis runtime HTTP paths:
+
+- `GET /api/runtime/genesis/replays`
+- `GET /api/runtime/genesis/replays/:replayId/status`
+
+Both paths are read-only.
+
+Milestone 23 MUST NOT expose POST, PUT, PATCH, or DELETE Genesis routes.
+
+Milestone 23 MUST NOT expose replay discovery, replay start, Evidence admission, resume, recovery, checkpoint mutation, Runner Result mutation, or Knowledge Operations mutation through HTTP.
+
+Milestone 23 MUST NOT modify the certified Replay Status / Inspection Service or Replay Listing / Inventory Read Model semantics.
+
+Milestone 23 MUST NOT add Builder UI or Builder API consumers.
+
+Milestone 23 HTTP integration certification MUST exercise the inventory endpoint through a real ephemeral HTTP server using the actual `registerGenesisReplayInventoryRoute` registration function and isolated `FileGenesisReplayPersistenceStore`.
+
+Integration certification MUST verify:
+
+- an empty persisted Genesis store returns HTTP 200 with an empty inventory;
+- multiple persisted replays retain the deterministic Replay Identity ordering established by the inventory service;
+- a manifest-only replay remains visible with no fabricated execution state;
+- corrupt persisted replay JSON returns an integrity failure rather than HTTP 200 with an empty or partial inventory;
+- failed inventory inspection does not rewrite the corrupt persisted artifact.
+
+Milestone 23 integration fixtures MUST remain isolated from operational Genesis and Knowledge storage.
+
+HTTP integration certification MUST NOT create an additional Genesis route or mutation surface.
+
+
+
 
 
 
