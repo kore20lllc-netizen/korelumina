@@ -1182,6 +1182,44 @@ Milestone 28 MUST NOT add polling, timers, automatic refresh, workspace state, n
 
 Milestone 28 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
 
+Genesis Replay Read Hook Contract V1 provides the first application-consumable React hook for the certified Genesis replay read stack.
+
+The production hook MUST bind the existing generic `useGenesisReplayRead` React adapter hook to the existing singleton `genesisReplayReactAdapter`.
+
+The production hook MUST NOT create a second runtime client, read-state adapter, controller, React adapter, or external-store implementation.
+
+The production hook MUST NOT call `useSyncExternalStore` directly.
+
+External-store semantics remain owned by Genesis Replay React Adapter V1.
+
+The production hook MUST expose the certified React binding unchanged:
+
+- presentation snapshot;
+- explicit inventory refresh;
+- explicit Replay Identity selection;
+- explicit selected-replay refresh;
+- explicit selection clearing;
+- explicit read-error clearing.
+
+Hook invocation MUST NOT automatically refresh inventory.
+
+Hook invocation MUST NOT automatically inspect a replay.
+
+Hook invocation during server rendering MUST NOT perform runtime network access.
+
+The initial server-rendered snapshot MUST come from the certified React adapter server snapshot.
+
+The hook MUST NOT introduce local React state for Genesis replay data.
+
+The hook MUST NOT reinterpret lifecycle, progress, recovery, linkage, loading, or error state.
+
+Those semantics remain owned by the previously certified read stack.
+
+Milestone 29 MUST NOT add polling, timers, effects that trigger runtime access, workspace state, navigation, rendered workspace UI, or user controls.
+
+Milestone 29 MUST NOT add Genesis mutation operations or modify runtime-server Genesis endpoints.
+
+
 
 
 
