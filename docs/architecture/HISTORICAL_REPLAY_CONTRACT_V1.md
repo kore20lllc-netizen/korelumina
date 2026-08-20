@@ -2560,6 +2560,112 @@ Milestone 39 establishes only the typed Builder operational client and read-stat
 
 Controller/React integration and workspace operational projection remain subsequent milestones.
 
+# Genesis Builder Operational Controller + React Adapter V1
+
+## Purpose
+
+Milestone 40 composes the certified Replay read controller and the certified Operational read-state adapter into one Builder selection lifecycle.
+
+The certified Replay controller remains independently valid.
+
+The Operational controller wraps it rather than replacing or redefining it.
+
+## Selection Lifecycle
+
+Selecting a Replay MUST initiate both:
+
+- certified Replay status selection;
+- replay-scoped Operational Projection loading.
+
+Both reads MUST receive the same deterministic Replay identity.
+
+Changing Replay selection MUST rely on the independently certified stale-response protection of each underlying read boundary.
+
+Operational composition MUST NOT permit Replay A operational state to become the operational projection for Replay B.
+
+## Refresh Lifecycle
+
+Replay inventory refresh remains a Replay-controller responsibility.
+
+Selected Replay refresh MUST refresh both:
+
+- selected Replay status;
+- selected Operational Projection.
+
+## Clear Lifecycle
+
+Clearing Replay selection MUST clear both Replay selection and Operational read state.
+
+Clearing errors MUST clear both independent read-error channels without fabricating data.
+
+## Snapshot Contract
+
+The composed controller snapshot MUST retain Replay read state and Operational read state as independently inspectable children.
+
+The controller MUST NOT collapse them into a single opaque status.
+
+Subscription MUST publish changes originating from either read boundary.
+
+Unsubscription MUST detach from both underlying subscriptions.
+
+## React Boundary
+
+The React adapter MUST use a stable cached snapshot suitable for `useSyncExternalStore`.
+
+The first React subscriber MUST create at most one controller subscription.
+
+Multiple React subscribers MUST share that controller subscription.
+
+The final React unsubscription MUST detach the controller subscription.
+
+Synchronous initial controller delivery MUST NOT produce a redundant React notification.
+
+## Runtime Source of Truth
+
+The controller and React adapter orchestrate reads only.
+
+They MUST NOT:
+
+- build Corpus;
+- build chronology;
+- infer documentation governance;
+- correlate Knowledge lifecycle;
+- calculate readiness;
+- reinterpret conversation-source status.
+
+## Milestone 40 Stop Boundary
+
+Milestone 40 MUST NOT:
+
+- modify Runtime Genesis;
+- modify certified Replay controller semantics;
+- redesign GenesisReplayReadWorkspace;
+- render new operational UI;
+- execute Historical Replay;
+- mutate Knowledge Operations;
+- ingest conversations;
+- evaluate educational eligibility;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 40 establishes only composed Builder controller and React read integration.
+
+Genesis workspace operational rendering remains a subsequent milestone.
+
+A composed controller subscription MUST deliver exactly one synchronous initial snapshot.
+
+After a completed Replay selection, the Replay read boundary and Operational read boundary MUST represent the same selected Replay identity.
+
+After reselection, neither composed read boundary may remain attached to the previous Replay identity.
+
+Clearing selection MUST leave both composed read boundaries unselected and MUST clear previously selected Operational Projection state.
+
+React adapter disconnection MUST detach from the controller.
+
+When the React adapter later reconnects, its cached snapshot MUST synchronize to the controller's current state before React consumes that snapshot.
+
+Controller/React composition MUST preserve the independently certified stale-response protections implemented by the underlying Replay and Operational read-state adapters.
+
 Every certified child operational projection MUST retain an independently identifiable projection identity at the Builder boundary.
 
 A successful HTTP response with a missing certified child projection identity MUST fail closed.
