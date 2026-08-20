@@ -2059,6 +2059,137 @@ Milestone 34 establishes documentation-governance enrichment only.
 
 Knowledge Operations lifecycle correlation remains the next Genesis reconstruction concern.
 
+# Genesis Knowledge Operations Lifecycle Correlation V1
+
+## Purpose
+
+Genesis Knowledge Operations Lifecycle Correlation V1 provides a read-only correlation between admitted Genesis Evidence and the existing production Knowledge Operations lifecycle.
+
+Genesis does not receive a separate Knowledge Constitution.
+
+The authoritative lifecycle remains:
+
+Historical Source
+→ Replay
+→ Evidence
+→ Knowledge Manufacturing Run
+→ Knowledge IR
+→ Validation
+→ Knowledge Package
+→ Canonical Review
+→ Canonical Knowledge
+→ Organizational Memory adaptation where governed.
+
+## Evidence Correlation
+
+Genesis MUST correlate admitted Evidence to Knowledge Manufacturing Runs by stable Evidence identity.
+
+One matching manufacturing run MAY be represented as correlated.
+
+Multiple matching runs MUST be represented as ambiguous.
+
+Genesis MUST NOT arbitrarily choose one of multiple manufacturing runs.
+
+Admitted Evidence with no manufacturing run MUST remain visible as not correlated.
+
+## Manufacturing Lifecycle
+
+Knowledge Manufacturing stage state MUST derive from the existing manufacturing run and stage history.
+
+Genesis MUST preserve the distinction between:
+
+- Knowledge IR;
+- Validation;
+- Knowledge Package Assembly;
+- Canonical Review;
+- Canonical Knowledge.
+
+A later stage MUST NOT erase earlier lifecycle history.
+
+Failed and blocked stages remain inspectable.
+
+## Review Versus Promotion
+
+Canonical Review is not Canonical Knowledge.
+
+An item awaiting human review MUST NOT be represented as canonical.
+
+Review approval alone MUST NOT fabricate a Canonical Knowledge identity.
+
+Canonical Knowledge identity MUST come from the existing manufacturing/canonical lifecycle.
+
+## Organizational Memory
+
+Genesis MAY correlate Canonical Knowledge to Organizational Memory only through existing governed identity, including `canonicalItemId`.
+
+Canonical Knowledge does not imply Organizational Memory adaptation.
+
+Absence of a matching Organizational Memory record MUST remain `not-correlated`.
+
+Multiple matching memory records MUST remain ambiguous unless another governed contract resolves the ambiguity.
+
+Adaptation validation MUST be preserved independently from canonical identity.
+
+## Educational Boundary
+
+Organizational Memory correlation does not imply educational eligibility.
+
+Adaptation validation does not imply educational eligibility.
+
+Milestone 35 MUST report educational eligibility as not evaluated.
+
+CA-005 governs later educational eligibility and Day-0 education.
+
+## Projection Identity
+
+Knowledge lifecycle correlation projection identity MUST be deterministic.
+
+Equivalent manufacturing-run and Organizational Memory input ordering MUST NOT change projection identity.
+
+A material represented lifecycle, canonical, or memory-adaptation change MUST be capable of changing projection identity.
+
+A change to Organizational Memory adaptation validation MUST be capable of changing lifecycle projection identity without changing the correlated Canonical Knowledge identity.
+
+An ambiguous manufacturing correlation MUST NOT expose package identity, Canonical Knowledge identity, downstream lifecycle stage state, or Organizational Memory state from any candidate run.
+
+Ambiguous Organizational Memory correlation MUST NOT be represented as validated adaptation unless every correlated record independently proves validated adaptation; mixed adaptation evidence MUST remain non-validated at the aggregate correlation boundary.
+
+Canonical Knowledge identity, Organizational Memory adaptation, adaptation validation, and educational eligibility are separate governed facts.
+
+A downstream fact MUST NOT be inferred solely from the presence of an upstream fact.
+
+## Read-Only Boundary
+
+The lifecycle correlation projection MUST NOT:
+
+- create or alter Evidence;
+- create or advance manufacturing runs;
+- assemble Knowledge Packages;
+- approve Canonical Review;
+- promote Canonical Knowledge;
+- adapt Organizational Memory;
+- evaluate educational eligibility.
+
+It observes certified production state only.
+
+## Milestone 35 Stop Boundary
+
+Milestone 35 MUST NOT:
+
+- execute Historical Replay;
+- modify Knowledge Operations;
+- perform canonical promotion;
+- perform memory adaptation;
+- evaluate educational eligibility;
+- ingest conversations;
+- redesign Genesis UI;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 35 establishes Knowledge Operations Lifecycle Correlation V1 only.
+
+Genesis readiness and completion computation remains the next reconstruction concern.
+
 
 
 
