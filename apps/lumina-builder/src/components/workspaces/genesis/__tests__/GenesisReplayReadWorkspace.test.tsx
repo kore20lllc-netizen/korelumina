@@ -1,3 +1,8 @@
+import {
+  test,
+  vi,
+} from "vitest";
+
 import React from "react";
 
 import {
@@ -9,6 +14,7 @@ import {
 } from "../GenesisReplayReadWorkspace";
 
 import type {
+  GenesisOperationalReactBinding,
   GenesisReplayReactBinding,
 } from "@/services/runtime/genesisReplayRead";
 
@@ -17,10 +23,32 @@ import type {
 } from "@/services/runtime/genesisReplayRead";
 
 declare global {
-  var __GENESIS_REPLAY_TEST_BINDING__:
-    GenesisReplayReactBinding |
+  var __GENESIS_OPERATIONAL_TEST_BINDING__:
+    GenesisOperationalReactBinding |
     undefined;
 }
+
+vi.mock(
+  "@/hooks/useGenesisOperationalRead",
+  () => ({
+    useGenesisOperationalRead:
+      () => {
+        const binding =
+          globalThis
+            .__GENESIS_OPERATIONAL_TEST_BINDING__;
+
+        if (
+          !binding
+        ) {
+          throw new Error(
+            "genesis_operational_test_binding_missing",
+          );
+        }
+
+        return binding;
+      },
+  }),
+);
 
 const REPLAY_A =
   `genesis-replay:${"a".repeat(
@@ -54,8 +82,45 @@ function renderWith(
     GenesisReplayReactBinding,
 ) {
   globalThis
-    .__GENESIS_REPLAY_TEST_BINDING__ =
-    binding;
+    .__GENESIS_OPERATIONAL_TEST_BINDING__ = {
+    snapshot: {
+      replay:
+        binding.snapshot,
+
+      operational: {
+        replayId:
+          binding.snapshot
+            .selectedReplayId,
+
+        projection:
+          null,
+
+        loading:
+          false,
+
+        loaded:
+          false,
+
+        error:
+          null,
+      },
+    },
+
+    refreshInventory:
+      binding.refreshInventory,
+
+    selectReplay:
+      binding.selectReplay,
+
+    refreshSelected:
+      binding.refreshSelected,
+
+    clearSelection:
+      binding.clearSelection,
+
+    clearError:
+      binding.clearError,
+  };
 
   return renderToString(
     React.createElement(
@@ -587,6 +652,24 @@ export function runGenesisReplayWorkspaceShellContract() {
       originalFetch;
 
     delete globalThis
-      .__GENESIS_REPLAY_TEST_BINDING__;
+      .__GENESIS_OPERATIONAL_TEST_BINDING__;
   }
 }
+
+
+test(
+  "preserves certified Genesis replay workspace shell contract",
+  () => {
+    const result =
+      runGenesisReplayWorkspaceShellContract();
+
+    if (
+      result.fetchCalls !==
+        0
+    ) {
+      throw new Error(
+        `workspace_auto_read_detected:${result.fetchCalls}`,
+      );
+    }
+  },
+);

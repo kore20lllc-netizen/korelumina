@@ -1,7 +1,7 @@
 import {
   LayoutGrid, Sparkles, Lightbulb, Palette, Code2, FolderGit2, Settings, X,
   Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity,
-  BookOpen, ShieldCheck, Gauge, ServerCog, Crown, ChevronDown, LogOut, User as UserIcon,
+  BookOpen, History, ShieldCheck, Gauge, ServerCog, Crown, ChevronDown, LogOut, User as UserIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -106,7 +106,11 @@ export function Sidebar() {
             label: "Knowledge Operations",
             active: view === "knowledge-operations",
           },
-          { icon: Crown, label: "Admin", active: view === "admin" },
+          {
+            icon: History,
+            label: "Genesis",
+            active: view === "genesis",
+          },
         ]
       : [];
 
@@ -173,7 +177,13 @@ export function Sidebar() {
         </button>
         <div className="w-8 h-px bg-border my-1" />
         <nav
-          className="flex flex-col gap-1 w-full items-center"
+          className="
+            flex min-h-0 flex-1 flex-col items-center gap-1
+            w-full overflow-y-auto overflow-x-hidden
+            overscroll-contain
+            [scrollbar-width:none]
+            [&::-webkit-scrollbar]:hidden
+          "
           role="toolbar"
           aria-orientation="vertical"
           aria-label="Sidebar navigation"
@@ -220,8 +230,10 @@ export function Sidebar() {
                       item.label === "Knowledge Operations"
                     ) {
                       setView("knowledge-operations");
-                    } else if (item.label === "Admin") {
-                      setView("admin");
+                    } else if (
+                      item.label === "Genesis"
+                    ) {
+                      setView("genesis");
                     } else {
                       toast(item.label, { description: "Panel coming soon" });
                     }
@@ -237,13 +249,33 @@ export function Sidebar() {
           )}
         </nav>
 
-        <div className="flex-1" />
+        {(role === "admin" || role === "super_admin") &&
+          view !== "workspace" && (
+            <>
+              <div className="my-1 h-px w-8 shrink-0 bg-border" />
+
+              <div className="w-full shrink-0">
+                <NavigationItem
+                  label="Admin"
+                  icon={<Crown />}
+                  active={view === "admin"}
+                  compact={true}
+                  onClick={() => {
+                    setView("admin");
+                    setActiveLabel("Admin");
+                    setSidebarOpen(false);
+                  }}
+                />
+              </div>
+            </>
+          )}
 
         <button
           onClick={toggleAppearancePanel}
           className="
             group
             relative
+            shrink-0
             mb-3
             h-10
             w-10

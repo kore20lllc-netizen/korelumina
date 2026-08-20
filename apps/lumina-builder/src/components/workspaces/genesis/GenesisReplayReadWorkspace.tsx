@@ -12,14 +12,28 @@ import {
 } from "@/components/lumina/LuminaButton";
 
 import {
-  LuminaWorkspaceHero,
   LuminaWorkspaceLayout,
-  LuminaWorkspacePanel,
 } from "@/components/lumina/workspace";
 
 import {
-  useGenesisReplayRead,
-} from "@/hooks/useGenesisReplayRead";
+  LuminaExecutiveTitleMetricsComposition,
+} from "@/components/design-system/compositions/LuminaExecutiveTitleMetricsComposition";
+
+import {
+  LuminaFlagshipCard,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+
+import {
+  LuminaFlagshipPanel,
+} from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import {
+  useGenesisOperationalRead,
+} from "@/hooks/useGenesisOperationalRead";
+
+import {
+  GenesisOperationalProjectionPanel,
+} from "./GenesisOperationalProjectionPanel";
 
 export interface GenesisReplayReadWorkspaceProps {
   onBack?:
@@ -41,28 +55,24 @@ function Metric({
     string;
 }) {
   return (
-    <div
-      className={[
-        "rounded-2xl border px-5 py-4",
-        "[border-color:var(--lumina-border-standard)]",
-        "[background:var(--lumina-surface-compact)]",
-        "[box-shadow:var(--lumina-shadow-panel)]",
-      ].join(
-        " ",
-      )}
+    <LuminaFlagshipCard
+      as="article"
+      className="min-w-0 px-5 py-4"
     >
-      <div className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-        {label}
-      </div>
+      <div className="relative z-10">
+        <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/72">
+          {label}
+        </div>
 
-      <div className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-foreground">
-        {value}
-      </div>
+        <div className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-amber-400">
+          {value}
+        </div>
 
-      <div className="mt-1 text-xs text-muted-foreground">
-        {detail}
+        <div className="mt-1 text-xs leading-5 text-sky-300/58">
+          {detail}
+        </div>
       </div>
-    </div>
+    </LuminaFlagshipCard>
   );
 }
 
@@ -164,7 +174,13 @@ export function GenesisReplayReadWorkspace({
     clearSelection,
     clearError,
   } =
-    useGenesisReplayRead();
+    useGenesisOperationalRead();
+
+  const {
+    replay,
+    operational,
+  } =
+    snapshot;
 
   const {
     inventoryLoading,
@@ -177,7 +193,7 @@ export function GenesisReplayReadWorkspace({
     selected,
     error,
   } =
-    snapshot;
+    replay;
 
   const completed =
     rows.filter(
@@ -210,106 +226,120 @@ export function GenesisReplayReadWorkspace({
   return (
     <LuminaWorkspaceLayout
       header={
-        <LuminaWorkspaceHero
-          eyebrow="Historical Replay"
-          title="Genesis Replay Observatory"
-          subtitle="Read-only inspection of persisted Genesis replay inventory, execution progress, recovery eligibility, and Knowledge Manufacturing linkage."
-          actions={
-            <div className="flex flex-wrap items-center justify-end gap-3">
-              {onBack && (
-                <LuminaButton
-                  variant="ghost"
-                  onClick={onBack}
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Back
-                </LuminaButton>
-              )}
+        <LuminaExecutiveTitleMetricsComposition
+          variant="balanced"
+          titleRegion={
+            <LuminaFlagshipPanel
+              title={null}
+              className="h-full [&>div:nth-of-type(3)]:hidden"
+            >
+              <div className="relative z-10 min-w-0 px-6 pb-6 pt-2">
+                <div className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
+                  Historical Replay
+                </div>
 
-              <LuminaButton
-                variant="toolbar"
-                disabled={
-                  inventoryLoading
-                }
-                onClick={() => {
-                  void refreshInventory();
-                }}
-              >
-                <RefreshCw
-                  className={[
-                    "h-4 w-4",
-                    inventoryLoading
-                      ? "animate-spin"
-                      : "",
-                  ].join(
-                    " ",
+                <h1 className="mt-3 text-2xl font-semibold tracking-[-0.025em] text-cyan">
+                  Genesis Replay Observatory
+                </h1>
+
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-white/60">
+                  Read-only inspection of persisted Genesis replay inventory,
+                  execution progress, recovery eligibility, Knowledge
+                  Manufacturing linkage, and governed institutional
+                  reconstruction.
+                </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  {onBack && (
+                    <LuminaButton
+                      variant="ghost"
+                      onClick={onBack}
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Back
+                    </LuminaButton>
                   )}
+
+                  <LuminaButton
+                    variant="toolbar"
+                    disabled={inventoryLoading}
+                    onClick={() => {
+                      void refreshInventory();
+                    }}
+                  >
+                    <RefreshCw
+                      className={[
+                        "h-4 w-4",
+                        inventoryLoading
+                          ? "animate-spin"
+                          : "",
+                      ].join(" ")}
+                    />
+
+                    {inventoryLoaded
+                      ? "Refresh inventory"
+                      : "Load inventory"}
+                  </LuminaButton>
+                </div>
+              </div>
+            </LuminaFlagshipPanel>
+          }
+          metricsRegion={
+            <LuminaFlagshipPanel
+              title={null}
+              className="h-full [&>div:nth-of-type(3)]:hidden"
+            >
+              <div className="relative z-10 grid gap-3 p-4 sm:grid-cols-2">
+                <Metric
+                  label="Persisted replays"
+                  value={
+                    inventoryLoaded
+                      ? String(inventoryCount)
+                      : "—"
+                  }
+                  detail="Certified inventory records"
                 />
 
-                {inventoryLoaded
-                  ? "Refresh inventory"
-                  : "Load inventory"}
-              </LuminaButton>
-            </div>
+                <Metric
+                  label="Completed"
+                  value={
+                    inventoryLoaded
+                      ? String(completed)
+                      : "—"
+                  }
+                  detail="Execution lifecycle complete"
+                />
+
+                <Metric
+                  label="Recovery eligible"
+                  value={
+                    inventoryLoaded
+                      ? String(recoveryEligible)
+                      : "—"
+                  }
+                  detail="Inspection only — no mutation"
+                />
+
+                <Metric
+                  label="Linkage issues"
+                  value={
+                    inventoryLoaded
+                      ? String(linkageIssues)
+                      : "—"
+                  }
+                  detail="Partial or ambiguous linkage"
+                />
+              </div>
+            </LuminaFlagshipPanel>
           }
         />
       }
-      metrics={
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <Metric
-            label="Persisted replays"
-            value={
-              inventoryLoaded
-                ? String(
-                    inventoryCount,
-                  )
-                : "—"
-            }
-            detail="Certified inventory records"
-          />
-
-          <Metric
-            label="Completed"
-            value={
-              inventoryLoaded
-                ? String(
-                    completed,
-                  )
-                : "—"
-            }
-            detail="Execution lifecycle complete"
-          />
-
-          <Metric
-            label="Recovery eligible"
-            value={
-              inventoryLoaded
-                ? String(
-                    recoveryEligible,
-                  )
-                : "—"
-            }
-            detail="Inspection only — no mutation"
-          />
-
-          <Metric
-            label="Linkage issues"
-            value={
-              inventoryLoaded
-                ? String(
-                    linkageIssues,
-                  )
-                : "—"
-            }
-            detail="Partial or ambiguous linkage"
-          />
-        </div>
-      }
+      metrics={null}
       content={
         <div className="grid min-h-[620px] gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
-          <LuminaWorkspacePanel
+          <LuminaFlagshipPanel
             title="Replay inventory"
-            subtitle="Deterministic persisted replay identities from the certified Genesis inventory endpoint."
+            description="Deterministic persisted replay identities from the certified Genesis inventory endpoint."
             toolbar={
               inventoryLoaded
                 ? (
@@ -451,11 +481,11 @@ export function GenesisReplayReadWorkspace({
                   </div>
                 </div>
               )}
-          </LuminaWorkspacePanel>
+          </LuminaFlagshipPanel>
 
-          <LuminaWorkspacePanel
+          <LuminaFlagshipPanel
             title="Replay inspection"
-            subtitle="Certified per-replay status projection. No replay execution controls are exposed."
+            description="Certified per-replay status projection. No replay execution controls are exposed."
             toolbar={
               selectedReplayId
                 ? (
@@ -605,60 +635,72 @@ export function GenesisReplayReadWorkspace({
                 </div>
               </div>
             )}
-          </LuminaWorkspacePanel>
+          </LuminaFlagshipPanel>
         </div>
       }
       inspector={
-        error
+        error ||
+        operational.replayId !==
+          null
           ? (
-              <LuminaWorkspacePanel
-                title="Read integrity"
-                subtitle="The certified read stack returned an error."
-              >
-                <div className="space-y-4 p-5">
-                  <div
-                    className={[
-                      "rounded-2xl border p-4",
-                      "border-red-400/25",
-                      "bg-red-500/[0.06]",
-                    ].join(
-                      " ",
-                    )}
+              <div className="space-y-6">
+                {error && (
+                  <LuminaFlagshipPanel
+                    title="Read integrity"
+                    description="The certified replay read stack returned an error."
                   >
-                    <div className="text-sm font-semibold text-red-200">
-                      {
-                        error.label
-                      }
-                    </div>
+                    <div className="space-y-4 p-5">
+                      <div
+                        className={[
+                          "rounded-2xl border p-4",
+                          "border-red-400/25",
+                          "bg-red-500/[0.06]",
+                        ].join(
+                          " ",
+                        )}
+                      >
+                        <div className="text-sm font-semibold text-red-200">
+                          {
+                            error.label
+                          }
+                        </div>
 
-                    <div className="mt-2 font-mono text-xs text-red-200/80">
-                      {
-                        error.code ??
-                        error.message
-                      }
-                    </div>
+                        <div className="mt-2 font-mono text-xs text-red-200/80">
+                          {
+                            error.code ??
+                            error.message
+                          }
+                        </div>
 
-                    {error.status !==
-                      null && (
-                      <div className="mt-2 text-xs text-muted-foreground">
-                        HTTP {
-                          error.status
-                        }
+                        {error.status !==
+                          null && (
+                          <div className="mt-2 text-xs text-muted-foreground">
+                            HTTP {
+                              error.status
+                            }
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
 
-                  <LuminaButton
-                    variant="ghost"
-                    size="sm"
-                    onClick={
-                      clearError
-                    }
-                  >
-                    Clear error
-                  </LuminaButton>
-                </div>
-              </LuminaWorkspacePanel>
+                      <LuminaButton
+                        variant="ghost"
+                        size="sm"
+                        onClick={
+                          clearError
+                        }
+                      >
+                        Clear error
+                      </LuminaButton>
+                    </div>
+                  </LuminaFlagshipPanel>
+                )}
+
+                <GenesisOperationalProjectionPanel
+                  state={
+                    operational
+                  }
+                />
+              </div>
             )
           : undefined
       }

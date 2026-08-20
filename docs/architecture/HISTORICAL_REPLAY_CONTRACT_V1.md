@@ -2652,6 +2652,98 @@ Milestone 40 establishes only composed Builder controller and React read integra
 
 Genesis workspace operational rendering remains a subsequent milestone.
 
+# Genesis Workspace Operational Projection V1
+
+## Purpose
+
+Milestone 41 is the first Genesis workspace milestone that renders the certified replay-scoped Operational Projection.
+
+The existing Genesis Replay Observatory visual contract remains the workspace foundation.
+
+Milestone 41 MUST extend that workspace rather than replace or redesign it.
+
+## Composed Binding
+
+GenesisReplayReadWorkspace MUST consume the certified Milestone 40 composed Operational React binding.
+
+The workspace MUST NOT independently invoke both Replay and Operational clients.
+
+Replay inventory, Replay selection, and Operational Projection selection MUST therefore remain governed by the same composed selection lifecycle.
+
+## Operational Rendering
+
+For a selected Replay, the workspace MAY expose:
+
+- Genesis Corpus source and evolution summaries;
+- historical chronology coverage;
+- Evolution Episode counts;
+- documentation governance state;
+- Knowledge Operations lifecycle state;
+- Genesis readiness;
+- conversation source classification;
+- external-context-pending state;
+- educational eligibility state.
+
+Rendered values MUST come from the Runtime Operational Projection.
+
+The workspace MUST NOT recalculate these domains from Replay inventory.
+
+## Source Independence
+
+Historical conversation status MUST remain independently visible.
+
+`SOURCE ACCESS BLOCKED` MUST be rendered truthfully while that is the certified source boundary.
+
+`EXTERNAL SOURCE — NOT YET INGESTED` and `EXTERNAL CONTEXT PENDING` MUST remain distinguishable from repository-native historical state.
+
+The workspace MUST NOT imply Git substitutes for unavailable Conversation Evidence.
+
+## Educational Boundary
+
+Educational eligibility MUST remain visible as `not-evaluated` while CA-005 evaluation has not occurred.
+
+The workspace MUST NOT infer educational eligibility from Canonical Knowledge or Organizational Memory adaptation.
+
+## Error Boundaries
+
+Replay read integrity and Operational Projection integrity MUST remain independently inspectable.
+
+Missing Operational persisted state MUST render as an operational read error.
+
+It MUST NOT be converted into an empty successful Genesis Corpus.
+
+## UI Boundary
+
+Milestone 41 MUST use existing certified Lumina workspace primitives.
+
+Milestone 41 MUST NOT perform Lumina extraction.
+
+Milestone 41 MUST NOT redesign the workspace hierarchy.
+
+The operational presentation SHOULD be composed as a separate local workspace component so GenesisReplayReadWorkspace does not become monolithic.
+
+## Mutation Boundary
+
+Milestone 41 remains read-only.
+
+It MUST NOT expose controls to:
+
+- start Historical Replay;
+- resume Historical Replay;
+- recover Historical Replay;
+- admit Evidence;
+- advance Knowledge Manufacturing;
+- approve or promote Canonical Knowledge;
+- adapt Organizational Memory;
+- ingest conversations;
+- activate Chief Agent education.
+
+## Milestone 41 Stop Boundary
+
+Milestone 41 establishes truthful operational rendering only.
+
+Historical artifact inspection, source/event/episode timelines, and deeper lineage interaction remain later Genesis milestones.
+
 A composed controller subscription MUST deliver exactly one synchronous initial snapshot.
 
 After a completed Replay selection, the Replay read boundary and Operational read boundary MUST represent the same selected Replay identity.

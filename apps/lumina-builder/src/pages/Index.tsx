@@ -15,6 +15,7 @@ import { AuthView } from "@/components/workspaces/AuthView";
 import { SettingsView } from "@/components/workspaces/SettingsView";
 import { PricingView } from "@/components/workspaces/PricingView";
 import { InHouseDevDashboard } from "@/components/workspaces/InHouseDevDashboard";
+import { AdminWorkspace } from "@/components/workspaces/AdminWorkspace";
 import { ImpersonationBanner } from "@/components/workspaces/admin/ImpersonationBanner";
 import { ImportModal } from "@/components/import/ImportModal";
 import { DeployModal } from "@/components/deploy/DeployModal";
@@ -30,12 +31,6 @@ import {
 const RepoAuditWorkspace = lazy(() =>
   import("@/components/workspaces/RepoAuditWorkspace").then((m) => ({
     default: m.RepoAuditWorkspace,
-  })),
-);
-
-const AdminWorkspace = lazy(() =>
-  import("@/components/workspaces/AdminWorkspace").then((m) => ({
-    default: m.AdminWorkspace,
   })),
 );
 
@@ -81,6 +76,15 @@ const RuntimeOperationsWorkspace = lazy(() =>
     "@/components/workspaces/runtime/RuntimeOperationsWorkspace"
   ).then((m) => ({
     default: m.RuntimeOperationsWorkspace,
+  })),
+);
+
+
+const GenesisReplayReadWorkspace = lazy(() =>
+  import(
+    "@/components/workspaces/genesis/GenesisReplayReadWorkspace"
+  ).then((m) => ({
+    default: m.GenesisReplayReadWorkspace,
   })),
 );
 
@@ -269,6 +273,17 @@ function Router() {
           <KnowledgeOperationsV3Workspace
             setView={setView}
           />
+        </Suspense>
+      </Shell>
+    );
+  }
+
+
+  if (view === "genesis") {
+    return (
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <GenesisReplayReadWorkspace />
         </Suspense>
       </Shell>
     );
