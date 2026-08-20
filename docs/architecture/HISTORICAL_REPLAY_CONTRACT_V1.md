@@ -2469,6 +2469,111 @@ Milestone 38 establishes the replay-scoped operational runtime projection only.
 
 Builder operational consumption and Genesis workspace extension remain subsequent milestones.
 
+# Genesis Builder Operational Client + Read Adapter V1
+
+## Purpose
+
+Milestone 39 extends the certified Builder Genesis read boundary so a selected Replay can consume the replay-scoped Genesis Operational Projection introduced by Milestone 38.
+
+This milestone does not redesign the Genesis workspace.
+
+## Typed Client
+
+Builder MUST access the operational projection through a typed read-only client.
+
+The client MUST call:
+
+`GET /api/runtime/genesis/replays/:replayId/operational`
+
+The client MUST validate Replay identity before issuing a request.
+
+The client MUST reject a successful response whose returned Replay identity differs from the requested Replay identity.
+
+The client MUST require independently identifiable child projections for:
+
+- Corpus;
+- chronology;
+- documentation governance;
+- Knowledge lifecycle correlation;
+- readiness;
+- conversation-source boundary.
+
+The client MUST preserve Runtime error codes rather than converting integrity failures into empty successful state.
+
+## Builder Read State
+
+Operational read state MUST remain separate from the certified Replay inventory/status state.
+
+The state adapter MUST expose:
+
+- selected Replay identity;
+- operational projection;
+- loading;
+- loaded;
+- typed error state.
+
+Changing Replay selection MUST clear the previous operational projection before the new projection is accepted.
+
+A stale request MUST NOT overwrite a newer Replay selection.
+
+Clearing operational state MUST invalidate any in-flight read.
+
+## Composition Boundary
+
+Builder MUST consume the Runtime operational projection.
+
+Builder MUST NOT reconstruct Corpus, chronology, documentation governance, Knowledge lifecycle, readiness, or conversation-source status from Replay inventory locally.
+
+Runtime remains the source of truth for Genesis operational reconstruction.
+
+## Conversation Boundary
+
+Builder MUST preserve the operational projection's conversation-source classification.
+
+`SOURCE ACCESS BLOCKED` MUST remain visible as data.
+
+Builder MUST NOT reinterpret that state as successful conversation ingestion.
+
+Builder MUST NOT substitute Git data for unavailable Conversation Evidence.
+
+## Educational Boundary
+
+Builder operational state MUST preserve `not-evaluated` educational readiness.
+
+Milestone 39 MUST NOT calculate educational eligibility.
+
+## Milestone 39 Stop Boundary
+
+Milestone 39 MUST NOT:
+
+- modify Runtime Genesis domain logic;
+- execute Historical Replay;
+- mutate Knowledge Operations;
+- redesign GenesisReplayReadWorkspace;
+- add new visual patterns;
+- ingest conversations;
+- evaluate CA-005 educational eligibility;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 39 establishes only the typed Builder operational client and read-state adapter.
+
+Controller/React integration and workspace operational projection remain subsequent milestones.
+
+Every certified child operational projection MUST retain an independently identifiable projection identity at the Builder boundary.
+
+A successful HTTP response with a missing certified child projection identity MUST fail closed.
+
+When Builder selection changes from Replay A to Replay B, Replay A operational data MUST be cleared before Replay B data is accepted.
+
+A stale success or stale failure from Replay A MUST NOT overwrite Replay B operational state.
+
+Clearing operational error state MUST NOT clear the selected Replay identity or otherwise fabricate operational data.
+
+Operational state subscriptions MUST observe state transitions and MUST support deterministic unsubscription.
+
+The Builder operational facade MUST expose Runtime-derived operational state without locally rebuilding Genesis history.
+
 Operational projection identity MUST change when a material represented child projection identity changes.
 
 Operational composition MUST preserve child projection identities independently rather than collapsing Corpus, chronology, governance, lifecycle, readiness, and conversation-source state into one opaque status.

@@ -1,0 +1,852 @@
+import {
+  assertGenesisReplayId,
+} from "./genesisReplayReadClient.js";
+
+import type {
+  GenesisReplayId,
+} from "./genesisReplayReadClient.js";
+
+export type GenesisOperationalProjectionId =
+  `genesis-operational:${string}`;
+
+export type GenesisReadinessOverall =
+  | "incomplete"
+  | "blocked"
+  | "ready";
+
+export type GenesisReadinessDimensionState =
+  | "complete"
+  | "partial"
+  | "blocked"
+  | "unavailable"
+  | "not-evaluated";
+
+export type GenesisConversationSourceSupportClassification =
+  | "SUPPORTED AND INGESTIBLE"
+  | "SUPPORTED BUT REQUIRES COMPILER COMPLETION"
+  | "SOURCE ACCESS BLOCKED"
+  | "ARCHITECTURALLY UNDEFINED";
+
+export interface GenesisOperationalCorpusSummary {
+  projectionId:
+    string;
+
+  sourceSummary: {
+    uniqueSources:
+      number;
+
+    sourceRevisions:
+      number;
+
+    byClass:
+      Readonly<
+        Record<
+          string,
+          number | undefined
+        >
+      >;
+  };
+
+  evolutionSummary: {
+    historicalEvents:
+      number;
+
+    relationships:
+      number;
+
+    evolutionEpisodes:
+      number;
+
+    conflictedEpisodes:
+      number;
+
+    incompleteEpisodes:
+      number;
+
+    validatedEpisodes:
+      number;
+
+    unresolvedRelationships:
+      number;
+  };
+
+  knowledgeLifecycle: {
+    admittedEvidence:
+      number;
+
+    manufacturingLinkedEvidence:
+      number;
+
+    ambiguousManufacturingLinks:
+      number;
+
+    packages:
+      number;
+
+    canonicalKnowledge:
+      number;
+  };
+
+  externalContext: {
+    pendingEpisodes:
+      number;
+
+    notYetIngestedConversationSources:
+      number;
+
+    externalSourceReferences:
+      number;
+
+    complete:
+      boolean;
+  };
+
+  replays:
+    readonly unknown[];
+
+  sources:
+    readonly unknown[];
+
+  events:
+    readonly unknown[];
+
+  relationships:
+    readonly unknown[];
+
+  episodes:
+    readonly unknown[];
+}
+
+export interface GenesisOperationalChronologySummary {
+  projectionId:
+    string;
+
+  corpusProjectionId:
+    string;
+
+  entries:
+    readonly unknown[];
+
+  coverage: {
+    totalEvents:
+      number;
+
+    earliestOccurredAt:
+      number | null;
+
+    latestOccurredAt:
+      number | null;
+
+    sourceRevisionsWithoutHistoricalEvents:
+      readonly string[];
+
+    episodesWithExternalContextPending:
+      readonly string[];
+
+    conflictedEpisodes:
+      readonly string[];
+
+    unresolvedRelationshipIds:
+      readonly string[];
+
+    complete:
+      boolean;
+  };
+}
+
+export interface GenesisOperationalDocumentationGovernanceSummary {
+  projectionId:
+    string;
+
+  documents:
+    readonly unknown[];
+
+  summary: {
+    documents:
+      number;
+
+    governing:
+      number;
+
+    evidentiary:
+      number;
+
+    planning:
+      number;
+
+    proposals:
+      number;
+
+    historical:
+      number;
+
+    superseded:
+      number;
+
+    unresolved:
+      number;
+
+    missingScope:
+      number;
+
+    missingEffectivePeriod:
+      number;
+  };
+}
+
+export interface GenesisOperationalKnowledgeLifecycleSummary {
+  projectionId:
+    string;
+
+  corpusProjectionId:
+    string;
+
+  records:
+    readonly unknown[];
+
+  summary: {
+    admittedEvidence:
+      number;
+
+    manufacturingCorrelated:
+      number;
+
+    manufacturingAmbiguous:
+      number;
+
+    manufacturingUncorrelated:
+      number;
+
+    knowledgeIRReached:
+      number;
+
+    validated:
+      number;
+
+    packaged:
+      number;
+
+    awaitingCanonicalReview:
+      number;
+
+    canonical:
+      number;
+
+    memoryCorrelatedCanonicalItems:
+      number;
+
+    memoryAdaptationValidated:
+      number;
+
+    educationalEligibilityEvaluated:
+      number;
+  };
+}
+
+export interface GenesisOperationalReadinessSummary {
+  projectionId:
+    string;
+
+  policyId:
+    string;
+
+  overall:
+    GenesisReadinessOverall;
+
+  sources: {
+    state:
+      GenesisReadinessDimensionState;
+
+    discoveredSourceRevisions:
+      number;
+
+    requiredSourceClasses:
+      readonly string[];
+
+    presentRequiredSourceClasses:
+      readonly string[];
+
+    missingRequiredSourceClasses:
+      readonly string[];
+
+    externalSourceReferences:
+      number;
+
+    pendingExternalContextEpisodes:
+      number;
+
+    notYetIngestedConversationSources:
+      number;
+  };
+
+  replay: {
+    state:
+      GenesisReadinessDimensionState;
+
+    replayCount:
+      number;
+
+    completedReplays:
+      number;
+
+    blockedReplays:
+      number;
+
+    failedReplays:
+      number;
+
+    runningReplays:
+      number;
+
+    pendingReplays:
+      number;
+
+    manifestSources:
+      number;
+
+    sourcesReplayed:
+      number | null;
+
+    sourcesReplayedMeasurement:
+      "unavailable";
+  };
+
+  knowledge: {
+    state:
+      GenesisReadinessDimensionState;
+
+    evidenceAdmitted:
+      number;
+
+    manufacturingCorrelated:
+      number;
+
+    manufacturingAmbiguous:
+      number;
+
+    manufacturingUncorrelated:
+      number;
+
+    knowledgeIRReached:
+      number;
+
+    validated:
+      number;
+
+    packaged:
+      number;
+
+    awaitingCanonicalReview:
+      number;
+
+    canonical:
+      number;
+
+    memoryCorrelatedCanonicalItems:
+      number;
+
+    memoryAdaptationValidated:
+      number;
+
+    failed:
+      number;
+
+    blocked:
+      number;
+
+    educationalEligibilityEvaluated:
+      number;
+  };
+
+  chronology: {
+    state:
+      GenesisReadinessDimensionState;
+
+    historicalEvents:
+      number;
+
+    earliestOccurredAt:
+      number | null;
+
+    latestOccurredAt:
+      number | null;
+
+    sourceRevisionsWithoutHistoricalEvents:
+      number;
+
+    externalContextPendingEpisodes:
+      number;
+
+    conflictedEpisodes:
+      number;
+
+    unresolvedRelationships:
+      number;
+  };
+
+  authority: {
+    state:
+      GenesisReadinessDimensionState;
+
+    documents:
+      number;
+
+    governing:
+      number;
+
+    unresolved:
+      number;
+
+    missingScope:
+      number;
+
+    missingEffectivePeriod:
+      number;
+  };
+
+  education: {
+    state:
+      "not-evaluated";
+
+    eligibleRecords:
+      null;
+
+    reason:
+      string;
+  };
+
+  blockers:
+    readonly {
+      code:
+        string;
+
+      count:
+        number;
+
+      detail:
+        string;
+    }[];
+
+  completionPercentage:
+    null;
+}
+
+export interface GenesisOperationalConversationSourceSummary {
+  projectionId:
+    string;
+
+  classification:
+    GenesisConversationSourceSupportClassification;
+
+  compiler: {
+    available:
+      boolean;
+
+    compilerName:
+      string | null;
+
+    evidenceType:
+      "conversation";
+
+    governedKnowledgePathAvailable:
+      boolean;
+  };
+
+  acquisition: {
+    available:
+      boolean;
+
+    state:
+      "not-yet-ingested" |
+      "available" |
+      "blocked";
+
+    mechanism:
+      string | null;
+
+    blocker:
+      string | null;
+  };
+
+  externalSourceMarker:
+    "EXTERNAL SOURCE — NOT YET INGESTED";
+
+  externalContextMarker:
+    "EXTERNAL CONTEXT PENDING";
+
+  repositoryReplayBlocked:
+    false;
+
+  conversationEvidenceMayBeSubstitutedByGit:
+    false;
+}
+
+export interface GenesisOperationalProjection {
+  projectionId:
+    GenesisOperationalProjectionId;
+
+  replayId:
+    GenesisReplayId;
+
+  corpus:
+    GenesisOperationalCorpusSummary;
+
+  chronology:
+    GenesisOperationalChronologySummary;
+
+  documentationGovernance:
+    GenesisOperationalDocumentationGovernanceSummary;
+
+  knowledgeLifecycle:
+    GenesisOperationalKnowledgeLifecycleSummary;
+
+  readiness:
+    GenesisOperationalReadinessSummary;
+
+  conversationSource:
+    GenesisOperationalConversationSourceSummary;
+}
+
+export interface GenesisOperationalSuccessResponse {
+  ok:
+    true;
+
+  projection:
+    GenesisOperationalProjection;
+}
+
+export interface GenesisOperationalReadClientOptions {
+  baseUrl:
+    string;
+
+  getHeaders?:
+    () => HeadersInit;
+
+  fetchImpl?:
+    typeof fetch;
+}
+
+export class GenesisOperationalReadApiError
+  extends Error
+{
+  readonly status:
+    number;
+
+  readonly code:
+    string;
+
+  readonly replayId:
+    GenesisReplayId;
+
+  constructor(
+    input: {
+      status:
+        number;
+
+      code:
+        string;
+
+      replayId:
+        GenesisReplayId;
+    },
+  ) {
+    super(
+      input.code,
+    );
+
+    this.name =
+      "GenesisOperationalReadApiError";
+
+    this.status =
+      input.status;
+
+    this.code =
+      input.code;
+
+    this.replayId =
+      input.replayId;
+  }
+}
+
+export interface GenesisOperationalReadClient {
+  getOperationalProjection(
+    replayId:
+      GenesisReplayId,
+  ):
+    Promise<
+      GenesisOperationalProjection
+    >;
+}
+
+function trimTrailingSlash(
+  value:
+    string,
+): string {
+  return value.replace(
+    /\/+$/,
+    "",
+  );
+}
+
+async function readJson(
+  response:
+    Response,
+
+  replayId:
+    GenesisReplayId,
+): Promise<unknown> {
+  try {
+    return await response.json();
+  } catch {
+    throw new GenesisOperationalReadApiError({
+      status:
+        response.status,
+
+      code:
+        "genesis_operational_read_invalid_json",
+
+      replayId,
+    });
+  }
+}
+
+function errorCodeFromBody(
+  body:
+    unknown,
+
+  fallback:
+    string,
+): string {
+  if (
+    typeof body ===
+      "object" &&
+    body !==
+      null &&
+    "error" in body &&
+    typeof (
+      body as {
+        error?:
+          unknown;
+      }
+    ).error ===
+      "string"
+  ) {
+    return (
+      body as {
+        error:
+          string;
+      }
+    ).error;
+  }
+
+  return fallback;
+}
+
+function hasProjectionId(
+  value:
+    unknown,
+): value is {
+  projectionId:
+    string;
+} {
+  return (
+    typeof value ===
+      "object" &&
+    value !==
+      null &&
+    "projectionId" in value &&
+    typeof (
+      value as {
+        projectionId?:
+          unknown;
+      }
+    ).projectionId ===
+      "string"
+  );
+}
+
+function isOperationalSuccess(
+  body:
+    unknown,
+
+  replayId:
+    GenesisReplayId,
+): body is
+  GenesisOperationalSuccessResponse {
+  if (
+    typeof body !==
+      "object" ||
+    body ===
+      null
+  ) {
+    return false;
+  }
+
+  const candidate =
+    body as {
+      ok?:
+        unknown;
+
+      projection?: {
+        projectionId?:
+          unknown;
+
+        replayId?:
+          unknown;
+
+        corpus?:
+          unknown;
+
+        chronology?:
+          unknown;
+
+        documentationGovernance?:
+          unknown;
+
+        knowledgeLifecycle?:
+          unknown;
+
+        readiness?:
+          unknown;
+
+        conversationSource?:
+          unknown;
+      };
+    };
+
+  return (
+    candidate.ok ===
+      true &&
+    typeof candidate
+      .projection
+      ?.projectionId ===
+      "string" &&
+    candidate
+      .projection
+      ?.projectionId
+      .startsWith(
+        "genesis-operational:",
+      ) &&
+    candidate
+      .projection
+      ?.replayId ===
+      replayId &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.corpus,
+    ) &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.chronology,
+    ) &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.documentationGovernance,
+    ) &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.knowledgeLifecycle,
+    ) &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.readiness,
+    ) &&
+    hasProjectionId(
+      candidate
+        .projection
+        ?.conversationSource,
+    )
+  );
+}
+
+export function createGenesisOperationalReadClient(
+  options:
+    GenesisOperationalReadClientOptions,
+): GenesisOperationalReadClient {
+  const baseUrl =
+    trimTrailingSlash(
+      options.baseUrl,
+    );
+
+  const fetchImpl =
+    options.fetchImpl ??
+    fetch;
+
+  function headers():
+    HeadersInit {
+    return options
+      .getHeaders?.() ??
+      {};
+  }
+
+  return {
+    async getOperationalProjection(
+      replayId,
+    ) {
+      assertGenesisReplayId(
+        replayId,
+      );
+
+      const response =
+        await fetchImpl(
+          `${baseUrl}/api/runtime/genesis/replays/${encodeURIComponent(
+            replayId,
+          )}/operational`,
+          {
+            method:
+              "GET",
+
+            headers:
+              headers(),
+          },
+        );
+
+      const body =
+        await readJson(
+          response,
+          replayId,
+        );
+
+      if (
+        !response.ok
+      ) {
+        throw new GenesisOperationalReadApiError({
+          status:
+            response.status,
+
+          code:
+            errorCodeFromBody(
+              body,
+              "genesis_operational_projection_read_failed",
+            ),
+
+          replayId,
+        });
+      }
+
+      if (
+        !isOperationalSuccess(
+          body,
+          replayId,
+        )
+      ) {
+        throw new GenesisOperationalReadApiError({
+          status:
+            response.status,
+
+          code:
+            "genesis_operational_projection_response_invalid",
+
+          replayId,
+        });
+      }
+
+      return body.projection;
+    },
+  };
+}

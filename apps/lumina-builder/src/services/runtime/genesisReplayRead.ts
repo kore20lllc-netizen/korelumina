@@ -117,3 +117,62 @@ export type {
   GenesisReplayReactBinding,
   GenesisReplayReactStore,
 } from "@/services/runtime/genesisReplayReactAdapter";
+
+import {
+  createGenesisOperationalReadClient,
+} from "@/services/runtime/genesisOperationalReadClient";
+
+export {
+  GenesisOperationalReadApiError,
+  createGenesisOperationalReadClient,
+} from "@/services/runtime/genesisOperationalReadClient";
+
+export type {
+  GenesisConversationSourceSupportClassification,
+  GenesisOperationalChronologySummary,
+  GenesisOperationalConversationSourceSummary,
+  GenesisOperationalCorpusSummary,
+  GenesisOperationalDocumentationGovernanceSummary,
+  GenesisOperationalKnowledgeLifecycleSummary,
+  GenesisOperationalProjection,
+  GenesisOperationalProjectionId,
+  GenesisOperationalReadClient,
+  GenesisOperationalReadClientOptions,
+  GenesisOperationalReadinessSummary,
+  GenesisOperationalSuccessResponse,
+  GenesisReadinessDimensionState,
+  GenesisReadinessOverall,
+} from "@/services/runtime/genesisOperationalReadClient";
+
+import {
+  createGenesisOperationalReadStateAdapter,
+} from "@/services/runtime/genesisOperationalReadState";
+
+export {
+  createGenesisOperationalReadStateAdapter,
+} from "@/services/runtime/genesisOperationalReadState";
+
+export type {
+  GenesisOperationalReadState,
+  GenesisOperationalReadStateAdapter,
+  GenesisOperationalReadStateError,
+} from "@/services/runtime/genesisOperationalReadState";
+
+export const genesisOperationalReadClient =
+  createGenesisOperationalReadClient({
+    baseUrl:
+      RUNTIME_API,
+
+    getHeaders:
+      () =>
+        getRuntimeCallerHeaders(),
+  });
+
+export const getGenesisOperationalProjection =
+  genesisOperationalReadClient
+    .getOperationalProjection;
+
+export const genesisOperationalReadState =
+  createGenesisOperationalReadStateAdapter(
+    genesisOperationalReadClient,
+  );
