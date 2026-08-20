@@ -2347,6 +2347,146 @@ Milestone 37 establishes and certifies the conversation-source boundary only.
 
 A future acquisition milestone MAY replace `SOURCE ACCESS BLOCKED` only when a governed source mechanism actually exists.
 
+# Genesis Operational Projection V1
+
+## Purpose
+
+Genesis Operational Projection V1 composes the certified Genesis read projections into one replay-scoped operational read model.
+
+The operational projection is not a new source of historical truth.
+
+It composes:
+
+- Genesis Corpus;
+- Temporal Chronology;
+- Documentation Governance;
+- Knowledge Operations Lifecycle Correlation;
+- Genesis Readiness;
+- Historical Conversation Source Boundary.
+
+Each child projection retains its own identity.
+
+## Replay Scope
+
+Operational projection MUST be scoped to exactly one deterministic Genesis Replay identity.
+
+The projection MUST fail closed if the supplied replay inventory does not represent exactly the requested replay.
+
+The operational projection MUST NOT merge unrelated replay histories.
+
+## Runtime Source of Truth
+
+The runtime operational projection MUST read existing persisted state through the certified boundaries:
+
+- Genesis Replay persistence;
+- Historical Correlation persistence;
+- Knowledge Manufacturing Run service;
+- Organizational Memory store.
+
+It MUST NOT reconstruct those stores independently.
+
+Missing replay manifest or missing Historical Correlation state MUST remain an explicit read failure.
+
+The runtime MUST NOT replace absent persisted state with fixtures or synthetic empty history.
+
+## Composition
+
+Corpus MUST be constructed from the certified replay status and Historical Correlation state.
+
+Chronology MUST be constructed from the certified Corpus.
+
+Documentation Governance MUST be constructed from the persisted replay manifest entries.
+
+Knowledge lifecycle correlation MUST use real Knowledge Manufacturing Runs and Organizational Memory records.
+
+Readiness MUST consume those certified projections.
+
+Conversation source status MUST remain independently represented.
+
+## Readiness Policy
+
+Operational composition MUST receive an explicit readiness policy.
+
+The policy MUST have a stable identity.
+
+Runtime composition MUST NOT derive required source classes from whichever source classes happen to be present.
+
+The initial KoreLumina runtime policy requires:
+
+- architecture-document;
+- commit;
+- conversation.
+
+The conversation requirement remains incomplete while Milestone 37 is `SOURCE ACCESS BLOCKED`.
+
+## Conversation Boundary
+
+`SOURCE ACCESS BLOCKED` MUST remain visible through the operational projection.
+
+Unavailable conversation acquisition MUST NOT prevent repository-native replay inspection.
+
+Git MUST NOT substitute for Conversation Evidence.
+
+## Determinism
+
+Operational projection identity MUST be deterministic.
+
+Its identity MUST depend on the identities of the represented child projections and requested Replay identity.
+
+Equivalent unchanged persisted state MUST produce the same operational projection identity.
+
+## Read-Only Runtime API
+
+Runtime MAY expose the operational projection through:
+
+`GET /api/runtime/genesis/replays/:replayId/operational`
+
+The endpoint is read-only.
+
+Invalid Replay identity MUST fail before projection construction.
+
+Integrity or missing-state failures MUST remain visible and MUST NOT be converted into empty successful projections.
+
+## Milestone 38 Stop Boundary
+
+Milestone 38 MUST NOT:
+
+- execute Historical Replay;
+- alter replay state;
+- alter Historical Correlation;
+- admit Evidence;
+- advance Knowledge Manufacturing;
+- approve Canonical Review;
+- promote Canonical Knowledge;
+- adapt Organizational Memory;
+- ingest conversations;
+- evaluate CA-005 educational eligibility;
+- redesign GenesisReplayReadWorkspace;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 38 establishes the replay-scoped operational runtime projection only.
+
+Builder operational consumption and Genesis workspace extension remain subsequent milestones.
+
+Operational projection identity MUST change when a material represented child projection identity changes.
+
+Operational composition MUST preserve child projection identities independently rather than collapsing Corpus, chronology, governance, lifecycle, readiness, and conversation-source state into one opaque status.
+
+A replay-scoped operational projection MUST reject inventory containing unrelated Replay identities.
+
+Missing Historical Correlation state MUST fail closed.
+
+Missing replay manifest state MUST fail closed.
+
+Runtime operational projection failures MUST NOT be converted into successful empty Corpus responses.
+
+`SOURCE ACCESS BLOCKED` conversation status MUST survive operational composition unchanged until governed acquisition capability actually exists.
+
+Conversation source blockage MUST NOT convert repository-native Replay inspection into a blocked Replay state.
+
+Git substitution for unavailable Conversation Evidence remains forbidden at the operational projection boundary.
+
 When a governed acquisition mechanism later becomes available, Genesis MAY transition from `SOURCE ACCESS BLOCKED` to `SUPPORTED AND INGESTIBLE` without changing the certified Conversation Compiler contract, provided the compiler and governed Knowledge path remain valid.
 
 Conversation acquisition capability and Conversation compiler capability MUST remain independently represented.

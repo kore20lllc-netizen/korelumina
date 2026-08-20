@@ -156,10 +156,15 @@ import {
 } from "./routes/genesisReplayInventory.js";
 
 import {
+  registerGenesisOperationalProjectionRoute,
+} from "./routes/genesisOperationalProjection.js";
+
+import {
   knowledgeManufacturingReplayService,
 } from "./knowledge-preservation/manufacturing/index.js";
 
 import {
+  FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
 } from "./knowledge-preservation/genesis/index.js";
 
@@ -173,6 +178,20 @@ export const runtimeKnowledgePreservationPlatform =
 
 export const runtimeGenesisReplayPersistenceStore =
   new FileGenesisReplayPersistenceStore();
+
+export const runtimeGenesisHistoricalCorrelationPersistenceStore =
+  new FileGenesisHistoricalCorrelationPersistenceStore();
+
+export const runtimeGenesisReadinessPolicy = {
+  policyId:
+    "korelumina-genesis-readiness:v1",
+
+  requiredSourceClasses: [
+    "architecture-document",
+    "commit",
+    "conversation",
+  ],
+} as const;
 
 rehydrateRuntimeCanonicalKnowledge(
   knowledgePlatform,
@@ -507,6 +526,27 @@ registerGenesisReplayInventoryRoute(
     manufacturingRuns:
       runtimeKnowledgePreservationPlatform
         .manufacturingRunService,
+  },
+);
+
+registerGenesisOperationalProjectionRoute(
+  app,
+  {
+    replayPersistence:
+      runtimeGenesisReplayPersistenceStore,
+
+    historicalCorrelation:
+      runtimeGenesisHistoricalCorrelationPersistenceStore,
+
+    manufacturingRuns:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    organizationalMemory:
+      runtimeOrganizationalMemoryStore,
+
+    readinessPolicy:
+      runtimeGenesisReadinessPolicy,
   },
 );
 

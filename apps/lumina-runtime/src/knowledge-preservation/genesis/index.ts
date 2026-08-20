@@ -28,3 +28,5 @@ export * from "./GenesisDocumentationGovernance.js";
 export * from "./GenesisKnowledgeLifecycleCorrelation.js";
 export * from "./GenesisReadiness.js";
 export * from "./GenesisConversationSourceBoundary.js";
+export * from "./GenesisOperationalProjection.js";
+export * from "./GenesisOperationalProjectionService.js";
