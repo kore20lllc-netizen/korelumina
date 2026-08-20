@@ -27,3 +27,4 @@ export * from "./GenesisTemporalChronology.js";
 export * from "./GenesisDocumentationGovernance.js";
 export * from "./GenesisKnowledgeLifecycleCorrelation.js";
 export * from "./GenesisReadiness.js";
+export * from "./GenesisConversationSourceBoundary.js";

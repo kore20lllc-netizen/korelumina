@@ -2246,6 +2246,119 @@ Milestone 36 MUST NOT execute Historical Replay, admit Evidence, mutate Knowledg
 
 Milestone 36 establishes Genesis Readiness / Completion Model V1 only.
 
+# Genesis Historical Conversation Source Boundary V1
+
+## Certified Repository Classification
+
+At Milestone 37 the repository-supported historical conversation state is:
+
+`SOURCE ACCESS BLOCKED`
+
+This classification means:
+
+- a governed Conversation Compiler exists;
+- the Conversation Compiler is registered in the Knowledge Preservation Platform;
+- conversation Evidence has a governed compiler path into Knowledge IR;
+- no governed historical-conversation acquisition/source adapter currently exists.
+
+The compiler is not the blocker.
+
+Historical conversation source access is the blocker.
+
+## Acquisition and Compilation Separation
+
+Conversation acquisition and Conversation compilation are separate responsibilities.
+
+The required future lifecycle is:
+
+Conversation Source
+→ Conversation Acquisition
+→ Conversation Evidence
+→ Conversation Compiler
+→ Knowledge IR
+→ existing Knowledge Operations governance.
+
+Genesis MUST NOT move external acquisition logic into the Conversation Compiler.
+
+Genesis MUST NOT fabricate Conversation Evidence from Git history.
+
+Git commit messages, issue comments, documentation, or Runtime history MUST NOT substitute for unavailable historical conversations.
+
+## Future Acquisition Contract
+
+Any future governed conversation acquisition mechanism MUST preserve, where available and applicable:
+
+- conversation identity;
+- message identity;
+- project/conversation association;
+- timestamp;
+- speaker or role;
+- message ordering;
+- source reference;
+- acquisition event;
+- integrity information.
+
+Acquisition MUST preserve source provenance before compilation.
+
+## Current External Source State
+
+Unavailable historical conversations MUST remain representable as:
+
+`EXTERNAL SOURCE — NOT YET INGESTED`
+
+Historical reconstruction that clearly lacks conversation rationale MAY remain:
+
+`EXTERNAL CONTEXT PENDING`
+
+Repository-native Historical Replay MUST NOT be blocked solely because conversation acquisition is unavailable.
+
+Genesis MUST continue reconstructing repository-native evidence without guessing missing human intent.
+
+## Support Classification
+
+Genesis conversation-source capability MUST distinguish:
+
+- `SUPPORTED AND INGESTIBLE`;
+- `SUPPORTED BUT REQUIRES COMPILER COMPLETION`;
+- `SOURCE ACCESS BLOCKED`;
+- `ARCHITECTURALLY UNDEFINED`.
+
+Classification MUST derive from acquisition availability, compiler availability, and governed Knowledge-path availability.
+
+The classifications MUST NOT be treated as aliases.
+
+## Milestone 37 Stop Boundary
+
+Milestone 37 MUST NOT:
+
+- implement ChatGPT acquisition;
+- scrape conversation history;
+- create an external conversation connector;
+- fabricate Conversation Evidence;
+- substitute Git history for conversations;
+- execute Historical Replay;
+- mutate Knowledge Operations;
+- redesign Genesis UI;
+- evaluate educational eligibility;
+- activate Chief Agent education;
+- build the Executive Office.
+
+Milestone 37 establishes and certifies the conversation-source boundary only.
+
+A future acquisition milestone MAY replace `SOURCE ACCESS BLOCKED` only when a governed source mechanism actually exists.
+
+When a governed acquisition mechanism later becomes available, Genesis MAY transition from `SOURCE ACCESS BLOCKED` to `SUPPORTED AND INGESTIBLE` without changing the certified Conversation Compiler contract, provided the compiler and governed Knowledge path remain valid.
+
+Conversation acquisition capability and Conversation compiler capability MUST remain independently represented.
+
+Unavailable conversation acquisition MUST NOT block repository-native Historical Replay.
+
+Unavailable conversation acquisition MUST NOT be satisfied by substituting Git commits, Git messages, documentation, Runtime telemetry, or other repository evidence for Conversation Evidence.
+
+A change in acquisition capability MUST be capable of changing the conversation-source boundary projection identity.
+
+A change in compiler capability MUST be capable of changing classification independently from acquisition capability.
+
 
 
 
