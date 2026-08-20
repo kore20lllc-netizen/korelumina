@@ -2190,6 +2190,62 @@ Milestone 35 establishes Knowledge Operations Lifecycle Correlation V1 only.
 
 Genesis readiness and completion computation remains the next reconstruction concern.
 
+# Genesis Readiness / Completion Model V1
+
+Genesis readiness is a deterministic, read-only projection over the certified Genesis Corpus, Temporal Chronology, Documentation Governance, and Knowledge Operations lifecycle projections.
+
+Genesis readiness MUST NOT be reduced to a synthetic completion percentage.
+
+Required historical source classes MUST come from an explicit readiness policy.
+
+A missing policy-required source class MUST remain visible.
+
+Historical conversation absence MUST remain visible when conversation is required by policy.
+
+Repository-native reconstruction MAY continue while external context remains pending, but full Genesis completion MUST remain incomplete.
+
+Replay readiness MUST distinguish completed, running, pending, blocked, and failed replay state.
+
+The current certified Genesis Corpus does not expose an exact source-level replayed count. Milestone 36 MUST therefore expose exact `sourcesReplayed` as unavailable rather than infer it from manifest size, Evidence admission, or replay completion.
+
+Readiness MUST preserve separate Knowledge lifecycle states for Evidence admission, Manufacturing correlation, Knowledge IR, Validation, Knowledge Package Assembly, Canonical Review, Canonical Knowledge, Organizational Memory correlation, and adaptation validation.
+
+Chronology gaps, conflicted Evolution Episodes, external context pending, and unresolved Historical Relationships remain readiness gaps.
+
+Documentation authority gaps, missing authority scope, and missing declared effective period remain readiness gaps.
+
+Educational eligibility MUST remain `not-evaluated`.
+
+Canonical Knowledge, Organizational Memory correlation, and adaptation validation MUST NOT be treated as educational eligibility.
+
+Milestone 36 MUST NOT report full Genesis readiness while educational eligibility remains unevaluated.
+
+Overall readiness MAY be `blocked`, `incomplete`, or `ready`.
+
+Failed or blocked Historical Replay and failed or blocked Knowledge Manufacturing MUST produce `blocked`.
+
+Known gaps MUST produce `incomplete`.
+
+Readiness blocker ordering MUST be deterministic.
+
+Equivalent readiness-policy source-class ordering MUST NOT change readiness projection identity.
+
+Changing readiness policy MUST NOT mutate, revise, or reinterpret existing Historical Source identity or source history.
+
+Clearing a chronology, correlation, documentation-authority, Replay, or Knowledge lifecycle gap MUST change the readiness projection when that represented readiness state changes.
+
+An otherwise complete repository-native reconstruction MUST NOT report `ready` while exact required replay coverage remains unavailable.
+
+An otherwise complete repository-native reconstruction MUST NOT report `ready` while CA-005 educational eligibility remains unevaluated.
+
+When conversation is required by the explicit readiness policy, an otherwise complete repository-native reconstruction MUST NOT report `ready` while governed conversation coverage remains unavailable.
+
+Readiness blockers MUST use deterministic canonical ordering.
+
+Milestone 36 MUST NOT execute Historical Replay, admit Evidence, mutate Knowledge Operations, perform canonical promotion, adapt Organizational Memory, evaluate educational eligibility, ingest conversations, redesign Genesis UI, activate the Chief Agent, or build the Executive Office.
+
+Milestone 36 establishes Genesis Readiness / Completion Model V1 only.
+
 
 
 
