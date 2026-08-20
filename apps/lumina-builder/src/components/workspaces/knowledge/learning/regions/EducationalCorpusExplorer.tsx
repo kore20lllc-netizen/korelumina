@@ -303,7 +303,20 @@ export function EducationalCorpusExplorer({
         {artifacts.length} modeled educational artifacts visible
       </div>
 
-      <div className="relative block min-h-[620px] w-full grid gap-3 p-4">
+      <div
+        className="
+          relative block min-h-[620px] max-h-[760px] w-full
+          grid gap-3 overflow-y-auto overflow-x-hidden
+          overscroll-contain p-4
+          [scrollbar-gutter:stable]
+          [touch-action:pan-y]
+        "
+        aria-label="Educational corpus artifacts"
+        tabIndex={0}
+        onWheel={(event) => {
+          event.stopPropagation();
+        }}
+      >
         {artifacts.length === 0 ? (
           <LuminaFlagshipSurface
             dashed

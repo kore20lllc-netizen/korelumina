@@ -9,6 +9,358 @@ import type {
 export type GenesisOperationalProjectionId =
   `genesis-operational:${string}`;
 
+
+export type GenesisHistoricalSourceReferenceId =
+  `genesis-source-ref:${string}`;
+
+export type GenesisHistoricalSourceRevisionId =
+  `genesis-source-revision:${string}`;
+
+export type GenesisHistoricalEventId =
+  `genesis-event:${string}`;
+
+export type GenesisHistoricalRelationshipId =
+  `genesis-relationship:${string}`;
+
+export type GenesisEvolutionEpisodeId =
+  `genesis-episode:${string}`;
+
+export type GenesisEvolutionEpisodeRevisionId =
+  `genesis-episode-revision:${string}`;
+
+export type GenesisCorrelationConfidence =
+  | "explicit"
+  | "strong"
+  | "probable"
+  | "possible"
+  | "unresolved";
+
+export type GenesisHistoricalSourceClass =
+  | "ADR"
+  | "RFC"
+  | "architecture-document"
+  | "document"
+  | "specification"
+  | "roadmap"
+  | "source-file"
+  | "commit"
+  | "tag"
+  | "branch"
+  | "runtime-event"
+  | "conversation"
+  | "engineering-execution"
+  | "issue"
+  | "pull-request"
+  | "incident-log"
+  | "build-output"
+  | "milestone";
+
+export type GenesisHistoricalEventKind =
+  | "requirement-stated"
+  | "architecture-proposed"
+  | "decision-approved"
+  | "decision-rejected"
+  | "task-delegated"
+  | "implementation-committed"
+  | "runtime-observed"
+  | "build-executed"
+  | "test-passed"
+  | "test-failed"
+  | "visual-validation-passed"
+  | "visual-validation-failed"
+  | "correction-requested"
+  | "replacement-implemented"
+  | "document-created"
+  | "document-amended"
+  | "document-superseded"
+  | "release-certified"
+  | "historical-attempt"
+  | "lesson-recorded"
+  | "other";
+
+export type GenesisHistoricalAuthorityStatus =
+  | "historically-authoritative"
+  | "historically-proposed"
+  | "historically-rejected"
+  | "historically-implemented"
+  | "historically-validated"
+  | "historically-observed"
+  | "unknown";
+
+export type GenesisCurrentAuthorityStatus =
+  | "currently-authoritative"
+  | "currently-implemented"
+  | "currently-superseded"
+  | "currently-retired"
+  | "not-applicable"
+  | "unknown";
+
+export interface GenesisTemporalAuthority {
+  historical: {
+    status:
+      GenesisHistoricalAuthorityStatus;
+
+    authorityClass?:
+      string;
+
+    approvalState?:
+      string;
+
+    effectiveFrom?:
+      number;
+
+    effectiveTo?:
+      number;
+  };
+
+  current: {
+    status:
+      GenesisCurrentAuthorityStatus;
+
+    authorityClass?:
+      string;
+
+    approvalState?:
+      string;
+
+    replacedBy?:
+      string;
+  };
+}
+
+export interface GenesisCorpusSourceRecord {
+  sourceReferenceId:
+    GenesisHistoricalSourceReferenceId;
+
+  sourceRevisionId:
+    GenesisHistoricalSourceRevisionId;
+
+  sourceIdentity:
+    string;
+
+  sourceClass:
+    GenesisHistoricalSourceClass;
+
+  evidenceType:
+    string;
+
+  externalSource:
+    boolean;
+
+  acquisitionState:
+    | "available"
+    | "acquired"
+    | "not-yet-ingested"
+    | "unavailable";
+
+  provenance: {
+    locator?:
+      string;
+
+    nativeId?:
+      string;
+
+    repository?:
+      string;
+
+    ref?:
+      string;
+
+    sourceReference?:
+      string;
+
+    externalSource:
+      boolean;
+  };
+
+  eventIds:
+    readonly GenesisHistoricalEventId[];
+
+  episodeIds:
+    readonly GenesisEvolutionEpisodeId[];
+
+  metadata:
+    Readonly<
+      Record<
+        string,
+        unknown
+      >
+    >;
+}
+
+export interface GenesisHistoricalEventRecord {
+  eventId:
+    GenesisHistoricalEventId;
+
+  kind:
+    GenesisHistoricalEventKind;
+
+  observationKey:
+    string;
+
+  occurredAt:
+    number;
+
+  sourceReferenceIds:
+    readonly GenesisHistoricalSourceReferenceId[];
+
+  sourceRevisionIds:
+    readonly GenesisHistoricalSourceRevisionId[];
+
+  revisesEventId?:
+    GenesisHistoricalEventId;
+
+  summary?:
+    string;
+
+  temporalAuthority:
+    GenesisTemporalAuthority;
+
+  metadata:
+    Readonly<
+      Record<
+        string,
+        unknown
+      >
+    >;
+}
+
+export type GenesisHistoricalRelationshipType =
+  | "requested"
+  | "clarified"
+  | "proposed"
+  | "approved"
+  | "rejected"
+  | "corrected"
+  | "delegated"
+  | "implemented_by"
+  | "modified_by"
+  | "validated_by"
+  | "failed_validation"
+  | "replaced_by"
+  | "superseded_by"
+  | "certified_by"
+  | "contradicted_by"
+  | "confirmed_by"
+  | "derived_from"
+  | "related_to"
+  | "occurred_before"
+  | "caused";
+
+export interface GenesisHistoricalRelationshipRecord {
+  relationshipId:
+    GenesisHistoricalRelationshipId;
+
+  from: {
+    kind:
+      "source" | "event";
+
+    id:
+      GenesisHistoricalSourceReferenceId |
+      GenesisHistoricalEventId;
+  };
+
+  to: {
+    kind:
+      "source" | "event";
+
+    id:
+      GenesisHistoricalSourceReferenceId |
+      GenesisHistoricalEventId;
+  };
+
+  type:
+    GenesisHistoricalRelationshipType;
+
+  causal:
+    boolean;
+
+  confidence:
+    GenesisCorrelationConfidence;
+
+  evidence: {
+    mode:
+      string;
+
+    confidence:
+      GenesisCorrelationConfidence;
+
+    sourceReferenceIds:
+      readonly GenesisHistoricalSourceReferenceId[];
+
+    assertions:
+      readonly string[];
+
+    rationale?:
+      string;
+  };
+}
+
+export type GenesisEvolutionEpisodeLifecycle =
+  | "candidate"
+  | "correlating"
+  | "correlated"
+  | "conflicted"
+  | "incomplete"
+  | "validated"
+  | "superseded"
+  | "archived";
+
+export interface GenesisEvolutionEpisodeRecord {
+  episodeId:
+    GenesisEvolutionEpisodeId;
+
+  revisionId:
+    GenesisEvolutionEpisodeRevisionId;
+
+  episodeKey:
+    string;
+
+  title:
+    string;
+
+  lifecycle:
+    GenesisEvolutionEpisodeLifecycle;
+
+  eventIds:
+    readonly GenesisHistoricalEventId[];
+
+  relationshipIds:
+    readonly GenesisHistoricalRelationshipId[];
+
+  sourceReferenceIds:
+    readonly GenesisHistoricalSourceReferenceId[];
+
+  externalContext:
+    "complete" |
+    "pending" |
+    "not-required";
+
+  temporalAuthority:
+    GenesisTemporalAuthority;
+
+  lineage: {
+    previousRevisionId?:
+      GenesisEvolutionEpisodeRevisionId;
+
+    mergedFrom:
+      readonly GenesisEvolutionEpisodeId[];
+
+    splitFrom?:
+      GenesisEvolutionEpisodeId;
+
+    supersedes:
+      readonly GenesisEvolutionEpisodeId[];
+  };
+
+  metadata:
+    Readonly<
+      Record<
+        string,
+        unknown
+      >
+    >;
+}
 export type GenesisReadinessOverall =
   | "incomplete"
   | "blocked"
@@ -105,16 +457,16 @@ export interface GenesisOperationalCorpusSummary {
     readonly unknown[];
 
   sources:
-    readonly unknown[];
+    readonly GenesisCorpusSourceRecord[];
 
   events:
-    readonly unknown[];
+    readonly GenesisHistoricalEventRecord[];
 
   relationships:
-    readonly unknown[];
+    readonly GenesisHistoricalRelationshipRecord[];
 
   episodes:
-    readonly unknown[];
+    readonly GenesisEvolutionEpisodeRecord[];
 }
 
 export interface GenesisOperationalChronologySummary {

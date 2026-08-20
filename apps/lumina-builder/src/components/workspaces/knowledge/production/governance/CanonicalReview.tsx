@@ -1736,7 +1736,7 @@ export function CanonicalReview({
           </div>
 
           <div
-            className="relative z-20 mt-4 max-h-[620px] min-h-0 overflow-y-auto overscroll-contain pr-2 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
+            className="relative z-20 mt-4 max-h-[620px] min-h-0 w-full min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain px-3 pb-3 pointer-events-auto [scrollbar-gutter:stable] [touch-action:pan-y]"
             aria-label="Governance queue capsules awaiting canonical decision"
             tabIndex={0}
             onWheel={(event) => {
@@ -3594,7 +3594,7 @@ export function CanonicalReview({
                   ].join(" ")}
                 >
                   <div className="relative z-10">
-                <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                <div className="grid min-w-0 gap-4">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-300/68">
@@ -3624,7 +3624,7 @@ export function CanonicalReview({
                     </div>
                   </div>
 
-                  <div className="grid shrink-0 gap-2 sm:grid-cols-2 xl:w-[360px]">
+                  <div className="grid min-w-0 w-full gap-2 sm:grid-cols-2">
                     <LuminaFlagshipCard
                       as="article"
                       className="rounded-[16px] p-3"
@@ -3712,7 +3712,7 @@ export function CanonicalReview({
                       item.id,
                     )
                   }
-                  className="block w-full text-left"
+                  className="block min-w-0 w-full overflow-hidden text-left"
                 >
                   {article}
                 </button>

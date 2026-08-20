@@ -35,6 +35,10 @@ import {
   GenesisOperationalProjectionPanel,
 } from "./GenesisOperationalProjectionPanel";
 
+import {
+  GenesisHistoricalArtifactExplorer,
+} from "./GenesisHistoricalArtifactExplorer";
+
 export interface GenesisReplayReadWorkspaceProps {
   onBack?:
     () => void;
@@ -373,7 +377,7 @@ export function GenesisReplayReadWorkspace({
             {inventoryLoaded &&
               !inventoryLoading &&
               !inventoryEmpty && (
-                <div className="h-full overflow-y-auto p-4">
+                <div className="h-full min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain p-4 [scrollbar-gutter:stable] [touch-action:pan-y]">
                   <div className="space-y-3">
                     {rows.map(
                       (
@@ -539,7 +543,7 @@ export function GenesisReplayReadWorkspace({
               )}
 
             {selected && (
-              <div className="h-full overflow-y-auto p-5">
+              <div className="h-full min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain p-5 [scrollbar-gutter:stable] [touch-action:pan-y]">
                 <div className="space-y-5">
                   <div>
                     <div className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
@@ -693,6 +697,14 @@ export function GenesisReplayReadWorkspace({
                       </LuminaButton>
                     </div>
                   </LuminaFlagshipPanel>
+                )}
+
+                {operational.projection && (
+                  <GenesisHistoricalArtifactExplorer
+                    projection={
+                      operational.projection
+                    }
+                  />
                 )}
 
                 <GenesisOperationalProjectionPanel

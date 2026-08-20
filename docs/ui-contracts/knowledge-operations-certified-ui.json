@@ -80,7 +80,7 @@
       "elementCount": 50
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx": {
-      "sha256": "df9d015740d97c9cdf4f9b085bdfe21abf6350e7733d54b00627ff2e7cc9a474",
+      "sha256": "4f208e31833d77f2b0bf15189e38e26ce3bf287a67d454c8f4747f5a80c692b1",
       "elementCount": 37
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx": {
@@ -140,7 +140,7 @@
       "elementCount": 73
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx": {
-      "sha256": "cc27a9fed5839816802462ad63a96be0366c2a8e69838094490f9de30acf9c35",
+      "sha256": "b02c8e3c6b6ec7241f08f5078e31832c1507c918bbd9c594a19b6dd4ea5516dc",
       "elementCount": 394
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {

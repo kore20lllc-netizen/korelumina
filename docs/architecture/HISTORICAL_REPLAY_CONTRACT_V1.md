@@ -3763,3 +3763,120 @@ a deterministic, provenance-preserving, authority-aware historical educational s
 not a canonical knowledge database.
 
 This contract resolves the V1 replay identity, source identity, deterministic ordering, deduplication, checkpoint, resume, mutation-detection, scope, and ingestion-boundary requirements required before Genesis implementation begins.
+
+# Genesis Historical Artifact & Lineage Inspector V1
+
+## Purpose
+
+Milestone 42 exposes the historical identity model already present in the certified Genesis Operational Projection.
+
+It MUST NOT create a second Runtime historical model.
+
+## Inspectable Historical Layers
+
+For a selected Replay, the Builder MAY inspect:
+
+- Source References;
+- Source Revisions;
+- Historical Events;
+- Historical Relationships;
+- Evolution Episodes.
+
+Source Evidence, Historical Events, relationships, and Evolution Episodes MUST remain independently identifiable.
+
+## Source Inspection
+
+A Source inspection MUST preserve where available:
+
+- deterministic source reference identity;
+- deterministic source revision identity;
+- source identity;
+- source class;
+- Evidence type;
+- acquisition state;
+- external-source status;
+- provenance;
+- linked Historical Events;
+- linked Evolution Episodes.
+
+A repository locator MUST NOT be required for an external source.
+
+## Historical Event Inspection
+
+Historical Event inspection MUST preserve:
+
+- deterministic Event identity;
+- Event kind;
+- occurrence timestamp;
+- observation key;
+- source-reference provenance;
+- source-revision provenance;
+- revision lineage where present;
+- historical authority;
+- current authority.
+
+Chronology MUST NOT be presented as causality.
+
+## Evolution Episode Inspection
+
+Evolution Episode inspection MUST preserve:
+
+- deterministic Episode identity;
+- deterministic Episode revision identity;
+- Episode key and title;
+- lifecycle;
+- source membership;
+- Event membership;
+- relationship membership;
+- external-context status;
+- historical authority;
+- current authority;
+- previous revision;
+- merge lineage;
+- split lineage;
+- supersession lineage.
+
+Failed, conflicted, incomplete, superseded, and archived Episodes remain historical records.
+
+## Relationship Boundary
+
+Historical Relationships remain Runtime-derived evidence-backed correlations.
+
+The Builder MUST NOT infer `caused` from temporal ordering.
+
+The Builder MUST NOT upgrade correlation confidence.
+
+## Projection Boundary
+
+Milestone 42 MUST consume historical records already present in the replay-scoped Operational Projection.
+
+It MUST NOT:
+
+- rescan Git;
+- rediscover documentation;
+- rebuild chronology;
+- correlate historical records locally;
+- mutate correlation state;
+- synthesize missing historical artifacts.
+
+An empty historical layer MUST be rendered as empty, not fabricated.
+
+## UI Boundary
+
+Historical inspection MUST use the certified flagship Lumina presentation standard already adopted by Knowledge Operations and Genesis.
+
+No new shared Lumina extraction occurs during Milestone 42.
+
+## Stop Boundary
+
+Milestone 42 establishes historical artifact inspection only.
+
+It does not execute Historical Replay.
+
+It does not add conversation acquisition.
+
+It does not perform canonical promotion.
+
+It does not evaluate educational eligibility.
+
+It does not activate Chief Agent education.
