@@ -469,15 +469,128 @@ export interface GenesisOperationalCorpusSummary {
     readonly GenesisEvolutionEpisodeRecord[];
 }
 
+export type GenesisTemporalChronologyProjectionId =
+  `genesis-chronology:${string}`;
+
+export type GenesisTemporalChronologyEntryId =
+  `genesis-chronology-entry:${string}`;
+
+export interface GenesisTemporalChronologyEntry {
+  chronologyEntryId:
+    GenesisTemporalChronologyEntryId;
+
+  position:
+    number;
+
+  eventId:
+    GenesisHistoricalEventId;
+
+  occurredAt:
+    number;
+
+  kind:
+    GenesisHistoricalEventKind;
+
+  summary:
+    string | null;
+
+  sourceReferenceIds:
+    readonly GenesisHistoricalSourceReferenceId[];
+
+  sourceRevisionIds:
+    readonly GenesisHistoricalSourceRevisionId[];
+
+  episodeIds:
+    readonly GenesisEvolutionEpisodeId[];
+
+  incomingRelationshipIds:
+    readonly GenesisHistoricalRelationshipId[];
+
+  outgoingRelationshipIds:
+    readonly GenesisHistoricalRelationshipId[];
+
+  chronologicalPredecessorEventIds:
+    readonly GenesisHistoricalEventId[];
+
+  chronologicalSuccessorEventIds:
+    readonly GenesisHistoricalEventId[];
+
+  temporalAuthority:
+    GenesisTemporalAuthority;
+
+  revisesEventId:
+    GenesisHistoricalEventId | null;
+
+  metadata:
+    Readonly<
+      Record<
+        string,
+        unknown
+      >
+    >;
+}
+
+export interface GenesisTemporalChronologyEqualTimestampGroup {
+  occurredAt:
+    number;
+
+  eventIds:
+    readonly GenesisHistoricalEventId[];
+}
+
+export interface GenesisTemporalChronologyAuthoritySummary {
+  historicallyAuthoritative:
+    number;
+
+  historicallyProposed:
+    number;
+
+  historicallyRejected:
+    number;
+
+  historicallyImplemented:
+    number;
+
+  historicallyValidated:
+    number;
+
+  historicallyObserved:
+    number;
+
+  historicalUnknown:
+    number;
+
+  currentlyAuthoritative:
+    number;
+
+  currentlyImplemented:
+    number;
+
+  currentlySuperseded:
+    number;
+
+  currentlyRetired:
+    number;
+
+  currentNotApplicable:
+    number;
+
+  currentUnknown:
+    number;
+}
+
 export interface GenesisOperationalChronologySummary {
   projectionId:
-    string;
+    GenesisTemporalChronologyProjectionId;
 
   corpusProjectionId:
     string;
 
   entries:
-    readonly unknown[];
+    readonly GenesisTemporalChronologyEntry[];
+
+  authority:
+    GenesisTemporalChronologyAuthoritySummary;
 
   coverage: {
     totalEvents:
@@ -489,17 +602,20 @@ export interface GenesisOperationalChronologySummary {
     latestOccurredAt:
       number | null;
 
+    equalTimestampGroups:
+      readonly GenesisTemporalChronologyEqualTimestampGroup[];
+
     sourceRevisionsWithoutHistoricalEvents:
-      readonly string[];
+      readonly GenesisHistoricalSourceRevisionId[];
 
     episodesWithExternalContextPending:
-      readonly string[];
+      readonly GenesisEvolutionEpisodeId[];
 
     conflictedEpisodes:
-      readonly string[];
+      readonly GenesisEvolutionEpisodeId[];
 
     unresolvedRelationshipIds:
-      readonly string[];
+      readonly GenesisHistoricalRelationshipId[];
 
     complete:
       boolean;

@@ -130,6 +130,11 @@ export {
 export type {
   GenesisConversationSourceSupportClassification,
   GenesisOperationalChronologySummary,
+  GenesisTemporalChronologyAuthoritySummary,
+  GenesisTemporalChronologyEntry,
+  GenesisTemporalChronologyEntryId,
+  GenesisTemporalChronologyEqualTimestampGroup,
+  GenesisTemporalChronologyProjectionId,
   GenesisOperationalConversationSourceSummary,
   GenesisOperationalCorpusSummary,
   GenesisOperationalDocumentationGovernanceSummary,

@@ -3880,3 +3880,87 @@ It does not perform canonical promotion.
 It does not evaluate educational eligibility.
 
 It does not activate Chief Agent education.
+
+# Genesis Temporal Chronology Inspector V1
+
+## Purpose
+
+Milestone 43 exposes the deterministic temporal chronology already produced by Runtime.
+
+It does not create a second chronology model in the Builder.
+
+## Temporal Ordering
+
+The Builder MAY display:
+
+- chronology position;
+- Historical Event identity;
+- occurrence timestamp;
+- Event kind and summary;
+- source-reference provenance;
+- source-revision provenance;
+- Evolution Episode membership;
+- chronological predecessor Event identities;
+- chronological successor Event identities;
+- Historical Event revision identity;
+- historical authority;
+- current authority.
+
+Chronological predecessor and successor relationships represent deterministic ordering only.
+
+They MUST NOT be presented as causality.
+
+Equal timestamps MUST NOT imply causal ordering.
+
+## Historical Relationship Separation
+
+Evidence-backed Historical Relationships remain distinct from chronological adjacency.
+
+The Builder MAY inspect Runtime-projected incoming and outgoing Historical Relationships.
+
+It MUST preserve:
+
+- relationship identity;
+- relationship type;
+- confidence;
+- causal flag;
+- evidence provenance.
+
+The Builder MUST NOT infer, upgrade, or manufacture a `caused` relationship.
+
+## Coverage
+
+The Builder MAY expose Runtime chronology coverage including:
+
+- total Historical Events;
+- earliest and latest occurrence;
+- equal-timestamp groups;
+- source revisions without Historical Events;
+- external-context-pending Episodes;
+- conflicted Episodes;
+- unresolved relationships;
+- completeness.
+
+Empty chronology MUST remain visibly empty.
+
+## Authority
+
+Historical authority and current authority MUST remain separate dimensions.
+
+A historically authoritative Event MAY be currently superseded or retired.
+
+Historical reconstruction MUST NOT rewrite that distinction.
+
+## Mutation Boundary
+
+Milestone 43 is read-only.
+
+It MUST NOT:
+
+- execute replay;
+- reorder Runtime chronology;
+- correlate Historical Events locally;
+- create relationships;
+- mutate temporal authority;
+- promote Canonical Knowledge;
+- activate Chief Agent education.

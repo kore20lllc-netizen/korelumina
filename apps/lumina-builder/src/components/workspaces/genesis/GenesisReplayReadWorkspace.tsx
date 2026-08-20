@@ -39,6 +39,10 @@ import {
   GenesisHistoricalArtifactExplorer,
 } from "./GenesisHistoricalArtifactExplorer";
 
+import {
+  GenesisTemporalChronologyInspector,
+} from "./GenesisTemporalChronologyInspector";
+
 export interface GenesisReplayReadWorkspaceProps {
   onBack?:
     () => void;
@@ -700,11 +704,19 @@ export function GenesisReplayReadWorkspace({
                 )}
 
                 {operational.projection && (
-                  <GenesisHistoricalArtifactExplorer
-                    projection={
-                      operational.projection
-                    }
-                  />
+                  <>
+                    <GenesisTemporalChronologyInspector
+                      projection={
+                        operational.projection
+                      }
+                    />
+
+                    <GenesisHistoricalArtifactExplorer
+                      projection={
+                        operational.projection
+                      }
+                    />
+                  </>
                 )}
 
                 <GenesisOperationalProjectionPanel
