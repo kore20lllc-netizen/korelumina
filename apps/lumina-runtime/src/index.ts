@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import {
   registerRuntimeScenarioRoute,
 } from "./routes/runtimeScenario.js";
@@ -142,6 +144,11 @@ import { claimRuntimeBootstrap } from "./runtime/bootstrapGuard.js";
 import { stopAllWorkspaceWatchers } from "./runtime/workspaceWatcher.js";
 import { backfillMissingProjectMetadata } from "./projects/projectMetadataMigration.js";
 
+import {
+  getRuntimeDataRoot,
+} from "./projects/workspacePaths.js";
+
+
 
 import {
   registerKnowledgeManufacturingReplayRoutes,
@@ -158,6 +165,11 @@ import {
 import {
   registerGenesisOperationalProjectionRoute,
 } from "./routes/genesisOperationalProjection.js";
+
+import {
+  registerGenesisReplayExecutionRoute,
+} from "./routes/genesisReplayExecution.js";
+
 
 import {
   knowledgeManufacturingReplayService,
@@ -504,6 +516,26 @@ registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
 registerKnowledgeOperationsRoutes(app);
+
+registerGenesisReplayExecutionRoute(
+  app,
+  {
+    persistenceStore:
+      runtimeGenesisReplayPersistenceStore,
+
+    platform:
+      runtimeKnowledgePreservationPlatform,
+
+    repositoryRoot:
+      path.dirname(
+        getRuntimeDataRoot(),
+      ),
+
+    now:
+      () =>
+        Date.now(),
+  },
+);
 
 registerGenesisReplayStatusRoute(
   app,
