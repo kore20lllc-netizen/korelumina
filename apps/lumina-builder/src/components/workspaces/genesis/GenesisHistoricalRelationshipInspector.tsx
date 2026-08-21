@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -16,17 +17,40 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
+  LuminaButton,
+} from "@/components/lumina/LuminaButton";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import type {
+  GenesisHistoricalRelationshipNavigationTarget,
+} from "./GenesisHistoricalNavigation";
 
 import type {
   GenesisHistoricalRelationshipRecord,
   GenesisOperationalProjection,
 } from "@/services/runtime/genesisReplayRead";
 
+import type {
+  GenesisHistoricalArtifactNavigationTarget,
+} from "./GenesisHistoricalNavigation";
+
 export interface GenesisHistoricalRelationshipInspectorProps {
   projection:
     GenesisOperationalProjection;
+
+  navigationTarget?:
+    GenesisHistoricalRelationshipNavigationTarget;
+
+  onNavigateToArtifact?(
+    target:
+      Omit<
+        GenesisHistoricalArtifactNavigationTarget,
+        "requestId"
+      >,
+  ): void;
 }
 
 function Badge({
@@ -231,6 +255,8 @@ function RelationshipRow({
 
 export function GenesisHistoricalRelationshipInspector({
   projection,
+  onNavigateToArtifact,
+  navigationTarget,
 }: GenesisHistoricalRelationshipInspectorProps) {
   const relationships =
     projection.corpus.relationships;
@@ -239,6 +265,36 @@ export function GenesisHistoricalRelationshipInspector({
     useState<string | null>(
       null,
     );
+
+
+  useEffect(
+    () => {
+      if (
+        !navigationTarget
+      ) {
+        return;
+      }
+
+      const relationship =
+        relationships.find(
+          candidate =>
+            candidate.relationshipId ===
+            navigationTarget.relationshipId,
+        );
+
+      if (
+        relationship
+      ) {
+        setSelectedId(
+          relationship.relationshipId,
+        );
+      }
+    },
+    [
+      navigationTarget,
+      relationships,
+    ],
+  );
 
   const selected =
     useMemo(
@@ -432,6 +488,26 @@ export function GenesisHistoricalRelationshipInspector({
                           <Field label="Episode membership">
                             {selectedFromEpisodes.length}
                           </Field>
+
+
+                          {onNavigateToArtifact && (
+                            <LuminaButton
+                              type="button"
+                              variant="subtle"
+                              size="sm"
+                              onClick={() => {
+                                onNavigateToArtifact({
+                                  kind:
+                                    selected.from.kind,
+
+                                  id:
+                                    selected.from.id,
+                                });
+                              }}
+                            >
+                              Open From Endpoint
+                            </LuminaButton>
+                          )}
                         </div>
                       </LuminaFlagshipCard>
 
@@ -465,6 +541,26 @@ export function GenesisHistoricalRelationshipInspector({
                           <Field label="Episode membership">
                             {selectedToEpisodes.length}
                           </Field>
+
+
+                          {onNavigateToArtifact && (
+                            <LuminaButton
+                              type="button"
+                              variant="subtle"
+                              size="sm"
+                              onClick={() => {
+                                onNavigateToArtifact({
+                                  kind:
+                                    selected.to.kind,
+
+                                  id:
+                                    selected.to.id,
+                                });
+                              }}
+                            >
+                              Open To Endpoint
+                            </LuminaButton>
+                          )}
                         </div>
                       </LuminaFlagshipCard>
                     </div>

@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -13,6 +14,10 @@ import {
 } from "lucide-react";
 
 import {
+  LuminaButton,
+} from "@/components/lumina/LuminaButton";
+
+import {
   LuminaFlagshipCard,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
@@ -20,12 +25,20 @@ import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
+import {
+  resolveGenesisHistoricalArtifactLinks,
+} from "./GenesisHistoricalNavigation";
+
 import type {
   GenesisCorpusSourceRecord,
   GenesisEvolutionEpisodeRecord,
   GenesisHistoricalEventRecord,
   GenesisOperationalProjection,
 } from "@/services/runtime/genesisReplayRead";
+
+import type {
+  GenesisHistoricalArtifactNavigationTarget,
+} from "./GenesisHistoricalNavigation";
 
 type ArtifactKind =
   | "source"
@@ -43,6 +56,19 @@ interface ArtifactSelection {
 export interface GenesisHistoricalArtifactExplorerProps {
   projection:
     GenesisOperationalProjection;
+
+  navigationTarget?:
+    GenesisHistoricalArtifactNavigationTarget |
+    null;
+
+  onNavigateToChronology?:
+    (eventId: string) => void;
+
+  onNavigateToRelationship?:
+    (relationshipId: string) => void;
+
+  onNavigateToEpisode?:
+    (episodeId: string) => void;
 }
 
 function formatTimestamp(
@@ -396,6 +422,11 @@ function EpisodeInspector({
 
 export function GenesisHistoricalArtifactExplorer({
   projection,
+  navigationTarget =
+    null,
+  onNavigateToChronology,
+  onNavigateToRelationship,
+  onNavigateToEpisode,
 }: GenesisHistoricalArtifactExplorerProps) {
   const {
     sources,
@@ -414,6 +445,29 @@ export function GenesisHistoricalArtifactExplorer({
     useState<ArtifactSelection | null>(
       null,
     );
+
+
+  useEffect(() => {
+    if (
+      !navigationTarget
+    ) {
+      return;
+    }
+
+    setKind(
+      navigationTarget.kind,
+    );
+
+    setSelection({
+      kind:
+        navigationTarget.kind,
+
+      id:
+        navigationTarget.id,
+    });
+  }, [
+    navigationTarget,
+  ]);
 
   const selectedSource =
     useMemo(
@@ -471,6 +525,33 @@ export function GenesisHistoricalArtifactExplorer({
           : null,
       [
         episodes,
+        selection,
+      ],
+    );
+
+  const selectedNavigationLinks =
+    useMemo(
+      () => {
+        if (
+          !selection
+        ) {
+          return {
+            eventIds:
+              [],
+            relationshipIds:
+              [],
+            episodeIds:
+              [],
+          };
+        }
+
+        return resolveGenesisHistoricalArtifactLinks(
+          projection,
+          selection,
+        );
+      },
+      [
+        projection,
         selection,
       ],
     );
@@ -771,6 +852,128 @@ export function GenesisHistoricalArtifactExplorer({
                   }
                 />
               )}
+
+              {selection &&
+                (
+                  selectedSource ||
+                  selectedEvent ||
+                  selectedEpisode
+                ) && (
+                  <div className="mt-6 border-t border-cyan-300/15 pt-5">
+                    <div className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-300/54">
+                      Related reconstruction
+                    </div>
+
+                    <p className="mt-2 text-[11px] leading-5 text-white/42">
+                      Navigate only through identities already projected by Runtime.
+                    </p>
+
+                    {onNavigateToChronology &&
+                      selectedNavigationLinks.eventIds.length > 0 && (
+                        <div className="mt-4">
+                          <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-white/42">
+                            Temporal chronology
+                          </div>
+
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {selectedNavigationLinks.eventIds.map(
+                              (
+                                eventId,
+                                index,
+                              ) => (
+                                <LuminaButton
+                                  key={eventId}
+                                  variant="subtle"
+                                  size="sm"
+                                  onClick={() => {
+                                    onNavigateToChronology(
+                                      eventId,
+                                    );
+                                  }}
+                                >
+                                  Open event{
+                                    selectedNavigationLinks.eventIds.length > 1
+                                      ? ` ${index + 1}`
+                                      : ""
+                                  } in Chronology
+                                </LuminaButton>
+                              ),
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                    {onNavigateToRelationship &&
+                      selectedNavigationLinks.relationshipIds.length > 0 && (
+                        <div className="mt-4">
+                          <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-white/42">
+                            Historical relationships
+                          </div>
+
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {selectedNavigationLinks.relationshipIds.map(
+                              (
+                                relationshipId,
+                                index,
+                              ) => (
+                                <LuminaButton
+                                  key={relationshipId}
+                                  variant="subtle"
+                                  size="sm"
+                                  onClick={() => {
+                                    onNavigateToRelationship(
+                                      relationshipId,
+                                    );
+                                  }}
+                                >
+                                  Open relationship{
+                                    selectedNavigationLinks.relationshipIds.length > 1
+                                      ? ` ${index + 1}`
+                                      : ""
+                                  }
+                                </LuminaButton>
+                              ),
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                    {onNavigateToEpisode &&
+                      selectedNavigationLinks.episodeIds.length > 0 && (
+                        <div className="mt-4">
+                          <div className="text-[9px] font-semibold uppercase tracking-[0.13em] text-white/42">
+                            Evolution episodes
+                          </div>
+
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {selectedNavigationLinks.episodeIds.map(
+                              (
+                                episodeId,
+                                index,
+                              ) => (
+                                <LuminaButton
+                                  key={episodeId}
+                                  variant="subtle"
+                                  size="sm"
+                                  onClick={() => {
+                                    onNavigateToEpisode(
+                                      episodeId,
+                                    );
+                                  }}
+                                >
+                                  Open episode{
+                                    selectedNavigationLinks.episodeIds.length > 1
+                                      ? ` ${index + 1}`
+                                      : ""
+                                  }
+                                </LuminaButton>
+                              ),
+                            )}
+                          </div>
+                        </div>
+                      )}
+                  </div>
+                )}
 
               {selection &&
                 !selectedSource &&

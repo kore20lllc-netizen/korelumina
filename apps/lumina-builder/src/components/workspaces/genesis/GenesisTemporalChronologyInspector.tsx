@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -17,8 +18,16 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
+  LuminaButton,
+} from "@/components/lumina/LuminaButton";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import type {
+  GenesisTemporalChronologyNavigationTarget,
+} from "./GenesisHistoricalNavigation";
 
 import type {
   GenesisHistoricalRelationshipRecord,
@@ -26,9 +35,24 @@ import type {
   GenesisTemporalChronologyEntry,
 } from "@/services/runtime/genesisReplayRead";
 
+import type {
+  GenesisHistoricalArtifactNavigationTarget,
+} from "./GenesisHistoricalNavigation";
+
 export interface GenesisTemporalChronologyInspectorProps {
   projection:
     GenesisOperationalProjection;
+
+  navigationTarget?:
+    GenesisTemporalChronologyNavigationTarget;
+
+  onNavigateToArtifact?(
+    target:
+      Omit<
+        GenesisHistoricalArtifactNavigationTarget,
+        "requestId"
+      >,
+  ): void;
 }
 
 function formatTimestamp(
@@ -218,6 +242,8 @@ function ChronologyEntryCard({
 
 export function GenesisTemporalChronologyInspector({
   projection,
+  onNavigateToArtifact,
+  navigationTarget,
 }: GenesisTemporalChronologyInspectorProps) {
   const chronology =
     projection.chronology;
@@ -230,6 +256,36 @@ export function GenesisTemporalChronologyInspector({
     useState<string | null>(
       null,
     );
+
+
+  useEffect(
+    () => {
+      if (
+        !navigationTarget
+      ) {
+        return;
+      }
+
+      const entry =
+        chronology.entries.find(
+          candidate =>
+            candidate.eventId ===
+            navigationTarget.eventId,
+        );
+
+      if (
+        entry
+      ) {
+        setSelectedEntryId(
+          entry.chronologyEntryId,
+        );
+      }
+    },
+    [
+      chronology.entries,
+      navigationTarget,
+    ],
+  );
 
   const selectedEntry =
     useMemo(
@@ -437,9 +493,11 @@ export function GenesisTemporalChronologyInspector({
           <div className="mt-5 grid min-w-0 gap-5 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)]">
             <div
               className="
-                max-h-[560px] min-w-0 space-y-3
+                min-h-0 min-w-0 space-y-3
                 overflow-y-auto overflow-x-hidden
-                overscroll-contain pr-1
+                overscroll-contain pb-5 pr-1
+                scroll-pb-5
+                xl:max-h-[720px]
                 [scrollbar-gutter:stable]
                 [touch-action:pan-y]
               "
@@ -510,6 +568,26 @@ export function GenesisTemporalChronologyInspector({
                         {selectedEntry.eventId}
                       </span>
                     </Field>
+
+
+                    {onNavigateToArtifact && (
+                      <LuminaButton
+                        type="button"
+                        variant="subtle"
+                        size="sm"
+                        onClick={() => {
+                          onNavigateToArtifact({
+                            kind:
+                              "event",
+
+                            id:
+                              selectedEntry.eventId,
+                          });
+                        }}
+                      >
+                        Open Event in Historical Artifacts
+                      </LuminaButton>
+                    )}
 
                     <Field label="Occurred">
                       {formatTimestamp(

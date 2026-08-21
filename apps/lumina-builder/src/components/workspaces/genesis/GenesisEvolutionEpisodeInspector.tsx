@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -15,17 +16,40 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
+  LuminaButton,
+} from "@/components/lumina/LuminaButton";
+
+import {
   LuminaFlagshipPanel,
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
+
+import type {
+  GenesisEvolutionEpisodeNavigationTarget,
+} from "./GenesisHistoricalNavigation";
 
 import type {
   GenesisEvolutionEpisodeRecord,
   GenesisOperationalProjection,
 } from "@/services/runtime/genesisReplayRead";
 
+import type {
+  GenesisHistoricalArtifactNavigationTarget,
+} from "./GenesisHistoricalNavigation";
+
 export interface GenesisEvolutionEpisodeInspectorProps {
   projection:
     GenesisOperationalProjection;
+
+  navigationTarget?:
+    GenesisEvolutionEpisodeNavigationTarget;
+
+  onNavigateToArtifact?(
+    target:
+      Omit<
+        GenesisHistoricalArtifactNavigationTarget,
+        "requestId"
+      >,
+  ): void;
 }
 
 function Badge({
@@ -141,6 +165,8 @@ function EpisodeRow({
 
 export function GenesisEvolutionEpisodeInspector({
   projection,
+  onNavigateToArtifact,
+  navigationTarget,
 }: GenesisEvolutionEpisodeInspectorProps) {
   const episodes =
     projection.corpus
@@ -150,6 +176,36 @@ export function GenesisEvolutionEpisodeInspector({
     useState<string | null>(
       null,
     );
+
+
+  useEffect(
+    () => {
+      if (
+        !navigationTarget
+      ) {
+        return;
+      }
+
+      const episode =
+        episodes.find(
+          candidate =>
+            candidate.episodeId ===
+            navigationTarget.episodeId,
+        );
+
+      if (
+        episode
+      ) {
+        setSelectedId(
+          episode.episodeId,
+        );
+      }
+    },
+    [
+      episodes,
+      navigationTarget,
+    ],
+  );
 
   const selected =
     useMemo(
@@ -295,6 +351,26 @@ export function GenesisEvolutionEpisodeInspector({
                         {selected.episodeId}
                       </span>
                     </Field>
+
+
+                    {onNavigateToArtifact && (
+                      <LuminaButton
+                        type="button"
+                        variant="subtle"
+                        size="sm"
+                        onClick={() => {
+                          onNavigateToArtifact({
+                            kind:
+                              "episode",
+
+                            id:
+                              selected.episodeId,
+                          });
+                        }}
+                      >
+                        Open Episode in Historical Artifacts
+                      </LuminaButton>
+                    )}
 
                     <Field label="Revision identity">
                       <span className="font-mono">

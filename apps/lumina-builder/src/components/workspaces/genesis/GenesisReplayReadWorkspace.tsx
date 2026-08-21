@@ -1,4 +1,9 @@
 import {
+  useCallback,
+  useState,
+} from "react";
+
+import {
   Activity,
   ArrowLeft,
   Clock3,
@@ -57,6 +62,14 @@ import {
 import {
   GenesisHistoricalRelationshipInspector,
 } from "./GenesisHistoricalRelationshipInspector";
+
+import {
+  useGenesisHistoricalNavigation,
+} from "./GenesisHistoricalNavigation";
+
+import type {
+  GenesisHistoricalArtifactNavigationTarget,
+} from "./GenesisHistoricalNavigation";
 
 const GENESIS_SECTIONS = [
   {
@@ -263,6 +276,78 @@ export function GenesisReplayReadWorkspace({
     operational,
   } =
     snapshot;
+
+  const {
+    state: peerNavigation,
+    navigateToChronology,
+    navigateToRelationship,
+    navigateToEpisode,
+  } =
+    useGenesisHistoricalNavigation();
+
+
+  const [
+    artifactNavigationTarget,
+    setArtifactNavigationTarget,
+  ] =
+    useState<
+      GenesisHistoricalArtifactNavigationTarget |
+      null
+    >(
+      null,
+    );
+
+  const navigateToHistoricalArtifact =
+    useCallback(
+      (
+        target:
+          Omit<
+            GenesisHistoricalArtifactNavigationTarget,
+            "requestId"
+          >,
+      ) => {
+        setArtifactNavigationTarget(
+          previous => ({
+            ...target,
+
+            requestId:
+              (previous?.requestId ?? 0) +
+              1,
+          }),
+        );
+
+        requestAnimationFrame(
+          () => {
+            const targetElement =
+              document.getElementById(
+                "genesis-historical-artifacts",
+              );
+
+            if (
+              !targetElement
+            ) {
+              return;
+            }
+
+            const reduceMotion =
+              window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+              ).matches;
+
+            targetElement.scrollIntoView({
+              behavior:
+                reduceMotion
+                  ? "auto"
+                  : "smooth",
+
+              block:
+                "start",
+            });
+          },
+        );
+      },
+      [],
+    );
 
   const {
     inventoryLoading,
@@ -740,16 +825,7 @@ export function GenesisReplayReadWorkspace({
             )}
             </LuminaFlagshipPanel>
           </section>
-        </div>
-      }
-      inspectorPlacement="stacked"
-      inspector={
-        error ||
-        operational.replayId !==
-          null
-          ? (
-              <div className="space-y-6">
-                {error && (
+          {error && (
                   <LuminaFlagshipPanel
                     title="Read integrity"
                     description="The certified replay read stack returned an error."
@@ -800,50 +876,123 @@ export function GenesisReplayReadWorkspace({
                   </LuminaFlagshipPanel>
                 )}
 
-                {operational.projection && (
-                  <>
-                    <section
-                      id="genesis-temporal-chronology"
-                      className="min-w-0 scroll-mt-28"
-                    >
+                <section
+                  id="genesis-temporal-chronology"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  {operational.projection ? (
                     <GenesisTemporalChronologyInspector
                       projection={
                         operational.projection
                       }
-                    />\n                    </section>
-
-                    <section
-                      id="genesis-historical-relationships"
-                      className="min-w-0 scroll-mt-28"
+                      navigationTarget={
+                        peerNavigation.chronology
+                      }
+                      onNavigateToArtifact={
+                        navigateToHistoricalArtifact
+                      }
+                    />
+                  ) : (
+                    <LuminaFlagshipPanel
+                      title="Temporal chronology"
+                      description="Deterministic historical ordering from the selected Genesis Replay."
                     >
+                      <div className="flex min-h-[320px] items-center justify-center px-8 text-center text-sm text-muted-foreground">
+                        Select a persisted Replay to inspect its Temporal Chronology.
+                      </div>
+                    </LuminaFlagshipPanel>
+                  )}
+                </section>
+
+                <section
+                  id="genesis-historical-relationships"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  {operational.projection ? (
                     <GenesisHistoricalRelationshipInspector
                       projection={
                         operational.projection
                       }
-                    />\n                    </section>
-
-                    <section
-                      id="genesis-evolution-episodes"
-                      className="min-w-0 scroll-mt-28"
+                      navigationTarget={
+                        peerNavigation.relationship
+                      }
+                      onNavigateToArtifact={
+                        navigateToHistoricalArtifact
+                      }
+                    />
+                  ) : (
+                    <LuminaFlagshipPanel
+                      title="Historical relationships"
+                      description="Runtime-governed historical correlations and exact Source/Event endpoints."
                     >
-                      <GenesisEvolutionEpisodeInspector
-                        projection={
-                          operational.projection
-                        }
-                      />
-                    </section>
+                      <div className="flex min-h-[320px] items-center justify-center px-8 text-center text-sm text-muted-foreground">
+                        Select a persisted Replay to inspect Historical Relationships.
+                      </div>
+                    </LuminaFlagshipPanel>
+                  )}
+                </section>
 
-                    <section
-                      id="genesis-historical-artifacts"
-                      className="min-w-0 scroll-mt-28"
+                <section
+                  id="genesis-evolution-episodes"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  {operational.projection ? (
+                    <GenesisEvolutionEpisodeInspector
+                      projection={
+                        operational.projection
+                      }
+                      navigationTarget={
+                        peerNavigation.episode
+                      }
+                      onNavigateToArtifact={
+                        navigateToHistoricalArtifact
+                      }
+                    />
+                  ) : (
+                    <LuminaFlagshipPanel
+                      title="Evolution episodes"
+                      description="Governed evolution groups materialized only from sufficient Runtime semantic evidence."
                     >
+                      <div className="flex min-h-[320px] items-center justify-center px-8 text-center text-sm text-muted-foreground">
+                        Select a persisted Replay to inspect Evolution Episodes.
+                      </div>
+                    </LuminaFlagshipPanel>
+                  )}
+                </section>
+
+                <section
+                  id="genesis-historical-artifacts"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  {operational.projection ? (
                     <GenesisHistoricalArtifactExplorer
                       projection={
                         operational.projection
                       }
-                    />\n                    </section>
-                  </>
-                )}
+                      navigationTarget={
+                        artifactNavigationTarget
+                      }
+                      onNavigateToChronology={
+                        navigateToChronology
+                      }
+                      onNavigateToRelationship={
+                        navigateToRelationship
+                      }
+                      onNavigateToEpisode={
+                        navigateToEpisode
+                      }
+                    />
+                  ) : (
+                    <LuminaFlagshipPanel
+                      title="Historical artifacts"
+                      description="Provenance-preserving Sources, Historical Events, and governed Evolution Episodes."
+                    >
+                      <div className="flex min-h-[320px] items-center justify-center px-8 text-center text-sm text-muted-foreground">
+                        Select a persisted Replay to inspect Historical Artifacts.
+                      </div>
+                    </LuminaFlagshipPanel>
+                  )}
+                </section>
 
                 <section
                   id="genesis-operational-reconstruction"
@@ -853,10 +1002,9 @@ export function GenesisReplayReadWorkspace({
                   state={
                     operational
                   }
-                />\n                </section>
-              </div>
-            )
-          : undefined
+                />
+                </section>
+        </div>
       }
     />
   );
