@@ -3964,3 +3964,81 @@ It MUST NOT:
 - mutate temporal authority;
 - promote Canonical Knowledge;
 - activate Chief Agent education.
+
+# Genesis Historical Relationship Inspector V1
+
+## Purpose
+
+Milestone 44 exposes Runtime-derived Historical Relationships as an independently inspectable Genesis layer.
+
+The Builder MUST NOT create a second correlation model.
+
+## Relationship Inspection
+
+For each Historical Relationship, the Builder MAY expose:
+
+- deterministic relationship identity;
+- relationship type;
+- `from` endpoint kind and identity;
+- `to` endpoint kind and identity;
+- confidence;
+- causal classification;
+- evidence mode;
+- evidence confidence;
+- source-reference evidence;
+- assertions;
+- rationale;
+- related Evolution Episode membership where derivable from the Runtime projection.
+
+## Endpoint Resolution
+
+Relationship endpoints MAY reference Historical Events or Source References.
+
+The Builder MAY resolve those identities to already-projected labels for operator readability.
+
+It MUST NOT modify endpoint identity.
+
+## Causality Boundary
+
+A causal relationship exists only when Runtime explicitly projects the relationship as causal.
+
+The Builder MUST NOT promote a relationship to causal because:
+
+- one Event occurred before another;
+- Events are chronological neighbors;
+- Events share a Source;
+- Events share an Evolution Episode;
+- correlation confidence is strong or explicit.
+
+Chronology and correlation remain distinct semantic dimensions.
+
+## Confidence Boundary
+
+The Builder MUST preserve Runtime confidence.
+
+It MUST NOT upgrade:
+
+- unresolved to possible;
+- possible to probable;
+- probable to strong;
+- strong to explicit.
+
+## Empty State
+
+If Runtime projects no Historical Relationships, Genesis MUST render an explicit empty state.
+
+It MUST NOT synthesize placeholder or inferred relationships.
+
+## Mutation Boundary
+
+Milestone 44 is read-only.
+
+It does not:
+
+- execute Historical Replay;
+- create or modify Historical Events;
+- create or modify relationships;
+- mutate Evolution Episodes;
+- alter temporal authority;
+- perform Canonical promotion;
+- activate Chief Agent education.

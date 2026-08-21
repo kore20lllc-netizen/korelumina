@@ -1,8 +1,11 @@
 import {
   Activity,
   ArrowLeft,
+  Clock3,
   Database,
+  GitBranch,
   Link2,
+  Network,
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";
@@ -28,6 +31,10 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import {
+  LuminaSectionNavigator,
+} from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
+
+import {
   useGenesisOperationalRead,
 } from "@/hooks/useGenesisOperationalRead";
 
@@ -42,6 +49,61 @@ import {
 import {
   GenesisTemporalChronologyInspector,
 } from "./GenesisTemporalChronologyInspector";
+
+import {
+  GenesisHistoricalRelationshipInspector,
+} from "./GenesisHistoricalRelationshipInspector";
+
+const GENESIS_SECTIONS = [
+  {
+    id:
+      "genesis-replay-inventory",
+    label:
+      "Replay Inventory",
+    icon:
+      Database,
+  },
+  {
+    id:
+      "genesis-replay-inspection",
+    label:
+      "Replay Inspection",
+    icon:
+      Activity,
+  },
+  {
+    id:
+      "genesis-temporal-chronology",
+    label:
+      "Temporal Chronology",
+    icon:
+      Clock3,
+  },
+  {
+    id:
+      "genesis-historical-relationships",
+    label:
+      "Relationships",
+    icon:
+      Network,
+  },
+  {
+    id:
+      "genesis-historical-artifacts",
+    label:
+      "Historical Artifacts",
+    icon:
+      GitBranch,
+  },
+  {
+    id:
+      "genesis-operational-reconstruction",
+    label:
+      "Reconstruction",
+    icon:
+      ShieldCheck,
+  },
+] as const;
 
 export interface GenesisReplayReadWorkspaceProps {
   onBack?:
@@ -241,7 +303,10 @@ export function GenesisReplayReadWorkspace({
               title={null}
               className="h-full [&>div:nth-of-type(3)]:hidden"
             >
-              <div className="relative z-10 min-w-0 px-6 pb-6 pt-2">
+              <div
+                id="genesis-replay-observatory-top"
+                className="relative z-10 min-w-0 scroll-mt-28 px-6 pb-6 pt-2"
+              >
                 <div className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
                   Historical Replay
                 </div>
@@ -343,10 +408,23 @@ export function GenesisReplayReadWorkspace({
         />
       }
       metrics={null}
+      toolbar={
+        <LuminaSectionNavigator
+          items={GENESIS_SECTIONS}
+          ariaLabel="Genesis replay observatory sections"
+          topTargetId="genesis-replay-observatory-top"
+          minWidthClassName="min-w-[980px]"
+          gridColumnsClassName="grid-cols-6"
+        />
+      }
       content={
-        <div className="grid min-h-[620px] gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
-          <LuminaFlagshipPanel
-            title="Replay inventory"
+        <div className="grid min-w-0 gap-6">
+          <section
+            id="genesis-replay-inventory"
+            className="min-w-0 scroll-mt-28"
+          >
+            <LuminaFlagshipPanel
+              title="Replay inventory"
             description="Deterministic persisted replay identities from the certified Genesis inventory endpoint."
             toolbar={
               inventoryLoaded
@@ -489,10 +567,15 @@ export function GenesisReplayReadWorkspace({
                   </div>
                 </div>
               )}
-          </LuminaFlagshipPanel>
+            </LuminaFlagshipPanel>
+          </section>
 
-          <LuminaFlagshipPanel
-            title="Replay inspection"
+          <section
+            id="genesis-replay-inspection"
+            className="min-w-0 scroll-mt-28"
+          >
+            <LuminaFlagshipPanel
+              title="Replay inspection"
             description="Certified per-replay status projection. No replay execution controls are exposed."
             toolbar={
               selectedReplayId
@@ -643,9 +726,11 @@ export function GenesisReplayReadWorkspace({
                 </div>
               </div>
             )}
-          </LuminaFlagshipPanel>
+            </LuminaFlagshipPanel>
+          </section>
         </div>
       }
+      inspectorPlacement="stacked"
       inspector={
         error ||
         operational.replayId !==
@@ -705,25 +790,47 @@ export function GenesisReplayReadWorkspace({
 
                 {operational.projection && (
                   <>
+                    <section
+                      id="genesis-temporal-chronology"
+                      className="min-w-0 scroll-mt-28"
+                    >
                     <GenesisTemporalChronologyInspector
                       projection={
                         operational.projection
                       }
-                    />
+                    />\n                    </section>
 
+                    <section
+                      id="genesis-historical-relationships"
+                      className="min-w-0 scroll-mt-28"
+                    >
+                    <GenesisHistoricalRelationshipInspector
+                      projection={
+                        operational.projection
+                      }
+                    />\n                    </section>
+
+                    <section
+                      id="genesis-historical-artifacts"
+                      className="min-w-0 scroll-mt-28"
+                    >
                     <GenesisHistoricalArtifactExplorer
                       projection={
                         operational.projection
                       }
-                    />
+                    />\n                    </section>
                   </>
                 )}
 
+                <section
+                  id="genesis-operational-reconstruction"
+                  className="min-w-0 scroll-mt-28"
+                >
                 <GenesisOperationalProjectionPanel
                   state={
                     operational
                   }
-                />
+                />\n                </section>
               </div>
             )
           : undefined

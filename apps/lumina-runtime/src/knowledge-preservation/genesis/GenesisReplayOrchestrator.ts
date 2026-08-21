@@ -41,6 +41,14 @@ import {
   GenesisProductionReplayAdmissionAdapter,
 } from "./GenesisProductionReplayAdmissionAdapter.js";
 
+import {
+  FileGenesisHistoricalCorrelationPersistenceStore,
+} from "./GenesisHistoricalCorrelationPersistence.js";
+
+import {
+  materializeGenesisHistoricalCorrelation,
+} from "./GenesisHistoricalCorrelationMaterializer.js";
+
 export type GenesisReplayOrchestratorMode =
   | "DRY_RUN"
   | "PRODUCTION_ADMISSION";
@@ -411,6 +419,24 @@ export async function runGovernedGenesisReplay(
       },
       input.persistenceStore,
     );
+
+  if (
+    runnerResult.outcome ===
+    "COMPLETED"
+  ) {
+    const correlation =
+      materializeGenesisHistoricalCorrelation(
+        runnerResult.execution,
+      );
+
+    const correlationStore =
+      new FileGenesisHistoricalCorrelationPersistenceStore();
+
+    correlationStore.save(
+      plan.replayId,
+      correlation,
+    );
+  }
 
   return {
     mode:

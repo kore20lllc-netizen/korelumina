@@ -1,6 +1,10 @@
 import path from "node:path";
 
 import {
+  fileURLToPath,
+} from "node:url";
+
+import {
   assertSafeProjectId,
   ensureWithinRoot,
   getProjectsRoot,
@@ -8,20 +12,30 @@ import {
   resolveProjectPath,
 } from "@korelumina/platform-sdk";
 
+const RUNTIME_REPOSITORY_ROOT =
+  path.resolve(
+    path.dirname(
+      fileURLToPath(
+        import.meta.url,
+      ),
+    ),
+    "..",
+    "..",
+    "..",
+    "..",
+  );
+
 export function getRuntimeDataRoot(): string {
   /*
    * Operational Runtime data has one canonical repository-level root.
    *
-   * Do not make its identity depend on:
-   * - process.cwd();
-   * - whether runtime-data already exists at process startup;
-   * - which workspace launched the Runtime process.
-   *
-   * Genesis, Knowledge Operations, and all other Runtime consumers must
-   * resolve the same production storage location deterministically.
+   * This is deliberately module-relative rather than process-relative.
+   * Runtime servers, build output, tests, maintenance scripts, and
+   * governed operational tools therefore resolve the same location
+   * regardless of process.cwd().
    */
   return path.join(
-    getRepoRoot(),
+    RUNTIME_REPOSITORY_ROOT,
     "runtime-data",
   );
 }
