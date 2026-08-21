@@ -39,6 +39,14 @@ import type {
 } from "./GenesisHistoricalCorrelation.js";
 
 import {
+  buildGenesisHistoricalKnowledgeLineage,
+} from "./GenesisHistoricalKnowledgeLineage.js";
+
+import type {
+  GenesisHistoricalKnowledgeLineageProjection,
+} from "./GenesisHistoricalKnowledgeLineage.js";
+
+import {
   buildGenesisKnowledgeLifecycleCorrelation,
 } from "./GenesisKnowledgeLifecycleCorrelation.js";
 
@@ -97,6 +105,9 @@ export interface GenesisOperationalProjection {
   knowledgeLifecycle:
     GenesisKnowledgeLifecycleProjection;
 
+  historicalKnowledgeLineage:
+    GenesisHistoricalKnowledgeLineageProjection;
+
   readiness:
     GenesisReadinessProjection;
 
@@ -122,6 +133,10 @@ export interface BuildGenesisOperationalProjectionInput {
 
   organizationalMemory:
     readonly OrganizationalMemoryRecord[];
+
+  replayDispositions?:
+    readonly import("./GenesisReplayCheckpoint.js")
+      .GenesisReplayCheckpointDisposition[];
 
   readinessPolicy:
     GenesisReadinessPolicy;
@@ -281,6 +296,15 @@ export function buildGenesisOperationalProjection(
         input.organizationalMemory,
     });
 
+  const historicalKnowledgeLineage =
+    buildGenesisHistoricalKnowledgeLineage({
+      corpus,
+
+      dispositions:
+        input.replayDispositions ??
+        [],
+    });
+
   const readiness =
     buildGenesisReadiness({
       policy:
@@ -318,6 +342,10 @@ export function buildGenesisOperationalProjection(
         knowledgeLifecycle
           .projectionId,
 
+      historicalKnowledgeLineageProjectionId:
+        historicalKnowledgeLineage
+          .projectionId,
+
       readinessProjectionId:
         readiness.projectionId,
 
@@ -339,6 +367,8 @@ export function buildGenesisOperationalProjection(
     documentationGovernance,
 
     knowledgeLifecycle,
+
+    historicalKnowledgeLineage,
 
     readiness,
 

@@ -332,6 +332,116 @@ function EventInspector({
   );
 }
 
+function KnowledgeLineageInspector({
+  evidenceId,
+  lineageStatus,
+  lifecycle,
+}: {
+  evidenceId:
+    string;
+
+  lineageStatus:
+    string;
+
+  lifecycle:
+    GenesisOperationalProjection["knowledgeLifecycle"]["records"][number] |
+    null;
+}) {
+  return (
+    <LuminaFlagshipCard
+      as="section"
+      className="mt-5 min-w-0 p-4"
+    >
+      <div className="relative z-10 min-w-0">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-300/60">
+            Knowledge Operations lineage
+          </div>
+
+          <Chip>
+            {lineageStatus}
+          </Chip>
+        </div>
+
+        <div className="mt-4 space-y-4">
+          <Field label="Evidence identity">
+            <span className="break-all font-mono">
+              {evidenceId}
+            </span>
+          </Field>
+
+          {lifecycle ? (
+            <>
+              <Field label="Manufacturing correlation">
+                {lifecycle.manufacturingCorrelation}
+              </Field>
+
+              <Field label="Manufacturing run">
+                <span className="break-all font-mono">
+                  {lifecycle.manufacturingRunId ??
+                    "No unique manufacturing run correlated"}
+                </span>
+              </Field>
+
+              <Field label="Current Knowledge stage">
+                {lifecycle.currentStage ??
+                  "Not reached"}
+              </Field>
+
+              <Field label="Lifecycle">
+                IR {lifecycle.knowledgeIR.state}
+                {" · "}
+                Validation {lifecycle.validation.state}
+                {" · "}
+                Package {lifecycle.packageAssembly.state}
+                {" · "}
+                Review {lifecycle.canonicalReview.state}
+                {" · "}
+                Canonical {lifecycle.canonicalKnowledge.state}
+              </Field>
+
+              <Field label="Knowledge package">
+                <span className="break-all font-mono">
+                  {lifecycle.packageId ??
+                    "No package materialized"}
+                </span>
+              </Field>
+
+              <Field label="Canonical Knowledge">
+                {lifecycle.canonicalKnowledgeIds.length > 0
+                  ? lifecycle.canonicalKnowledgeIds.map(
+                      (
+                        id,
+                        index,
+                      ) => (
+                        <div
+                          key={id}
+                          className={
+                            index > 0
+                              ? "mt-1 break-all font-mono"
+                              : "break-all font-mono"
+                          }
+                        >
+                          {id}
+                        </div>
+                      ),
+                    )
+                  : "No canonical Knowledge identity materialized"}
+              </Field>
+            </>
+          ) : (
+            <div className="text-xs leading-5 text-white/45">
+              Runtime admitted this historical source as Evidence,
+              but no Knowledge lifecycle record is present in the
+              current operational projection.
+            </div>
+          )}
+        </div>
+      </div>
+    </LuminaFlagshipCard>
+  );
+}
+
 function EpisodeInspector({
   episode,
 }: {
@@ -526,6 +636,95 @@ export function GenesisHistoricalArtifactExplorer({
       [
         episodes,
         selection,
+      ],
+    );
+
+  const selectedKnowledgeLineage =
+    useMemo(
+      () => {
+        if (
+          !selection
+        ) {
+          return [];
+        }
+
+        return projection
+          .historicalKnowledgeLineage
+          .records
+          .filter(
+            record => {
+              if (
+                selection.kind ===
+                "source"
+              ) {
+                return record
+                  .sourceReferenceIds
+                  .includes(
+                    selection.id as
+                      typeof record.sourceReferenceIds[number],
+                  );
+              }
+
+              if (
+                selection.kind ===
+                "event"
+              ) {
+                return record
+                  .eventIds
+                  .includes(
+                    selection.id as
+                      typeof record.eventIds[number],
+                  );
+              }
+
+              return record
+                .episodeIds
+                .includes(
+                  selection.id as
+                    typeof record.episodeIds[number],
+                );
+            },
+          )
+          .slice()
+          .sort(
+            (
+              left,
+              right,
+            ) =>
+              left.evidenceId
+                .localeCompare(
+                  right.evidenceId,
+                ),
+          );
+      },
+      [
+        projection,
+        selection,
+      ],
+    );
+
+  const selectedKnowledgeLifecycle =
+    useMemo(
+      () =>
+        selectedKnowledgeLineage.map(
+          lineage => ({
+            lineage,
+
+            lifecycle:
+              projection
+                .knowledgeLifecycle
+                .records
+                .find(
+                  record =>
+                    record.evidenceId ===
+                    lineage.evidenceId,
+                ) ??
+              null,
+          }),
+        ),
+      [
+        projection,
+        selectedKnowledgeLineage,
       ],
     );
 
@@ -851,6 +1050,31 @@ export function GenesisHistoricalArtifactExplorer({
                     selectedEpisode
                   }
                 />
+              )}
+
+              {selectedKnowledgeLifecycle.length >
+                0 && (
+                <div className="mt-5 space-y-3">
+                  {selectedKnowledgeLifecycle.map(
+                    ({
+                      lineage,
+                      lifecycle,
+                    }) => (
+                      <KnowledgeLineageInspector
+                        key={`${lineage.historicalSourceId}:${lineage.evidenceId}`}
+                        evidenceId={
+                          lineage.evidenceId
+                        }
+                        lineageStatus={
+                          lineage.status
+                        }
+                        lifecycle={
+                          lifecycle
+                        }
+                      />
+                    ),
+                  )}
+                </div>
               )}
 
               {selection &&

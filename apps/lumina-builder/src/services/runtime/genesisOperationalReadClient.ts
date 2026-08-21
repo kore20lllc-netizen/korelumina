@@ -662,6 +662,141 @@ export interface GenesisOperationalDocumentationGovernanceSummary {
   };
 }
 
+export type GenesisHistoricalKnowledgeLineageStatus =
+  | "correlated"
+  | "source-reference-missing"
+  | "ambiguous-source-reference";
+
+export interface GenesisHistoricalKnowledgeLineageRecord {
+  historicalSourceId:
+    string;
+
+  evidenceId:
+    string;
+
+  status:
+    GenesisHistoricalKnowledgeLineageStatus;
+
+  sourceReferenceIds:
+    readonly GenesisHistoricalSourceReferenceId[];
+
+  eventIds:
+    readonly GenesisHistoricalEventId[];
+
+  episodeIds:
+    readonly GenesisEvolutionEpisodeId[];
+}
+
+export interface GenesisHistoricalKnowledgeLineageProjection {
+  projectionId:
+    `genesis-historical-knowledge-lineage:${string}`;
+
+  corpusProjectionId:
+    string;
+
+  records:
+    readonly GenesisHistoricalKnowledgeLineageRecord[];
+
+  summary: {
+    admittedEvidence:
+      number;
+
+    correlated:
+      number;
+
+    sourceReferenceMissing:
+      number;
+
+    ambiguousSourceReference:
+      number;
+  };
+}
+
+export type GenesisLifecycleCorrelationStatus =
+  | "correlated"
+  | "not-correlated"
+  | "ambiguous";
+
+export type GenesisLifecycleStageState =
+  | "not-reached"
+  | "entered"
+  | "processing"
+  | "completed"
+  | "awaiting-human-review"
+  | "approved"
+  | "published"
+  | "blocked"
+  | "failed";
+
+export interface GenesisLifecycleStageProjection {
+  state:
+    GenesisLifecycleStageState;
+
+  events:
+    readonly unknown[];
+}
+
+export interface GenesisKnowledgeLifecycleRecord {
+  evidenceId:
+    string;
+
+  manufacturingCorrelation:
+    GenesisLifecycleCorrelationStatus;
+
+  manufacturingRunId:
+    string | null;
+
+  matchingManufacturingRunIds:
+    readonly string[];
+
+  manufacturingStatus:
+    string | null;
+
+  currentStage:
+    string | null;
+
+  knowledgeIR:
+    GenesisLifecycleStageProjection;
+
+  validation:
+    GenesisLifecycleStageProjection;
+
+  packageAssembly:
+    GenesisLifecycleStageProjection;
+
+  canonicalReview:
+    GenesisLifecycleStageProjection;
+
+  canonicalKnowledge:
+    GenesisLifecycleStageProjection;
+
+  packageId:
+    string | null;
+
+  canonicalKnowledgeIds:
+    readonly string[];
+
+  organizationalMemory:
+    readonly {
+      status:
+        GenesisLifecycleCorrelationStatus;
+
+      memoryRecordIds:
+        readonly string[];
+
+      adaptationValidated:
+        boolean | null;
+    }[];
+
+  educationalEligibility: {
+    status:
+      "not-evaluated";
+
+    eligible:
+      null;
+  };
+}
+
 export interface GenesisOperationalKnowledgeLifecycleSummary {
   projectionId:
     string;
@@ -670,7 +805,7 @@ export interface GenesisOperationalKnowledgeLifecycleSummary {
     string;
 
   records:
-    readonly unknown[];
+    readonly GenesisKnowledgeLifecycleRecord[];
 
   summary: {
     admittedEvidence:
@@ -967,6 +1102,9 @@ export interface GenesisOperationalProjection {
 
   knowledgeLifecycle:
     GenesisOperationalKnowledgeLifecycleSummary;
+
+  historicalKnowledgeLineage:
+    GenesisHistoricalKnowledgeLineageProjection;
 
   readiness:
     GenesisOperationalReadinessSummary;

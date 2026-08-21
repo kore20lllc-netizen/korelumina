@@ -151,6 +151,11 @@ export function readGenesisOperationalProjection(
       input.organizationalMemory
         .list(),
 
+    replayDispositions:
+      status.checkpoint
+        ?.dispositions ??
+      [],
+
     readinessPolicy:
       input.readinessPolicy,
   });
