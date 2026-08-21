@@ -48,6 +48,23 @@ function request(
       GenesisSourceManifestEntry[
         "evidenceType"
       ];
+
+    sourceType?:
+      GenesisSourceManifestEntry[
+        "sourceType"
+      ];
+
+    authorityClass?:
+      string;
+
+    approvalState?:
+      string;
+
+    supersedes?:
+      readonly HistoricalSourceId[];
+
+    conflictsWith?:
+      readonly HistoricalSourceId[];
   } = {},
 ): GenesisReplayAdmissionRequest {
   const historicalSourceId:
@@ -83,6 +100,7 @@ function request(
         historicalSourceId,
 
         sourceType:
+          overrides.sourceType ??
           "commit",
 
         evidenceType:
@@ -90,7 +108,11 @@ function request(
           "commit",
 
         authorityClass:
+          overrides.authorityClass ??
           "repository-history",
+
+        approvalState:
+          overrides.approvalState,
 
         provenanceLocator:
           "git:commit:production-adapter",
@@ -116,9 +138,11 @@ function request(
           "eligible",
 
         supersedes:
+          overrides.supersedes ??
           [],
 
         conflictsWith:
+          overrides.conflictsWith ??
           [],
 
         metadata: {
@@ -161,7 +185,7 @@ function request(
 }
 
 test(
-  "production adapter admits Genesis commit through existing Knowledge Preservation Platform",
+  "production adapter routes governance-approved ADR through existing Knowledge Preservation Platform",
   async () => {
     const platform =
       createKnowledgePreservationPlatform();
@@ -173,7 +197,22 @@ test(
 
     const result =
       await adapter.admit(
-        request(),
+        request({
+          historicalSourceId:
+            "genesis-source:ADR:production-adapter",
+
+          sourceType:
+            "ADR",
+
+          evidenceType:
+            "ADR",
+
+          authorityClass:
+            "architecture-decision",
+
+          approvalState:
+            "approved",
+        }),
       );
 
     assert.match(
@@ -230,6 +269,18 @@ test(
 
         checksum:
           "sha256:idempotent-production-adapter",
+
+        sourceType:
+          "ADR",
+
+        evidenceType:
+          "ADR",
+
+        authorityClass:
+          "architecture-decision",
+
+        approvalState:
+          "approved",
       });
 
     const first =
@@ -392,6 +443,18 @@ test(
 
           checksum:
             "sha256:canonical-boundary",
+
+          sourceType:
+            "ADR",
+
+          evidenceType:
+            "ADR",
+
+          authorityClass:
+            "architecture-decision",
+
+          approvalState:
+            "approved",
         }),
       );
 
@@ -493,6 +556,18 @@ test(
 
         checksum:
           "sha256:downstream-failure-after-intake",
+
+        sourceType:
+          "ADR",
+
+        evidenceType:
+          "ADR",
+
+        authorityClass:
+          "architecture-decision",
+
+        approvalState:
+          "approved",
       });
 
     const originalCompile =
@@ -588,7 +663,7 @@ test(
 );
 
 test(
-  "Evidence Intake failure remains a replay admission failure and retry cannot falsely become ADMITTED",
+  "non-seeding Runtime Evidence remains historically admitted without Knowledge manufacturing",
   async () => {
     const platform =
       createKnowledgePreservationPlatform();
@@ -598,107 +673,44 @@ test(
         platform,
       });
 
-    const input =
-      request({
-        historicalSourceId:
-          "genesis-source:commit:intake-failure",
+    const result =
+      await adapter.admit(
+        request({
+          historicalSourceId:
+            "genesis-source:runtime-event:historical-only",
 
-        checksum:
-          "sha256:intake-failure",
+          checksum:
+            "sha256:historical-only",
 
-        evidenceType:
-          "runtime-event",
-      });
+          sourceType:
+            "runtime-event",
 
-    await assert.rejects(
-      () =>
-        adapter.admit(
-          input,
-        ),
-      /knowledge_compiler_not_found/,
+          evidenceType:
+            "runtime-event",
+
+          authorityClass:
+            "runtime-observation",
+        }),
+      );
+
+    assert.match(
+      result.evidenceId,
+      /^genesis-evidence:[a-f0-9]{64}$/,
     );
 
-    const evidenceRuns =
+    const matchingRuns =
       platform
         .manufacturingRunService
         .list()
         .filter(
-          (
-            run,
-          ) =>
-            run.evidenceId.startsWith(
-              "genesis-evidence:",
-            ),
-        )
-        .filter(
-          (
-            run,
-          ) =>
-            run.stageHistory.some(
-              (
-                event,
-              ) =>
-                event.detail
-                  ?.includes(
-                    "runtime-event",
-                  ),
-            ),
+          run =>
+            run.evidenceId ===
+            result.evidenceId,
         );
 
     assert.equal(
-      evidenceRuns.length,
-      1,
-    );
-
-    const failedRun =
-      evidenceRuns[0];
-
-    assert.equal(
-      failedRun.currentStage,
-      "Evidence Intake",
-    );
-
-    assert.equal(
-      failedRun.status,
-      "failed",
-    );
-
-    assert.equal(
-      failedRun.stageHistory.some(
-        (
-          event,
-        ) =>
-          event.stage ===
-            "Evidence Intake" &&
-          event.outcome ===
-            "completed",
-      ),
-      false,
-    );
-
-    await assert.rejects(
-      () =>
-        adapter.admit(
-          input,
-        ),
-      /genesis_production_admission_existing_run_not_admitted/,
-    );
-
-    const runsAfterRetry =
-      platform
-        .manufacturingRunService
-        .list()
-        .filter(
-          (
-            run,
-          ) =>
-            run.id ===
-            failedRun.id,
-        );
-
-    assert.equal(
-      runsAfterRetry.length,
-      1,
+      matchingRuns.length,
+      0,
     );
   },
 );

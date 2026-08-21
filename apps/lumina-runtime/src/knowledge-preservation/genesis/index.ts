@@ -13,6 +13,7 @@ export * from "./GenesisSourceManifestBuilder.js";
 export * from "./GenesisReplayPlan.js";
 export * from "./GenesisReplayExecution.js";
 export * from "./GenesisReplayAdmission.js";
+export * from "./GenesisHistoricalAdmissionGovernancePolicy.js";
 export * from "./GenesisReplayRunner.js";
 export * from "./GenesisReplayPersistence.js";
 export * from "./GenesisProductionReplayAdmissionAdapter.js";

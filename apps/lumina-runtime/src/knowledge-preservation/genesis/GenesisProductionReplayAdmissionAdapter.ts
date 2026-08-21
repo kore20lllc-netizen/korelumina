@@ -20,6 +20,11 @@ import {
   genesisReplayAdmissionRequestToEvidence,
 } from "./GenesisReplayAdmission.js";
 
+import {
+  classifyGenesisHistoricalAdmission,
+} from "./GenesisHistoricalAdmissionGovernancePolicy.js";
+
+
 export interface GenesisProductionReplayAdmissionAdapterOptions {
   platform:
     KnowledgePreservationPlatform;
@@ -167,6 +172,11 @@ export class GenesisProductionReplayAdmissionAdapter
         request,
       );
 
+    const governance =
+      classifyGenesisHistoricalAdmission(
+        request.manifestEntry,
+      );
+
     const existing =
       evidenceRun(
         this.platform,
@@ -180,6 +190,28 @@ export class GenesisProductionReplayAdmissionAdapter
         existing,
         evidence,
       );
+    }
+
+    /*
+     * Genesis Evidence admission and Knowledge manufacturing
+     * are separate trust transitions.
+     *
+     * The Replay manifest plus deterministic Evidence identity
+     * and persisted ADMITTED checkpoint disposition preserve
+     * historical existence. Only sources classified as
+     * knowledge-seeding-eligible may enter the existing
+     * Knowledge Operations manufacturing pipeline.
+     *
+     * No classification here grants canonical authority.
+     */
+    if (
+      !governance
+        .invokeKnowledgeManufacturing
+    ) {
+      return {
+        evidenceId:
+          evidence.id,
+      };
     }
 
     try {
