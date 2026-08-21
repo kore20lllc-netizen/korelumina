@@ -47,6 +47,10 @@ import {
 } from "./GenesisHistoricalArtifactExplorer";
 
 import {
+  GenesisEvolutionEpisodeInspector,
+} from "./GenesisEvolutionEpisodeInspector";
+
+import {
   GenesisTemporalChronologyInspector,
 } from "./GenesisTemporalChronologyInspector";
 
@@ -86,6 +90,14 @@ const GENESIS_SECTIONS = [
       "Relationships",
     icon:
       Network,
+  },
+  {
+    id:
+      "genesis-evolution-episodes",
+    label:
+      "Evolution Episodes",
+    icon:
+      GitBranch,
   },
   {
     id:
@@ -413,8 +425,8 @@ export function GenesisReplayReadWorkspace({
           items={GENESIS_SECTIONS}
           ariaLabel="Genesis replay observatory sections"
           topTargetId="genesis-replay-observatory-top"
-          minWidthClassName="min-w-[980px]"
-          gridColumnsClassName="grid-cols-6"
+          minWidthClassName="min-w-[1120px]"
+          gridColumnsClassName="grid-cols-7"
         />
       }
       content={
@@ -809,6 +821,17 @@ export function GenesisReplayReadWorkspace({
                         operational.projection
                       }
                     />\n                    </section>
+
+                    <section
+                      id="genesis-evolution-episodes"
+                      className="min-w-0 scroll-mt-28"
+                    >
+                      <GenesisEvolutionEpisodeInspector
+                        projection={
+                          operational.projection
+                        }
+                      />
+                    </section>
 
                     <section
                       id="genesis-historical-artifacts"

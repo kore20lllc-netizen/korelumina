@@ -254,3 +254,91 @@ test(
     );
   },
 );
+
+test(
+  "does not create an Evolution Episode from chronology alone",
+  () => {
+    const state =
+      materializeGenesisHistoricalCorrelation(
+        fixture(),
+      );
+
+    assert.equal(
+      state.episodes.length,
+      0,
+    );
+  },
+);
+
+test(
+  "creates an Evolution Episode from an explicit semantic source relationship",
+  () => {
+    const execution =
+      fixture();
+
+    const entries =
+      execution.manifest.entries;
+
+    const second =
+      entries[1];
+
+    if (!second) {
+      throw new Error(
+        "fixture_second_manifest_entry_missing",
+      );
+    }
+
+    execution.manifest.entries = [
+      entries[0],
+      {
+        ...second,
+
+        supersedes: [
+          "genesis-source:document:a",
+        ],
+      },
+    ];
+
+    const state =
+      materializeGenesisHistoricalCorrelation(
+        execution,
+      );
+
+    assert.equal(
+      state.episodes.length,
+      1,
+    );
+
+    const episode =
+      state.episodes[0];
+
+    assert.ok(
+      episode,
+    );
+
+    assert.equal(
+      episode.lifecycle,
+      "correlated",
+    );
+
+    assert.equal(
+      episode.eventIds.length,
+      2,
+    );
+
+    assert.equal(
+      episode.sourceReferenceIds.length,
+      2,
+    );
+
+    assert.equal(
+      episode.temporalAuthority.current.status,
+      "unknown",
+    );
+
+    assert.equal(
+      episode.metadata.materializationMode,
+      "explicit-semantic-component",
+    );
+  },
+);

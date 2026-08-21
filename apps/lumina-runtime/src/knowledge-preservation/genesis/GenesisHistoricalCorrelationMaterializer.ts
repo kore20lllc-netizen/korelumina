@@ -8,6 +8,7 @@ import type {
 
 import {
   createChronologicalRelationship,
+  createEvolutionEpisode,
   createHistoricalEvent,
   createHistoricalRelationship,
   createHistoricalSourceReference,
@@ -15,10 +16,12 @@ import {
 
 import type {
   CurrentAuthorityStatus,
+  EvolutionEpisode,
   GenesisHistoricalCorrelationState,
   HistoricalAuthorityStatus,
   HistoricalEvent,
   HistoricalEventKind,
+  HistoricalRelationship,
   HistoricalSourceReference,
   TemporalAuthority,
 } from "./GenesisHistoricalCorrelation.js";
@@ -368,6 +371,582 @@ function buildEvent(
   });
 }
 
+function materializeEvolutionEpisodes(
+  input: {
+    admittedEntries:
+      readonly GenesisSourceManifestEntry[];
+
+    sourceByHistoricalId:
+      ReadonlyMap<
+        string,
+        HistoricalSourceReference
+      >;
+
+    eventByHistoricalId:
+      ReadonlyMap<
+        string,
+        HistoricalEvent
+      >;
+
+    relationships:
+      readonly HistoricalRelationship[];
+  },
+): readonly EvolutionEpisode[] {
+  /*
+   * Evolution Episodes require a semantic correlation signal.
+   *
+   * Allowed signals:
+   * - multiple revisions of the same logical Source Reference;
+   * - an explicit manifest supersedes relation;
+   * - an explicit manifest conflict relation.
+   *
+   * Replay membership, timestamp proximity, and chronological
+   * adjacency are explicitly insufficient.
+   */
+
+  const historicalIds =
+    input.admittedEntries.map(
+      entry =>
+        entry.historicalSourceId,
+    );
+
+  const parent =
+    new Map<
+      string,
+      string
+    >(
+      historicalIds.map(
+        id => [
+          id,
+          id,
+        ],
+      ),
+    );
+
+  function find(
+    id:
+      string,
+  ): string {
+    const current =
+      parent.get(
+        id,
+      );
+
+    if (
+      !current
+    ) {
+      throw new Error(
+        "genesis_episode_materializer_unknown_source",
+      );
+    }
+
+    if (
+      current ===
+      id
+    ) {
+      return id;
+    }
+
+    const root =
+      find(
+        current,
+      );
+
+    parent.set(
+      id,
+      root,
+    );
+
+    return root;
+  }
+
+  function union(
+    left:
+      string,
+
+    right:
+      string,
+  ): void {
+    if (
+      !parent.has(
+        left,
+      ) ||
+      !parent.has(
+        right,
+      )
+    ) {
+      return;
+    }
+
+    const leftRoot =
+      find(
+        left,
+      );
+
+    const rightRoot =
+      find(
+        right,
+      );
+
+    if (
+      leftRoot ===
+      rightRoot
+    ) {
+      return;
+    }
+
+    const [
+      first,
+      second,
+    ] =
+      [
+        leftRoot,
+        rightRoot,
+      ].sort();
+
+    parent.set(
+      second,
+      first,
+    );
+  }
+
+  /*
+   * Signal 1:
+   * revisions of one stable logical Source Reference.
+   */
+  const historicalIdsBySourceReference =
+    new Map<
+      string,
+      string[]
+    >();
+
+  for (
+    const entry
+    of input.admittedEntries
+  ) {
+    const source =
+      input.sourceByHistoricalId.get(
+        entry.historicalSourceId,
+      );
+
+    if (
+      !source
+    ) {
+      continue;
+    }
+
+    const ids =
+      historicalIdsBySourceReference.get(
+        source.sourceReferenceId,
+      ) ??
+      [];
+
+    ids.push(
+      entry.historicalSourceId,
+    );
+
+    historicalIdsBySourceReference.set(
+      source.sourceReferenceId,
+      ids,
+    );
+  }
+
+  for (
+    const ids
+    of historicalIdsBySourceReference.values()
+  ) {
+    if (
+      ids.length <
+      2
+    ) {
+      continue;
+    }
+
+    const first =
+      ids[0];
+
+    for (
+      const id
+      of ids.slice(
+        1,
+      )
+    ) {
+      union(
+        first,
+        id,
+      );
+    }
+  }
+
+  /*
+   * Signals 2 and 3:
+   * explicit semantic links in the manifest.
+   */
+  for (
+    const entry
+    of input.admittedEntries
+  ) {
+    for (
+      const target
+      of [
+        ...entry.supersedes,
+        ...entry.conflictsWith,
+      ]
+    ) {
+      union(
+        entry.historicalSourceId,
+        target,
+      );
+    }
+  }
+
+  const components =
+    new Map<
+      string,
+      GenesisSourceManifestEntry[]
+    >();
+
+  for (
+    const entry
+    of input.admittedEntries
+  ) {
+    const root =
+      find(
+        entry.historicalSourceId,
+      );
+
+    const entries =
+      components.get(
+        root,
+      ) ??
+      [];
+
+    entries.push(
+      entry,
+    );
+
+    components.set(
+      root,
+      entries,
+    );
+  }
+
+  const episodes:
+    EvolutionEpisode[] =
+    [];
+
+  for (
+    const entries
+    of components.values()
+  ) {
+    if (
+      entries.length <
+      2
+    ) {
+      continue;
+    }
+
+    const sourceReferenceIds =
+      [
+        ...new Set(
+          entries.flatMap(
+            entry => {
+              const source =
+                input.sourceByHistoricalId.get(
+                  entry.historicalSourceId,
+                );
+
+              return source
+                ? [
+                    source.sourceReferenceId,
+                  ]
+                : [];
+            },
+          ),
+        ),
+      ].sort();
+
+    const sameLogicalSource =
+      sourceReferenceIds.length ===
+      1;
+
+    const explicitSemanticLink =
+      entries.some(
+        entry =>
+          entry.supersedes.some(
+            id =>
+              entries.some(
+                candidate =>
+                  candidate.historicalSourceId ===
+                  id,
+              ),
+          ) ||
+          entry.conflictsWith.some(
+            id =>
+              entries.some(
+                candidate =>
+                  candidate.historicalSourceId ===
+                  id,
+              ),
+          ),
+      );
+
+    if (
+      !sameLogicalSource &&
+      !explicitSemanticLink
+    ) {
+      continue;
+    }
+
+    const events =
+      entries
+        .map(
+          entry =>
+            input.eventByHistoricalId.get(
+              entry.historicalSourceId,
+            ),
+        )
+        .filter(
+          (
+            event,
+          ): event is HistoricalEvent =>
+            Boolean(
+              event,
+            ),
+        )
+        .sort(
+          (
+            left,
+            right,
+          ) =>
+            left.occurredAt -
+              right.occurredAt ||
+            left.eventId.localeCompare(
+              right.eventId,
+            ),
+        );
+
+    if (
+      events.length <
+      2
+    ) {
+      continue;
+    }
+
+    const eventIds =
+      events.map(
+        event =>
+          event.eventId,
+      );
+
+    const eventIdSet =
+      new Set<string>(
+        eventIds,
+      );
+
+    const sourceReferenceIdSet =
+      new Set<string>(
+        sourceReferenceIds,
+      );
+
+    const episodeRelationships =
+      input.relationships.filter(
+        relationship => {
+          const fromInside =
+            relationship.from.kind ===
+            "event"
+              ? eventIdSet.has(
+                  relationship.from.id,
+                )
+              : sourceReferenceIdSet.has(
+                  relationship.from.id,
+                );
+
+          const toInside =
+            relationship.to.kind ===
+            "event"
+              ? eventIdSet.has(
+                  relationship.to.id,
+                )
+              : sourceReferenceIdSet.has(
+                  relationship.to.id,
+                );
+
+          return (
+            fromInside &&
+            toInside
+          );
+        },
+      );
+
+    const semanticRelationships =
+      episodeRelationships.filter(
+        relationship =>
+          relationship.type !==
+          "occurred_before",
+      );
+
+    const conflicted =
+      semanticRelationships.some(
+        relationship =>
+          relationship.type ===
+          "contradicted_by",
+      );
+
+    const primaryEntry =
+      entries
+        .slice()
+        .sort(
+          (
+            left,
+            right,
+          ) =>
+            left.historicalTimestamp -
+              right.historicalTimestamp ||
+            left.historicalSourceId.localeCompare(
+              right.historicalSourceId,
+            ),
+        )[0];
+
+    const primarySource =
+      input.sourceByHistoricalId.get(
+        primaryEntry.historicalSourceId,
+      );
+
+    if (
+      !primarySource
+    ) {
+      continue;
+    }
+
+    const externalSources =
+      entries
+        .map(
+          entry =>
+            input.sourceByHistoricalId.get(
+              entry.historicalSourceId,
+            ),
+        )
+        .filter(
+          (
+            source,
+          ): source is HistoricalSourceReference =>
+            Boolean(
+              source,
+            ),
+        )
+        .filter(
+          source =>
+            source.provenance.externalSource,
+        );
+
+    const externalContext =
+      externalSources.length ===
+      0
+        ? "not-required"
+        : externalSources.every(
+            source =>
+              source.integrity.acquisitionState ===
+                "available" ||
+              source.integrity.acquisitionState ===
+                "acquired",
+          )
+          ? "complete"
+          : "pending";
+
+    const episodeKey =
+      `source-evolution:${primarySource.sourceReferenceId}`;
+
+    const title =
+      sameLogicalSource
+        ? `Evolution · ${primarySource.sourceIdentity}`
+        : `Historical correlation · ${primarySource.sourceIdentity}`;
+
+    episodes.push(
+      createEvolutionEpisode({
+        episodeKey,
+
+        title,
+
+        lifecycle:
+          conflicted
+            ? "conflicted"
+            : "correlated",
+
+        eventIds,
+
+        relationshipIds:
+          episodeRelationships.map(
+            relationship =>
+              relationship.relationshipId,
+          ),
+
+        sourceReferenceIds,
+
+        externalContext,
+
+        temporalAuthority: {
+          historical: {
+            status:
+              "historically-observed",
+
+            authorityClass:
+              "genesis-evolution-episode",
+          },
+
+          current: {
+            status:
+              "unknown",
+
+            authorityClass:
+              "genesis-evolution-episode",
+          },
+        },
+
+        lineage: {
+          mergedFrom:
+            [],
+
+          supersedes:
+            [],
+        },
+
+        metadata: {
+          materializationMode:
+            sameLogicalSource
+              ? "logical-source-revision-lineage"
+              : "explicit-semantic-component",
+
+          historicalSourceIds:
+            entries
+              .map(
+                entry =>
+                  entry.historicalSourceId,
+              )
+              .sort(),
+
+          semanticRelationshipCount:
+            semanticRelationships.length,
+
+          chronologicalRelationshipCount:
+            episodeRelationships.length -
+            semanticRelationships.length,
+        },
+      }),
+    );
+  }
+
+  return episodes.sort(
+    (
+      left,
+      right,
+    ) =>
+      left.episodeId.localeCompare(
+        right.episodeId,
+      ),
+  );
+}
+
 export function materializeGenesisHistoricalCorrelation(
   execution:
     GenesisReplayExecution,
@@ -668,6 +1247,17 @@ export function materializeGenesisHistoricalCorrelation(
     );
   }
 
+  const episodes =
+    materializeEvolutionEpisodes({
+      admittedEntries,
+
+      sourceByHistoricalId,
+
+      eventByHistoricalId,
+
+      relationships,
+    });
+
   return {
     sourceReferences: [
       ...sourceByHistoricalId
@@ -681,12 +1271,6 @@ export function materializeGenesisHistoricalCorrelation(
 
     relationships,
 
-    /*
-     * Evolution Episodes require stronger semantic
-     * correlation than replay membership alone.
-     * Do not fabricate them.
-     */
-    episodes:
-      [],
+    episodes,
   };
 }
