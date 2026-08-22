@@ -34,6 +34,7 @@ import { registerCanonicalReviewPolicyBindingRoutes } from "./routes/knowledge/r
 import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerCanonicalReviewBatchRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerAutonomousCanonicalPromotionRoutes } from "./routes/knowledge/registerAutonomousCanonicalPromotionRoutes.js";
+import { registerAutonomousGovernanceCycleRoutes } from "./routes/knowledge/registerAutonomousGovernanceCycleRoutes.js";
 import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
 import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
@@ -75,6 +76,10 @@ import {
   AutonomousGovernedCanonicalPromotionExecutor,
   GovernedCanonicalPromotionService,
 } from "./knowledge-preservation/promotion/index.js";
+
+import {
+  AutonomousGovernanceCycleOrchestrator,
+} from "./knowledge-preservation/governance/index.js";
 
 import {
   createKnowledgePreservationPlatform,
@@ -282,6 +287,15 @@ export const runtimeAutonomousGovernedPromotionExecutor =
     runtimeKnowledgePreservationPlatform
       .manufacturingRunService,
     runtimeGovernedPromotionService,
+  );
+
+export const runtimeAutonomousGovernanceCycleOrchestrator =
+  new AutonomousGovernanceCycleOrchestrator(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeCanonicalReviewPolicyBindingService,
+    runtimeCanonicalReviewPolicyExecutionService,
+    runtimeAutonomousGovernedPromotionExecutor,
   );
 
 const knowledgeContextBuilder =
@@ -670,6 +684,14 @@ registerAutonomousCanonicalPromotionRoutes(
   {
     executor:
       runtimeAutonomousGovernedPromotionExecutor,
+  },
+);
+
+registerAutonomousGovernanceCycleRoutes(
+  app,
+  {
+    orchestrator:
+      runtimeAutonomousGovernanceCycleOrchestrator,
   },
 );
 
