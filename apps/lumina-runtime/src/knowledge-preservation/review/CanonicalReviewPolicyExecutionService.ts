@@ -412,7 +412,7 @@ export class CanonicalReviewPolicyExecutionService {
     const actorId =
       required(
         input.actorId,
-        "executing_human",
+        "executor",
       );
 
     const executedAt =
@@ -452,8 +452,17 @@ export class CanonicalReviewPolicyExecutionService {
             decision:
               "approved",
 
+            /*
+             * Governance authority and mechanical execution
+             * are intentionally distinct.
+             *
+             * The active policy was explicitly authorized by
+             * human governance. Runtime may execute that
+             * pre-authorized policy, but it does not become
+             * the human approval authority.
+             */
             reviewerId:
-              actorId,
+              policy.authorizedBy,
 
             reviewedAt:
               executedAt,

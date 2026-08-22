@@ -731,7 +731,7 @@ test(
 
       assert.equal(
         review.reviewerId,
-        "human:policy-executor",
+        "human:knowledge-governance",
       );
 
       assert.equal(
@@ -841,6 +841,296 @@ test(
         id,
         [
           "2.0.0",
+        ],
+        [
+          packageId,
+        ],
+      );
+    }
+  },
+);
+
+
+test(
+  "runtime executor preserves human policy authority as reviewer identity",
+  () => {
+    const id =
+      `POLICY-EXEC-DELEGATED-${Date.now()}`;
+
+    const packageId =
+      `TEST-PACKAGE-DELEGATED-${Date.now()}`;
+
+    try {
+      saveCanonicalReviewPolicy(
+        policy(
+          id,
+          "1.0.0",
+          "active",
+          {
+            authorizedBy:
+              "human:founder",
+
+            authorizedAt:
+              1234,
+          },
+        ),
+      );
+
+      saveKnowledgePackage(
+        knowledgePackage(
+          packageId,
+          id,
+          "1.0.0",
+        ),
+      );
+
+      const result =
+        executionService()
+          .execute({
+            policyId:
+              id,
+
+            policyVersion:
+              "1.0.0",
+
+            actorId:
+              "runtime:autonomous-governance",
+
+            executedAt:
+              5000,
+          });
+
+      assert.equal(
+        result.executedBy,
+        "runtime:autonomous-governance",
+      );
+
+      assert.equal(
+        result.decisions.length,
+        1,
+      );
+
+      const persisted =
+        loadKnowledgePackage(
+          packageId,
+        );
+
+      assert.ok(
+        persisted,
+      );
+
+      const review =
+        persisted.metadata
+          .review as {
+            reviewerId?:
+              string;
+
+            decision?:
+              string;
+
+            reason?:
+              string;
+          };
+
+      assert.equal(
+        review.reviewerId,
+        "human:founder",
+      );
+
+      assert.equal(
+        review.decision,
+        "approved",
+      );
+
+      assert.equal(
+        review.reason,
+        `governed-policy-execution:${id}@1.0.0`,
+      );
+
+      const execution =
+        persisted.metadata
+          .policyExecution as {
+            executedBy?:
+              string;
+
+            policyId?:
+              string;
+
+            policyVersion?:
+              string;
+
+            decision?:
+              string;
+          };
+
+      assert.equal(
+        execution.executedBy,
+        "runtime:autonomous-governance",
+      );
+
+      assert.equal(
+        execution.policyId,
+        id,
+      );
+
+      assert.equal(
+        execution.policyVersion,
+        "1.0.0",
+      );
+
+      assert.equal(
+        execution.decision,
+        "approved",
+      );
+    } finally {
+      cleanup(
+        id,
+        [
+          "1.0.0",
+        ],
+        [
+          packageId,
+        ],
+      );
+    }
+  },
+);
+
+test(
+  "delegated execution preserves authorization and execution identities in history",
+  () => {
+    const id =
+      `POLICY-EXEC-DELEGATED-HISTORY-${Date.now()}`;
+
+    const packageId =
+      `TEST-PACKAGE-DELEGATED-HISTORY-${Date.now()}`;
+
+    try {
+      saveCanonicalReviewPolicy(
+        policy(
+          id,
+          "1.0.0",
+          "active",
+          {
+            authorizedBy:
+              "human:founder",
+
+            authorizedAt:
+              2222,
+          },
+        ),
+      );
+
+      saveKnowledgePackage(
+        knowledgePackage(
+          packageId,
+          id,
+          "1.0.0",
+        ),
+      );
+
+      executionService()
+        .execute({
+          policyId:
+            id,
+
+          policyVersion:
+            "1.0.0",
+
+          actorId:
+            "runtime:autonomous-governance",
+
+          executedAt:
+            6000,
+        });
+
+      const persisted =
+        loadKnowledgePackage(
+          packageId,
+        );
+
+      assert.ok(
+        persisted,
+      );
+
+      const reviewHistory =
+        persisted.metadata
+          .reviewHistory as
+          Array<{
+            reviewerId?:
+              string;
+
+            packageVersion?:
+              string;
+
+            decision?:
+              string;
+          }>;
+
+      assert.equal(
+        reviewHistory.length,
+        1,
+      );
+
+      assert.equal(
+        reviewHistory[0]
+          ?.reviewerId,
+        "human:founder",
+      );
+
+      assert.equal(
+        reviewHistory[0]
+          ?.packageVersion,
+        "1.0.0",
+      );
+
+      assert.equal(
+        reviewHistory[0]
+          ?.decision,
+        "approved",
+      );
+
+      const executionHistory =
+        persisted.metadata
+          .policyExecutionHistory as
+          Array<{
+            executedBy?:
+              string;
+
+            policyId?:
+              string;
+
+            policyVersion?:
+              string;
+          }>;
+
+      assert.equal(
+        executionHistory.length,
+        1,
+      );
+
+      assert.equal(
+        executionHistory[0]
+          ?.executedBy,
+        "runtime:autonomous-governance",
+      );
+
+      assert.equal(
+        executionHistory[0]
+          ?.policyId,
+        id,
+      );
+
+      assert.equal(
+        executionHistory[0]
+          ?.policyVersion,
+        "1.0.0",
+      );
+    } finally {
+      cleanup(
+        id,
+        [
+          "1.0.0",
         ],
         [
           packageId,
