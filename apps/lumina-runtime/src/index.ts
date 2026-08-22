@@ -32,6 +32,7 @@ import { registerCanonicalReviewPolicyAdministrationRoutes } from "./routes/know
 import { registerCanonicalReviewPolicyExecutionRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyExecutionRoutes.js";
 import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerCanonicalReviewBatchRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
+import { registerAutonomousCanonicalPromotionRoutes } from "./routes/knowledge/registerAutonomousCanonicalPromotionRoutes.js";
 import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
 import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
@@ -69,6 +70,7 @@ import {
 } from "./knowledge-preservation/review/index.js";
 
 import {
+  AutonomousGovernedCanonicalPromotionExecutor,
   GovernedCanonicalPromotionService,
 } from "./knowledge-preservation/promotion/index.js";
 
@@ -263,6 +265,15 @@ export const runtimeGovernedPromotionService =
     knowledgePlatform.store,
     runtimeKnowledgePreservationPlatform
       .manufacturingRunService,
+  );
+
+export const runtimeAutonomousGovernedPromotionExecutor =
+  new AutonomousGovernedCanonicalPromotionExecutor(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
+    runtimeGovernedPromotionService,
   );
 
 const knowledgeContextBuilder =
@@ -635,6 +646,14 @@ registerCanonicalPromotionRoutes(
   {
     promotionService:
       runtimeGovernedPromotionService,
+  },
+);
+
+registerAutonomousCanonicalPromotionRoutes(
+  app,
+  {
+    executor:
+      runtimeAutonomousGovernedPromotionExecutor,
   },
 );
 
