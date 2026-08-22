@@ -35,3 +35,42 @@ implements GovernanceReadySignalPublisher {
      */
   }
 }
+
+
+export class DelegatingGovernanceReadySignalPublisher
+implements GovernanceReadySignalPublisher {
+  private delegate:
+    GovernanceReadySignalPublisher |
+    null =
+      null;
+
+  setDelegate(
+    delegate:
+      GovernanceReadySignalPublisher,
+  ): void {
+    this.delegate =
+      delegate;
+  }
+
+  clearDelegate(): void {
+    this.delegate =
+      null;
+  }
+
+  publish(
+    signal:
+      GovernanceReadySignal,
+  ): void {
+    /*
+     * Runtime composition may establish the preservation
+     * platform before the governance consumer is available.
+     *
+     * Until a delegate is installed, manufacturing remains
+     * inert at the governance boundary.
+     */
+    this.delegate
+      ?.publish(
+        signal,
+      );
+  }
+}

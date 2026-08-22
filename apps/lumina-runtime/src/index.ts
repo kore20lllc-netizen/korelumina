@@ -79,6 +79,8 @@ import {
 
 import {
   AutonomousGovernanceCycleOrchestrator,
+  DelegatingGovernanceReadySignalPublisher,
+  GovernanceReadyRuntimeConsumer,
 } from "./knowledge-preservation/governance/index.js";
 
 import {
@@ -194,8 +196,13 @@ const app = express();
 const knowledgePlatform =
   runtimeKnowledgeProvider.getPlatform();
 
+export const runtimeGovernanceReadySignalPublisher =
+  new DelegatingGovernanceReadySignalPublisher();
+
 export const runtimeKnowledgePreservationPlatform =
-  createKnowledgePreservationPlatform();
+  createKnowledgePreservationPlatform(
+    runtimeGovernanceReadySignalPublisher,
+  );
 
 export const runtimeGenesisReplayPersistenceStore =
   new FileGenesisReplayPersistenceStore();
@@ -296,6 +303,20 @@ export const runtimeAutonomousGovernanceCycleOrchestrator =
     runtimeCanonicalReviewPolicyBindingService,
     runtimeCanonicalReviewPolicyExecutionService,
     runtimeAutonomousGovernedPromotionExecutor,
+  );
+
+export const runtimeGovernanceReadyConsumer =
+  new GovernanceReadyRuntimeConsumer(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    undefined,
+    runtimeAutonomousGovernanceCycleOrchestrator,
+    "runtime:autonomous-governance",
+  );
+
+runtimeGovernanceReadySignalPublisher
+  .setDelegate(
+    runtimeGovernanceReadyConsumer,
   );
 
 const knowledgeContextBuilder =
