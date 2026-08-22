@@ -30,6 +30,7 @@ import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanoni
 import { registerCanonicalReviewPolicyRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyRoutes.js";
 import { registerCanonicalReviewPolicyAdministrationRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyAdministrationRoutes.js";
 import { registerCanonicalReviewPolicyExecutionRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyExecutionRoutes.js";
+import { registerCanonicalReviewPolicyBindingRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyBindingRoutes.js";
 import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerCanonicalReviewBatchRoutes.js";
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerAutonomousCanonicalPromotionRoutes } from "./routes/knowledge/registerAutonomousCanonicalPromotionRoutes.js";
@@ -65,6 +66,7 @@ import {
 import {
   CanonicalReviewBatchService,
   CanonicalReviewPolicyAdministrationService,
+  CanonicalReviewPolicyBindingService,
   CanonicalReviewPolicyExecutionService,
   CanonicalReviewService,
 } from "./knowledge-preservation/review/index.js";
@@ -244,6 +246,12 @@ export const runtimeCanonicalReviewPolicyExecutionService =
     runtimeKnowledgePreservationPlatform
       .packageService,
     runtimeCanonicalReviewService,
+  );
+
+export const runtimeCanonicalReviewPolicyBindingService =
+  new CanonicalReviewPolicyBindingService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
   );
 
 export const runtimeCanonicalReviewBatchService =
@@ -638,6 +646,14 @@ registerCanonicalReviewPolicyExecutionRoutes(
   {
     service:
       runtimeCanonicalReviewPolicyExecutionService,
+  },
+);
+
+registerCanonicalReviewPolicyBindingRoutes(
+  app,
+  {
+    service:
+      runtimeCanonicalReviewPolicyBindingService,
   },
 );
 
