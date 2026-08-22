@@ -140,8 +140,8 @@
       "elementCount": 73
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx": {
-      "sha256": "b02c8e3c6b6ec7241f08f5078e31832c1507c918bbd9c594a19b6dd4ea5516dc",
-      "elementCount": 394
+      "sha256": "171d22534b211b550ded4d945f67f913f38e7608ac7fadb9ff7f699785d3adf9",
+      "elementCount": 395
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {
       "sha256": "43a7d2b13de694ec2aeebdcad227a71bc199e8064f715e9143dd68961e7c858b",

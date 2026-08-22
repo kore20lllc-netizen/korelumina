@@ -3702,28 +3702,28 @@ export function CanonicalReview({
               }
 
               return (
-                <button
-                  type="button"
+                <div
                   key={item.id}
-                  aria-pressed={selected}
-                  onClick={() =>
-                    onReviewSelect(
-                      item.capsuleId,
-                      item.id,
-                    )
-                  }
-                  className="block min-w-0 w-full overflow-hidden text-left"
+                  className="grid min-w-0 gap-3"
                 >
-                  {article}
-                </button>
-              );
-            })}
-          </div>
+                  <button
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() =>
+                      onReviewSelect(
+                        item.capsuleId,
+                        item.id,
+                      )
+                    }
+                    className="block min-w-0 w-full overflow-hidden text-left"
+                  >
+                    {article}
+                  </button>
 
-          {selectedReview ? (
+                  {selected && selectedReview ? (
             <LuminaFlagshipCard
               as="article"
-              className="mt-5 rounded-[18px] p-4"
+              className="rounded-[18px] p-4"
             >
               <div className="relative z-10">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -3867,6 +3867,12 @@ export function CanonicalReview({
               </div>
             </LuminaFlagshipCard>
           ) : null}
+
+                </div>
+              );
+            })}
+          </div>
+
           </div>
             </div>
           </LuminaFlagshipPanel>
