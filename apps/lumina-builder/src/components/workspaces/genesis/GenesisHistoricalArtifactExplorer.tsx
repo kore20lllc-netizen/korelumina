@@ -335,6 +335,7 @@ function EventInspector({
 function KnowledgeLineageInspector({
   evidenceId,
   lineageStatus,
+  governance,
   lifecycle,
 }: {
   evidenceId:
@@ -342,6 +343,10 @@ function KnowledgeLineageInspector({
 
   lineageStatus:
     string;
+
+  governance:
+    GenesisOperationalProjection["historicalAdmissionGovernance"]["records"][number] |
+    null;
 
   lifecycle:
     GenesisOperationalProjection["knowledgeLifecycle"]["records"][number] |
@@ -369,6 +374,31 @@ function KnowledgeLineageInspector({
               {evidenceId}
             </span>
           </Field>
+
+          {governance && (
+            <>
+              <Field label="Current Replay governance">
+                {governance.classification}
+              </Field>
+
+              <Field label="Knowledge manufacturing authorization">
+                {governance.knowledgeManufacturingAuthorized
+                  ? "Authorized by current Replay policy"
+                  : "Not authorized by current Replay policy"}
+              </Field>
+            </>
+          )}
+
+          {lifecycle?.manufacturingCorrelation ===
+            "correlated" &&
+            governance &&
+            !governance.knowledgeManufacturingAuthorized && (
+              <div className="rounded-xl border border-amber-300/15 bg-amber-300/[0.04] px-3 py-2.5 text-xs leading-5 text-amber-100/65">
+                Pre-existing Knowledge lineage. The current Replay
+                preserved this historical Evidence identity but did
+                not authorize new Knowledge manufacturing.
+              </div>
+            )}
 
           {lifecycle ? (
             <>
@@ -709,6 +739,17 @@ export function GenesisHistoricalArtifactExplorer({
         selectedKnowledgeLineage.map(
           lineage => ({
             lineage,
+
+            governance:
+              projection
+                .historicalAdmissionGovernance
+                .records
+                .find(
+                  record =>
+                    record.evidenceId ===
+                    lineage.evidenceId,
+                ) ??
+              null,
 
             lifecycle:
               projection
@@ -1058,6 +1099,7 @@ export function GenesisHistoricalArtifactExplorer({
                   {selectedKnowledgeLifecycle.map(
                     ({
                       lineage,
+                      governance,
                       lifecycle,
                     }) => (
                       <KnowledgeLineageInspector
@@ -1067,6 +1109,9 @@ export function GenesisHistoricalArtifactExplorer({
                         }
                         lineageStatus={
                           lineage.status
+                        }
+                        governance={
+                          governance
                         }
                         lifecycle={
                           lifecycle

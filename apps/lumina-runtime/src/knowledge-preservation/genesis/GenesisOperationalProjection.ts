@@ -39,6 +39,15 @@ import type {
 } from "./GenesisHistoricalCorrelation.js";
 
 import {
+  buildGenesisHistoricalAdmissionGovernanceProjection,
+} from "./GenesisHistoricalAdmissionGovernanceProjection.js";
+
+import type {
+  GenesisHistoricalAdmissionGovernanceProjection,
+} from "./GenesisHistoricalAdmissionGovernanceProjection.js";
+
+
+import {
   buildGenesisHistoricalKnowledgeLineage,
 } from "./GenesisHistoricalKnowledgeLineage.js";
 
@@ -107,6 +116,9 @@ export interface GenesisOperationalProjection {
 
   historicalKnowledgeLineage:
     GenesisHistoricalKnowledgeLineageProjection;
+
+  historicalAdmissionGovernance:
+    GenesisHistoricalAdmissionGovernanceProjection;
 
   readiness:
     GenesisReadinessProjection;
@@ -305,6 +317,16 @@ export function buildGenesisOperationalProjection(
         [],
     });
 
+  const historicalAdmissionGovernance =
+    buildGenesisHistoricalAdmissionGovernanceProjection({
+      manifestEntries:
+        input.manifestEntries,
+
+      dispositions:
+        input.replayDispositions ??
+        [],
+    });
+
   const readiness =
     buildGenesisReadiness({
       policy:
@@ -346,6 +368,10 @@ export function buildGenesisOperationalProjection(
         historicalKnowledgeLineage
           .projectionId,
 
+      historicalAdmissionGovernanceProjectionId:
+        historicalAdmissionGovernance
+          .projectionId,
+
       readinessProjectionId:
         readiness.projectionId,
 
@@ -369,6 +395,8 @@ export function buildGenesisOperationalProjection(
     knowledgeLifecycle,
 
     historicalKnowledgeLineage,
+
+    historicalAdmissionGovernance,
 
     readiness,
 

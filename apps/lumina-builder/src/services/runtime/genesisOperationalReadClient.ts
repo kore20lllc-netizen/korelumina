@@ -712,6 +712,60 @@ export interface GenesisHistoricalKnowledgeLineageProjection {
   };
 }
 
+export type GenesisHistoricalAdmissionClassification =
+  | "historical-evidence-only"
+  | "historical-correlation-eligible"
+  | "knowledge-seeding-eligible"
+  | "requires-governance-review";
+
+export interface GenesisHistoricalAdmissionGovernanceRecord {
+  historicalSourceId:
+    string;
+
+  evidenceId:
+    string;
+
+  classification:
+    GenesisHistoricalAdmissionClassification;
+
+  correlationEligible:
+    boolean;
+
+  knowledgeManufacturingAuthorized:
+    boolean;
+
+  reasons:
+    readonly string[];
+}
+
+export interface GenesisHistoricalAdmissionGovernanceProjection {
+  projectionId:
+    `genesis-historical-admission-governance:${string}`;
+
+  records:
+    readonly GenesisHistoricalAdmissionGovernanceRecord[];
+
+  summary: {
+    admittedEvidence:
+      number;
+
+    historicalEvidenceOnly:
+      number;
+
+    historicalCorrelationEligible:
+      number;
+
+    knowledgeSeedingEligible:
+      number;
+
+    requiresGovernanceReview:
+      number;
+
+    knowledgeManufacturingAuthorized:
+      number;
+  };
+}
+
 export type GenesisLifecycleCorrelationStatus =
   | "correlated"
   | "not-correlated"
@@ -1105,6 +1159,9 @@ export interface GenesisOperationalProjection {
 
   historicalKnowledgeLineage:
     GenesisHistoricalKnowledgeLineageProjection;
+
+  historicalAdmissionGovernance:
+    GenesisHistoricalAdmissionGovernanceProjection;
 
   readiness:
     GenesisOperationalReadinessSummary;
