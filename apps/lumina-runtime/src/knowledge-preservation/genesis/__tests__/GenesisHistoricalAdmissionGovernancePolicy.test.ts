@@ -144,6 +144,170 @@ test(
 );
 
 test(
+  "approved documentation with complete manufacturing governance metadata may seed Knowledge",
+  () => {
+    const result =
+      classifyGenesisHistoricalAdmission(
+        source({
+          sourceType:
+            "architecture-document",
+
+          evidenceType:
+            "document",
+
+          authorityClass:
+            "architecture",
+
+          approvalState:
+            "Approved",
+
+          authorityOwner:
+            "Platform Architecture",
+
+          authorityScope:
+            "KoreLumina",
+
+          authorityVersion:
+            "1.0",
+
+          metadata: {
+            sourceLocation:
+              "docs/architecture/PLATFORM.md",
+          },
+        }),
+      );
+
+    assert.equal(
+      result.classification,
+      "knowledge-seeding-eligible",
+    );
+
+    assert.equal(
+      result.invokeKnowledgeManufacturing,
+      true,
+    );
+  },
+);
+
+test(
+  "approved documentation missing governed manufacturing metadata requires governance review",
+  () => {
+    const result =
+      classifyGenesisHistoricalAdmission(
+        source({
+          sourceType:
+            "architecture-document",
+
+          evidenceType:
+            "document",
+
+          authorityClass:
+            "architecture",
+
+          approvalState:
+            "Approved",
+
+          authorityOwner:
+            "Platform Architecture",
+
+          authorityScope:
+            undefined,
+
+          authorityVersion:
+            "1.0",
+
+          metadata: {
+            sourceLocation:
+              "docs/architecture/PLATFORM.md",
+          },
+        }),
+      );
+
+    assert.equal(
+      result.classification,
+      "requires-governance-review",
+    );
+
+    assert.equal(
+      result.invokeKnowledgeManufacturing,
+      false,
+    );
+
+    assert.equal(
+      result.correlationEligible,
+      false,
+    );
+
+    assert.ok(
+      result.reasons.some(
+        reason =>
+          reason.includes(
+            "authority scope",
+          ),
+      ),
+    );
+  },
+);
+
+test(
+  "documentation governance states accepted historically but not literally approved do not enter manufacturing",
+  () => {
+    for (
+      const approvalState
+      of [
+        "Certified",
+        "Final",
+        "Ratified",
+        "Active",
+        "Accepted",
+      ]
+    ) {
+      const result =
+        classifyGenesisHistoricalAdmission(
+          source({
+            sourceType:
+              "architecture-document",
+
+            evidenceType:
+              "document",
+
+            authorityClass:
+              "architecture",
+
+            approvalState,
+
+            authorityOwner:
+              "Platform Architecture",
+
+            authorityScope:
+              "KoreLumina",
+
+            authorityVersion:
+              "1.0",
+
+            metadata: {
+              sourceLocation:
+                "docs/architecture/PLATFORM.md",
+            },
+          }),
+        );
+
+      assert.equal(
+        result.classification,
+        "requires-governance-review",
+        approvalState,
+      );
+
+      assert.equal(
+        result.invokeKnowledgeManufacturing,
+        false,
+        approvalState,
+      );
+    }
+  },
+);
+
+test(
   "ordinary documentation without approval remains historical Evidence only",
   () => {
     const result =

@@ -260,6 +260,49 @@ export function genesisAdmissionRequestToSyntheticEvidence(
             request.manifestEntry
               .authorityClass,
 
+          approvalState:
+            request.manifestEntry
+              .approvalState,
+
+          owner:
+            request.manifestEntry
+              .authorityOwner,
+
+          scope:
+            request.manifestEntry
+              .authorityScope,
+
+          version:
+            request.manifestEntry
+              .authorityVersion,
+
+          effectiveFrom:
+            request.manifestEntry
+              .effectiveFrom,
+
+          effectiveTo:
+            request.manifestEntry
+              .effectiveTo,
+
+          sourceLocation:
+            typeof request
+              .manifestEntry
+              .metadata
+              .sourceLocation ===
+              "string"
+              ? request
+                  .manifestEntry
+                  .metadata
+                  .sourceLocation
+              : request
+                  .manifestEntry
+                  .provenanceLocator,
+
+          documentClassification:
+            request.manifestEntry
+              .metadata
+              .documentClassification,
+
           discoveryMethod:
             request.manifestEntry
               .discoveryMethod,

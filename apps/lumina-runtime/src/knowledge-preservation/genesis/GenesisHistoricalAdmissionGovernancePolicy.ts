@@ -127,6 +127,86 @@ function unresolvedApprovalState(
   );
 }
 
+function documentationManufacturingReadinessIssues(
+  source:
+    GenesisSourceManifestEntry,
+): string[] {
+  if (
+    source.evidenceType !==
+    "document"
+  ) {
+    return [];
+  }
+
+  const issues:
+    string[] = [];
+
+  const approvalState =
+    normalize(
+      source.approvalState,
+    );
+
+  /*
+   * DocumentationGovernanceValidator requires the literal
+   * approved state before a documentation package may enter
+   * Canonical Review. Other constitutionally recognized states
+   * such as certified/final remain valid historical governance
+   * observations, but they are not interchangeable with this
+   * downstream manufacturing contract.
+   */
+  if (
+    approvalState !==
+    "approved"
+  ) {
+    issues.push(
+      "Documentation Knowledge manufacturing requires explicit approvalState=approved.",
+    );
+  }
+
+  if (
+    !source.authorityOwner
+      ?.trim()
+  ) {
+    issues.push(
+      "Documentation Knowledge manufacturing requires an explicit authority owner.",
+    );
+  }
+
+  if (
+    !source.authorityScope
+      ?.trim()
+  ) {
+    issues.push(
+      "Documentation Knowledge manufacturing requires an explicit authority scope.",
+    );
+  }
+
+  if (
+    !source.authorityVersion
+      ?.trim()
+  ) {
+    issues.push(
+      "Documentation Knowledge manufacturing requires an explicit authority version.",
+    );
+  }
+
+  const sourceLocation =
+    source.metadata
+      .sourceLocation;
+
+  if (
+    typeof sourceLocation !==
+      "string" ||
+    !sourceLocation.trim()
+  ) {
+    issues.push(
+      "Documentation Knowledge manufacturing requires an explicit source location.",
+    );
+  }
+
+  return issues;
+}
+
 function decision(
   classification:
     GenesisHistoricalAdmissionClassification,
@@ -258,6 +338,25 @@ export function classifyGenesisHistoricalAdmission(
       approvalState,
     )
   ) {
+    const documentationReadinessIssues =
+      documentationManufacturingReadinessIssues(
+        source,
+      );
+
+    if (
+      documentationReadinessIssues
+        .length >
+      0
+    ) {
+      return decision(
+        "requires-governance-review",
+        [
+          "Historical documentation is approved but does not satisfy the governed Knowledge manufacturing metadata contract.",
+          ...documentationReadinessIssues,
+        ],
+      );
+    }
+
     return decision(
       "knowledge-seeding-eligible",
       [
