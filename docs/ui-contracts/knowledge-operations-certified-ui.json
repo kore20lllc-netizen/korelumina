@@ -56,8 +56,8 @@
       "elementCount": 1
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx": {
-      "sha256": "84ec58679e6f45d288c44c98104a77a046821ea0e332c8f645d4fb298683d4e7",
-      "elementCount": 47
+      "sha256": "9854ad40d1c29d44d35ca7382ef4bbfb1dcf9704a622e640991dd323993b34bb",
+      "elementCount": 48
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalDashboardMain.tsx": {
       "sha256": "021f88e6c0677426a291d687e8302f84e1183ed8b5c6a466bbd5b4cf8044ea63",
@@ -88,7 +88,7 @@
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx": {
-      "sha256": "3ad12b28ed298d1edba8819d5eac328962d3d14373ee22d3e158422910d08416",
+      "sha256": "9a0b9e023dae71a42cef5cdf1b1fe66ab53642d71ea1c2eababd1b41597a5ba1",
       "elementCount": 26
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ExecutiveEducationalSummary.tsx": {

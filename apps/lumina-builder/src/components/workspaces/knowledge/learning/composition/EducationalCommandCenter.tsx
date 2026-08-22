@@ -357,7 +357,20 @@ export function EducationalCommandCenter() {
               description={`${visibleGenesisArtifacts.length} modeled sources in the selected corpus category`}
               emphasis="strong"
             >
-              <div className="grid gap-4 p-5 md:grid-cols-2 xl:grid-cols-3">
+              <div
+                className="
+                  max-h-[760px] overflow-y-auto overflow-x-hidden
+                  overscroll-contain
+                  [scrollbar-gutter:stable]
+                  [touch-action:pan-y]
+                "
+                aria-label="Genesis source drill-down artifacts"
+                tabIndex={0}
+                onWheel={(event) => {
+                  event.stopPropagation();
+                }}
+              >
+                <div className="grid gap-4 p-5 md:grid-cols-2 xl:grid-cols-3">
                 {visibleGenesisArtifacts.map(
                   (artifact) => {
                     const selected =
@@ -458,6 +471,7 @@ export function EducationalCommandCenter() {
                     </p>
                   </div>
                 ) : null}
+                </div>
               </div>
               </LuminaFlagshipPanel>
             </div>

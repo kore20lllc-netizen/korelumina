@@ -126,7 +126,20 @@ export function EducationalTimeline({
         {events.length} modeled educational timeline events visible
       </div>
 
-      <div className="relative space-y-3.5 p-5">
+      <div
+        className="
+          relative max-h-[760px]
+          space-y-3.5 overflow-y-auto overflow-x-hidden
+          overscroll-contain p-5
+          [scrollbar-gutter:stable]
+          [touch-action:pan-y]
+        "
+        aria-label="Educational timeline events"
+        tabIndex={0}
+        onWheel={(event) => {
+          event.stopPropagation();
+        }}
+      >
         <div
           aria-hidden="true"
           className="
