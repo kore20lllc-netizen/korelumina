@@ -271,6 +271,214 @@ test(
 );
 
 test(
+  "does not collapse distinct commits that reuse the same subject into one logical Source",
+  () => {
+    const execution =
+      fixture();
+
+    execution.manifest.entries = [
+      {
+        historicalSourceId:
+          "genesis-source:commit:first",
+
+        sourceType:
+          "commit",
+
+        evidenceType:
+          "commit",
+
+        authorityClass:
+          "repository-history",
+
+        provenanceLocator:
+          "git:commit:first",
+
+        sourceChecksum:
+          "checksum-first",
+
+        historicalTimestamp:
+          10,
+
+        historicalTimestampSource:
+          "git",
+
+        discoveredAt:
+          30,
+
+        discoveryMethod:
+          "test",
+
+        replayEligibility:
+          "eligible",
+
+        supersedes:
+          [],
+
+        conflictsWith:
+          [],
+
+        metadata: {
+          subject:
+            "fix(knowledge): preserve inspector close state",
+        },
+      },
+      {
+        historicalSourceId:
+          "genesis-source:commit:second",
+
+        sourceType:
+          "commit",
+
+        evidenceType:
+          "commit",
+
+        authorityClass:
+          "repository-history",
+
+        provenanceLocator:
+          "git:commit:second",
+
+        sourceChecksum:
+          "checksum-second",
+
+        historicalTimestamp:
+          20,
+
+        historicalTimestampSource:
+          "git",
+
+        discoveredAt:
+          30,
+
+        discoveryMethod:
+          "test",
+
+        replayEligibility:
+          "eligible",
+
+        supersedes:
+          [],
+
+        conflictsWith:
+          [],
+
+        metadata: {
+          subject:
+            "fix(knowledge): preserve inspector close state",
+        },
+      },
+    ];
+
+    execution.state.dispositions = [
+      {
+        historicalSourceId:
+          "genesis-source:commit:first",
+
+        disposition:
+          "ADMITTED",
+
+        evidenceId:
+          "evidence:first",
+      },
+      {
+        historicalSourceId:
+          "genesis-source:commit:second",
+
+        disposition:
+          "ADMITTED",
+
+        evidenceId:
+          "evidence:second",
+      },
+    ];
+
+    execution.state.lastCompletedManifestIndex =
+      1;
+
+    const state =
+      materializeGenesisHistoricalCorrelation(
+        execution,
+      );
+
+    assert.equal(
+      state.sourceReferences.length,
+      2,
+    );
+
+    assert.equal(
+      state.events.length,
+      2,
+    );
+
+    assert.equal(
+      state.episodes.length,
+      0,
+    );
+
+    assert.notEqual(
+      state.sourceReferences[0]
+        ?.sourceReferenceId,
+      state.sourceReferences[1]
+        ?.sourceReferenceId,
+    );
+
+    assert.deepEqual(
+      state.sourceReferences
+        .map(
+          source =>
+            source.sourceIdentity,
+        )
+        .sort(),
+      [
+        "genesis-source:commit:first",
+        "genesis-source:commit:second",
+      ],
+    );
+
+    for (
+      const source
+      of state.sourceReferences
+    ) {
+      const matchingEvents =
+        state.events.filter(
+          event =>
+            event.sourceReferenceIds.includes(
+              source.sourceReferenceId,
+            ),
+        );
+
+      assert.equal(
+        matchingEvents.length,
+        1,
+      );
+    }
+
+    assert.deepEqual(
+      state.events
+        .map(
+          event =>
+            event.observationKey,
+        )
+        .sort(),
+      [
+        "genesis-source:commit:first",
+        "genesis-source:commit:second",
+      ],
+    );
+
+    assert.equal(
+      new Set(
+        state.events.flatMap(
+          event =>
+            event.sourceReferenceIds,
+        ),
+      ).size,
+      2,
+    );
+  },
+);
+
+test(
   "creates an Evolution Episode from an explicit semantic source relationship",
   () => {
     const execution =

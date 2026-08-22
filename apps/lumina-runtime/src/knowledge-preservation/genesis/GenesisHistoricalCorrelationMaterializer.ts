@@ -189,6 +189,26 @@ function sourceIdentity(
   entry:
     GenesisSourceManifestEntry,
 ): string {
+  /*
+   * A Git commit is itself the authoritative historical object.
+   *
+   * Commit subjects are descriptive labels, not logical Source
+   * identities. Two independent commits may legitimately reuse
+   * the same subject. Collapsing them by subject would fabricate
+   * a revision relationship and can incorrectly materialize an
+   * Evolution Episode.
+   *
+   * The Historical Source ID already embeds the deterministic
+   * commit identity established by discovery.
+   */
+  if (
+    entry.sourceType ===
+    "commit"
+  ) {
+    return entry
+      .historicalSourceId;
+  }
+
   return (
     stringMetadata(
       entry,
