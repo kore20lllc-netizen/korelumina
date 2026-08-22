@@ -80,6 +80,8 @@ import {
 import {
   AutonomousGovernanceCycleOrchestrator,
   DelegatingGovernanceReadySignalPublisher,
+  GovernanceReadyRecoveryScheduler,
+  GovernanceReadyRecoverySweep,
   GovernanceReadyRuntimeConsumer,
 } from "./knowledge-preservation/governance/index.js";
 
@@ -317,6 +319,65 @@ export const runtimeGovernanceReadyConsumer =
 runtimeGovernanceReadySignalPublisher
   .setDelegate(
     runtimeGovernanceReadyConsumer,
+  );
+
+export const runtimeGovernanceReadyRecoverySweep =
+  new GovernanceReadyRecoverySweep(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+    runtimeKnowledgePreservationPlatform
+      .manufacturingRunService,
+    runtimeGovernanceReadyConsumer,
+  );
+
+export const runtimeGovernanceReadyRecoveryScheduler =
+  new GovernanceReadyRecoveryScheduler(
+    runtimeGovernanceReadyRecoverySweep,
+    {
+      intervalMs:
+        5 * 60 * 1000,
+
+      runImmediately:
+        true,
+
+      onResult:
+        (result) => {
+          if (
+            result.recovered >
+              0 ||
+            result.exceptions >
+              0
+          ) {
+            console.log(
+              "[knowledge-governance] recovery sweep",
+              {
+                scanned:
+                  result.scanned,
+
+                recoverable:
+                  result.recoverable,
+
+                recovered:
+                  result.recovered,
+
+                ignored:
+                  result.ignored,
+
+                exceptions:
+                  result.exceptions,
+              },
+            );
+          }
+        },
+
+      onError:
+        (error) => {
+          console.error(
+            "[knowledge-governance] recovery sweep failed",
+            error,
+          );
+        },
+    },
   );
 
 const knowledgeContextBuilder =
@@ -899,6 +960,16 @@ if (shouldBootstrap) {
   backfillMissingProjectMetadata();
   await recoverPersistedRuntimes();
   startRuntimeSupervisor();
+
+  /*
+   * Event-driven governance is primary.
+   *
+   * Recovery executes once at Runtime startup and then every
+   * five minutes only to recover packages stranded by a lost
+   * in-process governance-ready signal or Runtime crash.
+   */
+  runtimeGovernanceReadyRecoveryScheduler
+    .start();
 } else {
   console.warn(
     "[lumina-runtime] bootstrap already claimed; skipping recovery/supervisor",
@@ -925,6 +996,9 @@ async function shutdown(signal: string) {
   );
 
   stopRuntimeSupervisor();
+
+  runtimeGovernanceReadyRecoveryScheduler
+    .stop();
 
   await stopAllWorkspaceWatchers();
 
