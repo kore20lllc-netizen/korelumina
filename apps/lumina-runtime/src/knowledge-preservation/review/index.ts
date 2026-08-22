@@ -4,3 +4,4 @@ export * from "./CanonicalReviewPolicyStore.js";
 export * from "./CanonicalReviewService.js";
 export * from "./CanonicalReviewPolicyAdministrationService.js";
 export * from "./CanonicalReviewPolicyExecutionService.js";
+export * from "./CanonicalReviewPolicyBindingService.js";
