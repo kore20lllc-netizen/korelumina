@@ -46,6 +46,14 @@ import {
   CanonicalKnowledgeStore,
 } from "../../canonical-knowledge/index.js";
 
+import type {
+  GovernanceReadySignalPublisher,
+} from "../governance/index.js";
+
+import {
+  NoopGovernanceReadySignalPublisher,
+} from "../governance/index.js";
+
 const COMPILER_STAGES: readonly {
   stage:
     KnowledgeManufacturingStage;
@@ -153,6 +161,16 @@ function compilerDisplayName(
 }
 
 export class KnowledgePreservationPlatform {
+  constructor(
+    private readonly governanceReadySignalPublisher:
+      GovernanceReadySignalPublisher =
+        new NoopGovernanceReadySignalPublisher(),
+
+    private readonly now:
+      () => number =
+        () => Date.now(),
+  ) {}
+
   readonly compilerRegistry =
     new KnowledgeCompilerRegistry();
 
@@ -563,16 +581,54 @@ export class KnowledgePreservationPlatform {
      * Entering the station is automatic because package
      * assembly has completed. Crossing the station is not.
      */
-    this.manufacturingRunService.advance(
-      runId,
-      {
-        outcome:
-          "awaiting_human_review",
+    const parkedRun =
+      this.manufacturingRunService.advance(
+        runId,
+        {
+          outcome:
+            "awaiting_human_review",
 
-        detail:
-          "Knowledge Package is awaiting explicit human canonical review.",
-      },
-    );
+          detail:
+            "Knowledge Package is awaiting explicit human canonical review.",
+        },
+      );
+
+    /*
+     * Manufacturing announces only that durable package state
+     * has reached the governance boundary.
+     *
+     * It does not select policy, approve review, or promote
+     * Canonical Knowledge.
+     */
+    if (
+      knowledgePackage.state ===
+        "awaiting_review" &&
+      knowledgePackage.approvalState ===
+        "pending_review" &&
+      typeof knowledgePackage.version ===
+        "string" &&
+      knowledgePackage.version.trim() &&
+      parkedRun.currentStage ===
+        "Canonical Review"
+    ) {
+      this.governanceReadySignalPublisher
+        .publish({
+          packageId:
+            knowledgePackage.id,
+
+          packageVersion:
+            knowledgePackage.version,
+
+          manufacturingRunId:
+            parkedRun.id,
+
+          evidenceId:
+            evidence.id,
+
+          emittedAt:
+            this.now(),
+        });
+    }
 
     /*
      * Canonical Review and Canonical Knowledge MUST NOT be

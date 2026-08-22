@@ -26,9 +26,22 @@ import {
   DocumentationGovernanceValidator,
 } from "../validation/documentation/index.js";
 
-export function createKnowledgePreservationPlatform() {
+import type {
+  GovernanceReadySignalPublisher,
+} from "../governance/index.js";
+
+export function createKnowledgePreservationPlatform(
+  governanceReadySignalPublisher?:
+    GovernanceReadySignalPublisher,
+
+  now?:
+    () => number,
+) {
   const platform =
-    new KnowledgePreservationPlatform();
+    new KnowledgePreservationPlatform(
+      governanceReadySignalPublisher,
+      now,
+    );
 
   platform.compilerRegistry.register(
     new GitCompiler(),
