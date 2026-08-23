@@ -35,6 +35,7 @@ import { registerCanonicalReviewBatchRoutes } from "./routes/knowledge/registerC
 import { registerCanonicalPromotionRoutes } from "./routes/knowledge/registerCanonicalPromotionRoutes.js";
 import { registerAutonomousCanonicalPromotionRoutes } from "./routes/knowledge/registerAutonomousCanonicalPromotionRoutes.js";
 import { registerAutonomousGovernanceCycleRoutes } from "./routes/knowledge/registerAutonomousGovernanceCycleRoutes.js";
+import { registerLegacyHistoricalReconciliationRoutes } from "./routes/knowledge/registerLegacyHistoricalReconciliationRoutes.js";
 import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge/registerOrganizationalMemoryAdaptationRoutes.js";
 import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
@@ -79,6 +80,9 @@ import {
 
 import {
   AutonomousGovernanceCycleOrchestrator,
+  LegacyHistoricalReconciliationOrchestrator,
+  LegacyHistoricalReconciliationService,
+  VerifiedGenesisHistoricalCorrelationResolver,
   DelegatingGovernanceReadySignalPublisher,
   GovernanceReadyRecoveryScheduler,
   GovernanceReadyRecoverySweep,
@@ -306,6 +310,25 @@ export const runtimeAutonomousGovernanceCycleOrchestrator =
     runtimeCanonicalReviewPolicyExecutionService,
     runtimeAutonomousGovernedPromotionExecutor,
   );
+
+export const runtimeLegacyHistoricalReconciliationResolver =
+  new VerifiedGenesisHistoricalCorrelationResolver(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+  );
+
+export const runtimeLegacyHistoricalReconciliationService =
+  new LegacyHistoricalReconciliationService(
+    runtimeKnowledgePreservationPlatform
+      .packageService,
+  );
+
+export const runtimeLegacyHistoricalReconciliationOrchestrator =
+  new LegacyHistoricalReconciliationOrchestrator(
+    runtimeLegacyHistoricalReconciliationResolver,
+    runtimeLegacyHistoricalReconciliationService,
+  );
+
 
 export const runtimeGovernanceReadyConsumer =
   new GovernanceReadyRuntimeConsumer(
@@ -776,6 +799,15 @@ registerAutonomousGovernanceCycleRoutes(
       runtimeAutonomousGovernanceCycleOrchestrator,
   },
 );
+
+registerLegacyHistoricalReconciliationRoutes(
+  app,
+  {
+    orchestrator:
+      runtimeLegacyHistoricalReconciliationOrchestrator,
+  },
+);
+
 
 registerOrganizationalMemoryAdaptationRoutes(
   app,
