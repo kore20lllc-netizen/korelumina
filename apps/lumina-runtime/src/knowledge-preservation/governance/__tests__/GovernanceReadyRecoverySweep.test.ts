@@ -417,6 +417,164 @@ test(
 );
 
 test(
+  "archived legacy historical reconciliation is never reconsidered",
+  () => {
+    const packageId =
+      `PKG-ARCHIVED-LEGACY-${suffix}`;
+
+    let runReads =
+      0;
+
+    let consumerCalls =
+      0;
+
+    const result =
+      new GovernanceReadyRecoverySweep(
+        {
+          list() {
+            return [
+              knowledgePackage(
+                packageId,
+                {
+                  state:
+                    "archived",
+
+                  approvalState:
+                    "pending_review",
+
+                  authority:
+                    null,
+
+                  owner:
+                    null,
+
+                  scope:
+                    null,
+
+                  version:
+                    null,
+
+                  metadata: {
+                    governanceException: {
+                      type:
+                        "incomplete_governance_identity",
+
+                      disposition:
+                        "manual_reclassification_required",
+
+                      source:
+                        "legacy_governance_identity_audit",
+
+                      recordedAt:
+                        2000,
+
+                      recordedBy:
+                        "human:founder",
+                    },
+
+                    historicalReconciliation: {
+                      disposition:
+                        "represented_as_genesis_historical_correlation",
+
+                      replayId:
+                        "genesis-replay:test",
+
+                      evidenceId:
+                        "genesis-evidence:test",
+
+                      historicalSourceId:
+                        "genesis-source:commit:test",
+
+                      sourceReferenceId:
+                        "genesis-source-ref:test",
+
+                      sourceRevisionId:
+                        "genesis-source-revision:test",
+
+                      eventId:
+                        "genesis-event:test",
+
+                      eventKind:
+                        "implementation-committed",
+
+                      sourceChecksum:
+                        "sha256:test",
+
+                      reconciledAt:
+                        3000,
+
+                      reconciledBy:
+                        "human:founder",
+                    },
+                  },
+                },
+              ),
+            ];
+          },
+        },
+
+        {
+          findByPackageId() {
+            runReads +=
+              1;
+
+            throw new Error(
+              "must_not_read_manufacturing_run",
+            );
+          },
+        },
+
+        {
+          consume() {
+            consumerCalls +=
+              1;
+
+            throw new Error(
+              "must_not_consume",
+            );
+          },
+        },
+      ).execute();
+
+    assert.equal(
+      result.scanned,
+      0,
+    );
+
+    assert.equal(
+      result.recoverable,
+      0,
+    );
+
+    assert.equal(
+      result.recovered,
+      0,
+    );
+
+    assert.equal(
+      result.ignored,
+      0,
+    );
+
+    assert.equal(
+      result.exceptions,
+      0,
+    );
+
+    assert.equal(
+      runReads,
+      0,
+    );
+
+    assert.equal(
+      consumerCalls,
+      0,
+    );
+  },
+);
+
+
+test(
   "awaiting package without manufacturing run becomes exception",
   () => {
     const packageId =
