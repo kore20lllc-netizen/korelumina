@@ -598,3 +598,191 @@ test(
     );
   },
 );
+
+
+test(
+  "equivalent repeated replay occurrences collapse deterministically",
+  () => {
+    const value =
+      fixture();
+
+    const secondReplayId =
+      (
+        "genesis-replay:" +
+        "7".repeat(64)
+      ) as GenesisReplayId;
+
+    const secondExecution =
+      structuredClone(
+        value.execution,
+      );
+
+    secondExecution.plan.replayId =
+      secondReplayId;
+
+    const packageService = {
+      get() {
+        return value
+          .knowledgePackage;
+      },
+    };
+
+    const replayReader = {
+      listReplayIds() {
+        return [
+          secondReplayId,
+          REPLAY_ID,
+        ];
+      },
+
+      loadExecution(
+        replayId:
+          GenesisReplayId,
+      ) {
+        if (
+          replayId ===
+            REPLAY_ID
+        ) {
+          return value.execution;
+        }
+
+        if (
+          replayId ===
+            secondReplayId
+        ) {
+          return secondExecution;
+        }
+
+        return null;
+      },
+    };
+
+    const correlationReader = {
+      load(
+        replayId:
+          GenesisReplayId,
+      ) {
+        return (
+          replayId ===
+            REPLAY_ID ||
+          replayId ===
+            secondReplayId
+        )
+          ? value.correlation
+          : null;
+      },
+    };
+
+    const resolver =
+      new VerifiedGenesisHistoricalCorrelationResolver(
+        packageService as never,
+        replayReader,
+        correlationReader,
+      );
+
+    const proof =
+      resolver.resolveForPackage(
+        "KP-2026-000009",
+      );
+
+    assert.equal(
+      proof.replayId,
+      [
+        REPLAY_ID,
+        secondReplayId,
+      ].sort()[0],
+    );
+
+    assert.equal(
+      proof.evidenceId,
+      value.evidenceId,
+    );
+
+    assert.equal(
+      proof.historicalSourceId,
+      HISTORICAL_SOURCE_ID,
+    );
+
+    assert.equal(
+      proof.sourceChecksum,
+      CHECKSUM,
+    );
+  },
+);
+
+
+test(
+  "conflicting repeated replay occurrence still fails closed",
+  () => {
+    const value =
+      fixture();
+
+    const secondReplayId =
+      (
+        "genesis-replay:" +
+        "8".repeat(64)
+      ) as GenesisReplayId;
+
+    const secondExecution =
+      structuredClone(
+        value.execution,
+      );
+
+    secondExecution.plan.replayId =
+      secondReplayId;
+
+    secondExecution
+      .manifest
+      .entries[0]
+      .provenanceLocator =
+      "git:commit:" +
+      "9".repeat(40);
+
+    const packageService = {
+      get() {
+        return value
+          .knowledgePackage;
+      },
+    };
+
+    const replayReader = {
+      listReplayIds() {
+        return [
+          REPLAY_ID,
+          secondReplayId,
+        ];
+      },
+
+      loadExecution(
+        replayId:
+          GenesisReplayId,
+      ) {
+        return replayId ===
+          REPLAY_ID
+          ? value.execution
+          : secondExecution;
+      },
+    };
+
+    const correlationReader = {
+      load() {
+        return value.correlation;
+      },
+    };
+
+    const resolver =
+      new VerifiedGenesisHistoricalCorrelationResolver(
+        packageService as never,
+        replayReader,
+        correlationReader,
+      );
+
+    assert.throws(
+      () =>
+        resolver.resolveForPackage(
+          "KP-2026-000009",
+        ),
+      /evidence_identity_mismatch|replay_ambiguous/,
+    );
+  },
+);

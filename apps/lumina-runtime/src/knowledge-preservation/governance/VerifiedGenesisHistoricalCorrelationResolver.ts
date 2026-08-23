@@ -295,12 +295,203 @@ export class VerifiedGenesisHistoricalCorrelationResolver {
       }
     }
 
-    const replayMatch =
-      exactlyOne(
-        replayMatches,
+    if (
+      replayMatches.length ===
+        0
+    ) {
+      throw new Error(
         "verified_genesis_historical_correlation_replay_disposition_not_found",
+      );
+    }
+
+    /*
+     * Genesis synthetic Evidence identity is replay-independent.
+     * The same historical source may therefore be ADMITTED by
+     * multiple replay executions without representing multiple
+     * historical facts.
+     *
+     * Collapse repeated occurrences only when every persisted
+     * occurrence proves the same source identity, checksum,
+     * provenance locator, evidence type, and source type.
+     * Any disagreement remains a fail-closed ambiguity.
+     */
+    const replayProofs =
+      replayMatches.map(
+        (
+          match,
+        ) => {
+          const manifestMatches =
+            match
+              .execution
+              .manifest
+              .entries
+              .map(
+                (
+                  manifestEntry,
+                  manifestIndex,
+                ) => ({
+                  manifestEntry,
+                  manifestIndex,
+                }),
+              )
+              .filter(
+                (
+                  candidate,
+                ) =>
+                  candidate
+                    .manifestEntry
+                    .historicalSourceId ===
+                    match.historicalSourceId,
+              );
+
+          const {
+            manifestEntry,
+            manifestIndex,
+          } =
+            exactlyOne(
+              manifestMatches,
+              "verified_genesis_historical_correlation_manifest_entry_not_found",
+              "verified_genesis_historical_correlation_manifest_entry_ambiguous",
+            );
+
+          const planEntry =
+            match
+              .execution
+              .plan
+              .entries[
+                manifestIndex
+              ];
+
+          if (
+            !planEntry ||
+            planEntry
+              .historicalSourceId !==
+              match.historicalSourceId ||
+            planEntry.action !==
+              "ADMIT" ||
+            planEntry
+              .sourceChecksum !==
+              manifestEntry
+                .sourceChecksum
+          ) {
+            throw new Error(
+              "verified_genesis_historical_correlation_plan_manifest_mismatch",
+            );
+          }
+
+          if (
+            manifestEntry
+              .sourceType !==
+              "commit" ||
+            manifestEntry
+              .evidenceType !==
+              "commit"
+          ) {
+            throw new Error(
+              "verified_genesis_historical_correlation_commit_source_required",
+            );
+          }
+
+          const admissionIdentity =
+            createGenesisReplayAdmissionIdentity({
+              replayId:
+                match.replayId,
+
+              manifestId:
+                match
+                  .execution
+                  .manifest
+                  .manifestId,
+
+              repository:
+                match
+                  .execution
+                  .manifest
+                  .scope
+                  .repository,
+
+              manifestIndex,
+
+              planEntry,
+
+              manifestEntry,
+            });
+
+          if (
+            createGenesisSyntheticEvidenceId(
+              admissionIdentity,
+            ) !==
+            evidenceId
+          ) {
+            throw new Error(
+              "verified_genesis_historical_correlation_evidence_identity_mismatch",
+            );
+          }
+
+          return {
+            ...match,
+
+            signature:
+              JSON.stringify({
+                historicalSourceId:
+                  match.historicalSourceId,
+
+                sourceChecksum:
+                  manifestEntry
+                    .sourceChecksum,
+
+                provenanceLocator:
+                  manifestEntry
+                    .provenanceLocator,
+
+                sourceType:
+                  manifestEntry
+                    .sourceType,
+
+                evidenceType:
+                  manifestEntry
+                    .evidenceType,
+              }),
+          };
+        },
+      );
+
+    const proofSignatures =
+      new Set(
+        replayProofs.map(
+          (
+            match,
+          ) =>
+            match.signature,
+        ),
+      );
+
+    if (
+      proofSignatures.size !==
+        1
+    ) {
+      throw new Error(
         "verified_genesis_historical_correlation_replay_ambiguous",
       );
+    }
+
+    /*
+     * Replay occurrence identity is not part of the historical
+     * fact. Select deterministically so reconciliation metadata
+     * remains stable across reruns and process restarts.
+     */
+    const replayMatch =
+      [...replayProofs]
+        .sort(
+          (
+            left,
+            right,
+          ) =>
+            left.replayId
+              .localeCompare(
+                right.replayId,
+              ),
+        )[0];
 
     const {
       replayId,
