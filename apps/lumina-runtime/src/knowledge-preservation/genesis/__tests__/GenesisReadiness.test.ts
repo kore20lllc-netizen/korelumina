@@ -142,6 +142,23 @@ function corpus():
         totalManifestSources:
           2,
 
+        progress: {
+          totalSources:
+            2,
+
+          completedSources:
+            2,
+
+          admittedSources:
+            1,
+
+          skippedSources:
+            1,
+
+          blockedSources:
+            0,
+        },
+
         admittedEvidenceIds: [
           "evidence:1",
         ],
@@ -591,7 +608,7 @@ test(
 );
 
 test(
-  "exact replayed source count remains unavailable",
+  "exact persisted replay progress is projected into readiness",
   () => {
     const readiness =
       buildGenesisReadiness(
@@ -599,15 +616,308 @@ test(
       );
 
     assert.equal(
+      readiness.replay.state,
+      "complete",
+    );
+
+    assert.equal(
+      readiness.replay
+        .totalSources,
+      2,
+    );
+
+    assert.equal(
+      readiness.replay
+        .completedSources,
+      2,
+    );
+
+    assert.equal(
+      readiness.replay
+        .admittedSources,
+      1,
+    );
+
+    assert.equal(
+      readiness.replay
+        .skippedSources,
+      1,
+    );
+
+    assert.equal(
+      readiness.replay
+        .blockedSources,
+      0,
+    );
+
+    assert.equal(
       readiness.replay
         .sourcesReplayed,
-      null,
+      2,
     );
 
     assert.equal(
       readiness.replay
         .sourcesReplayedMeasurement,
-      "unavailable",
+      "exact",
+    );
+
+    assert.equal(
+      readiness.replay
+        .completedSources,
+      readiness.replay
+        .admittedSources! +
+        readiness.replay
+          .skippedSources! +
+        readiness.replay
+          .blockedSources!,
+    );
+
+    assert.equal(
+      readiness.blockers.some(
+        item =>
+          item.code ===
+          "replayed-source-count-unavailable",
+      ),
+      false,
+    );
+  },
+);
+
+
+test(
+  "blocked source does not report clean replay completeness",
+  () => {
+    const value =
+      input();
+
+    value.corpus = {
+      ...value.corpus,
+
+      replays: [
+        {
+          ...value.corpus
+            .replays[0],
+
+          executionStatus:
+            "blocked",
+
+          replayCorpusStatus:
+            "BLOCKED",
+
+          progress: {
+            totalSources:
+              2,
+
+            completedSources:
+              2,
+
+            admittedSources:
+              1,
+
+            skippedSources:
+              0,
+
+            blockedSources:
+              1,
+          },
+        },
+      ],
+    };
+
+    const replay =
+      buildGenesisReadiness(
+        value,
+      ).replay;
+
+    assert.equal(
+      replay.state,
+      "blocked",
+    );
+
+    assert.equal(
+      replay.blockedSources,
+      1,
+    );
+
+    assert.equal(
+      replay.sourcesReplayedMeasurement,
+      "exact",
+    );
+  },
+);
+
+
+test(
+  "partial replay preserves exact progress without masquerading as complete",
+  () => {
+    const value =
+      input();
+
+    value.corpus = {
+      ...value.corpus,
+
+      replays: [
+        {
+          ...value.corpus
+            .replays[0],
+
+          executionStatus:
+            "running",
+
+          replayCorpusStatus:
+            "PARTIAL",
+
+          progress: {
+            totalSources:
+              2,
+
+            completedSources:
+              1,
+
+            admittedSources:
+              1,
+
+            skippedSources:
+              0,
+
+            blockedSources:
+              0,
+          },
+        },
+      ],
+    };
+
+    const replay =
+      buildGenesisReadiness(
+        value,
+      ).replay;
+
+    assert.equal(
+      replay.state,
+      "partial",
+    );
+
+    assert.equal(
+      replay.sourcesReplayed,
+      1,
+    );
+
+    assert.equal(
+      replay.sourcesReplayedMeasurement,
+      "exact",
+    );
+  },
+);
+
+
+test(
+  "inconsistent replay progress fails closed",
+  () => {
+    const value =
+      input();
+
+    value.corpus = {
+      ...value.corpus,
+
+      replays: [
+        {
+          ...value.corpus
+            .replays[0],
+
+          progress: {
+            totalSources:
+              2,
+
+            completedSources:
+              2,
+
+            admittedSources:
+              1,
+
+            skippedSources:
+              0,
+
+            blockedSources:
+              0,
+          },
+        },
+      ],
+    };
+
+    assert.throws(
+      () =>
+        buildGenesisReadiness(
+          value,
+        ),
+      /replay_progress_disposition_count_mismatch/,
+    );
+  },
+);
+
+
+test(
+  "repository replay coverage is independent of downstream knowledge and external conversation completeness",
+  () => {
+    const baseline =
+      input();
+
+    const expected =
+      buildGenesisReadiness(
+        baseline,
+      ).replay;
+
+    const changed =
+      input();
+
+    changed.knowledgeLifecycle = {
+      ...changed.knowledgeLifecycle,
+
+      summary: {
+        ...changed
+          .knowledgeLifecycle
+          .summary,
+
+        packaged:
+          0,
+
+        canonical:
+          0,
+
+        memoryCorrelatedCanonicalItems:
+          0,
+
+        memoryAdaptationValidated:
+          0,
+
+        educationalEligibilityEvaluated:
+          0,
+      },
+    };
+
+    changed.corpus = {
+      ...changed.corpus,
+
+      externalContext: {
+        pendingEpisodes:
+          3,
+
+        notYetIngestedConversationSources:
+          7,
+
+        externalSourceReferences:
+          7,
+
+        complete:
+          false,
+      },
+    };
+
+    assert.deepEqual(
+      buildGenesisReadiness(
+        changed,
+      ).replay,
+      expected,
     );
   },
 );
@@ -1281,47 +1591,77 @@ test(
 );
 
 test(
-  "otherwise complete reconstruction cannot report ready while exact replay coverage is unavailable",
+  "otherwise complete reconstruction uses exact persisted replay coverage",
   () => {
+    const value =
+      input();
+
+    value.policy = {
+      ...value.policy,
+
+      requiredSourceClasses: [
+        "architecture-document",
+        "commit",
+      ],
+    };
+
     const readiness =
       buildGenesisReadiness(
-        input(),
+        value,
       );
 
     assert.equal(
       readiness.replay
-        .completedReplays,
-      1,
-    );
-
-    assert.equal(
-      readiness.replay
         .sourcesReplayed,
-      null,
+      2,
     );
 
     assert.equal(
       readiness.replay
         .sourcesReplayedMeasurement,
-      "unavailable",
+      "exact",
     );
 
     assert.equal(
-      readiness.overall,
-      "incomplete",
+      readiness.replay
+        .completedSources,
+      2,
     );
 
-    assert.ok(
+    assert.equal(
+      readiness.replay
+        .totalSources,
+      2,
+    );
+
+    assert.equal(
+      readiness.replay
+        .admittedSources! +
+        readiness.replay
+          .skippedSources! +
+        readiness.replay
+          .blockedSources!,
+      readiness.replay
+        .completedSources,
+    );
+
+    assert.equal(
+      readiness.replay
+        .blockedSources,
+      0,
+    );
+
+    assert.equal(
       readiness.blockers.some(
-        (
-          blocker,
-        ) =>
-          blocker.code ===
+        item =>
+          item.code ===
           "replayed-source-count-unavailable",
       ),
+      false,
     );
   },
 );
+
 
 test(
   "policy-required conversation coverage prevents ready state even when repository-native dimensions are complete",

@@ -96,11 +96,27 @@ export interface GenesisReplayCoverageReadiness {
   manifestSources:
     number;
 
+  totalSources:
+    number | null;
+
+  completedSources:
+    number | null;
+
+  admittedSources:
+    number | null;
+
+  skippedSources:
+    number | null;
+
+  blockedSources:
+    number | null;
+
   sourcesReplayed:
     number | null;
 
   sourcesReplayedMeasurement:
-    "unavailable";
+    | "exact"
+    | "unavailable";
 }
 
 export interface GenesisKnowledgeReadiness {
@@ -460,64 +476,222 @@ function replayCoverage(
 ): GenesisReplayCoverageReadiness {
   const completedReplays =
     corpus.replays.filter(
-      (
-        replay,
-      ) =>
+      replay =>
         replay.executionStatus ===
         "completed",
     ).length;
 
   const blockedReplays =
     corpus.replays.filter(
-      (
-        replay,
-      ) =>
+      replay =>
         replay.executionStatus ===
         "blocked",
     ).length;
 
   const failedReplays =
     corpus.replays.filter(
-      (
-        replay,
-      ) =>
+      replay =>
         replay.executionStatus ===
         "failed",
     ).length;
 
   const runningReplays =
     corpus.replays.filter(
-      (
-        replay,
-      ) =>
+      replay =>
         replay.executionStatus ===
         "running",
     ).length;
 
   const pendingReplays =
     corpus.replays.filter(
-      (
-        replay,
-      ) =>
+      replay =>
         replay.executionStatus ===
         "pending",
     ).length;
 
-  return {
-    state:
-      blockedReplays >
-        0 ||
-      failedReplays >
-        0
+  const manifestSources =
+    corpus.replays.reduce(
+      (
+        total,
+        replay,
+      ) =>
+        total +
+        replay.totalManifestSources,
+      0,
+    );
+
+  /*
+   * Repository replay coverage measures the persisted execution
+   * of the governed replay scope only.
+   *
+   * Conversations remain first-class Genesis Evidence through
+   * their separate governed external acquisition boundary.
+   * Repository replay completeness must never be interpreted as
+   * conversation or broader Educational Corpus completeness.
+   */
+  for (
+    const replay
+    of corpus.replays
+  ) {
+    const progress =
+      replay.progress;
+
+    if (!progress) {
+      continue;
+    }
+
+    if (
+      progress.totalSources !==
+        replay.totalManifestSources
+    ) {
+      throw new Error(
+        "genesis_readiness_replay_progress_total_mismatch",
+      );
+    }
+
+    if (
+      progress.completedSources !==
+        progress.admittedSources +
+          progress.skippedSources +
+          progress.blockedSources
+    ) {
+      throw new Error(
+        "genesis_readiness_replay_progress_disposition_count_mismatch",
+      );
+    }
+
+    if (
+      progress.totalSources < 0 ||
+      progress.completedSources < 0 ||
+      progress.admittedSources < 0 ||
+      progress.skippedSources < 0 ||
+      progress.blockedSources < 0 ||
+      progress.completedSources >
+        progress.totalSources
+    ) {
+      throw new Error(
+        "genesis_readiness_replay_progress_invalid",
+      );
+    }
+
+    if (
+      replay.executionStatus ===
+        "completed" &&
+      (
+        progress.completedSources !==
+          progress.totalSources ||
+        progress.blockedSources !==
+          0 ||
+        replay.replayCorpusStatus !==
+          "COMPLETE"
+      )
+    ) {
+      throw new Error(
+        "genesis_readiness_completed_replay_progress_invalid",
+      );
+    }
+  }
+
+  const exactMeasurement =
+    corpus.replays.length > 0 &&
+    corpus.replays.every(
+      replay =>
+        replay.progress !==
+        null,
+    );
+
+  const totalSources =
+    exactMeasurement
+      ? corpus.replays.reduce(
+          (
+            total,
+            replay,
+          ) =>
+            total +
+            replay.progress!
+              .totalSources,
+          0,
+        )
+      : null;
+
+  const completedSources =
+    exactMeasurement
+      ? corpus.replays.reduce(
+          (
+            total,
+            replay,
+          ) =>
+            total +
+            replay.progress!
+              .completedSources,
+          0,
+        )
+      : null;
+
+  const admittedSources =
+    exactMeasurement
+      ? corpus.replays.reduce(
+          (
+            total,
+            replay,
+          ) =>
+            total +
+            replay.progress!
+              .admittedSources,
+          0,
+        )
+      : null;
+
+  const skippedSources =
+    exactMeasurement
+      ? corpus.replays.reduce(
+          (
+            total,
+            replay,
+          ) =>
+            total +
+            replay.progress!
+              .skippedSources,
+          0,
+        )
+      : null;
+
+  const blockedSources =
+    exactMeasurement
+      ? corpus.replays.reduce(
+          (
+            total,
+            replay,
+          ) =>
+            total +
+            replay.progress!
+              .blockedSources,
+          0,
+        )
+      : null;
+
+  const state:
+    GenesisReadinessDimensionState =
+      blockedReplays > 0 ||
+      failedReplays > 0 ||
+      (
+        blockedSources !==
+          null &&
+        blockedSources > 0
+      )
         ? "blocked"
-        : corpus.replays
-              .length ===
-            0 ||
-          completedReplays !==
-            corpus.replays
-              .length
+        : corpus.replays.length ===
+              0 ||
+            !exactMeasurement ||
+            completedReplays !==
+              corpus.replays.length ||
+            completedSources !==
+              totalSources
           ? "partial"
-          : "unavailable",
+          : "complete";
+
+  return {
+    state,
 
     replayCount:
       corpus.replays.length,
@@ -532,23 +706,25 @@ function replayCoverage(
 
     pendingReplays,
 
-    manifestSources:
-      corpus.replays.reduce(
-        (
-          total,
-          replay,
-        ) =>
-          total +
-          replay
-            .totalManifestSources,
-        0,
-      ),
+    manifestSources,
+
+    totalSources,
+
+    completedSources,
+
+    admittedSources,
+
+    skippedSources,
+
+    blockedSources,
 
     sourcesReplayed:
-      null,
+      completedSources,
 
     sourcesReplayedMeasurement:
-      "unavailable",
+      exactMeasurement
+        ? "exact"
+        : "unavailable",
   };
 }
 
@@ -831,8 +1007,12 @@ function blockersFor(
 
     blocker(
       "replayed-source-count-unavailable",
-      1,
-      "Exact source-level replay coverage is not yet projected by the certified Corpus.",
+      replay
+          .sourcesReplayedMeasurement ===
+        "unavailable"
+        ? 1
+        : 0,
+      "Exact source-level replay coverage is unavailable.",
     ),
 
     blocker(

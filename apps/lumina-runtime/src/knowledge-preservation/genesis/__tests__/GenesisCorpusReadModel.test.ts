@@ -603,6 +603,46 @@ test(
 );
 
 test(
+  "Genesis Corpus preserves exact persisted replay progress",
+  () => {
+    const corpus =
+      buildGenesisCorpusReadModel(
+        fixture(),
+      );
+
+    assert.deepEqual(
+      corpus.replays[0]
+        .progress,
+      {
+        totalSources:
+          3,
+
+        completedSources:
+          3,
+
+        admittedSources:
+          2,
+
+        skippedSources:
+          1,
+
+        blockedSources:
+          0,
+      },
+    );
+
+    assert.equal(
+      corpus.replays[0]
+        .progress
+        ?.completedSources,
+      corpus.replays[0]
+        .totalManifestSources,
+    );
+  },
+);
+
+
+test(
   "Knowledge lifecycle reports only correlations actually proved by replay status",
   () => {
     const corpus =

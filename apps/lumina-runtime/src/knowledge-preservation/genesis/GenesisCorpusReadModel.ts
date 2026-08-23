@@ -94,6 +94,9 @@ export interface GenesisCorpusReplayRecord {
   totalManifestSources:
     number;
 
+  progress:
+    GenesisReplayStatusSnapshot["progress"];
+
   admittedEvidenceIds:
     readonly string[];
 
@@ -384,6 +387,13 @@ function replayRecord(
 
     totalManifestSources:
       replay.totalManifestSources,
+
+    progress:
+      replay.progress
+        ? {
+            ...replay.progress,
+          }
+        : null,
 
     admittedEvidenceIds:
       sortedUnique(
@@ -976,6 +986,9 @@ export function buildGenesisCorpusReadModel(
             replayCorpusStatus:
               replay
                 .replayCorpusStatus,
+
+            progress:
+              replay.progress,
 
             admittedEvidenceIds:
               replay

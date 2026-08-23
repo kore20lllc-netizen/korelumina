@@ -133,6 +133,23 @@ function corpus(
         totalManifestSources:
           evidenceIds.length,
 
+        progress: {
+          totalSources:
+            evidenceIds.length,
+
+          completedSources:
+            evidenceIds.length,
+
+          admittedSources:
+            evidenceIds.length,
+
+          skippedSources:
+            0,
+
+          blockedSources:
+            0,
+        },
+
         admittedEvidenceIds:
           evidenceIds,
 
