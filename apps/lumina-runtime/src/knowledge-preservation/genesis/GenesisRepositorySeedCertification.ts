@@ -480,17 +480,15 @@ export function buildGenesisRepositorySeedCertification(
     );
   }
 
-  if (
-    partition
-      .requiresGovernanceReview
-      .length >
-      0
-  ) {
-    blockers.push(
-      "governance-review-required",
-    );
-  }
-
+  /*
+   * Governance-review Evidence remains inside the certified Genesis
+   * partition but outside automatic Repository Knowledge Seeding.
+   *
+   * Its presence is not a replay/corpus certification failure.
+   * Fail-closed behavior is preserved because these records are
+   * never included in seedEvidenceIds and manufacturing authorization
+   * remains false.
+   */
   if (
     partition
       .knowledgeSeedingEligible
@@ -544,11 +542,7 @@ export function buildGenesisRepositorySeedCertification(
           "failed" ||
         replay.replayCorpusStatus ===
           "BLOCKED",
-    ) ||
-    partition
-      .requiresGovernanceReview
-      .length >
-      0;
+    );
 
   const repositorySeedCorpus:
     GenesisRepositorySeedCertificationState =

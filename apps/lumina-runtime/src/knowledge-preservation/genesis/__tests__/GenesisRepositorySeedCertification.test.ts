@@ -295,40 +295,52 @@ test(
 
 
 test(
-  "governance review blocks automatic repository seed certification",
+  "governance-review Evidence remains quarantined without blocking the certified seed partition",
   () => {
     const c = corpus();
     const g = governance();
 
     c.replays = [
       {
-      ...c.replays[0],
-      totalManifestSources: 4,
-      progress: {
-        totalSources: 4,
-        completedSources: 4,
-        admittedSources: 4,
-        skippedSources: 0,
-        blockedSources: 0,
+        ...c.replays[0],
+
+        totalManifestSources: 4,
+
+        progress: {
+          totalSources: 4,
+          completedSources: 4,
+          admittedSources: 4,
+          skippedSources: 0,
+          blockedSources: 0,
+        },
+
+        admittedEvidenceIds: [
+          ...c.replays[0]
+            .admittedEvidenceIds,
+          "evidence:review",
+        ],
       },
-      admittedEvidenceIds: [
-        ...c.replays[0].admittedEvidenceIds,
-        "evidence:review",
-      ],
-    },
     ];
 
     g.records = [
       ...g.records,
+
       {
         historicalSourceId:
           "source:review",
+
         evidenceId:
           "evidence:review",
+
         classification:
           "requires-governance-review",
-        correlationEligible: false,
-        knowledgeManufacturingAuthorized: false,
+
+        correlationEligible:
+          false,
+
+        knowledgeManufacturingAuthorized:
+          false,
+
         reasons: [
           "governance unresolved",
         ],
@@ -337,27 +349,64 @@ test(
 
     g.summary = {
       ...g.summary,
+
       admittedEvidence: 4,
+
       requiresGovernanceReview: 1,
     };
 
     const result =
       buildGenesisRepositorySeedCertification({
         corpus: c,
-        historicalAdmissionGovernance: g,
+
+        historicalAdmissionGovernance:
+          g,
+
         conversationSource:
           conversationUnavailable(),
       });
 
     assert.equal(
       result.repositorySeedCorpus,
-      "BLOCKED",
+      "CERTIFIED",
     );
 
-    assert.ok(
-      result.blockers.includes(
-        "governance-review-required",
+    assert.deepEqual(
+      result.seedEvidenceIds,
+      [
+        "evidence:seed",
+      ],
+    );
+
+    assert.deepEqual(
+      result.partition
+        .requiresGovernanceReview
+        .map(
+          record =>
+            record.evidenceId,
+        ),
+      [
+        "evidence:review",
+      ],
+    );
+
+    assert.equal(
+      result.partition
+        .requiresGovernanceReview[0]
+        .knowledgeManufacturingAuthorized,
+      false,
+    );
+
+    assert.equal(
+      result.seedEvidenceIds.includes(
+        "evidence:review",
       ),
+      false,
+    );
+
+    assert.deepEqual(
+      result.blockers,
+      [],
     );
   },
 );
