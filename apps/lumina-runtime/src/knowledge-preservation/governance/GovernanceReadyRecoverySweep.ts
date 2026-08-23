@@ -26,6 +26,10 @@ import type {
   GovernanceReadySignal,
 } from "./GovernanceReadySignal.js";
 
+import {
+  hasDurableIncompleteGovernanceIdentityException,
+} from "./GovernanceExceptionClassificationService.js";
+
 export interface GovernanceReadyRecoveryPackageReader {
   list():
     KnowledgePackage[];
@@ -188,6 +192,24 @@ export class GovernanceReadyRecoverySweep {
         packageVersion:
           knowledgePackage.version,
       };
+
+      if (
+        hasDurableIncompleteGovernanceIdentityException(
+          knowledgePackage,
+        )
+      ) {
+        results.push({
+          ...base,
+
+          disposition:
+            "ignored",
+
+          reason:
+            "governance_recovery_durable_exception",
+        });
+
+        continue;
+      }
 
       if (
         !knowledgePackage.version ||
