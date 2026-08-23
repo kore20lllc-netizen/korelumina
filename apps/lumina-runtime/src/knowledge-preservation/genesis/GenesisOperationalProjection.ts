@@ -73,6 +73,14 @@ import type {
 } from "./GenesisReadiness.js";
 
 import {
+  buildGenesisRepositorySeedHandoffCertification,
+} from "./GenesisRepositorySeedHandoffCertification.js";
+
+import type {
+  GenesisRepositorySeedHandoffCertification,
+} from "./GenesisRepositorySeedHandoffCertification.js";
+
+import {
   buildGenesisRepositorySeedCertification,
 } from "./GenesisRepositorySeedCertification.js";
 
@@ -130,6 +138,9 @@ export interface GenesisOperationalProjection {
 
   repositorySeedCertification:
     GenesisRepositorySeedCertification;
+
+  repositorySeedHandoffCertification:
+    GenesisRepositorySeedHandoffCertification;
 
   readiness:
     GenesisReadinessProjection;
@@ -351,6 +362,13 @@ export function buildGenesisOperationalProjection(
       conversationSource,
     });
 
+  const repositorySeedHandoffCertification =
+    buildGenesisRepositorySeedHandoffCertification({
+      repositorySeedCertification,
+
+      knowledgeLifecycle,
+    });
+
   const readiness =
     buildGenesisReadiness({
       policy:
@@ -396,6 +414,10 @@ export function buildGenesisOperationalProjection(
         repositorySeedCertification
           .certificationId,
 
+      repositorySeedHandoffCertificationId:
+        repositorySeedHandoffCertification
+          .certificationId,
+
       readinessProjectionId:
         readiness.projectionId,
 
@@ -423,6 +445,8 @@ export function buildGenesisOperationalProjection(
     historicalAdmissionGovernance,
 
     repositorySeedCertification,
+
+    repositorySeedHandoffCertification,
 
     readiness,
 
