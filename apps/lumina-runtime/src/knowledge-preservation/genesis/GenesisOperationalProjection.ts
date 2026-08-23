@@ -72,6 +72,14 @@ import type {
   GenesisReadinessProjection,
 } from "./GenesisReadiness.js";
 
+import {
+  buildGenesisRepositorySeedCertification,
+} from "./GenesisRepositorySeedCertification.js";
+
+import type {
+  GenesisRepositorySeedCertification,
+} from "./GenesisRepositorySeedCertification.js";
+
 import type {
   GenesisReplayId,
 } from "./GenesisReplayIdentity.js";
@@ -119,6 +127,9 @@ export interface GenesisOperationalProjection {
 
   historicalAdmissionGovernance:
     GenesisHistoricalAdmissionGovernanceProjection;
+
+  repositorySeedCertification:
+    GenesisRepositorySeedCertification;
 
   readiness:
     GenesisReadinessProjection;
@@ -327,6 +338,19 @@ export function buildGenesisOperationalProjection(
         [],
     });
 
+  const conversationSource =
+    input.conversationSource ??
+    certifiedConversationBoundary();
+
+  const repositorySeedCertification =
+    buildGenesisRepositorySeedCertification({
+      corpus,
+
+      historicalAdmissionGovernance,
+
+      conversationSource,
+    });
+
   const readiness =
     buildGenesisReadiness({
       policy:
@@ -340,10 +364,6 @@ export function buildGenesisOperationalProjection(
 
       knowledgeLifecycle,
     });
-
-  const conversationSource =
-    input.conversationSource ??
-    certifiedConversationBoundary();
 
   const projectionId =
     `genesis-operational:${hash({
@@ -372,6 +392,10 @@ export function buildGenesisOperationalProjection(
         historicalAdmissionGovernance
           .projectionId,
 
+      repositorySeedCertificationId:
+        repositorySeedCertification
+          .certificationId,
+
       readinessProjectionId:
         readiness.projectionId,
 
@@ -397,6 +421,8 @@ export function buildGenesisOperationalProjection(
     historicalKnowledgeLineage,
 
     historicalAdmissionGovernance,
+
+    repositorySeedCertification,
 
     readiness,
 

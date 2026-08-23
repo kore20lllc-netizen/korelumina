@@ -34,3 +34,4 @@ export * from "./GenesisConversationSourceBoundary.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";
+export * from "./GenesisRepositorySeedCertification.js";
