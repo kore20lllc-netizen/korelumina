@@ -2,6 +2,8 @@ export * from "./CertifiedEducationalCurriculum.js";
 export * from "./EducationalCorpusAuthorityPolicy.js";
 export * from "./EducationalCorpusSourceContract.js";
 export * from "./EducationalCorpus.js";
+export * from "./EducationalCorpusPersistence.js";
+export * from "./EducationalCorpusRuntimeService.js";
 export * from "./KnowledgeEducationProjectionService.js";
 export * from "./normalization/index.js";
 export * from "./admission/index.js";

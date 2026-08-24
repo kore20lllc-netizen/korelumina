@@ -101,6 +101,8 @@ import {
 } from "./knowledge-preservation/bootstrap/index.js";
 
 import {
+  EducationalCorpusRuntimeService,
+  FileEducationalCorpusPersistenceStore,
   KnowledgeEducationProjectionService,
 } from "./knowledge-education/index.js";
 
@@ -535,6 +537,18 @@ export const runtimeKnowledgeEducationProjectionService =
   new KnowledgeEducationProjectionService(
     runtimeGenesisCanonicalConsumption
       .store,
+  );
+
+
+export const runtimeEducationalCorpusPersistenceStore =
+  new FileEducationalCorpusPersistenceStore();
+
+
+export const runtimeEducationalCorpusService =
+  new EducationalCorpusRuntimeService(
+    runtimeEducationalCorpusPersistenceStore,
+    runtimeKnowledgeEducationProjectionService,
+    runtimeGenesisDayZeroCertificationService,
   );
 
 export const runtimeKnowledgeOperationsService =
