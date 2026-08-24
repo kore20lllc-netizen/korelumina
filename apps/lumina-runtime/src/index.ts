@@ -495,6 +495,9 @@ export const runtimeGovernanceReadyRecoveryScheduler =
 const knowledgeContextBuilder =
   new KnowledgeContextBuilder(
     knowledgePlatform,
+
+    runtimeGenesisCanonicalConsumption
+      .store,
   );
 
 export const executiveRuntime =
@@ -619,7 +622,9 @@ export const runtimeChiefAgentReasoningExecutionService =
 export const chiefAgentReasoningAdapter =
   new ChiefAgentReasoningDestinationAdapter(
     new ChiefAgentReasoningKnowledgeMaterializer(
-      knowledgePlatform.store,
+      runtimeGenesisCanonicalConsumption
+        .store,
+
       runtimeOrganizationalMemoryStore,
     ),
     {

@@ -36,21 +36,54 @@ export interface KnowledgeContextWithOrganizationalMemory
     OrganizationalMemoryContext;
 }
 
+export interface KnowledgeContextCanonicalConsumptionView {
+  list():
+    CanonicalKnowledgeItem[];
+}
+
+
 export class KnowledgeContextBuilder {
   constructor(
     private readonly platform:
       KnowledgePlatform,
+
+    private readonly canonicalConsumptionView?:
+      KnowledgeContextCanonicalConsumptionView,
   ) {}
 
   build(
     request: AgentContextRequest,
   ): KnowledgeContext {
+    const currentPolicyKnowledge =
+      this.canonicalConsumptionView
+        ?.list();
+
+    const allowedCanonicalIds =
+      currentPolicyKnowledge
+        ? new Set(
+            currentPolicyKnowledge.map(
+              item =>
+                item.id,
+            ),
+          )
+        : null;
+
     const knowledge =
       request.query
-        ? this.platform.search(
-            request.query,
-          )
-        : this.platform.list();
+        ? this.platform
+            .search(
+              request.query,
+            )
+            .filter(
+              item =>
+                allowedCanonicalIds ===
+                  null ||
+                allowedCanonicalIds.has(
+                  item.id,
+                ),
+            )
+        : currentPolicyKnowledge ??
+          this.platform.list();
 
     const max =
       request.maxKnowledgeItems ??

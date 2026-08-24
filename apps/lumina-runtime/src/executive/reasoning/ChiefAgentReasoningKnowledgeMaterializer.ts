@@ -1,6 +1,5 @@
 import type {
   CanonicalKnowledgeItem,
-  CanonicalKnowledgeStore,
 } from "../../canonical-knowledge/index.js";
 
 import type {
@@ -23,6 +22,12 @@ export interface ChiefAgentReasoningKnowledge {
     readonly OrganizationalMemoryRecord[];
 }
 
+
+export interface ChiefAgentCanonicalConsumptionView {
+  list():
+    CanonicalKnowledgeItem[];
+}
+
 function readStringArray(
   value: unknown,
 ): string[] {
@@ -40,8 +45,8 @@ function readStringArray(
 
 export class ChiefAgentReasoningKnowledgeMaterializer {
   constructor(
-    private readonly canonicalStore:
-      CanonicalKnowledgeStore,
+    private readonly canonicalConsumptionView:
+      ChiefAgentCanonicalConsumptionView,
 
     private readonly organizationalMemoryStore:
       RuntimeOrganizationalMemoryStore,
@@ -79,12 +84,25 @@ export class ChiefAgentReasoningKnowledgeMaterializer {
         ),
       );
 
+    const canonicalById =
+      new Map(
+        this.canonicalConsumptionView
+          .list()
+          .map(
+            item => [
+              item.id,
+              item,
+            ],
+          ),
+      );
+
     const canonicalKnowledge =
       canonicalIds
         .map(
-          (id) =>
-            this.canonicalStore
-              .get(id),
+          id =>
+            canonicalById.get(
+              id,
+            ),
         )
         .filter(
           (
