@@ -51,6 +51,8 @@ export * from "./GenesisConversationReplayEvidenceResolver.js";
 export * from "./GenesisConversationCorrelationCompleteness.js";
 export * from "./GenesisDayZeroCertificationCandidate.js";
 export * from "./GenesisDayZeroCertification.js";
+export * from "./GenesisDayZeroCertificationPersistence.js";
+export * from "./GenesisDayZeroCertificationService.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";

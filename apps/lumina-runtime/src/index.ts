@@ -206,6 +206,11 @@ import {
 
 
 import {
+  registerGenesisDayZeroCertificationRoutes,
+} from "./routes/genesisDayZeroCertification.js";
+
+
+import {
   knowledgeManufacturingReplayService,
 } from "./knowledge-preservation/manufacturing/index.js";
 
@@ -213,8 +218,10 @@ import {
   buildGenesisRuntimeCanonicalConsumptionView,
   FileGenesisConversationAcquisitionPersistenceStore,
   FileGenesisConversationExpectedHistoryPersistenceStore,
+  FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
+  GenesisDayZeroCertificationService,
   GenesisCurrentPolicyOrganizationalMemoryView,
   PersistedConversationHistoricalSourceDiscoverer,
   PersistedGenesisConversationReplayEvidenceResolver,
@@ -305,6 +312,10 @@ export const runtimeGenesisConversationHistoryReconciliationService =
   );
 
 
+export const runtimeGenesisDayZeroCertificationPersistenceStore =
+  new FileGenesisDayZeroCertificationPersistenceStore();
+
+
 export const runtimeGenesisReplayDesignationStore =
   new FileGenesisRuntimeReplayDesignationStore();
 
@@ -333,6 +344,73 @@ rehydrateRuntimeCanonicalKnowledge(
 
 export const runtimeOrganizationalMemoryStore =
   new RuntimeOrganizationalMemoryStore();
+
+export const runtimeGenesisDayZeroCertificationService =
+  new GenesisDayZeroCertificationService(
+    runtimeGenesisDayZeroCertificationPersistenceStore,
+    {
+      readCurrentCandidate:
+        () => {
+          const inventory =
+            listGenesisReplayInventory({
+              persistence:
+                runtimeGenesisReplayPersistenceStore,
+
+              manufacturingRuns:
+                runtimeKnowledgePreservationPlatform
+                  .manufacturingRunService,
+            });
+
+          const selection =
+            resolveGenesisRuntimeReplaySelection({
+              designationStore:
+                runtimeGenesisReplayDesignationStore,
+
+              inventory,
+            });
+
+          if (
+            selection.state !==
+              "SELECTED" ||
+            selection.replayId ===
+              null
+          ) {
+            throw new Error(
+              "genesis_day_zero_certification_runtime_replay_not_selected",
+            );
+          }
+
+          return readGenesisOperationalProjection({
+            replayId:
+              selection.replayId,
+
+            replayPersistence:
+              runtimeGenesisReplayPersistenceStore,
+
+            historicalCorrelation:
+              runtimeGenesisHistoricalCorrelationPersistenceStore,
+
+            manufacturingRuns:
+              runtimeKnowledgePreservationPlatform
+                .manufacturingRunService,
+
+            organizationalMemory:
+              runtimeOrganizationalMemoryStore,
+
+            readinessPolicy:
+              runtimeGenesisReadinessPolicy,
+
+            conversationSource:
+              runtimeGenesisConversationConfiguration
+                .boundary,
+
+            conversationHistoryReconciliation:
+              runtimeGenesisConversationHistoryReconciliationService
+                .read(),
+          }).dayZeroCertificationCandidate;
+        },
+    },
+  );
 
 export const runtimeGovernedCanonicalMemoryAdaptationService =
   new GovernedCanonicalMemoryAdaptationService(
@@ -937,6 +1015,15 @@ registerGenesisConversationExpectedHistoryRoutes(
   {
     service:
       runtimeGenesisConversationHistoryReconciliationService,
+  },
+);
+
+
+registerGenesisDayZeroCertificationRoutes(
+  app,
+  {
+    service:
+      runtimeGenesisDayZeroCertificationService,
   },
 );
 
