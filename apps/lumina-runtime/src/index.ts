@@ -843,6 +843,9 @@ registerGenesisConversationAcquisitionRoutes(
   {
     executor:
       runtimeGenesisConversationAcquisitionExecutor,
+
+    configuration:
+      runtimeGenesisConversationConfiguration,
   },
 );
 

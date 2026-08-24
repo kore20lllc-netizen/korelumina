@@ -25,6 +25,10 @@ import type {
 } from "./GenesisConversationRuntimeConfiguration.js";
 
 import type {
+  GenesisConversationHistoricalGap,
+} from "./GenesisHistoricalConversationSourceAdapter.js";
+
+import type {
   GenesisReplayScope,
 } from "./GenesisSourceManifest.js";
 
@@ -75,6 +79,12 @@ export interface GenesisConversationAcquisitionRecord {
 
   occurrences:
     readonly GenesisConversationAcquisitionOccurrence[];
+
+  conversationIds:
+    readonly string[];
+
+  gaps:
+    readonly GenesisConversationHistoricalGap[];
 
   conversationCount:
     number;
@@ -298,7 +308,19 @@ function assertSameAcquisitionContent(
     existing.acquisitionId !==
       incoming.acquisitionId ||
     existing.sourceId !==
-      incoming.sourceId
+      incoming.sourceId ||
+    JSON.stringify(
+      [...(existing.conversationIds ?? [])].sort(),
+    ) !==
+    JSON.stringify(
+      [...(incoming.conversationIds ?? [])].sort(),
+    ) ||
+    JSON.stringify(
+      existing.gaps ?? [],
+    ) !==
+    JSON.stringify(
+      incoming.gaps ?? [],
+    )
   ) {
     throw new Error(
       "genesis_conversation_acquisition_identity_conflict",
@@ -712,6 +734,18 @@ export class GenesisConversationAcquisitionExecutor {
 
               completedAt,
             },
+          ],
+
+          conversationIds:
+            snapshot.conversations
+              .map(
+                conversation =>
+                  conversation.conversationId,
+              )
+              .sort(),
+
+          gaps: [
+            ...snapshot.gaps,
           ],
 
           conversationCount:

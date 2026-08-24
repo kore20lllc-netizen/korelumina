@@ -7,6 +7,11 @@ import type {
 
 import type {
   GenesisConversationAcquisitionExecutor,
+  GenesisConversationRuntimeConfiguration,
+} from "../knowledge-preservation/genesis/index.js";
+
+import {
+  buildGenesisConversationAcquisitionInventory,
 } from "../knowledge-preservation/genesis/index.js";
 
 import {
@@ -17,6 +22,9 @@ import {
 export interface GenesisConversationAcquisitionRouteRuntime {
   executor:
     GenesisConversationAcquisitionExecutor;
+
+  configuration:
+    GenesisConversationRuntimeConfiguration;
 }
 
 
@@ -31,12 +39,25 @@ export function createGenesisConversationAcquisitionStatusHandler(
     res:
       Response,
   ) => {
+    const acquisition =
+      runtime.executor.latest();
+
+    const inventory =
+      buildGenesisConversationAcquisitionInventory({
+        configuration:
+          runtime.configuration,
+
+        latest:
+          acquisition,
+      });
+
     return res.json({
       ok:
         true,
 
-      acquisition:
-        runtime.executor.latest(),
+      acquisition,
+
+      inventory,
     });
   };
 }
