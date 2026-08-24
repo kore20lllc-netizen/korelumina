@@ -247,17 +247,52 @@ function validateSnapshot(
       snapshot.conversationUrl,
     );
 
+  const urlSegments =
+    url.pathname
+      .split("/")
+      .filter(Boolean);
+
+  const conversationMarkerIndex =
+    urlSegments.lastIndexOf(
+      "c",
+    );
+
+  const urlConversationId =
+    conversationMarkerIndex >= 0
+      ? urlSegments[
+          conversationMarkerIndex + 1
+        ]
+      : null;
+
   if (
     url.protocol !==
       "https:" ||
     url.hostname !==
       "chatgpt.com" ||
-    !/^\/c\/[^/]+/.test(
-      url.pathname,
-    )
+    !urlConversationId ||
+    decodeURIComponent(
+      urlConversationId,
+    ) !==
+      snapshot.conversationId
   ) {
     fail(
       `Collector is not on a ChatGPT conversation URL: ${snapshot.conversationUrl}`,
+    );
+  }
+
+  if (
+    snapshot.projectId !==
+      undefined &&
+    (
+      typeof snapshot.projectId !==
+        "string" ||
+      snapshot.projectId.trim()
+        .length ===
+        0
+    )
+  ) {
+    fail(
+      "Recovered project identity is invalid.",
     );
   }
 
@@ -581,6 +616,20 @@ const EXTRACTION_SCRIPT = String.raw`
       ) ||
     "ChatGPT conversation " + conversationId;
 
+  const projectMarkerIndex =
+    pathSegments.indexOf(
+      "g"
+    );
+
+  const projectId =
+    projectMarkerIndex >= 0 &&
+    projectMarkerIndex <
+      conversationMarkerIndex
+      ? pathSegments[
+          projectMarkerIndex + 1
+        ]
+      : undefined;
+
   return {
     snapshotVersion:
       SNAPSHOT_VERSION,
@@ -590,9 +639,10 @@ const EXTRACTION_SCRIPT = String.raw`
     title,
 
     conversationUrl:
-      window.location.origin + "/c/" + encodeURIComponent(
-        conversationId
-      ),
+      window.location.origin +
+      window.location.pathname,
+
+    projectId,
 
     capturedAt:
       Date.now(),
@@ -743,7 +793,362 @@ function inspect() {
 }
 
 
-function captureCurrent() {
+function discoverProject() {
+  const raw =
+    runSafariJavaScript(
+      `JSON.stringify((() => {
+        const pathSegments =
+          location.pathname
+            .split("/")
+            .filter(Boolean);
+
+        const projectMarkerIndex =
+          pathSegments.indexOf(
+            "g"
+          );
+
+        const projectId =
+          projectMarkerIndex >= 0
+            ? pathSegments[
+                projectMarkerIndex + 1
+              ]
+            : null;
+
+        if (!projectId) {
+          throw new Error(
+            "chatgpt_browser_recovery_not_in_project"
+          );
+        }
+
+        const projectConversationPrefix =
+          "/g/" +
+          projectId +
+          "/c/";
+
+        const links =
+          Array.from(
+            document.querySelectorAll(
+              "a[href]"
+            )
+          );
+
+        const conversations =
+          links
+            .map(
+              anchor => {
+                let url;
+
+                try {
+                  url =
+                    new URL(
+                      anchor.href,
+                    );
+                } catch {
+                  return null;
+                }
+
+                if (
+                  url.hostname !==
+                    "chatgpt.com" ||
+                  !url.pathname.startsWith(
+                    projectConversationPrefix
+                  )
+                ) {
+                  return null;
+                }
+
+                const segments =
+                  url.pathname
+                    .split("/")
+                    .filter(Boolean);
+
+                const conversationMarkerIndex =
+                  segments.lastIndexOf(
+                    "c"
+                  );
+
+                const rawConversationId =
+                  conversationMarkerIndex >= 0
+                    ? segments[
+                        conversationMarkerIndex + 1
+                      ]
+                    : null;
+
+                if (!rawConversationId) {
+                  return null;
+                }
+
+                return {
+                  conversationId:
+                    decodeURIComponent(
+                      rawConversationId
+                    ),
+
+                  title:
+                    (
+                      anchor.innerText ||
+                      anchor.textContent ||
+                      ""
+                    ).trim(),
+
+                  conversationUrl:
+                    url.origin +
+                    url.pathname,
+                };
+              }
+            )
+            .filter(Boolean);
+
+        const unique =
+          Array.from(
+            new Map(
+              conversations.map(
+                conversation => [
+                  conversation.conversationId,
+                  conversation,
+                ]
+              )
+            ).values()
+          )
+            .sort(
+              (left, right) =>
+                left.title.localeCompare(
+                  right.title
+                ) ||
+                left.conversationId.localeCompare(
+                  right.conversationId
+                )
+            );
+
+        const currentConversationIndex =
+          pathSegments.lastIndexOf(
+            "c"
+          );
+
+        const currentConversationId =
+          currentConversationIndex >= 0
+            ? pathSegments[
+                currentConversationIndex + 1
+              ]
+            : null;
+
+        return {
+          inventoryVersion:
+            "chatgpt-browser-project-inventory:v1",
+
+          projectId,
+
+          projectTitle:
+            document.title
+              ?.replace(
+                /\\s*[|\\-]\\s*ChatGPT\\s*$/i,
+                ""
+              )
+              .split(" - ")[0]
+              .trim() ||
+            projectId,
+
+          discoveredAt:
+            Date.now(),
+
+          pageUrl:
+            location.href,
+
+          currentConversationId,
+
+          conversationCount:
+            unique.length,
+
+          conversations:
+            unique,
+        };
+      })())`,
+    );
+
+  let inventory;
+
+  try {
+    inventory =
+      JSON.parse(
+        raw,
+      );
+  } catch {
+    fail(
+      `Safari returned invalid project inventory JSON:\n${raw.slice(0, 1000)}`,
+    );
+  }
+
+  if (
+    !inventory ||
+    typeof inventory !==
+      "object" ||
+    typeof inventory.projectId !==
+      "string" ||
+    !Array.isArray(
+      inventory.conversations,
+    )
+  ) {
+    fail(
+      "Project discovery returned an invalid inventory.",
+    );
+  }
+
+  const inventoryRoot =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "project-inventories",
+    );
+
+  mkdirSync(
+    inventoryRoot,
+    {
+      recursive:
+        true,
+    },
+  );
+
+  const destination =
+    path.join(
+      inventoryRoot,
+      `project-${inventory.projectId.replace(
+        /[^A-Za-z0-9._-]/g,
+        "_",
+      )}.json`,
+    );
+
+  writeFileSync(
+    destination,
+    `${JSON.stringify(
+      inventory,
+      null,
+      2,
+    )}\n`,
+    {
+      encoding:
+        "utf8",
+
+      mode:
+        0o600,
+    },
+  );
+
+  console.log(
+    JSON.stringify(
+      {
+        ok:
+          true,
+
+        browser:
+          "Safari",
+
+        destination,
+
+        projectId:
+          inventory.projectId,
+
+        projectTitle:
+          inventory.projectTitle,
+
+        conversationCount:
+          inventory.conversationCount,
+
+        conversations:
+          inventory.conversations,
+      },
+      null,
+      2,
+    ),
+  );
+}
+
+
+function captureCurrentSnapshot(
+  {
+    attempts = 20,
+    retryDelayMs = 500,
+  } = {},
+) {
+  let lastError =
+    "No capture attempt completed.";
+
+  for (
+    let attempt =
+      1;
+    attempt <=
+      attempts;
+    attempt +=
+      1
+  ) {
+    try {
+      const raw =
+        runSafariJavaScript(
+          "JSON.stringify(" +
+          EXTRACTION_SCRIPT +
+          ")",
+        );
+
+      let captured;
+
+      try {
+        captured =
+          JSON.parse(
+            raw,
+          );
+      } catch {
+        throw new Error(
+          `Safari returned invalid capture JSON: ${raw.slice(0, 500)}`,
+        );
+      }
+
+      if (
+        !captured ||
+        !Array.isArray(
+          captured.messages,
+        ) ||
+        captured.messages.length ===
+          0
+      ) {
+        throw new Error(
+          "conversation_messages_not_stably_rendered",
+        );
+      }
+
+      return validateSnapshot(
+        captured,
+      );
+    } catch (
+      error
+    ) {
+      lastError =
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            );
+
+      if (
+        attempt <
+        attempts
+      ) {
+        sleep(
+          retryDelayMs,
+        );
+      }
+    }
+  }
+
+  fail(
+    `Conversation capture did not stabilize after ${attempts} attempts: ${lastError}`,
+  );
+}
+
+
+function persistSnapshot(
+  snapshot,
+) {
   mkdirSync(
     RECOVERY_ROOT,
     {
@@ -751,31 +1156,6 @@ function captureCurrent() {
         true,
     },
   );
-
-  const raw =
-    runSafariJavaScript(
-      "JSON.stringify(" +
-      EXTRACTION_SCRIPT +
-      ")",
-    );
-
-  let captured;
-
-  try {
-    captured =
-      JSON.parse(
-        raw,
-      );
-  } catch {
-    fail(
-      `Safari returned invalid capture JSON:\n${raw.slice(0, 1000)}`,
-    );
-  }
-
-  const snapshot =
-    validateSnapshot(
-      captured,
-    );
 
   const destination =
     path.join(
@@ -800,6 +1180,19 @@ function captureCurrent() {
         0o600,
     },
   );
+
+  return destination;
+}
+
+
+function captureCurrent() {
+  const snapshot =
+    captureCurrentSnapshot();
+
+  const destination =
+    persistSnapshot(
+      snapshot,
+    );
 
   console.log(
     JSON.stringify(
@@ -847,6 +1240,690 @@ function captureCurrent() {
       2,
     ),
   );
+}
+
+
+function sleep(
+  milliseconds,
+) {
+  const buffer =
+    new SharedArrayBuffer(
+      4,
+    );
+
+  const view =
+    new Int32Array(
+      buffer,
+    );
+
+  Atomics.wait(
+    view,
+    0,
+    0,
+    milliseconds,
+  );
+}
+
+
+function setSafariUrl(
+  url,
+) {
+  const appleScript = `
+on run argv
+  set targetUrl to item 1 of argv
+
+  tell application "Safari"
+    if (count of windows) = 0 then
+      error "Safari has no open window."
+    end if
+
+    set URL of current tab of front window to targetUrl
+  end tell
+end run
+`;
+
+  const result =
+    spawnSync(
+      "osascript",
+      [
+        "-",
+        url,
+      ],
+      {
+        encoding:
+          "utf8",
+
+        input:
+          appleScript,
+
+        stdio: [
+          "pipe",
+          "pipe",
+          "pipe",
+        ],
+      },
+    );
+
+  if (
+    result.error ||
+    result.status !==
+      0
+  ) {
+    throw new Error(
+      (
+        result.stderr ||
+        result.stdout ||
+        result.error?.message ||
+        "Safari navigation failed."
+      ).trim(),
+    );
+  }
+}
+
+
+function waitForConversation(
+  conversationId,
+  timeoutMs = 45000,
+) {
+  const startedAt =
+    Date.now();
+
+  let stableObservations =
+    0;
+
+  let previousCount =
+    null;
+
+  while (
+    Date.now() -
+      startedAt <
+    timeoutMs
+  ) {
+    try {
+      const raw =
+        runSafariJavaScript(
+          `JSON.stringify({
+            path:
+              location.pathname,
+
+            readyState:
+              document.readyState,
+
+            messages:
+              document.querySelectorAll(
+                '[data-message-author-role]'
+              ).length,
+
+            turns:
+              document.querySelectorAll(
+                '[data-testid^="conversation-turn-"]'
+              ).length
+          })`,
+        );
+
+      const state =
+        JSON.parse(
+          raw,
+        );
+
+      const segments =
+        String(
+          state.path ??
+          "",
+        )
+          .split("/")
+          .filter(Boolean);
+
+      const marker =
+        segments.lastIndexOf(
+          "c",
+        );
+
+      const currentId =
+        marker >= 0
+          ? decodeURIComponent(
+              segments[
+                marker + 1
+              ] ??
+              "",
+            )
+          : null;
+
+      const renderedCount =
+        Math.max(
+          Number(
+            state.messages ??
+            0,
+          ),
+          Number(
+            state.turns ??
+            0,
+          ),
+        );
+
+      if (
+        currentId ===
+          conversationId &&
+        renderedCount >
+          0
+      ) {
+        if (
+          previousCount ===
+          renderedCount
+        ) {
+          stableObservations +=
+            1;
+        } else {
+          stableObservations =
+            1;
+
+          previousCount =
+            renderedCount;
+        }
+
+        /*
+         * Require three consecutive equal observations.
+         * This avoids capturing during ChatGPT's transient SPA render.
+         */
+        if (
+          stableObservations >=
+          3
+        ) {
+          return;
+        }
+      } else {
+        stableObservations =
+          0;
+
+        previousCount =
+          null;
+      }
+    } catch {
+      stableObservations =
+        0;
+
+      previousCount =
+        null;
+    }
+
+    sleep(
+      750,
+    );
+  }
+
+  throw new Error(
+    `chatgpt_browser_recovery_navigation_timeout:${conversationId}`,
+  );
+}
+
+
+function projectInventoryPath(
+  explicitPath,
+) {
+  if (
+    explicitPath
+  ) {
+    return path.resolve(
+      explicitPath,
+    );
+  }
+
+  const raw =
+    runSafariJavaScript(
+      `JSON.stringify({
+        pathname:
+          location.pathname
+      })`,
+    );
+
+  const current =
+    JSON.parse(
+      raw,
+    );
+
+  const segments =
+    String(
+      current.pathname ??
+      "",
+    )
+      .split("/")
+      .filter(Boolean);
+
+  const marker =
+    segments.indexOf(
+      "g",
+    );
+
+  const projectId =
+    marker >= 0
+      ? segments[
+          marker + 1
+        ]
+      : null;
+
+  if (
+    !projectId
+  ) {
+    throw new Error(
+      "chatgpt_browser_recovery_not_in_project",
+    );
+  }
+
+  return path.join(
+    REPOSITORY_ROOT,
+    "runtime-data",
+    "genesis",
+    "chatgpt-browser-recovery",
+    "project-inventories",
+    `project-${projectId.replace(
+      /[^A-Za-z0-9._-]/g,
+      "_",
+    )}.json`,
+  );
+}
+
+
+function loadProjectInventory(
+  filename,
+) {
+  let inventory;
+
+  try {
+    inventory =
+      JSON.parse(
+        readFileSync(
+          filename,
+          "utf8",
+        ),
+      );
+  } catch (
+    error
+  ) {
+    throw new Error(
+      `chatgpt_browser_recovery_inventory_unreadable:${filename}:${
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            )
+      }`,
+    );
+  }
+
+  if (
+    !inventory ||
+    inventory.inventoryVersion !==
+      "chatgpt-browser-project-inventory:v1" ||
+    typeof inventory.projectId !==
+      "string" ||
+    !Array.isArray(
+      inventory.conversations,
+    )
+  ) {
+    throw new Error(
+      "chatgpt_browser_recovery_inventory_invalid",
+    );
+  }
+
+  return inventory;
+}
+
+
+function captureProject(
+  explicitInventoryPath,
+) {
+  let inventoryFile;
+
+  try {
+    inventoryFile =
+      projectInventoryPath(
+        explicitInventoryPath,
+      );
+  } catch (
+    error
+  ) {
+    fail(
+      error instanceof Error
+        ? error.message
+        : String(
+            error,
+          ),
+    );
+  }
+
+  let inventory;
+
+  try {
+    inventory =
+      loadProjectInventory(
+        inventoryFile,
+      );
+  } catch (
+    error
+  ) {
+    fail(
+      error instanceof Error
+        ? error.message
+        : String(
+            error,
+          ),
+    );
+  }
+
+  mkdirSync(
+    RECOVERY_ROOT,
+    {
+      recursive:
+        true,
+    },
+  );
+
+  const checkpointRoot =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "checkpoints",
+    );
+
+  mkdirSync(
+    checkpointRoot,
+    {
+      recursive:
+        true,
+    },
+  );
+
+  const checkpointFile =
+    path.join(
+      checkpointRoot,
+      `project-${inventory.projectId.replace(
+        /[^A-Za-z0-9._-]/g,
+        "_",
+      )}.json`,
+    );
+
+  let checkpoint = {
+    checkpointVersion:
+      "chatgpt-browser-project-capture:v1",
+
+    projectId:
+      inventory.projectId,
+
+    projectTitle:
+      inventory.projectTitle,
+
+    inventoryFile,
+
+    startedAt:
+      Date.now(),
+
+    updatedAt:
+      Date.now(),
+
+    completedConversationIds:
+      [],
+
+    failures:
+      [],
+  };
+
+  try {
+    checkpoint = {
+      ...checkpoint,
+      ...JSON.parse(
+        readFileSync(
+          checkpointFile,
+          "utf8",
+        ),
+      ),
+    };
+  } catch {
+    // No prior checkpoint is expected on the first run.
+  }
+
+  const completed =
+    new Set(
+      checkpoint
+        .completedConversationIds ??
+      [],
+    );
+
+  const failures =
+    Array.isArray(
+      checkpoint.failures,
+    )
+      ? [
+          ...checkpoint.failures,
+        ]
+      : [];
+
+  const writeCheckpoint =
+    () => {
+      checkpoint = {
+        ...checkpoint,
+
+        updatedAt:
+          Date.now(),
+
+        completedConversationIds: [
+          ...completed,
+        ].sort(),
+
+        failures,
+      };
+
+      writeFileSync(
+        checkpointFile,
+        `${JSON.stringify(
+          checkpoint,
+          null,
+          2,
+        )}\n`,
+        {
+          encoding:
+            "utf8",
+
+          mode:
+            0o600,
+        },
+      );
+    };
+
+  console.log(
+    JSON.stringify(
+      {
+        projectId:
+          inventory.projectId,
+
+        projectTitle:
+          inventory.projectTitle,
+
+        inventoryConversations:
+          inventory.conversations.length,
+
+        alreadyCompleted:
+          completed.size,
+
+        checkpointFile,
+      },
+      null,
+      2,
+    ),
+  );
+
+  for (
+    const conversation
+    of inventory.conversations
+  ) {
+    const conversationId =
+      conversation.conversationId;
+
+    if (
+      completed.has(
+        conversationId,
+      )
+    ) {
+      console.log(
+        `[skip] ${conversation.title} (${conversationId})`,
+      );
+
+      continue;
+    }
+
+    console.log(
+      `[capture] ${conversation.title} (${conversationId})`,
+    );
+
+    try {
+      setSafariUrl(
+        conversation.conversationUrl,
+      );
+
+      waitForConversation(
+        conversationId,
+      );
+
+      /*
+       * Give the rendered conversation a brief stabilization window
+       * after message nodes first become available.
+       */
+      sleep(
+        1000,
+      );
+
+      const snapshot =
+        captureCurrentSnapshot();
+
+      if (
+        snapshot.conversationId !==
+          conversationId
+      ) {
+        throw new Error(
+          `chatgpt_browser_recovery_wrong_conversation:${snapshot.conversationId}`,
+        );
+      }
+
+      if (
+        snapshot.projectId !==
+          inventory.projectId
+      ) {
+        throw new Error(
+          `chatgpt_browser_recovery_wrong_project:${snapshot.projectId ?? "none"}`,
+        );
+      }
+
+      const destination =
+        persistSnapshot(
+          snapshot,
+        );
+
+      completed.add(
+        conversationId,
+      );
+
+      for (
+        let index =
+          failures.length - 1;
+        index >=
+          0;
+        index -=
+          1
+      ) {
+        if (
+          failures[
+            index
+          ]?.conversationId ===
+            conversationId
+        ) {
+          failures.splice(
+            index,
+            1,
+          );
+        }
+      }
+
+      writeCheckpoint();
+
+      console.log(
+        `[ok] ${snapshot.title} — ${snapshot.messages.length} messages — ${destination}`,
+      );
+    } catch (
+      error
+    ) {
+      failures.push({
+        conversationId,
+
+        title:
+          conversation.title,
+
+        conversationUrl:
+          conversation.conversationUrl,
+
+        failedAt:
+          Date.now(),
+
+        error:
+          error instanceof Error
+            ? error.message
+            : String(
+                error,
+              ),
+      });
+
+      writeCheckpoint();
+
+      console.error(
+        `[fail] ${conversation.title}: ${
+          error instanceof Error
+            ? error.message
+            : String(
+                error,
+              )
+        }`,
+      );
+    }
+  }
+
+  writeCheckpoint();
+
+  console.log(
+    JSON.stringify(
+      {
+        ok:
+          failures.length ===
+            0,
+
+        projectId:
+          inventory.projectId,
+
+        projectTitle:
+          inventory.projectTitle,
+
+        inventoryConversations:
+          inventory.conversations.length,
+
+        completed:
+          completed.size,
+
+        failures:
+          failures.length,
+
+        checkpointFile,
+      },
+      null,
+      2,
+    ),
+  );
+
+  if (
+    failures.length >
+      0
+  ) {
+    process.exitCode =
+      2;
+  }
 }
 
 
@@ -907,8 +1984,18 @@ switch (
     inspect();
     break;
 
+  case "discover-project":
+    discoverProject();
+    break;
+
   case "capture-current":
     captureCurrent();
+    break;
+
+  case "capture-project":
+    captureProject(
+      argument,
+    );
     break;
 
   case "validate":
@@ -932,7 +2019,9 @@ KoreLumina Genesis ChatGPT Browser Recovery
 Commands:
   node scripts/genesis-chatgpt-browser-recovery.mjs login
   node scripts/genesis-chatgpt-browser-recovery.mjs inspect
+  node scripts/genesis-chatgpt-browser-recovery.mjs discover-project
   node scripts/genesis-chatgpt-browser-recovery.mjs capture-current
+  node scripts/genesis-chatgpt-browser-recovery.mjs capture-project [project-inventory.json]
   node scripts/genesis-chatgpt-browser-recovery.mjs validate <snapshot.json>
 
 Profile:
