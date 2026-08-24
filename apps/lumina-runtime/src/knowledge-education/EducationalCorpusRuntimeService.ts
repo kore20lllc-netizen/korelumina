@@ -26,6 +26,14 @@ import type {
   GenesisDayZeroCertificationRuntimeProjection,
 } from "../knowledge-preservation/genesis/index.js";
 
+import {
+  buildEducationalCorpusCertificationCandidate,
+} from "./EducationalCorpusCertificationCandidate.js";
+
+import type {
+  EducationalCorpusCertificationCandidate,
+} from "./EducationalCorpusCertificationCandidate.js";
+
 
 export type EducationalCorpusRuntimeState =
   | "UNSET"
@@ -72,6 +80,10 @@ export interface EducationalCorpusRuntimeProjection {
     chiefAgentActivationAuthorized:
       false;
   };
+
+  certificationCandidate:
+    EducationalCorpusCertificationCandidate |
+    null;
 }
 
 
@@ -147,6 +159,9 @@ export class EducationalCorpusRuntimeService {
           chiefAgentActivationAuthorized:
             false,
         },
+
+        certificationCandidate:
+          null,
       };
     }
 
@@ -254,7 +269,7 @@ export class EducationalCorpusRuntimeService {
       );
     }
 
-    return {
+    const projectionWithoutCandidate = {
       state,
 
       persistedCorpus,
@@ -276,14 +291,27 @@ export class EducationalCorpusRuntimeService {
 
       downstream: {
         educationalCorpusCertified:
-          false,
+          false as const,
 
         initialCompetencyCertified:
-          false,
+          false as const,
 
         chiefAgentActivationAuthorized:
-          false,
+          false as const,
       },
+    };
+
+    return {
+      ...projectionWithoutCandidate,
+
+      certificationCandidate:
+        buildEducationalCorpusCertificationCandidate({
+          runtime:
+            projectionWithoutCandidate,
+
+          artifacts:
+            education.artifacts,
+        }),
     };
   }
 
