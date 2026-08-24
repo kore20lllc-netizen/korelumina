@@ -67,6 +67,23 @@ export interface GenesisConversationAcquisitionProvenance {
 }
 
 
+export type GenesisConversationExplicitHistoricalRelationshipType =
+  | "supersedes"
+  | "conflicts-with";
+
+
+export interface GenesisConversationExplicitHistoricalRelationship {
+  type:
+    GenesisConversationExplicitHistoricalRelationshipType;
+
+  historicalSourceId:
+    HistoricalSourceId;
+
+  basis:
+    string;
+}
+
+
 export interface GenesisHistoricalConversationMessageInput {
   messageId:
     string;
@@ -88,6 +105,9 @@ export interface GenesisHistoricalConversationMessageInput {
 
   sourceLocator?:
     string;
+
+  explicitHistoricalRelationships?:
+    readonly GenesisConversationExplicitHistoricalRelationship[];
 
   metadata?:
     Readonly<
@@ -385,6 +405,53 @@ function validateInput(
         "genesis_conversation_unavailable_message_content_forbidden",
       );
     }
+
+    const relationshipKeys =
+      new Set<string>();
+
+    for (
+      const relationship
+      of message.explicitHistoricalRelationships ??
+      []
+    ) {
+      if (
+        relationship.type !==
+          "supersedes" &&
+        relationship.type !==
+          "conflicts-with"
+      ) {
+        throw new Error(
+          "genesis_conversation_historical_relationship_type_invalid",
+        );
+      }
+
+      requireNonEmpty(
+        relationship.historicalSourceId,
+        "genesis_conversation_historical_relationship_source_required",
+      );
+
+      requireNonEmpty(
+        relationship.basis,
+        "genesis_conversation_historical_relationship_basis_required",
+      );
+
+      const key =
+        `${relationship.type}:${relationship.historicalSourceId}`;
+
+      if (
+        relationshipKeys.has(
+          key,
+        )
+      ) {
+        throw new Error(
+          "genesis_conversation_duplicate_historical_relationship",
+        );
+      }
+
+      relationshipKeys.add(
+        key,
+      );
+    }
   }
 }
 
@@ -538,6 +605,10 @@ export function acquireGenesisHistoricalConversation(
             sourceLocator:
               message.sourceLocator ?? null,
 
+            explicitHistoricalRelationships:
+              message.explicitHistoricalRelationships ??
+              [],
+
             metadata:
               message.metadata ?? {},
           }),
@@ -586,6 +657,10 @@ export function acquireGenesisHistoricalConversation(
 
             sourceRevision:
               input.sourceRevision ?? null,
+
+            explicitHistoricalRelationships:
+              message.explicitHistoricalRelationships ??
+              [],
 
             locator,
           });
@@ -661,10 +736,36 @@ export function acquireGenesisHistoricalConversation(
                   ),
 
             supersedes:
-              [],
+              (
+                message.explicitHistoricalRelationships ??
+                []
+              )
+                .filter(
+                  relationship =>
+                    relationship.type ===
+                    "supersedes",
+                )
+                .map(
+                  relationship =>
+                    relationship.historicalSourceId,
+                )
+                .sort(),
 
             conflictsWith:
-              [],
+              (
+                message.explicitHistoricalRelationships ??
+                []
+              )
+                .filter(
+                  relationship =>
+                    relationship.type ===
+                    "conflicts-with",
+                )
+                .map(
+                  relationship =>
+                    relationship.historicalSourceId,
+                )
+                .sort(),
 
             metadata: {
               conversationId:
@@ -709,6 +810,16 @@ export function acquireGenesisHistoricalConversation(
                 exportRevision:
                   input.acquisition.exportRevision ?? null,
               },
+
+              explicitHistoricalRelationships:
+                (
+                  message.explicitHistoricalRelationships ??
+                  []
+                ).map(
+                  relationship => ({
+                    ...relationship,
+                  }),
+                ),
 
               originalMetadata:
                 message.metadata ?? {},
@@ -794,6 +905,16 @@ export function acquireGenesisHistoricalConversation(
                 historicalSource
                   .metadata
                   .acquisition,
+
+              explicitHistoricalRelationships:
+                (
+                  message.explicitHistoricalRelationships ??
+                  []
+                ).map(
+                  relationship => ({
+                    ...relationship,
+                  }),
+                ),
 
               originalMetadata:
                 message.metadata ?? {},
