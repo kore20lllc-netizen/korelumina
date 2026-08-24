@@ -15,6 +15,10 @@ import type {
 } from "./GenesisReadiness.js";
 
 import type {
+  GenesisConversationSourceBoundary,
+} from "./GenesisConversationSourceBoundary.js";
+
+import type {
   GenesisReplayId,
 } from "./GenesisReplayIdentity.js";
 
@@ -65,6 +69,9 @@ export interface ReadGenesisOperationalProjectionInput {
 
   readinessPolicy:
     GenesisReadinessPolicy;
+
+  conversationSource?:
+    GenesisConversationSourceBoundary;
 }
 
 export function readGenesisOperationalProjection(
@@ -158,5 +165,8 @@ export function readGenesisOperationalProjection(
 
     readinessPolicy:
       input.readinessPolicy,
+
+    conversationSource:
+      input.conversationSource,
   });
 }

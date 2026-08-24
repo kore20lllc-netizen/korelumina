@@ -202,6 +202,7 @@ import {
 import {
   buildGenesisRuntimeCanonicalConsumptionView,
   GenesisCurrentPolicyOrganizationalMemoryView,
+  resolveGenesisConversationRuntimeConfiguration,
   FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
   FileGenesisRuntimeReplayDesignationStore,
@@ -239,6 +240,10 @@ export const runtimeGenesisReadinessPolicy = {
     "conversation",
   ],
 } as const;
+
+
+export const runtimeGenesisConversationConfiguration =
+  resolveGenesisConversationRuntimeConfiguration();
 
 
 export const runtimeGenesisReplayDesignationStore =
@@ -332,6 +337,10 @@ export const runtimeGenesisOperationalProjection =
 
             readinessPolicy:
               runtimeGenesisReadinessPolicy,
+
+            conversationSource:
+              runtimeGenesisConversationConfiguration
+                .boundary,
           });
         } catch (
           error
