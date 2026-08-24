@@ -130,7 +130,31 @@ export function GenesisOperationalProjectionPanel({
     state.replayId ===
       null
   ) {
-    return null;
+    return (
+      <LuminaFlagshipPanel
+        title="Operational reconstruction"
+        description="Replay-scoped Genesis Corpus, chronology, governance, Knowledge lifecycle, readiness, and external-source state."
+      >
+        <div className="flex min-h-[320px] flex-col items-center justify-center px-8 text-center">
+          <ShieldCheck className="h-6 w-6 text-muted-foreground" />
+
+          <div className="mt-4 text-base font-semibold text-foreground">
+            Select a replay
+          </div>
+
+          <p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
+            Select a persisted Genesis Replay to inspect its operational
+            reconstruction, corpus state, governance, Knowledge lifecycle,
+            and readiness.
+          </p>
+
+          <p className="mt-3 max-w-lg text-xs leading-5 text-sky-300/58">
+            Day-0 Certification is a separate corpus-level authority and may
+            remain visible without a replay being selected for inspection.
+          </p>
+        </div>
+      </LuminaFlagshipPanel>
+    );
   }
 
   if (

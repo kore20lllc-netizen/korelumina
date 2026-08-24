@@ -13,6 +13,7 @@ import {
   Network,
   RefreshCw,
   ShieldCheck,
+  BadgeCheck,
 } from "lucide-react";
 
 import {
@@ -46,6 +47,10 @@ import {
 import {
   GenesisOperationalProjectionPanel,
 } from "./GenesisOperationalProjectionPanel";
+
+import {
+  GenesisDayZeroCertificationPanel,
+} from "./GenesisDayZeroCertificationPanel";
 
 import {
   GenesisHistoricalArtifactExplorer,
@@ -127,6 +132,14 @@ const GENESIS_SECTIONS = [
       "Reconstruction",
     icon:
       ShieldCheck,
+  },
+  {
+    id:
+      "genesis-day-zero-certification",
+    label:
+      "Day-0 Certification",
+    icon:
+      BadgeCheck,
   },
 ] as const;
 
@@ -510,8 +523,8 @@ export function GenesisReplayReadWorkspace({
           items={GENESIS_SECTIONS}
           ariaLabel="Genesis replay observatory sections"
           topTargetId="genesis-replay-observatory-top"
-          minWidthClassName="min-w-[1120px]"
-          gridColumnsClassName="grid-cols-7"
+          minWidthClassName="min-w-[1280px]"
+          gridColumnsClassName="grid-cols-8"
         />
       }
       content={
@@ -998,11 +1011,18 @@ export function GenesisReplayReadWorkspace({
                   id="genesis-operational-reconstruction"
                   className="min-w-0 scroll-mt-28"
                 >
-                <GenesisOperationalProjectionPanel
-                  state={
-                    operational
-                  }
-                />
+                  <GenesisOperationalProjectionPanel
+                    state={
+                      operational
+                    }
+                  />
+                </section>
+
+                <section
+                  id="genesis-day-zero-certification"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  <GenesisDayZeroCertificationPanel />
                 </section>
         </div>
       }
