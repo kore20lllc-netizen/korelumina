@@ -205,6 +205,27 @@ test(
 );
 
 test(
+  "operational projection composes historical output governance",
+  () => {
+    assert.match(
+      build()
+        .historicalOutputGovernance
+        .projectionId,
+      /^genesis-historical-output-governance:/,
+    );
+
+    assert.equal(
+      build()
+        .historicalOutputGovernance
+        .summary
+        .historicalOutputs,
+      0,
+    );
+  },
+);
+
+
+test(
   "operational projection composes readiness",
   () => {
     assert.match(

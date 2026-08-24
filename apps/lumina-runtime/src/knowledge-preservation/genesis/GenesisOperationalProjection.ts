@@ -46,6 +46,14 @@ import type {
   GenesisHistoricalAdmissionGovernanceProjection,
 } from "./GenesisHistoricalAdmissionGovernanceProjection.js";
 
+import {
+  buildGenesisHistoricalOutputGovernanceProjection,
+} from "./GenesisHistoricalOutputGovernance.js";
+
+import type {
+  GenesisHistoricalOutputGovernanceProjection,
+} from "./GenesisHistoricalOutputGovernance.js";
+
 
 import {
   buildGenesisHistoricalKnowledgeLineage,
@@ -135,6 +143,9 @@ export interface GenesisOperationalProjection {
 
   historicalAdmissionGovernance:
     GenesisHistoricalAdmissionGovernanceProjection;
+
+  historicalOutputGovernance:
+    GenesisHistoricalOutputGovernanceProjection;
 
   repositorySeedCertification:
     GenesisRepositorySeedCertification;
@@ -349,6 +360,13 @@ export function buildGenesisOperationalProjection(
         [],
     });
 
+  const historicalOutputGovernance =
+    buildGenesisHistoricalOutputGovernanceProjection({
+      historicalAdmissionGovernance,
+
+      knowledgeLifecycle,
+    });
+
   const conversationSource =
     input.conversationSource ??
     certifiedConversationBoundary();
@@ -410,6 +428,10 @@ export function buildGenesisOperationalProjection(
         historicalAdmissionGovernance
           .projectionId,
 
+      historicalOutputGovernanceProjectionId:
+        historicalOutputGovernance
+          .projectionId,
+
       repositorySeedCertificationId:
         repositorySeedCertification
           .certificationId,
@@ -443,6 +465,8 @@ export function buildGenesisOperationalProjection(
     historicalKnowledgeLineage,
 
     historicalAdmissionGovernance,
+
+    historicalOutputGovernance,
 
     repositorySeedCertification,
 

@@ -28,6 +28,7 @@ export * from "./GenesisCorpusReadModel.js";
 export * from "./GenesisTemporalChronology.js";
 export * from "./GenesisDocumentationGovernance.js";
 export * from "./GenesisKnowledgeLifecycleCorrelation.js";
+export * from "./GenesisHistoricalOutputGovernance.js";
 export * from "./GenesisHistoricalKnowledgeLineage.js";
 export * from "./GenesisReadiness.js";
 export * from "./GenesisConversationSourceBoundary.js";
