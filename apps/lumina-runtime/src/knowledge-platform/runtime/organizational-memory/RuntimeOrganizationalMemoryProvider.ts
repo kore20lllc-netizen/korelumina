@@ -4,9 +4,19 @@ import type {
   OrganizationalMemoryProviderResult,
 } from "../../../knowledge/organizational-memory/index.js";
 
+import type {
+  OrganizationalMemoryRecord,
+} from "../../../knowledge/organizational-memory/index.js";
+
 import {
   RuntimeOrganizationalMemoryStore,
 } from "./RuntimeOrganizationalMemoryStore.js";
+
+export interface RuntimeOrganizationalMemoryReadStore {
+  list():
+    OrganizationalMemoryRecord[];
+}
+
 
 export class RuntimeOrganizationalMemoryProvider
 implements OrganizationalMemoryProvider {
@@ -14,8 +24,9 @@ implements OrganizationalMemoryProvider {
     "runtime-organizational-memory";
 
   constructor(
-    private readonly store =
-      new RuntimeOrganizationalMemoryStore(),
+    private readonly store:
+      RuntimeOrganizationalMemoryReadStore =
+        new RuntimeOrganizationalMemoryStore(),
   ) {}
 
   async recall(

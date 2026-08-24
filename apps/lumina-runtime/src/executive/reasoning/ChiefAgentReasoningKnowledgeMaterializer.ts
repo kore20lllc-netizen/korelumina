@@ -7,10 +7,6 @@ import type {
 } from "../../knowledge/organizational-memory/index.js";
 
 import type {
-  RuntimeOrganizationalMemoryStore,
-} from "../../knowledge-platform/runtime/index.js";
-
-import type {
   ExecutiveContext,
 } from "../context/index.js";
 
@@ -26,6 +22,12 @@ export interface ChiefAgentReasoningKnowledge {
 export interface ChiefAgentCanonicalConsumptionView {
   list():
     CanonicalKnowledgeItem[];
+}
+
+
+export interface ChiefAgentOrganizationalMemoryConsumptionView {
+  list():
+    OrganizationalMemoryRecord[];
 }
 
 function readStringArray(
@@ -49,7 +51,7 @@ export class ChiefAgentReasoningKnowledgeMaterializer {
       ChiefAgentCanonicalConsumptionView,
 
     private readonly organizationalMemoryStore:
-      RuntimeOrganizationalMemoryStore,
+      ChiefAgentOrganizationalMemoryConsumptionView,
   ) {}
 
   materialize(

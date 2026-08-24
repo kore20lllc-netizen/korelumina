@@ -198,6 +198,7 @@ import {
 
 import {
   buildGenesisRuntimeCanonicalConsumptionView,
+  GenesisCurrentPolicyOrganizationalMemoryView,
   FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
   FileGenesisRuntimeReplayDesignationStore,
@@ -266,19 +267,10 @@ rehydrateRuntimeCanonicalKnowledge(
 export const runtimeOrganizationalMemoryStore =
   new RuntimeOrganizationalMemoryStore();
 
-export const runtimeOrganizationalMemoryProvider =
-  new RuntimeOrganizationalMemoryProvider(
-    runtimeOrganizationalMemoryStore,
-  );
-
 export const runtimeGovernedCanonicalMemoryAdaptationService =
   new GovernedCanonicalMemoryAdaptationService(
     runtimeOrganizationalMemoryStore,
   );
-
-registerOrganizationalMemoryProvider(
-  runtimeOrganizationalMemoryProvider,
-);
 
 export const runtimeCanonicalReviewService =
   new CanonicalReviewService(
@@ -365,6 +357,25 @@ export const runtimeGenesisCanonicalConsumption =
         ?.historicalOutputGovernance ??
       null,
   });
+
+
+export const runtimeGenesisOrganizationalMemoryConsumption =
+  new GenesisCurrentPolicyOrganizationalMemoryView(
+    runtimeOrganizationalMemoryStore,
+
+    runtimeGenesisCanonicalConsumption,
+  );
+
+
+export const runtimeOrganizationalMemoryProvider =
+  new RuntimeOrganizationalMemoryProvider(
+    runtimeGenesisOrganizationalMemoryConsumption,
+  );
+
+
+registerOrganizationalMemoryProvider(
+  runtimeOrganizationalMemoryProvider,
+);
 
 
 export const runtimeKnowledgeEducationProjectionService =
@@ -625,7 +636,7 @@ export const chiefAgentReasoningAdapter =
       runtimeGenesisCanonicalConsumption
         .store,
 
-      runtimeOrganizationalMemoryStore,
+      runtimeGenesisOrganizationalMemoryConsumption,
     ),
     {
       reason: async (input) => {
