@@ -40,6 +40,7 @@ export * from "./GenesisConversationAcquisition.js";
 export * from "./GenesisHistoricalConversationSourceAdapter.js";
 export * from "./ChatGPTConversationExportSource.js";
 export * from "./GenesisConversationRuntimeConfiguration.js";
+export * from "./GenesisConversationAcquisitionExecution.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";

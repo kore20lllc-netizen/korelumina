@@ -6,6 +6,7 @@ import type {
 } from "express";
 
 import type {
+  GenesisConversationSourceBoundary,
   GenesisHistoricalCorrelationPersistenceStore,
   GenesisOperationalManufacturingRunReader,
   GenesisOperationalMemoryReader,
@@ -43,6 +44,9 @@ export interface GenesisOperationalProjectionRouteRuntime {
 
   readinessPolicy:
     GenesisReadinessPolicy;
+
+  conversationSource?:
+    GenesisConversationSourceBoundary;
 }
 
 export function createGenesisOperationalProjectionHandler(
@@ -105,6 +109,9 @@ export function createGenesisOperationalProjectionHandler(
 
           readinessPolicy:
             runtime.readinessPolicy,
+
+          conversationSource:
+            runtime.conversationSource,
         });
 
       return res.json({

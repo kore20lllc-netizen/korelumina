@@ -196,11 +196,18 @@ import {
 
 
 import {
+  registerGenesisConversationAcquisitionRoutes,
+} from "./routes/genesisConversationAcquisition.js";
+
+
+import {
   knowledgeManufacturingReplayService,
 } from "./knowledge-preservation/manufacturing/index.js";
 
 import {
   buildGenesisRuntimeCanonicalConsumptionView,
+  FileGenesisConversationAcquisitionPersistenceStore,
+  GenesisConversationAcquisitionExecutor,
   GenesisCurrentPolicyOrganizationalMemoryView,
   resolveGenesisConversationRuntimeConfiguration,
   FileGenesisHistoricalCorrelationPersistenceStore,
@@ -244,6 +251,23 @@ export const runtimeGenesisReadinessPolicy = {
 
 export const runtimeGenesisConversationConfiguration =
   resolveGenesisConversationRuntimeConfiguration();
+
+
+export const runtimeGenesisConversationAcquisitionPersistenceStore =
+  new FileGenesisConversationAcquisitionPersistenceStore();
+
+
+export const runtimeGenesisConversationAcquisitionExecutor =
+  new GenesisConversationAcquisitionExecutor({
+    configuration:
+      runtimeGenesisConversationConfiguration,
+
+    persistence:
+      runtimeGenesisConversationAcquisitionPersistenceStore,
+
+    repository:
+      "korelumina",
+  });
 
 
 export const runtimeGenesisReplayDesignationStore =
@@ -814,6 +838,15 @@ registerGenesisReplayExecutionRoute(
   },
 );
 
+registerGenesisConversationAcquisitionRoutes(
+  app,
+  {
+    executor:
+      runtimeGenesisConversationAcquisitionExecutor,
+  },
+);
+
+
 registerGenesisReplayStatusRoute(
   app,
   {
@@ -856,6 +889,10 @@ registerGenesisOperationalProjectionRoute(
 
     readinessPolicy:
       runtimeGenesisReadinessPolicy,
+
+    conversationSource:
+      runtimeGenesisConversationConfiguration
+        .boundary,
   },
 );
 
