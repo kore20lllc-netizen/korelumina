@@ -38,6 +38,7 @@ export * from "./GenesisReadiness.js";
 export * from "./GenesisConversationSourceBoundary.js";
 export * from "./GenesisConversationAcquisition.js";
 export * from "./GenesisHistoricalConversationSourceAdapter.js";
+export * from "./ChatGPTConversationExportSource.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";
