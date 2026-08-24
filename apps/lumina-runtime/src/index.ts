@@ -193,8 +193,13 @@ import {
 } from "./knowledge-preservation/manufacturing/index.js";
 
 import {
+  buildGenesisRuntimeCanonicalConsumptionView,
   FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
+  FileGenesisRuntimeReplayDesignationStore,
+  listGenesisReplayInventory,
+  readGenesisOperationalProjection,
+  resolveGenesisRuntimeReplaySelection,
 } from "./knowledge-preservation/genesis/index.js";
 
 const app = express();
@@ -226,6 +231,29 @@ export const runtimeGenesisReadinessPolicy = {
     "conversation",
   ],
 } as const;
+
+
+export const runtimeGenesisReplayDesignationStore =
+  new FileGenesisRuntimeReplayDesignationStore();
+
+export const runtimeGenesisReplayInventory =
+  listGenesisReplayInventory({
+    persistence:
+      runtimeGenesisReplayPersistenceStore,
+
+    manufacturingRuns:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+  });
+
+export const runtimeGenesisReplaySelection =
+  resolveGenesisRuntimeReplaySelection({
+    designationStore:
+      runtimeGenesisReplayDesignationStore,
+
+    inventory:
+      runtimeGenesisReplayInventory,
+  });
 
 rehydrateRuntimeCanonicalKnowledge(
   knowledgePlatform,
@@ -279,9 +307,66 @@ export const runtimeCanonicalReviewBatchService =
     runtimeCanonicalReviewService,
   );
 
+export const runtimeGenesisOperationalProjection =
+  runtimeGenesisReplaySelection.state ===
+    "SELECTED" &&
+  runtimeGenesisReplaySelection.replayId !==
+    null
+    ? (() => {
+        try {
+          return readGenesisOperationalProjection({
+            replayId:
+              runtimeGenesisReplaySelection.replayId,
+
+            replayPersistence:
+              runtimeGenesisReplayPersistenceStore,
+
+            historicalCorrelation:
+              runtimeGenesisHistoricalCorrelationPersistenceStore,
+
+            manufacturingRuns:
+              runtimeKnowledgePreservationPlatform
+                .manufacturingRunService,
+
+            organizationalMemory:
+              runtimeOrganizationalMemoryStore,
+
+            readinessPolicy:
+              runtimeGenesisReadinessPolicy,
+          });
+        } catch (
+          error
+        ) {
+          console.error(
+            "[genesis] designated replay operational projection unavailable",
+            error,
+          );
+
+          return null;
+        }
+      })()
+    : null;
+
+
+export const runtimeGenesisCanonicalConsumption =
+  buildGenesisRuntimeCanonicalConsumptionView({
+    canonicalStore:
+      knowledgePlatform.store,
+
+    replaySelection:
+      runtimeGenesisReplaySelection,
+
+    historicalOutputGovernance:
+      runtimeGenesisOperationalProjection
+        ?.historicalOutputGovernance ??
+      null,
+  });
+
+
 export const runtimeKnowledgeEducationProjectionService =
   new KnowledgeEducationProjectionService(
-    knowledgePlatform.store,
+    runtimeGenesisCanonicalConsumption
+      .store,
   );
 
 export const runtimeGovernedPromotionService =
