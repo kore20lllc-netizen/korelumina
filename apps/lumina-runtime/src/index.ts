@@ -1236,6 +1236,12 @@ registerKnowledgeEducationRoutes(
   {
     projectionService:
       runtimeKnowledgeEducationProjectionService,
+
+    educationalCorpusService:
+      runtimeEducationalCorpusService,
+
+    educationalCorpusCertificationService:
+      runtimeEducationalCorpusCertificationService,
   },
 );
 

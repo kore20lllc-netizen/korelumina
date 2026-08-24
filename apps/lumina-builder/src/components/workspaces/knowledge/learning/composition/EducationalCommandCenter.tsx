@@ -45,6 +45,10 @@ import {
 } from "../regions";
 
 import {
+  EducationalCorpusCertificationPanel,
+} from "../regions/EducationalCorpusCertificationPanel";
+
+import {
   EducationalStateSurface,
 } from "../states";
 
@@ -323,6 +327,13 @@ export function EducationalCommandCenter() {
   </div>
 
 </section>
+      </div>
+
+      <div
+        id="learning-educational-corpus-certification"
+        className="mt-6 scroll-mt-32"
+      >
+        <EducationalCorpusCertificationPanel />
       </div>
 
       <div
