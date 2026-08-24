@@ -8,6 +8,8 @@ import {
   canonicalEducationRelationshipRefs,
   canonicalEducationSource,
   canonicalEducationSourceRefs,
+  educationGovernanceString,
+  educationGovernanceStrings,
   educationMetadataString,
   educationMetadataStrings,
 } from "../normalization/index.js";
@@ -212,6 +214,10 @@ function packageIds(
     educationMetadataString(
       item,
       "packageId",
+    ) ??
+    educationGovernanceString(
+      item,
+      "packageId",
     );
 
   return [
@@ -270,6 +276,10 @@ export function projectEducationalArtifact(
         item,
         "authority",
       ) ??
+      educationGovernanceString(
+        item,
+        "authority",
+      ) ??
       "Unavailable",
 
     approvalState:
@@ -289,10 +299,18 @@ export function projectEducationalArtifact(
         item,
         "owner",
       ) ??
+      educationGovernanceString(
+        item,
+        "owner",
+      ) ??
       "Unavailable",
 
     scope:
       educationMetadataString(
+        item,
+        "scope",
+      ) ??
+      educationGovernanceString(
         item,
         "scope",
       ) ??
@@ -302,6 +320,10 @@ export function projectEducationalArtifact(
       educationMetadataString(
         item,
         "version",
+      ) ??
+      educationGovernanceString(
+        item,
+        "packageVersion",
       ) ??
       "Unavailable",
 
@@ -324,23 +346,44 @@ export function projectEducationalArtifact(
       ),
 
     lineage:
-      educationMetadataStrings(
-        item,
-        "lineage",
-      ),
+      [
+        ...new Set([
+          ...educationMetadataStrings(
+            item,
+            "lineage",
+          ),
+          ...educationGovernanceStrings(
+            item,
+            "lineage",
+          ),
+        ]),
+      ],
 
     dependencies:
-      educationMetadataStrings(
-        item,
-        "dependencies",
-      ),
+      [
+        ...new Set([
+          ...educationMetadataStrings(
+            item,
+            "dependencies",
+          ),
+          ...educationGovernanceStrings(
+            item,
+            "dependencies",
+          ),
+        ]),
+      ],
 
     supersession:
       educationMetadataString(
         item,
         "supersession",
       ) ??
-      "",
+      educationGovernanceStrings(
+        item,
+        "supersedes",
+      ).join(
+        ", ",
+      ),
 
     educationalStatus:
       educationalStatus(

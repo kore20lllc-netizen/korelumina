@@ -154,6 +154,173 @@ test(
 );
 
 test(
+  "education projection preserves governed canonical identity from the runtime governance envelope",
+  () => {
+    const service =
+      new KnowledgeEducationProjectionService(
+        {
+          list:
+            () => [
+              {
+                id:
+                  "canonical:governed:runtime",
+
+                type:
+                  "CandidateDecision",
+
+                title:
+                  "Runtime governed knowledge",
+
+                summary:
+                  "Canonical knowledge reconstructed from a governed package.",
+
+                confidence:
+                  1,
+
+                evidenceRefs: [
+                  "evidence:runtime-governed",
+                ],
+
+                relationships:
+                  {},
+
+                createdAt:
+                  100,
+
+                updatedAt:
+                  200,
+
+                status:
+                  "canonical",
+
+                metadata: {
+                  source:
+                    "repository",
+
+                  governance: {
+                    packageId:
+                      "KP-2026-000999",
+
+                    packageVersion:
+                      "3.2.1",
+
+                    authority:
+                      "Architecture Council",
+
+                    owner:
+                      "Knowledge Operations",
+
+                    scope:
+                      "platform",
+
+                    reviewDecision:
+                      "approved",
+
+                    lineage: [
+                      "knowledge-ir:runtime-governed",
+                    ],
+
+                    dependencies: [
+                      "canonical:dependency",
+                    ],
+
+                    supersedes: [
+                      "canonical:previous",
+                    ],
+
+                    provenance: {
+                      evidenceIds: [
+                        "evidence:runtime-governed",
+                      ],
+
+                      sourceLocations: [
+                        "docs/architecture/runtime.md",
+                      ],
+
+                      contentRefs: [
+                        "sha256:runtime-governed",
+                      ],
+
+                      sources: [
+                        "repository",
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+        },
+      );
+
+    const snapshot =
+      service.snapshot();
+
+    assert.equal(
+      snapshot.artifacts.length,
+      1,
+    );
+
+    const artifact =
+      snapshot.artifacts[0];
+
+    assert.equal(
+      artifact.authorityClass,
+      "Architecture Council",
+    );
+
+    assert.equal(
+      artifact.owner,
+      "Knowledge Operations",
+    );
+
+    assert.equal(
+      artifact.scope,
+      "platform",
+    );
+
+    assert.equal(
+      artifact.version,
+      "3.2.1",
+    );
+
+    assert.deepEqual(
+      artifact.relatedKnowledgePackages,
+      [
+        "KP-2026-000999",
+      ],
+    );
+
+    assert.deepEqual(
+      artifact.lineage,
+      [
+        "knowledge-ir:runtime-governed",
+      ],
+    );
+
+    assert.deepEqual(
+      artifact.dependencies,
+      [
+        "canonical:dependency",
+      ],
+    );
+
+    assert.equal(
+      artifact.supersession,
+      "canonical:previous",
+    );
+
+    assert.deepEqual(
+      artifact.sourceRefs,
+      [
+        "docs/architecture/runtime.md",
+        "sha256:runtime-governed",
+      ],
+    );
+  },
+);
+
+
+test(
   "empty canonical corpus preserves the certified Education UI composition",
   () => {
     const service =

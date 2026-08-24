@@ -34,6 +34,90 @@ export function educationMetadataRecord(
     : {};
 }
 
+export function educationGovernanceRecord(
+  item:
+    CanonicalKnowledgeItem,
+): Record<
+  string,
+  unknown
+> | null {
+  const metadata =
+    educationMetadataRecord(
+      item,
+    );
+
+  return isEducationRecord(
+    metadata.governance,
+  )
+    ? metadata.governance
+    : null;
+}
+
+export function educationGovernanceString(
+  item:
+    CanonicalKnowledgeItem,
+
+  key:
+    string,
+): string | null {
+  const governance =
+    educationGovernanceRecord(
+      item,
+    );
+
+  if (
+    !governance
+  ) {
+    return null;
+  }
+
+  const value =
+    governance[key];
+
+  return (
+    typeof value ===
+      "string" &&
+    value.trim().length >
+      0
+  )
+    ? value
+    : null;
+}
+
+export function educationGovernanceStrings(
+  item:
+    CanonicalKnowledgeItem,
+
+  key:
+    string,
+): string[] {
+  const governance =
+    educationGovernanceRecord(
+      item,
+    );
+
+  if (
+    !governance ||
+    !Array.isArray(
+      governance[key],
+    )
+  ) {
+    return [];
+  }
+
+  return (
+    governance[key] as unknown[]
+  ).filter(
+    (
+      entry,
+    ): entry is string =>
+      typeof entry ===
+        "string" &&
+      entry.trim().length >
+        0,
+  );
+}
+
 export function educationMetadataString(
   item:
     CanonicalKnowledgeItem,
