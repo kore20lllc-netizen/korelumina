@@ -8,9 +8,29 @@ import {
   knowledgeOperationsService,
 } from "../../knowledge-operations/KnowledgeOperationsService.js";
 
+import type {
+  KnowledgeOperationsService,
+} from "../../knowledge-operations/KnowledgeOperationsService.js";
+
+
+export interface KnowledgeOperationsRouteDependencies {
+  service?:
+    Pick<
+      KnowledgeOperationsService,
+      "getSnapshot"
+    >;
+}
+
+
 export function registerKnowledgeOperationsRoutes(
   app: Express,
+
+  dependencies:
+    KnowledgeOperationsRouteDependencies = {},
 ): void {
+  const service =
+    dependencies.service ??
+    knowledgeOperationsService;
   app.get(
     "/api/knowledge/operations",
     (
@@ -18,7 +38,7 @@ export function registerKnowledgeOperationsRoutes(
       res: Response,
     ) => {
       res.json(
-        knowledgeOperationsService.getSnapshot(),
+        service.getSnapshot(),
       );
     },
   );

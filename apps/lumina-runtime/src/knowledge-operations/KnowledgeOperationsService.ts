@@ -8,7 +8,6 @@ import type {
 
 import type {
   CanonicalKnowledgeItem,
-  CanonicalKnowledgeStore,
 } from "../canonical-knowledge/index.js";
 
 import type {
@@ -36,6 +35,12 @@ export interface KnowledgeProviderSummary {
   status: "available" | "planned";
 }
 
+export interface KnowledgeOperationsCanonicalReadStore {
+  list():
+    CanonicalKnowledgeItem[];
+}
+
+
 export interface KnowledgeOperationsRuntimeTruth {
   packageService:
     KnowledgePackageService;
@@ -44,7 +49,7 @@ export interface KnowledgeOperationsRuntimeTruth {
     KnowledgeManufacturingRunService;
 
   canonicalStore:
-    CanonicalKnowledgeStore;
+    KnowledgeOperationsCanonicalReadStore;
 }
 
 function normalizeStatus(

@@ -30,6 +30,9 @@ import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
+import {
+  KnowledgeOperationsService,
+} from "./knowledge-operations/KnowledgeOperationsService.js";
 import { registerCanonicalReviewRoutes } from "./routes/knowledge/registerCanonicalReviewRoutes.js";
 import { registerCanonicalReviewPolicyRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyRoutes.js";
 import { registerCanonicalReviewPolicyAdministrationRoutes } from "./routes/knowledge/registerCanonicalReviewPolicyAdministrationRoutes.js";
@@ -383,6 +386,22 @@ export const runtimeKnowledgeEducationProjectionService =
     runtimeGenesisCanonicalConsumption
       .store,
   );
+
+export const runtimeKnowledgeOperationsService =
+  new KnowledgeOperationsService({
+    packageService:
+      runtimeKnowledgePreservationPlatform
+        .packageService,
+
+    manufacturingRunService:
+      runtimeKnowledgePreservationPlatform
+        .manufacturingRunService,
+
+    canonicalStore:
+      runtimeGenesisCanonicalConsumption
+        .store,
+  });
+
 
 export const runtimeGovernedPromotionService =
   new GovernedCanonicalPromotionService(
@@ -758,7 +777,13 @@ registerRevertDraftRoute(app);
 registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 
-registerKnowledgeOperationsRoutes(app);
+registerKnowledgeOperationsRoutes(
+  app,
+  {
+    service:
+      runtimeKnowledgeOperationsService,
+  },
+);
 
 registerGenesisReplayExecutionRoute(
   app,
