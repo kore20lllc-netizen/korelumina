@@ -36,6 +36,7 @@ export * from "./GenesisCurrentPolicyOrganizationalMemoryView.js";
 export * from "./GenesisHistoricalKnowledgeLineage.js";
 export * from "./GenesisReadiness.js";
 export * from "./GenesisConversationSourceBoundary.js";
+export * from "./GenesisConversationAcquisition.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";
