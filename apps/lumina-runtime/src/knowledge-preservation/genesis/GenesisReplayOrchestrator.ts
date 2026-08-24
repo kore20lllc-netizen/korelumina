@@ -49,6 +49,14 @@ import {
   materializeGenesisHistoricalCorrelation,
 } from "./GenesisHistoricalCorrelationMaterializer.js";
 
+import type {
+  HistoricalSourceDiscoverer,
+} from "./HistoricalSourceDiscovery.js";
+
+import type {
+  GenesisConversationReplayEvidenceResolver,
+} from "./GenesisConversationReplayEvidenceResolver.js";
+
 export type GenesisReplayOrchestratorMode =
   | "DRY_RUN"
   | "PRODUCTION_ADMISSION";
@@ -119,6 +127,9 @@ export type GenesisReplayManifestBuilder =
 
       discoveredAt?:
         number;
+
+      additionalDiscoverers?:
+        readonly HistoricalSourceDiscoverer[];
     },
   ) => Promise<
     GenesisSourceManifestBuildResult
@@ -157,6 +168,12 @@ export interface RunGovernedGenesisReplayInput {
 
   manifestBuilder?:
     GenesisReplayManifestBuilder;
+
+  additionalDiscoverers?:
+    readonly HistoricalSourceDiscoverer[];
+
+  conversationEvidenceResolver?:
+    GenesisConversationReplayEvidenceResolver;
 }
 
 function assertValidTimestamp(
@@ -295,6 +312,9 @@ export async function runGovernedGenesisReplay(
 
       discoveredAt:
         input.discoveredAt,
+
+      additionalDiscoverers:
+        input.additionalDiscoverers,
     });
 
   /*
@@ -403,6 +423,9 @@ export async function runGovernedGenesisReplay(
     new GenesisProductionReplayAdmissionAdapter({
       platform:
         input.platform,
+
+      conversationEvidenceResolver:
+        input.conversationEvidenceResolver,
     });
 
   const runnerResult =

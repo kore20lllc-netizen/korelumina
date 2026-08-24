@@ -17,9 +17,11 @@ import {
 
 import type {
   FileGenesisReplayPersistenceStore,
+  GenesisConversationReplayEvidenceResolver,
   GenesisReplayOrchestratorMode,
   GenesisReplayOrchestratorResult,
   GenesisReplayScope,
+  HistoricalSourceDiscoverer,
 } from "../knowledge-preservation/genesis/index.js";
 
 import {
@@ -38,6 +40,12 @@ export interface GenesisReplayExecutionRouteRuntime {
 
   now():
     number;
+
+  additionalDiscoverers?:
+    readonly HistoricalSourceDiscoverer[];
+
+  conversationEvidenceResolver?:
+    GenesisConversationReplayEvidenceResolver;
 
   execute?:
     typeof runGovernedGenesisReplay;
@@ -447,6 +455,12 @@ export function createGenesisReplayExecutionHandler(
           authorizeProductionAdmission:
             request
               .authorizeProductionAdmission,
+
+          additionalDiscoverers:
+            runtime.additionalDiscoverers,
+
+          conversationEvidenceResolver:
+            runtime.conversationEvidenceResolver,
         });
 
       return res.json({

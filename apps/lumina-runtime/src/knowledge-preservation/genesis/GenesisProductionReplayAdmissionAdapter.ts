@@ -17,6 +17,7 @@ import type {
 } from "./GenesisReplayExecution.js";
 
 import {
+  createGenesisReplayAdmissionIdentity,
   genesisReplayAdmissionRequestToEvidence,
 } from "./GenesisReplayAdmission.js";
 
@@ -24,11 +25,19 @@ import {
   classifyGenesisHistoricalAdmission,
 } from "./GenesisHistoricalAdmissionGovernancePolicy.js";
 
+import type {
+  GenesisConversationReplayEvidenceResolver,
+} from "./GenesisConversationReplayEvidenceResolver.js";
+
 
 export interface GenesisProductionReplayAdmissionAdapterOptions {
   platform:
     KnowledgePreservationPlatform;
+
+  conversationEvidenceResolver?:
+    GenesisConversationReplayEvidenceResolver;
 }
+
 
 function evidenceRun(
   platform:
@@ -42,28 +51,26 @@ function evidenceRun(
     .manufacturingRunService
     .list()
     .find(
-      (
-        run,
-      ) =>
+      run =>
         run.evidenceId ===
         evidenceId,
     );
 }
+
 
 function evidenceIntakeCompleted(
   run:
     KnowledgeManufacturingRun,
 ): boolean {
   return run.stageHistory.some(
-    (
-      event,
-    ) =>
+    event =>
       event.stage ===
         "Evidence Intake" &&
       event.outcome ===
         "completed",
   );
 }
+
 
 function assertProductionAdmissionRequest(
   request:
@@ -79,8 +86,7 @@ function assertProductionAdmissionRequest(
   }
 
   if (
-    request.manifestEntry
-      .replayEligibility !==
+    request.manifestEntry.replayEligibility !==
     "eligible"
   ) {
     throw new Error(
@@ -89,10 +95,8 @@ function assertProductionAdmissionRequest(
   }
 
   if (
-    request.planEntry
-      .historicalSourceId !==
-    request.manifestEntry
-      .historicalSourceId
+    request.planEntry.historicalSourceId !==
+    request.manifestEntry.historicalSourceId
   ) {
     throw new Error(
       "genesis_production_admission_source_identity_mismatch",
@@ -100,16 +104,29 @@ function assertProductionAdmissionRequest(
   }
 
   if (
-    request.planEntry
-      .sourceChecksum !==
-    request.manifestEntry
-      .sourceChecksum
+    request.planEntry.sourceChecksum !==
+    request.manifestEntry.sourceChecksum
   ) {
     throw new Error(
       "genesis_production_admission_source_checksum_mismatch",
     );
   }
+
+  const expectedAdmissionIdentity =
+    createGenesisReplayAdmissionIdentity(
+      request,
+    );
+
+  if (
+    request.admissionIdentity !==
+    expectedAdmissionIdentity
+  ) {
+    throw new Error(
+      "genesis_replay_admission_identity_mismatch",
+    );
+  }
 }
+
 
 function existingAdmissionResult(
   run:
@@ -143,11 +160,17 @@ function existingAdmissionResult(
   };
 }
 
+
 export class GenesisProductionReplayAdmissionAdapter
   implements GenesisReplayAdmissionAdapter
 {
   private readonly platform:
     KnowledgePreservationPlatform;
+
+  private readonly conversationEvidenceResolver:
+    GenesisConversationReplayEvidenceResolver |
+    null;
+
 
   constructor(
     options:
@@ -155,7 +178,95 @@ export class GenesisProductionReplayAdmissionAdapter
   ) {
     this.platform =
       options.platform;
+
+    this.conversationEvidenceResolver =
+      options.conversationEvidenceResolver ??
+      null;
   }
+
+
+  private evidenceFor(
+    request:
+      GenesisReplayAdmissionRequest,
+  ): EvidenceItem {
+    if (
+      request.manifestEntry.evidenceType !==
+      "conversation"
+    ) {
+      return genesisReplayAdmissionRequestToEvidence(
+        request,
+      );
+    }
+
+    if (
+      !this.conversationEvidenceResolver
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_resolver_required",
+      );
+    }
+
+    const evidence =
+      this.conversationEvidenceResolver.resolve(
+        request.manifestEntry.historicalSourceId,
+      );
+
+    if (
+      !evidence
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_missing",
+      );
+    }
+
+    if (
+      evidence.type !==
+      "conversation"
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_type_mismatch",
+      );
+    }
+
+    if (
+      evidence.checksum !==
+      request.manifestEntry.sourceChecksum
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_checksum_mismatch",
+      );
+    }
+
+    if (
+      evidence.metadata.historicalSourceId !==
+      request.manifestEntry.historicalSourceId
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_source_identity_mismatch",
+      );
+    }
+
+    if (
+      evidence.contentRef !==
+      request.manifestEntry.provenanceLocator
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_provenance_mismatch",
+      );
+    }
+
+    if (
+      evidence.observedAt !==
+      request.manifestEntry.historicalTimestamp
+    ) {
+      throw new Error(
+        "genesis_conversation_replay_evidence_timestamp_mismatch",
+      );
+    }
+
+    return evidence;
+  }
+
 
   async admit(
     request:
@@ -168,7 +279,7 @@ export class GenesisProductionReplayAdmissionAdapter
     );
 
     const evidence =
-      genesisReplayAdmissionRequestToEvidence(
+      this.evidenceFor(
         request,
       );
 
@@ -193,20 +304,15 @@ export class GenesisProductionReplayAdmissionAdapter
     }
 
     /*
-     * Genesis Evidence admission and Knowledge manufacturing
-     * are separate trust transitions.
+     * Historical Evidence admission and Knowledge manufacturing
+     * remain separate trust transitions.
      *
-     * The Replay manifest plus deterministic Evidence identity
-     * and persisted ADMITTED checkpoint disposition preserve
-     * historical existence. Only sources classified as
-     * knowledge-seeding-eligible may enter the existing
-     * Knowledge Operations manufacturing pipeline.
-     *
-     * No classification here grants canonical authority.
+     * Conversation Evidence is admitted using its original
+     * acquisition custody. It is never reconstructed from the
+     * replay manifest.
      */
     if (
-      !governance
-        .invokeKnowledgeManufacturing
+      !governance.invokeKnowledgeManufacturing
     ) {
       return {
         evidenceId:
@@ -221,17 +327,6 @@ export class GenesisProductionReplayAdmissionAdapter
     } catch (
       error
     ) {
-      /*
-       * preserve() governs more than Evidence Intake.
-       *
-       * If Evidence Intake completed before a later
-       * manufacturing stage failed, Genesis admission itself
-       * succeeded. The downstream Knowledge Operations run
-       * remains the authoritative record of that later failure.
-       *
-       * If Evidence Intake never completed, propagate the
-       * original failure and do not mark Genesis ADMITTED.
-       */
       const afterFailure =
         evidenceRun(
           this.platform,

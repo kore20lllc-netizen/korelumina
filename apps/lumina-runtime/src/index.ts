@@ -216,6 +216,8 @@ import {
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
   GenesisCurrentPolicyOrganizationalMemoryView,
+  PersistedConversationHistoricalSourceDiscoverer,
+  PersistedGenesisConversationReplayEvidenceResolver,
   resolveGenesisConversationRuntimeConfiguration,
   FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
@@ -274,6 +276,20 @@ export const runtimeGenesisConversationAcquisitionExecutor =
 
     repository:
       "korelumina",
+  });
+
+
+export const runtimeGenesisPersistedConversationHistoricalSourceDiscoverer =
+  new PersistedConversationHistoricalSourceDiscoverer({
+    acquisition:
+      runtimeGenesisConversationAcquisitionPersistenceStore,
+  });
+
+
+export const runtimeGenesisConversationReplayEvidenceResolver =
+  new PersistedGenesisConversationReplayEvidenceResolver({
+    acquisition:
+      runtimeGenesisConversationAcquisitionPersistenceStore,
   });
 
 
@@ -854,6 +870,13 @@ registerGenesisReplayExecutionRoute(
     now:
       () =>
         Date.now(),
+
+    additionalDiscoverers: [
+      runtimeGenesisPersistedConversationHistoricalSourceDiscoverer,
+    ],
+
+    conversationEvidenceResolver:
+      runtimeGenesisConversationReplayEvidenceResolver,
   },
 );
 

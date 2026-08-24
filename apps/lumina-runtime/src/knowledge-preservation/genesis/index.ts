@@ -46,6 +46,7 @@ export * from "./GenesisConversationExpectedHistoryInventory.js";
 export * from "./GenesisConversationExpectedHistoryPersistence.js";
 export * from "./GenesisConversationHistoryReconciliationService.js";
 export * from "./PersistedConversationHistoricalSourceDiscoverer.js";
+export * from "./GenesisConversationReplayEvidenceResolver.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";
