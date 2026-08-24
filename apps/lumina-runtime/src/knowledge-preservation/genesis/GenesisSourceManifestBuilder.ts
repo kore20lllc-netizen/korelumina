@@ -76,6 +76,9 @@ export interface BuildDefaultGenesisSourceManifestInput {
 
   discoveredAt?:
     number;
+
+  additionalDiscoverers?:
+    readonly HistoricalSourceDiscoverer[];
 }
 
 function canonicalManifestEntries(
@@ -279,6 +282,11 @@ export async function buildDefaultGenesisSourceManifest(
           () =>
             discoveredAt,
       }),
+
+      ...(
+        input.additionalDiscoverers ??
+        []
+      ),
     ],
   });
 }
