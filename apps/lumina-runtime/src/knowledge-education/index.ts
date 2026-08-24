@@ -6,6 +6,8 @@ export * from "./EducationalCorpusPersistence.js";
 export * from "./EducationalCorpusRuntimeService.js";
 export * from "./EducationalCorpusCertificationCandidate.js";
 export * from "./EducationalCorpusCertification.js";
+export * from "./EducationalCorpusCertificationPersistence.js";
+export * from "./EducationalCorpusCertificationService.js";
 export * from "./KnowledgeEducationProjectionService.js";
 export * from "./normalization/index.js";
 export * from "./admission/index.js";

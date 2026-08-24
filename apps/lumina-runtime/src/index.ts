@@ -101,7 +101,9 @@ import {
 } from "./knowledge-preservation/bootstrap/index.js";
 
 import {
+  EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
+  FileEducationalCorpusCertificationPersistenceStore,
   FileEducationalCorpusPersistenceStore,
   KnowledgeEducationProjectionService,
 } from "./knowledge-education/index.js";
@@ -549,6 +551,23 @@ export const runtimeEducationalCorpusService =
     runtimeEducationalCorpusPersistenceStore,
     runtimeKnowledgeEducationProjectionService,
     runtimeGenesisDayZeroCertificationService,
+  );
+
+
+export const runtimeEducationalCorpusCertificationPersistenceStore =
+  new FileEducationalCorpusCertificationPersistenceStore();
+
+
+export const runtimeEducationalCorpusCertificationService =
+  new EducationalCorpusCertificationService(
+    runtimeEducationalCorpusCertificationPersistenceStore,
+    {
+      readCurrentCandidate:
+        () =>
+          runtimeEducationalCorpusService
+            .read()
+            .certificationCandidate,
+    },
   );
 
 export const runtimeKnowledgeOperationsService =
