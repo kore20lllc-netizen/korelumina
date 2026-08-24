@@ -296,9 +296,10 @@ export function classifyGenesisHistoricalAdmission(
     "conversation"
   ) {
     return decision(
-      "requires-governance-review",
+      "historical-correlation-eligible",
       [
-        "Conversation Evidence may be admitted historically but interpretive Knowledge seeding requires governance review.",
+        "Conversation Evidence is independently acquired historical Evidence and may participate in governed historical correlation.",
+        "Conversation Evidence does not authorize automatic interpretive Knowledge manufacturing or canonical promotion.",
       ],
     );
   }

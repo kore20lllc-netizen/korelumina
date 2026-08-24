@@ -309,9 +309,7 @@ function buildSourceReference(
         entry.sourceChecksum,
 
       acquisitionState:
-        externalSource
-          ? "not-yet-ingested"
-          : "acquired",
+        "acquired",
 
       acquiredAt:
         entry.discoveredAt,
