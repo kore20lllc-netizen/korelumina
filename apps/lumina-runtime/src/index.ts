@@ -1,6 +1,10 @@
 import path from "node:path";
 
 import {
+  fileURLToPath,
+} from "node:url";
+
+import {
   registerRuntimeScenarioRoute,
 } from "./routes/runtimeScenario.js";
 
@@ -1068,86 +1072,167 @@ registerExecutiveApprovalRoute(
   },
 );
 
-const PORT =
-  Number(process.env.LUMINA_RUNTIME_PORT) || 4100;
+export async function startLuminaRuntimeServer():
+Promise<void> {
+  const PORT =
+    Number(
+      process.env
+        .LUMINA_RUNTIME_PORT,
+    ) ||
+    4100;
 
-const shouldBootstrap = claimRuntimeBootstrap();
+  const shouldBootstrap =
+    claimRuntimeBootstrap();
 
-if (shouldBootstrap) {
-  backfillMissingProjectMetadata();
-  await recoverPersistedRuntimes();
-  startRuntimeSupervisor();
+  if (
+    shouldBootstrap
+  ) {
+    backfillMissingProjectMetadata();
 
-  /*
-   * Event-driven governance is primary.
-   *
-   * Recovery executes once at Runtime startup and then every
-   * five minutes only to recover packages stranded by a lost
-   * in-process governance-ready signal or Runtime crash.
-   */
-  runtimeGovernanceReadyRecoveryScheduler
-    .start();
-} else {
-  console.warn(
-    "[lumina-runtime] bootstrap already claimed; skipping recovery/supervisor",
-  );
-}
+    await recoverPersistedRuntimes();
 
-const server = app.listen(PORT, () => {
-  console.log(
-    `[lumina-runtime] listening on ${PORT}`,
-  );
-});
+    startRuntimeSupervisor();
 
-let shuttingDown = false;
-
-async function shutdown(signal: string) {
-  if (shuttingDown) {
-    return;
+    /*
+     * Event-driven governance is primary.
+     *
+     * Recovery executes once at Runtime startup and then every
+     * five minutes only to recover packages stranded by a lost
+     * in-process governance-ready signal or Runtime crash.
+     */
+    runtimeGovernanceReadyRecoveryScheduler
+      .start();
+  } else {
+    console.warn(
+      "[lumina-runtime] bootstrap already claimed; skipping recovery/supervisor",
+    );
   }
 
-  shuttingDown = true;
+  const server =
+    app.listen(
+      PORT,
+      () => {
+        console.log(
+          `[lumina-runtime] listening on ${PORT}`,
+        );
+      },
+    );
 
-  console.log(
-    `[lumina-runtime] shutting down: ${signal}`,
+  let shuttingDown =
+    false;
+
+  async function shutdown(
+    signal:
+      string,
+  ) {
+    if (
+      shuttingDown
+    ) {
+      return;
+    }
+
+    shuttingDown =
+      true;
+
+    console.log(
+      `[lumina-runtime] shutting down: ${signal}`,
+    );
+
+    stopRuntimeSupervisor();
+
+    runtimeGovernanceReadyRecoveryScheduler
+      .stop();
+
+    await stopAllWorkspaceWatchers();
+
+    await stopAllRuntimes();
+
+    server.close(
+      () => {
+        process.exit(
+          0,
+        );
+      },
+    );
+
+    setTimeout(
+      () => {
+        process.exit(
+          1,
+        );
+      },
+      5000,
+    ).unref();
+  }
+
+  process.on(
+    "SIGINT",
+    () => {
+      void shutdown(
+        "SIGINT",
+      );
+    },
   );
 
-  stopRuntimeSupervisor();
+  process.on(
+    "SIGTERM",
+    () => {
+      void shutdown(
+        "SIGTERM",
+      );
+    },
+  );
 
-  runtimeGovernanceReadyRecoveryScheduler
-    .stop();
+  process.on(
+    "uncaughtException",
+    (
+      error,
+    ) => {
+      console.error(
+        "[runtime] uncaughtException",
+        error,
+      );
+    },
+  );
 
-  await stopAllWorkspaceWatchers();
-
-  await stopAllRuntimes();
-
-  server.close(() => {
-    process.exit(0);
-  });
-
-  setTimeout(() => {
-    process.exit(1);
-  }, 5000).unref();
+  process.on(
+    "unhandledRejection",
+    (
+      error,
+    ) => {
+      console.error(
+        "[runtime] unhandledRejection",
+        error,
+      );
+    },
+  );
 }
 
-process.on("SIGINT", () => {
-  void shutdown("SIGINT");
-});
 
-process.on("SIGTERM", () => {
-  void shutdown("SIGTERM");
-});
+function isDirectRuntimeEntrypoint():
+boolean {
+  const entry =
+    process.argv[1];
 
-process.on("uncaughtException", (error) => {
-  console.error(
-    "[runtime] uncaughtException",
-    error,
+  if (
+    !entry
+  ) {
+    return false;
+  }
+
+  return (
+    fileURLToPath(
+      import.meta.url,
+    ) ===
+    path.resolve(
+      entry,
+    )
   );
-});
+}
 
-process.on("unhandledRejection", (error) => {
-  console.error(
-    "[runtime] unhandledRejection",
-    error,
-  );
-});
+
+if (
+  isDirectRuntimeEntrypoint()
+) {
+  void startLuminaRuntimeServer();
+}
