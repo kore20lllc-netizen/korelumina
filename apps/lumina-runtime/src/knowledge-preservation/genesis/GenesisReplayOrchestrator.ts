@@ -49,6 +49,14 @@ import {
   materializeGenesisHistoricalCorrelation,
 } from "./GenesisHistoricalCorrelationMaterializer.js";
 
+import {
+  integrateGenesisHistoricalCorrelationRevision,
+} from "./GenesisHistoricalCorrelationRevisionIntegrator.js";
+
+import type {
+  GenesisHistoricalCorrelationState,
+} from "./GenesisHistoricalCorrelation.js";
+
 import type {
   HistoricalSourceDiscoverer,
 } from "./HistoricalSourceDiscovery.js";
@@ -174,6 +182,10 @@ export interface RunGovernedGenesisReplayInput {
 
   conversationEvidenceResolver?:
     GenesisConversationReplayEvidenceResolver;
+
+  priorHistoricalCorrelation?:
+    GenesisHistoricalCorrelationState |
+    null;
 }
 
 function assertValidTimestamp(
@@ -447,10 +459,18 @@ export async function runGovernedGenesisReplay(
     runnerResult.outcome ===
     "COMPLETED"
   ) {
-    const correlation =
+    const materializedCorrelation =
       materializeGenesisHistoricalCorrelation(
         runnerResult.execution,
       );
+
+    const correlation =
+      input.priorHistoricalCorrelation
+        ? integrateGenesisHistoricalCorrelationRevision(
+            input.priorHistoricalCorrelation,
+            materializedCorrelation,
+          )
+        : materializedCorrelation;
 
     const correlationStore =
       new FileGenesisHistoricalCorrelationPersistenceStore();

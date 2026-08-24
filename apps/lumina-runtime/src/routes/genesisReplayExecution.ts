@@ -18,6 +18,7 @@ import {
 import type {
   FileGenesisReplayPersistenceStore,
   GenesisConversationReplayEvidenceResolver,
+  GenesisHistoricalCorrelationState,
   GenesisReplayOrchestratorMode,
   GenesisReplayOrchestratorResult,
   GenesisReplayScope,
@@ -46,6 +47,10 @@ export interface GenesisReplayExecutionRouteRuntime {
 
   conversationEvidenceResolver?:
     GenesisConversationReplayEvidenceResolver;
+
+  priorHistoricalCorrelation?():
+    GenesisHistoricalCorrelationState |
+    null;
 
   execute?:
     typeof runGovernedGenesisReplay;
@@ -461,6 +466,11 @@ export function createGenesisReplayExecutionHandler(
 
           conversationEvidenceResolver:
             runtime.conversationEvidenceResolver,
+
+          priorHistoricalCorrelation:
+            runtime.priorHistoricalCorrelation
+              ? runtime.priorHistoricalCorrelation()
+              : null,
         });
 
       return res.json({

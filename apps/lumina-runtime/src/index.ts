@@ -877,6 +877,42 @@ registerGenesisReplayExecutionRoute(
 
     conversationEvidenceResolver:
       runtimeGenesisConversationReplayEvidenceResolver,
+
+    priorHistoricalCorrelation:
+      () => {
+        const currentInventory =
+          listGenesisReplayInventory({
+            persistence:
+              runtimeGenesisReplayPersistenceStore,
+
+            manufacturingRuns:
+              runtimeKnowledgePreservationPlatform
+                .manufacturingRunService,
+          });
+
+        const currentSelection =
+          resolveGenesisRuntimeReplaySelection({
+            designationStore:
+              runtimeGenesisReplayDesignationStore,
+
+            inventory:
+              currentInventory,
+          });
+
+        if (
+          currentSelection.state !==
+            "SELECTED" ||
+          currentSelection.replayId ===
+            null
+        ) {
+          return null;
+        }
+
+        return runtimeGenesisHistoricalCorrelationPersistenceStore
+          .load(
+            currentSelection.replayId,
+          );
+      },
   },
 );
 
