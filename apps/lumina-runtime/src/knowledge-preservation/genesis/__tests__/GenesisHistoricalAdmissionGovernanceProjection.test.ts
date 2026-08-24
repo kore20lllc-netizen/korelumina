@@ -27,6 +27,15 @@ function source(
 
     approvalState?:
       string;
+
+    authorityOwner?:
+      string;
+
+    authorityScope?:
+      string;
+
+    authorityVersion?:
+      string;
   },
 ): GenesisSourceManifestEntry {
   return {
@@ -44,6 +53,15 @@ function source(
 
     approvalState:
       input.approvalState,
+
+    authorityOwner:
+      input.authorityOwner,
+
+    authorityScope:
+      input.authorityScope,
+
+    authorityVersion:
+      input.authorityVersion,
 
     provenanceLocator:
       `fixture:${input.id}`,
@@ -129,6 +147,15 @@ test(
 
         approvalState:
           "approved",
+
+        authorityOwner:
+          "Architecture Council",
+
+        authorityScope:
+          "KoreLumina",
+
+        authorityVersion:
+          "1.0",
       });
 
     const projection =

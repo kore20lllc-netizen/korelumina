@@ -126,6 +126,15 @@ test(
           approvalState:
             "Approved",
 
+          authorityOwner:
+            "Architecture Council",
+
+          authorityScope:
+            "KoreLumina",
+
+          authorityVersion:
+            "1.0",
+
           provenanceLocator:
             "docs/adr/ADR-001.md",
         }),
@@ -142,6 +151,136 @@ test(
     );
   },
 );
+
+test(
+  "accepted ADR without complete manufacturing governance identity requires governance review",
+  () => {
+    const result =
+      classifyGenesisHistoricalAdmission(
+        source({
+          historicalSourceId:
+            "genesis-source:ADR:incomplete" as
+              HistoricalSourceId,
+
+          sourceType:
+            "ADR",
+
+          evidenceType:
+            "ADR",
+
+          authorityClass:
+            "architecture-decision",
+
+          approvalState:
+            "Accepted",
+
+          provenanceLocator:
+            "docs/adr/ADR-0036.md",
+        }),
+      );
+
+    assert.equal(
+      result.classification,
+      "requires-governance-review",
+    );
+
+    assert.equal(
+      result.invokeKnowledgeManufacturing,
+      false,
+    );
+
+    assert.equal(
+      result.correlationEligible,
+      false,
+    );
+
+    assert.ok(
+      result.reasons.some(
+        reason =>
+          reason.includes(
+            "authority owner",
+          ),
+      ),
+    );
+
+    assert.ok(
+      result.reasons.some(
+        reason =>
+          reason.includes(
+            "authority scope",
+          ),
+      ),
+    );
+
+    assert.ok(
+      result.reasons.some(
+        reason =>
+          reason.includes(
+            "authority version",
+          ),
+      ),
+    );
+  },
+);
+
+
+test(
+  "semantic seed source without authority class requires governance review",
+  () => {
+    const result =
+      classifyGenesisHistoricalAdmission(
+        source({
+          historicalSourceId:
+            "genesis-source:ADR:no-authority" as
+              HistoricalSourceId,
+
+          sourceType:
+            "ADR",
+
+          evidenceType:
+            "ADR",
+
+          authorityClass:
+            undefined,
+
+          approvalState:
+            "Approved",
+
+          authorityOwner:
+            "Architecture Council",
+
+          authorityScope:
+            "KoreLumina",
+
+          authorityVersion:
+            "1.0",
+
+          provenanceLocator:
+            "docs/adr/ADR-no-authority.md",
+        }),
+      );
+
+    assert.equal(
+      result.classification,
+      "requires-governance-review",
+    );
+
+    assert.equal(
+      result.invokeKnowledgeManufacturing,
+      false,
+    );
+
+    assert.ok(
+      result.reasons.some(
+        reason =>
+          reason.includes(
+            "authority class",
+          ),
+      ),
+    );
+  },
+);
+
 
 test(
   "approved documentation with complete manufacturing governance metadata may seed Knowledge",

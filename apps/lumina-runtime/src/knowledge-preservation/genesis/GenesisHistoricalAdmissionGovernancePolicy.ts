@@ -127,19 +127,55 @@ function unresolvedApprovalState(
   );
 }
 
-function documentationManufacturingReadinessIssues(
+function knowledgeManufacturingReadinessIssues(
   source:
     GenesisSourceManifestEntry,
 ): string[] {
+  const issues:
+    string[] = [];
+
+  if (
+    !source.authorityClass
+      ?.trim()
+  ) {
+    issues.push(
+      "Knowledge manufacturing requires an explicit authority class.",
+    );
+  }
+
+  if (
+    !source.authorityOwner
+      ?.trim()
+  ) {
+    issues.push(
+      "Knowledge manufacturing requires an explicit authority owner.",
+    );
+  }
+
+  if (
+    !source.authorityScope
+      ?.trim()
+  ) {
+    issues.push(
+      "Knowledge manufacturing requires an explicit authority scope.",
+    );
+  }
+
+  if (
+    !source.authorityVersion
+      ?.trim()
+  ) {
+    issues.push(
+      "Knowledge manufacturing requires an explicit authority version.",
+    );
+  }
+
   if (
     source.evidenceType !==
     "document"
   ) {
-    return [];
+    return issues;
   }
-
-  const issues:
-    string[] = [];
 
   const approvalState =
     normalize(
@@ -160,33 +196,6 @@ function documentationManufacturingReadinessIssues(
   ) {
     issues.push(
       "Documentation Knowledge manufacturing requires explicit approvalState=approved.",
-    );
-  }
-
-  if (
-    !source.authorityOwner
-      ?.trim()
-  ) {
-    issues.push(
-      "Documentation Knowledge manufacturing requires an explicit authority owner.",
-    );
-  }
-
-  if (
-    !source.authorityScope
-      ?.trim()
-  ) {
-    issues.push(
-      "Documentation Knowledge manufacturing requires an explicit authority scope.",
-    );
-  }
-
-  if (
-    !source.authorityVersion
-      ?.trim()
-  ) {
-    issues.push(
-      "Documentation Knowledge manufacturing requires an explicit authority version.",
     );
   }
 
@@ -338,21 +347,21 @@ export function classifyGenesisHistoricalAdmission(
       approvalState,
     )
   ) {
-    const documentationReadinessIssues =
-      documentationManufacturingReadinessIssues(
+    const manufacturingReadinessIssues =
+      knowledgeManufacturingReadinessIssues(
         source,
       );
 
     if (
-      documentationReadinessIssues
+      manufacturingReadinessIssues
         .length >
       0
     ) {
       return decision(
         "requires-governance-review",
         [
-          "Historical documentation is approved but does not satisfy the governed Knowledge manufacturing metadata contract.",
-          ...documentationReadinessIssues,
+          "Historical semantic source has a recognized approval state but does not satisfy the governed Knowledge manufacturing identity contract.",
+          ...manufacturingReadinessIssues,
         ],
       );
     }
