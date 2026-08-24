@@ -53,6 +53,7 @@ export * from "./GenesisDayZeroCertificationCandidate.js";
 export * from "./GenesisDayZeroCertification.js";
 export * from "./GenesisDayZeroCertificationPersistence.js";
 export * from "./GenesisDayZeroCertificationService.js";
+export * from "./GenesisDayZeroCertificationApprovalProjection.js";
 export * from "./GenesisOperationalProjection.js";
 export * from "./GenesisOperationalProjectionService.js";
 export * from "./GenesisHistoricalCorrelationMaterializer.js";

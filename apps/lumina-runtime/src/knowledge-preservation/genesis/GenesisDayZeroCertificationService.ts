@@ -17,6 +17,14 @@ import type {
   GenesisDayZeroCertificationPersistenceStore,
 } from "./GenesisDayZeroCertificationPersistence.js";
 
+import {
+  buildGenesisDayZeroCertificationApprovalProjection,
+} from "./GenesisDayZeroCertificationApprovalProjection.js";
+
+import type {
+  GenesisDayZeroCertificationApprovalProjection,
+} from "./GenesisDayZeroCertificationApprovalProjection.js";
+
 
 export type GenesisDayZeroCertificationRuntimeState =
   | "UNSET"
@@ -50,6 +58,9 @@ export interface GenesisDayZeroCertificationRuntimeProjection {
     chiefAgentActivationAuthorized:
       false;
   };
+
+  approval:
+    GenesisDayZeroCertificationApprovalProjection;
 }
 
 
@@ -82,9 +93,9 @@ export class GenesisDayZeroCertificationService {
     if (
       !certification
     ) {
-      return {
+      const projectionWithoutApproval = {
         state:
-          "UNSET",
+          "UNSET" as const,
 
         candidate,
 
@@ -96,14 +107,23 @@ export class GenesisDayZeroCertificationService {
 
         downstream: {
           educationalCorpusCertified:
-            false,
+            false as const,
 
           initialCompetencyCertified:
-            false,
+            false as const,
 
           chiefAgentActivationAuthorized:
-            false,
+            false as const,
         },
+      };
+
+      return {
+        ...projectionWithoutApproval,
+
+        approval:
+          buildGenesisDayZeroCertificationApprovalProjection(
+            projectionWithoutApproval,
+          ),
       };
     }
 
@@ -115,7 +135,7 @@ export class GenesisDayZeroCertificationService {
           candidate,
       });
 
-    return {
+    const projectionWithoutApproval = {
       state:
         validation.state,
 
@@ -127,14 +147,23 @@ export class GenesisDayZeroCertificationService {
 
       downstream: {
         educationalCorpusCertified:
-          false,
+          false as const,
 
         initialCompetencyCertified:
-          false,
+          false as const,
 
         chiefAgentActivationAuthorized:
-          false,
+          false as const,
       },
+    };
+
+    return {
+      ...projectionWithoutApproval,
+
+      approval:
+        buildGenesisDayZeroCertificationApprovalProjection(
+          projectionWithoutApproval,
+        ),
     };
   }
 
