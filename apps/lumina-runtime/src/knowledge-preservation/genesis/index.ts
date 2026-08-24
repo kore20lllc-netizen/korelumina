@@ -40,6 +40,7 @@ export * from "./GenesisConversationSourceBoundary.js";
 export * from "./GenesisConversationAcquisition.js";
 export * from "./GenesisHistoricalConversationSourceAdapter.js";
 export * from "./ChatGPTConversationExportSource.js";
+export * from "./ChatGPTBrowserRecoverySource.js";
 export * from "./GenesisConversationRuntimeConfiguration.js";
 export * from "./GenesisConversationAcquisitionExecution.js";
 export * from "./GenesisConversationAcquisitionInventory.js";
