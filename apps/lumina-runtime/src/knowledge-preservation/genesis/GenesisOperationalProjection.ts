@@ -19,6 +19,14 @@ import type {
 } from "./GenesisConversationSourceBoundary.js";
 
 import {
+  buildGenesisConversationCorrelationCompleteness,
+} from "./GenesisConversationCorrelationCompleteness.js";
+
+import type {
+  GenesisConversationCorrelationCompletenessProjection,
+} from "./GenesisConversationCorrelationCompleteness.js";
+
+import {
   buildGenesisCorpusReadModel,
 } from "./GenesisCorpusReadModel.js";
 
@@ -158,6 +166,9 @@ export interface GenesisOperationalProjection {
 
   conversationSource:
     GenesisConversationSourceBoundary;
+
+  conversationCorrelationCompleteness:
+    GenesisConversationCorrelationCompletenessProjection;
 }
 
 export interface BuildGenesisOperationalProjectionInput {
@@ -371,6 +382,19 @@ export function buildGenesisOperationalProjection(
     input.conversationSource ??
     certifiedConversationBoundary();
 
+  const conversationCorrelationCompleteness =
+    buildGenesisConversationCorrelationCompleteness({
+      manifestEntries:
+        input.manifestEntries,
+
+      dispositions:
+        input.replayDispositions ??
+        [],
+
+      correlation:
+        input.correlation,
+    });
+
   const repositorySeedCertification =
     buildGenesisRepositorySeedCertification({
       corpus,
@@ -446,6 +470,10 @@ export function buildGenesisOperationalProjection(
       conversationSourceProjectionId:
         conversationSource
           .projectionId,
+
+      conversationCorrelationCompletenessProjectionId:
+        conversationCorrelationCompleteness
+          .projectionId,
     })}` as GenesisOperationalProjectionId;
 
   return {
@@ -475,5 +503,7 @@ export function buildGenesisOperationalProjection(
     readiness,
 
     conversationSource,
+
+    conversationCorrelationCompleteness,
   };
 }
