@@ -400,6 +400,10 @@ export const runtimeGenesisOperationalProjection =
             conversationSource:
               runtimeGenesisConversationConfiguration
                 .boundary,
+
+            conversationHistoryReconciliation:
+              runtimeGenesisConversationHistoryReconciliationService
+                .read(),
           });
         } catch (
           error
@@ -983,6 +987,11 @@ registerGenesisOperationalProjectionRoute(
     conversationSource:
       runtimeGenesisConversationConfiguration
         .boundary,
+
+    conversationHistoryReconciliation:
+      () =>
+        runtimeGenesisConversationHistoryReconciliationService
+          .read(),
   },
 );
 

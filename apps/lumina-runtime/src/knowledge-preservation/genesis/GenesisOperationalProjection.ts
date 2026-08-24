@@ -27,6 +27,18 @@ import type {
 } from "./GenesisConversationCorrelationCompleteness.js";
 
 import {
+  buildGenesisDayZeroCertificationCandidate,
+} from "./GenesisDayZeroCertificationCandidate.js";
+
+import type {
+  GenesisDayZeroCertificationCandidate,
+} from "./GenesisDayZeroCertificationCandidate.js";
+
+import type {
+  GenesisConversationHistoryReconciliationProjection,
+} from "./GenesisConversationHistoryReconciliationService.js";
+
+import {
   buildGenesisCorpusReadModel,
 } from "./GenesisCorpusReadModel.js";
 
@@ -169,6 +181,9 @@ export interface GenesisOperationalProjection {
 
   conversationCorrelationCompleteness:
     GenesisConversationCorrelationCompletenessProjection;
+
+  dayZeroCertificationCandidate:
+    GenesisDayZeroCertificationCandidate;
 }
 
 export interface BuildGenesisOperationalProjectionInput {
@@ -199,6 +214,10 @@ export interface BuildGenesisOperationalProjectionInput {
 
   conversationSource?:
     GenesisConversationSourceBoundary;
+
+  conversationHistoryReconciliation?:
+    GenesisConversationHistoryReconciliationProjection |
+    null;
 }
 
 function stableNormalize(
@@ -411,6 +430,20 @@ export function buildGenesisOperationalProjection(
       knowledgeLifecycle,
     });
 
+  const dayZeroCertificationCandidate =
+    buildGenesisDayZeroCertificationCandidate({
+      repositorySeedCertification,
+
+      corpus,
+
+      conversationHistory:
+        input.conversationHistoryReconciliation ??
+        null,
+
+      conversationCorrelation:
+        conversationCorrelationCompleteness,
+    });
+
   const readiness =
     buildGenesisReadiness({
       policy:
@@ -474,6 +507,10 @@ export function buildGenesisOperationalProjection(
       conversationCorrelationCompletenessProjectionId:
         conversationCorrelationCompleteness
           .projectionId,
+
+      dayZeroCertificationCandidateId:
+        dayZeroCertificationCandidate
+          .candidateId,
     })}` as GenesisOperationalProjectionId;
 
   return {
@@ -505,5 +542,7 @@ export function buildGenesisOperationalProjection(
     conversationSource,
 
     conversationCorrelationCompleteness,
+
+    dayZeroCertificationCandidate,
   };
 }

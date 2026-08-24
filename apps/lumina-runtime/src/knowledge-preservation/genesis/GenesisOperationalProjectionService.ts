@@ -19,6 +19,10 @@ import type {
 } from "./GenesisConversationSourceBoundary.js";
 
 import type {
+  GenesisConversationHistoryReconciliationProjection,
+} from "./GenesisConversationHistoryReconciliationService.js";
+
+import type {
   GenesisReplayId,
 } from "./GenesisReplayIdentity.js";
 
@@ -72,6 +76,10 @@ export interface ReadGenesisOperationalProjectionInput {
 
   conversationSource?:
     GenesisConversationSourceBoundary;
+
+  conversationHistoryReconciliation?:
+    GenesisConversationHistoryReconciliationProjection |
+    null;
 }
 
 export function readGenesisOperationalProjection(
@@ -168,5 +176,9 @@ export function readGenesisOperationalProjection(
 
     conversationSource:
       input.conversationSource,
+
+    conversationHistoryReconciliation:
+      input.conversationHistoryReconciliation ??
+      null,
   });
 }
