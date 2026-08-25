@@ -205,6 +205,11 @@ import {
 
 
 import {
+  registerGenesisConversationExpectedHistoryCandidateRoutes,
+} from "./routes/genesisConversationExpectedHistoryCandidate.js";
+
+
+import {
   registerGenesisConversationExpectedHistoryRoutes,
 } from "./routes/genesisConversationExpectedHistory.js";
 
@@ -221,7 +226,9 @@ import {
 import {
   buildGenesisRuntimeCanonicalConsumptionView,
   FileGenesisConversationAcquisitionPersistenceStore,
+  FileGenesisConversationExpectedHistoryCandidatePersistenceStore,
   FileGenesisConversationExpectedHistoryPersistenceStore,
+  GenesisConversationExpectedHistoryCandidateService,
   FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
@@ -302,6 +309,17 @@ export const runtimeGenesisConversationReplayEvidenceResolver =
     acquisition:
       runtimeGenesisConversationAcquisitionPersistenceStore,
   });
+
+
+export const runtimeGenesisConversationExpectedHistoryCandidatePersistenceStore =
+  new FileGenesisConversationExpectedHistoryCandidatePersistenceStore();
+
+
+export const runtimeGenesisConversationExpectedHistoryCandidateService =
+  new GenesisConversationExpectedHistoryCandidateService(
+    runtimeGenesisConversationAcquisitionPersistenceStore,
+    runtimeGenesisConversationExpectedHistoryCandidatePersistenceStore,
+  );
 
 
 export const runtimeGenesisConversationExpectedHistoryPersistenceStore =
@@ -1039,6 +1057,15 @@ registerGenesisConversationAcquisitionRoutes(
 
     configuration:
       runtimeGenesisConversationConfiguration,
+  },
+);
+
+
+registerGenesisConversationExpectedHistoryCandidateRoutes(
+  app,
+  {
+    service:
+      runtimeGenesisConversationExpectedHistoryCandidateService,
   },
 );
 
