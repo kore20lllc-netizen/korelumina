@@ -2163,246 +2163,565 @@ function setProjectDisposition(
 
 
 function discoverProject() {
-  const raw =
+  const projectStateRaw =
     runSafariJavaScript(
       `JSON.stringify((() => {
-        const pathSegments =
+        const segments =
           location.pathname
             .split("/")
             .filter(Boolean);
 
-        const projectMarkerIndex =
-          pathSegments.indexOf(
+        const gIndex =
+          segments.indexOf(
             "g"
           );
 
-        const projectId =
-          projectMarkerIndex >= 0
-            ? pathSegments[
-                projectMarkerIndex + 1
+        const rawProjectSegment =
+          gIndex >= 0
+            ? segments[
+                gIndex + 1
               ]
             : null;
 
-        if (!projectId) {
+        const match =
+          String(
+            rawProjectSegment ??
+            "",
+          ).match(
+            /^(g-p-[0-9a-f]{32})/i,
+          );
+
+        if (
+          !match
+        ) {
           throw new Error(
             "chatgpt_browser_recovery_not_in_project"
           );
         }
 
-        const projectConversationPrefix =
-          "/g/" +
-          projectId +
-          "/c/";
-
-        const links =
-          Array.from(
-            document.querySelectorAll(
-              "a[href]"
-            )
-          );
-
-        const conversations =
-          links
-            .map(
-              anchor => {
-                let url;
-
-                try {
-                  url =
-                    new URL(
-                      anchor.href,
-                    );
-                } catch {
-                  return null;
-                }
-
-                if (
-                  url.hostname !==
-                    "chatgpt.com" ||
-                  !url.pathname.startsWith(
-                    projectConversationPrefix
-                  )
-                ) {
-                  return null;
-                }
-
-                const segments =
-                  url.pathname
-                    .split("/")
-                    .filter(Boolean);
-
-                const conversationMarkerIndex =
-                  segments.lastIndexOf(
-                    "c"
-                  );
-
-                const rawConversationId =
-                  conversationMarkerIndex >= 0
-                    ? segments[
-                        conversationMarkerIndex + 1
-                      ]
-                    : null;
-
-                if (!rawConversationId) {
-                  return null;
-                }
-
-                return {
-                  conversationId:
-                    decodeURIComponent(
-                      rawConversationId
-                    ),
-
-                  title:
-                    (
-                      anchor.innerText ||
-                      anchor.textContent ||
-                      ""
-                    ).trim(),
-
-                  conversationUrl:
-                    url.origin +
-                    url.pathname,
-                };
-              }
-            )
-            .filter(Boolean);
-
-        const unique =
-          Array.from(
-            new Map(
-              conversations.map(
-                conversation => [
-                  conversation.conversationId,
-                  conversation,
-                ]
-              )
-            ).values()
-          )
-            .sort(
-              (left, right) =>
-                left.title.localeCompare(
-                  right.title
-                ) ||
-                left.conversationId.localeCompare(
-                  right.conversationId
-                )
-            );
-
-        const currentConversationIndex =
-          pathSegments.lastIndexOf(
-            "c"
-          );
-
-        const currentConversationId =
-          currentConversationIndex >= 0
-            ? pathSegments[
-                currentConversationIndex + 1
-              ]
-            : null;
-
         return {
-          inventoryVersion:
-            "chatgpt-browser-project-inventory:v1",
-
-          projectId,
+          projectId:
+            match[1],
 
           projectTitle:
             document.title
               ?.replace(
-                /\\s*[|\\-]\\s*ChatGPT\\s*$/i,
+                /\s*[|\-]\s*ChatGPT\s*$/i,
                 ""
               )
               .split(" - ")[0]
               .trim() ||
-            projectId,
-
-          discoveredAt:
-            Date.now(),
+            match[1],
 
           pageUrl:
             location.href,
-
-          currentConversationId,
-
-          conversationCount:
-            unique.length,
-
-          conversations:
-            unique,
         };
       })())`,
     );
 
-  let inventory;
+  let projectState;
 
   try {
-    inventory =
+    projectState =
       JSON.parse(
-        raw,
+        projectStateRaw,
       );
   } catch {
     fail(
-      `Safari returned invalid project inventory JSON:\n${raw.slice(0, 1000)}`,
+      `Safari returned invalid project identity JSON:\n${projectStateRaw}`,
     );
   }
+
+  const projectId =
+    projectState.projectId;
+
+  const conversations =
+    new Map();
+
+  let previousCount =
+    -1;
+
+  let stableBottomPasses =
+    0;
+
+  for (
+    let pass =
+      0;
+    pass <
+      80;
+    pass +=
+      1
+  ) {
+    const raw =
+      runSafariJavaScript(
+        `JSON.stringify((() => {
+          const projectId =
+            ${JSON.stringify(projectId)};
+
+          const selector =
+            'a[href*="/g/' +
+            projectId +
+            '/c/"]';
+
+          const links =
+            Array.from(
+              document.querySelectorAll(
+                selector
+              )
+            );
+
+          const records =
+            links
+              .map(
+                anchor => {
+                  let url;
+
+                  try {
+                    url =
+                      new URL(
+                        anchor.href
+                      );
+                  } catch {
+                    return null;
+                  }
+
+                  const segments =
+                    url.pathname
+                      .split("/")
+                      .filter(Boolean);
+
+                  const cIndex =
+                    segments.lastIndexOf(
+                      "c"
+                    );
+
+                  const rawConversationId =
+                    cIndex >= 0
+                      ? segments[
+                          cIndex + 1
+                        ]
+                      : null;
+
+                  if (
+                    !rawConversationId
+                  ) {
+                    return null;
+                  }
+
+                  return {
+                    conversationId:
+                      decodeURIComponent(
+                        rawConversationId
+                      ),
+
+                    title:
+                      (
+                        anchor.innerText ||
+                        anchor.textContent ||
+                        ""
+                      ).trim(),
+
+                    conversationUrl:
+                      url.origin +
+                      url.pathname,
+                  };
+                }
+              )
+              .filter(Boolean);
+
+          let scrollContainer =
+            null;
+
+          for (
+            const link
+            of links
+          ) {
+            let node =
+              link.parentElement;
+
+            while (
+              node
+            ) {
+              const style =
+                getComputedStyle(
+                  node
+                );
+
+              if (
+                (
+                  style.overflowY ===
+                    "auto" ||
+                  style.overflowY ===
+                    "scroll"
+                ) &&
+                node.scrollHeight >
+                  node.clientHeight +
+                  2
+              ) {
+                scrollContainer =
+                  node;
+
+                break;
+              }
+
+              node =
+                node.parentElement;
+            }
+
+            if (
+              scrollContainer
+            ) {
+              break;
+            }
+          }
+
+          if (
+            !scrollContainer
+          ) {
+            return {
+              records,
+              scrollable:
+                false,
+              scrollTop:
+                0,
+              scrollHeight:
+                0,
+              clientHeight:
+                0,
+              atBottom:
+                true,
+            };
+          }
+
+          const before =
+            scrollContainer.scrollTop;
+
+          const next =
+            Math.min(
+              scrollContainer.scrollHeight -
+                scrollContainer.clientHeight,
+              before +
+                Math.max(
+                  250,
+                  Math.floor(
+                    scrollContainer.clientHeight *
+                    0.75
+                  )
+                )
+            );
+
+          scrollContainer.scrollTop =
+            next;
+
+          return {
+            records,
+
+            scrollable:
+              true,
+
+            scrollTop:
+              scrollContainer.scrollTop,
+
+            scrollHeight:
+              scrollContainer.scrollHeight,
+
+            clientHeight:
+              scrollContainer.clientHeight,
+
+            atBottom:
+              scrollContainer.scrollTop +
+                scrollContainer.clientHeight >=
+              scrollContainer.scrollHeight -
+                4,
+          };
+        })())`,
+      );
+
+    let state;
+
+    try {
+      state =
+        JSON.parse(
+          raw,
+        );
+    } catch {
+      fail(
+        `Safari returned invalid exhaustive discovery JSON:\n${raw.slice(0, 1000)}`,
+      );
+    }
+
+    for (
+      const conversation
+      of state.records ??
+      []
+    ) {
+      const existing =
+        conversations.get(
+          conversation.conversationId,
+        );
+
+      /*
+       * Prefer a meaningful human-readable title when the same
+       * conversation is encountered more than once.
+       */
+      if (
+        !existing ||
+        (
+          (
+            !existing.title ||
+            existing.title ===
+              existing.conversationId
+          ) &&
+          conversation.title
+        )
+      ) {
+        conversations.set(
+          conversation.conversationId,
+          conversation,
+        );
+      }
+    }
+
+    const currentCount =
+      conversations.size;
+
+    console.log(
+      `[discover] pass=${pass + 1} conversations=${currentCount} scrollTop=${state.scrollTop} scrollHeight=${state.scrollHeight} bottom=${state.atBottom}`,
+    );
+
+    if (
+      state.atBottom
+    ) {
+      if (
+        currentCount ===
+          previousCount
+      ) {
+        stableBottomPasses +=
+          1;
+      } else {
+        stableBottomPasses =
+          0;
+      }
+
+      /*
+       * Two stable observations at the bottom are required before
+       * accepting the inventory. This gives ChatGPT time to lazy-load
+       * another batch after reaching the apparent bottom.
+       */
+      if (
+        stableBottomPasses >=
+          2
+      ) {
+        break;
+      }
+
+      /*
+       * Nudge upward and back down on the next pass. Virtualized
+       * sidebars sometimes materialize another batch only after an
+       * additional scroll event.
+       */
+      runSafariJavaScript(
+        `(() => {
+          const projectId =
+            ${JSON.stringify(projectId)};
+
+          const link =
+            document.querySelector(
+              'a[href*="/g/' +
+              projectId +
+              '/c/"]'
+            );
+
+          if (!link) {
+            return;
+          }
+
+          let node =
+            link.parentElement;
+
+          while (node) {
+            const style =
+              getComputedStyle(
+                node
+              );
+
+            if (
+              (
+                style.overflowY ===
+                  "auto" ||
+                style.overflowY ===
+                  "scroll"
+              ) &&
+              node.scrollHeight >
+                node.clientHeight +
+                2
+            ) {
+              node.scrollTop =
+                Math.max(
+                  0,
+                  node.scrollTop -
+                    Math.floor(
+                      node.clientHeight *
+                      0.5
+                    )
+                );
+
+              return;
+            }
+
+            node =
+              node.parentElement;
+          }
+        })()`,
+      );
+    }
+
+    previousCount =
+      currentCount;
+
+    sleep(
+      600,
+    );
+  }
+
+  /*
+   * One final collection after scrolling has stabilized.
+   */
+  const finalRaw =
+    runSafariJavaScript(
+      `JSON.stringify(
+        Array.from(
+          document.querySelectorAll(
+            'a[href*="/g/${projectId}/c/"]'
+          )
+        ).map(anchor => ({
+          href:
+            anchor.href,
+          title:
+            (
+              anchor.innerText ||
+              anchor.textContent ||
+              ""
+            ).trim()
+        }))
+      )`,
+    );
+
+  try {
+    const finalLinks =
+      JSON.parse(
+        finalRaw,
+      );
+
+    for (
+      const item
+      of finalLinks
+    ) {
+      const url =
+        new URL(
+          item.href,
+        );
+
+      const segments =
+        url.pathname
+          .split("/")
+          .filter(Boolean);
+
+      const cIndex =
+        segments.lastIndexOf(
+          "c",
+        );
+
+      if (
+        cIndex < 0 ||
+        !segments[
+          cIndex + 1
+        ]
+      ) {
+        continue;
+      }
+
+      const conversationId =
+        decodeURIComponent(
+          segments[
+            cIndex + 1
+          ],
+        );
+
+      conversations.set(
+        conversationId,
+        {
+          conversationId,
+
+          title:
+            item.title ||
+            conversations.get(
+              conversationId,
+            )?.title ||
+            conversationId,
+
+          conversationUrl:
+            url.origin +
+            url.pathname,
+        },
+      );
+    }
+  } catch {
+    // The accumulated inventory remains authoritative for this run.
+  }
+
+  const normalized =
+    [
+      ...conversations.values(),
+    ]
+      .sort(
+        (
+          left,
+          right,
+        ) =>
+          left.title.localeCompare(
+            right.title,
+          ) ||
+          left.conversationId.localeCompare(
+            right.conversationId,
+          ),
+      );
 
   if (
-    !inventory ||
-    typeof inventory !==
-      "object" ||
-    typeof inventory.projectId !==
-      "string" ||
-    !Array.isArray(
-      inventory.conversations,
-    )
+    normalized.length ===
+      0
   ) {
     fail(
-      "Project discovery returned an invalid inventory.",
+      "No project conversations were discovered.",
     );
   }
 
-  const inventoryRoot =
-    path.join(
-      REPOSITORY_ROOT,
-      "runtime-data",
-      "genesis",
-      "chatgpt-browser-recovery",
-      "project-inventories",
-    );
+  const inventory = {
+    inventoryVersion:
+      "chatgpt-browser-project-inventory:v1",
 
-  mkdirSync(
-    inventoryRoot,
-    {
-      recursive:
-        true,
-    },
-  );
+    projectId,
+
+    projectTitle:
+      projectState.projectTitle,
+
+    discoveredAt:
+      Date.now(),
+
+    pageUrl:
+      projectState.pageUrl,
+
+    conversationCount:
+      normalized.length,
+
+    conversations:
+      normalized,
+  };
 
   const destination =
-    path.join(
-      inventoryRoot,
-      `project-${inventory.projectId.replace(
-        /[^A-Za-z0-9._-]/g,
-        "_",
-      )}.json`,
-    );
-
-  writeFileSync(
-    destination,
-    `${JSON.stringify(
+    persistProjectInventory(
       inventory,
-      null,
-      2,
-    )}\n`,
-    {
-      encoding:
-        "utf8",
-
-      mode:
-        0o600,
-    },
-  );
+    );
 
   console.log(
     JSON.stringify(
