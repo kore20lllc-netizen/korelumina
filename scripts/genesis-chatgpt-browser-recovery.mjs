@@ -1117,29 +1117,79 @@ function discoverProjects() {
       ),
     );
 
+  const discoveredById =
+    new Map(
+      discovered.projects.map(
+        project => [
+          project.projectId,
+          project,
+        ],
+      ),
+    );
+
+  const allProjectIds =
+    [
+      ...new Set([
+        ...previousById.keys(),
+        ...discoveredById.keys(),
+      ]),
+    ].sort();
+
   const projects =
-    discovered.projects.map(
-      project => {
+    allProjectIds.map(
+      projectId => {
         const existing =
           previousById.get(
-            project.projectId,
+            projectId,
           );
+
+        const discoveredProject =
+          discoveredById.get(
+            projectId,
+          );
+
+        if (
+          !discoveredProject &&
+          existing
+        ) {
+          /*
+           * A project may not be visible in the current Safari DOM.
+           * Preserve its governed registry identity and disposition.
+           */
+          return {
+            ...existing,
+
+            visibleInLatestDiscovery:
+              false,
+
+            lastRegistryScanAt:
+              discovered.discoveredAt,
+          };
+        }
+
+        if (
+          !discoveredProject
+        ) {
+          throw new Error(
+            `chatgpt_browser_recovery_project_registry_merge_failed:${projectId}`,
+          );
+        }
 
         return {
           projectId:
-            project.projectId,
+            discoveredProject.projectId,
 
           projectTitle:
-            project.projectTitle,
+            discoveredProject.projectTitle,
 
           projectUrls:
-            project.projectUrls,
+            discoveredProject.projectUrls,
 
           visibleConversationCount:
-            project.visibleConversationCount,
+            discoveredProject.visibleConversationCount,
 
           visibleConversationIds:
-            project.visibleConversationIds,
+            discoveredProject.visibleConversationIds,
 
           disposition:
             existing?.disposition ??
@@ -1149,12 +1199,21 @@ function discoverProjects() {
             existing?.dispositionReason ??
             null,
 
+          dispositionUpdatedAt:
+            existing?.dispositionUpdatedAt,
+
           firstDiscoveredAt:
             existing?.firstDiscoveredAt ??
             discovered.discoveredAt,
 
           lastDiscoveredAt:
             discovered.discoveredAt,
+
+          lastRegistryScanAt:
+            discovered.discoveredAt,
+
+          visibleInLatestDiscovery:
+            true,
         };
       },
     );
