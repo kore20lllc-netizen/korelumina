@@ -216,7 +216,7 @@ test(
 
     assert.equal(
       reconciliation.dayZeroConversationCoverageCertified,
-      true,
+      false,
     );
 
     assert.deepEqual(

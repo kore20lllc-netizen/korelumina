@@ -613,8 +613,11 @@ export function reconcileGenesisConversationExpectedHistory(
     blockers:
       normalizedBlockers,
 
+    /*
+     * Reconciliation completeness is evidence for the later Day-0 gate.
+     * It is not itself a Day-0 certification.
+     */
     dayZeroConversationCoverageCertified:
-      state ===
-      "COMPLETE",
+      false,
   };
 }
