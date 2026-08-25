@@ -57,6 +57,10 @@ import {
 } from "./GenesisConversationHistoryCandidateReviewPanel";
 
 import {
+  GenesisConversationAuthoritativeCompletenessCertificationPanel,
+} from "./GenesisConversationAuthoritativeCompletenessCertificationPanel";
+
+import {
   GenesisHistoricalArtifactExplorer,
 } from "./GenesisHistoricalArtifactExplorer";
 
@@ -144,6 +148,14 @@ const GENESIS_SECTIONS = [
       "Candidate Review",
     icon:
       ShieldCheck,
+  },
+  {
+    id:
+      "genesis-authoritative-completeness-certification",
+    label:
+      "Completeness Certification",
+    icon:
+      BadgeCheck,
   },
   {
     id:
@@ -535,8 +547,8 @@ export function GenesisReplayReadWorkspace({
           items={GENESIS_SECTIONS}
           ariaLabel="Genesis replay observatory sections"
           topTargetId="genesis-replay-observatory-top"
-          minWidthClassName="min-w-[1440px]"
-          gridColumnsClassName="grid-cols-9"
+          minWidthClassName="min-w-[1600px]"
+          gridColumnsClassName="grid-cols-10"
         />
       }
       content={
@@ -1035,6 +1047,13 @@ export function GenesisReplayReadWorkspace({
                   className="min-w-0 scroll-mt-28"
                 >
                   <GenesisConversationHistoryCandidateReviewPanel />
+                </section>
+
+                <section
+                  id="genesis-authoritative-completeness-certification"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  <GenesisConversationAuthoritativeCompletenessCertificationPanel />
                 </section>
 
                 <section
