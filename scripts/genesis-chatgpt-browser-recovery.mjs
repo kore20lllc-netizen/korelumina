@@ -793,6 +793,1302 @@ function inspect() {
 }
 
 
+function discoverProjects() {
+  const raw =
+    runSafariJavaScript(
+      `JSON.stringify((() => {
+        const normalizeProjectId = value => {
+          const match =
+            String(value ?? "")
+              .match(
+                /^(g-p-[0-9a-f]{32})/i
+              );
+
+          return match
+            ? match[1]
+            : null;
+        };
+
+        const links =
+          Array.from(
+            document.querySelectorAll(
+              "a[href]"
+            )
+          );
+
+        const projectsById =
+          new Map();
+
+        for (
+          const anchor
+          of links
+        ) {
+          let url;
+
+          try {
+            url =
+              new URL(
+                anchor.href,
+              );
+          } catch {
+            continue;
+          }
+
+          if (
+            url.hostname !==
+              "chatgpt.com"
+          ) {
+            continue;
+          }
+
+          const segments =
+            url.pathname
+              .split("/")
+              .filter(Boolean);
+
+          const gIndex =
+            segments.indexOf(
+              "g"
+            );
+
+          if (
+            gIndex < 0 ||
+            !segments[
+              gIndex + 1
+            ]
+          ) {
+            continue;
+          }
+
+          const rawProjectSegment =
+            decodeURIComponent(
+              segments[
+                gIndex + 1
+              ]
+            );
+
+          const projectId =
+            normalizeProjectId(
+              rawProjectSegment,
+            );
+
+          /*
+           * Only g-p-* represents ChatGPT Projects.
+           * Custom GPT identifiers such as g-... are not projects.
+           */
+          if (
+            !projectId
+          ) {
+            continue;
+          }
+
+          const cIndex =
+            segments.lastIndexOf(
+              "c"
+            );
+
+          const conversationId =
+            cIndex >= 0 &&
+            segments[
+              cIndex + 1
+            ]
+              ? decodeURIComponent(
+                  segments[
+                    cIndex + 1
+                  ]
+                )
+              : null;
+
+          const text =
+            (
+              anchor.innerText ||
+              anchor.textContent ||
+              ""
+            ).trim();
+
+          const existing =
+            projectsById.get(
+              projectId,
+            ) ?? {
+              projectId,
+
+              titleCandidates:
+                [],
+
+              projectUrls:
+                [],
+
+              conversationIds:
+                [],
+            };
+
+          if (
+            conversationId
+          ) {
+            existing
+              .conversationIds
+              .push(
+                conversationId,
+              );
+          } else {
+            existing
+              .projectUrls
+              .push(
+                url.origin +
+                url.pathname,
+              );
+
+            if (
+              text
+            ) {
+              existing
+                .titleCandidates
+                .push(
+                  text,
+                );
+            }
+          }
+
+          projectsById.set(
+            projectId,
+            existing,
+          );
+        }
+
+        const projects =
+          Array.from(
+            projectsById.values(),
+          )
+            .map(
+              project => {
+                const titleCandidates =
+                  Array.from(
+                    new Set(
+                      project
+                        .titleCandidates,
+                    ),
+                  )
+                    .filter(Boolean);
+
+                const projectUrls =
+                  Array.from(
+                    new Set(
+                      project
+                        .projectUrls,
+                    ),
+                  );
+
+                const conversationIds =
+                  Array.from(
+                    new Set(
+                      project
+                        .conversationIds,
+                    ),
+                  )
+                    .sort();
+
+                return {
+                  projectId:
+                    project.projectId,
+
+                  projectTitle:
+                    titleCandidates[0] ??
+                    project.projectId,
+
+                  titleCandidates,
+
+                  projectUrls,
+
+                  visibleConversationCount:
+                    conversationIds.length,
+
+                  visibleConversationIds:
+                    conversationIds,
+                };
+              },
+            )
+            .sort(
+              (
+                left,
+                right,
+              ) =>
+                left.projectTitle.localeCompare(
+                  right.projectTitle,
+                ) ||
+                left.projectId.localeCompare(
+                  right.projectId,
+                ),
+            );
+
+        return {
+          registryDiscoveryVersion:
+            "chatgpt-browser-project-registry-discovery:v1",
+
+          discoveredAt:
+            Date.now(),
+
+          pageUrl:
+            location.href,
+
+          projectCount:
+            projects.length,
+
+          projects,
+        };
+      })())`,
+    );
+
+  let discovered;
+
+  try {
+    discovered =
+      JSON.parse(
+        raw,
+      );
+  } catch {
+    fail(
+      `Safari returned invalid project-registry JSON:\n${raw.slice(0, 1000)}`,
+    );
+  }
+
+  if (
+    !discovered ||
+    !Array.isArray(
+      discovered.projects,
+    )
+  ) {
+    fail(
+      "Project registry discovery returned invalid data.",
+    );
+  }
+
+  const registryFile =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "project-registry.json",
+    );
+
+  mkdirSync(
+    path.dirname(
+      registryFile,
+    ),
+    {
+      recursive:
+        true,
+    },
+  );
+
+  let previous = {
+    registryVersion:
+      "chatgpt-browser-project-registry:v1",
+
+    projects:
+      [],
+  };
+
+  try {
+    previous =
+      JSON.parse(
+        readFileSync(
+          registryFile,
+          "utf8",
+        ),
+      );
+  } catch {
+    // First registry creation.
+  }
+
+  const previousById =
+    new Map(
+      (
+        Array.isArray(
+          previous.projects,
+        )
+          ? previous.projects
+          : []
+      ).map(
+        project => [
+          project.projectId,
+          project,
+        ],
+      ),
+    );
+
+  const projects =
+    discovered.projects.map(
+      project => {
+        const existing =
+          previousById.get(
+            project.projectId,
+          );
+
+        return {
+          projectId:
+            project.projectId,
+
+          projectTitle:
+            project.projectTitle,
+
+          projectUrls:
+            project.projectUrls,
+
+          visibleConversationCount:
+            project.visibleConversationCount,
+
+          visibleConversationIds:
+            project.visibleConversationIds,
+
+          disposition:
+            existing?.disposition ??
+            "REVIEW",
+
+          dispositionReason:
+            existing?.dispositionReason ??
+            null,
+
+          firstDiscoveredAt:
+            existing?.firstDiscoveredAt ??
+            discovered.discoveredAt,
+
+          lastDiscoveredAt:
+            discovered.discoveredAt,
+        };
+      },
+    );
+
+  const registry = {
+    registryVersion:
+      "chatgpt-browser-project-registry:v1",
+
+    updatedAt:
+      Date.now(),
+
+    sourcePageUrl:
+      discovered.pageUrl,
+
+    projects,
+  };
+
+  writeFileSync(
+    registryFile,
+    `${JSON.stringify(
+      registry,
+      null,
+      2,
+    )}\n`,
+    {
+      encoding:
+        "utf8",
+
+      mode:
+        0o600,
+    },
+  );
+
+  console.log(
+    JSON.stringify(
+      {
+        ok:
+          true,
+
+        registryFile,
+
+        projectCount:
+          projects.length,
+
+        projects:
+          projects.map(
+            project => ({
+              projectId:
+                project.projectId,
+
+              projectTitle:
+                project.projectTitle,
+
+              disposition:
+                project.disposition,
+
+              visibleConversationCount:
+                project.visibleConversationCount,
+
+              projectUrls:
+                project.projectUrls,
+            }),
+          ),
+      },
+      null,
+      2,
+    ),
+  );
+}
+
+
+function loadProjectRegistry() {
+  const registryFile =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "project-registry.json",
+    );
+
+  let registry;
+
+  try {
+    registry =
+      JSON.parse(
+        readFileSync(
+          registryFile,
+          "utf8",
+        ),
+      );
+  } catch (
+    error
+  ) {
+    throw new Error(
+      `chatgpt_browser_recovery_project_registry_unreadable:${
+        error instanceof Error
+          ? error.message
+          : String(
+              error,
+            )
+      }`,
+    );
+  }
+
+  if (
+    !registry ||
+    registry.registryVersion !==
+      "chatgpt-browser-project-registry:v1" ||
+    !Array.isArray(
+      registry.projects,
+    )
+  ) {
+    throw new Error(
+      "chatgpt_browser_recovery_project_registry_invalid",
+    );
+  }
+
+  return {
+    registryFile,
+    registry,
+  };
+}
+
+
+function discoverProjectInventoryForCurrentPage() {
+  const raw =
+    runSafariJavaScript(
+      `JSON.stringify((() => {
+        const pathSegments =
+          location.pathname
+            .split("/")
+            .filter(Boolean);
+
+        const normalizeProjectId = value => {
+          const match =
+            String(value ?? "")
+              .match(
+                /^(g-p-[0-9a-f]{32})/i
+              );
+
+          return match
+            ? match[1]
+            : null;
+        };
+
+        const gIndex =
+          pathSegments.indexOf(
+            "g"
+          );
+
+        const rawProjectSegment =
+          gIndex >= 0
+            ? pathSegments[
+                gIndex + 1
+              ]
+            : null;
+
+        const projectId =
+          normalizeProjectId(
+            rawProjectSegment,
+          );
+
+        if (
+          !projectId
+        ) {
+          throw new Error(
+            "chatgpt_browser_recovery_not_in_project"
+          );
+        }
+
+        const links =
+          Array.from(
+            document.querySelectorAll(
+              "a[href]"
+            )
+          );
+
+        const conversations =
+          links
+            .map(
+              anchor => {
+                let url;
+
+                try {
+                  url =
+                    new URL(
+                      anchor.href,
+                    );
+                } catch {
+                  return null;
+                }
+
+                if (
+                  url.hostname !==
+                    "chatgpt.com"
+                ) {
+                  return null;
+                }
+
+                const segments =
+                  url.pathname
+                    .split("/")
+                    .filter(Boolean);
+
+                const linkGIndex =
+                  segments.indexOf(
+                    "g"
+                  );
+
+                const linkProjectId =
+                  linkGIndex >= 0
+                    ? normalizeProjectId(
+                        segments[
+                          linkGIndex + 1
+                        ],
+                      )
+                    : null;
+
+                if (
+                  linkProjectId !==
+                    projectId
+                ) {
+                  return null;
+                }
+
+                const cIndex =
+                  segments.lastIndexOf(
+                    "c"
+                  );
+
+                const rawConversationId =
+                  cIndex >= 0
+                    ? segments[
+                        cIndex + 1
+                      ]
+                    : null;
+
+                if (
+                  !rawConversationId
+                ) {
+                  return null;
+                }
+
+                return {
+                  conversationId:
+                    decodeURIComponent(
+                      rawConversationId,
+                    ),
+
+                  title:
+                    (
+                      anchor.innerText ||
+                      anchor.textContent ||
+                      ""
+                    ).trim(),
+
+                  conversationUrl:
+                    url.origin +
+                    url.pathname,
+                };
+              },
+            )
+            .filter(Boolean);
+
+        const unique =
+          Array.from(
+            new Map(
+              conversations.map(
+                conversation => [
+                  conversation.conversationId,
+                  conversation,
+                ],
+              ),
+            ).values(),
+          )
+            .sort(
+              (
+                left,
+                right,
+              ) =>
+                left.title.localeCompare(
+                  right.title,
+                ) ||
+                left.conversationId.localeCompare(
+                  right.conversationId,
+                ),
+            );
+
+        return {
+          inventoryVersion:
+            "chatgpt-browser-project-inventory:v1",
+
+          projectId,
+
+          projectTitle:
+            document.title
+              ?.replace(
+                /\\s*[|\\-]\\s*ChatGPT\\s*$/i,
+                ""
+              )
+              .split(" - ")[0]
+              .trim() ||
+            projectId,
+
+          discoveredAt:
+            Date.now(),
+
+          pageUrl:
+            location.href,
+
+          currentConversationId:
+            null,
+
+          conversationCount:
+            unique.length,
+
+          conversations:
+            unique,
+        };
+      })())`,
+    );
+
+  let inventory;
+
+  try {
+    inventory =
+      JSON.parse(
+        raw,
+      );
+  } catch {
+    throw new Error(
+      `chatgpt_browser_recovery_project_inventory_json_invalid:${raw.slice(0, 500)}`,
+    );
+  }
+
+  if (
+    !inventory ||
+    typeof inventory.projectId !==
+      "string" ||
+    !Array.isArray(
+      inventory.conversations,
+    )
+  ) {
+    throw new Error(
+      "chatgpt_browser_recovery_project_inventory_invalid",
+    );
+  }
+
+  return inventory;
+}
+
+
+function persistProjectInventory(
+  inventory,
+) {
+  const inventoryRoot =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "project-inventories",
+    );
+
+  mkdirSync(
+    inventoryRoot,
+    {
+      recursive:
+        true,
+    },
+  );
+
+  const destination =
+    path.join(
+      inventoryRoot,
+      `project-${inventory.projectId.replace(
+        /[^A-Za-z0-9._-]/g,
+        "_",
+      )}.json`,
+    );
+
+  writeFileSync(
+    destination,
+    `${JSON.stringify(
+      inventory,
+      null,
+      2,
+    )}\n`,
+    {
+      encoding:
+        "utf8",
+
+      mode:
+        0o600,
+    },
+  );
+
+  return destination;
+}
+
+
+function waitForProject(
+  projectId,
+  timeoutMs = 30000,
+) {
+  const startedAt =
+    Date.now();
+
+  while (
+    Date.now() -
+      startedAt <
+    timeoutMs
+  ) {
+    try {
+      const raw =
+        runSafariJavaScript(
+          `JSON.stringify({
+            path:
+              location.pathname,
+            title:
+              document.title,
+            links:
+              document.querySelectorAll(
+                "a[href]"
+              ).length
+          })`,
+        );
+
+      const state =
+        JSON.parse(
+          raw,
+        );
+
+      const segments =
+        String(
+          state.path ??
+          "",
+        )
+          .split("/")
+          .filter(Boolean);
+
+      const gIndex =
+        segments.indexOf(
+          "g",
+        );
+
+      const rawProjectSegment =
+        gIndex >= 0
+          ? segments[
+              gIndex + 1
+            ]
+          : "";
+
+      const match =
+        rawProjectSegment.match(
+          /^(g-p-[0-9a-f]{32})/i,
+        );
+
+      const currentProjectId =
+        match
+          ? match[1]
+          : null;
+
+      if (
+        currentProjectId ===
+          projectId &&
+        Number(
+          state.links ??
+          0,
+        ) >
+          0
+      ) {
+        return;
+      }
+    } catch {
+      // Safari may briefly reject JS during route transition.
+    }
+
+    sleep(
+      500,
+    );
+  }
+
+  throw new Error(
+    `chatgpt_browser_recovery_project_navigation_timeout:${projectId}`,
+  );
+}
+
+
+function captureRecoverProjects() {
+  let registryFile;
+  let registry;
+
+  try {
+    ({
+      registryFile,
+      registry,
+    } =
+      loadProjectRegistry());
+  } catch (
+    error
+  ) {
+    fail(
+      error instanceof Error
+        ? error.message
+        : String(
+            error,
+          ),
+    );
+  }
+
+  const recoverProjects =
+    registry.projects
+      .filter(
+        project =>
+          project.disposition ===
+          "RECOVER",
+      )
+      .sort(
+        (
+          left,
+          right,
+        ) =>
+          left.projectTitle.localeCompare(
+            right.projectTitle,
+          ) ||
+          left.projectId.localeCompare(
+            right.projectId,
+          ),
+      );
+
+  if (
+    recoverProjects.length ===
+      0
+  ) {
+    fail(
+      "No projects are authorized with disposition RECOVER.",
+    );
+  }
+
+  console.log(
+    JSON.stringify(
+      {
+        registryFile,
+        recoverProjectCount:
+          recoverProjects.length,
+
+        projects:
+          recoverProjects.map(
+            project => ({
+              projectId:
+                project.projectId,
+
+              projectTitle:
+                project.projectTitle,
+
+              visibleConversationCount:
+                project.visibleConversationCount,
+            }),
+          ),
+      },
+      null,
+      2,
+    ),
+  );
+
+  const orchestrationResults =
+    [];
+
+  for (
+    const project
+    of recoverProjects
+  ) {
+    console.log(
+      `\n[project] ${project.projectTitle} (${project.projectId})`,
+    );
+
+    const projectUrl =
+      Array.isArray(
+        project.projectUrls,
+      ) &&
+      project.projectUrls.length >
+        0
+        ? project.projectUrls[0]
+        : null;
+
+    if (
+      !projectUrl
+    ) {
+      orchestrationResults.push({
+        projectId:
+          project.projectId,
+
+        projectTitle:
+          project.projectTitle,
+
+        state:
+          "FAILED",
+
+        error:
+          "project_url_missing",
+      });
+
+      console.error(
+        `[fail] ${project.projectTitle}: project URL missing`,
+      );
+
+      continue;
+    }
+
+    try {
+      setSafariUrl(
+        projectUrl,
+      );
+
+      waitForProject(
+        project.projectId,
+      );
+
+      sleep(
+        1000,
+      );
+
+      const expectedInventoryFile =
+        path.join(
+          REPOSITORY_ROOT,
+          "runtime-data",
+          "genesis",
+          "chatgpt-browser-recovery",
+          "project-inventories",
+          `project-${project.projectId.replace(
+            /[^A-Za-z0-9._-]/g,
+            "_",
+          )}.json`,
+        );
+
+      let inventoryFile =
+        null;
+
+      let inventory =
+        null;
+
+      /*
+       * Prefer an already governed persisted project inventory.
+       *
+       * ChatGPT project landing pages do not always render their
+       * conversation links immediately, so live discovery must not
+       * invalidate a previously successful inventory.
+       */
+      try {
+        const persistedInventory =
+          loadProjectInventory(
+            expectedInventoryFile,
+          );
+
+        if (
+          persistedInventory.projectId ===
+            project.projectId &&
+          persistedInventory.conversationCount >
+            0
+        ) {
+          inventory =
+            persistedInventory;
+
+          inventoryFile =
+            expectedInventoryFile;
+
+          console.log(
+            `[inventory:cached] ${inventory.conversationCount} conversations — ${inventoryFile}`,
+          );
+        }
+      } catch {
+        // No usable persisted inventory yet.
+      }
+
+      /*
+       * Attempt a live refresh. Only replace the governed inventory
+       * when discovery returns a non-empty inventory for this exact
+       * project.
+       */
+      try {
+        const discovered =
+          discoverProjectInventoryForCurrentPage();
+
+        if (
+          discovered.projectId ===
+            project.projectId &&
+          discovered.conversationCount >
+            0
+        ) {
+          inventory =
+            discovered;
+
+          inventoryFile =
+            persistProjectInventory(
+              discovered,
+            );
+
+          console.log(
+            `[inventory:refreshed] ${discovered.conversationCount} conversations — ${inventoryFile}`,
+          );
+        } else if (
+          inventory
+        ) {
+          console.log(
+            `[inventory:refresh-unavailable] retaining ${inventory.conversationCount} governed conversations`,
+          );
+        }
+      } catch (
+        discoveryError
+      ) {
+        if (
+          inventory
+        ) {
+          console.log(
+            `[inventory:refresh-unavailable] retaining governed inventory — ${
+              discoveryError instanceof Error
+                ? discoveryError.message
+                : String(
+                    discoveryError,
+                  )
+            }`,
+          );
+        } else {
+          throw discoveryError;
+        }
+      }
+
+      if (
+        !inventory ||
+        !inventoryFile
+      ) {
+        throw new Error(
+          "chatgpt_browser_recovery_project_inventory_unavailable",
+        );
+      }
+
+      captureProject(
+        inventoryFile,
+      );
+
+      orchestrationResults.push({
+        projectId:
+          project.projectId,
+
+        projectTitle:
+          project.projectTitle,
+
+        state:
+          "CAPTURE_INVOKED",
+
+        inventoryFile,
+
+        conversationCount:
+          inventory.conversationCount,
+      });
+    } catch (
+      error
+    ) {
+      orchestrationResults.push({
+        projectId:
+          project.projectId,
+
+        projectTitle:
+          project.projectTitle,
+
+        state:
+          "FAILED",
+
+        error:
+          error instanceof Error
+            ? error.message
+            : String(
+                error,
+              ),
+      });
+
+      console.error(
+        `[fail] ${project.projectTitle}: ${
+          error instanceof Error
+            ? error.message
+            : String(
+                error,
+              )
+        }`,
+      );
+    }
+  }
+
+  console.log(
+    "\n" +
+    JSON.stringify(
+      {
+        ok:
+          orchestrationResults.every(
+            result =>
+              result.state !==
+              "FAILED",
+          ),
+
+        results:
+          orchestrationResults,
+      },
+      null,
+      2,
+    ),
+  );
+
+  if (
+    orchestrationResults.some(
+      result =>
+        result.state ===
+        "FAILED",
+    )
+  ) {
+    process.exitCode =
+      2;
+  }
+}
+
+
+function setProjectDisposition(
+  projectId,
+  disposition,
+  reason,
+) {
+  if (
+    !projectId ||
+    ![
+      "REVIEW",
+      "RECOVER",
+      "IGNORE",
+    ].includes(
+      disposition,
+    )
+  ) {
+    fail(
+      "set-project requires: <projectId> <REVIEW|RECOVER|IGNORE> [reason]",
+    );
+  }
+
+  const registryFile =
+    path.join(
+      REPOSITORY_ROOT,
+      "runtime-data",
+      "genesis",
+      "chatgpt-browser-recovery",
+      "project-registry.json",
+    );
+
+  let registry;
+
+  try {
+    registry =
+      JSON.parse(
+        readFileSync(
+          registryFile,
+          "utf8",
+        ),
+      );
+  } catch {
+    fail(
+      "Project registry does not exist. Run discover-projects first.",
+    );
+  }
+
+  const project =
+    registry.projects
+      ?.find(
+        item =>
+          item.projectId ===
+          projectId,
+      );
+
+  if (
+    !project
+  ) {
+    fail(
+      `Unknown project: ${projectId}`,
+    );
+  }
+
+  project.disposition =
+    disposition;
+
+  project.dispositionReason =
+    reason?.trim() ||
+    null;
+
+  project.dispositionUpdatedAt =
+    Date.now();
+
+  writeFileSync(
+    registryFile,
+    `${JSON.stringify(
+      registry,
+      null,
+      2,
+    )}\n`,
+    {
+      encoding:
+        "utf8",
+
+      mode:
+        0o600,
+    },
+  );
+
+  console.log(
+    JSON.stringify(
+      {
+        ok:
+          true,
+
+        projectId:
+          project.projectId,
+
+        projectTitle:
+          project.projectTitle,
+
+        disposition:
+          project.disposition,
+
+        dispositionReason:
+          project.dispositionReason,
+      },
+      null,
+      2,
+    ),
+  );
+}
+
+
 function discoverProject() {
   const raw =
     runSafariJavaScript(
@@ -1967,6 +3263,8 @@ function validateFile(
 const [
   command,
   argument,
+  argument2,
+  ...remainingArguments
 ] =
   process.argv.slice(
     2,
@@ -1984,8 +3282,22 @@ switch (
     inspect();
     break;
 
+  case "discover-projects":
+    discoverProjects();
+    break;
+
   case "discover-project":
     discoverProject();
+    break;
+
+  case "set-project":
+    setProjectDisposition(
+      argument,
+      argument2,
+      remainingArguments.join(
+        " ",
+      ),
+    );
     break;
 
   case "capture-current":
@@ -1996,6 +3308,10 @@ switch (
     captureProject(
       argument,
     );
+    break;
+
+  case "capture-recover-projects":
+    captureRecoverProjects();
     break;
 
   case "validate":
@@ -2019,9 +3335,12 @@ KoreLumina Genesis ChatGPT Browser Recovery
 Commands:
   node scripts/genesis-chatgpt-browser-recovery.mjs login
   node scripts/genesis-chatgpt-browser-recovery.mjs inspect
+  node scripts/genesis-chatgpt-browser-recovery.mjs discover-projects
+  node scripts/genesis-chatgpt-browser-recovery.mjs set-project <projectId> <REVIEW|RECOVER|IGNORE> [reason]
   node scripts/genesis-chatgpt-browser-recovery.mjs discover-project
   node scripts/genesis-chatgpt-browser-recovery.mjs capture-current
   node scripts/genesis-chatgpt-browser-recovery.mjs capture-project [project-inventory.json]
+  node scripts/genesis-chatgpt-browser-recovery.mjs capture-recover-projects
   node scripts/genesis-chatgpt-browser-recovery.mjs validate <snapshot.json>
 
 Profile:
