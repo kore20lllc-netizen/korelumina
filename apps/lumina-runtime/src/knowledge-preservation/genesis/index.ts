@@ -50,6 +50,8 @@ export * from "./GenesisConversationExpectedHistoryCandidateService.js";
 export * from "./GenesisConversationExpectedHistoryCandidateReview.js";
 export * from "./GenesisConversationExpectedHistoryCandidateReviewPersistence.js";
 export * from "./GenesisConversationExpectedHistoryCandidateReviewService.js";
+export * from "./GenesisConversationAuthoritativeCompletenessEvidence.js";
+export * from "./GenesisConversationAuthoritativeCompletenessEvidenceService.js";
 export * from "./GenesisConversationExpectedHistoryInventory.js";
 export * from "./GenesisConversationExpectedHistoryPersistence.js";
 export * from "./GenesisConversationHistoryReconciliationService.js";

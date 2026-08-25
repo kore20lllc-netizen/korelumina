@@ -212,6 +212,10 @@ import {
   registerGenesisConversationExpectedHistoryCandidateReviewRoutes,
 } from "./routes/genesisConversationExpectedHistoryCandidateReview.js";
 
+import {
+  registerGenesisConversationAuthoritativeCompletenessEvidenceRoute,
+} from "./routes/genesisConversationAuthoritativeCompletenessEvidence.js";
+
 
 
 import {
@@ -236,6 +240,7 @@ import {
   FileGenesisConversationExpectedHistoryPersistenceStore,
   GenesisConversationExpectedHistoryCandidateReviewService,
   GenesisConversationExpectedHistoryCandidateService,
+  GenesisConversationAuthoritativeCompletenessEvidenceService,
   FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
@@ -347,6 +352,14 @@ export const runtimeGenesisConversationHistoryReconciliationService =
     runtimeGenesisConversationConfiguration,
     runtimeGenesisConversationAcquisitionExecutor,
     runtimeGenesisConversationExpectedHistoryPersistenceStore,
+  );
+
+
+export const runtimeGenesisConversationAuthoritativeCompletenessEvidenceService =
+  new GenesisConversationAuthoritativeCompletenessEvidenceService(
+    runtimeGenesisConversationExpectedHistoryCandidateService,
+    runtimeGenesisConversationExpectedHistoryCandidateReviewService,
+    runtimeGenesisConversationHistoryReconciliationService,
   );
 
 
@@ -1090,6 +1103,15 @@ registerGenesisConversationExpectedHistoryCandidateReviewRoutes(
   {
     service:
       runtimeGenesisConversationExpectedHistoryCandidateReviewService,
+  },
+);
+
+
+registerGenesisConversationAuthoritativeCompletenessEvidenceRoute(
+  app,
+  {
+    service:
+      runtimeGenesisConversationAuthoritativeCompletenessEvidenceService,
   },
 );
 
