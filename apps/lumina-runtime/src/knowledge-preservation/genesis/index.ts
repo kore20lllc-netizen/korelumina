@@ -57,6 +57,8 @@ export * from "./GenesisConversationAuthoritativeCompletenessCertificationPersis
 export * from "./GenesisConversationAuthoritativeCompletenessCertificationService.js";
 export * from "./GenesisConversationExpectedHistoryInventory.js";
 export * from "./GenesisConversationExpectedHistoryPersistence.js";
+export * from "./GenesisConversationAuthoritativeExpectedHistory.js";
+export * from "./GenesisConversationAuthoritativeExpectedHistoryService.js";
 export * from "./GenesisConversationHistoryReconciliationService.js";
 export * from "./PersistedConversationHistoricalSourceDiscoverer.js";
 export * from "./GenesisConversationReplayEvidenceResolver.js";

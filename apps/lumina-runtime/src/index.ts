@@ -226,6 +226,10 @@ import {
   registerGenesisConversationExpectedHistoryRoutes,
 } from "./routes/genesisConversationExpectedHistory.js";
 
+import {
+  registerGenesisConversationAuthoritativeExpectedHistoryRoute,
+} from "./routes/genesisConversationAuthoritativeExpectedHistory.js";
+
 
 import {
   registerGenesisDayZeroCertificationRoutes,
@@ -250,6 +254,7 @@ import {
   FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
+  GenesisConversationAuthoritativeExpectedHistoryService,
   GenesisDayZeroCertificationService,
   GenesisCurrentPolicyOrganizationalMemoryView,
   PersistedConversationHistoricalSourceDiscoverer,
@@ -361,6 +366,8 @@ export const runtimeGenesisConversationHistoryReconciliationService =
   );
 
 
+
+
 export const runtimeGenesisConversationAuthoritativeCompletenessEvidenceService =
   new GenesisConversationAuthoritativeCompletenessEvidenceService(
     runtimeGenesisConversationExpectedHistoryCandidateService,
@@ -376,6 +383,14 @@ export const runtimeGenesisConversationAuthoritativeCompletenessCertificationSer
   new GenesisConversationAuthoritativeCompletenessCertificationService(
     runtimeGenesisConversationAuthoritativeCompletenessCertificationPersistenceStore,
     runtimeGenesisConversationAuthoritativeCompletenessEvidenceService,
+  );
+
+
+export const runtimeGenesisConversationAuthoritativeExpectedHistoryService =
+  new GenesisConversationAuthoritativeExpectedHistoryService(
+    runtimeGenesisConversationExpectedHistoryCandidateService,
+    runtimeGenesisConversationAuthoritativeCompletenessCertificationService,
+    runtimeGenesisConversationHistoryReconciliationService,
   );
 
 
@@ -1146,6 +1161,15 @@ registerGenesisConversationExpectedHistoryRoutes(
   {
     service:
       runtimeGenesisConversationHistoryReconciliationService,
+  },
+);
+
+
+registerGenesisConversationAuthoritativeExpectedHistoryRoute(
+  app,
+  {
+    service:
+      runtimeGenesisConversationAuthoritativeExpectedHistoryService,
   },
 );
 
