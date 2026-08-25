@@ -53,6 +53,10 @@ import {
 } from "./GenesisDayZeroCertificationPanel";
 
 import {
+  GenesisConversationHistoryCandidateReviewPanel,
+} from "./GenesisConversationHistoryCandidateReviewPanel";
+
+import {
   GenesisHistoricalArtifactExplorer,
 } from "./GenesisHistoricalArtifactExplorer";
 
@@ -130,6 +134,14 @@ const GENESIS_SECTIONS = [
       "genesis-operational-reconstruction",
     label:
       "Reconstruction",
+    icon:
+      ShieldCheck,
+  },
+  {
+    id:
+      "genesis-conversation-history-candidate-review",
+    label:
+      "Candidate Review",
     icon:
       ShieldCheck,
   },
@@ -523,8 +535,8 @@ export function GenesisReplayReadWorkspace({
           items={GENESIS_SECTIONS}
           ariaLabel="Genesis replay observatory sections"
           topTargetId="genesis-replay-observatory-top"
-          minWidthClassName="min-w-[1280px]"
-          gridColumnsClassName="grid-cols-8"
+          minWidthClassName="min-w-[1440px]"
+          gridColumnsClassName="grid-cols-9"
         />
       }
       content={
@@ -1016,6 +1028,13 @@ export function GenesisReplayReadWorkspace({
                       operational
                     }
                   />
+                </section>
+
+                <section
+                  id="genesis-conversation-history-candidate-review"
+                  className="min-w-0 scroll-mt-28"
+                >
+                  <GenesisConversationHistoryCandidateReviewPanel />
                 </section>
 
                 <section
