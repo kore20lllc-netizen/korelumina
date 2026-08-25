@@ -1180,10 +1180,24 @@ function discoverProjects() {
             discoveredProject.projectId,
 
           projectTitle:
-            discoveredProject.projectTitle,
+            (
+              discoveredProject.projectTitle ===
+                discoveredProject.projectId &&
+              existing?.projectTitle &&
+              existing.projectTitle !==
+                existing.projectId
+            )
+              ? existing.projectTitle
+              : discoveredProject.projectTitle,
 
           projectUrls:
-            discoveredProject.projectUrls,
+            discoveredProject.projectUrls.length >
+              0
+              ? discoveredProject.projectUrls
+              : (
+                  existing?.projectUrls ??
+                  []
+                ),
 
           visibleConversationCount:
             discoveredProject.visibleConversationCount,
