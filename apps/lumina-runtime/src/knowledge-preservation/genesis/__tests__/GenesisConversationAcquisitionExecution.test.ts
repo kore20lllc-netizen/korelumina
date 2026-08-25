@@ -354,7 +354,7 @@ test(
         result.failure
           ?.error ??
         "",
-        /not configured/i,
+        /must be configured/i,
       );
 
       assert.equal(

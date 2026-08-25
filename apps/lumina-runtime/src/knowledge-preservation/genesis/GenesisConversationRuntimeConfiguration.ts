@@ -14,6 +14,10 @@ import type {
 } from "./GenesisConversationSourceBoundary.js";
 
 import {
+  ChatGPTBrowserRecoverySource,
+} from "./ChatGPTBrowserRecoverySource.js";
+
+import {
   ChatGPTConversationExportSource,
 } from "./ChatGPTConversationExportSource.js";
 
@@ -21,9 +25,17 @@ import {
   GenesisHistoricalConversationSourceAdapter,
 } from "./GenesisHistoricalConversationSourceAdapter.js";
 
+import type {
+  GenesisHistoricalConversationSource,
+} from "./GenesisHistoricalConversationSourceAdapter.js";
+
 
 export const GENESIS_CHATGPT_EXPORT_ROOT_ENV =
   "KORELUMINA_GENESIS_CHATGPT_EXPORT_ROOT";
+
+
+export const GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT_ENV =
+  "KORELUMINA_GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT";
 
 
 export type GenesisConversationRuntimeConfigurationState =
@@ -32,9 +44,18 @@ export type GenesisConversationRuntimeConfigurationState =
   | "UNAVAILABLE";
 
 
+export type GenesisConversationRuntimeSourceKind =
+  | "chatgpt-data-export"
+  | "chatgpt-authenticated-browser";
+
+
 export interface GenesisConversationRuntimeConfiguration {
   state:
     GenesisConversationRuntimeConfigurationState;
+
+  sourceKind:
+    GenesisConversationRuntimeSourceKind |
+    null;
 
   configuredRoot:
     string | null;
@@ -49,7 +70,7 @@ export interface GenesisConversationRuntimeConfiguration {
     GenesisConversationSourceBoundary;
 
   source:
-    ChatGPTConversationExportSource |
+    GenesisHistoricalConversationSource |
     null;
 
   adapter:
@@ -81,28 +102,153 @@ function blockedBoundary(
 }
 
 
+function unavailable(
+  input: {
+    configuredRoot:
+      string | null;
+
+    blocker:
+      string;
+  },
+): GenesisConversationRuntimeConfiguration {
+  return {
+    state:
+      "UNAVAILABLE",
+
+    sourceKind:
+      null,
+
+    configuredRoot:
+      input.configuredRoot,
+
+    resolvedRoot:
+      null,
+
+    blocker:
+      input.blocker,
+
+    boundary:
+      blockedBoundary(
+        input.blocker,
+      ),
+
+    source:
+      null,
+
+    adapter:
+      null,
+  };
+}
+
+
+function resolveReadableDirectory(
+  configuredRoot:
+    string,
+
+  sourceLabel:
+    string,
+): {
+  resolvedRoot:
+    string;
+} | {
+  blocker:
+    string;
+} {
+  try {
+    const resolvedRoot =
+      realpathSync(
+        configuredRoot,
+      );
+
+    const info =
+      statSync(
+        resolvedRoot,
+      );
+
+    if (
+      !info.isDirectory()
+    ) {
+      throw new Error(
+        "configured path is not a directory",
+      );
+    }
+
+    accessSync(
+      resolvedRoot,
+      constants.R_OK,
+    );
+
+    return {
+      resolvedRoot,
+    };
+  } catch (
+    error
+  ) {
+    return {
+      blocker:
+        `Configured ${sourceLabel} source is unavailable: ${
+          error instanceof Error
+            ? error.message
+            : String(
+                error,
+              )
+        }`,
+    };
+  }
+}
+
+
 export function resolveGenesisConversationRuntimeConfiguration(
   environment:
     NodeJS.ProcessEnv =
       process.env,
 ): GenesisConversationRuntimeConfiguration {
-  const configuredRoot =
+  const configuredExportRoot =
     environment[
       GENESIS_CHATGPT_EXPORT_ROOT_ENV
     ]
       ?.trim() ??
     "";
 
+  const configuredBrowserRecoveryRoot =
+    environment[
+      GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT_ENV
+    ]
+      ?.trim() ??
+    "";
+
   if (
-    configuredRoot.length ===
-    0
+    configuredExportRoot.length >
+      0 &&
+    configuredBrowserRecoveryRoot.length >
+      0
   ) {
     const blocker =
-      `${GENESIS_CHATGPT_EXPORT_ROOT_ENV} is not configured.`;
+      "Multiple Genesis conversation acquisition sources are configured. Configure exactly one source.";
+
+    return unavailable({
+      configuredRoot:
+        null,
+
+      blocker,
+    });
+  }
+
+  if (
+    configuredExportRoot.length ===
+      0 &&
+    configuredBrowserRecoveryRoot.length ===
+      0
+  ) {
+    const blocker =
+      `${GENESIS_CHATGPT_EXPORT_ROOT_ENV} or ${GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT_ENV} must be configured.`;
 
     return {
       state:
         "UNCONFIGURED",
+
+      sourceKind:
+        null,
 
       configuredRoot:
         null,
@@ -125,75 +271,112 @@ export function resolveGenesisConversationRuntimeConfiguration(
     };
   }
 
-  let resolvedRoot:
-    string;
-
-  try {
-    resolvedRoot =
-      realpathSync(
-        configuredRoot,
-      );
-
-    const info =
-      statSync(
-        resolvedRoot,
+  if (
+    configuredExportRoot.length >
+      0
+  ) {
+    const resolved =
+      resolveReadableDirectory(
+        configuredExportRoot,
+        "ChatGPT export",
       );
 
     if (
-      !info.isDirectory()
+      "blocker" in
+      resolved
     ) {
-      throw new Error(
-        "configured path is not a directory",
-      );
+      return unavailable({
+        configuredRoot:
+          configuredExportRoot,
+
+        blocker:
+          resolved.blocker,
+      });
     }
 
-    accessSync(
-      resolvedRoot,
-      constants.R_OK,
-    );
-  } catch (
-    error
-  ) {
-    const blocker =
-      `Configured ChatGPT export source is unavailable: ${
-        error instanceof Error
-          ? error.message
-          : String(
-              error,
-            )
-      }`;
+    const source =
+      new ChatGPTConversationExportSource({
+        exportRoot:
+          resolved.resolvedRoot,
+
+        sourceId:
+          "runtime-chatgpt-data-export",
+      });
+
+    const adapter =
+      new GenesisHistoricalConversationSourceAdapter({
+        source,
+
+        discovererId:
+          "runtime-chatgpt-conversation-history-v1",
+      });
 
     return {
       state:
-        "UNAVAILABLE",
+        "CONFIGURED",
 
-      configuredRoot,
+      sourceKind:
+        "chatgpt-data-export",
+
+      configuredRoot:
+        configuredExportRoot,
 
       resolvedRoot:
-        null,
+        resolved.resolvedRoot,
 
-      blocker,
+      blocker:
+        null,
 
       boundary:
-        blockedBoundary(
-          blocker,
-        ),
+        buildGenesisConversationSourceBoundary({
+          compilerAvailable:
+            true,
 
-      source:
-        null,
+          compilerName:
+            "conversation-compiler",
 
-      adapter:
-        null,
+          governedKnowledgePathAvailable:
+            true,
+
+          acquisitionAvailable:
+            true,
+
+          acquisitionMechanism:
+            "chatgpt-data-export",
+        }),
+
+      source,
+
+      adapter,
     };
   }
 
+  const resolved =
+    resolveReadableDirectory(
+      configuredBrowserRecoveryRoot,
+      "ChatGPT browser recovery",
+    );
+
+  if (
+    "blocker" in
+    resolved
+  ) {
+    return unavailable({
+      configuredRoot:
+        configuredBrowserRecoveryRoot,
+
+      blocker:
+        resolved.blocker,
+    });
+  }
+
   const source =
-    new ChatGPTConversationExportSource({
-      exportRoot:
-        resolvedRoot,
+    new ChatGPTBrowserRecoverySource({
+      recoveryRoot:
+        resolved.resolvedRoot,
 
       sourceId:
-        "runtime-chatgpt-data-export",
+        "runtime-chatgpt-browser-recovery",
     });
 
   const adapter =
@@ -201,16 +384,21 @@ export function resolveGenesisConversationRuntimeConfiguration(
       source,
 
       discovererId:
-        "runtime-chatgpt-conversation-history-v1",
+        "runtime-chatgpt-browser-conversation-history-v1",
     });
 
   return {
     state:
       "CONFIGURED",
 
-    configuredRoot,
+    sourceKind:
+      "chatgpt-authenticated-browser",
 
-    resolvedRoot,
+    configuredRoot:
+      configuredBrowserRecoveryRoot,
+
+    resolvedRoot:
+      resolved.resolvedRoot,
 
     blocker:
       null,
@@ -230,7 +418,7 @@ export function resolveGenesisConversationRuntimeConfiguration(
           true,
 
         acquisitionMechanism:
-          "chatgpt-data-export",
+          "chatgpt-authenticated-browser",
       }),
 
     source,

@@ -51,6 +51,9 @@ test(
       state:
         "CONFIGURED" as const,
 
+      sourceKind:
+        "chatgpt-data-export" as const,
+
       configuredRoot:
         "/configured",
 
@@ -179,6 +182,9 @@ test(
       {
         state:
           "CONFIGURED" as const,
+
+        sourceKind:
+          "chatgpt-data-export" as const,
 
         configuredRoot:
           "/configured",
@@ -377,6 +383,9 @@ test(
       {
         state:
           "CONFIGURED" as const,
+
+        sourceKind:
+          "chatgpt-data-export" as const,
 
         configuredRoot:
           "/configured",
