@@ -208,6 +208,11 @@ import {
   registerGenesisConversationExpectedHistoryCandidateRoutes,
 } from "./routes/genesisConversationExpectedHistoryCandidate.js";
 
+import {
+  registerGenesisConversationExpectedHistoryCandidateReviewRoutes,
+} from "./routes/genesisConversationExpectedHistoryCandidateReview.js";
+
+
 
 import {
   registerGenesisConversationExpectedHistoryRoutes,
@@ -227,7 +232,9 @@ import {
   buildGenesisRuntimeCanonicalConsumptionView,
   FileGenesisConversationAcquisitionPersistenceStore,
   FileGenesisConversationExpectedHistoryCandidatePersistenceStore,
+  FileGenesisConversationExpectedHistoryCandidateReviewPersistenceStore,
   FileGenesisConversationExpectedHistoryPersistenceStore,
+  GenesisConversationExpectedHistoryCandidateReviewService,
   GenesisConversationExpectedHistoryCandidateService,
   FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
@@ -321,6 +328,15 @@ export const runtimeGenesisConversationExpectedHistoryCandidateService =
     runtimeGenesisConversationExpectedHistoryCandidatePersistenceStore,
   );
 
+
+export const runtimeGenesisConversationExpectedHistoryCandidateReviewPersistenceStore =
+  new FileGenesisConversationExpectedHistoryCandidateReviewPersistenceStore();
+
+export const runtimeGenesisConversationExpectedHistoryCandidateReviewService =
+  new GenesisConversationExpectedHistoryCandidateReviewService(
+    runtimeGenesisConversationExpectedHistoryCandidateService,
+    runtimeGenesisConversationExpectedHistoryCandidateReviewPersistenceStore,
+  );
 
 export const runtimeGenesisConversationExpectedHistoryPersistenceStore =
   new FileGenesisConversationExpectedHistoryPersistenceStore();
@@ -1066,6 +1082,14 @@ registerGenesisConversationExpectedHistoryCandidateRoutes(
   {
     service:
       runtimeGenesisConversationExpectedHistoryCandidateService,
+  },
+);
+
+registerGenesisConversationExpectedHistoryCandidateReviewRoutes(
+  app,
+  {
+    service:
+      runtimeGenesisConversationExpectedHistoryCandidateReviewService,
   },
 );
 
