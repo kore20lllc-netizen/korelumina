@@ -216,6 +216,10 @@ import {
   registerGenesisConversationAuthoritativeCompletenessEvidenceRoute,
 } from "./routes/genesisConversationAuthoritativeCompletenessEvidence.js";
 
+import {
+  registerGenesisConversationAuthoritativeCompletenessCertificationRoutes,
+} from "./routes/genesisConversationAuthoritativeCompletenessCertification.js";
+
 
 
 import {
@@ -241,6 +245,8 @@ import {
   GenesisConversationExpectedHistoryCandidateReviewService,
   GenesisConversationExpectedHistoryCandidateService,
   GenesisConversationAuthoritativeCompletenessEvidenceService,
+  FileGenesisConversationAuthoritativeCompletenessCertificationPersistenceStore,
+  GenesisConversationAuthoritativeCompletenessCertificationService,
   FileGenesisDayZeroCertificationPersistenceStore,
   GenesisConversationAcquisitionExecutor,
   GenesisConversationHistoryReconciliationService,
@@ -360,6 +366,16 @@ export const runtimeGenesisConversationAuthoritativeCompletenessEvidenceService 
     runtimeGenesisConversationExpectedHistoryCandidateService,
     runtimeGenesisConversationExpectedHistoryCandidateReviewService,
     runtimeGenesisConversationHistoryReconciliationService,
+  );
+
+
+export const runtimeGenesisConversationAuthoritativeCompletenessCertificationPersistenceStore =
+  new FileGenesisConversationAuthoritativeCompletenessCertificationPersistenceStore();
+
+export const runtimeGenesisConversationAuthoritativeCompletenessCertificationService =
+  new GenesisConversationAuthoritativeCompletenessCertificationService(
+    runtimeGenesisConversationAuthoritativeCompletenessCertificationPersistenceStore,
+    runtimeGenesisConversationAuthoritativeCompletenessEvidenceService,
   );
 
 
@@ -1112,6 +1128,15 @@ registerGenesisConversationAuthoritativeCompletenessEvidenceRoute(
   {
     service:
       runtimeGenesisConversationAuthoritativeCompletenessEvidenceService,
+  },
+);
+
+
+registerGenesisConversationAuthoritativeCompletenessCertificationRoutes(
+  app,
+  {
+    service:
+      runtimeGenesisConversationAuthoritativeCompletenessCertificationService,
   },
 );
 

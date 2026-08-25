@@ -52,6 +52,9 @@ export * from "./GenesisConversationExpectedHistoryCandidateReviewPersistence.js
 export * from "./GenesisConversationExpectedHistoryCandidateReviewService.js";
 export * from "./GenesisConversationAuthoritativeCompletenessEvidence.js";
 export * from "./GenesisConversationAuthoritativeCompletenessEvidenceService.js";
+export * from "./GenesisConversationAuthoritativeCompletenessCertification.js";
+export * from "./GenesisConversationAuthoritativeCompletenessCertificationPersistence.js";
+export * from "./GenesisConversationAuthoritativeCompletenessCertificationService.js";
 export * from "./GenesisConversationExpectedHistoryInventory.js";
 export * from "./GenesisConversationExpectedHistoryPersistence.js";
 export * from "./GenesisConversationHistoryReconciliationService.js";
