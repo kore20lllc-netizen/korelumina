@@ -175,6 +175,68 @@ function validateStoredEducationalCorpus(
     );
   }
 
+  /*
+   * Backward compatibility:
+   * canonical-only persisted v1 corpora predate the explicit
+   * historicalEvidence lane. Normalize those to null.
+   */
+  if (
+    record.historicalEvidence ===
+      undefined
+  ) {
+    record.historicalEvidence =
+      null;
+  }
+
+  if (
+    record.historicalEvidence !==
+      null
+  ) {
+    if (
+      !record.historicalEvidence ||
+      typeof record.historicalEvidence !==
+        "object" ||
+      Array.isArray(
+        record.historicalEvidence,
+      )
+    ) {
+      throw new Error(
+        "educational_corpus_persistence_historical_evidence_invalid",
+      );
+    }
+
+    const historical =
+      record.historicalEvidence as Record<
+        string,
+        unknown
+      >;
+
+    if (
+      historical.version !==
+        "educational-corpus-historical-evidence:v1" ||
+      typeof historical.historicalEvidenceId !==
+        "string" ||
+      !historical.historicalEvidenceId.startsWith(
+        "educational-corpus-historical-evidence:",
+      ) ||
+      !Array.isArray(
+        historical.records,
+      ) ||
+      historical.governingAuthority !==
+        false ||
+      historical.educationalCorpusCertified !==
+        false ||
+      historical.initialCompetencyCertified !==
+        false ||
+      historical.chiefAgentActivationAuthorized !==
+        false
+    ) {
+      throw new Error(
+        "educational_corpus_persistence_historical_evidence_invalid",
+      );
+    }
+  }
+
   if (
     !Array.isArray(
       record.items,

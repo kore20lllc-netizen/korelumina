@@ -36,6 +36,10 @@ import {
 } from "./GenesisHistoricalEducationSourceAssessment.js";
 
 import {
+  assembleEducationalCorpusHistoricalEvidence,
+} from "./EducationalCorpusHistoricalEvidence.js";
+
+import {
   buildEducationalCorpusCertificationCandidate,
 } from "./EducationalCorpusCertificationCandidate.js";
 
@@ -193,14 +197,30 @@ export class EducationalCorpusRuntimeService {
         ?.read() ??
       null;
 
-    const historicalAssessments =
+    const historicalProjection =
       genesisHistorical
+        ? projectGenesisHistoricalEducation(
+            genesisHistorical,
+          )
+        : null;
+
+    const historicalAssessments =
+      historicalProjection
         ? assessGenesisHistoricalEducationSources(
-            projectGenesisHistoricalEducation(
-              genesisHistorical,
-            ).records,
+            historicalProjection.records,
           )
         : [];
+
+    const historicalEvidence =
+      historicalProjection
+        ? assembleEducationalCorpusHistoricalEvidence({
+            records:
+              historicalProjection.records,
+
+            assessments:
+              historicalAssessments,
+          })
+        : null;
 
     const sourceContract =
       buildEducationalCorpusSourceContract({
@@ -218,6 +238,8 @@ export class EducationalCorpusRuntimeService {
           education.artifacts,
 
         sourceContract,
+
+        historicalEvidence,
       });
 
     const unresolvedArtifactIds =
@@ -391,14 +413,30 @@ export class EducationalCorpusRuntimeService {
         ?.read() ??
       null;
 
-    const historicalAssessments =
+    const historicalProjection =
       genesisHistorical
+        ? projectGenesisHistoricalEducation(
+            genesisHistorical,
+          )
+        : null;
+
+    const historicalAssessments =
+      historicalProjection
         ? assessGenesisHistoricalEducationSources(
-            projectGenesisHistoricalEducation(
-              genesisHistorical,
-            ).records,
+            historicalProjection.records,
           )
         : [];
+
+    const historicalEvidence =
+      historicalProjection
+        ? assembleEducationalCorpusHistoricalEvidence({
+            records:
+              historicalProjection.records,
+
+            assessments:
+              historicalAssessments,
+          })
+        : null;
 
     const sourceContract =
       buildEducationalCorpusSourceContract({
@@ -416,6 +454,8 @@ export class EducationalCorpusRuntimeService {
           education.artifacts,
 
         sourceContract,
+
+        historicalEvidence,
       });
 
     this.persistence

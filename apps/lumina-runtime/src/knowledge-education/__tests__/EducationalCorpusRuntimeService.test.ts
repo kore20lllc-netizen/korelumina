@@ -1058,7 +1058,12 @@ test(
         );
 
       const result =
-        service.read();
+        service.persistCurrent();
+
+      assert.equal(
+        result.state,
+        "CURRENT",
+      );
 
       assert.equal(
         result.sourceContract
@@ -1096,14 +1101,53 @@ test(
       );
 
       /*
-       * Historical evidence is not inserted into EducationalCorpus
-       * items by this milestone.
+       * Historical evidence is persisted beside, never inside,
+       * the current governing curriculum lane.
        */
       assert.equal(
         result.currentCorpus
           ?.summary
           .curriculumItems,
         1,
+      );
+
+      assert.equal(
+        result.currentCorpus
+          ?.historicalEvidence
+          ?.records.length,
+        1,
+      );
+
+      assert.equal(
+        result.currentCorpus
+          ?.historicalEvidence
+          ?.records[0]
+          ?.learningRole,
+        "LESSON",
+      );
+
+      assert.equal(
+        result.currentCorpus
+          ?.historicalEvidence
+          ?.records[0]
+          ?.governingAuthority,
+        false,
+      );
+
+      assert.equal(
+        result.persistedCorpus
+          ?.historicalEvidence
+          ?.historicalEvidenceId,
+        result.currentCorpus
+          ?.historicalEvidence
+          ?.historicalEvidenceId,
+      );
+
+      assert.deepEqual(
+        store.load()
+          ?.historicalEvidence,
+        result.currentCorpus
+          ?.historicalEvidence,
       );
     } finally {
       rmSync(

@@ -235,6 +235,9 @@ function corpus():
     sourceContractId:
       "educational-corpus-source-contract:test",
 
+    historicalEvidence:
+      null,
+
     items,
 
     excluded:

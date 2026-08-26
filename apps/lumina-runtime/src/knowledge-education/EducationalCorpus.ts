@@ -14,6 +14,10 @@ import type {
   EducationalArtifactProjection,
 } from "./projection/index.js";
 
+import type {
+  EducationalCorpusHistoricalEvidence,
+} from "./EducationalCorpusHistoricalEvidence.js";
+
 
 export const EDUCATIONAL_CORPUS_VERSION =
   "educational-corpus:v1" as const;
@@ -137,6 +141,15 @@ export interface EducationalCorpus {
     EducationalCorpusSourceContract[
       "contractId"
     ];
+
+  /*
+   * Governed historical education is a distinct lane.
+   *
+   * It does not participate in current governing curriculum items.
+   */
+  historicalEvidence:
+    EducationalCorpusHistoricalEvidence |
+    null;
 
   items:
     readonly EducationalCorpusItem[];
@@ -291,6 +304,10 @@ export function assembleEducationalCorpus(
 
     sourceContract:
       EducationalCorpusSourceContract;
+
+    historicalEvidence?:
+      EducationalCorpusHistoricalEvidence |
+      null;
   },
 ): EducationalCorpus {
   if (
@@ -300,6 +317,28 @@ export function assembleEducationalCorpus(
   ) {
     throw new Error(
       "educational_corpus_source_contract_certification_boundary_invalid",
+    );
+  }
+
+  const historicalEvidence =
+    input.historicalEvidence ??
+    null;
+
+  if (
+    historicalEvidence &&
+    (
+      historicalEvidence.governingAuthority !==
+        false ||
+      historicalEvidence.educationalCorpusCertified !==
+        false ||
+      historicalEvidence.initialCompetencyCertified !==
+        false ||
+      historicalEvidence.chiefAgentActivationAuthorized !==
+        false
+    )
+  ) {
+    throw new Error(
+      "educational_corpus_historical_evidence_boundary_invalid",
     );
   }
 
@@ -589,6 +628,8 @@ export function assembleEducationalCorpus(
         input.sourceContract
           .contractId,
 
+      historicalEvidence,
+
       items,
 
       excluded,
@@ -613,6 +654,8 @@ export function assembleEducationalCorpus(
     sourceContractId:
       input.sourceContract
         .contractId,
+
+    historicalEvidence,
 
     items,
 
