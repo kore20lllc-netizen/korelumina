@@ -550,3 +550,270 @@ test(
     );
   },
 );
+
+test(
+  "creates one Evolution Episode from authoritative conversation-thread membership",
+  () => {
+    const execution =
+      fixture();
+
+    execution.manifest.scope = {
+      ...execution.manifest.scope,
+      includedEvidenceTypes: [
+        "conversation",
+      ],
+    };
+
+    execution.manifest.entries = [
+      {
+        historicalSourceId:
+          "genesis-source:conversation:first",
+        sourceType:
+          "conversation",
+        evidenceType:
+          "conversation",
+        authorityClass:
+          "external-conversation-evidence",
+        provenanceLocator:
+          "conversation:test#message=1",
+        sourceChecksum:
+          "conversation-checksum-1",
+        historicalTimestamp:
+          10,
+        historicalTimestampSource:
+          "authoritative-conversation-message-timestamp",
+        discoveredAt:
+          30,
+        discoveryMethod:
+          "test",
+        replayEligibility:
+          "eligible",
+        supersedes:
+          [],
+        conflictsWith:
+          [],
+        metadata: {
+          conversationId:
+            "conversation:test",
+          messageId:
+            "message:1",
+          messageOrder:
+            0,
+          speakerRole:
+            "user",
+        },
+      },
+      {
+        historicalSourceId:
+          "genesis-source:conversation:second",
+        sourceType:
+          "conversation",
+        evidenceType:
+          "conversation",
+        authorityClass:
+          "external-conversation-evidence",
+        provenanceLocator:
+          "conversation:test#message=2",
+        sourceChecksum:
+          "conversation-checksum-2",
+        historicalTimestamp:
+          20,
+        historicalTimestampSource:
+          "authoritative-conversation-message-timestamp",
+        discoveredAt:
+          30,
+        discoveryMethod:
+          "test",
+        replayEligibility:
+          "eligible",
+        supersedes:
+          [],
+        conflictsWith:
+          [],
+        metadata: {
+          conversationId:
+            "conversation:test",
+          messageId:
+            "message:2",
+          messageOrder:
+            1,
+          speakerRole:
+            "assistant",
+        },
+      },
+    ];
+
+    execution.state.dispositions = [
+      {
+        historicalSourceId:
+          "genesis-source:conversation:first",
+        disposition:
+          "ADMITTED",
+        evidenceId:
+          "evidence:conversation:first",
+      },
+      {
+        historicalSourceId:
+          "genesis-source:conversation:second",
+        disposition:
+          "ADMITTED",
+        evidenceId:
+          "evidence:conversation:second",
+      },
+    ];
+
+    execution.state.lastCompletedManifestIndex =
+      1;
+
+    const state =
+      materializeGenesisHistoricalCorrelation(
+        execution,
+      );
+
+    assert.equal(
+      state.episodes.length,
+      1,
+    );
+
+    const episode =
+      state.episodes[0];
+
+    assert.ok(
+      episode,
+    );
+
+    assert.equal(
+      episode.eventIds.length,
+      2,
+    );
+
+    assert.equal(
+      episode.sourceReferenceIds.length,
+      2,
+    );
+
+    assert.equal(
+      episode.lifecycle,
+      "correlated",
+    );
+  },
+);
+
+
+test(
+  "does not merge messages from different conversation threads",
+  () => {
+    const execution =
+      fixture();
+
+    execution.manifest.scope = {
+      ...execution.manifest.scope,
+      includedEvidenceTypes: [
+        "conversation",
+      ],
+    };
+
+    execution.manifest.entries = [
+      {
+        historicalSourceId:
+          "genesis-source:conversation:a",
+        sourceType:
+          "conversation",
+        evidenceType:
+          "conversation",
+        authorityClass:
+          "external-conversation-evidence",
+        provenanceLocator:
+          "conversation:a#message=1",
+        sourceChecksum:
+          "conversation-a",
+        historicalTimestamp:
+          10,
+        historicalTimestampSource:
+          "authoritative-conversation-message-timestamp",
+        discoveredAt:
+          30,
+        discoveryMethod:
+          "test",
+        replayEligibility:
+          "eligible",
+        supersedes:
+          [],
+        conflictsWith:
+          [],
+        metadata: {
+          conversationId:
+            "conversation:a",
+          messageId:
+            "message:a",
+        },
+      },
+      {
+        historicalSourceId:
+          "genesis-source:conversation:b",
+        sourceType:
+          "conversation",
+        evidenceType:
+          "conversation",
+        authorityClass:
+          "external-conversation-evidence",
+        provenanceLocator:
+          "conversation:b#message=1",
+        sourceChecksum:
+          "conversation-b",
+        historicalTimestamp:
+          20,
+        historicalTimestampSource:
+          "authoritative-conversation-message-timestamp",
+        discoveredAt:
+          30,
+        discoveryMethod:
+          "test",
+        replayEligibility:
+          "eligible",
+        supersedes:
+          [],
+        conflictsWith:
+          [],
+        metadata: {
+          conversationId:
+            "conversation:b",
+          messageId:
+            "message:b",
+        },
+      },
+    ];
+
+    execution.state.dispositions = [
+      {
+        historicalSourceId:
+          "genesis-source:conversation:a",
+        disposition:
+          "ADMITTED",
+        evidenceId:
+          "evidence:conversation:a",
+      },
+      {
+        historicalSourceId:
+          "genesis-source:conversation:b",
+        disposition:
+          "ADMITTED",
+        evidenceId:
+          "evidence:conversation:b",
+      },
+    ];
+
+    execution.state.lastCompletedManifestIndex =
+      1;
+
+    const state =
+      materializeGenesisHistoricalCorrelation(
+        execution,
+      );
+
+    assert.equal(
+      state.episodes.length,
+      0,
+    );
+  },
+);

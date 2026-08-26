@@ -416,10 +416,15 @@ function materializeEvolutionEpisodes(
    * Allowed signals:
    * - multiple revisions of the same logical Source Reference;
    * - an explicit manifest supersedes relation;
-   * - an explicit manifest conflict relation.
+   * - an explicit manifest conflict relation;
+   * - membership in the same authoritative conversation thread.
+   *
+   * Conversation membership is explicit source structure carried
+   * by acquired conversation evidence. It is not inferred from
+   * timestamps or replay adjacency.
    *
    * Replay membership, timestamp proximity, and chronological
-   * adjacency are explicitly insufficient.
+   * adjacency remain explicitly insufficient.
    */
 
   const historicalIds =
@@ -618,6 +623,91 @@ function materializeEvolutionEpisodes(
     }
   }
 
+  /*
+   * Signal 4:
+   * authoritative conversation-thread membership.
+   *
+   * Genesis conversation acquisition persists the provider's
+   * conversationId on every message source. Messages carrying the
+   * same non-empty conversationId therefore belong to one explicit
+   * historical conversation structure.
+   *
+   * This does not imply that one message caused another, and it
+   * does not infer supersession, approval, rejection, or current
+   * authority. It only establishes the governed episode boundary.
+   */
+  const historicalIdsByConversationId =
+    new Map<
+      string,
+      string[]
+    >();
+
+  for (
+    const entry
+    of input.admittedEntries
+  ) {
+    if (
+      entry.sourceType !==
+      "conversation"
+    ) {
+      continue;
+    }
+
+    const conversationId =
+      stringMetadata(
+        entry,
+        "conversationId",
+      );
+
+    if (
+      !conversationId
+    ) {
+      continue;
+    }
+
+    const ids =
+      historicalIdsByConversationId.get(
+        conversationId,
+      ) ??
+      [];
+
+    ids.push(
+      entry.historicalSourceId,
+    );
+
+    historicalIdsByConversationId.set(
+      conversationId,
+      ids,
+    );
+  }
+
+  for (
+    const ids
+    of historicalIdsByConversationId.values()
+  ) {
+    if (
+      ids.length <
+      2
+    ) {
+      continue;
+    }
+
+    const first =
+      ids[0];
+
+    for (
+      const id
+      of ids.slice(
+        1,
+      )
+    ) {
+      union(
+        first,
+        id,
+      );
+    }
+  }
+
   const components =
     new Map<
       string,
@@ -709,9 +799,46 @@ function materializeEvolutionEpisodes(
           ),
       );
 
+    const conversationIds =
+      [
+        ...new Set(
+          entries
+            .filter(
+              entry =>
+                entry.sourceType ===
+                "conversation",
+            )
+            .map(
+              entry =>
+                stringMetadata(
+                  entry,
+                  "conversationId",
+                ),
+            )
+            .filter(
+              (
+                value,
+              ): value is string =>
+                Boolean(
+                  value,
+                ),
+            ),
+        ),
+      ];
+
+    const sameConversationThread =
+      entries.every(
+        entry =>
+          entry.sourceType ===
+          "conversation",
+      ) &&
+      conversationIds.length ===
+        1;
+
     if (
       !sameLogicalSource &&
-      !explicitSemanticLink
+      !explicitSemanticLink &&
+      !sameConversationThread
     ) {
       continue;
     }
