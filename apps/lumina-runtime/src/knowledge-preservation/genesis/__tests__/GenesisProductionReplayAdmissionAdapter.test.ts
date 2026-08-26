@@ -60,6 +60,15 @@ function request(
     approvalState?:
       string;
 
+    authorityOwner?:
+      string;
+
+    authorityScope?:
+      string;
+
+    authorityVersion?:
+      string;
+
     supersedes?:
       readonly HistoricalSourceId[];
 
@@ -113,6 +122,18 @@ function request(
 
         approvalState:
           overrides.approvalState,
+
+        authorityOwner:
+          overrides.authorityOwner ??
+          "Architecture Governance",
+
+        authorityScope:
+          overrides.authorityScope ??
+          "Platform Architecture",
+
+        authorityVersion:
+          overrides.authorityVersion ??
+          "1.0.0",
 
         provenanceLocator:
           "git:commit:production-adapter",
