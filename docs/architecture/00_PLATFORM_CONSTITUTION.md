@@ -4,6 +4,16 @@
 
 Authoritative.
 
+## Governance Identity
+
+Owner: Constitutional Office
+
+Scope: Platform
+
+Version: 1.0.0
+
+Identity authority: `docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md`
+
 This document governs KoreLumina architecture, implementation, engineering quality, product scope, Knowledge Platform behavior, Engineer Agent growth, regression prevention, and roadmap discipline.
 
 ## Constitutional Identity
