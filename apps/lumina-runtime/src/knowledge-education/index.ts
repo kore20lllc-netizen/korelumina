@@ -12,6 +12,7 @@ export * from "./KnowledgeEducationProjectionService.js";
 export * from "./GenesisHistoricalEducationProjection.js";
 export * from "./GenesisHistoricalEducationLearningRole.js";
 export * from "./GenesisHistoricalEducationSourceAssessment.js";
+export * from "./EducationalCorpusHistoricalEvidence.js";
 export * from "./normalization/index.js";
 export * from "./admission/index.js";
 export * from "./projection/index.js";
