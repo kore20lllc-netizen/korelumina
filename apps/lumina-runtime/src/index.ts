@@ -624,11 +624,73 @@ export const runtimeEducationalCorpusPersistenceStore =
   new FileEducationalCorpusPersistenceStore();
 
 
+export const runtimeEducationalCorpusGenesisHistoricalReader = {
+  read: () => {
+    const inventory =
+      listGenesisReplayInventory({
+        persistence:
+          runtimeGenesisReplayPersistenceStore,
+
+        manufacturingRuns:
+          runtimeKnowledgePreservationPlatform
+            .manufacturingRunService,
+      });
+
+    const selection =
+      resolveGenesisRuntimeReplaySelection({
+        designationStore:
+          runtimeGenesisReplayDesignationStore,
+
+        inventory,
+      });
+
+    if (
+      selection.state !==
+        "SELECTED" ||
+      selection.replayId ===
+        null
+    ) {
+      return null;
+    }
+
+    return readGenesisOperationalProjection({
+      replayId:
+        selection.replayId,
+
+      replayPersistence:
+        runtimeGenesisReplayPersistenceStore,
+
+      historicalCorrelation:
+        runtimeGenesisHistoricalCorrelationPersistenceStore,
+
+      manufacturingRuns:
+        runtimeKnowledgePreservationPlatform
+          .manufacturingRunService,
+
+      organizationalMemory:
+        runtimeOrganizationalMemoryStore,
+
+      readinessPolicy:
+        runtimeGenesisReadinessPolicy,
+
+      conversationSource:
+        runtimeGenesisConversationConfiguration
+          .boundary,
+
+      conversationHistoryReconciliation:
+        runtimeGenesisConversationHistoryReconciliationService
+          .read(),
+    });
+  },
+};
+
+
 export const runtimeEducationalCorpusService =
   new EducationalCorpusRuntimeService(
     runtimeEducationalCorpusPersistenceStore,
     runtimeKnowledgeEducationProjectionService,
     runtimeGenesisDayZeroCertificationService,
+    runtimeEducationalCorpusGenesisHistoricalReader,
   );
 
 

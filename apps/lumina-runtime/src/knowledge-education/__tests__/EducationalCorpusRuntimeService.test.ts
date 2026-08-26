@@ -860,3 +860,423 @@ test(
     }
   },
 );
+
+
+test(
+  "Runtime source contract includes governed Genesis historical assessments when historical reader is supplied",
+  () => {
+    const root =
+      mkdtempSync(
+        path.join(
+          tmpdir(),
+          "korelumina-educational-corpus-historical-",
+        ),
+      );
+
+    try {
+      const store =
+        new FileEducationalCorpusPersistenceStore({
+          storageRoot:
+            root,
+        });
+
+      const service =
+        new EducationalCorpusRuntimeService(
+          store,
+
+          {
+            snapshot:
+              () =>
+                educationSnapshot([
+                  artifact({
+                    id:
+                      "constitution",
+
+                    kind:
+                      "constitution",
+                  }),
+                ]),
+          },
+
+          {
+            read:
+              () =>
+                validDayZero(),
+          },
+
+          {
+            read:
+              () =>
+                ({
+                  replayId:
+                    "genesis-replay:test",
+
+                  corpus: {
+                    sources: [
+                      {
+                        sourceReferenceId:
+                          "genesis-source-ref:test",
+
+                        sourceRevisionId:
+                          "genesis-source-revision:test",
+
+                        sourceIdentity:
+                          "conversation:test",
+
+                        sourceClass:
+                          "conversation",
+
+                        evidenceType:
+                          "conversation",
+
+                        acquisitionState:
+                          "acquired",
+
+                        provenance: {
+                          nativeId:
+                            "conversation:test",
+
+                          externalSource:
+                            true,
+                        },
+
+                        eventIds: [
+                          "genesis-event:test",
+                        ],
+
+                        episodeIds: [
+                          "genesis-episode:test",
+                        ],
+
+                        metadata: {},
+                      },
+                    ],
+
+                    events: [
+                      {
+                        eventId:
+                          "genesis-event:test",
+
+                        kind:
+                          "lesson-recorded",
+
+                        observationKey:
+                          "lesson:test",
+
+                        occurredAt:
+                          1,
+
+                        sourceReferenceIds: [
+                          "genesis-source-ref:test",
+                        ],
+
+                        sourceRevisionIds: [
+                          "genesis-source-revision:test",
+                        ],
+
+                        summary:
+                          "Historical lesson.",
+
+                        temporalAuthority: {
+                          historical: {
+                            status:
+                              "historically-observed",
+                          },
+
+                          current: {
+                            status:
+                              "not-applicable",
+                          },
+                        },
+
+                        metadata: {},
+                      },
+                    ],
+
+                    episodes: [
+                      {
+                        episodeId:
+                          "genesis-episode:test",
+
+                        revisionId:
+                          "genesis-episode-revision:test",
+
+                        episodeKey:
+                          "episode:test",
+
+                        title:
+                          "Historical Lesson",
+
+                        lifecycle:
+                          "validated",
+
+                        eventIds: [
+                          "genesis-event:test",
+                        ],
+
+                        relationshipIds:
+                          [],
+
+                        sourceReferenceIds: [
+                          "genesis-source-ref:test",
+                        ],
+
+                        externalContext:
+                          "complete",
+
+                        temporalAuthority: {
+                          historical: {
+                            status:
+                              "historically-validated",
+                          },
+
+                          current: {
+                            status:
+                              "not-applicable",
+                          },
+                        },
+
+                        lineage: {
+                          mergedFrom:
+                            [],
+
+                          supersedes:
+                            [],
+                        },
+
+                        metadata: {},
+                      },
+                    ],
+                  },
+
+                  dayZeroCertificationCandidate: {
+                    candidateId:
+                      "genesis-day-zero-candidate:test",
+                  },
+                } as never),
+          },
+        );
+
+      const result =
+        service.read();
+
+      assert.equal(
+        result.sourceContract
+          ?.summary
+          .historicalArtifacts,
+        1,
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.summary
+          .historicalEligible,
+        1,
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.summary
+          .historicalBlocked,
+        0,
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.historicalAssessments[0]
+          ?.learningRole,
+        "LESSON",
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.historicalAssessments[0]
+          ?.governingAuthority,
+        false,
+      );
+
+      /*
+       * Historical evidence is not inserted into EducationalCorpus
+       * items by this milestone.
+       */
+      assert.equal(
+        result.currentCorpus
+          ?.summary
+          .curriculumItems,
+        1,
+      );
+    } finally {
+      rmSync(
+        root,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
+  },
+);
+
+
+test(
+  "blocked Genesis historical provenance makes Runtime corpus incomplete without becoming canonical authority review",
+  () => {
+    const root =
+      mkdtempSync(
+        path.join(
+          tmpdir(),
+          "korelumina-educational-corpus-historical-blocked-",
+        ),
+      );
+
+    try {
+      const store =
+        new FileEducationalCorpusPersistenceStore({
+          storageRoot:
+            root,
+        });
+
+      const service =
+        new EducationalCorpusRuntimeService(
+          store,
+
+          {
+            snapshot:
+              () =>
+                educationSnapshot([
+                  artifact({
+                    id:
+                      "constitution",
+
+                    kind:
+                      "constitution",
+                  }),
+                ]),
+          },
+
+          {
+            read:
+              () =>
+                validDayZero(),
+          },
+
+          {
+            read:
+              () =>
+                ({
+                  replayId:
+                    "genesis-replay:test",
+
+                  corpus: {
+                    sources:
+                      [],
+
+                    events:
+                      [],
+
+                    episodes: [
+                      {
+                        episodeId:
+                          "genesis-episode:test",
+
+                        revisionId:
+                          "genesis-episode-revision:test",
+
+                        episodeKey:
+                          "episode:test",
+
+                        title:
+                          "Unproven Historical Episode",
+
+                        lifecycle:
+                          "validated",
+
+                        eventIds:
+                          [],
+
+                        relationshipIds:
+                          [],
+
+                        sourceReferenceIds:
+                          [],
+
+                        externalContext:
+                          "complete",
+
+                        temporalAuthority: {
+                          historical: {
+                            status:
+                              "unknown",
+                          },
+
+                          current: {
+                            status:
+                              "unknown",
+                          },
+                        },
+
+                        lineage: {
+                          mergedFrom:
+                            [],
+
+                          supersedes:
+                            [],
+                        },
+
+                        metadata: {},
+                      },
+                    ],
+                  },
+
+                  dayZeroCertificationCandidate: {
+                    candidateId:
+                      "genesis-day-zero-candidate:test",
+                  },
+                } as never),
+          },
+        );
+
+      const result =
+        service.read();
+
+      assert.equal(
+        result.state,
+        "INCOMPLETE",
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.summary
+          .historicalBlocked,
+        1,
+      );
+
+      assert.equal(
+        result.sourceContract
+          ?.summary
+          .requiresAuthorityReview,
+        0,
+      );
+
+      assert.ok(
+        result.blockers.includes(
+          "educational-corpus-historical-evidence-blocked",
+        ),
+      );
+    } finally {
+      rmSync(
+        root,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
+  },
+);

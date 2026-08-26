@@ -24,7 +24,16 @@ import type {
 
 import type {
   GenesisDayZeroCertificationRuntimeProjection,
+  GenesisOperationalProjection,
 } from "../knowledge-preservation/genesis/index.js";
+
+import {
+  projectGenesisHistoricalEducation,
+} from "./GenesisHistoricalEducationProjection.js";
+
+import {
+  assessGenesisHistoricalEducationSources,
+} from "./GenesisHistoricalEducationSourceAssessment.js";
 
 import {
   buildEducationalCorpusCertificationCandidate,
@@ -99,6 +108,13 @@ export interface EducationalCorpusDayZeroReader {
 }
 
 
+export interface EducationalCorpusGenesisHistoricalReader {
+  read():
+    GenesisOperationalProjection |
+    null;
+}
+
+
 export class EducationalCorpusRuntimeService {
   constructor(
     private readonly persistence:
@@ -109,6 +125,9 @@ export class EducationalCorpusRuntimeService {
 
     private readonly dayZero:
       EducationalCorpusDayZeroReader,
+
+    private readonly genesisHistorical?:
+      EducationalCorpusGenesisHistoricalReader,
   ) {}
 
 
@@ -169,10 +188,26 @@ export class EducationalCorpusRuntimeService {
       this.education
         .snapshot();
 
+    const genesisHistorical =
+      this.genesisHistorical
+        ?.read() ??
+      null;
+
+    const historicalAssessments =
+      genesisHistorical
+        ? assessGenesisHistoricalEducationSources(
+            projectGenesisHistoricalEducation(
+              genesisHistorical,
+            ).records,
+          )
+        : [];
+
     const sourceContract =
       buildEducationalCorpusSourceContract({
         artifacts:
           education.artifacts,
+
+        historicalAssessments,
 
         dayZero,
       });
@@ -199,6 +234,10 @@ export class EducationalCorpusRuntimeService {
       sourceContract
         .summary
         .blocked >
+        0 ||
+      sourceContract
+        .summary
+        .historicalBlocked >
         0;
 
     let state:
@@ -243,6 +282,17 @@ export class EducationalCorpusRuntimeService {
     ) {
       blockers.push(
         "educational-corpus-source-contract-blocked",
+      );
+    }
+
+    if (
+      sourceContract
+        .summary
+        .historicalBlocked >
+      0
+    ) {
+      blockers.push(
+        "educational-corpus-historical-evidence-blocked",
       );
     }
 
@@ -336,10 +386,26 @@ export class EducationalCorpusRuntimeService {
       this.education
         .snapshot();
 
+    const genesisHistorical =
+      this.genesisHistorical
+        ?.read() ??
+      null;
+
+    const historicalAssessments =
+      genesisHistorical
+        ? assessGenesisHistoricalEducationSources(
+            projectGenesisHistoricalEducation(
+              genesisHistorical,
+            ).records,
+          )
+        : [];
+
     const sourceContract =
       buildEducationalCorpusSourceContract({
         artifacts:
           education.artifacts,
+
+        historicalAssessments,
 
         dayZero,
       });
