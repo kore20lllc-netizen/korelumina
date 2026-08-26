@@ -4,6 +4,7 @@ status: Constitutional Amendment Record
 authority: Constitutional Amendment
 owner: Constitutional Office
 version: 1.0.0
+scope: Canonical Knowledge to Organizational Memory adaptation
 amendment_id: CA-004
 approval_date: 2026-07-31
 branch: inspect/runtime-certified-main

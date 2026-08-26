@@ -4,6 +4,7 @@ status: Canonical
 owner: Chief Systems Architect
 authority: Architecture
 version: 1.0.0
+scope: Platform
 review_cycle: Quarterly
 related:
   - docs/README.md

@@ -4,6 +4,7 @@ status: Constitutional Amendment Record
 authority: Constitutional Amendment
 owner: Constitutional Office
 version: 1.0.0
+scope: Chief Agent education, activation readiness, and continuous learning governance
 amendment_id: CA-005
 approval_date: 2026-07-31
 branch: inspect/runtime-certified-main

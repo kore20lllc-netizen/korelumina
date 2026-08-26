@@ -4,6 +4,7 @@ status: Canonical
 owner: Constitutional Office
 authority: Supreme
 version: 1.0.0
+scope: Organization-wide
 review_cycle: Annual
 related:
   - README.md
