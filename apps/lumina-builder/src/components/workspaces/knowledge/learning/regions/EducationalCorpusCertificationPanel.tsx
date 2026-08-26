@@ -372,7 +372,14 @@ export function EducationalCorpusCertificationPanel() {
                         </div>
                       </div>
                     ) : (
-                      <div className="mt-4 space-y-3">
+                      <div
+                        className="
+                          mt-4 max-h-[300px] space-y-3
+                          overflow-y-auto overscroll-contain pr-1
+                          [scrollbar-gutter:stable]
+                          [touch-action:pan-y]
+                        "
+                      >
                         {candidate.exceptions.map(
                           (
                             item,

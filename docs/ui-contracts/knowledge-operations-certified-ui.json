@@ -80,7 +80,7 @@
       "elementCount": 50
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusCertificationPanel.tsx": {
-      "sha256": "3721ddd7c309c77a7860062d3934c8aa2f04ad57e3bfd4f0352685258b8113c2",
+      "sha256": "18591dd1f86fc4d6b9146d5faab06009818809c3fbef8d1a06ef0cffde549090",
       "elementCount": 89
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx": {
