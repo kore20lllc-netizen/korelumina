@@ -246,11 +246,26 @@ function sourceContract():
 
       blocked:
         0,
+
+      historicalArtifacts:
+        0,
+
+      historicalEligible:
+        0,
+
+      historicalBlocked:
+        0,
     },
 
     unresolvedArtifactIds: [
       "conversation",
     ],
+
+    historicalAssessments:
+      [],
+
+    blockedHistoricalRecordIds:
+      [],
 
     educationalCorpusCertified:
       false,

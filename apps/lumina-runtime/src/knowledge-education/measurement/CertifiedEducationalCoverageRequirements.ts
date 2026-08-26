@@ -63,7 +63,7 @@ EducationalModuleCoverageDefinition[] = [
 
         match: {
           sourceRefs: [
-            "docs/governance/CONSTITUTIONAL_DOCUMENT_GOVERNANCE.md",
+            "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
           ],
         },
       },
@@ -147,8 +147,7 @@ EducationalModuleCoverageDefinition[] = [
 
         match: {
           sourceRefs: [
-            "docs/architecture/KORELUMINA_MASTER_ARCHITECTURE.md",
-            "KORELUMINA_MASTER_ARCHITECTURE.md",
+            "BLUEPRINT.md",
           ],
         },
       },

@@ -133,6 +133,9 @@ interface ParsedDocumentMetadata {
 
   effectiveTo?:
     string;
+
+  approvalDate?:
+    string;
 }
 
 function toPosixPath(
@@ -689,6 +692,9 @@ function parseDocumentMetadata(
   let effectiveTo:
     string | undefined;
 
+  let approvalDate:
+    string | undefined;
+
   for (
     const line
     of lines
@@ -761,6 +767,16 @@ function parseDocumentMetadata(
         line,
         "Effective To",
       );
+
+    approvalDate ??=
+      metadataValue(
+        line,
+        "Approval Date",
+      ) ??
+      metadataValue(
+        line,
+        "approval_date",
+      );
   }
 
   return {
@@ -788,8 +804,83 @@ function parseDocumentMetadata(
     effectiveFrom,
 
     effectiveTo,
+
+    approvalDate,
   };
 }
+
+
+/*
+ * Repository documentation uses richer human governance states than
+ * the downstream Documentation Governance Validator.
+ *
+ * Preserve the observed state in metadata. Normalize to the
+ * manufacturing approval contract only when repository evidence makes
+ * approval deterministic.
+ *
+ * This function MUST NOT infer missing owner, scope, version, or other
+ * authority identity.
+ */
+function normalizedManufacturingApprovalState(
+  input: {
+    repositoryRelativePath:
+      string;
+
+    parsed:
+      ParsedDocumentMetadata;
+  },
+): string | undefined {
+  const explicitApproval =
+    input.parsed.approvalState
+      ?.trim();
+
+  if (
+    explicitApproval
+  ) {
+    return explicitApproval;
+  }
+
+  const observedStatus =
+    input.parsed.status
+      ?.trim()
+      .toLowerCase();
+
+  if (
+    observedStatus ===
+      "canonical" ||
+    observedStatus ===
+      "authoritative"
+  ) {
+    return "approved";
+  }
+
+  const normalizedPath =
+    input.repositoryRelativePath
+      .toLowerCase();
+
+  const isConstitutionalAmendmentRecord =
+    normalizedPath.startsWith(
+      "docs/architecture/amendments/",
+    ) &&
+    /^ca-\d+/i.test(
+      path.posix.basename(
+        input.repositoryRelativePath,
+      ),
+    );
+
+  if (
+    isConstitutionalAmendmentRecord &&
+    observedStatus ===
+      "constitutional amendment record" &&
+    input.parsed.approvalDate
+      ?.trim()
+  ) {
+    return "approved";
+  }
+
+  return input.parsed.status;
+}
+
 
 function checksumFor(
   content:
@@ -1248,8 +1339,11 @@ export class DocumentationHistoricalSourceDiscoverer
             classification.authorityClass,
 
           approvalState:
-            parsed.approvalState ??
-            parsed.status,
+            normalizedManufacturingApprovalState({
+              repositoryRelativePath,
+
+              parsed,
+            }),
 
           owner:
             parsed.owner,
@@ -1285,6 +1379,12 @@ export class DocumentationHistoricalSourceDiscoverer
 
           status:
             parsed.status,
+
+          observedApprovalState:
+            parsed.approvalState,
+
+          approvalDate:
+            parsed.approvalDate,
 
           documentClassification:
             classification

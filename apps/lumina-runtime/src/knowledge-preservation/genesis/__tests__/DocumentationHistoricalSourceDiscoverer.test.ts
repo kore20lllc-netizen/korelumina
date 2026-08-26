@@ -983,3 +983,210 @@ test(
     );
   },
 );
+
+
+test(
+  "canonical document status is normalized for manufacturing while observed status remains preserved",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/canon/VISION.md",
+      [
+        "---",
+        "title: Vision",
+        "status: Canonical",
+        "owner: Constitutional Office",
+        "authority: Supreme",
+        "version: 1.0.0",
+        "---",
+        "",
+        "# Vision",
+      ].join(
+        "\n",
+      ),
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    const source =
+      result.sources[0];
+
+    assert.equal(
+      source.authority
+        .approvalState,
+      "approved",
+    );
+
+    assert.equal(
+      source.metadata.status,
+      "Canonical",
+    );
+  },
+);
+
+
+test(
+  "authoritative document status is normalized for manufacturing without inventing missing identity fields",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+      [
+        "# Platform Constitution",
+        "",
+        "Status: Authoritative",
+      ].join(
+        "\n",
+      ),
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    const source =
+      result.sources[0];
+
+    assert.equal(
+      source.authority
+        .approvalState,
+      "approved",
+    );
+
+    assert.equal(
+      source.metadata.status,
+      "Authoritative",
+    );
+
+    assert.equal(
+      source.authority.owner,
+      undefined,
+    );
+
+    assert.equal(
+      source.authority.scope,
+      undefined,
+    );
+
+    assert.equal(
+      source.authority.version,
+      undefined,
+    );
+  },
+);
+
+
+test(
+  "constitutional amendment record with approval date normalizes to approved while retaining observed status",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+      [
+        "---",
+        "title: CA-005 Learning Constitution",
+        "status: Constitutional Amendment Record",
+        "authority: Constitutional Amendment",
+        "owner: Constitutional Office",
+        "version: 1.0.0",
+        "approval_date: 2026-07-31",
+        "---",
+        "",
+        "# CA-005 — Learning Constitution",
+      ].join(
+        "\n",
+      ),
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    const source =
+      result.sources[0];
+
+    assert.equal(
+      source.authority
+        .approvalState,
+      "approved",
+    );
+
+    assert.equal(
+      source.metadata.status,
+      "Constitutional Amendment Record",
+    );
+
+    assert.equal(
+      source.metadata.approvalDate,
+      "2026-07-31",
+    );
+  },
+);
+
+
+test(
+  "audit document is not promoted to approved manufacturing authority",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/governance/AUDIT.md",
+      [
+        "---",
+        "title: Governance Audit",
+        "status: Audit",
+        "owner: Constitutional Office",
+        "authority: Governance",
+        "version: 1.0.0",
+        "---",
+        "",
+        "# Governance Audit",
+      ].join(
+        "\n",
+      ),
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    const source =
+      result.sources[0];
+
+    assert.equal(
+      source.authority
+        .approvalState,
+      "Audit",
+    );
+
+    assert.equal(
+      source.metadata.status,
+      "Audit",
+    );
+  },
+);

@@ -18,6 +18,10 @@ import type {
   GenesisDayZeroCertificationRuntimeProjection,
 } from "../knowledge-preservation/genesis/index.js";
 
+import type {
+  GenesisHistoricalEducationSourceAssessment,
+} from "./GenesisHistoricalEducationSourceAssessment.js";
+
 
 export type EducationalCorpusSourceContractId =
   `educational-corpus-source-contract:${string}`;
@@ -33,8 +37,24 @@ export interface EducationalCorpusSourceContract {
   dayZeroCandidateId:
     string;
 
+  /*
+   * Governing/current educational sources.
+   *
+   * These retain the existing authority policy and must not be
+   * weakened by historical evidence.
+   */
   assessments:
     readonly EducationalCorpusAuthorityAssessment[];
+
+  /*
+   * Genesis historical educational evidence.
+   *
+   * These records are educationally admissible because of governed
+   * Genesis provenance. They do not create current governing
+   * authority.
+   */
+  historicalAssessments:
+    readonly GenesisHistoricalEducationSourceAssessment[];
 
   summary: {
     artifacts:
@@ -51,9 +71,21 @@ export interface EducationalCorpusSourceContract {
 
     blocked:
       number;
+
+    historicalArtifacts:
+      number;
+
+    historicalEligible:
+      number;
+
+    historicalBlocked:
+      number;
   };
 
   unresolvedArtifactIds:
+    readonly string[];
+
+  blockedHistoricalRecordIds:
     readonly string[];
 
   /*
@@ -140,6 +172,9 @@ export function buildEducationalCorpusSourceContract(
     artifacts:
       readonly EducationalArtifactProjection[];
 
+    historicalAssessments?:
+      readonly GenesisHistoricalEducationSourceAssessment[];
+
     dayZero:
       GenesisDayZeroCertificationRuntimeProjection;
   },
@@ -153,6 +188,22 @@ export function buildEducationalCorpusSourceContract(
       "educational_corpus_valid_day_zero_certification_required",
     );
   }
+
+  const historicalAssessments =
+    [
+      ...(
+        input.historicalAssessments ??
+        []
+      ),
+    ].sort(
+      (
+        left,
+        right,
+      ) =>
+        left.recordId.localeCompare(
+          right.recordId,
+        ),
+    );
 
   const assessments =
     input.artifacts
@@ -206,6 +257,23 @@ export function buildEducationalCorpusSourceContract(
           assessment.decision ===
           "BLOCKED",
       ).length,
+
+    historicalArtifacts:
+      historicalAssessments.length,
+
+    historicalEligible:
+      historicalAssessments.filter(
+        assessment =>
+          assessment.decision ===
+          "ELIGIBLE_HISTORICAL_EVIDENCE",
+      ).length,
+
+    historicalBlocked:
+      historicalAssessments.filter(
+        assessment =>
+          assessment.decision ===
+          "BLOCKED",
+      ).length,
   };
 
   const unresolvedArtifactIds =
@@ -222,20 +290,58 @@ export function buildEducationalCorpusSourceContract(
           assessment.artifactId,
       );
 
+  const blockedHistoricalRecordIds =
+    historicalAssessments
+      .filter(
+        assessment =>
+          assessment.decision ===
+          "BLOCKED",
+      )
+      .map(
+        assessment =>
+          assessment.recordId,
+      );
+
+  /*
+   * Preserve the existing contract identity for callers that have
+   * not yet opted into the historical lane.
+   *
+   * Once Runtime supplies historicalAssessments explicitly, those
+   * assessments become part of the deterministic contract identity.
+   */
+  const contractIdentity =
+    input.historicalAssessments
+      ? {
+          dayZeroCertificationId:
+            input.dayZero
+              .certification
+              .certificationId,
+
+          dayZeroCandidateId:
+            input.dayZero
+              .candidate
+              .candidateId,
+
+          assessments,
+
+          historicalAssessments,
+        }
+      : {
+          dayZeroCertificationId:
+            input.dayZero
+              .certification
+              .certificationId,
+
+          dayZeroCandidateId:
+            input.dayZero
+              .candidate
+              .candidateId,
+
+          assessments,
+        };
+
   const contractId =
-    `educational-corpus-source-contract:${hash({
-      dayZeroCertificationId:
-        input.dayZero
-          .certification
-          .certificationId,
-
-      dayZeroCandidateId:
-        input.dayZero
-          .candidate
-          .candidateId,
-
-      assessments,
-    })}` as EducationalCorpusSourceContractId;
+    `educational-corpus-source-contract:${hash(contractIdentity)}` as EducationalCorpusSourceContractId;
 
   return {
     contractId,
@@ -252,9 +358,13 @@ export function buildEducationalCorpusSourceContract(
 
     assessments,
 
+    historicalAssessments,
+
     summary,
 
     unresolvedArtifactIds,
+
+    blockedHistoricalRecordIds,
 
     educationalCorpusCertified:
       false,
@@ -263,3 +373,10 @@ export function buildEducationalCorpusSourceContract(
       false,
   };
 }
+
+/*
+ * Historical evidence is deliberately additive to the source contract.
+ *
+ * It does not change the meaning of canonical authority assessments,
+ * and it does not automatically enter EducationalCorpus assembly.
+ */

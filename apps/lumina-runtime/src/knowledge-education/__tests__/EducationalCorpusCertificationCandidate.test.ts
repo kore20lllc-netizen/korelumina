@@ -21,13 +21,13 @@ import type {
 const constitutionalRefs = [
   "docs/canon/VISION_2050.md",
   "docs/architecture/00_PLATFORM_CONSTITUTION.md",
-  "docs/governance/CONSTITUTIONAL_DOCUMENT_GOVERNANCE.md",
+  "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
   "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
   "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
   "docs/architecture/amendments/CA-003_ORGANIZATIONAL_MEMORY_STEWARDSHIP.md",
   "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
   "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
-  "docs/architecture/KORELUMINA_MASTER_ARCHITECTURE.md",
+  "BLUEPRINT.md",
 ];
 
 
@@ -322,9 +322,24 @@ function currentRuntime():
 
         blocked:
           0,
+
+        historicalArtifacts:
+          0,
+
+        historicalEligible:
+          0,
+
+        historicalBlocked:
+          0,
       },
 
       unresolvedArtifactIds:
+        [],
+
+      historicalAssessments:
+        [],
+
+      blockedHistoricalRecordIds:
         [],
 
       educationalCorpusCertified:
