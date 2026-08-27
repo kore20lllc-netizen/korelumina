@@ -522,7 +522,7 @@ test(
 );
 
 test(
-  "conversation Evidence requires governance review before Knowledge seeding",
+  "conversation Evidence is correlation eligible but cannot seed Knowledge",
   () => {
     const result =
       classifyGenesisHistoricalAdmission(
@@ -547,12 +547,24 @@ test(
 
     assert.equal(
       result.classification,
-      "requires-governance-review",
+      "historical-correlation-eligible",
+    );
+
+    assert.equal(
+      result.correlationEligible,
+      true,
     );
 
     assert.equal(
       result.invokeKnowledgeManufacturing,
       false,
+    );
+
+    assert.match(
+      result.reasons.join(
+        " ",
+      ),
+      /does not authorize automatic interpretive Knowledge manufacturing or canonical promotion/,
     );
   },
 );

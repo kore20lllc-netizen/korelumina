@@ -47,6 +47,7 @@ const DEFAULT_DOCUMENT_ROOTS =
     "docs/adr",
     "docs/rfc",
     "docs/architecture",
+    "docs/chief-agent",
     "docs/specification",
     "docs/specifications",
     "docs/roadmap",
@@ -648,6 +649,80 @@ function metadataValue(
     undefined;
 }
 
+function sectionMetadataValue(
+  lines:
+    readonly string[],
+
+  key:
+    string,
+): string | undefined {
+  const escaped =
+    key.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&",
+    );
+
+  const headingPattern =
+    new RegExp(
+      `^\\s*#{2,6}\\s+${escaped}\\s*$`,
+      "i",
+    );
+
+  for (
+    let index = 0;
+    index < lines.length;
+    index += 1
+  ) {
+    if (
+      !headingPattern.test(
+        lines[index] ?? "",
+      )
+    ) {
+      continue;
+    }
+
+    for (
+      let valueIndex =
+        index + 1;
+      valueIndex <
+        lines.length;
+      valueIndex += 1
+    ) {
+      const candidate =
+        (
+          lines[valueIndex] ??
+          ""
+        ).trim();
+
+      if (
+        candidate.length ===
+        0
+      ) {
+        continue;
+      }
+
+      if (
+        /^#{1,6}\s+/.test(
+          candidate,
+        )
+      ) {
+        return undefined;
+      }
+
+      return candidate
+        .replace(
+          /[.]$/,
+          "",
+        )
+        .trim() ||
+        undefined;
+    }
+  }
+
+  return undefined;
+}
+
+
 function parseDocumentMetadata(
   content:
     string,
@@ -778,6 +853,12 @@ function parseDocumentMetadata(
         "approval_date",
       );
   }
+
+  status ??=
+    sectionMetadataValue(
+      lines,
+      "Status",
+    );
 
   return {
     title:

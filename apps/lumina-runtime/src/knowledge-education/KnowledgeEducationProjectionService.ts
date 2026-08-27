@@ -69,6 +69,43 @@ export interface CanonicalKnowledgeProjectionStore {
     CanonicalKnowledgeItem[];
 }
 
+
+function projectRuntimeCompetencies(
+  artifacts:
+    readonly EducationalArtifactProjection[],
+): EducationalRuntimeCompetency[] {
+  const missionCurriculumPresent =
+    artifacts.some(
+      artifact =>
+        artifact.kind ===
+        "mission",
+    );
+
+  return certifiedEducationalCompetencies.map(
+    competency => {
+      if (
+        competency.id !==
+          "mission-boundaries" ||
+        missionCurriculumPresent
+      ) {
+        return {
+          ...competency,
+        };
+      }
+
+      return {
+        ...competency,
+
+        status:
+          "not-started",
+
+        evidence:
+          "Mission curriculum is not present in the current Educational Corpus.",
+      };
+    },
+  );
+}
+
 export class KnowledgeEducationProjectionService {
   constructor(
     private readonly canonicalStore:
@@ -181,10 +218,8 @@ export class KnowledgeEducationProjectionService {
         ),
 
       competencies:
-        certifiedEducationalCompetencies.map(
-          (competency) => ({
-            ...competency,
-          }),
+        projectRuntimeCompetencies(
+          artifacts,
         ),
 
       timeline,
