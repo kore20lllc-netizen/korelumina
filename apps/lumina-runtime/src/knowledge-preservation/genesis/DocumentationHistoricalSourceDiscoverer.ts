@@ -28,6 +28,15 @@ import type {
   HistoricalSourceClass,
 } from "./HistoricalSource.js";
 
+import type {
+  DocumentationSectionAuthorityDeclaration,
+} from "./DocumentationSectionAuthority.js";
+
+import {
+  documentationSectionAuthorityKey,
+  sectionAuthorityMaySeed,
+} from "./DocumentationSectionAuthority.js";
+
 import {
   createDerivedHistoricalSourceId,
 } from "./HistoricalSourceIdentity.js";
@@ -94,6 +103,9 @@ export interface DocumentationHistoricalSourceDiscovererOptions {
 
   sectionDocumentPaths?:
     readonly string[];
+
+  sectionAuthorityDeclarations?:
+    readonly DocumentationSectionAuthorityDeclaration[];
 }
 
 interface DocumentClassification {
@@ -1308,6 +1320,12 @@ export class DocumentationHistoricalSourceDiscoverer
   private readonly sectionDocumentPaths:
     ReadonlySet<string>;
 
+  private readonly sectionAuthorityDeclarations:
+    ReadonlyMap<
+      string,
+      DocumentationSectionAuthorityDeclaration
+    >;
+
   private readonly discoveredAt:
     () => number;
 
@@ -1348,6 +1366,22 @@ export class DocumentationHistoricalSourceDiscoverer
           value =>
             value.length >
             0,
+        ),
+      );
+
+    this.sectionAuthorityDeclarations =
+      new Map(
+        (
+          options.sectionAuthorityDeclarations ??
+          []
+        ).map(
+          declaration => [
+            documentationSectionAuthorityKey(
+              declaration.repositoryRelativePath,
+              declaration.sectionSlug,
+            ),
+            declaration,
+          ],
         ),
       );
 
@@ -1660,6 +1694,14 @@ export class DocumentationHistoricalSourceDiscoverer
               "",
             );
 
+          const sectionAuthorityDeclaration =
+            this.sectionAuthorityDeclarations.get(
+              documentationSectionAuthorityKey(
+                repositoryRelativePath,
+                section.slug,
+              ),
+            );
+
           const sectionHistoricalSourceId =
             createDerivedHistoricalSourceId(
               classification.evidenceType,
@@ -1725,33 +1767,37 @@ export class DocumentationHistoricalSourceDiscoverer
             discoveryMethod:
               "documentation-section-v1",
 
-            authority: {
-              authorityClass:
-                parsed.authority ??
-                classification.authorityClass,
+            authority:
+              sectionAuthorityMaySeed(
+                sectionAuthorityDeclaration,
+              )
+                ? {
+                    ...sectionAuthorityDeclaration!
+                      .authority!,
+                  }
+                : {
+                    authorityClass:
+                      parsed.authority ??
+                      classification.authorityClass,
 
-              approvalState:
-                normalizedManufacturingApprovalState({
-                  repositoryRelativePath,
+                    approvalState:
+                      undefined,
 
-                  parsed,
-                }),
+                    owner:
+                      parsed.owner,
 
-              owner:
-                parsed.owner,
+                    scope:
+                      parsed.scope,
 
-              scope:
-                parsed.scope,
+                    version:
+                      parsed.version,
 
-              version:
-                parsed.version,
+                    effectiveFrom:
+                      parsed.effectiveFrom,
 
-              effectiveFrom:
-                parsed.effectiveFrom,
-
-              effectiveTo:
-                parsed.effectiveTo,
-            },
+                    effectiveTo:
+                      parsed.effectiveTo,
+                  },
 
             replayEligibility:
               sectionEligibility
@@ -1798,6 +1844,24 @@ export class DocumentationHistoricalSourceDiscoverer
 
               sectionSlug:
                 section.slug,
+
+              currentAuthority:
+                sectionAuthorityDeclaration
+                  ?.currentAuthority ??
+                "UNRESOLVED",
+
+              authorityBasis:
+                sectionAuthorityDeclaration
+                  ? [
+                      ...sectionAuthorityDeclaration
+                        .basis,
+                    ]
+                  : [],
+
+              authorityDeclarationComplete:
+                sectionAuthorityMaySeed(
+                  sectionAuthorityDeclaration,
+                ),
 
               parentHistoricalSourceId:
                 historicalSourceId,
