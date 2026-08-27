@@ -116,6 +116,10 @@ import {
 } from "./routes/knowledge/registerKnowledgeEducationRoutes.js";
 
 import {
+  registerGovernedRetrievalObservationRoute,
+} from "./routes/knowledge/registerGovernedRetrievalObservationRoute.js";
+
+import {
   createExecutiveOrchestrator,
 } from "./executive/orchestrator/index.js";
 
@@ -865,7 +869,7 @@ export const runtimeGovernanceReadyRecoveryScheduler =
     },
   );
 
-const knowledgeContextBuilder =
+export const runtimeKnowledgeContextBuilder =
   new KnowledgeContextBuilder(
     knowledgePlatform,
 
@@ -875,7 +879,8 @@ const knowledgeContextBuilder =
 
 export const executiveRuntime =
   createExecutiveOrchestrator({
-    knowledgeContextBuilder,
+    knowledgeContextBuilder:
+      runtimeKnowledgeContextBuilder,
   });
 
 export const runtimeExecutiveReasoningService =
@@ -1434,6 +1439,15 @@ registerKnowledgeManufacturingReplayRoutes(
       knowledgeManufacturingReplayService,
   },
 );
+
+registerGovernedRetrievalObservationRoute(
+  app,
+  {
+    knowledgeContextBuilder:
+      runtimeKnowledgeContextBuilder,
+  },
+);
+
 
 registerKnowledgeEducationRoutes(
   app,
