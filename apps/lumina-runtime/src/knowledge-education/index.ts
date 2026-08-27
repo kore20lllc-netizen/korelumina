@@ -21,3 +21,5 @@ export * from "./InitialCompetencyAssessmentCandidate.js";
 export * from "./InitialCompetencyAssessmentService.js";
 export * from "./InitialCompetencyEvidenceContract.js";
 export * from "./GovernedRetrievalCompetencyEvidenceAdapter.js";
+export * from "./InitialCompetencyEvidencePersistence.js";
+export * from "./InitialCompetencyEvidenceValidationService.js";
