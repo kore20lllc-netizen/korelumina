@@ -4,10 +4,15 @@ import type {
   Response,
 } from "express";
 
+import {
+  createInitialCompetencyEvidenceRecord,
+} from "../../knowledge-education/index.js";
+
 import type {
   EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
   InitialCompetencyAssessmentService,
+  InitialCompetencyEvidenceValidationService,
   KnowledgeEducationProjectionService,
 } from "../../knowledge-education/index.js";
 
@@ -28,6 +33,9 @@ export interface KnowledgeEducationRuntime {
 
   initialCompetencyAssessmentService:
     InitialCompetencyAssessmentService;
+
+  initialCompetencyEvidenceService:
+    InitialCompetencyEvidenceValidationService;
 }
 
 
@@ -117,6 +125,218 @@ export function registerKnowledgeEducationRoutes(
               error instanceof Error
                 ? error.message
                 : "initial_competency_assessment_read_failed",
+          });
+      }
+    },
+  );
+
+
+  app.get(
+    "/api/knowledge/education/initial-competency/evidence",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        return res.json({
+          ok:
+            true,
+
+          evidence:
+            runtime
+              .initialCompetencyEvidenceService
+              .list(),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_evidence_read_failed",
+          });
+      }
+    },
+  );
+
+
+  app.post(
+    "/api/knowledge/education/initial-competency/evidence",
+    requireRuntimeAccess,
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const body =
+          bodyRecord(
+            req.body,
+          );
+
+        const evidence =
+          createInitialCompetencyEvidenceRecord({
+            evidenceId:
+              String(
+                body.evidenceId ??
+                "",
+              ),
+
+            competencyId:
+              String(
+                body.competencyId ??
+                "",
+              ),
+
+            source:
+              String(
+                body.source ??
+                "",
+              ) as Parameters<
+                typeof createInitialCompetencyEvidenceRecord
+              >[0]["source"],
+
+            sourceRef:
+              String(
+                body.sourceRef ??
+                "",
+              ),
+
+            claim:
+              String(
+                body.claim ??
+                "",
+              ),
+
+            observedAt:
+              Number(
+                body.observedAt,
+              ),
+          });
+
+        return res.json({
+          ok:
+            true,
+
+          evidence:
+            runtime
+              .initialCompetencyEvidenceService
+              .submit(
+                evidence,
+              ),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_evidence_submit_failed",
+          });
+      }
+    },
+  );
+
+
+  app.post(
+    "/api/knowledge/education/initial-competency/evidence/:evidenceId/decision",
+    requireRuntimeAccess,
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const body =
+          bodyRecord(
+            req.body,
+          );
+
+        const rawDecision =
+          String(
+            body.decision ??
+            "",
+          );
+
+        if (
+          rawDecision !==
+            "VALIDATED" &&
+          rawDecision !==
+            "REJECTED"
+        ) {
+          throw new Error(
+            "initial_competency_evidence_validation_decision_invalid",
+          );
+        }
+
+        return res.json({
+          ok:
+            true,
+
+          evidence:
+            runtime
+              .initialCompetencyEvidenceService
+              .validate({
+                evidenceId:
+                  Array.isArray(
+                    req.params.evidenceId,
+                  )
+                    ? req.params.evidenceId[0] ?? ""
+                    : req.params.evidenceId,
+
+                decision:
+                  rawDecision,
+
+                validatedBy:
+                  String(
+                    body.validatedBy ??
+                    "",
+                  ),
+
+                validatedAt:
+                  Number(
+                    body.validatedAt,
+                  ),
+              }),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_evidence_validation_failed",
           });
       }
     },
