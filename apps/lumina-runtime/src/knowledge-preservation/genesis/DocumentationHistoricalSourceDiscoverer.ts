@@ -1801,6 +1801,9 @@ export class DocumentationHistoricalSourceDiscoverer
 
               parentHistoricalSourceId:
                 historicalSourceId,
+
+              content:
+                section.content,
             },
           });
         }

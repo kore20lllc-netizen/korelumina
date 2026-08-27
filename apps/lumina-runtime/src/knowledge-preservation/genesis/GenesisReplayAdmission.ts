@@ -298,6 +298,36 @@ export function genesisAdmissionRequestToSyntheticEvidence(
                   .manifestEntry
                   .provenanceLocator,
 
+          lineStart:
+            request.manifestEntry
+              .metadata
+              .lineStart,
+
+          lineEnd:
+            request.manifestEntry
+              .metadata
+              .lineEnd,
+
+          sectionTitle:
+            request.manifestEntry
+              .metadata
+              .sectionTitle,
+
+          sectionSlug:
+            request.manifestEntry
+              .metadata
+              .sectionSlug,
+
+          parentHistoricalSourceId:
+            request.manifestEntry
+              .metadata
+              .parentHistoricalSourceId,
+
+          content:
+            request.manifestEntry
+              .metadata
+              .content,
+
           documentClassification:
             request.manifestEntry
               .metadata
