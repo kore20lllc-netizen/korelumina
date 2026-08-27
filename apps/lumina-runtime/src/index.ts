@@ -105,6 +105,7 @@ import {
   EducationalCorpusRuntimeService,
   FileEducationalCorpusCertificationPersistenceStore,
   FileEducationalCorpusPersistenceStore,
+  InitialCompetencyAssessmentService,
   KnowledgeEducationProjectionService,
 } from "./knowledge-education/index.js";
 
@@ -709,6 +710,13 @@ export const runtimeEducationalCorpusCertificationService =
             .certificationCandidate,
     },
   );
+
+export const runtimeInitialCompetencyAssessmentService =
+  new InitialCompetencyAssessmentService(
+    runtimeKnowledgeEducationProjectionService,
+    runtimeEducationalCorpusCertificationService,
+  );
+
 
 export const runtimeKnowledgeOperationsService =
   new KnowledgeOperationsService({
@@ -1426,6 +1434,9 @@ registerKnowledgeEducationRoutes(
 
     educationalCorpusCertificationService:
       runtimeEducationalCorpusCertificationService,
+
+    initialCompetencyAssessmentService:
+      runtimeInitialCompetencyAssessmentService,
   },
 );
 

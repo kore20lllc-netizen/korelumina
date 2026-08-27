@@ -18,3 +18,4 @@ export * from "./admission/index.js";
 export * from "./projection/index.js";
 export * from "./measurement/index.js";
 export * from "./InitialCompetencyAssessmentCandidate.js";
+export * from "./InitialCompetencyAssessmentService.js";

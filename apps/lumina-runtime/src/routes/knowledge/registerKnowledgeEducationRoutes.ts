@@ -7,6 +7,7 @@ import type {
 import type {
   EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
+  InitialCompetencyAssessmentService,
   KnowledgeEducationProjectionService,
 } from "../../knowledge-education/index.js";
 
@@ -24,6 +25,9 @@ export interface KnowledgeEducationRuntime {
 
   educationalCorpusCertificationService:
     EducationalCorpusCertificationService;
+
+  initialCompetencyAssessmentService:
+    InitialCompetencyAssessmentService;
 }
 
 
@@ -75,6 +79,46 @@ export function registerKnowledgeEducationRoutes(
           .projectionService
           .snapshot(),
       );
+    },
+  );
+
+
+  app.get(
+    "/api/knowledge/education/initial-competency",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        return res.json({
+          ok:
+            true,
+
+          assessment:
+            runtime
+              .initialCompetencyAssessmentService
+              .read(),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_assessment_read_failed",
+          });
+      }
     },
   );
 
