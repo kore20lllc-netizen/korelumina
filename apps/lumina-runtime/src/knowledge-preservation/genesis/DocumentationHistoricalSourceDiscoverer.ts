@@ -91,6 +91,9 @@ export interface DocumentationHistoricalSourceDiscovererOptions {
 
   historicalTimestampResolver?:
     DocumentationHistoricalTimestampResolver;
+
+  sectionDocumentPaths?:
+    readonly string[];
 }
 
 interface DocumentClassification {
@@ -106,6 +109,133 @@ interface DocumentClassification {
   documentClassification:
     string;
 }
+
+
+interface DocumentationSection {
+  title:
+    string;
+
+  slug:
+    string;
+
+  lineStart:
+    number;
+
+  lineEnd:
+    number;
+
+  content:
+    string;
+}
+
+
+function sectionSlug(
+  title:
+    string,
+): string {
+  return title
+    .trim()
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]+/g,
+      "-",
+    )
+    .replace(
+      /^-+|-+$/g,
+      "",
+    ) || "section";
+}
+
+
+function parseDocumentSections(
+  content:
+    string,
+): DocumentationSection[] {
+  const lines =
+    content.split(
+      /\r?\n/,
+    );
+
+  const headings:
+    {
+      title:
+        string;
+
+      line:
+        number;
+    }[] = [];
+
+  for (
+    let index = 0;
+    index < lines.length;
+    index += 1
+  ) {
+    const match =
+      (
+        lines[index] ??
+        ""
+      ).match(
+        /^#{1,6}\s+(.+?)\s*$/,
+      );
+
+    if (
+      !match?.[1]
+    ) {
+      continue;
+    }
+
+    headings.push({
+      title:
+        match[1].trim(),
+
+      line:
+        index + 1,
+    });
+  }
+
+  return headings.map(
+    (
+      heading,
+      index,
+    ) => {
+      const next =
+        headings[
+          index + 1
+        ];
+
+      const lineEnd =
+        next
+          ? next.line - 1
+          : lines.length;
+
+      return {
+        title:
+          heading.title,
+
+        slug:
+          sectionSlug(
+            heading.title,
+          ),
+
+        lineStart:
+          heading.line,
+
+        lineEnd,
+
+        content:
+          lines
+            .slice(
+              heading.line - 1,
+              lineEnd,
+            )
+            .join(
+              "\n",
+            ),
+      };
+    },
+  );
+}
+
 
 interface ParsedDocumentMetadata {
   title:
@@ -1175,6 +1305,9 @@ export class DocumentationHistoricalSourceDiscoverer
   private readonly documentRoots:
     readonly string[];
 
+  private readonly sectionDocumentPaths:
+    ReadonlySet<string>;
+
   private readonly discoveredAt:
     () => number;
 
@@ -1193,6 +1326,30 @@ export class DocumentationHistoricalSourceDiscoverer
     this.documentRoots =
       options.documentRoots ??
       DEFAULT_DOCUMENT_ROOTS;
+
+    this.sectionDocumentPaths =
+      new Set(
+        (
+          options.sectionDocumentPaths ??
+          []
+        ).map(
+          value =>
+            value
+              .replaceAll(
+                "\\",
+                "/",
+              )
+              .replace(
+                /^\.\//,
+                "",
+              )
+              .trim(),
+        ).filter(
+          value =>
+            value.length >
+            0,
+        ),
+      );
 
     this.id =
       options.discovererId ??
@@ -1475,6 +1632,179 @@ export class DocumentationHistoricalSourceDiscoverer
             repositoryRelativePath,
         },
       });
+
+      if (
+        this.sectionDocumentPaths.has(
+          repositoryRelativePath,
+        )
+      ) {
+        const sections =
+          parseDocumentSections(
+            content,
+          );
+
+        for (
+          const section
+          of sections
+        ) {
+          const sectionLocator =
+            [
+              repositoryRelativePath,
+              "#section:",
+              section.slug,
+              ":",
+              section.lineStart,
+              "-",
+              section.lineEnd,
+            ].join(
+              "",
+            );
+
+          const sectionHistoricalSourceId =
+            createDerivedHistoricalSourceId(
+              classification.evidenceType,
+              {
+                provenanceLocator:
+                  sectionLocator,
+              },
+            );
+
+          const sectionEligibility =
+            eligibilityFor({
+              scope,
+
+              historicalSourceId:
+                sectionHistoricalSourceId,
+
+              evidenceType:
+                classification.evidenceType,
+
+              historicalTimestamp:
+                timestamp.value,
+            });
+
+          sources.push({
+            historicalSourceId:
+              sectionHistoricalSourceId,
+
+            sourceClass:
+              classification.sourceClass,
+
+            evidenceType:
+              classification.evidenceType,
+
+            stableSourceKey:
+              sectionLocator,
+
+            sourceChecksum:
+              checksumFor(
+                section.content,
+              ),
+
+            provenance: {
+              locator:
+                sectionLocator,
+
+              repository:
+                scope.repository,
+
+              ref:
+                scope.ref,
+
+              parentIds: [
+                historicalSourceId,
+              ],
+            },
+
+            historicalTimestamp:
+              timestamp,
+
+            discoveredAt:
+              this.discoveredAt(),
+
+            discoveryMethod:
+              "documentation-section-v1",
+
+            authority: {
+              authorityClass:
+                parsed.authority ??
+                classification.authorityClass,
+
+              approvalState:
+                normalizedManufacturingApprovalState({
+                  repositoryRelativePath,
+
+                  parsed,
+                }),
+
+              owner:
+                parsed.owner,
+
+              scope:
+                parsed.scope,
+
+              version:
+                parsed.version,
+
+              effectiveFrom:
+                parsed.effectiveFrom,
+
+              effectiveTo:
+                parsed.effectiveTo,
+            },
+
+            replayEligibility:
+              sectionEligibility
+                .replayEligibility,
+
+            exclusionReason:
+              sectionEligibility
+                .exclusionReason,
+
+            supersedes:
+              [],
+
+            conflictsWith:
+              [],
+
+            metadata: {
+              title:
+                section.title,
+
+              status:
+                parsed.status,
+
+              observedApprovalState:
+                parsed.approvalState,
+
+              approvalDate:
+                parsed.approvalDate,
+
+              documentClassification:
+                classification
+                  .documentClassification,
+
+              sourceLocation:
+                repositoryRelativePath,
+
+              lineStart:
+                section.lineStart,
+
+              lineEnd:
+                section.lineEnd,
+
+              sectionTitle:
+                section.title,
+
+              sectionSlug:
+                section.slug,
+
+              parentHistoricalSourceId:
+                historicalSourceId,
+            },
+          });
+        }
+      }
     }
 
     return {
