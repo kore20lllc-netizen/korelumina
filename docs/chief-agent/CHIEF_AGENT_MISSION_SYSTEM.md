@@ -4,6 +4,9 @@ Status: Approved
 
 Version: 1.0
 
+Owner: Chief Systems Architect
+Scope: Mission hierarchy, mission lifecycle, mission intake, planning, approval, delegation, execution coordination, validation, completion, knowledge extraction, and archival semantics, subordinate to higher governing authority.
+
 ---
 
 # Purpose

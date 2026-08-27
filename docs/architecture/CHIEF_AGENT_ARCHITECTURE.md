@@ -4,6 +4,9 @@ Status: Approved
 
 Version: 1.0
 
+Owner: Chief Systems Architect
+Scope: Chief Agent identity, executive operating loop, cross-subsystem orchestration boundaries, Runtime-truth relationship, knowledge-consumer boundaries, delegation architecture, and human-override boundaries.
+
 ---
 
 # Purpose

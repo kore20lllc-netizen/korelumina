@@ -4,6 +4,9 @@ Status: Approved
 
 Version: 1.0
 
+Owner: Chief Systems Architect
+Scope: Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.
+
 ## Purpose
 
 This document defines how the KoreLumina Chief Agent operates.
