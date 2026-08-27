@@ -183,6 +183,12 @@ export class DocumentationCompiler
           sourceLocation:
             evidence.metadata.sourceLocation,
 
+          lineStart:
+            evidence.metadata.lineStart,
+
+          lineEnd:
+            evidence.metadata.lineEnd,
+
           supersedes:
             evidence.metadata.supersedes,
 
