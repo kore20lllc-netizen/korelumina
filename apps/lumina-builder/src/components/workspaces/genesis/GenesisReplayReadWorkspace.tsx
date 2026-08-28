@@ -605,7 +605,7 @@ export function GenesisReplayReadWorkspace({
             {inventoryLoaded &&
               !inventoryLoading &&
               !inventoryEmpty && (
-                <div className="h-full min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain p-4 [scrollbar-gutter:stable] [touch-action:pan-y]">
+                <div className="max-h-[560px] min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain p-4 [scrollbar-gutter:stable] [touch-action:pan-y]">
                   <div className="space-y-3">
                     {rows.map(
                       (
