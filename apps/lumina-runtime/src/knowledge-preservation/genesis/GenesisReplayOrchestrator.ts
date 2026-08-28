@@ -41,6 +41,10 @@ import {
   GenesisProductionReplayAdmissionAdapter,
 } from "./GenesisProductionReplayAdmissionAdapter.js";
 
+import type {
+  GenesisProductionReplayReprocessingRequest,
+} from "./GenesisProductionReplayAdmissionAdapter.js";
+
 import {
   FileGenesisHistoricalCorrelationPersistenceStore,
 } from "./GenesisHistoricalCorrelationPersistence.js";
@@ -173,6 +177,9 @@ export interface RunGovernedGenesisReplayInput {
 
   authorizeProductionAdmission?:
     boolean;
+
+  reprocessing?:
+    GenesisProductionReplayReprocessingRequest;
 
   manifestBuilder?:
     GenesisReplayManifestBuilder;
@@ -358,6 +365,16 @@ export async function runGovernedGenesisReplay(
 
   if (
     input.mode ===
+      "DRY_RUN" &&
+    input.reprocessing
+  ) {
+    throw new Error(
+      "genesis_reprocessing_requires_production_admission",
+    );
+  }
+
+  if (
+    input.mode ===
     "DRY_RUN"
   ) {
     return {
@@ -438,6 +455,9 @@ export async function runGovernedGenesisReplay(
 
       conversationEvidenceResolver:
         input.conversationEvidenceResolver,
+
+      reprocessing:
+        input.reprocessing,
     });
 
   const runnerResult =

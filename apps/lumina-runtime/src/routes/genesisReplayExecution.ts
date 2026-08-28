@@ -19,6 +19,7 @@ import type {
   FileGenesisReplayPersistenceStore,
   GenesisConversationReplayEvidenceResolver,
   GenesisHistoricalCorrelationState,
+  GenesisProductionReplayReprocessingRequest,
   GenesisReplayOrchestratorMode,
   GenesisReplayOrchestratorResult,
   GenesisReplayScope,
@@ -65,6 +66,9 @@ interface GenesisReplayExecutionRequestBody {
 
   authorizeProductionAdmission:
     boolean;
+
+  reprocessing?:
+    GenesisProductionReplayReprocessingRequest;
 }
 
 function record(
@@ -304,6 +308,57 @@ function parseScope(
   );
 }
 
+function parseReprocessing(
+  value:
+    unknown,
+): GenesisProductionReplayReprocessingRequest |
+  undefined {
+  if (
+    value ===
+      undefined
+  ) {
+    return undefined;
+  }
+
+  const input =
+    record(
+      value,
+    );
+
+  return {
+    historicalSourceId:
+      requireString(
+        input.historicalSourceId,
+        "genesis_reprocessing_historical_source_id_required",
+      ),
+
+    attemptId:
+      requireString(
+        input.attemptId,
+        "genesis_reprocessing_attempt_id_required",
+      ),
+
+    priorManufacturingRunId:
+      requireString(
+        input.priorManufacturingRunId,
+        "genesis_reprocessing_prior_run_required",
+      ),
+
+    priorPackageId:
+      requireString(
+        input.priorPackageId,
+        "genesis_reprocessing_prior_package_required",
+      ),
+
+    reason:
+      requireString(
+        input.reason,
+        "genesis_reprocessing_reason_required",
+      ),
+  };
+}
+
+
 function parseBody(
   value:
     unknown,
@@ -327,6 +382,21 @@ function parseBody(
     input.authorizeProductionAdmission ===
     true;
 
+  const reprocessing =
+    parseReprocessing(
+      input.reprocessing,
+    );
+
+  if (
+    reprocessing &&
+    mode !==
+      "PRODUCTION_ADMISSION"
+  ) {
+    throw new Error(
+      "genesis_reprocessing_requires_production_admission",
+    );
+  }
+
   if (
     mode ===
       "PRODUCTION_ADMISSION" &&
@@ -341,6 +411,12 @@ function parseBody(
     mode,
     scope,
     authorizeProductionAdmission,
+
+    ...(reprocessing
+      ? {
+          reprocessing,
+        }
+      : {}),
   };
 }
 
@@ -460,6 +536,9 @@ export function createGenesisReplayExecutionHandler(
           authorizeProductionAdmission:
             request
               .authorizeProductionAdmission,
+
+          reprocessing:
+            request.reprocessing,
 
           additionalDiscoverers:
             runtime.additionalDiscoverers,

@@ -8,6 +8,7 @@ import type {
 
 import type {
   KnowledgePreservationPlatform,
+  KnowledgeReprocessingRequest,
 } from "../bootstrap/index.js";
 
 import type {
@@ -30,12 +31,23 @@ import type {
 } from "./GenesisConversationReplayEvidenceResolver.js";
 
 
+export interface GenesisProductionReplayReprocessingRequest
+  extends KnowledgeReprocessingRequest
+{
+  historicalSourceId:
+    string;
+}
+
+
 export interface GenesisProductionReplayAdmissionAdapterOptions {
   platform:
     KnowledgePreservationPlatform;
 
   conversationEvidenceResolver?:
     GenesisConversationReplayEvidenceResolver;
+
+  reprocessing?:
+    GenesisProductionReplayReprocessingRequest;
 }
 
 
@@ -171,6 +183,10 @@ export class GenesisProductionReplayAdmissionAdapter
     GenesisConversationReplayEvidenceResolver |
     null;
 
+  private readonly reprocessing:
+    GenesisProductionReplayReprocessingRequest |
+    null;
+
 
   constructor(
     options:
@@ -181,6 +197,10 @@ export class GenesisProductionReplayAdmissionAdapter
 
     this.conversationEvidenceResolver =
       options.conversationEvidenceResolver ??
+      null;
+
+    this.reprocessing =
+      options.reprocessing ??
       null;
   }
 
@@ -268,6 +288,31 @@ export class GenesisProductionReplayAdmissionAdapter
   }
 
 
+  private reprocessingFor(
+    request:
+      GenesisReplayAdmissionRequest,
+  ):
+    GenesisProductionReplayReprocessingRequest |
+    null {
+    if (
+      !this.reprocessing
+    ) {
+      return null;
+    }
+
+    if (
+      this.reprocessing
+        .historicalSourceId !==
+      request.planEntry
+        .historicalSourceId
+    ) {
+      return null;
+    }
+
+    return this.reprocessing;
+  }
+
+
   async admit(
     request:
       GenesisReplayAdmissionRequest,
@@ -294,13 +339,59 @@ export class GenesisProductionReplayAdmissionAdapter
         evidence.id,
       );
 
+    const reprocessing =
+      this.reprocessingFor(
+        request,
+      );
+
     if (
-      existing
+      existing &&
+      !reprocessing
     ) {
       return existingAdmissionResult(
         existing,
         evidence,
       );
+    }
+
+    if (
+      reprocessing
+    ) {
+      if (
+        !governance
+          .invokeKnowledgeManufacturing
+      ) {
+        throw new Error(
+          "genesis_reprocessing_requires_knowledge_manufacturing_eligibility",
+        );
+      }
+
+      await this.platform
+        .reprocess(
+          evidence,
+          {
+            attemptId:
+              reprocessing
+                .attemptId,
+
+            priorManufacturingRunId:
+              reprocessing
+                .priorManufacturingRunId,
+
+            priorPackageId:
+              reprocessing
+                .priorPackageId,
+
+            reason:
+              reprocessing
+                .reason,
+          },
+        );
+
+      return {
+        evidenceId:
+          evidence.id,
+      };
     }
 
     /*
