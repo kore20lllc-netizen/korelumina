@@ -116,13 +116,25 @@ const COMPILER_STAGES: readonly {
 function manufacturingRunId(
   evidence:
     EvidenceItem,
+
+  attemptId?:
+    string,
 ): string {
+  const normalizedAttemptId =
+    attemptId?.trim() ??
+    "";
+
+  const identity =
+    normalizedAttemptId
+      ? `${evidence.id}\nreprocessing-attempt:${normalizedAttemptId}`
+      : evidence.id;
+
   const digest =
     createHash(
       "sha256",
     )
       .update(
-        evidence.id,
+        identity,
       )
       .digest(
         "hex",
@@ -159,6 +171,105 @@ function compilerDisplayName(
     compiler.name,
   );
 }
+
+export interface KnowledgeReprocessingRequest {
+  attemptId:
+    string;
+
+  priorManufacturingRunId:
+    string;
+
+  priorPackageId:
+    string;
+
+  reason:
+    string;
+}
+
+
+interface KnowledgePreservationAttemptContext {
+  attemptId:
+    string;
+
+  priorManufacturingRunId:
+    string;
+
+  priorPackageId:
+    string;
+
+  reason:
+    string;
+}
+
+
+function normalizedRequiredIdentifier(
+  value:
+    string,
+
+  error:
+    string,
+): string {
+  const normalized =
+    value.trim();
+
+  if (
+    !normalized
+  ) {
+    throw new Error(
+      error,
+    );
+  }
+
+  return normalized;
+}
+
+
+function metadataStringArray(
+  value:
+    unknown,
+): string[] {
+  if (
+    typeof value ===
+      "string"
+  ) {
+    return value.trim()
+      ? [
+          value.trim(),
+        ]
+      : [];
+  }
+
+  if (
+    !Array.isArray(
+      value,
+    )
+  ) {
+    return [];
+  }
+
+  return value.filter(
+    (
+      entry,
+    ): entry is string =>
+      typeof entry ===
+        "string" &&
+      entry.trim().length >
+        0,
+  );
+}
+
+
+function uniqueStrings(
+  values:
+    readonly string[],
+): string[] {
+  return [
+    ...new Set(
+      values,
+    ),
+  ];
+}
+
 
 export class KnowledgePreservationPlatform {
   constructor(
@@ -216,6 +327,125 @@ export class KnowledgePreservationPlatform {
     evidence:
       EvidenceItem,
   ): Promise<void> {
+    return this
+      .preserveAttempt(
+        evidence,
+        null,
+      );
+  }
+
+
+  async reprocess(
+    evidence:
+      EvidenceItem,
+
+    request:
+      KnowledgeReprocessingRequest,
+  ): Promise<void> {
+    const attemptId =
+      normalizedRequiredIdentifier(
+        request.attemptId,
+        "knowledge_reprocessing_attempt_id_required",
+      );
+
+    const priorManufacturingRunId =
+      normalizedRequiredIdentifier(
+        request.priorManufacturingRunId,
+        "knowledge_reprocessing_prior_run_required",
+      );
+
+    const priorPackageId =
+      normalizedRequiredIdentifier(
+        request.priorPackageId,
+        "knowledge_reprocessing_prior_package_required",
+      );
+
+    const reason =
+      normalizedRequiredIdentifier(
+        request.reason,
+        "knowledge_reprocessing_reason_required",
+      );
+
+    const priorRun =
+      this.manufacturingRunService
+        .get(
+          priorManufacturingRunId,
+        );
+
+    if (
+      !priorRun
+    ) {
+      throw new Error(
+        "knowledge_reprocessing_prior_run_not_found",
+      );
+    }
+
+    if (
+      priorRun.evidenceId !==
+      evidence.id
+    ) {
+      throw new Error(
+        "knowledge_reprocessing_evidence_identity_mismatch",
+      );
+    }
+
+    if (
+      priorRun.packageId !==
+      priorPackageId
+    ) {
+      throw new Error(
+        "knowledge_reprocessing_prior_package_mismatch",
+      );
+    }
+
+    const priorPackage =
+      this.packageService
+        .get(
+          priorPackageId,
+        );
+
+    if (
+      !priorPackage
+    ) {
+      throw new Error(
+        "knowledge_reprocessing_prior_package_not_found",
+      );
+    }
+
+    if (
+      !priorPackage.remediation.required ||
+      priorPackage.approvalState !==
+        "remediation_required"
+    ) {
+      throw new Error(
+        "knowledge_reprocessing_prior_package_not_remediation_required",
+      );
+    }
+
+    return this
+      .preserveAttempt(
+        evidence,
+        {
+          attemptId,
+
+          priorManufacturingRunId,
+
+          priorPackageId,
+
+          reason,
+        },
+      );
+  }
+
+
+  private async preserveAttempt(
+    evidence:
+      EvidenceItem,
+
+    reprocessing:
+      KnowledgePreservationAttemptContext |
+      null,
+  ): Promise<void> {
     /*
      * Evidence admission is a runtime boundary.
      *
@@ -231,6 +461,8 @@ export class KnowledgePreservationPlatform {
     const runId =
       manufacturingRunId(
         evidence,
+        reprocessing
+          ?.attemptId,
       );
 
     const existing =
@@ -367,6 +599,62 @@ export class KnowledgePreservationPlatform {
 
       throw error;
     }
+
+    if (
+      reprocessing
+    ) {
+      compiled =
+        compiled.map(
+          (
+            item,
+          ) => ({
+            ...item,
+
+            metadata: {
+              ...item.metadata,
+
+              lineage:
+                uniqueStrings([
+                  ...metadataStringArray(
+                    item.metadata
+                      .lineage,
+                  ),
+                  reprocessing
+                    .priorPackageId,
+                ]),
+
+              supersedes:
+                uniqueStrings([
+                  ...metadataStringArray(
+                    item.metadata
+                      .supersedes,
+                  ),
+                  reprocessing
+                    .priorPackageId,
+                ]),
+
+              reprocessing: {
+                attemptId:
+                  reprocessing
+                    .attemptId,
+
+                priorManufacturingRunId:
+                  reprocessing
+                    .priorManufacturingRunId,
+
+                priorPackageId:
+                  reprocessing
+                    .priorPackageId,
+
+                reason:
+                  reprocessing
+                    .reason,
+              },
+            },
+          }),
+        );
+    }
+
 
     const executedCompilerNames =
       new Set(
