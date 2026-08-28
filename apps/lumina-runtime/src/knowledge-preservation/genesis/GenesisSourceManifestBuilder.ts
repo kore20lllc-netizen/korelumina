@@ -31,9 +31,59 @@ import {
   DocumentationHistoricalSourceDiscoverer,
 } from "./DocumentationHistoricalSourceDiscoverer.js";
 
+import type {
+  DocumentationSectionAuthorityDeclaration,
+} from "./DocumentationSectionAuthority.js";
+
 import {
   GitHistoryHistoricalSourceDiscoverer,
 } from "./GitHistoryHistoricalSourceDiscoverer.js";
+
+const CHIEF_AGENT_OPERATING_MODEL_PATH =
+  "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md";
+
+
+const DEFAULT_DOCUMENTATION_SECTION_AUTHORITY_DECLARATIONS:
+  readonly DocumentationSectionAuthorityDeclaration[] =
+  [
+    {
+      repositoryRelativePath:
+        CHIEF_AGENT_OPERATING_MODEL_PATH,
+
+      sectionSlug:
+        "mission-ownership",
+
+      currentAuthority:
+        "CURRENT_SUPPORTING",
+
+      authority: {
+        authorityClass:
+          "governance",
+
+        approvalState:
+          "Approved",
+
+        owner:
+          "Chief Systems Architect",
+
+        scope:
+          "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+
+        version:
+          "1.0",
+      },
+
+      basis: [
+        "docs/canon/VISION_2050.md",
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+        "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+        "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+        "docs/architecture/reconciliation/CHIEF_AGENT_OPERATIONAL_LEARNING_MODEL.md",
+        "docs/architecture/reconciliation/CHIEF_AGENT_AUTHORITY_IDENTITY_RECONCILIATION.md",
+      ],
+    },
+  ];
+
 
 export type GenesisSourceManifestBuildReadiness =
   | "READY"
@@ -272,6 +322,13 @@ export async function buildDefaultGenesisSourceManifest(
         discoveredAt:
           () =>
             discoveredAt,
+
+        sectionDocumentPaths: [
+          CHIEF_AGENT_OPERATING_MODEL_PATH,
+        ],
+
+        sectionAuthorityDeclarations:
+          DEFAULT_DOCUMENTATION_SECTION_AUTHORITY_DECLARATIONS,
       }),
 
       new GitHistoryHistoricalSourceDiscoverer({
