@@ -200,7 +200,8 @@ export class DocumentationGovernanceValidator
       metadataString(
         item,
         "approvalState",
-      );
+      )
+        .toLowerCase();
 
     if (
       approvalState !==
