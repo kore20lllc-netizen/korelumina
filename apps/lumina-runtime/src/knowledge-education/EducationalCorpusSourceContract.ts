@@ -4,6 +4,7 @@ import {
 
 import {
   assessEducationalCorpusAuthority,
+  EDUCATIONAL_CORPUS_AUTHORITY_POLICY_VERSION,
 } from "./EducationalCorpusAuthorityPolicy.js";
 
 import type {
@@ -21,6 +22,10 @@ import type {
 import type {
   GenesisHistoricalEducationSourceAssessment,
 } from "./GenesisHistoricalEducationSourceAssessment.js";
+
+import type {
+  EducationalAuthorityResolution,
+} from "./EducationalAuthorityResolution.js";
 
 
 export type EducationalCorpusSourceContractId =
@@ -175,6 +180,9 @@ export function buildEducationalCorpusSourceContract(
     historicalAssessments?:
       readonly GenesisHistoricalEducationSourceAssessment[];
 
+    authorityResolutions?:
+      readonly EducationalAuthorityResolution[];
+
     dayZero:
       GenesisDayZeroCertificationRuntimeProjection;
   },
@@ -188,6 +196,11 @@ export function buildEducationalCorpusSourceContract(
       "educational_corpus_valid_day_zero_certification_required",
     );
   }
+
+  const dayZeroCertificationId =
+    input.dayZero
+      .certification
+      .certificationId;
 
   const historicalAssessments =
     [
@@ -205,16 +218,73 @@ export function buildEducationalCorpusSourceContract(
         ),
     );
 
+  const resolutionsByArtifact =
+    new Map(
+      (
+        input.authorityResolutions ??
+        []
+      )
+        .filter(
+          resolution =>
+            resolution.authorityPolicyVersion ===
+              EDUCATIONAL_CORPUS_AUTHORITY_POLICY_VERSION &&
+            resolution.dayZeroCertificationId ===
+              dayZeroCertificationId,
+        )
+        .map(
+          resolution => [
+            resolution.artifactId,
+            resolution,
+          ] as const,
+        ),
+    );
+
   const assessments =
     input.artifacts
       .map(
-        artifact =>
-          assessEducationalCorpusAuthority({
-            artifact,
+        artifact => {
+          const assessment =
+            assessEducationalCorpusAuthority({
+              artifact,
 
-            dayZero:
-              input.dayZero,
-          }),
+              dayZero:
+                input.dayZero,
+            });
+
+          if (
+            assessment.decision !==
+              "REQUIRES_AUTHORITY_REVIEW"
+          ) {
+            return assessment;
+          }
+
+          const resolution =
+            resolutionsByArtifact.get(
+              artifact.id,
+            );
+
+          if (
+            !resolution
+          ) {
+            return assessment;
+          }
+
+          return {
+            ...assessment,
+
+            decision:
+              "ELIGIBLE" as const,
+
+            learningRole:
+              resolution.learningRole,
+
+            reasons: [
+              ...assessment.reasons,
+              "educational-authority-resolution-applied",
+              `educational-authority-resolution:${resolution.resolutionId}`,
+            ],
+          };
+        },
       )
       .sort(
         (
@@ -325,6 +395,46 @@ export function buildEducationalCorpusSourceContract(
           assessments,
 
           historicalAssessments,
+
+          authorityResolutions:
+            (
+              input.authorityResolutions ??
+              []
+            )
+              .filter(
+                resolution =>
+                  resolution.authorityPolicyVersion ===
+                    EDUCATIONAL_CORPUS_AUTHORITY_POLICY_VERSION &&
+                  resolution.dayZeroCertificationId ===
+                    dayZeroCertificationId,
+              )
+              .map(
+                resolution => ({
+                  resolutionId:
+                    resolution.resolutionId,
+
+                  artifactId:
+                    resolution.artifactId,
+
+                  learningRole:
+                    resolution.learningRole,
+
+                  reviewerId:
+                    resolution.reviewerId,
+
+                  reviewedAt:
+                    resolution.reviewedAt,
+                }),
+              )
+              .sort(
+                (
+                  left,
+                  right,
+                ) =>
+                  left.artifactId.localeCompare(
+                    right.artifactId,
+                  ),
+              ),
         }
       : {
           dayZeroCertificationId:

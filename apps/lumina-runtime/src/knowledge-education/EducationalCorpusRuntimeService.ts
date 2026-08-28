@@ -18,6 +18,10 @@ import type {
   EducationalCorpusPersistenceStore,
 } from "./EducationalCorpusPersistence.js";
 
+import {
+  FileEducationalAuthorityResolutionStore,
+} from "./EducationalAuthorityResolutionPersistence.js";
+
 import type {
   KnowledgeEducationSnapshot,
 } from "./KnowledgeEducationProjectionService.js";
@@ -132,7 +136,34 @@ export class EducationalCorpusRuntimeService {
 
     private readonly genesisHistorical?:
       EducationalCorpusGenesisHistoricalReader,
+
+    private readonly authorityResolutions =
+      new FileEducationalAuthorityResolutionStore(),
   ) {}
+
+
+  private loadAuthorityResolutions(
+    artifactIds:
+      readonly string[],
+  ) {
+    return artifactIds
+      .map(
+        artifactId =>
+          this.authorityResolutions
+            .load(
+              artifactId,
+            ),
+      )
+      .filter(
+        (
+          resolution,
+        ): resolution is NonNullable<
+          typeof resolution
+        > =>
+          resolution !==
+          null,
+      );
+  }
 
 
   read():
@@ -228,6 +259,14 @@ export class EducationalCorpusRuntimeService {
           education.artifacts,
 
         historicalAssessments,
+
+        authorityResolutions:
+          this.loadAuthorityResolutions(
+            education.artifacts.map(
+              artifact =>
+                artifact.id,
+            ),
+          ),
 
         dayZero,
       });
@@ -444,6 +483,14 @@ export class EducationalCorpusRuntimeService {
           education.artifacts,
 
         historicalAssessments,
+
+        authorityResolutions:
+          this.loadAuthorityResolutions(
+            education.artifacts.map(
+              artifact =>
+                artifact.id,
+            ),
+          ),
 
         dayZero,
       });
