@@ -26,3 +26,6 @@ export * from "./InitialCompetencyEvidenceValidationService.js";
 export * from "./InitialCompetencyCertification.js";
 export * from "./InitialCompetencyCertificationPersistence.js";
 export * from "./InitialCompetencyCertificationService.js";
+export * from "./InitialCompetencyHumanAcceptance.js";
+export * from "./InitialCompetencyHumanAcceptancePersistence.js";
+export * from "./InitialCompetencyHumanAcceptanceService.js";

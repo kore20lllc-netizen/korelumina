@@ -14,6 +14,7 @@ import type {
   InitialCompetencyAssessmentService,
   InitialCompetencyCertificationService,
   InitialCompetencyEvidenceValidationService,
+  InitialCompetencyHumanAcceptanceService,
   KnowledgeEducationProjectionService,
 } from "../../knowledge-education/index.js";
 
@@ -40,6 +41,9 @@ export interface KnowledgeEducationRuntime {
 
   initialCompetencyCertificationService:
     InitialCompetencyCertificationService;
+
+  initialCompetencyHumanAcceptanceService:
+    InitialCompetencyHumanAcceptanceService;
 }
 
 
@@ -444,6 +448,109 @@ export function registerKnowledgeEducationRoutes(
               error instanceof Error
                 ? error.message
                 : "initial_competency_certification_failed",
+          });
+      }
+    },
+  );
+
+
+  app.get(
+    "/api/knowledge/education/initial-competency/human-acceptance",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .initialCompetencyHumanAcceptanceService
+              .read(),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_human_acceptance_read_failed",
+          });
+      }
+    },
+  );
+
+
+  app.put(
+    "/api/knowledge/education/initial-competency/human-acceptance",
+    requireRuntimeAccess,
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const body =
+          bodyRecord(
+            req.body,
+          );
+
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .initialCompetencyHumanAcceptanceService
+              .accept({
+                acceptedBy:
+                  String(
+                    body.acceptedBy ??
+                    "",
+                  ),
+
+                acceptedAt:
+                  Number(
+                    body.acceptedAt,
+                  ),
+
+                reason:
+                  String(
+                    body.reason ??
+                    "",
+                  ),
+              }),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_human_acceptance_failed",
           });
       }
     },
