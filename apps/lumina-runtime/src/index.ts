@@ -101,8 +101,10 @@ import {
 } from "./knowledge-preservation/bootstrap/index.js";
 
 import {
+  ChiefAgentProductionWorkspaceAuthorizationService,
   EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
+  FileChiefAgentProductionWorkspaceAuthorizationPersistenceStore,
   FileEducationalCorpusCertificationPersistenceStore,
   FileEducationalCorpusPersistenceStore,
   FileInitialCompetencyCertificationPersistenceStore,
@@ -763,6 +765,17 @@ export const runtimeInitialCompetencyHumanAcceptanceService =
   new InitialCompetencyHumanAcceptanceService(
     runtimeInitialCompetencyHumanAcceptancePersistenceStore,
     runtimeInitialCompetencyCertificationService,
+  );
+
+
+export const runtimeChiefAgentProductionWorkspaceAuthorizationPersistenceStore =
+  new FileChiefAgentProductionWorkspaceAuthorizationPersistenceStore();
+
+
+export const runtimeChiefAgentProductionWorkspaceAuthorizationService =
+  new ChiefAgentProductionWorkspaceAuthorizationService(
+    runtimeChiefAgentProductionWorkspaceAuthorizationPersistenceStore,
+    runtimeInitialCompetencyHumanAcceptanceService,
   );
 
 
@@ -1504,6 +1517,9 @@ registerKnowledgeEducationRoutes(
 
     initialCompetencyHumanAcceptanceService:
       runtimeInitialCompetencyHumanAcceptanceService,
+
+    chiefAgentProductionWorkspaceAuthorizationService:
+      runtimeChiefAgentProductionWorkspaceAuthorizationService,
   },
 );
 

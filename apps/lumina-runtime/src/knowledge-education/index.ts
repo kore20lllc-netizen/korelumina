@@ -29,3 +29,6 @@ export * from "./InitialCompetencyCertificationService.js";
 export * from "./InitialCompetencyHumanAcceptance.js";
 export * from "./InitialCompetencyHumanAcceptancePersistence.js";
 export * from "./InitialCompetencyHumanAcceptanceService.js";
+export * from "./ChiefAgentProductionWorkspaceAuthorization.js";
+export * from "./ChiefAgentProductionWorkspaceAuthorizationPersistence.js";
+export * from "./ChiefAgentProductionWorkspaceAuthorizationService.js";

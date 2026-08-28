@@ -9,6 +9,7 @@ import {
 } from "../../knowledge-education/index.js";
 
 import type {
+  ChiefAgentProductionWorkspaceAuthorizationService,
   EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
   InitialCompetencyAssessmentService,
@@ -44,6 +45,9 @@ export interface KnowledgeEducationRuntime {
 
   initialCompetencyHumanAcceptanceService:
     InitialCompetencyHumanAcceptanceService;
+
+  chiefAgentProductionWorkspaceAuthorizationService:
+    ChiefAgentProductionWorkspaceAuthorizationService;
 }
 
 
@@ -551,6 +555,115 @@ export function registerKnowledgeEducationRoutes(
               error instanceof Error
                 ? error.message
                 : "initial_competency_human_acceptance_failed",
+          });
+      }
+    },
+  );
+
+
+  app.get(
+    "/api/knowledge/education/chief-agent/production-workspace/authorization",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .chiefAgentProductionWorkspaceAuthorizationService
+              .read(),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "chief_agent_production_workspace_authorization_read_failed",
+          });
+      }
+    },
+  );
+
+
+  app.put(
+    "/api/knowledge/education/chief-agent/production-workspace/authorization",
+    requireRuntimeAccess,
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const body =
+          bodyRecord(
+            req.body,
+          );
+
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .chiefAgentProductionWorkspaceAuthorizationService
+              .authorize({
+                authorizedBy:
+                  String(
+                    body.authorizedBy ??
+                    "",
+                  ),
+
+                authorityRole:
+                  String(
+                    body.authorityRole ??
+                    "",
+                  ) as "HUMAN_GOVERNANCE",
+
+                authorizedAt:
+                  Number(
+                    body.authorizedAt,
+                  ),
+
+                reason:
+                  String(
+                    body.reason ??
+                    "",
+                  ),
+              }),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "chief_agent_production_workspace_authorization_failed",
           });
       }
     },
