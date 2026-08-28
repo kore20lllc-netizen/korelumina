@@ -78,7 +78,17 @@ function projectRuntimeCompetencies(
     artifacts.some(
       artifact =>
         artifact.kind ===
-        "mission",
+          "mission" ||
+        (
+          artifact.title ===
+            "Mission Ownership" &&
+          artifact.educationalStatus ===
+            "completed" &&
+          artifact.approvalState
+            .trim()
+            .toLowerCase() ===
+            "approved"
+        ),
     );
 
   return certifiedEducationalCompetencies.map(

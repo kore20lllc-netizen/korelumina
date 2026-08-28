@@ -717,13 +717,6 @@ export const runtimeEducationalCorpusCertificationService =
     },
   );
 
-export const runtimeInitialCompetencyAssessmentService =
-  new InitialCompetencyAssessmentService(
-    runtimeKnowledgeEducationProjectionService,
-    runtimeEducationalCorpusCertificationService,
-  );
-
-
 export const runtimeInitialCompetencyEvidencePersistenceStore =
   new FileInitialCompetencyEvidencePersistenceStore();
 
@@ -731,6 +724,14 @@ export const runtimeInitialCompetencyEvidencePersistenceStore =
 export const runtimeInitialCompetencyEvidenceValidationService =
   new InitialCompetencyEvidenceValidationService(
     runtimeInitialCompetencyEvidencePersistenceStore,
+  );
+
+
+export const runtimeInitialCompetencyAssessmentService =
+  new InitialCompetencyAssessmentService(
+    runtimeKnowledgeEducationProjectionService,
+    runtimeEducationalCorpusCertificationService,
+    runtimeInitialCompetencyEvidenceValidationService,
   );
 
 

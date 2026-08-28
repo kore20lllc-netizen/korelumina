@@ -11,6 +11,10 @@ import type {
 } from "./EducationalCorpusCertificationService.js";
 
 import type {
+  InitialCompetencyEvidenceRecord,
+} from "./InitialCompetencyEvidenceContract.js";
+
+import type {
   KnowledgeEducationSnapshot,
 } from "./KnowledgeEducationProjectionService.js";
 
@@ -27,6 +31,12 @@ export interface InitialCompetencyCorpusCertificationReader {
 }
 
 
+export interface InitialCompetencyEvidenceReader {
+  list():
+    readonly InitialCompetencyEvidenceRecord[];
+}
+
+
 export class InitialCompetencyAssessmentService {
   constructor(
     private readonly education:
@@ -34,6 +44,9 @@ export class InitialCompetencyAssessmentService {
 
     private readonly corpusCertification:
       InitialCompetencyCorpusCertificationReader,
+
+    private readonly evidence?:
+      InitialCompetencyEvidenceReader,
   ) {}
 
 
@@ -47,6 +60,11 @@ export class InitialCompetencyAssessmentService {
       corpusCertification:
         this.corpusCertification
           .read(),
+
+      evidence:
+        this.evidence
+          ?.list() ??
+        [],
     });
   }
 }

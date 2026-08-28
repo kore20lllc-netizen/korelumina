@@ -12,6 +12,10 @@ import type {
   KnowledgeEducationSnapshot,
 } from "./KnowledgeEducationProjectionService.js";
 
+import type {
+  InitialCompetencyEvidenceRecord,
+} from "./InitialCompetencyEvidenceContract.js";
+
 
 export const INITIAL_COMPETENCY_ASSESSMENT_VERSION =
   "initial-competency-assessment:v1" as const;
@@ -157,6 +161,9 @@ export function buildInitialCompetencyAssessmentCandidate(
 
     education:
       KnowledgeEducationSnapshot;
+
+    evidence?:
+      readonly InitialCompetencyEvidenceRecord[];
   },
 ): InitialCompetencyAssessmentCandidate {
   const certification =
@@ -172,29 +179,90 @@ export function buildInitialCompetencyAssessmentCandidate(
     certification !==
       null;
 
+  const validatedEvidenceByCompetency =
+    new Map<
+      string,
+      InitialCompetencyEvidenceRecord[]
+    >();
+
+  for (
+    const evidence
+    of input.evidence ??
+      []
+  ) {
+    if (
+      evidence.validationState !==
+        "VALIDATED"
+    ) {
+      continue;
+    }
+
+    const existing =
+      validatedEvidenceByCompetency.get(
+        evidence.competencyId,
+      ) ??
+      [];
+
+    existing.push(
+      evidence,
+    );
+
+    validatedEvidenceByCompetency.set(
+      evidence.competencyId,
+      existing,
+    );
+  }
+
   const competencies:
     InitialCompetencyAssessmentEntry[] =
       input
         .education
         .competencies
         .map(
-          competency => ({
-            id:
-              competency.id,
+          competency => {
+            const validatedEvidence =
+              validatedEvidenceByCompetency.get(
+                competency.id,
+              ) ??
+              [];
 
-            title:
-              competency.title,
-
-            status:
-              competency.status,
-
-            evidence:
-              competency.evidence,
-
-            resolved:
+            const resolvedByProjection =
               competency.status ===
-                "completed",
-          }),
+                "completed";
+
+            const resolvedByValidatedEvidence =
+              validatedEvidence.length >
+              0;
+
+            return {
+              id:
+                competency.id,
+
+              title:
+                competency.title,
+
+              status:
+                resolvedByProjection ||
+                resolvedByValidatedEvidence
+                  ? "completed"
+                  : competency.status,
+
+              evidence:
+                resolvedByValidatedEvidence
+                  ? validatedEvidence
+                      .map(
+                        item =>
+                          item.evidenceId,
+                      )
+                      .sort()
+                      .join(", ")
+                  : competency.evidence,
+
+              resolved:
+                resolvedByProjection ||
+                resolvedByValidatedEvidence,
+            };
+          },
         )
         .sort(
           (
