@@ -357,7 +357,7 @@ export function EducationalCommandCenter() {
       />
 
       {dashboard.uiState === "success" && (
-        <div className="grid items-start gap-6 2xl:grid-cols-[minmax(0,1.7fr)_minmax(380px,0.8fr)]">
+        <div className="mt-8 grid items-start gap-6 2xl:grid-cols-[minmax(0,1.7fr)_minmax(380px,0.8fr)]">
           <div className="space-y-6">
             <div
               id="learning-genesis-sources"
@@ -370,7 +370,8 @@ export function EducationalCommandCenter() {
             >
               <div
                 className="
-                  max-h-[760px] overflow-y-auto overflow-x-hidden
+                  max-h-[430px]
+                  overflow-y-auto overflow-x-hidden
                   overscroll-contain
                   [scrollbar-gutter:stable]
                   [touch-action:pan-y]
@@ -381,7 +382,13 @@ export function EducationalCommandCenter() {
                   event.stopPropagation();
                 }}
               >
-                <div className="grid gap-4 p-5 md:grid-cols-2 xl:grid-cols-3">
+                <div
+                  className="
+                    grid gap-4 p-5
+                    md:grid-cols-2
+                    xl:grid-cols-3
+                  "
+                >
                 {visibleGenesisArtifacts.map(
                   (artifact) => {
                     const selected =

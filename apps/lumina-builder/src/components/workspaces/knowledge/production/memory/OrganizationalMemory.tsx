@@ -231,7 +231,15 @@ export function OrganizationalMemory({
           title={null}
           className="[&>div:nth-of-type(3)]:hidden"
         >
-          <div className="p-5 sm:p-6">
+          <div
+            className="
+              max-h-[760px]
+              overflow-y-auto overflow-x-hidden
+              overscroll-contain
+              p-5 pr-3 sm:p-6 sm:pr-4
+              [scrollbar-gutter:stable]
+            "
+          >
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/62">
               Memory adaptation
@@ -667,7 +675,15 @@ export function OrganizationalMemory({
             title={null}
             className="h-full [&>div:nth-of-type(3)]:hidden"
           >
-          <div className="p-5 sm:p-6">
+          <div
+            className="
+              max-h-[560px]
+              overflow-y-auto overflow-x-hidden
+              overscroll-contain
+              p-5 pr-3 sm:p-6 sm:pr-4
+              [scrollbar-gutter:stable]
+            "
+          >
           <div className="flex items-center gap-3">
             <ExecutivePremiumIcon
               icon={History}
