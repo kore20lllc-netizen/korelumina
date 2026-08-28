@@ -12,6 +12,7 @@ import type {
   EducationalCorpusCertificationService,
   EducationalCorpusRuntimeService,
   InitialCompetencyAssessmentService,
+  InitialCompetencyCertificationService,
   InitialCompetencyEvidenceValidationService,
   KnowledgeEducationProjectionService,
 } from "../../knowledge-education/index.js";
@@ -36,6 +37,9 @@ export interface KnowledgeEducationRuntime {
 
   initialCompetencyEvidenceService:
     InitialCompetencyEvidenceValidationService;
+
+  initialCompetencyCertificationService:
+    InitialCompetencyCertificationService;
 }
 
 
@@ -337,6 +341,109 @@ export function registerKnowledgeEducationRoutes(
               error instanceof Error
                 ? error.message
                 : "initial_competency_evidence_validation_failed",
+          });
+      }
+    },
+  );
+
+
+  app.get(
+    "/api/knowledge/education/initial-competency/certification",
+    (
+      _req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .initialCompetencyCertificationService
+              .read(),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_certification_read_failed",
+          });
+      }
+    },
+  );
+
+
+  app.put(
+    "/api/knowledge/education/initial-competency/certification",
+    requireRuntimeAccess,
+    (
+      req:
+        Request,
+
+      res:
+        Response,
+    ) => {
+      try {
+        const body =
+          bodyRecord(
+            req.body,
+          );
+
+        return res.json({
+          ok:
+            true,
+
+          projection:
+            runtime
+              .initialCompetencyCertificationService
+              .certify({
+                certifiedBy:
+                  String(
+                    body.certifiedBy ??
+                    "",
+                  ),
+
+                certifiedAt:
+                  Number(
+                    body.certifiedAt,
+                  ),
+
+                reason:
+                  String(
+                    body.reason ??
+                    "",
+                  ),
+              }),
+        });
+      } catch (
+        error
+      ) {
+        return res
+          .status(
+            409,
+          )
+          .json({
+            ok:
+              false,
+
+            error:
+              error instanceof Error
+                ? error.message
+                : "initial_competency_certification_failed",
           });
       }
     },

@@ -105,8 +105,10 @@ import {
   EducationalCorpusRuntimeService,
   FileEducationalCorpusCertificationPersistenceStore,
   FileEducationalCorpusPersistenceStore,
+  FileInitialCompetencyCertificationPersistenceStore,
   FileInitialCompetencyEvidencePersistenceStore,
   InitialCompetencyAssessmentService,
+  InitialCompetencyCertificationService,
   InitialCompetencyEvidenceValidationService,
   KnowledgeEducationProjectionService,
 } from "./knowledge-education/index.js";
@@ -732,6 +734,22 @@ export const runtimeInitialCompetencyAssessmentService =
     runtimeKnowledgeEducationProjectionService,
     runtimeEducationalCorpusCertificationService,
     runtimeInitialCompetencyEvidenceValidationService,
+  );
+
+
+export const runtimeInitialCompetencyCertificationPersistenceStore =
+  new FileInitialCompetencyCertificationPersistenceStore();
+
+
+export const runtimeInitialCompetencyCertificationService =
+  new InitialCompetencyCertificationService(
+    runtimeInitialCompetencyCertificationPersistenceStore,
+    {
+      readCurrentCandidate:
+        () =>
+          runtimeInitialCompetencyAssessmentService
+            .read(),
+    },
   );
 
 
@@ -1467,6 +1485,9 @@ registerKnowledgeEducationRoutes(
 
     initialCompetencyEvidenceService:
       runtimeInitialCompetencyEvidenceValidationService,
+
+    initialCompetencyCertificationService:
+      runtimeInitialCompetencyCertificationService,
   },
 );
 
