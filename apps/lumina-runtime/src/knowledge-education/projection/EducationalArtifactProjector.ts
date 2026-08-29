@@ -156,6 +156,94 @@ function artifactKind(
     return declared as EducationalArtifactProjection["kind"];
   }
 
+  /*
+   * Documentation Compiler preserves the governed Genesis
+   * document classification on canonical metadata.
+   *
+   * Education must consume that existing classification rather
+   * than collapsing every promoted CandidateArtifact into the
+   * generic knowledge-operations kind.
+   */
+  const authorityClass =
+    educationMetadataString(
+      item,
+      "authorityClass",
+    ) ??
+    educationMetadataString(
+      item,
+      "authority",
+    ) ??
+    educationGovernanceString(
+      item,
+      "authority",
+    );
+
+  if (
+    authorityClass
+      ?.trim()
+      .toLowerCase() ===
+    "constitutional amendment"
+  ) {
+    return "amendment";
+  }
+
+  /*
+   * CA-005 and the certified Educational Coverage contract
+   * explicitly require Repository Knowledge Seeding as current
+   * recovery-obligation curriculum.
+   *
+   * Its legacy document contains a known precedence conflict,
+   * but CA-005 preserves the higher constitutional authority
+   * order. Classification here therefore admits the governed
+   * recovery architecture without granting that conflicting
+   * lower-order wording higher authority.
+   */
+  const sourceRefs =
+    canonicalEducationSourceRefs(
+      item,
+    );
+
+  if (
+    sourceRefs.includes(
+      "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+    )
+  ) {
+    return "architecture";
+  }
+
+  const documentClassification =
+    educationMetadataString(
+      item,
+      "documentClassification",
+    )
+      ?.trim()
+      .toLowerCase();
+
+  switch (
+    documentClassification
+  ) {
+    case "canonical":
+      return "canon";
+
+    case "constitution":
+      return "constitution";
+
+    case "blueprint":
+      return "architecture";
+
+    case "architecture":
+      return "architecture";
+
+    case "adr":
+      return "adr";
+
+    case "specification":
+      return "specification";
+
+    default:
+      break;
+  }
+
   switch (
     canonicalEducationCandidateType(
       item,

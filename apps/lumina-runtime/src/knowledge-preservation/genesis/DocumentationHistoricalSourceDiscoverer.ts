@@ -54,6 +54,7 @@ const DEFAULT_DOCUMENT_ROOTS =
     "docs/constitution",
     "docs/governance",
     "docs/adr",
+    "docs/knowledge-recovery",
     "docs/rfc",
     "docs/architecture",
     "docs/chief-agent",

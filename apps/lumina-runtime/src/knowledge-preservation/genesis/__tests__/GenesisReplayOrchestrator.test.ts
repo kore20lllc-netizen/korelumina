@@ -605,6 +605,64 @@ test(
       "COMPLETED",
     );
 
+    const admissionGovernance =
+      persistence
+        .loadAdmissionGovernanceProjection(
+          first.plan.replayId,
+        );
+
+    assert.ok(
+      admissionGovernance,
+    );
+
+    assert.equal(
+      admissionGovernance
+        .summary
+        .admittedEvidence,
+      first.runnerResult
+        .execution
+        .state
+        .dispositions
+        .filter(
+          disposition =>
+            disposition.disposition ===
+              "ADMITTED" &&
+            Boolean(
+              disposition.evidenceId,
+            ),
+        )
+        .length,
+    );
+
+    assert.deepEqual(
+      admissionGovernance
+        .records
+        .map(
+          record =>
+            record.evidenceId,
+        )
+        .slice()
+        .sort(),
+      first.runnerResult
+        .execution
+        .state
+        .dispositions
+        .filter(
+          disposition =>
+            disposition.disposition ===
+              "ADMITTED" &&
+            Boolean(
+              disposition.evidenceId,
+            ),
+        )
+        .map(
+          disposition =>
+            disposition.evidenceId!,
+        )
+        .slice()
+        .sort(),
+    );
+
     await assert.rejects(
       () =>
         runGovernedGenesisReplay({

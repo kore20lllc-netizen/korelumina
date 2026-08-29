@@ -6,6 +6,7 @@ import {
   mkdirSync,
   symlinkSync,
   writeFileSync,
+  rmSync,
 } from "node:fs";
 
 import {
@@ -1091,6 +1092,53 @@ test(
 
 
 test(
+  "section-style authoritative status is normalized to approved",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+      [
+        "# KoreLumina Platform Constitution",
+        "",
+        "## Status",
+        "",
+        "Authoritative.",
+        "",
+        "This document governs KoreLumina architecture.",
+      ].join(
+        "\n",
+      ),
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    const source =
+      result.sources[0];
+
+    assert.equal(
+      source.authority
+        .approvalState,
+      "approved",
+    );
+
+    assert.equal(
+      source.metadata.status,
+      "Authoritative",
+    );
+
+  },
+);
+
+
+test(
   "constitutional amendment record with approval date normalizes to approved while retaining observed status",
   async () => {
     const root =
@@ -1188,5 +1236,166 @@ test(
       source.metadata.status,
       "Audit",
     );
+  },
+);
+
+
+test(
+  "discovers accepted knowledge-recovery specifications from the governed default roots",
+  async () => {
+    const repositoryRoot =
+      mkdtempSync(
+        path.join(
+          tmpdir(),
+          "korelumina-genesis-knowledge-recovery-",
+        ),
+      );
+
+    try {
+      const knowledgeRecoveryDirectory =
+        path.join(
+          repositoryRoot,
+          "docs",
+          "knowledge-recovery",
+        );
+
+      mkdirSync(
+        knowledgeRecoveryDirectory,
+        {
+          recursive:
+            true,
+        },
+      );
+
+      const repositoryRelativePath =
+        "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md";
+
+      writeFileSync(
+        path.join(
+          repositoryRoot,
+          repositoryRelativePath,
+        ),
+        [
+          "# KR-005 — Repository Knowledge Recovery Specification",
+          "",
+          "## Status",
+          "",
+          "Accepted",
+          "",
+          "## Purpose",
+          "",
+          "Define the canonical process for recovering engineering knowledge from an existing repository.",
+          "",
+          "Knowledge Compiler",
+          "",
+          "↓",
+          "",
+          "Knowledge IR",
+        ].join(
+          "\n",
+        ),
+        "utf8",
+      );
+
+      const discoverer =
+        new DocumentationHistoricalSourceDiscoverer({
+          repositoryRoot,
+
+          discoveredAt:
+            () =>
+              1_700_000_000_000,
+
+          historicalTimestampResolver:
+            () => ({
+              value:
+                1_699_000_000_000,
+
+              source:
+                "test",
+            }),
+        });
+
+      const result =
+        await discoverer.discover({
+          mode:
+            "partial",
+
+          repository:
+            "kore20lllc-netizen/korelumina",
+
+          ref:
+            "main",
+
+          includedEvidenceTypes: [
+            "ADR",
+            "RFC",
+            "document",
+            "specification",
+            "roadmap",
+          ],
+
+          excludedEvidenceTypes:
+            [],
+
+          explicitlyExcludedSourceIds:
+            [],
+
+          governancePolicyVersion:
+            "governance-v1",
+
+          replayContractVersion:
+            "1.0",
+        });
+
+      const source =
+        result.sources.find(
+          candidate =>
+            candidate.provenance
+              .locator ===
+            repositoryRelativePath,
+        );
+
+      assert.ok(
+        source,
+      );
+
+      assert.equal(
+        source.evidenceType,
+        "document",
+      );
+
+      assert.equal(
+        source.replayEligibility,
+        "eligible",
+      );
+
+      assert.equal(
+        source.authority
+          ?.approvalState,
+        "Accepted",
+      );
+
+      assert.equal(
+        source.provenance
+          .locator,
+        repositoryRelativePath,
+      );
+
+      assert.match(
+        source.historicalSourceId,
+        /^genesis-source:document:derived:/,
+      );
+    } finally {
+      rmSync(
+        repositoryRoot,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        },
+      );
+    }
   },
 );

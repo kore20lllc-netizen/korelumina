@@ -45,6 +45,10 @@ import type {
   GenesisSourceManifestBuildResult,
 } from "./GenesisSourceManifestBuilder.js";
 
+import type {
+  GenesisHistoricalAdmissionGovernanceProjection,
+} from "./GenesisHistoricalAdmissionGovernanceProjection.js";
+
 export interface GenesisReplayPersistencePaths {
   replayDirectory:
     string;
@@ -56,6 +60,9 @@ export interface GenesisReplayPersistencePaths {
     string;
 
   runnerResultFile:
+    string;
+
+  admissionGovernanceFile:
     string;
 }
 
@@ -463,6 +470,12 @@ export class FileGenesisReplayPersistenceStore
           replayDirectory,
           "runner-result.json",
         ),
+
+      admissionGovernanceFile:
+        path.join(
+          replayDirectory,
+          "admission-governance.json",
+        ),
     };
   }
 
@@ -566,6 +579,37 @@ export class FileGenesisReplayPersistenceStore
 
     return execution;
   }
+
+  saveAdmissionGovernanceProjection(
+    replayId:
+      GenesisReplayId,
+
+    projection:
+      GenesisHistoricalAdmissionGovernanceProjection,
+  ): void {
+    atomicWriteJson(
+      this.pathsFor(
+        replayId,
+      ).admissionGovernanceFile,
+      projection,
+    );
+  }
+
+  loadAdmissionGovernanceProjection(
+    replayId:
+      GenesisReplayId,
+  ):
+    GenesisHistoricalAdmissionGovernanceProjection |
+    null {
+    return readJson<
+      GenesisHistoricalAdmissionGovernanceProjection
+    >(
+      this.pathsFor(
+        replayId,
+      ).admissionGovernanceFile,
+    );
+  }
+
 
   saveRunnerResult(
     result:

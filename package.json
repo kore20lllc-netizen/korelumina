@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "node scripts/dev-supervisor.mjs",
+    "dev": "node --env-file-if-exists=.env.local scripts/dev-supervisor.mjs",
     "dev:builder": "npm --workspace apps/lumina-builder run dev",
     "dev:runtime": "npm --workspace apps/lumina-runtime run dev",
     "build": "npm run verify:knowledge-doc-governance && npm run verify:knowledge-ui-contract && npm run build:runtime && npm run build:builder",

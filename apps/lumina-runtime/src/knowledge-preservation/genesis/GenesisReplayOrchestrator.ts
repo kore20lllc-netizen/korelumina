@@ -54,6 +54,10 @@ import {
 } from "./GenesisHistoricalCorrelationMaterializer.js";
 
 import {
+  buildGenesisHistoricalAdmissionGovernanceProjection,
+} from "./GenesisHistoricalAdmissionGovernanceProjection.js";
+
+import {
   integrateGenesisHistoricalCorrelationRevision,
 } from "./GenesisHistoricalCorrelationRevisionIntegrator.js";
 
@@ -479,6 +483,30 @@ export async function runGovernedGenesisReplay(
     runnerResult.outcome ===
     "COMPLETED"
   ) {
+    /*
+     * Admission governance is a deterministic projection of the
+     * completed replay manifest + persisted dispositions. Keeping
+     * it at this lifecycle boundary prevents later admissions from
+     * existing without their governance classification.
+     */
+    const admissionGovernance =
+      buildGenesisHistoricalAdmissionGovernanceProjection({
+        manifestEntries:
+          manifestBuild.manifest
+            .entries,
+
+        dispositions:
+          runnerResult.execution
+            .state
+            .dispositions,
+      });
+
+    input.persistenceStore
+      .saveAdmissionGovernanceProjection(
+        plan.replayId,
+        admissionGovernance,
+      );
+
     const materializedCorrelation =
       materializeGenesisHistoricalCorrelation(
         runnerResult.execution,
