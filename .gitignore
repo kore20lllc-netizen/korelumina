@@ -73,3 +73,10 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 runtime/knowledge/runtime/
+
+# Generated knowledge/runtime persistence
+# Durable governed artifacts such as evidence, review-batches,
+# and review-policies remain tracked explicitly.
+runtime-data/
+runtime/knowledge/autonomous-promotion-executions/
+runtime/knowledge/organizational-memory/
