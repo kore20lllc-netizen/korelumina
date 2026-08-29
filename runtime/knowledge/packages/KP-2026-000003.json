@@ -1,0 +1,226 @@
+{
+  "id": "KP-2026-000003",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787245896902,
+  "updatedAt": 1787245896902,
+  "data": {
+    "id": "KP-2026-000003",
+    "state": "validated",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c",
+        "candidateType": "CandidateArtifact",
+        "title": "Knowledge Package Constitutional Reconciliation",
+        "summary": "--- title: Knowledge Package Constitutional Reconciliation status: Constitutional Reconciliation authority: Architecture Reconciliation owner: Constitutional Office version: 1.0.0 audit_date: 2026-07-31 branch: inspect/runtime-certified-main base_commit: 1d4a65456cf400908ac5072b7f028fe46f1d9fe9 related: - ../../canon/VISION_2050.md - ../../canon/CANONICAL_DOCUMENT_HIERARCHY.md - ../../governance/CONSTITUTIONAL_DOCUMENT_GOVERNANCE.md - ../00_PLATFORM_CONSTITUTION.md - CHIEF_AGENT_LEARNING_RECO...",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:b2400f6dc313570f0def1cda044acab9dd869da272c2dab04f50d668a0e00416"
+          ],
+          "genesisReplay": [
+            "genesis-replay:8e50d41b3a59e5d18439b3526f9421f2b2072c60ae6a35e1d855caf9789f4970"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a9b0f3f58a64f4657f1b599196442292a3f269c4eb53b186d5c82292b4b6aabf"
+          ]
+        },
+        "extractedAt": 1787245896895,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787245896895,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "needs-review",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md",
+          "checksum": "sha256:9a238eb7555623e096b1eb588689eae9f71b8aee9667d4996969c6dfee400e78",
+          "capturedAt": 1787245804027,
+          "observedAt": 1786942550000,
+          "authorityClass": "Architecture Reconciliation",
+          "lineage": [],
+          "dependencies": [],
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:8e50d41b3a59e5d18439b3526f9421f2b2072c60ae6a35e1d855caf9789f4970",
+            "genesisManifestId": "genesis-manifest:a9b0f3f58a64f4657f1b599196442292a3f269c4eb53b186d5c82292b4b6aabf",
+            "genesisManifestIndex": 1463,
+            "genesisAdmissionIdentity": "genesis-admission:3ec6815e0471a0f6bfd3c8beadc1e718c6540bdb84b2ec78a999a4a97325f1d1",
+            "historicalSourceId": "genesis-source:document:derived:b2400f6dc313570f0def1cda044acab9dd869da272c2dab04f50d668a0e00416",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Architecture Reconciliation",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "Knowledge Package Constitutional Reconciliation",
+              "status": "Constitutional Reconciliation",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "failed",
+            "checkedAt": 1787245896901,
+            "issues": [
+              {
+                "code": "documentation_approval_state_required",
+                "field": "approvalState",
+                "message": "Documentation governance metadata \"approvalState\" is required."
+              },
+              {
+                "code": "documentation_owner_required",
+                "field": "owner",
+                "message": "Documentation governance metadata \"owner\" is required."
+              },
+              {
+                "code": "documentation_scope_required",
+                "field": "scope",
+                "message": "Documentation governance metadata \"scope\" is required."
+              },
+              {
+                "code": "documentation_version_required",
+                "field": "version",
+                "message": "Documentation governance metadata \"version\" is required."
+              },
+              {
+                "code": "documentation_source_location_required",
+                "field": "sourceLocation",
+                "message": "Documentation governance metadata \"sourceLocation\" is required."
+              },
+              {
+                "code": "documentation_source_not_approved",
+                "field": "approvalState",
+                "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Architecture Reconciliation",
+    "approvalState": "remediation_required",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c",
+        "status": "needs-review",
+        "confidence": 1,
+        "blocked": true,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "failed",
+          "checkedAt": 1787245896901,
+          "issues": [
+            {
+              "code": "documentation_approval_state_required",
+              "field": "approvalState",
+              "message": "Documentation governance metadata \"approvalState\" is required."
+            },
+            {
+              "code": "documentation_owner_required",
+              "field": "owner",
+              "message": "Documentation governance metadata \"owner\" is required."
+            },
+            {
+              "code": "documentation_scope_required",
+              "field": "scope",
+              "message": "Documentation governance metadata \"scope\" is required."
+            },
+            {
+              "code": "documentation_version_required",
+              "field": "version",
+              "message": "Documentation governance metadata \"version\" is required."
+            },
+            {
+              "code": "documentation_source_location_required",
+              "field": "sourceLocation",
+              "message": "Documentation governance metadata \"sourceLocation\" is required."
+            },
+            {
+              "code": "documentation_source_not_approved",
+              "field": "approvalState",
+              "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+            }
+          ]
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787245896895,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787245896902
+      },
+      {
+        "state": "compiled",
+        "at": 1787245896902
+      },
+      {
+        "state": "validated",
+        "at": 1787245896902
+      }
+    ],
+    "remediation": {
+      "required": true,
+      "status": "required",
+      "blockedItemIds": [
+        "document:genesis-evidence:d3bbbbb14eb532a6316b3e29ad9d1620b35bba7e06406f7347549a8d19aad05c"
+      ],
+      "updatedAt": 1787245896902
+    },
+    "createdAt": 1787245896902,
+    "updatedAt": 1787245896902,
+    "metadata": {
+      "sourceApprovalStates": []
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "id": "KP-2026-000029",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787430674634,
+  "updatedAt": 1787431301537,
+  "data": {
+    "id": "KP-2026-000029",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "phase43-vision2050-certification-1787430674"
+    ],
+    "knowledgeItemIds": [
+      "document:phase43-vision2050-certification-1787430674"
+    ],
+    "items": [
+      {
+        "id": "document:phase43-vision2050-certification-1787430674",
+        "candidateType": "CandidateArtifact",
+        "title": "Vision 2050 Autonomous Governance Certification",
+        "summary": "# KoreLumina Vision 2050 Autonomous Governance Certification This controlled evidence artifact exists solely to certify the production Knowledge Preservation lifecycle for policy-governed architecture knowledge. Authority: architecture Scope: platform Owner: Knowledge Governance Version: 1.0.0 The artifact validates that a fully governed architecture package can move through normal evidence intake, compilation, validation, package assembly, policy binding, policy-authorized Canonical Review, ...",
+        "confidence": 1,
+        "evidenceRefs": [
+          "phase43-vision2050-certification-1787430674"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1787430674632,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787430674632,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "m49-phase43-controlled-certification",
+          "contentRef": "/tmp/phase43-vision2050-certification-1787430674.md",
+          "capturedAt": 1787430674543,
+          "observedAt": 1787430674543,
+          "authorityClass": "architecture",
+          "approvalState": "approved",
+          "owner": "Knowledge Governance",
+          "scope": "platform",
+          "version": "1.0.0",
+          "sourceLocation": "/tmp/phase43-vision2050-certification-1787430674.md",
+          "lineage": [
+            "phase43-vision2050-certification-1787430674"
+          ],
+          "dependencies": [],
+          "documentClassification": "controlled-certification",
+          "destination": "canonical-knowledge",
+          "originalMetadata": {
+            "authorityClass": "architecture",
+            "approvalState": "approved",
+            "owner": "Knowledge Governance",
+            "scope": "platform",
+            "version": "1.0.0",
+            "sourceLocation": "/tmp/phase43-vision2050-certification-1787430674.md",
+            "destination": "canonical-knowledge",
+            "lineage": [
+              "phase43-vision2050-certification-1787430674"
+            ],
+            "dependencies": [],
+            "documentClassification": "controlled-certification"
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787430674634,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "phase43-vision2050-certification-1787430674"
+      ],
+      "sourceLocations": [
+        "/tmp/phase43-vision2050-certification-1787430674.md"
+      ],
+      "contentRefs": [
+        "/tmp/phase43-vision2050-certification-1787430674.md"
+      ],
+      "sources": [
+        "m49-phase43-controlled-certification"
+      ]
+    },
+    "authority": "architecture",
+    "approvalState": "approved",
+    "owner": "Knowledge Governance",
+    "scope": "platform",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [
+      "phase43-vision2050-certification-1787430674"
+    ],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": "canonical-knowledge",
+    "validationResults": [
+      {
+        "itemId": "document:phase43-vision2050-certification-1787430674",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787430674634,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:phase43-vision2050-certification-1787430674",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787430674632,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787430674634
+      },
+      {
+        "state": "compiled",
+        "at": 1787430674634
+      },
+      {
+        "state": "validated",
+        "at": 1787430674634
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787430674634
+      },
+      {
+        "state": "approved",
+        "at": 1787431058079,
+        "reason": "governed-policy-execution:korelumina-vision-2050-architecture@1.0.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1787431301537,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787430674634
+    },
+    "createdAt": 1787430674634,
+    "updatedAt": 1787431301537,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "korelumina-vision-2050-architecture",
+        "policyVersion": "1.0.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1787430061007,
+        "boundBy": "runtime:policy-binding",
+        "boundAt": 1787430800799
+      },
+      "review": {
+        "packageId": "KP-2026-000029",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1787431058079,
+        "evidenceConsidered": [
+          "phase43-vision2050-certification-1787430674"
+        ],
+        "reason": "governed-policy-execution:korelumina-vision-2050-architecture@1.0.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000029",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1787431058079,
+          "evidenceConsidered": [
+            "phase43-vision2050-certification-1787430674"
+          ],
+          "reason": "governed-policy-execution:korelumina-vision-2050-architecture@1.0.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "korelumina-vision-2050-architecture",
+        "policyVersion": "1.0.0",
+        "executedBy": "human:founder",
+        "executedAt": 1787431058079,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "korelumina-vision-2050-architecture",
+          "policyVersion": "1.0.0",
+          "executedBy": "human:founder",
+          "executedAt": 1787431058079,
+          "packageIds": [
+            "KP-2026-000029"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000029",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787431301537,
+        "canonicalItemIds": [
+          "canonical:document:phase43-vision2050-certification-1787430674"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "id": "KP-2026-000004",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787245897000,
+  "updatedAt": 1787245897000,
+  "data": {
+    "id": "KP-2026-000004",
+    "state": "validated",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Canonical Document Hierarchy",
+        "summary": "--- title: KoreLumina Canonical Document Hierarchy status: Canonical owner: Constitutional Office authority: Supreme version: 1.0.0 review_cycle: Annual related: - README.md - VISION_2050.md - ../README.md - ../architecture/00_PLATFORM_CONSTITUTION.md - ../architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md - ../architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE_AUDIT.md --- # KoreLumina Canonical Document Hierarchy > Historical Knowledge Operations V1/V2 references in t...",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454"
+          ],
+          "genesisReplay": [
+            "genesis-replay:8e50d41b3a59e5d18439b3526f9421f2b2072c60ae6a35e1d855caf9789f4970"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a9b0f3f58a64f4657f1b599196442292a3f269c4eb53b186d5c82292b4b6aabf"
+          ]
+        },
+        "extractedAt": 1787245896993,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787245896993,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "needs-review",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+          "checksum": "sha256:27e8f4b0ce5ad8366e528e29acf33c187d4b32ecc863e537afe34c04db95e8c4",
+          "capturedAt": 1787245804028,
+          "observedAt": 1786942550000,
+          "authorityClass": "Supreme",
+          "lineage": [],
+          "dependencies": [],
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:8e50d41b3a59e5d18439b3526f9421f2b2072c60ae6a35e1d855caf9789f4970",
+            "genesisManifestId": "genesis-manifest:a9b0f3f58a64f4657f1b599196442292a3f269c4eb53b186d5c82292b4b6aabf",
+            "genesisManifestIndex": 1464,
+            "genesisAdmissionIdentity": "genesis-admission:9859d34b813347b22e8d297f1d94d9481450485b93c319695e256a407b358b73",
+            "historicalSourceId": "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Supreme",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KoreLumina Canonical Document Hierarchy",
+              "status": "Canonical",
+              "documentClassification": "canonical",
+              "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "failed",
+            "checkedAt": 1787245896999,
+            "issues": [
+              {
+                "code": "documentation_approval_state_required",
+                "field": "approvalState",
+                "message": "Documentation governance metadata \"approvalState\" is required."
+              },
+              {
+                "code": "documentation_owner_required",
+                "field": "owner",
+                "message": "Documentation governance metadata \"owner\" is required."
+              },
+              {
+                "code": "documentation_scope_required",
+                "field": "scope",
+                "message": "Documentation governance metadata \"scope\" is required."
+              },
+              {
+                "code": "documentation_version_required",
+                "field": "version",
+                "message": "Documentation governance metadata \"version\" is required."
+              },
+              {
+                "code": "documentation_source_location_required",
+                "field": "sourceLocation",
+                "message": "Documentation governance metadata \"sourceLocation\" is required."
+              },
+              {
+                "code": "documentation_source_not_approved",
+                "field": "approvalState",
+                "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Supreme",
+    "approvalState": "remediation_required",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314",
+        "status": "needs-review",
+        "confidence": 1,
+        "blocked": true,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "failed",
+          "checkedAt": 1787245896999,
+          "issues": [
+            {
+              "code": "documentation_approval_state_required",
+              "field": "approvalState",
+              "message": "Documentation governance metadata \"approvalState\" is required."
+            },
+            {
+              "code": "documentation_owner_required",
+              "field": "owner",
+              "message": "Documentation governance metadata \"owner\" is required."
+            },
+            {
+              "code": "documentation_scope_required",
+              "field": "scope",
+              "message": "Documentation governance metadata \"scope\" is required."
+            },
+            {
+              "code": "documentation_version_required",
+              "field": "version",
+              "message": "Documentation governance metadata \"version\" is required."
+            },
+            {
+              "code": "documentation_source_location_required",
+              "field": "sourceLocation",
+              "message": "Documentation governance metadata \"sourceLocation\" is required."
+            },
+            {
+              "code": "documentation_source_not_approved",
+              "field": "approvalState",
+              "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+            }
+          ]
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787245896993,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787245897000
+      },
+      {
+        "state": "compiled",
+        "at": 1787245897000
+      },
+      {
+        "state": "validated",
+        "at": 1787245897000
+      }
+    ],
+    "remediation": {
+      "required": true,
+      "status": "required",
+      "blockedItemIds": [
+        "document:genesis-evidence:7a9c7b73ebe10bd5b713453edef93b11fb25d5fd669d89c1583cf6e9a6310314"
+      ],
+      "updatedAt": 1787245897000
+    },
+    "createdAt": 1787245897000,
+    "updatedAt": 1787245897000,
+    "metadata": {
+      "sourceApprovalStates": []
+    }
+  }
+}

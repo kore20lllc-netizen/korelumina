@@ -1,0 +1,236 @@
+{
+  "id": "KP-2026-000001",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1786859913543,
+  "updatedAt": 1786878016773,
+  "data": {
+    "id": "KP-2026-000001",
+    "state": "adapted",
+    "sourceEvidenceRefs": [
+      "evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+    ],
+    "knowledgeItemIds": [
+      "document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+    ],
+    "items": [
+      {
+        "id": "document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Repository Knowledge Seeding Specification V1",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+        ],
+        "proposedRelationships": {
+          "governedBy": [
+            "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+          ],
+          "seeds": [
+            "Knowledge Operations",
+            "Education",
+            "Chief Agent learning"
+          ]
+        },
+        "extractedAt": 1786859913542,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1786859913542,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+          "contentRef": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+          "checksum": "sha256:3f8cb44dad1ed6e1b65f30ab3d9020e7d19b4706fc906b43a613136dddf270cf",
+          "capturedAt": 1782710620000,
+          "observedAt": 1782710620000,
+          "authorityClass": "constitutional",
+          "approvalState": "approved",
+          "owner": "KoreLumina Architecture",
+          "scope": "platform",
+          "version": "1.0",
+          "sourceLocation": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+          "lineage": [
+            "ae2552c665926ac136cf5886f09c4548ca5e379e"
+          ],
+          "dependencies": [
+            "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+          ],
+          "documentClassification": "repository-knowledge-seeding",
+          "originalMetadata": {
+            "authorityClass": "constitutional",
+            "approvalState": "approved",
+            "owner": "KoreLumina Architecture",
+            "scope": "platform",
+            "version": "1.0",
+            "confidence": 1,
+            "sourceLocation": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+            "documentClassification": "repository-knowledge-seeding",
+            "sourceCommit": "ae2552c665926ac136cf5886f09c4548ca5e379e",
+            "repositoryBlob": "41e9b381eebc272f24d3619cae43d4cf9db3045a",
+            "genesis": true,
+            "lineage": [
+              "ae2552c665926ac136cf5886f09c4548ca5e379e"
+            ],
+            "dependencies": [
+              "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+            ]
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1786859913543,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+      ],
+      "sourceLocations": [
+        "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md"
+      ],
+      "sources": [
+        "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md"
+      ]
+    },
+    "authority": "constitutional",
+    "approvalState": "approved",
+    "owner": "KoreLumina Architecture",
+    "scope": "platform",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [
+      "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+    ],
+    "lineage": [
+      "ae2552c665926ac136cf5886f09c4548ca5e379e"
+    ],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1786859913543,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1786859913542,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1786859913543
+      },
+      {
+        "state": "compiled",
+        "at": 1786859913543
+      },
+      {
+        "state": "validated",
+        "at": 1786859913543
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1786859913543
+      },
+      {
+        "state": "approved",
+        "at": 1786861599580,
+        "reason": "Approved after explicit human review of the first governed KoreLumina Genesis knowledge package."
+      },
+      {
+        "state": "canonical",
+        "at": 1786863619799,
+        "reason": "governed_canonical_promotion"
+      },
+      {
+        "state": "adapted",
+        "at": 1786878016773,
+        "reason": "organizational_memory_adapted"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1786859913543
+    },
+    "createdAt": 1786859913543,
+    "updatedAt": 1786878016773,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000001",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:chief-systems-architect",
+        "reviewedAt": 1786861599580,
+        "evidenceConsidered": [
+          "evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+        ],
+        "reason": "Approved after explicit human review of the first governed KoreLumina Genesis knowledge package."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000001",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:chief-systems-architect",
+          "reviewedAt": 1786861599580,
+          "evidenceConsidered": [
+            "evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+          ],
+          "reason": "Approved after explicit human review of the first governed KoreLumina Genesis knowledge package."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1786863619799,
+        "canonicalItemIds": [
+          "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+        ]
+      },
+      "organizationalMemoryAdaptation": {
+        "adaptedAt": 1786878016773,
+        "recordIds": [
+          "canonical-memory:canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+        ]
+      }
+    }
+  }
+}

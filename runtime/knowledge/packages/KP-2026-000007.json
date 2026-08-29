@@ -1,0 +1,144 @@
+{
+  "id": "KP-2026-000007",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787245897236,
+  "updatedAt": 1787263243368,
+  "data": {
+    "id": "KP-2026-000007",
+    "state": "approved",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+    ],
+    "knowledgeItemIds": [
+      "git:genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+    ],
+    "items": [
+      {
+        "id": "git:genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546",
+        "candidateType": "CandidateArtifact",
+        "title": "feat(knowledge): enforce production evidence admission",
+        "summary": "Recovered commit evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1787245897235,
+        "compiler": {
+          "compilerName": "git-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "commit",
+          "extractedAt": 1787245897235,
+          "extractionMethod": "git-compiler",
+          "confidenceBasis": "direct-evidence"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "approved",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "git:genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546",
+        "status": "extracted",
+        "confidence": 1,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "git:genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546",
+        "compiler": {
+          "compilerName": "git-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "commit",
+          "extractedAt": 1787245897235,
+          "extractionMethod": "git-compiler",
+          "confidenceBasis": "direct-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787245897236
+      },
+      {
+        "state": "compiled",
+        "at": 1787245897236
+      },
+      {
+        "state": "validated",
+        "at": 1787245897236
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787245897236
+      },
+      {
+        "state": "approved",
+        "at": 1787263243368,
+        "reason": "canonical-review:approved"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787245897236
+    },
+    "createdAt": 1787245897236,
+    "updatedAt": 1787263243368,
+    "metadata": {
+      "sourceApprovalStates": [],
+      "review": {
+        "packageId": "KP-2026-000007",
+        "packageVersion": null,
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1787263243368,
+        "evidenceConsidered": [
+          "genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+        ]
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000007",
+          "packageVersion": null,
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1787263243368,
+          "evidenceConsidered": [
+            "genesis-evidence:b2a77d3fdd64eda24ebca5559e6bceaac41c33eac46b52cc3a6b4260a46fd546"
+          ]
+        }
+      ]
+    }
+  }
+}

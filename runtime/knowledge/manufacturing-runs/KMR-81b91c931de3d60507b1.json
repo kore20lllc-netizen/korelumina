@@ -1,0 +1,115 @@
+{
+  "id": "KMR-81b91c931de3d60507b1",
+  "type": "knowledge-manufacturing-run",
+  "version": 1,
+  "createdAt": 1787245897642,
+  "updatedAt": 1787245897645,
+  "data": {
+    "id": "KMR-81b91c931de3d60507b1",
+    "evidenceId": "genesis-evidence:2c1e6d05b324b1ec3b8a4161f7fde38c6b26c809ca54d8397bd178d6445ced54",
+    "currentStage": "Canonical Review",
+    "status": "active",
+    "canonicalKnowledgeIds": [],
+    "stageHistory": [
+      {
+        "stage": "Evidence Intake",
+        "outcome": "entered",
+        "at": 1787245897642
+      },
+      {
+        "stage": "Evidence Intake",
+        "outcome": "completed",
+        "at": 1787245897643,
+        "detail": "Evidence genesis-evidence:2c1e6d05b324b1ec3b8a4161f7fde38c6b26c809ca54d8397bd178d6445ced54 accepted and routed directly to Git Compiler."
+      },
+      {
+        "stage": "Documentation Compiler",
+        "outcome": "not_applicable",
+        "at": 1787245897643,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Conversation Compiler",
+        "outcome": "not_applicable",
+        "at": 1787245897643,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Git Compiler",
+        "outcome": "entered",
+        "at": 1787245897643
+      },
+      {
+        "stage": "Git Compiler",
+        "outcome": "completed",
+        "at": 1787245897643,
+        "detail": "1 Knowledge IR item(s) compiled."
+      },
+      {
+        "stage": "Runtime Compiler",
+        "outcome": "not_applicable",
+        "at": 1787245897643,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Mission Compiler",
+        "outcome": "not_applicable",
+        "at": 1787245897643,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Execution Compiler",
+        "outcome": "not_applicable",
+        "at": 1787245897643,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "entered",
+        "at": 1787245897643
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "completed",
+        "at": 1787245897643,
+        "detail": "1 normalized Knowledge IR item(s) ready for validation."
+      },
+      {
+        "stage": "Validation",
+        "outcome": "entered",
+        "at": 1787245897643
+      },
+      {
+        "stage": "Validation",
+        "outcome": "completed",
+        "at": 1787245897644,
+        "detail": "1 Knowledge IR item(s) validated."
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "entered",
+        "at": 1787245897644
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "completed",
+        "at": 1787245897644,
+        "detail": "Knowledge Package assembled: KP-2026-000013"
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "entered",
+        "at": 1787245897644
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "awaiting_human_review",
+        "at": 1787245897645,
+        "detail": "Knowledge Package is awaiting explicit human canonical review."
+      }
+    ],
+    "createdAt": 1787245897642,
+    "updatedAt": 1787245897645,
+    "packageId": "KP-2026-000013"
+  }
+}

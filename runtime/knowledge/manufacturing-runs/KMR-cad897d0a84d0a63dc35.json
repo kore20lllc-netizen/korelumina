@@ -1,0 +1,134 @@
+{
+  "id": "KMR-cad897d0a84d0a63dc35",
+  "type": "knowledge-manufacturing-run",
+  "version": 1,
+  "createdAt": 1787724066956,
+  "updatedAt": 1787741341265,
+  "data": {
+    "id": "KMR-cad897d0a84d0a63dc35",
+    "evidenceId": "genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+    "currentStage": "Canonical Knowledge",
+    "status": "completed",
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641"
+    ],
+    "stageHistory": [
+      {
+        "stage": "Evidence Intake",
+        "outcome": "entered",
+        "at": 1787724066956
+      },
+      {
+        "stage": "Evidence Intake",
+        "outcome": "completed",
+        "at": 1787724066957,
+        "detail": "Evidence genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641 accepted and routed directly to Documentation Compiler."
+      },
+      {
+        "stage": "Documentation Compiler",
+        "outcome": "entered",
+        "at": 1787724066957
+      },
+      {
+        "stage": "Documentation Compiler",
+        "outcome": "completed",
+        "at": 1787724066965,
+        "detail": "1 Knowledge IR item(s) compiled."
+      },
+      {
+        "stage": "Conversation Compiler",
+        "outcome": "not_applicable",
+        "at": 1787724066965,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Git Compiler",
+        "outcome": "not_applicable",
+        "at": 1787724066965,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Runtime Compiler",
+        "outcome": "not_applicable",
+        "at": 1787724066965,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Mission Compiler",
+        "outcome": "not_applicable",
+        "at": 1787724066965,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Execution Compiler",
+        "outcome": "not_applicable",
+        "at": 1787724066965,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "entered",
+        "at": 1787724066965
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "completed",
+        "at": 1787724066965,
+        "detail": "1 normalized Knowledge IR item(s) ready for validation."
+      },
+      {
+        "stage": "Validation",
+        "outcome": "entered",
+        "at": 1787724066965
+      },
+      {
+        "stage": "Validation",
+        "outcome": "completed",
+        "at": 1787724066966,
+        "detail": "1 Knowledge IR item(s) validated."
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "entered",
+        "at": 1787724066966
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "completed",
+        "at": 1787724066969,
+        "detail": "Knowledge Package assembled: KP-2026-000031"
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "entered",
+        "at": 1787724066969
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "awaiting_human_review",
+        "at": 1787724066970,
+        "detail": "Knowledge Package is awaiting explicit human canonical review."
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "approved",
+        "at": 1787741010729,
+        "detail": "Canonical review approved by human-governance."
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "entered",
+        "at": 1787741010729
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "published",
+        "at": 1787741341265,
+        "detail": "1 governed canonical item(s) published as Canonical Knowledge."
+      }
+    ],
+    "createdAt": 1787724066956,
+    "updatedAt": 1787741341265,
+    "packageId": "KP-2026-000031"
+  }
+}

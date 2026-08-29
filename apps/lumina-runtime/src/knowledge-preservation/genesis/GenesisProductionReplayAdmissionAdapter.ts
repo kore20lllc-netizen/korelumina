@@ -1,5 +1,10 @@
 import type {
   EvidenceItem,
+  EvidencePersistenceStore,
+} from "../evidence/index.js";
+
+import {
+  FileEvidencePersistenceStore,
 } from "../evidence/index.js";
 
 import type {
@@ -27,8 +32,22 @@ import {
 } from "./GenesisHistoricalAdmissionGovernancePolicy.js";
 
 import type {
+  GenesisHistoricalEvidenceReviewDecisionResolver,
+} from "./GenesisHistoricalEvidenceReviewDecision.js";
+
+import {
+  manifestEntryWithHistoricalEvidenceReview,
+} from "./GenesisHistoricalEvidenceReviewDecision.js";
+
+import type {
   GenesisConversationReplayEvidenceResolver,
 } from "./GenesisConversationReplayEvidenceResolver.js";
+
+
+export interface GenesisProductionReplayReviewedManufacturingRequest {
+  historicalSourceId:
+    string;
+}
 
 
 export interface GenesisProductionReplayReprocessingRequest
@@ -48,6 +67,15 @@ export interface GenesisProductionReplayAdmissionAdapterOptions {
 
   reprocessing?:
     GenesisProductionReplayReprocessingRequest;
+
+  reviewedManufacturing?:
+    GenesisProductionReplayReviewedManufacturingRequest;
+
+  historicalEvidenceReviewDecisionResolver?:
+    GenesisHistoricalEvidenceReviewDecisionResolver;
+
+  evidencePersistenceStore?:
+    EvidencePersistenceStore;
 }
 
 
@@ -187,6 +215,17 @@ export class GenesisProductionReplayAdmissionAdapter
     GenesisProductionReplayReprocessingRequest |
     null;
 
+  private readonly reviewedManufacturing:
+    GenesisProductionReplayReviewedManufacturingRequest |
+    null;
+
+  private readonly historicalEvidenceReviewDecisionResolver:
+    GenesisHistoricalEvidenceReviewDecisionResolver |
+    null;
+
+  private readonly evidencePersistenceStore:
+    EvidencePersistenceStore;
+
 
   constructor(
     options:
@@ -202,6 +241,18 @@ export class GenesisProductionReplayAdmissionAdapter
     this.reprocessing =
       options.reprocessing ??
       null;
+
+    this.reviewedManufacturing =
+      options.reviewedManufacturing ??
+      null;
+
+    this.historicalEvidenceReviewDecisionResolver =
+      options.historicalEvidenceReviewDecisionResolver ??
+      null;
+
+    this.evidencePersistenceStore =
+      options.evidencePersistenceStore ??
+      new FileEvidencePersistenceStore();
   }
 
 
@@ -288,6 +339,31 @@ export class GenesisProductionReplayAdmissionAdapter
   }
 
 
+  private reviewedManufacturingFor(
+    request:
+      GenesisReplayAdmissionRequest,
+  ):
+    GenesisProductionReplayReviewedManufacturingRequest |
+    null {
+    if (
+      !this.reviewedManufacturing
+    ) {
+      return null;
+    }
+
+    if (
+      this.reviewedManufacturing
+        .historicalSourceId !==
+      request.planEntry
+        .historicalSourceId
+    ) {
+      return null;
+    }
+
+    return this.reviewedManufacturing;
+  }
+
+
   private reprocessingFor(
     request:
       GenesisReplayAdmissionRequest,
@@ -328,7 +404,7 @@ export class GenesisProductionReplayAdmissionAdapter
         request,
       );
 
-    const governance =
+    const baseGovernance =
       classifyGenesisHistoricalAdmission(
         request.manifestEntry,
       );
@@ -344,6 +420,12 @@ export class GenesisProductionReplayAdmissionAdapter
         request,
       );
 
+
+    const reviewedManufacturing =
+      this.reviewedManufacturingFor(
+        request,
+      );
+
     if (
       existing &&
       !reprocessing
@@ -355,10 +437,169 @@ export class GenesisProductionReplayAdmissionAdapter
     }
 
     if (
+      reviewedManufacturing
+    ) {
+      if (existing) {
+        throw new Error(
+          "genesis_reviewed_manufacturing_existing_run_not_allowed",
+        );
+      }
+
+      const review =
+        this.historicalEvidenceReviewDecisionResolver
+          ?.resolve(
+            request.manifestEntry
+              .historicalSourceId,
+            evidence.id,
+          ) ??
+        null;
+
+      if (!review) {
+        throw new Error(
+          "genesis_reviewed_manufacturing_decision_required",
+        );
+      }
+
+      const reviewedManifestEntry =
+        manifestEntryWithHistoricalEvidenceReview(
+          request.manifestEntry,
+          evidence.id,
+          review,
+        );
+
+      const reviewedGovernance =
+        classifyGenesisHistoricalAdmission(
+          reviewedManifestEntry,
+        );
+
+      if (
+        !reviewedGovernance
+          .invokeKnowledgeManufacturing
+      ) {
+        throw new Error(
+          "genesis_reviewed_manufacturing_not_authorized",
+        );
+      }
+
+      /*
+       * The persisted historical Evidence and manifest remain immutable.
+       *
+       * For an explicitly approved reviewed-manufacturing transition,
+       * carry the effective governance decision into the transient
+       * Evidence metadata consumed by Knowledge Manufacturing.
+       *
+       * Documentation validators require owner/scope/version and the
+       * literal approved state. These values come from the persisted
+       * human review decision, not from rewriting historical truth.
+       */
+      const reviewedEvidence = {
+        ...evidence,
+
+        metadata: {
+          ...evidence.metadata,
+
+          approvalState:
+            review.authority
+              ?.approvalState,
+
+          owner:
+            review.authority
+              ?.authorityOwner,
+
+          scope:
+            review.authority
+              ?.authorityScope,
+
+          version:
+            review.authority
+              ?.authorityVersion,
+
+          authorityClass:
+            review.authority
+              ?.authorityClass,
+
+          authorityOwner:
+            review.authority
+              ?.authorityOwner,
+
+          authorityScope:
+            review.authority
+              ?.authorityScope,
+
+          authorityVersion:
+            review.authority
+              ?.authorityVersion,
+
+          historicalEvidenceReviewDecisionId:
+            review.decisionId,
+
+          historicalEvidenceReviewReviewerId:
+            review.reviewerId,
+
+          historicalEvidenceReviewDecidedAt:
+            review.decidedAt,
+        },
+      };
+
+      await this.platform
+        .preserve(
+          reviewedEvidence,
+        );
+
+      const manufacturedRun =
+        evidenceRun(
+          this.platform,
+          evidence.id,
+        );
+
+      if (!manufacturedRun) {
+        throw new Error(
+          "genesis_reviewed_manufacturing_run_missing_after_preserve",
+        );
+      }
+
+      return existingAdmissionResult(
+        manufacturedRun,
+        evidence,
+      );
+    }
+
+
+    if (
       reprocessing
     ) {
+      const resolvedReview =
+        this.historicalEvidenceReviewDecisionResolver
+          ?.resolve(
+            request.manifestEntry
+              .historicalSourceId,
+            evidence.id,
+          ) ??
+        null;
+
+      let effectiveGovernance =
+        baseGovernance;
+
       if (
-        !governance
+        !effectiveGovernance
+          .invokeKnowledgeManufacturing &&
+        resolvedReview
+      ) {
+        const reviewedManifestEntry =
+          manifestEntryWithHistoricalEvidenceReview(
+            request.manifestEntry,
+            evidence.id,
+            resolvedReview,
+          );
+
+        effectiveGovernance =
+          classifyGenesisHistoricalAdmission(
+            reviewedManifestEntry,
+          );
+      }
+
+      if (
+        !effectiveGovernance
           .invokeKnowledgeManufacturing
       ) {
         throw new Error(
@@ -366,9 +607,72 @@ export class GenesisProductionReplayAdmissionAdapter
         );
       }
 
+      if (
+        !resolvedReview
+      ) {
+        throw new Error(
+          "genesis_reprocessing_review_decision_required",
+        );
+      }
+
+      /*
+       * Remediation must consume the same effective human-review
+       * authority as reviewed first manufacturing.
+       *
+       * Persisted historical Evidence remains immutable.
+       */
+      const reviewedReprocessingEvidence = {
+        ...evidence,
+
+        metadata: {
+          ...evidence.metadata,
+
+          approvalState:
+            resolvedReview?.authority
+              ?.approvalState,
+
+          owner:
+            resolvedReview?.authority
+              ?.authorityOwner,
+
+          scope:
+            resolvedReview?.authority
+              ?.authorityScope,
+
+          version:
+            resolvedReview?.authority
+              ?.authorityVersion,
+
+          authorityClass:
+            resolvedReview?.authority
+              ?.authorityClass,
+
+          authorityOwner:
+            resolvedReview?.authority
+              ?.authorityOwner,
+
+          authorityScope:
+            resolvedReview?.authority
+              ?.authorityScope,
+
+          authorityVersion:
+            resolvedReview?.authority
+              ?.authorityVersion,
+
+          historicalEvidenceReviewDecisionId:
+            resolvedReview?.decisionId,
+
+          historicalEvidenceReviewReviewerId:
+            resolvedReview?.reviewerId,
+
+          historicalEvidenceReviewDecidedAt:
+            resolvedReview?.decidedAt,
+        },
+      };
+
       await this.platform
         .reprocess(
-          evidence,
+          reviewedReprocessingEvidence,
           {
             attemptId:
               reprocessing
@@ -403,11 +707,39 @@ export class GenesisProductionReplayAdmissionAdapter
      * replay manifest.
      */
     if (
-      !governance.invokeKnowledgeManufacturing
+      !baseGovernance.invokeKnowledgeManufacturing
     ) {
+      this.evidencePersistenceStore.save(
+        evidence,
+      );
+
+      const persistedEvidence =
+        this.evidencePersistenceStore.load(
+          evidence.id,
+        );
+
+      if (
+        !persistedEvidence
+      ) {
+        throw new Error(
+          "genesis_evidence_persistence_missing_after_save",
+        );
+      }
+
+      if (
+        persistedEvidence.id !==
+          evidence.id ||
+        persistedEvidence.checksum !==
+          evidence.checksum
+      ) {
+        throw new Error(
+          "genesis_evidence_persistence_integrity_mismatch",
+        );
+      }
+
       return {
         evidenceId:
-          evidence.id,
+          persistedEvidence.id,
       };
     }
 

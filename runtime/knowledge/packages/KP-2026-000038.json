@@ -1,0 +1,222 @@
+{
+  "id": "KP-2026-000038",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787724067742,
+  "updatedAt": 1787741341543,
+  "data": {
+    "id": "KP-2026-000038",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Vision 2050",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:4d5f7e7bdb794e888ed50eca49be3197bb62491b3bf1ee544fafb8a6e4fd1bcc"
+          ],
+          "genesisReplay": [
+            "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+          ]
+        },
+        "extractedAt": 1787724067741,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067741,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/canon/VISION_2050.md",
+          "checksum": "sha256:b97012e6930e26e53a74ef058ea0e9fa2f5a3fd83336accc462dfa53dc8aeac8",
+          "capturedAt": 1787724067738,
+          "observedAt": 1787722039000,
+          "authorityClass": "Supreme",
+          "approvalState": "approved",
+          "owner": "Constitutional Office",
+          "scope": "Organization-wide",
+          "version": "1.0.0",
+          "sourceLocation": "docs/canon/VISION_2050.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "canonical",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+            "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+            "genesisManifestIndex": 1903,
+            "genesisAdmissionIdentity": "genesis-admission:68ec07fa47128d3203d21f5fa6ceaff10074a56fad96d10ad6e1ec1ae6cf1411",
+            "historicalSourceId": "genesis-source:document:derived:4d5f7e7bdb794e888ed50eca49be3197bb62491b3bf1ee544fafb8a6e4fd1bcc",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Supreme",
+            "approvalState": "approved",
+            "owner": "Constitutional Office",
+            "scope": "Organization-wide",
+            "version": "1.0.0",
+            "sourceLocation": "docs/canon/VISION_2050.md",
+            "documentClassification": "canonical",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KoreLumina Vision 2050",
+              "status": "Canonical",
+              "documentClassification": "canonical",
+              "sourceLocation": "docs/canon/VISION_2050.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787724067742,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+      ],
+      "sourceLocations": [
+        "docs/canon/VISION_2050.md"
+      ],
+      "contentRefs": [
+        "docs/canon/VISION_2050.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Organization-wide",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787724067742,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067741,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787724067742
+      },
+      {
+        "state": "compiled",
+        "at": 1787724067742
+      },
+      {
+        "state": "validated",
+        "at": 1787724067742
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787724067742
+      },
+      {
+        "state": "approved",
+        "at": 1787741010985,
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      {
+        "state": "canonical",
+        "at": 1787741341543,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787724067742
+    },
+    "createdAt": 1787724067742,
+    "updatedAt": 1787741341543,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000038",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human-governance",
+        "reviewedAt": 1787741010985,
+        "evidenceConsidered": [
+          "genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+        ],
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000038",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human-governance",
+          "reviewedAt": 1787741010985,
+          "evidenceConsidered": [
+            "genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+          ],
+          "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787741341543,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de"
+        ]
+      }
+    }
+  }
+}

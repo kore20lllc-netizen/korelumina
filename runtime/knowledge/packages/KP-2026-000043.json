@@ -1,0 +1,216 @@
+{
+  "id": "KP-2026-000043",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1788032400922,
+  "updatedAt": 1788032400922,
+  "data": {
+    "id": "KP-2026-000043",
+    "state": "validated",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+        "candidateType": "CandidateArtifact",
+        "title": "KR-005 — Repository Knowledge Recovery Specification",
+        "summary": "# KR-005 — Repository Knowledge Recovery Specification ## Status Accepted --- # Purpose Define the canonical process for recovering engineering knowledge from an existing repository. This specification governs every future recovery implementation. Recovery implementations MUST conform to this specification. --- # Recovery Philosophy The repository is the first evidence corpus. Recovery extracts existing engineering knowledge. Recovery does not invent knowledge. --- # Recovery Pipeline Reposit...",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40"
+          ],
+          "genesisReplay": [
+            "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b"
+          ]
+        },
+        "extractedAt": 1788032400920,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788032400920,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "needs-review",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+          "checksum": "sha256:4351f034f1633141b9ea93da09a6299214e56721ad0864c381d694449672d4b4",
+          "capturedAt": 1788003246993,
+          "observedAt": 1783042904000,
+          "authorityClass": "documentation",
+          "approvalState": "Accepted",
+          "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "document",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61",
+            "genesisManifestId": "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b",
+            "genesisManifestIndex": 0,
+            "genesisAdmissionIdentity": "genesis-admission:653acf82ec32bb176e502d1b6717304940ed0e2f94f27c58613bbc647204795b",
+            "historicalSourceId": "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "documentation",
+            "approvalState": "Accepted",
+            "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+            "documentClassification": "document",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KR-005 — Repository Knowledge Recovery Specification",
+              "status": "Accepted",
+              "documentClassification": "document",
+              "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "failed",
+            "checkedAt": 1788032400921,
+            "issues": [
+              {
+                "code": "documentation_owner_required",
+                "field": "owner",
+                "message": "Documentation governance metadata \"owner\" is required."
+              },
+              {
+                "code": "documentation_scope_required",
+                "field": "scope",
+                "message": "Documentation governance metadata \"scope\" is required."
+              },
+              {
+                "code": "documentation_version_required",
+                "field": "version",
+                "message": "Documentation governance metadata \"version\" is required."
+              },
+              {
+                "code": "documentation_source_not_approved",
+                "field": "approvalState",
+                "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+      ],
+      "sourceLocations": [
+        "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+      ],
+      "contentRefs": [
+        "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "documentation",
+    "approvalState": "remediation_required",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+        "status": "needs-review",
+        "confidence": 1,
+        "blocked": true,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "failed",
+          "checkedAt": 1788032400921,
+          "issues": [
+            {
+              "code": "documentation_owner_required",
+              "field": "owner",
+              "message": "Documentation governance metadata \"owner\" is required."
+            },
+            {
+              "code": "documentation_scope_required",
+              "field": "scope",
+              "message": "Documentation governance metadata \"scope\" is required."
+            },
+            {
+              "code": "documentation_version_required",
+              "field": "version",
+              "message": "Documentation governance metadata \"version\" is required."
+            },
+            {
+              "code": "documentation_source_not_approved",
+              "field": "approvalState",
+              "message": "Documentation source must be explicitly approved before it may enter Canonical Review."
+            }
+          ]
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788032400920,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1788032400922
+      },
+      {
+        "state": "compiled",
+        "at": 1788032400922
+      },
+      {
+        "state": "validated",
+        "at": 1788032400922
+      }
+    ],
+    "remediation": {
+      "required": true,
+      "status": "required",
+      "blockedItemIds": [
+        "document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+      ],
+      "updatedAt": 1788032400922
+    },
+    "createdAt": 1788032400922,
+    "updatedAt": 1788032400922,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Accepted"
+      ]
+    }
+  }
+}

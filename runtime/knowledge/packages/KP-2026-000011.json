@@ -1,0 +1,142 @@
+{
+  "id": "KP-2026-000011",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787245897507,
+  "updatedAt": 1787455178857,
+  "data": {
+    "id": "KP-2026-000011",
+    "state": "archived",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c"
+    ],
+    "knowledgeItemIds": [
+      "git:genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c"
+    ],
+    "items": [
+      {
+        "id": "git:genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c",
+        "candidateType": "CandidateArtifact",
+        "title": "chore(knowledge): certify capsule presentation",
+        "summary": "Recovered commit evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1787245897506,
+        "compiler": {
+          "compilerName": "git-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "commit",
+          "extractedAt": 1787245897506,
+          "extractionMethod": "git-compiler",
+          "confidenceBasis": "direct-evidence"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "pending_review",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "git:genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c",
+        "status": "extracted",
+        "confidence": 1,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "git:genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c",
+        "compiler": {
+          "compilerName": "git-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "commit",
+          "extractedAt": 1787245897506,
+          "extractionMethod": "git-compiler",
+          "confidenceBasis": "direct-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787245897507
+      },
+      {
+        "state": "compiled",
+        "at": 1787245897507
+      },
+      {
+        "state": "validated",
+        "at": 1787245897507
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787245897507
+      },
+      {
+        "state": "archived",
+        "at": 1787455178857,
+        "reason": "legacy_package_reconciled_to_genesis_historical_correlation"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787245897507
+    },
+    "createdAt": 1787245897507,
+    "updatedAt": 1787455178857,
+    "metadata": {
+      "sourceApprovalStates": [],
+      "governanceException": {
+        "type": "incomplete_governance_identity",
+        "disposition": "manual_reclassification_required",
+        "source": "legacy_governance_identity_audit",
+        "recordedAt": 1787446227323,
+        "recordedBy": "human:founder"
+      },
+      "historicalReconciliation": {
+        "disposition": "represented_as_genesis_historical_correlation",
+        "replayId": "genesis-replay:8e50d41b3a59e5d18439b3526f9421f2b2072c60ae6a35e1d855caf9789f4970",
+        "evidenceId": "genesis-evidence:0dc28d3a661c87f31ec20683640249435dfc6c223a46e59d0e7b77478447970c",
+        "historicalSourceId": "genesis-source:commit:187d5b850c0dbf9f867c5278e5e3cff16e535b9a",
+        "sourceReferenceId": "genesis-source-ref:103e0cdcfc43f910d744cce6854fe2c65425e7034c2781b6b113ff92c61e17e9",
+        "sourceRevisionId": "genesis-source-revision:b75698c7fe55818984ae0e06849d799481f9a8e73c5506c8f1c42d66be440eed",
+        "eventId": "genesis-event:007a17facd168de38068753ea746ec052d0d003bdff60321a314107a0315e1bf",
+        "eventKind": "implementation-committed",
+        "sourceChecksum": "sha256:f37d018a57e65410caa3767812ecfdac4d9ef1da56d6dcf76d2fb01df5111214",
+        "reconciledAt": 1787455178857,
+        "reconciledBy": "human:founder"
+      }
+    }
+  }
+}

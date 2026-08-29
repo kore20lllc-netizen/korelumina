@@ -1,0 +1,183 @@
+{
+  "id": "KP-2026-000040",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787785148225,
+  "updatedAt": 1787785148225,
+  "data": {
+    "id": "KP-2026-000040",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822",
+        "candidateType": "CandidateArtifact",
+        "title": "CA-006 — Platform Constitution Identity",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:e17eee7a6f982d4738974943ec036fb065abd3d01c65407ce75a5586af8f37f2"
+          ],
+          "genesisReplay": [
+            "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451"
+          ]
+        },
+        "extractedAt": 1787785148223,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787785148223,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md",
+          "checksum": "sha256:98bc1152dcff3319e3134d80ad3fa51c46ffca9c0ba71bb8d36101aedcc988d2",
+          "capturedAt": 1787785148221,
+          "observedAt": 1787784532000,
+          "authorityClass": "Constitutional Amendment",
+          "approvalState": "approved",
+          "owner": "Constitutional Office",
+          "scope": "Platform",
+          "version": "1.0.0",
+          "sourceLocation": "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "architecture",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632",
+            "genesisManifestId": "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451",
+            "genesisManifestIndex": 1153,
+            "genesisAdmissionIdentity": "genesis-admission:3ebba6071a6f02a59a2cbdd47b70941b5f8e8e609408059e3be60e0630c88fe5",
+            "historicalSourceId": "genesis-source:document:derived:e17eee7a6f982d4738974943ec036fb065abd3d01c65407ce75a5586af8f37f2",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Constitutional Amendment",
+            "approvalState": "approved",
+            "owner": "Constitutional Office",
+            "scope": "Platform",
+            "version": "1.0.0",
+            "sourceLocation": "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md",
+            "documentClassification": "architecture",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "CA-006 — Platform Constitution Identity",
+              "status": "Constitutional Amendment Record",
+              "approvalDate": "2026-08-26",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787785148224,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+      ],
+      "sourceLocations": [
+        "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Constitutional Amendment",
+    "approvalState": "pending_review",
+    "owner": "Constitutional Office",
+    "scope": "Platform",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787785148224,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787785148223,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787785148225
+      },
+      {
+        "state": "compiled",
+        "at": 1787785148225
+      },
+      {
+        "state": "validated",
+        "at": 1787785148225
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787785148225
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787785148225
+    },
+    "createdAt": 1787785148225,
+    "updatedAt": 1787785148225,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ]
+    }
+  }
+}

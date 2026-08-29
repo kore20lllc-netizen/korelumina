@@ -1,0 +1,222 @@
+{
+  "id": "KP-2026-000039",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787785148172,
+  "updatedAt": 1787800003360,
+  "data": {
+    "id": "KP-2026-000039",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Platform Constitution",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:37547f21d0d6c4dcf80109771afc52016ec0c60f75cec5bb4ad9194a46afc9b5"
+          ],
+          "genesisReplay": [
+            "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451"
+          ]
+        },
+        "extractedAt": 1787785148170,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787785148170,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+          "checksum": "sha256:65a0886c9dab23cee6511c49259aa2f2e58e3ce688886d28cc0a0b24ba1b89e1",
+          "capturedAt": 1787785148165,
+          "observedAt": 1787784532000,
+          "authorityClass": "architecture",
+          "approvalState": "approved",
+          "owner": "Constitutional Office",
+          "scope": "Platform",
+          "version": "1.0.0",
+          "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "architecture",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632",
+            "genesisManifestId": "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451",
+            "genesisManifestIndex": 1152,
+            "genesisAdmissionIdentity": "genesis-admission:6bcc0f5bed1f89d3d270e0795d2b9e78574b3d4ec5c47326c807b8db1e042c79",
+            "historicalSourceId": "genesis-source:document:derived:37547f21d0d6c4dcf80109771afc52016ec0c60f75cec5bb4ad9194a46afc9b5",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "architecture",
+            "approvalState": "approved",
+            "owner": "Constitutional Office",
+            "scope": "Platform",
+            "version": "1.0.0",
+            "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+            "documentClassification": "architecture",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KoreLumina Platform Constitution",
+              "status": "Authoritative",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787785148171,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+      ],
+      "sourceLocations": [
+        "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "architecture",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Platform",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787785148171,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787785148170,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787785148172
+      },
+      {
+        "state": "compiled",
+        "at": 1787785148172
+      },
+      {
+        "state": "validated",
+        "at": 1787785148172
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787785148172
+      },
+      {
+        "state": "approved",
+        "at": 1787799798937,
+        "reason": "M51.4 governed Educational Corpus curriculum review: Platform Constitution governance identity verified through CA-006, documentation validation passed, and Genesis evidence lineage reviewed."
+      },
+      {
+        "state": "canonical",
+        "at": 1787800003360,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787785148172
+    },
+    "createdAt": 1787785148172,
+    "updatedAt": 1787800003360,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000039",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human-governance",
+        "reviewedAt": 1787799798937,
+        "evidenceConsidered": [
+          "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+        ],
+        "reason": "M51.4 governed Educational Corpus curriculum review: Platform Constitution governance identity verified through CA-006, documentation validation passed, and Genesis evidence lineage reviewed."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000039",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human-governance",
+          "reviewedAt": 1787799798937,
+          "evidenceConsidered": [
+            "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+          ],
+          "reason": "M51.4 governed Educational Corpus curriculum review: Platform Constitution governance identity verified through CA-006, documentation validation passed, and Genesis evidence lineage reviewed."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787800003360,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+        ]
+      }
+    }
+  }
+}

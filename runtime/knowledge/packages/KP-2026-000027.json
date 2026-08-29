@@ -1,0 +1,169 @@
+{
+  "id": "KP-2026-000027",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787374748736,
+  "updatedAt": 1787527653557,
+  "data": {
+    "id": "KP-2026-000027",
+    "state": "adapted",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0036 — Canonical Knowledge Domain Architecture"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0036 — Canonical Knowledge Domain Architecture",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0036 — Canonical Knowledge Domain Architecture",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1787374748735,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1787374748735,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0036-canonical-knowledge-domain-architecture.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0036-canonical-knowledge-domain-architecture.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "approved",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0036 — Canonical Knowledge Domain Architecture",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0036 — Canonical Knowledge Domain Architecture",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1787374748735,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787374748736
+      },
+      {
+        "state": "compiled",
+        "at": 1787374748736
+      },
+      {
+        "state": "validated",
+        "at": 1787374748736
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787374748736
+      },
+      {
+        "state": "approved",
+        "at": 1787396895015,
+        "reason": "canonical-review:approved"
+      },
+      {
+        "state": "canonical",
+        "at": 1787397807374,
+        "reason": "governed_canonical_promotion"
+      },
+      {
+        "state": "adapted",
+        "at": 1787527653557,
+        "reason": "organizational_memory_adapted"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787374748736
+    },
+    "createdAt": 1787374748736,
+    "updatedAt": 1787527653557,
+    "metadata": {
+      "sourceApprovalStates": [],
+      "review": {
+        "packageId": "KP-2026-000027",
+        "packageVersion": null,
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1787396895015,
+        "evidenceConsidered": [
+          "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+        ]
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000027",
+          "packageVersion": null,
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1787396895015,
+          "evidenceConsidered": [
+            "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+          ]
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787397807374,
+        "canonicalItemIds": [
+          "canonical:adr:ADR-0036 — Canonical Knowledge Domain Architecture"
+        ]
+      },
+      "organizationalMemoryAdaptation": {
+        "adaptedAt": 1787527653557,
+        "recordIds": [
+          "canonical-memory:canonical:adr:ADR-0036 — Canonical Knowledge Domain Architecture"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "id": "KMR-bbd5c7a97a7a5a4f6b37",
+  "type": "knowledge-manufacturing-run",
+  "version": 1,
+  "createdAt": 1786859913541,
+  "updatedAt": 1786863619799,
+  "data": {
+    "id": "KMR-bbd5c7a97a7a5a4f6b37",
+    "evidenceId": "evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+    "currentStage": "Canonical Knowledge",
+    "status": "completed",
+    "canonicalKnowledgeIds": [
+      "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc"
+    ],
+    "stageHistory": [
+      {
+        "stage": "Evidence Intake",
+        "outcome": "entered",
+        "at": 1786859913541
+      },
+      {
+        "stage": "Evidence Intake",
+        "outcome": "completed",
+        "at": 1786859913542,
+        "detail": "Evidence evidence:genesis:repository-knowledge-seeding:41e9b381eebc accepted and routed directly to Documentation Compiler."
+      },
+      {
+        "stage": "Documentation Compiler",
+        "outcome": "entered",
+        "at": 1786859913542
+      },
+      {
+        "stage": "Documentation Compiler",
+        "outcome": "completed",
+        "at": 1786859913542,
+        "detail": "1 Knowledge IR item(s) compiled."
+      },
+      {
+        "stage": "Conversation Compiler",
+        "outcome": "not_applicable",
+        "at": 1786859913542,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Git Compiler",
+        "outcome": "not_applicable",
+        "at": 1786859913542,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Runtime Compiler",
+        "outcome": "not_applicable",
+        "at": 1786859913542,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Mission Compiler",
+        "outcome": "not_applicable",
+        "at": 1786859913542,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Execution Compiler",
+        "outcome": "not_applicable",
+        "at": 1786859913542,
+        "detail": "Compiler station does not apply to this evidence route."
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "entered",
+        "at": 1786859913542
+      },
+      {
+        "stage": "Knowledge IR",
+        "outcome": "completed",
+        "at": 1786859913543,
+        "detail": "1 normalized Knowledge IR item(s) ready for validation."
+      },
+      {
+        "stage": "Validation",
+        "outcome": "entered",
+        "at": 1786859913543
+      },
+      {
+        "stage": "Validation",
+        "outcome": "completed",
+        "at": 1786859913543,
+        "detail": "1 Knowledge IR item(s) validated."
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "entered",
+        "at": 1786859913543
+      },
+      {
+        "stage": "Knowledge Package Assembly",
+        "outcome": "completed",
+        "at": 1786859913545,
+        "detail": "Knowledge Package assembled: KP-2026-000001"
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "entered",
+        "at": 1786859913545
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "awaiting_human_review",
+        "at": 1786859913545,
+        "detail": "Knowledge Package is awaiting explicit human canonical review."
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "approved",
+        "at": 1786861599580,
+        "detail": "Canonical review approved by human:chief-systems-architect."
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "entered",
+        "at": 1786861599580
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "published",
+        "at": 1786863619799,
+        "detail": "1 governed canonical item(s) published as Canonical Knowledge."
+      }
+    ],
+    "createdAt": 1786859913541,
+    "updatedAt": 1786863619799,
+    "packageId": "KP-2026-000001"
+  }
+}

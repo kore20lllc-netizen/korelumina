@@ -8,6 +8,10 @@ import {
 } from "../../bootstrap/index.js";
 
 import {
+  FileEvidencePersistenceStore,
+} from "../../evidence/index.js";
+
+import {
   resolveKnowledgeStorageRoot,
 } from "../../storage/index.js";
 
@@ -732,6 +736,648 @@ test(
     assert.equal(
       matchingRuns.length,
       0,
+    );
+
+    const evidenceStore =
+      new FileEvidencePersistenceStore();
+
+    const persistedEvidence =
+      evidenceStore.load(
+        result.evidenceId,
+      );
+
+    assert.ok(
+      persistedEvidence,
+    );
+
+    assert.equal(
+      persistedEvidence.id,
+      result.evidenceId,
+    );
+
+    assert.equal(
+      persistedEvidence.type,
+      "runtime-event",
+    );
+
+    assert.equal(
+      persistedEvidence.metadata
+        .historicalSourceId,
+      "genesis-source:runtime-event:historical-only",
+    );
+
+  },
+);
+
+test(
+  "approved historical Evidence review permits explicit first manufacturing without remediation reprocessing",
+  async () => {
+    const {
+      createGenesisHistoricalEvidenceReviewDecision,
+      genesisReplayAdmissionRequestToEvidence,
+    } =
+      await import(
+        "../index.js"
+      );
+
+    /*
+     * Use the repository's existing request() fixture.
+     *
+     * Empty authority identity fields are intentional:
+     * the source must begin as requires-governance-review.
+     */
+    const baseRequest =
+      request({
+        historicalSourceId:
+          "genesis-source:document:reviewed-first-manufacture",
+
+        checksum:
+          "sha256:reviewed-first-manufacture",
+
+        sourceType:
+          "document",
+
+        evidenceType:
+          "document",
+
+        authorityClass:
+          "documentation",
+
+        approvalState:
+          "Accepted",
+
+        authorityOwner:
+          "",
+
+        authorityScope:
+          "",
+
+        authorityVersion:
+          "",
+      });
+
+    /*
+     * metadata is readonly in GenesisSourceManifestEntry.
+     * Construct a new manifest entry instead of mutating
+     * the fixture returned by request().
+     */
+    const requestWithSourceLocation = {
+      ...baseRequest,
+
+      manifestEntry: {
+        ...baseRequest.manifestEntry,
+
+        metadata: {
+          ...baseRequest
+            .manifestEntry
+            .metadata,
+
+          sourceLocation:
+            "docs/reviewed-first-manufacture.md",
+        },
+      },
+    };
+
+    /*
+     * Recalculate admission identity after replacing the
+     * manifest entry so the request remains internally valid.
+     */
+    const admissionRequest:
+      GenesisReplayAdmissionRequest = {
+        ...requestWithSourceLocation,
+
+        admissionIdentity:
+          createGenesisReplayAdmissionIdentity(
+            requestWithSourceLocation,
+          ),
+      };
+
+    /*
+     * Evidence identity remains owned by the Genesis
+     * admission contract.
+     */
+    const evidence =
+      genesisReplayAdmissionRequestToEvidence(
+        admissionRequest,
+      );
+
+    const review =
+      createGenesisHistoricalEvidenceReviewDecision({
+        historicalSourceId:
+          admissionRequest
+            .manifestEntry
+            .historicalSourceId,
+
+        evidenceId:
+          evidence.id,
+
+        sourceChecksum:
+          admissionRequest
+            .manifestEntry
+            .sourceChecksum,
+
+        disposition:
+          "APPROVE_MANUFACTURING",
+
+        authority: {
+          authorityClass:
+            "Supreme",
+
+          authorityOwner:
+            "Constitutional Office",
+
+          authorityScope:
+            "Organization-wide",
+
+          authorityVersion:
+            "1.0.0",
+
+          approvalState:
+            "approved",
+        },
+
+        reviewerId:
+          "human:constitutional-office",
+
+        decidedAt:
+          100,
+
+        rationale:
+          "Approved for test first manufacturing.",
+      });
+
+    const resolver = {
+      resolve(
+        historicalSourceId:
+          string,
+
+        evidenceId:
+          string,
+      ) {
+        if (
+          historicalSourceId ===
+            review.historicalSourceId &&
+          evidenceId ===
+            review.evidenceId
+        ) {
+          return review;
+        }
+
+        return null;
+      },
+    };
+
+    const preserveCalls:
+      string[] = [];
+
+    const reprocessCalls:
+      string[] = [];
+
+    const platform =
+      createKnowledgePreservationPlatform();
+
+    const originalPreserve =
+      platform.preserve.bind(
+        platform,
+      );
+
+    const originalReprocess =
+      platform.reprocess.bind(
+        platform,
+      );
+
+    platform.preserve =
+      async evidenceItem => {
+        preserveCalls.push(
+          evidenceItem.id,
+        );
+
+        return originalPreserve(
+          evidenceItem,
+        );
+      };
+
+    platform.reprocess =
+      async (
+        evidenceItem,
+        reprocessingRequest,
+      ) => {
+        reprocessCalls.push(
+          evidenceItem.id,
+        );
+
+        return originalReprocess(
+          evidenceItem,
+          reprocessingRequest,
+        );
+      };
+
+    const adapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform,
+
+        historicalEvidenceReviewDecisionResolver:
+          resolver,
+
+        reviewedManufacturing: {
+          historicalSourceId:
+            review.historicalSourceId,
+        },
+      });
+
+    await adapter.admit(
+      admissionRequest,
+    );
+
+    assert.deepEqual(
+      preserveCalls,
+      [
+        evidence.id,
+      ],
+    );
+
+    assert.deepEqual(
+      reprocessCalls,
+      [],
+    );
+
+    const run =
+      platform
+        .manufacturingRunService
+        .list()
+        .find(
+          candidate =>
+            candidate.evidenceId ===
+            evidence.id,
+        );
+
+    assert.ok(
+      run,
+    );
+
+    const manufacturedPackage =
+      platform
+        .packageService
+        .list()
+        .find(
+          candidate =>
+            candidate.id ===
+            run.packageId,
+        );
+
+    assert.ok(
+      manufacturedPackage,
+    );
+
+    assert.notEqual(
+      manufacturedPackage.approvalState,
+      "remediation_required",
+    );
+
+    const serializedPackage =
+      JSON.stringify(
+        manufacturedPackage,
+      );
+
+    assert.doesNotMatch(
+      serializedPackage,
+      /documentation_owner_required/,
+    );
+
+    assert.doesNotMatch(
+      serializedPackage,
+      /documentation_scope_required/,
+    );
+
+    assert.doesNotMatch(
+      serializedPackage,
+      /documentation_version_required/,
+    );
+
+    assert.match(
+      serializedPackage,
+      /Constitutional Office/,
+    );
+
+    assert.match(
+      serializedPackage,
+      /Organization-wide/,
+    );
+
+    assert.match(
+      serializedPackage,
+      /1\.0\.0/,
+    );
+  },
+);
+
+test(
+  "approved historical Evidence remediation carries review authority into reprocessing without mutating historical Evidence",
+  async () => {
+    const {
+      createGenesisHistoricalEvidenceReviewDecision,
+      genesisReplayAdmissionRequestToEvidence,
+    } =
+      await import(
+        "../index.js"
+      );
+
+    const baseRequest =
+      request({
+        historicalSourceId:
+          "genesis-source:document:reviewed-remediation",
+
+        checksum:
+          "sha256:reviewed-remediation",
+
+        sourceType:
+          "document",
+
+        evidenceType:
+          "document",
+
+        authorityClass:
+          "documentation",
+
+        approvalState:
+          "Accepted",
+
+        authorityOwner:
+          "",
+
+        authorityScope:
+          "",
+
+        authorityVersion:
+          "",
+      });
+
+    const requestWithSourceLocation = {
+      ...baseRequest,
+
+      manifestEntry: {
+        ...baseRequest.manifestEntry,
+
+        metadata: {
+          ...baseRequest
+            .manifestEntry
+            .metadata,
+
+          sourceLocation:
+            "docs/reviewed-remediation.md",
+        },
+      },
+    };
+
+    const admissionRequest:
+      GenesisReplayAdmissionRequest = {
+        ...requestWithSourceLocation,
+
+        admissionIdentity:
+          createGenesisReplayAdmissionIdentity(
+            requestWithSourceLocation,
+          ),
+      };
+
+    const historicalEvidence =
+      genesisReplayAdmissionRequestToEvidence(
+        admissionRequest,
+      );
+
+    const historicalEvidenceBefore =
+      structuredClone(
+        historicalEvidence,
+      );
+
+    const review =
+      createGenesisHistoricalEvidenceReviewDecision({
+        historicalSourceId:
+          admissionRequest
+            .manifestEntry
+            .historicalSourceId,
+
+        evidenceId:
+          historicalEvidence.id,
+
+        sourceChecksum:
+          admissionRequest
+            .manifestEntry
+            .sourceChecksum,
+
+        disposition:
+          "APPROVE_MANUFACTURING",
+
+        authority: {
+          authorityClass:
+            "Supreme",
+
+          authorityOwner:
+            "Constitutional Office",
+
+          authorityScope:
+            "Organization-wide",
+
+          authorityVersion:
+            "1.0.0",
+
+          approvalState:
+            "approved",
+        },
+
+        reviewerId:
+          "human:constitutional-office",
+
+        decidedAt:
+          100,
+
+        rationale:
+          "Approved for governed remediation test.",
+      });
+
+    const resolver = {
+      resolve(
+        historicalSourceId:
+          string,
+
+        evidenceId:
+          string,
+      ) {
+        if (
+          historicalSourceId ===
+            review.historicalSourceId &&
+          evidenceId ===
+            review.evidenceId
+        ) {
+          return review;
+        }
+
+        return null;
+      },
+    };
+
+    const platform =
+      createKnowledgePreservationPlatform();
+
+    /*
+     * Seed a legitimate remediation-required prior package/run
+     * with the historical, non-overlaid Evidence.
+     */
+    await platform.preserve(
+      historicalEvidence,
+    );
+
+    const priorRun =
+      platform
+        .manufacturingRunService
+        .list()
+        .find(
+          candidate =>
+            candidate.evidenceId ===
+            historicalEvidence.id,
+        );
+
+    assert.ok(
+      priorRun,
+    );
+
+    assert.ok(
+      priorRun.packageId,
+    );
+
+    const priorPackage =
+      platform
+        .packageService
+        .get(
+          priorRun.packageId,
+        );
+
+    assert.ok(
+      priorPackage,
+    );
+
+    assert.equal(
+      priorPackage.approvalState,
+      "remediation_required",
+    );
+
+    assert.equal(
+      priorPackage.remediation.required,
+      true,
+    );
+
+    const adapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform,
+
+        historicalEvidenceReviewDecisionResolver:
+          resolver,
+
+        reprocessing: {
+          historicalSourceId:
+            review.historicalSourceId,
+
+          attemptId:
+            "review-authority-remediation-1",
+
+          priorManufacturingRunId:
+            priorRun.id,
+
+          priorPackageId:
+            priorPackage.id,
+
+          reason:
+            "Apply persisted historical Evidence review authority.",
+        },
+      });
+
+    await adapter.admit(
+      admissionRequest,
+    );
+
+    assert.deepEqual(
+      historicalEvidence,
+      historicalEvidenceBefore,
+    );
+
+    const runs =
+      platform
+        .manufacturingRunService
+        .list()
+        .filter(
+          candidate =>
+            candidate.evidenceId ===
+            historicalEvidence.id,
+        );
+
+    assert.equal(
+      runs.length,
+      2,
+    );
+
+    const successorRun =
+      runs.find(
+        candidate =>
+          candidate.id !==
+          priorRun.id,
+      );
+
+    assert.ok(
+      successorRun,
+    );
+
+    assert.ok(
+      successorRun.packageId,
+    );
+
+    const successorPackage =
+      platform
+        .packageService
+        .get(
+          successorRun.packageId,
+        );
+
+    assert.ok(
+      successorPackage,
+    );
+
+    const serialized =
+      JSON.stringify(
+        successorPackage,
+      );
+
+    assert.doesNotMatch(
+      serialized,
+      /documentation_owner_required/,
+    );
+
+    assert.doesNotMatch(
+      serialized,
+      /documentation_scope_required/,
+    );
+
+    assert.doesNotMatch(
+      serialized,
+      /documentation_version_required/,
+    );
+
+    assert.match(
+      serialized,
+      /Constitutional Office/,
+    );
+
+    assert.match(
+      serialized,
+      /Organization-wide/,
+    );
+
+    assert.match(
+      serialized,
+      /1\.0\.0/,
+    );
+
+    assert.notEqual(
+      successorPackage.approvalState,
+      "remediation_required",
     );
   },
 );

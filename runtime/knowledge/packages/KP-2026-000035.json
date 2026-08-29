@@ -1,0 +1,223 @@
+{
+  "id": "KP-2026-000035",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787724067431,
+  "updatedAt": 1787741341424,
+  "data": {
+    "id": "KP-2026-000035",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "candidateType": "CandidateArtifact",
+        "title": "CA-004 — Canonical Knowledge ↔ Organizational Memory Adaptation Contract",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:0d21b35cfb88e75284f5acbaac3423560e024c700b308d036a19bc76ba053450"
+          ],
+          "genesisReplay": [
+            "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+          ]
+        },
+        "extractedAt": 1787724067430,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067430,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
+          "checksum": "sha256:3d4bfc209143fd8b0ee9637d1696d1d899a0c939c2b269c218192888dbdd19c1",
+          "capturedAt": 1787724067407,
+          "observedAt": 1787722039000,
+          "authorityClass": "Constitutional Amendment",
+          "approvalState": "approved",
+          "owner": "Constitutional Office",
+          "scope": "Canonical Knowledge to Organizational Memory adaptation",
+          "version": "1.0.0",
+          "sourceLocation": "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "architecture",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+            "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+            "genesisManifestIndex": 1900,
+            "genesisAdmissionIdentity": "genesis-admission:01f50041c543c04b85652e042a3a327817abd8c518475b68b36d1980fa57b476",
+            "historicalSourceId": "genesis-source:document:derived:0d21b35cfb88e75284f5acbaac3423560e024c700b308d036a19bc76ba053450",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Constitutional Amendment",
+            "approvalState": "approved",
+            "owner": "Constitutional Office",
+            "scope": "Canonical Knowledge to Organizational Memory adaptation",
+            "version": "1.0.0",
+            "sourceLocation": "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
+            "documentClassification": "architecture",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "CA-004 — Canonical Knowledge ↔ Organizational Memory Adaptation Contract",
+              "status": "Constitutional Amendment Record",
+              "approvalDate": "2026-07-31",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787724067430,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+      ],
+      "sourceLocations": [
+        "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Constitutional Amendment",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Canonical Knowledge to Organizational Memory adaptation",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787724067430,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067430,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787724067431
+      },
+      {
+        "state": "compiled",
+        "at": 1787724067431
+      },
+      {
+        "state": "validated",
+        "at": 1787724067431
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787724067431
+      },
+      {
+        "state": "approved",
+        "at": 1787741010827,
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      {
+        "state": "canonical",
+        "at": 1787741341424,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787724067431
+    },
+    "createdAt": 1787724067431,
+    "updatedAt": 1787741341424,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000035",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human-governance",
+        "reviewedAt": 1787741010827,
+        "evidenceConsidered": [
+          "genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+        ],
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000035",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human-governance",
+          "reviewedAt": 1787741010827,
+          "evidenceConsidered": [
+            "genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+          ],
+          "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787741341424,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae"
+        ]
+      }
+    }
+  }
+}

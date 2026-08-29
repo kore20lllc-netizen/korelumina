@@ -1,0 +1,222 @@
+{
+  "id": "KP-2026-000037",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1787724067636,
+  "updatedAt": 1787741341503,
+  "data": {
+    "id": "KP-2026-000037",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Canonical Document Hierarchy",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454"
+          ],
+          "genesisReplay": [
+            "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+          ]
+        },
+        "extractedAt": 1787724067635,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067635,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+          "checksum": "sha256:7394c8eb2e6e56343a95ad688d078f455d13d3109bca2c2cf84e37d6bedd22ff",
+          "capturedAt": 1787724067632,
+          "observedAt": 1787722039000,
+          "authorityClass": "Supreme",
+          "approvalState": "approved",
+          "owner": "Constitutional Office",
+          "scope": "Organization-wide",
+          "version": "1.0.0",
+          "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "canonical",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+            "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+            "genesisManifestIndex": 1902,
+            "genesisAdmissionIdentity": "genesis-admission:e29aa82e6ecf985109992e6d7649c843973f3de28e5c95f580fe320733b18ecd",
+            "historicalSourceId": "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "Supreme",
+            "approvalState": "approved",
+            "owner": "Constitutional Office",
+            "scope": "Organization-wide",
+            "version": "1.0.0",
+            "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+            "documentClassification": "canonical",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KoreLumina Canonical Document Hierarchy",
+              "status": "Canonical",
+              "documentClassification": "canonical",
+              "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1787724067636,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+      ],
+      "sourceLocations": [
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+      ],
+      "contentRefs": [
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Organization-wide",
+    "version": "1.0.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1787724067636,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1787724067635,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1787724067636
+      },
+      {
+        "state": "compiled",
+        "at": 1787724067636
+      },
+      {
+        "state": "validated",
+        "at": 1787724067636
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1787724067636
+      },
+      {
+        "state": "approved",
+        "at": 1787741010985,
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      {
+        "state": "canonical",
+        "at": 1787741341503,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1787724067636
+    },
+    "createdAt": 1787724067636,
+    "updatedAt": 1787741341503,
+    "metadata": {
+      "sourceApprovalStates": [
+        "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000037",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human-governance",
+        "reviewedAt": 1787741010985,
+        "evidenceConsidered": [
+          "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+        ],
+        "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000037",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human-governance",
+          "reviewedAt": 1787741010985,
+          "evidenceConsidered": [
+            "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+          ],
+          "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1787741341503,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+        ]
+      }
+    }
+  }
+}
