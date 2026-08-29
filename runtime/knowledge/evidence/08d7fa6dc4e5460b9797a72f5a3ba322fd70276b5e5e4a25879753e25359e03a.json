@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+  "type": "document",
+  "title": "KR-005 — Repository Knowledge Recovery Specification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788003246993,
+  "observedAt": 1783042904000,
+  "contentRef": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+  "checksum": "sha256:4351f034f1633141b9ea93da09a6299214e56721ad0864c381d694449672d4b4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61",
+    "genesisManifestId": "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:653acf82ec32bb176e502d1b6717304940ed0e2f94f27c58613bbc647204795b",
+    "historicalSourceId": "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "approvalState": "Accepted",
+    "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KR-005 — Repository Knowledge Recovery Specification",
+      "status": "Accepted",
+      "documentClassification": "document",
+      "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40"
+    ],
+    "genesisReplay": [
+      "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b"
+    ]
+  }
+}

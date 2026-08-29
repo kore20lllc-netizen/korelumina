@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:b37a008a2f553d9824ca6fb8669de8547f7b49e9f3237d56092f938e7bb3a6c9",
+  "type": "ADR",
+  "title": "ADR-0038 — Knowledge Acquisition Platform Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1787371151036,
+  "observedAt": 1783057958000,
+  "contentRef": "docs/adr/ADR-0038-knowledge-acquisition-platform-architecture.md",
+  "checksum": "sha256:7a72b9467b2036b5b446728e011e57280b321051aa48701cdf9a8985e22df03a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:ccfa979f6d051e70a24789e018301f46d2bd767f42d701802939f36a2f512009",
+    "genesisManifestId": "genesis-manifest:26f21e01ef905f562a2b1480574d1a1b20f7dd6fdedecca2f1a080f83078f4be",
+    "genesisManifestIndex": 737,
+    "genesisAdmissionIdentity": "genesis-admission:85506ca151b4b0d5c920453c2b4018024be0bff18fc73718bc2bdda4f8bf3de9",
+    "historicalSourceId": "genesis-source:ADR:derived:92ec99df845b5d3679437c3af431f4e8cafb67518f9155db5eb57e655eb47524",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "sourceLocation": "docs/adr/ADR-0038-knowledge-acquisition-platform-architecture.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ADR-0038 — Knowledge Acquisition Platform Architecture",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/ADR-0038-knowledge-acquisition-platform-architecture.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:92ec99df845b5d3679437c3af431f4e8cafb67518f9155db5eb57e655eb47524"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ccfa979f6d051e70a24789e018301f46d2bd767f42d701802939f36a2f512009"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:26f21e01ef905f562a2b1480574d1a1b20f7dd6fdedecca2f1a080f83078f4be"
+    ]
+  }
+}

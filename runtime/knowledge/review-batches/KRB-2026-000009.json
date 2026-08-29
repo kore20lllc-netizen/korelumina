@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000009",
+  "packageIds": [
+    "KP-2026-000042"
+  ],
+  "status": "approved",
+  "reviewerId": "human-review:m51.5i8",
+  "decision": "approved",
+  "reason": "Human Canonical Review verified that KP-2026-000042 faithfully represents the ratified Mission Ownership section, preserves its approved governance authority and subordinate scope, contains no invented production-workspace authority, and passed all validation checks.",
+  "createdAt": 1787892508394,
+  "reviewedAt": 1787892658080
+}

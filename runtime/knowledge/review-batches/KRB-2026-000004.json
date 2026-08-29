@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000004",
+  "packageIds": [
+    "KP-2026-000036"
+  ],
+  "status": "approved",
+  "reviewerId": "human-governance",
+  "decision": "approved",
+  "reason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed.",
+  "createdAt": 1787740735758,
+  "reviewedAt": 1787741010861
+}

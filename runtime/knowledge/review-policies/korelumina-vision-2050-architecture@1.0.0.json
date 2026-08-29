@@ -1,0 +1,23 @@
+{
+  "id": "korelumina-vision-2050-architecture",
+  "version": "1.0.0",
+  "status": "active",
+  "title": "KoreLumina Vision 2050 Architecture Governance",
+  "authority": "architecture",
+  "scope": "platform",
+  "owner": "Knowledge Governance",
+  "authorizedBy": "human:founder",
+  "authorizedAt": 1787430061007,
+  "createdAt": 1787430060930,
+  "updatedAt": 1787430061007,
+  "supersedes": [],
+  "supersededBy": null,
+  "rules": {
+    "requireCompleteGovernanceIdentity": true,
+    "requireProvenance": true,
+    "requireValidationPassed": true,
+    "excludedAuthorities": [
+      "constitutional"
+    ]
+  }
+}
