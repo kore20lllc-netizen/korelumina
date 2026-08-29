@@ -64,6 +64,101 @@ function candidate():
         measurementVersion:
           "education-coverage-v1",
       },
+
+      dayZero: {
+        requiredModules: [
+          "constitutional-literacy",
+          "knowledge-governance",
+          "operational-boundaries",
+          "conversation-curriculum",
+          "business-domain-literacy",
+        ],
+
+        completeModules: [
+          "constitutional-literacy",
+          "knowledge-governance",
+          "operational-boundaries",
+          "conversation-curriculum",
+          "business-domain-literacy",
+        ],
+
+        modules: {
+          "constitutional-literacy": {
+            satisfiedRequirements: [
+              "test:constitutional-literacy",
+            ],
+            missingRequirements: [],
+            satisfiedCount: 1,
+            requirementCount: 1,
+            completion: 100,
+            measurementVersion: "education-coverage-v1",
+          },
+
+          "knowledge-governance": {
+            satisfiedRequirements: [
+              "test:knowledge-governance",
+            ],
+            missingRequirements: [],
+            satisfiedCount: 1,
+            requirementCount: 1,
+            completion: 100,
+            measurementVersion: "education-coverage-v1",
+          },
+
+          "operational-boundaries": {
+            satisfiedRequirements: [
+              "test:operational-boundaries",
+            ],
+            missingRequirements: [],
+            satisfiedCount: 1,
+            requirementCount: 1,
+            completion: 100,
+            measurementVersion: "education-coverage-v1",
+          },
+
+          "conversation-curriculum": {
+            satisfiedRequirements: [
+              "test:conversation-curriculum",
+            ],
+            missingRequirements: [],
+            satisfiedCount: 1,
+            requirementCount: 1,
+            completion: 100,
+            measurementVersion: "education-coverage-v1",
+          },
+
+          "business-domain-literacy": {
+            satisfiedRequirements: [
+              "test:business-domain-literacy",
+            ],
+            missingRequirements: [],
+            satisfiedCount: 1,
+            requirementCount: 1,
+            completion: 100,
+            measurementVersion: "education-coverage-v1",
+          },
+        },
+
+        satisfiedRequirements: [
+          "test:business-domain-literacy",
+          "test:constitutional-literacy",
+          "test:conversation-curriculum",
+          "test:knowledge-governance",
+          "test:operational-boundaries",
+        ],
+
+        missingRequirements: [],
+
+        satisfiedCount: 5,
+
+        requirementCount: 5,
+
+        completion: 100,
+
+        measurementVersion:
+          "education-coverage-v1",
+      },
+
     },
 
     summary: {

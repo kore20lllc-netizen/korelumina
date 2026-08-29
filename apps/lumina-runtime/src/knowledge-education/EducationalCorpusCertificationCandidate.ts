@@ -3,9 +3,13 @@ import {
 } from "node:crypto";
 
 import {
-  coverageRequirementsForModule,
-  measureEducationalCoverage,
-} from "./measurement/index.js";
+  measureDayZeroEducationalCoverage,
+} from "./DayZeroEducationalCoverage.js";
+
+import type {
+  DayZeroEducationalCoverage,
+  DayZeroEducationalModuleCoverage,
+} from "./DayZeroEducationalCoverage.js";
 
 import type {
   EducationalArtifactProjection,
@@ -65,25 +69,11 @@ export interface EducationalCorpusCertificationCandidate {
     string | null;
 
   coverage: {
-    constitutionalLiteracy: {
-      satisfiedRequirements:
-        readonly string[];
+    constitutionalLiteracy:
+      DayZeroEducationalModuleCoverage;
 
-      missingRequirements:
-        readonly string[];
-
-      satisfiedCount:
-        number;
-
-      requirementCount:
-        number;
-
-      completion:
-        number;
-
-      measurementVersion:
-        "education-coverage-v1";
-    };
+    dayZero:
+      DayZeroEducationalCoverage;
   };
 
   summary: {
@@ -390,29 +380,44 @@ export function buildEducationalCorpusCertificationCandidate(
           ),
       );
 
-  const constitutionalCoverage =
-    measureEducationalCoverage(
+  const dayZeroCoverage =
+    measureDayZeroEducationalCoverage(
       curriculumArtifacts,
-      coverageRequirementsForModule(
-        "constitutional-literacy",
-      ),
     );
 
+  const constitutionalCoverage =
+    dayZeroCoverage
+      .modules[
+        "constitutional-literacy"
+      ];
+
   for (
-    const requirementId
-    of constitutionalCoverage
-      .missing
+    const moduleId
+    of dayZeroCoverage
+      .requiredModules
   ) {
-    exceptions.push({
-      code:
-        "required-constitutional-curriculum-missing",
+    const moduleCoverage =
+      dayZeroCoverage
+        .modules[
+          moduleId
+        ];
 
-      category:
-        "curriculum-coverage",
+    for (
+      const requirementId
+      of moduleCoverage
+        .missingRequirements
+    ) {
+      exceptions.push({
+        code:
+          `required-day-zero-curriculum-missing:${moduleId}`,
 
-      subjectId:
-        requirementId,
-    });
+        category:
+          "curriculum-coverage",
+
+        subjectId:
+          requirementId,
+      });
+    }
   }
 
   const deduplicated =
@@ -520,7 +525,7 @@ export function buildEducationalCorpusCertificationCandidate(
   const approvalReason =
     state ===
       "READY"
-      ? "The persisted Educational Corpus is current, required constitutional curriculum coverage is complete, and no unresolved certification exceptions remain. One corpus-level human approval may be issued."
+      ? "The persisted Educational Corpus is current, every required Day-0 curriculum module is complete, and no unresolved certification exceptions remain. One corpus-level human approval may be issued."
       : state ===
           "BLOCKED"
         ? "Educational Corpus certification is blocked by an invalid upstream authority state."
@@ -545,7 +550,7 @@ export function buildEducationalCorpusCertificationCandidate(
           ?.dayZeroCertificationId ??
         null,
 
-      constitutionalCoverage,
+      dayZeroCoverage,
 
       summary,
 
@@ -576,33 +581,11 @@ export function buildEducationalCorpusCertificationCandidate(
       null,
 
     coverage: {
-      constitutionalLiteracy: {
-        satisfiedRequirements: [
-          ...constitutionalCoverage
-            .satisfied,
-        ],
+      constitutionalLiteracy:
+        constitutionalCoverage,
 
-        missingRequirements: [
-          ...constitutionalCoverage
-            .missing,
-        ],
-
-        satisfiedCount:
-          constitutionalCoverage
-            .satisfiedCount,
-
-        requirementCount:
-          constitutionalCoverage
-            .requirementCount,
-
-        completion:
-          constitutionalCoverage
-            .completion,
-
-        measurementVersion:
-          constitutionalCoverage
-            .measurementVersion,
-      },
+      dayZero:
+        dayZeroCoverage,
     },
 
     summary,

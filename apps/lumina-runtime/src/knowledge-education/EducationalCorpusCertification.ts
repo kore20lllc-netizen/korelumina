@@ -6,6 +6,10 @@ import type {
   EducationalCorpusCertificationCandidate,
 } from "./EducationalCorpusCertificationCandidate.js";
 
+import type {
+  DayZeroEducationalCoverage,
+} from "./DayZeroEducationalCoverage.js";
+
 
 export const EDUCATIONAL_CORPUS_CERTIFICATION_VERSION =
   "educational-corpus-certification:v1" as const;
@@ -76,6 +80,9 @@ export interface EducationalCorpusCertification {
     measurementVersion:
       "education-coverage-v1";
   };
+
+  dayZeroCoverage?:
+    DayZeroEducationalCoverage;
 
   acknowledgedExcludedArtifactIds:
     readonly string[];
@@ -314,6 +321,30 @@ function assertCandidateCertifiable(
       "educational_corpus_certification_constitutional_requirements_missing",
     );
   }
+
+  if (
+    candidate.coverage
+      .dayZero
+      .completion !==
+      100 ||
+    candidate.coverage
+      .dayZero
+      .missingRequirements
+      .length >
+      0 ||
+    candidate.coverage
+      .dayZero
+      .completeModules
+      .length !==
+    candidate.coverage
+      .dayZero
+      .requiredModules
+      .length
+  ) {
+    throw new Error(
+      "educational_corpus_certification_day_zero_coverage_incomplete",
+    );
+  }
 }
 
 
@@ -471,6 +502,12 @@ export function certifyEducationalCorpus(
         .measurementVersion,
   };
 
+  const dayZeroCoverage =
+    input.candidate
+      .coverage
+      .dayZero;
+
+
   const certificationId =
     `educational-corpus-certification:${hash({
       certificationVersion:
@@ -493,6 +530,8 @@ export function certifyEducationalCorpus(
       reason,
 
       constitutionalCoverage,
+
+      dayZeroCoverage,
 
       acknowledgedExcludedArtifactIds,
     })}` as EducationalCorpusCertificationId;
@@ -523,6 +562,8 @@ export function certifyEducationalCorpus(
     reason,
 
     constitutionalCoverage,
+
+    dayZeroCoverage,
 
     acknowledgedExcludedArtifactIds,
 
@@ -659,6 +700,73 @@ export function validateEducationalCorpusCertification(
       "educational-corpus-constitutional-requirements-changed",
     );
   }
+
+  const certifiedDayZeroCoverage =
+    input.certification
+      .dayZeroCoverage;
+
+  if (
+    !certifiedDayZeroCoverage
+  ) {
+    blockers.push(
+      "educational-corpus-day-zero-coverage-not-certified",
+    );
+  } else if (
+    JSON.stringify(
+      stableNormalize(
+        current.coverage
+          .dayZero,
+      ),
+    ) !==
+    JSON.stringify(
+      stableNormalize(
+        certifiedDayZeroCoverage,
+      ),
+    )
+  ) {
+    blockers.push(
+      "educational-corpus-day-zero-coverage-changed",
+    );
+
+    for (
+      const moduleId
+      of current.coverage
+        .dayZero
+        .requiredModules
+    ) {
+      const currentModule =
+        current.coverage
+          .dayZero
+          .modules[
+            moduleId
+          ];
+
+      const certifiedModule =
+        certifiedDayZeroCoverage
+          .modules[
+            moduleId
+          ];
+
+      if (
+        !certifiedModule ||
+        JSON.stringify(
+          stableNormalize(
+            currentModule,
+          ),
+        ) !==
+        JSON.stringify(
+          stableNormalize(
+            certifiedModule,
+          ),
+        )
+      ) {
+        blockers.push(
+          `educational-corpus-module-coverage-changed:${moduleId}`,
+        );
+      }
+    }
+  }
+
 
   const currentExcluded =
     sortedUnique(
