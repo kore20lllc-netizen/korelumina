@@ -1,0 +1,50 @@
+{
+  "id": "canonical:adr:ADR-0036 — Canonical Knowledge Domain Architecture",
+  "type": "CandidateDecision",
+  "title": "ADR-0036 — Canonical Knowledge Domain Architecture",
+  "summary": "Recovered architectural decision.",
+  "confidence": 0.8,
+  "evidenceRefs": [
+    "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+  ],
+  "relationships": {},
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/adr/ADR-0036-canonical-knowledge-domain-architecture.md",
+    "governance": {
+      "packageId": "KP-2026-000027",
+      "packageVersion": null,
+      "authority": null,
+      "owner": null,
+      "scope": null,
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
+        ],
+        "sourceLocations": [],
+        "contentRefs": [
+          "docs/adr/ADR-0036-canonical-knowledge-domain-architecture.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:knowledge-governance",
+      "reviewedAt": 1787396895015
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787397807374
+    }
+  }
+}

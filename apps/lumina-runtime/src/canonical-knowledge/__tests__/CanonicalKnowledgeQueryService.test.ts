@@ -1,5 +1,10 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import test, {
+  type TestContext,
+} from "node:test";
 
 import {
   CanonicalKnowledgeQueryService,
@@ -8,6 +13,7 @@ import {
 import {
   CanonicalKnowledgeStore,
 } from "../CanonicalKnowledgeStore.js";
+
 
 function createCanonicalItem(
   id: string,
@@ -47,11 +53,46 @@ function createCanonicalItem(
   };
 }
 
+
+function createIsolatedStore(
+  t:
+    TestContext,
+): CanonicalKnowledgeStore {
+  const root =
+    fs.mkdtempSync(
+      path.join(
+        os.tmpdir(),
+        "korelumina-canonical-query-",
+      ),
+    );
+
+  t.after(
+    () => {
+      fs.rmSync(
+        root,
+        {
+          recursive:
+            true,
+          force:
+            true,
+        },
+      );
+    },
+  );
+
+  return new CanonicalKnowledgeStore({
+    root,
+  });
+}
+
+
 test(
   "retrieves canonical knowledge from natural-language agent query terms",
-  () => {
+  t => {
     const store =
-      new CanonicalKnowledgeStore();
+      createIsolatedStore(
+        t,
+      );
 
     store.registerGoverned(
       createCanonicalItem(
@@ -91,11 +132,14 @@ test(
   },
 );
 
+
 test(
   "ranks items with more matching query terms first",
-  () => {
+  t => {
     const store =
-      new CanonicalKnowledgeStore();
+      createIsolatedStore(
+        t,
+      );
 
     store.registerGoverned(
       createCanonicalItem(
@@ -130,11 +174,14 @@ test(
   },
 );
 
+
 test(
   "returns all canonical knowledge when query contains no searchable terms",
-  () => {
+  t => {
     const store =
-      new CanonicalKnowledgeStore();
+      createIsolatedStore(
+        t,
+      );
 
     store.registerGoverned(
       createCanonicalItem(

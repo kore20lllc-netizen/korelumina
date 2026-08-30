@@ -1,0 +1,106 @@
+{
+  "id": "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+  "type": "CandidateArtifact",
+  "title": "CA-002 — Canonical Knowledge",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e719ff2379e18ce03e779b81f58d6d0e0a6a72dcfb3ba105704cd4e20935917c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
+    "checksum": "sha256:31f2b96b0528af57303a4fb981a7c2a6c5028ca702329ff008f174cd34191042",
+    "capturedAt": 1787724067184,
+    "observedAt": 1787722039000,
+    "authorityClass": "Constitutional Amendment",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Canonical Knowledge governance",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "architecture",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+      "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+      "genesisManifestIndex": 1898,
+      "genesisAdmissionIdentity": "genesis-admission:62deaa5ae1648347450f566ced08791f7191dbcfbfa3ebd03689bb4a79832bf3",
+      "historicalSourceId": "genesis-source:document:derived:e719ff2379e18ce03e779b81f58d6d0e0a6a72dcfb3ba105704cd4e20935917c",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Constitutional Amendment",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Canonical Knowledge governance",
+      "version": "1.0.0",
+      "sourceLocation": "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
+      "documentClassification": "architecture",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "CA-002 — Canonical Knowledge",
+        "status": "Constitutional Amendment Record",
+        "approvalDate": "2026-07-31",
+        "documentClassification": "architecture",
+        "sourceLocation": "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787724067189,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000033",
+      "packageVersion": "1.0.0",
+      "authority": "Constitutional Amendment",
+      "owner": "Constitutional Office",
+      "scope": "Canonical Knowledge governance",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+        ],
+        "sourceLocations": [
+          "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md"
+        ],
+        "contentRefs": [
+          "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787741010778,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787741341344
+    }
+  }
+}

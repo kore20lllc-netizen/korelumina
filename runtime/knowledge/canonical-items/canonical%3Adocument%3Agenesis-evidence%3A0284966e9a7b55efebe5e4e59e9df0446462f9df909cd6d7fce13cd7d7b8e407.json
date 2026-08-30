@@ -1,0 +1,106 @@
+{
+  "id": "canonical:document:genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407",
+  "type": "CandidateArtifact",
+  "title": "CA-005 — Learning Constitution",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:55c863830697ee78e70c6ade6213cca7dea17de9019c0a0d8088a52f4997a3a0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+    "checksum": "sha256:45ffe814a503cd640ba188381d8d8d2e0445fc36b4d748df053638e2a8547b3a",
+    "capturedAt": 1787724067529,
+    "observedAt": 1787722039000,
+    "authorityClass": "Constitutional Amendment",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Chief Agent education, activation readiness, and continuous learning governance",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "architecture",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+      "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+      "genesisManifestIndex": 1901,
+      "genesisAdmissionIdentity": "genesis-admission:e274a8e435982f429d0af4a27f87119fdaa16174c889fafe72f3858087a9e1ea",
+      "historicalSourceId": "genesis-source:document:derived:55c863830697ee78e70c6ade6213cca7dea17de9019c0a0d8088a52f4997a3a0",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Constitutional Amendment",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Chief Agent education, activation readiness, and continuous learning governance",
+      "version": "1.0.0",
+      "sourceLocation": "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+      "documentClassification": "architecture",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "CA-005 — Learning Constitution",
+        "status": "Constitutional Amendment Record",
+        "approvalDate": "2026-07-31",
+        "documentClassification": "architecture",
+        "sourceLocation": "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787724067533,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000036",
+      "packageVersion": "1.0.0",
+      "authority": "Constitutional Amendment",
+      "owner": "Constitutional Office",
+      "scope": "Chief Agent education, activation readiness, and continuous learning governance",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407"
+        ],
+        "sourceLocations": [
+          "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md"
+        ],
+        "contentRefs": [
+          "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787741010861,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787741341465
+    }
+  }
+}

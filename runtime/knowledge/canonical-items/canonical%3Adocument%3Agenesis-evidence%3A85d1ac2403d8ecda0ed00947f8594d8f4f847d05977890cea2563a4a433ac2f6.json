@@ -1,0 +1,105 @@
+{
+  "id": "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+  "type": "CandidateArtifact",
+  "title": "KoreLumina Canonical Document Hierarchy",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+    "checksum": "sha256:7394c8eb2e6e56343a95ad688d078f455d13d3109bca2c2cf84e37d6bedd22ff",
+    "capturedAt": 1787724067632,
+    "observedAt": 1787722039000,
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Organization-wide",
+    "version": "1.0.0",
+    "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "canonical",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+      "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+      "genesisManifestIndex": 1902,
+      "genesisAdmissionIdentity": "genesis-admission:e29aa82e6ecf985109992e6d7649c843973f3de28e5c95f580fe320733b18ecd",
+      "historicalSourceId": "genesis-source:document:derived:f91e1157e311e01817936f4a75cdfe3e960fd1c1763c2d8ca5a4457ea7528454",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Supreme",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Organization-wide",
+      "version": "1.0.0",
+      "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+      "documentClassification": "canonical",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KoreLumina Canonical Document Hierarchy",
+        "status": "Canonical",
+        "documentClassification": "canonical",
+        "sourceLocation": "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787724067636,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000037",
+      "packageVersion": "1.0.0",
+      "authority": "Supreme",
+      "owner": "Constitutional Office",
+      "scope": "Organization-wide",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6"
+        ],
+        "sourceLocations": [
+          "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+        ],
+        "contentRefs": [
+          "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787741010985,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787741341503
+    }
+  }
+}

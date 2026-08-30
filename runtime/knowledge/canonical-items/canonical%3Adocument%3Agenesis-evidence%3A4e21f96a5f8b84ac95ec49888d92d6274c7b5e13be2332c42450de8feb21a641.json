@@ -1,0 +1,105 @@
+{
+  "id": "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+  "type": "CandidateArtifact",
+  "title": "KoreLumina Blueprint",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:1a37ca3666cd11b02310711074eb4d8b092527b90a036696e15ba9b476ad00e1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "BLUEPRINT.md",
+    "checksum": "sha256:d12521aeabcf8789f4b930db73f8916f1a6685b68f95f04814bb0cbb75ca2f23",
+    "capturedAt": 1787724066953,
+    "observedAt": 1787722039000,
+    "authorityClass": "Architecture",
+    "approvalState": "approved",
+    "owner": "Chief Systems Architect",
+    "scope": "Platform",
+    "version": "1.0.0",
+    "sourceLocation": "BLUEPRINT.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "blueprint",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+      "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+      "genesisManifestIndex": 1896,
+      "genesisAdmissionIdentity": "genesis-admission:76ef5d61e8f47517fabed01671438f403bd871c4f878a3290d8f750ae4b7b089",
+      "historicalSourceId": "genesis-source:document:derived:1a37ca3666cd11b02310711074eb4d8b092527b90a036696e15ba9b476ad00e1",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Architecture",
+      "approvalState": "approved",
+      "owner": "Chief Systems Architect",
+      "scope": "Platform",
+      "version": "1.0.0",
+      "sourceLocation": "BLUEPRINT.md",
+      "documentClassification": "blueprint",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KoreLumina Blueprint",
+        "status": "Canonical",
+        "documentClassification": "blueprint",
+        "sourceLocation": "BLUEPRINT.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787724066966,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000031",
+      "packageVersion": "1.0.0",
+      "authority": "Architecture",
+      "owner": "Chief Systems Architect",
+      "scope": "Platform",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641"
+        ],
+        "sourceLocations": [
+          "BLUEPRINT.md"
+        ],
+        "contentRefs": [
+          "BLUEPRINT.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787741010729,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787741341265
+    }
+  }
+}

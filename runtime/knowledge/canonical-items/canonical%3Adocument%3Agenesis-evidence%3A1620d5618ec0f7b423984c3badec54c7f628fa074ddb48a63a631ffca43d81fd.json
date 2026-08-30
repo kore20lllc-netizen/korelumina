@@ -1,0 +1,106 @@
+{
+  "id": "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd",
+  "type": "CandidateArtifact",
+  "title": "CA-001 — Knowledge Package",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a73908e834e1e89cde72e0b939e90f194343ed33f3db81d4239d62b9e81da434"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
+    "checksum": "sha256:44cfe8df49159e986b3c678cd571bf55504a90287919969ef6488f869bd9610f",
+    "capturedAt": 1787724067073,
+    "observedAt": 1787722039000,
+    "authorityClass": "Constitutional Amendment",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Knowledge Package governance",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "architecture",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:ce0115c81e4adef4eeb3f9cfad624cb5183f0f8edb8687dc9da8e024974f8b6b",
+      "genesisManifestId": "genesis-manifest:76be7f8f406feef5c7a23af3551006d0e36a8bed7d372fe34353d6d1731e4a4a",
+      "genesisManifestIndex": 1897,
+      "genesisAdmissionIdentity": "genesis-admission:19e6f0e91d71d4a50be78f77ad1215d47a1a8286a4fc893bceeceb26f1420e32",
+      "historicalSourceId": "genesis-source:document:derived:a73908e834e1e89cde72e0b939e90f194343ed33f3db81d4239d62b9e81da434",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Constitutional Amendment",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Knowledge Package governance",
+      "version": "1.0.0",
+      "sourceLocation": "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
+      "documentClassification": "architecture",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "CA-001 — Knowledge Package",
+        "status": "Constitutional Amendment Record",
+        "approvalDate": "2026-07-31",
+        "documentClassification": "architecture",
+        "sourceLocation": "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787724067082,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000032",
+      "packageVersion": "1.0.0",
+      "authority": "Constitutional Amendment",
+      "owner": "Constitutional Office",
+      "scope": "Knowledge Package governance",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd"
+        ],
+        "sourceLocations": [
+          "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md"
+        ],
+        "contentRefs": [
+          "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787741010895,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: source governance metadata verified, documentation validation passed, and evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787741341306
+    }
+  }
+}

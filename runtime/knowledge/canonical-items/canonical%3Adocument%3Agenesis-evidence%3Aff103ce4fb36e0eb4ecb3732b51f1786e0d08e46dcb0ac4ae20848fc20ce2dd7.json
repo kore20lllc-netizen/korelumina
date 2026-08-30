@@ -1,0 +1,126 @@
+{
+  "id": "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+  "type": "CandidateArtifact",
+  "title": "KR-005 — Repository Knowledge Recovery Specification",
+  "summary": "# KR-005 — Repository Knowledge Recovery Specification ## Status Accepted --- # Purpose Define the canonical process for recovering engineering knowledge from an existing repository. This specification governs every future recovery implementation. Recovery implementations MUST conform to this specification. --- # Recovery Philosophy The repository is the first evidence corpus. Recovery extracts existing engineering knowledge. Recovery does not invent knowledge. --- # Recovery Pipeline Reposit...",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40"
+    ],
+    "genesisReplay": [
+      "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+    "checksum": "sha256:4351f034f1633141b9ea93da09a6299214e56721ad0864c381d694449672d4b4",
+    "capturedAt": 1788003246993,
+    "observedAt": 1783042904000,
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Organization-wide",
+    "version": "1.0.0",
+    "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+    "supersedes": [
+      "KP-2026-000043"
+    ],
+    "lineage": [
+      "KP-2026-000043"
+    ],
+    "dependencies": [],
+    "documentClassification": "document",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:594785f5903d452c5a13ba65272d84785ad836ccd12e3c96b640ef66221d3a61",
+      "genesisManifestId": "genesis-manifest:9cf5cd9ab715d0ccf5bc8b173afe26369b5941d56e549172b4a75c95e85b705b",
+      "genesisManifestIndex": 0,
+      "genesisAdmissionIdentity": "genesis-admission:653acf82ec32bb176e502d1b6717304940ed0e2f94f27c58613bbc647204795b",
+      "historicalSourceId": "genesis-source:document:derived:3149acdd274aae0df7d776d07a613eb738778473ee19937873ce4d83fed3ee40",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "Supreme",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Organization-wide",
+      "version": "1.0.0",
+      "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md",
+      "documentClassification": "document",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KR-005 — Repository Knowledge Recovery Specification",
+        "status": "Accepted",
+        "documentClassification": "document",
+        "sourceLocation": "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+      },
+      "authorityOwner": "Constitutional Office",
+      "authorityScope": "Organization-wide",
+      "authorityVersion": "1.0.0",
+      "historicalEvidenceReviewDecisionId": "genesis-historical-evidence-review:99ecc2eac058fb19f1d02926e9a035debbe225e7339c4c6465d9f335c4627f3d",
+      "historicalEvidenceReviewReviewerId": "human:constitutional-office",
+      "historicalEvidenceReviewDecidedAt": 1788031093641
+    },
+    "reprocessing": {
+      "attemptId": "kr005-remediation-governance-lineage-v1",
+      "priorManufacturingRunId": "KMR-08d7fa6dc4e5460b9797",
+      "priorPackageId": "KP-2026-000043",
+      "reason": "Propagate persisted Constitutional Office review authority into Knowledge Manufacturing governance metadata."
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1788034421855,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000044",
+      "packageVersion": "1.0.0",
+      "authority": "Supreme",
+      "owner": "Constitutional Office",
+      "scope": "Organization-wide",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+        ],
+        "sourceLocations": [
+          "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+        ],
+        "contentRefs": [
+          "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [
+        "KP-2026-000043"
+      ],
+      "dependencies": [],
+      "supersedes": [
+        "KP-2026-000043"
+      ],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1788049857950,
+      "reviewReason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1788056436342
+    }
+  }
+}

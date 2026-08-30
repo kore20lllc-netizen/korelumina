@@ -1,0 +1,105 @@
+{
+  "id": "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+  "type": "CandidateArtifact",
+  "title": "KoreLumina Platform Constitution",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:37547f21d0d6c4dcf80109771afc52016ec0c60f75cec5bb4ad9194a46afc9b5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451"
+    ]
+  },
+  "createdAt": 1788060829292,
+  "updatedAt": 1788060829292,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+    "checksum": "sha256:65a0886c9dab23cee6511c49259aa2f2e58e3ce688886d28cc0a0b24ba1b89e1",
+    "capturedAt": 1787785148165,
+    "observedAt": 1787784532000,
+    "authorityClass": "architecture",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "scope": "Platform",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "architecture",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:bbdc88e54a89b3c31cc9e7afe027cc9ac3504c26bcf79023a87412c2ff8d2632",
+      "genesisManifestId": "genesis-manifest:e514d4c1ef3592f940138b65c7d8a6b1da84fa021f29d32cfb71b79d2500f451",
+      "genesisManifestIndex": 1152,
+      "genesisAdmissionIdentity": "genesis-admission:6bcc0f5bed1f89d3d270e0795d2b9e78574b3d4ec5c47326c807b8db1e042c79",
+      "historicalSourceId": "genesis-source:document:derived:37547f21d0d6c4dcf80109771afc52016ec0c60f75cec5bb4ad9194a46afc9b5",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "architecture",
+      "approvalState": "approved",
+      "owner": "Constitutional Office",
+      "scope": "Platform",
+      "version": "1.0.0",
+      "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+      "documentClassification": "architecture",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KoreLumina Platform Constitution",
+        "status": "Authoritative",
+        "documentClassification": "architecture",
+        "sourceLocation": "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1787785148171,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000039",
+      "packageVersion": "1.0.0",
+      "authority": "architecture",
+      "owner": "Constitutional Office",
+      "scope": "Platform",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6"
+        ],
+        "sourceLocations": [
+          "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+        ],
+        "contentRefs": [
+          "docs/architecture/00_PLATFORM_CONSTITUTION.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-governance",
+      "reviewedAt": 1787799798937,
+      "reviewReason": "M51.4 governed Educational Corpus curriculum review: Platform Constitution governance identity verified through CA-006, documentation validation passed, and Genesis evidence lineage reviewed."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1787800003360
+    }
+  }
+}

@@ -7,6 +7,11 @@ import type {
 } from "./CanonicalKnowledgeItem.js";
 
 import {
+  CanonicalKnowledgePersistence,
+  type CanonicalKnowledgePersistenceOptions,
+} from "./CanonicalKnowledgePersistence.js";
+
+import {
   CanonicalKnowledgeRegistry,
 } from "./CanonicalKnowledgeRegistry.js";
 
@@ -18,6 +23,11 @@ import {
   KnowledgePromotionPolicy,
 } from "./KnowledgePromotionPolicy.js";
 
+
+export interface CanonicalKnowledgeStoreOptions
+  extends CanonicalKnowledgePersistenceOptions {}
+
+
 export class CanonicalKnowledgeStore {
   private readonly promoter =
     new KnowledgePromoter();
@@ -25,12 +35,39 @@ export class CanonicalKnowledgeStore {
   private readonly registry =
     new CanonicalKnowledgeRegistry();
 
+  private readonly persistence:
+    CanonicalKnowledgePersistence;
+
   private readonly policy =
     new KnowledgePromotionPolicy();
 
+
+  constructor(
+    options:
+      CanonicalKnowledgeStoreOptions = {},
+  ) {
+    this.persistence =
+      new CanonicalKnowledgePersistence(
+        options,
+      );
+
+    for (
+      const item
+      of this.persistence.list()
+    ) {
+      this.registry.register(
+        item,
+      );
+    }
+  }
+
+
   promote(
-    item: KnowledgeIRItem,
-  ): CanonicalKnowledgeItem | undefined {
+    item:
+      KnowledgeIRItem,
+  ):
+    CanonicalKnowledgeItem |
+    undefined {
     const decision =
       this.policy.evaluate(
         item,
@@ -48,20 +85,26 @@ export class CanonicalKnowledgeStore {
         item,
       );
 
-    this.registry.register(
+    this.registerGoverned(
       canonical,
     );
 
     return canonical;
   }
 
-  promoteAll(
-    items: readonly KnowledgeIRItem[],
-  ): CanonicalKnowledgeItem[] {
-    const promoted: CanonicalKnowledgeItem[] =
-      [];
 
-    for (const item of items) {
+  promoteAll(
+    items:
+      readonly KnowledgeIRItem[],
+  ): CanonicalKnowledgeItem[] {
+    const promoted:
+      CanonicalKnowledgeItem[] =
+        [];
+
+    for (
+      const item
+      of items
+    ) {
       const canonical =
         this.promote(
           item,
@@ -79,9 +122,15 @@ export class CanonicalKnowledgeStore {
     return promoted;
   }
 
+
   registerGoverned(
-    item: CanonicalKnowledgeItem,
+    item:
+      CanonicalKnowledgeItem,
   ): CanonicalKnowledgeItem {
+    this.persistence.save(
+      item,
+    );
+
     this.registry.register(
       item,
     );
@@ -89,23 +138,62 @@ export class CanonicalKnowledgeStore {
     return item;
   }
 
+
   get(
-    id: string,
-  ): CanonicalKnowledgeItem | undefined {
-    return this.registry.get(
-      id,
+    id:
+      string,
+  ):
+    CanonicalKnowledgeItem |
+    undefined {
+    const registered =
+      this.registry.get(
+        id,
+      );
+
+    if (
+      registered
+    ) {
+      return registered;
+    }
+
+    const persisted =
+      this.persistence.get(
+        id,
+      );
+
+    if (
+      !persisted
+    ) {
+      return undefined;
+    }
+
+    this.registry.register(
+      persisted,
     );
+
+    return persisted;
   }
 
-  list(): CanonicalKnowledgeItem[] {
+
+  list():
+    CanonicalKnowledgeItem[] {
     return this.registry.list();
   }
+
 
   size(): number {
     return this.registry.size();
   }
 
+
   clear(): void {
+    /*
+     * clear() retains its historical meaning:
+     * clear the in-memory view only.
+     *
+     * Durable canonical knowledge is governance state and must
+     * never be deleted as an incidental cache-reset operation.
+     */
     this.registry.clear();
   }
 }
