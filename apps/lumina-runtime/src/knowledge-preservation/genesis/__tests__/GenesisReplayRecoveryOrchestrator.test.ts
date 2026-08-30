@@ -15,6 +15,10 @@ import {
   createKnowledgePreservationPlatform,
 } from "../../bootstrap/index.js";
 
+import {
+  FileEvidencePersistenceStore,
+} from "../../evidence/index.js";
+
 import type {
   GenesisReplayScope,
   GenesisSourceManifestBuildResult,
@@ -468,6 +472,32 @@ test(
           1,
       });
 
+    /*
+     * Position a is already terminal before production recovery begins.
+     * Recovery must therefore continue from manifest index 1.
+     */
+    assert.equal(
+      fixture.execution
+        .state
+        .currentManifestIndex,
+      1,
+    );
+
+    assert.equal(
+      fixture.execution
+        .state
+        .lastCompletedManifestIndex,
+      0,
+    );
+
+    assert.equal(
+      fixture.execution
+        .state
+        .dispositions
+        .length,
+      1,
+    );
+
     const platform =
       createKnowledgePreservationPlatform();
 
@@ -529,24 +559,248 @@ test(
     );
 
     /*
-     * Position zero was already terminal in persisted Genesis
-     * state. Production recovery therefore admits only b and c.
+     * Recovery must persist the advanced execution, not merely
+     * return an in-memory completed state.
      */
-    const productionEvidenceIds =
+    const persistedExecution =
+      fixture.persistence
+        .loadExecution(
+          fixture.plan.replayId,
+        );
+
+    assert.ok(
+      persistedExecution,
+    );
+
+    assert.deepEqual(
+      persistedExecution,
+      result.runnerResult
+        .execution,
+    );
+
+    assert.equal(
+      persistedExecution
+        .state
+        .currentManifestIndex,
+      null,
+    );
+
+    assert.equal(
+      persistedExecution
+        .state
+        .lastCompletedManifestIndex,
+      2,
+    );
+
+    assert.equal(
+      persistedExecution
+        .state
+        .progress
+        .completedSources,
+      3,
+    );
+
+    assert.equal(
+      persistedExecution
+        .state
+        .progress
+        .admittedSources,
+      3,
+    );
+
+    const [
+      positionA,
+      positionB,
+      positionC,
+    ] =
+      persistedExecution
+        .state
+        .dispositions;
+
+    if (
+      !positionA ||
+      positionA.disposition !==
+        "ADMITTED" ||
+      !positionB ||
+      positionB.disposition !==
+        "ADMITTED" ||
+      !positionC ||
+      positionC.disposition !==
+        "ADMITTED"
+    ) {
+      throw new Error(
+        "expected three admitted replay dispositions",
+      );
+    }
+
+    assert.equal(
+      positionA
+        .historicalSourceId,
+      fixture.manifestBuild
+        .manifest
+        .entries[0]
+        ?.historicalSourceId,
+    );
+
+    assert.equal(
+      positionB
+        .historicalSourceId,
+      fixture.manifestBuild
+        .manifest
+        .entries[1]
+        ?.historicalSourceId,
+    );
+
+    assert.equal(
+      positionC
+        .historicalSourceId,
+      fixture.manifestBuild
+        .manifest
+        .entries[2]
+        ?.historicalSourceId,
+    );
+
+    /*
+     * GenesisProductionReplayAdmissionAdapter uses the standard
+     * Evidence persistence store for correlation-only Evidence.
+     *
+     * Test processes resolve the default store into the isolated
+     * test-knowledge root, so this observes the same persistence
+     * surface used by the production adapter without touching
+     * production knowledge.
+     */
+    const evidenceStore =
+      new FileEvidencePersistenceStore();
+
+    assert.ok(
+      positionA.evidenceId,
+    );
+
+    assert.ok(
+      positionB.evidenceId,
+    );
+
+    assert.ok(
+      positionC.evidenceId,
+    );
+
+    const positionAEvidence =
+      evidenceStore.load(
+        positionA.evidenceId,
+      );
+
+    const positionBEvidence =
+      evidenceStore.load(
+        positionB.evidenceId,
+      );
+
+    const positionCEvidence =
+      evidenceStore.load(
+        positionC.evidenceId,
+      );
+
+    /*
+     * a was completed by the synthetic prefix before recovery.
+     * If production recovery restarted from zero, production
+     * admission would have persisted this Evidence.
+     */
+    assert.equal(
+      positionAEvidence,
+      null,
+    );
+
+    if (
+      !positionBEvidence ||
+      !positionCEvidence
+    ) {
+      throw new Error(
+        "expected recovered commit Evidence for b and c",
+      );
+    }
+
+    assert.equal(
+      positionBEvidence.id,
+      positionB.evidenceId,
+    );
+
+    assert.equal(
+      positionBEvidence.type,
+      "commit",
+    );
+
+    assert.equal(
+      positionBEvidence
+        .contentRef,
+      "git:commit:b",
+    );
+
+    assert.equal(
+      positionBEvidence
+        .checksum,
+      "sha256:b",
+    );
+
+    assert.equal(
+      positionBEvidence
+        .metadata
+        .historicalSourceId,
+      "genesis-source:commit:b",
+    );
+
+    assert.equal(
+      positionBEvidence
+        .metadata
+        .genesisManifestIndex,
+      1,
+    );
+
+    assert.equal(
+      positionCEvidence.id,
+      positionC.evidenceId,
+    );
+
+    assert.equal(
+      positionCEvidence.type,
+      "commit",
+    );
+
+    assert.equal(
+      positionCEvidence
+        .contentRef,
+      "git:commit:c",
+    );
+
+    assert.equal(
+      positionCEvidence
+        .checksum,
+      "sha256:c",
+    );
+
+    assert.equal(
+      positionCEvidence
+        .metadata
+        .historicalSourceId,
+      "genesis-source:commit:c",
+    );
+
+    assert.equal(
+      positionCEvidence
+        .metadata
+        .genesisManifestIndex,
+      2,
+    );
+
+    /*
+     * Raw repository commits are correlation-only Evidence.
+     * Successful production recovery therefore creates no direct
+     * Knowledge Manufacturing runs.
+     */
+    assert.equal(
       platform
         .manufacturingRunService
         .list()
-        .map(
-          (
-            run,
-          ) =>
-            run.evidenceId,
-        );
-
-    assert.equal(
-      productionEvidenceIds
         .length,
-      2,
+      0,
     );
   },
 );
