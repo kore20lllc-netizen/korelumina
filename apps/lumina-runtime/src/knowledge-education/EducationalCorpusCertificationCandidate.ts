@@ -3,6 +3,7 @@ import {
 } from "node:crypto";
 
 import {
+  composeHistoricalConversationIntoDayZeroCoverage,
   measureDayZeroEducationalCoverage,
 } from "./DayZeroEducationalCoverage.js";
 
@@ -380,9 +381,18 @@ export function buildEducationalCorpusCertificationCandidate(
           ),
       );
 
-  const dayZeroCoverage =
+  const currentDayZeroCoverage =
     measureDayZeroEducationalCoverage(
       curriculumArtifacts,
+    );
+
+  const dayZeroCoverage =
+    composeHistoricalConversationIntoDayZeroCoverage(
+      currentDayZeroCoverage,
+
+      input.runtime
+        .historicalConversationCoverage ??
+        null,
     );
 
   const constitutionalCoverage =

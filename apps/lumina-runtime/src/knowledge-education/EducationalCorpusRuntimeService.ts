@@ -26,7 +26,12 @@ import type {
   KnowledgeEducationSnapshot,
 } from "./KnowledgeEducationProjectionService.js";
 
+import {
+  FileGenesisConversationAcquisitionPersistenceStore,
+} from "../knowledge-preservation/genesis/index.js";
+
 import type {
+  GenesisConversationAcquisitionLatestState,
   GenesisDayZeroCertificationRuntimeProjection,
   GenesisOperationalProjection,
 } from "../knowledge-preservation/genesis/index.js";
@@ -42,6 +47,14 @@ import {
 import {
   assembleEducationalCorpusHistoricalEvidence,
 } from "./EducationalCorpusHistoricalEvidence.js";
+
+import {
+  measureHistoricalConversationEducationalCoverage,
+} from "./HistoricalConversationEducationalCoverage.js";
+
+import type {
+  HistoricalConversationEducationalCoverageResult,
+} from "./HistoricalConversationEducationalCoverage.js";
 
 import {
   buildEducationalCorpusCertificationCandidate,
@@ -74,6 +87,10 @@ export interface EducationalCorpusRuntimeProjection {
 
   sourceContract:
     EducationalCorpusSourceContract |
+    null;
+
+  historicalConversationCoverage?:
+    HistoricalConversationEducationalCoverageResult |
     null;
 
   dayZeroState:
@@ -123,6 +140,13 @@ export interface EducationalCorpusGenesisHistoricalReader {
 }
 
 
+export interface EducationalCorpusConversationEvidenceReader {
+  loadLatest():
+    GenesisConversationAcquisitionLatestState |
+    null;
+}
+
+
 export class EducationalCorpusRuntimeService {
   constructor(
     private readonly persistence:
@@ -139,6 +163,10 @@ export class EducationalCorpusRuntimeService {
 
     private readonly authorityResolutions =
       new FileEducationalAuthorityResolutionStore(),
+
+    private readonly conversationEvidence:
+      EducationalCorpusConversationEvidenceReader =
+        new FileGenesisConversationAcquisitionPersistenceStore(),
   ) {}
 
 
@@ -191,6 +219,9 @@ export class EducationalCorpusRuntimeService {
           null,
 
         sourceContract:
+          null,
+
+        historicalConversationCoverage:
           null,
 
         dayZeroState:
@@ -250,6 +281,28 @@ export class EducationalCorpusRuntimeService {
 
             assessments:
               historicalAssessments,
+          })
+        : null;
+
+    const latestConversationAcquisition =
+      this.conversationEvidence
+        .loadLatest();
+
+    const persistedConversationEvidence =
+      latestConversationAcquisition
+        ?.state ===
+        "ACQUIRED"
+        ? latestConversationAcquisition
+            .evidence
+        : [];
+
+    const historicalConversationCoverage =
+      historicalEvidence
+        ? measureHistoricalConversationEducationalCoverage({
+            historicalEvidence,
+
+            conversationEvidence:
+              persistedConversationEvidence,
           })
         : null;
 
@@ -388,6 +441,8 @@ export class EducationalCorpusRuntimeService {
       currentCorpus,
 
       sourceContract,
+
+      historicalConversationCoverage,
 
       dayZeroState:
         dayZero.state,

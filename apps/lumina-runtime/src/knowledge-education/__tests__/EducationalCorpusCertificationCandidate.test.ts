@@ -17,116 +17,130 @@ import type {
   EducationalCorpus,
 } from "../EducationalCorpus.js";
 
-
-const constitutionalRefs = [
-  "docs/canon/VISION_2050.md",
-  "docs/architecture/00_PLATFORM_CONSTITUTION.md",
-  "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
-  "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
-  "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
-  "docs/architecture/amendments/CA-003_ORGANIZATIONAL_MEMORY_STEWARDSHIP.md",
-  "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
-  "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
-  "BLUEPRINT.md",
-];
+import {
+  certifiedEducationalCoverageRequirements,
+} from "../measurement/index.js";
 
 
-function artifact(
-  id:
-    string,
+function artifacts(
+  excludedModules:
+    readonly string[] = [],
+): EducationalArtifactProjection[] {
+  const excluded =
+    new Set(
+      excludedModules,
+    );
 
-  sourceRef:
-    string,
-): EducationalArtifactProjection {
-  return {
-    id,
+  return certifiedEducationalCoverageRequirements
+    .filter(
+      definition =>
+        !excluded.has(
+          definition.moduleId,
+        ),
+    )
+    .flatMap(
+      definition =>
+        definition.requirements.map(
+          (
+            requirement,
+            index,
+          ) => {
+            const sourceRef =
+              requirement.match
+                .sourceRefs?.[0] ??
+              `coverage:${definition.moduleId}:${requirement.id}`;
 
-    title:
-      id,
+            const id =
+              requirement.match
+                .artifactIds?.[0] ??
+              `artifact:${definition.moduleId}:${requirement.id}:${index}`;
 
-    kind:
-      "constitution",
+            return {
+              id,
 
-    category:
-      "constitutional",
+              title:
+                requirement.match
+                  .titleIncludes?.[0] ??
+                requirement.description,
 
-    authorityClass:
-      "constitutional",
+              kind:
+                (
+                  requirement.match
+                    .kinds?.[0] ??
+                  "knowledge-operations"
+                ) as EducationalArtifactProjection["kind"],
 
-    approvalState:
-      "approved",
+              category:
+                requirement.match
+                  .categories?.[0] ??
+                "curriculum",
 
-    owner:
-      "Constitutional Office",
+              authorityClass:
+                "constitutional",
 
-    scope:
-      "platform",
+              approvalState:
+                "approved",
 
-    version:
-      "1",
+              owner:
+                "Constitutional Office",
 
-    provenance:
-      sourceRef,
+              scope:
+                "platform",
 
-    source:
-      "canonical-knowledge",
+              version:
+                "1",
 
-    sourceRefs: [
-      sourceRef,
-    ],
+              provenance:
+                sourceRef,
 
-    lineage:
-      [],
+              source:
+                "canonical-knowledge",
 
-    dependencies:
-      [],
+              sourceRefs:
+                requirement.match
+                  .sourceRefs ??
+                [],
 
-    supersession:
-      "",
+              lineage:
+                [],
 
-    educationalStatus:
-      "completed",
+              dependencies:
+                [],
 
-    educationalImpact:
-      "Constitutional curriculum.",
+              supersession:
+                "",
 
-    relatedArtifacts:
-      [],
+              educationalStatus:
+                "completed",
 
-    relatedKnowledgePackages:
-      [],
+              educationalImpact:
+                requirement.description,
 
-    relatedCanonicalKnowledge: [
-      id,
-    ],
+              relatedArtifacts:
+                [],
 
-    relatedMemory:
-      [],
+              relatedKnowledgePackages:
+                [],
 
-    relatedMissions:
-      [],
+              relatedCanonicalKnowledge: [
+                id,
+              ],
 
-    relatedDecisions:
-      [],
+              relatedMemory:
+                [],
 
-    authors:
-      [],
-  };
-}
+              relatedMissions:
+                [],
 
+              relatedDecisions:
+                [],
 
-function artifacts():
-  EducationalArtifactProjection[] {
-  return constitutionalRefs.map(
-    (
-      sourceRef,
-      index,
-    ) =>
-      artifact(
-        `artifact-${index}`,
-        sourceRef,
-      ),
-  );
+              authors:
+                [],
+            };
+          },
+        ),
+    );
 }
 
 
@@ -376,7 +390,7 @@ function currentRuntime():
 
 
 test(
-  "CURRENT corpus with complete constitutional coverage produces READY candidate",
+  "CURRENT corpus with complete required Day-0 coverage produces READY candidate",
   () => {
     const result =
       buildEducationalCorpusCertificationCandidate({
@@ -431,10 +445,9 @@ test(
       currentRuntime();
 
     const limitedArtifacts =
-      artifacts().slice(
-        0,
-        -1,
-      );
+      artifacts([
+        "constitutional-literacy",
+      ]);
 
     const persisted =
       current.persistedCorpus!;
@@ -492,7 +505,7 @@ test(
       result.exceptions.some(
         item =>
           item.code ===
-          "required-constitutional-curriculum-missing",
+          "required-day-zero-curriculum-missing:constitutional-literacy",
       ),
     );
   },
