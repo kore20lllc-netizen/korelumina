@@ -186,6 +186,86 @@ export class ExecutiveDecisionService {
     return updated;
   }
 
+  implement(
+    decisionId: string,
+    actorId: string,
+    metadataPatch:
+      Readonly<
+        Record<string, unknown>
+      > = {},
+  ): ExecutiveDecision {
+
+    const existing =
+      this.get(
+        decisionId,
+      );
+
+    if (!existing) {
+      throw new Error(
+        `Unknown executive decision "${decisionId}".`,
+      );
+    }
+
+    if (
+      existing.status !==
+        "approved"
+    ) {
+      throw new Error(
+        `Executive decision "${decisionId}" must be approved before implementation.`,
+      );
+    }
+
+    const updated =
+      Object.freeze({
+        ...existing,
+
+        status:
+          "implemented" as const,
+
+        updatedAt:
+          Date.now(),
+
+        metadata:
+          Object.freeze({
+            ...existing.metadata,
+            ...metadataPatch,
+          }),
+      });
+
+    this.decisions.set(
+      decisionId,
+      updated,
+    );
+
+    saveExecutiveDecision(
+      updated,
+    );
+
+    this.timeline.record({
+      id:
+        `${decisionId}:implemented`,
+      sessionId:
+        updated.sessionId,
+      type:
+        "decision-approved",
+      actorId,
+      source:
+        "executive-decision",
+      title:
+        updated.title,
+      summary:
+        "Approved decision implemented.",
+      payload: {
+        decisionId,
+        implemented:
+          true,
+      },
+    });
+
+    return updated;
+  }
+
+
   get(
     id: string,
   ) {
