@@ -8,6 +8,12 @@ import {
   type CreateExecutiveApprovalInput,
 } from "./ExecutiveApproval.js";
 
+import {
+  listExecutiveApprovals,
+  loadExecutiveApproval,
+  saveExecutiveApproval,
+} from "./ExecutiveApprovalStore.js";
+
 export class ExecutiveApprovalService {
 
   private readonly approvals =
@@ -33,6 +39,10 @@ export class ExecutiveApprovalService {
 
     this.approvals.set(
       approval.id,
+      approval,
+    );
+
+    saveExecutiveApproval(
       approval,
     );
 
@@ -88,6 +98,10 @@ export class ExecutiveApprovalService {
 
     this.approvals.set(
       approvalId,
+      updated,
+    );
+
+    saveExecutiveApproval(
       updated,
     );
 
@@ -148,6 +162,10 @@ export class ExecutiveApprovalService {
       updated,
     );
 
+    saveExecutiveApproval(
+      updated,
+    );
+
     this.timeline.record({
       id:
         `${approvalId}:rejected`,
@@ -176,12 +194,49 @@ export class ExecutiveApprovalService {
   get(
     id: string,
   ) {
-    return this.approvals.get(
+    const registered =
+      this.approvals.get(
+        id,
+      );
+
+    if (
+      registered
+    ) {
+      return registered;
+    }
+
+    const persisted =
+      loadExecutiveApproval(
+        id,
+      );
+
+    if (
+      !persisted
+    ) {
+      return undefined;
+    }
+
+    this.approvals.set(
       id,
+      persisted,
     );
+
+    return persisted;
   }
 
   list() {
+    this.approvals.clear();
+
+    for (
+      const approval
+      of listExecutiveApprovals()
+    ) {
+      this.approvals.set(
+        approval.id,
+        approval,
+      );
+    }
+
     return Object.freeze(
       Array.from(
         this.approvals.values(),

@@ -8,6 +8,12 @@ import {
   type ExecutiveDecision,
 } from "./ExecutiveDecision.js";
 
+import {
+  listExecutiveDecisions,
+  loadExecutiveDecision,
+  saveExecutiveDecision,
+} from "./ExecutiveDecisionStore.js";
+
 export class ExecutiveDecisionService {
 
   private readonly decisions =
@@ -33,6 +39,10 @@ export class ExecutiveDecisionService {
 
     this.decisions.set(
       decision.id,
+      decision,
+    );
+
+    saveExecutiveDecision(
       decision,
     );
 
@@ -92,6 +102,10 @@ export class ExecutiveDecisionService {
       updated,
     );
 
+    saveExecutiveDecision(
+      updated,
+    );
+
     this.timeline.record({
       id:
         `${decisionId}:approved`,
@@ -146,6 +160,10 @@ export class ExecutiveDecisionService {
       updated,
     );
 
+    saveExecutiveDecision(
+      updated,
+    );
+
     this.timeline.record({
       id:
         `${decisionId}:rejected`,
@@ -171,12 +189,49 @@ export class ExecutiveDecisionService {
   get(
     id: string,
   ) {
-    return this.decisions.get(
+    const registered =
+      this.decisions.get(
+        id,
+      );
+
+    if (
+      registered
+    ) {
+      return registered;
+    }
+
+    const persisted =
+      loadExecutiveDecision(
+        id,
+      );
+
+    if (
+      !persisted
+    ) {
+      return undefined;
+    }
+
+    this.decisions.set(
       id,
+      persisted,
     );
+
+    return persisted;
   }
 
   list() {
+    this.decisions.clear();
+
+    for (
+      const decision
+      of listExecutiveDecisions()
+    ) {
+      this.decisions.set(
+        decision.id,
+        decision,
+      );
+    }
+
     return Object.freeze(
       Array.from(
         this.decisions.values(),
