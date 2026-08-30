@@ -5,7 +5,7 @@
   "rationale": "Authorize KP-2026-000044 to enter the governed promotion path after successful KR-005 remediation and approved human Canonical Review.",
   "requestedBy": "knowledge-governance",
   "approvedBy": "human-governance",
-  "status": "approved",
+  "status": "implemented",
   "evidence": [
     "KP-2026-000044",
     "KRB-2026-000010"
@@ -16,14 +16,19 @@
     "Does not certify the Educational Corpus."
   ],
   "createdAt": 1788054218844,
-  "updatedAt": 1788054218845,
+  "updatedAt": 1788056436343,
   "metadata": {
     "authorityType": "knowledge-promotion",
     "packageId": "KP-2026-000044",
     "canonicalReviewBatchId": "KRB-2026-000010",
     "canonicalReviewDecision": "approved",
     "promotionExecutionAuthorized": true,
-    "promotionExecutionPerformed": false,
-    "educationCertificationAuthorized": false
+    "promotionExecutionPerformed": true,
+    "educationCertificationAuthorized": false,
+    "promotionExecutionMode": "direct-governed",
+    "promotionExecutedAt": 1788056436343,
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+    ]
   }
 }

@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1788034421856,
-  "updatedAt": 1788049857950,
+  "updatedAt": 1788056436342,
   "data": {
     "id": "KP-2026-000044",
-    "state": "approved",
+    "state": "canonical",
     "sourceEvidenceRefs": [
       "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
     ],
@@ -189,6 +189,11 @@
         "state": "approved",
         "at": 1788049857950,
         "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
+      },
+      {
+        "state": "canonical",
+        "at": 1788056436342,
+        "reason": "governed_canonical_promotion"
       }
     ],
     "remediation": {
@@ -198,7 +203,7 @@
       "updatedAt": 1788034421856
     },
     "createdAt": 1788034421856,
-    "updatedAt": 1788049857950,
+    "updatedAt": 1788056436342,
     "metadata": {
       "sourceApprovalStates": [
         "approved"
@@ -226,7 +231,13 @@
           ],
           "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
         }
-      ]
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1788056436342,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+        ]
+      }
     }
   }
 }
