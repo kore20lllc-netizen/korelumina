@@ -1,0 +1,22 @@
+{
+  "id": "approval:executive-decision:knowledge-promotion:KP-2026-000044",
+  "sessionId": "knowledge-promotion:KP-2026-000044",
+  "decisionId": "executive-decision:knowledge-promotion:KP-2026-000044",
+  "requestedBy": "knowledge-governance",
+  "approverId": "human-governance",
+  "status": "approved",
+  "comments": "",
+  "createdAt": 1788054218844,
+  "metadata": {
+    "decisionStatus": "proposed",
+    "decisionTitle": "Authorize KR-005 canonical knowledge promotion",
+    "authorityType": "knowledge-promotion",
+    "packageId": "KP-2026-000044",
+    "canonicalReviewBatchId": "KRB-2026-000010",
+    "canonicalReviewDecision": "approved",
+    "promotionExecutionAuthorized": true,
+    "promotionExecutionPerformed": false,
+    "educationCertificationAuthorized": false
+  },
+  "decidedAt": 1788054218845
+}

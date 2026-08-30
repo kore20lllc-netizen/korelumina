@@ -1,0 +1,29 @@
+{
+  "id": "executive-decision:knowledge-promotion:KP-2026-000044",
+  "sessionId": "knowledge-promotion:KP-2026-000044",
+  "title": "Authorize KR-005 canonical knowledge promotion",
+  "rationale": "Authorize KP-2026-000044 to enter the governed promotion path after successful KR-005 remediation and approved human Canonical Review.",
+  "requestedBy": "knowledge-governance",
+  "approvedBy": "human-governance",
+  "status": "approved",
+  "evidence": [
+    "KP-2026-000044",
+    "KRB-2026-000010"
+  ],
+  "consequences": [
+    "Allows KP-2026-000044 to enter governed promotion.",
+    "Does not itself execute promotion.",
+    "Does not certify the Educational Corpus."
+  ],
+  "createdAt": 1788054218844,
+  "updatedAt": 1788054218845,
+  "metadata": {
+    "authorityType": "knowledge-promotion",
+    "packageId": "KP-2026-000044",
+    "canonicalReviewBatchId": "KRB-2026-000010",
+    "canonicalReviewDecision": "approved",
+    "promotionExecutionAuthorized": true,
+    "promotionExecutionPerformed": false,
+    "educationCertificationAuthorized": false
+  }
+}
