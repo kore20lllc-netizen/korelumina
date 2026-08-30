@@ -1,5 +1,15 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import test from "node:test";
+
+import {
+  saveExecutiveApproval,
+} from "../../../executive/approval/index.js";
+
+import {
+  saveExecutiveDecision,
+} from "../../../executive/decision/index.js";
 
 import {
   CanonicalKnowledgeStore,
@@ -46,6 +56,144 @@ import {
 
 const suffix =
   `${Date.now()}-${process.pid}`;
+
+
+function authorizePromotion(
+  packageId: string,
+): void {
+  const now =
+    Date.now();
+
+  const decisionId =
+    `executive-decision:knowledge-promotion:${packageId}`;
+
+  const approvalId =
+    `approval:${decisionId}`;
+
+  saveExecutiveDecision({
+    id:
+      decisionId,
+
+    sessionId:
+      `knowledge-promotion:${packageId}`,
+
+    title:
+      "Authorize test promotion",
+
+    rationale:
+      "Test Executive promotion authorization.",
+
+    requestedBy:
+      "knowledge-governance",
+
+    approvedBy:
+      "human-governance",
+
+    status:
+      "approved",
+
+    evidence:
+      [],
+
+    consequences:
+      [],
+
+    createdAt:
+      now,
+
+    updatedAt:
+      now,
+
+    metadata: {
+      authorityType:
+        "knowledge-promotion",
+
+      packageId,
+
+      promotionExecutionAuthorized:
+        true,
+
+      promotionExecutionPerformed:
+        false,
+    },
+  });
+
+  saveExecutiveApproval({
+    id:
+      approvalId,
+
+    sessionId:
+      `knowledge-promotion:${packageId}`,
+
+    decisionId,
+
+    requestedBy:
+      "knowledge-governance",
+
+    approverId:
+      "human-governance",
+
+    status:
+      "approved",
+
+    comments:
+      "",
+
+    createdAt:
+      now,
+
+    decidedAt:
+      now,
+
+    metadata:
+      {},
+  });
+}
+
+
+function removePromotionAuthorization(
+  packageId: string,
+): void {
+  const decisionId =
+    `executive-decision:knowledge-promotion:${packageId}`;
+
+  const approvalId =
+    `approval:${decisionId}`;
+
+  const decisionPath =
+    path.resolve(
+      process.cwd(),
+      "runtime/executive/decisions",
+      `${encodeURIComponent(
+        decisionId,
+      )}.json`,
+    );
+
+  const approvalPath =
+    path.resolve(
+      process.cwd(),
+      "runtime/executive/approvals",
+      `${encodeURIComponent(
+        approvalId,
+      )}.json`,
+    );
+
+  fs.rmSync(
+    decisionPath,
+    {
+      force:
+        true,
+    },
+  );
+
+  fs.rmSync(
+    approvalPath,
+    {
+      force:
+        true,
+    },
+  );
+}
 
 function policy(
   id:
@@ -466,6 +614,10 @@ test(
       ),
     ]);
 
+    authorizePromotion(
+      packageId,
+    );
+
     const {
       executor,
     } =
@@ -566,6 +718,15 @@ test(
           ),
       ),
     );
+
+    for (
+      const packageId
+      of packageIds
+    ) {
+      authorizePromotion(
+        packageId,
+      );
+    }
 
     const result =
       createExecutor()
@@ -783,6 +944,10 @@ test(
       ),
     ]);
 
+    authorizePromotion(
+      packageId,
+    );
+
     const canonicalStore =
       new CanonicalKnowledgeStore();
 
@@ -907,6 +1072,14 @@ test(
       ),
     ]);
 
+    authorizePromotion(
+      failId,
+    );
+
+    authorizePromotion(
+      passId,
+    );
+
     const packageService =
       new KnowledgePackageService();
 
@@ -1022,6 +1195,10 @@ test(
         policyId,
       ),
     ]);
+
+    authorizePromotion(
+      packageId,
+    );
 
     const packageService =
       new KnowledgePackageService();
@@ -1170,6 +1347,10 @@ test(
         policyId,
       ),
     ]);
+
+    authorizePromotion(
+      packageId,
+    );
 
     const before =
       loadCanonicalReviewPolicy(

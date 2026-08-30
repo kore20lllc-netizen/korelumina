@@ -6,6 +6,14 @@ import {
   CanonicalKnowledgeStore,
 } from "../../canonical-knowledge/CanonicalKnowledgeStore.js";
 
+import {
+  loadExecutiveApproval,
+} from "../../executive/approval/index.js";
+
+import {
+  loadExecutiveDecision,
+} from "../../executive/decision/index.js";
+
 import type {
   KnowledgePackage,
 } from "../package/index.js";
@@ -566,6 +574,105 @@ function validateApprovalProof(
 
   return null;
 }
+
+export function validateExecutivePromotionAuthorization(
+  packageId:
+    string,
+): string | null {
+  const decisionId =
+    `executive-decision:knowledge-promotion:${packageId}`;
+
+  const approvalId =
+    `approval:${decisionId}`;
+
+  const decision =
+    loadExecutiveDecision(
+      decisionId,
+    );
+
+  if (!decision) {
+    return "executive_promotion_decision_missing";
+  }
+
+  if (
+    decision.status !==
+      "approved"
+  ) {
+    return "executive_promotion_decision_not_approved";
+  }
+
+  if (
+    typeof decision.approvedBy !==
+      "string" ||
+    !decision.approvedBy.trim()
+  ) {
+    return "executive_promotion_approver_missing";
+  }
+
+  const metadata =
+    decision.metadata;
+
+  if (
+    metadata.authorityType !==
+      "knowledge-promotion"
+  ) {
+    return "executive_promotion_authority_type_mismatch";
+  }
+
+  if (
+    metadata.packageId !==
+      packageId
+  ) {
+    return "executive_promotion_package_identity_mismatch";
+  }
+
+  if (
+    metadata.promotionExecutionAuthorized !==
+      true
+  ) {
+    return "executive_promotion_not_authorized";
+  }
+
+  if (
+    metadata.promotionExecutionPerformed ===
+      true
+  ) {
+    return "executive_promotion_already_performed";
+  }
+
+  const approval =
+    loadExecutiveApproval(
+      approvalId,
+    );
+
+  if (!approval) {
+    return "executive_promotion_approval_missing";
+  }
+
+  if (
+    approval.status !==
+      "approved"
+  ) {
+    return "executive_promotion_approval_not_approved";
+  }
+
+  if (
+    approval.decisionId !==
+      decision.id
+  ) {
+    return "executive_promotion_approval_decision_mismatch";
+  }
+
+  if (
+    approval.approverId !==
+      decision.approvedBy
+  ) {
+    return "executive_promotion_approval_identity_mismatch";
+  }
+
+  return null;
+}
+
 
 function hasGovernanceIdentity(
   knowledgePackage:
@@ -1327,6 +1434,27 @@ export class AutonomousGovernedCanonicalPromotionExecutor {
       }
 
       try {
+        const executiveAuthorizationFailure =
+          validateExecutivePromotionAuthorization(
+            knowledgePackage.id,
+          );
+
+        if (
+          executiveAuthorizationFailure
+        ) {
+          record({
+            ...base,
+            disposition:
+              "exception",
+            canonicalKnowledgeIds:
+              [],
+            reason:
+              executiveAuthorizationFailure,
+          });
+
+          continue;
+        }
+
         const promoted =
           this.promotionService
             .promoteApprovedPackage(
