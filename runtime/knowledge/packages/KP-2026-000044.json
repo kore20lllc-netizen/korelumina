@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1788034421856,
-  "updatedAt": 1788034421856,
+  "updatedAt": 1788049857950,
   "data": {
     "id": "KP-2026-000044",
-    "state": "awaiting_review",
+    "state": "approved",
     "sourceEvidenceRefs": [
       "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
     ],
@@ -124,7 +124,7 @@
       ]
     },
     "authority": "Supreme",
-    "approvalState": "pending_review",
+    "approvalState": "approved",
     "owner": "Constitutional Office",
     "scope": "Organization-wide",
     "version": "1.0.0",
@@ -184,6 +184,11 @@
       {
         "state": "awaiting_review",
         "at": 1788034421856
+      },
+      {
+        "state": "approved",
+        "at": 1788049857950,
+        "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
       }
     ],
     "remediation": {
@@ -193,10 +198,34 @@
       "updatedAt": 1788034421856
     },
     "createdAt": 1788034421856,
-    "updatedAt": 1788034421856,
+    "updatedAt": 1788049857950,
     "metadata": {
       "sourceApprovalStates": [
         "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000044",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human-governance",
+        "reviewedAt": 1788049857950,
+        "evidenceConsidered": [
+          "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+        ],
+        "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000044",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human-governance",
+          "reviewedAt": 1788049857950,
+          "evidenceConsidered": [
+            "genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+          ],
+          "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation."
+        }
       ]
     }
   }

@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000010",
+  "packageIds": [
+    "KP-2026-000044"
+  ],
+  "status": "approved",
+  "reviewerId": "human-governance",
+  "decision": "approved",
+  "reason": "Human Canonical Review approved KP-2026-000044 after governed KR-005 remediation cleared documentation governance validation.",
+  "createdAt": 1788049857950,
+  "reviewedAt": 1788049857950
+}
