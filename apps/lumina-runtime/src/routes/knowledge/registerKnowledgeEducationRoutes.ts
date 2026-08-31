@@ -97,7 +97,11 @@ export function registerKnowledgeEducationRoutes(
       return res.json(
         runtime
           .projectionService
-          .snapshot(),
+          .snapshot(
+            runtime
+              .educationalCorpusService
+              .readDayZeroCoverage(),
+          ),
       );
     },
   );

@@ -1,4 +1,8 @@
 import type {
+  DayZeroEducationalCoverage,
+} from "./DayZeroEducationalCoverage.js";
+
+import type {
   CanonicalKnowledgeItem,
 } from "../canonical-knowledge/index.js";
 
@@ -122,7 +126,11 @@ export class KnowledgeEducationProjectionService {
       CanonicalKnowledgeProjectionStore,
   ) {}
 
-  snapshot():
+  snapshot(
+    dayZeroCoverage:
+      DayZeroEducationalCoverage |
+      null = null,
+  ):
     KnowledgeEducationSnapshot {
     const canonical =
       this.canonicalStore
@@ -177,43 +185,102 @@ export class KnowledgeEducationProjectionService {
       modules:
         certifiedEducationalModules.map(
           (module) => {
-            const coverage =
-              measureEducationalCoverage(
-                artifacts,
-                coverageRequirementsForModule(
-                  module.id,
-                ),
-              );
+            const resolvedCoverage =
+              dayZeroCoverage
+                ? (() => {
+                    switch (
+                      module.id
+                    ) {
+                      case "constitutional-literacy":
+                      case "knowledge-governance":
+                      case "operational-boundaries":
+                      case "conversation-curriculum":
+                      case "business-domain-literacy":
+                        return dayZeroCoverage
+                          .modules[
+                            module.id
+                          ];
+
+                      default:
+                        return undefined;
+                    }
+                  })()
+                : undefined;
+
+            const currentCoverage =
+              resolvedCoverage
+                ? null
+                : measureEducationalCoverage(
+                    artifacts,
+                    coverageRequirementsForModule(
+                      module.id,
+                    ),
+                  );
+
+            const completion =
+              resolvedCoverage
+                ?.completion ??
+              currentCoverage
+                ?.completion ??
+              0;
 
             return {
               ...module,
 
               status:
                 educationalStatusFromCoverage(
-                  coverage.completion,
+                  completion,
                   module.conflict,
                 ),
 
-              completion:
-                coverage.completion,
+              completion,
 
               coverage: {
-                satisfiedRequirements: [
-                  ...coverage.satisfied,
-                ],
+                satisfiedRequirements:
+                  resolvedCoverage
+                    ? [
+                        ...resolvedCoverage
+                          .satisfiedRequirements,
+                      ]
+                    : [
+                        ...(currentCoverage
+                          ?.satisfied ??
+                          []),
+                      ],
 
-                missingRequirements: [
-                  ...coverage.missing,
-                ],
+                missingRequirements:
+                  resolvedCoverage
+                    ? [
+                        ...resolvedCoverage
+                          .missingRequirements,
+                      ]
+                    : [
+                        ...(currentCoverage
+                          ?.missing ??
+                          []),
+                      ],
 
                 satisfiedCount:
-                  coverage.satisfiedCount,
+                  resolvedCoverage
+                    ?.satisfiedCount ??
+                  currentCoverage
+                    ?.satisfiedCount ??
+                  0,
 
                 requirementCount:
-                  coverage.requirementCount,
+                  resolvedCoverage
+                    ?.requirementCount ??
+                  currentCoverage
+                    ?.requirementCount ??
+                  0,
 
+                /*
+                 * KnowledgeEducationSnapshot exposes the certified UI
+                 * projection contract version, not the underlying Day-0
+                 * measurement engine version.
+                 */
                 measurementVersion:
-                  coverage.measurementVersion,
+                  "education-coverage-v1",
               },
 
               dependencyIds: [

@@ -1,3 +1,8 @@
+import {
+  composeHistoricalConversationIntoDayZeroCoverage,
+  measureDayZeroEducationalCoverage,
+} from "../DayZeroEducationalCoverage.js";
+
 import assert from "node:assert/strict";
 import test from "node:test";
 
@@ -1108,6 +1113,110 @@ test(
       [
         "canonical:document:primary",
       ],
+    );
+  },
+);
+
+
+test(
+  "uses composed Day-0 coverage for module progress without projecting historical conversations as current artifacts",
+  () => {
+    const service =
+      new KnowledgeEducationProjectionService({
+        list:
+          () =>
+            [],
+      });
+
+    const current =
+      measureDayZeroEducationalCoverage(
+        [],
+      );
+
+    const historicalConversationCoverage = {
+      version:
+        "historical-conversation-educational-coverage:v1",
+
+      moduleId:
+        "conversation-curriculum",
+
+      satisfiedRequirements: [
+        "conversation:architecture",
+        "conversation:engineering",
+        "conversation:governance",
+        "conversation:mission",
+        "conversation:operations",
+      ],
+
+      missingRequirements:
+        [],
+
+      contributors:
+        [],
+
+      satisfiedCount:
+        5,
+
+      requirementCount:
+        5,
+
+      completion:
+        100,
+
+      complete:
+        true,
+
+      governingAuthority:
+        false,
+    } as const;
+
+    const composed =
+      composeHistoricalConversationIntoDayZeroCoverage(
+        current,
+        historicalConversationCoverage,
+      );
+
+    const snapshot =
+      service.snapshot(
+        composed,
+      );
+
+    const conversation =
+      snapshot.modules.find(
+        module =>
+          module.id ===
+            "conversation-curriculum",
+      );
+
+    assert.ok(
+      conversation,
+    );
+
+    assert.equal(
+      conversation.completion,
+      100,
+    );
+
+    assert.equal(
+      conversation.status,
+      "completed",
+    );
+
+    assert.deepEqual(
+      conversation.coverage
+        .missingRequirements,
+      [],
+    );
+
+    assert.deepEqual(
+      snapshot.artifacts,
+      [],
+    );
+
+    assert.equal(
+      historicalConversationCoverage
+        .governingAuthority,
+      false,
     );
   },
 );

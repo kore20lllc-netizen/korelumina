@@ -49,6 +49,15 @@ import {
 } from "./EducationalCorpusHistoricalEvidence.js";
 
 import {
+  composeHistoricalConversationIntoDayZeroCoverage,
+  measureDayZeroEducationalCoverage,
+} from "./DayZeroEducationalCoverage.js";
+
+import type {
+  DayZeroEducationalCoverage,
+} from "./DayZeroEducationalCoverage.js";
+
+import {
   measureHistoricalConversationEducationalCoverage,
 } from "./HistoricalConversationEducationalCoverage.js";
 
@@ -194,6 +203,110 @@ export class EducationalCorpusRuntimeService {
   }
 
 
+  private resolveHistoricalEducationCoverage() {
+    const genesisHistorical =
+      this.genesisHistorical
+        ?.read() ??
+      null;
+
+    const historicalProjection =
+      genesisHistorical
+        ? projectGenesisHistoricalEducation(
+            genesisHistorical,
+          )
+        : null;
+
+    const historicalAssessments =
+      historicalProjection
+        ? assessGenesisHistoricalEducationSources(
+            historicalProjection.records,
+          )
+        : [];
+
+    const historicalEvidence =
+      historicalProjection
+        ? assembleEducationalCorpusHistoricalEvidence({
+            records:
+              historicalProjection.records,
+
+            assessments:
+              historicalAssessments,
+          })
+        : null;
+
+    const latestConversationAcquisition =
+      this.conversationEvidence
+        .loadLatest();
+
+    const persistedConversationEvidence =
+      latestConversationAcquisition
+        ?.state ===
+        "ACQUIRED"
+        ? latestConversationAcquisition
+            .evidence
+        : [];
+
+    const historicalConversationCoverage =
+      historicalEvidence
+        ? measureHistoricalConversationEducationalCoverage({
+            historicalEvidence,
+
+            conversationEvidence:
+              persistedConversationEvidence,
+          })
+        : null;
+
+    return {
+      historicalAssessments,
+      historicalEvidence,
+      historicalConversationCoverage,
+    };
+  }
+
+
+  readDayZeroCoverage():
+    DayZeroEducationalCoverage |
+    null {
+    const dayZero =
+      this.dayZero
+        .read();
+
+    if (
+      dayZero.state !==
+        "VALID" ||
+      !dayZero.certification
+    ) {
+      return null;
+    }
+
+    /*
+     * This snapshot is used only to obtain the current educational
+     * artifact projections required by the existing Day-0 engine.
+     *
+     * Historical conversation Evidence remains outside the current
+     * artifact inventory.
+     */
+    const education =
+      this.education
+        .snapshot();
+
+    const currentCoverage =
+      measureDayZeroEducationalCoverage(
+        education.artifacts,
+      );
+
+    const {
+      historicalConversationCoverage,
+    } =
+      this.resolveHistoricalEducationCoverage();
+
+    return composeHistoricalConversationIntoDayZeroCoverage(
+      currentCoverage,
+      historicalConversationCoverage,
+    );
+  }
+
+
   read():
     EducationalCorpusRuntimeProjection {
     const persistedCorpus =
@@ -254,57 +367,12 @@ export class EducationalCorpusRuntimeService {
       this.education
         .snapshot();
 
-    const genesisHistorical =
-      this.genesisHistorical
-        ?.read() ??
-      null;
-
-    const historicalProjection =
-      genesisHistorical
-        ? projectGenesisHistoricalEducation(
-            genesisHistorical,
-          )
-        : null;
-
-    const historicalAssessments =
-      historicalProjection
-        ? assessGenesisHistoricalEducationSources(
-            historicalProjection.records,
-          )
-        : [];
-
-    const historicalEvidence =
-      historicalProjection
-        ? assembleEducationalCorpusHistoricalEvidence({
-            records:
-              historicalProjection.records,
-
-            assessments:
-              historicalAssessments,
-          })
-        : null;
-
-    const latestConversationAcquisition =
-      this.conversationEvidence
-        .loadLatest();
-
-    const persistedConversationEvidence =
-      latestConversationAcquisition
-        ?.state ===
-        "ACQUIRED"
-        ? latestConversationAcquisition
-            .evidence
-        : [];
-
-    const historicalConversationCoverage =
-      historicalEvidence
-        ? measureHistoricalConversationEducationalCoverage({
-            historicalEvidence,
-
-            conversationEvidence:
-              persistedConversationEvidence,
-          })
-        : null;
+    const {
+      historicalAssessments,
+      historicalEvidence,
+      historicalConversationCoverage,
+    } =
+      this.resolveHistoricalEducationCoverage();
 
     const sourceContract =
       buildEducationalCorpusSourceContract({
