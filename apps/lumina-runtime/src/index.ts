@@ -200,6 +200,10 @@ import {
 } from "./routes/genesisReplayStatus.js";
 
 import {
+  registerGenesisReplayDesignationRoute,
+} from "./routes/genesisReplayDesignation.js";
+
+import {
   registerGenesisReplayInventoryRoute,
 } from "./routes/genesisReplayInventory.js";
 
@@ -1338,6 +1342,26 @@ registerGenesisReplayInventoryRoute(
         .manufacturingRunService,
   },
 );
+
+registerGenesisReplayDesignationRoute(
+  app,
+  {
+    listReplayInventory:
+      () =>
+        listGenesisReplayInventory({
+          persistence:
+            runtimeGenesisReplayPersistenceStore,
+
+          manufacturingRuns:
+            runtimeKnowledgePreservationPlatform
+              .manufacturingRunService,
+        }),
+
+    designationStore:
+      runtimeGenesisReplayDesignationStore,
+  },
+);
+
 
 registerGenesisOperationalProjectionRoute(
   app,
