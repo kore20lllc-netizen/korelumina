@@ -709,6 +709,42 @@ export class GenesisProductionReplayAdmissionAdapter
     if (
       !baseGovernance.invokeKnowledgeManufacturing
     ) {
+      /*
+       * Evidence identity is deterministic for immutable historical
+       * source content, while Genesis replay metadata is execution-
+       * specific.
+       *
+       * A later replay may therefore resolve the same Evidence ID
+       * with different replay metadata. Existing immutable Evidence
+       * must be reused rather than overwritten.
+       *
+       * Checksum mismatch remains a fail-closed integrity violation.
+       */
+      const existingEvidence =
+        this.evidencePersistenceStore.load(
+          evidence.id,
+        );
+
+      if (
+        existingEvidence
+      ) {
+        if (
+          existingEvidence.id !==
+            evidence.id ||
+          existingEvidence.checksum !==
+            evidence.checksum
+        ) {
+          throw new Error(
+            "genesis_evidence_persistence_integrity_mismatch",
+          );
+        }
+
+        return {
+          evidenceId:
+            existingEvidence.id,
+        };
+      }
+
       this.evidencePersistenceStore.save(
         evidence,
       );

@@ -1381,3 +1381,202 @@ test(
     );
   },
 );
+
+test(
+  "reuses immutable persisted Evidence when replay execution metadata changes",
+  async () => {
+    const historicalSourceId =
+      "genesis-source:runtime-event:immutable-reuse";
+
+    const checksum =
+      "sha256:immutable-reuse";
+
+    const evidencePersistenceStore =
+      new FileEvidencePersistenceStore();
+
+    const firstAdapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform:
+          createKnowledgePreservationPlatform(),
+
+        evidencePersistenceStore,
+      });
+
+    const first =
+      await firstAdapter.admit(
+        request({
+          historicalSourceId,
+          checksum,
+          executionTimestamp:
+            1000,
+        }),
+      );
+
+    const persistedBefore =
+      evidencePersistenceStore.load(
+        first.evidenceId,
+      );
+
+    assert.ok(
+      persistedBefore,
+    );
+
+    assert.equal(
+      persistedBefore.capturedAt,
+      1000,
+    );
+
+    /*
+     * Same HistoricalSource identity and checksum, but a later
+     * Genesis execution timestamp. The deterministic Evidence ID
+     * remains the same while reconstructed replay metadata differs.
+     *
+     * The adapter must reuse the immutable persisted Evidence rather
+     * than ask the store to overwrite it.
+     */
+    const successorAdapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform:
+          createKnowledgePreservationPlatform(),
+
+        evidencePersistenceStore,
+      });
+
+    const second =
+      await successorAdapter.admit(
+        request({
+          historicalSourceId,
+          checksum,
+          executionTimestamp:
+            2000,
+        }),
+      );
+
+    assert.equal(
+      second.evidenceId,
+      first.evidenceId,
+    );
+
+    const persistedAfter =
+      evidencePersistenceStore.load(
+        first.evidenceId,
+      );
+
+    assert.deepEqual(
+      persistedAfter,
+      persistedBefore,
+    );
+
+    assert.equal(
+      persistedAfter?.capturedAt,
+      1000,
+    );
+  },
+);
+
+test(
+  "fails closed when existing Evidence has the deterministic identity but a different checksum",
+  async () => {
+    const historicalSourceId =
+      "genesis-source:runtime-event:immutable-checksum-conflict";
+
+    const checksum =
+      "sha256:immutable-checksum";
+
+    /*
+     * This test double implements the existing persistence contract
+     * only. It returns an Evidence record under the deterministic ID
+     * but with a conflicting immutable checksum.
+     *
+     * The production adapter must reject it before attempting save().
+     */
+    const realStore =
+      new FileEvidencePersistenceStore();
+
+    const seedAdapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform:
+          createKnowledgePreservationPlatform(),
+
+        evidencePersistenceStore:
+          realStore,
+      });
+
+    const seeded =
+      await seedAdapter.admit(
+        request({
+          historicalSourceId,
+          checksum,
+          executionTimestamp:
+            3000,
+        }),
+      );
+
+    const persisted =
+      realStore.load(
+        seeded.evidenceId,
+      );
+
+    assert.ok(
+      persisted,
+    );
+
+    let saveCalled =
+      false;
+
+    const conflictingStore = {
+      load(
+        evidenceId: string,
+      ) {
+        assert.equal(
+          evidenceId,
+          seeded.evidenceId,
+        );
+
+        return {
+          ...persisted,
+
+          checksum:
+            "sha256:deliberate-conflict",
+        };
+      },
+
+      save() {
+        saveCalled =
+          true;
+
+        throw new Error(
+          "save_should_not_be_called",
+        );
+      },
+    };
+
+    const replayAdapter =
+      new GenesisProductionReplayAdmissionAdapter({
+        platform:
+          createKnowledgePreservationPlatform(),
+
+        evidencePersistenceStore:
+          conflictingStore,
+      });
+
+    await assert.rejects(
+      async () => {
+        await replayAdapter.admit(
+          request({
+            historicalSourceId,
+            checksum,
+            executionTimestamp:
+              4000,
+          }),
+        );
+      },
+      /genesis_evidence_persistence_integrity_mismatch/,
+    );
+
+    assert.equal(
+      saveCalled,
+      false,
+    );
+  },
+);
