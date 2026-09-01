@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:3a809b37ad345ec8581a2f6afba575abe6acd9fd4a4c985857f39c6557ab9d8b",
+  "type": "ADR",
+  "title": "KoreLumina Architectural Decision Records (ADR)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731940,
+  "observedAt": 1782554475000,
+  "contentRef": "docs/adr/README.md",
+  "checksum": "sha256:5a8850f61698f9e636bedec8ee6cb127905944cb1699512222e9b7ac3a27a945",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 467,
+    "genesisAdmissionIdentity": "genesis-admission:43954235834bfc76763e801ff076353e995cf75c7da2f2128f4ce4e788699495",
+    "historicalSourceId": "genesis-source:ADR:derived:5767cabc35c1548f9cfc20256a0dbed5cff220c64bb4a5563ec342908587dd3d",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "sourceLocation": "docs/adr/README.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architectural Decision Records (ADR)",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/README.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:5767cabc35c1548f9cfc20256a0dbed5cff220c64bb4a5563ec342908587dd3d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

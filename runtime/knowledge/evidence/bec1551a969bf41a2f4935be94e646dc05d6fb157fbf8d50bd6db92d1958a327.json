@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:a8f5d9c8d2f1b801ea20e2b805db051c18cd1b4395fefc48c063ac04661b0a27",
+  "type": "commit",
+  "title": "feat(engineering): introduce execution service contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739671,
+  "observedAt": 1782976149000,
+  "contentRef": "git:commit:69248fc3dddab91801f665a3fd68dcbad06f81f2",
+  "checksum": "sha256:0b5189f3dc7c44c9b3f7a0c13cbffcf24b68e0e4f752a616dbd2c50df862d1e9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 679,
+    "genesisAdmissionIdentity": "genesis-admission:51a80bb812fdd6d48eb550e3f2b9a0e33ded57004d7e413d9067726be176e8b9",
+    "historicalSourceId": "genesis-source:commit:69248fc3dddab91801f665a3fd68dcbad06f81f2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:69248fc3dddab91801f665a3fd68dcbad06f81f2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "69248fc3dddab91801f665a3fd68dcbad06f81f2",
+      "parentShas": [
+        "82090b14fcb84a280a3d695503d8ff719da6c3d1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782976149000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782976149000
+      },
+      "subject": "feat(engineering): introduce execution service contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/EngineeringService.ts"
+      ],
+      "changedPathsByParent": {
+        "82090b14fcb84a280a3d695503d8ff719da6c3d1": [
+          "apps/lumina-runtime/src/engineering/EngineeringService.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a2.3-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:69248fc3dddab91801f665a3fd68dcbad06f81f2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

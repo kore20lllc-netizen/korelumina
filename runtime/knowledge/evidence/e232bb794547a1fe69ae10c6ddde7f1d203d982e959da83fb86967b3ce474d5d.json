@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:19a0d766021226f76cf31a4bc6d4d8dbd74e7204018a7405a5261be3b8f706a1",
+  "type": "commit",
+  "title": "feat(knowledge): generate recovery reports",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741886,
+  "observedAt": 1783053870000,
+  "contentRef": "git:commit:56d6752653b05d80a2939a96259d449414cc1d42",
+  "checksum": "sha256:59fa2cd0d095ad40ca74056e4a5636965b4788246aa436d34effd3663a2b83cb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 735,
+    "genesisAdmissionIdentity": "genesis-admission:826fa9601963893f6dcdb7daabae1ab3fb592274dfd299329daa30d1de72bc4c",
+    "historicalSourceId": "genesis-source:commit:56d6752653b05d80a2939a96259d449414cc1d42",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:56d6752653b05d80a2939a96259d449414cc1d42",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "56d6752653b05d80a2939a96259d449414cc1d42",
+      "parentShas": [
+        "1006455e4681471ac450caa415c5b742614d623e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783053870000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783053870000
+      },
+      "subject": "feat(knowledge): generate recovery reports",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-recovery/reporting/RecoveryReportGenerator.ts",
+        "apps/lumina-runtime/src/knowledge-recovery/reporting/index.ts"
+      ],
+      "changedPathsByParent": {
+        "1006455e4681471ac450caa415c5b742614d623e": [
+          "apps/lumina-runtime/src/knowledge-recovery/reporting/RecoveryReportGenerator.ts",
+          "apps/lumina-runtime/src/knowledge-recovery/reporting/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/rrp-004-recovery-report-generation-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:56d6752653b05d80a2939a96259d449414cc1d42"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

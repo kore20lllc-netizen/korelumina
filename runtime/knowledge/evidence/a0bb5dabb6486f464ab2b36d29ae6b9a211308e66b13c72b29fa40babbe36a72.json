@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:41c9b4e0f54001c6180e670f92e07a75f348eed765b3084d0be301a313aad57b",
+  "type": "commit",
+  "title": "feat(improvement): add autonomous improvement validation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734716,
+  "observedAt": 1782647860000,
+  "contentRef": "git:commit:ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b",
+  "checksum": "sha256:9fd9f6dbb8b2e31d36b62d0839f65ac72bce32744c47a34ed4e8bd0dd2579865",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 546,
+    "genesisAdmissionIdentity": "genesis-admission:bd1f307e2288fc77b574576e0bafe2d9dd5a4465f491ee07d9a939d4d902d7a0",
+    "historicalSourceId": "genesis-source:commit:ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b",
+      "parentShas": [
+        "3620ae71be177a43c20a9ca88caf33f09c9c43a4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647860000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647860000
+      },
+      "subject": "feat(improvement): add autonomous improvement validation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/AutonomousImprovementValidation.ts",
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3620ae71be177a43c20a9ca88caf33f09c9c43a4": [
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/AutonomousImprovementValidation.ts",
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:6247aa5ac38c256dc974093f9d707b4924706f880fb4177d7e3b4d54c75afc41",
+  "type": "document",
+  "title": "KoreLumina Documentation Governance V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728245,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/DOCUMENTATION_GOVERNANCE_V1.md",
+  "checksum": "sha256:2fa889dbe00fc431a530e045b8c6c6b2d7d20c013da6bd2527d7080532b51367",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 357,
+    "genesisAdmissionIdentity": "genesis-admission:b7105cd7002c1c5b3f5a1a2fa9ef612379b76c69e58c2badd833863e577910df",
+    "historicalSourceId": "genesis-source:document:derived:f379d2a00c5e2957b44a0040ccb8b8f132dca9b7b16c2e640e990f5ab37b3f1a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/DOCUMENTATION_GOVERNANCE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Documentation Governance V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/DOCUMENTATION_GOVERNANCE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f379d2a00c5e2957b44a0040ccb8b8f132dca9b7b16c2e640e990f5ab37b3f1a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

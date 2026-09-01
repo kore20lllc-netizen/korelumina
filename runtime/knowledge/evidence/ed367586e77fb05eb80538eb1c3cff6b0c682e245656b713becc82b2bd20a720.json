@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:fd6bb714ea803ef14216bfc975b9b1c0bfcbd636f8bb2af7f00b3dc60fdb56fe",
+  "type": "commit",
+  "title": "docs(governance): establish KoreLumina governance framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731605,
+  "observedAt": 1782547225000,
+  "contentRef": "git:commit:97f9808c9b7bb63bbe5ab3c6893cbc11b775addf",
+  "checksum": "sha256:2d4e66d7ccbbf105aa37cb1f2a03ba1c66057d02c86af7a6322fd3e666756751",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 457,
+    "genesisAdmissionIdentity": "genesis-admission:eeae021daf5299787f84cb3aab7b9fa8b4bb07d0825a799e4ddd49d2d9b96b2b",
+    "historicalSourceId": "genesis-source:commit:97f9808c9b7bb63bbe5ab3c6893cbc11b775addf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:97f9808c9b7bb63bbe5ab3c6893cbc11b775addf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "97f9808c9b7bb63bbe5ab3c6893cbc11b775addf",
+      "parentShas": [
+        "51a2e469fdf583c7577e0fdf42a1a5f9b9a87253"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782547225000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782547225000
+      },
+      "subject": "docs(governance): establish KoreLumina governance framework",
+      "body": "",
+      "changedPaths": [
+        "docs/governance/ARCHITECTURAL_DECISION_PROCESS.md",
+        "docs/governance/DEFINITION_OF_DONE.md",
+        "docs/governance/ENGINEERING_PRINCIPLES.md",
+        "docs/governance/GOVERNANCE_MODEL.md",
+        "docs/governance/KORELUMINA_CONSTITUTION.md",
+        "docs/governance/ROADMAP_GOVERNANCE.md"
+      ],
+      "changedPathsByParent": {
+        "51a2e469fdf583c7577e0fdf42a1a5f9b9a87253": [
+          "docs/governance/ARCHITECTURAL_DECISION_PROCESS.md",
+          "docs/governance/DEFINITION_OF_DONE.md",
+          "docs/governance/ENGINEERING_PRINCIPLES.md",
+          "docs/governance/GOVERNANCE_MODEL.md",
+          "docs/governance/KORELUMINA_CONSTITUTION.md",
+          "docs/governance/ROADMAP_GOVERNANCE.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/architecture-v1.0"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:97f9808c9b7bb63bbe5ab3c6893cbc11b775addf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

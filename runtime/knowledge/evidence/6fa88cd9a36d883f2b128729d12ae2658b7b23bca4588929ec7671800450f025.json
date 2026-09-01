@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:b03cf86a8692e2925a411858c6a3917a54261a2fb85b7a2477eb4d2eebaf1d57",
+  "type": "document",
+  "title": "KORELUMINA ENGINEERING INTELLIGENCE ARCHITECTURE",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731265,
+  "observedAt": 1782545731000,
+  "contentRef": "docs/architecture/KORELUMINA_ENGINEERING_INTELLIGENCE_ARCHITECTURE.md",
+  "checksum": "sha256:0164717246437bfe9b163204586dbce7f201facf40e2adf8cc6eb9df7ca96b09",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 447,
+    "genesisAdmissionIdentity": "genesis-admission:d18ec58f4405e0fc8e930f2436020379f8e4477bf8583eae4f46d4b4b7039995",
+    "historicalSourceId": "genesis-source:document:derived:489126f0a99ec36a60d2e250fe97132db1e5109398ec7b2de8753413a833770e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/KORELUMINA_ENGINEERING_INTELLIGENCE_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KORELUMINA ENGINEERING INTELLIGENCE ARCHITECTURE",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_ENGINEERING_INTELLIGENCE_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:489126f0a99ec36a60d2e250fe97132db1e5109398ec7b2de8753413a833770e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

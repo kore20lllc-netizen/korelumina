@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:1c0a198f0fb104505f579376317e781721ae9cdcec9ac115c43d9efafcc42ed2",
+  "type": "commit",
+  "title": "refactor(runtime): introduce runtime project registry contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729257,
+  "observedAt": 1782469216000,
+  "contentRef": "git:commit:7c516ab7a997a743db00fa4acdaed60fb996598c",
+  "checksum": "sha256:19eedd6c2b85349b624b0fef417f62a8e97889577269373734e745cd2eb0cb23",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 387,
+    "genesisAdmissionIdentity": "genesis-admission:6b7f42bd5416914a46428c76be96f0e6ffc529b246017b48390593635323bbb1",
+    "historicalSourceId": "genesis-source:commit:7c516ab7a997a743db00fa4acdaed60fb996598c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7c516ab7a997a743db00fa4acdaed60fb996598c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7c516ab7a997a743db00fa4acdaed60fb996598c",
+      "parentShas": [
+        "5d8985a9c525d2ef859385cbb15e7f3795e13da6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782469216000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782469216000
+      },
+      "subject": "refactor(runtime): introduce runtime project registry contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/routes/projects.ts",
+        "apps/lumina-runtime/src/runtime/projectRegistry.ts"
+      ],
+      "changedPathsByParent": {
+        "5d8985a9c525d2ef859385cbb15e7f3795e13da6": [
+          "apps/lumina-runtime/src/routes/projects.ts",
+          "apps/lumina-runtime/src/runtime/projectRegistry.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7c516ab7a997a743db00fa4acdaed60fb996598c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

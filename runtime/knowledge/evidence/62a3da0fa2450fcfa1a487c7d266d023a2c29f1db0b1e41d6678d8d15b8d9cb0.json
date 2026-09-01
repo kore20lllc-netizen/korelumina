@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:42f2c479a6ae1a4f14115dfd00f38982b78bebe78e9810b82a6b99d75ec79b94",
+  "type": "commit",
+  "title": "feat(execution): add engineer agent integration adapter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734148,
+  "observedAt": 1782645952000,
+  "contentRef": "git:commit:b69842be3dd3f2b024504ba903e1d10ab2389f29",
+  "checksum": "sha256:486d86e442292e9f99c4a7ef807bad424a6d90e9fdb07575c1d36da6110e0ad2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 530,
+    "genesisAdmissionIdentity": "genesis-admission:6ce23052e3fdc50a1ea0651faca2e83133382384b331cafa21be5c97ed393f69",
+    "historicalSourceId": "genesis-source:commit:b69842be3dd3f2b024504ba903e1d10ab2389f29",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b69842be3dd3f2b024504ba903e1d10ab2389f29",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b69842be3dd3f2b024504ba903e1d10ab2389f29",
+      "parentShas": [
+        "9c92c4745e80802b267177cfea1496c449a5b68b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782645952000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782645952000
+      },
+      "subject": "feat(execution): add engineer agent integration adapter",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/execution/ExecutionEngineerAgentAdapter.ts",
+        "apps/lumina-runtime/src/knowledge/execution/index.ts"
+      ],
+      "changedPathsByParent": {
+        "9c92c4745e80802b267177cfea1496c449a5b68b": [
+          "apps/lumina-runtime/src/knowledge/execution/ExecutionEngineerAgentAdapter.ts",
+          "apps/lumina-runtime/src/knowledge/execution/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b69842be3dd3f2b024504ba903e1d10ab2389f29"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

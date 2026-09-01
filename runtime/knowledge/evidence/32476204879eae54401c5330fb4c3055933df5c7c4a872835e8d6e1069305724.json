@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:6d921c2831addc18ccfc011ee0a708ed19e11735d65ca6bbb5f7946463c8700f",
+  "type": "commit",
+  "title": "feat(runtime): add startup execution pipeline scaffold",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738751,
+  "observedAt": 1782931004000,
+  "contentRef": "git:commit:7133ab76c76ac99b149f48f0d2e746c78e09ab29",
+  "checksum": "sha256:1b4f9c868305a6cb68a8dd20b5b798be932076536ab52a6c0de877f14e1e1560",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 655,
+    "genesisAdmissionIdentity": "genesis-admission:c682b2285eee3c3ac9ea3134dee0a0b2c03ca912e1f809ff9de108cdf5574ade",
+    "historicalSourceId": "genesis-source:commit:7133ab76c76ac99b149f48f0d2e746c78e09ab29",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7133ab76c76ac99b149f48f0d2e746c78e09ab29",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7133ab76c76ac99b149f48f0d2e746c78e09ab29",
+      "parentShas": [
+        "5ad1ee55aba6f04b2d0451d293241904981318e6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782931004000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782931004000
+      },
+      "subject": "feat(runtime): add startup execution pipeline scaffold",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupContext.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupPipeline.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "5ad1ee55aba6f04b2d0451d293241904981318e6": [
+          "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupContext.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupPipeline.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase061-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7133ab76c76ac99b149f48f0d2e746c78e09ab29"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

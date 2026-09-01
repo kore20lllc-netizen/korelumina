@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:7db4ede65e400a7321e5f7424718950e563204c221a853e98fc2fad1071ab191",
+  "type": "commit",
+  "title": "docs(engineering): audit automation convergence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739517,
+  "observedAt": 1782973370000,
+  "contentRef": "git:commit:4965a84be35d456a2e585884b7f7867ae498a284",
+  "checksum": "sha256:1b53d5c2d65f356da214516dfc565c48fa316c4d479c213d93a54cf426666a79",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 675,
+    "genesisAdmissionIdentity": "genesis-admission:fb774f163b4fe5e91756ae19faab6e0b73f1292a20149be20956ab11af6a58a2",
+    "historicalSourceId": "genesis-source:commit:4965a84be35d456a2e585884b7f7867ae498a284",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4965a84be35d456a2e585884b7f7867ae498a284",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4965a84be35d456a2e585884b7f7867ae498a284",
+      "parentShas": [
+        "3b4d8d44c0f8af59e8dc098fad7731dacdc14050"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782973370000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782973370000
+      },
+      "subject": "docs(engineering): audit automation convergence",
+      "body": "",
+      "changedPaths": [
+        "docs/programs/autonomous-engineering/audits/a1.7-engineering-automation-convergence.md"
+      ],
+      "changedPathsByParent": {
+        "3b4d8d44c0f8af59e8dc098fad7731dacdc14050": [
+          "docs/programs/autonomous-engineering/audits/a1.7-engineering-automation-convergence.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a1.7-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4965a84be35d456a2e585884b7f7867ae498a284"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

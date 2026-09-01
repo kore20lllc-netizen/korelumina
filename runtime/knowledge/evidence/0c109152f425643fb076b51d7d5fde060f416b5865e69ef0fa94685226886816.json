@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:29bcffa0cfbe664e64c760c89bf1124a3bc9665675e662a65f9c9ef08f265501",
+  "type": "commit",
+  "title": "fix: Correct preview frame sizing by using valid CSS width values",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724675,
+  "observedAt": 1780100037000,
+  "contentRef": "git:commit:e4dac84848f2d6c29a8ef79b5a770cddc2785a2a",
+  "checksum": "sha256:0fcbba609224901437d300ce9e97198160f93f79c289abb4d73d1b8040fe8e32",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 248,
+    "genesisAdmissionIdentity": "genesis-admission:d3c6d14c333e0db330dc896f0972c8acc13742cb9bea34fdf0e50d917bd12db4",
+    "historicalSourceId": "genesis-source:commit:e4dac84848f2d6c29a8ef79b5a770cddc2785a2a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e4dac84848f2d6c29a8ef79b5a770cddc2785a2a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e4dac84848f2d6c29a8ef79b5a770cddc2785a2a",
+      "parentShas": [
+        "85e3a3e332c4179b28981294bf3a5bcf69a8616c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780100037000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780100037000
+      },
+      "subject": "fix: Correct preview frame sizing by using valid CSS width values",
+      "body": "Co-authored-by: aider (gemini/gemini-2.5-pro) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx"
+      ],
+      "changedPathsByParent": {
+        "85e3a3e332c4179b28981294bf3a5bcf69a8616c": [
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e4dac84848f2d6c29a8ef79b5a770cddc2785a2a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

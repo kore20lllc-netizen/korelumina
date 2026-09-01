@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:5ce6ce6d34fa90e98535adef10fa05a27b3943153d0dcc094213ca11c2d7c533",
+  "type": "commit",
+  "title": "docs(knowledge): define knowledge intermediate representation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740223,
+  "observedAt": 1783025594000,
+  "contentRef": "git:commit:cd89860084ec12b9f06b322da1d23adbd876c5ca",
+  "checksum": "sha256:57f46a6285150e079d7bda4ab62aa4c6950bc8715440e86fe261711d1e17d602",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 693,
+    "genesisAdmissionIdentity": "genesis-admission:a2e1af83983d8f20a3262eaa2c303d4ca3885960c6f914217f15f533b8198c50",
+    "historicalSourceId": "genesis-source:commit:cd89860084ec12b9f06b322da1d23adbd876c5ca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cd89860084ec12b9f06b322da1d23adbd876c5ca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cd89860084ec12b9f06b322da1d23adbd876c5ca",
+      "parentShas": [
+        "fcd8b55b77bb78872db96b64cd63a6e1fb96dd70"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783025594000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783025594000
+      },
+      "subject": "docs(knowledge): define knowledge intermediate representation",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+      ],
+      "changedPathsByParent": {
+        "fcd8b55b77bb78872db96b64cd63a6e1fb96dd70": [
+          "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpe-002-knowledge-ir-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cd89860084ec12b9f06b322da1d23adbd876c5ca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

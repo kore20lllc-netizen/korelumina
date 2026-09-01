@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:02492aaaa7ecfbe7df93c61c5acb9932a1f20c7419d53783bde86398099e1c32",
+  "type": "commit",
+  "title": "feat(knowledge): add architecture discovery pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730021,
+  "observedAt": 1782519518000,
+  "contentRef": "git:commit:6ab89db1b4339c476bfa4bd2ef5ba45e168ddf21",
+  "checksum": "sha256:530e7d8f51314ced04ff56ceeaf6d2c6d3d0df296d16b7dd3165b8ed4babe5c8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 410,
+    "genesisAdmissionIdentity": "genesis-admission:c54a97e54d4d677c31bc7c360ee1182ff7033f9d769b7cbf0b344eff0151032a",
+    "historicalSourceId": "genesis-source:commit:6ab89db1b4339c476bfa4bd2ef5ba45e168ddf21",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6ab89db1b4339c476bfa4bd2ef5ba45e168ddf21",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6ab89db1b4339c476bfa4bd2ef5ba45e168ddf21",
+      "parentShas": [
+        "1f79f9189dd8d457dda18d9054aa0659b211da80"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782519518000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782519518000
+      },
+      "subject": "feat(knowledge): add architecture discovery pipeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/architecture/ArchitectureDiscovery.ts",
+        "apps/lumina-runtime/src/knowledge/architecture/ArchitectureManifest.ts",
+        "apps/lumina-runtime/src/knowledge/architecture/index.ts",
+        "apps/lumina-runtime/src/knowledge/architecture/types.ts"
+      ],
+      "changedPathsByParent": {
+        "1f79f9189dd8d457dda18d9054aa0659b211da80": [
+          "apps/lumina-runtime/src/knowledge/architecture/ArchitectureDiscovery.ts",
+          "apps/lumina-runtime/src/knowledge/architecture/ArchitectureManifest.ts",
+          "apps/lumina-runtime/src/knowledge/architecture/index.ts",
+          "apps/lumina-runtime/src/knowledge/architecture/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6ab89db1b4339c476bfa4bd2ef5ba45e168ddf21"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

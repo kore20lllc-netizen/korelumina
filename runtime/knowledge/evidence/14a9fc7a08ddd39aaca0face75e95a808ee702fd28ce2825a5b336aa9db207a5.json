@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:04a87d0de041636f7d4486594d5feba8a2fb790dafceb495a0c9cccb709f6865",
+  "type": "RFC",
+  "title": "RFC-XXXX",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731806,
+  "observedAt": 1782554367000,
+  "contentRef": "docs/rfc/RFC_TEMPLATE.md",
+  "checksum": "sha256:1b111de7a35959f0de7cba0fd7a1b359e318dfe6ec1cec1482a386bd468bd989",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 463,
+    "genesisAdmissionIdentity": "genesis-admission:e19c23638d9e2446577ecb673cd524f1ea667d1825b5de8ce4f476a0b0a15257",
+    "historicalSourceId": "genesis-source:RFC:derived:3fddb5baa01d1d176e4745f9434aea53f6373aab55856f188f26f84e6ff1bfc1",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "request-for-comments",
+    "approvalState": "Draft | Proposed | In Review | Approved | Rejected | Superseded | Implemented",
+    "sourceLocation": "docs/rfc/RFC_TEMPLATE.md",
+    "documentClassification": "rfc",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "RFC-XXXX",
+      "status": "Draft | Proposed | In Review | Approved | Rejected | Superseded | Implemented",
+      "documentClassification": "rfc",
+      "sourceLocation": "docs/rfc/RFC_TEMPLATE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:RFC:derived:3fddb5baa01d1d176e4745f9434aea53f6373aab55856f188f26f84e6ff1bfc1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

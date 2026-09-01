@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:ef3e25e07c701078512a895807f579af744a0630e61ceadb4df2c31f35dbcc5b",
+  "type": "commit",
+  "title": "feat(knowledge): add engineering knowledge store",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730157,
+  "observedAt": 1782524657000,
+  "contentRef": "git:commit:92f4e5d082a4a2c07253cb729abb3d46430f5f2f",
+  "checksum": "sha256:a00fea087d78f42a977ba8759c8f653f884d5e3ab2400703a2eded9b70aecfda",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 414,
+    "genesisAdmissionIdentity": "genesis-admission:eb4968b9493a68e90c262830667ec6a011805e8d99e7a236a67e7b14a6d4c96f",
+    "historicalSourceId": "genesis-source:commit:92f4e5d082a4a2c07253cb729abb3d46430f5f2f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:92f4e5d082a4a2c07253cb729abb3d46430f5f2f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "92f4e5d082a4a2c07253cb729abb3d46430f5f2f",
+      "parentShas": [
+        "b18a4ca8667f2aae5e653de080f46ecc159929c7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782524657000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782524657000
+      },
+      "subject": "feat(knowledge): add engineering knowledge store",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/index.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/types.ts"
+      ],
+      "changedPathsByParent": {
+        "b18a4ca8667f2aae5e653de080f46ecc159929c7": [
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/index.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:92f4e5d082a4a2c07253cb729abb3d46430f5f2f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:abc9431e8dd361f02d7754a2d76c31c0c338549998d196dc62cfd9fb72f8eb74",
+  "type": "document",
+  "title": "KoreLumina Architecture Principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736386,
+  "observedAt": 1782760627000,
+  "contentRef": "docs/architecture/ARCHITECTURE_PRINCIPLES.md",
+  "checksum": "sha256:098f81cdb54329fc184cb2be3689d9bda003b531b9d2d2d517e0066960e8c581",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 592,
+    "genesisAdmissionIdentity": "genesis-admission:b4356a262ae94b2ff0229ba1ae9abd336e799da286b40ffde886ba47f56a94d3",
+    "historicalSourceId": "genesis-source:document:derived:a99e8674cb162fd9c49f0fbc30cfa017d804d3f00e0e0497771d55838ee8c121",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_PRINCIPLES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Principles",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_PRINCIPLES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a99e8674cb162fd9c49f0fbc30cfa017d804d3f00e0e0497771d55838ee8c121"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

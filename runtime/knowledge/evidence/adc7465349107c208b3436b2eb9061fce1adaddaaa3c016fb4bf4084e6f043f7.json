@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:45016b6d43adb7175de84a7d449e3306d127ea860ccb5b75b318b20b06a0e714",
+  "type": "commit",
+  "title": "fix(app): correct case-sensitive Index import for Vercel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723276,
+  "observedAt": 1779234972000,
+  "contentRef": "git:commit:a188ad4e773a0672802f8f6f31e39b428e0af685",
+  "checksum": "sha256:fd2f1bcc246f4a5b64df3e74841821cd687e3ee1ad892991af57cfa71cd47928",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 204,
+    "genesisAdmissionIdentity": "genesis-admission:9173533a0d19f20995244493fd7db806134e88fbda8153de7643180c4ac0ee2c",
+    "historicalSourceId": "genesis-source:commit:a188ad4e773a0672802f8f6f31e39b428e0af685",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a188ad4e773a0672802f8f6f31e39b428e0af685",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a188ad4e773a0672802f8f6f31e39b428e0af685",
+      "parentShas": [
+        "a69dc1253f0d2e66b653035474f41c081d4accd1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779234972000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779234972000
+      },
+      "subject": "fix(app): correct case-sensitive Index import for Vercel",
+      "body": "",
+      "changedPaths": [
+        "src/App.tsx"
+      ],
+      "changedPathsByParent": {
+        "a69dc1253f0d2e66b653035474f41c081d4accd1": [
+          "src/App.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a188ad4e773a0672802f8f6f31e39b428e0af685"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

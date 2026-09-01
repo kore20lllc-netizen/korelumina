@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:7efb7517d2488b4f0f59264351942a455d861a9f690999a5e4e42e37b2b83f41",
+  "type": "commit",
+  "title": "refactor(runtime): extract runtime serializer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737283,
+  "observedAt": 1782852016000,
+  "contentRef": "git:commit:bd44862c7cf8ffc0be20d1ecc4131c8391f21281",
+  "checksum": "sha256:a32308e9511796d52f60e8ee9744823143d499b40abec0c86512ac804294dbf5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 616,
+    "genesisAdmissionIdentity": "genesis-admission:8e673e2ca06350d193b5c1e30c13ebdb64914ad710f95d149bbc177f998fa5bb",
+    "historicalSourceId": "genesis-source:commit:bd44862c7cf8ffc0be20d1ecc4131c8391f21281",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:bd44862c7cf8ffc0be20d1ecc4131c8391f21281",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "bd44862c7cf8ffc0be20d1ecc4131c8391f21281",
+      "parentShas": [
+        "c5e4762161865883a12e4ced263e884ecc1e47a1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782852016000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782852016000
+      },
+      "subject": "refactor(runtime): extract runtime serializer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/registry/RuntimeSerializer.ts",
+        "docs/architecture/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "c5e4762161865883a12e4ced263e884ecc1e47a1": [
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/registry/RuntimeSerializer.ts",
+          "docs/architecture/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:bd44862c7cf8ffc0be20d1ecc4131c8391f21281"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

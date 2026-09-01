@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:912c9a5ad97b13275eaa8c2663f60b99f74da362a7f9252f6a567966a64ecc79",
+  "type": "commit",
+  "title": "docs(improvement): reconcile autonomous improvement architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734787,
+  "observedAt": 1782648010000,
+  "contentRef": "git:commit:420fc0c4024d36e9fdca574c4ee75e61588025dd",
+  "checksum": "sha256:d9d292bf1bf5fbb83cd0454a5e8cbc3b2a8b1c28323de520dd1a3ffb37d7268a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 548,
+    "genesisAdmissionIdentity": "genesis-admission:9da1c4a9d96375fcfb6fef0c15a3bd22a5736252553addc150f6b0cb192aa9dc",
+    "historicalSourceId": "genesis-source:commit:420fc0c4024d36e9fdca574c4ee75e61588025dd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:420fc0c4024d36e9fdca574c4ee75e61588025dd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "420fc0c4024d36e9fdca574c4ee75e61588025dd",
+      "parentShas": [
+        "ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782648010000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782648010000
+      },
+      "subject": "docs(improvement): reconcile autonomous improvement architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/KP-015_AUTONOMOUS_IMPROVEMENT_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "ef6cd1f73bbc727b8ce3a385ad96b96ca5bca34b": [
+          "docs/architecture/reconciliation/KP-015_AUTONOMOUS_IMPROVEMENT_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:420fc0c4024d36e9fdca574c4ee75e61588025dd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:dac6b4535e1816d14ef975e42cc1ff4885c77201de44dced428ded8b6027ed18",
+  "type": "commit",
+  "title": "feat(knowledge): add publisher framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740533,
+  "observedAt": 1783036338000,
+  "contentRef": "git:commit:e8d6e79f2a1c321c3fdaa419bcaa9ed118cb26a4",
+  "checksum": "sha256:a4badb2dc8641f770d35b510e24ca0db2eab07dcdfdec8f3176f38e504f521f9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 701,
+    "genesisAdmissionIdentity": "genesis-admission:9add3f93f9ef532ab1246fd3eb755600b73268f1065a2e6fd06c2bdc7813acc1",
+    "historicalSourceId": "genesis-source:commit:e8d6e79f2a1c321c3fdaa419bcaa9ed118cb26a4",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e8d6e79f2a1c321c3fdaa419bcaa9ed118cb26a4",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e8d6e79f2a1c321c3fdaa419bcaa9ed118cb26a4",
+      "parentShas": [
+        "31f93130f87c7d8991b1608f20596fc89abc2ac5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036338000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036338000
+      },
+      "subject": "feat(knowledge): add publisher framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublisher.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublisherRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublishingPipeline.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/publisher/index.ts"
+      ],
+      "changedPathsByParent": {
+        "31f93130f87c7d8991b1608f20596fc89abc2ac5": [
+          "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublisher.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublisherRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/publisher/KnowledgePublishingPipeline.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/publisher/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-006-knowledge-publisher-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e8d6e79f2a1c321c3fdaa419bcaa9ed118cb26a4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

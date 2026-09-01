@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:bc23c0593166cb666145859377468ecf4e8b3ff4ecf574d275635c5176dadbed",
+  "type": "commit",
+  "title": "docs(reconstruction): introduce RECON-002 patch engine specification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735440,
+  "observedAt": 1782713424000,
+  "contentRef": "git:commit:932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80",
+  "checksum": "sha256:47dfc1af4b94658bab0b8b59ea830e7c36f9358d89f055a57f9fa2a5ecd2b36d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 566,
+    "genesisAdmissionIdentity": "genesis-admission:e08bf27f96b11c378f9e19df1b72b466fe5782060429848843d03751041bfc72",
+    "historicalSourceId": "genesis-source:commit:932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80",
+      "parentShas": [
+        "f421802a24147649718289761d4b11d81a0bb9e5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782713424000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782713424000
+      },
+      "subject": "docs(reconstruction): introduce RECON-002 patch engine specification",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/RECON-002_PATCH_ENGINE_SPEC.md",
+        "tools/reconstruction/README.md",
+        "tools/reconstruction/__pycache__/apply_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/generate_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/reconstruction_workflow.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/review_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/validate_patch.cpython-312.pyc",
+        "tools/reconstruction/apply_patch.py",
+        "tools/reconstruction/generate_patch.py",
+        "tools/reconstruction/reconstruction_workflow.py",
+        "tools/reconstruction/review_patch.py",
+        "tools/reconstruction/templates/patch_metadata.json",
+        "tools/reconstruction/templates/ticket.md",
+        "tools/reconstruction/validate_patch.py"
+      ],
+      "changedPathsByParent": {
+        "f421802a24147649718289761d4b11d81a0bb9e5": [
+          "docs/architecture/RECON-002_PATCH_ENGINE_SPEC.md",
+          "tools/reconstruction/README.md",
+          "tools/reconstruction/__pycache__/apply_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/generate_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/reconstruction_workflow.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/review_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/validate_patch.cpython-312.pyc",
+          "tools/reconstruction/apply_patch.py",
+          "tools/reconstruction/generate_patch.py",
+          "tools/reconstruction/reconstruction_workflow.py",
+          "tools/reconstruction/review_patch.py",
+          "tools/reconstruction/templates/patch_metadata.json",
+          "tools/reconstruction/templates/ticket.md",
+          "tools/reconstruction/validate_patch.py"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:03905c0d323423ddca2ec12b6d733082b3fc34134f3cf01a3b8c31d4167b6041",
+  "type": "document",
+  "title": "KoreLumina Governance Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731504,
+  "observedAt": 1782547225000,
+  "contentRef": "docs/governance/GOVERNANCE_MODEL.md",
+  "checksum": "sha256:1295c94e83a710a8c2e421c99185095f2a2ffdcdd94753546f3002c049d45e54",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 454,
+    "genesisAdmissionIdentity": "genesis-admission:450a344e673b8abb0493e098cfe49f206fbe7e904ba337dcd4dd33a710f2c49c",
+    "historicalSourceId": "genesis-source:document:derived:79f188a10c421e6f583b224df587f6d2515529871d41a3f89308a96c2e9731f9",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/GOVERNANCE_MODEL.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Governance Model",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/GOVERNANCE_MODEL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:79f188a10c421e6f583b224df587f6d2515529871d41a3f89308a96c2e9731f9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

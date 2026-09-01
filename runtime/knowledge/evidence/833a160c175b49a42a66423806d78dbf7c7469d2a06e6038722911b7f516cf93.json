@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:710ec62b5b045db441e565c8e34a4ac387bcd368d902647cb874bc64bef3458f",
+  "type": "ADR",
+  "title": "ADR-0035 — Canonical Knowledge Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737729,
+  "observedAt": 1782880281000,
+  "contentRef": "docs/adr/ADR-0035-canonical-knowledge-architecture.md",
+  "checksum": "sha256:596a82b3f44e1adc059553a08cb8bb244b9bcbcb5f2dd192ff5b4c549a8617d7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 628,
+    "genesisAdmissionIdentity": "genesis-admission:1c62f11ca257b569260451b11c09126157f8b842c87c7e4e2ae71725ef893f0a",
+    "historicalSourceId": "genesis-source:ADR:derived:0d721c25dea998ed5d6af2945dd0852ef7d2dc242d5686e12493f98eacc731a5",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "sourceLocation": "docs/adr/ADR-0035-canonical-knowledge-architecture.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ADR-0035 — Canonical Knowledge Architecture",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/ADR-0035-canonical-knowledge-architecture.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:0d721c25dea998ed5d6af2945dd0852ef7d2dc242d5686e12493f98eacc731a5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

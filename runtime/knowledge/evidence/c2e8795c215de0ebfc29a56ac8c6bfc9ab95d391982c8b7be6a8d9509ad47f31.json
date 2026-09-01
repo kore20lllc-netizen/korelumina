@@ -1,0 +1,96 @@
+{
+  "id": "genesis-evidence:dc4c8399783aed7664dddd1dbc35719c5039c5abe76c7315450c6d30ab825841",
+  "type": "commit",
+  "title": "merge(main): resolved conflicts keeping runtime preview stable",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227721476,
+  "observedAt": 1775185849000,
+  "contentRef": "git:commit:7394be467762472177b5ef8eca0505e841df6fc4",
+  "checksum": "sha256:f35e77824efbef67f26ecab5d9f5bf5ba160f3ecdd0207ceb6636f071dd8350d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 147,
+    "genesisAdmissionIdentity": "genesis-admission:d3064cc7ebb147485c71e4b15295d58a6c22f364ec725ae1204602257a0bd723",
+    "historicalSourceId": "genesis-source:commit:7394be467762472177b5ef8eca0505e841df6fc4",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7394be467762472177b5ef8eca0505e841df6fc4",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7394be467762472177b5ef8eca0505e841df6fc4",
+      "parentShas": [
+        "b367c59215ff06100c99f14eb3fe932a971f5876",
+        "afb4ed98e0e53da8fbd355994d1f0f9bc89ad192"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775185849000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775185849000
+      },
+      "subject": "merge(main): resolved conflicts keeping runtime preview stable",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/apply/route.ts",
+        "app/api/ai/orchestrate/route.ts",
+        "app/api/dev/asset/route.ts",
+        "app/api/dev/preview/resolveEntry.ts",
+        "app/api/dev/preview/route.ts",
+        "app/api/master-os/route.ts",
+        "app/builder/BuilderInner.tsx",
+        "app/master-os/page.tsx",
+        "package-lock.json",
+        "package.json",
+        "scripts/add-assets.sh",
+        "scripts/add-node-modules.sh",
+        "scripts/add-tailwind.sh",
+        "scripts/fix-jsx-runtime.sh",
+        "scripts/fix-preview-app.sh",
+        "scripts/fix-preview-mount.sh",
+        "test.png"
+      ],
+      "changedPathsByParent": {
+        "afb4ed98e0e53da8fbd355994d1f0f9bc89ad192": [
+          "app/api/dev/asset/route.ts",
+          "app/api/dev/preview/resolveEntry.ts",
+          "app/api/dev/preview/route.ts",
+          "app/builder/BuilderInner.tsx",
+          "package-lock.json",
+          "package.json",
+          "scripts/add-assets.sh",
+          "scripts/add-node-modules.sh",
+          "scripts/add-tailwind.sh",
+          "scripts/fix-jsx-runtime.sh",
+          "scripts/fix-preview-app.sh",
+          "scripts/fix-preview-mount.sh",
+          "test.png"
+        ],
+        "b367c59215ff06100c99f14eb3fe932a971f5876": [
+          "app/api/ai/apply/route.ts",
+          "app/api/ai/orchestrate/route.ts",
+          "app/api/master-os/route.ts",
+          "app/master-os/page.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7394be467762472177b5ef8eca0505e841df6fc4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

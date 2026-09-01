@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:27cad838d1f38dbdd1d3545b173632656051910c7562978a0e8e2738bf154b0b",
+  "type": "commit",
+  "title": "fix(auth): restore Lovable landing navigation and auth gating",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723402,
+  "observedAt": 1779272246000,
+  "contentRef": "git:commit:9b8e5c5407a37049f65dd2e21e285019595e914d",
+  "checksum": "sha256:402c5740c3626461b4a848f40ff3046e26d1fc165603cfd14c5ecd63d37ac610",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 208,
+    "genesisAdmissionIdentity": "genesis-admission:e55fe203f3993c9de6b76af0d9555717fa2d0bb6fce77743d69aee836dd35c6f",
+    "historicalSourceId": "genesis-source:commit:9b8e5c5407a37049f65dd2e21e285019595e914d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9b8e5c5407a37049f65dd2e21e285019595e914d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9b8e5c5407a37049f65dd2e21e285019595e914d",
+      "parentShas": [
+        "162bc434754b5edbd11a2e34e970230f35d58ca2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779272246000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779272246000
+      },
+      "subject": "fix(auth): restore Lovable landing navigation and auth gating",
+      "body": "",
+      "changedPaths": [
+        "src/pages/LandingPage.tsx",
+        "src/services/navigationService.ts"
+      ],
+      "changedPathsByParent": {
+        "162bc434754b5edbd11a2e34e970230f35d58ca2": [
+          "src/pages/LandingPage.tsx",
+          "src/services/navigationService.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9b8e5c5407a37049f65dd2e21e285019595e914d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

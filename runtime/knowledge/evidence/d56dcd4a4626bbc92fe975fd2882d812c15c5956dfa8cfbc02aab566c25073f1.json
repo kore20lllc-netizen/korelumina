@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:2ad1ff56febb66c810b1d4fad1320701b52764c6ac1b297dd0f594128cd8d67d",
+  "type": "document",
+  "title": "KP-012 Planning Platform Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733725,
+  "observedAt": 1782644371000,
+  "contentRef": "docs/architecture/reconciliation/KP-012_PLANNING_PLATFORM_RECONCILIATION.md",
+  "checksum": "sha256:b5b61243817819536f2f5622622f093f5b26211501df63edb1bb41069a6e2130",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 518,
+    "genesisAdmissionIdentity": "genesis-admission:5d13e07539f09698ef5566c0a76495bdfe615c769fb90842334a74c45c21307e",
+    "historicalSourceId": "genesis-source:document:derived:de1a31a64cfd9cc26bccda6fb5241025a387548d4ce2ec1520ca7742064145a0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "KP-012 Planning Platform is complete and architecture frozen",
+    "sourceLocation": "docs/architecture/reconciliation/KP-012_PLANNING_PLATFORM_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KP-012 Planning Platform Reconciliation",
+      "status": "KP-012 Planning Platform is complete and architecture frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconciliation/KP-012_PLANNING_PLATFORM_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:de1a31a64cfd9cc26bccda6fb5241025a387548d4ce2ec1520ca7742064145a0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

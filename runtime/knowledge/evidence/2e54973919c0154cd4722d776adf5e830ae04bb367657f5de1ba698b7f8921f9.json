@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:0e4fd9d94c7c2f6569cbffb6cfbebcb3a09d125f05c408abf92bf45dd6628944",
+  "type": "commit",
+  "title": "docs(engineering): define responsibility convergence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739632,
+  "observedAt": 1782975462000,
+  "contentRef": "git:commit:82090b14fcb84a280a3d695503d8ff719da6c3d1",
+  "checksum": "sha256:7071cd9b047cc19c33cd81e36dce25b08dff0cf37fb650b2c2a68116d7c8dc42",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 678,
+    "genesisAdmissionIdentity": "genesis-admission:ae5a6031c580147cda57655d1c6ff87d340d2eb46a274881f3f39ad63da22b9c",
+    "historicalSourceId": "genesis-source:commit:82090b14fcb84a280a3d695503d8ff719da6c3d1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:82090b14fcb84a280a3d695503d8ff719da6c3d1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "82090b14fcb84a280a3d695503d8ff719da6c3d1",
+      "parentShas": [
+        "b341e6e62525ac1690e1336c15cce11aba47d915"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782975462000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782975462000
+      },
+      "subject": "docs(engineering): define responsibility convergence",
+      "body": "",
+      "changedPaths": [
+        "docs/programs/autonomous-engineering/audits/a2.2-responsibility-convergence.md"
+      ],
+      "changedPathsByParent": {
+        "b341e6e62525ac1690e1336c15cce11aba47d915": [
+          "docs/programs/autonomous-engineering/audits/a2.2-responsibility-convergence.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a2.2-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:82090b14fcb84a280a3d695503d8ff719da6c3d1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

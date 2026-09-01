@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:04c13d7de959233cb2e044278e3a0c6dde02cf8753f04c7e3b87f7fc26ac48fa",
+  "type": "document",
+  "title": "KoreLumina Execution Governance Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735294,
+  "observedAt": 1782711562000,
+  "contentRef": "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md",
+  "checksum": "sha256:98e3e8709fd3301f372ed197c57af1ad1e3eea611d78f33bfd9fb82bd94b290e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 562,
+    "genesisAdmissionIdentity": "genesis-admission:e0ad6e9472258a3877d79161c03e7d09a06efab8c088437984c4c17895029986",
+    "historicalSourceId": "genesis-source:document:derived:7ba604ec6e147b9e2152ea0c4e3ba8aee31093be89b8fa3c19a6474815da757a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Constitutional",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Execution Governance Specification V1",
+      "status": "Constitutional",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:7ba604ec6e147b9e2152ea0c4e3ba8aee31093be89b8fa3c19a6474815da757a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

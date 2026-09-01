@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:596da2fa6e6aa00e4ca16bcc3f0c0ce273ee94d9e1d8bab67aa7eac25726d796",
+  "type": "commit",
+  "title": "test(knowledge): execute full knowledge preservation pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740768,
+  "observedAt": 1783038418000,
+  "contentRef": "git:commit:4d312e30e701943ddbc8200fd9b15d072ce4ca4d",
+  "checksum": "sha256:6f2f29b763c166fea68aaf8319904f9e4cd7f6fdd978d30c3e370bf258447be6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 707,
+    "genesisAdmissionIdentity": "genesis-admission:77a9de00b02054b2754327689686915a559a1b167229d9b626cf272fa037b8f2",
+    "historicalSourceId": "genesis-source:commit:4d312e30e701943ddbc8200fd9b15d072ce4ca4d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4d312e30e701943ddbc8200fd9b15d072ce4ca4d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4d312e30e701943ddbc8200fd9b15d072ce4ca4d",
+      "parentShas": [
+        "086bb166558c8d9d9cc5460aa368e734267dfb37"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783038418000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783038418000
+      },
+      "subject": "test(knowledge): execute full knowledge preservation pipeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatformSmokeTest.ts"
+      ],
+      "changedPathsByParent": {
+        "086bb166558c8d9d9cc5460aa368e734267dfb37": [
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatformSmokeTest.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-012-full-pipeline-smoke-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4d312e30e701943ddbc8200fd9b15d072ce4ca4d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

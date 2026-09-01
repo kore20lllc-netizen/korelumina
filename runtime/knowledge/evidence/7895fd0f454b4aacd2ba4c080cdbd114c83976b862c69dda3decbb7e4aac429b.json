@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:5dfb1cd6e3c1904d1d369d696ffb32d9889025a8ccdfa725e16c159b9e1900da",
+  "type": "document",
+  "title": "Package Registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735801,
+  "observedAt": 1782714867000,
+  "contentRef": "docs/architecture/packages/PACKAGE_REGISTRY.md",
+  "checksum": "sha256:91b3f3f415ab08c8225f4326f262ac2bf8dcde4075db28a8a2b687c15a16a22e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 576,
+    "genesisAdmissionIdentity": "genesis-admission:7342096bc4549a5521771d5199372cbf45d32c4501d6d7ad7bae5d1c6763925f",
+    "historicalSourceId": "genesis-source:document:derived:2c97a0be42f7f0b7a3dbcb630f57f1a97ce4f0422de7b7e5a5260d6feed7691b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "sourceLocation": "docs/architecture/packages/PACKAGE_REGISTRY.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Package Registry",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/packages/PACKAGE_REGISTRY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2c97a0be42f7f0b7a3dbcb630f57f1a97ce4f0422de7b7e5a5260d6feed7691b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

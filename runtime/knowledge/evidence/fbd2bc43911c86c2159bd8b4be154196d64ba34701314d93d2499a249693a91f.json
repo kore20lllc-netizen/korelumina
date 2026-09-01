@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:fb4fa6995d09115f8c3f5ea8bca4a0949c16fe4f3284e3b3c40ab11cbfa6c82f",
+  "type": "commit",
+  "title": "fix: add error handling to auth initialization to prevent white-page crashes",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724486,
+  "observedAt": 1780094591000,
+  "contentRef": "git:commit:3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd",
+  "checksum": "sha256:902fab69359797165e06e0d1a0a408537e2da6ad6847da9a1ceab0e62eff8cd5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 242,
+    "genesisAdmissionIdentity": "genesis-admission:b0b05d043de18fb1f4a985a37ee663ed99350123785b8ea75de23bbd07ba4241",
+    "historicalSourceId": "genesis-source:commit:3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd",
+      "parentShas": [
+        "17f02a906d6a69235341815b962316df0f144545"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780094591000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780094591000
+      },
+      "subject": "fix: add error handling to auth initialization to prevent white-page crashes",
+      "body": "Co-authored-by: aider (claude-sonnet-4-5) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/src/context/AuthContext.tsx",
+        "apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts"
+      ],
+      "changedPathsByParent": {
+        "17f02a906d6a69235341815b962316df0f144545": [
+          "apps/lumina-builder/src/context/AuthContext.tsx",
+          "apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

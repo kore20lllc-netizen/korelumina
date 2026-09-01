@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:6e641d88ff112b8004c7e47799cfcc441000886f36a97804afaf860725834e08",
+  "type": "commit",
+  "title": "feat(knowledge): discover documentation evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741083,
+  "observedAt": 1783044089000,
+  "contentRef": "git:commit:5f63f5fc7d2b2667bc09dc502deeaa46780d0341",
+  "checksum": "sha256:3b7671b5dd8a79ae15eb728eae6f4f4dbf5c338fda30cc8251cef10e011c3062",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 715,
+    "genesisAdmissionIdentity": "genesis-admission:10d09a1eae72dfedb4f129e396f9d939944a5b29c1891c290001e2f5df620f5f",
+    "historicalSourceId": "genesis-source:commit:5f63f5fc7d2b2667bc09dc502deeaa46780d0341",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5f63f5fc7d2b2667bc09dc502deeaa46780d0341",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5f63f5fc7d2b2667bc09dc502deeaa46780d0341",
+      "parentShas": [
+        "b9c377010323a871b8fbac6e082c627ca1443291"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783044089000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783044089000
+      },
+      "subject": "feat(knowledge): discover documentation evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/discovery/DocumentationEvidenceDiscovery.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/discovery/index.ts"
+      ],
+      "changedPathsByParent": {
+        "b9c377010323a871b8fbac6e082c627ca1443291": [
+          "apps/lumina-runtime/src/knowledge-preservation/discovery/DocumentationEvidenceDiscovery.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/discovery/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-006-documentation-evidence-discovery-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5f63f5fc7d2b2667bc09dc502deeaa46780d0341"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:166afe38fa7906536d03bf76918eb94ded9c6354103e96e55aac18055a0d59ec",
+  "type": "document",
+  "title": "Deployment Reference Architecture V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728212,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/DEPLOYMENT_REFERENCE_ARCHITECTURE_V1.md",
+  "checksum": "sha256:ad59f65e36979d99ecd412f5760e60443f924b6d697c1dc15e41c2ea0df205a8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 356,
+    "genesisAdmissionIdentity": "genesis-admission:529345e4d56586eec540ea7683b6f69c6680cc7ebfecde8f3008a2376b8394b1",
+    "historicalSourceId": "genesis-source:document:derived:83ce5cf46bfe1cf4f38e80059eea3d73f1dd556919bdc3e5f88dc501584305df",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/DEPLOYMENT_REFERENCE_ARCHITECTURE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Deployment Reference Architecture V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/DEPLOYMENT_REFERENCE_ARCHITECTURE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:83ce5cf46bfe1cf4f38e80059eea3d73f1dd556919bdc3e5f88dc501584305df"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

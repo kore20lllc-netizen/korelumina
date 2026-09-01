@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:da455762cdefdcda4179881ee08ee600be336681a4626db75ca513002ddfcbf1",
+  "type": "document",
+  "title": "KoreLumina Master Traceability Matrix V2",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735330,
+  "observedAt": 1782711562000,
+  "contentRef": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md",
+  "checksum": "sha256:ba3a5496fcab57f48d3e42b7076161f201617625f5e842f8ed168e2839a37c26",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 563,
+    "genesisAdmissionIdentity": "genesis-admission:1f9abcc7d8a4ce9ebe35475353fc9f4631379a7d7cc45e42d066a2dc0eacbd0d",
+    "historicalSourceId": "genesis-source:document:derived:a10a6f39be8424d45f7edc62855db2771ebbd14d6301a399b5629794f935b280",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "approved",
+    "sourceLocation": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Master Traceability Matrix V2",
+      "status": "Authoritative",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a10a6f39be8424d45f7edc62855db2771ebbd14d6301a399b5629794f935b280"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

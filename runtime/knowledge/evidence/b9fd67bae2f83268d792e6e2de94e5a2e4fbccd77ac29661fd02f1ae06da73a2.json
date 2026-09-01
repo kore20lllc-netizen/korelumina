@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:00e782cbb8ffa12905a1d7af09cbd7963e70b9196458cf385e6368865a8eaf6d",
+  "type": "commit",
+  "title": "fix(platform-sdk): establish valid module contract for paths",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735258,
+  "observedAt": 1782711054000,
+  "contentRef": "git:commit:d88edcf1adcd8bf657a5e3ebfe2fb6af03f0567c",
+  "checksum": "sha256:f47c89fafb268f89d76a8a35ac0b7179ed0d42a35c0850085c8a256609130ce4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 561,
+    "genesisAdmissionIdentity": "genesis-admission:b9e5961270dd33028063b5c3a36e1778e8b2c96606e2dde96dea8e8d9ee296d8",
+    "historicalSourceId": "genesis-source:commit:d88edcf1adcd8bf657a5e3ebfe2fb6af03f0567c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d88edcf1adcd8bf657a5e3ebfe2fb6af03f0567c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d88edcf1adcd8bf657a5e3ebfe2fb6af03f0567c",
+      "parentShas": [
+        "ae2552c665926ac136cf5886f09c4548ca5e379e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782711054000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782711054000
+      },
+      "subject": "fix(platform-sdk): establish valid module contract for paths",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/package.json",
+        "packages/platform-sdk/src/index.ts",
+        "packages/platform-sdk/src/paths/index.ts",
+        "packages/platform-sdk/tsconfig.json"
+      ],
+      "changedPathsByParent": {
+        "ae2552c665926ac136cf5886f09c4548ca5e379e": [
+          "packages/platform-sdk/package.json",
+          "packages/platform-sdk/src/index.ts",
+          "packages/platform-sdk/src/paths/index.ts",
+          "packages/platform-sdk/tsconfig.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d88edcf1adcd8bf657a5e3ebfe2fb6af03f0567c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

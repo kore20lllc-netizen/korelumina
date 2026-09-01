@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:cdd3edfea615b1ba6bd9c171094e88ca71d34059869726e7f9c2315739e4e19e",
+  "type": "commit",
+  "title": "fix: Prevent preview frame clipping with scrollable grid layout",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724770,
+  "observedAt": 1780100469000,
+  "contentRef": "git:commit:d641333df7055ddc64e2cd1624a6f6d877e159b6",
+  "checksum": "sha256:5bd1713989c15c9c2d1ee87249fa9d2fc034b9239f5ce95b479040dca06ee6f1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 251,
+    "genesisAdmissionIdentity": "genesis-admission:e6cef6041f3665a5c735c0d1495ec66cd9629d69f567a820250b5676b68b24ff",
+    "historicalSourceId": "genesis-source:commit:d641333df7055ddc64e2cd1624a6f6d877e159b6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d641333df7055ddc64e2cd1624a6f6d877e159b6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d641333df7055ddc64e2cd1624a6f6d877e159b6",
+      "parentShas": [
+        "36a3060b9ea4a08fc08664bb24c2e6c3e9e186ba"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780100469000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780100469000
+      },
+      "subject": "fix: Prevent preview frame clipping with scrollable grid layout",
+      "body": "Co-authored-by: aider (gemini/gemini-2.5-pro) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "36a3060b9ea4a08fc08664bb24c2e6c3e9e186ba": [
+          "apps/lumina-builder/src/components/workspaces/DesignerWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d641333df7055ddc64e2cd1624a6f6d877e159b6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:b01480219efbc8a3ec7f91077f367cedc63222fe8b68d1cd8621280702838c52",
+  "type": "document",
+  "title": "Documentation Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740021,
+  "observedAt": 1783023471000,
+  "contentRef": "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md",
+  "checksum": "sha256:881ec6984f9ddcb1cb9c6a1b2714f186b720aaed15bd9f992e12b8903ca50dcd",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 688,
+    "genesisAdmissionIdentity": "genesis-admission:f3c2b5bf37aba1355ddc17525b97004a7c9fc6f6ab649be80e17851806f38535",
+    "historicalSourceId": "genesis-source:document:derived:69b3e6b1ace89c56b21dae221972138c42779e5929d96f189e67df0b62e8904a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Documentation Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:69b3e6b1ace89c56b21dae221972138c42779e5929d96f189e67df0b62e8904a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

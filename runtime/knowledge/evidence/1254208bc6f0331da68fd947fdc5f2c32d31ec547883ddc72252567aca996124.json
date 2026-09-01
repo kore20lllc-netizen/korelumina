@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:4b1b329d231d579827335b72690c24cb6f3bae88603be44a0c66611a4789b222",
+  "type": "commit",
+  "title": "Merge pull request #8 from kore20lllc-netizen/dev",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717868,
+  "observedAt": 1771290641000,
+  "contentRef": "git:commit:930d806ea765f50fcbb55894e91ba6b2e97c1206",
+  "checksum": "sha256:4be352177adf49da471925bc1cd444e756117c984f9285d8f1e0abdbe50a5c6e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 30,
+    "genesisAdmissionIdentity": "genesis-admission:d58ce62014afc1f63213cd9a994f64433654b2ac56a6963c73573c7b2e9b2db4",
+    "historicalSourceId": "genesis-source:commit:930d806ea765f50fcbb55894e91ba6b2e97c1206",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:930d806ea765f50fcbb55894e91ba6b2e97c1206",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "930d806ea765f50fcbb55894e91ba6b2e97c1206",
+      "parentShas": [
+        "5759efa68e301648449922d4b09f37eaaf7dc0d9",
+        "f781f2f0f6754927abcf400b92d350b4bc493a9f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771290641000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1771290641000
+      },
+      "subject": "Merge pull request #8 from kore20lllc-netizen/dev",
+      "body": "Dev",
+      "changedPaths": [
+        "app/api/projects/[projectId]/build/route.ts",
+        "app/api/projects/[projectId]/deploy/route.ts",
+        "lib/dev-guard.ts",
+        "lib/workspace-jail.ts"
+      ],
+      "changedPathsByParent": {
+        "5759efa68e301648449922d4b09f37eaaf7dc0d9": [
+          "app/api/projects/[projectId]/build/route.ts",
+          "app/api/projects/[projectId]/deploy/route.ts",
+          "lib/dev-guard.ts",
+          "lib/workspace-jail.ts"
+        ],
+        "f781f2f0f6754927abcf400b92d350b4bc493a9f": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:930d806ea765f50fcbb55894e91ba6b2e97c1206"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

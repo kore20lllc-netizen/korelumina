@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:1695449412b83bd1f9ce6bc003f8fbb896f36af8ffdcf557f75f0b4647b73b0c",
+  "type": "commit",
+  "title": "feat(engineering): add engineering service boundary",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739052,
+  "observedAt": 1782951698000,
+  "contentRef": "git:commit:5b12137f6473d26e6632af03ffde29409dfee229",
+  "checksum": "sha256:68d88f3da30e78d82236661bed9225d1c555deb77ce1ba0e459cbcae18793b8b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 663,
+    "genesisAdmissionIdentity": "genesis-admission:df5328b453004680796f932142d1bb5aaa5ece3e732ceca9c826c2a89e364257",
+    "historicalSourceId": "genesis-source:commit:5b12137f6473d26e6632af03ffde29409dfee229",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5b12137f6473d26e6632af03ffde29409dfee229",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5b12137f6473d26e6632af03ffde29409dfee229",
+      "parentShas": [
+        "d39f0a9cccd07aa272c19886f1251b3de27cc639"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782951698000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782951698000
+      },
+      "subject": "feat(engineering): add engineering service boundary",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/EngineeringService.ts",
+        "apps/lumina-runtime/src/engineering/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "d39f0a9cccd07aa272c19886f1251b3de27cc639": [
+          "apps/lumina-runtime/src/engineering/EngineeringService.ts",
+          "apps/lumina-runtime/src/engineering/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase068-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5b12137f6473d26e6632af03ffde29409dfee229"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

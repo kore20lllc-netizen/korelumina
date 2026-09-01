@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:ea8c2fc0ff48c0a82e3e886bb0a50cec651bde54f776901db4b12c8adbb5fbc5",
+  "type": "document",
+  "title": "KoreLumina Operating Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732331,
+  "observedAt": 1782589054000,
+  "contentRef": "docs/governance/OPERATING_MODEL.md",
+  "checksum": "sha256:5cc744aa5a9882e26b42fbd7b22a37d927043b9f920df3a3686238be1361a640",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 478,
+    "genesisAdmissionIdentity": "genesis-admission:9aa5c6f6a419a0f0154ad9b028d78d8fa55b45d0fc883627cef1e32bddb0cafd",
+    "historicalSourceId": "genesis-source:document:derived:15b33325c73bd127d4c1b4dc48200fba925ce3e91766c7d82dc5c738fb7c0acf",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "approvalState": "Approved Governance",
+    "version": "1.1",
+    "sourceLocation": "docs/governance/OPERATING_MODEL.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Operating Model",
+      "status": "Approved Governance",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/OPERATING_MODEL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:15b33325c73bd127d4c1b4dc48200fba925ce3e91766c7d82dc5c738fb7c0acf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

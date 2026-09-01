@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:041ea39644c2d4ca2b56deeab430331b2b14cafbf4eb66578546da4afe82ab16",
+  "type": "commit",
+  "title": "docs(reasoning): reconcile reasoning platform architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733512,
+  "observedAt": 1782642113000,
+  "contentRef": "git:commit:ed981cb94eea32003995d99d4a9ec32bf33dcb82",
+  "checksum": "sha256:0c5351a232354fbe526ee4103dfbb9240ad0eda51296d523e9d7b4d6dc839a54",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 512,
+    "genesisAdmissionIdentity": "genesis-admission:4eebf47296dbf9f73d117c000467955f4b2da1cb812fdc9da46d715bda093a17",
+    "historicalSourceId": "genesis-source:commit:ed981cb94eea32003995d99d4a9ec32bf33dcb82",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ed981cb94eea32003995d99d4a9ec32bf33dcb82",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ed981cb94eea32003995d99d4a9ec32bf33dcb82",
+      "parentShas": [
+        "413317f62474911c0955890680859693597bb8e8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782642113000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782642113000
+      },
+      "subject": "docs(reasoning): reconcile reasoning platform architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/KP-011_REASONING_PLATFORM_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "413317f62474911c0955890680859693597bb8e8": [
+          "docs/architecture/reconciliation/KP-011_REASONING_PLATFORM_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ed981cb94eea32003995d99d4a9ec32bf33dcb82"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

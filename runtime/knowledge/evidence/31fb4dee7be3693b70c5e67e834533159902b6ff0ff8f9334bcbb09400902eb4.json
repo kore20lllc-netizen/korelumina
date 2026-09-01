@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:3561b9687a1955da17fe4e7ba17656b7f7caacedc01112d9acaf242a75cf615b",
+  "type": "document",
+  "title": "KoreLumina Master OS Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739170,
+  "observedAt": 1782959015000,
+  "contentRef": "docs/architecture/KORELUMINA_MASTER_OS.md",
+  "checksum": "sha256:50511792d5b1cf011c66bb00422a0856a78bcbc7a0cc665294768f1dd20a0dca",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 666,
+    "genesisAdmissionIdentity": "genesis-admission:b1128f7e50580b6acb1eba7c994dc9144f26d47904d60258250f2e87afddcd18",
+    "historicalSourceId": "genesis-source:document:derived:82b65a7ea97860b90c07089d9f503ddb7d0f50647e64d8253579188e97750999",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Core Reconstruction complete. Autonomous Engineering Platform begins here",
+    "sourceLocation": "docs/architecture/KORELUMINA_MASTER_OS.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Master OS Architecture",
+      "status": "Core Reconstruction complete. Autonomous Engineering Platform begins here",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_MASTER_OS.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:82b65a7ea97860b90c07089d9f503ddb7d0f50647e64d8253579188e97750999"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

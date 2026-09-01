@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:e2b2e2ddb6433a53a7a4cd5462309f82d97f4448b12ccebdd32639a7ae394865",
+  "type": "commit",
+  "title": "harden preview lifecycle: dynamic port allocation + process group termination",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718877,
+  "observedAt": 1771783981000,
+  "contentRef": "git:commit:51e40dbdcff91c14f212cd249bb04d5d677e5f79",
+  "checksum": "sha256:2ae4f5efeccad13609176b880070e1fc37d07de3dae027d0c4e4ce6607a0dbb6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 63,
+    "genesisAdmissionIdentity": "genesis-admission:08dd27b64df97a2bbe973f5fb8e95c67d332eecaafe589de67d03c21377a2409",
+    "historicalSourceId": "genesis-source:commit:51e40dbdcff91c14f212cd249bb04d5d677e5f79",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:51e40dbdcff91c14f212cd249bb04d5d677e5f79",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "51e40dbdcff91c14f212cd249bb04d5d677e5f79",
+      "parentShas": [
+        "b8f1678a51e2206eaf7253e7c20e4196152f2a5e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771783981000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771783981000
+      },
+      "subject": "harden preview lifecycle: dynamic port allocation + process group termination",
+      "body": "",
+      "changedPaths": [
+        "runtime/port-utils.ts",
+        "runtime/preview-daemon.ts",
+        "runtime/preview-store.ts"
+      ],
+      "changedPathsByParent": {
+        "b8f1678a51e2206eaf7253e7c20e4196152f2a5e": [
+          "runtime/port-utils.ts",
+          "runtime/preview-daemon.ts",
+          "runtime/preview-store.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:51e40dbdcff91c14f212cd249bb04d5d677e5f79"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

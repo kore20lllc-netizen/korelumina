@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:035594d7ae74a95f34f651b31989ff57d23003a9670a14d4ec8a7ce559f86f5a",
+  "type": "commit",
+  "title": "fix: allow app to run without Supabase env vars in development",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724454,
+  "observedAt": 1780091626000,
+  "contentRef": "git:commit:17f02a906d6a69235341815b962316df0f144545",
+  "checksum": "sha256:412bf36f37de490a0752b8648a6e6be8d12c9634c7d5c8226c8cd4fc5bc1a7d1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 241,
+    "genesisAdmissionIdentity": "genesis-admission:6817e577a2f9bf133580b13a2fd4bfe105f2289a71c19a27fab033d2ad9d8b18",
+    "historicalSourceId": "genesis-source:commit:17f02a906d6a69235341815b962316df0f144545",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:17f02a906d6a69235341815b962316df0f144545",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "17f02a906d6a69235341815b962316df0f144545",
+      "parentShas": [
+        "d8ee7503227497d0148dc7285b9a2f0aed70c0c4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780091626000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780091626000
+      },
+      "subject": "fix: allow app to run without Supabase env vars in development",
+      "body": "Co-authored-by: aider (claude-sonnet-4-5) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/.env.example",
+        "apps/lumina-builder/src/integrations/supabase/client.ts",
+        "apps/lumina-builder/src/providers/auth-registry.ts"
+      ],
+      "changedPathsByParent": {
+        "d8ee7503227497d0148dc7285b9a2f0aed70c0c4": [
+          "apps/lumina-builder/.env.example",
+          "apps/lumina-builder/src/integrations/supabase/client.ts",
+          "apps/lumina-builder/src/providers/auth-registry.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:17f02a906d6a69235341815b962316df0f144545"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

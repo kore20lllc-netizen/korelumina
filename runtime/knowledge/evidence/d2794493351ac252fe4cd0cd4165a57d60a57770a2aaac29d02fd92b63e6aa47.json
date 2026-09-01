@@ -1,0 +1,103 @@
+{
+  "id": "genesis-evidence:488bcd5bd6c64fbbe8dd51946bca507e36eb243ae1a12f520463d1d51f820351",
+  "type": "commit",
+  "title": "🔥 stabilize builder runtime — preview v3 + journal memory engine + fs sync",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719803,
+  "observedAt": 1773513769000,
+  "contentRef": "git:commit:68a671f7cb1267e0fc7c7ee68a474129e21f561b",
+  "checksum": "sha256:f188128ec7d4c26fcdc05d7ef70d91f4c5f9fceea6751289269e51c0cee40359",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 93,
+    "genesisAdmissionIdentity": "genesis-admission:b69e03be484f86338e7c33eda620102e11cfede2b93cc37895341902cada0c9e",
+    "historicalSourceId": "genesis-source:commit:68a671f7cb1267e0fc7c7ee68a474129e21f561b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:68a671f7cb1267e0fc7c7ee68a474129e21f561b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "68a671f7cb1267e0fc7c7ee68a474129e21f561b",
+      "parentShas": [
+        "704c49ddbbf9f07dedd47b9ccae42406d54db49c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773513769000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773513769000
+      },
+      "subject": "🔥 stabilize builder runtime — preview v3 + journal memory engine + fs sync",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/ai/generate/route.ts",
+        "app/api/dev/files/read/route.ts",
+        "app/api/dev/files/route.ts",
+        "app/api/dev/files/write/route.ts",
+        "app/api/dev/fs-stream/route.ts",
+        "app/api/dev/journal/route.ts",
+        "app/api/dev/preview/run/route.ts",
+        "components/builder/AIPanel.tsx",
+        "components/builder/CodeEditor.tsx",
+        "components/builder/FileTree.tsx",
+        "components/builder/JournalPanel.tsx",
+        "components/builder/PreviewFrame.tsx",
+        "package-lock.json",
+        "package.json",
+        "runtime/fs/bootstrapProject.ts",
+        "runtime/fs/ensureProjectRoot.ts",
+        "runtime/journal/index.ts",
+        "runtime/journal/store.ts",
+        "runtime/journal/types.ts",
+        "runtime/preview-patches.ts",
+        "runtime/preview-version.ts"
+      ],
+      "changedPathsByParent": {
+        "704c49ddbbf9f07dedd47b9ccae42406d54db49c": [
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "app/api/ai/generate/route.ts",
+          "app/api/dev/files/read/route.ts",
+          "app/api/dev/files/route.ts",
+          "app/api/dev/files/write/route.ts",
+          "app/api/dev/fs-stream/route.ts",
+          "app/api/dev/journal/route.ts",
+          "app/api/dev/preview/run/route.ts",
+          "components/builder/AIPanel.tsx",
+          "components/builder/CodeEditor.tsx",
+          "components/builder/FileTree.tsx",
+          "components/builder/JournalPanel.tsx",
+          "components/builder/PreviewFrame.tsx",
+          "package-lock.json",
+          "package.json",
+          "runtime/fs/bootstrapProject.ts",
+          "runtime/fs/ensureProjectRoot.ts",
+          "runtime/journal/index.ts",
+          "runtime/journal/store.ts",
+          "runtime/journal/types.ts",
+          "runtime/preview-patches.ts",
+          "runtime/preview-version.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:68a671f7cb1267e0fc7c7ee68a474129e21f561b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

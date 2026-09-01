@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:15d8b95691405631d15e8b62011f89c321bcba296b07cc0df36f6c0209c79439",
+  "type": "commit",
+  "title": "feat(workspaces): replace workspace creation prompt with Lumina dialog",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726123,
+  "observedAt": 1781692844000,
+  "contentRef": "git:commit:42fea9e5c380f0e9816cc60950feb9d6200cc6e2",
+  "checksum": "sha256:ebe542773a6c20d7851fc0af8313bf99ff95a67a9fd57a0fadaeb2e590aabccb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 293,
+    "genesisAdmissionIdentity": "genesis-admission:be13056d5c73eb462965682b9784ee93c02609c56979b6715eea859db8bdd5e7",
+    "historicalSourceId": "genesis-source:commit:42fea9e5c380f0e9816cc60950feb9d6200cc6e2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:42fea9e5c380f0e9816cc60950feb9d6200cc6e2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "42fea9e5c380f0e9816cc60950feb9d6200cc6e2",
+      "parentShas": [
+        "33b2f4b0591a8ed84347fbb69deab0b8f53fad8e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781692844000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781692844000
+      },
+      "subject": "feat(workspaces): replace workspace creation prompt with Lumina dialog",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/layout/TeamSwitcher.tsx",
+        "apps/lumina-builder/src/components/layout/dialogs/CreateWorkspaceDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "33b2f4b0591a8ed84347fbb69deab0b8f53fad8e": [
+          "apps/lumina-builder/src/components/layout/TeamSwitcher.tsx",
+          "apps/lumina-builder/src/components/layout/dialogs/CreateWorkspaceDialog.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:42fea9e5c380f0e9816cc60950feb9d6200cc6e2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

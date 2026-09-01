@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:864e6979ddd96dd4914de8d9d1b65b9ac011f71a8abf12e6dfa8b9213abcbbc0",
+  "type": "commit",
+  "title": "feat(knowledge): execute repository recovery",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741800,
+  "observedAt": 1783053028000,
+  "contentRef": "git:commit:d3b059f6dbf9042691e4a6218dac1d7380bae99a",
+  "checksum": "sha256:8890c919af1999a239425195b4d56e356a4c0887c6dd4aab571474c8c5960e1f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 733,
+    "genesisAdmissionIdentity": "genesis-admission:ab1fb4c0ea613572424770d672ddedbf24ea653b36b2458d255451e91d902e87",
+    "historicalSourceId": "genesis-source:commit:d3b059f6dbf9042691e4a6218dac1d7380bae99a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d3b059f6dbf9042691e4a6218dac1d7380bae99a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d3b059f6dbf9042691e4a6218dac1d7380bae99a",
+      "parentShas": [
+        "1282d146e6433e30c39a2c7a723660cf1dbf0930"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783053028000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783053028000
+      },
+      "subject": "feat(knowledge): execute repository recovery",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-recovery/RepositoryRecoveryExecution.ts",
+        "apps/lumina-runtime/src/knowledge-recovery/index.ts"
+      ],
+      "changedPathsByParent": {
+        "1282d146e6433e30c39a2c7a723660cf1dbf0930": [
+          "apps/lumina-runtime/src/knowledge-recovery/RepositoryRecoveryExecution.ts",
+          "apps/lumina-runtime/src/knowledge-recovery/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/rrp-002-repository-recovery-execution-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d3b059f6dbf9042691e4a6218dac1d7380bae99a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:85e02d06600678b92bf728f395375a9f50b95a5b34b9ea4be585a9d331563b58",
+  "type": "document",
+  "title": "Customer Experience Platform Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728113,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/CUSTOMER_EXPERIENCE_PLATFORM_SPECIFICATION_V1.md",
+  "checksum": "sha256:c951c84ff610b8cbd7cf17d9994ea24c95704d2f16f87813f82489ba88f8ea0a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 353,
+    "genesisAdmissionIdentity": "genesis-admission:552ad55f2a5c0cd56ee66ec5796f29f43d8314875d6cef9107966fd4050fcdaf",
+    "historicalSourceId": "genesis-source:document:derived:021a9553d428acb005a3a04b650baedf0c1f8867a8006aa38d5f885ca71eedad",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Customer Experience Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/CUSTOMER_EXPERIENCE_PLATFORM_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Customer Experience Platform Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/CUSTOMER_EXPERIENCE_PLATFORM_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:021a9553d428acb005a3a04b650baedf0c1f8867a8006aa38d5f885ca71eedad"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

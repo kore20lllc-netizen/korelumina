@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:efaf7275cd291635df0dc088e1d6a0df974ed5be17a7bfacc7ee4b1b1245f548",
+  "type": "document",
+  "title": "KoreLumina Architecture Review Checklist V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727945,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_REVIEW_CHECKLIST_V1.md",
+  "checksum": "sha256:f46bb898e6662e84490917dbe6cb0543738b29f4ce558cd415a9e31073b896d2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 348,
+    "genesisAdmissionIdentity": "genesis-admission:e2c0ec01c39679f4858003c662fa6de2fd1ecb36eeedc1fc6ce86be0543ebc40",
+    "historicalSourceId": "genesis-source:document:derived:f2c8b428aeddd51be62b4adeca33127d139a35eb79f526748c0ebe0609455485",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_REVIEW_CHECKLIST_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Review Checklist V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_REVIEW_CHECKLIST_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f2c8b428aeddd51be62b4adeca33127d139a35eb79f526748c0ebe0609455485"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

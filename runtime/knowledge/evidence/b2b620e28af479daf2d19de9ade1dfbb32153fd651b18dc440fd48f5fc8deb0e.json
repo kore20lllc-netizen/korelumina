@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:fd78d3136df5a9851c64289ac15b46097b046ade1eaf4291c430338cf2c49209",
+  "type": "commit",
+  "title": "feat(platform-sdk): add decision knowledge processor",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738103,
+  "observedAt": 1782885380000,
+  "contentRef": "git:commit:62965bc46046620609d446477b606775241c84e2",
+  "checksum": "sha256:2cc4a92e34e8f404ea145cb06e86506c56d4613dc598201340dfa322f26dc585",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 638,
+    "genesisAdmissionIdentity": "genesis-admission:4a5b31971d5b5689b17c1917516d6e13954c260c384a60e072c405dc49b6e4b9",
+    "historicalSourceId": "genesis-source:commit:62965bc46046620609d446477b606775241c84e2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:62965bc46046620609d446477b606775241c84e2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "62965bc46046620609d446477b606775241c84e2",
+      "parentShas": [
+        "8b6791a15c752391cb717a294470a4f2c9bbe672"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885380000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885380000
+      },
+      "subject": "feat(platform-sdk): add decision knowledge processor",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/knowledge/bootstrap.ts",
+        "packages/platform-sdk/src/knowledge/processors/DecisionStorageProcessor.ts"
+      ],
+      "changedPathsByParent": {
+        "8b6791a15c752391cb717a294470a4f2c9bbe672": [
+          "packages/platform-sdk/src/knowledge/bootstrap.ts",
+          "packages/platform-sdk/src/knowledge/processors/DecisionStorageProcessor.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase045-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:62965bc46046620609d446477b606775241c84e2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

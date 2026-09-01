@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:f2f60f439372b70cb53554a494ff4ceb6c802f94377896f9f8b04836e56f6d1c",
+  "type": "document",
+  "title": "KR-004 — Knowledge Architecture Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740261,
+  "observedAt": 1783033930000,
+  "contentRef": "docs/architecture/knowledge-governance/reconciliation/KR-004_KNOWLEDGE_ARCHITECTURE_RECONCILIATION.md",
+  "checksum": "sha256:b4196e0a76b6b6021b06597352fbe50b78ae75c8bb6497f295c928b13ae9a58d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 694,
+    "genesisAdmissionIdentity": "genesis-admission:ad0529276c1b42d7a1a677d74c219dfcac37b9d6c7cbd487c3be9d60a2d7e9b9",
+    "historicalSourceId": "genesis-source:document:derived:aaf04b83a2be4a2aaec575d50ac3820426933c0ef75bef95a064a6402a1c8cf2",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/knowledge-governance/reconciliation/KR-004_KNOWLEDGE_ARCHITECTURE_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KR-004 — Knowledge Architecture Reconciliation",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-governance/reconciliation/KR-004_KNOWLEDGE_ARCHITECTURE_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:aaf04b83a2be4a2aaec575d50ac3820426933c0ef75bef95a064a6402a1c8cf2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

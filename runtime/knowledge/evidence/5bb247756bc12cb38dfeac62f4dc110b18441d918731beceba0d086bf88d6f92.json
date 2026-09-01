@@ -1,0 +1,72 @@
+{
+  "id": "genesis-evidence:8447cb67d9892e05891d8c2fe36e2496e08813afbcbad722198714d773a29419",
+  "type": "commit",
+  "title": "Merge branch 'feature/repo-intelligence-runtime-graph'",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725353,
+  "observedAt": 1781350422000,
+  "contentRef": "git:commit:ed59ab4c1934b33e7d7bdd42343ee83a1e4a328b",
+  "checksum": "sha256:6a1ee1d20d20566679e7bfbe794c6a47c75adc06d2890b16d70d986577ed5c2b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 269,
+    "genesisAdmissionIdentity": "genesis-admission:7558649d51b38d89f3241beffb4c31407eb4bc13b84983e0813c475b14b5ef87",
+    "historicalSourceId": "genesis-source:commit:ed59ab4c1934b33e7d7bdd42343ee83a1e4a328b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ed59ab4c1934b33e7d7bdd42343ee83a1e4a328b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ed59ab4c1934b33e7d7bdd42343ee83a1e4a328b",
+      "parentShas": [
+        "55bd24bb011641e2a49bb8c91eeffde575d65286",
+        "a72e96d1d5debbf45733a309dbf88dcc2be05368"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781350422000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781350422000
+      },
+      "subject": "Merge branch 'feature/repo-intelligence-runtime-graph'",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/index.html",
+        "apps/lumina-builder/src/components/workspaces/ImportsView.tsx",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+        "apps/lumina-builder/src/services/repoIntelligenceService.ts"
+      ],
+      "changedPathsByParent": {
+        "55bd24bb011641e2a49bb8c91eeffde575d65286": [
+          "apps/lumina-builder/src/components/workspaces/ImportsView.tsx",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+          "apps/lumina-builder/src/services/repoIntelligenceService.ts"
+        ],
+        "a72e96d1d5debbf45733a309dbf88dcc2be05368": [
+          "apps/lumina-builder/index.html"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/repo-intelligence-green-20260613"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ed59ab4c1934b33e7d7bdd42343ee83a1e4a328b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

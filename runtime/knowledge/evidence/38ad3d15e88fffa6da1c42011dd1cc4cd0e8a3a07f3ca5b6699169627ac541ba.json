@@ -1,0 +1,115 @@
+{
+  "id": "genesis-evidence:0d701fac82490c307dd21886f5fcd5a65c54899e0c73fe463d4187668ded1bc0",
+  "type": "commit",
+  "title": "Merge branch 'main' into stage-2-1-workspace",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717445,
+  "observedAt": 1771276193000,
+  "contentRef": "git:commit:abb0c6e6775580419a7efe11337fdb1dd77942f2",
+  "checksum": "sha256:48295e8a6662ed705f24786d2f3f9cdd7ae637ab14094be57c0a3ed1677a845e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 16,
+    "genesisAdmissionIdentity": "genesis-admission:a88a39961b3648781804dee34168f1f84cef5fc6133cc99dd7a806edc23a2c5f",
+    "historicalSourceId": "genesis-source:commit:abb0c6e6775580419a7efe11337fdb1dd77942f2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:abb0c6e6775580419a7efe11337fdb1dd77942f2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "abb0c6e6775580419a7efe11337fdb1dd77942f2",
+      "parentShas": [
+        "f9c3c33e8d25c1e8d1a9befd350f864280d27fa8",
+        "e4ba15001c4a66957d7c0f4ecc4bb53229c250ad"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771276193000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1771276193000
+      },
+      "subject": "Merge branch 'main' into stage-2-1-workspace",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/jobs/[jobId]/stream/route.ts",
+        "app/api/projects/[projectId]/build/route.ts",
+        "app/api/projects/[projectId]/logs/route.ts",
+        "app/api/projects/[projectId]/status/route.ts",
+        "lib/build-queue.ts",
+        "lib/queue.ts",
+        "lib/runtime/locks.ts",
+        "runtime/global-lock.ts",
+        "runtime/job-store.ts",
+        "runtime/jobs.json",
+        "runtime/jobs/2b3d036b-2c0d-4d48-93b0-7d71337de19b.json",
+        "runtime/jobs/49439c7a-82e3-443b-9b5a-8de2f27ad8c4.json",
+        "runtime/jobs/554129f1-8310-4f3a-a025-48ef41896692.json",
+        "runtime/projects/acmo-atlas",
+        "runtime/projects/auth-app",
+        "runtime/projects/dev-project/app/components/Button.tsx",
+        "runtime/projects/dev-project/app/page.tsx",
+        "runtime/projects/dev-project/app/styles/globals.css",
+        "runtime/projects/kid-transit-eye",
+        "runtime/projects/nextjs-core",
+        "runtime/projects/test-app",
+        "runtime/projects/test/.logs/build.log",
+        "runtime/projects/test/build.log",
+        "runtime/projects/test/package-lock.json",
+        "runtime/projects/test/package.json",
+        "runtime/workspaces/kid-transit-eye"
+      ],
+      "changedPathsByParent": {
+        "e4ba15001c4a66957d7c0f4ecc4bb53229c250ad": [
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "app/api/jobs/[jobId]/stream/route.ts",
+          "app/api/projects/[projectId]/build/route.ts",
+          "app/api/projects/[projectId]/logs/route.ts",
+          "app/api/projects/[projectId]/status/route.ts",
+          "lib/build-queue.ts",
+          "lib/queue.ts",
+          "lib/runtime/locks.ts",
+          "runtime/global-lock.ts",
+          "runtime/job-store.ts",
+          "runtime/jobs.json",
+          "runtime/jobs/2b3d036b-2c0d-4d48-93b0-7d71337de19b.json",
+          "runtime/jobs/49439c7a-82e3-443b-9b5a-8de2f27ad8c4.json",
+          "runtime/jobs/554129f1-8310-4f3a-a025-48ef41896692.json",
+          "runtime/projects/acmo-atlas",
+          "runtime/projects/auth-app",
+          "runtime/projects/dev-project/app/components/Button.tsx",
+          "runtime/projects/dev-project/app/page.tsx",
+          "runtime/projects/dev-project/app/styles/globals.css",
+          "runtime/projects/kid-transit-eye",
+          "runtime/projects/nextjs-core",
+          "runtime/projects/test-app",
+          "runtime/projects/test/.logs/build.log",
+          "runtime/projects/test/build.log",
+          "runtime/projects/test/package-lock.json",
+          "runtime/projects/test/package.json",
+          "runtime/workspaces/kid-transit-eye"
+        ],
+        "f9c3c33e8d25c1e8d1a9befd350f864280d27fa8": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:abb0c6e6775580419a7efe11337fdb1dd77942f2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

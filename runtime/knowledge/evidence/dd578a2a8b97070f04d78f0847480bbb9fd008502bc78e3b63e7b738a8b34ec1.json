@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:ceb76b117bc9cf337639bee792cced8bd1e1468267acda0cbd2e469cbd4a7731",
+  "type": "commit",
+  "title": "feat(agent): add engineer agent domain contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733794,
+  "observedAt": 1782644599000,
+  "contentRef": "git:commit:de69ef0ad5bbbcf3771f44c5c4abdf076aa95ade",
+  "checksum": "sha256:b18a0c7b67fd3b9e62288367a8d9e95122949932d2cb6772da1a5abfa860fa31",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 520,
+    "genesisAdmissionIdentity": "genesis-admission:480419220f004d613cedc5d715bc48ba8ff2d8e648425257816157eace21567c",
+    "historicalSourceId": "genesis-source:commit:de69ef0ad5bbbcf3771f44c5c4abdf076aa95ade",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:de69ef0ad5bbbcf3771f44c5c4abdf076aa95ade",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "de69ef0ad5bbbcf3771f44c5c4abdf076aa95ade",
+      "parentShas": [
+        "f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644599000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644599000
+      },
+      "subject": "feat(agent): add engineer agent domain contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/agent/EngineerAgentAction.ts",
+        "apps/lumina-runtime/src/knowledge/agent/EngineerAgentInput.ts",
+        "apps/lumina-runtime/src/knowledge/agent/EngineerAgentProvider.ts",
+        "apps/lumina-runtime/src/knowledge/agent/EngineerAgentRequest.ts",
+        "apps/lumina-runtime/src/knowledge/agent/EngineerAgentRun.ts",
+        "apps/lumina-runtime/src/knowledge/agent/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38": [
+          "apps/lumina-runtime/src/knowledge/agent/EngineerAgentAction.ts",
+          "apps/lumina-runtime/src/knowledge/agent/EngineerAgentInput.ts",
+          "apps/lumina-runtime/src/knowledge/agent/EngineerAgentProvider.ts",
+          "apps/lumina-runtime/src/knowledge/agent/EngineerAgentRequest.ts",
+          "apps/lumina-runtime/src/knowledge/agent/EngineerAgentRun.ts",
+          "apps/lumina-runtime/src/knowledge/agent/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:de69ef0ad5bbbcf3771f44c5c4abdf076aa95ade"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

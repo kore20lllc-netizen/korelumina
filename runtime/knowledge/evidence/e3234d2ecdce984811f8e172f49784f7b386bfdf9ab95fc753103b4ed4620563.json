@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4b8a6c1a32ae541b473066eb2999bef414dd150f8bb01b737689b5b8a21e48ea",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate draft filesystem operations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737021,
+  "observedAt": 1782817437000,
+  "contentRef": "git:commit:48936c4676e0ae88b434c66dad3159589e405fc2",
+  "checksum": "sha256:9633d38fdf54381cd35000cd8b0692d40ba7a11ee079c0787ff6f8b77b248965",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 609,
+    "genesisAdmissionIdentity": "genesis-admission:a482771eaa916da2626cfa3b4405fb30ad897e3e762948bc6ac381ce465a9ffe",
+    "historicalSourceId": "genesis-source:commit:48936c4676e0ae88b434c66dad3159589e405fc2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:48936c4676e0ae88b434c66dad3159589e405fc2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "48936c4676e0ae88b434c66dad3159589e405fc2",
+      "parentShas": [
+        "cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782817437000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782817437000
+      },
+      "subject": "refactor(platform-sdk): migrate draft filesystem operations",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/drafts/applyDraft.ts",
+        "apps/lumina-runtime/src/drafts/revertDraft.ts"
+      ],
+      "changedPathsByParent": {
+        "cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8": [
+          "apps/lumina-runtime/src/drafts/applyDraft.ts",
+          "apps/lumina-runtime/src/drafts/revertDraft.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:48936c4676e0ae88b434c66dad3159589e405fc2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

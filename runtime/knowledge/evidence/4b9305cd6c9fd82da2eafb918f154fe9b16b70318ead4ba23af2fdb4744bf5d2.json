@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:85759ef6d95ea11930dfcba20ae7f8d379ea3315629a9f9a16da6aed9921b13f",
+  "type": "commit",
+  "title": "refactor(platform-sdk): introduce knowledge pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738143,
+  "observedAt": 1782885832000,
+  "contentRef": "git:commit:ec2f2ff2a61927b5f0c8cfe91c27731d9975563a",
+  "checksum": "sha256:156e136471a7e45a81521bd7dfb26ae1a17daf8e77fbc74aeeb7995fb7c97ada",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 639,
+    "genesisAdmissionIdentity": "genesis-admission:edf1532bfc161d1a6a1f0f1e1080b1911e9dfbe5330aa6da5a6510644c756adf",
+    "historicalSourceId": "genesis-source:commit:ec2f2ff2a61927b5f0c8cfe91c27731d9975563a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ec2f2ff2a61927b5f0c8cfe91c27731d9975563a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ec2f2ff2a61927b5f0c8cfe91c27731d9975563a",
+      "parentShas": [
+        "62965bc46046620609d446477b606775241c84e2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885832000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885832000
+      },
+      "subject": "refactor(platform-sdk): introduce knowledge pipeline",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgePublisher.ts",
+        "packages/platform-sdk/src/knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "62965bc46046620609d446477b606775241c84e2": [
+          "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgePublisher.ts",
+          "packages/platform-sdk/src/knowledge/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase046-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ec2f2ff2a61927b5f0c8cfe91c27731d9975563a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

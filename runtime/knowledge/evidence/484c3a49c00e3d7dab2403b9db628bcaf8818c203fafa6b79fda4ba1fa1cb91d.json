@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:7c8cadfb5574ddf0dbaec61fed28faa37561017fd78596f19f3b832b76f06d3f",
+  "type": "commit",
+  "title": "STABLE: remove legacy workspace shell, remove esbuild SSR pollution, studio builder + runtime preview green",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719924,
+  "observedAt": 1774042054000,
+  "contentRef": "git:commit:5d1107bced3b4647255bf736748adff0ec528305",
+  "checksum": "sha256:933e369108e4dd4b7837772920bb566e779125a2e6071b5dce2ce3c9766507ff",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 97,
+    "genesisAdmissionIdentity": "genesis-admission:08a586ade1ec4cad5b2406bbd796f46bad901a8b6b38fa6e4f28821c32e9fe66",
+    "historicalSourceId": "genesis-source:commit:5d1107bced3b4647255bf736748adff0ec528305",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5d1107bced3b4647255bf736748adff0ec528305",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5d1107bced3b4647255bf736748adff0ec528305",
+      "parentShas": [
+        "db28abc2ee18880cb5654a84b50cda00b5c1d98b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1774042054000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1774042054000
+      },
+      "subject": "STABLE: remove legacy workspace shell, remove esbuild SSR pollution, studio builder + runtime preview green",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/page.tsx",
+        "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.DISABLED.tsx",
+        "app/api/dev/preview/run/route.ts",
+        "app/api/dev/runtime/render/route.ts",
+        "app/runtime-renderer/[projectId]/page.tsx",
+        "app/studio-runtime/[projectId]/page.tsx"
+      ],
+      "changedPathsByParent": {
+        "db28abc2ee18880cb5654a84b50cda00b5c1d98b": [
+          "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/page.tsx",
+          "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.DISABLED.tsx",
+          "app/api/dev/preview/run/route.ts",
+          "app/api/dev/runtime/render/route.ts",
+          "app/runtime-renderer/[projectId]/page.tsx",
+          "app/studio-runtime/[projectId]/page.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5d1107bced3b4647255bf736748adff0ec528305"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:62c9cf8a9bd19fd490dc5c883e6ca5774fb9c9a2fe28ce9a86e6e8cc299f50ed",
+  "type": "commit",
+  "title": "feat(preview-v2): stable engine + resolver + cache",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722307,
+  "observedAt": 1776273926000,
+  "contentRef": "git:commit:faf6fe55b13889e1938f3c8a1c8cbd7a0937cb33",
+  "checksum": "sha256:69a538f4163123a69a537a16cfae6b3d4953f45369e09681fb726720ebc25627",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 173,
+    "genesisAdmissionIdentity": "genesis-admission:0f1567f6f51838d0c4fd46736ab0719eeaa0e5ff72aeb154c46d0242e3ede742",
+    "historicalSourceId": "genesis-source:commit:faf6fe55b13889e1938f3c8a1c8cbd7a0937cb33",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:faf6fe55b13889e1938f3c8a1c8cbd7a0937cb33",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "faf6fe55b13889e1938f3c8a1c8cbd7a0937cb33",
+      "parentShas": [
+        "f17c3ae44b43d4c2d13d8a670fe1afe4757cdd28"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1776273926000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1776273926000
+      },
+      "subject": "feat(preview-v2): stable engine + resolver + cache",
+      "body": "",
+      "changedPaths": [
+        "preview-v2/package-lock.json",
+        "preview-v2/package.json",
+        "preview-v2/vite.config.ts"
+      ],
+      "changedPathsByParent": {
+        "f17c3ae44b43d4c2d13d8a670fe1afe4757cdd28": [
+          "preview-v2/package-lock.json",
+          "preview-v2/package.json",
+          "preview-v2/vite.config.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:faf6fe55b13889e1938f3c8a1c8cbd7a0937cb33"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

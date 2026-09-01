@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:a1390daaf15b3d7991167f44b4ae3c72779906a99e6f4465231945934c2315d4",
+  "type": "commit",
+  "title": "builder: fix async params + extract BuilderClient (client component)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718722,
+  "observedAt": 1771611412000,
+  "contentRef": "git:commit:62887a5ece9f403b6fd786eb24cf69baa516d302",
+  "checksum": "sha256:306ae85de2f7bc99299d863478b5a9920c35f431ddde05fd8da8b3a426f946bc",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 58,
+    "genesisAdmissionIdentity": "genesis-admission:122724ca06c9352dc36583e2d530d028f480781df575ce0b71991277f5b8391b",
+    "historicalSourceId": "genesis-source:commit:62887a5ece9f403b6fd786eb24cf69baa516d302",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:62887a5ece9f403b6fd786eb24cf69baa516d302",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "62887a5ece9f403b6fd786eb24cf69baa516d302",
+      "parentShas": [
+        "fea6b502702ba460356f31ae68c309a84bc77020"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771611412000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771611412000
+      },
+      "subject": "builder: fix async params + extract BuilderClient (client component)",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "components/builder/BuilderClient.tsx",
+        "components/builder/LogPanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "fea6b502702ba460356f31ae68c309a84bc77020": [
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "components/builder/BuilderClient.tsx",
+          "components/builder/LogPanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:62887a5ece9f403b6fd786eb24cf69baa516d302"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f431b49b4de08c32440560b2f27cbbd9a0fa0baa14683d68dd80638b892d759c",
+  "type": "commit",
+  "title": "fix(auth): production-safe auth provider registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725187,
+  "observedAt": 1781247035000,
+  "contentRef": "git:commit:948ab09b33261ac21565269a45001a68a83d2e1c",
+  "checksum": "sha256:a8ec588d71bf1a7203da0f2f2f1ab8b0406a80a209cf24523ceb7421c23bd4e6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 264,
+    "genesisAdmissionIdentity": "genesis-admission:8abba9ae8e36d3f03449b921e8fd6530df276cfd560981f926edeff4e91379a1",
+    "historicalSourceId": "genesis-source:commit:948ab09b33261ac21565269a45001a68a83d2e1c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:948ab09b33261ac21565269a45001a68a83d2e1c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "948ab09b33261ac21565269a45001a68a83d2e1c",
+      "parentShas": [
+        "b2252eedbb387f996373b08ea75b21d31e82c196"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781247035000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781247035000
+      },
+      "subject": "fix(auth): production-safe auth provider registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/index.html",
+        "apps/lumina-builder/src/providers/auth-registry.ts"
+      ],
+      "changedPathsByParent": {
+        "b2252eedbb387f996373b08ea75b21d31e82c196": [
+          "apps/lumina-builder/index.html",
+          "apps/lumina-builder/src/providers/auth-registry.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:948ab09b33261ac21565269a45001a68a83d2e1c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

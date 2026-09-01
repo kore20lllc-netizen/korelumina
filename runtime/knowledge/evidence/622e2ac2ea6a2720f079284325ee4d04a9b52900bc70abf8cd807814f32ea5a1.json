@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:33a8670b7b5a3bcf0e5bc147b6685041553e8f50d1d533e45ca3ad87403bbd05",
+  "type": "document",
+  "title": "Security Architecture V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729193,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/SECURITY_ARCHITECTURE_V1.md",
+  "checksum": "sha256:b3cebd6c11c46b4f2a50420e213d214edee4566ac5bb795baca742b499e5071f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 385,
+    "genesisAdmissionIdentity": "genesis-admission:289200c5a3cef299f0d3df961a084708fbdecfba74cac0e753fb0db0fdc3fb95",
+    "historicalSourceId": "genesis-source:document:derived:6a3c5786dbee022cff50f961b3fe3b06c6bd42ad3db32c7886d7a32c85bb58e0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Security Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/SECURITY_ARCHITECTURE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Security Architecture V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/SECURITY_ARCHITECTURE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:6a3c5786dbee022cff50f961b3fe3b06c6bd42ad3db32c7886d7a32c85bb58e0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

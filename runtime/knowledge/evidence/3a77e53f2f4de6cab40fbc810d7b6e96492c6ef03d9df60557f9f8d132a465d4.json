@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:232a054422cf8dc98d57bd52c39ca887ddaa7aa1333b2f3722262a825738b766",
+  "type": "commit",
+  "title": "perf(assets): replace lumina logo PNG with WebP",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723084,
+  "observedAt": 1779223758000,
+  "contentRef": "git:commit:ea7ffece87a50e96119bffd0a376247fdb1cda3d",
+  "checksum": "sha256:4bc3fc17376d702690230a321a96eb54445a6f3a53275c3f3f10323b68dd9b18",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 198,
+    "genesisAdmissionIdentity": "genesis-admission:139c42acfbc415daee70d35fc4043ce25fca2205473001dd409442998ba43c2b",
+    "historicalSourceId": "genesis-source:commit:ea7ffece87a50e96119bffd0a376247fdb1cda3d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ea7ffece87a50e96119bffd0a376247fdb1cda3d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ea7ffece87a50e96119bffd0a376247fdb1cda3d",
+      "parentShas": [
+        "c697d7d66659a9fd5328ffe77bf32a54db449813"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779223758000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779223758000
+      },
+      "subject": "perf(assets): replace lumina logo PNG with WebP",
+      "body": "",
+      "changedPaths": [
+        "src/assets/lumina.webp",
+        "src/components/landing/Footer.tsx",
+        "src/components/landing/LandingNav.tsx",
+        "src/components/layout/Shell.tsx",
+        "src/components/layout/TopBar.tsx",
+        "src/services/repoAuditPdfService.ts"
+      ],
+      "changedPathsByParent": {
+        "c697d7d66659a9fd5328ffe77bf32a54db449813": [
+          "src/assets/lumina.webp",
+          "src/components/landing/Footer.tsx",
+          "src/components/landing/LandingNav.tsx",
+          "src/components/layout/Shell.tsx",
+          "src/components/layout/TopBar.tsx",
+          "src/services/repoAuditPdfService.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ea7ffece87a50e96119bffd0a376247fdb1cda3d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

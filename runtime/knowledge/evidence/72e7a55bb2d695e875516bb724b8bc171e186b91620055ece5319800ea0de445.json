@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:6ef03a83a79df1c5fbff0628c086aab8dcae59e9654e4521f04fa99144c3a93e",
+  "type": "commit",
+  "title": "Merge pull request #40 from kore20lllc-netizen/feature/production-hardening",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723786,
+  "observedAt": 1779320536000,
+  "contentRef": "git:commit:6f7c98a88e4a6aaf7712bb1385fc4b878607f87c",
+  "checksum": "sha256:b9745b60ecb08280887e206a926763fd3bd0c9b721840dd091f07cd04949cc8c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 220,
+    "genesisAdmissionIdentity": "genesis-admission:65b0a97456a3e2359e9a8f9a5b384333c546275209755d0111938019c54c1fb3",
+    "historicalSourceId": "genesis-source:commit:6f7c98a88e4a6aaf7712bb1385fc4b878607f87c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6f7c98a88e4a6aaf7712bb1385fc4b878607f87c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6f7c98a88e4a6aaf7712bb1385fc4b878607f87c",
+      "parentShas": [
+        "9d37ff2d1006cbb6394969f7597280f199793a82",
+        "43e0100a83e773af449dd27ae11e39fe8e12bcc0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779320536000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1779320536000
+      },
+      "subject": "Merge pull request #40 from kore20lllc-netizen/feature/production-hardening",
+      "body": "Feature/production hardening",
+      "changedPaths": [
+        "src/App.tsx",
+        "src/hooks/use-auth.ts",
+        "src/integrations/supabase/client.ts",
+        "src/main.tsx",
+        "src/providers/auth/SupabaseAuthProvider.ts",
+        "src/providers/registry.ts"
+      ],
+      "changedPathsByParent": {
+        "43e0100a83e773af449dd27ae11e39fe8e12bcc0": [],
+        "9d37ff2d1006cbb6394969f7597280f199793a82": [
+          "src/App.tsx",
+          "src/hooks/use-auth.ts",
+          "src/integrations/supabase/client.ts",
+          "src/main.tsx",
+          "src/providers/auth/SupabaseAuthProvider.ts",
+          "src/providers/registry.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6f7c98a88e4a6aaf7712bb1385fc4b878607f87c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d75fd92d0323b7b09f60030507e339b8beeeb159422eaabcfa6c28a0d5dc825f",
+  "type": "commit",
+  "title": "hardening: enforce workspace filesystem jail for project execution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717808,
+  "observedAt": 1771290452000,
+  "contentRef": "git:commit:194f28a13b6e7e5135893afdba64f92c479a1e14",
+  "checksum": "sha256:6a71db3b8dd402227ae047181b4470c42f2c5c36af42125e0d3ebe5feaff1e88",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 28,
+    "genesisAdmissionIdentity": "genesis-admission:3bbbdf119b09bf4f19bf86671777cb583515683e4d2c04b9bd0d0c98c316e0dd",
+    "historicalSourceId": "genesis-source:commit:194f28a13b6e7e5135893afdba64f92c479a1e14",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:194f28a13b6e7e5135893afdba64f92c479a1e14",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "194f28a13b6e7e5135893afdba64f92c479a1e14",
+      "parentShas": [
+        "94098c7e16883f6d805fcc60dadb58d897af9f4b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771290452000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771290452000
+      },
+      "subject": "hardening: enforce workspace filesystem jail for project execution",
+      "body": "",
+      "changedPaths": [
+        "app/api/projects/[projectId]/build/route.ts",
+        "lib/workspace-jail.ts"
+      ],
+      "changedPathsByParent": {
+        "94098c7e16883f6d805fcc60dadb58d897af9f4b": [
+          "app/api/projects/[projectId]/build/route.ts",
+          "lib/workspace-jail.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:194f28a13b6e7e5135893afdba64f92c479a1e14"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

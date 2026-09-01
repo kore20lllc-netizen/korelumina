@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:1b54edd54342eea05b15ef818e4cb6a841918ebf5dd0412548a93bc8ea450328",
+  "type": "commit",
+  "title": "refactor(knowledge): delegate ADR compiler to extractor",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741324,
+  "observedAt": 1783047840000,
+  "contentRef": "git:commit:9f4f12c9a6088f6c6d4858af3b5250bec9402846",
+  "checksum": "sha256:cbfb5e73340257a70b90c91a489b83b12b16d51cf75942a278e094721dcac76c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 721,
+    "genesisAdmissionIdentity": "genesis-admission:5fd633b1ac27cefa27b1c0ad426b5c296a058b08f900d4bbf9eaa817cd96aa95",
+    "historicalSourceId": "genesis-source:commit:9f4f12c9a6088f6c6d4858af3b5250bec9402846",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9f4f12c9a6088f6c6d4858af3b5250bec9402846",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9f4f12c9a6088f6c6d4858af3b5250bec9402846",
+      "parentShas": [
+        "f5bff2937bbed8544c268490739df01b4b54219e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783047840000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783047840000
+      },
+      "subject": "refactor(knowledge): delegate ADR compiler to extractor",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts"
+      ],
+      "changedPathsByParent": {
+        "f5bff2937bbed8544c268490739df01b4b54219e": [
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-012-adr-delegation-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9f4f12c9a6088f6c6d4858af3b5250bec9402846"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

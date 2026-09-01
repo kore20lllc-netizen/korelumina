@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:b27f02420b12faec6a3162ba367ebc50e3d5c1df47906be69e7637e870e56efa",
+  "type": "commit",
+  "title": "feat: stabilize preview daemon + build pipeline + real-time log panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718756,
+  "observedAt": 1771698666000,
+  "contentRef": "git:commit:e778146a6e592b8815279990fb8830b207449107",
+  "checksum": "sha256:91e5596fa424bb90e2694f3787e289bc4cf5e6911ff097fdb78f8beda8989fd7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 59,
+    "genesisAdmissionIdentity": "genesis-admission:fa2f0f0c94460b551a05ba828331f4b2b9fd548511139232622d3452e3d16109",
+    "historicalSourceId": "genesis-source:commit:e778146a6e592b8815279990fb8830b207449107",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e778146a6e592b8815279990fb8830b207449107",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e778146a6e592b8815279990fb8830b207449107",
+      "parentShas": [
+        "62887a5ece9f403b6fd786eb24cf69baa516d302"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771698666000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771698666000
+      },
+      "subject": "feat: stabilize preview daemon + build pipeline + real-time log panel",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/BuilderClient.tsx",
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/preview/stop/route.ts",
+        "components/builder/LogPanel.tsx",
+        "components/builder/StatusBadge.tsx",
+        "lib/project-manifest.ts",
+        "runtime/job-store.ts",
+        "runtime/preview-daemon.ts",
+        "runtime/preview-store.ts"
+      ],
+      "changedPathsByParent": {
+        "62887a5ece9f403b6fd786eb24cf69baa516d302": [
+          "app/(workspace)/projects/[projectId]/builder/BuilderClient.tsx",
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/preview/stop/route.ts",
+          "components/builder/LogPanel.tsx",
+          "components/builder/StatusBadge.tsx",
+          "lib/project-manifest.ts",
+          "runtime/job-store.ts",
+          "runtime/preview-daemon.ts",
+          "runtime/preview-store.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e778146a6e592b8815279990fb8830b207449107"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

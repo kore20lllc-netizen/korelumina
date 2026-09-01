@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:87db3a3eded88ba85d554ad82def0a12f69eff09403afe5912ce0453a92f0bda",
+  "type": "commit",
+  "title": "feat: add environment configuration and error handling for runtime service",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724360,
+  "observedAt": 1780086087000,
+  "contentRef": "git:commit:0035f1af19e2547ab934a970c0001f67be3cda9c",
+  "checksum": "sha256:76195decb5de0f1de536a727f08bf13ef69b4f802b809c419692e6d88daf3d93",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 238,
+    "genesisAdmissionIdentity": "genesis-admission:d4e104a0dcd304dd0483b75576b7a6e4cf54c2fe2b6aefd251c4f0750f629d61",
+    "historicalSourceId": "genesis-source:commit:0035f1af19e2547ab934a970c0001f67be3cda9c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0035f1af19e2547ab934a970c0001f67be3cda9c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0035f1af19e2547ab934a970c0001f67be3cda9c",
+      "parentShas": [
+        "d1c486031316495ef2b84b3067bf279b3d9d6dfa"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780086087000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780086087000
+      },
+      "subject": "feat: add environment configuration and error handling for runtime service",
+      "body": "Co-authored-by: aider (claude-sonnet-4-5) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/.env.example",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "apps/lumina-runtime/.env.example",
+        "apps/lumina-runtime/src/detect/detectFramework.ts"
+      ],
+      "changedPathsByParent": {
+        "d1c486031316495ef2b84b3067bf279b3d9d6dfa": [
+          "apps/lumina-builder/.env.example",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "apps/lumina-runtime/.env.example",
+          "apps/lumina-runtime/src/detect/detectFramework.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0035f1af19e2547ab934a970c0001f67be3cda9c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

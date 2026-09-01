@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:1d0ec07e6d80107bf859ad16bdc332897342e075f23dd8d3381eaeef2af5e125",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate runtime persistence to storage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736763,
+  "observedAt": 1782795492000,
+  "contentRef": "git:commit:be19072d27be978594f97a7cb902a1c7576ff22d",
+  "checksum": "sha256:068b2c5e4432a73d5fd575b0ba624d5d401cdb63b1dc1b3b950f79f49fe1aca4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 602,
+    "genesisAdmissionIdentity": "genesis-admission:820d16c04919efffd2824e836a09629372a795ce4aff61228d159c020c0dbf7e",
+    "historicalSourceId": "genesis-source:commit:be19072d27be978594f97a7cb902a1c7576ff22d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:be19072d27be978594f97a7cb902a1c7576ff22d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "be19072d27be978594f97a7cb902a1c7576ff22d",
+      "parentShas": [
+        "e372e44c9ae5c01750678a2031f23be6f2f18ea3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782795492000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782795492000
+      },
+      "subject": "refactor(platform-sdk): migrate runtime persistence to storage",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/persistence.ts",
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+        "packages/platform-sdk/src/storage/FileStore.ts",
+        "packages/platform-sdk/src/storage/JsonStore.ts",
+        "packages/platform-sdk/src/storage/index.ts"
+      ],
+      "changedPathsByParent": {
+        "e372e44c9ae5c01750678a2031f23be6f2f18ea3": [
+          "apps/lumina-runtime/src/runtime/persistence.ts",
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+          "packages/platform-sdk/src/storage/FileStore.ts",
+          "packages/platform-sdk/src/storage/JsonStore.ts",
+          "packages/platform-sdk/src/storage/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:be19072d27be978594f97a7cb902a1c7576ff22d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

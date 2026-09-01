@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:8e76cb00e030198b426fe5246256f1a77631cc8471fae902ba686d6d3c5d0b5e",
+  "type": "commit",
+  "title": "feat(knowledge): recover documentation knowledge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741125,
+  "observedAt": 1783044202000,
+  "contentRef": "git:commit:982db5280d4a20cd2637ca027328e003ebfd550a",
+  "checksum": "sha256:7e3ac06062693d143ead9a699780fe1b2e1fc4b59d7617e567ced5ef3cd68b7b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 716,
+    "genesisAdmissionIdentity": "genesis-admission:e18bf746929592904aeb6193dbeb959a59b1a79ab9c8c0f2bae5c597f3e3c635",
+    "historicalSourceId": "genesis-source:commit:982db5280d4a20cd2637ca027328e003ebfd550a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:982db5280d4a20cd2637ca027328e003ebfd550a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "982db5280d4a20cd2637ca027328e003ebfd550a",
+      "parentShas": [
+        "5f63f5fc7d2b2667bc09dc502deeaa46780d0341"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783044202000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783044202000
+      },
+      "subject": "feat(knowledge): recover documentation knowledge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/recovery/DocumentationKnowledgeRecovery.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/recovery/index.ts"
+      ],
+      "changedPathsByParent": {
+        "5f63f5fc7d2b2667bc09dc502deeaa46780d0341": [
+          "apps/lumina-runtime/src/knowledge-preservation/recovery/DocumentationKnowledgeRecovery.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/recovery/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-007-documentation-knowledge-recovery-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:982db5280d4a20cd2637ca027328e003ebfd550a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

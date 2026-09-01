@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:a399fdeba60d26e23d7fa1cabae8a4198670528690a305456ed0d9ccdfeaddc4",
+  "type": "commit",
+  "title": "fix: remove unused context import from task route",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719495,
+  "observedAt": 1773126292000,
+  "contentRef": "git:commit:4b98ff1c143166fc33a86dd166a8ed1702c52538",
+  "checksum": "sha256:fb34a419587291af648d44fd2001471dde06aa7ac6f0483d45735033471998b4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 83,
+    "genesisAdmissionIdentity": "genesis-admission:6b5f4eb244f331ba84c92959b4314ff9d122011de92ca2bef4c69b13f38469f2",
+    "historicalSourceId": "genesis-source:commit:4b98ff1c143166fc33a86dd166a8ed1702c52538",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4b98ff1c143166fc33a86dd166a8ed1702c52538",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4b98ff1c143166fc33a86dd166a8ed1702c52538",
+      "parentShas": [
+        "540b644948787ddf803027af7107bab44afeb87a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773126292000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773126292000
+      },
+      "subject": "fix: remove unused context import from task route",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/task/route.ts"
+      ],
+      "changedPathsByParent": {
+        "540b644948787ddf803027af7107bab44afeb87a": [
+          "app/api/ai/task/route.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4b98ff1c143166fc33a86dd166a8ed1702c52538"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

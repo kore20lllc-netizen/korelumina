@@ -1,0 +1,115 @@
+{
+  "id": "genesis-evidence:2b5c7a8d8df94c2c84e7d3e53492f28b27b728de559f0c526f92b0ad0083408b",
+  "type": "commit",
+  "title": "feat: implement AI builder engine (plan → task → apply → orchestrate)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719371,
+  "observedAt": 1773083614000,
+  "contentRef": "git:commit:39f24def7b85cbd8d3170c819ed6595048873b14",
+  "checksum": "sha256:7715783052147a2646346d1ecc25a412d58f8194cb6ddcdbe70cbcb1b5b5a2f7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 79,
+    "genesisAdmissionIdentity": "genesis-admission:1ed8385fb7b0b40c74f38b98e93dbd40b5c2c54fd16b1f6bb86796db1f0c9371",
+    "historicalSourceId": "genesis-source:commit:39f24def7b85cbd8d3170c819ed6595048873b14",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:39f24def7b85cbd8d3170c819ed6595048873b14",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "39f24def7b85cbd8d3170c819ed6595048873b14",
+      "parentShas": [
+        "9da1ab101555df11b6a2a58c9a5713f41418f605"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773083614000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773083614000
+      },
+      "subject": "feat: implement AI builder engine (plan → task → apply → orchestrate)",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/page.tsx",
+        "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.tsx",
+        "app/api/ai/apply/route.ts",
+        "app/api/ai/orchestrate/route.ts",
+        "app/api/ai/plan/route.ts",
+        "app/api/ai/task/route.ts",
+        "app/api/file/route.ts",
+        "app/api/files/route.ts",
+        "components/DiffViewer.tsx",
+        "components/builder/ChatPanel.tsx",
+        "components/builder/CodeEditor.tsx",
+        "components/builder/DiffPanel.tsx",
+        "components/builder/DiffViewer.tsx",
+        "components/builder/ExecutionPanel.tsx",
+        "components/builder/FileTree.tsx",
+        "components/builder/JournalPanel.tsx",
+        "components/builder/PlanPanel.tsx",
+        "components/builder/Shell.tsx",
+        "components/builder/TaskPanel.tsx",
+        "components/builder/TaskSpecPanel.tsx",
+        "components/builder/TaskStatusPanel.tsx",
+        "lib/ai/apply-guard.ts",
+        "lib/ai/apply.ts",
+        "lib/ai/compile-guard.ts",
+        "lib/ai/orchestrator.ts",
+        "lib/ai/parseFileBlocks.ts",
+        "package-lock.json",
+        "package.json"
+      ],
+      "changedPathsByParent": {
+        "9da1ab101555df11b6a2a58c9a5713f41418f605": [
+          "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/page.tsx",
+          "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.tsx",
+          "app/api/ai/apply/route.ts",
+          "app/api/ai/orchestrate/route.ts",
+          "app/api/ai/plan/route.ts",
+          "app/api/ai/task/route.ts",
+          "app/api/file/route.ts",
+          "app/api/files/route.ts",
+          "components/DiffViewer.tsx",
+          "components/builder/ChatPanel.tsx",
+          "components/builder/CodeEditor.tsx",
+          "components/builder/DiffPanel.tsx",
+          "components/builder/DiffViewer.tsx",
+          "components/builder/ExecutionPanel.tsx",
+          "components/builder/FileTree.tsx",
+          "components/builder/JournalPanel.tsx",
+          "components/builder/PlanPanel.tsx",
+          "components/builder/Shell.tsx",
+          "components/builder/TaskPanel.tsx",
+          "components/builder/TaskSpecPanel.tsx",
+          "components/builder/TaskStatusPanel.tsx",
+          "lib/ai/apply-guard.ts",
+          "lib/ai/apply.ts",
+          "lib/ai/compile-guard.ts",
+          "lib/ai/orchestrator.ts",
+          "lib/ai/parseFileBlocks.ts",
+          "package-lock.json",
+          "package.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:39f24def7b85cbd8d3170c819ed6595048873b14"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

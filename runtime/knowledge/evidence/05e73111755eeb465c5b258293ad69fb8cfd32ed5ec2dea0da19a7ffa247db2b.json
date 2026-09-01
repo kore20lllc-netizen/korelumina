@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:f7538b24410249fb216d22e2eda09ca69fd46406f85591c48da899c93951f875",
+  "type": "document",
+  "title": "KoreLumina Platform Boundaries V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728748,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_BOUNDARIES_V1.md",
+  "checksum": "sha256:a6e97c333eca5052e6bad0b184852669d290d6c40c9c47fc3c569a842a85c9fa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 372,
+    "genesisAdmissionIdentity": "genesis-admission:1229253d8be7831f1ac26f2614fb8100453c272eb7ad69d51c52be35a96d26a0",
+    "historicalSourceId": "genesis-source:document:derived:eb3dbc90532fa744d00a4b4c5bbfa9099ed800df982512053682385020594fcf",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_BOUNDARIES_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Boundaries V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_BOUNDARIES_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:eb3dbc90532fa744d00a4b4c5bbfa9099ed800df982512053682385020594fcf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

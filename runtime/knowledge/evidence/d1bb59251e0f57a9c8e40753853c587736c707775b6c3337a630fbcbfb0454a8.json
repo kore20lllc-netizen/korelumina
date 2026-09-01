@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:cd0c8a13721ee6e1e51034945c79936b5b2cede9a7e01aedb1958677561235c6",
+  "type": "document",
+  "title": "Definition of Done",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731437,
+  "observedAt": 1782547225000,
+  "contentRef": "docs/governance/DEFINITION_OF_DONE.md",
+  "checksum": "sha256:116314f1d3101c2445966d52fe8728f57fa5711761a843fc68abb116657eaf33",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 452,
+    "genesisAdmissionIdentity": "genesis-admission:da81d66a9756928fe023b1da61876e18537490c6439be38f0169e8a6d5374f99",
+    "historicalSourceId": "genesis-source:document:derived:d63acaeeb16ad774d21f017a8c9f4a5769cbf2c98d69c91b4da99a28cc5c3406",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/DEFINITION_OF_DONE.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Definition of Done",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/DEFINITION_OF_DONE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d63acaeeb16ad774d21f017a8c9f4a5769cbf2c98d69c91b4da99a28cc5c3406"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

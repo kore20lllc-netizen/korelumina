@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:1a45f73a03aae6e708e59fcfa3572632a2ab687a21354b065ef83a8e7215382a",
+  "type": "commit",
+  "title": "style(dialogs): standardize alert dialog surfaces",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726319,
+  "observedAt": 1781695898000,
+  "contentRef": "git:commit:953b37f6e545ebbae26f0c65b5fffee6d537dc95",
+  "checksum": "sha256:eee8ec8c5b7263636b983513b85e5bcbd01c04bf644a18ad65b14bf0d2d17d36",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 299,
+    "genesisAdmissionIdentity": "genesis-admission:bc53e22d3d092337da631bd8d35ee63d4306aa2f348a9e47b0ad5fa163157ac6",
+    "historicalSourceId": "genesis-source:commit:953b37f6e545ebbae26f0c65b5fffee6d537dc95",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:953b37f6e545ebbae26f0c65b5fffee6d537dc95",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "953b37f6e545ebbae26f0c65b5fffee6d537dc95",
+      "parentShas": [
+        "5c2a0cfd646cafed3760030e3206dc5894576c0b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781695898000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781695898000
+      },
+      "subject": "style(dialogs): standardize alert dialog surfaces",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/repo-audit/FindingsFilters.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx"
+      ],
+      "changedPathsByParent": {
+        "5c2a0cfd646cafed3760030e3206dc5894576c0b": [
+          "apps/lumina-builder/src/components/workspaces/inhouse/MobilePackagingCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/repo-audit/FindingsFilters.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:953b37f6e545ebbae26f0c65b5fffee6d537dc95"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:3182a948d2999f09b85e1c27f233a50c0b0483842eab5afe06167e62f80d4213",
+  "type": "document",
+  "title": "KoreLumina Engineering Playbook V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728312,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ENGINEERING_PLAYBOOK_V1.md",
+  "checksum": "sha256:92cf385d489eee628c7d4d9a54aba80d6017ac08245708ea569e19467a48b480",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 359,
+    "genesisAdmissionIdentity": "genesis-admission:de7830b6dd63c7a85bc6464d99ac7a8ef6a6adec77b9fe3097dc9c387a74b035",
+    "historicalSourceId": "genesis-source:document:derived:fd2385b206669bf719a561032e6a311ebcb96f311f34c93081ddc7c182e8449f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ENGINEERING_PLAYBOOK_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Engineering Playbook V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ENGINEERING_PLAYBOOK_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:fd2385b206669bf719a561032e6a311ebcb96f311f34c93081ddc7c182e8449f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

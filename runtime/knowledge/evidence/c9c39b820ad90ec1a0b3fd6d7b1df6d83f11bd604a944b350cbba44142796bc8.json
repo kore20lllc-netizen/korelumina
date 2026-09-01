@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:035bd764682cebe2d6ba71c9e14f69effb7fa1ab031c90c0300523bc01152668",
+  "type": "commit",
+  "title": "refactor(platform-sdk): run knowledge pipeline through execution sdk",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738676,
+  "observedAt": 1782904835000,
+  "contentRef": "git:commit:fd3e66e580a8096e5527bedadba13a610e3ae51e",
+  "checksum": "sha256:28434c5286edf1a2eee64a87af40617b9b5f138fa8b39b7fdf6ef39964e5dc37",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 653,
+    "genesisAdmissionIdentity": "genesis-admission:bf347efdb07e838c9cbeca7978a56fa75b8fccaccf0efa7c81ac10c9aaa6bcd7",
+    "historicalSourceId": "genesis-source:commit:fd3e66e580a8096e5527bedadba13a610e3ae51e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fd3e66e580a8096e5527bedadba13a610e3ae51e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fd3e66e580a8096e5527bedadba13a610e3ae51e",
+      "parentShas": [
+        "8f0aae593094d485a14a614c378f3367216c00d5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782904835000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782904835000
+      },
+      "subject": "refactor(platform-sdk): run knowledge pipeline through execution sdk",
+      "body": "",
+      "changedPaths": [
+        "docs/engineering/reconstruction-log.md",
+        "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts"
+      ],
+      "changedPathsByParent": {
+        "8f0aae593094d485a14a614c378f3367216c00d5": [
+          "docs/engineering/reconstruction-log.md",
+          "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase059-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fd3e66e580a8096e5527bedadba13a610e3ae51e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

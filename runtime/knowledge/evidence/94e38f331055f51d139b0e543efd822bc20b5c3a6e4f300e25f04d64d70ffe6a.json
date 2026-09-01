@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:f41c9eaea15b4c6ce43dbf8bcf2b7656d205270b7dd501690fb47abc5fbd811c",
+  "type": "document",
+  "title": "Observability Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728646,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/OBSERVABILITY_SPECIFICATION_V1.md",
+  "checksum": "sha256:fc62ce6fe2bad604dcd726506b9950cdd63d49c738fad1004cd4685dc4490ab9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 369,
+    "genesisAdmissionIdentity": "genesis-admission:b3de2c1cf1e459d51616a2b6c97c9241a6e50c5371dd7fc3c837a7d40023ee5c",
+    "historicalSourceId": "genesis-source:document:derived:0579c0735d4dd55ee226b42206146670782e26f681e222e706de1ca0b06901ab",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Observability Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/OBSERVABILITY_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Observability Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/OBSERVABILITY_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:0579c0735d4dd55ee226b42206146670782e26f681e222e706de1ca0b06901ab"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

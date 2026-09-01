@@ -1,0 +1,81 @@
+{
+  "id": "genesis-evidence:b7b473314f0ab01697f95598b3140365ffc77ee054b4549785ad08e80d0f8301",
+  "type": "commit",
+  "title": "Merge pull request #2 from kore20lllc-netizen/feature/build-pipeline-stage1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717233,
+  "observedAt": 1771226671000,
+  "contentRef": "git:commit:0721afe64a092c4dc3f544e86ba01fe3b47ce8ca",
+  "checksum": "sha256:e95f6a3f76328532456cb7c5ceebb0e33ba097cd17c7beeae641f0086ada5b2b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 9,
+    "genesisAdmissionIdentity": "genesis-admission:fa5bcf28d75859591ef9ee2cd1649c391633657ab16f7bbf13e0b767c3370061",
+    "historicalSourceId": "genesis-source:commit:0721afe64a092c4dc3f544e86ba01fe3b47ce8ca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0721afe64a092c4dc3f544e86ba01fe3b47ce8ca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0721afe64a092c4dc3f544e86ba01fe3b47ce8ca",
+      "parentShas": [
+        "6df6dcf6a9c15a6b3a904635d09403dc0c294552",
+        "d64be442770e2105bb365126ecfcca4cc9dcaa08"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771226671000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1771226671000
+      },
+      "subject": "Merge pull request #2 from kore20lllc-netizen/feature/build-pipeline-stage1",
+      "body": "Feature/build pipeline stage1",
+      "changedPaths": [
+        "app/api/jobs/[jobId]/route.ts",
+        "app/api/projects/[projectId]/build/route.ts",
+        "app/api/projects/[projectId]/git/commit/route.ts",
+        "package-lock.json",
+        "runtime/build-lock.ts",
+        "runtime/jobs.json",
+        "runtime/jobs.ts",
+        "runtime/logs/test.log",
+        "scripts/build-project.sh",
+        "vercel.json"
+      ],
+      "changedPathsByParent": {
+        "6df6dcf6a9c15a6b3a904635d09403dc0c294552": [
+          "app/api/jobs/[jobId]/route.ts",
+          "app/api/projects/[projectId]/build/route.ts",
+          "app/api/projects/[projectId]/git/commit/route.ts",
+          "package-lock.json",
+          "runtime/build-lock.ts",
+          "runtime/jobs.json",
+          "runtime/jobs.ts",
+          "runtime/logs/test.log",
+          "scripts/build-project.sh",
+          "vercel.json"
+        ],
+        "d64be442770e2105bb365126ecfcca4cc9dcaa08": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0721afe64a092c4dc3f544e86ba01fe3b47ce8ca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

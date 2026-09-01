@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:24bf49b58022c14d34fecde9af67d6ccd3d469b8b9a742451456b846e2467ebd",
+  "type": "document",
+  "title": "KoreLumina Platform Domain Model V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728816,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_DOMAIN_MODEL_V1.md",
+  "checksum": "sha256:3ee260f94332c17491f36eef75c259e0b14cdc00cd1c32b89ef7ca7f55d30493",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 374,
+    "genesisAdmissionIdentity": "genesis-admission:ccd8a2a7f9e77ca868a9cac371e07090a8978cf613f388fb4605b937fe8d1051",
+    "historicalSourceId": "genesis-source:document:derived:4df375114ebac6432ef7a3d8ce95409103d10442d10d46d823b1854013276a03",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_DOMAIN_MODEL_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Domain Model V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_DOMAIN_MODEL_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:4df375114ebac6432ef7a3d8ce95409103d10442d10d46d823b1854013276a03"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

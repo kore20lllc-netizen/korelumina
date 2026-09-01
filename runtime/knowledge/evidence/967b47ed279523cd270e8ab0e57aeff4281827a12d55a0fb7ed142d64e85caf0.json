@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:d6f9f0c7e2318998ff50f178ac42142fbaca0830a75baed027193cf5eb0132e8",
+  "type": "commit",
+  "title": "docs(architecture): add continuous engineering evolution amendment",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735225,
+  "observedAt": 1782710620000,
+  "contentRef": "git:commit:ae2552c665926ac136cf5886f09c4548ca5e379e",
+  "checksum": "sha256:bb2d7e828dbd34a2699fe126a9455461f0e6db2f495d95b3d31e13e82fb9a4b6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 560,
+    "genesisAdmissionIdentity": "genesis-admission:6cd91b9b6a905d4abb412323a9a03dd667dd8d1eb79f41f6d715c01e21c33a15",
+    "historicalSourceId": "genesis-source:commit:ae2552c665926ac136cf5886f09c4548ca5e379e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ae2552c665926ac136cf5886f09c4548ca5e379e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ae2552c665926ac136cf5886f09c4548ca5e379e",
+      "parentShas": [
+        "802b799945a53be7733873fbd326135f1a6f7295"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782710620000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782710620000
+      },
+      "subject": "docs(architecture): add continuous engineering evolution amendment",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+        "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md",
+        "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+        "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md",
+        "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+        "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md"
+      ],
+      "changedPathsByParent": {
+        "802b799945a53be7733873fbd326135f1a6f7295": [
+          "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+          "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md",
+          "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+          "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md",
+          "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+          "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ae2552c665926ac136cf5886f09c4548ca5e379e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:a469046d2f6c8f879b6736f8468e016c7b817b3e665c1454c1d6f3de289a96a2",
+  "type": "commit",
+  "title": "feat(runtime): stabilize persistent preview manager and live refresh",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722494,
+  "observedAt": 1778122127000,
+  "contentRef": "git:commit:bc5a87f573783fbaa63c373b0b3024ba900ac0f9",
+  "checksum": "sha256:45448ce25a3fdc3b147c13dcf3e47448c6d9f2db355fd1984f573d369a5267c4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 179,
+    "genesisAdmissionIdentity": "genesis-admission:a7a82d8234123db2284b7069b20339142b5bb0917f9b8300f2aabfa6a26ddd7a",
+    "historicalSourceId": "genesis-source:commit:bc5a87f573783fbaa63c373b0b3024ba900ac0f9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:bc5a87f573783fbaa63c373b0b3024ba900ac0f9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "bc5a87f573783fbaa63c373b0b3024ba900ac0f9",
+      "parentShas": [
+        "74cbc831bf8c1cdd676cae6489b49f6d7a290383"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778122127000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778122127000
+      },
+      "subject": "feat(runtime): stabilize persistent preview manager and live refresh",
+      "body": "",
+      "changedPaths": [
+        "app/api/dev/preview/events/route.ts",
+        "app/api/dev/preview/route.ts",
+        "runtime/preview-events.js",
+        "runtime/preview-manager.js"
+      ],
+      "changedPathsByParent": {
+        "74cbc831bf8c1cdd676cae6489b49f6d7a290383": [
+          "app/api/dev/preview/events/route.ts",
+          "app/api/dev/preview/route.ts",
+          "runtime/preview-events.js",
+          "runtime/preview-manager.js"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:bc5a87f573783fbaa63c373b0b3024ba900ac0f9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

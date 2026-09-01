@@ -1,0 +1,105 @@
+{
+  "id": "genesis-evidence:5b94c92d777b5f965aa9db130c491b410f39fa99c8f4bebcb1161ff42173552c",
+  "type": "commit",
+  "title": "runtime supervisor foundation + persistent preview sessions",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724234,
+  "observedAt": 1779834240000,
+  "contentRef": "git:commit:ebe9d3097c05dae7f7d42f58a0f5a24e61c978d7",
+  "checksum": "sha256:46c01e0728ecfbe65e2fba286b87ba4cd0bee632bc76bff862715508adcbec42",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 234,
+    "genesisAdmissionIdentity": "genesis-admission:cbaa81d3afac9661400bf9eb0b718e29a87bb54073587f44f7ae20a314541ee3",
+    "historicalSourceId": "genesis-source:commit:ebe9d3097c05dae7f7d42f58a0f5a24e61c978d7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ebe9d3097c05dae7f7d42f58a0f5a24e61c978d7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ebe9d3097c05dae7f7d42f58a0f5a24e61c978d7",
+      "parentShas": [
+        "499dfc42986be21a71299e8b6094810061553428"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779834240000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779834240000
+      },
+      "subject": "runtime supervisor foundation + persistent preview sessions",
+      "body": "",
+      "changedPaths": [
+        "CONTINUATION_CONTEXT.md",
+        "apps/lumina-builder/src/components/layout/TopBar.tsx",
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+        "apps/lumina-builder/src/components/workspaces/AIWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/DashboardView.tsx",
+        "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+        "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "apps/lumina-runtime/src/detect/detectFramework.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/projects/getProjectPath.ts",
+        "apps/lumina-runtime/src/projects/listProjects.ts",
+        "apps/lumina-runtime/src/routes/logs.ts",
+        "apps/lumina-runtime/src/routes/projects.ts",
+        "apps/lumina-runtime/src/routes/restart.ts",
+        "apps/lumina-runtime/src/routes/start.ts",
+        "apps/lumina-runtime/src/routes/status.ts",
+        "apps/lumina-runtime/src/routes/stop.ts",
+        "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/startProject.ts",
+        "apps/lumina-runtime/src/runtime/waitForRuntime.ts"
+      ],
+      "changedPathsByParent": {
+        "499dfc42986be21a71299e8b6094810061553428": [
+          "CONTINUATION_CONTEXT.md",
+          "apps/lumina-builder/src/components/layout/TopBar.tsx",
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+          "apps/lumina-builder/src/components/workspaces/AIWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/DashboardView.tsx",
+          "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+          "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "apps/lumina-runtime/src/detect/detectFramework.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/projects/getProjectPath.ts",
+          "apps/lumina-runtime/src/projects/listProjects.ts",
+          "apps/lumina-runtime/src/routes/logs.ts",
+          "apps/lumina-runtime/src/routes/projects.ts",
+          "apps/lumina-runtime/src/routes/restart.ts",
+          "apps/lumina-runtime/src/routes/start.ts",
+          "apps/lumina-runtime/src/routes/status.ts",
+          "apps/lumina-runtime/src/routes/stop.ts",
+          "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/startProject.ts",
+          "apps/lumina-runtime/src/runtime/waitForRuntime.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ebe9d3097c05dae7f7d42f58a0f5a24e61c978d7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

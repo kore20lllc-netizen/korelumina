@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:a7f3e952301ffc279a4c3841f80c8153faf7b59d28149e7f350d14409ea1a655",
+  "type": "commit",
+  "title": "feat(platform-sdk): bootstrap knowledge publisher",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738063,
+  "observedAt": 1782885214000,
+  "contentRef": "git:commit:8b6791a15c752391cb717a294470a4f2c9bbe672",
+  "checksum": "sha256:dc7119fc07b71e235ea9ae496213804b6f8522063a864600df0a334047e09477",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 637,
+    "genesisAdmissionIdentity": "genesis-admission:af4726ee747a768353ef1ab35de48de825d8bc726bf82c23ad698f282fc76610",
+    "historicalSourceId": "genesis-source:commit:8b6791a15c752391cb717a294470a4f2c9bbe672",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8b6791a15c752391cb717a294470a4f2c9bbe672",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8b6791a15c752391cb717a294470a4f2c9bbe672",
+      "parentShas": [
+        "02b20322cd221cb5b0bd6b3e43cbdf5d8cd56e95"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885214000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782885214000
+      },
+      "subject": "feat(platform-sdk): bootstrap knowledge publisher",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/knowledge/bootstrap.ts",
+        "packages/platform-sdk/src/knowledge/index.ts",
+        "packages/platform-sdk/src/knowledge/processors/StorageProcessor.ts"
+      ],
+      "changedPathsByParent": {
+        "02b20322cd221cb5b0bd6b3e43cbdf5d8cd56e95": [
+          "packages/platform-sdk/src/knowledge/bootstrap.ts",
+          "packages/platform-sdk/src/knowledge/index.ts",
+          "packages/platform-sdk/src/knowledge/processors/StorageProcessor.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase044-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8b6791a15c752391cb717a294470a4f2c9bbe672"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

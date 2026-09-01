@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:5c9679dda2c2f366be25a2d9fde81960f87d23008dde60fa3e1a12e20863cd07",
+  "type": "document",
+  "title": "Platform SDK",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735728,
+  "observedAt": 1782714445000,
+  "contentRef": "docs/architecture/capabilities/PLATFORM_SDK.md",
+  "checksum": "sha256:045f4d9abf06e2e15d431ab2a924d2cd92ad34a83aecc7aa3ad2590d93247a06",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 574,
+    "genesisAdmissionIdentity": "genesis-admission:e049c55ed94036a26788c179da21a8fa11bd9b19737854e28cd9825a8ae7b81e",
+    "historicalSourceId": "genesis-source:document:derived:f6b688e1c87ef1f88e8f5a268f5b2c82861a0efd02bb11195a375a864f104ced",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "sourceLocation": "docs/architecture/capabilities/PLATFORM_SDK.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Platform SDK",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/capabilities/PLATFORM_SDK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f6b688e1c87ef1f88e8f5a268f5b2c82861a0efd02bb11195a375a864f104ced"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

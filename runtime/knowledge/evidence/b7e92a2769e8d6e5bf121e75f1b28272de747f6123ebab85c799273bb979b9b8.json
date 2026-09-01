@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:e67e2bef83df4d578790fc1a6648d932a21a922b2e0ccfab82f967427dceb45e",
+  "type": "ADR",
+  "title": "ADR-0001 — Domain Ownership vs Relationship Ownership",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731906,
+  "observedAt": 1782554475000,
+  "contentRef": "docs/adr/ADR-0001-DOMAIN_BOUNDARIES.md",
+  "checksum": "sha256:a2e2d59877b6fa89066d634c8b59cc5f4629122956172ee4fe21bda30ac68918",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 466,
+    "genesisAdmissionIdentity": "genesis-admission:0d1b4af4f6999468af84c545da9a32c1bd77b6c6696e6af3580eb3564015a395",
+    "historicalSourceId": "genesis-source:ADR:derived:5f551f4bfbddcff04ba214be2075bac8b5f613db9b331e001c6d3ca08205a1d0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "approvalState": "Accepted",
+    "sourceLocation": "docs/adr/ADR-0001-DOMAIN_BOUNDARIES.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ADR-0001 — Domain Ownership vs Relationship Ownership",
+      "status": "Accepted",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/ADR-0001-DOMAIN_BOUNDARIES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:5f551f4bfbddcff04ba214be2075bac8b5f613db9b331e001c6d3ca08205a1d0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

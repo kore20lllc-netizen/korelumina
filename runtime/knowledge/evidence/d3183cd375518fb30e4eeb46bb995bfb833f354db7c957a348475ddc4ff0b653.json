@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b7dd86c331679ea70639e725873ef4cd3a2608e5a90c315ff9454cf6c78ba052",
+  "type": "commit",
+  "title": "refactor(platform-sdk): consolidate FileStore on FileSystem",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737171,
+  "observedAt": 1782819609000,
+  "contentRef": "git:commit:b7f8c1b1d745fce4c84487c59601c31e73abfab0",
+  "checksum": "sha256:0660b585c017495032af53fc86a92ba1e8008f25d970b34f5474f7a261589376",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 613,
+    "genesisAdmissionIdentity": "genesis-admission:f48c4f62068b7b8add785666b9498a7b82550edecb401c4d09a88fb5a10bba30",
+    "historicalSourceId": "genesis-source:commit:b7f8c1b1d745fce4c84487c59601c31e73abfab0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b7f8c1b1d745fce4c84487c59601c31e73abfab0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b7f8c1b1d745fce4c84487c59601c31e73abfab0",
+      "parentShas": [
+        "fbbb1cf5fda8bd039deac751ef58f937e1c8b277"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782819609000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782819609000
+      },
+      "subject": "refactor(platform-sdk): consolidate FileStore on FileSystem",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+        "packages/platform-sdk/src/storage/FileStore.ts"
+      ],
+      "changedPathsByParent": {
+        "fbbb1cf5fda8bd039deac751ef58f937e1c8b277": [
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+          "packages/platform-sdk/src/storage/FileStore.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b7f8c1b1d745fce4c84487c59601c31e73abfab0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

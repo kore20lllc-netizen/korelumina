@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:06298ac21374436a3390018b23326bddb18980e053e269ff944012c109d8f0cd",
+  "type": "commit",
+  "title": "hardening: enforce dev-only access for runtime execution endpoints",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717778,
+  "observedAt": 1771290243000,
+  "contentRef": "git:commit:94098c7e16883f6d805fcc60dadb58d897af9f4b",
+  "checksum": "sha256:b2996b3a3b1b73bf44ad1762058c6c481a1a9be42db3dd85550df27557e6df77",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 27,
+    "genesisAdmissionIdentity": "genesis-admission:e55f8dadcd77fa41588e998c616e57b4e84aaf9363b2d446a19f294601679392",
+    "historicalSourceId": "genesis-source:commit:94098c7e16883f6d805fcc60dadb58d897af9f4b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:94098c7e16883f6d805fcc60dadb58d897af9f4b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "94098c7e16883f6d805fcc60dadb58d897af9f4b",
+      "parentShas": [
+        "ed50d957c313300c86df8e41f73431f862a61611"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771290243000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771290243000
+      },
+      "subject": "hardening: enforce dev-only access for runtime execution endpoints",
+      "body": "",
+      "changedPaths": [
+        "app/api/projects/[projectId]/deploy/route.ts",
+        "lib/dev-guard.ts"
+      ],
+      "changedPathsByParent": {
+        "ed50d957c313300c86df8e41f73431f862a61611": [
+          "app/api/projects/[projectId]/deploy/route.ts",
+          "lib/dev-guard.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:94098c7e16883f6d805fcc60dadb58d897af9f4b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

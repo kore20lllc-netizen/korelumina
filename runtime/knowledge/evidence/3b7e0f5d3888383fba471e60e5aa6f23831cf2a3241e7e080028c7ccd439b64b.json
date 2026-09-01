@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:098d43d9c6d30de5aa0e54604b80702830f41fd812f7b35a895f7ed10f700d24",
+  "type": "commit",
+  "title": "docs(architecture): establish canonical knowledge ownership",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737766,
+  "observedAt": 1782880281000,
+  "contentRef": "git:commit:4df75214d0ab3b50290dc6044171e4975fa01d00",
+  "checksum": "sha256:7428b34995c68fe9787d6ce6bd96a72edb9ae350de1c5b26d6909568e7c8e4e1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 629,
+    "genesisAdmissionIdentity": "genesis-admission:6d2d46e69c6e4d223e16a4433f09b054a306403aa1e7ae773113eb19ccc75199",
+    "historicalSourceId": "genesis-source:commit:4df75214d0ab3b50290dc6044171e4975fa01d00",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4df75214d0ab3b50290dc6044171e4975fa01d00",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4df75214d0ab3b50290dc6044171e4975fa01d00",
+      "parentShas": [
+        "340e4f34b0ea06b8a324744122413ed3b81ba07e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782880281000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782880281000
+      },
+      "subject": "docs(architecture): establish canonical knowledge ownership",
+      "body": "",
+      "changedPaths": [
+        "docs/adr/ADR-0035-canonical-knowledge-architecture.md",
+        "docs/engineering/reconstruction-log.md",
+        "runtime/knowledge/adr/ADR-0035-builder-integrity-recovery.md",
+        "runtime/knowledge/adr/ADR-0035-canonical-knowledge-architecture.md"
+      ],
+      "changedPathsByParent": {
+        "340e4f34b0ea06b8a324744122413ed3b81ba07e": [
+          "docs/adr/ADR-0035-canonical-knowledge-architecture.md",
+          "docs/engineering/reconstruction-log.md",
+          "runtime/knowledge/adr/ADR-0035-builder-integrity-recovery.md",
+          "runtime/knowledge/adr/ADR-0035-canonical-knowledge-architecture.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4df75214d0ab3b50290dc6044171e4975fa01d00"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

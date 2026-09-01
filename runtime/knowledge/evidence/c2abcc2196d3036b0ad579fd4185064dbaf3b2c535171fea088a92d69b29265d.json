@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:0a8e01814856ffb316c23a598573c370e14d7060f667b88558dfbd1e6f67d372",
+  "type": "commit",
+  "title": "feat(imports): delete projects permanently and update in-house pricing",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722927,
+  "observedAt": 1778741121000,
+  "contentRef": "git:commit:daf480874112dfc3d020d2d2ff160100bdc819e6",
+  "checksum": "sha256:e90e46b3c99244d15a15d3dbed6d0752d65a3e9ac89d9b6b6f31953d74462487",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 193,
+    "genesisAdmissionIdentity": "genesis-admission:fac28bd969ee3917800cf3309ba7b7a1c2c4c049123e3aec6b6538095ba94ee0",
+    "historicalSourceId": "genesis-source:commit:daf480874112dfc3d020d2d2ff160100bdc819e6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:daf480874112dfc3d020d2d2ff160100bdc819e6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "daf480874112dfc3d020d2d2ff160100bdc819e6",
+      "parentShas": [
+        "54f9450b8d93606d734e499e6dfd6317adcdb7d1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778741121000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778741121000
+      },
+      "subject": "feat(imports): delete projects permanently and update in-house pricing",
+      "body": "",
+      "changedPaths": [
+        "app/api/projects/[projectId]/route.ts",
+        "app/master-os/preview-frame.tsx",
+        "public/videos/hero-build-reel.mp4",
+        "public/videos/hero-build-reel.webm",
+        "public/videos/landing-bg.mp4",
+        "src/lib/api.ts"
+      ],
+      "changedPathsByParent": {
+        "54f9450b8d93606d734e499e6dfd6317adcdb7d1": [
+          "app/api/projects/[projectId]/route.ts",
+          "app/master-os/preview-frame.tsx",
+          "public/videos/hero-build-reel.mp4",
+          "public/videos/hero-build-reel.webm",
+          "public/videos/landing-bg.mp4",
+          "src/lib/api.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:daf480874112dfc3d020d2d2ff160100bdc819e6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

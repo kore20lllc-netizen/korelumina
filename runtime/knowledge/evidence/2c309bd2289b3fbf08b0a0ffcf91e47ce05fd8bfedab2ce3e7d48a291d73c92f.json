@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:9f4dd6e6b6d8739333e4327d4dd03fa7236bca6db90ff00096f97677737769cb",
+  "type": "commit",
+  "title": "Revert \"test protection\"",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725417,
+  "observedAt": 1781432921000,
+  "contentRef": "git:commit:492df53d8f7427b05d05d21906fc9e78c65b843f",
+  "checksum": "sha256:8bafe4a8c977c1b0f63ec1cfe0f1747c73576adeaae889bb12d49299c8024e91",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 271,
+    "genesisAdmissionIdentity": "genesis-admission:89c03215578666a01cedcbaa293a28ff5bfe75631ed007f9b0c9e2d77a75452e",
+    "historicalSourceId": "genesis-source:commit:492df53d8f7427b05d05d21906fc9e78c65b843f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:492df53d8f7427b05d05d21906fc9e78c65b843f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "492df53d8f7427b05d05d21906fc9e78c65b843f",
+      "parentShas": [
+        "bdb8374160ff07f14c408c7299a76781e8bf0b1f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781432921000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781432921000
+      },
+      "subject": "Revert \"test protection\"",
+      "body": "This reverts commit bdb8374160ff07f14c408c7299a76781e8bf0b1f.",
+      "changedPaths": [
+        "protection-test.txt"
+      ],
+      "changedPathsByParent": {
+        "bdb8374160ff07f14c408c7299a76781e8bf0b1f": [
+          "protection-test.txt"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-production-baseline-v2"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:492df53d8f7427b05d05d21906fc9e78c65b843f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "genesis-evidence:c9112ea3578b110f0aee7305b928ee38b2d410d5337435aae249282c6ff21ccb",
+  "type": "commit",
+  "title": "perf(core): lazy load landing page and split vendor chunks",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723181,
+  "observedAt": 1779234427000,
+  "contentRef": "git:commit:91950754d7163e4210a6b76bb74fc9548b00f868",
+  "checksum": "sha256:8d224d7b7efe81b2ea9e1ea550b3647c9f5067bd470ecae3469079b1bebbea02",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 201,
+    "genesisAdmissionIdentity": "genesis-admission:93474e4b3d8341548c82909aa5fe9660c0a286d700687b17459b7af4cf6093a5",
+    "historicalSourceId": "genesis-source:commit:91950754d7163e4210a6b76bb74fc9548b00f868",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:91950754d7163e4210a6b76bb74fc9548b00f868",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "91950754d7163e4210a6b76bb74fc9548b00f868",
+      "parentShas": [
+        "eb1fd584335de1e94a19ecd0c5cd969cc56e537a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779234427000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779234427000
+      },
+      "subject": "perf(core): lazy load landing page and split vendor chunks",
+      "body": "",
+      "changedPaths": [
+        "dist/assets/ErrorPage-CWnYirLa.js",
+        "dist/assets/Index-DjtRtC9M.js",
+        "dist/assets/InviteAcceptPage-Dp7AJADh.js",
+        "dist/assets/LandingPage-CGtcj8SP.js",
+        "dist/assets/NotFound-59N4fdDE.js",
+        "dist/assets/PreviewPage-BNTSWNNi.js",
+        "dist/assets/TemplatePage-CC-KVMGK.js",
+        "dist/assets/WorkspaceContext-mJC-PwgN.js",
+        "dist/assets/dialog-B7uTpCaK.js",
+        "dist/assets/index-4axLHnd_.js",
+        "dist/assets/index-whKBz8Lk.css",
+        "dist/assets/lumina-DDoF5VAx.webp",
+        "dist/assets/react-Bfss2TF5.js",
+        "dist/assets/registry-D0xZvRfv.js",
+        "dist/assets/ui-BV4B4DjM.js",
+        "dist/favicon.ico",
+        "dist/index.html",
+        "dist/placeholder.svg",
+        "dist/robots.txt",
+        "dist/videos/hero-build-reel.mp4",
+        "dist/videos/hero-build-reel.webm",
+        "dist/videos/landing-bg.mp4",
+        "src/pages/Index.tsx",
+        "src/pages/LandingPageContent.tsx"
+      ],
+      "changedPathsByParent": {
+        "eb1fd584335de1e94a19ecd0c5cd969cc56e537a": [
+          "dist/assets/ErrorPage-CWnYirLa.js",
+          "dist/assets/Index-DjtRtC9M.js",
+          "dist/assets/InviteAcceptPage-Dp7AJADh.js",
+          "dist/assets/LandingPage-CGtcj8SP.js",
+          "dist/assets/NotFound-59N4fdDE.js",
+          "dist/assets/PreviewPage-BNTSWNNi.js",
+          "dist/assets/TemplatePage-CC-KVMGK.js",
+          "dist/assets/WorkspaceContext-mJC-PwgN.js",
+          "dist/assets/dialog-B7uTpCaK.js",
+          "dist/assets/index-4axLHnd_.js",
+          "dist/assets/index-whKBz8Lk.css",
+          "dist/assets/lumina-DDoF5VAx.webp",
+          "dist/assets/react-Bfss2TF5.js",
+          "dist/assets/registry-D0xZvRfv.js",
+          "dist/assets/ui-BV4B4DjM.js",
+          "dist/favicon.ico",
+          "dist/index.html",
+          "dist/placeholder.svg",
+          "dist/robots.txt",
+          "dist/videos/hero-build-reel.mp4",
+          "dist/videos/hero-build-reel.webm",
+          "dist/videos/landing-bg.mp4",
+          "src/pages/Index.tsx",
+          "src/pages/LandingPageContent.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:91950754d7163e4210a6b76bb74fc9548b00f868"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

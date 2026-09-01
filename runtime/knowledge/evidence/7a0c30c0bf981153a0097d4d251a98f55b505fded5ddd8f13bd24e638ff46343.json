@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:066eb19c8c5df7d1171c2cec50af7ac765ceb0d221485b5e9de1a832d85dc1cb",
+  "type": "commit",
+  "title": "feat: architecture planner + repo awareness + dependency installer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719588,
+  "observedAt": 1773147041000,
+  "contentRef": "git:commit:34628f6b2af1edf81d75bb71c7871f2ba5b163f7",
+  "checksum": "sha256:a7e4873fff40f3087571351a74679d1dc8ef7545f6f3b378db626e9ce7a6dd36",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 86,
+    "genesisAdmissionIdentity": "genesis-admission:74a6c061ead48695a58524a1a520fbe70efc6d472f9a66a4c79b57865fcc8a17",
+    "historicalSourceId": "genesis-source:commit:34628f6b2af1edf81d75bb71c7871f2ba5b163f7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:34628f6b2af1edf81d75bb71c7871f2ba5b163f7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "34628f6b2af1edf81d75bb71c7871f2ba5b163f7",
+      "parentShas": [
+        "09af1c7b2e3f5a07fe1b126c2924d06ea4c580dc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773147041000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773147041000
+      },
+      "subject": "feat: architecture planner + repo awareness + dependency installer",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/plan/route.ts",
+        "lib/ai/apply.ts",
+        "lib/ai/architecture-plan.ts",
+        "lib/ai/context.ts",
+        "lib/ai/orchestrator.ts",
+        "lib/ai/repo-context.ts",
+        "templates/next-saas/app/page.tsx",
+        "templates/next-saas/package.json"
+      ],
+      "changedPathsByParent": {
+        "09af1c7b2e3f5a07fe1b126c2924d06ea4c580dc": [
+          "app/api/ai/plan/route.ts",
+          "lib/ai/apply.ts",
+          "lib/ai/architecture-plan.ts",
+          "lib/ai/context.ts",
+          "lib/ai/orchestrator.ts",
+          "lib/ai/repo-context.ts",
+          "templates/next-saas/app/page.tsx",
+          "templates/next-saas/package.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:34628f6b2af1edf81d75bb71c7871f2ba5b163f7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

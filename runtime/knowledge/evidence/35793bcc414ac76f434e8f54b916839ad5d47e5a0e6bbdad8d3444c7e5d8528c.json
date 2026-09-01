@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:094647785fad40d11f09a13cde800b953e26dbbb3686d2f7f5e6429ef97693e9",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate draft storage to FileSystem",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736985,
+  "observedAt": 1782817196000,
+  "contentRef": "git:commit:cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8",
+  "checksum": "sha256:816bcf66c95d3904ca0db32565868bb7fb30f8b43a2442261529c9a28ad469e8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 608,
+    "genesisAdmissionIdentity": "genesis-admission:3b95996223d889305827966f95218ced9264d10b72e736144154c8fd6641a3f8",
+    "historicalSourceId": "genesis-source:commit:cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8",
+      "parentShas": [
+        "d1b91787813a8d4177ee05af845e2f6da29d0ca1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782817196000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782817196000
+      },
+      "subject": "refactor(platform-sdk): migrate draft storage to FileSystem",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/filesystem/FileSystem.ts",
+        "scripts/architecture/investigate-next.sh",
+        "scripts/architecture/investigate-plat019.sh"
+      ],
+      "changedPathsByParent": {
+        "d1b91787813a8d4177ee05af845e2f6da29d0ca1": [
+          "packages/platform-sdk/src/filesystem/FileSystem.ts",
+          "scripts/architecture/investigate-next.sh",
+          "scripts/architecture/investigate-plat019.sh"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cede0bbdfe38ac8deaccb6f4db3c67b3b488a9f8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

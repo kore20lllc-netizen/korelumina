@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:313ea081b284621c32cb6e589d9a91d28ff30f9a3a742056ae2e2dae7cd2fe84",
+  "type": "commit",
+  "title": "feat(knowledge): scaffold Knowledge Platform package",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735110,
+  "observedAt": 1782707871000,
+  "contentRef": "git:commit:99dfddf8f7222606fe0b54504b60a7039b43897d",
+  "checksum": "sha256:244243f8f36280bec5bacf746ef5fc1e1a3210a8e8c5bffd3777073e170409bb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 557,
+    "genesisAdmissionIdentity": "genesis-admission:6f3822e43b17c9f3091af79d5e207265c8b7bddd1160bccfad68082906ad93e7",
+    "historicalSourceId": "genesis-source:commit:99dfddf8f7222606fe0b54504b60a7039b43897d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:99dfddf8f7222606fe0b54504b60a7039b43897d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "99dfddf8f7222606fe0b54504b60a7039b43897d",
+      "parentShas": [
+        "5b39c5e7aa5ca09e5220d0cfc160327bdb9bea66"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782707871000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782707871000
+      },
+      "subject": "feat(knowledge): scaffold Knowledge Platform package",
+      "body": "",
+      "changedPaths": [
+        "package.json",
+        "packages/knowledge-platform/package.json",
+        "packages/knowledge-platform/tsconfig.json"
+      ],
+      "changedPathsByParent": {
+        "5b39c5e7aa5ca09e5220d0cfc160327bdb9bea66": [
+          "package.json",
+          "packages/knowledge-platform/package.json",
+          "packages/knowledge-platform/tsconfig.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:99dfddf8f7222606fe0b54504b60a7039b43897d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

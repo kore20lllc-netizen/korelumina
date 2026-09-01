@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:4c4979a9a595f4ecef955f83e3043df6c2163b9634c32964b0995ae8b7250525",
+  "type": "commit",
+  "title": "feat(knowledge): add validation framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740494,
+  "observedAt": 1783036217000,
+  "contentRef": "git:commit:31f93130f87c7d8991b1608f20596fc89abc2ac5",
+  "checksum": "sha256:010ef168304c39f6108c35e73ee1f62c257521994490f8de693d3a4dbb8ee9aa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 700,
+    "genesisAdmissionIdentity": "genesis-admission:7d2999663ee162cb742455afaef099fa68505f223878d9c4627e8575b57b5fc8",
+    "historicalSourceId": "genesis-source:commit:31f93130f87c7d8991b1608f20596fc89abc2ac5",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:31f93130f87c7d8991b1608f20596fc89abc2ac5",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "31f93130f87c7d8991b1608f20596fc89abc2ac5",
+      "parentShas": [
+        "53eee24c23b316f2787e871dc0668c45b833bd55"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036217000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036217000
+      },
+      "subject": "feat(knowledge): add validation framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidationPipeline.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidationRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidator.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/validation/index.ts"
+      ],
+      "changedPathsByParent": {
+        "53eee24c23b316f2787e871dc0668c45b833bd55": [
+          "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidationPipeline.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidationRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/validation/KnowledgeValidator.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/validation/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-005-validation-engine-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:31f93130f87c7d8991b1608f20596fc89abc2ac5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

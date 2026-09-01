@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:2be76f2b0bcd874a67d78751511b7556d042a91d239185c7e2ff569c2daf2deb",
+  "type": "document",
+  "title": "KoreLumina Platform Maintenance Guide V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728949,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_MAINTENANCE_GUIDE_V1.md",
+  "checksum": "sha256:b7d08f880255c85ecdc13c422f1e86a935cdf58c662c40bdd2667bf0e6e0ffc8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 378,
+    "genesisAdmissionIdentity": "genesis-admission:e18f0ce01b6b86202c86b6f5e50c5c3966d961d15dd3bb52f5806cb753823c29",
+    "historicalSourceId": "genesis-source:document:derived:0540a07be91b03507b69e411d9d8d92ed7df5a2ba86cbf46796f70f8396b865b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Operations Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_MAINTENANCE_GUIDE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Maintenance Guide V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_MAINTENANCE_GUIDE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:0540a07be91b03507b69e411d9d8d92ed7df5a2ba86cbf46796f70f8396b865b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

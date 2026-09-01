@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b3bce96d61e2c22621079c103c277276c66f2d114ee913a5359151b723f70ad2",
+  "type": "commit",
+  "title": "feat(knowledge): preserve repository evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740962,
+  "observedAt": 1783042545000,
+  "contentRef": "git:commit:969f70e6f8393481540020857467a3e3f7e21030",
+  "checksum": "sha256:0b81f21036b44c51bf5070702bba07d1241a7423190c377e4e61ae753348d492",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 712,
+    "genesisAdmissionIdentity": "genesis-admission:a306376fd72f16ac5091ffea00e960d2541254df27f2671fd386459d0538cb99",
+    "historicalSourceId": "genesis-source:commit:969f70e6f8393481540020857467a3e3f7e21030",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:969f70e6f8393481540020857467a3e3f7e21030",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "969f70e6f8393481540020857467a3e3f7e21030",
+      "parentShas": [
+        "264c051043a884b1bb2ea494ba492e608ce1a57c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042545000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042545000
+      },
+      "subject": "feat(knowledge): preserve repository evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/repository/RepositoryKnowledgePreserver.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/repository/index.ts"
+      ],
+      "changedPathsByParent": {
+        "264c051043a884b1bb2ea494ba492e608ce1a57c": [
+          "apps/lumina-runtime/src/knowledge-preservation/repository/RepositoryKnowledgePreserver.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/repository/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-017-repository-preservation-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:969f70e6f8393481540020857467a3e3f7e21030"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

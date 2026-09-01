@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:3ec9dcc52799258370b65ac902e8f20145b10a24d006131af5efe99f6991041a",
+  "type": "document",
+  "title": "KoreLumina Architecture Compliance Framework V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727781,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_COMPLIANCE_FRAMEWORK_V1.md",
+  "checksum": "sha256:0983825e5d873a3df42bf0f4f14d49f04c123e27fdfde909269b101285113860",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 343,
+    "genesisAdmissionIdentity": "genesis-admission:694509d6474e0232f649005238620bbd6b2bd3fa9e08c726881e8c6d1926ec98",
+    "historicalSourceId": "genesis-source:document:derived:5ebb24c07a3788934efd531ec9b0273b921cd59eaa7d8cc89a4987515808939a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_COMPLIANCE_FRAMEWORK_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Compliance Framework V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_COMPLIANCE_FRAMEWORK_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:5ebb24c07a3788934efd531ec9b0273b921cd59eaa7d8cc89a4987515808939a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

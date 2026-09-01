@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b2557cb05a9aa4e4ba73902646c49606e9aa9bdd5e53e381841312a366a5a140",
+  "type": "commit",
+  "title": "refactor(engineering): remove legacy automation state flags",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739748,
+  "observedAt": 1782976946000,
+  "contentRef": "git:commit:23b8f0af66b79755aa1ff75b938b1bd7d92645a9",
+  "checksum": "sha256:fa40c15b7d6b9429c8cef2b028b083fc9ed930e239e1241227b42c3434e69881",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 681,
+    "genesisAdmissionIdentity": "genesis-admission:a688fc8f27a324f0c6e427e2444bb30d55fc3ab1da394c29b5a4e637a50f844f",
+    "historicalSourceId": "genesis-source:commit:23b8f0af66b79755aa1ff75b938b1bd7d92645a9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:23b8f0af66b79755aa1ff75b938b1bd7d92645a9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "23b8f0af66b79755aa1ff75b938b1bd7d92645a9",
+      "parentShas": [
+        "5ec1927ddcc138b010ebf3264e986cbf952c5c72"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782976946000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782976946000
+      },
+      "subject": "refactor(engineering): remove legacy automation state flags",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationPipeline.ts"
+      ],
+      "changedPathsByParent": {
+        "5ec1927ddcc138b010ebf3264e986cbf952c5c72": [
+          "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationPipeline.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a2.5-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:23b8f0af66b79755aa1ff75b938b1bd7d92645a9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

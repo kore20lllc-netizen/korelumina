@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:58f16fbb79b2444d7a5828041643008fcb610d5c4cbe47a686fe410634beb942",
+  "type": "document",
+  "title": "Architecture Decision Record Index",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727847,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_DECISION_RECORD_INDEX.md",
+  "checksum": "sha256:fa45b75c3b9b39b4a32cdb6e03ad13269a203d835617678d8b38d5956e5030a2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 345,
+    "genesisAdmissionIdentity": "genesis-admission:e3ab3b123a72f94e50a78e08871118353c77946184b8ab307e6b74ef9dadd56a",
+    "historicalSourceId": "genesis-source:document:derived:6a1f4924b7c03d0c5a4c423eb6a6d06b2767126f46ef44f320c005c600a99959",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_DECISION_RECORD_INDEX.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Architecture Decision Record Index",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_DECISION_RECORD_INDEX.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:6a1f4924b7c03d0c5a4c423eb6a6d06b2767126f46ef44f320c005c600a99959"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

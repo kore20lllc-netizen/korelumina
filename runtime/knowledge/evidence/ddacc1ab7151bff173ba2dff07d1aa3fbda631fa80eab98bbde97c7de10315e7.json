@@ -1,0 +1,125 @@
+{
+  "id": "genesis-evidence:a4748d049e7217b3cd7ddcd7dead189fd65a5426730203722fd8f2d775a85cb0",
+  "type": "commit",
+  "title": "Merge pull request #35 from kore20lllc-netizen/feature/landing-page-sync",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722989,
+  "observedAt": 1778814549000,
+  "contentRef": "git:commit:299a5584ef02aab4340938507345a5fea3b38c3f",
+  "checksum": "sha256:846e21c001bd5d28b8654680d6dde60ab6b601f7804aa74442598d31da536ceb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 195,
+    "genesisAdmissionIdentity": "genesis-admission:25e2eda286b0d348ec09c41ab5f32fa44eb1b8f8af125fedb9aec47bc3d17896",
+    "historicalSourceId": "genesis-source:commit:299a5584ef02aab4340938507345a5fea3b38c3f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:299a5584ef02aab4340938507345a5fea3b38c3f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "299a5584ef02aab4340938507345a5fea3b38c3f",
+      "parentShas": [
+        "54f9450b8d93606d734e499e6dfd6317adcdb7d1",
+        "2b143851c28f070cef0508ace2d19bc20a368031"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778814549000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1778814549000
+      },
+      "subject": "Merge pull request #35 from kore20lllc-netizen/feature/landing-page-sync",
+      "body": "Feature/landing page sync",
+      "changedPaths": [
+        "app/api/projects/[projectId]/route.ts",
+        "app/master-os/preview-frame.tsx",
+        "package-lock.json",
+        "package.json",
+        "public/videos/hero-build-reel.mp4",
+        "public/videos/hero-build-reel.webm",
+        "public/videos/landing-bg.mp4",
+        "src/components/landing/BackgroundVideo.tsx",
+        "src/components/landing/Comparison.tsx",
+        "src/components/landing/FAQ.tsx",
+        "src/components/landing/Features.tsx",
+        "src/components/landing/FinalCTA.tsx",
+        "src/components/landing/Footer.tsx",
+        "src/components/landing/Hero.tsx",
+        "src/components/landing/HeroVideoFrame.tsx",
+        "src/components/landing/HowItWorks.tsx",
+        "src/components/landing/LandingNav.tsx",
+        "src/components/landing/PlatformArchitecture.tsx",
+        "src/components/landing/Pricing.tsx",
+        "src/components/landing/ProblemSolution.tsx",
+        "src/components/landing/SocialProof.tsx",
+        "src/components/landing/Templates.tsx",
+        "src/components/landing/data.ts",
+        "src/components/lumina/LuminaButton.tsx",
+        "src/components/ui/accordion.tsx",
+        "src/components/ui/dialog.tsx",
+        "src/hooks/use-reveal.ts",
+        "src/lib/api.ts",
+        "src/lib/luminaPalette.ts",
+        "src/lib/utils.ts",
+        "src/services/navigationService.ts",
+        "tsconfig.json"
+      ],
+      "changedPathsByParent": {
+        "2b143851c28f070cef0508ace2d19bc20a368031": [],
+        "54f9450b8d93606d734e499e6dfd6317adcdb7d1": [
+          "app/api/projects/[projectId]/route.ts",
+          "app/master-os/preview-frame.tsx",
+          "package-lock.json",
+          "package.json",
+          "public/videos/hero-build-reel.mp4",
+          "public/videos/hero-build-reel.webm",
+          "public/videos/landing-bg.mp4",
+          "src/components/landing/BackgroundVideo.tsx",
+          "src/components/landing/Comparison.tsx",
+          "src/components/landing/FAQ.tsx",
+          "src/components/landing/Features.tsx",
+          "src/components/landing/FinalCTA.tsx",
+          "src/components/landing/Footer.tsx",
+          "src/components/landing/Hero.tsx",
+          "src/components/landing/HeroVideoFrame.tsx",
+          "src/components/landing/HowItWorks.tsx",
+          "src/components/landing/LandingNav.tsx",
+          "src/components/landing/PlatformArchitecture.tsx",
+          "src/components/landing/Pricing.tsx",
+          "src/components/landing/ProblemSolution.tsx",
+          "src/components/landing/SocialProof.tsx",
+          "src/components/landing/Templates.tsx",
+          "src/components/landing/data.ts",
+          "src/components/lumina/LuminaButton.tsx",
+          "src/components/ui/accordion.tsx",
+          "src/components/ui/dialog.tsx",
+          "src/hooks/use-reveal.ts",
+          "src/lib/api.ts",
+          "src/lib/luminaPalette.ts",
+          "src/lib/utils.ts",
+          "src/services/navigationService.ts",
+          "tsconfig.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:299a5584ef02aab4340938507345a5fea3b38c3f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

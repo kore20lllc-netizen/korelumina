@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:79f9dd837e782ba7af2b5b9e94506e6f7ca09704fd6b95bb94e8168891659609",
+  "type": "commit",
+  "title": "Merge pull request #9 from kore20lllc-netizen/dev",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227717989,
+  "observedAt": 1771296053000,
+  "contentRef": "git:commit:58175e37c6eb03ae60924702342936bf4cfb4340",
+  "checksum": "sha256:ad2f613e4323ee0609bfed4affbd0112a4d4daf0b2bc4190b1527d454a9b9c6d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 34,
+    "genesisAdmissionIdentity": "genesis-admission:06352a90a2d702e326f22e3091e51e0918ceb6d404427cf3faee17c2ee8983d1",
+    "historicalSourceId": "genesis-source:commit:58175e37c6eb03ae60924702342936bf4cfb4340",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:58175e37c6eb03ae60924702342936bf4cfb4340",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "58175e37c6eb03ae60924702342936bf4cfb4340",
+      "parentShas": [
+        "930d806ea765f50fcbb55894e91ba6b2e97c1206",
+        "579a06934bc80d08c1c08c8ad1a3f3e8d5dd3ff9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771296053000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1771296053000
+      },
+      "subject": "Merge pull request #9 from kore20lllc-netizen/dev",
+      "body": "Dev",
+      "changedPaths": [
+        ".gitignore",
+        "runtime/build-lock.ts",
+        "runtime/global-lock.ts",
+        "runtime/job-logs.ts",
+        "runtime/job-store.ts",
+        "runtime/jobs.ts",
+        "runtime/locks.ts",
+        "runtime/project-lock.ts"
+      ],
+      "changedPathsByParent": {
+        "579a06934bc80d08c1c08c8ad1a3f3e8d5dd3ff9": [],
+        "930d806ea765f50fcbb55894e91ba6b2e97c1206": [
+          ".gitignore",
+          "runtime/build-lock.ts",
+          "runtime/global-lock.ts",
+          "runtime/job-logs.ts",
+          "runtime/job-store.ts",
+          "runtime/jobs.ts",
+          "runtime/locks.ts",
+          "runtime/project-lock.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:58175e37c6eb03ae60924702342936bf4cfb4340"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

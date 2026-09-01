@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:73f33b2b2ae35856a657bbc0277ccb28ec4c1d3954e767aa900fd81ffeecb24e",
+  "type": "commit",
+  "title": "feat(runtime): add restart diagnostics and runtime metrics",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725544,
+  "observedAt": 1781565795000,
+  "contentRef": "git:commit:3824f61453f6b0f8cfacb74481b5debc0751ac03",
+  "checksum": "sha256:5233114d05f24d17091529acfe723b66414083d777150245f6eeede44f277a0d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 275,
+    "genesisAdmissionIdentity": "genesis-admission:2035d506bd7d377fc18cf71c6c5a9dec8f33d7a3608bd6b929ae5e160dc79596",
+    "historicalSourceId": "genesis-source:commit:3824f61453f6b0f8cfacb74481b5debc0751ac03",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3824f61453f6b0f8cfacb74481b5debc0751ac03",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3824f61453f6b0f8cfacb74481b5debc0751ac03",
+      "parentShas": [
+        "410fd0c0327cedf1e6c2d9fd3d36d0cbf8f0c2a1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781565795000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781565795000
+      },
+      "subject": "feat(runtime): add restart diagnostics and runtime metrics",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        "apps/lumina-builder/src/components/workspaces/DashboardView.tsx.20260615-155624.bak",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx.20260615-190109.bak",
+        "apps/lumina-builder/src/hooks/useRuntimeBoot.ts.20260615-141303.bak",
+        "apps/lumina-runtime/src/routes/metrics.ts",
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/startProject.ts"
+      ],
+      "changedPathsByParent": {
+        "410fd0c0327cedf1e6c2d9fd3d36d0cbf8f0c2a1": [
+          ".gitignore",
+          "apps/lumina-builder/src/components/workspaces/DashboardView.tsx.20260615-155624.bak",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx.20260615-190109.bak",
+          "apps/lumina-builder/src/hooks/useRuntimeBoot.ts.20260615-141303.bak",
+          "apps/lumina-runtime/src/routes/metrics.ts",
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/startProject.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/runtime-diagnostics-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3824f61453f6b0f8cfacb74481b5debc0751ac03"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

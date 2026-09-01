@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:6b1168d211e876e627e0d18394e2dc0ee9cd63dd68b75546e946d10a4409dc83",
+  "type": "commit",
+  "title": "fix(vercel): restore root build scripts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723945,
+  "observedAt": 1779512292000,
+  "contentRef": "git:commit:a0e9507ae9406c61b3d0ec46aa1cdc39bc5b55cc",
+  "checksum": "sha256:cca9a2873b9a9b7e8f767fed44100a4132ec1f6992d78c161510c6f010aaa884",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 225,
+    "genesisAdmissionIdentity": "genesis-admission:92b54b84e408fc91c539da93ff27c9b3f4bf9bd802bf3f46339c0dfc1b9ce96e",
+    "historicalSourceId": "genesis-source:commit:a0e9507ae9406c61b3d0ec46aa1cdc39bc5b55cc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a0e9507ae9406c61b3d0ec46aa1cdc39bc5b55cc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a0e9507ae9406c61b3d0ec46aa1cdc39bc5b55cc",
+      "parentShas": [
+        "63a33f4ae25ef61e7c48c8c152107483db9a865a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779512292000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779512292000
+      },
+      "subject": "fix(vercel): restore root build scripts",
+      "body": "",
+      "changedPaths": [
+        "package.json"
+      ],
+      "changedPathsByParent": {
+        "63a33f4ae25ef61e7c48c8c152107483db9a865a": [
+          "package.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a0e9507ae9406c61b3d0ec46aa1cdc39bc5b55cc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:23bf0967ff94d05a06a1ea1ec292e96d05324533541ef4ee0a464e70b1483e63",
+  "type": "commit",
+  "title": "docs(planning): reconcile planning platform architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733759,
+  "observedAt": 1782644371000,
+  "contentRef": "git:commit:f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38",
+  "checksum": "sha256:ec388d9ff1af11c8f04968ed17b374614389d8d1fae497d2bfb95b4a685336b4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 519,
+    "genesisAdmissionIdentity": "genesis-admission:3bf20cdd83b6cec97808ab23ff9defa20257ccbf8cd819b0f2cc3f7e6f603322",
+    "historicalSourceId": "genesis-source:commit:f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38",
+      "parentShas": [
+        "3d791f20b4d1617f6803b22c842e4fce5fbaf9a0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644371000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644371000
+      },
+      "subject": "docs(planning): reconcile planning platform architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/KP-012_PLANNING_PLATFORM_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "3d791f20b4d1617f6803b22c842e4fce5fbaf9a0": [
+          "docs/architecture/reconciliation/KP-012_PLANNING_PLATFORM_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f60e1d07fca90f55b36fa0b5fb61516ab9cf9a38"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

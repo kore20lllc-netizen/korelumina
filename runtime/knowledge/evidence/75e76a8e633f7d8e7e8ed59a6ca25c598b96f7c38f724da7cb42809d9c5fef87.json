@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:775da90ddd032be971f27096f39fc8adfd9a8505b9e11df8300f10d36af095fd",
+  "type": "commit",
+  "title": "docs(architecture): define KoreLumina Master OS architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739209,
+  "observedAt": 1782959015000,
+  "contentRef": "git:commit:d2bb0e044a001c6478e84a817175d682203dab5d",
+  "checksum": "sha256:457949934a7ab074c85d504d628d1d0a2c980f3dc3d1c940d43ace22d6ddb9f3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 667,
+    "genesisAdmissionIdentity": "genesis-admission:77203646e0767b0dce615e4f9f05292c4ca72948a374894014ce29c1c0c126f5",
+    "historicalSourceId": "genesis-source:commit:d2bb0e044a001c6478e84a817175d682203dab5d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d2bb0e044a001c6478e84a817175d682203dab5d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d2bb0e044a001c6478e84a817175d682203dab5d",
+      "parentShas": [
+        "ff208d9871741a8731bd8e62753c719f60eb296b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782959015000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782959015000
+      },
+      "subject": "docs(architecture): define KoreLumina Master OS architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_MASTER_OS.md",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "ff208d9871741a8731bd8e62753c719f60eb296b": [
+          "docs/architecture/KORELUMINA_MASTER_OS.md",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/master-os-core-v1"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d2bb0e044a001c6478e84a817175d682203dab5d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

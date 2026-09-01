@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:d0d4d71b19431e62d613ae42c0ad55c38e208bc366ac24563e23be9ca89aecc0",
+  "type": "document",
+  "title": "Platform Extension Framework Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728882,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_EXTENSION_FRAMEWORK_SPECIFICATION_V1.md",
+  "checksum": "sha256:7b45e9e81d4a42d98ce20ab3fbafce6c89c38432a0c1e7ee1018b33b9e95b8bb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 376,
+    "genesisAdmissionIdentity": "genesis-admission:3c9794a714d8eb838767a98548012e40886b50d88468a5063baa94897fd4c45c",
+    "historicalSourceId": "genesis-source:document:derived:c134ead54306226e72273d7c04ef562cfaaa495f7f69d272ff182d4caa6270c9",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_EXTENSION_FRAMEWORK_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Platform Extension Framework Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_EXTENSION_FRAMEWORK_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:c134ead54306226e72273d7c04ef562cfaaa495f7f69d272ff182d4caa6270c9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

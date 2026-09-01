@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:de90707355eb129ce313e2656165cf99a4ca6da11a51c4ed3b96261ffb0873c8",
+  "type": "document",
+  "title": "Canonical Knowledge Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739903,
+  "observedAt": 1783020320000,
+  "contentRef": "docs/architecture/CANONICAL_KNOWLEDGE_MODEL.md",
+  "checksum": "sha256:fdd34feb8a12facab16dfe635d7c7eccb2bd266056a2282eb2e134af6613c40e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 685,
+    "genesisAdmissionIdentity": "genesis-admission:cb474b0c26cd0c0af3351353a5b1286fd841bf8f31ad73d7bdb3cbc8ca38566c",
+    "historicalSourceId": "genesis-source:document:derived:a59dd3c00ebae528be58769871e86f136962722dcd3e4b8f8c54201d2689df60",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft v1",
+    "sourceLocation": "docs/architecture/CANONICAL_KNOWLEDGE_MODEL.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Canonical Knowledge Model",
+      "status": "Draft v1",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/CANONICAL_KNOWLEDGE_MODEL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a59dd3c00ebae528be58769871e86f136962722dcd3e4b8f8c54201d2689df60"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

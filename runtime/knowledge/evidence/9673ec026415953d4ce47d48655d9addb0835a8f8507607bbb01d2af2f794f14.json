@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:af45f632331edb69d5f514ad832d8dea44b152640f1441e17607bc2f4a724416",
+  "type": "commit",
+  "title": "feat(knowledge): add milestone projection",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738410,
+  "observedAt": 1782889733000,
+  "contentRef": "git:commit:b789e1e3cd029df82f38e9f950819a3336d3135b",
+  "checksum": "sha256:09368277f0e7500c58a16813700f49f06fcc5a59dc7a729fccaf7e8eb80f554c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 646,
+    "genesisAdmissionIdentity": "genesis-admission:d4fcc2fc186b612c98ebe27c09611cfa7b97f73477f84b9b61ae26e0075e05a7",
+    "historicalSourceId": "genesis-source:commit:b789e1e3cd029df82f38e9f950819a3336d3135b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b789e1e3cd029df82f38e9f950819a3336d3135b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b789e1e3cd029df82f38e9f950819a3336d3135b",
+      "parentShas": [
+        "98ebc3899196b76815479c058604cca934568d46"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782889733000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782889733000
+      },
+      "subject": "feat(knowledge): add milestone projection",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/milestone/MilestoneProjection.ts",
+        "apps/lumina-runtime/src/knowledge/milestone/MilestoneStore.ts",
+        "apps/lumina-runtime/src/knowledge/milestone/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "98ebc3899196b76815479c058604cca934568d46": [
+          "apps/lumina-runtime/src/knowledge/milestone/MilestoneProjection.ts",
+          "apps/lumina-runtime/src/knowledge/milestone/MilestoneStore.ts",
+          "apps/lumina-runtime/src/knowledge/milestone/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase053-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b789e1e3cd029df82f38e9f950819a3336d3135b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

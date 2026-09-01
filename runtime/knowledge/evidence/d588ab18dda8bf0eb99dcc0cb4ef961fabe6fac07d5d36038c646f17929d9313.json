@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4ea438a43b89ecf8fd154d0d09eea01e54356d8a2afeb74a334baf80e63448d0",
+  "type": "commit",
+  "title": "feat(knowledge): enforce promotion policy",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741521,
+  "observedAt": 1783048848000,
+  "contentRef": "git:commit:a1b9e8a2b70e2e2e050fc3b6665d151570206979",
+  "checksum": "sha256:963f7632d406427f027e2464c316bc35d793eb8e30802f656628a00f4e69a440",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 726,
+    "genesisAdmissionIdentity": "genesis-admission:5f40dab21669d0e32f9d0d251043b9c9d3ce0150ea9f7f34854e86f1fad0c37d",
+    "historicalSourceId": "genesis-source:commit:a1b9e8a2b70e2e2e050fc3b6665d151570206979",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a1b9e8a2b70e2e2e050fc3b6665d151570206979",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a1b9e8a2b70e2e2e050fc3b6665d151570206979",
+      "parentShas": [
+        "0c0f0e0cc6ccb93e00e854501f15dc2f445d5703"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783048848000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783048848000
+      },
+      "subject": "feat(knowledge): enforce promotion policy",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeStore.ts"
+      ],
+      "changedPathsByParent": {
+        "0c0f0e0cc6ccb93e00e854501f15dc2f445d5703": [
+          "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeStore.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ckm-006-promotion-policy-integration-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a1b9e8a2b70e2e2e050fc3b6665d151570206979"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

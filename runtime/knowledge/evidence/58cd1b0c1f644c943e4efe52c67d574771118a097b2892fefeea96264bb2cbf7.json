@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:91321b23b17eb68d8d26491ee98f7b46e66c4bf05c1a505c45d31e8af53abc13",
+  "type": "commit",
+  "title": "feat(learning): add learning validation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733233,
+  "observedAt": 1782640519000,
+  "contentRef": "git:commit:3a27d856113766f3e8be761e757c3c9664cbdbe0",
+  "checksum": "sha256:d955baec00a52693aebead013c171bdeb8c2e14d8fcc4c286819d7bbc53cf90f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 504,
+    "genesisAdmissionIdentity": "genesis-admission:ff3e67a637b4cab8f6a49d8b2bf994ba6c85258d4511982e5990a9fd67381739",
+    "historicalSourceId": "genesis-source:commit:3a27d856113766f3e8be761e757c3c9664cbdbe0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3a27d856113766f3e8be761e757c3c9664cbdbe0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3a27d856113766f3e8be761e757c3c9664cbdbe0",
+      "parentShas": [
+        "0b4b4474ce15f7035cdf074efb774ac05d099061"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782640519000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782640519000
+      },
+      "subject": "feat(learning): add learning validation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/learning/LearningValidator.ts",
+        "apps/lumina-runtime/src/knowledge/learning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "0b4b4474ce15f7035cdf074efb774ac05d099061": [
+          "apps/lumina-runtime/src/knowledge/learning/LearningValidator.ts",
+          "apps/lumina-runtime/src/knowledge/learning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3a27d856113766f3e8be761e757c3c9664cbdbe0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:9cf67c1122c2e1515b77eb9efdc882f17daf8d6dfc7d5f5551aedb6897d498a7",
+  "type": "document",
+  "title": "KoreLumina Release Plan V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729055,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/RELEASE_PLAN_V1.md",
+  "checksum": "sha256:f58822266815056da8bba32f48816d544f4e14624c5609230c45c7e8a41f3323",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 381,
+    "genesisAdmissionIdentity": "genesis-admission:6b03eafde70b53f44f71d7c99f817fc50535c75533b71f96a624b80d34ea516d",
+    "historicalSourceId": "genesis-source:document:derived:3ea3e3f89c632e204f44e4bda1050656f43a0aeb68e860ee0d08858f0edcbfaf",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/RELEASE_PLAN_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Release Plan V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/RELEASE_PLAN_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3ea3e3f89c632e204f44e4bda1050656f43a0aeb68e860ee0d08858f0edcbfaf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

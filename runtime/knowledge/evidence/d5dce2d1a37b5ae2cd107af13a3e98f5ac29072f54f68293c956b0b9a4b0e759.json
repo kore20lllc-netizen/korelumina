@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:e4d05fb1f910519b4ec445d60b94dd1573fd7e5253af54f8b435dea673bfaad2",
+  "type": "commit",
+  "title": "feat(knowledge): add agent context requests",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741679,
+  "observedAt": 1783050082000,
+  "contentRef": "git:commit:f4923f11cdcc46d5eea8102bbf0578182d7b3743",
+  "checksum": "sha256:b3b35b447688d3adeeaea7a5a48d60584c354c3528557b4f662a158272b577f0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 730,
+    "genesisAdmissionIdentity": "genesis-admission:bb92c0756b9755f4708f373c3df235ac7082f9f7c8add82fd7ff911709fefad2",
+    "historicalSourceId": "genesis-source:commit:f4923f11cdcc46d5eea8102bbf0578182d7b3743",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f4923f11cdcc46d5eea8102bbf0578182d7b3743",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f4923f11cdcc46d5eea8102bbf0578182d7b3743",
+      "parentShas": [
+        "8e419514600fe93cf214869a806628cf498dde4f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783050082000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783050082000
+      },
+      "subject": "feat(knowledge): add agent context requests",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/index.ts"
+      ],
+      "changedPathsByParent": {
+        "8e419514600fe93cf214869a806628cf498dde4f": [
+          "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kp-003-agent-context-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f4923f11cdcc46d5eea8102bbf0578182d7b3743"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

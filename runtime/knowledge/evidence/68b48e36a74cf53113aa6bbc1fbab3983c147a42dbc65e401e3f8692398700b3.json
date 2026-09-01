@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4dd1e94dc5871c5a0283ef78d559f2011a54ee458d5a2fab0fbc812cccf71615",
+  "type": "commit",
+  "title": "refactor(deploy): remove fake deployment history",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727613,
+  "observedAt": 1782297157000,
+  "contentRef": "git:commit:08063cea82be8b5f1b386fdf8a5a96efbd95d7b6",
+  "checksum": "sha256:130cc04c2c8a5a808d78a55d06de4bbd5ca4613570f6f7bbdab7fd4b43fedc4f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 338,
+    "genesisAdmissionIdentity": "genesis-admission:bb3e4ae45e72a99548ff2bca238f906884618f0d6f983acdf6cadd15d85ce57e",
+    "historicalSourceId": "genesis-source:commit:08063cea82be8b5f1b386fdf8a5a96efbd95d7b6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:08063cea82be8b5f1b386fdf8a5a96efbd95d7b6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "08063cea82be8b5f1b386fdf8a5a96efbd95d7b6",
+      "parentShas": [
+        "438ccfd6f9817d2ee7184e97c5af432d16b184d7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782297157000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782297157000
+      },
+      "subject": "refactor(deploy): remove fake deployment history",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/admin/DeploymentsTab.tsx",
+        "apps/lumina-builder/src/lib/seed.ts"
+      ],
+      "changedPathsByParent": {
+        "438ccfd6f9817d2ee7184e97c5af432d16b184d7": [
+          "apps/lumina-builder/src/components/workspaces/admin/DeploymentsTab.tsx",
+          "apps/lumina-builder/src/lib/seed.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:08063cea82be8b5f1b386fdf8a5a96efbd95d7b6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

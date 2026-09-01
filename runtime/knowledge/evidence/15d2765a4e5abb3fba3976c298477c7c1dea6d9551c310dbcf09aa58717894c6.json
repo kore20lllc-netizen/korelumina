@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:ab01f57c9c36fdc2043096c624bb6a6b1ccd9acea398842f31aad1335ce48e94",
+  "type": "commit",
+  "title": "feat(settings): replace app reset confirmation with Lumina dialog",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726254,
+  "observedAt": 1781694721000,
+  "contentRef": "git:commit:6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d",
+  "checksum": "sha256:12fb885179f910aea7a963038b5cd69946dc3b208531319723f342bb24c0b163",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 297,
+    "genesisAdmissionIdentity": "genesis-admission:dd14261d26952db93a41d7c3dda7c34e9bbf9c2b28bce7052230be9aecef9825",
+    "historicalSourceId": "genesis-source:commit:6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d",
+      "parentShas": [
+        "52971760f273fff88f872b473a8d20953153cbcf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781694721000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781694721000
+      },
+      "subject": "feat(settings): replace app reset confirmation with Lumina dialog",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "52971760f273fff88f872b473a8d20953153cbcf": [
+          "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

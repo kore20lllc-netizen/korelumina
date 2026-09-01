@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:9585c1942f624424239c724250d00f298f813f6d1aa02b9e454a9885faf33485",
+  "type": "ADR",
+  "title": "ADR-XXXX",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731873,
+  "observedAt": 1782554475000,
+  "contentRef": "docs/adr/ADR_TEMPLATE.md",
+  "checksum": "sha256:fc4a5322b0374ca0d4630eb4d35fba80bdc072b3951796baf3addf4348c70656",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 465,
+    "genesisAdmissionIdentity": "genesis-admission:203be0ce795ca7552ed2960ffbbbb736c93f27c21b656d0566a513bc1561cc28",
+    "historicalSourceId": "genesis-source:ADR:derived:6f40c460f8674ba37392f17f1c47a5fded2e68ebbeddb2ab759144c5425de968",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "approvalState": "Proposed | Accepted | Superseded | Deprecated",
+    "sourceLocation": "docs/adr/ADR_TEMPLATE.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ADR-XXXX",
+      "status": "Proposed | Accepted | Superseded | Deprecated",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/ADR_TEMPLATE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:6f40c460f8674ba37392f17f1c47a5fded2e68ebbeddb2ab759144c5425de968"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

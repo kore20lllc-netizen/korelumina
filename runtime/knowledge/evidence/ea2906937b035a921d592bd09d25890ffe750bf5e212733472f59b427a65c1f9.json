@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:51c3ef7bd47c58614d369a21b85904da096b73d792105ebf92f617efc51ff627",
+  "type": "document",
+  "title": "KoreLumina Implementation Protocol V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735584,
+  "observedAt": 1782714212000,
+  "contentRef": "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+  "checksum": "sha256:ca94fd04a69c8e05cb5bfc152331ce6843262640b6ed30fc50c89341aadfa23f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 570,
+    "genesisAdmissionIdentity": "genesis-admission:e30e5c8554195dac7a68fd40735a426ab9c9dd552577f9dbcd60fe5b10c0cabe",
+    "historicalSourceId": "genesis-source:document:derived:4ee437130c6c809153aad66126504a585f78d2a04a8ef31da632384576f3daf9",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Constitutional",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Implementation Protocol V1",
+      "status": "Constitutional",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:4ee437130c6c809153aad66126504a585f78d2a04a8ef31da632384576f3daf9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

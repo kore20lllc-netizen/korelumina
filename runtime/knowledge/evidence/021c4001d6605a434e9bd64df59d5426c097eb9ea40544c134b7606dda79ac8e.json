@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:5ace8250837fd5cec50451d2e2545f6050eb871b683f29e81e7cf27bfecea8d0",
+  "type": "commit",
+  "title": "feat(settings): replace workspace leave confirmation with Lumina dialog",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726221,
+  "observedAt": 1781693882000,
+  "contentRef": "git:commit:52971760f273fff88f872b473a8d20953153cbcf",
+  "checksum": "sha256:69e7a89217b8dae0f7621d36b0e21949120651f249c355798f1a03e7eb05b56c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 296,
+    "genesisAdmissionIdentity": "genesis-admission:065ad46d24aca69916414c442c1c1e1f869da526ab6853b6cf4a2a857ae3fe73",
+    "historicalSourceId": "genesis-source:commit:52971760f273fff88f872b473a8d20953153cbcf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:52971760f273fff88f872b473a8d20953153cbcf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "52971760f273fff88f872b473a8d20953153cbcf",
+      "parentShas": [
+        "abca3b529ccfbd6c5dca1ba19ce43e833c25afae"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693882000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693882000
+      },
+      "subject": "feat(settings): replace workspace leave confirmation with Lumina dialog",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "abca3b529ccfbd6c5dca1ba19ce43e833c25afae": [
+          "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ui-dialog-clean-5297176"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:52971760f273fff88f872b473a8d20953153cbcf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

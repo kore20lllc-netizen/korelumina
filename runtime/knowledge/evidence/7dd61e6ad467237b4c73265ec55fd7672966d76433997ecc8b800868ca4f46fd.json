@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:bcf577d84cebd41a44c33cb6042c6238bc503c7e4efef7b148dcf7d13903cf1c",
+  "type": "commit",
+  "title": "fix(memory): align learning adapter with learning pattern contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734438,
+  "observedAt": 1782647100000,
+  "contentRef": "git:commit:f70bb4d740526fcefb613e421dfeae0052d83f8a",
+  "checksum": "sha256:11f08316b155676bf6c1cb949ea18697fd2167a5fb4b4ebbf494ec631738cd64",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 538,
+    "genesisAdmissionIdentity": "genesis-admission:2536e3e5a5fe57c4992d85cb798ee586d91b455e68211645fbfd4d62bb7fc7ca",
+    "historicalSourceId": "genesis-source:commit:f70bb4d740526fcefb613e421dfeae0052d83f8a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f70bb4d740526fcefb613e421dfeae0052d83f8a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f70bb4d740526fcefb613e421dfeae0052d83f8a",
+      "parentShas": [
+        "8783d182fd84ee2333367fe65ce811ad7cdad729"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647100000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647100000
+      },
+      "subject": "fix(memory): align learning adapter with learning pattern contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/organizational-memory/OrganizationalMemoryLearningAdapter.ts"
+      ],
+      "changedPathsByParent": {
+        "8783d182fd84ee2333367fe65ce811ad7cdad729": [
+          "apps/lumina-runtime/src/knowledge/organizational-memory/OrganizationalMemoryLearningAdapter.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f70bb4d740526fcefb613e421dfeae0052d83f8a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

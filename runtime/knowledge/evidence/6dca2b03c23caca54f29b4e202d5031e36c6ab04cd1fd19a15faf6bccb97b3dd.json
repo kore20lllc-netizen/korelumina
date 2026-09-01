@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:c68829c3b3d4125ee729bc9e05c9d7afda11c3bf927bdc532c4e65e18f977804",
+  "type": "document",
+  "title": "Capability Registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735692,
+  "observedAt": 1782714445000,
+  "contentRef": "docs/architecture/capabilities/CAPABILITY_REGISTRY.md",
+  "checksum": "sha256:c3cfb183564479307e8f5f62d3cc3d61716f0d8272e33799ad493dce55c3d547",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 573,
+    "genesisAdmissionIdentity": "genesis-admission:6aaefa4fe09f1bab13583eee6a4178c5ac6909ddea2ace5f4db8dfecd9150804",
+    "historicalSourceId": "genesis-source:document:derived:d1e293d003e24d1a8b5a3f1ec88811fc044659c37f48edb6b126b4648d41cbf8",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "sourceLocation": "docs/architecture/capabilities/CAPABILITY_REGISTRY.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Capability Registry",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/capabilities/CAPABILITY_REGISTRY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d1e293d003e24d1a8b5a3f1ec88811fc044659c37f48edb6b126b4648d41cbf8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:5043f1d0fddca7071b027765859e007b7e896ac645b46f15cb18d9e3cee7e9da",
+  "type": "document",
+  "title": "KoreLumina Constitutional Amendment Process",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732085,
+  "observedAt": 1782554777000,
+  "contentRef": "docs/constitution/AMENDMENT_PROCESS.md",
+  "checksum": "sha256:ceccdc31feaaa1e661a1650438bb13174e47cdbd768c4ba55290e4ee7dff79ed",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 471,
+    "genesisAdmissionIdentity": "genesis-admission:7e07372e19cb2d946f8870ddbd6d4558db287354d3a492b974c0145521a45496",
+    "historicalSourceId": "genesis-source:document:derived:a6febd8cc0a6f7c9189444502a278fe974ae0527f028da8f7bfd7d02917814df",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "constitution",
+    "sourceLocation": "docs/constitution/AMENDMENT_PROCESS.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Constitutional Amendment Process",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/AMENDMENT_PROCESS.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a6febd8cc0a6f7c9189444502a278fe974ae0527f028da8f7bfd7d02917814df"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

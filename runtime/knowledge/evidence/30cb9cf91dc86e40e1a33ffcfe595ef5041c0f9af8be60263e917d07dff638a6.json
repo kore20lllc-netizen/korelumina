@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:6d9cfbf25f49a9169aca5c5ed4143130a5c0a700181d48c9b0c94c1f5ba88db3",
+  "type": "document",
+  "title": "Knowledge Intermediate Representation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740185,
+  "observedAt": 1783025594000,
+  "contentRef": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md",
+  "checksum": "sha256:816e95942372e6a44b274867e3dab9bf0f289c3031bd576017f2ecdea1b3035f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 692,
+    "genesisAdmissionIdentity": "genesis-admission:eab965d5b011669c1b9c91190b19d44d9ddad75d14a0829be467f602ab43cb1d",
+    "historicalSourceId": "genesis-source:document:derived:576d738da2c219d83f108e824a14f95f5a18e9175515a7ee3be0e620f928311f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft v1",
+    "sourceLocation": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Knowledge Intermediate Representation",
+      "status": "Draft v1",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:576d738da2c219d83f108e824a14f95f5a18e9175515a7ee3be0e620f928311f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

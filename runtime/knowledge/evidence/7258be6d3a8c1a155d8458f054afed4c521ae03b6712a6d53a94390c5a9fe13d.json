@@ -1,0 +1,111 @@
+{
+  "id": "genesis-evidence:bd34faa2669155418100d2a6e973800076d217575d4dc1c9d326d8c1b9d39103",
+  "type": "commit",
+  "title": "feat(landing): sync latest lumina builder landing page",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722958,
+  "observedAt": 1778814320000,
+  "contentRef": "git:commit:2b143851c28f070cef0508ace2d19bc20a368031",
+  "checksum": "sha256:65ecbe7977b81ede22c72e30bd40b59ec740ca324af107259489537f2f2ab0f8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 194,
+    "genesisAdmissionIdentity": "genesis-admission:571f7210b7e9dc13b8ad738247daeb687f4cc680afb838a40378bc8e7ddca0bb",
+    "historicalSourceId": "genesis-source:commit:2b143851c28f070cef0508ace2d19bc20a368031",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2b143851c28f070cef0508ace2d19bc20a368031",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2b143851c28f070cef0508ace2d19bc20a368031",
+      "parentShas": [
+        "daf480874112dfc3d020d2d2ff160100bdc819e6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778814320000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778814320000
+      },
+      "subject": "feat(landing): sync latest lumina builder landing page",
+      "body": "",
+      "changedPaths": [
+        "package-lock.json",
+        "package.json",
+        "src/components/landing/BackgroundVideo.tsx",
+        "src/components/landing/Comparison.tsx",
+        "src/components/landing/FAQ.tsx",
+        "src/components/landing/Features.tsx",
+        "src/components/landing/FinalCTA.tsx",
+        "src/components/landing/Footer.tsx",
+        "src/components/landing/Hero.tsx",
+        "src/components/landing/HeroVideoFrame.tsx",
+        "src/components/landing/HowItWorks.tsx",
+        "src/components/landing/LandingNav.tsx",
+        "src/components/landing/PlatformArchitecture.tsx",
+        "src/components/landing/Pricing.tsx",
+        "src/components/landing/ProblemSolution.tsx",
+        "src/components/landing/SocialProof.tsx",
+        "src/components/landing/Templates.tsx",
+        "src/components/landing/data.ts",
+        "src/components/lumina/LuminaButton.tsx",
+        "src/components/ui/accordion.tsx",
+        "src/components/ui/dialog.tsx",
+        "src/hooks/use-reveal.ts",
+        "src/lib/luminaPalette.ts",
+        "src/lib/utils.ts",
+        "src/services/navigationService.ts",
+        "tsconfig.json"
+      ],
+      "changedPathsByParent": {
+        "daf480874112dfc3d020d2d2ff160100bdc819e6": [
+          "package-lock.json",
+          "package.json",
+          "src/components/landing/BackgroundVideo.tsx",
+          "src/components/landing/Comparison.tsx",
+          "src/components/landing/FAQ.tsx",
+          "src/components/landing/Features.tsx",
+          "src/components/landing/FinalCTA.tsx",
+          "src/components/landing/Footer.tsx",
+          "src/components/landing/Hero.tsx",
+          "src/components/landing/HeroVideoFrame.tsx",
+          "src/components/landing/HowItWorks.tsx",
+          "src/components/landing/LandingNav.tsx",
+          "src/components/landing/PlatformArchitecture.tsx",
+          "src/components/landing/Pricing.tsx",
+          "src/components/landing/ProblemSolution.tsx",
+          "src/components/landing/SocialProof.tsx",
+          "src/components/landing/Templates.tsx",
+          "src/components/landing/data.ts",
+          "src/components/lumina/LuminaButton.tsx",
+          "src/components/ui/accordion.tsx",
+          "src/components/ui/dialog.tsx",
+          "src/hooks/use-reveal.ts",
+          "src/lib/luminaPalette.ts",
+          "src/lib/utils.ts",
+          "src/services/navigationService.ts",
+          "tsconfig.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2b143851c28f070cef0508ace2d19bc20a368031"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

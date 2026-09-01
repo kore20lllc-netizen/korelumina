@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:c981426fa433376c3d6b53b258d9cc933c923e502655ceea084e7e4a5145d829",
+  "type": "commit",
+  "title": "docs(architecture): reconcile knowledge platform implementation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731372,
+  "observedAt": 1782546301000,
+  "contentRef": "git:commit:51a2e469fdf583c7577e0fdf42a1a5f9b9a87253",
+  "checksum": "sha256:76cc7ec931fc3df885a912a69cb2edb01b4ee230728b0082421dc73448506889",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 450,
+    "genesisAdmissionIdentity": "genesis-admission:ca053d7a35bfd1e86fe741c9b37d89699f8e151bef9972b1895cb1b9346d7832",
+    "historicalSourceId": "genesis-source:commit:51a2e469fdf583c7577e0fdf42a1a5f9b9a87253",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:51a2e469fdf583c7577e0fdf42a1a5f9b9a87253",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "51a2e469fdf583c7577e0fdf42a1a5f9b9a87253",
+      "parentShas": [
+        "3d01289b7f8d2f77dfacde1642d01a99e6913c73"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782546301000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782546301000
+      },
+      "subject": "docs(architecture): reconcile knowledge platform implementation",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "3d01289b7f8d2f77dfacde1642d01a99e6913c73": [
+          "docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:51a2e469fdf583c7577e0fdf42a1a5f9b9a87253"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

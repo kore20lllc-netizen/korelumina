@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:91df72f9989e46c383af3c5216078dab4ab032ba3b2235d03596a0edb1bb5e1d",
+  "type": "document",
+  "title": "Runtime Event Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729128,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/RUNTIME_EVENT_SPECIFICATION_V1.md",
+  "checksum": "sha256:2ca12cac206e8ecd19be267acc0301d34d84bae73b467df715f0cf762e6cf73a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 383,
+    "genesisAdmissionIdentity": "genesis-admission:b2242e6bf3454b2cc4ce41070eca7fc729b4887ffde18f5bfeb1d56e2b8575a1",
+    "historicalSourceId": "genesis-source:document:derived:307fba660fa67e96f98f04e2e936f2d43f6c3025f9d718e070de43327389949f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Runtime Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/RUNTIME_EVENT_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Runtime Event Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/RUNTIME_EVENT_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:307fba660fa67e96f98f04e2e936f2d43f6c3025f9d718e070de43327389949f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

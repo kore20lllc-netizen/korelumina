@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:ff2766e28f64537f96fe1e8e893372ea0758c24006921332521ed5324f5b55e2",
+  "type": "document",
+  "title": "Deployment Platform Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728179,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/DEPLOYMENT_PLATFORM_SPECIFICATION_V1.md",
+  "checksum": "sha256:0bd52975ccd01de1a6832e708f33c6c9b72fd5f4f6f75d50fb7846993865aaac",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 355,
+    "genesisAdmissionIdentity": "genesis-admission:41c4b8bb8500bfa0f7346e56008ce23bb4b0abde643fbc999950379c6e235e6c",
+    "historicalSourceId": "genesis-source:document:derived:ef373028a27ab2a1037515fc6b23ead7e71e6886a24ff0696ed567218fbca128",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Deployment Platform Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/DEPLOYMENT_PLATFORM_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Deployment Platform Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/DEPLOYMENT_PLATFORM_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ef373028a27ab2a1037515fc6b23ead7e71e6886a24ff0696ed567218fbca128"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

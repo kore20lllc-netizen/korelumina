@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:095d01b16b40a393e1952cfed7bf8df7d74d8bb50913d58554ec83c15a70f84f",
+  "type": "commit",
+  "title": "feat(knowledge): complete runtime lifecycle knowledge integration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730456,
+  "observedAt": 1782533016000,
+  "contentRef": "git:commit:085ac9b83f1d09ee210aa513e4b9c8a3794ebf0c",
+  "checksum": "sha256:97787afb6912811adf0a8865986f21c163150279c2a3c5527ef0b14ba901353f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 423,
+    "genesisAdmissionIdentity": "genesis-admission:302c8f6c7125fed4557db0d96e93ff7020a9aa598c05753ce02a34624e6a2532",
+    "historicalSourceId": "genesis-source:commit:085ac9b83f1d09ee210aa513e4b9c8a3794ebf0c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:085ac9b83f1d09ee210aa513e4b9c8a3794ebf0c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "085ac9b83f1d09ee210aa513e4b9c8a3794ebf0c",
+      "parentShas": [
+        "318d610c1e50a108a45b10dd71730bf8b12e4913"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782533016000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782533016000
+      },
+      "subject": "feat(knowledge): complete runtime lifecycle knowledge integration",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/recovery.ts",
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/supervisor.ts"
+      ],
+      "changedPathsByParent": {
+        "318d610c1e50a108a45b10dd71730bf8b12e4913": [
+          "apps/lumina-runtime/src/runtime/recovery.ts",
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/supervisor.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:085ac9b83f1d09ee210aa513e4b9c8a3794ebf0c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

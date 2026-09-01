@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:c7da9ae24e66921ec86792a79396b4345a522cda8c9d3ad309f02d85aa44286a",
+  "type": "document",
+  "title": "AI Platform Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727748,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/AI_PLATFORM_SPECIFICATION_V1.md",
+  "checksum": "sha256:5dea0416c33e6fdb0ca8c703c28f857f01c5415982bf2089250b1a111b1803cd",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 342,
+    "genesisAdmissionIdentity": "genesis-admission:7ff636ada6743af97a6d2f6cfe750b860bbc26cc7ef4e0402802ce2355e96507",
+    "historicalSourceId": "genesis-source:document:derived:7fd6b3d518aefe4e460f8a87df64a5d633f8003428abfa7791f9dfbff0c5490c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "AI Platform Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/AI_PLATFORM_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "AI Platform Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/AI_PLATFORM_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:7fd6b3d518aefe4e460f8a87df64a5d633f8003428abfa7791f9dfbff0c5490c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

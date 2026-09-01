@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:848ce5e985ff4b71d93e47535afcc31a476fa73a8da748106a17294558b1f420",
+  "type": "commit",
+  "title": "feat(runtime): add runtime operations console",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725767,
+  "observedAt": 1781587049000,
+  "contentRef": "git:commit:04ac1be306d3f4ad24f5bad1efa99846d0346920",
+  "checksum": "sha256:994efcfd61da8baeb37570c00378159ce8d4c8242b2180618352ef772b99d304",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 282,
+    "genesisAdmissionIdentity": "genesis-admission:25d04223cfc150fee3ca46479233595606e9298f5afd27d20147ade891f28c70",
+    "historicalSourceId": "genesis-source:commit:04ac1be306d3f4ad24f5bad1efa99846d0346920",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:04ac1be306d3f4ad24f5bad1efa99846d0346920",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "04ac1be306d3f4ad24f5bad1efa99846d0346920",
+      "parentShas": [
+        "70456202fbb3c4b09ddb6e060d2ac978c0b9fb62"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781587049000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781587049000
+      },
+      "subject": "feat(runtime): add runtime operations console",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "70456202fbb3c4b09ddb6e060d2ac978c0b9fb62": [
+          "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-runtime-ops-console-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:04ac1be306d3f4ad24f5bad1efa99846d0346920"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

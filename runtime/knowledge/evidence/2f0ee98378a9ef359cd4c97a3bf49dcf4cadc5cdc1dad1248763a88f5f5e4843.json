@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:ce03550ac0aac26bcd3379ad1f125315ebc123c20f7ec300ea7c9e936e62221f",
+  "type": "RFC",
+  "title": "RFC-0001 — Knowledge Graph Integration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732261,
+  "observedAt": 1782587331000,
+  "contentRef": "docs/rfc/RFC-0001-KNOWLEDGE-GRAPH-INTEGRATION.md",
+  "checksum": "sha256:69507c7d7a651b9c413cc2d3c4d6e05198702b661dc3b3ed2727212f028b9e3d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 476,
+    "genesisAdmissionIdentity": "genesis-admission:8ed7f501d112d68ad7c0f21abd70b4e7e1e81b6595c6597ce9b19b184bd97eea",
+    "historicalSourceId": "genesis-source:RFC:derived:92c666302009ddb856b951710acad726c92c19fc1e3d6cffea5d2b67d1f9edb2",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "request-for-comments",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/rfc/RFC-0001-KNOWLEDGE-GRAPH-INTEGRATION.md",
+    "documentClassification": "rfc",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "RFC-0001 — Knowledge Graph Integration",
+      "status": "Draft",
+      "documentClassification": "rfc",
+      "sourceLocation": "docs/rfc/RFC-0001-KNOWLEDGE-GRAPH-INTEGRATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:RFC:derived:92c666302009ddb856b951710acad726c92c19fc1e3d6cffea5d2b67d1f9edb2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

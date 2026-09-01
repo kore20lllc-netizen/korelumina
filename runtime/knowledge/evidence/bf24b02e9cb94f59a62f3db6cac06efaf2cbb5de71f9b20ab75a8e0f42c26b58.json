@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:73c3a9db0886de702b2f5cfb70638d5f58e68ba5efa428391804b3be827bbca7",
+  "type": "document",
+  "title": "Roadmap Governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731572,
+  "observedAt": 1782547225000,
+  "contentRef": "docs/governance/ROADMAP_GOVERNANCE.md",
+  "checksum": "sha256:f2cee86ba4a70078df2fb6e0a8bc8f05f085c5c72f3a4d352b27d14a0ca4cd3e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 456,
+    "genesisAdmissionIdentity": "genesis-admission:973cd305f72b4e6729df17865eb0247bf130d5cbd699dbd8f01b4f1c845d9a4d",
+    "historicalSourceId": "genesis-source:document:derived:ff321051048f38b9795c4237b235fbb76c46341507f5d46b8209ae209a70bb80",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/ROADMAP_GOVERNANCE.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Roadmap Governance",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/ROADMAP_GOVERNANCE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ff321051048f38b9795c4237b235fbb76c46341507f5d46b8209ae209a70bb80"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

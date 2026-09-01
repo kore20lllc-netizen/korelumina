@@ -1,0 +1,115 @@
+{
+  "id": "genesis-evidence:7e8779e87b0db1d52da1089c2598e623d3defef16cbb8eb8d180e7a7fbd10335",
+  "type": "commit",
+  "title": "merge: architecture audit runtime stabilization",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725608,
+  "observedAt": 1781578991000,
+  "contentRef": "git:commit:9ea903101c6bcc6fcbdffad60ef4b3a23fc1b9d8",
+  "checksum": "sha256:0b5a52ed1dd428976de7aabecf77469215369087d9f51ec61736d3203a27e17f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 277,
+    "genesisAdmissionIdentity": "genesis-admission:c06874d53f20a5710e0e4ffdecc0cf3df84a6b8895622f40098cdcecc95423a3",
+    "historicalSourceId": "genesis-source:commit:9ea903101c6bcc6fcbdffad60ef4b3a23fc1b9d8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9ea903101c6bcc6fcbdffad60ef4b3a23fc1b9d8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9ea903101c6bcc6fcbdffad60ef4b3a23fc1b9d8",
+      "parentShas": [
+        "7b2ba87989c4cb2e2fb4422969a35fd20b9c58e9",
+        "4127d0ad4bd9f9830025394a0fa6f82496c8c242"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781578991000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781578991000
+      },
+      "subject": "merge: architecture audit runtime stabilization",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+        "apps/lumina-builder/src/components/layout/TopBar.tsx",
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+        "apps/lumina-builder/src/components/workspaces/DashboardView.tsx",
+        "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+        "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+        "apps/lumina-builder/src/lib/analytics.ts",
+        "apps/lumina-builder/src/pages/Index.tsx",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "apps/lumina-runtime/src/routes/metrics.ts",
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/startProject.ts",
+        "audit/README.md",
+        "audit/all-files.txt",
+        "audit/all-source-files.txt",
+        "audit/app-files.txt",
+        "audit/apps-files.txt",
+        "audit/architecture-classification.md",
+        "audit/archive-files.txt",
+        "audit/lumina-builder-files.txt",
+        "audit/lumina-runtime-files.txt",
+        "audit/runtime-core-files.txt",
+        "audit/runtime-files.txt",
+        "audit/scripts-files.txt"
+      ],
+      "changedPathsByParent": {
+        "4127d0ad4bd9f9830025394a0fa6f82496c8c242": [],
+        "7b2ba87989c4cb2e2fb4422969a35fd20b9c58e9": [
+          ".gitignore",
+          "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+          "apps/lumina-builder/src/components/layout/TopBar.tsx",
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+          "apps/lumina-builder/src/components/workspaces/DashboardView.tsx",
+          "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+          "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+          "apps/lumina-builder/src/lib/analytics.ts",
+          "apps/lumina-builder/src/pages/Index.tsx",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "apps/lumina-runtime/src/routes/metrics.ts",
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/startProject.ts",
+          "audit/README.md",
+          "audit/all-files.txt",
+          "audit/all-source-files.txt",
+          "audit/app-files.txt",
+          "audit/apps-files.txt",
+          "audit/architecture-classification.md",
+          "audit/archive-files.txt",
+          "audit/lumina-builder-files.txt",
+          "audit/lumina-runtime-files.txt",
+          "audit/runtime-core-files.txt",
+          "audit/runtime-files.txt",
+          "audit/scripts-files.txt"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-production-baseline-v3"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9ea903101c6bcc6fcbdffad60ef4b3a23fc1b9d8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

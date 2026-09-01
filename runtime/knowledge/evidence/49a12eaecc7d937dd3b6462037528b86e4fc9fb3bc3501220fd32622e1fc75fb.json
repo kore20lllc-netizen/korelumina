@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4500211e2607cb358f16ca157cbe42ab4fb3722839ccfdc461a1e4ffa647cb25",
+  "type": "commit",
+  "title": "docs(knowledge): add repository knowledge recovery specification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741045,
+  "observedAt": 1783042904000,
+  "contentRef": "git:commit:b9c377010323a871b8fbac6e082c627ca1443291",
+  "checksum": "sha256:f9626f829700a82c32b5e4184beb6922bf47cd5115bb6ff35dcabbf612f96834",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 714,
+    "genesisAdmissionIdentity": "genesis-admission:07096c1ce2f23fff1870d96204b93f37fb9fe628d2726fbba63c4164dfae6d9d",
+    "historicalSourceId": "genesis-source:commit:b9c377010323a871b8fbac6e082c627ca1443291",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b9c377010323a871b8fbac6e082c627ca1443291",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b9c377010323a871b8fbac6e082c627ca1443291",
+      "parentShas": [
+        "969f70e6f8393481540020857467a3e3f7e21030"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042904000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042904000
+      },
+      "subject": "docs(knowledge): add repository knowledge recovery specification",
+      "body": "",
+      "changedPaths": [
+        "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+      ],
+      "changedPathsByParent": {
+        "969f70e6f8393481540020857467a3e3f7e21030": [
+          "docs/knowledge-recovery/KR-005_REPOSITORY_KNOWLEDGE_RECOVERY_SPECIFICATION.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-005-repository-knowledge-recovery-spec-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b9c377010323a871b8fbac6e082c627ca1443291"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

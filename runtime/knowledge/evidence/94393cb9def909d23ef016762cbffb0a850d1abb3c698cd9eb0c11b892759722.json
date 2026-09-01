@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:0bcc32b6cefc38b2a9d56bfb2dd5515a8717d9f5941eeabad86d3e55e6ab837c",
+  "type": "commit",
+  "title": "feat(knowledge): add engineering service layer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730257,
+  "observedAt": 1782526891000,
+  "contentRef": "git:commit:c10f4a6342f980716c3c37762f76b96257f8e436",
+  "checksum": "sha256:9ab33ebe6520f58a6e31d97a63345b3d1baae384e87989f3f938f19a6ece5a4f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 417,
+    "genesisAdmissionIdentity": "genesis-admission:5d54b6cac3af045820a1a169fc38e47ff52be0c0da3918c63ecb8efd0d03c133",
+    "historicalSourceId": "genesis-source:commit:c10f4a6342f980716c3c37762f76b96257f8e436",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c10f4a6342f980716c3c37762f76b96257f8e436",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c10f4a6342f980716c3c37762f76b96257f8e436",
+      "parentShas": [
+        "60f1e2a9eb06f3bb0c0c858fa89a50468f62e038"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782526891000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782526891000
+      },
+      "subject": "feat(knowledge): add engineering service layer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringService.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/index.ts"
+      ],
+      "changedPathsByParent": {
+        "60f1e2a9eb06f3bb0c0c858fa89a50468f62e038": [
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringService.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c10f4a6342f980716c3c37762f76b96257f8e436"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

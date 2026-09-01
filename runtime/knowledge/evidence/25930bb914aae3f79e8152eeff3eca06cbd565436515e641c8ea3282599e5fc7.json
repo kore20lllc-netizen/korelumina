@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4f749841f286c13a4e84d0ca65802825b0b56950fe35ac15ac382b17b7c2d628",
+  "type": "commit",
+  "title": "docs(architecture): establish architecture governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736434,
+  "observedAt": 1782760627000,
+  "contentRef": "git:commit:6e12df31263d1197c053ad567da973934bd9dbdd",
+  "checksum": "sha256:629d20ce91a6c2f05bf34149034424a893917fe3351cadc67df00bb8993b5b35",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 593,
+    "genesisAdmissionIdentity": "genesis-admission:787d01fccdde8a2cf325713beb69f2fdc267fe43509259f934d7f53a64a238b0",
+    "historicalSourceId": "genesis-source:commit:6e12df31263d1197c053ad567da973934bd9dbdd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6e12df31263d1197c053ad567da973934bd9dbdd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6e12df31263d1197c053ad567da973934bd9dbdd",
+      "parentShas": [
+        "1738cfe6e48dd0d6af47f1a3a26280f4775fc08b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782760627000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782760627000
+      },
+      "subject": "docs(architecture): establish architecture governance",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+        "docs/architecture/ARCHITECTURE_PRINCIPLES.md"
+      ],
+      "changedPathsByParent": {
+        "1738cfe6e48dd0d6af47f1a3a26280f4775fc08b": [
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+          "docs/architecture/ARCHITECTURE_PRINCIPLES.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6e12df31263d1197c053ad567da973934bd9dbdd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

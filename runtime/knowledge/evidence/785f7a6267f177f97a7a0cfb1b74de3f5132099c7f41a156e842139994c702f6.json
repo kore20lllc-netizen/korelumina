@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:a8c8946d813d174d6377a75abc03f8d528aca26f6bda4f4adb26923c0d991676",
+  "type": "document",
+  "title": "KoreLumina Architecture Freeze V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735000,
+  "observedAt": 1782692954000,
+  "contentRef": "docs/architecture/KORELUMINA_ARCHITECTURE_FREEZE_V1.md",
+  "checksum": "sha256:9d207f6566fa84706f54df58b4c12b28ab9f87a44514ba382c6354cba5721121",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 554,
+    "genesisAdmissionIdentity": "genesis-admission:3ef731d9dd0aec8bc404eb43076e5a8d43e0a92132a05a76be451a6690c6a6e2",
+    "historicalSourceId": "genesis-source:document:derived:9bc16335247a2f7c0592940ed8b01c1be7877473d9fd8b8813619853261e7b6c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Constitutional",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_ARCHITECTURE_FREEZE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Freeze V1",
+      "status": "Constitutional",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_ARCHITECTURE_FREEZE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:9bc16335247a2f7c0592940ed8b01c1be7877473d9fd8b8813619853261e7b6c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:44e760b91c0218960f3e7aca93a295ccc1e469ed0615bd08e7b714c7e34ec5ea",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate RepositoryAnalyzer to DirectoryWalker",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736690,
+  "observedAt": 1782794971000,
+  "contentRef": "git:commit:d03338e5be62474e3f3e98e22f095e914639ae91",
+  "checksum": "sha256:c2e1d04d56a6c68976fc38093551d8c35dc3d4a5ff3a2c4e69a4eb0a8739d378",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 600,
+    "genesisAdmissionIdentity": "genesis-admission:9aa915f6e17df9e59d3a488eae740ac3f0a729843e3a3f30ebb2712a12a71390",
+    "historicalSourceId": "genesis-source:commit:d03338e5be62474e3f3e98e22f095e914639ae91",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d03338e5be62474e3f3e98e22f095e914639ae91",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d03338e5be62474e3f3e98e22f095e914639ae91",
+      "parentShas": [
+        "ac28c942b7aabeaf74c250ef7b77c5b94b022b9f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782794971000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782794971000
+      },
+      "subject": "refactor(platform-sdk): migrate RepositoryAnalyzer to DirectoryWalker",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/repository/RepositoryAnalyzer.ts"
+      ],
+      "changedPathsByParent": {
+        "ac28c942b7aabeaf74c250ef7b77c5b94b022b9f": [
+          "apps/lumina-runtime/src/knowledge/repository/RepositoryAnalyzer.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d03338e5be62474e3f3e98e22f095e914639ae91"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

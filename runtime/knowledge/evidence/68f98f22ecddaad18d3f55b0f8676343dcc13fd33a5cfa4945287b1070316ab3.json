@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:227676f154c8cf712c1555e9aa1126f341064ed1b71b6d5ad5b209ff0df13b66",
+  "type": "commit",
+  "title": "feat(platform-sdk): extract synchronous process runner",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736347,
+  "observedAt": 1782759705000,
+  "contentRef": "git:commit:1738cfe6e48dd0d6af47f1a3a26280f4775fc08b",
+  "checksum": "sha256:13a1b2e56bbce57e7034da7277f5eb0bcd72f5d525f6ed5749b338e44caab134",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 591,
+    "genesisAdmissionIdentity": "genesis-admission:16b2b0f539e9f78c3ef989ed3c134867353926aa99c7cf4860030a8955357b35",
+    "historicalSourceId": "genesis-source:commit:1738cfe6e48dd0d6af47f1a3a26280f4775fc08b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1738cfe6e48dd0d6af47f1a3a26280f4775fc08b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1738cfe6e48dd0d6af47f1a3a26280f4775fc08b",
+      "parentShas": [
+        "8047b2ef27ebbc15b16f41dd20eb324eee607a80"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782759705000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782759705000
+      },
+      "subject": "feat(platform-sdk): extract synchronous process runner",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+        "packages/platform-sdk/src/process/ProcessRunnerSync.ts",
+        "packages/platform-sdk/src/process/index.ts"
+      ],
+      "changedPathsByParent": {
+        "8047b2ef27ebbc15b16f41dd20eb324eee607a80": [
+          "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+          "packages/platform-sdk/src/process/ProcessRunnerSync.ts",
+          "packages/platform-sdk/src/process/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1738cfe6e48dd0d6af47f1a3a26280f4775fc08b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

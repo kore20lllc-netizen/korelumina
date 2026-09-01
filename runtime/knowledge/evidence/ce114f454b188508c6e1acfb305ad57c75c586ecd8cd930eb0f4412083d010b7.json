@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:6b572a8ce980f74c36a268f0d8b557510e8809acbb42620687c94b3f748a5306",
+  "type": "commit",
+  "title": "docs(reconstruction): add capability extraction protocol",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736021,
+  "observedAt": 1782718604000,
+  "contentRef": "git:commit:dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b",
+  "checksum": "sha256:50c52dfbf9a740a4a4c26dc52ccd0053fe4e81b13d83b4026282df3785feb5d3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 582,
+    "genesisAdmissionIdentity": "genesis-admission:a51cd39cfa20f1d94fdc8bb7e0588ebab4bb3a343e38f7279a17503a58094e68",
+    "historicalSourceId": "genesis-source:commit:dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b",
+      "parentShas": [
+        "56a51671d38b7666f4d70bf7b84f3ffd101e22fc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782718604000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782718604000
+      },
+      "subject": "docs(reconstruction): add capability extraction protocol",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconstruction/CAPABILITY_EXTRACTION_PROTOCOL.md"
+      ],
+      "changedPathsByParent": {
+        "56a51671d38b7666f4d70bf7b84f3ffd101e22fc": [
+          "docs/architecture/reconstruction/CAPABILITY_EXTRACTION_PROTOCOL.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

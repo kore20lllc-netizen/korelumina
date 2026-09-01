@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:5c909032dd22df14cef2b885e2d929bb5774fe54a3d66adbf9ffeda3dcf6cbbc",
+  "type": "commit",
+  "title": "Merge pull request #25 from kore20lllc-netizen/fix/preview-entry-resolution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722182,
+  "observedAt": 1775819990000,
+  "contentRef": "git:commit:f4734295fc7edbf067c75bdb9c00687cb3ef239f",
+  "checksum": "sha256:732bbeb98d32146f1e35cbc27f25de9f30fb3b85ab17a0fa448d904ac02b7266",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 169,
+    "genesisAdmissionIdentity": "genesis-admission:842feaeb27dc6afe3fb91069ac4ec6900009c0c7f2cda415df2b5630c3e8f203",
+    "historicalSourceId": "genesis-source:commit:f4734295fc7edbf067c75bdb9c00687cb3ef239f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f4734295fc7edbf067c75bdb9c00687cb3ef239f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f4734295fc7edbf067c75bdb9c00687cb3ef239f",
+      "parentShas": [
+        "2a5074213c70adb8f4077e0b687860d732cd8fb7",
+        "45d5222ac0055dda251087289b63f1f1f4fa78f9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775819990000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1775819990000
+      },
+      "subject": "Merge pull request #25 from kore20lllc-netizen/fix/preview-entry-resolution",
+      "body": "Fix/preview entry resolution",
+      "changedPaths": [
+        "app/api/dev/fs/read/route.ts",
+        "app/api/dev/preview/route.ts",
+        "app/builder/BuilderInner.tsx",
+        "components/builder/DiffPanel.tsx",
+        "components/builder/FileTree.tsx",
+        "components/builder/Shell.tsx"
+      ],
+      "changedPathsByParent": {
+        "2a5074213c70adb8f4077e0b687860d732cd8fb7": [
+          "app/api/dev/fs/read/route.ts",
+          "app/api/dev/preview/route.ts",
+          "app/builder/BuilderInner.tsx",
+          "components/builder/DiffPanel.tsx",
+          "components/builder/FileTree.tsx",
+          "components/builder/Shell.tsx"
+        ],
+        "45d5222ac0055dda251087289b63f1f1f4fa78f9": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f4734295fc7edbf067c75bdb9c00687cb3ef239f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

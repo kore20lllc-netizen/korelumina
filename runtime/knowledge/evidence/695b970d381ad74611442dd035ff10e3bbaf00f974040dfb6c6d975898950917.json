@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:7050fb8817070131455c6c8bc598b9fb0b89ab42991e2c2a229dc2275580de6d",
+  "type": "commit",
+  "title": "refactor(runtime): remove legacy project registry subsystem",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726545,
+  "observedAt": 1782103222000,
+  "contentRef": "git:commit:a8c0af20d2b62511bf9083a3b2188352405ad0f9",
+  "checksum": "sha256:4ed74c74900e0142e28fc28c05be0bceb02732b2631a865bb631b052f4b845a1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 306,
+    "genesisAdmissionIdentity": "genesis-admission:61bbb81ca318db0e268867ef2a39fd70a4551886e1e976c35bd0c09ce3c4b17b",
+    "historicalSourceId": "genesis-source:commit:a8c0af20d2b62511bf9083a3b2188352405ad0f9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a8c0af20d2b62511bf9083a3b2188352405ad0f9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a8c0af20d2b62511bf9083a3b2188352405ad0f9",
+      "parentShas": [
+        "7eff1683dae626a5ecf31f3f1d62b5341889b3e6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782103222000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782103222000
+      },
+      "subject": "refactor(runtime): remove legacy project registry subsystem",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/projects/listProjects.ts",
+        "apps/lumina-runtime/src/projects/projectRegistry.ts"
+      ],
+      "changedPathsByParent": {
+        "7eff1683dae626a5ecf31f3f1d62b5341889b3e6": [
+          "apps/lumina-runtime/src/projects/listProjects.ts",
+          "apps/lumina-runtime/src/projects/projectRegistry.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/runtime-registry-removal-20260621"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a8c0af20d2b62511bf9083a3b2188352405ad0f9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

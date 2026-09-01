@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:ee9667f58b1c642638047d5663e274e351af5019b8dc46be44f0a59da99348df",
+  "type": "commit",
+  "title": "docs(rfc): define knowledge graph integration architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732295,
+  "observedAt": 1782587331000,
+  "contentRef": "git:commit:80d5b02c6f789be85efa37972f01ddf460b4ff3f",
+  "checksum": "sha256:c89d67b854fa27257d4f568d2b5b9858ecb1141d46e53e3a4b4c86d8aa2b71ba",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 477,
+    "genesisAdmissionIdentity": "genesis-admission:26f60ed27aa168be5f8f571162741e3bd4eaebea76f9f7a0389618c48e43a8e7",
+    "historicalSourceId": "genesis-source:commit:80d5b02c6f789be85efa37972f01ddf460b4ff3f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:80d5b02c6f789be85efa37972f01ddf460b4ff3f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "80d5b02c6f789be85efa37972f01ddf460b4ff3f",
+      "parentShas": [
+        "5dfe4bb7397b9f081d283cf242dd275d54c8dd9c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782587331000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782587331000
+      },
+      "subject": "docs(rfc): define knowledge graph integration architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/rfc/INDEX.md",
+        "docs/rfc/RFC-0001-KNOWLEDGE-GRAPH-INTEGRATION.md"
+      ],
+      "changedPathsByParent": {
+        "5dfe4bb7397b9f081d283cf242dd275d54c8dd9c": [
+          "docs/rfc/INDEX.md",
+          "docs/rfc/RFC-0001-KNOWLEDGE-GRAPH-INTEGRATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:80d5b02c6f789be85efa37972f01ddf460b4ff3f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

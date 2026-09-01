@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:0cf4850ac1c159609440b5db9e9c7acb3af05f0763252d16d03aba9e888d11c1",
+  "type": "commit",
+  "title": "feat(improvement): add autonomous improvement provider registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734608,
+  "observedAt": 1782647560000,
+  "contentRef": "git:commit:4d81ff129b095ed6fdbd824679c54e16f0879344",
+  "checksum": "sha256:be93e3adb2006ceffdb66d6f8faf172855379295e3bf58b4611ff0283020d99e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 543,
+    "genesisAdmissionIdentity": "genesis-admission:2c8afbd5f66fb5aef914e4ea11da09a85065cadc104cba470917deeff831507f",
+    "historicalSourceId": "genesis-source:commit:4d81ff129b095ed6fdbd824679c54e16f0879344",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4d81ff129b095ed6fdbd824679c54e16f0879344",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4d81ff129b095ed6fdbd824679c54e16f0879344",
+      "parentShas": [
+        "e8e0d269c9d218ef51b17dace41f7fc6d7796792"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647560000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782647560000
+      },
+      "subject": "feat(improvement): add autonomous improvement provider registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/AutonomousImprovementProviderRegistry.ts",
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/getAutonomousImprovementProvider.ts",
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/index.ts",
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/listAutonomousImprovementProviders.ts",
+        "apps/lumina-runtime/src/knowledge/autonomous-improvement/registerAutonomousImprovementProvider.ts"
+      ],
+      "changedPathsByParent": {
+        "e8e0d269c9d218ef51b17dace41f7fc6d7796792": [
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/AutonomousImprovementProviderRegistry.ts",
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/getAutonomousImprovementProvider.ts",
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/index.ts",
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/listAutonomousImprovementProviders.ts",
+          "apps/lumina-runtime/src/knowledge/autonomous-improvement/registerAutonomousImprovementProvider.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4d81ff129b095ed6fdbd824679c54e16f0879344"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

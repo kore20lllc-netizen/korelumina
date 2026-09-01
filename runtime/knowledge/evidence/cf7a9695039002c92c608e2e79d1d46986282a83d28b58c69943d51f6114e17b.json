@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:9312ac98c97d5cbbcddf74cbcfcf2729a2c9e151e3f4b8376b8e39800c6a3e3d",
+  "type": "commit",
+  "title": "fix: repair context injection corruption in parseFileBlocks",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719465,
+  "observedAt": 1773125561000,
+  "contentRef": "git:commit:540b644948787ddf803027af7107bab44afeb87a",
+  "checksum": "sha256:97110862119afe6ae2eeb0e225a40fbedc32e0540a1704bf8fd0ed2f43582d49",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 82,
+    "genesisAdmissionIdentity": "genesis-admission:f55d5e847f29cfbd27466bc554c365067acf78f1f92169e738acf6298679c8b8",
+    "historicalSourceId": "genesis-source:commit:540b644948787ddf803027af7107bab44afeb87a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:540b644948787ddf803027af7107bab44afeb87a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "540b644948787ddf803027af7107bab44afeb87a",
+      "parentShas": [
+        "d0587c20742b640cbe2b0e4527788caaaf1bc930"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773125561000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773125561000
+      },
+      "subject": "fix: repair context injection corruption in parseFileBlocks",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/task/route.ts"
+      ],
+      "changedPathsByParent": {
+        "d0587c20742b640cbe2b0e4527788caaaf1bc930": [
+          "app/api/ai/task/route.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:540b644948787ddf803027af7107bab44afeb87a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

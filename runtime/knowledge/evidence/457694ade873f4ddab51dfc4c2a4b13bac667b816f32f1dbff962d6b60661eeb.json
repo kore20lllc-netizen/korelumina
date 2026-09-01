@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c6096b6c7e6cb549199228183dddb2f3189f0f7f00ba43dbbd28d1f5db6f11c2",
+  "type": "commit",
+  "title": "feat(dashboard): add Lumina project dialog components",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726025,
+  "observedAt": 1781690801000,
+  "contentRef": "git:commit:d3379ed6dd81ac75ce7f35bd405543f7b3de370d",
+  "checksum": "sha256:006b8edd6a34b29d6f420243d3aaa21a124b686defd0e8948fc10b59ead988b4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 290,
+    "genesisAdmissionIdentity": "genesis-admission:41aff2e94afb226f9c3c32bb77a916281c2a4295d6e8331fca4894482d39875d",
+    "historicalSourceId": "genesis-source:commit:d3379ed6dd81ac75ce7f35bd405543f7b3de370d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d3379ed6dd81ac75ce7f35bd405543f7b3de370d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d3379ed6dd81ac75ce7f35bd405543f7b3de370d",
+      "parentShas": [
+        "5277ed139a8716330606ced2750e42716771550c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781690801000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781690801000
+      },
+      "subject": "feat(dashboard): add Lumina project dialog components",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/dialogs/ProjectDeleteDialog.tsx",
+        "apps/lumina-builder/src/components/workspaces/dialogs/ProjectRenameDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "5277ed139a8716330606ced2750e42716771550c": [
+          "apps/lumina-builder/src/components/workspaces/dialogs/ProjectDeleteDialog.tsx",
+          "apps/lumina-builder/src/components/workspaces/dialogs/ProjectRenameDialog.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d3379ed6dd81ac75ce7f35bd405543f7b3de370d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

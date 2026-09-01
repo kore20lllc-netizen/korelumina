@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:dff60e1bc2466cbe852cb98619db52ca165bd9ff59cefc367d661c55b785af0e",
+  "type": "commit",
+  "title": "feat(landing): add enterprise governance section",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726771,
+  "observedAt": 1782196855000,
+  "contentRef": "git:commit:884dc026b972eed7edd1713e786637e973a643ea",
+  "checksum": "sha256:046b42b2bf38109b2be433b530c78a5c5b5372acda8e783e09f90e9877182231",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 313,
+    "genesisAdmissionIdentity": "genesis-admission:be20c5e1e80fb30996103f2ca3812f0aa5e8886d81bfd44575b150b0164bc791",
+    "historicalSourceId": "genesis-source:commit:884dc026b972eed7edd1713e786637e973a643ea",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:884dc026b972eed7edd1713e786637e973a643ea",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "884dc026b972eed7edd1713e786637e973a643ea",
+      "parentShas": [
+        "69261f1ad44d0bc152a20fda4c11bc60b3bedf91"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782196855000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782196855000
+      },
+      "subject": "feat(landing): add enterprise governance section",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/landing/EnterpriseGovernance.tsx",
+        "apps/lumina-builder/src/pages/LandingPage.tsx"
+      ],
+      "changedPathsByParent": {
+        "69261f1ad44d0bc152a20fda4c11bc60b3bedf91": [
+          "apps/lumina-builder/src/components/landing/EnterpriseGovernance.tsx",
+          "apps/lumina-builder/src/pages/LandingPage.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:884dc026b972eed7edd1713e786637e973a643ea"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

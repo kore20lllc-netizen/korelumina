@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:ddcd0f58c48f3252757a69221f92340f454ea594d6bee4b5d95d58d517a9df9f",
+  "type": "document",
+  "title": "Architectural Decision Process",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731404,
+  "observedAt": 1782547225000,
+  "contentRef": "docs/governance/ARCHITECTURAL_DECISION_PROCESS.md",
+  "checksum": "sha256:fcf5f2d82000127601da75f77f6d65e2035cb621774c6ac1f1091dce42e2597e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 451,
+    "genesisAdmissionIdentity": "genesis-admission:7ab989431698e56e5f080098074b5b380de380ce894e7401c6359a5dc23710db",
+    "historicalSourceId": "genesis-source:document:derived:4059a1d731809f3553a3e8b29302ba1238a5bd0fd10e0f6c2716c5b6620f2ba5",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/ARCHITECTURAL_DECISION_PROCESS.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Architectural Decision Process",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/ARCHITECTURAL_DECISION_PROCESS.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:4059a1d731809f3553a3e8b29302ba1238a5bd0fd10e0f6c2716c5b6620f2ba5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:d62fc71ce17c739c5112f335f47bb793598a296654acbbefb2e9c9ea6373bfb0",
+  "type": "commit",
+  "title": "add preview recovery monitor for stale process restart",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718906,
+  "observedAt": 1771784490000,
+  "contentRef": "git:commit:1fd16fb8540b5280b642f397abf7a171637d2e43",
+  "checksum": "sha256:208dede453b07c9652dfc4a4d556a38377f912059e5a46605736786067376097",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 64,
+    "genesisAdmissionIdentity": "genesis-admission:9aa0f949db1a12131434f91d1aabf4df09dbe9caa51b64c73c5e0ee2abaccc8e",
+    "historicalSourceId": "genesis-source:commit:1fd16fb8540b5280b642f397abf7a171637d2e43",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1fd16fb8540b5280b642f397abf7a171637d2e43",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1fd16fb8540b5280b642f397abf7a171637d2e43",
+      "parentShas": [
+        "51e40dbdcff91c14f212cd249bb04d5d677e5f79"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771784490000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771784490000
+      },
+      "subject": "add preview recovery monitor for stale process restart",
+      "body": "",
+      "changedPaths": [
+        "runtime/health-monitor.ts"
+      ],
+      "changedPathsByParent": {
+        "51e40dbdcff91c14f212cd249bb04d5d677e5f79": [
+          "runtime/health-monitor.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1fd16fb8540b5280b642f397abf7a171637d2e43"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

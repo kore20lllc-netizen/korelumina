@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:c3332a9adadca1a6f94dbbf8eb58747dd26aa8c26b07414e44120a63fdda297b",
+  "type": "document",
+  "title": "KoreLumina Architecture Roadmap Governance V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728011,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_ROADMAP_GOVERNANCE_V1.md",
+  "checksum": "sha256:86962758a9d2dff39e507f5b84e5a0dfbaf0f881bb3eac941027a84021f61c82",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 350,
+    "genesisAdmissionIdentity": "genesis-admission:cf9302d139530c13642227c42890529b624688a7ee76c00bc36551fe8bfbc50b",
+    "historicalSourceId": "genesis-source:document:derived:44f91ddf133bbe9e6f4edf10561f8cc5fd29bd9ed4f8a4e95ef59cb7bc1cd187",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_ROADMAP_GOVERNANCE_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Roadmap Governance V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_ROADMAP_GOVERNANCE_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:44f91ddf133bbe9e6f4edf10561f8cc5fd29bd9ed4f8a4e95ef59cb7bc1cd187"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

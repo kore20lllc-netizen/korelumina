@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:dbdf10e56aac272ed6aa78e86f4b873bace33b2ceb65a9e06c1bdca778fea39e",
+  "type": "document",
+  "title": "Boundary Convergence Audit",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739091,
+  "observedAt": 1782956194000,
+  "contentRef": "docs/architecture/BOUNDARY_CONVERGENCE_AUDIT.md",
+  "checksum": "sha256:b94991d8ebb8f48c7e1ca8ac6246f3ab50ce0d1b60cdf4e4bc6e1641961c2dd1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 664,
+    "genesisAdmissionIdentity": "genesis-admission:d907d8f79ddd44a298cc2cc942e01be3ec9f3cd370be68c7495a21560c0cb126",
+    "historicalSourceId": "genesis-source:document:derived:a8c7ee9d28f40d0e451e60b138d6774bcc299f1a872bfd2a32e4ea10b8725f6a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Phase 069 audit generated",
+    "sourceLocation": "docs/architecture/BOUNDARY_CONVERGENCE_AUDIT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Boundary Convergence Audit",
+      "status": "Phase 069 audit generated",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/BOUNDARY_CONVERGENCE_AUDIT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a8c7ee9d28f40d0e451e60b138d6774bcc299f1a872bfd2a32e4ea10b8725f6a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

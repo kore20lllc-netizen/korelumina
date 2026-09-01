@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b3dd97b7febca6024c78e238417f86068903592dfca0d2ef2f3d2d5cb9353e1a",
+  "type": "commit",
+  "title": "feat(knowledge): add knowledge operations snapshot",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741924,
+  "observedAt": 1783054268000,
+  "contentRef": "git:commit:f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42",
+  "checksum": "sha256:e067d7f6965c9a556450f6922481f0a6a63cdf267f2a8deecd898fc8b25ffa96",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 736,
+    "genesisAdmissionIdentity": "genesis-admission:322dbd7c7c66a9d91bf76e803d7f635cd28d2863dd66cbb1c15c9e22438eb4fb",
+    "historicalSourceId": "genesis-source:commit:f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42",
+      "parentShas": [
+        "56d6752653b05d80a2939a96259d449414cc1d42"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783054268000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783054268000
+      },
+      "subject": "feat(knowledge): add knowledge operations snapshot",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsSnapshot.ts",
+        "apps/lumina-runtime/src/knowledge-operations/index.ts"
+      ],
+      "changedPathsByParent": {
+        "56d6752653b05d80a2939a96259d449414cc1d42": [
+          "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsSnapshot.ts",
+          "apps/lumina-runtime/src/knowledge-operations/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kops-001-runtime-contract-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

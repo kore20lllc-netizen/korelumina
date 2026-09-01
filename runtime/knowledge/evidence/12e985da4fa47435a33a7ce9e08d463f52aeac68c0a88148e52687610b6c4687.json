@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:3272ce78b2991a1ac302c1080669778a29eadfd9690894d62416205c3538f9d1",
+  "type": "commit",
+  "title": "docs(reconstruction): integrate reconstruction engine into engineering workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735656,
+  "observedAt": 1782714212000,
+  "contentRef": "git:commit:368b67b221c00ebf134382fc9b223296b359d55d",
+  "checksum": "sha256:575cfd590bc783c76b2645ae9d9995acb305a3659744dfd2ade8601561fda1e7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 572,
+    "genesisAdmissionIdentity": "genesis-admission:e09c82b78ac4efb6051f53cd85484a3f5b86443309211eafc0f8b718a4675f91",
+    "historicalSourceId": "genesis-source:commit:368b67b221c00ebf134382fc9b223296b359d55d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:368b67b221c00ebf134382fc9b223296b359d55d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "368b67b221c00ebf134382fc9b223296b359d55d",
+      "parentShas": [
+        "4c79b314a2108c855d5838fcb91dfb4d895d63f0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782714212000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782714212000
+      },
+      "subject": "docs(reconstruction): integrate reconstruction engine into engineering workflow",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+        "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md"
+      ],
+      "changedPathsByParent": {
+        "4c79b314a2108c855d5838fcb91dfb4d895d63f0": [
+          "docs/architecture/KORELUMINA_IMPLEMENTATION_PROTOCOL_V1.md",
+          "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:368b67b221c00ebf134382fc9b223296b359d55d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

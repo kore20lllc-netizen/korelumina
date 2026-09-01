@@ -1,0 +1,105 @@
+{
+  "id": "genesis-evidence:cf0981a0e83d57913a06fd7a6e02830945ee182c6e92af97d92ad66a175b5bf6",
+  "type": "commit",
+  "title": "feat: preview daemon architecture + workspace state API + hardened build pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718483,
+  "observedAt": 1771530860000,
+  "contentRef": "git:commit:7ebc1ebf892ab3dbf5ba654331378c295a224467",
+  "checksum": "sha256:f05e1a357808fd55938bae747f8286f4edf782eb972d4ed44a066f98d6c55e06",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 50,
+    "genesisAdmissionIdentity": "genesis-admission:eff5fd55544f53be4d982783f2a1dafd7d8549d323cbb2c953cbffcf74eb85bb",
+    "historicalSourceId": "genesis-source:commit:7ebc1ebf892ab3dbf5ba654331378c295a224467",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7ebc1ebf892ab3dbf5ba654331378c295a224467",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7ebc1ebf892ab3dbf5ba654331378c295a224467",
+      "parentShas": [
+        "9fb416845b3e1bb9dd46faff3aaddf5a50ea5041"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771530860000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771530860000
+      },
+      "subject": "feat: preview daemon architecture + workspace state API + hardened build pipeline",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/logs/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/manifest/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/preview/start/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/state/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/stream/route.ts",
+        "lib/manifest-default.ts",
+        "lib/port-allocator.ts",
+        "lib/previewd-client.ts",
+        "lib/project-manifest.ts",
+        "package-lock.json",
+        "package.json",
+        "runtime/constants.ts",
+        "runtime/job-store.ts",
+        "runtime/locks.ts",
+        "runtime/preview-daemon.ts",
+        "runtime/preview-store.ts",
+        "runtime/recovery.ts",
+        "scripts/dev-safe.sh",
+        "scripts/previewd.js",
+        "scripts/previewd.sh"
+      ],
+      "changedPathsByParent": {
+        "9fb416845b3e1bb9dd46faff3aaddf5a50ea5041": [
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/logs/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/manifest/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/preview/start/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/state/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/stream/route.ts",
+          "lib/manifest-default.ts",
+          "lib/port-allocator.ts",
+          "lib/previewd-client.ts",
+          "lib/project-manifest.ts",
+          "package-lock.json",
+          "package.json",
+          "runtime/constants.ts",
+          "runtime/job-store.ts",
+          "runtime/locks.ts",
+          "runtime/preview-daemon.ts",
+          "runtime/preview-store.ts",
+          "runtime/recovery.ts",
+          "scripts/dev-safe.sh",
+          "scripts/previewd.js",
+          "scripts/previewd.sh"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7ebc1ebf892ab3dbf5ba654331378c295a224467"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

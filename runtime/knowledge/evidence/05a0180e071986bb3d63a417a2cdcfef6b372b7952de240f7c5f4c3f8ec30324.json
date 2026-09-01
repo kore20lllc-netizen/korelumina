@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:79f3436b9f52988eac6f8f870da5c73d4471454a12b41bebda3c6b7ea8007aee",
+  "type": "document",
+  "title": "KoreLumina Engineering Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728346,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ENGINEERING_SPEC_V1.md",
+  "checksum": "sha256:c98f276ed57a272643664d954a7958a36522684dab62a33092e39d66ac519aad",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 360,
+    "genesisAdmissionIdentity": "genesis-admission:bf2fadd22debd21b6f9a01e3a20b23c033f1649aef4424d14608cc030e649941",
+    "historicalSourceId": "genesis-source:document:derived:02cb5a8f2c5802a05833acdc596d69490433cfb83da1382519d777b5f2ff8bd4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Engineering Freeze",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ENGINEERING_SPEC_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Engineering Specification V1",
+      "status": "Engineering Freeze",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ENGINEERING_SPEC_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:02cb5a8f2c5802a05833acdc596d69490433cfb83da1382519d777b5f2ff8bd4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

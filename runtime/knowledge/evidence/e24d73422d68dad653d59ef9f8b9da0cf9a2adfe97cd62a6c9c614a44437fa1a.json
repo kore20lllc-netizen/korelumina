@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:75603c2b3c07b0b30a820ffb0fe70306b65724148b6c80a6c719b8eae266642f",
+  "type": "commit",
+  "title": "docs(architecture): establish constitutional architecture freeze",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735036,
+  "observedAt": 1782692954000,
+  "contentRef": "git:commit:c698b35166c9a878bf71ee73c18d63e0e74198f8",
+  "checksum": "sha256:6137af84bf67ea3b2d6f49380bd2d2d6e796ff73f643fbd60a2b83392ff45891",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 555,
+    "genesisAdmissionIdentity": "genesis-admission:b9590f9be7571c64efba838faa0c95e592dc966f670bd0d7bc244165601d73f3",
+    "historicalSourceId": "genesis-source:commit:c698b35166c9a878bf71ee73c18d63e0e74198f8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c698b35166c9a878bf71ee73c18d63e0e74198f8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c698b35166c9a878bf71ee73c18d63e0e74198f8",
+      "parentShas": [
+        "70b982652bfd02892040f9415668a84e41d0ebe1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782692954000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782692954000
+      },
+      "subject": "docs(architecture): establish constitutional architecture freeze",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_ARCHITECTURE_FREEZE_V1.md"
+      ],
+      "changedPathsByParent": {
+        "70b982652bfd02892040f9415668a84e41d0ebe1": [
+          "docs/architecture/KORELUMINA_ARCHITECTURE_FREEZE_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c698b35166c9a878bf71ee73c18d63e0e74198f8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

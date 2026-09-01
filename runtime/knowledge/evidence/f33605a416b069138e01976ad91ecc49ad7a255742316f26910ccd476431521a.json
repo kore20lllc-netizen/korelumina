@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:9632441f2f7e73df2e24c3e96c64a077a95c053aef9aec9841e81c043f0bc5d5",
+  "type": "commit",
+  "title": "feat(runtime): add recovery telemetry and diagnostics",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725863,
+  "observedAt": 1781595078000,
+  "contentRef": "git:commit:7c4a68eca7c8ff8970e5783e7f5080fbc81ce726",
+  "checksum": "sha256:e87e4a1dcbc15223565d35cda1248796e7e654f71fb48a90c05a810b93a8735b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 285,
+    "genesisAdmissionIdentity": "genesis-admission:ec9cba4b406b79e25d0dd2f812c120656d792071a321baa56e7e9435eeb089f5",
+    "historicalSourceId": "genesis-source:commit:7c4a68eca7c8ff8970e5783e7f5080fbc81ce726",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7c4a68eca7c8ff8970e5783e7f5080fbc81ce726",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7c4a68eca7c8ff8970e5783e7f5080fbc81ce726",
+      "parentShas": [
+        "6631adf7207eb93ecda39d990c7f7a0cf14928df"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781595078000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781595078000
+      },
+      "subject": "feat(runtime): add recovery telemetry and diagnostics",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx",
+        "apps/lumina-runtime/src/runtime/startProject.ts"
+      ],
+      "changedPathsByParent": {
+        "6631adf7207eb93ecda39d990c7f7a0cf14928df": [
+          "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx",
+          "apps/lumina-runtime/src/runtime/startProject.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-runtime-recovery-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7c4a68eca7c8ff8970e5783e7f5080fbc81ce726"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

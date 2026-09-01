@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:475628ac34a05e5d07af0bd5f1ea40d4f948d2dd2ab2207b2878a9e1b7a1722f",
+  "type": "commit",
+  "title": "feat: add autonomous repair loop wiring",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719432,
+  "observedAt": 1773108644000,
+  "contentRef": "git:commit:d0587c20742b640cbe2b0e4527788caaaf1bc930",
+  "checksum": "sha256:914dfaf0f95a531268743d8df43091aba50f89cf542676269137b64f85f8a96b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 81,
+    "genesisAdmissionIdentity": "genesis-admission:77a281e62e07e84af137c40ca627abbc53bc9a51eb8aa4a4952a380bcdbdf061",
+    "historicalSourceId": "genesis-source:commit:d0587c20742b640cbe2b0e4527788caaaf1bc930",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d0587c20742b640cbe2b0e4527788caaaf1bc930",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d0587c20742b640cbe2b0e4527788caaaf1bc930",
+      "parentShas": [
+        "bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773108644000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773108644000
+      },
+      "subject": "feat: add autonomous repair loop wiring",
+      "body": "",
+      "changedPaths": [
+        "lib/ai/repair-loop.ts"
+      ],
+      "changedPathsByParent": {
+        "bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e": [
+          "lib/ai/repair-loop.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d0587c20742b640cbe2b0e4527788caaaf1bc930"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

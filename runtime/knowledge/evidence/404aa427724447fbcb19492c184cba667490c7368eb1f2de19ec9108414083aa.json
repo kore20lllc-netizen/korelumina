@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:22222ec68e3126fdaccc158aa370bf1ff95d57f7af097b90f99617899850088f",
+  "type": "commit",
+  "title": "feat: add framework detection for react, vue, nuxt and monorepo",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724392,
+  "observedAt": 1780086094000,
+  "contentRef": "git:commit:b2065deccdfc15c21c8794c53e1cbb3408f4ca00",
+  "checksum": "sha256:b5ec5f4cddd591135fbbab85904fff80848c55c46d86ddfc1746286ca9d56647",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 239,
+    "genesisAdmissionIdentity": "genesis-admission:c42fb137c03a0dfebc6fb80510b91758c32e28b5c5af6d605fcaaa01e6e92f3d",
+    "historicalSourceId": "genesis-source:commit:b2065deccdfc15c21c8794c53e1cbb3408f4ca00",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b2065deccdfc15c21c8794c53e1cbb3408f4ca00",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b2065deccdfc15c21c8794c53e1cbb3408f4ca00",
+      "parentShas": [
+        "0035f1af19e2547ab934a970c0001f67be3cda9c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780086094000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780086094000
+      },
+      "subject": "feat: add framework detection for react, vue, nuxt and monorepo",
+      "body": "Co-authored-by: aider (claude-sonnet-4-5) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-runtime/src/detect/detectFramework.ts"
+      ],
+      "changedPathsByParent": {
+        "0035f1af19e2547ab934a970c0001f67be3cda9c": [
+          "apps/lumina-runtime/src/detect/detectFramework.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b2065deccdfc15c21c8794c53e1cbb3408f4ca00"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

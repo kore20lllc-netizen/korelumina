@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:c2d3c84063ca915853c1d9146b7b6e0e4581a6145212df9f281e59b26144758b",
+  "type": "document",
+  "title": "Milestone Completion Gate",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736056,
+  "observedAt": 1782719024000,
+  "contentRef": "docs/architecture/reconstruction/MILESTONE_COMPLETION_GATE.md",
+  "checksum": "sha256:19b4826df1e800d49f21d2a0529b574c0c00ef1a2a83b9d00a6a069448da64ec",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 583,
+    "genesisAdmissionIdentity": "genesis-admission:05df22e5815f274cd010b93e803d24ca00bd1f298755b3cc6f6e93311565498a",
+    "historicalSourceId": "genesis-source:document:derived:38eba0a217208b074313cbd4769049e7c98a4afca3c31886914a1b813c4249c6",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture",
+    "sourceLocation": "docs/architecture/reconstruction/MILESTONE_COMPLETION_GATE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Milestone Completion Gate",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconstruction/MILESTONE_COMPLETION_GATE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:38eba0a217208b074313cbd4769049e7c98a4afca3c31886914a1b813c4249c6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

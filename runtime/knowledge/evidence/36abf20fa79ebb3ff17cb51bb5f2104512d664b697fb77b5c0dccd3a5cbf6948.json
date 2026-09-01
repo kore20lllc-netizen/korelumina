@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:862ff3d084140977d81a22acd60ad7151187bb79bfb99aa82db3d3743fe4f419",
+  "type": "commit",
+  "title": "refactor(engineering): migrate automation to execution model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739403,
+  "observedAt": 1782971456000,
+  "contentRef": "git:commit:7b3583199e2c5662dd5f60303ba008456ef8b79b",
+  "checksum": "sha256:72d82e68f2d09b09a157e8d4e2a01e717595907f56afe0491014f04c5eb17a3d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 672,
+    "genesisAdmissionIdentity": "genesis-admission:ca5ad2cda3413d20b213974c0ba10ad0c1000dab0e20c6387b21db347d2ebe0e",
+    "historicalSourceId": "genesis-source:commit:7b3583199e2c5662dd5f60303ba008456ef8b79b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7b3583199e2c5662dd5f60303ba008456ef8b79b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7b3583199e2c5662dd5f60303ba008456ef8b79b",
+      "parentShas": [
+        "51cb89330fdb95a2764be1269ec550874a561ddc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782971456000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782971456000
+      },
+      "subject": "refactor(engineering): migrate automation to execution model",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationContext.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/InitializeStage.ts"
+      ],
+      "changedPathsByParent": {
+        "51cb89330fdb95a2764be1269ec550874a561ddc": [
+          "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationContext.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/InitializeStage.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a1.4-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7b3583199e2c5662dd5f60303ba008456ef8b79b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

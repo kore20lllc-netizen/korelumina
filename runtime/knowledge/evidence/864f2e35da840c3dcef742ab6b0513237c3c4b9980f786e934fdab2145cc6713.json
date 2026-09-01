@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:9bcec5659dd128e739847f2d47fe9afa77bfe25b5b3e291a8310ac3c330f481b",
+  "type": "commit",
+  "title": "refactor(runtime): use workspace path contract for runtime storage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729925,
+  "observedAt": 1782518152000,
+  "contentRef": "git:commit:a9bf4246ee204e7ab952b9ecfc3e4b3afa7533a0",
+  "checksum": "sha256:b62feb2b1fde8bf3d1910bbaedcf869171e385d82bec4ef6c8f929919a75d32a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 407,
+    "genesisAdmissionIdentity": "genesis-admission:9acf712123e2cb1da315f0c107755b72009758c1e97d6a09a35a5697477c564e",
+    "historicalSourceId": "genesis-source:commit:a9bf4246ee204e7ab952b9ecfc3e4b3afa7533a0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a9bf4246ee204e7ab952b9ecfc3e4b3afa7533a0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a9bf4246ee204e7ab952b9ecfc3e4b3afa7533a0",
+      "parentShas": [
+        "88cb79ecaab3ac7909fe6608f39f382e444957a9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782518152000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782518152000
+      },
+      "subject": "refactor(runtime): use workspace path contract for runtime storage",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/persistence.ts",
+        "apps/lumina-runtime/src/runtime/runtimeLock.ts"
+      ],
+      "changedPathsByParent": {
+        "88cb79ecaab3ac7909fe6608f39f382e444957a9": [
+          "apps/lumina-runtime/src/runtime/persistence.ts",
+          "apps/lumina-runtime/src/runtime/runtimeLock.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a9bf4246ee204e7ab952b9ecfc3e4b3afa7533a0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

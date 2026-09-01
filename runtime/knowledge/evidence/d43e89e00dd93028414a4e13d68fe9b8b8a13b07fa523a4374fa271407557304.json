@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:c1b6a2a1159ff00a831fb6c78020610d16e4e6146e600b4c10af17ea40dc3d0e",
+  "type": "document",
+  "title": "KP-014 Organizational Memory Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734505,
+  "observedAt": 1782647373000,
+  "contentRef": "docs/architecture/reconciliation/KP-014_ORGANIZATIONAL_MEMORY_RECONCILIATION.md",
+  "checksum": "sha256:d2e0e0e2f813c3b272716d17d174249a090e62f056326f688e1d8c98bcdc4ad4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 540,
+    "genesisAdmissionIdentity": "genesis-admission:ea96f20d12201aaf5600cd8c3fd2ad77a3b051d33298d09bd263d82c9dcd195d",
+    "historicalSourceId": "genesis-source:document:derived:6875a17f0fed08f491a2ac4d2e8a68d61f76628d776be9b1aad8c02c79d5cb2a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "KP-014 Organizational Memory is complete and architecture frozen",
+    "sourceLocation": "docs/architecture/reconciliation/KP-014_ORGANIZATIONAL_MEMORY_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KP-014 Organizational Memory Reconciliation",
+      "status": "KP-014 Organizational Memory is complete and architecture frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconciliation/KP-014_ORGANIZATIONAL_MEMORY_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:6875a17f0fed08f491a2ac4d2e8a68d61f76628d776be9b1aad8c02c79d5cb2a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

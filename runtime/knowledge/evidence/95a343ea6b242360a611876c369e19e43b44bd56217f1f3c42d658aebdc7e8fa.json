@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e133f4399f4952db34a306899481389183e89d75b6b22d99478f19178edef68b",
+  "type": "commit",
+  "title": "chore(builder): remove analytics debug output",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725703,
+  "observedAt": 1781581089000,
+  "contentRef": "git:commit:4db0e057959894e5e21a1b7ddd3f7e16f185faca",
+  "checksum": "sha256:93b29739babf23389ea8af871e916dcedbf18fc2d0a2e5c0f44a1dab86d27d9f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 280,
+    "genesisAdmissionIdentity": "genesis-admission:07387f1b1b8b5ec4a36dda52a034919b9ac155b335a42f78f6c38c8cb8a5b410",
+    "historicalSourceId": "genesis-source:commit:4db0e057959894e5e21a1b7ddd3f7e16f185faca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4db0e057959894e5e21a1b7ddd3f7e16f185faca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4db0e057959894e5e21a1b7ddd3f7e16f185faca",
+      "parentShas": [
+        "0deb6659ad6674be6a8bd9109cf5b3d8708070e8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781581089000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781581089000
+      },
+      "subject": "chore(builder): remove analytics debug output",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/lib/analytics.ts"
+      ],
+      "changedPathsByParent": {
+        "0deb6659ad6674be6a8bd9109cf5b3d8708070e8": [
+          "apps/lumina-builder/src/lib/analytics.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-production-baseline-v4"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4db0e057959894e5e21a1b7ddd3f7e16f185faca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

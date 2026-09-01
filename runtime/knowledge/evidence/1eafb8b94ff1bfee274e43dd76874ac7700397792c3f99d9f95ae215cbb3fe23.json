@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:035249756cd763c9121e09fa1e586cdd9e0acc60c400e9f2be4f21dd27676707",
+  "type": "document",
+  "title": "reconstruction-log",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737320,
+  "observedAt": 1782852426000,
+  "contentRef": "docs/architecture/reconstruction-log.md",
+  "checksum": "sha256:081b5ca796c346ef17391650333348aece43e69468b5fcba86bbf98c4a5653bb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 617,
+    "genesisAdmissionIdentity": "genesis-admission:7f590c3e161b6391762f5704351ff0af0b607a2390485345ae811f45bda7346c",
+    "historicalSourceId": "genesis-source:document:derived:00e40f35ec6c6172d213b38bb34dad6cf74d0855cc6c4f8ad82071006a5fbf25",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "COMPLETE",
+    "sourceLocation": "docs/architecture/reconstruction-log.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "reconstruction-log",
+      "status": "COMPLETE",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconstruction-log.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:00e40f35ec6c6172d213b38bb34dad6cf74d0855cc6c4f8ad82071006a5fbf25"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

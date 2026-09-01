@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:d9ce6d6c467dee83af4f226343326f91ada71e8e3b946d88c7eca033dd21eccd",
+  "type": "commit",
+  "title": "refactor(knowledge): migrate event journal replay to execution sdk",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738714,
+  "observedAt": 1782906632000,
+  "contentRef": "git:commit:5ad1ee55aba6f04b2d0451d293241904981318e6",
+  "checksum": "sha256:200f3a37e35f32a603a8f4616360250299587b178f45f032226b939acfd2f633",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 654,
+    "genesisAdmissionIdentity": "genesis-admission:c403a0703d4886382a454af195e57c775280387d00ba55526b3741bb3a4b1d34",
+    "historicalSourceId": "genesis-source:commit:5ad1ee55aba6f04b2d0451d293241904981318e6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5ad1ee55aba6f04b2d0451d293241904981318e6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5ad1ee55aba6f04b2d0451d293241904981318e6",
+      "parentShas": [
+        "fd3e66e580a8096e5527bedadba13a610e3ae51e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782906632000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782906632000
+      },
+      "subject": "refactor(knowledge): migrate event journal replay to execution sdk",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/event-journal/EventJournalReplay.ts",
+        "apps/lumina-runtime/src/knowledge/event-journal/EventJournalReplayExecution.ts",
+        "apps/lumina-runtime/src/knowledge/event-journal/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "fd3e66e580a8096e5527bedadba13a610e3ae51e": [
+          "apps/lumina-runtime/src/knowledge/event-journal/EventJournalReplay.ts",
+          "apps/lumina-runtime/src/knowledge/event-journal/EventJournalReplayExecution.ts",
+          "apps/lumina-runtime/src/knowledge/event-journal/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase060-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5ad1ee55aba6f04b2d0451d293241904981318e6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

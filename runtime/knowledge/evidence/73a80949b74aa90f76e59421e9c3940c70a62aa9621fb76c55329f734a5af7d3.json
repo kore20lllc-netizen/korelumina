@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:d9d1f5ae0151057dd7a1b4093fa50549bd34c31305612665afeeb404fd246a00",
+  "type": "commit",
+  "title": "feat(knowledge): add normalization framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740455,
+  "observedAt": 1783036056000,
+  "contentRef": "git:commit:53eee24c23b316f2787e871dc0668c45b833bd55",
+  "checksum": "sha256:4b48e321cb983a335b453b7dc454e94c333ee6af31b422ba80acdeec5df7b37c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 699,
+    "genesisAdmissionIdentity": "genesis-admission:d5ad943eccb6de3e568736969a8a7ee3e6dcc16de07b74b8f84035eaf51b165a",
+    "historicalSourceId": "genesis-source:commit:53eee24c23b316f2787e871dc0668c45b833bd55",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:53eee24c23b316f2787e871dc0668c45b833bd55",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "53eee24c23b316f2787e871dc0668c45b833bd55",
+      "parentShas": [
+        "ecd89b3c0ab1d1d0bee8b3f4347784f354c9b83e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036056000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783036056000
+      },
+      "subject": "feat(knowledge): add normalization framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizationPipeline.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizationRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/normalization/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ecd89b3c0ab1d1d0bee8b3f4347784f354c9b83e": [
+          "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizationPipeline.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizationRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/normalization/KnowledgeNormalizer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/normalization/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-004-normalization-engine-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:53eee24c23b316f2787e871dc0668c45b833bd55"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

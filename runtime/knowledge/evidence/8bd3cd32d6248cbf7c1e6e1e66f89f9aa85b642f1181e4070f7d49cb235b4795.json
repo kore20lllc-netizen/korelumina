@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:0239df88524028b028fa25bdd54fd3864c47ea248cbae981b87902379d5679e0",
+  "type": "commit",
+  "title": "feat(ai-core): scaffold + diff + journal + manifest hardening",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719186,
+  "observedAt": 1772004033000,
+  "contentRef": "git:commit:745b669511db5e67f6915b76cbb3f857e0cc8477",
+  "checksum": "sha256:0dff6660a6264ad1d4164eb197a74c1f957f26b43a49cdac934ec8ed68d5a621",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 73,
+    "genesisAdmissionIdentity": "genesis-admission:b97ce4b1b68fc6a21619c51cfc8e704494bf1d82e4a551871edd7494f2664524",
+    "historicalSourceId": "genesis-source:commit:745b669511db5e67f6915b76cbb3f857e0cc8477",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:745b669511db5e67f6915b76cbb3f857e0cc8477",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "745b669511db5e67f6915b76cbb3f857e0cc8477",
+      "parentShas": [
+        "1b252181dad7586faa09dc69f82a446c5e1579b5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1772004033000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1772004033000
+      },
+      "subject": "feat(ai-core): scaffold + diff + journal + manifest hardening",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        "app/api/ai/apply/route.ts",
+        "app/api/ai/diff/route.ts",
+        "app/api/ai/journal/route.ts",
+        "app/api/ai/repair/route.ts",
+        "app/api/ai/scaffold/route.ts",
+        "lib/ai/diff.ts",
+        "lib/ai/journal.ts",
+        "lib/ai/repair-log.ts",
+        "lib/ai/repair-loop.ts",
+        "lib/ai/scaffold.ts",
+        "lib/manifest-enforce.ts",
+        "scripts/apply-patch.sh",
+        "scripts/patch-to-json.mjs"
+      ],
+      "changedPathsByParent": {
+        "1b252181dad7586faa09dc69f82a446c5e1579b5": [
+          ".gitignore",
+          "app/api/ai/apply/route.ts",
+          "app/api/ai/diff/route.ts",
+          "app/api/ai/journal/route.ts",
+          "app/api/ai/repair/route.ts",
+          "app/api/ai/scaffold/route.ts",
+          "lib/ai/diff.ts",
+          "lib/ai/journal.ts",
+          "lib/ai/repair-log.ts",
+          "lib/ai/repair-loop.ts",
+          "lib/ai/scaffold.ts",
+          "lib/manifest-enforce.ts",
+          "scripts/apply-patch.sh",
+          "scripts/patch-to-json.mjs"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:745b669511db5e67f6915b76cbb3f857e0cc8477"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:1675faead46c125f68b3e9b7662c59abe2f57589ee8a7d69368c381d8e8862c1",
+  "type": "commit",
+  "title": "docs(engineering): audit engineering service integration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739594,
+  "observedAt": 1782974666000,
+  "contentRef": "git:commit:b341e6e62525ac1690e1336c15cce11aba47d915",
+  "checksum": "sha256:7f24f03048a7a15ccd440f99944a79c000868345052e8e8abaebed988f931086",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 677,
+    "genesisAdmissionIdentity": "genesis-admission:69bed728f2a25506c1e5307549ea474a11e9b75a6156e2e1d6d586dc506ed756",
+    "historicalSourceId": "genesis-source:commit:b341e6e62525ac1690e1336c15cce11aba47d915",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b341e6e62525ac1690e1336c15cce11aba47d915",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b341e6e62525ac1690e1336c15cce11aba47d915",
+      "parentShas": [
+        "1d19f64779fd27eb51ff24056e3950d57c80f132"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782974666000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782974666000
+      },
+      "subject": "docs(engineering): audit engineering service integration",
+      "body": "",
+      "changedPaths": [
+        "docs/programs/autonomous-engineering/audits/a2.1-engineering-service-audit.md"
+      ],
+      "changedPathsByParent": {
+        "1d19f64779fd27eb51ff24056e3950d57c80f132": [
+          "docs/programs/autonomous-engineering/audits/a2.1-engineering-service-audit.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a2.1-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b341e6e62525ac1690e1336c15cce11aba47d915"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

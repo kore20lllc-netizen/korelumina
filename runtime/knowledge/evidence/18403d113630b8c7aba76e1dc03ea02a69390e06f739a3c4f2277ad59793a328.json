@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:b93a5892eb85c82e02b1133af6f115857f957b2b3777bcb7d241f919b957be64",
+  "type": "commit",
+  "title": "refactor(graph): route builder through ingestion service",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732434,
+  "observedAt": 1782591042000,
+  "contentRef": "git:commit:0e68f44d37d8198cadd52920633deb9835f0c970",
+  "checksum": "sha256:c6f9b1eba366fa3769c3b2e331a387559f432b6e6fc65b4fadaf32f85a453849",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 481,
+    "genesisAdmissionIdentity": "genesis-admission:92b090f80250f4a2583edd9d10fdf93d85824338252a297ead25597294806b3b",
+    "historicalSourceId": "genesis-source:commit:0e68f44d37d8198cadd52920633deb9835f0c970",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0e68f44d37d8198cadd52920633deb9835f0c970",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0e68f44d37d8198cadd52920633deb9835f0c970",
+      "parentShas": [
+        "286c080552522f02fb260f8c470b7d10b436b70a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782591042000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782591042000
+      },
+      "subject": "refactor(graph): route builder through ingestion service",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/graph/KnowledgeGraphBuilder.ts"
+      ],
+      "changedPathsByParent": {
+        "286c080552522f02fb260f8c470b7d10b436b70a": [
+          "apps/lumina-runtime/src/knowledge/graph/KnowledgeGraphBuilder.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0e68f44d37d8198cadd52920633deb9835f0c970"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

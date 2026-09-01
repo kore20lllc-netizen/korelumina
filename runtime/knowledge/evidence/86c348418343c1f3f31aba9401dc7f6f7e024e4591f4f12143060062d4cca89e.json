@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:39ae7177c2eabae4b9ce8828763aa8308b20aea1a9fff4307b2d283cea27dcc7",
+  "type": "commit",
+  "title": "feat(knowledge): register built-in knowledge compilers",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740689,
+  "observedAt": 1783037557000,
+  "contentRef": "git:commit:7794730462c014ae72081411a6d9cea4adfb3831",
+  "checksum": "sha256:7df6397a1473fd0e54f89ccc16b4debce559edcea97b3cc090f5f83a66f5fa4a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 705,
+    "genesisAdmissionIdentity": "genesis-admission:5964a4829b2e98ff538c65984c0dd85114965f42c815fe455ab08add3a95e294",
+    "historicalSourceId": "genesis-source:commit:7794730462c014ae72081411a6d9cea4adfb3831",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7794730462c014ae72081411a6d9cea4adfb3831",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7794730462c014ae72081411a6d9cea4adfb3831",
+      "parentShas": [
+        "7c60463f777cc51256697bc0d8e7986e547dbf02"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783037557000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783037557000
+      },
+      "subject": "feat(knowledge): register built-in knowledge compilers",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/index.ts"
+      ],
+      "changedPathsByParent": {
+        "7c60463f777cc51256697bc0d8e7986e547dbf02": [
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-010-compiler-registration-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7794730462c014ae72081411a6d9cea4adfb3831"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

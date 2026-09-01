@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:b0759e1adec7e45efbce4ff487d292979657093aeef100c1179a234e0295cbc8",
+  "type": "commit",
+  "title": "docs(audit): add reconstruction audit artifacts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726952,
+  "observedAt": 1782202282000,
+  "contentRef": "git:commit:df3ae0aaeb9b5a2ff7e44f78b88f1445fa7903dc",
+  "checksum": "sha256:1cfc2cb96f41d238893f19a048402fcdc7c9a94c63fbb1dfc90274249ff637bb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 318,
+    "genesisAdmissionIdentity": "genesis-admission:29b14279479dcb151c70ff7d95bd042e5b17f891e7ec774499c576c4a5b0f717",
+    "historicalSourceId": "genesis-source:commit:df3ae0aaeb9b5a2ff7e44f78b88f1445fa7903dc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:df3ae0aaeb9b5a2ff7e44f78b88f1445fa7903dc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "df3ae0aaeb9b5a2ff7e44f78b88f1445fa7903dc",
+      "parentShas": [
+        "bc97b894f597345940f5fb00bfebb1288ace48b7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782202282000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782202282000
+      },
+      "subject": "docs(audit): add reconstruction audit artifacts",
+      "body": "",
+      "changedPaths": [
+        "docs/audit/exported-capabilities.txt",
+        "docs/audit/landing-promises.txt",
+        "docs/audit/localstorage-dependencies.txt",
+        "docs/audit/mock-dependencies.txt",
+        "docs/audit/projectRepository-callers.txt",
+        "docs/audit/projectRepository-usage.txt",
+        "docs/audit/repository-inventory.txt",
+        "docs/audit/runtime-api-surface.txt"
+      ],
+      "changedPathsByParent": {
+        "bc97b894f597345940f5fb00bfebb1288ace48b7": [
+          "docs/audit/exported-capabilities.txt",
+          "docs/audit/landing-promises.txt",
+          "docs/audit/localstorage-dependencies.txt",
+          "docs/audit/mock-dependencies.txt",
+          "docs/audit/projectRepository-callers.txt",
+          "docs/audit/projectRepository-usage.txt",
+          "docs/audit/repository-inventory.txt",
+          "docs/audit/runtime-api-surface.txt"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:df3ae0aaeb9b5a2ff7e44f78b88f1445fa7903dc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:977d894ac6e5ad295dd41ac64b7abacdfee0813aed228b9e6a2ccdf96731f740",
+  "type": "commit",
+  "title": "docs(reconciliation): close out KP-007 knowledge graph integration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732572,
+  "observedAt": 1782594365000,
+  "contentRef": "git:commit:992fb9e52f8d3366ff6f278075c743630c4bc8ad",
+  "checksum": "sha256:9cb12a2162a9eae03a5982e3d7d1af32cb4e8287f0871d55641af85328207c02",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 485,
+    "genesisAdmissionIdentity": "genesis-admission:d93f5ddbc6afbad022c55acc21c3305e6d38502a21d79eebfe185eb340a91ff5",
+    "historicalSourceId": "genesis-source:commit:992fb9e52f8d3366ff6f278075c743630c4bc8ad",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:992fb9e52f8d3366ff6f278075c743630c4bc8ad",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "992fb9e52f8d3366ff6f278075c743630c4bc8ad",
+      "parentShas": [
+        "525c343b0c794ac603a218820952c8cc2ceb4685"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782594365000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782594365000
+      },
+      "subject": "docs(reconciliation): close out KP-007 knowledge graph integration",
+      "body": "",
+      "changedPaths": [
+        "docs/reconciliation/KP-007_CLOSEOUT.md"
+      ],
+      "changedPathsByParent": {
+        "525c343b0c794ac603a218820952c8cc2ceb4685": [
+          "docs/reconciliation/KP-007_CLOSEOUT.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/phase0-engineering-foundation"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:992fb9e52f8d3366ff6f278075c743630c4bc8ad"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

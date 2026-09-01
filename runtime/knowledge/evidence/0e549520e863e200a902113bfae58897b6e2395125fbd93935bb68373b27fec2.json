@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:985cffc9727f08ca33c7820cdddd5935a1bbc2c926a00e0ba96802b44351d388",
+  "type": "commit",
+  "title": "feat(reasoning): add learning adapter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733407,
+  "observedAt": 1782641652000,
+  "contentRef": "git:commit:a5bf07875d18d582109a8685d6e8f93d0d177ef5",
+  "checksum": "sha256:207ed5089231d65ae61d0a33bfafc2fc7a98aaa861497fbfb18e660fe21f7d6d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 509,
+    "genesisAdmissionIdentity": "genesis-admission:4a49001e6493d822fc59aa5a53138229f490bc261174ca3e7f2abfc4525eadec",
+    "historicalSourceId": "genesis-source:commit:a5bf07875d18d582109a8685d6e8f93d0d177ef5",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a5bf07875d18d582109a8685d6e8f93d0d177ef5",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a5bf07875d18d582109a8685d6e8f93d0d177ef5",
+      "parentShas": [
+        "f15efe425f64e0447bdac70e3638a4ae79045614"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782641652000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782641652000
+      },
+      "subject": "feat(reasoning): add learning adapter",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/reasoning/ReasoningLearningAdapter.ts",
+        "apps/lumina-runtime/src/knowledge/reasoning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f15efe425f64e0447bdac70e3638a4ae79045614": [
+          "apps/lumina-runtime/src/knowledge/reasoning/ReasoningLearningAdapter.ts",
+          "apps/lumina-runtime/src/knowledge/reasoning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a5bf07875d18d582109a8685d6e8f93d0d177ef5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

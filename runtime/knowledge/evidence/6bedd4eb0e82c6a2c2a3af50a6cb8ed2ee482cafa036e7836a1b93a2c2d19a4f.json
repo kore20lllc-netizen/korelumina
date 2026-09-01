@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:26970c4c74631657ccf20186a8d4b0c5f49ca716aa8bc65bed6a438aff4fa374",
+  "type": "commit",
+  "title": "feat: add runtime state persistence, event publishing, and log sanitization",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724517,
+  "observedAt": 1780097627000,
+  "contentRef": "git:commit:5b3401ec927fc858314d8bdd65a477488bfa3dc8",
+  "checksum": "sha256:21a57a224fdb66dad827d528ed6ef8f21ee5fa27aaf0bf5cea55b21c348ed036",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 243,
+    "genesisAdmissionIdentity": "genesis-admission:db2ca17198c8a67e0faa1215efe1cfc549dc2c894f1400ecd60d617982909d97",
+    "historicalSourceId": "genesis-source:commit:5b3401ec927fc858314d8bdd65a477488bfa3dc8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5b3401ec927fc858314d8bdd65a477488bfa3dc8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5b3401ec927fc858314d8bdd65a477488bfa3dc8",
+      "parentShas": [
+        "3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780097627000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen (aider)",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780097627000
+      },
+      "subject": "feat: add runtime state persistence, event publishing, and log sanitization",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/registry.ts",
+        "apps/lumina-runtime/src/runtime/supervisor.ts"
+      ],
+      "changedPathsByParent": {
+        "3eeee0131a1e2f52cc636f6f51fe16bfe29ecbdd": [
+          "apps/lumina-runtime/src/runtime/registry.ts",
+          "apps/lumina-runtime/src/runtime/supervisor.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5b3401ec927fc858314d8bdd65a477488bfa3dc8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

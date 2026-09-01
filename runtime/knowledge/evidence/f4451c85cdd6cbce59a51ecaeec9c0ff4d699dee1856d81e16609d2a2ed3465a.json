@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:cc6e06cf02488eae933879880f34db521ef84ec40c3c177cb54ac85bc975d522",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate OpenAI context walker",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736875,
+  "observedAt": 1782814317000,
+  "contentRef": "git:commit:a274e27077d757329573f3c74441e7fd3bb81d2c",
+  "checksum": "sha256:f1cc330e4e64e7f36e61706bbb7086fa61914d1bd37f1ef9cce4b286e762d486",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 605,
+    "genesisAdmissionIdentity": "genesis-admission:3d7c735fcd8e1a31d7a466c4191cfcb9426c2d89411a4d3f36696f392becfb11",
+    "historicalSourceId": "genesis-source:commit:a274e27077d757329573f3c74441e7fd3bb81d2c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a274e27077d757329573f3c74441e7fd3bb81d2c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a274e27077d757329573f3c74441e7fd3bb81d2c",
+      "parentShas": [
+        "135fd1ba02bb770157a4a7dd7c0a41e70085ca57"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782814317000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782814317000
+      },
+      "subject": "refactor(platform-sdk): migrate OpenAI context walker",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/ai/providers/OpenAIProvider.ts",
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md"
+      ],
+      "changedPathsByParent": {
+        "135fd1ba02bb770157a4a7dd7c0a41e70085ca57": [
+          "apps/lumina-runtime/src/ai/providers/OpenAIProvider.ts",
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a274e27077d757329573f3c74441e7fd3bb81d2c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

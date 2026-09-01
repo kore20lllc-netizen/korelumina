@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:f5ced7a93616708e94d00b56514ec0f50fc2660c1fc3793ed87f428161e18a2a",
+  "type": "document",
+  "title": "RECON-002 — Reconstruction Patch Engine",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735404,
+  "observedAt": 1782713424000,
+  "contentRef": "docs/architecture/RECON-002_PATCH_ENGINE_SPEC.md",
+  "checksum": "sha256:574efb609e971fc7ef76ff6630da4b840d465f92a21fb8a4aea3f498e6bf9bb6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 565,
+    "genesisAdmissionIdentity": "genesis-admission:b564b44fbb18c5fd1dc400e98063044bacef9d59ff995ad5989810aa76f92a55",
+    "historicalSourceId": "genesis-source:document:derived:aac149b47f5c27198c4ddb8179433f1b35c4f4756b8d39484759520618165daa",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Approved",
+    "version": "1",
+    "sourceLocation": "docs/architecture/RECON-002_PATCH_ENGINE_SPEC.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "RECON-002 — Reconstruction Patch Engine",
+      "status": "Approved",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/RECON-002_PATCH_ENGINE_SPEC.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:aac149b47f5c27198c4ddb8179433f1b35c4f4756b8d39484759520618165daa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

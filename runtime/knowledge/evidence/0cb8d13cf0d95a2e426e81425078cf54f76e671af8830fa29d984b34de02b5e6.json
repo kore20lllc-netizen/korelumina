@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:6784180a37f4d922b26856bfec3266946ff9c1ef3e4e7256a3ce0703acfb70b8",
+  "type": "commit",
+  "title": "builder: stable dark dev UI + multi-file draft + selective apply (no demo-project leak)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227720422,
+  "observedAt": 1774997842000,
+  "contentRef": "git:commit:877e3776b94f37a5cf9d0f08651ef7b742a7a722",
+  "checksum": "sha256:3bfbef687651dbe865f967c18e2c6c66664f1c949f09ad83a18c979562555ded",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 113,
+    "genesisAdmissionIdentity": "genesis-admission:e674c31f2a2b8417422d039cd21e676bef7c74cbe5a8489c8498dbd7ecdb27c0",
+    "historicalSourceId": "genesis-source:commit:877e3776b94f37a5cf9d0f08651ef7b742a7a722",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:877e3776b94f37a5cf9d0f08651ef7b742a7a722",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "877e3776b94f37a5cf9d0f08651ef7b742a7a722",
+      "parentShas": [
+        "54f74785103dc2f681080d9e1d0f12cd8f76f4b5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1774997842000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1774997842000
+      },
+      "subject": "builder: stable dark dev UI + multi-file draft + selective apply (no demo-project leak)",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/draft/route.ts",
+        "app/api/ai/scaffold/route.ts",
+        "app/api/ai/task/route.ts",
+        "app/api/dev/fs/list/route.ts",
+        "app/api/projects/import/route.ts",
+        "app/builder/page.tsx",
+        "lib/ai/scaffold.ts",
+        "nature-crest-climate-solutions"
+      ],
+      "changedPathsByParent": {
+        "54f74785103dc2f681080d9e1d0f12cd8f76f4b5": [
+          "app/api/ai/draft/route.ts",
+          "app/api/ai/scaffold/route.ts",
+          "app/api/ai/task/route.ts",
+          "app/api/dev/fs/list/route.ts",
+          "app/api/projects/import/route.ts",
+          "app/builder/page.tsx",
+          "lib/ai/scaffold.ts",
+          "nature-crest-climate-solutions"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:877e3776b94f37a5cf9d0f08651ef7b742a7a722"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

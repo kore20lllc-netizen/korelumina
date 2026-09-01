@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:8eb1e6f15d5096a79715b39792eb58dcb7758f81c57d9ad7a8ed4087e48700bc",
+  "type": "commit",
+  "title": "feat(knowledge): add decision query API",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732192,
+  "observedAt": 1782555389000,
+  "contentRef": "git:commit:5dfe4bb7397b9f081d283cf242dd275d54c8dd9c",
+  "checksum": "sha256:5facc134b8658895a70790b3338dc47a56770d02bc2776e199f00024e1bc0635",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 474,
+    "genesisAdmissionIdentity": "genesis-admission:01e5c1a34ee1fd6bf59f240816dbcd7a7c1f942554a3b7d296c609c3acdd74b5",
+    "historicalSourceId": "genesis-source:commit:5dfe4bb7397b9f081d283cf242dd275d54c8dd9c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5dfe4bb7397b9f081d283cf242dd275d54c8dd9c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5dfe4bb7397b9f081d283cf242dd275d54c8dd9c",
+      "parentShas": [
+        "d1fccc13994384f0fdd5504a91aa080b29a81785"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782555389000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782555389000
+      },
+      "subject": "feat(knowledge): add decision query API",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/decision/DecisionQuery.ts",
+        "apps/lumina-runtime/src/knowledge/decision/DecisionStore.ts",
+        "apps/lumina-runtime/src/knowledge/decision/index.ts"
+      ],
+      "changedPathsByParent": {
+        "d1fccc13994384f0fdd5504a91aa080b29a81785": [
+          "apps/lumina-runtime/src/knowledge/decision/DecisionQuery.ts",
+          "apps/lumina-runtime/src/knowledge/decision/DecisionStore.ts",
+          "apps/lumina-runtime/src/knowledge/decision/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5dfe4bb7397b9f081d283cf242dd275d54c8dd9c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

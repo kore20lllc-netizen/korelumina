@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:f157e4f80250407b2bb5c4218727cfccd304a6c88aed771d6e9fe3f6f697e60e",
+  "type": "document",
+  "title": "ARCHITECTURE_CHANGELOG",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737134,
+  "observedAt": 1782819609000,
+  "contentRef": "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+  "checksum": "sha256:82e89f9e84f492b00aec885f5667f6bece5097de96811c8658cc4c7b9553c59a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 612,
+    "genesisAdmissionIdentity": "genesis-admission:1b28abf946747083608eb970bbe37949bdbc64724efb398d30834ba8ea761e20",
+    "historicalSourceId": "genesis-source:document:derived:dd8ba25121e004e490ecb8c8333c04ad818ac5ba71716263512d1ea1c5e66be0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ARCHITECTURE_CHANGELOG",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_CHANGELOG.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:dd8ba25121e004e490ecb8c8333c04ad818ac5ba71716263512d1ea1c5e66be0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

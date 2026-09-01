@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5bbf924f64da0fabbdd7e66f19fa269d79f92af62bc04f8c95a5a33194d405ea",
+  "type": "commit",
+  "title": "docs(architecture): add platform ownership principle",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736164,
+  "observedAt": 1782719266000,
+  "contentRef": "git:commit:09e38bece86e38e365c0237ac19bf6111cb5fb90",
+  "checksum": "sha256:88eadaa3f609ed0240675ee0977c64d68218123810f5fb961f7a0e07b0bada74",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 586,
+    "genesisAdmissionIdentity": "genesis-admission:609ba13d57caecba750e10ceee4c9cfc517124f2172b6b4d450862c7a6754c30",
+    "historicalSourceId": "genesis-source:commit:09e38bece86e38e365c0237ac19bf6111cb5fb90",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:09e38bece86e38e365c0237ac19bf6111cb5fb90",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "09e38bece86e38e365c0237ac19bf6111cb5fb90",
+      "parentShas": [
+        "03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782719266000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782719266000
+      },
+      "subject": "docs(architecture): add platform ownership principle",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/principles/ARCH_005_PLATFORM_OWNERSHIP_PRINCIPLE.md"
+      ],
+      "changedPathsByParent": {
+        "03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70": [
+          "docs/architecture/principles/ARCH_005_PLATFORM_OWNERSHIP_PRINCIPLE.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:09e38bece86e38e365c0237ac19bf6111cb5fb90"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

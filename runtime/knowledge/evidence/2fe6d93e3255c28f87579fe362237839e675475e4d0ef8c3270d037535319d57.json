@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:dd26dc06b8829e7cd689bf90160e39bad714e6de3ec8c1c13ae4f8ef7c3a88ea",
+  "type": "commit",
+  "title": "docs(knowledge): define evidence model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740148,
+  "observedAt": 1783024546000,
+  "contentRef": "git:commit:fcd8b55b77bb78872db96b64cd63a6e1fb96dd70",
+  "checksum": "sha256:3204ab42d21923ad2bbd7bebe09fcb7d30f5fa2872c26f154a9d8216327a624a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 691,
+    "genesisAdmissionIdentity": "genesis-admission:327dbcaa44c43a2d165cf941af1c47686e4a1c7c8f69709efdf2bd020af157c8",
+    "historicalSourceId": "genesis-source:commit:fcd8b55b77bb78872db96b64cd63a6e1fb96dd70",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fcd8b55b77bb78872db96b64cd63a6e1fb96dd70",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fcd8b55b77bb78872db96b64cd63a6e1fb96dd70",
+      "parentShas": [
+        "8a942c4fdb894c352cb12317e191838ff27a458f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783024546000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783024546000
+      },
+      "subject": "docs(knowledge): define evidence model",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+      ],
+      "changedPathsByParent": {
+        "8a942c4fdb894c352cb12317e191838ff27a458f": [
+          "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpe-001-evidence-model-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fcd8b55b77bb78872db96b64cd63a6e1fb96dd70"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

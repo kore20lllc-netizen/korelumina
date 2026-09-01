@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:7ad2ddfcef4bda1d7d85c0b1ac989ebb60de50f19781c8b715ee55ac39552a83",
+  "type": "commit",
+  "title": "feat(knowledge): add engineering lifecycle and recorder",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730290,
+  "observedAt": 1782527805000,
+  "contentRef": "git:commit:ca73780c2eed70d00290755109735d5307e243fa",
+  "checksum": "sha256:66590abfe07205489b355472d32d39fc3fc6072b00a2b5e84568a2aab770f515",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 418,
+    "genesisAdmissionIdentity": "genesis-admission:2f25a8e3135aedc6bcb30580ecdcfb4a0d178cee2021e259f0d5c5532d69d67d",
+    "historicalSourceId": "genesis-source:commit:ca73780c2eed70d00290755109735d5307e243fa",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ca73780c2eed70d00290755109735d5307e243fa",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ca73780c2eed70d00290755109735d5307e243fa",
+      "parentShas": [
+        "c10f4a6342f980716c3c37762f76b96257f8e436"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782527805000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782527805000
+      },
+      "subject": "feat(knowledge): add engineering lifecycle and recorder",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringLifecycle.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringRecorder.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/index.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/types.ts"
+      ],
+      "changedPathsByParent": {
+        "c10f4a6342f980716c3c37762f76b96257f8e436": [
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringLifecycle.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringRecorder.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/index.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ca73780c2eed70d00290755109735d5307e243fa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

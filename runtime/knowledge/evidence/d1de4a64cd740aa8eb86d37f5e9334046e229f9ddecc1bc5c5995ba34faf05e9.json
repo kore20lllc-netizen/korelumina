@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:24c8de5ce93d4ae9adf79c09850176d4bd15751c17b99de2990e979b166813b1",
+  "type": "commit",
+  "title": "feat(engineering): integrate planning into execution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739864,
+  "observedAt": 1782986979000,
+  "contentRef": "git:commit:06a959dc3b0d6e2f04d9dd0257ef0dec9e76bcf4",
+  "checksum": "sha256:d414a88039ddc8c2ad6d0399d03fb765daf4d23c69824e1349628e262caf352a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 684,
+    "genesisAdmissionIdentity": "genesis-admission:887a1d7d5bdce8d1c3abf471b7fcbb829f1cf7005c1f692030ef334f894c2f43",
+    "historicalSourceId": "genesis-source:commit:06a959dc3b0d6e2f04d9dd0257ef0dec9e76bcf4",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:06a959dc3b0d6e2f04d9dd0257ef0dec9e76bcf4",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "06a959dc3b0d6e2f04d9dd0257ef0dec9e76bcf4",
+      "parentShas": [
+        "b4e321aacf2922cdd01dc7a929b69f9e43055792"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782986979000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782986979000
+      },
+      "subject": "feat(engineering): integrate planning into execution",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/EngineeringExecutor.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/FinalizeStage.ts",
+        "apps/lumina-runtime/src/engineering/planning/EngineeringPlan.ts",
+        "apps/lumina-runtime/src/engineering/planning/EngineeringPlanner.ts",
+        "apps/lumina-runtime/src/engineering/planning/EngineeringTask.ts",
+        "apps/lumina-runtime/src/engineering/planning/PlannedEngineeringExecution.ts",
+        "apps/lumina-runtime/src/engineering/planning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "b4e321aacf2922cdd01dc7a929b69f9e43055792": [
+          "apps/lumina-runtime/src/engineering/EngineeringExecutor.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/FinalizeStage.ts",
+          "apps/lumina-runtime/src/engineering/planning/EngineeringPlan.ts",
+          "apps/lumina-runtime/src/engineering/planning/EngineeringPlanner.ts",
+          "apps/lumina-runtime/src/engineering/planning/EngineeringTask.ts",
+          "apps/lumina-runtime/src/engineering/planning/PlannedEngineeringExecution.ts",
+          "apps/lumina-runtime/src/engineering/planning/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/engineering-planning-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:06a959dc3b0d6e2f04d9dd0257ef0dec9e76bcf4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

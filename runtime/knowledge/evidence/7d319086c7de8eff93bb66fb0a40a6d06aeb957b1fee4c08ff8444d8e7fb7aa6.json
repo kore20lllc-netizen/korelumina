@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:93207e5fd611834ebcf714b6646f9321b937fc16122ca8f61a5e75cdd6323568",
+  "type": "commit",
+  "title": "refactor(runtime): migrate shutdown to execution sdk",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738975,
+  "observedAt": 1782949227000,
+  "contentRef": "git:commit:451b1ae91e981bb14a3d20a72e840fb3b79ad1e9",
+  "checksum": "sha256:d18d655f648a556d2ff47211a9091eef4831190a77028577cb790a7e35715386",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 661,
+    "genesisAdmissionIdentity": "genesis-admission:8b0810edfb541973a1813dcb918cd1ea59d77ce72bc0e105be466225571daa2d",
+    "historicalSourceId": "genesis-source:commit:451b1ae91e981bb14a3d20a72e840fb3b79ad1e9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:451b1ae91e981bb14a3d20a72e840fb3b79ad1e9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "451b1ae91e981bb14a3d20a72e840fb3b79ad1e9",
+      "parentShas": [
+        "3a285c2f76f5f0542ed5ca3926df58c755703ab2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782949227000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782949227000
+      },
+      "subject": "refactor(runtime): migrate shutdown to execution sdk",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/registry/RuntimeLifecycle.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/RuntimeShutdownContext.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/RuntimeShutdownPipeline.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/CleanupRuntimeStage.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ReportStage.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ResolveRuntimeStage.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/TerminateRuntimeStage.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ValidateShutdownStage.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/index.ts",
+        "apps/lumina-runtime/src/runtime/shutdown/pipeline/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "3a285c2f76f5f0542ed5ca3926df58c755703ab2": [
+          "apps/lumina-runtime/src/runtime/registry/RuntimeLifecycle.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/RuntimeShutdownContext.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/RuntimeShutdownPipeline.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/CleanupRuntimeStage.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ReportStage.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ResolveRuntimeStage.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/TerminateRuntimeStage.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/ValidateShutdownStage.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/Stages/index.ts",
+          "apps/lumina-runtime/src/runtime/shutdown/pipeline/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase066-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:451b1ae91e981bb14a3d20a72e840fb3b79ad1e9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

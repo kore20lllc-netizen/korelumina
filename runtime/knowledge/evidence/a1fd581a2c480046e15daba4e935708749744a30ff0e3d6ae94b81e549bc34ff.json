@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:473c782ecb630079e8c3e1fd7e9608fc3d8c5c67cb6679a976e101528f16cce8",
+  "type": "document",
+  "title": "KP-015 Autonomous Improvement Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734751,
+  "observedAt": 1782648010000,
+  "contentRef": "docs/architecture/reconciliation/KP-015_AUTONOMOUS_IMPROVEMENT_RECONCILIATION.md",
+  "checksum": "sha256:f84cb35afaeda8056b36914038f144a723c01e696c67ff7b53c1c67d9089a182",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 547,
+    "genesisAdmissionIdentity": "genesis-admission:0349f2ca9afdcc5deb3efe3b8eaf437e13e1190299e9a4961eb16b93948582a8",
+    "historicalSourceId": "genesis-source:document:derived:0cdce2e23b9bbfbeb499d5dede7acea9d01db1ebc4458499009ee31ac8c0fdee",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "KP-015 Autonomous Improvement is complete and architecture frozen",
+    "sourceLocation": "docs/architecture/reconciliation/KP-015_AUTONOMOUS_IMPROVEMENT_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KP-015 Autonomous Improvement Reconciliation",
+      "status": "KP-015 Autonomous Improvement is complete and architecture frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconciliation/KP-015_AUTONOMOUS_IMPROVEMENT_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:0cdce2e23b9bbfbeb499d5dede7acea9d01db1ebc4458499009ee31ac8c0fdee"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

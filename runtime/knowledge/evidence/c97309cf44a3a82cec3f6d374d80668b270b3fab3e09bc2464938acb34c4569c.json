@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:9d4cbc6c4a806811fbad13c166d3fd78a48de96b796f1e9aa778f5e5fe0ff4a9",
+  "type": "commit",
+  "title": "feat(engineering): complete execution-driven automation pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739479,
+  "observedAt": 1782972786000,
+  "contentRef": "git:commit:3b4d8d44c0f8af59e8dc098fad7731dacdc14050",
+  "checksum": "sha256:699ceed114aa647f44ef131c2c9d628b003ff6c7fbc50b6a45b34b2c3ee30317",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 674,
+    "genesisAdmissionIdentity": "genesis-admission:303a956329e3d2f2006368b69b4247c6484407f224d2931d169c549f6d255223",
+    "historicalSourceId": "genesis-source:commit:3b4d8d44c0f8af59e8dc098fad7731dacdc14050",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3b4d8d44c0f8af59e8dc098fad7731dacdc14050",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3b4d8d44c0f8af59e8dc098fad7731dacdc14050",
+      "parentShas": [
+        "4436f4f754c4d1c103902836dd299acf670e4d96"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782972786000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782972786000
+      },
+      "subject": "feat(engineering): complete execution-driven automation pipeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/automation/Stages/CaptureKnowledgeStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/ExecuteStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/FinalizeStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/GovernStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/ProjectKnowledgeStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/ReportStage.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/ValidateStage.ts"
+      ],
+      "changedPathsByParent": {
+        "4436f4f754c4d1c103902836dd299acf670e4d96": [
+          "apps/lumina-runtime/src/engineering/automation/Stages/CaptureKnowledgeStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/ExecuteStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/FinalizeStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/GovernStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/ProjectKnowledgeStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/ReportStage.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/ValidateStage.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a1.6-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3b4d8d44c0f8af59e8dc098fad7731dacdc14050"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:9c6e008747bbe736b78c05797137554b4592e0c49d0f8cb680ecd566d46b3224",
+  "type": "commit",
+  "title": "refactor: simplify PreviewFrame and DeveloperWorkspace components",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724832,
+  "observedAt": 1780121634000,
+  "contentRef": "git:commit:53e8851c26d23d8f8da46044757c433b30ff19fd",
+  "checksum": "sha256:33be8d71114cc19891601be666630a618e76bf67efd4266bd9ce7c09c558038c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 253,
+    "genesisAdmissionIdentity": "genesis-admission:79fdae55849e135a9d69d502ca92ec5699aaadfc42e9ee05d203c0decd52dc5a",
+    "historicalSourceId": "genesis-source:commit:53e8851c26d23d8f8da46044757c433b30ff19fd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:53e8851c26d23d8f8da46044757c433b30ff19fd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "53e8851c26d23d8f8da46044757c433b30ff19fd",
+      "parentShas": [
+        "7663d8c35fd01a8020a15989a7934cd3154096f4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780121634000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen (aider)",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780121634000
+      },
+      "subject": "refactor: simplify PreviewFrame and DeveloperWorkspace components",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+        "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx",
+        "apps/lumina-runtime/src/runtime/startProject.ts",
+        "apps/lumina-runtime/src/runtime/workspaceWatcher.ts"
+      ],
+      "changedPathsByParent": {
+        "7663d8c35fd01a8020a15989a7934cd3154096f4": [
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+          "apps/lumina-builder/src/components/workspaces/DeveloperWorkspace.tsx",
+          "apps/lumina-runtime/src/runtime/startProject.ts",
+          "apps/lumina-runtime/src/runtime/workspaceWatcher.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:53e8851c26d23d8f8da46044757c433b30ff19fd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

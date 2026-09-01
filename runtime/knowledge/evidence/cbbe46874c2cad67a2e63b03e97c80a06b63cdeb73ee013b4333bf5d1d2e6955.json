@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:f0d4172db837327797dbac0ac59e1f4440dcad1e2075e6252faf464196177929",
+  "type": "document",
+  "title": "Engineering Intelligence Platform",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733020,
+  "observedAt": 1782623748000,
+  "contentRef": "docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md",
+  "checksum": "sha256:5785499d5d8ce2adcbfd71c020760aaf8a1e466a3aab8981356a1af514672d43",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 498,
+    "genesisAdmissionIdentity": "genesis-admission:a4b46f0a1c6d561ceab18227ab9ec206556f3226a5e54f8771150556da885037",
+    "historicalSourceId": "genesis-source:document:derived:8e7adc7d3b4c0c9247df06ac705b1c08c71dafbfb9d8f49fbf45c5018d023755",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Engineering Intelligence Platform",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:8e7adc7d3b4c0c9247df06ac705b1c08c71dafbfb9d8f49fbf45c5018d023755"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

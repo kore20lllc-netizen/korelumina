@@ -1,0 +1,101 @@
+{
+  "id": "genesis-evidence:529ae78d2eca581106bc64bea0a2ac6e9016d7b637f4159653ede370140d19a0",
+  "type": "commit",
+  "title": "chore(runtime): remove snapshots from repo and ignore them",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227721817,
+  "observedAt": 1775606515000,
+  "contentRef": "git:commit:5abaf6e0b019ccb1dad746ccbc28d4b76253ed3b",
+  "checksum": "sha256:065fb598a9a39751e46f2203e99d022c0d54072b13601f412f650d32b40df5b7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 158,
+    "genesisAdmissionIdentity": "genesis-admission:90bdae7ddf3d5e9370fb9a4090f1c230f8896e2a8ad346581d27136fe5969a8e",
+    "historicalSourceId": "genesis-source:commit:5abaf6e0b019ccb1dad746ccbc28d4b76253ed3b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5abaf6e0b019ccb1dad746ccbc28d4b76253ed3b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5abaf6e0b019ccb1dad746ccbc28d4b76253ed3b",
+      "parentShas": [
+        "e88cf5abcbb292d52601abbc49a77e4b685068a3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775606515000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775606515000
+      },
+      "subject": "chore(runtime): remove snapshots from repo and ignore them",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        "runtime/snapshots/repo-test/1775590388268/app/page.tsx",
+        "runtime/snapshots/repo-test/1775590388268/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775590388268/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775590388268/journal.json",
+        "runtime/snapshots/repo-test/1775594045406/app/page.tsx",
+        "runtime/snapshots/repo-test/1775594045406/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775594045406/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775594045406/journal.json",
+        "runtime/snapshots/repo-test/1775595372814/app/page.tsx",
+        "runtime/snapshots/repo-test/1775595372814/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775595372814/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775595372814/journal.json",
+        "runtime/snapshots/repo-test/1775604887134/app/page.tsx",
+        "runtime/snapshots/repo-test/1775604887134/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775604887134/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775604887134/journal.json",
+        "runtime/snapshots/repo-test/1775605645136/app/page.tsx",
+        "runtime/snapshots/repo-test/1775605645136/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775605645136/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775605645136/journal.json"
+      ],
+      "changedPathsByParent": {
+        "e88cf5abcbb292d52601abbc49a77e4b685068a3": [
+          ".gitignore",
+          "runtime/snapshots/repo-test/1775590388268/app/page.tsx",
+          "runtime/snapshots/repo-test/1775590388268/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775590388268/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775590388268/journal.json",
+          "runtime/snapshots/repo-test/1775594045406/app/page.tsx",
+          "runtime/snapshots/repo-test/1775594045406/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775594045406/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775594045406/journal.json",
+          "runtime/snapshots/repo-test/1775595372814/app/page.tsx",
+          "runtime/snapshots/repo-test/1775595372814/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775595372814/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775595372814/journal.json",
+          "runtime/snapshots/repo-test/1775604887134/app/page.tsx",
+          "runtime/snapshots/repo-test/1775604887134/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775604887134/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775604887134/journal.json",
+          "runtime/snapshots/repo-test/1775605645136/app/page.tsx",
+          "runtime/snapshots/repo-test/1775605645136/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775605645136/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775605645136/journal.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5abaf6e0b019ccb1dad746ccbc28d4b76253ed3b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

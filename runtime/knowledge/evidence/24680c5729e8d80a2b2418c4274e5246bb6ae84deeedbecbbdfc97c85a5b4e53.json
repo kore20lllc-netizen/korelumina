@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:49758acbec912a519f5cc5af4c7a2a74068a3173d2ea7d9f164dd431a2dcce2e",
+  "type": "commit",
+  "title": "refactor(transform): write generated files to runtime",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727380,
+  "observedAt": 1782271909000,
+  "contentRef": "git:commit:581ee301bfb8b9873fd08981653fdc51ad61ed7e",
+  "checksum": "sha256:3f4d58d8f40b0cbc4884d7f580524f06df8cb598cae106cca9853cc6ddef196c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 331,
+    "genesisAdmissionIdentity": "genesis-admission:e6fac64f242b57b876a3eb898c611b2f70dd8ea70edd3f433cf1c261bc174404",
+    "historicalSourceId": "genesis-source:commit:581ee301bfb8b9873fd08981653fdc51ad61ed7e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:581ee301bfb8b9873fd08981653fdc51ad61ed7e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "581ee301bfb8b9873fd08981653fdc51ad61ed7e",
+      "parentShas": [
+        "eb057a2ae658a392402d07f9bf54b1b2ba8ac2b9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782271909000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782271909000
+      },
+      "subject": "refactor(transform): write generated files to runtime",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/transform/TransformModal.tsx"
+      ],
+      "changedPathsByParent": {
+        "eb057a2ae658a392402d07f9bf54b1b2ba8ac2b9": [
+          "apps/lumina-builder/src/components/transform/TransformModal.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:581ee301bfb8b9873fd08981653fdc51ad61ed7e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5f01092872de6f41da431050b68b69cd6020be4f005e6c17e23544ef74a4bae7",
+  "type": "commit",
+  "title": "feat(knowledge): integrate project knowledge recording into import pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730855,
+  "observedAt": 1782539326000,
+  "contentRef": "git:commit:db71b121be8e8399790bd5d1e98d98af28d2d3ce",
+  "checksum": "sha256:84976124b1732bc4254d35c9ecfe85a3edcfe49604dd1492074e7371c6db1db8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 435,
+    "genesisAdmissionIdentity": "genesis-admission:640d5555882937044ad3d1d2edc8102b33a0beb011b725f9059e9b035e7e2364",
+    "historicalSourceId": "genesis-source:commit:db71b121be8e8399790bd5d1e98d98af28d2d3ce",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:db71b121be8e8399790bd5d1e98d98af28d2d3ce",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "db71b121be8e8399790bd5d1e98d98af28d2d3ce",
+      "parentShas": [
+        "a5d0e4be8ac899149f7c0335b318cda09574713e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782539326000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782539326000
+      },
+      "subject": "feat(knowledge): integrate project knowledge recording into import pipeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/import/importGithubProject.ts"
+      ],
+      "changedPathsByParent": {
+        "a5d0e4be8ac899149f7c0335b318cda09574713e": [
+          "apps/lumina-runtime/src/import/importGithubProject.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:db71b121be8e8399790bd5d1e98d98af28d2d3ce"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:8fd6dc6b3ac9b3b6bd71ff8890f5a50783e3e1fbea04b6e2439446ed65904550",
+  "type": "commit",
+  "title": "feat(runtime): add live SSE log streaming",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725831,
+  "observedAt": 1781589797000,
+  "contentRef": "git:commit:6631adf7207eb93ecda39d990c7f7a0cf14928df",
+  "checksum": "sha256:3ffd4b730d8267790f1b24651b0c43ebbd5fdde09a857aa2b391d258ab6cdb93",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 284,
+    "genesisAdmissionIdentity": "genesis-admission:0e5bb03765a6973c02e14e3bc80ed6748e844760d3a78c6c984e5bebb8b36add",
+    "historicalSourceId": "genesis-source:commit:6631adf7207eb93ecda39d990c7f7a0cf14928df",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6631adf7207eb93ecda39d990c7f7a0cf14928df",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6631adf7207eb93ecda39d990c7f7a0cf14928df",
+      "parentShas": [
+        "451d74a5fb162ac9c85622356734977f99f74cd3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781589797000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781589797000
+      },
+      "subject": "feat(runtime): add live SSE log streaming",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "451d74a5fb162ac9c85622356734977f99f74cd3": [
+          "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-live-runtime-console-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6631adf7207eb93ecda39d990c7f7a0cf14928df"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

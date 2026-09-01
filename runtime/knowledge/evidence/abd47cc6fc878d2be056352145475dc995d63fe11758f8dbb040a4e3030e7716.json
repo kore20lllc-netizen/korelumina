@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:09eb8a5a7d0dd116340df7bbdc9883b675000fe3785ee2d8442a8faa19531954",
+  "type": "commit",
+  "title": "docs(architecture): freeze platform constitution and execution roadmap",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734857,
+  "observedAt": 1782690667000,
+  "contentRef": "git:commit:ecb18857fee8f82d1130a8e499d1d55d3fce3a29",
+  "checksum": "sha256:73049e7766d9dcb8a23f9b43d7c45fc7c34d99f117a0b8cb3e876cec04944c4b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 550,
+    "genesisAdmissionIdentity": "genesis-admission:78ae1532e4329018a1c7a1b91dce8e0651b20ba0cba3d3849dba01cfa437de46",
+    "historicalSourceId": "genesis-source:commit:ecb18857fee8f82d1130a8e499d1d55d3fce3a29",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ecb18857fee8f82d1130a8e499d1d55d3fce3a29",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ecb18857fee8f82d1130a8e499d1d55d3fce3a29",
+      "parentShas": [
+        "420fc0c4024d36e9fdca574c4ee75e61588025dd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782690667000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782690667000
+      },
+      "subject": "docs(architecture): freeze platform constitution and execution roadmap",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+        "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md",
+        "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md"
+      ],
+      "changedPathsByParent": {
+        "420fc0c4024d36e9fdca574c4ee75e61588025dd": [
+          "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+          "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md",
+          "docs/architecture/MASTER_TRACEABILITY_MATRIX_V2.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ecb18857fee8f82d1130a8e499d1d55d3fce3a29"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

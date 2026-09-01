@@ -1,0 +1,72 @@
+{
+  "id": "genesis-evidence:39f2b961214e0709f7d476bf86797ed2f105f046c5283160a236b8a1dc599ac0",
+  "type": "commit",
+  "title": "feat(runtime): improve project deletion workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725928,
+  "observedAt": 1781680631000,
+  "contentRef": "git:commit:606c1eacb5d905740f88176059dfc1cc7d0a4e5e",
+  "checksum": "sha256:0fe3babed7d94c7d74453666bf56023312fdbe5bf20d3f474490bbff9e324c29",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 287,
+    "genesisAdmissionIdentity": "genesis-admission:4648135e135d77d8595caf45c1983102eb7cddc171a34b64ca8f79dc0fda474a",
+    "historicalSourceId": "genesis-source:commit:606c1eacb5d905740f88176059dfc1cc7d0a4e5e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:606c1eacb5d905740f88176059dfc1cc7d0a4e5e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "606c1eacb5d905740f88176059dfc1cc7d0a4e5e",
+      "parentShas": [
+        "f0a9f975ad88e08e3cac02f1d1129423b19e013f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781680631000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781680631000
+      },
+      "subject": "feat(runtime): improve project deletion workflow",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/admin/ProjectsTab.tsx",
+        "apps/lumina-builder/src/services/adminService.ts",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "apps/lumina-runtime/src/routes/projects.ts",
+        "apps/lumina-runtime/src/routes/restart.ts"
+      ],
+      "changedPathsByParent": {
+        "f0a9f975ad88e08e3cac02f1d1129423b19e013f": [
+          "apps/lumina-builder/src/components/workspaces/admin/ProjectsTab.tsx",
+          "apps/lumina-builder/src/services/adminService.ts",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "apps/lumina-runtime/src/routes/projects.ts",
+          "apps/lumina-runtime/src/routes/restart.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/dashboard-actions-working-20260617-0328",
+        "refs/tags/korelumina-project-lifecycle-green-20260617-0320"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:606c1eacb5d905740f88176059dfc1cc7d0a4e5e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

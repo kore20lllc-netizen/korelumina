@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:53e3b453780d72b3392d302565a509941823c1c0f7126e92603bc247f5847f3a",
+  "type": "commit",
+  "title": "feat(engineering): add engineering execution model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739367,
+  "observedAt": 1782970849000,
+  "contentRef": "git:commit:51cb89330fdb95a2764be1269ec550874a561ddc",
+  "checksum": "sha256:a4ad7f952bf6f97044de6f1eef3dc6bf98174602fa8b8eaa91ab1b535e36d672",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 671,
+    "genesisAdmissionIdentity": "genesis-admission:37f7d3852d8884adde5b1980848da89bde7066b43582484ac5e394df40a502ac",
+    "historicalSourceId": "genesis-source:commit:51cb89330fdb95a2764be1269ec550874a561ddc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:51cb89330fdb95a2764be1269ec550874a561ddc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "51cb89330fdb95a2764be1269ec550874a561ddc",
+      "parentShas": [
+        "3dee7bba46e98f1597cc436a6c17f1177d81bc14"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782970849000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782970849000
+      },
+      "subject": "feat(engineering): add engineering execution model",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/execution/EngineeringExecution.ts",
+        "apps/lumina-runtime/src/engineering/execution/EngineeringExecutionStore.ts",
+        "apps/lumina-runtime/src/engineering/execution/EngineeringExecutionValidation.ts",
+        "apps/lumina-runtime/src/engineering/execution/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3dee7bba46e98f1597cc436a6c17f1177d81bc14": [
+          "apps/lumina-runtime/src/engineering/execution/EngineeringExecution.ts",
+          "apps/lumina-runtime/src/engineering/execution/EngineeringExecutionStore.ts",
+          "apps/lumina-runtime/src/engineering/execution/EngineeringExecutionValidation.ts",
+          "apps/lumina-runtime/src/engineering/execution/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/capability-a1.3-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:51cb89330fdb95a2764be1269ec550874a561ddc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

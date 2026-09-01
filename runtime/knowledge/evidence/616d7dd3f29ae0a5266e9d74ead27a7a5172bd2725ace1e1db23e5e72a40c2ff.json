@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:2735a26c91fe67b6084d70a663e0568a29778443ca1fa2fe8bffb5df5d4793b6",
+  "type": "commit",
+  "title": "feat(reasoning): add reasoning provider registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733338,
+  "observedAt": 1782641458000,
+  "contentRef": "git:commit:8d7f609b06fe47f2bfbd15ce794b1f39772b3b7e",
+  "checksum": "sha256:8a14114207e177612ffc13d7dd7b92335eef3360e18d7cad18ae803536b192cb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 507,
+    "genesisAdmissionIdentity": "genesis-admission:e617af1f47b308ccf7e122975a0147771e922d2e8091c3f785b93d193b293f0f",
+    "historicalSourceId": "genesis-source:commit:8d7f609b06fe47f2bfbd15ce794b1f39772b3b7e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8d7f609b06fe47f2bfbd15ce794b1f39772b3b7e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8d7f609b06fe47f2bfbd15ce794b1f39772b3b7e",
+      "parentShas": [
+        "c8085d6d7bae5549490e4c9dfd1779b2e99bebdf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782641458000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782641458000
+      },
+      "subject": "feat(reasoning): add reasoning provider registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/reasoning/ReasoningProviderRegistry.ts",
+        "apps/lumina-runtime/src/knowledge/reasoning/getReasoningProvider.ts",
+        "apps/lumina-runtime/src/knowledge/reasoning/index.ts",
+        "apps/lumina-runtime/src/knowledge/reasoning/listReasoningProviders.ts",
+        "apps/lumina-runtime/src/knowledge/reasoning/registerReasoningProvider.ts"
+      ],
+      "changedPathsByParent": {
+        "c8085d6d7bae5549490e4c9dfd1779b2e99bebdf": [
+          "apps/lumina-runtime/src/knowledge/reasoning/ReasoningProviderRegistry.ts",
+          "apps/lumina-runtime/src/knowledge/reasoning/getReasoningProvider.ts",
+          "apps/lumina-runtime/src/knowledge/reasoning/index.ts",
+          "apps/lumina-runtime/src/knowledge/reasoning/listReasoningProviders.ts",
+          "apps/lumina-runtime/src/knowledge/reasoning/registerReasoningProvider.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8d7f609b06fe47f2bfbd15ce794b1f39772b3b7e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

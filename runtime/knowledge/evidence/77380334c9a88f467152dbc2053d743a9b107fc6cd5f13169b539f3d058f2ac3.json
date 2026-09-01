@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5f8b05a4dcd0462faac222e85bfc8e13748e038d62a0caebe132804fcc4c0d95",
+  "type": "commit",
+  "title": "refactor(repo-audit): remove local stored project audit bridge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727447,
+  "observedAt": 1782272375000,
+  "contentRef": "git:commit:0c12c35150a0e49a443b1f41046ae89c5ec8fa14",
+  "checksum": "sha256:23bfc199034868cf54134eb6a74ddbbf2cd899d6651a152ec1247517a442bf64",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 333,
+    "genesisAdmissionIdentity": "genesis-admission:e506f06086a64cefe52ae14aee2fac41ce527ce1dfa4530047cb06689be04696",
+    "historicalSourceId": "genesis-source:commit:0c12c35150a0e49a443b1f41046ae89c5ec8fa14",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0c12c35150a0e49a443b1f41046ae89c5ec8fa14",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0c12c35150a0e49a443b1f41046ae89c5ec8fa14",
+      "parentShas": [
+        "8669088d439c71887176ed3a0aee466d73872871"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782272375000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782272375000
+      },
+      "subject": "refactor(repo-audit): remove local stored project audit bridge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "8669088d439c71887176ed3a0aee466d73872871": [
+          "apps/lumina-builder/src/components/workspaces/RepoAuditWorkspace.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0c12c35150a0e49a443b1f41046ae89c5ec8fa14"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

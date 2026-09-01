@@ -1,0 +1,110 @@
+{
+  "id": "genesis-evidence:f9c0261f7bea4440812aaa1fde1a6470aeb32bdf03ea16a6d87d2fc3d896e76b",
+  "type": "commit",
+  "title": "merge(main): keep local stable builder + preview sync",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227721570,
+  "observedAt": 1775456949000,
+  "contentRef": "git:commit:1de9a3faa87bcc253c30316fed85b535f9fbfc8e",
+  "checksum": "sha256:5fa6f486997d8f3a93ae60e8ea3b3179610c8b7c33c929e251a69ea1082fba81",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 150,
+    "genesisAdmissionIdentity": "genesis-admission:ef8738d88aa89bc8ea1f519a972d29be5840dd07fe50a62b59390021f28e10a3",
+    "historicalSourceId": "genesis-source:commit:1de9a3faa87bcc253c30316fed85b535f9fbfc8e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1de9a3faa87bcc253c30316fed85b535f9fbfc8e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1de9a3faa87bcc253c30316fed85b535f9fbfc8e",
+      "parentShas": [
+        "5e270a49780b677e2b4bcc838f9049d999147d84",
+        "a5f7abd4a751f05f31cb91cc3813037adc7a2703"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775456949000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775456949000
+      },
+      "subject": "merge(main): keep local stable builder + preview sync",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/orchestrate/route.ts",
+        "app/api/dev/asset/route.ts",
+        "app/api/dev/preview/banner-fix.js",
+        "app/api/dev/preview/debug/route.ts",
+        "app/api/dev/preview/resolveEntry.ts",
+        "app/api/dev/preview/route.ts",
+        "app/api/dev/preview/route.ts.bak",
+        "app/builder/BuilderInner.tsx",
+        "fix-apply-final.ts",
+        "fix-apply-visibility.sh",
+        "fix-jsx-final.sh",
+        "fix-jsx.sh",
+        "fix-preview-refresh.sh",
+        "fix-runai-clean.sh",
+        "kpatch",
+        "package-lock.json",
+        "package.json",
+        "scripts/add-assets.sh",
+        "scripts/add-node-modules.sh",
+        "scripts/add-tailwind.sh",
+        "scripts/fix-jsx-runtime.sh",
+        "scripts/fix-preview-app.sh",
+        "scripts/fix-preview-mount.sh",
+        "test.png"
+      ],
+      "changedPathsByParent": {
+        "5e270a49780b677e2b4bcc838f9049d999147d84": [
+          "app/api/dev/asset/route.ts",
+          "package.json",
+          "scripts/add-assets.sh",
+          "scripts/add-node-modules.sh",
+          "scripts/add-tailwind.sh",
+          "scripts/fix-jsx-runtime.sh",
+          "scripts/fix-preview-app.sh",
+          "scripts/fix-preview-mount.sh",
+          "test.png"
+        ],
+        "a5f7abd4a751f05f31cb91cc3813037adc7a2703": [
+          "app/api/ai/orchestrate/route.ts",
+          "app/api/dev/preview/banner-fix.js",
+          "app/api/dev/preview/debug/route.ts",
+          "app/api/dev/preview/resolveEntry.ts",
+          "app/api/dev/preview/route.ts",
+          "app/api/dev/preview/route.ts.bak",
+          "app/builder/BuilderInner.tsx",
+          "fix-apply-final.ts",
+          "fix-apply-visibility.sh",
+          "fix-jsx-final.sh",
+          "fix-jsx.sh",
+          "fix-preview-refresh.sh",
+          "fix-runai-clean.sh",
+          "kpatch",
+          "package-lock.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1de9a3faa87bcc253c30316fed85b535f9fbfc8e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

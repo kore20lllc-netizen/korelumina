@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b7ff64add47eddfe45f575650f7b29086e76212322848c01c0fc540d476bd2bd",
+  "type": "commit",
+  "title": "feat: add PID + stale timeout enforcement for global and project locks",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718361,
+  "observedAt": 1771311335000,
+  "contentRef": "git:commit:2961972917faa4c47350a4bc5eb5b8e59ab762b0",
+  "checksum": "sha256:60300f35fea1a3e6a26814ff8b7db5db58c8724a42d98b4eec702624529bd376",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 46,
+    "genesisAdmissionIdentity": "genesis-admission:2c734f44f716811ad013dfb4ea315a634023486b60935e7c99b8db0182038505",
+    "historicalSourceId": "genesis-source:commit:2961972917faa4c47350a4bc5eb5b8e59ab762b0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2961972917faa4c47350a4bc5eb5b8e59ab762b0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2961972917faa4c47350a4bc5eb5b8e59ab762b0",
+      "parentShas": [
+        "1924a02ad94b6ce40936b41d64d88493df7d7a51"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771311335000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771311335000
+      },
+      "subject": "feat: add PID + stale timeout enforcement for global and project locks",
+      "body": "",
+      "changedPaths": [
+        "runtime/global-lock.ts",
+        "runtime/project-lock.ts"
+      ],
+      "changedPathsByParent": {
+        "1924a02ad94b6ce40936b41d64d88493df7d7a51": [
+          "runtime/global-lock.ts",
+          "runtime/project-lock.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2961972917faa4c47350a4bc5eb5b8e59ab762b0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

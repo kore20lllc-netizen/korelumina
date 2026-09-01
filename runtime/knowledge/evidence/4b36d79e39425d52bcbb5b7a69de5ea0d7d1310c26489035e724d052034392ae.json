@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:123c32d18b26d9eeb5ee5aca2dab575f2f8d527b5164e43e097bee12aea3cda4",
+  "type": "commit",
+  "title": "fix: remove duplicate import and auto-reload effect in PreviewFrame",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724894,
+  "observedAt": 1780122163000,
+  "contentRef": "git:commit:09ff20666fd3109b00312908b2a3734f6d0712af",
+  "checksum": "sha256:6825113840ff2fe1887344d57ee8cedb2c2ca872f013ea6a265f9d20a0894d56",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 255,
+    "genesisAdmissionIdentity": "genesis-admission:c1f2ca5aa111418db06d9f1d1516145de4f51630923f4718512eb52e61d201c4",
+    "historicalSourceId": "genesis-source:commit:09ff20666fd3109b00312908b2a3734f6d0712af",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:09ff20666fd3109b00312908b2a3734f6d0712af",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "09ff20666fd3109b00312908b2a3734f6d0712af",
+      "parentShas": [
+        "5d4f46074974afc5fed714979f5d42fa6f06d0ed"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780122163000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1780122163000
+      },
+      "subject": "fix: remove duplicate import and auto-reload effect in PreviewFrame",
+      "body": "Co-authored-by: aider (claude-sonnet-4-5) <aider@aider.chat>",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx"
+      ],
+      "changedPathsByParent": {
+        "5d4f46074974afc5fed714979f5d42fa6f06d0ed": [
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:09ff20666fd3109b00312908b2a3734f6d0712af"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

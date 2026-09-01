@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:4b4813df4da6f39e0f7ea1d5b358ee47871824f582e975daac4adcc5d9726714",
+  "type": "commit",
+  "title": "refactor(platform-sdk): add knowledge event dispatcher",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738221,
+  "observedAt": 1782886655000,
+  "contentRef": "git:commit:ae6dbc98565aa39cb115b8857798bf94d9c4db61",
+  "checksum": "sha256:d4889c72d5a1bcf1292b487e8333c2aaece40aae66f7fe977ce74ac92ec8767d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 641,
+    "genesisAdmissionIdentity": "genesis-admission:48855c49bba58c3c8ad76d1bf5d8193a97a58f891e35d0978c4fda783d859021",
+    "historicalSourceId": "genesis-source:commit:ae6dbc98565aa39cb115b8857798bf94d9c4db61",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ae6dbc98565aa39cb115b8857798bf94d9c4db61",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ae6dbc98565aa39cb115b8857798bf94d9c4db61",
+      "parentShas": [
+        "8a1afea562918c8e691c69c04d400841d67097a3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782886655000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782886655000
+      },
+      "subject": "refactor(platform-sdk): add knowledge event dispatcher",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/knowledge/KnowledgeEventBus.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgeEventDispatcher.ts",
+        "packages/platform-sdk/src/knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "8a1afea562918c8e691c69c04d400841d67097a3": [
+          "packages/platform-sdk/src/knowledge/KnowledgeEventBus.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgeEventDispatcher.ts",
+          "packages/platform-sdk/src/knowledge/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase048-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ae6dbc98565aa39cb115b8857798bf94d9c4db61"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

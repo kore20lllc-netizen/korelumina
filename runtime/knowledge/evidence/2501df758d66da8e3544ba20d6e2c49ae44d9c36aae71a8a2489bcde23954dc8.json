@@ -1,0 +1,101 @@
+{
+  "id": "genesis-evidence:45f0c3ff38ae71a9ddf780510d15c19d9c784be176821ca353443fca378abaed",
+  "type": "commit",
+  "title": "feat: AI assist + diff engine + compile guard + manifest enforcement + repair loop",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718969,
+  "observedAt": 1771919635000,
+  "contentRef": "git:commit:90ef4c709c8c26c2d3bd23aaedb785f8f1755bf6",
+  "checksum": "sha256:5e33e67415ce10e7dc060744a657cdefc09a18f456344d3937413d6cc38744ee",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 66,
+    "genesisAdmissionIdentity": "genesis-admission:4918cc4204e21392692618099f1f3da4611c95342c9f346ad54325479e2d6072",
+    "historicalSourceId": "genesis-source:commit:90ef4c709c8c26c2d3bd23aaedb785f8f1755bf6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:90ef4c709c8c26c2d3bd23aaedb785f8f1755bf6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "90ef4c709c8c26c2d3bd23aaedb785f8f1755bf6",
+      "parentShas": [
+        "d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771919635000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771919635000
+      },
+      "subject": "feat: AI assist + diff engine + compile guard + manifest enforcement + repair loop",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/apply/route.ts",
+        "app/api/ai/assist/route.ts",
+        "app/api/ai/execute/route.ts",
+        "app/api/ai/repair/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+        "korelumina.manifest.json",
+        "lib/ai/apply-with-backup.ts",
+        "lib/ai/apply.ts",
+        "lib/ai/compile-guard.ts",
+        "lib/ai/diff.ts",
+        "lib/ai/manifest.ts",
+        "lib/ai/parse.ts",
+        "lib/ai/repair-loop.ts",
+        "lib/ai/tsc.ts",
+        "lib/ai/types.ts",
+        "lib/manifest-enforce.ts",
+        "lib/manifest.ts",
+        "package-lock.json",
+        "package.json",
+        "runtime/build-queue-runner.ts",
+        "runtime/build-queue.ts"
+      ],
+      "changedPathsByParent": {
+        "d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86": [
+          "app/api/ai/apply/route.ts",
+          "app/api/ai/assist/route.ts",
+          "app/api/ai/execute/route.ts",
+          "app/api/ai/repair/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+          "korelumina.manifest.json",
+          "lib/ai/apply-with-backup.ts",
+          "lib/ai/apply.ts",
+          "lib/ai/compile-guard.ts",
+          "lib/ai/diff.ts",
+          "lib/ai/manifest.ts",
+          "lib/ai/parse.ts",
+          "lib/ai/repair-loop.ts",
+          "lib/ai/tsc.ts",
+          "lib/ai/types.ts",
+          "lib/manifest-enforce.ts",
+          "lib/manifest.ts",
+          "package-lock.json",
+          "package.json",
+          "runtime/build-queue-runner.ts",
+          "runtime/build-queue.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:90ef4c709c8c26c2d3bd23aaedb785f8f1755bf6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:8122f563d72f60b94244f81a816d1e6084c9b5c0056f04aba660abbf0b9e262f",
+  "type": "commit",
+  "title": "chore(reconstruction): ignore Python cache artifacts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735476,
+  "observedAt": 1782713604000,
+  "contentRef": "git:commit:ce9fa8abbb94edb6c9f56fc18ef70e4e2aa5fbec",
+  "checksum": "sha256:883b9c286c38a84eb1e00c8c44ddfbd26747b519003e195c3884e92a9de1f9c6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 567,
+    "genesisAdmissionIdentity": "genesis-admission:4df7cebcb3c1886375c481a9c65a1bbcc2aa688a9d0583f2aff7afdc708cbf01",
+    "historicalSourceId": "genesis-source:commit:ce9fa8abbb94edb6c9f56fc18ef70e4e2aa5fbec",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ce9fa8abbb94edb6c9f56fc18ef70e4e2aa5fbec",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ce9fa8abbb94edb6c9f56fc18ef70e4e2aa5fbec",
+      "parentShas": [
+        "932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782713604000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782713604000
+      },
+      "subject": "chore(reconstruction): ignore Python cache artifacts",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        "tools/reconstruction/__pycache__/apply_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/generate_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/reconstruction_workflow.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/review_patch.cpython-312.pyc",
+        "tools/reconstruction/__pycache__/validate_patch.cpython-312.pyc"
+      ],
+      "changedPathsByParent": {
+        "932f9ec3aae2166e66a5b0e66985cbc0d1a4ab80": [
+          ".gitignore",
+          "tools/reconstruction/__pycache__/apply_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/generate_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/reconstruction_workflow.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/review_patch.cpython-312.pyc",
+          "tools/reconstruction/__pycache__/validate_patch.cpython-312.pyc"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ce9fa8abbb94edb6c9f56fc18ef70e4e2aa5fbec"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

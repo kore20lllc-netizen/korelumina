@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:4894a5bd161d2cb36d38675671d0d7664878d6cb5ea815bdee0a7bf6c8d8a8ed",
+  "type": "commit",
+  "title": "fix: remove workspace route-group root pages causing vercel runtime manifest crash",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719742,
+  "observedAt": 1773256907000,
+  "contentRef": "git:commit:aa7abb5afbd1ea8e25ed5c159319f7a5c6c831ec",
+  "checksum": "sha256:101bf7d905c5c188fcb04753ee9d1bf4584d1191a7073712840f1ed6d97546c8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 91,
+    "genesisAdmissionIdentity": "genesis-admission:704ce3997e6791652b62d87404a99e1be006391ff43fdbe2882aa436c8e068cb",
+    "historicalSourceId": "genesis-source:commit:aa7abb5afbd1ea8e25ed5c159319f7a5c6c831ec",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:aa7abb5afbd1ea8e25ed5c159319f7a5c6c831ec",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "aa7abb5afbd1ea8e25ed5c159319f7a5c6c831ec",
+      "parentShas": [
+        "cc9250a059ab546c20111816b3eebc76790fae23"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773256907000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773256907000
+      },
+      "subject": "fix: remove workspace route-group root pages causing vercel runtime manifest crash",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/page.tsx"
+      ],
+      "changedPathsByParent": {
+        "cc9250a059ab546c20111816b3eebc76790fae23": [
+          "app/(workspace)/page.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:aa7abb5afbd1ea8e25ed5c159319f7a5c6c831ec"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

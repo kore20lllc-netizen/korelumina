@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:b6ec3f05ab75aa156a57b3e831e59126b80c0996f605d8b4bf103ba05cbe2854",
+  "type": "commit",
+  "title": "feat(runtime): add lifecycle service",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739014,
+  "observedAt": 1782950736000,
+  "contentRef": "git:commit:d39f0a9cccd07aa272c19886f1251b3de27cc639",
+  "checksum": "sha256:7253f846e78c6ce7e16ffa3ad23208f358c2cf4fbec9277e42307a63858499ca",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 662,
+    "genesisAdmissionIdentity": "genesis-admission:04f95f0b4597c128e7535f764cdb6831748530414b8760044ddf4d212c12bbbf",
+    "historicalSourceId": "genesis-source:commit:d39f0a9cccd07aa272c19886f1251b3de27cc639",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d39f0a9cccd07aa272c19886f1251b3de27cc639",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d39f0a9cccd07aa272c19886f1251b3de27cc639",
+      "parentShas": [
+        "451b1ae91e981bb14a3d20a72e840fb3b79ad1e9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782950736000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782950736000
+      },
+      "subject": "feat(runtime): add lifecycle service",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/lifecycle/RuntimeLifecycleService.ts",
+        "apps/lumina-runtime/src/runtime/lifecycle/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "451b1ae91e981bb14a3d20a72e840fb3b79ad1e9": [
+          "apps/lumina-runtime/src/runtime/lifecycle/RuntimeLifecycleService.ts",
+          "apps/lumina-runtime/src/runtime/lifecycle/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase067-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d39f0a9cccd07aa272c19886f1251b3de27cc639"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

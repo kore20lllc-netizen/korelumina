@@ -1,0 +1,121 @@
+{
+  "id": "genesis-evidence:fc6a932a68524cb851c248ede584c7b108b79e2cdbe938cf6ce990a8819f4025",
+  "type": "commit",
+  "title": "checkpoint: preview engine + builder stable",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227721991,
+  "observedAt": 1775714629000,
+  "contentRef": "git:commit:a17ab7a8614361db76dfdee61fb3a32bf623e2da",
+  "checksum": "sha256:2c10ee47054034f106f308dd7c7d55b7093c7db075b575bfa3702608d8e7f60b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 163,
+    "genesisAdmissionIdentity": "genesis-admission:e1f7e1c87c8e4ed0b059ee38fcecdf13b106e882adad9e3e649f0ce9fe054d23",
+    "historicalSourceId": "genesis-source:commit:a17ab7a8614361db76dfdee61fb3a32bf623e2da",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a17ab7a8614361db76dfdee61fb3a32bf623e2da",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a17ab7a8614361db76dfdee61fb3a32bf623e2da",
+      "parentShas": [
+        "4db869bcd88991b9abd2f27a35ea9a1e991a188d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775714629000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775714629000
+      },
+      "subject": "checkpoint: preview engine + builder stable",
+      "body": "",
+      "changedPaths": [
+        "__graveyard_runtime_v1/components_builder/AIPanel.tsx",
+        "__graveyard_runtime_v1/components_builder/DraftPanel.tsx",
+        "__graveyard_runtime_v1/components_builder/FileTree.tsx",
+        "__graveyard_runtime_v1/components_builder/JournalPanel.tsx",
+        "__graveyard_runtime_v1/components_builder/PreviewFrame.tsx",
+        "app/api/dev/fs/write/route.ts",
+        "app/api/dev/journal/route.ts",
+        "app/api/dev/preview/route.ts",
+        "app/api/jobs/[jobId]/route.ts",
+        "app/api/jobs/[jobId]/stream/route.ts",
+        "app/api/projects/import/route.ts",
+        "app/builder/BuilderInner.tsx",
+        "app/master-os/page.tsx",
+        "components/builder/BuilderClient.tsx",
+        "components/builder/ChatPanel.tsx",
+        "components/builder/CodeEditor.tsx",
+        "components/builder/DiffPanel.tsx",
+        "components/builder/DiffViewer.tsx",
+        "components/builder/ExecutionPanel.tsx",
+        "components/builder/FileTree.tsx",
+        "components/builder/LogPanel.tsx",
+        "components/builder/PlanPanel.tsx",
+        "components/builder/PreviewFrame.tsx",
+        "components/builder/RenderProbe.tsx",
+        "components/builder/Shell.tsx",
+        "components/builder/StatusBadge.tsx",
+        "components/builder/TaskPanel.tsx",
+        "components/builder/TaskSpecPanel.tsx",
+        "components/builder/TaskStatusPanel.tsx",
+        "lib/guardrails/builder-lock.ts",
+        "lib/safe-json.ts"
+      ],
+      "changedPathsByParent": {
+        "4db869bcd88991b9abd2f27a35ea9a1e991a188d": [
+          "__graveyard_runtime_v1/components_builder/AIPanel.tsx",
+          "__graveyard_runtime_v1/components_builder/DraftPanel.tsx",
+          "__graveyard_runtime_v1/components_builder/FileTree.tsx",
+          "__graveyard_runtime_v1/components_builder/JournalPanel.tsx",
+          "__graveyard_runtime_v1/components_builder/PreviewFrame.tsx",
+          "app/api/dev/fs/write/route.ts",
+          "app/api/dev/journal/route.ts",
+          "app/api/dev/preview/route.ts",
+          "app/api/jobs/[jobId]/route.ts",
+          "app/api/jobs/[jobId]/stream/route.ts",
+          "app/api/projects/import/route.ts",
+          "app/builder/BuilderInner.tsx",
+          "app/master-os/page.tsx",
+          "components/builder/BuilderClient.tsx",
+          "components/builder/ChatPanel.tsx",
+          "components/builder/CodeEditor.tsx",
+          "components/builder/DiffPanel.tsx",
+          "components/builder/DiffViewer.tsx",
+          "components/builder/ExecutionPanel.tsx",
+          "components/builder/FileTree.tsx",
+          "components/builder/LogPanel.tsx",
+          "components/builder/PlanPanel.tsx",
+          "components/builder/PreviewFrame.tsx",
+          "components/builder/RenderProbe.tsx",
+          "components/builder/Shell.tsx",
+          "components/builder/StatusBadge.tsx",
+          "components/builder/TaskPanel.tsx",
+          "components/builder/TaskSpecPanel.tsx",
+          "components/builder/TaskStatusPanel.tsx",
+          "lib/guardrails/builder-lock.ts",
+          "lib/safe-json.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a17ab7a8614361db76dfdee61fb3a32bf623e2da"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

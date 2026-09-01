@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:e20f83eb72f10c06341018caca5cf61609305fdc5ccb43a1857407a45824852d",
+  "type": "commit",
+  "title": "refactor(runtime): migrate startup coordinator to execution sdk",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738900,
+  "observedAt": 1782936255000,
+  "contentRef": "git:commit:f69fe81d30505a1435983a9597faca69c9dbc16a",
+  "checksum": "sha256:68320d6a5938f472299061b31682d7d065e73cdf8fdaa45cc05d30c75ccd94db",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 659,
+    "genesisAdmissionIdentity": "genesis-admission:42cca9bcb5795b9ebbc5559e926c0521c3ad42b9af29634d2741aa212933c405",
+    "historicalSourceId": "genesis-source:commit:f69fe81d30505a1435983a9597faca69c9dbc16a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f69fe81d30505a1435983a9597faca69c9dbc16a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f69fe81d30505a1435983a9597faca69c9dbc16a",
+      "parentShas": [
+        "b4b6498407147011d2573e31710e71588a95dcb3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782936255000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782936255000
+      },
+      "subject": "refactor(runtime): migrate startup coordinator to execution sdk",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/startup/RuntimeCoordinator.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupContext.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupPipeline.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/BindLifecycleStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/LaunchRuntimeStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/PrepareRuntimeStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/ResolveProjectStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/ValidateProjectStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/WaitForReadyStage.ts",
+        "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/index.ts",
+        "docs/engineering/reconstruction-log.md"
+      ],
+      "changedPathsByParent": {
+        "b4b6498407147011d2573e31710e71588a95dcb3": [
+          "apps/lumina-runtime/src/runtime/startup/RuntimeCoordinator.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupContext.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/RuntimeStartupPipeline.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/BindLifecycleStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/LaunchRuntimeStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/PrepareRuntimeStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/ResolveProjectStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/ValidateProjectStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/WaitForReadyStage.ts",
+          "apps/lumina-runtime/src/runtime/startup/pipeline/Stages/index.ts",
+          "docs/engineering/reconstruction-log.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase064-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f69fe81d30505a1435983a9597faca69c9dbc16a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

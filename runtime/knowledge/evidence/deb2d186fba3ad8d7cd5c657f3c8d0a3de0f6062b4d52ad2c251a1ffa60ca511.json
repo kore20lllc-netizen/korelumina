@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:86922dc930120953c33dbde01606c8df7651563e9da42110b6c341c41c157b19",
+  "type": "document",
+  "title": "KoreLumina Architectural Reconciliation Process",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732007,
+  "observedAt": 1782554717000,
+  "contentRef": "docs/governance/RECONCILIATION_PROCESS.md",
+  "checksum": "sha256:53f440a15ac79180a97a9d7159a888c977d4def2e0f1ea3c07b74f99c2dc6ce1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 469,
+    "genesisAdmissionIdentity": "genesis-admission:608bc13ae0544b7b7ab406383bd69ee6417358fc807495aecd13148c8397c343",
+    "historicalSourceId": "genesis-source:document:derived:3d0e7f7aad1a7abb6f96e5961b846dc6106db3dfbc3cb22776f3524d9292a14b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/RECONCILIATION_PROCESS.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architectural Reconciliation Process",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/RECONCILIATION_PROCESS.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3d0e7f7aad1a7abb6f96e5961b846dc6106db3dfbc3cb22776f3524d9292a14b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

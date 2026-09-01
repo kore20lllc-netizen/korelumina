@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:6448649322e28b8d41698ea8bb7f131319c2dd0f0fc61280e76bb8fd30690215",
+  "type": "commit",
+  "title": "feat(knowledge): synchronize engineering manifest automatically",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730224,
+  "observedAt": 1782524985000,
+  "contentRef": "git:commit:60f1e2a9eb06f3bb0c0c858fa89a50468f62e038",
+  "checksum": "sha256:1f4c674ae11d2f59432944eae617a046a61281d59a222751893ed0813364b4da",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 416,
+    "genesisAdmissionIdentity": "genesis-admission:dc3befeaf82b9f7d8735940c5335f3058bb179b2b13fc833c404c248808cc793",
+    "historicalSourceId": "genesis-source:commit:60f1e2a9eb06f3bb0c0c858fa89a50468f62e038",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:60f1e2a9eb06f3bb0c0c858fa89a50468f62e038",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "60f1e2a9eb06f3bb0c0c858fa89a50468f62e038",
+      "parentShas": [
+        "68f6906a4b6b5f98c69e07f12d6910127fb57891"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782524985000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782524985000
+      },
+      "subject": "feat(knowledge): synchronize engineering manifest automatically",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts"
+      ],
+      "changedPathsByParent": {
+        "68f6906a4b6b5f98c69e07f12d6910127fb57891": [
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringStore.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:60f1e2a9eb06f3bb0c0c858fa89a50468f62e038"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:1a48e4e50ddc6d623f1928319159389a3c348f8b7a3e4feddc829ea14c19900d",
+  "type": "commit",
+  "title": "docs(platform-sdk): define Platform SDK capability",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735765,
+  "observedAt": 1782714445000,
+  "contentRef": "git:commit:e12fd99d1b6fd4c41f88d5d802b8faf6c3ab8b6d",
+  "checksum": "sha256:690e96b9b844216920ad9cb9a7a92c3f2266ca11bf99ed92b213d54a9151661f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 575,
+    "genesisAdmissionIdentity": "genesis-admission:be612a7f3a64cf1b1e695f1b2c737fe87cd292a3761c422fd36311754099d402",
+    "historicalSourceId": "genesis-source:commit:e12fd99d1b6fd4c41f88d5d802b8faf6c3ab8b6d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e12fd99d1b6fd4c41f88d5d802b8faf6c3ab8b6d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e12fd99d1b6fd4c41f88d5d802b8faf6c3ab8b6d",
+      "parentShas": [
+        "368b67b221c00ebf134382fc9b223296b359d55d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782714445000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782714445000
+      },
+      "subject": "docs(platform-sdk): define Platform SDK capability",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/capabilities/CAPABILITY_REGISTRY.md",
+        "docs/architecture/capabilities/PLATFORM_SDK.md"
+      ],
+      "changedPathsByParent": {
+        "368b67b221c00ebf134382fc9b223296b359d55d": [
+          "docs/architecture/capabilities/CAPABILITY_REGISTRY.md",
+          "docs/architecture/capabilities/PLATFORM_SDK.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e12fd99d1b6fd4c41f88d5d802b8faf6c3ab8b6d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

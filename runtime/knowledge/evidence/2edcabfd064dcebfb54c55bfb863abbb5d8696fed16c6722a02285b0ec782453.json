@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:f6ca95b48eb1f8271f13eed5161465c95aa8f1ccb340791266ba83cf027b98be",
+  "type": "document",
+  "title": "Capability Extraction Protocol",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735987,
+  "observedAt": 1782718604000,
+  "contentRef": "docs/architecture/reconstruction/CAPABILITY_EXTRACTION_PROTOCOL.md",
+  "checksum": "sha256:33f47be6f52a990d7e7ec35bb818489c24094e0f8edf11c339cf5ee5144b3e4f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 581,
+    "genesisAdmissionIdentity": "genesis-admission:06477fd81da1b97a0e7fa8537057294c4d12924cd2dde0e91cd00ad57c31e595",
+    "historicalSourceId": "genesis-source:document:derived:dec83b091be1956453158093754e0497cdb65191da8836a05b4f5db1b1ac830a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture",
+    "sourceLocation": "docs/architecture/reconstruction/CAPABILITY_EXTRACTION_PROTOCOL.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Capability Extraction Protocol",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconstruction/CAPABILITY_EXTRACTION_PROTOCOL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:dec83b091be1956453158093754e0497cdb65191da8836a05b4f5db1b1ac830a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

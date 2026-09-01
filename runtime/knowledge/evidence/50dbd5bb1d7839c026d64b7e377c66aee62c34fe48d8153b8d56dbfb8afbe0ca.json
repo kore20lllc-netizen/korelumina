@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:3c2c91f2b8dd3d243c3516adde79f90b28841e9c09b18b581a78eb133e6d4bd8",
+  "type": "commit",
+  "title": "Merge branch 'fix/dashboard-project-actions'",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725993,
+  "observedAt": 1781681961000,
+  "contentRef": "git:commit:5277ed139a8716330606ced2750e42716771550c",
+  "checksum": "sha256:42efeccb6b3d98177fa04ed4ca025ec9dea0b6cd84a0ae977076fc8b4756c980",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 289,
+    "genesisAdmissionIdentity": "genesis-admission:330cbc68a4be6b604201228de5ee3988cc6b87952635db2bc96c5693b04bd507",
+    "historicalSourceId": "genesis-source:commit:5277ed139a8716330606ced2750e42716771550c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5277ed139a8716330606ced2750e42716771550c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5277ed139a8716330606ced2750e42716771550c",
+      "parentShas": [
+        "606c1eacb5d905740f88176059dfc1cc7d0a4e5e",
+        "4ede87c6f4f691e3b20407f073cb868f7dda1981"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781681961000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781681961000
+      },
+      "subject": "Merge branch 'fix/dashboard-project-actions'",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/DashboardView.tsx"
+      ],
+      "changedPathsByParent": {
+        "4ede87c6f4f691e3b20407f073cb868f7dda1981": [],
+        "606c1eacb5d905740f88176059dfc1cc7d0a4e5e": [
+          "apps/lumina-builder/src/components/workspaces/DashboardView.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/dashboard-actions-stable-20260617-0339"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5277ed139a8716330606ced2750e42716771550c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

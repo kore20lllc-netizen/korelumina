@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:3fa8491988408936e1d1b048faca1171d82f7c6ab08fd0bd7c8bf997a9acd689",
+  "type": "commit",
+  "title": "fix(runtime): remove reconstruction diagnostics logs",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726642,
+  "observedAt": 1782189965000,
+  "contentRef": "git:commit:c0a7618d4d760066c778f1172b8f9f488115960f",
+  "checksum": "sha256:21aab3c94a494a8deba6ef84fdb43a9f3e88103d4fb7eb1c763de99fef56c812",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 309,
+    "genesisAdmissionIdentity": "genesis-admission:57bace15b2c44922b0ba1127494867364ed4189497c5859b65b156a856b2a1e0",
+    "historicalSourceId": "genesis-source:commit:c0a7618d4d760066c778f1172b8f9f488115960f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c0a7618d4d760066c778f1172b8f9f488115960f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c0a7618d4d760066c778f1172b8f9f488115960f",
+      "parentShas": [
+        "548a70630a475b67a20a28169e275c8d585675f0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782189965000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782189965000
+      },
+      "subject": "fix(runtime): remove reconstruction diagnostics logs",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/projects/projectMetadataStore.ts"
+      ],
+      "changedPathsByParent": {
+        "548a70630a475b67a20a28169e275c8d585675f0": [
+          "apps/lumina-runtime/src/projects/projectMetadataStore.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/reconstruction-project-visibility-restored"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c0a7618d4d760066c778f1172b8f9f488115960f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

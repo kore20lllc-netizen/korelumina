@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:8384005d98c397564689743ee020809ff69ea5e74ce8b0710eca5d1a578123ca",
+  "type": "commit",
+  "title": "feat(knowledge): add ADR compiler",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740845,
+  "observedAt": 1783042241000,
+  "contentRef": "git:commit:2bbc82beb792a615f7b97aaae5025bde2f516515",
+  "checksum": "sha256:de28ddc7b5a6038783b239389254f4891753ff3553764d2d697143ed331e2ee0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 709,
+    "genesisAdmissionIdentity": "genesis-admission:27f6b780a5ca71dbde4963411d631863b465bdd260d0cf8eea7f37d28fa544f8",
+    "historicalSourceId": "genesis-source:commit:2bbc82beb792a615f7b97aaae5025bde2f516515",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2bbc82beb792a615f7b97aaae5025bde2f516515",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2bbc82beb792a615f7b97aaae5025bde2f516515",
+      "parentShas": [
+        "4abf9f0bb20b6a9b17dd555345bcc864ba0711d1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042241000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783042241000
+      },
+      "subject": "feat(knowledge): add ADR compiler",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/index.ts"
+      ],
+      "changedPathsByParent": {
+        "4abf9f0bb20b6a9b17dd555345bcc864ba0711d1": [
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpp-014-adr-compiler-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2bbc82beb792a615f7b97aaae5025bde2f516515"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

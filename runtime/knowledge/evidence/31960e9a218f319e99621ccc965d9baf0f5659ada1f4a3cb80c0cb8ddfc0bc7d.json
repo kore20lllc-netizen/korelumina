@@ -1,0 +1,89 @@
+{
+  "id": "genesis-evidence:522b89db1651cdd583686f69c50bd2c4021dc7f89b3e773d6ef1eb1222a54f78",
+  "type": "commit",
+  "title": "🔥 builder engine hard reset snapshot",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719834,
+  "observedAt": 1773514121000,
+  "contentRef": "git:commit:2ed8ea5c267bfb6982592b62b777909cf3c2e75a",
+  "checksum": "sha256:1b14552e7b5086b5f8054dfd2f161029fc6a861878e4225447d3afe7a63dc423",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 94,
+    "genesisAdmissionIdentity": "genesis-admission:d9d6638eb8ae42dca4ecd9f275e729e499487e96344cdf982db29ac040e53a5b",
+    "historicalSourceId": "genesis-source:commit:2ed8ea5c267bfb6982592b62b777909cf3c2e75a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2ed8ea5c267bfb6982592b62b777909cf3c2e75a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2ed8ea5c267bfb6982592b62b777909cf3c2e75a",
+      "parentShas": [
+        "68a671f7cb1267e0fc7c7ee68a474129e21f561b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773514121000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773514121000
+      },
+      "subject": "🔥 builder engine hard reset snapshot",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.DISABLED.tsx",
+        "app/api/dev/preview/bundle/route.ts",
+        "components/builder/BuilderClient.tsx",
+        "components/builder/ChatPanel.tsx",
+        "components/builder/DiffPanel.tsx",
+        "components/builder/DiffViewer.tsx",
+        "components/builder/ExecutionPanel.tsx",
+        "components/builder/LogPanel.tsx",
+        "components/builder/PlanPanel.tsx",
+        "components/builder/RenderProbe.tsx",
+        "components/builder/Shell.tsx",
+        "components/builder/StatusBadge.tsx",
+        "components/builder/TaskPanel.tsx",
+        "components/builder/TaskSpecPanel.tsx",
+        "components/builder/TaskStatusPanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "68a671f7cb1267e0fc7c7ee68a474129e21f561b": [
+          "app/(workspace)/workspaces/[workspaceId]/projects/[projectId]/builder/shell.DISABLED.tsx",
+          "app/api/dev/preview/bundle/route.ts",
+          "components/builder/BuilderClient.tsx",
+          "components/builder/ChatPanel.tsx",
+          "components/builder/DiffPanel.tsx",
+          "components/builder/DiffViewer.tsx",
+          "components/builder/ExecutionPanel.tsx",
+          "components/builder/LogPanel.tsx",
+          "components/builder/PlanPanel.tsx",
+          "components/builder/RenderProbe.tsx",
+          "components/builder/Shell.tsx",
+          "components/builder/StatusBadge.tsx",
+          "components/builder/TaskPanel.tsx",
+          "components/builder/TaskSpecPanel.tsx",
+          "components/builder/TaskStatusPanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2ed8ea5c267bfb6982592b62b777909cf3c2e75a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

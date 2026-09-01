@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:e99e397685446f0d854f36eed4587ea6fdd26346ce515fc82e044e47c8fc61d3",
+  "type": "commit",
+  "title": "Merge pull request #13 from kore20lllc-netizen/fix/builder-ui-stable",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227720967,
+  "observedAt": 1775063584000,
+  "contentRef": "git:commit:c4808675aa3a35b72106282604c896c71c65ff7f",
+  "checksum": "sha256:611199b71b5439f6c077537134a61619e6481e9b38fde4c940ac1e42b3291c14",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 131,
+    "genesisAdmissionIdentity": "genesis-admission:511aaf31a34b891d800cf628ffd4c96304eaa60fccd2ff56d9c0885799252b74",
+    "historicalSourceId": "genesis-source:commit:c4808675aa3a35b72106282604c896c71c65ff7f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c4808675aa3a35b72106282604c896c71c65ff7f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c4808675aa3a35b72106282604c896c71c65ff7f",
+      "parentShas": [
+        "052a3732d8666a810664cbc5ae8ca10ed960a74c",
+        "b35de62e143cf5d468beb0c21648d2894dfa9b33"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775063584000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1775063584000
+      },
+      "subject": "Merge pull request #13 from kore20lllc-netizen/fix/builder-ui-stable",
+      "body": "Fix/builder UI stable",
+      "changedPaths": [
+        "app/api/ai/orchestrate/route.ts",
+        "app/builder/BuilderInner.tsx"
+      ],
+      "changedPathsByParent": {
+        "052a3732d8666a810664cbc5ae8ca10ed960a74c": [
+          "app/api/ai/orchestrate/route.ts",
+          "app/builder/BuilderInner.tsx"
+        ],
+        "b35de62e143cf5d468beb0c21648d2894dfa9b33": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c4808675aa3a35b72106282604c896c71c65ff7f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

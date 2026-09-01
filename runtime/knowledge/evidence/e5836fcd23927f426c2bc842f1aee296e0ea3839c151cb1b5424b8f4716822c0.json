@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:3478ce6e98dd6c4559efbce9df5f24d21aad7b63864471b3e78a80dfb767692e",
+  "type": "document",
+  "title": "KoreLumina Master Traceability Matrix V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728613,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V1.md",
+  "checksum": "sha256:47756febf820a13ccec1b01e49fa67457ee26481d832e4727a12f3c4ca7e2f0d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 368,
+    "genesisAdmissionIdentity": "genesis-admission:8a089c581ffa50e5d70aed0ed26bb8cef6f137d4fa490fa1e8c86f111219ff21",
+    "historicalSourceId": "genesis-source:document:derived:ee8bb20d7659f11a19ffe1150360df845d371c7b2134834a4c462ca03b978dce",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Master Traceability Matrix V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/MASTER_TRACEABILITY_MATRIX_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ee8bb20d7659f11a19ffe1150360df845d371c7b2134834a4c462ca03b978dce"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

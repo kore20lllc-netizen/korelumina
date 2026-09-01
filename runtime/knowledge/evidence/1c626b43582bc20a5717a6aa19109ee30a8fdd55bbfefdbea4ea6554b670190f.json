@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:1b92ff8415e9563527bfc42898f7bca2cec98cc74c5eb13019acb5ac0703266a",
+  "type": "commit",
+  "title": "docs(program): transition from reconstruction to autonomous engineering",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227739248,
+  "observedAt": 1782963381000,
+  "contentRef": "git:commit:5f82d839b2c7208653a6ce0905adeee9a8afaf63",
+  "checksum": "sha256:aba64ff75264eb7cd6bdecbe60675b5bad1136f2451d05577f09e4aa936bca44",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 668,
+    "genesisAdmissionIdentity": "genesis-admission:e4f11c4f1acd23cf21d0e96f815a6fce709f3ce4889f88561af8a7d737f0f897",
+    "historicalSourceId": "genesis-source:commit:5f82d839b2c7208653a6ce0905adeee9a8afaf63",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5f82d839b2c7208653a6ce0905adeee9a8afaf63",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5f82d839b2c7208653a6ce0905adeee9a8afaf63",
+      "parentShas": [
+        "d2bb0e044a001c6478e84a817175d682203dab5d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782963381000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782963381000
+      },
+      "subject": "docs(program): transition from reconstruction to autonomous engineering",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationContext.ts",
+        "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationPipeline.ts",
+        "apps/lumina-runtime/src/engineering/automation/Stages/InitializeStage.ts",
+        "docs/archive/reconstruction-log.md",
+        "docs/programs/autonomous-engineering/README.md",
+        "docs/programs/autonomous-engineering/roadmap.md"
+      ],
+      "changedPathsByParent": {
+        "d2bb0e044a001c6478e84a817175d682203dab5d": [
+          "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationContext.ts",
+          "apps/lumina-runtime/src/engineering/automation/EngineeringAutomationPipeline.ts",
+          "apps/lumina-runtime/src/engineering/automation/Stages/InitializeStage.ts",
+          "docs/archive/reconstruction-log.md",
+          "docs/programs/autonomous-engineering/README.md",
+          "docs/programs/autonomous-engineering/roadmap.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/autonomous-program-start"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5f82d839b2c7208653a6ce0905adeee9a8afaf63"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

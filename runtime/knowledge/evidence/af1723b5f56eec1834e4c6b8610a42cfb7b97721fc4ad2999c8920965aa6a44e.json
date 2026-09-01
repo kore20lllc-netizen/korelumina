@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:371fc2bf07b4d3c8379b4101c57583a0e446a771a16b7c37d61fd826bc6ffd32",
+  "type": "commit",
+  "title": "feat(platform-sdk): add execution sdk primitives",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738601,
+  "observedAt": 1782903113000,
+  "contentRef": "git:commit:f6a3a5e7f98318db2da972aeea2e3222cd8155f4",
+  "checksum": "sha256:977d7035c9100db592b7a7b33e141b176dd55852bc2a42809138bd1b615d24a5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 651,
+    "genesisAdmissionIdentity": "genesis-admission:e15e0e1066bb0df643b705ce4b4d879b12e6894105b31429aa115e7334e5490c",
+    "historicalSourceId": "genesis-source:commit:f6a3a5e7f98318db2da972aeea2e3222cd8155f4",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f6a3a5e7f98318db2da972aeea2e3222cd8155f4",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f6a3a5e7f98318db2da972aeea2e3222cd8155f4",
+      "parentShas": [
+        "bbc79a99cdf34e1c4ac0d941ee83aa49b3907417"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782903113000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782903113000
+      },
+      "subject": "feat(platform-sdk): add execution sdk primitives",
+      "body": "",
+      "changedPaths": [
+        "docs/engineering/reconstruction-log.md",
+        "packages/platform-sdk/src/execution/ExecutionContext.ts",
+        "packages/platform-sdk/src/execution/ExecutionPipeline.ts",
+        "packages/platform-sdk/src/execution/ExecutionRegistry.ts",
+        "packages/platform-sdk/src/execution/ExecutionResult.ts",
+        "packages/platform-sdk/src/execution/ExecutionStage.ts",
+        "packages/platform-sdk/src/execution/index.ts",
+        "packages/platform-sdk/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "bbc79a99cdf34e1c4ac0d941ee83aa49b3907417": [
+          "docs/engineering/reconstruction-log.md",
+          "packages/platform-sdk/src/execution/ExecutionContext.ts",
+          "packages/platform-sdk/src/execution/ExecutionPipeline.ts",
+          "packages/platform-sdk/src/execution/ExecutionRegistry.ts",
+          "packages/platform-sdk/src/execution/ExecutionResult.ts",
+          "packages/platform-sdk/src/execution/ExecutionStage.ts",
+          "packages/platform-sdk/src/execution/index.ts",
+          "packages/platform-sdk/src/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase057-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f6a3a5e7f98318db2da972aeea2e3222cd8155f4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

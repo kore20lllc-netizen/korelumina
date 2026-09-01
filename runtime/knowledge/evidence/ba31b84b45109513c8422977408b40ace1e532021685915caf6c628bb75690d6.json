@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d29b4831755c6b62854487853e4a046be997d1d2fa01174059893f0f9931e72b",
+  "type": "commit",
+  "title": "feat(admin): replace user delete confirmation with Lumina dialog",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726156,
+  "observedAt": 1781693136000,
+  "contentRef": "git:commit:fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e",
+  "checksum": "sha256:2b79da5c13e07daa34125d976db55f177d10b67787d2d385654ad8235499373f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 294,
+    "genesisAdmissionIdentity": "genesis-admission:7296d2ab5c04f0e08e8886766595d2e7279cc7a07baaebff7db7bb4b803f2be0",
+    "historicalSourceId": "genesis-source:commit:fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e",
+      "parentShas": [
+        "42fea9e5c380f0e9816cc60950feb9d6200cc6e2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693136000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693136000
+      },
+      "subject": "feat(admin): replace user delete confirmation with Lumina dialog",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx",
+        "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "42fea9e5c380f0e9816cc60950feb9d6200cc6e2": [
+          "apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx",
+          "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

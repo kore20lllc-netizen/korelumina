@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:7988b4da17891063311403434881212a4a1f7bc97dc16c59cf3f346c35275775",
+  "type": "document",
+  "title": "KoreLumina Platform Evolution Strategy V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728849,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_EVOLUTION_STRATEGY_V1.md",
+  "checksum": "sha256:cddb98c1a0419267de1c6fc48ee7fb8d00139ab6c51e92ae27366f572133b5fa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 375,
+    "genesisAdmissionIdentity": "genesis-admission:8b8035df20ff57d930ea86bcfa611c3ed1549532574577df8a5730bba0629476",
+    "historicalSourceId": "genesis-source:document:derived:d04b64b961af57c6f6aa97765ea37ac2f5fec54135b12bfe0926a83dd6e7271c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_EVOLUTION_STRATEGY_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Evolution Strategy V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_EVOLUTION_STRATEGY_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d04b64b961af57c6f6aa97765ea37ac2f5fec54135b12bfe0926a83dd6e7271c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

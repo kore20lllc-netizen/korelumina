@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:06f0917a416dc50757298d110bb8f8537d5d523b0bcf3bb56416a660ef62c536",
+  "type": "commit",
+  "title": "fix(runtime): normalize SSE event contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725799,
+  "observedAt": 1781588165000,
+  "contentRef": "git:commit:451d74a5fb162ac9c85622356734977f99f74cd3",
+  "checksum": "sha256:211032645cd5bf587a2bf36d2acbdf8b28f03519eb63d629d2290664b51dce0d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 283,
+    "genesisAdmissionIdentity": "genesis-admission:309cbe5c309f3ea85e73ecae8a79976dbc6487c2c8c3d7d114c6e7cc96101b1b",
+    "historicalSourceId": "genesis-source:commit:451d74a5fb162ac9c85622356734977f99f74cd3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:451d74a5fb162ac9c85622356734977f99f74cd3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "451d74a5fb162ac9c85622356734977f99f74cd3",
+      "parentShas": [
+        "04ac1be306d3f4ad24f5bad1efa99846d0346920"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781588165000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781588165000
+      },
+      "subject": "fix(runtime): normalize SSE event contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/services/runtimeEvents.ts"
+      ],
+      "changedPathsByParent": {
+        "04ac1be306d3f4ad24f5bad1efa99846d0346920": [
+          "apps/lumina-builder/src/services/runtimeEvents.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-sse-contract-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:451d74a5fb162ac9c85622356734977f99f74cd3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

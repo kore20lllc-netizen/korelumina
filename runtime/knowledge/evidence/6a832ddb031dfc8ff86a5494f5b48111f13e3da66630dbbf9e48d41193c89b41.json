@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:18bb7e6ce2d2690d9ef690dae8353aeb7e70e512b7d13ed633cefb4a22e9f6f4",
+  "type": "commit",
+  "title": "refactor(runtime): migrate metadata store to workspace contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729553,
+  "observedAt": 1782470687000,
+  "contentRef": "git:commit:a1239ef7304e989a077dacbe45725887e9fad37e",
+  "checksum": "sha256:ca96bffe13a627622bf3f4762c2ad1b874e515a2f2e625f4971da379470737b9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 396,
+    "genesisAdmissionIdentity": "genesis-admission:3eb459f3b8cce55ac673b98dc820182609b422b8e9e06b7b2d2b349b9b0d09ee",
+    "historicalSourceId": "genesis-source:commit:a1239ef7304e989a077dacbe45725887e9fad37e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a1239ef7304e989a077dacbe45725887e9fad37e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a1239ef7304e989a077dacbe45725887e9fad37e",
+      "parentShas": [
+        "8492690c98e352369ec250cd2954dd09e6c676a5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782470687000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782470687000
+      },
+      "subject": "refactor(runtime): migrate metadata store to workspace contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/projects/projectMetadataStore.ts"
+      ],
+      "changedPathsByParent": {
+        "8492690c98e352369ec250cd2954dd09e6c676a5": [
+          "apps/lumina-runtime/src/projects/projectMetadataStore.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a1239ef7304e989a077dacbe45725887e9fad37e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

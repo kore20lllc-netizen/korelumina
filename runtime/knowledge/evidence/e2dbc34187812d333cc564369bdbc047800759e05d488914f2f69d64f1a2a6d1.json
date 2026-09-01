@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:9ec7878c725c98430c4590faed1bc886d75e332b8559ccb991acbec4b31797d5",
+  "type": "document",
+  "title": "Package",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735838,
+  "observedAt": 1782714867000,
+  "contentRef": "docs/architecture/packages/PACKAGE_TEMPLATE.md",
+  "checksum": "sha256:48b634f849642849db2f5197faaea93c695e73a8eb944868f935991a4fae9c43",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 577,
+    "genesisAdmissionIdentity": "genesis-admission:f4958cbd236fdf57072fa06ac532e885ecb1714e2b136a1cbe0a9b7974ec282f",
+    "historicalSourceId": "genesis-source:document:derived:69aae7544b780e9d87fe44a95446b22c0010844fdead6122d1a8e2ee9e72dd92",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/packages/PACKAGE_TEMPLATE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Package",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/packages/PACKAGE_TEMPLATE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:69aae7544b780e9d87fe44a95446b22c0010844fdead6122d1a8e2ee9e72dd92"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

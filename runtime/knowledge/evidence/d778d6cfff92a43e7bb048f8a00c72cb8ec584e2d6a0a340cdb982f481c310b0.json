@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:639a054a63f9b2b9c26b4d638cbd0beab25c94b3cafbf7688e08311aa59781d2",
+  "type": "commit",
+  "title": "feat(knowledge): add runtime event model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730323,
+  "observedAt": 1782528096000,
+  "contentRef": "git:commit:a51b611b26f0b26e528efa5b17126026e5e97f7e",
+  "checksum": "sha256:7ea1f26de76b05065e93f2bc6620a69dc1472c68a3eb403148ebbeb3161da1a9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 419,
+    "genesisAdmissionIdentity": "genesis-admission:9b38d522c96d0148ba0ce4bd47eccbfc22fa5a46e5eef837b517ae9f44aa9ad2",
+    "historicalSourceId": "genesis-source:commit:a51b611b26f0b26e528efa5b17126026e5e97f7e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a51b611b26f0b26e528efa5b17126026e5e97f7e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a51b611b26f0b26e528efa5b17126026e5e97f7e",
+      "parentShas": [
+        "ca73780c2eed70d00290755109735d5307e243fa"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782528096000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782528096000
+      },
+      "subject": "feat(knowledge): add runtime event model",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/runtime/RuntimeEvent.ts",
+        "apps/lumina-runtime/src/knowledge/runtime/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ca73780c2eed70d00290755109735d5307e243fa": [
+          "apps/lumina-runtime/src/knowledge/runtime/RuntimeEvent.ts",
+          "apps/lumina-runtime/src/knowledge/runtime/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a51b611b26f0b26e528efa5b17126026e5e97f7e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

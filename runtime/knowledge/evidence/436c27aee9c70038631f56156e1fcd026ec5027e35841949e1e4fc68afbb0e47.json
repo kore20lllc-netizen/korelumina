@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:60ba23e5fa8a67da115b2f66bc2addb07067eddb2cedf55a74fd4df7995092df",
+  "type": "commit",
+  "title": "feat(platform-sdk): add knowledge event bus",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227738183,
+  "observedAt": 1782886422000,
+  "contentRef": "git:commit:8a1afea562918c8e691c69c04d400841d67097a3",
+  "checksum": "sha256:dc4db436fe5df1403253994925564e21a088a5794622c0a6dcbb899918c131df",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 640,
+    "genesisAdmissionIdentity": "genesis-admission:28bde5bc330e8f7775c01f1b36f3473bbffea4757d6139d581b36dd64fb1b00a",
+    "historicalSourceId": "genesis-source:commit:8a1afea562918c8e691c69c04d400841d67097a3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8a1afea562918c8e691c69c04d400841d67097a3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8a1afea562918c8e691c69c04d400841d67097a3",
+      "parentShas": [
+        "ec2f2ff2a61927b5f0c8cfe91c27731d9975563a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782886422000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782886422000
+      },
+      "subject": "feat(platform-sdk): add knowledge event bus",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/knowledge/KnowledgeEvent.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgeEventBus.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgeSubscriber.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgeSubscriberRegistry.ts",
+        "packages/platform-sdk/src/knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ec2f2ff2a61927b5f0c8cfe91c27731d9975563a": [
+          "packages/platform-sdk/src/knowledge/KnowledgeEvent.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgeEventBus.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgePipeline.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgeSubscriber.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgeSubscriberRegistry.ts",
+          "packages/platform-sdk/src/knowledge/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase047-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8a1afea562918c8e691c69c04d400841d67097a3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:b866d762b85cdcce78f710227c84c78fe7cf02cb0dea23598ba5c62f2610049e",
+  "type": "commit",
+  "title": "refactor(entitlements): remove local project quota source",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727314,
+  "observedAt": 1782243001000,
+  "contentRef": "git:commit:48801fcfb991c608ee39cc2d553bce69d2ce3ddb",
+  "checksum": "sha256:3cba08607397feeccd87e1bff61bb117bce6c07a6f82c35a6245e4771d19e0d4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 329,
+    "genesisAdmissionIdentity": "genesis-admission:d302bceac0d1934c70bde04324c0c61e143ae7da492095083164e7a75a103566",
+    "historicalSourceId": "genesis-source:commit:48801fcfb991c608ee39cc2d553bce69d2ce3ddb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:48801fcfb991c608ee39cc2d553bce69d2ce3ddb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "48801fcfb991c608ee39cc2d553bce69d2ce3ddb",
+      "parentShas": [
+        "a38603837a8f1e8b88db9ebc4e6923468837fc65"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782243001000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782243001000
+      },
+      "subject": "refactor(entitlements): remove local project quota source",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/services/workspaceEntitlements.ts"
+      ],
+      "changedPathsByParent": {
+        "a38603837a8f1e8b88db9ebc4e6923468837fc65": [
+          "apps/lumina-builder/src/services/workspaceEntitlements.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:48801fcfb991c608ee39cc2d553bce69d2ce3ddb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

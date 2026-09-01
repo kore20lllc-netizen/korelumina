@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:24f4ff3dcb702bfda467929657fcca51e4ef25d2ba9e99bc21da7cefeefe930a",
+  "type": "commit",
+  "title": "feat(knowledge): add documentation extraction contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741206,
+  "observedAt": 1783046970000,
+  "contentRef": "git:commit:e8dd25652775133ef28ff21afeafa79bc3a76f13",
+  "checksum": "sha256:134ba59d39cd0a19030879e5f1c019174a3cc0a7aeb0b1a8af2350af0e13508d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 718,
+    "genesisAdmissionIdentity": "genesis-admission:e4fe1fd392241fdc36cf115666828bf49549f0868813dc85b501d3405a39b5bb",
+    "historicalSourceId": "genesis-source:commit:e8dd25652775133ef28ff21afeafa79bc3a76f13",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e8dd25652775133ef28ff21afeafa79bc3a76f13",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e8dd25652775133ef28ff21afeafa79bc3a76f13",
+      "parentShas": [
+        "3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783046970000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783046970000
+      },
+      "subject": "feat(knowledge): add documentation extraction contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/extractors/DocumentationKnowledgeExtractor.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/extractors/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530": [
+          "apps/lumina-runtime/src/knowledge-preservation/extractors/DocumentationKnowledgeExtractor.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/extractors/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-009-documentation-extraction-contract-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e8dd25652775133ef28ff21afeafa79bc3a76f13"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

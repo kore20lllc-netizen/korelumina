@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:86c04246c25c2a38a21296e38b2ac0707dd51f7e1c404659a346a658fee895e7",
+  "type": "document",
+  "title": "Repository Intelligence Platform Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729096,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/REPOSITORY_INTELLIGENCE_PLATFORM_SPECIFICATION_V1.md",
+  "checksum": "sha256:2071698a54ab4888ec6f7eb46e8b4bc79dae532ed8a0d6af9fa8e94b087d8bce",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 382,
+    "genesisAdmissionIdentity": "genesis-admission:065687374660fff768e4352c742c7ff5b02e0273f1313481c1b08eeeedc0dbb7",
+    "historicalSourceId": "genesis-source:document:derived:7f0b888decab9da680972ebda4d2b33a51d1aff5909c10bb07b1e9d5a4b18c27",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Repository Intelligence Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/REPOSITORY_INTELLIGENCE_PLATFORM_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Repository Intelligence Platform Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/REPOSITORY_INTELLIGENCE_PLATFORM_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:7f0b888decab9da680972ebda4d2b33a51d1aff5909c10bb07b1e9d5a4b18c27"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

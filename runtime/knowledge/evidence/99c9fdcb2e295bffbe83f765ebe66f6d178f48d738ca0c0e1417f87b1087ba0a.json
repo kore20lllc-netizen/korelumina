@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:93f090f665fa4675d10e67d8672335ad5668ddb009cf6dd94a9f70f0be03c58f",
+  "type": "document",
+  "title": "KP ARCHITECTURAL RECONCILIATION",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731340,
+  "observedAt": 1782546301000,
+  "contentRef": "docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md",
+  "checksum": "sha256:db3da0c516ca93a30ccc79531529ead87686fbc9082ff446c98c377b1218ccfb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 449,
+    "genesisAdmissionIdentity": "genesis-admission:750ba85fd32bb10be5b8704c2d43aed4dfc00452ed0939b1ae0edde6fb736d7c",
+    "historicalSourceId": "genesis-source:document:derived:ea184f797df304f8d2352746d52ff63e7a236df6af155f30077dacef800bdf88",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KP ARCHITECTURAL RECONCILIATION",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KP_ARCHITECTURAL_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ea184f797df304f8d2352746d52ff63e7a236df6af155f30077dacef800bdf88"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

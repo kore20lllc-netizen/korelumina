@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5f602d68c21e4b588c20a49c337ed7a93cb8d792fbb37d48e581a01a3e764866",
+  "type": "commit",
+  "title": "docs(architecture): add execution governance specification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734929,
+  "observedAt": 1782692589000,
+  "contentRef": "git:commit:8fd6a962865b65daa48f2d4d177b6bd87bb49faf",
+  "checksum": "sha256:5c4f8b0c5aeb3b4e7a104be663d30b6acb7f4d6e42163d8e7395fc9d5a57a490",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 552,
+    "genesisAdmissionIdentity": "genesis-admission:de60b2b803b9e6588d4a258aa3c6ce635b0762bff138d274b82e55e7deac14d3",
+    "historicalSourceId": "genesis-source:commit:8fd6a962865b65daa48f2d4d177b6bd87bb49faf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8fd6a962865b65daa48f2d4d177b6bd87bb49faf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8fd6a962865b65daa48f2d4d177b6bd87bb49faf",
+      "parentShas": [
+        "351d2d90c9945bf20352a67d55c97d037eed1919"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782692589000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782692589000
+      },
+      "subject": "docs(architecture): add execution governance specification",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md"
+      ],
+      "changedPathsByParent": {
+        "351d2d90c9945bf20352a67d55c97d037eed1919": [
+          "docs/architecture/KORELUMINA_EXECUTION_GOVERNANCE_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8fd6a962865b65daa48f2d4d177b6bd87bb49faf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

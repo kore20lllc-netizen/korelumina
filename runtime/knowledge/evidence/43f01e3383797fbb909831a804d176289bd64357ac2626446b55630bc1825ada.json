@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:e7634c8c89e2f26b9461266af77e9370a31c4b4fc0cf9d23ea5f5ff43a53ddc1",
+  "type": "commit",
+  "title": "feat(platform-sdk): complete filesystem safety extraction",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736238,
+  "observedAt": 1782748948000,
+  "contentRef": "git:commit:719e9a69dd032d62e4fe899cd8dcbf9e9f7782a3",
+  "checksum": "sha256:d233b0bb5b51ce2a3e5f5c407e80fb48e9e17b1b36390ecf1f075ddb7bc9beba",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 588,
+    "genesisAdmissionIdentity": "genesis-admission:65e45a0f69a381eed3b59bf0112918515f18af97474170801903c073a15dd7c9",
+    "historicalSourceId": "genesis-source:commit:719e9a69dd032d62e4fe899cd8dcbf9e9f7782a3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:719e9a69dd032d62e4fe899cd8dcbf9e9f7782a3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "719e9a69dd032d62e4fe899cd8dcbf9e9f7782a3",
+      "parentShas": [
+        "5e090a6a7a261e81fc5c0bb33c8ac1037a417824"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782748948000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782748948000
+      },
+      "subject": "feat(platform-sdk): complete filesystem safety extraction",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/projects/workspacePaths.ts"
+      ],
+      "changedPathsByParent": {
+        "5e090a6a7a261e81fc5c0bb33c8ac1037a417824": [
+          "apps/lumina-runtime/src/projects/workspacePaths.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:719e9a69dd032d62e4fe899cd8dcbf9e9f7782a3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

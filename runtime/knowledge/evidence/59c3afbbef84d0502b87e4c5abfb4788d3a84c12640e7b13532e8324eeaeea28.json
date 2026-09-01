@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:2fdc1b548ceaae639d95babb8fa8bdfcf333bf57e0f9c107574176591932e0c4",
+  "type": "document",
+  "title": "KP-013 Engineer Agent Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733971,
+  "observedAt": 1782644986000,
+  "contentRef": "docs/architecture/reconciliation/KP-013_ENGINEER_AGENT_RECONCILIATION.md",
+  "checksum": "sha256:186870cfe5663db665a1355e32ebaf33b4640880ca16a072847154a1f079e3f1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 525,
+    "genesisAdmissionIdentity": "genesis-admission:dcea59e8fa6e5a79d7942eac597af72d239a2b6a883596f5f6d30fddf6dc387e",
+    "historicalSourceId": "genesis-source:document:derived:861e3ff044c5d83b9715e98abc49bb7c8438ab9c83559e43c22706db03362163",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "KP-013 Engineer Agent is complete and architecture frozen",
+    "sourceLocation": "docs/architecture/reconciliation/KP-013_ENGINEER_AGENT_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KP-013 Engineer Agent Reconciliation",
+      "status": "KP-013 Engineer Agent is complete and architecture frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconciliation/KP-013_ENGINEER_AGENT_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:861e3ff044c5d83b9715e98abc49bb7c8438ab9c83559e43c22706db03362163"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

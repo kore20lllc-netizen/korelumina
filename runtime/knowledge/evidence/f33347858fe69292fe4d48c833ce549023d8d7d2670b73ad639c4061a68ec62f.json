@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:a018d9734c5a7e4bce122df278143551cfaf2d650cd0451c785f6f338c4752b0",
+  "type": "document",
+  "title": "Platform SDK Roadmap",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736507,
+  "observedAt": 1782787346000,
+  "contentRef": "docs/architecture/PLATFORM_SDK_ROADMAP.md",
+  "checksum": "sha256:54293dfdaddcfe1e66aef3a046f1cee85ac2eae1eb18979071573dc247bfc001",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 595,
+    "genesisAdmissionIdentity": "genesis-admission:747ac88efc2cc20f04e902e4c529ceb07f9c2a7f9ad85035797f58a82377a9dd",
+    "historicalSourceId": "genesis-source:document:derived:79b7e938054258283c094e3d04dc88066a64601e9c822a4aa7d2ede468407ef4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture",
+    "sourceLocation": "docs/architecture/PLATFORM_SDK_ROADMAP.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Platform SDK Roadmap",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_SDK_ROADMAP.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:79b7e938054258283c094e3d04dc88066a64601e9c822a4aa7d2ede468407ef4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

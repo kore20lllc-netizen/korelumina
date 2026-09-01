@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:f93ea7bce4531ea3bcc214500a52837b3a0af9ae36df308c5710b865e1f965e6",
+  "type": "document",
+  "title": "ARCH-005 — Platform Ownership Principle",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736129,
+  "observedAt": 1782719266000,
+  "contentRef": "docs/architecture/principles/ARCH_005_PLATFORM_OWNERSHIP_PRINCIPLE.md",
+  "checksum": "sha256:3d2ff317e010d261325c1a7fa79444f1d624b97ae3054b291e89b3685cf019c3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 585,
+    "genesisAdmissionIdentity": "genesis-admission:5fd44ab6f0e6c3442f02efc3b4bf222d2f0f69ae0c43fcc0ee636c08783a85c7",
+    "historicalSourceId": "genesis-source:document:derived:29e3545e066ac784f609a6196e28f543a6f454e33dfa8284affc0f6709ff504c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture",
+    "sourceLocation": "docs/architecture/principles/ARCH_005_PLATFORM_OWNERSHIP_PRINCIPLE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ARCH-005 — Platform Ownership Principle",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/principles/ARCH_005_PLATFORM_OWNERSHIP_PRINCIPLE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:29e3545e066ac784f609a6196e28f543a6f454e33dfa8284affc0f6709ff504c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

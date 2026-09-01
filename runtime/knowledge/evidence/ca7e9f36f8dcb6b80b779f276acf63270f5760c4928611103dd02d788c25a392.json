@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b889c5556310b44e3093c5b236f1a89de291a5efeb063f796f4b85545294db8f",
+  "type": "commit",
+  "title": "docs(adr): establish architectural decision record framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731973,
+  "observedAt": 1782554475000,
+  "contentRef": "git:commit:37d3408870f49bfc5381d30e6ab288202599573b",
+  "checksum": "sha256:cbd7e4bba03f6bb294d79b0af6bf8737a488189b9ee63b3967bc3bcd4dacdc63",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 468,
+    "genesisAdmissionIdentity": "genesis-admission:3ce554d6c6a295c9e0b789e3d83a8577a18a7bd6b6b48254b7f1d959ba2f58e3",
+    "historicalSourceId": "genesis-source:commit:37d3408870f49bfc5381d30e6ab288202599573b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:37d3408870f49bfc5381d30e6ab288202599573b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "37d3408870f49bfc5381d30e6ab288202599573b",
+      "parentShas": [
+        "57cab5b445e60ae8fb7ead416f97ac3855c0802a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782554475000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782554475000
+      },
+      "subject": "docs(adr): establish architectural decision record framework",
+      "body": "",
+      "changedPaths": [
+        "docs/adr/ADR-0001-DOMAIN_BOUNDARIES.md",
+        "docs/adr/ADR_TEMPLATE.md",
+        "docs/adr/README.md"
+      ],
+      "changedPathsByParent": {
+        "57cab5b445e60ae8fb7ead416f97ac3855c0802a": [
+          "docs/adr/ADR-0001-DOMAIN_BOUNDARIES.md",
+          "docs/adr/ADR_TEMPLATE.md",
+          "docs/adr/README.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:37d3408870f49bfc5381d30e6ab288202599573b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

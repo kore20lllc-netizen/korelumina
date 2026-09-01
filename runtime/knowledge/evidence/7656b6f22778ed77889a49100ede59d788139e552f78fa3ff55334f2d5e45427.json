@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:7b9eddf429f5eacc022eb6d51a9f309a78d2cdfd90529e011fcba12c3b1b7069",
+  "type": "document",
+  "title": "KoreLumina Platform Glossary V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728916,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_GLOSSARY_V1.md",
+  "checksum": "sha256:4b7ee492dee1c2b30cf5a87c96f17ad9d8281668ed3bca37b561e137c2e40bde",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 377,
+    "genesisAdmissionIdentity": "genesis-admission:f7dd4a6218f111b2c8cd9da569900a52c272ffe8228863a63e78101b61ce10c6",
+    "historicalSourceId": "genesis-source:document:derived:8c7bdbb30ad9723b55d61a9a9ca223acc5808ed34a02a537ecd133df71a66300",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_GLOSSARY_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Glossary V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_GLOSSARY_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:8c7bdbb30ad9723b55d61a9a9ca223acc5808ed34a02a537ecd133df71a66300"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

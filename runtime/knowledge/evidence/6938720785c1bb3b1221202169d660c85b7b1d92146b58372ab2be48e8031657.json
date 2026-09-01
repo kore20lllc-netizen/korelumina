@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:40aae13316c504fcf90ff9bd65ea15045aec957e32f545e13307006c38fe42e2",
+  "type": "document",
+  "title": "KoreLumina Architecture Risk Register V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727978,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_RISK_REGISTER_V1.md",
+  "checksum": "sha256:7e04bb089c677e604e49830811bb5e428905266a9c0c37969fa24b66c5260de2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 349,
+    "genesisAdmissionIdentity": "genesis-admission:777fbe5ac8dc7168bdea9f319d51c44e146a15037c4452f774fe781438d2d277",
+    "historicalSourceId": "genesis-source:document:derived:a46f9d1451fe59f00f2b77ec6f7abde7f1b7e4d7df2a626fd010dca88eb83876",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_RISK_REGISTER_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Risk Register V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_RISK_REGISTER_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a46f9d1451fe59f00f2b77ec6f7abde7f1b7e4d7df2a626fd010dca88eb83876"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

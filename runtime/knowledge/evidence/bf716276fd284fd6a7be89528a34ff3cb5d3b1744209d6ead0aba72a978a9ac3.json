@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:e55604477006d6301da96dad81b0916a39d67abeca2073adb110f09b1501625a",
+  "type": "commit",
+  "title": "feat(platform-sdk): add shared filesystem utilities",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736806,
+  "observedAt": 1782795687000,
+  "contentRef": "git:commit:32c7a3dc44c02e3357452ada3573caed4ee2e3d6",
+  "checksum": "sha256:d345c4c1e8db9014e5adb971a62898ca36ce45b8cca12866cea6e0ddb2db959f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 603,
+    "genesisAdmissionIdentity": "genesis-admission:815b2417690f29cb95c5fdbb56c42b8de845f5a24d8880c201f3bbb50e7d5636",
+    "historicalSourceId": "genesis-source:commit:32c7a3dc44c02e3357452ada3573caed4ee2e3d6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:32c7a3dc44c02e3357452ada3573caed4ee2e3d6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "32c7a3dc44c02e3357452ada3573caed4ee2e3d6",
+      "parentShas": [
+        "be19072d27be978594f97a7cb902a1c7576ff22d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782795687000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782795687000
+      },
+      "subject": "feat(platform-sdk): add shared filesystem utilities",
+      "body": "",
+      "changedPaths": [
+        "packages/platform-sdk/src/filesystem/AtomicWriter.ts",
+        "packages/platform-sdk/src/filesystem/FileSystem.ts",
+        "packages/platform-sdk/src/filesystem/PathUtils.ts"
+      ],
+      "changedPathsByParent": {
+        "be19072d27be978594f97a7cb902a1c7576ff22d": [
+          "packages/platform-sdk/src/filesystem/AtomicWriter.ts",
+          "packages/platform-sdk/src/filesystem/FileSystem.ts",
+          "packages/platform-sdk/src/filesystem/PathUtils.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:32c7a3dc44c02e3357452ada3573caed4ee2e3d6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

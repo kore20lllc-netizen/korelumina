@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:3f0fa4eb8ccf590f55bfb2acf5b7a9bea0afbab0097180ac4f617f8a7eea3071",
+  "type": "commit",
+  "title": "feat(planning): add reasoning integration adapter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733658,
+  "observedAt": 1782644246000,
+  "contentRef": "git:commit:968639b4bf12b8a2644561bf380121340573949f",
+  "checksum": "sha256:9858854351104e7fa90f842b5ca2481863c5bfe1d4f5b185e1f10d79af8c20f2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 516,
+    "genesisAdmissionIdentity": "genesis-admission:b44478fe7117f99d5f6a1f3dde9158339a2abef2421a1922117e61baf554a233",
+    "historicalSourceId": "genesis-source:commit:968639b4bf12b8a2644561bf380121340573949f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:968639b4bf12b8a2644561bf380121340573949f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "968639b4bf12b8a2644561bf380121340573949f",
+      "parentShas": [
+        "f1d526e4436e4d95203213b17d6ea11869721ba6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644246000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782644246000
+      },
+      "subject": "feat(planning): add reasoning integration adapter",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/planning/PlanningReasoningAdapter.ts",
+        "apps/lumina-runtime/src/knowledge/planning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f1d526e4436e4d95203213b17d6ea11869721ba6": [
+          "apps/lumina-runtime/src/knowledge/planning/PlanningReasoningAdapter.ts",
+          "apps/lumina-runtime/src/knowledge/planning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:968639b4bf12b8a2644561bf380121340573949f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

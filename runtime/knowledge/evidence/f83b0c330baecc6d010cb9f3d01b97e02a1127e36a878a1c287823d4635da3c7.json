@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:359bfdcad8d97ef85d5d80c5c311b19e656c0b0f82b27465796f0b058af028f7",
+  "type": "commit",
+  "title": "docs(reconstruction): add milestone completion gate",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736092,
+  "observedAt": 1782719024000,
+  "contentRef": "git:commit:03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70",
+  "checksum": "sha256:d88c9e0e313052f37642fcaf73ea06f2405e53901f600946adaf203ac23ea08f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 584,
+    "genesisAdmissionIdentity": "genesis-admission:10ee4cafd24158783585256bbc1ecde6684957d71b8438246b239a1513ba8796",
+    "historicalSourceId": "genesis-source:commit:03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70",
+      "parentShas": [
+        "dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782719024000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782719024000
+      },
+      "subject": "docs(reconstruction): add milestone completion gate",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconstruction/MILESTONE_COMPLETION_GATE.md"
+      ],
+      "changedPathsByParent": {
+        "dd3d6f2a3bb2b4d5d8142b8f3976c986ded90c1b": [
+          "docs/architecture/reconstruction/MILESTONE_COMPLETION_GATE.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:03fb8c1f5ae7aea119ba5eb22588303a6f6cfa70"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

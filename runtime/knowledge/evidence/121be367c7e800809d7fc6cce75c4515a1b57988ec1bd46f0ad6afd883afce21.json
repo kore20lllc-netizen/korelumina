@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:db2b017f10cbbf0c55dabd39d4dc7fedda4e5b9f972e2f0fe1abd532446164c1",
+  "type": "commit",
+  "title": "feat(knowledge): extract ADR decision knowledge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741166,
+  "observedAt": 1783046430000,
+  "contentRef": "git:commit:3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530",
+  "checksum": "sha256:d2aae3abb05d7a84bf49c916f5dda6d07e39476fcc78e27ad14276984ddeb758",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 717,
+    "genesisAdmissionIdentity": "genesis-admission:deb32846d5ad6ab954afee6fdad1967831cef4f9ebe41f90d1edc82a88386342",
+    "historicalSourceId": "genesis-source:commit:3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530",
+      "parentShas": [
+        "982db5280d4a20cd2637ca027328e003ebfd550a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783046430000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783046430000
+      },
+      "subject": "feat(knowledge): extract ADR decision knowledge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts"
+      ],
+      "changedPathsByParent": {
+        "982db5280d4a20cd2637ca027328e003ebfd550a": [
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/adr/ADRCompiler.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kr-008-adr-knowledge-extraction-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3f0dead8e6dfc6f7da6eb2bc7d718f128e51c530"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

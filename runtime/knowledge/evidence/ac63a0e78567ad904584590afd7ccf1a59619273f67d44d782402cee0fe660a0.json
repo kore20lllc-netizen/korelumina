@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:4a12528a7fb4e4abfb8159476ac1064e357624419fa76d45a0f4c196f45e1dc3",
+  "type": "document",
+  "title": "Engineering Platform Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728279,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ENGINEERING_PLATFORM_SPECIFICATION_V1.md",
+  "checksum": "sha256:3222ed01da655bcb74764ee22bb7e36994a2251bef022a3e430516e95715e310",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 358,
+    "genesisAdmissionIdentity": "genesis-admission:66cfd17654cde0591d4a66252759ad8532dcf2353c72f45c26a400c31799a301",
+    "historicalSourceId": "genesis-source:document:derived:62cc9205c9e2eaac6b5f4394a670681b6309997b27764668170a7f1b9e5de374",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Engineering Platform Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ENGINEERING_PLATFORM_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Engineering Platform Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ENGINEERING_PLATFORM_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:62cc9205c9e2eaac6b5f4394a670681b6309997b27764668170a7f1b9e5de374"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

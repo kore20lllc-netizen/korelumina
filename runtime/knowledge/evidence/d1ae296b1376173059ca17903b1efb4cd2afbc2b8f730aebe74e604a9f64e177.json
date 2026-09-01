@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:4b927c9c754bc1d007213c1d5cba36ccc00a8e4dae375e9d4a0f17b5c9ab499e",
+  "type": "commit",
+  "title": "audit: classify current production architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725481,
+  "observedAt": 1781480347000,
+  "contentRef": "git:commit:1035fb60beb2eefdfeb9e7ab43a9da76c75d9a48",
+  "checksum": "sha256:fb9afb3462fdf21c9fb969dd0b3737336f8e3d40b707064102321ab875d42251",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 273,
+    "genesisAdmissionIdentity": "genesis-admission:4145140916e93df772e679e42f514cc60ca8edf8b4744b786719f94891fa4233",
+    "historicalSourceId": "genesis-source:commit:1035fb60beb2eefdfeb9e7ab43a9da76c75d9a48",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1035fb60beb2eefdfeb9e7ab43a9da76c75d9a48",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1035fb60beb2eefdfeb9e7ab43a9da76c75d9a48",
+      "parentShas": [
+        "7b2ba87989c4cb2e2fb4422969a35fd20b9c58e9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781480347000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781480347000
+      },
+      "subject": "audit: classify current production architecture",
+      "body": "",
+      "changedPaths": [
+        "audit/README.md",
+        "audit/all-files.txt",
+        "audit/all-source-files.txt",
+        "audit/app-files.txt",
+        "audit/apps-files.txt",
+        "audit/architecture-classification.md",
+        "audit/archive-files.txt",
+        "audit/lumina-builder-files.txt",
+        "audit/lumina-runtime-files.txt",
+        "audit/runtime-core-files.txt",
+        "audit/runtime-files.txt",
+        "audit/scripts-files.txt"
+      ],
+      "changedPathsByParent": {
+        "7b2ba87989c4cb2e2fb4422969a35fd20b9c58e9": [
+          "audit/README.md",
+          "audit/all-files.txt",
+          "audit/all-source-files.txt",
+          "audit/app-files.txt",
+          "audit/apps-files.txt",
+          "audit/architecture-classification.md",
+          "audit/archive-files.txt",
+          "audit/lumina-builder-files.txt",
+          "audit/lumina-runtime-files.txt",
+          "audit/runtime-core-files.txt",
+          "audit/runtime-files.txt",
+          "audit/scripts-files.txt"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/architecture-audit-baseline-20260614"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1035fb60beb2eefdfeb9e7ab43a9da76c75d9a48"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

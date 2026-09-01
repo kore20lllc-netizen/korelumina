@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:b087259d48901f03fb8ca65118ac63f5ef155838ff6ab4d5e482cb3b4b977466",
+  "type": "commit",
+  "title": "refactor(platform-sdk): extract shared knowledge paths",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737657,
+  "observedAt": 1782870736000,
+  "contentRef": "git:commit:509397192bc577ad9f27c16e070a7de8eac0b8c0",
+  "checksum": "sha256:58456f7e8719552c92f485d77c7ba1fb11cb3c968f392f03ce9388c405cb517e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 626,
+    "genesisAdmissionIdentity": "genesis-admission:d0af66da2940b510d3eb09e8274c4d66fe7fe9945c0cccc81a9bec4127060a96",
+    "historicalSourceId": "genesis-source:commit:509397192bc577ad9f27c16e070a7de8eac0b8c0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:509397192bc577ad9f27c16e070a7de8eac0b8c0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "509397192bc577ad9f27c16e070a7de8eac0b8c0",
+      "parentShas": [
+        "ef140bba858e4e5bb648af1a665e8e86929b48ae"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782870736000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782870736000
+      },
+      "subject": "refactor(platform-sdk): extract shared knowledge paths",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/runtime-locks/kore20lllc-netizen-premium-ride-app.lock",
+        "apps/lumina-runtime/src/projects/knowledgePaths.ts",
+        "docs/engineering/reconstruction-log.md",
+        "packages/platform-sdk/src/paths/KnowledgePaths.ts",
+        "packages/platform-sdk/src/paths/index.ts",
+        "runtime/knowledge/runtime/3beaed1c-3858-416e-8c9f-9f11776d536c.json"
+      ],
+      "changedPathsByParent": {
+        "ef140bba858e4e5bb648af1a665e8e86929b48ae": [
+          "apps/lumina-runtime/runtime-locks/kore20lllc-netizen-premium-ride-app.lock",
+          "apps/lumina-runtime/src/projects/knowledgePaths.ts",
+          "docs/engineering/reconstruction-log.md",
+          "packages/platform-sdk/src/paths/KnowledgePaths.ts",
+          "packages/platform-sdk/src/paths/index.ts",
+          "runtime/knowledge/runtime/3beaed1c-3858-416e-8c9f-9f11776d536c.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:509397192bc577ad9f27c16e070a7de8eac0b8c0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

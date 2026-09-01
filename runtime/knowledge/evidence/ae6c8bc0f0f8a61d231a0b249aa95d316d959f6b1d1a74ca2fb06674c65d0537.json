@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:57b62e8860424d74f0b417d97301e8f470532f9009491e9c913b23760485bc91",
+  "type": "document",
+  "title": "KoreLumina Repository Knowledge Seeding Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735191,
+  "observedAt": 1782710620000,
+  "contentRef": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+  "checksum": "sha256:3f8cb44dad1ed6e1b65f30ab3d9020e7d19b4706fc906b43a613136dddf270cf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 559,
+    "genesisAdmissionIdentity": "genesis-admission:053b4d35e54c2b22acb20f6665d51df72439b11e047908280811408ba3c85ac9",
+    "historicalSourceId": "genesis-source:document:derived:77fdc740524908dab6704fd01631b6f593c682eb796f3df3abe214f2511f819d",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Constitutional",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Repository Knowledge Seeding Specification V1",
+      "status": "Constitutional",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_REPOSITORY_KNOWLEDGE_SEEDING_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:77fdc740524908dab6704fd01631b6f593c682eb796f3df3abe214f2511f819d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

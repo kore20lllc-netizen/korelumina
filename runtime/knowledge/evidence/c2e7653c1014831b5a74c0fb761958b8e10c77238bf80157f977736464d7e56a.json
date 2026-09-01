@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:7e1c13cd78d457f6e1410d8cdd2de907a20f971ae8d3a701201fe090f107635d",
+  "type": "commit",
+  "title": "feat(knowledge): implement Knowledge Platform core contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735148,
+  "observedAt": 1782708688000,
+  "contentRef": "git:commit:802b799945a53be7733873fbd326135f1a6f7295",
+  "checksum": "sha256:061f9915ed9dcaad0af53049c639f5d244d451cc14f87da77b7d20b07c60f82b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 558,
+    "genesisAdmissionIdentity": "genesis-admission:52c24a8977e7b4d32f70fed4be7739c54dbe91b89fdd154009970585b31a64cc",
+    "historicalSourceId": "genesis-source:commit:802b799945a53be7733873fbd326135f1a6f7295",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:802b799945a53be7733873fbd326135f1a6f7295",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "802b799945a53be7733873fbd326135f1a6f7295",
+      "parentShas": [
+        "99dfddf8f7222606fe0b54504b60a7039b43897d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782708688000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782708688000
+      },
+      "subject": "feat(knowledge): implement Knowledge Platform core contracts",
+      "body": "",
+      "changedPaths": [
+        "packages/knowledge-platform/src/graph/KnowledgeGraph.ts",
+        "packages/knowledge-platform/src/index.ts",
+        "packages/knowledge-platform/src/ingestion/KnowledgeSeeder.ts",
+        "packages/knowledge-platform/src/ingestion/KnowledgeSource.ts",
+        "packages/knowledge-platform/src/normalization/KnowledgeNormalizer.ts",
+        "packages/knowledge-platform/src/sources/ArchitectureSource.ts",
+        "packages/knowledge-platform/src/sources/GitHistorySource.ts",
+        "packages/knowledge-platform/src/sources/HistoricalDocsSource.ts",
+        "packages/knowledge-platform/src/sources/LandingContractSource.ts",
+        "packages/knowledge-platform/src/sources/SourceCodeSource.ts",
+        "packages/knowledge-platform/src/store/KnowledgeStore.ts",
+        "packages/knowledge-platform/src/types/KnowledgeTypes.ts",
+        "packages/knowledge-platform/tsconfig.json"
+      ],
+      "changedPathsByParent": {
+        "99dfddf8f7222606fe0b54504b60a7039b43897d": [
+          "packages/knowledge-platform/src/graph/KnowledgeGraph.ts",
+          "packages/knowledge-platform/src/index.ts",
+          "packages/knowledge-platform/src/ingestion/KnowledgeSeeder.ts",
+          "packages/knowledge-platform/src/ingestion/KnowledgeSource.ts",
+          "packages/knowledge-platform/src/normalization/KnowledgeNormalizer.ts",
+          "packages/knowledge-platform/src/sources/ArchitectureSource.ts",
+          "packages/knowledge-platform/src/sources/GitHistorySource.ts",
+          "packages/knowledge-platform/src/sources/HistoricalDocsSource.ts",
+          "packages/knowledge-platform/src/sources/LandingContractSource.ts",
+          "packages/knowledge-platform/src/sources/SourceCodeSource.ts",
+          "packages/knowledge-platform/src/store/KnowledgeStore.ts",
+          "packages/knowledge-platform/src/types/KnowledgeTypes.ts",
+          "packages/knowledge-platform/tsconfig.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:802b799945a53be7733873fbd326135f1a6f7295"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

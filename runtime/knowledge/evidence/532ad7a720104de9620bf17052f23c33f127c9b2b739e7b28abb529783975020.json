@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:9b787316a439fb1de7b9443ba6469578c127a63fe40517370edafab97869ca48",
+  "type": "commit",
+  "title": "feat(planning): add planning domain contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733548,
+  "observedAt": 1782642377000,
+  "contentRef": "git:commit:626a9736be563062b41441d3082ba93bdc512f3e",
+  "checksum": "sha256:705ea2e30613419bc7e154c55173a3599a514e32b65def3c4a1a5d1ce3adeb4a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 513,
+    "genesisAdmissionIdentity": "genesis-admission:3677aab15ffd991d1ed13fd74d66f3d201b9af9d06a4bde5d202018befa1a98d",
+    "historicalSourceId": "genesis-source:commit:626a9736be563062b41441d3082ba93bdc512f3e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:626a9736be563062b41441d3082ba93bdc512f3e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "626a9736be563062b41441d3082ba93bdc512f3e",
+      "parentShas": [
+        "ed981cb94eea32003995d99d4a9ec32bf33dcb82"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782642377000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782642377000
+      },
+      "subject": "feat(planning): add planning domain contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/planning/PlanningInput.ts",
+        "apps/lumina-runtime/src/knowledge/planning/PlanningPlan.ts",
+        "apps/lumina-runtime/src/knowledge/planning/PlanningProvider.ts",
+        "apps/lumina-runtime/src/knowledge/planning/PlanningRequest.ts",
+        "apps/lumina-runtime/src/knowledge/planning/PlanningStep.ts",
+        "apps/lumina-runtime/src/knowledge/planning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ed981cb94eea32003995d99d4a9ec32bf33dcb82": [
+          "apps/lumina-runtime/src/knowledge/planning/PlanningInput.ts",
+          "apps/lumina-runtime/src/knowledge/planning/PlanningPlan.ts",
+          "apps/lumina-runtime/src/knowledge/planning/PlanningProvider.ts",
+          "apps/lumina-runtime/src/knowledge/planning/PlanningRequest.ts",
+          "apps/lumina-runtime/src/knowledge/planning/PlanningStep.ts",
+          "apps/lumina-runtime/src/knowledge/planning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:626a9736be563062b41441d3082ba93bdc512f3e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:31ac9fec19e8e1b44bd2cd111c57bd675c8dc8fb3732be6afd9a9bc6edb37c49",
+  "type": "commit",
+  "title": "refactor(runtime): migrate github importer to workspace contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227729620,
+  "observedAt": 1782502517000,
+  "contentRef": "git:commit:ef9dd89cdca90907b6a28b3c16d8393209bd612c",
+  "checksum": "sha256:2fa59e318844f756d03a2107fcde6f119e056ebcb15903883e35aeb902e46213",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 398,
+    "genesisAdmissionIdentity": "genesis-admission:ec62562a3ead9efc51041924396216428c44bbb34c2fb6a472be28faa6df3bc0",
+    "historicalSourceId": "genesis-source:commit:ef9dd89cdca90907b6a28b3c16d8393209bd612c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ef9dd89cdca90907b6a28b3c16d8393209bd612c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ef9dd89cdca90907b6a28b3c16d8393209bd612c",
+      "parentShas": [
+        "a2ec94a3784f84c597819e1083950ca5ce88ddfe"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782502517000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782502517000
+      },
+      "subject": "refactor(runtime): migrate github importer to workspace contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/import/importGithubProject.ts"
+      ],
+      "changedPathsByParent": {
+        "a2ec94a3784f84c597819e1083950ca5ce88ddfe": [
+          "apps/lumina-runtime/src/import/importGithubProject.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ef9dd89cdca90907b6a28b3c16d8393209bd612c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

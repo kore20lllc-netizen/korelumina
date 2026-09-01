@@ -1,0 +1,117 @@
+{
+  "id": "genesis-evidence:07cf7539ff12d645a77f6aa7fa9c85edf4efee38711bffaeb46211d9e86fe6e7",
+  "type": "commit",
+  "title": "Merge remote-tracking branch 'origin/main' into feature/builder-preview-sync",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227721787,
+  "observedAt": 1775605951000,
+  "contentRef": "git:commit:e88cf5abcbb292d52601abbc49a77e4b685068a3",
+  "checksum": "sha256:7c8b6b28050770d461bdb507aec385e380139a486ceca2b9f3f7bbffc75f9cab",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 157,
+    "genesisAdmissionIdentity": "genesis-admission:eb87112e84ebfd4f913169dfed0fd931814bc34d3a4b56003c218c1173e301ce",
+    "historicalSourceId": "genesis-source:commit:e88cf5abcbb292d52601abbc49a77e4b685068a3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e88cf5abcbb292d52601abbc49a77e4b685068a3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e88cf5abcbb292d52601abbc49a77e4b685068a3",
+      "parentShas": [
+        "ad28271030f140164d797bc540d68c2eaac90cf3",
+        "8f8c0c9dddd5a86b92e2f8b0e3a5a4d4ba0a1aad"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775605951000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1775605951000
+      },
+      "subject": "Merge remote-tracking branch 'origin/main' into feature/builder-preview-sync",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/apply/route.ts",
+        "app/api/ai/orchestrate/route.ts",
+        "app/api/dev/snapshot/create/route.ts",
+        "app/api/dev/snapshot/list/route.ts",
+        "app/api/dev/snapshot/restore/route.ts",
+        "app/builder/BuilderInner.tsx",
+        "app/master-os/page.tsx",
+        "components/master-os/SnapshotPanel.tsx",
+        "runtime/snapshots/repo-test/1775590388268/app/page.tsx",
+        "runtime/snapshots/repo-test/1775590388268/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775590388268/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775590388268/journal.json",
+        "runtime/snapshots/repo-test/1775594045406/app/page.tsx",
+        "runtime/snapshots/repo-test/1775594045406/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775594045406/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775594045406/journal.json",
+        "runtime/snapshots/repo-test/1775595372814/app/page.tsx",
+        "runtime/snapshots/repo-test/1775595372814/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775595372814/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775595372814/journal.json",
+        "runtime/snapshots/repo-test/1775604887134/app/page.tsx",
+        "runtime/snapshots/repo-test/1775604887134/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775604887134/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775604887134/journal.json",
+        "runtime/snapshots/repo-test/1775605645136/app/page.tsx",
+        "runtime/snapshots/repo-test/1775605645136/components/Card.tsx",
+        "runtime/snapshots/repo-test/1775605645136/components/Layout.tsx",
+        "runtime/snapshots/repo-test/1775605645136/journal.json"
+      ],
+      "changedPathsByParent": {
+        "8f8c0c9dddd5a86b92e2f8b0e3a5a4d4ba0a1aad": [
+          "app/api/ai/apply/route.ts",
+          "app/api/ai/orchestrate/route.ts",
+          "app/api/dev/snapshot/create/route.ts",
+          "app/api/dev/snapshot/list/route.ts",
+          "app/api/dev/snapshot/restore/route.ts",
+          "app/builder/BuilderInner.tsx",
+          "app/master-os/page.tsx",
+          "components/master-os/SnapshotPanel.tsx",
+          "runtime/snapshots/repo-test/1775590388268/app/page.tsx",
+          "runtime/snapshots/repo-test/1775590388268/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775590388268/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775590388268/journal.json",
+          "runtime/snapshots/repo-test/1775594045406/app/page.tsx",
+          "runtime/snapshots/repo-test/1775594045406/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775594045406/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775594045406/journal.json",
+          "runtime/snapshots/repo-test/1775595372814/app/page.tsx",
+          "runtime/snapshots/repo-test/1775595372814/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775595372814/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775595372814/journal.json",
+          "runtime/snapshots/repo-test/1775604887134/app/page.tsx",
+          "runtime/snapshots/repo-test/1775604887134/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775604887134/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775604887134/journal.json",
+          "runtime/snapshots/repo-test/1775605645136/app/page.tsx",
+          "runtime/snapshots/repo-test/1775605645136/components/Card.tsx",
+          "runtime/snapshots/repo-test/1775605645136/components/Layout.tsx",
+          "runtime/snapshots/repo-test/1775605645136/journal.json"
+        ],
+        "ad28271030f140164d797bc540d68c2eaac90cf3": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e88cf5abcbb292d52601abbc49a77e4b685068a3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

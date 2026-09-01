@@ -1,0 +1,99 @@
+{
+  "id": "genesis-evidence:344b693c1faccd2275cb68a4f67128dd73537a847b72387327c19dd6a68e4132",
+  "type": "commit",
+  "title": "feat: migrate to workspace-scoped API + stabilize job lifecycle + manifest/status endpoints",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718452,
+  "observedAt": 1771364835000,
+  "contentRef": "git:commit:9fb416845b3e1bb9dd46faff3aaddf5a50ea5041",
+  "checksum": "sha256:2d3ec856d99ec4d487cdf6a57c796fcb8dadb88f6c3970e012dad3281cb9f03b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 49,
+    "genesisAdmissionIdentity": "genesis-admission:458e2cd3348041c34da18120db17554c7347c30cb05ac2f502a15326733b6ed5",
+    "historicalSourceId": "genesis-source:commit:9fb416845b3e1bb9dd46faff3aaddf5a50ea5041",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9fb416845b3e1bb9dd46faff3aaddf5a50ea5041",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9fb416845b3e1bb9dd46faff3aaddf5a50ea5041",
+      "parentShas": [
+        "c6ae3e9f21b691cb5aaa28827c1504c1803f5dd7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771364835000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771364835000
+      },
+      "subject": "feat: migrate to workspace-scoped API + stabilize job lifecycle + manifest/status endpoints",
+      "body": "",
+      "changedPaths": [
+        "app/api/projects/[projectId]/build/route.ts",
+        "app/api/projects/[projectId]/deploy/route.ts",
+        "app/api/projects/[projectId]/file/route.ts",
+        "app/api/projects/[projectId]/files/route.ts",
+        "app/api/projects/[projectId]/git/commit/route.ts",
+        "app/api/projects/[projectId]/git/commit/route.ts.save",
+        "app/api/projects/[projectId]/logs/route.ts",
+        "app/api/projects/[projectId]/preview/start/route.ts",
+        "app/api/projects/[projectId]/preview/stop/route.ts",
+        "app/api/projects/[projectId]/status/route.ts",
+        "app/api/projects/import/route.ts",
+        "app/api/projects/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/manifest/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+        "lib/pid.ts",
+        "lib/project-manifest.ts",
+        "runtime/global-lock.ts",
+        "runtime/job-store.ts",
+        "runtime/locks.ts"
+      ],
+      "changedPathsByParent": {
+        "c6ae3e9f21b691cb5aaa28827c1504c1803f5dd7": [
+          "app/api/projects/[projectId]/build/route.ts",
+          "app/api/projects/[projectId]/deploy/route.ts",
+          "app/api/projects/[projectId]/file/route.ts",
+          "app/api/projects/[projectId]/files/route.ts",
+          "app/api/projects/[projectId]/git/commit/route.ts",
+          "app/api/projects/[projectId]/git/commit/route.ts.save",
+          "app/api/projects/[projectId]/logs/route.ts",
+          "app/api/projects/[projectId]/preview/start/route.ts",
+          "app/api/projects/[projectId]/preview/stop/route.ts",
+          "app/api/projects/[projectId]/status/route.ts",
+          "app/api/projects/import/route.ts",
+          "app/api/projects/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/build/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/manifest/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+          "lib/pid.ts",
+          "lib/project-manifest.ts",
+          "runtime/global-lock.ts",
+          "runtime/job-store.ts",
+          "runtime/locks.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9fb416845b3e1bb9dd46faff3aaddf5a50ea5041"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

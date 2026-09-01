@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:a458173fddebd8314eb06e67ed25478c9cb028a1bef5b1869cd0fe1660f764d0",
+  "type": "document",
+  "title": "KoreLumina Platform Principles V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728983,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/PLATFORM_PRINCIPLES_V1.md",
+  "checksum": "sha256:102f3f3e26442a22ea28eac8b6224a7212c9c83397a1339f3d39055b617f1b15",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 379,
+    "genesisAdmissionIdentity": "genesis-admission:340fa59de7bd92381756a37f2e96d66340c97d9b9503ba2787bca42863474446",
+    "historicalSourceId": "genesis-source:document:derived:daf242b840219741e545738fd58d383029f16efe7df3f363a71015ff1ec3aaa3",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/PLATFORM_PRINCIPLES_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Principles V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/PLATFORM_PRINCIPLES_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:daf242b840219741e545738fd58d383029f16efe7df3f363a71015ff1ec3aaa3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

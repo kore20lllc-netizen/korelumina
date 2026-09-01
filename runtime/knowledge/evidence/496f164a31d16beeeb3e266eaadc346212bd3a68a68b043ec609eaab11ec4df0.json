@@ -1,0 +1,102 @@
+{
+  "id": "genesis-evidence:ba0d4c123816282c8eae1412ba7b973db82339ca0b8df31974045135e05745d6",
+  "type": "commit",
+  "title": "stable builder baseline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227716957,
+  "observedAt": 1771190849000,
+  "contentRef": "git:commit:6df6dcf6a9c15a6b3a904635d09403dc0c294552",
+  "checksum": "sha256:f75f5c36b18c32e8f3d30be741dbcf2ce61465fc1830d650544409b9ef329db3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:644000d3c3bb92627bb56693060bfde3a8abc6a21e316d730310b63124742a69",
+    "historicalSourceId": "genesis-source:commit:6df6dcf6a9c15a6b3a904635d09403dc0c294552",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6df6dcf6a9c15a6b3a904635d09403dc0c294552",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6df6dcf6a9c15a6b3a904635d09403dc0c294552",
+      "parentShas": [],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771190849000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771190849000
+      },
+      "subject": "stable builder baseline",
+      "body": "",
+      "changedPaths": [
+        ".gitignore",
+        ".nvmrc",
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/dev/preview/bundle/route.ts",
+        "app/api/health/route.ts",
+        "app/api/jobs/[jobId]/route.ts",
+        "app/api/jobs/[jobId]/stream/route.ts",
+        "app/api/projects/[projectId]/build/route.ts",
+        "app/api/projects/[projectId]/deploy/route.ts",
+        "app/api/projects/[projectId]/file/route.ts",
+        "app/api/projects/[projectId]/files/route.ts",
+        "app/api/projects/[projectId]/git/commit/route.ts",
+        "app/api/projects/[projectId]/git/commit/route.ts.save",
+        "app/api/projects/[projectId]/preview/start/route.ts",
+        "app/api/projects/[projectId]/preview/stop/route.ts",
+        "app/api/projects/import/route.ts",
+        "app/api/projects/route.ts",
+        "app/dashboard/import/page.tsx",
+        "app/favicon.ico",
+        "app/globals.css",
+        "app/layout.tsx",
+        "app/page.tsx",
+        "data/projects.json",
+        "docker/builder.Dockerfile",
+        "lib/supabase-admin.ts",
+        "next-env.d.ts",
+        "package-lock.json",
+        "package.json",
+        "postcss.config.mjs",
+        "runtime/build-lock.ts",
+        "runtime/job-logs.ts",
+        "runtime/jobs.json",
+        "runtime/jobs.ts",
+        "runtime/locks.ts",
+        "runtime/watchdog.log",
+        "scripts/build-project.sh",
+        "scripts/dev-safe.sh",
+        "scripts/free-port-3000.sh",
+        "scripts/reset-dev.sh",
+        "scripts/reset-system.sh",
+        "scripts/run-preview-safe.sh",
+        "scripts/run-preview-universal.sh",
+        "scripts/run-preview.s",
+        "scripts/run-preview.sh",
+        "scripts/start-safe.sh",
+        "scripts/watchdog.sh",
+        "tailwind.config.js",
+        "tsconfig.json"
+      ],
+      "changedPathsByParent": {},
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6df6dcf6a9c15a6b3a904635d09403dc0c294552"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

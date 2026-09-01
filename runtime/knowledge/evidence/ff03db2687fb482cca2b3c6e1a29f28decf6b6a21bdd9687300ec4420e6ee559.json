@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:f26ddcb4f3e07823c07175d502135c8c617dc40f1e88c35ad6802495ed8d23aa",
+  "type": "commit",
+  "title": "docs(architecture): define engineering intelligence platform",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733054,
+  "observedAt": 1782623748000,
+  "contentRef": "git:commit:12fe16b59d9d916d22a44b283780de784b36f4a6",
+  "checksum": "sha256:5e0eba94f5b59e389b581a8691825242736ae069bc0752586aff5e0bad5717c8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 499,
+    "genesisAdmissionIdentity": "genesis-admission:360a99de8e6b75bed30a2506646b01795d092b07375c9c0b9acaa42532e98f0f",
+    "historicalSourceId": "genesis-source:commit:12fe16b59d9d916d22a44b283780de784b36f4a6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:12fe16b59d9d916d22a44b283780de784b36f4a6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "12fe16b59d9d916d22a44b283780de784b36f4a6",
+      "parentShas": [
+        "a2c214f47ae2dc783784159e1f1047140aa1b6bd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782623748000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782623748000
+      },
+      "subject": "docs(architecture): define engineering intelligence platform",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md"
+      ],
+      "changedPathsByParent": {
+        "a2c214f47ae2dc783784159e1f1047140aa1b6bd": [
+          "docs/architecture/ENGINEERING_INTELLIGENCE_PLATFORM.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:12fe16b59d9d916d22a44b283780de784b36f4a6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

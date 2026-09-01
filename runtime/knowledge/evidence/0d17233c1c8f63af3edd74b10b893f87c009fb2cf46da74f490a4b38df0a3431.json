@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:f8b5208e43cef195775c4669b6c199cf8ce6843524f35d17b7d57eb50c8cd607",
+  "type": "document",
+  "title": "KoreLumina Implementation Backlog V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728447,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/IMPLEMENTATION_BACKLOG_V1.md",
+  "checksum": "sha256:1b91e1fef8aecefa97cc443809d3be2abaab22d9985fe8a5932354e93f05f89b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 363,
+    "genesisAdmissionIdentity": "genesis-admission:553862e4240cdf33c86aacaffb26eb5ec1eaf994cb24d21b82631f43e8687f89",
+    "historicalSourceId": "genesis-source:document:derived:3ddd0db8dbaa6eb0719b9f228ff826a3fb72c297dd90dccecf90c88389816545",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/IMPLEMENTATION_BACKLOG_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Implementation Backlog V1",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/IMPLEMENTATION_BACKLOG_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3ddd0db8dbaa6eb0719b9f228ff826a3fb72c297dd90dccecf90c88389816545"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

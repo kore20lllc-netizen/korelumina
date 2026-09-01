@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:23b6f7e47a2efed9b96eaa61683372af30f273d76494d84c2d05758ca006408e",
+  "type": "commit",
+  "title": "fix(builder): stabilize vite runtime preview orchestration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722555,
+  "observedAt": 1778215832000,
+  "contentRef": "git:commit:12a044df49122caa2231f200667e985298ce6f40",
+  "checksum": "sha256:7144aa64013575d861bdd5ef86ee3bc79fef8227f2ddf642842d0acfde9f16b4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 181,
+    "genesisAdmissionIdentity": "genesis-admission:53599b3e4390fe33061a6e899258f70bd95b6b5b8dbc5211ec4bec6b01393f0e",
+    "historicalSourceId": "genesis-source:commit:12a044df49122caa2231f200667e985298ce6f40",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:12a044df49122caa2231f200667e985298ce6f40",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "12a044df49122caa2231f200667e985298ce6f40",
+      "parentShas": [
+        "96f4051ccb684656656bf3341083d876c4963b2f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778215832000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778215832000
+      },
+      "subject": "fix(builder): stabilize vite runtime preview orchestration",
+      "body": "",
+      "changedPaths": [
+        "app/builder/BuilderClient.tsx",
+        "app/builder/BuilderInner.tsx",
+        "app/builder/components/PreviewFrame.tsx",
+        "components/builder/PreviewFrame.tsx",
+        "runtime/preview-manager.js"
+      ],
+      "changedPathsByParent": {
+        "96f4051ccb684656656bf3341083d876c4963b2f": [
+          "app/builder/BuilderClient.tsx",
+          "app/builder/BuilderInner.tsx",
+          "app/builder/components/PreviewFrame.tsx",
+          "components/builder/PreviewFrame.tsx",
+          "runtime/preview-manager.js"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:12a044df49122caa2231f200667e985298ce6f40"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

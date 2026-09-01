@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:7bc371f992413a12db4564765663910f0a6dee3a07dd9ed488603572b9b3cf62",
+  "type": "commit",
+  "title": "Merge pull request #32 from kore20lllc-netizen/fix/preview-runtime-url-type",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227722742,
+  "observedAt": 1778642687000,
+  "contentRef": "git:commit:eeb228b667f983edd310105b8718c153eec2f928",
+  "checksum": "sha256:828fe9f5166797e89bec142b4df06da1c05095ba97120090792fcd80a9615976",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 187,
+    "genesisAdmissionIdentity": "genesis-admission:72754e7829b2f3292adb4bf54faf69dc5db5883407c585f4624db7c48d4d9859",
+    "historicalSourceId": "genesis-source:commit:eeb228b667f983edd310105b8718c153eec2f928",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:eeb228b667f983edd310105b8718c153eec2f928",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "eeb228b667f983edd310105b8718c153eec2f928",
+      "parentShas": [
+        "dc32ff9b0a1ae08ce908f8ffe706e67b77b594a3",
+        "fd1933d06f0995cc7db9eb3eb4ddb2529dcae4a1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1778642687000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1778642687000
+      },
+      "subject": "Merge pull request #32 from kore20lllc-netizen/fix/preview-runtime-url-type",
+      "body": "fix(types): add url to PreviewRuntime",
+      "changedPaths": [
+        "tsconfig.json",
+        "types/preview-manager.d.ts"
+      ],
+      "changedPathsByParent": {
+        "dc32ff9b0a1ae08ce908f8ffe706e67b77b594a3": [
+          "tsconfig.json",
+          "types/preview-manager.d.ts"
+        ],
+        "fd1933d06f0995cc7db9eb3eb4ddb2529dcae4a1": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:eeb228b667f983edd310105b8718c153eec2f928"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

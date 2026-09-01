@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:43e1b72dbb103daaf6e932e38a9877da756240887636fe6aecdd31c743a8b962",
+  "type": "commit",
+  "title": "feat(knowledge): enrich repository manifest contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730659,
+  "observedAt": 1782537088000,
+  "contentRef": "git:commit:7828654e70e136d2cbcc2fdff22f03e65672c6a3",
+  "checksum": "sha256:f132769bb45558d43312ffa65178c2e1e8956aea1128c51a02045539044e8117",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 429,
+    "genesisAdmissionIdentity": "genesis-admission:48805ec0f08eb462c048aa104b2f0518db3aee02691c29388d88524f60493a34",
+    "historicalSourceId": "genesis-source:commit:7828654e70e136d2cbcc2fdff22f03e65672c6a3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7828654e70e136d2cbcc2fdff22f03e65672c6a3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7828654e70e136d2cbcc2fdff22f03e65672c6a3",
+      "parentShas": [
+        "8d700deb5baf6429d4eec47f73ebdf912125c591"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782537088000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782537088000
+      },
+      "subject": "feat(knowledge): enrich repository manifest contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/repository/RepositoryAnalyzer.ts",
+        "apps/lumina-runtime/src/knowledge/repository/RepositoryKnowledgeRecorder.ts",
+        "apps/lumina-runtime/src/knowledge/repository/RepositoryManifest.ts"
+      ],
+      "changedPathsByParent": {
+        "8d700deb5baf6429d4eec47f73ebdf912125c591": [
+          "apps/lumina-runtime/src/knowledge/repository/RepositoryAnalyzer.ts",
+          "apps/lumina-runtime/src/knowledge/repository/RepositoryKnowledgeRecorder.ts",
+          "apps/lumina-runtime/src/knowledge/repository/RepositoryManifest.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7828654e70e136d2cbcc2fdff22f03e65672c6a3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

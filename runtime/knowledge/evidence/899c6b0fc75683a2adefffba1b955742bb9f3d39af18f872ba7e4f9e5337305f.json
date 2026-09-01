@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:014df410eb34670b5747d6eba22bbda67e1c383f7fb2b152fb5c31a98d39b532",
+  "type": "commit",
+  "title": "feat(settings): replace mock data confirmation with Lumina dialog",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726286,
+  "observedAt": 1781695192000,
+  "contentRef": "git:commit:5c2a0cfd646cafed3760030e3206dc5894576c0b",
+  "checksum": "sha256:f5ccb58f98c3e276b6b59eab74f9172fed5f3f386b1cc1903989dbecc9a2158a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 298,
+    "genesisAdmissionIdentity": "genesis-admission:73a628cf8fe18eebf5b83a1c1389ca2ab8a0149c79a876af02018f9d0de93c10",
+    "historicalSourceId": "genesis-source:commit:5c2a0cfd646cafed3760030e3206dc5894576c0b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5c2a0cfd646cafed3760030e3206dc5894576c0b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5c2a0cfd646cafed3760030e3206dc5894576c0b",
+      "parentShas": [
+        "6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781695192000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781695192000
+      },
+      "subject": "feat(settings): replace mock data confirmation with Lumina dialog",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "6d2a39f6dcb4fb4dec1360f04db212d082ffcc6d": [
+          "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ui-dialog-sweep-complete"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5c2a0cfd646cafed3760030e3206dc5894576c0b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

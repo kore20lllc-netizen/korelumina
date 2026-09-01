@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:ebfb41a6927fb4642595ab0b1e8806ea126cff75ef995e8ab19d4d8033d7d8f2",
+  "type": "commit",
+  "title": "feat(knowledge): add decision memory domain model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731639,
+  "observedAt": 1782547728000,
+  "contentRef": "git:commit:a67b9568db1f68c9e79a8ad59a92779bacdd485f",
+  "checksum": "sha256:a602427ecf3cace421a9740388460cb11cc05a0a7fcba8f6da7d8933241b49ec",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 458,
+    "genesisAdmissionIdentity": "genesis-admission:9c2cdb6b13de2af60847f36f26a76a40ef691ee5ec4f09e3234598eac609e77f",
+    "historicalSourceId": "genesis-source:commit:a67b9568db1f68c9e79a8ad59a92779bacdd485f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a67b9568db1f68c9e79a8ad59a92779bacdd485f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a67b9568db1f68c9e79a8ad59a92779bacdd485f",
+      "parentShas": [
+        "97f9808c9b7bb63bbe5ab3c6893cbc11b775addf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782547728000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782547728000
+      },
+      "subject": "feat(knowledge): add decision memory domain model",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/decision/Decision.ts",
+        "apps/lumina-runtime/src/knowledge/decision/DecisionEvidence.ts",
+        "apps/lumina-runtime/src/knowledge/decision/DecisionRelation.ts",
+        "apps/lumina-runtime/src/knowledge/decision/index.ts",
+        "apps/lumina-runtime/src/knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "97f9808c9b7bb63bbe5ab3c6893cbc11b775addf": [
+          "apps/lumina-runtime/src/knowledge/decision/Decision.ts",
+          "apps/lumina-runtime/src/knowledge/decision/DecisionEvidence.ts",
+          "apps/lumina-runtime/src/knowledge/decision/DecisionRelation.ts",
+          "apps/lumina-runtime/src/knowledge/decision/index.ts",
+          "apps/lumina-runtime/src/knowledge/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a67b9568db1f68c9e79a8ad59a92779bacdd485f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

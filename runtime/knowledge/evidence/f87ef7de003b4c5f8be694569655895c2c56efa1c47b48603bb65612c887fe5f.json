@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:6868ddf7cec10f1ed0389b0fb547435d31fe95f24314d5a2d7af8f7810a42cf4",
+  "type": "commit",
+  "title": "docs(runtime): validate modular runtime startup pipeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737622,
+  "observedAt": 1782869319000,
+  "contentRef": "git:commit:ef140bba858e4e5bb648af1a665e8e86929b48ae",
+  "checksum": "sha256:f4c6a89ee873b772f17e3d7ac77fea4d526bbd0493005bcb7acae2a722e345eb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 625,
+    "genesisAdmissionIdentity": "genesis-admission:110079e4126b8368d1f0164b29cce1b5274f65a9ec5a209b0e2effc81f0a8beb",
+    "historicalSourceId": "genesis-source:commit:ef140bba858e4e5bb648af1a665e8e86929b48ae",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ef140bba858e4e5bb648af1a665e8e86929b48ae",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ef140bba858e4e5bb648af1a665e8e86929b48ae",
+      "parentShas": [
+        "e3d445b7334984579f7af398e11173303f34324d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782869319000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782869319000
+      },
+      "subject": "docs(runtime): validate modular runtime startup pipeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/runtime-locks/kore20lllc-netizen-premium-ride-app.lock",
+        "docs/engineering/reconstruction-log.md",
+        "runtime/knowledge/runtime/358de9ba-f625-4b27-8518-388d8f5873ba.json",
+        "runtime/knowledge/runtime/5e45533f-0116-4b64-87ba-bccdb34ee7e6.json",
+        "runtime/knowledge/runtime/6320d202-c3bd-4829-9c15-108d9e2aed5c.json"
+      ],
+      "changedPathsByParent": {
+        "e3d445b7334984579f7af398e11173303f34324d": [
+          "apps/lumina-runtime/runtime-locks/kore20lllc-netizen-premium-ride-app.lock",
+          "docs/engineering/reconstruction-log.md",
+          "runtime/knowledge/runtime/358de9ba-f625-4b27-8518-388d8f5873ba.json",
+          "runtime/knowledge/runtime/5e45533f-0116-4b64-87ba-bccdb34ee7e6.json",
+          "runtime/knowledge/runtime/6320d202-c3bd-4829-9c15-108d9e2aed5c.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ef140bba858e4e5bb648af1a665e8e86929b48ae"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

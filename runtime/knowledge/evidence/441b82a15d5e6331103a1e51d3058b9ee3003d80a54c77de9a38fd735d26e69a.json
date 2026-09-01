@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:3359bda40906a75f1d6522901d0ec68d2bba78dc6c61a3bb0b911c4c2b2d3f4b",
+  "type": "commit",
+  "title": "chore(knowledge): prepare automation module",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737951,
+  "observedAt": 1782883349000,
+  "contentRef": "git:commit:64c99beb4e7782ff62f6a6557ee8708641fff6ba",
+  "checksum": "sha256:467ab4d47dcb39bcea04f7e7479609ab537e585368150f4fc339209eabb66980",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 634,
+    "genesisAdmissionIdentity": "genesis-admission:f53088bf054cfec6d2224570a0ee5da35e35b815b9180a39e042f64ef5c71fa4",
+    "historicalSourceId": "genesis-source:commit:64c99beb4e7782ff62f6a6557ee8708641fff6ba",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:64c99beb4e7782ff62f6a6557ee8708641fff6ba",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "64c99beb4e7782ff62f6a6557ee8708641fff6ba",
+      "parentShas": [
+        "8062d8d29772eee43cb24ee5817767f42e122308"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782883349000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782883349000
+      },
+      "subject": "chore(knowledge): prepare automation module",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/automation/KnowledgeAutomation.ts",
+        "apps/lumina-runtime/src/knowledge/automation/index.ts",
+        "apps/lumina-runtime/src/knowledge/automation/types.ts"
+      ],
+      "changedPathsByParent": {
+        "8062d8d29772eee43cb24ee5817767f42e122308": [
+          "apps/lumina-runtime/src/knowledge/automation/KnowledgeAutomation.ts",
+          "apps/lumina-runtime/src/knowledge/automation/index.ts",
+          "apps/lumina-runtime/src/knowledge/automation/types.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase040-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:64c99beb4e7782ff62f6a6557ee8708641fff6ba"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

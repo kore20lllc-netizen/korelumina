@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:e42aaafb0728421fdad94062385c87ccc8821f0a725d3a526aecfe295466c1f1",
+  "type": "document",
+  "title": "KoreLumina Landing Contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728579,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/LANDING_CONTRACT.md",
+  "checksum": "sha256:1da7e5ca8ac44637a3e7ea731f8fbbb6896329848f56ac511eb8922f8709413d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 367,
+    "genesisAdmissionIdentity": "genesis-admission:9b205a5e540ff894b5923277476f6786cef4cc54e220af630aa433132a0da22d",
+    "historicalSourceId": "genesis-source:document:derived:8375c52e1108b409ce4936b9c27c20859341d73577c710993d7a7cc70bbf4186",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/LANDING_CONTRACT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Landing Contract",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LANDING_CONTRACT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:8375c52e1108b409ce4936b9c27c20859341d73577c710993d7a7cc70bbf4186"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

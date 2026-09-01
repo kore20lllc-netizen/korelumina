@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:22d5d76b8222adad1ad1e407dae82760ee35f5c2b6b2d8f4f289cffea7ccad6a",
+  "type": "commit",
+  "title": "feat(knowledge): add canonical knowledge registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741404,
+  "observedAt": 1783048353000,
+  "contentRef": "git:commit:76d3f8d1bbb05b9107ade49a511b69d9d72ca88d",
+  "checksum": "sha256:740b2d67bd30e5eaa9d591c3614da115d25362d8731b90f6f8f9fcb80006138a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 723,
+    "genesisAdmissionIdentity": "genesis-admission:ada387356e268f5ed40361436f836a8303400562eeb1e63603f1be7fc0bfe33d",
+    "historicalSourceId": "genesis-source:commit:76d3f8d1bbb05b9107ade49a511b69d9d72ca88d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:76d3f8d1bbb05b9107ade49a511b69d9d72ca88d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "76d3f8d1bbb05b9107ade49a511b69d9d72ca88d",
+      "parentShas": [
+        "36edfc845d3a58b45aa202c9c32e241c18599463"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783048353000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783048353000
+      },
+      "subject": "feat(knowledge): add canonical knowledge registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeRegistry.ts",
+        "apps/lumina-runtime/src/canonical-knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "36edfc845d3a58b45aa202c9c32e241c18599463": [
+          "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeRegistry.ts",
+          "apps/lumina-runtime/src/canonical-knowledge/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ckm-002-canonical-knowledge-registry-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:76d3f8d1bbb05b9107ade49a511b69d9d72ca88d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

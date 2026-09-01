@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:c8e3f3ed8a648697aee8ca4feeda1f1f78ce17fa57476221986e9e8541d36c41",
+  "type": "document",
+  "title": "KoreLumina Engineering Principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227731470,
+  "observedAt": 1782547225000,
+  "contentRef": "docs/governance/ENGINEERING_PRINCIPLES.md",
+  "checksum": "sha256:859be0a238b4dbf583e1184b3e4378647cc41526062c3dc0ec5f540a4a13e170",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 453,
+    "genesisAdmissionIdentity": "genesis-admission:6ca09d79e8b5e968b0570c04c224bf6738df29184092a2fbddd78ad380905857",
+    "historicalSourceId": "genesis-source:document:derived:3c082ea86165587ee7de9ed1184c5d51adbe573e3608836da894855dc834476c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "governance",
+    "sourceLocation": "docs/governance/ENGINEERING_PRINCIPLES.md",
+    "documentClassification": "governance",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Engineering Principles",
+      "documentClassification": "governance",
+      "sourceLocation": "docs/governance/ENGINEERING_PRINCIPLES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3c082ea86165587ee7de9ed1184c5d51adbe573e3608836da894855dc834476c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ebebe9385ee8b2900a6e36eaa7d52d5b9f9053a09f9516a4e66b7cf0ae032f35",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate ArchitectureDiscovery to DirectoryWalker",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736654,
+  "observedAt": 1782794776000,
+  "contentRef": "git:commit:ac28c942b7aabeaf74c250ef7b77c5b94b022b9f",
+  "checksum": "sha256:eabddc51f389c3d1a88fb664bde368e581bf9fca6464493decb8a3f90a7a32bd",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 599,
+    "genesisAdmissionIdentity": "genesis-admission:98d6882ef1580deaab3fd8b697e66a62d4974dd7ded906221bd9b8aba19ee2ef",
+    "historicalSourceId": "genesis-source:commit:ac28c942b7aabeaf74c250ef7b77c5b94b022b9f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ac28c942b7aabeaf74c250ef7b77c5b94b022b9f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ac28c942b7aabeaf74c250ef7b77c5b94b022b9f",
+      "parentShas": [
+        "e316a064c994f1394e64476c627d5fc6ee2c1129"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782794776000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782794776000
+      },
+      "subject": "refactor(platform-sdk): migrate ArchitectureDiscovery to DirectoryWalker",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md"
+      ],
+      "changedPathsByParent": {
+        "e316a064c994f1394e64476c627d5fc6ee2c1129": [
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ac28c942b7aabeaf74c250ef7b77c5b94b022b9f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

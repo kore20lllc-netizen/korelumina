@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:dccb364063bd0bd01b238828d1d97f75c15a48a33b9137a6823bbab696a4dedd",
+  "type": "commit",
+  "title": "feat(admin): replace destructive confirmations with Lumina dialogs",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227726189,
+  "observedAt": 1781693360000,
+  "contentRef": "git:commit:abca3b529ccfbd6c5dca1ba19ce43e833c25afae",
+  "checksum": "sha256:872cac4a19a6641f58f93b3ed8f68a41d3c9a2f5db56f4fac93c787619a2f217",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 295,
+    "genesisAdmissionIdentity": "genesis-admission:4c8d65e17c3dc83f76a84ebf559b55736c81af4d66034eb51367ecc1b064b1a1",
+    "historicalSourceId": "genesis-source:commit:abca3b529ccfbd6c5dca1ba19ce43e833c25afae",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:abca3b529ccfbd6c5dca1ba19ce43e833c25afae",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "abca3b529ccfbd6c5dca1ba19ce43e833c25afae",
+      "parentShas": [
+        "fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693360000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781693360000
+      },
+      "subject": "feat(admin): replace destructive confirmations with Lumina dialogs",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/admin/MaintenanceTab.tsx",
+        "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx"
+      ],
+      "changedPathsByParent": {
+        "fbe032e8e8fc3d06041a7bbc22b37a9517a0c15e": [
+          "apps/lumina-builder/src/components/workspaces/admin/MaintenanceTab.tsx",
+          "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ui-dialog-baseline-20260617"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:abca3b529ccfbd6c5dca1ba19ce43e833c25afae"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

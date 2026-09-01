@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:5e146e443e68781ad6c227d0d1c2416fb8494a78f40458c2b9ceacde5963f5d8",
+  "type": "document",
+  "title": "KoreLumina Production Workflow V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227735621,
+  "observedAt": 1782714212000,
+  "contentRef": "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md",
+  "checksum": "sha256:135110f1818fc884560f2b8e1060b31b53504724d0e489c75a25c7afd0afed4d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 571,
+    "genesisAdmissionIdentity": "genesis-admission:3a59d21b263f96169c56f4a352d4f190a83ff8f339c409d8675b0d1f37882246",
+    "historicalSourceId": "genesis-source:document:derived:b829d02c2e1ad03f0038613f2d322ef666a08db847e99b86529abac9ef8fda73",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Constitutional",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Production Workflow V1",
+      "status": "Constitutional",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_PRODUCTION_WORKFLOW_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:b829d02c2e1ad03f0038613f2d322ef666a08db847e99b86529abac9ef8fda73"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

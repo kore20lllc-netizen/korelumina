@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:4e8b9e84ad9187a704b384188cb19dac9bd2e44fed5457406c4fa03c82819bdc",
+  "type": "document",
+  "title": "Data Model Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728146,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/DATA_MODEL_SPECIFICATION_V1.md",
+  "checksum": "sha256:605ca401661197fa8a736fbf8ac9c1688648b5a7b23c141c067fc8449f48e93a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 354,
+    "genesisAdmissionIdentity": "genesis-admission:06aad03fabb3aa55dc5830fa20504faee91fee3254c7617b2b8eae89cd15a050",
+    "historicalSourceId": "genesis-source:document:derived:d6bb8bbed9465294213716e01ea2c67d321e903e1139e448d276ba2f13865cb0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/DATA_MODEL_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Data Model Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/DATA_MODEL_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d6bb8bbed9465294213716e01ea2c67d321e903e1139e448d276ba2f13865cb0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

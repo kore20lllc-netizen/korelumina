@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:23c58c2ada4aba7e6b2b8df1febf2fcf26c34ab30149a63116168aa3ed0f909a",
+  "type": "commit",
+  "title": "docs(knowledge): audit documentation architecture governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740060,
+  "observedAt": 1783023471000,
+  "contentRef": "git:commit:8a942c4fdb894c352cb12317e191838ff27a458f",
+  "checksum": "sha256:f99e3820951bef26b817b817f29775220d2d1c26350aa8d067ff01dbda9cc93c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 689,
+    "genesisAdmissionIdentity": "genesis-admission:d459e81de6421533a7cc7d38a580125210ec0ad1d8b6c8c89065bcc89e627e79",
+    "historicalSourceId": "genesis-source:commit:8a942c4fdb894c352cb12317e191838ff27a458f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8a942c4fdb894c352cb12317e191838ff27a458f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8a942c4fdb894c352cb12317e191838ff27a458f",
+      "parentShas": [
+        "2675c7c39a09cb2db27ddb777f43868ff8f08660"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783023471000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783023471000
+      },
+      "subject": "docs(knowledge): audit documentation architecture governance",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md",
+        "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE_AUDIT.md",
+        "docs/architecture/knowledge-governance/documentation-inventory.tsv"
+      ],
+      "changedPathsByParent": {
+        "2675c7c39a09cb2db27ddb777f43868ff8f08660": [
+          "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE.md",
+          "docs/architecture/knowledge-governance/DOCUMENTATION_ARCHITECTURE_AUDIT.md",
+          "docs/architecture/knowledge-governance/documentation-inventory.tsv"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kpe-000-documentation-governance-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8a942c4fdb894c352cb12317e191838ff27a458f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

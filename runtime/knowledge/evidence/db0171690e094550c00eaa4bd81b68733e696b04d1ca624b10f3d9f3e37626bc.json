@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:0974520696be28cb9012a3fde1d0217e2f2d6b8259ed631c69ccf8c306ed1528",
+  "type": "commit",
+  "title": "Merge pull request #41 from kore20lllc-netizen/feature/supabase-team-provider",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723849,
+  "observedAt": 1779331419000,
+  "contentRef": "git:commit:b5fea1631ea731ec212f0f02a90c4e4ce5bd374d",
+  "checksum": "sha256:eb48595f897d0eb5fe85f85f8aab547c4ca00fda1218a4b541d3b656f1651f03",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 222,
+    "genesisAdmissionIdentity": "genesis-admission:94081197ce59cd351f0c4c595de9319cefb78583f73c7508ebf02c1c3449d545",
+    "historicalSourceId": "genesis-source:commit:b5fea1631ea731ec212f0f02a90c4e4ce5bd374d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b5fea1631ea731ec212f0f02a90c4e4ce5bd374d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b5fea1631ea731ec212f0f02a90c4e4ce5bd374d",
+      "parentShas": [
+        "6f7c98a88e4a6aaf7712bb1385fc4b878607f87c",
+        "8b5e36ea7f30ab2ecfc0ae21f33d94d8858f37b7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779331419000
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "timestamp": 1779331419000
+      },
+      "subject": "Merge pull request #41 from kore20lllc-netizen/feature/supabase-team-provider",
+      "body": "feat(team): implement production-safe Supabase team provider",
+      "changedPaths": [
+        "src/providers/team/SupabaseTeamProvider.ts"
+      ],
+      "changedPathsByParent": {
+        "6f7c98a88e4a6aaf7712bb1385fc4b878607f87c": [
+          "src/providers/team/SupabaseTeamProvider.ts"
+        ],
+        "8b5e36ea7f30ab2ecfc0ae21f33d94d8858f37b7": []
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b5fea1631ea731ec212f0f02a90c4e4ce5bd374d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

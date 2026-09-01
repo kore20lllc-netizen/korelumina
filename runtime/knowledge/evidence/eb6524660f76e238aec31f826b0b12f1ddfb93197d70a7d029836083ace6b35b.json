@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:247b07f1ca75a7764b4b97070578f457a96edb6b3eb8fc69ad15776aae1e6aab",
+  "type": "commit",
+  "title": "stable: ai engine, scaffold, repair, task pipeline green",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719248,
+  "observedAt": 1772112927000,
+  "contentRef": "git:commit:0ddaab1b28695da2d7553fa21338d7ab79d2b549",
+  "checksum": "sha256:d81ac2d63f66064ea36eec27c5bdb2a519eceb4bd08882d47c439079d35cc144",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 75,
+    "genesisAdmissionIdentity": "genesis-admission:087e55ad5d3f70ed51ede766ddf8d1944d6cf3f87d8f1a738b975be0b9e48de4",
+    "historicalSourceId": "genesis-source:commit:0ddaab1b28695da2d7553fa21338d7ab79d2b549",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0ddaab1b28695da2d7553fa21338d7ab79d2b549",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0ddaab1b28695da2d7553fa21338d7ab79d2b549",
+      "parentShas": [
+        "642ac986862880fd69fa4e57c3b08362ded8f6d8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1772112927000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1772112927000
+      },
+      "subject": "stable: ai engine, scaffold, repair, task pipeline green",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/task/route.ts",
+        "lib/ai/apply.ts",
+        "lib/ai/journal.ts",
+        "lib/ai/scaffold.ts"
+      ],
+      "changedPathsByParent": {
+        "642ac986862880fd69fa4e57c3b08362ded8f6d8": [
+          "app/api/ai/task/route.ts",
+          "lib/ai/apply.ts",
+          "lib/ai/journal.ts",
+          "lib/ai/scaffold.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0ddaab1b28695da2d7553fa21338d7ab79d2b549"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

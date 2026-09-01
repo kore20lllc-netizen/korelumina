@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:bb8211fbf6d5a086971a60fa6aad4f790379e5337e1e12120c9eafc42f36667b",
+  "type": "RFC",
+  "title": "KoreLumina RFC Index",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227732226,
+  "observedAt": 1782587331000,
+  "contentRef": "docs/rfc/INDEX.md",
+  "checksum": "sha256:fccd39563f565b5143180cec46661467390e37a03765e830eb06c210a0e7b23f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 475,
+    "genesisAdmissionIdentity": "genesis-admission:fad9ffccfddad0fcaa0234421f9ada55a7acd7d974fe5da7e54509cc8903bd2c",
+    "historicalSourceId": "genesis-source:RFC:derived:c4a4585c97644d3b974f1884ea9cb79fd400d9d464ff8e5fc0a625688a203d89",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "request-for-comments",
+    "sourceLocation": "docs/rfc/INDEX.md",
+    "documentClassification": "rfc",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina RFC Index",
+      "documentClassification": "rfc",
+      "sourceLocation": "docs/rfc/INDEX.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:RFC:derived:c4a4585c97644d3b974f1884ea9cb79fd400d9d464ff8e5fc0a625688a203d89"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

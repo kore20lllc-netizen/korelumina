@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:44e8ee89b7eb03873b1986f443ee21bb1fe8134c42f5d1455e0d01c88dd0bb57",
+  "type": "document",
+  "title": "Autonomous Operations Layer Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728079,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/AUTONOMOUS_OPERATIONS_LAYER_SPECIFICATION_V1.md",
+  "checksum": "sha256:e67f540e9a18d984b08b118314af752ee8eba329c54b1889112872096475e2a1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 352,
+    "genesisAdmissionIdentity": "genesis-admission:17ee64695fd305a9cfe7f53cd2968ddbc1524e6ba9579511f77fea1e64d6a41c",
+    "historicalSourceId": "genesis-source:document:derived:ab3b3c012081d94fb18e5179d801372ef1de26fa1ca4c0e3b64f83470d726d5c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Autonomous Operations Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/AUTONOMOUS_OPERATIONS_LAYER_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Autonomous Operations Layer Specification V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/AUTONOMOUS_OPERATIONS_LAYER_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ab3b3c012081d94fb18e5179d801372ef1de26fa1ca4c0e3b64f83470d726d5c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

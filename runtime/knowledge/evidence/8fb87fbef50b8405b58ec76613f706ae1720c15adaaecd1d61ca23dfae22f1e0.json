@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:d98ffce563fd810a6aead899670c61cf7a02088e252d29bbfa6ed64b34398390",
+  "type": "document",
+  "title": "KoreLumina Final Implementation Roadmap V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227734822,
+  "observedAt": 1782690667000,
+  "contentRef": "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md",
+  "checksum": "sha256:2ae342fc5f163b1971863717fe967c70caf1f18ad02444119a52ec3d91ae9c18",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 549,
+    "genesisAdmissionIdentity": "genesis-admission:f962da617f7501d72ab19a1fe3a3683b9579f93888c4a82b964f6ab80e3c2c1e",
+    "historicalSourceId": "genesis-source:document:derived:14a268fe4eea1e5e5b8e267958de4587e9bce7bc6b61416833bca86cb9ebc129",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Authoritative implementation roadmap",
+    "sourceLocation": "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Final Implementation Roadmap V1",
+      "status": "Authoritative implementation roadmap",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:14a268fe4eea1e5e5b8e267958de4587e9bce7bc6b61416833bca86cb9ebc129"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

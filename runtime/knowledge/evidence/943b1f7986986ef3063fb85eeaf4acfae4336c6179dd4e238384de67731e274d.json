@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:7554fec2480da6106a2d8e46f3c306ef306124ad9d7f0825787fbe6a627b135a",
+  "type": "document",
+  "title": "Engineering Standards V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227728380,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ENGINEERING_STANDARDS_V1.md",
+  "checksum": "sha256:379f9a41cb52bc10e2cce0090ecc5ac0350afa4609f83f45cadbdb54895cbf03",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 361,
+    "genesisAdmissionIdentity": "genesis-admission:8c67d995fa9230f54be6433f963cfcf70ce7428fb8e2f3ad853083bac9e8b2dd",
+    "historicalSourceId": "genesis-source:document:derived:e134b086a55354606cbc8d2e4f6bb8ddc4f3cf020e874cc36675c6abacfbd70d",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ENGINEERING_STANDARDS_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Engineering Standards V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ENGINEERING_STANDARDS_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e134b086a55354606cbc8d2e4f6bb8ddc4f3cf020e874cc36675c6abacfbd70d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

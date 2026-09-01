@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:1cbf2c5888277528d3b1caf08c58a4e71977a3251a122b2cb4a3c8d7423094c6",
+  "type": "commit",
+  "title": "stabilize AI builder engine: type fixes, parser fix, repair loop fix",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227719401,
+  "observedAt": 1773095788000,
+  "contentRef": "git:commit:bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e",
+  "checksum": "sha256:8e25e574f888dbb6a9d4e2cde3ee88652f37d79276a7c581016584529ecee1e4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 80,
+    "genesisAdmissionIdentity": "genesis-admission:d91716fd1abbab5592151a1be3d5589fa92ed9b7426ef6e2ca85bf7d18e41428",
+    "historicalSourceId": "genesis-source:commit:bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e",
+      "parentShas": [
+        "39f24def7b85cbd8d3170c819ed6595048873b14"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773095788000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1773095788000
+      },
+      "subject": "stabilize AI builder engine: type fixes, parser fix, repair loop fix",
+      "body": "",
+      "changedPaths": [
+        "app/api/ai/scaffold/route.ts",
+        "app/api/ai/task/route.ts",
+        "lib/ai/apply.ts",
+        "lib/ai/apply.ts.bak.1773093674",
+        "lib/ai/orchestrator.ts",
+        "lib/ai/parseFileBlocks.ts",
+        "lib/ai/repair-loop.ts",
+        "lib/ai/scaffold.ts",
+        "task-apply.json",
+        "task-repair.json"
+      ],
+      "changedPathsByParent": {
+        "39f24def7b85cbd8d3170c819ed6595048873b14": [
+          "app/api/ai/scaffold/route.ts",
+          "app/api/ai/task/route.ts",
+          "lib/ai/apply.ts",
+          "lib/ai/apply.ts.bak.1773093674",
+          "lib/ai/orchestrator.ts",
+          "lib/ai/parseFileBlocks.ts",
+          "lib/ai/repair-loop.ts",
+          "lib/ai/scaffold.ts",
+          "task-apply.json",
+          "task-repair.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:bd6b0083d9a9d3bdf463d80e1aaa4fe60532363e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

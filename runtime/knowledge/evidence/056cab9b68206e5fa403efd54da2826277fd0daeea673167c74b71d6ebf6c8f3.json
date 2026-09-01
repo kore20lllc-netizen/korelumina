@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f6476d88b2bbb9391880bd8068d46acd324fa349473473f5a1b7e3f5c22c3475",
+  "type": "commit",
+  "title": "refactor(platform-sdk): migrate project metadata storage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227736948,
+  "observedAt": 1782816175000,
+  "contentRef": "git:commit:d1b91787813a8d4177ee05af845e2f6da29d0ca1",
+  "checksum": "sha256:862306567bd65f3dd44f062246329cb12e0069e9f112e66184e2a8c9a6c76345",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 607,
+    "genesisAdmissionIdentity": "genesis-admission:4720be06caf4fd0c097a12553195e8e814f83fb6d770d980273de2bbc7ed251f",
+    "historicalSourceId": "genesis-source:commit:d1b91787813a8d4177ee05af845e2f6da29d0ca1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d1b91787813a8d4177ee05af845e2f6da29d0ca1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d1b91787813a8d4177ee05af845e2f6da29d0ca1",
+      "parentShas": [
+        "e003de0d28e431609a6ca1fe9a810c985632c532"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782816175000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782816175000
+      },
+      "subject": "refactor(platform-sdk): migrate project metadata storage",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+        "scripts/architecture/investigate-next.sh"
+      ],
+      "changedPathsByParent": {
+        "e003de0d28e431609a6ca1fe9a810c985632c532": [
+          "docs/architecture/ARCHITECTURE_CHANGELOG.md",
+          "scripts/architecture/investigate-next.sh"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d1b91787813a8d4177ee05af845e2f6da29d0ca1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

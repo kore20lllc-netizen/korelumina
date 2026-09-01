@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:c63a3e092dd78706bbd6c3a16f139774e751e9576e1dfb4c79e02fa29cef1f32",
+  "type": "commit",
+  "title": "refactor(platform-sdk): extract decision domain contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737876,
+  "observedAt": 1782881472000,
+  "contentRef": "git:commit:03d3076808717145990c48e87070d7232f1d57eb",
+  "checksum": "sha256:7a8afd9411ab27479e48bcbf9f38f082b5dedf4a955ed9aa447b695aa994d94c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 632,
+    "genesisAdmissionIdentity": "genesis-admission:d82d7b71b9e3bd9ce5a75f54e44b02b4254efc74590db819b5de83145467cc40",
+    "historicalSourceId": "genesis-source:commit:03d3076808717145990c48e87070d7232f1d57eb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:03d3076808717145990c48e87070d7232f1d57eb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "03d3076808717145990c48e87070d7232f1d57eb",
+      "parentShas": [
+        "fbaf31f8520e2270acb49059c6ebae4ca7f6571d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782881472000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782881472000
+      },
+      "subject": "refactor(platform-sdk): extract decision domain contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/decision/Decision.ts",
+        "apps/lumina-runtime/src/knowledge/decision/DecisionEvidence.ts",
+        "apps/lumina-runtime/src/knowledge/decision/DecisionRelation.ts",
+        "packages/platform-sdk/src/decision/Decision.ts",
+        "packages/platform-sdk/src/decision/DecisionEvidence.ts",
+        "packages/platform-sdk/src/decision/DecisionRelation.ts",
+        "packages/platform-sdk/src/decision/index.ts",
+        "packages/platform-sdk/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "fbaf31f8520e2270acb49059c6ebae4ca7f6571d": [
+          "apps/lumina-runtime/src/knowledge/decision/Decision.ts",
+          "apps/lumina-runtime/src/knowledge/decision/DecisionEvidence.ts",
+          "apps/lumina-runtime/src/knowledge/decision/DecisionRelation.ts",
+          "packages/platform-sdk/src/decision/Decision.ts",
+          "packages/platform-sdk/src/decision/DecisionEvidence.ts",
+          "packages/platform-sdk/src/decision/DecisionRelation.ts",
+          "packages/platform-sdk/src/decision/index.ts",
+          "packages/platform-sdk/src/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase038-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:03d3076808717145990c48e87070d7232f1d57eb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

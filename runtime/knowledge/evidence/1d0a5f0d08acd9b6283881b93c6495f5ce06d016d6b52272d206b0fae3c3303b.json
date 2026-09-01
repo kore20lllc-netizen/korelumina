@@ -1,0 +1,101 @@
+{
+  "id": "genesis-evidence:79faf6caa68c83059100f6451fc11df077b8847534df130818e742d37f43a673",
+  "type": "commit",
+  "title": "fix(builder): restore missing builder workspace assets",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737692,
+  "observedAt": 1782879459000,
+  "contentRef": "git:commit:340e4f34b0ea06b8a324744122413ed3b81ba07e",
+  "checksum": "sha256:4767c49e25bb7917aac6e8c58871f9e19cf7327359a6523c99c61d01c02a73bf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 627,
+    "genesisAdmissionIdentity": "genesis-admission:07cfba9d471ba2cbd8b7ef62030db556e00dd919b5108cc75e8cbb1586abe10d",
+    "historicalSourceId": "genesis-source:commit:340e4f34b0ea06b8a324744122413ed3b81ba07e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:340e4f34b0ea06b8a324744122413ed3b81ba07e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "340e4f34b0ea06b8a324744122413ed3b81ba07e",
+      "parentShas": [
+        "509397192bc577ad9f27c16e070a7de8eac0b8c0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782879459000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782879459000
+      },
+      "subject": "fix(builder): restore missing builder workspace assets",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/assets/lumina-blob.png",
+        "apps/lumina-builder/assets/lumina.png",
+        "apps/lumina-builder/public/lumina.png",
+        "apps/lumina-builder/public/videos/hero-build-reel.mp4",
+        "apps/lumina-builder/public/videos/hero-build-reel.webm",
+        "apps/lumina-builder/public/videos/landing-bg.mp4",
+        "apps/lumina-runtime/src/knowledge/runtime/RuntimeEvent.ts",
+        "archive/lumina-legacy/components.backup.1778817800/workspaces/EntryView.tsx",
+        "archive/lumina-legacy/components.backup.1778817800/workspaces/dev/DevAIAssistPanel.tsx",
+        "archive/lumina-legacy/lumina-ui-migrated/src/assets/lumina.png",
+        "archive/lumina-legacy/src.backup/src/assets/lumina-blob.png",
+        "archive/lumina-legacy/src.backup/src/assets/lumina.png",
+        "assets/lumina-blob.png",
+        "assets/lumina.png",
+        "package-lock.json",
+        "packages/platform-sdk/src/contracts/RuntimeEvent.ts",
+        "packages/platform-sdk/src/contracts/index.ts",
+        "packages/platform-sdk/src/index.ts",
+        "test.png",
+        "types-babel__traverse-7.28.0.tgz"
+      ],
+      "changedPathsByParent": {
+        "509397192bc577ad9f27c16e070a7de8eac0b8c0": [
+          "apps/lumina-builder/assets/lumina-blob.png",
+          "apps/lumina-builder/assets/lumina.png",
+          "apps/lumina-builder/public/lumina.png",
+          "apps/lumina-builder/public/videos/hero-build-reel.mp4",
+          "apps/lumina-builder/public/videos/hero-build-reel.webm",
+          "apps/lumina-builder/public/videos/landing-bg.mp4",
+          "apps/lumina-runtime/src/knowledge/runtime/RuntimeEvent.ts",
+          "archive/lumina-legacy/components.backup.1778817800/workspaces/EntryView.tsx",
+          "archive/lumina-legacy/components.backup.1778817800/workspaces/dev/DevAIAssistPanel.tsx",
+          "archive/lumina-legacy/lumina-ui-migrated/src/assets/lumina.png",
+          "archive/lumina-legacy/src.backup/src/assets/lumina-blob.png",
+          "archive/lumina-legacy/src.backup/src/assets/lumina.png",
+          "assets/lumina-blob.png",
+          "assets/lumina.png",
+          "package-lock.json",
+          "packages/platform-sdk/src/contracts/RuntimeEvent.ts",
+          "packages/platform-sdk/src/contracts/index.ts",
+          "packages/platform-sdk/src/index.ts",
+          "test.png",
+          "types-babel__traverse-7.28.0.tgz"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/reconstruction-builder-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:340e4f34b0ea06b8a324744122413ed3b81ba07e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

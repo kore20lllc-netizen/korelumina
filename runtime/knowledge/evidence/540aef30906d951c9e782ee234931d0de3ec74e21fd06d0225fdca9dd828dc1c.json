@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:0ccfcffe24a49b0099a487eceab07b6ce5eddfd58ffb1b044bad018e74c672ec",
+  "type": "document",
+  "title": "Evidence Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227740101,
+  "observedAt": 1783024546000,
+  "contentRef": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md",
+  "checksum": "sha256:469525483f9c9c525678186fbe9ef1f57b382c7b1b05f33dc45ab3f8126977ae",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 690,
+    "genesisAdmissionIdentity": "genesis-admission:808d45b0c068c1ac4a0bb3ca9b36644173bb4c7dde72cadf6de55a2f7300f173",
+    "historicalSourceId": "genesis-source:document:derived:55fc1f80b7452e4de5a0641f09984f44e30c06de33729b3d24fd6988fb7d4d94",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft v1",
+    "sourceLocation": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Evidence Model",
+      "status": "Draft v1",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:55fc1f80b7452e4de5a0641f09984f44e30c06de33729b3d24fd6988fb7d4d94"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

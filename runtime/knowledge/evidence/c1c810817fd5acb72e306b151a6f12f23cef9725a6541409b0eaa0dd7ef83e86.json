@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:61c7e6a5986d5c655de57f36b9060b4474411dfb830f0698aa1f5357f8e10af6",
+  "type": "commit",
+  "title": "feat(knowledge): enforce promotion policy",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227741560,
+  "observedAt": 1783049168000,
+  "contentRef": "git:commit:6de52d8dba5de1c113607f08293232fa8261a58e",
+  "checksum": "sha256:2bbdc470ab58b444a3865acd6dfb9f80166fbd56f15097d8ea5fbddb8675f3b0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 727,
+    "genesisAdmissionIdentity": "genesis-admission:a0fa34a4de86876eaa96b1b95394cd58ecd4fca3cba70ab97d2dd9ce77f0d015",
+    "historicalSourceId": "genesis-source:commit:6de52d8dba5de1c113607f08293232fa8261a58e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6de52d8dba5de1c113607f08293232fa8261a58e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6de52d8dba5de1c113607f08293232fa8261a58e",
+      "parentShas": [
+        "a1b9e8a2b70e2e2e050fc3b6665d151570206979"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783049168000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783049168000
+      },
+      "subject": "feat(knowledge): enforce promotion policy",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeQueryService.ts",
+        "apps/lumina-runtime/src/canonical-knowledge/KnowledgePromotionPolicy.ts",
+        "apps/lumina-runtime/src/canonical-knowledge/index.ts"
+      ],
+      "changedPathsByParent": {
+        "a1b9e8a2b70e2e2e050fc3b6665d151570206979": [
+          "apps/lumina-runtime/src/canonical-knowledge/CanonicalKnowledgeQueryService.ts",
+          "apps/lumina-runtime/src/canonical-knowledge/KnowledgePromotionPolicy.ts",
+          "apps/lumina-runtime/src/canonical-knowledge/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ckm-007-query-service-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6de52d8dba5de1c113607f08293232fa8261a58e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

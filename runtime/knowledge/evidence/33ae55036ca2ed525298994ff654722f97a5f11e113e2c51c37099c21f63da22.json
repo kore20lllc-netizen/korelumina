@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:a0cd3db4dca9c54f3f057f8ceb06b4cf55b97d61f438f3e9188ffba62469446b",
+  "type": "commit",
+  "title": "feat(learning): integrate context adapter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227733198,
+  "observedAt": 1782640119000,
+  "contentRef": "git:commit:0b4b4474ce15f7035cdf074efb774ac05d099061",
+  "checksum": "sha256:b4c945fd4f95e736b5958b98abe54e023a8ade211f58f840bd16aaa0ec2d22e0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 503,
+    "genesisAdmissionIdentity": "genesis-admission:56492dfb5db4cfd0867f0f7b70fd310c49d462c59f401bcefcaf7a3f4491b5a6",
+    "historicalSourceId": "genesis-source:commit:0b4b4474ce15f7035cdf074efb774ac05d099061",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0b4b4474ce15f7035cdf074efb774ac05d099061",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0b4b4474ce15f7035cdf074efb774ac05d099061",
+      "parentShas": [
+        "6f2a8f491fb050883699b679d53e9d13f4466fc9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782640119000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782640119000
+      },
+      "subject": "feat(learning): integrate context adapter",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/learning/ContextLearningAdapter.ts",
+        "apps/lumina-runtime/src/knowledge/learning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "6f2a8f491fb050883699b679d53e9d13f4466fc9": [
+          "apps/lumina-runtime/src/knowledge/learning/ContextLearningAdapter.ts",
+          "apps/lumina-runtime/src/knowledge/learning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0b4b4474ce15f7035cdf074efb774ac05d099061"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

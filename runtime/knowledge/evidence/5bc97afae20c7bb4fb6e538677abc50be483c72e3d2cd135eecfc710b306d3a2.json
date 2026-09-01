@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:802014f5557b09b5967e92f81fee0a40347b64de7ecaa8828565852d40ef2829",
+  "type": "commit",
+  "title": "feat(auth): enable Supabase admin login and workspace routing",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227723720,
+  "observedAt": 1779320497000,
+  "contentRef": "git:commit:d10b15e0142d248e53d07d7e547549426c46fccf",
+  "checksum": "sha256:076a7f6b6cfb3d05d4992dae164b7d7abe6db69c33bae2daa97279405f5dddb0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 218,
+    "genesisAdmissionIdentity": "genesis-admission:69d2373fdadfef4e58fed1f8123f35a97bee85a7d7b5add7e7b571b6ed4f8fe2",
+    "historicalSourceId": "genesis-source:commit:d10b15e0142d248e53d07d7e547549426c46fccf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d10b15e0142d248e53d07d7e547549426c46fccf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d10b15e0142d248e53d07d7e547549426c46fccf",
+      "parentShas": [
+        "7b51796878498b3afc97ac13869df8dfa06a7059"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779320497000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779320497000
+      },
+      "subject": "feat(auth): enable Supabase admin login and workspace routing",
+      "body": "",
+      "changedPaths": [
+        "src/hooks/use-auth.ts",
+        "src/providers/auth/SupabaseAuthProvider.ts"
+      ],
+      "changedPathsByParent": {
+        "7b51796878498b3afc97ac13869df8dfa06a7059": [
+          "src/hooks/use-auth.ts",
+          "src/providers/auth/SupabaseAuthProvider.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d10b15e0142d248e53d07d7e547549426c46fccf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

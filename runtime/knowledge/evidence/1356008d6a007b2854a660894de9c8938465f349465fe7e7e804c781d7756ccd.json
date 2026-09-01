@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c4693bed0a3c118f6467c0f505bc09614436cd162555e4052280a5fd648b1611",
+  "type": "commit",
+  "title": "chore(runtime): harden project path boundaries and remove preview backup",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227724297,
+  "observedAt": 1779878334000,
+  "contentRef": "git:commit:061d9f977f9a004ac96c83791cfcd68411809814",
+  "checksum": "sha256:1137f8025697d328e42a920d140bd452f0f8212013bdfb2a01d37f858343bdf6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 236,
+    "genesisAdmissionIdentity": "genesis-admission:6b7777f24ba401051ff9ae4dc631ad5582de3d034c5339e813937b6d203cefae",
+    "historicalSourceId": "genesis-source:commit:061d9f977f9a004ac96c83791cfcd68411809814",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:061d9f977f9a004ac96c83791cfcd68411809814",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "061d9f977f9a004ac96c83791cfcd68411809814",
+      "parentShas": [
+        "8b3666d6987649e8bf679edeaea880869adbf6e9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779878334000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1779878334000
+      },
+      "subject": "chore(runtime): harden project path boundaries and remove preview backup",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx.bak",
+        "apps/lumina-runtime/src/projects/getProjectPath.ts"
+      ],
+      "changedPathsByParent": {
+        "8b3666d6987649e8bf679edeaea880869adbf6e9": [
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx.bak",
+          "apps/lumina-runtime/src/projects/getProjectPath.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:061d9f977f9a004ac96c83791cfcd68411809814"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

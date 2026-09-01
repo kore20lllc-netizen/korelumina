@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:a1c0dcfd4918d4ad609313e0d099cfc112e7069ca66484ea1ac61720f228c640",
+  "type": "commit",
+  "title": "feat(runtime): improve diagnostics dashboard visibility",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227725735,
+  "observedAt": 1781584192000,
+  "contentRef": "git:commit:70456202fbb3c4b09ddb6e060d2ac978c0b9fb62",
+  "checksum": "sha256:b09806e591307c040ad36c7882ce51a2ec549c0262ebefb5e5cf638e2d4f4d58",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 281,
+    "genesisAdmissionIdentity": "genesis-admission:c5bfb79f5685596e40dbeac08f159698d90e8db1d5b40fd035a0fc065429812a",
+    "historicalSourceId": "genesis-source:commit:70456202fbb3c4b09ddb6e060d2ac978c0b9fb62",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:70456202fbb3c4b09ddb6e060d2ac978c0b9fb62",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "70456202fbb3c4b09ddb6e060d2ac978c0b9fb62",
+      "parentShas": [
+        "4db0e057959894e5e21a1b7ddd3f7e16f185faca"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781584192000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1781584192000
+      },
+      "subject": "feat(runtime): improve diagnostics dashboard visibility",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "4db0e057959894e5e21a1b7ddd3f7e16f185faca": [
+          "apps/lumina-builder/src/components/workspaces/RuntimeDiagnosticsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/korelumina-production-baseline-v5"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:70456202fbb3c4b09ddb6e060d2ac978c0b9fb62"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

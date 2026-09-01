@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:3fb0828a23f4cfc179aa9aede0abaf6110b2f5098c08a13075c74fa19d27780d",
+  "type": "commit",
+  "title": "runtime: stabilize manifest, status, logs, preview daemon isolation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227718938,
+  "observedAt": 1771824402000,
+  "contentRef": "git:commit:d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86",
+  "checksum": "sha256:267b74e159450760981a5e52233a8a9169c8bba65c0d1b35a1097039194e0bd0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 65,
+    "genesisAdmissionIdentity": "genesis-admission:c6404573730fa47a3f4a8f2e4cb1bb063b047867c8df347715f5ff020ed7a1e7",
+    "historicalSourceId": "genesis-source:commit:d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86",
+      "parentShas": [
+        "1fd16fb8540b5280b642f397abf7a171637d2e43"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771824402000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1771824402000
+      },
+      "subject": "runtime: stabilize manifest, status, logs, preview daemon isolation",
+      "body": "",
+      "changedPaths": [
+        "app/(workspace)/projects/[projectId]/builder/BuilderClient.tsx",
+        "app/(workspace)/projects/[projectId]/builder/page.tsx",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/logs/route.ts",
+        "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+        "lib/project-manifest.ts",
+        "lib/workspace-jail.ts",
+        "runtime/preview-daemon.ts"
+      ],
+      "changedPathsByParent": {
+        "1fd16fb8540b5280b642f397abf7a171637d2e43": [
+          "app/(workspace)/projects/[projectId]/builder/BuilderClient.tsx",
+          "app/(workspace)/projects/[projectId]/builder/page.tsx",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/logs/route.ts",
+          "app/api/workspaces/[workspaceId]/projects/[projectId]/status/route.ts",
+          "lib/project-manifest.ts",
+          "lib/workspace-jail.ts",
+          "runtime/preview-daemon.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d3f6dfb6783722de0e6fbfe21cf10d2d9e018f86"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

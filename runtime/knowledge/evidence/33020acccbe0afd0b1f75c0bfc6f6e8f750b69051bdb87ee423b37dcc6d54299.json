@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:dea7335bf1fca45c26395596fe90f1e99eeb481f993f4a30cd6346304b5f96e7",
+  "type": "document",
+  "title": "KoreLumina Architecture Decision Criteria V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227727814,
+  "observedAt": 1782457451000,
+  "contentRef": "docs/architecture/ARCHITECTURE_DECISION_CRITERIA_V1.md",
+  "checksum": "sha256:09720b61eb48a8387e8e893c7829896b7d9935ed6eb37f400e9a3698a7149d0f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 344,
+    "genesisAdmissionIdentity": "genesis-admission:8a32687bb50549d5f553524a1cf89a55c433d36bd43d6751a20fbfc813731d73",
+    "historicalSourceId": "genesis-source:document:derived:9f027778cb81985d373079cc8bd8af7801e19e366bb92ef3793c751646152aa6",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Frozen",
+    "owner": "Platform Architecture Team",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_DECISION_CRITERIA_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Decision Criteria V1",
+      "status": "Frozen",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_DECISION_CRITERIA_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:9f027778cb81985d373079cc8bd8af7801e19e366bb92ef3793c751646152aa6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

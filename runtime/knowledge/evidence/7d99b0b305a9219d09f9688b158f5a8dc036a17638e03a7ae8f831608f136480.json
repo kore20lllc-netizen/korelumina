@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:6ccf9efcb64dd6753d5f15bb2f9b0083753c4d0875be31be88dbba54339a08c2",
+  "type": "commit",
+  "title": "refactor(platform-sdk): extract engineering domain contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737913,
+  "observedAt": 1782881859000,
+  "contentRef": "git:commit:8062d8d29772eee43cb24ee5817767f42e122308",
+  "checksum": "sha256:e54adb5034eb4ebb1420632fc34d8a812c21988bd407b375141d0dcfd64707c8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 633,
+    "genesisAdmissionIdentity": "genesis-admission:452ce3937fc6efd29a80499b1fe41214286275273a405135208a7c69b538ff59",
+    "historicalSourceId": "genesis-source:commit:8062d8d29772eee43cb24ee5817767f42e122308",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8062d8d29772eee43cb24ee5817767f42e122308",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8062d8d29772eee43cb24ee5817767f42e122308",
+      "parentShas": [
+        "03d3076808717145990c48e87070d7232f1d57eb"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782881859000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782881859000
+      },
+      "subject": "refactor(platform-sdk): extract engineering domain contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/engineering/EngineeringManifest.ts",
+        "apps/lumina-runtime/src/knowledge/engineering/types.ts",
+        "packages/platform-sdk/src/engineering/EngineeringManifest.ts",
+        "packages/platform-sdk/src/engineering/index.ts",
+        "packages/platform-sdk/src/engineering/types.ts",
+        "packages/platform-sdk/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "03d3076808717145990c48e87070d7232f1d57eb": [
+          "apps/lumina-runtime/src/knowledge/engineering/EngineeringManifest.ts",
+          "apps/lumina-runtime/src/knowledge/engineering/types.ts",
+          "packages/platform-sdk/src/engineering/EngineeringManifest.ts",
+          "packages/platform-sdk/src/engineering/index.ts",
+          "packages/platform-sdk/src/engineering/types.ts",
+          "packages/platform-sdk/src/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/sdk-phase039-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8062d8d29772eee43cb24ee5817767f42e122308"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

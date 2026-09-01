@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f6f4fda2d540f54c814188fac04a61bb0c88c67ec3f19e5f7fce4a47e4359725",
+  "type": "commit",
+  "title": "feat(knowledge): add repository knowledge recorder",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227730556,
+  "observedAt": 1782533895000,
+  "contentRef": "git:commit:970fc164787eb0755366dfc1c8b70501346a9115",
+  "checksum": "sha256:80d3c419c0fb1970d0ec4251d9558a6251abc693e56c05c149d216c2f796c120",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 426,
+    "genesisAdmissionIdentity": "genesis-admission:fb5f702cecf01fe3a8ca9400c1d9e2e0a0903e691b4348e55bae077a9fe6b6cd",
+    "historicalSourceId": "genesis-source:commit:970fc164787eb0755366dfc1c8b70501346a9115",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:970fc164787eb0755366dfc1c8b70501346a9115",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "970fc164787eb0755366dfc1c8b70501346a9115",
+      "parentShas": [
+        "546e8f32f9dc83d179940b1a2c194853638e363a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782533895000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782533895000
+      },
+      "subject": "feat(knowledge): add repository knowledge recorder",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/repository/RepositoryKnowledgeRecorder.ts",
+        "apps/lumina-runtime/src/knowledge/repository/index.ts"
+      ],
+      "changedPathsByParent": {
+        "546e8f32f9dc83d179940b1a2c194853638e363a": [
+          "apps/lumina-runtime/src/knowledge/repository/RepositoryKnowledgeRecorder.ts",
+          "apps/lumina-runtime/src/knowledge/repository/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:970fc164787eb0755366dfc1c8b70501346a9115"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}

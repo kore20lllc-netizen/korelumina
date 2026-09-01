@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:be0e22be9c87c354efead9004a5de33a5f3c9ef1ee4c8295e88b9803d9b8faeb",
+  "type": "commit",
+  "title": "refactor(runtime): extract startup architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788227737209,
+  "observedAt": 1782824397000,
+  "contentRef": "git:commit:6b1aa1d7fe5b30da7d5f25aa6267208d2072f0f9",
+  "checksum": "sha256:62a5b036d8576dcf19c8cfa4e9b57d79266c9c5a20687011dc00351f7ba45b21",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e",
+    "genesisManifestId": "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86",
+    "genesisManifestIndex": 614,
+    "genesisAdmissionIdentity": "genesis-admission:3ef40bad75d5f2c13c6a66a5055082786174556384674cb3b12940e3a667b0e6",
+    "historicalSourceId": "genesis-source:commit:6b1aa1d7fe5b30da7d5f25aa6267208d2072f0f9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6b1aa1d7fe5b30da7d5f25aa6267208d2072f0f9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6b1aa1d7fe5b30da7d5f25aa6267208d2072f0f9",
+      "parentShas": [
+        "b7f8c1b1d745fce4c84487c59601c31e73abfab0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782824397000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1782824397000
+      },
+      "subject": "refactor(runtime): extract startup architecture",
+      "body": "- extract RuntimeStartupValidator\n- extract RuntimeCommandBuilder\n- extract RuntimeRestartPolicy\n- extract RuntimeProcessLauncher\n- extract RuntimeReadiness\n- reduce startProject orchestration\n- preserve runtime behavior",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/startProject.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeCommandBuilder.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeProcessLauncher.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeReadiness.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeRestartPolicy.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeStartupValidator.ts",
+        "docs/reconstruction/RUNTIME_RECONSTRUCTION_LOG.md",
+        "scripts/architecture/investigate-log-tool.sh",
+        "scripts/architecture/log-change.js",
+        "scripts/architecture/log-change.sh"
+      ],
+      "changedPathsByParent": {
+        "b7f8c1b1d745fce4c84487c59601c31e73abfab0": [
+          "apps/lumina-runtime/src/runtime/startProject.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeCommandBuilder.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeProcessLauncher.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeReadiness.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeRestartPolicy.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeStartupValidator.ts",
+          "docs/reconstruction/RUNTIME_RECONSTRUCTION_LOG.md",
+          "scripts/architecture/investigate-log-tool.sh",
+          "scripts/architecture/log-change.js",
+          "scripts/architecture/log-change.sh"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6b1aa1d7fe5b30da7d5f25aa6267208d2072f0f9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:30374dd1e54ae2bdaee5a1ff9d7ef924754617f348240eae18012648e8c7b23e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7db8fc63df838f9e3e90eea2f6b92ea88a7653d35dc3aff216cff2c225b48c86"
+    ]
+  }
+}
