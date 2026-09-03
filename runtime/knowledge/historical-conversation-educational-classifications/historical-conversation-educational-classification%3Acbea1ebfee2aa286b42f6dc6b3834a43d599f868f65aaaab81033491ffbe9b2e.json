@@ -1,0 +1,28 @@
+{
+  "classificationId": "historical-conversation-educational-classification:cbea1ebfee2aa286b42f6dc6b3834a43d599f868f65aaaab81033491ffbe9b2e",
+  "checksum": "cbea1ebfee2aa286b42f6dc6b3834a43d599f868f65aaaab81033491ffbe9b2e",
+  "conversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+  "sourceEvidenceIds": [
+    "genesis-conversation-evidence:a3525928d6f55ee706d787e69550477b77d2a94dbda957fdae866740b3dfb3b4"
+  ],
+  "sourceChecksum": "0b23df7e33ce86a4b3bb4daae34b09b02b42bf2cf251160d07fc9d64482e13b0",
+  "requirementContributions": [
+    {
+      "requirementId": "conversation:mission",
+      "evidenceIds": [
+        "genesis-conversation-evidence:a3525928d6f55ee706d787e69550477b77d2a94dbda957fdae866740b3dfb3b4"
+      ],
+      "basis": "The governed historical conversation evidence explicitly defines the constitutional progression from Historical Replay through Educational Corpus, Initial Competency, Chief Agent activation, and Continuous Learning."
+    }
+  ],
+  "classifierId": "historical-conversation-educational-classifier",
+  "classifierVersion": "1",
+  "lineage": {
+    "sourceConversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+    "sourceEvidenceIds": [
+      "genesis-conversation-evidence:a3525928d6f55ee706d787e69550477b77d2a94dbda957fdae866740b3dfb3b4"
+    ],
+    "sourceChecksum": "0b23df7e33ce86a4b3bb4daae34b09b02b42bf2cf251160d07fc9d64482e13b0"
+  },
+  "createdAt": 1788165035415
+}

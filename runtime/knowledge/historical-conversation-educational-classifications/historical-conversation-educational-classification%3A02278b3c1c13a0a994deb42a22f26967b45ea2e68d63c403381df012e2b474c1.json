@@ -1,0 +1,28 @@
+{
+  "classificationId": "historical-conversation-educational-classification:02278b3c1c13a0a994deb42a22f26967b45ea2e68d63c403381df012e2b474c1",
+  "checksum": "02278b3c1c13a0a994deb42a22f26967b45ea2e68d63c403381df012e2b474c1",
+  "conversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+  "sourceEvidenceIds": [
+    "genesis-conversation-evidence:24d33a12a6182d49aedda9da541350ac15f5d4716fa0c1825564320555b3a2b0"
+  ],
+  "sourceChecksum": "5a7067e5201ae9e33831b252bb2a5d6a6180b02de5fb1f8012ad79934bf0e679",
+  "requirementContributions": [
+    {
+      "requirementId": "conversation:engineering",
+      "evidenceIds": [
+        "genesis-conversation-evidence:24d33a12a6182d49aedda9da541350ac15f5d4716fa0c1825564320555b3a2b0"
+      ],
+      "basis": "The governed historical conversation evidence explicitly establishes production engineering rules, implementation sequencing, Runtime source-of-truth requirements, and anti-drift implementation guidance."
+    }
+  ],
+  "classifierId": "historical-conversation-educational-classifier",
+  "classifierVersion": "1",
+  "lineage": {
+    "sourceConversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+    "sourceEvidenceIds": [
+      "genesis-conversation-evidence:24d33a12a6182d49aedda9da541350ac15f5d4716fa0c1825564320555b3a2b0"
+    ],
+    "sourceChecksum": "5a7067e5201ae9e33831b252bb2a5d6a6180b02de5fb1f8012ad79934bf0e679"
+  },
+  "createdAt": 1788165035415
+}

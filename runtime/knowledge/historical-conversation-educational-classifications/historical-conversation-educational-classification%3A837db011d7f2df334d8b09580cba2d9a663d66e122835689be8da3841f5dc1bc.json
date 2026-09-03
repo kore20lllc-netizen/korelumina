@@ -1,0 +1,28 @@
+{
+  "classificationId": "historical-conversation-educational-classification:837db011d7f2df334d8b09580cba2d9a663d66e122835689be8da3841f5dc1bc",
+  "checksum": "837db011d7f2df334d8b09580cba2d9a663d66e122835689be8da3841f5dc1bc",
+  "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+  "sourceEvidenceIds": [
+    "genesis-conversation-evidence:a81794b5bd96cadb97b0db8cbfe070c318bbbcad4666be72b5af2d33e00c4b28"
+  ],
+  "sourceChecksum": "e153bdb616606df23f26c9fdd74329f29ac49e6e51933a2960a9f85fa8e8c0e4",
+  "requirementContributions": [
+    {
+      "requirementId": "conversation:architecture",
+      "evidenceIds": [
+        "genesis-conversation-evidence:a81794b5bd96cadb97b0db8cbfe070c318bbbcad4666be72b5af2d33e00c4b28"
+      ],
+      "basis": "The governed historical conversation evidence explicitly defines KoreLumina's cross-source historical architecture, layered source-evidence/event/episode model, and reconstruction boundaries."
+    }
+  ],
+  "classifierId": "historical-conversation-educational-classifier",
+  "classifierVersion": "1",
+  "lineage": {
+    "sourceConversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+    "sourceEvidenceIds": [
+      "genesis-conversation-evidence:a81794b5bd96cadb97b0db8cbfe070c318bbbcad4666be72b5af2d33e00c4b28"
+    ],
+    "sourceChecksum": "e153bdb616606df23f26c9fdd74329f29ac49e6e51933a2960a9f85fa8e8c0e4"
+  },
+  "createdAt": 1788165035415
+}
