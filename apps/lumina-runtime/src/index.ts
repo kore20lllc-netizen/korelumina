@@ -247,6 +247,10 @@ import {
   registerGenesisConversationAuthoritativeExpectedHistoryRoute,
 } from "./routes/genesisConversationAuthoritativeExpectedHistory.js";
 
+import {
+  registerGenesisConversationExpectedHistoryAmendmentRoute,
+} from "./routes/genesisConversationExpectedHistoryAmendment.js";
+
 
 import {
   registerGenesisDayZeroCertificationRoutes,
@@ -259,10 +263,13 @@ import {
 
 import {
   buildGenesisRuntimeCanonicalConsumptionView,
+  buildGenesisDayZeroGovernedCertificationCandidate,
   FileGenesisConversationAcquisitionPersistenceStore,
   FileGenesisConversationExpectedHistoryCandidatePersistenceStore,
   FileGenesisConversationExpectedHistoryCandidateReviewPersistenceStore,
   FileGenesisConversationExpectedHistoryPersistenceStore,
+  FileGenesisConversationExpectedHistoryAmendmentPersistenceStore,
+  GenesisConversationExpectedHistoryAmendmentService,
   GenesisConversationExpectedHistoryCandidateReviewService,
   GenesisConversationExpectedHistoryCandidateService,
   GenesisConversationAuthoritativeCompletenessEvidenceService,
@@ -284,6 +291,12 @@ import {
   readGenesisOperationalProjection,
   resolveGenesisRuntimeReplaySelection,
 } from "./knowledge-preservation/genesis/index.js";
+import { GenesisDayZeroConversationCoverageEvidenceService } from "./knowledge-preservation/genesis/GenesisDayZeroConversationCoverageEvidenceService.js";
+import { GenesisDayZeroConversationCoverageCertificationService } from "./knowledge-preservation/genesis/GenesisDayZeroConversationCoverageCertificationService.js";
+import { FileGenesisDayZeroConversationCoverageCertificationPersistenceStore } from "./knowledge-preservation/genesis/GenesisDayZeroConversationCoverageCertificationPersistence.js";
+import {
+  registerGenesisDayZeroConversationCoverageCertificationRoutes,
+} from "./routes/genesisDayZeroConversationCoverageCertification.js";
 
 const app = express();
 
@@ -383,6 +396,17 @@ export const runtimeGenesisConversationHistoryReconciliationService =
   );
 
 
+export const runtimeGenesisConversationExpectedHistoryAmendmentPersistenceStore =
+  new FileGenesisConversationExpectedHistoryAmendmentPersistenceStore();
+
+
+export const runtimeGenesisConversationExpectedHistoryAmendmentService =
+  new GenesisConversationExpectedHistoryAmendmentService(
+    runtimeGenesisConversationHistoryReconciliationService,
+    runtimeGenesisConversationExpectedHistoryAmendmentPersistenceStore,
+  );
+
+
 
 
 export const runtimeGenesisConversationAuthoritativeCompletenessEvidenceService =
@@ -479,34 +503,56 @@ export const runtimeGenesisDayZeroCertificationService =
             );
           }
 
-          return readGenesisOperationalProjection({
-            replayId:
-              selection.replayId,
+          const operationalProjection =
+            readGenesisOperationalProjection({
+              replayId:
+                selection.replayId,
 
-            replayPersistence:
-              runtimeGenesisReplayPersistenceStore,
+              replayPersistence:
+                runtimeGenesisReplayPersistenceStore,
 
-            historicalCorrelation:
-              runtimeGenesisHistoricalCorrelationPersistenceStore,
+              historicalCorrelation:
+                runtimeGenesisHistoricalCorrelationPersistenceStore,
 
-            manufacturingRuns:
-              runtimeKnowledgePreservationPlatform
-                .manufacturingRunService,
+              manufacturingRuns:
+                runtimeKnowledgePreservationPlatform
+                  .manufacturingRunService,
 
-            organizationalMemory:
-              runtimeOrganizationalMemoryStore,
+              organizationalMemory:
+                runtimeOrganizationalMemoryStore,
 
-            readinessPolicy:
-              runtimeGenesisReadinessPolicy,
+              readinessPolicy:
+                runtimeGenesisReadinessPolicy,
 
-            conversationSource:
-              runtimeGenesisConversationConfiguration
-                .boundary,
+              conversationSource:
+                runtimeGenesisConversationConfiguration
+                  .boundary,
 
-            conversationHistoryReconciliation:
-              runtimeGenesisConversationHistoryReconciliationService
-                .read(),
-          }).dayZeroCertificationCandidate;
+              conversationHistoryReconciliation:
+                runtimeGenesisConversationHistoryReconciliationService
+                  .read(),
+            });
+
+          const coverageCertification =
+            runtimeGenesisDayZeroConversationCoverageCertificationService
+              .read();
+
+          return buildGenesisDayZeroGovernedCertificationCandidate({
+            candidate:
+              operationalProjection
+                .dayZeroCertificationCandidate,
+
+            conversationCoverageCertification: {
+              state:
+                coverageCertification.state,
+
+              certificationId:
+                coverageCertification
+                  .certification
+                  ?.certificationId ??
+                null,
+            },
+          });
         },
     },
   );
@@ -700,6 +746,42 @@ export const runtimeEducationalCorpusGenesisHistoricalReader = {
     });
   },
 };
+
+
+export const runtimeGenesisDayZeroConversationCoverageEvidenceService =
+  new GenesisDayZeroConversationCoverageEvidenceService(
+    runtimeGenesisConversationHistoryReconciliationService,
+    {
+      read: () => {
+        const operationalProjection =
+          runtimeEducationalCorpusGenesisHistoricalReader
+            .read();
+
+        if (
+          operationalProjection ===
+          null
+        ) {
+          throw new Error(
+            "genesis_day_zero_conversation_coverage_operational_projection_unavailable",
+          );
+        }
+
+        return operationalProjection
+          .conversationCorrelationCompleteness;
+      },
+    },
+  );
+
+
+export const runtimeGenesisDayZeroConversationCoverageCertificationPersistenceStore =
+  new FileGenesisDayZeroConversationCoverageCertificationPersistenceStore();
+
+
+export const runtimeGenesisDayZeroConversationCoverageCertificationService =
+  new GenesisDayZeroConversationCoverageCertificationService(
+    runtimeGenesisDayZeroConversationCoverageCertificationPersistenceStore,
+    runtimeGenesisDayZeroConversationCoverageEvidenceService,
+  );
 
 
 export const runtimeEducationalCorpusService =
@@ -1310,6 +1392,15 @@ registerGenesisConversationAuthoritativeExpectedHistoryRoute(
 );
 
 
+registerGenesisConversationExpectedHistoryAmendmentRoute(
+  app,
+  {
+    service:
+      runtimeGenesisConversationExpectedHistoryAmendmentService,
+  },
+);
+
+
 registerGenesisDayZeroCertificationRoutes(
   app,
   {
@@ -1317,6 +1408,16 @@ registerGenesisDayZeroCertificationRoutes(
       runtimeGenesisDayZeroCertificationService,
   },
 );
+
+
+registerGenesisDayZeroConversationCoverageCertificationRoutes(
+  app,
+  {
+    service:
+      runtimeGenesisDayZeroConversationCoverageCertificationService,
+  },
+);
+
 
 
 registerGenesisReplayStatusRoute(

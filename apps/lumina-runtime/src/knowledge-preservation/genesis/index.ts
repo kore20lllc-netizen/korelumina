@@ -57,6 +57,9 @@ export * from "./GenesisConversationAuthoritativeCompletenessCertificationPersis
 export * from "./GenesisConversationAuthoritativeCompletenessCertificationService.js";
 export * from "./GenesisConversationExpectedHistoryInventory.js";
 export * from "./GenesisConversationExpectedHistoryPersistence.js";
+export * from "./GenesisConversationExpectedHistoryAmendment.js";
+export * from "./GenesisConversationExpectedHistoryAmendmentPersistence.js";
+export * from "./GenesisConversationExpectedHistoryAmendmentService.js";
 export * from "./GenesisConversationAuthoritativeExpectedHistory.js";
 export * from "./GenesisConversationAuthoritativeExpectedHistoryService.js";
 export * from "./GenesisConversationHistoryReconciliationService.js";
@@ -64,6 +67,7 @@ export * from "./PersistedConversationHistoricalSourceDiscoverer.js";
 export * from "./GenesisConversationReplayEvidenceResolver.js";
 export * from "./GenesisConversationCorrelationCompleteness.js";
 export * from "./GenesisDayZeroCertificationCandidate.js";
+export * from "./GenesisDayZeroGovernedCertificationCandidate.js";
 export * from "./GenesisDayZeroCertification.js";
 export * from "./GenesisDayZeroCertificationPersistence.js";
 export * from "./GenesisDayZeroCertificationService.js";

@@ -423,3 +423,210 @@ test(
     );
   },
 );
+
+test(
+  "stale certification with a READY current candidate reopens single approval",
+  () => {
+    const runtime =
+      unsetRuntime();
+
+    const oldCandidateId =
+      "genesis-day-zero-certification-candidate:old";
+
+    runtime.state =
+      "STALE";
+
+    runtime.certification = {
+      certificationId:
+        "genesis-day-zero-certification:old",
+
+      certificationVersion:
+        "genesis-day-zero-certification:v1",
+
+      state:
+        "CERTIFIED",
+
+      candidateId:
+        oldCandidateId,
+
+      certifiedBy:
+        "human",
+
+      certifiedAt:
+        1000,
+
+      reason:
+        "previous approval",
+
+      provenance: {
+        repositorySeedCertificationId:
+          runtime.candidate
+            .provenance
+            .repositorySeedCertificationId,
+
+        corpusProjectionId:
+          runtime.candidate
+            .provenance
+            .corpusProjectionId,
+
+        conversationExpectedInventoryId:
+          "genesis-conversation-expected-history:old",
+
+        conversationAcquisitionInventoryId:
+          runtime.candidate
+            .provenance
+            .conversationAcquisitionInventoryId,
+
+        conversationCorrelationProjectionId:
+          runtime.candidate
+            .provenance
+            .conversationCorrelationProjectionId,
+      },
+
+      certifiedHistoricalGaps: {
+        historicallyUnavailableConversationIds: [
+          "conversation-lost",
+        ],
+      },
+
+      downstream: {
+        educationalCorpusCertified:
+          false,
+
+        initialCompetencyCertified:
+          false,
+
+        chiefAgentActivationAuthorized:
+          false,
+      },
+    };
+
+    runtime.validation = {
+      state:
+        "STALE",
+
+      certificationId:
+        runtime.certification
+          .certificationId,
+
+      currentCandidateId:
+        runtime.candidate
+          .candidateId,
+
+      blockers: [
+        "day-zero-certification-candidate-changed",
+      ],
+    };
+
+    const result =
+      buildGenesisDayZeroCertificationApprovalProjection(
+        runtime,
+      );
+
+    assert.equal(
+      runtime.candidate.state,
+      "READY",
+    );
+
+    assert.notEqual(
+      runtime.certification
+        .candidateId,
+      runtime.candidate
+        .candidateId,
+    );
+
+    assert.equal(
+      result.state,
+      "READY_FOR_SINGLE_APPROVAL",
+    );
+
+    assert.equal(
+      result.approval.available,
+      true,
+    );
+
+    assert.equal(
+      result.approval
+        .singleHumanApprovalRequired,
+      true,
+    );
+
+    assert.equal(
+      result.approval
+        .perConversationApprovalRequired,
+      false,
+    );
+
+    assert.equal(
+      result.exceptions.length,
+      0,
+    );
+
+    assert.match(
+      result.approval.reason,
+      /re-certification/i,
+    );
+  },
+);
+
+
+test(
+  "stale certification does not reopen approval when the current candidate has unresolved blockers",
+  () => {
+    const runtime =
+      unsetRuntime();
+
+    runtime.state =
+      "STALE";
+
+    runtime.candidate = {
+      ...runtime.candidate,
+
+      state:
+        "INCOMPLETE",
+
+      blockers: [
+        "conversation-history-coverage-incomplete",
+      ],
+    };
+
+    runtime.validation = {
+      state:
+        "STALE",
+
+      certificationId:
+        "genesis-day-zero-certification:stale-blocked",
+
+      currentCandidateId:
+        runtime.candidate
+          .candidateId,
+
+      blockers: [
+        "day-zero-certification-candidate-changed",
+      ],
+    };
+
+    const result =
+      buildGenesisDayZeroCertificationApprovalProjection(
+        runtime,
+      );
+
+    assert.equal(
+      result.approval.available,
+      false,
+    );
+
+    assert.notEqual(
+      result.state,
+      "READY_FOR_SINGLE_APPROVAL",
+    );
+
+    assert.ok(
+      result.exceptions.some(
+        item =>
+          item.code ===
+          "conversation-history-coverage-incomplete",
+      ),
+    );
+  },
+);

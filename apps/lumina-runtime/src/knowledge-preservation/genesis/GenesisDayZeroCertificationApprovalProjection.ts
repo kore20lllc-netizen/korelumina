@@ -386,8 +386,19 @@ export function buildGenesisDayZeroCertificationApprovalProjection(
     );
   }
 
+  /*
+   * Validation blockers belong to the persisted certification.
+   *
+   * When that certification is STALE but the current authoritative
+   * candidate is READY, those blockers describe why the old
+   * certification no longer matches current authority. They are not
+   * defects in the current candidate and must not prevent governed
+   * re-certification.
+   */
   if (
-    runtime.validation
+    runtime.validation &&
+    runtime.state !==
+      "STALE"
   ) {
     for (
       const blocker
@@ -425,8 +436,20 @@ export function buildGenesisDayZeroCertificationApprovalProjection(
       );
 
   const approvalAvailable =
+    (
+      runtime.state ===
+        "UNSET" ||
+      runtime.state ===
+        "STALE"
+    ) &&
+    candidate.state ===
+      "READY" &&
+    deduplicated.length ===
+      0;
+
+  const staleReadyForReCertification =
     runtime.state ===
-      "UNSET" &&
+      "STALE" &&
     candidate.state ===
       "READY" &&
     deduplicated.length ===
@@ -437,20 +460,22 @@ export function buildGenesisDayZeroCertificationApprovalProjection(
       runtime.state ===
         "VALID"
         ? "CERTIFIED"
-        : runtime.state ===
-            "STALE"
-          ? "STALE"
+        : staleReadyForReCertification
+          ? "READY_FOR_SINGLE_APPROVAL"
           : runtime.state ===
-              "BLOCKED" ||
-            candidate.state ===
-              "BLOCKED"
-            ? "BLOCKED"
-            : deduplicated.length >
-                0 ||
-              candidate.state !==
-                "READY"
-              ? "EXCEPTIONS_PRESENT"
-              : "READY_FOR_SINGLE_APPROVAL";
+              "STALE"
+            ? "STALE"
+            : runtime.state ===
+                "BLOCKED" ||
+              candidate.state ===
+                "BLOCKED"
+              ? "BLOCKED"
+              : deduplicated.length >
+                  0 ||
+                candidate.state !==
+                  "READY"
+                ? "EXCEPTIONS_PRESENT"
+                : "READY_FOR_SINGLE_APPROVAL";
 
   const acknowledgedHistoricalGaps =
     runtime.certification
@@ -463,7 +488,10 @@ export function buildGenesisDayZeroCertificationApprovalProjection(
   const approvalReason =
     state ===
       "READY_FOR_SINGLE_APPROVAL"
-      ? "All automated Day-0 prerequisites are satisfied. One human corpus-level approval may be issued."
+      ? runtime.state ===
+          "STALE"
+        ? "The persisted Day-0 certification is stale, but the current authoritative candidate satisfies all automated prerequisites. One human corpus-level re-certification approval may be issued."
+        : "All automated Day-0 prerequisites are satisfied. One human corpus-level approval may be issued."
       : state ===
           "CERTIFIED"
         ? "Day-0 Genesis is certified and currently valid."
