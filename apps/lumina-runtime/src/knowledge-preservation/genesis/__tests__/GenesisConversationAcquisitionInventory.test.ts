@@ -45,6 +45,126 @@ test(
 
 
 test(
+  "persisted successful acquisition remains ACQUIRED when source is no longer configured",
+  () => {
+    const configuration =
+      resolveGenesisConversationRuntimeConfiguration(
+        {},
+      );
+
+    const inventory =
+      buildGenesisConversationAcquisitionInventory({
+        configuration,
+
+        latest: {
+          acquisitionId:
+            "acquisition-persisted-1",
+
+          state:
+            "ACQUIRED",
+
+          sourceId:
+            "runtime-chatgpt-browser-conversation-history-v1",
+
+          firstAcquiredAt:
+            100,
+
+          lastAcquiredAt:
+            100,
+
+          completedAt:
+            101,
+
+          occurrenceCount:
+            1,
+
+          occurrences: [
+            {
+              acquiredAt:
+                100,
+
+              completedAt:
+                101,
+            },
+          ],
+
+          conversationIds: [
+            "conversation-2",
+            "conversation-1",
+          ],
+
+          gaps:
+            [],
+
+          conversationCount:
+            2,
+
+          historicalSourceCount:
+            4,
+
+          evidenceCount:
+            4,
+
+          errors:
+            [],
+
+          historicalSources:
+            [],
+
+          evidence:
+            [],
+        },
+      });
+
+    assert.equal(
+      inventory.historyState,
+      "ACQUIRED",
+    );
+
+    assert.equal(
+      inventory.completeness,
+      "UNVERIFIED",
+    );
+
+    assert.equal(
+      inventory.configured,
+      false,
+    );
+
+    assert.equal(
+      inventory.acquisitionAvailable,
+      false,
+    );
+
+    assert.equal(
+      inventory.acquisitionId,
+      "acquisition-persisted-1",
+    );
+
+    assert.deepEqual(
+      inventory.acquiredConversationIds,
+      [
+        "conversation-1",
+        "conversation-2",
+      ],
+    );
+
+    assert.deepEqual(
+      inventory.blockers,
+      [
+        "authoritative-conversation-history-inventory-not-certified",
+      ],
+    );
+
+    assert.equal(
+      inventory.historicalCompletenessCertified,
+      false,
+    );
+  },
+);
+
+
+test(
   "configured source without acquisition remains NOT_ACQUIRED",
   () => {
     const configuration = {

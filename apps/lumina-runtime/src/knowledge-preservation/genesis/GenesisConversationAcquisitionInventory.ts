@@ -282,58 +282,15 @@ export function buildGenesisConversationAcquisitionInventory(
     emptyGapCounts();
 
   if (
-    configuration.state ===
-    "UNCONFIGURED"
+    latest?.state ===
+    "ACQUIRED"
   ) {
-    historyState =
-      "UNCONFIGURED";
-
-    completeness =
-      "NOT_ACQUIRED";
-
-    blockers.push(
-      "conversation-source-not-configured",
-    );
-  } else if (
-    configuration.state ===
-    "UNAVAILABLE"
-  ) {
-    historyState =
-      "SOURCE_UNAVAILABLE";
-
-    completeness =
-      "NOT_ACQUIRED";
-
-    blockers.push(
-      "configured-conversation-source-unavailable",
-    );
-  } else if (
-    latest ===
-    null
-  ) {
-    historyState =
-      "NOT_ACQUIRED";
-
-    completeness =
-      "NOT_ACQUIRED";
-
-    blockers.push(
-      "conversation-acquisition-not-executed",
-    );
-  } else if (
-    latest.state ===
-    "FAILED"
-  ) {
-    historyState =
-      "ACQUISITION_FAILED";
-
-    completeness =
-      "NOT_ACQUIRED";
-
-    blockers.push(
-      "conversation-acquisition-failed",
-    );
-  } else {
+    /*
+     * A successfully persisted acquisition is durable historical
+     * evidence. Current source configuration controls whether a new
+     * acquisition can execute; it must not erase an acquisition that
+     * has already completed and been persisted.
+     */
     historyState =
       "ACQUIRED";
 
@@ -419,6 +376,55 @@ export function buildGenesisConversationAcquisitionInventory(
         "authoritative-conversation-history-inventory-not-certified",
       );
     }
+  } else if (
+    configuration.state ===
+    "UNCONFIGURED"
+  ) {
+    historyState =
+      "UNCONFIGURED";
+
+    completeness =
+      "NOT_ACQUIRED";
+
+    blockers.push(
+      "conversation-source-not-configured",
+    );
+  } else if (
+    configuration.state ===
+    "UNAVAILABLE"
+  ) {
+    historyState =
+      "SOURCE_UNAVAILABLE";
+
+    completeness =
+      "NOT_ACQUIRED";
+
+    blockers.push(
+      "configured-conversation-source-unavailable",
+    );
+  } else if (
+    latest ===
+    null
+  ) {
+    historyState =
+      "NOT_ACQUIRED";
+
+    completeness =
+      "NOT_ACQUIRED";
+
+    blockers.push(
+      "conversation-acquisition-not-executed",
+    );
+  } else {
+    historyState =
+      "ACQUISITION_FAILED";
+
+    completeness =
+      "NOT_ACQUIRED";
+
+    blockers.push(
+      "conversation-acquisition-failed",
+    );
   }
 
   const normalizedBlockers =
