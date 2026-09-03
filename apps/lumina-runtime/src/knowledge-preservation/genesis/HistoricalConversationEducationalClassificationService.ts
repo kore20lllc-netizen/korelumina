@@ -31,9 +31,6 @@ export interface CreateGovernedHistoricalConversationEducationalClassificationIn
   conversationId:
     string;
 
-  correlationId:
-    string;
-
   requirementContributions:
     HistoricalConversationEducationalRequirementContribution[];
 
@@ -132,12 +129,6 @@ export class HistoricalConversationEducationalClassificationService {
       requireNonEmpty(
         input.conversationId,
         "historical_conversation_educational_classification_service_conversation_id_required",
-      );
-
-    const correlationId =
-      requireNonEmpty(
-        input.correlationId,
-        "historical_conversation_educational_classification_service_correlation_id_required",
       );
 
     const contributionEvidenceIds =
@@ -252,7 +243,6 @@ export class HistoricalConversationEducationalClassificationService {
     const classification =
       createHistoricalConversationEducationalClassification({
         conversationId,
-        correlationId,
 
         sourceEvidenceIds:
           contributionEvidenceIds,

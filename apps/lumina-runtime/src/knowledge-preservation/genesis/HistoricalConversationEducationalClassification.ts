@@ -37,9 +37,6 @@ export interface HistoricalConversationEducationalClassificationLineage {
   sourceConversationId:
     string;
 
-  correlationId:
-    string;
-
   sourceEvidenceIds:
     string[];
 
@@ -56,9 +53,6 @@ export interface HistoricalConversationEducationalClassification {
     string;
 
   conversationId:
-    string;
-
-  correlationId:
     string;
 
   sourceEvidenceIds:
@@ -86,9 +80,6 @@ export interface HistoricalConversationEducationalClassification {
 
 export interface CreateHistoricalConversationEducationalClassificationInput {
   conversationId:
-    string;
-
-  correlationId:
     string;
 
   sourceEvidenceIds:
@@ -127,9 +118,6 @@ export type HistoricalConversationEducationalClassificationValidation =
 
 interface HistoricalConversationEducationalClassificationIdentityPayload {
   conversationId:
-    string;
-
-  correlationId:
     string;
 
   sourceEvidenceIds:
@@ -277,12 +265,6 @@ function identityPayload(
       "historical_conversation_educational_classification_conversation_id_required",
     );
 
-  const correlationId =
-    requireNonEmpty(
-      input.correlationId,
-      "historical_conversation_educational_classification_correlation_id_required",
-    );
-
   const sourceEvidenceIds =
     normalizeStringList(
       input.sourceEvidenceIds,
@@ -312,7 +294,6 @@ function identityPayload(
 
   return {
     conversationId,
-    correlationId,
     sourceEvidenceIds,
     sourceChecksum,
 
@@ -382,9 +363,6 @@ export function createHistoricalConversationEducationalClassification(
       sourceConversationId:
         payload.conversationId,
 
-      correlationId:
-        payload.correlationId,
-
       sourceEvidenceIds: [
         ...payload.sourceEvidenceIds,
       ],
@@ -408,9 +386,6 @@ export function validateHistoricalConversationEducationalClassification(
       createHistoricalConversationEducationalClassification({
         conversationId:
           classification.conversationId,
-
-        correlationId:
-          classification.correlationId,
 
         sourceEvidenceIds:
           classification.sourceEvidenceIds,
@@ -460,8 +435,6 @@ export function validateHistoricalConversationEducationalClassification(
     if (
       classification.lineage.sourceConversationId !==
         reconstructed.lineage.sourceConversationId ||
-      classification.lineage.correlationId !==
-        reconstructed.lineage.correlationId ||
       classification.lineage.sourceChecksum !==
         reconstructed.lineage.sourceChecksum ||
       JSON.stringify(

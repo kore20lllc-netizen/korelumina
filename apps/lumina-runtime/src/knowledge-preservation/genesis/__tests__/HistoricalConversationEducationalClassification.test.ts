@@ -13,9 +13,6 @@ function createFixture() {
     conversationId:
       "conversation-001",
 
-    correlationId:
-      "correlation-001",
-
     sourceEvidenceIds: [
       "evidence-002",
       "evidence-001",
@@ -66,9 +63,6 @@ test(
       createHistoricalConversationEducationalClassification({
         conversationId:
           "conversation-001",
-
-        correlationId:
-          "correlation-001",
 
         sourceEvidenceIds: [
           "evidence-001",
@@ -175,9 +169,6 @@ test(
           conversationId:
             "conversation-001",
 
-          correlationId:
-            "correlation-001",
-
           sourceEvidenceIds: [
             "evidence-001",
           ],
@@ -216,9 +207,6 @@ test(
         createHistoricalConversationEducationalClassification({
           conversationId:
             "conversation-001",
-
-          correlationId:
-            "correlation-001",
 
           sourceEvidenceIds: [
             "evidence-001",
@@ -268,9 +256,6 @@ test(
       createHistoricalConversationEducationalClassification({
         conversationId:
           "conversation-002",
-
-        correlationId:
-          "correlation-002",
 
         sourceEvidenceIds: [
           "evidence-003",

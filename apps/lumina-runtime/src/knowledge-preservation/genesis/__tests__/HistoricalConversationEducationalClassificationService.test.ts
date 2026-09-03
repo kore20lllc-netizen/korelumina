@@ -178,9 +178,6 @@ test(
             conversationId:
               "conversation-001",
 
-            correlationId:
-              "correlation-001",
-
             requirementContributions: [
               {
                 requirementId:
@@ -253,9 +250,6 @@ test(
             conversationId:
               "conversation-001",
 
-            correlationId:
-              "correlation-001",
-
             requirementContributions: [
               {
                 requirementId:
@@ -312,9 +306,6 @@ test(
               conversationId:
                 "conversation-001",
 
-              correlationId:
-                "correlation-001",
-
               requirementContributions: [
                 {
                   requirementId:
@@ -364,9 +355,6 @@ test(
               conversationId:
                 "conversation-001",
 
-              correlationId:
-                "correlation-001",
-
               requirementContributions: [
                 {
                   requirementId:
@@ -415,9 +403,6 @@ test(
             service.create({
               conversationId:
                 "conversation-001",
-
-              correlationId:
-                "correlation-001",
 
               requirementContributions: [
                 {
@@ -478,9 +463,6 @@ test(
               conversationId:
                 "conversation-001",
 
-              correlationId:
-                "correlation-001",
-
               requirementContributions: [
                 {
                   requirementId:
@@ -524,9 +506,6 @@ test(
         const input = {
           conversationId:
             "conversation-001",
-
-          correlationId:
-            "correlation-001",
 
           requirementContributions: [
             {

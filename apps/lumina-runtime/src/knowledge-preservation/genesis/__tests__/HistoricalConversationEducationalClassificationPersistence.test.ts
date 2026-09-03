@@ -58,9 +58,6 @@ function createFixture(
   return createHistoricalConversationEducationalClassification({
     conversationId,
 
-    correlationId:
-      `correlation-${conversationId}`,
-
     sourceEvidenceIds: [
       `evidence-${conversationId}`,
     ],
