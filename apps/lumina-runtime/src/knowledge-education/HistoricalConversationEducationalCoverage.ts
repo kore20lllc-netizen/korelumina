@@ -2,6 +2,14 @@ import type {
   EvidenceItem,
 } from "../knowledge-preservation/evidence/index.js";
 
+import {
+  validateHistoricalConversationEducationalClassification,
+} from "../knowledge-preservation/genesis/HistoricalConversationEducationalClassification.js";
+
+import type {
+  HistoricalConversationEducationalClassification,
+} from "../knowledge-preservation/genesis/HistoricalConversationEducationalClassification.js";
+
 import type {
   EducationalCorpusHistoricalEvidence,
   EducationalCorpusHistoricalEvidenceRecord,
@@ -473,6 +481,9 @@ export function measureHistoricalConversationEducationalCoverage(
 
     conversationEvidence:
       readonly EvidenceItem[];
+
+    classifications?:
+      readonly HistoricalConversationEducationalClassification[];
   },
 ): HistoricalConversationEducationalCoverageResult {
   if (
@@ -492,6 +503,83 @@ export function measureHistoricalConversationEducationalCoverage(
     evidenceByHistoricalSource(
       input.conversationEvidence,
     );
+
+  const governedRequirementIds =
+    new Set(
+      requirements.map(
+        requirement =>
+          requirement.id,
+      ),
+    );
+
+  const classificationsByEvidenceId =
+    new Map<
+      string,
+      HistoricalConversationEducationalClassification[]
+    >();
+
+  for (
+    const classification
+    of input.classifications ?? []
+  ) {
+    const validation =
+      validateHistoricalConversationEducationalClassification(
+        classification,
+      );
+
+    if (
+      validation.state !==
+        "VALID"
+    ) {
+      throw new Error(
+        `historical_conversation_coverage_classification_invalid:${classification.classificationId}:${validation.reason}`,
+      );
+    }
+
+    for (
+      const contribution
+      of classification.requirementContributions
+    ) {
+      if (
+        !governedRequirementIds.has(
+          contribution.requirementId,
+        )
+      ) {
+        throw new Error(
+          `historical_conversation_coverage_classification_requirement_unknown:${contribution.requirementId}`,
+        );
+      }
+
+      for (
+        const evidenceId
+        of contribution.evidenceIds
+      ) {
+        if (
+          !classification.sourceEvidenceIds.includes(
+            evidenceId,
+          )
+        ) {
+          throw new Error(
+            `historical_conversation_coverage_classification_evidence_outside_lineage:${classification.classificationId}:${evidenceId}`,
+          );
+        }
+
+        const existing =
+          classificationsByEvidenceId.get(
+            evidenceId,
+          ) ?? [];
+
+        existing.push(
+          classification,
+        );
+
+        classificationsByEvidenceId.set(
+          evidenceId,
+          existing,
+        );
+      }
+    }
+  }
 
   const contributors =
     new Map<
@@ -580,6 +668,137 @@ export function measureHistoricalConversationEducationalCoverage(
           continue;
         }
 
+        const evidenceConversationChecksum =
+          metadataString(
+            evidence,
+            "conversationChecksum",
+          );
+
+        const governedClassifications =
+          classificationsByEvidenceId.get(
+            evidence.id,
+          ) ?? [];
+
+        for (
+          const classification
+          of governedClassifications
+        ) {
+          if (
+            classification.conversationId !==
+              conversationId
+          ) {
+            throw new Error(
+              `historical_conversation_coverage_classification_conversation_mismatch:${classification.classificationId}:${evidence.id}`,
+            );
+          }
+
+          if (
+            !evidenceConversationChecksum ||
+            classification.sourceChecksum !==
+              evidenceConversationChecksum
+          ) {
+            throw new Error(
+              `historical_conversation_coverage_classification_checksum_mismatch:${classification.classificationId}:${evidence.id}`,
+            );
+          }
+
+          for (
+            const contribution
+            of classification.requirementContributions
+          ) {
+            if (
+              !contribution.evidenceIds.includes(
+                evidence.id,
+              )
+            ) {
+              continue;
+            }
+
+            const key =
+              contributorKey(
+                contribution.requirementId,
+                evidence.id,
+                historicalSourceId,
+              );
+
+            let contributor =
+              contributors.get(
+                key,
+              );
+
+            if (
+              !contributor
+            ) {
+              contributor = {
+                requirementId:
+                  contribution.requirementId,
+
+                evidenceId:
+                  evidence.id,
+
+                evidenceTitle:
+                  evidence.title,
+
+                historicalSourceId,
+
+                conversationId,
+
+                messageId,
+
+                recordIds:
+                  new Set(),
+
+                episodeIds:
+                  new Set(),
+
+                sourceReferenceIds:
+                  new Set(),
+
+                sourceRevisionIds:
+                  new Set(),
+
+                eventIds:
+                  new Set(),
+              };
+
+              contributors.set(
+                key,
+                contributor,
+              );
+            }
+
+            contributor.recordIds.add(
+              record.recordId,
+            );
+
+            contributor.episodeIds.add(
+              record.episodeId,
+            );
+
+            contributor.sourceReferenceIds.add(
+              source.sourceReferenceId,
+            );
+
+            contributor.sourceRevisionIds.add(
+              source.sourceRevisionId,
+            );
+
+            for (
+              const event
+              of record.eventReferences
+            ) {
+              contributor.eventIds.add(
+                event.eventId,
+              );
+            }
+          }
+        }
+
+        /*
+         * Preserve the existing governed title-signal path.
+         * Governed semantic classifications supplement it; they do not
+         * alter ordinary historical title matching or current authority.
+         */
         for (
           const requirement
           of requirements

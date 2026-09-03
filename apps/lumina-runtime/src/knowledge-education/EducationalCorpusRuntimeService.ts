@@ -30,6 +30,14 @@ import {
   FileGenesisConversationAcquisitionPersistenceStore,
 } from "../knowledge-preservation/genesis/index.js";
 
+import {
+  HistoricalConversationEducationalClassificationPersistence,
+} from "../knowledge-preservation/genesis/HistoricalConversationEducationalClassificationPersistence.js";
+
+import {
+  resolveKnowledgeStorageRoot,
+} from "../knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
+
 import type {
   GenesisConversationAcquisitionLatestState,
   GenesisDayZeroCertificationRuntimeProjection,
@@ -176,6 +184,12 @@ export class EducationalCorpusRuntimeService {
     private readonly conversationEvidence:
       EducationalCorpusConversationEvidenceReader =
         new FileGenesisConversationAcquisitionPersistenceStore(),
+
+    private readonly historicalClassifications =
+      new HistoricalConversationEducationalClassificationPersistence({
+        rootDir:
+          resolveKnowledgeStorageRoot(),
+      }),
   ) {}
 
 
@@ -246,6 +260,10 @@ export class EducationalCorpusRuntimeService {
             .evidence
         : [];
 
+    const governedClassifications =
+      this.historicalClassifications
+        .listSync();
+
     const historicalConversationCoverage =
       historicalEvidence
         ? measureHistoricalConversationEducationalCoverage({
@@ -253,6 +271,9 @@ export class EducationalCorpusRuntimeService {
 
             conversationEvidence:
               persistedConversationEvidence,
+
+            classifications:
+              governedClassifications,
           })
         : null;
 

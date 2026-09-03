@@ -1,4 +1,9 @@
 import {
+  readFileSync,
+  readdirSync,
+} from "node:fs";
+
+import {
   mkdir,
   readFile,
   readdir,
@@ -198,6 +203,97 @@ export class HistoricalConversationEducationalClassificationPersistence {
     );
 
     return classification;
+  }
+
+
+  public listSync():
+    HistoricalConversationEducationalClassification[] {
+    const directory =
+      classificationDirectory(
+        this.rootDir,
+      );
+
+    let filenames:
+      string[];
+
+    try {
+      filenames =
+        readdirSync(
+          directory,
+        );
+    } catch (
+      error
+    ) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        return [];
+      }
+
+      throw error;
+    }
+
+    const classifications:
+      HistoricalConversationEducationalClassification[] =
+        [];
+
+    for (
+      const filename
+      of filenames.sort()
+    ) {
+      if (
+        !filename.endsWith(
+          ".json",
+        )
+      ) {
+        continue;
+      }
+
+      const raw =
+        readFileSync(
+          join(
+            directory,
+            filename,
+          ),
+          "utf8",
+        );
+
+      const classification =
+        JSON.parse(
+          raw,
+        ) as HistoricalConversationEducationalClassification;
+
+      const validation =
+        validateHistoricalConversationEducationalClassification(
+          classification,
+        );
+
+      if (
+        validation.state !==
+          "VALID"
+      ) {
+        throw new Error(
+          `historical_conversation_educational_classification_persistence_invalid:${validation.reason}`,
+        );
+      }
+
+      classifications.push(
+        classification,
+      );
+    }
+
+    return classifications.sort(
+      (
+        left,
+        right,
+      ) =>
+        left.classificationId.localeCompare(
+          right.classificationId,
+        ),
+    );
   }
 
 
