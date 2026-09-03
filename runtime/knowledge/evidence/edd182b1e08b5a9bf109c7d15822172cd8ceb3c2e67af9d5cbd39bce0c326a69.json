@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:0d3ba2b77ab22eb37bbffe17d1bb098ec360fca74c31ce744e4aa616b68d6a3e",
+  "type": "commit",
+  "title": "docs(lumina): define certified extraction execution plan",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240088969,
+  "observedAt": 1785866147000,
+  "contentRef": "git:commit:5ed2eba4d4a88ae1003798df21c90c4698e07e16",
+  "checksum": "sha256:976dea86be07ff7ae11a51c7725002b46020034865bb9b366ba6eacf935f2cef",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1038,
+    "genesisAdmissionIdentity": "genesis-admission:a824071af45b158c82b9269d7499ac651b3a02e7ab0f33d2308fa93bed3c5d1d",
+    "historicalSourceId": "genesis-source:commit:5ed2eba4d4a88ae1003798df21c90c4698e07e16",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5ed2eba4d4a88ae1003798df21c90c4698e07e16",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5ed2eba4d4a88ae1003798df21c90c4698e07e16",
+      "parentShas": [
+        "21a4dc3c4087ff5f58a4ef3799fec6680c533db0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785866147000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785866147000
+      },
+      "subject": "docs(lumina): define certified extraction execution plan",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md"
+      ],
+      "changedPathsByParent": {
+        "21a4dc3c4087ff5f58a4ef3799fec6680c533db0": [
+          "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5ed2eba4d4a88ae1003798df21c90c4698e07e16"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

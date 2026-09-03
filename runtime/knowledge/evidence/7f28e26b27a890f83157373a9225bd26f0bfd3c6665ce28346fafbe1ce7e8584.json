@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:1f789fdc665244b5743cb65f5b975accb87568f045ef30d3645dd65ad6b3ba06",
+  "type": "document",
+  "title": "CAP-002 — Capability Lifecycle",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085129,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/capabilities/CAP-002_CAPABILITY_LIFECYCLE.md",
+  "checksum": "sha256:4a1a38dd38a1d47ee737dfaada9d8d31e3048af029bdeab3d6209dab837433de",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 962,
+    "genesisAdmissionIdentity": "genesis-admission:fa7747a660ec1eb789162ed2911a0eb54b12ff2704013b8d67bd442b7cab6384",
+    "historicalSourceId": "genesis-source:document:derived:89488b69e66fb03c36df205b5aedbff2411835fe52a8e3ca60705877cc2f0b7f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/capabilities/CAP-002_CAPABILITY_LIFECYCLE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "CAP-002 — Capability Lifecycle",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/capabilities/CAP-002_CAPABILITY_LIFECYCLE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:89488b69e66fb03c36df205b5aedbff2411835fe52a8e3ca60705877cc2f0b7f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

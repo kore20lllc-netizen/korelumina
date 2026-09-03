@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:d8aca6c188f848e23ac5fc48f2cba9b69326eec37503736897b209a0d4019736",
+  "type": "commit",
+  "title": "refactor(knowledge): use Lumina flagship control directly in corpus explorer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240099733,
+  "observedAt": 1786201146000,
+  "contentRef": "git:commit:25088919b09604553319d3c6d8571bd6d7bc7630",
+  "checksum": "sha256:d83da478c6b121b1c498b6a0c2adcd1a8dc340eb58aa0b4288808be120c6f059",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1230,
+    "genesisAdmissionIdentity": "genesis-admission:4e8ca931c2d37d7752c496f7ed75c876c604511187dab516d78b5c20605035c2",
+    "historicalSourceId": "genesis-source:commit:25088919b09604553319d3c6d8571bd6d7bc7630",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:25088919b09604553319d3c6d8571bd6d7bc7630",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "25088919b09604553319d3c6d8571bd6d7bc7630",
+      "parentShas": [
+        "7be0c68b9246367f1574f733f9e5bcbabc74f89b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786201146000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786201146000
+      },
+      "subject": "refactor(knowledge): use Lumina flagship control directly in corpus explorer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx"
+      ],
+      "changedPathsByParent": {
+        "7be0c68b9246367f1574f733f9e5bcbabc74f89b": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:25088919b09604553319d3c6d8571bd6d7bc7630"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:dcf4acd3086bdf50987ff0a885dcb3c9954111bbe109e67db27045f9893cd7dc",
+  "type": "commit",
+  "title": "feat(lumina): add reusable workspace primitives",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079709,
+  "observedAt": 1783564387000,
+  "contentRef": "git:commit:262b9f7c114da2312e3581a40f212b033704d949",
+  "checksum": "sha256:40503f659535532d401d404abc17e5fb24b09c1de464afa0b6f25fd9eb78eab8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 847,
+    "genesisAdmissionIdentity": "genesis-admission:1858dc71dd187655bb7f1d9605439a54a00c566db132983463dca1444f949bd5",
+    "historicalSourceId": "genesis-source:commit:262b9f7c114da2312e3581a40f212b033704d949",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:262b9f7c114da2312e3581a40f212b033704d949",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "262b9f7c114da2312e3581a40f212b033704d949",
+      "parentShas": [
+        "29e6a4cc09fa78462298fa3c05a0add3a11a0f29"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783564387000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783564387000
+      },
+      "subject": "feat(lumina): add reusable workspace primitives",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/index.ts",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFeedCard.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaInspectorSection.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaPanelHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaStatusBadge.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaTimelineCard.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+      ],
+      "changedPathsByParent": {
+        "29e6a4cc09fa78462298fa3c05a0add3a11a0f29": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/index.ts",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFeedCard.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaInspectorSection.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaPanelHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaStatusBadge.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaTimelineCard.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:262b9f7c114da2312e3581a40f212b033704d949"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

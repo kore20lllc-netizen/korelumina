@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:c0e0001d9cc8eeef6ffa9771e752ba3db408d869e900a86f1ab50794dfd88d05",
+  "type": "document",
+  "title": "KoreLumina Knowledge Philosophy",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078232,
+  "observedAt": 1783201996000,
+  "contentRef": "docs/constitution/KNOWLEDGE_PHILOSOPHY.md",
+  "checksum": "sha256:7249f7ae0a6dac7906a74d0d542840d3cb244598324a11846f35a9e2f627619a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 814,
+    "genesisAdmissionIdentity": "genesis-admission:da8e9de7ba41b7cf40b057a2c7389fa34c88201668f4bc95e22504bcb39a1fc6",
+    "historicalSourceId": "genesis-source:document:derived:218269f14f756dee393d468011a3fdff7ffc761d3095b9213335f3b4eee1b9c3",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/KNOWLEDGE_PHILOSOPHY.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Knowledge Philosophy",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/KNOWLEDGE_PHILOSOPHY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:218269f14f756dee393d468011a3fdff7ffc761d3095b9213335f3b4eee1b9c3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

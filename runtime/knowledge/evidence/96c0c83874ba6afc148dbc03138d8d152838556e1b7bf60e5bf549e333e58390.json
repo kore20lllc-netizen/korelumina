@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:ffea6f9c79c1be1da765323b40fd55f17d40400c125cc33565b9b7d2b6fa5102",
+  "type": "conversation",
+  "title": "KoreLumina — AI Planner + Diff - Guardrail Commit Workflow — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=0",
+  "checksum": "ffea6f9c79c1be1da765323b40fd55f17d40400c125cc33565b9b7d2b6fa5102",
+  "metadata": {
+    "content": "KORELUMINA COMMIT GUARDRAIL (ENFORCED)\n\nSCOPE\n- One module only\n- No cross-module edits\n\nPRE-COMMIT CHECK (ALL YES REQUIRED)\n- build passes → yes\n- preview renders → yes\n- editor visible → yes\n- filetree populated → yes\n- save overwrites (no append) → yes\n- diff visible → yes (if applicable)\n- apply works → yes (if applicable)\n- no console/runtime errors → yes\n\nIF ANY “NO” → STOP\n\nBRANCH RULES\n- NEVER commit on main\n- ALWAYS:\n\n  git checkout main\n  git pull origin main\n  git checkout -b feature/<module>-<task>\n\nCOMMIT (ONLY VIA KPUSH)\n- DO NOT use raw git push\n- ALWAYS use:\n\n  kpush \"type(module): change\"\n\nPUSH FLOW (AUTOMATED BY KPUSH)\n- merges latest main\n- blocks on conflict\n- commits + pushes safely\n\nCONFLICT RULE\n- NEVER rebase\n- ALWAYS:\n\n  git merge origin/main\n\n- If conflict:\n  KEEP LOCAL STABLE:\n\n  git checkout --ours <file>\n  git add .\n  git commit -m \"merge(main): keep stable local state\"\n\n- THEN:\n  git push origin feature/<branch>\n\nMERGE\n- PR → GitHub merge only\n- NO direct pushes to main\n\nPOST-MERGE\n- git checkout main\n- git pull origin main\n\nPROHIBITED\n- ❌ git push origin main\n- ❌ git push --force main\n- ❌ git pull --rebase\n- ❌ editing conflicts manually line-by-line\n- ❌ multi-module edits\n- ❌ mixing UI + runtime + AI changes\n\nAI RULE\n- Small targeted edits only\n- No full rewrites unless explicitly required\n- No architecture changes\n\nROLLBACK\n- Before risky change:\n\n  git tag <module>-checkpoint\n  git push origin <module>-checkpoint\n\n- Restore:\n\n  git checkout <tag>",
+    "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+    "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+    "messageId": "1bb28b80-6766-43ba-9c9b-71f80774a76b",
+    "speakerRole": "user",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9857-2924-8332-8f39-5540c6ad2c76:message:1bb28b80-6766-43ba-9c9b-71f80774a76b",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=0",
+    "sourceRevision": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e800ac0b7adc53925e7f56abf4895a125eb05abba2cf2cab154b8a2b21216975",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf",
+      "exportRevision": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787625718212
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9857-2924-8332-8f39-5540c6ad2c76:message:1bb28b80-6766-43ba-9c9b-71f80774a76b"
+    ],
+    "conversation": [
+      "69cc9857-2924-8332-8f39-5540c6ad2c76"
+    ]
+  }
+}

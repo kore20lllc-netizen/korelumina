@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:a2b02860fe24b6e177a8fa6fb028536063bfb57126bbcb51ee89267f3acfd70b",
+  "type": "commit",
+  "title": "feat(knowledge): introduce persistent knowledge package boundary",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108515,
+  "observedAt": 1786425955000,
+  "contentRef": "git:commit:acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb",
+  "checksum": "sha256:b900cfea3a7e3956ef7a9cf5efac6c7b9303ca4c68dfe7854eaaeb1d2d405704",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1368,
+    "genesisAdmissionIdentity": "genesis-admission:f3dc2996a5d6ecd77f3eeee46bdc72d15225835f81cea8c219443f90ba74b54b",
+    "historicalSourceId": "genesis-source:commit:acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb",
+      "parentShas": [
+        "4ee3601b4a92bf71ada6d9573e398b3bf7ebda9b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786425955000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786425955000
+      },
+      "subject": "feat(knowledge): introduce persistent knowledge package boundary",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-platform/KnowledgePlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackage.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageFactory.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageStore.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/__tests__/knowledgePackageBoundary.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/package/index.ts"
+      ],
+      "changedPathsByParent": {
+        "4ee3601b4a92bf71ada6d9573e398b3bf7ebda9b": [
+          "apps/lumina-runtime/src/knowledge-platform/KnowledgePlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackage.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageFactory.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/KnowledgePackageStore.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/__tests__/knowledgePackageBoundary.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/package/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

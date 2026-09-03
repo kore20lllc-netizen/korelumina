@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:62974a4ebf9e11ef235ef173c22242eb961ab76b7c108664d2dfc02e72ece975",
+  "type": "commit",
+  "title": "docs(runtime): certify runtime operations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083370,
+  "observedAt": 1783976974000,
+  "contentRef": "git:commit:74504559420d263eb5c1bbeb5b4b5a3cbc769dde",
+  "checksum": "sha256:329b4b83ee83042644ee372f4fb331560ae8138329f68ee19c62326a2c1ec5f8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 926,
+    "genesisAdmissionIdentity": "genesis-admission:dfcb67a423930cce8b94cb55131f29e804aeee0e57879709819cc835e4eee5c2",
+    "historicalSourceId": "genesis-source:commit:74504559420d263eb5c1bbeb5b4b5a3cbc769dde",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:74504559420d263eb5c1bbeb5b4b5a3cbc769dde",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "74504559420d263eb5c1bbeb5b4b5a3cbc769dde",
+      "parentShas": [
+        "bc30dc819c65f669c8de378bbc61b2164ade4849"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783976974000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783976974000
+      },
+      "subject": "docs(runtime): certify runtime operations",
+      "body": "",
+      "changedPaths": [
+        "docs/certification/README.md",
+        "docs/certification/runtime/Runtime-Operations-Certification-2026-07-13.md",
+        "scripts/certify-runtime-operations.sh"
+      ],
+      "changedPathsByParent": {
+        "bc30dc819c65f669c8de378bbc61b2164ade4849": [
+          "docs/certification/README.md",
+          "docs/certification/runtime/Runtime-Operations-Certification-2026-07-13.md",
+          "scripts/certify-runtime-operations.sh"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/feature/lumina-workspace-migration"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:74504559420d263eb5c1bbeb5b4b5a3cbc769dde"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

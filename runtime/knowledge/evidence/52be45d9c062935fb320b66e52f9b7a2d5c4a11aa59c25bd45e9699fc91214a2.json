@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:0d72b2245a9c12124fea6de63a622236e712bfd4d2cf47f4702ff1a7c98c40aa",
+  "type": "commit",
+  "title": "feat(education): derive progress from governed coverage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240114451,
+  "observedAt": 1786838815000,
+  "contentRef": "git:commit:c31c1bb89e65d6fa7ca9dfadbee5e2fa94c82784",
+  "checksum": "sha256:602cb6623692b5c15a0d8884fa4bae5c7cd3ab72c16b702b7ec4807a4b8b4fa2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1453,
+    "genesisAdmissionIdentity": "genesis-admission:c9695c4ee6c8f5b9fb1010d0f212ff804c87c48ac00fc547e3c05eb0a785cc96",
+    "historicalSourceId": "genesis-source:commit:c31c1bb89e65d6fa7ca9dfadbee5e2fa94c82784",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c31c1bb89e65d6fa7ca9dfadbee5e2fa94c82784",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c31c1bb89e65d6fa7ca9dfadbee5e2fa94c82784",
+      "parentShas": [
+        "a48f7a37f519550e70019d8fcdfb8f2329cf267f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786838815000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786838815000
+      },
+      "subject": "feat(education): derive progress from governed coverage",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+        "apps/lumina-runtime/src/knowledge-education/CertifiedEducationalCurriculum.ts",
+        "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/CertifiedEducationCompatibility.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCoverageEngine.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalMeasurementContract.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/KnowledgeEducationProjectionService.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/measurement/CertifiedEducationalCoverageRequirements.ts",
+        "apps/lumina-runtime/src/knowledge-education/measurement/EducationalCoverageEngine.ts",
+        "apps/lumina-runtime/src/knowledge-education/measurement/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/normalization/CanonicalEducationNormalizer.ts",
+        "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts"
+      ],
+      "changedPathsByParent": {
+        "a48f7a37f519550e70019d8fcdfb8f2329cf267f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+          "apps/lumina-runtime/src/knowledge-education/CertifiedEducationalCurriculum.ts",
+          "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/CertifiedEducationCompatibility.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCoverageEngine.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalMeasurementContract.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/KnowledgeEducationProjectionService.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/measurement/CertifiedEducationalCoverageRequirements.ts",
+          "apps/lumina-runtime/src/knowledge-education/measurement/EducationalCoverageEngine.ts",
+          "apps/lumina-runtime/src/knowledge-education/measurement/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/normalization/CanonicalEducationNormalizer.ts",
+          "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c31c1bb89e65d6fa7ca9dfadbee5e2fa94c82784"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

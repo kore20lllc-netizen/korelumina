@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:5131300f259442cfe4528a31c380abdaf1ba0899a1db58ae2c8219cb1d0066e4",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Repository Contract Audit — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406#browser-turn=0",
+  "checksum": "5131300f259442cfe4528a31c380abdaf1ba0899a1db58ae2c8219cb1d0066e4",
+  "metadata": {
+    "content": "Phase 48 is correctly locked. The repository now has the intended boundary: successful Runtime responses pass artifacts, competencies, timeline, and Runtime state through unchanged; only module topology is merged with the certified UI contract.  The hook falls back to certifiedBaseline() only when the Runtime request throws.\nProceed with M50 Phase 49 — Learning Production Runtime-Truth Re-Certification. This is read-only:\nBashnpx tsx <<'TS'\nimport assert from \"node:assert/strict\";\n\nimport {\n  certifiedBaseline,\n  runtimeCompatibleDashboard,\n} from \"./apps/lumina-builder/src/components/workspaces/knowledge/learning/state/EducationalRuntimeCompatibility.ts\";\n\nimport {\n  runtimeGenesisReplaySelection,\n  runtimeGenesisCanonicalConsumption,\n  runtimeKnowledgeEducationProjectionService,\n} from \"./apps/lumina-runtime/src/index.ts\";\n\n\nif (\n  runtimeGenesisReplaySelection.state !==\n    \"SELECTED\"\n) {\n  throw new Error(\n    `phase49_replay_selection:${runtimeGenesisReplaySelection.state}`,\n  );\n}\n\n\nif (\n  runtimeGenesisCanonicalConsumption.state !==\n    \"ACTIVE\"\n) {\n  throw new Error(\n    `phase49_canonical_consumption:${runtimeGenesisCanonicalConsumption.state}`,\n  );\n}\n\n\n/*\n * 1. Certify the actual Runtime Education projection.\n */\nconst runtime =\n  runtimeKnowledgeEducationProjectionService\n    .snapshot();\n\nconst compatible =\n  runtimeCompatibleDashboard({\n    state:\n      runtime.state,\n\n    artifacts:\n      runtime.artifacts,\n\n    modules:\n      runtime.modules,\n\n    competencies:\n      runtime.competencies,\n\n    timeline:\n      runtime.timeline,\n  });\n\n\nassert.deepEqual(\n  compatible.artifacts,\n  runtime.artifacts,\n  \"Builder must preserve authoritative Runtime artifacts exactly\",\n);\n\nassert.deepEqual(\n  compatible.competencies,\n  runtime.competencies,\n  \"Builder must preserve authoritative Runtime competencies exactly\",\n);\n\nassert.deepEqual(\n  compatible.timeline,\n  runtime.timeline,\n  \"Builder must preserve authoritative Runtime timeline exactly\",\n);\n\nassert.equal(\n  compatible.state,\n  runtime.state,\n  \"Builder must preserve authoritative Runtime state\",\n);\n\n\n/*\n * 2. Certify authoritative-empty behavior explicitly.\n */\nconst authoritativeEmpty =\n  runtimeCompatibleDashboard({\n    state:\n      \"success\",\n\n    artifacts:\n      [],\n\n    modules:\n      [],\n\n    competencies:\n      [],\n\n    timeline:\n      [],\n  });\n\n\nassert.deepEqual(\n  authoritativeEmpty.artifacts,\n  [],\n);\n\nassert.deepEqual(\n  authoritativeEmpty.competencies,\n  [],\n);\n\nassert.deepEqual(\n  authoritativeEmpty.timeline,\n  [],\n);\n\n\n/*\n * 3. Certify the fallback itself remains neutral.\n *\n * This baseline is used only by the hook's error path and initial\n * render. It may preserve certified topology, but it must not claim\n * measured module progress.\n */\nconst fallback =\n  certifiedBaseline();\n\n\nfor (\n  const module\n  of fallback.modules\n) {\n  assert.equal(\n    module.completion,\n    0,\n    `fallback module ${module.id} manufactured progress`,\n  );\n\n  assert.ok(\n    module.status ===\n      \"not-started\" ||\n    module.status ===\n      \"blocked\",\n    `fallback module ${module.id} has non-neutral status ${module.status}`,\n  );\n}\n\n\nconst suppressed =\n  new Set(\n    runtimeGenesisCanonicalConsumption\n      .suppressedCanonicalIds,\n  );\n\nconst runtimeArtifactIds =\n  runtime.artifacts.map(\n    artifact =>\n      artifact.id,\n  );\n\n\nfor (\n  const canonicalId\n  of suppressed\n) {\n  assert.equal(\n    runtimeArtifactIds.includes(\n      canonicalId,\n    ),\n    false,\n    `suppressed canonical leaked into Runtime Education: ${canonicalId}`,\n  );\n}\n\n\nconsole.log(\n  JSON.stringify(\n    {\n      replaySelection:\n        runtimeGenesisReplaySelection.state,\n\n      canonicalConsumption:\n        runtimeGenesisCanonicalConsumption.state,\n\n      suppressedCanonicalIds:\n        [\n          ...suppressed,\n        ],\n\n      productionRuntimeEducation: {\n        state:\n          runtime.state,\n\n        artifacts:\n          runtime.artifacts.length,\n\n        modules:\n          runtime.modules.length,\n\n        competencies:\n          runtime.competencies.length,\n\n        timeline:\n          runtime.timeline.length,\n      },\n\n      builderCompatibility: {\n        artifactIdsPreserved:\n          compatible.artifacts.map(\n            artifact =>\n              artifact.id,\n          ),\n\n        authoritativeEmptyArtifacts:\n          authoritativeEmpty\n            .artifacts\n            .length,\n\n        authoritativeEmptyCompetencies:\n          authoritativeEmpty\n            .competencies\n            .length,\n\n        authoritativeEmptyTimeline:\n          authoritativeEmpty\n            .timeline\n            .length,\n      },\n\n      runtimeFailureFallback: {\n        moduleCount:\n          fallback.modules.length,\n\n        allModuleProgressNeutral:\n          fallback.modules.every(\n            module =>\n              module.completion ===\n              0,\n          ),\n      },\n    },\n    null,\n    2,\n  ),\n);\n\n\nconsole.log(\n  \"PASS: M50 Phase 49 Learning production Runtime-truth certification\"\n);\nTS\n\nnpx tsx --test \\\n  apps/lumina-builder/src/components/workspaces/knowledge/learning/state/__tests__/EducationalRuntimeAuthority.test.ts \\\n&& git diff --check \\\n&& git status --short\nRequired result:\nReplay authority                SELECTED\nCanonical consumption           ACTIVE\nSuppressed ADR canonicals       absent from Runtime Education\n\nSuccessful Runtime response\n  artifacts                     preserved exactly\n  competencies                  preserved exactly\n  timeline                      preserved exactly\n  state                         preserved exactly\n\nSuccessful Runtime empty []\n  artifacts                     []\n  competencies                  []\n  timeline                      []\n\nRuntime failure fallback\n  module completion             all 0\n  module state                  not-started / blocked only\nNo commit belongs to Phase 49. If green, Phase 50 should be the M50 closure audit: confirm every active Canonical/Organizational-Memory consumer is either Genesis-governed or explicitly classified as historical/governance/write-only before closing M50.",
+    "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "cc6b02da-7e44-4f93-8d45-97552357cac5",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8a4f33-4b58-83ea-a343-671d7cf38406:message:cc6b02da-7e44-4f93-8d45-97552357cac5",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406#browser-turn=0",
+    "sourceRevision": "sha256:d6dba8075ac00da22a692fd29c26b2927f21b5de48684eaeee8ae16ce187980c",
+    "segmentAvailability": "available",
+    "conversationChecksum": "ccc1c65a5fcb046290466b6c84dac2af4f35f3915a46cd83dd4b64ca2a20b71d",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:d6dba8075ac00da22a692fd29c26b2927f21b5de48684eaeee8ae16ce187980c",
+      "exportRevision": "sha256:d6dba8075ac00da22a692fd29c26b2927f21b5de48684eaeee8ae16ce187980c"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630835990
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8a4f33-4b58-83ea-a343-671d7cf38406:message:cc6b02da-7e44-4f93-8d45-97552357cac5"
+    ],
+    "conversation": [
+      "6a8a4f33-4b58-83ea-a343-671d7cf38406"
+    ]
+  }
+}

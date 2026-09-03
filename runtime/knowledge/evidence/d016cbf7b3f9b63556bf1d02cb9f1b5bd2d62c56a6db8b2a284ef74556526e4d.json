@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:b273e5124a639420538783c467db756518fec0acda2e8dd5c9989a8778e82fcc",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship panel in validation workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240097481,
+  "observedAt": 1786129701000,
+  "contentRef": "git:commit:08e07de97978399b0faeb9b3e3b50069d41de8cf",
+  "checksum": "sha256:d638b5ac5086b66f56de92e36f2d947d1ca2d1014b7ed07664834e7578cb5127",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1192,
+    "genesisAdmissionIdentity": "genesis-admission:cce9ca0666a693286f38364dc38ec1665b153ef42bbc606880c994a4b4d0e2ca",
+    "historicalSourceId": "genesis-source:commit:08e07de97978399b0faeb9b3e3b50069d41de8cf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:08e07de97978399b0faeb9b3e3b50069d41de8cf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "08e07de97978399b0faeb9b3e3b50069d41de8cf",
+      "parentShas": [
+        "81e0b6b3fd9e0c73667565009518a56550cf868d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786129701000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786129701000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship panel in validation workflow",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ValidationWorkflow.tsx"
+      ],
+      "changedPathsByParent": {
+        "81e0b6b3fd9e0c73667565009518a56550cf868d": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ValidationWorkflow.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:08e07de97978399b0faeb9b3e3b50069d41de8cf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

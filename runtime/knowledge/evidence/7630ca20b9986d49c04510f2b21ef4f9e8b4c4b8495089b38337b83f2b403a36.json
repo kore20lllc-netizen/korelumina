@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:e47bd82c25014a21baacae8a6b7898cde55221458e529982daeed011e70eb993",
+  "type": "document",
+  "title": "Chief Agent Operating Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130468,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:chief-agent-operating-model:1-9",
+  "checksum": "sha256:05b9a1828829030f4f47a547a1722d404b4be4eba6335009e7eb9326cd726716",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1657,
+    "genesisAdmissionIdentity": "genesis-admission:9626419c4515d1db67c0ed8849e578163b2add1ccbafea278fed221534735bc9",
+    "historicalSourceId": "genesis-source:document:derived:26713f1385d69d576fbf6d7b104a03823a7ae13a8658c94a5b037c76edc98df9",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 1,
+    "lineEnd": 9,
+    "sectionTitle": "Chief Agent Operating Model",
+    "sectionSlug": "chief-agent-operating-model",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "# Chief Agent Operating Model\n\nStatus: Approved\n\nVersion: 1.0\n\nOwner: Chief Systems Architect\nScope: Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Chief Agent Operating Model",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 1,
+      "lineEnd": 9,
+      "sectionTitle": "Chief Agent Operating Model",
+      "sectionSlug": "chief-agent-operating-model",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "# Chief Agent Operating Model\n\nStatus: Approved\n\nVersion: 1.0\n\nOwner: Chief Systems Architect\nScope: Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:26713f1385d69d576fbf6d7b104a03823a7ae13a8658c94a5b037c76edc98df9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

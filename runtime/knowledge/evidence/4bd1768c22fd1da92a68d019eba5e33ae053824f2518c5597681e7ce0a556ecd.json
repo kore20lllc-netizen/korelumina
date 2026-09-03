@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:902ab3867fd67a0422b01c84ca045a0d90544ac8da25c80946c2555fd278a291",
+  "type": "conversation",
+  "title": "KoreLumina — Repo Import - ProjectId Fix Strategy — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cbc9b4-6aa0-832b-9d74-5ec0057c1300#browser-turn=4",
+  "checksum": "902ab3867fd67a0422b01c84ca045a0d90544ac8da25c80946c2555fd278a291",
+  "metadata": {
+    "content": "## Error Type\nRuntime ReferenceError\n\n## Error Message\nCan't find variable: refreshTick\n\nNext.js version: 15.5.12 (Webpack)\nSo what happen to the builder-stable -recovery that we commit if we have to rebuild all",
+    "conversationId": "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+    "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+    "messageId": "bdf0c843-2100-49a0-abf7-43ff04f1f646",
+    "speakerRole": "user",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cbc9b4-6aa0-832b-9d74-5ec0057c1300:message:bdf0c843-2100-49a0-abf7-43ff04f1f646",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cbc9b4-6aa0-832b-9d74-5ec0057c1300#browser-turn=4",
+    "sourceRevision": "sha256:6db18b9b643c4315f8659841827b114c5a031f562098d18a8732e31d48157d81",
+    "segmentAvailability": "available",
+    "conversationChecksum": "588117e4fd8637c443aefc3c2fbb257e2a3ba94c69456c0ce679d13d8df0dab5",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:6db18b9b643c4315f8659841827b114c5a031f562098d18a8732e31d48157d81",
+      "exportRevision": "sha256:6db18b9b643c4315f8659841827b114c5a031f562098d18a8732e31d48157d81"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787629390911
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cbc9b4-6aa0-832b-9d74-5ec0057c1300:message:bdf0c843-2100-49a0-abf7-43ff04f1f646"
+    ],
+    "conversation": [
+      "69cbc9b4-6aa0-832b-9d74-5ec0057c1300"
+    ]
+  }
+}

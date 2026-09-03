@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:82ce215ccebbe82af6a5c4d56d0c5e0e2527f9e80d9e48bb3c51bc8a0a0d2831",
+  "type": "commit",
+  "title": "docs(amendment): establish learning constitution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087133,
+  "observedAt": 1785541661000,
+  "contentRef": "git:commit:cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b",
+  "checksum": "sha256:de5d84c4f4b6a458c7bac805b081d9db58d6e953b7ab96199ba45bd14ee1ffb9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1002,
+    "genesisAdmissionIdentity": "genesis-admission:e7775c6cd38bb54d93d7b1d1e5e41f96533ba95b9d29bb39817d0d6bc232be6f",
+    "historicalSourceId": "genesis-source:commit:cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b",
+      "parentShas": [
+        "c256b15d67155b3ce5d7b9f066db0c97c06f3834"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785541661000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785541661000
+      },
+      "subject": "docs(amendment): establish learning constitution",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md"
+      ],
+      "changedPathsByParent": {
+        "c256b15d67155b3ce5d7b9f066db0c97c06f3834": [
+          "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

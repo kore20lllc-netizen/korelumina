@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:5f52df5d16b977657351de0d85a066eb792925f58a614856a956cf900097573c",
+  "type": "document",
+  "title": "Chief Agent Learning Reconciliation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086681,
+  "observedAt": 1785525338000,
+  "contentRef": "docs/architecture/reconciliation/CHIEF_AGENT_LEARNING_RECONCILIATION.md",
+  "checksum": "sha256:18b5890d9b8f617446be6f102fad285cebf8c433e57ce170c655224d49af7391",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 993,
+    "genesisAdmissionIdentity": "genesis-admission:66987e7cb8a38147d3772d0bbc82e5fa05c19b50957ea8908ed72e52dc2063d1",
+    "historicalSourceId": "genesis-source:document:derived:170f103bfbdb6b2172329b59cd5a08406c3f77837396f0dfe850f31215cdb21a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Architecture Reconciliation",
+    "approvalState": "Constitutional Reconciliation",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/reconciliation/CHIEF_AGENT_LEARNING_RECONCILIATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Chief Agent Learning Reconciliation",
+      "status": "Constitutional Reconciliation",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/reconciliation/CHIEF_AGENT_LEARNING_RECONCILIATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:170f103bfbdb6b2172329b59cd5a08406c3f77837396f0dfe850f31215cdb21a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

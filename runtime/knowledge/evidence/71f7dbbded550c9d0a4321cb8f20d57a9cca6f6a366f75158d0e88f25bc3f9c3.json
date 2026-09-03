@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:dc25f6f5067ad125d707625dabec0db51d6f780c3913fe058189c9a395361e42",
+  "type": "commit",
+  "title": "refactor(knowledge): strengthen educational artifact inspector surfaces",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098668,
+  "observedAt": 1786167289000,
+  "contentRef": "git:commit:79341ab099521c1bf3f843c00f060cb72fd0c8ed",
+  "checksum": "sha256:8f05f5cc59462ad9612362aaf6d539beb87d55c8bb02195a6e825dcfb915bdfe",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1212,
+    "genesisAdmissionIdentity": "genesis-admission:c359dc61e6e1201abc6fe0064299431cb93c5efe388940097b4d9fac9a91e931",
+    "historicalSourceId": "genesis-source:commit:79341ab099521c1bf3f843c00f060cb72fd0c8ed",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:79341ab099521c1bf3f843c00f060cb72fd0c8ed",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "79341ab099521c1bf3f843c00f060cb72fd0c8ed",
+      "parentShas": [
+        "768a15cadb9fc667747b6f8b7f113dac984b073f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786167289000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786167289000
+      },
+      "subject": "refactor(knowledge): strengthen educational artifact inspector surfaces",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx"
+      ],
+      "changedPathsByParent": {
+        "768a15cadb9fc667747b6f8b7f113dac984b073f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:79341ab099521c1bf3f843c00f060cb72fd0c8ed"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

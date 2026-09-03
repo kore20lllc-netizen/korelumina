@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:46cbc230c6125884b077c2eb3d9b7051088caa721105b2c512085a3d0245d906",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Knowledge Extraction — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0#browser-turn=0",
+  "checksum": "46cbc230c6125884b077c2eb3d9b7051088caa721105b2c512085a3d0245d906",
+  "metadata": {
+    "content": "The audit is clean: there are no remaining consumers of any capsuleFlow* token outside flagshipAppearance.ts, and the working tree is clean. That makes this a safe dead-code deletion milestone.\nRemove only the now-unused Flow token block:\nBashcd /Users/erictouko/dev/korelumina || exit 1\nset -e\n\ntest \"$(git branch --show-current)\" = \"inspect/runtime-certified-main\"\ntest \"$(git rev-parse HEAD)\" = \"2d41a4d5cc399096f7ae4ce47f76441e838ab538\"\n\nFILE=\"apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts\"\n\npython - <<'PY'\nfrom pathlib import Path\n\npath = Path(\n    \"apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/\"\n    \"flagshipAppearance.ts\"\n)\n\ntext = path.read_text()\n\nstart = text.find(\"  capsuleFlowShell: [\")\nend = text.find(\"  divider:\", start)\n\nif start == -1:\n    raise SystemExit(\"capsuleFlow block start not found\")\n\nif end == -1:\n    raise SystemExit(\"capsuleFlow block end marker not found\")\n\nblock = text[start:end]\n\nrequired = [\n    \"capsuleFlowShell\",\n    \"capsuleFlowHeader\",\n    \"capsuleFlowMetric\",\n    \"capsuleFlowCanvas\",\n    \"capsuleFlowZone\",\n    \"capsuleFlowZoneTone\",\n    \"capsuleFlowOccupancyBadge\",\n    \"capsuleFlowStation\",\n    \"capsuleFlowStationCount\",\n    \"capsuleFlowBranch\",\n    \"capsuleFlowBranchTone\",\n    \"capsuleFlowEmptyStation\",\n]\n\nmissing = [token for token in required if token not in block]\nif missing:\n    raise SystemExit(f\"expected tokens missing from deletion block: {missing}\")\n\ntext = text[:start] + text[end:]\npath.write_text(text)\nPY\n\nprintf '%s\\n' \"===== VERIFY NO capsuleFlow TOKENS REMAIN =====\"\nif grep -n 'capsuleFlow' \"$FILE\"; then\n  echo \"ERROR: capsuleFlow definitions remain\"\n  exit 1\nfi\n\nprintf '%s\\n' \"===== VERIFY NO capsuleFlow CONSUMERS EXIST =====\"\nif grep -Rni \\\n  'flagshipAppearance\\.capsuleFlow' \\\n  apps/lumina-builder/src/components/workspaces/knowledge\nthen\n  echo \"ERROR: capsuleFlow consumer remains\"\n  exit 1\nfi\n\ngit diff --check\nnpm run build\n\nprintf '%s\\n' \"===== DEAD FLOW TOKEN CLEANUP =====\"\ngit diff -- \"$FILE\"\n\nprintf '%s\\n' \"===== EXECUTIVE / FLAGSHIP IMMUTABILITY =====\"\ngit diff --exit-code -- \\\napps/lumina-builder/src/components/design-system/lumina/executive/ribbon/LuminaExecutiveRibbon.tsx \\\napps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipPanel.tsx \\\napps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx \\\napps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipSurface.tsx\n\nprintf '%s\\n' \"===== STATUS =====\"\ngit status --short\nThis is cleanup only; there should be no visual change. If build and UI remain green, this closes the Flow Engine legacy appearance-token ownership.",
+    "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "ceaaa962-d7c9-44ab-8d2e-e79c6baf9b2d",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a76aba2-1ed0-83ea-9964-24dbce2af4d0:message:ceaaa962-d7c9-44ab-8d2e-e79c6baf9b2d",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0#browser-turn=0",
+    "sourceRevision": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "f46d95a4ab17fb93a824cd4afc52a2cbf384a10af7f9be2ddccd54bec8cd26b2",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e",
+      "exportRevision": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630681037
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a76aba2-1ed0-83ea-9964-24dbce2af4d0:message:ceaaa962-d7c9-44ab-8d2e-e79c6baf9b2d"
+    ],
+    "conversation": [
+      "6a76aba2-1ed0-83ea-9964-24dbce2af4d0"
+    ]
+  }
+}

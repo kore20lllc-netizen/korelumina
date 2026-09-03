@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:f2811ac6c22d6d5e0cec6f551ea772b066a4a686ef27584992759dd1d91c02f3",
+  "type": "commit",
+  "title": "refactor(knowledge): align capsule flow zones",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240102477,
+  "observedAt": 1786342950000,
+  "contentRef": "git:commit:8896c28fb457903667a50a4f52bea97ab29f064c",
+  "checksum": "sha256:3cdf5187c7b4438d59057ea1593214b108d7dcbc4b89e11b829b2c91738fca45",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1275,
+    "genesisAdmissionIdentity": "genesis-admission:79cc16ff9568b4bc1885f119a17fe4019c6be7764a5051a47574ceda40b8bcb0",
+    "historicalSourceId": "genesis-source:commit:8896c28fb457903667a50a4f52bea97ab29f064c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8896c28fb457903667a50a4f52bea97ab29f064c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8896c28fb457903667a50a4f52bea97ab29f064c",
+      "parentShas": [
+        "b63cc30a54b8c3f882cdfd2ff687cebd64589544"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786342950000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786342950000
+      },
+      "subject": "refactor(knowledge): align capsule flow zones",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+      ],
+      "changedPathsByParent": {
+        "b63cc30a54b8c3f882cdfd2ff687cebd64589544": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8896c28fb457903667a50a4f52bea97ab29f064c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

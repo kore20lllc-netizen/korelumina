@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:75b77f82596b0aef015f6fd0cf6acb2a9a9117a7bf6a7fb1755b96feabc61da1",
+  "type": "commit",
+  "title": "refactor(lumina): normalize workspace primitive exports",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240100463,
+  "observedAt": 1786245938000,
+  "contentRef": "git:commit:e199d0ccbbe207a116b74f59506db8c3a96fd3f7",
+  "checksum": "sha256:534147e81a57d33ffb7b2a96375465ccb9a20bf24ad2af70cdf53653301ccbc0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1242,
+    "genesisAdmissionIdentity": "genesis-admission:c3d46f1ce228c8077c3355b04c7a2daf1e115ea04951ed5160090e5fe1e67fb4",
+    "historicalSourceId": "genesis-source:commit:e199d0ccbbe207a116b74f59506db8c3a96fd3f7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e199d0ccbbe207a116b74f59506db8c3a96fd3f7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e199d0ccbbe207a116b74f59506db8c3a96fd3f7",
+      "parentShas": [
+        "260904042c8aa236967d258753b8c8017aa443e3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786245938000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786245938000
+      },
+      "subject": "refactor(lumina): normalize workspace primitive exports",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+      ],
+      "changedPathsByParent": {
+        "260904042c8aa236967d258753b8c8017aa443e3": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e199d0ccbbe207a116b74f59506db8c3a96fd3f7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

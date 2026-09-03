@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:152dfb958a0433697a7c8f3b4d63dfb5079cbbc5d1cab7b1dd97a171d9eb728f",
+  "type": "commit",
+  "title": "feat(knowledge): require executive authorization for promotion",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132971,
+  "observedAt": 1788055691000,
+  "contentRef": "git:commit:76b0c610106308e5b8f6a00d35ddb16f7dd6d55b",
+  "checksum": "sha256:a1b45778bdb2239f53ea8593219590473ab379d5eec091c3cbf2019b78644577",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1686,
+    "genesisAdmissionIdentity": "genesis-admission:b3f490efc4065ae722ef582f583645a8fa9fea17c3ef35e663a61501d2a4f178",
+    "historicalSourceId": "genesis-source:commit:76b0c610106308e5b8f6a00d35ddb16f7dd6d55b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:76b0c610106308e5b8f6a00d35ddb16f7dd6d55b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "76b0c610106308e5b8f6a00d35ddb16f7dd6d55b",
+      "parentShas": [
+        "e819501d5d3d884474f7d71f76b19b8fa05d510b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788055691000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788055691000
+      },
+      "subject": "feat(knowledge): require executive authorization for promotion",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/AutonomousGovernedCanonicalPromotionExecutor.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/AutonomousGovernedCanonicalPromotionExecutor.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/AutonomousPromotionExecutiveAuthorization.test.ts"
+      ],
+      "changedPathsByParent": {
+        "e819501d5d3d884474f7d71f76b19b8fa05d510b": [
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/AutonomousGovernedCanonicalPromotionExecutor.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/AutonomousGovernedCanonicalPromotionExecutor.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/AutonomousPromotionExecutiveAuthorization.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:76b0c610106308e5b8f6a00d35ddb16f7dd6d55b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

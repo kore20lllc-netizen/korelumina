@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:4c39358090f96225b7eb4a70ae1f1ba228b5c52a1f32c4547174c0e9400a7f74",
+  "type": "commit",
+  "title": "feat(lumina): activate appearance engine",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080514,
+  "observedAt": 1783597301000,
+  "contentRef": "git:commit:c74cb2a1b9a5954bf51270d42af80107470e1232",
+  "checksum": "sha256:1aa166fdb1814bc381ad23a438d25c95aea41999f495be83952701223c8b1bd5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 865,
+    "genesisAdmissionIdentity": "genesis-admission:e159ea108a3dcf7bf3bb0f58953d8b7ebc483f8a6eff7bbc637ec877a16a0328",
+    "historicalSourceId": "genesis-source:commit:c74cb2a1b9a5954bf51270d42af80107470e1232",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c74cb2a1b9a5954bf51270d42af80107470e1232",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c74cb2a1b9a5954bf51270d42af80107470e1232",
+      "parentShas": [
+        "2cdb8fa25f9a48b46a54adab220ede245e9805fa"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783597301000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783597301000
+      },
+      "subject": "feat(lumina): activate appearance engine",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/appearance/LuminaAppearanceProvider.tsx"
+      ],
+      "changedPathsByParent": {
+        "2cdb8fa25f9a48b46a54adab220ede245e9805fa": [
+          "apps/lumina-builder/src/components/lumina/appearance/LuminaAppearanceProvider.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c74cb2a1b9a5954bf51270d42af80107470e1232"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

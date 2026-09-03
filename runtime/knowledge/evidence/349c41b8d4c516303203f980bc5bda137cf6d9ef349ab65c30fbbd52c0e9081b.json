@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:a43c007ce6f8bb258a9c0a8544e15cfec342a0acb938a7e3202934a525c230a2",
+  "type": "commit",
+  "title": "feat(knowledge): register runtime organizational memory provider",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240109666,
+  "observedAt": 1786488437000,
+  "contentRef": "git:commit:b11243b6413651cddc6ed013f9aec486f0ba351e",
+  "checksum": "sha256:be8a77897816e1229da41df4db530f168d090f61e694dccf475afa4d77a85a7e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1385,
+    "genesisAdmissionIdentity": "genesis-admission:fa88c8b493401199ea496c401f82a1fa0c12d8313c85b717ce39fb493a4f34e1",
+    "historicalSourceId": "genesis-source:commit:b11243b6413651cddc6ed013f9aec486f0ba351e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b11243b6413651cddc6ed013f9aec486f0ba351e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b11243b6413651cddc6ed013f9aec486f0ba351e",
+      "parentShas": [
+        "8eb023863cae14119973284924590cbc0d2dd310"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786488437000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786488437000
+      },
+      "subject": "feat(knowledge): register runtime organizational memory provider",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/__tests__/RuntimeOrganizationalMemoryComposition.test.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "8eb023863cae14119973284924590cbc0d2dd310": [
+          "apps/lumina-runtime/src/__tests__/RuntimeOrganizationalMemoryComposition.test.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b11243b6413651cddc6ed013f9aec486f0ba351e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

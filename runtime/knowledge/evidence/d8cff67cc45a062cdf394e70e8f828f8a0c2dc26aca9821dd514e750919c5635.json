@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:58b71ab813b0f099b3c2376e1a0e583debd3d4604b485fd436fc389ff5092387",
+  "type": "commit",
+  "title": "feat(m51): add deterministic section-scoped genesis discovery",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129857,
+  "observedAt": 1787863524000,
+  "contentRef": "git:commit:c5cb1d1838d2d8d60c2fb0196a8cc37c9a5ccc7f",
+  "checksum": "sha256:214c9746e2e60ed88d40c5bd2e5fd3c50063480e43fb8aa9bfc78213d2efc791",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1650,
+    "genesisAdmissionIdentity": "genesis-admission:d52e299d6a831df628e5b2fe11e0d14f7e5b0dd03962efc89b7d43d04f0438b8",
+    "historicalSourceId": "genesis-source:commit:c5cb1d1838d2d8d60c2fb0196a8cc37c9a5ccc7f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c5cb1d1838d2d8d60c2fb0196a8cc37c9a5ccc7f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c5cb1d1838d2d8d60c2fb0196a8cc37c9a5ccc7f",
+      "parentShas": [
+        "d820b0c75e82022c63cc990a315a5de8eb3b5cc1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787863524000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787863524000
+      },
+      "subject": "feat(m51): add deterministic section-scoped genesis discovery",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51SectionHistoricalSourceDiscovery.test.ts"
+      ],
+      "changedPathsByParent": {
+        "d820b0c75e82022c63cc990a315a5de8eb3b5cc1": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51SectionHistoricalSourceDiscovery.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c5cb1d1838d2d8d60c2fb0196a8cc37c9a5ccc7f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ee8f278bd723ebbb8f66e2948b2a5d38173d9da9bc8e26ef22003b3f0592ccb0",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt LuminaSurface",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078979,
+  "observedAt": 1783425058000,
+  "contentRef": "git:commit:b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c",
+  "checksum": "sha256:708307b7bfd13f9f0b4429657d86e8c55330916ba45337ddf0fe88eb07ec23d2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 831,
+    "genesisAdmissionIdentity": "genesis-admission:5b342f0c983a251b91fc19ccac43a13e431f4d53fa3ad3c44b6d90b29f567537",
+    "historicalSourceId": "genesis-source:commit:b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c",
+      "parentShas": [
+        "1b0bfa476010f1e8b1b0064d565499871effdc64"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425058000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425058000
+      },
+      "subject": "refactor(knowledge): adopt LuminaSurface",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "1b0bfa476010f1e8b1b0064d565499871effdc64": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

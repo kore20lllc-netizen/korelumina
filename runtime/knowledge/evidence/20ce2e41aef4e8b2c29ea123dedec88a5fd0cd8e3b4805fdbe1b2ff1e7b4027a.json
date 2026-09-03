@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:649513d9b17b7bba375974aad2207c5b0b0a954e67a3fad2d4e4acc7052cc68b",
+  "type": "document",
+  "title": "Lumina Design System Roadmap",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079341,
+  "observedAt": 1783492694000,
+  "contentRef": "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md",
+  "checksum": "sha256:02ca853667800ed808e26dd73cd09517722e687e395e962ae912158feb893320",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 839,
+    "genesisAdmissionIdentity": "genesis-admission:26039d11d4044bd4aaa027bc8ab170a3074e8607351e7c633998339af6328a27",
+    "historicalSourceId": "genesis-source:document:derived:a86937be4daf9ae43729775abf14ce3cf4a7c48a6efb6f013a0f47b5909c9b27",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active Roadmap",
+    "owner": "KoreLumina",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Design System Roadmap",
+      "status": "Active Roadmap",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a86937be4daf9ae43729775abf14ce3cf4a7c48a6efb6f013a0f47b5909c9b27"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

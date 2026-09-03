@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:009989a6855707ea33272b606fbdaeb0d9c14288aadf9307f8abb5975af4cbc2",
+  "type": "commit",
+  "title": "feat(executive): propose decisions from chief agent reasoning",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240110499,
+  "observedAt": 1786531745000,
+  "contentRef": "git:commit:2eaec01351150dc0a6bff70f2b9ae2472aefc408",
+  "checksum": "sha256:9c858421c875f391e7caf05592ae1efa54eaa7933c6f621abb9ae8d84b99189e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1397,
+    "genesisAdmissionIdentity": "genesis-admission:8c93a9c26b45aeb0367bc795c63027ba4fb27a99dfd4492bab4beafeb3fa5569",
+    "historicalSourceId": "genesis-source:commit:2eaec01351150dc0a6bff70f2b9ae2472aefc408",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2eaec01351150dc0a6bff70f2b9ae2472aefc408",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2eaec01351150dc0a6bff70f2b9ae2472aefc408",
+      "parentShas": [
+        "b1e3747089a637d884c98c8aac6257e9fa7dd450"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786531745000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786531745000
+      },
+      "subject": "feat(executive): propose decisions from chief agent reasoning",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDecisionService.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "b1e3747089a637d884c98c8aac6257e9fa7dd450": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDecisionService.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2eaec01351150dc0a6bff70f2b9ae2472aefc408"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

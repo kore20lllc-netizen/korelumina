@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:822cb5e561f3b500860c22a14b9b4bbd43ffa652a72ac856bf3d32dc83757792",
+  "type": "document",
+  "title": "Master OS Engineering Principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076607,
+  "observedAt": 1783149481000,
+  "contentRef": "docs/architecture/MASTER_OS_ENGINEERING_PRINCIPLES.md",
+  "checksum": "sha256:51459373158790f3fca28a3905387604bbbe31c8f37ac0c253c8a0ea274d3e8e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 777,
+    "genesisAdmissionIdentity": "genesis-admission:924de3d3c5d97d5e0bef17b655c236efa33c30262cb0df3a461cbd745ac6ab04",
+    "historicalSourceId": "genesis-source:document:derived:e90ec537eaf3902b63e66d93fd4bdcfd9ddd2a2c8eb5d2e27b20fcb3fae7b701",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Approved",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/MASTER_OS_ENGINEERING_PRINCIPLES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Master OS Engineering Principles",
+      "status": "Approved",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/MASTER_OS_ENGINEERING_PRINCIPLES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e90ec537eaf3902b63e66d93fd4bdcfd9ddd2a2c8eb5d2e27b20fcb3fae7b701"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

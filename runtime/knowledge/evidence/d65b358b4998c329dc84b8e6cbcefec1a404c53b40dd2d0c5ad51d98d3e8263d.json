@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ff4fdb4784c707bc07b4a9d7ecdc966a89c491178d6596fd8d6dcd3986e047a5",
+  "type": "commit",
+  "title": "feat(lumina): add panel header composition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240091231,
+  "observedAt": 1785911156000,
+  "contentRef": "git:commit:a943cf186945a6655dfb0f677158a519a9a4532e",
+  "checksum": "sha256:3c25533c16c0f13115c64cca7d36888adc4d36152beac84a76d16f8fa19ca8cf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1081,
+    "genesisAdmissionIdentity": "genesis-admission:8e351b45009f26f87873f541ce18ebc4d451d19d09d06e9c92884fabe6d49749",
+    "historicalSourceId": "genesis-source:commit:a943cf186945a6655dfb0f677158a519a9a4532e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a943cf186945a6655dfb0f677158a519a9a4532e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a943cf186945a6655dfb0f677158a519a9a4532e",
+      "parentShas": [
+        "75fc7cef8da9342601cc542f815f44721c059dbd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785911156000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785911156000
+      },
+      "subject": "feat(lumina): add panel header composition",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/compositions/LuminaPanelHeaderComposition.tsx"
+      ],
+      "changedPathsByParent": {
+        "75fc7cef8da9342601cc542f815f44721c059dbd": [
+          "apps/lumina-builder/src/components/design-system/compositions/LuminaPanelHeaderComposition.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a943cf186945a6655dfb0f677158a519a9a4532e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "genesis-evidence:039b838d5642d3cea82f5c99c95f9f72a0d7abab77f1bc4f7a2a4bf654c135f1",
+  "type": "commit",
+  "title": "feat(executive): establish chief agent kernel and orchestration",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085920,
+  "observedAt": 1785304001000,
+  "contentRef": "git:commit:e71acaccefbc5a9ff5ff42498d5f13fce7c5c4f8",
+  "checksum": "sha256:8ff27da969a6e99ab132a04f9ffda481251e9c33cff44ece63757da9dd094522",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 978,
+    "genesisAdmissionIdentity": "genesis-admission:769e4485c4c4b5d44f4c5dd43ca6373d90a2d1273e23608ca5aa6a0a1483b921",
+    "historicalSourceId": "genesis-source:commit:e71acaccefbc5a9ff5ff42498d5f13fce7c5c4f8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e71acaccefbc5a9ff5ff42498d5f13fce7c5c4f8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e71acaccefbc5a9ff5ff42498d5f13fce7c5c4f8",
+      "parentShas": [
+        "6ce7e8c2266b669c35fe79164ceb3af06443dc89"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785304001000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785304001000
+      },
+      "subject": "feat(executive): establish chief agent kernel and orchestration",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/constitution/ExecutiveConstitution.ts",
+        "apps/lumina-runtime/src/executive/constitution/index.ts",
+        "apps/lumina-runtime/src/executive/context/ExecutiveContext.ts",
+        "apps/lumina-runtime/src/executive/context/index.ts",
+        "apps/lumina-runtime/src/executive/events/ExecutiveEvent.ts",
+        "apps/lumina-runtime/src/executive/events/ExecutiveEventBus.ts",
+        "apps/lumina-runtime/src/executive/events/index.ts",
+        "apps/lumina-runtime/src/executive/identity/ExecutiveIdentity.ts",
+        "apps/lumina-runtime/src/executive/identity/index.ts",
+        "apps/lumina-runtime/src/executive/index.ts",
+        "apps/lumina-runtime/src/executive/kernel/ExecutiveKernel.ts",
+        "apps/lumina-runtime/src/executive/kernel/createExecutiveKernel.ts",
+        "apps/lumina-runtime/src/executive/kernel/index.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutiveDispatcher.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutiveLifecycle.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutiveOrchestrator.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutivePipeline.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutiveRouter.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/createExecutiveOrchestrator.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/index.ts"
+      ],
+      "changedPathsByParent": {
+        "6ce7e8c2266b669c35fe79164ceb3af06443dc89": [
+          "apps/lumina-runtime/src/executive/constitution/ExecutiveConstitution.ts",
+          "apps/lumina-runtime/src/executive/constitution/index.ts",
+          "apps/lumina-runtime/src/executive/context/ExecutiveContext.ts",
+          "apps/lumina-runtime/src/executive/context/index.ts",
+          "apps/lumina-runtime/src/executive/events/ExecutiveEvent.ts",
+          "apps/lumina-runtime/src/executive/events/ExecutiveEventBus.ts",
+          "apps/lumina-runtime/src/executive/events/index.ts",
+          "apps/lumina-runtime/src/executive/identity/ExecutiveIdentity.ts",
+          "apps/lumina-runtime/src/executive/identity/index.ts",
+          "apps/lumina-runtime/src/executive/index.ts",
+          "apps/lumina-runtime/src/executive/kernel/ExecutiveKernel.ts",
+          "apps/lumina-runtime/src/executive/kernel/createExecutiveKernel.ts",
+          "apps/lumina-runtime/src/executive/kernel/index.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutiveDispatcher.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutiveLifecycle.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutiveOrchestrator.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutivePipeline.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutiveRouter.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/createExecutiveOrchestrator.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e71acaccefbc5a9ff5ff42498d5f13fce7c5c4f8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

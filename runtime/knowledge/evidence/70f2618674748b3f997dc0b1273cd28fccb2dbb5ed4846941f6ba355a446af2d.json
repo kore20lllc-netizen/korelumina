@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:a434a4217f47cd1979a2be6851025d4170fd1f1fddefbaa185fd9b06d39f5572",
+  "type": "document",
+  "title": "KoreLumina Reconstruction Engineering Rules",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075993,
+  "observedAt": 1783142326000,
+  "contentRef": "docs/architecture/KORELUMINA_RECONSTRUCTION_ENGINEERING_RULES.md",
+  "checksum": "sha256:062467db2577da8966cf512478ea9adb0892e81540d620c2eb907dc7e0887c9c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 763,
+    "genesisAdmissionIdentity": "genesis-admission:00339e2dc05ce8cd8007fce9f7745baf3fb0f66197605f45d35a27d76ecaef54",
+    "historicalSourceId": "genesis-source:document:derived:9c01d02ae091c64878102c2b754a33dce7e64bb98faa323f41fc0e200afffc70",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Approved",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_ENGINEERING_RULES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Reconstruction Engineering Rules",
+      "status": "Approved",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_ENGINEERING_RULES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:9c01d02ae091c64878102c2b754a33dce7e64bb98faa323f41fc0e200afffc70"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

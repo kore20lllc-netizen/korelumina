@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:b6ca1a901c879081b1268e033d6b6216230429a9e78869558344cb903c99475d",
+  "type": "commit",
+  "title": "chore(runtime): exclude generated knowledge persistence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132624,
+  "observedAt": 1788040069000,
+  "contentRef": "git:commit:cab96c16f36a9e359bf85d29d643a9bb21dd202d",
+  "checksum": "sha256:cdd13659fc91a94b736c1f9366f2bea974f3046712f31f11f47ced730d506f2d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1682,
+    "genesisAdmissionIdentity": "genesis-admission:30e662299ed1e631c674199b467e787afc5f4155bf6e0606c638ce8baf3cddfa",
+    "historicalSourceId": "genesis-source:commit:cab96c16f36a9e359bf85d29d643a9bb21dd202d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cab96c16f36a9e359bf85d29d643a9bb21dd202d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cab96c16f36a9e359bf85d29d643a9bb21dd202d",
+      "parentShas": [
+        "811e05be3f1677d4794afea55a65d501295c5f70"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788040069000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788040069000
+      },
+      "subject": "chore(runtime): exclude generated knowledge persistence",
+      "body": "",
+      "changedPaths": [
+        ".gitignore"
+      ],
+      "changedPathsByParent": {
+        "811e05be3f1677d4794afea55a65d501295c5f70": [
+          ".gitignore"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cab96c16f36a9e359bf85d29d643a9bb21dd202d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

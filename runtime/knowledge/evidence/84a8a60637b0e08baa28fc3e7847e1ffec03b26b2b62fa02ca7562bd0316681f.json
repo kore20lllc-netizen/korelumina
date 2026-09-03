@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4f5bd641476d0e523b8cc6af925bb66f8e8a1f8d3d37b4a16bb63b74ce14ec96",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Audit Roadmap Position — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb#browser-turn=2",
+  "checksum": "4f5bd641476d0e523b8cc6af925bb66f8e8a1f8d3d37b4a16bb63b74ce14ec96",
+  "metadata": {
+    "content": "The exhaustive Master OS inventory is now valid at 41 conversations. Before authorizing capture, there is one important integrity check: some Master OS titles overlap conversations already recovered from the five earlier projects. We must determine whether they are the same conversation IDs before capture-project can overwrite any existing snapshot.\nRun this overlap audit first:\nBashcd /Users/erictouko/dev/korelumina\n\nMASTER_INVENTORY=\"runtime-data/genesis/chatgpt-browser-recovery/project-inventories/project-g-p-69cbc434281c8191a10f1c7b3ffe11a9.json\"\nSNAPSHOT_ROOT=\"runtime-data/genesis/chatgpt-browser-recovery/snapshots\"\n\nTMP_MASTER=\"$(mktemp)\"\nTMP_EXISTING=\"$(mktemp)\"\n\njq -r \\\n  '.conversations[].conversationId' \\\n  \"$MASTER_INVENTORY\" \\\n  | sort -u \\\n  > \"$TMP_MASTER\"\n\nfor file in \"$SNAPSHOT_ROOT\"/conversation-*.json\ndo\n  [ -f \"$file\" ] || continue\n\n  jq -r \\\n    '.conversationId' \\\n    \"$file\"\ndone \\\n  | sort -u \\\n  > \"$TMP_EXISTING\"\n\necho \"================ MASTER OS INVENTORY ================\"\nwc -l < \"$TMP_MASTER\"\n\necho\necho \"================ ALREADY RECOVERED ================\"\nwc -l < \"$TMP_EXISTING\"\n\necho\necho \"================ OVERLAPPING CONVERSATION IDS ================\"\n\nOVERLAP=\"$(\n  comm -12 \\\n    \"$TMP_MASTER\" \\\n    \"$TMP_EXISTING\"\n)\"\n\nif [ -z \"$OVERLAP\" ]; then\n  echo \"overlapCount=0\"\nelse\n  printf '%s\\n' \"$OVERLAP\" \\\n    | tee /tmp/korelumina-master-os-overlap.txt\n\n  echo\n  echo \"overlapCount=$(\n    printf '%s\\n' \"$OVERLAP\" \\\n      | sed '/^$/d' \\\n      | wc -l \\\n      | tr -d ' '\n  )\"\nfi\n\necho\necho \"================ OVERLAP PROVENANCE ================\"\n\nif [ -n \"$OVERLAP\" ]; then\n  while IFS= read -r id\n  do\n    [ -n \"$id\" ] || continue\n\n    existing=\"$SNAPSHOT_ROOT/conversation-$id.json\"\n\n    echo\n    echo \"conversationId=$id\"\n\n    jq -n \\\n      --argjson master \"$(\n        jq \\\n          --arg id \"$id\" \\\n          '.conversations[] | select(.conversationId == $id)' \\\n          \"$MASTER_INVENTORY\"\n      )\" \\\n      --argjson existing \"$(\n        jq \\\n          '{\n            conversationId,\n            projectId,\n            title,\n            conversationUrl,\n            capturedAt,\n            messageCount: (.messages | length)\n          }' \\\n          \"$existing\"\n      )\" \\\n      '{\n        masterOS: $master,\n        existingSnapshot: $existing\n      }'\n  done <<< \"$OVERLAP\"\nfi\n\nrm -f \\\n  \"$TMP_MASTER\" \\\n  \"$TMP_EXISTING\"\nWe need to know which state we have:\nA. overlapCount = 0\n   → Master OS can be authorized and captured normally.\n\nB. overlapCount > 0, same conversation IDs\n   → do NOT capture yet.\n      Those chats have apparently been moved/reorganized between\n      ChatGPT projects, and our current snapshot filename scheme\n      would overwrite existing project provenance.\nThis matters because our current storage key is:\nconversation-<conversationId>.json\nnot:\n<projectId>/conversation-<conversationId>.json\nSo if the same conversation appears in Master OS and an earlier project, blindly capturing all 41 could silently replace the earlier projectId and source URL.\nDo not mark Master OS RECOVER yet. The overlap result determines whether we can capture immediately or first need a small provenance-preservation hardening milestone.",
+    "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "36fa3346-de50-406b-bbbc-f70a40cdd497",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8bdc01-849c-83ea-a8c3-753b9e97d6cb:message:36fa3346-de50-406b-bbbc-f70a40cdd497",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb#browser-turn=2",
+    "sourceRevision": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53",
+    "segmentAvailability": "available",
+    "conversationChecksum": "599b3fc35a4c5013087aafac01baceb72aaddb3798e65ea9cad081b350beb3f4",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53",
+      "exportRevision": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630554272
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8bdc01-849c-83ea-a8c3-753b9e97d6cb:message:36fa3346-de50-406b-bbbc-f70a40cdd497"
+    ],
+    "conversation": [
+      "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb"
+    ]
+  }
+}

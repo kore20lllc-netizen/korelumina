@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:fbbc73263403e8e93ce728ddd1ef5ce12f7127423c5823091fa6c1743e503b2f",
+  "type": "document",
+  "title": "CAP-001 — KoreLumina Capability Framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085081,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/capabilities/CAP-001_KORELUMINA_CAPABILITY_FRAMEWORK.md",
+  "checksum": "sha256:dc90d70a98e3a68d7fad59c6b7fe1be30e5925c3dd399d66e4180b01647f6d00",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 961,
+    "genesisAdmissionIdentity": "genesis-admission:00bf6970dfc7758d37b883f059fe1ede2db0c8b72090a25373ddb5844bf144e8",
+    "historicalSourceId": "genesis-source:document:derived:25d84d6ab09b9efb5cf34bb1eeca2e92777dc7dbab7396c39f5fd6667c63f46b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/capabilities/CAP-001_KORELUMINA_CAPABILITY_FRAMEWORK.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "CAP-001 — KoreLumina Capability Framework",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/capabilities/CAP-001_KORELUMINA_CAPABILITY_FRAMEWORK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:25d84d6ab09b9efb5cf34bb1eeca2e92777dc7dbab7396c39f5fd6667c63f46b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

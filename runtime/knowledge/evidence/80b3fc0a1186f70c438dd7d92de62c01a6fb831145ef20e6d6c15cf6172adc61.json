@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:5c52e5f55525944aee606ee898ae6cbbfa23e358ab2c14465688056887bd9569",
+  "type": "commit",
+  "title": "docs(constitution): establish constitutional framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077495,
+  "observedAt": 1783196560000,
+  "contentRef": "git:commit:8621d8445ece219d5a043e04c4a5dff8528156da",
+  "checksum": "sha256:0133ccd867657c369616896fd02016f4a615abebf4932ed8ef61bcdd5c407b95",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 797,
+    "genesisAdmissionIdentity": "genesis-admission:2cdbd44964bad7606998ecc4814c045fcea19634c07c65cfcbd04c2f82b5c2d1",
+    "historicalSourceId": "genesis-source:commit:8621d8445ece219d5a043e04c4a5dff8528156da",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8621d8445ece219d5a043e04c4a5dff8528156da",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8621d8445ece219d5a043e04c4a5dff8528156da",
+      "parentShas": [
+        "c3674b47dfa5651c3b2752aade5932fb49c58b29"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196560000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196560000
+      },
+      "subject": "docs(constitution): establish constitutional framework",
+      "body": "",
+      "changedPaths": [
+        "docs/constitution/README.md"
+      ],
+      "changedPathsByParent": {
+        "c3674b47dfa5651c3b2752aade5932fb49c58b29": [
+          "docs/constitution/README.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/constitution-readme-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8621d8445ece219d5a043e04c4a5dff8528156da"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

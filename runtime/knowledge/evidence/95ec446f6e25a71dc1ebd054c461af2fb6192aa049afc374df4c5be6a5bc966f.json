@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:e152f9a2e3067290c3ee871f2ad108f1de9a52f43ae6ea4ee4cdcd7f78f60d2f",
+  "type": "document",
+  "title": "KoreLumina Platform Doctrine",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080108,
+  "observedAt": 1783577843000,
+  "contentRef": "docs/architecture/KORELUMINA_PLATFORM_DOCTRINE.md",
+  "checksum": "sha256:95ba6affb9f932def6896e07ea2725e71cfaf2727a08ed27e34834ac9ecaced8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 856,
+    "genesisAdmissionIdentity": "genesis-admission:d66ec20d124b16122303e253c9d81055abaa073e5e60467cb06ca418677db199",
+    "historicalSourceId": "genesis-source:document:derived:9eba082554d73bfe70672475c54b5cea31d62c01c4792b179a698e39ab0b3cb0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/KORELUMINA_PLATFORM_DOCTRINE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Platform Doctrine",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_PLATFORM_DOCTRINE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:9eba082554d73bfe70672475c54b5cea31d62c01c4792b179a698e39ab0b3cb0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

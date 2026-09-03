@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:afd60b947c1c1b37043ea7b8d0e49552b5f7d9aaa570ff2be3c779fad696ba48",
+  "type": "commit",
+  "title": "feat(lumina): add standard premium card primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240089949,
+  "observedAt": 1785899464000,
+  "contentRef": "git:commit:d6c52e7929480e0821dcca294de3a9d865447078",
+  "checksum": "sha256:2f5736c174e6ca1c1bf0460532cfbfbf72729b6dcfa5d6e735c2f2362cac90e2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1057,
+    "genesisAdmissionIdentity": "genesis-admission:6acd36cbb329486572de32b165829a51842d1347ce36fed18b401dcbfcccd66f",
+    "historicalSourceId": "genesis-source:commit:d6c52e7929480e0821dcca294de3a9d865447078",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d6c52e7929480e0821dcca294de3a9d865447078",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d6c52e7929480e0821dcca294de3a9d865447078",
+      "parentShas": [
+        "3fc50be482a6242ab00efa2892b51f2ebd14f0f1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785899464000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785899464000
+      },
+      "subject": "feat(lumina): add standard premium card primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/surfaces/LuminaStandardPremiumCard.tsx"
+      ],
+      "changedPathsByParent": {
+        "3fc50be482a6242ab00efa2892b51f2ebd14f0f1": [
+          "apps/lumina-builder/src/components/design-system/surfaces/LuminaStandardPremiumCard.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d6c52e7929480e0821dcca294de3a9d865447078"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

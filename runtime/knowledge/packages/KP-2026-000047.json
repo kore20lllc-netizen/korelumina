@@ -1,0 +1,182 @@
+{
+  "id": "KP-2026-000047",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1788240130297,
+  "updatedAt": 1788240130297,
+  "data": {
+    "id": "KP-2026-000047",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
+        "candidateType": "CandidateArtifact",
+        "title": "Chief Agent Mission System",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:b1a71f6cd1440e208d1a6744ac0f7ce956ce7d25e213594cb6a3fa7f941d5fd2"
+          ],
+          "genesisReplay": [
+            "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+          ]
+        },
+        "extractedAt": 1788240130296,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130296,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md",
+          "checksum": "sha256:b30d6cf2bb00aa51326baadeedd06f83478381799123d1f1411fb7e8c0d05bcb",
+          "capturedAt": 1788240130292,
+          "observedAt": 1787873068000,
+          "authorityClass": "documentation",
+          "approvalState": "Approved",
+          "owner": "Chief Systems Architect",
+          "scope": "Mission hierarchy, mission lifecycle, mission intake, planning, approval, delegation, execution coordination, validation, completion, knowledge extraction, and archival semantics, subordinate to higher governing authority.",
+          "version": "1.0",
+          "sourceLocation": "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "document",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+            "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+            "genesisManifestIndex": 1655,
+            "genesisAdmissionIdentity": "genesis-admission:963ed5cee435cd1638367f4151a147f7784b3339d4edc6e47025316e9d6f98ab",
+            "historicalSourceId": "genesis-source:document:derived:b1a71f6cd1440e208d1a6744ac0f7ce956ce7d25e213594cb6a3fa7f941d5fd2",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "documentation",
+            "approvalState": "Approved",
+            "owner": "Chief Systems Architect",
+            "scope": "Mission hierarchy, mission lifecycle, mission intake, planning, approval, delegation, execution coordination, validation, completion, knowledge extraction, and archival semantics, subordinate to higher governing authority.",
+            "version": "1.0",
+            "sourceLocation": "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md",
+            "documentClassification": "document",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "Chief Agent Mission System",
+              "status": "Approved",
+              "documentClassification": "document",
+              "sourceLocation": "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1788240130297,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678"
+      ],
+      "sourceLocations": [
+        "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md"
+      ],
+      "contentRefs": [
+        "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "documentation",
+    "approvalState": "pending_review",
+    "owner": "Chief Systems Architect",
+    "scope": "Mission hierarchy, mission lifecycle, mission intake, planning, approval, delegation, execution coordination, validation, completion, knowledge extraction, and archival semantics, subordinate to higher governing authority.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1788240130297,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130296,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1788240130297
+      },
+      {
+        "state": "compiled",
+        "at": 1788240130297
+      },
+      {
+        "state": "validated",
+        "at": 1788240130297
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1788240130297
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1788240130297
+    },
+    "createdAt": 1788240130297,
+    "updatedAt": 1788240130297,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ]
+    }
+  }
+}

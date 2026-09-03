@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:e365ca3dd7484d0dfa33e278e41efea7158a816cdd01e310fdc21f6cdb8e52d8",
+  "type": "document",
+  "title": "Runtime Operations V2 Reference Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084446,
+  "observedAt": 1784355227000,
+  "contentRef": "docs/architecture/runtime/Runtime-V2-Reference.md",
+  "checksum": "sha256:de32e5db5eb171aecb52f51e33cab2951fe344409525443c87f51a1c5abb04f4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 948,
+    "genesisAdmissionIdentity": "genesis-admission:a7af9931c34279edeb9f0798487364675f992c1e2d3654729e419afef41b3bed",
+    "historicalSourceId": "genesis-source:document:derived:e34d58ddc1659d8ddfd7633f429e2fbe0ee28bfca809cddda466cebe9cd4d119",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/runtime/Runtime-V2-Reference.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Runtime Operations V2 Reference Architecture",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/runtime/Runtime-V2-Reference.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e34d58ddc1659d8ddfd7633f429e2fbe0ee28bfca809cddda466cebe9cd4d119"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

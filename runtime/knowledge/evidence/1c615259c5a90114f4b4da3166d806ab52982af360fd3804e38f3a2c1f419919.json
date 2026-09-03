@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:4ea3d6f2551e953ba7086afd5c18a18762bd222da806ad57679c591d961f1438",
+  "type": "commit",
+  "title": "feat(executive): bind execution policy to typed operations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240112386,
+  "observedAt": 1786597530000,
+  "contentRef": "git:commit:1a11f8d4ffca8fabbd45876472685d917882c1dc",
+  "checksum": "sha256:424a59a9ef24502854ce0bdc1169e5358bd581ae28b2e1cc7952dd59abc250fa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1424,
+    "genesisAdmissionIdentity": "genesis-admission:f3a1648144b70721e84df75812a2c7fa1044701a40285ec5131e9a759f89611b",
+    "historicalSourceId": "genesis-source:commit:1a11f8d4ffca8fabbd45876472685d917882c1dc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1a11f8d4ffca8fabbd45876472685d917882c1dc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1a11f8d4ffca8fabbd45876472685d917882c1dc",
+      "parentShas": [
+        "5e751a5ad56cdd5ceb92e108dc020f127e0c14f8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786597530000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786597530000
+      },
+      "subject": "feat(executive): bind execution policy to typed operations",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionOperation.ts",
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutor.ts",
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorService.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutionOperation.test.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorService.test.ts",
+        "apps/lumina-runtime/src/executive/action/index.ts"
+      ],
+      "changedPathsByParent": {
+        "5e751a5ad56cdd5ceb92e108dc020f127e0c14f8": [
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionOperation.ts",
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutor.ts",
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorService.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutionOperation.test.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorService.test.ts",
+          "apps/lumina-runtime/src/executive/action/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1a11f8d4ffca8fabbd45876472685d917882c1dc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

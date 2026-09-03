@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:60167e28d7593c05925edf5216130ac0dedc7ee5983787331c3adcf8b9aa0c55",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Korelumina Deployment Diagnostics — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a#browser-turn=2",
+  "checksum": "60167e28d7593c05925edf5216130ac0dedc7ee5983787331c3adcf8b9aa0c55",
+  "metadata": {
+    "content": "The next production-grade item after project deletion is:\nProject Persistence Synchronization\nCurrent architecture has two sources of truth:\nRuntime\n└─ runtime/workspaces/default/projects/*\nand\nBuilder\n└─ projectRepository\nYou already discovered this earlier when:\nJavaScriptlocalStorage.getItem(\"lumina.projects.all\")\nreturned:\nJavaScript[]\nwhile:\nhttpGET /api/runtime/projects\nreturned:\nacmo-atlas\nelegance-sync-app\ngroup-home-harmony\nride-craft-ai\nThis means runtime projects exist without corresponding Builder records.\n\nGoal\nMake imported/runtime projects first-class Builder projects automatically.\nDesired behavior\nWhen Builder sees:\nJSON{\n  \"projectId\": \"elegance-sync-app\"\n}\nand no matching:\nTypeScriptprojectRepository.get(\"elegance-sync-app\")\nexists,\nBuilder should create:\nTypeScriptprojectRepository.create({\n  id: \"elegance-sync-app\",\n  name: \"Elegance Sync App\",\n  type: \"webapp\",\n  runtime: \"warm\",\n});\nautomatically.\n\nResult\nDashboard becomes source-of-truth aware.\nImported projects:\n✓ survive refresh\n✓ survive restart\n✓ appear immediately\n✓ become selectable\n✓ become deletable\n✓ become searchable\n✓ become team assignable\n\nInspection First\nStart here:\nBashgrep -n \"runtimeMapped\" \\\napps/lumina-builder/src/context/WorkspaceContext.tsx \\\n-A80 -B40\n\necho \"====================\"\n\ngrep -n \"runtimeProjectToProject\" \\\napps/lumina-builder/src/context/WorkspaceContext.tsx \\\n-A60 -B20\nThe likely place to implement synchronization is the existing runtime project refresh pipeline inside WorkspaceContext.\nDo not patch yet. Inspect the mapping implementation first and determine whether runtime-discovered projects are only rendered transiently or persisted into projectRepository. That answer determines the correct production implementation.",
+    "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "21805bbb-3ee3-44a6-94de-3562fa28901e",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2f6ed4-4a28-83ea-bdf8-94476c3af07a:message:21805bbb-3ee3-44a6-94de-3562fa28901e",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a#browser-turn=2",
+    "sourceRevision": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d",
+    "segmentAvailability": "available",
+    "conversationChecksum": "ddc4f42caa04a69593c40fb381b1ce64b4dc77c4d268ceb871d958b52704a047",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d",
+      "exportRevision": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630644477
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2f6ed4-4a28-83ea-bdf8-94476c3af07a:message:21805bbb-3ee3-44a6-94de-3562fa28901e"
+    ],
+    "conversation": [
+      "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:e100423ef8400d2714c8b4b906f5a846c0ec425dd89db462c6b91e00b81e8e51",
+  "type": "document",
+  "title": "KoreLumina AI Governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078057,
+  "observedAt": 1783201842000,
+  "contentRef": "docs/constitution/AI_GOVERNANCE.md",
+  "checksum": "sha256:90918cd5c78bf8a531f3d050f92bd49739320516389664f7743da80518824c9e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 810,
+    "genesisAdmissionIdentity": "genesis-admission:c2b0e09d1c3bb124f76d1aa974da611a5f7fa2ef25df45112bef2034fd5adb73",
+    "historicalSourceId": "genesis-source:document:derived:cd4eaaa3b278337707b50f85291fd0e01a37e93994d095e8fd745d41219813ff",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/AI_GOVERNANCE.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina AI Governance",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/AI_GOVERNANCE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:cd4eaaa3b278337707b50f85291fd0e01a37e93994d095e8fd745d41219813ff"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

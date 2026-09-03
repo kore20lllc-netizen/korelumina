@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c695299d7545f4e21b1f0fc38c4f21c0bb37039999fc7b298a82c89f345dfede",
+  "type": "commit",
+  "title": "docs(canon): establish KoreLumina founding charter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077182,
+  "observedAt": 1783195970000,
+  "contentRef": "git:commit:07ed86de001f6264cdf16a249820d947c71ad956",
+  "checksum": "sha256:193744cae821ddf259d9bae36aa00246ca1f9fe7957ef60639f20e8770cef429",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 790,
+    "genesisAdmissionIdentity": "genesis-admission:56d6d5f17f5046aed2b9db966a0a80376dc8564333a5007dee1a0ef839b60a32",
+    "historicalSourceId": "genesis-source:commit:07ed86de001f6264cdf16a249820d947c71ad956",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:07ed86de001f6264cdf16a249820d947c71ad956",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "07ed86de001f6264cdf16a249820d947c71ad956",
+      "parentShas": [
+        "31a52392829af96d34bc36626c236258d46c0667"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195970000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195970000
+      },
+      "subject": "docs(canon): establish KoreLumina founding charter",
+      "body": "",
+      "changedPaths": [
+        "docs/canon/FOUNDING_CHARTER.md"
+      ],
+      "changedPathsByParent": {
+        "31a52392829af96d34bc36626c236258d46c0667": [
+          "docs/canon/FOUNDING_CHARTER.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/founding-charter-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:07ed86de001f6264cdf16a249820d947c71ad956"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

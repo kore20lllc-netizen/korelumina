@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:1dc9fcd71283a117b7246da519b1b97eeb7ff9358c3f47ccc04ea1b500c1a33e",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Driver Intelligence Platform — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3#browser-turn=1",
+  "checksum": "1dc9fcd71283a117b7246da519b1b97eeb7ff9358c3f47ccc04ea1b500c1a33e",
+  "metadata": {
+    "content": "How do we ensure, protect, declare relationship, and the response quality? Also know that most of the jobs really don't require certain credential. You just need clean vehicle, professional chauffeur, be on time, be courteous, and they hope that you'll be professional enough not to steal their client. How do we enforce all those and make them secure?",
+    "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "2ba509ca-b94a-495c-811a-44c1a2dcfaa6",
+    "speakerRole": "user",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5819fd-e390-83ea-a77d-f902ac0405e3:message:2ba509ca-b94a-495c-811a-44c1a2dcfaa6",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3#browser-turn=1",
+    "sourceRevision": "sha256:896b3321dac1edff9d61c31f5eb653c9565f248fd614b251d7d0aa58f546a7a5",
+    "segmentAvailability": "available",
+    "conversationChecksum": "047a42aa854c11ed00370b1bbd512f42e886f8133c63b42bbdbdb68a43790409",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:896b3321dac1edff9d61c31f5eb653c9565f248fd614b251d7d0aa58f546a7a5",
+      "exportRevision": "sha256:896b3321dac1edff9d61c31f5eb653c9565f248fd614b251d7d0aa58f546a7a5"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630576178
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5819fd-e390-83ea-a77d-f902ac0405e3:message:2ba509ca-b94a-495c-811a-44c1a2dcfaa6"
+    ],
+    "conversation": [
+      "6a5819fd-e390-83ea-a77d-f902ac0405e3"
+    ]
+  }
+}

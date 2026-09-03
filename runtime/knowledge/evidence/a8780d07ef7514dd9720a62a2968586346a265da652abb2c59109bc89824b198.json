@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:025726ee9bc4328c1db4d97cad56801c262fc3d3c70f02d684f560569fccecce",
+  "type": "document",
+  "title": "The KoreLumina Constitution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077538,
+  "observedAt": 1783196668000,
+  "contentRef": "docs/constitution/KORELUMINA_CONSTITUTION.md",
+  "checksum": "sha256:8bae987ff545c7fb8f2cb856e4255a6f93347f487e0678a9adc75c3b9f46741c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 798,
+    "genesisAdmissionIdentity": "genesis-admission:3d7d233415cbb2f973f97e269c0afe4a0b2ac7c3d659ed9633128442ae5b4aee",
+    "historicalSourceId": "genesis-source:document:derived:b707b92d0719793f13f6c7d740e5297f0940425607c3dfa1666eb52c63f2becc",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/KORELUMINA_CONSTITUTION.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "The KoreLumina Constitution",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/KORELUMINA_CONSTITUTION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:b707b92d0719793f13f6c7d740e5297f0940425607c3dfa1666eb52c63f2becc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

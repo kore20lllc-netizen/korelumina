@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:87f4cc1fad75a17832b2fd58594c253fc1ac9cca4b3acb70f4f3be20a74076de",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Inspect M46 Phase 1 — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c#browser-turn=2",
+  "checksum": "87f4cc1fad75a17832b2fd58594c253fc1ac9cca4b3acb70f4f3be20a74076de",
+  "metadata": {
+    "content": "Yes — but the safe version is not “rerun the 16 package records.” It is re-ingest their original source evidence through the current Flow Engine, then let today’s compiler, validation, governance classification, and policy machinery decide where each resulting package belongs.\nThat is actually preferable to manually assigning authority, scope, owner, and version, because the current pipeline now propagates governance metadata correctly from evidence → IR → package. The old 16 packages predate that reliable contract, which is why their package-level identity is blank.\nThe correct path should be:\nlegacy package\n    ↓\nresolve original evidence/source\n    ↓\nre-ingest through current Flow Engine\n    ↓\ncurrent compiler\n    ↓\ncurrent validation\n    ↓\nnew governed Knowledge Package\n    ↓\npolicy resolution\n    ↓\nautomatic review/promotion if eligible\nThe old package should not be overwritten. It should remain as historical lineage and be marked as superseded/reprocessed once the new package is successfully created. That preserves auditability and avoids pretending the old package always had governance metadata.\nThere are two possible outcomes for each of the 16. If the original evidence still contains enough information, the Flow Engine can produce a properly governed replacement and the normal autonomous pipeline can decide whether it becomes Canonical Knowledge. If the original source itself lacks governance/context, rerunning it will still fail closed — which is useful, because then we know the problem is genuinely in the source, not just in the old package format.\nSo I would not manually review all 16 first. I would implement a bounded Legacy Package Reprocessing Service that takes those exact 16 package IDs, resolves their persisted sourceEvidenceRefs / source locations, replays the source through the current preservation pipeline, records old→new lineage, and leaves any unresolved ones in quarantine.\nThat is the better long-term mechanism because future legacy migrations can use the same path instead of requiring you to manually classify historical packages one by one.\nThe next milestone should therefore change from “manual reclassification” to M49 Phase 61 — Legacy Package Flow-Engine Reprocessing Audit: first verify that the original evidence for each of the 16 is still resolvable before executing anything. If the evidence exists, we can then rerun them safely through the current pipeline.",
+    "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "300dbf65-3077-4930-807f-019729b51fd3",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a87bb2a-02fc-83ea-b769-ac2cf1abca2c:message:300dbf65-3077-4930-807f-019729b51fd3",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c#browser-turn=2",
+    "sourceRevision": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "a903fa9ef528a31b94370ad6354a867ecced772ca0b25fc515f977277be1463e",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e",
+      "exportRevision": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630611726
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a87bb2a-02fc-83ea-b769-ac2cf1abca2c:message:300dbf65-3077-4930-807f-019729b51fd3"
+    ],
+    "conversation": [
+      "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:01bfc1b8397a4b7c027f18dab57e0870ac02de2256c121d935993baee31a57fd",
+  "type": "commit",
+  "title": "feat(executive): define guarded mutation exposure contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240112875,
+  "observedAt": 1786620483000,
+  "contentRef": "git:commit:c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136",
+  "checksum": "sha256:16ef864122aa6203d6d014bafc06ad285920b2fc204d03a8117cd0f830ba66a7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1431,
+    "genesisAdmissionIdentity": "genesis-admission:4ae8b8f70605dadfbcc39b7c7bbb2563de1c56958b66fd0942bc97b901ab90b6",
+    "historicalSourceId": "genesis-source:commit:c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136",
+      "parentShas": [
+        "b5d6a51931d4dc1bb734a698cdda2af6119e44ad"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786620483000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786620483000
+      },
+      "subject": "feat(executive): define guarded mutation exposure contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/routes/__tests__/executiveActionMutationContract.test.ts",
+        "apps/lumina-runtime/src/routes/executiveActionMutationContract.ts"
+      ],
+      "changedPathsByParent": {
+        "b5d6a51931d4dc1bb734a698cdda2af6119e44ad": [
+          "apps/lumina-runtime/src/routes/__tests__/executiveActionMutationContract.test.ts",
+          "apps/lumina-runtime/src/routes/executiveActionMutationContract.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

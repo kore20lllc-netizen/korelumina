@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:9402f1a8e5944eba44751077223ffbddc6f34259857b82046daabc492d1a9461",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Handoff Inspection — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=4",
+  "checksum": "9402f1a8e5944eba44751077223ffbddc6f34259857b82046daabc492d1a9461",
+  "metadata": {
+    "content": "Phase 2B.6 is visually certified and ready to commit.\nBashcd /Users/erictouko/dev/korelumina\n\ngit add \\\n  apps/lumina-builder/src/components/design-system/lumina/executive/index.ts \\\n  apps/lumina-builder/src/components/design-system/lumina/executive/ribbon \\\n  apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx\n\necho \"===== STAGED FILES =====\"\ngit diff --cached --name-only\n\necho\necho \"===== PROTECTED FILE CHECK =====\"\nif git diff --cached --name-only \\\n  | grep -Fq \\\n  \"apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx\"\nthen\n  echo \"ERROR: RuntimeHeader.tsx was staged\"\n  exit 1\nfi\n\necho\necho \"===== STAGED DIFF CHECK =====\"\ngit diff --cached --check\n\necho\necho \"===== FINAL BUILD =====\"\nnpm run build\n\ngit commit -m \"feat(lumina): extract executive ribbon\"\n\ngit push origin inspect/runtime-certified-main\n\necho\necho \"===== LATEST COMMIT =====\"\ngit log -1 --oneline\n\necho\necho \"===== STATUS =====\"\ngit status --short\nExpected remaining worktree:\n M apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx\nThe latest verified remote baseline before this commit is 4d93c7311d83d6d849a51f04b258f70de3e11ae2.",
+    "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "444c3a61-1615-4b16-90e0-b07f6d5cd96f",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:444c3a61-1615-4b16-90e0-b07f6d5cd96f",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=4",
+    "sourceRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0c8d12264d02c9c4c48d281b42765e29afc3ddf55b8a8b1a08993eae22444549",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+      "exportRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630659669
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:444c3a61-1615-4b16-90e0-b07f6d5cd96f"
+    ],
+    "conversation": [
+      "6a6c78f2-f41c-83ea-a29d-21579b9b298a"
+    ]
+  }
+}

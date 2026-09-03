@@ -1,0 +1,44 @@
+{
+  "id": "genesis-evidence:c226ab6e63159421b3690c15e03c0ec33d55aa9636d2aab7393c6d8c231891a0",
+  "type": "document",
+  "title": "Historical Replay Contract V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240120025,
+  "observedAt": 1787272954000,
+  "contentRef": "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md",
+  "checksum": "sha256:b82a180f45d9f23764e8fe7d3f5b79bed7f4701c26ef591f3be8167bddc20f0c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1528,
+    "genesisAdmissionIdentity": "genesis-admission:5fdda4f55994baad1c6f59d16aee79ca47e16c080765a4fd8a3a66520bd0a689",
+    "historicalSourceId": "genesis-source:document:derived:34ce88f84bddc0a9800a5a34d91b0939b331e035a458b9914e42078016ad6900",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Subordinate to the KoreLumina Constitution, approved constitutional amendments, and Constitutional Document Governance",
+    "approvalState": "Architecture Contract",
+    "owner": "Knowledge Platform",
+    "scope": "Historical Replay and Genesis Corpus construction",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Historical Replay Contract V1",
+      "status": "Architecture Contract",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:34ce88f84bddc0a9800a5a34d91b0939b331e035a458b9914e42078016ad6900"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:53159a7e7725c1cb380da9c53d5cf989e57df027d42625adfeb0dfc7196d9bc7",
+  "type": "commit",
+  "title": "refactor(knowledge): align canonical production rails",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240107842,
+  "observedAt": 1786409886000,
+  "contentRef": "git:commit:e93fdfcd8fc2f3600d19a9817f1ddd5efe52012a",
+  "checksum": "sha256:7e255fc001c237db7a788b5230eba07a6c4ff79fd9067beaa771c9eacde960fc",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1358,
+    "genesisAdmissionIdentity": "genesis-admission:93fae7c871cc4de632cff1e0bd2938845fdf30bd65dd0cce5d21e26e1fecc2b9",
+    "historicalSourceId": "genesis-source:commit:e93fdfcd8fc2f3600d19a9817f1ddd5efe52012a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e93fdfcd8fc2f3600d19a9817f1ddd5efe52012a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e93fdfcd8fc2f3600d19a9817f1ddd5efe52012a",
+      "parentShas": [
+        "21bf224a272c0ce1afe3364a4ab8d07007ef24ab"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786409886000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786409886000
+      },
+      "subject": "refactor(knowledge): align canonical production rails",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+      ],
+      "changedPathsByParent": {
+        "21bf224a272c0ce1afe3364a4ab8d07007ef24ab": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e93fdfcd8fc2f3600d19a9817f1ddd5efe52012a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

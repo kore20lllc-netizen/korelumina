@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:4b7bc9d4e50f068b81ad224f80f23fad17fd443edc7a401adb7fc27c659d304d",
+  "type": "commit",
+  "title": "feat(education): assemble governed historical evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240127440,
+  "observedAt": 1787718744000,
+  "contentRef": "git:commit:c221acc51f55f040bbe59e4308128353c8180497",
+  "checksum": "sha256:68185a81e867d81f68ac5fec2bb0c78ed938bc2ec0bebd38ebfdc14a1b94da4f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1621,
+    "genesisAdmissionIdentity": "genesis-admission:9a8d51be91a87409595177a710ca9ed258a77d15d1c6ac66d7564189700c5666",
+    "historicalSourceId": "genesis-source:commit:c221acc51f55f040bbe59e4308128353c8180497",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c221acc51f55f040bbe59e4308128353c8180497",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c221acc51f55f040bbe59e4308128353c8180497",
+      "parentShas": [
+        "d6c9fd3dc7fbf4b18fadab8f49b95de724117add"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787718744000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787718744000
+      },
+      "subject": "feat(education): assemble governed historical evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/EducationalCorpusHistoricalEvidence.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusHistoricalEvidence.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts"
+      ],
+      "changedPathsByParent": {
+        "d6c9fd3dc7fbf4b18fadab8f49b95de724117add": [
+          "apps/lumina-runtime/src/knowledge-education/EducationalCorpusHistoricalEvidence.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusHistoricalEvidence.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c221acc51f55f040bbe59e4308128353c8180497"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:b3391820cb1a062ff9a2f3731c0a21cbaf9932304baceb9c379f1d6b52f0efdf",
+  "type": "commit",
+  "title": "feat(genesis): add operational projection",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240119570,
+  "observedAt": 1787199828000,
+  "contentRef": "git:commit:ab05760ad67b27b6b9c2504f969145dd8456354d",
+  "checksum": "sha256:25e5e794114c0d959a4734e393a51614bc9ed0d91aa4bcf33e21f71e7bb144f9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1522,
+    "genesisAdmissionIdentity": "genesis-admission:7a3d067a175cbc4fbbf256afeee718e09acd2e90fbda40a92912454994bb2106",
+    "historicalSourceId": "genesis-source:commit:ab05760ad67b27b6b9c2504f969145dd8456354d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ab05760ad67b27b6b9c2504f969145dd8456354d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ab05760ad67b27b6b9c2504f969145dd8456354d",
+      "parentShas": [
+        "d71fb915d0cde2a87d5b2a6d722136efce679131"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787199828000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787199828000
+      },
+      "subject": "feat(genesis): add operational projection",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjection.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjectionService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisOperationalProjection.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "apps/lumina-runtime/src/routes/genesisOperationalProjection.ts",
+        "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+      ],
+      "changedPathsByParent": {
+        "d71fb915d0cde2a87d5b2a6d722136efce679131": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjection.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjectionService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisOperationalProjection.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "apps/lumina-runtime/src/routes/genesisOperationalProjection.ts",
+          "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ab05760ad67b27b6b9c2504f969145dd8456354d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

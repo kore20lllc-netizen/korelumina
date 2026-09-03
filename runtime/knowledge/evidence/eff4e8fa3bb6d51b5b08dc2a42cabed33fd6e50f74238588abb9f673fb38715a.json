@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:5f72c266ed255ebfa275beb3c91396e7a5b5eefb9584c864d836a621537c2b4b",
+  "type": "document",
+  "title": "WF-100 — Executive Workspace Standard",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084252,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/workspace-framework/WF-100_EXECUTIVE_WORKSPACE_STANDARD.md",
+  "checksum": "sha256:5469a16db594675c74f6442394b4c2da762d75734531842e3ad40c325caed427",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 944,
+    "genesisAdmissionIdentity": "genesis-admission:678e35c8740d25b88f8e7e9f2196b95196d502b0da66dcae59e5fd86284e350f",
+    "historicalSourceId": "genesis-source:document:derived:c753c93c02577dcd28d205d114eb2a404295370e3e259060083d96c6b1583808",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "KoreLumina Architecture",
+    "approvalState": "Proposed for certification",
+    "sourceLocation": "docs/architecture/workspace-framework/WF-100_EXECUTIVE_WORKSPACE_STANDARD.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "WF-100 — Executive Workspace Standard",
+      "status": "Proposed for certification",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/workspace-framework/WF-100_EXECUTIVE_WORKSPACE_STANDARD.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:c753c93c02577dcd28d205d114eb2a404295370e3e259060083d96c6b1583808"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

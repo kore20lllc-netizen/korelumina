@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:365d51a0d73e42c6318110c74a47d3f876f87ba2b8e60eaf18fde07179c5bf82",
+  "type": "document",
+  "title": "Delegation Rules",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130638,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:delegation-rules:66-75",
+  "checksum": "sha256:7147b7bf2f52ace28dad633885451984f33568c9b75faa72cc455e7997c4ded0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1659,
+    "genesisAdmissionIdentity": "genesis-admission:207da3d40d262642791aebf65fbbb7d905d226f8201b65a51b9e5c0cb39cbef3",
+    "historicalSourceId": "genesis-source:document:derived:17d07c549217751d3a46c78cf6d418ceefa06876bafb9c7dc8fab4c042d3d954",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 66,
+    "lineEnd": 75,
+    "sectionTitle": "Delegation Rules",
+    "sectionSlug": "delegation-rules",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Delegation Rules\n\nThe Chief Agent delegates work to specialist agents only when:\n\n- the mission is defined\n- scope is bounded\n- expected output is clear\n- validation is defined\n- rollback is available\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Delegation Rules",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 66,
+      "lineEnd": 75,
+      "sectionTitle": "Delegation Rules",
+      "sectionSlug": "delegation-rules",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Delegation Rules\n\nThe Chief Agent delegates work to specialist agents only when:\n\n- the mission is defined\n- scope is bounded\n- expected output is clear\n- validation is defined\n- rollback is available\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:17d07c549217751d3a46c78cf6d418ceefa06876bafb9c7dc8fab4c042d3d954"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

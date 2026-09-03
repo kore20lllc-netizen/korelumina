@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:2db9fc72ffa28ceb5e892be3012e28983f60161120d31ed95cf68e0a855e5938",
+  "type": "document",
+  "title": "Learning Workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130896,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:learning-workflow:88-98",
+  "checksum": "sha256:c2b3d45bef17c11623372acba9e4f92fb06b55a14b318966a49400f46fa8c9e3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1662,
+    "genesisAdmissionIdentity": "genesis-admission:7325442013d0704432d906dda3323016f4255d1dadda95a630d8cd07f637cb7e",
+    "historicalSourceId": "genesis-source:document:derived:89aae102c359c41859fb675507153e15c0a4954689e065d38cfb6e9bd009b03e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 88,
+    "lineEnd": 98,
+    "sectionTitle": "Learning Workflow",
+    "sectionSlug": "learning-workflow",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Learning Workflow\n\nEvery mission produces:\n\n- decisions\n- lessons\n- patterns\n- pitfalls\n- recovery anchors\n- reusable knowledge\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Learning Workflow",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 88,
+      "lineEnd": 98,
+      "sectionTitle": "Learning Workflow",
+      "sectionSlug": "learning-workflow",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Learning Workflow\n\nEvery mission produces:\n\n- decisions\n- lessons\n- patterns\n- pitfalls\n- recovery anchors\n- reusable knowledge\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:89aae102c359c41859fb675507153e15c0a4954689e065d38cfb6e9bd009b03e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:0e025f650690f76fdc53b744c5de49a373c53cce4600cc1ab2ab440e5f90e751",
+  "type": "commit",
+  "title": "feat(genesis): add governed replay designation action",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240133661,
+  "observedAt": 1788162947000,
+  "contentRef": "git:commit:03dd6e128f592c7138aa640b907f562af83de370",
+  "checksum": "sha256:8ed5e6586465f58cb5a6d68028fe9e26cf3a285fb20293658c94596f00ce54c9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1694,
+    "genesisAdmissionIdentity": "genesis-admission:422ea8fecd317236227917c133b8a173fe3388a2043fb3bcfb5a2e8c07981f40",
+    "historicalSourceId": "genesis-source:commit:03dd6e128f592c7138aa640b907f562af83de370",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:03dd6e128f592c7138aa640b907f562af83de370",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "03dd6e128f592c7138aa640b907f562af83de370",
+      "parentShas": [
+        "7b3e1a0901fce7b22ab547515002dff49732352d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788162947000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788162947000
+      },
+      "subject": "feat(genesis): add governed replay designation action",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/genesisReplayDesignation.test.ts",
+        "apps/lumina-runtime/src/routes/genesisReplayDesignation.ts"
+      ],
+      "changedPathsByParent": {
+        "7b3e1a0901fce7b22ab547515002dff49732352d": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/genesisReplayDesignation.test.ts",
+          "apps/lumina-runtime/src/routes/genesisReplayDesignation.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:03dd6e128f592c7138aa640b907f562af83de370"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

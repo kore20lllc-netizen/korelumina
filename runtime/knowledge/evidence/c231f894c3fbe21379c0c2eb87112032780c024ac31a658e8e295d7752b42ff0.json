@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:bcb6e7435a1894d413d2238c0e0f0c1f225a2964eea070e133179c2c86dca27c",
+  "type": "commit",
+  "title": "feat(genesis): add current-policy canonical consumption view",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240123061,
+  "observedAt": 1787539382000,
+  "contentRef": "git:commit:e17ef6df766ea7617f3e04f015d64ef5d4874003",
+  "checksum": "sha256:42aa397a6d0d64dc9ad23a32e2eba102773003601527457b6092046060f09903",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1567,
+    "genesisAdmissionIdentity": "genesis-admission:3ecc4e10b747272f26cc4ec0b684a36b882a93269bd129a7b509ce57d09555a3",
+    "historicalSourceId": "genesis-source:commit:e17ef6df766ea7617f3e04f015d64ef5d4874003",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e17ef6df766ea7617f3e04f015d64ef5d4874003",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e17ef6df766ea7617f3e04f015d64ef5d4874003",
+      "parentShas": [
+        "7258312cfd7c736dcf1b2d8059b9fbc9e0c5c9df"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787539382000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787539382000
+      },
+      "subject": "feat(genesis): add current-policy canonical consumption view",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyCanonicalView.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisCurrentPolicyCanonicalView.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+      ],
+      "changedPathsByParent": {
+        "7258312cfd7c736dcf1b2d8059b9fbc9e0c5c9df": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyCanonicalView.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisCurrentPolicyCanonicalView.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e17ef6df766ea7617f3e04f015d64ef5d4874003"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:b38ff2986bfe2ea0f69eb732f10c60660c7fcd1dc0fe39a62210749210527840",
+  "type": "commit",
+  "title": "feat(knowledge): add acquisition provider framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240074848,
+  "observedAt": 1783058745000,
+  "contentRef": "git:commit:34451932702be451723302962096586d81caf32f",
+  "checksum": "sha256:4d1f18f16982f5d0e513d77a302296750ee94efd87edacdd157446ee901f6df3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 741,
+    "genesisAdmissionIdentity": "genesis-admission:cf000734c5a292161c96bec3ef23a4c6b4e5e71e2635133b172320f261a31100",
+    "historicalSourceId": "genesis-source:commit:34451932702be451723302962096586d81caf32f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:34451932702be451723302962096586d81caf32f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "34451932702be451723302962096586d81caf32f",
+      "parentShas": [
+        "9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783058745000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783058745000
+      },
+      "subject": "feat(knowledge): add acquisition provider framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionPipeline.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionProvider.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/index.ts"
+      ],
+      "changedPathsByParent": {
+        "9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea": [
+          "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionPipeline.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionProvider.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/KnowledgeAcquisitionRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kap-001-acquisition-provider-framework-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:34451932702be451723302962096586d81caf32f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

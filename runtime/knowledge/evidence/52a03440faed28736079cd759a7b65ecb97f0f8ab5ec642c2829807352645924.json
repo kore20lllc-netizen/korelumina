@@ -1,0 +1,113 @@
+{
+  "id": "genesis-evidence:48aea18c6c49e0832e33ac83cbcf16ff7faf676114db126ecf541fd46eb59fe9",
+  "type": "commit",
+  "title": "docs(runtime): add certification evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083476,
+  "observedAt": 1783977261000,
+  "contentRef": "git:commit:6c0bdf7ca308c725486ac629f3a6b14ffd4cb003",
+  "checksum": "sha256:30b7d493670bc90e49d31ac41860c1ecd6657917244499cb44479795dd4a4e54",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 928,
+    "genesisAdmissionIdentity": "genesis-admission:821ae502f54cee001090cd0d0c1ae24d913d8ed416943c3956273bed91746828",
+    "historicalSourceId": "genesis-source:commit:6c0bdf7ca308c725486ac629f3a6b14ffd4cb003",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6c0bdf7ca308c725486ac629f3a6b14ffd4cb003",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6c0bdf7ca308c725486ac629f3a6b14ffd4cb003",
+      "parentShas": [
+        "46eefe9571a6b997a7983375adb1a02d97abad6b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783977261000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783977261000
+      },
+      "subject": "docs(runtime): add certification evidence",
+      "body": "",
+      "changedPaths": [
+        ".runtime-certification/20260713T205446Z/health.json",
+        ".runtime-certification/20260713T205446Z/metrics-initial.json",
+        ".runtime-certification/20260713T205446Z/projects.json",
+        ".runtime-certification/20260713T205708Z/health.json",
+        ".runtime-certification/20260713T205708Z/metrics-initial.json",
+        ".runtime-certification/20260713T205708Z/projects.json",
+        ".runtime-certification/20260713T205917Z/health.json",
+        ".runtime-certification/20260713T205917Z/metrics-initial.json",
+        ".runtime-certification/20260713T205917Z/projects.json",
+        ".runtime-certification/20260713T210510Z/events.txt",
+        ".runtime-certification/20260713T210510Z/health.json",
+        ".runtime-certification/20260713T210510Z/metrics-idle.json",
+        ".runtime-certification/20260713T210510Z/metrics-initial.json",
+        ".runtime-certification/20260713T210510Z/metrics-live.json",
+        ".runtime-certification/20260713T210510Z/metrics-outage.json",
+        ".runtime-certification/20260713T210510Z/metrics-recover.json",
+        ".runtime-certification/20260713T210510Z/metrics-spike.json",
+        ".runtime-certification/20260713T210510Z/metrics-state.json",
+        ".runtime-certification/20260713T210510Z/projects.json",
+        ".runtime-certification/20260713T210510Z/restart.json",
+        ".runtime-certification/20260713T210510Z/restore-start.json",
+        ".runtime-certification/20260713T210510Z/scenario-idle.json",
+        ".runtime-certification/20260713T210510Z/scenario-outage.json",
+        ".runtime-certification/20260713T210510Z/scenario-recover.json",
+        ".runtime-certification/20260713T210510Z/scenario-spike.json",
+        ".runtime-certification/20260713T210510Z/stop.json",
+        "docs/runtime/RUNTIME_CERTIFICATION_REPORT.md"
+      ],
+      "changedPathsByParent": {
+        "46eefe9571a6b997a7983375adb1a02d97abad6b": [
+          ".runtime-certification/20260713T205446Z/health.json",
+          ".runtime-certification/20260713T205446Z/metrics-initial.json",
+          ".runtime-certification/20260713T205446Z/projects.json",
+          ".runtime-certification/20260713T205708Z/health.json",
+          ".runtime-certification/20260713T205708Z/metrics-initial.json",
+          ".runtime-certification/20260713T205708Z/projects.json",
+          ".runtime-certification/20260713T205917Z/health.json",
+          ".runtime-certification/20260713T205917Z/metrics-initial.json",
+          ".runtime-certification/20260713T205917Z/projects.json",
+          ".runtime-certification/20260713T210510Z/events.txt",
+          ".runtime-certification/20260713T210510Z/health.json",
+          ".runtime-certification/20260713T210510Z/metrics-idle.json",
+          ".runtime-certification/20260713T210510Z/metrics-initial.json",
+          ".runtime-certification/20260713T210510Z/metrics-live.json",
+          ".runtime-certification/20260713T210510Z/metrics-outage.json",
+          ".runtime-certification/20260713T210510Z/metrics-recover.json",
+          ".runtime-certification/20260713T210510Z/metrics-spike.json",
+          ".runtime-certification/20260713T210510Z/metrics-state.json",
+          ".runtime-certification/20260713T210510Z/projects.json",
+          ".runtime-certification/20260713T210510Z/restart.json",
+          ".runtime-certification/20260713T210510Z/restore-start.json",
+          ".runtime-certification/20260713T210510Z/scenario-idle.json",
+          ".runtime-certification/20260713T210510Z/scenario-outage.json",
+          ".runtime-certification/20260713T210510Z/scenario-recover.json",
+          ".runtime-certification/20260713T210510Z/scenario-spike.json",
+          ".runtime-certification/20260713T210510Z/stop.json",
+          "docs/runtime/RUNTIME_CERTIFICATION_REPORT.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6c0bdf7ca308c725486ac629f3a6b14ffd4cb003"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

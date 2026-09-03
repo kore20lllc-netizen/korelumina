@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:c8b89c357955264c07888b3e5c1e4b4ac5bb862b82d738a6ee9774985bdb82b8",
+  "type": "commit",
+  "title": "feat(education): project educational corpus certification readiness",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240125466,
+  "observedAt": 1787586447000,
+  "contentRef": "git:commit:1b7d55ada95ed9032d976151bcdd06812145e002",
+  "checksum": "sha256:2c4ee9ce7ea5cdad80c22393b0a58f47b55f3af70a2d188043e3e0496008d733",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1597,
+    "genesisAdmissionIdentity": "genesis-admission:ee69ade4fbca68036675847255a4907f38f11cb7b33886fbb7660eacf973623a",
+    "historicalSourceId": "genesis-source:commit:1b7d55ada95ed9032d976151bcdd06812145e002",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1b7d55ada95ed9032d976151bcdd06812145e002",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1b7d55ada95ed9032d976151bcdd06812145e002",
+      "parentShas": [
+        "83a1415c73326a927fc539962990c71ebdc4902b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787586447000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787586447000
+      },
+      "subject": "feat(education): project educational corpus certification readiness",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertificationCandidate.ts",
+        "apps/lumina-runtime/src/knowledge-education/EducationalCorpusRuntimeService.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertificationCandidate.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts"
+      ],
+      "changedPathsByParent": {
+        "83a1415c73326a927fc539962990c71ebdc4902b": [
+          "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertificationCandidate.ts",
+          "apps/lumina-runtime/src/knowledge-education/EducationalCorpusRuntimeService.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertificationCandidate.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1b7d55ada95ed9032d976151bcdd06812145e002"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:fa156478f972e13b5265fc9c585f963842e2da5f9d0d278016c71b9c6cb3763e",
+  "type": "document",
+  "title": "KoreLumina Destiny",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077361,
+  "observedAt": 1783196394000,
+  "contentRef": "docs/canon/DESTINY.md",
+  "checksum": "sha256:bbe98b9db8e3e4ee6fe5e71cbf29e913c145294680c5d80f4d35150b13affc0c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 794,
+    "genesisAdmissionIdentity": "genesis-admission:d1fa0ae3404e579d6ee1950d99f8596eb4a390ce3eabf4c1885c65ed92e83b23",
+    "historicalSourceId": "genesis-source:document:derived:53f7b2fad5fad8eb75d5c38fb16a5e6f9e032b375559e32eedbd3f89b0c53c2b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/canon/DESTINY.md",
+    "documentClassification": "canonical",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Destiny",
+      "status": "Canonical",
+      "documentClassification": "canonical",
+      "sourceLocation": "docs/canon/DESTINY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:53f7b2fad5fad8eb75d5c38fb16a5e6f9e032b375559e32eedbd3f89b0c53c2b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

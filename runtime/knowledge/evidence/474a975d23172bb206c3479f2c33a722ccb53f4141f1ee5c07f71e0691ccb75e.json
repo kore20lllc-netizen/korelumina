@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b996a4096a2a90d66ace9f0305792a19b73ee189d648d41a0901a9cb217f77ab",
+  "type": "commit",
+  "title": "education: define initial competency evidence contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129016,
+  "observedAt": 1787806050000,
+  "contentRef": "git:commit:4ea99e4a49d6c42a50020a16d25b52efb2598ab3",
+  "checksum": "sha256:b56b97f6efb6bd236e29bb0d8def46578f662d022c90527cde9dcf2060202e23",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1640,
+    "genesisAdmissionIdentity": "genesis-admission:19fd4d7c3dd94bb6973ee82a6839a0b18e9bdb479a1e050728637898c972c0f6",
+    "historicalSourceId": "genesis-source:commit:4ea99e4a49d6c42a50020a16d25b52efb2598ab3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4ea99e4a49d6c42a50020a16d25b52efb2598ab3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4ea99e4a49d6c42a50020a16d25b52efb2598ab3",
+      "parentShas": [
+        "b883ba9dd2950db6f6bb5bb8f19e422d5716a869"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787806050000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787806050000
+      },
+      "subject": "education: define initial competency evidence contract",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/InitialCompetencyEvidenceContract.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/InitialCompetencyEvidenceContract.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts"
+      ],
+      "changedPathsByParent": {
+        "b883ba9dd2950db6f6bb5bb8f19e422d5716a869": [
+          "apps/lumina-runtime/src/knowledge-education/InitialCompetencyEvidenceContract.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/InitialCompetencyEvidenceContract.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4ea99e4a49d6c42a50020a16d25b52efb2598ab3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

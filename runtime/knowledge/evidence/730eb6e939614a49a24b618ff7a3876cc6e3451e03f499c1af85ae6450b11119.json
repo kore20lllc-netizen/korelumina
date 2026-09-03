@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:7a4c842fc0aa4dbf1c8b89c3f3526ef8e49e4fe076b344d3cda7fde0ecbe4b5b",
+  "type": "commit",
+  "title": "feat(genesis): add authoritative completeness certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240126771,
+  "observedAt": 1787655801000,
+  "contentRef": "git:commit:ec754a136e24f101aea5aa76566121f13f4160b7",
+  "checksum": "sha256:46737a77d1dc54f7237ad815155c76d67a92e5554fa8f80b09e57e70cd298830",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1613,
+    "genesisAdmissionIdentity": "genesis-admission:919984505d813114e1b2d4bdb108391a0f2dbc06a69dba91065166cf55a197d0",
+    "historicalSourceId": "genesis-source:commit:ec754a136e24f101aea5aa76566121f13f4160b7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ec754a136e24f101aea5aa76566121f13f4160b7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ec754a136e24f101aea5aa76566121f13f4160b7",
+      "parentShas": [
+        "b29bf82d66aeace02ce7c5c0440637bae220bde9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787655801000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787655801000
+      },
+      "subject": "feat(genesis): add authoritative completeness certification",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertification.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertificationPersistence.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertificationService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAuthoritativeCompletenessCertification.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "apps/lumina-runtime/src/routes/genesisConversationAuthoritativeCompletenessCertification.ts"
+      ],
+      "changedPathsByParent": {
+        "b29bf82d66aeace02ce7c5c0440637bae220bde9": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertification.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertificationPersistence.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationAuthoritativeCompletenessCertificationService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAuthoritativeCompletenessCertification.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "apps/lumina-runtime/src/routes/genesisConversationAuthoritativeCompletenessCertification.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ec754a136e24f101aea5aa76566121f13f4160b7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

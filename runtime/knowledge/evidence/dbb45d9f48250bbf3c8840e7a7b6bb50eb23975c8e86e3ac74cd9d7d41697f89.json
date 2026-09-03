@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:c54a6f5a1b7a4e94f6c842da0c457b61ac6ebcf661a815793038bb3fa14dbe90",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Progress — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278#browser-turn=0",
+  "checksum": "c54a6f5a1b7a4e94f6c842da0c457b61ac6ebcf661a815793038bb3fa14dbe90",
+  "metadata": {
+    "content": "The audit found the actual rendering defect.\nThe appearance variables contain Tailwind class names, but consumers treat them as CSS property values:\nTypeScriptcard: \"bg-white/[0.09]\"\nblur: \"backdrop-blur-2xl\"\nborder: \"border-white/12\"\nshadow: \"shadow-[...]\"\nThen the system writes:\nCSS--lumina-surface-card: bg-white/[0.09];\nand consumes:\nCSSbackground: var(--lumina-surface-card);\nThat value is invalid CSS, so the browser ignores it. The adapter and state pipeline are working; the resolver output contract is broken.\nDo not migrate TopBar or Sidebar yet. First repair the Lumina appearance token contract.\nRun this final inspection:\nBashsed -n '1,260p' \\\napps/lumina-builder/src/components/lumina/appearance/resolver/types.ts\n\necho \"====================\"\n\ngrep -R -n \\\n\"getLuminaSurfaceClass\" \\\napps/lumina-builder/src/components/lumina/appearance\n\necho \"====================\"\n\nsed -n '1,260p' \\\napps/lumina-builder/src/components/lumina/appearance/controller/getLuminaSurfaceClass.ts 2>/dev/null || true\n\necho \"====================\"\n\nfind \\\napps/lumina-builder/src/components/lumina/appearance \\\n-maxdepth 3 \\\n-type f \\\n-sort\nThe next reconstruction ticket will rewrite the affected appearance profile/resolver files so CSS variables receive real values such as:\nCSSrgba(255, 255, 255, 0.09)\nblur(40px)\nrgba(255, 255, 255, 0.12)\n0 24px 80px -30px rgba(0, 0, 0, 0.62)\nOnly after that contract is valid should TopBar, Sidebar, and the wider Builder be migrated to consume those variables.",
+    "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "f9ca0a8e-3d75-4ec5-a2a7-bf76e8fd318f",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a4c6288-5ea4-83ea-ae5a-9324e046d278:message:f9ca0a8e-3d75-4ec5-a2a7-bf76e8fd318f",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278#browser-turn=0",
+    "sourceRevision": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1",
+    "segmentAvailability": "available",
+    "conversationChecksum": "aa639589de8db1e2d0db1b45f1a4b5eeb0e06d9312bafa31ad2da66c26a04e17",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1",
+      "exportRevision": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630739389
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a4c6288-5ea4-83ea-ae5a-9324e046d278:message:f9ca0a8e-3d75-4ec5-a2a7-bf76e8fd318f"
+    ],
+    "conversation": [
+      "6a4c6288-5ea4-83ea-ae5a-9324e046d278"
+    ]
+  }
+}

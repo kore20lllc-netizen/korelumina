@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:52f9c269e189f8dd53781760e392184785f07f56f177cd5b54c3b749c73de316",
+  "type": "commit",
+  "title": "feat(knowledge): activate documentation compiler preservation path",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108581,
+  "observedAt": 1786426313000,
+  "contentRef": "git:commit:013459aee8ad3ca67b84461dceaab37d1c303d3e",
+  "checksum": "sha256:61c6900b04ffa8a10e43b7459e59825386a359f768179571056e84ec227a573d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1369,
+    "genesisAdmissionIdentity": "genesis-admission:8f057066ca1aee70c03235aaa301d1a0bf3c5ce3091fb7fc1d81be688e1a5186",
+    "historicalSourceId": "genesis-source:commit:013459aee8ad3ca67b84461dceaab37d1c303d3e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:013459aee8ad3ca67b84461dceaab37d1c303d3e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "013459aee8ad3ca67b84461dceaab37d1c303d3e",
+      "parentShas": [
+        "acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786426313000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786426313000
+      },
+      "subject": "feat(knowledge): activate documentation compiler preservation path",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/__tests__/DocumentationPreservationPath.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/DocumentationCompiler.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/__tests__/DocumentationCompiler.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/index.ts"
+      ],
+      "changedPathsByParent": {
+        "acd6d9c1c3a3cd134390f9c51d07bb79f5f46ebb": [
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/__tests__/DocumentationPreservationPath.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/createKnowledgePreservationPlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/DocumentationCompiler.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/__tests__/DocumentationCompiler.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:013459aee8ad3ca67b84461dceaab37d1c303d3e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

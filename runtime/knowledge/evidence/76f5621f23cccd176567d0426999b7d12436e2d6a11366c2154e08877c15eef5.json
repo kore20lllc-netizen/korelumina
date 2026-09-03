@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:43ea1dce37d5d9d5b57b9fd5f226b37d8e7691f60589e6553b7db23bed2fa06e",
+  "type": "commit",
+  "title": "feat(lumina): add workspace layout framework scaffold",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079620,
+  "observedAt": 1783544491000,
+  "contentRef": "git:commit:61f56f06827b6e0a602e7de9a1337b50301e91ce",
+  "checksum": "sha256:e710966702d81d6a20df6bad871bf224c098cdca6a07a9e9bce15220082342a5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 845,
+    "genesisAdmissionIdentity": "genesis-admission:1bbc7af729380c7c005d762930aca4fbfe2c55e42c26b4d5f14293787efa976b",
+    "historicalSourceId": "genesis-source:commit:61f56f06827b6e0a602e7de9a1337b50301e91ce",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:61f56f06827b6e0a602e7de9a1337b50301e91ce",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "61f56f06827b6e0a602e7de9a1337b50301e91ce",
+      "parentShas": [
+        "ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783544491000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783544491000
+      },
+      "subject": "feat(lumina): add workspace layout framework scaffold",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/framework/LuminaWorkspaceLayout.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/framework/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd": [
+          "apps/lumina-builder/src/components/lumina/workspace/framework/LuminaWorkspaceLayout.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/framework/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:61f56f06827b6e0a602e7de9a1337b50301e91ce"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

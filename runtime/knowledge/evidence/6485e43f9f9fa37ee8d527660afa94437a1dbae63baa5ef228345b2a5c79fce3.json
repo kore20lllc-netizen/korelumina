@@ -1,0 +1,111 @@
+{
+  "id": "genesis-evidence:71b6c3bf485a17512351d31b165523a8da6a7106730fc881409bbd3f0d12222b",
+  "type": "commit",
+  "title": "feat(knowledge): wire certified education runtime",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240114379,
+  "observedAt": 1786831606000,
+  "contentRef": "git:commit:a48f7a37f519550e70019d8fcdfb8f2329cf267f",
+  "checksum": "sha256:283bee2655aa053d4848456a379e176d0103a87335a1ec31d3d363362af23ff4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1452,
+    "genesisAdmissionIdentity": "genesis-admission:ff5c9ef801059b6187b816addacc18fac8021697229c374c823c099c3aa7eb42",
+    "historicalSourceId": "genesis-source:commit:a48f7a37f519550e70019d8fcdfb8f2329cf267f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a48f7a37f519550e70019d8fcdfb8f2329cf267f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a48f7a37f519550e70019d8fcdfb8f2329cf267f",
+      "parentShas": [
+        "5bf2aea63cd7e3ff0d17bb46fbc3e12ec78381e9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786831606000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786831606000
+      },
+      "subject": "feat(knowledge): wire certified education runtime",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/fixtures/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/CertifiedEducationalDashboardContract.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/artifacts.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/competencies.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/modules.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/timeline.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+        "apps/lumina-builder/src/services/educationService.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/CertifiedEducationalCurriculum.ts",
+        "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/CertifiedEducationCompatibility.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationEndToEndCertification.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/KnowledgeEducationProjectionService.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/admission/EducationalAdmissionPolicy.ts",
+        "apps/lumina-runtime/src/knowledge-education/admission/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/normalization/CanonicalEducationNormalizer.ts",
+        "apps/lumina-runtime/src/knowledge-education/normalization/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts",
+        "apps/lumina-runtime/src/knowledge-education/projection/EducationalTimelineProjector.ts",
+        "apps/lumina-runtime/src/knowledge-education/projection/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts",
+        "docs/ui-contracts/knowledge-operations-certified-ui.json",
+        "scripts/knowledge-ui-contract.mjs"
+      ],
+      "changedPathsByParent": {
+        "5bf2aea63cd7e3ff0d17bb46fbc3e12ec78381e9": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/fixtures/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/CertifiedEducationalDashboardContract.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/artifacts.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/competencies.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/modules.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/contracts/data/timeline.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+          "apps/lumina-builder/src/services/educationService.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/CertifiedEducationalCurriculum.ts",
+          "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/CertifiedEducationCompatibility.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationEndToEndCertification.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/KnowledgeEducationProjectionService.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/admission/EducationalAdmissionPolicy.ts",
+          "apps/lumina-runtime/src/knowledge-education/admission/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/normalization/CanonicalEducationNormalizer.ts",
+          "apps/lumina-runtime/src/knowledge-education/normalization/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts",
+          "apps/lumina-runtime/src/knowledge-education/projection/EducationalTimelineProjector.ts",
+          "apps/lumina-runtime/src/knowledge-education/projection/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts",
+          "docs/ui-contracts/knowledge-operations-certified-ui.json",
+          "scripts/knowledge-ui-contract.mjs"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a48f7a37f519550e70019d8fcdfb8f2329cf267f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

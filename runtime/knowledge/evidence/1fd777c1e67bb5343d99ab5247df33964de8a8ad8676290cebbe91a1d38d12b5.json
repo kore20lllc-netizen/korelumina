@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:b8e768f6de4379f458a79733400c2788b4a7a6c247ebb40df4f31072926468cc",
+  "type": "commit",
+  "title": "refactor(knowledge): remove obsolete flagship inner surface appearance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240100037,
+  "observedAt": 1786237287000,
+  "contentRef": "git:commit:a06ddf41c8a0a866fa26d069c6167122795d2a6c",
+  "checksum": "sha256:1989567a0b83238ebd1f26f0b290c08705ca3990d811f75a0a25d01f2d296576",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1235,
+    "genesisAdmissionIdentity": "genesis-admission:02541ff58229bf6e804f24381077111312cc07bb7a63a7a5778f8e404be57782",
+    "historicalSourceId": "genesis-source:commit:a06ddf41c8a0a866fa26d069c6167122795d2a6c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a06ddf41c8a0a866fa26d069c6167122795d2a6c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a06ddf41c8a0a866fa26d069c6167122795d2a6c",
+      "parentShas": [
+        "d7786920431d3653ae3f4983f16ec086667dc017"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786237287000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786237287000
+      },
+      "subject": "refactor(knowledge): remove obsolete flagship inner surface appearance",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts"
+      ],
+      "changedPathsByParent": {
+        "d7786920431d3653ae3f4983f16ec086667dc017": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a06ddf41c8a0a866fa26d069c6167122795d2a6c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

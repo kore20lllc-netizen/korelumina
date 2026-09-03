@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ff902f1c767742c55586139aefedb80d51870b9fd5330f22c422b8c37d86e5a4",
+  "type": "commit",
+  "title": "test(genesis): align production admission fixtures with governance identity",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240128520,
+  "observedAt": 1787723496000,
+  "contentRef": "git:commit:f378da88b82e0224d89bc1c748325a8956af9f3d",
+  "checksum": "sha256:7128790a0a20fe598b8728d7041977e8d32f05781cfa0e608d6e083a6caf3f4d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1634,
+    "genesisAdmissionIdentity": "genesis-admission:deb32c18543999006a3a36f2323ffa6f25427bcd5787e3480e335d5e1df3da4c",
+    "historicalSourceId": "genesis-source:commit:f378da88b82e0224d89bc1c748325a8956af9f3d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f378da88b82e0224d89bc1c748325a8956af9f3d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f378da88b82e0224d89bc1c748325a8956af9f3d",
+      "parentShas": [
+        "2fdacec3f3dace20dc7f8a46f4df5aaf84279d80"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787723496000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787723496000
+      },
+      "subject": "test(genesis): align production admission fixtures with governance identity",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisProductionReplayAdmissionAdapter.test.ts"
+      ],
+      "changedPathsByParent": {
+        "2fdacec3f3dace20dc7f8a46f4df5aaf84279d80": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisProductionReplayAdmissionAdapter.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f378da88b82e0224d89bc1c748325a8956af9f3d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

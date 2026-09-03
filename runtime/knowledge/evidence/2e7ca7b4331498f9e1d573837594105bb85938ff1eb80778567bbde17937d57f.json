@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:986b6e75ac9659ce8021e974ba6c4c5db57c8c875ef0ec44e2fab598e0942804",
+  "type": "commit",
+  "title": "feat(executive): add chief agent knowledge context reducer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240109125,
+  "observedAt": 1786445011000,
+  "contentRef": "git:commit:484a00aed4766f06cf75570fc64acfcb50cf8bc2",
+  "checksum": "sha256:c2196a268244516fd9e790050868d2fbf1e3f23963810bdbda0457521afcd03e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1377,
+    "genesisAdmissionIdentity": "genesis-admission:0cf81e4f45e463d4207f511bae3758599f5a196d8cfe124a6875ec380b3b8f57",
+    "historicalSourceId": "genesis-source:commit:484a00aed4766f06cf75570fc64acfcb50cf8bc2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:484a00aed4766f06cf75570fc64acfcb50cf8bc2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "484a00aed4766f06cf75570fc64acfcb50cf8bc2",
+      "parentShas": [
+        "f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786445011000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786445011000
+      },
+      "subject": "feat(executive): add chief agent knowledge context reducer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+        "apps/lumina-runtime/src/executive/context/__tests__/ExecutiveKnowledgeContextReducer.test.ts",
+        "apps/lumina-runtime/src/executive/context/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e": [
+          "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+          "apps/lumina-runtime/src/executive/context/__tests__/ExecutiveKnowledgeContextReducer.test.ts",
+          "apps/lumina-runtime/src/executive/context/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:484a00aed4766f06cf75570fc64acfcb50cf8bc2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

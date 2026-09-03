@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:8faed5546dfef4651bdbe83fa2b4ca06dc27dc2a37af40b545d5fd000cde844e",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Handoff Inspection — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=2",
+  "checksum": "8faed5546dfef4651bdbe83fa2b4ca06dc27dc2a37af40b545d5fd000cde844e",
+  "metadata": {
+    "content": "Proceed with Phase 2B.6 — LuminaExecutiveRibbon.\nThe reusable boundary is the hero shell, ambient gradient, top reflection, inner padding, and vertical slot spacing. Knowledge keeps the identity, operations deck, metrics, and their ordering.\nBashcd /Users/erictouko/dev/korelumina\n\nmkdir -p \\\n  apps/lumina-builder/src/components/design-system/lumina/executive/ribbon\n\ncat > \\\napps/lumina-builder/src/components/design-system/lumina/executive/ribbon/LuminaExecutiveRibbon.tsx <<'EOF'\nimport type {\n  ReactNode,\n} from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface LuminaExecutiveRibbonProps {\n  identity: ReactNode;\n  operations: ReactNode;\n  metrics: ReactNode;\n  className?: string;\n  contentClassName?: string;\n}\n\nexport function LuminaExecutiveRibbon({\n  identity,\n  operations,\n  metrics,\n  className,\n  contentClassName,\n}: LuminaExecutiveRibbonProps) {\n  return (\n    <header\n      className={cn(\n        \"group relative h-full min-w-0 overflow-hidden\",\n        \"rounded-[30px]\",\n        \"border border-white/[0.08]\",\n        \"bg-[linear-gradient(145deg,rgba(15,23,42,.78),rgba(15,23,42,.58))]\",\n        \"shadow-[0_28px_160px_rgba(0,0,0,.40)]\",\n        className,\n      )}\n    >\n      <div\n        aria-hidden=\"true\"\n        className={[\n          \"pointer-events-none absolute inset-0\",\n          \"bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,.10),transparent_36%),radial-gradient(circle_at_top_right,rgba(139,92,246,.11),transparent_40%),linear-gradient(180deg,rgba(255,255,255,.02),transparent_34%)]\",\n        ].join(\" \")}\n      />\n\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-x-[7%] top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent\"\n      />\n\n      <div\n        className={cn(\n          \"relative z-10 flex h-full min-w-0 flex-col px-8 py-9\",\n          contentClassName,\n        )}\n      >\n        <div className=\"min-w-0\">\n          {identity}\n        </div>\n\n        <div className=\"mt-7 min-w-0\">\n          {operations}\n        </div>\n\n        <div className=\"mt-7 min-w-0\">\n          {metrics}\n        </div>\n      </div>\n    </header>\n  );\n}\nEOF\n\ncat > \\\napps/lumina-builder/src/components/design-system/lumina/executive/ribbon/index.ts <<'EOF'\nexport {\n  LuminaExecutiveRibbon,\n} from \"./LuminaExecutiveRibbon\";\n\nexport type {\n  LuminaExecutiveRibbonProps,\n} from \"./LuminaExecutiveRibbon\";\nEOF\n\npython3 - <<'PY'\nfrom pathlib import Path\n\npath = Path(\n    \"apps/lumina-builder/src/components/design-system/lumina/executive/index.ts\"\n)\n\ntext = path.read_text()\nline = 'export * from \"./ribbon\";\\n'\n\nif line not in text:\n    text = text.rstrip() + \"\\n\" + line\n\npath.write_text(text)\nPY\n\ncat > \\\napps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx <<'EOF'\nimport {\n  LuminaExecutiveRibbon,\n} from \"@/components/design-system/lumina\";\n\nimport {\n  ExecutiveIdentity,\n} from \"./ExecutiveIdentity\";\nimport {\n  ExecutiveMetrics,\n} from \"./ExecutiveMetrics\";\nimport {\n  ExecutiveOperationsDeck,\n} from \"./ExecutiveOperationsDeck\";\n\nexport function ExecutiveRibbon() {\n  return (\n    <LuminaExecutiveRibbon\n      identity={\n        <ExecutiveIdentity />\n      }\n      operations={\n        <ExecutiveOperationsDeck />\n      }\n      metrics={\n        <ExecutiveMetrics />\n      }\n    />\n  );\n}\nEOF\n\necho\necho \"===== EXECUTIVE RIBBON =====\"\nsed -n '1,280p' \\\n  apps/lumina-builder/src/components/design-system/lumina/executive/ribbon/LuminaExecutiveRibbon.tsx\n\necho\necho \"===== KNOWLEDGE ADAPTER =====\"\ncat \\\n  apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx\n\necho\necho \"===== DIFF CHECK =====\"\ngit diff --check\n\necho\necho \"===== BUILD =====\"\nnpm run build\n\necho\necho \"===== KNOWLEDGE CHANGE SCOPE =====\"\ngit diff --name-only -- \\\n  apps/lumina-builder/src/components/workspaces/knowledge\n\necho\necho \"===== WORKTREE =====\"\ngit status --short\nExpected Knowledge change scope:\napps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx\nExpected worktree also contains the new executive/ribbon files and the protected unstaged RuntimeHeader.tsx. Do not commit until the full executive ribbon is visually unchanged.",
+    "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "8bb7ea18-bb62-4d57-ac13-a58da0725e67",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:8bb7ea18-bb62-4d57-ac13-a58da0725e67",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=2",
+    "sourceRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0c8d12264d02c9c4c48d281b42765e29afc3ddf55b8a8b1a08993eae22444549",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+      "exportRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630659669
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:8bb7ea18-bb62-4d57-ac13-a58da0725e67"
+    ],
+    "conversation": [
+      "6a6c78f2-f41c-83ea-a29d-21579b9b298a"
+    ]
+  }
+}

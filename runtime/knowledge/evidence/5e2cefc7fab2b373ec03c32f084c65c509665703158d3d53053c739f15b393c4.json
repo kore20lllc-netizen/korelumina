@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:55fa664baeb8f3bb1630a51764c8b351a16f95278b913aa6ff3d233615ef4579",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Handoff Inspection — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=0",
+  "checksum": "55fa664baeb8f3bb1630a51764c8b351a16f95278b913aa6ff3d233615ef4579",
+  "metadata": {
+    "content": "Phase 2B.5 is committed, pushed, and verified on GitHub.\n\n\nCommit: 4d93c7311d83d6d849a51f04b258f70de3e11ae2\n\n\nMessage: feat(lumina): extract executive identity\n\n\nRemote branch: inspect/runtime-certified-main\n\n\nRemaining local change: only the protected RuntimeHeader.tsx.\n\n\nNext milestone: Phase 2B.6 — Executive ribbon composition.\nInspect the ribbon container before any extraction:\nBashcd /Users/erictouko/dev/korelumina\n\necho \"===== EXECUTIVE RIBBON SOURCE =====\"\nsed -n '1,360p' \\\n  apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx\n\necho\necho \"===== EXECUTIVE RIBBON RELATED FILES =====\"\nfind \\\n  apps/lumina-builder/src/components/workspaces/knowledge-v3/layout \\\n  -maxdepth 1 \\\n  -type f \\\n  -name 'Executive*' \\\n  | sort\n\necho\necho \"===== EXECUTIVE RIBBON USAGES =====\"\ngrep -R \\\n  \"ExecutiveRibbon\" \\\n  apps/lumina-builder/src/components/workspaces/knowledge \\\n  -n \\\n  | sed -n '1,220p'\n\necho\necho \"===== CURRENT LUMINA EXECUTIVE COMPONENTS =====\"\nfind \\\n  apps/lumina-builder/src/components/design-system/lumina/executive \\\n  -maxdepth 4 \\\n  -type f \\\n  | sort\n\necho\necho \"===== CURRENT WORKTREE =====\"\ngit status --short\nDo not patch yet. The target is only the reusable responsive ribbon layout. Knowledge must retain identity, operational status, metrics, and all domain composition decisions.",
+    "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "377d768d-1821-4770-8a39-a1e93e3b10d8",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:377d768d-1821-4770-8a39-a1e93e3b10d8",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=0",
+    "sourceRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0c8d12264d02c9c4c48d281b42765e29afc3ddf55b8a8b1a08993eae22444549",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+      "exportRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630659669
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:377d768d-1821-4770-8a39-a1e93e3b10d8"
+    ],
+    "conversation": [
+      "6a6c78f2-f41c-83ea-a29d-21579b9b298a"
+    ]
+  }
+}

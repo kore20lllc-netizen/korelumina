@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:3d13a5675cd0910727547bc831ca9fef99ce37b5f51c73cda9f25deb54a78ea8",
+  "type": "document",
+  "title": "Human Approval Gates",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130806,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:human-approval-gates:54-65",
+  "checksum": "sha256:1202771a70f7b265faee3b3e099048c7269b5dd42667927127892b2bc76e9663",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1661,
+    "genesisAdmissionIdentity": "genesis-admission:f991dc22c5a84a2827e1dec15983158ce4431ef7a44a766a8ac09644aed07381",
+    "historicalSourceId": "genesis-source:document:derived:2b42388a9805e9af45b22d9b0056ff043d9765d8a1a683b6790b63df7475441e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 54,
+    "lineEnd": 65,
+    "sectionTitle": "Human Approval Gates",
+    "sectionSlug": "human-approval-gates",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Human Approval Gates\n\nHuman approval is required for:\n\n- destructive actions\n- production deployment\n- repository rewrites\n- architecture changes\n- autonomous execution expansion\n- recovery rollback\n- knowledge promotion to canonical status\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Human Approval Gates",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 54,
+      "lineEnd": 65,
+      "sectionTitle": "Human Approval Gates",
+      "sectionSlug": "human-approval-gates",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Human Approval Gates\n\nHuman approval is required for:\n\n- destructive actions\n- production deployment\n- repository rewrites\n- architecture changes\n- autonomous execution expansion\n- recovery rollback\n- knowledge promotion to canonical status\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2b42388a9805e9af45b22d9b0056ff043d9765d8a1a683b6790b63df7475441e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

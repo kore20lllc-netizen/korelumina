@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:fc29876e97b243a4d2bb8a929b901c0d81b3cae011666ad395a825eb5e4e2965",
+  "type": "document",
+  "title": "KOW-002 — Knowledge Operations Layout Contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084007,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-002_LAYOUT.md",
+  "checksum": "sha256:627d310480ded62da067fa013422de07886ab5709e5be21acbe45fe659c5c436",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 939,
+    "genesisAdmissionIdentity": "genesis-admission:ed46bbf93b1211ae176a5ac15aa3be5e4c90fa99b20505b3da226dd6060ba941",
+    "historicalSourceId": "genesis-source:document:derived:f22c0db66d2bdc595ca10a900d290ab544e6318194f1918a8f62b5668e6a98a4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Proposed for approval",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-002_LAYOUT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-002 — Knowledge Operations Layout Contract",
+      "status": "Proposed for approval",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-002_LAYOUT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f22c0db66d2bdc595ca10a900d290ab544e6318194f1918a8f62b5668e6a98a4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "genesis-evidence:9ed6b3014cc86e31b1950ba8058b271701652fd34922a0093b3f1575b3fb7991",
+  "type": "commit",
+  "title": "refactor(lumina): standardize workspace surface radius tokens",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082706,
+  "observedAt": 1783820878000,
+  "contentRef": "git:commit:91763ed916cd94a8253e972f4fe64c8be0ed989b",
+  "checksum": "sha256:3ce02ca31feff3c1348a6b21cdd2faf5f973ae8ced819eb3fd84f81f9a397955",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 912,
+    "genesisAdmissionIdentity": "genesis-admission:6295f3cd0a1d329fec825914a29106ebe2515ad4de7cefa50b9753d8417062c1",
+    "historicalSourceId": "genesis-source:commit:91763ed916cd94a8253e972f4fe64c8be0ed989b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:91763ed916cd94a8253e972f4fe64c8be0ed989b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "91763ed916cd94a8253e972f4fe64c8be0ed989b",
+      "parentShas": [
+        "33b559f817975817d5f86b2330499690305df930"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783820878000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783820878000
+      },
+      "subject": "refactor(lumina): standardize workspace surface radius tokens",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/background/LuminaAmbient.tsx",
+        "apps/lumina-builder/src/components/lumina/background/LuminaBackground.tsx",
+        "apps/lumina-builder/src/components/lumina/input/toggle/LuminaToggle.tsx",
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaServiceCard.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceSlider.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceToggle.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearancePanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/appearance/AppearanceWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/GlassWorkspaceHero.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceMetricCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceTabBar.tsx"
+      ],
+      "changedPathsByParent": {
+        "33b559f817975817d5f86b2330499690305df930": [
+          "apps/lumina-builder/src/components/lumina/background/LuminaAmbient.tsx",
+          "apps/lumina-builder/src/components/lumina/background/LuminaBackground.tsx",
+          "apps/lumina-builder/src/components/lumina/input/toggle/LuminaToggle.tsx",
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaServiceCard.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceSlider.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceToggle.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearancePanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/appearance/AppearanceWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/GlassWorkspaceHero.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceMetricCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceTabBar.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:91763ed916cd94a8253e972f4fe64c8be0ed989b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

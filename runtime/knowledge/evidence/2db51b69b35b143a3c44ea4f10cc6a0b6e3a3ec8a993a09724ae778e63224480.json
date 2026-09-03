@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:815a742b173a6afe9d35b813542caf86b61293ca4f089c3687d3a1533a5c2b86",
+  "type": "commit",
+  "title": "feat(m51): activate mission ownership section seeding",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131324,
+  "observedAt": 1787879138000,
+  "contentRef": "git:commit:5064afdaa614f2c321949d07186dc838f0391c84",
+  "checksum": "sha256:90f646c0435cca6f169d6f9916e1247f04874caed860f715780ac977045995b0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1667,
+    "genesisAdmissionIdentity": "genesis-admission:6236bc13a65e5b4ae4d1c5419801a9399e7bcf214fee502ae2169b03e7b5ed14",
+    "historicalSourceId": "genesis-source:commit:5064afdaa614f2c321949d07186dc838f0391c84",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5064afdaa614f2c321949d07186dc838f0391c84",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5064afdaa614f2c321949d07186dc838f0391c84",
+      "parentShas": [
+        "387f977a2e8571c18f02413a08bb628ac0d320a0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787879138000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787879138000
+      },
+      "subject": "feat(m51): activate mission ownership section seeding",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisSourceManifestBuilder.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipDefaultManifestAdmission.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipSectionActivation.test.ts"
+      ],
+      "changedPathsByParent": {
+        "387f977a2e8571c18f02413a08bb628ac0d320a0": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisSourceManifestBuilder.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipDefaultManifestAdmission.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipSectionActivation.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5064afdaa614f2c321949d07186dc838f0391c84"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

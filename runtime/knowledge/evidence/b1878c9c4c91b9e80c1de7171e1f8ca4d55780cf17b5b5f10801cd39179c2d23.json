@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:8e90d21f67b301e6fd48b47994dea0d09d4c6f7319f938c9ff8b28d300990080",
+  "type": "commit",
+  "title": "feat(m51): add fail-closed section authority declarations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130023,
+  "observedAt": 1787871730000,
+  "contentRef": "git:commit:69c0ff4742736f6e8473afdd01ab410b826ba34a",
+  "checksum": "sha256:21725a17d27f4ab8da56a86b45541df0e93534a07e875c28b911711a2014cb4f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1652,
+    "genesisAdmissionIdentity": "genesis-admission:fe11aba56fd1675ad6dacf67d6f2c7c72e9fae45c40ef3acdbf5fda55d82ed1c",
+    "historicalSourceId": "genesis-source:commit:69c0ff4742736f6e8473afdd01ab410b826ba34a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:69c0ff4742736f6e8473afdd01ab410b826ba34a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "69c0ff4742736f6e8473afdd01ab410b826ba34a",
+      "parentShas": [
+        "201e902e03d5f166545fb7b69de9f364c05c0fc3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787871730000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787871730000
+      },
+      "subject": "feat(m51): add fail-closed section authority declarations",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationSectionAuthority.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51SectionAuthorityDeclaration.test.ts"
+      ],
+      "changedPathsByParent": {
+        "201e902e03d5f166545fb7b69de9f364c05c0fc3": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationSectionAuthority.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51SectionAuthorityDeclaration.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:69c0ff4742736f6e8473afdd01ab410b826ba34a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

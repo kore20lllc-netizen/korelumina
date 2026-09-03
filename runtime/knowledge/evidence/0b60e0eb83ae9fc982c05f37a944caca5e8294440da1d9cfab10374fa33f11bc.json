@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:2ccecc292b09260d74b3b8f7796164b1b6ca9204ba5375d839a9351127884bd6",
+  "type": "commit",
+  "title": "refactor(knowledge): use shared badge in activation readiness",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240101180,
+  "observedAt": 1786292856000,
+  "contentRef": "git:commit:aeb491824c241db0531d714090fc363a53a213d7",
+  "checksum": "sha256:e4360a73751d1feb5783e21a1fa25cdd7c29ee8bdf748109a3dd445132bb629d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1254,
+    "genesisAdmissionIdentity": "genesis-admission:5d4d6c407e6bc1da1bc6d7ead0bb870841908820e1b51c16b7e5a9a4081e53e9",
+    "historicalSourceId": "genesis-source:commit:aeb491824c241db0531d714090fc363a53a213d7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:aeb491824c241db0531d714090fc363a53a213d7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "aeb491824c241db0531d714090fc363a53a213d7",
+      "parentShas": [
+        "4287450496e2b2154f42f9676e8aebfa47606955"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786292856000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786292856000
+      },
+      "subject": "refactor(knowledge): use shared badge in activation readiness",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx"
+      ],
+      "changedPathsByParent": {
+        "4287450496e2b2154f42f9676e8aebfa47606955": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:aeb491824c241db0531d714090fc363a53a213d7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

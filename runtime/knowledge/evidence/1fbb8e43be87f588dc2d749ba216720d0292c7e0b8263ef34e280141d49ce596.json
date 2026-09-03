@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:0b970280643b7aa1c65e4935e7ea74e3ca623dfc00034d7c78f718423612acdb",
+  "type": "commit",
+  "title": "feat(executive): register chief agent reasoning destination",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240110005,
+  "observedAt": 1786508885000,
+  "contentRef": "git:commit:99034c8665f34f7643da640bd8cc4757dc76b082",
+  "checksum": "sha256:4580b41c509591da22bb98253a601cb30631ef678c91de0eb37fa3f57b81a78d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1390,
+    "genesisAdmissionIdentity": "genesis-admission:31bbace0b88a82c3e0989d37327d08c626c25d7411017a9d2d7ff526210b94c0",
+    "historicalSourceId": "genesis-source:commit:99034c8665f34f7643da640bd8cc4757dc76b082",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:99034c8665f34f7643da640bd8cc4757dc76b082",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "99034c8665f34f7643da640bd8cc4757dc76b082",
+      "parentShas": [
+        "f84273b202ed6ba86a5e6ddd51361dbd7d409272"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786508885000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786508885000
+      },
+      "subject": "feat(executive): register chief agent reasoning destination",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f84273b202ed6ba86a5e6ddd51361dbd7d409272": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:99034c8665f34f7643da640bd8cc4757dc76b082"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

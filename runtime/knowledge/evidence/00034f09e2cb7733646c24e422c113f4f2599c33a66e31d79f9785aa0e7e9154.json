@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:94f3b93a810b20b2dd2ef467cedf016e60f4585146583495f9ec0beb945ef469",
+  "type": "commit",
+  "title": "feat(knowledge): elevate executive KPI cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079068,
+  "observedAt": 1783425358000,
+  "contentRef": "git:commit:a2a85830435c09bc3e539c679c783944e1141cb9",
+  "checksum": "sha256:3c8409f4d0da54e5de1b81aa01626568651f245b617b502cd14a7c272b11b583",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 833,
+    "genesisAdmissionIdentity": "genesis-admission:6527bab2e426fec201fdcc303cf04cb6fbd40ef9d74bccc50a832ffb7a288c1f",
+    "historicalSourceId": "genesis-source:commit:a2a85830435c09bc3e539c679c783944e1141cb9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a2a85830435c09bc3e539c679c783944e1141cb9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a2a85830435c09bc3e539c679c783944e1141cb9",
+      "parentShas": [
+        "386d21dcb1c1c71ea1012676d26fc6710101a256"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425358000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425358000
+      },
+      "subject": "feat(knowledge): elevate executive KPI cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "386d21dcb1c1c71ea1012676d26fc6710101a256": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a2a85830435c09bc3e539c679c783944e1141cb9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

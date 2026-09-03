@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:ab2d7380bdf7bfbcd128b3ba4649f9fb94fd237a42620a14770d2221299d69df",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Plan — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=0",
+  "checksum": "ab2d7380bdf7bfbcd128b3ba4649f9fb94fd237a42620a14770d2221299d69df",
+  "metadata": {
+    "content": "That confirms exactly why runtime-locks was not where you were looking.\nRuntime process PID 39374 is running with:\ncwd:\n/Users/erictouko/dev/korelumina/apps/lumina-runtime\nAnd runtimeLock.ts builds the lock directory from:\nTypeScriptconst LOCK_DIR = path.resolve(\n  process.cwd(),\n  \"runtime-locks\",\n);\nTherefore the actual lock location is:\n/Users/erictouko/dev/korelumina/apps/lumina-runtime/runtime-locks\nnot\n/Users/erictouko/dev/korelumina/runtime-locks\nCheck it:\nBashls -la apps/lumina-runtime/runtime-locks\nor\nBashfind apps/lumina-runtime -name \"*.lock\"\nCurrent findings:\nFixed\n\n\nRuntime lock cleanup bug found.\n\n\nremoveRuntime() now releases locks.\n\n\nBuild passes.\n\n\nVerified\n\n\nRuntime supervisor running.\n\n\nRuntime recovery running.\n\n\nRuntime registry healthy.\n\n\nRuntime can start and stop manually.\n\n\nRuntime metrics show Elegance Sync running on port 4201.\n\n\nNew root cause discovered\nThis is now the bigger issue:\nJSONGET /api/runtime/projects\n{\n  \"ok\": true,\n  \"projects\": []\n}\nbut\nBashcurl -H \"x-korelumina-role: super_admin\" \\\nhttp://localhost:4100/api/runtime/projects\nreturns all projects.\nThat means the runtime itself can see the projects.\nThe filtering layer is hiding them.\nThis aligns with earlier findings:\n\n\nWorkspace access system added during reconstruction.\n\n\ncanViewProject() filtering exists.\n\n\nDashboard empty.\n\n\nRuntime project API empty unless super_admin header supplied.\n\n\nThe next investigation is no longer runtime locks.\nThe next investigation is:\nBashgrep -R \"canViewProject\" apps/lumina-runtime/src -n\n\ngrep -R \"x-korelumina-role\" apps/lumina-runtime/src -n\n\ngrep -R \"listProjects()\" apps/lumina-runtime/src/routes -n\nWe need to trace why normal requests are being filtered to zero projects while the super_admin request returns all seven projects. That is the most likely reason the Builder lost project visibility and subsequently lost runtime auto-start behavior.",
+    "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "97a92151-9389-4a3c-8552-60ae21e82523",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:97a92151-9389-4a3c-8552-60ae21e82523",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=0",
+    "sourceRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e994e279db5b4e8933195d5e2efb6ca5db85eee49edf2a97411ee1907bc451be",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+      "exportRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630711928
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:97a92151-9389-4a3c-8552-60ae21e82523"
+    ],
+    "conversation": [
+      "6a35fe61-d42c-83ea-af5d-5101df5b53db"
+    ]
+  }
+}

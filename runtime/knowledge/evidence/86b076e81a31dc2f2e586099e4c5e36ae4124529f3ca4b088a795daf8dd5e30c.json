@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:54039b7fc0a0c5c11928f08e53a0337cdbd1e716936be5e7f388a4afb6303dfe",
+  "type": "commit",
+  "title": "feat(knowledge): rebuild operations workspace shell",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078710,
+  "observedAt": 1783401069000,
+  "contentRef": "git:commit:876c5f86997e79b3adcd8cd4e98ab61cb0e8775b",
+  "checksum": "sha256:c0f031f8ca09f0d83873adf57c6ddaa5994585f7cff35fea57f05d02732f97b0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 825,
+    "genesisAdmissionIdentity": "genesis-admission:6eefe964727ba1d9679b2e98bd35c2e1997e391d63b20b698e2240dfd223218c",
+    "historicalSourceId": "genesis-source:commit:876c5f86997e79b3adcd8cd4e98ab61cb0e8775b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:876c5f86997e79b3adcd8cd4e98ab61cb0e8775b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "876c5f86997e79b3adcd8cd4e98ab61cb0e8775b",
+      "parentShas": [
+        "0745b6d4fd720148f376c3919fb5277c7154a6ca"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783401069000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783401069000
+      },
+      "subject": "feat(knowledge): rebuild operations workspace shell",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "0745b6d4fd720148f376c3919fb5277c7154a6ca": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-operations-v2-shell-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:876c5f86997e79b3adcd8cd4e98ab61cb0e8775b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:181f3d336c94c5eb32160c1406ec063577d9b5f04b40b6e296965426e2713c5d",
+  "type": "document",
+  "title": "XA-001 — Knowledge Operations Experience Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085531,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/experience/XA-001_KNOWLEDGE_OPERATIONS_EXPERIENCE_ARCHITECTURE.md",
+  "checksum": "sha256:7bbfb3af2d2c4b2c54952435741c1fa3e0df7f071103bc549e722f52c6c42977",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 970,
+    "genesisAdmissionIdentity": "genesis-admission:da2db5786d7801f98fe3b4f84378a4501fe3bb1bfbc4717831600294fc5df37d",
+    "historicalSourceId": "genesis-source:document:derived:131123768bd3ee625bef399be0d21110dfc224c86ff0b5cfb7e40e7ba6c49aeb",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/experience/XA-001_KNOWLEDGE_OPERATIONS_EXPERIENCE_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "XA-001 — Knowledge Operations Experience Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/experience/XA-001_KNOWLEDGE_OPERATIONS_EXPERIENCE_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:131123768bd3ee625bef399be0d21110dfc224c86ff0b5cfb7e40e7ba6c49aeb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

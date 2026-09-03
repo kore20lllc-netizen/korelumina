@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:5c8d3d2cd334f5dcf48271317c4e2deb33500e88872483f46a56adad2a53475d",
+  "type": "commit",
+  "title": "feat(executive): preserve compensation after mutation failure",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113016,
+  "observedAt": 1786621714000,
+  "contentRef": "git:commit:589a677ac16637865041bd63483c68b326cb7fcc",
+  "checksum": "sha256:4cbd9e7dda56d7712dafec1a3180e9f7943dc96ee768dbd9d2d0ca200487a22c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1433,
+    "genesisAdmissionIdentity": "genesis-admission:38a32d8d7df9cf46b673a2f02e6bf3d701770b973046a1326bf53b0029194ea3",
+    "historicalSourceId": "genesis-source:commit:589a677ac16637865041bd63483c68b326cb7fcc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:589a677ac16637865041bd63483c68b326cb7fcc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "589a677ac16637865041bd63483c68b326cb7fcc",
+      "parentShas": [
+        "d14f7032773dd25edc9a84e086317d14260e73dc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786621714000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786621714000
+      },
+      "subject": "feat(executive): preserve compensation after mutation failure",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorService.ts",
+        "apps/lumina-runtime/src/executive/action/ProjectFilesystemReplaceExecutor.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorService.test.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ProjectFilesystemReplaceExecutor.test.ts",
+        "apps/lumina-runtime/src/routes/__tests__/executiveActionMutation.test.ts",
+        "apps/lumina-runtime/src/routes/executiveActionMutation.ts"
+      ],
+      "changedPathsByParent": {
+        "d14f7032773dd25edc9a84e086317d14260e73dc": [
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorService.ts",
+          "apps/lumina-runtime/src/executive/action/ProjectFilesystemReplaceExecutor.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorService.test.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ProjectFilesystemReplaceExecutor.test.ts",
+          "apps/lumina-runtime/src/routes/__tests__/executiveActionMutation.test.ts",
+          "apps/lumina-runtime/src/routes/executiveActionMutation.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:589a677ac16637865041bd63483c68b326cb7fcc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

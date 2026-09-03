@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e281527b8201302e2b647ca4c23c902266c44167c8b01f9dc693e2242ab5a3f3",
+  "type": "commit",
+  "title": "feat(lumina): finalize runtime hero composition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084548,
+  "observedAt": 1784419862000,
+  "contentRef": "git:commit:5514de2e830bef4c5350c63da92639906167dbdc",
+  "checksum": "sha256:35ee53db8695a40957373c54bd2a7301732ef685fc45a6e1f86f330e88922539",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 950,
+    "genesisAdmissionIdentity": "genesis-admission:a7d36e6c554979651985b91fda19220cea38c1d8de904fdcad3e611a46d9e113",
+    "historicalSourceId": "genesis-source:commit:5514de2e830bef4c5350c63da92639906167dbdc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5514de2e830bef4c5350c63da92639906167dbdc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5514de2e830bef4c5350c63da92639906167dbdc",
+      "parentShas": [
+        "505b53e1058907d0c06ce8c4ac07c4c7501211cf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784419862000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784419862000
+      },
+      "subject": "feat(lumina): finalize runtime hero composition",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaCompositionSurface.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "505b53e1058907d0c06ce8c4ac07c4c7501211cf": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaCompositionSurface.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5514de2e830bef4c5350c63da92639906167dbdc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:a466da2b8505f255a7a6555e2ece72881a11960752e3a326017ffd98e1ce9815",
+  "type": "commit",
+  "title": "feat(genesis): add ChatGPT conversation export source",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240123856,
+  "observedAt": 1787553495000,
+  "contentRef": "git:commit:f44b814d73c8d843af61c72f8b89d30d3008941d",
+  "checksum": "sha256:b3d8715bd92fa5cb4e015af64e39d41c89d7a692cbebe84d157d689bbd5d788d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1577,
+    "genesisAdmissionIdentity": "genesis-admission:4417b2fa6810f56c1badc732ba92de9f1c09428c73f197bca3b9019da2beb43d",
+    "historicalSourceId": "genesis-source:commit:f44b814d73c8d843af61c72f8b89d30d3008941d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f44b814d73c8d843af61c72f8b89d30d3008941d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f44b814d73c8d843af61c72f8b89d30d3008941d",
+      "parentShas": [
+        "75af848223be1b42dbfd2d99d695b5ca6d2e2445"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787553495000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787553495000
+      },
+      "subject": "feat(genesis): add ChatGPT conversation export source",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/ChatGPTConversationExportSource.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/ChatGPTConversationExportSource.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+      ],
+      "changedPathsByParent": {
+        "75af848223be1b42dbfd2d99d695b5ca6d2e2445": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/ChatGPTConversationExportSource.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/ChatGPTConversationExportSource.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f44b814d73c8d843af61c72f8b89d30d3008941d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

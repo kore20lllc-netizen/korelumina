@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:6b28d4ddd52368baf980f4a3be029766cb0bd9d0fc1b180ad568293addd93876",
+  "type": "commit",
+  "title": "feat(executive): expose pending approval read API",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240110909,
+  "observedAt": 1786534103000,
+  "contentRef": "git:commit:59b3593ed20e75d28a40334975e14c8a0f3f8ebf",
+  "checksum": "sha256:3eed4329344ce4b0e8f9a3500e1421377a5099e304f18e67c538e57866aa3531",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1403,
+    "genesisAdmissionIdentity": "genesis-admission:8f1f523c8ab50f14e5b92f05f3a16ed66c2fce78ea856f9474b870c9d016d062",
+    "historicalSourceId": "genesis-source:commit:59b3593ed20e75d28a40334975e14c8a0f3f8ebf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:59b3593ed20e75d28a40334975e14c8a0f3f8ebf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "59b3593ed20e75d28a40334975e14c8a0f3f8ebf",
+      "parentShas": [
+        "474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786534103000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786534103000
+      },
+      "subject": "feat(executive): expose pending approval read API",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/executiveApproval.test.ts",
+        "apps/lumina-runtime/src/routes/executiveApproval.ts"
+      ],
+      "changedPathsByParent": {
+        "474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/executiveApproval.test.ts",
+          "apps/lumina-runtime/src/routes/executiveApproval.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:59b3593ed20e75d28a40334975e14c8a0f3f8ebf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b5743994e470f556e1aaf9bc4b036a57dc461748d337007c633de687e35358a3",
+  "type": "commit",
+  "title": "fix(genesis): separate reconciliation from day-zero certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240126940,
+  "observedAt": 1787656534000,
+  "contentRef": "git:commit:93a02db4e1f99b7942a045d5ed23b479b77e865d",
+  "checksum": "sha256:e8555281ddbd5cc1473a244032a8bd0ed19d8641cacbb633087039e0ae062c31",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1615,
+    "genesisAdmissionIdentity": "genesis-admission:5ee14b2ce2d92b99e437929fc66cd5e2587099b809105f1c6019fa4953bed7c9",
+    "historicalSourceId": "genesis-source:commit:93a02db4e1f99b7942a045d5ed23b479b77e865d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:93a02db4e1f99b7942a045d5ed23b479b77e865d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "93a02db4e1f99b7942a045d5ed23b479b77e865d",
+      "parentShas": [
+        "78c4bfe23991e58afd2e6854d21bc4cfb0e5f521"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787656534000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787656534000
+      },
+      "subject": "fix(genesis): separate reconciliation from day-zero certification",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationExpectedHistoryInventory.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationExpectedHistoryInventory.test.ts"
+      ],
+      "changedPathsByParent": {
+        "78c4bfe23991e58afd2e6854d21bc4cfb0e5f521": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationExpectedHistoryInventory.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationExpectedHistoryInventory.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:93a02db4e1f99b7942a045d5ed23b479b77e865d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

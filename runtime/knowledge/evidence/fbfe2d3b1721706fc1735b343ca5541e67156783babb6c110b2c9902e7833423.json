@@ -1,0 +1,40 @@
+{
+  "id": "genesis-evidence:bcfb7a9adcc4917bfb8447e629e04feb579ce2d26ec9d57e29d0eb5007ef8d05",
+  "type": "document",
+  "title": "Knowledge Operations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084643,
+  "observedAt": 1784673551000,
+  "contentRef": "docs/architecture/knowledge-operations/README.md",
+  "checksum": "sha256:83a534afd51f2aca1138215343b537393bb216fb214feb21f1e4675fc885492c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 952,
+    "genesisAdmissionIdentity": "genesis-admission:51dd2d8d73eac94d4c38010200dac8b70c27133da0740c7448791c2657becce9",
+    "historicalSourceId": "genesis-source:document:derived:30e54f3333d9a73c17279bb8d37aae196620333f0e1571878346bd5e4650f8eb",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "version": "2.0",
+    "sourceLocation": "docs/architecture/knowledge-operations/README.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Knowledge Operations",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/README.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:30e54f3333d9a73c17279bb8d37aae196620333f0e1571878346bd5e4650f8eb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

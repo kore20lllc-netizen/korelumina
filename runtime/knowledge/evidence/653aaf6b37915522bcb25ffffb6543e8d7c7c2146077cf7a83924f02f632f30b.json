@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:726df25286a4a95feefc1e5676db969d610574edae4ca0b6d0f0c823d589ab25",
+  "type": "commit",
+  "title": "refactor(knowledge): align knowledge attention panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240103107,
+  "observedAt": 1786361378000,
+  "contentRef": "git:commit:a7bdfdf42836f9c3468fee0807ed7e2af94dee23",
+  "checksum": "sha256:6a79066977baaae4a1f99e751efd716ba717c9f3b11a52176da9bc4af9cffb32",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1285,
+    "genesisAdmissionIdentity": "genesis-admission:1b1853705da5e8ccc84700a43f9e8cdcecdaef3aeed50fb0be5f4a1cd138f177",
+    "historicalSourceId": "genesis-source:commit:a7bdfdf42836f9c3468fee0807ed7e2af94dee23",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a7bdfdf42836f9c3468fee0807ed7e2af94dee23",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a7bdfdf42836f9c3468fee0807ed7e2af94dee23",
+      "parentShas": [
+        "162ada6ea3c4b2f756d15fc90cb4071e30ef099a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786361378000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786361378000
+      },
+      "subject": "refactor(knowledge): align knowledge attention panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+      ],
+      "changedPathsByParent": {
+        "162ada6ea3c4b2f756d15fc90cb4071e30ef099a": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a7bdfdf42836f9c3468fee0807ed7e2af94dee23"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

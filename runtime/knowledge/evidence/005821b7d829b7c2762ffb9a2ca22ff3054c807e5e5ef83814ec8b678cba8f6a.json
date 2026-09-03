@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:c795cb530df350c793b37f84edfaadfc4a59e9b1f54f88942cafdee06b84bfc6",
+  "type": "document",
+  "title": "Executive Loop",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130722,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:executive-loop:14-45",
+  "checksum": "sha256:2cc31add163bcfa7688dbc27bbf867d5ba76bae6095feffe3926ae293238465c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1660,
+    "genesisAdmissionIdentity": "genesis-admission:d8257c51bed134d1f197d0bb97cf726e720041dc9f8bf6c9ca9cf0736ee3f5d7",
+    "historicalSourceId": "genesis-source:document:derived:87ebfc9cb3ed5ed850b1a33e8ac3462d41b28ac017cbaaabd5866ee18e581cac",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 14,
+    "lineEnd": 45,
+    "sectionTitle": "Executive Loop",
+    "sectionSlug": "executive-loop",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Executive Loop\n\nObserve\n\n↓\n\nUnderstand\n\n↓\n\nPlan\n\n↓\n\nDelegate\n\n↓\n\nMonitor\n\n↓\n\nRecover\n\n↓\n\nLearn\n\n↓\n\nImprove\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Executive Loop",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 14,
+      "lineEnd": 45,
+      "sectionTitle": "Executive Loop",
+      "sectionSlug": "executive-loop",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Executive Loop\n\nObserve\n\n↓\n\nUnderstand\n\n↓\n\nPlan\n\n↓\n\nDelegate\n\n↓\n\nMonitor\n\n↓\n\nRecover\n\n↓\n\nLearn\n\n↓\n\nImprove\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:87ebfc9cb3ed5ed850b1a33e8ac3462d41b28ac017cbaaabd5866ee18e581cac"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:10fdd5a6c41aee9f95f50d23f5fd90f517870d1bc9350340308c7e299569743f",
+  "type": "document",
+  "title": "KoreLumina Chief Agent",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076751,
+  "observedAt": 1783153164000,
+  "contentRef": "docs/chief-agent/README.md",
+  "checksum": "sha256:be43313a05d3232160cf5142c3537360dcad1c85461f4df2c3b2ddb65e9a9b7c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 780,
+    "genesisAdmissionIdentity": "genesis-admission:26121270dacb0ed76d98c99334c0ed0047df7193c47ff363ff873f16498af617",
+    "historicalSourceId": "genesis-source:document:derived:daad4e4b2dce6d4a2e104f1dd1a5459ce39b09fc5cd1209127f51f9dba37aeb1",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "approvalState": "Approved",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/README.md",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Chief Agent",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/README.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:daad4e4b2dce6d4a2e104f1dd1a5459ce39b09fc5cd1209127f51f9dba37aeb1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

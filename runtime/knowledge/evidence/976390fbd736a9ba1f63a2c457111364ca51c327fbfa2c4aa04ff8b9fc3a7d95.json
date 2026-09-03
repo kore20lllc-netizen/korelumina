@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:444587ec317385585bb09d6bb4b70255acf18d50fed5cf4de8b11c23e854bfa5",
+  "type": "commit",
+  "title": "feat(lumina): add css variable bridge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080462,
+  "observedAt": 1783597118000,
+  "contentRef": "git:commit:2cdb8fa25f9a48b46a54adab220ede245e9805fa",
+  "checksum": "sha256:858a55bb8a6ee0aa1a0dab9d94d65ae6ab2be2d24f3e9a1529af698e9d292b18",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 864,
+    "genesisAdmissionIdentity": "genesis-admission:7a007e28038e6ff6d3aed0edb564020d973510a279c67211cc917c580272393b",
+    "historicalSourceId": "genesis-source:commit:2cdb8fa25f9a48b46a54adab220ede245e9805fa",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2cdb8fa25f9a48b46a54adab220ede245e9805fa",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2cdb8fa25f9a48b46a54adab220ede245e9805fa",
+      "parentShas": [
+        "b67ff1f822014de7dc2cd4dc8b6a2649bb9a300c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783597118000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783597118000
+      },
+      "subject": "feat(lumina): add css variable bridge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/appearance/css/applyAppearance.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/css/index.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/css/variables.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/index.ts"
+      ],
+      "changedPathsByParent": {
+        "b67ff1f822014de7dc2cd4dc8b6a2649bb9a300c": [
+          "apps/lumina-builder/src/components/lumina/appearance/css/applyAppearance.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/css/index.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/css/variables.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2cdb8fa25f9a48b46a54adab220ede245e9805fa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

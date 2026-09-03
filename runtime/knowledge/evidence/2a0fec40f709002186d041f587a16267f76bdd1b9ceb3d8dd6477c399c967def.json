@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:86201ed5d90b2b28dc2856e76410c86eca2a98303a247ad588e015dd1e58ea1f",
+  "type": "commit",
+  "title": "refactor(knowledge): extract Lumina flagship card in activation readiness",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098205,
+  "observedAt": 1786162929000,
+  "contentRef": "git:commit:b038e0eb7ab11b9d02f665c49344ca2cff4d546f",
+  "checksum": "sha256:19708eca4728704e0c83360e28f9c2b6933e55bf1d6c456cbcf946e74e43d66a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1204,
+    "genesisAdmissionIdentity": "genesis-admission:b230aa47e0cfc364df2d00b4650a35a7d1ed5fd97fffec72511753ba48eaaa39",
+    "historicalSourceId": "genesis-source:commit:b038e0eb7ab11b9d02f665c49344ca2cff4d546f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b038e0eb7ab11b9d02f665c49344ca2cff4d546f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b038e0eb7ab11b9d02f665c49344ca2cff4d546f",
+      "parentShas": [
+        "00ca79fb4b532334b8a3db1df57dec91eab718b2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786162929000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786162929000
+      },
+      "subject": "refactor(knowledge): extract Lumina flagship card in activation readiness",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx"
+      ],
+      "changedPathsByParent": {
+        "00ca79fb4b532334b8a3db1df57dec91eab718b2": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b038e0eb7ab11b9d02f665c49344ca2cff4d546f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

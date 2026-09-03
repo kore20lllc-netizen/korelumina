@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:927eeffd7833fe238a1036f30700cca976b7ed63a92571db1fffe211b109363b",
+  "type": "ADR",
+  "title": "ADR-0039 — Knowledge Scope Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240074771,
+  "observedAt": 1783058529000,
+  "contentRef": "docs/adr/ADR-0039-knowledge-scope-architecture.md",
+  "checksum": "sha256:3ce5ac71f9afce925951adf7126b7a345200cb1e7fc21c1bda3d7a5a0f076489",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 739,
+    "genesisAdmissionIdentity": "genesis-admission:ecada4fad74f8fa6543246512e9cdd5b980e0f8dd08ac4ab2874647625f655f6",
+    "historicalSourceId": "genesis-source:ADR:derived:ed8116f5d66097c199a5fdb1ee71a746d3103235bb96c59084b2aaedaafb097b",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture-decision",
+    "approvalState": "Accepted",
+    "sourceLocation": "docs/adr/ADR-0039-knowledge-scope-architecture.md",
+    "documentClassification": "adr",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "ADR-0039 — Knowledge Scope Architecture",
+      "status": "Accepted",
+      "documentClassification": "adr",
+      "sourceLocation": "docs/adr/ADR-0039-knowledge-scope-architecture.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:ADR:derived:ed8116f5d66097c199a5fdb1ee71a746d3103235bb96c59084b2aaedaafb097b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

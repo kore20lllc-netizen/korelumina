@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:d169082877592158f35ebe87bf85e568eeeb36babd4c1bfb555775761394452b",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Korelu,ina Mster engine — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944#browser-turn=0",
+  "checksum": "d169082877592158f35ebe87bf85e568eeeb36babd4c1bfb555775761394452b",
+  "metadata": {
+    "content": "Current task: fix blank preview WITHOUT breaking your UI\n\n🔴 Root cause (from your grep)\napp/master-os/preview-frame.tsx ✅\napp/master-os/page.tsx ❌ (duplicate iframe)\n👉 You have TWO preview sources fighting each other\nThat’s why:\n✔ requests fire\n❌ preview shows blank / inconsistent\n\n🎯 Goal\n✔ ONE preview source only\n✔ Stable refresh\n✔ Keep your current UI layout\n\n🔥 CLEAN FIX (nano — safe, no layout break)\n\n✅ STEP 1 — open file\nBashnano app/master-os/page.tsx\n\n✅ STEP 2 — REMOVE inline iframe (CRITICAL)\nSearch:\nBashCtrl + W\niframe\nYou will see something like:\nTypeScript<iframe\n  src={`/api/dev/preview?projectId=repo-test&v=${Date.now()}`}\n  style={styles.preview}\n/>\n👉 DELETE that entire iframe block\n\n✅ STEP 3 — IMPORT preview component\nAt the top of file, add:\nTypeScriptimport PreviewFrame from \"./preview-frame\";\n\n✅ STEP 4 — ADD SINGLE preview (clean)\nFind where preview should render (keep layout)\nReplace with:\nTypeScript<PreviewFrame projectId=\"repo-test\" />\n\n✅ FINAL STRUCTURE (important)\nYour layout should look like:\nTypeScript<div style={styles.container}>\n\n  {/* your existing UI */}\n  <textarea ... />\n  <div style={styles.row}>...</div>\n  {drafts.map(...)}\n\n  {/* ✅ ONLY ONE PREVIEW */}\n  <PreviewFrame projectId=\"repo-test\" />\n\n  {/* logs */}\n  <div style={styles.log}>...</div>\n\n</div>\n\n✅ STEP 5 — SAVE\nBashCtrl + O → Enter\nCtrl + X\n\n✅ STEP 6 — restart clean\nBashrm -rf .next\nnpm run dev\n\n✅ EXPECTED RESULT\n✔ preview no longer blank\n✔ preview updates\n✔ no duplicate rendering\n✔ UI unchanged\n\n🧠 Why this fixes it\nBefore:\n❌ page.tsx iframe (Date.now spam)\n❌ preview-frame iframe\n→ conflict → blank\nNow:\n✔ single source of truth\n✔ controlled refresh\n✔ stable rendering\n\n⚠️ If still blank (only 1 possibility)\nThen your preview route is fine but React bundle isn’t mounting.\nTest quickly:\nOpen browser:\nBashhttp://localhost:3000/api/dev/preview?projectId=repo-test\nIf blank there → preview route issue\n\nIf NOT blank → UI duplication issue (now fixed)\n\n🚀 Next step\nSay:\nmake preview auto-refresh ONLY after apply (not constant Date.now spam)\nThat’s the final polish.",
+    "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "270e4087-b5d1-4da7-8db3-5cafb2e7463b",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69af18f3-9b08-8327-a8d7-e814dad59944:message:270e4087-b5d1-4da7-8db3-5cafb2e7463b",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944#browser-turn=0",
+    "sourceRevision": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e1153fd67abc850b70e39a95dc1995305fcab0cb5396290a8700e709c7e6f0ee",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66",
+      "exportRevision": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630628194
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69af18f3-9b08-8327-a8d7-e814dad59944:message:270e4087-b5d1-4da7-8db3-5cafb2e7463b"
+    ],
+    "conversation": [
+      "69af18f3-9b08-8327-a8d7-e814dad59944"
+    ]
+  }
+}

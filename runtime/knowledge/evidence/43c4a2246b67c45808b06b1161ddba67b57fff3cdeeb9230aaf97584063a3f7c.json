@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d7543ba3c7a7f39ad3d8373ee6d7f032c1ff756f95fc3db9616c78398a3a303e",
+  "type": "commit",
+  "title": "feat(knowledge): integrate acquisition activity panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075871,
+  "observedAt": 1783073720000,
+  "contentRef": "git:commit:a0635f82ea24d62b1a74e994c8cdf20aea4bbb3f",
+  "checksum": "sha256:82b98696b79573c2f9414580c19c7fa3306a593d5d12c48aa842d2a4a1b87abf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 760,
+    "genesisAdmissionIdentity": "genesis-admission:92e58bd77bb8ad5e9d139ae6ac9993ee759bc5d6847c2c7eb67ae5be0b16e4bd",
+    "historicalSourceId": "genesis-source:commit:a0635f82ea24d62b1a74e994c8cdf20aea4bbb3f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a0635f82ea24d62b1a74e994c8cdf20aea4bbb3f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a0635f82ea24d62b1a74e994c8cdf20aea4bbb3f",
+      "parentShas": [
+        "ea92013c15195a31c35ec06efba707dfa42df0b9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783073720000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783073720000
+      },
+      "subject": "feat(knowledge): integrate acquisition activity panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "ea92013c15195a31c35ec06efba707dfa42df0b9": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kops-009-acquisition-panel-integration-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a0635f82ea24d62b1a74e994c8cdf20aea4bbb3f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:5f220fa3820e38bc8e1a525b53a82ec4070e2bd245c19cafd3e87e60ef726e7e",
+  "type": "commit",
+  "title": "feat(genesis): persist governed historical evidence review flow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132454,
+  "observedAt": 1788039390000,
+  "contentRef": "git:commit:2dc2157f27128f984c7bc230b720886d49182be0",
+  "checksum": "sha256:79641c214decc35dcab13f9b2a63dff940e24e24bf6e67b56989de1f0d198ecf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1680,
+    "genesisAdmissionIdentity": "genesis-admission:1c7fdbc51835c7e785d1c23801168a1b63c9986be92d1867bb98bf5b7eff85b3",
+    "historicalSourceId": "genesis-source:commit:2dc2157f27128f984c7bc230b720886d49182be0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2dc2157f27128f984c7bc230b720886d49182be0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2dc2157f27128f984c7bc230b720886d49182be0",
+      "parentShas": [
+        "05c6f3a272942da0577ed706f38dce0cf2f286fa"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788039390000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788039390000
+      },
+      "subject": "feat(genesis): persist governed historical evidence review flow",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts",
+        "apps/lumina-runtime/src/knowledge-education/projection/__tests__/EducationalArtifactProjector.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/evidence/EvidencePersistenceStore.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/evidence/__tests__/EvidencePersistenceStore.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/evidence/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalEvidenceReviewDecision.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayPersistence.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/DocumentationHistoricalSourceDiscoverer.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalEvidenceReviewDecision.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayOrchestrator.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "package.json"
+      ],
+      "changedPathsByParent": {
+        "05c6f3a272942da0577ed706f38dce0cf2f286fa": [
+          "apps/lumina-runtime/src/knowledge-education/projection/EducationalArtifactProjector.ts",
+          "apps/lumina-runtime/src/knowledge-education/projection/__tests__/EducationalArtifactProjector.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/evidence/EvidencePersistenceStore.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/evidence/__tests__/EvidencePersistenceStore.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/evidence/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalEvidenceReviewDecision.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayPersistence.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/DocumentationHistoricalSourceDiscoverer.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalEvidenceReviewDecision.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayOrchestrator.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "package.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2dc2157f27128f984c7bc230b720886d49182be0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

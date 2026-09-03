@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:27acf71271962fb8e1419f90975c18d547e3f3f72fbb83c61a17ac02c0405612",
+  "type": "conversation",
+  "title": "KoreLumina — Production Hardening - Commit Guardrail Rules — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25#browser-turn=0",
+  "checksum": "27acf71271962fb8e1419f90975c18d547e3f3f72fbb83c61a17ac02c0405612",
+  "metadata": {
+    "content": "That result is decisive.\nA completely blank Safari tab reports:\nJavaScriptinnerHeight: 359\nouterHeight: 949\nratio: 2.64\nwhich means:\nKoreLumina is not causing the problem.\nYou have now proven:\n\n\nBlank Safari tab = 359px\n\n\nKoreLumina = 359px\n\n\nvisualViewport = 359px\n\n\nscale = 1\n\n\nno fullscreen\n\n\nno iframe issue\n\n\nThe bug exists before any Lumina code executes.\nWhat this means\nSafari believes the usable viewport height is only 359px on your machine.\nA normal Mac Safari window should look more like:\nJavaScript{\n  outerHeight: 949,\n  innerHeight: 850-900\n}\nnot:\nJavaScript{\n  outerHeight: 949,\n  innerHeight: 359\n}\nCheck these Safari settings\n\n\nSafari → View → Actual Size (⌘0)\n\n\nSafari → View → Zoom In/Out (verify page zoom is 100%)\n\n\nSafari → Settings → Websites → Page Zoom\n\n\nEnsure localhost is not set to a custom zoom\n\n\n\n\nSafari → Develop\n\n\nMake sure Responsive Design Mode is OFF\n\n\n\n\nDisable all Safari extensions temporarily.\n\n\nTry a new Safari Profile.\n\n\nCheck macOS display scaling\nSystem Settings → Displays\nVerify you're not on an unusual scaled resolution mode.\nQuick confirmation\nOpen Chrome and run:\nJavaScriptwindow.innerHeight\nIf Chrome returns something near:\n861\nthen the KoreLumina layout is healthy and Safari alone is misreporting the viewport.\nAt this point I would stop changing PreviewFrame and workspace code. The debugging data has isolated the issue to Safari/macOS viewport reporting, not the Lumina application.",
+    "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+    "projectId": "g-p-69cbc6142624819186caca549600467e",
+    "messageId": "23ca71ea-2d55-4a55-8f0b-3fad857f916c",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc982d-f218-8333-9737-3f780ba0bf25:message:23ca71ea-2d55-4a55-8f0b-3fad857f916c",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25#browser-turn=0",
+    "sourceRevision": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251",
+    "segmentAvailability": "available",
+    "conversationChecksum": "193d9ec26a37f4daa37dddbd7a0e811aa3060f1b8055e9066cde59a827e57803",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251",
+      "exportRevision": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787626542771
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc982d-f218-8333-9737-3f780ba0bf25:message:23ca71ea-2d55-4a55-8f0b-3fad857f916c"
+    ],
+    "conversation": [
+      "69cc982d-f218-8333-9737-3f780ba0bf25"
+    ]
+  }
+}

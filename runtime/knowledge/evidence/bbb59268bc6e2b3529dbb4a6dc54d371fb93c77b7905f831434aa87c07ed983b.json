@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:cb0961a73a24f8a4d9c2012d017dcd3d03ca6723d3511a70388bd32d75ff567c",
+  "type": "document",
+  "title": "Executive Mutation Governance Specification V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113229,
+  "observedAt": 1786642021000,
+  "contentRef": "docs/architecture/EXECUTIVE_MUTATION_GOVERNANCE_SPECIFICATION_V1.md",
+  "checksum": "sha256:4e469ce70b075547b7c183aad370d36268f81d9cf27bd0e6ce083a1df2c7a664",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1436,
+    "genesisAdmissionIdentity": "genesis-admission:7edab42e51c7eda9f50e3858cffc4d991321e25ac5a6c49a122690294525c512",
+    "historicalSourceId": "genesis-source:document:derived:577487560dcb31cf7b7d75c69c4caaca02d6eb453eb7dc2797b80f26866646ae",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Production governance contract",
+    "sourceLocation": "docs/architecture/EXECUTIVE_MUTATION_GOVERNANCE_SPECIFICATION_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Executive Mutation Governance Specification V1",
+      "status": "Production governance contract",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/EXECUTIVE_MUTATION_GOVERNANCE_SPECIFICATION_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:577487560dcb31cf7b7d75c69c4caaca02d6eb453eb7dc2797b80f26866646ae"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

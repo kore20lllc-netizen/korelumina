@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:0e164f4d18f5eb2e385a3b367fa0536b3bac31b3a96ad5f8019432222988728d",
+  "type": "commit",
+  "title": "feat(knowledge): add acquisition metrics framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075049,
+  "observedAt": 1783060099000,
+  "contentRef": "git:commit:fc2f505b326a948e8afd9a8f082e9c6d15f8cb9c",
+  "checksum": "sha256:dd0fbe7251e5e3d40b38f38dfee2f745d6ad4bba7df3e91399fab2feb196280f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 746,
+    "genesisAdmissionIdentity": "genesis-admission:ce707cbb8f327fa5176314af3c616480147e7213dde65b424962a2f3a297d34d",
+    "historicalSourceId": "genesis-source:commit:fc2f505b326a948e8afd9a8f082e9c6d15f8cb9c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fc2f505b326a948e8afd9a8f082e9c6d15f8cb9c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fc2f505b326a948e8afd9a8f082e9c6d15f8cb9c",
+      "parentShas": [
+        "5eecb06e77786ef743c774dbb02f06207c9a5a39"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783060099000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783060099000
+      },
+      "subject": "feat(knowledge): add acquisition metrics framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-acquisition/index.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/metrics/KnowledgeAcquisitionMetrics.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/metrics/KnowledgeAcquisitionMetricsRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/metrics/index.ts"
+      ],
+      "changedPathsByParent": {
+        "5eecb06e77786ef743c774dbb02f06207c9a5a39": [
+          "apps/lumina-runtime/src/knowledge-acquisition/index.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/metrics/KnowledgeAcquisitionMetrics.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/metrics/KnowledgeAcquisitionMetricsRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/metrics/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kap-006-acquisition-metrics-framework-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fc2f505b326a948e8afd9a8f082e9c6d15f8cb9c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

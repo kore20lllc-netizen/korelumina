@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:8f2e45f39e868e06fea6aa2a724557bc854efabccf300405c2c27181802c1d70",
+  "type": "commit",
+  "title": "docs(lumina): establish primitive extraction registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240088503,
+  "observedAt": 1785838293000,
+  "contentRef": "git:commit:737649b76f168d24c0d588093411df92e1478fb8",
+  "checksum": "sha256:6890c71bb0c3a31d19b57554ad3cf71ba7dbb3d389a40bb47e9aebf4392cc10b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1029,
+    "genesisAdmissionIdentity": "genesis-admission:6a2fd6ab92c5efc9145b06351b1b2bd39a69c8ff0a0f374175e0dbfff5b126a2",
+    "historicalSourceId": "genesis-source:commit:737649b76f168d24c0d588093411df92e1478fb8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:737649b76f168d24c0d588093411df92e1478fb8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "737649b76f168d24c0d588093411df92e1478fb8",
+      "parentShas": [
+        "8239f6a9cb3f0cf12148973dac37ef97ce4527c0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785838293000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785838293000
+      },
+      "subject": "docs(lumina): establish primitive extraction registry",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md"
+      ],
+      "changedPathsByParent": {
+        "8239f6a9cb3f0cf12148973dac37ef97ce4527c0": [
+          "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:737649b76f168d24c0d588093411df92e1478fb8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

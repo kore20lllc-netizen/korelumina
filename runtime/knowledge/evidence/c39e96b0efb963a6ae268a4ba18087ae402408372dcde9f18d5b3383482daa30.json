@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:47b5b0e6b1eb799c7920ca2d4366b94d89d09584781b5680b74fc5b70af6f0f1",
+  "type": "commit",
+  "title": "feat(lumina): add toggle input",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080973,
+  "observedAt": 1783639947000,
+  "contentRef": "git:commit:ffcb672d6dda3ba2868095f696c9ec4965dc583d",
+  "checksum": "sha256:83d4609151069c2e40bbda9275fd86c273b1de11751a7d1f98ac747a350d95d6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 875,
+    "genesisAdmissionIdentity": "genesis-admission:7702d09a7017caa9b9c02a25eae04bf01b0e48ff39f9486d5b7ba928fae5e9b5",
+    "historicalSourceId": "genesis-source:commit:ffcb672d6dda3ba2868095f696c9ec4965dc583d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ffcb672d6dda3ba2868095f696c9ec4965dc583d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ffcb672d6dda3ba2868095f696c9ec4965dc583d",
+      "parentShas": [
+        "3424cfba84151dacefd28833780a16d73097c9a3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783639947000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783639947000
+      },
+      "subject": "feat(lumina): add toggle input",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/input/field/LuminaField.tsx",
+        "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldDescription.tsx",
+        "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldError.tsx",
+        "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldHint.tsx",
+        "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldLabel.tsx",
+        "apps/lumina-builder/src/components/lumina/input/field/index.ts",
+        "apps/lumina-builder/src/components/lumina/input/index.ts",
+        "apps/lumina-builder/src/components/lumina/input/toggle/LuminaToggle.tsx",
+        "apps/lumina-builder/src/components/lumina/input/toggle/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3424cfba84151dacefd28833780a16d73097c9a3": [
+          "apps/lumina-builder/src/components/lumina/input/field/LuminaField.tsx",
+          "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldDescription.tsx",
+          "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldError.tsx",
+          "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldHint.tsx",
+          "apps/lumina-builder/src/components/lumina/input/field/LuminaFieldLabel.tsx",
+          "apps/lumina-builder/src/components/lumina/input/field/index.ts",
+          "apps/lumina-builder/src/components/lumina/input/index.ts",
+          "apps/lumina-builder/src/components/lumina/input/toggle/LuminaToggle.tsx",
+          "apps/lumina-builder/src/components/lumina/input/toggle/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ffcb672d6dda3ba2868095f696c9ec4965dc583d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

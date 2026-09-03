@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:6cce37868b1ee82fc8f72b30b21cef433dd3403aa51ae6eb688c4d204e75279c",
+  "type": "document",
+  "title": "KoreLumina Executive UI Flagship Guidance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085969,
+  "observedAt": 1785369213000,
+  "contentRef": "docs/architecture/KORELUMINA_EXECUTIVE_UI_FLAGSHIP_GUIDANCE.md",
+  "checksum": "sha256:fe5f9a080d57d51ccc8606e9acb8455e7bc1bd6ac0fe2fe08a9216df9490dae6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 979,
+    "genesisAdmissionIdentity": "genesis-admission:e92c1f353fc903068c1ae3c4c932c2c558d5db3f59b592caf45625856171612f",
+    "historicalSourceId": "genesis-source:document:derived:08107ecb138b39dd42c50a096c360ffdff58887dfd6fc3b90ebb8e7bae89797a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "sourceLocation": "docs/architecture/KORELUMINA_EXECUTIVE_UI_FLAGSHIP_GUIDANCE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Executive UI Flagship Guidance",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_EXECUTIVE_UI_FLAGSHIP_GUIDANCE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:08107ecb138b39dd42c50a096c360ffdff58887dfd6fc3b90ebb8e7bae89797a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

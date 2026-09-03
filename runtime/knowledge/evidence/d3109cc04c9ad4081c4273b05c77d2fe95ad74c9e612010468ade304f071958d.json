@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:8b770c87a43c28bfdc2dba7c44cfb75ec8cc2ebf9e06ec536f22a11d8f714576",
+  "type": "document",
+  "title": "KoreLumina Builder Architecture v2",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075912,
+  "observedAt": 1783141514000,
+  "contentRef": "docs/architecture/KORELUMINA_BUILDER_ARCHITECTURE_V2.md",
+  "checksum": "sha256:2b26b36afc99870e828c69cf6c729086c279f7a4c3fcc4a687c93eb0b906f872",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 761,
+    "genesisAdmissionIdentity": "genesis-admission:2ef2b69840e3ade00780b64447ad10613ee05b989073c91574a030d09290affb",
+    "historicalSourceId": "genesis-source:document:derived:d79475e3a6328f7e061d20aa47a9474e35cada50e7134faf22afd534a12882b4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Approved Direction",
+    "sourceLocation": "docs/architecture/KORELUMINA_BUILDER_ARCHITECTURE_V2.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Builder Architecture v2",
+      "status": "Approved Direction",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_BUILDER_ARCHITECTURE_V2.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d79475e3a6328f7e061d20aa47a9474e35cada50e7134faf22afd534a12882b4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

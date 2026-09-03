@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:5b823b208d92e8c2a576a48e9fcff9f9b2e9d2a77bb18627f6e5deba45c61915",
+  "type": "document",
+  "title": "CA-001 — Chief Agent, Executive Workspace, and Knowledge Operations Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085176,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/chief-agent/CA-001_EXECUTIVE_WORKSPACE_AND_CHIEF_AGENT_ARCHITECTURE.md",
+  "checksum": "sha256:eeb905f7224270a014beb6d82234c1879496a7bfe45c31d0b5646c2c2c2ebdb9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 963,
+    "genesisAdmissionIdentity": "genesis-admission:1d1f00a8973f4ddd57f0dc4c7e909ff9406f7705a03e6d3922ab02437e3cfa93",
+    "historicalSourceId": "genesis-source:document:derived:d3712bcd601f27c1efda3f68c3b6fe19c1bc575d8c58da2dea815513a6decf55",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "version": "0.1",
+    "sourceLocation": "docs/architecture/chief-agent/CA-001_EXECUTIVE_WORKSPACE_AND_CHIEF_AGENT_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "CA-001 — Chief Agent, Executive Workspace, and Knowledge Operations Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/chief-agent/CA-001_EXECUTIVE_WORKSPACE_AND_CHIEF_AGENT_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d3712bcd601f27c1efda3f68c3b6fe19c1bc575d8c58da2dea815513a6decf55"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

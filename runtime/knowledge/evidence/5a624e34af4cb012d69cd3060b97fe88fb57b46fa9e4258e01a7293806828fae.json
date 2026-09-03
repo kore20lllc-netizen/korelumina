@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:5f228e0674c80074ca783a903fc005c06d804121df1156d349091374fadd7986",
+  "type": "commit",
+  "title": "feat(knowledge): expose autonomous canonical promotion",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240121100,
+  "observedAt": 1787402266000,
+  "contentRef": "git:commit:feb0c1074c1468774d6de884fd091f582819d10b",
+  "checksum": "sha256:4605ae3a8f51eabf1f617ffadac3bd6b6e48986759074248e004124cfde30692",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1542,
+    "genesisAdmissionIdentity": "genesis-admission:7610002db3e43876cc34aaf8fc0da184a4530fb19587744a9e600147a0a7ee26",
+    "historicalSourceId": "genesis-source:commit:feb0c1074c1468774d6de884fd091f582819d10b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:feb0c1074c1468774d6de884fd091f582819d10b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "feb0c1074c1468774d6de884fd091f582819d10b",
+      "parentShas": [
+        "97aa59893663a2cf012073efa7b7e7cf7d2538b3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787402266000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787402266000
+      },
+      "subject": "feat(knowledge): expose autonomous canonical promotion",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/__tests__/AutonomousCanonicalPromotionRoute.test.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerAutonomousCanonicalPromotionRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "97aa59893663a2cf012073efa7b7e7cf7d2538b3": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/__tests__/AutonomousCanonicalPromotionRoute.test.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerAutonomousCanonicalPromotionRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:feb0c1074c1468774d6de884fd091f582819d10b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

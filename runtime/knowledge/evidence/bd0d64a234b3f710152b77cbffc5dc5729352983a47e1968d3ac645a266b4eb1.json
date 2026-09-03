@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:e70adf60a19e10a9b9e1845727c3873e6b77862931e39316435b6a62edb93bc4",
+  "type": "commit",
+  "title": "refactor(knowledge): align usage pattern cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240103361,
+  "observedAt": 1786389587000,
+  "contentRef": "git:commit:1733f36bc5bdd81e0bc8680b61eea8ef403e804a",
+  "checksum": "sha256:61b0eede91a1f52faea65787463eda1380eeb91c647c5f79d8f2f1465db9c84c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1289,
+    "genesisAdmissionIdentity": "genesis-admission:b534ad853f5968911cc16b2ac99587a1ad4ac71d3194f79dea7ad39bc0aa524f",
+    "historicalSourceId": "genesis-source:commit:1733f36bc5bdd81e0bc8680b61eea8ef403e804a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1733f36bc5bdd81e0bc8680b61eea8ef403e804a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1733f36bc5bdd81e0bc8680b61eea8ef403e804a",
+      "parentShas": [
+        "ee592f2277f612e97f1fce23350146b7bbb978ef"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786389587000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786389587000
+      },
+      "subject": "refactor(knowledge): align usage pattern cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+      ],
+      "changedPathsByParent": {
+        "ee592f2277f612e97f1fce23350146b7bbb978ef": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1733f36bc5bdd81e0bc8680b61eea8ef403e804a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

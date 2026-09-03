@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:a2f71d1fe5cb676d33b76992a0e6b9d1f6fd948a09a6b39c38a178225fff8002",
+  "type": "commit",
+  "title": "feat(executive): add gated mutation execution route",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240112945,
+  "observedAt": 1786621081000,
+  "contentRef": "git:commit:d14f7032773dd25edc9a84e086317d14260e73dc",
+  "checksum": "sha256:4bf02a0876b92388fae7d9c55acead5141f3c5003292d7157284c5041f8455c8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1432,
+    "genesisAdmissionIdentity": "genesis-admission:6353688e454991ea5f202b8ac6bb6680dcbe5988dc3392989c0fb676c8849dd8",
+    "historicalSourceId": "genesis-source:commit:d14f7032773dd25edc9a84e086317d14260e73dc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d14f7032773dd25edc9a84e086317d14260e73dc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d14f7032773dd25edc9a84e086317d14260e73dc",
+      "parentShas": [
+        "c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786621081000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786621081000
+      },
+      "subject": "feat(executive): add gated mutation execution route",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/executiveActionMutation.test.ts",
+        "apps/lumina-runtime/src/routes/executiveActionMutation.ts"
+      ],
+      "changedPathsByParent": {
+        "c2fc814bce3ce2ecdc4f7df7e7dbb5e484446136": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/executiveActionMutation.test.ts",
+          "apps/lumina-runtime/src/routes/executiveActionMutation.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d14f7032773dd25edc9a84e086317d14260e73dc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

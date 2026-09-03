@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:68bad6e08b9605a6533aaaddd70e0c6e8e9a3d117b702b1cdf3fd2686ed2190b",
+  "type": "commit",
+  "title": "feat(lumina): enhance canonical surface variants",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079023,
+  "observedAt": 1783425184000,
+  "contentRef": "git:commit:386d21dcb1c1c71ea1012676d26fc6710101a256",
+  "checksum": "sha256:4ad1c56ef5ae0cd8d1dac15b6809518448f3b975c2d28f56f25e05a4b1709e8c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 832,
+    "genesisAdmissionIdentity": "genesis-admission:b4ae16e474d640cae6f8e7f977241073968530b85545a38b6e84e8f8166dbe0a",
+    "historicalSourceId": "genesis-source:commit:386d21dcb1c1c71ea1012676d26fc6710101a256",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:386d21dcb1c1c71ea1012676d26fc6710101a256",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "386d21dcb1c1c71ea1012676d26fc6710101a256",
+      "parentShas": [
+        "b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425184000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783425184000
+      },
+      "subject": "feat(lumina): enhance canonical surface variants",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx"
+      ],
+      "changedPathsByParent": {
+        "b823b6b103bc1c632a249e71cd4fd2fb4c3bf37c": [
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:386d21dcb1c1c71ea1012676d26fc6710101a256"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

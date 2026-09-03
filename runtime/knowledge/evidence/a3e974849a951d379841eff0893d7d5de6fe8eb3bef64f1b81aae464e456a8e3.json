@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c3e3af24449de7b96c502b2295880937f1f9ee01b6a94621e4e15f4cfd69c3e2",
+  "type": "commit",
+  "title": "feat(knowledge): project governed promotion into organizational memory",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108916,
+  "observedAt": 1786443849000,
+  "contentRef": "git:commit:400145add10f9786674bd82dba9e4b28e12e5449",
+  "checksum": "sha256:59df04691a1108653695b0a731c144fa053e735c18bdfc958ec0c38e035c4850",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1374,
+    "genesisAdmissionIdentity": "genesis-admission:1ad52e4d02aa42af7a0c12f31d726821e54ee81c38623e61ffcbed5522130a7b",
+    "historicalSourceId": "genesis-source:commit:400145add10f9786674bd82dba9e4b28e12e5449",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:400145add10f9786674bd82dba9e4b28e12e5449",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "400145add10f9786674bd82dba9e4b28e12e5449",
+      "parentShas": [
+        "34eb417b78e020606b446afd86b3e69389aea9ee"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786443849000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786443849000
+      },
+      "subject": "feat(knowledge): project governed promotion into organizational memory",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/GovernedCanonicalPromotionService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts"
+      ],
+      "changedPathsByParent": {
+        "34eb417b78e020606b446afd86b3e69389aea9ee": [
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/GovernedCanonicalPromotionService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:400145add10f9786674bd82dba9e4b28e12e5449"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

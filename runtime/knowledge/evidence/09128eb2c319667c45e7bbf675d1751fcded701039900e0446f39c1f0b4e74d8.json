@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:cb76d5d903823c8cd4128a0fe03e9abc45b7a7c3e98962f49120dc8d8de356db",
+  "type": "commit",
+  "title": "refactor(runtime): migrate runtime event stream row",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092156,
+  "observedAt": 1785928229000,
+  "contentRef": "git:commit:a089e94f7b24dc564d38d440cdfa903194ba5995",
+  "checksum": "sha256:b34daad56a9d4dc67e87343da105b8921e85fb0cf020ebf62c80211f5b7c934b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1098,
+    "genesisAdmissionIdentity": "genesis-admission:370fb53d9cb4559a2088bf13fe93d103ecf90000ae3aa44ca5d79ca40694b04d",
+    "historicalSourceId": "genesis-source:commit:a089e94f7b24dc564d38d440cdfa903194ba5995",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a089e94f7b24dc564d38d440cdfa903194ba5995",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a089e94f7b24dc564d38d440cdfa903194ba5995",
+      "parentShas": [
+        "f6cf8a224151606d863d568490b115bad608703e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785928229000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785928229000
+      },
+      "subject": "refactor(runtime): migrate runtime event stream row",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx"
+      ],
+      "changedPathsByParent": {
+        "f6cf8a224151606d863d568490b115bad608703e": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEventStream.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a089e94f7b24dc564d38d440cdfa903194ba5995"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

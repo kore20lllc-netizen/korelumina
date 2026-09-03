@@ -1,0 +1,40 @@
+{
+  "id": "genesis-evidence:574e3d344ee11ea4ff4584ed684722bb945eb113a91205c4c6156b634b920d50",
+  "type": "document",
+  "title": "KoreLumina Project Manifesto",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081962,
+  "observedAt": 1783728724000,
+  "contentRef": "docs/architecture/KORELUMINA_PROJECT_MANIFESTO.md",
+  "checksum": "sha256:2bbd5dc46cdf64693f1e7f53bfbaf055bcd2b2d00276eedcd22c796034c1451c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 896,
+    "genesisAdmissionIdentity": "genesis-admission:dd4d2e7a8c6928a5b61eb0b71d432496b4c82b423e54305d3acf9a3ca3001da2",
+    "historicalSourceId": "genesis-source:document:derived:e161ba71fb698ea0f1d29e15280018ab65e48125a0dd2e093e04c3de1b8d191e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_PROJECT_MANIFESTO.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Project Manifesto",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_PROJECT_MANIFESTO.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e161ba71fb698ea0f1d29e15280018ab65e48125a0dd2e093e04c3de1b8d191e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

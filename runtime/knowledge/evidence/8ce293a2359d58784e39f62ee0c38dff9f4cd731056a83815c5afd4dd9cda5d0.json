@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5e6cd0d8bfe3870c1490912bd8975e85d420b58be97d608e43c340d68748f0b9",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship panel in educational timeline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240097845,
+  "observedAt": 1786160447000,
+  "contentRef": "git:commit:1fc8c35988533940b0c031bfedbd123aac49502b",
+  "checksum": "sha256:64ad0724c5c33e6fa2c4c284cbae3d05261c26e0f5b5d88916806fea0b875fea",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1198,
+    "genesisAdmissionIdentity": "genesis-admission:8ea5d0ed745d78b2bda012ff8e570b57927376834faad87b7511a80f7b02f89a",
+    "historicalSourceId": "genesis-source:commit:1fc8c35988533940b0c031bfedbd123aac49502b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1fc8c35988533940b0c031bfedbd123aac49502b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1fc8c35988533940b0c031bfedbd123aac49502b",
+      "parentShas": [
+        "d818080d392130f8cab4450e83243ab5688371ae"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786160447000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786160447000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship panel in educational timeline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx"
+      ],
+      "changedPathsByParent": {
+        "d818080d392130f8cab4450e83243ab5688371ae": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1fc8c35988533940b0c031bfedbd123aac49502b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

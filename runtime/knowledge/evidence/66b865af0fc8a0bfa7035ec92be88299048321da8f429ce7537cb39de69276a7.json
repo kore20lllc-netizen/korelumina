@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:f7d2bde9317cbabf7b562fdfb71ddeff7569b62d502d388c66b6a04934c504cd",
+  "type": "commit",
+  "title": "refactor(knowledge): restore executive hero baseline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084838,
+  "observedAt": 1784889136000,
+  "contentRef": "git:commit:db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c",
+  "checksum": "sha256:c53bc6cc68004d6f8670a80d16976ea656deebc42332765b66cd739cb9a18700",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 956,
+    "genesisAdmissionIdentity": "genesis-admission:845cb06670f3e2705ff69084f525e5ca09ce722cbf08ca96fa7fbd8baee6fc12",
+    "historicalSourceId": "genesis-source:commit:db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c",
+      "parentShas": [
+        "11587a14b9a78a11ab42b7f7e2e474f488ae2e1f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784889136000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784889136000
+      },
+      "subject": "refactor(knowledge): restore executive hero baseline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveIdentity.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+      ],
+      "changedPathsByParent": {
+        "11587a14b9a78a11ab42b7f7e2e474f488ae2e1f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveIdentity.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-executive-baseline-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f7006f9e593cc3a8291e7badfe5af0781149fce69d906377759a8ff935dad342",
+  "type": "commit",
+  "title": "docs(master-os): define engineering principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076658,
+  "observedAt": 1783149481000,
+  "contentRef": "git:commit:8740116883595be42c1c37d101a72aa82b033d09",
+  "checksum": "sha256:fa22db5aa1f463fe29a9a5c6ab2795707c9b5b0513a38b95624ea16cd7ab220d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 778,
+    "genesisAdmissionIdentity": "genesis-admission:82f82bcfaef2abea869045dfecbde279e549309c6c7e2313aa38b77971b0f0fd",
+    "historicalSourceId": "genesis-source:commit:8740116883595be42c1c37d101a72aa82b033d09",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8740116883595be42c1c37d101a72aa82b033d09",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8740116883595be42c1c37d101a72aa82b033d09",
+      "parentShas": [
+        "9f53fce8ee95f230aba1a9688f33bd98c317d56f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783149481000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783149481000
+      },
+      "subject": "docs(master-os): define engineering principles",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/MASTER_OS_ENGINEERING_PRINCIPLES.md"
+      ],
+      "changedPathsByParent": {
+        "9f53fce8ee95f230aba1a9688f33bd98c317d56f": [
+          "docs/architecture/MASTER_OS_ENGINEERING_PRINCIPLES.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/master-os-engineering-principles-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8740116883595be42c1c37d101a72aa82b033d09"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:cd225c5b7177604dc92975a9f6b265c3aa8a114c838f5030f66c6433a4f621a9",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Next Diff Engine-korelumina — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=2",
+  "checksum": "cd225c5b7177604dc92975a9f6b265c3aa8a114c838f5030f66c6433a4f621a9",
+  "metadata": {
+    "content": "Yes. Terminal log confirms it.\nYou are now in live-reload loop → iframe remount every second → visual blinking.\nThis is not runtime failure.\n\nThis is preview polling architecture too aggressive.\nYou built:\n\n\ntick every 1s\n\n\niframe key={tick}\n\n\nfull remount\n\n\nruntime HTML reload\n\n→ therefore constant white flash\n\n\nYou fixed caching.\n\nNow you must fix stability.\n\n✅ Correct Preview Architecture (important)\nYou must NOT remount iframe on timer.\nYou must:\n\n\npoll runtime endpoint\n\n\ncompare HTML hash\n\n\nonly reload iframe when HTML changed\n\n\nThis is how Vercel / Stackblitz / CodeSandbox preview works.\n\n🔥 Fix — Rewrite studio-runtime/[projectId]/page.tsx\nFull overwrite.\nBashcat > app/studio-runtime/[projectId]/page.tsx << 'EOF'\n\"use client\"\n\nimport { useEffect, useRef, useState } from \"react\"\nimport { useParams } from \"next/navigation\"\n\nexport default function StudioRuntime(){\n\n  const { projectId } = useParams()\n\n  const iframeRef = useRef<HTMLIFrameElement>(null)\n  const lastHtmlRef = useRef<string>(\"\")\n\n  const [html,setHtml] = useState(\"Loading runtime...\")\n\n  useEffect(()=>{\n\n    let mounted = true\n\n    async function poll(){\n\n      try{\n\n        const res = await fetch(\n          `/api/dev/runtime/execute?projectId=${projectId}`,\n          { cache:\"no-store\" }\n        )\n\n        const text = await res.text()\n\n        // ONLY update if changed\n        if(text !== lastHtmlRef.current){\n\n          lastHtmlRef.current = text\n\n          if(mounted){\n            setHtml(text)\n          }\n\n        }\n\n      }catch(e){\n        console.error(e)\n      }\n\n    }\n\n    poll()\n\n    const id = setInterval(poll,1500)\n\n    return ()=>{\n      mounted = false\n      clearInterval(id)\n    }\n\n  },[projectId])\n\n  return (\n    <div style={{height:\"100vh\"}}>\n      <iframe\n        ref={iframeRef}\n        srcDoc={html}\n        style={{\n          width:\"100%\",\n          height:\"100%\",\n          border:\"none\",\n          background:\"#fff\"\n        }}\n      />\n    </div>\n  )\n}\nEOF\n\n✅ Now restart clean\nrm -rf .next\nnpm run dev\n\n✅ Expected behavior after fix\n\n\nNo blinking\n\n\nStable preview\n\n\nTemplate switch → preview updates once\n\n\nRuntime polling still active\n\n\nEngine remains hot\n\n\n\n⚠️ VERY IMPORTANT (system design note)\nYou just crossed from:\n\n\"runtime execution correctness\"\n\nto\n\n\"IDE-grade preview orchestration\"\n\nThis is a different class of problem.\nNext step after this goes green will be:\n⭐ Runtime Change Signal Engine\nInstead of polling.\nYou will build:\n\n\nruntime version file\n\n\npreview listens to version\n\n\nreload only on version bump\n\n\nThat makes KoreLumina feel like Lovable / Builder.io.\n\nNow do restart → test switch template.\nTell me:\n👉 Blinking gone or still flashing?",
+    "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "a975501c-0de0-474e-9ef6-57151b2ffcc6",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:a975501c-0de0-474e-9ef6-57151b2ffcc6",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=2",
+    "sourceRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0fb33606832a5c1613d7c0cd61634a9f42208910a9b0ea7de37ffa55e234ed43",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+      "exportRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630819038
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:a975501c-0de0-474e-9ef6-57151b2ffcc6"
+    ],
+    "conversation": [
+      "69b7017a-f53c-8328-bfeb-b2de07d7838c"
+    ]
+  }
+}

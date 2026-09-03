@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:d2184617999d395906a02731ebb9e9e78abf24c70a44a878698415d658a13240",
+  "type": "commit",
+  "title": "fix(knowledge): enforce canonical promotion governance boundary",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113448,
+  "observedAt": 1786653251000,
+  "contentRef": "git:commit:ee940ff8c2296881a226db6d340995dae7037eba",
+  "checksum": "sha256:8a531864f8931cb3b5b27533439672ee524a8bca79d6b7cfb98be45b8eecf9b0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1439,
+    "genesisAdmissionIdentity": "genesis-admission:ef2f983a5831f13f6122606f972f5bf9a213868a461e804c94b781898c87adc6",
+    "historicalSourceId": "genesis-source:commit:ee940ff8c2296881a226db6d340995dae7037eba",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ee940ff8c2296881a226db6d340995dae7037eba",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ee940ff8c2296881a226db6d340995dae7037eba",
+      "parentShas": [
+        "710018cb5cafb4c039d8bccfa2cd17da0e480d14"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786653251000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786653251000
+      },
+      "subject": "fix(knowledge): enforce canonical promotion governance boundary",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/canonical-knowledge/__tests__/canonicalGovernanceBoundary.test.ts",
+        "apps/lumina-runtime/src/knowledge-platform/KnowledgePlatform.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatform.ts"
+      ],
+      "changedPathsByParent": {
+        "710018cb5cafb4c039d8bccfa2cd17da0e480d14": [
+          "apps/lumina-runtime/src/canonical-knowledge/__tests__/canonicalGovernanceBoundary.test.ts",
+          "apps/lumina-runtime/src/knowledge-platform/KnowledgePlatform.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/KnowledgePreservationPlatform.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ee940ff8c2296881a226db6d340995dae7037eba"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

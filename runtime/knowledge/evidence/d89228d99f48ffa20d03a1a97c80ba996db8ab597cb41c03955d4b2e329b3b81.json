@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:11c1fc4f9ca3f954921e4b7a6d5af714f581959ae3c623664d11ebca6ae4b3e0",
+  "type": "commit",
+  "title": "feat(knowledge): expose governed preservation intake",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240111676,
+  "observedAt": 1786576387000,
+  "contentRef": "git:commit:c5713942f16706dbd004c12fbec32e6e08068a9c",
+  "checksum": "sha256:ef3df3d1b880009ed851641db79bffa598a8f41b65c60cbcafd0219b63f40f1e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1414,
+    "genesisAdmissionIdentity": "genesis-admission:32331cb3fa5b6c536c163082b631954dee62b0df4b2823d941491c887882b1df",
+    "historicalSourceId": "genesis-source:commit:c5713942f16706dbd004c12fbec32e6e08068a9c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c5713942f16706dbd004c12fbec32e6e08068a9c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c5713942f16706dbd004c12fbec32e6e08068a9c",
+      "parentShas": [
+        "fa659fd6d5491e8cedaad90dfd497bb3edf6841a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786576387000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786576387000
+      },
+      "subject": "feat(knowledge): expose governed preservation intake",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/__tests__/knowledgePreservationRoute.test.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgePreservationRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "fa659fd6d5491e8cedaad90dfd497bb3edf6841a": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/__tests__/knowledgePreservationRoute.test.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgePreservationRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c5713942f16706dbd004c12fbec32e6e08068a9c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

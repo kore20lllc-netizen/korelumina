@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:0ab570149aa478590160188f51174c322590cdd79567444338ca8695ecd55a65",
+  "type": "conversation",
+  "title": "Korelumina day-0 — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=3",
+  "checksum": "0ab570149aa478590160188f51174c322590cdd79567444338ca8695ecd55a65",
+  "metadata": {
+    "content": "Good.\nNow we add minimal working content.\n1️⃣ Button component\nOpen:\nprojects/dev-project/app/components/Button.tsx\nPaste:\nexport default function Button({ label }: { label: string }) {\n  return (\n    <button\n      style={{\n        padding: \"8px 12px\",\n        borderRadius: 6,\n        border: \"1px solid #333\",\n        cursor: \"pointer\"\n      }}\n    >\n      {label}\n    </button>\n  );\n}\n\n2️⃣ Page file\nOpen:\nprojects/dev-project/app/page.tsx\nPaste:\nimport Button from \"./components/Button\";\n\nexport default function Page() {\n  return (\n    <div style={{ padding: 40 }}>\n      <h1>Hello from Builder</h1>\n      <Button label=\"Click me\" />\n    </div>\n  );\n}\n\n3️⃣ Leave globals.css empty for now\nDo not import CSS.\n\nNow restart clean:\npkill -f next || true\nrm -rf .next\nnpm run dev\nThen test:\ncurl \"http://localhost:3000/api/dev/preview/bundle?projectId=dev-project\" | head\nIf no build error appears, open the Builder preview.\nReport exactly what you see. No interpretation. Just result.",
+    "conversationId": "69760457-b00c-832b-8d81-384ee5032859",
+    "projectId": null,
+    "messageId": "6d2bc3b9-0fb8-42cb-8e91-fff1e8324fe0",
+    "speakerRole": "assistant",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69760457-b00c-832b-8d81-384ee5032859:message:6d2bc3b9-0fb8-42cb-8e91-fff1e8324fe0",
+    "sourceLocation": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=3",
+    "sourceRevision": "sha256:a101872c2526f05210f657e9ceb3b5fb994a06612d81d90acf8abd8fdfc8f7ff",
+    "segmentAvailability": "available",
+    "conversationChecksum": "832b4a9a281d78651afff19f95b5475aebeee0f9a89a541d107c631d7cb39a94",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:a101872c2526f05210f657e9ceb3b5fb994a06612d81d90acf8abd8fdfc8f7ff",
+      "exportRevision": "sha256:a101872c2526f05210f657e9ceb3b5fb994a06612d81d90acf8abd8fdfc8f7ff"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69760457-b00c-832b-8d81-384ee5032859",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1788164230146
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69760457-b00c-832b-8d81-384ee5032859:message:6d2bc3b9-0fb8-42cb-8e91-fff1e8324fe0"
+    ],
+    "conversation": [
+      "69760457-b00c-832b-8d81-384ee5032859"
+    ]
+  }
+}

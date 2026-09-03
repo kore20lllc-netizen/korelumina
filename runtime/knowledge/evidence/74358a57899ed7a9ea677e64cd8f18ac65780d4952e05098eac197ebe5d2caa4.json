@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:2a9d9bd20c56ab389e6de03119bc898237512b12924acc02d3e27e5d627165c0",
+  "type": "commit",
+  "title": "feat(executive): request approval from live chief agent decisions",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240110841,
+  "observedAt": 1786533953000,
+  "contentRef": "git:commit:474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf",
+  "checksum": "sha256:638f3942b8dfd608dba8b5e3093747aa4f51d83cc134e0366337ac4107fc8772",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1402,
+    "genesisAdmissionIdentity": "genesis-admission:1fcd5d1eefb4f22025b3b7331c2ae53b4545874e8f2f172fe56f5c7481eb0a50",
+    "historicalSourceId": "genesis-source:commit:474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf",
+      "parentShas": [
+        "4525a7202f7096b995f366c93d18943ed89adca2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786533953000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786533953000
+      },
+      "subject": "feat(executive): request approval from live chief agent decisions",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApprovalComposition.test.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "4525a7202f7096b995f366c93d18943ed89adca2": [
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApprovalComposition.test.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:474f5ddbd1ee0156b606fbbf2cfac3943eac7ddf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

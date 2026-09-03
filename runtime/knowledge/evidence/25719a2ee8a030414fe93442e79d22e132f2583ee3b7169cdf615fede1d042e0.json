@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:6a70fb2cee56a82fd89ca2b2abb027c707bb2605186faaf9fb4473d823753597",
+  "type": "document",
+  "title": "KoreLumina Values",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077799,
+  "observedAt": 1783197130000,
+  "contentRef": "docs/constitution/VALUES.md",
+  "checksum": "sha256:81f82566ad7ecab41ba01c88258c675f933890c97a139f99f1dc27c63dd46315",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 804,
+    "genesisAdmissionIdentity": "genesis-admission:fc28f2168c79b9e5edd6cb1d9f250c48af6a0deae060c3a5fdf2defd06619c8e",
+    "historicalSourceId": "genesis-source:document:derived:ae89ac7f6e80cc0f17f58a5e20fc427b576fd8d391a894535379e8322ce4da2d",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/VALUES.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Values",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/VALUES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ae89ac7f6e80cc0f17f58a5e20fc427b576fd8d391a894535379e8322ce4da2d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

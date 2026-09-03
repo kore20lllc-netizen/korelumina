@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:dc774f19db0c7853b315268c6614f11d1abb92a012d223e99f944584647b0f69",
+  "type": "commit",
+  "title": "docs(architecture): reconcile chief agent operational learning model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087234,
+  "observedAt": 1785542251000,
+  "contentRef": "git:commit:a9805316e73fa4bfa90a6db7568b273b42eab273",
+  "checksum": "sha256:8310b2b1dcce91b873f15be7b5b252c0ee04333b30fc41e04838d74284c478ae",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1004,
+    "genesisAdmissionIdentity": "genesis-admission:516690580ad1c9ce55560d3d2d7084ae160c26f61f35c24bcc66328a0441acc3",
+    "historicalSourceId": "genesis-source:commit:a9805316e73fa4bfa90a6db7568b273b42eab273",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a9805316e73fa4bfa90a6db7568b273b42eab273",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a9805316e73fa4bfa90a6db7568b273b42eab273",
+      "parentShas": [
+        "cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785542251000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785542251000
+      },
+      "subject": "docs(architecture): reconcile chief agent operational learning model",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/CHIEF_AGENT_OPERATIONAL_LEARNING_MODEL.md"
+      ],
+      "changedPathsByParent": {
+        "cce905a3fc90ec1545ac70a384a6bcccfc5c4a0b": [
+          "docs/architecture/reconciliation/CHIEF_AGENT_OPERATIONAL_LEARNING_MODEL.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a9805316e73fa4bfa90a6db7568b273b42eab273"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

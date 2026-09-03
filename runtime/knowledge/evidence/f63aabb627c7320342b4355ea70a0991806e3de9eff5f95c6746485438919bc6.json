@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:3e0cced9ab55c48e8cb15ff3878ceb2f3675fb7bfd103b045fd105beb14242e1",
+  "type": "commit",
+  "title": "feat(ui): introduce shared Lumina branding and workspace accents",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080197,
+  "observedAt": 1783584414000,
+  "contentRef": "git:commit:6d51127bb7bd0f63e0bc4174ea8ee17a7b9fe38e",
+  "checksum": "sha256:dbf3a336261dd56bc827affc7ee423ed6aa1561eb364fda79ef16b78e713e8cb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 858,
+    "genesisAdmissionIdentity": "genesis-admission:663170b996e5d7fe9c0f2b991e93f141b9975e132635a0e67dddd9441064dcde",
+    "historicalSourceId": "genesis-source:commit:6d51127bb7bd0f63e0bc4174ea8ee17a7b9fe38e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6d51127bb7bd0f63e0bc4174ea8ee17a7b9fe38e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6d51127bb7bd0f63e0bc4174ea8ee17a7b9fe38e",
+      "parentShas": [
+        "454894ad131f335a6ac6feb4332cae5be76eb15c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783584414000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783584414000
+      },
+      "subject": "feat(ui): introduce shared Lumina branding and workspace accents",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/brand/LuminaBrand.tsx",
+        "apps/lumina-builder/src/components/lumina/brand/index.ts",
+        "apps/lumina-builder/src/components/lumina/tokens/workspaceAccents.ts",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "454894ad131f335a6ac6feb4332cae5be76eb15c": [
+          "apps/lumina-builder/src/components/lumina/brand/LuminaBrand.tsx",
+          "apps/lumina-builder/src/components/lumina/brand/index.ts",
+          "apps/lumina-builder/src/components/lumina/tokens/workspaceAccents.ts",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6d51127bb7bd0f63e0bc4174ea8ee17a7b9fe38e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:347d0b70aedcb08daff36c1ed5b5244af8be91ea059bb9f0819bba9d92c5c835",
+  "type": "document",
+  "title": "Lumina Design System Certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083714,
+  "observedAt": 1784010740000,
+  "contentRef": "docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md",
+  "checksum": "sha256:981f18cc3acdf4a1d3514c8120a23fb070a12aa0d5482af1f61df064678f4873",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 933,
+    "genesisAdmissionIdentity": "genesis-admission:101211c63778f91c647bb83e9c0cf9a76bcf31d6561ef718030754b267731d08",
+    "historicalSourceId": "genesis-source:document:derived:bcebe6a3767221aa6010993f7870d0013eaa6f20552a00cbdb632e93f9872aa1",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "KoreLumina Architecture",
+    "approvalState": "Draft",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Design System Certification",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:bcebe6a3767221aa6010993f7870d0013eaa6f20552a00cbdb632e93f9872aa1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

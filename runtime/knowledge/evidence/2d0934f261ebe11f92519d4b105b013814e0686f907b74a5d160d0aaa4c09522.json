@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:bd584b22eae5a893b00472f140b8aca51d4928356ca65fdc636dceb8da78d39c",
+  "type": "commit",
+  "title": "feat(knowledge): scale canonical review governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240114594,
+  "observedAt": 1786906069000,
+  "contentRef": "git:commit:d2467c06ab42901de86c4623a7df9c9e2abfdde9",
+  "checksum": "sha256:25aecfdab6314f30826936abfe6db7914b74f89c58f1d07eff867846271432a9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1455,
+    "genesisAdmissionIdentity": "genesis-admission:8839d1b53bd99fa0c9b8346587cad32d4c42f8e2c36966d0c51c4f74a9bff985",
+    "historicalSourceId": "genesis-source:commit:d2467c06ab42901de86c4623a7df9c9e2abfdde9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d2467c06ab42901de86c4623a7df9c9e2abfdde9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d2467c06ab42901de86c4623a7df9c9e2abfdde9",
+      "parentShas": [
+        "b9bb44ef3dbabfc2280a0d0c4cd4db19cd56010f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786906069000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786906069000
+      },
+      "subject": "feat(knowledge): scale canonical review governance",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/canonicalReviewProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx",
+        "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewBatch.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewPolicy.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewBatch.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewPolicy.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerCanonicalReviewBatchRoutes.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerCanonicalReviewRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "b9bb44ef3dbabfc2280a0d0c4cd4db19cd56010f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/canonicalReviewProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx",
+          "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewBatch.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewPolicy.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewBatch.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewPolicy.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerCanonicalReviewBatchRoutes.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerCanonicalReviewRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d2467c06ab42901de86c4623a7df9c9e2abfdde9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

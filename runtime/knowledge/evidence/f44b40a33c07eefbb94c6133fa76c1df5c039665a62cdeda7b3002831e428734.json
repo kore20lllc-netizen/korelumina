@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:d34d20c078ca14e6fb80e7f7b5c026abb55e3cf8c6801c6dc30351bbb12832cc",
+  "type": "commit",
+  "title": "refactor(knowledge): extract graph viewport controls",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240093697,
+  "observedAt": 1785981416000,
+  "contentRef": "git:commit:640263ef34a8f843a7902e1478ddee1d15e48a5f",
+  "checksum": "sha256:10a54dbc14e22b9a97f80b45c81d11a97144d7cbe3d27657eb23851be285f8b1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1126,
+    "genesisAdmissionIdentity": "genesis-admission:be6a6045044f2cd17387934d84a83f3eecde1099579553f96892c811f7c85bb2",
+    "historicalSourceId": "genesis-source:commit:640263ef34a8f843a7902e1478ddee1d15e48a5f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:640263ef34a8f843a7902e1478ddee1d15e48a5f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "640263ef34a8f843a7902e1478ddee1d15e48a5f",
+      "parentShas": [
+        "dff9123de8eca987fc919d64a7bcf06be457e0f4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785981416000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785981416000
+      },
+      "subject": "refactor(knowledge): extract graph viewport controls",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/graph/KnowledgeGraphPanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "dff9123de8eca987fc919d64a7bcf06be457e0f4": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/graph/KnowledgeGraphPanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:640263ef34a8f843a7902e1478ddee1d15e48a5f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:77a4aa9e6e8d0defd4fcc7cf1ceebd2deb99d30ddae73fe5e59841cb43737020",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Plan — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=4",
+  "checksum": "77a4aa9e6e8d0defd4fcc7cf1ceebd2deb99d30ddae73fe5e59841cb43737020",
+  "metadata": {
+    "content": "Use this as the first message in the new conversation.\nKORELUMINA RECONSTRUCTION HANDOFFMissionYou are acting as Lead Reconstruction Engineer for KoreLumina.Your responsibility is NOT to add features first.Priority order:Restore correctnessRestore production behaviorRemove reconstruction regressionsRemove mocksImprove UXAdd capabilitiesNever sacrifice architectural correctness for speed.Operating RulesRule 1 — One Ticket At A TimeNever combine unrelated fixes.Workflow:Investigate\n→ Root Cause\n→ Smallest Safe Patch\n→ Build\n→ Validate\n→ Commit\n→ ProceedNo parallel repairs.Rule 2 — Runtime Is Source Of TruthBuilder must consume runtime data.Never:fabricate projectscreate fake runtime statehardcode runtime statuscreate UI-only state that diverges from runtimeRuntime owns:projectsruntime processesruntime healthruntime metricsruntime logsruntime lifecycleBuilder consumes.Rule 3 — Investigate Before EditingBefore any change:Identify:exact fileexact functionexact ownershipexact failure pathNo speculative edits.No \"try this\".No broad rewrites.Rule 4 — Every Fix Must BuildAfter every change:npm run buildor workspace equivalent.No exceptions.Rule 5 — Commit Every Completed TicketPattern:git add .\ngit commit -m \"fix(scope): description\"\ngit pushNever stack multiple completed fixes uncommitted.Current ArchitectureRuntimeLocation:apps/lumina-runtimeResponsibilities:Runtime lifecycleProcess managementHealth monitoringAuto recoveryRestart trackingEvent busMetricsWorkspace watchingRuntime registryImportant modules:runtime/\n├── startProject.ts\n├── registry.ts\n├── supervisor.ts\n├── recovery.ts\n├── runtimeLock.ts\n├── manualStop.ts\n├── workspaceWatcher.ts\n├── runtimeState.ts\n└── persistence.tsBuilderLocation:apps/lumina-builderResponsibilities:Project UIMonacoDiff approvalPreview embeddingRuntime consumptionBuilder must never become a second runtime.Current Verified StateRuntime MetricsVerified:curl http://localhost:4100/api/runtime/metricsShows:running runtimesevent clientsworkspace watchersrestart historyprocess healthStatus: WORKINGRuntime SupervisorVerified:supervisor.tsStarted from:apps/lumina-runtime/src/index.tsStatus: WORKINGRuntime RecoveryVerified:recovery.tsStarted from:apps/lumina-runtime/src/index.tsStatus: WORKINGRuntime Auto RestartVerified in:startProject.tsFeatures:restart windowsrestart historyauto recoveryrestart limitsStatus: WORKINGRuntime Manual Stop ProtectionVerified:manualStop.tsUsed by:registry.ts\nstartProject.tsManual stop no longer triggers auto restart.Status: WORKINGRuntime Lock CleanupLatest fix:registry.tsAdded:releaseRuntimeLock(projectId);inside:removeRuntime(...)Purpose:Prevent stale runtime locks from blocking future starts.Status: FIXEDCommit:562c8d0\nfix(runtime): release runtime locks on removalImportant DiscoveryThis command:curl http://localhost:4100/api/runtime/projectsreturns:{\n  \"ok\": true,\n  \"projects\": []\n}because runtime project listing is role gated.Correct verification:curl \\\n-H \"x-korelumina-role: super_admin\" \\\nhttp://localhost:4100/api/runtime/projectsreturns all projects.This is NOT a runtime failure.Do not investigate this again unless behavior changes.Current Production StatusVerified:✅ Runtime starts✅ Runtime stops✅ Runtime restarts✅ Metrics endpoint works✅ Recovery boot works✅ Supervisor boot works✅ Dashboard project visibility works✅ Imported projects visible✅ Runtime lock cleanup fixedImmediate Next Architecture RoadmapPhase 1 — Runtime Diagnostics UIGoal:Expose runtime metrics already available from backend.Builder work:Create Deployment Diagnostics Dashboard.Consume:GET /api/runtime/metricsDisplay:Runtime processesRunning projectsRuntime healthMemory usageCPU usageRestart historyEvent clientsWorkspace watchersNo new backend work.Backend already exists.Phase 2 — Runtime Control CenterExpose runtime actions.Functions:Restart runtimeStop runtimeView logsRuntime statusUse existing runtime APIs.No duplicate state.Phase 3 — Runtime Recovery DashboardVisualize:Restart historyAuto recovery historyFailuresRecovery successData already exists.Expose it.Phase 4 — Runtime Persistence HardeningAudit:persistence.ts\nrecovery.ts\nruntimeLock.tsGoals:survive machine restartsurvive runtime crashremove stale state safelyPhase 5 — Runtime OrchestratorIntroduce unified orchestration layer.Own:lifecyclerecoveryhealthresource managementKeep registry as source of truth.Phase 6 — Builder Mocks RemovalAudit:apps/lumina-builder/src/services\napps/lumina-builder/src/contextRemove remaining mock data paths.Builder should load from runtime.Reconstruction GuardrailsNever:rewrite architecture during debuggingreplace runtime with UI stateadd mock databypass runtime APIsperform multiple fixes in one ticketAlways:identify root causepatch smallest modulebuildvalidatecommitContinue from the current state, not from historical assumptions.\nCurrent checkpoint:\n\n\nBranch contains runtime lock cleanup fix.\n\n\nCommit: 562c8d0\n\n\nRuntime architecture is operational.\n\n\nNext ticket: Deployment Diagnostics Dashboard (builder consuming /api/runtime/metrics).",
+    "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "43d8d77f-1c8f-42dd-9232-d13826b4572b",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:43d8d77f-1c8f-42dd-9232-d13826b4572b",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=4",
+    "sourceRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e994e279db5b4e8933195d5e2efb6ca5db85eee49edf2a97411ee1907bc451be",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+      "exportRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630711928
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:43d8d77f-1c8f-42dd-9232-d13826b4572b"
+    ],
+    "conversation": [
+      "6a35fe61-d42c-83ea-af5d-5101df5b53db"
+    ]
+  }
+}

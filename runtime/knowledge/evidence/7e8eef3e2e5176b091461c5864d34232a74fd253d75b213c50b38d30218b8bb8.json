@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e6a428fe348a548263f52e241398cf18d065221e5f133b01aa06b87630218774",
+  "type": "commit",
+  "title": "feat(knowledge): synchronize organizational impact outcomes",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240094207,
+  "observedAt": 1785997494000,
+  "contentRef": "git:commit:39b8f1b74fe36b672cb06eaad4c4df54a3ac61aa",
+  "checksum": "sha256:05b111e2680ade857e581008c78c093d00184382feb002e2d04b6b562849cbf1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1135,
+    "genesisAdmissionIdentity": "genesis-admission:595ca3eb10c996fa749aebd967add05b856f884592adf7f0f15864b4187a8995",
+    "historicalSourceId": "genesis-source:commit:39b8f1b74fe36b672cb06eaad4c4df54a3ac61aa",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:39b8f1b74fe36b672cb06eaad4c4df54a3ac61aa",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "39b8f1b74fe36b672cb06eaad4c4df54a3ac61aa",
+      "parentShas": [
+        "1942d52d76ee65744ccff2945b5f5d8c4793ec4c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785997494000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785997494000
+      },
+      "subject": "feat(knowledge): synchronize organizational impact outcomes",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx"
+      ],
+      "changedPathsByParent": {
+        "1942d52d76ee65744ccff2945b5f5d8c4793ec4c": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:39b8f1b74fe36b672cb06eaad4c4df54a3ac61aa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

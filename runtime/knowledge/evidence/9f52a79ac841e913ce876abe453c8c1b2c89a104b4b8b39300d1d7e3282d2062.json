@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:fd21789ed41ce31ee4d754ee4adac98bab2faf5fd155ce5b9896d96d5f3d99d9",
+  "type": "commit",
+  "title": "feat(knowledge): add canonical review policy binding",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240121178,
+  "observedAt": 1787425895000,
+  "contentRef": "git:commit:f62071236db0f2efba37cbc70de4ba6cb9836cb1",
+  "checksum": "sha256:9403a9914f944f345108eee65cce9ed332fe0630df3d595f01246afd1cfd2d6d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1543,
+    "genesisAdmissionIdentity": "genesis-admission:ff5d285f7cc19ba6acc62fecd542555457239c9896b950358d2d04a06e578751",
+    "historicalSourceId": "genesis-source:commit:f62071236db0f2efba37cbc70de4ba6cb9836cb1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f62071236db0f2efba37cbc70de4ba6cb9836cb1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f62071236db0f2efba37cbc70de4ba6cb9836cb1",
+      "parentShas": [
+        "feb0c1074c1468774d6de884fd091f582819d10b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787425895000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787425895000
+      },
+      "subject": "feat(knowledge): add canonical review policy binding",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewPolicyBindingService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewPolicyBindingService.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/review/index.ts"
+      ],
+      "changedPathsByParent": {
+        "feb0c1074c1468774d6de884fd091f582819d10b": [
+          "apps/lumina-runtime/src/knowledge-preservation/review/CanonicalReviewPolicyBindingService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/__tests__/CanonicalReviewPolicyBindingService.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/review/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f62071236db0f2efba37cbc70de4ba6cb9836cb1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4a00191eeeaec323b829101a6adcb61609b63c79eb344b22acbf412ada4847dc",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Fixing Tailwind Runtime — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e#browser-turn=1",
+  "checksum": "4a00191eeeaec323b829101a6adcb61609b63c79eb344b22acbf412ada4847dc",
+  "metadata": {
+    "content": "Bash# Verify the project starts\nnpm run dev\nIf your terminal shows quote> after pasting, it means the shell thinks you started a quoted string or unfinished command.\nFix\nPress:\nBashCtrl + C\nThen run only:\nBashnpm run dev\nExpected Result\nYou should see output similar to:\nBashVITE vX.X.X ready in ...\nLocal: http://localhost:8080\nor\nBashLocal: http://localhost:5173\nNext Step\nKeep this dev server running, and in another terminal open:\nBashhttp://localhost:3000/builder?projectId=lumina-builder\nThis will load the imported Lovable project inside KoreLumina's Builder for the UI readiness audit.",
+    "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "7d24421e-3627-4ba6-8e70-d9b5d8c24550",
+    "speakerRole": "assistant",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69f2586f-9e50-83ea-bbad-30c05354fb2e:message:7d24421e-3627-4ba6-8e70-d9b5d8c24550",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e#browser-turn=1",
+    "sourceRevision": "sha256:419c93b9237174f2c2b930ec7d196ea94145f6271fcd733202c5b61f880cd40e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "275b9c529be5014afc370d6ef4e9f888273ebefcbe5efb3919a5241d902d66af",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:419c93b9237174f2c2b930ec7d196ea94145f6271fcd733202c5b61f880cd40e",
+      "exportRevision": "sha256:419c93b9237174f2c2b930ec7d196ea94145f6271fcd733202c5b61f880cd40e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630596717
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69f2586f-9e50-83ea-bbad-30c05354fb2e:message:7d24421e-3627-4ba6-8e70-d9b5d8c24550"
+    ],
+    "conversation": [
+      "69f2586f-9e50-83ea-bbad-30c05354fb2e"
+    ]
+  }
+}

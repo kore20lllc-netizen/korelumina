@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:0bc25297a047540fcabf2287e48a491bd2adf0556aca22173a7f918cc2784975",
+  "type": "commit",
+  "title": "docs(adr): define knowledge scope architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240074809,
+  "observedAt": 1783058529000,
+  "contentRef": "git:commit:9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea",
+  "checksum": "sha256:fa02a2a3415d30bad16cc350a2626a16fc2bb93af2b28894d56d2ca22550bc1d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 740,
+    "genesisAdmissionIdentity": "genesis-admission:385ac30b0a7e5512dfe7c617f72a33c5989ff3a2170bf1936fef545a498def90",
+    "historicalSourceId": "genesis-source:commit:9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea",
+      "parentShas": [
+        "a17ea1a7e86690783ca9affef09d57bc3a96d318"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783058529000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783058529000
+      },
+      "subject": "docs(adr): define knowledge scope architecture",
+      "body": "",
+      "changedPaths": [
+        "docs/adr/ADR-0039-knowledge-scope-architecture.md"
+      ],
+      "changedPathsByParent": {
+        "a17ea1a7e86690783ca9affef09d57bc3a96d318": [
+          "docs/adr/ADR-0039-knowledge-scope-architecture.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/adr-0039-knowledge-scope-architecture-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9cd96355ba55d4b9f6b25c3d841e63ea2e04dfea"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

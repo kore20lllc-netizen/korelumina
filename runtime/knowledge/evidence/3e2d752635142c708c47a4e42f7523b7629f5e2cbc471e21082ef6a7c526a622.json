@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:978c34373eef37743901d0da5f51d7c315c75ecbbfd8285fc4131a7416d28527",
+  "type": "commit",
+  "title": "chore(knowledge): lock certified UI contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240114022,
+  "observedAt": 1786706558000,
+  "contentRef": "git:commit:71f972f0676e60134d270cb599ea520b832d9b8e",
+  "checksum": "sha256:f03688531828e03a9aef7861ac5f0be61262826d04d07a5d2e5f9c53e8a5db87",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1447,
+    "genesisAdmissionIdentity": "genesis-admission:7d9ebb16f117979a2436817e038cc3aa40d5bc46bc6e6c7934cda05731a16e22",
+    "historicalSourceId": "genesis-source:commit:71f972f0676e60134d270cb599ea520b832d9b8e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:71f972f0676e60134d270cb599ea520b832d9b8e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "71f972f0676e60134d270cb599ea520b832d9b8e",
+      "parentShas": [
+        "8d32a9fbc915ff105e14dd32ab82814432fbf19d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786706558000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786706558000
+      },
+      "subject": "chore(knowledge): lock certified UI contract",
+      "body": "",
+      "changedPaths": [
+        "docs/ui-contracts/KNOWLEDGE_OPERATIONS_UI_CONTRACT.md",
+        "docs/ui-contracts/knowledge-operations-certified-ui.json",
+        "package.json",
+        "scripts/knowledge-ui-contract.mjs"
+      ],
+      "changedPathsByParent": {
+        "8d32a9fbc915ff105e14dd32ab82814432fbf19d": [
+          "docs/ui-contracts/KNOWLEDGE_OPERATIONS_UI_CONTRACT.md",
+          "docs/ui-contracts/knowledge-operations-certified-ui.json",
+          "package.json",
+          "scripts/knowledge-ui-contract.mjs"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:71f972f0676e60134d270cb599ea520b832d9b8e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:8b237816a70cb506cc3b66c4cd577d1dfff2c89d168ff6a01a55b9cc1943aee9",
+  "type": "commit",
+  "title": "feat(lumina): extract executive operations deck",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087592,
+  "observedAt": 1785731678000,
+  "contentRef": "git:commit:4f6382728b77a8165c7067e7332daff090dbe0ad",
+  "checksum": "sha256:6bc23acfe39d31e2fd065c060f35f05a027b7737d7403d4977ac9a8b2de0fd30",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1011,
+    "genesisAdmissionIdentity": "genesis-admission:a33fa6bb1270c634715085ffb3432d4a4f85965ddb2197ca0b88c60e39577d58",
+    "historicalSourceId": "genesis-source:commit:4f6382728b77a8165c7067e7332daff090dbe0ad",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4f6382728b77a8165c7067e7332daff090dbe0ad",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4f6382728b77a8165c7067e7332daff090dbe0ad",
+      "parentShas": [
+        "2b3148a52f7f3929b3cff54342975e528ab79135"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785731678000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785731678000
+      },
+      "subject": "feat(lumina): extract executive operations deck",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/lumina/executive/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/executive/operations-deck/LuminaExecutiveOperationsDeck.tsx",
+        "apps/lumina-builder/src/components/design-system/lumina/executive/operations-deck/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx"
+      ],
+      "changedPathsByParent": {
+        "2b3148a52f7f3929b3cff54342975e528ab79135": [
+          "apps/lumina-builder/src/components/design-system/lumina/executive/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/executive/operations-deck/LuminaExecutiveOperationsDeck.tsx",
+          "apps/lumina-builder/src/components/design-system/lumina/executive/operations-deck/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4f6382728b77a8165c7067e7332daff090dbe0ad"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

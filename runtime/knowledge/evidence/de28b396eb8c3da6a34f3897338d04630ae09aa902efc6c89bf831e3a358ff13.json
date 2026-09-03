@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:cf9768dbac2b09d19cef7dcbcf81801f3137a620188b1c755ee6331a1739759d",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Handoff Inspection — message 6",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=6",
+  "checksum": "cf9768dbac2b09d19cef7dcbcf81801f3137a620188b1c755ee6331a1739759d",
+  "metadata": {
+    "content": "Phase 2B.6 is committed, pushed, and verified on GitHub.\n\n\nCommit: c52a33fc6ba9ae3b01f0c2a00842281e34ec2054\n\n\nMessage: feat(lumina): extract executive ribbon\n\n\nRemote branch: inspect/runtime-certified-main\n\n\nRemaining local change: only the protected RuntimeHeader.tsx.\n\n\nPhase 2B Executive Components is now complete. The next milestone is Phase 2C — Navigation extraction.",
+    "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "afb06f33-6ce3-41a8-ac5c-a2acced7c99b",
+    "speakerRole": "assistant",
+    "messageOrder": 6,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:afb06f33-6ce3-41a8-ac5c-a2acced7c99b",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a#browser-turn=6",
+    "sourceRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0c8d12264d02c9c4c48d281b42765e29afc3ddf55b8a8b1a08993eae22444549",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090",
+      "exportRevision": "sha256:c3b57e9521533adff90d75ac9c0b604d5a8b10627a1ee26bc50c74c937380090"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630659669
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c78f2-f41c-83ea-a29d-21579b9b298a:message:afb06f33-6ce3-41a8-ac5c-a2acced7c99b"
+    ],
+    "conversation": [
+      "6a6c78f2-f41c-83ea-a29d-21579b9b298a"
+    ]
+  }
+}

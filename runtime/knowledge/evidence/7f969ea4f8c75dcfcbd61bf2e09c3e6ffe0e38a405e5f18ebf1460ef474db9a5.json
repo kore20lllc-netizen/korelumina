@@ -1,0 +1,111 @@
+{
+  "id": "genesis-evidence:b723cb61eabaa3913d32d881963af55190bf227395898e8de1459815a9ea794e",
+  "type": "commit",
+  "title": "feat(appearance): establish workspace appearance drawer architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081496,
+  "observedAt": 1783678290000,
+  "contentRef": "git:commit:7261b2a3954ac8dd0fe87a6d426be774b6c20c1c",
+  "checksum": "sha256:9fae5e539a2a52943463273227d30409c434c964d9862e0e94b1081d16802ff5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 886,
+    "genesisAdmissionIdentity": "genesis-admission:045221947a787de533381be60ff411c5bec8212a8a12cba547bc6776a054a701",
+    "historicalSourceId": "genesis-source:commit:7261b2a3954ac8dd0fe87a6d426be774b6c20c1c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7261b2a3954ac8dd0fe87a6d426be774b6c20c1c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7261b2a3954ac8dd0fe87a6d426be774b6c20c1c",
+      "parentShas": [
+        "95e5dccf9ee6cc01c146ffcdfd6935d44386f406"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783678290000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783678290000
+      },
+      "subject": "feat(appearance): establish workspace appearance drawer architecture",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/layout/Shell.tsx",
+        "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceAccordion.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceChoiceGroup.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceDropdown.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceHeader.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceRadioGroup.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceSection.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceSlider.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/AppearanceToggle.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceDrawer.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceHeader.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearancePanel.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceTrigger.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/AppearanceCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/GlassCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/LayoutCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/ThemeCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/index.ts",
+        "apps/lumina-builder/src/components/workspace-appearance/index.ts",
+        "apps/lumina-builder/src/components/workspace-appearance/sections/PreviewSection.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/sections/SliderSection.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/sections/index.ts",
+        "apps/lumina-builder/src/components/workspaces/appearance/AppearanceWorkspace.tsx",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx"
+      ],
+      "changedPathsByParent": {
+        "95e5dccf9ee6cc01c146ffcdfd6935d44386f406": [
+          "apps/lumina-builder/src/components/layout/Shell.tsx",
+          "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceAccordion.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceChoiceGroup.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceDropdown.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceHeader.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceRadioGroup.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceSection.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceSlider.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/AppearanceToggle.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceDrawer.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceHeader.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearancePanel.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/WorkspaceAppearanceTrigger.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/AppearanceCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/GlassCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/LayoutCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/ThemeCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/index.ts",
+          "apps/lumina-builder/src/components/workspace-appearance/index.ts",
+          "apps/lumina-builder/src/components/workspace-appearance/sections/PreviewSection.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/sections/SliderSection.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/sections/index.ts",
+          "apps/lumina-builder/src/components/workspaces/appearance/AppearanceWorkspace.tsx",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7261b2a3954ac8dd0fe87a6d426be774b6c20c1c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

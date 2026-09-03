@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:4f16b8dbf935806931fef5525e77290a769840237f936f87c8cc701056669d00",
+  "type": "commit",
+  "title": "feat(lumina): promote executive card",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087488,
+  "observedAt": 1785730822000,
+  "contentRef": "git:commit:5c884e1ab0cd9720b140790accd3b7610c2a2968",
+  "checksum": "sha256:0c1a0dff4c1b4ffe17268a6ac11f09b1b28f1139e034a14d9e93e030fd984206",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1009,
+    "genesisAdmissionIdentity": "genesis-admission:ad9a2890b26171327b116c4e38f934fc28058a538bb5c4a033baa4f7e7d0abc9",
+    "historicalSourceId": "genesis-source:commit:5c884e1ab0cd9720b140790accd3b7610c2a2968",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5c884e1ab0cd9720b140790accd3b7610c2a2968",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5c884e1ab0cd9720b140790accd3b7610c2a2968",
+      "parentShas": [
+        "7b9d81a6ed21e32f2e6655ec307f64218d605ba0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785730822000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785730822000
+      },
+      "subject": "feat(lumina): promote executive card",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/lumina/executive/card/LuminaExecutiveCard.tsx",
+        "apps/lumina-builder/src/components/design-system/lumina/executive/card/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/executive/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/primitives/KnowledgeExecutiveCard.tsx"
+      ],
+      "changedPathsByParent": {
+        "7b9d81a6ed21e32f2e6655ec307f64218d605ba0": [
+          "apps/lumina-builder/src/components/design-system/lumina/executive/card/LuminaExecutiveCard.tsx",
+          "apps/lumina-builder/src/components/design-system/lumina/executive/card/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/executive/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/primitives/KnowledgeExecutiveCard.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5c884e1ab0cd9720b140790accd3b7610c2a2968"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f7a7b65d02426b107d1eecd727f7295345b8a8bdb8a6663da3589cc14b8f4e4e",
+  "type": "commit",
+  "title": "refactor(knowledge): remove obsolete learning status badge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240101491,
+  "observedAt": 1786317736000,
+  "contentRef": "git:commit:70a2d33d26e2b866f195c6bc451fcdc24c15e50b",
+  "checksum": "sha256:5c2526c9c83d1d0f2b05a0c5c34425627ce350a78070a14a02586d7c0d1e7545",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1259,
+    "genesisAdmissionIdentity": "genesis-admission:c37681d3fef2a9c2c7dc04e5ab53b4e645768f935e46031ec8dea6f39f09d8a6",
+    "historicalSourceId": "genesis-source:commit:70a2d33d26e2b866f195c6bc451fcdc24c15e50b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:70a2d33d26e2b866f195c6bc451fcdc24c15e50b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "70a2d33d26e2b866f195c6bc451fcdc24c15e50b",
+      "parentShas": [
+        "1e2e3166cdce30f5340199baca2fba589e8ffcb1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786317736000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786317736000
+      },
+      "subject": "refactor(knowledge): remove obsolete learning status badge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/LearningStatusBadge.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+      ],
+      "changedPathsByParent": {
+        "1e2e3166cdce30f5340199baca2fba589e8ffcb1": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/LearningStatusBadge.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:70a2d33d26e2b866f195c6bc451fcdc24c15e50b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

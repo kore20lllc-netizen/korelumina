@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:84ebc2c51816431bdc285e3169fec3c5d6ac551126f9eb5a0b4878d2944ae5d3",
+  "type": "commit",
+  "title": "feat(education): add historical conversation coverage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240133403,
+  "observedAt": 1788128200000,
+  "contentRef": "git:commit:1ca5375aeaef91d55bbf889dadf152b6866367af",
+  "checksum": "sha256:4fd07f180411ebc9dab832a457937918e8b0ec3d52c160988626c6f19e53b8d1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1691,
+    "genesisAdmissionIdentity": "genesis-admission:060acb248950031e95af504c40b0980f742f87e48e8be90ed54fa200b226141a",
+    "historicalSourceId": "genesis-source:commit:1ca5375aeaef91d55bbf889dadf152b6866367af",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1ca5375aeaef91d55bbf889dadf152b6866367af",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1ca5375aeaef91d55bbf889dadf152b6866367af",
+      "parentShas": [
+        "2a7ac57e015c18b4a4ff208a2c5542f00011ae24"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788128200000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788128200000
+      },
+      "subject": "feat(education): add historical conversation coverage",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/HistoricalConversationEducationalCoverage.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/HistoricalConversationEducationalCoverage.test.ts"
+      ],
+      "changedPathsByParent": {
+        "2a7ac57e015c18b4a4ff208a2c5542f00011ae24": [
+          "apps/lumina-runtime/src/knowledge-education/HistoricalConversationEducationalCoverage.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/HistoricalConversationEducationalCoverage.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1ca5375aeaef91d55bbf889dadf152b6866367af"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

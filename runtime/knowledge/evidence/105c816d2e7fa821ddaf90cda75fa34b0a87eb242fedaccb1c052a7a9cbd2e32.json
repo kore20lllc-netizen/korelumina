@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:05b9b9f0ec9e7803e6dcb540762f9137b27055ec5a5f46bf7f679a73da5197c6",
+  "type": "commit",
+  "title": "education: derive explainable grounding competency evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129354,
+  "observedAt": 1787807946000,
+  "contentRef": "git:commit:d9e77471632c9ef887e22dbccd5914eb6e6f6a7b",
+  "checksum": "sha256:07695b67ecadbe31bdcbd186348b54040fea680de49c851d2cc1aad54f6e62d0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1644,
+    "genesisAdmissionIdentity": "genesis-admission:1dbc1ac37e3ed0b666012724ef68b6b10542929ec671568f82a4f3f1d64c2750",
+    "historicalSourceId": "genesis-source:commit:d9e77471632c9ef887e22dbccd5914eb6e6f6a7b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d9e77471632c9ef887e22dbccd5914eb6e6f6a7b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d9e77471632c9ef887e22dbccd5914eb6e6f6a7b",
+      "parentShas": [
+        "beb09520079c54bd219abd8ecf3bb6350ca314d7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787807946000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787807946000
+      },
+      "subject": "education: derive explainable grounding competency evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/ExplainableGroundingCompetencyEvidenceAdapter.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/ExplainableGroundingCompetencyEvidenceAdapter.test.ts"
+      ],
+      "changedPathsByParent": {
+        "beb09520079c54bd219abd8ecf3bb6350ca314d7": [
+          "apps/lumina-runtime/src/knowledge-education/ExplainableGroundingCompetencyEvidenceAdapter.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/ExplainableGroundingCompetencyEvidenceAdapter.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d9e77471632c9ef887e22dbccd5914eb6e6f6a7b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

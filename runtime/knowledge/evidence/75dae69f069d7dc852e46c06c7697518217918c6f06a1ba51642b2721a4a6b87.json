@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:3c4e71d26e5ac808abde45b3734d4c968733c273d0e72ac8fe022c103bfee201",
+  "type": "document",
+  "title": "KoreLumina Reconstruction Roadmap",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082053,
+  "observedAt": 1783748718000,
+  "contentRef": "docs/architecture/KORELUMINA_RECONSTRUCTION_ROADMAP.md",
+  "checksum": "sha256:d7be409c265072c4153191dcb7c2ee6a38ed5c337d209c5319ab331509549689",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 898,
+    "genesisAdmissionIdentity": "genesis-admission:455598c5b889535858ee9bd1326fd41f35cb4ba63802345dbb0fc08382d7d80a",
+    "historicalSourceId": "genesis-source:document:derived:467088833c756eab2eded991c8d6711a84b61e92545d9f0c7bf44bfedb5f6bf3",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_ROADMAP.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Reconstruction Roadmap",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_ROADMAP.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:467088833c756eab2eded991c8d6711a84b61e92545d9f0c7bf44bfedb5f6bf3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:87e2082c4c1580ba03e74dd49a6ab117c8c58590a30acd179e90a6f8a8ffee38",
+  "type": "commit",
+  "title": "fix(knowledge): retrieve organizational memory from natural language queries",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240110420,
+  "observedAt": 1786530505000,
+  "contentRef": "git:commit:b1e3747089a637d884c98c8aac6257e9fa7dd450",
+  "checksum": "sha256:2ccc14d2ddcaf683242ec18404577caee3a2834ba066d092715c841559b8a7dc",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1396,
+    "genesisAdmissionIdentity": "genesis-admission:41cedf4aed20690f01f57f39b2a5afdbcc888a1ee64ca4e2f9919395bf7a3e3c",
+    "historicalSourceId": "genesis-source:commit:b1e3747089a637d884c98c8aac6257e9fa7dd450",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b1e3747089a637d884c98c8aac6257e9fa7dd450",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b1e3747089a637d884c98c8aac6257e9fa7dd450",
+      "parentShas": [
+        "89d07adacdd22bb6ab31bb6692c5be2b94c771ba"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786530505000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786530505000
+      },
+      "subject": "fix(knowledge): retrieve organizational memory from natural language queries",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/RuntimeOrganizationalMemoryProvider.ts",
+        "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/__tests__/RuntimeOrganizationalMemoryProvider.test.ts"
+      ],
+      "changedPathsByParent": {
+        "89d07adacdd22bb6ab31bb6692c5be2b94c771ba": [
+          "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/RuntimeOrganizationalMemoryProvider.ts",
+          "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/__tests__/RuntimeOrganizationalMemoryProvider.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b1e3747089a637d884c98c8aac6257e9fa7dd450"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:c8fd6ae545d911921cd8c2af6e6ef816181e7a306f692cd4c2b5201d9d4f9a2a",
+  "type": "commit",
+  "title": "feat(executive): gate canonical reasoning by Genesis policy",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240123379,
+  "observedAt": 1787544477000,
+  "contentRef": "git:commit:570de92d03981fdc4eca3ff82dfb81035ff3555d",
+  "checksum": "sha256:311ca2bd1fa7174fc6de4312f39c7790c9d2a69c174db915f87cb0bbd9413bfe",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1571,
+    "genesisAdmissionIdentity": "genesis-admission:0c972fecadf96ca2742fa69fc305b87d7741d4844ff8a48d70c9dcaea5c9b601",
+    "historicalSourceId": "genesis-source:commit:570de92d03981fdc4eca3ff82dfb81035ff3555d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:570de92d03981fdc4eca3ff82dfb81035ff3555d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "570de92d03981fdc4eca3ff82dfb81035ff3555d",
+      "parentShas": [
+        "88b23786d7cd72bc73014915f633f12b4c4af8d0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787544477000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787544477000
+      },
+      "subject": "feat(executive): gate canonical reasoning by Genesis policy",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningCurrentPolicy.test.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderCurrentPolicy.test.ts"
+      ],
+      "changedPathsByParent": {
+        "88b23786d7cd72bc73014915f633f12b4c4af8d0": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningCurrentPolicy.test.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderCurrentPolicy.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:570de92d03981fdc4eca3ff82dfb81035ff3555d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

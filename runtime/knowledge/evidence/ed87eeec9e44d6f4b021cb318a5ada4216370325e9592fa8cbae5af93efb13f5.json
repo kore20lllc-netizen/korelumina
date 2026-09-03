@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c886475b0b5b35bfcbd5636b534d155cbae9c3217cf264ff78347d15ee9cca04",
+  "type": "commit",
+  "title": "feat(executive): compose chief agent knowledge context",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240109262,
+  "observedAt": 1786445452000,
+  "contentRef": "git:commit:ff40bad73bc8cb8f32f94c4e28b21ae529c92e4f",
+  "checksum": "sha256:4d84e8dad7635e25c855d4524dc25e273fee2ca9bef0ae6f1c0e3735f8438977",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1379,
+    "genesisAdmissionIdentity": "genesis-admission:a8b0582ec21ba302762216178d777b54a10d6b329a1905307cb2285b47666251",
+    "historicalSourceId": "genesis-source:commit:ff40bad73bc8cb8f32f94c4e28b21ae529c92e4f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ff40bad73bc8cb8f32f94c4e28b21ae529c92e4f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ff40bad73bc8cb8f32f94c4e28b21ae529c92e4f",
+      "parentShas": [
+        "82c0394736c3ff9f24082bf101117312a1566f74"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786445452000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786445452000
+      },
+      "subject": "feat(executive): compose chief agent knowledge context",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/orchestrator/__tests__/createExecutiveOrchestratorKnowledgeContext.test.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/createExecutiveOrchestrator.ts"
+      ],
+      "changedPathsByParent": {
+        "82c0394736c3ff9f24082bf101117312a1566f74": [
+          "apps/lumina-runtime/src/executive/orchestrator/__tests__/createExecutiveOrchestratorKnowledgeContext.test.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/createExecutiveOrchestrator.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ff40bad73bc8cb8f32f94c4e28b21ae529c92e4f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:01e53cff377bdcd9c5d5a617849f11d2c9761eefe9cfceff90879f99f9d7e8bc",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - Fix JournalPanel Crash — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=1",
+  "checksum": "01e53cff377bdcd9c5d5a617849f11d2c9761eefe9cfceff90879f99f9d7e8bc",
+  "metadata": {
+    "content": "(base) erictouko@MacBook-Pro korelumina % git add .\ngit commit -m \"checkpoint(builder-core): stable UI (filetree/editor/preview/ai panel all rendering clean)\"\ngit tag builder-ui-stable\ngit push origin main\ngit push origin builder-ui-stable\n[main b85079c] checkpoint(builder-core): stable UI (filetree/editor/preview/ai panel all rendering clean)\n 6 files changed, 761 insertions(+), 5501 deletions(-)\n create mode 100644 components/builder/FileTree.tsx\nTo https://github.com/kore20lllc-netizen/korelumina.git\n ! [rejected]        main -> main (non-fast-forward)\nerror: failed to push some refs to 'https://github.com/kore20lllc-netizen/korelumina.git'\nhint: Updates were rejected because the tip of your current branch is behind\nhint: its remote counterpart. If you want to integrate the remote changes,\nhint: use 'git pull' before pushing again.\nhint: See the 'Note about fast-forwards' in 'git push --help' for details.\nEnumerating objects: 30, done.\nCounting objects: 100% (30/30), done.\nDelta compression using up to 10 threads\nCompressing objects: 100% (14/14), done.\nWriting objects: 100% (16/16), 5.93 KiB | 2.97 MiB/s, done.\nTotal 16 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)\nremote: Resolving deltas: 100% (10/10), completed with 10 local objects.\nTo https://github.com/kore20lllc-netizen/korelumina.git\n * [new tag]         builder-ui-stable -> builder-ui-stable",
+    "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "0da137e2-60d7-4fdf-a16a-3ae5e06960fc",
+    "speakerRole": "user",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:0da137e2-60d7-4fdf-a16a-3ae5e06960fc",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=1",
+    "sourceRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+    "segmentAvailability": "available",
+    "conversationChecksum": "37984edfedd9f57e78d643b85f2079133f345b1d12dfbc741c2850d3a85fb791",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+      "exportRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610831796
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:0da137e2-60d7-4fdf-a16a-3ae5e06960fc"
+    ],
+    "conversation": [
+      "69cc7bdc-82ac-8329-b252-f0bce4d5a035"
+    ]
+  }
+}

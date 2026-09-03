@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:df6a8f84a757b12ea58193245964726ebf33743a59a7a97ad340315c942c290b",
+  "type": "document",
+  "title": "KoreLumina Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076075,
+  "observedAt": 1783142420000,
+  "contentRef": "docs/architecture/README.md",
+  "checksum": "sha256:7778b023d74aa6caab7b572a29b5d06d429d3e599501520a1ade16aa068c228a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 765,
+    "genesisAdmissionIdentity": "genesis-admission:834e979ba0d04009279e5c4a60cf0891dd27b4cbdb105a6c9f1835c275139e38",
+    "historicalSourceId": "genesis-source:document:derived:92691389bf6252f222606d3e5d3865e606a362bccc8d0cd770c5048270abb25c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/README.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/README.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:92691389bf6252f222606d3e5d3865e606a362bccc8d0cd770c5048270abb25c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

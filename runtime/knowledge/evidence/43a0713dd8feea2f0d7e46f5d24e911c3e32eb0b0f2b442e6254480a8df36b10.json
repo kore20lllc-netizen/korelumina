@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:cc53d36639dcb745db834e7a7924ab419501a9ecd4a646e6d2a1598fbb47f8a2",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship panel in pipeline artifact inspector",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240097540,
+  "observedAt": 1786130574000,
+  "contentRef": "git:commit:8ee9baa28dfd26d70a75eb11c0a8dd567d0a46b9",
+  "checksum": "sha256:8d05965621986125004e59f66b7d8fb6ac1e37524a1a7cd4b0160aa35d64aa05",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1193,
+    "genesisAdmissionIdentity": "genesis-admission:9ad6bf8f951d8d63c855c7fec603dcb7fd64ea5bc5cfe81aa635da135bddc391",
+    "historicalSourceId": "genesis-source:commit:8ee9baa28dfd26d70a75eb11c0a8dd567d0a46b9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8ee9baa28dfd26d70a75eb11c0a8dd567d0a46b9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8ee9baa28dfd26d70a75eb11c0a8dd567d0a46b9",
+      "parentShas": [
+        "08e07de97978399b0faeb9b3e3b50069d41de8cf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786130574000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786130574000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship panel in pipeline artifact inspector",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/PipelineArtifactInspector.tsx"
+      ],
+      "changedPathsByParent": {
+        "08e07de97978399b0faeb9b3e3b50069d41de8cf": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/PipelineArtifactInspector.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8ee9baa28dfd26d70a75eb11c0a8dd567d0a46b9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

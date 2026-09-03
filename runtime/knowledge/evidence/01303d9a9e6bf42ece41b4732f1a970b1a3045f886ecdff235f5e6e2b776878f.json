@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4b1dac0433ef4f936a46e7d5ab83806671498e4a2c14be4597c28cd37b43a5e6",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Lumina Design System Extraction — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67#browser-turn=3",
+  "checksum": "4b1dac0433ef4f936a46e7d5ab83806671498e4a2c14be4597c28cd37b43a5e6",
+  "metadata": {
+    "content": "next",
+    "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "4d65e941-f881-44de-85f6-0c969c78a5cf",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a701da5-f8b4-83ea-a850-e15922effa67:message:4d65e941-f881-44de-85f6-0c969c78a5cf",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67#browser-turn=3",
+    "sourceRevision": "sha256:5d2843e02d8c8507158625aed8849b768b0a33ce9fba541187dfdecc4f056bd7",
+    "segmentAvailability": "available",
+    "conversationChecksum": "d137e91746f6bca73349d83d265c1ebffaf62258c674d2b287120454519a54c1",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:5d2843e02d8c8507158625aed8849b768b0a33ce9fba541187dfdecc4f056bd7",
+      "exportRevision": "sha256:5d2843e02d8c8507158625aed8849b768b0a33ce9fba541187dfdecc4f056bd7"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630812680
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a701da5-f8b4-83ea-a850-e15922effa67:message:4d65e941-f881-44de-85f6-0c969c78a5cf"
+    ],
+    "conversation": [
+      "6a701da5-f8b4-83ea-a850-e15922effa67"
+    ]
+  }
+}

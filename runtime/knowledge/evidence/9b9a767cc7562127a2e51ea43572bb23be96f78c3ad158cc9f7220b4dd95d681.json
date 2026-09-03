@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:02b9d4b62eec0c31cee6c57b02cdc72696848c42eb0bd68fc83d45c370f23b6b",
+  "type": "commit",
+  "title": "feat(m51): preserve section provenance in documentation knowledge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129775,
+  "observedAt": 1787862608000,
+  "contentRef": "git:commit:d820b0c75e82022c63cc990a315a5de8eb3b5cc1",
+  "checksum": "sha256:fc8106c101c6a0e0f343b7ad2b248cb613cf1e4dd432abbe9d8c0798eaeed70b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1649,
+    "genesisAdmissionIdentity": "genesis-admission:bc31aa4b760603e522e05704eb303e9af3fa1c61ab9670500c2d694f3381d547",
+    "historicalSourceId": "genesis-source:commit:d820b0c75e82022c63cc990a315a5de8eb3b5cc1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d820b0c75e82022c63cc990a315a5de8eb3b5cc1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d820b0c75e82022c63cc990a315a5de8eb3b5cc1",
+      "parentShas": [
+        "18c4ff19d55af8b5de3b608b00740675a32009f1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787862608000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787862608000
+      },
+      "subject": "feat(m51): preserve section provenance in documentation knowledge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/DocumentationCompiler.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/__tests__/M51SectionProvenanceBridge.test.ts"
+      ],
+      "changedPathsByParent": {
+        "18c4ff19d55af8b5de3b608b00740675a32009f1": [
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/DocumentationCompiler.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/documentation/__tests__/M51SectionProvenanceBridge.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d820b0c75e82022c63cc990a315a5de8eb3b5cc1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e4d8f3895cf11d17f194210c66cd34380148b7942006ad66056dbf06b342fd2f",
+  "type": "commit",
+  "title": "governance: establish Platform Constitution identity",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240128767,
+  "observedAt": 1787784532000,
+  "contentRef": "git:commit:ae76ca2062fa26fd07682c8806e0c19fa058cd7b",
+  "checksum": "sha256:e18cccdf98c370b00df5d713b15f9a8066ed299a32bb55c0b8e9911907ef66d0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1637,
+    "genesisAdmissionIdentity": "genesis-admission:8f4c49e1dc2b03e1b22b1ca2e9553909c60cfbb576e1e2fb6823aa6d9c13eeb7",
+    "historicalSourceId": "genesis-source:commit:ae76ca2062fa26fd07682c8806e0c19fa058cd7b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ae76ca2062fa26fd07682c8806e0c19fa058cd7b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ae76ca2062fa26fd07682c8806e0c19fa058cd7b",
+      "parentShas": [
+        "f378da88b82e0224d89bc1c748325a8956af9f3d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787784532000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787784532000
+      },
+      "subject": "governance: establish Platform Constitution identity",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+        "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md"
+      ],
+      "changedPathsByParent": {
+        "f378da88b82e0224d89bc1c748325a8956af9f3d": [
+          "docs/architecture/00_PLATFORM_CONSTITUTION.md",
+          "docs/architecture/amendments/CA-006_PLATFORM_CONSTITUTION_IDENTITY.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ae76ca2062fa26fd07682c8806e0c19fa058cd7b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

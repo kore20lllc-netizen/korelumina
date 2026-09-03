@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:f0e9935f8c0af515c63543516d405ac9f6c8846e2ae1f5b76c3d86e91bd3abfc",
+  "type": "document",
+  "title": "KOW-004 — Knowledge Operations Data Flow Contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084106,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-004_DATA_FLOW.md",
+  "checksum": "sha256:dd4d7b05fc975f852f8b52f903b7721e78ed1bf3edac4529c522c6412d969c4a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 941,
+    "genesisAdmissionIdentity": "genesis-admission:bad5b70a2257e8c03933389b9f50727a534b94b29fabc6f1938298a8d2e5dd0c",
+    "historicalSourceId": "genesis-source:document:derived:090f10466156a8ecf610037819723761c1cd041a67bcfe144cb35e1f297abeb2",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Proposed for approval",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-004_DATA_FLOW.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-004 — Knowledge Operations Data Flow Contract",
+      "status": "Proposed for approval",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-004_DATA_FLOW.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:090f10466156a8ecf610037819723761c1cd041a67bcfe144cb35e1f297abeb2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

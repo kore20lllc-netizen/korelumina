@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c93445e949b333f63ebc16391cafda8b1e3b8646f63a87fc7c04bbebab023678",
+  "type": "commit",
+  "title": "docs(repository): establish documentation operating system",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076961,
+  "observedAt": 1783195598000,
+  "contentRef": "git:commit:5299a6e1893c0194400393f9670bf1b9e0103b6e",
+  "checksum": "sha256:5ac3df37a87229e4f9277a02d0f26d8989a43aa1c27118c114ab68c72aeb3f43",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 785,
+    "genesisAdmissionIdentity": "genesis-admission:374e9fab4d9f08f6a30cbe00af284dbb2bbf040e9b2f59d87bc2dd6f3fedd238",
+    "historicalSourceId": "genesis-source:commit:5299a6e1893c0194400393f9670bf1b9e0103b6e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5299a6e1893c0194400393f9670bf1b9e0103b6e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5299a6e1893c0194400393f9670bf1b9e0103b6e",
+      "parentShas": [
+        "439ce3fdf330da018e4a97716de02690c5e71271"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195598000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195598000
+      },
+      "subject": "docs(repository): establish documentation operating system",
+      "body": "",
+      "changedPaths": [
+        "docs/README.md"
+      ],
+      "changedPathsByParent": {
+        "439ce3fdf330da018e4a97716de02690c5e71271": [
+          "docs/README.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/docs-readme-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5299a6e1893c0194400393f9670bf1b9e0103b6e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

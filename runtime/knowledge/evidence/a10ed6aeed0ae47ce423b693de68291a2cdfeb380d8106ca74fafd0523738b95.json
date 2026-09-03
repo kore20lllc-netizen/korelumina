@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:d93fd145d07d1ef69ff4e5ef1fa0865ecc8a164e93a89d4a51f6e09c585905b1",
+  "type": "commit",
+  "title": "feat(genesis): add day-zero certification operator ui",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240125136,
+  "observedAt": 1787572109000,
+  "contentRef": "git:commit:e99de432f8eb7520e9c1b147f94b0416457e204b",
+  "checksum": "sha256:6dde48a06801a7aaf440cf73aeecb32991daf401c119829acd886b5614b48688",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1593,
+    "genesisAdmissionIdentity": "genesis-admission:2339aeb8b496e4e9e9d6e3d2e66f931852264c1ef9620cb4f18dc7b8961eee55",
+    "historicalSourceId": "genesis-source:commit:e99de432f8eb7520e9c1b147f94b0416457e204b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e99de432f8eb7520e9c1b147f94b0416457e204b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e99de432f8eb7520e9c1b147f94b0416457e204b",
+      "parentShas": [
+        "8fc602876e1aa3b9e1693b6c6d50bb181a487ce3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787572109000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787572109000
+      },
+      "subject": "feat(genesis): add day-zero certification operator ui",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisDayZeroCertificationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisOperationalProjectionPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisReplayReadWorkspace.tsx",
+        "apps/lumina-builder/src/hooks/useGenesisDayZeroCertification.ts",
+        "apps/lumina-builder/src/services/runtime/genesisDayZeroCertification.ts"
+      ],
+      "changedPathsByParent": {
+        "8fc602876e1aa3b9e1693b6c6d50bb181a487ce3": [
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisDayZeroCertificationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisOperationalProjectionPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisReplayReadWorkspace.tsx",
+          "apps/lumina-builder/src/hooks/useGenesisDayZeroCertification.ts",
+          "apps/lumina-builder/src/services/runtime/genesisDayZeroCertification.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e99de432f8eb7520e9c1b147f94b0416457e204b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

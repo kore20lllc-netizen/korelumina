@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:a559e1b966321417ea98d5b75941a7b95166b0be3858af1fbad31389ed1c189e",
+  "type": "commit",
+  "title": "feat(m51): add initial competency human acceptance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131928,
+  "observedAt": 1787944837000,
+  "contentRef": "git:commit:9034f2e7bd8e4e5bd89d6d9462429537ea7e6777",
+  "checksum": "sha256:8556800524cad6e549852c7c1e2cdfcce390a8fc1cad1d223da584f41146978e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1674,
+    "genesisAdmissionIdentity": "genesis-admission:9e0b7d1e429c92ee2505c6f07f1b559fc179979c4f55c516e555be1c1ee7159a",
+    "historicalSourceId": "genesis-source:commit:9034f2e7bd8e4e5bd89d6d9462429537ea7e6777",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9034f2e7bd8e4e5bd89d6d9462429537ea7e6777",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9034f2e7bd8e4e5bd89d6d9462429537ea7e6777",
+      "parentShas": [
+        "d338025addeb407d36a28cb6eb9cbcede68c8407"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787944837000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787944837000
+      },
+      "subject": "feat(m51): add initial competency human acceptance",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptance.ts",
+        "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptancePersistence.ts",
+        "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptanceService.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/M51InitialCompetencyHumanAcceptance.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "d338025addeb407d36a28cb6eb9cbcede68c8407": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptance.ts",
+          "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptancePersistence.ts",
+          "apps/lumina-runtime/src/knowledge-education/InitialCompetencyHumanAcceptanceService.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/M51InitialCompetencyHumanAcceptance.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9034f2e7bd8e4e5bd89d6d9462429537ea7e6777"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

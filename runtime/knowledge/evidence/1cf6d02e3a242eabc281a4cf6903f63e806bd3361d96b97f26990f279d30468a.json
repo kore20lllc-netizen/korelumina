@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:188a71be83cff6dada9db6cab48016770471c6b16e3ee057997547b409e3628e",
+  "type": "commit",
+  "title": "fix(m51): normalize documentation approval state",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131413,
+  "observedAt": 1787885624000,
+  "contentRef": "git:commit:1dc1f2f34979cdd28fbfd7367b58fada05e15dc0",
+  "checksum": "sha256:e84d2196e4647c01e0622fff4dfd8394047d0ae640f42a74bf285895a5d97e75",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1668,
+    "genesisAdmissionIdentity": "genesis-admission:8451c4df22de562afb55bf0c144828beedb399511872bbce9f4bc2e952065968",
+    "historicalSourceId": "genesis-source:commit:1dc1f2f34979cdd28fbfd7367b58fada05e15dc0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1dc1f2f34979cdd28fbfd7367b58fada05e15dc0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1dc1f2f34979cdd28fbfd7367b58fada05e15dc0",
+      "parentShas": [
+        "5064afdaa614f2c321949d07186dc838f0391c84"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787885624000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787885624000
+      },
+      "subject": "fix(m51): normalize documentation approval state",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/validation/documentation/DocumentationGovernanceValidator.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/validation/documentation/__tests__/M51DocumentationApprovalNormalization.test.ts"
+      ],
+      "changedPathsByParent": {
+        "5064afdaa614f2c321949d07186dc838f0391c84": [
+          "apps/lumina-runtime/src/knowledge-preservation/validation/documentation/DocumentationGovernanceValidator.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/validation/documentation/__tests__/M51DocumentationApprovalNormalization.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1dc1f2f34979cdd28fbfd7367b58fada05e15dc0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

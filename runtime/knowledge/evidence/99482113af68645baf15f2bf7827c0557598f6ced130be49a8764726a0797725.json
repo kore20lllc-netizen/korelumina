@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:08961b637d772dcad0f56047cf7b5116201ac78cdd9b9c0c2b10af0c9ce6eb26",
+  "type": "commit",
+  "title": "docs(m51): ratify chief agent authority identity",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131240,
+  "observedAt": 1787873068000,
+  "contentRef": "git:commit:387f977a2e8571c18f02413a08bb628ac0d320a0",
+  "checksum": "sha256:38301cbd4972f130517d07f3af739eb019d46da871e12dc086f16cbbee16c650",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1666,
+    "genesisAdmissionIdentity": "genesis-admission:83141d1f03c21b10dde8ad3a89fde5c80cf0a84a6b50296c66ea74dfff1947a9",
+    "historicalSourceId": "genesis-source:commit:387f977a2e8571c18f02413a08bb628ac0d320a0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:387f977a2e8571c18f02413a08bb628ac0d320a0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "387f977a2e8571c18f02413a08bb628ac0d320a0",
+      "parentShas": [
+        "69c0ff4742736f6e8473afdd01ab410b826ba34a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787873068000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787873068000
+      },
+      "subject": "docs(m51): ratify chief agent authority identity",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+        "docs/architecture/reconciliation/CHIEF_AGENT_AUTHORITY_IDENTITY_RECONCILIATION.md",
+        "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md",
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+      ],
+      "changedPathsByParent": {
+        "69c0ff4742736f6e8473afdd01ab410b826ba34a": [
+          "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+          "docs/architecture/reconciliation/CHIEF_AGENT_AUTHORITY_IDENTITY_RECONCILIATION.md",
+          "docs/chief-agent/CHIEF_AGENT_MISSION_SYSTEM.md",
+          "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:387f977a2e8571c18f02413a08bb628ac0d320a0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

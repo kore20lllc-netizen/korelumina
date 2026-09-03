@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:fd925248299a590c35b5381b22a0346ee74752f758ee468c9a14074307ec685a",
+  "type": "document",
+  "title": "Lumina Design System Extraction Stage 2 Certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087994,
+  "observedAt": 1785754861000,
+  "contentRef": "docs/architecture/LUMINA_DESIGN_SYSTEM_EXTRACTION_STAGE_2_CERTIFICATION.md",
+  "checksum": "sha256:579dee650365541460da2fed11ff9bdbfa5c195d6eda62b588163d00dd4ad2ad",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1019,
+    "genesisAdmissionIdentity": "genesis-admission:4ed03ff1a6706113b25a7e80addcd52cc06440a45ed390acb3970232c4d0025f",
+    "historicalSourceId": "genesis-source:document:derived:b91494c9b892d98ae8cb7048cf1b0a410e046f05738f8a1168f60ab59fe28b54",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Architecture",
+    "approvalState": "Certified",
+    "owner": "Chief Systems Architect",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_EXTRACTION_STAGE_2_CERTIFICATION.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Design System Extraction Stage 2 Certification",
+      "status": "Certified",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM_EXTRACTION_STAGE_2_CERTIFICATION.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:b91494c9b892d98ae8cb7048cf1b0a410e046f05738f8a1168f60ab59fe28b54"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "genesis-evidence:50e44652075390ea71b05f0001dd29d45a89bb532f9046123a92b5ea242bdf1b",
+  "type": "commit",
+  "title": "feat(lumina): add executive runtime presentation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086223,
+  "observedAt": 1785477665000,
+  "contentRef": "git:commit:fab851ad84fa65529aca8303c9d73b4b7d00ca0e",
+  "checksum": "sha256:8a78430623f6ba823912ab52f54af05aeac33b234cac40ff7705cddcb0b7ffea",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 984,
+    "genesisAdmissionIdentity": "genesis-admission:31bb572081a32c846200bc8296c3138c53c8deaa804162e36324dfec44947dda",
+    "historicalSourceId": "genesis-source:commit:fab851ad84fa65529aca8303c9d73b4b7d00ca0e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fab851ad84fa65529aca8303c9d73b4b7d00ca0e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fab851ad84fa65529aca8303c9d73b4b7d00ca0e",
+      "parentShas": [
+        "dd6d00a8fa75160ffce20d9d095e723f9f2d227b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785477665000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785477665000
+      },
+      "subject": "feat(lumina): add executive runtime presentation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveActivityRail.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveDivider.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveExecutionFrame.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveGlassPanel.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveInspectorDock.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelBody.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelContour.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveSection.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveSpatialCanvas.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/ExecutiveWorkspaceShell.tsx",
+        "apps/lumina-builder/src/components/lumina/executive/index.ts",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaCompositionSurface.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "dd6d00a8fa75160ffce20d9d095e723f9f2d227b": [
+          "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveActivityRail.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveDivider.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveExecutionFrame.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveGlassPanel.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveInspectorDock.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelBody.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelContour.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutivePanelHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveSection.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveSpatialCanvas.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/ExecutiveWorkspaceShell.tsx",
+          "apps/lumina-builder/src/components/lumina/executive/index.ts",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaCompositionSurface.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fab851ad84fa65529aca8303c9d73b4b7d00ca0e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

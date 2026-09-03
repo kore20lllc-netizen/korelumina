@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:a91f03e620f4d08ceee9833c80573205dc351f7be9decb6f4702fd97dabd0f36",
+  "type": "commit",
+  "title": "refactor(runtime): migrate project row to Lumina primitives",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079979,
+  "observedAt": 1783567339000,
+  "contentRef": "git:commit:7026646cf915a2cec8bf5d02f304432e640a69f9",
+  "checksum": "sha256:2271ce2221f413b7e3252024235851283fa995f81ef0bd0835521bbe9b869ed9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 853,
+    "genesisAdmissionIdentity": "genesis-admission:6b5003f53516c83fd9081fc951208d8a9678dd5d9c130cf112b256441f2f60fb",
+    "historicalSourceId": "genesis-source:commit:7026646cf915a2cec8bf5d02f304432e640a69f9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7026646cf915a2cec8bf5d02f304432e640a69f9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7026646cf915a2cec8bf5d02f304432e640a69f9",
+      "parentShas": [
+        "bb380889770d37364af2e030513de942b3c7bfe4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783567339000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783567339000
+      },
+      "subject": "refactor(runtime): migrate project row to Lumina primitives",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx"
+      ],
+      "changedPathsByParent": {
+        "bb380889770d37364af2e030513de942b3c7bfe4": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7026646cf915a2cec8bf5d02f304432e640a69f9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

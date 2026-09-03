@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:ac4a103dca436b98872fb43f26f3426cc55fc915f3bd90e9632d64ce2fff191e",
+  "type": "commit",
+  "title": "refactor(knowledge): centralize flow engine structural contracts",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240093132,
+  "observedAt": 1785977149000,
+  "contentRef": "git:commit:cff3b3d5e9777de6f2965d49baed090215ec78de",
+  "checksum": "sha256:3e72f43ea78f8dafa904509b3093e59c4ed2fbf1212b388f301acc63691c605a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1116,
+    "genesisAdmissionIdentity": "genesis-admission:d96dece614af072bff9ca43d85d3c5049f4f84c7388d30bcc450dc172189bba0",
+    "historicalSourceId": "genesis-source:commit:cff3b3d5e9777de6f2965d49baed090215ec78de",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cff3b3d5e9777de6f2965d49baed090215ec78de",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cff3b3d5e9777de6f2965d49baed090215ec78de",
+      "parentShas": [
+        "ea344567a25aedbdf145c828e1b3ad5ec7178323"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785977149000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785977149000
+      },
+      "subject": "refactor(knowledge): centralize flow engine structural contracts",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+      ],
+      "changedPathsByParent": {
+        "ea344567a25aedbdf145c828e1b3ad5ec7178323": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cff3b3d5e9777de6f2965d49baed090215ec78de"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

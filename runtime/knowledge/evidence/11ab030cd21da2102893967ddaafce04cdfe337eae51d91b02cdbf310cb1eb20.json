@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:e918472d03e1860473dd5b8b336116b7ded4a7e532f61038a9a7cb399d6e7eec",
+  "type": "document",
+  "title": "GA-003 — Chief Agent Cognitive Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085275,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/chief-agent/GA-003_CHIEF_AGENT_COGNITIVE_ARCHITECTURE.md",
+  "checksum": "sha256:0ac37831565adc640d0e7096f3aa2fd925ec1c4d2f69ae3458df08fc51095af7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 965,
+    "genesisAdmissionIdentity": "genesis-admission:374b8edda0907096de3941fd21a07330fd1ac72a0c88cc925a32735da97838bf",
+    "historicalSourceId": "genesis-source:document:derived:30f9873308b07f357b69a061df02d262fb821334bcac1d3af49c0707fe3ede62",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Vision 2050 Alignment",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/chief-agent/GA-003_CHIEF_AGENT_COGNITIVE_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "GA-003 — Chief Agent Cognitive Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/chief-agent/GA-003_CHIEF_AGENT_COGNITIVE_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:30f9873308b07f357b69a061df02d262fb821334bcac1d3af49c0707fe3ede62"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

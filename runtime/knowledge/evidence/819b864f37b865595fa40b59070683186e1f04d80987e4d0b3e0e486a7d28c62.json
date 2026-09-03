@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:3981be002f215f5c87a1c7dafe05fef3e280465b42e5a9ff8bd32fd1d9396114",
+  "type": "document",
+  "title": "Lumina Design System",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079253,
+  "observedAt": 1783486137000,
+  "contentRef": "docs/architecture/LUMINA_DESIGN_SYSTEM.md",
+  "checksum": "sha256:2446f9deea70ad348fa26b40d89819dcd00615a67a9acde4fb9ab7b79e13f069",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 837,
+    "genesisAdmissionIdentity": "genesis-admission:f682162ca291692aeed68fdb69bde2e6b316e0346f8556a3f4eef5ca89b3496f",
+    "historicalSourceId": "genesis-source:document:derived:2492f23d7b07b89caa9849ef775c00cf30d77d3b6318d630a8d9ee316ec3fcb3",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Foundation Architecture",
+    "owner": "KoreLumina",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Design System",
+      "status": "Foundation Architecture",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_DESIGN_SYSTEM.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2492f23d7b07b89caa9849ef775c00cf30d77d3b6318d630a8d9ee316ec3fcb3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

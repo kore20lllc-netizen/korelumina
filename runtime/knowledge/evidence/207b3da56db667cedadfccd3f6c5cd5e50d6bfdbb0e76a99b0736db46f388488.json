@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:e5711da5c5b63d590d4d3806d312ab649f25c4f729b0010c315ccd9ca19486e0",
+  "type": "commit",
+  "title": "feat(appearance): add inspector foundation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080738,
+  "observedAt": 1783629537000,
+  "contentRef": "git:commit:6a6fd361239b04a8558576ccfe2d8da69795443a",
+  "checksum": "sha256:66d907083995da5034ab3633bcdee9c4e04bcb6a4e92dda0a86bb347e0245e16",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 870,
+    "genesisAdmissionIdentity": "genesis-admission:f3cc6e5184468e3164ba376056b4a49adc48602882b87d2b585f8f7c1b5892a4",
+    "historicalSourceId": "genesis-source:commit:6a6fd361239b04a8558576ccfe2d8da69795443a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6a6fd361239b04a8558576ccfe2d8da69795443a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6a6fd361239b04a8558576ccfe2d8da69795443a",
+      "parentShas": [
+        "35e03e45ad78971f8c19b37b05d784e5bc554bb7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783629537000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783629537000
+      },
+      "subject": "feat(appearance): add inspector foundation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspector.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorBody.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorControl.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorDescription.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorDivider.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorFooter.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorGroup.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorSection.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorTitle.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+        "apps/lumina-builder/src/components/workspaces/appearance/navigation/index.ts",
+        "apps/lumina-builder/src/components/workspaces/appearance/navigation/navigationRegistry.ts",
+        "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearanceSidebar.tsx"
+      ],
+      "changedPathsByParent": {
+        "35e03e45ad78971f8c19b37b05d784e5bc554bb7": [
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspector.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorBody.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorControl.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorDescription.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorDivider.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorFooter.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorGroup.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorSection.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/LuminaInspectorTitle.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+          "apps/lumina-builder/src/components/workspaces/appearance/navigation/index.ts",
+          "apps/lumina-builder/src/components/workspaces/appearance/navigation/navigationRegistry.ts",
+          "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearanceSidebar.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6a6fd361239b04a8558576ccfe2d8da69795443a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

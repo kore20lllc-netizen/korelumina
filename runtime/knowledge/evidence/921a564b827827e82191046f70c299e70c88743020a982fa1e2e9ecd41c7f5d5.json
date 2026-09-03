@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4702f15a0543ac6c873eec252af0cd16a159013d15a034ac9e5025e39851cc6d",
+  "type": "commit",
+  "title": "refactor(knowledge): extract Lumina flagship tabs",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240099031,
+  "observedAt": 1786189901000,
+  "contentRef": "git:commit:ca2d8251eb0bc24cffaf741b62ebe836e7eb18ef",
+  "checksum": "sha256:5d97a4eb46d3184b54723c1bdf0b4c6a71104e4766db9c359652d6e2358fe28b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1218,
+    "genesisAdmissionIdentity": "genesis-admission:83857b82ebbd60db8ed0e46119019d3d84d243467d3394f58b0b4857a5fe1562",
+    "historicalSourceId": "genesis-source:commit:ca2d8251eb0bc24cffaf741b62ebe836e7eb18ef",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ca2d8251eb0bc24cffaf741b62ebe836e7eb18ef",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ca2d8251eb0bc24cffaf741b62ebe836e7eb18ef",
+      "parentShas": [
+        "ef7acf941b3beca704fcaf3b53caa1fc73894faf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786189901000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786189901000
+      },
+      "subject": "refactor(knowledge): extract Lumina flagship tabs",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipTabs.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx"
+      ],
+      "changedPathsByParent": {
+        "ef7acf941b3beca704fcaf3b53caa1fc73894faf": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipTabs.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ca2d8251eb0bc24cffaf741b62ebe836e7eb18ef"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

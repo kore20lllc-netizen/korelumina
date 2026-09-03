@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:828f462b4c7aa5e866f6e517dd23fd5f52e65a707ea72f1a3ed0c9ba362d9404",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Korelu,ina Mster engine — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944#browser-turn=3",
+  "checksum": "828f462b4c7aa5e866f6e517dd23fd5f52e65a707ea72f1a3ed0c9ba362d9404",
+  "metadata": {
+    "content": "Blank I also notice is the same blank in builder, I believe master OS preview is showing builder preview rigth",
+    "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "e9107505-08cb-4bbc-a77c-6e01d01f128e",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69af18f3-9b08-8327-a8d7-e814dad59944:message:e9107505-08cb-4bbc-a77c-6e01d01f128e",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944#browser-turn=3",
+    "sourceRevision": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e1153fd67abc850b70e39a95dc1995305fcab0cb5396290a8700e709c7e6f0ee",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66",
+      "exportRevision": "sha256:6ba8315b82fd9d92a8d798f52794a0e100cba1602bb4759e42834c1337464c66"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630628194
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69af18f3-9b08-8327-a8d7-e814dad59944:message:e9107505-08cb-4bbc-a77c-6e01d01f128e"
+    ],
+    "conversation": [
+      "69af18f3-9b08-8327-a8d7-e814dad59944"
+    ]
+  }
+}

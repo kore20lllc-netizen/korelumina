@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:52ea4a5f42c599121402ce87feff86e8c359e7d87ff45ed2ad6c9514893f61dc",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - RuntimeHeader Modification Classification — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59#browser-turn=0",
+  "checksum": "52ea4a5f42c599121402ce87feff86e8c359e7d87ff45ed2ad6c9514893f61dc",
+  "metadata": {
+    "content": "The remaining double contour is not the redundant highlight. The actual cause is in the shared FlagshipCard appearance itself: it combines a physical border and an inset ring on every card:\n\n\nborder-cyan-300/40\n\n\nring-1 ring-inset ring-cyan-100/10\n\n\nOn selected cards, that ring is strengthened again via cardSelected with ring-cyan-100/24, so the first selected artifact can read as two concentric contours.\nDo not change the shared primitive yet because that would affect every remaining Learning surface. Fix only the selected Corpus Explorer artifact card by neutralizing its inherited ring while preserving the electric-blue border/glow.\nRun:\nBashcd /Users/erictouko/dev/korelumina && \\\ntest \"$(git branch --show-current)\" = \"inspect/runtime-certified-main\" && \\\ntest \"$(git rev-parse HEAD)\" = \"f9a3e18ce61a6768f097c1a451a3cda87cde6d08\" && \\\ntest \"$(git status --short)\" = \" M apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx\" && \\\npython - <<'PY'\nfrom pathlib import Path\n\npath = Path(\n    \"apps/lumina-builder/src/components/workspaces/knowledge/\"\n    \"learning/regions/EducationalCorpusExplorer.tsx\"\n)\n\ntext = path.read_text()\n\nold = '''                className=\"p-4 text-left\"\n'''\n\nnew = '''                className={cn(\n                  \"p-4 text-left\",\n                  selected && \"ring-0\",\n                )}\n'''\n\nif text.count(old) != 1:\n    raise SystemExit(\"expected exactly one artifact FlagshipCard className\")\n\ntext = text.replace(old, new)\n\npath.write_text(text)\nPY\n\ngit diff --check && \\\nnpm run build && \\\nprintf '%s\\n' \"===== EDUCATIONAL CORPUS EXPLORER DIFF =====\" && \\\ngit diff -- \\\napps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx && \\\nprintf '%s\\n' \"===== STATUS =====\" && \\\ngit status --short\nThen inspect the selected first artifact card again. It should retain one clean electric-blue border/glow without the inner concentric ring. Do not commit yet.",
+    "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "ed21a2e3-21fb-4885-b949-39ba85ed7c58",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a732386-b120-83ea-a01d-fdfd0c777e59:message:ed21a2e3-21fb-4885-b949-39ba85ed7c58",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59#browser-turn=0",
+    "sourceRevision": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a",
+    "segmentAvailability": "available",
+    "conversationChecksum": "6c1578a25015a86eee2e1f2d4c80bb57ff9627a827029a96bae19d7c500e6145",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a",
+      "exportRevision": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630870560
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a732386-b120-83ea-a01d-fdfd0c777e59:message:ed21a2e3-21fb-4885-b949-39ba85ed7c58"
+    ],
+    "conversation": [
+      "6a732386-b120-83ea-a01d-fdfd0c777e59"
+    ]
+  }
+}

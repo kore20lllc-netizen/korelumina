@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:212dcd7496882fcd9ef7cfed4b341f7a03f1fdf708f08d8921c01342f573c3af",
+  "type": "commit",
+  "title": "feat(lumina): add inspector renderer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081161,
+  "observedAt": 1783641030000,
+  "contentRef": "git:commit:4c67484787ed443de4177692d0be3b99dd52ba76",
+  "checksum": "sha256:23fc792ec3d7b9020beaa403efaeaab8920386b2c6ee85eb49175f2b71450875",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 879,
+    "genesisAdmissionIdentity": "genesis-admission:3cbe50d106d47efc0c16087a515ad375c60044fd1e16c98e2613935b7eac9356",
+    "historicalSourceId": "genesis-source:commit:4c67484787ed443de4177692d0be3b99dd52ba76",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4c67484787ed443de4177692d0be3b99dd52ba76",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4c67484787ed443de4177692d0be3b99dd52ba76",
+      "parentShas": [
+        "52e7f74b9721e7daee24f687bae156bfb9f3918c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783641030000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783641030000
+      },
+      "subject": "feat(lumina): add inspector renderer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/renderer/LuminaInspectorRenderer.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/renderer/index.ts"
+      ],
+      "changedPathsByParent": {
+        "52e7f74b9721e7daee24f687bae156bfb9f3918c": [
+          "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/renderer/LuminaInspectorRenderer.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/renderer/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4c67484787ed443de4177692d0be3b99dd52ba76"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

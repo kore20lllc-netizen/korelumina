@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:459cca159f442fad671152b905f846174bd53fbd30e70b1b5a13c457c974afce",
+  "type": "commit",
+  "title": "docs(architecture): add reconstruction engineering rules",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076033,
+  "observedAt": 1783142326000,
+  "contentRef": "git:commit:413f508cd3bcd98860446ff428fff1ffcdf164d5",
+  "checksum": "sha256:4ebc10a37f0ca2743ef3662cb0d263d11d35dfc4a2264e47204e5085337f1f5e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 764,
+    "genesisAdmissionIdentity": "genesis-admission:6d35591f613f67d4d1c865b0dcc6149e775111c73827cf7ebd079172e4194362",
+    "historicalSourceId": "genesis-source:commit:413f508cd3bcd98860446ff428fff1ffcdf164d5",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:413f508cd3bcd98860446ff428fff1ffcdf164d5",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "413f508cd3bcd98860446ff428fff1ffcdf164d5",
+      "parentShas": [
+        "f2017505eaa143d2494d5a7833eeecee91a97799"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142326000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142326000
+      },
+      "subject": "docs(architecture): add reconstruction engineering rules",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_RECONSTRUCTION_ENGINEERING_RULES.md"
+      ],
+      "changedPathsByParent": {
+        "f2017505eaa143d2494d5a7833eeecee91a97799": [
+          "docs/architecture/KORELUMINA_RECONSTRUCTION_ENGINEERING_RULES.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/reconstruction-rules-v1-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:413f508cd3bcd98860446ff428fff1ffcdf164d5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

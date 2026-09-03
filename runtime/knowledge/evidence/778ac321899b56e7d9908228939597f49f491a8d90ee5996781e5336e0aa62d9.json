@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:269f880f969ea01f9b9378501c8095b1d509f32262ec6a4da6a242a3a6c49114",
+  "type": "commit",
+  "title": "test(genesis): correct commit recovery observable",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240133311,
+  "observedAt": 1788115995000,
+  "contentRef": "git:commit:2a7ac57e015c18b4a4ff208a2c5542f00011ae24",
+  "checksum": "sha256:b02ba8c87f8ce023108d19a4874cd78b48c7a173c75ff19e945f1d216230dd0a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1690,
+    "genesisAdmissionIdentity": "genesis-admission:4ca8565420b1a78e7e8647ede2bc2412025bd72c374222eb516dc0dbf09ee0f1",
+    "historicalSourceId": "genesis-source:commit:2a7ac57e015c18b4a4ff208a2c5542f00011ae24",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2a7ac57e015c18b4a4ff208a2c5542f00011ae24",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2a7ac57e015c18b4a4ff208a2c5542f00011ae24",
+      "parentShas": [
+        "119564e9dbe95b56d5c130dc7ca4527c0226121a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788115995000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788115995000
+      },
+      "subject": "test(genesis): correct commit recovery observable",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayRecoveryOrchestrator.test.ts"
+      ],
+      "changedPathsByParent": {
+        "119564e9dbe95b56d5c130dc7ca4527c0226121a": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayRecoveryOrchestrator.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2a7ac57e015c18b4a4ff208a2c5542f00011ae24"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

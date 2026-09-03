@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:3f54aab4265bee66f4583dab2b6ae6833a6702d917e61d5368223ae4d0984a18",
+  "type": "commit",
+  "title": "feat(lumina): add flagship workspace panel primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240096961,
+  "observedAt": 1786102308000,
+  "contentRef": "git:commit:ab3c9a67c6a99aff310864937dc9454c0a8a5966",
+  "checksum": "sha256:a6de1e570f446e8d86ae5e96795fffd65ea9181af6b95b03bd79845b3f1fe21a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1183,
+    "genesisAdmissionIdentity": "genesis-admission:271b5daa91534d45eaf68ab3a449c0a55e8a2c10a18481602564e3ecd925ee8c",
+    "historicalSourceId": "genesis-source:commit:ab3c9a67c6a99aff310864937dc9454c0a8a5966",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ab3c9a67c6a99aff310864937dc9454c0a8a5966",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ab3c9a67c6a99aff310864937dc9454c0a8a5966",
+      "parentShas": [
+        "66a4b19c05b1092cfcdae3ee8cea2a16a0e46810"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786102308000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786102308000
+      },
+      "subject": "feat(lumina): add flagship workspace panel primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipPanel.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+      ],
+      "changedPathsByParent": {
+        "66a4b19c05b1092cfcdae3ee8cea2a16a0e46810": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipPanel.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ab3c9a67c6a99aff310864937dc9454c0a8a5966"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

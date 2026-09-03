@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:245d59c7747941329f26447d8551f316f863d5eff8a724b32b82e4d7c46f7f61",
+  "type": "commit",
+  "title": "refactor(builder): add knowledge operations service",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075459,
+  "observedAt": 1783062740000,
+  "contentRef": "git:commit:86622b97598be992391f0d09e084e1d0a7c0d39c",
+  "checksum": "sha256:b7913468b01a42145ea5e54d6b5f6f418f5a72134b32f0d9843095786654b170",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 753,
+    "genesisAdmissionIdentity": "genesis-admission:4cf7ea3c793fa30d2377307f0ed21a91f0ae6b54b4ac9fc5bd4cd88ab74ad48a",
+    "historicalSourceId": "genesis-source:commit:86622b97598be992391f0d09e084e1d0a7c0d39c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:86622b97598be992391f0d09e084e1d0a7c0d39c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "86622b97598be992391f0d09e084e1d0a7c0d39c",
+      "parentShas": [
+        "b9d7bc90066fdae90f444a801710aec7da8956ed"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783062740000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783062740000
+      },
+      "subject": "refactor(builder): add knowledge operations service",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+        "apps/lumina-builder/src/services/knowledgeOperationsService.ts"
+      ],
+      "changedPathsByParent": {
+        "b9d7bc90066fdae90f444a801710aec7da8956ed": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+          "apps/lumina-builder/src/services/knowledgeOperationsService.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/backup/kops-current-86622b9",
+        "refs/tags/backup-kops-current-86622b9",
+        "refs/tags/kops-005-builder-service-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:86622b97598be992391f0d09e084e1d0a7c0d39c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:b12e9f3b4865f4c9132ba98d69fde322f0d928b8337310fb981ed09d4a0e5e65",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Runtime Header Refinement — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153#browser-turn=3",
+  "checksum": "b12e9f3b4865f4c9132ba98d69fde322f0d928b8337310fb981ed09d4a0e5e65",
+  "metadata": {
+    "content": "But how come do I have a GitHub, I can open GitHub on my app on the phone, but not on a Mac operating system?",
+    "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "473914d0-f7fc-4282-8377-c675bad18929",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5c707a-7d9c-83ea-aee3-13f03ab51153:message:473914d0-f7fc-4282-8377-c675bad18929",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153#browser-turn=3",
+    "sourceRevision": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "42074a3eb9bb37750a562a9e93af45aa9dc704aa272b431dc3abb061ff0fbc3e",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e",
+      "exportRevision": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630853516
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5c707a-7d9c-83ea-aee3-13f03ab51153:message:473914d0-f7fc-4282-8377-c675bad18929"
+    ],
+    "conversation": [
+      "6a5c707a-7d9c-83ea-aee3-13f03ab51153"
+    ]
+  }
+}

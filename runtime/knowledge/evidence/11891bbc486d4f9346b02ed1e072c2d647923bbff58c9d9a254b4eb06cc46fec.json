@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:4a955ba78ed03713656c6bbcef56912860bff47233936f295dacc6b781303d21",
+  "type": "commit",
+  "title": "refactor(knowledge): migrate knowledge genealogy premium cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240090052,
+  "observedAt": 1785900242000,
+  "contentRef": "git:commit:8c6d5b90542462fa776d82c5bd5aa5c653a68ffb",
+  "checksum": "sha256:55fa4332ae0b7525785f42a0b372a140cbff683e2d2b0d9d9f566e5dd355b8a9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1059,
+    "genesisAdmissionIdentity": "genesis-admission:a884f87c4b6e2c5b145c9a4c9b99eeecfaa71a2817c6a66262f4bd806b6cbcc7",
+    "historicalSourceId": "genesis-source:commit:8c6d5b90542462fa776d82c5bd5aa5c653a68ffb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8c6d5b90542462fa776d82c5bd5aa5c653a68ffb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8c6d5b90542462fa776d82c5bd5aa5c653a68ffb",
+      "parentShas": [
+        "dc6cecedaacf49b19e85ba4096ad2e96d8641d21"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785900242000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785900242000
+      },
+      "subject": "refactor(knowledge): migrate knowledge genealogy premium cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx"
+      ],
+      "changedPathsByParent": {
+        "dc6cecedaacf49b19e85ba4096ad2e96d8641d21": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8c6d5b90542462fa776d82c5bd5aa5c653a68ffb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

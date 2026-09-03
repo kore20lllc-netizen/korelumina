@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:66026d4a5f77c8da19c35590b1981961a86eb645881084e8a626ba059bedba4a",
+  "type": "commit",
+  "title": "refactor(appearance): migrate segmented control to appearance variables",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082328,
+  "observedAt": 1783784115000,
+  "contentRef": "git:commit:7c78a24c1d431ea70bb2036101c172d57cf3cea0",
+  "checksum": "sha256:fd0e2029926af3ed5f70f2f93147a8c5f866b426012547889028605564ee701b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 904,
+    "genesisAdmissionIdentity": "genesis-admission:91ae8f092e8978cc75b68990924077757d920064e19a23aaf8f9324c29b6d3dd",
+    "historicalSourceId": "genesis-source:commit:7c78a24c1d431ea70bb2036101c172d57cf3cea0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7c78a24c1d431ea70bb2036101c172d57cf3cea0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7c78a24c1d431ea70bb2036101c172d57cf3cea0",
+      "parentShas": [
+        "a527c0d9b7e37b9c7b3f9adf9974a91dc402c799"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783784115000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783784115000
+      },
+      "subject": "refactor(appearance): migrate segmented control to appearance variables",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/LuminaSegmentedControl.tsx"
+      ],
+      "changedPathsByParent": {
+        "a527c0d9b7e37b9c7b3f9adf9974a91dc402c799": [
+          "apps/lumina-builder/src/components/lumina/LuminaSegmentedControl.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7c78a24c1d431ea70bb2036101c172d57cf3cea0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

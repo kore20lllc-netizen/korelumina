@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:190776808dbb8d7a97ef07ae79748f8ec6687d038c095beac1ff5578af668d58",
+  "type": "commit",
+  "title": "fix(m51): repair governed mission source lineage",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129693,
+  "observedAt": 1787859629000,
+  "contentRef": "git:commit:18c4ff19d55af8b5de3b608b00740675a32009f1",
+  "checksum": "sha256:510161f55f4cad3c45d47685059efc1ffb597a44dc70542f72ca585df1023ac2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1648,
+    "genesisAdmissionIdentity": "genesis-admission:8b0a7568d2f4ffbb64f012996e7b8cd3fe00237da5396bbe12989978c6b3b776",
+    "historicalSourceId": "genesis-source:commit:18c4ff19d55af8b5de3b608b00740675a32009f1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:18c4ff19d55af8b5de3b608b00740675a32009f1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "18c4ff19d55af8b5de3b608b00740675a32009f1",
+      "parentShas": [
+        "04afea33927efd4d2ba6d3e1f5bae2aff0873e36"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787859629000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787859629000
+      },
+      "subject": "fix(m51): repair governed mission source lineage",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/M51MissionCompetencyTruth.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalAdmissionGovernancePolicy.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionSourceDiscovery.test.ts"
+      ],
+      "changedPathsByParent": {
+        "04afea33927efd4d2ba6d3e1f5bae2aff0873e36": [
+          "apps/lumina-runtime/src/knowledge-education/KnowledgeEducationProjectionService.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/M51MissionCompetencyTruth.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalAdmissionGovernancePolicy.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionSourceDiscovery.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:18c4ff19d55af8b5de3b608b00740675a32009f1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

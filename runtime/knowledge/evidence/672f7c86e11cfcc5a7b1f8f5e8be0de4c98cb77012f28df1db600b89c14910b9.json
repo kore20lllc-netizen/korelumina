@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:97a96b56578e3436228a8a89796a3b316c4fda391e29e8c6043542889a392da5",
+  "type": "document",
+  "title": "LDS-004 — Lumina Design System Extraction Sequence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083664,
+  "observedAt": 1784010740000,
+  "contentRef": "docs/architecture/design-system/LDS_004_EXTRACTION_SEQUENCE.md",
+  "checksum": "sha256:b17b3fd9200c2bc2a7654fe646b006a91cc142cc9f0b1e2dbb6dc294a371581e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 932,
+    "genesisAdmissionIdentity": "genesis-admission:bff45195fa641a24332db01e316a79eddb324f09bcc50ab09c29b0484bc0447a",
+    "historicalSourceId": "genesis-source:document:derived:2cd7fb530410d9261e1257cefeb86125390149edda58024b7fda368168c4cec9",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "KoreLumina Architecture",
+    "approvalState": "Approved",
+    "sourceLocation": "docs/architecture/design-system/LDS_004_EXTRACTION_SEQUENCE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "LDS-004 — Lumina Design System Extraction Sequence",
+      "status": "Approved",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/design-system/LDS_004_EXTRACTION_SEQUENCE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2cd7fb530410d9261e1257cefeb86125390149edda58024b7fda368168c4cec9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

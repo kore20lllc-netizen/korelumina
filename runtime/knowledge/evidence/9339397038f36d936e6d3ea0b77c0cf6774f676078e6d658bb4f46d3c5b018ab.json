@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:e82ca20b7cfcbacf0f1a210e070fd83e3c04fd0bcdd2b9335679978a9724a60e",
+  "type": "commit",
+  "title": "feat(knowledge): wire governed lifecycle state and stabilize flagship glass",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113950,
+  "observedAt": 1786690256000,
+  "contentRef": "git:commit:8d32a9fbc915ff105e14dd32ab82814432fbf19d",
+  "checksum": "sha256:a826aa66554b5bed81437e90aa807053f02d6eec63f9e7c94f3a018d5eecb064",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1446,
+    "genesisAdmissionIdentity": "genesis-admission:7a7b2280b44b093980ef9b6b03107733cca7175bb0104365be9d119664f2ec74",
+    "historicalSourceId": "genesis-source:commit:8d32a9fbc915ff105e14dd32ab82814432fbf19d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8d32a9fbc915ff105e14dd32ab82814432fbf19d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8d32a9fbc915ff105e14dd32ab82814432fbf19d",
+      "parentShas": [
+        "e5ca7f2e0dc2dbafe3118866cb9868a7f9b5adc3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786690256000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786690256000
+      },
+      "subject": "feat(knowledge): wire governed lifecycle state and stabilize flagship glass",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/canonicalKnowledgeProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/knowledgeCapsuleProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/organizationalMemoryProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+        "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/__tests__/KnowledgeProductionLifecycleRoute.test.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeProductionLifecycleRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "e5ca7f2e0dc2dbafe3118866cb9868a7f9b5adc3": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/canonicalKnowledgeProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/knowledgeCapsuleProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/organizationalMemoryProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+          "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/__tests__/KnowledgeProductionLifecycleRoute.test.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeProductionLifecycleRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8d32a9fbc915ff105e14dd32ab82814432fbf19d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

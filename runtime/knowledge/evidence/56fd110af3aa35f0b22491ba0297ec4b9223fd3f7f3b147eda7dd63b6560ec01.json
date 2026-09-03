@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4d2532b8fb79185232882e7e23e1bdca4eb116cc3be2ff91342ab65e2c919354",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Production Handoff — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129#browser-turn=4",
+  "checksum": "4d2532b8fb79185232882e7e23e1bdca4eb116cc3be2ff91342ab65e2c919354",
+  "metadata": {
+    "content": "Copy this into the first message of the new conversation.\nKORELUMINA RECONSTRUCTION HANDOFFMissionYou are acting as the lead engineer responsible for KoreLumina reconstruction.Do not introduce new architecture until the current architecture is stabilized.Priority order:Restore correctnessRestore production behaviorRemove mock implementationsImprove UXAdd new capabilitiesNever reverse that order.Working RulesExecution StyleOne task at a time.No speculative fixes.Investigate before changing code.Build must pass after every change.No partial snippets when editing files.Use patch scripts:cat > /tmp/patch.py <<'PY'\n...\nPY\n\npython3 /tmp/patch.py\nnpm run buildPrefer exact commands.Prefer full file rewrites only when necessary.Never chain multiple unrelated fixes.Reconstruction RuleEvery issue follows this sequence:Locate source.Confirm root cause.Patch smallest affected module.Build.Validate.Commit checkpoint.Continue.Never skip investigation.Current ArchitectureRuntimeRuntime is the source of truth.Builder must consume runtime data.Never fabricate runtime information.Runtime Rootruntime/workspaces/default/projectsRuntime APIhttp://localhost:4100Core Runtime EndpointsGET  /api/runtime/projects\nPOST /api/runtime/projects/import\nPOST /api/runtime/projects/metadata\n\nPOST /api/runtime/start\nPOST /api/runtime/stop\n\nGET  /api/runtime/status\nGET  /api/runtime/logs\n\nGET  /api/runtime/files\nGET  /api/runtime/read\nPOST /api/runtime/writeBuilder ArchitectureSource of TruthBuilder UI must be hydrated from:runtimeService.tsNOT from:fake objects\nmock data\nsynthetic URLs\ngenerated repo names\nhardcoded frameworksCurrent StateWorkingRuntimeRuntime health working.Runtime project discovery working.Runtime project import working.Runtime metadata sync working.Runtime preview working.Runtime start/stop working.ImportsGitHub import working.Imported repositories appear in workspace.Imported repositories render in preview.Metadata persistence added.Stored:framework\nsourceUrl\nrepoOwner\nrepoNameinside runtime metadata.Workspace HydrationRuntimeProject extended to include:framework\nsourceUrl\nrepoOwner\nrepoName\nownerId\nteamId\ncreatedByCurrent IssueImport Modal Still Displays Mock InformationRoot cause:const detected = url.trim()\n  ? {\n      framework: \"Next.js\",\n      packageManager: \"pnpm\",\n      entryFile: \"app/page.tsx\",\n    }\n  : null;Location:apps/lumina-builder/src/components/import/ImportModal.tsxThis is still fake.The modal claims:Framework: Next.js\nPackage manager: pnpm\nEntry: app/page.tsxbefore any import has occurred.This must be removed or replaced.Current status:Import pipeline real.Success screen real.Preview real.Detection cards still fake.Import Pipeline RoadmapPhase 1Remove fake detection.Either:A)Hide detection entirely until runtime returns metadata.ORB)Display:Framework: Detecting...\nPackage Manager: Detecting...\nEntry: Detecting...No fabricated values.Phase 2Replace simulated progress.Current modal still uses:Connecting to source\nFetching files\nAnalyzing project\nFinalizing workspaceThese are fake frontend stages.Phase 3Runtime Progress EventsRuntime import should emit:Connecting to GitHub\nCloning repository\nDetecting framework\nIndexing project\nPreparing runtime\nImport completederived from actual backend activity.Architectural RoadmapStage A — Builder StabilityGoal:100% production import workflow.Tasks:Remove fake import detection.Remove fake import progress.Runtime-driven import status.Runtime-driven metadata.Runtime-driven source URLs.Success criteria:No synthetic import information exists.Stage B — Runtime AuthorityGoal:Runtime owns all project state.Tasks:Runtime registry cleanup.Runtime project lifecycle ownership.Runtime metadata ownership.Runtime file indexing ownership.Runtime preview ownership.Success criteria:Builder becomes a client of runtime.Stage C — Repository IntelligenceGoal:Production repository understanding.Capabilities:Framework detection.Package manager detection.Entry-point detection.Dependency graph.Project complexity scoring.Architecture mapping.Output:Repository Intelligence Layer.Stage D — AI Builder EngineGoal:Lovable-class AI generation.Components:Intent EngineDraft EngineDiff EngineApply EngineContext EngineRepository Intelligence EngineSuccess criteria:AI changes real code using repository context.Stage E — Master OSGoal:Unified KoreLumina platform.Workspaces:AI Workspace\nDesigner Workspace\nDeveloper Workspace\nAdmin Workspace\nRepo Audit Workspace\nRuntime Diagnostics WorkspaceAll backed by the same runtime authority layer.Recovery AnchorsClean recovery commit:89019b2662e1f7bf985ab18303a01951db000203Known anchors:runtime-clean-baseline-89019b2\nrecovery-master-os-cleanUse these before attempting major rollback.Immediate Next TaskInvestigate:apps/lumina-builder/src/components/import/ImportModal.tsxLocate:const detected = ...Remove the remaining fake import detection layer without changing layout.No new features.No redesign.Production-grade behavior only.\nThis handoff preserves the reconstruction workflow, current architecture, active issue, and the roadmap from import stabilization through the Master OS architecture.",
+    "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "e9f1631d-2c27-42d8-9563-b9f348239572",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a322eb4-4cb4-83ea-959f-14189225a129:message:e9f1631d-2c27-42d8-9563-b9f348239572",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129#browser-turn=4",
+    "sourceRevision": "sha256:2e220fd4d8b13a72c15f2f7f115818e9c26014331e641e1b683b5c3606db1b75",
+    "segmentAvailability": "available",
+    "conversationChecksum": "b3f5050470a66e2465a09c12fda34f6797f73c415775e416bcd6835eed659de9",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:2e220fd4d8b13a72c15f2f7f115818e9c26014331e641e1b683b5c3606db1b75",
+      "exportRevision": "sha256:2e220fd4d8b13a72c15f2f7f115818e9c26014331e641e1b683b5c3606db1b75"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630704605
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a322eb4-4cb4-83ea-959f-14189225a129:message:e9f1631d-2c27-42d8-9563-b9f348239572"
+    ],
+    "conversation": [
+      "6a322eb4-4cb4-83ea-959f-14189225a129"
+    ]
+  }
+}

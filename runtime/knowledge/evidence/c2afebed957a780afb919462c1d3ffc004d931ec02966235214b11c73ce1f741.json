@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:e216e5ebc36812d798a429ec0c487630098916d8f83363191533760911401f7f",
+  "type": "commit",
+  "title": "refactor(knowledge): align workspace title glass",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108250,
+  "observedAt": 1786422705000,
+  "contentRef": "git:commit:9a0849d9c4fd23a0132739864e5a8862fc35b5ec",
+  "checksum": "sha256:6aeef6b68d7c3692098d3a446cf2b89d2a302c67b51b5102afd55c7667229069",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1364,
+    "genesisAdmissionIdentity": "genesis-admission:03bd69f37d8ed00404270cfb2cf78f5a564aec94ab64285a4150be125f71467f",
+    "historicalSourceId": "genesis-source:commit:9a0849d9c4fd23a0132739864e5a8862fc35b5ec",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9a0849d9c4fd23a0132739864e5a8862fc35b5ec",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9a0849d9c4fd23a0132739864e5a8862fc35b5ec",
+      "parentShas": [
+        "0456dbc88f4dd2ecd714f2acbf792a84b0f8401f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786422705000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786422705000
+      },
+      "subject": "refactor(knowledge): align workspace title glass",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/KnowledgeWorkspaceHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "0456dbc88f4dd2ecd714f2acbf792a84b0f8401f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/KnowledgeWorkspaceHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9a0849d9c4fd23a0132739864e5a8862fc35b5ec"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

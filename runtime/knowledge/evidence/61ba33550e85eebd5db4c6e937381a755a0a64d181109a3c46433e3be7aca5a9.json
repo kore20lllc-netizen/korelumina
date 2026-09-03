@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:1998dce03144e3089d636b655f0cab8a8064d8e623fbb6d07ab2070e8e6616b7",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - Commit Guardrail Enforcement — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175#browser-turn=0",
+  "checksum": "1998dce03144e3089d636b655f0cab8a8064d8e623fbb6d07ab2070e8e6616b7",
+  "metadata": {
+    "content": "KORELUMINA COMMIT GUARDRAIL\n\nSCOPE\n- This chat works on ONE module only.\n- Do not modify files outside this module.\n\nPRE-COMMIT CHECK (ALL MUST BE YES)\n- build passes → yes\n- preview renders → yes\n- editor visible → yes\n- filetree populated → yes\n- save overwrites (no append) → yes\n- diff visible → yes (if applicable)\n- apply works → yes (if applicable)\n- no console/runtime errors → yes\n\nIF ANY “NO” → STOP. DO NOT COMMIT.\n\nBRANCH RULES\n- NEVER work on main.\n- Create/use a feature branch:\n  git checkout main\n  git pull origin main\n  git checkout -b feature/<module>-<task>\n\nCOMMIT\n- Small, scoped commit:\n  git add .\n  git commit -m \"<type(module): change>\"\n\nPUSH\n- git push origin feature/<module>-<task>\n\nMERGE (PROTECTED MAIN)\n- Open PR → merge on GitHub\n- NEVER force-push to main\n\nCONFLICT RESOLUTION (LOCAL ONLY)\n- git fetch origin\n- git merge origin/main   (NO REBASE)\n\n- For conflicts, KEEP LOCAL (stable) versions:\n  git checkout --ours <file>\n  git add .\n  git commit -m \"merge(main): keep stable local state\"\n  git push origin feature/<branch>\n\n- NEVER use GitHub conflict editor\n- NEVER line-merge blindly\n\nPOST-MERGE\n- git checkout main\n- git pull origin main\n\nPROHIBITED\n- ❌ git push origin main\n- ❌ git push --force main\n- ❌ git pull --rebase during conflicts\n- ❌ multi-file rewrites across modules\n- ❌ fixing UI + runtime + AI in same change\n\nAI USAGE RULE\n- AI may make SMALL, TARGETED edits only\n- AI must NOT rewrite entire files unless explicitly required\n- AI must NOT change architecture or unrelated modules\n\nROLLBACK SAFETY\n- Tag before risky changes:\n  git tag <module>-checkpoint\n  git push origin <module>-checkpoint\n\n- If broken:\n  git checkout <tag>\n\nOUTPUT REQUIREMENT (EVERY TASK)\nReturn:\n- files changed\n- exact commands to run\n- verification checklist (yes/no)",
+    "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "e202f1ed-b98b-4089-b88d-11e8d48c1481",
+    "speakerRole": "user",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc8ae2-6074-8331-b61a-6c4125790175:message:e202f1ed-b98b-4089-b88d-11e8d48c1481",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175#browser-turn=0",
+    "sourceRevision": "sha256:bd983a1c362a1cf4b0436c6c28c8805e27a23d806abbf21c6a1123b9b30e0982",
+    "segmentAvailability": "available",
+    "conversationChecksum": "ef9ddbc51184feae63dd94d45ccea961fc6a799a066168609de21902d48c750b",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:bd983a1c362a1cf4b0436c6c28c8805e27a23d806abbf21c6a1123b9b30e0982",
+      "exportRevision": "sha256:bd983a1c362a1cf4b0436c6c28c8805e27a23d806abbf21c6a1123b9b30e0982"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610824022
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc8ae2-6074-8331-b61a-6c4125790175:message:e202f1ed-b98b-4089-b88d-11e8d48c1481"
+    ],
+    "conversation": [
+      "69cc8ae2-6074-8331-b61a-6c4125790175"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:9cb491bcc8ba9c9a6caadb039b2fdf1f1a1c424624b8174daad63225f232ffdf",
+  "type": "commit",
+  "title": "feat(knowledge): project canonical knowledge into organizational memory",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108850,
+  "observedAt": 1786443660000,
+  "contentRef": "git:commit:34eb417b78e020606b446afd86b3e69389aea9ee",
+  "checksum": "sha256:18dabaab0324b6477d5e14c75b0deff7f3b2ab9c518288dde7d7a0142bcc879f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1373,
+    "genesisAdmissionIdentity": "genesis-admission:e6e30d5380ccea503ba61fae090c5b6909a33651eb8e101e60e0f663e75e5883",
+    "historicalSourceId": "genesis-source:commit:34eb417b78e020606b446afd86b3e69389aea9ee",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:34eb417b78e020606b446afd86b3e69389aea9ee",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "34eb417b78e020606b446afd86b3e69389aea9ee",
+      "parentShas": [
+        "ee0d231468244bf247105db915441ff094392553"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786443660000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786443660000
+      },
+      "subject": "feat(knowledge): project canonical knowledge into organizational memory",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/organizational-memory/CanonicalKnowledgeOrganizationalMemoryAdapter.ts",
+        "apps/lumina-runtime/src/knowledge/organizational-memory/__tests__/CanonicalKnowledgeOrganizationalMemoryAdapter.test.ts",
+        "apps/lumina-runtime/src/knowledge/organizational-memory/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ee0d231468244bf247105db915441ff094392553": [
+          "apps/lumina-runtime/src/knowledge/organizational-memory/CanonicalKnowledgeOrganizationalMemoryAdapter.ts",
+          "apps/lumina-runtime/src/knowledge/organizational-memory/__tests__/CanonicalKnowledgeOrganizationalMemoryAdapter.test.ts",
+          "apps/lumina-runtime/src/knowledge/organizational-memory/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:34eb417b78e020606b446afd86b3e69389aea9ee"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

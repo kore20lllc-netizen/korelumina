@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:c330d15285b5a3bf5a2dde13c2364921b85a7d30fcc1e64b3c79ff692a6551f6",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship panel in evidence intake",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240097247,
+  "observedAt": 1786127434000,
+  "contentRef": "git:commit:5ed77cbf0db40a230dc672f51cf64d82e91874fc",
+  "checksum": "sha256:3a0ea604785195f32b759c81d6b767c9aaeb969ad832a12aaea2c0d030a3f9d9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1188,
+    "genesisAdmissionIdentity": "genesis-admission:e37360a31a1fb54ed40a89375eb540e6c76512ab8079e3bdaa80e400fdeed0d4",
+    "historicalSourceId": "genesis-source:commit:5ed77cbf0db40a230dc672f51cf64d82e91874fc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5ed77cbf0db40a230dc672f51cf64d82e91874fc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5ed77cbf0db40a230dc672f51cf64d82e91874fc",
+      "parentShas": [
+        "947aa9978d9956019ad6fe7f66b3d854f5c09491"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786127434000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786127434000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship panel in evidence intake",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/EvidenceIntake.tsx"
+      ],
+      "changedPathsByParent": {
+        "947aa9978d9956019ad6fe7f66b3d854f5c09491": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/EvidenceIntake.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5ed77cbf0db40a230dc672f51cf64d82e91874fc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

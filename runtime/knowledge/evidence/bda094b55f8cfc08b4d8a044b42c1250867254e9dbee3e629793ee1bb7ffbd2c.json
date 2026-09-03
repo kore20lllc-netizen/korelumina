@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:f7336564df974794f06a6b1b30f2e0bf11ef5629a6ee288074656214f872837d",
+  "type": "commit",
+  "title": "feat(lumina): extract flow canvas",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087845,
+  "observedAt": 1785737026000,
+  "contentRef": "git:commit:f727e1a35a99071a8398062fddf7cb68feb236ed",
+  "checksum": "sha256:5a6805f568490d0fa8fa7c98379d32177ccfdedf34c1d5f8477b680143e5ae7d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1016,
+    "genesisAdmissionIdentity": "genesis-admission:359497f32091fef291cc47d3038c910622d250898f73606b9944518e1a567d6a",
+    "historicalSourceId": "genesis-source:commit:f727e1a35a99071a8398062fddf7cb68feb236ed",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f727e1a35a99071a8398062fddf7cb68feb236ed",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f727e1a35a99071a8398062fddf7cb68feb236ed",
+      "parentShas": [
+        "56459afc26f38cc7321947f3f9ce2f3ea495458d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785737026000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785737026000
+      },
+      "subject": "feat(lumina): extract flow canvas",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/lumina/flow/canvas/LuminaFlowCanvas.tsx",
+        "apps/lumina-builder/src/components/design-system/lumina/flow/canvas/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/flow/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/canvas/CanvasSurface.tsx"
+      ],
+      "changedPathsByParent": {
+        "56459afc26f38cc7321947f3f9ce2f3ea495458d": [
+          "apps/lumina-builder/src/components/design-system/lumina/flow/canvas/LuminaFlowCanvas.tsx",
+          "apps/lumina-builder/src/components/design-system/lumina/flow/canvas/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/flow/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/canvas/CanvasSurface.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f727e1a35a99071a8398062fddf7cb68feb236ed"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

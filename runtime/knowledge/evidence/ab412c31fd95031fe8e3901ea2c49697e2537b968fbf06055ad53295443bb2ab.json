@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:3ce6b02393d13d3cd052eb5fe623f5e2c5e95d97f5d56b1c7efc73dbdb268e10",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Commit Guardrail — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=2",
+  "checksum": "3ce6b02393d13d3cd052eb5fe623f5e2c5e95d97f5d56b1c7efc73dbdb268e10",
+  "metadata": {
+    "content": "The task is:\nFix KoreLumina preview/runtime behavior.\nCurrent focus:\n\n\nPreview frame layout bug\n\nRight/bottom strip appears even when no iframe is rendered, so it’s likely in PreviewFrame wrapper layout.\n\n\nRuntime stop/start bug\n\nAfter stopping, the UI shows running/stale state or starts again incorrectly. Need to confirm whether backend auto-restart or frontend useRuntimeBoot() is responsible.\n\n\nPreview not rebinding after stop/start\n\nRuntime can be running on 4201, but PreviewFrame falls back to skeleton because runtimeUrl is cleared/not restored.\n\n\nWe should continue from the last concrete lead: inspect useRuntimeBoot.ts and runtime stop/start flow, not image generation.",
+    "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "a024830f-c93e-4b2c-8293-136b523451f3",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:a024830f-c93e-4b2c-8293-136b523451f3",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=2",
+    "sourceRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+    "segmentAvailability": "available",
+    "conversationChecksum": "163cd330ee4ee43a502972b0cb4705bf42b2cbab6fa122b665523b6cf66f4095",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+      "exportRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630637343
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:a024830f-c93e-4b2c-8293-136b523451f3"
+    ],
+    "conversation": [
+      "69cc9772-05f8-8325-8512-4aabf0ad0551"
+    ]
+  }
+}

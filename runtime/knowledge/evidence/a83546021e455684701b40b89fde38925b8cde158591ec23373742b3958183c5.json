@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:015a2875c8063f945709ff241f6c82ae426f7945d5e45bbbde3a010fe6301fec",
+  "type": "commit",
+  "title": "refactor(lumina): integrate certified status primitives into workspace system",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240091717,
+  "observedAt": 1785915576000,
+  "contentRef": "git:commit:2684ea53c4385345d51be5e77251e7bc02cb93d6",
+  "checksum": "sha256:5636d9f42e2c6d81ad95318b5289dcbb4c63072fa28509c5a831d001c15a72d3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1090,
+    "genesisAdmissionIdentity": "genesis-admission:aee715b7cc4fe7cd35c76f148bd52697308f88f3a89aa767b0d987d4a5ceb856",
+    "historicalSourceId": "genesis-source:commit:2684ea53c4385345d51be5e77251e7bc02cb93d6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2684ea53c4385345d51be5e77251e7bc02cb93d6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2684ea53c4385345d51be5e77251e7bc02cb93d6",
+      "parentShas": [
+        "1072fcd26e7bbd37b0ca8b349b097c4e234f0a47"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785915576000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785915576000
+      },
+      "subject": "refactor(lumina): integrate certified status primitives into workspace system",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/surfaces/LuminaStateSurface.tsx",
+        "apps/lumina-builder/src/components/design-system/surfaces/LuminaStatusBadge.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaStateSurface.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaStatusBadge.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/index.ts"
+      ],
+      "changedPathsByParent": {
+        "1072fcd26e7bbd37b0ca8b349b097c4e234f0a47": [
+          "apps/lumina-builder/src/components/design-system/surfaces/LuminaStateSurface.tsx",
+          "apps/lumina-builder/src/components/design-system/surfaces/LuminaStatusBadge.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaStateSurface.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaStatusBadge.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2684ea53c4385345d51be5e77251e7bc02cb93d6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

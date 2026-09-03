@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:31018ff6c563e64cbcdb3953a2cb8994fcb1d652f30106577749fd9f497ea92d",
+  "type": "conversation",
+  "title": "KoreLumina — AI Planner + Diff - Diagnose Runtime TypeError — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5#browser-turn=0",
+  "checksum": "31018ff6c563e64cbcdb3953a2cb8994fcb1d652f30106577749fd9f497ea92d",
+  "metadata": {
+    "content": "Yes — that is the correct file to modify:\nsrc/components/preview/PreviewFrame.tsx\nThat file is 100% responsible for rendering the iframe preview.\n\nNothing else in your UI will fix a blank preview if this is wrong.\n\nWhat your result means\nJSON{\"ok\":true,\"url\":\"http://localhost:3100\"}\nThis confirms:\n\n\n✅ Backend preview route is working\n\n\n✅ Runtime server is running\n\n\n✅ Correct URL is being generated\n\n\nSo the problem is only UI rendering / iframe handling — which we just fixed.\n\nWhat should happen now\nIn Dev Mode:\nTypeScript<PreviewFrame url=\"/api/dev/preview?projectId=korelumina-dogfood\" />\nFlow:\n\n\nUI calls /api/dev/preview\n\n\nThat route returns → http://localhost:3100\n\n\niframe loads that URL\n\n\nYou see live app\n\n\n\nIf preview is STILL blank\nThere are only 3 real causes left:\n1. Iframe blocked (most common)\nCheck console:\n\n\nCSP\n\n\nX-Frame-Options\n\n\nFix (server-side):\nX-Frame-Options: SAMEORIGIN\nor remove DENY\n\n2. Wrong route wiring in Dev workspace\nMake sure this is EXACT:\nTypeScript<PreviewFrame url={`/api/dev/preview?projectId=korelumina-dogfood`} />\nNOT:\n\n\nlocalhost:5173\n\n\nhardcoded ports\n\n\n\n3. Preview route returning JSON instead of redirect\nYour route should either:\n\n\nredirect → http://localhost:3100\n\nOR\n\n\nreturn HTML that iframe can render\n\n\nIf it returns JSON → iframe shows blank\n\nQuick test (do this now)\nOpen browser:\nhttp://localhost:8080/api/dev/preview?projectId=korelumina-dogfood\nExpected:\n\n\nit redirects or loads app\n\n\nIf you see JSON:\n👉 that’s the issue (route not iframe-compatible)\n\nBottom line\n\n\nYes — correct file modified\n\n\nYour backend is already working\n\n\nRemaining issue (if any) = iframe compatibility or route behavior\n\n\n\nCurrent task complete: PreviewFrame correctly wired\nNext step only if needed:\n\n→ fix /api/dev/preview to return iframe-renderable response (redirect or HTML)",
+    "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+    "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+    "messageId": "cb2dd9bf-7e1e-4019-9388-86c4ea7c8d80",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cd5a35-3c30-8325-bbd0-f365465d31e5:message:cb2dd9bf-7e1e-4019-9388-86c4ea7c8d80",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5#browser-turn=0",
+    "sourceRevision": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e767770605908af698b5786f0ea3bfbac9c9d0425df039bfefa412977ad15509",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d",
+      "exportRevision": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787625711099
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cd5a35-3c30-8325-bbd0-f365465d31e5:message:cb2dd9bf-7e1e-4019-9388-86c4ea7c8d80"
+    ],
+    "conversation": [
+      "69cd5a35-3c30-8325-bbd0-f365465d31e5"
+    ]
+  }
+}

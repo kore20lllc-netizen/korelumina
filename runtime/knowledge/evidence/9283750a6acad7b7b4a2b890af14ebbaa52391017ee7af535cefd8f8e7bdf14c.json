@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:991d16ffd1bdcc22f03fc32b38b0b8604cbc82dfe650305cd76e41d5e9d621c7",
+  "type": "commit",
+  "title": "refactor(knowledge): use shared badge in genesis corpus",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240101431,
+  "observedAt": 1786317597000,
+  "contentRef": "git:commit:1e2e3166cdce30f5340199baca2fba589e8ffcb1",
+  "checksum": "sha256:dd8c74a6efe8b592f6493327d07dcb8d1998545e1c42edb6724a11ef4103d73f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1258,
+    "genesisAdmissionIdentity": "genesis-admission:c1af68fef9720060322d1018378f68e8eb7de2988f92e560dc9c7f74a0dcbedf",
+    "historicalSourceId": "genesis-source:commit:1e2e3166cdce30f5340199baca2fba589e8ffcb1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1e2e3166cdce30f5340199baca2fba589e8ffcb1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1e2e3166cdce30f5340199baca2fba589e8ffcb1",
+      "parentShas": [
+        "842d996964faa94e1829e181970c3fcc7b68ba9e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786317597000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786317597000
+      },
+      "subject": "refactor(knowledge): use shared badge in genesis corpus",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx"
+      ],
+      "changedPathsByParent": {
+        "842d996964faa94e1829e181970c3fcc7b68ba9e": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1e2e3166cdce30f5340199baca2fba589e8ffcb1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:5b53197ed2026586b8d4ae1df97ff388b541c07fd703cd644cde8945cacf84e2",
+  "type": "document",
+  "title": "KoreLumina Manifesto",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077226,
+  "observedAt": 1783196151000,
+  "contentRef": "docs/canon/MANIFESTO.md",
+  "checksum": "sha256:d48f6369c65bf1bb0e899fc6baa3851ca09498c116ba0aec786bcd46cf8df485",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 791,
+    "genesisAdmissionIdentity": "genesis-admission:65051225ff13557b470f9e8498db540a6668744649f9f1974d025993c1afc70b",
+    "historicalSourceId": "genesis-source:document:derived:323392948f7eda861f19c4fa5bf9ab2564990a9cb9116da06ad0b9ed265d1e3a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/canon/MANIFESTO.md",
+    "documentClassification": "canonical",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Manifesto",
+      "status": "Canonical",
+      "documentClassification": "canonical",
+      "sourceLocation": "docs/canon/MANIFESTO.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:323392948f7eda861f19c4fa5bf9ab2564990a9cb9116da06ad0b9ed265d1e3a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

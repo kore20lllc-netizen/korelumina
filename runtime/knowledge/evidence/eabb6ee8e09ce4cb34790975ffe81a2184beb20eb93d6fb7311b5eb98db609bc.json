@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:a1b88b57b240327a87d68b61f31cedd4564b8190103a926481791f3c41774777",
+  "type": "commit",
+  "title": "feat(knowledge): wire governance-ready manufacturing events",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240121729,
+  "observedAt": 1787438187000,
+  "contentRef": "git:commit:9af6137f4794df2ca285048f55718e82d662ed0f",
+  "checksum": "sha256:f47fa9ae7535b091cad75d6a9bb8836a0bed70353a2485a3543c10e87b15a8af",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1550,
+    "genesisAdmissionIdentity": "genesis-admission:d4f5433ecf5d66926efedb2a5db14bec251ba28ec69c8d28338fcb15052acee0",
+    "historicalSourceId": "genesis-source:commit:9af6137f4794df2ca285048f55718e82d662ed0f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9af6137f4794df2ca285048f55718e82d662ed0f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9af6137f4794df2ca285048f55718e82d662ed0f",
+      "parentShas": [
+        "d476fad6918a3c35d12011fbf3e616963ed35667"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787438187000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787438187000
+      },
+      "subject": "feat(knowledge): wire governance-ready manufacturing events",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/GovernanceReadySignal.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/GovernanceReadyRuntimeWiring.test.ts"
+      ],
+      "changedPathsByParent": {
+        "d476fad6918a3c35d12011fbf3e616963ed35667": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/GovernanceReadySignal.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/GovernanceReadyRuntimeWiring.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9af6137f4794df2ca285048f55718e82d662ed0f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

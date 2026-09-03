@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:9d1f42e85fd68c09cb7fad14f95c55fb0658e1c5f7bd52cd0d15486c60143b87",
+  "type": "document",
+  "title": "LDS-002 — Runtime Operations Visual Extraction Plan",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083569,
+  "observedAt": 1784010740000,
+  "contentRef": "docs/architecture/design-system/LDS_002_RUNTIME_VISUAL_EXTRACTION_PLAN.md",
+  "checksum": "sha256:0f8363c7403bac1fb247cc72a8ec5ea149e46800e00540b59712270b1d15e218",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 930,
+    "genesisAdmissionIdentity": "genesis-admission:81eca17400ff8973537d37691cba4254c91d1c909d9360e845ea08a4b31c1fcc",
+    "historicalSourceId": "genesis-source:document:derived:c12d4cde2734579a2b5bc2534273b9837f093d34707f081723e2e3d7b0a41cea",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Lumina Design System Certification",
+    "approvalState": "Audit",
+    "sourceLocation": "docs/architecture/design-system/LDS_002_RUNTIME_VISUAL_EXTRACTION_PLAN.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "LDS-002 — Runtime Operations Visual Extraction Plan",
+      "status": "Audit",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/design-system/LDS_002_RUNTIME_VISUAL_EXTRACTION_PLAN.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:c12d4cde2734579a2b5bc2534273b9837f093d34707f081723e2e3d7b0a41cea"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

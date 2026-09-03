@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:0f4b6e450a957142557ca66e065fd3be8d791970218915873135f57664a18138",
+  "type": "commit",
+  "title": "docs(architecture): define executive mutation governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113308,
+  "observedAt": 1786642021000,
+  "contentRef": "git:commit:afdd71675f19bf0b0f5c93670abfc01cee3e3ae5",
+  "checksum": "sha256:6330f53dc6a7503b7b028d734c97224dc726bfedead38165a84896ec31148cce",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1437,
+    "genesisAdmissionIdentity": "genesis-admission:309952cb8680f0414a8aad89f4056d3799a252b6ff2d49fa96bdc11d99d84eec",
+    "historicalSourceId": "genesis-source:commit:afdd71675f19bf0b0f5c93670abfc01cee3e3ae5",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:afdd71675f19bf0b0f5c93670abfc01cee3e3ae5",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "afdd71675f19bf0b0f5c93670abfc01cee3e3ae5",
+      "parentShas": [
+        "5d032b51d278734bc86e72352842b990ab4da7e6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786642021000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786642021000
+      },
+      "subject": "docs(architecture): define executive mutation governance",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/EXECUTIVE_MUTATION_GOVERNANCE_SPECIFICATION_V1.md"
+      ],
+      "changedPathsByParent": {
+        "5d032b51d278734bc86e72352842b990ab4da7e6": [
+          "docs/architecture/EXECUTIVE_MUTATION_GOVERNANCE_SPECIFICATION_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:afdd71675f19bf0b0f5c93670abfc01cee3e3ae5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:d62d5ac89aa0a0b0b4e42a920b631c8a6955ed3b9011e6d0ffbc7ce7f6bdf9a5",
+  "type": "commit",
+  "title": "docs(architecture): reconcile constitutional knowledge package",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086780,
+  "observedAt": 1785526919000,
+  "contentRef": "git:commit:c682506e2b2ddf7c8661606eb92d5af1bc098b30",
+  "checksum": "sha256:74d51349cba50244c51c6c7c34177aa58500dac6cc78648326f09efcc68da07f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 995,
+    "genesisAdmissionIdentity": "genesis-admission:6d5d58cb272b7bdca527fce83fe11fc1bf3446db9a2456bfd30f77c0a0e7849e",
+    "historicalSourceId": "genesis-source:commit:c682506e2b2ddf7c8661606eb92d5af1bc098b30",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c682506e2b2ddf7c8661606eb92d5af1bc098b30",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c682506e2b2ddf7c8661606eb92d5af1bc098b30",
+      "parentShas": [
+        "1d4a65456cf400908ac5072b7f028fe46f1d9fe9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785526919000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785526919000
+      },
+      "subject": "docs(architecture): reconcile constitutional knowledge package",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "1d4a65456cf400908ac5072b7f028fe46f1d9fe9": [
+          "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c682506e2b2ddf7c8661606eb92d5af1bc098b30"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

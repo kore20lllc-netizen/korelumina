@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:c4af9304b7dee233a03071f6b74096e7f73359f1b5f76bec42c558d562ed2f5c",
+  "type": "commit",
+  "title": "refactor(knowledge): remove obsolete learning appearance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240101986,
+  "observedAt": 1786337594000,
+  "contentRef": "git:commit:c9a86bb717858e16d7665743a1cc571e9c41bdec",
+  "checksum": "sha256:083741c2e4baf1c33b520920fd12a4b65b97369c8eb3605ad22938575098442a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1267,
+    "genesisAdmissionIdentity": "genesis-admission:fb8397c8b73711eeb567b250a3ef1090ab7abc25d88175e5d9b4a5ecabcb02e9",
+    "historicalSourceId": "genesis-source:commit:c9a86bb717858e16d7665743a1cc571e9c41bdec",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c9a86bb717858e16d7665743a1cc571e9c41bdec",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c9a86bb717858e16d7665743a1cc571e9c41bdec",
+      "parentShas": [
+        "b6827ac508f4ec2ef385e30adda1373e820cae92"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786337594000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786337594000
+      },
+      "subject": "refactor(knowledge): remove obsolete learning appearance",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/learningAppearance.ts"
+      ],
+      "changedPathsByParent": {
+        "b6827ac508f4ec2ef385e30adda1373e820cae92": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/learningAppearance.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c9a86bb717858e16d7665743a1cc571e9c41bdec"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

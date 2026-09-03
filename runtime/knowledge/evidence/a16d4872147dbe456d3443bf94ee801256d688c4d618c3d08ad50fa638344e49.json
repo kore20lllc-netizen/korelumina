@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:b624bb2796a1849ed69c681f20a5d5c9bfc1756f878d2fda03cff58eb6018762",
+  "type": "document",
+  "title": "LA-001 — Universal Lifecycle Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085821,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/lifecycle/LA-001_UNIVERSAL_LIFECYCLE_ARCHITECTURE.md",
+  "checksum": "sha256:ab5e3206c6ddd57ac4586217ee97553146298ef24e0b1716fbe744e9c05d1176",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 976,
+    "genesisAdmissionIdentity": "genesis-admission:5254f1e299ae7d48e7c57ab43b9354de3af16418806c0ea101c38086c6e1aee3",
+    "historicalSourceId": "genesis-source:document:derived:232d7e75f4f73125afa9ff1a52c9824d9001905c2afdcba933388444638418bc",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/lifecycle/LA-001_UNIVERSAL_LIFECYCLE_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "LA-001 — Universal Lifecycle Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/lifecycle/LA-001_UNIVERSAL_LIFECYCLE_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:232d7e75f4f73125afa9ff1a52c9824d9001905c2afdcba933388444638418bc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

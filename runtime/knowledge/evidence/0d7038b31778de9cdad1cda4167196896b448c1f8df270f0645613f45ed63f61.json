@@ -1,0 +1,121 @@
+{
+  "id": "genesis-evidence:7e888430f82baec802bf084deb869a193d45a73ce13fac2f417e400a4312b431",
+  "type": "commit",
+  "title": "feat(knowledge): complete production capsule flow UI",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087334,
+  "observedAt": 1785720320000,
+  "contentRef": "git:commit:3926cc14413880c9a2735437c0347074c07c2bcc",
+  "checksum": "sha256:d045e3d3027a7de0889b57d2bdfe757cb5cea62b363ad24d0f93ec02058ee82c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1006,
+    "genesisAdmissionIdentity": "genesis-admission:b618a77a1705a0b3fa769ff247adaeb10ddefb603acf6f75c68b4f0861a2d1d0",
+    "historicalSourceId": "genesis-source:commit:3926cc14413880c9a2735437c0347074c07c2bcc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3926cc14413880c9a2735437c0347074c07c2bcc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3926cc14413880c9a2735437c0347074c07c2bcc",
+      "parentShas": [
+        "905489503af440f44dd691e4b5d1763ac9fe1a11"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785720320000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785720320000
+      },
+      "subject": "feat(knowledge): complete production capsule flow UI",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/KnowledgeOperationsV3Workspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/WorkspaceShell.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/navigation/KnowledgeDomainNavigator.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFilters.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeStationDetail.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/fixtures.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/lifecycle.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/types.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/productionFixtures.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/KnowledgeDistributionHub.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/CompilerOperations.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ConversationCompiler.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/DocumentationCompiler.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/EvidenceIntake.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgeIR.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgePackage.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/PipelineArtifactInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ProductionStateSurface.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ValidationWorkflow.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/state/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/state/types.ts"
+      ],
+      "changedPathsByParent": {
+        "905489503af440f44dd691e4b5d1763ac9fe1a11": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/KnowledgeOperationsV3Workspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/WorkspaceShell.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/navigation/KnowledgeDomainNavigator.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFilters.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeStationDetail.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/fixtures.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/lifecycle.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/types.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/productionFixtures.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/KnowledgeDistributionHub.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/CompilerOperations.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ConversationCompiler.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/DocumentationCompiler.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/EvidenceIntake.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgeIR.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/KnowledgePackage.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/PipelineArtifactInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ProductionStateSurface.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/ValidationWorkflow.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/state/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/state/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3926cc14413880c9a2735437c0347074c07c2bcc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

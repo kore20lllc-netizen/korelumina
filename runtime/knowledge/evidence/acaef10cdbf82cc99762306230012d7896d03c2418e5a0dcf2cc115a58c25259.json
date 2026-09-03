@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:3058996c86895cd2cd5552026bd7ed4c4af5a1e96c38c123ec23f59d59f8538f",
+  "type": "commit",
+  "title": "feat(lumina): add inspector control registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080831,
+  "observedAt": 1783631846000,
+  "contentRef": "git:commit:2f485b4bdfbdfe07ab900194ded42f76cac3790b",
+  "checksum": "sha256:ef3066493abb72c4675dc1245f0a59538c0595c7f60458ea8fdc29f8702c56dd",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 872,
+    "genesisAdmissionIdentity": "genesis-admission:f999af40d11adfb0597397a95b03a0e739606dbaa0ec467188391bb97873f966",
+    "historicalSourceId": "genesis-source:commit:2f485b4bdfbdfe07ab900194ded42f76cac3790b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2f485b4bdfbdfe07ab900194ded42f76cac3790b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2f485b4bdfbdfe07ab900194ded42f76cac3790b",
+      "parentShas": [
+        "14f50ec6f843a22633719869dfacfd01cfd2463f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783631846000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783631846000
+      },
+      "subject": "feat(lumina): add inspector control registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/inspector/controls/PlaceholderControl.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/factory/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/factory/renderInspectorControl.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/registry/controlRegistry.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/registry/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/registry/types.ts"
+      ],
+      "changedPathsByParent": {
+        "14f50ec6f843a22633719869dfacfd01cfd2463f": [
+          "apps/lumina-builder/src/components/lumina/inspector/controls/PlaceholderControl.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/factory/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/factory/renderInspectorControl.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/registry/controlRegistry.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/registry/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/registry/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2f485b4bdfbdfe07ab900194ded42f76cac3790b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

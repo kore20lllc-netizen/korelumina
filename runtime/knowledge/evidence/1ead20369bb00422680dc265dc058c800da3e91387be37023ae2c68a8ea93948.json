@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:5991a16a0ac97cd097bf0d553e8caf405e46cb275cd9f58e1076e07212bdaf89",
+  "type": "commit",
+  "title": "docs(adr): define knowledge acquisition platform",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240074722,
+  "observedAt": 1783057958000,
+  "contentRef": "git:commit:a17ea1a7e86690783ca9affef09d57bc3a96d318",
+  "checksum": "sha256:66167bc676ba14b69aa4b4504d32126e91a70844b395062ad94ebe9e7712fdb6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 738,
+    "genesisAdmissionIdentity": "genesis-admission:005d5a64d7e80bc0d8b9b9e28eb4e7c882f6ded3d4569da275baef1ac4eb19c5",
+    "historicalSourceId": "genesis-source:commit:a17ea1a7e86690783ca9affef09d57bc3a96d318",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a17ea1a7e86690783ca9affef09d57bc3a96d318",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a17ea1a7e86690783ca9affef09d57bc3a96d318",
+      "parentShas": [
+        "f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783057958000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783057958000
+      },
+      "subject": "docs(adr): define knowledge acquisition platform",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeOperationsRoutes.ts",
+        "docs/adr/ADR-0038-knowledge-acquisition-platform-architecture.md"
+      ],
+      "changedPathsByParent": {
+        "f1256ffb6f70f5dcb5b5b1d93705dd60ec8afc42": [
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeOperationsRoutes.ts",
+          "docs/adr/ADR-0038-knowledge-acquisition-platform-architecture.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/adr-0038-knowledge-acquisition-platform-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a17ea1a7e86690783ca9affef09d57bc3a96d318"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

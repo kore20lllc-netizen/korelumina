@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:2a36af0a6aeef080764cba36b3fdd241bbf75029d14c305e478f2437d6467239",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - Fix JournalPanel Crash — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=2",
+  "checksum": "2a36af0a6aeef080764cba36b3fdd241bbf75029d14c305e478f2437d6467239",
+  "metadata": {
+    "content": "Current task: Fix rejected push (non-fast-forward) and safely publish checkpoint\n\nWhat happened (direct)\n\n\nYour local main is behind remote\n\n\nYou successfully pushed the tag\n\n\nBut main branch push was rejected\n\n\nSo:\n\n\nbuilder-ui-stable tag = ✅ already on remote\n\n\nmain = ❌ not updated yet\n\n\n\nCorrect fix (safe, no history break)\nBashgit pull origin main --rebase\ngit push origin main\n\nIf rebase produces conflicts\nRun:\nBashgit status\nFix files → then:\nBashgit add .\ngit rebase --continue\ngit push origin main\n\nDO NOT do this\n\n\ndo NOT force push (--force) → will break history\n\n\ndo NOT reset → you’ll lose your checkpoint\n\n\n\nFinal expected state\n\n\nmain updated → yes\n\n\ntag exists remotely → yes\n\n\nUI checkpoint preserved → yes\n\n\n\nTask complete.",
+    "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "6452cb72-384b-48c3-b06e-24aaabb70fda",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:6452cb72-384b-48c3-b06e-24aaabb70fda",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=2",
+    "sourceRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+    "segmentAvailability": "available",
+    "conversationChecksum": "37984edfedd9f57e78d643b85f2079133f345b1d12dfbc741c2850d3a85fb791",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+      "exportRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610831796
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:6452cb72-384b-48c3-b06e-24aaabb70fda"
+    ],
+    "conversation": [
+      "69cc7bdc-82ac-8329-b252-f0bce4d5a035"
+    ]
+  }
+}

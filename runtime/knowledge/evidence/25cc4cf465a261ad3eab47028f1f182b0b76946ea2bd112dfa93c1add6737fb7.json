@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:7c37efd5766970d0c537561fb8dbad3db137b85b6d9f2fd441a347c12f4e565d",
+  "type": "commit",
+  "title": "feat(builder): add shared workspace section",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076302,
+  "observedAt": 1783143156000,
+  "contentRef": "git:commit:a93c459ecc4c2724d4e5a11b68e2b9cc79468724",
+  "checksum": "sha256:39a8ead3301b556c225d1ffd74f6b89f8c3e34c052878683ca3f25e411028aed",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 770,
+    "genesisAdmissionIdentity": "genesis-admission:d60f1fe1033caec3295f97bf58139e2cda2155b8c6310e66fc4c7a29d3509177",
+    "historicalSourceId": "genesis-source:commit:a93c459ecc4c2724d4e5a11b68e2b9cc79468724",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a93c459ecc4c2724d4e5a11b68e2b9cc79468724",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a93c459ecc4c2724d4e5a11b68e2b9cc79468724",
+      "parentShas": [
+        "d92303a4bf7806535f1af623641f3faf1400cfa0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143156000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143156000
+      },
+      "subject": "feat(builder): add shared workspace section",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx"
+      ],
+      "changedPathsByParent": {
+        "d92303a4bf7806535f1af623641f3faf1400cfa0": [
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/wds-workspace-section-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a93c459ecc4c2724d4e5a11b68e2b9cc79468724"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

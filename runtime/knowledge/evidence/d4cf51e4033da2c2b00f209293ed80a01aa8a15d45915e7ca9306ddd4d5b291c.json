@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d314099a21b42f60c127c9fde78eccd4d77b2fa6280f4edcb19c822b4a9c272a",
+  "type": "commit",
+  "title": "docs(canon): establish KoreLumina canon",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077092,
+  "observedAt": 1783195816000,
+  "contentRef": "git:commit:31a52392829af96d34bc36626c236258d46c0667",
+  "checksum": "sha256:5800f94d093a52542748451de9f2e9690bb0b0c02808d5298fabddbd2d5d9ff4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 788,
+    "genesisAdmissionIdentity": "genesis-admission:3296df1372b546a3df2e878ba1b30e702e3fd2eff22e77956aaf1e534d0d2184",
+    "historicalSourceId": "genesis-source:commit:31a52392829af96d34bc36626c236258d46c0667",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:31a52392829af96d34bc36626c236258d46c0667",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "31a52392829af96d34bc36626c236258d46c0667",
+      "parentShas": [
+        "dca7a286917193d591ebb721d6aa46b89c16eb37"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195816000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783195816000
+      },
+      "subject": "docs(canon): establish KoreLumina canon",
+      "body": "",
+      "changedPaths": [
+        "docs/canon/README.md"
+      ],
+      "changedPathsByParent": {
+        "dca7a286917193d591ebb721d6aa46b89c16eb37": [
+          "docs/canon/README.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/canon-readme-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:31a52392829af96d34bc36626c236258d46c0667"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

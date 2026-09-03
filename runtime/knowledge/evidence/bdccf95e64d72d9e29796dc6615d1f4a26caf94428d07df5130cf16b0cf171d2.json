@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:f0f05d2f720906f07adc1200afebaf9c6fc1f19a5f88ff571ed5102baa3a5a23",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Runtime stop investigation — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb#browser-turn=0",
+  "checksum": "f0f05d2f720906f07adc1200afebaf9c6fc1f19a5f88ff571ed5102baa3a5a23",
+  "metadata": {
+    "content": "Create a new chat and paste a handoff block. The key is to preserve the exact branch, commit, findings, and next investigation target.\nUse this:\nKORELUMINA HANDOFF\n\nCurrent branch:\nrecovery/runtime-green-64a049b\n\nCurrent commit:\n64a049b\n\nKnown facts:\n- Runtime health OK on :4100\n- POST /api/runtime/start works\n- elegance-sync-app starts on :4201\n- runtime status returns running\n- useRuntimeBoot exists and auto-starts runtime\n- activeProject is populated\n- projectId = elegance-sync-app\n- runtimeUrl = http://localhost:4201\n\nBrowser verification:\ndocument.querySelectorAll(\"iframe\").length = 1\n\niframe:\n{\n  src: \"http://localhost:4201/\",\n  width: 456,\n  height: 283\n}\n\nDeveloperWorkspace logs:\nactiveProject present\nprojectId present\nruntimeUrl present\n\nCurrent conclusion:\nPreview pipeline is alive:\nWorkspaceContext\n→ activeProject\n→ useRuntimeBoot\n→ runtimeUrl\n→ PreviewFrame\n→ iframe\n→ runtime app\n\nNot confirmed:\n- whether any visual rendering bug remains\n- whether RuntimeToolbar from stash@{2} should be restored\n- whether root dev supervisor from stash@{3} should be restored\n\nRelevant references:\nstash@{2}\n- RuntimeToolbar.tsx\n- RuntimeStatusBanner.tsx\n- PreviewFrame changes\n\nstash@{3}\n- dev-supervisor.mjs\n- package.json runtime startup scripts\n- manual stop logic in useRuntimeBoot\n\nLast verified browser state:\niframe exists and points to localhost:4201\n\nContinue investigation from here.\nEven better, open the new chat and start with:\n\nContinue KoreLumina runtime recovery from this handoff. Do not re-investigate anything already verified. Start from the last verified state and identify the next unresolved issue.\n\nThat will minimize duplicate debugging.",
+    "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "3b65eccd-840f-45d1-b8c9-c690a827bc1f",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a22547c-c19c-83ea-b716-bdf9822d6efb:message:3b65eccd-840f-45d1-b8c9-c690a827bc1f",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb#browser-turn=0",
+    "sourceRevision": "sha256:2dfdfc8c18dd8b31b0fee146297459c70ba3e58c7c3ef29fad33b960c09430e8",
+    "segmentAvailability": "available",
+    "conversationChecksum": "7fac2d0c233d6ffc08d60c4025e7621e9bb2066bd086cbf3b0a77cb67e812786",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:2dfdfc8c18dd8b31b0fee146297459c70ba3e58c7c3ef29fad33b960c09430e8",
+      "exportRevision": "sha256:2dfdfc8c18dd8b31b0fee146297459c70ba3e58c7c3ef29fad33b960c09430e8"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630862871
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a22547c-c19c-83ea-b716-bdf9822d6efb:message:3b65eccd-840f-45d1-b8c9-c690a827bc1f"
+    ],
+    "conversation": [
+      "6a22547c-c19c-83ea-b716-bdf9822d6efb"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:e7db8828cf32ea860b18d71cbe76303c707d911190e7327ac6c4fd3f35c24ec9",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina repo status — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=2",
+  "checksum": "e7db8828cf32ea860b18d71cbe76303c707d911190e7327ac6c4fd3f35c24ec9",
+  "metadata": {
+    "content": "The next task is visual validation of the sidebar regression fix.\nYou have already completed the code patch and the full build is green. Now start the app and confirm:\n\n\nOnly one Runtime Operations button appears.\n\n\nIt opens the production Runtime Operations workspace.\n\n\nNo Runtime Operations Preview entry remains.\n\n\nNo console errors appear.\n\n\nRun:\nBashnpm run dev\nAfter visual confirmation, this regression fix is ready to be included with the current uncommitted milestone. Do not commit yet, because the branch also contains the unfinished Executive primitives extraction:\nM  Sidebar.tsx\nM  LuminaCompositionSurface.tsx\n?? components/lumina/executive/\nOnce the sidebar is confirmed, the next development milestone is to complete the Executive primitive extraction and integrate it into Knowledge Operations, then build and validate that workspace before any commit.",
+    "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "95a4da33-dff7-4439-8d48-a134c2e276f0",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:95a4da33-dff7-4439-8d48-a134c2e276f0",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=2",
+    "sourceRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+    "segmentAvailability": "available",
+    "conversationChecksum": "301ba4fa823ad4a444eaf5cbb9b1dd872683b682e20fa989dee7b09e188a6357",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+      "exportRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630769970
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:95a4da33-dff7-4439-8d48-a134c2e276f0"
+    ],
+    "conversation": [
+      "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7"
+    ]
+  }
+}

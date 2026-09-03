@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:3cbea1d9326ac6b9feca1cc183f346db9c604b8ca08bac0b3bd02d5afb2f6c82",
+  "type": "document",
+  "title": "Chief Agent Interface",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076839,
+  "observedAt": 1783157103000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_INTERFACE.md",
+  "checksum": "sha256:bfd381b74533346d372b906b710658b155db0f02c18cd75a0d816091cdc0214f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 782,
+    "genesisAdmissionIdentity": "genesis-admission:21c04d986f06162a9e67199bd4f59097b58eef765d3677ca21d075a09b1c7466",
+    "historicalSourceId": "genesis-source:document:derived:21d49f21bc17fb569912900779a18d7529c701f0005f51b74846be62dd7adfce",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "approvalState": "Approved",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_INTERFACE.md",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Chief Agent Interface",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_INTERFACE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:21d49f21bc17fb569912900779a18d7529c701f0005f51b74846be62dd7adfce"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

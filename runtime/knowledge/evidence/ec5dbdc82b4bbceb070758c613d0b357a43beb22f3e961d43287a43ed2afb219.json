@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:288038b7d7ebfd14cc14cd56c696d3bc3f9840b10233e286d268a333853b60f9",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Progress — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3#browser-turn=4",
+  "checksum": "288038b7d7ebfd14cc14cd56c696d3bc3f9840b10233e286d268a333853b60f9",
+  "metadata": {
+    "content": "Yes. Since this is a long-running reconstruction effort, every completed milestone should be preserved immediately. I would add the following section to the handoff.\n\nSource Control Policy (Mandatory)\nEvery completed refinement must be preserved before proceeding to the next task.\nNever accumulate multiple completed milestones without committing them.\nThe workflow is:\n\n\nImplement one focused refinement.\n\n\nVerify the application builds successfully.\n\n\nValidate the UI manually.\n\n\nCommit the completed work.\n\n\nPush the branch to the remote repository.\n\n\nContinue with the next refinement.\n\n\nThis ensures that no production-quality work is lost and every milestone has a recoverable checkpoint.\n\nRequired Validation\nBefore every commit:\nBashnpm run build\nThe build must be green.\nDo not commit failing builds.\n\nCommit Policy\nEach commit should represent one logical refinement.\nAvoid combining unrelated visual improvements into a single commit.\nExamples:\n\n\nrefactor(runtime): refine runtime hero metrics\n\n\nfeat(runtime): polish runtime project cards\n\n\nstyle(runtime): improve runtime inspector hierarchy\n\n\nrefactor(runtime): refine event stream presentation\n\n\nCommits should be small, reviewable, and easy to revert independently.\n\nPush Policy\nAfter every successful commit:\nBashgit push\nDo not leave completed work only in the local repository.\nThe remote branch is the recovery point for the project.\n\nRecovery Rule\nAt the completion of every production-quality milestone:\n\n\nBuild passes.\n\n\nManual validation passes.\n\n\nCommit created.\n\n\nPush completed.\n\n\nOnly then may work continue to the next Runtime Operations refinement.\nThis policy is mandatory throughout the Runtime Operations premium polish and continues until the workspace reaches production-ready status. It minimizes the risk of losing work and provides a clean history of each completed refinement.",
+    "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "199f77bb-3901-40ad-821a-064d020b478f",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a58091a-1650-83ea-9129-6b55b27ac7f3:message:199f77bb-3901-40ad-821a-064d020b478f",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3#browser-turn=4",
+    "sourceRevision": "sha256:b4175ab34524bf1078a0551c4b49b80b1cc078fdc7bc31473d522957c6c9158f",
+    "segmentAvailability": "available",
+    "conversationChecksum": "da37f5fee657bc1bd0735655e38a063656c9b2125ba6433dab5ff1a7f1eaab66",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:b4175ab34524bf1078a0551c4b49b80b1cc078fdc7bc31473d522957c6c9158f",
+      "exportRevision": "sha256:b4175ab34524bf1078a0551c4b49b80b1cc078fdc7bc31473d522957c6c9158f"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630747993
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a58091a-1650-83ea-9129-6b55b27ac7f3:message:199f77bb-3901-40ad-821a-064d020b478f"
+    ],
+    "conversation": [
+      "6a58091a-1650-83ea-9129-6b55b27ac7f3"
+    ]
+  }
+}

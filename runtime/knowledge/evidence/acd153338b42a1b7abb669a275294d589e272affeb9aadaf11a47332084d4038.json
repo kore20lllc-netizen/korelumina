@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:c3b4b6d13056813e6ca73facfa5869c4d2df74862f0cb4282bc361d5c2b952ee",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Next Diff Engine-korelumina — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=4",
+  "checksum": "c3b4b6d13056813e6ca73facfa5869c4d2df74862f0cb4282bc361d5c2b952ee",
+  "metadata": {
+    "content": "Good. This output is very important signal.\nYour runtime engine is now doing the correct thing.\nLet’s be very precise.\n\n✅ What this curl proves\nYou are successfully getting:\n\n\ncompiled runtime HTML\n\n\nesbuild bundled output\n\n\nReact UMD injection\n\n\npage component export detected\n\n\nruntime worker responding fast (~13ms earlier)\n\n\nMeaning:\n\n⭐ KoreLumina Runtime Engine V3 is operational\n\nThis is no longer infra debugging.\n\nNow you are in IDE behavior tuning phase.\n\n❗ BUT — your terminal log earlier shows the REAL issue\nFrom your previous screenshot:\nGET /api/dev/runtime/execute ...\nGET /studio-runtime/demo-project ...\nGET /api/dev/runtime/execute ...\nGET /studio-runtime/demo-project ...\nGET /api/dev/runtime/execute ...\nGET /studio-runtime/demo-project ...\n(repeats forever)\nThis is not a crash.\nThis is:\n\n🔥 Preview polling loop running TOO FAST\n\nSo browser keeps reloading iframe → blinking.\n\n✅ What we must verify NOW (critical)\nAfter the rewrite I gave you, the preview should behave like this:\nExpected\n\n\nruntime HTML loads once\n\n\npolling continues silently\n\n\nNO iframe reload unless template changes\n\n\nNO blinking\n\n\nCPU usage drops\n\n\nterminal stops spamming continuous requests\n\n\n\n👉 So now do this EXACT test\nOpen browser:\nhttp://localhost:3000/studio-runtime/demo-project\nThen:\nQuestion 1\nDoes the preview stay stable now?\nQuestion 2\nDoes terminal still spam:\nGET /studio-runtime/demo-project?t=xxx\nQuestion 3\nWhen you apply another template:\ncurl -X POST ...\nDoes preview refresh only once?\n\n⚠️ VERY important architecture note (senior-engineer level)\nRight now KoreLumina preview model is:\npoll runtime → compare html → set iframe srcDoc\nThis is GOOD for MVP.\nBut real builder-grade system will evolve to:\nPhase Next\n\n\nruntime writes version file\n\n\npreview subscribes (SSE / websocket / fs signal)\n\n\nno polling at all\n\n\ninstant rebuild signal\n\n\ndeterministic reload\n\n\nThis is what will make KoreLumina feel:\n\n⭐ First-class builder (Lovable / Stackblitz tier)\n\n\n✅ Also — your runtime HTML structure looks clean\nImportant signals:\n\n\nKorePreviewApp bundle wrapper → correct\n\n\ncomponent export detection present\n\n\nno dynamic require errors\n\n\nno JSX runtime missing\n\n\nUMD React injection correct\n\n\nThis means:\n\nRuntime compilation pipeline is now stable.\n\n\nNow answer only this\n👉 Is the preview still blinking OR now stable?\nWe do NOT move to next engine step until preview UX is solid.",
+    "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "fa55bee7-65cf-4dfc-9d0e-f6d383c032b5",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:fa55bee7-65cf-4dfc-9d0e-f6d383c032b5",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=4",
+    "sourceRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0fb33606832a5c1613d7c0cd61634a9f42208910a9b0ea7de37ffa55e234ed43",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+      "exportRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630819038
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:fa55bee7-65cf-4dfc-9d0e-f6d383c032b5"
+    ],
+    "conversation": [
+      "69b7017a-f53c-8328-bfeb-b2de07d7838c"
+    ]
+  }
+}

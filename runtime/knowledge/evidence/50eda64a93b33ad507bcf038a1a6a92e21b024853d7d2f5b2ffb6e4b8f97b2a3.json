@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:6169ea998093c69d68b45c6b14eeed796ef905865a0ac517fcee3b544724a2a8",
+  "type": "commit",
+  "title": "feat(knowledge): add acquisition activity panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240075668,
+  "observedAt": 1783073082000,
+  "contentRef": "git:commit:74ad567127d943a7c7d4dd69466c500ebe60c405",
+  "checksum": "sha256:57aec892fd418f572aeb6a57c31dfb6d1049707599f555feb92bdc692dba5280",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 758,
+    "genesisAdmissionIdentity": "genesis-admission:3e0308c8a6412d589a13f54a0584c1cc997ae642e4435fde14ec59ec15483473",
+    "historicalSourceId": "genesis-source:commit:74ad567127d943a7c7d4dd69466c500ebe60c405",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:74ad567127d943a7c7d4dd69466c500ebe60c405",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "74ad567127d943a7c7d4dd69466c500ebe60c405",
+      "parentShas": [
+        "2190e2e343ce6060ac67b165d386ec5c7597de19"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783073082000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783073082000
+      },
+      "subject": "feat(knowledge): add acquisition activity panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/AcquisitionActivityPanel.tsx",
+        "runtime/knowledge/runtime/a3d6a304-c9a4-493e-b07b-9c2c6faeeefc.json"
+      ],
+      "changedPathsByParent": {
+        "2190e2e343ce6060ac67b165d386ec5c7597de19": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/AcquisitionActivityPanel.tsx",
+          "runtime/knowledge/runtime/a3d6a304-c9a4-493e-b07b-9c2c6faeeefc.json"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kops-008-acquisition-activity-panel-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:74ad567127d943a7c7d4dd69466c500ebe60c405"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

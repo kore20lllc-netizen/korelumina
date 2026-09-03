@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:a0841c76775fe786a509cf60c1d340f8c8daa9f2277acdafbad5f06d62b9a55d",
+  "type": "document",
+  "title": "Continuous Improvement",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240130553,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:continuous-improvement:99-102",
+  "checksum": "sha256:06c07b3b958f650608df4fe1e3532090e0881a727433255397c5fcc89160429a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1658,
+    "genesisAdmissionIdentity": "genesis-admission:4824856e43fea4eff4c5ff40f756ed4b57a98d6a52e9077ca50f13315f654794",
+    "historicalSourceId": "genesis-source:document:derived:3ec82862ba5980e2e15acd3a3c78af39941f5c47d51a0abb9c6a0d74ba382daa",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 99,
+    "lineEnd": 102,
+    "sectionTitle": "Continuous Improvement",
+    "sectionSlug": "continuous-improvement",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Continuous Improvement\n\nThe Chief Agent continuously improves by converting validated engineering work into repository-backed institutional memory.\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Continuous Improvement",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 99,
+      "lineEnd": 102,
+      "sectionTitle": "Continuous Improvement",
+      "sectionSlug": "continuous-improvement",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Continuous Improvement\n\nThe Chief Agent continuously improves by converting validated engineering work into repository-backed institutional memory.\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3ec82862ba5980e2e15acd3a3c78af39941f5c47d51a0abb9c6a0d74ba382daa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

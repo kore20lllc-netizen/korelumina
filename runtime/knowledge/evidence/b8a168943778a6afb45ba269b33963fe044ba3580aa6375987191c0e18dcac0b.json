@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:4d5f47800cda2941618b2ef4d2f54bcc49f96058a8db44e7822b54703ff0c93f",
+  "type": "commit",
+  "title": "feat(education): add educational corpus certification workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240125707,
+  "observedAt": 1787587931000,
+  "contentRef": "git:commit:c2c0861f58fd4f31ae8d8f38a67e18806714621f",
+  "checksum": "sha256:01dea4a0667784749749c0bcdc6f16869a75f8eee99a879dd7d640890627d0f6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1600,
+    "genesisAdmissionIdentity": "genesis-admission:6b98dc9f0795c62bdacf2c13fbed5cf868ce10a74c50fe93660a2f8def1b467b",
+    "historicalSourceId": "genesis-source:commit:c2c0861f58fd4f31ae8d8f38a67e18806714621f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c2c0861f58fd4f31ae8d8f38a67e18806714621f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c2c0861f58fd4f31ae8d8f38a67e18806714621f",
+      "parentShas": [
+        "428b7745b4d0c6b06ef2e17ccd4773c5111d2e18"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787587931000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787587931000
+      },
+      "subject": "feat(education): add educational corpus certification workflow",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusCertificationPanel.tsx",
+        "apps/lumina-builder/src/hooks/useEducationalCorpusCertification.ts",
+        "apps/lumina-builder/src/services/educationalCorpusService.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts",
+        "docs/ui-contracts/knowledge-operations-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "428b7745b4d0c6b06ef2e17ccd4773c5111d2e18": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusCertificationPanel.tsx",
+          "apps/lumina-builder/src/hooks/useEducationalCorpusCertification.ts",
+          "apps/lumina-builder/src/services/educationalCorpusService.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerKnowledgeEducationRoutes.ts",
+          "docs/ui-contracts/knowledge-operations-certified-ui.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c2c0861f58fd4f31ae8d8f38a67e18806714621f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

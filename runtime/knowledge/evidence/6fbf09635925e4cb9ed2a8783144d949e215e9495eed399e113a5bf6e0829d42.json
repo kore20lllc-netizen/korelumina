@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:158274c265efe5483e0a54f248b8d619178a88a2e7ffa7a77eaf8ecdd8a23799",
+  "type": "document",
+  "title": "Lumina Visual Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079161,
+  "observedAt": 1783472116000,
+  "contentRef": "docs/architecture/LUMINA_VISUAL_ARCHITECTURE.md",
+  "checksum": "sha256:4594e9738da1484beb7aa6555c603b97f5eab5b6f74c0994a88adfcb258a461a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 835,
+    "genesisAdmissionIdentity": "genesis-admission:9f591c8dc3d1ab03e589fcddcfcf686c3bdd74bf8109d1762697e6662936c9bc",
+    "historicalSourceId": "genesis-source:document:derived:2b64b81d6ac65ca1b677333e1d68732d3955bdb9d69847df5549ee1da9c5f34e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Core Architecture",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/LUMINA_VISUAL_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Visual Architecture",
+      "status": "Core Architecture",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_VISUAL_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2b64b81d6ac65ca1b677333e1d68732d3955bdb9d69847df5549ee1da9c5f34e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

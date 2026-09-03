@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:80ad5e05a9770df53bdf7494c7a3b23c88fc1625a20d0449e757f42e696017f7",
+  "type": "document",
+  "title": "KA-001 — Knowledge Operations Platform Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085773,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/knowledge-operations/KA-001_KNOWLEDGE_OPERATIONS_PLATFORM_ARCHITECTURE.md",
+  "checksum": "sha256:4fb5b05fd62c076ad67cd76e628d687545e7dbd73d33601561349e38da23a58d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 975,
+    "genesisAdmissionIdentity": "genesis-admission:0e5c9b4f1816d2ff491be2c3c7f4c88039df70669716e79ed51ed4f419d298ff",
+    "historicalSourceId": "genesis-source:document:derived:e7400f02826c25ddf42a60279e520b57d44320a3bd382e6eeb96ec423b799e57",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/knowledge-operations/KA-001_KNOWLEDGE_OPERATIONS_PLATFORM_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KA-001 — Knowledge Operations Platform Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KA-001_KNOWLEDGE_OPERATIONS_PLATFORM_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e7400f02826c25ddf42a60279e520b57d44320a3bd382e6eeb96ec423b799e57"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

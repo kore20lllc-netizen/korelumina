@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:7b39e39c5c1025d1572e3bf6ea6d1a5f34320669e8f7a1e96175f8ed2e836df1",
+  "type": "commit",
+  "title": "feat(builder): add shared workspace card",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076211,
+  "observedAt": 1783142815000,
+  "contentRef": "git:commit:b600dd30c0419f8d900736d16f0b748fc2a8a13f",
+  "checksum": "sha256:636c28def4c8f2e13d1fb9daf546d0a6f355dbc56157477007f40ebc9234bf6f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 768,
+    "genesisAdmissionIdentity": "genesis-admission:da677859d2cf4781bb7cf3ef404559c631120f9c4d282fdac57137d21d61bb91",
+    "historicalSourceId": "genesis-source:commit:b600dd30c0419f8d900736d16f0b748fc2a8a13f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b600dd30c0419f8d900736d16f0b748fc2a8a13f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b600dd30c0419f8d900736d16f0b748fc2a8a13f",
+      "parentShas": [
+        "1f00088c506a365fe6e5fe468fa1cc07577e161c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142815000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142815000
+      },
+      "subject": "feat(builder): add shared workspace card",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx"
+      ],
+      "changedPathsByParent": {
+        "1f00088c506a365fe6e5fe468fa1cc07577e161c": [
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/wds-workspace-card-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b600dd30c0419f8d900736d16f0b748fc2a8a13f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:6f5ad347a76edbe220448af0663761ec364ba707b4cd02feaa902af43bb2b760",
+  "type": "commit",
+  "title": "refactor(knowledge): remove obsolete local flagship panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098971,
+  "observedAt": 1786189689000,
+  "contentRef": "git:commit:ef7acf941b3beca704fcaf3b53caa1fc73894faf",
+  "checksum": "sha256:7d225860758fd3dc3b8ba072c3a1028ad3f7bda83a56a548cf709987514e9bce",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1217,
+    "genesisAdmissionIdentity": "genesis-admission:b5735e5d9f862ee69ccf80919d97b9912e3c2a50668259104a837d9f60a60f40",
+    "historicalSourceId": "genesis-source:commit:ef7acf941b3beca704fcaf3b53caa1fc73894faf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ef7acf941b3beca704fcaf3b53caa1fc73894faf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ef7acf941b3beca704fcaf3b53caa1fc73894faf",
+      "parentShas": [
+        "9b81bf5b859ab203d5e823aad40debcfa725bf3a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786189689000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786189689000
+      },
+      "subject": "refactor(knowledge): remove obsolete local flagship panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/FlagshipPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+      ],
+      "changedPathsByParent": {
+        "9b81bf5b859ab203d5e823aad40debcfa725bf3a": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/FlagshipPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ef7acf941b3beca704fcaf3b53caa1fc73894faf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

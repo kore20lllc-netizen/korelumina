@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:32328abf7c12dec037886fd4fb893642d47bcdd5ada93c9804a93942e1766c73",
+  "type": "commit",
+  "title": "feat(lumina): add activity feed row primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092049,
+  "observedAt": 1785927453000,
+  "contentRef": "git:commit:4fd17fcfae2a68252ac5f60c24169dfa4b593b5f",
+  "checksum": "sha256:0fd75d642d6c1583afadd35fb0eb88e4c0c2080079a06a3d2e773f3277ffe494",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1096,
+    "genesisAdmissionIdentity": "genesis-admission:3863652a5529b098b4606e084340e8cd1f270105985dfd8df9ed22c989eb735e",
+    "historicalSourceId": "genesis-source:commit:4fd17fcfae2a68252ac5f60c24169dfa4b593b5f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4fd17fcfae2a68252ac5f60c24169dfa4b593b5f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4fd17fcfae2a68252ac5f60c24169dfa4b593b5f",
+      "parentShas": [
+        "863f4a6374fada4dc891637f0e5e3521c15677eb"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785927453000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785927453000
+      },
+      "subject": "feat(lumina): add activity feed row primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaActivityFeedRow.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+      ],
+      "changedPathsByParent": {
+        "863f4a6374fada4dc891637f0e5e3521c15677eb": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaActivityFeedRow.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4fd17fcfae2a68252ac5f60c24169dfa4b593b5f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

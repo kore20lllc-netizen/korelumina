@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:fb5685bab2edcc1752d142fc330a273f98acb031bbb4d1e58381633445efa661",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Commit Guardrail — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=4",
+  "checksum": "fb5685bab2edcc1752d142fc330a273f98acb031bbb4d1e58381633445efa661",
+  "metadata": {
+    "content": "Open a new chat and paste a handoff summary. Include:\nPROJECT: KoreLumina\n\nCURRENT ISSUE:\nPreview/runtime system investigation.\n\nFACTS VERIFIED:\n- AI Preview renders correctly.\n- Designer workspace blank/white.\n- Developer workspace blank/white.\n- PreviewFrame shows right and bottom strips even when no iframe is rendered.\n- runtime:file-changed events are reaching the browser.\n- SSE endpoint works.\n- Runtime starts on port 4201.\n- After Stop, preview skeleton appears.\n- Runtime stop behavior still under investigation.\n- localStorage.getItem(\"lumina:last-runtime-project\") === null\n- window.__LUMINA_RUNTIME__ === undefined\n\nFILES UNDER INVESTIGATION:\n- apps/lumina-builder/src/components/preview/PreviewFrame.tsx\n- apps/lumina-builder/src/hooks/useRuntimeBoot.ts\n- apps/lumina-runtime/src/runtime/startProject.ts\n- apps/lumina-runtime/src/runtime/registry.ts\n\nLAST CONCLUSION:\nDo not investigate image generation, SVG errors, or React warnings.\nFocus on:\n1. PreviewFrame layout causing right/bottom strip.\n2. useRuntimeBoot runtimeUrl lifecycle.\n3. Runtime stop/start state synchronization.\n4. Why AI Preview works while Designer and Developer previews do not.\n\nNEXT STEP:\nAudit PreviewFrame sizing chain and trace runtimeUrl from useRuntimeBoot into PreviewFrame after stop/start.\nIf you want the strongest continuity, also include the latest findings:\ngrep -R \"runtime:file-changed\" confirmed\ncurl -N http://localhost:4100/api/runtime/events confirmed\nPreviewFrame contains:\n- DEVICE_WIDTHS\n- iframe\n- place-items-center\n- overflow-auto\n- glass-strong container\n\nKnown symptom:\nRuntime may be running, but PreviewFrame remains on skeleton and does not rebind.\nThat will give the new chat enough context to continue without redoing the investigation from scratch.",
+    "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "05e50c15-d979-4fb6-be88-cb3e799b0738",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:05e50c15-d979-4fb6-be88-cb3e799b0738",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=4",
+    "sourceRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+    "segmentAvailability": "available",
+    "conversationChecksum": "163cd330ee4ee43a502972b0cb4705bf42b2cbab6fa122b665523b6cf66f4095",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+      "exportRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630637343
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:05e50c15-d979-4fb6-be88-cb3e799b0738"
+    ],
+    "conversation": [
+      "69cc9772-05f8-8325-8512-4aabf0ad0551"
+    ]
+  }
+}

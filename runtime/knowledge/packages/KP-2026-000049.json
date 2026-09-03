@@ -1,0 +1,206 @@
+{
+  "id": "KP-2026-000049",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1788240130986,
+  "updatedAt": 1788240130986,
+  "data": {
+    "id": "KP-2026-000049",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa",
+        "candidateType": "CandidateArtifact",
+        "title": "Mission Ownership",
+        "summary": "## Mission Ownership The Chief Agent owns mission-level orchestration. Specialist agents execute bounded tasks. Humans approve high-impact decisions.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:0d231153af0b450f35d3d7e1c469475296faa73785c511ecce181fe1fab3c24d"
+          ],
+          "genesisReplay": [
+            "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+          ]
+        },
+        "extractedAt": 1788240130985,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130985,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:mission-ownership:46-53",
+          "checksum": "sha256:da4a4372e8d684fcc97770573db7621692811cc3f3eeefd7a7b200616ff2dc1e",
+          "capturedAt": 1788240130981,
+          "observedAt": 1787873068000,
+          "authorityClass": "governance",
+          "approvalState": "Approved",
+          "owner": "Chief Systems Architect",
+          "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+          "version": "1.0",
+          "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+          "lineStart": 46,
+          "lineEnd": 53,
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "document",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+            "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+            "genesisManifestIndex": 1663,
+            "genesisAdmissionIdentity": "genesis-admission:296753086d9965c8eb45b9b566f0ad1eff76f9bae44d517df533c1f100f92d16",
+            "historicalSourceId": "genesis-source:document:derived:0d231153af0b450f35d3d7e1c469475296faa73785c511ecce181fe1fab3c24d",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "governance",
+            "approvalState": "Approved",
+            "owner": "Chief Systems Architect",
+            "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+            "version": "1.0",
+            "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+            "lineStart": 46,
+            "lineEnd": 53,
+            "sectionTitle": "Mission Ownership",
+            "sectionSlug": "mission-ownership",
+            "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+            "content": "## Mission Ownership\n\nThe Chief Agent owns mission-level orchestration.\n\nSpecialist agents execute bounded tasks.\n\nHumans approve high-impact decisions.\n",
+            "documentClassification": "document",
+            "discoveryMethod": "documentation-section-v1",
+            "sourceMetadata": {
+              "title": "Mission Ownership",
+              "status": "Approved",
+              "documentClassification": "document",
+              "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+              "lineStart": 46,
+              "lineEnd": 53,
+              "sectionTitle": "Mission Ownership",
+              "sectionSlug": "mission-ownership",
+              "currentAuthority": "CURRENT_SUPPORTING",
+              "authorityBasis": [
+                "docs/canon/VISION_2050.md",
+                "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+                "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+                "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+                "docs/architecture/reconciliation/CHIEF_AGENT_OPERATIONAL_LEARNING_MODEL.md",
+                "docs/architecture/reconciliation/CHIEF_AGENT_AUTHORITY_IDENTITY_RECONCILIATION.md"
+              ],
+              "authorityDeclarationComplete": true,
+              "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+              "content": "## Mission Ownership\n\nThe Chief Agent owns mission-level orchestration.\n\nSpecialist agents execute bounded tasks.\n\nHumans approve high-impact decisions.\n"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1788240130986,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+      ],
+      "sourceLocations": [
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+      ],
+      "contentRefs": [
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:mission-ownership:46-53"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "governance",
+    "approvalState": "pending_review",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1788240130986,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130985,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1788240130986
+      },
+      {
+        "state": "compiled",
+        "at": 1788240130986
+      },
+      {
+        "state": "validated",
+        "at": 1788240130986
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1788240130986
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1788240130986
+    },
+    "createdAt": 1788240130986,
+    "updatedAt": 1788240130986,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ]
+    }
+  }
+}

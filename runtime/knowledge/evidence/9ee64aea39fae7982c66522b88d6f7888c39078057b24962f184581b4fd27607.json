@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:57222379b7c7a8ab1a42085eb5d8915211fd0abaa5abe3a1314c28b0ad3eecea",
+  "type": "commit",
+  "title": "feat(knowledge): activate conversation compiler preservation path",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240108647,
+  "observedAt": 1786427106000,
+  "contentRef": "git:commit:1ef0560b7ac3b1b61d3b1d124727795344f0ef59",
+  "checksum": "sha256:c782e1cadb3bcad5bce9ee5dda4b212638469ccf5e477ca3f8d1bf08eb604ac8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1370,
+    "genesisAdmissionIdentity": "genesis-admission:c042d8643bc2cd36aab35d3ed18b9bd3ab98d8e7dc2b451caa73cdcc2a95a5b9",
+    "historicalSourceId": "genesis-source:commit:1ef0560b7ac3b1b61d3b1d124727795344f0ef59",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1ef0560b7ac3b1b61d3b1d124727795344f0ef59",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1ef0560b7ac3b1b61d3b1d124727795344f0ef59",
+      "parentShas": [
+        "013459aee8ad3ca67b84461dceaab37d1c303d3e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786427106000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786427106000
+      },
+      "subject": "feat(knowledge): activate conversation compiler preservation path",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/bootstrap/__tests__/ConversationPreservationPath.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/conversation/ConversationCompiler.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/compiler/conversation/__tests__/ConversationCompiler.test.ts"
+      ],
+      "changedPathsByParent": {
+        "013459aee8ad3ca67b84461dceaab37d1c303d3e": [
+          "apps/lumina-runtime/src/knowledge-preservation/bootstrap/__tests__/ConversationPreservationPath.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/conversation/ConversationCompiler.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/compiler/conversation/__tests__/ConversationCompiler.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1ef0560b7ac3b1b61d3b1d124727795344f0ef59"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

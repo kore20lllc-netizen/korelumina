@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:723ba53051347ac543fc8e8b0235ff769c52403eed6e6ef8f49e1cafc64e9bed",
+  "type": "document",
+  "title": "XA-001A — Experience Evolution Principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085578,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/experience/XA-001A_EXPERIENCE_EVOLUTION_PRINCIPLES.md",
+  "checksum": "sha256:e6e891ac67f115fdde69fff06f04bee294dad2994ed8025516cf0314703dac8d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 971,
+    "genesisAdmissionIdentity": "genesis-admission:1f063a44945873e1a264efc405f2d0a04fce3785d3b72562512aa1baebbc70a4",
+    "historicalSourceId": "genesis-source:document:derived:ef4a7cc66dc137c87b10bb5a0797261078ac0bb48fbc025e45d75513d01d482c",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/experience/XA-001A_EXPERIENCE_EVOLUTION_PRINCIPLES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "XA-001A — Experience Evolution Principles",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/experience/XA-001A_EXPERIENCE_EVOLUTION_PRINCIPLES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ef4a7cc66dc137c87b10bb5a0797261078ac0bb48fbc025e45d75513d01d482c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

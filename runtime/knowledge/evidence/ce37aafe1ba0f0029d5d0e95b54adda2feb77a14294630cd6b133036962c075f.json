@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:e36f630761b69e9e71f38c5dab6425c7fee78a0e5506225070ff351a78f4b593",
+  "type": "commit",
+  "title": "fix(knowledge): compact production navigator",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240095629,
+  "observedAt": 1786055179000,
+  "contentRef": "git:commit:f1162ec12f5484bdf4d0e45d6a50d3513907ba5a",
+  "checksum": "sha256:77d3871d651bb71597cc3dca89ee102c809e848f94995b42fcf181c1d7e72c96",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1160,
+    "genesisAdmissionIdentity": "genesis-admission:370dd8c1156bfb7e67a70c3c4162f6ed0a95dfe6073288172679a10d125d1da0",
+    "historicalSourceId": "genesis-source:commit:f1162ec12f5484bdf4d0e45d6a50d3513907ba5a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f1162ec12f5484bdf4d0e45d6a50d3513907ba5a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f1162ec12f5484bdf4d0e45d6a50d3513907ba5a",
+      "parentShas": [
+        "ade0cfded8b148e843231521edba10f079534a85"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786055179000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786055179000
+      },
+      "subject": "fix(knowledge): compact production navigator",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx"
+      ],
+      "changedPathsByParent": {
+        "ade0cfded8b148e843231521edba10f079534a85": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f1162ec12f5484bdf4d0e45d6a50d3513907ba5a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

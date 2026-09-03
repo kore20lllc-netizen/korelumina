@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:3e9635943cbbd3af16888b8432e89e45c863f2047acadb6b6b60e2b60a734b2a",
+  "type": "commit",
+  "title": "refactor(knowledge): align memory compact projection cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240104005,
+  "observedAt": 1786391187000,
+  "contentRef": "git:commit:f59cc675d786abf1c18a36d5b20e33b2d97f97cc",
+  "checksum": "sha256:938c92026868965c8652f1b01bd33f6f0893967e658eb5fb9928c1297a37f8e5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1299,
+    "genesisAdmissionIdentity": "genesis-admission:4ce85d5011bfbf68a71c74b6f131f4e2a2320f44e72b5a1e1f7cfb443becfbeb",
+    "historicalSourceId": "genesis-source:commit:f59cc675d786abf1c18a36d5b20e33b2d97f97cc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f59cc675d786abf1c18a36d5b20e33b2d97f97cc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f59cc675d786abf1c18a36d5b20e33b2d97f97cc",
+      "parentShas": [
+        "1488290e1df0041218afefb0c1cc195e34073e39"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786391187000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786391187000
+      },
+      "subject": "refactor(knowledge): align memory compact projection cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx"
+      ],
+      "changedPathsByParent": {
+        "1488290e1df0041218afefb0c1cc195e34073e39": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f59cc675d786abf1c18a36d5b20e33b2d97f97cc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

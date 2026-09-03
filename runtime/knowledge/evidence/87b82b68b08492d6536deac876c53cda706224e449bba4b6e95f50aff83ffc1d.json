@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:6558efdfaacc71bcb538d449dc309e9a5bec316bd11446d61161401b32513bec",
+  "type": "document",
+  "title": "Purpose",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131070,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:purpose:10-13",
+  "checksum": "sha256:7d72a02be58c5529bf54851a18bc660638b1e2b541c8ef06896f187a89324f49",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1664,
+    "genesisAdmissionIdentity": "genesis-admission:1678526623674ee276a86fe2a6ca615890c1c00a0f3dd1c7ee766926283fe0ed",
+    "historicalSourceId": "genesis-source:document:derived:7379d88d33521fbab223a3df7af924c99745667afbceb0d350da665b5486d16f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 10,
+    "lineEnd": 13,
+    "sectionTitle": "Purpose",
+    "sectionSlug": "purpose",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Purpose\n\nThis document defines how the KoreLumina Chief Agent operates.\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Purpose",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 10,
+      "lineEnd": 13,
+      "sectionTitle": "Purpose",
+      "sectionSlug": "purpose",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Purpose\n\nThis document defines how the KoreLumina Chief Agent operates.\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:7379d88d33521fbab223a3df7af924c99745667afbceb0d350da665b5486d16f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

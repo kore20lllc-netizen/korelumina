@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:f39d213983ee5d41cb39c139f7c2566a909ed66c4c49e2bd0d73efc98e8220d4",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Knowledge Backend — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08#browser-turn=2",
+  "checksum": "f39d213983ee5d41cb39c139f7c2566a909ed66c4c49e2bd0d73efc98e8220d4",
+  "metadata": {
+    "content": "Yes, but deletion needs a governance boundary.\nA policy that was ever active has become part of the audit history. Hard-deleting it would destroy evidence explaining why packages were once eligible for policy review. So the safe production rule is:\nDRAFT\n→ Delete permanently allowed\n→ only if never activated\n→ only if not referenced by a package\n\nACTIVE\n→ cannot delete\n→ revoke first\n\nREVOKED\n→ cannot hard-delete\n→ retained as governance history\n\nSUPERSEDED\n→ cannot hard-delete\n→ retained as lineage history\nFor something like the unused Policy-Doc-Low-Risk@1.0.0 currently sitting as draft, Delete policy is appropriate.\nThe next narrow milestone should therefore be Governed Draft Policy Deletion, not unrestricted delete.\nAdd it to the existing policy administration lifecycle:\nCreate Draft\nActivate\nRevoke\nSupersede\nDelete Draft\nThe delete action should be two-step:\nDelete policy\n      ↓\nThis permanently removes Policy-Doc-Low-Risk@1.0.0.\nOnly unused drafts can be deleted.\n\nDeleting human\n[ human:knowledge-governance ]\n\n[ Permanently delete ] [ Cancel ]\nThe runtime service must reject deletion if:\nstatus != draft\nOR\npolicy has package references\nOR\npolicy has authorization history\nOR\npolicy participates in supersession lineage\nAnd deletion must still return:\npackageDecision: null\npromotion: null\nThat gives you cleanup without compromising governance history.\nI would implement draft deletion backend → route → Builder client → Delete Policy UI next, then visually validate it against the existing unused draft before moving to supersession.",
+    "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "7937695f-5e51-41e1-bc3e-c91efa1463ca",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08:message:7937695f-5e51-41e1-bc3e-c91efa1463ca",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08#browser-turn=2",
+    "sourceRevision": "sha256:5af2ac0a92ec39c7c8019463c342fbc07f1cf854e4bd7b0ef9703f13a2771222",
+    "segmentAvailability": "available",
+    "conversationChecksum": "f7bf8c51b06cc845b04826d7f576c317f17e63bdfe84e920d908db5c60326776",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:5af2ac0a92ec39c7c8019463c342fbc07f1cf854e4bd7b0ef9703f13a2771222",
+      "exportRevision": "sha256:5af2ac0a92ec39c7c8019463c342fbc07f1cf854e4bd7b0ef9703f13a2771222"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630670559
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08:message:7937695f-5e51-41e1-bc3e-c91efa1463ca"
+    ],
+    "conversation": [
+      "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:5adb2fb891cf5ccda3d13d89829a2378d33b81af657d5fa7087d2c32cb9ab92f",
+  "type": "commit",
+  "title": "feat(genesis): enrich documentation governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240119266,
+  "observedAt": 1787183097000,
+  "contentRef": "git:commit:548ab9e09bcd0361a99028a572480373a503abfe",
+  "checksum": "sha256:63c85c629673cf8bf2b2f17845f157fba1a75c238294847ba9052de8f9f03d5d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1518,
+    "genesisAdmissionIdentity": "genesis-admission:37dd3660e0ac1674cbc3752f58506f47450589111abe52df28a0c7f15aeceaa2",
+    "historicalSourceId": "genesis-source:commit:548ab9e09bcd0361a99028a572480373a503abfe",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:548ab9e09bcd0361a99028a572480373a503abfe",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "548ab9e09bcd0361a99028a572480373a503abfe",
+      "parentShas": [
+        "c56df31707b985e5608e6b7806fc23fad0d94880"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787183097000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787183097000
+      },
+      "subject": "feat(genesis): enrich documentation governance",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDocumentationGovernance.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisSourceManifest.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/HistoricalSource.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDocumentationGovernance.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+      ],
+      "changedPathsByParent": {
+        "c56df31707b985e5608e6b7806fc23fad0d94880": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDocumentationGovernance.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisSourceManifest.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/HistoricalSource.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDocumentationGovernance.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:548ab9e09bcd0361a99028a572480373a503abfe"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:dda5f4f3ffcb2423b88ad57aed078809befde3f10234b703457d97eb616acdfd",
+  "type": "commit",
+  "title": "refactor(lumina): extract reusable workspace metric components",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079577,
+  "observedAt": 1783536961000,
+  "contentRef": "git:commit:ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd",
+  "checksum": "sha256:5c1ce988eb79a43e02a1cecd7a1e792f194f61e69460a808c3b3fb4a8ec63d94",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 844,
+    "genesisAdmissionIdentity": "genesis-admission:9ab1d45884034ac6dac977b6153d5832f1868296d7256236bd222725828927df",
+    "historicalSourceId": "genesis-source:commit:ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd",
+      "parentShas": [
+        "7d137cf7ac05463d15aa46564452c1eb4a2583b8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783536961000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783536961000
+      },
+      "subject": "refactor(lumina): extract reusable workspace metric components",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricGrid.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceToolbar.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx"
+      ],
+      "changedPathsByParent": {
+        "7d137cf7ac05463d15aa46564452c1eb4a2583b8": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricGrid.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceToolbar.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeEmptyState.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ceb88df0b27e410ed37eb3fdc8d01429f7e6a1dd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

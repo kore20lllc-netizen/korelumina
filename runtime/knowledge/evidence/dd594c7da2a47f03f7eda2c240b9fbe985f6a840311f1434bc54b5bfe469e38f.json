@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:5acc5f5da63a05d1ce89325f1e92c4f369edc64643aaa14f2635999daf12d086",
+  "type": "commit",
+  "title": "feat(knowledge): establish governed canonical promotion",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113803,
+  "observedAt": 1786676995000,
+  "contentRef": "git:commit:87750c6169c635bc77dd779604b3bd2c97a5f21f",
+  "checksum": "sha256:b7540cd9253231d4cc63259ca0b534de01bff6213524c19c2b8279c9c04d05d2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1444,
+    "genesisAdmissionIdentity": "genesis-admission:11b3ef4dca2ac3cec8f5615ff795f346c2111b9513855602e369ce87e8fb8b6b",
+    "historicalSourceId": "genesis-source:commit:87750c6169c635bc77dd779604b3bd2c97a5f21f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:87750c6169c635bc77dd779604b3bd2c97a5f21f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "87750c6169c635bc77dd779604b3bd2c97a5f21f",
+      "parentShas": [
+        "c616e3d9945d2ad28b7fb4b8fd878c41df2c680d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786676995000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786676995000
+      },
+      "subject": "feat(knowledge): establish governed canonical promotion",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/certification/__tests__/KoreLuminaMasterArchitectureFullPath.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/GovernedCanonicalPromotionService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionPersistence.test.ts",
+        "apps/lumina-runtime/src/routes/knowledge/__tests__/CanonicalPromotionRoute.test.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerCanonicalPromotionRoutes.ts"
+      ],
+      "changedPathsByParent": {
+        "c616e3d9945d2ad28b7fb4b8fd878c41df2c680d": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/certification/__tests__/KoreLuminaMasterArchitectureFullPath.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/GovernedCanonicalPromotionService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionPersistence.test.ts",
+          "apps/lumina-runtime/src/routes/knowledge/__tests__/CanonicalPromotionRoute.test.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerCanonicalPromotionRoutes.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:87750c6169c635bc77dd779604b3bd2c97a5f21f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

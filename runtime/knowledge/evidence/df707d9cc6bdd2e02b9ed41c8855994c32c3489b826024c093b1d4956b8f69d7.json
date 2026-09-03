@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:4594e3a531d788193cb2dda303244e59aa4235efd2a9b575e207fd17d1116c61",
+  "type": "commit",
+  "title": "fix(m51): enforce full day-zero education certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132277,
+  "observedAt": 1787966769000,
+  "contentRef": "git:commit:483131621eb6579cbec58b81515450c86c8c4d2a",
+  "checksum": "sha256:36c320b04e9907e9ba747cd520eac7a2f1d894c6f08791ae8540bc5a2a481852",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1678,
+    "genesisAdmissionIdentity": "genesis-admission:eb7535b56f4f54cc0d5739ccde3830b9c4f35b940339dcf672aa1d94da46f8fc",
+    "historicalSourceId": "genesis-source:commit:483131621eb6579cbec58b81515450c86c8c4d2a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:483131621eb6579cbec58b81515450c86c8c4d2a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "483131621eb6579cbec58b81515450c86c8c4d2a",
+      "parentShas": [
+        "fda41a0cadc3e8b8bcbd559fb508080a75347246"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787966769000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787966769000
+      },
+      "subject": "fix(m51): enforce full day-zero education certification",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/DayZeroEducationalCoverage.ts",
+        "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertification.ts",
+        "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertificationCandidate.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertification.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertificationService.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusHistoricalCertificationIntegrity.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/M51DayZeroEducationalCompleteness.test.ts"
+      ],
+      "changedPathsByParent": {
+        "fda41a0cadc3e8b8bcbd559fb508080a75347246": [
+          "apps/lumina-runtime/src/knowledge-education/DayZeroEducationalCoverage.ts",
+          "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertification.ts",
+          "apps/lumina-runtime/src/knowledge-education/EducationalCorpusCertificationCandidate.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertification.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusCertificationService.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalCorpusHistoricalCertificationIntegrity.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/M51DayZeroEducationalCompleteness.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:483131621eb6579cbec58b81515450c86c8c4d2a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

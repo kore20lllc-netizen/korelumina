@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:d3ebe31eef04ec5426e0d5ed08b1a61ab5709c6c33add4ef3c59bec65632307a",
+  "type": "document",
+  "title": "GA-005 — Chief Agent Memory Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085375,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/chief-agent/GA-005_CHIEF_AGENT_MEMORY_ARCHITECTURE.md",
+  "checksum": "sha256:3afacbf318ac1659e09982d20523a83bc6422dd8ce941d2e1d6908cdec8712be",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 967,
+    "genesisAdmissionIdentity": "genesis-admission:35619241c80e61cf04618a635cea38ee0f9cf4c486b708ddf45566ea23485ef1",
+    "historicalSourceId": "genesis-source:document:derived:c6dd5272e29cb0cfe9b97dbed2835cc48b604340c4fc97fc47eac235090e32e4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Vision 2050 Alignment",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/chief-agent/GA-005_CHIEF_AGENT_MEMORY_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "GA-005 — Chief Agent Memory Architecture",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/chief-agent/GA-005_CHIEF_AGENT_MEMORY_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:c6dd5272e29cb0cfe9b97dbed2835cc48b604340c4fc97fc47eac235090e32e4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:8c101c1d59e18e0b1c8774d78b49499f6ad5000d5d44b61d419a7aa541b4fb51",
+  "type": "commit",
+  "title": "docs(architecture): certify Lumina design system governance and design system audit",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083764,
+  "observedAt": 1784010740000,
+  "contentRef": "git:commit:2745c7f83b08a40458ade5eac180d299cda6d3cc",
+  "checksum": "sha256:ede1d15363b4446d22b0b4e157195bfb868eb0adbb6ef978f162246ea64b0ab4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 934,
+    "genesisAdmissionIdentity": "genesis-admission:0002fcfb2a69a652534c46c424f84626b6e0323449bc8422ac08f01761f5f71a",
+    "historicalSourceId": "genesis-source:commit:2745c7f83b08a40458ade5eac180d299cda6d3cc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2745c7f83b08a40458ade5eac180d299cda6d3cc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2745c7f83b08a40458ade5eac180d299cda6d3cc",
+      "parentShas": [
+        "04e365c6b45ce5f85c0693c9f8385c3b4f27af2a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784010740000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784010740000
+      },
+      "subject": "docs(architecture): certify Lumina design system governance and design system audit",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md",
+        "docs/architecture/design-system/LDS_002_RUNTIME_VISUAL_EXTRACTION_PLAN.md",
+        "docs/architecture/design-system/LDS_003_RUNTIME_COMPONENT_INVENTORY.md",
+        "docs/architecture/design-system/LDS_004_EXTRACTION_SEQUENCE.md",
+        "docs/runtime/RUNTIME_CERTIFICATION_REPORT.md",
+        "runtime-certification/design-system-audit/lumina-components.txt",
+        "runtime-certification/design-system-audit/lumina-exports.txt",
+        "runtime-certification/design-system-audit/lumina-token-map.txt",
+        "runtime-certification/design-system-audit/runtime-decomposition.md",
+        "runtime-certification/design-system-audit/runtime-visual-values.txt"
+      ],
+      "changedPathsByParent": {
+        "04e365c6b45ce5f85c0693c9f8385c3b4f27af2a": [
+          "docs/architecture/LUMINA_DESIGN_SYSTEM_CERTIFICATION.md",
+          "docs/architecture/design-system/LDS_002_RUNTIME_VISUAL_EXTRACTION_PLAN.md",
+          "docs/architecture/design-system/LDS_003_RUNTIME_COMPONENT_INVENTORY.md",
+          "docs/architecture/design-system/LDS_004_EXTRACTION_SEQUENCE.md",
+          "docs/runtime/RUNTIME_CERTIFICATION_REPORT.md",
+          "runtime-certification/design-system-audit/lumina-components.txt",
+          "runtime-certification/design-system-audit/lumina-exports.txt",
+          "runtime-certification/design-system-audit/lumina-token-map.txt",
+          "runtime-certification/design-system-audit/runtime-decomposition.md",
+          "runtime-certification/design-system-audit/runtime-visual-values.txt"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2745c7f83b08a40458ade5eac180d299cda6d3cc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

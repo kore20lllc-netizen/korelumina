@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:17605cf9cfcded0f1a37f24b9a529cdaa11d4f3a8f2f1862a008ca0b64865bcc",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Plan — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=2",
+  "checksum": "17605cf9cfcded0f1a37f24b9a529cdaa11d4f3a8f2f1862a008ca0b64865bcc",
+  "metadata": {
+    "content": "Yes. I drifted again.\nDashboard visibility is already validated. The unauthenticated curl returning projects: [] is expected because it sends no role headers. It is not a bug.\nCurrent valid state:\n\n\nDashboard shows all projects.\n\n\nRuntime metrics show 1 running runtime.\n\n\nSuper admin API returns 7 projects.\n\n\nLock cleanup patch builds green.\n\n\nNo .lock file found while running, so lock creation may be elsewhere/not active for this path, but the removeRuntime() cleanup patch is still safe.\n\n\nNext correct step:\nBashgit status --short\n\ngit add apps/lumina-runtime/src/runtime/registry.ts\n\ngit commit -m \"fix(runtime): release runtime locks on removal\"\n\ngit push origin main\nThen move to the next handoff item, not project visibility.",
+    "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "a27fa326-989d-411d-845e-57a5645034c6",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:a27fa326-989d-411d-845e-57a5645034c6",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db#browser-turn=2",
+    "sourceRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e994e279db5b4e8933195d5e2efb6ca5db85eee49edf2a97411ee1907bc451be",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4",
+      "exportRevision": "sha256:45e96543b59e98a74383942930c8979fa5c59abd9d6aba4326a809b4b66d67b4"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630711928
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a35fe61-d42c-83ea-af5d-5101df5b53db:message:a27fa326-989d-411d-845e-57a5645034c6"
+    ],
+    "conversation": [
+      "6a35fe61-d42c-83ea-af5d-5101df5b53db"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:48101ba4fc2cdda39178227256ab7a20f3fa4628165987930d0368a60b98e060",
+  "type": "commit",
+  "title": "refactor(lumina): add segmented tabs primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240101738,
+  "observedAt": 1786336590000,
+  "contentRef": "git:commit:a13bf89a2e0832cb857422556f4eabe53669fe2f",
+  "checksum": "sha256:ff67893b89e3017acd744969e86e8816aa0dc204fbaa895dc51c2bada5d55d04",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1263,
+    "genesisAdmissionIdentity": "genesis-admission:e354b577cba556841262467f2dd910d152fc99b731f592b2b12089f37757ad0b",
+    "historicalSourceId": "genesis-source:commit:a13bf89a2e0832cb857422556f4eabe53669fe2f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a13bf89a2e0832cb857422556f4eabe53669fe2f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a13bf89a2e0832cb857422556f4eabe53669fe2f",
+      "parentShas": [
+        "5a72811d1b569e3b0d6bce70b65bde81ddd48cd7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786336590000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786336590000
+      },
+      "subject": "refactor(lumina): add segmented tabs primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaSegmentedTabs.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+      ],
+      "changedPathsByParent": {
+        "5a72811d1b569e3b0d6bce70b65bde81ddd48cd7": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaSegmentedTabs.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a13bf89a2e0832cb857422556f4eabe53669fe2f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

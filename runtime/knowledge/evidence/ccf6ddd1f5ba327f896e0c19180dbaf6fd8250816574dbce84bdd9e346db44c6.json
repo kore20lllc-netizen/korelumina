@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:54c60822bf7ea99914381a7af5f4a92a93f24cac24102fe152691bac87f32918",
+  "type": "conversation",
+  "title": "KoreLumina — Production Hardening - KoreLumina Hardening Setup — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=2",
+  "checksum": "54c60822bf7ea99914381a7af5f4a92a93f24cac24102fe152691bac87f32918",
+  "metadata": {
+    "content": "Current task: harden Builder stability + diff system (no feature expansion).\n\n1. Risks identified (from your current state)\nA. Editor crash risk\n\n\nvalue={content} can become undefined or stale\n\n\nonChange fires frequently → no debounce → UI thrash\n\n\nB. Diff instability\n\n\nfileContents[d.path] may be undefined → bad diff input\n\n\ngetDiffChunks has no guard → can crash on malformed input\n\n\nLarge diffs → UI freeze (render loop)\n\n\nC. Preview instability\n\n\n<iframe src={previewUrl}> reloads aggressively\n\n\nNo validation → can point to invalid route\n\n\nNo isolation → silent failures (blank iframe)\n\n\nD. Draft integrity risk\n\n\ndrafts array not validated\n\n\nMissing path or content breaks rendering\n\n\n\n2. Protections to implement (minimal, no regression)\n✅ HARDEN EDITOR INPUT\nReplace:\nTypeScriptvalue={content}\nWith:\nTypeScriptvalue={typeof content === \"string\" ? content : \"\"}\n\n✅ HARDEN onChange (prevent UI thrash)\nReplace:\nTypeScriptonChange={(v) => setContent(v || \"\")}\nWith:\nTypeScriptonChange={(v) => {\n  if (typeof v === \"string\") {\n    setContent(v);\n  }\n}}\n\n✅ HARDEN DIFF INPUT (CRITICAL)\nWrap diff logic:\nTypeScriptconst currentFile =\n  typeof fileContents?.[d.path] === \"string\"\n    ? fileContents[d.path]\n    : \"\";\n\nconst nextFile =\n  typeof d?.content === \"string\"\n    ? d.content\n    : \"\";\n\n✅ HARDEN DIFF EXECUTION (FAIL SAFE)\nReplace:\nTypeScriptconst chunks = getDiffChunks(currentFile, nextFile);\nWith:\nTypeScriptlet chunks = [];\ntry {\n  chunks = getDiffChunks(currentFile, nextFile) || [];\n} catch (e) {\n  console.error(\"DIFF ERROR:\", e);\n}\n\n✅ LIMIT DIFF RENDER (PREVENT FREEZE)\nReplace:\nTypeScript{chunks.map((c, idx) => (\nWith:\nTypeScript{chunks.slice(0, 200).map((c, idx) => (\n(Prevents large file lockups)\n\n✅ VALIDATE DRAFTS ARRAY\nWrap drafts rendering:\nTypeScript{Array.isArray(drafts) && drafts.length > 0 && (\n\n✅ HARDEN PREVIEW URL\nReplace:\nTypeScript<iframe src={previewUrl}\nWith:\nTypeScript<iframe\n  src={typeof previewUrl === \"string\" ? previewUrl : \"\"}\n\n✅ ADD PREVIEW FAIL VISIBILITY (NO SILENT BLANK)\nOptional but safe:\nTypeScript<iframe\n  key={previewUrl} // force refresh only when URL changes\n  src={typeof previewUrl === \"string\" ? previewUrl : \"\"}\n  style={{ height: \"40%\", border: \"none\" }}\n/>\n\n3. Regression check\nThese changes:\n\n\nDo NOT change architecture\n\n\nDo NOT touch runtime/API\n\n\nDo NOT change builder layout\n\n\nOnly add guards + limits\n\n\nSafe under your guardrail:\n\n✔ one module (builder)\n\n✔ no cross-module impact\n\n4. Stability outcome\nAfter this:\n\n\nEditor won’t crash on bad state\n\n\nDiff won’t break UI or freeze\n\n\nPreview won’t silently fail\n\n\nDrafts won’t corrupt rendering\n\n\n\nStatus\nBuilder stability layer: hardened (input + diff + preview guards)\n\nNext task (recommended):\n\n→ Diff accuracy (line-level → block-level improvements)",
+    "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+    "projectId": "g-p-69cbc6142624819186caca549600467e",
+    "messageId": "48310691-d982-47a2-a7d4-eb4adeb5f28b",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce5790-1740-8333-87e5-3dd85753c227:message:48310691-d982-47a2-a7d4-eb4adeb5f28b",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=2",
+    "sourceRevision": "sha256:5886c6567157d9c6e49f7b8231a05f5a9acc852850788e206d230ff1d92e8d81",
+    "segmentAvailability": "available",
+    "conversationChecksum": "c87950e5e80f6bd767cd64f288a9437eecb397e77c4bc995b1eb2d11d1958154",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:5886c6567157d9c6e49f7b8231a05f5a9acc852850788e206d230ff1d92e8d81",
+      "exportRevision": "sha256:5886c6567157d9c6e49f7b8231a05f5a9acc852850788e206d230ff1d92e8d81"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787626550074
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce5790-1740-8333-87e5-3dd85753c227:message:48310691-d982-47a2-a7d4-eb4adeb5f28b"
+    ],
+    "conversation": [
+      "69ce5790-1740-8333-87e5-3dd85753c227"
+    ]
+  }
+}

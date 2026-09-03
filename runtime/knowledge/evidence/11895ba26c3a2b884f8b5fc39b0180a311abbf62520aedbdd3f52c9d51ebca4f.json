@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:1c9eee25aa22b91f91e49477908c854fb93d7a53fdffeb9dae9131d917f731fa",
+  "type": "commit",
+  "title": "feat(lumina): add inspector model architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080785,
+  "observedAt": 1783631164000,
+  "contentRef": "git:commit:14f50ec6f843a22633719869dfacfd01cfd2463f",
+  "checksum": "sha256:897e4fbafea67642ec30ba9872bc7237f3c9b0de1bf3c2eebeb540bbb64a4fff",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 871,
+    "genesisAdmissionIdentity": "genesis-admission:3291f8ab51ba28122c20a1cf6dad5f00e21b754b1b3bfd2b8dd8b5a6914495ca",
+    "historicalSourceId": "genesis-source:commit:14f50ec6f843a22633719869dfacfd01cfd2463f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:14f50ec6f843a22633719869dfacfd01cfd2463f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "14f50ec6f843a22633719869dfacfd01cfd2463f",
+      "parentShas": [
+        "6a6fd361239b04a8558576ccfe2d8da69795443a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783631164000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783631164000
+      },
+      "subject": "feat(lumina): add inspector model architecture",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/model/createInspectorModel.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/model/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/model/types.ts"
+      ],
+      "changedPathsByParent": {
+        "6a6fd361239b04a8558576ccfe2d8da69795443a": [
+          "apps/lumina-builder/src/components/lumina/inspector/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/model/createInspectorModel.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/model/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/model/types.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:14f50ec6f843a22633719869dfacfd01cfd2463f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

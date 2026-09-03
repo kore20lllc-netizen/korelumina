@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:2f87bc1ebf86e0dee2f3a3637df7935cedc578a4d21c5785540bffdd2b8ac4cb",
+  "type": "document",
+  "title": "KOW-005 — Knowledge Operations UI State Contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084154,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-005_UI_STATES.md",
+  "checksum": "sha256:f84795dc862f0f432345ae2a75376d7b5fbbdf89f3b1c44bb6e3cb705768173e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 942,
+    "genesisAdmissionIdentity": "genesis-admission:30353223b13527b464821ef72adad9f9c181762bb733790a7535c1cffdf71299",
+    "historicalSourceId": "genesis-source:document:derived:76d03e8728d596216cf2be0325ad2a6363a8aa3aa76d1c30b59ed5a31f04b35a",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Proposed for approval",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-005_UI_STATES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-005 — Knowledge Operations UI State Contract",
+      "status": "Proposed for approval",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-005_UI_STATES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:76d03e8728d596216cf2be0325ad2a6363a8aa3aa76d1c30b59ed5a31f04b35a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

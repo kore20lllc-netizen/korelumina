@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:74143d280ec71c924989c5b1003d4832f1aa3ef66e8964202834eef9047a0cd8",
+  "type": "commit",
+  "title": "feat(governance): add legacy historical reconciliation transition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240122040,
+  "observedAt": 1787451708000,
+  "contentRef": "git:commit:b161887217eac2ba27e86ee9d73db09272bcbdfb",
+  "checksum": "sha256:fb30414a69b5b2bf9d8bdaa7a68a573ad5a1a7ca5ba8cacbb1e459ca6a140b47",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1554,
+    "genesisAdmissionIdentity": "genesis-admission:a502fc527a4877d3f98947e6a773c09a0df067105ace9e8fc8a5d5fefd941f23",
+    "historicalSourceId": "genesis-source:commit:b161887217eac2ba27e86ee9d73db09272bcbdfb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b161887217eac2ba27e86ee9d73db09272bcbdfb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b161887217eac2ba27e86ee9d73db09272bcbdfb",
+      "parentShas": [
+        "8d6a5e3a50123569f4e09221260573d703f974f9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787451708000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787451708000
+      },
+      "subject": "feat(governance): add legacy historical reconciliation transition",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/governance/LegacyHistoricalReconciliationService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/LegacyHistoricalReconciliationService.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/index.ts"
+      ],
+      "changedPathsByParent": {
+        "8d6a5e3a50123569f4e09221260573d703f974f9": [
+          "apps/lumina-runtime/src/knowledge-preservation/governance/LegacyHistoricalReconciliationService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/LegacyHistoricalReconciliationService.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b161887217eac2ba27e86ee9d73db09272bcbdfb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

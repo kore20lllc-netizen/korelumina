@@ -1,0 +1,95 @@
+{
+  "id": "genesis-evidence:2bb96cc66ffa3f08c904df2bd6a27e84717597a2c43406b73f6aa587d2c1015f",
+  "type": "commit",
+  "title": "feat(lumina): extract shared foundation language",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087385,
+  "observedAt": 1785726941000,
+  "contentRef": "git:commit:037f40864913bae7b9d540b3659798157ea6cb85",
+  "checksum": "sha256:de6cd558b61084ba5ee42f7ee18bb8d5116bd36a594ce44f520922502a602596",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1007,
+    "genesisAdmissionIdentity": "genesis-admission:29ef1a5fb79f9379e4f8eecad1284dc331b952d83837d6f69e8af262d55de11d",
+    "historicalSourceId": "genesis-source:commit:037f40864913bae7b9d540b3659798157ea6cb85",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:037f40864913bae7b9d540b3659798157ea6cb85",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "037f40864913bae7b9d540b3659798157ea6cb85",
+      "parentShas": [
+        "3926cc14413880c9a2735437c0347074c07c2bcc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785726941000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785726941000
+      },
+      "subject": "feat(lumina): extract shared foundation language",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/capsule-state/capsuleStateTreatment.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/capsule-state/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/electric-contour/electricContour.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/electric-contour/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/icon-frame/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/icon-frame/semanticIconFrame.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/motion/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/motion/premiumMotion.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/spacing/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/spacing/premiumSpacing.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/state-language/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/state-language/semanticStateLanguage.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/status-language/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/status-language/semanticStatusLanguage.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/surfaces/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/foundations/surfaces/premiumSurfaces.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3926cc14413880c9a2735437c0347074c07c2bcc": [
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/capsule-state/capsuleStateTreatment.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/capsule-state/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/electric-contour/electricContour.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/electric-contour/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/icon-frame/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/icon-frame/semanticIconFrame.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/motion/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/motion/premiumMotion.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/spacing/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/spacing/premiumSpacing.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/state-language/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/state-language/semanticStateLanguage.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/status-language/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/status-language/semanticStatusLanguage.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/surfaces/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/foundations/surfaces/premiumSurfaces.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:037f40864913bae7b9d540b3659798157ea6cb85"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

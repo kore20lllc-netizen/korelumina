@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:ab463170e8137a58cd7cd301bd32feaed8765995b2bd3b716f6177d37d87b202",
+  "type": "commit",
+  "title": "feat(lumina): migrate runtime header to workspace hero",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079435,
+  "observedAt": 1783506316000,
+  "contentRef": "git:commit:b7ad65efd37cf496a75a04cf3481908c8305549d",
+  "checksum": "sha256:f679f771533ceedef957f514d94b79de2731470679be40dd70e5afca5c675296",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 841,
+    "genesisAdmissionIdentity": "genesis-admission:00faa35997fc0d5a3881be3da601926b75947781bc01fa346777f4c97a7d07cf",
+    "historicalSourceId": "genesis-source:commit:b7ad65efd37cf496a75a04cf3481908c8305549d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b7ad65efd37cf496a75a04cf3481908c8305549d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b7ad65efd37cf496a75a04cf3481908c8305549d",
+      "parentShas": [
+        "cc950bd9618d1b02cf55919155ff14a8b7608721"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783506316000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783506316000
+      },
+      "subject": "feat(lumina): migrate runtime header to workspace hero",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaEmptyState.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricCard.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricGrid.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaSkeleton.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaStatusBadge.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceSection.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceShell.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceToolbar.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/index.ts",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "cc950bd9618d1b02cf55919155ff14a8b7608721": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaEmptyState.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricCard.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaMetricGrid.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaSkeleton.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaStatusBadge.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceSection.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceShell.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceToolbar.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/index.ts",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b7ad65efd37cf496a75a04cf3481908c8305549d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

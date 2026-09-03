@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:a109e6fa9342ea84a66124fdf91a64ec1049151dbee2f1582d93d392fd9178cc",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Inspect M46 Phase 1 — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c#browser-turn=0",
+  "checksum": "a109e6fa9342ea84a66124fdf91a64ec1049151dbee2f1582d93d392fd9178cc",
+  "metadata": {
+    "content": "Those 16 are not “bad” packages. They are legacy Knowledge Packages that reached awaiting_review / pending_review before the current governance identity contract was consistently present.\nThe exact packages are:\nKP-2026-000009 through KP-2026-000022, plus KP-2026-000024 and KP-2026-000025. KP-2026-000023 is not in this group.\nThey require manual handling for a very specific reason: their persisted records do not contain enough governance identity to let KoreLumina make a constitutional decision automatically. The audit found no reliable package-level or item-level proof for authority, scope, owner, version, or classification. That means Runtime cannot safely answer questions like “Is this architecture knowledge?”, “Does the Vision-2050 architecture policy govern it?”, or “Who owns this knowledge?” without inventing facts.\nSo “manual review required” here really means manual reclassification, not necessarily manual approval of the content itself.\nTheir utility is a separate question. A package can have useful content while still lacking governance metadata. Right now, the system knows that these 16 contain knowledge candidates, but it cannot safely determine their governance jurisdiction. We have not yet inspected and categorized the actual subject matter of each one in this phase, so I would not tell you that all 16 are valuable or all 16 should be discarded.\nThe promotion decision should therefore be:\n\n\nPromote a package only if its original source clearly establishes what it is, its authority class, scope, ownership, version/currentness, and that it is still valid and non-duplicative.\n\n\nSupersede/archive it if the knowledge is useful historically but has been replaced by newer canonical knowledge.\n\n\nReject/archive it if it is obsolete, duplicate, incomplete, transient, or no longer aligned with KoreLumina.\n\n\nKeep quarantined if the source does not give us enough evidence to classify it confidently.\n\n\nWhat we should not do is assign all 16 architecture/platform/Knowledge Governance/1.0.0 just so they can pass through the Vision-2050 policy. That would make the pipeline look clean while corrupting governance provenance.\nThe best next milestone is to inspect the actual content and source evidence of those 16 packages, not their metadata alone, and produce a decision table like:\nPackageWhat it containsCurrent utilityGovernance identity recoverable?RecommendationKP-2026-000009…high/medium/lowyes/nopromote / supersede / archive / quarantine……………\nThat will tell us whether these are genuinely valuable historical knowledge that should enter Canonical Knowledge, or simply legacy manufacturing residue that should remain archived. Until that content-level audit is done, I would not promote them.",
+    "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "d7bb7ec6-2064-46ed-a58b-220d0efcde9a",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a87bb2a-02fc-83ea-b769-ac2cf1abca2c:message:d7bb7ec6-2064-46ed-a58b-220d0efcde9a",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c#browser-turn=0",
+    "sourceRevision": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "a903fa9ef528a31b94370ad6354a867ecced772ca0b25fc515f977277be1463e",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e",
+      "exportRevision": "sha256:719575ddd79e837b6e5765b10b91a7e99ad7a07ef7eb729e248096711830901e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630611726
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a87bb2a-02fc-83ea-b769-ac2cf1abca2c:message:d7bb7ec6-2064-46ed-a58b-220d0efcde9a"
+    ],
+    "conversation": [
+      "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c"
+    ]
+  }
+}

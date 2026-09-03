@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:4f3dc1fdfe91ddeb80c239f72fdd1cd6e31cc820c516b52ae44c2b407aa56dca",
+  "type": "commit",
+  "title": "docs(architecture): certify Lumina Stage 2 extraction",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087894,
+  "observedAt": 1785754084000,
+  "contentRef": "git:commit:d39cc9dee4e4ef8c769e9fcc72bbe6439f2ba48b",
+  "checksum": "sha256:ac63fc69954179aed9cedc91a1f892e6707a8b185278220db67e5cd16d3db4a3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1017,
+    "genesisAdmissionIdentity": "genesis-admission:580c4e342872eae0b6bf397b783e3dba6307b4b55e4172e04ee731350ec1bbbb",
+    "historicalSourceId": "genesis-source:commit:d39cc9dee4e4ef8c769e9fcc72bbe6439f2ba48b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d39cc9dee4e4ef8c769e9fcc72bbe6439f2ba48b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d39cc9dee4e4ef8c769e9fcc72bbe6439f2ba48b",
+      "parentShas": [
+        "f727e1a35a99071a8398062fddf7cb68feb236ed"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785754084000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785754084000
+      },
+      "subject": "docs(architecture): certify Lumina Stage 2 extraction",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_DESIGN_SYSTEM_EXTRACTION_STAGE_2_CERTIFICATION.md"
+      ],
+      "changedPathsByParent": {
+        "f727e1a35a99071a8398062fddf7cb68feb236ed": [
+          "docs/architecture/LUMINA_DESIGN_SYSTEM_EXTRACTION_STAGE_2_CERTIFICATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d39cc9dee4e4ef8c769e9fcc72bbe6439f2ba48b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

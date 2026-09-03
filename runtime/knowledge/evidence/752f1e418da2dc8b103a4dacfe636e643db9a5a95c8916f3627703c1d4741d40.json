@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:9e05314ec183c0c707a2f1e750dcfda52c877f753cf8cc198d00519c265d51b4",
+  "type": "document",
+  "title": "XA-002 — Knowledge Operations Workspace Contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085626,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/experience/XA-002_KNOWLEDGE_OPERATIONS_WORKSPACE_CONTRACT.md",
+  "checksum": "sha256:0ec05c7c059fb55b8658fd3084fefb8b5d7f2765c8c494f3d487f5d2e6ff7efa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 972,
+    "genesisAdmissionIdentity": "genesis-admission:c889d9632e283a7a1c1f4f01ccb7d6a74d7260ad55b97a2f929d287badde611f",
+    "historicalSourceId": "genesis-source:document:derived:50673d7130d62f16388c55a5d5249debd1c0a0e1caa1020cf284d92c56bcdb6e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/experience/XA-002_KNOWLEDGE_OPERATIONS_WORKSPACE_CONTRACT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "XA-002 — Knowledge Operations Workspace Contract",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/experience/XA-002_KNOWLEDGE_OPERATIONS_WORKSPACE_CONTRACT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:50673d7130d62f16388c55a5d5249debd1c0a0e1caa1020cf284d92c56bcdb6e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

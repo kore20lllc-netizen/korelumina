@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4e9671f5f5c3ba9e0bfeddc8e0d9a4146ee85ecf56b84f21ca4a3000eec36147",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Code Fix for Client Component-korelumina — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117#browser-turn=4",
+  "checksum": "4e9671f5f5c3ba9e0bfeddc8e0d9a4146ee85ecf56b84f21ca4a3000eec36147",
+  "metadata": {
+    "content": "You cannot “retrieve” a previously generated downloadable document from me unless one of these is true:\n✅ 1. You still have the chat where it was generated\nGo to the left sidebar → open the exact conversation\n\nScroll until you find the message where:\n\n\nI created the document\n\n\nor gave a Download link (sandbox:/mnt/...)\n\n\nThen you can click it again.\n⚠️ If you closed that chat or started a new one, the file is not globally stored for later retrieval.\n\n✅ 2. You downloaded it already\nCheck your computer:\n\n\nDownloads folder\n\n\nDesktop\n\n\nDocuments\n\n\nBrowser download history\n\n\nSearch by:\n\n\n.pdf\n\n\n.docx\n\n\n.txt\n\n\n.md\n\n\n\n❗ VERY IMPORTANT\nFiles I generate are:\n\n\nsession-scoped\n\n\nnot permanently hosted\n\n\nnot searchable by name later\n\n\nSo if you lost the link or the chat → the file itself cannot be fetched again.\n\n✅ Best move now (realistic solution)\nYou can say:\n\n“Regenerate the doc from this conversation”\n\nor\n\n“Regenerate KoreLumina engineering log”\n\nI will rebuild it again from context.\n\nIf you want — tell me:\n👉 Was it:\n\n\nPDF\n\n\nDOC\n\n\nsession log\n\n\nproposal\n\n\nPRD\n\n\nbash commands log\n\n\nI will recreate it exactly.",
+    "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "2332f447-dfe1-40e9-b132-d4635e648fd9",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6988c49e-8a10-832d-bd5c-2cb03f04b117:message:2332f447-dfe1-40e9-b132-d4635e648fd9",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117#browser-turn=4",
+    "sourceRevision": "sha256:bcd0ff7ac0cd4315251317a1dd468f0e268a81c5c7247868ff34d53652ce81af",
+    "segmentAvailability": "available",
+    "conversationChecksum": "c3b1a7cd368a92f3b1fed34a85092b1c5965f8fae7d79a78653ae7866f7b60f7",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:bcd0ff7ac0cd4315251317a1dd468f0e268a81c5c7247868ff34d53652ce81af",
+      "exportRevision": "sha256:bcd0ff7ac0cd4315251317a1dd468f0e268a81c5c7247868ff34d53652ce81af"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630568608
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6988c49e-8a10-832d-bd5c-2cb03f04b117:message:2332f447-dfe1-40e9-b132-d4635e648fd9"
+    ],
+    "conversation": [
+      "6988c49e-8a10-832d-bd5c-2cb03f04b117"
+    ]
+  }
+}

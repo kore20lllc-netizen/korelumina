@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:f5a6bade82535482dd554a0259ee24da7b798214f72ac7440f2f1a56e2080093",
+  "type": "document",
+  "title": "GA-007 — Executive Council Operating Model",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085476,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/chief-agent/GA-007_EXECUTIVE_COUNCIL_OPERATING_MODEL.md",
+  "checksum": "sha256:916ff08074a1279b3e830125653bbf6d3f14c7330b164298c9129b8af323b5d9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 969,
+    "genesisAdmissionIdentity": "genesis-admission:03c3bdabba0eb6e8e00218b3fe6a09ec915cf7a5dda9b495c70779b465ff583a",
+    "historicalSourceId": "genesis-source:document:derived:9a75a12b9e85d959400f1d0e0e1d038a98c9659116311124c5e46f7a08433bfe",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/chief-agent/GA-007_EXECUTIVE_COUNCIL_OPERATING_MODEL.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "GA-007 — Executive Council Operating Model",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/chief-agent/GA-007_EXECUTIVE_COUNCIL_OPERATING_MODEL.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:9a75a12b9e85d959400f1d0e0e1d038a98c9659116311124c5e46f7a08433bfe"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

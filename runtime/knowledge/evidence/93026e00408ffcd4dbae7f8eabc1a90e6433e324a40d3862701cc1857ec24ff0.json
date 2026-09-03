@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:1b580d83f3ba64b7c2e41567dde3ecbf407d97e52a693b654e1f4aa58b6ff6e9",
+  "type": "document",
+  "title": "Lumina Certified Extraction Execution Plan",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092365,
+  "observedAt": 1785930284000,
+  "contentRef": "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md",
+  "checksum": "sha256:3f8816a2231ac8bea70c1312317282a5b2d5fd6f7814cfc7b736e10a026eead5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1102,
+    "genesisAdmissionIdentity": "genesis-admission:4d068234bd07ad1257ce41f9cc1f4af48011dcacf04cae226f9b55953e1f5e3e",
+    "historicalSourceId": "genesis-source:document:derived:4149b9a08fdd2857a38379873369e55ae33becac4d9116433c9826df9601b7a7",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Certified Extraction Execution Plan",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:4149b9a08fdd2857a38379873369e55ae33becac4d9116433c9826df9601b7a7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

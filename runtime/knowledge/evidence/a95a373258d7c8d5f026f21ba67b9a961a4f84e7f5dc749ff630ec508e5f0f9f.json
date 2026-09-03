@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:1a5dcbdb926443d83818b371a06bd8514a9fe4128ab251734e62eb8e29375107",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Knowledge Extraction — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0#browser-turn=2",
+  "checksum": "1a5dcbdb926443d83818b371a06bd8514a9fe4128ab251734e62eb8e29375107",
+  "metadata": {
+    "content": "Green accepted for the dead Flow-token cleanup.\nThe local validation is clean: no capsuleFlow* definitions remain, no consumers remain, npm run build passed, git diff --check passed, and only flagshipAppearance.ts is modified.\nCommit and push this approved cleanup:\nBashcd /Users/erictouko/dev/korelumina || exit 1\nset -e\n\ngit add \\\napps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts\n\ngit commit -m \"refactor(knowledge): remove obsolete flow appearance tokens\"\n\ngit push\n\ngit rev-parse HEAD\ngit status --short\nAfter push, I’ll verify the exact commit through GitHub before continuing.",
+    "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "13b83947-2546-4cf6-b468-3f15558a6f3d",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a76aba2-1ed0-83ea-9964-24dbce2af4d0:message:13b83947-2546-4cf6-b468-3f15558a6f3d",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0#browser-turn=2",
+    "sourceRevision": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "f46d95a4ab17fb93a824cd4afc52a2cbf384a10af7f9be2ddccd54bec8cd26b2",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e",
+      "exportRevision": "sha256:0e1fbd0807dfbe25c0ae6a7bffd9c0f1bd3c6868b5ceedc7057c090664eef47e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630681037
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a76aba2-1ed0-83ea-9964-24dbce2af4d0:message:13b83947-2546-4cf6-b468-3f15558a6f3d"
+    ],
+    "conversation": [
+      "6a76aba2-1ed0-83ea-9964-24dbce2af4d0"
+    ]
+  }
+}

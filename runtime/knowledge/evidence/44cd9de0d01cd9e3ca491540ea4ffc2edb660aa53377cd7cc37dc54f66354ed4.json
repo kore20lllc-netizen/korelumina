@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:e7cf25c5714b687177e5f01468a18831a64d337cc1fc6abdd3630fea6637705b",
+  "type": "commit",
+  "title": "refactor(knowledge): strengthen genesis drill-down empty state",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098610,
+  "observedAt": 1786167158000,
+  "contentRef": "git:commit:768a15cadb9fc667747b6f8b7f113dac984b073f",
+  "checksum": "sha256:60d7bc618d3275a9064185d84bedaae2d4a0b531e8a37f99e29699b422a651e5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1211,
+    "genesisAdmissionIdentity": "genesis-admission:2f5ab23260ba94a497642dfec2e9fb14af35f40ec4248e0075ee8357fd71f25c",
+    "historicalSourceId": "genesis-source:commit:768a15cadb9fc667747b6f8b7f113dac984b073f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:768a15cadb9fc667747b6f8b7f113dac984b073f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "768a15cadb9fc667747b6f8b7f113dac984b073f",
+      "parentShas": [
+        "f8016cd5215f535618d0fcd377d7e6e954e170bd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786167158000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786167158000
+      },
+      "subject": "refactor(knowledge): strengthen genesis drill-down empty state",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx"
+      ],
+      "changedPathsByParent": {
+        "f8016cd5215f535618d0fcd377d7e6e954e170bd": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:768a15cadb9fc667747b6f8b7f113dac984b073f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

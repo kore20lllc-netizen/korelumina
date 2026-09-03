@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:b2b40299784a41cb725df8705b5243b5fd015c72608be8bf448abf40c97a0401",
+  "type": "commit",
+  "title": "feat(genesis): preserve conversation evidence during replay admission",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240124416,
+  "observedAt": 1787568201000,
+  "contentRef": "git:commit:8b9a995aa5df930a6df665dec4284ad90b6a5d7e",
+  "checksum": "sha256:e32749ab180460c6c57724b920b65447759e0df0a4cd331aee06828e20c335b7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1584,
+    "genesisAdmissionIdentity": "genesis-admission:47dbc3ca98ec301d49aec10ad2052d5f3cb1aaea388c0a08397ac6c56f888563",
+    "historicalSourceId": "genesis-source:commit:8b9a995aa5df930a6df665dec4284ad90b6a5d7e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8b9a995aa5df930a6df665dec4284ad90b6a5d7e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8b9a995aa5df930a6df665dec4284ad90b6a5d7e",
+      "parentShas": [
+        "7b9677eb84b43ae7343e07d17a48a7e1c200b0f2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787568201000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787568201000
+      },
+      "subject": "feat(genesis): preserve conversation evidence during replay admission",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationReplayEvidenceResolver.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisProductionReplayAdmissionAdapter.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationReplayEvidenceResolver.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisProductionConversationReplayAdmission.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "apps/lumina-runtime/src/routes/genesisReplayExecution.ts"
+      ],
+      "changedPathsByParent": {
+        "7b9677eb84b43ae7343e07d17a48a7e1c200b0f2": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationReplayEvidenceResolver.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisProductionReplayAdmissionAdapter.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationReplayEvidenceResolver.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisProductionConversationReplayAdmission.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "apps/lumina-runtime/src/routes/genesisReplayExecution.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8b9a995aa5df930a6df665dec4284ad90b6a5d7e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

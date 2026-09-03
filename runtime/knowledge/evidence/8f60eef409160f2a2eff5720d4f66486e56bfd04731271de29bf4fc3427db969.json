@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:c0b010389c439211b653bc98909daa06e4fe87fa37b06b61ee4e304ff250be5d",
+  "type": "commit",
+  "title": "feat(executive): add executor capability policy registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240112247,
+  "observedAt": 1786596291000,
+  "contentRef": "git:commit:848c0e3e22eac47c3921f6df5dd92629238e0726",
+  "checksum": "sha256:e2b84fe3fe9000a186fdbb85f8b0d5f91e8f22141238b0e6db8e61a0fdf39d9c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1422,
+    "genesisAdmissionIdentity": "genesis-admission:abdde6663fd2ff93492efbd1d4c49f02ae3bac550d746a1c902b33b873877659",
+    "historicalSourceId": "genesis-source:commit:848c0e3e22eac47c3921f6df5dd92629238e0726",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:848c0e3e22eac47c3921f6df5dd92629238e0726",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "848c0e3e22eac47c3921f6df5dd92629238e0726",
+      "parentShas": [
+        "be60142b773cab03a311c2c8cbff3396e815e976"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786596291000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786596291000
+      },
+      "subject": "feat(executive): add executor capability policy registry",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorPolicy.ts",
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorPolicyRegistry.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorPolicyRegistry.test.ts",
+        "apps/lumina-runtime/src/executive/action/index.ts"
+      ],
+      "changedPathsByParent": {
+        "be60142b773cab03a311c2c8cbff3396e815e976": [
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorPolicy.ts",
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutorPolicyRegistry.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutorPolicyRegistry.test.ts",
+          "apps/lumina-runtime/src/executive/action/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:848c0e3e22eac47c3921f6df5dd92629238e0726"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

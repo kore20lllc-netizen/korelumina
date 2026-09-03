@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:2d4b77c2ddc82086fbb4378835be19fe532b3fc60723ec21e8adab4389c2733a",
+  "type": "conversation",
+  "title": "KoreLumina — AI Planner + Diff - Diagnose Runtime TypeError — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5#browser-turn=2",
+  "checksum": "2d4b77c2ddc82086fbb4378835be19fe532b3fc60723ec21e8adab4389c2733a",
+  "metadata": {
+    "content": "This is not a preview issue. Your runtime is crashing.\nRoot cause (from your output)\nError: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin.\nThe PostCSS plugin has moved to a separate package...\nYour imported repo is using old Tailwind config, but your environment expects new Tailwind/PostCSS split.\n\nFix — do exactly this (no guessing)\n1. Go to the imported project\ncd /Users/erictouko/dev/korelumina/runtime/workspaces/default/projects/korelumina-dogfood\n\n2. Install correct PostCSS plugin\nnpm install -D @tailwindcss/postcss\n\n3. Fix postcss.config.js\nReplace the file completely:\ncat > postcss.config.js << 'EOF'\nmodule.exports = {\n  plugins: {\n    \"@tailwindcss/postcss\": {},\n    autoprefixer: {},\n  },\n};\nEOF\n\n4. Remove old Tailwind plugin usage (if present)\nIf you see this anywhere:\nJavaScripttailwindcss: {}\nIt must be removed or replaced (handled above).\n\n5. Restart runtime\nKill and restart your dev server:\npkill -f \"npm run dev\"\nnpm run dev\n\nExpected result\nNow:\ncurl http://localhost:3100\nshould return actual app HTML, not _error.\n\nWhy this matters for KoreLumina\nThis is exactly the type of issue your platform must auto-fix:\n\n\nRepo import → dependency mismatch\n\n\nBuild fails silently → blank preview\n\n\nUser thinks KoreLumina is broken\n\n\nYou need later:\n\n\ndependency auto-detection\n\n\nTailwind version patching\n\n\nruntime health check before iframe load\n\n\n\nCurrent task status\n\n\nRuntime process manager: working\n\n\nPreview wiring: correct\n\n\nFailure: project build config (Tailwind/PostCSS)\n\n\nFix above → preview will render.",
+    "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+    "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+    "messageId": "dedf5ee4-991f-4b6a-abdb-5ca4f5413351",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cd5a35-3c30-8325-bbd0-f365465d31e5:message:dedf5ee4-991f-4b6a-abdb-5ca4f5413351",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5#browser-turn=2",
+    "sourceRevision": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e767770605908af698b5786f0ea3bfbac9c9d0425df039bfefa412977ad15509",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d",
+      "exportRevision": "sha256:e48ddf4f9f8980025ab3717675b7c4ddb89dae7c51c1d57ef77882c4379fb06d"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787625711099
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cd5a35-3c30-8325-bbd0-f365465d31e5:message:dedf5ee4-991f-4b6a-abdb-5ca4f5413351"
+    ],
+    "conversation": [
+      "69cd5a35-3c30-8325-bbd0-f365465d31e5"
+    ]
+  }
+}

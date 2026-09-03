@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:2a3d17d4b740ac9ae76396e3573dc4613f23316ef13071efed5cd47903d58080",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KPP Compiler Registry Implementation — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832#browser-turn=4",
+  "checksum": "2a3d17d4b740ac9ae76396e3573dc4613f23316ef13071efed5cd47903d58080",
+  "metadata": {
+    "content": "KoreLumina Reconstruction Handoff (Master Conversation)\nMission\nContinue the KoreLumina reconstruction as the Lead Reconstruction Engineer.\nThe objective is not to build new features. The objective is to complete the production-grade reconstruction of KoreLumina while preserving architectural integrity.\n\nCurrent State\nRepository\nkorelumina\nBranch\nContinue on the current reconstruction branch.\nDo not create a new architecture.\n\nDo not redesign existing systems.\n\nContinue the existing reconstruction.\n\nCurrent Status\nEverything below is GREEN.\nRuntime\n\n\nRuntime registry working\n\n\nRuntime startup pipeline working\n\n\nProject isolation working\n\n\nRuntime project discovery working\n\n\nRuntime preview working\n\n\nRuntime lifecycle working\n\n\nRuntime status API working\n\n\nRuntime Operations workspace working\n\n\nPreview\nPremium Ride App\n\n\nimports correctly\n\n\ndependencies install correctly\n\n\nSWC native binaries install correctly\n\n\npreview launches correctly\n\n\nruntime starts correctly\n\n\nruntime status green\n\n\nRoot cause previously solved:\nnpm install --ignore-scripts skipped package lifecycle while still installing optional native binaries correctly. The SWC issue was caused by an interrupted installation rather than the isolation pipeline.\nNo changes are required there.\n\nRecently Completed\nRuntime UI Reconstruction\nCompleted:\n\n\nRuntime Header redesign\n\n\nRuntime Search restoration\n\n\nRuntime Environment filters restoration\n\n\nRuntime Health filters restoration\n\n\nRuntime SearchFilters migrated\n\n\nLuminaSegmentedControl introduced\n\n\nRuntime Action buttons upgraded\n\n\nLuminaButton migration\n\n\nRuntime Health Badge redesign\n\n\nRuntime Project Row redesign\n\n\nRuntime Logs Panel redesign\n\n\nEverything builds successfully.\nLatest build:\nRuntime build\nGREEN\n\nBuilder build\nGREEN\n\nPreview\nGREEN\n\nReconstruction Rules\nThese rules are mandatory.\nRule 1\nNever drift.\nNever invent architecture.\nNever replace working systems.\nAlways continue the current reconstruction.\n\nRule 2\nOne ticket at a time.\nNever mix unrelated work.\n\nRule 3\nInvestigate first.\nBefore changing code:\n\n\ninspect\n\n\nverify\n\n\nidentify root cause\n\n\nNever guess.\n\nRule 4\nNo regressions.\nIf functionality disappears, restore it before continuing.\nExample:\nThe Runtime Header redesign accidentally removed:\n\n\nSearch\n\n\nEnvironment filters\n\n\nHealth filters\n\n\nThose were restored before continuing.\nThis is the expected workflow.\n\nRule 5\nProduction quality only.\nNever produce MVP-quality UI or architecture.\nEverything should look production ready.\n\nRule 6\nNo manual edits.\nEvery source change must be generated through rewrite scripts.\nPattern:\nBashcat >/tmp/rewrite_xxx.py <<'PY'\n...\nPY\n\npython3 /tmp/rewrite_xxx.py\n\nnpm run build\nNever instruct manual editing.\nNever say \"open the file.\"\nNever ask to edit in VSCode.\n\nRule 7\nAlways build.\nEvery completed ticket ends with\nnpm run build\nNo exceptions.\n\nRule 8\nNever break Runtime.\nRuntime is the source of truth.\nBuilder consumes Runtime.\nNever fabricate runtime state.\n\nRule 9\nSmall safe commits.\nNever rewrite unrelated systems.\n\nEngineering Workflow\nAlways follow this order.\nInspect\n\n↓\n\nRoot Cause\n\n↓\n\nPlan\n\n↓\n\nRewrite Script\n\n↓\n\nBuild\n\n↓\n\nVerify\n\n↓\n\nContinue\nNever skip steps.\n\nUI Direction\nTarget aesthetic:\nPremium AI operating system.\nThink:\n\n\nLinear\n\n\nRaycast\n\n\nVercel\n\n\nApple\n\n\nStripe\n\n\nArc Browser\n\n\nCharacteristics:\n\n\npremium glass\n\n\nsoft gradients\n\n\nrestrained glow\n\n\nconsistent spacing\n\n\npolished typography\n\n\nsubtle animations\n\n\nhigh information density\n\n\nprofessional operations dashboard\n\n\nNever use loud colors.\nNever use cartoon styling.\n\nComponent Strategy\nWhen upgrading components:\nImprove visuals.\nDo not remove functionality.\nExample:\nGood:\n\n\nredesign RuntimeHeader\n\n\nkeep Search\n\n\nkeep Filters\n\n\nkeep props\n\n\nBad:\n\n\nrewrite RuntimeHeader\n\n\naccidentally remove filters\n\n\n\nCurrent Priority\nContinue polishing Runtime Operations.\nPriority order:\n\n\n\nRuntime Inspector\nUpgrade to premium design.\nImprove:\n\n\nmetrics cards\n\n\nspacing\n\n\nglass styling\n\n\nhierarchy\n\n\n\n\n\n\nRuntime Lifecycle Timeline\nUpgrade visuals only.\nPreserve functionality.\n\n\n\n\nRuntime Health Overview\nPremium metric cards.\nBetter KPI presentation.\n\n\n\n\nRuntime Event Stream\nImprove readability.\nKeep behavior.\n\n\n\n\nFinal Runtime polish\nConsistency pass.\nSpacing\nTypography\nAnimations\nHover states\n\nDo NOT\nDo not:\n\n\nrewrite Runtime architecture\n\n\nreplace Runtime APIs\n\n\nremove features\n\n\nintroduce mock data\n\n\nperform large refactors\n\n\ncreate duplicate components\n\n\nbypass Runtime\n\n\n\nSuccess Criteria\nBefore closing each ticket:\n\n\nRuntime builds\n\n\nBuilder builds\n\n\nPreview works\n\n\nRuntime starts\n\n\nRuntime Operations functions\n\n\nNo regressions introduced\n\n\n\nFirst Instruction for the New Conversation\nStart by asking:\n\n\"What is the next Runtime Operations component to upgrade according to the reconstruction roadmap?\"\n\nDo not re-audit the repository.\nDo not redesign the architecture.\nContinue directly from the current reconstruction state following the workflow and rules above.",
+    "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "a290b025-6536-413b-9370-801d9183b37d",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a46f72f-ac5c-83ea-8f1a-4ee186204832:message:a290b025-6536-413b-9370-801d9183b37d",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832#browser-turn=4",
+    "sourceRevision": "sha256:5686d3ca6662b3f8337a27e976fdac9c2a1dc05ab72ed1e4adce7b1616b49074",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e15c75efbc7fef66d81478ccdc31607174f695f5966aeeba7219f09de184b1ba",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:5686d3ca6662b3f8337a27e976fdac9c2a1dc05ab72ed1e4adce7b1616b49074",
+      "exportRevision": "sha256:5686d3ca6662b3f8337a27e976fdac9c2a1dc05ab72ed1e4adce7b1616b49074"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630785172
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a46f72f-ac5c-83ea-8f1a-4ee186204832:message:a290b025-6536-413b-9370-801d9183b37d"
+    ],
+    "conversation": [
+      "6a46f72f-ac5c-83ea-8f1a-4ee186204832"
+    ]
+  }
+}

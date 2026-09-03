@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:1cdfee8ec5ad7b3a53db27f6f9518622a7e74cfc00df736b00631cadaf341bdd",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Progress — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278#browser-turn=2",
+  "checksum": "1cdfee8ec5ad7b3a53db27f6f9518622a7e74cfc00df736b00631cadaf341bdd",
+  "metadata": {
+    "content": "Current Reconstruction Status\nBranch: feature/lumina-workspace-migration\n\nLatest checkpoint: d444a86 — feat(appearance): promote material rendering to resolved appearance tokens\nCompleted:\n\n\nWorkspace Appearance drawer and UI contract established.\n\n\nAppearance model, provider, actions, and adapter added.\n\n\nDropdown state updates correctly.\n\n\nWorkspace Appearance is bridged into LuminaAppearanceProvider.\n\n\nThe broken token contract was repaired so resolved appearance variables contain valid CSS values rather than Tailwind class names.\n\n\nLuminaSurface and LuminaGlassLayer were migrated to the resolved token contract.\n\n\nThe architectural milestone was committed.\n\n\nNext Unfinished Ticket\nAppearance Rendering Runtime Validation\nValidate that changing:\n\n\nMaterial: Glass / Solid / Mica\n\n\nDensity\n\n\nTransparency\n\n\nBlur\n\n\nproduces visible changes in the currently migrated Lumina surfaces.\nOnly after runtime validation succeeds should reconstruction proceed to the next UI boundary:\n\n\nTopBar.tsx\n\n\nSidebar.tsx\n\n\nRemaining workspace surfaces\n\n\nNo implementation should begin until this checkpoint is approved.",
+    "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "86a6ac01-1f87-4acd-8106-098211873766",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a4c6288-5ea4-83ea-ae5a-9324e046d278:message:86a6ac01-1f87-4acd-8106-098211873766",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278#browser-turn=2",
+    "sourceRevision": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1",
+    "segmentAvailability": "available",
+    "conversationChecksum": "aa639589de8db1e2d0db1b45f1a4b5eeb0e06d9312bafa31ad2da66c26a04e17",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1",
+      "exportRevision": "sha256:b7933aa5cb34013ad4ea3edd260fd2435b69bd33f68890635e9271d61aac8cf1"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630739389
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a4c6288-5ea4-83ea-ae5a-9324e046d278:message:86a6ac01-1f87-4acd-8106-098211873766"
+    ],
+    "conversation": [
+      "6a4c6288-5ea4-83ea-ae5a-9324e046d278"
+    ]
+  }
+}

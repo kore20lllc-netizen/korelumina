@@ -1,0 +1,99 @@
+{
+  "id": "genesis-evidence:b53274f2897564d1c55e53b33ebed9a49aff613db0fc560dddb98bca6f117af6",
+  "type": "commit",
+  "title": "feat(runtime): complete live telemetry runtime operations workspace",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083224,
+  "observedAt": 1783974121000,
+  "contentRef": "git:commit:bc30dc819c65f669c8de378bbc61b2164ade4849",
+  "checksum": "sha256:f1e56c6c7b24a596651a235034497dcefdebc38d3c96579b8be2686f12ca38a3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 923,
+    "genesisAdmissionIdentity": "genesis-admission:4e75b9848bc91ae9a982418dd7879c3c899c6f0b87d7cc20093ed81296717645",
+    "historicalSourceId": "genesis-source:commit:bc30dc819c65f669c8de378bbc61b2164ade4849",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:bc30dc819c65f669c8de378bbc61b2164ade4849",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "bc30dc819c65f669c8de378bbc61b2164ade4849",
+      "parentShas": [
+        "73db088ca476c7560251e47b8ac9fae9f4e8a805"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783974121000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783974121000
+      },
+      "subject": "feat(runtime): complete live telemetry runtime operations workspace",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx",
+        "apps/lumina-builder/src/hooks/useRuntimeOperations.ts",
+        "apps/lumina-builder/src/services/runtime/RealRuntimeOperationsService.ts",
+        "apps/lumina-builder/src/services/runtime/metrics.ts",
+        "apps/lumina-builder/src/services/runtime/setRuntimeScenario.ts",
+        "apps/lumina-builder/src/services/runtime/types.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/metrics.ts",
+        "apps/lumina-runtime/src/routes/runtimeScenario.ts",
+        "apps/lumina-runtime/src/runtime/scenario/RuntimeScenarioService.ts"
+      ],
+      "changedPathsByParent": {
+        "73db088ca476c7560251e47b8ac9fae9f4e8a805": [
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHeader.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceHero.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeMetricTile.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeProjectRow.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeSparkline.tsx",
+          "apps/lumina-builder/src/hooks/useRuntimeOperations.ts",
+          "apps/lumina-builder/src/services/runtime/RealRuntimeOperationsService.ts",
+          "apps/lumina-builder/src/services/runtime/metrics.ts",
+          "apps/lumina-builder/src/services/runtime/setRuntimeScenario.ts",
+          "apps/lumina-builder/src/services/runtime/types.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/metrics.ts",
+          "apps/lumina-runtime/src/routes/runtimeScenario.ts",
+          "apps/lumina-runtime/src/runtime/scenario/RuntimeScenarioService.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:bc30dc819c65f669c8de378bbc61b2164ade4849"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

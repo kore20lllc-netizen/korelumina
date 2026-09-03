@@ -1,0 +1,64 @@
+{
+  "id": "genesis-evidence:2412eb581db5aa16239f5380b65b599943cadc749d42610799a89ade66b20843",
+  "type": "commit",
+  "title": "docs(architecture): record baseline 1.0",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078448,
+  "observedAt": 1783203226000,
+  "contentRef": "git:commit:970d5670b31d58045b43ab0f01d5577358c0076a",
+  "checksum": "sha256:d5d53463f8fa916c629d650e856fb16df75ada8c785f1290610df04d456a2719",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 819,
+    "genesisAdmissionIdentity": "genesis-admission:11b471f175258e964a5fdc9d08c07bb60c8d532fdd5fafdbd2590783dca25cfa",
+    "historicalSourceId": "genesis-source:commit:970d5670b31d58045b43ab0f01d5577358c0076a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:970d5670b31d58045b43ab0f01d5577358c0076a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "970d5670b31d58045b43ab0f01d5577358c0076a",
+      "parentShas": [
+        "7214557cb342a3cd6a9109c5e4cb4f1201aff951"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783203226000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783203226000
+      },
+      "subject": "docs(architecture): record baseline 1.0",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/ARCHITECTURE_BASELINE_1_0.md"
+      ],
+      "changedPathsByParent": {
+        "7214557cb342a3cd6a9109c5e4cb4f1201aff951": [
+          "docs/architecture/ARCHITECTURE_BASELINE_1_0.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/architecture-baseline-1-0-green",
+        "refs/tags/kep-001-complete"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:970d5670b31d58045b43ab0f01d5577358c0076a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:e1c93db24e9a955da63df831328dad792e333f0c68fd95ea2bb70b6df47fd2e2",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Runtime Recovery — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e#browser-turn=4",
+  "checksum": "e1c93db24e9a955da63df831328dad792e333f0c68fd95ea2bb70b6df47fd2e2",
+  "metadata": {
+    "content": "Start the new chat with a handoff block like this:\nKORELUMINA CONTINUATION HANDOFF\n\nBranch:\nfeature/architecture-audit\n\nCurrent status:\n- Reconstruction complete.\n- Architecture audit complete.\n- Commit: 1035fb6\n- Working tree clean.\n- Runtime preview stack already restored and validated.\n- Runtime health endpoint operational.\n- Runtime metrics endpoint operational.\n- Main architecture authority:\n  - KORELUMINA_MASTER_ARCHITECTURE.md\n  - KORELUMINA_ENGINEERING_RULES.md\n\nRules:\n- One task at a time.\n- No architectural rewrites.\n- Follow architecture docs exactly.\n- Full-file rewrites only.\n- Provide exact terminal commands.\n- No speculative changes.\n- Validate before commit.\n- Commit after each completed ticket.\n\nCurrent verified facts:\n- /api/runtime/metrics exists and works.\n- Runtime registry exists.\n- Runtime event bus exists.\n- Workspace watcher metrics exist.\n- DeploymentDiagnostics capability exists in workspaceAccessService.\n- No Deployment Diagnostics UI exists yet.\n- No Runtime Health dashboard exists yet.\n- No metrics consumer exists in builder.\n\nNext ticket:\nDeployment Diagnostics Dashboard\n\nGoal:\nCreate builder-side diagnostics workspace that consumes:\n\nGET /api/runtime/metrics\n\nDisplay:\n- Runtime process health\n- Runtime totals\n- Runtime registry table\n- Runtime memory usage\n- Runtime uptime\n- Runtime status\n- Runtime actions (logs/restart/stop if architecture requires)\n\nDefinition of done:\n- Diagnostics workspace visible only when deploymentDiagnostics capability is true.\n- Poll metrics endpoint.\n- Display runtime metrics.\n- Build passes.\n- No regression to preview/runtime stack.\n\nDo not revisit reconstruction issues unless new evidence appears.\nAssume preview/runtime restoration is already complete.\nContinue from architecture implementation.\nAlso include this one-line anchor:\nLast confirmed state: reconstruction complete, architecture audit complete, next milestone = Deployment Diagnostics Dashboard.\nThat gives the new chat enough context to continue development without reopening already-solved reconstruction investigations.",
+    "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "a57abdef-2e23-46ea-a15a-4bf9192b0fdb",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e:message:a57abdef-2e23-46ea-a15a-4bf9192b0fdb",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e#browser-turn=4",
+    "sourceRevision": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9",
+    "segmentAvailability": "available",
+    "conversationChecksum": "d2d9df5ecb5da9955d134a9b269cc90e4c8afbf7e2085f13335812718c4f3dbf",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9",
+      "exportRevision": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630777026
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e:message:a57abdef-2e23-46ea-a15a-4bf9192b0fdb"
+    ],
+    "conversation": [
+      "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e"
+    ]
+  }
+}

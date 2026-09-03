@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:7adcae363a2f8bdd318980724881364ebd0234fa8d35c3def4e1d4e6dd1d7e1b",
+  "type": "conversation",
+  "title": "KoreLumina — Production Hardening - Commit Guardrail Rules — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25#browser-turn=1",
+  "checksum": "7adcae363a2f8bdd318980724881364ebd0234fa8d35c3def4e1d4e6dd1d7e1b",
+  "metadata": {
+    "content": "If the app is not the problem why is AI preview properly displays and designer and dev are off?",
+    "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+    "projectId": "g-p-69cbc6142624819186caca549600467e",
+    "messageId": "180d8690-ff4d-4076-94c6-8830037ca4a5",
+    "speakerRole": "user",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc982d-f218-8333-9737-3f780ba0bf25:message:180d8690-ff4d-4076-94c6-8830037ca4a5",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25#browser-turn=1",
+    "sourceRevision": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251",
+    "segmentAvailability": "available",
+    "conversationChecksum": "193d9ec26a37f4daa37dddbd7a0e811aa3060f1b8055e9066cde59a827e57803",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251",
+      "exportRevision": "sha256:55c3f8b07dbc9f84ae817cfee4562e12caccf42a062fedc7780f76748d490251"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787626542771
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc982d-f218-8333-9737-3f780ba0bf25:message:180d8690-ff4d-4076-94c6-8830037ca4a5"
+    ],
+    "conversation": [
+      "69cc982d-f218-8333-9737-3f780ba0bf25"
+    ]
+  }
+}

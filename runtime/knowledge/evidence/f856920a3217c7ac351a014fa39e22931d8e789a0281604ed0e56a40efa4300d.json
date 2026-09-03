@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:8a5ec8227d40bfe4367e5c3715cc7f5b752a6e1b452cc32e0c0b65de3e1863d1",
+  "type": "document",
+  "title": "KoreLumina Genome",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078322,
+  "observedAt": 1783202067000,
+  "contentRef": "docs/constitution/GENOME.md",
+  "checksum": "sha256:5ceca04d6083d64450533e5e0492b38b8eea18044617d2628366cb9fe216afa6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 816,
+    "genesisAdmissionIdentity": "genesis-admission:5ea454850404cb3a6db6fbdb7e0215025cdf2333ca940233fcebabd971a61c29",
+    "historicalSourceId": "genesis-source:document:derived:156d0a29fc5bd71f3b624267ed705b7e2976d0e7442cda1924a70bb40ed12614",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/GENOME.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Genome",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/GENOME.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:156d0a29fc5bd71f3b624267ed705b7e2976d0e7442cda1924a70bb40ed12614"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

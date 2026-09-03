@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:f51f6f9e03725655ade44ce5726f5ca87559c37b158ae2c79017dfda54d38eee",
+  "type": "commit",
+  "title": "feat(genesis): add typed replay read API client",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240118502,
+  "observedAt": 1787114910000,
+  "contentRef": "git:commit:46a316d7587babf799933c506088e42910a3897f",
+  "checksum": "sha256:285563aff55d93e702f8235252358ef29aa14c8efa47bd50d051b2fc78872431",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1508,
+    "genesisAdmissionIdentity": "genesis-admission:f56dbde61611b143a17b92840e8f0d1c5f0400de461ce42d084447b6634b7c5f",
+    "historicalSourceId": "genesis-source:commit:46a316d7587babf799933c506088e42910a3897f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:46a316d7587babf799933c506088e42910a3897f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "46a316d7587babf799933c506088e42910a3897f",
+      "parentShas": [
+        "6b1260095efb181489256f3853579fcb083e87c4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787114910000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787114910000
+      },
+      "subject": "feat(genesis): add typed replay read API client",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/services/runtime/__tests__/genesisReplayReadClient.test.ts",
+        "apps/lumina-builder/src/services/runtime/genesisReplayRead.ts",
+        "apps/lumina-builder/src/services/runtime/genesisReplayReadClient.ts",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+      ],
+      "changedPathsByParent": {
+        "6b1260095efb181489256f3853579fcb083e87c4": [
+          "apps/lumina-builder/src/services/runtime/__tests__/genesisReplayReadClient.test.ts",
+          "apps/lumina-builder/src/services/runtime/genesisReplayRead.ts",
+          "apps/lumina-builder/src/services/runtime/genesisReplayReadClient.ts",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:46a316d7587babf799933c506088e42910a3897f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

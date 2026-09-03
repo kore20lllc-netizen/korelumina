@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:de4c4d3b76acb611bcf1eefe64f5725eda815f573e1f57d1e5fa45145b143eec",
+  "type": "commit",
+  "title": "refactor(appearance): introduce material registry resolver",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083910,
+  "observedAt": 1784254850000,
+  "contentRef": "git:commit:9e75a581e7e3ecdcb62340cbc07d80a6bcc4e22b",
+  "checksum": "sha256:d7020e2c77ad942367497671c3af8cbdc87178734c70af04e1ee36436ea81d04",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 937,
+    "genesisAdmissionIdentity": "genesis-admission:6958d85aeb8a0a853bc7986c03f0a906d703f1c406987c1fbc0abe3ad80430bd",
+    "historicalSourceId": "genesis-source:commit:9e75a581e7e3ecdcb62340cbc07d80a6bcc4e22b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9e75a581e7e3ecdcb62340cbc07d80a6bcc4e22b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9e75a581e7e3ecdcb62340cbc07d80a6bcc4e22b",
+      "parentShas": [
+        "a7f3357a519e6134e2cccfa63615c2a7ee506661"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784254850000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784254850000
+      },
+      "subject": "refactor(appearance): introduce material registry resolver",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/appearance/registry/materials.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/resolver/index.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/resolver/resolveAppearance.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/resolver/resolveMaterial.ts"
+      ],
+      "changedPathsByParent": {
+        "a7f3357a519e6134e2cccfa63615c2a7ee506661": [
+          "apps/lumina-builder/src/components/lumina/appearance/registry/materials.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/resolver/index.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/resolver/resolveAppearance.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/resolver/resolveMaterial.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9e75a581e7e3ecdcb62340cbc07d80a6bcc4e22b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

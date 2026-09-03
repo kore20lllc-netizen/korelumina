@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:0e7be344b4a7b2bab99f1d462fb94e8fd7a2e30c91f31cd6a3c2ddc4c72220d8",
+  "type": "commit",
+  "title": "refactor(knowledge): extract executive identity",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084789,
+  "observedAt": 1784867367000,
+  "contentRef": "git:commit:11587a14b9a78a11ab42b7f7e2e474f488ae2e1f",
+  "checksum": "sha256:a392c92f0b01a9a3ec02ab8c9f9688c4745ce6f4d646ece6e91d699085665dc7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 955,
+    "genesisAdmissionIdentity": "genesis-admission:c4c25afbdda32d0141d55c25796dc0d05bdc70ed65d484a53a9ea631b6b36698",
+    "historicalSourceId": "genesis-source:commit:11587a14b9a78a11ab42b7f7e2e474f488ae2e1f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:11587a14b9a78a11ab42b7f7e2e474f488ae2e1f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "11587a14b9a78a11ab42b7f7e2e474f488ae2e1f",
+      "parentShas": [
+        "189b8fb32b32da20264feb7b6b180b9500fd7e89"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784867367000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784867367000
+      },
+      "subject": "refactor(knowledge): extract executive identity",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveIdentity.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+      ],
+      "changedPathsByParent": {
+        "189b8fb32b32da20264feb7b6b180b9500fd7e89": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveIdentity.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:11587a14b9a78a11ab42b7f7e2e474f488ae2e1f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

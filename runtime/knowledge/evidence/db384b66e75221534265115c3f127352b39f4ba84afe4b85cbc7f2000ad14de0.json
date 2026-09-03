@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:8ab8f875b75fcb7ff990b5258da39ad5fa157878b8c11683cdc817a765579dcb",
+  "type": "commit",
+  "title": "refactor(lumina): make workspace product branding opt-in",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086477,
+  "observedAt": 1785495373000,
+  "contentRef": "git:commit:09bae3553e1cc7ef81b11b25b145ac5d11ef61cd",
+  "checksum": "sha256:589c88e57c205dc6b66c48edc0962504b0fc841391b5d95efc33ab7953302612",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 989,
+    "genesisAdmissionIdentity": "genesis-admission:1d8e2408b6beaa4794c4e4fc0df1871f5888c24aebb04978d9ccd95f403609ff",
+    "historicalSourceId": "genesis-source:commit:09bae3553e1cc7ef81b11b25b145ac5d11ef61cd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:09bae3553e1cc7ef81b11b25b145ac5d11ef61cd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "09bae3553e1cc7ef81b11b25b145ac5d11ef61cd",
+      "parentShas": [
+        "311dd1edeb3be304444b4c160fe69296297d9848"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785495373000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785495373000
+      },
+      "subject": "refactor(lumina): make workspace product branding opt-in",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceBrand.tsx"
+      ],
+      "changedPathsByParent": {
+        "311dd1edeb3be304444b4c160fe69296297d9848": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspaceBrand.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:09bae3553e1cc7ef81b11b25b145ac5d11ef61cd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

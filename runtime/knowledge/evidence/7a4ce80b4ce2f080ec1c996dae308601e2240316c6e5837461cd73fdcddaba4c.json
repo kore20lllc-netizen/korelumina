@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:a4444b5fe33cd2293fb5e277d11abfe71febe485cf9ab3fe23cfab8f294ec225",
+  "type": "document",
+  "title": "KoreLumina AI Reconstruction Bootstrap Prompt",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081915,
+  "observedAt": 1783728724000,
+  "contentRef": "docs/architecture/AI_RECONSTRUCTION_BOOTSTRAP_PROMPT.md",
+  "checksum": "sha256:eb094c0c8003d501e92008e94afa4c7d29e93a9e179147866fe71d7a7397d552",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 895,
+    "genesisAdmissionIdentity": "genesis-admission:6e126a1ea276de23c661ef2626723c6294bb91d242964fd716f15d47f5eb26fd",
+    "historicalSourceId": "genesis-source:document:derived:3ab6cf0981ba1fb55c6f62d2fda59599e1b6a694e172894bc2884671069c1225",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/AI_RECONSTRUCTION_BOOTSTRAP_PROMPT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina AI Reconstruction Bootstrap Prompt",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/AI_RECONSTRUCTION_BOOTSTRAP_PROMPT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3ab6cf0981ba1fb55c6f62d2fda59599e1b6a694e172894bc2884671069c1225"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

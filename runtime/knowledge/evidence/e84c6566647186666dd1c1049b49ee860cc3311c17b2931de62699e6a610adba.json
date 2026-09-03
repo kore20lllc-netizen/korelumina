@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:ad078ba4de6bdaad73849f7ce375fb1940c731e23cbf8b97697117e7441d74cf",
+  "type": "conversation",
+  "title": "KoreLumina — Repo Import - Repo Import System — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=2",
+  "checksum": "ad078ba4de6bdaad73849f7ce375fb1940c731e23cbf8b97697117e7441d74cf",
+  "metadata": {
+    "content": "Current task: Restore Builder from latest remote (not local)\nYour last command:\nBashgit checkout -- app/builder/page.tsx\nonly restored from local state, not from your last push.\n\n✅ Correct restore (from GitHub remote)\n1. Reset file from remote main\nBashgit fetch origin\ngit checkout origin/main -- app/builder/page.tsx\n\n2. Clean + restart\nBashrm -rf .next\nnpm run dev\n\n🔥 If you want FULL project rollback (not just one file)\n⚠️ This will discard local changes:\nBashgit fetch origin\ngit reset --hard origin/main\n\n🧠 What just happened\nYou had:\n\n\nlocal broken builder\n\n\nremote still has good version\n\n\nSo:\n\nYou must pull from origin/main, not local working tree\n\n\n✅ Done criteria\n\n\nBuilder layout restored → FileTree / Editor / Preview visible\n\n\nNo blank screen → yes\n\n\nImport system untouched → yes\n\n\n\nNext step (safe this time)\nSay:\ninject entry selector into builder WITHOUT breaking layout\nThis time we’ll modify:\n\n\nONLY preview iframe\n\n\nNOT the whole page",
+    "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+    "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+    "messageId": "1fbdc3fc-3cf6-4bb5-8a5f-b870946bb6ff",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce581f-b160-8331-8bf9-02858e8e90e6:message:1fbdc3fc-3cf6-4bb5-8a5f-b870946bb6ff",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=2",
+    "sourceRevision": "sha256:57e876a62a764eae92a6d95c98f9e78c66c263d6d76ac8cd2b81f4b05f9f82be",
+    "segmentAvailability": "available",
+    "conversationChecksum": "06966784540fffe36afa893508cfc72d21440876e31891816ee089bb45b691f8",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:57e876a62a764eae92a6d95c98f9e78c66c263d6d76ac8cd2b81f4b05f9f82be",
+      "exportRevision": "sha256:57e876a62a764eae92a6d95c98f9e78c66c263d6d76ac8cd2b81f4b05f9f82be"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787629398898
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce581f-b160-8331-8bf9-02858e8e90e6:message:1fbdc3fc-3cf6-4bb5-8a5f-b870946bb6ff"
+    ],
+    "conversation": [
+      "69ce581f-b160-8331-8bf9-02858e8e90e6"
+    ]
+  }
+}

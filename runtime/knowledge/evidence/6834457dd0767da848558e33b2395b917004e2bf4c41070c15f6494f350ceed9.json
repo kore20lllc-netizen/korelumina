@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:f683599cd1b57dd86c91440df77e951d4a6de4347b7af780021017994f9ce3b6",
+  "type": "commit",
+  "title": "feat(executive): gate execution start on authorization consumption",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240111896,
+  "observedAt": 1786593275000,
+  "contentRef": "git:commit:5ab0fec24ef03bf11179537d4d5f464a2000a80b",
+  "checksum": "sha256:ca182ad6cfbe717c49893be153511f471be9197eddc9a63fe68dbc911bf0f5eb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1417,
+    "genesisAdmissionIdentity": "genesis-admission:c1da8fd96c3ab644525b6f81e1338475ecf06bc00b176e9d859e024e4bf12fb4",
+    "historicalSourceId": "genesis-source:commit:5ab0fec24ef03bf11179537d4d5f464a2000a80b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5ab0fec24ef03bf11179537d4d5f464a2000a80b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5ab0fec24ef03bf11179537d4d5f464a2000a80b",
+      "parentShas": [
+        "9d3f44f3e2d993200f77d7733802eb0c9727ae24"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786593275000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786593275000
+      },
+      "subject": "feat(executive): gate execution start on authorization consumption",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionAuthorizationService.ts",
+        "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionStartService.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutionStartService.test.ts",
+        "apps/lumina-runtime/src/executive/action/index.ts"
+      ],
+      "changedPathsByParent": {
+        "9d3f44f3e2d993200f77d7733802eb0c9727ae24": [
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionAuthorizationService.ts",
+          "apps/lumina-runtime/src/executive/action/ExecutiveActionExecutionStartService.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveActionExecutionStartService.test.ts",
+          "apps/lumina-runtime/src/executive/action/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5ab0fec24ef03bf11179537d4d5f464a2000a80b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b6cf1fd5144c5b3680d1e6d590f2ee7dbb0a28043e27d79d0e1c6288d9827152",
+  "type": "commit",
+  "title": "feat(executive): materialize governed reasoning knowledge",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240109939,
+  "observedAt": 1786508657000,
+  "contentRef": "git:commit:f84273b202ed6ba86a5e6ddd51361dbd7d409272",
+  "checksum": "sha256:cb3f123d4dee0c2b396bd5c6816437f1804c91312dd344bc15599f76ae9b946d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1389,
+    "genesisAdmissionIdentity": "genesis-admission:d3b3a57fb4f72fed25d49a250af3dff568d3b7b54389b27184d6ef437f4ff0ca",
+    "historicalSourceId": "genesis-source:commit:f84273b202ed6ba86a5e6ddd51361dbd7d409272",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f84273b202ed6ba86a5e6ddd51361dbd7d409272",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f84273b202ed6ba86a5e6ddd51361dbd7d409272",
+      "parentShas": [
+        "3625a50ffb180714e85f32256e9747ecc52a986f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786508657000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786508657000
+      },
+      "subject": "feat(executive): materialize governed reasoning knowledge",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningKnowledgeMaterializer.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3625a50ffb180714e85f32256e9747ecc52a986f": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningKnowledgeMaterializer.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f84273b202ed6ba86a5e6ddd51361dbd7d409272"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

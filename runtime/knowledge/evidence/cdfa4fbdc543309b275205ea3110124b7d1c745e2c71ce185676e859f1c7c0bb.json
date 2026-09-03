@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:b13ab49f43c2c82ab6988b26d2b07fc7c5314354de83b01d26d09878b4d2771f",
+  "type": "document",
+  "title": "KoreLumina Founding Charter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077136,
+  "observedAt": 1783195970000,
+  "contentRef": "docs/canon/FOUNDING_CHARTER.md",
+  "checksum": "sha256:c80c9b3438d68d67f7af7e98eb07e04469b442e55631c75b8f68175c7d8e0013",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 789,
+    "genesisAdmissionIdentity": "genesis-admission:f624f0e68727bd61647f63a0c7af7f613b7ce29366b0425ebee02014f66d7cc0",
+    "historicalSourceId": "genesis-source:document:derived:4bf5299859c9c483994a9ddafe63675a80a3c1cfdc229725838917492464e4ec",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Supreme",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/canon/FOUNDING_CHARTER.md",
+    "documentClassification": "canonical",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Founding Charter",
+      "status": "Canonical",
+      "documentClassification": "canonical",
+      "sourceLocation": "docs/canon/FOUNDING_CHARTER.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:4bf5299859c9c483994a9ddafe63675a80a3c1cfdc229725838917492464e4ec"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

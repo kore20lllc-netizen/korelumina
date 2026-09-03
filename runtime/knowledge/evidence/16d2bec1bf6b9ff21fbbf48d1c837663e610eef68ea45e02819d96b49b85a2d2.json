@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:789442749a118d3186235ff4a660d2ad7b0c21df0eae967f458bead0a6a6b7d0",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - RuntimeHeader Modification Classification — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59#browser-turn=2",
+  "checksum": "789442749a118d3186235ff4a660d2ad7b0c21df0eae967f458bead0a6a6b7d0",
+  "metadata": {
+    "content": "Educational Corpus Explorer is now visually certified green with the double-contour issue resolved. Commit and push this single milestone:\nBashcd /Users/erictouko/dev/korelumina && \\\ntest \"$(git branch --show-current)\" = \"inspect/runtime-certified-main\" && \\\ntest \"$(git rev-parse HEAD)\" = \"f9a3e18ce61a6768f097c1a451a3cda87cde6d08\" && \\\ntest \"$(git status --short)\" = \" M apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx\" && \\\ngit diff --check && \\\nnpm run build && \\\ngit add \\\napps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx && \\\ngit diff --cached --check && \\\ngit commit -m \"refactor(knowledge): adopt Lumina flagship panel in educational corpus explorer\" && \\\ngit push && \\\nprintf '%s\\n' \"===== HEAD =====\" && \\\ngit log -1 --oneline && \\\nprintf '%s\\n' \"===== STATUS =====\" && \\\ngit status --short\nThis milestone intentionally includes the outer LuminaFlagshipPanel migration, removal of the redundant top highlight, and the selected-card ring-0 correction that produced the single clean electric-blue contour you validated.",
+    "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "acc86f5a-54fe-4c5d-8e0b-8c9cfaecd991",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a732386-b120-83ea-a01d-fdfd0c777e59:message:acc86f5a-54fe-4c5d-8e0b-8c9cfaecd991",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59#browser-turn=2",
+    "sourceRevision": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a",
+    "segmentAvailability": "available",
+    "conversationChecksum": "6c1578a25015a86eee2e1f2d4c80bb57ff9627a827029a96bae19d7c500e6145",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a",
+      "exportRevision": "sha256:10814ec8ecbcd7fb8f2f97d8527b0372f4b457d8306293f07cac7d39a8cd4f2a"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630870560
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a732386-b120-83ea-a01d-fdfd0c777e59:message:acc86f5a-54fe-4c5d-8e0b-8c9cfaecd991"
+    ],
+    "conversation": [
+      "6a732386-b120-83ea-a01d-fdfd0c777e59"
+    ]
+  }
+}

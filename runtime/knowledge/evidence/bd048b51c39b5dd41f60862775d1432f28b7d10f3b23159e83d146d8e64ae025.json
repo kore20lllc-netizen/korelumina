@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:9bd22b1df4e269d9509650ffee4a94c7e16223f6f5c0a4c01c57af8ff7ba4d88",
+  "type": "commit",
+  "title": "feat(lumina): extract flow connector",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087794,
+  "observedAt": 1785736563000,
+  "contentRef": "git:commit:56459afc26f38cc7321947f3f9ce2f3ea495458d",
+  "checksum": "sha256:182b51841ec2eba600f8faaf071f655b9e1674d7f360dda7713894743884051a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1015,
+    "genesisAdmissionIdentity": "genesis-admission:aed4d55b5734b4d2c9fb4acd93d719ecce7c71a8e34a9457487d7eb781274944",
+    "historicalSourceId": "genesis-source:commit:56459afc26f38cc7321947f3f9ce2f3ea495458d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:56459afc26f38cc7321947f3f9ce2f3ea495458d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "56459afc26f38cc7321947f3f9ce2f3ea495458d",
+      "parentShas": [
+        "03a92f41445c31c221f86d2fae8b02e85c4f89f0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785736563000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785736563000
+      },
+      "subject": "feat(lumina): extract flow connector",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/lumina/flow/connector/LuminaFlowConnector.tsx",
+        "apps/lumina-builder/src/components/design-system/lumina/flow/connector/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/flow/index.ts",
+        "apps/lumina-builder/src/components/design-system/lumina/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/canvas/orchestration/components/FlowLayer.tsx"
+      ],
+      "changedPathsByParent": {
+        "03a92f41445c31c221f86d2fae8b02e85c4f89f0": [
+          "apps/lumina-builder/src/components/design-system/lumina/flow/connector/LuminaFlowConnector.tsx",
+          "apps/lumina-builder/src/components/design-system/lumina/flow/connector/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/flow/index.ts",
+          "apps/lumina-builder/src/components/design-system/lumina/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/canvas/orchestration/components/FlowLayer.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:56459afc26f38cc7321947f3f9ce2f3ea495458d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

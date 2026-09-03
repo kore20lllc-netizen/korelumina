@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:fa9a0c4b563d3246a2a1831578d41e5f5b595d734c4ddee98f9230891d502c1b",
+  "type": "document",
+  "title": "KoreLumina Engineering Method",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077971,
+  "observedAt": 1783201746000,
+  "contentRef": "docs/constitution/ENGINEERING_METHOD.md",
+  "checksum": "sha256:fc23f64719e5d7a421ed505e34b88f1edfb9c9c6ead46359409e4b4e029aecab",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 808,
+    "genesisAdmissionIdentity": "genesis-admission:c65ef37572b8742a98465c699e4946204aa409825a48c7e6a9459a2d5e9107d9",
+    "historicalSourceId": "genesis-source:document:derived:2862de70f418a98138fd10bf1654e722d18042c12cfa51a1d78408518d106339",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/ENGINEERING_METHOD.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Engineering Method",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/ENGINEERING_METHOD.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:2862de70f418a98138fd10bf1654e722d18042c12cfa51a1d78408518d106339"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

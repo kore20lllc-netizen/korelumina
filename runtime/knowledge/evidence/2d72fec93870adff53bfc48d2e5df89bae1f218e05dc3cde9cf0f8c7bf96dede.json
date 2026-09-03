@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:0a01841fd588e8e944c412aeb11331d3b5f3214e65f71b150c8cb3ab5c7646fc",
+  "type": "commit",
+  "title": "refactor(knowledge): centralize capsule inspector tabs",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092687,
+  "observedAt": 1785958001000,
+  "contentRef": "git:commit:7be92eea1deb571b4b3513805822a29ede5f595c",
+  "checksum": "sha256:53fc28cff24f0b021bc75511ce9b1371fb6dc5c41e1d33bc08e66d0c5006f3a3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1108,
+    "genesisAdmissionIdentity": "genesis-admission:15aaad3e045adab9c452322c552299920dbb527267e1e64575b85301cf97da78",
+    "historicalSourceId": "genesis-source:commit:7be92eea1deb571b4b3513805822a29ede5f595c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7be92eea1deb571b4b3513805822a29ede5f595c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7be92eea1deb571b4b3513805822a29ede5f595c",
+      "parentShas": [
+        "9bccaaa10cafbc3fc4c0b64f898f825c515ba46d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785958001000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785958001000
+      },
+      "subject": "refactor(knowledge): centralize capsule inspector tabs",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx"
+      ],
+      "changedPathsByParent": {
+        "9bccaaa10cafbc3fc4c0b64f898f825c515ba46d": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/flagshipAppearance.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7be92eea1deb571b4b3513805822a29ede5f595c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

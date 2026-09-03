@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:cf72f6f12615d59999db74885e9f6e8f576bc6b3680953c75f8f56040ce09cb6",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Repo Import Debugging — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79#browser-turn=1",
+  "checksum": "cf72f6f12615d59999db74885e9f6e8f576bc6b3680953c75f8f56040ce09cb6",
+  "metadata": {
+    "content": "Current task: verify your live preview system is actually working end-to-end\n\nStep 1 — Confirm files exist\nRun:\nBashls app/api/dev/live-preview\nExpected:\nBashmanager.ts\nwatcher.ts\nroute.ts\nIf anything missing → stop and fix.\n\nStep 2 — Start main app\nBashnpm run dev\nMake sure:\n\n\nno build errors\n\n\nAPI routes compiled\n\n\n\nStep 3 — Trigger live preview (critical test)\nOpen your builder UI and select a project.\n👉 This should call:\nPOST /api/dev/live-preview\n\nStep 4 — Watch terminal logs\nYou should see:\n📦 Installing dependencies... (only first run)\n🚀 Launching korelumina-dogfood on 34xx\nThen:\nready / started / Local:\n\nStep 5 — Verify iframe loads\nExpected result:\n\n\nNOT blank\n\n\nactual app renders\n\n\nroutes work\n\n\nno supabase errors\n\n\n\nStep 6 — Test hot reload\nEdit any file inside the repo:\nBashruntime/workspaces/default/projects/<projectId>/app/page.tsx\nExpected:\n👀 Watching project: ...\n🔁 Change detected: app/page.tsx\nThen:\n\n\nserver killed\n\n\nnext request restarts it\n\n\npreview updates\n\n\n\nIf something fails\nCase A — preview never loads\nCheck:\nBashlsof -i :3400\nIf nothing → server didn’t start\n\nCase B — install hangs\nRun manually:\nBashcd runtime/workspaces/default/projects/<projectId>\nnpm install\n\nCase C — Next never ready\nCheck logs for:\n\n\nmissing env vars\n\n\nport conflicts\n\n\nscript mismatch\n\n\n\nWhat success looks like\nYou now have:\n\n\nreal repo rendering ✅\n\n\nmulti-framework support ✅\n\n\nauto dependency install ✅\n\n\nhot reload ✅\n\n\nprocess isolation ✅\n\n\n\nImportant checkpoint\nIf this works:\n👉 KoreLumina is now a real runtime platform, not just a builder\n\nNext step (only after this passes)\nSay:\n👉 “add UI control panel (logs + restart + status)”\nThat’s the final layer to make it elite-level.",
+    "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "829d33f3-7459-4453-9c78-e951aadc8052",
+    "speakerRole": "assistant",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69e18fec-788c-83ea-b357-799841a92a79:message:829d33f3-7459-4453-9c78-e951aadc8052",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79#browser-turn=1",
+    "sourceRevision": "sha256:6b7a5593b4a7a55355ca4a9d52fbdbbb404f741a168f4d456f55f8f13d7ecfde",
+    "segmentAvailability": "available",
+    "conversationChecksum": "427251efa52bbfcb0ebb8a27a6621e385597601d68b8f7513409b563b02b7797",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:6b7a5593b4a7a55355ca4a9d52fbdbbb404f741a168f4d456f55f8f13d7ecfde",
+      "exportRevision": "sha256:6b7a5593b4a7a55355ca4a9d52fbdbbb404f741a168f4d456f55f8f13d7ecfde"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630826620
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69e18fec-788c-83ea-b357-799841a92a79:message:829d33f3-7459-4453-9c78-e951aadc8052"
+    ],
+    "conversation": [
+      "69e18fec-788c-83ea-b357-799841a92a79"
+    ]
+  }
+}

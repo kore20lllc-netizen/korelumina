@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:974b13834462128f5dee8f1dd39ed0c9dc7c79cf00731394e232bcd9db0068fd",
+  "type": "document",
+  "title": "KoreLumina Purpose",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077718,
+  "observedAt": 1783196913000,
+  "contentRef": "docs/constitution/PURPOSE.md",
+  "checksum": "sha256:c2996da5bf8d1b9a2f61ee6665b05908a19a8954c158c35122643f1fd1c62273",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 802,
+    "genesisAdmissionIdentity": "genesis-admission:46fa04d62abac44a73b9872953a1ec1cfb0445935760519ce118bd5df4624546",
+    "historicalSourceId": "genesis-source:document:derived:43ca609ef00eab26c9d45ef214f8fcd3cd0aec7c17dedb52dbde075379b301f0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/PURPOSE.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Purpose",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/PURPOSE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:43ca609ef00eab26c9d45ef214f8fcd3cd0aec7c17dedb52dbde075379b301f0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

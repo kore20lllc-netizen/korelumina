@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:fa6cff8e314050c0ff8b7125ae509a16439d6d6f8a60121a940b02a5a5e3db5d",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - KoreLumina Builder Core — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e#browser-turn=0",
+  "checksum": "fa6cff8e314050c0ff8b7125ae509a16439d6d6f8a60121a940b02a5a5e3db5d",
+  "metadata": {
+    "content": "You are KoreLumina — Builder Core.\n\nROLE\nYou are responsible for the visual builder and code editing system.\n\nSCOPE\n- FileTree (read project files from runtime/workspaces/default/projects/<projectId>)\n- CodeEditor (Monaco or textarea fallback)\n- BuilderCanvas (render project live)\n- Save system (overwrite files only, never append)\n- Sync editor ↔ runtime ↔ preview\n\nRULES\n- Only modify builder-related files\n- Never touch AI, runtime, or API logic\n- Always output full-file rewrites (no partial patches)\n- All changes must preserve build stability\n\nTASK FORMAT\nWhen I give a task:\n1. Analyze required UI + data flow\n2. Identify exact file(s)\n3. Output FULL FILE code (no fragments)\n4. Ensure it compiles\n\nGOAL\nMake KoreLumina behave like a real builder (like VS Code + preview).",
+    "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "d9f1cb73-0de1-4b6c-b869-a06b7b2e8fca",
+    "speakerRole": "user",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce58b2-8ebc-8327-8b44-8ff252cf173e:message:d9f1cb73-0de1-4b6c-b869-a06b7b2e8fca",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e#browser-turn=0",
+    "sourceRevision": "sha256:02913d8d17047098d9276036288c5ea38588b8eb7e881cf37d7942999416311e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "b2586a9e9e02f94afb1fd1fff1f658fed77e3130e11e7019868cceb81ca787c2",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:02913d8d17047098d9276036288c5ea38588b8eb7e881cf37d7942999416311e",
+      "exportRevision": "sha256:02913d8d17047098d9276036288c5ea38588b8eb7e881cf37d7942999416311e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610838947
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ce58b2-8ebc-8327-8b44-8ff252cf173e:message:d9f1cb73-0de1-4b6c-b869-a06b7b2e8fca"
+    ],
+    "conversation": [
+      "69ce58b2-8ebc-8327-8b44-8ff252cf173e"
+    ]
+  }
+}

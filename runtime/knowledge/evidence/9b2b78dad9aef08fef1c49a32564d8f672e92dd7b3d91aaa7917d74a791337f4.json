@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:74e4f7e2c72b59bcd25add609ab6dcfbfe435bc1133a22dc45cc959ff236e4b4",
+  "type": "commit",
+  "title": "refactor(appearance): establish workspace appearance architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082146,
+  "observedAt": 1783754200000,
+  "contentRef": "git:commit:3a6a29ffc094e6b654bbb1ce207ef10b64676fb0",
+  "checksum": "sha256:2ae0c24db0c347b9f846222a1ed30d5edd1f8944921c10cfde84a7b2eaacf40a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 900,
+    "genesisAdmissionIdentity": "genesis-admission:59718c6ccc27359db8c82a71303337869a18d5719fd3ee7b4d5addc16cb98ef7",
+    "historicalSourceId": "genesis-source:commit:3a6a29ffc094e6b654bbb1ce207ef10b64676fb0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3a6a29ffc094e6b654bbb1ce207ef10b64676fb0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3a6a29ffc094e6b654bbb1ce207ef10b64676fb0",
+      "parentShas": [
+        "3841c41ea848cf2f4965a671d11b5355f1ed2414"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783754200000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783754200000
+      },
+      "subject": "refactor(appearance): establish workspace appearance architecture",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspace-appearance/adapter/WorkspaceAppearanceAdapter.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/GlassCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/LayoutCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/cards/ThemeCard.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/context/AppearanceActions.ts",
+        "apps/lumina-builder/src/components/workspace-appearance/context/AppearanceSelectors.ts",
+        "apps/lumina-builder/src/components/workspace-appearance/context/WorkspaceAppearanceContext.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/model/AppearanceModel.ts"
+      ],
+      "changedPathsByParent": {
+        "3841c41ea848cf2f4965a671d11b5355f1ed2414": [
+          "apps/lumina-builder/src/components/workspace-appearance/adapter/WorkspaceAppearanceAdapter.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/GlassCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/LayoutCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/cards/ThemeCard.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/context/AppearanceActions.ts",
+          "apps/lumina-builder/src/components/workspace-appearance/context/AppearanceSelectors.ts",
+          "apps/lumina-builder/src/components/workspace-appearance/context/WorkspaceAppearanceContext.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/model/AppearanceModel.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3a6a29ffc094e6b654bbb1ce207ef10b64676fb0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

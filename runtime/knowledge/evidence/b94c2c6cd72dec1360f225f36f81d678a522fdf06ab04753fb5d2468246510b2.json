@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:a5878e9d895de24b12e480f98ea7c547602de8cbcf9374694a8dab1a6efc7215",
+  "type": "commit",
+  "title": "feat(lumina): add slider input",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081114,
+  "observedAt": 1783640648000,
+  "contentRef": "git:commit:52e7f74b9721e7daee24f687bae156bfb9f3918c",
+  "checksum": "sha256:0f7d5c090ec4ec9f44a396459d9879c61fb8372ffd23a434509435aeb25d2d73",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 878,
+    "genesisAdmissionIdentity": "genesis-admission:b74792d3c1e67f587aebd85f42de75a0c8482634ef27c69cdbe80def97a030ec",
+    "historicalSourceId": "genesis-source:commit:52e7f74b9721e7daee24f687bae156bfb9f3918c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:52e7f74b9721e7daee24f687bae156bfb9f3918c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "52e7f74b9721e7daee24f687bae156bfb9f3918c",
+      "parentShas": [
+        "2ba2c5b67abcb1a553af88005c8c82db221bd404"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783640648000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783640648000
+      },
+      "subject": "feat(lumina): add slider input",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/input/index.ts",
+        "apps/lumina-builder/src/components/lumina/input/slider/LuminaSlider.tsx",
+        "apps/lumina-builder/src/components/lumina/input/slider/index.ts",
+        "apps/lumina-builder/src/components/lumina/input/slider/useSlider.ts"
+      ],
+      "changedPathsByParent": {
+        "2ba2c5b67abcb1a553af88005c8c82db221bd404": [
+          "apps/lumina-builder/src/components/lumina/input/index.ts",
+          "apps/lumina-builder/src/components/lumina/input/slider/LuminaSlider.tsx",
+          "apps/lumina-builder/src/components/lumina/input/slider/index.ts",
+          "apps/lumina-builder/src/components/lumina/input/slider/useSlider.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:52e7f74b9721e7daee24f687bae156bfb9f3918c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

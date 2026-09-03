@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:c95dff79c6ece2609f40ca0bba93a065b48538c00de6c6e9d527733d2af5f02e",
+  "type": "commit",
+  "title": "feat(genesis): add authenticated browser recovery source",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240125788,
+  "observedAt": 1787600535000,
+  "contentRef": "git:commit:670c55be63c9e060a8f538f6399c8c04f8084d7f",
+  "checksum": "sha256:bfa1914778d775ed779d3c12cfceea529fde8b7048a250f733903a8c7eb877ff",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1601,
+    "genesisAdmissionIdentity": "genesis-admission:d9d08886e2917d08a2659ed1e7577886cecf2cc461688dcfec08f9d9cf14b56a",
+    "historicalSourceId": "genesis-source:commit:670c55be63c9e060a8f538f6399c8c04f8084d7f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:670c55be63c9e060a8f538f6399c8c04f8084d7f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "670c55be63c9e060a8f538f6399c8c04f8084d7f",
+      "parentShas": [
+        "c2c0861f58fd4f31ae8d8f38a67e18806714621f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787600535000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787600535000
+      },
+      "subject": "feat(genesis): add authenticated browser recovery source",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/ChatGPTBrowserRecoverySource.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/ChatGPTBrowserRecoverySource.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+      ],
+      "changedPathsByParent": {
+        "c2c0861f58fd4f31ae8d8f38a67e18806714621f": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/ChatGPTBrowserRecoverySource.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/ChatGPTBrowserRecoverySource.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:670c55be63c9e060a8f538f6399c8c04f8084d7f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

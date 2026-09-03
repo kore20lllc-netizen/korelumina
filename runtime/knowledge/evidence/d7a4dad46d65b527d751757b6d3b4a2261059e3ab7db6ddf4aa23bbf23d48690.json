@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:178bcca7cb3697a301d48c4cb2f48a23bb55ec493280223c18bff97e80169afc",
+  "type": "document",
+  "title": "KOW-003 — Knowledge Operations Component Tree",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084057,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-003_COMPONENT_TREE.md",
+  "checksum": "sha256:a944711d2b2cab8fe342e950d6d8ae604d7a39070515aa9951acafd660895911",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 940,
+    "genesisAdmissionIdentity": "genesis-admission:7f14668b7a842ecffd31a1157500c578a61d6303c2c1c0b54f0279abfc5cbb84",
+    "historicalSourceId": "genesis-source:document:derived:f4e0863dd6238bf5acdfa2b722a87032146e8e262e7b359272ab5895d161378f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Proposed",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-003_COMPONENT_TREE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-003 — Knowledge Operations Component Tree",
+      "status": "Proposed",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-003_COMPONENT_TREE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f4e0863dd6238bf5acdfa2b722a87032146e8e262e7b359272ab5895d161378f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:97654c793bd9fca3bc194a70e9d8bd5464bd6c53f3e82a96d71c5cc9a0d89a88",
+  "type": "commit",
+  "title": "refactor(lumina): add flagship nested surface primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240099319,
+  "observedAt": 1786191260000,
+  "contentRef": "git:commit:fe82471df925f21abe38d1c88d422a15ecd1061d",
+  "checksum": "sha256:2084d229ef43d17c33988dc4bb58facf79c12827a5e8b8801c87aefb097810ac",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1223,
+    "genesisAdmissionIdentity": "genesis-admission:7eff6a62dc75518696275243160c829d51b0ba44d2e0468b04191ca3aa7db01d",
+    "historicalSourceId": "genesis-source:commit:fe82471df925f21abe38d1c88d422a15ecd1061d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fe82471df925f21abe38d1c88d422a15ecd1061d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fe82471df925f21abe38d1c88d422a15ecd1061d",
+      "parentShas": [
+        "398941f19d3d20f3abfea3cd5f0345762077e2c7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786191260000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786191260000
+      },
+      "subject": "refactor(lumina): add flagship nested surface primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipSurface.tsx"
+      ],
+      "changedPathsByParent": {
+        "398941f19d3d20f3abfea3cd5f0345762077e2c7": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaFlagshipSurface.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fe82471df925f21abe38d1c88d422a15ecd1061d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

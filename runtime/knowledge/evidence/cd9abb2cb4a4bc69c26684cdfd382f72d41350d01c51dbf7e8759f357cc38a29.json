@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:c11e3f9679207a0617e179d8fd333813d40a3555faa367be2608cc0072f5826f",
+  "type": "commit",
+  "title": "refactor(appearance): migrate toolbar to Lumina workspace primitives",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082568,
+  "observedAt": 1783800875000,
+  "contentRef": "git:commit:010eb99b210dcb7f571a6a90b62806cdfdc17e85",
+  "checksum": "sha256:f27fb10e779d0d495a8a979621ae8c4497b2f90ad5d4bdf5c09b9ba8f929f48a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 909,
+    "genesisAdmissionIdentity": "genesis-admission:ea00b1bc41373ef7d99d318fb738743382bed58d637e5faba4acc4d6aa4fd4d5",
+    "historicalSourceId": "genesis-source:commit:010eb99b210dcb7f571a6a90b62806cdfdc17e85",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:010eb99b210dcb7f571a6a90b62806cdfdc17e85",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "010eb99b210dcb7f571a6a90b62806cdfdc17e85",
+      "parentShas": [
+        "15653036831800392398f60206c1288825a5ae92"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783800875000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783800875000
+      },
+      "subject": "refactor(appearance): migrate toolbar to Lumina workspace primitives",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearanceToolbar.tsx"
+      ],
+      "changedPathsByParent": {
+        "15653036831800392398f60206c1288825a5ae92": [
+          "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearanceToolbar.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:010eb99b210dcb7f571a6a90b62806cdfdc17e85"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

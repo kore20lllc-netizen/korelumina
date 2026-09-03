@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:57070b4cf2952f2f11038777051976ca74a0eb0c718dcbb3394aee17f77f8c8d",
+  "type": "commit",
+  "title": "docs(architecture): add architecture documentation index",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076120,
+  "observedAt": 1783142420000,
+  "contentRef": "git:commit:145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd",
+  "checksum": "sha256:16b3a7d43044dad83488cd6e00edbabfb772ceb130be71ec5fd22b1d68519b5a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 766,
+    "genesisAdmissionIdentity": "genesis-admission:4cb7705934cc579d8611541a33c65f67a08d0492d1942b0f58f6f9d706c8ffcb",
+    "historicalSourceId": "genesis-source:commit:145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd",
+      "parentShas": [
+        "413f508cd3bcd98860446ff428fff1ffcdf164d5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142420000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142420000
+      },
+      "subject": "docs(architecture): add architecture documentation index",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/README.md"
+      ],
+      "changedPathsByParent": {
+        "413f508cd3bcd98860446ff428fff1ffcdf164d5": [
+          "docs/architecture/README.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/architecture-docs-index-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

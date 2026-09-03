@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:12bb5078950c63e0624da6d5187a477ceb97f2cd7284cbaf1030311af2b72de0",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Plan — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1#browser-turn=2",
+  "checksum": "12bb5078950c63e0624da6d5187a477ceb97f2cd7284cbaf1030311af2b72de0",
+  "metadata": {
+    "content": "Based on the terminal state, M46 Phase 1 is complete and green.\nWhat is already proven:\n\n\nRuntime semantic boundary: green.\n\n\nGenesis contract tests: 6 files / 10 tests passed.\n\n\nBuilder production build: green.\n\n\nFull repository build: green.\n\n\nKnowledge documentation governance check: green.\n\n\nKnowledge UI contract check: green.\n\n\nDiff safety is clean and scoped to Genesis files.\n\n\nNo backend/runtime regression is visible.\n\n\nThe changed Genesis UI files are exactly the expected correlation/inspection surfaces.\n\n\nruntime-data/ and runtime/knowledge/* remain untracked operational state and must stay out of source commits.\n\n\nThe current uncommitted source work is:\n\n\nGenesisEvolutionEpisodeInspector.tsx\n\n\nGenesisHistoricalArtifactExplorer.tsx\n\n\nGenesisHistoricalRelationshipInspector.tsx\n\n\nGenesisReplayReadWorkspace.tsx\n\n\nGenesisTemporalChronologyInspector.tsx\n\n\nnew GenesisHistoricalNavigation.ts\n\n\nSo the immediate next step is not more implementation.\nIt is to commit and push M46 Phase 1 as one isolated milestone, because the phase has already satisfied its contract and validation boundary.\nUse the milestone commit first, then move to M46 Phase 2.\nM46 Phase 2 should be: Selection synchronization and historical navigation contract\nThe code added in Phase 1 has created the detail surfaces. The next step should make them behave as one historical investigation environment, not independent inspectors.\nThe target interaction should be:\nHistorical Artifact\n      ↓\nEvolution Episode\n      ↓\nHistorical Relationship\n      ↓\nTemporal Chronology\n      ↓\nKnowledge / Evidence correlation\nOne authoritative Genesis selection should synchronize:\n\n\nartifact explorer,\n\n\nevolution episode inspector,\n\n\nhistorical relationship inspector,\n\n\ntemporal chronology inspector,\n\n\noperational projection,\n\n\nreplay workspace navigation.\n\n\nThe user should be able to move from a repository artifact to:\n\n\nwhat happened,\n\n\nwhat episode it belongs to,\n\n\nwhat other evidence relates to it,\n\n\nwhat came before/after,\n\n\nwhat authority applied then,\n\n\nwhether it was superseded,\n\n\nwhat Knowledge Operations artifact resulted,\n\n\nand eventually where external conversation context will attach.\n\n\nDo not start full Historical Replay execution yet.\nDo not ingest conversations yet.\nDo not wire Chief Agent learning yet.\nThe phase order should now be:\n\n\nCommit/push M46 Phase 1.\n\n\nM46 Phase 2 — unified Genesis selection/navigation.\n\n\nM46 Phase 3 — real repository chronology correlation and Knowledge Operations lifecycle linkage.\n\n\nThen bounded Historical Replay execution.\n\n\nThen idempotency/recovery certification.\n\n\nThen expand toward full Day-0 replay.\n\n\nExternal conversations later enrich the same Evolution Episodes, rather than creating a separate history.\n\n\nThe important point is: Phase 1 has established the visual inspection contract. Phase 2 should make that contract coherent and navigable before we feed it large amounts of real Genesis history.",
+    "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "cf56d2b8-0d35-4bdb-902b-9f0dd4bd865e",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a65e350-1a30-83ea-b88c-ba20cfab26a1:message:cf56d2b8-0d35-4bdb-902b-9f0dd4bd865e",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1#browser-turn=2",
+    "sourceRevision": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e153bdb616606df23f26c9fdd74329f29ac49e6e51933a2960a9f85fa8e8c0e4",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b",
+      "exportRevision": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630730940
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a65e350-1a30-83ea-b88c-ba20cfab26a1:message:cf56d2b8-0d35-4bdb-902b-9f0dd4bd865e"
+    ],
+    "conversation": [
+      "6a65e350-1a30-83ea-b88c-ba20cfab26a1"
+    ]
+  }
+}

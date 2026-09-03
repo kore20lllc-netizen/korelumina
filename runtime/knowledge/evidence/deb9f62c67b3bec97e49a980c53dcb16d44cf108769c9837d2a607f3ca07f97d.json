@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:61d185c0c92a5582dd174b0dca2d038d5793866d029adee058219cc3d35af355",
+  "type": "commit",
+  "title": "docs(lumina): define runtime v2 reference implementation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079388,
+  "observedAt": 1783492694000,
+  "contentRef": "git:commit:cc950bd9618d1b02cf55919155ff14a8b7608721",
+  "checksum": "sha256:ec22b909c86565b1e2ec600a18ec56d217751d5bef28b88cbadde0eedd59e277",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 840,
+    "genesisAdmissionIdentity": "genesis-admission:53dd9a34ccf891ba444714f4c487b0b3130011160d1a615081641e86f50c2d45",
+    "historicalSourceId": "genesis-source:commit:cc950bd9618d1b02cf55919155ff14a8b7608721",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cc950bd9618d1b02cf55919155ff14a8b7608721",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cc950bd9618d1b02cf55919155ff14a8b7608721",
+      "parentShas": [
+        "b89f257d8a08cebdffc7cb147bbcb9792d7a14c6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783492694000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783492694000
+      },
+      "subject": "docs(lumina): define runtime v2 reference implementation",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md"
+      ],
+      "changedPathsByParent": {
+        "b89f257d8a08cebdffc7cb147bbcb9792d7a14c6": [
+          "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/recovery/post-green-build-001"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cc950bd9618d1b02cf55919155ff14a8b7608721"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

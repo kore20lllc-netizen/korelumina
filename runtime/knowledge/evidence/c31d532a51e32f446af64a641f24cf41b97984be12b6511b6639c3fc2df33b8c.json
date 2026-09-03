@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:b4bde0337562ad979b64bb8b9c75cc5f0a58d5b67c9018f5fdc780eb5a6db715",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Handoff Implementation — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651#browser-turn=2",
+  "checksum": "b4bde0337562ad979b64bb8b9c75cc5f0a58d5b67c9018f5fdc780eb5a6db715",
+  "metadata": {
+    "content": "RA-001 — Repository Architecture Audit\nTicket: RA-001.1 — Repository Documentation Inventory\nRun:\nBashmkdir -p docs/repository-audit\nBashfind . \\\n\\( -path \"./.git\" -o \\\n   -path \"./node_modules\" -o \\\n   -path \"./dist\" -o \\\n   -path \"./build\" -o \\\n   -path \"./coverage\" -o \\\n   -path \"./.next\" \\) -prune \\\n-o \\\n-type f \\\n\\( \\\n-name \"*.md\" -o \\\n-name \"*.pdf\" -o \\\n-name \"*.txt\" -o \\\n-name \"*.docx\" \\\n\\) \\\n-print | sort > /tmp/korelumina_docs.txt\nBashcat /tmp/korelumina_docs.txt\nDo not summarize.\nPaste the complete output here.\nWe will inventory every document before opening any of them. No assumptions. No roadmap drafting until the inventory is complete.",
+    "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "5caa6b12-0e4d-4f9c-a978-bfe83cc6fd10",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a3e4e96-14d0-83ea-b77d-c9063e4fd651:message:5caa6b12-0e4d-4f9c-a978-bfe83cc6fd10",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651#browser-turn=2",
+    "sourceRevision": "sha256:227a2cacf93dcd092065bc120e64a50a7deaa0abf1ec38cfda9961a72d5b449b",
+    "segmentAvailability": "available",
+    "conversationChecksum": "c03179b8511007611391690a3e35de61db7ef19b5536cf91fe2a27f75959199e",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:227a2cacf93dcd092065bc120e64a50a7deaa0abf1ec38cfda9961a72d5b449b",
+      "exportRevision": "sha256:227a2cacf93dcd092065bc120e64a50a7deaa0abf1ec38cfda9961a72d5b449b"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630651368
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a3e4e96-14d0-83ea-b77d-c9063e4fd651:message:5caa6b12-0e4d-4f9c-a978-bfe83cc6fd10"
+    ],
+    "conversation": [
+      "6a3e4e96-14d0-83ea-b77d-c9063e4fd651"
+    ]
+  }
+}

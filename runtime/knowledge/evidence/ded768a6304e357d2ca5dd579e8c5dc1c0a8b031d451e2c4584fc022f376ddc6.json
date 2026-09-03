@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:b6bfb78aa5989bed19686ad9e4edcdc6f42383004d301cd147327ff053975b2a",
+  "type": "commit",
+  "title": "feat(genesis): activate governed browser conversation acquisition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240126361,
+  "observedAt": 1787632764000,
+  "contentRef": "git:commit:7a1723dc663e31443b13b0699fae37e6b3e5d184",
+  "checksum": "sha256:f60b661da3b532dd233d636483293814c45b4a15bfa363e5d3b60774f51e7ba5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1608,
+    "genesisAdmissionIdentity": "genesis-admission:0046019f0122166a2fd0ff067f5ad430c131d775fc97c0a056b4f1d2443d21c3",
+    "historicalSourceId": "genesis-source:commit:7a1723dc663e31443b13b0699fae37e6b3e5d184",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7a1723dc663e31443b13b0699fae37e6b3e5d184",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7a1723dc663e31443b13b0699fae37e6b3e5d184",
+      "parentShas": [
+        "5378c53abbde1e4154cca4bf00425056de2f96bc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787632764000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787632764000
+      },
+      "subject": "feat(genesis): activate governed browser conversation acquisition",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationRuntimeConfiguration.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAcquisitionExecution.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAcquisitionInventory.test.ts"
+      ],
+      "changedPathsByParent": {
+        "5378c53abbde1e4154cca4bf00425056de2f96bc": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisConversationRuntimeConfiguration.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAcquisitionExecution.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisConversationAcquisitionInventory.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7a1723dc663e31443b13b0699fae37e6b3e5d184"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

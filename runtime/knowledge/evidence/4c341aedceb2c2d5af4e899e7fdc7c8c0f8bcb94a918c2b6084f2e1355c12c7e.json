@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:9c46c3cbab3f3552506dea124e2acb40b426606231e6fba227be75296440afda",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - Fix JournalPanel Crash — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=0",
+  "checksum": "9c46c3cbab3f3552506dea124e2acb40b426606231e6fba227be75296440afda",
+  "metadata": {
+    "content": "Current task: Verify Builder Core UI stability and lock checkpoint\n\nUI STATUS (based on your latest run)\nFrom logs:\n\n\n/builder → 200 OK\n\n\n/api/dev/preview → 200 OK\n\n\n/api/dev/fs/list → 200 OK\n\n\n/api/dev/fs/read → 200 OK\n\n\ncompile passes → yes\n\n\nNo runtime crash shown after restart.\n\nComponent verification\n\n\nFileTree → rendered (fs/list hit confirms) → OK\n\n\nCodeEditor → rendered (fs/read hit confirms) → OK\n\n\nPreviewFrame → rendered (preview endpoint hit) → OK\n\n\nAIPanel → rendered (UI visible, no crash) → OK\n\n\nJournalPanel → no crash reported → OK\n\n\n\nRuntime / console state\n\n\nNo hydration error → OK\n\n\nNo undefined state (refreshTick resolved) → OK\n\n\nNo module errors → OK\n\n\nNo missing component imports → OK\n\n\n\nKnown issue (explicitly ignored per scope)\n\n\n/api/ai/draft → 400 → IGNORED (not UI)\n\n\n\nFINAL VERDICT\nUI is stable and safe to checkpoint\n\nCommit (lock this state)\nBashgit add .\ngit commit -m \"checkpoint(builder-core): stable UI (filetree/editor/preview/ai panel all rendering clean)\"\ngit tag builder-ui-stable\ngit push origin main\ngit push origin builder-ui-stable\n\nTask complete.",
+    "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "a1fff6b8-d5b2-4b3b-a11f-d410a881cf99",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:a1fff6b8-d5b2-4b3b-a11f-d410a881cf99",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=0",
+    "sourceRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+    "segmentAvailability": "available",
+    "conversationChecksum": "37984edfedd9f57e78d643b85f2079133f345b1d12dfbc741c2850d3a85fb791",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+      "exportRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610831796
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:a1fff6b8-d5b2-4b3b-a11f-d410a881cf99"
+    ],
+    "conversation": [
+      "69cc7bdc-82ac-8329-b252-f0bce4d5a035"
+    ]
+  }
+}

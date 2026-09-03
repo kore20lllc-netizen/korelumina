@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:c82d2d6db79faf57788566508b3f860392d15cfb5670bc08a91e7b341fc13538",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Audit Roadmap Position — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb#browser-turn=4",
+  "checksum": "c82d2d6db79faf57788566508b3f860392d15cfb5670bc08a91e7b341fc13538",
+  "metadata": {
+    "content": "The overlap audit is clean:\nMaster OS inventory      41\nAlready recovered        15\nOverlapping IDs           0\nThat means Master OS can be enrolled and captured without overwriting any existing recovered conversation.\nAuthorize it:\nBashcd /Users/erictouko/dev/korelumina\n\nnode scripts/genesis-chatgpt-browser-recovery.mjs \\\n  set-project \\\n  g-p-69cbc434281c8191a10f1c7b3ffe11a9 \\\n  RECOVER \\\n  \"KoreLumina Master OS historical project\"\nThen capture all 41 conversations from the exhaustive inventory:\nBashnode scripts/genesis-chatgpt-browser-recovery.mjs \\\n  capture-project \\\n  runtime-data/genesis/chatgpt-browser-recovery/project-inventories/project-g-p-69cbc434281c8191a10f1c7b3ffe11a9.json\nThis will take noticeably longer than the earlier projects because it has 41 conversations. The checkpoint should update after every successful capture, so interruption is safe.\nWhen it completes, validate the Master OS checkpoint:\nBashjq '{\n  projectId,\n  projectTitle,\n  completed: (.completedConversationIds | length),\n  completedConversationIds,\n  failureCount: (.failures | length),\n  failures\n}' \\\nruntime-data/genesis/chatgpt-browser-recovery/checkpoints/project-g-p-69cbc434281c8191a10f1c7b3ffe11a9.json\nTarget:\nprojectTitle = KoreLumina — Master OS\ncompleted    = 41\nfailureCount = 0\nThen inspect the aggregate recovery totals:\nBashjq -s '\n  {\n    projects: (\n      map(.projectId)\n      | unique\n      | length\n    ),\n\n    conversations: length,\n\n    messages: (\n      map(.messages | length)\n      | add\n    ),\n\n    byProject: (\n      group_by(.projectId)\n      | map({\n          projectId: .[0].projectId,\n          conversations: length,\n          messages: (\n            map(.messages | length)\n            | add\n          )\n        })\n    )\n  }\n' \\\nruntime-data/genesis/chatgpt-browser-recovery/snapshots/conversation-*.json\nExpected conversation total after Master OS succeeds:\nprevious recovered = 15\nMaster OS           = 41\n                    ----\ntotal               = 56 conversations\nDo not commit yet. Once Master OS is 41/41 with zero failures, the next step is production-adapter validation of all 56 recovered conversations before we feed browser recovery into the actual Genesis acquisition/reconciliation pipeline.",
+    "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "007d0d1a-e0e6-4228-8eaf-8f1b7f785386",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8bdc01-849c-83ea-a8c3-753b9e97d6cb:message:007d0d1a-e0e6-4228-8eaf-8f1b7f785386",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb#browser-turn=4",
+    "sourceRevision": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53",
+    "segmentAvailability": "available",
+    "conversationChecksum": "599b3fc35a4c5013087aafac01baceb72aaddb3798e65ea9cad081b350beb3f4",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53",
+      "exportRevision": "sha256:0d3d081fff08cd9143cf78250d03fec01e1f5e8f16cb7bb539cb94f233cf4a53"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630554272
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a8bdc01-849c-83ea-a8c3-753b9e97d6cb:message:007d0d1a-e0e6-4228-8eaf-8f1b7f785386"
+    ],
+    "conversation": [
+      "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb"
+    ]
+  }
+}

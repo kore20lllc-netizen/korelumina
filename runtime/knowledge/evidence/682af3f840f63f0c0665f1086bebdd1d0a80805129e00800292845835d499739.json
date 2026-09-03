@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:68bc3a4f554379958ea928fb44d1ef9a852f724f92a100cfed0faa0980f2b6f9",
+  "type": "commit",
+  "title": "chore(knowledge): checkpoint governed M51 runtime records",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132539,
+  "observedAt": 1788039780000,
+  "contentRef": "git:commit:811e05be3f1677d4794afea55a65d501295c5f70",
+  "checksum": "sha256:a1ca0e1fe307c0052c252dffca6f252838312851c79394c5af0a711932efde18",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1681,
+    "genesisAdmissionIdentity": "genesis-admission:36faf41164c67d7d54c7f629a65453dca6a57a28a952220125600d7431b8342e",
+    "historicalSourceId": "genesis-source:commit:811e05be3f1677d4794afea55a65d501295c5f70",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:811e05be3f1677d4794afea55a65d501295c5f70",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "811e05be3f1677d4794afea55a65d501295c5f70",
+      "parentShas": [
+        "2dc2157f27128f984c7bc230b720886d49182be0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788039780000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788039780000
+      },
+      "subject": "chore(knowledge): checkpoint governed M51 runtime records",
+      "body": "",
+      "changedPaths": [
+        "runtime/knowledge/evidence/08d7fa6dc4e5460b9797a72f5a3ba322fd70276b5e5e4a25879753e25359e03a.json",
+        "runtime/knowledge/evidence/8e076e6957154458832af1928506b6f49f950364cd3c2be178e6db4c0a585777.json",
+        "runtime/knowledge/review-batches/KRB-2026-000001.json",
+        "runtime/knowledge/review-batches/KRB-2026-000002.json",
+        "runtime/knowledge/review-batches/KRB-2026-000003.json",
+        "runtime/knowledge/review-batches/KRB-2026-000004.json",
+        "runtime/knowledge/review-batches/KRB-2026-000005.json",
+        "runtime/knowledge/review-batches/KRB-2026-000006.json",
+        "runtime/knowledge/review-batches/KRB-2026-000007.json",
+        "runtime/knowledge/review-batches/KRB-2026-000008.json",
+        "runtime/knowledge/review-batches/KRB-2026-000009.json",
+        "runtime/knowledge/review-policies/korelumina-vision-2050-architecture@1.0.0.json"
+      ],
+      "changedPathsByParent": {
+        "2dc2157f27128f984c7bc230b720886d49182be0": [
+          "runtime/knowledge/evidence/08d7fa6dc4e5460b9797a72f5a3ba322fd70276b5e5e4a25879753e25359e03a.json",
+          "runtime/knowledge/evidence/8e076e6957154458832af1928506b6f49f950364cd3c2be178e6db4c0a585777.json",
+          "runtime/knowledge/review-batches/KRB-2026-000001.json",
+          "runtime/knowledge/review-batches/KRB-2026-000002.json",
+          "runtime/knowledge/review-batches/KRB-2026-000003.json",
+          "runtime/knowledge/review-batches/KRB-2026-000004.json",
+          "runtime/knowledge/review-batches/KRB-2026-000005.json",
+          "runtime/knowledge/review-batches/KRB-2026-000006.json",
+          "runtime/knowledge/review-batches/KRB-2026-000007.json",
+          "runtime/knowledge/review-batches/KRB-2026-000008.json",
+          "runtime/knowledge/review-batches/KRB-2026-000009.json",
+          "runtime/knowledge/review-policies/korelumina-vision-2050-architecture@1.0.0.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:811e05be3f1677d4794afea55a65d501295c5f70"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

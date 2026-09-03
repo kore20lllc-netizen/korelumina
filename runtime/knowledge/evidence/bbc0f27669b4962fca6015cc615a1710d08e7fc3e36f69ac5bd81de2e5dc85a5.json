@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:0682266b76eb7ec34253e716e04cc22f823d80f1a3cdd6f19345c738c8aaf053",
+  "type": "document",
+  "title": "LDS-003 — Runtime Operations Component Inventory",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083617,
+  "observedAt": 1784010740000,
+  "contentRef": "docs/architecture/design-system/LDS_003_RUNTIME_COMPONENT_INVENTORY.md",
+  "checksum": "sha256:941a8def32c65526cf9e1c16ed2628cc0ba1ec25bdf79da559a62359b61c5c28",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 931,
+    "genesisAdmissionIdentity": "genesis-admission:d7bb2d98627336faccbfc655570190d6843a778208a6c4b27a40e528b141ca4f",
+    "historicalSourceId": "genesis-source:document:derived:11600c31fba2219a8d46a92c5ed54f72825937cce5427765883286cc5d919935",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Lumina Design System",
+    "approvalState": "Audit",
+    "sourceLocation": "docs/architecture/design-system/LDS_003_RUNTIME_COMPONENT_INVENTORY.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "LDS-003 — Runtime Operations Component Inventory",
+      "status": "Audit",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/design-system/LDS_003_RUNTIME_COMPONENT_INVENTORY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:11600c31fba2219a8d46a92c5ed54f72825937cce5427765883286cc5d919935"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

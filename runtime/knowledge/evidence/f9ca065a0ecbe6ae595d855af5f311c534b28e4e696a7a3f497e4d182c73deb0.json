@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:38941fad1bea0ab66c90d3509fc5e688af47b1851290d9b1ca2cae82bd48837c",
+  "type": "commit",
+  "title": "refactor(knowledge): migrate canonical review prominent panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240089795,
+  "observedAt": 1785898500000,
+  "contentRef": "git:commit:46050ef20bc2c76dae8b6592f3b99b9509283b12",
+  "checksum": "sha256:3e42caf908fe840a8b11c733d6829675a14d5bcd3fcb0de2f93089f73080ced6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1054,
+    "genesisAdmissionIdentity": "genesis-admission:68efd3cbe8852d330ce83de2639a74edbe1eb9812c39b9b6ce793cb3f7b0416c",
+    "historicalSourceId": "genesis-source:commit:46050ef20bc2c76dae8b6592f3b99b9509283b12",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:46050ef20bc2c76dae8b6592f3b99b9509283b12",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "46050ef20bc2c76dae8b6592f3b99b9509283b12",
+      "parentShas": [
+        "3da17ef012d17fb07f04b8eca9753dc0c26e662b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785898500000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785898500000
+      },
+      "subject": "refactor(knowledge): migrate canonical review prominent panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+      ],
+      "changedPathsByParent": {
+        "3da17ef012d17fb07f04b8eca9753dc0c26e662b": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:46050ef20bc2c76dae8b6592f3b99b9509283b12"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:509063e99c7a2f15a6762a64d6a51107108151714a0e09aa041411c4bc7e47dd",
+  "type": "commit",
+  "title": "docs(canon): establish KoreLumina Vision 2050",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077316,
+  "observedAt": 1783196294000,
+  "contentRef": "git:commit:e5f31d8e7856abd210ef1f00bebd33ab24b9c81d",
+  "checksum": "sha256:28127fe8b4fa0cf3fe9e41599b2fe752554b251fe8734b2f15fef7480887f55d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 793,
+    "genesisAdmissionIdentity": "genesis-admission:ccc57c27c0b9866e67d725b2c02e6ea604ff20a3cbc6bae6cf4a37762042cfb1",
+    "historicalSourceId": "genesis-source:commit:e5f31d8e7856abd210ef1f00bebd33ab24b9c81d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e5f31d8e7856abd210ef1f00bebd33ab24b9c81d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e5f31d8e7856abd210ef1f00bebd33ab24b9c81d",
+      "parentShas": [
+        "578c7aeacd52e544c42dc597c50e0f475590bc46"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196294000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196294000
+      },
+      "subject": "docs(canon): establish KoreLumina Vision 2050",
+      "body": "",
+      "changedPaths": [
+        "docs/canon/VISION_2050.md"
+      ],
+      "changedPathsByParent": {
+        "578c7aeacd52e544c42dc597c50e0f475590bc46": [
+          "docs/canon/VISION_2050.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/vision-2050-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e5f31d8e7856abd210ef1f00bebd33ab24b9c81d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

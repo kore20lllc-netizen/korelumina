@@ -1,0 +1,89 @@
+{
+  "id": "genesis-evidence:2ac14a22099d9a95c7969c94585b8bf530b05858b57c6f89fde461635a85bf8d",
+  "type": "commit",
+  "title": "feat(executive): enforce reasoning execution disposition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240113158,
+  "observedAt": 1786640229000,
+  "contentRef": "git:commit:5d032b51d278734bc86e72352842b990ab4da7e6",
+  "checksum": "sha256:c4e3ede6d8ac2b6a05c6dda4bf431d640cb602baa7bdb8afb4e1553a12d80d9d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1435,
+    "genesisAdmissionIdentity": "genesis-admission:fabd60d4af71bdc38e42098b382839c8d450119724780db8de1704f007033bc5",
+    "historicalSourceId": "genesis-source:commit:5d032b51d278734bc86e72352842b990ab4da7e6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5d032b51d278734bc86e72352842b990ab4da7e6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5d032b51d278734bc86e72352842b990ab4da7e6",
+      "parentShas": [
+        "fcf443817e770621dab09456edd7b2830172a993"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786640229000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786640229000
+      },
+      "subject": "feat(executive): enforce reasoning execution disposition",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ExecutiveReasoning.ts",
+        "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApprovalComposition.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApproverPropagation.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDecisionService.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDisposition.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningExecutionService.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningProductionComposition.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/TextGenerationChiefAgentReasoningProvider.test.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/executiveReasoningRoute.test.ts"
+      ],
+      "changedPathsByParent": {
+        "fcf443817e770621dab09456edd7b2830172a993": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ExecutiveReasoning.ts",
+          "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApprovalComposition.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningApproverPropagation.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDecisionService.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDisposition.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningExecutionService.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningProductionComposition.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/TextGenerationChiefAgentReasoningProvider.test.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/executiveReasoningRoute.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5d032b51d278734bc86e72352842b990ab4da7e6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

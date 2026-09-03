@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:aa012dcb73d4385926b01c595984ca558d80ef71ec5f4c95ccdc410d75ae1d8c",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Lumina appearance token fix — message 6",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f#browser-turn=6",
+  "checksum": "aa012dcb73d4385926b01c595984ca558d80ef71ec5f4c95ccdc410d75ae1d8c",
+  "metadata": {
+    "content": "Markdown# KoreLumina Reconstruction Handoff\n## Mission Continuation — Production Reconstruction + Chief Agent Knowledge Platform\n\nYou are continuing KoreLumina as the Lead Systems Architect and Principal Engineer.\n\nYou are NOT building an MVP.\n\nYou are reconstructing the long-term operating system that will become the permanent foundation of KoreLumina.\n\n---\n\n# Current Branch\n\nContinue from the current reconstruction branch.\n\nThe repository currently builds successfully.\n\nKnowledge Operations Stage 1 has been restored and compiles successfully.\n\nDo NOT revert architecture.\n\n---\n\n# Current Status\n\nBuilder\n- ✅ builds green\n- ✅ Runtime Operations production UI complete\n- ✅ Workspace Framework largely complete\n- ✅ Hero framework standardized\n- ✅ Executive metrics standardized\n- ✅ Operational metrics standardized\n- ✅ Knowledge Operations compiles\n- 🚧 Knowledge Graph is currently being reconstructed (UI contract only)\n\nRuntime\n- green\n\nPlatform SDK\n- green\n\n---\n\n# Absolute Priority\n\nThe highest priority of KoreLumina is NOT the Builder.\n\nThe highest priority is the Chief Agent.\n\nEverything else exists to serve the Chief Agent.\n\nThe Chief Agent must become progressively more intelligent every day.\n\nEvery feature must answer:\n\n> \"How does this improve the Chief Agent?\"\n\nIf it does not improve learning, reasoning, planning, execution, governance, or institutional memory, it is lower priority.\n\n---\n\n# Primary Mission\n\nTransform KoreLumina into a continuously learning AI Operating System.\n\nThe Chief Agent must accumulate organizational intelligence from day one.\n\nNothing valuable should ever be forgotten.\n\n---\n\n# Knowledge Preservation is Core Infrastructure\n\nKnowledge Preservation is NOT another feature.\n\nIt is foundational infrastructure.\n\nEvery repository\n\nEvery commit\n\nEvery architecture decision\n\nEvery engineering discussion\n\nEvery document\n\nEvery design\n\nEvery runtime observation\n\nEvery implementation\n\nEvery audit\n\nEvery deployment\n\nEvery postmortem\n\nEvery lesson learned\n\nmust become institutional knowledge.\n\nNothing should disappear.\n\n---\n\n# Required Learning Sources\n\nThe Chief Agent must continuously ingest knowledge from:\n\nRepositories\n\nSource code\n\nArchitecture documents\n\nEngineering documentation\n\nRuntime telemetry\n\nGit history\n\nPull Requests\n\nSpecifications\n\nPlanning documents\n\nHandoffs\n\nRoadmaps\n\nAudit reports\n\nTerminal sessions\n\nDecision records\n\nMeeting notes\n\nRequirements\n\nWorkspace state\n\nFuture runtime events\n\nFuture production incidents\n\n---\n\n# Long-Term Objective\n\nThe Chief Agent should eventually know the KoreLumina codebase better than any human engineer.\n\nThe system should remember:\n\nwhy something exists\n\nwhy it was changed\n\nwhat alternatives were rejected\n\nhistorical tradeoffs\n\narchitectural evolution\n\ndependencies\n\nimplementation patterns\n\norganizational best practices\n\nsuccessful fixes\n\nprevious failures\n\nfuture recommendations\n\n---\n\n# Knowledge Pipeline\n\nThe intended pipeline is:\n\nEvidence\n\n↓\n\nKnowledge IR\n\n↓\n\nCanonical Knowledge\n\n↓\n\nKnowledge Graph\n\n↓\n\nOrganizational Memory\n\n↓\n\nLearning\n\n↓\n\nReasoning\n\n↓\n\nPlanning\n\n↓\n\nImprovement\n\n↓\n\nChief Agent\n\nEvery stage is governed.\n\nNo hallucinated knowledge.\n\nEverything must remain traceable back to evidence.\n\n---\n\n# Current UI Status\n\nCompleted\n\nWorkspace Framework\n\nRuntime Operations\n\nHero framework\n\nMetric framework\n\nWorkspace panels\n\nInspector framework\n\nSidebar framework\n\nToolbar framework\n\nKnowledge hero\n\nKnowledge executive metrics\n\nKnowledge operational metrics\n\nKnowledge layout\n\nKnowledge regions\n\nKnowledge acquisition panel\n\nKnowledge reasoning panel\n\nKnowledge activity feed\n\n---\n\n# Current Reconstruction Ticket\n\nKnowledge Graph\n\nCurrent implementation is intentionally UI-only.\n\nNo runtime integration yet.\n\nNo graph engine.\n\nNo ReactFlow.\n\nNo Cytoscape.\n\nNo Sigma.\n\nNo D3.\n\nNo mock graph data.\n\nThe objective is to finish the production-grade UI contract before backend wiring.\n\nRemaining work:\n\nProduction graph viewport\n\nLegend\n\nMinimap\n\nSelection panel\n\nRelationship panel\n\nStatus footer\n\nProfessional graph controls\n\nResponsive behavior\n\nPremium Lumina styling\n\nZero overlap\n\nZero overflow\n\nRuntime-quality polish\n\n---\n\n# Backend Wiring (AFTER UI)\n\nOnce the UI contract is complete:\n\nConnect to authoritative Knowledge Graph Service.\n\nConnect to graph indexes.\n\nConnect canonical knowledge.\n\nConnect evidence.\n\nConnect reasoning.\n\nConnect organizational memory.\n\nNever fabricate data.\n\nRuntime remains source of truth.\n\n---\n\n# Architecture Rules\n\nNever redesign architecture unless a conflict is discovered.\n\nPrefer reconciliation over replacement.\n\nNo architectural drift.\n\nNo duplicate systems.\n\nNo competing implementations.\n\nNo temporary hacks.\n\nNo TODO placeholders.\n\nNo fake data.\n\nNo dead code.\n\n---\n\n# Engineering Rules\n\nOne ticket at a time.\n\nOne subsystem at a time.\n\nBuild after every reconstruction.\n\nGreen before continuing.\n\nNever leave the repository broken.\n\nPrefer complete rewrites over patching corrupted files.\n\nInvestigate first.\n\nRoot cause.\n\nSmallest correct implementation.\n\nValidate.\n\nCommit.\n\nContinue.\n\n---\n\n# Production Standard\n\nEverything must be:\n\nProduction-grade\n\nPremium\n\nEnterprise-ready\n\nGoverned\n\nScalable\n\nMaintainable\n\nComposable\n\nAuthoritative\n\nNo MVP shortcuts.\n\n---\n\n# Final Objective\n\nThe end goal is not merely a software builder.\n\nThe end goal is an AI-native engineering operating system whose Chief Agent continuously learns from every artifact created since the first day of KoreLumina.\n\nBy the time the platform reaches production maturity, the Chief Agent should possess a complete, traceable, continuously evolving institutional memory of the entire KoreLumina ecosystem and use that knowledge to improve engineering quality, architectural consistency, planning, governance, and autonomous execution.",
+    "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "2833ba73-2f13-4dbe-bf2c-24bf143a5e4e",
+    "speakerRole": "assistant",
+    "messageOrder": 6,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a51b868-2cc0-83ea-a58c-a92c0585580f:message:2833ba73-2f13-4dbe-bf2c-24bf143a5e4e",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f#browser-turn=6",
+    "sourceRevision": "sha256:ace31d970a7cdd1ef22afa35a6edb9454cce70398d9be3ee5d6110b10894095f",
+    "segmentAvailability": "available",
+    "conversationChecksum": "15fe2545c9e293a2e0ea1c47a8839b98d3204e3b324146b4c491123289f7972b",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ace31d970a7cdd1ef22afa35a6edb9454cce70398d9be3ee5d6110b10894095f",
+      "exportRevision": "sha256:ace31d970a7cdd1ef22afa35a6edb9454cce70398d9be3ee5d6110b10894095f"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630803594
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a51b868-2cc0-83ea-a58c-a92c0585580f:message:2833ba73-2f13-4dbe-bf2c-24bf143a5e4e"
+    ],
+    "conversation": [
+      "6a51b868-2cc0-83ea-a58c-a92c0585580f"
+    ]
+  }
+}

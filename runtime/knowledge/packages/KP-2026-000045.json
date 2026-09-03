@@ -1,0 +1,182 @@
+{
+  "id": "KP-2026-000045",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1788240130112,
+  "updatedAt": 1788240130112,
+  "data": {
+    "id": "KP-2026-000045",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+        "candidateType": "CandidateArtifact",
+        "title": "KoreLumina Chief Agent Architecture",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:ccf880271e21d2f9f4ebb8246f9419058958c5d0acb884618213d494ea2ebb68"
+          ],
+          "genesisReplay": [
+            "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+          ]
+        },
+        "extractedAt": 1788240130111,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130111,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+          "checksum": "sha256:3f8b9eb1fc0703a10bbf960565e75879bf25c29125fa148487a8a389d9b260d3",
+          "capturedAt": 1788240130106,
+          "observedAt": 1787873068000,
+          "authorityClass": "architecture",
+          "approvalState": "Approved",
+          "owner": "Chief Systems Architect",
+          "scope": "Chief Agent identity, executive operating loop, cross-subsystem orchestration boundaries, Runtime-truth relationship, knowledge-consumer boundaries, delegation architecture, and human-override boundaries.",
+          "version": "1.0",
+          "sourceLocation": "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "architecture",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+            "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+            "genesisManifestIndex": 1653,
+            "genesisAdmissionIdentity": "genesis-admission:e7c5be88a4c767a867ed828f1d9a84628171cee3f9155dd5b302e6cdce987dfd",
+            "historicalSourceId": "genesis-source:document:derived:ccf880271e21d2f9f4ebb8246f9419058958c5d0acb884618213d494ea2ebb68",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "architecture",
+            "approvalState": "Approved",
+            "owner": "Chief Systems Architect",
+            "scope": "Chief Agent identity, executive operating loop, cross-subsystem orchestration boundaries, Runtime-truth relationship, knowledge-consumer boundaries, delegation architecture, and human-override boundaries.",
+            "version": "1.0",
+            "sourceLocation": "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md",
+            "documentClassification": "architecture",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "KoreLumina Chief Agent Architecture",
+              "status": "Approved",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1788240130112,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
+      ],
+      "sourceLocations": [
+        "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/CHIEF_AGENT_ARCHITECTURE.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "architecture",
+    "approvalState": "pending_review",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent identity, executive operating loop, cross-subsystem orchestration boundaries, Runtime-truth relationship, knowledge-consumer boundaries, delegation architecture, and human-override boundaries.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1788240130112,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130111,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1788240130112
+      },
+      {
+        "state": "compiled",
+        "at": 1788240130112
+      },
+      {
+        "state": "validated",
+        "at": 1788240130112
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1788240130112
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1788240130112
+    },
+    "createdAt": 1788240130112,
+    "updatedAt": 1788240130112,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ]
+    }
+  }
+}

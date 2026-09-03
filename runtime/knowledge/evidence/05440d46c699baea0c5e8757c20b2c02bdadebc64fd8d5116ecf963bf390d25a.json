@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:92b6da3474de1312cce55b2b310e43e8030de58d7b362c08d504152a716a89ad",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship surface in educational progress",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240099377,
+  "observedAt": 1786191664000,
+  "contentRef": "git:commit:4ace9436bd83818b40d067e0dbc28e6b08be9acf",
+  "checksum": "sha256:2d26fafe69a9ab91be6c576973b4f37c6e3435fb49f261ca83d4bc915ac739ea",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1224,
+    "genesisAdmissionIdentity": "genesis-admission:1337ae1165673db52659d8791b00568f9678abb0452956ea00e6a67644b1500a",
+    "historicalSourceId": "genesis-source:commit:4ace9436bd83818b40d067e0dbc28e6b08be9acf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4ace9436bd83818b40d067e0dbc28e6b08be9acf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4ace9436bd83818b40d067e0dbc28e6b08be9acf",
+      "parentShas": [
+        "fe82471df925f21abe38d1c88d422a15ecd1061d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786191664000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786191664000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship surface in educational progress",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx"
+      ],
+      "changedPathsByParent": {
+        "fe82471df925f21abe38d1c88d422a15ecd1061d": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4ace9436bd83818b40d067e0dbc28e6b08be9acf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

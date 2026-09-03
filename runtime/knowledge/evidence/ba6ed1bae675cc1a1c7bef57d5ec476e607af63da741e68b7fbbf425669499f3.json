@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:a079a6f6e169e3cefab8a14057141cb01513dbf1992520c3704c02fda02c7451",
+  "type": "commit",
+  "title": "refactor(knowledge): align canonical detail surfaces",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240106710,
+  "observedAt": 1786401945000,
+  "contentRef": "git:commit:cce9505c39f15b45593c3e31d4012fe31055702d",
+  "checksum": "sha256:b71aa3611b672f27cfe640c3c25df1c28885395c246ddaa24d7bfff6237c2076",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1341,
+    "genesisAdmissionIdentity": "genesis-admission:02873bfc2befe0c63fd98b5383bc93b4a54eae412d8911b1adf5353d08daab22",
+    "historicalSourceId": "genesis-source:commit:cce9505c39f15b45593c3e31d4012fe31055702d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cce9505c39f15b45593c3e31d4012fe31055702d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cce9505c39f15b45593c3e31d4012fe31055702d",
+      "parentShas": [
+        "87066ade0643e4679acb4ea5d38e04ca106b078d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786401945000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786401945000
+      },
+      "subject": "refactor(knowledge): align canonical detail surfaces",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx"
+      ],
+      "changedPathsByParent": {
+        "87066ade0643e4679acb4ea5d38e04ca106b078d": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cce9505c39f15b45593c3e31d4012fe31055702d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

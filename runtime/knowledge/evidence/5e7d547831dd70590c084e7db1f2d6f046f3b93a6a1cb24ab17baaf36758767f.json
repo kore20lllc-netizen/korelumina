@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:fa27b5e101b43e0c197ae5e8244ed540dcf83fe61bc0ecd620872ff9bd5528d9",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship panel in executive educational dashboard",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098090,
+  "observedAt": 1786162394000,
+  "contentRef": "git:commit:6d1c7e717620de711c121816a070493315727d5b",
+  "checksum": "sha256:8190578531f11fe6d5170c75d9355dd98f6feff4bb3552543db2ecce17324050",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1202,
+    "genesisAdmissionIdentity": "genesis-admission:d75f0d6fedd06a689f96dba0f8199ddfd7dae77aaba99478b9ddd89bfb7f5601",
+    "historicalSourceId": "genesis-source:commit:6d1c7e717620de711c121816a070493315727d5b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6d1c7e717620de711c121816a070493315727d5b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6d1c7e717620de711c121816a070493315727d5b",
+      "parentShas": [
+        "56b88f7c3f7cf23ed1ba62007798aa645db2f0f4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786162394000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786162394000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship panel in executive educational dashboard",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx"
+      ],
+      "changedPathsByParent": {
+        "56b88f7c3f7cf23ed1ba62007798aa645db2f0f4": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6d1c7e717620de711c121816a070493315727d5b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:d3d0cbf612e6e83c1e79e42cafb6e122279deb3e32c5c7076b3765a32e1b3866",
+  "type": "commit",
+  "title": "feat(lumina): connect surface system to appearance engine",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080326,
+  "observedAt": 1783595149000,
+  "contentRef": "git:commit:78c3702dd0ffc2f455d1a9573bdde60243d90d1f",
+  "checksum": "sha256:86393750ea2301425b12168e7a5c7c9efa25e3bad19a8ad10171e3b849160c05",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 861,
+    "genesisAdmissionIdentity": "genesis-admission:889b5ba25b5f402f36d9455ef307c801aa19fcace35b4b5d18c68e2b05bbe5a5",
+    "historicalSourceId": "genesis-source:commit:78c3702dd0ffc2f455d1a9573bdde60243d90d1f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:78c3702dd0ffc2f455d1a9573bdde60243d90d1f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "78c3702dd0ffc2f455d1a9573bdde60243d90d1f",
+      "parentShas": [
+        "067f08228b4dd47400550819e78adbc7464fc033"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783595149000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783595149000
+      },
+      "subject": "feat(lumina): connect surface system to appearance engine",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx"
+      ],
+      "changedPathsByParent": {
+        "067f08228b4dd47400550819e78adbc7464fc033": [
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:78c3702dd0ffc2f455d1a9573bdde60243d90d1f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

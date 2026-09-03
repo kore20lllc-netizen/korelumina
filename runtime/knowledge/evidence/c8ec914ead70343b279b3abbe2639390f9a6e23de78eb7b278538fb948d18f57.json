@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b9e0b75fc9b3281859d3e5740bf43f5c2558ebe21ae9150151992a54ff2918e7",
+  "type": "commit",
+  "title": "docs(constitution): establish KoreLumina engineering principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077927,
+  "observedAt": 1783197813000,
+  "contentRef": "git:commit:126a84ec0fa7f168f5332d615abf6e9a15eeb2cf",
+  "checksum": "sha256:a0284eca8b944423005f2dfb1e497ce86f191006145325127f900b8585d8b1a9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 807,
+    "genesisAdmissionIdentity": "genesis-admission:5f49b7b16d1e2ee485306a862cded6fc9a9858ebcbf9530f3da4777896c2f11c",
+    "historicalSourceId": "genesis-source:commit:126a84ec0fa7f168f5332d615abf6e9a15eeb2cf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:126a84ec0fa7f168f5332d615abf6e9a15eeb2cf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "126a84ec0fa7f168f5332d615abf6e9a15eeb2cf",
+      "parentShas": [
+        "897a3cb4f6a3774bcea388ce3b834a21de00b718"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783197813000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783197813000
+      },
+      "subject": "docs(constitution): establish KoreLumina engineering principles",
+      "body": "",
+      "changedPaths": [
+        "docs/constitution/PRINCIPLES.md"
+      ],
+      "changedPathsByParent": {
+        "897a3cb4f6a3774bcea388ce3b834a21de00b718": [
+          "docs/constitution/PRINCIPLES.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/constitution-principles-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:126a84ec0fa7f168f5332d615abf6e9a15eeb2cf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

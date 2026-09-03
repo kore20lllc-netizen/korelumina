@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ae7742bdd45f1ca1d9aae8f08349510dde87db14820aa0431770de234699af71",
+  "type": "commit",
+  "title": "refactor(knowledge): align capsule genealogy summary cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240106241,
+  "observedAt": 1786400560000,
+  "contentRef": "git:commit:82e365b73caa1239fc85db5d62954e8bb44685fb",
+  "checksum": "sha256:bf05981c00bc28b63fe16f62aab8d6c09291d79fb183dea15fdd0d56eb3cc474",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1334,
+    "genesisAdmissionIdentity": "genesis-admission:1107199580c271297457f8636f7c1f1c132ca980e8ed379afe981b48346819b2",
+    "historicalSourceId": "genesis-source:commit:82e365b73caa1239fc85db5d62954e8bb44685fb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:82e365b73caa1239fc85db5d62954e8bb44685fb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "82e365b73caa1239fc85db5d62954e8bb44685fb",
+      "parentShas": [
+        "9939b0a4787b04307481b63a97c2f95f4ab1d2cd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786400560000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786400560000
+      },
+      "subject": "refactor(knowledge): align capsule genealogy summary cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/KnowledgeDistributionHub.tsx"
+      ],
+      "changedPathsByParent": {
+        "9939b0a4787b04307481b63a97c2f95f4ab1d2cd": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/distribution/KnowledgeDistributionHub.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:82e365b73caa1239fc85db5d62954e8bb44685fb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

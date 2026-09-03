@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:db332201faeee9cbd3af2522f9880b513f8ab08cd674570817e826bb37f5a27b",
+  "type": "document",
+  "title": "KoreLumina Decision Framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078142,
+  "observedAt": 1783201927000,
+  "contentRef": "docs/constitution/DECISION_FRAMEWORK.md",
+  "checksum": "sha256:a4c513cd7c2e0c8dbd5c54f6b93d95c1fe47dd437932ccc624248a04b0e52684",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 812,
+    "genesisAdmissionIdentity": "genesis-admission:7cfa65f189f1dffe7b9d1f5c1df61028ffac8185b9db50e1d1bb7628caece154",
+    "historicalSourceId": "genesis-source:document:derived:3de3a4deb0e5d64af64ba2142960da15fef109685a0d0a3e550bc4797ffa2de0",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/DECISION_FRAMEWORK.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Decision Framework",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/DECISION_FRAMEWORK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3de3a4deb0e5d64af64ba2142960da15fef109685a0d0a3e550bc4797ffa2de0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

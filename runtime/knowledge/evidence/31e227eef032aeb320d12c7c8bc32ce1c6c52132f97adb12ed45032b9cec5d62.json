@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:5b68ec132e872ab0eaf77c9cb9986948cfcb87eeb3242fb16179617c34b60368",
+  "type": "commit",
+  "title": "refactor(knowledge): use flagship card in genesis corpus",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240100522,
+  "observedAt": 1786248089000,
+  "contentRef": "git:commit:e3e52fbffa71c8cd8bf966dd00697542b31c7cd0",
+  "checksum": "sha256:c3f5e556f2532014dd02675f069056e5b2766d7f3c1ef78d0b1c6facd9869026",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1243,
+    "genesisAdmissionIdentity": "genesis-admission:8adf2b91edbec17ddbee9982a8d4ddfc00bc87e6fbb344edd97db68a225fc03a",
+    "historicalSourceId": "genesis-source:commit:e3e52fbffa71c8cd8bf966dd00697542b31c7cd0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e3e52fbffa71c8cd8bf966dd00697542b31c7cd0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e3e52fbffa71c8cd8bf966dd00697542b31c7cd0",
+      "parentShas": [
+        "e199d0ccbbe207a116b74f59506db8c3a96fd3f7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786248089000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786248089000
+      },
+      "subject": "refactor(knowledge): use flagship card in genesis corpus",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx"
+      ],
+      "changedPathsByParent": {
+        "e199d0ccbbe207a116b74f59506db8c3a96fd3f7": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e3e52fbffa71c8cd8bf966dd00697542b31c7cd0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

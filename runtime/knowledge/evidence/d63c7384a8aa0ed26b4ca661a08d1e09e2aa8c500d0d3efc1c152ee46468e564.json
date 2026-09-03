@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:94d033e6eba427596898c7757ccfdb735edec073ba9842559e18bbca33cf0195",
+  "type": "commit",
+  "title": "feat(lumina): add standard premium panel primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240089020,
+  "observedAt": 1785866334000,
+  "contentRef": "git:commit:a590cab0e44a48bcce9339e16a6b0b1926ca88f3",
+  "checksum": "sha256:9f6da03f110723b60eeb9ebb68f21b91decba09a186fe0aa06f1651769567917",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1039,
+    "genesisAdmissionIdentity": "genesis-admission:23850a0d28a02f505ab66446d2123109af761264520d64eead9a0d7a85017039",
+    "historicalSourceId": "genesis-source:commit:a590cab0e44a48bcce9339e16a6b0b1926ca88f3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a590cab0e44a48bcce9339e16a6b0b1926ca88f3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a590cab0e44a48bcce9339e16a6b0b1926ca88f3",
+      "parentShas": [
+        "5ed2eba4d4a88ae1003798df21c90c4698e07e16"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785866334000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785866334000
+      },
+      "subject": "feat(lumina): add standard premium panel primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/surfaces/LuminaStandardPremiumPanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "5ed2eba4d4a88ae1003798df21c90c4698e07e16": [
+          "apps/lumina-builder/src/components/design-system/surfaces/LuminaStandardPremiumPanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a590cab0e44a48bcce9339e16a6b0b1926ca88f3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:759c478a878375b5d1cad9614870533b7195d083c8a134477d6bb13d496abd0e",
+  "type": "document",
+  "title": "KOW-006 — Knowledge Operations Production Implementation Blueprint",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084203,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-006_PRODUCTION_IMPLEMENTATION_BLUEPRINT.md",
+  "checksum": "sha256:55127fa84c9edd4f8e4d0a687d26eac548ae7cc3ddd69c90904a0746181bee6d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 943,
+    "genesisAdmissionIdentity": "genesis-admission:2072ea560e8cf0265676f92c0a5d4791e14de797a858f372d970a9875d3902eb",
+    "historicalSourceId": "genesis-source:document:derived:714dfd162b0bfab34072c367fa2357f8633ad6ded20e82760111e57db753c3f4",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Approved for implementation",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-006_PRODUCTION_IMPLEMENTATION_BLUEPRINT.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-006 — Knowledge Operations Production Implementation Blueprint",
+      "status": "Approved for implementation",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-006_PRODUCTION_IMPLEMENTATION_BLUEPRINT.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:714dfd162b0bfab34072c367fa2357f8633ad6ded20e82760111e57db753c3f4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

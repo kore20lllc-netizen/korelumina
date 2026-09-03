@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:c64736a6fb326597daefcea146a7069ded2b535b08fcfbc03327445a659ede92",
+  "type": "commit",
+  "title": "feat(knowledge): add acquisition job framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240074972,
+  "observedAt": 1783059508000,
+  "contentRef": "git:commit:50b6f38231dc140f45df3285eae67847e43a480b",
+  "checksum": "sha256:1ac8ae543c9cc956100d2e4179390a43f7823b3f97c8c1d34885a40458682eeb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 744,
+    "genesisAdmissionIdentity": "genesis-admission:a157e44a74203d2d3b118a78e9158f950b086f7bf86769cd8cbb61887897db86",
+    "historicalSourceId": "genesis-source:commit:50b6f38231dc140f45df3285eae67847e43a480b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:50b6f38231dc140f45df3285eae67847e43a480b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "50b6f38231dc140f45df3285eae67847e43a480b",
+      "parentShas": [
+        "4d46abe00e29a77e22ae7ea1334d032214c72e25"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783059508000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783059508000
+      },
+      "subject": "feat(knowledge): add acquisition job framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-acquisition/index.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/jobs/KnowledgeAcquisitionJob.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/jobs/KnowledgeAcquisitionJobRegistry.ts",
+        "apps/lumina-runtime/src/knowledge-acquisition/jobs/index.ts"
+      ],
+      "changedPathsByParent": {
+        "4d46abe00e29a77e22ae7ea1334d032214c72e25": [
+          "apps/lumina-runtime/src/knowledge-acquisition/index.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/jobs/KnowledgeAcquisitionJob.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/jobs/KnowledgeAcquisitionJobRegistry.ts",
+          "apps/lumina-runtime/src/knowledge-acquisition/jobs/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/kap-004-acquisition-job-framework-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:50b6f38231dc140f45df3285eae67847e43a480b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

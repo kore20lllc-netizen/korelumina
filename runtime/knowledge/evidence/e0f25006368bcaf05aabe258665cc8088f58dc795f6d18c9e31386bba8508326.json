@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:59747f4228edfafe42ca10100c8e209fe924f187afc749c14efba483c5838d9a",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Runtime Header Refinement — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153#browser-turn=0",
+  "checksum": "59747f4228edfafe42ca10100c8e209fe924f187afc749c14efba483c5838d9a",
+  "metadata": {
+    "content": "It depends on which ChatGPT interface you're using, because GitHub integration is still being rolled out and the UI differs.\nIf you see your GitHub connector in ChatGPT\n\n\nClick New Chat.\n\n\nLook for Sources, Connectors, or a + / paperclip button near the message box.\n\n\nChoose GitHub.\n\n\nSelect your repository (for example, kore20lllc-netizen/korelumina).\n\n\nStart the conversation.\n\n\nIf the repository is attached correctly, you can ask:\n\n\"Find appearance.ts.\"\n\nor\n\n\"Search for executiveMaterial.\"\n\nwithout pasting any code.\n\nIf you don't see a GitHub option\nYour GitHub account may be connected for authentication, but repository browsing may not yet be available in your ChatGPT client or plan.\n\nLet's verify what you have\nTell me:\n\n\nAre you using ChatGPT on the web (chatgpt.com) or the macOS desktop app?\n\n\nWhen you click New Chat, do you see any of these:\n\n\nGitHub\n\n\nConnectors\n\n\nSources\n\n\nAdd source\n\n\nA paperclip or + menu with GitHub listed?\n\n\n\n\nBased on your answer, I can tell you exactly where to click.",
+    "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "5d2e485e-1685-4ede-bd8e-7086419dd93c",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5c707a-7d9c-83ea-aee3-13f03ab51153:message:5d2e485e-1685-4ede-bd8e-7086419dd93c",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153#browser-turn=0",
+    "sourceRevision": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e",
+    "segmentAvailability": "available",
+    "conversationChecksum": "42074a3eb9bb37750a562a9e93af45aa9dc704aa272b431dc3abb061ff0fbc3e",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e",
+      "exportRevision": "sha256:b8e4df0ea3c8b12752ce1b2d6b3a4dd436b5e54f388aafcd18c0c25ee7416e8e"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630853516
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a5c707a-7d9c-83ea-aee3-13f03ab51153:message:5d2e485e-1685-4ede-bd8e-7086419dd93c"
+    ],
+    "conversation": [
+      "6a5c707a-7d9c-83ea-aee3-13f03ab51153"
+    ]
+  }
+}

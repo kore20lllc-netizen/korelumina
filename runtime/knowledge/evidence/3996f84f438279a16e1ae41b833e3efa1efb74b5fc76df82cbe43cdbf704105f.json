@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:2160439c576501c108560868eb02172749e33d4bb088afc769922c7d9db133e7",
+  "type": "commit",
+  "title": "chore(knowledge): approve KR-005 canonical review",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132708,
+  "observedAt": 1788050291000,
+  "contentRef": "git:commit:65ff2a85a2c1c5a80df2f5d0fe87324e8b1e8575",
+  "checksum": "sha256:6c4f8ae87d9543112ff8b74bb6896fffaf0fe622525d83e53d0ced8bd07d0249",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1683,
+    "genesisAdmissionIdentity": "genesis-admission:d46103bdba2c05b4464531dc95403e9141a8c395d36c28d173d093b8e3c3bdcb",
+    "historicalSourceId": "genesis-source:commit:65ff2a85a2c1c5a80df2f5d0fe87324e8b1e8575",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:65ff2a85a2c1c5a80df2f5d0fe87324e8b1e8575",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "65ff2a85a2c1c5a80df2f5d0fe87324e8b1e8575",
+      "parentShas": [
+        "cab96c16f36a9e359bf85d29d643a9bb21dd202d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788050291000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788050291000
+      },
+      "subject": "chore(knowledge): approve KR-005 canonical review",
+      "body": "",
+      "changedPaths": [
+        "runtime/knowledge/manufacturing-runs/KMR-f1de3aa163de7f21753b.json",
+        "runtime/knowledge/packages/KP-2026-000044.json",
+        "runtime/knowledge/review-batches/KRB-2026-000010.json"
+      ],
+      "changedPathsByParent": {
+        "cab96c16f36a9e359bf85d29d643a9bb21dd202d": [
+          "runtime/knowledge/manufacturing-runs/KMR-f1de3aa163de7f21753b.json",
+          "runtime/knowledge/packages/KP-2026-000044.json",
+          "runtime/knowledge/review-batches/KRB-2026-000010.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:65ff2a85a2c1c5a80df2f5d0fe87324e8b1e8575"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

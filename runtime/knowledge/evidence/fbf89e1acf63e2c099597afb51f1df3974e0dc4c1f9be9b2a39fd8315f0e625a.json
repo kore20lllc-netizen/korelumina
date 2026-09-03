@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:2cc8b3a003496ea2e25f8fb45700ad825730e6399083626e8eac2f321c0de29d",
+  "type": "commit",
+  "title": "refactor(ui): remove legacy glass wrapper from workspace panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083130,
+  "observedAt": 1783899416000,
+  "contentRef": "git:commit:b02b59562d7e26f4fceaa7a97e909b6a93cb9d0c",
+  "checksum": "sha256:70b18352f1746bba21505fc74089d4951a218ad9ecdf777f9c6bb3acea496ea7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 921,
+    "genesisAdmissionIdentity": "genesis-admission:b1bb1a95fba38e721b37766a3785d263bd7d324ce48e579e4107082d943aa479",
+    "historicalSourceId": "genesis-source:commit:b02b59562d7e26f4fceaa7a97e909b6a93cb9d0c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b02b59562d7e26f4fceaa7a97e909b6a93cb9d0c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b02b59562d7e26f4fceaa7a97e909b6a93cb9d0c",
+      "parentShas": [
+        "38db2b94da013bfaba88cad23d1785ff910b5922"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783899416000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783899416000
+      },
+      "subject": "refactor(ui): remove legacy glass wrapper from workspace panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "38db2b94da013bfaba88cad23d1785ff910b5922": [
+          "apps/lumina-builder/src/components/lumina/workspace/LuminaWorkspacePanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b02b59562d7e26f4fceaa7a97e909b6a93cb9d0c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

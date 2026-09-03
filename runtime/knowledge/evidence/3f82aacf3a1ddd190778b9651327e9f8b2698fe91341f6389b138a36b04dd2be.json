@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:287a486552ee891b480f3fb4cb0c476d06c8514978a65f9b570e239b432407f8",
+  "type": "commit",
+  "title": "education: add initial competency assessment candidate",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240128849,
+  "observedAt": 1787803002000,
+  "contentRef": "git:commit:b56c697c623ad895091e683429e3faf9afca1dc1",
+  "checksum": "sha256:856d46517449d622907b4309b367d6993f3ff08d6b0b657fb38267c6dcdfa8bf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1638,
+    "genesisAdmissionIdentity": "genesis-admission:909637c37d239055b1dd34edbba3a53a762964177b7a053fa8c891efefda29bb",
+    "historicalSourceId": "genesis-source:commit:b56c697c623ad895091e683429e3faf9afca1dc1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b56c697c623ad895091e683429e3faf9afca1dc1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b56c697c623ad895091e683429e3faf9afca1dc1",
+      "parentShas": [
+        "ae76ca2062fa26fd07682c8806e0c19fa058cd7b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787803002000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787803002000
+      },
+      "subject": "education: add initial competency assessment candidate",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/InitialCompetencyAssessmentCandidate.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/InitialCompetencyAssessmentCandidate.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts"
+      ],
+      "changedPathsByParent": {
+        "ae76ca2062fa26fd07682c8806e0c19fa058cd7b": [
+          "apps/lumina-runtime/src/knowledge-education/InitialCompetencyAssessmentCandidate.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/InitialCompetencyAssessmentCandidate.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b56c697c623ad895091e683429e3faf9afca1dc1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

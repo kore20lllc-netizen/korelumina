@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:f9dbf17514d22f1b1dcfe1b0caaa54d554f4eaaf637e19496d9bcbcf895408e1",
+  "type": "commit",
+  "title": "refactor(knowledge): align impact lineage cards",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240105794,
+  "observedAt": 1786399478000,
+  "contentRef": "git:commit:9af34e87da66d538f1bc69c77a75a1705f3d695a",
+  "checksum": "sha256:d17564b3d460c9afc22bec4c011b17ad406659c7c486963f3af6a6cbe0325846",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1327,
+    "genesisAdmissionIdentity": "genesis-admission:12435964295d10fd1792b0db5328ae84dfccf0e5108c3b08a9f91cc7b943cd16",
+    "historicalSourceId": "genesis-source:commit:9af34e87da66d538f1bc69c77a75a1705f3d695a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9af34e87da66d538f1bc69c77a75a1705f3d695a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9af34e87da66d538f1bc69c77a75a1705f3d695a",
+      "parentShas": [
+        "1bd19212f7d618637fd5b021f03abd1f9554a2ae"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786399478000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786399478000
+      },
+      "subject": "refactor(knowledge): align impact lineage cards",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx"
+      ],
+      "changedPathsByParent": {
+        "1bd19212f7d618637fd5b021f03abd1f9554a2ae": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9af34e87da66d538f1bc69c77a75a1705f3d695a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:b679a0479a5c022f2ecaac2cc9b0ffb683a43da8cdc5b2f9e18b4305930091a8",
+  "type": "commit",
+  "title": "docs(constitution): establish KoreLumina AI governance",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078099,
+  "observedAt": 1783201842000,
+  "contentRef": "git:commit:df5b06c667f187807a648a8ec02f6a63337d981e",
+  "checksum": "sha256:fe12697e8669497f7959aef71bf3a3cad67405403720472eacb952657236dde3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 811,
+    "genesisAdmissionIdentity": "genesis-admission:cc889c8653c81da8cf29ed0267617534a767b47e45d0a546290bc96fd1cab4ac",
+    "historicalSourceId": "genesis-source:commit:df5b06c667f187807a648a8ec02f6a63337d981e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:df5b06c667f187807a648a8ec02f6a63337d981e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "df5b06c667f187807a648a8ec02f6a63337d981e",
+      "parentShas": [
+        "a51315c16059a3f2a705da8fc16b93756610cfb9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783201842000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783201842000
+      },
+      "subject": "docs(constitution): establish KoreLumina AI governance",
+      "body": "",
+      "changedPaths": [
+        "docs/constitution/AI_GOVERNANCE.md"
+      ],
+      "changedPathsByParent": {
+        "a51315c16059a3f2a705da8fc16b93756610cfb9": [
+          "docs/constitution/AI_GOVERNANCE.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/ai-governance-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:df5b06c667f187807a648a8ec02f6a63337d981e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

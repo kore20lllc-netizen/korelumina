@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:e279daf7bcb7d0f3c7a094e666096da2b6a351e82f4a0795045cdc6fde8004e3",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Update — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b#browser-turn=3",
+  "checksum": "e279daf7bcb7d0f3c7a094e666096da2b6a351e82f4a0795045cdc6fde8004e3",
+  "metadata": {
+    "content": "(base) erictouko@MacBook-Pro korelumina % git status\nOn branch feature/lumina-workspace-migration\nYour branch is up to date with 'origin/feature/lumina-workspace-migration'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   apps/lumina-builder/src/components/lumina/appearance/css/applyAppearance.ts\n\tmodified:   apps/lumina-builder/src/components/lumina/appearance/css/variables.ts\n\tmodified:   apps/lumina-builder/src/components/lumina/appearance/resolver/resolveAppearance.ts\n\tmodified:   apps/lumina-builder/src/components/lumina/appearance/resolver/types.ts\n\tmodified:   apps/lumina-builder/src/components/lumina/background/LuminaGlassLayer.tsx\n\tmodified:   apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n(base) erictouko@MacBook-Pro korelumina % \n  [Restored Jul 12, 2026 at 6:02:57 AM]\nLast login: Sun Jul 12 06:02:57 on ttys001\nRestored session: Sun Jul 12 06:02:11 EDT 2026\n(base) erictouko@MacBook-Pro korelumina %",
+    "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "dd47e1f7-2eaf-4230-bd0c-27cf9cf2de65",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a51b7e5-7d64-83ea-bfcb-d20ae5be588b:message:dd47e1f7-2eaf-4230-bd0c-27cf9cf2de65",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b#browser-turn=3",
+    "sourceRevision": "sha256:e77bb1fe511c06cc037f9f69750ca7dcef50ab4de8979f5b4ae1d7e5ecab6d23",
+    "segmentAvailability": "available",
+    "conversationChecksum": "fcde5122204312e1cb3e0aeaa2b7ee86de59df3b102c6fa5d74429b52b719c48",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:e77bb1fe511c06cc037f9f69750ca7dcef50ab4de8979f5b4ae1d7e5ecab6d23",
+      "exportRevision": "sha256:e77bb1fe511c06cc037f9f69750ca7dcef50ab4de8979f5b4ae1d7e5ecab6d23"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630762953
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a51b7e5-7d64-83ea-bfcb-d20ae5be588b:message:dd47e1f7-2eaf-4230-bd0c-27cf9cf2de65"
+    ],
+    "conversation": [
+      "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b"
+    ]
+  }
+}

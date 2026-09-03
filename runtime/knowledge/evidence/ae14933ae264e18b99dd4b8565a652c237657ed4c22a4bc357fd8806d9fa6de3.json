@@ -1,0 +1,42 @@
+{
+  "id": "genesis-evidence:32e006b60c9cdc8a448848b78080312ca5c53ab8d2203cc02ced2f6f18a388e1",
+  "type": "document",
+  "title": "KoreLumina Reconstruction Rules",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082933,
+  "observedAt": 1783888587000,
+  "contentRef": "docs/architecture/KORELUMINA_RECONSTRUCTION_RULES.md",
+  "checksum": "sha256:6a2b72c1977e35888e73fb332a0babb144abbf23fca0107f06dc6ae6f9ae4974",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 917,
+    "genesisAdmissionIdentity": "genesis-admission:710aa8b7fb2ae1832e21412f9fa3b9d3b63549f8c5d33a75e351c56e7f51f4e0",
+    "historicalSourceId": "genesis-source:document:derived:3a2beae2940ef9946c06bb2d7d28f92e8e28e6b17311b716385ee3d2ea55456e",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Active",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_RULES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Reconstruction Rules",
+      "status": "Active",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_RECONSTRUCTION_RULES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:3a2beae2940ef9946c06bb2d7d28f92e8e28e6b17311b716385ee3d2ea55456e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

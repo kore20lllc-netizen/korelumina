@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:445ab22cddee81b214114effeea9d5ac6acb8b66bbfbb51190506dfb98400aba",
+  "type": "commit",
+  "title": "feat(builder): add shared workspace layout",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076165,
+  "observedAt": 1783142714000,
+  "contentRef": "git:commit:1f00088c506a365fe6e5fe468fa1cc07577e161c",
+  "checksum": "sha256:11005df4c6b5e5fdfe4e312d2d2747479e5889184fc4b6d039c3873f70570123",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 767,
+    "genesisAdmissionIdentity": "genesis-admission:5f0adf03ac5c114cb0035524d9d6a755ba9241da1c25dafa158764e76d866adf",
+    "historicalSourceId": "genesis-source:commit:1f00088c506a365fe6e5fe468fa1cc07577e161c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1f00088c506a365fe6e5fe468fa1cc07577e161c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1f00088c506a365fe6e5fe468fa1cc07577e161c",
+      "parentShas": [
+        "145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142714000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783142714000
+      },
+      "subject": "feat(builder): add shared workspace layout",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLayout.tsx"
+      ],
+      "changedPathsByParent": {
+        "145baa4d48a5c5dc1f98c78d4e5cb9ea577d36cd": [
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLayout.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/wds-workspace-layout-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1f00088c506a365fe6e5fe468fa1cc07577e161c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

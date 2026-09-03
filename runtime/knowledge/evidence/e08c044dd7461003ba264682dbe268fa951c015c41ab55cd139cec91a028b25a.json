@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:38783bdf6572a453499776629adcea1ee636de9f18c410f311d8947440447979",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Next Diff Engine-korelumina — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=0",
+  "checksum": "38783bdf6572a453499776629adcea1ee636de9f18c410f311d8947440447979",
+  "metadata": {
+    "content": "Good. This is the decisive proof.\n✅ What the terminal proves\nYour runtime engine is working correctly.\nThe response from:\nBashcurl -i \"http://localhost:3000/api/dev/runtime/execute?projectId=demo-project\"\nshows the Waitlist template code, not the old Agency template.\nSo:\n\n\ntemplate apply ✅\n\n\nworkspace file replacement ✅\n\n\nruntime execute rebundle ✅\n\n\nruntime HTML generation ✅\n\n\n❗ Real problem now\nThe browser showing the old UI is a preview caching / iframe refresh problem, not a runtime compiler problem.\nSo we fix the preview surface, not the engine.\nUse full rewrites only.\n\n1) Rewrite app/studio-runtime/[projectId]/page.tsx\nBashcat > app/studio-runtime/[projectId]/page.tsx << 'EOF'\n\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport { useParams } from \"next/navigation\"\n\nexport default function StudioRuntime(){\n\n  const { projectId } = useParams()\n  const [html,setHtml] = useState<string>(\"Loading runtime...\")\n  const [tick,setTick] = useState(0)\n\n  useEffect(()=>{\n    const id = setInterval(()=>{\n      setTick(v=>v+1)\n    },1000)\n\n    return ()=>clearInterval(id)\n  },[])\n\n  useEffect(()=>{\n\n    async function load(){\n      const res = await fetch(\n        `/api/dev/runtime/execute?projectId=${projectId}&t=${tick}`,\n        { cache:\"no-store\" }\n      )\n      const text = await res.text()\n      setHtml(text)\n    }\n\n    if(projectId){\n      load()\n    }\n\n  },[projectId,tick])\n\n  return (\n    <div style={{height:\"100vh\"}}>\n      <iframe\n        key={tick}\n        srcDoc={html}\n        style={{\n          width:\"100%\",\n          height:\"100%\",\n          border:\"none\",\n          background:\"#fff\"\n        }}\n      />\n    </div>\n  )\n}\nEOF\n\n2) Rewrite app/runtime-renderer/[projectId]/page.tsx\nBashcat > app/runtime-renderer/[projectId]/page.tsx << 'EOF'\n\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport { useParams } from \"next/navigation\"\n\nexport default function RuntimeRenderer(){\n\n  const { projectId } = useParams()\n  const [tick,setTick] = useState(0)\n\n  useEffect(()=>{\n    const id = setInterval(()=>{\n      setTick(v=>v+1)\n    },1000)\n\n    return ()=>clearInterval(id)\n  },[])\n\n  return (\n    <div style={{padding:40}}>\n      <h1>Runtime App Preview</h1>\n\n      <iframe\n        key={tick}\n        src={`/studio-runtime/${projectId}?t=${tick}`}\n        style={{\n          width:\"100%\",\n          height:\"80vh\",\n          border:\"1px solid #ddd\",\n          borderRadius:8,\n          background:\"#fff\"\n        }}\n      />\n    </div>\n  )\n}\nEOF\n\n3) Restart clean\nBashrm -rf .next\nnpm run dev\n\n4) Re-test\nBashcurl -X POST http://localhost:3000/api/templates/apply \\\n-H \"Content-Type: application/json\" \\\n-d '{\"projectId\":\"demo-project\",\"templatePath\":\"templates/websites/agency\"}'\nOpen:\nhttp://localhost:3000/runtime-renderer/demo-project\nThen switch again:\nBashcurl -X POST http://localhost:3000/api/templates/apply \\\n-H \"Content-Type: application/json\" \\\n-d '{\"projectId\":\"demo-project\",\"templatePath\":\"templates/websites/waitlist\"}'\nThe preview should now change automatically within about a second.\nWhen that is green, we lock this state with build + commit + tag before the next engine.",
+    "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "d514a789-9418-4f1f-af95-6869dc6126ba",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:d514a789-9418-4f1f-af95-6869dc6126ba",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c#browser-turn=0",
+    "sourceRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+    "segmentAvailability": "available",
+    "conversationChecksum": "0fb33606832a5c1613d7c0cd61634a9f42208910a9b0ea7de37ffa55e234ed43",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6",
+      "exportRevision": "sha256:8db4d020ae50f7618840d472c677a746af29de083cd95a1f742112aa8b16ada6"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630819038
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69b7017a-f53c-8328-bfeb-b2de07d7838c:message:d514a789-9418-4f1f-af95-6869dc6126ba"
+    ],
+    "conversation": [
+      "69b7017a-f53c-8328-bfeb-b2de07d7838c"
+    ]
+  }
+}

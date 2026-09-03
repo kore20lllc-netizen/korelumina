@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:6a62e894f07e43b2c877e61cee91edd34663c9ed196173bed64a4dee1fffb61f",
+  "type": "commit",
+  "title": "refactor(builder): remove deprecated shared workspace library",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082842,
+  "observedAt": 1783886422000,
+  "contentRef": "git:commit:e1f1ff8edabad679b9e303a1e2376909f6e3d79e",
+  "checksum": "sha256:fe5e29c79cb1debe700359ea13632fb1603215cb752a09c6a630eeef2c521f99",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 915,
+    "genesisAdmissionIdentity": "genesis-admission:77b8ee6dd271cd5047b1e6d32f722bc518fc631863a12c8220fe2ba6bc78ce2f",
+    "historicalSourceId": "genesis-source:commit:e1f1ff8edabad679b9e303a1e2376909f6e3d79e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e1f1ff8edabad679b9e303a1e2376909f6e3d79e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e1f1ff8edabad679b9e303a1e2376909f6e3d79e",
+      "parentShas": [
+        "247dfc416ff5bf2f2955be33b274c7ca82f43198"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783886422000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783886422000
+      },
+      "subject": "refactor(builder): remove deprecated shared workspace library",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/GlassWorkspaceHero.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceGrid.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLayout.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceMetricCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceTabBar.tsx",
+        "apps/lumina-builder/src/components/workspaces/shared/index.ts"
+      ],
+      "changedPathsByParent": {
+        "247dfc416ff5bf2f2955be33b274c7ca82f43198": [
+          "apps/lumina-builder/src/components/workspaces/shared/GlassWorkspaceHero.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceGrid.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLayout.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceMetricCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceSection.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceTabBar.tsx",
+          "apps/lumina-builder/src/components/workspaces/shared/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e1f1ff8edabad679b9e303a1e2376909f6e3d79e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

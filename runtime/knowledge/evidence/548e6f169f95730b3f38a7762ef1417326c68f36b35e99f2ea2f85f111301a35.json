@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f2c57f10c703d386417d0aa94e70dc6948e79e816d1230abdd150522a879f588",
+  "type": "commit",
+  "title": "refactor(knowledge): remove obsolete local flagship card",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098903,
+  "observedAt": 1786188870000,
+  "contentRef": "git:commit:9b81bf5b859ab203d5e823aad40debcfa725bf3a",
+  "checksum": "sha256:8582e3c07c2f68b3fada3dc37dcab7c0fc10fba16db12e7e4ccf20c5765061e1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1216,
+    "genesisAdmissionIdentity": "genesis-admission:675e08f9636afa6c8e961090d62e742db8d4abf4b0e744163034759d865e18c7",
+    "historicalSourceId": "genesis-source:commit:9b81bf5b859ab203d5e823aad40debcfa725bf3a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9b81bf5b859ab203d5e823aad40debcfa725bf3a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9b81bf5b859ab203d5e823aad40debcfa725bf3a",
+      "parentShas": [
+        "0e77cf3d2a6ae96a4ad2e4fd2e02bfe02678f461"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786188870000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786188870000
+      },
+      "subject": "refactor(knowledge): remove obsolete local flagship card",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/FlagshipCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+      ],
+      "changedPathsByParent": {
+        "0e77cf3d2a6ae96a4ad2e4fd2e02bfe02678f461": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/FlagshipCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/presentation/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9b81bf5b859ab203d5e823aad40debcfa725bf3a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

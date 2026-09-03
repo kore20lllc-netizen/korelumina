@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:f1d00bb843bddaaf810014fff30dddafa941369674786c65b51a23234b0d1237",
+  "type": "commit",
+  "title": "refactor(knowledge): align capsule ancestry panel",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240104766,
+  "observedAt": 1786393160000,
+  "contentRef": "git:commit:90d2c68755b791dd10cebc5011e313d6a50960f6",
+  "checksum": "sha256:5c9e2b59ae93a2144b5e1d354619a749783f4c28801194e6f1787d68228fe058",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1311,
+    "genesisAdmissionIdentity": "genesis-admission:899263ac3976c77ba54ca87558c79f8986ebfb54cee7464c53fc8f1830c95353",
+    "historicalSourceId": "genesis-source:commit:90d2c68755b791dd10cebc5011e313d6a50960f6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:90d2c68755b791dd10cebc5011e313d6a50960f6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "90d2c68755b791dd10cebc5011e313d6a50960f6",
+      "parentShas": [
+        "495ebfe8ecc334b0eb32e74923e5939fdcd113a6"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786393160000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786393160000
+      },
+      "subject": "refactor(knowledge): align capsule ancestry panel",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx"
+      ],
+      "changedPathsByParent": {
+        "495ebfe8ecc334b0eb32e74923e5939fdcd113a6": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:90d2c68755b791dd10cebc5011e313d6a50960f6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

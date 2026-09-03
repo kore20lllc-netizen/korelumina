@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:318b1bca06888f7df2902e02f1dbcea38e8238db7478b28d3501ac626574e35c",
+  "type": "commit",
+  "title": "feat(knowledge): schedule governance recovery sweeps",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240121884,
+  "observedAt": 1787439937000,
+  "contentRef": "git:commit:4221a16f4dcd700b585b33558dd60a5f19eb5559",
+  "checksum": "sha256:b48c056cfe480e271b1c7c8feba53ef5aeafecd1544f23327fa55ce53d161e85",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1552,
+    "genesisAdmissionIdentity": "genesis-admission:8eb487199fa530aafd6ee39d81099c7589cb9a214577ee68e4b02e3a4cbb6880",
+    "historicalSourceId": "genesis-source:commit:4221a16f4dcd700b585b33558dd60a5f19eb5559",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4221a16f4dcd700b585b33558dd60a5f19eb5559",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4221a16f4dcd700b585b33558dd60a5f19eb5559",
+      "parentShas": [
+        "bba8be1f2ad3fa93cf3f7654d31d2fc9560ba3e7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787439937000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787439937000
+      },
+      "subject": "feat(knowledge): schedule governance recovery sweeps",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/GovernanceReadyRecoveryScheduler.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/GovernanceReadyRecoveryScheduler.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/governance/index.ts"
+      ],
+      "changedPathsByParent": {
+        "bba8be1f2ad3fa93cf3f7654d31d2fc9560ba3e7": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/GovernanceReadyRecoveryScheduler.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/__tests__/GovernanceReadyRecoveryScheduler.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/governance/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4221a16f4dcd700b585b33558dd60a5f19eb5559"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

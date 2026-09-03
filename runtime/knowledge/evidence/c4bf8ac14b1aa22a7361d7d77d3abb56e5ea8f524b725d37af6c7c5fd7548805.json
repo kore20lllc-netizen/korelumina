@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:28afb0d769409cd3005abc5fb2d5ad04b2e0d9f89ace8566beb22c4657120b30",
+  "type": "commit",
+  "title": "feat(genesis): add replay state progression",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240117145,
+  "observedAt": 1787052941000,
+  "contentRef": "git:commit:6ce6a321292500736ac901d2e7cbefb6aed56f3e",
+  "checksum": "sha256:54df745463718a81c3961e974d268769e68200a510b5d51406409fc1cdea4da8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1490,
+    "genesisAdmissionIdentity": "genesis-admission:2743471581deb4f24b2a13e7b20dab8062a7d592a3c4504b19b53529e808f63c",
+    "historicalSourceId": "genesis-source:commit:6ce6a321292500736ac901d2e7cbefb6aed56f3e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6ce6a321292500736ac901d2e7cbefb6aed56f3e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6ce6a321292500736ac901d2e7cbefb6aed56f3e",
+      "parentShas": [
+        "2f64edd9527ac96e66e093076b46e6640810cae5"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787052941000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787052941000
+      },
+      "subject": "feat(genesis): add replay state progression",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayState.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayState.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+      ],
+      "changedPathsByParent": {
+        "2f64edd9527ac96e66e093076b46e6640810cae5": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayState.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayState.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "docs/architecture/HISTORICAL_REPLAY_CONTRACT_V1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6ce6a321292500736ac901d2e7cbefb6aed56f3e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:0962f04761d9029d9c18e44856e87c4a8f4003abc22e965e417c3d3f46eee5a7",
+  "type": "commit",
+  "title": "refactor(runtime): migrate lifecycle timeline to Lumina timeline card",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079888,
+  "observedAt": 1783566817000,
+  "contentRef": "git:commit:7d9e16f238542a7cce4487c95fcfe3cb801c579c",
+  "checksum": "sha256:773fd0d69f0ec734f6e2457751fa8a725faaaf5dd573c985a7e93adbca6f3e9f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 851,
+    "genesisAdmissionIdentity": "genesis-admission:ea27b1076bd48e7529a5763191470ee1b80c906ee46aa4fc0f99a51bd63132ce",
+    "historicalSourceId": "genesis-source:commit:7d9e16f238542a7cce4487c95fcfe3cb801c579c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7d9e16f238542a7cce4487c95fcfe3cb801c579c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7d9e16f238542a7cce4487c95fcfe3cb801c579c",
+      "parentShas": [
+        "de1f7d28bfb9b4a8c14acb8ff02b253d4a0c575b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783566817000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783566817000
+      },
+      "subject": "refactor(runtime): migrate lifecycle timeline to Lumina timeline card",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLifecycleTimeline.tsx"
+      ],
+      "changedPathsByParent": {
+        "de1f7d28bfb9b4a8c14acb8ff02b253d4a0c575b": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLifecycleTimeline.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7d9e16f238542a7cce4487c95fcfe3cb801c579c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

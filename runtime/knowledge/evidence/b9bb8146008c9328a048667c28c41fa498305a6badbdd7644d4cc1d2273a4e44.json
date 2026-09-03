@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:2897dc5d2e8e286625f9a6cbf0ffdbd0b5f40fe043c499f0d0ac33d6cc48e1d3",
+  "type": "commit",
+  "title": "feat(design): add Lumina design token foundation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079479,
+  "observedAt": 1783506851000,
+  "contentRef": "git:commit:6dfa8d21c50f19f4e3f30be180150093ba6efeb7",
+  "checksum": "sha256:38e13a3aedee137599facec8f7ad8077df7e3e7610b59761f8b7b2cebb4cdd48",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 842,
+    "genesisAdmissionIdentity": "genesis-admission:766bef4189206c9cf021de686b2423e681349295b3b61e810bc9276dff61a4a9",
+    "historicalSourceId": "genesis-source:commit:6dfa8d21c50f19f4e3f30be180150093ba6efeb7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6dfa8d21c50f19f4e3f30be180150093ba6efeb7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6dfa8d21c50f19f4e3f30be180150093ba6efeb7",
+      "parentShas": [
+        "b7ad65efd37cf496a75a04cf3481908c8305549d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783506851000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783506851000
+      },
+      "subject": "feat(design): add Lumina design token foundation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/design/index.ts",
+        "apps/lumina-builder/src/design/tokens/blur.ts",
+        "apps/lumina-builder/src/design/tokens/colors.ts",
+        "apps/lumina-builder/src/design/tokens/elevation.ts",
+        "apps/lumina-builder/src/design/tokens/glass.ts",
+        "apps/lumina-builder/src/design/tokens/gradients.ts",
+        "apps/lumina-builder/src/design/tokens/motion.ts",
+        "apps/lumina-builder/src/design/tokens/opacity.ts",
+        "apps/lumina-builder/src/design/tokens/radius.ts",
+        "apps/lumina-builder/src/design/tokens/spacing.ts",
+        "apps/lumina-builder/src/design/tokens/typography.ts",
+        "apps/lumina-builder/src/design/tokens/zIndex.ts"
+      ],
+      "changedPathsByParent": {
+        "b7ad65efd37cf496a75a04cf3481908c8305549d": [
+          "apps/lumina-builder/src/design/index.ts",
+          "apps/lumina-builder/src/design/tokens/blur.ts",
+          "apps/lumina-builder/src/design/tokens/colors.ts",
+          "apps/lumina-builder/src/design/tokens/elevation.ts",
+          "apps/lumina-builder/src/design/tokens/glass.ts",
+          "apps/lumina-builder/src/design/tokens/gradients.ts",
+          "apps/lumina-builder/src/design/tokens/motion.ts",
+          "apps/lumina-builder/src/design/tokens/opacity.ts",
+          "apps/lumina-builder/src/design/tokens/radius.ts",
+          "apps/lumina-builder/src/design/tokens/spacing.ts",
+          "apps/lumina-builder/src/design/tokens/typography.ts",
+          "apps/lumina-builder/src/design/tokens/zIndex.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6dfa8d21c50f19f4e3f30be180150093ba6efeb7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

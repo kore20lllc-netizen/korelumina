@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:642d6da460aa22bf15beb69a46391b698ccf7dfd3f0b6445f3853bd28fa3ee66",
+  "type": "commit",
+  "title": "docs(chief-agent): add operating model foundation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076799,
+  "observedAt": 1783153164000,
+  "contentRef": "git:commit:e5990be4c7fc70ff77c6a5d94f9fb8ed8f62030a",
+  "checksum": "sha256:5621f385e5a57334d686b66ac9f15c8908ade49f95a438c09e3a6cdc989b86e7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 781,
+    "genesisAdmissionIdentity": "genesis-admission:47a8f7f0c61703a10573abb8b1a21dd268ec49ae39365d1f8d335b9e64158a27",
+    "historicalSourceId": "genesis-source:commit:e5990be4c7fc70ff77c6a5d94f9fb8ed8f62030a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e5990be4c7fc70ff77c6a5d94f9fb8ed8f62030a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e5990be4c7fc70ff77c6a5d94f9fb8ed8f62030a",
+      "parentShas": [
+        "be5a467fe8e79ce23eaf73041a348ee73edfd726"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783153164000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783153164000
+      },
+      "subject": "docs(chief-agent): add operating model foundation",
+      "body": "",
+      "changedPaths": [
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+        "docs/chief-agent/README.md"
+      ],
+      "changedPathsByParent": {
+        "be5a467fe8e79ce23eaf73041a348ee73edfd726": [
+          "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+          "docs/chief-agent/README.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/chief-agent-operating-model-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e5990be4c7fc70ff77c6a5d94f9fb8ed8f62030a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

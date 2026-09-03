@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:74658fdc04b32d8d1a69567619ca96530284fc81ae2bf6efc510c3e54a87b877",
+  "type": "commit",
+  "title": "chore: synchronize current KoreLumina working state",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086273,
+  "observedAt": 1785482353000,
+  "contentRef": "git:commit:c04244298b0e5891108bc026ab446a435ba39ac6",
+  "checksum": "sha256:528a14215a846929e22302d9c5bb54ac60fe9c9675270914959fd2eb9c922a0c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 985,
+    "genesisAdmissionIdentity": "genesis-admission:70d7fa947ce04ae71281c05b4bbb6685b2d17a5cae2cbca7e53b3a896acffae3",
+    "historicalSourceId": "genesis-source:commit:c04244298b0e5891108bc026ab446a435ba39ac6",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c04244298b0e5891108bc026ab446a435ba39ac6",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c04244298b0e5891108bc026ab446a435ba39ac6",
+      "parentShas": [
+        "fab851ad84fa65529aca8303c9d73b4b7d00ca0e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785482353000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785482353000
+      },
+      "subject": "chore: synchronize current KoreLumina working state",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "fab851ad84fa65529aca8303c9d73b4b7d00ca0e": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c04244298b0e5891108bc026ab446a435ba39ac6"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

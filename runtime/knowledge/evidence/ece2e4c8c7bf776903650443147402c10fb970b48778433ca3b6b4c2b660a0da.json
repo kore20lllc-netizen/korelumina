@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:7226f3caea7ce0ab8e87655151ddb528ba37539f2bcd58b70dd47eb0cf991e00",
+  "type": "commit",
+  "title": "feat(executive): bind delegated owners to planned actions",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240111254,
+  "observedAt": 1786562793000,
+  "contentRef": "git:commit:407eb1ddcad833ed018726e8ba850fb90454f1dd",
+  "checksum": "sha256:d2bd4147ce7d563da359bfa82f13a5cc26366c6e3e651b51714718ad58b3b77b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1408,
+    "genesisAdmissionIdentity": "genesis-admission:2e40574d059635f3e4f3a3b76de8687b731f307503fbebaa8c07eff918ef519f",
+    "historicalSourceId": "genesis-source:commit:407eb1ddcad833ed018726e8ba850fb90454f1dd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:407eb1ddcad833ed018726e8ba850fb90454f1dd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "407eb1ddcad833ed018726e8ba850fb90454f1dd",
+      "parentShas": [
+        "2942bccb187f372529f2cff74ed69abfe31f196a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786562793000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786562793000
+      },
+      "subject": "feat(executive): bind delegated owners to planned actions",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/action/ExecutiveDelegationActionProposalService.ts",
+        "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveDelegationActionProposalService.test.ts",
+        "apps/lumina-runtime/src/executive/action/index.ts"
+      ],
+      "changedPathsByParent": {
+        "2942bccb187f372529f2cff74ed69abfe31f196a": [
+          "apps/lumina-runtime/src/executive/action/ExecutiveDelegationActionProposalService.ts",
+          "apps/lumina-runtime/src/executive/action/__tests__/ExecutiveDelegationActionProposalService.test.ts",
+          "apps/lumina-runtime/src/executive/action/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:407eb1ddcad833ed018726e8ba850fb90454f1dd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

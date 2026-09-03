@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:477bcd524c253622dd2fa608044fa7b4b4c4e154e5a529101eb8b4406712cb58",
+  "type": "commit",
+  "title": "fix(knowledge): preserve neutral capsule styling",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240095342,
+  "observedAt": 1786050522000,
+  "contentRef": "git:commit:1eb05124406f7de81bc2776d993ae19f375b644f",
+  "checksum": "sha256:12b5340da26689cdc1b981fe7b38479a48b659d8125b8635c9c04047afa79e58",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1155,
+    "genesisAdmissionIdentity": "genesis-admission:fbe5ebf5d152b73ea0881e2b3331ef6cc4f3be45e013caec36777c492720a686",
+    "historicalSourceId": "genesis-source:commit:1eb05124406f7de81bc2776d993ae19f375b644f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1eb05124406f7de81bc2776d993ae19f375b644f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1eb05124406f7de81bc2776d993ae19f375b644f",
+      "parentShas": [
+        "ed4c4ff689ca597ebc7c7e86adae80ca36295655"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786050522000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786050522000
+      },
+      "subject": "fix(knowledge): preserve neutral capsule styling",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+      ],
+      "changedPathsByParent": {
+        "ed4c4ff689ca597ebc7c7e86adae80ca36295655": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1eb05124406f7de81bc2776d993ae19f375b644f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

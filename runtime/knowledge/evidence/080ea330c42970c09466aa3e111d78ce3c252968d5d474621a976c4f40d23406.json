@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:c11cb6fe02aa4406ccd14fdfcc64c446d63c30b76c017cc4688ec64d5b9e4eb6",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Korelumina Deployment Diagnostics — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a#browser-turn=0",
+  "checksum": "c11cb6fe02aa4406ccd14fdfcc64c446d63c30b76c017cc4688ec64d5b9e4eb6",
+  "metadata": {
+    "content": "Use this as the first message in the new conversation.\nKoreLumina Production Development HandoffRoleAct as the lead engineer for KoreLumina.Take ownership of architecture validation, implementation sequencing, regression prevention, and production readiness decisions.Do not assume historical architecture documents are fully accurate. The platform has evolved significantly and many items documented as incomplete are already implemented.Always inspect the current codebase before proposing architecture changes.Mandatory Working RulesOne task at a time.No speculative architecture changes.Inspect first, patch second.Build must remain green after every change.No regressions.Full-file rewrites or safe patch scripts only.Terminal-copyable commands only.Use safe:cat > /tmp/patch.py <<'PY'\n...\nPY\n\npython3 /tmp/patch.pypatch format.Never assume a feature is missing without verifying in source.Verify runtime behavior, not just source code.Current Reconstruction StatusBranch:feature/master-os-reconstructionRuntime stack:GREENVerified:Runtime health endpointRuntime registryRuntime startRuntime stopRuntime restartRuntime metricsRuntime logsRuntime event streamRuntime auto-startRuntime previewDesigner previewDeveloper previewAI previewActive project synchronizationRuntime diagnostics workspaceRuntime recovery metricsRuntime restart historyRuntime monitoring dashboardRecently CompletedRuntime Recovery MetricsImplemented:restartHistoryrestart trackingrestart metrics APIruntime diagnostics recovery tableEndpoints verified:GET /api/runtime/metrics\nPOST /api/runtime/restartMetrics now expose:{\n  \"restarts\": [\n    {\n      \"projectId\": \"...\",\n      \"count\": 1,\n      \"lastRestartAt\": ...,\n      \"lastRecoveredAt\": ...\n    }\n  ]\n}Verified working.Project Hard DeleteImplemented:Runtime route:DELETE /api/runtime/projects/:projectIdFile:apps/lumina-runtime/src/routes/projects.tsBehavior:stop runtimeremove workspace directoryreturn successVerified via:curl -X DELETE \\\nhttp://localhost:4100/api/runtime/projects/delete-testResponse:{\n  \"ok\": true,\n  \"deleted\": true\n}Runtime deletion confirmed.Important Architecture CorrectionOriginal architecture documents assumed:Project = local repository entryCurrent reality:Project\n├─ Runtime workspace folder\n├─ Runtime metadata\n├─ Builder metadata\n├─ Active project state\n├─ Runtime session\n└─ Preview lifecycleAny project lifecycle operation must handle all layers.Current Known IssueDashboard delete UX still requires validation.Source contains:deleteRuntimeProject(projectId)and:projectRepository.remove(projectId)but UI behavior must be verified against current running build.Inspect before modifying.Do not assume delete flow is broken without runtime/network verification.Architecture Guidance Going ForwardKoreLumina is no longer in recovery mode.Most runtime/preview failures are resolved.Priority is now:Production ReadinessComplete project lifecyclecreateimportduplicateexportdeleteRuntime stabilitycrash recoveryorphan cleanupmonitoringWorkspace persistenceTeam/workspace managementDeployment pipelineBuilder-to-runtime synchronizationWhite-label infrastructureEnterprise featuresAvoid re-opening already solved preview/runtime investigations unless evidence shows a regression.Required Workflow Before Every ChangeAlways:Inspect implementation.Determine actual current behavior.Compare against intended behavior.Identify missing layer.Patch smallest possible surface.Build.Verify.Commit.Never start coding before completing steps 1–4.Current ObjectiveContinue KoreLumina toward production-grade readiness.Do not revisit resolved runtime recovery work unless a regression is proven.Focus on missing production capabilities rather than reconstruction of already-functional systems.",
+    "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "bfdc7962-4dac-4b57-a6cc-265a98b4d8ca",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2f6ed4-4a28-83ea-bdf8-94476c3af07a:message:bfdc7962-4dac-4b57-a6cc-265a98b4d8ca",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a#browser-turn=0",
+    "sourceRevision": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d",
+    "segmentAvailability": "available",
+    "conversationChecksum": "ddc4f42caa04a69593c40fb381b1ce64b4dc77c4d268ceb871d958b52704a047",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d",
+      "exportRevision": "sha256:43824ffd7fb6867b9f2c3e02a60e89c280dd90f23b9c8efd6904d63a7973de4d"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630644477
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2f6ed4-4a28-83ea-bdf8-94476c3af07a:message:bfdc7962-4dac-4b57-a6cc-265a98b4d8ca"
+    ],
+    "conversation": [
+      "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a"
+    ]
+  }
+}

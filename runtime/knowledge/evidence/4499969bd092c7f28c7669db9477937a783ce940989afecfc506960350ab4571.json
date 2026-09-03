@@ -1,0 +1,133 @@
+{
+  "id": "genesis-evidence:8ea03163eb0206b5f9fbcadab971a1c3971e8cb0f1938ac53f5aac651ff35c57",
+  "type": "commit",
+  "title": "chore(wip): preserve knowledge operations local work",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240114887,
+  "observedAt": 1786942088000,
+  "contentRef": "git:commit:02d0794d3575acfec9b445d693006c75ab7772ad",
+  "checksum": "sha256:79c6938c116e86021d19d82d2849964a1b1671909ce3dcf3c89dc6a492f0d07d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1459,
+    "genesisAdmissionIdentity": "genesis-admission:0b45a47ebf8ab30fc3acecbc778079efdb119e2b3a18156211a1f04cd75234fe",
+    "historicalSourceId": "genesis-source:commit:02d0794d3575acfec9b445d693006c75ab7772ad",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:02d0794d3575acfec9b445d693006c75ab7772ad",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "02d0794d3575acfec9b445d693006c75ab7772ad",
+      "parentShas": [
+        "5f92eb4dad4fdff7444a20a898c904a759e281bc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786942088000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786942088000
+      },
+      "subject": "chore(wip): preserve knowledge operations local work",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/metrics/KnowledgeExecutiveMetrics.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/metrics/KnowledgeMetricsOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/metrics/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/knowledgeCapsuleProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/reasoning/KnowledgeReasoningPanel.tsx",
+        "apps/lumina-builder/src/services/educationService.ts",
+        "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsEvidenceAdmissionPolicy.ts",
+        "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsService.ts",
+        "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsCanonicalAdmission.test.ts",
+        "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsCoverage.test.ts",
+        "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsEvidenceAdmissionPolicy.test.ts",
+        "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsHealthContract.test.ts",
+        "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md",
+        "docs/archive/knowledge-operations/README.md",
+        "docs/archive/knowledge-operations/v1/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_BLUEPRINT.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_EXECUTIVE_SITUATION_ROOM.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_GRAPH_EXPLORER.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_IMPLEMENTATION_ROADMAP.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_INFORMATION_ARCHITECTURE.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_KNOWLEDGE_OBJECT_MODEL.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_MASTER_SPECIFICATION.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_MOTION_SYSTEM.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_ORGANIZATIONAL_MEMORY_EXPLORER.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_RUNTIME_DATA_CONTRACT.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_SPATIAL_ARCHITECTURE.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_UI_COMPONENT_SPECIFICATION.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_VALIDATION_WORKBENCH.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_VISUAL_LANGUAGE.md",
+        "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md",
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+        "docs/governance/CONSTITUTIONAL_DOCUMENT_GOVERNANCE.md",
+        "package.json",
+        "scripts/verify-knowledge-operations-doc-governance.sh"
+      ],
+      "changedPathsByParent": {
+        "5f92eb4dad4fdff7444a20a898c904a759e281bc": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/metrics/KnowledgeExecutiveMetrics.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/metrics/KnowledgeMetricsOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/metrics/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/knowledgeCapsuleProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/reasoning/KnowledgeReasoningPanel.tsx",
+          "apps/lumina-builder/src/services/educationService.ts",
+          "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsEvidenceAdmissionPolicy.ts",
+          "apps/lumina-runtime/src/knowledge-operations/KnowledgeOperationsService.ts",
+          "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsCanonicalAdmission.test.ts",
+          "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsCoverage.test.ts",
+          "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsEvidenceAdmissionPolicy.test.ts",
+          "apps/lumina-runtime/src/knowledge-operations/__tests__/KnowledgeOperationsHealthContract.test.ts",
+          "docs/architecture/reconciliation/KNOWLEDGE_PACKAGE_RECONCILIATION.md",
+          "docs/archive/knowledge-operations/README.md",
+          "docs/archive/knowledge-operations/v1/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V1.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_BLUEPRINT.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_EXECUTIVE_SITUATION_ROOM.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_GRAPH_EXPLORER.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_IMPLEMENTATION_ROADMAP.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_INFORMATION_ARCHITECTURE.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_KNOWLEDGE_OBJECT_MODEL.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_MASTER_SPECIFICATION.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_MOTION_SYSTEM.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_ORGANIZATIONAL_MEMORY_EXPLORER.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_RUNTIME_DATA_CONTRACT.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_SPATIAL_ARCHITECTURE.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_UI_COMPONENT_SPECIFICATION.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_VALIDATION_WORKBENCH.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_V2_VISUAL_LANGUAGE.md",
+          "docs/archive/knowledge-operations/v2/KNOWLEDGE_OPERATIONS_WORKSPACE_SPECIFICATION_V2.md",
+          "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+          "docs/governance/CONSTITUTIONAL_DOCUMENT_GOVERNANCE.md",
+          "package.json",
+          "scripts/verify-knowledge-operations-doc-governance.sh"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:02d0794d3575acfec9b445d693006c75ab7772ad"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

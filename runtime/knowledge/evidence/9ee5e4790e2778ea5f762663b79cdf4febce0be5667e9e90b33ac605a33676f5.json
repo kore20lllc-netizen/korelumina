@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:8649ea19acdc057339a9f4fbc72ef806c83c7a86905066f3bdb8682cd1e88f2f",
+  "type": "conversation",
+  "title": "KoreLumina — AI Planner + Diff - Guardrail Commit Workflow — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=1",
+  "checksum": "8649ea19acdc057339a9f4fbc72ef806c83c7a86905066f3bdb8682cd1e88f2f",
+  "metadata": {
+    "content": "Understood. Guardrails are clear and internally consistent.\nKey enforcement summary:\n\n\nWork strictly within a single module per change\n\n\nDo not proceed unless every pre-commit check passes\n\n\nAlways branch from updated main into feature/<module>-<task>\n\n\nUse kpush only (no direct git push)\n\n\nResolve conflicts via merge + --ours, never rebase or manual edits\n\n\nNo direct interaction with main beyond pull/merge\n\n\nKeep changes minimal and localized\n\n\nTag before risky operations\n\n\nNo conflicts or ambiguities in the rules. Ready to operate within this system.",
+    "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+    "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+    "messageId": "c6220772-0b0c-43a9-8da9-75b6c376e067",
+    "speakerRole": "assistant",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9857-2924-8332-8f39-5540c6ad2c76:message:c6220772-0b0c-43a9-8da9-75b6c376e067",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=1",
+    "sourceRevision": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e800ac0b7adc53925e7f56abf4895a125eb05abba2cf2cab154b8a2b21216975",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf",
+      "exportRevision": "sha256:4fb236227461e640c1e01f0f653538d274dc8840c198ccf8622d6d6f1a36a0bf"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787625718212
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9857-2924-8332-8f39-5540c6ad2c76:message:c6220772-0b0c-43a9-8da9-75b6c376e067"
+    ],
+    "conversation": [
+      "69cc9857-2924-8332-8f39-5540c6ad2c76"
+    ]
+  }
+}

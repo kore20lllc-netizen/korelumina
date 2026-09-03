@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:3289adc25171637ed556b9c4900646cf3ad54e7543818a5de90e2b000705e5de",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Commit Guardrail — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=0",
+  "checksum": "3289adc25171637ed556b9c4900646cf3ad54e7543818a5de90e2b000705e5de",
+  "metadata": {
+    "content": "The snippets you posted don't show the root cause yet. They only confirm:\n\n\nstartProject.ts launches the dev server.\n\n\nregistry.ts only tracks runtime state and logs.\n\n\nNeither file explains why AI Preview renders correctly while Designer and Dev show a white page.\n\n\nGiven the symptoms from the previous investigation:\n\n\nAI Preview works.\n\n\nDesigner canvas is blank.\n\n\nDev canvas is blank.\n\n\nBrowser viewport values are abnormal:\nJavaScriptinnerHeight: 359\nouterHeight: 949\nratio: 2.64\n\n\nThis occurs only in certain panels.\n\n\nThat strongly suggests a frontend rendering/container issue, not runtime startup.\nBefore changing runtime code, inspect the actual browser DOM.\nOpen DevTools in the blank Designer page and run:\nJavaScriptdocument.querySelector(\"#__next\")?.getBoundingClientRect()\nJavaScriptdocument.querySelector(\"main\")?.getBoundingClientRect()\nJavaScript[...document.querySelectorAll(\"iframe\")].map(x => ({\n  src: x.src,\n  width: x.clientWidth,\n  height: x.clientHeight,\n  display: getComputedStyle(x).display,\n  visibility: getComputedStyle(x).visibility,\n  position: getComputedStyle(x).position\n}))\nJavaScriptdocument.body.innerHTML.includes(\"iframe\")\nThen inspect the React root:\nJavaScriptdocument.querySelectorAll('[data-panel]')\nJavaScript[...document.querySelectorAll('*')]\n.filter(el => getComputedStyle(el).overflow === 'hidden')\n.slice(0,50)\nAlso check whether the iframe itself is rendering:\nJavaScriptconst f = document.querySelector(\"iframe\");\nf?.contentWindow?.location?.href\nand\nJavaScriptconst f = document.querySelector(\"iframe\");\n({\n  rect: f?.getBoundingClientRect(),\n  style: f ? getComputedStyle(f) : null\n})\nIf AI Preview works while Designer and Dev don't, the most likely causes are:\nPossibility A — iframe height collapse\nDesigner/Dev panel iframe height becomes 0px because of a flexbox/layout regression.\nTypical symptom:\nJavaScriptheight: 0\nPossibility B — overlay covering iframe\nAn absolutely positioned overlay is sitting on top of the iframe.\nTypical symptom:\nJavaScriptdocument.elementFromPoint(\n  window.innerWidth/2,\n  window.innerHeight/2\n)\nreturns some overlay div instead of iframe.\nPossibility C — wrong preview URL\nAI Preview points at:\nhttp://localhost:<runtime-port>\nDesigner/Dev points at:\nabout:blank\nor stale project URL.\nPossibility D — zoom transform bug\nThe viewport values you reported earlier are unusual enough that a CSS transform or zoom calculation could be collapsing available height in only those panels.\nRun:\nJavaScriptgetComputedStyle(document.body).transform\nJavaScriptgetComputedStyle(document.documentElement).transform\nJavaScriptdocument.body.style.zoom\nJavaScriptdocument.documentElement.style.zoom\nDo not modify startProject.ts or registry.ts yet. The evidence still points toward the Designer/Dev UI layer rather than the runtime process layer.\nPaste the results of the iframe inspection commands above. That will identify whether we're dealing with:\n\n\nruntime failure,\n\n\niframe URL issue,\n\n\nheight collapse,\n\n\noverlay obstruction,\n\n\nor viewport scaling corruption.",
+    "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "8f30a4d2-95f0-42b6-a63f-e00db253022d",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:8f30a4d2-95f0-42b6-a63f-e00db253022d",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=0",
+    "sourceRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+    "segmentAvailability": "available",
+    "conversationChecksum": "163cd330ee4ee43a502972b0cb4705bf42b2cbab6fa122b665523b6cf66f4095",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108",
+      "exportRevision": "sha256:f4ea549b7d6b30544b9a874b82ccc00a0df8c71dfe6eb4aed746e048959f7108"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630637343
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9772-05f8-8325-8512-4aabf0ad0551:message:8f30a4d2-95f0-42b6-a63f-e00db253022d"
+    ],
+    "conversation": [
+      "69cc9772-05f8-8325-8512-4aabf0ad0551"
+    ]
+  }
+}

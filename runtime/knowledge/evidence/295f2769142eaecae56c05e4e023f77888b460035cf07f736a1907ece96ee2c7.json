@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:e39b3bcb5a5fc77592a5f024e65fb23fb8eb102c198bf98a742e56de8503a6ff",
+  "type": "commit",
+  "title": "feat(tooling): certify repository-owned reconstruction toolchain",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240082978,
+  "observedAt": 1783888587000,
+  "contentRef": "git:commit:01d18d57638403db1918d4acf20338b2cf34223c",
+  "checksum": "sha256:10aaf3106dd224be7b40c80fce55a99e4b6bea6da812aa4b81a194561ba3d76d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 918,
+    "genesisAdmissionIdentity": "genesis-admission:3e16ab7b9767493532584766c483faf2277be912ded72a8879d033db8f66e55d",
+    "historicalSourceId": "genesis-source:commit:01d18d57638403db1918d4acf20338b2cf34223c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:01d18d57638403db1918d4acf20338b2cf34223c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "01d18d57638403db1918d4acf20338b2cf34223c",
+      "parentShas": [
+        "3137e9c950c51c4d0c4d0863a44fb458fe59fa73"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783888587000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783888587000
+      },
+      "subject": "feat(tooling): certify repository-owned reconstruction toolchain",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/KORELUMINA_RECONSTRUCTION_RULES.md",
+        "tools/reconstruction/README.md",
+        "tools/reconstruction/apply_patch.py",
+        "tools/reconstruction/inspect.sh",
+        "tools/reconstruction/patch.py",
+        "tools/reconstruction/validate_patch.py"
+      ],
+      "changedPathsByParent": {
+        "3137e9c950c51c4d0c4d0863a44fb458fe59fa73": [
+          "docs/architecture/KORELUMINA_RECONSTRUCTION_RULES.md",
+          "tools/reconstruction/README.md",
+          "tools/reconstruction/apply_patch.py",
+          "tools/reconstruction/inspect.sh",
+          "tools/reconstruction/patch.py",
+          "tools/reconstruction/validate_patch.py"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:01d18d57638403db1918d4acf20338b2cf34223c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

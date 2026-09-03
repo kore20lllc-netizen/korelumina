@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:10ba2bcd9762b74006d56d1233b3272e79e908c5a876bd5625dd9ae1e8480794",
+  "type": "commit",
+  "title": "feat(builder): add shared workspace loading",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076441,
+  "observedAt": 1783143643000,
+  "contentRef": "git:commit:46157d6e3c61b6cb1db0aa87dd192d57df944e94",
+  "checksum": "sha256:d24a67f3a996b7a4c3a1f1de5e506703515318f50abdc00f597aed5164b284b9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 773,
+    "genesisAdmissionIdentity": "genesis-admission:e0b76248b5dab558d2406b15ec067d60843c5849d31934bbb7f29dc6255b2c0c",
+    "historicalSourceId": "genesis-source:commit:46157d6e3c61b6cb1db0aa87dd192d57df944e94",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:46157d6e3c61b6cb1db0aa87dd192d57df944e94",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "46157d6e3c61b6cb1db0aa87dd192d57df944e94",
+      "parentShas": [
+        "93d6004bb230fbba9fa1414581216fadd78a7f57"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143643000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143643000
+      },
+      "subject": "feat(builder): add shared workspace loading",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx"
+      ],
+      "changedPathsByParent": {
+        "93d6004bb230fbba9fa1414581216fadd78a7f57": [
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceLoading.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/wds-workspace-loading-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:46157d6e3c61b6cb1db0aa87dd192d57df944e94"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

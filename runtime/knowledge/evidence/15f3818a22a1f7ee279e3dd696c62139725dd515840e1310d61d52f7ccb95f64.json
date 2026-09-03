@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:41d781c281d4d105bcc53667ad1c99e9a32dd2095b4b106c39447fef3a5534c1",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Reconstruction Plan — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1#browser-turn=3",
+  "checksum": "41d781c281d4d105bcc53667ad1c99e9a32dd2095b4b106c39447fef3a5534c1",
+  "metadata": {
+    "content": "Draft the handoff for the new conversation to continue assigning tasks to repository engineer. One thing I've noticed is Genesis should be auto-updated, meaning that right now what I'm seeing coming is how the Genesis curriculum would be. If it's done, then I will need to manually validate it, like to manually promote it. That will be a lot of work. So we have to come up with a solution where if Genesis is like something that exists already, I don't know if manual validation is required.",
+    "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "d38d6b71-7555-433b-976e-38f8b4d06ea1",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a65e350-1a30-83ea-b88c-ba20cfab26a1:message:d38d6b71-7555-433b-976e-38f8b4d06ea1",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1#browser-turn=3",
+    "sourceRevision": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b",
+    "segmentAvailability": "available",
+    "conversationChecksum": "e153bdb616606df23f26c9fdd74329f29ac49e6e51933a2960a9f85fa8e8c0e4",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b",
+      "exportRevision": "sha256:3a37e5789ba19dd720cc2132fa2cf62eaeff01f53243f3c91187e8269de2a91b"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630730940
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a65e350-1a30-83ea-b88c-ba20cfab26a1:message:d38d6b71-7555-433b-976e-38f8b4d06ea1"
+    ],
+    "conversation": [
+      "6a65e350-1a30-83ea-b88c-ba20cfab26a1"
+    ]
+  }
+}

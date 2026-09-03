@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:5ab646d3a0c9fb35b07639ebbaf0cab3fbc0a0fee9ef2b6f73278ab6de3fb8f2",
+  "type": "commit",
+  "title": "feat(genesis): add historical conversation source adapter",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240123778,
+  "observedAt": 1787553268000,
+  "contentRef": "git:commit:75af848223be1b42dbfd2d99d695b5ca6d2e2445",
+  "checksum": "sha256:3bf15c8646338acd7ca55c69c31a6f6384f056aba8d22a2e847cbc213369da01",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1576,
+    "genesisAdmissionIdentity": "genesis-admission:a11ad14966885965ad3a78dca3c8738b367e09537f44198398e1dbbcda8841d3",
+    "historicalSourceId": "genesis-source:commit:75af848223be1b42dbfd2d99d695b5ca6d2e2445",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:75af848223be1b42dbfd2d99d695b5ca6d2e2445",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "75af848223be1b42dbfd2d99d695b5ca6d2e2445",
+      "parentShas": [
+        "3c69fa6bada5281279a49742f9d3f9845aca22c0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787553268000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787553268000
+      },
+      "subject": "feat(genesis): add historical conversation source adapter",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalConversationSourceAdapter.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalConversationSourceAdapter.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+      ],
+      "changedPathsByParent": {
+        "3c69fa6bada5281279a49742f9d3f9845aca22c0": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalConversationSourceAdapter.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalConversationSourceAdapter.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:75af848223be1b42dbfd2d99d695b5ca6d2e2445"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

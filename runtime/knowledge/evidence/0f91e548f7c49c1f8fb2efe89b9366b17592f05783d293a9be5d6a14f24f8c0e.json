@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:fcf7ac2c21f647024f683c22cf329ccc5297a9d5b081c407b35f6b7d009588c2",
+  "type": "commit",
+  "title": "education: derive governed retrieval competency evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129105,
+  "observedAt": 1787806515000,
+  "contentRef": "git:commit:4b27f1339ea2d7a676257c338d8913c1f6a7328b",
+  "checksum": "sha256:03f5edf3547f78fcb4f563568b5141a162b17e8338721104173aaca33b67a00c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1641,
+    "genesisAdmissionIdentity": "genesis-admission:c993869b6028310ea7edfcb24de305de233ed4123829098a42dcd644ccca2dbb",
+    "historicalSourceId": "genesis-source:commit:4b27f1339ea2d7a676257c338d8913c1f6a7328b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4b27f1339ea2d7a676257c338d8913c1f6a7328b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4b27f1339ea2d7a676257c338d8913c1f6a7328b",
+      "parentShas": [
+        "4ea99e4a49d6c42a50020a16d25b52efb2598ab3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787806515000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787806515000
+      },
+      "subject": "education: derive governed retrieval competency evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/GovernedRetrievalCompetencyEvidenceAdapter.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/GovernedRetrievalCompetencyEvidenceAdapter.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/index.ts"
+      ],
+      "changedPathsByParent": {
+        "4ea99e4a49d6c42a50020a16d25b52efb2598ab3": [
+          "apps/lumina-runtime/src/knowledge-education/GovernedRetrievalCompetencyEvidenceAdapter.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/GovernedRetrievalCompetencyEvidenceAdapter.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4b27f1339ea2d7a676257c338d8913c1f6a7328b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

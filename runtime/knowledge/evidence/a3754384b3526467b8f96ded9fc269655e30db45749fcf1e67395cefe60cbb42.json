@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:f1df9819c22a6ae39590c45a5b6c9962d97968d5964e3e36440584c7aebc6fa4",
+  "type": "commit",
+  "title": "feat(genesis): persist and validate day-zero certification",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240124972,
+  "observedAt": 1787570810000,
+  "contentRef": "git:commit:47bb58da5740926ae834dab5d437bd4a46be60f3",
+  "checksum": "sha256:01da74e5b7067892916e9eaaa44dcb6ce894ca05719a028ab907b153e544af97",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1591,
+    "genesisAdmissionIdentity": "genesis-admission:753300937a704b8fc71042d10d904169f840bbfe16976ef21d10373e0fa53e54",
+    "historicalSourceId": "genesis-source:commit:47bb58da5740926ae834dab5d437bd4a46be60f3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:47bb58da5740926ae834dab5d437bd4a46be60f3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "47bb58da5740926ae834dab5d437bd4a46be60f3",
+      "parentShas": [
+        "415645441c2169618d71f01f2111bb9c55ef9559"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787570810000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787570810000
+      },
+      "subject": "feat(genesis): persist and validate day-zero certification",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationPersistence.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDayZeroCertificationPersistence.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "apps/lumina-runtime/src/routes/genesisDayZeroCertification.ts"
+      ],
+      "changedPathsByParent": {
+        "415645441c2169618d71f01f2111bb9c55ef9559": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationPersistence.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDayZeroCertificationPersistence.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "apps/lumina-runtime/src/routes/genesisDayZeroCertification.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:47bb58da5740926ae834dab5d437bd4a46be60f3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

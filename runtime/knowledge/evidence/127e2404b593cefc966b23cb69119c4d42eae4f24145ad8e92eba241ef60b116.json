@@ -1,0 +1,40 @@
+{
+  "id": "genesis-evidence:43f16b268b4259cd7def404523d9d1c6b3104caf8d7d6e881664abccec86102d",
+  "type": "document",
+  "title": "Lumina Primitive Extraction Registry",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092418,
+  "observedAt": 1785930284000,
+  "contentRef": "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md",
+  "checksum": "sha256:2cf2fbe9e61b7e35586e273b6fd0cfbc7c1295fe7d15367e6ea4c79daf108e69",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1103,
+    "genesisAdmissionIdentity": "genesis-admission:d8f399e38b7247e7f827db73c6a73a1225fc3b8699dbd1b7845024ada715d8f2",
+    "historicalSourceId": "genesis-source:document:derived:a8c4f137e45a8712d85067ed5ac4769fac61c6f6991ef4011b2999b33f0f53d3",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "scope": "Documentation-only",
+    "sourceLocation": "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Primitive Extraction Registry",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a8c4f137e45a8712d85067ed5ac4769fac61c6f6991ef4011b2999b33f0f53d3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

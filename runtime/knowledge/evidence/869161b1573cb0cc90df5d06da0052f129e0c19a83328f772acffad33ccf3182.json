@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:bcb982884b51b7ae14970c236cdd8c7c2879101b962d0547228d0d45243e6d08",
+  "type": "commit",
+  "title": "feat(knowledge-v3): establish executive ribbon baseline",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084594,
+  "observedAt": 1784673441000,
+  "contentRef": "git:commit:b6ec8db00e9e9521cfd6a69aca061eaaffadf1b8",
+  "checksum": "sha256:7be068d44855de923efefe9527381d2b71f6d96b1ae2527efbc4be2266ecb754",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 951,
+    "genesisAdmissionIdentity": "genesis-admission:04096dc145279cb7127bf4284400230ea6af07a048c0ab5ba2c46f591e0707d4",
+    "historicalSourceId": "genesis-source:commit:b6ec8db00e9e9521cfd6a69aca061eaaffadf1b8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b6ec8db00e9e9521cfd6a69aca061eaaffadf1b8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b6ec8db00e9e9521cfd6a69aca061eaaffadf1b8",
+      "parentShas": [
+        "5514de2e830bef4c5350c63da92639906167dbdc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784673441000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784673441000
+      },
+      "subject": "feat(knowledge-v3): establish executive ribbon baseline",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/KnowledgeOperationsV3Workspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ActivityRail.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx.bak.20260721085525",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx.bak.20260721085618",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/InspectorDock.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ProductionNavigator.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/SpatialCanvas.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/WorkspaceShell.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts.bak.20260721085525"
+      ],
+      "changedPathsByParent": {
+        "5514de2e830bef4c5350c63da92639906167dbdc": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/KnowledgeOperationsV3Workspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ActivityRail.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx.bak.20260721085525",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx.bak.20260721085618",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/InspectorDock.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ProductionNavigator.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/SpatialCanvas.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/WorkspaceShell.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts.bak.20260721085525"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b6ec8db00e9e9521cfd6a69aca061eaaffadf1b8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

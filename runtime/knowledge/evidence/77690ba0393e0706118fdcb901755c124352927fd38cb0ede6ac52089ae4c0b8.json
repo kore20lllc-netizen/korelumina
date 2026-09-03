@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:b2c292682dbf80698aa6f1102bbda66dc48ffce594c56482d24bd59edb06b258",
+  "type": "document",
+  "title": "GA-002 — Engineering Intelligence Acquisition Framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085225,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/chief-agent/GA-002_ENGINEERING_INTELLIGENCE_ACQUISITION_FRAMEWORK.md",
+  "checksum": "sha256:fb35173be95333635696fcb8dafcda7af3fbee97d0e6ff5921817623c5480db1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 964,
+    "genesisAdmissionIdentity": "genesis-admission:c1f0722a80af5bb22354509e0e3341c7df35c89e4d39bae61e19acfd33596e24",
+    "historicalSourceId": "genesis-source:document:derived:f956706314abdae0fbac678fbdc6059c84532f8e5846468a4d60f3667fd7dd26",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Vision 2050 Alignment",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/chief-agent/GA-002_ENGINEERING_INTELLIGENCE_ACQUISITION_FRAMEWORK.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "GA-002 — Engineering Intelligence Acquisition Framework",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/chief-agent/GA-002_ENGINEERING_INTELLIGENCE_ACQUISITION_FRAMEWORK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:f956706314abdae0fbac678fbdc6059c84532f8e5846468a4d60f3667fd7dd26"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

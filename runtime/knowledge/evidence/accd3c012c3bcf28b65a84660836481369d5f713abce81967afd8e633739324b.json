@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:12fdad0883f3b0df94e48585a8e006d704253d1c48d77e02e3153a3cd91da98d",
+  "type": "commit",
+  "title": "feat(lumina): add appearance controller api",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080647,
+  "observedAt": 1783599807000,
+  "contentRef": "git:commit:7a687fde6fae3ac111d7210b78bdedb9fa1ddeca",
+  "checksum": "sha256:782e25c591d3baa40d7ca8f6e77dc54f90157e7fa04b7e434c579828c4da2621",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 868,
+    "genesisAdmissionIdentity": "genesis-admission:d72b65b8a861c8ada3554bd87db1463d7e224ea5effa6342eb34c58b973d2d8c",
+    "historicalSourceId": "genesis-source:commit:7a687fde6fae3ac111d7210b78bdedb9fa1ddeca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7a687fde6fae3ac111d7210b78bdedb9fa1ddeca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7a687fde6fae3ac111d7210b78bdedb9fa1ddeca",
+      "parentShas": [
+        "f8021b09236e775bd51e59ba356379e0a9d99652"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783599807000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783599807000
+      },
+      "subject": "feat(lumina): add appearance controller api",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/appearance/controller/createAppearanceController.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/controller/index.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/controller/types.ts",
+        "apps/lumina-builder/src/components/lumina/appearance/index.ts"
+      ],
+      "changedPathsByParent": {
+        "f8021b09236e775bd51e59ba356379e0a9d99652": [
+          "apps/lumina-builder/src/components/lumina/appearance/controller/createAppearanceController.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/controller/index.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/controller/types.ts",
+          "apps/lumina-builder/src/components/lumina/appearance/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7a687fde6fae3ac111d7210b78bdedb9fa1ddeca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

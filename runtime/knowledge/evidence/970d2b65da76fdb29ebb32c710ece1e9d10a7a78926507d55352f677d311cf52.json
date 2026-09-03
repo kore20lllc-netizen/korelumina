@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:42149bd40eb10b4085ac69815e49c0b93bdac8ab5a0bd08087719e83c1e3c859",
+  "type": "conversation",
+  "title": "KoreLumina — Builder Core - Fix JournalPanel Crash — message 4",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=4",
+  "checksum": "42149bd40eb10b4085ac69815e49c0b93bdac8ab5a0bd08087719e83c1e3c859",
+  "metadata": {
+    "content": "Current task: Stop esbuild from breaking the build (UI must run)\n\nReality (no fluff)\nYou’re stuck in a loop because:\n\n\nNext 15 WILL try to bundle esbuild\n\n\nesbuild contains .d.ts inside runtime path\n\n\nWebpack cannot parse that\n\n\nYour preview route is poisoning the entire app build\n\n\nYou tried:\n\n\ndynamic import ❌\n\n\nrequire ❌\n\n\nserverExternalPackages ❌\n\n\n→ All still let webpack touch esbuild\n\nCorrect move (for NOW): REMOVE esbuild from runtime path\nYou said:\n\nAI / preview logic is NOT part of this task\n\nSo stop letting it break the UI.\n\nBash — HARD STABILIZATION (copy/paste)\n1. Replace preview route with safe stub\nBashcat <<'EOF' > app/api/dev/preview/route.ts\nimport { NextRequest, NextResponse } from \"next/server\";\n\nexport const runtime = \"nodejs\";\n\nexport async function GET(req: NextRequest) {\n  const { searchParams } = new URL(req.url);\n  const projectId = searchParams.get(\"projectId\");\n\n  if (!projectId) {\n    return NextResponse.json({ error: \"Missing projectId\" }, { status: 400 });\n  }\n\n  // 🔒 STABLE MODE: disable esbuild completely\n  return NextResponse.json({\n    ok: true,\n    projectId,\n    mode: \"stub-preview\"\n  });\n}\nEOF\n\n2. Clean + restart\nBashrm -rf .next\nnpm run dev\n\nExpected result (must be YES)\n\n\nbuilder loads → yes\n\n\nno .d.ts error → yes\n\n\nfiletree works → yes\n\n\neditor works → yes\n\n\npreview no longer crashes → yes\n\n\nPreview will NOT render real output → this is intentional\n\nWhy this is the correct move\nYou are in Builder Core stabilization phase, not preview engine phase.\nRight now:\n\n\nUI = priority ✅\n\n\nPreview engine = separate module ❌\n\n\nYou isolate the failure instead of letting it break everything.\n\nWhen to bring esbuild back\nLater, do it properly via:\n\n\nseparate worker\n\n\nor edge function\n\n\nor external service\n\n\nNOT inside Next route.\n\nLock this state\nBashgit add app/api/dev/preview/route.ts\ngit commit -m \"stabilize(preview): stub preview to unblock builder UI (esbuild isolated)\"\ngit push origin main\n\nTask complete.",
+    "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+    "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "messageId": "31ff6f9d-4d8a-4afb-b2ac-8801647e785e",
+    "speakerRole": "assistant",
+    "messageOrder": 4,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:31ff6f9d-4d8a-4afb-b2ac-8801647e785e",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035#browser-turn=4",
+    "sourceRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+    "segmentAvailability": "available",
+    "conversationChecksum": "37984edfedd9f57e78d643b85f2079133f345b1d12dfbc741c2850d3a85fb791",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99",
+      "exportRevision": "sha256:ab64cb47e0e5ea60233e4274643b3b7a6a230364f574c42834b5b065bb622b99"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787610831796
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc7bdc-82ac-8329-b252-f0bce4d5a035:message:31ff6f9d-4d8a-4afb-b2ac-8801647e785e"
+    ],
+    "conversation": [
+      "69cc7bdc-82ac-8329-b252-f0bce4d5a035"
+    ]
+  }
+}

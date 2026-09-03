@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:64e2d04a410d6bedb2d165a1bf7b5598953d2271293a11423e768820b9b5d26a",
+  "type": "commit",
+  "title": "feat(genesis): gate organizational memory consumption by current policy",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240123464,
+  "observedAt": 1787546944000,
+  "contentRef": "git:commit:7f24757496f97f496f026a941513ad5dd2974cf3",
+  "checksum": "sha256:e3d94909aeb7678fc2528227327bac02dd644defd99658a2ba1df685d7cd7117",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1572,
+    "genesisAdmissionIdentity": "genesis-admission:1e2778dfb554d66caa80b633c4a1089c3cc4b1e80cd25eb0ad3f40c40218d12d",
+    "historicalSourceId": "genesis-source:commit:7f24757496f97f496f026a941513ad5dd2974cf3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7f24757496f97f496f026a941513ad5dd2974cf3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7f24757496f97f496f026a941513ad5dd2974cf3",
+      "parentShas": [
+        "570de92d03981fdc4eca3ff82dfb81035ff3555d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787546944000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787546944000
+      },
+      "subject": "feat(genesis): gate organizational memory consumption by current policy",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/RuntimeOrganizationalMemoryProvider.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyOrganizationalMemoryView.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisCurrentPolicyOrganizationalMemoryView.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+      ],
+      "changedPathsByParent": {
+        "570de92d03981fdc4eca3ff82dfb81035ff3555d": [
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-platform/runtime/organizational-memory/RuntimeOrganizationalMemoryProvider.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyOrganizationalMemoryView.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisCurrentPolicyOrganizationalMemoryView.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7f24757496f97f496f026a941513ad5dd2974cf3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

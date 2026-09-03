@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:a3ac61e54d62637df9786eacb52234aeaf3fa2b03f6179c8d5434a853e36087b",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Repository Engineer Workflow — message 2",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983#browser-turn=2",
+  "checksum": "a3ac61e54d62637df9786eacb52234aeaf3fa2b03f6179c8d5434a853e36087b",
+  "metadata": {
+    "content": "You’re right. The last patch violated the certified UI contract by restructuring CanonicalReview.tsx internally. We should undo that UI change completely before doing anything else.\nRestore only the certified Canonical Review component to the pushed 5390a00 version. Do not touch the backend/service work yet:\nBashset -euo pipefail\n\necho \"===== RESTORE CERTIFIED CANONICAL REVIEW UI =====\"\n\ngit restore \\\n  --source=5390a00 \\\n  -- \\\n  apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx\n\necho\necho \"===== VERIFY UI FILE MATCHES CERTIFIED HEAD =====\"\n\ngit diff \\\n  5390a00 \\\n  -- \\\n  apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx\n\ntest -z \"$(\n  git diff \\\n    5390a00 \\\n    -- \\\n    apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx\n)\"\n\necho \"PASS: Canonical Review UI exactly matches certified 5390a00.\"\n\necho\necho \"===== VERIFY BACKEND MILESTONE 4 WORK REMAINS =====\"\n\ngit status --short\n\necho\necho \"===== BUILD =====\"\n\nnpm run build\n\necho\necho \"===== FINAL STATUS =====\"\n\ngit status --short\nAfter this, visually reopen:\nKnowledge Operations → Production → Canonical Review\nThe governance queue, capsule cards, “Capsules awaiting canonical decision,” readiness bars, governance chain, supersession preview, timeline, and pending-decisions composition should be back exactly as before.\nDo not commit yet.\nThe corrected implementation strategy is now:\nCertified CanonicalReview.tsx stays structurally untouched.\nWe will wire data around it by introducing a separate adapter/container and narrowly replacing fixture values through its existing contract. No new cards, no new action rows, no changed nested-card geometry, no changed panel ownership, and no altered visual lifecycle. The backend route/service changes remain valid; the regression was entirely in how I wired the UI.",
+    "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "80d16d6d-d5b9-4761-b771-eefa896ac10f",
+    "speakerRole": "assistant",
+    "messageOrder": 2,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a7aa9b5-8198-83ea-bdbc-f153cd023983:message:80d16d6d-d5b9-4761-b771-eefa896ac10f",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983#browser-turn=2",
+    "sourceRevision": "sha256:ae951192b5cd00c4648141e570d0c079d6bba05df93117934c024a5fecb77b49",
+    "segmentAvailability": "available",
+    "conversationChecksum": "4d9f606a4a1a261b6fdca8225f482abf4f0856efcbc43cb2f4df64395568bc4b",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:ae951192b5cd00c4648141e570d0c079d6bba05df93117934c024a5fecb77b49",
+      "exportRevision": "sha256:ae951192b5cd00c4648141e570d0c079d6bba05df93117934c024a5fecb77b49"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630844951
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a7aa9b5-8198-83ea-bdbc-f153cd023983:message:80d16d6d-d5b9-4761-b771-eefa896ac10f"
+    ],
+    "conversation": [
+      "6a7aa9b5-8198-83ea-bdbc-f153cd023983"
+    ]
+  }
+}

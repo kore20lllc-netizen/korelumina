@@ -1,0 +1,182 @@
+{
+  "id": "KP-2026-000048",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1788240130386,
+  "updatedAt": 1788240130386,
+  "data": {
+    "id": "KP-2026-000048",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66",
+        "candidateType": "CandidateArtifact",
+        "title": "Chief Agent Operating Model",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035"
+          ],
+          "genesisReplay": [
+            "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+          ]
+        },
+        "extractedAt": 1788240130385,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130385,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+          "checksum": "sha256:b732250c11dc3ee57098ab9b9bb843989c11e3e3272544b8080803be5edcde4a",
+          "capturedAt": 1788240130381,
+          "observedAt": 1787873068000,
+          "authorityClass": "documentation",
+          "approvalState": "Approved",
+          "owner": "Chief Systems Architect",
+          "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+          "version": "1.0",
+          "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "document",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+            "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+            "genesisManifestIndex": 1656,
+            "genesisAdmissionIdentity": "genesis-admission:1b14d90d6fdbe01ca926d3f83a2165acc8f8f4b967bf4f2b2d5dc222d382a8fa",
+            "historicalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "documentation",
+            "approvalState": "Approved",
+            "owner": "Chief Systems Architect",
+            "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+            "version": "1.0",
+            "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+            "documentClassification": "document",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "Chief Agent Operating Model",
+              "status": "Approved",
+              "documentClassification": "document",
+              "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1788240130385,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66"
+      ],
+      "sourceLocations": [
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+      ],
+      "contentRefs": [
+        "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "documentation",
+    "approvalState": "pending_review",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1788240130385,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:4940ff8169e4e0ce40b24fa83c94992ed98a108e31320432db48afe7ded56a66",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1788240130385,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1788240130386
+      },
+      {
+        "state": "compiled",
+        "at": 1788240130386
+      },
+      {
+        "state": "validated",
+        "at": 1788240130386
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1788240130386
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1788240130386
+    },
+    "createdAt": 1788240130386,
+    "updatedAt": 1788240130386,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ]
+    }
+  }
+}

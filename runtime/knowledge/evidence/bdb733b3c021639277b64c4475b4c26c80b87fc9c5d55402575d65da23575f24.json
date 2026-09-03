@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:37842b0ea3cd1f5c08b5e54c0d4a3ad9be988ff829663ef3f5b53ae0b521e4e8",
+  "type": "document",
+  "title": "KoreLumina Architecture Baseline 1.0",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078408,
+  "observedAt": 1783203226000,
+  "contentRef": "docs/architecture/ARCHITECTURE_BASELINE_1_0.md",
+  "checksum": "sha256:89f2f160819614ded7c417280a042af468428c39037275cfd1ef89abfd3d5fec",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 818,
+    "genesisAdmissionIdentity": "genesis-admission:eaeb4aaadddd5b5f6c76ba225ecc9cc46a316af2e099393e018a04f57605d511",
+    "historicalSourceId": "genesis-source:document:derived:80b8ae6c63573245920d94c446ce0a65544b9b635488408a5b6e1bb04d91b397",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Architecture",
+    "approvalState": "approved",
+    "owner": "Chief Systems Architect",
+    "version": "1.0.0",
+    "sourceLocation": "docs/architecture/ARCHITECTURE_BASELINE_1_0.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Architecture Baseline 1.0",
+      "status": "Canonical",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/ARCHITECTURE_BASELINE_1_0.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:80b8ae6c63573245920d94c446ce0a65544b9b635488408a5b6e1bb04d91b397"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

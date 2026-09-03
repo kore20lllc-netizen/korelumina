@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:1ae0de9fdc3ea75f37f56984671dfb73ed636f4bf56be91c453b0c4b5de3cf5a",
+  "type": "commit",
+  "title": "feat(knowledge): add organizational memory to agent context",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240109050,
+  "observedAt": 1786444639000,
+  "contentRef": "git:commit:f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e",
+  "checksum": "sha256:90f81237dd7965dec2b240f8b933aa40498e7ecdbf58f364633268b9925a6c66",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1376,
+    "genesisAdmissionIdentity": "genesis-admission:e27daaa4e495af6db529f61ed83a1be77b22ee19eda3d13c108ed8f49600a206",
+    "historicalSourceId": "genesis-source:commit:f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e",
+      "parentShas": [
+        "6c72c1db90df4eafa33da7c887be17e8b2e88dc3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786444639000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786444639000
+      },
+      "subject": "feat(knowledge): add organizational memory to agent context",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderOrganizationalMemory.test.ts"
+      ],
+      "changedPathsByParent": {
+        "6c72c1db90df4eafa33da7c887be17e8b2e88dc3": [
+          "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderOrganizationalMemory.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f23c26f5cce9b6c7aedb0d3dc5baaf5bafdc5c0e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

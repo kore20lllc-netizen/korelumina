@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d62905cc6c159bc44c7cc71df76854841f47e5ccbdbbe17653277d62a34c1b58",
+  "type": "commit",
+  "title": "feat(builder): add shared workspace empty state",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076400,
+  "observedAt": 1783143526000,
+  "contentRef": "git:commit:93d6004bb230fbba9fa1414581216fadd78a7f57",
+  "checksum": "sha256:f7e758665e940d2d711c64d58c5d26f4ed1098fdb5d82060965b601b5dc88291",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 772,
+    "genesisAdmissionIdentity": "genesis-admission:e5349cf109f106ce211d6aeb2ccc5aa1011679be9da7742b9febb51b4d08a90c",
+    "historicalSourceId": "genesis-source:commit:93d6004bb230fbba9fa1414581216fadd78a7f57",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:93d6004bb230fbba9fa1414581216fadd78a7f57",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "93d6004bb230fbba9fa1414581216fadd78a7f57",
+      "parentShas": [
+        "c905b2d360d2425c3a1c335eaefe76d878509be8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143526000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783143526000
+      },
+      "subject": "feat(builder): add shared workspace empty state",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx"
+      ],
+      "changedPathsByParent": {
+        "c905b2d360d2425c3a1c335eaefe76d878509be8": [
+          "apps/lumina-builder/src/components/workspaces/shared/WorkspaceEmptyState.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/wds-workspace-empty-state-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:93d6004bb230fbba9fa1414581216fadd78a7f57"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

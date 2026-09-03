@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:453e88dfec9e21eab18b03d551881b0fcce2390673dffa2bb5716e90c8101006",
+  "type": "commit",
+  "title": "docs(architecture): certify lpr-011 executive title metrics composition",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240090749,
+  "observedAt": 1785907377000,
+  "contentRef": "git:commit:f4e988527487cb3bfd7e81b933e7c8d413a10944",
+  "checksum": "sha256:c0fb95cd2ef76bf75c039d6f8dd35f8dd74b0b3b6da9c971f5fb65f3694a9846",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1072,
+    "genesisAdmissionIdentity": "genesis-admission:09d79140c4e2a1e1597738ade1574dd362398f71951b31842d42b42f65914024",
+    "historicalSourceId": "genesis-source:commit:f4e988527487cb3bfd7e81b933e7c8d413a10944",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f4e988527487cb3bfd7e81b933e7c8d413a10944",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f4e988527487cb3bfd7e81b933e7c8d413a10944",
+      "parentShas": [
+        "c6638b87abf01aba3dda0847802573f9144b1058"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785907377000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785907377000
+      },
+      "subject": "docs(architecture): certify lpr-011 executive title metrics composition",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md",
+        "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md"
+      ],
+      "changedPathsByParent": {
+        "c6638b87abf01aba3dda0847802573f9144b1058": [
+          "docs/architecture/LUMINA_CERTIFIED_EXTRACTION_EXECUTION_PLAN.md",
+          "docs/architecture/LUMINA_PRIMITIVE_EXTRACTION_REGISTRY.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f4e988527487cb3bfd7e81b933e7c8d413a10944"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

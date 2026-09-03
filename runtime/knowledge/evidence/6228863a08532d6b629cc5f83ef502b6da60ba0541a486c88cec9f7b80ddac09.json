@@ -1,0 +1,58 @@
+{
+  "id": "genesis-evidence:5bfbbe8e8f10a3f7b0232f45722883d3e3ec6e07894f35f76197f30ee8b9b282",
+  "type": "document",
+  "title": "Recovery Workflow",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240131156,
+  "observedAt": 1787873068000,
+  "contentRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md#section:recovery-workflow:76-87",
+  "checksum": "sha256:d08d1e57b681dacfc673abc3e845bbbe2c1b47369181e78674e10d29ac750617",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1665,
+    "genesisAdmissionIdentity": "genesis-admission:ee81e14e6a5cb3f9be5c854f2ec0586f22115de1cdf7fa4a44b817b7312c27ba",
+    "historicalSourceId": "genesis-source:document:derived:ec65281c8c7eee1eb9ff657db831a345f7bac9637affd7a1fc5190d5472dd719",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "documentation",
+    "owner": "Chief Systems Architect",
+    "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
+    "version": "1.0",
+    "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+    "lineStart": 76,
+    "lineEnd": 87,
+    "sectionTitle": "Recovery Workflow",
+    "sectionSlug": "recovery-workflow",
+    "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+    "content": "## Recovery Workflow\n\nWhen failure occurs:\n\n1. Stop speculative execution\n2. Identify failing subsystem\n3. Locate last green recovery tag\n4. Inspect root cause\n5. Propose smallest safe fix\n6. Validate build/runtime state\n7. Preserve lesson as engineering knowledge\n",
+    "documentClassification": "document",
+    "discoveryMethod": "documentation-section-v1",
+    "sourceMetadata": {
+      "title": "Recovery Workflow",
+      "status": "Approved",
+      "documentClassification": "document",
+      "sourceLocation": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "lineStart": 76,
+      "lineEnd": 87,
+      "sectionTitle": "Recovery Workflow",
+      "sectionSlug": "recovery-workflow",
+      "currentAuthority": "UNRESOLVED",
+      "authorityBasis": [],
+      "authorityDeclarationComplete": false,
+      "parentHistoricalSourceId": "genesis-source:document:derived:2284e9a8cda4e6a63f76d4a62359d6d6fc0c30eb76ff08a652f7855c01152035",
+      "content": "## Recovery Workflow\n\nWhen failure occurs:\n\n1. Stop speculative execution\n2. Identify failing subsystem\n3. Locate last green recovery tag\n4. Inspect root cause\n5. Propose smallest safe fix\n6. Validate build/runtime state\n7. Preserve lesson as engineering knowledge\n"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ec65281c8c7eee1eb9ff657db831a345f7bac9637affd7a1fc5190d5472dd719"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

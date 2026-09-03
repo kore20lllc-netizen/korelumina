@@ -1,0 +1,43 @@
+{
+  "id": "genesis-evidence:010e534b812a31342f45afc95a1cf4d6febca6abe019fc370e6f4eb8fe2a2c01",
+  "type": "document",
+  "title": "KoreLumina Principles",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077882,
+  "observedAt": 1783197813000,
+  "contentRef": "docs/constitution/PRINCIPLES.md",
+  "checksum": "sha256:db094ed96f7c902e1ccf12d85c805dd029fa60b58cb5c116e698eb5b6f07153d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 806,
+    "genesisAdmissionIdentity": "genesis-admission:75dea65f975407b4027f942e35a3904b849cc10234308622c1701fff9a70a282",
+    "historicalSourceId": "genesis-source:document:derived:0aaf999e42c258cce69a4009eb08a5ec50d047c4b05dd584c8638225ea914bd7",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "Constitution",
+    "approvalState": "approved",
+    "owner": "Constitutional Office",
+    "version": "1.0.0",
+    "sourceLocation": "docs/constitution/PRINCIPLES.md",
+    "documentClassification": "constitution",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KoreLumina Principles",
+      "status": "Canonical",
+      "documentClassification": "constitution",
+      "sourceLocation": "docs/constitution/PRINCIPLES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:0aaf999e42c258cce69a4009eb08a5ec50d047c4b05dd584c8638225ea914bd7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

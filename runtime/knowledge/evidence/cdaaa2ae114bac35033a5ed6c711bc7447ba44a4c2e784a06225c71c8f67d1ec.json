@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:55119f6cbeb52bd26d08d653d0f0d5440304344b902cb629158b7d4bebc8aa75",
+  "type": "commit",
+  "title": "feat(knowledge): add operations navigation framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078754,
+  "observedAt": 1783406090000,
+  "contentRef": "git:commit:231e6c93eada787af69995601db28b4d63b3620c",
+  "checksum": "sha256:2e884c8536fd5bb9d3e583e82206c57ed2999317e3c4de56f118c7d02f05f420",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 826,
+    "genesisAdmissionIdentity": "genesis-admission:4308ef937d99420b78d89d21dfbc2024d7a6dadaa24441348fc070bce126666b",
+    "historicalSourceId": "genesis-source:commit:231e6c93eada787af69995601db28b4d63b3620c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:231e6c93eada787af69995601db28b4d63b3620c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "231e6c93eada787af69995601db28b4d63b3620c",
+      "parentShas": [
+        "876c5f86997e79b3adcd8cd4e98ab61cb0e8775b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783406090000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783406090000
+      },
+      "subject": "feat(knowledge): add operations navigation framework",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+      ],
+      "changedPathsByParent": {
+        "876c5f86997e79b3adcd8cd4e98ab61cb0e8775b": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-operations-nav-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:231e6c93eada787af69995601db28b4d63b3620c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

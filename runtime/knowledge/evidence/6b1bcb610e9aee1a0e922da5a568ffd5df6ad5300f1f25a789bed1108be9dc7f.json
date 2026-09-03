@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:4ab6e47d9913674dcfd6d68246179b74a7ad1f1493c172bea12ac228d13742b8",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Search History Assistance — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed#browser-turn=0",
+  "checksum": "4ab6e47d9913674dcfd6d68246179b74a7ad1f1493c172bea12ac228d13742b8",
+  "metadata": {
+    "content": "Current task: fix hydration mismatch (caused by Date.now() in iframe src).\n\n🔴 Root cause\nYou added:\nTypeScriptv: String(Date.now())\n👉 This runs:\n\n\non server (SSR)\n\n\nagain on client (hydration)\n\n\n👉 Values differ → React throws:\nhydration mismatch\n\n✅ Fix (production-safe)\n👉 Remove ALL dynamic values from initial render\n👉 Only use stable values during SSR\n\n🔥 FULL FILE REWRITE (fixed, no hydration issues)\nBashcat > components/builder/PreviewFrame.tsx << 'EOF'\n\"use client\";\n\ntype PreviewFrameProps = {\n  projectId: string;\n  className?: string;\n};\n\nconst PREVIEW_ORIGIN =\n  process.env.NEXT_PUBLIC_PREVIEW_V2_ORIGIN || \"http://localhost:5173\";\n\nexport default function PreviewFrame({\n  projectId,\n  className,\n}: PreviewFrameProps) {\n  if (!projectId) {\n    return (\n      <div\n        className={className}\n        style={{\n          width: \"100%\",\n          height: \"100%\",\n          minHeight: 320,\n          display: \"flex\",\n          alignItems: \"center\",\n          justifyContent: \"center\",\n          background: \"#fff\",\n          color: \"#666\",\n          fontSize: 14,\n        }}\n      >\n        No project selected\n      </div>\n    );\n  }\n\n  const src = `${PREVIEW_ORIGIN}/?projectId=${projectId}`;\n\n  return (\n    <iframe\n      title={`KoreLumina Preview - ${projectId}`}\n      src={src}\n      className={className}\n      style={{\n        width: \"100%\",\n        height: \"100%\",\n        minHeight: 320,\n        border: \"none\",\n        background: \"#fff\",\n      }}\n      sandbox=\"allow-scripts allow-same-origin\"\n      referrerPolicy=\"no-referrer\"\n    />\n  );\n}\nEOF\n\n🧠 Why this fixes it\nBefore:\nTypeScriptDate.now() → different on server vs client ❌\nNow:\nTypeScriptprojectId only → deterministic → hydration safe ✅\n\n🚀 After this\nNo need to rebuild everything, just refresh.\n\n🎯 Expected\n\n\n❌ hydration error gone\n\n\n✅ builder stable\n\n\n✅ preview loads\n\n\n\n⚠️ If you want auto-refresh later\nDo NOT use Date.now() in render.\nUse:\nTypeScriptuseEffect(() => {\n  iframeRef.current.src = ...\n}, [projectId])\n👉 client-only update (safe)\n\n✅ Task status\n\n\nhydration issue fixed\n\n\npreview-v2 wiring intact\n\n\nno regression\n\n\n\nIf preview still blank inside builder, say:\n“iframe loads but blank”\nand we fix the next layer (CORS or loader mismatch).",
+    "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "cc0f2ee0-79a7-4f3b-8737-7d49582252f3",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ddaf99-f2a8-83ea-bd47-f914922fbfed:message:cc0f2ee0-79a7-4f3b-8737-7d49582252f3",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed#browser-turn=0",
+    "sourceRevision": "sha256:1633ee022ff44a8a603a9fa9088823d63a5a7e5eeb7f01bad3272422a147094d",
+    "segmentAvailability": "available",
+    "conversationChecksum": "c2744900c1476453af5cda9b970766423fb8a0c73d9727ce1741d77ab8e9bffa",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:1633ee022ff44a8a603a9fa9088823d63a5a7e5eeb7f01bad3272422a147094d",
+      "exportRevision": "sha256:1633ee022ff44a8a603a9fa9088823d63a5a7e5eeb7f01bad3272422a147094d"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630876961
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69ddaf99-f2a8-83ea-bd47-f914922fbfed:message:cc0f2ee0-79a7-4f3b-8737-7d49582252f3"
+    ],
+    "conversation": [
+      "69ddaf99-f2a8-83ea-bd47-f914922fbfed"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:0165c7d1cb31e2d8e426da61d881c3d9595233ea534334cdb76dc8d66b11ef4f",
+  "type": "commit",
+  "title": "refactor(knowledge): adopt Lumina flagship card in competency posture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240098262,
+  "observedAt": 1786163159000,
+  "contentRef": "git:commit:11786a7d62b50e79d90981e16081577b38a45a52",
+  "checksum": "sha256:0652cdd3935edcb65fa11f780b8dfc847c7245c4770649dd27861d5118bc443a",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1205,
+    "genesisAdmissionIdentity": "genesis-admission:3ebe9edf89edfe7da4048717a2ba30b596d5ea6acceb1fcb678de3d8dde9312a",
+    "historicalSourceId": "genesis-source:commit:11786a7d62b50e79d90981e16081577b38a45a52",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:11786a7d62b50e79d90981e16081577b38a45a52",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "11786a7d62b50e79d90981e16081577b38a45a52",
+      "parentShas": [
+        "b038e0eb7ab11b9d02f665c49344ca2cff4d546f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786163159000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1786163159000
+      },
+      "subject": "refactor(knowledge): adopt Lumina flagship card in competency posture",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx"
+      ],
+      "changedPathsByParent": {
+        "b038e0eb7ab11b9d02f665c49344ca2cff4d546f": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:11786a7d62b50e79d90981e16081577b38a45a52"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

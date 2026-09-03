@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c2f774ee7888c73030d429bb18b96a473fd683e5b851248454228d412f3f9729",
+  "type": "commit",
+  "title": "chore(knowledge): promote KR-005 to canonical",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240133139,
+  "observedAt": 1788057933000,
+  "contentRef": "git:commit:f385574f28c493f0bcf0dcfaa30a40a630219314",
+  "checksum": "sha256:a8e13af9bca39d6802be96381f21e6158890e7fb3706d90e725178ca260cdceb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1688,
+    "genesisAdmissionIdentity": "genesis-admission:601d01c7876c43610138b991168a5c5590bd1b203f839299679af98f751e2a8b",
+    "historicalSourceId": "genesis-source:commit:f385574f28c493f0bcf0dcfaa30a40a630219314",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f385574f28c493f0bcf0dcfaa30a40a630219314",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f385574f28c493f0bcf0dcfaa30a40a630219314",
+      "parentShas": [
+        "4abc7310ee22f37154f394c2f2b114fa24acc534"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788057933000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1788057933000
+      },
+      "subject": "chore(knowledge): promote KR-005 to canonical",
+      "body": "",
+      "changedPaths": [
+        "runtime/executive/decisions/executive-decision%3Aknowledge-promotion%3AKP-2026-000044.json",
+        "runtime/knowledge/packages/KP-2026-000044.json"
+      ],
+      "changedPathsByParent": {
+        "4abc7310ee22f37154f394c2f2b114fa24acc534": [
+          "runtime/executive/decisions/executive-decision%3Aknowledge-promotion%3AKP-2026-000044.json",
+          "runtime/knowledge/packages/KP-2026-000044.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f385574f28c493f0bcf0dcfaa30a40a630219314"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

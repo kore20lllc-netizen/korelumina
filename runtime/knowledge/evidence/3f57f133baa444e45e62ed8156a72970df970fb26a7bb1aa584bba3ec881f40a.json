@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:903b64929415e951f50a301371e5fb35ac07c1660a4bbaa981e3dd8a7eea2b50",
+  "type": "document",
+  "title": "IA-001 — KoreLumina Intelligence Framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085722,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/intelligence/IA-001_KORELUMINA_INTELLIGENCE_FRAMEWORK.md",
+  "checksum": "sha256:d51a4bf920252f41872b52d7df891c15285ad69922c62b6cc109e2eb3d1d05de",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 974,
+    "genesisAdmissionIdentity": "genesis-admission:b77de47d9867011e174d2c5220813718bf1fdf69702e867b91ddc4a97783f285",
+    "historicalSourceId": "genesis-source:document:derived:e03fe259850b65c1f70ee627c28355fc1da998dd6bd81d35288eb231afebe5df",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/intelligence/IA-001_KORELUMINA_INTELLIGENCE_FRAMEWORK.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "IA-001 — KoreLumina Intelligence Framework",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/intelligence/IA-001_KORELUMINA_INTELLIGENCE_FRAMEWORK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e03fe259850b65c1f70ee627c28355fc1da998dd6bd81d35288eb231afebe5df"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

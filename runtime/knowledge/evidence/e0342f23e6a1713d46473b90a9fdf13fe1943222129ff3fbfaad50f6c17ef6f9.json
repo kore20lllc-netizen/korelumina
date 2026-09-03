@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:4dc31a3896ec37d0203cfe71a6713ba12b2dde6a861831fa89e45f8317a2f492",
+  "type": "commit",
+  "title": "docs(constitution): define KoreLumina purpose",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240077758,
+  "observedAt": 1783196913000,
+  "contentRef": "git:commit:000ffc9f97c4f6d52bbb4751014c97523bd93e7c",
+  "checksum": "sha256:7b2500afd36e2730addacddf0afe8f17aae5ba23393efd273654d3529bc30110",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 803,
+    "genesisAdmissionIdentity": "genesis-admission:263a0fd29101b3202171fb1c3391d7cacb1ca4bc00190611383a83f7516cbc69",
+    "historicalSourceId": "genesis-source:commit:000ffc9f97c4f6d52bbb4751014c97523bd93e7c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:000ffc9f97c4f6d52bbb4751014c97523bd93e7c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "000ffc9f97c4f6d52bbb4751014c97523bd93e7c",
+      "parentShas": [
+        "b63a6ed010ef9bbd06082272caac34f70ada1b90"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196913000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783196913000
+      },
+      "subject": "docs(constitution): define KoreLumina purpose",
+      "body": "",
+      "changedPaths": [
+        "docs/constitution/PURPOSE.md"
+      ],
+      "changedPathsByParent": {
+        "b63a6ed010ef9bbd06082272caac34f70ada1b90": [
+          "docs/constitution/PURPOSE.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/constitution-purpose-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:000ffc9f97c4f6d52bbb4751014c97523bd93e7c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

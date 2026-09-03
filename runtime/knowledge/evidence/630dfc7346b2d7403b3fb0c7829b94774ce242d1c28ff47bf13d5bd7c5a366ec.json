@@ -1,0 +1,39 @@
+{
+  "id": "genesis-evidence:d0d5afae72735ea0e70f6c0bb93644aff3014ed77b14402f2741e8abc7ba57ad",
+  "type": "document",
+  "title": "KORELUMINA_ENGINEERING_RULES",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081818,
+  "observedAt": 1783727460000,
+  "contentRef": "docs/architecture/KORELUMINA_ENGINEERING_RULES.md",
+  "checksum": "sha256:a63ca5abd3bbced69d0c0554337d2aa054192eb5e4c0250b2fef97bc6db7b99c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 893,
+    "genesisAdmissionIdentity": "genesis-admission:60ef6017c113579e8f873403c0eb1f4703375aca289bc8fce145a26c06e4de74",
+    "historicalSourceId": "genesis-source:document:derived:b1fa827c68af3119dcb79df16252ca85f08f54836012850502af2ddb63fafa1f",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "sourceLocation": "docs/architecture/KORELUMINA_ENGINEERING_RULES.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KORELUMINA_ENGINEERING_RULES",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/KORELUMINA_ENGINEERING_RULES.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:b1fa827c68af3119dcb79df16252ca85f08f54836012850502af2ddb63fafa1f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

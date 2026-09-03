@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:bb2b2ba46be86f574ba220f24b891fbab91b477ac941a8fb4c11bdc2ee7d392b",
+  "type": "commit",
+  "title": "refactor(runtime): migrate logs panel to Lumina workspace primitives",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240080022,
+  "observedAt": 1783567771000,
+  "contentRef": "git:commit:9bf68fe45c1b9ba3b22224907cbbfcdb99cc5306",
+  "checksum": "sha256:c1c791ea07f2f6bea2f08645d937c12429ee6ceaf9afd6fe96cc4fa1ea713ebf",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 854,
+    "genesisAdmissionIdentity": "genesis-admission:c4523efec00f7e9ec2e1233ea155d2686a78cb52cca5eeae24de865be67e2b5c",
+    "historicalSourceId": "genesis-source:commit:9bf68fe45c1b9ba3b22224907cbbfcdb99cc5306",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9bf68fe45c1b9ba3b22224907cbbfcdb99cc5306",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9bf68fe45c1b9ba3b22224907cbbfcdb99cc5306",
+      "parentShas": [
+        "7026646cf915a2cec8bf5d02f304432e640a69f9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783567771000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783567771000
+      },
+      "subject": "refactor(runtime): migrate logs panel to Lumina workspace primitives",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx"
+      ],
+      "changedPathsByParent": {
+        "7026646cf915a2cec8bf5d02f304432e640a69f9": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9bf68fe45c1b9ba3b22224907cbbfcdb99cc5306"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

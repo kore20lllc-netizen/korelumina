@@ -8,8 +8,8 @@
     "genesis-evidence:7dca3b1defb90623943cdb3c3e7866e2798a15261535fe301471d6ed1a9d89b3"
   ],
   "relationships": {},
-  "createdAt": 1788060829292,
-  "updatedAt": 1788060829292,
+  "createdAt": 1788402545330,
+  "updatedAt": 1788402545330,
   "status": "canonical",
   "metadata": {
     "source": "genesis-historical-replay",

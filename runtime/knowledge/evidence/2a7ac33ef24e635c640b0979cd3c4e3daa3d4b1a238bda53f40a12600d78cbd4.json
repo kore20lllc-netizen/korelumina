@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:5a48a0a429ef0bbb3a8259abfe1eaa9eddd46a60a5882a64a38a89639fe80453",
+  "type": "conversation",
+  "title": "KoreLumina — Runtime + Preview - Korelumin Guardrail Enforcement — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9844-dc54-8325-be3f-229b00501c61#browser-turn=1",
+  "checksum": "5a48a0a429ef0bbb3a8259abfe1eaa9eddd46a60a5882a64a38a89639fe80453",
+  "metadata": {
+    "content": "Understood. Guardrail acknowledged and enforced.\nKey constraints locked:\n\n\nSingle-module scope only\n\n\nNo commit if any pre-check fails\n\n\nFeature branch workflow only (never main)\n\n\nkpush exclusively for commits/push\n\n\nNo rebase; merge-only conflict handling with local state priority\n\n\nNo cross-module or architectural changes\n\n\nSmall, targeted edits only\n\n\nReady to proceed under these rules.",
+    "conversationId": "69cc9844-dc54-8325-be3f-229b00501c61",
+    "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+    "messageId": "96fd903f-9f88-47b0-9fa2-3f632e4d01c6",
+    "speakerRole": "assistant",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9844-dc54-8325-be3f-229b00501c61:message:96fd903f-9f88-47b0-9fa2-3f632e4d01c6",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9844-dc54-8325-be3f-229b00501c61#browser-turn=1",
+    "sourceRevision": "sha256:bcfb9d9c4c610a3b1fa0508678203d36f325aec744f7973dc7bf19a79c5df2f1",
+    "segmentAvailability": "available",
+    "conversationChecksum": "c0bb6505f0b0a0eba55b0d3a1c9d2c3216691683f33b2a087b3aa05d87bb8e57",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:bcfb9d9c4c610a3b1fa0508678203d36f325aec744f7973dc7bf19a79c5df2f1",
+      "exportRevision": "sha256:bcfb9d9c4c610a3b1fa0508678203d36f325aec744f7973dc7bf19a79c5df2f1"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cc9844-dc54-8325-be3f-229b00501c61",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787628901556
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cc9844-dc54-8325-be3f-229b00501c61:message:96fd903f-9f88-47b0-9fa2-3f632e4d01c6"
+    ],
+    "conversation": [
+      "69cc9844-dc54-8325-be3f-229b00501c61"
+    ]
+  }
+}

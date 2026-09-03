@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:c05c981f2fffc157048e695eb003681a4f964c2ecc9af31756e4d0907beab810",
+  "type": "commit",
+  "title": "docs(constitution): establish KoreLumina decision framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078186,
+  "observedAt": 1783201927000,
+  "contentRef": "git:commit:5bb96fe7444f6dd338c01b0829ea25fd66704fd5",
+  "checksum": "sha256:dae5d29ce589e32d2062fdd31582979012320d2e1bd455593661a768e17ca5ce",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 813,
+    "genesisAdmissionIdentity": "genesis-admission:ea818eb94d6e300ef182f679c363896dcd622661d288b1c7c8482b3663ae0113",
+    "historicalSourceId": "genesis-source:commit:5bb96fe7444f6dd338c01b0829ea25fd66704fd5",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5bb96fe7444f6dd338c01b0829ea25fd66704fd5",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5bb96fe7444f6dd338c01b0829ea25fd66704fd5",
+      "parentShas": [
+        "df5b06c667f187807a648a8ec02f6a63337d981e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783201927000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783201927000
+      },
+      "subject": "docs(constitution): establish KoreLumina decision framework",
+      "body": "",
+      "changedPaths": [
+        "docs/constitution/DECISION_FRAMEWORK.md"
+      ],
+      "changedPathsByParent": {
+        "df5b06c667f187807a648a8ec02f6a63337d981e": [
+          "docs/constitution/DECISION_FRAMEWORK.md"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/decision-framework-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5bb96fe7444f6dd338c01b0829ea25fd66704fd5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

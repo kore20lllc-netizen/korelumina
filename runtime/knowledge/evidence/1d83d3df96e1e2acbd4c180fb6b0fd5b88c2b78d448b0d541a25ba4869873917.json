@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:ebb18a148c4c1af7007d746c3215b8938cc80f2e5c7461c59c67623331f349f7",
+  "type": "commit",
+  "title": "refactor(knowledge): extract executive metric card",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084740,
+  "observedAt": 1784866839000,
+  "contentRef": "git:commit:189b8fb32b32da20264feb7b6b180b9500fd7e89",
+  "checksum": "sha256:d32f72d708fec35818c006ea06a21e5c14f9b09dcc0baef09230d106d23f6ad7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 954,
+    "genesisAdmissionIdentity": "genesis-admission:101eabb40e5a30379d5fcc0d831ab0b2b9f12885277f0b35f9c9fb7db9dee64c",
+    "historicalSourceId": "genesis-source:commit:189b8fb32b32da20264feb7b6b180b9500fd7e89",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:189b8fb32b32da20264feb7b6b180b9500fd7e89",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "189b8fb32b32da20264feb7b6b180b9500fd7e89",
+      "parentShas": [
+        "a4bf07615edc247252680061c0e482dbefd383f8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784866839000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784866839000
+      },
+      "subject": "refactor(knowledge): extract executive metric card",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+      ],
+      "changedPathsByParent": {
+        "a4bf07615edc247252680061c0e482dbefd383f8": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:189b8fb32b32da20264feb7b6b180b9500fd7e89"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

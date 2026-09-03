@@ -1,0 +1,81 @@
+{
+  "id": "genesis-evidence:7baae2d175fe0d73904bf04a0f08d1b4e8fe7d7cc6203031eb2075159a4095c7",
+  "type": "commit",
+  "title": "feat(knowledge): add premium overview dashboard",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078800,
+  "observedAt": 1783418102000,
+  "contentRef": "git:commit:ca30642d367f57580dbfbf5eea2cb1dc63c934fb",
+  "checksum": "sha256:8213c60249ba325aa013f090265721e33068ebef47719334516503d4fe4a6ed5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 827,
+    "genesisAdmissionIdentity": "genesis-admission:e3c6567368c0f7f31aba2bb0e2e8bd4dc4654ed7a579ad59e23283d300a28fc6",
+    "historicalSourceId": "genesis-source:commit:ca30642d367f57580dbfbf5eea2cb1dc63c934fb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ca30642d367f57580dbfbf5eea2cb1dc63c934fb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ca30642d367f57580dbfbf5eea2cb1dc63c934fb",
+      "parentShas": [
+        "231e6c93eada787af69995601db28b4d63b3620c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783418102000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783418102000
+      },
+      "subject": "feat(knowledge): add premium overview dashboard",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeActivityFeed.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeCoveragePanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeHealthOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeMetricTile.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeOverviewSkeleton.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgePipelineOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeSystemStatus.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/overview/index.ts"
+      ],
+      "changedPathsByParent": {
+        "231e6c93eada787af69995601db28b4d63b3620c": [
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeActivityFeed.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeCoveragePanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeExecutiveSummary.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeHealthOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeMetricTile.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeOverviewSkeleton.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgePipelineOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/KnowledgeSystemStatus.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/overview/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-overview-dashboard-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ca30642d367f57580dbfbf5eea2cb1dc63c934fb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

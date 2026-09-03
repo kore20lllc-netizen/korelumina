@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:1e0a90ed26ee3ff73639175def4404af7543269faa6bf06b6ac158ab2ee1162e",
+  "type": "document",
+  "title": "AA-001 — KoreLumina Architecture Framework",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240085674,
+  "observedAt": 1785253123000,
+  "contentRef": "docs/architecture/framework/AA-001_KORELUMINA_ARCHITECTURE_FRAMEWORK.md",
+  "checksum": "sha256:04ffbb6f1de0086f8ab4bf5da93bf19a9395c81fc3c79ab23763b1e471847104",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 973,
+    "genesisAdmissionIdentity": "genesis-admission:2fc45fdf9d5d88bffa966cfcf7060e2833a445466863e618db7578c74e6bfe2d",
+    "historicalSourceId": "genesis-source:document:derived:68c0b364101dc94b2c18ecfc2d2d18f9ce8bb6ce20b6a991bbc8e094f078e7e2",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Draft",
+    "sourceLocation": "docs/architecture/framework/AA-001_KORELUMINA_ARCHITECTURE_FRAMEWORK.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "AA-001 — KoreLumina Architecture Framework",
+      "status": "Draft",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/framework/AA-001_KORELUMINA_ARCHITECTURE_FRAMEWORK.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:68c0b364101dc94b2c18ecfc2d2d18f9ce8bb6ce20b6a991bbc8e094f078e7e2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

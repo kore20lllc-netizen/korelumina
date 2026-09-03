@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:6be9c23bde4a216092ef0ce597c991e06452ebd5bded695b25dd41bb3a793f57",
+  "type": "commit",
+  "title": "feat(genesis): add historical reconstruction cross-navigation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240120261,
+  "observedAt": 1787286625000,
+  "contentRef": "git:commit:d1b6c98b396581671a726c596cf52d899b132f9b",
+  "checksum": "sha256:659994b11f2d9944ccf0f136d752847c13eca8a453df16413854bb9e38d46c72",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1531,
+    "genesisAdmissionIdentity": "genesis-admission:733d99334ef7400ce053c33938bb45c03bf20017cf0672e7686a8902c3c00dde",
+    "historicalSourceId": "genesis-source:commit:d1b6c98b396581671a726c596cf52d899b132f9b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d1b6c98b396581671a726c596cf52d899b132f9b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d1b6c98b396581671a726c596cf52d899b132f9b",
+      "parentShas": [
+        "010ad7a8274e27a43cb6e98a977b7bf76a40ba3b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787286625000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787286625000
+      },
+      "subject": "feat(genesis): add historical reconstruction cross-navigation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisEvolutionEpisodeInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalArtifactExplorer.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalNavigation.ts",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalRelationshipInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisReplayReadWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisTemporalChronologyInspector.tsx"
+      ],
+      "changedPathsByParent": {
+        "010ad7a8274e27a43cb6e98a977b7bf76a40ba3b": [
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisEvolutionEpisodeInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalArtifactExplorer.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalNavigation.ts",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalRelationshipInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisReplayReadWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisTemporalChronologyInspector.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d1b6c98b396581671a726c596cf52d899b132f9b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

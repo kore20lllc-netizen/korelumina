@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:8d5170663e1d7465c2948f399e03705ac4fae7d35f2bddf95307d3373df5106a",
+  "type": "commit",
+  "title": "fix(knowledge-ui): contain memory and genesis panels",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240132013,
+  "observedAt": 1787947670000,
+  "contentRef": "git:commit:4efa86e3c80333c43aae73e211ca8101ba01facf",
+  "checksum": "sha256:9256ce81569b2122d6281abf619db5abc2e114d94b8d637a19046d306f0937e9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1675,
+    "genesisAdmissionIdentity": "genesis-admission:f7ca9441c98434d0e17cc1990b2c59d3a512f97970481b583b6d19fe48e58090",
+    "historicalSourceId": "genesis-source:commit:4efa86e3c80333c43aae73e211ca8101ba01facf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4efa86e3c80333c43aae73e211ca8101ba01facf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4efa86e3c80333c43aae73e211ca8101ba01facf",
+      "parentShas": [
+        "9034f2e7bd8e4e5bd89d6d9462429537ea7e6777"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787947670000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787947670000
+      },
+      "subject": "fix(knowledge-ui): contain memory and genesis panels",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+        "docs/ui-contracts/knowledge-operations-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "9034f2e7bd8e4e5bd89d6d9462429537ea7e6777": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+          "docs/ui-contracts/knowledge-operations-certified-ui.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4efa86e3c80333c43aae73e211ca8101ba01facf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

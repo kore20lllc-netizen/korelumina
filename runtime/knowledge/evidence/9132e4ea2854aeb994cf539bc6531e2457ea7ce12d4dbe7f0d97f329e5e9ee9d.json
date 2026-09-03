@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:696092ba96d06724c2cb2a1f3336638c85fc87c622cd2cd51424d3c0a6427d2c",
+  "type": "commit",
+  "title": "feat(knowledge): refine executive hero optical material",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240084888,
+  "observedAt": 1784937478000,
+  "contentRef": "git:commit:93ae2c1d47ede36a0149fb5b4edd64ef36c85e14",
+  "checksum": "sha256:230511de516491b8bc669d1a9162d43fe53e25c8abe9189655e6ea1c8588fc12",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 957,
+    "genesisAdmissionIdentity": "genesis-admission:c565bab258634c9bc954916759f1e0170fdaa53511c107d9bc5549c6ac4a4268",
+    "historicalSourceId": "genesis-source:commit:93ae2c1d47ede36a0149fb5b4edd64ef36c85e14",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:93ae2c1d47ede36a0149fb5b4edd64ef36c85e14",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "93ae2c1d47ede36a0149fb5b4edd64ef36c85e14",
+      "parentShas": [
+        "db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784937478000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1784937478000
+      },
+      "subject": "feat(knowledge): refine executive hero optical material",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts"
+      ],
+      "changedPathsByParent": {
+        "db9fea6eb0d0d3bb4ca2a9682d69df8e022d264c": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/theme/appearance.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:93ae2c1d47ede36a0149fb5b4edd64ef36c85e14"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

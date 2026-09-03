@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:a3526040ea6e86fd0ed3b1f9c68649de58f490c65a60523c0137cb249e9abf0b",
+  "type": "document",
+  "title": "Lumina Workspace Visual Standard V1",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240100881,
+  "observedAt": 1786289548000,
+  "contentRef": "docs/architecture/LUMINA_WORKSPACE_VISUAL_STANDARD_V1.md",
+  "checksum": "sha256:ebe57b0b7df6527196fe8a48f9f9675f6fd1b4931e9547a07b2349ec27422f00",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1249,
+    "genesisAdmissionIdentity": "genesis-admission:90ef51b162a85c803cffc6ea5fdb80664e4641a92ff0103c0c72a7fb160b730a",
+    "historicalSourceId": "genesis-source:document:derived:b23957aef2edcab2e18425ce03f2f9e2f2266f7ad1473428b2c06125de706854",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Production design-system contract",
+    "sourceLocation": "docs/architecture/LUMINA_WORKSPACE_VISUAL_STANDARD_V1.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "Lumina Workspace Visual Standard V1",
+      "status": "Production design-system contract",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/LUMINA_WORKSPACE_VISUAL_STANDARD_V1.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:b23957aef2edcab2e18425ce03f2f9e2f2266f7ad1473428b2c06125de706854"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

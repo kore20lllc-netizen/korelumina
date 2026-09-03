@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:433a9040902b3389ef8559d1a8e794e9b712948ca79eca973b332825ad06ca5e",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - Fix projectId Boot — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638#browser-turn=0",
+  "checksum": "433a9040902b3389ef8559d1a8e794e9b712948ca79eca973b332825ad06ca5e",
+  "metadata": {
+    "content": "You are already in the repo root:\nBash/Users/erictouko/dev/korelumina\nSo just create the file directly there.\nRun:\nBashcd /Users/erictouko/dev/korelumina\n\ncat > KORELUMINA_MASTER_ARCHITECTURE.md <<'EOF'\n# KoreLumina — Master Architecture Roadmap\n\n> Persistent architecture tracker for KoreLumina.\n> Use this file across conversations to preserve execution state, avoid drift, and continue from the next incomplete production-critical item.\n\n---\n\n## Operating Rule\n\n- Mark completed work with `[x]`\n- Leave pending work as `[ ]`\n- Never delete completed items\n- Append notes under milestone logs instead of rewriting history\n- Every new conversation should begin by reading this file\n\nRecommended continuation prompt:\n\n```txt\nRead KORELUMINA_MASTER_ARCHITECTURE.md and continue from the first incomplete production-critical item.\n\nCORE FOUNDATION\nBuilder + Runtime Integration\n\n\n Lumina Builder connected to KoreLumina runtime backend\n\n\n Runtime auto-start from builder\n\n\n Runtime status polling\n\n\n Embedded iframe preview rendering\n\n\n Device preview modes\n\n\n Fullscreen preview\n\n\n Runtime lifecycle registry\n\n\n Runtime logs API\n\n\n Runtime restart support\n\n\n Runtime shutdown cleanup\n\n\n Runtime crash auto-recovery\n\n\n Runtime memory monitoring\n\n\n Runtime CPU monitoring\n\n\n Zombie process cleanup daemon\n\n\n Runtime sandboxing hardening\n\n\n\nMULTI-FRAMEWORK ENGINE\nFramework Support\n\n\n Vite detection\n\n\n Next.js detection\n\n\n Remix support\n\n\n Nuxt support\n\n\n Astro support\n\n\n Electron support\n\n\n React Native support\n\n\n Monorepo workspace detection\n\n\n Turborepo support\n\n\n Nx workspace support\n\n\n\nPROJECT IMPORT SYSTEM\nRepo Import\n\n\n GitHub repo import\n\n\n Branch selector\n\n\n Dependency auto-install\n\n\n Lockfile detection\n\n\n Environment variable mapper\n\n\n Missing dependency repair\n\n\n Import diagnostics panel\n\n\n Repo structure visualization\n\n\n Multi-entrypoint detection\n\n\n App router auto-detection\n\n\n\nBUILDER ENGINE\nVisual Builder\n\n\n Production drag/drop editor\n\n\n Design schema engine\n\n\n AI design mutation layer\n\n\n Live layout inspector\n\n\n Tailwind visual controls\n\n\n Responsive breakpoint editor\n\n\n Animation timeline editor\n\n\n\nAI ORCHESTRATION\nAI Core\n\n\n Planner engine stabilization\n\n\n Diff generation engine\n\n\n Safe apply engine\n\n\n Multi-file AI edits\n\n\n Repo-wide semantic understanding\n\n\n AI rollback system\n\n\n AI execution audit trail\n\n\n Context window optimization\n\n\n Streaming AI responses\n\n\n\nPRODUCTION HARDENING\nStability\n\n\n Runtime readiness checks\n\n\n Runtime structured logs\n\n\n Runtime process registry\n\n\n Runtime status endpoints\n\n\n Centralized error system\n\n\n Structured telemetry\n\n\n Health monitoring dashboard\n\n\n Rate limiting\n\n\n Runtime isolation boundaries\n\n\n Production deployment pipeline\n\n\n Distributed runtime orchestration\n\n\n\nMASTER OS\nCommand Center\n\n\n Master OS dashboard\n\n\n Global orchestration panel\n\n\n AI execution timeline\n\n\n Runtime fleet management\n\n\n Project fleet management\n\n\n Workspace analytics\n\n\n Admin controls\n\n\n Production monitoring\n\n\n\nBUSINESS LAYER\nSaaS Platform\n\n\n Authentication hardening\n\n\n Team workspaces\n\n\n Billing integration\n\n\n Subscription enforcement\n\n\n Free-tier execution limits\n\n\n Enterprise access control\n\n\n Audit logs\n\n\n Usage metering\n\n\n\nDEPLOYMENT SYSTEM\nHosting\n\n\n Vercel deployment integration\n\n\n Netlify deployment integration\n\n\n Cloudflare deployment integration\n\n\n Docker deployment support\n\n\n Kubernetes deployment support\n\n\n BYO domain system\n\n\n SSL provisioning\n\n\n Production rollback system\n\n\n\nLONG-TERM VISION\nKoreLumina OS\n\n\n Full website generation\n\n\n Full app generation\n\n\n Native app generation\n\n\n AI autonomous engineering agents\n\n\n Multi-agent collaboration\n\n\n Self-healing runtime infrastructure\n\n\n Designer + developer unified workflow\n\n\n First-class production AI software factory\n\n\n\nMILESTONE LOG\n2026-05 Runtime Lifecycle Hardening\n\n\nAdded runtime registry\n\n\nAdded runtime logs endpoint\n\n\nAdded runtime restart support\n\n\nAdded runtime status serialization\n\n\nAdded runtime readiness validation\n\n\nAdded runtime structured lifecycle states\n\n\nEOF\n\nVerify:\n\n```bash\nls\n\ncat KORELUMINA_MASTER_ARCHITECTURE.md\nCommit after verification only.",
+    "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "879a052f-9daf-42f3-9e88-afa7f7a4ec71",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cbc91d-298c-8328-96a8-24d3288f9638:message:879a052f-9daf-42f3-9e88-afa7f7a4ec71",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638#browser-turn=0",
+    "sourceRevision": "sha256:0937139f84b49eac6ad89f3ccdf5180b2c310281b9b2df9487007d1f2dee7790",
+    "segmentAvailability": "available",
+    "conversationChecksum": "ee032b042133fc488696c716d5b71a0eb68b1cda9f690f9ae932e29cca62c53a",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:0937139f84b49eac6ad89f3ccdf5180b2c310281b9b2df9487007d1f2dee7790",
+      "exportRevision": "sha256:0937139f84b49eac6ad89f3ccdf5180b2c310281b9b2df9487007d1f2dee7790"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630586112
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:69cbc91d-298c-8328-96a8-24d3288f9638:message:879a052f-9daf-42f3-9e88-afa7f7a4ec71"
+    ],
+    "conversation": [
+      "69cbc91d-298c-8328-96a8-24d3288f9638"
+    ]
+  }
+}

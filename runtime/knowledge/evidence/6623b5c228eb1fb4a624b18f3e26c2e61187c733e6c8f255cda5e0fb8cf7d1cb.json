@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:e3cbf4d6e6dd814d1785ba1ab925899809c848f0f25a96468a75867a6b928c18",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina repo status — message 0",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=0",
+  "checksum": "e3cbf4d6e6dd814d1785ba1ab925899809c848f0f25a96468a75867a6b928c18",
+  "metadata": {
+    "content": "Correct. The duplicate is visible in Sidebar.tsx:\n\n\nRuntime Operations\n\n\nRuntime Operations Preview\n\n\nThe obsolete entry is Runtime Operations Preview using route runtime-v2-reference. Keep the production Runtime Operations entry.\nRun this automated patch:\nBashpython - <<'PY'\nfrom pathlib import Path\n\npath = Path(\n    \"apps/lumina-builder/src/components/layout/Sidebar.tsx\"\n)\n\ntext = path.read_text()\n\nold_item = '''          {\n            icon: ServerCog,\n            label: \"Runtime Operations Preview\",\n            active: view === \"runtime-v2-reference\",\n          },\n'''\n\nold_handler = '''                    } else if (\n                      item.label === \"Runtime Operations Preview\"\n                    ) {\n                      setView(\"runtime-v2-reference\");\n'''\n\nif old_item not in text:\n    raise SystemExit(\"Runtime Operations Preview nav item not found\")\n\nif old_handler not in text:\n    raise SystemExit(\"Runtime Operations Preview handler not found\")\n\ntext = text.replace(old_item, \"\", 1)\ntext = text.replace(old_handler, \"\", 1)\n\npath.write_text(text)\nPY\n\ngrep -n \\\n  \"Runtime Operations\" \\\n  apps/lumina-builder/src/components/layout/Sidebar.tsx\n\nnpm run build\n\ngit status --short --branch\nExpected grep result: only the production Runtime Operations label and its click handler remain. Do not commit or push yet; visually confirm that the sidebar now shows one Runtime Operations button.",
+    "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "2ee72322-b766-4da6-ac4e-bd037ebf65d2",
+    "speakerRole": "assistant",
+    "messageOrder": 0,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:2ee72322-b766-4da6-ac4e-bd037ebf65d2",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=0",
+    "sourceRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+    "segmentAvailability": "available",
+    "conversationChecksum": "301ba4fa823ad4a444eaf5cbb9b1dd872683b682e20fa989dee7b09e188a6357",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+      "exportRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630769970
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:2ee72322-b766-4da6-ac4e-bd037ebf65d2"
+    ],
+    "conversation": [
+      "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7"
+    ]
+  }
+}

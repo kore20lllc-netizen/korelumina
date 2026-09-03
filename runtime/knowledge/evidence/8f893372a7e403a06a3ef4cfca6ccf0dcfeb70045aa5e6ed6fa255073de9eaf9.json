@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:11a4c363cd050b843b4a457157d0828ae6c12e644a78f929f5c66836713031d8",
+  "type": "commit",
+  "title": "docs(architecture): reconcile learning constitution",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240087084,
+  "observedAt": 1785538581000,
+  "contentRef": "git:commit:c256b15d67155b3ce5d7b9f066db0c97c06f3834",
+  "checksum": "sha256:1b29342f4e83a8a73c2c70926f0ae29510969078842068d14b1be3135a4db654",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1001,
+    "genesisAdmissionIdentity": "genesis-admission:5651f5d01acbdd415e6ccf5dd3ab3bcaa9ac356756ac1429d968d2fbd067c372",
+    "historicalSourceId": "genesis-source:commit:c256b15d67155b3ce5d7b9f066db0c97c06f3834",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c256b15d67155b3ce5d7b9f066db0c97c06f3834",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c256b15d67155b3ce5d7b9f066db0c97c06f3834",
+      "parentShas": [
+        "3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785538581000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785538581000
+      },
+      "subject": "docs(architecture): reconcile learning constitution",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/reconciliation/LEARNING_CONSTITUTION_RECONCILIATION.md"
+      ],
+      "changedPathsByParent": {
+        "3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4": [
+          "docs/architecture/reconciliation/LEARNING_CONSTITUTION_RECONCILIATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c256b15d67155b3ce5d7b9f066db0c97c06f3834"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

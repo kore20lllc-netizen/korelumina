@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:ec847b3a68669593aee2ca47c5ea964fe61b2099824fd583137cd9d2f4c5662d",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina repo status — message 3",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=3",
+  "checksum": "ec847b3a68669593aee2ca47c5ea964fe61b2099824fd583137cd9d2f4c5662d",
+  "metadata": {
+    "content": "The task is to polish runtime operation, so it's using the similar component primitives as knowledge operation. It's not the other way around. The duplicate sidebar button is gone now. Everything is green.",
+    "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "9d945753-97df-4b64-a413-13ac20c0557c",
+    "speakerRole": "user",
+    "messageOrder": 3,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:9d945753-97df-4b64-a413-13ac20c0557c",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7#browser-turn=3",
+    "sourceRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+    "segmentAvailability": "available",
+    "conversationChecksum": "301ba4fa823ad4a444eaf5cbb9b1dd872683b682e20fa989dee7b09e188a6357",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de",
+      "exportRevision": "sha256:9fb9512d7d0a4f0cf1c2d4529cb9a3bb0c673dedf5e1d71e0cc9ff9f656ca7de"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630769970
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7:message:9d945753-97df-4b64-a413-13ac20c0557c"
+    ],
+    "conversation": [
+      "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7"
+    ]
+  }
+}

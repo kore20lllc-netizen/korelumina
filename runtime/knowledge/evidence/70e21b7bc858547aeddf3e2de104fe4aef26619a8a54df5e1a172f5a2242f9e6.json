@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:bdea33710013388fb12d106f7da8fdcf4f95dd32cfabc0cd2012a08b3724e055",
+  "type": "commit",
+  "title": "knowledge: expose governed retrieval observation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129604,
+  "observedAt": 1787810869000,
+  "contentRef": "git:commit:04afea33927efd4d2ba6d3e1f5bae2aff0873e36",
+  "checksum": "sha256:f131ddad660829c52363ba3258432b9cd21bae186c77c788d68a45612617631f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1647,
+    "genesisAdmissionIdentity": "genesis-admission:056c948604575aab596792d109d348da8b9b202c447c2ad6b0e2c9fb05123734",
+    "historicalSourceId": "genesis-source:commit:04afea33927efd4d2ba6d3e1f5bae2aff0873e36",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:04afea33927efd4d2ba6d3e1f5bae2aff0873e36",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "04afea33927efd4d2ba6d3e1f5bae2aff0873e36",
+      "parentShas": [
+        "481714fb26a49f2bb6bd02884947637781e06342"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787810869000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787810869000
+      },
+      "subject": "knowledge: expose governed retrieval observation",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/knowledge/registerGovernedRetrievalObservationRoute.ts"
+      ],
+      "changedPathsByParent": {
+        "481714fb26a49f2bb6bd02884947637781e06342": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/knowledge/registerGovernedRetrievalObservationRoute.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:04afea33927efd4d2ba6d3e1f5bae2aff0873e36"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

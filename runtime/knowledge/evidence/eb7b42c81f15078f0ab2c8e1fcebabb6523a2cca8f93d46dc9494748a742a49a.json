@@ -1,0 +1,41 @@
+{
+  "id": "genesis-evidence:22c6b6b4fc054585ba3b18321175d034aae2b1e32720e9165d1fe3a2cfec5929",
+  "type": "document",
+  "title": "KOW-001 — Knowledge Operations Executive Architecture",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240083958,
+  "observedAt": 1784255440000,
+  "contentRef": "docs/architecture/knowledge-operations/KOW-001_EXECUTIVE_ARCHITECTURE.md",
+  "checksum": "sha256:7cb61e9a9432eed40e5a922dd34244a11395871313d738111beb941e0654a2d3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 938,
+    "genesisAdmissionIdentity": "genesis-admission:be75bfe5f94b2c2b5d17cd092b1686efae97f8b21322ee1df99bdd64f0b500b2",
+    "historicalSourceId": "genesis-source:document:derived:a566902f5f3963fc5bb04051e0d3a9ce88907e2ea992d31414ded1e80378e878",
+    "historicalTimestampSource": "git-last-change-time",
+    "authorityClass": "architecture",
+    "approvalState": "Proposed for approval",
+    "sourceLocation": "docs/architecture/knowledge-operations/KOW-001_EXECUTIVE_ARCHITECTURE.md",
+    "documentClassification": "architecture",
+    "discoveryMethod": "documentation-v1",
+    "sourceMetadata": {
+      "title": "KOW-001 — Knowledge Operations Executive Architecture",
+      "status": "Proposed for approval",
+      "documentClassification": "architecture",
+      "sourceLocation": "docs/architecture/knowledge-operations/KOW-001_EXECUTIVE_ARCHITECTURE.md"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:a566902f5f3963fc5bb04051e0d3a9ce88907e2ea992d31414ded1e80378e878"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

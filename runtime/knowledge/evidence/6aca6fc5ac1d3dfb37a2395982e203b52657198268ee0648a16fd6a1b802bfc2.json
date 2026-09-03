@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:d1036d8bb2b01effa871e4d4af5d437c5ae5763f51bbf87c9a9962d67b288970",
+  "type": "commit",
+  "title": "feat(runtime): integrate knowledge operations",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240076561,
+  "observedAt": 1783148345000,
+  "contentRef": "git:commit:9f53fce8ee95f230aba1a9688f33bd98c317d56f",
+  "checksum": "sha256:1b60798ddbf8f1d7b3b5b61e167dfebb5aa99244251310f8629e6f04d1bfc8f5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 776,
+    "genesisAdmissionIdentity": "genesis-admission:14a807ae50c020678f25d57af85bbb391549926c5e5c1ae1f632e1ec3e8467d3",
+    "historicalSourceId": "genesis-source:commit:9f53fce8ee95f230aba1a9688f33bd98c317d56f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9f53fce8ee95f230aba1a9688f33bd98c317d56f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9f53fce8ee95f230aba1a9688f33bd98c317d56f",
+      "parentShas": [
+        "266ca0586f6523970827ccc7c47a481399619684"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783148345000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783148345000
+      },
+      "subject": "feat(runtime): integrate knowledge operations",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+        "apps/lumina-builder/src/services/runtimeService.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "266ca0586f6523970827ccc7c47a481399619684": [
+          "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+          "apps/lumina-builder/src/services/runtimeService.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-runtime-integration-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9f53fce8ee95f230aba1a9688f33bd98c317d56f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

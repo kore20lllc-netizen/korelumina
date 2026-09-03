@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:0b81edb3bee34a836add92a8142fa5f85e5f5237902a25f5830cc2178ad0edf1",
+  "type": "commit",
+  "title": "feat(knowledge): add canonical knowledge IR types",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240078668,
+  "observedAt": 1783396829000,
+  "contentRef": "git:commit:0745b6d4fd720148f376c3919fb5277c7154a6ca",
+  "checksum": "sha256:d3646b7872c24319fb87b28e13b5523e97ad66676904e06bb75a0afad9d9b909",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 824,
+    "genesisAdmissionIdentity": "genesis-admission:0bbfaddebbe5e4db00337840457a9b478b192b3783b1d5d4d5cefa10441bdc65",
+    "historicalSourceId": "genesis-source:commit:0745b6d4fd720148f376c3919fb5277c7154a6ca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0745b6d4fd720148f376c3919fb5277c7154a6ca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0745b6d4fd720148f376c3919fb5277c7154a6ca",
+      "parentShas": [
+        "d5e401e72fcdbd44f222b1842cb594e44e479009"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783396829000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783396829000
+      },
+      "subject": "feat(knowledge): add canonical knowledge IR types",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge/index.ts",
+        "apps/lumina-runtime/src/knowledge/ir/EvidenceItem.ts",
+        "apps/lumina-runtime/src/knowledge/ir/KnowledgeIR.ts",
+        "apps/lumina-runtime/src/knowledge/ir/KnowledgeScope.ts",
+        "apps/lumina-runtime/src/knowledge/ir/SourceReference.ts",
+        "apps/lumina-runtime/src/knowledge/ir/index.ts"
+      ],
+      "changedPathsByParent": {
+        "d5e401e72fcdbd44f222b1842cb594e44e479009": [
+          "apps/lumina-runtime/src/knowledge/index.ts",
+          "apps/lumina-runtime/src/knowledge/ir/EvidenceItem.ts",
+          "apps/lumina-runtime/src/knowledge/ir/KnowledgeIR.ts",
+          "apps/lumina-runtime/src/knowledge/ir/KnowledgeScope.ts",
+          "apps/lumina-runtime/src/knowledge/ir/SourceReference.ts",
+          "apps/lumina-runtime/src/knowledge/ir/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/tags/knowledge-ir-types-green"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0745b6d4fd720148f376c3919fb5277c7154a6ca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

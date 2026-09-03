@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ce22049a13515f3d49cd3e27291e459ea36e4120193df4e422249b5249c48735",
+  "type": "commit",
+  "title": "refactor(runtime): refine operations header identity",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240092525,
+  "observedAt": 1785930749000,
+  "contentRef": "git:commit:62d6ea0e83d6e5908e4464436cc263da40e79997",
+  "checksum": "sha256:8f24d237edf6960711d35084e951d21ffa2a174a41dd0a792d49bf760b728672",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1105,
+    "genesisAdmissionIdentity": "genesis-admission:ec0ec0f1b7162007ed5eb69f0649ce6ee1e8bfdb3ddc7c17863ab71e9b176cf0",
+    "historicalSourceId": "genesis-source:commit:62d6ea0e83d6e5908e4464436cc263da40e79997",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:62d6ea0e83d6e5908e4464436cc263da40e79997",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "62d6ea0e83d6e5908e4464436cc263da40e79997",
+      "parentShas": [
+        "d23d18b228967adc09b16c36bc9cb98c6d479c3f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785930749000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785930749000
+      },
+      "subject": "refactor(runtime): refine operations header identity",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+      ],
+      "changedPathsByParent": {
+        "d23d18b228967adc09b16c36bc9cb98c6d479c3f": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:62d6ea0e83d6e5908e4464436cc263da40e79997"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

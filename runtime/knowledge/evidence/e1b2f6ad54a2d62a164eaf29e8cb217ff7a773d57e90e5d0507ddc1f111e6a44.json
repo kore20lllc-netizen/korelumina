@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:e7b7b8e6be3e219ec6f9c7eae34fe09a08ec4b74552abf7900536c784e54961b",
+  "type": "commit",
+  "title": "feat(lumina): add input interaction layer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240081019,
+  "observedAt": 1783640347000,
+  "contentRef": "git:commit:a7e83954a1ef8b24c2d2314a2c3838ae86906042",
+  "checksum": "sha256:df90480c5111a44d8e76d3c44e225cb9f24c0dc071fbd80b242ee0d6783f7c11",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 876,
+    "genesisAdmissionIdentity": "genesis-admission:bf7ed462a00d8540baff22e68a778da34911e656728cd192cca70ec955bb428b",
+    "historicalSourceId": "genesis-source:commit:a7e83954a1ef8b24c2d2314a2c3838ae86906042",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a7e83954a1ef8b24c2d2314a2c3838ae86906042",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a7e83954a1ef8b24c2d2314a2c3838ae86906042",
+      "parentShas": [
+        "ffcb672d6dda3ba2868095f696c9ec4965dc583d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783640347000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783640347000
+      },
+      "subject": "feat(lumina): add input interaction layer",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/input/core/index.ts",
+        "apps/lumina-builder/src/components/lumina/input/core/types.ts",
+        "apps/lumina-builder/src/components/lumina/input/core/useInputAccessibility.ts",
+        "apps/lumina-builder/src/components/lumina/input/core/useInputInteraction.ts",
+        "apps/lumina-builder/src/components/lumina/input/core/useInputState.ts"
+      ],
+      "changedPathsByParent": {
+        "ffcb672d6dda3ba2868095f696c9ec4965dc583d": [
+          "apps/lumina-builder/src/components/lumina/input/core/index.ts",
+          "apps/lumina-builder/src/components/lumina/input/core/types.ts",
+          "apps/lumina-builder/src/components/lumina/input/core/useInputAccessibility.ts",
+          "apps/lumina-builder/src/components/lumina/input/core/useInputInteraction.ts",
+          "apps/lumina-builder/src/components/lumina/input/core/useInputState.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a7e83954a1ef8b24c2d2314a2c3838ae86906042"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

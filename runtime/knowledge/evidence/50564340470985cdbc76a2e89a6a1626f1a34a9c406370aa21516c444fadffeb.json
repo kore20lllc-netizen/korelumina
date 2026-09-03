@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:30b857a2791eaa686a7f439c09ab57fa2996d3c518895358d367845ac4d37f17",
+  "type": "commit",
+  "title": "education: derive mission boundaries competency evidence",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240129270,
+  "observedAt": 1787807535000,
+  "contentRef": "git:commit:beb09520079c54bd219abd8ecf3bb6350ca314d7",
+  "checksum": "sha256:94c3758c360b38a838eb837308a3861bc7068db072776c4a9e8e10c57c82c4a3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1643,
+    "genesisAdmissionIdentity": "genesis-admission:c8453278dd7ee685815ce77c19a882176673b9c21bdb4376d4e67ea35512c0d4",
+    "historicalSourceId": "genesis-source:commit:beb09520079c54bd219abd8ecf3bb6350ca314d7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:beb09520079c54bd219abd8ecf3bb6350ca314d7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "beb09520079c54bd219abd8ecf3bb6350ca314d7",
+      "parentShas": [
+        "0b7ad9162178d30381d7ed5d2e512da528a92bf4"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787807535000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787807535000
+      },
+      "subject": "education: derive mission boundaries competency evidence",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/MissionBoundariesCompetencyEvidenceAdapter.ts",
+        "apps/lumina-runtime/src/knowledge-education/__tests__/MissionBoundariesCompetencyEvidenceAdapter.test.ts"
+      ],
+      "changedPathsByParent": {
+        "0b7ad9162178d30381d7ed5d2e512da528a92bf4": [
+          "apps/lumina-runtime/src/knowledge-education/MissionBoundariesCompetencyEvidenceAdapter.ts",
+          "apps/lumina-runtime/src/knowledge-education/__tests__/MissionBoundariesCompetencyEvidenceAdapter.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:beb09520079c54bd219abd8ecf3bb6350ca314d7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

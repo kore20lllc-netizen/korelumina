@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:eaa41cc0401fcaa9a4ed2e61c1d299412ce3b93205ed37f2f8b5a6a00fdcecbd",
+  "type": "commit",
+  "title": "docs(amendment): establish canonical memory adaptation contract",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240086982,
+  "observedAt": 1785530100000,
+  "contentRef": "git:commit:3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4",
+  "checksum": "sha256:bc132c205c3bfd119d33bebe54e4302d54ec25c59546deadc2f6f3b6bfd76b4e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 999,
+    "genesisAdmissionIdentity": "genesis-admission:312d6bcc81a14e0dfcc6aca3ec4a569842408134a04f4b1394c176bf476673e1",
+    "historicalSourceId": "genesis-source:commit:3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4",
+      "parentShas": [
+        "98557788d21d427ddc9bba0da1ef1356d7e97a28"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785530100000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1785530100000
+      },
+      "subject": "docs(amendment): establish canonical memory adaptation contract",
+      "body": "",
+      "changedPaths": [
+        "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md"
+      ],
+      "changedPathsByParent": {
+        "98557788d21d427ddc9bba0da1ef1356d7e97a28": [
+          "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3533a70b7ad97b8bf8c8b39fb94b6f956bced5b4"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

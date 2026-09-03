@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:d5d184c3c49cdad833028effec5086690d9ee229d26d44f08e18bae88792104d",
+  "type": "commit",
+  "title": "refactor(lumina): rename status badge primitive",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240079754,
+  "observedAt": 1783565737000,
+  "contentRef": "git:commit:4c75dc16ff924e6635617b90d80892897b1f00d7",
+  "checksum": "sha256:2c4e8413a627d8451585810db2334953ed5c6b9573005be2a0ac7db1c3c0d435",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 848,
+    "genesisAdmissionIdentity": "genesis-admission:bbefc612cc307463a3a0954c62e9deb3d70135a2066602efc2d0818b79d9ea2a",
+    "historicalSourceId": "genesis-source:commit:4c75dc16ff924e6635617b90d80892897b1f00d7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:4c75dc16ff924e6635617b90d80892897b1f00d7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "4c75dc16ff924e6635617b90d80892897b1f00d7",
+      "parentShas": [
+        "262b9f7c114da2312e3581a40f212b033704d949"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783565737000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1783565737000
+      },
+      "subject": "refactor(lumina): rename status badge primitive",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaBadge.tsx",
+        "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx"
+      ],
+      "changedPathsByParent": {
+        "262b9f7c114da2312e3581a40f212b033704d949": [
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/LuminaBadge.tsx",
+          "apps/lumina-builder/src/components/lumina/workspace/primitives/index.ts",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:4c75dc16ff924e6635617b90d80892897b1f00d7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

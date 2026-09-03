@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:0f28c31eff9041913ee25f54990293d8f8ad816b877f86c73cd06d14065ddc9d",
+  "type": "commit",
+  "title": "docs(governance): declare curriculum authority scopes",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240128439,
+  "observedAt": 1787722039000,
+  "contentRef": "git:commit:2fdacec3f3dace20dc7f8a46f4df5aaf84279d80",
+  "checksum": "sha256:e95f0d6ec6dcb27239907250bedabec01760eed07e592d6b0540c91eae348553",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1633,
+    "genesisAdmissionIdentity": "genesis-admission:987406d2f8aa14895b435aeb4046c62ae1ccf19087f82a7e692275c435ec49c8",
+    "historicalSourceId": "genesis-source:commit:2fdacec3f3dace20dc7f8a46f4df5aaf84279d80",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:2fdacec3f3dace20dc7f8a46f4df5aaf84279d80",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "2fdacec3f3dace20dc7f8a46f4df5aaf84279d80",
+      "parentShas": [
+        "11414d6a52663d8feef831d8ea3d01ea3b5d3c53"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787722039000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787722039000
+      },
+      "subject": "docs(governance): declare curriculum authority scopes",
+      "body": "",
+      "changedPaths": [
+        "BLUEPRINT.md",
+        "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
+        "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
+        "docs/architecture/amendments/CA-003_ORGANIZATIONAL_MEMORY_STEWARDSHIP.md",
+        "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
+        "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+        "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+        "docs/canon/VISION_2050.md"
+      ],
+      "changedPathsByParent": {
+        "11414d6a52663d8feef831d8ea3d01ea3b5d3c53": [
+          "BLUEPRINT.md",
+          "docs/architecture/amendments/CA-001_KNOWLEDGE_PACKAGE.md",
+          "docs/architecture/amendments/CA-002_CANONICAL_KNOWLEDGE.md",
+          "docs/architecture/amendments/CA-003_ORGANIZATIONAL_MEMORY_STEWARDSHIP.md",
+          "docs/architecture/amendments/CA-004_CANONICAL_MEMORY_ADAPTATION.md",
+          "docs/architecture/amendments/CA-005_LEARNING_CONSTITUTION.md",
+          "docs/canon/CANONICAL_DOCUMENT_HIERARCHY.md",
+          "docs/canon/VISION_2050.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:2fdacec3f3dace20dc7f8a46f4df5aaf84279d80"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}

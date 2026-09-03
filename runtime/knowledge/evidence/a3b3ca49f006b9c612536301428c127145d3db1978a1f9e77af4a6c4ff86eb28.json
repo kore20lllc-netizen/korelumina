@@ -1,0 +1,54 @@
+{
+  "id": "genesis-conversation-evidence:45f8db1962fc6bf6885455aadd9f51f5bd52bf92cca61e435f98f89a03d939da",
+  "type": "conversation",
+  "title": "KoreLumina — Master OS - KoreLumina Runtime Recovery — message 1",
+  "source": "chatgpt-authenticated-browser",
+  "capturedAt": 1788165035415,
+  "observedAt": 1788165035415,
+  "contentRef": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e#browser-turn=1",
+  "checksum": "45f8db1962fc6bf6885455aadd9f51f5bd52bf92cca61e435f98f89a03d939da",
+  "metadata": {
+    "content": "grep -R \"Diagnostics\" apps/lumina-builder/src\n====================\n====================\n====================\n====================\n====================\napps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx:  { key: \"deploymentDiagnostics\",  label: \"Deployment diagnostics\" },\napps/lumina-builder/src/services/workspaceAccessService.ts:  deploymentDiagnostics: boolean;\napps/lumina-builder/src/services/workspaceAccessService.ts:  deploymentDiagnostics: false,\napps/lumina-builder/src/services/workspaceAccessService.ts:        deploymentDiagnostics: true, adminTools: true,\napps/lumina-builder/src/services/workspaceAccessService.ts:        deploymentDiagnostics: true, adminTools: true,\napps/lumina-builder/src/services/workspaceAccessService.ts:        deploymentDiagnostics: true, adminTools: false,\napps/lumina-builder/src/services/workspaceAccessService.ts:    caps.deploymentDiagnostics || caps.adminTools;\n(base) erictouko@MacBook-Pro korelumina %",
+    "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+    "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "messageId": "9944a281-115d-4558-a9e1-1b0103c06976",
+    "speakerRole": "user",
+    "messageOrder": 1,
+    "historicalSourceId": "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e:message:9944a281-115d-4558-a9e1-1b0103c06976",
+    "sourceLocation": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e#browser-turn=1",
+    "sourceRevision": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9",
+    "segmentAvailability": "available",
+    "conversationChecksum": "d2d9df5ecb5da9955d134a9b269cc90e4c8afbf7e2085f13335812718c4f3dbf",
+    "privacy": {
+      "sensitivity": "sensitive",
+      "containsPersonalData": true,
+      "handlingNotes": [
+        "Recovered from the user's authenticated ChatGPT browser session.",
+        "Browser recovery is evidence acquisition and does not certify Day-0 completeness.",
+        "Official ChatGPT export may later corroborate or supersede this recovery source."
+      ]
+    },
+    "acquisition": {
+      "provider": "chatgpt-authenticated-browser",
+      "method": "chatgpt-browser-dom-recovery-v1",
+      "acquiredAt": 1788165035415,
+      "exportId": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9",
+      "exportRevision": "sha256:a78a022dfba9e91b74fe602960b680d89993d9250e39623e12464553272de7f9"
+    },
+    "explicitHistoricalRelationships": [],
+    "originalMetadata": {
+      "recoveryMethod": "authenticated-browser-dom",
+      "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+      "snapshotVersion": "chatgpt-browser-recovery:v1",
+      "capturedAt": 1787630777026
+    }
+  },
+  "relationships": {
+    "historicalSource": [
+      "genesis-source:conversation:conversation:chatgpt-authenticated-browser:6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e:message:9944a281-115d-4558-a9e1-1b0103c06976"
+    ],
+    "conversation": [
+      "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e"
+    ]
+  }
+}

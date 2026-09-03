@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:d8f2d2e24b64f4ee2f1535bf6832e2d9d2943261cc40039b956fe1a3c88fdb6b",
+  "type": "commit",
+  "title": "feat(genesis): assemble day-zero certification candidate",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1788240124813,
+  "observedAt": 1787570022000,
+  "contentRef": "git:commit:95d5b91eb800f9bd3d714c8d05f9666aae71ce14",
+  "checksum": "sha256:08d44ce96d98b98e71ff5e81eafe99cef0e8284e295cf527db1df15f0221f771",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10",
+    "genesisManifestId": "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97",
+    "genesisManifestIndex": 1589,
+    "genesisAdmissionIdentity": "genesis-admission:13c28e405806856466ff8c3ca059cc9647c546426fdc58eaaa3048d4b706e353",
+    "historicalSourceId": "genesis-source:commit:95d5b91eb800f9bd3d714c8d05f9666aae71ce14",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:95d5b91eb800f9bd3d714c8d05f9666aae71ce14",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "95d5b91eb800f9bd3d714c8d05f9666aae71ce14",
+      "parentShas": [
+        "882e6ce1d5828c5b6d1102c53b1e11c70a2b0a8f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787570022000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1787570022000
+      },
+      "subject": "feat(genesis): assemble day-zero certification candidate",
+      "body": "",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationCandidate.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjection.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjectionService.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDayZeroCertificationCandidate.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "apps/lumina-runtime/src/routes/genesisOperationalProjection.ts"
+      ],
+      "changedPathsByParent": {
+        "882e6ce1d5828c5b6d1102c53b1e11c70a2b0a8f": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisDayZeroCertificationCandidate.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjection.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisOperationalProjectionService.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisDayZeroCertificationCandidate.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "apps/lumina-runtime/src/routes/genesisOperationalProjection.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:95d5b91eb800f9bd3d714c8d05f9666aae71ce14"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c2bda7263e01e497d1ea18074da58543fdeef3fe852c6c41ec81d1cac6934e10"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a25d711e10835cbcc3f19414a8a77063470f04ee5865127d453d5e9583edff97"
+    ]
+  }
+}
