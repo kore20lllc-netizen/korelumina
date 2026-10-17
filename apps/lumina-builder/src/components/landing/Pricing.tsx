@@ -61,8 +61,8 @@ const pricingFaq = [
   { q: "What happens when I exceed my AI credits?", a: "Additional usage is billed automatically based on actual model consumption." },
   { q: "Can I use my own API keys?", a: "Yes. Connect OpenAI, Anthropic, or Google AI keys and pay providers directly." },
   { q: "Do I still pay for KoreLumina if I use my own keys?", a: "Yes. Your subscription covers access to the KoreLumina platform and orchestration engine." },
-  { q: "What is the In-House Developer Escalation Layer?", a: "A premium service where our engineering team implements complex requirements for you." },
-  { q: "What happens after my 5 free executions?", a: "Upgrade to Pro to unlock unlimited AI building and advanced features." },
+  { q: "What is the In-House Developer Escalation Layer?", a: "A paid service where our engineering team implements complex requirements for you. Any customer can request it, on any plan." },
+  { q: "What happens after my 5 free executions?", a: "Upgrade to Pro for monthly AI credits, unlimited projects, and advanced features." },
   { q: "Can I use my own Supabase and GitHub?", a: "Yes, Pro and above let you connect your own infrastructure." },
   { q: "Can I import an existing app and turn it into a website?", a: "Yes, Pro and above include repository import and Transform App → Website." },
   { q: "Does Free include full browser preview?", a: "No. Free users can preview inside KoreLumina only. Full browser preview is available on Pro and above." },
@@ -70,7 +70,7 @@ const pricingFaq = [
   { q: "Do you offer custom enterprise deployments?", a: "Yes, Enterprise includes private cloud and custom integrations." },
   { q: "Do I need Pro to use Transform App → Website?", a: "No. Free users can unlock this feature for a one-time payment of $49 for one project." },
   { q: "What does the $49 purchase include?", a: "One complete transformation of an imported application into a production-ready website." },
-  { q: "When should I upgrade to Pro?", a: "Upgrade to Pro if you plan to transform multiple projects or want unlimited access to advanced features." },
+  { q: "When should I upgrade to Pro?", a: "Upgrade to Pro if you plan to transform multiple projects or want full access to advanced features." },
 ];
 
 function ctaFor(cta: string) {
