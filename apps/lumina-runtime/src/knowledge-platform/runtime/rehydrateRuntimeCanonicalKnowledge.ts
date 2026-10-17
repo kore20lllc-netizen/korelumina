@@ -107,12 +107,25 @@ function rehydrateCanonicalItems(
           return undefined;
         }
 
+        /*
+         * Timestamps derive from the governed canonicalization
+         * time, never from the moment of rehydration, so that
+         * rehydrating the same package is deterministic.
+         */
         const canonical:
           CanonicalKnowledgeItem = {
           ...promoted,
 
           id:
             canonicalId,
+
+          createdAt:
+            canonicalization
+              .canonicalizedAt as number,
+
+          updatedAt:
+            canonicalization
+              .canonicalizedAt as number,
 
           metadata: {
             ...promoted.metadata,
@@ -248,9 +261,20 @@ export function rehydrateRuntimeCanonicalKnowledge(
           ),
       );
 
+  const preserved =
+    canonicalItems.map(
+      (canonicalItem) =>
+        preservePersistedTimestamps(
+          canonicalItem,
+          platform.store.get(
+            canonicalItem.id,
+          ),
+        ),
+    );
+
   for (
     const canonicalItem
-    of canonicalItems
+    of preserved
   ) {
     platform.store
       .registerGoverned(
@@ -258,5 +282,61 @@ export function rehydrateRuntimeCanonicalKnowledge(
       );
   }
 
-  return canonicalItems;
+  return preserved;
+}
+
+
+function withoutTimestamps(
+  item:
+    CanonicalKnowledgeItem,
+): string {
+  const {
+    createdAt: _createdAt,
+    updatedAt: _updatedAt,
+    ...rest
+  } = item;
+
+  return JSON.stringify(
+    rest,
+  );
+}
+
+
+/*
+ * Canonical history is immutable. Rehydration rebuilds an item from
+ * its governed package; when that item is already persisted, its
+ * original createdAt is kept, and its updatedAt is kept unless the
+ * rebuilt content actually differs from what is stored.
+ */
+export function preservePersistedTimestamps(
+  rebuilt:
+    CanonicalKnowledgeItem,
+
+  persisted:
+    CanonicalKnowledgeItem |
+    undefined,
+): CanonicalKnowledgeItem {
+  if (
+    !persisted
+  ) {
+    return rebuilt;
+  }
+
+  const unchanged =
+    withoutTimestamps(
+      rebuilt,
+    ) ===
+    withoutTimestamps(
+      persisted,
+    );
+
+  return {
+    ...rebuilt,
+    createdAt:
+      persisted.createdAt,
+    updatedAt:
+      unchanged
+        ? persisted.updatedAt
+        : Date.now(),
+  };
 }
