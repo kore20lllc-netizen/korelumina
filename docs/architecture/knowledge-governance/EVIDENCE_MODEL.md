@@ -1,8 +1,14 @@
 # Evidence Model
 
-## Status
+Status: Approved
 
-Draft v1
+Version: 1.0
+
+Owner: Chief Systems Architect
+
+Scope: Defines the immutable evidence inputs the Knowledge Preservation Engine compiles into knowledge: evidence identity, required fields, evidence types, immutability and traceability rules.
+
+Approval Date: 2026-10-17
 
 ## Purpose
 

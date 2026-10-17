@@ -1,8 +1,14 @@
 # Knowledge Intermediate Representation
 
-## Status
+Status: Approved
 
-Draft v1
+Version: 1.0
+
+Owner: Chief Systems Architect
+
+Scope: Defines the normalized candidate knowledge (Knowledge IR) emitted by Knowledge Compilers before canonical review: IR structure, compiler boundaries, normalization and validation pipeline.
+
+Approval Date: 2026-10-17
 
 ## Purpose
 
