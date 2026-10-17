@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+  "type": "CandidateArtifact",
+  "title": "KoreLumina Domain Primer",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:52ca7e17d4305389a06c3616a8be9c1a92964322782d03a7b1c3c2f585ed6305"
+    ],
+    "genesisReplay": [
+      "genesis-replay:26227216ab691afec4fa2970fd4e9d3090986a97efb2d2879ce8a67effad7e18"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cd3d5ed8e70b149d95b3780f1cab63f4b5a313bc06a5b99f090f1017bdf086fd"
+    ]
+  },
+  "createdAt": 1792267919699,
+  "updatedAt": 1792267919699,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/domain/KORELUMINA_DOMAIN_PRIMER.md",
+    "checksum": "sha256:52e23326a8da6fb7b01864020e2a316ae776dded49214d459e43706e47f3b43b",
+    "capturedAt": 1792267823520,
+    "observedAt": 1792265983000,
+    "authorityClass": "domain",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "The problem domains KoreLumina operates in, how KoreLumina differs from other platforms in those domains, and the domain terms the Chief Agent must understand.",
+    "version": "1.0",
+    "sourceLocation": "docs/domain/KORELUMINA_DOMAIN_PRIMER.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "domain",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:26227216ab691afec4fa2970fd4e9d3090986a97efb2d2879ce8a67effad7e18",
+      "genesisManifestId": "genesis-manifest:cd3d5ed8e70b149d95b3780f1cab63f4b5a313bc06a5b99f090f1017bdf086fd",
+      "genesisManifestIndex": 1706,
+      "genesisAdmissionIdentity": "genesis-admission:5dd82024815176e577599bd37413f8524d481662abe8fcdc0ffcf6d8f899426c",
+      "historicalSourceId": "genesis-source:document:derived:52ca7e17d4305389a06c3616a8be9c1a92964322782d03a7b1c3c2f585ed6305",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "domain",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "The problem domains KoreLumina operates in, how KoreLumina differs from other platforms in those domains, and the domain terms the Chief Agent must understand.",
+      "version": "1.0",
+      "sourceLocation": "docs/domain/KORELUMINA_DOMAIN_PRIMER.md",
+      "documentClassification": "domain",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KoreLumina Domain Primer",
+        "status": "Approved",
+        "approvalDate": "2026-10-17",
+        "documentClassification": "domain",
+        "sourceLocation": "docs/domain/KORELUMINA_DOMAIN_PRIMER.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792267823525,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000053",
+      "packageVersion": "1.0",
+      "authority": "domain",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "The problem domains KoreLumina operates in, how KoreLumina differs from other platforms in those domains, and the domain terms the Chief Agent must understand.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09"
+        ],
+        "sourceLocations": [
+          "docs/domain/KORELUMINA_DOMAIN_PRIMER.md"
+        ],
+        "contentRefs": [
+          "docs/domain/KORELUMINA_DOMAIN_PRIMER.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-review:repository-owner",
+      "reviewedAt": 1792267919662,
+      "reviewReason": "Owner approves the KoreLumina Domain Primer v1.0 as domain curriculum for the Chief Agent under ADR-0040, subordinate to the Canon.",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000053",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human-review:repository-owner",
+        "reviewedAt": 1792267919662,
+        "evidenceConsidered": [
+          "genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09"
+        ],
+        "reason": "Owner approves the KoreLumina Domain Primer v1.0 as domain curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000053",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human-review:repository-owner",
+          "reviewedAt": 1792267919662,
+          "evidenceConsidered": [
+            "genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09"
+          ],
+          "reason": "Owner approves the KoreLumina Domain Primer v1.0 as domain curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792267823525
+        },
+        {
+          "state": "compiled",
+          "at": 1792267823525
+        },
+        {
+          "state": "validated",
+          "at": 1792267823525
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792267823525
+        },
+        {
+          "state": "approved",
+          "at": 1792267919662,
+          "reason": "Owner approves the KoreLumina Domain Primer v1.0 as domain curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

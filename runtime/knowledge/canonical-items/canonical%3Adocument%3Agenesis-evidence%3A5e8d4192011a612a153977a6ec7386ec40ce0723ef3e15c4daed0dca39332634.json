@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+  "type": "CandidateArtifact",
+  "title": "KoreLumina Business Charter",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:03fc40b39de25214fee9046e080e492fb0f8601b3badcc800de6a829a891c4af"
+    ],
+    "genesisReplay": [
+      "genesis-replay:26227216ab691afec4fa2970fd4e9d3090986a97efb2d2879ce8a67effad7e18"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cd3d5ed8e70b149d95b3780f1cab63f4b5a313bc06a5b99f090f1017bdf086fd"
+    ]
+  },
+  "createdAt": 1792267919682,
+  "updatedAt": 1792267919682,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/business/KORELUMINA_BUSINESS_CHARTER.md",
+    "checksum": "sha256:baf06ec124cde18e762705f9942acaef5c22bb04e806881b0e5a34cf9ca03944",
+    "capturedAt": 1792267823416,
+    "observedAt": 1792265983000,
+    "authorityClass": "business",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What KoreLumina sells, to whom, how it earns revenue, its near-term business priorities, and the business boundaries the Chief Agent must respect.",
+    "version": "1.0",
+    "sourceLocation": "docs/business/KORELUMINA_BUSINESS_CHARTER.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "business",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:26227216ab691afec4fa2970fd4e9d3090986a97efb2d2879ce8a67effad7e18",
+      "genesisManifestId": "genesis-manifest:cd3d5ed8e70b149d95b3780f1cab63f4b5a313bc06a5b99f090f1017bdf086fd",
+      "genesisManifestIndex": 1705,
+      "genesisAdmissionIdentity": "genesis-admission:aa3fba67f610b41a4091ef1c9d63f0e58f833766ed7c3bded88160315f04ae73",
+      "historicalSourceId": "genesis-source:document:derived:03fc40b39de25214fee9046e080e492fb0f8601b3badcc800de6a829a891c4af",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "business",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What KoreLumina sells, to whom, how it earns revenue, its near-term business priorities, and the business boundaries the Chief Agent must respect.",
+      "version": "1.0",
+      "sourceLocation": "docs/business/KORELUMINA_BUSINESS_CHARTER.md",
+      "documentClassification": "business",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "KoreLumina Business Charter",
+        "status": "Approved",
+        "approvalDate": "2026-10-17",
+        "documentClassification": "business",
+        "sourceLocation": "docs/business/KORELUMINA_BUSINESS_CHARTER.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792267823426,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000052",
+      "packageVersion": "1.0",
+      "authority": "business",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What KoreLumina sells, to whom, how it earns revenue, its near-term business priorities, and the business boundaries the Chief Agent must respect.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
+        ],
+        "sourceLocations": [
+          "docs/business/KORELUMINA_BUSINESS_CHARTER.md"
+        ],
+        "contentRefs": [
+          "docs/business/KORELUMINA_BUSINESS_CHARTER.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-review:repository-owner",
+      "reviewedAt": 1792267919637,
+      "reviewReason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon.",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000052",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human-review:repository-owner",
+        "reviewedAt": 1792267919637,
+        "evidenceConsidered": [
+          "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
+        ],
+        "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000052",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human-review:repository-owner",
+          "reviewedAt": 1792267919637,
+          "evidenceConsidered": [
+            "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
+          ],
+          "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792267823426
+        },
+        {
+          "state": "compiled",
+          "at": 1792267823426
+        },
+        {
+          "state": "validated",
+          "at": 1792267823426
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792267823426
+        },
+        {
+          "state": "approved",
+          "at": 1792267919637,
+          "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}
