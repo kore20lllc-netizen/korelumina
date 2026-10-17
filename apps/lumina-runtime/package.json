@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "education:resolve-authority": "tsx src/knowledge-education/cli/resolveEducationalAuthority.ts"
   },
   "dependencies": {
     "@korelumina/platform-sdk": "0.1.0",

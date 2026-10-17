@@ -16,6 +16,7 @@
     "preview:builder": "npm --workspace apps/lumina-builder run preview",
     "verify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs",
     "certify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs --write",
-    "verify:knowledge-doc-governance": "bash scripts/verify-knowledge-operations-doc-governance.sh"
+    "verify:knowledge-doc-governance": "bash scripts/verify-knowledge-operations-doc-governance.sh",
+    "education:resolve-authority": "npm --workspace apps/lumina-runtime run education:resolve-authority --"
   }
 }
