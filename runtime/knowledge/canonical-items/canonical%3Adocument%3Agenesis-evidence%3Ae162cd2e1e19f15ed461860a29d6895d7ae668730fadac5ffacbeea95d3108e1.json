@@ -1,0 +1,106 @@
+{
+  "id": "canonical:document:genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1",
+  "type": "CandidateArtifact",
+  "title": "Evidence Model",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:55fc1f80b7452e4de5a0641f09984f44e30c06de33729b3d24fd6988fb7d4d94"
+    ],
+    "genesisReplay": [
+      "genesis-replay:7edbb7e4145ab3be92cf2daa2a55283867b6045fda26c4b964e2b7510b1e6972"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0854005dea395fed7b88131f7b10cdc2b2f3fe886137c48dc7fa4f392a27a60d"
+    ]
+  },
+  "createdAt": 1792238743178,
+  "updatedAt": 1792265867780,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md",
+    "checksum": "sha256:aa50bc9335a5fbe25ba8a168114845db5433e0f59018a14b5bdcb0f183d27928",
+    "capturedAt": 1792238364393,
+    "observedAt": 1792234509000,
+    "authorityClass": "architecture",
+    "approvalState": "Approved",
+    "owner": "Chief Systems Architect",
+    "scope": "Defines the immutable evidence inputs the Knowledge Preservation Engine compiles into knowledge: evidence identity, required fields, evidence types, immutability and traceability rules.",
+    "version": "1.0",
+    "sourceLocation": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "architecture",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:7edbb7e4145ab3be92cf2daa2a55283867b6045fda26c4b964e2b7510b1e6972",
+      "genesisManifestId": "genesis-manifest:0854005dea395fed7b88131f7b10cdc2b2f3fe886137c48dc7fa4f392a27a60d",
+      "genesisManifestIndex": 1699,
+      "genesisAdmissionIdentity": "genesis-admission:02dd80ccebac48e6fc5088445dc653f23ab43f265b7943983026a5129baefe89",
+      "historicalSourceId": "genesis-source:document:derived:55fc1f80b7452e4de5a0641f09984f44e30c06de33729b3d24fd6988fb7d4d94",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "architecture",
+      "approvalState": "Approved",
+      "owner": "Chief Systems Architect",
+      "scope": "Defines the immutable evidence inputs the Knowledge Preservation Engine compiles into knowledge: evidence identity, required fields, evidence types, immutability and traceability rules.",
+      "version": "1.0",
+      "sourceLocation": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md",
+      "documentClassification": "architecture",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "Evidence Model",
+        "status": "Approved",
+        "approvalDate": "2026-10-17",
+        "documentClassification": "architecture",
+        "sourceLocation": "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792238364404,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000050",
+      "packageVersion": "1.0",
+      "authority": "architecture",
+      "owner": "Chief Systems Architect",
+      "scope": "Defines the immutable evidence inputs the Knowledge Preservation Engine compiles into knowledge: evidence identity, required fields, evidence types, immutability and traceability rules.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1"
+        ],
+        "sourceLocations": [
+          "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+        ],
+        "contentRefs": [
+          "docs/architecture/knowledge-governance/EVIDENCE_MODEL.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "supersedes": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human-review:repository-owner",
+      "reviewedAt": 1792238743158,
+      "reviewReason": "Owner approves the knowledge-governance specification v1.0 as governing architecture for evidence and Knowledge IR."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1792238743179
+    }
+  }
+}

@@ -19,7 +19,7 @@
     ]
   },
   "createdAt": 1792228461443,
-  "updatedAt": 1792228461443,
+  "updatedAt": 1792265867780,
   "status": "canonical",
   "metadata": {
     "source": "genesis-historical-replay",
@@ -92,62 +92,14 @@
       },
       "lineage": [],
       "dependencies": [],
+      "supersedes": [],
       "reviewDecision": "approved",
       "reviewerId": "human-review:repository-owner",
       "reviewedAt": 1792228461418,
-      "reviewReason": "Approved as governing Chief Agent architecture. \"Platform Governor\" means operational coordination under human governance, per AI Governance; governance remains human.",
-      "approvalState": "approved",
-      "reviewEvidence": {
-        "packageId": "KP-2026-000045",
-        "packageVersion": "1.0",
-        "decision": "approved",
-        "reviewerId": "human-review:repository-owner",
-        "reviewedAt": 1792228461418,
-        "evidenceConsidered": [
-          "genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
-        ],
-        "reason": "Approved as governing Chief Agent architecture. \"Platform Governor\" means operational coordination under human governance, per AI Governance; governance remains human."
-      },
-      "reviewHistory": [
-        {
-          "packageId": "KP-2026-000045",
-          "packageVersion": "1.0",
-          "decision": "approved",
-          "reviewerId": "human-review:repository-owner",
-          "reviewedAt": 1792228461418,
-          "evidenceConsidered": [
-            "genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
-          ],
-          "reason": "Approved as governing Chief Agent architecture. \"Platform Governor\" means operational coordination under human governance, per AI Governance; governance remains human."
-        }
-      ],
-      "lifecycleHistory": [
-        {
-          "state": "captured",
-          "at": 1788240130112
-        },
-        {
-          "state": "compiled",
-          "at": 1788240130112
-        },
-        {
-          "state": "validated",
-          "at": 1788240130112
-        },
-        {
-          "state": "awaiting_review",
-          "at": 1788240130112
-        },
-        {
-          "state": "approved",
-          "at": 1792228461418,
-          "reason": "Approved as governing Chief Agent architecture. \"Platform Governor\" means operational coordination under human governance, per AI Governance; governance remains human."
-        }
-      ],
-      "supersession": {
-        "supersedes": [],
-        "supersededBy": []
-      }
+      "reviewReason": "Approved as governing Chief Agent architecture. \"Platform Governor\" means operational coordination under human governance, per AI Governance; governance remains human."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1792228461445
     }
   }
 }

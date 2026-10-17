@@ -1,0 +1,223 @@
+{
+  "id": "KP-2026-000051",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792238364500,
+  "updatedAt": 1792238743220,
+  "data": {
+    "id": "KP-2026-000051",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+        "candidateType": "CandidateArtifact",
+        "title": "Knowledge Intermediate Representation",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:576d738da2c219d83f108e824a14f95f5a18e9175515a7ee3be0e620f928311f"
+          ],
+          "genesisReplay": [
+            "genesis-replay:7edbb7e4145ab3be92cf2daa2a55283867b6045fda26c4b964e2b7510b1e6972"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:0854005dea395fed7b88131f7b10cdc2b2f3fe886137c48dc7fa4f392a27a60d"
+          ]
+        },
+        "extractedAt": 1792238364498,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792238364498,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md",
+          "checksum": "sha256:e7455649ae891a5b80778f5d8725de2426ef7c3e30f34b7f350344e51f8b75ad",
+          "capturedAt": 1792238364494,
+          "observedAt": 1792234509000,
+          "authorityClass": "architecture",
+          "approvalState": "Approved",
+          "owner": "Chief Systems Architect",
+          "scope": "Defines the normalized candidate knowledge (Knowledge IR) emitted by Knowledge Compilers before canonical review: IR structure, compiler boundaries, normalization and validation pipeline.",
+          "version": "1.0",
+          "sourceLocation": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "architecture",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:7edbb7e4145ab3be92cf2daa2a55283867b6045fda26c4b964e2b7510b1e6972",
+            "genesisManifestId": "genesis-manifest:0854005dea395fed7b88131f7b10cdc2b2f3fe886137c48dc7fa4f392a27a60d",
+            "genesisManifestIndex": 1700,
+            "genesisAdmissionIdentity": "genesis-admission:7eca3edae1958d12db97ed8c6d7089d64661b410700986c6888d7a567a46df68",
+            "historicalSourceId": "genesis-source:document:derived:576d738da2c219d83f108e824a14f95f5a18e9175515a7ee3be0e620f928311f",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "architecture",
+            "approvalState": "Approved",
+            "owner": "Chief Systems Architect",
+            "scope": "Defines the normalized candidate knowledge (Knowledge IR) emitted by Knowledge Compilers before canonical review: IR structure, compiler boundaries, normalization and validation pipeline.",
+            "version": "1.0",
+            "sourceLocation": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md",
+            "documentClassification": "architecture",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "Knowledge Intermediate Representation",
+              "status": "Approved",
+              "approvalDate": "2026-10-17",
+              "documentClassification": "architecture",
+              "sourceLocation": "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792238364499,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+      ],
+      "sourceLocations": [
+        "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+      ],
+      "contentRefs": [
+        "docs/architecture/knowledge-governance/KNOWLEDGE_INTERMEDIATE_REPRESENTATION.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "architecture",
+    "approvalState": "approved",
+    "owner": "Chief Systems Architect",
+    "scope": "Defines the normalized candidate knowledge (Knowledge IR) emitted by Knowledge Compilers before canonical review: IR structure, compiler boundaries, normalization and validation pipeline.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792238364499,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792238364498,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792238364500
+      },
+      {
+        "state": "compiled",
+        "at": 1792238364500
+      },
+      {
+        "state": "validated",
+        "at": 1792238364500
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792238364500
+      },
+      {
+        "state": "approved",
+        "at": 1792238743199,
+        "reason": "Owner approves the knowledge-governance specification v1.0 as governing architecture for evidence and Knowledge IR."
+      },
+      {
+        "state": "canonical",
+        "at": 1792238743220,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792238364500
+    },
+    "createdAt": 1792238364500,
+    "updatedAt": 1792238743220,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000051",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human-review:repository-owner",
+        "reviewedAt": 1792238743199,
+        "evidenceConsidered": [
+          "genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+        ],
+        "reason": "Owner approves the knowledge-governance specification v1.0 as governing architecture for evidence and Knowledge IR."
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000051",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human-review:repository-owner",
+          "reviewedAt": 1792238743199,
+          "evidenceConsidered": [
+            "genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+          ],
+          "reason": "Owner approves the knowledge-governance specification v1.0 as governing architecture for evidence and Knowledge IR."
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792238743220,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae"
+        ]
+      }
+    }
+  }
+}
