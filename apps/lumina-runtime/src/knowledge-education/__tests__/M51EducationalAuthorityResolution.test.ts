@@ -72,6 +72,7 @@ test(
       assert.deepEqual(
         store.load(
           resolution.artifactId,
+          resolution.dayZeroCertificationId,
         ),
         resolution,
       );
@@ -200,6 +201,7 @@ test(
       assert.deepEqual(
         store.load(
           first.artifactId,
+          first.dayZeroCertificationId,
         ),
         first,
       );

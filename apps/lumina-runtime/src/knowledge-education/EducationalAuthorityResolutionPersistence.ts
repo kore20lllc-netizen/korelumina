@@ -1,5 +1,6 @@
 import {
   mkdirSync,
+  readdirSync,
   readFileSync,
   renameSync,
   rmSync,
@@ -243,6 +244,23 @@ function validateResolution(
 }
 
 
+/*
+ * Educational authority resolutions are versioned per Day-0
+ * Genesis certification.
+ *
+ * A human authority decision is bound to the Day-0 certification
+ * it was made against. When Day-0 is re-certified, the earlier
+ * decision remains preserved as history and a new decision may be
+ * recorded against the new certification. Within one Day-0
+ * certification, a resolution can never be silently replaced.
+ *
+ * Layout:
+ *
+ *   <root>/<artifact>.json                 legacy v1 record (read-only)
+ *   <root>/<artifact>/<day-zero>.json      versioned records
+ *
+ * Legacy records are read as history and are never rewritten.
+ */
 export class FileEducationalAuthorityResolutionStore {
   readonly storageRoot:
     string;
@@ -264,36 +282,72 @@ export class FileEducationalAuthorityResolutionStore {
   }
 
 
-  private fileFor(
+  private static encode(
+    value:
+      string,
+  ): string {
+    return Buffer.from(
+      value,
+      "utf8",
+    )
+      .toString(
+        "base64url",
+      );
+  }
+
+
+  private legacyFileFor(
     artifactId:
       string,
   ): string {
-    const safe =
-      Buffer.from(
-        artifactId,
-        "utf8",
-      )
-        .toString(
-          "base64url",
-        );
-
     return path.join(
       this.storageRoot,
-      `${safe}.json`,
+      `${FileEducationalAuthorityResolutionStore.encode(
+        artifactId,
+      )}.json`,
     );
   }
 
 
-  load(
+  private versionDirectoryFor(
+    artifactId:
+      string,
+  ): string {
+    return path.join(
+      this.storageRoot,
+      FileEducationalAuthorityResolutionStore.encode(
+        artifactId,
+      ),
+    );
+  }
+
+
+  private versionFileFor(
+    artifactId:
+      string,
+
+    dayZeroCertificationId:
+      string,
+  ): string {
+    return path.join(
+      this.versionDirectoryFor(
+        artifactId,
+      ),
+      `${FileEducationalAuthorityResolutionStore.encode(
+        dayZeroCertificationId,
+      )}.json`,
+    );
+  }
+
+
+  private readRecord(
+    file:
+      string,
+
     artifactId:
       string,
   ): EducationalAuthorityResolution |
     null {
-    const file =
-      this.fileFor(
-        artifactId,
-      );
-
     let raw:
       string;
 
@@ -362,6 +416,187 @@ export class FileEducationalAuthorityResolutionStore {
   }
 
 
+  private listVersionFiles(
+    artifactId:
+      string,
+  ): string[] {
+    try {
+      return readdirSync(
+        this.versionDirectoryFor(
+          artifactId,
+        ),
+      )
+        .filter(
+          name =>
+            name.endsWith(
+              ".json",
+            ),
+        )
+        .sort()
+        .map(
+          name =>
+            path.join(
+              this.versionDirectoryFor(
+                artifactId,
+              ),
+              name,
+            ),
+        );
+    } catch (
+      error
+    ) {
+      const code =
+        (
+          error as {
+            code?:
+              string;
+          }
+        ).code;
+
+      if (
+        code ===
+          "ENOENT"
+      ) {
+        return [];
+      }
+
+      throw error;
+    }
+  }
+
+
+  /*
+   * Every preserved resolution for an artifact, across all Day-0
+   * certifications, ordered by review time.
+   */
+  list(
+    artifactId:
+      string,
+  ): EducationalAuthorityResolution[] {
+    const byDayZero =
+      new Map<
+        string,
+        EducationalAuthorityResolution
+      >();
+
+    const accept = (
+      resolution:
+        EducationalAuthorityResolution,
+    ): void => {
+      const existing =
+        byDayZero.get(
+          resolution.dayZeroCertificationId,
+        );
+
+      if (
+        existing &&
+        existing.resolutionId !==
+          resolution.resolutionId
+      ) {
+        throw new Error(
+          "educational_authority_resolution_persistence_day_zero_conflict",
+        );
+      }
+
+      byDayZero.set(
+        resolution.dayZeroCertificationId,
+        resolution,
+      );
+    };
+
+    const legacy =
+      this.readRecord(
+        this.legacyFileFor(
+          artifactId,
+        ),
+        artifactId,
+      );
+
+    if (
+      legacy
+    ) {
+      accept(
+        legacy,
+      );
+    }
+
+    for (
+      const file of
+      this.listVersionFiles(
+        artifactId,
+      )
+    ) {
+      const resolution =
+        this.readRecord(
+          file,
+          artifactId,
+        );
+
+      if (
+        !resolution
+      ) {
+        continue;
+      }
+
+      if (
+        file !==
+          this.versionFileFor(
+            artifactId,
+            resolution.dayZeroCertificationId,
+          )
+      ) {
+        throw new Error(
+          "educational_authority_resolution_persistence_day_zero_mismatch",
+        );
+      }
+
+      accept(
+        resolution,
+      );
+    }
+
+    return [
+      ...byDayZero.values(),
+    ].sort(
+      (
+        left,
+        right,
+      ) =>
+        left.reviewedAt -
+          right.reviewedAt ||
+        left.resolutionId.localeCompare(
+          right.resolutionId,
+        ),
+    );
+  }
+
+
+  /*
+   * The resolution recorded for an artifact against one specific
+   * Day-0 certification, or null.
+   */
+  load(
+    artifactId:
+      string,
+
+    dayZeroCertificationId:
+      string,
+  ): EducationalAuthorityResolution |
+    null {
+    return (
+      this.list(
+        artifactId,
+      )
+        .find(
+          resolution =>
+            resolution.dayZeroCertificationId ===
+              dayZeroCertificationId,
+        ) ??
+      null
+    );
+  }
+
+
   save(
     resolution:
       EducationalAuthorityResolution,
@@ -374,6 +609,7 @@ export class FileEducationalAuthorityResolutionStore {
     const existing =
       this.load(
         validated.artifactId,
+        validated.dayZeroCertificationId,
       );
 
     if (
@@ -392,8 +628,9 @@ export class FileEducationalAuthorityResolutionStore {
     }
 
     atomicWriteJson(
-      this.fileFor(
+      this.versionFileFor(
         validated.artifactId,
+        validated.dayZeroCertificationId,
       ),
       validated,
     );

@@ -197,22 +197,18 @@ export class EducationalCorpusRuntimeService {
     artifactIds:
       readonly string[],
   ) {
+    /*
+     * Every preserved resolution version is supplied. The source
+     * contract selects only the resolution bound to the current
+     * valid Day-0 certification.
+     */
     return artifactIds
-      .map(
+      .flatMap(
         artifactId =>
           this.authorityResolutions
-            .load(
+            .list(
               artifactId,
             ),
-      )
-      .filter(
-        (
-          resolution,
-        ): resolution is NonNullable<
-          typeof resolution
-        > =>
-          resolution !==
-          null,
       );
   }
 
