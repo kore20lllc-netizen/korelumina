@@ -3,13 +3,15 @@
   "type": "knowledge-manufacturing-run",
   "version": 1,
   "createdAt": 1788240130296,
-  "updatedAt": 1788240130298,
+  "updatedAt": 1792228461479,
   "data": {
     "id": "KMR-c5a229be41a8a0225db8",
     "evidenceId": "genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
-    "currentStage": "Canonical Review",
-    "status": "active",
-    "canonicalKnowledgeIds": [],
+    "currentStage": "Canonical Knowledge",
+    "status": "completed",
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678"
+    ],
     "stageHistory": [
       {
         "stage": "Evidence Intake",
@@ -106,10 +108,27 @@
         "outcome": "awaiting_human_review",
         "at": 1788240130298,
         "detail": "Knowledge Package is awaiting explicit human canonical review."
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "approved",
+        "at": 1792228461461,
+        "detail": "Canonical review approved by human-review:repository-owner."
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "entered",
+        "at": 1792228461461
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "published",
+        "at": 1792228461479,
+        "detail": "1 governed canonical item(s) published as Canonical Knowledge."
       }
     ],
     "createdAt": 1788240130296,
-    "updatedAt": 1788240130298,
+    "updatedAt": 1792228461479,
     "packageId": "KP-2026-000047"
   }
 }
