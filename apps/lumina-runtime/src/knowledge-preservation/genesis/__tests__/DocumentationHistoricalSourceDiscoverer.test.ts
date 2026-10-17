@@ -1399,3 +1399,118 @@ test(
     }
   },
 );
+
+
+test(
+  "business and domain documentation map to their own authority classes (ADR-0040)",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/business/CHARTER.md",
+      "# Charter",
+    );
+
+    write(
+      root,
+      "docs/domain/PRIMER.md",
+      "# Primer",
+    );
+
+    const result =
+      await discoverer(
+        root,
+      ).discover(
+        scope(),
+      );
+
+    assert.equal(
+      result.sources.length,
+      2,
+    );
+
+    const classes =
+      result.sources
+        .map(
+          (source) => [
+            source.authority
+              .authorityClass,
+            source.metadata
+              .documentClassification,
+            source.evidenceType,
+          ].join("|"),
+        )
+        .sort();
+
+    assert.deepEqual(
+      classes,
+      [
+        "business|business|document",
+        "domain|domain|document",
+      ],
+    );
+  },
+);
+
+test(
+  "default document roots include the business and domain registries",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/business/CHARTER.md",
+      "# Charter",
+    );
+
+    write(
+      root,
+      "docs/domain/PRIMER.md",
+      "# Primer",
+    );
+
+    write(
+      root,
+      "docs/unregistered/NOTES.md",
+      "# Notes",
+    );
+
+    const result =
+      await new DocumentationHistoricalSourceDiscoverer({
+        repositoryRoot:
+          root,
+
+        discoveredAt:
+          () =>
+            9_000,
+
+        historicalTimestampResolver:
+          () => ({
+            value:
+              1_700_000_000_000,
+
+            source:
+              "fixture-history",
+          }),
+      }).discover(
+        scope(),
+      );
+
+    assert.deepEqual(
+      result.sources
+        .map(
+          (source) =>
+            source.authority
+              .authorityClass,
+        )
+        .sort(),
+      [
+        "business",
+        "domain",
+      ],
+    );
+  },
+);

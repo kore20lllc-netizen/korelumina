@@ -177,3 +177,35 @@ test(
     );
   },
 );
+
+
+test(
+  "projects business and domain document classifications as business and domain curriculum",
+  () => {
+    assert.equal(
+      projectEducationalArtifact(
+        canonicalItem({
+          authorityClass:
+            "business",
+
+          documentClassification:
+            "business",
+        }),
+      ).kind,
+      "business",
+    );
+
+    assert.equal(
+      projectEducationalArtifact(
+        canonicalItem({
+          authorityClass:
+            "domain",
+
+          documentClassification:
+            "domain",
+        }),
+      ).kind,
+      "domain",
+    );
+  },
+);

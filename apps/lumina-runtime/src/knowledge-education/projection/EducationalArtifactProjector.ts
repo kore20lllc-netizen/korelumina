@@ -240,6 +240,12 @@ function artifactKind(
     case "specification":
       return "specification";
 
+    case "business":
+      return "business";
+
+    case "domain":
+      return "domain";
+
     default:
       break;
   }

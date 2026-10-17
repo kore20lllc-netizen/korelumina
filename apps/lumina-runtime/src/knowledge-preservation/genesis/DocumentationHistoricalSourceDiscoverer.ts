@@ -63,6 +63,8 @@ const DEFAULT_DOCUMENT_ROOTS =
     "docs/roadmap",
     "docs/roadmaps",
     "docs/certification",
+    "docs/business",
+    "docs/domain",
   ] as const;
 
 export interface DocumentationHistoricalTimestamp {
@@ -745,6 +747,53 @@ function classifyDocument(
 
       documentClassification:
         "governance",
+    };
+  }
+
+  /*
+   * ADR-0040 registers docs/business and docs/domain as the
+   * canonical source registries for business and domain
+   * knowledge (CA-005). They inform the Chief Agent but are
+   * not governing authority, so they stay outside the
+   * governing authority classes.
+   */
+  if (
+    normalized.startsWith(
+      "docs/business/",
+    )
+  ) {
+    return {
+      sourceClass:
+        "document",
+
+      evidenceType:
+        "document",
+
+      authorityClass:
+        "business",
+
+      documentClassification:
+        "business",
+    };
+  }
+
+  if (
+    normalized.startsWith(
+      "docs/domain/",
+    )
+  ) {
+    return {
+      sourceClass:
+        "document",
+
+      evidenceType:
+        "document",
+
+      authorityClass:
+        "domain",
+
+      documentClassification:
+        "domain",
     };
   }
 
