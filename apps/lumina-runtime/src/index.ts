@@ -12,7 +12,8 @@ import express from "express";
 import cors from "cors";
 import {
   ChiefAgentActivationGate,
-  noChiefAgentActivationRecords,
+  ChiefAgentActivationService,
+  FileChiefAgentActivationStore,
   requireActiveChiefAgent,
 } from "./executive/activation/index.js";
 import {
@@ -1227,6 +1228,75 @@ export const chiefAgentReasoningAdapter =
     },
   );
 
+const readChiefAgentActivationPrerequisites = () => {
+  const dayZero =
+    runtimeGenesisDayZeroCertificationService.read();
+  const corpus =
+    runtimeEducationalCorpusCertificationService.read();
+  const competency =
+    runtimeInitialCompetencyCertificationService.read();
+  const acceptance =
+    runtimeInitialCompetencyHumanAcceptanceService.read();
+  const workspace =
+    runtimeChiefAgentProductionWorkspaceAuthorizationService.read();
+
+  return [
+    {
+      gate:
+        "day-zero-certification",
+      state:
+        dayZero.state,
+      id:
+        dayZero.certification?.certificationId ?? null,
+    },
+    {
+      gate:
+        "educational-corpus-certification",
+      state:
+        corpus.state,
+      id:
+        corpus.certification?.certificationId ?? null,
+    },
+    {
+      gate:
+        "initial-competency-certification",
+      state:
+        competency.state,
+      id:
+        competency.certification?.certificationId ?? null,
+    },
+    {
+      gate:
+        "initial-competency-human-acceptance",
+      state:
+        acceptance.state,
+      id:
+        acceptance.acceptance?.acceptanceId ?? null,
+    },
+    {
+      gate:
+        "production-workspace-authorization",
+      state:
+        workspace.state,
+      id:
+        workspace.authorization?.authorizationId ?? null,
+    },
+  ];
+};
+
+/*
+ * ADR-0041 (KO-5c): activation records are read from the tracked
+ * governance store. The gate is ACTIVE only while the latest record is.
+ */
+export const chiefAgentActivationStore =
+  new FileChiefAgentActivationStore();
+
+export const chiefAgentActivationService =
+  new ChiefAgentActivationService(
+    chiefAgentActivationStore,
+    readChiefAgentActivationPrerequisites,
+  );
+
 /*
  * ADR-0041 Decision 3 (KO-5b): Chief Agent reasoning runs only while the
  * activation gate is ACTIVE. Before activation the event is still recorded;
@@ -1234,49 +1304,8 @@ export const chiefAgentReasoningAdapter =
  */
 export const chiefAgentActivationGate =
   new ChiefAgentActivationGate(
-    noChiefAgentActivationRecords,
-    () => [
-      {
-        gate:
-          "day-zero-certification",
-        state:
-          runtimeGenesisDayZeroCertificationService
-            .read()
-            .state,
-      },
-      {
-        gate:
-          "educational-corpus-certification",
-        state:
-          runtimeEducationalCorpusCertificationService
-            .read()
-            .state,
-      },
-      {
-        gate:
-          "initial-competency-certification",
-        state:
-          runtimeInitialCompetencyCertificationService
-            .read()
-            .state,
-      },
-      {
-        gate:
-          "initial-competency-human-acceptance",
-        state:
-          runtimeInitialCompetencyHumanAcceptanceService
-            .read()
-            .state,
-      },
-      {
-        gate:
-          "production-workspace-authorization",
-        state:
-          runtimeChiefAgentProductionWorkspaceAuthorizationService
-            .read()
-            .state,
-      },
-    ],
+    chiefAgentActivationStore,
+    readChiefAgentActivationPrerequisites,
   );
 
 executiveRuntime.dispatcher.register(
@@ -1776,6 +1805,7 @@ registerExecutiveRoute(
 registerExecutiveActivationRoute(
   app,
   chiefAgentActivationGate,
+  chiefAgentActivationService,
 );
 
 registerExecutiveReasoningRoute(

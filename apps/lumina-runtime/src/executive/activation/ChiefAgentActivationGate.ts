@@ -44,6 +44,13 @@ export interface ChiefAgentActivationPrerequisite {
 
   state:
     string;
+
+  /*
+   * The current record's id (certification, acceptance or authorization),
+   * bound into an activation record when one is made (KO-5c).
+   */
+  id?:
+    string | null;
 }
 
 export type ChiefAgentActivationPrerequisiteReader =
@@ -178,11 +185,30 @@ export class ChiefAgentActivationGate {
    * gate ACTIVE; only an activation record does (ADR-0041 Decision 6:
    * drift after activation does not suspend).
    */
-  status():
+  status(
+    options: {
+      includePrerequisites?:
+        boolean;
+    } = {
+      includePrerequisites:
+        true,
+    },
+  ):
     ChiefAgentActivationDecision & {
       prerequisites:
-        readonly ChiefAgentActivationPrerequisite[];
+        readonly ChiefAgentActivationPrerequisite[] | null;
     } {
+    if (
+      options.includePrerequisites ===
+      false
+    ) {
+      return {
+        ...this.evaluate(),
+        prerequisites:
+          null,
+      };
+    }
+
     let prerequisites:
       readonly ChiefAgentActivationPrerequisite[];
 

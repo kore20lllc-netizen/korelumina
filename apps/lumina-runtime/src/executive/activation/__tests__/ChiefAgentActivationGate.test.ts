@@ -264,7 +264,10 @@ test(
     const { port } = server.address() as AddressInfo;
 
     try {
-      const response = await fetch(`http://127.0.0.1:${port}/api/executive/activation`);
+      const quick = await (await fetch(`http://127.0.0.1:${port}/api/executive/activation`)).json();
+      assert.equal(quick.activation.prerequisites, null, "prerequisites only on request");
+
+      const response = await fetch(`http://127.0.0.1:${port}/api/executive/activation?prerequisites=true`);
       const body = await response.json();
 
       assert.equal(response.status, 200);
