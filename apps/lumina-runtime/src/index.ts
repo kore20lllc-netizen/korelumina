@@ -10,6 +10,15 @@ import {
 
 import express from "express";
 import cors from "cors";
+import {
+  rejectAgentActorsOnHumanOnlyExecutiveRoutes,
+  rejectDisallowedBrowserOrigins,
+  resolveAllowedRuntimeOrigins,
+  resolveRuntimeHost,
+} from "./routes/runtimeBoundary.js";
+import {
+  requireRuntimeAccess,
+} from "./routes/runtimeAccess.js";
 
 import { registerProjectsRoute } from "./routes/projects.js";
 import { registerProjectMetadataRoute } from "./routes/projectMetadata.js";
@@ -1218,8 +1227,34 @@ executiveRuntime.dispatcher.register(
     ),
 );
 
-app.use(cors());
+/*
+ * ADR-0041 Decision 5 (KO-5a): only the Builder's own origin may call the
+ * Runtime from a browser, executive routes require Runtime access, and
+ * human-only executive decisions refuse agent actors.
+ */
+const allowedRuntimeOrigins =
+  resolveAllowedRuntimeOrigins(
+    process.env
+      .KORELUMINA_RUNTIME_ALLOWED_ORIGINS,
+  );
+
+app.use(
+  rejectDisallowedBrowserOrigins(
+    allowedRuntimeOrigins,
+  ),
+);
+app.use(
+  cors({
+    origin:
+      allowedRuntimeOrigins,
+  }),
+);
 app.use(express.json());
+app.use(
+  "/api/executive",
+  requireRuntimeAccess,
+  rejectAgentActorsOnHumanOnlyExecutiveRoutes,
+);
 
 app.get(
   "/health",
@@ -1796,6 +1831,12 @@ Promise<void> {
     ) ||
     4100;
 
+  const RUNTIME_HOST =
+    resolveRuntimeHost(
+      process.env
+        .KORELUMINA_RUNTIME_HOST,
+    );
+
   const shouldBootstrap =
     claimRuntimeBootstrap();
 
@@ -1826,9 +1867,10 @@ Promise<void> {
   const server =
     app.listen(
       PORT,
+      RUNTIME_HOST,
       () => {
         console.log(
-          `[lumina-runtime] listening on ${PORT}`,
+          `[lumina-runtime] listening on ${RUNTIME_HOST}:${PORT}`,
         );
       },
     );
