@@ -685,6 +685,39 @@ export function CanonicalReview({
     selectedReview?.reviewMode ===
     "individual";
 
+  /*
+   * UI-2: the governed batch group (same authority and scope) the
+   * selected package belongs to, so it can be reviewed with its group.
+   */
+  const selectedBatchGroup =
+    useMemo(
+      () => {
+        const capsuleId =
+          selectedReview?.capsuleId;
+
+        if (
+          !capsuleId ||
+          selectedReview?.reviewMode !==
+            "batch_candidate"
+        ) {
+          return null;
+        }
+
+        return (
+          batchGroups.find(
+            (group) =>
+              group.packageIds.includes(
+                capsuleId,
+              ),
+          ) ?? null
+        );
+      },
+      [
+        batchGroups,
+        selectedReview,
+      ],
+    );
+
   async function submitDecision(
     decision:
       CanonicalReviewDecision,
@@ -1415,6 +1448,11 @@ export function CanonicalReview({
 
       setActiveBatchId(
         result.batch.id,
+      );
+
+      /* The batch decision controls live in the Batch queue. */
+      setQueueMode(
+        "batch_candidate",
       );
     } catch (
       error
@@ -3846,13 +3884,76 @@ export function CanonicalReview({
                   </>
                 ) : selectedReview.reviewMode ===
                   "batch_candidate" ? (
-                  <div className="mt-4 rounded-[14px] border border-cyan-300/14 bg-cyan-300/[0.04] px-3 py-3 text-xs leading-5 text-cyan-100/72">
-                    This package is eligible for governed batch review. Batch decision controls are the next activation milestone.
+                  <div className="mt-4 grid gap-3 rounded-[14px] border border-cyan-300/14 bg-cyan-300/[0.04] px-3 py-3 text-xs leading-5 text-cyan-100/72">
+                    <div>
+                      This package is eligible for governed batch review. Open a batch for it, then record the decision in the Batch queue.
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        disabled={
+                          batchBusy ||
+                          !selectedReview.capsuleId
+                        }
+                        onClick={() =>
+                          selectedReview.capsuleId
+                            ? void createBatch([
+                                selectedReview.capsuleId,
+                              ])
+                            : undefined
+                        }
+                        className="rounded-full border border-cyan-300/28 bg-cyan-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-100 transition hover:bg-cyan-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                      >
+                        {batchBusy
+                          ? "Preparing…"
+                          : "Review this package"}
+                      </button>
+
+                      {selectedBatchGroup &&
+                      selectedBatchGroup.count >
+                        1 ? (
+                        <button
+                          type="button"
+                          disabled={
+                            batchBusy
+                          }
+                          onClick={() =>
+                            void createBatch(
+                              selectedBatchGroup.packageIds,
+                            )
+                          }
+                          className="rounded-full border border-cyan-300/28 bg-cyan-300/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-100 transition hover:bg-cyan-300/[0.13] disabled:cursor-not-allowed disabled:opacity-45"
+                        >
+                          {`Review all ${selectedBatchGroup.count} in its group`}
+                        </button>
+                      ) : null}
+                    </div>
+
+                    {batchError ? (
+                      <div className="text-rose-200/80">
+                        {batchError}
+                      </div>
+                    ) : null}
                   </div>
                 ) : selectedReview.reviewMode ===
                   "policy_candidate" ? (
                   <div className="mt-4 rounded-[14px] border border-violet-300/14 bg-violet-300/[0.04] px-3 py-3 text-xs leading-5 text-violet-100/72">
-                    This package is policy-eligible. Policy execution remains disabled until the governed policy authority model is activated.
+                    <div>
+                      This package is policy-eligible. It is decided by executing an active review policy from the Policy queue.
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setQueueMode(
+                          "policy_candidate",
+                        )
+                      }
+                      className="mt-3 rounded-full border border-violet-300/28 bg-violet-300/[0.09] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-violet-100 transition hover:bg-violet-300/[0.14]"
+                    >
+                      Open Policy queue
+                    </button>
                   </div>
                 ) : selectedReview.reviewMode ===
                   "blocked" ? (
