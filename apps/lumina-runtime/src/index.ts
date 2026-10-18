@@ -28,6 +28,16 @@ import {
 import {
   requireRuntimeAccess,
 } from "./routes/runtimeAccess.js";
+import {
+  cacheUntilRuntimeStateChanges,
+  trackRuntimeMutations,
+} from "./runtime/cache/RuntimeStateCache.js";
+import type {
+  RuntimeStateRoot,
+} from "./runtime/cache/RuntimeStateCache.js";
+import {
+  resolveKnowledgeStorageRoot,
+} from "./knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
 
 import { registerProjectsRoute } from "./routes/projects.js";
 import { registerProjectMetadataRoute } from "./routes/projectMetadata.js";
@@ -482,12 +492,41 @@ rehydrateRuntimeCanonicalKnowledge(
 export const runtimeOrganizationalMemoryStore =
   new RuntimeOrganizationalMemoryStore();
 
+/*
+ * Every persisted location Genesis, knowledge, and education reads from.
+ * Project workspaces and test data are not knowledge state.
+ */
+function runtimeKnowledgeStateRoots(): RuntimeStateRoot[] {
+  const roots: RuntimeStateRoot[] = [
+    {
+      root: getRuntimeDataRoot(),
+      exclude: ["test-knowledge"],
+    },
+    {
+      root: resolveKnowledgeStorageRoot(),
+    },
+  ];
+  for (const name of [
+    "KORELUMINA_CANONICAL_ROOT",
+    "KORELUMINA_GENESIS_CHATGPT_EXPORT_ROOT",
+    "KORELUMINA_GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT",
+  ]) {
+    const value = process.env[name]?.trim();
+    if (value) roots.push({ root: value });
+  }
+  return roots;
+}
+
 export const runtimeGenesisDayZeroCertificationService =
   new GenesisDayZeroCertificationService(
     runtimeGenesisDayZeroCertificationPersistenceStore,
     {
+      /*
+       * RT-1: rebuilding this candidate reads every persisted Genesis
+       * replay (about 12 s). It is reused until Runtime state changes.
+       */
       readCurrentCandidate:
-        () => {
+        cacheUntilRuntimeStateChanges(() => {
           const inventory =
             listGenesisReplayInventory({
               persistence:
@@ -567,7 +606,10 @@ export const runtimeGenesisDayZeroCertificationService =
                 null,
             },
           });
-        },
+        }, {
+          roots:
+            runtimeKnowledgeStateRoots,
+        }),
     },
   );
 
@@ -1340,6 +1382,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(trackRuntimeMutations);
 app.use(
   "/api/executive",
   requireRuntimeAccess,
