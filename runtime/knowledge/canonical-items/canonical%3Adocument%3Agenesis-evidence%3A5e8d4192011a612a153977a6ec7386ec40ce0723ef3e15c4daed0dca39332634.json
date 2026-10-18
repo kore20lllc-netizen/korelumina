@@ -19,7 +19,7 @@
     ]
   },
   "createdAt": 1792267919682,
-  "updatedAt": 1792267919682,
+  "updatedAt": 1792268363305,
   "status": "canonical",
   "metadata": {
     "source": "genesis-historical-replay",
@@ -93,62 +93,14 @@
       },
       "lineage": [],
       "dependencies": [],
+      "supersedes": [],
       "reviewDecision": "approved",
       "reviewerId": "human-review:repository-owner",
       "reviewedAt": 1792267919637,
-      "reviewReason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon.",
-      "approvalState": "approved",
-      "reviewEvidence": {
-        "packageId": "KP-2026-000052",
-        "packageVersion": "1.0",
-        "decision": "approved",
-        "reviewerId": "human-review:repository-owner",
-        "reviewedAt": 1792267919637,
-        "evidenceConsidered": [
-          "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
-        ],
-        "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
-      },
-      "reviewHistory": [
-        {
-          "packageId": "KP-2026-000052",
-          "packageVersion": "1.0",
-          "decision": "approved",
-          "reviewerId": "human-review:repository-owner",
-          "reviewedAt": 1792267919637,
-          "evidenceConsidered": [
-            "genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634"
-          ],
-          "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
-        }
-      ],
-      "lifecycleHistory": [
-        {
-          "state": "captured",
-          "at": 1792267823426
-        },
-        {
-          "state": "compiled",
-          "at": 1792267823426
-        },
-        {
-          "state": "validated",
-          "at": 1792267823426
-        },
-        {
-          "state": "awaiting_review",
-          "at": 1792267823426
-        },
-        {
-          "state": "approved",
-          "at": 1792267919637,
-          "reason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
-        }
-      ],
-      "supersession": {
-        "supersedes": [],
-        "supersededBy": []
-      }
+      "reviewReason": "Owner approves the KoreLumina Business Charter v1.0 as business curriculum for the Chief Agent under ADR-0040, subordinate to the Canon."
+    },
+    "canonicalization": {
+      "canonicalizedAt": 1792267919683
     }
   }
 }
