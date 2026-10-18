@@ -2,6 +2,8 @@ import {
   RUNTIME_API,
 } from "@/services/runtime/client";
 
+import { runtimeRead } from "@/services/runtime/runtimeReadQueue";
+
 import type {
   CompetencyObjective,
   EducationalArtifact,
@@ -47,7 +49,7 @@ export interface EducationalDashboardSnapshot {
 export async function getEducationalDashboard():
 Promise<EducationalDashboardSnapshot> {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/knowledge/education`,
       {
         method:

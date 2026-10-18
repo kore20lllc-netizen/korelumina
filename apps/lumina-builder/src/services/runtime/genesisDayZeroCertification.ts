@@ -3,6 +3,8 @@ import {
   getRuntimeCallerHeaders,
 } from "@/services/runtime/client";
 
+import { runtimeRead } from "@/services/runtime/runtimeReadQueue";
+
 
 export type GenesisDayZeroCertificationRuntimeState =
   | "UNSET"
@@ -386,7 +388,7 @@ async function request(
   GenesisDayZeroCertificationRuntimeProjection
 > {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/runtime/genesis/day-zero-certification`,
       input,
     );

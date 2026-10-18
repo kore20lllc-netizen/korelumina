@@ -3,6 +3,8 @@ import {
   getRuntimeCallerHeaders,
 } from "@/services/runtime/client";
 
+import { runtimeRead } from "@/services/runtime/runtimeReadQueue";
+
 
 export type EducationalCorpusRuntimeState =
   | "UNSET"
@@ -311,7 +313,7 @@ export async function getEducationalCorpus():
     EducationalCorpusRuntimeProjection
   > {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/knowledge/education/corpus`,
       {
         method:
@@ -349,7 +351,7 @@ export async function persistEducationalCorpus():
     EducationalCorpusRuntimeProjection
   > {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/knowledge/education/corpus`,
       {
         method:
@@ -422,7 +424,7 @@ export async function getEducationalCorpusCertification():
     EducationalCorpusCertificationProjection
   > {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/knowledge/education/corpus-certification`,
       {
         method:
@@ -473,7 +475,7 @@ export async function certifyEducationalCorpus(
   EducationalCorpusCertificationProjection
 > {
   const response =
-    await fetch(
+    await runtimeRead(
       `${RUNTIME_API}/api/knowledge/education/corpus-certification`,
       {
         method:
