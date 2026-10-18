@@ -1,4 +1,9 @@
 import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
   CheckCircle2,
   CircleOff,
   KeyRound,
@@ -35,6 +40,12 @@ import {
   flagshipAppearance,
 } from "../presentation";
 
+import { runtimeRead } from "@/services/runtime/runtimeReadQueue";
+import {
+  RUNTIME_API,
+  getRuntimeCallerHeaders,
+} from "@/services/runtime/client";
+
 interface ActivationReadinessItem {
   label: string;
   state:
@@ -44,68 +55,141 @@ interface ActivationReadinessItem {
   detail: string;
 }
 
-const READINESS_ITEMS: ActivationReadinessItem[] = [
-  {
-    label: "Genesis completion",
-    state: "partial",
-    detail:
-      "Constitutional, architectural, recovery and conversation sources are represented; business and domain coverage remains incomplete.",
+/*
+ * UI-1: readiness is read from the Runtime's activation gate
+ * (GET /api/executive/activation?prerequisites=true, ADR-0041). Nothing on
+ * this panel is typed in. Reading the five certifications rebuilds their
+ * candidates, so the first answer can take up to a minute.
+ */
+
+interface ActivationStatus {
+  state: string;
+  reason: string;
+  autonomyLevel: string | null;
+  prerequisites: Array<{ gate: string; state: string; id?: string | null }> | null;
+}
+
+type Loaded =
+  | { status: "loading" }
+  | { status: "error"; message: string }
+  | { status: "ok"; activation: ActivationStatus; decisions: number };
+
+const PREREQUISITE_LABELS: Record<string, { label: string; valid: string }> = {
+  "day-zero-certification": {
+    label: "Day-0 Genesis certification",
+    valid: "Genesis history is certified for the current corpus.",
   },
-  {
-    label: "Corpus approval",
-    state: "partial",
-    detail:
-      "Architectural conversations are admitted; governance and mission conversation approval remains incomplete.",
+  "educational-corpus-certification": {
+    label: "Educational Corpus certification",
+    valid: "The curriculum Chief Agent learns from is certified.",
   },
-  {
-    label: "Dependency completion",
+  "initial-competency-certification": {
+    label: "Initial Competency certification",
+    valid: "All competencies are certified against the current corpus.",
+  },
+  "initial-competency-human-acceptance": {
+    label: "Human acceptance of competency",
+    valid: "The owner accepted the competency certification.",
+  },
+  "production-workspace-authorization": {
+    label: "Production workspace authorization",
+    valid: "The owner authorized a production workspace.",
+  },
+};
+
+function prerequisiteItem(
+  prerequisite: { gate: string; state: string },
+): ActivationReadinessItem {
+  const known =
+    PREREQUISITE_LABELS[prerequisite.gate] ??
+    { label: prerequisite.gate, valid: "Valid." };
+
+  if (prerequisite.state === "VALID") {
+    return { label: known.label, state: "complete", detail: known.valid };
+  }
+
+  if (prerequisite.state === "STALE") {
+    return {
+      label: known.label,
+      state: "partial",
+      detail: "Knowledge changed since this was certified; re-certify before activating.",
+    };
+  }
+
+  return {
+    label: known.label,
     state: "blocked",
-    detail:
-      "Business and domain ownership and source admission remain unresolved.",
-  },
-  {
-    label: "Competency posture",
-    state: "partial",
-    detail:
-      "Explainable grounding and mission-boundary review remain incomplete.",
-  },
-  {
-    label: "Critical architectural conversations reviewed",
-    state: "complete",
-    detail:
-      "Validated reconstruction conversations are represented in the educational corpus.",
-  },
-  {
-    label: "Constitutional conversations covered",
-    state: "partial",
-    detail:
-      "Constitutional drafting conversations are visible but still require final educational review.",
-  },
-  {
-    label: "Mission conversations covered",
-    state: "partial",
-    detail:
-      "Mission records are represented; mission conversation curriculum remains incomplete.",
-  },
-  {
-    label: "Governance conversations covered",
-    state: "partial",
-    detail:
-      "Governance conversation provenance is visible; approval is not complete.",
-  },
-  {
-    label: "Human authorization",
-    state: "blocked",
-    detail:
-      "Activation authority is constitutionally human-governed and intentionally unavailable in Phase 1A.",
-  },
-  {
-    label: "Rollback and oversight boundary",
-    state: "complete",
-    detail:
-      "Human authority, Runtime truth, recovery and oversight obligations remain explicit.",
-  },
-];
+    detail: `Current state: ${prerequisite.state.toLowerCase().replace(/_/g, " ")}.`,
+  };
+}
+
+function activationItem(
+  activation: ActivationStatus,
+): ActivationReadinessItem {
+  switch (activation.state) {
+    case "ACTIVE":
+      return {
+        label: "Activation record",
+        state: "complete",
+        detail: `Active at ${(activation.autonomyLevel ?? "unknown").toLowerCase().replace(/_/g, " ")} autonomy.`,
+      };
+    case "NOT_ACTIVATED":
+      return {
+        label: "Activation record",
+        state: "partial",
+        detail: "No activation recorded yet. Only the owner can record it.",
+      };
+    default:
+      return {
+        label: "Activation record",
+        state: "blocked",
+        detail: activation.reason,
+      };
+  }
+}
+
+function useActivationStatus(): Loaded {
+  const [loaded, setLoaded] = useState<Loaded>({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const response = await runtimeRead(
+          `${RUNTIME_API}/api/executive/activation?prerequisites=true`,
+          { cache: "no-store", headers: getRuntimeCallerHeaders() },
+        );
+        if (!response.ok) throw new Error(`Runtime answered ${response.status}`);
+        const body = await response.json();
+        if (!cancelled) {
+          setLoaded({
+            status: "ok",
+            activation: body.activation as ActivationStatus,
+            decisions: Array.isArray(body.history) ? body.history.length : 0,
+          });
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setLoaded({
+            status: "error",
+            message: error instanceof Error ? error.message : String(error),
+          });
+        }
+      }
+    };
+
+    void load();
+    const timer = setInterval(() => void load(), 600_000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, []);
+
+  return loaded;
+}
 
 function toneForState(
   state: ActivationReadinessItem["state"],
@@ -136,6 +220,34 @@ function premiumIconState(
 }
 
 export function ActivationReadiness() {
+  const loaded = useActivationStatus();
+
+  const READINESS_ITEMS: ActivationReadinessItem[] =
+    loaded.status === "ok"
+      ? [
+          ...(loaded.activation.prerequisites ?? []).map(prerequisiteItem),
+          activationItem(loaded.activation),
+        ]
+      : [];
+
+  const prerequisitesValid =
+    loaded.status === "ok" &&
+    (loaded.activation.prerequisites ?? []).length > 0 &&
+    (loaded.activation.prerequisites ?? []).every(
+      (prerequisite) => prerequisite.state === "VALID",
+    );
+
+  const posture =
+    loaded.status === "loading"
+      ? { label: "Checking", badge: "Checking", variant: "partial" as const, color: "text-sky-300" }
+      : loaded.status === "error"
+        ? { label: "Unknown", badge: "Runtime unavailable", variant: "blocked" as const, color: "text-rose-300" }
+        : loaded.activation.state === "ACTIVE"
+          ? { label: "Active", badge: "Active", variant: "complete" as const, color: "text-emerald-300" }
+          : prerequisitesValid
+            ? { label: "Ready", badge: "Ready to activate", variant: "complete" as const, color: "text-emerald-300" }
+            : { label: "Not ready", badge: "Not ready", variant: "blocked" as const, color: "text-amber-400" };
+
   const completed =
     READINESS_ITEMS.filter(
       (item) =>
@@ -151,13 +263,13 @@ export function ActivationReadiness() {
   return (
     <LuminaFlagshipPanel
       title="Activation Readiness"
-      description="Informational readiness only — no activation, certification or authority control is available."
+      description="Live from the Runtime's activation gate. This page reads state only; activation is recorded by the owner's governed decision."
       toolbar={
         <LuminaBadge
-          variant="blocked"
+          variant={posture.variant}
           className="min-h-7 text-[11px] leading-none"
         >
-          Not ready
+          {posture.badge}
         </LuminaBadge>
       }
       emphasis="strong"
@@ -173,8 +285,8 @@ export function ActivationReadiness() {
             Readiness posture
           </div>
 
-          <div className="mt-2 text-2xl font-semibold text-amber-400">
-            Partial
+          <div className={cn("mt-2 text-2xl font-semibold", posture.color)}>
+            {posture.label}
           </div>
         </LuminaFlagshipSurface>
 
@@ -208,6 +320,14 @@ export function ActivationReadiness() {
           </div>
         </LuminaFlagshipSurface>
       </div>
+
+      {loaded.status !== "ok" ? (
+        <p className="px-4 pt-4 text-xs leading-5 text-sky-500/76">
+          {loaded.status === "loading"
+            ? "Reading the five certifications from the Runtime. This can take up to a minute."
+            : `The Runtime could not be read (${loaded.message}). Nothing is shown rather than a guess.`}
+        </p>
+      ) : null}
 
       <div className="grid gap-3 p-4 xl:grid-cols-2">
         {READINESS_ITEMS.map((item) => {
@@ -304,7 +424,7 @@ export function ActivationReadiness() {
           </div>
 
           <p className="mt-2 text-xs leading-5 text-sky-500/76">
-            Authorization registry, certification and activation controls are explicitly outside this milestone.
+            Activation, suspension and revocation are recorded only by the owner through the Runtime's governed activation decision (ADR-0041). {loaded.status === "ok" ? `${loaded.decisions} activation decision${loaded.decisions === 1 ? "" : "s"} on record.` : ""}
           </p>
         </LuminaFlagshipSurface>
       </div>
@@ -321,10 +441,10 @@ export function ActivationReadiness() {
             "shadow-[inset_0_1px_0_rgba(186,230,253,0.05),inset_0_0_18px_rgba(2,6,23,0.42)]",
             "cursor-not-allowed",
           ].join(" ")}
-          title="Activation is intentionally unavailable during the UI-contract milestone."
+          title="This page reads state only. Activation is a governed owner decision recorded through the Runtime."
         >
           <LockKeyhole className="h-3.5 w-3.5" />
-          Activation unavailable
+          Activation is recorded by the owner, not from this page
         </button>
       </div>
     </LuminaFlagshipPanel>

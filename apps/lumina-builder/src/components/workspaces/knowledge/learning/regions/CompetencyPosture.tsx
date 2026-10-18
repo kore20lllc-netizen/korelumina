@@ -1,4 +1,15 @@
 import {
+  useEffect,
+  useState,
+} from "react";
+
+import { runtimeRead } from "@/services/runtime/runtimeReadQueue";
+import {
+  RUNTIME_API,
+  getRuntimeCallerHeaders,
+} from "@/services/runtime/client";
+
+import {
   AlertCircle,
   CheckCircle2,
   Circle,
@@ -90,13 +101,126 @@ function statusGlow(
   }
 }
 
+/*
+ * UI-1: competency status and evidence come from the certified Initial
+ * Competency assessment (GET /api/knowledge/education/initial-competency)
+ * and its certification. The contract list supplies titles and
+ * descriptions only; no status is shown that the Runtime did not report.
+ */
+
+type AssessedCompetency = {
+  id: string;
+  title?: string;
+  status?: string;
+  evidence?: string;
+};
+
+type Assessment =
+  | { status: "loading" }
+  | { status: "error"; message: string }
+  | {
+      status: "ok";
+      competencies: AssessedCompetency[];
+      certification: string;
+    };
+
+const KNOWN_STATUSES = new Set<CompetencyObjective["status"]>([
+  "completed",
+  "active",
+  "blocked",
+  "not-started",
+  "needs-review",
+]);
+
+function useCertifiedAssessment(): Assessment {
+  const [assessment, setAssessment] = useState<Assessment>({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const read = async (path: string) => {
+      const response = await runtimeRead(`${RUNTIME_API}${path}`, {
+        cache: "no-store",
+        headers: getRuntimeCallerHeaders(),
+      });
+      if (!response.ok) throw new Error(`Runtime answered ${response.status}`);
+      return response.json();
+    };
+
+    void (async () => {
+      try {
+        const [assessed, certification] = await Promise.all([
+          read("/api/knowledge/education/initial-competency"),
+          read("/api/knowledge/education/initial-competency/certification"),
+        ]);
+        if (!cancelled) {
+          setAssessment({
+            status: "ok",
+            competencies: Array.isArray(assessed?.assessment?.competencies)
+              ? assessed.assessment.competencies
+              : [],
+            certification: String(certification?.projection?.state ?? "UNKNOWN"),
+          });
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setAssessment({
+            status: "error",
+            message: error instanceof Error ? error.message : String(error),
+          });
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return assessment;
+}
+
 export function CompetencyPosture({
-  competencies,
+  competencies: contract,
 }: CompetencyPostureProps) {
+  const assessment = useCertifiedAssessment();
+
+  const competencies: CompetencyObjective[] =
+    assessment.status === "ok"
+      ? assessment.competencies.map((assessed) => {
+          const known = contract.find((c) => c.id === assessed.id);
+          const status = KNOWN_STATUSES.has(assessed.status as CompetencyObjective["status"])
+            ? (assessed.status as CompetencyObjective["status"])
+            : "needs-review";
+          return {
+            id: assessed.id,
+            title: known?.title ?? assessed.title ?? assessed.id,
+            description: known?.description ?? "",
+            status,
+            evidence: /^(competency-evidence|initial-competency):/.test(assessed.evidence ?? "")
+              ? "Validated evidence record on file."
+              : assessed.evidence ?? "",
+          };
+        })
+      : [];
+
+  const rawEvidence = new Map(
+    assessment.status === "ok"
+      ? assessment.competencies.map((assessed) => [assessed.id, assessed.evidence ?? ""] as const)
+      : [],
+  );
+
+  const description =
+    assessment.status === "loading"
+      ? "Reading the certified Initial Competency assessment from the Runtime."
+      : assessment.status === "error"
+        ? `The Runtime could not be read (${assessment.message}). Nothing is shown rather than a guess.`
+        : `Certified assessment from the Runtime. Certification: ${assessment.certification.toLowerCase()}. ${competencies.filter((c) => c.status === "completed").length} of ${competencies.length} competencies completed.`;
+
   return (
     <LuminaFlagshipPanel
       title="Initial Competency Posture"
-      description="Constitutional competency expectations represented without certification or activation logic"
+      description={description}
       emphasis="strong"
     >
       <div className="grid gap-3 p-4 md:grid-cols-2">
@@ -185,7 +309,9 @@ export function CompetencyPosture({
                       Evidence
                     </div>
 
-                    {competency.evidence}
+                    <span title={rawEvidence.get(competency.id) || undefined}>
+                      {competency.evidence}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -202,11 +328,13 @@ export function CompetencyPosture({
             "
           >
             <div className="text-sm font-semibold text-amber-500">
-              No competency objectives available
+              {assessment.status === "loading" ? "Checking the certified assessment" : "No competencies reported"}
             </div>
 
             <p className="mt-2 text-xs leading-5 text-sky-500/72">
-              The modeled educational state does not currently expose competency evidence.
+              {assessment.status === "loading"
+                ? "Waiting for the Runtime to answer."
+                : "The Runtime did not report a certified Initial Competency assessment."}
             </p>
           </LuminaFlagshipSurface>
         ) : null}

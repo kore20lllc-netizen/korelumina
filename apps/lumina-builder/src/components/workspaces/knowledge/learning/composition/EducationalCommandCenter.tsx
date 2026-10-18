@@ -167,65 +167,21 @@ export function EducationalCommandCenter() {
       className="h-full"
       toolbar={
         <div className="flex w-full flex-col items-stretch gap-2 xl:w-auto">
-          <LuminaStatusBadge status="warning">
-            Runtime-backed model
+          <LuminaStatusBadge
+            variant={
+              dashboard.runtimeConnected
+                ? "healthy"
+                : dashboard.uiState === "loading"
+                  ? "neutral"
+                  : "warning"
+            }
+          >
+            {dashboard.runtimeConnected
+              ? "Live from Runtime"
+              : dashboard.uiState === "loading"
+                ? "Loading from Runtime…"
+                : "Runtime unavailable"}
           </LuminaStatusBadge>
-
-          <label className="block">
-            <span className="sr-only">
-              Select modeled dashboard state
-            </span>
-
-            <select
-              value={dashboard.uiState}
-              onChange={(event) => {
-                dashboard.setUiState(
-                  event.target.value as typeof dashboard.uiState,
-                );
-              }}
-              style={{
-                WebkitAppearance: "none",
-                appearance: "none",
-                colorScheme: "dark",
-                backgroundColor: "rgba(2, 6, 23, 0.88)",
-                backgroundImage:
-                  "linear-gradient(45deg, transparent 50%, rgba(125,211,252,0.9) 50%), linear-gradient(135deg, rgba(125,211,252,0.9) 50%, transparent 50%)",
-                backgroundPosition:
-                  "calc(100% - 15px) 50%, calc(100% - 10px) 50%",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "5px 5px, 5px 5px",
-              }}
-              className={cn(
-                "h-9 w-full rounded-xl border px-3 pr-9 text-xs xl:min-w-[150px]",
-                "border-cyan-300/30 text-sky-200/86",
-                "shadow-[inset_0_1px_5px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(186,230,253,0.05)]",
-                "outline-none transition-[border-color,box-shadow] duration-200",
-                "hover:border-cyan-200/50",
-                "focus-visible:border-cyan-200/70",
-                "focus-visible:ring-2 focus-visible:ring-cyan-300/32",
-                "motion-reduce:transition-none",
-              )}
-            >
-              {[
-                "success",
-                "empty",
-                "loading",
-                "processing",
-                "partial",
-                "warning",
-                "error",
-                "offline",
-              ].map((state) => (
-                <option
-                  key={state}
-                  value={state}
-                  className="bg-slate-950 text-sky-100"
-                >
-                  {state}
-                </option>
-              ))}
-            </select>
-          </label>
 
           <LuminaButton
             type="button"

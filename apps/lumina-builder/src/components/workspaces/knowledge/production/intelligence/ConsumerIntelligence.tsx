@@ -75,86 +75,80 @@ const consumerIcons = {
   "engineering-workspace": Users,
 } as const;
 
-const intelligenceRows = [
-  {
-    title: "Mission System",
-    consumerId: "mission-system",
-    trust: "High",
-    adoption: "92%",
-    quality: "Strong",
-    pattern: "Mission planning",
-    signal: "Expanded scenario guidance requested",
-  },
-  {
-    title: "Context Builder",
-    consumerId: "context-builder",
-    trust: "High",
-    adoption: "88%",
-    quality: "Strong",
-    pattern: "Context assembly",
-    signal: "More recovery examples requested",
-  },
-  {
-    title: "Organizational Memory",
-    consumerId: "organizational-memory",
-    trust: "Governed",
-    adoption: "84%",
-    quality: "Healthy",
-    pattern: "Institutional recall",
-    signal: "Privacy-filtered summary demand",
-  },
-  {
-    title: "Engineering Workspace",
-    consumerId: "engineering-workspace",
-    trust: "High",
-    adoption: "76%",
-    quality: "Healthy",
-    pattern: "Operating standards",
-    signal: "Implementation checklist requested",
-  },
-];
+/*
+ * UI-1: rows come from the governed distribution records Runtime projects.
+ * There is no consumption telemetry yet (no event ledger, no adoption or
+ * quality measurement), so those values say "Not measured" instead of
+ * showing sample percentages.
+ */
+type IntelligenceRow = {
+  title: string;
+  consumerId: string;
+  capsuleId: string;
+  trust: string;
+  adoption: string;
+  quality: string;
+  pattern: string;
+  signal: string;
+};
+
+const NOT_MEASURED = "Not measured";
+
+function statusLabel(status: string) {
+  return status.charAt(0).toUpperCase() + status.slice(1);
+}
+
+function createIntelligenceRows(
+  records: KnowledgeDistributionRecord[],
+): IntelligenceRow[] {
+  const rows = new Map<string, IntelligenceRow & { capsules: number; events: number }>();
+  for (const record of records) {
+    for (const consumer of record.consumers) {
+      const existing = rows.get(consumer.id);
+      if (existing) {
+        existing.capsules += 1;
+        existing.events += record.history.length;
+        continue;
+      }
+      rows.set(consumer.id, {
+        title: consumer.label,
+        consumerId: consumer.id,
+        capsuleId: record.capsuleId,
+        trust: statusLabel(consumer.status),
+        adoption: "",
+        quality: NOT_MEASURED,
+        pattern: consumer.detail,
+        signal: "",
+        capsules: 1,
+        events: record.history.length,
+      });
+    }
+  }
+  return [...rows.values()].map(({ capsules, events, ...row }) => ({
+    ...row,
+    adoption: `${capsules} capsule${capsules === 1 ? "" : "s"}`,
+    signal:
+      events > 0
+        ? `${events} recorded consumption event${events === 1 ? "" : "s"}`
+        : "No consumption events recorded yet",
+  }));
+}
 
 const demandSignals = [
   {
-    title: "Mission adaptation demand",
-    value: "High",
+    title: "Adaptation demand",
+    value: NOT_MEASURED,
     detail:
-      "Consumers are requesting more scenario-specific operational guidance.",
-  },
-  {
-    title: "Executive projection demand",
-    value: "Moderate",
-    detail:
-      "Leadership consumers prefer concise risk and decision summaries.",
-  },
-  {
-    title: "Chief Agent education demand",
-    value: "Emerging",
-    detail:
-      "Competency mapping is the primary dependency before broader use.",
+      "Runtime does not record consumer requests yet, so no demand is shown.",
   },
 ];
 
 const usagePatterns = [
   {
-    title: "Mission planning",
-    value: "34%",
-    detail: "Most frequent governed consumption pattern.",
-  },
-  {
-    title: "Context assembly",
-    value: "27%",
-    detail: "Strong reuse across active contextual workflows.",
-  },
-  {
-    title: "Engineering standards",
-    value: "22%",
-    detail: "Increasing contribution to technical operating standards.",
-  },
-  {
-    title: "Executive summaries",
-    value: "17%",
-    detail: "Restricted but high-value strategic consumption.",
+    title: "Usage mix",
+    value: NOT_MEASURED,
+    detail:
+      "Runtime does not record how consumers use capsules yet, so no mix is shown.",
   },
 ];
 
@@ -170,6 +164,8 @@ export function ConsumerIntelligence({
   if (!record) {
     return null;
   }
+
+  const intelligenceRows = createIntelligenceRows(records);
 
   const activeConsumers = record.consumers.filter(
     (consumer) =>
@@ -302,12 +298,12 @@ export function ConsumerIntelligence({
                 Consumer performance
               </div>
               <h3 className="mt-1 text-lg font-semibold text-sky-100">
-                Trust, adoption, quality, and feedback signals
+                Status, reach, and recorded feedback
               </h3>
             </div>
 
             <div className="rounded-full border border-blue-400/48 bg-cyan-300/[0.04] px-3 py-1.5 text-[10px] font-semibold text-cyan-100">
-              4 priority consumers
+              {intelligenceRows.length} governed consumer{intelligenceRows.length === 1 ? "" : "s"}
             </div>
           </div>
 
@@ -329,7 +325,7 @@ export function ConsumerIntelligence({
                   aria-pressed={selected}
                   onClick={() =>
                     onConsumerSelect(
-                      record.capsuleId,
+                      row.capsuleId,
                       row.consumerId,
                     )
                   }
@@ -371,7 +367,7 @@ export function ConsumerIntelligence({
                       >
                         <div className="relative z-10">
                           <div className="text-[9px] uppercase tracking-[0.13em] text-emerald-300/52">
-                            Consumer trust
+                            Consumer status
                           </div>
                           <div className="mt-1 text-xs font-semibold text-emerald-100">
                             {row.trust}
@@ -385,7 +381,7 @@ export function ConsumerIntelligence({
                       >
                         <div className="relative z-10">
                           <div className="text-[9px] uppercase tracking-[0.13em] text-cyan-300/52">
-                            Adoption
+                            Reach
                           </div>
                           <div className="mt-1 text-xs font-semibold text-cyan-100">
                             {row.adoption}

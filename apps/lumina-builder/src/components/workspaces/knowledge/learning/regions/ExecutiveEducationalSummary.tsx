@@ -23,6 +23,48 @@ import type {
   ExecutiveEducationalSummaryViewModel,
 } from "../model";
 
+import {
+  useKnowledgeOperationsTruth,
+  type Checked,
+} from "@/components/workspaces/knowledge-v3/layout/useKnowledgeOperationsTruth";
+
+function describeCompetency(
+  check: Checked<{ state: string }>,
+): { value: string; footer: string; healthy: boolean } {
+  if (check.status === "loading") {
+    return { value: "Checking…", footer: "Reading Initial Competency certification from Runtime", healthy: false };
+  }
+  if (check.status === "error") {
+    return { value: "Unknown", footer: "Runtime did not answer the certification check", healthy: false };
+  }
+  if (check.data.state === "VALID") {
+    return { value: "Certified", footer: "Initial Competency certification is valid", healthy: true };
+  }
+  return { value: check.data.state.replace(/_/g, " ").toLowerCase(), footer: "Initial Competency certification is not valid", healthy: false };
+}
+
+function describeActivation(
+  check: Checked<{ state: string; autonomyLevel: string | null }>,
+): { value: string; footer: string; healthy: boolean } {
+  if (check.status === "loading") {
+    return { value: "Checking…", footer: "Reading the activation record from Runtime", healthy: false };
+  }
+  if (check.status === "error") {
+    return { value: "Unknown", footer: "Runtime did not answer the activation check", healthy: false };
+  }
+  if (check.data.state === "ACTIVE") {
+    return {
+      value: "Active",
+      footer: `Activated by the owner · ${check.data.autonomyLevel ?? "autonomy not recorded"}`,
+      healthy: true,
+    };
+  }
+  if (check.data.state === "SUSPENDED" || check.data.state === "REVOKED") {
+    return { value: check.data.state === "SUSPENDED" ? "Suspended" : "Revoked", footer: "Recorded by the owner (ADR-0041)", healthy: false };
+  }
+  return { value: "Not activated", footer: "Prerequisites and owner decision are shown in Activation Readiness", healthy: false };
+}
+
 interface ExecutiveEducationalSummaryProps {
   summary: ExecutiveEducationalSummaryViewModel;
 }
@@ -33,6 +75,11 @@ const metricSurface =
 export function ExecutiveEducationalSummary({
   summary,
 }: ExecutiveEducationalSummaryProps) {
+  const truth = useKnowledgeOperationsTruth();
+  const competency = describeCompetency(truth.competencyCertification);
+  const activation = describeActivation(truth.activation);
+  const live = truth.runtime.status === "ok";
+
   return (
     <section
       aria-labelledby="executive-educational-summary"
@@ -72,14 +119,14 @@ export function ExecutiveEducationalSummary({
               text-sm leading-6 text-sky-400/78
             "
           >
-            Representative UI state showing what has educated the Chief Agent,
-            current curriculum posture, and unresolved activation prerequisites.
+            What has educated the Chief Agent, its current curriculum posture,
+            and its activation state, read from Runtime.
           </p>
         </div>
 
         <div className="shrink-0">
-          <LuminaStatusBadge status="warning">
-            Modeled UI contract · No live telemetry
+          <LuminaStatusBadge variant={live ? "healthy" : truth.runtime.status === "loading" ? "neutral" : "warning"}>
+            {live ? "Live from Runtime" : truth.runtime.status === "loading" ? "Checking Runtime…" : "Runtime unavailable"}
           </LuminaStatusBadge>
         </div>
       </div>
@@ -204,16 +251,16 @@ export function ExecutiveEducationalSummary({
         <div className={metricSurface}>
           <LuminaMetricCard
             label="Initial competency"
-            value="Developing"
+            value={competency.value}
             icon={
               <ExecutivePremiumIcon
                 icon={BadgeCheck}
-                state="healthy"
+                state={competency.healthy ? "healthy" : "warning"}
               />
             }
             footer={
               <div className="text-xs leading-5 text-sky-500/78">
-                Certification intentionally excluded from Phase 1A
+                {competency.footer}
               </div>
             }
           />
@@ -222,16 +269,16 @@ export function ExecutiveEducationalSummary({
         <div className={metricSurface}>
           <LuminaMetricCard
             label="Activation readiness"
-            value="Not ready"
+            value={activation.value}
             icon={
               <ExecutivePremiumIcon
-                icon={TriangleAlert}
-                state="warning"
+                icon={activation.healthy ? ShieldCheck : TriangleAlert}
+                state={activation.healthy ? "healthy" : "warning"}
               />
             }
             footer={
               <div className="text-xs leading-5 text-sky-500/78">
-                Human authorization and unresolved curriculum gaps remain
+                {activation.footer}
               </div>
             }
           />

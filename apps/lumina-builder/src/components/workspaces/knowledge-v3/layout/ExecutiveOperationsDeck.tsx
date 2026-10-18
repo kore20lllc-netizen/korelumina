@@ -1,7 +1,10 @@
 import { RadioTower } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ExecutiveOperationRow } from "./ExecutiveOperationRow";
-import { useExecutiveOperations } from "./useExecutiveOperations";
+import {
+  useExecutiveOperations,
+  useExecutiveOverall,
+} from "./useExecutiveOperations";
 import {
   executiveMaterial,
   gradients,
@@ -10,6 +13,13 @@ import {
 
 export function ExecutiveOperationsDeck() {
   const operations = useExecutiveOperations();
+  const overall = useExecutiveOverall();
+  const tone = {
+    nominal: { text: "text-emerald-100", dot: "bg-emerald-300 shadow-[0_0_8px_rgba(110,231,183,.35)]" },
+    checking: { text: "text-white/70", dot: "bg-white/50" },
+    attention: { text: "text-amber-100", dot: "bg-amber-300 shadow-[0_0_8px_rgba(252,211,77,.35)]" },
+    offline: { text: "text-rose-100", dot: "bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,.35)]" },
+  }[overall.tone];
 
   return (
     <section
@@ -103,35 +113,17 @@ export function ExecutiveOperationsDeck() {
           </div>
 
           <span
-            className="
-              inline-flex
-              shrink-0
-              items-center
-              gap-1.5
-              rounded-full
-              border
-              border-white/[0.08]
-              bg-white/[0.04]
-              px-2.5
-              py-1
-              text-[8px]
-              font-semibold
-              uppercase
-              tracking-[0.15em]
-              text-emerald-100
-            "
+            aria-live="polite"
+            className={cn(
+              "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.15em]",
+              tone.text,
+            )}
           >
             <span
               aria-hidden="true"
-              className="
-                h-1.5
-                w-1.5
-                rounded-full
-                bg-emerald-300
-                shadow-[0_0_8px_rgba(110,231,183,.35)]
-              "
+              className={cn("h-1.5 w-1.5 rounded-full", tone.dot)}
             />
-            Nominal
+            {overall.label}
           </span>
         </div>
 

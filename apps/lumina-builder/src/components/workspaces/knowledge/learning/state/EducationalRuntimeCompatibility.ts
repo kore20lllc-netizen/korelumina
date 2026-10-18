@@ -37,14 +37,19 @@ export interface EducationalDashboardData {
  * Until Runtime measurement arrives, module progress is deliberately
  * neutral rather than falling back to historical modeled percentages.
  */
-export function certifiedBaseline():
-EducationalDashboardData {
+export function certifiedBaseline(
+  state: EducationalUiState = "loading",
+): EducationalDashboardData {
   return {
-    state:
-      certifiedEducationalDashboardContract.state,
+    state,
 
+    /*
+     * No fixture artifacts or timeline events: before Runtime answers,
+     * and when it cannot be reached, the dashboard shows nothing rather
+     * than sample records.
+     */
     artifacts:
-      certifiedEducationalDashboardContract.artifacts,
+      [],
 
     modules:
       certifiedEducationalDashboardContract.modules.map(
@@ -65,7 +70,7 @@ EducationalDashboardData {
       certifiedEducationalDashboardContract.competencies,
 
     timeline:
-      certifiedEducationalDashboardContract.timeline,
+      [],
   };
 }
 

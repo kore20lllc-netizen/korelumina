@@ -84,7 +84,7 @@ export function ExecutiveMetricCard({
           >
             <Icon
               className={cn(
-                "h-4.5 w-4.5",
+                "block h-[18px] w-[18px] shrink-0",
                 metric.accent,
               )}
             />

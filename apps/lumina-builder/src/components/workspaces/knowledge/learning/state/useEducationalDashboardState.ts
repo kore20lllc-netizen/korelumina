@@ -84,7 +84,9 @@ export function useEducationalDashboardState() {
            * neutral certified baseline.
            */
           setDashboard(
-            certifiedBaseline(),
+            certifiedBaseline(
+              "offline",
+            ),
           );
 
           setRuntimeConnected(
