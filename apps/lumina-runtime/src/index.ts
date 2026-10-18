@@ -153,7 +153,7 @@ import {
   ChiefAgentReasoningExecutionService,
   ChiefAgentReasoningKnowledgeMaterializer,
   ExecutiveReasoningService,
-  TextGenerationChiefAgentReasoningProvider,
+  createChiefAgentReasoningProvider,
 } from "./executive/reasoning/index.js";
 
 import {
@@ -188,10 +188,6 @@ import {
 import {
   ExecutiveDecisionService,
 } from "./executive/decision/index.js";
-
-import {
-  OpenAITextGenerationClient,
-} from "./ai/model/index.js";
 
 import { stopAllRuntimes } from "./runtime/registry.js";
 import {
@@ -1140,9 +1136,11 @@ export const runtimeExecutiveActionExecutionDispatcher =
 
 export const runtimeChiefAgentReasoningExecutionService =
   new ChiefAgentReasoningExecutionService(
-    new TextGenerationChiefAgentReasoningProvider(
-      new OpenAITextGenerationClient(),
-    ),
+    /*
+     * KO-5d (ADR-0041 Decision 9): provider and escalation come from
+     * configuration. Defaults keep OpenAI as primary with no escalation.
+     */
+    createChiefAgentReasoningProvider(),
     runtimeExecutiveReasoningService,
   );
 

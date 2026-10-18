@@ -111,7 +111,7 @@ test(
 
     assert.equal(status.state, "NOT_ACTIVATED");
     assert.equal(status.active, false);
-    assert.equal(status.prerequisites.length, 2);
+    assert.equal(status.prerequisites?.length, 2);
 
     const broken =
       new ChiefAgentActivationGate(

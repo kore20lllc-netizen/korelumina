@@ -6,3 +6,5 @@ export * from "./ChiefAgentReasoningExecutionService.js";
 export * from "./TextGenerationChiefAgentReasoningProvider.js";
 
 export * from "./ChiefAgentReasoningDecisionService.js";
+export * from "./EscalatingChiefAgentReasoningProvider.js";
+export * from "./ChiefAgentReasoningProviderConfig.js";
