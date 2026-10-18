@@ -1867,7 +1867,7 @@ export function CanonicalReview({
                             event.target.value,
                           )
                         }
-                        className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none focus:border-cyan-300/42"
+                        className="[color-scheme:dark] h-10 rounded-[14px] border border-cyan-300/[0.14] bg-slate-950/[0.42] px-3 text-xs text-sky-100 placeholder:text-slate-500 outline-none focus:border-cyan-300/[0.42]"
                         placeholder="Reviewer identity"
                       />
 
@@ -1883,7 +1883,7 @@ export function CanonicalReview({
                           )
                         }
                         rows={2}
-                        className="min-h-[64px] resize-y rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 py-2.5 text-xs text-sky-100 outline-none focus:border-violet-300/42"
+                        className="[color-scheme:dark] min-h-[64px] resize-y rounded-[14px] border border-violet-300/[0.14] bg-slate-950/[0.42] px-3 py-2.5 text-xs text-sky-100 placeholder:text-slate-500 outline-none focus:border-violet-300/[0.42]"
                         placeholder="Batch governance rationale"
                       />
                     </div>
@@ -3799,7 +3799,7 @@ export function CanonicalReview({
                               event.target.value,
                             )
                           }
-                          className="h-10 rounded-[14px] border border-cyan-300/14 bg-slate-950/42 px-3 text-xs text-sky-100 outline-none transition focus:border-cyan-300/42"
+                          className="[color-scheme:dark] h-10 rounded-[14px] border border-cyan-300/[0.14] bg-slate-950/[0.42] px-3 text-xs text-sky-100 placeholder:text-slate-500 outline-none transition focus:border-cyan-300/[0.42]"
                         />
                       </label>
 
@@ -3817,7 +3817,7 @@ export function CanonicalReview({
                           }
                           rows={3}
                           placeholder="Record the human governance rationale."
-                          className="min-h-[76px] resize-y rounded-[14px] border border-violet-300/14 bg-slate-950/42 px-3 py-2.5 text-xs leading-5 text-sky-100 outline-none transition placeholder:text-slate-500 focus:border-violet-300/42"
+                          className="[color-scheme:dark] min-h-[76px] resize-y rounded-[14px] border border-violet-300/[0.14] bg-slate-950/[0.42] px-3 py-2.5 text-xs leading-5 text-sky-100 outline-none transition placeholder:text-slate-500 focus:border-violet-300/[0.42]"
                         />
                       </label>
                     </div>
