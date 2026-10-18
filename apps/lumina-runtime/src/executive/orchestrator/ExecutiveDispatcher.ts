@@ -25,6 +25,7 @@ export interface ExecutiveDispatchRecord {
   status:
     | "handled"
     | "unhandled"
+    | "refused"
     | "failed";
 
   message?: string;
@@ -37,6 +38,38 @@ export interface ExecutiveDispatchResult {
     readonly ExecutiveDispatchRecord[];
 
   successful: boolean;
+}
+
+/*
+ * A destination may decline to act by governance (for example, the Chief
+ * Agent before activation, ADR-0041). A refusal is an expected, recorded
+ * outcome, not a failure: the event still completes and stays on record.
+ */
+export class ExecutiveDestinationRefusal
+  extends Error {
+  readonly executiveRefusal =
+    true as const;
+
+  constructor(
+    code:
+      string,
+  ) {
+    super(code);
+    this.name =
+      "ExecutiveDestinationRefusal";
+  }
+}
+
+function isExecutiveDestinationRefusal(
+  error:
+    unknown,
+): error is ExecutiveDestinationRefusal {
+  return (
+    error instanceof Error &&
+    (error as {
+      executiveRefusal?: unknown;
+    }).executiveRefusal === true
+  );
 }
 
 export type ExecutiveDestinationHandler =
@@ -133,6 +166,21 @@ export class RegistryExecutiveDispatcher
           status: "handled",
         });
       } catch (error) {
+        if (
+          isExecutiveDestinationRefusal(
+            error,
+          )
+        ) {
+          records.push({
+            destination,
+            status: "refused",
+            message:
+              error.message,
+          });
+
+          continue;
+        }
+
         records.push({
           destination,
           status: "failed",

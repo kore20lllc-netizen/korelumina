@@ -11,6 +11,14 @@ import {
 import express from "express";
 import cors from "cors";
 import {
+  ChiefAgentActivationGate,
+  noChiefAgentActivationRecords,
+  requireActiveChiefAgent,
+} from "./executive/activation/index.js";
+import {
+  registerExecutiveActivationRoute,
+} from "./routes/executiveActivation.js";
+import {
   rejectAgentActorsOnHumanOnlyExecutiveRoutes,
   rejectDisallowedBrowserOrigins,
   resolveAllowedRuntimeOrigins,
@@ -1219,12 +1227,67 @@ export const chiefAgentReasoningAdapter =
     },
   );
 
+/*
+ * ADR-0041 Decision 3 (KO-5b): Chief Agent reasoning runs only while the
+ * activation gate is ACTIVE. Before activation the event is still recorded;
+ * the reasoning destination is refused with chief_agent_not_activated.
+ */
+export const chiefAgentActivationGate =
+  new ChiefAgentActivationGate(
+    noChiefAgentActivationRecords,
+    () => [
+      {
+        gate:
+          "day-zero-certification",
+        state:
+          runtimeGenesisDayZeroCertificationService
+            .read()
+            .state,
+      },
+      {
+        gate:
+          "educational-corpus-certification",
+        state:
+          runtimeEducationalCorpusCertificationService
+            .read()
+            .state,
+      },
+      {
+        gate:
+          "initial-competency-certification",
+        state:
+          runtimeInitialCompetencyCertificationService
+            .read()
+            .state,
+      },
+      {
+        gate:
+          "initial-competency-human-acceptance",
+        state:
+          runtimeInitialCompetencyHumanAcceptanceService
+            .read()
+            .state,
+      },
+      {
+        gate:
+          "production-workspace-authorization",
+        state:
+          runtimeChiefAgentProductionWorkspaceAuthorizationService
+            .read()
+            .state,
+      },
+    ],
+  );
+
 executiveRuntime.dispatcher.register(
   "reasoning",
-  (context) =>
-    chiefAgentReasoningAdapter.handle(
-      context,
-    ),
+  requireActiveChiefAgent(
+    chiefAgentActivationGate,
+    (context) =>
+      chiefAgentReasoningAdapter.handle(
+        context,
+      ),
+  ),
 );
 
 /*
@@ -1708,6 +1771,11 @@ registerKnowledgeProductionLifecycleRoutes(
 registerExecutiveRoute(
   app,
   executiveRuntime,
+);
+
+registerExecutiveActivationRoute(
+  app,
+  chiefAgentActivationGate,
 );
 
 registerExecutiveReasoningRoute(
