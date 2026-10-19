@@ -2,6 +2,7 @@ import path from "node:path";
 
 import {
   isNodeTestProcess,
+  isolatedTestStorageRoot,
   resolveRepositoryRoot,
 } from "../../knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
 
@@ -12,9 +13,9 @@ import {
  * written relative to the working directory, so starting the Runtime from
  * apps/lumina-runtime put them in an untracked folder.
  *
- * KORELUMINA_EXECUTIVE_ROOT overrides the location. Test processes keep
- * their previous working-directory location so tests never touch the
- * repository's records.
+ * KORELUMINA_EXECUTIVE_ROOT overrides the location. Test processes use a
+ * fresh temporary directory each (F-25), so tests never touch the
+ * repository's records or each other's leftovers.
  */
 export function resolveExecutiveStorageRoot(): string {
   const configured =
@@ -25,10 +26,7 @@ export function resolveExecutiveStorageRoot(): string {
   }
 
   if (isNodeTestProcess()) {
-    return path.resolve(
-      process.cwd(),
-      "runtime/executive",
-    );
+    return isolatedTestStorageRoot("executive");
   }
 
   return path.join(

@@ -1,4 +1,8 @@
 import {
+  isNodeTestProcess,
+  isolatedTestStorageRoot,
+} from "../../knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
+import {
   mkdirSync,
   readdirSync,
   readFileSync,
@@ -42,6 +46,11 @@ export function defaultChiefAgentActivationRoot():
     return path.resolve(
       configured,
     );
+  }
+
+  /* F-25: tests never write the real activation records. */
+  if (isNodeTestProcess()) {
+    return isolatedTestStorageRoot("chief-agent-activation");
   }
 
   const repositoryRoot =

@@ -6,6 +6,7 @@ import type {
 } from "./LearningRecordService.js";
 import {
   isNodeTestProcess,
+  isolatedTestStorageRoot,
   resolveRepositoryRoot,
 } from "../knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
 
@@ -66,11 +67,9 @@ export function resolveContinuousLearningRoot(): string {
   if (configured) {
     return path.resolve(configured);
   }
+  /* F-25: a fresh temporary directory per test process. */
   if (isNodeTestProcess()) {
-    return path.resolve(
-      process.cwd(),
-      "runtime/governance/continuous-learning",
-    );
+    return isolatedTestStorageRoot("continuous-learning");
   }
   return path.join(
     resolveRepositoryRoot(),

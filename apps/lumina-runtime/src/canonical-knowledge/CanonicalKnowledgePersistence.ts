@@ -4,6 +4,11 @@ import {
   fileURLToPath,
 } from "node:url";
 
+import {
+  isNodeTestProcess,
+  isolatedTestStorageRoot,
+} from "../knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
+
 import type {
   CanonicalKnowledgeItem,
 } from "./CanonicalKnowledgeItem.js";
@@ -47,10 +52,13 @@ export class CanonicalKnowledgePersistence {
           ? path.resolve(
               environmentRoot,
             )
-          : path.join(
-              repositoryRoot,
-              "runtime/knowledge/canonical-items",
-            )
+          : isNodeTestProcess()
+            ? /* F-25: tests never write the Chief Agent's real canonical knowledge. */
+              isolatedTestStorageRoot("canonical-items")
+            : path.join(
+                repositoryRoot,
+                "runtime/knowledge/canonical-items",
+              )
       );
   }
 

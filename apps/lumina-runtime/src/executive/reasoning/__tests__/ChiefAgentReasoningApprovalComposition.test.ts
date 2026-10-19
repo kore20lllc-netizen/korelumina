@@ -175,8 +175,15 @@ test(
       undefined,
     );
 
+    /* F-25: the store is shared within the test process; check this decision only. */
     assert.deepEqual(
-      approvalService.list(),
+      approvalService
+        .list()
+        .filter(
+          (approval) =>
+            approval.decisionId ===
+            decision.id,
+        ),
       [],
     );
   },

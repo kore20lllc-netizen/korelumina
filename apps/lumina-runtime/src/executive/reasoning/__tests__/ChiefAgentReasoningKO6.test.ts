@@ -190,5 +190,8 @@ test("executive records go to the configured root", () => {
     if (previous === undefined) delete process.env.KORELUMINA_EXECUTIVE_ROOT;
     else process.env.KORELUMINA_EXECUTIVE_ROOT = previous;
   }
-  assert.equal(resolveExecutiveStorageRoot(), path.resolve(process.cwd(), "runtime/executive"));
+  /* F-25: unconfigured, a test process gets its own temporary directory. */
+  const isolated = resolveExecutiveStorageRoot();
+  assert.ok(isolated.startsWith(os.tmpdir()), isolated);
+  assert.ok(!isolated.startsWith(process.cwd()), isolated);
 });

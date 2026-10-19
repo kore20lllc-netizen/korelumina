@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 
 import {
@@ -8,6 +11,13 @@ import {
 import {
   rehydrateRuntimeCanonicalKnowledge,
 } from "../rehydrateRuntimeCanonicalKnowledge.js";
+
+/* F-25: each test gets its own canonical store. */
+function freshPlatform(): KnowledgePlatform {
+  process.env.KORELUMINA_CANONICAL_ROOT =
+    fs.mkdtempSync(path.join(os.tmpdir(), "korelumina-rehydrate-"));
+  return new KnowledgePlatform();
+}
 
 function createCanonicalPackage() {
   return {
@@ -101,7 +111,7 @@ test(
   "rehydrates governed canonical knowledge from persisted canonical packages",
   () => {
     const platform =
-      new KnowledgePlatform();
+      freshPlatform();
 
     const packageService = {
       list() {
@@ -213,7 +223,7 @@ test(
   "ignores packages that are not canonically governed",
   () => {
     const platform =
-      new KnowledgePlatform();
+      freshPlatform();
 
     const invalid =
       createCanonicalPackage();

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import os from "node:os";
 import path from "node:path";
 
 import {
@@ -547,9 +548,10 @@ test(
         resolveKnowledgeStorageRoot(),
       );
 
+    /* F-25: test Knowledge storage is a per-process temporary directory. */
     assert.equal(
-      root.includes(
-        `${path.sep}runtime-data${path.sep}test-knowledge${path.sep}`,
+      root.startsWith(
+        path.resolve(os.tmpdir()),
       ),
       true,
     );

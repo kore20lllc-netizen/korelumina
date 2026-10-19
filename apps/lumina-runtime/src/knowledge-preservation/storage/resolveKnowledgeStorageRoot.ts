@@ -91,6 +91,35 @@ export function isNodeTestProcess(): boolean {
   );
 }
 
+/*
+ * F-25: test isolation. Every governed store (knowledge, canonical items,
+ * Chief Agent activation, executive records, continuous learning) uses a
+ * fresh temporary directory per test process unless a test configures one.
+ * Before this, tests wrote into the working directory or into the real
+ * repository stores, read each other's leftovers, and could add test items
+ * to the Chief Agent's canonical knowledge.
+ */
+let isolatedTestRoot: string | null = null;
+
+export function isolatedTestStorageRoot(
+  store: string,
+): string {
+  if (!isolatedTestRoot) {
+    isolatedTestRoot = fs.mkdtempSync(
+      path.join(os.tmpdir(), `korelumina-test-${process.pid}-`),
+    );
+    const root = isolatedTestRoot;
+    process.once("exit", () => {
+      try {
+        fs.rmSync(root, { recursive: true, force: true });
+      } catch {
+        /* Leaving a temp folder behind is harmless. */
+      }
+    });
+  }
+  return path.join(isolatedTestRoot, store);
+}
+
 export function resolveKnowledgeStorageRoot():
 string {
   const explicit =
@@ -110,13 +139,8 @@ string {
   if (
     isNodeTestProcess()
   ) {
-    return path.join(
-      repositoryRoot,
-      "runtime-data",
-      "test-knowledge",
-      String(
-        process.pid,
-      ),
+    return isolatedTestStorageRoot(
+      "knowledge",
     );
   }
 
