@@ -24,7 +24,6 @@ import {
   lighting,
 } from "../../knowledge-v3/theme/appearance";
 import {
-  briefing,
   currentMission,
   type PreviewTone,
 } from "../design/executiveDesignPreview";
@@ -35,6 +34,7 @@ import {
   toneDot,
   toneText,
 } from "../shared/ExecutiveSection";
+import { useExecutiveBriefing } from "../state/useExecutiveBriefing";
 import {
   learnNow,
   useExecutiveOffice,
@@ -49,8 +49,8 @@ import {
  * horizontal heartbeat on the right.
  *
  * EW-1: Chief Agent status, autonomy, learning, approvals, Runtime, and the
- * three metrics read Runtime. Security, the briefing line, and the current
- * mission are still the design-preview snapshot.
+ * three metrics read Runtime; the headline is the live briefing (EW-1b).
+ * Security and the current mission are still the design-preview snapshot.
  */
 
 type Operation = {
@@ -195,6 +195,7 @@ function AgentMark({ tone }: { tone: PreviewTone }) {
 }
 
 function Identity({ office }: { office: ExecutiveOfficeState }) {
+  const briefing = useExecutiveBriefing();
   const activation = office.activation;
   const autonomy =
     activation.status === "ok"

@@ -13,32 +13,6 @@
 
 export type PreviewTone = "healthy" | "active" | "warning" | "error";
 
-export const briefing = {
-  asOf: "2026-10-19",
-  headline:
-    "Continuous learning is live. The Executive Office is the next build; two security findings stand between the platform and its first paying customer.",
-  completed: [
-    "Continuous learning v1 (CL-1a to CL-1e): commits captured every 30 minutes, cited Learning Records, automatic promotion. 24 canonical items.",
-    "Chief Agent activated at PROPOSE_ONLY (KO-5e) and reasoning over certified document text (KO-6).",
-    "Knowledge Operations shows live Runtime state (UI-1); slow reads cached (RT-1).",
-  ],
-  remaining: [
-    "Executive Office design (EW-0), then wiring section by section.",
-    "Pre-customer security hardening: signed-out role default and F-18.",
-    "Canonical Review of ADR-0041 and ADR-0042 packages.",
-  ],
-  priorities: [
-    { title: "Approve the Executive Office design", detail: "UI is the contract; wiring starts after approval." },
-    { title: "Close F-18", detail: "Runtime passes its full environment, including API keys, to project processes." },
-    { title: "Fix the signed-out role default", detail: "Visitors without a session default to the in-house developer role." },
-  ],
-  risks: [
-    { title: "API keys reachable by imported projects (F-18)", tone: "error" as PreviewTone },
-    { title: "Signed-out visitors get developer access", tone: "error" as PreviewTone },
-    { title: "Day-0 curriculum drift since activation", tone: "warning" as PreviewTone },
-  ],
-};
-
 export const dashboardHealth = [
   { id: "mission", label: "Mission Health", value: "1 active", detail: "Executive Office (EW)", tone: "active" as PreviewTone },
   { id: "platform", label: "Platform Health", value: "2 high", detail: "Security findings open", tone: "warning" as PreviewTone },

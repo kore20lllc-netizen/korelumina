@@ -94,6 +94,7 @@ export interface LearningCycleRecord {
   reasons: string[];
   learning?: {
     recordId?: string;
+    repositoryPath?: string;
     status?: string;
     [key: string]: unknown;
   };
@@ -105,6 +106,7 @@ export interface LearningStatus {
     committedAt: number;
   } | null;
   pendingCommits: Array<{ sha: string; subject: string }>;
+  nonOwnerPendingCommits: Array<{ sha: string; subject: string; authorEmail?: string }>;
   running: boolean;
   cycles: LearningCycleRecord[];
 }
@@ -213,6 +215,7 @@ Promise<LearningStatus> {
   return {
     checkpoint: body?.checkpoint ?? null,
     pendingCommits: Array.isArray(body?.pendingCommits) ? body.pendingCommits : [],
+    nonOwnerPendingCommits: Array.isArray(body?.nonOwnerPendingCommits) ? body.nonOwnerPendingCommits : [],
     running: body?.running === true,
     cycles: Array.isArray(body?.cycles) ? body.cycles : [],
   };

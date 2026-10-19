@@ -5,6 +5,7 @@ import { LuminaFlagshipPanel } from "@/components/lumina/workspace/primitives/Lu
 
 import { ChiefAgentLogo } from "../shared/ChiefAgentLogo";
 import { DesignPreviewBadge } from "../shared/ExecutiveSection";
+import { useExecutiveBriefing } from "../state/useExecutiveBriefing";
 import { askExecutiveQuestion, useExecutiveOffice } from "../state/useExecutiveOffice";
 
 const QUICK_ACTIONS = [
@@ -15,6 +16,7 @@ const QUICK_ACTIONS = [
 ];
 
 type Turn =
+  | { kind: "briefing"; key: string; at: number }
   | { kind: "question"; key: string; text: string; at: number }
   | { kind: "answer"; key: string; text: string; at: number; meta: string; metaTone: "approved" | "pending" | "other" }
   | { kind: "unanswered"; key: string; text: string; at: number };
@@ -29,6 +31,8 @@ type Turn =
  */
 export function ConversationPanel() {
   const office = useExecutiveOffice();
+  const briefing = useExecutiveBriefing();
+  const [openedAt] = useState(() => Date.now());
   const [draft, setDraft] = useState("");
   const scroller = useRef<HTMLOListElement>(null);
 
@@ -58,6 +62,9 @@ export function ConversationPanel() {
     turns.push({ kind: "question", key: `miss:${miss.askedAt}:q`, text: miss.question, at: miss.askedAt });
     turns.push({ kind: "unanswered", key: `miss:${miss.askedAt}:a`, text: miss.reason, at: miss.askedAt + 1 });
   }
+
+  /* EW-1b: opening the office, the Chief Agent briefs the owner first. */
+  turns.push({ kind: "briefing", key: "briefing", at: openedAt });
 
   turns.sort((left, right) => left.at - right.at);
 
@@ -100,14 +107,32 @@ export function ConversationPanel() {
                 Conversation unavailable: {office.operations.message}
               </li>
             ) : null}
-            {office.operations.status === "ok" && turns.length === 0 && !replying ? (
+            {office.operations.status === "ok" && turns.length === 1 && !replying ? (
               <li className="text-sm leading-6 text-sky-300/60">
                 No conversation yet. Ask the Chief Agent anything about the platform; it answers from governed knowledge and cites it.
               </li>
             ) : null}
 
             {turns.map((turn) =>
-              turn.kind === "question" ? (
+              turn.kind === "briefing" ? (
+                <li key={turn.key} className="mr-4" aria-live="polite">
+                  <ChiefAgentLogo replying={!briefing.ready} />
+                  {briefing.ready ? (
+                    <>
+                      <div className="mt-1 rounded-[16px] border border-amber-300/30 bg-amber-400/[0.06] px-3.5 py-2.5 text-sm leading-6 text-sky-50/90">
+                        {briefing.narrative}
+                      </div>
+                      <a href="#executive-briefing" className="mt-1.5 inline-block font-mono text-[10px] text-amber-200/80 hover:text-amber-100">
+                        Briefing · {briefing.sinceLabel} · full briefing below
+                      </a>
+                    </>
+                  ) : (
+                    <div className="mt-1 inline-flex items-center gap-1.5 rounded-[16px] border border-amber-300/20 bg-slate-950/50 px-3.5 py-2.5 text-sm text-sky-100/60">
+                      Preparing your briefing
+                    </div>
+                  )}
+                </li>
+              ) : turn.kind === "question" ? (
                 <li key={turn.key} className="ml-8">
                   <div className="text-right text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-300/70">You</div>
                   <div className="mt-1 whitespace-pre-wrap rounded-[16px] border border-cyan-300/20 bg-cyan-400/10 px-3.5 py-2.5 text-sm leading-6 text-sky-50">

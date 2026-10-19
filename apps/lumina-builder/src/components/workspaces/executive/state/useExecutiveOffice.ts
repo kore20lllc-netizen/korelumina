@@ -236,3 +236,31 @@ function getSnapshot() {
 export function useExecutiveOffice(): ExecutiveOfficeState {
   return useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 }
+
+/*
+ * EW-1b: the owner's previous visit, read once per page load so the
+ * briefing keeps saying "since your last visit" while the office is open.
+ * Stored in this browser only; when it cannot be read the briefing covers
+ * the last 24 hours instead.
+ */
+const LAST_VISIT_KEY = "korelumina.executiveOffice.lastVisit";
+
+function readLastVisit(): number | null {
+  try {
+    const value = Number(window.localStorage.getItem(LAST_VISIT_KEY));
+    return Number.isFinite(value) && value > 0 ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+export const previousExecutiveOfficeVisit: number | null =
+  typeof window === "undefined" ? null : readLastVisit();
+
+export function recordExecutiveOfficeVisit() {
+  try {
+    window.localStorage.setItem(LAST_VISIT_KEY, String(Date.now()));
+  } catch {
+    /* A private window or blocked storage only loses "since your last visit". */
+  }
+}
