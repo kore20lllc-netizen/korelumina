@@ -261,28 +261,45 @@ export function rehydrateRuntimeCanonicalKnowledge(
           ),
       );
 
-  const preserved =
-    canonicalItems.map(
-      (canonicalItem) =>
-        preservePersistedTimestamps(
-          canonicalItem,
-          platform.store.get(
-            canonicalItem.id,
-          ),
-        ),
-    );
+  /*
+   * F-31: rehydration restores canonical items that are missing; it never
+   * rewrites one that is already persisted. A persisted item is the record
+   * written when it became canonical, and may carry more history than its
+   * package (an automatic promotion under ADR-0042 records its review
+   * evidence, review history, lifecycle and supersession there). Rebuilding
+   * it from the package on every Runtime start dropped that history.
+   */
+  const restored:
+    CanonicalKnowledgeItem[] = [];
 
   for (
-    const canonicalItem
-    of preserved
+    const rebuilt
+    of canonicalItems
   ) {
+    const persisted =
+      platform.store.get(
+        rebuilt.id,
+      );
+
+    if (persisted) {
+      restored.push(
+        persisted,
+      );
+
+      continue;
+    }
+
     platform.store
       .registerGoverned(
-        canonicalItem,
+        rebuilt,
       );
+
+    restored.push(
+      rebuilt,
+    );
   }
 
-  return preserved;
+  return restored;
 }
 
 

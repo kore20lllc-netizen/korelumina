@@ -375,3 +375,104 @@ test(
     );
   },
 );
+
+
+/*
+ * F-31: a canonical item promoted automatically under ADR-0042 carries its
+ * review evidence and history in the persisted record, not in its package.
+ * A Runtime restart (rehydration) must keep that record exactly.
+ */
+test(
+  "rehydration never rewrites a persisted canonical item or drops its review history",
+  () => {
+    withIsolatedCanonicalRoot(
+      (
+        root,
+      ) => {
+        const platform =
+          new KnowledgePlatform();
+
+        const [rebuilt] =
+          rehydrateRuntimeCanonicalKnowledge(
+            platform,
+            packages(
+              canonicalPackage(),
+            ),
+          );
+
+        const promoted: CanonicalKnowledgeItem = {
+          ...rebuilt,
+          metadata: {
+            ...rebuilt.metadata,
+            governance: {
+              ...(rebuilt.metadata.governance as Record<string, unknown>),
+              reviewEvidence: {
+                packageId: "knowledge-package:stability",
+                decision: "approved",
+                reason: "governed-policy-execution:learning-records@1.0",
+              },
+              reviewHistory: [
+                { decision: "approved", reason: "governed-policy-execution:learning-records@1.0" },
+              ],
+              lifecycleHistory: [
+                { state: "approved", at: 2 },
+              ],
+            },
+          },
+        };
+
+        platform.store.registerGoverned(
+          promoted,
+        );
+
+        const before =
+          snapshot(
+            root,
+          );
+
+        const [after] =
+          rehydrateRuntimeCanonicalKnowledge(
+            new KnowledgePlatform(),
+            packages(
+              canonicalPackage(),
+            ),
+          );
+
+        assert.deepEqual(
+          snapshot(
+            root,
+          ),
+          before,
+          "the persisted file is untouched",
+        );
+
+        assert.deepEqual(
+          (after.metadata.governance as Record<string, unknown>).reviewHistory,
+          [{ decision: "approved", reason: "governed-policy-execution:learning-records@1.0" }],
+        );
+      },
+    );
+  },
+);
+
+test(
+  "a canonical item missing from the store is restored from its package",
+  () => {
+    withIsolatedCanonicalRoot(
+      (
+        root,
+      ) => {
+        const items =
+          rehydrateRuntimeCanonicalKnowledge(
+            new KnowledgePlatform(),
+            packages(
+              canonicalPackage(),
+            ),
+          );
+
+        assert.equal(items.length, 1);
+        assert.equal(Object.keys(snapshot(root)).length, 1);
+      },
+    );
+  },
+);

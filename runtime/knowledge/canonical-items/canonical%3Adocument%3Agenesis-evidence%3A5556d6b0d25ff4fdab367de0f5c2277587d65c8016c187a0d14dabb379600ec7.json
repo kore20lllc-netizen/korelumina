@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0005 — Executive Office design preview",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:39178b3951e09bf44275545cb00c3ada7c4db5701e955aeae36778431f817dd5"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c"
+    ]
+  },
+  "createdAt": 1792414240148,
+  "updatedAt": 1792414240148,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+    "checksum": "sha256:af5b6749726b364514bcb2df7d22b3caafcc692ebf876984bf9b1be38037107f",
+    "capturedAt": 1792414240122,
+    "observedAt": 1792414176000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85",
+      "genesisManifestId": "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c",
+      "genesisManifestIndex": 1,
+      "genesisAdmissionIdentity": "genesis-admission:cd48a30f4cfbf831cf89a403e5633a6a245d3f3c072baa75c9fad782d096667a",
+      "historicalSourceId": "genesis-source:document:derived:39178b3951e09bf44275545cb00c3ada7c4db5701e955aeae36778431f817dd5",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0005 — Executive Office design preview",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0005-executive-office-design-preview.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792414240127,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000060",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0005-executive-office-design-preview.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0005-executive-office-design-preview.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792414240130,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000060",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792414240130,
+        "evidenceConsidered": [
+          "genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000060",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792414240130,
+          "evidenceConsidered": [
+            "genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792414240127
+        },
+        {
+          "state": "compiled",
+          "at": 1792414240127
+        },
+        {
+          "state": "validated",
+          "at": 1792414240127
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792414240127
+        },
+        {
+          "state": "approved",
+          "at": 1792414240130,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}
