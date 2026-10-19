@@ -35,18 +35,44 @@ export function isInLearningWindow(
   return includedEvidenceTypes.includes(entry.evidenceType);
 }
 
+/*
+ * A document with no commit yet (for example a Learning Record the Runtime
+ * just wrote) has no git timestamp, which Genesis reports as a discovery
+ * error that blocks the whole replay. For learning it is simply not in any
+ * window yet: it is learned once it is committed. Such sources are left out
+ * here instead of failing the cycle.
+ */
+export function isUncommittedDocumentError(error: {
+  code?: string;
+  historicalSourceId?: string;
+}): boolean {
+  return error.code === "TIMESTAMP_UNAVAILABLE" && Boolean(error.historicalSourceId);
+}
+
 export const windowedGenesisManifestBuilder: GenesisReplayManifestBuilder =
   async (input) => {
     const built = await buildDefaultGenesisSourceManifest(input);
-    const entries = built.manifest.entries.filter((entry) =>
-      isInLearningWindow(
-        entry,
-        built.manifest.scope.includedEvidenceTypes,
-      ),
+    const notYetCommitted = new Set(
+      built.errors
+        .filter(isUncommittedDocumentError)
+        .map((error) => error.historicalSourceId as string),
+    );
+    const errors = built.errors.filter(
+      (error) => !isUncommittedDocumentError(error),
+    );
+    const entries = built.manifest.entries.filter(
+      (entry) =>
+        !notYetCommitted.has(entry.historicalSourceId) &&
+        isInLearningWindow(
+          entry,
+          built.manifest.scope.includedEvidenceTypes,
+        ),
     );
 
     return {
       ...built,
+      errors,
+      readiness: errors.length === 0 ? "READY" : built.readiness,
       manifest: {
         ...built.manifest,
         entries,

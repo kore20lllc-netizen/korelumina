@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0002 — Continuous learning checkpoint and automatic capture",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:eb97f9f77eacda294e6a23b7257609b3a0912967e19c9d120d53c18b83ff1be1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:52225f30e19e902a2cb60e9819a4b73f60a514d02e2a6d59336237189c9e10e8"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cf32a36b53bc4a5dcd4cf2b8c4641d21c361602ff12014eebd22954021a0d4e1"
+    ]
+  },
+  "createdAt": 1792391484307,
+  "updatedAt": 1792391484307,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md",
+    "checksum": "sha256:067567914cba4150292a4feaa9fe1d44d3fb924589db43addc569c7f3ff35c94",
+    "capturedAt": 1792391484288,
+    "observedAt": 1792390852000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:52225f30e19e902a2cb60e9819a4b73f60a514d02e2a6d59336237189c9e10e8",
+      "genesisManifestId": "genesis-manifest:cf32a36b53bc4a5dcd4cf2b8c4641d21c361602ff12014eebd22954021a0d4e1",
+      "genesisManifestIndex": 2,
+      "genesisAdmissionIdentity": "genesis-admission:6ea3d19b5790ccc090392fd07ca61ee6ce18e2e29466c449c30d5634fb3ef437",
+      "historicalSourceId": "genesis-source:document:derived:eb97f9f77eacda294e6a23b7257609b3a0912967e19c9d120d53c18b83ff1be1",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0002 — Continuous learning checkpoint and automatic capture",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792391484292,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000057",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792391484294,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000057",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792391484294,
+        "evidenceConsidered": [
+          "genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000057",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792391484294,
+          "evidenceConsidered": [
+            "genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792391484292
+        },
+        {
+          "state": "compiled",
+          "at": 1792391484292
+        },
+        {
+          "state": "validated",
+          "at": 1792391484292
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792391484292
+        },
+        {
+          "state": "approved",
+          "at": 1792391484294,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

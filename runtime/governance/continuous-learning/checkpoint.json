@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "3a4b8d416a865010e61cccc19f1d963d24351f57",
-    "committedAt": 1792387333000,
-    "establishedAt": 1792389071718,
-    "basis": "Learning cycle learning-cycle:cfd3ab5b6d1612f9"
+    "commit": "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7",
+    "committedAt": 1792390852000,
+    "establishedAt": 1792391520444,
+    "basis": "Learning cycle learning-cycle:6dee78c600985792"
   },
   "cycles": [
     {
@@ -212,6 +212,45 @@
       "reasons": [
         "capture_failed:genesis_source_manifest_discovery_incomplete"
       ]
+    },
+    {
+      "cycleId": "learning-cycle:6dee78c600985792",
+      "trigger": "manual",
+      "startedAt": 1792391418103,
+      "fromCommit": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+      "replayId": "genesis-replay:52225f30e19e902a2cb60e9819a4b73f60a514d02e2a6d59336237189c9e10e8",
+      "admittedSources": 4,
+      "completedAt": 1792391484410,
+      "toCommit": "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7",
+      "commits": [
+        {
+          "sha": "171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792389735000,
+          "subject": "feat(learning): Chief Agent writes cited Learning Records (CL-1b, CL-1c, ADR-0042)"
+        },
+        {
+          "sha": "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792390852000,
+          "subject": "feat(learning): Learning Records become canonical automatically (CL-1d, ADR-0042)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0003",
+        "repositoryPath": "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+        "keptStatements": 28,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792391484411,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
     }
   ]
 }

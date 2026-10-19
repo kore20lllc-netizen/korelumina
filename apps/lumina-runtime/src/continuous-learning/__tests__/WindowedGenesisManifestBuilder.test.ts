@@ -21,3 +21,11 @@ test("keeps window sources excluded for governance reasons, so the replay record
     true,
   );
 });
+
+import { isUncommittedDocumentError } from "../index.js";
+
+test("a document that is not committed yet does not block learning", () => {
+  assert.equal(isUncommittedDocumentError({ code: "TIMESTAMP_UNAVAILABLE", historicalSourceId: "genesis-source:document:x" }), true);
+  assert.equal(isUncommittedDocumentError({ code: "SOURCE_UNAVAILABLE" }), false);
+  assert.equal(isUncommittedDocumentError({ code: "TIMESTAMP_UNAVAILABLE" }), false);
+});

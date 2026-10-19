@@ -1,0 +1,93 @@
+{
+  "id": "genesis-evidence:86557172ceae8f2add446b264b5b70bf4834aef5303cf9fc70844018395306ca",
+  "type": "commit",
+  "title": "feat(learning): Chief Agent writes cited Learning Records (CL-1b, CL-1c, ADR-0042)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792391484284,
+  "observedAt": 1792389735000,
+  "contentRef": "git:commit:171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+  "checksum": "sha256:71e419940e64895c3854c6cd0c917bb6baaaf75bac913f00b1dca68c033fd09e",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:52225f30e19e902a2cb60e9819a4b73f60a514d02e2a6d59336237189c9e10e8",
+    "genesisManifestId": "genesis-manifest:cf32a36b53bc4a5dcd4cf2b8c4641d21c361602ff12014eebd22954021a0d4e1",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:f53487a20342838297626e97a4531ef376cb1f266ba4df9bba64b447bdc0a8b4",
+    "historicalSourceId": "genesis-source:commit:171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+      "parentShas": [
+        "3a4b8d416a865010e61cccc19f1d963d24351f57"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792389735000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792389735000
+      },
+      "subject": "feat(learning): Chief Agent writes cited Learning Records (CL-1b, CL-1c, ADR-0042)",
+      "body": "Registers docs/learning as the learning authority class and turns each captured window into a Learning Record whose statements must cite real commits, files or executive records; uncited statements are removed and low-confidence or conflicting records are held. First record LR-2026-0001 covers the work from KO-5a to ADR-0042; all 43 file citations verified against git.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+        "apps/lumina-runtime/src/continuous-learning/LearningEvidence.ts",
+        "apps/lumina-runtime/src/continuous-learning/LearningRecordService.ts",
+        "apps/lumina-runtime/src/continuous-learning/LearningRecordSynthesizer.ts",
+        "apps/lumina-runtime/src/continuous-learning/LearningRecordWriter.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/ContinuousLearningCycleService.test.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/LearningRecord.test.ts",
+        "apps/lumina-runtime/src/continuous-learning/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/DocumentationHistoricalSourceDiscoverer.test.ts",
+        "docs/learning/LR-2026-0001-chief-agent-activation-and-runtime-backed-knowledge-operatio.md",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/evidence/646183215f21a9ac06a691851d44c9151851bb5279bd755e010b26aefc5c2e4c.json"
+      ],
+      "changedPathsByParent": {
+        "3a4b8d416a865010e61cccc19f1d963d24351f57": [
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+          "apps/lumina-runtime/src/continuous-learning/LearningEvidence.ts",
+          "apps/lumina-runtime/src/continuous-learning/LearningRecordService.ts",
+          "apps/lumina-runtime/src/continuous-learning/LearningRecordSynthesizer.ts",
+          "apps/lumina-runtime/src/continuous-learning/LearningRecordWriter.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/ContinuousLearningCycleService.test.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/LearningRecord.test.ts",
+          "apps/lumina-runtime/src/continuous-learning/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/DocumentationHistoricalSourceDiscoverer.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/DocumentationHistoricalSourceDiscoverer.test.ts",
+          "docs/learning/LR-2026-0001-chief-agent-activation-and-runtime-backed-knowledge-operatio.md",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/evidence/646183215f21a9ac06a691851d44c9151851bb5279bd755e010b26aefc5c2e4c.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde"
+    ],
+    "genesisReplay": [
+      "genesis-replay:52225f30e19e902a2cb60e9819a4b73f60a514d02e2a6d59336237189c9e10e8"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cf32a36b53bc4a5dcd4cf2b8c4641d21c361602ff12014eebd22954021a0d4e1"
+    ]
+  }
+}
