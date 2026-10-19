@@ -6,6 +6,10 @@ import {
   runCommandSync,
 } from "@korelumina/platform-sdk";
 
+import {
+  projectProcessEnvironment,
+} from "./projectProcessEnvironment.js";
+
 
 const INSTALL_TIMEOUT_MS = 1000 * 60 * 10;
 
@@ -30,12 +34,12 @@ function commandSucceeds(
       {
         cwd: projectPath,
         stdio: "ignore",
-        env: {
-          ...process.env,
+        /* SEC-1 (F-18): never Runtime's own environment. */
+        env: projectProcessEnvironment({
           CI: "true",
           NODE_ENV: "development",
           BROWSER: "none",
-        },
+        }),
       },
     );
 
@@ -108,13 +112,13 @@ function installDependencies(
       shell: false,
       stdio: "inherit",
       timeout: INSTALL_TIMEOUT_MS,
-      env: {
-        ...process.env,
+      /* SEC-1 (F-18): never Runtime's own environment. */
+      env: projectProcessEnvironment({
         CI: "true",
         NODE_ENV: "development",
         BROWSER: "none",
         npm_config_ignore_scripts: "true",
-      },
+      }),
     },
   );
 }

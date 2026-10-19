@@ -13,6 +13,10 @@ import {
   recordRuntimeEvent,
 } from "../../knowledge/runtime/index.js";
 
+import {
+  projectProcessEnvironment,
+} from "../projectProcessEnvironment.js";
+
 export function launchRuntimeProcess({
   projectId,
   framework,
@@ -40,8 +44,11 @@ export function launchRuntimeProcess({
         "pipe",
         "pipe",
       ],
-      env: {
-        ...process.env,
+      /*
+       * SEC-1 (F-18): project code gets an allowlisted environment, never
+       * Runtime's own (which holds AI keys and the internal token).
+       */
+      env: projectProcessEnvironment({
         NODE_ENV:
           "development",
         PORT:
@@ -54,7 +61,7 @@ export function launchRuntimeProcess({
           "1",
         BROWSER:
           "none",
-      },
+      }),
     },
   );
 
