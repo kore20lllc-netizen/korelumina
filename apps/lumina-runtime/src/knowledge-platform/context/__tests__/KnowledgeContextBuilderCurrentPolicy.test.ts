@@ -252,3 +252,65 @@ test(
     );
   },
 );
+
+/*
+ * KA-1 (F-27): retrieval "all" keeps every current-policy item even when
+ * the query shares no word with it; the default still filters.
+ */
+test(
+  "retrieval all keeps current-policy items the query does not mention",
+  () => {
+    const platform =
+      new KnowledgePlatform();
+
+    const item = (id: string, title: string) => ({
+      id,
+      type: "CandidateArtifact" as const,
+      title,
+      summary: "Recovered governing document.",
+      confidence: 1,
+      evidenceRefs: [],
+      relationships: {},
+      createdAt: 1,
+      updatedAt: 1,
+      status: "canonical" as const,
+      metadata: {},
+    });
+
+    platform.store.registerGoverned(item("canonical:constitution", "Platform Constitution"));
+    platform.store.registerGoverned(item("canonical:review-queue", "Canonical review queue rules"));
+
+    const builder =
+      new KnowledgeContextBuilder(
+        platform,
+        { list: () => platform.list() },
+      );
+
+    const query =
+      "Which pending canonical review should I handle first?";
+
+    const searched =
+      builder.build({ role: "architect", objective: "question", query });
+
+    const all =
+      builder.build({ role: "architect", objective: "question", query, retrieval: "all" });
+
+    const searchedIds =
+      searched.knowledge.map((entry) => entry.id);
+
+    const allIds =
+      all.knowledge.map((entry) => entry.id);
+
+    assert.ok(searchedIds.includes("canonical:review-queue"));
+    assert.ok(
+      !searchedIds.includes("canonical:constitution"),
+      "the default search drops an item the query does not mention",
+    );
+
+    assert.ok(allIds.includes("canonical:review-queue"));
+    assert.ok(
+      allIds.includes("canonical:constitution"),
+      "retrieval all keeps it",
+    );
+  },
+);

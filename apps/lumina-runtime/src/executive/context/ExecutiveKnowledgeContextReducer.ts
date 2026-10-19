@@ -105,6 +105,16 @@ export class ExecutiveKnowledgeContextReducer {
           objective:
             event.type,
 
+          /*
+           * KA-1 (F-27): a title-and-summary word match dropped governing
+           * documents (the Platform Constitution, Business Charter,
+           * Blueprint) whenever a question did not share their words. The
+           * Chief Agent receives all current-policy knowledge; the governed
+           * content reader ranks its certified text by the question.
+           */
+          retrieval:
+            "all",
+
           query:
             typeof event.payload.query ===
             "string"

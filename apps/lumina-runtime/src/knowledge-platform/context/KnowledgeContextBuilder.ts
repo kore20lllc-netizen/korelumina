@@ -69,7 +69,8 @@ export class KnowledgeContextBuilder {
         : null;
 
     const knowledge =
-      request.query
+      request.query &&
+      request.retrieval !== "all"
         ? this.platform
             .search(
               request.query,
