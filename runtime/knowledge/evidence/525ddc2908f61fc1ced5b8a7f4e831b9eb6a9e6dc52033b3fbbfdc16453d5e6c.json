@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:023c406764c7101db70ff6f2f640ea43495044a451cd11a6207b8055d7b8542f",
+  "type": "commit",
+  "title": "feat(executive): talk to the Chief Agent and decide its proposals in the Executive Office (EW-1)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792413885352,
+  "observedAt": 1792412643000,
+  "contentRef": "git:commit:a20e06482a29d46a80b599c6808399683bc78fc1",
+  "checksum": "sha256:77f60ab89b8debc2555d14a7ce543842535d3206be9e107fd658f4fa2801f4cd",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:a06e9852a79b27643db8792adbc837da20b3df71f0f150f3daf0257686a54682",
+    "genesisManifestId": "genesis-manifest:cd231038e9aabd41f381b293fb81134f2bb4dfb178ab129426c898d796b1ca09",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:3d8cdafb3c254e74df36bd6dd9194084b5eb18ff387410c99506f724ecc71569",
+    "historicalSourceId": "genesis-source:commit:a20e06482a29d46a80b599c6808399683bc78fc1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a20e06482a29d46a80b599c6808399683bc78fc1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a20e06482a29d46a80b599c6808399683bc78fc1",
+      "parentShas": [
+        "15849372738329b342e321f099aa20c3f11ad9dd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792412643000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792412643000
+      },
+      "subject": "feat(executive): talk to the Chief Agent and decide its proposals in the Executive Office (EW-1)",
+      "body": "Wires the first Executive Office sections to Runtime, using only endpoints that already exist. The conversation sends the owner's question as an executive event; the Chief Agent reasons over governed knowledge and its answer becomes a proposed decision with an approval addressed to the owner, so nothing it says takes effect without the owner (ADR-0041, propose only). The Approval Center approves or rejects those decisions (a rejection needs a reason) and lists canonical promotions waiting for review with a way into Canonical Review. The command deck reads activation, autonomy, learning cycles, pending approvals and the canonical count, and Learn now runs a real learning cycle. Reads are fast records polled every 30 s; the slow education projections are deliberately not used here. Unwired parts keep their design-preview badge and mixed sections say Partly live. The approved look is locked by a new Executive Office UI contract (same fingerprint method as Knowledge Operations, separate script so it cannot touch the certified KO contract), and npm run build now verifies both.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/ExecutiveOfficeWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/pages/Index.tsx",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "docs/ui-contracts/EXECUTIVE_OFFICE_UI_CONTRACT.md",
+        "docs/ui-contracts/executive-office-certified-ui.json",
+        "package.json",
+        "scripts/executive-ui-contract.mjs"
+      ],
+      "changedPathsByParent": {
+        "15849372738329b342e321f099aa20c3f11ad9dd": [
+          "apps/lumina-builder/src/components/workspaces/executive/ExecutiveOfficeWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/pages/Index.tsx",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "docs/ui-contracts/EXECUTIVE_OFFICE_UI_CONTRACT.md",
+          "docs/ui-contracts/executive-office-certified-ui.json",
+          "package.json",
+          "scripts/executive-ui-contract.mjs"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a20e06482a29d46a80b599c6808399683bc78fc1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:a06e9852a79b27643db8792adbc837da20b3df71f0f150f3daf0257686a54682"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cd231038e9aabd41f381b293fb81134f2bb4dfb178ab129426c898d796b1ca09"
+    ]
+  }
+}

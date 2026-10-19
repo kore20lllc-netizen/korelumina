@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:2ba1e7d870898086fafdc7551b222c92c589ea67d4f541929166db58aa7f2e2a",
+  "type": "commit",
+  "title": "fix(landing): restore hero and background videos and the KoreLumina icon",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792413885363,
+  "observedAt": 1792413227000,
+  "contentRef": "git:commit:586695356df95849fba9da214137267bcc2c2375",
+  "checksum": "sha256:b52dc78dc8ade82a74d5a47ce7374dadb42e9840585b4b62bc0936873a34aa2f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:a06e9852a79b27643db8792adbc837da20b3df71f0f150f3daf0257686a54682",
+    "genesisManifestId": "genesis-manifest:cd231038e9aabd41f381b293fb81134f2bb4dfb178ab129426c898d796b1ca09",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:56923262d4ce3cceca9bdf3a9828e91d4da5de207e62aebcbf65ad777d94da3e",
+    "historicalSourceId": "genesis-source:commit:586695356df95849fba9da214137267bcc2c2375",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:586695356df95849fba9da214137267bcc2c2375",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "586695356df95849fba9da214137267bcc2c2375",
+      "parentShas": [
+        "a20e06482a29d46a80b599c6808399683bc78fc1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792413227000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792413227000
+      },
+      "subject": "fix(landing): restore hero and background videos and the KoreLumina icon",
+      "body": "Commit 340e4f34 (fix(builder): restore missing builder workspace assets) deleted public/videos/hero-build-reel.mp4, hero-build-reel.webm, landing-bg.mp4 and public/lumina.png instead of restoring them. HeroVideoFrame, BackgroundVideo, the landing page and index.html (favicon, apple-touch-icon, og:image, twitter:image) still reference them, so the landing hero video, the background video and the site icon stopped showing. Restored byte for byte from 340e4f34~1.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/public/lumina.png",
+        "apps/lumina-builder/public/videos/hero-build-reel.mp4",
+        "apps/lumina-builder/public/videos/hero-build-reel.webm",
+        "apps/lumina-builder/public/videos/landing-bg.mp4"
+      ],
+      "changedPathsByParent": {
+        "a20e06482a29d46a80b599c6808399683bc78fc1": [
+          "apps/lumina-builder/public/lumina.png",
+          "apps/lumina-builder/public/videos/hero-build-reel.mp4",
+          "apps/lumina-builder/public/videos/hero-build-reel.webm",
+          "apps/lumina-builder/public/videos/landing-bg.mp4"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:586695356df95849fba9da214137267bcc2c2375"
+    ],
+    "genesisReplay": [
+      "genesis-replay:a06e9852a79b27643db8792adbc837da20b3df71f0f150f3daf0257686a54682"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cd231038e9aabd41f381b293fb81134f2bb4dfb178ab129426c898d796b1ca09"
+    ]
+  }
+}

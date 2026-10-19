@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:c971b0bb3274232e75d5767454e3c5e963d7b50bd00854abbdb2a454a71eccbd",
+  "type": "commit",
+  "title": "chore(learning): record LR-2026-0004 and its canonical promotion",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792412443956,
+  "observedAt": 1792411813000,
+  "contentRef": "git:commit:15849372738329b342e321f099aa20c3f11ad9dd",
+  "checksum": "sha256:24db2edb438dec616845780c8f4efd980c50554580a5208909ef43593153f8bb",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e",
+    "genesisManifestId": "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:0dc82bb03736bdcb9a49a9e137a6c3203b7c3fef627f3a54ab8b60f00068b8f9",
+    "historicalSourceId": "genesis-source:commit:15849372738329b342e321f099aa20c3f11ad9dd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:15849372738329b342e321f099aa20c3f11ad9dd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "15849372738329b342e321f099aa20c3f11ad9dd",
+      "parentShas": [
+        "0a0ad325049d7197304886f5406a393e01d3145c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792411813000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792411813000
+      },
+      "subject": "chore(learning): record LR-2026-0004 and its canonical promotion",
+      "body": "Bookkeeping from the continuous learning cycle (ADR-0042): the Chief Agent's Learning Record on CL-1e, its evidence, package, manufacturing run, canonical item, and the advanced checkpoint. Committed separately so learning windows exclude it as bookkeeping.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ad0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e.json",
+        "runtime/knowledge/evidence/bdb5cd5645b3890759ef2ffa0bcaaf0979e4e69236798f888f6fda1811670d74.json",
+        "runtime/knowledge/manufacturing-runs/KMR-adc3f047477cce1855fc.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000058.json"
+      ],
+      "changedPathsByParent": {
+        "0a0ad325049d7197304886f5406a393e01d3145c": [
+          "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ad0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e.json",
+          "runtime/knowledge/evidence/bdb5cd5645b3890759ef2ffa0bcaaf0979e4e69236798f888f6fda1811670d74.json",
+          "runtime/knowledge/manufacturing-runs/KMR-adc3f047477cce1855fc.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000058.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:15849372738329b342e321f099aa20c3f11ad9dd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464"
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "id": "genesis-evidence:f5d390987cfbbf5dfbf5a6c2e8800f1b58ccf5d0dae1fd7a944100e6d27b54aa",
+  "type": "commit",
+  "title": "feat(executive): Executive Office design preview (EW-0)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792412443912,
+  "observedAt": 1792411767000,
+  "contentRef": "git:commit:0a0ad325049d7197304886f5406a393e01d3145c",
+  "checksum": "sha256:d46e580531b31a77bf255c53b408dd422b69ecf7bebfa6f463c572619227d127",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e",
+    "genesisManifestId": "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:74d073f7e2e69712e83aba0b6f7212c7f090dae13acf51b9f8c7da628a98ff6c",
+    "historicalSourceId": "genesis-source:commit:0a0ad325049d7197304886f5406a393e01d3145c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0a0ad325049d7197304886f5406a393e01d3145c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0a0ad325049d7197304886f5406a393e01d3145c",
+      "parentShas": [
+        "d7cbbd7251535f3e49a34284fb0d9304f9f001da"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792411767000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792411767000
+      },
+      "subject": "feat(executive): Executive Office design preview (EW-0)",
+      "body": "UI is the contract. This designs every surface of the approved Chief Agent Interface (docs/chief-agent/CHIEF_AGENT_INTERFACE.md) before any wiring: briefing, dashboard, missions, planning, projects, knowledge, memory, agents, execution, approvals, activity, notifications, and the Chief Agent conversation. Knowledge Operations is the reference for design language (materials, premium icons, flagship panels, section navigator), not for layout: each workspace arranges its panels for its own job. The Executive Office opens with the Chief Agent command deck and the conversation side by side, then lays its sections out in a two-column grid so the page stays short. Dashboard and knowledge tiles carry premium icons. The Crown icon stays with Admin, so the Chief Agent uses a brain-circuit icon. In the conversation the Chief Agent speaks under the KoreLumina logo, which spins while it is replying. Every section shows 'Design preview · not wired' and every action stays disabled until EW-1 onward wires it to Runtime.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/ExecutiveOfficeWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/index.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/MemoryCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+        "apps/lumina-builder/src/pages/Index.tsx",
+        "apps/lumina-builder/src/services/navigationService.ts"
+      ],
+      "changedPathsByParent": {
+        "d7cbbd7251535f3e49a34284fb0d9304f9f001da": [
+          "apps/lumina-builder/src/components/layout/Sidebar.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/ExecutiveOfficeWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/index.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/MemoryCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+          "apps/lumina-builder/src/pages/Index.tsx",
+          "apps/lumina-builder/src/services/navigationService.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0a0ad325049d7197304886f5406a393e01d3145c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464"
+    ]
+  }
+}

@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
-    "committedAt": 1792391543000,
-    "establishedAt": 1792394626883,
-    "basis": "Learning cycle learning-cycle:6df165322d038b40"
+    "commit": "586695356df95849fba9da214137267bcc2c2375",
+    "committedAt": 1792413227000,
+    "establishedAt": 1792413915793,
+    "basis": "Learning cycle learning-cycle:9c204c665c230ecc"
   },
   "cycles": [
     {
@@ -279,6 +279,84 @@
         "removedStatements": 0,
         "model": "gpt-5.5",
         "attemptedAt": 1792394609558,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:b24439771f6e3295",
+      "trigger": "automatic",
+      "startedAt": 1792412375781,
+      "fromCommit": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+      "replayId": "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e",
+      "admittedSources": 3,
+      "completedAt": 1792412444023,
+      "toCommit": "15849372738329b342e321f099aa20c3f11ad9dd",
+      "commits": [
+        {
+          "sha": "0a0ad325049d7197304886f5406a393e01d3145c",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792411767000,
+          "subject": "feat(executive): Executive Office design preview (EW-0)"
+        },
+        {
+          "sha": "15849372738329b342e321f099aa20c3f11ad9dd",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792411813000,
+          "subject": "chore(learning): record LR-2026-0004 and its canonical promotion"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0005",
+        "repositoryPath": "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+        "keptStatements": 19,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792412444023,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:9c204c665c230ecc",
+      "trigger": "manual",
+      "startedAt": 1792413823765,
+      "fromCommit": "15849372738329b342e321f099aa20c3f11ad9dd",
+      "replayId": "genesis-replay:a06e9852a79b27643db8792adbc837da20b3df71f0f150f3daf0257686a54682",
+      "admittedSources": 2,
+      "completedAt": 1792413885442,
+      "toCommit": "586695356df95849fba9da214137267bcc2c2375",
+      "commits": [
+        {
+          "sha": "a20e06482a29d46a80b599c6808399683bc78fc1",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792412643000,
+          "subject": "feat(executive): talk to the Chief Agent and decide its proposals in the Executive Office (EW-1)"
+        },
+        {
+          "sha": "586695356df95849fba9da214137267bcc2c2375",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792413227000,
+          "subject": "fix(landing): restore hero and background videos and the KoreLumina icon"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0006",
+        "repositoryPath": "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+        "keptStatements": 33,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792413885442,
         "attempts": 1,
         "state": "WRITTEN",
         "reasons": []

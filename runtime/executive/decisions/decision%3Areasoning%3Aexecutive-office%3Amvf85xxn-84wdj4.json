@@ -1,0 +1,77 @@
+{
+  "id": "decision:reasoning:executive-office:mvf85xxn-84wdj4",
+  "sessionId": "executive-office:mvf85xxn-84wdj4",
+  "title": "Insufficient Pending Review Context",
+  "rationale": "I cannot determine which pending canonical review should be handled first because the supplied governed knowledge does not include the pending review queue or the identity, scope, authority class, approval state, conflict status, evidence type, or urgency of any pending canonical reviews. Governed prioritization rules exist: repository document precedence is determined by human-recorded decisions, Canon, Constitution, Blueprint, accepted amendments and approved decisions, then lower classes; recovery prioritizes ADRs, RFCs, architecture documents, specifications, roadmaps, source files, git history, runtime events, conversations, and engineering executions in that order; approved Learning Records within the authorized learning scope may promote automatically, while other knowledge classes still require per-package executive decisions. However, without the actual pending items, applying those rules to select a first review would require inventing facts not present in the governed knowledge.",
+  "requestedBy": "chief-agent",
+  "status": "rejected",
+  "evidence": [
+    "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+    "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+    "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+    "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+  ],
+  "consequences": [
+    "There are pending canonical reviews, as implied by the question.",
+    "The supplied governed knowledge does not include the current pending canonical review queue or metadata for individual pending reviews."
+  ],
+  "createdAt": 1792412582893,
+  "updatedAt": 1792412582893,
+  "metadata": {
+    "reasoningId": "reasoning:executive-office:mvf85xxn-84wdj4",
+    "reasoningConfidence": 0.92,
+    "reasoningQuestion": "hich of the pending canonical reviews should I handle first, and why?",
+    "reasoningDisposition": "deny",
+    "executableCandidate": false,
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+      "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+      "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+      "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+      "canonical:document:phase43-vision2050-certification-1787430674",
+      "canonical:document:phase54-event-driven-certification-1787438365",
+      "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+    ],
+    "organizationalMemoryRecordIds": [],
+    "governedContent": {
+      "includedIds": [
+        "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "truncatedIds": [
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "excluded": [
+        {
+          "id": "canonical:document:phase43-vision2050-certification-1787430674",
+          "reason": "content_ref_not_a_repository_file"
+        },
+        {
+          "id": "canonical:document:phase54-event-driven-certification-1787438365",
+          "reason": "content_ref_not_a_repository_file"
+        }
+      ]
+    },
+    "model": "gpt-5.5",
+    "provider": "text-generation",
+    "routing": {
+      "escalated": false,
+      "escalationReason": null,
+      "confidenceThreshold": 0.6,
+      "attempts": [
+        {
+          "role": "primary",
+          "provider": "openai",
+          "model": "gpt-5.5",
+          "confidence": 0.92,
+          "error": null
+        }
+      ]
+    }
+  }
+}

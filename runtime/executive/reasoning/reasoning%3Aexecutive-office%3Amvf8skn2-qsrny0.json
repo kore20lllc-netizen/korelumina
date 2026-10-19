@@ -1,0 +1,42 @@
+{
+  "id": "reasoning:executive-office:mvf8skn2-qsrny0",
+  "sessionId": "executive-office:mvf8skn2-qsrny0",
+  "title": "Priority cannot be determined",
+  "question": "what's the priority?",
+  "conclusion": "No governed knowledge was supplied to determine the priority for the unspecified event, organization, or project. Therefore the requested priority cannot be authorized or assigned.",
+  "disposition": "deny",
+  "confidence": 0.98,
+  "evidence": [],
+  "assumptions": [
+    "No canonical knowledge or organizational memory was supplied.",
+    "The question asks for a priority determination but provides no governed priority criteria or project context."
+  ],
+  "status": "completed",
+  "createdAt": 1792413630252,
+  "updatedAt": 1792413630252,
+  "metadata": {
+    "canonicalKnowledgeIds": [],
+    "organizationalMemoryRecordIds": [],
+    "governedContent": {
+      "includedIds": [],
+      "truncatedIds": [],
+      "excluded": []
+    },
+    "model": "gpt-5.5",
+    "provider": "text-generation",
+    "routing": {
+      "escalated": false,
+      "escalationReason": null,
+      "confidenceThreshold": 0.6,
+      "attempts": [
+        {
+          "role": "primary",
+          "provider": "openai",
+          "model": "gpt-5.5",
+          "confidence": 0.98,
+          "error": null
+        }
+      ]
+    }
+  }
+}

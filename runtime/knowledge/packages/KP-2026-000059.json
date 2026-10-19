@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000059",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792412443924,
+  "updatedAt": 1792412443949,
+  "data": {
+    "id": "KP-2026-000059",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0004 — Windowed learning skips uncommitted documents",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:4fe07ebcd2539a5c0e2be8cea214d7dd1735ecfb9e088777b7d55d7ca007576c"
+          ],
+          "genesisReplay": [
+            "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464"
+          ]
+        },
+        "extractedAt": 1792412443923,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792412443923,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+          "checksum": "sha256:1b88d4155a8903db6dbfedc86bbacb6cfbae8a32035b6ce15b9e5c676033e69c",
+          "capturedAt": 1792412443919,
+          "observedAt": 1792411813000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:27ebd8878353b7e4d748457968ed5015dc65d8e1414fe747e01ce51fc092eb8e",
+            "genesisManifestId": "genesis-manifest:eb6d4a5e82ab93b826b1df4d194a3945d30bea090c66abf18bb73859203f7464",
+            "genesisManifestIndex": 1,
+            "genesisAdmissionIdentity": "genesis-admission:80d2443b084959d2ff361e2951c0a713cb9d9a4dca171de43b9dab369aabff63",
+            "historicalSourceId": "genesis-source:document:derived:4fe07ebcd2539a5c0e2be8cea214d7dd1735ecfb9e088777b7d55d7ca007576c",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0004 — Windowed learning skips uncommitted documents",
+              "status": "Approved",
+              "approvalDate": "2026-10-19",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792412443924,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792412443924,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792412443923,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792412443924
+      },
+      {
+        "state": "compiled",
+        "at": 1792412443924
+      },
+      {
+        "state": "validated",
+        "at": 1792412443924
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792412443924
+      },
+      {
+        "state": "approved",
+        "at": 1792412443927,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792412443949,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792412443924
+    },
+    "createdAt": 1792412443924,
+    "updatedAt": 1792412443949,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792412443927
+      },
+      "review": {
+        "packageId": "KP-2026-000059",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792412443927,
+        "evidenceConsidered": [
+          "genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000059",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792412443927,
+          "evidenceConsidered": [
+            "genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792412443927,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792412443927,
+          "packageIds": [
+            "KP-2026-000059"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000059",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792412443949,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e"
+        ]
+      }
+    }
+  }
+}
