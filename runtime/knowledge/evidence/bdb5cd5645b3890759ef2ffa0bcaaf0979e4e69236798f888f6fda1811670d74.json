@@ -1,0 +1,89 @@
+{
+  "id": "genesis-evidence:78553edf24197b844b4b092dc1d9bf054fcd8c09dc9b1ffb6b5293646e4441e5",
+  "type": "commit",
+  "title": "fix(learning): uncommitted documents no longer block learning cycles (CL-1e)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792394609485,
+  "observedAt": 1792391543000,
+  "contentRef": "git:commit:d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+  "checksum": "sha256:bfb3da44c9fe8c3eba28403b6f0f17d51487abdec80b5af1bedb9dd0af3990a5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:9413a2565d32f0ab4b2ec770800acd8a46ef1019af8cdcd0eada6be7be070ed5",
+    "genesisManifestId": "genesis-manifest:d65a606c4f35ac647731e3cc98f574b3a95f35feb0268a61568932babe92c6fb",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:0925b1898bf35f51268e687f1614a2984b9deb76de8d8d31e1f00e51eb7e8d75",
+    "historicalSourceId": "genesis-source:commit:d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+      "parentShas": [
+        "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792391543000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792391543000
+      },
+      "subject": "fix(learning): uncommitted documents no longer block learning cycles (CL-1e)",
+      "body": "A Learning Record written by the Runtime has no git timestamp until it is committed, and Genesis treated that as a discovery error that blocked the whole capture, so LR-2026-0001 was never admitted or promoted. Learning cycles now leave uncommitted documents out of the window; they are learned once committed. Full Genesis replays still treat it as an error.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/WindowedGenesisManifestBuilder.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/WindowedGenesisManifestBuilder.test.ts",
+        "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3aa38453402ef1a201a50411a350a0719b76a313cea8bb849d6f8fd3f7b695ec.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b.json",
+        "runtime/knowledge/evidence/232bcf52d0bceb8593f45c9465a6948dcf9d36f98708d1345bd94fa47e7c9d9d.json",
+        "runtime/knowledge/evidence/eccf56ad74ba72c420c4a6595fec86854114c7b612cfbbdfe607a7328ad9b309.json",
+        "runtime/knowledge/manufacturing-runs/KMR-030ebc5d10b4e3c7352c.json",
+        "runtime/knowledge/manufacturing-runs/KMR-052f1ff39e2b2bd85188.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000056.json",
+        "runtime/knowledge/packages/KP-2026-000057.json",
+        "runtime/knowledge/review-batches/KRB-2026-000014.json"
+      ],
+      "changedPathsByParent": {
+        "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7": [
+          "apps/lumina-runtime/src/continuous-learning/WindowedGenesisManifestBuilder.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/WindowedGenesisManifestBuilder.test.ts",
+          "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3aa38453402ef1a201a50411a350a0719b76a313cea8bb849d6f8fd3f7b695ec.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b.json",
+          "runtime/knowledge/evidence/232bcf52d0bceb8593f45c9465a6948dcf9d36f98708d1345bd94fa47e7c9d9d.json",
+          "runtime/knowledge/evidence/eccf56ad74ba72c420c4a6595fec86854114c7b612cfbbdfe607a7328ad9b309.json",
+          "runtime/knowledge/manufacturing-runs/KMR-030ebc5d10b4e3c7352c.json",
+          "runtime/knowledge/manufacturing-runs/KMR-052f1ff39e2b2bd85188.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000056.json",
+          "runtime/knowledge/packages/KP-2026-000057.json",
+          "runtime/knowledge/review-batches/KRB-2026-000014.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d7cbbd7251535f3e49a34284fb0d9304f9f001da"
+    ],
+    "genesisReplay": [
+      "genesis-replay:9413a2565d32f0ab4b2ec770800acd8a46ef1019af8cdcd0eada6be7be070ed5"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:d65a606c4f35ac647731e3cc98f574b3a95f35feb0268a61568932babe92c6fb"
+    ]
+  }
+}

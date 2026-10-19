@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7",
-    "committedAt": 1792390852000,
-    "establishedAt": 1792391520444,
-    "basis": "Learning cycle learning-cycle:6dee78c600985792"
+    "commit": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+    "committedAt": 1792391543000,
+    "establishedAt": 1792394626883,
+    "basis": "Learning cycle learning-cycle:6df165322d038b40"
   },
   "cycles": [
     {
@@ -247,6 +247,38 @@
         "removedStatements": 0,
         "model": "gpt-5.5",
         "attemptedAt": 1792391484411,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:6df165322d038b40",
+      "trigger": "automatic",
+      "startedAt": 1792393612869,
+      "fromCommit": "3cdbbd5cfd2fe9906a9102458a8f4b11f2082df7",
+      "replayId": "genesis-replay:9413a2565d32f0ab4b2ec770800acd8a46ef1019af8cdcd0eada6be7be070ed5",
+      "admittedSources": 2,
+      "completedAt": 1792394609558,
+      "toCommit": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+      "commits": [
+        {
+          "sha": "d7cbbd7251535f3e49a34284fb0d9304f9f001da",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792391543000,
+          "subject": "fix(learning): uncommitted documents no longer block learning cycles (CL-1e)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0004",
+        "repositoryPath": "docs/learning/LR-2026-0004-windowed-learning-skips-uncommitted-documents.md",
+        "keptStatements": 11,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792394609558,
         "attempts": 1,
         "state": "WRITTEN",
         "reasons": []

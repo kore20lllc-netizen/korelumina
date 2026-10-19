@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000058",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792394609456,
+  "updatedAt": 1792394609479,
+  "data": {
+    "id": "KP-2026-000058",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0003 — Cited Learning Records and automatic canonical promotion",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:ae0e546afe963df33b00962cd661d04aadccc6e7ccbacadacebd82e8a7ba6545"
+          ],
+          "genesisReplay": [
+            "genesis-replay:9413a2565d32f0ab4b2ec770800acd8a46ef1019af8cdcd0eada6be7be070ed5"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:d65a606c4f35ac647731e3cc98f574b3a95f35feb0268a61568932babe92c6fb"
+          ]
+        },
+        "extractedAt": 1792394609455,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792394609455,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+          "checksum": "sha256:04ffb94ba78bceee6a8391c599703e01073f70c6443df118f77fcf34773252a2",
+          "capturedAt": 1792394609446,
+          "observedAt": 1792391543000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:9413a2565d32f0ab4b2ec770800acd8a46ef1019af8cdcd0eada6be7be070ed5",
+            "genesisManifestId": "genesis-manifest:d65a606c4f35ac647731e3cc98f574b3a95f35feb0268a61568932babe92c6fb",
+            "genesisManifestIndex": 0,
+            "genesisAdmissionIdentity": "genesis-admission:ce307bc4fe0681c3c7416c20c7e46207f51aeb65454b8a6c0fc9f77a7913dbba",
+            "historicalSourceId": "genesis-source:document:derived:ae0e546afe963df33b00962cd661d04aadccc6e7ccbacadacebd82e8a7ba6545",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0003 — Cited Learning Records and automatic canonical promotion",
+              "status": "Approved",
+              "approvalDate": "2026-10-19",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792394609456,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0003-cited-learning-records-and-automatic-canonical-promotion.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792394609456,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792394609455,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792394609456
+      },
+      {
+        "state": "compiled",
+        "at": 1792394609456
+      },
+      {
+        "state": "validated",
+        "at": 1792394609456
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792394609456
+      },
+      {
+        "state": "approved",
+        "at": 1792394609459,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792394609479,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792394609456
+    },
+    "createdAt": 1792394609456,
+    "updatedAt": 1792394609479,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792394609459
+      },
+      "review": {
+        "packageId": "KP-2026-000058",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792394609459,
+        "evidenceConsidered": [
+          "genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000058",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792394609459,
+          "evidenceConsidered": [
+            "genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792394609459,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792394609459,
+          "packageIds": [
+            "KP-2026-000058"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000058",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792394609479,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+        ]
+      }
+    }
+  }
+}
