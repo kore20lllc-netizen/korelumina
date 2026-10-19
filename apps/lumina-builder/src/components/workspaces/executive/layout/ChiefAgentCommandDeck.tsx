@@ -86,7 +86,9 @@ function waitingCount(office: ExecutiveOfficeState): number | null {
 
 function learnedRecords(office: ExecutiveOfficeState): string[] {
   if (office.learning.status !== "ok") return [];
-  return office.learning.data.cycles
+  /* Runtime lists cycles newest first; keep them oldest to newest here. */
+  return [...office.learning.data.cycles]
+    .sort((left, right) => left.startedAt - right.startedAt)
     .map((cycle) => cycle.learning?.recordId)
     .filter((recordId): recordId is string => typeof recordId === "string");
 }
@@ -97,7 +99,10 @@ function operationsFor(office: ExecutiveOfficeState): Operation[] {
   const waiting = waitingCount(office);
   const runtimeAnswered = [office.operations, office.activation, office.learning].some((read) => read.status === "ok");
   const runtimeFailed = [office.operations, office.activation, office.learning].every((read) => read.status === "error");
-  const lastCycle = learning.status === "ok" ? learning.data.cycles[learning.data.cycles.length - 1] : undefined;
+  const lastCycle =
+    learning.status === "ok"
+      ? [...learning.data.cycles].sort((left, right) => right.startedAt - left.startedAt)[0]
+      : undefined;
 
   return [
     {

@@ -182,6 +182,27 @@ function buildPrompt(
         }),
       );
 
+  const operationalState =
+    input.operationalState;
+
+  const operationalSection =
+    operationalState
+      ? [
+          "",
+          `Live operational state (read-only, captured ${operationalState.capturedAt}):`,
+          JSON.stringify(
+            {
+              entries:
+                operationalState.entries,
+              unavailable:
+                operationalState.unavailable,
+            },
+            null,
+            2,
+          ),
+        ]
+      : [];
+
   return [
     "You are the KoreLumina Chief Agent reasoning engine.",
     "",
@@ -193,6 +214,15 @@ function buildPrompt(
     "If proceeding requires human judgment despite sufficient governed evidence, use disposition review.",
     "If governed knowledge is insufficient, contradictory, or explicitly does not authorize the requested action, use disposition deny.",
     "A deny disposition must never be softened merely because an approver was supplied.",
+    ...(operationalState
+      ? [
+          "",
+          "Live operational state describes what is happening on the platform now: activation, learning, pending approvals, recent decisions, and knowledge waiting for canonical review.",
+          "Use it to answer questions about current, pending, waiting, running, or recent work, and cite its operational ids when you rely on it.",
+          "It is not governed knowledge: it never authorizes an action by itself, and governed knowledge decides what should be done about it.",
+          "If a part is listed as unavailable, say you could not see it; do not guess.",
+        ]
+      : []),
     "",
     "Return JSON only. No markdown. No commentary.",
     "",
@@ -202,7 +232,7 @@ function buildPrompt(
     '  "disposition": "authorize | review | deny",',
     '  "conclusion": "reasoned conclusion",',
     '  "confidence": 0.0,',
-    '  "evidence": ["canonical-or-memory-id"],',
+    '  "evidence": ["canonical-memory-or-operational-id"],',
     '  "assumptions": ["explicit assumption"]',
     "}",
     "",
@@ -224,6 +254,7 @@ function buildPrompt(
       null,
       2,
     ),
+    ...operationalSection,
   ].join("\n");
 }
 
@@ -266,6 +297,11 @@ function parseResult(
         .map(
           (record) => record.id,
         ),
+      ...(input.operationalState
+        ?.entries ?? []
+      ).map(
+        (entry) => entry.id,
+      ),
     ]);
 
   for (

@@ -10,6 +10,10 @@ import {
   ChiefAgentReasoningKnowledgeMaterializer,
   type ChiefAgentReasoningKnowledge,
 } from "./ChiefAgentReasoningKnowledgeMaterializer.js";
+import type {
+  ChiefAgentOperationalState,
+  ChiefAgentOperationalStateReader,
+} from "./ChiefAgentOperationalState.js";
 
 export interface ChiefAgentReasoningInput {
   eventId: string;
@@ -26,6 +30,13 @@ export interface ChiefAgentReasoningInput {
 
   knowledge:
     ChiefAgentReasoningKnowledge;
+
+  /*
+   * EW-2 (F-24): what is happening on the platform right now. Context for
+   * questions about current state; never knowledge, never authority.
+   */
+  operationalState?:
+    ChiefAgentOperationalState;
 }
 
 export type ChiefAgentReasoningDisposition =
@@ -72,6 +83,9 @@ export class ChiefAgentReasoningDestinationAdapter {
 
     private readonly contentReader?:
       ChiefAgentGovernedContentReader,
+
+    private readonly operationalStateReader?:
+      ChiefAgentOperationalStateReader,
   ) {}
 
   async handle(
@@ -161,6 +175,25 @@ export class ChiefAgentReasoningDestinationAdapter {
           }
         : materialized;
 
+    let operationalState:
+      ChiefAgentOperationalState | undefined;
+
+    if (this.operationalStateReader) {
+      try {
+        operationalState =
+          this.operationalStateReader.read();
+      } catch (error) {
+        operationalState = {
+          capturedAt:
+            new Date().toISOString(),
+          entries: [],
+          unavailable: [
+            `operational state: ${error instanceof Error ? error.message : String(error)}`,
+          ],
+        };
+      }
+    }
+
     await this.provider.reason({
       eventId:
         dispatchContext.event.id,
@@ -182,6 +215,10 @@ export class ChiefAgentReasoningDestinationAdapter {
       approverId,
 
       knowledge,
+
+      ...(operationalState
+        ? { operationalState }
+        : {}),
     });
   }
 }

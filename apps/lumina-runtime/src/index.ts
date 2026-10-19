@@ -61,6 +61,7 @@ import {
   runGovernedGenesisReplay,
 } from "./knowledge-preservation/genesis/index.js";
 import {
+  classifyCanonicalReview,
   loadCanonicalReviewPolicy,
 } from "./knowledge-preservation/review/index.js";
 import {
@@ -113,6 +114,7 @@ import { registerKnowledgePreservationRoutes } from "./routes/knowledge/register
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
+import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -199,6 +201,7 @@ import {
   ChiefAgentReasoningExecutionService,
   ChiefAgentReasoningKnowledgeMaterializer,
   ChiefAgentGovernedContentReader,
+  ChiefAgentOperationalStateReader,
   ExecutiveReasoningService,
   FileExecutiveReasoningStore,
   createChiefAgentReasoningProvider,
@@ -1241,6 +1244,50 @@ export const runtimeChiefAgentReasoningExecutionService =
     runtimeExecutiveReasoningService,
   );
 
+/*
+ * EW-2 (F-24): what is happening now, read at the moment of reasoning.
+ * The sources are defined later in this module and are only called when
+ * the Chief Agent reasons or the owner asks to see its operational state.
+ */
+export const chiefAgentOperationalStateReader =
+  new ChiefAgentOperationalStateReader({
+    activation: () => {
+      const status =
+        chiefAgentActivationGate.status({
+          includePrerequisites: false,
+        });
+      return {
+        state: status.state,
+        autonomyLevel: status.autonomyLevel ?? null,
+      };
+    },
+    learning: () =>
+      runtimeContinuousLearningService.status(),
+    approvals: () =>
+      runtimeExecutiveApprovalService.list(),
+    decisions: () =>
+      runtimeExecutiveDecisionService.list(),
+    canonicalReviews: () =>
+      runtimeKnowledgePreservationPlatform
+        .packageService
+        .list()
+        .filter(
+          (knowledgePackage) =>
+            knowledgePackage.state === "awaiting_review" &&
+            knowledgePackage.approvalState === "pending_review",
+        )
+        .map((knowledgePackage) => ({
+          id: knowledgePackage.id,
+          title:
+            knowledgePackage.items[0]?.title ??
+            knowledgePackage.id,
+          classification:
+            classifyCanonicalReview(knowledgePackage).mode,
+          createdAt: knowledgePackage.createdAt,
+          updatedAt: knowledgePackage.updatedAt,
+        })),
+  });
+
 export const chiefAgentReasoningAdapter =
   new ChiefAgentReasoningDestinationAdapter(
     new ChiefAgentReasoningKnowledgeMaterializer(
@@ -1324,6 +1371,7 @@ export const chiefAgentReasoningAdapter =
     new ChiefAgentGovernedContentReader(
       resolveRepositoryRoot(),
     ),
+    chiefAgentOperationalStateReader,
   );
 
 const readChiefAgentActivationPrerequisites = () => {
@@ -2159,6 +2207,11 @@ registerExecutiveActivationRoute(
 registerExecutiveReasoningRoute(
   app,
   runtimeExecutiveReasoningService,
+);
+
+registerExecutiveOperationalStateRoute(
+  app,
+  chiefAgentOperationalStateReader,
 );
 
 registerExecutiveOperationsSnapshotRoute(

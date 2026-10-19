@@ -107,6 +107,20 @@ export class ChiefAgentReasoningExecutionService {
               },
             }
           : {}),
+        ...(input.operationalState
+          ? {
+              operationalState: {
+                capturedAt:
+                  input.operationalState.capturedAt,
+                entryIds:
+                  input.operationalState.entries.map(
+                    (entry) => entry.id,
+                  ),
+                unavailable:
+                  input.operationalState.unavailable,
+              },
+            }
+          : {}),
         ...(result.metadata ?? {}),
       },
     });

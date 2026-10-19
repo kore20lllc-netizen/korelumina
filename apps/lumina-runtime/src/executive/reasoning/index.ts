@@ -10,3 +10,4 @@ export * from "./EscalatingChiefAgentReasoningProvider.js";
 export * from "./ChiefAgentReasoningProviderConfig.js";
 export * from "./ChiefAgentGovernedContentReader.js";
 export * from "./FileExecutiveReasoningStore.js";
+export * from "./ChiefAgentOperationalState.js";
