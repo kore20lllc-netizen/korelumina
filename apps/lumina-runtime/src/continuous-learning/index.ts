@@ -7,3 +7,4 @@ export * from "./LearningEvidence.js";
 export * from "./LearningRecordSynthesizer.js";
 export * from "./LearningRecordWriter.js";
 export * from "./LearningRecordService.js";
+export * from "./LearningPromotionAuthorization.js";

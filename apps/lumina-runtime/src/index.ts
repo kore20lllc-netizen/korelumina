@@ -33,6 +33,12 @@ import {
   ContinuousLearningScheduler,
   FileContinuousLearningLedger,
   GitLearningWindowSource,
+  FileLearningPromotionAuthorizationStore,
+  LEARNING_RECORD_AUTHORITY,
+  LEARNING_RECORD_SCOPE,
+  LEARNING_REVIEW_POLICY_ID,
+  LEARNING_REVIEW_POLICY_VERSION,
+  validateStandingLearningPromotionAuthorization,
   LearningEvidenceCollector,
   LearningRecordService,
   LearningRecordSynthesizer,
@@ -49,10 +55,14 @@ import {
 } from "./executive/storage/resolveExecutiveStorageRoot.js";
 import {
   registerContinuousLearningRoutes,
+  registerLearningGovernanceRoutes,
 } from "./routes/continuousLearning.js";
 import {
   runGovernedGenesisReplay,
 } from "./knowledge-preservation/genesis/index.js";
+import {
+  loadCanonicalReviewPolicy,
+} from "./knowledge-preservation/review/index.js";
 import {
   cacheUntilRuntimeStateChanges,
   trackRuntimeMutations,
@@ -974,6 +984,13 @@ export const runtimeGovernedPromotionService =
       .manufacturingRunService,
   );
 
+/*
+ * ADR-0042 Decision 4 (CL-1d): the owner's standing authorization for
+ * promoting Learning Records approved by the learning review policy.
+ */
+export const runtimeLearningPromotionAuthorizationStore =
+  new FileLearningPromotionAuthorizationStore();
+
 export const runtimeAutonomousGovernedPromotionExecutor =
   new AutonomousGovernedCanonicalPromotionExecutor(
     runtimeKnowledgePreservationPlatform
@@ -981,6 +998,13 @@ export const runtimeAutonomousGovernedPromotionExecutor =
     runtimeKnowledgePreservationPlatform
       .manufacturingRunService,
     runtimeGovernedPromotionService,
+    (knowledgePackage, policyId, policyVersion) =>
+      validateStandingLearningPromotionAuthorization(
+        runtimeLearningPromotionAuthorizationStore,
+        knowledgePackage,
+        policyId,
+        policyVersion,
+      ),
   );
 
 export const runtimeAutonomousGovernanceCycleOrchestrator =
@@ -1693,6 +1717,89 @@ export const runtimeContinuousLearningScheduler =
 registerContinuousLearningRoutes(
   app,
   runtimeContinuousLearningService,
+);
+
+registerLearningGovernanceRoutes(
+  app,
+  {
+    status: () => ({
+      policy:
+        loadCanonicalReviewPolicy(
+          LEARNING_REVIEW_POLICY_ID,
+          LEARNING_REVIEW_POLICY_VERSION,
+        ),
+      authorization:
+        runtimeLearningPromotionAuthorizationStore.read(),
+    }),
+
+    setup: (actorId) => {
+      const existing =
+        loadCanonicalReviewPolicy(
+          LEARNING_REVIEW_POLICY_ID,
+          LEARNING_REVIEW_POLICY_VERSION,
+        );
+
+      if (!existing) {
+        runtimeCanonicalReviewPolicyAdministrationService.createDraft({
+          id:
+            LEARNING_REVIEW_POLICY_ID,
+          version:
+            LEARNING_REVIEW_POLICY_VERSION,
+          title:
+            "Learning Records (ADR-0042)",
+          authority:
+            LEARNING_RECORD_AUTHORITY,
+          scope:
+            LEARNING_RECORD_SCOPE,
+          owner:
+            "Founder, Kore20 LLC",
+          rules: {
+            requireCompleteGovernanceIdentity:
+              true,
+            requireProvenance:
+              true,
+            requireValidationPassed:
+              true,
+            excludedAuthorities: [
+              "constitutional",
+            ],
+          },
+        });
+      }
+
+      const policy =
+        existing?.status === "active"
+          ? existing
+          : runtimeCanonicalReviewPolicyAdministrationService.activate(
+              LEARNING_REVIEW_POLICY_ID,
+              LEARNING_REVIEW_POLICY_VERSION,
+              { actorId },
+            );
+
+      return {
+        policy,
+        authorization:
+          runtimeLearningPromotionAuthorizationStore.authorize(
+            actorId,
+            Date.now(),
+          ),
+      };
+    },
+
+    revoke: (actorId) => ({
+      policy:
+        runtimeCanonicalReviewPolicyAdministrationService.revoke(
+          LEARNING_REVIEW_POLICY_ID,
+          LEARNING_REVIEW_POLICY_VERSION,
+          { actorId },
+        ),
+      authorization:
+        runtimeLearningPromotionAuthorizationStore.revoke(
+          actorId,
+          Date.now(),
+        ),
+    }),
+  },
 );
 
 registerGenesisConversationAcquisitionRoutes(

@@ -177,7 +177,41 @@
         }
       ],
       "outcome": "CAPTURED",
-      "reasons": []
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0002",
+        "repositoryPath": "docs/learning/LR-2026-0002-continuous-learning-checkpoint-and-automatic-capture.md",
+        "keptStatements": 14,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792390622834,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:58791abce2ec8a37",
+      "trigger": "manual",
+      "startedAt": 1792390642328,
+      "fromCommit": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+      "replayId": null,
+      "admittedSources": null,
+      "completedAt": 1792390704584,
+      "toCommit": "171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+      "commits": [
+        {
+          "sha": "171482ef2b7c41d8f3e0bc1e6ed8211cf82b3cde",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792389735000,
+          "subject": "feat(learning): Chief Agent writes cited Learning Records (CL-1b, CL-1c, ADR-0042)"
+        }
+      ],
+      "outcome": "FAILED",
+      "reasons": [
+        "capture_failed:genesis_source_manifest_discovery_incomplete"
+      ]
     }
   ]
 }

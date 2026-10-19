@@ -1,0 +1,11 @@
+{
+  "version": "learning-promotion-authorization:v1",
+  "status": "active",
+  "policyId": "learning-records",
+  "policyVersion": "1.0",
+  "authority": "learning",
+  "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+  "authorizedBy": "human:founder",
+  "authorizedAt": 1792390602211,
+  "basis": "ADR-0042 Decision 4: Learning Records approved by the learning review policy are promoted without a per-package decision."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "learning-records",
+  "version": "1.0",
+  "status": "active",
+  "title": "Learning Records (ADR-0042)",
+  "authority": "learning",
+  "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+  "owner": "Founder, Kore20 LLC",
+  "authorizedBy": "human:founder",
+  "authorizedAt": 1792390602211,
+  "createdAt": 1792390602211,
+  "updatedAt": 1792390602211,
+  "supersedes": [],
+  "supersededBy": null,
+  "rules": {
+    "requireCompleteGovernanceIdentity": true,
+    "requireProvenance": true,
+    "requireValidationPassed": true,
+    "excludedAuthorities": [
+      "constitutional"
+    ]
+  }
+}

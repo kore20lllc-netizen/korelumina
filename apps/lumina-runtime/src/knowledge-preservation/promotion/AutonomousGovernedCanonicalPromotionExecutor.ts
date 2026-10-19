@@ -950,6 +950,21 @@ export class AutonomousGovernedCanonicalPromotionExecutor {
           new CanonicalKnowledgeStore(),
           manufacturingRunService,
         ),
+
+    /*
+     * ADR-0042 Decision 4 (CL-1d): an optional standing authorization,
+     * consulted only when a package has no per-package executive
+     * promotion decision. Returns null when it authorizes the package.
+     */
+    private readonly standingAuthorization?:
+      (
+        knowledgePackage:
+          KnowledgePackage,
+        policyId:
+          string,
+        policyVersion:
+          string,
+      ) => string | null,
   ) {}
 
   execute(
@@ -1434,10 +1449,21 @@ export class AutonomousGovernedCanonicalPromotionExecutor {
       }
 
       try {
-        const executiveAuthorizationFailure =
+        const perPackageFailure =
           validateExecutivePromotionAuthorization(
             knowledgePackage.id,
           );
+
+        const executiveAuthorizationFailure =
+          perPackageFailure ===
+            "executive_promotion_decision_missing" &&
+          this.standingAuthorization
+            ? this.standingAuthorization(
+                knowledgePackage,
+                policyId,
+                policyVersion,
+              )
+            : perPackageFailure;
 
         if (
           executiveAuthorizationFailure

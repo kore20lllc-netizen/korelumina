@@ -13,6 +13,15 @@ import type {
  * commit, and the next learning cycle admits it.
  */
 
+/*
+ * Every Learning Record carries the same Scope, so one review policy
+ * (authority "learning", this scope) governs them all (ADR-0042 Decision 4).
+ */
+export const LEARNING_RECORD_SCOPE =
+  "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.";
+
+export const LEARNING_RECORD_AUTHORITY = "learning";
+
 export interface WrittenLearningRecord {
   recordId: string;
   repositoryPath: string;
@@ -64,7 +73,7 @@ export function renderLearningRecord(input: {
     "",
     "Owner: Founder, Kore20 LLC",
     "",
-    "Scope: What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    `Scope: ${LEARNING_RECORD_SCOPE}`,
     "",
     `Window: ${input.evidence.fromCommit.slice(0, 8)}..${input.evidence.toCommit.slice(0, 8)}`,
     "",
