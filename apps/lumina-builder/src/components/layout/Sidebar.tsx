@@ -1,7 +1,7 @@
 import {
   LayoutGrid, Sparkles, Lightbulb, Palette, Code2, FolderGit2, Settings, X,
   Layers, FileCode2, Wand2, Image as ImageIcon, MessageSquare, Plus, Box, Home, Activity,
-  BookOpen, History, ShieldCheck, Gauge, ServerCog, Crown, ChevronDown, LogOut, User as UserIcon,
+  BookOpen, History, ShieldCheck, Gauge, ServerCog, Crown, BrainCircuit, ChevronDown, LogOut, User as UserIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -100,6 +100,11 @@ export function Sidebar() {
             icon: ServerCog,
             label: "Runtime Operations",
             active: view === "runtime-operations",
+          },
+          {
+            icon: BrainCircuit,
+            label: "Executive Office",
+            active: view === "executive-office",
           },
           {
             icon: BookOpen,
@@ -226,6 +231,10 @@ export function Sidebar() {
                       item.label === "Runtime Operations"
                     ) {
                       setView("runtime-operations");
+                    } else if (
+                      item.label === "Executive Office"
+                    ) {
+                      setView("executive-office");
                     } else if (
                       item.label === "Knowledge Operations"
                     ) {

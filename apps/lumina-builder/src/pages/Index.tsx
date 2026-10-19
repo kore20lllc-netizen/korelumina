@@ -40,6 +40,12 @@ const KnowledgeOperationsV3Workspace = lazy(() =>
   ),
 );
 
+const ExecutiveOfficeWorkspace = lazy(() =>
+  import(
+    "@/components/workspaces/executive/ExecutiveOfficeWorkspace"
+  ),
+);
+
 const DesignerWorkspace = lazy(() =>
   import("@/components/workspaces/DesignerWorkspace").then((m) => ({
     default: m.DesignerWorkspace,
@@ -266,6 +272,16 @@ function Router() {
   }
 
   
+  if (view === "executive-office") {
+    return (
+      <Shell blobs="ambient">
+        <Suspense fallback={<LoadingView />}>
+          <ExecutiveOfficeWorkspace />
+        </Suspense>
+      </Shell>
+    );
+  }
+
   if (view === "knowledge-operations") {
     return (
       <Shell blobs="ambient">
