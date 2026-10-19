@@ -47,8 +47,8 @@
       "elementCount": 32
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx": {
-      "sha256": "f40247a19c75ccb6279b80ecc7d92eed8ab6c0adf2fd1d2a1c5ff7b88148bdfe",
-      "elementCount": 46
+      "sha256": "635ce705cbcb934a192da23743d3b381b4370e0ecf192cb3545f9d6cb28a146e",
+      "elementCount": 61
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx": {
       "sha256": "2d239acfffeee0dbdf4c9d95abf8b56c374a26dbb8f0f74845e9cffcda1aeb1f",

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageSquareText, Send } from "lucide-react";
+import { MessageSquareText, Mic, Send, Square, Volume2, VolumeX } from "lucide-react";
 
 import { LuminaFlagshipPanel } from "@/components/lumina/workspace/primitives/LuminaFlagshipPanel";
 
 import { ChiefAgentLogo } from "../shared/ChiefAgentLogo";
 import { DesignPreviewBadge } from "../shared/ExecutiveSection";
 import { useExecutiveBriefing } from "../state/useExecutiveBriefing";
+import { useConversationVoice, type ConversationVoice } from "../state/useConversationVoice";
 import { askExecutiveQuestion, useExecutiveOffice } from "../state/useExecutiveOffice";
 
 const QUICK_ACTIONS = [
@@ -28,13 +29,40 @@ type Turn =
  *
  * EW-1: wired. History is the Chief Agent's recorded reasoning; every
  * answer is a proposed decision with an approval addressed to the owner.
+ *
+ * EW-1f: voice. Talk to the Chief Agent with the microphone, and hear its
+ * replies (state/useConversationVoice.ts).
  */
+function ListenButton({ voice, turnKey, text }: { voice: ConversationVoice; turnKey: string; text: string }) {
+  if (!voice.canSpeak) return null;
+  const speaking = voice.speakingKey === turnKey;
+  return (
+    <button
+      type="button"
+      onClick={() => (speaking ? voice.stopSpeaking() : voice.speak(turnKey, text))}
+      aria-label={speaking ? "Stop reading aloud" : "Read aloud"}
+      title={speaking ? "Stop reading aloud" : "Read aloud"}
+      className={`ml-2 inline-flex items-center gap-1 align-middle font-mono text-[10px] transition-colors ${speaking ? "text-amber-100" : "text-sky-300/60 hover:text-sky-100"}`}
+    >
+      {speaking ? <Square className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+      {speaking ? "Stop" : "Listen"}
+    </button>
+  );
+}
+
 export function ConversationPanel() {
   const office = useExecutiveOffice();
   const briefing = useExecutiveBriefing();
   const [openedAt] = useState(() => Date.now());
   const [draft, setDraft] = useState("");
   const scroller = useRef<HTMLOListElement>(null);
+  const spoken = useRef(new Set<string>());
+  const voice = useConversationVoice({
+    onFinalTranscript: (text) => {
+      setDraft("");
+      void askExecutiveQuestion(text);
+    },
+  });
 
   const operations = office.operations.status === "ok" ? office.operations.data : null;
   const decisions = new Map((operations?.decisions ?? []).map((decision) => [decision.id, decision]));
@@ -74,7 +102,17 @@ export function ConversationPanel() {
   useEffect(() => {
     const element = scroller.current;
     if (element) element.scrollTop = element.scrollHeight;
-  }, [turns.length, replying]);
+  }, [turns.length, replying, voice.listening]);
+
+  /* Voice replies: read each answer that arrives while the office is open. */
+  const latest = [...turns].reverse().find((turn) => turn.kind === "answer" || turn.kind === "unanswered");
+  useEffect(() => {
+    if (!latest || latest.at <= openedAt || spoken.current.has(latest.key)) return;
+    spoken.current.add(latest.key);
+    if (voice.voiceReplies && (latest.kind === "answer" || latest.kind === "unanswered")) {
+      voice.speak(latest.key, latest.kind === "unanswered" ? `Not answered. ${latest.text}` : latest.text);
+    }
+  }, [latest, openedAt, voice]);
 
   const send = () => {
     const question = draft.trim();
@@ -95,7 +133,21 @@ export function ConversationPanel() {
                 <div className="text-[10px] text-sky-300/60">Every answer is a proposal you can approve</div>
               </div>
             </div>
-            <DesignPreviewBadge wiring="live" />
+            <div className="flex items-center gap-2">
+              {voice.canSpeak ? (
+                <button
+                  type="button"
+                  aria-pressed={voice.voiceReplies}
+                  onClick={() => voice.setVoiceReplies(!voice.voiceReplies)}
+                  title={voice.voiceReplies ? "Voice replies on: new answers are read aloud" : "Voice replies off"}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors ${voice.voiceReplies ? "border-amber-300/40 bg-amber-400/10 text-amber-100" : "border-white/15 text-white/55 hover:text-white/80"}`}
+                >
+                  {voice.voiceReplies ? <Volume2 className="h-3 w-3" /> : <VolumeX className="h-3 w-3" />}
+                  Voice
+                </button>
+              ) : null}
+              <DesignPreviewBadge wiring="live" />
+            </div>
           </div>
 
           <ol ref={scroller} className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
@@ -125,6 +177,7 @@ export function ConversationPanel() {
                       <a href="#executive-briefing" className="mt-1.5 inline-block font-mono text-[10px] text-amber-200/80 hover:text-amber-100">
                         Briefing · {briefing.sinceLabel} · full briefing below
                       </a>
+                      <ListenButton voice={voice} turnKey={turn.key} text={briefing.narrative} />
                     </>
                   ) : (
                     <div className="mt-1 inline-flex items-center gap-1.5 rounded-[16px] border border-amber-300/20 bg-slate-950/50 px-3.5 py-2.5 text-sm text-sky-100/60">
@@ -147,6 +200,7 @@ export function ConversationPanel() {
                   </div>
                   <div className={`mt-1.5 font-mono text-[10px] ${turn.metaTone === "approved" ? "text-emerald-200/70" : turn.metaTone === "pending" ? "text-amber-200/80" : "text-sky-300/60"}`}>
                     {turn.meta}
+                    <ListenButton voice={voice} turnKey={turn.key} text={turn.text} />
                   </div>
                 </li>
               ) : (
@@ -155,6 +209,7 @@ export function ConversationPanel() {
                   <div className="mt-1 rounded-[16px] border border-rose-300/25 bg-rose-400/10 px-3.5 py-2.5 text-sm leading-6 text-rose-100">
                     Not answered. {turn.text}
                   </div>
+                  <ListenButton voice={voice} turnKey={turn.key} text={`Not answered. ${turn.text}`} />
                 </li>
               ),
             )}
@@ -199,7 +254,8 @@ export function ConversationPanel() {
             <div className="flex items-end gap-2">
               <textarea
                 rows={2}
-                value={draft}
+                value={voice.listening ? voice.interim : draft}
+                readOnly={voice.listening}
                 disabled={replying}
                 onChange={(event) => setDraft(event.target.value)}
                 onKeyDown={(event) => {
@@ -208,13 +264,37 @@ export function ConversationPanel() {
                     send();
                   }
                 }}
-                placeholder={replying ? "The Chief Agent is replying…" : "Ask the Chief Agent…"}
+                placeholder={replying ? "The Chief Agent is replying…" : voice.listening ? "Listening… speak, then pause to send" : "Ask the Chief Agent…"}
                 className="[color-scheme:dark] min-h-[52px] flex-1 resize-none rounded-[14px] border border-cyan-300/[0.2] bg-slate-950/[0.42] px-3 py-2.5 text-sm text-sky-100 placeholder:text-slate-500 outline-none focus:border-cyan-300/45 disabled:cursor-not-allowed"
               />
               <button
                 type="button"
+                onClick={() => (voice.listening ? voice.stopListening() : voice.startListening())}
+                disabled={replying || !voice.canListen}
+                aria-pressed={voice.listening}
+                aria-label={voice.listening ? "Stop and send" : "Talk to the Chief Agent"}
+                title={
+                  !voice.canListen
+                    ? "This browser has no speech recognition (use Chrome or Safari)"
+                    : voice.listening
+                      ? "Stop and send what you said"
+                      : "Talk: speak, then pause to send"
+                }
+                className={`relative flex h-[52px] w-[52px] items-center justify-center rounded-[14px] border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${voice.listening ? "border-rose-300/50 bg-rose-400/15 text-rose-100" : "border-cyan-300/30 bg-cyan-400/10 text-cyan-100 hover:bg-cyan-400/20"}`}
+              >
+                {voice.listening ? (
+                  <>
+                    <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-[14px] border border-rose-300/40 motion-reduce:hidden" />
+                    <Square className="h-4 w-4" />
+                  </>
+                ) : (
+                  <Mic className="h-4 w-4" />
+                )}
+              </button>
+              <button
+                type="button"
                 onClick={send}
-                disabled={replying || draft.trim().length === 0}
+                disabled={replying || voice.listening || draft.trim().length === 0}
                 title={replying ? "The Chief Agent is replying" : "Send (Enter)"}
                 aria-label="Send"
                 className="flex h-[52px] w-[52px] items-center justify-center rounded-[14px] border border-amber-300/30 bg-amber-400/10 text-amber-200 transition-colors hover:bg-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50"
@@ -222,6 +302,9 @@ export function ConversationPanel() {
                 <Send className="h-4 w-4" />
               </button>
             </div>
+            {voice.listenError ? (
+              <p className="mt-2 text-xs text-rose-200" role="alert">{voice.listenError}</p>
+            ) : null}
           </div>
         </div>
       </LuminaFlagshipPanel>
