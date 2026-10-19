@@ -1,0 +1,21 @@
+{
+  "recordId": "chief-agent-activation-record:b50377c99cc15cb4f5307979d4a85a01bd30a73b55bb362bcfe55c0110f116b4",
+  "activationId": "chief-agent-activation:b50377c99cc15cb4f5307979d4a85a01bd30a73b55bb362bcfe55c0110f116b4",
+  "version": "chief-agent-activation:v1",
+  "sequence": 1,
+  "previousRecordId": null,
+  "action": "ACTIVATE",
+  "state": "ACTIVE",
+  "autonomyLevel": "PROPOSE_ONLY",
+  "bindings": {
+    "dayZeroCertificationId": "genesis-day-zero-certification:807381ca884d8fc1cbfb6371c97fff098fe11c376cafea595a3009a52dfc405d",
+    "educationalCorpusCertificationId": "educational-corpus-certification:351a86e15a83bcc8a762390e46b0eb2cd267b65a1357044bfa35a14ef0e520c6",
+    "initialCompetencyCertificationId": "initial-competency-certification:787a654d7ddc124cb6cd520523fd70765b90da1523fe8c11be1df5405e190127",
+    "initialCompetencyHumanAcceptanceId": "initial-competency-human-acceptance:60bb5dc9475a9fcebf64802b3226ff2b89c982f25ef3365e06b228bc5239691f",
+    "productionWorkspaceAuthorizationId": "chief-agent-production-workspace-authorization:f73defc952d0530c2f49e5ccea4efaa3c6a35dcff40e851a3ae9091c529a9183"
+  },
+  "decidedBy": "human:founder",
+  "authorityRole": "HUMAN_GOVERNANCE",
+  "decidedAt": 1792369558556,
+  "reason": "Founder activates the Chief Agent at PROPOSE_ONLY after all education gates were certified."
+}
