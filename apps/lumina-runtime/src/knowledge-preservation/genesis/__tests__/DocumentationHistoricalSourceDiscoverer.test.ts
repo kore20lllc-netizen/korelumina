@@ -1514,3 +1514,54 @@ test(
     );
   },
 );
+
+test(
+  "docs/learning is discovered as the learning registry (ADR-0042)",
+  async () => {
+    const root =
+      repository();
+
+    write(
+      root,
+      "docs/learning/LR-2026-0001-test.md",
+      "# Learning Record\n\nStatus: Approved\n",
+    );
+
+    const result =
+      await new DocumentationHistoricalSourceDiscoverer({
+        repositoryRoot:
+          root,
+
+        discoveredAt:
+          () =>
+            9_000,
+
+        historicalTimestampResolver:
+          () => ({
+            value:
+              1_700_000_000_000,
+
+            source:
+              "fixture-history",
+          }),
+      }).discover(
+        scope(),
+      );
+
+    assert.deepEqual(
+      result.sources.map(
+        (source) =>
+          [
+            source.authority
+              .authorityClass,
+            source.metadata
+              .documentClassification,
+            source.evidenceType,
+          ].join("|"),
+      ),
+      [
+        "learning|learning|document",
+      ],
+    );
+  },
+);

@@ -4,8 +4,8 @@
   "decisionId": "decision:reasoning:ko5e-first-reasoning-test-2",
   "requestedBy": "chief-agent",
   "approverId": "human:founder",
-  "status": "pending",
-  "comments": "",
+  "status": "rejected",
+  "comments": "First supervised test; superseded by ko6-risk-question-1.",
   "createdAt": 1792370016042,
   "metadata": {
     "decisionStatus": "proposed",
@@ -49,5 +49,6 @@
         }
       ]
     }
-  }
+  },
+  "decidedAt": 1792389707387
 }

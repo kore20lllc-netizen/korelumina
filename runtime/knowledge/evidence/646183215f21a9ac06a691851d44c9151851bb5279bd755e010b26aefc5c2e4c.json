@@ -1,0 +1,133 @@
+{
+  "id": "genesis-evidence:8054fc78206d2d7ee5811dece34640ae495e4183feff498e18b53787f6b7b1e3",
+  "type": "commit",
+  "title": "feat(learning): continuous learning checkpoint and automatic capture (CL-1a, ADR-0042)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792389071651,
+  "observedAt": 1792387333000,
+  "contentRef": "git:commit:3a4b8d416a865010e61cccc19f1d963d24351f57",
+  "checksum": "sha256:49fbe6bcb99d173d665eb885f95fe1a6ad40b34fadbd44400f2da965969976b3",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:9c29a3842f9d8944a45c2305010563fb8806f40b4f4265f1a87acba19aaaea0e",
+    "genesisManifestId": "genesis-manifest:212b70b3d0843969720c11bdf0bb168053d0c5d5da38a75004cce99a5cf31405",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:e3bec7ff95d3484f27d1f4a06fd39a20ce946affd20900efcddc92c7d890edb1",
+    "historicalSourceId": "genesis-source:commit:3a4b8d416a865010e61cccc19f1d963d24351f57",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3a4b8d416a865010e61cccc19f1d963d24351f57",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+      "parentShas": [
+        "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792387333000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792387333000
+      },
+      "subject": "feat(learning): continuous learning checkpoint and automatic capture (CL-1a, ADR-0042)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningScheduler.ts",
+        "apps/lumina-runtime/src/continuous-learning/GitLearningWindow.ts",
+        "apps/lumina-runtime/src/continuous-learning/WindowedGenesisManifestBuilder.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/ContinuousLearningCycleService.test.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/LearningInterval.test.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/WindowedGenesisManifestBuilder.test.ts",
+        "apps/lumina-runtime/src/continuous-learning/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/continuousLearning.ts",
+        "docs/adr/ADR-0042-continuous-learning.md",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/evidence/048780709d07ea1d2fe7ed42b3485a993bd728b62505d8dd2f72f7a4187c93dc.json",
+        "runtime/knowledge/evidence/11cf3e7f3b2119e091acbbefdac7f9df704f5c16aa7205af988d09fc594e9a17.json",
+        "runtime/knowledge/evidence/1c22aecc55af813f2d84715e9c2b9750cf2878f004e7b46b7d53360b940af042.json",
+        "runtime/knowledge/evidence/238cb5522525041db8a7c163637bd6ad84d340c9935cd8f48337efc37d8b9545.json",
+        "runtime/knowledge/evidence/40f388ad548c23c4b5ad160aea8e328e9954c343ae200eef1141427065a3c132.json",
+        "runtime/knowledge/evidence/616cc877a63da43811c82fb80b242c450e4b135486a681d94df8998cbb2fe9a0.json",
+        "runtime/knowledge/evidence/6be623cc88bd6b3428abc5eaf8a9ec61f908e7a50e883b18d067f77f4a559a7c.json",
+        "runtime/knowledge/evidence/6cad7f5669597c94eb53156f8acdecaf7052ad1e9691081f5438e63cf7ed3554.json",
+        "runtime/knowledge/evidence/75fe9cffdd96f895c83c299dad032d36711e807d4c4e1fe110dacb95dcedb05c.json",
+        "runtime/knowledge/evidence/812e3b86b367c86a8c71dd41883ebf9340e391dfb22f283c3a2a8c48d6a451d5.json",
+        "runtime/knowledge/evidence/83db10083f941c538deb6931893c850fbdbcec3f0fa921ed699a1bbd9193f837.json",
+        "runtime/knowledge/evidence/99d5267315dd928245dbb6d5a368bfc6c07e2f4f0f61dd310fbb42e39e67ccf8.json",
+        "runtime/knowledge/evidence/9f78fe2745192f451629c77bc5e1c3c73a048d57ecb15720051135f43d38ab75.json",
+        "runtime/knowledge/evidence/a220798a4c042f0990e36e3547ddd4894020e0bee0f2a2e62921025f8be831fc.json",
+        "runtime/knowledge/evidence/b37a534544f4aba3a78a3a0be47be2179b147eca259ce5d8a9540299d9d22d41.json",
+        "runtime/knowledge/evidence/cc6323a027378ef0d9a00eedce7bcd39f913d02added697d63679fd15d6296a2.json",
+        "runtime/knowledge/evidence/d9c8e9bafa8a16fa484a2a201b428b6da618fe72e5adb367f8b3971b0df9b64b.json",
+        "runtime/knowledge/evidence/f16f8c572eaa8161971008f35aef1e74ff80f8fe790bd00f87b1f4627d76dfb3.json",
+        "runtime/knowledge/manufacturing-runs/KMR-318d4003a555d5d1977e.json",
+        "runtime/knowledge/manufacturing-runs/KMR-a267d05e9d03f734a73d.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000054.json",
+        "runtime/knowledge/packages/KP-2026-000055.json"
+      ],
+      "changedPathsByParent": {
+        "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2": [
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningScheduler.ts",
+          "apps/lumina-runtime/src/continuous-learning/GitLearningWindow.ts",
+          "apps/lumina-runtime/src/continuous-learning/WindowedGenesisManifestBuilder.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/ContinuousLearningCycleService.test.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/LearningInterval.test.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/WindowedGenesisManifestBuilder.test.ts",
+          "apps/lumina-runtime/src/continuous-learning/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/continuousLearning.ts",
+          "docs/adr/ADR-0042-continuous-learning.md",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/evidence/048780709d07ea1d2fe7ed42b3485a993bd728b62505d8dd2f72f7a4187c93dc.json",
+          "runtime/knowledge/evidence/11cf3e7f3b2119e091acbbefdac7f9df704f5c16aa7205af988d09fc594e9a17.json",
+          "runtime/knowledge/evidence/1c22aecc55af813f2d84715e9c2b9750cf2878f004e7b46b7d53360b940af042.json",
+          "runtime/knowledge/evidence/238cb5522525041db8a7c163637bd6ad84d340c9935cd8f48337efc37d8b9545.json",
+          "runtime/knowledge/evidence/40f388ad548c23c4b5ad160aea8e328e9954c343ae200eef1141427065a3c132.json",
+          "runtime/knowledge/evidence/616cc877a63da43811c82fb80b242c450e4b135486a681d94df8998cbb2fe9a0.json",
+          "runtime/knowledge/evidence/6be623cc88bd6b3428abc5eaf8a9ec61f908e7a50e883b18d067f77f4a559a7c.json",
+          "runtime/knowledge/evidence/6cad7f5669597c94eb53156f8acdecaf7052ad1e9691081f5438e63cf7ed3554.json",
+          "runtime/knowledge/evidence/75fe9cffdd96f895c83c299dad032d36711e807d4c4e1fe110dacb95dcedb05c.json",
+          "runtime/knowledge/evidence/812e3b86b367c86a8c71dd41883ebf9340e391dfb22f283c3a2a8c48d6a451d5.json",
+          "runtime/knowledge/evidence/83db10083f941c538deb6931893c850fbdbcec3f0fa921ed699a1bbd9193f837.json",
+          "runtime/knowledge/evidence/99d5267315dd928245dbb6d5a368bfc6c07e2f4f0f61dd310fbb42e39e67ccf8.json",
+          "runtime/knowledge/evidence/9f78fe2745192f451629c77bc5e1c3c73a048d57ecb15720051135f43d38ab75.json",
+          "runtime/knowledge/evidence/a220798a4c042f0990e36e3547ddd4894020e0bee0f2a2e62921025f8be831fc.json",
+          "runtime/knowledge/evidence/b37a534544f4aba3a78a3a0be47be2179b147eca259ce5d8a9540299d9d22d41.json",
+          "runtime/knowledge/evidence/cc6323a027378ef0d9a00eedce7bcd39f913d02added697d63679fd15d6296a2.json",
+          "runtime/knowledge/evidence/d9c8e9bafa8a16fa484a2a201b428b6da618fe72e5adb367f8b3971b0df9b64b.json",
+          "runtime/knowledge/evidence/f16f8c572eaa8161971008f35aef1e74ff80f8fe790bd00f87b1f4627d76dfb3.json",
+          "runtime/knowledge/manufacturing-runs/KMR-318d4003a555d5d1977e.json",
+          "runtime/knowledge/manufacturing-runs/KMR-a267d05e9d03f734a73d.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000054.json",
+          "runtime/knowledge/packages/KP-2026-000055.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3a4b8d416a865010e61cccc19f1d963d24351f57"
+    ],
+    "genesisReplay": [
+      "genesis-replay:9c29a3842f9d8944a45c2305010563fb8806f40b4f4265f1a87acba19aaaea0e"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:212b70b3d0843969720c11bdf0bb168053d0c5d5da38a75004cce99a5cf31405"
+    ]
+  }
+}

@@ -4,7 +4,7 @@
   "title": "Pre-customer architecture risk review",
   "rationale": "The three most important risks to address before onboarding the first paying customer are: 1) Governance lifecycle incompleteness: KoreLumina should not rely on architecture knowledge that has not passed the certified Knowledge Preservation lifecycle, including evidence intake, compilation, validation, package assembly, policy binding, Canonical Review, governed promotion, and canonicalization. This is supported by canonical:document:phase43-vision2050-certification-1787430674. 2) Event-driven governance automation gaps: the certified path requires Knowledge Package Assembly through Governance-Ready Signal, Runtime Policy Resolution, Policy Binding, Governed Canonical Review, Autonomous Governed Promotion, and Canonical Knowledge, with no manual binding, review execution, or promotion. Any remaining manual step is a material pre-customer risk. This is supported by canonical:document:phase54-event-driven-certification-1787438365. 3) Repository knowledge integrity risk: the repository is defined as the first evidence corpus, recovery must extract existing engineering knowledge, and recovery must not invent knowledge. Before accepting payment from a customer, KoreLumina should ensure recovered repository knowledge conforms to the accepted recovery specification and is seeded into canonical knowledge without unsupported invention. This is supported by canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7 and canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc.",
   "requestedBy": "chief-agent",
-  "status": "proposed",
+  "status": "rejected",
   "evidence": [
     "canonical:document:phase43-vision2050-certification-1787430674",
     "canonical:document:phase54-event-driven-certification-1787438365",
@@ -17,7 +17,7 @@
     "Prioritizing the three risks requires review judgment because the supplied canonical knowledge does not explicitly rank pre-customer risks."
   ],
   "createdAt": 1792370016040,
-  "updatedAt": 1792370016040,
+  "updatedAt": 1792389707389,
   "metadata": {
     "reasoningId": "reasoning:ko5e-first-reasoning-test-2",
     "reasoningConfidence": 0.78,

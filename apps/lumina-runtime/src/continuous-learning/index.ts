@@ -3,3 +3,7 @@ export * from "./GitLearningWindow.js";
 export * from "./ContinuousLearningCycleService.js";
 export * from "./ContinuousLearningScheduler.js";
 export * from "./WindowedGenesisManifestBuilder.js";
+export * from "./LearningEvidence.js";
+export * from "./LearningRecordSynthesizer.js";
+export * from "./LearningRecordWriter.js";
+export * from "./LearningRecordService.js";

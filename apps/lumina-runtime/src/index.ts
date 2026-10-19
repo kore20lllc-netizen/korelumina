@@ -33,9 +33,20 @@ import {
   ContinuousLearningScheduler,
   FileContinuousLearningLedger,
   GitLearningWindowSource,
+  LearningEvidenceCollector,
+  LearningRecordService,
+  LearningRecordSynthesizer,
+  LearningRecordWriter,
   resolveLearningIntervalMinutes,
   windowedGenesisManifestBuilder,
 } from "./continuous-learning/index.js";
+import {
+  createTextGenerationClient,
+  resolveChiefAgentReasoningRouting,
+} from "./executive/reasoning/index.js";
+import {
+  resolveExecutiveStorageRoot,
+} from "./executive/storage/resolveExecutiveStorageRoot.js";
 import {
   registerContinuousLearningRoutes,
 } from "./routes/continuousLearning.js";
@@ -1544,6 +1555,30 @@ export const runtimeContinuousLearningService =
         .split(",")
         .map((email) => email.trim())
         .filter(Boolean),
+
+    /*
+     * CL-1c: the Chief Agent writes the Learning Record with the same
+     * primary model as its reasoning (LUMINA_REASONING_PRIMARY).
+     */
+    learner:
+      new LearningRecordService(
+        new LearningEvidenceCollector({
+          repositoryRoot:
+            runtimeGenesisReplayExecutionRuntime.repositoryRoot,
+          executiveRoot:
+            resolveExecutiveStorageRoot,
+        }),
+        new LearningRecordSynthesizer(
+          createTextGenerationClient(
+            resolveChiefAgentReasoningRouting().primary,
+            resolveChiefAgentReasoningRouting().primaryModel,
+          ),
+          resolveChiefAgentReasoningRouting().confidenceThreshold,
+        ),
+        new LearningRecordWriter(
+          runtimeGenesisReplayExecutionRuntime.repositoryRoot,
+        ),
+      ),
 
     initialCheckpointTime: () =>
       runtimeGenesisDayZeroCertificationPersistenceStore

@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
-    "committedAt": 1792384966000,
-    "establishedAt": 1792387316267,
-    "basis": "Learning cycle learning-cycle:aa321923319abcb7"
+    "commit": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+    "committedAt": 1792387333000,
+    "establishedAt": 1792389071718,
+    "basis": "Learning cycle learning-cycle:cfd3ab5b6d1612f9"
   },
   "cycles": [
     {
@@ -142,6 +142,38 @@
           "authorEmail": "kore20lllc@gmail.com",
           "committedAt": 1792384966000,
           "subject": "docs(adr): ADR-0042 continuous learning v1, commit is approval"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0001",
+        "repositoryPath": "docs/learning/LR-2026-0001-chief-agent-activation-and-runtime-backed-knowledge-operatio.md",
+        "keptStatements": 30,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792389331778,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:cfd3ab5b6d1612f9",
+      "trigger": "automatic",
+      "startedAt": 1792389019133,
+      "fromCommit": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+      "replayId": "genesis-replay:9c29a3842f9d8944a45c2305010563fb8806f40b4f4265f1a87acba19aaaea0e",
+      "admittedSources": 2,
+      "completedAt": 1792389071718,
+      "toCommit": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+      "commits": [
+        {
+          "sha": "3a4b8d416a865010e61cccc19f1d963d24351f57",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792387333000,
+          "subject": "feat(learning): continuous learning checkpoint and automatic capture (CL-1a, ADR-0042)"
         }
       ],
       "outcome": "CAPTURED",

@@ -65,6 +65,7 @@ const DEFAULT_DOCUMENT_ROOTS =
     "docs/certification",
     "docs/business",
     "docs/domain",
+    "docs/learning",
   ] as const;
 
 export interface DocumentationHistoricalTimestamp {
@@ -794,6 +795,32 @@ function classifyDocument(
 
       documentClassification:
         "domain",
+    };
+  }
+
+  /*
+   * ADR-0042 registers docs/learning as the canonical source registry
+   * for Learning Records: what the Chief Agent learned from owner-approved
+   * engineering work after activation. They are the lowest authority
+   * class and never governing authority.
+   */
+  if (
+    normalized.startsWith(
+      "docs/learning/",
+    )
+  ) {
+    return {
+      sourceClass:
+        "document",
+
+      evidenceType:
+        "document",
+
+      authorityClass:
+        "learning",
+
+      documentClassification:
+        "learning",
     };
   }
 

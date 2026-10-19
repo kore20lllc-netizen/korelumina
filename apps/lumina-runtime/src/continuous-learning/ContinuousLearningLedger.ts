@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import type {
+  LearningOutcome,
+} from "./LearningRecordService.js";
 import {
   isNodeTestProcess,
   resolveRepositoryRoot,
@@ -47,6 +50,8 @@ export interface LearningCycleRecord {
   reasons: readonly string[];
   replayId: string | null;
   admittedSources: number | null;
+  /* ADR-0042 (CL-1c): the Learning Record written from this window. */
+  learning?: LearningOutcome;
 }
 
 export interface ContinuousLearningLedgerState {

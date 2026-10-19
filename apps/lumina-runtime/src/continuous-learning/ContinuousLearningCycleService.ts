@@ -11,13 +11,17 @@ import type {
 import type {
   LearningWindowSource,
 } from "./GitLearningWindow.js";
+import type {
+  Learner,
+} from "./LearningRecordService.js";
 
 /*
  * ADR-0042 (CL-1a): one learning cycle captures all owner-approved work
  * since the checkpoint. The owner's commit is the approval (Decision 1).
  *
- * This ticket implements capture. Synthesis of a Learning Record (CL-1c)
- * and automatic admission (CL-1d) build on the CAPTURED cycle.
+ * After capture, the Chief Agent writes a Learning Record for the window
+ * (CL-1c). A failed write is retried on later cycles (at most 3 attempts);
+ * capture is never repeated, so the checkpoint moves after capture.
  */
 
 export interface LearningCaptureRequest {
@@ -39,6 +43,8 @@ export interface ContinuousLearningCycleServiceDependencies {
   /** Day-0 certification time: the first checkpoint (ADR-0042 Decision 2). */
   initialCheckpointTime(): number | null;
   ownerEmails: readonly string[];
+  /* ADR-0042 (CL-1c): writes the Learning Record for a captured window. */
+  learner?: Learner;
   now?: () => number;
 }
 
@@ -142,9 +148,80 @@ export class ContinuousLearningCycleService {
     return cycle;
   }
 
+  private async learnFor(
+    cycle: LearningCycleRecord,
+    windowStart: number,
+    attempts: number,
+  ): Promise<LearningCycleRecord> {
+    if (!this.dependencies.learner) return cycle;
+    try {
+      const learning = await this.dependencies.learner.learn({
+        cycleId: cycle.cycleId,
+        fromCommit: cycle.fromCommit,
+        commits: cycle.commits,
+        windowStart,
+        windowEnd: cycle.completedAt,
+        attempts,
+      });
+      return { ...cycle, learning };
+    } catch (error) {
+      return {
+        ...cycle,
+        learning: {
+          state: "FAILED",
+          reasons: [`learner_failed:${(error as Error).message}`],
+          recordId: null,
+          repositoryPath: null,
+          keptStatements: null,
+          removedStatements: null,
+          model: null,
+          attemptedAt: this.now(),
+          attempts,
+        },
+      };
+    }
+  }
+
+  /*
+   * Write the Learning Record for the oldest captured window that has
+   * none yet: windows captured before CL-1c, or whose write failed
+   * (model unavailable, for example; at most 3 attempts).
+   */
+  private async retryFailedLearning(): Promise<void> {
+    if (!this.dependencies.learner) return;
+    const ledger = this.ensureLedger();
+    const index = ledger.cycles.findIndex(
+      (cycle) =>
+        cycle.outcome === "CAPTURED" &&
+        (
+          // Captured before Learning Records existed (CL-1a): learn now.
+          cycle.learning === undefined ||
+          (cycle.learning.state === "FAILED" && cycle.learning.attempts < 3)
+        ),
+    );
+    if (index < 0) return;
+    const cycle = ledger.cycles[index];
+    const start =
+      this.dependencies.window.commitAt(cycle.fromCommit)?.committedAt ??
+      cycle.startedAt;
+    const updated = await this.learnFor(
+      { ...cycle, learning: undefined },
+      start,
+      (cycle.learning?.attempts ?? 0) + 1,
+    );
+    const fresh = this.ensureLedger();
+    this.dependencies.ledger.write({
+      ...fresh,
+      cycles: fresh.cycles.map((entry) =>
+        entry.cycleId === cycle.cycleId ? updated : entry,
+      ),
+    });
+  }
+
   private async execute(
     trigger: LearningCycleTrigger,
   ): Promise<LearningCycleRecord> {
+    await this.retryFailedLearning();
     const startedAt = this.now();
     const ledger = this.ensureLedger();
     const fromCommit = ledger.checkpoint.commit;
@@ -235,8 +312,7 @@ export class ContinuousLearningCycleService {
         explicitlyExcludedSourceIds,
       });
 
-      return this.record(
-        ledger,
+      const captured = await this.learnFor(
         {
           ...base,
           completedAt: this.now(),
@@ -247,6 +323,13 @@ export class ContinuousLearningCycleService {
           replayId: result.replayId,
           admittedSources: result.admittedSources,
         },
+        ledger.checkpoint.committedAt,
+        1,
+      );
+
+      return this.record(
+        ledger,
+        captured,
         {
           commit: toCommit.sha,
           committedAt: toCommit.committedAt,

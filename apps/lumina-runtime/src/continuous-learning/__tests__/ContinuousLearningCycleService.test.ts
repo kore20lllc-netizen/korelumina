@@ -159,3 +159,58 @@ test("without a Day-0 certification there is no starting point", () => {
   const f = fixture({ history: [commit("a", 1000)], day0: null });
   assert.throws(() => f.service.status(), /continuous_learning_initial_checkpoint_unavailable/);
 });
+
+test("after capture the Chief Agent writes the Learning Record; a failed write is retried without capturing again", async () => {
+  let stored: ContinuousLearningLedgerState | null = null;
+  const history = [commit("a", 1000), commit("b", 2000), commit("c", 3000)];
+  let captures = 0;
+  const outcomes = ["FAILED", "WRITTEN"] as const;
+  const requests: number[] = [];
+  const service = new ContinuousLearningCycleService({
+    ledger: { read: () => (stored ? structuredClone(stored) : null), write: (s) => (stored = structuredClone(s)) },
+    window: {
+      head: () => ({ sha: "c", committedAt: 3000, branch: "main" }),
+      commitAt: (sha) => history.find((h) => h.sha === sha) ?? null,
+      lastCommitAtOrBefore: (t) => [...history].reverse().find((h) => h.committedAt <= t) ?? null,
+      commitsAfter: (sha) => history.slice(history.findIndex((h) => h.sha === sha) + 1),
+      commitsSince: (t) => history.filter((h) => h.committedAt >= t).map((h) => h.sha),
+      repositoryName: () => "owner/repo",
+    },
+    ownerEmails: [OWNER],
+    initialCheckpointTime: () => 2500,
+    capture: async () => {
+      captures += 1;
+      return { replayId: null, admittedSources: 1 };
+    },
+    learner: {
+      learn: async (request) => {
+        requests.push(request.attempts);
+        const state = outcomes[requests.length - 1];
+        return {
+          state,
+          reasons: state === "FAILED" ? ["synthesis_failed:down"] : [],
+          recordId: state === "WRITTEN" ? "LR-2026-0001" : null,
+          repositoryPath: null,
+          keptStatements: null,
+          removedStatements: null,
+          model: null,
+          attemptedAt: 1,
+          attempts: request.attempts,
+        };
+      },
+    },
+    now: () => 9000,
+  });
+
+  const first = await service.run("automatic");
+  assert.equal(first.outcome, "CAPTURED");
+  assert.equal(first.learning?.state, "FAILED");
+  assert.equal(stored!.checkpoint.commit, "c");
+
+  const second = await service.run("automatic");
+  assert.equal(second.outcome, "NO_NEW_WORK");
+  assert.equal(captures, 1);
+  assert.deepEqual(requests, [1, 2]);
+  assert.equal(stored!.cycles[0].learning?.state, "WRITTEN");
+  assert.equal(stored!.cycles[0].learning?.recordId, "LR-2026-0001");
+});
