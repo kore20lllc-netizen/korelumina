@@ -5,13 +5,17 @@ import {
   decideExecutiveApproval,
   getChiefAgentActivationStatus,
   getExecutiveOfficeOperations,
+  getKnowledgeLifecycle,
   getKnowledgeOverview,
+  getRuntimeProjects,
   getLearningStatus,
   getPendingCanonicalReviews,
   runLearningCycleNow,
   type ChiefAgentActivationStatus,
   type ExecutiveOfficeOperations,
+  type KnowledgeLifecycle,
   type KnowledgeOverview,
+  type RuntimeProject,
   type LearningStatus,
   type PendingCanonicalReview,
 } from "@/services/executiveOfficeService";
@@ -46,6 +50,8 @@ export interface ExecutiveOfficeState {
   learning: Loaded<LearningStatus>;
   canonicalReviews: Loaded<PendingCanonicalReview[]>;
   knowledge: Loaded<KnowledgeOverview>;
+  lifecycle: Loaded<KnowledgeLifecycle>;
+  projects: Loaded<RuntimeProject[]>;
   pendingQuestion: PendingQuestion | null;
   unanswered: UnansweredQuestion[];
   deciding: Record<string, "approve" | "reject">;
@@ -62,6 +68,8 @@ let state: ExecutiveOfficeState = {
   learning: { status: "loading" },
   canonicalReviews: { status: "loading" },
   knowledge: { status: "loading" },
+  lifecycle: { status: "loading" },
+  projects: { status: "loading" },
   pendingQuestion: null,
   unanswered: [],
   deciding: {},
@@ -85,7 +93,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge">(
+function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects">(
   key: K,
   read: () => Promise<unknown>,
 ) {
@@ -113,6 +121,8 @@ export async function refreshExecutiveOffice() {
       load("learning", getLearningStatus),
       load("canonicalReviews", getPendingCanonicalReviews),
       load("knowledge", getKnowledgeOverview),
+      load("lifecycle", getKnowledgeLifecycle),
+      load("projects", getRuntimeProjects),
     ]);
   } finally {
     refreshing = false;

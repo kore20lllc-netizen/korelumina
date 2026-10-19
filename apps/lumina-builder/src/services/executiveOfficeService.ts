@@ -76,12 +76,21 @@ export interface ExecutiveOfficeOperations {
   approvals: ExecutiveApprovalRecord[];
 }
 
+export interface ChiefAgentActivationRecord {
+  action: string;
+  state: string;
+  autonomyLevel: string | null;
+  decidedBy: string;
+  decidedAt: number;
+}
+
 export interface ChiefAgentActivationStatus {
   state: string;
   active: boolean;
   autonomyLevel: string | null;
   reason: string;
   checkedAt: number;
+  history: ChiefAgentActivationRecord[];
 }
 
 export interface LearningCycleRecord {
@@ -202,6 +211,13 @@ Promise<ChiefAgentActivationStatus> {
     autonomyLevel: body?.activation?.autonomyLevel ?? null,
     reason: String(body?.activation?.reason ?? ""),
     checkedAt: Number(body?.activation?.checkedAt ?? Date.now()),
+    history: (Array.isArray(body?.history) ? body.history : []).map((record: any) => ({
+      action: String(record?.action ?? ""),
+      state: String(record?.state ?? ""),
+      autonomyLevel: record?.autonomyLevel ?? null,
+      decidedBy: String(record?.decidedBy ?? ""),
+      decidedAt: Number(record?.decidedAt ?? 0),
+    })),
   };
 }
 
@@ -244,6 +260,90 @@ Promise<PendingCanonicalReview[]> {
       createdAt: Number(entry?.createdAt ?? 0),
     }))
     .sort((left, right) => right.createdAt - left.createdAt);
+}
+
+/*
+ * EW-3: canonical knowledge and organizational memory, from the knowledge
+ * production lifecycle (a fast record read, no projection).
+ */
+export interface CanonicalKnowledgeEntry {
+  id: string;
+  title: string;
+  contentRef: string;
+  canonicalizedAt: number;
+}
+
+export interface KnowledgeLifecycle {
+  canonicalItems: CanonicalKnowledgeEntry[];
+  organizationalMemory: number;
+  packages: number;
+  awaitingReview: number;
+}
+
+export async function getKnowledgeLifecycle():
+Promise<KnowledgeLifecycle> {
+  const body =
+    await readJson(
+      "/api/knowledge/production-lifecycle",
+    );
+
+  const items: any[] =
+    Array.isArray(body?.canonicalItems) ? body.canonicalItems : [];
+
+  return {
+    canonicalItems: items.map((item) => ({
+      id: String(item.id),
+      title: String(item.title ?? item.id),
+      contentRef: String(item?.metadata?.contentRef ?? ""),
+      canonicalizedAt: Number(
+        item?.metadata?.canonicalization?.canonicalizedAt ??
+          item?.updatedAt ??
+          item?.createdAt ??
+          0,
+      ),
+    })),
+    organizationalMemory: Array.isArray(body?.organizationalMemory)
+      ? body.organizationalMemory.length
+      : Number(body?.summary?.organizationalMemory ?? 0),
+    packages: Number(body?.summary?.packages ?? 0),
+    awaitingReview: Number(body?.summary?.awaitingReview ?? 0),
+  };
+}
+
+/* EW-3: projects imported into the Runtime, and which ones are running. */
+export interface RuntimeProject {
+  projectId: string;
+  createdAt: number;
+  hasPackageJson: boolean;
+  running: boolean;
+  framework: string | null;
+  url: string | null;
+}
+
+export async function getRuntimeProjects():
+Promise<RuntimeProject[]> {
+  const [projects, status] =
+    await Promise.all([
+      readJson("/api/runtime/projects"),
+      readJson("/api/runtime/status"),
+    ]);
+
+  const runtimes: any[] =
+    Array.isArray(status?.runtimes) ? status.runtimes : [];
+
+  return (Array.isArray(projects?.projects) ? projects.projects : []).map((project: any) => {
+    const runtime =
+      runtimes.find((entry) => entry?.projectId === project?.projectId);
+
+    return {
+      projectId: String(project.projectId),
+      createdAt: Number(project?.createdAt ?? 0),
+      hasPackageJson: project?.hasPackageJson === true,
+      running: runtime?.status === "running",
+      framework: typeof runtime?.framework === "string" ? runtime.framework : null,
+      url: typeof runtime?.url === "string" ? runtime.url : null,
+    };
+  });
 }
 
 export interface KnowledgeOverview {

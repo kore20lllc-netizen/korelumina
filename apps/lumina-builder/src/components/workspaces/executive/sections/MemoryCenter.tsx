@@ -1,10 +1,14 @@
 import { ArrowDown, Database } from "lucide-react";
 import { Fragment } from "react";
 
-import { memoryLayers } from "../design/executiveDesignPreview";
 import { ExecutiveSection } from "../shared/ExecutiveSection";
+import { composeMemoryLayers } from "../state/executiveRecords";
+import { useExecutiveOffice } from "../state/useExecutiveOffice";
 
+/* EW-3: wired. Layers that exist show their real size; the rest say Not built. */
 export function MemoryCenter() {
+  const memoryLayers = composeMemoryLayers(useExecutiveOffice());
+
   return (
     <ExecutiveSection
       id="executive-memory"
@@ -12,6 +16,7 @@ export function MemoryCenter() {
       eyebrow="Memory Center"
       title="Where knowledge lives and how it flows"
       description="Working memory flows up through conversation, session, project, repository, and organizational memory into canonical knowledge."
+      wiring="live"
     >
       <ol className="grid gap-1.5">
         {memoryLayers.map((layer, index) => (
@@ -21,7 +26,7 @@ export function MemoryCenter() {
                 <div className="text-sm font-semibold text-sky-50">{layer.layer}</div>
                 <div className="text-xs text-sky-300/60">{layer.detail}</div>
               </div>
-              <span className={`text-[10px] font-semibold uppercase tracking-[0.14em] ${layer.state === "Not built" || layer.state === "0 records" ? "text-amber-200/80" : "text-emerald-200/80"}`}>
+              <span className={`text-[10px] font-semibold uppercase tracking-[0.14em] ${!layer.built || layer.state.startsWith("0 ") ? "text-amber-200/80" : "text-emerald-200/80"}`}>
                 {layer.state}
               </span>
             </li>
