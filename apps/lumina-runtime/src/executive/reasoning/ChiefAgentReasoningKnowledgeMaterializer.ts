@@ -9,6 +9,9 @@ import type {
 import type {
   ExecutiveContext,
 } from "../context/index.js";
+import type {
+  ChiefAgentGovernedContent,
+} from "./ChiefAgentGovernedContentReader.js";
 
 export interface ChiefAgentReasoningKnowledge {
   canonicalKnowledge:
@@ -16,6 +19,13 @@ export interface ChiefAgentReasoningKnowledge {
 
   organizationalMemory:
     readonly OrganizationalMemoryRecord[];
+
+  /*
+   * KO-6 (F-22): certified document content for canonical items, when
+   * a governed content reader is configured.
+   */
+  governedContent?:
+    ChiefAgentGovernedContent;
 }
 
 

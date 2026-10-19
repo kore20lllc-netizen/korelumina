@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-function resolveRepositoryRoot(): string {
+export function resolveRepositoryRoot(): string {
   let current =
     process.cwd();
 
@@ -56,7 +56,7 @@ function resolveRepositoryRoot(): string {
   );
 }
 
-function isNodeTestProcess(): boolean {
+export function isNodeTestProcess(): boolean {
   if (
     process.env.NODE_ENV ===
       "test" ||

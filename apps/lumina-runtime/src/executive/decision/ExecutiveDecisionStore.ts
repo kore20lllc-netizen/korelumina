@@ -1,20 +1,27 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  resolveExecutiveStoragePath,
+} from "../storage/resolveExecutiveStorageRoot.js";
+
 import type {
   ExecutiveDecision,
 } from "./ExecutiveDecision.js";
 
-const root =
-  path.resolve(
-    process.cwd(),
-    "runtime/executive/decisions",
+/*
+ * KO-6 (F-23): resolved on each use, in the repository's runtime/executive.
+ */
+function storeRoot(): string {
+  return resolveExecutiveStoragePath(
+    "decisions",
   );
+}
 
 
 function ensureRoot(): void {
   fs.mkdirSync(
-    root,
+    storeRoot(),
     {
       recursive:
         true,
@@ -28,7 +35,7 @@ function filePath(
     string,
 ): string {
   return path.join(
-    root,
+    storeRoot(),
     `${encodeURIComponent(
       id,
     )}.json`,
@@ -86,7 +93,7 @@ export function listExecutiveDecisions():
   ExecutiveDecision[] {
   if (
     !fs.existsSync(
-      root,
+      storeRoot(),
     )
   ) {
     return [];
@@ -94,7 +101,7 @@ export function listExecutiveDecisions():
 
   return fs
     .readdirSync(
-      root,
+      storeRoot(),
     )
     .filter(
       name =>
@@ -107,7 +114,7 @@ export function listExecutiveDecisions():
         JSON.parse(
           fs.readFileSync(
             path.join(
-              root,
+              storeRoot(),
               name,
             ),
             "utf8",

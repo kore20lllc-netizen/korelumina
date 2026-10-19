@@ -80,9 +80,15 @@ export class ExecutiveKnowledgeContextReducer {
         event,
       );
 
+    /*
+     * Knowledge context is built for events the Chief Agent reasons on:
+     * its own, and requests from a person (KO-6, F-21).
+     */
     if (
       event.actor.type !==
-      "chief-agent"
+        "chief-agent" &&
+      event.actor.type !==
+        "human"
     ) {
       return structuralContext;
     }

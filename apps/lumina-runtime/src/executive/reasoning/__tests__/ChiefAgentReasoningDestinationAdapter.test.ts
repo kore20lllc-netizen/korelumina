@@ -278,7 +278,7 @@ test(
 );
 
 test(
-  "does nothing when no reasoning provider is configured",
+  "skips, and says so, when no reasoning provider is configured (KO-6)",
   async () => {
     const root =
       fs.mkdtempSync(
@@ -298,7 +298,7 @@ test(
         ),
       );
 
-    await adapter.handle({
+    await assert.rejects(adapter.handle({
       event:
         createExecutiveEvent({
           id:
@@ -342,7 +342,7 @@ test(
 
       context:
         createExecutiveContext(),
-    });
+    }), /chief_agent_reasoning_provider_not_configured/);
 
     fs.rmSync(
       root,

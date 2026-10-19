@@ -2,6 +2,9 @@ import {
   ExecutiveTimelineService,
 } from "../timeline/ExecutiveTimelineService.js";
 
+import type {
+  ExecutiveReasoningStore,
+} from "./FileExecutiveReasoningStore.js";
 import {
   createExecutiveReasoning,
   type CreateExecutiveReasoningInput,
@@ -20,6 +23,13 @@ export class ExecutiveReasoningService {
   constructor(
     private readonly timeline =
       new ExecutiveTimelineService(),
+
+    /*
+     * KO-6 (F-23): optional persistent store; without one, reasoning
+     * stays in memory as before.
+     */
+    private readonly store?:
+      ExecutiveReasoningStore,
   ) {}
 
   create(
@@ -34,6 +44,10 @@ export class ExecutiveReasoningService {
 
     this.reasoning.set(
       result.id,
+      result,
+    );
+
+    this.store?.save(
       result,
     );
 
@@ -70,7 +84,7 @@ export class ExecutiveReasoningService {
   ): ExecutiveReasoning {
 
     const existing =
-      this.reasoning.get(
+      this.get(
         reasoningId,
       );
 
@@ -90,6 +104,10 @@ export class ExecutiveReasoningService {
 
     this.reasoning.set(
       reasoningId,
+      updated,
+    );
+
+    this.store?.save(
       updated,
     );
 
@@ -119,13 +137,57 @@ export class ExecutiveReasoningService {
 
   get(
     id: string,
-  ) {
-    return this.reasoning.get(
-      id,
-    );
+  ): ExecutiveReasoning | undefined {
+    const cached =
+      this.reasoning.get(
+        id,
+      );
+
+    if (
+      cached ||
+      !this.store
+    ) {
+      return cached;
+    }
+
+    const stored =
+      this.store.load(
+        id,
+      );
+
+    if (
+      stored
+    ) {
+      this.reasoning.set(
+        id,
+        stored,
+      );
+    }
+
+    return stored ?? undefined;
   }
 
   list() {
+    if (
+      this.store
+    ) {
+      for (
+        const stored
+        of this.store.list()
+      ) {
+        if (
+          !this.reasoning.has(
+            stored.id,
+          )
+        ) {
+          this.reasoning.set(
+            stored.id,
+            stored,
+          );
+        }
+      }
+    }
+
     return Object.freeze(
       Array.from(
         this.reasoning.values(),

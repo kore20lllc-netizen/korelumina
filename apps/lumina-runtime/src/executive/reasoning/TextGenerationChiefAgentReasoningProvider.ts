@@ -115,24 +115,53 @@ function buildPrompt(
   input:
     ChiefAgentReasoningInput,
 ): string {
+  const governedContent =
+    new Map(
+      (
+        input.knowledge
+          .governedContent
+          ?.included ?? []
+      ).map(
+        (entry) => [
+          entry.id,
+          entry,
+        ],
+      ),
+    );
+
   const canonicalKnowledge =
     input.knowledge
       .canonicalKnowledge
       .map(
-        (item) => ({
-          id:
-            item.id,
-          type:
-            item.type,
-          title:
-            item.title,
-          summary:
-            item.summary,
-          confidence:
-            item.confidence,
-          evidenceRefs:
-            item.evidenceRefs,
-        }),
+        (item) => {
+          const content =
+            governedContent.get(
+              item.id,
+            );
+
+          return {
+            id:
+              item.id,
+            type:
+              item.type,
+            title:
+              item.title,
+            summary:
+              item.summary,
+            confidence:
+              item.confidence,
+            evidenceRefs:
+              item.evidenceRefs,
+            ...(content
+              ? {
+                  certifiedContent:
+                    content.content,
+                  certifiedContentTruncated:
+                    content.truncated,
+                }
+              : {}),
+          };
+        },
       );
 
   const organizationalMemory =
@@ -157,6 +186,7 @@ function buildPrompt(
     "You are the KoreLumina Chief Agent reasoning engine.",
     "",
     "Use only the governed knowledge supplied below.",
+    "Where an item includes certifiedContent, that is the certified text of the document; base your reasoning on it. Items without it are known only by title and summary.",
     "Do not invent evidence identifiers.",
     "Do not cite raw Evidence, IR, knowledge packages, or unreviewed material.",
     "If the supplied knowledge explicitly supports proceeding, use disposition authorize.",

@@ -78,6 +78,35 @@ export class ChiefAgentReasoningExecutionService {
               (record) => record.id,
             ),
 
+        ...(input.knowledge
+          .governedContent
+          ? {
+              governedContent: {
+                includedIds:
+                  input.knowledge
+                    .governedContent
+                    .included
+                    .map(
+                      (entry) => entry.id,
+                    ),
+                truncatedIds:
+                  input.knowledge
+                    .governedContent
+                    .included
+                    .filter(
+                      (entry) =>
+                        entry.truncated,
+                    )
+                    .map(
+                      (entry) => entry.id,
+                    ),
+                excluded:
+                  input.knowledge
+                    .governedContent
+                    .excluded,
+              },
+            }
+          : {}),
         ...(result.metadata ?? {}),
       },
     });

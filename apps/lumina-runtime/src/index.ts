@@ -37,6 +37,7 @@ import type {
 } from "./runtime/cache/RuntimeStateCache.js";
 import {
   resolveKnowledgeStorageRoot,
+  resolveRepositoryRoot,
 } from "./knowledge-preservation/storage/resolveKnowledgeStorageRoot.js";
 
 import { registerProjectsRoute } from "./routes/projects.js";
@@ -162,7 +163,9 @@ import {
   ChiefAgentReasoningDestinationAdapter,
   ChiefAgentReasoningExecutionService,
   ChiefAgentReasoningKnowledgeMaterializer,
+  ChiefAgentGovernedContentReader,
   ExecutiveReasoningService,
+  FileExecutiveReasoningStore,
   createChiefAgentReasoningProvider,
 } from "./executive/reasoning/index.js";
 
@@ -1071,7 +1074,10 @@ export const executiveRuntime =
   });
 
 export const runtimeExecutiveReasoningService =
-  new ExecutiveReasoningService();
+  new ExecutiveReasoningService(
+    undefined,
+    new FileExecutiveReasoningStore(),
+  );
 
 export const runtimeExecutiveDecisionService =
   new ExecutiveDecisionService();
@@ -1266,6 +1272,9 @@ export const chiefAgentReasoningAdapter =
         };
       },
     },
+    new ChiefAgentGovernedContentReader(
+      resolveRepositoryRoot(),
+    ),
   );
 
 const readChiefAgentActivationPrerequisites = () => {

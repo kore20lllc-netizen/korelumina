@@ -25,6 +25,7 @@ export interface ExecutiveDispatchRecord {
   status:
     | "handled"
     | "unhandled"
+    | "skipped"
     | "refused"
     | "failed";
 
@@ -58,6 +59,38 @@ export class ExecutiveDestinationRefusal
     this.name =
       "ExecutiveDestinationRefusal";
   }
+}
+
+/*
+ * KO-6 (F-21): a destination may also have nothing to do for an event (for
+ * example, Chief Agent reasoning for an event raised by a system process).
+ * A skip says so plainly instead of reporting the event as handled.
+ */
+export class ExecutiveDestinationSkip
+  extends Error {
+  readonly executiveSkip =
+    true as const;
+
+  constructor(
+    code:
+      string,
+  ) {
+    super(code);
+    this.name =
+      "ExecutiveDestinationSkip";
+  }
+}
+
+function isExecutiveDestinationSkip(
+  error:
+    unknown,
+): error is ExecutiveDestinationSkip {
+  return (
+    error instanceof Error &&
+    (error as {
+      executiveSkip?: unknown;
+    }).executiveSkip === true
+  );
 }
 
 function isExecutiveDestinationRefusal(
@@ -166,6 +199,21 @@ export class RegistryExecutiveDispatcher
           status: "handled",
         });
       } catch (error) {
+        if (
+          isExecutiveDestinationSkip(
+            error,
+          )
+        ) {
+          records.push({
+            destination,
+            status: "skipped",
+            message:
+              error.message,
+          });
+
+          continue;
+        }
+
         if (
           isExecutiveDestinationRefusal(
             error,

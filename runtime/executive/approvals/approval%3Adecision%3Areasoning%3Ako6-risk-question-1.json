@@ -1,0 +1,99 @@
+{
+  "id": "approval:decision:reasoning:ko6-risk-question-1",
+  "sessionId": "ko6-risk-question-1",
+  "decisionId": "decision:reasoning:ko6-risk-question-1",
+  "requestedBy": "chief-agent",
+  "approverId": "human:founder",
+  "status": "pending",
+  "comments": "",
+  "createdAt": 1792373033340,
+  "metadata": {
+    "decisionStatus": "proposed",
+    "decisionTitle": "First Customer Onboarding Risk Review",
+    "reasoningId": "reasoning:ko6-risk-question-1",
+    "reasoningConfidence": 0.88,
+    "reasoningQuestion": "Based on the certified curriculum, what are the three most important risks to address before KoreLumina onboards its first paying customer? Cite the canonical knowledge you rely on.",
+    "reasoningDisposition": "review",
+    "executableCandidate": true,
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+      "canonical:document:phase43-vision2050-certification-1787430674",
+      "canonical:document:phase54-event-driven-certification-1787438365",
+      "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+      "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+      "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+      "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+      "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd",
+      "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+      "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+      "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+      "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+      "canonical:document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+      "canonical:document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+      "canonical:document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344"
+    ],
+    "organizationalMemoryRecordIds": [],
+    "governedContent": {
+      "includedIds": [
+        "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+        "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+        "canonical:document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+        "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+        "canonical:document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd"
+      ],
+      "truncatedIds": [
+        "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd"
+      ],
+      "excluded": [
+        {
+          "id": "canonical:document:phase43-vision2050-certification-1787430674",
+          "reason": "content_ref_not_a_repository_file"
+        },
+        {
+          "id": "canonical:document:phase54-event-driven-certification-1787438365",
+          "reason": "content_ref_not_a_repository_file"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+          "reason": "context_budget_reached"
+        }
+      ]
+    },
+    "model": "gpt-5.5",
+    "provider": "text-generation",
+    "routing": {
+      "escalated": false,
+      "escalationReason": null,
+      "confidenceThreshold": 0.6,
+      "attempts": [
+        {
+          "role": "primary",
+          "provider": "openai",
+          "model": "gpt-5.5",
+          "confidence": 0.88,
+          "error": null
+        }
+      ]
+    }
+  }
+}
