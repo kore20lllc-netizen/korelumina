@@ -1,5 +1,17 @@
 import type { Config } from "tailwindcss";
 
+/*
+ * UI-3: every whole-number opacity step from 0 to 100.
+ *
+ * Tailwind's default scale only has steps of 5 (0, 5, 10 ... 100), and it
+ * silently ignores any other alpha modifier. Components across the Builder
+ * use values like `text-cyan-100/72` and `bg-slate-950/42`; without this
+ * scale those classes generate no CSS at all.
+ */
+const wholeNumberOpacity = Object.fromEntries(
+  Array.from({ length: 101 }, (_, step) => [String(step), String(step / 100)]),
+);
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
@@ -11,6 +23,7 @@ export default {
       screens: { "2xl": "1400px" },
     },
     extend: {
+      opacity: wholeNumberOpacity,
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["'Space Grotesk'", "Inter", "sans-serif"],
