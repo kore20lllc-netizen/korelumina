@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:ee8dd3cb758ee4b9bfaad6f3248414ac6faefe9b238a26073e492390e9f296db",
+  "type": "commit",
+  "title": "governance: Chief Agent activated at PROPOSE_ONLY (KO-5e, ADR-0041)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316132,
+  "observedAt": 1792369627000,
+  "contentRef": "git:commit:733b26d0f8cd85691df12a3059b7a74552b1a32b",
+  "checksum": "sha256:ea059633e42f296b69577e3a382fe216f7403c7e3b4f84828ea4640995b47e64",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 14,
+    "genesisAdmissionIdentity": "genesis-admission:bd14a987726b0d17b58a880c5888ebdf722b0b52339f1ccb607066c0a2412629",
+    "historicalSourceId": "genesis-source:commit:733b26d0f8cd85691df12a3059b7a74552b1a32b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:733b26d0f8cd85691df12a3059b7a74552b1a32b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "733b26d0f8cd85691df12a3059b7a74552b1a32b",
+      "parentShas": [
+        "d81d4a4dbc2217c98a198a53afa80ae933199820"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792369627000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792369627000
+      },
+      "subject": "governance: Chief Agent activated at PROPOSE_ONLY (KO-5e, ADR-0041)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "runtime/governance/chief-agent-activation/000001-activate.json"
+      ],
+      "changedPathsByParent": {
+        "d81d4a4dbc2217c98a198a53afa80ae933199820": [
+          "runtime/governance/chief-agent-activation/000001-activate.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:733b26d0f8cd85691df12a3059b7a74552b1a32b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:f71ae9435ba024f0ad557fd4433a1b836db909b00c1ee696b7341b59e524aa53",
+  "type": "commit",
+  "title": "fix(runtime): protect executive routes and bind runtime to localhost (KO-5a, ADR-0041)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316080,
+  "observedAt": 1792288305000,
+  "contentRef": "git:commit:6ad73295105b8c4781f094de2c9702294c3bf1e7",
+  "checksum": "sha256:5a23a16b9133d26abd08fa97c67a295135cd3a50152b52d2f40df2f7f1525931",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:09fcafad5c551e358998ccb1500437a67e991d7aa5b0ccfc74fbb3f75c0c6a60",
+    "historicalSourceId": "genesis-source:commit:6ad73295105b8c4781f094de2c9702294c3bf1e7",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6ad73295105b8c4781f094de2c9702294c3bf1e7",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6ad73295105b8c4781f094de2c9702294c3bf1e7",
+      "parentShas": [
+        "a41981e863b0cc30c6814e541c0b465c5450d4f1"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792288305000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792288305000
+      },
+      "subject": "fix(runtime): protect executive routes and bind runtime to localhost (KO-5a, ADR-0041)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/runtimeBoundary.test.ts",
+        "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+      ],
+      "changedPathsByParent": {
+        "a41981e863b0cc30c6814e541c0b465c5450d4f1": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/runtimeBoundary.test.ts",
+          "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6ad73295105b8c4781f094de2c9702294c3bf1e7"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

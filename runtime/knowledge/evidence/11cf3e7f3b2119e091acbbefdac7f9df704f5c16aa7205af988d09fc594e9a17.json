@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:563baf9d97bbd57e885e98e132bd36033e8af31c7fe5fbc9269a8b35b242b07e",
+  "type": "commit",
+  "title": "feat(executive): governed Chief Agent activation records (KO-5c, ADR-0041)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316096,
+  "observedAt": 1792327771000,
+  "contentRef": "git:commit:e17006302edd90507480e48869a5cae17879627b",
+  "checksum": "sha256:e7b5bc49795928251e024e3dc55791510f9d0b9821adcbc1f11ae6b42e7401ce",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 5,
+    "genesisAdmissionIdentity": "genesis-admission:4f3739ea046f6fadd0309da200219e45099fe4afafebf3611471f9af2fbe960c",
+    "historicalSourceId": "genesis-source:commit:e17006302edd90507480e48869a5cae17879627b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e17006302edd90507480e48869a5cae17879627b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e17006302edd90507480e48869a5cae17879627b",
+      "parentShas": [
+        "441fd7e5b77854281e94b8f66351404df9fe3307"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792327771000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792327771000
+      },
+      "subject": "feat(executive): governed Chief Agent activation records (KO-5c, ADR-0041)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationGate.ts",
+        "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationPersistence.ts",
+        "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationRecord.ts",
+        "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationService.ts",
+        "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationGate.test.ts",
+        "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationLifecycle.test.ts",
+        "apps/lumina-runtime/src/executive/activation/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveActivation.ts"
+      ],
+      "changedPathsByParent": {
+        "441fd7e5b77854281e94b8f66351404df9fe3307": [
+          "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationGate.ts",
+          "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationPersistence.ts",
+          "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationRecord.ts",
+          "apps/lumina-runtime/src/executive/activation/ChiefAgentActivationService.ts",
+          "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationGate.test.ts",
+          "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationLifecycle.test.ts",
+          "apps/lumina-runtime/src/executive/activation/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveActivation.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e17006302edd90507480e48869a5cae17879627b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:6e34b6aa60c905e1ee2ac42a1229633013ae2299a28ea542f652932bf00ded6d",
+  "type": "commit",
+  "title": "UI-2: dark styling for review decision fields",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316122,
+  "observedAt": 1792367993000,
+  "contentRef": "git:commit:efa36136f1e4934da69fe408767cfbbbcf90acff",
+  "checksum": "sha256:0caef2351a4abff4127d64dbd07f0384e1117e681f8665c79a93f1b4c782ea4c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 11,
+    "genesisAdmissionIdentity": "genesis-admission:735abfd6da09903b2629692dbb5369e5edfdc04b6c25b824de175604007d565b",
+    "historicalSourceId": "genesis-source:commit:efa36136f1e4934da69fe408767cfbbbcf90acff",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:efa36136f1e4934da69fe408767cfbbbcf90acff",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "efa36136f1e4934da69fe408767cfbbbcf90acff",
+      "parentShas": [
+        "b6ea7ba7efd219c37992b07b1a765e89900ec685"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792367993000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792367993000
+      },
+      "subject": "UI-2: dark styling for review decision fields",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+      ],
+      "changedPathsByParent": {
+        "b6ea7ba7efd219c37992b07b1a765e89900ec685": [
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:efa36136f1e4934da69fe408767cfbbbcf90acff"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

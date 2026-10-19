@@ -1,0 +1,151 @@
+{
+  "version": "continuous-learning-ledger:v1",
+  "checkpoint": {
+    "commit": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+    "committedAt": 1792384966000,
+    "establishedAt": 1792387316267,
+    "basis": "Learning cycle learning-cycle:aa321923319abcb7"
+  },
+  "cycles": [
+    {
+      "cycleId": "learning-cycle:aa321923319abcb7",
+      "trigger": "manual",
+      "startedAt": 1792387243442,
+      "fromCommit": "28ce084fc82e0b95cfd74f94979aba673e7e383c",
+      "replayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+      "admittedSources": 20,
+      "completedAt": 1792387316267,
+      "toCommit": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+      "commits": [
+        {
+          "sha": "a41981e863b0cc30c6814e541c0b465c5450d4f1",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792285393000,
+          "subject": "docs(adr): accept ADR-0041 Chief Agent activation"
+        },
+        {
+          "sha": "6ad73295105b8c4781f094de2c9702294c3bf1e7",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792288305000,
+          "subject": "fix(runtime): protect executive routes and bind runtime to localhost (KO-5a, ADR-0041)"
+        },
+        {
+          "sha": "cd4410fe39a11d4db51c38444b6de754fb12753b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792288738000,
+          "subject": "chore(knowledge): record normalized canonical items for Business Charter and Domain Primer"
+        },
+        {
+          "sha": "441fd7e5b77854281e94b8f66351404df9fe3307",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792307746000,
+          "subject": "feat(executive): enforce Chief Agent activation gate (KO-5b, ADR-0041)"
+        },
+        {
+          "sha": "e17006302edd90507480e48869a5cae17879627b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792327771000,
+          "subject": "feat(executive): governed Chief Agent activation records (KO-5c, ADR-0041)"
+        },
+        {
+          "sha": "0cb5ad37acbc6bdace22e8113cbff61981264e0b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792328718000,
+          "subject": "feat(executive): configurable reasoning provider with escalation (KO-5d, ADR-0041)"
+        },
+        {
+          "sha": "5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792332318000,
+          "subject": "UI-1: Knowledge Operations shows live Runtime state instead of sample data"
+        },
+        {
+          "sha": "c699e49d3f7b686c47e3d5e6a462afe2839cf0db",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792366612000,
+          "subject": "UI-1: shared queue for slow Runtime reads"
+        },
+        {
+          "sha": "787bc78a6be2a718dbcecdd1dff9dc2585db3684",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792366690000,
+          "subject": "perf(runtime): reuse Genesis Day-0 candidate until Runtime state changes (RT-1)"
+        },
+        {
+          "sha": "b6ea7ba7efd219c37992b07b1a765e89900ec685",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792367593000,
+          "subject": "UI-2: batch and policy review controls from the selected package"
+        },
+        {
+          "sha": "efa36136f1e4934da69fe408767cfbbbcf90acff",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792367993000,
+          "subject": "UI-2: dark styling for review decision fields"
+        },
+        {
+          "sha": "ac68009b3301535df1143db2c66c1bf5869b6d5d",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792368824000,
+          "subject": "fix(builder): support whole-number opacity modifiers (UI-3, F-20)"
+        },
+        {
+          "sha": "d81d4a4dbc2217c98a198a53afa80ae933199820",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792369020000,
+          "subject": "Revert \"fix(builder): support whole-number opacity modifiers (UI-3, F-20)\""
+        },
+        {
+          "sha": "733b26d0f8cd85691df12a3059b7a74552b1a32b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792369627000,
+          "subject": "governance: Chief Agent activated at PROPOSE_ONLY (KO-5e, ADR-0041)"
+        },
+        {
+          "sha": "f3b27e4dfa8d42a6548c39033adf2ce91cc000c8",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792373958000,
+          "subject": "feat(executive): Chief Agent reasons on human requests with certified content; durable executive records (KO-6)"
+        },
+        {
+          "sha": "d094a8289950076aa6d3d1930ff71f6163024aa3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792376544000,
+          "subject": "ui(knowledge): certify UI-1 and UI-2 presentation after owner visual approval"
+        },
+        {
+          "sha": "6b23ccc5d842182f3bc7a4b008a2daf390722eb9",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792376767000,
+          "subject": "governance: canonical review and executive approval records"
+        },
+        {
+          "sha": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792384966000,
+          "subject": "docs(adr): ADR-0042 continuous learning v1, commit is approval"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": []
+    }
+  ]
+}

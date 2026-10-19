@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:cebe0f87332c92d95d827340151921a429a2a9b24c1071e2bbaf734d5c8274a9",
+  "type": "commit",
+  "title": "fix(builder): support whole-number opacity modifiers (UI-3, F-20)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316126,
+  "observedAt": 1792368824000,
+  "contentRef": "git:commit:ac68009b3301535df1143db2c66c1bf5869b6d5d",
+  "checksum": "sha256:a6af5ae8748878c3e02b0b7fa45c6bf43fca829ac5b0051c66a183ab9a7c0864",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 12,
+    "genesisAdmissionIdentity": "genesis-admission:984f45a12c05fea2ee63081d3c333bcb94fa63e327d3e7414bb2dec4ce208576",
+    "historicalSourceId": "genesis-source:commit:ac68009b3301535df1143db2c66c1bf5869b6d5d",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:ac68009b3301535df1143db2c66c1bf5869b6d5d",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "ac68009b3301535df1143db2c66c1bf5869b6d5d",
+      "parentShas": [
+        "efa36136f1e4934da69fe408767cfbbbcf90acff"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792368824000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792368824000
+      },
+      "subject": "fix(builder): support whole-number opacity modifiers (UI-3, F-20)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/tailwind.config.ts"
+      ],
+      "changedPathsByParent": {
+        "efa36136f1e4934da69fe408767cfbbbcf90acff": [
+          "apps/lumina-builder/tailwind.config.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:ac68009b3301535df1143db2c66c1bf5869b6d5d"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

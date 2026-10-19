@@ -29,6 +29,20 @@ import {
   requireRuntimeAccess,
 } from "./routes/runtimeAccess.js";
 import {
+  ContinuousLearningCycleService,
+  ContinuousLearningScheduler,
+  FileContinuousLearningLedger,
+  GitLearningWindowSource,
+  resolveLearningIntervalMinutes,
+  windowedGenesisManifestBuilder,
+} from "./continuous-learning/index.js";
+import {
+  registerContinuousLearningRoutes,
+} from "./routes/continuousLearning.js";
+import {
+  runGovernedGenesisReplay,
+} from "./knowledge-preservation/genesis/index.js";
+import {
   cacheUntilRuntimeStateChanges,
   trackRuntimeMutations,
 } from "./runtime/cache/RuntimeStateCache.js";
@@ -1441,9 +1455,7 @@ registerKnowledgeOperationsRoutes(
   },
 );
 
-registerGenesisReplayExecutionRoute(
-  app,
-  {
+const runtimeGenesisReplayExecutionRuntime = {
     persistenceStore:
       runtimeGenesisReplayPersistenceStore,
 
@@ -1501,7 +1513,151 @@ registerGenesisReplayExecutionRoute(
             currentSelection.replayId,
           );
       },
-  },
+  };
+
+registerGenesisReplayExecutionRoute(
+  app,
+  runtimeGenesisReplayExecutionRuntime,
+);
+
+/*
+ * ADR-0042 (CL-1a): continuous learning. The owner's commits since the
+ * learning checkpoint are captured by a bounded Genesis replay through
+ * the same governed path as the replay route above.
+ */
+export const runtimeContinuousLearningService =
+  new ContinuousLearningCycleService({
+    ledger:
+      new FileContinuousLearningLedger(),
+
+    window:
+      new GitLearningWindowSource(
+        runtimeGenesisReplayExecutionRuntime.repositoryRoot,
+      ),
+
+    ownerEmails:
+      (
+        process.env
+          .KORELUMINA_LEARNING_OWNER_EMAILS ??
+        "kore20lllc@gmail.com"
+      )
+        .split(",")
+        .map((email) => email.trim())
+        .filter(Boolean),
+
+    initialCheckpointTime: () =>
+      runtimeGenesisDayZeroCertificationPersistenceStore
+        .load()
+        ?.certifiedAt ??
+      null,
+
+    capture: async (request) => {
+      const runtime =
+        runtimeGenesisReplayExecutionRuntime;
+
+      const result =
+        await runGovernedGenesisReplay({
+          mode:
+            "PRODUCTION_ADMISSION",
+
+          repositoryRoot:
+            runtime.repositoryRoot,
+
+          scope: {
+            mode:
+              "partial",
+            repository:
+              request.repository,
+            ref:
+              request.ref,
+            historicalStart:
+              request.historicalStart,
+            includedEvidenceTypes: [
+              "commit",
+              "document",
+              "ADR",
+              "RFC",
+              "specification",
+              "roadmap",
+              "milestone",
+            ],
+            excludedEvidenceTypes:
+              [],
+            explicitlyExcludedSourceIds:
+              request.explicitlyExcludedSourceIds as `genesis-source:commit:${string}`[],
+            governancePolicyVersion:
+              "governance-v1",
+            replayContractVersion:
+              "1.0",
+          },
+
+          persistenceStore:
+            runtime.persistenceStore,
+
+          startedAt:
+            runtime.now(),
+
+          executionTimestampForManifestIndex:
+            () =>
+              runtime.now(),
+
+          platform:
+            runtime.platform,
+
+          authorizeProductionAdmission:
+            true,
+
+          additionalDiscoverers:
+            runtime.additionalDiscoverers,
+
+          conversationEvidenceResolver:
+            runtime.conversationEvidenceResolver,
+
+          priorHistoricalCorrelation:
+            runtime.priorHistoricalCorrelation(),
+
+          manifestBuilder:
+            windowedGenesisManifestBuilder,
+        });
+
+      if (
+        result.mode !==
+          "PRODUCTION_ADMISSION" ||
+        result.runnerResult
+          .outcome !==
+          "COMPLETED"
+      ) {
+        throw new Error(
+          `learning_capture_not_completed:${
+            result.mode ===
+              "PRODUCTION_ADMISSION"
+              ? result.runnerResult.outcome
+              : result.mode
+          }`,
+        );
+      }
+
+      return {
+        replayId:
+          result.plan.replayId,
+        admittedSources:
+          result.plan.summary.admit,
+      };
+    },
+  });
+
+export const runtimeContinuousLearningScheduler =
+  new ContinuousLearningScheduler(
+    runtimeContinuousLearningService,
+    resolveLearningIntervalMinutes(
+      process.env
+        .KORELUMINA_LEARNING_INTERVAL_MINUTES,
+    ),
+  );
+
+registerContinuousLearningRoutes(
+  app,
+  runtimeContinuousLearningService,
 );
 
 registerGenesisConversationAcquisitionRoutes(
@@ -2006,6 +2162,9 @@ Promise<void> {
      */
     runtimeGovernanceReadyRecoveryScheduler
       .start();
+
+    runtimeContinuousLearningScheduler
+      .start();
   } else {
     console.warn(
       "[lumina-runtime] bootstrap already claimed; skipping recovery/supervisor",
@@ -2046,6 +2205,9 @@ Promise<void> {
     stopRuntimeSupervisor();
 
     runtimeGovernanceReadyRecoveryScheduler
+      .stop();
+
+    runtimeContinuousLearningScheduler
       .stop();
 
     await stopAllWorkspaceWatchers();

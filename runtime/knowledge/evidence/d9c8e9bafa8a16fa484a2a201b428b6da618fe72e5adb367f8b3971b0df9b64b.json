@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:ab5eb3dec9a95cc3c49ee8fbc47b3b31efb2b5398e8dc9315ed09666ee0af144",
+  "type": "commit",
+  "title": "feat(executive): configurable reasoning provider with escalation (KO-5d, ADR-0041)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316100,
+  "observedAt": 1792328718000,
+  "contentRef": "git:commit:0cb5ad37acbc6bdace22e8113cbff61981264e0b",
+  "checksum": "sha256:e973792836e89d332b00d942f8e35492cd812775c7bb1ab39ad34e7bbe5401b9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 6,
+    "genesisAdmissionIdentity": "genesis-admission:530a2bb6d16ec158537f1137fde0cc66af3f1936645d8ca4ccd8b2070882a3e1",
+    "historicalSourceId": "genesis-source:commit:0cb5ad37acbc6bdace22e8113cbff61981264e0b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0cb5ad37acbc6bdace22e8113cbff61981264e0b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0cb5ad37acbc6bdace22e8113cbff61981264e0b",
+      "parentShas": [
+        "e17006302edd90507480e48869a5cae17879627b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792328718000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792328718000
+      },
+      "subject": "feat(executive): configurable reasoning provider with escalation (KO-5d, ADR-0041)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/ai/model/AnthropicTextGenerationClient.ts",
+        "apps/lumina-runtime/src/ai/model/OpenAICompatibleTextGenerationClient.ts",
+        "apps/lumina-runtime/src/ai/model/__tests__/ProviderTextGenerationClients.test.ts",
+        "apps/lumina-runtime/src/ai/model/index.ts",
+        "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationGate.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningProviderConfig.ts",
+        "apps/lumina-runtime/src/executive/reasoning/EscalatingChiefAgentReasoningProvider.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningEscalation.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "e17006302edd90507480e48869a5cae17879627b": [
+          "apps/lumina-runtime/src/ai/model/AnthropicTextGenerationClient.ts",
+          "apps/lumina-runtime/src/ai/model/OpenAICompatibleTextGenerationClient.ts",
+          "apps/lumina-runtime/src/ai/model/__tests__/ProviderTextGenerationClients.test.ts",
+          "apps/lumina-runtime/src/ai/model/index.ts",
+          "apps/lumina-runtime/src/executive/activation/__tests__/ChiefAgentActivationGate.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningProviderConfig.ts",
+          "apps/lumina-runtime/src/executive/reasoning/EscalatingChiefAgentReasoningProvider.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningEscalation.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0cb5ad37acbc6bdace22e8113cbff61981264e0b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

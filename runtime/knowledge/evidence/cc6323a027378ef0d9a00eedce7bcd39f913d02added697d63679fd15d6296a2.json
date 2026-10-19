@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:f17104611d0a034e3223367de8c87bd6aa76bfcffe577865097f91a8e636faaf",
+  "type": "commit",
+  "title": "docs(adr): accept ADR-0041 Chief Agent activation",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316075,
+  "observedAt": 1792285393000,
+  "contentRef": "git:commit:a41981e863b0cc30c6814e541c0b465c5450d4f1",
+  "checksum": "sha256:6fc7a7283a26bbb3f0f7069a79b5e0429d0c3118034e43581bc4ffd005d064da",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:773fc8727136b6a096bddb67618f442b419e1a6112cb33b530f8566172585b6a",
+    "historicalSourceId": "genesis-source:commit:a41981e863b0cc30c6814e541c0b465c5450d4f1",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a41981e863b0cc30c6814e541c0b465c5450d4f1",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a41981e863b0cc30c6814e541c0b465c5450d4f1",
+      "parentShas": [
+        "28ce084fc82e0b95cfd74f94979aba673e7e383c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792285393000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792285393000
+      },
+      "subject": "docs(adr): accept ADR-0041 Chief Agent activation",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/adr/ADR-0041-chief-agent-activation.md"
+      ],
+      "changedPathsByParent": {
+        "28ce084fc82e0b95cfd74f94979aba673e7e383c": [
+          "docs/adr/ADR-0041-chief-agent-activation.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a41981e863b0cc30c6814e541c0b465c5450d4f1"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

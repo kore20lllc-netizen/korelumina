@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:618b27559a298e706ad8f4cf43a2ef64028fc888577bcfcc38878dacce0db106",
+  "type": "commit",
+  "title": "Revert \"fix(builder): support whole-number opacity modifiers (UI-3, F-20)\"",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316129,
+  "observedAt": 1792369020000,
+  "contentRef": "git:commit:d81d4a4dbc2217c98a198a53afa80ae933199820",
+  "checksum": "sha256:e11edb6c615db71cd2494d61100a717415cb4761600e829c9aba1df83320adb6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 13,
+    "genesisAdmissionIdentity": "genesis-admission:29fc56de38436003e805a3606fb51ef94477a2855f87f47309678dfc48cd8006",
+    "historicalSourceId": "genesis-source:commit:d81d4a4dbc2217c98a198a53afa80ae933199820",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d81d4a4dbc2217c98a198a53afa80ae933199820",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d81d4a4dbc2217c98a198a53afa80ae933199820",
+      "parentShas": [
+        "ac68009b3301535df1143db2c66c1bf5869b6d5d"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792369020000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792369020000
+      },
+      "subject": "Revert \"fix(builder): support whole-number opacity modifiers (UI-3, F-20)\"",
+      "body": "This reverts commit ac68009b3301535df1143db2c66c1bf5869b6d5d.",
+      "changedPaths": [
+        "apps/lumina-builder/tailwind.config.ts"
+      ],
+      "changedPathsByParent": {
+        "ac68009b3301535df1143db2c66c1bf5869b6d5d": [
+          "apps/lumina-builder/tailwind.config.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d81d4a4dbc2217c98a198a53afa80ae933199820"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

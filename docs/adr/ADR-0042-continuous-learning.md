@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed
+Accepted
 
 Version: 1.0
 

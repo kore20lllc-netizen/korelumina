@@ -1,0 +1,120 @@
+{
+  "id": "KP-2026-000054",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792387316068,
+  "updatedAt": 1792387316068,
+  "data": {
+    "id": "KP-2026-000054",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:861e8d36571f653dd990fb371bdbad8ac0a4ac3a605910eb69a76769372d4eb3"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0041 — Chief Agent Activation"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0041 — Chief Agent Activation",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0041 — Chief Agent Activation",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:861e8d36571f653dd990fb371bdbad8ac0a4ac3a605910eb69a76769372d4eb3"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1792387316067,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792387316067,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0041-chief-agent-activation.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:861e8d36571f653dd990fb371bdbad8ac0a4ac3a605910eb69a76769372d4eb3"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0041-chief-agent-activation.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "pending_review",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0041 — Chief Agent Activation",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0041 — Chief Agent Activation",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792387316067,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792387316068
+      },
+      {
+        "state": "compiled",
+        "at": 1792387316068
+      },
+      {
+        "state": "validated",
+        "at": 1792387316068
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792387316068
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792387316068
+    },
+    "createdAt": 1792387316068,
+    "updatedAt": 1792387316068,
+    "metadata": {
+      "sourceApprovalStates": []
+    }
+  }
+}

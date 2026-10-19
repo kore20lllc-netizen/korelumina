@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e3861b9f09a7cb55cab3163df1bdcfa0bf2fb131ff8caa1bffdb6658bb28224a",
+  "type": "commit",
+  "title": "chore(knowledge): record normalized canonical items for Business Charter and Domain Primer",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316084,
+  "observedAt": 1792288738000,
+  "contentRef": "git:commit:cd4410fe39a11d4db51c38444b6de754fb12753b",
+  "checksum": "sha256:be69396f9e7685cb24e708fbd2f4ec1eaf5dcf342696d98223cfc852660929fa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 3,
+    "genesisAdmissionIdentity": "genesis-admission:fae7b69081cac92481c20a1b146fca38eb67c54b852b87314a6d71d9a13b96b1",
+    "historicalSourceId": "genesis-source:commit:cd4410fe39a11d4db51c38444b6de754fb12753b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cd4410fe39a11d4db51c38444b6de754fb12753b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cd4410fe39a11d4db51c38444b6de754fb12753b",
+      "parentShas": [
+        "6ad73295105b8c4781f094de2c9702294c3bf1e7"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792288738000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792288738000
+      },
+      "subject": "chore(knowledge): record normalized canonical items for Business Charter and Domain Primer",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09.json"
+      ],
+      "changedPathsByParent": {
+        "6ad73295105b8c4781f094de2c9702294c3bf1e7": [
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cd4410fe39a11d4db51c38444b6de754fb12753b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

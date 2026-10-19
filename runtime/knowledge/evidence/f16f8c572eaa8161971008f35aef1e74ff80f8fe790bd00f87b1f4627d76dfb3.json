@@ -1,0 +1,103 @@
+{
+  "id": "genesis-evidence:e2647c656e9d775969c77b7f1d5235e42f73adfdf00600c7915d0b87c3da244b",
+  "type": "commit",
+  "title": "feat(executive): Chief Agent reasons on human requests with certified content; durable executive records (KO-6)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316135,
+  "observedAt": 1792373958000,
+  "contentRef": "git:commit:f3b27e4dfa8d42a6548c39033adf2ce91cc000c8",
+  "checksum": "sha256:1b30a36edcff1e649b20f68b0597569f25c3ea97ebe313a2dc23dda600ed072b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 15,
+    "genesisAdmissionIdentity": "genesis-admission:342345553946cb5b40b42d302c97d32f9f20a2164026622eae8272a41fedeb8a",
+    "historicalSourceId": "genesis-source:commit:f3b27e4dfa8d42a6548c39033adf2ce91cc000c8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f3b27e4dfa8d42a6548c39033adf2ce91cc000c8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f3b27e4dfa8d42a6548c39033adf2ce91cc000c8",
+      "parentShas": [
+        "733b26d0f8cd85691df12a3059b7a74552b1a32b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792373958000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792373958000
+      },
+      "subject": "feat(executive): Chief Agent reasons on human requests with certified content; durable executive records (KO-6)",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/approval/ExecutiveApprovalStore.ts",
+        "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+        "apps/lumina-runtime/src/executive/decision/ExecutiveDecisionStore.ts",
+        "apps/lumina-runtime/src/executive/orchestrator/ExecutiveDispatcher.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentGovernedContentReader.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ExecutiveReasoningService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/FileExecutiveReasoningStore.ts",
+        "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningKO6.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts",
+        "apps/lumina-runtime/src/executive/storage/resolveExecutiveStorageRoot.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/storage/resolveKnowledgeStorageRoot.ts",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako6-risk-question-1.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Ako6-risk-question-1.json",
+        "runtime/executive/reasoning/reasoning%3Ako6-risk-question-1.json"
+      ],
+      "changedPathsByParent": {
+        "733b26d0f8cd85691df12a3059b7a74552b1a32b": [
+          "apps/lumina-runtime/src/executive/approval/ExecutiveApprovalStore.ts",
+          "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+          "apps/lumina-runtime/src/executive/decision/ExecutiveDecisionStore.ts",
+          "apps/lumina-runtime/src/executive/orchestrator/ExecutiveDispatcher.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentGovernedContentReader.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningKnowledgeMaterializer.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ExecutiveReasoningService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/FileExecutiveReasoningStore.ts",
+          "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningDestinationAdapter.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentReasoningKO6.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts",
+          "apps/lumina-runtime/src/executive/storage/resolveExecutiveStorageRoot.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/storage/resolveKnowledgeStorageRoot.ts",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako6-risk-question-1.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Ako5e-first-reasoning-test-2.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Ako6-risk-question-1.json",
+          "runtime/executive/reasoning/reasoning%3Ako6-risk-question-1.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f3b27e4dfa8d42a6548c39033adf2ce91cc000c8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

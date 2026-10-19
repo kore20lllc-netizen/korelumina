@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:b2311b706d8095c1f1011984e6e79ca79fda92536612ee080b9eced992d65c76",
+  "type": "commit",
+  "title": "governance: canonical review and executive approval records",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316141,
+  "observedAt": 1792376767000,
+  "contentRef": "git:commit:6b23ccc5d842182f3bc7a4b008a2daf390722eb9",
+  "checksum": "sha256:f24e0e89c4a35d9210000448add538b23dc08c2f69d86d59391768bb4ef475a4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 17,
+    "genesisAdmissionIdentity": "genesis-admission:68ea4bb959efad5a5402f1b90f96117e1c089e17f5ee9926a38a40698b9b5c94",
+    "historicalSourceId": "genesis-source:commit:6b23ccc5d842182f3bc7a4b008a2daf390722eb9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6b23ccc5d842182f3bc7a4b008a2daf390722eb9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6b23ccc5d842182f3bc7a4b008a2daf390722eb9",
+      "parentShas": [
+        "d094a8289950076aa6d3d1930ff71f6163024aa3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792376767000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792376767000
+      },
+      "subject": "governance: canonical review and executive approval records",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako6-risk-question-1.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Ako6-risk-question-1.json",
+        "runtime/knowledge/manufacturing-runs/KMR-b7919f615d7923a3c5cc.json",
+        "runtime/knowledge/manufacturing-runs/KMR-ddcf71c9ae3bb79506a2.json",
+        "runtime/knowledge/packages/KP-2026-000048.json",
+        "runtime/knowledge/packages/KP-2026-000049.json",
+        "runtime/knowledge/review-batches/KRB-2026-000011.json",
+        "runtime/knowledge/review-batches/KRB-2026-000012.json",
+        "runtime/knowledge/review-batches/KRB-2026-000013.json"
+      ],
+      "changedPathsByParent": {
+        "d094a8289950076aa6d3d1930ff71f6163024aa3": [
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Ako6-risk-question-1.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Ako6-risk-question-1.json",
+          "runtime/knowledge/manufacturing-runs/KMR-b7919f615d7923a3c5cc.json",
+          "runtime/knowledge/manufacturing-runs/KMR-ddcf71c9ae3bb79506a2.json",
+          "runtime/knowledge/packages/KP-2026-000048.json",
+          "runtime/knowledge/packages/KP-2026-000049.json",
+          "runtime/knowledge/review-batches/KRB-2026-000011.json",
+          "runtime/knowledge/review-batches/KRB-2026-000012.json",
+          "runtime/knowledge/review-batches/KRB-2026-000013.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6b23ccc5d842182f3bc7a4b008a2daf390722eb9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

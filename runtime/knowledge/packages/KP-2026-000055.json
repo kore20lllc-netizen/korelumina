@@ -1,0 +1,120 @@
+{
+  "id": "KP-2026-000055",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792387316155,
+  "updatedAt": 1792387316155,
+  "data": {
+    "id": "KP-2026-000055",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0042 — Continuous Learning v1"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0042 — Continuous Learning v1",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0042 — Continuous Learning v1",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1792387316148,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792387316148,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0042-continuous-learning.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0042-continuous-learning.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "pending_review",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0042 — Continuous Learning v1",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0042 — Continuous Learning v1",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792387316148,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792387316155
+      },
+      {
+        "state": "compiled",
+        "at": 1792387316155
+      },
+      {
+        "state": "validated",
+        "at": 1792387316155
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792387316155
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792387316155
+    },
+    "createdAt": 1792387316155,
+    "updatedAt": 1792387316155,
+    "metadata": {
+      "sourceApprovalStates": []
+    }
+  }
+}

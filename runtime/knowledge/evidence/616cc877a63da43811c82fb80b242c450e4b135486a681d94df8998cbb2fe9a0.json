@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:7fd0d93e55312c46af5ae9fdfed1055f5bc22e951f355c0b540318cff028956e",
+  "type": "commit",
+  "title": "UI-1: shared queue for slow Runtime reads",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316110,
+  "observedAt": 1792366612000,
+  "contentRef": "git:commit:c699e49d3f7b686c47e3d5e6a462afe2839cf0db",
+  "checksum": "sha256:491025f4e501f2d14d7fd7de69f49f741fe58c6e72e510d966869c2e2263d606",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 8,
+    "genesisAdmissionIdentity": "genesis-admission:0540a117be6a944b34b61a4352364709d6501e25d95d1b5c64a595a252ce80c6",
+    "historicalSourceId": "genesis-source:commit:c699e49d3f7b686c47e3d5e6a462afe2839cf0db",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c699e49d3f7b686c47e3d5e6a462afe2839cf0db",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c699e49d3f7b686c47e3d5e6a462afe2839cf0db",
+      "parentShas": [
+        "5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792366612000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792366612000
+      },
+      "subject": "UI-1: shared queue for slow Runtime reads",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/services/educationService.ts",
+        "apps/lumina-builder/src/services/educationalCorpusService.ts",
+        "apps/lumina-builder/src/services/runtime/genesisDayZeroCertification.ts",
+        "apps/lumina-builder/src/services/runtime/runtimeReadQueue.ts"
+      ],
+      "changedPathsByParent": {
+        "5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe": [
+          "apps/lumina-builder/src/services/educationService.ts",
+          "apps/lumina-builder/src/services/educationalCorpusService.ts",
+          "apps/lumina-builder/src/services/runtime/genesisDayZeroCertification.ts",
+          "apps/lumina-builder/src/services/runtime/runtimeReadQueue.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c699e49d3f7b686c47e3d5e6a462afe2839cf0db"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

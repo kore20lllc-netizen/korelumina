@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:8dbb039c49d17e8dca9c16276533d32176d5152a366020f3b377e350dfa39c62",
+  "type": "commit",
+  "title": "UI-1: Knowledge Operations shows live Runtime state instead of sample data",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316106,
+  "observedAt": 1792332318000,
+  "contentRef": "git:commit:5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe",
+  "checksum": "sha256:0a6036bba3375a4b92483888853fd943a19da4b4f1a4380115032e9d307794a1",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 7,
+    "genesisAdmissionIdentity": "genesis-admission:e8730b6caef7318305d97deb506f5e03bc9a1e163ab6d16f0bf42af03ffa787a",
+    "historicalSourceId": "genesis-source:commit:5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe",
+      "parentShas": [
+        "0cb5ad37acbc6bdace22e8113cbff61981264e0b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792332318000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792332318000
+      },
+      "subject": "UI-1: Knowledge Operations shows live Runtime state instead of sample data",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbonProvider.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/executiveOperations.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/useExecutiveOperations.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/useKnowledgeOperationsTruth.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ExecutiveEducationalSummary.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/EducationalRuntimeCompatibility.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+      ],
+      "changedPathsByParent": {
+        "0cb5ad37acbc6bdace22e8113cbff61981264e0b": [
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetrics.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbonProvider.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/executiveOperations.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/useExecutiveOperations.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/useKnowledgeOperationsTruth.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ExecutiveEducationalSummary.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/EducationalRuntimeCompatibility.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/state/useEducationalDashboardState.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5f3e81ad7bce8c17ffb09e2798137cb02ca04ebe"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}

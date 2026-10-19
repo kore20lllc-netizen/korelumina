@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:e7e0bfba894d84f36b42e2313dc4a27543c7808122f74eb686d61d9516a3c2ab",
+  "type": "commit",
+  "title": "docs(adr): ADR-0042 continuous learning v1, commit is approval",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792387316167,
+  "observedAt": 1792384966000,
+  "contentRef": "git:commit:e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+  "checksum": "sha256:4c86a0b76d04f287f2c5c3ef2b1d6b939be6a4b40087bb539f723247bb859c65",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467",
+    "genesisManifestId": "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7",
+    "genesisManifestIndex": 19,
+    "genesisAdmissionIdentity": "genesis-admission:8395ab67beb8f440f2415b8218db8c32397ce0b82d6c98e7ed7341b0049874c0",
+    "historicalSourceId": "genesis-source:commit:e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e322332c9021b6ec444f4c8d12ad1fc63d23dfd2",
+      "parentShas": [
+        "6b23ccc5d842182f3bc7a4b008a2daf390722eb9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792384966000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792384966000
+      },
+      "subject": "docs(adr): ADR-0042 continuous learning v1, commit is approval",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/adr/ADR-0042-continuous-learning.md"
+      ],
+      "changedPathsByParent": {
+        "6b23ccc5d842182f3bc7a4b008a2daf390722eb9": [
+          "docs/adr/ADR-0042-continuous-learning.md"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e322332c9021b6ec444f4c8d12ad1fc63d23dfd2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:112ff984302e255020cd25777dea5f07bf8b1aea27ee61493c6e4599353eb467"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:be139a37872d8a6b891db97f4fd1b9890038fc854206c188c26e2177415af3f7"
+    ]
+  }
+}
