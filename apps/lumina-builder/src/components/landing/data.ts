@@ -73,12 +73,12 @@ export const architectureSystems = [
 ];
 
 export const enterpriseLayer = [
-  { icon: Shield, label: "Security & Governance", category: "Security", body: "SSO, SCIM, role-based access, and policy controls that meet enterprise compliance bars.", benefit: "Pass SOC 2 & ISO audits without engineering overhead." },
+  { icon: Shield, label: "Security & Governance", category: "Security", body: "SSO, role-based access, and policy controls built for enterprise environments.", benefit: "Designed to support your security and compliance reviews." },
   { icon: ScrollText, label: "Audit Trail", category: "Compliance", body: "Every AI action, edit, and deploy logged and queryable — full forensic visibility.", benefit: "Answer 'who changed what, when' in seconds." },
   { icon: FolderTree, label: "Multi-Project Workspaces", category: "Collaboration", body: "Organize teams, repos, and environments across product lines without context switching.", benefit: "Scale from one team to hundreds with zero replatforming." },
   { icon: Server, label: "BYO Infrastructure", category: "Infrastructure", body: "Bring your own cloud, database, and secrets. KoreLumina runs in your perimeter, not ours.", benefit: "Keep data residency and IP fully inside your boundary." },
   { icon: ShieldCheck, label: "Production Hardening", category: "Security", body: "Automated security scans, dependency audits, and runtime guardrails before code ships.", benefit: "Catch vulnerabilities before they reach production." },
-  { icon: UsersRound, label: "Team Collaboration", category: "Collaboration", body: "Real-time presence, shared sessions, and review flows built into the workspace.", benefit: "Cut review cycles in half with shared live context." },
+  { icon: UsersRound, label: "Team Collaboration", category: "Collaboration", body: "Real-time presence, shared sessions, and review flows built into the workspace.", benefit: "Review changes together with shared live context." },
 ];
 
 export const features = [
@@ -90,17 +90,18 @@ export const features = [
   { icon: Bell, title: "Notifications & activity", body: "Build runs, deploys, AI tasks, and teammate events streamed into one focused inbox." },
 ];
 
+/*
+ * KoreLumina capabilities only. Competitor columns were removed because
+ * their claims were unsourced and several were out of date (Oct 2026).
+ */
 export const comparisonRows = [
-  { feature: "Imports any repo", korelumina: true,  lovable: false, bolt: false, v0: false, cursor: true  },
-  { feature: "Universal Runtime Engine", korelumina: true, lovable: false, bolt: true,  v0: false, cursor: false },
-  { feature: "Designer mode", korelumina: true, lovable: false, bolt: false, v0: true,  cursor: false },
-  { feature: "Developer mode (multi-cursor)", korelumina: true, lovable: false, bolt: false, v0: false, cursor: true  },
-  { feature: "Expert escalation layer", korelumina: true, lovable: false, bolt: false, v0: false, cursor: false },
-  { feature: "Enterprise hardening", korelumina: true, lovable: false, bolt: false, v0: false, cursor: false },
+  { feature: "Imports existing repositories", detail: "ZIP, GitHub URL, or connected repo, indexed for AI context." },
+  { feature: "Runs your stack", detail: "Isolated runtime with live preview before changes apply." },
+  { feature: "Designer and Developer modes", detail: "Visual editing and multi-cursor code editing on one project." },
+  { feature: "Expert escalation", detail: "Hand any task to KoreLumina engineers as a paid service." },
+  { feature: "Bring your own stack and AI keys", detail: "Your repo, infrastructure, and AI provider. Leave anytime." },
+  { feature: "Governed delivery", detail: "Role controls, audit trails, and approvals before deploy." },
 ];
-
-export const comparisonCols = ["KoreLumina","Lovable","Bolt.new","v0","Cursor"] as const;
-
 export type TemplatePreview = "marketing" | "dashboard" | "crm" | "chat";
 
 export const templateTeasers: Array<{
@@ -195,7 +196,7 @@ export const pricingTiers = [
     body: "Best for founders, freelancers, and solo builders.",
     badge: "Most Popular",
     features: [
-      "Unlimited AI executions",
+      "Monthly AI credits included",
       "Unlimited projects",
       "Bring Your Own Supabase",
       "Bring Your Own GitHub Repo",
@@ -283,7 +284,7 @@ export const featureComparison: Array<{
   biz: MatrixCell;
   ent: MatrixCell;
 }> = [
-  { feature: "AI executions",            free: "5 total",          pro: "Unlimited", biz: "Unlimited", ent: "Unlimited" },
+  { feature: "AI usage",                 free: "5 executions",     pro: "Monthly credits", biz: "Monthly credits", ent: "Monthly credits" },
   { feature: "Projects",                 free: "1",                pro: "Unlimited", biz: "Unlimited", ent: "Unlimited" },
   { feature: "In-app preview",           free: true,               pro: true,        biz: true,        ent: true },
   { feature: "Full browser preview",     free: false,              pro: true,        biz: true,        ent: true },
@@ -312,7 +313,7 @@ export const faq = [
   { q: "Can I import an existing project?", a: "Yes. Drop a ZIP, paste a GitHub URL, or connect a repo. Repo Intelligence indexes the codebase so AI works with real context." },
   { q: "What frameworks are supported?", a: "Universal Runtime supports React, Next, Vue, Svelte, plain Node, Python, Go, and static sites. New runtimes are added regularly." },
   { q: "Is there a free tier?", a: "Yes — Free includes 5 AI executions and full access to Designer and Developer modes so you can try the platform end to end." },
-  { q: "How does Expert Escalation work?", a: "Pro and Enterprise customers can escalate any task to KoreLumina engineers from inside the workspace. Human help, no context loss." },
+  { q: "How does Expert Escalation work?", a: "Any customer can escalate a task to KoreLumina engineers from inside the workspace. It is a paid service: you see the scope and price before work starts. Human help, no context loss." },
   { q: "Can my team collaborate?", a: "Yes. Multi-project workspaces, shared templates, audit trails, and live activity keep teams aligned." },
 ];
 

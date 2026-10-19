@@ -153,7 +153,7 @@ export function RepoAuditFeature() {
                   <p className="font-medium text-foreground mb-1">Repo Audit is unavailable</p>
                   <p className="text-muted-foreground">
                     Your account doesn't include the <span className="font-mono">repoAudit</span> capability.
-                    It's available on Business and Enterprise plans, or with an active in-house developer engagement.
+                    Today, audits are run by our in-house engineering team. Request an AI Repo Audit and we deliver the report and repair plan.
                   </p>
                   <button
                     type="button"

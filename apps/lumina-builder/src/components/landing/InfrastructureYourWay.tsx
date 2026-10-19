@@ -99,7 +99,7 @@ export function InfrastructureYourWay() {
         </div>
 
         <p className="text-center text-sm md:text-base text-muted-foreground mt-10">
-          Start managed. Connect your own tools anytime. Keep your code, data, and deployment path portable.
+          Start managed. Connect your own tools anytime on Pro and above. Keep your code, data, and deployment path portable.
         </p>
       </div>
     </section>
