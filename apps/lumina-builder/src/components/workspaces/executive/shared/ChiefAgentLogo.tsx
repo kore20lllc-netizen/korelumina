@@ -7,8 +7,9 @@ import luminaLogo from "@/assets/optimized/lumina.webp";
  * briefing) the logo becomes the living Lumina form, the owner's chosen
  * motion from the landing page, re-encoded small for the conversation
  * (public/videos/chief-agent-thinking.*, about 100 KB each, from
- * landing-bg.mp4), held in a circle with a soft gold glow, no ring.
- * Reduced-motion users see a still frame instead.
+ * landing-bg.mp4). The whole form shows, uncropped; its black background is
+ * blended away. (A circle and a gold ring were tried and removed: the
+ * circle cut off the form.) Reduced-motion users see a still frame.
  */
 const THINKING_POSTER = "/videos/chief-agent-thinking-poster.webp";
 
@@ -25,11 +26,7 @@ export function ChiefAgentLogo({
         role="img"
         aria-label="Chief Agent is thinking"
         title="Chief Agent is thinking"
-        className={[
-          "relative inline-grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-full",
-          "bg-slate-950",
-          "shadow-[0_0_16px_rgba(217,164,65,.45),0_0_32px_rgba(185,122,24,.25)]",
-        ].join(" ")}
+        className="relative inline-block h-14 w-14 shrink-0 drop-shadow-[0_0_14px_rgba(124,58,237,.35)]"
       >
         <video
           autoPlay
@@ -38,7 +35,7 @@ export function ChiefAgentLogo({
           playsInline
           aria-hidden="true"
           poster={THINKING_POSTER}
-          className="h-[115%] w-[115%] max-w-none object-cover mix-blend-screen motion-reduce:hidden"
+          className="h-full w-full object-contain mix-blend-screen motion-reduce:hidden"
         >
           <source src="/videos/chief-agent-thinking.webm" type="video/webm" />
           <source src="/videos/chief-agent-thinking.mp4" type="video/mp4" />
@@ -48,7 +45,7 @@ export function ChiefAgentLogo({
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="hidden h-[115%] w-[115%] max-w-none object-cover mix-blend-screen motion-reduce:block"
+          className="hidden h-full w-full object-contain mix-blend-screen motion-reduce:block"
         />
       </span>
     );
