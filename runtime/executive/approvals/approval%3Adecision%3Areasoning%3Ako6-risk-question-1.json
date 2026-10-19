@@ -4,7 +4,7 @@
   "decisionId": "decision:reasoning:ko6-risk-question-1",
   "requestedBy": "chief-agent",
   "approverId": "human:founder",
-  "status": "pending",
+  "status": "approved",
   "comments": "",
   "createdAt": 1792373033340,
   "metadata": {
@@ -95,5 +95,6 @@
         }
       ]
     }
-  }
+  },
+  "decidedAt": 1792374216102
 }

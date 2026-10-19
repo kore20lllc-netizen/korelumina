@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000011",
+  "packageIds": [
+    "KP-2026-000049"
+  ],
+  "status": "approved",
+  "reviewerId": "human:knowledge-governance",
+  "decision": "approved",
+  "reason": null,
+  "createdAt": 1792367548965,
+  "reviewedAt": 1792367572018
+}

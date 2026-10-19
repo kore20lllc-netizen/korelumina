@@ -3,11 +3,11 @@
   "type": "knowledge-manufacturing-run",
   "version": 1,
   "createdAt": 1788240130985,
-  "updatedAt": 1788240130987,
+  "updatedAt": 1792367572018,
   "data": {
     "id": "KMR-b7919f615d7923a3c5cc",
     "evidenceId": "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa",
-    "currentStage": "Canonical Review",
+    "currentStage": "Canonical Knowledge",
     "status": "active",
     "canonicalKnowledgeIds": [],
     "stageHistory": [
@@ -106,10 +106,21 @@
         "outcome": "awaiting_human_review",
         "at": 1788240130987,
         "detail": "Knowledge Package is awaiting explicit human canonical review."
+      },
+      {
+        "stage": "Canonical Review",
+        "outcome": "approved",
+        "at": 1792367572018,
+        "detail": "Canonical review approved by human:knowledge-governance."
+      },
+      {
+        "stage": "Canonical Knowledge",
+        "outcome": "entered",
+        "at": 1792367572018
       }
     ],
     "createdAt": 1788240130985,
-    "updatedAt": 1788240130987,
+    "updatedAt": 1792367572018,
     "packageId": "KP-2026-000049"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000012",
+  "packageIds": [
+    "KP-2026-000048"
+  ],
+  "status": "approved",
+  "reviewerId": "human:founder",
+  "decision": "approved",
+  "reason": "Reviewed Chief Agent Operating Model documentation package.",
+  "createdAt": 1792367615705,
+  "reviewedAt": 1792376707350
+}

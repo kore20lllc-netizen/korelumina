@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1788240130986,
-  "updatedAt": 1788240130986,
+  "updatedAt": 1792367572018,
   "data": {
     "id": "KP-2026-000049",
-    "state": "awaiting_review",
+    "state": "approved",
     "sourceEvidenceRefs": [
       "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
     ],
@@ -131,7 +131,7 @@
       ]
     },
     "authority": "governance",
-    "approvalState": "pending_review",
+    "approvalState": "approved",
     "owner": "Chief Systems Architect",
     "scope": "Chief Agent mission-level orchestration, bounded specialist-agent execution, delegation procedure, recovery procedure, operating learning workflow, and human-approval operating gates, subordinate to higher governing authority.",
     "version": "1.0",
@@ -187,6 +187,11 @@
       {
         "state": "awaiting_review",
         "at": 1788240130986
+      },
+      {
+        "state": "approved",
+        "at": 1792367572018,
+        "reason": "canonical-review-batch:KRB-2026-000011"
       }
     ],
     "remediation": {
@@ -196,10 +201,34 @@
       "updatedAt": 1788240130986
     },
     "createdAt": 1788240130986,
-    "updatedAt": 1788240130986,
+    "updatedAt": 1792367572018,
     "metadata": {
       "sourceApprovalStates": [
         "Approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000049",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792367572018,
+        "evidenceConsidered": [
+          "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+        ],
+        "reason": "canonical-review-batch:KRB-2026-000011"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000049",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792367572018,
+          "evidenceConsidered": [
+            "genesis-evidence:854008113f137bd5f1017ad485e18ff784700aa24f51497844e0f9f021dfe3fa"
+          ],
+          "reason": "canonical-review-batch:KRB-2026-000011"
+        }
       ]
     }
   }

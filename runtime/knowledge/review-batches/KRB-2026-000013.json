@@ -1,0 +1,12 @@
+{
+  "id": "KRB-2026-000013",
+  "packageIds": [
+    "KP-2026-000048"
+  ],
+  "status": "pending",
+  "reviewerId": null,
+  "decision": null,
+  "reason": null,
+  "createdAt": 1792369159989,
+  "reviewedAt": null
+}
