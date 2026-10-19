@@ -61,12 +61,6 @@ export const currentMission = {
   next: "EW-0 design approval",
 };
 
-export const recentDecisions = [
-  { id: "decision:reasoning:ko6-risk-question-1", title: "First Customer Onboarding Risk Review", status: "approved", confidence: 0.88 },
-  { id: "decision:reasoning:ko5e-first-reasoning-test-2", title: "Pre-customer architecture risk review", status: "proposed", confidence: 0.78 },
-  { id: "chief-agent-activation:b50377c9", title: "Chief Agent activation at PROPOSE_ONLY", status: "recorded", confidence: null },
-];
-
 export const missionLifecycle = ["Vision", "Objective", "Mission", "Execution", "Validation", "Knowledge"] as const;
 
 export const missions = [
@@ -161,39 +155,6 @@ export const executionItems = [
   { title: "Chief Agent operations", state: "Propose-only", detail: "No action may execute at this autonomy level (ADR-0041)", tone: "active" as PreviewTone },
 ];
 
-export const approvals = [
-  {
-    id: "KP-2026-000054",
-    title: "ADR-0041 — Chief Agent Activation",
-    kind: "Canonical knowledge promotion",
-    recommendation: "Approve: accepted ADR, already in force.",
-    evidence: ["docs/adr/ADR-0041-chief-agent-activation.md", "a41981e8"],
-    risk: "Low",
-    outcome: "Chief Agent can cite its own activation rules.",
-    rollback: "Supersede the canonical item; history kept.",
-  },
-  {
-    id: "KP-2026-000055",
-    title: "ADR-0042 — Continuous Learning v1",
-    kind: "Canonical knowledge promotion",
-    recommendation: "Approve: accepted ADR, implemented in CL-1a to CL-1e.",
-    evidence: ["docs/adr/ADR-0042-continuous-learning.md", "e322332c"],
-    risk: "Low",
-    outcome: "Chief Agent can cite how it learns.",
-    rollback: "Supersede the canonical item; history kept.",
-  },
-  {
-    id: "approval:decision:reasoning:ko5e-first-reasoning-test-2",
-    title: "Pre-customer architecture risk review",
-    kind: "Executive decision",
-    recommendation: "Reject: first supervised test, superseded.",
-    evidence: ["decision:reasoning:ko5e-first-reasoning-test-2"],
-    risk: "None",
-    outcome: "Clears a stale open risk from Learning Records.",
-    rollback: "Re-run the question.",
-  },
-];
-
 export const activity = [
   { at: "Oct 19 · 02:30", type: "Knowledge", title: "LR-2026-0001 and LR-2026-0002 promoted to canonical" },
   { at: "Oct 19 · 02:20", type: "Governance", title: "Learning review policy and standing authorization recorded" },
@@ -209,16 +170,3 @@ export const notifications = [
   { priority: "Normal", title: "2 packages awaiting review", detail: "ADR-0041, ADR-0042", tone: "warning" as PreviewTone },
   { priority: "Informational", title: "LR-2026-0003 written", detail: "Promotes after your next commit.", tone: "active" as PreviewTone },
 ];
-
-export const conversation = [
-  { from: "You", text: "What are the three most important risks before our first paying customer?" },
-  {
-    from: "Chief Agent",
-    text: "1) Customer control of code, data, keys, and spending. 2) Production execution, validation, and rollback. 3) Governance and honest capability claims. Confidence 0.88; cited the Business Charter, Domain Primer, Chief Agent Architecture, and Vision 2050.",
-    proposal: "decision:reasoning:ko6-risk-question-1 · approved",
-  },
-  { from: "You", text: "Which pending approval should I handle first?" },
-];
-
-/* The preview shows the Chief Agent mid-reply so the replying state is visible. */
-export const conversationReplying = true;

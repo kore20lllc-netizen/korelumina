@@ -1,0 +1,396 @@
+import {
+  getRuntimeCallerHeaders,
+  RUNTIME_API,
+} from "@/services/runtime/client";
+
+/*
+ * EW-1: the Executive Office talks to the Chief Agent through Runtime.
+ *
+ * - A question is an executive event from the owner. The Chief Agent reasons
+ *   over governed knowledge, and its answer becomes a proposed decision with
+ *   an approval addressed back to the owner (ADR-0041: propose only).
+ * - Approvals are decided by the owner. Runtime only accepts a decision from
+ *   the approver the approval names, and only from this machine.
+ *
+ * The owner's executive identity is "human:founder", the identity the
+ * activation record and every existing executive approval already use.
+ */
+export const EXECUTIVE_OWNER_ACTOR_ID =
+  "human:founder";
+
+export interface ExecutiveReasoningRecord {
+  id: string;
+  sessionId: string;
+  title: string;
+  question: string;
+  conclusion: string;
+  disposition: "authorize" | "review" | "deny";
+  confidence: number;
+  evidence: string[];
+  assumptions: string[];
+  status: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface ExecutiveDecisionRecord {
+  id: string;
+  title: string;
+  rationale: string;
+  status: string;
+  requestedBy?: string;
+  approvedBy?: string;
+  evidence?: string[];
+  consequences?: string[];
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface ExecutiveApprovalRecord {
+  id: string;
+  decisionId: string;
+  requestedBy: string;
+  approverId: string;
+  status: string;
+  comments?: string;
+  createdAt: number;
+  metadata?: {
+    decisionTitle?: string;
+    reasoningId?: string;
+    reasoningConfidence?: number;
+    reasoningQuestion?: string;
+    reasoningDisposition?: string;
+    [key: string]: unknown;
+  };
+}
+
+export interface ExecutiveOfficeOperations {
+  generatedAt: number;
+  summary: {
+    reasoning: number;
+    decisions: number;
+    pendingApprovals: number;
+  };
+  reasoning: ExecutiveReasoningRecord[];
+  decisions: ExecutiveDecisionRecord[];
+  approvals: ExecutiveApprovalRecord[];
+}
+
+export interface ChiefAgentActivationStatus {
+  state: string;
+  active: boolean;
+  autonomyLevel: string | null;
+  reason: string;
+  checkedAt: number;
+}
+
+export interface LearningCycleRecord {
+  cycleId: string;
+  trigger: string;
+  outcome: string;
+  startedAt: number;
+  completedAt?: number;
+  commits: Array<{ sha: string; subject: string }>;
+  reasons: string[];
+  learning?: {
+    recordId?: string;
+    status?: string;
+    [key: string]: unknown;
+  };
+}
+
+export interface LearningStatus {
+  checkpoint: {
+    commit: string;
+    committedAt: number;
+  } | null;
+  pendingCommits: Array<{ sha: string; subject: string }>;
+  running: boolean;
+  cycles: LearningCycleRecord[];
+}
+
+export interface PendingCanonicalReview {
+  id: string;
+  title: string;
+  classification: string;
+  createdAt: number;
+}
+
+async function readJson(
+  path: string,
+): Promise<any> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}${path}`,
+      {
+        cache: "no-store",
+        headers: getRuntimeCallerHeaders(),
+      },
+    );
+
+  if (!response.ok) {
+    throw new Error(
+      `${path} answered ${response.status}`,
+    );
+  }
+
+  return await response.json();
+}
+
+async function postJson(
+  path: string,
+  body: unknown,
+): Promise<{ status: number; body: any }> {
+  const response =
+    await fetch(
+      `${RUNTIME_API}${path}`,
+      {
+        method: "POST",
+        headers: getRuntimeCallerHeaders({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(body),
+      },
+    );
+
+  let parsed: any = null;
+
+  try {
+    parsed = await response.json();
+  } catch {
+    parsed = null;
+  }
+
+  return {
+    status: response.status,
+    body: parsed,
+  };
+}
+
+export async function getExecutiveOfficeOperations():
+Promise<ExecutiveOfficeOperations> {
+  const body =
+    await readJson(
+      "/api/executive/operations",
+    );
+
+  return {
+    generatedAt: Number(body?.generatedAt ?? Date.now()),
+    summary: {
+      reasoning: Number(body?.summary?.reasoning ?? 0),
+      decisions: Number(body?.summary?.decisions ?? 0),
+      pendingApprovals: Number(body?.summary?.pendingApprovals ?? 0),
+    },
+    reasoning: Array.isArray(body?.reasoning) ? body.reasoning : [],
+    decisions: Array.isArray(body?.decisions) ? body.decisions : [],
+    approvals: Array.isArray(body?.approvals) ? body.approvals : [],
+  };
+}
+
+export async function getChiefAgentActivationStatus():
+Promise<ChiefAgentActivationStatus> {
+  const body =
+    await readJson(
+      "/api/executive/activation",
+    );
+
+  return {
+    state: String(body?.activation?.state ?? "UNAVAILABLE"),
+    active: body?.activation?.active === true,
+    autonomyLevel: body?.activation?.autonomyLevel ?? null,
+    reason: String(body?.activation?.reason ?? ""),
+    checkedAt: Number(body?.activation?.checkedAt ?? Date.now()),
+  };
+}
+
+export async function getLearningStatus():
+Promise<LearningStatus> {
+  const body =
+    await readJson(
+      "/api/learning/cycles",
+    );
+
+  return {
+    checkpoint: body?.checkpoint ?? null,
+    pendingCommits: Array.isArray(body?.pendingCommits) ? body.pendingCommits : [],
+    running: body?.running === true,
+    cycles: Array.isArray(body?.cycles) ? body.cycles : [],
+  };
+}
+
+export async function getPendingCanonicalReviews():
+Promise<PendingCanonicalReview[]> {
+  const body =
+    await readJson(
+      "/api/knowledge/canonical-review",
+    );
+
+  const packages: any[] =
+    Array.isArray(body?.packages) ? body.packages : [];
+
+  return packages
+    .filter((entry) => entry?.reviewStatus === "pending")
+    .map((entry) => ({
+      id: String(entry.id),
+      title: String(entry?.items?.[0]?.title ?? entry.id),
+      classification: String(
+        typeof entry?.reviewClassification === "string"
+          ? entry.reviewClassification
+          : entry?.reviewClassification?.mode ?? "individual",
+      ),
+      createdAt: Number(entry?.createdAt ?? 0),
+    }))
+    .sort((left, right) => right.createdAt - left.createdAt);
+}
+
+export interface KnowledgeOverview {
+  canonicalItems: number;
+}
+
+export async function getKnowledgeOverview():
+Promise<KnowledgeOverview> {
+  const body =
+    await readJson(
+      "/api/knowledge/operations",
+    );
+
+  return {
+    canonicalItems: Number(body?.knowledge?.canonicalItems ?? 0),
+  };
+}
+
+export type AskChiefAgentResult =
+  | {
+      answered: true;
+      reasoning: ExecutiveReasoningRecord | null;
+    }
+  | {
+      answered: false;
+      reason: string;
+    };
+
+function explainUnanswered(
+  code: string,
+): string {
+  if (code.startsWith("missing_") && code.endsWith("_API_KEY")) {
+    return `Runtime has no reasoning provider key (${code.slice("missing_".length)}). Add it to the Runtime environment and restart Runtime.`;
+  }
+
+  if (code.includes("activation")) {
+    return `The Chief Agent is not active (${code}).`;
+  }
+
+  return code;
+}
+
+export async function askChiefAgent(
+  question: string,
+): Promise<AskChiefAgentResult> {
+  const eventId =
+    `executive-office:${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+  const { status, body } =
+    await postJson(
+      "/api/executive/events",
+      {
+        id: eventId,
+        type: "chief-agent.question",
+        category: "business",
+        source: "executive-office",
+        workspace: "executive-office",
+        actor: {
+          id: EXECUTIVE_OWNER_ACTOR_ID,
+          type: "human",
+          label: "Owner",
+        },
+        confidence: "validated",
+        payload: {
+          query: question,
+          approverId: EXECUTIVE_OWNER_ACTOR_ID,
+        },
+      },
+    );
+
+  const records: Array<{ destination: string; status: string; message?: string }> =
+    Array.isArray(body?.dispatch?.records) ? body.dispatch.records : [];
+
+  const reasoning =
+    records.find((record) => record.destination === "reasoning");
+
+  if (reasoning?.status === "handled") {
+    let record: ExecutiveReasoningRecord | null = null;
+
+    try {
+      const answer =
+        await readJson(
+          `/api/executive/reasoning/${encodeURIComponent(`reasoning:${eventId}`)}`,
+        );
+
+      record = answer?.reasoning ?? null;
+    } catch {
+      record = null;
+    }
+
+    return {
+      answered: true,
+      reasoning: record,
+    };
+  }
+
+  if (reasoning) {
+    return {
+      answered: false,
+      reason: explainUnanswered(
+        reasoning.message ?? reasoning.status,
+      ),
+    };
+  }
+
+  return {
+    answered: false,
+    reason:
+      typeof body?.error === "string"
+        ? body.error
+        : `Runtime answered ${status} without a reasoning outcome.`,
+  };
+}
+
+export async function decideExecutiveApproval(
+  approvalId: string,
+  decision: "approve" | "reject",
+  reason?: string,
+): Promise<void> {
+  const { status, body } =
+    await postJson(
+      `/api/executive/approvals/${encodeURIComponent(approvalId)}/${decision}`,
+      decision === "approve"
+        ? { actorId: EXECUTIVE_OWNER_ACTOR_ID }
+        : { actorId: EXECUTIVE_OWNER_ACTOR_ID, reason: reason ?? "" },
+    );
+
+  if (status >= 400 || body?.ok === false) {
+    throw new Error(
+      typeof body?.error === "string"
+        ? body.error
+        : `Runtime answered ${status}`,
+    );
+  }
+}
+
+export async function runLearningCycleNow(): Promise<LearningCycleRecord> {
+  const { status, body } =
+    await postJson(
+      "/api/learning/cycles",
+      {},
+    );
+
+  if (!body?.cycle) {
+    throw new Error(
+      typeof body?.error === "string"
+        ? body.error
+        : `Runtime answered ${status}`,
+    );
+  }
+
+  return body.cycle;
+}

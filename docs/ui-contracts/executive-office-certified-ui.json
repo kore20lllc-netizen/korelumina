@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Executive Office Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Chief Agent command deck and conversation placement",
+      "wiring badge (preview, partly live, live)",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved Executive Office",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/executive/ExecutiveOfficeWorkspace.tsx": {
+      "sha256": "36ee42408d23375951fc9b76498fc759d247a092f97eb7e17845abb54f2154ff",
+      "elementCount": 20
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx": {
+      "sha256": "f00e13183a8d60ed20074b8911ff777a5080c1cc3f0df89f5837bf4eb0507656",
+      "elementCount": 57
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx": {
+      "sha256": "6eba10ac983f1c998511d47a1a14d4d96b78e3ada1fa72eddee34da120844176",
+      "elementCount": 6
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx": {
+      "sha256": "df37271893df54decfdf9e6e5a36bf3f6ca858387c3dbaa88108f9dc22d0c874",
+      "elementCount": 12
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx": {
+      "sha256": "e41f09a2db322191045bf4f7bb66a269665c8c7b09b8d51c6a30c30bc1770406",
+      "elementCount": 32
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx": {
+      "sha256": "661dde7ebbacc412e3b12da1e50fb2db7841875f6614df57b2a383ef0a230506",
+      "elementCount": 41
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx": {
+      "sha256": "ef4f9b68e44aae73e35dec020c818d85c9efcfb6fc7c2ec70c81e1a1dc80ec81",
+      "elementCount": 26
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx": {
+      "sha256": "6790abd9505b08967362fad85014ecf0dab0dd38db06078252ac6de526f83b63",
+      "elementCount": 7
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx": {
+      "sha256": "a26aab10bd76c4a365c0335fd02e5e0aae54bcef0c68eee6ab75cd045ff10404",
+      "elementCount": 33
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx": {
+      "sha256": "0a63e5f738872f29ded4bab398aa79df5f823fc8e3513caa5fe3853c22ce2811",
+      "elementCount": 3
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/MemoryCenter.tsx": {
+      "sha256": "d360f1a7deac8f0f71ce6531c5c2c3b6cb1554893ee041419d50b837c3a5a94d",
+      "elementCount": 9
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx": {
+      "sha256": "331df23dc9ebe8f85ff083318e87bdf2351ebc44195988a3ff82d6bf2d8a388e",
+      "elementCount": 27
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx": {
+      "sha256": "efca16f144ea437d14ee2c7705c4659397a7f5385c9f9c488ebfda66f0dd2d10",
+      "elementCount": 7
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx": {
+      "sha256": "f92d3d1f71227590c8392359c64664489dd75063c18214151a07f59278130b47",
+      "elementCount": 5
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx": {
+      "sha256": "157792a9f58cc9f9c10354074523a890c39cc7370c3b0c85b9f6b2435f82adff",
+      "elementCount": 11
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx": {
+      "sha256": "16d796bf9f7bcda7ea9a550ed08eca985a96228c340989f8be0ff6405f5d2a77",
+      "elementCount": 2
+    },
+    "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx": {
+      "sha256": "4905de56890583bcefddd1beecd949f4a8d3ce8a3e4c2a3331e610c4d4f26d89",
+      "elementCount": 28
+    }
+  }
+}

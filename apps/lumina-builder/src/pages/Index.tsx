@@ -276,7 +276,7 @@ function Router() {
     return (
       <Shell blobs="ambient">
         <Suspense fallback={<LoadingView />}>
-          <ExecutiveOfficeWorkspace />
+          <ExecutiveOfficeWorkspace setView={setView} />
         </Suspense>
       </Shell>
     );

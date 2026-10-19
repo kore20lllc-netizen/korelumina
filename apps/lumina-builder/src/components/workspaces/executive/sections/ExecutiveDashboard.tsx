@@ -5,10 +5,17 @@ import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/Lum
 import {
   currentMission,
   dashboardHealth,
-  recentDecisions,
   recommendations,
 } from "../design/executiveDesignPreview";
-import { ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill } from "../shared/ExecutiveSection";
+import { DesignPreviewBadge, ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill } from "../shared/ExecutiveSection";
+import { useExecutiveOffice } from "../state/useExecutiveOffice";
+
+const DECISION_TONE: Record<string, "healthy" | "warning" | "error" | "active"> = {
+  approved: "healthy",
+  implemented: "healthy",
+  proposed: "warning",
+  rejected: "error",
+};
 
 const HEALTH_ICONS: Record<string, LucideIcon> = {
   mission: Rocket,
@@ -18,6 +25,9 @@ const HEALTH_ICONS: Record<string, LucideIcon> = {
 };
 
 export function ExecutiveDashboard() {
+  const office = useExecutiveOffice();
+  const decisions = office.operations.status === "ok" ? office.operations.data.decisions.slice(0, 5) : [];
+
   return (
     <ExecutiveSection
       id="executive-overview"
@@ -25,6 +35,7 @@ export function ExecutiveDashboard() {
       eyebrow="Executive Dashboard · Overview"
       title="Platform at a glance"
       description="Mission, platform, runtime, and knowledge health, what the Chief Agent recommends, the current mission, and recent decisions."
+      wiring="partial"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {dashboardHealth.map((tile) => (
@@ -63,12 +74,24 @@ export function ExecutiveDashboard() {
 
           <LuminaFlagshipCard as="article" className="rounded-[20px] p-4">
             <div className="relative z-10">
-              <ExecutiveCardHeading icon={Gavel} tone="healthy">Recent decisions</ExecutiveCardHeading>
+              <div className="flex items-center justify-between gap-3">
+                <ExecutiveCardHeading icon={Gavel} tone="healthy">Recent decisions</ExecutiveCardHeading>
+                <DesignPreviewBadge wiring="live" />
+              </div>
               <ul className="mt-3 grid gap-2">
-                {recentDecisions.map((decision) => (
+                {office.operations.status === "loading" ? (
+                  <li className="text-sm text-sky-300/60">Reading decisions…</li>
+                ) : null}
+                {office.operations.status === "error" ? (
+                  <li className="text-sm text-rose-200">Decisions unavailable: {office.operations.message}</li>
+                ) : null}
+                {office.operations.status === "ok" && decisions.length === 0 ? (
+                  <li className="text-sm text-sky-300/60">No executive decisions yet.</li>
+                ) : null}
+                {decisions.map((decision) => (
                   <li key={decision.id} className="flex items-center justify-between gap-3">
-                    <span className="min-w-0 truncate text-sm text-sky-100/80" title={decision.id}>{decision.title}</span>
-                    <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill[decision.status === "approved" || decision.status === "recorded" ? "healthy" : "warning"]}`}>
+                    <span className="min-w-0 truncate text-sm text-sky-100/80" title={`${decision.id} · ${new Date(decision.updatedAt).toLocaleString()}`}>{decision.title}</span>
+                    <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill[DECISION_TONE[decision.status] ?? "active"]}`}>
                       {decision.status}
                     </span>
                   </li>

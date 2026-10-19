@@ -30,6 +30,7 @@ import type {
 
 export type ExecutiveSectionWiring =
   | "preview"
+  | "partial"
   | "live";
 
 export function DesignPreviewBadge({
@@ -37,6 +38,18 @@ export function DesignPreviewBadge({
 }: {
   wiring?: ExecutiveSectionWiring;
 }) {
+  if (wiring === "partial") {
+    return (
+      <span
+        title="Parts marked Live read Runtime. The rest still shows the approved design with a snapshot, until its ticket wires it."
+        className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300/35 bg-cyan-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200"
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+        Partly live
+      </span>
+    );
+  }
+
   return wiring === "live" ? (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-200">
       <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />

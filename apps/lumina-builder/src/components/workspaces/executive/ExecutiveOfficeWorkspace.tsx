@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { LuminaSectionNavigator } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
+import type { View } from "@/context/WorkspaceContext";
 
 import { ChiefAgentCommandDeck } from "./layout/ChiefAgentCommandDeck";
 import { ActivityCenter } from "./sections/ActivityCenter";
@@ -38,8 +39,12 @@ import { ProjectsCenter } from "./sections/ProjectsCenter";
  * Knowledge Operations design language (materials, premium icons, flagship
  * panels, section navigator) with its own arrangement: the Chief Agent
  * command deck and the conversation side by side on top, a sticky section
- * navigator, then every section in a two-column grid, row by row. UI is the contract: sections are wired to Runtime
+ * navigator, then every section in a two-column grid, row by row.
+ *
+ * UI is the contract: sections are wired to Runtime
  * one ticket at a time and show a design-preview badge until then.
+ * EW-1 wired the conversation, approvals, recent decisions, and the Chief
+ * Agent's status (state/useExecutiveOffice.ts).
  */
 
 const SECTIONS = [
@@ -57,7 +62,11 @@ const SECTIONS = [
   { id: "executive-notifications", label: "Notifications", icon: Bell },
 ] as const;
 
-export function ExecutiveOfficeWorkspace() {
+export function ExecutiveOfficeWorkspace({
+  setView,
+}: {
+  setView?: (view: View) => void;
+}) {
   return (
     <section
       aria-label="Executive Office"
@@ -93,7 +102,9 @@ export function ExecutiveOfficeWorkspace() {
         <MemoryCenter />
         <AgentCenter />
         <ExecutionCenter />
-        <ApprovalCenter />
+        <ApprovalCenter
+          onOpenCanonicalReview={setView ? () => setView("knowledge-operations") : undefined}
+        />
         <ActivityCenter />
         <NotificationsCenter />
       </main>
