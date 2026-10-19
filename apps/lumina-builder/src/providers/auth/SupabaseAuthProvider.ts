@@ -12,6 +12,7 @@ function toUser(raw: {
   email?: string;
   created_at?: string;
   user_metadata?: Record<string, unknown>;
+  app_metadata?: Record<string, unknown>;
 }): User {
   return {
     id: raw.id,
@@ -24,9 +25,14 @@ function toUser(raw: {
       typeof raw.user_metadata?.avatar_url === "string"
         ? raw.user_metadata.avatar_url
         : undefined,
+    /*
+     * SEC-1b: the role is read from app_metadata, which only the server
+     * (service role) can write. user_metadata is editable by the user
+     * themselves, so a role stored there let anyone make themselves admin.
+     */
     role:
-      typeof raw.user_metadata?.role === "string"
-        ? (raw.user_metadata.role as Role)
+      typeof raw.app_metadata?.role === "string"
+        ? (raw.app_metadata.role as Role)
         : "free",
     createdAt: raw.created_at
       ? new Date(raw.created_at).getTime()
@@ -266,22 +272,15 @@ export class SupabaseAuthProvider implements AuthProvider {
     if (error) fail(error);
   }
 
-  async setRole(role: Role) {
-    if (!supabase) {
-      throw new AppError(
-        "AUTH_ERROR",
-        "Supabase is not configured.",
-      );
-    }
-
-    const { data, error } =
-      await supabase.auth.updateUser({
-        data: { role },
-      });
-
-    if (error || !data.user) fail(error);
-
-    return toUser(data.user);
+  /*
+   * SEC-1b: a signed-in user cannot change their own role. Roles live in
+   * app_metadata and are assigned server-side (ADR-0043, Proposed).
+   */
+  async setRole(_role: Role): Promise<never> {
+    throw new AppError(
+      "AUTH_ERROR",
+      "Roles are assigned by KoreLumina and cannot be changed from the browser.",
+    );
   }
 
   onChange(callback: () => void) {

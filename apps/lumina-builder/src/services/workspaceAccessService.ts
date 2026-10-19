@@ -45,24 +45,68 @@ const BASE: WorkspaceCapabilities = {
   inhouseDevDashboard: false,
 };
 
-/** Role is sourced from the AuthProvider when a session exists; otherwise
- *  falls back to the legacy localStorage override (kept for dev/demo). */
 import { auth } from "@/providers/auth-registry";
 
-const FALLBACK: WorkspaceRole =
-  (typeof window !== "undefined" &&
-    (window.localStorage.getItem("korelumina:role") as WorkspaceRole | null)) ||
-  "inhouse-dev";
+/*
+ * SEC-1b: the role comes from the signed-in user. A visitor who is not
+ * signed in is a plain "user" (it used to be "inhouse-dev", which reached
+ * internal engineering surfaces and, in Runtime, every project).
+ *
+ * Choosing a role in the browser (the Settings role switcher, the
+ * localStorage "korelumina:role" override, the simulated checkout) is a
+ * development convenience only. Production builds ignore it: roles are
+ * assigned by KoreLumina, not by the client (ADR-0043, Proposed).
+ */
+const ROLES: readonly WorkspaceRole[] = [
+  "user",
+  "pro",
+  "business",
+  "enterprise",
+  "inhouse-dev",
+  "admin",
+  "super_admin",
+];
 
-let currentRole: WorkspaceRole = FALLBACK;
+export const SIGNED_OUT_ROLE: WorkspaceRole = "user";
+
+const buildEnv =
+  (import.meta as {
+    env?: Record<string, string | boolean | undefined>;
+  }).env ?? {};
+
+export const roleSwitchingAllowed: boolean =
+  buildEnv.DEV === true;
+
+function asWorkspaceRole(value: unknown): WorkspaceRole | null {
+  return typeof value === "string" && (ROLES as readonly string[]).includes(value)
+    ? (value as WorkspaceRole)
+    : null;
+}
+
+function readDevelopmentRoleOverride(): WorkspaceRole | null {
+  if (!roleSwitchingAllowed || typeof window === "undefined") return null;
+  try {
+    return asWorkspaceRole(window.localStorage.getItem("korelumina:role"));
+  } catch {
+    return null;
+  }
+}
+
+let currentRole: WorkspaceRole =
+  readDevelopmentRoleOverride() ?? SIGNED_OUT_ROLE;
 
 export function getCurrentRole(): WorkspaceRole {
   const u = auth.getUser();
-  if (u) return u.role as WorkspaceRole;
+  /* A role the platform does not know ("free", or anything unexpected) is a plain user. */
+  if (u) return asWorkspaceRole(u.role) ?? SIGNED_OUT_ROLE;
   return currentRole;
 }
 
 export function setCurrentRole(role: WorkspaceRole) {
+  if (!roleSwitchingAllowed) {
+    console.warn("[KoreLumina] Roles are assigned by KoreLumina, not changed in the browser.");
+    return;
+  }
   currentRole = role;
   try { window.localStorage.setItem("korelumina:role", role); } catch {}
   // Reflect into auth provider if signed in so entitlements stay consistent.

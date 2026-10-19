@@ -4,7 +4,7 @@ import { Check, Sparkles, Crown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useWorkspace } from "@/context/WorkspaceContext";
-import { setCurrentRole, type WorkspaceRole } from "@/services/workspaceAccessService";
+import { roleSwitchingAllowed, setCurrentRole, type WorkspaceRole } from "@/services/workspaceAccessService";
 import { toast } from "sonner";
 
 export type UpgradeReason = "fullscreen" | "browser" | "slug";
@@ -83,6 +83,16 @@ export function UpgradeModal({
   const copy = REASON_COPY[reason];
 
   const handleCheckout = async (tier: Tier) => {
+    /*
+     * SEC-1b: checkout is simulated. Outside development it must not grant
+     * a plan in the browser; a real payment provider assigns it server-side.
+     */
+    if (!roleSwitchingAllowed) {
+      toast.info("Checkout is not open yet", {
+        description: "Plans will be available once payments are live.",
+      });
+      return;
+    }
     setLoadingTier(tier.id);
     // Simulated checkout: in production this would redirect to Stripe / Paddle.
     await new Promise((r) => setTimeout(r, 900));

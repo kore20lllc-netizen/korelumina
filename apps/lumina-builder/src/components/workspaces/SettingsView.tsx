@@ -6,6 +6,7 @@ import { mockIntegrations, type Integration } from "@/lib/mockData";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { RoleSwitcher } from "@/components/workspaces/settings/RoleSwitcher";
+import { roleSwitchingAllowed } from "@/services/workspaceAccessService";
 import { auth } from "@/providers/auth-registry";
 import { billing } from "@/providers/billing-registry";
 import { team as teamProvider } from "@/providers/team-registry";
@@ -489,7 +490,7 @@ export function SettingsView() {
             )}
             {active === "security" && (
               <Section title="Security">
-                <RoleSwitcher />
+                {roleSwitchingAllowed ? <RoleSwitcher /> : null}
                 <Row label="Two-factor auth"><LuminaButton variant="ghost" size="sm">Enable</LuminaButton></Row>
                 <Row label="Active sessions"><span className="text-[12px] text-muted-foreground">1 device</span></Row>
                 <Row label="Sign out everywhere"><LuminaButton variant="ghost" size="sm" onClick={signOutEverywhere}>Sign out</LuminaButton></Row>
