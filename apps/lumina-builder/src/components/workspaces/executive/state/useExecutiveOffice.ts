@@ -10,7 +10,10 @@ import {
   getRuntimeIdentity,
   getRuntimeProjects,
   getLearningStatus,
+  getMissions,
   getPendingCanonicalReviews,
+  setMissionTaskStatus,
+  verifyMissionBuild,
   runLearningCycleNow,
   type ChiefAgentActivationStatus,
   type ExecutiveOfficeOperations,
@@ -19,6 +22,8 @@ import {
   type RuntimeIdentity,
   type RuntimeProject,
   type LearningStatus,
+  type MissionRecord,
+  type MissionTaskRecord,
   type PendingCanonicalReview,
 } from "@/services/executiveOfficeService";
 
@@ -55,6 +60,10 @@ export interface ExecutiveOfficeState {
   lifecycle: Loaded<KnowledgeLifecycle>;
   projects: Loaded<RuntimeProject[]>;
   identity: Loaded<RuntimeIdentity>;
+  missions: Loaded<MissionRecord[]>;
+  /* MS-5: owner evidence being recorded, and failures, keyed per action. */
+  missionBusy: Record<string, string>;
+  missionErrors: Record<string, string>;
   pendingQuestion: PendingQuestion | null;
   unanswered: UnansweredQuestion[];
   deciding: Record<string, "approve" | "reject">;
@@ -74,6 +83,9 @@ let state: ExecutiveOfficeState = {
   lifecycle: { status: "loading" },
   projects: { status: "loading" },
   identity: { status: "loading" },
+  missions: { status: "loading" },
+  missionBusy: {},
+  missionErrors: {},
   pendingQuestion: null,
   unanswered: [],
   deciding: {},
@@ -97,7 +109,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity">(
+function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity" | "missions">(
   key: K,
   read: () => Promise<unknown>,
 ) {
@@ -128,6 +140,7 @@ export async function refreshExecutiveOffice() {
       load("lifecycle", getKnowledgeLifecycle),
       load("projects", getRuntimeProjects),
       load("identity", getRuntimeIdentity),
+      load("missions", getMissions),
     ]);
   } finally {
     refreshing = false;
@@ -202,6 +215,63 @@ export async function decideApproval(
   }
 
   return succeeded;
+}
+
+/*
+ * MS-5: the owner's mission evidence. `key` identifies the control (a task,
+ * or a mission's build check) so only that control shows progress or the
+ * reason Runtime refused.
+ */
+async function recordMissionEvidence(
+  key: string,
+  label: string,
+  record: () => Promise<unknown>,
+): Promise<boolean> {
+  if (state.missionBusy[key]) return false;
+  const { [key]: _cleared, ...otherErrors } = state.missionErrors;
+  publish({ missionBusy: { ...state.missionBusy, [key]: label }, missionErrors: otherErrors });
+
+  let succeeded = false;
+  try {
+    await record();
+    succeeded = true;
+  } catch (error) {
+    publish({ missionErrors: { ...state.missionErrors, [key]: errorMessage(error) } });
+  } finally {
+    await refreshExecutiveOffice();
+    const { [key]: _done, ...stillBusy } = state.missionBusy;
+    publish({ missionBusy: stillBusy });
+  }
+  return succeeded;
+}
+
+export function missionTaskKey(missionId: string, taskId: string): string {
+  return `${missionId}:task:${taskId}`;
+}
+
+export function missionBuildKey(missionId: string): string {
+  return `${missionId}:build`;
+}
+
+export function updateMissionTask(
+  missionId: string,
+  taskId: string,
+  status: MissionTaskRecord["status"],
+  reason?: string,
+): Promise<boolean> {
+  return recordMissionEvidence(missionTaskKey(missionId, taskId), status, () =>
+    setMissionTaskStatus(missionId, taskId, status, reason),
+  );
+}
+
+export function recordMissionBuild(
+  missionId: string,
+  sha: string,
+  result: "passed" | "failed",
+): Promise<boolean> {
+  return recordMissionEvidence(missionBuildKey(missionId), result, () =>
+    verifyMissionBuild(missionId, sha, result),
+  );
 }
 
 export async function learnNow(): Promise<void> {

@@ -23,10 +23,8 @@ import {
   executiveMaterial,
   lighting,
 } from "../../knowledge-v3/theme/appearance";
-import {
-  currentMission,
-  type PreviewTone,
-} from "../design/executiveDesignPreview";
+import type { PreviewTone } from "../design/executiveDesignPreview";
+import { currentMission } from "../state/missionView";
 import {
   DesignPreviewBadge,
   NotWiredButton,
@@ -51,7 +49,7 @@ import {
  * EW-1: Chief Agent status, autonomy, learning, approvals, Runtime, and the
  * three metrics read Runtime; the headline is the live briefing (EW-1b).
  * Security reads how Runtime identifies the owner (SEC-1d). The current
- * mission is still the design-preview snapshot.
+ * mission reads Runtime missions (MS-5).
  */
 
 type Operation = {
@@ -229,6 +227,15 @@ function AgentMark({ tone }: { tone: PreviewTone }) {
 function Identity({ office }: { office: ExecutiveOfficeState }) {
   const briefing = useExecutiveBriefing();
   const activation = office.activation;
+  const deckCurrent = office.missions.status === "ok" ? currentMission(office.missions.data) : null;
+  const deckMission =
+    office.missions.status === "ok"
+      ? deckCurrent
+        ? `${deckCurrent.id} · ${deckCurrent.title}`
+        : "None in progress"
+      : office.missions.status === "error"
+        ? "Unreadable"
+        : "Reading…";
   const autonomy =
     activation.status === "ok"
       ? activation.data.active
@@ -277,7 +284,7 @@ function Identity({ office }: { office: ExecutiveOfficeState }) {
           The Chief Agent reasons and proposes. It cannot approve, execute, delegate, or spend (ADR-0041). You decide.
         </p>
         <div className="text-[10px] uppercase tracking-[0.14em] text-sky-300/60">
-          Current mission · <span className="text-amber-200">{currentMission.title}</span>
+          Current mission · <span className="text-amber-200">{deckMission}</span>
         </div>
         <div className="flex flex-wrap gap-2">
           <NotWiredButton tone="warning">Suspend</NotWiredButton>

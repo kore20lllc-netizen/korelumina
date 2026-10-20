@@ -101,6 +101,8 @@ export interface LearningCycleRecord {
   completedAt?: number;
   commits: Array<{ sha: string; subject: string }>;
   reasons: string[];
+  /* MS-2: commits this cycle attached to missions. */
+  missionLinks?: Array<{ missionId: string; sha: string; result: string; reason?: string }>;
   learning?: {
     recordId?: string;
     repositoryPath?: string;
@@ -527,4 +529,120 @@ export async function runLearningCycleNow(): Promise<LearningCycleRecord> {
   }
 
   return body.cycle;
+}
+
+/*
+ * MS-5 (ADR-0044): missions are Runtime records. The Executive Office reads
+ * them as they are; for missions in execution it also reads the live
+ * validation checks (MS-4). Task status and build verification are the
+ * owner's evidence, recorded through Runtime.
+ */
+export type MissionState =
+  | "draft"
+  | "planned"
+  | "awaiting_approval"
+  | "approved"
+  | "executing"
+  | "validating"
+  | "completed"
+  | "knowledge_extracted"
+  | "archived"
+  | "blocked"
+  | "cancelled";
+
+export interface MissionTaskRecord {
+  id: string;
+  title: string;
+  acceptanceCriteria: string[];
+  status: "todo" | "done" | "dropped";
+  dropReason?: string;
+  updatedBy?: string;
+  updatedAt?: number;
+}
+
+export interface MissionCheckRecord {
+  id: string;
+  label: string;
+  passed: boolean;
+  detail: string;
+}
+
+export interface MissionRecord {
+  id: string;
+  title: string;
+  description: string;
+  objective: string;
+  type: string;
+  priority: string;
+  owner: string;
+  proposedBy: { id: string; type: string };
+  participants: string[];
+  requiredApprovals: string[];
+  risks: string[];
+  plan: {
+    epics: Array<{ id: string; title: string; tasks: MissionTaskRecord[] }>;
+    validationPlan: string[];
+    requiredDocuments: string[];
+  } | null;
+  state: MissionState;
+  blockedFrom: MissionState | null;
+  linkedCommits: Array<{ sha: string; subject: string; committedAt: number }>;
+  recoveryAnchor: string | null;
+  producedKnowledge: string[];
+  verifications?: Array<{ check: string; sha: string; result: "passed" | "failed"; actor: string; at: number; note?: string }>;
+  history: Array<{ from: MissionState | null; to: MissionState; actor: { id: string; type: string }; at: number; reason?: string }>;
+  createdAt: number;
+  updatedAt: number;
+  /* Live checks, read for missions in execution. */
+  checks?: MissionCheckRecord[];
+}
+
+const IN_EXECUTION: readonly MissionState[] = ["executing", "validating"];
+
+export async function getMissions(): Promise<MissionRecord[]> {
+  const body = await readJson("/api/executive/missions");
+  const missions: MissionRecord[] = Array.isArray(body?.missions) ? body.missions : [];
+
+  return Promise.all(
+    missions.map(async (mission) => {
+      if (!IN_EXECUTION.includes(mission.state)) return mission;
+      try {
+        const validation = await readJson(`/api/executive/missions/${encodeURIComponent(mission.id)}/validation`);
+        return { ...mission, checks: Array.isArray(validation?.checks) ? validation.checks : undefined };
+      } catch {
+        return mission;
+      }
+    }),
+  );
+}
+
+async function missionPost(path: string, body: Record<string, unknown>): Promise<MissionRecord> {
+  const { status, body: answer } = await postJson(path, { actorId: EXECUTIVE_OWNER_ACTOR_ID, ...body });
+  if (status >= 400 || answer?.ok === false || !answer?.mission) {
+    throw new Error(typeof answer?.error === "string" ? answer.error : `Runtime answered ${status}`);
+  }
+  return answer.mission;
+}
+
+export function setMissionTaskStatus(
+  missionId: string,
+  taskId: string,
+  status: MissionTaskRecord["status"],
+  reason?: string,
+): Promise<MissionRecord> {
+  return missionPost(
+    `/api/executive/missions/${encodeURIComponent(missionId)}/tasks/${encodeURIComponent(taskId)}`,
+    { status, ...(reason ? { reason } : {}) },
+  );
+}
+
+export function verifyMissionBuild(
+  missionId: string,
+  sha: string,
+  result: "passed" | "failed",
+): Promise<MissionRecord> {
+  return missionPost(
+    `/api/executive/missions/${encodeURIComponent(missionId)}/verifications`,
+    { check: "build", sha, result },
+  );
 }

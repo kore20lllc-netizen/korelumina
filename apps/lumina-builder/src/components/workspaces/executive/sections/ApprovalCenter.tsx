@@ -29,17 +29,23 @@ function ExecutiveApprovalCard({
   const deciding = office.deciding[approval.id];
   const failure = office.decisionErrors[approval.id];
   const confidence = approval.metadata?.reasoningConfidence;
+  /* MS-3/MS-5: an approval that carries a mission decides that mission. */
+  const missionId = typeof approval.metadata?.missionId === "string" ? approval.metadata.missionId : null;
+  const missionKind = approval.metadata?.missionProposalKind === "plan" ? "Plan proposal" : "Mission proposal";
 
   return (
     <LuminaFlagshipCard as="article" className="rounded-[20px] p-4">
       <div className="relative z-10 grid gap-3">
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/70">Executive decision</div>
+          <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/70">{missionId ? `${missionKind} · ${missionId}` : "Executive decision"}</div>
           <div className="mt-1 text-base font-semibold text-amber-300">{approval.metadata?.decisionTitle ?? approval.decisionId}</div>
           <div className="mt-0.5 truncate font-mono text-[11px] text-sky-300/50" title={approval.id}>{approval.id}</div>
         </div>
         <dl className="grid gap-2 text-xs">
           {[
+            ...(missionId
+              ? [["Mission", `${missionId} · ${String(approval.metadata?.missionTitle ?? "")} · approving it approves the mission in your name; rejecting returns it to planned.`]]
+              : []),
             ["Question", approval.metadata?.reasoningQuestion ?? "—"],
             ["Chief Agent's proposal", rationale ?? "—"],
             ["Evidence", evidenceCount === null ? "—" : `${evidenceCount} canonical citation${evidenceCount === 1 ? "" : "s"}`],

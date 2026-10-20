@@ -39,7 +39,7 @@
       "elementCount": 7
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx": {
-      "sha256": "df37271893df54decfdf9e6e5a36bf3f6ca858387c3dbaa88108f9dc22d0c874",
+      "sha256": "95229a8cf5637a192bbda64c6c99897a42ee80395432e6f454a4f2337cdf7fb5",
       "elementCount": 12
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx": {
@@ -55,8 +55,8 @@
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx": {
-      "sha256": "6790abd9505b08967362fad85014ecf0dab0dd38db06078252ac6de526f83b63",
-      "elementCount": 7
+      "sha256": "7cdf011be29b710b74db76010876ab40d47268c2c22781097677455be19a1461",
+      "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx": {
       "sha256": "a26aab10bd76c4a365c0335fd02e5e0aae54bcef0c68eee6ab75cd045ff10404",
@@ -71,16 +71,16 @@
       "elementCount": 9
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx": {
-      "sha256": "331df23dc9ebe8f85ff083318e87bdf2351ebc44195988a3ff82d6bf2d8a388e",
-      "elementCount": 27
+      "sha256": "0e23e1b70d3565453ae0e8d1184878516a85d031e85c954f2b443690bc8bbd1c",
+      "elementCount": 20
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx": {
       "sha256": "674e26c13381b73ca5331974c2a7738c07dfe5922aa0b16669796d6a2a99e535",
       "elementCount": 7
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx": {
-      "sha256": "f92d3d1f71227590c8392359c64664489dd75063c18214151a07f59278130b47",
-      "elementCount": 5
+      "sha256": "86bf3ed6cf9ebfeafb7bdfd2f3237f5e54b1947f01e4f62ff4ec598271026154",
+      "elementCount": 33
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx": {
       "sha256": "e512250c771a5e461045509e52ca5af46000a550e7034de7c641dc45d171eccf",

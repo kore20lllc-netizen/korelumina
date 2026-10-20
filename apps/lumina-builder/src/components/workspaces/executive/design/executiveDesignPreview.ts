@@ -14,7 +14,6 @@
 export type PreviewTone = "healthy" | "active" | "warning" | "error";
 
 export const dashboardHealth = [
-  { id: "mission", label: "Mission Health", value: "1 active", detail: "Executive Office (EW)", tone: "active" as PreviewTone },
   { id: "platform", label: "Platform Health", value: "2 high", detail: "Security findings open", tone: "warning" as PreviewTone },
   { id: "runtime", label: "Runtime Health", value: "Online", detail: "Learning check every 30 min", tone: "healthy" as PreviewTone },
   { id: "knowledge", label: "Knowledge Health", value: "24", detail: "Canonical items, 3 learned", tone: "healthy" as PreviewTone },
@@ -25,66 +24,6 @@ export const recommendations = [
   { title: "Write commit bodies that explain why", reason: "Learning Records can only cite reasons that are in the commit.", impact: "Deeper Lessons sections" },
   { title: "Schedule re-certification of Day-0", reason: "Three Learning Records were added since activation.", impact: "Curriculum drift cleared" },
 ];
-
-export const currentMission = {
-  id: "EW",
-  title: "Executive Office",
-  objective: "Give the owner one place to brief, converse with, and govern the Chief Agent.",
-  stage: "Mission",
-  progress: 10,
-  next: "EW-0 design approval",
-};
-
-export const missionLifecycle = ["Vision", "Objective", "Mission", "Execution", "Validation", "Knowledge"] as const;
-
-export const missions = [
-  {
-    id: "CL-1",
-    title: "Continuous learning v1",
-    stage: "Knowledge",
-    progress: 100,
-    tone: "healthy" as PreviewTone,
-    agents: ["Chief Agent"],
-    approvals: 0,
-    risks: ["Capture takes about 22 s while Runtime is busy"],
-    recoveryAnchor: "d7cbbd72",
-    knowledge: ["LR-2026-0001", "LR-2026-0002", "LR-2026-0003"],
-  },
-  {
-    id: "EW",
-    title: "Executive Office",
-    stage: "Mission",
-    progress: 10,
-    tone: "active" as PreviewTone,
-    agents: ["Chief Agent"],
-    approvals: 1,
-    risks: ["Sections without backend stay in design preview"],
-    recoveryAnchor: "d7cbbd72",
-    knowledge: [],
-  },
-  {
-    id: "SEC-1",
-    title: "Pre-customer security hardening",
-    stage: "Objective",
-    progress: 0,
-    tone: "warning" as PreviewTone,
-    agents: [],
-    approvals: 0,
-    risks: ["F-18 API key exposure", "Signed-out developer role"],
-    recoveryAnchor: null,
-    knowledge: [],
-  },
-];
-
-export const planningTree = [
-  { level: "Vision", title: "KoreLumina Vision 2050: enduring engineering capability" },
-  { level: "Roadmap", title: "AI-operated engineering under human governance" },
-  { level: "Objective", title: "Onboard the first paying customer" },
-  { level: "Mission", title: "Pre-customer security hardening (SEC-1)" },
-  { level: "Epic", title: "Runtime and access boundaries" },
-  { level: "Sprint", title: "Security sprint 1" },
-  { level: "Task", title: "Stop passing API keys to project processes (F-18)" },
-] as const;
 
 export const projects = [
   {
@@ -117,17 +56,6 @@ export const memoryLayers = [
   { layer: "Organizational Memory", detail: "Stewarded projections of knowledge", state: "0 records" },
   { layer: "Canonical Knowledge", detail: "Certified, governed knowledge", state: "24 items" },
 ] as const;
-
-export const agents = [
-  { name: "Chief Agent", status: "Active", mission: "Executive Office", workload: "Reasoning, learning", lastActivity: "LR-2026-0003 written", confidence: "0.88 last decision", blocked: "No", approvals: "PROPOSE_ONLY", tone: "healthy" as PreviewTone },
-  { name: "Engineer Agent", status: "Not built", mission: "—", workload: "—", lastActivity: "—", confidence: "—", blocked: "—", approvals: "—", tone: "warning" as PreviewTone },
-];
-
-export const executionItems = [
-  { title: "Learning cycle: CL-1d and CL-1e commits", state: "Completed", detail: "2 commits captured, LR-2026-0003 written", tone: "healthy" as PreviewTone },
-  { title: "Learning cycle: CL-1b and CL-1c commit", state: "Failed, then recovered", detail: "Uncommitted Learning Record blocked capture; fixed in CL-1e", tone: "warning" as PreviewTone },
-  { title: "Chief Agent operations", state: "Propose-only", detail: "No action may execute at this autonomy level (ADR-0041)", tone: "active" as PreviewTone },
-];
 
 export const activity = [
   { at: "Oct 19 · 02:30", type: "Knowledge", title: "LR-2026-0001 and LR-2026-0002 promoted to canonical" },
