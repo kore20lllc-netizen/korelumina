@@ -1,0 +1,147 @@
+{
+  "id": "KP-2026-000070",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792466695025,
+  "updatedAt": 1792467377345,
+  "data": {
+    "id": "KP-2026-000070",
+    "state": "approved",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:7e5095036d151529b152736dfa1c8ba93d929bdd624c036abe7a921788b33310"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0044 — Mission System v1"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0044 — Mission System v1",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0044 — Mission System v1",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:7e5095036d151529b152736dfa1c8ba93d929bdd624c036abe7a921788b33310"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1792466695024,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792466695024,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0044-mission-system-v1.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:7e5095036d151529b152736dfa1c8ba93d929bdd624c036abe7a921788b33310"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0044-mission-system-v1.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "approved",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0044 — Mission System v1",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0044 — Mission System v1",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792466695024,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792466695025
+      },
+      {
+        "state": "compiled",
+        "at": 1792466695025
+      },
+      {
+        "state": "validated",
+        "at": 1792466695025
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792466695025
+      },
+      {
+        "state": "approved",
+        "at": 1792467377345,
+        "reason": "canonical-review:approved"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792466695025
+    },
+    "createdAt": 1792466695025,
+    "updatedAt": 1792467377345,
+    "metadata": {
+      "sourceApprovalStates": [],
+      "review": {
+        "packageId": "KP-2026-000070",
+        "packageVersion": null,
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792467377345,
+        "evidenceConsidered": [
+          "genesis-evidence:7e5095036d151529b152736dfa1c8ba93d929bdd624c036abe7a921788b33310"
+        ]
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000070",
+          "packageVersion": null,
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792467377345,
+          "evidenceConsidered": [
+            "genesis-evidence:7e5095036d151529b152736dfa1c8ba93d929bdd624c036abe7a921788b33310"
+          ]
+        }
+      ]
+    }
+  }
+}

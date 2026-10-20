@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:c1497bec051e89165b7cb63c7645069acbfc789fddcb1295b21712e0e8afcf2b",
+  "type": "commit",
+  "title": "feat(security): the owner assigns staff roles through Runtime, and every assignment is recorded (SEC-1e, ADR-0043)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695001,
+  "observedAt": 1792460326000,
+  "contentRef": "git:commit:eb3abca5a4cbfd7a6bb40557c856c655198faf3b",
+  "checksum": "sha256:e61947cad2f6db80c582f7a90cd4aa909a4d77c261147f14fbff8ceafa952d9d",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 3,
+    "genesisAdmissionIdentity": "genesis-admission:d34691aff1191b81a48df009d29a08cd4e623788a325493ab7bb5b69682fc5f9",
+    "historicalSourceId": "genesis-source:commit:eb3abca5a4cbfd7a6bb40557c856c655198faf3b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:eb3abca5a4cbfd7a6bb40557c856c655198faf3b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "eb3abca5a4cbfd7a6bb40557c856c655198faf3b",
+      "parentShas": [
+        "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792460326000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792460326000
+      },
+      "subject": "feat(security): the owner assigns staff roles through Runtime, and every assignment is recorded (SEC-1e, ADR-0043)",
+      "body": "Implements ADR-0043 Decision 3. Runtime holds the Supabase service role key and exposes the real user directory and staff role assignment: GET /api/admin/users and POST /api/admin/users/:id/role, for a super admin identified by a verified session (or the configured development identity on this machine) only. A role is written to app_metadata through the Supabase admin API, keeping the user's other app_metadata, and recorded in runtime/governance/role-assignments with from, to, reason, who and when. Refused: callers who are not super admin, header claims, plan roles (assigned by billing, BILL-1), unknown roles, a missing reason, no change, and removing the last super admin. With real sign-in, Admin > Users is now this directory with a reason dialog and recent assignments; the demo directory remains for the development-only mock sign-in. Verified live against a stand-in Supabase admin server; runtime suites 444/444.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx",
+        "apps/lumina-builder/src/services/adminDirectoryService.ts",
+        "apps/lumina-runtime/src/governance/roles/RoleAssignment.ts",
+        "apps/lumina-runtime/src/governance/roles/__tests__/RoleAssignment.test.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/adminUsers.ts"
+      ],
+      "changedPathsByParent": {
+        "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9": [
+          "apps/lumina-builder/src/components/workspaces/admin/UsersTab.tsx",
+          "apps/lumina-builder/src/services/adminDirectoryService.ts",
+          "apps/lumina-runtime/src/governance/roles/RoleAssignment.ts",
+          "apps/lumina-runtime/src/governance/roles/__tests__/RoleAssignment.test.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/adminUsers.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:eb3abca5a4cbfd7a6bb40557c856c655198faf3b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

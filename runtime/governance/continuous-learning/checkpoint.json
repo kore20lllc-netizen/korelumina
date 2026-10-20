@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
-    "committedAt": 1792456391000,
-    "establishedAt": 1792459489489,
-    "basis": "Learning cycle learning-cycle:4ac2e3304a32e57c"
+    "commit": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+    "committedAt": 1792472337000,
+    "establishedAt": 1792472804642,
+    "basis": "Learning cycle learning-cycle:e743e831cf06c55e"
   },
   "cycles": [
     {
@@ -630,6 +630,216 @@
         "removedStatements": 0,
         "model": "gpt-5.5",
         "attemptedAt": 1792459456469,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:6ff2112c6bc3dee6",
+      "trigger": "automatic",
+      "startedAt": 1792466626775,
+      "fromCommit": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+      "replayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+      "admittedSources": 14,
+      "completedAt": 1792466695136,
+      "toCommit": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+      "commits": [
+        {
+          "sha": "eb3abca5a4cbfd7a6bb40557c856c655198faf3b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792460326000,
+          "subject": "feat(security): the owner assigns staff roles through Runtime, and every assignment is recorded (SEC-1e, ADR-0043)"
+        },
+        {
+          "sha": "099591d657d46ba7753cf738dfa8eb60d05c760a",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792460326000,
+          "subject": "chore(knowledge): record Learning Records LR-2026-0012 and LR-2026-0013 and their canonical promotion"
+        },
+        {
+          "sha": "cc9eb943c10f95b80de64b9b5dda9afb4418c229",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792461445000,
+          "subject": "fix(tests): the whole Runtime suite is green and order-independent (F-30)"
+        },
+        {
+          "sha": "65589244f436e69c410801ebb555932ac1a9e306",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792461812000,
+          "subject": "fix(runtime): locks live in runtime-data; the dev data reset works and is development-only"
+        },
+        {
+          "sha": "d23ef5cf4a357961b2cc8f18ed14fecae9252990",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792462400000,
+          "subject": "fix(knowledge): retire the August pipeline certification fixtures from current policy (F-28)"
+        },
+        {
+          "sha": "9cfdc9733594c4b7b010e386a0eb015f904d57bb",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792463109000,
+          "subject": "docs(adr): ADR-0044 Mission System v1 (accepted)"
+        },
+        {
+          "sha": "39e4189fa46653d7744157fb1c6dcec75cc96029",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792463710000,
+          "subject": "feat(missions): missions are governed Runtime records with an enforced lifecycle (MS-1, ADR-0044)"
+        },
+        {
+          "sha": "a55d4b94f32adce90d575ea3e9c6e815059940dd",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792464131000,
+          "subject": "feat(missions): owner commits with a Mission trailer are the mission's execution (MS-2, ADR-0044)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        },
+        {
+          "sha": "92f1c112fad75a9917ccf48ca163c105219804ca",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792465837000,
+          "subject": "feat(missions): Chief Agent mission and plan proposals are decided only through the owner's approval (MS-3, ADR-0044)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        },
+        {
+          "sha": "37d22565a80bd8efab35cfe07c09614b7c275667",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792466566000,
+          "subject": "fix(learning): the first learning check runs a minute after Runtime starts (F-32)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        },
+        {
+          "sha": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792466566000,
+          "subject": "feat(missions): missions complete only on evidence (MS-4, ADR-0044)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0014",
+        "repositoryPath": "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md",
+        "keptStatements": 33,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792466695136,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "a55d4b94f32adce90d575ea3e9c6e815059940dd",
+          "result": "started"
+        },
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "92f1c112fad75a9917ccf48ca163c105219804ca",
+          "result": "linked"
+        },
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "37d22565a80bd8efab35cfe07c09614b7c275667",
+          "result": "linked"
+        },
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:8dbe98078739ed5a",
+      "trigger": "automatic",
+      "startedAt": 1792470917484,
+      "fromCommit": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+      "replayId": "genesis-replay:c95a68d5e65480bea74cef9f284fa07c0148c9b6f1045ae46a00d6be2a054c16",
+      "admittedSources": 1,
+      "completedAt": 1792470979480,
+      "toCommit": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+      "commits": [
+        {
+          "sha": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792470872000,
+          "subject": "feat(executive): Mission, Planning, Agent and Execution sections read Runtime missions (MS-5, ADR-0044)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0015",
+        "repositoryPath": "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md",
+        "keptStatements": 20,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792470979480,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:e743e831cf06c55e",
+      "trigger": "automatic",
+      "startedAt": 1792472717489,
+      "fromCommit": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+      "replayId": "genesis-replay:4b1067607073281ab7e3a4d4b87b3b1bf118c47147e4c626b49e44a271ee29ed",
+      "admittedSources": 1,
+      "completedAt": 1792472787240,
+      "toCommit": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+      "commits": [
+        {
+          "sha": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792472337000,
+          "subject": "fix(executive): the Chief Agent's thinking form has no background and appears instantly (EW-1h)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0016",
+        "repositoryPath": "docs/learning/LR-2026-0016-executive-thinking-form-rendering-and-preload-fix.md",
+        "keptStatements": 14,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792472787240,
         "attempts": 1,
         "state": "WRITTEN",
         "reasons": []

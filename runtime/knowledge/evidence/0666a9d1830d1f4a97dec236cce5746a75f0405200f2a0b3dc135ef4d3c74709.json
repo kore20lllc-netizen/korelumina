@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:0e64f3056d9e92ca1a525f6485e4854cc1ebd5e967b06942d8071c350cf46261",
+  "type": "commit",
+  "title": "fix(knowledge): retire the August pipeline certification fixtures from current policy (F-28)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695016,
+  "observedAt": 1792462400000,
+  "contentRef": "git:commit:d23ef5cf4a357961b2cc8f18ed14fecae9252990",
+  "checksum": "sha256:3e0ba63e899ada2ccca97053d1fd006caffb6ec1a89a2ae93bf3940bd42abd4b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 6,
+    "genesisAdmissionIdentity": "genesis-admission:76373b14a50bdbcc2c2a67e7343b0b519a0e061b8507d7f0adcdc2227a40ce83",
+    "historicalSourceId": "genesis-source:commit:d23ef5cf4a357961b2cc8f18ed14fecae9252990",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d23ef5cf4a357961b2cc8f18ed14fecae9252990",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d23ef5cf4a357961b2cc8f18ed14fecae9252990",
+      "parentShas": [
+        "65589244f436e69c410801ebb555932ac1a9e306"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792462400000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792462400000
+      },
+      "subject": "fix(knowledge): retire the August pipeline certification fixtures from current policy (F-28)",
+      "body": "Two canonical items, Vision 2050 Autonomous Governance Certification (KP-2026-000029) and Phase 54 Event-Driven Governance Certification (KP-2026-000030), are controlled evidence artifacts created only to certify the knowledge preservation pipeline. Genesis never produced them, so Genesis governance could not take them out of current policy, and their source files were in /tmp and no longer exist: the Chief Agent reasoned with two documents it could not read, and its knowledge count disagreed with Knowledge Operations. Adds canonical retirement records: committed files in runtime/governance/canonical-retirements, decided by a human with a reason (the owner's commit is the approval), which remove canonical ids from current policy only; the items stay in the canonical store with their history. Records not decided by a human or without a real reason are ignored. The owner's record retires the two fixtures. Verified on the owner's records: the Chief Agent's current-policy knowledge goes from 31 to 29, matching Knowledge Operations, with both canonical files still in the store.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/governance/canonical-retirement/CanonicalRetirementLedger.ts",
+        "apps/lumina-runtime/src/governance/canonical-retirement/__tests__/CanonicalRetirementLedger.test.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyCanonicalView.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisRuntimeCanonicalConsumptionView.ts",
+        "runtime/governance/canonical-retirements/2026-10-19-f28-pipeline-certification-fixtures.json"
+      ],
+      "changedPathsByParent": {
+        "65589244f436e69c410801ebb555932ac1a9e306": [
+          "apps/lumina-runtime/src/governance/canonical-retirement/CanonicalRetirementLedger.ts",
+          "apps/lumina-runtime/src/governance/canonical-retirement/__tests__/CanonicalRetirementLedger.test.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisCurrentPolicyCanonicalView.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisRuntimeCanonicalConsumptionView.ts",
+          "runtime/governance/canonical-retirements/2026-10-19-f28-pipeline-certification-fixtures.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d23ef5cf4a357961b2cc8f18ed14fecae9252990"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

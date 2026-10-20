@@ -1,0 +1,61 @@
+{
+  "id": "genesis-evidence:19740ad89f7420752daa3bc23740398ed5bc4ce18c3b74b23d0347b5426cb58d",
+  "type": "commit",
+  "title": "docs(adr): ADR-0044 Mission System v1 (accepted)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695031,
+  "observedAt": 1792463109000,
+  "contentRef": "git:commit:9cfdc9733594c4b7b010e386a0eb015f904d57bb",
+  "checksum": "sha256:a22befa3d90128681f3f54b30e7a08bd063e52a899c146968016381921634560",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 8,
+    "genesisAdmissionIdentity": "genesis-admission:19e1057223ef18fd511098ad66df1b6886b7ed59c7a76f1fa3205451b5865440",
+    "historicalSourceId": "genesis-source:commit:9cfdc9733594c4b7b010e386a0eb015f904d57bb",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9cfdc9733594c4b7b010e386a0eb015f904d57bb",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9cfdc9733594c4b7b010e386a0eb015f904d57bb",
+      "parentShas": [
+        "d23ef5cf4a357961b2cc8f18ed14fecae9252990"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792463109000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792463109000
+      },
+      "subject": "docs(adr): ADR-0044 Mission System v1 (accepted)",
+      "body": "Missions become governed Runtime records following the approved Chief Agent Mission System: the Chief Agent or the owner proposes and plans, only the owner approves, owner commits with a Mission trailer are the execution, validation and completion are evidence-based, knowledge extraction completes the lifecycle through Learning Records, the Chief Agent's authority stays at PROPOSE_ONLY, the Agent and Execution centers show only what exists, and the external Mission Board is superseded. Implemented by MS-1 to MS-6.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/adr/ADR-0044-mission-system-v1.md"
+      ],
+      "changedPathsByParent": {
+        "d23ef5cf4a357961b2cc8f18ed14fecae9252990": [
+          "docs/adr/ADR-0044-mission-system-v1.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9cfdc9733594c4b7b010e386a0eb015f904d57bb"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

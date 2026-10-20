@@ -1,0 +1,183 @@
+{
+  "id": "MS-2026-0002",
+  "title": "Wire the Executive Office Mission Section",
+  "description": "Wire the Executive Office Mission Center to the Runtime mission system so the owner can see current missions, mission lifecycle state, plans, priorities, approvals, and recent mission activity from governed records. The work must preserve propose-only Chief Agent behavior: the Chief Agent may propose missions and plans, but owner approval remains required before decisions take effect.",
+  "objective": "Turn the Executive Office Mission section from design preview into a live Runtime-backed mission command surface for viewing, proposing, planning, and tracking governed missions.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "chief-agent",
+    "type": "chief-agent"
+  },
+  "participants": [],
+  "relatedRepositories": [],
+  "relatedServices": [],
+  "requiredApprovals": [
+    "approval:decision:reasoning:executive-office:mvg3xz24-tgsoo9"
+  ],
+  "risks": [
+    "Mission System v1 has live operational evidence but some related commits are still awaiting learning and canonical review.",
+    "Mission proposals could be confused with approved work unless the UI clearly separates draft, proposed, approved, active, completed, rejected, and blocked states.",
+    "Runtime mission lifecycle rules must be enforced server-side, not only in the Builder UI.",
+    "The Executive Office UI contract may need updates to preserve the approved design while replacing preview content with live data."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Confirm governed mission contract",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Review Mission System v1 Runtime records and documentation before wiring",
+            "acceptanceCriteria": [
+              "Mission lifecycle states, owner approval gates, proposal records, and plan records are identified from governed or owner-approved sources.",
+              "Any unlearned Mission System material is treated as implementation context only until learning and review complete.",
+              "The Mission Center wiring scope is documented before code changes begin."
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Define the Executive Office Mission Center data contract",
+            "acceptanceCriteria": [
+              "The Builder service contract lists every Runtime field the Mission Center will read.",
+              "The contract distinguishes read-only mission visibility from owner-approved mutating actions.",
+              "Unavailable Runtime fields have explicit fallback behavior and are not guessed."
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Implement live Mission Center reads",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Add Runtime-backed mission record loading to Executive Office state",
+            "acceptanceCriteria": [
+              "Mission Center reads mission records from Runtime instead of preview fixtures.",
+              "Mission records show mission id, title, priority, status, proposer, plan summary, timestamps, and current approval state when available.",
+              "Loading, empty, unavailable, and error states are visible and do not imply nonexistent missions."
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Render mission portfolio and mission detail views",
+            "acceptanceCriteria": [
+              "The Mission Center lists current missions in a clear priority and lifecycle order.",
+              "Selecting a mission shows its objective, description, plan, task count, lifecycle state, and related activity when available.",
+              "The existing Executive Office visual language is preserved while removing the design-preview label from live portions only."
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Wire governed mission proposal and plan actions",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Connect Chief Agent mission proposal output to owner approval flow",
+            "acceptanceCriteria": [
+              "Mission proposals created from Chief Agent reasoning remain proposed records until owner approval.",
+              "The UI clearly labels proposed missions as awaiting owner decision.",
+              "Approving or rejecting a proposed mission uses the existing Executive Office approval pattern where available."
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E3.T2",
+            "title": "Connect mission plan proposal handling",
+            "acceptanceCriteria": [
+              "Plan proposals for eligible missions are displayed with tasks and acceptance criteria.",
+              "Plan proposals do not mutate approved mission execution without owner approval.",
+              "Rejected plan proposals retain rejection reason visibility where Runtime provides it."
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E4",
+        "title": "Validation, certification, and learning",
+        "tasks": [
+          {
+            "id": "E4.T1",
+            "title": "Add tests and UI contract coverage",
+            "acceptanceCriteria": [
+              "Runtime-backed Mission Center loading is covered by automated tests or equivalent validation.",
+              "Mission proposal and plan proposal states are covered for pending, approved, and rejected outcomes where supported.",
+              "The Executive Office certified UI contract is updated if the approved surface changes."
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E4.T2",
+            "title": "Preserve mission learning and documentation",
+            "acceptanceCriteria": [
+              "The mission records implementation decisions, validation results, and follow-up risks.",
+              "Knowledge preservation is completed before the mission is considered done.",
+              "Any canonical-review or learning follow-up is listed explicitly rather than silently assumed complete."
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "chief-agent",
+        "type": "chief-agent"
+      },
+      "at": 1792465977431
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "chief-agent",
+        "type": "chief-agent"
+      },
+      "at": 1792465977431
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "chief-agent",
+        "type": "chief-agent"
+      },
+      "at": 1792465977433,
+      "reason": "Chief Agent mission proposal"
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792472533194,
+      "reason": "Rejected through approval:decision:reasoning:executive-office:mvg3xz24-tgsoo9: it was a test"
+    }
+  ],
+  "createdAt": 1792465977431,
+  "updatedAt": 1792472533194
+}

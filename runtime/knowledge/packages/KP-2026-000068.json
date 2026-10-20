@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000068",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792466694918,
+  "updatedAt": 1792466694951,
+  "data": {
+    "id": "KP-2026-000068",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0012 — Test store isolation, role verification, and canonical rehydration fixes",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:2fe1938b7b87140620e0168fbcb3d6a66fb861f2ddb985096262109537b1f8a4"
+          ],
+          "genesisReplay": [
+            "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+          ]
+        },
+        "extractedAt": 1792466694917,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792466694917,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+          "checksum": "sha256:300bffd2b4e8a4072cb699dae9a5c278e8c71b619a73c673d1c588c78bf50eb3",
+          "capturedAt": 1792466694909,
+          "observedAt": 1792460326000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+            "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+            "genesisManifestIndex": 0,
+            "genesisAdmissionIdentity": "genesis-admission:0449d2c9ad40926b9a0458db779877f597727da1837de94169ea6dd89d78a04d",
+            "historicalSourceId": "genesis-source:document:derived:2fe1938b7b87140620e0168fbcb3d6a66fb861f2ddb985096262109537b1f8a4",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0012 — Test store isolation, role verification, and canonical rehydration fixes",
+              "status": "Approved",
+              "approvalDate": "2026-10-20",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792466694918,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792466694918,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792466694917,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792466694918
+      },
+      {
+        "state": "compiled",
+        "at": 1792466694918
+      },
+      {
+        "state": "validated",
+        "at": 1792466694918
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792466694918
+      },
+      {
+        "state": "approved",
+        "at": 1792466694921,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792466694951,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792466694918
+    },
+    "createdAt": 1792466694918,
+    "updatedAt": 1792466694951,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792466694921
+      },
+      "review": {
+        "packageId": "KP-2026-000068",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792466694921,
+        "evidenceConsidered": [
+          "genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000068",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792466694921,
+          "evidenceConsidered": [
+            "genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792466694921,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792466694921,
+          "packageIds": [
+            "KP-2026-000068"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000068",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792466694951,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:9bbeb25e1a67091e4faeff89b9f16dae6939b9343091e1bb797680cc4f4e5345"
+        ]
+      }
+    }
+  }
+}

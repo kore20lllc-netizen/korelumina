@@ -1,0 +1,87 @@
+{
+  "id": "genesis-evidence:425d6dc85ea099420835fa409fb7a7f66415e5cbdb09f3a025e9371707d51274",
+  "type": "commit",
+  "title": "feat(missions): Chief Agent mission and plan proposals are decided only through the owner's approval (MS-3, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695044,
+  "observedAt": 1792465837000,
+  "contentRef": "git:commit:92f1c112fad75a9917ccf48ca163c105219804ca",
+  "checksum": "sha256:3e980ca0af48f0c7b29cf9f302d0f57c0774c3fd1164ac00505a14790378ddd5",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 11,
+    "genesisAdmissionIdentity": "genesis-admission:d1080f119f5570de1689cee82e5fb33e2ce396a268f37d8cdb4fe2dbc3130661",
+    "historicalSourceId": "genesis-source:commit:92f1c112fad75a9917ccf48ca163c105219804ca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:92f1c112fad75a9917ccf48ca163c105219804ca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "92f1c112fad75a9917ccf48ca163c105219804ca",
+      "parentShas": [
+        "a55d4b94f32adce90d575ea3e9c6e815059940dd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792465837000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792465837000
+      },
+      "subject": "feat(missions): Chief Agent mission and plan proposals are decided only through the owner's approval (MS-3, ADR-0044)",
+      "body": "Implements ADR-0044 Decision 2 for proposals. A Chief Agent reply may carry a missionProposal (a new mission, or a plan for an existing draft or planned mission); Runtime records it as the Chief Agent and submits it, and the reply's existing approval addressed to the owner carries the mission id. Deciding that approval decides the mission, and deciding the mission from its route decides the approval, so there is one gate. A mission that cannot be approved leaves its approval undecided; an approval addressed to an agent can never approve a mission; nothing is proposed from a deny or without an approver; malformed proposals are dropped with the reason kept and never fail the reply. Open missions join the Chief Agent's operational state so it can plan them by id. Runtime suites 1560/1560.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/approval/ExecutiveApprovalDecisionService.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionProposal.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+        "apps/lumina-runtime/src/executive/mission/__tests__/MissionProposal.test.ts",
+        "apps/lumina-runtime/src/executive/mission/index.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentOperationalState.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/TextGenerationChiefAgentReasoningProvider.test.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveApproval.ts",
+        "apps/lumina-runtime/src/routes/executiveMission.ts"
+      ],
+      "changedPathsByParent": {
+        "a55d4b94f32adce90d575ea3e9c6e815059940dd": [
+          "apps/lumina-runtime/src/executive/approval/ExecutiveApprovalDecisionService.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionProposal.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+          "apps/lumina-runtime/src/executive/mission/__tests__/MissionProposal.test.ts",
+          "apps/lumina-runtime/src/executive/mission/index.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentOperationalState.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDecisionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/TextGenerationChiefAgentReasoningProvider.test.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveApproval.ts",
+          "apps/lumina-runtime/src/routes/executiveMission.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:92f1c112fad75a9917ccf48ca163c105219804ca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

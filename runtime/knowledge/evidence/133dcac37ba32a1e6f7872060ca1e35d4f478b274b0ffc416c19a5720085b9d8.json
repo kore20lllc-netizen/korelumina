@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:291718cd81ba157c89c69ac4f7c7f9eb56a20a8803c1d41c7c4433dbbfdb3930",
+  "type": "commit",
+  "title": "fix(tests): the whole Runtime suite is green and order-independent (F-30)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695006,
+  "observedAt": 1792461445000,
+  "contentRef": "git:commit:cc9eb943c10f95b80de64b9b5dda9afb4418c229",
+  "checksum": "sha256:ac6acd62e5af5288b6f9fe7ff5ae5055d3736ca220d39ccbec8059df8a014a43",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 4,
+    "genesisAdmissionIdentity": "genesis-admission:ad7a43bc01cde765797e61269c85ac6f9357551044506b6da6db2ffaaa27b297",
+    "historicalSourceId": "genesis-source:commit:cc9eb943c10f95b80de64b9b5dda9afb4418c229",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cc9eb943c10f95b80de64b9b5dda9afb4418c229",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cc9eb943c10f95b80de64b9b5dda9afb4418c229",
+      "parentShas": [
+        "099591d657d46ba7753cf738dfa8eb60d05c760a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792461445000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792461445000
+      },
+      "subject": "fix(tests): the whole Runtime suite is green and order-independent (F-30)",
+      "body": "The last 10 failing Runtime tests were test faults, not product faults. Seven canonicalization-gate tests (awaiting-review, rejected, remediation-required, unproven or inconsistent packages cannot become canonical; memory receives only canonical output) asserted an empty canonical store after a refusal, but every test opened the same per-process store, which an earlier test had already promoted into; the gates were refusing correctly throughout. Each test now gets its own store. Three Mission Ownership tests read the repository's Chief Agent Operating Model from the current directory and failed unless run from the repository root; they now resolve the root. Full Runtime suite: 1,529 of 1,529 from apps/lumina-runtime with no environment variables, and the repository's runtime and docs byte-for-byte unchanged.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipDefaultManifestAdmission.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipSectionActivation.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionService.test.ts"
+      ],
+      "changedPathsByParent": {
+        "099591d657d46ba7753cf738dfa8eb60d05c760a": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipDefaultManifestAdmission.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/M51MissionOwnershipSectionActivation.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionOrganizationalMemory.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/promotion/__tests__/GovernedCanonicalPromotionService.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cc9eb943c10f95b80de64b9b5dda9afb4418c229"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

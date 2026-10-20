@@ -30,7 +30,9 @@
             "acceptanceCriteria": [
               "Lifecycle enforced with authority by step"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792466695512
           },
           {
             "id": "E1.T2",
@@ -38,7 +40,9 @@
             "acceptanceCriteria": [
               "Mission trailers attach owner commits"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792466695649
           },
           {
             "id": "E1.T3",
@@ -46,7 +50,9 @@
             "acceptanceCriteria": [
               "Proposals reach the owner as approvals"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792466695670
           },
           {
             "id": "E1.T4",
@@ -54,7 +60,9 @@
             "acceptanceCriteria": [
               "Completion only on evidence"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792466695689
           }
         ]
       },
@@ -68,7 +76,9 @@
             "acceptanceCriteria": [
               "No design-preview data left"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792471834155
           },
           {
             "id": "E2.T2",
@@ -76,7 +86,9 @@
             "acceptanceCriteria": [
               "Open tickets become missions"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792471839693
           }
         ]
       }
@@ -89,11 +101,40 @@
       "docs/adr/ADR-0044-mission-system-v1.md"
     ]
   },
-  "state": "approved",
+  "state": "validating",
   "blockedFrom": null,
-  "linkedCommits": [],
-  "recoveryAnchor": null,
-  "producedKnowledge": [],
+  "linkedCommits": [
+    {
+      "sha": "a55d4b94f32adce90d575ea3e9c6e815059940dd",
+      "subject": "feat(missions): owner commits with a Mission trailer are the mission's execution (MS-2, ADR-0044)",
+      "committedAt": 1792464131000
+    },
+    {
+      "sha": "92f1c112fad75a9917ccf48ca163c105219804ca",
+      "subject": "feat(missions): Chief Agent mission and plan proposals are decided only through the owner's approval (MS-3, ADR-0044)",
+      "committedAt": 1792465837000
+    },
+    {
+      "sha": "37d22565a80bd8efab35cfe07c09614b7c275667",
+      "subject": "fix(learning): the first learning check runs a minute after Runtime starts (F-32)",
+      "committedAt": 1792466566000
+    },
+    {
+      "sha": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+      "subject": "feat(missions): missions complete only on evidence (MS-4, ADR-0044)",
+      "committedAt": 1792466566000
+    },
+    {
+      "sha": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+      "subject": "feat(executive): Mission, Planning, Agent and Execution sections read Runtime missions (MS-5, ADR-0044)",
+      "committedAt": 1792470872000
+    }
+  ],
+  "recoveryAnchor": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+  "producedKnowledge": [
+    "LR-2026-0014",
+    "LR-2026-0015"
+  ],
   "history": [
     {
       "from": null,
@@ -130,8 +171,63 @@
         "type": "human"
       },
       "at": 1792464087308
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792466723507,
+      "reason": "First linked commit a55d4b94: feat(missions): owner commits with a Mission trailer are the mission's execution (MS-2, ADR-0044)"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792471839694,
+      "reason": "Every planned task is done or dropped"
     }
   ],
   "createdAt": 1792464087272,
-  "updatedAt": 1792464087308
+  "updatedAt": 1792472804643,
+  "validation": {
+    "evaluatedAt": 1792472804643,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "6 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": false,
+        "detail": "No build verification for 298ed3fb."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 1 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 298ed3fb."
+      }
+    ]
+  }
 }

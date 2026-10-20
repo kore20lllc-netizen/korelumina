@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:f7cd0eb18cdf9e91d52e1cb992b352af99ee04aaafecac2a5c8ba2843cd7abd2",
+  "type": "commit",
+  "title": "fix(learning): the first learning check runs a minute after Runtime starts (F-32)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695048,
+  "observedAt": 1792466566000,
+  "contentRef": "git:commit:37d22565a80bd8efab35cfe07c09614b7c275667",
+  "checksum": "sha256:1efa28bdf17c8a2841323c314b530a22e7e3a78bdbe4a370e53b4bc4c82bb8f4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 12,
+    "genesisAdmissionIdentity": "genesis-admission:3a6fbd79cdfa5ff893871d6832fe787229bf56b57a9c285931ffb2bab8b9fe21",
+    "historicalSourceId": "genesis-source:commit:37d22565a80bd8efab35cfe07c09614b7c275667",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:37d22565a80bd8efab35cfe07c09614b7c275667",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "37d22565a80bd8efab35cfe07c09614b7c275667",
+      "parentShas": [
+        "92f1c112fad75a9917ccf48ca163c105219804ca"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792466566000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792466566000
+      },
+      "subject": "fix(learning): the first learning check runs a minute after Runtime starts (F-32)",
+      "body": "The scheduler only checked after a full 30-minute interval of uptime. During development Runtime restarts with every patch, so no cycle ran after SEC-1d: seven owner commits went unlearned, and MS-2026-0001 never received the commits carrying its Mission trailer. The first check now runs one minute after start, then every interval; stopping cancels it and an interval of 0 still turns checks off.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningScheduler.ts",
+        "apps/lumina-runtime/src/continuous-learning/__tests__/LearningInterval.test.ts"
+      ],
+      "changedPathsByParent": {
+        "92f1c112fad75a9917ccf48ca163c105219804ca": [
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningScheduler.ts",
+          "apps/lumina-runtime/src/continuous-learning/__tests__/LearningInterval.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:37d22565a80bd8efab35cfe07c09614b7c275667"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

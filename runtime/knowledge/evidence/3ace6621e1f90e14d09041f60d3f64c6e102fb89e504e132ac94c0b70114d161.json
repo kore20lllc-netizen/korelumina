@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:75d4ae161e6278b5f2024edb66b0cb26305b6dbd6a0ee37999e35fab91980872",
+  "type": "commit",
+  "title": "feat(missions): owner commits with a Mission trailer are the mission's execution (MS-2, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695040,
+  "observedAt": 1792464131000,
+  "contentRef": "git:commit:a55d4b94f32adce90d575ea3e9c6e815059940dd",
+  "checksum": "sha256:94c03af03767f7f6e73d77cf18954f0314f6bf96f57161606d2e659a7c3b8eea",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 10,
+    "genesisAdmissionIdentity": "genesis-admission:6f2f7df5a18ead60252934304a5d1ef2744f9565c2357787fcbb056f163afdba",
+    "historicalSourceId": "genesis-source:commit:a55d4b94f32adce90d575ea3e9c6e815059940dd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a55d4b94f32adce90d575ea3e9c6e815059940dd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a55d4b94f32adce90d575ea3e9c6e815059940dd",
+      "parentShas": [
+        "39e4189fa46653d7744157fb1c6dcec75cc96029"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792464131000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792464131000
+      },
+      "subject": "feat(missions): owner commits with a Mission trailer are the mission's execution (MS-2, ADR-0044)",
+      "body": "Implements ADR-0044 Decision 3. The learning window reads Mission trailers with git's own trailer parser. After each captured cycle, commits attach to their missions: an approved mission starts executing on its first linked commit, the latest linked commit is its recovery anchor, the window's Learning Record is recorded as the mission's produced knowledge (including one written on retry), and a completed mission reaches knowledge extracted once that record is canonical. Nothing attaches to draft, unapproved or unknown missions or from a held window, and a linking failure is recorded without failing learning. Tested against real git commits; runtime suites 679/679.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+        "apps/lumina-runtime/src/continuous-learning/GitLearningWindow.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+        "apps/lumina-runtime/src/executive/mission/__tests__/MissionWorkLinking.test.ts",
+        "apps/lumina-runtime/src/executive/mission/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "runtime/executive/missions/MS-2026-0001.json"
+      ],
+      "changedPathsByParent": {
+        "39e4189fa46653d7744157fb1c6dcec75cc96029": [
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+          "apps/lumina-runtime/src/continuous-learning/GitLearningWindow.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+          "apps/lumina-runtime/src/executive/mission/__tests__/MissionWorkLinking.test.ts",
+          "apps/lumina-runtime/src/executive/mission/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "runtime/executive/missions/MS-2026-0001.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a55d4b94f32adce90d575ea3e9c6e815059940dd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

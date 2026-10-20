@@ -1,0 +1,82 @@
+{
+  "id": "MS-2026-0005",
+  "title": "Remove the dead InstitutionalMemoryZone file",
+  "description": "Imported by MS-6 from runtime/executive/mission-imports/2026-10-20-ms6-open-tickets.json. Source ticket: F-33.",
+  "objective": "The Builder typechecks clean: the only TypeScript errors come from a Knowledge Operations file nothing imports.",
+  "objectiveId": null,
+  "type": "maintenance",
+  "priority": "low",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Deleting a file needs the owner's approval. The file is under neither certified UI contract."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Cleanup",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Confirm nothing imports InstitutionalMemoryZone.tsx, then remove it",
+            "acceptanceCriteria": [
+              "No import of the file anywhere in the Builder",
+              "The owner approves the deletion"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Builder typecheck is clean",
+            "acceptanceCriteria": [
+              "tsc -p apps/lumina-builder/tsconfig.app.json --noEmit reports no errors"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Both UI contracts still verify"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895276
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895276
+    }
+  ],
+  "createdAt": 1792473895276,
+  "updatedAt": 1792473895276
+}

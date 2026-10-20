@@ -1,0 +1,102 @@
+{
+  "id": "MS-2026-0003",
+  "title": "Plan roles assigned only by billing",
+  "description": "Imported by MS-6 from runtime/executive/mission-imports/2026-10-20-ms6-open-tickets.json. Source ticket: BILL-1.",
+  "objective": "A paid plan grants its role only through the payment provider's verified webhook, never from the browser (ADR-0043 Decision 3).",
+  "objectiveId": null,
+  "type": "security",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The payment provider is not chosen; nothing else in this mission can start before that decision."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Billing",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Choose the payment provider",
+            "acceptanceCriteria": [
+              "The owner records the provider and why"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Webhook route that verifies the provider's signature",
+            "acceptanceCriteria": [
+              "Unsigned or wrongly signed events are refused",
+              "Replayed events change nothing"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "Plan role written to app_metadata with an audit record",
+            "acceptanceCriteria": [
+              "pro, business and enterprise are set only by the webhook",
+              "Every change records from, to, event and time"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T4",
+            "title": "Retire the simulated checkout from every non-development path",
+            "acceptanceCriteria": [
+              "Production builds cannot grant a plan role client-side"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass",
+      "A signed test event from the provider grants the plan role"
+    ],
+    "requiredDocuments": [
+      "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+    ]
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895268
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895268
+    }
+  ],
+  "createdAt": 1792473895268,
+  "updatedAt": 1792473895268
+}

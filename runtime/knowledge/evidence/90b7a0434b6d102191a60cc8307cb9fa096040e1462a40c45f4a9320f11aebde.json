@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:02a1064c4cc41ecda07f55881cb2d48ad0bf84d951b94a962c06de08c6aba181",
+  "type": "commit",
+  "title": "fix(executive): the Chief Agent's thinking form has no background and appears instantly (EW-1h)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792472787164,
+  "observedAt": 1792472337000,
+  "contentRef": "git:commit:b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+  "checksum": "sha256:8abf155276612823280bf7f996df3b4c22dbbac532641f1a1fa24577fd9f7e9b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:4b1067607073281ab7e3a4d4b87b3b1bf118c47147e4c626b49e44a271ee29ed",
+    "genesisManifestId": "genesis-manifest:314be9fedd9393c9e0e58a831fb864e06b9af95d6040af5c8ac78ed877450e4c",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:2a8c7c175164d521573003fa524533b8d427987e99bd6c091be004699d519d42",
+    "historicalSourceId": "genesis-source:commit:b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+      "parentShas": [
+        "298ed3fb36ee85d735bbe6576daba36e0643199b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792472337000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792472337000
+      },
+      "subject": "fix(executive): the Chief Agent's thinking form has no background and appears instantly (EW-1h)",
+      "body": "The morph video's black background was meant to blend away with mix-blend-screen, but the avatar's glow filter isolates blending, so the black showed as a dark square. Each frame is now drawn to a canvas with black keyed to transparent, so the form shows on any background and the glow follows its shape. The form also started late: a new video loaded and decoded only when a reply began, while the three dots are instant CSS. One shared video now loads when the Executive Office opens and plays only while a thinking avatar is shown. Presentation certified after owner visual approval.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/shared/thinkingForm.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "298ed3fb36ee85d735bbe6576daba36e0643199b": [
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/shared/thinkingForm.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:4b1067607073281ab7e3a4d4b87b3b1bf118c47147e4c626b49e44a271ee29ed"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:314be9fedd9393c9e0e58a831fb864e06b9af95d6040af5c8ac78ed877450e4c"
+    ]
+  }
+}

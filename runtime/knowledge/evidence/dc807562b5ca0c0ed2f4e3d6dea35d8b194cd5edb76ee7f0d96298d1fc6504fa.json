@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:79e3430842f0c564a20b8e172be4bbdf6fedda891a256911a443be723ac6c52e",
+  "type": "commit",
+  "title": "feat(missions): missions are governed Runtime records with an enforced lifecycle (MS-1, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695035,
+  "observedAt": 1792463710000,
+  "contentRef": "git:commit:39e4189fa46653d7744157fb1c6dcec75cc96029",
+  "checksum": "sha256:ba63a795df8adedcfef70d2189c1a2325b6c7bc00899d23be6eab6bce5ca2881",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 9,
+    "genesisAdmissionIdentity": "genesis-admission:e5676261cd533f560502f0537df1f3801d40d4a1904d46a96689ed0e0f6e0d39",
+    "historicalSourceId": "genesis-source:commit:39e4189fa46653d7744157fb1c6dcec75cc96029",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:39e4189fa46653d7744157fb1c6dcec75cc96029",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "39e4189fa46653d7744157fb1c6dcec75cc96029",
+      "parentShas": [
+        "9cfdc9733594c4b7b010e386a0eb015f904d57bb"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792463710000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792463710000
+      },
+      "subject": "feat(missions): missions are governed Runtime records with an enforced lifecycle (MS-1, ADR-0044)",
+      "body": "Implements ADR-0044 Decisions 1 and 2. A mission (MS-YYYY-NNNN) is a committed record in runtime/executive/missions carrying the approved Mission System structure: objective, type, priority, owner (always the Chief Agent), proposer, participants, repositories, services, approvals, risks, a plan of epics and tasks with acceptance criteria, validation plan, linked commits, recovery anchor, produced knowledge and history. The lifecycle is enforced with authority by step: the Chief Agent or the owner creates, plans and submits; only the owner approves, rejects, blocks, unblocks, cancels and archives, with a reason where it matters; executing, validating, completed and knowledge extracted are system steps on evidence (MS-2, MS-4). Every transition is recorded with actor, time and reason. Owner steps are on the human-only executive route list, so agents are refused at the boundary as well as by the lifecycle. Verified live: the Chief Agent created and submitted MS-2026-0001, its approval attempt and an agent posing as human were refused, the owner's approval was recorded; runtime suites 674/674.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/mission/Mission.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionStore.ts",
+        "apps/lumina-runtime/src/executive/mission/__tests__/MissionLifecycle.test.ts",
+        "apps/lumina-runtime/src/executive/mission/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveMission.ts",
+        "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+      ],
+      "changedPathsByParent": {
+        "9cfdc9733594c4b7b010e386a0eb015f904d57bb": [
+          "apps/lumina-runtime/src/executive/mission/Mission.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionStore.ts",
+          "apps/lumina-runtime/src/executive/mission/__tests__/MissionLifecycle.test.ts",
+          "apps/lumina-runtime/src/executive/mission/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveMission.ts",
+          "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:39e4189fa46653d7744157fb1c6dcec75cc96029"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

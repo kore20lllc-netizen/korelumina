@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:8cd4f2adbdc55e4a06bf09eca82486fc6fa0f8bc7d786b1a0ab50d0b1131d1d3",
+  "type": "commit",
+  "title": "feat(missions): missions complete only on evidence (MS-4, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695052,
+  "observedAt": 1792466566000,
+  "contentRef": "git:commit:6e01d8f015caf6cf709cff15dd7a901339903e34",
+  "checksum": "sha256:19201116d5aca6ed2509b18793894bdeccb05d2a103863d4c0d5cceb86fb07d0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 13,
+    "genesisAdmissionIdentity": "genesis-admission:59341cc0e93c5d988b5edfc7c7060c3d7b616c7414a0b52de87456e5fef65808",
+    "historicalSourceId": "genesis-source:commit:6e01d8f015caf6cf709cff15dd7a901339903e34",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:6e01d8f015caf6cf709cff15dd7a901339903e34",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "6e01d8f015caf6cf709cff15dd7a901339903e34",
+      "parentShas": [
+        "37d22565a80bd8efab35cfe07c09614b7c275667"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792466566000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792466566000
+      },
+      "subject": "feat(missions): missions complete only on evidence (MS-4, ADR-0044)",
+      "body": "Implements ADR-0044 Decision 5. Five checks: every task done or dropped by the owner with a reason; the latest linked commit verified by the owner as passing npm run build (a new commit needs its own verification); no linked approval pending; the plan's required documents committed at HEAD; a recovery anchor recorded. Runtime, as the system, moves an executing mission to validating once no task is left and completes it only when every check passes; a failed check keeps it validating. Task status and build verifications are owner-only, enforced at the Runtime boundary too, so the Chief Agent never validates or completes. Missions in execution are re-evaluated after every learning cycle. Runtime suites 1569/1569.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/mission/Mission.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionValidation.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+        "apps/lumina-runtime/src/executive/mission/__tests__/MissionValidation.test.ts",
+        "apps/lumina-runtime/src/executive/mission/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveMission.ts",
+        "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+      ],
+      "changedPathsByParent": {
+        "37d22565a80bd8efab35cfe07c09614b7c275667": [
+          "apps/lumina-runtime/src/executive/mission/Mission.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionValidation.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+          "apps/lumina-runtime/src/executive/mission/__tests__/MissionValidation.test.ts",
+          "apps/lumina-runtime/src/executive/mission/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveMission.ts",
+          "apps/lumina-runtime/src/routes/runtimeBoundary.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:6e01d8f015caf6cf709cff15dd7a901339903e34"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

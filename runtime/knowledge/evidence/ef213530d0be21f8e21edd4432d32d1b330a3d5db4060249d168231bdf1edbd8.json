@@ -1,0 +1,113 @@
+{
+  "id": "genesis-evidence:aca86fdfdc24c4acd7ec16348abe24b4ed9e95d64c2a63b7fe6f9c627afc19da",
+  "type": "commit",
+  "title": "chore(knowledge): record Learning Records LR-2026-0012 and LR-2026-0013 and their canonical promotion",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466694996,
+  "observedAt": 1792460326000,
+  "contentRef": "git:commit:099591d657d46ba7753cf738dfa8eb60d05c760a",
+  "checksum": "sha256:2971e6103473afdce140f88f4b8931ef97cfe3e5b5ac99c789549cd02d1c2aa0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:6bded34f6a2c8cd29dc24e06db1c713d6899d451d05a2cae46ee0aa80b992398",
+    "historicalSourceId": "genesis-source:commit:099591d657d46ba7753cf738dfa8eb60d05c760a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:099591d657d46ba7753cf738dfa8eb60d05c760a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "099591d657d46ba7753cf738dfa8eb60d05c760a",
+      "parentShas": [
+        "eb3abca5a4cbfd7a6bb40557c856c655198faf3b"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792460326000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792460326000
+      },
+      "subject": "chore(knowledge): record Learning Records LR-2026-0012 and LR-2026-0013 and their canonical promotion",
+      "body": "Bookkeeping from continuous learning (ADR-0042): the Learning Records the Chief Agent wrote from the F-25, F-31 and SEC-1b to SEC-1d commits, their evidence, packages, manufacturing runs and canonical items, and the advanced checkpoint. Committed separately so learning windows exclude it as bookkeeping.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+        "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab0fbe0c139b5cd065350f4e254ec24edb3572854a44963936f14333c32a3198b.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ae5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca.json",
+        "runtime/knowledge/evidence/058b62ef8e6ed83afc6e2b7c3b50abbe1329b270693f70c60e3da059b4543e2b.json",
+        "runtime/knowledge/evidence/3eaa549b9d5cc8e647e592e637dc64504179b5e2d6389324be27e7bf2a577217.json",
+        "runtime/knowledge/evidence/489635e889728d3c808131ffccd65180c7a74774731d18b40d273f2d917be6be.json",
+        "runtime/knowledge/evidence/51d32843d126bb482126d931a55e069e9249548abd1f60de0ec24030d058757a.json",
+        "runtime/knowledge/evidence/95eda286aa90595309b73c6fe577cf3bc396f502a287b79dd72e96af3facb3da.json",
+        "runtime/knowledge/evidence/a2ff183939cd02f2f5a521c149282b7034fe304365d983bdde0c929c308032f0.json",
+        "runtime/knowledge/manufacturing-runs/KMR-0424fd5e560adf9fd808.json",
+        "runtime/knowledge/manufacturing-runs/KMR-0607b4aed17360a30518.json",
+        "runtime/knowledge/manufacturing-runs/KMR-1c218e5bc55a91d93156.json",
+        "runtime/knowledge/manufacturing-runs/KMR-1e21403abe757116b638.json",
+        "runtime/knowledge/manufacturing-runs/KMR-42e97dc1f42e50fa78b7.json",
+        "runtime/knowledge/manufacturing-runs/KMR-581b8fa98baf2ce1ecec.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000062.json",
+        "runtime/knowledge/packages/KP-2026-000063.json",
+        "runtime/knowledge/packages/KP-2026-000064.json",
+        "runtime/knowledge/packages/KP-2026-000065.json",
+        "runtime/knowledge/packages/KP-2026-000066.json",
+        "runtime/knowledge/packages/KP-2026-000067.json"
+      ],
+      "changedPathsByParent": {
+        "eb3abca5a4cbfd7a6bb40557c856c655198faf3b": [
+          "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+          "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab0fbe0c139b5cd065350f4e254ec24edb3572854a44963936f14333c32a3198b.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ab95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Ae5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca.json",
+          "runtime/knowledge/evidence/058b62ef8e6ed83afc6e2b7c3b50abbe1329b270693f70c60e3da059b4543e2b.json",
+          "runtime/knowledge/evidence/3eaa549b9d5cc8e647e592e637dc64504179b5e2d6389324be27e7bf2a577217.json",
+          "runtime/knowledge/evidence/489635e889728d3c808131ffccd65180c7a74774731d18b40d273f2d917be6be.json",
+          "runtime/knowledge/evidence/51d32843d126bb482126d931a55e069e9249548abd1f60de0ec24030d058757a.json",
+          "runtime/knowledge/evidence/95eda286aa90595309b73c6fe577cf3bc396f502a287b79dd72e96af3facb3da.json",
+          "runtime/knowledge/evidence/a2ff183939cd02f2f5a521c149282b7034fe304365d983bdde0c929c308032f0.json",
+          "runtime/knowledge/manufacturing-runs/KMR-0424fd5e560adf9fd808.json",
+          "runtime/knowledge/manufacturing-runs/KMR-0607b4aed17360a30518.json",
+          "runtime/knowledge/manufacturing-runs/KMR-1c218e5bc55a91d93156.json",
+          "runtime/knowledge/manufacturing-runs/KMR-1e21403abe757116b638.json",
+          "runtime/knowledge/manufacturing-runs/KMR-42e97dc1f42e50fa78b7.json",
+          "runtime/knowledge/manufacturing-runs/KMR-581b8fa98baf2ce1ecec.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000062.json",
+          "runtime/knowledge/packages/KP-2026-000063.json",
+          "runtime/knowledge/packages/KP-2026-000064.json",
+          "runtime/knowledge/packages/KP-2026-000065.json",
+          "runtime/knowledge/packages/KP-2026-000066.json",
+          "runtime/knowledge/packages/KP-2026-000067.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:099591d657d46ba7753cf738dfa8eb60d05c760a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

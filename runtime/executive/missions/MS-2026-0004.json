@@ -1,0 +1,118 @@
+{
+  "id": "MS-2026-0004",
+  "title": "Executive Office: wire the remaining preview parts",
+  "description": "Imported by MS-6 from runtime/executive/mission-imports/2026-10-20-ms6-open-tickets.json. Source ticket: EW (open parts).",
+  "objective": "No part of the Executive Office shows snapshot data or a control that does nothing.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Recommendations need a real source; until one is decided they stay marked as preview."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Dashboard",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Platform, Runtime and Knowledge health tiles read Runtime",
+            "acceptanceCriteria": [
+              "Each tile shows a live value or says it could not read it"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Decide where recommendations come from, then wire them",
+            "acceptanceCriteria": [
+              "Every recommendation names its source record"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Controls",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Suspend and resume the Chief Agent from the command deck",
+            "acceptanceCriteria": [
+              "Uses PUT /api/executive/activation with a reason",
+              "The command deck and Agent Center show the new state"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Acknowledge critical notifications",
+            "acceptanceCriteria": [
+              "Acknowledgements are Runtime records with who and when"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Projects",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "The platform card reads Runtime instead of the snapshot",
+            "acceptanceCriteria": [
+              "Projects Center shows Live, not Partly live"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Executive Office UI contract certified after owner visual approval"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895273
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792473895273
+    }
+  ],
+  "createdAt": 1792473895273,
+  "updatedAt": 1792473895273
+}

@@ -1,0 +1,309 @@
+{
+  "id": "decision:reasoning:executive-office:mvg3xz24-tgsoo9",
+  "sessionId": "executive-office:mvg3xz24-tgsoo9",
+  "title": "Mission proposal: wire Executive Office Mission section",
+  "rationale": "I propose an owner-review mission to wire the Executive Office Mission section to governed Runtime mission records. Governed knowledge supports Mission Planning as a Chief Agent responsibility and identifies Missions as an Executive Office surface that remained a design preview because Runtime records were not yet available. Live operational state now shows an approved Mission System v1 mission and no pending executive approvals, but the Mission System commits are not yet learned canonical knowledge, so this proposal should await owner approval and should include documentation review before implementation.",
+  "requestedBy": "chief-agent",
+  "status": "rejected",
+  "evidence": [
+    "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+    "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+    "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7",
+    "canonical:document:genesis-evidence:b0fbe0c139b5cd065350f4e254ec24edb3572854a44963936f14333c32a3198b",
+    "operational:activation",
+    "operational:approvals",
+    "operational:learning",
+    "operational:mission:MS-2026-0001"
+  ],
+  "consequences": [
+    "The requested Mission section is the Executive Office Mission Center described in the Executive Office workspace.",
+    "The owner wants a new mission proposal, not a plan amendment for the existing approved Mission System v1 mission.",
+    "Implementation will use governed Runtime mission records and will not treat unlearned operational commits as canonical authority until they are learned and reviewed through the normal process.",
+    "The owner will approve, reject, or revise this mission before work begins."
+  ],
+  "createdAt": 1792465977433,
+  "updatedAt": 1792472533198,
+  "metadata": {
+    "reasoningId": "reasoning:executive-office:mvg3xz24-tgsoo9",
+    "reasoningConfidence": 0.88,
+    "reasoningQuestion": "Propose a mission to wire the Mission section of the Executive Office.",
+    "reasoningDisposition": "review",
+    "executableCandidate": true,
+    "canonicalKnowledgeIds": [
+      "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+      "canonical:document:genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407",
+      "canonical:document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed",
+      "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd",
+      "canonical:document:genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f",
+      "canonical:document:genesis-evidence:3aa38453402ef1a201a50411a350a0719b76a313cea8bb849d6f8fd3f7b695ec",
+      "canonical:document:genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b",
+      "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+      "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+      "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+      "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7",
+      "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+      "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+      "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+      "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+      "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+      "canonical:document:genesis-evidence:ac658b0d4eb486b40fe2fbe965e447becb63d20cfe8b9387822e412e279ad564",
+      "canonical:document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+      "canonical:document:genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565",
+      "canonical:document:genesis-evidence:b0fbe0c139b5cd065350f4e254ec24edb3572854a44963936f14333c32a3198b",
+      "canonical:document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+      "canonical:document:genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e",
+      "canonical:document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e",
+      "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+      "canonical:document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
+      "canonical:document:genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1",
+      "canonical:document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+      "canonical:document:genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca",
+      "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7"
+    ],
+    "organizationalMemoryRecordIds": [],
+    "governedContent": {
+      "includedIds": [
+        "canonical:document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed",
+        "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7",
+        "canonical:document:genesis-evidence:b0fbe0c139b5cd065350f4e254ec24edb3572854a44963936f14333c32a3198b",
+        "canonical:document:genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f",
+        "canonical:document:genesis-evidence:ac658b0d4eb486b40fe2fbe965e447becb63d20cfe8b9387822e412e279ad564",
+        "canonical:document:genesis-evidence:3aa38453402ef1a201a50411a350a0719b76a313cea8bb849d6f8fd3f7b695ec",
+        "canonical:document:genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca",
+        "canonical:document:genesis-evidence:4e21f96a5f8b84ac95ec49888d92d6274c7b5e13be2332c42450de8feb21a641",
+        "canonical:document:genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "truncatedIds": [
+        "canonical:document:genesis-evidence:ac658b0d4eb486b40fe2fbe965e447becb63d20cfe8b9387822e412e279ad564",
+        "canonical:document:genesis-evidence:0284966e9a7b55efebe5e4e59e9df0446462f9df909cd6d7fce13cd7d7b8e407",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "excluded": [
+        {
+          "id": "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+          "reason": "content_ref_not_a_repository_file"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:e49e39aefc38d01e8781f3867105b6709bc3de930cfc450dc5c58e4321b3e344",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:1620d5618ec0f7b423984c3badec54c7f628fa074ddb48a63a631ffca43d81fd",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:acd488814efd4c09ecd5464a90b7a7073056f486ea1ce08992e2c1e12c3940de",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:3aafd4692da8cc80cd5f5c4d27c0099f12a55cd5b3eb58d91bc29395a502375b",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:b3e44ed74f60d9f8df4074f527bc856f40001263e445e5c60f5f98b383cf77ae",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:d74f8d3cf6a35319d5f1ce8618c48c0adf7c3e733f3d140a721d9fe6fa808678",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:evidence:genesis:repository-knowledge-seeding:41e9b381eebc",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:cd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:e162cd2e1e19f15ed461860a29d6895d7ae668730fadac5ffacbeea95d3108e1",
+          "reason": "context_budget_reached"
+        },
+        {
+          "id": "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+          "reason": "context_budget_reached"
+        }
+      ]
+    },
+    "operationalState": {
+      "capturedAt": "2026-10-20T03:12:25.332Z",
+      "entryIds": [
+        "operational:activation",
+        "operational:learning",
+        "operational:learning-cycle:4ac2e3304a32e57c",
+        "operational:learning-cycle:652f69cb20684f86",
+        "operational:learning-cycle:c21a7c56f55422bd",
+        "operational:learning-cycle:5bfe33f3d080f39d",
+        "operational:learning-cycle:e74d2b874becb4ea",
+        "operational:approvals",
+        "operational:decision:reasoning:executive-office:mvf8ynt7-v4pll0",
+        "operational:decision:reasoning:executive-office:mvf9zccv-vn1p0d",
+        "operational:decision:reasoning:executive-office:mvfaifh2-gon9us",
+        "operational:decision:reasoning:executive-office:mvfao8up-3jtm98",
+        "operational:decision:reasoning:executive-office:mvfp84ba-szacrw",
+        "operational:decision:reasoning:executive-office:mvf9iac6-qhf1k9",
+        "operational:canonical-review:KP-2026-000040",
+        "operational:canonical-review:KP-2026-000046",
+        "operational:canonical-review:KP-2026-000062",
+        "operational:mission:MS-2026-0001"
+      ],
+      "unavailable": []
+    },
+    "model": "gpt-5.5",
+    "provider": "text-generation",
+    "routing": {
+      "escalated": false,
+      "escalationReason": null,
+      "confidenceThreshold": 0.6,
+      "attempts": [
+        {
+          "role": "primary",
+          "provider": "openai",
+          "model": "gpt-5.5",
+          "confidence": 0.88,
+          "error": null
+        }
+      ]
+    },
+    "missionProposal": {
+      "title": "Wire the Executive Office Mission Section",
+      "objective": "Turn the Executive Office Mission section from design preview into a live Runtime-backed mission command surface for viewing, proposing, planning, and tracking governed missions.",
+      "description": "Wire the Executive Office Mission Center to the Runtime mission system so the owner can see current missions, mission lifecycle state, plans, priorities, approvals, and recent mission activity from governed records. The work must preserve propose-only Chief Agent behavior: the Chief Agent may propose missions and plans, but owner approval remains required before decisions take effect.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "Mission System v1 has live operational evidence but some related commits are still awaiting learning and canonical review.",
+        "Mission proposals could be confused with approved work unless the UI clearly separates draft, proposed, approved, active, completed, rejected, and blocked states.",
+        "Runtime mission lifecycle rules must be enforced server-side, not only in the Builder UI.",
+        "The Executive Office UI contract may need updates to preserve the approved design while replacing preview content with live data."
+      ],
+      "relatedRepositories": [],
+      "plan": {
+        "epics": [
+          {
+            "title": "Confirm governed mission contract",
+            "tasks": [
+              {
+                "title": "Review Mission System v1 Runtime records and documentation before wiring",
+                "acceptanceCriteria": [
+                  "Mission lifecycle states, owner approval gates, proposal records, and plan records are identified from governed or owner-approved sources.",
+                  "Any unlearned Mission System material is treated as implementation context only until learning and review complete.",
+                  "The Mission Center wiring scope is documented before code changes begin."
+                ]
+              },
+              {
+                "title": "Define the Executive Office Mission Center data contract",
+                "acceptanceCriteria": [
+                  "The Builder service contract lists every Runtime field the Mission Center will read.",
+                  "The contract distinguishes read-only mission visibility from owner-approved mutating actions.",
+                  "Unavailable Runtime fields have explicit fallback behavior and are not guessed."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Implement live Mission Center reads",
+            "tasks": [
+              {
+                "title": "Add Runtime-backed mission record loading to Executive Office state",
+                "acceptanceCriteria": [
+                  "Mission Center reads mission records from Runtime instead of preview fixtures.",
+                  "Mission records show mission id, title, priority, status, proposer, plan summary, timestamps, and current approval state when available.",
+                  "Loading, empty, unavailable, and error states are visible and do not imply nonexistent missions."
+                ]
+              },
+              {
+                "title": "Render mission portfolio and mission detail views",
+                "acceptanceCriteria": [
+                  "The Mission Center lists current missions in a clear priority and lifecycle order.",
+                  "Selecting a mission shows its objective, description, plan, task count, lifecycle state, and related activity when available.",
+                  "The existing Executive Office visual language is preserved while removing the design-preview label from live portions only."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Wire governed mission proposal and plan actions",
+            "tasks": [
+              {
+                "title": "Connect Chief Agent mission proposal output to owner approval flow",
+                "acceptanceCriteria": [
+                  "Mission proposals created from Chief Agent reasoning remain proposed records until owner approval.",
+                  "The UI clearly labels proposed missions as awaiting owner decision.",
+                  "Approving or rejecting a proposed mission uses the existing Executive Office approval pattern where available."
+                ]
+              },
+              {
+                "title": "Connect mission plan proposal handling",
+                "acceptanceCriteria": [
+                  "Plan proposals for eligible missions are displayed with tasks and acceptance criteria.",
+                  "Plan proposals do not mutate approved mission execution without owner approval.",
+                  "Rejected plan proposals retain rejection reason visibility where Runtime provides it."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Validation, certification, and learning",
+            "tasks": [
+              {
+                "title": "Add tests and UI contract coverage",
+                "acceptanceCriteria": [
+                  "Runtime-backed Mission Center loading is covered by automated tests or equivalent validation.",
+                  "Mission proposal and plan proposal states are covered for pending, approved, and rejected outcomes where supported.",
+                  "The Executive Office certified UI contract is updated if the approved surface changes."
+                ]
+              },
+              {
+                "title": "Preserve mission learning and documentation",
+                "acceptanceCriteria": [
+                  "The mission records implementation decisions, validation results, and follow-up risks.",
+                  "Knowledge preservation is completed before the mission is considered done.",
+                  "Any canonical-review or learning follow-up is listed explicitly rather than silently assumed complete."
+                ]
+              }
+            ]
+          }
+        ],
+        "validationPlan": [],
+        "requiredDocuments": []
+      }
+    },
+    "missionId": "MS-2026-0002",
+    "missionTitle": "Wire the Executive Office Mission Section",
+    "missionProposalKind": "mission"
+  }
+}

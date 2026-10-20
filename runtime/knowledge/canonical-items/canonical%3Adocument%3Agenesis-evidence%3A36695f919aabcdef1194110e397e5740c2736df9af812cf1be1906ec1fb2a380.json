@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0013 — Verified Supabase caller identity for Runtime",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:8010c2607d090e05d1a329157e984d53ff24ffdddfd978666faa3a4963d7d6d2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  },
+  "createdAt": 1792466694987,
+  "updatedAt": 1792466694987,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+    "checksum": "sha256:56f21c82dc2cc6e1fadd1f0d4f5e8db1d61bed35db843c0552a92d7784482002",
+    "capturedAt": 1792466694961,
+    "observedAt": 1792460326000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+      "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+      "genesisManifestIndex": 1,
+      "genesisAdmissionIdentity": "genesis-admission:c3bf0041880dcbb20fa90da33bebf0a944f6778c6c5915fd9ef2dd4fac2f412f",
+      "historicalSourceId": "genesis-source:document:derived:8010c2607d090e05d1a329157e984d53ff24ffdddfd978666faa3a4963d7d6d2",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0013 — Verified Supabase caller identity for Runtime",
+        "status": "Approved",
+        "approvalDate": "2026-10-20",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792466694967,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000069",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792466694969,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000069",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792466694969,
+        "evidenceConsidered": [
+          "genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000069",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792466694969,
+          "evidenceConsidered": [
+            "genesis-evidence:36695f919aabcdef1194110e397e5740c2736df9af812cf1be1906ec1fb2a380"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792466694967
+        },
+        {
+          "state": "compiled",
+          "at": 1792466694967
+        },
+        {
+          "state": "validated",
+          "at": 1792466694967
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792466694967
+        },
+        {
+          "state": "approved",
+          "at": 1792466694969,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

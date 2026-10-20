@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:d6a325549e7d1fa1d7a7a9f7674160581fc61757d1a839ba8ac5d892f73f7503",
+  "type": "commit",
+  "title": "fix(runtime): locks live in runtime-data; the dev data reset works and is development-only",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792466695012,
+  "observedAt": 1792461812000,
+  "contentRef": "git:commit:65589244f436e69c410801ebb555932ac1a9e306",
+  "checksum": "sha256:58d47e91ead44539b940dd0a99961f68535e4bc0199b265c24bab0fdccfbf825",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a",
+    "genesisManifestId": "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241",
+    "genesisManifestIndex": 5,
+    "genesisAdmissionIdentity": "genesis-admission:7ffec402a6e8217f575f3e1dbb7fa73696bd51e7c036ae4de131a462bd779ddb",
+    "historicalSourceId": "genesis-source:commit:65589244f436e69c410801ebb555932ac1a9e306",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:65589244f436e69c410801ebb555932ac1a9e306",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "65589244f436e69c410801ebb555932ac1a9e306",
+      "parentShas": [
+        "cc9eb943c10f95b80de64b9b5dda9afb4418c229"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792461812000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792461812000
+      },
+      "subject": "fix(runtime): locks live in runtime-data; the dev data reset works and is development-only",
+      "body": "Runtime project locks followed process.cwd(), so starting Runtime from apps/lumina-runtime left an untracked runtime-locks folder in the working tree; they are operational state and now live under the gitignored runtime-data root like other operational data. Settings > Security called resetAllData without importing it, so Reset & re-seed would throw; it is now imported and, like the role switcher, shown only in development builds, since it wipes the demo data in the browser.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+        "apps/lumina-runtime/src/projects/workspacePaths.ts"
+      ],
+      "changedPathsByParent": {
+        "cc9eb943c10f95b80de64b9b5dda9afb4418c229": [
+          "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+          "apps/lumina-runtime/src/projects/workspacePaths.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:65589244f436e69c410801ebb555932ac1a9e306"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2ab587cb96c09e06f9b2294c1d87ca936784c4bc00a63166bfcf69e6974d356a"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0ab057ed973b294e45686741283c969a4557f09329493a6357250e3a655ec241"
+    ]
+  }
+}

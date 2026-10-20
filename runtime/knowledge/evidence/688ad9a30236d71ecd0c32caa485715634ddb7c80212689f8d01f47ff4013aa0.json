@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:9b776e8a60904125199c2e0295dd6aae381865aed256fdbf6ff9879231618ebd",
+  "type": "commit",
+  "title": "feat(executive): Mission, Planning, Agent and Execution sections read Runtime missions (MS-5, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792470979397,
+  "observedAt": 1792470872000,
+  "contentRef": "git:commit:298ed3fb36ee85d735bbe6576daba36e0643199b",
+  "checksum": "sha256:40d20b98ff52df69a174a8a244a118387ce8aa71e5ddeefc1b0c86ea6a5411e8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c95a68d5e65480bea74cef9f284fa07c0148c9b6f1045ae46a00d6be2a054c16",
+    "genesisManifestId": "genesis-manifest:2300c6eef94f453c422445d92f1de217c4382738f7cef6c4b3eeef484f3b2ad8",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:2ce8c15e8e5f6db32b27caa3fcb157d571bdb4af0c722d1d444e888f1e03c869",
+    "historicalSourceId": "genesis-source:commit:298ed3fb36ee85d735bbe6576daba36e0643199b",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:298ed3fb36ee85d735bbe6576daba36e0643199b",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+      "parentShas": [
+        "6e01d8f015caf6cf709cff15dd7a901339903e34"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792470872000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792470872000
+      },
+      "subject": "feat(executive): Mission, Planning, Agent and Execution sections read Runtime missions (MS-5, ADR-0044)",
+      "body": "Implements ADR-0044 Decision 6 and the MS-5 ticket. The four sections, the dashboard's mission health and current mission, and the command deck's current mission now read Runtime mission records; their design-preview data is removed. The owner records evidence where it is shown: task done, dropped with a reason, or reopened in Planning, and npm run build passed or failed for the exact recovery-anchor commit in Execution; Runtime then validates and completes (MS-4). Agents show only what exists: the live Chief Agent and the Mission System's six specialists as Not built. Approval cards name the mission a proposal decides. Presentation of the four sections certified after owner visual approval.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/missionView.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "6e01d8f015caf6cf709cff15dd7a901339903e34": [
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/AgentCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ApprovalCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutionCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/missionView.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:298ed3fb36ee85d735bbe6576daba36e0643199b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c95a68d5e65480bea74cef9f284fa07c0148c9b6f1045ae46a00d6be2a054c16"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2300c6eef94f453c422445d92f1de217c4382738f7cef6c4b3eeef484f3b2ad8"
+    ]
+  }
+}
