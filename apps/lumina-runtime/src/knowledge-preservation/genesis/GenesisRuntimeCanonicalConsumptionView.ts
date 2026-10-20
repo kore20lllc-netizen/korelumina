@@ -65,6 +65,9 @@ export function buildGenesisRuntimeCanonicalConsumptionView(
     historicalOutputGovernance:
       GenesisHistoricalOutputGovernanceProjection |
       null;
+    /* F-28: owner-retired canonical ids, also outside current policy. */
+    retiredCanonicalIds?:
+      readonly string[];
   },
 ): GenesisRuntimeCanonicalConsumptionResolution {
   if (
@@ -127,6 +130,7 @@ export function buildGenesisRuntimeCanonicalConsumptionView(
     new GenesisCurrentPolicyCanonicalView(
       input.canonicalStore,
       input.historicalOutputGovernance,
+      input.retiredCanonicalIds ?? [],
     );
 
   return {

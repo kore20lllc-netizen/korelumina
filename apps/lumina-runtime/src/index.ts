@@ -115,6 +115,7 @@ import { registerExecutiveRoute } from "./routes/executive.js";
 import { resolveRuntimeCaller } from "./routes/runtimeCaller.js";
 import { registerRuntimeIdentityRoute } from "./routes/runtimeIdentity.js";
 import { registerAdminUserRoutes } from "./routes/adminUsers.js";
+import { CanonicalRetirementLedger } from "./governance/canonical-retirement/CanonicalRetirementLedger.js";
 import {
   FileRoleAssignmentLedger,
   RoleAssignmentService,
@@ -763,6 +764,10 @@ export const runtimeGenesisCanonicalConsumption =
       runtimeGenesisOperationalProjection
         ?.historicalOutputGovernance ??
       null,
+
+    /* F-28: canonical knowledge the owner retired from current policy. */
+    retiredCanonicalIds:
+      new CanonicalRetirementLedger().retiredCanonicalIds(),
   });
 
 

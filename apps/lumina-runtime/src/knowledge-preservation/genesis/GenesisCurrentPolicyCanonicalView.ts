@@ -24,6 +24,13 @@ implements GenesisCanonicalConsumptionStore {
 
     historicalOutputGovernance:
       GenesisHistoricalOutputGovernanceProjection,
+
+    /*
+     * F-28: canonical ids the owner retired from current policy with a
+     * committed retirement record. They stay in the canonical store.
+     */
+    retiredCanonicalIds:
+      readonly string[] = [],
   ) {
     this.suppressedCanonicalIds =
       new Set(
@@ -37,6 +44,9 @@ implements GenesisCanonicalConsumptionStore {
           .flatMap(
             record =>
               record.canonicalKnowledgeIds,
+          )
+          .concat(
+            retiredCanonicalIds,
           ),
       );
   }

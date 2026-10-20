@@ -1,0 +1,10 @@
+{
+  "id": "canonical-retirement:2026-10-19:f28-pipeline-certification-fixtures",
+  "canonicalIds": [
+    "canonical:document:phase43-vision2050-certification-1787430674",
+    "canonical:document:phase54-event-driven-certification-1787438365"
+  ],
+  "reason": "F-28: these two items are controlled evidence artifacts created in August 2026 only to certify the knowledge preservation pipeline (KP-2026-000029, KP-2026-000030). They are not governing knowledge, Genesis never produced them, and their source files were written to /tmp and no longer exist, so the Chief Agent could neither read nor rely on them. Retired from current policy; kept in the canonical store with their history.",
+  "decidedBy": "human:founder",
+  "decidedAt": "2026-10-20T02:06:00.000Z"
+}
