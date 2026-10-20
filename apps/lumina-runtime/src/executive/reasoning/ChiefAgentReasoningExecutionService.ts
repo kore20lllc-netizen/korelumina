@@ -122,6 +122,12 @@ export class ChiefAgentReasoningExecutionService {
             }
           : {}),
         ...(result.metadata ?? {}),
+        ...(result.missionProposal
+          ? {
+              missionProposal:
+                result.missionProposal,
+            }
+          : {}),
       },
     });
   }

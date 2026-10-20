@@ -32,6 +32,19 @@ export interface ExecutiveApprovalDecisionResult {
     ExecutiveDecision;
 }
 
+/*
+ * MS-3 (ADR-0044): work that an approval decides. Runs after the approval
+ * and decision are checked and before either changes; if it throws,
+ * nothing is decided.
+ */
+export interface ExecutiveApprovalDecisionHooks {
+  beforeDecided?(
+    approval: ExecutiveApproval,
+    outcome: "approved" | "rejected",
+    reason?: string,
+  ): void;
+}
+
 export class ExecutiveApprovalDecisionService {
   constructor(
     private readonly approvalService:
@@ -39,6 +52,9 @@ export class ExecutiveApprovalDecisionService {
 
     private readonly decisionService:
       ExecutiveDecisionService,
+
+    private readonly hooks:
+      ExecutiveApprovalDecisionHooks = {},
   ) {}
 
   approve(
@@ -54,6 +70,11 @@ export class ExecutiveApprovalDecisionService {
       this.requireProposedDecision(
         pending.decisionId,
       );
+
+    this.hooks.beforeDecided?.(
+      pending,
+      "approved",
+    );
 
     const approval =
       this.approvalService
@@ -99,6 +120,12 @@ export class ExecutiveApprovalDecisionService {
       this.requireProposedDecision(
         pending.decisionId,
       );
+
+    this.hooks.beforeDecided?.(
+      pending,
+      "rejected",
+      reason,
+    );
 
     const approval =
       this.approvalService

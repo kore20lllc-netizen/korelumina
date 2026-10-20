@@ -16,6 +16,11 @@ export interface CreateChiefAgentDecisionInput {
 
   requestedBy:
     string;
+
+  /* MS-3: e.g. the mission a proposal created. */
+  metadata?: Readonly<
+    Record<string, unknown>
+  >;
 }
 
 export class ChiefAgentReasoningDecisionService {
@@ -91,6 +96,8 @@ export class ChiefAgentReasoningDecisionService {
             "deny",
 
           ...reasoning.metadata,
+
+          ...(input.metadata ?? {}),
         },
       });
   }

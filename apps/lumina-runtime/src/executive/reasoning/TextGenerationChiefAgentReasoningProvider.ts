@@ -7,6 +7,9 @@ import type {
   ChiefAgentReasoningProvider,
   ChiefAgentReasoningResult,
 } from "./ChiefAgentReasoningDestinationAdapter.js";
+import {
+  readMissionProposal,
+} from "../mission/MissionProposal.js";
 
 interface ParsedReasoningResult {
   title?: unknown;
@@ -15,6 +18,7 @@ interface ParsedReasoningResult {
   confidence?: unknown;
   evidence?: unknown;
   assumptions?: unknown;
+  missionProposal?: unknown;
 }
 
 function stripJsonFence(
@@ -233,8 +237,17 @@ function buildPrompt(
     '  "conclusion": "reasoned conclusion",',
     '  "confidence": 0.0,',
     '  "evidence": ["canonical-memory-or-operational-id"],',
-    '  "assumptions": ["explicit assumption"]',
+    '  "assumptions": ["explicit assumption"],',
+    '  "missionProposal": null',
     "}",
+    "",
+    "missionProposal is optional and normally null. Fill it only when the owner asks you to propose or plan a mission, or when the question can only be answered by work that should become a mission.",
+    "A proposal is never approved by you: it becomes a mission awaiting the owner's approval. Do not propose with disposition deny.",
+    "To propose a new mission:",
+    '  {"title": "...", "objective": "...", "description": "...", "type": "engineering | architecture | recovery | knowledge-acquisition | documentation | deployment | maintenance | research | governance | security | operational", "priority": "critical | high | normal | low", "risks": ["..."], "relatedRepositories": ["..."], "plan": {"epics": [{"title": "...", "tasks": [{"title": "...", "acceptanceCriteria": ["..."]}]}], "validationPlan": ["..."], "requiredDocuments": ["..."]}}',
+    "To propose a plan for an existing draft or planned mission, give its id and the plan only:",
+    '  {"missionId": "MS-YYYY-NNNN", "plan": {...}}',
+    "Every plan needs at least one task with acceptance criteria. Only use mission ids listed in the live operational state.",
     "",
     `Event type: ${input.eventType}`,
     `Organization: ${input.organizationId ?? "unspecified"}`,
@@ -349,7 +362,32 @@ function parseResult(
         parsed.assumptions,
         "assumptions",
       ),
+
+    ...missionProposalFrom(
+      parsed.missionProposal,
+    ),
   };
+}
+
+/*
+ * MS-3: a malformed proposal never fails the reply; it is dropped and
+ * the reason is kept with the reasoning.
+ */
+function missionProposalFrom(
+  value: unknown,
+): Pick<ChiefAgentReasoningResult, "missionProposal" | "metadata"> {
+  const reading =
+    readMissionProposal(
+      value,
+    );
+
+  if (!reading) {
+    return {};
+  }
+
+  return "proposal" in reading
+    ? { missionProposal: reading.proposal }
+    : { metadata: { missionProposalInvalid: reading.invalid } };
 }
 
 export class TextGenerationChiefAgentReasoningProvider
@@ -383,6 +421,8 @@ export class TextGenerationChiefAgentReasoningProvider
       ...result,
 
       metadata: {
+        ...(result.metadata ?? {}),
+
         model:
           generated.model,
 

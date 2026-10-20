@@ -11,6 +11,9 @@ import {
   type ChiefAgentReasoningKnowledge,
 } from "./ChiefAgentReasoningKnowledgeMaterializer.js";
 import type {
+  MissionProposal,
+} from "../mission/MissionProposal.js";
+import type {
   ChiefAgentOperationalState,
   ChiefAgentOperationalStateReader,
 } from "./ChiefAgentOperationalState.js";
@@ -59,6 +62,13 @@ export interface ChiefAgentReasoningResult {
 
   assumptions:
     readonly string[];
+
+  /*
+   * MS-3 (ADR-0044): an optional mission or plan proposal, already
+   * validated. It becomes a mission awaiting the owner's approval.
+   */
+  missionProposal?:
+    MissionProposal;
 
   metadata?: Readonly<
     Record<string, unknown>

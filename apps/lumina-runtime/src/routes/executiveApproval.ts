@@ -69,6 +69,28 @@ function respondDomainError(
     });
   }
 
+  /* MS-3: the mission an approval decides refused the step. */
+  if (
+    message.startsWith(
+      "mission_",
+    )
+  ) {
+    return res.status(
+      message.includes("not_allowed") ||
+        message.includes("actor_required")
+        ? 403
+        : message === "mission_not_found"
+          ? 404
+          : 409,
+    ).json({
+      ok:
+        false,
+
+      error:
+        message,
+    });
+  }
+
   if (
     message ===
     "executive_approval_rejection_reason_required"

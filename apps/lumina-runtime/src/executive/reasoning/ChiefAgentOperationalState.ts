@@ -22,7 +22,8 @@ export interface ChiefAgentOperationalEntry {
     | "learning-cycle"
     | "approval"
     | "decision"
-    | "canonical-review";
+    | "canonical-review"
+    | "mission";
   title: string;
   detail: string;
   at?: string;
@@ -81,12 +82,26 @@ export interface OperationalCanonicalReview {
   updatedAt: number;
 }
 
+export interface OperationalMission {
+  id: string;
+  title: string;
+  state: string;
+  priority: string;
+  proposedBy: { id: string };
+  plan: { epics: ReadonlyArray<{ tasks: ReadonlyArray<unknown> }> } | null;
+  linkedCommits: ReadonlyArray<unknown>;
+  recoveryAnchor: string | null;
+  updatedAt: number;
+}
+
 export interface ChiefAgentOperationalStateSources {
   activation(): OperationalActivation;
   learning(): OperationalLearning;
   approvals(): readonly OperationalApproval[];
   decisions(): readonly OperationalDecision[];
   canonicalReviews(): readonly OperationalCanonicalReview[];
+  /* MS-3: so the Chief Agent can reason about and plan missions. */
+  missions?(): readonly OperationalMission[];
   now?(): number;
 }
 
@@ -231,6 +246,41 @@ export class ChiefAgentOperationalStateReader {
         });
       }
     });
+
+    const missions = this.sources.missions;
+    if (missions) {
+      attempt("missions", () => {
+        const open = missions
+          .call(this.sources)
+          .filter((mission) => !["archived", "cancelled", "knowledge_extracted"].includes(mission.state))
+          .sort((left, right) => right.updatedAt - left.updatedAt)
+          .slice(0, LIMIT);
+        for (const mission of open) {
+          const tasks = mission.plan?.epics.reduce((total, epic) => total + epic.tasks.length, 0) ?? 0;
+          entries.push({
+            id: `operational:mission:${mission.id}`,
+            kind: "mission",
+            title: `Mission ${mission.id} ${mission.state.replace(/_/g, " ")}: ${mission.title}`,
+            detail: [
+              `Priority ${mission.priority}; proposed by ${mission.proposedBy.id}.`,
+              mission.plan ? `Plan: ${tasks} task(s).` : "No plan yet.",
+              mission.linkedCommits.length
+                ? `${mission.linkedCommits.length} linked commit(s); recovery anchor ${mission.recoveryAnchor?.slice(0, 8)}.`
+                : "",
+            ].filter(Boolean).join(" "),
+            at: iso(mission.updatedAt),
+          });
+        }
+        if (open.length === 0) {
+          entries.push({
+            id: "operational:missions",
+            kind: "mission",
+            title: "No open missions",
+            detail: "No mission is drafted, planned, awaiting approval, approved, executing, validating or completed.",
+          });
+        }
+      });
+    }
 
     return {
       capturedAt: new Date(now).toISOString(),

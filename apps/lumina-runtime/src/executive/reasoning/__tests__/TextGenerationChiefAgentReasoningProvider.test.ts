@@ -285,3 +285,72 @@ test(
     );
   },
 );
+
+/* MS-3 (ADR-0044): the reply may carry a mission or plan proposal. */
+function replyWith(
+  missionProposal: unknown,
+) {
+  return new TextGenerationChiefAgentReasoningProvider({
+    async generateText() {
+      return {
+        text: JSON.stringify({
+          title: "Mission proposal",
+          disposition: "review",
+          conclusion: "This should become a mission.",
+          confidence: 0.8,
+          evidence: ["canonical:architecture"],
+          assumptions: [],
+          missionProposal,
+        }),
+        model: "test-model",
+      };
+    },
+  });
+}
+
+test(
+  "a valid mission proposal is returned with the reasoning",
+  async () => {
+    const result = await replyWith({
+      title: "Boundary hardening",
+      objective: "Every route sits behind the boundary",
+      priority: "high",
+      plan: { epics: [{ title: "Routes", tasks: [{ title: "Audit routes", acceptanceCriteria: ["List complete"] }] }] },
+    }).reason(input);
+
+    assert.equal(result.missionProposal?.title, "Boundary hardening");
+    assert.equal(result.missionProposal?.plan.epics[0].tasks[0].title, "Audit routes");
+    assert.equal(result.metadata?.model, "test-model");
+  },
+);
+
+test(
+  "a malformed mission proposal is dropped without failing the reply",
+  async () => {
+    const result = await replyWith({ title: "No plan" }).reason(input);
+
+    assert.equal(result.missionProposal, undefined);
+    assert.equal(result.metadata?.missionProposalInvalid, "mission_proposal_title_and_objective_required");
+    assert.equal(result.metadata?.model, "test-model");
+    assert.equal(result.conclusion, "This should become a mission.");
+  },
+);
+
+test(
+  "the prompt tells the Chief Agent a proposal is never its own approval",
+  async () => {
+    let prompt = "";
+    await new TextGenerationChiefAgentReasoningProvider({
+      async generateText(request) {
+        prompt = request.prompt;
+        return {
+          text: JSON.stringify({ title: "t", disposition: "review", conclusion: "c", confidence: 0.5, evidence: [], assumptions: [], missionProposal: null }),
+          model: "m",
+        };
+      },
+    }).reason(input);
+
+    assert.match(prompt, /"missionProposal": null/);
+    assert.match(prompt, /never approved by you/);
+  },
+);

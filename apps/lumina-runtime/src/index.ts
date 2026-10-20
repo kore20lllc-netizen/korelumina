@@ -129,7 +129,7 @@ import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js"
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
 import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
-import { MissionService, MissionWorkLinker } from "./executive/mission/index.js";
+import { MissionProposalService, MissionService, MissionWorkLinker } from "./executive/mission/index.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -1170,6 +1170,18 @@ export const runtimeExecutiveApprovalDecisionService =
   new ExecutiveApprovalDecisionService(
     runtimeExecutiveApprovalService,
     runtimeExecutiveDecisionService,
+    {
+      /*
+       * MS-3 (ADR-0044): an approval that carries a mission decides it.
+       * Resolved at call time: missions are composed later in this module.
+       */
+      beforeDecided: (approval, outcome, reason) =>
+        runtimeMissionProposals.beforeApprovalDecided(
+          approval,
+          outcome,
+          reason,
+        ),
+    },
   );
 
 export const runtimeExecutiveDelegationService =
@@ -1286,6 +1298,8 @@ export const chiefAgentOperationalStateReader =
       runtimeExecutiveApprovalService.list(),
     decisions: () =>
       runtimeExecutiveDecisionService.list(),
+    missions: () =>
+      runtimeMissionService.list(),
     canonicalReviews: () =>
       runtimeKnowledgePreservationPlatform
         .packageService
@@ -1336,6 +1350,17 @@ export const chiefAgentReasoningAdapter =
           );
         }
 
+        /*
+         * MS-3 (ADR-0044): a mission or plan proposal in the reply becomes
+         * a mission awaiting approval; the reply's approval decides it.
+         */
+        const proposed =
+          runtimeMissionProposals
+            .fromReasoning(
+              persisted,
+              input.approverId,
+            );
+
         const decision =
           runtimeChiefAgentReasoningDecisionService
             .createProposedDecision({
@@ -1344,6 +1369,9 @@ export const chiefAgentReasoningAdapter =
 
               requestedBy:
                 "chief-agent",
+
+              metadata:
+                proposed.metadata,
             });
 
         if (
@@ -1351,16 +1379,27 @@ export const chiefAgentReasoningAdapter =
           decision.status ===
             "proposed"
         ) {
-          runtimeExecutiveDecisionApprovalRequestService
-            .requestApproval({
-              decision,
+          const approval =
+            runtimeExecutiveDecisionApprovalRequestService
+              .requestApproval({
+                decision,
 
-              approverId:
-                input.approverId,
+                approverId:
+                  input.approverId,
 
-              requestedBy:
-                "chief-agent",
-            });
+                requestedBy:
+                  "chief-agent",
+              });
+
+          if (
+            proposed.missionId
+          ) {
+            runtimeMissionProposals
+              .attachApproval(
+                proposed.missionId,
+                approval.id,
+              );
+          }
         }
 
         return {
@@ -1382,8 +1421,10 @@ export const chiefAgentReasoningAdapter =
           assumptions:
             persisted.assumptions,
 
-          metadata:
-            persisted.metadata,
+          metadata: {
+            ...(persisted.metadata ?? {}),
+            ...proposed.metadata,
+          },
         };
       },
     },
@@ -2306,9 +2347,27 @@ registerExecutiveOperationalStateRoute(
 export const runtimeMissionService =
   new MissionService();
 
+/*
+ * MS-3 (ADR-0044): Chief Agent mission and plan proposals, decided only
+ * through the owner's approval.
+ */
+export const runtimeMissionProposals =
+  new MissionProposalService(
+    runtimeMissionService,
+    () => ({
+      get: (approvalId) =>
+        runtimeExecutiveApprovalService.get(approvalId),
+      approve: (approvalId) =>
+        runtimeExecutiveApprovalDecisionService.approve({ approvalId }),
+      reject: (approvalId, reason) =>
+        runtimeExecutiveApprovalDecisionService.reject({ approvalId, reason }),
+    }),
+  );
+
 registerExecutiveMissionRoutes(
   app,
   runtimeMissionService,
+  runtimeMissionProposals,
 );
 
 registerExecutiveOperationsSnapshotRoute(

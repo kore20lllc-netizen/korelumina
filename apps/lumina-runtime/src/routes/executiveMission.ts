@@ -3,6 +3,7 @@ import type { Express, Request, Response } from "express";
 import {
   MissionTransitionError,
   type MissionActor,
+  type MissionProposalService,
   type MissionService,
   type MissionTransitionName,
 } from "../executive/mission/index.js";
@@ -31,13 +32,22 @@ function fail(res: Response, error: unknown) {
       error: error.code,
     });
   }
-  return res.status(500).json({ ok: false, error: error instanceof Error ? error.message : String(error) });
+  const message = error instanceof Error ? error.message : String(error);
+  if (message.startsWith("executive_approval_") || message.startsWith("executive_decision_")) {
+    return res.status(409).json({ ok: false, error: message });
+  }
+  return res.status(500).json({ ok: false, error: message });
 }
 
 const OWNER_STEPS: readonly MissionTransitionName[] = ["approve", "reject", "block", "unblock", "cancel", "archive"];
 const PROPOSER_STEPS: readonly MissionTransitionName[] = ["submit"];
 
-export function registerExecutiveMissionRoutes(app: Express, missions: MissionService): void {
+export function registerExecutiveMissionRoutes(
+  app: Express,
+  missions: MissionService,
+  /* MS-3: owner steps on a proposed mission go through its approval. */
+  proposals?: MissionProposalService,
+): void {
   app.get("/api/executive/missions", (_req: Request, res: Response) =>
     res.json({ ok: true, missions: missions.list() }),
   );
@@ -70,7 +80,9 @@ export function registerExecutiveMissionRoutes(app: Express, missions: MissionSe
       try {
         return res.json({
           ok: true,
-          mission: missions.transition(String(req.params.id), step, actorFrom(req.body), req.body?.reason),
+          mission: proposals && OWNER_STEPS.includes(step)
+            ? proposals.decide(String(req.params.id), step, actorFrom(req.body), req.body?.reason)
+            : missions.transition(String(req.params.id), step, actorFrom(req.body), req.body?.reason),
         });
       } catch (error) {
         return fail(res, error);

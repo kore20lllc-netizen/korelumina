@@ -141,6 +141,18 @@ export class MissionService {
   }
 
   /*
+   * MS-3: the approval that decides this mission. Listed in
+   * requiredApprovals; adding it twice changes nothing.
+   */
+  attachApproval(id: string, approvalId: string): Mission {
+    const mission = this.require(id);
+    if (mission.requiredApprovals.includes(approvalId)) return mission;
+    const updated = { ...mission, requiredApprovals: [...mission.requiredApprovals, approvalId], updatedAt: this.now() };
+    this.store.save(updated);
+    return updated;
+  }
+
+  /*
    * MS-2 (ADR-0044 Decision 3): an owner commit with this mission's
    * trailer is its execution. Work attaches to approved, executing,
    * validating or blocked missions; the first commit on an approved
