@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:9eecc2c0579969b297364ead7c6aa8124f8ad7ed9bb4b6083097819639d905ee",
+  "type": "commit",
+  "title": "feat(executive): the Chief Agent sees live operational state when it reasons (EW-2, F-24)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792416928876,
+  "observedAt": 1792415669000,
+  "contentRef": "git:commit:1103f13ee8928e6a51e12344730fac96f46110cc",
+  "checksum": "sha256:0e67b2d7a4b7d9968bd759ce60f7f0ac13ae6534d2335c1f689d429ed9c8bef6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441",
+    "genesisManifestId": "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:83bef06148204396015ddb72f4e6263964c008835481267c30e6aca65c8e24ad",
+    "historicalSourceId": "genesis-source:commit:1103f13ee8928e6a51e12344730fac96f46110cc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1103f13ee8928e6a51e12344730fac96f46110cc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1103f13ee8928e6a51e12344730fac96f46110cc",
+      "parentShas": [
+        "a3e61d84a985515bffa84f738e33bbba0b652c66"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792415669000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792415669000
+      },
+      "subject": "feat(executive): the Chief Agent sees live operational state when it reasons (EW-2, F-24)",
+      "body": "Asked which pending canonical review to handle first, the Chief Agent answered that it could not see the review queue, and two more answers were rejected for the same reason: it reasoned only over governed knowledge, which says what is true and allowed but not what is happening now. Reasoning now also receives a read-only snapshot taken at that moment (activation, continuous learning and recent cycles, pending executive approvals, recent decisions, and knowledge waiting for canonical review, oldest first). Every entry has an operational id the Chief Agent may cite; ids not in the snapshot are rejected like any unauthorized evidence. The snapshot is context, not knowledge: it never authorizes an action and governed knowledge still decides what to do. Unreadable parts are reported as unavailable, never guessed, and each reasoning record keeps the ids it saw. GET /api/executive/operational-state shows the owner exactly what the Chief Agent sees. Also fixes the command deck reading learning cycles in the wrong order (Runtime lists them newest first), which showed the oldest cycle as the latest.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentOperationalState.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+        "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+        "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+        "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentOperationalState.test.ts",
+        "apps/lumina-runtime/src/executive/reasoning/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveOperationalState.ts"
+      ],
+      "changedPathsByParent": {
+        "a3e61d84a985515bffa84f738e33bbba0b652c66": [
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentOperationalState.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningDestinationAdapter.ts",
+          "apps/lumina-runtime/src/executive/reasoning/ChiefAgentReasoningExecutionService.ts",
+          "apps/lumina-runtime/src/executive/reasoning/TextGenerationChiefAgentReasoningProvider.ts",
+          "apps/lumina-runtime/src/executive/reasoning/__tests__/ChiefAgentOperationalState.test.ts",
+          "apps/lumina-runtime/src/executive/reasoning/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveOperationalState.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1103f13ee8928e6a51e12344730fac96f46110cc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11"
+    ]
+  }
+}

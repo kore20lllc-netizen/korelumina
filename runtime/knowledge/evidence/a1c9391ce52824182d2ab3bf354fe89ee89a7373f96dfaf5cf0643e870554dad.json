@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:7516974b8de461ffab991edd0733cb507a1c92b92023c227e05527d8799ed052",
+  "type": "commit",
+  "title": "feat(executive): Activity, Notifications, Knowledge, Memory and Projects read Runtime (EW-3)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792416928886,
+  "observedAt": 1792416581000,
+  "contentRef": "git:commit:cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+  "checksum": "sha256:726699d35755a33880ca7072c70370af3c690e9b75202a81fa753df395ebaba0",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441",
+    "genesisManifestId": "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:a32a96a76986b8c0ebfadd84676f5ae707a188a0084af273e57367b4285a7027",
+    "historicalSourceId": "genesis-source:commit:cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+      "parentShas": [
+        "9113967352a0f494ec398a4fe0ef76c63fd32949"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416581000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416581000
+      },
+      "subject": "feat(executive): Activity, Notifications, Knowledge, Memory and Projects read Runtime (EW-3)",
+      "body": "Five more Executive Office sections are composed from Runtime records the office reads, plus one fast read of the knowledge production lifecycle. Activity is the real operational timeline (proposals, owner decisions, Learning Records, canonical promotions, activation). Notifications classify live state by priority. The Knowledge Center groups current-policy canonical knowledge by its source document, excluding certification records kept in /tmp. The Memory Center shows real sizes for the layers that exist and says Not built for the rest. Projects lists every project imported into the Runtime with its state; the platform card is partly live. Missions, Planning, Agents and Execution stay design previews because Runtime has no records for them yet.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/MemoryCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecords.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "9113967352a0f494ec398a4fe0ef76c63fd32949": [
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/MemoryCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecords.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cc72a86a01c2dc25df66f013b0f8fb2614d990f3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:61fe759a7fadd74a6902f80f56c45b619312f629164e4a6613ac13f6b6517f7e",
+  "type": "commit",
+  "title": "feat(executive): talk to the Chief Agent and hear its replies (EW-1f)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792415374989,
+  "observedAt": 1792414888000,
+  "contentRef": "git:commit:a3e61d84a985515bffa84f738e33bbba0b652c66",
+  "checksum": "sha256:b8b1c7726ed8212f309085482a7d02e33760ba06e6ab0372c795a3843b45e673",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:fe5e69df9f3249ae2ed46d32d1685c6af0ebfe0d63262fdba29552ca054eff8f",
+    "genesisManifestId": "genesis-manifest:321d28aa3c23b9cd82154c64284856a7a7f2dd76ebdffce274f6e46a594dba7e",
+    "genesisManifestIndex": 3,
+    "genesisAdmissionIdentity": "genesis-admission:5640cfdd2a9fd76c2fc14b62493a70bb5e101554b1d3857257365c7a24490399",
+    "historicalSourceId": "genesis-source:commit:a3e61d84a985515bffa84f738e33bbba0b652c66",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a3e61d84a985515bffa84f738e33bbba0b652c66",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a3e61d84a985515bffa84f738e33bbba0b652c66",
+      "parentShas": [
+        "70337eca81101209e3541be38e40ffdf67ef5441"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414888000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414888000
+      },
+      "subject": "feat(executive): talk to the Chief Agent and hear its replies (EW-1f)",
+      "body": "Adds voice to the Executive Office conversation with the browser's own speech engines, the owner's choice for a first version: the microphone dictates into the message box and sends when the owner pauses, and replies (including the opening briefing) can be read aloud, with a Voice toggle that reads each new answer as it arrives. Nothing is recorded or stored by KoreLumina; Chrome transcribes through Google and Safari through Apple, and read-aloud runs locally. Long hashes and canonical ids are skipped when reading aloud. Browsers without speech recognition keep the microphone disabled and say why. A Runtime voice (Whisper and OpenAI TTS) can replace the engine later without changing the controls.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useConversationVoice.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "70337eca81101209e3541be38e40ffdf67ef5441": [
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useConversationVoice.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a3e61d84a985515bffa84f738e33bbba0b652c66"
+    ],
+    "genesisReplay": [
+      "genesis-replay:fe5e69df9f3249ae2ed46d32d1685c6af0ebfe0d63262fdba29552ca054eff8f"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:321d28aa3c23b9cd82154c64284856a7a7f2dd76ebdffce274f6e46a594dba7e"
+    ]
+  }
+}

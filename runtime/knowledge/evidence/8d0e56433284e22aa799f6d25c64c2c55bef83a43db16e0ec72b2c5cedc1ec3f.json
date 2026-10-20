@@ -1,0 +1,85 @@
+{
+  "id": "genesis-evidence:13be1871f48060a5c8cbe52f5d68d5fd0960cc7d3e241bc40d195792c8ef64d7",
+  "type": "commit",
+  "title": "feat(executive): the Chief Agent briefs the owner on arrival and thinks as the living Lumina form (EW-1b, EW-1c)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792414240115,
+  "observedAt": 1792414127000,
+  "contentRef": "git:commit:0577390009a54e532aafd440da9ee5d8b2230747",
+  "checksum": "sha256:01c1d8e5e4a10c7f52a344d08007dd71556e4e04f9e7d6af604904a0116f67d4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85",
+    "genesisManifestId": "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:475d309a5b831b73ea1180c4541d7a24db23f65118b82ecfdba8e5362c7968a0",
+    "historicalSourceId": "genesis-source:commit:0577390009a54e532aafd440da9ee5d8b2230747",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:0577390009a54e532aafd440da9ee5d8b2230747",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "0577390009a54e532aafd440da9ee5d8b2230747",
+      "parentShas": [
+        "586695356df95849fba9da214137267bcc2c2375"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414127000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414127000
+      },
+      "subject": "feat(executive): the Chief Agent briefs the owner on arrival and thinks as the living Lumina form (EW-1b, EW-1c)",
+      "body": "Opening the Executive Office now starts with a briefing: what was learned and decided since the owner's last visit, what waits for them, priorities in order, and risks. It is composed from the Runtime records the office already reads, so it is instant, free, and cannot invent state; a learning failure that a later cycle recovered from is history, not a risk. The Daily Briefing section and the command deck headline show the same briefing; the last visit is remembered in this browser only. While the Chief Agent is thinking, its avatar is the morphing Lumina form from the landing page, chosen by the owner, re-encoded from landing-bg.mp4 to a 192 px loop of about 100 KB and held in a circle with a soft gold glow and no ring (the owner tried a gold ring and removed it); reduced-motion users see a still frame. The Chief Agent writing the briefing in its own words needs live operational state in its reasoning context first (F-24).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/public/videos/chief-agent-thinking-poster.webp",
+        "apps/lumina-builder/public/videos/chief-agent-thinking.mp4",
+        "apps/lumina-builder/public/videos/chief-agent-thinking.webm",
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/executiveBriefing.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveBriefing.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "586695356df95849fba9da214137267bcc2c2375": [
+          "apps/lumina-builder/public/videos/chief-agent-thinking-poster.webp",
+          "apps/lumina-builder/public/videos/chief-agent-thinking.mp4",
+          "apps/lumina-builder/public/videos/chief-agent-thinking.webm",
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ConversationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/DailyBriefing.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/executiveBriefing.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveBriefing.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:0577390009a54e532aafd440da9ee5d8b2230747"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c"
+    ]
+  }
+}

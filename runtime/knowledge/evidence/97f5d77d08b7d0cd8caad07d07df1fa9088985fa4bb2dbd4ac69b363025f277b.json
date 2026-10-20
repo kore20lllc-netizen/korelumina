@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:d690c9a9ef256ede27510faebcf8c49e788791db5384866d6eac259d5e468194",
+  "type": "commit",
+  "title": "fix(security): project processes no longer receive Runtime's secrets (SEC-1a, F-18)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792444724975,
+  "observedAt": 1792440996000,
+  "contentRef": "git:commit:a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+  "checksum": "sha256:a1d29a8fd98e17fb4ebe8b88e2bd927ede1ab27c01b5c16cd8578e6bc0caf403",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:e053d96b1e8c35f9250cf7606bb35fabf0242536ac1ef7397f2b62813a2f4ddd",
+    "genesisManifestId": "genesis-manifest:21652167aa473bcbdc7f40907d0dd36cfb2bfa0f75589ee81dbdd11390684bff",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:dffae3acbc7c328e280fb981b11d4fc2a761d15015c3a90601bf52cab41608a5",
+    "historicalSourceId": "genesis-source:commit:a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+      "parentShas": [
+        "a978fe0276609f7e7814cbd2934878c30e75758a"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792440996000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792440996000
+      },
+      "subject": "fix(security): project processes no longer receive Runtime's secrets (SEC-1a, F-18)",
+      "body": "Runtime spread its whole environment into every process that runs project code: the dependency install, the dependency health checks and the dev server. A probe project started through the real launcher could read OPENAI_API_KEY, ANTHROPIC_API_KEY, KORELUMINA_RUNTIME_INTERNAL_TOKEN and GITHUB_TOKEN, so any imported project, including a customer's, had the platform's AI keys and Runtime's internal token. Project processes now get an allowlisted environment (paths and home, tool locations, temp, locale and terminal, registry proxy and CA settings, Windows system paths) plus the launcher's own settings; everything else, secrets, npm_config_* and NODE_OPTIONS included, stays in Runtime. The same probe now sees none of them. Private registries keep working through the user's own ~/.npmrc; a project's own keys belong in its own .env.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/runtime/__tests__/projectProcessEnvironment.test.ts",
+        "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+        "apps/lumina-runtime/src/runtime/projectProcessEnvironment.ts",
+        "apps/lumina-runtime/src/runtime/startup/RuntimeProcessLauncher.ts"
+      ],
+      "changedPathsByParent": {
+        "a978fe0276609f7e7814cbd2934878c30e75758a": [
+          "apps/lumina-runtime/src/runtime/__tests__/projectProcessEnvironment.test.ts",
+          "apps/lumina-runtime/src/runtime/ensureProjectIsolation.ts",
+          "apps/lumina-runtime/src/runtime/projectProcessEnvironment.ts",
+          "apps/lumina-runtime/src/runtime/startup/RuntimeProcessLauncher.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a299d7a54dcabe42f35e87079034b5ef7cbe0cd3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:e053d96b1e8c35f9250cf7606bb35fabf0242536ac1ef7397f2b62813a2f4ddd"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:21652167aa473bcbdc7f40907d0dd36cfb2bfa0f75589ee81dbdd11390684bff"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:e3a6338bc6778d90e52becbb6b9d30b7345dc4f8cd806f36e0f00dd3dbf6a5fe",
+  "type": "commit",
+  "title": "fix(executive): show the Chief Agent's thinking form uncropped (EW-1g)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792418311427,
+  "observedAt": 1792416911000,
+  "contentRef": "git:commit:a978fe0276609f7e7814cbd2934878c30e75758a",
+  "checksum": "sha256:2ac107efb61e30ab265ff9e9b0306ed24b9c4da5c66c5d3db2af2c139002ef33",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:e2b087f4aeb6f7f102d8726e97739d69922ef02367ca63667eef354d8b27ae7b",
+    "genesisManifestId": "genesis-manifest:0908f48160e53214cb544e0bf7520b45d5e799b56534228a81a5b857ec0fbf27",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:79ea24fd61433427a1c115f7a7e91ec66aba5eebd4a64bdd5bb17ed767449414",
+    "historicalSourceId": "genesis-source:commit:a978fe0276609f7e7814cbd2934878c30e75758a",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:a978fe0276609f7e7814cbd2934878c30e75758a",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "a978fe0276609f7e7814cbd2934878c30e75758a",
+      "parentShas": [
+        "cc72a86a01c2dc25df66f013b0f8fb2614d990f3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416911000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416911000
+      },
+      "subject": "fix(executive): show the Chief Agent's thinking form uncropped (EW-1g)",
+      "body": "The round frame around the morphing Lumina form cut off its edges, so the owner could not see the whole form while the Chief Agent was thinking. The circle crop and glow frame are removed and the form is shown whole again, as first approved in EW-1c: object-contain, black background blended away, reduced-motion still frame. The gold ring and the circle were both tried and removed by the owner.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "cc72a86a01c2dc25df66f013b0f8fb2614d990f3": [
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:a978fe0276609f7e7814cbd2934878c30e75758a"
+    ],
+    "genesisReplay": [
+      "genesis-replay:e2b087f4aeb6f7f102d8726e97739d69922ef02367ca63667eef354d8b27ae7b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0908f48160e53214cb544e0bf7520b45d5e799b56534228a81a5b857ec0fbf27"
+    ]
+  }
+}

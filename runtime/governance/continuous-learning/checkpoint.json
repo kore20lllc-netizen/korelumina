@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "586695356df95849fba9da214137267bcc2c2375",
-    "committedAt": 1792413227000,
-    "establishedAt": 1792413915793,
-    "basis": "Learning cycle learning-cycle:9c204c665c230ecc"
+    "commit": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+    "committedAt": 1792440996000,
+    "establishedAt": 1792446626039,
+    "basis": "Learning cycle learning-cycle:c21a7c56f55422bd"
   },
   "cycles": [
     {
@@ -358,6 +358,187 @@
         "model": "gpt-5.5",
         "attemptedAt": 1792413885442,
         "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:88d6d3ced91f8d6a",
+      "trigger": "automatic",
+      "startedAt": 1792414175786,
+      "fromCommit": "586695356df95849fba9da214137267bcc2c2375",
+      "replayId": "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85",
+      "admittedSources": 4,
+      "completedAt": 1792414240264,
+      "toCommit": "0577390009a54e532aafd440da9ee5d8b2230747",
+      "commits": [
+        {
+          "sha": "0577390009a54e532aafd440da9ee5d8b2230747",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792414127000,
+          "subject": "feat(executive): the Chief Agent briefs the owner on arrival and thinks as the living Lumina form (EW-1b, EW-1c)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0007",
+        "repositoryPath": "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+        "keptStatements": 24,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792414240264,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:c6ae794c2dee0bcb",
+      "trigger": "manual",
+      "startedAt": 1792415302641,
+      "fromCommit": "0577390009a54e532aafd440da9ee5d8b2230747",
+      "replayId": "genesis-replay:fe5e69df9f3249ae2ed46d32d1685c6af0ebfe0d63262fdba29552ca054eff8f",
+      "admittedSources": 4,
+      "completedAt": 1792415375068,
+      "toCommit": "a3e61d84a985515bffa84f738e33bbba0b652c66",
+      "commits": [
+        {
+          "sha": "70337eca81101209e3541be38e40ffdf67ef5441",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792414176000,
+          "subject": "chore(executive): record Executive Office conversations, decisions, and Learning Records LR-2026-0005/0006"
+        },
+        {
+          "sha": "a3e61d84a985515bffa84f738e33bbba0b652c66",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792414888000,
+          "subject": "feat(executive): talk to the Chief Agent and hear its replies (EW-1f)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0008",
+        "repositoryPath": "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+        "keptStatements": 20,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792415375068,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:e74d2b874becb4ea",
+      "trigger": "manual",
+      "startedAt": 1792416856756,
+      "fromCommit": "a3e61d84a985515bffa84f738e33bbba0b652c66",
+      "replayId": "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441",
+      "admittedSources": 3,
+      "completedAt": 1792416928968,
+      "toCommit": "cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+      "commits": [
+        {
+          "sha": "1103f13ee8928e6a51e12344730fac96f46110cc",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792415669000,
+          "subject": "feat(executive): the Chief Agent sees live operational state when it reasons (EW-2, F-24)"
+        },
+        {
+          "sha": "9113967352a0f494ec398a4fe0ef76c63fd32949",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792416580000,
+          "subject": "fix(executive): the Chief Agent reasons with all current-policy knowledge, not a word match (KA-1, F-27)"
+        },
+        {
+          "sha": "cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792416581000,
+          "subject": "feat(executive): Activity, Notifications, Knowledge, Memory and Projects read Runtime (EW-3)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0009",
+        "repositoryPath": "docs/learning/LR-2026-0009-executive-office-runtime-visibility.md",
+        "keptStatements": 31,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792416928968,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:5bfe33f3d080f39d",
+      "trigger": "automatic",
+      "startedAt": 1792418257992,
+      "fromCommit": "cc72a86a01c2dc25df66f013b0f8fb2614d990f3",
+      "replayId": "genesis-replay:e2b087f4aeb6f7f102d8726e97739d69922ef02367ca63667eef354d8b27ae7b",
+      "admittedSources": 1,
+      "completedAt": 1792418311484,
+      "toCommit": "a978fe0276609f7e7814cbd2934878c30e75758a",
+      "commits": [
+        {
+          "sha": "a978fe0276609f7e7814cbd2934878c30e75758a",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792416911000,
+          "subject": "fix(executive): show the Chief Agent's thinking form uncropped (EW-1g)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0010",
+        "repositoryPath": "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+        "keptStatements": 10,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792418311484,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:c21a7c56f55422bd",
+      "trigger": "automatic",
+      "startedAt": 1792443588349,
+      "fromCommit": "a978fe0276609f7e7814cbd2934878c30e75758a",
+      "replayId": "genesis-replay:e053d96b1e8c35f9250cf7606bb35fabf0242536ac1ef7397f2b62813a2f4ddd",
+      "admittedSources": 1,
+      "completedAt": 1792444725064,
+      "toCommit": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+      "commits": [
+        {
+          "sha": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792440996000,
+          "subject": "fix(security): project processes no longer receive Runtime's secrets (SEC-1a, F-18)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0011",
+        "repositoryPath": "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792447262745,
+        "attempts": 2,
         "state": "WRITTEN",
         "reasons": []
       }

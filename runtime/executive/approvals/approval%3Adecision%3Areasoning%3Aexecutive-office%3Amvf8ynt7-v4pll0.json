@@ -4,7 +4,7 @@
   "decisionId": "decision:reasoning:executive-office:mvf8ynt7-v4pll0",
   "requestedBy": "chief-agent",
   "approverId": "human:founder",
-  "status": "pending",
+  "status": "approved",
   "comments": "",
   "createdAt": 1792413924040,
   "metadata": {
@@ -73,5 +73,6 @@
         }
       ]
     }
-  }
+  },
+  "decidedAt": 1792441306340
 }

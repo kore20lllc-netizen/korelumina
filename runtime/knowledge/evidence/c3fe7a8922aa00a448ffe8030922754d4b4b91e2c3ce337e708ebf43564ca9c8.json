@@ -1,0 +1,97 @@
+{
+  "id": "genesis-evidence:f0d0e229698a19151756e8f585965319fb21aeb2a94f900cc06daee79cc0920b",
+  "type": "commit",
+  "title": "chore(executive): record Executive Office conversations, decisions, and Learning Records LR-2026-0005/0006",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792414240189,
+  "observedAt": 1792414176000,
+  "contentRef": "git:commit:70337eca81101209e3541be38e40ffdf67ef5441",
+  "checksum": "sha256:8b70f1cd47df08c3737a44b6f8e0e6f1dd6e68579e812474b0916fbb36921b97",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85",
+    "genesisManifestId": "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c",
+    "genesisManifestIndex": 3,
+    "genesisAdmissionIdentity": "genesis-admission:7bf242a1ae6090dd62d91672949d308147c7eba8a69aa5e67e9ffccaf43e7308",
+    "historicalSourceId": "genesis-source:commit:70337eca81101209e3541be38e40ffdf67ef5441",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:70337eca81101209e3541be38e40ffdf67ef5441",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "70337eca81101209e3541be38e40ffdf67ef5441",
+      "parentShas": [
+        "0577390009a54e532aafd440da9ee5d8b2230747"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414176000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792414176000
+      },
+      "subject": "chore(executive): record Executive Office conversations, decisions, and Learning Records LR-2026-0005/0006",
+      "body": "Bookkeeping from using the Executive Office and from continuous learning (ADR-0042): the owner's first three questions to the Chief Agent with their reasoning, proposed decisions and approval, the Learning Records written from the EW-0 and EW-1 commits, their evidence, package, manufacturing run and canonical item, and the advanced learning checkpoint. Committed separately so learning windows exclude it as bookkeeping.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+        "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf85xxn-84wdj4.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8skn2-qsrny0.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf85xxn-84wdj4.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf8skn2-qsrny0.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Acd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e.json",
+        "runtime/knowledge/evidence/137b7abf180a673e6e2db7f0c59e851a6372617458d758f26b7616bb5b5f21ff.json",
+        "runtime/knowledge/evidence/525ddc2908f61fc1ced5b8a7f4e831b9eb6a9e6dc52033b3fbbfdc16453d5e6c.json",
+        "runtime/knowledge/evidence/a9787db6dfb80864417ab6c9b42551021f7fcb9f422b0b53bf8e232ca21b2233.json",
+        "runtime/knowledge/evidence/efb51e6f883f37cb43c0109691e87e53ae5fce572d4f03868d16332db47002bd.json",
+        "runtime/knowledge/manufacturing-runs/KMR-aad4d45d0bbd26313c5d.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000059.json"
+      ],
+      "changedPathsByParent": {
+        "0577390009a54e532aafd440da9ee5d8b2230747": [
+          "docs/learning/LR-2026-0005-executive-office-design-preview.md",
+          "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf85xxn-84wdj4.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8skn2-qsrny0.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf85xxn-84wdj4.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf8skn2-qsrny0.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Acd9250fcd5c1248f9d163c1b3b45bdef3499a7c60009db4c5f1ae91296ac0e4e.json",
+          "runtime/knowledge/evidence/137b7abf180a673e6e2db7f0c59e851a6372617458d758f26b7616bb5b5f21ff.json",
+          "runtime/knowledge/evidence/525ddc2908f61fc1ced5b8a7f4e831b9eb6a9e6dc52033b3fbbfdc16453d5e6c.json",
+          "runtime/knowledge/evidence/a9787db6dfb80864417ab6c9b42551021f7fcb9f422b0b53bf8e232ca21b2233.json",
+          "runtime/knowledge/evidence/efb51e6f883f37cb43c0109691e87e53ae5fce572d4f03868d16332db47002bd.json",
+          "runtime/knowledge/manufacturing-runs/KMR-aad4d45d0bbd26313c5d.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000059.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:70337eca81101209e3541be38e40ffdf67ef5441"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c"
+    ]
+  }
+}

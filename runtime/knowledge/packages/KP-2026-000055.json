@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1792387316155,
-  "updatedAt": 1792387316155,
+  "updatedAt": 1792441406152,
   "data": {
     "id": "KP-2026-000055",
-    "state": "awaiting_review",
+    "state": "approved",
     "sourceEvidenceRefs": [
       "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
     ],
@@ -53,7 +53,7 @@
       ]
     },
     "authority": null,
-    "approvalState": "pending_review",
+    "approvalState": "approved",
     "owner": null,
     "scope": null,
     "version": null,
@@ -103,6 +103,11 @@
       {
         "state": "awaiting_review",
         "at": 1792387316155
+      },
+      {
+        "state": "approved",
+        "at": 1792441406152,
+        "reason": "canonical-review:approved"
       }
     ],
     "remediation": {
@@ -112,9 +117,31 @@
       "updatedAt": 1792387316155
     },
     "createdAt": 1792387316155,
-    "updatedAt": 1792387316155,
+    "updatedAt": 1792441406152,
     "metadata": {
-      "sourceApprovalStates": []
+      "sourceApprovalStates": [],
+      "review": {
+        "packageId": "KP-2026-000055",
+        "packageVersion": null,
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792441406152,
+        "evidenceConsidered": [
+          "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
+        ]
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000055",
+          "packageVersion": null,
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792441406152,
+          "evidenceConsidered": [
+            "genesis-evidence:5044bad51a6d2018ff05c707b3b917831727fb46d7e074495c1ab5b8f9d44b18"
+          ]
+        }
+      ]
     }
   }
 }

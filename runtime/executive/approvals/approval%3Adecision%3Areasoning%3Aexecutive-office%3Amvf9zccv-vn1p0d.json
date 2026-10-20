@@ -1,0 +1,96 @@
+{
+  "id": "approval:decision:reasoning:executive-office:mvf9zccv-vn1p0d",
+  "sessionId": "executive-office:mvf9zccv-vn1p0d",
+  "decisionId": "decision:reasoning:executive-office:mvf9zccv-vn1p0d",
+  "requestedBy": "chief-agent",
+  "approverId": "human:founder",
+  "status": "approved",
+  "comments": "",
+  "createdAt": 1792415640657,
+  "metadata": {
+    "decisionStatus": "proposed",
+    "decisionTitle": "Prioritize constitutional canonical review",
+    "reasoningId": "reasoning:executive-office:mvf9zccv-vn1p0d",
+    "reasoningConfidence": 0.86,
+    "reasoningQuestion": "Which pending canonical review should I handle first, and why?”",
+    "reasoningDisposition": "authorize",
+    "executableCandidate": true,
+    "canonicalKnowledgeIds": [
+      "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+      "canonical:document:phase43-vision2050-certification-1787430674",
+      "canonical:document:phase54-event-driven-certification-1787438365",
+      "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7",
+      "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+      "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+      "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+      "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e"
+    ],
+    "organizationalMemoryRecordIds": [],
+    "governedContent": {
+      "includedIds": [
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:d0b9cb2f3df2e2a9f5145cd331402fa3f58a55a599aa42797b93c60a0c25b28e",
+        "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd",
+        "canonical:document:genesis-evidence:5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7"
+      ],
+      "truncatedIds": [
+        "canonical:document:genesis-evidence:798379ca274cc84a37bd173febe4f88626ab1380b777d156fb139e24c1d8e8ae",
+        "canonical:document:genesis-evidence:85d1ac2403d8ecda0ed00947f8594d8f4f847d05977890cea2563a4a433ac2f6",
+        "canonical:document:genesis-evidence:67005854653d837dd0f33c1fb1cd1f7df7b34548f99111c4d20834ad6ccc01fd"
+      ],
+      "excluded": [
+        {
+          "id": "canonical:document:phase43-vision2050-certification-1787430674",
+          "reason": "content_ref_not_a_repository_file"
+        },
+        {
+          "id": "canonical:document:phase54-event-driven-certification-1787438365",
+          "reason": "content_ref_not_a_repository_file"
+        }
+      ]
+    },
+    "operationalState": {
+      "capturedAt": "2026-10-19T13:13:40.730Z",
+      "entryIds": [
+        "operational:activation",
+        "operational:learning",
+        "operational:learning-cycle:c6ae794c2dee0bcb",
+        "operational:learning-cycle:88d6d3ced91f8d6a",
+        "operational:learning-cycle:9c204c665c230ecc",
+        "operational:learning-cycle:b24439771f6e3295",
+        "operational:learning-cycle:6df165322d038b40",
+        "operational:approval:decision:reasoning:executive-office:mvf8ynt7-v4pll0",
+        "operational:decision:reasoning:executive-office:mvf9iac6-qhf1k9",
+        "operational:decision:reasoning:executive-office:mvf8ynt7-v4pll0",
+        "operational:decision:reasoning:executive-office:mvf8skn2-qsrny0",
+        "operational:decision:reasoning:executive-office:mvf85xxn-84wdj4",
+        "operational:decision:reasoning:ko5e-first-reasoning-test-2",
+        "operational:decision:reasoning:ko6-risk-question-1",
+        "operational:canonical-review:KP-2026-000040",
+        "operational:canonical-review:KP-2026-000046",
+        "operational:canonical-review:KP-2026-000054",
+        "operational:canonical-review:KP-2026-000055"
+      ],
+      "unavailable": []
+    },
+    "model": "gpt-5.5",
+    "provider": "text-generation",
+    "routing": {
+      "escalated": false,
+      "escalationReason": null,
+      "confidenceThreshold": 0.6,
+      "attempts": [
+        {
+          "role": "primary",
+          "provider": "openai",
+          "model": "gpt-5.5",
+          "confidence": 0.86,
+          "error": null
+        }
+      ]
+    }
+  },
+  "decidedAt": 1792441300445
+}

@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000061",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792414240160,
+  "updatedAt": 1792414240181,
+  "data": {
+    "id": "KP-2026-000061",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0006 — Executive Office runtime wiring and landing asset restore (a20e06482a29d46a80b599c6808399683bc78fc1, 586695356df95849fba9da214137267bcc2c2375)",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:bdc2a9bacfd3933abf768e59b44731c4cf1f5f18e08d37f922815c4df516e1f6"
+          ],
+          "genesisReplay": [
+            "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c"
+          ]
+        },
+        "extractedAt": 1792414240159,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792414240159,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+          "checksum": "sha256:42de87e0e4317a9fb1884b174c0a37fb52b702c23d82b778d2136fc72335ae44",
+          "capturedAt": 1792414240156,
+          "observedAt": 1792414176000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:c6083cd6a81acef05ceef94d01c82e0e9025f6f68689ad67371857a19a0d8e85",
+            "genesisManifestId": "genesis-manifest:2c602587a2b96dea96e145720d4021308126573b1493a6d5ccc61e98c0c65b3c",
+            "genesisManifestIndex": 2,
+            "genesisAdmissionIdentity": "genesis-admission:a98f8f33a5b39f1c8b17d8911eec668fc5a3cb1ca0ccdd9f711cc0e18daf2559",
+            "historicalSourceId": "genesis-source:document:derived:bdc2a9bacfd3933abf768e59b44731c4cf1f5f18e08d37f922815c4df516e1f6",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0006 — Executive Office runtime wiring and landing asset restore (a20e06482a29d46a80b599c6808399683bc78fc1, 586695356df95849fba9da214137267bcc2c2375)",
+              "status": "Approved",
+              "approvalDate": "2026-10-19",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792414240159,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0006-executive-office-runtime-wiring-and-landing-asset-restore-a2.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792414240159,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792414240159,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792414240160
+      },
+      {
+        "state": "compiled",
+        "at": 1792414240160
+      },
+      {
+        "state": "validated",
+        "at": 1792414240160
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792414240160
+      },
+      {
+        "state": "approved",
+        "at": 1792414240161,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792414240181,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792414240160
+    },
+    "createdAt": 1792414240160,
+    "updatedAt": 1792414240181,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792414240161
+      },
+      "review": {
+        "packageId": "KP-2026-000061",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792414240161,
+        "evidenceConsidered": [
+          "genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000061",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792414240161,
+          "evidenceConsidered": [
+            "genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792414240161,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792414240161,
+          "packageIds": [
+            "KP-2026-000061"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000061",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792414240181,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed"
+        ]
+      }
+    }
+  }
+}

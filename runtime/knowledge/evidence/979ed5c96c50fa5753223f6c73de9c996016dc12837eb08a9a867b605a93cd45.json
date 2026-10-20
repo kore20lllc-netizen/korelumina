@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:58618ea355967e86d2105cf4cef60fb9d9e84a440f0ff7af82cdb37ed3e71d0c",
+  "type": "commit",
+  "title": "fix(executive): the Chief Agent reasons with all current-policy knowledge, not a word match (KA-1, F-27)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792416928882,
+  "observedAt": 1792416580000,
+  "contentRef": "git:commit:9113967352a0f494ec398a4fe0ef76c63fd32949",
+  "checksum": "sha256:e4ab9d1e8dadefdd7e8fba18569a5ed45f24bb0413ceab67ffa0be6952db41d7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441",
+    "genesisManifestId": "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:fe792cdaa9339b3fa0f08946c1cf5acf4ac7a551ebf21d235249a9271c687b2c",
+    "historicalSourceId": "genesis-source:commit:9113967352a0f494ec398a4fe0ef76c63fd32949",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:9113967352a0f494ec398a4fe0ef76c63fd32949",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "9113967352a0f494ec398a4fe0ef76c63fd32949",
+      "parentShas": [
+        "1103f13ee8928e6a51e12344730fac96f46110cc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416580000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792416580000
+      },
+      "subject": "fix(executive): the Chief Agent reasons with all current-policy knowledge, not a word match (KA-1, F-27)",
+      "body": "When a question was asked, the knowledge context builder kept only canonical items whose title or summary shared a word with it. Summaries are generic, so governing documents were dropped before reasoning: for 'which pending canonical review should I handle first' the Chief Agent received 8 of 26 current-policy items and never saw the Platform Constitution, Business Charter, Blueprint, Vision 2050 or its own architecture. The executive context now asks for retrieval all; the governed content reader already ranks certified document text by the question within its budget, which is how KO-6 intended ranking to work. Other callers keep the default search.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+        "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderCurrentPolicy.test.ts"
+      ],
+      "changedPathsByParent": {
+        "1103f13ee8928e6a51e12344730fac96f46110cc": [
+          "apps/lumina-runtime/src/executive/context/ExecutiveKnowledgeContextReducer.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/AgentContextRequest.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/KnowledgeContextBuilder.ts",
+          "apps/lumina-runtime/src/knowledge-platform/context/__tests__/KnowledgeContextBuilderCurrentPolicy.test.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:9113967352a0f494ec398a4fe0ef76c63fd32949"
+    ],
+    "genesisReplay": [
+      "genesis-replay:fcae4db72e003c592493890d1bd3a95b08abfbf4e7b12aa15dfbe0bd91ada441"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:a661d33b07ad780bd2416e92b27cd783bc21d1f53b50a478651544a44d042c11"
+    ]
+  }
+}
