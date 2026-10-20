@@ -114,6 +114,12 @@ import { registerKnowledgePreservationRoutes } from "./routes/knowledge/register
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { resolveRuntimeCaller } from "./routes/runtimeCaller.js";
 import { registerRuntimeIdentityRoute } from "./routes/runtimeIdentity.js";
+import { registerAdminUserRoutes } from "./routes/adminUsers.js";
+import {
+  FileRoleAssignmentLedger,
+  RoleAssignmentService,
+  SupabaseAdminUserDirectory,
+} from "./governance/roles/RoleAssignment.js";
 import {
   SupabaseAccessTokenVerifier,
   supabaseTokenConfigFromEnvironment,
@@ -1517,6 +1523,29 @@ registerRuntimeIdentityRoute(
   app,
   runtimeSupabaseAccessTokenVerifier,
 );
+
+/*
+ * SEC-1e (ADR-0043 Decision 3): staff roles are assigned by the owner here,
+ * through the Supabase admin API (SUPABASE_SERVICE_ROLE_KEY, held only by
+ * Runtime), and recorded in runtime/governance/role-assignments.
+ */
+const runtimeUserDirectory =
+  new SupabaseAdminUserDirectory(
+    supabaseTokenConfigFromEnvironment().url,
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || undefined,
+  );
+
+const runtimeRoleAssignmentLedger =
+  new FileRoleAssignmentLedger();
+
+registerAdminUserRoutes(app, {
+  directory: runtimeUserDirectory,
+  roles: new RoleAssignmentService(
+    runtimeUserDirectory,
+    runtimeRoleAssignmentLedger,
+  ),
+  ledger: runtimeRoleAssignmentLedger,
+});
 app.use(
   "/api/executive",
   requireRuntimeAccess,
