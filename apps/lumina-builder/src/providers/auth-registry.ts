@@ -29,6 +29,12 @@ if (isProduction && allowMockProviders) {
   );
 }
 
+/*
+ * SEC-1d (ADR-0043): with real sign-in the Builder proves who the person
+ * is with their session token; Runtime verifies it.
+ */
+export const usesVerifiedSessions: boolean = useRealAuth;
+
 export const auth: AuthProvider = useRealAuth
   ? new SupabaseAuthProvider()
   : new MockAuthProvider();

@@ -113,6 +113,7 @@ import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/r
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
 import { resolveRuntimeCaller } from "./routes/runtimeCaller.js";
+import { registerRuntimeIdentityRoute } from "./routes/runtimeIdentity.js";
 import {
   SupabaseAccessTokenVerifier,
   supabaseTokenConfigFromEnvironment,
@@ -1510,6 +1511,11 @@ app.use(
   resolveRuntimeCaller(
     runtimeSupabaseAccessTokenVerifier,
   ),
+);
+
+registerRuntimeIdentityRoute(
+  app,
+  runtimeSupabaseAccessTokenVerifier,
 );
 app.use(
   "/api/executive",

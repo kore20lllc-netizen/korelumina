@@ -7,6 +7,7 @@ import {
   getExecutiveOfficeOperations,
   getKnowledgeLifecycle,
   getKnowledgeOverview,
+  getRuntimeIdentity,
   getRuntimeProjects,
   getLearningStatus,
   getPendingCanonicalReviews,
@@ -15,6 +16,7 @@ import {
   type ExecutiveOfficeOperations,
   type KnowledgeLifecycle,
   type KnowledgeOverview,
+  type RuntimeIdentity,
   type RuntimeProject,
   type LearningStatus,
   type PendingCanonicalReview,
@@ -52,6 +54,7 @@ export interface ExecutiveOfficeState {
   knowledge: Loaded<KnowledgeOverview>;
   lifecycle: Loaded<KnowledgeLifecycle>;
   projects: Loaded<RuntimeProject[]>;
+  identity: Loaded<RuntimeIdentity>;
   pendingQuestion: PendingQuestion | null;
   unanswered: UnansweredQuestion[];
   deciding: Record<string, "approve" | "reject">;
@@ -70,6 +73,7 @@ let state: ExecutiveOfficeState = {
   knowledge: { status: "loading" },
   lifecycle: { status: "loading" },
   projects: { status: "loading" },
+  identity: { status: "loading" },
   pendingQuestion: null,
   unanswered: [],
   deciding: {},
@@ -93,7 +97,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects">(
+function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity">(
   key: K,
   read: () => Promise<unknown>,
 ) {
@@ -123,6 +127,7 @@ export async function refreshExecutiveOffice() {
       load("knowledge", getKnowledgeOverview),
       load("lifecycle", getKnowledgeLifecycle),
       load("projects", getRuntimeProjects),
+      load("identity", getRuntimeIdentity),
     ]);
   } finally {
     refreshing = false;

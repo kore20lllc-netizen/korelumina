@@ -50,7 +50,8 @@ import {
  *
  * EW-1: Chief Agent status, autonomy, learning, approvals, Runtime, and the
  * three metrics read Runtime; the headline is the live briefing (EW-1b).
- * Security and the current mission are still the design-preview snapshot.
+ * Security reads how Runtime identifies the owner (SEC-1d). The current
+ * mission is still the design-preview snapshot.
  */
 
 type Operation = {
@@ -137,15 +138,41 @@ function operationsFor(office: ExecutiveOfficeState): Operation[] {
       detail: runtimeAnswered ? "Answering reads" : runtimeFailed ? "No answer" : "Connecting",
       tone: runtimeAnswered ? "healthy" : runtimeFailed ? "error" : "active",
     },
-    {
-      id: "security",
-      label: "Security",
-      icon: ShieldAlert,
-      status: "2 high",
-      detail: "Preview · F-18, signed-out role",
-      tone: "warning",
-    },
+    securityOperation(office),
   ];
+}
+
+/*
+ * SEC-1d: Security shows how Runtime identifies the owner right now: a
+ * verified session is healthy; a rejected token, local headers or an
+ * anonymous caller say why.
+ */
+function securityOperation(office: ExecutiveOfficeState): Operation {
+  const identity = office.identity;
+  const base = { id: "security", label: "Security", icon: ShieldAlert };
+
+  if (identity.status === "loading") {
+    return { ...base, status: "Checking…", detail: "Reading identity", tone: "active" };
+  }
+  if (identity.status === "error") {
+    return { ...base, status: "Unreadable", detail: identity.message, tone: "error" };
+  }
+
+  const { source, role, reason } = identity.data;
+  switch (source) {
+    case "verified-token":
+      return { ...base, status: "Verified", detail: `Signed in · ${role.replace("_", " ")}`, tone: "healthy" };
+    case "rejected-token":
+      return { ...base, status: "Not verified", detail: reason ?? "Session token refused", tone: "error" };
+    case "development-identity":
+      return { ...base, status: "Dev identity", detail: `${role.replace("_", " ")} · this machine only`, tone: "active" };
+    case "local-headers":
+      return { ...base, status: "Local only", detail: "No identity provider configured", tone: "warning" };
+    case "internal-token":
+      return { ...base, status: "System", detail: "Runtime internal token", tone: "active" };
+    default:
+      return { ...base, status: "Anonymous", detail: "Not signed in", tone: "warning" };
+  }
 }
 
 function metricsFor(office: ExecutiveOfficeState): ExecutiveRibbonMetric[] {

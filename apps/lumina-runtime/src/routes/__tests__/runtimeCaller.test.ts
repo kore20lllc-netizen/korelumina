@@ -79,3 +79,32 @@ test("production refuses the development identity", () => {
     null,
   );
 });
+
+/* SEC-1d: once an identity provider is configured, headers are never believed from the browser. */
+import { resolveRuntimeCallerFor } from "../runtimeCaller.js";
+
+test("with Supabase configured, this machine's headers are not trusted", () => {
+  const environment = { NODE_ENV: "development", SUPABASE_URL: "https://project.supabase.co" };
+  assert.equal(isTrustedCallerSource(request("127.0.0.1", claimsSuperAdmin), environment), false);
+  const resolution = resolveRuntimeCallerFor(request("127.0.0.1", claimsSuperAdmin), environment);
+  assert.equal(resolution.source, "anonymous");
+  assert.equal(resolution.caller.role, "user");
+});
+
+test("each way of being identified is reported", () => {
+  assert.equal(resolveRuntimeCallerFor(request("127.0.0.1", claimsSuperAdmin), { NODE_ENV: "development" }).source, "local-headers");
+  assert.equal(resolveRuntimeCallerFor(request("203.0.113.7", claimsSuperAdmin), { NODE_ENV: "development" }).source, "anonymous");
+  assert.equal(
+    resolveRuntimeCallerFor(request("127.0.0.1", {}), { NODE_ENV: "development", SUPABASE_URL: "https://p.supabase.co", KORELUMINA_DEV_IDENTITY: "super_admin:usr_owner" }).source,
+    "development-identity",
+  );
+  assert.equal(
+    resolveRuntimeCallerFor(request("203.0.113.7", { ...claimsSuperAdmin, "x-korelumina-runtime-token": "t" }), { NODE_ENV: "production", KORELUMINA_RUNTIME_INTERNAL_TOKEN: "t" }).source,
+    "internal-token",
+  );
+});
+
+test("a development identity is only for this machine", () => {
+  const resolution = resolveRuntimeCallerFor(request("203.0.113.7", {}), { NODE_ENV: "development", KORELUMINA_DEV_IDENTITY: "super_admin:usr_owner" });
+  assert.equal(resolution.source, "anonymous");
+});

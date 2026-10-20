@@ -4,8 +4,9 @@ import type {
   Response,
 } from "express";
 
-import type {
-  SupabaseAccessTokenVerifier,
+import {
+  supabaseTokenConfigFromEnvironment,
+  type SupabaseAccessTokenVerifier,
 } from "./supabaseAccessToken.js";
 
 export type RuntimeCallerRole =
@@ -86,8 +87,15 @@ export function isTrustedCallerSource(
     return true;
   }
 
+  /*
+   * SEC-1d (ADR-0043 Decision 1): once Runtime can verify sessions
+   * (SUPABASE_URL configured), headers are never believed from the
+   * browser, not even on this machine. Without an identity provider, local
+   * development on this machine keeps the header path.
+   */
   return (
     environment.NODE_ENV !== "production" &&
+    !supabaseTokenConfigFromEnvironment(environment).url &&
     isLoopbackAddress(
       req.socket?.remoteAddress,
     )
@@ -135,10 +143,24 @@ export function developmentIdentity(
   return callerFor(normalizeRole(role), userId?.trim() || undefined);
 }
 
-const VERIFIED_CALLER = Symbol("korelumina.verifiedCaller");
+export type RuntimeCallerSource =
+  | "verified-token"
+  | "rejected-token"
+  | "internal-token"
+  | "development-identity"
+  | "local-headers"
+  | "anonymous";
+
+export interface RuntimeCallerResolution {
+  caller: RuntimeCaller;
+  source: RuntimeCallerSource;
+  reason?: string;
+}
+
+const TOKEN_RESOLUTION = Symbol("korelumina.tokenResolution");
 
 type RequestWithCaller = Request & {
-  [VERIFIED_CALLER]?: RuntimeCaller;
+  [TOKEN_RESOLUTION]?: RuntimeCallerResolution;
 };
 
 /*
@@ -167,63 +189,69 @@ export function resolveRuntimeCaller(
 
     try {
       const verification = await verifier.verify(token);
-      (req as RequestWithCaller)[VERIFIED_CALLER] = verification.ok
-        ? callerFor(normalizeRole(verification.identity.role ?? undefined), verification.identity.userId)
-        : { ...ANONYMOUS_CALLER };
-    } catch {
-      (req as RequestWithCaller)[VERIFIED_CALLER] = { ...ANONYMOUS_CALLER };
+      (req as RequestWithCaller)[TOKEN_RESOLUTION] = verification.ok
+        ? {
+            caller: callerFor(normalizeRole(verification.identity.role ?? undefined), verification.identity.userId),
+            source: "verified-token",
+          }
+        : { caller: { ...ANONYMOUS_CALLER }, source: "rejected-token", reason: verification.reason };
+    } catch (error) {
+      (req as RequestWithCaller)[TOKEN_RESOLUTION] = {
+        caller: { ...ANONYMOUS_CALLER },
+        source: "rejected-token",
+        reason: error instanceof Error ? error.message : String(error),
+      };
     }
 
     return next();
   };
 }
 
-export function getRuntimeCaller(
+/*
+ * Who is calling, and how Runtime knows. In order: a verified (or rejected)
+ * session token; the Runtime internal token (machine callers, which may
+ * act for a person through headers); a development identity configured in
+ * Runtime's environment on this machine outside production; local headers
+ * on this machine only while no identity provider is configured;
+ * otherwise an anonymous plain user.
+ */
+export function resolveRuntimeCallerFor(
   req: Request,
-): RuntimeCaller {
-  const verified = (req as RequestWithCaller)[VERIFIED_CALLER];
-  if (verified) {
-    return { ...verified };
+  environment: NodeJS.ProcessEnv = process.env,
+): RuntimeCallerResolution {
+  const fromToken = (req as RequestWithCaller)[TOKEN_RESOLUTION];
+  if (fromToken) {
+    return { ...fromToken, caller: { ...fromToken.caller } };
   }
 
-  if (!isTrustedCallerSource(req)) {
-    return { ...ANONYMOUS_CALLER };
-  }
-
-  /* SEC-1c: on this machine a configured development identity wins over headers. */
-  const internalToken = process.env.KORELUMINA_RUNTIME_INTERNAL_TOKEN;
+  const internalToken = environment.KORELUMINA_RUNTIME_INTERNAL_TOKEN;
   const usesInternalToken =
     Boolean(internalToken) &&
     req.header("x-korelumina-runtime-token") === internalToken;
-  const development = usesInternalToken ? null : developmentIdentity();
-  if (development) {
-    return development;
+
+  if (!usesInternalToken && isLoopbackAddress(req.socket?.remoteAddress)) {
+    const development = developmentIdentity(environment);
+    if (development) {
+      return { caller: development, source: "development-identity" };
+    }
   }
 
-  const role =
-    normalizeRole(
-      readHeader(
-        req,
-        "x-korelumina-role",
-      ),
-    );
+  if (!isTrustedCallerSource(req, environment)) {
+    return { caller: { ...ANONYMOUS_CALLER }, source: "anonymous" };
+  }
 
   return {
-    userId: readHeader(
-      req,
-      "x-korelumina-user-id",
+    caller: callerFor(
+      normalizeRole(readHeader(req, "x-korelumina-role")),
+      readHeader(req, "x-korelumina-user-id"),
+      readHeader(req, "x-korelumina-team-id"),
     ),
-    teamId: readHeader(
-      req,
-      "x-korelumina-team-id",
-    ),
-    role,
-    supportAccess:
-      role === "inhouse-dev" ||
-      role === "admin" ||
-      role === "super_admin",
-    adminTools:
-      role === "admin" ||
-      role === "super_admin",
+    source: usesInternalToken ? "internal-token" : "local-headers",
   };
+}
+
+export function getRuntimeCaller(
+  req: Request,
+): RuntimeCaller {
+  return resolveRuntimeCallerFor(req).caller;
 }

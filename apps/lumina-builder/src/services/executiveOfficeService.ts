@@ -346,6 +346,37 @@ Promise<RuntimeProject[]> {
   });
 }
 
+/* SEC-1d: how Runtime sees the person using the Executive Office. */
+export interface RuntimeIdentity {
+  identityProviderConfigured: boolean;
+  source:
+    | "verified-token"
+    | "rejected-token"
+    | "internal-token"
+    | "development-identity"
+    | "local-headers"
+    | "anonymous";
+  reason?: string;
+  role: string;
+  userId: string | null;
+}
+
+export async function getRuntimeIdentity():
+Promise<RuntimeIdentity> {
+  const body =
+    await readJson(
+      "/api/runtime/identity",
+    );
+
+  return {
+    identityProviderConfigured: body?.identityProviderConfigured === true,
+    source: body?.source ?? "anonymous",
+    reason: typeof body?.reason === "string" ? body.reason : undefined,
+    role: String(body?.caller?.role ?? "user"),
+    userId: typeof body?.caller?.userId === "string" ? body.caller.userId : null,
+  };
+}
+
 export interface KnowledgeOverview {
   canonicalItems: number;
 }
