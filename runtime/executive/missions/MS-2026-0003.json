@@ -72,7 +72,7 @@
       "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
     ]
   },
-  "state": "planned",
+  "state": "approved",
   "blockedFrom": null,
   "linkedCommits": [],
   "recoveryAnchor": null,
@@ -95,8 +95,26 @@
         "type": "human"
       },
       "at": 1792473895268
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476562425
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476573214
     }
   ],
   "createdAt": 1792473895268,
-  "updatedAt": 1792473895268
+  "updatedAt": 1792476573214
 }

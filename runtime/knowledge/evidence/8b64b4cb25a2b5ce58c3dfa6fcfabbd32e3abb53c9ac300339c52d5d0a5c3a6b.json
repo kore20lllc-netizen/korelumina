@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:e36d3b16bcf04b1a77936043137fc32b09c8801f382d2039b9e2c20125bddb12",
+  "type": "commit",
+  "title": "fix(education): Learning Records are knowledge, not curriculum (ADR-0045)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792498136363,
+  "observedAt": 1792498025000,
+  "contentRef": "git:commit:fb3556db36545c69e4b055c844d282587dd0c115",
+  "checksum": "sha256:388db8fd3e9d5b22eb4534b5ea5537aef5ff39928faf4de06fccb283ea8f4ff6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:13967cada55da08372fbc5927768b02cd78c19d950c0576e4ff9c0e961171aee",
+    "genesisManifestId": "genesis-manifest:f4bfd8ac453b0e5c7123297a7041e2d9d6f4abb6c7a2d52f3895d1e9d89e35ca",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:6c992a8f1b60d4c4565d0092091718cc1ea256eee453317935dbcac46c58fb59",
+    "historicalSourceId": "genesis-source:commit:fb3556db36545c69e4b055c844d282587dd0c115",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:fb3556db36545c69e4b055c844d282587dd0c115",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "fb3556db36545c69e4b055c844d282587dd0c115",
+      "parentShas": [
+        "e1cdb630cff6a653fc319783929a556c93ed09c0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792498025000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792498025000
+      },
+      "subject": "fix(education): Learning Records are knowledge, not curriculum (ADR-0045)",
+      "body": "Continuous learning makes each Learning Record canonical (ADR-0042), and education admitted them into the Day-0 curriculum, where each lacked an educational authority resolution: the corpus candidate went incomplete and the corpus, competency, human acceptance and workspace authorization certifications read blocked after every owner commit. Education no longer admits authority class learning; Learning Records stay canonical and reach reasoning through canonical knowledge. With it, every certification is valid against the exact candidate the owner certified on 2026-10-17, with no re-certification. Runtime suites 1571/1571.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalAdmissionLearningRecords.test.ts",
+        "apps/lumina-runtime/src/knowledge-education/admission/EducationalAdmissionPolicy.ts",
+        "docs/adr/ADR-0045-learning-records-are-knowledge-not-curriculum.md"
+      ],
+      "changedPathsByParent": {
+        "e1cdb630cff6a653fc319783929a556c93ed09c0": [
+          "apps/lumina-runtime/src/knowledge-education/__tests__/EducationalAdmissionLearningRecords.test.ts",
+          "apps/lumina-runtime/src/knowledge-education/admission/EducationalAdmissionPolicy.ts",
+          "docs/adr/ADR-0045-learning-records-are-knowledge-not-curriculum.md"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:fb3556db36545c69e4b055c844d282587dd0c115"
+    ],
+    "genesisReplay": [
+      "genesis-replay:13967cada55da08372fbc5927768b02cd78c19d950c0576e4ff9c0e961171aee"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:f4bfd8ac453b0e5c7123297a7041e2d9d6f4abb6c7a2d52f3895d1e9d89e35ca"
+    ]
+  }
+}

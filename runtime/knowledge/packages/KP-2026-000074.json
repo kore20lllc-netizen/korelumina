@@ -1,0 +1,147 @@
+{
+  "id": "KP-2026-000074",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792498136353,
+  "updatedAt": 1792498402979,
+  "data": {
+    "id": "KP-2026-000074",
+    "state": "approved",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:505fde93ac0ca42035f2837daa4b993b9ecae68b9cde0bff948d168348611995"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0045 — Learning Records are knowledge, not curriculum"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0045 — Learning Records are knowledge, not curriculum",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0045 — Learning Records are knowledge, not curriculum",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:505fde93ac0ca42035f2837daa4b993b9ecae68b9cde0bff948d168348611995"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1792498136351,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792498136351,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0045-learning-records-are-knowledge-not-curriculum.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:505fde93ac0ca42035f2837daa4b993b9ecae68b9cde0bff948d168348611995"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0045-learning-records-are-knowledge-not-curriculum.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "approved",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0045 — Learning Records are knowledge, not curriculum",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0045 — Learning Records are knowledge, not curriculum",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792498136351,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792498136353
+      },
+      {
+        "state": "compiled",
+        "at": 1792498136353
+      },
+      {
+        "state": "validated",
+        "at": 1792498136353
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792498136353
+      },
+      {
+        "state": "approved",
+        "at": 1792498402979,
+        "reason": "canonical-review:approved"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792498136353
+    },
+    "createdAt": 1792498136353,
+    "updatedAt": 1792498402979,
+    "metadata": {
+      "sourceApprovalStates": [],
+      "review": {
+        "packageId": "KP-2026-000074",
+        "packageVersion": null,
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792498402979,
+        "evidenceConsidered": [
+          "genesis-evidence:505fde93ac0ca42035f2837daa4b993b9ecae68b9cde0bff948d168348611995"
+        ]
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000074",
+          "packageVersion": null,
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792498402979,
+          "evidenceConsidered": [
+            "genesis-evidence:505fde93ac0ca42035f2837daa4b993b9ecae68b9cde0bff948d168348611995"
+          ]
+        }
+      ]
+    }
+  }
+}

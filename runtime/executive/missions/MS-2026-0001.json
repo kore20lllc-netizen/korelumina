@@ -128,12 +128,18 @@
       "sha": "298ed3fb36ee85d735bbe6576daba36e0643199b",
       "subject": "feat(executive): Mission, Planning, Agent and Execution sections read Runtime missions (MS-5, ADR-0044)",
       "committedAt": 1792470872000
+    },
+    {
+      "sha": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
+      "subject": "feat(missions): import the open tickets as missions, and the owner moves missions from the Mission Center (MS-6, MS-5b, ADR-0044)",
+      "committedAt": 1792473761000
     }
   ],
-  "recoveryAnchor": "298ed3fb36ee85d735bbe6576daba36e0643199b",
+  "recoveryAnchor": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
   "producedKnowledge": [
     "LR-2026-0014",
-    "LR-2026-0015"
+    "LR-2026-0015",
+    "LR-2026-0017"
   ],
   "history": [
     {
@@ -194,9 +200,9 @@
     }
   ],
   "createdAt": 1792464087272,
-  "updatedAt": 1792472804643,
+  "updatedAt": 1792498165902,
   "validation": {
-    "evaluatedAt": 1792472804643,
+    "evaluatedAt": 1792498165902,
     "checks": [
       {
         "id": "tasks",
@@ -208,7 +214,7 @@
         "id": "build",
         "label": "The last linked commit passed npm run build",
         "passed": false,
-        "detail": "No build verification for 298ed3fb."
+        "detail": "No build verification for 051dce1e."
       },
       {
         "id": "approvals",
@@ -226,7 +232,7 @@
         "id": "recovery-anchor",
         "label": "A recovery anchor is recorded",
         "passed": true,
-        "detail": "Recovery anchor 298ed3fb."
+        "detail": "Recovery anchor 051dce1e."
       }
     ]
   }

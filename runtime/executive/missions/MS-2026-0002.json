@@ -37,7 +37,9 @@
               "Any unlearned Mission System material is treated as implementation context only until learning and review complete.",
               "The Mission Center wiring scope is documented before code changes begin."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476676101
           },
           {
             "id": "E1.T2",
@@ -47,7 +49,9 @@
               "The contract distinguishes read-only mission visibility from owner-approved mutating actions.",
               "Unavailable Runtime fields have explicit fallback behavior and are not guessed."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476680632
           }
         ]
       },
@@ -63,7 +67,9 @@
               "Mission records show mission id, title, priority, status, proposer, plan summary, timestamps, and current approval state when available.",
               "Loading, empty, unavailable, and error states are visible and do not imply nonexistent missions."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476686701
           },
           {
             "id": "E2.T2",
@@ -73,7 +79,9 @@
               "Selecting a mission shows its objective, description, plan, task count, lifecycle state, and related activity when available.",
               "The existing Executive Office visual language is preserved while removing the design-preview label from live portions only."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476691145
           }
         ]
       },
@@ -89,7 +97,9 @@
               "The UI clearly labels proposed missions as awaiting owner decision.",
               "Approving or rejecting a proposed mission uses the existing Executive Office approval pattern where available."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476696396
           },
           {
             "id": "E3.T2",
@@ -99,7 +109,9 @@
               "Plan proposals do not mutate approved mission execution without owner approval.",
               "Rejected plan proposals retain rejection reason visibility where Runtime provides it."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476700876
           }
         ]
       },
@@ -115,7 +127,9 @@
               "Mission proposal and plan proposal states are covered for pending, approved, and rejected outcomes where supported.",
               "The Executive Office certified UI contract is updated if the approved surface changes."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476706941
           },
           {
             "id": "E4.T2",
@@ -125,7 +139,9 @@
               "Knowledge preservation is completed before the mission is considered done.",
               "Any canonical-review or learning follow-up is listed explicitly rather than silently assumed complete."
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476710239
           }
         ]
       }
@@ -133,7 +149,7 @@
     "validationPlan": [],
     "requiredDocuments": []
   },
-  "state": "planned",
+  "state": "approved",
   "blockedFrom": null,
   "linkedCommits": [],
   "recoveryAnchor": null,
@@ -176,8 +192,26 @@
       },
       "at": 1792472533194,
       "reason": "Rejected through approval:decision:reasoning:executive-office:mvg3xz24-tgsoo9: it was a test"
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476578427
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476579749
     }
   ],
   "createdAt": 1792465977431,
-  "updatedAt": 1792472533194
+  "updatedAt": 1792476710239
 }

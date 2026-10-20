@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1788240130204,
-  "updatedAt": 1788240130204,
+  "updatedAt": 1792474387354,
   "data": {
     "id": "KP-2026-000046",
-    "state": "awaiting_review",
+    "state": "approved",
     "sourceEvidenceRefs": [
       "genesis-evidence:11c8755ee2967e01bbb777b592e5964a1f123672ac716244340ea49c3d693cdc"
     ],
@@ -107,7 +107,7 @@
       ]
     },
     "authority": "Approved Architecture Reconciliation",
-    "approvalState": "pending_review",
+    "approvalState": "approved",
     "owner": "Chief Systems Architect",
     "scope": "Chief Agent governing architecture, operating model, and mission-system authority identity",
     "version": "1.0.0",
@@ -163,6 +163,11 @@
       {
         "state": "awaiting_review",
         "at": 1788240130204
+      },
+      {
+        "state": "approved",
+        "at": 1792474387354,
+        "reason": "canonical-review-batch:KRB-2026-000019"
       }
     ],
     "remediation": {
@@ -172,10 +177,34 @@
       "updatedAt": 1788240130204
     },
     "createdAt": 1788240130204,
-    "updatedAt": 1788240130204,
+    "updatedAt": 1792474387354,
     "metadata": {
       "sourceApprovalStates": [
         "Approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000046",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792474387354,
+        "evidenceConsidered": [
+          "genesis-evidence:11c8755ee2967e01bbb777b592e5964a1f123672ac716244340ea49c3d693cdc"
+        ],
+        "reason": "canonical-review-batch:KRB-2026-000019"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000046",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792474387354,
+          "evidenceConsidered": [
+            "genesis-evidence:11c8755ee2967e01bbb777b592e5964a1f123672ac716244340ea49c3d693cdc"
+          ],
+          "reason": "canonical-review-batch:KRB-2026-000019"
+        }
       ]
     }
   }

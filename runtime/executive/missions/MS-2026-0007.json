@@ -1,0 +1,198 @@
+{
+  "id": "MS-2026-0007",
+  "title": "Governed records live in git, not only on this Mac",
+  "description": "Found while cleaning up on 2026-10-20. runtime-data/ is git-ignored, yet it holds governed records: the Day-0 certification, educational corpus and its certification, initial competency evidence, certification and human acceptance, production workspace authorization, authority resolutions, and the conversation expected history with its amendments, candidate review, coverage and completeness certifications (about 1 MB). They exist only on the owner's Mac. The activation record itself is already tracked (KO-5c), but its prerequisites are not, so losing this disk would suspend the Chief Agent (ADR-0041: unreadable governance suspends). The rest of runtime-data is rebuildable cache (Genesis replays and historical correlation, about 690 MB) or private source material (recovered ChatGPT conversations, about 7 MB).",
+  "objective": "A fresh clone, with no runtime-data, has every certification and authorization the Chief Agent's activation depends on, and the activation gate reads ACTIVE without re-certifying.",
+  "objectiveId": null,
+  "type": "governance",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Moving a record the activation gate reads can suspend the Chief Agent; the move must be proven with the gate ACTIVE before and after.",
+    "Private conversation content must not reach GitHub: the educational corpus and conversation records are checked for raw conversation text before anything is tracked.",
+    "Records are moved once; Runtime must not keep two copies that can drift."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Classify",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Classify every runtime-data store as governed record, rebuildable cache, or private source material",
+            "acceptanceCriteria": [
+              "Each store is listed with its class and the service that writes it",
+              "The owner decides every store that holds conversation content"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476467127
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Move",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Governed record stores persist under runtime/governance, tracked by git",
+            "acceptanceCriteria": [
+              "Each service writes its record to the tracked location",
+              "Existing records are moved once, byte for byte, and the old copy is no longer read"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476476057
+          },
+          {
+            "id": "E2.T2",
+            "title": "Caches and private material stay ignored",
+            "acceptanceCriteria": [
+              ".gitignore keeps replays, correlation and recovered conversations out of git"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792476482560
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Prove",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "A fresh clone activates without re-certification",
+            "acceptanceCriteria": [
+              "In a clean clone with no runtime-data, the activation gate reads ACTIVE at PROPOSE_ONLY",
+              "Caches rebuild on demand"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass",
+      "Activation gate ACTIVE before and after the move, and in a fresh clone"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "executing",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "14dab022f1870cd17b2254e975ba07798509ddef",
+      "subject": "feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)",
+      "committedAt": 1792478201000
+    },
+    {
+      "sha": "e1cdb630cff6a653fc319783929a556c93ed09c0",
+      "subject": "fix(governance): track the browser recovery Day-0 coverage is re-proved from (MS-2026-0007)",
+      "committedAt": 1792497982000
+    }
+  ],
+  "recoveryAnchor": "e1cdb630cff6a653fc319783929a556c93ed09c0",
+  "producedKnowledge": [
+    "LR-2026-0020",
+    "LR-2026-0021"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476299259
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476299259
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476442687
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476448454
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792483112833,
+      "reason": "First linked commit 14dab022: feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)"
+    }
+  ],
+  "createdAt": 1792476299259,
+  "updatedAt": 1792498165917,
+  "validation": {
+    "evaluatedAt": 1792498165917,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "1 of 4 still to do: E3.T1."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": false,
+        "detail": "No build verification for e1cdb630."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor e1cdb630."
+      }
+    ]
+  }
+}

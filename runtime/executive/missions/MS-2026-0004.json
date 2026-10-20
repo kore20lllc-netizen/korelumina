@@ -88,7 +88,7 @@
     ],
     "requiredDocuments": []
   },
-  "state": "planned",
+  "state": "approved",
   "blockedFrom": null,
   "linkedCommits": [],
   "recoveryAnchor": null,
@@ -111,8 +111,26 @@
         "type": "human"
       },
       "at": 1792473895273
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476551448
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476555845
     }
   ],
   "createdAt": 1792473895273,
-  "updatedAt": 1792473895273
+  "updatedAt": 1792476555845
 }

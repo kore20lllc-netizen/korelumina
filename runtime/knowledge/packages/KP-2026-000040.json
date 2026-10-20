@@ -3,10 +3,10 @@
   "type": "knowledge-package",
   "version": 1,
   "createdAt": 1787785148225,
-  "updatedAt": 1787785148225,
+  "updatedAt": 1792474353857,
   "data": {
     "id": "KP-2026-000040",
-    "state": "awaiting_review",
+    "state": "approved",
     "sourceEvidenceRefs": [
       "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
     ],
@@ -108,7 +108,7 @@
       ]
     },
     "authority": "Constitutional Amendment",
-    "approvalState": "pending_review",
+    "approvalState": "approved",
     "owner": "Constitutional Office",
     "scope": "Platform",
     "version": "1.0.0",
@@ -164,6 +164,11 @@
       {
         "state": "awaiting_review",
         "at": 1787785148225
+      },
+      {
+        "state": "approved",
+        "at": 1792474353857,
+        "reason": "canonical-review-batch:KRB-2026-000018"
       }
     ],
     "remediation": {
@@ -173,10 +178,34 @@
       "updatedAt": 1787785148225
     },
     "createdAt": 1787785148225,
-    "updatedAt": 1787785148225,
+    "updatedAt": 1792474353857,
     "metadata": {
       "sourceApprovalStates": [
         "approved"
+      ],
+      "review": {
+        "packageId": "KP-2026-000040",
+        "packageVersion": "1.0.0",
+        "decision": "approved",
+        "reviewerId": "human:knowledge-governance",
+        "reviewedAt": 1792474353857,
+        "evidenceConsidered": [
+          "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+        ],
+        "reason": "canonical-review-batch:KRB-2026-000018"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000040",
+          "packageVersion": "1.0.0",
+          "decision": "approved",
+          "reviewerId": "human:knowledge-governance",
+          "reviewedAt": 1792474353857,
+          "evidenceConsidered": [
+            "genesis-evidence:906e878dc7328aa6a627de787eb7a2dca0caa46c9cdb1068c88eb9f994a95822"
+          ],
+          "reason": "canonical-review-batch:KRB-2026-000018"
+        }
       ]
     }
   }

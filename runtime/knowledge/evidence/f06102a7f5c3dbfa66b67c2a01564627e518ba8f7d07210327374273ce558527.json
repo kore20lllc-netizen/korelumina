@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:ca369a6d0531a950083b79c739dcc72e262d2a6c56067eaad1300af049945e33",
+  "type": "commit",
+  "title": "feat(missions): import the open tickets as missions, and the owner moves missions from the Mission Center (MS-6, MS-5b, ADR-0044)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792474473926,
+  "observedAt": 1792473761000,
+  "contentRef": "git:commit:051dce1e5c701587c7816811a5bb4ed1f95ce602",
+  "checksum": "sha256:8cf1d1b53e7935a140bdd6110214712e2bfabf292eb1ab61db05cd7d9e2aae50",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3",
+    "genesisManifestId": "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:eb943819e93ca52bbc306b9f92368672a178487b64555c8a9e04e7b41efff2b6",
+    "historicalSourceId": "genesis-source:commit:051dce1e5c701587c7816811a5bb4ed1f95ce602",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:051dce1e5c701587c7816811a5bb4ed1f95ce602",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
+      "parentShas": [
+        "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792473761000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792473761000
+      },
+      "subject": "feat(missions): import the open tickets as missions, and the owner moves missions from the Mission Center (MS-6, MS-5b, ADR-0044)",
+      "body": "Implements ADR-0044 Decision 7. There was no separate Mission Board: open work lived in ADR ticket lists and in the owner's conversations with Claude. A ticket counts as done when a commit names it; the open ones (BILL-1, the Executive Office's remaining preview parts, F-33) are recorded in runtime/executive/mission-imports with the reasons others were not imported (KO-3d done unnamed, KO-4a a note, parent tickets done through sub-tickets). scripts/import-missions.mjs creates each as a Planned mission in the owner's name, so importing decides nothing, and skips tickets already imported. MS-5 left owner-created missions with no way forward in the Executive Office; Mission Center cards now offer the lifecycle steps the state allows, with a reason where Runtime requires one, while Chief Agent proposals stay in the Approval Center. Mission Center presentation certified after owner visual approval.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json",
+        "runtime/executive/mission-imports/2026-10-20-ms6-open-tickets.json",
+        "scripts/import-missions.mjs"
+      ],
+      "changedPathsByParent": {
+        "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd": [
+          "apps/lumina-builder/src/components/workspaces/executive/sections/MissionCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json",
+          "runtime/executive/mission-imports/2026-10-20-ms6-open-tickets.json",
+          "scripts/import-missions.mjs"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:051dce1e5c701587c7816811a5bb4ed1f95ce602"
+    ],
+    "genesisReplay": [
+      "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d"
+    ]
+  }
+}

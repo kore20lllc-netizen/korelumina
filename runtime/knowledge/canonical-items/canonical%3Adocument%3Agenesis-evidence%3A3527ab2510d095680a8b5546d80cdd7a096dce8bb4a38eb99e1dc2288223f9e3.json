@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0015 — Runtime missions replace Executive Office preview data in 298ed3fb36ee85d735bbe6576daba36e0643199b",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:be68203a2ed74de81c887df536a3eb40e917f3aba8cf209b897dcf858dffe996"
+    ],
+    "genesisReplay": [
+      "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d"
+    ]
+  },
+  "createdAt": 1792474474008,
+  "updatedAt": 1792474474008,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md",
+    "checksum": "sha256:6de5bde85eab7747a6acd9e7f3f6cd9cdb5afeedee9346fcf1baf21cc2b6be51",
+    "capturedAt": 1792474473980,
+    "observedAt": 1792473919000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3",
+      "genesisManifestId": "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d",
+      "genesisManifestIndex": 2,
+      "genesisAdmissionIdentity": "genesis-admission:ff88bfe52ff57b0c7c92100e1025a4f52c55412ba8e8a2af0f31ee6037182c4a",
+      "historicalSourceId": "genesis-source:document:derived:be68203a2ed74de81c887df536a3eb40e917f3aba8cf209b897dcf858dffe996",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0015 — Runtime missions replace Executive Office preview data in 298ed3fb36ee85d735bbe6576daba36e0643199b",
+        "status": "Approved",
+        "approvalDate": "2026-10-20",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792474473985,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000072",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0015-runtime-missions-replace-executive-office-preview-data-in-29.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792474473987,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000072",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792474473987,
+        "evidenceConsidered": [
+          "genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000072",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792474473987,
+          "evidenceConsidered": [
+            "genesis-evidence:3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792474473985
+        },
+        {
+          "state": "compiled",
+          "at": 1792474473985
+        },
+        {
+          "state": "validated",
+          "at": 1792474473985
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792474473985
+        },
+        {
+          "state": "approved",
+          "at": 1792474473987,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

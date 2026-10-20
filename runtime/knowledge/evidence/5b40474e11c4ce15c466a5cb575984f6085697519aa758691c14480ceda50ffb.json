@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:4deb0e6c0f6acd7a87a81a3cedb21752cb8a4f650fe9b88c2bf173ab2597f079",
+  "type": "commit",
+  "title": "fix(executive): every Executive Office section is the same size and scrolls inside (EW-1i)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792478182740,
+  "observedAt": 1792477144000,
+  "contentRef": "git:commit:b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+  "checksum": "sha256:f21020763bf78ba856e560f70c42a1af34463b0e9a519e6bbc4fc4648b0e90be",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:67821325a26e7c147f181d5e9b90ae3c5ec4c10d72c986735c805b9d03d119fd",
+    "genesisManifestId": "genesis-manifest:4727f413bfc2d48a1678b30297dbff74658ae0aa61437bea26257408432939b4",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:de31d9d5d23bcee3dc9c3a6eec9fde9fdc9c3c3f33af81b87f99183f4bbc9e4c",
+    "historicalSourceId": "genesis-source:commit:b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+      "parentShas": [
+        "49af80ffc50ae5f93785b03e626324bb2bba3e70"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792477144000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792477144000
+      },
+      "subject": "fix(executive): every Executive Office section is the same size and scrolls inside (EW-1i)",
+      "body": "Sections grew with their content, so long ones (seven missions and their plans) stretched their row and pushed the office down, while short ones left uneven rows. Every section now has the same 680 px height in both columns: the header stays in place and the content scrolls inside the panel, using the Knowledge Operations scroll pattern (contained overscroll, stable gutter, shared scrollbar). One change in the shared section wrapper covers all twelve sections. Presentation certified after owner visual approval.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "49af80ffc50ae5f93785b03e626324bb2bba3e70": [
+          "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:b60464bbfa3b7ec07447f4fb14f75c07b3f999aa"
+    ],
+    "genesisReplay": [
+      "genesis-replay:67821325a26e7c147f181d5e9b90ae3c5ec4c10d72c986735c805b9d03d119fd"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:4727f413bfc2d48a1678b30297dbff74658ae0aa61437bea26257408432939b4"
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "id": "MS-2026-0006",
+  "title": "The Builder typechecks, and the build enforces it",
+  "description": "Found by F-33 (MS-2026-0005). vite build never typechecks, and a syntax error in a dead file made tsc skip type checking entirely. With it removed, tsc reports 384 errors across the Builder (knowledge 94, genesis 37, knowledge-v3 25, runtime 14, executive 7, others). The main cause: @types/react and @types/react-dom are not installed, so every component prop with key fails and the React namespace is missing; vite-env.d.ts sits outside the included src, so image imports have no types.",
+  "objective": "npm run build fails on a Builder type error, and the Builder has none.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The count after the React types are installed is not known yet; npm was not reachable from Claude's environment to measure it.",
+    "Some errors may be real defects, not just missing types."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Types",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Add @types/react and @types/react-dom for React 18.3, and include vite-env.d.ts",
+            "acceptanceCriteria": [
+              "No Cannot find namespace React errors",
+              "No missing-module errors for image imports",
+              "The remaining error count is recorded"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Fix the remaining type errors, area by area",
+            "acceptanceCriteria": [
+              "tsc -p apps/lumina-builder/tsconfig.app.json --noEmit reports no errors",
+              "Each real defect found is named in its commit"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Gate",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "npm run build typechecks the Builder",
+            "acceptanceCriteria": [
+              "A deliberate type error makes npm run build fail"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes with the typecheck gate",
+      "Both UI contracts still verify"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "approved",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792474589676
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792474589676
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476513290
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792476515234
+    }
+  ],
+  "createdAt": 1792474589676,
+  "updatedAt": 1792476515234
+}

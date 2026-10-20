@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0014 — Governed roles, canonical retirements, and Mission System v1",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:50939ac401a2f897ad23f5558f336396d110c06b42ba3032fdad410a4902ad11"
+    ],
+    "genesisReplay": [
+      "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d"
+    ]
+  },
+  "createdAt": 1792474473970,
+  "updatedAt": 1792474473970,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md",
+    "checksum": "sha256:a5eff40c7e9c5c045f676d0a06c58d4a6c9f98732a268966805109a4d5ebfe77",
+    "capturedAt": 1792474473936,
+    "observedAt": 1792473919000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3",
+      "genesisManifestId": "genesis-manifest:7eeaf6781df17b1628de7c0695947a43145c8ac3c92f86dd383a725a96c4429d",
+      "genesisManifestIndex": 1,
+      "genesisAdmissionIdentity": "genesis-admission:431f517e6576a4b7deab6a0f56dd2755cc921b02bb326ced786f49e43c99d24c",
+      "historicalSourceId": "genesis-source:document:derived:50939ac401a2f897ad23f5558f336396d110c06b42ba3032fdad410a4902ad11",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0014 — Governed roles, canonical retirements, and Mission System v1",
+        "status": "Approved",
+        "approvalDate": "2026-10-20",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792474473942,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000071",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0014-governed-roles-canonical-retirements-and-mission-system-v1.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792474473945,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000071",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792474473945,
+        "evidenceConsidered": [
+          "genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000071",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792474473945,
+          "evidenceConsidered": [
+            "genesis-evidence:40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792474473942
+        },
+        {
+          "state": "compiled",
+          "at": 1792474473942
+        },
+        {
+          "state": "validated",
+          "at": 1792474473942
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792474473942
+        },
+        {
+          "state": "approved",
+          "at": 1792474473945,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

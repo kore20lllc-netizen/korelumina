@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
-    "committedAt": 1792472337000,
-    "establishedAt": 1792472804642,
-    "basis": "Learning cycle learning-cycle:e743e831cf06c55e"
+    "commit": "fb3556db36545c69e4b055c844d282587dd0c115",
+    "committedAt": 1792498025000,
+    "establishedAt": 1792498165899,
+    "basis": "Learning cycle learning-cycle:b6478f8eff6e70bb"
   },
   "cycles": [
     {
@@ -844,6 +844,221 @@
         "state": "WRITTEN",
         "reasons": []
       }
+    },
+    {
+      "cycleId": "learning-cycle:34c62c6d2627f654",
+      "trigger": "manual",
+      "startedAt": 1792474411639,
+      "fromCommit": "b866c3ebbb6d4a0c20897dc0a4c0973eeb391acd",
+      "replayId": "genesis-replay:01a50c524eca49c65b296f38dbfeaec633af3b53115c903d3d8f2cc9b7189dc3",
+      "admittedSources": 5,
+      "completedAt": 1792474474148,
+      "toCommit": "6798557e5f106d406f61ad0a6523822af2e7ee47",
+      "commits": [
+        {
+          "sha": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792473761000,
+          "subject": "feat(missions): import the open tickets as missions, and the owner moves missions from the Mission Center (MS-6, MS-5b, ADR-0044)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        },
+        {
+          "sha": "6798557e5f106d406f61ad0a6523822af2e7ee47",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792473919000,
+          "subject": "chore(missions): record Mission System v1 completion, the imported missions, and Learning Records LR-2026-0014 and 0015"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0017",
+        "repositoryPath": "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+        "keptStatements": 27,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792474474148,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:f2207f49381201c6",
+      "trigger": "manual",
+      "startedAt": 1792474892192,
+      "fromCommit": "6798557e5f106d406f61ad0a6523822af2e7ee47",
+      "replayId": "genesis-replay:ef3d1e658acfb07ff6b2c866078dae5deb95a41b2354a8589dc8b53a4a25171a",
+      "admittedSources": 1,
+      "completedAt": 1792474954963,
+      "toCommit": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+      "commits": [
+        {
+          "sha": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792474560000,
+          "subject": "chore(builder): remove the dead InstitutionalMemoryZone component (F-33)",
+          "missions": [
+            "MS-2026-0005"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0018",
+        "repositoryPath": "docs/learning/LR-2026-0018-remove-dead-institutionalmemoryzone-component.md",
+        "keptStatements": 12,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792474954963,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0005",
+          "sha": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:da7e8038e1277471",
+      "trigger": "automatic",
+      "startedAt": 1792478117513,
+      "fromCommit": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+      "replayId": "genesis-replay:67821325a26e7c147f181d5e9b90ae3c5ec4c10d72c986735c805b9d03d119fd",
+      "admittedSources": 1,
+      "completedAt": 1792478182817,
+      "toCommit": "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+      "commits": [
+        {
+          "sha": "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792477144000,
+          "subject": "fix(executive): every Executive Office section is the same size and scrolls inside (EW-1i)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0019",
+        "repositoryPath": "docs/learning/LR-2026-0019-executive-office-section-height-and-internal-scrolling.md",
+        "keptStatements": 9,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792478182818,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:367ad34208344c0d",
+      "trigger": "automatic",
+      "startedAt": 1792480113481,
+      "fromCommit": "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa",
+      "replayId": "genesis-replay:99ade1daf420158bcf71cbe587e17de7cf5178bd04d7f804a0ab9a031dcae457",
+      "admittedSources": 1,
+      "completedAt": 1792483092555,
+      "toCommit": "14dab022f1870cd17b2254e975ba07798509ddef",
+      "commits": [
+        {
+          "sha": "14dab022f1870cd17b2254e975ba07798509ddef",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792478201000,
+          "subject": "feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)",
+          "missions": [
+            "MS-2026-0007"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0020",
+        "repositoryPath": "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792483092555,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0007",
+          "sha": "14dab022f1870cd17b2254e975ba07798509ddef",
+          "result": "started"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:b6478f8eff6e70bb",
+      "trigger": "automatic",
+      "startedAt": 1792498073940,
+      "fromCommit": "14dab022f1870cd17b2254e975ba07798509ddef",
+      "replayId": "genesis-replay:13967cada55da08372fbc5927768b02cd78c19d950c0576e4ff9c0e961171aee",
+      "admittedSources": 3,
+      "completedAt": 1792498136421,
+      "toCommit": "fb3556db36545c69e4b055c844d282587dd0c115",
+      "commits": [
+        {
+          "sha": "e1cdb630cff6a653fc319783929a556c93ed09c0",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792497982000,
+          "subject": "fix(governance): track the browser recovery Day-0 coverage is re-proved from (MS-2026-0007)",
+          "missions": [
+            "MS-2026-0007"
+          ]
+        },
+        {
+          "sha": "fb3556db36545c69e4b055c844d282587dd0c115",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792498025000,
+          "subject": "fix(education): Learning Records are knowledge, not curriculum (ADR-0045)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0021",
+        "repositoryPath": "docs/learning/LR-2026-0021-day-0-reproducibility-and-learning-record-admission-fixes.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792498136422,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0007",
+          "sha": "e1cdb630cff6a653fc319783929a556c93ed09c0",
+          "result": "linked"
+        }
+      ]
     }
   ]
 }

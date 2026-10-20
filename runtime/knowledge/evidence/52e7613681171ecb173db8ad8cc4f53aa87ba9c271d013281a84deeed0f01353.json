@@ -1,0 +1,129 @@
+{
+  "id": "genesis-evidence:48cd987a978bbc25399f826f61e19648a5646ab8d690123d4104783b8af55197",
+  "type": "commit",
+  "title": "feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792483092475,
+  "observedAt": 1792478201000,
+  "contentRef": "git:commit:14dab022f1870cd17b2254e975ba07798509ddef",
+  "checksum": "sha256:7a66d1e0fa5e2233219d73207300f4219abc54c199166ff0eb9bab9e4200442c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:99ade1daf420158bcf71cbe587e17de7cf5178bd04d7f804a0ab9a031dcae457",
+    "genesisManifestId": "genesis-manifest:34a2fce676b1372112b10bb2086b7e71c14a3d6df87a0c579297d622d1778393",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:15e381b8417617257a41fc32a8ed49bcbda2503293ca54c40c3d2453f5e65462",
+    "historicalSourceId": "genesis-source:commit:14dab022f1870cd17b2254e975ba07798509ddef",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:14dab022f1870cd17b2254e975ba07798509ddef",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "14dab022f1870cd17b2254e975ba07798509ddef",
+      "parentShas": [
+        "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792478201000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792478201000
+      },
+      "subject": "feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)",
+      "body": "runtime-data was entirely git-ignored, yet every certification the activation gate depends on is re-derived from records there, so they existed only on the owner's Mac. Tested in a fresh clone: certifications re-derive only with the governed records, the replay designation, the designated Day-0 replay and its historical correlation, and the acquired conversations Day-0 coverage is re-proved from (owner decision: commit them). Those 31 files are now tracked in place through .gitignore exceptions, with no Runtime code change and no second copy. Other replays, correlations, browser recovery and test data stay ignored. npm run build now fails if any governed record would be ignored by git, including a newly designated replay. A fresh clone built from git alone shows the same activation and certification states as this machine; runtime suites 1569/1569 leave tracked records unchanged.\n\nMission: MS-2026-0007\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        ".gitignore",
+        "package.json",
+        "runtime-data/genesis/conversation-acquisition/acquisitions/255c11ccc9949a2a728a6c6ea41655d7f537a744f3332f18baaef3188ce02bb3/record.json",
+        "runtime-data/genesis/conversation-acquisition/acquisitions/305b0d6b5ef170d3011781a38797a9556fd5ecc6a24c3fb9cff7399fe6b2983e/record.json",
+        "runtime-data/genesis/conversation-acquisition/latest.json",
+        "runtime-data/genesis/conversation-authoritative-completeness-certification/current.json",
+        "runtime-data/genesis/conversation-expected-history-amendments/current.json",
+        "runtime-data/genesis/conversation-expected-history-amendments/history/genesis-conversation-expected-history-amendment:6ba214c812f45b14ac39270f789590e2b5716e46c500dd7dd5c9518712db2161.json",
+        "runtime-data/genesis/conversation-expected-history-candidate-review/current.json",
+        "runtime-data/genesis/conversation-expected-history-candidate/current.json",
+        "runtime-data/genesis/conversation-expected-history/current.json",
+        "runtime-data/genesis/day-zero-certification/current.json",
+        "runtime-data/genesis/day-zero-conversation-coverage-certification/current.json",
+        "runtime-data/genesis/historical-correlation/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/correlation.json",
+        "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/admission-governance.json",
+        "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/execution.json",
+        "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/manifest-build.json",
+        "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/runner-result.json",
+        "runtime-data/genesis/runtime-replay-designation.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOmRlZTE2YTlkZDVhN2FjYTE0NzE1ZDE0YTJmMTY1ODI2NTBiNTdlNDRiOTViZmMyNDU1YTBiZTliMGJiOWM1ZTg.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NWU4ZDQxOTIwMTFhNjEyYTE1Mzk3N2E2ZWM3Mzg2ZWM0MGNlMDcyM2VmM2UxNWM0ZGFlZDBkY2EzOTMzMjYzNA/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6OWVlMGY3MGUwMTYyMzFiODZkM2QwMDRjMTk5MzAwY2FlMmIzMDNhMDYxYTdjNDIxOTUwYzA1OTJlZTY2MGQwOQ/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZDc0ZjhkM2NmNmEzNTMxOWQ1ZjFjZTg2MThjNDhjMGFkZjdjM2U3MzNmM2QxNDBhNzIxZDlmZTZmYTgwODY3OA/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZmYxMDNjZTRmYjM2ZTBlYjRlY2IzNzMyYjUxZjE3ODZlMGQwOGU0NmRjYjBhYzRhZTIwODQ4ZmMyMGNlMmRkNw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+        "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZmYxMDNjZTRmYjM2ZTBlYjRlY2IzNzMyYjUxZjE3ODZlMGQwOGU0NmRjYjBhYzRhZTIwODQ4ZmMyMGNlMmRkNw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOmRlZTE2YTlkZDVhN2FjYTE0NzE1ZDE0YTJmMTY1ODI2NTBiNTdlNDRiOTViZmMyNDU1YTBiZTliMGJiOWM1ZTg.json",
+        "runtime-data/knowledge-education/chief-agent-production-workspace-authorization/current.json",
+        "runtime-data/knowledge-education/educational-corpus-certification/current.json",
+        "runtime-data/knowledge-education/educational-corpus/current.json",
+        "runtime-data/knowledge-education/initial-competency-certification/current.json",
+        "runtime-data/knowledge-education/initial-competency-evidence/registry.json",
+        "runtime-data/knowledge-education/initial-competency-human-acceptance/current.json",
+        "scripts/verify-governed-records.mjs"
+      ],
+      "changedPathsByParent": {
+        "b60464bbfa3b7ec07447f4fb14f75c07b3f999aa": [
+          ".gitignore",
+          "package.json",
+          "runtime-data/genesis/conversation-acquisition/acquisitions/255c11ccc9949a2a728a6c6ea41655d7f537a744f3332f18baaef3188ce02bb3/record.json",
+          "runtime-data/genesis/conversation-acquisition/acquisitions/305b0d6b5ef170d3011781a38797a9556fd5ecc6a24c3fb9cff7399fe6b2983e/record.json",
+          "runtime-data/genesis/conversation-acquisition/latest.json",
+          "runtime-data/genesis/conversation-authoritative-completeness-certification/current.json",
+          "runtime-data/genesis/conversation-expected-history-amendments/current.json",
+          "runtime-data/genesis/conversation-expected-history-amendments/history/genesis-conversation-expected-history-amendment:6ba214c812f45b14ac39270f789590e2b5716e46c500dd7dd5c9518712db2161.json",
+          "runtime-data/genesis/conversation-expected-history-candidate-review/current.json",
+          "runtime-data/genesis/conversation-expected-history-candidate/current.json",
+          "runtime-data/genesis/conversation-expected-history/current.json",
+          "runtime-data/genesis/day-zero-certification/current.json",
+          "runtime-data/genesis/day-zero-conversation-coverage-certification/current.json",
+          "runtime-data/genesis/historical-correlation/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/correlation.json",
+          "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/admission-governance.json",
+          "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/execution.json",
+          "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/manifest-build.json",
+          "runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/runner-result.json",
+          "runtime-data/genesis/runtime-replay-designation.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NDcxNjg3MDJlNDEzN2Y3NWQ3MzI1ZGE2NmVlZjNiNjM1ZjFjZDVkYzY2MzJhNTJjN2E2ZjU4ODZkYzlkNzhkYw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOmRlZTE2YTlkZDVhN2FjYTE0NzE1ZDE0YTJmMTY1ODI2NTBiNTdlNDRiOTViZmMyNDU1YTBiZTliMGJiOWM1ZTg.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6NWU4ZDQxOTIwMTFhNjEyYTE1Mzk3N2E2ZWM3Mzg2ZWM0MGNlMDcyM2VmM2UxNWM0ZGFlZDBkY2EzOTMzMjYzNA/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6OWVlMGY3MGUwMTYyMzFiODZkM2QwMDRjMTk5MzAwY2FlMmIzMDNhMDYxYTdjNDIxOTUwYzA1OTJlZTY2MGQwOQ/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZDc0ZjhkM2NmNmEzNTMxOWQ1ZjFjZTg2MThjNDhjMGFkZjdjM2U3MzNmM2QxNDBhNzIxZDlmZTZmYTgwODY3OA/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZmYxMDNjZTRmYjM2ZTBlYjRlY2IzNzMyYjUxZjE3ODZlMGQwOGU0NmRjYjBhYzRhZTIwODQ4ZmMyMGNlMmRkNw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOjgwNzM4MWNhODg0ZDhmYzFjYmZiNjM3MWM5N2ZmZjA5OGZlMTFjMzc2Y2FmZWE1OTVhMzAwOWE1MmRmYzQwNWQ.json",
+          "runtime-data/knowledge-education/authority-resolutions/Y2Fub25pY2FsOmRvY3VtZW50OmdlbmVzaXMtZXZpZGVuY2U6ZmYxMDNjZTRmYjM2ZTBlYjRlY2IzNzMyYjUxZjE3ODZlMGQwOGU0NmRjYjBhYzRhZTIwODQ4ZmMyMGNlMmRkNw/Z2VuZXNpcy1kYXktemVyby1jZXJ0aWZpY2F0aW9uOmRlZTE2YTlkZDVhN2FjYTE0NzE1ZDE0YTJmMTY1ODI2NTBiNTdlNDRiOTViZmMyNDU1YTBiZTliMGJiOWM1ZTg.json",
+          "runtime-data/knowledge-education/chief-agent-production-workspace-authorization/current.json",
+          "runtime-data/knowledge-education/educational-corpus-certification/current.json",
+          "runtime-data/knowledge-education/educational-corpus/current.json",
+          "runtime-data/knowledge-education/initial-competency-certification/current.json",
+          "runtime-data/knowledge-education/initial-competency-evidence/registry.json",
+          "runtime-data/knowledge-education/initial-competency-human-acceptance/current.json",
+          "scripts/verify-governed-records.mjs"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:14dab022f1870cd17b2254e975ba07798509ddef"
+    ],
+    "genesisReplay": [
+      "genesis-replay:99ade1daf420158bcf71cbe587e17de7cf5178bd04d7f804a0ab9a031dcae457"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:34a2fce676b1372112b10bb2086b7e71c14a3d6df87a0c579297d622d1778393"
+    ]
+  }
+}
