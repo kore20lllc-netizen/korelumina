@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:ac3fd502a4a707fe3353dd30377b37a0d66d6581b183faeddd5894529636b792",
+  "type": "commit",
+  "title": "fix(security): roles are no longer chosen by the browser or trusted from headers (SEC-1b, ADR-0043)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792454868356,
+  "observedAt": 1792453183000,
+  "contentRef": "git:commit:80f790862f0c8d1feb470520f9475f509d5e0703",
+  "checksum": "sha256:01ea94c3322d6bf42e2aad5d1bc0c6a6b8a5b421204966a53ebcb98c35cb0cd8",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+    "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:165b36a078501946da783509b79c74dac82e290384d1eb821c4c3920d804ac38",
+    "historicalSourceId": "genesis-source:commit:80f790862f0c8d1feb470520f9475f509d5e0703",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:80f790862f0c8d1feb470520f9475f509d5e0703",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "80f790862f0c8d1feb470520f9475f509d5e0703",
+      "parentShas": [
+        "29304f8ba67703ab26d98390fe12e6894aded623"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792453183000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792453183000
+      },
+      "subject": "fix(security): roles are no longer chosen by the browser or trusted from headers (SEC-1b, ADR-0043)",
+      "body": "Runtime authorized project access from x-korelumina-role, -user-id and -team-id headers that the browser sets and nothing verified: a caller claiming super_admin saw every project. Signed-out visitors defaulted to inhouse-dev, any role in localStorage was honoured, Settings offered every user a role switcher up to Super admin, the simulated checkout granted plan roles client-side, and with Supabase the role came from user_metadata, which users can edit themselves. Now signed-out visitors are plain users; browser role switching, the localStorage override and the simulated checkout work only in development builds; the Supabase role is read from server-written app_metadata and cannot be set from the browser (the owner's super_admin role was moved to app_metadata in Supabase and verified); and Runtime believes caller headers only with the internal token or from this machine outside production. ADR-0043, accepted by the owner, decides the hosted model: the browser sends a verified Supabase session token, never a role, and roles are assigned server-side; SEC-1c to SEC-1e and BILL-1 implement it.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/preview/UpgradeModal.tsx",
+        "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+        "apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts",
+        "apps/lumina-builder/src/services/workspaceAccessService.ts",
+        "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+        "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+        "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+      ],
+      "changedPathsByParent": {
+        "29304f8ba67703ab26d98390fe12e6894aded623": [
+          "apps/lumina-builder/src/components/preview/UpgradeModal.tsx",
+          "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+          "apps/lumina-builder/src/providers/auth/SupabaseAuthProvider.ts",
+          "apps/lumina-builder/src/services/workspaceAccessService.ts",
+          "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+          "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+          "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:80f790862f0c8d1feb470520f9475f509d5e0703"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  }
+}

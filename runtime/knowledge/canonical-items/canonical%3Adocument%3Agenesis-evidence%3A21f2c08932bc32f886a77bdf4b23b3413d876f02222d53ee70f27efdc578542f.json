@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0007 — Executive Office arrival briefing and Chief Agent thinking form",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ab37c320eedec278e96e3275e2182424438f96a6881b351a33c926705d4ae165"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  },
+  "createdAt": 1792454868399,
+  "updatedAt": 1792454868399,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+    "checksum": "sha256:40ee1528b8bf57406e06106daf5f96934ed1498d244b4a03c2ffc3853c8cad11",
+    "capturedAt": 1792454868367,
+    "observedAt": 1792454598000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+      "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+      "genesisManifestIndex": 4,
+      "genesisAdmissionIdentity": "genesis-admission:9c2093795bb491bbda5935e00cd9491f16629f529440e15ad0ebe1016f185e7a",
+      "historicalSourceId": "genesis-source:document:derived:ab37c320eedec278e96e3275e2182424438f96a6881b351a33c926705d4ae165",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0007 — Executive Office arrival briefing and Chief Agent thinking form",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792454868371,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000063",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792454868376,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000063",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792454868376,
+        "evidenceConsidered": [
+          "genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000063",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792454868376,
+          "evidenceConsidered": [
+            "genesis-evidence:21f2c08932bc32f886a77bdf4b23b3413d876f02222d53ee70f27efdc578542f"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792454868372
+        },
+        {
+          "state": "compiled",
+          "at": 1792454868372
+        },
+        {
+          "state": "validated",
+          "at": 1792454868372
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792454868372
+        },
+        {
+          "state": "approved",
+          "at": 1792454868376,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

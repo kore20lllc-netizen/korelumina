@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:585fbff2caf276924fa9644875e2f6373d9f84f2e076ed3667dd836d96b85301",
+  "type": "commit",
+  "title": "fix(knowledge): a Runtime restart no longer strips canonical promotion history (F-31)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792454868362,
+  "observedAt": 1792453224000,
+  "contentRef": "git:commit:e09ae8b7a8f750b413953ebee8c6d29f6c8a145e",
+  "checksum": "sha256:1e04b895e75a912bd08d202d7e19a3abb7fb20988f1d9c0d94ac529049743e2f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+    "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+    "genesisManifestIndex": 3,
+    "genesisAdmissionIdentity": "genesis-admission:343f94baac18bc78089a71efdf0650f5804cc3c1789e5add3ef71351df45c943",
+    "historicalSourceId": "genesis-source:commit:e09ae8b7a8f750b413953ebee8c6d29f6c8a145e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e09ae8b7a8f750b413953ebee8c6d29f6c8a145e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e09ae8b7a8f750b413953ebee8c6d29f6c8a145e",
+      "parentShas": [
+        "80f790862f0c8d1feb470520f9475f509d5e0703"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792453224000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792453224000
+      },
+      "subject": "fix(knowledge): a Runtime restart no longer strips canonical promotion history (F-31)",
+      "body": "On every Runtime start, rehydration rebuilt canonical items from their packages and overwrote the persisted record whenever the rebuilt copy differed. For Learning Records promoted automatically under ADR-0042 it always differed, because the promotion writes review evidence, review history, lifecycle history and supersession into the canonical record itself: six records lost that history at the 09:12 restart. Rehydration now restores only canonical items that are missing and never rewrites a persisted one; a Runtime start on the committed store leaves it byte-for-byte unchanged. The four committed records were restored from git; LR-2026-0005 and LR-2026-0006, damaged before they were ever committed, were rebuilt from their packages with the same fields GovernedCanonicalPromotionService writes, a method that reproduces the four committed records byte for byte.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-platform/runtime/__tests__/rehydrateCanonicalTimestampStability.test.ts",
+        "apps/lumina-runtime/src/knowledge-platform/runtime/rehydrateRuntimeCanonicalKnowledge.ts",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7.json"
+      ],
+      "changedPathsByParent": {
+        "80f790862f0c8d1feb470520f9475f509d5e0703": [
+          "apps/lumina-runtime/src/knowledge-platform/runtime/__tests__/rehydrateCanonicalTimestampStability.test.ts",
+          "apps/lumina-runtime/src/knowledge-platform/runtime/rehydrateRuntimeCanonicalKnowledge.ts",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A13f635405aff941ed61252bfd6b871fcec4b1afe08abef898cadf3960096a5ed.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A5556d6b0d25ff4fdab367de0f5c2277587d65c8016c187a0d14dabb379600ec7.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e09ae8b7a8f750b413953ebee8c6d29f6c8a145e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  }
+}

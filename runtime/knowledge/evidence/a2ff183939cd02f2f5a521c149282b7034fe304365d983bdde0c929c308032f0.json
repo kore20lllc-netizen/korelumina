@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:ef356b91b08732e34c33c75a44cb41e2a54a2c3146361bbb7cec5a40f4de64fb",
+  "type": "commit",
+  "title": "feat(security): the Builder proves identity with its session token; Runtime stops trusting headers (SEC-1d, ADR-0043)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792459456363,
+  "observedAt": 1792456391000,
+  "contentRef": "git:commit:7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+  "checksum": "sha256:c853f1bab2306f65129ae688d1bc2d53d8076c1f42a98875a81508903ac2fcf9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:82bd0c2cd49c17aa1c3bf42d644cafdb75d35ec8284d620d39f7fefef022186c",
+    "genesisManifestId": "genesis-manifest:1566046dca62ec5dce98b9c74d02e2b0e8cedc6a6b8c03d9f5519ef1c17fd4c2",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:e8b54a5130ce94d87511c384a589d7ee8ad80296b6e7a8a3c8c7c252ea66ca23",
+    "historicalSourceId": "genesis-source:commit:7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+      "parentShas": [
+        "1400c21496ae638ac2634bc8938bcca84508ecc2"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792456391000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792456391000
+      },
+      "subject": "feat(security): the Builder proves identity with its session token; Runtime stops trusting headers (SEC-1d, ADR-0043)",
+      "body": "With real sign-in the Builder now sends the person's Supabase session token and no role, user or team header (ADR-0043 Decision 1); the development-only mock sign-in keeps the legacy headers. Once Runtime has an identity provider configured (SUPABASE_URL), caller headers are never believed from the browser, not even on this machine: a caller is a verified token, the internal token, a development identity configured in Runtime's environment, or anonymous. GET /api/runtime/identity reports how Runtime sees the caller (role, user id, source, reason; never a token), and the Executive Office Security heartbeat reads it live instead of preview text. Verified live with Supabase configured: a super_admin header from this machine is anonymous, a valid token is the verified super_admin, a forged token is rejected with bad_signature, and the browser preflight allows the Authorization header; runtime suites 435/435.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/providers/auth-registry.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "apps/lumina-builder/src/services/runtime/client.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+        "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+        "apps/lumina-runtime/src/routes/runtimeIdentity.ts"
+      ],
+      "changedPathsByParent": {
+        "1400c21496ae638ac2634bc8938bcca84508ecc2": [
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/providers/auth-registry.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "apps/lumina-builder/src/services/runtime/client.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+          "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+          "apps/lumina-runtime/src/routes/runtimeIdentity.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9"
+    ],
+    "genesisReplay": [
+      "genesis-replay:82bd0c2cd49c17aa1c3bf42d644cafdb75d35ec8284d620d39f7fefef022186c"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:1566046dca62ec5dce98b9c74d02e2b0e8cedc6a6b8c03d9f5519ef1c17fd4c2"
+    ]
+  }
+}

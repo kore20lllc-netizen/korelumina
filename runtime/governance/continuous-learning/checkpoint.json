@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
-    "committedAt": 1792440996000,
-    "establishedAt": 1792446626039,
-    "basis": "Learning cycle learning-cycle:c21a7c56f55422bd"
+    "commit": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+    "committedAt": 1792456391000,
+    "establishedAt": 1792459489489,
+    "basis": "Learning cycle learning-cycle:4ac2e3304a32e57c"
   },
   "cycles": [
     {
@@ -539,6 +539,98 @@
         "model": "gpt-5.5",
         "attemptedAt": 1792447262745,
         "attempts": 2,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:652f69cb20684f86",
+      "trigger": "automatic",
+      "startedAt": 1792454796718,
+      "fromCommit": "a299d7a54dcabe42f35e87079034b5ef7cbe0cd3",
+      "replayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+      "admittedSources": 10,
+      "completedAt": 1792454868846,
+      "toCommit": "904ee64668cdf56a56d51b7333759d0dcc68eafc",
+      "commits": [
+        {
+          "sha": "29304f8ba67703ab26d98390fe12e6894aded623",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792452453000,
+          "subject": "fix(tests): every governed store is isolated per test process (F-25)"
+        },
+        {
+          "sha": "80f790862f0c8d1feb470520f9475f509d5e0703",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792453183000,
+          "subject": "fix(security): roles are no longer chosen by the browser or trusted from headers (SEC-1b, ADR-0043)"
+        },
+        {
+          "sha": "e09ae8b7a8f750b413953ebee8c6d29f6c8a145e",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792453224000,
+          "subject": "fix(knowledge): a Runtime restart no longer strips canonical promotion history (F-31)"
+        },
+        {
+          "sha": "904ee64668cdf56a56d51b7333759d0dcc68eafc",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792454598000,
+          "subject": "chore(knowledge): record owner approvals of ADR-0041/0042 packages, Executive Office decisions, and Learning Records LR-2026-0007 to 0011"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0012",
+        "repositoryPath": "docs/learning/LR-2026-0012-test-store-isolation-role-verification-and-canonical-rehydra.md",
+        "keptStatements": 28,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792454868846,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:4ac2e3304a32e57c",
+      "trigger": "automatic",
+      "startedAt": 1792459396500,
+      "fromCommit": "904ee64668cdf56a56d51b7333759d0dcc68eafc",
+      "replayId": "genesis-replay:82bd0c2cd49c17aa1c3bf42d644cafdb75d35ec8284d620d39f7fefef022186c",
+      "admittedSources": 2,
+      "completedAt": 1792459456460,
+      "toCommit": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+      "commits": [
+        {
+          "sha": "1400c21496ae638ac2634bc8938bcca84508ecc2",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792454930000,
+          "subject": "feat(security): Runtime identifies callers from verified Supabase tokens (SEC-1c, ADR-0043)"
+        },
+        {
+          "sha": "7d764771bbf4d07c2c7cb4dac616a1c26a9c68c9",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792456391000,
+          "subject": "feat(security): the Builder proves identity with its session token; Runtime stops trusting headers (SEC-1d, ADR-0043)"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0013",
+        "repositoryPath": "docs/learning/LR-2026-0013-verified-supabase-caller-identity-for-runtime.md",
+        "keptStatements": 35,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792459456469,
+        "attempts": 1,
         "state": "WRITTEN",
         "reasons": []
       }

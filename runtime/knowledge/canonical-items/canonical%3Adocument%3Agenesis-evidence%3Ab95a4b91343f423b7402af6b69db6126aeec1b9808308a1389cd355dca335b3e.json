@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0011 — Restrict project process environment",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:d80415e5f1d94a2532c62b7b151ad2d48c3b0df43617488a226599c66e862020"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  },
+  "createdAt": 1792454868556,
+  "updatedAt": 1792454868556,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+    "checksum": "sha256:bd80fb25587f0fde0e9ae2a76105326a3f4a796eb881b3819de3cdbdccf49cfc",
+    "capturedAt": 1792454868531,
+    "observedAt": 1792454598000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+      "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+      "genesisManifestIndex": 8,
+      "genesisAdmissionIdentity": "genesis-admission:ca975525d0673dfa408b2f49ee69f90d316a0e945c672fea9d4649694270e6d7",
+      "historicalSourceId": "genesis-source:document:derived:d80415e5f1d94a2532c62b7b151ad2d48c3b0df43617488a226599c66e862020",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0011 — Restrict project process environment",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0011-restrict-project-process-environment.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792454868535,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000067",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0011-restrict-project-process-environment.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0011-restrict-project-process-environment.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792454868537,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000067",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792454868537,
+        "evidenceConsidered": [
+          "genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000067",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792454868537,
+          "evidenceConsidered": [
+            "genesis-evidence:b95a4b91343f423b7402af6b69db6126aeec1b9808308a1389cd355dca335b3e"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792454868535
+        },
+        {
+          "state": "compiled",
+          "at": 1792454868535
+        },
+        {
+          "state": "validated",
+          "at": 1792454868535
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792454868535
+        },
+        {
+          "state": "approved",
+          "at": 1792454868537,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

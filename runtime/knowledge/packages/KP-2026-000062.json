@@ -1,0 +1,120 @@
+{
+  "id": "KP-2026-000062",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792454868344,
+  "updatedAt": 1792454868344,
+  "data": {
+    "id": "KP-2026-000062",
+    "state": "awaiting_review",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:635ab283b77d5be21051c93586690c1890c7edd2160699c0b87deed6be571180"
+    ],
+    "knowledgeItemIds": [
+      "adr:ADR-0043 — Verified identity and server-assigned roles"
+    ],
+    "items": [
+      {
+        "id": "adr:ADR-0043 — Verified identity and server-assigned roles",
+        "candidateType": "CandidateDecision",
+        "title": "ADR-0043 — Verified identity and server-assigned roles",
+        "summary": "Recovered architectural decision.",
+        "confidence": 0.8,
+        "evidenceRefs": [
+          "genesis-evidence:635ab283b77d5be21051c93586690c1890c7edd2160699c0b87deed6be571180"
+        ],
+        "proposedRelationships": {},
+        "extractedAt": 1792454868341,
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792454868341,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        },
+        "status": "extracted",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:635ab283b77d5be21051c93586690c1890c7edd2160699c0b87deed6be571180"
+      ],
+      "sourceLocations": [],
+      "contentRefs": [
+        "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": null,
+    "approvalState": "pending_review",
+    "owner": null,
+    "scope": null,
+    "version": null,
+    "confidence": 0.8,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "adr:ADR-0043 — Verified identity and server-assigned roles",
+        "status": "extracted",
+        "confidence": 0.8,
+        "blocked": false,
+        "details": {}
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "adr:ADR-0043 — Verified identity and server-assigned roles",
+        "compiler": {
+          "compilerName": "adr-compiler",
+          "compilerVersion": "2.0.0",
+          "evidenceSourceType": "ADR",
+          "extractedAt": 1792454868341,
+          "extractionMethod": "adr-compiler",
+          "confidenceBasis": "document-analysis"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792454868344
+      },
+      {
+        "state": "compiled",
+        "at": 1792454868344
+      },
+      {
+        "state": "validated",
+        "at": 1792454868344
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792454868344
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792454868344
+    },
+    "createdAt": 1792454868344,
+    "updatedAt": 1792454868344,
+    "metadata": {
+      "sourceApprovalStates": []
+    }
+  }
+}

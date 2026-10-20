@@ -1,0 +1,69 @@
+{
+  "id": "genesis-evidence:bf8b1b22bb982f0d0550608dcc50dea24e0a8d8af6e7a5339efa331c2181b0d4",
+  "type": "commit",
+  "title": "feat(security): Runtime identifies callers from verified Supabase tokens (SEC-1c, ADR-0043)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792459456354,
+  "observedAt": 1792454930000,
+  "contentRef": "git:commit:1400c21496ae638ac2634bc8938bcca84508ecc2",
+  "checksum": "sha256:b3e7c95fd36c0c98ebc76fb499c92eef38765797a3ac94a33dfc1391652e698b",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:82bd0c2cd49c17aa1c3bf42d644cafdb75d35ec8284d620d39f7fefef022186c",
+    "genesisManifestId": "genesis-manifest:1566046dca62ec5dce98b9c74d02e2b0e8cedc6a6b8c03d9f5519ef1c17fd4c2",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:71a38d5d169e2d5bf05d0a41bf5fd1a695613c64fee348891495e7efafc510bb",
+    "historicalSourceId": "genesis-source:commit:1400c21496ae638ac2634bc8938bcca84508ecc2",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1400c21496ae638ac2634bc8938bcca84508ecc2",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1400c21496ae638ac2634bc8938bcca84508ecc2",
+      "parentShas": [
+        "904ee64668cdf56a56d51b7333759d0dcc68eafc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792454930000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792454930000
+      },
+      "subject": "feat(security): Runtime identifies callers from verified Supabase tokens (SEC-1c, ADR-0043)",
+      "body": "Runtime now verifies the Supabase access token itself (ADR-0043 Decisions 1-3, 5) instead of believing role and user headers. A request with a bearer token is identified by that token alone: HS256 with the project JWT secret, or ES256/RS256 against the project's published signing keys (fetched once, refreshed for rotated keys); any other algorithm, alg none included, is refused; the token must be unexpired, issued by this project and for the authenticated audience. The caller is the token's subject with the role from server-written app_metadata; a plan role such as free is a plain user. A present but invalid token is anonymous and never falls back to headers. Team ids are not accepted from verified callers until Runtime keeps team membership. Outside production a development identity can be configured in Runtime's environment (KORELUMINA_DEV_IDENTITY); production refuses it. Built on node:crypto, no new dependency. Verified live in production mode: a valid owner token sees the owner's project; a forged token, a customer token, or headers alone see none. 21 new tests; executive, routes, learning, knowledge and runtime suites 432/432.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+        "apps/lumina-runtime/src/routes/__tests__/supabaseAccessToken.test.ts",
+        "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+        "apps/lumina-runtime/src/routes/supabaseAccessToken.ts"
+      ],
+      "changedPathsByParent": {
+        "904ee64668cdf56a56d51b7333759d0dcc68eafc": [
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/runtimeCaller.test.ts",
+          "apps/lumina-runtime/src/routes/__tests__/supabaseAccessToken.test.ts",
+          "apps/lumina-runtime/src/routes/runtimeCaller.ts",
+          "apps/lumina-runtime/src/routes/supabaseAccessToken.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1400c21496ae638ac2634bc8938bcca84508ecc2"
+    ],
+    "genesisReplay": [
+      "genesis-replay:82bd0c2cd49c17aa1c3bf42d644cafdb75d35ec8284d620d39f7fefef022186c"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:1566046dca62ec5dce98b9c74d02e2b0e8cedc6a6b8c03d9f5519ef1c17fd4c2"
+    ]
+  }
+}

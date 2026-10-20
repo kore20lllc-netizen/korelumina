@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0010 — Uncrop Chief Agent thinking form",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:90dc5f3bac23c1085a5012e5110c088ee2ea528cf0c77d12794c546b3d950ebf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  },
+  "createdAt": 1792454868520,
+  "updatedAt": 1792454868520,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+    "checksum": "sha256:cbbccb4bbf7b94f4e84039e1fc154c2c11387da97399552d70e447d14e605dfd",
+    "capturedAt": 1792454868494,
+    "observedAt": 1792454598000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+      "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+      "genesisManifestIndex": 7,
+      "genesisAdmissionIdentity": "genesis-admission:813b94a9c0ce5c6b75ce1603014ceddac42b8b09ef44c92295b3a1f9d30b891d",
+      "historicalSourceId": "genesis-source:document:derived:90dc5f3bac23c1085a5012e5110c088ee2ea528cf0c77d12794c546b3d950ebf",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0010 — Uncrop Chief Agent thinking form",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792454868498,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000066",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792454868500,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000066",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792454868500,
+        "evidenceConsidered": [
+          "genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000066",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792454868500,
+          "evidenceConsidered": [
+            "genesis-evidence:b024ef62c02c9ed063b360b65372ff69683834f236dfe9d659c77b2dfe35c565"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792454868499
+        },
+        {
+          "state": "compiled",
+          "at": 1792454868499
+        },
+        {
+          "state": "validated",
+          "at": 1792454868499
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792454868499
+        },
+        {
+          "state": "approved",
+          "at": 1792454868500,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

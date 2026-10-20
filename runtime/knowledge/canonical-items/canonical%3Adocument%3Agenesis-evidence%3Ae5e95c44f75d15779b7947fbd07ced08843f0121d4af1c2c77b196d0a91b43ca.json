@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0008 — Executive Office browser voice conversation",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:dba2b5cf0b6c19ad44f4c96b95c96c9d34b9f3e92dd262388545c2fc6e0b8c27"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  },
+  "createdAt": 1792454868455,
+  "updatedAt": 1792454868455,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+    "checksum": "sha256:7c23d76db1763fe2ad67f8a46c4802fd6224a5ef9431789b23a40a3c94c1a26e",
+    "capturedAt": 1792454868414,
+    "observedAt": 1792454598000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+      "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+      "genesisManifestIndex": 5,
+      "genesisAdmissionIdentity": "genesis-admission:d43006f45f6ece73a63933198a2e55b27a2aca31fa227b0ef48f3277f7a4698c",
+      "historicalSourceId": "genesis-source:document:derived:dba2b5cf0b6c19ad44f4c96b95c96c9d34b9f3e92dd262388545c2fc6e0b8c27",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0008 — Executive Office browser voice conversation",
+        "status": "Approved",
+        "approvalDate": "2026-10-19",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792454868422,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000064",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792454868432,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000064",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792454868432,
+        "evidenceConsidered": [
+          "genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000064",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792454868432,
+          "evidenceConsidered": [
+            "genesis-evidence:e5e95c44f75d15779b7947fbd07ced08843f0121d4af1c2c77b196d0a91b43ca"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792454868423
+        },
+        {
+          "state": "compiled",
+          "at": 1792454868423
+        },
+        {
+          "state": "validated",
+          "at": 1792454868423
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792454868423
+        },
+        {
+          "state": "approved",
+          "at": 1792454868432,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "id": "genesis-evidence:204b76b20b84971427e995217d1a64c56c71344472f7b61a7878997d24515260",
+  "type": "commit",
+  "title": "chore(knowledge): record owner approvals of ADR-0041/0042 packages, Executive Office decisions, and Learning Records LR-2026-0007 to 0011",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792454868565,
+  "observedAt": 1792454598000,
+  "contentRef": "git:commit:904ee64668cdf56a56d51b7333759d0dcc68eafc",
+  "checksum": "sha256:3e0acc9f8645949560a0b955deb8068af826a86245bf016a68cd2f520fe95c71",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137",
+    "genesisManifestId": "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6",
+    "genesisManifestIndex": 9,
+    "genesisAdmissionIdentity": "genesis-admission:a4fcc74fec34e849a04c6c735c6067dec2c5ff7fc172995a1d312c2405c0e48f",
+    "historicalSourceId": "genesis-source:commit:904ee64668cdf56a56d51b7333759d0dcc68eafc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:904ee64668cdf56a56d51b7333759d0dcc68eafc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "904ee64668cdf56a56d51b7333759d0dcc68eafc",
+      "parentShas": [
+        "e09ae8b7a8f750b413953ebee8c6d29f6c8a145e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792454598000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792454598000
+      },
+      "subject": "chore(knowledge): record owner approvals of ADR-0041/0042 packages, Executive Office decisions, and Learning Records LR-2026-0007 to 0011",
+      "body": "Bookkeeping: the owner's Canonical Review approvals of KP-2026-000054 (ADR-0041) and KP-2026-000055 (ADR-0042), the owner's decisions on Chief Agent proposals from the Executive Office with their reasoning, the Learning Records written from the EW-1b to SEC-1a commits with their evidence, packages and manufacturing runs, and the advanced learning checkpoint. Committed separately so learning windows exclude it as bookkeeping.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+        "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+        "docs/learning/LR-2026-0009-executive-office-runtime-visibility.md",
+        "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+        "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+        "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf9iac6-qhf1k9.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+        "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf9iac6-qhf1k9.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+        "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/evidence/1b32a722499b016af38013b14e8d5f30ca984715827cb41cd6bfcb5d4a23da21.json",
+        "runtime/knowledge/evidence/58a205697ba198b60ce7b7a49757ae129c411447f9cf4378197420074857812f.json",
+        "runtime/knowledge/evidence/78f50b2898cff9bc9ed8c9b622301865b535a91c4be63dc2af921d204d68fe3a.json",
+        "runtime/knowledge/evidence/8d0e56433284e22aa799f6d25c64c2c55bef83a43db16e0ec72b2c5cedc1ec3f.json",
+        "runtime/knowledge/evidence/979ed5c96c50fa5753223f6c73de9c996016dc12837eb08a9a867b605a93cd45.json",
+        "runtime/knowledge/evidence/97f5d77d08b7d0cd8caad07d07df1fa9088985fa4bb2dbd4ac69b363025f277b.json",
+        "runtime/knowledge/evidence/a1c9391ce52824182d2ab3bf354fe89ee89a7373f96dfaf5cf0643e870554dad.json",
+        "runtime/knowledge/evidence/c3fe7a8922aa00a448ffe8030922754d4b4b91e2c3ce337e708ebf43564ca9c8.json",
+        "runtime/knowledge/manufacturing-runs/KMR-318d4003a555d5d1977e.json",
+        "runtime/knowledge/manufacturing-runs/KMR-489bfd02a5ec933a2324.json",
+        "runtime/knowledge/manufacturing-runs/KMR-8e2c5d25c659219ede02.json",
+        "runtime/knowledge/manufacturing-runs/KMR-a267d05e9d03f734a73d.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000054.json",
+        "runtime/knowledge/packages/KP-2026-000055.json",
+        "runtime/knowledge/packages/KP-2026-000060.json",
+        "runtime/knowledge/packages/KP-2026-000061.json"
+      ],
+      "changedPathsByParent": {
+        "e09ae8b7a8f750b413953ebee8c6d29f6c8a145e": [
+          "docs/learning/LR-2026-0007-executive-office-arrival-briefing-and-chief-agent-thinking-f.md",
+          "docs/learning/LR-2026-0008-executive-office-browser-voice-conversation.md",
+          "docs/learning/LR-2026-0009-executive-office-runtime-visibility.md",
+          "docs/learning/LR-2026-0010-uncrop-chief-agent-thinking-form.md",
+          "docs/learning/LR-2026-0011-restrict-project-process-environment.md",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+          "runtime/executive/approvals/approval%3Adecision%3Areasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf8ynt7-v4pll0.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf9iac6-qhf1k9.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+          "runtime/executive/decisions/decision%3Areasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf9iac6-qhf1k9.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvf9zccv-vn1p0d.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfaifh2-gon9us.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfao8up-3jtm98.json",
+          "runtime/executive/reasoning/reasoning%3Aexecutive-office%3Amvfp84ba-szacrw.json",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/evidence/1b32a722499b016af38013b14e8d5f30ca984715827cb41cd6bfcb5d4a23da21.json",
+          "runtime/knowledge/evidence/58a205697ba198b60ce7b7a49757ae129c411447f9cf4378197420074857812f.json",
+          "runtime/knowledge/evidence/78f50b2898cff9bc9ed8c9b622301865b535a91c4be63dc2af921d204d68fe3a.json",
+          "runtime/knowledge/evidence/8d0e56433284e22aa799f6d25c64c2c55bef83a43db16e0ec72b2c5cedc1ec3f.json",
+          "runtime/knowledge/evidence/979ed5c96c50fa5753223f6c73de9c996016dc12837eb08a9a867b605a93cd45.json",
+          "runtime/knowledge/evidence/97f5d77d08b7d0cd8caad07d07df1fa9088985fa4bb2dbd4ac69b363025f277b.json",
+          "runtime/knowledge/evidence/a1c9391ce52824182d2ab3bf354fe89ee89a7373f96dfaf5cf0643e870554dad.json",
+          "runtime/knowledge/evidence/c3fe7a8922aa00a448ffe8030922754d4b4b91e2c3ce337e708ebf43564ca9c8.json",
+          "runtime/knowledge/manufacturing-runs/KMR-318d4003a555d5d1977e.json",
+          "runtime/knowledge/manufacturing-runs/KMR-489bfd02a5ec933a2324.json",
+          "runtime/knowledge/manufacturing-runs/KMR-8e2c5d25c659219ede02.json",
+          "runtime/knowledge/manufacturing-runs/KMR-a267d05e9d03f734a73d.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000054.json",
+          "runtime/knowledge/packages/KP-2026-000055.json",
+          "runtime/knowledge/packages/KP-2026-000060.json",
+          "runtime/knowledge/packages/KP-2026-000061.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:904ee64668cdf56a56d51b7333759d0dcc68eafc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:14c6128ffeebfa3e2cf1cd3aa407a36e3590c1e5ff7d3f22d9a47c6d0e79e137"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ba25062627883b43c6b6305f0350e2cd40f2526cebd005845edcb103035e50e6"
+    ]
+  }
+}
