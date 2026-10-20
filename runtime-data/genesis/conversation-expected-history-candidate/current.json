@@ -1,0 +1,462 @@
+{
+  "candidateId": "genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993",
+  "authorityState": "CANDIDATE",
+  "dayZeroConversationCoverageCertified": false,
+  "generatedAt": 1787633509401,
+  "sourceAcquisitionId": "chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b",
+  "sourceId": "runtime-chatgpt-browser-conversation-history-v1",
+  "conversationCount": 56,
+  "conversations": [
+    {
+      "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "698d1f72-3c20-8329-b7aa-5d540b7d0812",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/698d1f72-3c20-8329-b7aa-5d540b7d0812",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+      "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+      "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+      "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+      "projectId": "g-p-69cbc6142624819186caca549600467e",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc9844-dc54-8325-be3f-229b00501c61",
+      "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9844-dc54-8325-be3f-229b00501c61",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+      "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+      "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cd53c4-3c88-8332-aef9-aa0db767fed8",
+      "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cd53c4-3c88-8332-aef9-aa0db767fed8",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+      "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+      "projectId": "g-p-69cbc6142624819186caca549600467e",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ce57d3-11f0-832f-9b21-115830d8a201",
+      "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69ce57d3-11f0-832f-9b21-115830d8a201",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+      "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+      "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+      "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69d1ae66-6d4c-8327-8f79-d1166505a700",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d1ae66-6d4c-8327-8f79-d1166505a700",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69d48595-1834-8326-8d0e-4ffe319ec21a",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d48595-1834-8326-8d0e-4ffe319ec21a",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69e3da37-08d8-83ea-914e-f8d6771339df",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e3da37-08d8-83ea-914e-f8d6771339df",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a3a1f63-dd10-83ea-97b3-ea631103e313",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3a1f63-dd10-83ea-97b3-ea631103e313",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a41c132-4410-83ea-9451-41b5db5f81c0",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a41c132-4410-83ea-9451-41b5db5f81c0",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a828bec-8f10-83ea-a28e-4c8dfb106355",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a828bec-8f10-83ea-a28e-4c8dfb106355",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8839da-3764-83ea-b5c0-680ccbe22f23",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    },
+    {
+      "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+      "firstKnownAt": 1787631586375,
+      "lastKnownAt": 1787631586375,
+      "basis": "derived-from-governed-acquisition:chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b"
+    }
+  ],
+  "blockers": [
+    "authoritative-conversation-history-inventory-not-certified"
+  ]
+}

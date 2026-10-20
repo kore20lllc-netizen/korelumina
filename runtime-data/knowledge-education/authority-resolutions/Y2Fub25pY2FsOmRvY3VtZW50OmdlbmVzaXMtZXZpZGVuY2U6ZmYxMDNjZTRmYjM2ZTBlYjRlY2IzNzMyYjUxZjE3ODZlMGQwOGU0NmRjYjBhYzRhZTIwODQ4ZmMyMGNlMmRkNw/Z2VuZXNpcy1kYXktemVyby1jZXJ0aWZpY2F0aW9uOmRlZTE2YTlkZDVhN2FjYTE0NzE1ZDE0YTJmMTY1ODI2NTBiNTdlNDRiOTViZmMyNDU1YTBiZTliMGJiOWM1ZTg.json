@@ -1,0 +1,17 @@
+{
+  "resolutionId": "educational-authority-resolution:f61299e2de5d0ff2d82d204de52d265e1d3dd485f0c68eddd3180ff467072235",
+  "version": "educational-authority-resolution:v1",
+  "artifactId": "canonical:document:genesis-evidence:ff103ce4fb36e0eb4ecb3732b51f1786e0d08e46dcb0ac4ae20848fc20ce2dd7",
+  "learningRole": "GOVERNING_ARCHITECTURE",
+  "decision": "APPROVED",
+  "reviewerId": "human-review:repository-owner",
+  "reviewedAt": 1792215903418,
+  "reason": "KR-005 governs recovery source order and recovery rules; its direct Validation-to-Canonical path is superseded by CA-002 canonical review and explicit human promotion.",
+  "authorityPolicyVersion": "educational-corpus-authority:v1",
+  "dayZeroCertificationId": "genesis-day-zero-certification:dee16a9dd5a7aca14715d14a2f16582650b57e44b95bfc2455a0be9b0bb9c5e8",
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

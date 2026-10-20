@@ -1,0 +1,157 @@
+{
+  "certificationId": "educational-corpus-certification:351a86e15a83bcc8a762390e46b0eb2cd267b65a1357044bfa35a14ef0e520c6",
+  "certificationVersion": "educational-corpus-certification:v1",
+  "state": "CERTIFIED",
+  "candidateId": "educational-corpus-certification-candidate:b5444c40effc980f83e0541b400cdd2447da8d0bcb698ee4b278872b8a0c6ed3",
+  "corpusId": "educational-corpus:16a386bf4274cc68c17af86c359beb49eeefbff5475f056ddbe7754e58cad350",
+  "sourceContractId": "educational-corpus-source-contract:dd5650e8fbb438da61d09541322f6be5893b1813e36313667daa85354124ae3a",
+  "dayZeroCertificationId": "genesis-day-zero-certification:807381ca884d8fc1cbfb6371c97fff098fe11c376cafea595a3009a52dfc405d",
+  "certifiedBy": "human-review:repository-owner",
+  "certifiedAt": 1792269128292,
+  "reason": "Owner certifies the current Educational Corpus: 18 curriculum items, all authority-resolved, all five Day-0 curriculum modules complete including business and domain literacy, no exclusions or exceptions, bound to the Oct 17 Day-0 certification.",
+  "constitutionalCoverage": {
+    "satisfiedRequirements": [
+      "constitutional:ca-001",
+      "constitutional:ca-002",
+      "constitutional:ca-003",
+      "constitutional:ca-004",
+      "constitutional:ca-005",
+      "constitutional:document-governance",
+      "constitutional:governing-architecture",
+      "constitutional:platform-constitution",
+      "constitutional:vision-2050"
+    ],
+    "requirementCount": 9,
+    "completion": 100,
+    "measurementVersion": "education-coverage-v1"
+  },
+  "dayZeroCoverage": {
+    "requiredModules": [
+      "constitutional-literacy",
+      "knowledge-governance",
+      "operational-boundaries",
+      "conversation-curriculum",
+      "business-domain-literacy"
+    ],
+    "completeModules": [
+      "constitutional-literacy",
+      "knowledge-governance",
+      "operational-boundaries",
+      "conversation-curriculum",
+      "business-domain-literacy"
+    ],
+    "modules": {
+      "constitutional-literacy": {
+        "satisfiedRequirements": [
+          "constitutional:ca-001",
+          "constitutional:ca-002",
+          "constitutional:ca-003",
+          "constitutional:ca-004",
+          "constitutional:ca-005",
+          "constitutional:document-governance",
+          "constitutional:governing-architecture",
+          "constitutional:platform-constitution",
+          "constitutional:vision-2050"
+        ],
+        "missingRequirements": [],
+        "satisfiedCount": 9,
+        "requirementCount": 9,
+        "completion": 100,
+        "measurementVersion": "education-coverage-v1"
+      },
+      "knowledge-governance": {
+        "satisfiedRequirements": [
+          "knowledge:canonical-knowledge",
+          "knowledge:canonical-memory-adaptation",
+          "knowledge:evidence-model",
+          "knowledge:knowledge-ir",
+          "knowledge:knowledge-package",
+          "knowledge:organizational-memory"
+        ],
+        "missingRequirements": [],
+        "satisfiedCount": 6,
+        "requirementCount": 6,
+        "completion": 100,
+        "measurementVersion": "education-coverage-v1"
+      },
+      "operational-boundaries": {
+        "satisfiedRequirements": [
+          "operations:activation-boundary",
+          "operations:human-approval",
+          "operations:mission-lifecycle",
+          "operations:recovery-obligations",
+          "operations:runtime-truth"
+        ],
+        "missingRequirements": [],
+        "satisfiedCount": 5,
+        "requirementCount": 5,
+        "completion": 100,
+        "measurementVersion": "education-coverage-v1"
+      },
+      "conversation-curriculum": {
+        "satisfiedRequirements": [
+          "conversation:architecture",
+          "conversation:engineering",
+          "conversation:governance",
+          "conversation:mission",
+          "conversation:operations"
+        ],
+        "missingRequirements": [],
+        "satisfiedCount": 5,
+        "requirementCount": 5,
+        "completion": 100,
+        "measurementVersion": "education-coverage-v1"
+      },
+      "business-domain-literacy": {
+        "satisfiedRequirements": [
+          "business:approved-business-knowledge",
+          "domain:approved-domain-knowledge"
+        ],
+        "missingRequirements": [],
+        "satisfiedCount": 2,
+        "requirementCount": 2,
+        "completion": 100,
+        "measurementVersion": "education-coverage-v1"
+      }
+    },
+    "satisfiedRequirements": [
+      "business:approved-business-knowledge",
+      "constitutional:ca-001",
+      "constitutional:ca-002",
+      "constitutional:ca-003",
+      "constitutional:ca-004",
+      "constitutional:ca-005",
+      "constitutional:document-governance",
+      "constitutional:governing-architecture",
+      "constitutional:platform-constitution",
+      "constitutional:vision-2050",
+      "conversation:architecture",
+      "conversation:engineering",
+      "conversation:governance",
+      "conversation:mission",
+      "conversation:operations",
+      "domain:approved-domain-knowledge",
+      "knowledge:canonical-knowledge",
+      "knowledge:canonical-memory-adaptation",
+      "knowledge:evidence-model",
+      "knowledge:knowledge-ir",
+      "knowledge:knowledge-package",
+      "knowledge:organizational-memory",
+      "operations:activation-boundary",
+      "operations:human-approval",
+      "operations:mission-lifecycle",
+      "operations:recovery-obligations",
+      "operations:runtime-truth"
+    ],
+    "missingRequirements": [],
+    "satisfiedCount": 27,
+    "requirementCount": 27,
+    "completion": 100,
+    "measurementVersion": "education-coverage-v1"
+  },
+  "acknowledgedExcludedArtifactIds": [],
+  "downstream": {
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

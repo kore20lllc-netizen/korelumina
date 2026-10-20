@@ -1,0 +1,21 @@
+{
+  "reviewId": "genesis-conversation-expected-history-candidate-review:1c542a2e849a57e9e9bc742591970eeb3367fda62d6d37c82bd9b87525678981",
+  "candidateId": "genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993",
+  "state": "SCOPE_ATTESTED",
+  "reviewedBy": "a08495a2-c528-461e-82c0-c941d88b8065",
+  "reviewedAt": 1787637278108,
+  "candidateConversationCount": 56,
+  "candidateProjectIds": [
+    "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+    "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+    "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+    "g-p-69cbc56e454481918cd74c08e0998e5c",
+    "g-p-69cbc5cdf18881918252a0a5c79bad61",
+    "g-p-69cbc6142624819186caca549600467e"
+  ],
+  "knownOmissions": [],
+  "notes": "Reviewed governed recovered corpus scope: 56 conversations across 6 projects. Scope attestation does not assert historical completeness or certify Day-0 coverage.",
+  "authoritativeExpectedHistoryCreated": false,
+  "dayZeroConversationCoverageCertified": false,
+  "promotionAvailable": false
+}

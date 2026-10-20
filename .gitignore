@@ -77,6 +77,34 @@ runtime/knowledge/runtime/
 # Generated knowledge/runtime persistence
 # Durable governed artifacts such as evidence, review-batches,
 # and review-policies remain tracked explicitly.
-runtime-data/
+#
+# MS-2026-0007: runtime-data is generated, except the governed records the
+# Chief Agent's activation rests on, which are tracked where Runtime keeps
+# them: every certification and authorization, the records they are derived
+# from, the designated Day-0 replay with its historical correlation, and the
+# acquired conversations Day-0 coverage is re-proved from. A fresh clone
+# re-derives exactly what this machine does. Other replays, correlations,
+# browser recovery and test data stay ignored. scripts/verify-governed-records.mjs
+# (part of npm run build) fails if a governed record is ignored, including a
+# newly designated replay: add its two folders below.
+runtime-data/*
+!runtime-data/knowledge-education/
+!runtime-data/genesis/
+runtime-data/genesis/*
+!runtime-data/genesis/runtime-replay-designation.json
+!runtime-data/genesis/day-zero-certification/
+!runtime-data/genesis/day-zero-conversation-coverage-certification/
+!runtime-data/genesis/conversation-acquisition/
+!runtime-data/genesis/conversation-authoritative-completeness-certification/
+!runtime-data/genesis/conversation-expected-history/
+!runtime-data/genesis/conversation-expected-history-amendments/
+!runtime-data/genesis/conversation-expected-history-candidate/
+!runtime-data/genesis/conversation-expected-history-candidate-review/
+!runtime-data/genesis/replays/
+runtime-data/genesis/replays/*
+!runtime-data/genesis/replays/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/
+!runtime-data/genesis/historical-correlation/
+runtime-data/genesis/historical-correlation/*
+!runtime-data/genesis/historical-correlation/07088856c6038fc0b727252d79851528c275606c86be5d688e0c7e72b796c2dc/
 runtime/knowledge/autonomous-promotion-executions/
 runtime/knowledge/organizational-memory/

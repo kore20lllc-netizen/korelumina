@@ -1,0 +1,49 @@
+{
+  "version": "initial-competency-evidence:v1",
+  "records": [
+    {
+      "evidenceId": "competency-evidence:governed-retrieval:canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6:1787828297723",
+      "competencyId": "governed-retrieval",
+      "source": "canonical-knowledge",
+      "sourceRef": "canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6",
+      "claim": "Governed retrieval returned canonical knowledge canonical:document:genesis-evidence:4baacf53438d076c478a9a8d20dc3fb9095532759968ab0a0fab07031e2f43d6 with authority architecture, owner Constitutional Office, scope Platform, approved governance review, and preserved evidence/provenance references.",
+      "observedAt": 1787828297723,
+      "validationState": "VALIDATED",
+      "validatedBy": "human-governance",
+      "validatedAt": 1787828373645
+    },
+    {
+      "evidenceId": "competency-evidence:runtime-truth:kore20lllc-netizen-premium-ride-app:1787809521519",
+      "competencyId": "runtime-truth-distinction",
+      "source": "runtime",
+      "sourceRef": "/api/runtime/status?projectId=kore20lllc-netizen-premium-ride-app",
+      "claim": "Operational state for project kore20lllc-netizen-premium-ride-app was observed directly from the Runtime registry as running, using framework vite on Runtime port 4200. The observation was taken from authoritative Runtime state rather than inferred from Canonical Knowledge or Organizational Memory.",
+      "observedAt": 1787809521519,
+      "validationState": "VALIDATED",
+      "validatedBy": "human-governance",
+      "validatedAt": 1787809730645
+    },
+    {
+      "evidenceId": "initial-competency:explainable-grounding:m51.5j9",
+      "competencyId": "explainable-grounding",
+      "source": "canonical-knowledge",
+      "sourceRef": "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md",
+      "claim": "The Initial Competency assessment demonstrates explainable grounding by citing an approved governed canonical source with preserved provenance and authority, distinguishing governed knowledge from Runtime truth, and explicitly refusing to infer missing authority, operational state, or activation permission that the cited source does not establish.",
+      "observedAt": 1787917498678,
+      "validationState": "VALIDATED",
+      "validatedBy": "human-review:m51.5j10",
+      "validatedAt": 1787917579231
+    },
+    {
+      "evidenceId": "initial-competency:mission-boundaries:m51.5j6",
+      "competencyId": "mission-boundaries",
+      "source": "mission",
+      "sourceRef": "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+      "claim": "Mission Ownership demonstrates the governed mission boundary: mission ownership remains explicit, delegation does not transfer governing authority, execution remains bounded by the assigned mission, and required human approval remains authoritative. This evidence does not authorize Chief Agent activation.",
+      "observedAt": 1787916856931,
+      "validationState": "VALIDATED",
+      "validatedBy": "human-review:m51.5j7",
+      "validatedAt": 1787917167920
+    }
+  ]
+}

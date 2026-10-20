@@ -1,0 +1,17 @@
+{
+  "resolutionId": "educational-authority-resolution:912ea31c69821481de05acae584bc30da86639c6a52aa3d0d398d312909f2488",
+  "version": "educational-authority-resolution:v1",
+  "artifactId": "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+  "learningRole": "CURRENT_RULE",
+  "decision": "APPROVED",
+  "reviewerId": "human-review:m51.5i17",
+  "reviewedAt": 1787914462855,
+  "reason": "Human educational authority review confirms that the ratified Mission Ownership artifact represents the current governing rule for Chief Agent mission ownership boundaries and is appropriate for the Educational Corpus as CURRENT_RULE curriculum.",
+  "authorityPolicyVersion": "educational-corpus-authority:v1",
+  "dayZeroCertificationId": "genesis-day-zero-certification:4f408bb2cd219d464caf3e2fc73f6ee5212b9ae36a98383e1476d400ee4b3447",
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

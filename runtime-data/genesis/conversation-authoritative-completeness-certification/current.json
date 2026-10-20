@@ -1,0 +1,21 @@
+{
+  "certificationId": "genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c",
+  "certificationVersion": "genesis-conversation-authoritative-completeness-certification:v1",
+  "state": "CERTIFIED",
+  "candidateId": "genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993",
+  "reviewId": "genesis-conversation-expected-history-candidate-review:1c542a2e849a57e9e9bc742591970eeb3367fda62d6d37c82bd9b87525678981",
+  "acquisitionId": "chatgpt-browser-recovery-acquisition:0b8936e5663b1e7f03941a5932eae106d706013cc9ed80a0e2698bab6788b34b",
+  "acquisitionInventoryId": "genesis-conversation-acquisition-inventory:a5478f801b788886ae6144d7e7d5b000eff40a2a6c2e4ee16d5ad79e91cec7fd",
+  "candidateConversationCount": 56,
+  "acquiredConversationCount": 56,
+  "projectCount": 6,
+  "historicalSourceCount": 272,
+  "evidenceCount": 272,
+  "knownOmissionCount": 0,
+  "certifiedBy": "a08495a2-c528-461e-82c0-c941d88b8065",
+  "certifiedAt": 1787656228930,
+  "reason": "Reviewed governed completeness evidence for the attested 56-conversation corpus across 6 projects. Candidate and acquisition identities match, no known omissions or acquisition gaps are present, and this certification does not create authoritative expected history or certify Day-0 coverage.",
+  "authoritativeExpectedHistoryCreated": false,
+  "dayZeroConversationCoverageCertified": false,
+  "promotionAvailable": false
+}

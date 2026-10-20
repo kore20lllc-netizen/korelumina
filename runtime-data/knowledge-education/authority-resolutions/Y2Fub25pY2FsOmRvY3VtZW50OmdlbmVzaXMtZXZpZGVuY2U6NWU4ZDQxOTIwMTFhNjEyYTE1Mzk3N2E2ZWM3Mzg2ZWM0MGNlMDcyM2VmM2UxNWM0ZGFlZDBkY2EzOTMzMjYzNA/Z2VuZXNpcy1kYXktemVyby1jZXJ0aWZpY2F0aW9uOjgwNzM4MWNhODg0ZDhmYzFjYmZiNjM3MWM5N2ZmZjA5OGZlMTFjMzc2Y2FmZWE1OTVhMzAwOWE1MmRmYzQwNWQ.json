@@ -1,0 +1,17 @@
+{
+  "resolutionId": "educational-authority-resolution:b63772f0ec71d26c4061b2708cfa8de7531fc9046de0f6a0f160a5666ccb7b43",
+  "version": "educational-authority-resolution:v1",
+  "artifactId": "canonical:document:genesis-evidence:5e8d4192011a612a153977a6ec7386ec40ce0723ef3e15c4daed0dca39332634",
+  "learningRole": "CURRENT_CANONICAL_KNOWLEDGE",
+  "decision": "APPROVED",
+  "reviewerId": "human-review:repository-owner",
+  "reviewedAt": 1792268914020,
+  "reason": "Business Charter v1.0 is approved current business knowledge for the Chief Agent under ADR-0040; it informs but does not govern, and the Canon prevails on conflict.",
+  "authorityPolicyVersion": "educational-corpus-authority:v1",
+  "dayZeroCertificationId": "genesis-day-zero-certification:807381ca884d8fc1cbfb6371c97fff098fe11c376cafea595a3009a52dfc405d",
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

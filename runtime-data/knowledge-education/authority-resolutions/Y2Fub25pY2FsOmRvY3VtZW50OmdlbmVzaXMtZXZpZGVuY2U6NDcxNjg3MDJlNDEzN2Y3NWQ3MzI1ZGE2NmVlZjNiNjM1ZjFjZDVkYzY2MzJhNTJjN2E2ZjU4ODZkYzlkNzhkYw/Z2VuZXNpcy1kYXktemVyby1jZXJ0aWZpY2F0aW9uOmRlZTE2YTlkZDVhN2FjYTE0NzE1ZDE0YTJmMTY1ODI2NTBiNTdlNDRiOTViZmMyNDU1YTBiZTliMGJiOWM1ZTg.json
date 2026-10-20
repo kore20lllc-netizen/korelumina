@@ -1,0 +1,17 @@
+{
+  "resolutionId": "educational-authority-resolution:34324c74a350d4d0677756b1c3df3194b87e1ecc89548700578669758b53376d",
+  "version": "educational-authority-resolution:v1",
+  "artifactId": "canonical:document:genesis-evidence:47168702e4137f75d7325da66eef3b635f1cd5dc6632a52c7a6f5886dc9d78dc",
+  "learningRole": "CURRENT_RULE",
+  "decision": "APPROVED",
+  "reviewerId": "human-review:repository-owner",
+  "reviewedAt": 1792215860866,
+  "reason": "Repository owner re-confirms Mission Ownership as the current governing rule for Chief Agent mission ownership, against the Sept 3 Day-0 certification.",
+  "authorityPolicyVersion": "educational-corpus-authority:v1",
+  "dayZeroCertificationId": "genesis-day-zero-certification:dee16a9dd5a7aca14715d14a2f16582650b57e44b95bfc2455a0be9b0bb9c5e8",
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

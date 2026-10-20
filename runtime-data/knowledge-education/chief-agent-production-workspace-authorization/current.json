@@ -1,0 +1,21 @@
+{
+  "authorizationId": "chief-agent-production-workspace-authorization:f73defc952d0530c2f49e5ccea4efaa3c6a35dcff40e851a3ae9091c529a9183",
+  "authorizationVersion": "chief-agent-production-workspace-authorization:v1",
+  "state": "AUTHORIZED",
+  "humanAcceptanceId": "initial-competency-human-acceptance:60bb5dc9475a9fcebf64802b3226ff2b89c982f25ef3365e06b228bc5239691f",
+  "initialCompetencyCertificationId": "initial-competency-certification:787a654d7ddc124cb6cd520523fd70765b90da1523fe8c11be1df5405e190127",
+  "initialCompetencyCandidateId": "initial-competency-assessment:4c15df370123615f2d381420a48bc0d359d63553db8ae07831fe17d7fe5d97f4",
+  "educationalCorpusCertificationId": "educational-corpus-certification:351a86e15a83bcc8a762390e46b0eb2cd267b65a1357044bfa35a14ef0e520c6",
+  "authorizedBy": "human-review:repository-owner",
+  "authorityRole": "HUMAN_GOVERNANCE",
+  "authorizedAt": 1792269387488,
+  "reason": "Owner authorizes a Chief Agent production workspace in principle. No workspace is created and the Chief Agent is not activated; activation requires the KO-5 decision record and owner approval.",
+  "downstream": {
+    "initialCompetencyCertified": true,
+    "humanAcceptanceRecorded": true,
+    "chiefAgentProductionWorkspaceAuthorized": true,
+    "chiefAgentProductionWorkspaceCreated": false,
+    "chiefAgentActivationAuthorized": false,
+    "chiefAgentActivated": false
+  }
+}

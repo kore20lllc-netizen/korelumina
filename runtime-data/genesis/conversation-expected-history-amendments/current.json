@@ -1,0 +1,1054 @@
+{
+  "previousInventory": {
+    "inventoryId": "genesis-conversation-expected-history:22c707d68d4c559c51909621ac8ca1e8993c77093e685e8f3937bb104642944e",
+    "authority": {
+      "authorityId": "genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c",
+      "authorityClass": "GENESIS_CONVERSATION_AUTHORITATIVE_COMPLETENESS_CERTIFICATION",
+      "certifiedBy": "a08495a2-c528-461e-82c0-c941d88b8065",
+      "certifiedAt": 1787656228930,
+      "scope": "governed-attested-conversation-history-corpus",
+      "version": "genesis-conversation-expected-history-authority:v1"
+    },
+    "historicalStart": 1787631586375,
+    "historicalEnd": 1787631586375,
+    "conversations": [
+      {
+        "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "698d1f72-3c20-8329-b7aa-5d540b7d0812",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/698d1f72-3c20-8329-b7aa-5d540b7d0812",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc6142624819186caca549600467e",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc9844-dc54-8325-be3f-229b00501c61",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9844-dc54-8325-be3f-229b00501c61",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cd53c4-3c88-8332-aef9-aa0db767fed8",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cd53c4-3c88-8332-aef9-aa0db767fed8",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc6142624819186caca549600467e",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ce57d3-11f0-832f-9b21-115830d8a201",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69ce57d3-11f0-832f-9b21-115830d8a201",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69d1ae66-6d4c-8327-8f79-d1166505a700",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d1ae66-6d4c-8327-8f79-d1166505a700",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69d48595-1834-8326-8d0e-4ffe319ec21a",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d48595-1834-8326-8d0e-4ffe319ec21a",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69e3da37-08d8-83ea-914e-f8d6771339df",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e3da37-08d8-83ea-914e-f8d6771339df",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a3a1f63-dd10-83ea-97b3-ea631103e313",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3a1f63-dd10-83ea-97b3-ea631103e313",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a41c132-4410-83ea-9451-41b5db5f81c0",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a41c132-4410-83ea-9451-41b5db5f81c0",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a828bec-8f10-83ea-a28e-4c8dfb106355",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a828bec-8f10-83ea-a28e-4c8dfb106355",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8839da-3764-83ea-b5c0-680ccbe22f23",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      },
+      {
+        "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+        "disposition": "EXPECTED_RECOVERABLE",
+        "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+        "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+        "firstKnownAt": 1787631586375,
+        "lastKnownAt": 1787631586375,
+        "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+      }
+    ]
+  },
+  "amendment": {
+    "amendmentId": "genesis-conversation-expected-history-amendment:6ba214c812f45b14ac39270f789590e2b5716e46c500dd7dd5c9518712db2161",
+    "previousInventoryId": "genesis-conversation-expected-history:22c707d68d4c559c51909621ac8ca1e8993c77093e685e8f3937bb104642944e",
+    "amendedInventoryId": "genesis-conversation-expected-history:fe76c5a08012fb9d4a24cdd50fe2d138923939b37ece921379cbf90a1e7092b7",
+    "conversationId": "69760457-b00c-832b-8d81-384ee5032859",
+    "amendedBy": "repository-owner",
+    "amendedAt": 1788393485352,
+    "reason": "Govern legitimate acquired conversation into authoritative expected history after verified sole unexpected-acquisition review.",
+    "inventory": {
+      "inventoryId": "genesis-conversation-expected-history:fe76c5a08012fb9d4a24cdd50fe2d138923939b37ece921379cbf90a1e7092b7",
+      "authority": {
+        "authorityId": "genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c",
+        "authorityClass": "GENESIS_CONVERSATION_AUTHORITATIVE_COMPLETENESS_CERTIFICATION",
+        "certifiedBy": "a08495a2-c528-461e-82c0-c941d88b8065",
+        "certifiedAt": 1787656228930,
+        "scope": "governed-attested-conversation-history-corpus",
+        "version": "genesis-conversation-expected-history-authority:v1"
+      },
+      "historicalStart": 1787631586375,
+      "historicalEnd": 1787631586375,
+      "conversations": [
+        {
+          "conversationId": "69760457-b00c-832b-8d81-384ee5032859",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "basis": "Governed post-creation expected-history amendment: Govern legitimate acquired conversation into authoritative expected history after verified sole unexpected-acquisition review."
+        },
+        {
+          "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "698d1f72-3c20-8329-b7aa-5d540b7d0812",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/698d1f72-3c20-8329-b7aa-5d540b7d0812",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc6142624819186caca549600467e",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc9844-dc54-8325-be3f-229b00501c61",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9844-dc54-8325-be3f-229b00501c61",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cd53c4-3c88-8332-aef9-aa0db767fed8",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cd53c4-3c88-8332-aef9-aa0db767fed8",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc6142624819186caca549600467e",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ce57d3-11f0-832f-9b21-115830d8a201",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61/c/69ce57d3-11f0-832f-9b21-115830d8a201",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69d1ae66-6d4c-8327-8f79-d1166505a700",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d1ae66-6d4c-8327-8f79-d1166505a700",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69d48595-1834-8326-8d0e-4ffe319ec21a",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d48595-1834-8326-8d0e-4ffe319ec21a",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69e3da37-08d8-83ea-914e-f8d6771339df",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e3da37-08d8-83ea-914e-f8d6771339df",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a3a1f63-dd10-83ea-97b3-ea631103e313",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3a1f63-dd10-83ea-97b3-ea631103e313",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a41c132-4410-83ea-9451-41b5db5f81c0",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a41c132-4410-83ea-9451-41b5db5f81c0",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a828bec-8f10-83ea-a28e-4c8dfb106355",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a828bec-8f10-83ea-a28e-4c8dfb106355",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8839da-3764-83ea-b5c0-680ccbe22f23",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        },
+        {
+          "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+          "disposition": "EXPECTED_RECOVERABLE",
+          "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+          "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+          "firstKnownAt": 1787631586375,
+          "lastKnownAt": 1787631586375,
+          "basis": "certified-authoritative-completeness:genesis-conversation-authoritative-completeness-certification:3ff20978230b20df07b170c414247a5e0c1701718ddab5b826a0971e0ffabd2c:genesis-conversation-expected-history-candidate:df9496199bdfb9a5c1a1890c2f48d5f59ff8f6b7bb5133152b199f5c4255d993"
+        }
+      ]
+    }
+  }
+}

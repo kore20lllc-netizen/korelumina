@@ -1,0 +1,17 @@
+{
+  "resolutionId": "educational-authority-resolution:84b2f3aeae5794a72247824850f873ef3ae70d6b4a6bd40e8b938dc58dcedb0e",
+  "version": "educational-authority-resolution:v1",
+  "artifactId": "canonical:document:genesis-evidence:9ee0f70e016231b86d3d004c199300cae2b303a061a7c421950c0592ee660d09",
+  "learningRole": "CURRENT_CANONICAL_KNOWLEDGE",
+  "decision": "APPROVED",
+  "reviewerId": "human-review:repository-owner",
+  "reviewedAt": 1792268960979,
+  "reason": "Domain Primer v1.0 is approved current domain knowledge for the Chief Agent under ADR-0040; it informs but does not govern, and the Canon prevails on conflict.",
+  "authorityPolicyVersion": "educational-corpus-authority:v1",
+  "dayZeroCertificationId": "genesis-day-zero-certification:807381ca884d8fc1cbfb6371c97fff098fe11c376cafea595a3009a52dfc405d",
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}

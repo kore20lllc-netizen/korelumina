@@ -1,0 +1,24 @@
+{
+  "certificationId": "initial-competency-certification:787a654d7ddc124cb6cd520523fd70765b90da1523fe8c11be1df5405e190127",
+  "certificationVersion": "initial-competency-certification:v1",
+  "state": "CERTIFIED",
+  "candidateId": "initial-competency-assessment:4c15df370123615f2d381420a48bc0d359d63553db8ae07831fe17d7fe5d97f4",
+  "assessmentVersion": "initial-competency-assessment:v1",
+  "educationalCorpusCertificationId": "educational-corpus-certification:351a86e15a83bcc8a762390e46b0eb2cd267b65a1357044bfa35a14ef0e520c6",
+  "completedCompetencyIds": [
+    "approval-boundaries",
+    "authority-interpretation",
+    "explainable-grounding",
+    "governed-retrieval",
+    "mission-boundaries",
+    "provenance-preservation",
+    "runtime-truth-distinction"
+  ],
+  "certifiedBy": "human-review:repository-owner",
+  "certifiedAt": 1792269387486,
+  "reason": "Owner certifies Initial Competency: all seven competencies resolved against the Oct 17 Educational Corpus certification, with four validated evidence records and curriculum-complete governance domains.",
+  "downstream": {
+    "initialCompetencyCertified": true,
+    "chiefAgentActivationAuthorized": false
+  }
+}

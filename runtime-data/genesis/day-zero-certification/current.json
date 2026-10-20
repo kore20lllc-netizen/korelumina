@@ -1,0 +1,24 @@
+{
+  "certificationId": "genesis-day-zero-certification:807381ca884d8fc1cbfb6371c97fff098fe11c376cafea595a3009a52dfc405d",
+  "certificationVersion": "genesis-day-zero-certification:v1",
+  "state": "CERTIFIED",
+  "candidateId": "genesis-day-zero-certification-candidate:cdda63cb51a86d0f0ea6f59c42e95f19dd2efea31e47133b646bd3d4633e4a0e",
+  "certifiedBy": "human-operator",
+  "certifiedAt": 1792268520271,
+  "reason": "Re-certify Day-0 Genesis after governed promotion of Evidence Model, Knowledge IR, Chief Agent Architecture, Mission System, Business Charter and Domain Primer to canonical knowledge.",
+  "provenance": {
+    "repositorySeedCertificationId": "genesis-repository-seed-certification:4f5c7f48d4d312c7a37700328b3dee72b98896db68a63b3560ab60cad51471cd",
+    "corpusProjectionId": "genesis-corpus-projection:c23ef880145cb32bc231ad1152846996f4ad808e0fbf61bd843f60b4f5104e79",
+    "conversationExpectedInventoryId": "genesis-conversation-expected-history:fe76c5a08012fb9d4a24cdd50fe2d138923939b37ece921379cbf90a1e7092b7",
+    "conversationAcquisitionInventoryId": "genesis-conversation-acquisition-inventory:8f570274e6198963e90a7740a6c0276ac67e2a638cd693dc71cf57960eab84ec",
+    "conversationCorrelationProjectionId": "genesis-conversation-correlation-completeness:51218374c48f7b956d29249153edfbe759c24c4586c72a2021b3a9f2e5d39852"
+  },
+  "certifiedHistoricalGaps": {
+    "historicallyUnavailableConversationIds": []
+  },
+  "downstream": {
+    "educationalCorpusCertified": false,
+    "initialCompetencyCertified": false,
+    "chiefAgentActivationAuthorized": false
+  }
+}
