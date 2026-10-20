@@ -178,10 +178,13 @@ export class MissionService {
     }
 
     const at = this.now();
+    const linkedCommits = [...mission.linkedCommits, { sha: commit.sha, subject: commit.subject, committedAt: commit.committedAt }];
+    /* F-36: an earlier commit linked late never moves the anchor back. */
+    const latest = linkedCommits.reduce((newest, linked) => (linked.committedAt >= newest.committedAt ? linked : newest));
     let updated: Mission = {
       ...mission,
-      linkedCommits: [...mission.linkedCommits, { sha: commit.sha, subject: commit.subject, committedAt: commit.committedAt }],
-      recoveryAnchor: commit.sha,
+      linkedCommits,
+      recoveryAnchor: latest.sha,
       updatedAt: at,
     };
 

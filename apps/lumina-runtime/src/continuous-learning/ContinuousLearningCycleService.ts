@@ -114,6 +114,11 @@ export class ContinuousLearningCycleService {
     return state;
   }
 
+  /* F-36: every recorded cycle, oldest first, without reading git. */
+  recordedCycles(): readonly LearningCycleRecord[] {
+    return this.ensureLedger().cycles;
+  }
+
   status(): ContinuousLearningStatus {
     const ledger = this.ensureLedger();
     const pending = this.dependencies.window.commitsAfter(

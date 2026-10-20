@@ -125,3 +125,50 @@ test("a completed mission's knowledge is extracted once its Learning Record is c
   assert.equal(mission.state, "knowledge_extracted");
   assert.equal(mission.history.at(-1)!.reason, "LR-2026-0100 is canonical");
 });
+
+/* F-36: a commit belongs to its mission whenever the mission is approved. */
+const at = (sha: string, missions: string[], committedAt: number): LearningWindowCommit => ({ ...commit(sha, missions), committedAt });
+
+test("a commit learned before its mission was approved links once the mission is approved", () => {
+  const missions = new MissionService();
+  const { id } = missions.create({ title: "F-33", objective: "O", plan }, owner);
+  missions.transition(id, "submit", owner);
+  const ledger: LearningCycleRecord[] = [];
+  const linker = new MissionWorkLinker(missions, () => false, undefined, () => ledger);
+
+  const learnedEarly = cycle([at("f33aaa", [id], 1_000)], { startedAt: 10, learning: { recordId: "LR-2026-0018" } as never });
+  assert.deepEqual(linker.afterCycle(learnedEarly).map((outcome) => outcome.reason), ["mission_awaiting_approval"]);
+  ledger.push(learnedEarly);
+
+  missions.transition(id, "approve", owner);
+  const next = linker.afterCycle(cycle([], { outcome: "NO_NEW_WORK", startedAt: 20 }));
+
+  assert.deepEqual(next, [{ missionId: id, sha: "f33aaa", result: "started", fromCycleId: learnedEarly.cycleId }]);
+  const mission = missions.get(id)!;
+  assert.equal(mission.state, "executing");
+  assert.equal(mission.recoveryAnchor, "f33aaa");
+  assert.deepEqual(mission.producedKnowledge, ["LR-2026-0018"]);
+
+  ledger.push(cycle([], { outcome: "NO_NEW_WORK", startedAt: 20 }));
+  assert.deepEqual(linker.afterCycle(cycle([], { outcome: "NO_NEW_WORK", startedAt: 30 })), [], "linked once");
+});
+
+test("an older commit linked late never moves the recovery anchor back", () => {
+  const missions = new MissionService();
+  const id = approvedMission(missions);
+  missions.linkWork(id, { sha: "new222", subject: "newer", committedAt: 2_000 });
+  missions.linkWork(id, { sha: "old111", subject: "older", committedAt: 1_000 });
+  assert.equal(missions.get(id)!.recoveryAnchor, "new222");
+});
+
+test("held or failed windows link nothing later either", () => {
+  const missions = new MissionService();
+  const id = approvedMission(missions);
+  const ledger = [
+    cycle([at("held01", [id], 1_000)], { outcome: "HELD", startedAt: 1 }),
+    cycle([at("fail01", [id], 1_100)], { outcome: "FAILED", startedAt: 2 }),
+  ];
+  const linker = new MissionWorkLinker(missions, () => false, undefined, () => ledger);
+  assert.deepEqual(linker.afterCycle(cycle([], { outcome: "NO_NEW_WORK", startedAt: 3 })), []);
+  assert.deepEqual(missions.get(id)!.linkedCommits, []);
+});

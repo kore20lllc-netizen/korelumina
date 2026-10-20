@@ -64,6 +64,8 @@ export interface MissionLinkOutcome {
   sha: string;
   result: "linked" | "started" | "ignored";
   reason?: string;
+  /* F-36: set when the commit was learned in an earlier cycle. */
+  fromCycleId?: string;
 }
 
 export interface ContinuousLearningLedgerState {

@@ -46,6 +46,10 @@ import {
   resolveLearningIntervalMinutes,
   windowedGenesisManifestBuilder,
 } from "./continuous-learning/index.js";
+import type {
+  LearningCycleRecord,
+  MissionLinkOutcome,
+} from "./continuous-learning/ContinuousLearningLedger.js";
 import {
   createTextGenerationClient,
   resolveChiefAgentReasoningRouting,
@@ -1745,11 +1749,13 @@ export const runtimeContinuousLearningService =
      * service is defined later in this module.
      */
     missionLinker: {
-      afterCycle: (cycle) =>
+      afterCycle: (cycle: LearningCycleRecord): MissionLinkOutcome[] =>
         new MissionWorkLinker(
           runtimeMissionService,
           isLearningRecordCanonical,
           () => runtimeMissionValidation.evaluateAll(),
+          (): readonly LearningCycleRecord[] =>
+            runtimeContinuousLearningService.recordedCycles(),
         ).afterCycle(cycle),
     },
 
