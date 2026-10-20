@@ -156,6 +156,23 @@ export function isEducationallyAdmissible(
     return false;
   }
 
+  /*
+   * ADR-0045: Learning Records are knowledge, not curriculum. Continuous
+   * learning (ADR-0042) makes them canonical under their own authority
+   * class and review policy, and the Chief Agent reasons with them through
+   * canonical knowledge. The Day-0 curriculum is the certified foundation;
+   * admitting each new Learning Record into it made every certification
+   * built on the curriculum stale after every owner commit.
+   */
+  if (
+    normalizedEducationString(
+      metadata.authorityClass,
+    ) ===
+      "learning"
+  ) {
+    return false;
+  }
+
   if (
     containsSyntheticMarker(
       source,
