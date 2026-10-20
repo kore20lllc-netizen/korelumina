@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  resolveRepositoryRoot,
+} from "../../storage/resolveKnowledgeStorageRoot.js";
+
+import {
   buildDefaultGenesisSourceManifest,
 } from "../GenesisSourceManifestBuilder.js";
 
@@ -14,6 +18,14 @@ import type {
 } from "../GenesisSourceManifest.js";
 
 
+/*
+ * F-30: these tests read the repository's real Chief Agent Operating Model.
+ * Resolve the repository root instead of assuming the tests are run from
+ * it, so they pass from apps/lumina-runtime as well.
+ */
+const REPOSITORY_ROOT =
+  resolveRepositoryRoot();
+
 const OPERATING_MODEL_PATH =
   "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md";
 
@@ -25,7 +37,7 @@ function scope():
       "partial",
 
     repository:
-      process.cwd(),
+      REPOSITORY_ROOT,
 
     includedEvidenceTypes: [
       "document",
@@ -52,7 +64,7 @@ test(
     const result =
       await buildDefaultGenesisSourceManifest({
         repositoryRoot:
-          process.cwd(),
+          REPOSITORY_ROOT,
 
         scope:
           scope(),
@@ -150,7 +162,7 @@ test(
     const result =
       await buildDefaultGenesisSourceManifest({
         repositoryRoot:
-          process.cwd(),
+          REPOSITORY_ROOT,
 
         scope:
           scope(),

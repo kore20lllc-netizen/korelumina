@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 
 import {
@@ -79,6 +82,18 @@ function candidate(
   };
 }
 
+
+/*
+ * F-30: each test gets its own canonical store. They assert that a refused
+ * package leaves the store empty, which only holds if no earlier test in
+ * the process promoted into the same store.
+ */
+function freshCanonicalStore(): CanonicalKnowledgeStore {
+  return new CanonicalKnowledgeStore({
+    root: fs.mkdtempSync(path.join(os.tmpdir(), "korelumina-promotion-")),
+  });
+}
+
 test(
   "approved reviewed package can become canonical",
   () => {
@@ -86,7 +101,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -198,7 +213,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -240,7 +255,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -298,7 +313,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -350,7 +365,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -413,7 +428,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -470,7 +485,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -568,7 +583,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([
@@ -642,7 +657,7 @@ test(
       new KnowledgePackageService();
 
     const canonicalStore =
-      new CanonicalKnowledgeStore();
+      freshCanonicalStore();
 
     const created =
       packageService.packageValidated([

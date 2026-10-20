@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  resolveRepositoryRoot,
+} from "../../storage/resolveKnowledgeStorageRoot.js";
+
+import {
   DocumentationHistoricalSourceDiscoverer,
 } from "../DocumentationHistoricalSourceDiscoverer.js";
 
@@ -13,6 +17,14 @@ import type {
   GenesisReplayScope,
 } from "../GenesisSourceManifest.js";
 
+
+/*
+ * F-30: these tests read the repository's real Chief Agent Operating Model.
+ * Resolve the repository root instead of assuming the tests are run from
+ * it, so they pass from apps/lumina-runtime as well.
+ */
+const REPOSITORY_ROOT =
+  resolveRepositoryRoot();
 
 const OPERATING_MODEL_PATH =
   "docs/chief-agent/CHIEF_AGENT_OPERATING_MODEL.md";
@@ -61,7 +73,7 @@ function scope():
       "partial",
 
     repository:
-      process.cwd(),
+      REPOSITORY_ROOT,
 
     includedEvidenceTypes: [
       "document",
@@ -88,7 +100,7 @@ test(
     const discoverer =
       new DocumentationHistoricalSourceDiscoverer({
         repositoryRoot:
-          process.cwd(),
+          REPOSITORY_ROOT,
 
         documentRoots: [
           "docs/chief-agent",
