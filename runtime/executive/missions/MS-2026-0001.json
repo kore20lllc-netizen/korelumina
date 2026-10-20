@@ -1,0 +1,137 @@
+{
+  "id": "MS-2026-0001",
+  "title": "Mission System v1",
+  "description": "",
+  "objective": "Missions become live Runtime records that attach to owner work, validate on evidence, and feed knowledge (ADR-0044)",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Runtime",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "MS-1 records and lifecycle",
+            "acceptanceCriteria": [
+              "Lifecycle enforced with authority by step"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "MS-2 commit linking",
+            "acceptanceCriteria": [
+              "Mission trailers attach owner commits"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "MS-3 Chief Agent proposals",
+            "acceptanceCriteria": [
+              "Proposals reach the owner as approvals"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T4",
+            "title": "MS-4 validation and completion",
+            "acceptanceCriteria": [
+              "Completion only on evidence"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Executive Office",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "MS-5 wire Mission, Planning, Agent and Execution",
+            "acceptanceCriteria": [
+              "No design-preview data left"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "MS-6 import the Mission Board",
+            "acceptanceCriteria": [
+              "Open tickets become missions"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass"
+    ],
+    "requiredDocuments": [
+      "docs/adr/ADR-0044-mission-system-v1.md"
+    ]
+  },
+  "state": "approved",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792464087272
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792464087272
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792464087295
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792464087308
+    }
+  ],
+  "createdAt": 1792464087272,
+  "updatedAt": 1792464087308
+}

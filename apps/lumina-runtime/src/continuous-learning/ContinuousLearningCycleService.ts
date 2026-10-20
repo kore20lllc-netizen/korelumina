@@ -7,6 +7,7 @@ import type {
   LearningCycleRecord,
   LearningCycleTrigger,
   LearningWindowCommit,
+  MissionLinkOutcome,
 } from "./ContinuousLearningLedger.js";
 import type {
   LearningWindowSource,
@@ -45,6 +46,13 @@ export interface ContinuousLearningCycleServiceDependencies {
   ownerEmails: readonly string[];
   /* ADR-0042 (CL-1c): writes the Learning Record for a captured window. */
   learner?: Learner;
+  /*
+   * MS-2 (ADR-0044): attaches captured commits to their missions. A
+   * linking failure is recorded and never fails learning.
+   */
+  missionLinker?: {
+    afterCycle(cycle: LearningCycleRecord): MissionLinkOutcome[];
+  };
   now?: () => number;
 }
 
@@ -139,13 +147,27 @@ export class ContinuousLearningCycleService {
     cycle: LearningCycleRecord,
     advanceTo: LearningCheckpoint | null,
   ): LearningCycleRecord {
+    const linked = this.linkMissions(cycle);
     const next: ContinuousLearningLedgerState = {
       ...ledger,
       checkpoint: advanceTo ?? ledger.checkpoint,
-      cycles: [...ledger.cycles, cycle].slice(-HISTORY_LIMIT),
+      cycles: [...ledger.cycles, linked].slice(-HISTORY_LIMIT),
     };
     this.dependencies.ledger.write(next);
-    return cycle;
+    return linked;
+  }
+
+  private linkMissions(cycle: LearningCycleRecord): LearningCycleRecord {
+    if (!this.dependencies.missionLinker) return cycle;
+    try {
+      const missionLinks = this.dependencies.missionLinker.afterCycle(cycle);
+      return missionLinks.length ? { ...cycle, missionLinks } : cycle;
+    } catch (error) {
+      return {
+        ...cycle,
+        reasons: [...cycle.reasons, `mission_linking_failed:${(error as Error).message}`],
+      };
+    }
   }
 
   private async learnFor(
@@ -204,11 +226,13 @@ export class ContinuousLearningCycleService {
     const start =
       this.dependencies.window.commitAt(cycle.fromCommit)?.committedAt ??
       cycle.startedAt;
-    const updated = await this.learnFor(
+    const learned = await this.learnFor(
       { ...cycle, learning: undefined },
       start,
       (cycle.learning?.attempts ?? 0) + 1,
     );
+    /* MS-2: a Learning Record written on retry still reaches its missions. */
+    const updated = this.linkMissions(learned);
     const fresh = this.ensureLedger();
     this.dependencies.ledger.write({
       ...fresh,

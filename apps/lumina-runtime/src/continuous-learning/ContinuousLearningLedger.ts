@@ -30,6 +30,8 @@ export interface LearningWindowCommit {
   authorEmail: string;
   committedAt: number;
   subject: string;
+  /* MS-2 (ADR-0044 Decision 3): mission ids from "Mission:" trailers. */
+  missions?: string[];
 }
 
 export interface LearningCheckpoint {
@@ -53,6 +55,15 @@ export interface LearningCycleRecord {
   admittedSources: number | null;
   /* ADR-0042 (CL-1c): the Learning Record written from this window. */
   learning?: LearningOutcome;
+  /* MS-2 (ADR-0044): how this window's commits attached to missions. */
+  missionLinks?: MissionLinkOutcome[];
+}
+
+export interface MissionLinkOutcome {
+  missionId: string;
+  sha: string;
+  result: "linked" | "started" | "ignored";
+  reason?: string;
 }
 
 export interface ContinuousLearningLedgerState {

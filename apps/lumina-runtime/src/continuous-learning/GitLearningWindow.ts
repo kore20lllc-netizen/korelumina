@@ -21,6 +21,20 @@ export interface LearningWindowSource {
 const FIELD = "\u001f";
 const RECORD = "\u001e";
 
+/* MS-2: "Mission: MS-2026-0001" (one or more, comma-separated). */
+const MISSION_ID = /^MS-\d{4}-\d{4}$/;
+
+export function parseMissionTrailers(value: string): string[] {
+  return [
+    ...new Set(
+      value
+        .split(/[,\n]/)
+        .map((entry) => entry.trim().toUpperCase())
+        .filter((entry) => MISSION_ID.test(entry)),
+    ),
+  ];
+}
+
 export class GitLearningWindowSource
   implements LearningWindowSource
 {
@@ -69,7 +83,8 @@ export class GitLearningWindowSource
     const out = this.git([
       "log",
       "--reverse",
-      `--format=%H${FIELD}%an${FIELD}%ae${FIELD}%ct${FIELD}%s${RECORD}`,
+      /* MS-2: git's own trailer parser reads "Mission:" trailers. */
+      `--format=%H${FIELD}%an${FIELD}%ae${FIELD}%ct${FIELD}%s${FIELD}%(trailers:key=Mission,valueonly,separator=%x2C)${RECORD}`,
       `${sha}..HEAD`,
     ]);
     return out
@@ -77,14 +92,16 @@ export class GitLearningWindowSource
       .map((entry) => entry.trim())
       .filter(Boolean)
       .map((entry) => {
-        const [commit, authorName, authorEmail, time, subject] =
+        const [commit, authorName, authorEmail, time, subject, trailers = ""] =
           entry.split(FIELD);
+        const missions = parseMissionTrailers(trailers);
         return {
           sha: commit,
           authorName,
           authorEmail: authorEmail.toLowerCase(),
           committedAt: Number(time) * 1000,
           subject,
+          ...(missions.length ? { missions } : {}),
         };
       });
   }

@@ -18,6 +18,10 @@ import { FileMissionStore } from "./MissionStore.js";
  * mission's history.
  */
 
+const SYSTEM: MissionActor = { id: "runtime", type: "system" };
+
+const LINKABLE: readonly Mission["state"][] = ["approved", "executing", "validating", "blocked"];
+
 export interface CreateMissionInput {
   title: string;
   description?: string;
@@ -134,6 +138,72 @@ export class MissionService {
     const updated = transitionMission(mission, transition, actor, this.now(), reason);
     this.store.save(updated);
     return updated;
+  }
+
+  /*
+   * MS-2 (ADR-0044 Decision 3): an owner commit with this mission's
+   * trailer is its execution. Work attaches to approved, executing,
+   * validating or blocked missions; the first commit on an approved
+   * mission starts it, and the latest linked commit is the recovery
+   * anchor. Re-linking the same commit changes nothing.
+   */
+  linkWork(
+    id: string,
+    commit: { sha: string; subject: string; committedAt: number },
+  ): { result: "linked" | "started" | "ignored"; reason?: string } {
+    const mission = this.store.get(id);
+    if (!mission) return { result: "ignored", reason: "mission_not_found" };
+    if (!LINKABLE.includes(mission.state)) {
+      return { result: "ignored", reason: `mission_${mission.state}` };
+    }
+    if (mission.linkedCommits.some((linked) => linked.sha === commit.sha)) {
+      return { result: "ignored", reason: "already_linked" };
+    }
+
+    const at = this.now();
+    let updated: Mission = {
+      ...mission,
+      linkedCommits: [...mission.linkedCommits, { sha: commit.sha, subject: commit.subject, committedAt: commit.committedAt }],
+      recoveryAnchor: commit.sha,
+      updatedAt: at,
+    };
+
+    const starts = mission.state === "approved";
+    if (starts) {
+      updated = transitionMission(updated, "start", SYSTEM, at, `First linked commit ${commit.sha.slice(0, 8)}: ${commit.subject}`);
+    }
+
+    this.store.save(updated);
+    return { result: starts ? "started" : "linked" };
+  }
+
+  /* MS-2: a Learning Record written from this mission's commits. */
+  recordKnowledge(id: string, learningRecordId: string): void {
+    const mission = this.store.get(id);
+    if (!mission || mission.producedKnowledge.includes(learningRecordId)) return;
+    this.store.save({
+      ...mission,
+      producedKnowledge: [...mission.producedKnowledge, learningRecordId],
+      updatedAt: this.now(),
+    });
+  }
+
+  /*
+   * MS-2 (ADR-0044 Decision 2): a completed mission's knowledge is
+   * extracted once one of its Learning Records is canonical.
+   */
+  extractKnowledgeWhenCanonical(isCanonical: (learningRecordId: string) => boolean): string[] {
+    const extracted: string[] = [];
+    for (const mission of this.store.list()) {
+      if (mission.state !== "completed") continue;
+      const canonical = mission.producedKnowledge.find(isCanonical);
+      if (!canonical) continue;
+      this.store.save(
+        transitionMission(mission, "extract_knowledge", SYSTEM, this.now(), `${canonical} is canonical`),
+      );
+      extracted.push(mission.id);
+    }
+    return extracted;
   }
 
   private withPlan(mission: Mission, plan: MissionPlan | null, actor: MissionActor, at: number): Mission {

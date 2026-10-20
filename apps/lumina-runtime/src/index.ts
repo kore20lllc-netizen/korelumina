@@ -129,7 +129,7 @@ import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js"
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
 import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
-import { MissionService } from "./executive/mission/index.js";
+import { MissionService, MissionWorkLinker } from "./executive/mission/index.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -1691,6 +1691,30 @@ export const runtimeContinuousLearningService =
         .split(",")
         .map((email) => email.trim())
         .filter(Boolean),
+
+    /*
+     * MS-2 (ADR-0044 Decision 3): captured owner commits with a Mission
+     * trailer attach to their missions. Created lazily: the mission
+     * service is defined later in this module.
+     */
+    missionLinker: {
+      afterCycle: (cycle) =>
+        new MissionWorkLinker(
+          runtimeMissionService,
+          (learningRecordId) =>
+            knowledgePlatform.store
+              .list()
+              .some((item) => {
+                const contentRef =
+                  typeof item.metadata?.contentRef === "string"
+                    ? item.metadata.contentRef
+                    : "";
+                return contentRef.startsWith(
+                  `docs/learning/${learningRecordId}`,
+                );
+              }),
+        ).afterCycle(cycle),
+    },
 
     /*
      * CL-1c: the Chief Agent writes the Learning Record with the same
