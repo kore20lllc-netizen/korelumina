@@ -118,6 +118,8 @@ const HUMAN_ONLY_EXECUTIVE_ROUTES:
     /^\/actions\/[^/]+\/execute-operation\/?$/,
     /^\/actions\/[^/]+\/execute-mutation\/?$/,
     /^\/decisions\/[^/]+\/delegate\/?$/,
+    /* MS-1 (ADR-0044 Decision 2): mission steps only the owner takes. */
+    /^\/missions\/[^/]+\/(approve|reject|block|unblock|cancel|archive)\/?$/,
   ];
 
 export function isHumanOnlyExecutivePath(

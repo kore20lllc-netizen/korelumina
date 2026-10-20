@@ -128,6 +128,8 @@ import {
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
+import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
+import { MissionService } from "./executive/mission/index.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -2274,6 +2276,15 @@ registerExecutiveReasoningRoute(
 registerExecutiveOperationalStateRoute(
   app,
   chiefAgentOperationalStateReader,
+);
+
+/* MS-1 (ADR-0044): missions as governed Runtime records. */
+export const runtimeMissionService =
+  new MissionService();
+
+registerExecutiveMissionRoutes(
+  app,
+  runtimeMissionService,
 );
 
 registerExecutiveOperationsSnapshotRoute(
