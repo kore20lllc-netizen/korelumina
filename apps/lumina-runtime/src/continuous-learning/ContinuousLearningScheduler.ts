@@ -7,7 +7,14 @@ import type {
  * every 30 minutes (KORELUMINA_LEARNING_INTERVAL_MINUTES; 0 turns the
  * automatic check off). The check itself only reads git; a capture runs
  * only when there are new commits.
+ *
+ * F-32: the first check runs one minute after start. With only the
+ * interval, a Runtime restarted more often than every 30 minutes (every
+ * patch, during development) never checked, and owner work went unlearned
+ * and unlinked from its missions.
  */
+const STARTUP_DELAY_MS = 60_000;
+
 export function resolveLearningIntervalMinutes(
   value: string | undefined,
 ): number {
@@ -18,15 +25,22 @@ export function resolveLearningIntervalMinutes(
 
 export class ContinuousLearningScheduler {
   private timer: ReturnType<typeof setInterval> | null = null;
+  private firstCheck: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
-    private readonly service: ContinuousLearningCycleService,
+    private readonly service: Pick<ContinuousLearningCycleService, "isRunning" | "run">,
     private readonly intervalMinutes: number,
     private readonly log: (message: string) => void = console.log,
+    private readonly startupDelayMs: number = STARTUP_DELAY_MS,
   ) {}
 
   start(): void {
     if (this.timer || this.intervalMinutes <= 0) return;
+    this.firstCheck = setTimeout(() => {
+      this.firstCheck = null;
+      void this.tick();
+    }, this.startupDelayMs);
+    this.firstCheck.unref?.();
     this.timer = setInterval(() => {
       void this.tick();
     }, this.intervalMinutes * 60_000);
@@ -34,7 +48,9 @@ export class ContinuousLearningScheduler {
   }
 
   stop(): void {
+    if (this.firstCheck) clearTimeout(this.firstCheck);
     if (this.timer) clearInterval(this.timer);
+    this.firstCheck = null;
     this.timer = null;
   }
 
