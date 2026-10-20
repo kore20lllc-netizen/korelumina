@@ -13,30 +13,10 @@
 
 export type PreviewTone = "healthy" | "active" | "warning" | "error";
 
-export const dashboardHealth = [
-  { id: "platform", label: "Platform Health", value: "2 high", detail: "Security findings open", tone: "warning" as PreviewTone },
-  { id: "runtime", label: "Runtime Health", value: "Online", detail: "Learning check every 30 min", tone: "healthy" as PreviewTone },
-  { id: "knowledge", label: "Knowledge Health", value: "24", detail: "Canonical items, 3 learned", tone: "healthy" as PreviewTone },
-];
-
 export const recommendations = [
   { title: "Review ADR-0041 and ADR-0042 packages", reason: "Architecture decisions keep individual Canonical Review (ADR-0042 Decision 5).", impact: "Chief Agent reasons with both ADRs" },
   { title: "Write commit bodies that explain why", reason: "Learning Records can only cite reasons that are in the commit.", impact: "Deeper Lessons sections" },
   { title: "Schedule re-certification of Day-0", reason: "Three Learning Records were added since activation.", impact: "Curriculum drift cleared" },
-];
-
-export const projects = [
-  {
-    name: "KoreLumina platform",
-    repository: "kore20lllc-netizen/korelumina",
-    framework: "Vite React + Express (monorepo)",
-    runtime: "Runtime on 127.0.0.1:4100",
-    health: "2 high findings",
-    tone: "warning" as PreviewTone,
-    deployments: "Local development",
-    mission: "Executive Office",
-    knowledge: "24 canonical items",
-  },
 ];
 
 export const knowledgeCategories = [

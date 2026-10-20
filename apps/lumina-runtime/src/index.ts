@@ -132,6 +132,7 @@ import {
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
+import { registerExecutivePlatformRoute } from "./routes/executivePlatform.js";
 import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
 import {
   MissionProposalService,
@@ -2343,6 +2344,12 @@ registerExecutiveReasoningRoute(
 registerExecutiveOperationalStateRoute(
   app,
   chiefAgentOperationalStateReader,
+);
+
+/* MS-2026-0004: platform facts for the Executive Office platform card. */
+registerExecutivePlatformRoute(
+  app,
+  resolveRepositoryRoot(),
 );
 
 /* MS-1 (ADR-0044): missions as governed Runtime records. */

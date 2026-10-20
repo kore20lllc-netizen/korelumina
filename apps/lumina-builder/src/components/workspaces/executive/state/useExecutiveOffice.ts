@@ -2,7 +2,10 @@ import { useSyncExternalStore } from "react";
 
 import {
   askChiefAgent,
+  decideChiefAgentActivation,
   decideExecutiveApproval,
+  getActivationPrerequisites,
+  getPlatformFacts,
   getChiefAgentActivationStatus,
   getExecutiveOfficeOperations,
   getKnowledgeLifecycle,
@@ -16,7 +19,9 @@ import {
   takeMissionStep,
   verifyMissionBuild,
   runLearningCycleNow,
+  type ActivationPrerequisite,
   type ChiefAgentActivationStatus,
+  type PlatformFacts,
   type ExecutiveOfficeOperations,
   type KnowledgeLifecycle,
   type KnowledgeOverview,
@@ -63,6 +68,11 @@ export interface ExecutiveOfficeState {
   projects: Loaded<RuntimeProject[]>;
   identity: Loaded<RuntimeIdentity>;
   missions: Loaded<MissionRecord[]>;
+  platform: Loaded<PlatformFacts>;
+  prerequisites: Loaded<ActivationPrerequisite[]>;
+  /* MS-2026-0004: a suspend or resume being recorded, and why it failed. */
+  activationDeciding: "SUSPEND" | "RESUME" | null;
+  activationError: string | null;
   /* MS-5: owner evidence being recorded, and failures, keyed per action. */
   missionBusy: Record<string, string>;
   missionErrors: Record<string, string>;
@@ -86,6 +96,10 @@ let state: ExecutiveOfficeState = {
   projects: { status: "loading" },
   identity: { status: "loading" },
   missions: { status: "loading" },
+  platform: { status: "loading" },
+  prerequisites: { status: "loading" },
+  activationDeciding: null,
+  activationError: null,
   missionBusy: {},
   missionErrors: {},
   pendingQuestion: null,
@@ -111,7 +125,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity" | "missions">(
+function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity" | "missions" | "platform" | "prerequisites">(
   key: K,
   read: () => Promise<unknown>,
 ) {
@@ -129,7 +143,22 @@ function load<K extends "operations" | "activation" | "learning" | "canonicalRev
   );
 }
 
+/* Prerequisites take tens of seconds to re-derive: read every 5 minutes. */
+const PREREQUISITES_EVERY_MS = 5 * 60_000;
+let prerequisitesReadAt = 0;
+let prerequisitesReading = false;
+
+function refreshPrerequisites(force = false) {
+  if (prerequisitesReading || (!force && Date.now() - prerequisitesReadAt < PREREQUISITES_EVERY_MS)) return;
+  prerequisitesReading = true;
+  prerequisitesReadAt = Date.now();
+  void load("prerequisites", getActivationPrerequisites).finally(() => {
+    prerequisitesReading = false;
+  });
+}
+
 export async function refreshExecutiveOffice() {
+  refreshPrerequisites();
   if (refreshing) return;
   refreshing = true;
   try {
@@ -143,6 +172,7 @@ export async function refreshExecutiveOffice() {
       load("projects", getRuntimeProjects),
       load("identity", getRuntimeIdentity),
       load("missions", getMissions),
+      load("platform", getPlatformFacts),
     ]);
   } finally {
     refreshing = false;
@@ -288,6 +318,30 @@ export function recordMissionBuild(
   return recordMissionEvidence(missionBuildKey(missionId), result, () =>
     verifyMissionBuild(missionId, sha, result),
   );
+}
+
+/*
+ * MS-2026-0004: the owner suspends or resumes the Chief Agent, with a
+ * reason. Runtime refuses a resume unless every prerequisite is valid.
+ */
+export async function decideActivation(
+  action: "SUSPEND" | "RESUME",
+  reason: string,
+): Promise<boolean> {
+  if (state.activationDeciding) return false;
+  publish({ activationDeciding: action, activationError: null });
+  let succeeded = false;
+  try {
+    await decideChiefAgentActivation(action, reason);
+    succeeded = true;
+  } catch (error) {
+    publish({ activationError: errorMessage(error) });
+  } finally {
+    await refreshExecutiveOffice();
+    refreshPrerequisites(true);
+    publish({ activationDeciding: null });
+  }
+  return succeeded;
 }
 
 export async function learnNow(): Promise<void> {

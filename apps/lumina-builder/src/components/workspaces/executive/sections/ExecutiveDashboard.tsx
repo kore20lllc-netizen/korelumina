@@ -3,10 +3,10 @@ import { Compass, Gavel, Library, Lightbulb, Rocket, ServerCog, ShieldAlert, Tar
 import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
-  dashboardHealth,
   recommendations,
   type PreviewTone,
 } from "../design/executiveDesignPreview";
+import { knowledgeHealth, platformHealth, runtimeHealth } from "../state/executiveHealth";
 import { DesignPreviewBadge, ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill } from "../shared/ExecutiveSection";
 import { STATE_LABEL, STATE_TONE, currentMission, isOpenMission, missionNextStep, missionProgress } from "../state/missionView";
 import { useExecutiveOffice } from "../state/useExecutiveOffice";
@@ -43,7 +43,8 @@ export function ExecutiveDashboard() {
       : office.missions.status === "error" ? office.missions.message : "",
     tone: (office.missions.status === "error" ? "error" : awaiting ? "warning" : current ? STATE_TONE[current.state] : "healthy") as PreviewTone,
   };
-  const health = [missionTile, ...dashboardHealth];
+  /* MS-2026-0004: every health tile reads Runtime. */
+  const health = [missionTile, platformHealth(office), runtimeHealth(office), knowledgeHealth(office)];
 
   return (
     <ExecutiveSection
@@ -63,7 +64,10 @@ export function ExecutiveDashboard() {
       <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <LuminaFlagshipCard as="article" className="rounded-[20px] p-4">
           <div className="relative z-10">
-            <ExecutiveCardHeading icon={Lightbulb} tone="warning">Recommendations</ExecutiveCardHeading>
+            <div className="flex items-center justify-between gap-3">
+              <ExecutiveCardHeading icon={Lightbulb} tone="warning">Recommendations</ExecutiveCardHeading>
+              <DesignPreviewBadge />
+            </div>
             <ul className="mt-3 grid gap-3">
               {recommendations.map((item) => (
                 <li key={item.title} className="rounded-[14px] border border-cyan-300/15 bg-slate-950/40 p-3">

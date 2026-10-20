@@ -153,12 +153,13 @@ async function readJson(
 async function postJson(
   path: string,
   body: unknown,
+  method: "POST" | "PUT" = "POST",
 ): Promise<{ status: number; body: any }> {
   const response =
     await fetch(
       `${RUNTIME_API}${path}`,
       {
-        method: "POST",
+        method,
         headers: getRuntimeCallerHeaders({
           "Content-Type": "application/json",
         }),
@@ -663,4 +664,53 @@ export function takeMissionStep(
     `/api/executive/missions/${encodeURIComponent(missionId)}/${step}`,
     reason ? { reason } : {},
   );
+}
+
+/*
+ * MS-2026-0004: the platform, read from the repository by Runtime, and the
+ * Chief Agent's activation prerequisites. Prerequisites are re-derived on
+ * every read (tens of seconds), so the office reads them rarely.
+ */
+export interface PlatformFacts {
+  repository: string | null;
+  branch: string | null;
+  head: { sha: string; subject: string; committedAt: number } | null;
+  workspaces: Array<{ path: string; name: string; stack: string[] }>;
+}
+
+export async function getPlatformFacts(): Promise<PlatformFacts> {
+  const body = await readJson("/api/executive/platform");
+  if (!body?.platform) throw new Error("Runtime returned no platform facts");
+  return body.platform;
+}
+
+export interface ActivationPrerequisite {
+  gate: string;
+  state: string;
+  id?: string | null;
+}
+
+export async function getActivationPrerequisites(): Promise<ActivationPrerequisite[]> {
+  const body = await readJson("/api/executive/activation?prerequisites=true");
+  const prerequisites = body?.activation?.prerequisites;
+  if (!Array.isArray(prerequisites)) throw new Error("Runtime returned no prerequisites");
+  return prerequisites.map((entry: any) => ({ gate: String(entry?.gate ?? ""), state: String(entry?.state ?? "UNKNOWN"), id: entry?.id ?? null }));
+}
+
+/* The owner suspends or resumes the Chief Agent (ADR-0041 Decision 7). */
+export async function decideChiefAgentActivation(
+  action: "SUSPEND" | "RESUME",
+  reason: string,
+): Promise<void> {
+  const { status, body } = await postJson(
+    "/api/executive/activation",
+    /* Runtime previews every activation decision unless it is confirmed; the
+       owner's Confirm button is that confirmation. */
+    { action, decidedBy: EXECUTIVE_OWNER_ACTOR_ID, reason, confirm: true },
+    "PUT",
+  );
+  if (status >= 400 || body?.ok === false || body?.outcome !== "RECORDED") {
+    const reasons = Array.isArray(body?.reasons) ? body.reasons.join(", ") : null;
+    throw new Error(reasons || (typeof body?.error === "string" ? body.error : `Runtime answered ${status}`));
+  }
 }

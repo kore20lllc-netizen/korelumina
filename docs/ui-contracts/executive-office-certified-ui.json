@@ -31,8 +31,8 @@
       "elementCount": 20
     },
     "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx": {
-      "sha256": "f00e13183a8d60ed20074b8911ff777a5080c1cc3f0df89f5837bf4eb0507656",
-      "elementCount": 57
+      "sha256": "09e7531dc00296c935dbd55c48adc6cb93af67215ec9a8d1b7cb65b15918b2ee",
+      "elementCount": 62
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ActivityCenter.tsx": {
       "sha256": "3b03d152dccb97abf7d5cfbbcc8e9ef1c4679d87413d77c55e23fa87d9091bf5",
@@ -59,8 +59,8 @@
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx": {
-      "sha256": "a26aab10bd76c4a365c0335fd02e5e0aae54bcef0c68eee6ab75cd045ff10404",
-      "elementCount": 33
+      "sha256": "c6848fb63428aa9f2edeecd5f54f2de7f64e137a6f5097f5df40f2a23bb002f3",
+      "elementCount": 35
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/KnowledgeCenter.tsx": {
       "sha256": "532a946ebadfdce73a7ecf4d070dfe8c7af5ead42424f8a06855ca5854b1b185",
@@ -83,7 +83,7 @@
       "elementCount": 33
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx": {
-      "sha256": "e512250c771a5e461045509e52ca5af46000a550e7034de7c641dc45d171eccf",
+      "sha256": "a0fe2c437a808570b43237dfa249e303a23c2bf23edab3047245072a457b1ddf",
       "elementCount": 11
     },
     "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx": {

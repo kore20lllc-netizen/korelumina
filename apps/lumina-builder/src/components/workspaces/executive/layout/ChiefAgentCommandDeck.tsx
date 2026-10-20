@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   BrainCircuit,
   Gavel,
@@ -27,13 +28,13 @@ import type { PreviewTone } from "../design/executiveDesignPreview";
 import { currentMission } from "../state/missionView";
 import {
   DesignPreviewBadge,
-  NotWiredButton,
   tonePill,
   toneDot,
   toneText,
 } from "../shared/ExecutiveSection";
 import { useExecutiveBriefing } from "../state/useExecutiveBriefing";
 import {
+  decideActivation,
   learnNow,
   useExecutiveOffice,
   type ExecutiveOfficeState,
@@ -50,6 +51,10 @@ import {
  * three metrics read Runtime; the headline is the live briefing (EW-1b).
  * Security reads how Runtime identifies the owner (SEC-1d). The current
  * mission reads Runtime missions (MS-5).
+ *
+ * MS-2026-0004 (E2.T1): the owner suspends and resumes the Chief Agent here,
+ * with a reason (ADR-0041 Decision 7). Runtime refuses a resume unless every
+ * activation prerequisite is valid, and says why.
  */
 
 type Operation = {
@@ -224,6 +229,70 @@ function AgentMark({ tone }: { tone: PreviewTone }) {
   );
 }
 
+function ActivationControl({ office }: { office: ExecutiveOfficeState }) {
+  const [asking, setAsking] = useState(false);
+  const [reason, setReason] = useState("");
+  const state = office.activation.status === "ok" ? office.activation.data.state : null;
+  const action = state === "ACTIVE" ? "SUSPEND" : state === "SUSPENDED" ? "RESUME" : null;
+  const deciding = office.activationDeciding;
+  if (!action && !office.activationError) return null;
+
+  return (
+    <>
+      {asking && action ? (
+        <textarea
+          rows={2}
+          value={reason}
+          onChange={(event) => setReason(event.target.value)}
+          placeholder={action === "SUSPEND" ? "Why suspend the Chief Agent? (at least 10 characters)" : "Why resume the Chief Agent? (at least 10 characters)"}
+          className="[color-scheme:dark] w-full resize-none rounded-[14px] border border-amber-300/[0.25] bg-slate-950/[0.42] px-3 py-2 text-sm text-sky-100 placeholder:text-slate-500 outline-none focus:border-amber-300/50"
+        />
+      ) : null}
+      {office.activationError ? (
+        <div className="rounded-[12px] border border-rose-300/25 bg-rose-400/10 px-3 py-2 text-xs text-rose-100">
+          Not recorded: {office.activationError}
+        </div>
+      ) : null}
+      {action ? (
+        asking ? (
+          <>
+            <button
+              type="button"
+              disabled={Boolean(deciding) || reason.trim().length < 10}
+              onClick={async () => {
+                if (await decideActivation(action, reason.trim())) {
+                  setAsking(false);
+                  setReason("");
+                }
+              }}
+              className={`rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] disabled:cursor-not-allowed disabled:opacity-50 ${tonePill[action === "SUSPEND" ? "warning" : "healthy"]}`}
+            >
+              {deciding ? "Recording…" : action === "SUSPEND" ? "Confirm suspend" : "Confirm resume"}
+            </button>
+            <button
+              type="button"
+              disabled={Boolean(deciding)}
+              onClick={() => setAsking(false)}
+              className="rounded-full border border-white/15 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/60 disabled:opacity-50"
+            >
+              Cancel
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            disabled={Boolean(deciding)}
+            onClick={() => setAsking(true)}
+            className={`rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] disabled:cursor-not-allowed disabled:opacity-50 ${tonePill[action === "SUSPEND" ? "warning" : "healthy"]}`}
+          >
+            {action === "SUSPEND" ? "Suspend" : "Resume"}
+          </button>
+        )
+      ) : null}
+    </>
+  );
+}
+
 function Identity({ office }: { office: ExecutiveOfficeState }) {
   const briefing = useExecutiveBriefing();
   const activation = office.activation;
@@ -256,7 +325,7 @@ function Identity({ office }: { office: ExecutiveOfficeState }) {
             <span className="inline-flex items-center rounded-full border border-amber-300/20 bg-amber-400/5 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.28em] text-amber-100/80 backdrop-blur-xl">
               Executive Office
             </span>
-            <DesignPreviewBadge wiring="partial" />
+            <DesignPreviewBadge wiring="live" />
           </div>
           <h1 className="mt-3 text-5xl font-black tracking-[-0.045em]">
             <span className="text-gradient-lumina">Chief</span>{" "}
@@ -287,7 +356,7 @@ function Identity({ office }: { office: ExecutiveOfficeState }) {
           Current mission · <span className="text-amber-200">{deckMission}</span>
         </div>
         <div className="flex flex-wrap gap-2">
-          <NotWiredButton tone="warning">Suspend</NotWiredButton>
+          <ActivationControl office={office} />
           <button
             type="button"
             disabled={office.learningNow}
