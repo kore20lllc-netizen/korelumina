@@ -16,6 +16,8 @@ export class MissionWorkLinker {
   constructor(
     private readonly missions: MissionService,
     private readonly isCanonicalLearningRecord: (learningRecordId: string) => boolean,
+    /* MS-4: new commits change the evidence; re-evaluate missions in execution. */
+    private readonly evaluate?: () => void,
   ) {}
 
   afterCycle(cycle: LearningCycleRecord): MissionLinkOutcome[] {
@@ -37,6 +39,7 @@ export class MissionWorkLinker {
       }
     }
 
+    this.evaluate?.();
     this.missions.extractKnowledgeWhenCanonical(this.isCanonicalLearningRecord);
     return outcomes;
   }

@@ -129,7 +129,13 @@ import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js"
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
 import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
-import { MissionProposalService, MissionService, MissionWorkLinker } from "./executive/mission/index.js";
+import {
+  MissionProposalService,
+  MissionService,
+  MissionValidationService,
+  MissionWorkLinker,
+  gitDocumentCommitted,
+} from "./executive/mission/index.js";
 import { registerExecutiveDecisionRoute } from "./routes/executiveDecision.js";
 import { registerExecutiveDelegationRoute } from "./routes/executiveDelegation.js";
 import { registerExecutiveActionRoute } from "./routes/executiveAction.js";
@@ -1742,18 +1748,8 @@ export const runtimeContinuousLearningService =
       afterCycle: (cycle) =>
         new MissionWorkLinker(
           runtimeMissionService,
-          (learningRecordId) =>
-            knowledgePlatform.store
-              .list()
-              .some((item) => {
-                const contentRef =
-                  typeof item.metadata?.contentRef === "string"
-                    ? item.metadata.contentRef
-                    : "";
-                return contentRef.startsWith(
-                  `docs/learning/${learningRecordId}`,
-                );
-              }),
+          isLearningRecordCanonical,
+          () => runtimeMissionValidation.evaluateAll(),
         ).afterCycle(cycle),
     },
 
@@ -2348,6 +2344,45 @@ export const runtimeMissionService =
   new MissionService();
 
 /*
+ * MS-2: a Learning Record is canonical once the knowledge platform holds
+ * an item whose content is that record.
+ */
+function isLearningRecordCanonical(
+  learningRecordId: string,
+): boolean {
+  return knowledgePlatform.store
+    .list()
+    .some((item) => {
+      const contentRef =
+        typeof item.metadata?.contentRef === "string"
+          ? item.metadata.contentRef
+          : "";
+      return contentRef.startsWith(
+        `docs/learning/${learningRecordId}`,
+      );
+    });
+}
+
+/*
+ * MS-4 (ADR-0044 Decision 5): missions complete only on evidence.
+ */
+export const runtimeMissionValidation =
+  new MissionValidationService(
+    runtimeMissionService,
+    {
+      approvalStatus: (approvalId) =>
+        runtimeExecutiveApprovalService.get(approvalId)?.status,
+      documentCommitted:
+        gitDocumentCommitted(resolveRepositoryRoot()),
+      afterCompleted: () => {
+        runtimeMissionService.extractKnowledgeWhenCanonical(
+          isLearningRecordCanonical,
+        );
+      },
+    },
+  );
+
+/*
  * MS-3 (ADR-0044): Chief Agent mission and plan proposals, decided only
  * through the owner's approval.
  */
@@ -2368,6 +2403,7 @@ registerExecutiveMissionRoutes(
   app,
   runtimeMissionService,
   runtimeMissionProposals,
+  runtimeMissionValidation,
 );
 
 registerExecutiveOperationsSnapshotRoute(

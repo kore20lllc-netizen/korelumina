@@ -4,6 +4,8 @@ import {
   MissionTransitionError,
   type MissionActor,
   type MissionProposalService,
+  type MissionTaskStatus,
+  type MissionValidationService,
   type MissionService,
   type MissionTransitionName,
 } from "../executive/mission/index.js";
@@ -47,7 +49,56 @@ export function registerExecutiveMissionRoutes(
   missions: MissionService,
   /* MS-3: owner steps on a proposed mission go through its approval. */
   proposals?: MissionProposalService,
+  /* MS-4: validation evidence and completion. */
+  validation?: MissionValidationService,
 ): void {
+  if (validation) {
+    app.get("/api/executive/missions/:id/validation", (req: Request, res: Response) => {
+      try {
+        return res.json({ ok: true, checks: validation.checks(String(req.params.id)) });
+      } catch (error) {
+        return fail(res, error);
+      }
+    });
+
+    app.post("/api/executive/missions/:id/tasks/:taskId", (req: Request, res: Response) => {
+      try {
+        return res.json({
+          ok: true,
+          mission: validation.setTaskStatus(
+            String(req.params.id),
+            String(req.params.taskId),
+            req.body?.status as MissionTaskStatus,
+            actorFrom(req.body),
+            req.body?.reason,
+          ),
+        });
+      } catch (error) {
+        return fail(res, error);
+      }
+    });
+
+    app.post("/api/executive/missions/:id/verifications", (req: Request, res: Response) => {
+      try {
+        return res.json({
+          ok: true,
+          mission: validation.recordVerification(String(req.params.id), req.body ?? {}, actorFrom(req.body)),
+        });
+      } catch (error) {
+        return fail(res, error);
+      }
+    });
+
+    /* Re-reads the evidence; only Runtime takes the resulting steps. */
+    app.post("/api/executive/missions/:id/evaluate", (req: Request, res: Response) => {
+      try {
+        return res.json({ ok: true, mission: validation.evaluate(String(req.params.id)) });
+      } catch (error) {
+        return fail(res, error);
+      }
+    });
+  }
+
   app.get("/api/executive/missions", (_req: Request, res: Response) =>
     res.json({ ok: true, missions: missions.list() }),
   );

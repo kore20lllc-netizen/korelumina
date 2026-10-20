@@ -140,6 +140,11 @@ export class MissionService {
     return updated;
   }
 
+  /* MS-4: validation writes task status, verifications and results. */
+  save(mission: Mission): void {
+    this.store.save(mission);
+  }
+
   /*
    * MS-3: the approval that decides this mission. Listed in
    * requiredApprovals; adding it twice changes nothing.

@@ -66,6 +66,34 @@ export interface MissionTask {
   acceptanceCriteria: string[];
   status: MissionTaskStatus;
   dropReason?: string;
+  /* MS-4: who last changed the task's status, and when. */
+  updatedBy?: string;
+  updatedAt?: number;
+}
+
+/*
+ * MS-4 (ADR-0044 Decision 5): the owner's record that a linked commit
+ * passed (or failed) a check, today `npm run build`.
+ */
+export interface MissionVerification {
+  check: "build";
+  sha: string;
+  result: "passed" | "failed";
+  note?: string;
+  actor: string;
+  at: number;
+}
+
+export interface MissionCheck {
+  id: "tasks" | "build" | "approvals" | "documents" | "recovery-anchor";
+  label: string;
+  passed: boolean;
+  detail: string;
+}
+
+export interface MissionValidation {
+  evaluatedAt: number;
+  checks: MissionCheck[];
 }
 
 export interface MissionEpic {
@@ -111,6 +139,9 @@ export interface Mission {
   linkedCommits: Array<{ sha: string; subject: string; committedAt: number }>;
   recoveryAnchor: string | null;
   producedKnowledge: string[];
+  /* MS-4: absent on records written before MS-4. */
+  verifications?: MissionVerification[];
+  validation?: MissionValidation | null;
   history: MissionTransition[];
   createdAt: number;
   updatedAt: number;
