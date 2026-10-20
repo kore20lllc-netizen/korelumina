@@ -91,8 +91,8 @@
       "elementCount": 5
     },
     "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx": {
-      "sha256": "4905de56890583bcefddd1beecd949f4a8d3ce8a3e4c2a3331e610c4d4f26d89",
-      "elementCount": 28
+      "sha256": "6fc1809e786628f3e4d4853fe6a6e209091841fd09273e09c6d9480ec605f7fe",
+      "elementCount": 29
     }
   }
 }

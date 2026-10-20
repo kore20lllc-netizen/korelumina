@@ -26,6 +26,11 @@ import type {
  * EW-0: every Executive Office section uses the Knowledge Operations
  * flagship panel and header composition. A section that is not wired to
  * Runtime yet says so with the design-preview badge.
+ *
+ * EW-1i: every section has the same height. The header stays in place and
+ * the content scrolls inside the panel (the Knowledge Operations scroll
+ * pattern), so a long list never stretches its row or pushes the office
+ * down.
  */
 
 export type ExecutiveSectionWiring =
@@ -112,13 +117,13 @@ export function ExecutiveSection({
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className="min-w-0 scroll-mt-28"
+      className="h-[680px] min-w-0 scroll-mt-28"
     >
       <LuminaFlagshipPanel
         title={null}
-        className="h-full [&>div:nth-of-type(3)]:hidden"
+        className="flex h-full flex-col [&>div:nth-of-type(3)]:hidden"
       >
-        <div className="relative z-10 grid gap-5 p-5 sm:p-6">
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col gap-5 p-5 sm:p-6">
           <LuminaPanelHeaderComposition
             alignment="start"
             responsiveAction
@@ -151,7 +156,9 @@ export function ExecutiveSection({
               </div>
             }
           />
-          {children}
+          <div className="grid min-h-0 flex-1 content-start gap-5 overflow-y-auto overflow-x-hidden overscroll-contain pr-2 [scrollbar-gutter:stable] [touch-action:pan-y]">
+            {children}
+          </div>
         </div>
       </LuminaFlagshipPanel>
     </section>
