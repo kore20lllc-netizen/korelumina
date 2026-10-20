@@ -40,9 +40,16 @@ export function getRuntimeDataRoot(): string {
   );
 }
 
+/*
+ * Runtime locks record which process runs each project. They are
+ * operational state, never committed, and live under the gitignored
+ * runtime-data root like other operational data. They used to follow
+ * process.cwd(), so starting Runtime from apps/lumina-runtime left an
+ * untracked runtime-locks folder in the working tree.
+ */
 export function getRuntimeLockRoot(): string {
-  return path.resolve(
-    process.cwd(),
+  return path.join(
+    getRuntimeDataRoot(),
     "runtime-locks",
   );
 }
