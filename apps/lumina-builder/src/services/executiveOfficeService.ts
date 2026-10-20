@@ -676,6 +676,7 @@ export interface PlatformFacts {
   branch: string | null;
   head: { sha: string; subject: string; committedAt: number } | null;
   workspaces: Array<{ path: string; name: string; stack: string[] }>;
+  uncommittedRecords: { learningRecords: number; runtimeRecords: number } | null;
 }
 
 export async function getPlatformFacts(): Promise<PlatformFacts> {

@@ -13,12 +13,6 @@
 
 export type PreviewTone = "healthy" | "active" | "warning" | "error";
 
-export const recommendations = [
-  { title: "Review ADR-0041 and ADR-0042 packages", reason: "Architecture decisions keep individual Canonical Review (ADR-0042 Decision 5).", impact: "Chief Agent reasons with both ADRs" },
-  { title: "Write commit bodies that explain why", reason: "Learning Records can only cite reasons that are in the commit.", impact: "Deeper Lessons sections" },
-  { title: "Schedule re-certification of Day-0", reason: "Three Learning Records were added since activation.", impact: "Curriculum drift cleared" },
-];
-
 export const knowledgeCategories = [
   { label: "Canon and Constitution", count: 9, detail: "Vision 2050, Platform Constitution, CA-001 to CA-005" },
   { label: "Architecture", count: 8, detail: "Blueprint, Chief Agent Architecture, Evidence Model, IR" },

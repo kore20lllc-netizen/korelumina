@@ -22,6 +22,24 @@ export interface PlatformFacts {
   branch: string | null;
   head: { sha: string; subject: string; committedAt: number } | null;
   workspaces: PlatformWorkspace[];
+  /*
+   * MS-2026-0004 (E1.T2): records Runtime wrote that are not committed yet,
+   * so the office can recommend committing them (MS-2026-0007).
+   */
+  uncommittedRecords: { learningRecords: number; runtimeRecords: number } | null;
+}
+
+/* Counts `git status --porcelain` lines for Learning Records and Runtime records. */
+export function countUncommittedRecords(porcelain: string): { learningRecords: number; runtimeRecords: number } {
+  let learningRecords = 0;
+  let runtimeRecords = 0;
+  for (const line of porcelain.split("\n")) {
+    const file = line.slice(3).trim().replace(/^"|"$/g, "");
+    if (!file) continue;
+    if (file.startsWith("docs/learning/")) learningRecords += 1;
+    else if (file.startsWith("runtime/") || file.startsWith("runtime-data/")) runtimeRecords += 1;
+  }
+  return { learningRecords, runtimeRecords };
 }
 
 /* "https://github.com/owner/repo.git" or "git@github.com:owner/repo.git" to "owner/repo". */
@@ -57,6 +75,7 @@ export function readPlatformFacts(repositoryRoot: string): PlatformFacts {
   const branch = git(repositoryRoot, ["rev-parse", "--abbrev-ref", "HEAD"]);
   const log = git(repositoryRoot, ["log", "-1", "--format=%H%x1f%s%x1f%ct"]);
   const [sha, subject, seconds] = log ? log.split("\x1f") : [];
+  const status = git(repositoryRoot, ["status", "--porcelain", "--untracked-files=all", "--", "docs/learning", "runtime", "runtime-data"]);
 
   const workspaces: PlatformWorkspace[] = [];
   try {
@@ -83,6 +102,7 @@ export function readPlatformFacts(repositoryRoot: string): PlatformFacts {
     branch,
     head: sha ? { sha, subject: subject ?? "", committedAt: Number(seconds) * 1000 } : null,
     workspaces: workspaces.sort((left, right) => left.path.localeCompare(right.path)),
+    uncommittedRecords: status === null ? null : countUncommittedRecords(status),
   };
 }
 

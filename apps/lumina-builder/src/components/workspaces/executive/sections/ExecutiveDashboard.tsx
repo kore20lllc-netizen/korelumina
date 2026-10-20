@@ -2,10 +2,8 @@ import { Compass, Gavel, Library, Lightbulb, Rocket, ServerCog, ShieldAlert, Tar
 
 import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
-import {
-  recommendations,
-  type PreviewTone,
-} from "../design/executiveDesignPreview";
+import type { PreviewTone } from "../design/executiveDesignPreview";
+import { deriveRecommendations } from "../state/executiveRecommendations";
 import { knowledgeHealth, platformHealth, runtimeHealth } from "../state/executiveHealth";
 import { DesignPreviewBadge, ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill } from "../shared/ExecutiveSection";
 import { STATE_LABEL, STATE_TONE, currentMission, isOpenMission, missionNextStep, missionProgress } from "../state/missionView";
@@ -45,6 +43,8 @@ export function ExecutiveDashboard() {
   };
   /* MS-2026-0004: every health tile reads Runtime. */
   const health = [missionTile, platformHealth(office), runtimeHealth(office), knowledgeHealth(office)];
+  /* MS-2026-0004 (E1.T2): derived from Runtime records, each naming its source. */
+  const recommendations = deriveRecommendations(office);
 
   return (
     <ExecutiveSection
@@ -52,8 +52,8 @@ export function ExecutiveDashboard() {
       icon={Compass}
       eyebrow="Executive Dashboard · Overview"
       title="Platform at a glance"
-      description="Mission, platform, runtime, and knowledge health, what the Chief Agent recommends, the current mission, and recent decisions."
-      wiring="partial"
+      description="Mission, platform, runtime, and knowledge health, what needs you (derived from Runtime records), the current mission, and recent decisions."
+      wiring="live"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {health.map((tile) => (
@@ -66,14 +66,17 @@ export function ExecutiveDashboard() {
           <div className="relative z-10">
             <div className="flex items-center justify-between gap-3">
               <ExecutiveCardHeading icon={Lightbulb} tone="warning">Recommendations</ExecutiveCardHeading>
-              <DesignPreviewBadge />
+              <DesignPreviewBadge wiring="live" />
             </div>
             <ul className="mt-3 grid gap-3">
+              {office.missions.status === "ok" && recommendations.length === 0 ? (
+                <li className="text-sm text-sky-300/60">Nothing needs you right now.</li>
+              ) : null}
               {recommendations.map((item) => (
-                <li key={item.title} className="rounded-[14px] border border-cyan-300/15 bg-slate-950/40 p-3">
+                <li key={item.key} className="rounded-[14px] border border-cyan-300/15 bg-slate-950/40 p-3">
                   <div className="text-sm font-semibold text-sky-50">{item.title}</div>
                   <div className="mt-1 text-xs leading-5 text-sky-300/60">{item.reason}</div>
-                  <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-200/80">Impact · {item.impact}</div>
+                  <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-200/80">Impact · {item.impact} · From {item.source}</div>
                 </li>
               ))}
             </ul>

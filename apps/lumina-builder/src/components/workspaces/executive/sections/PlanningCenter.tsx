@@ -38,7 +38,7 @@ function TaskRow({ mission, task, depth }: { mission: MissionRecord; task: Missi
       <div className="flex flex-wrap items-center gap-3">
         <span className="w-20 shrink-0 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-300/90">Task</span>
         <span className="min-w-0 flex-1 text-sm text-sky-100/85" title={task.acceptanceCriteria.length ? `Acceptance: ${task.acceptanceCriteria.join("; ")}` : undefined}>
-          <span className="mr-2 font-mono text-[11px] text-sky-300/50">{task.id}</span>
+          <span className="mr-2 font-mono text-[11px] text-sky-300/50">{mission.id} · {task.id}</span>
           {task.title}
         </span>
         <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill[TASK_TONE[task.status]]}`}>
