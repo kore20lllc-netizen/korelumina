@@ -1,0 +1,31 @@
+{
+  "inventoryVersion": "chatgpt-browser-project-inventory:v1",
+  "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+  "projectTitle": "KoreLumina — Builder Core",
+  "discoveredAt": 1787610462600,
+  "pageUrl": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175",
+  "currentConversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+  "conversationCount": 4,
+  "conversations": [
+    {
+      "conversationId": "69cc8ae2-6074-8331-b61a-6c4125790175",
+      "title": "Commit Guardrail Enforcement",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc8ae2-6074-8331-b61a-6c4125790175"
+    },
+    {
+      "conversationId": "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+      "title": "Fix JournalPanel Crash",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cc7bdc-82ac-8329-b252-f0bce4d5a035"
+    },
+    {
+      "conversationId": "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+      "title": "KoreLumina Builder Core",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69ce58b2-8ebc-8327-8b44-8ff252cf173e"
+    },
+    {
+      "conversationId": "69cd53c4-3c88-8332-aef9-aa0db767fed8",
+      "title": "Master OS Dashboard UI",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc505e4b08191a0174bbcac2ff30f/c/69cd53c4-3c88-8332-aef9-aa0db767fed8"
+    }
+  ]
+}

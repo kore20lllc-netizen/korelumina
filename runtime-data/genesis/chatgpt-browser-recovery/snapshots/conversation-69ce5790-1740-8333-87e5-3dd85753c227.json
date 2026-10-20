@@ -1,0 +1,45 @@
+{
+  "snapshotVersion": "chatgpt-browser-recovery:v1",
+  "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+  "title": "KoreLumina — Production Hardening - KoreLumina Hardening Setup",
+  "conversationUrl": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227",
+  "projectId": "g-p-69cbc6142624819186caca549600467e",
+  "capturedAt": 1787626550074,
+  "messages": [
+    {
+      "messageId": "1f8e4ea6-4351-47b9-b90d-3bf4d4b91ff9",
+      "role": "assistant",
+      "order": 0,
+      "content": "Current task: establish the Production Hardening operating mode for this chat.\nLocked in for this chat:\n\n\nFocus: stability, safety, scalability\n\n\nScope: execution limits, admin bypass, env validation, logging/error handling, safe filesystem operations\n\n\nDefault behavior: block unsafe ops, fail fast on bad env, log clearly, avoid touching core features unless required\n\n\nTask handling pattern: risk → protection → regression check → stability check\n\n\nCompleted: role and operating scope are set.\nSend the first scoped hardening task.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=0"
+    },
+    {
+      "messageId": "02099ede-b440-4d4a-9958-d0a505f99786",
+      "role": "user",
+      "order": 1,
+      "content": "KoreLumina:\n- Builder = engine\n- Master OS = command center\n- working on builder stability + diff\ncontinue",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=1"
+    },
+    {
+      "messageId": "48310691-d982-47a2-a7d4-eb4adeb5f28b",
+      "role": "assistant",
+      "order": 2,
+      "content": "Current task: harden Builder stability + diff system (no feature expansion).\n\n1. Risks identified (from your current state)\nA. Editor crash risk\n\n\nvalue={content} can become undefined or stale\n\n\nonChange fires frequently → no debounce → UI thrash\n\n\nB. Diff instability\n\n\nfileContents[d.path] may be undefined → bad diff input\n\n\ngetDiffChunks has no guard → can crash on malformed input\n\n\nLarge diffs → UI freeze (render loop)\n\n\nC. Preview instability\n\n\n<iframe src={previewUrl}> reloads aggressively\n\n\nNo validation → can point to invalid route\n\n\nNo isolation → silent failures (blank iframe)\n\n\nD. Draft integrity risk\n\n\ndrafts array not validated\n\n\nMissing path or content breaks rendering\n\n\n\n2. Protections to implement (minimal, no regression)\n✅ HARDEN EDITOR INPUT\nReplace:\nTypeScriptvalue={content}\nWith:\nTypeScriptvalue={typeof content === \"string\" ? content : \"\"}\n\n✅ HARDEN onChange (prevent UI thrash)\nReplace:\nTypeScriptonChange={(v) => setContent(v || \"\")}\nWith:\nTypeScriptonChange={(v) => {\n  if (typeof v === \"string\") {\n    setContent(v);\n  }\n}}\n\n✅ HARDEN DIFF INPUT (CRITICAL)\nWrap diff logic:\nTypeScriptconst currentFile =\n  typeof fileContents?.[d.path] === \"string\"\n    ? fileContents[d.path]\n    : \"\";\n\nconst nextFile =\n  typeof d?.content === \"string\"\n    ? d.content\n    : \"\";\n\n✅ HARDEN DIFF EXECUTION (FAIL SAFE)\nReplace:\nTypeScriptconst chunks = getDiffChunks(currentFile, nextFile);\nWith:\nTypeScriptlet chunks = [];\ntry {\n  chunks = getDiffChunks(currentFile, nextFile) || [];\n} catch (e) {\n  console.error(\"DIFF ERROR:\", e);\n}\n\n✅ LIMIT DIFF RENDER (PREVENT FREEZE)\nReplace:\nTypeScript{chunks.map((c, idx) => (\nWith:\nTypeScript{chunks.slice(0, 200).map((c, idx) => (\n(Prevents large file lockups)\n\n✅ VALIDATE DRAFTS ARRAY\nWrap drafts rendering:\nTypeScript{Array.isArray(drafts) && drafts.length > 0 && (\n\n✅ HARDEN PREVIEW URL\nReplace:\nTypeScript<iframe src={previewUrl}\nWith:\nTypeScript<iframe\n  src={typeof previewUrl === \"string\" ? previewUrl : \"\"}\n\n✅ ADD PREVIEW FAIL VISIBILITY (NO SILENT BLANK)\nOptional but safe:\nTypeScript<iframe\n  key={previewUrl} // force refresh only when URL changes\n  src={typeof previewUrl === \"string\" ? previewUrl : \"\"}\n  style={{ height: \"40%\", border: \"none\" }}\n/>\n\n3. Regression check\nThese changes:\n\n\nDo NOT change architecture\n\n\nDo NOT touch runtime/API\n\n\nDo NOT change builder layout\n\n\nOnly add guards + limits\n\n\nSafe under your guardrail:\n\n✔ one module (builder)\n\n✔ no cross-module impact\n\n4. Stability outcome\nAfter this:\n\n\nEditor won’t crash on bad state\n\n\nDiff won’t break UI or freeze\n\n\nPreview won’t silently fail\n\n\nDrafts won’t corrupt rendering\n\n\n\nStatus\nBuilder stability layer: hardened (input + diff + preview guards)\n\nNext task (recommended):\n\n→ Diff accuracy (line-level → block-level improvements)",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=2"
+    },
+    {
+      "messageId": "3a9baaac-de2f-40ef-a80e-197ed35dc120",
+      "role": "user",
+      "order": 3,
+      "content": "What's master os status",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=3"
+    },
+    {
+      "messageId": "5dc079c0-f067-4c56-b08a-63c33251eca5",
+      "role": "assistant",
+      "order": 4,
+      "content": "",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227#browser-turn=4"
+    }
+  ]
+}

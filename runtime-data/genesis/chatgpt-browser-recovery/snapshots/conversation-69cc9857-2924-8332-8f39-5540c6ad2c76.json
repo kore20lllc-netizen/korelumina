@@ -1,0 +1,24 @@
+{
+  "snapshotVersion": "chatgpt-browser-recovery:v1",
+  "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+  "title": "KoreLumina — AI Planner + Diff - Guardrail Commit Workflow",
+  "conversationUrl": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76",
+  "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+  "capturedAt": 1787625718212,
+  "messages": [
+    {
+      "messageId": "1bb28b80-6766-43ba-9c9b-71f80774a76b",
+      "role": "user",
+      "order": 0,
+      "content": "KORELUMINA COMMIT GUARDRAIL (ENFORCED)\n\nSCOPE\n- One module only\n- No cross-module edits\n\nPRE-COMMIT CHECK (ALL YES REQUIRED)\n- build passes → yes\n- preview renders → yes\n- editor visible → yes\n- filetree populated → yes\n- save overwrites (no append) → yes\n- diff visible → yes (if applicable)\n- apply works → yes (if applicable)\n- no console/runtime errors → yes\n\nIF ANY “NO” → STOP\n\nBRANCH RULES\n- NEVER commit on main\n- ALWAYS:\n\n  git checkout main\n  git pull origin main\n  git checkout -b feature/<module>-<task>\n\nCOMMIT (ONLY VIA KPUSH)\n- DO NOT use raw git push\n- ALWAYS use:\n\n  kpush \"type(module): change\"\n\nPUSH FLOW (AUTOMATED BY KPUSH)\n- merges latest main\n- blocks on conflict\n- commits + pushes safely\n\nCONFLICT RULE\n- NEVER rebase\n- ALWAYS:\n\n  git merge origin/main\n\n- If conflict:\n  KEEP LOCAL STABLE:\n\n  git checkout --ours <file>\n  git add .\n  git commit -m \"merge(main): keep stable local state\"\n\n- THEN:\n  git push origin feature/<branch>\n\nMERGE\n- PR → GitHub merge only\n- NO direct pushes to main\n\nPOST-MERGE\n- git checkout main\n- git pull origin main\n\nPROHIBITED\n- ❌ git push origin main\n- ❌ git push --force main\n- ❌ git pull --rebase\n- ❌ editing conflicts manually line-by-line\n- ❌ multi-module edits\n- ❌ mixing UI + runtime + AI changes\n\nAI RULE\n- Small targeted edits only\n- No full rewrites unless explicitly required\n- No architecture changes\n\nROLLBACK\n- Before risky change:\n\n  git tag <module>-checkpoint\n  git push origin <module>-checkpoint\n\n- Restore:\n\n  git checkout <tag>",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=0"
+    },
+    {
+      "messageId": "c6220772-0b0c-43a9-8da9-75b6c376e067",
+      "role": "assistant",
+      "order": 1,
+      "content": "Understood. Guardrails are clear and internally consistent.\nKey enforcement summary:\n\n\nWork strictly within a single module per change\n\n\nDo not proceed unless every pre-commit check passes\n\n\nAlways branch from updated main into feature/<module>-<task>\n\n\nUse kpush only (no direct git push)\n\n\nResolve conflicts via merge + --ours, never rebase or manual edits\n\n\nNo direct interaction with main beyond pull/merge\n\n\nKeep changes minimal and localized\n\n\nTag before risky operations\n\n\nNo conflicts or ambiguities in the rules. Ready to operate within this system.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76#browser-turn=1"
+    }
+  ]
+}

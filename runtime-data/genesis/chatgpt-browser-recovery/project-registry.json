@@ -1,0 +1,124 @@
+{
+  "registryVersion": "chatgpt-browser-project-registry:v1",
+  "updatedAt": 1788411472489,
+  "sourcePageUrl": "https://chatgpt.com/c/67cc85f4-1f74-8008-9c07-58c1a4cb55f0%22",
+  "projects": [
+    {
+      "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+      "projectTitle": "KoreLumina — Master OS",
+      "projectUrls": [
+        "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9-korelumina-master-os/project"
+      ],
+      "visibleConversationCount": 5,
+      "visibleConversationIds": [
+        "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+        "698d1f72-3c20-8329-b7aa-5d540b7d0812",
+        "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+        "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+        "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina Master OS historical project",
+      "firstDiscoveredAt": 1787630083881,
+      "lastDiscoveredAt": 1787630083881,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false,
+      "dispositionUpdatedAt": 1787630527665
+    },
+    {
+      "projectId": "g-p-69cbc505e4b08191a0174bbcac2ff30f",
+      "projectTitle": "KoreLumina — Builder Core",
+      "projectUrls": [],
+      "visibleConversationCount": 4,
+      "visibleConversationIds": [
+        "69cc8ae2-6074-8331-b61a-6c4125790175",
+        "69cc7bdc-82ac-8329-b252-f0bce4d5a035",
+        "69ce58b2-8ebc-8327-8b44-8ff252cf173e",
+        "69cd53c4-3c88-8332-aef9-aa0db767fed8"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina Builder Core historical project",
+      "firstDiscoveredAt": 1787610462600,
+      "lastDiscoveredAt": 1787610462600,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false
+    },
+    {
+      "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+      "projectTitle": "KoreLumina — AI Planner + Diff",
+      "projectUrls": [],
+      "visibleConversationCount": 3,
+      "visibleConversationIds": [
+        "69cc9857-2924-8332-8f39-5540c6ad2c76",
+        "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+        "69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina AI Planner and Diff historical project",
+      "dispositionUpdatedAt": 1787625495298,
+      "firstDiscoveredAt": 1787625343288,
+      "lastDiscoveredAt": 1787626015128,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false
+    },
+    {
+      "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+      "projectTitle": "KoreLumina — Repo Import",
+      "projectUrls": [
+        "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c-korelumina-repo-import/project"
+      ],
+      "visibleConversationCount": 3,
+      "visibleConversationIds": [
+        "69cbc9b4-6aa0-832b-9d74-5ec0057c1300",
+        "69cc972b-1bdc-832e-bc85-1504c2aa35ec",
+        "69ce581f-b160-8331-8bf9-02858e8e90e6"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina Repo Import historical project",
+      "firstDiscoveredAt": 1787629258629,
+      "lastDiscoveredAt": 1787629258629,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false,
+      "dispositionUpdatedAt": 1787629353884
+    },
+    {
+      "projectId": "g-p-69cbc5cdf18881918252a0a5c79bad61",
+      "projectTitle": "KoreLumina — Runtime + Preview",
+      "projectUrls": [
+        "https://chatgpt.com/g/g-p-69cbc5cdf18881918252a0a5c79bad61-korelumina-runtime-preview/project"
+      ],
+      "visibleConversationCount": 3,
+      "visibleConversationIds": [
+        "69cc9844-dc54-8325-be3f-229b00501c61",
+        "69cc9a8c-c9a0-8329-874b-923f87dc25bc",
+        "69ce57d3-11f0-832f-9b21-115830d8a201"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina Runtime and Preview historical project",
+      "firstDiscoveredAt": 1787628747936,
+      "lastDiscoveredAt": 1787628747936,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false,
+      "dispositionUpdatedAt": 1787628882703
+    },
+    {
+      "projectId": "g-p-69cbc6142624819186caca549600467e",
+      "projectTitle": "KoreLumina — Production Hardening",
+      "projectUrls": [
+        "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e-korelumina-production-hardening/project"
+      ],
+      "visibleConversationCount": 2,
+      "visibleConversationIds": [
+        "69cc982d-f218-8333-9737-3f780ba0bf25",
+        "69ce5790-1740-8333-87e5-3dd85753c227"
+      ],
+      "disposition": "RECOVER",
+      "dispositionReason": "KoreLumina Production Hardening historical project",
+      "dispositionUpdatedAt": 1787626516166,
+      "firstDiscoveredAt": 1787626015128,
+      "lastDiscoveredAt": 1787629946193,
+      "lastRegistryScanAt": 1788411472484,
+      "visibleInLatestDiscovery": false
+    }
+  ]
+}

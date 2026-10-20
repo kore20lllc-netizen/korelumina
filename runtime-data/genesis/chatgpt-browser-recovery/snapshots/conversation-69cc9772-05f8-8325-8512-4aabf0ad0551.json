@@ -1,0 +1,45 @@
+{
+  "snapshotVersion": "chatgpt-browser-recovery:v1",
+  "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+  "title": "KoreLumina — Master OS - KoreLumina Commit Guardrail",
+  "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551",
+  "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+  "capturedAt": 1787630637343,
+  "messages": [
+    {
+      "messageId": "8f30a4d2-95f0-42b6-a63f-e00db253022d",
+      "role": "assistant",
+      "order": 0,
+      "content": "The snippets you posted don't show the root cause yet. They only confirm:\n\n\nstartProject.ts launches the dev server.\n\n\nregistry.ts only tracks runtime state and logs.\n\n\nNeither file explains why AI Preview renders correctly while Designer and Dev show a white page.\n\n\nGiven the symptoms from the previous investigation:\n\n\nAI Preview works.\n\n\nDesigner canvas is blank.\n\n\nDev canvas is blank.\n\n\nBrowser viewport values are abnormal:\nJavaScriptinnerHeight: 359\nouterHeight: 949\nratio: 2.64\n\n\nThis occurs only in certain panels.\n\n\nThat strongly suggests a frontend rendering/container issue, not runtime startup.\nBefore changing runtime code, inspect the actual browser DOM.\nOpen DevTools in the blank Designer page and run:\nJavaScriptdocument.querySelector(\"#__next\")?.getBoundingClientRect()\nJavaScriptdocument.querySelector(\"main\")?.getBoundingClientRect()\nJavaScript[...document.querySelectorAll(\"iframe\")].map(x => ({\n  src: x.src,\n  width: x.clientWidth,\n  height: x.clientHeight,\n  display: getComputedStyle(x).display,\n  visibility: getComputedStyle(x).visibility,\n  position: getComputedStyle(x).position\n}))\nJavaScriptdocument.body.innerHTML.includes(\"iframe\")\nThen inspect the React root:\nJavaScriptdocument.querySelectorAll('[data-panel]')\nJavaScript[...document.querySelectorAll('*')]\n.filter(el => getComputedStyle(el).overflow === 'hidden')\n.slice(0,50)\nAlso check whether the iframe itself is rendering:\nJavaScriptconst f = document.querySelector(\"iframe\");\nf?.contentWindow?.location?.href\nand\nJavaScriptconst f = document.querySelector(\"iframe\");\n({\n  rect: f?.getBoundingClientRect(),\n  style: f ? getComputedStyle(f) : null\n})\nIf AI Preview works while Designer and Dev don't, the most likely causes are:\nPossibility A — iframe height collapse\nDesigner/Dev panel iframe height becomes 0px because of a flexbox/layout regression.\nTypical symptom:\nJavaScriptheight: 0\nPossibility B — overlay covering iframe\nAn absolutely positioned overlay is sitting on top of the iframe.\nTypical symptom:\nJavaScriptdocument.elementFromPoint(\n  window.innerWidth/2,\n  window.innerHeight/2\n)\nreturns some overlay div instead of iframe.\nPossibility C — wrong preview URL\nAI Preview points at:\nhttp://localhost:<runtime-port>\nDesigner/Dev points at:\nabout:blank\nor stale project URL.\nPossibility D — zoom transform bug\nThe viewport values you reported earlier are unusual enough that a CSS transform or zoom calculation could be collapsing available height in only those panels.\nRun:\nJavaScriptgetComputedStyle(document.body).transform\nJavaScriptgetComputedStyle(document.documentElement).transform\nJavaScriptdocument.body.style.zoom\nJavaScriptdocument.documentElement.style.zoom\nDo not modify startProject.ts or registry.ts yet. The evidence still points toward the Designer/Dev UI layer rather than the runtime process layer.\nPaste the results of the iframe inspection commands above. That will identify whether we're dealing with:\n\n\nruntime failure,\n\n\niframe URL issue,\n\n\nheight collapse,\n\n\noverlay obstruction,\n\n\nor viewport scaling corruption.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=0"
+    },
+    {
+      "messageId": "130ebb0f-69dc-400f-9a7c-82d3c2b06600",
+      "role": "user",
+      "order": 1,
+      "content": "What's the task?",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=1"
+    },
+    {
+      "messageId": "a024830f-c93e-4b2c-8293-136b523451f3",
+      "role": "assistant",
+      "order": 2,
+      "content": "The task is:\nFix KoreLumina preview/runtime behavior.\nCurrent focus:\n\n\nPreview frame layout bug\n\nRight/bottom strip appears even when no iframe is rendered, so it’s likely in PreviewFrame wrapper layout.\n\n\nRuntime stop/start bug\n\nAfter stopping, the UI shows running/stale state or starts again incorrectly. Need to confirm whether backend auto-restart or frontend useRuntimeBoot() is responsible.\n\n\nPreview not rebinding after stop/start\n\nRuntime can be running on 4201, but PreviewFrame falls back to skeleton because runtimeUrl is cleared/not restored.\n\n\nWe should continue from the last concrete lead: inspect useRuntimeBoot.ts and runtime stop/start flow, not image generation.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=2"
+    },
+    {
+      "messageId": "5a8bc7f7-691a-4196-8988-7df2dc943a56",
+      "role": "user",
+      "order": 3,
+      "content": "How do I continue this conversation in a new window without breaking the flow?",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=3"
+    },
+    {
+      "messageId": "05e50c15-d979-4fb6-be88-cb3e799b0738",
+      "role": "assistant",
+      "order": 4,
+      "content": "Open a new chat and paste a handoff summary. Include:\nPROJECT: KoreLumina\n\nCURRENT ISSUE:\nPreview/runtime system investigation.\n\nFACTS VERIFIED:\n- AI Preview renders correctly.\n- Designer workspace blank/white.\n- Developer workspace blank/white.\n- PreviewFrame shows right and bottom strips even when no iframe is rendered.\n- runtime:file-changed events are reaching the browser.\n- SSE endpoint works.\n- Runtime starts on port 4201.\n- After Stop, preview skeleton appears.\n- Runtime stop behavior still under investigation.\n- localStorage.getItem(\"lumina:last-runtime-project\") === null\n- window.__LUMINA_RUNTIME__ === undefined\n\nFILES UNDER INVESTIGATION:\n- apps/lumina-builder/src/components/preview/PreviewFrame.tsx\n- apps/lumina-builder/src/hooks/useRuntimeBoot.ts\n- apps/lumina-runtime/src/runtime/startProject.ts\n- apps/lumina-runtime/src/runtime/registry.ts\n\nLAST CONCLUSION:\nDo not investigate image generation, SVG errors, or React warnings.\nFocus on:\n1. PreviewFrame layout causing right/bottom strip.\n2. useRuntimeBoot runtimeUrl lifecycle.\n3. Runtime stop/start state synchronization.\n4. Why AI Preview works while Designer and Developer previews do not.\n\nNEXT STEP:\nAudit PreviewFrame sizing chain and trace runtimeUrl from useRuntimeBoot into PreviewFrame after stop/start.\nIf you want the strongest continuity, also include the latest findings:\ngrep -R \"runtime:file-changed\" confirmed\ncurl -N http://localhost:4100/api/runtime/events confirmed\nPreviewFrame contains:\n- DEVICE_WIDTHS\n- iframe\n- place-items-center\n- overflow-auto\n- glass-strong container\n\nKnown symptom:\nRuntime may be running, but PreviewFrame remains on skeleton and does not rebind.\nThat will give the new chat enough context to continue without redoing the investigation from scratch.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551#browser-turn=4"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "inventoryVersion": "chatgpt-browser-project-inventory:v1",
+  "projectId": "g-p-69cbc53a4f648191ae0d4aaf058cee63",
+  "projectTitle": "KoreLumina — AI Planner + Diff",
+  "discoveredAt": 1787625564527,
+  "pageUrl": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5",
+  "currentConversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+  "conversationCount": 3,
+  "conversations": [
+    {
+      "conversationId": "69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4",
+      "title": "AI Planner Output Contract",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69ce5864-d8a4-8328-a2c1-fdb34a2cc9a4"
+    },
+    {
+      "conversationId": "69cd5a35-3c30-8325-bbd0-f365465d31e5",
+      "title": "Diagnose Runtime TypeError",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cd5a35-3c30-8325-bbd0-f365465d31e5"
+    },
+    {
+      "conversationId": "69cc9857-2924-8332-8f39-5540c6ad2c76",
+      "title": "Guardrail Commit Workflow",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc53a4f648191ae0d4aaf058cee63/c/69cc9857-2924-8332-8f39-5540c6ad2c76"
+    }
+  ]
+}

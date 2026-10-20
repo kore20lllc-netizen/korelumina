@@ -1,0 +1,44 @@
+{
+  "snapshotVersion": "chatgpt-browser-recovery:v1",
+  "conversationId": "69760457-b00c-832b-8d81-384ee5032859",
+  "title": "Korelumina day-0",
+  "conversationUrl": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859",
+  "capturedAt": 1788164230146,
+  "messages": [
+    {
+      "messageId": "69ceac9e-526e-422a-8f28-c167a6892ef4",
+      "role": "user",
+      "order": 0,
+      "content": "erictouko@MacBook-Pro ai-builder % projects/dev-project/app/page.tsx\nprojects/dev-project/app/components/Button.tsx\nprojects/dev-project/app/styles/globals.css\nzsh: no such file or directory: projects/dev-project/app/page.tsx\nzsh: no such file or directory: projects/dev-project/app/components/Button.tsx\nzsh: no such file or directory: projects/dev-project/app/styles/globals.css\nerictouko@MacBook-Pro ai-builder %",
+      "sourceLocator": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=0"
+    },
+    {
+      "messageId": "9511cf97-c163-40b1-af8f-eee318949210",
+      "role": "assistant",
+      "order": 1,
+      "content": "You tried to execute file paths as commands.\nThey don’t exist yet.\nWe create them properly.\nRun this exactly:\nmkdir -p projects/dev-project/app/components\nmkdir -p projects/dev-project/app/styles\nNow create the files:\ntouch projects/dev-project/app/page.tsx\ntouch projects/dev-project/app/components/Button.tsx\ntouch projects/dev-project/app/styles/globals.css\nVerify:\nls -R projects/dev-project\nYou should see:\napp\napp/components\napp/styles\nOnce that’s confirmed, say:\nStructure ready\nDo not paste code yet. We confirm structure first.",
+      "sourceLocator": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=1"
+    },
+    {
+      "messageId": "8bc40399-b934-4dc7-bbfd-15dea35a5903",
+      "role": "user",
+      "order": 2,
+      "content": "Structure ready",
+      "sourceLocator": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=2"
+    },
+    {
+      "messageId": "6d2bc3b9-0fb8-42cb-8e91-fff1e8324fe0",
+      "role": "assistant",
+      "order": 3,
+      "content": "Good.\nNow we add minimal working content.\n1️⃣ Button component\nOpen:\nprojects/dev-project/app/components/Button.tsx\nPaste:\nexport default function Button({ label }: { label: string }) {\n  return (\n    <button\n      style={{\n        padding: \"8px 12px\",\n        borderRadius: 6,\n        border: \"1px solid #333\",\n        cursor: \"pointer\"\n      }}\n    >\n      {label}\n    </button>\n  );\n}\n\n2️⃣ Page file\nOpen:\nprojects/dev-project/app/page.tsx\nPaste:\nimport Button from \"./components/Button\";\n\nexport default function Page() {\n  return (\n    <div style={{ padding: 40 }}>\n      <h1>Hello from Builder</h1>\n      <Button label=\"Click me\" />\n    </div>\n  );\n}\n\n3️⃣ Leave globals.css empty for now\nDo not import CSS.\n\nNow restart clean:\npkill -f next || true\nrm -rf .next\nnpm run dev\nThen test:\ncurl \"http://localhost:3000/api/dev/preview/bundle?projectId=dev-project\" | head\nIf no build error appears, open the Builder preview.\nReport exactly what you see. No interpretation. Just result.",
+      "sourceLocator": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=3"
+    },
+    {
+      "messageId": "01c69b87-417f-4ff5-aa5a-c6a52d142411",
+      "role": "user",
+      "order": 4,
+      "content": "Don't drift on our bash draft ruleSomething went wrong. Please try again.",
+      "sourceLocator": "https://chatgpt.com/c/69760457-b00c-832b-8d81-384ee5032859#browser-turn=4"
+    }
+  ]
+}

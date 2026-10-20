@@ -1,0 +1,45 @@
+{
+  "snapshotVersion": "chatgpt-browser-recovery:v1",
+  "conversationId": "69ce581f-b160-8331-8bf9-02858e8e90e6",
+  "title": "KoreLumina — Repo Import - Repo Import System",
+  "conversationUrl": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6",
+  "projectId": "g-p-69cbc56e454481918cd74c08e0998e5c",
+  "capturedAt": 1787629398898,
+  "messages": [
+    {
+      "messageId": "e2329771-710d-4592-a8fa-d4179a4a11c9",
+      "role": "assistant",
+      "order": 0,
+      "content": "Current task: Diagnose blank Builder page\nYes — your builder page is effectively wiped in terms of functionality, not deleted, but replaced with a minimal shell.\n\n🔥 What happened\nYou overwrote this file:\nBashapp/builder/page.tsx\nWith this:\nTypeScriptreturn (\n  <div>\n    {/* selector */}\n    {/* iframe */}\n  </div>\n);\nSo you LOST:\n\n\n❌ FileTree\n\n\n❌ CodeEditor\n\n\n❌ PreviewFrame (original)\n\n\n❌ AI Panel\n\n\n❌ Diff system\n\n\n❌ Layout grid\n\n\n👉 That’s why it looks blank / empty\n\n⚠️ This is NOT a small bug\nYou replaced:\n\nBuilder Core UI\n\nwith:\n\nTesting sandbox for repo preview\n\n\n✅ Correct fix (do NOT rebuild from scratch)\nOption A (FAST — recommended)\nRestore previous version:\nBashgit checkout -- app/builder/page.tsx\n\nOption B (if no git backup)\nYou need to restore structure like:\nTypeScript<div className=\"builder-layout\">\n  <FileTree />\n  <CodeEditor />\n  <PreviewFrame />\n  <AIPanel />\n</div>\nRight now NONE of that exists.\n\n🧠 What you should have done instead\nYou should NOT replace builder.\nYou should:\n\nInject entry selector INTO existing builder layout\n\n\n🔧 Correct architecture\nKeep builder intact:\nTypeScript<FileTree />\n<CodeEditor />\n\n<EntrySelector />   ← ADD HERE\n\n<PreviewFrame />   ← update iframe src only\n<AIPanel />\n\n🚨 Why this matters\nIf you continue like this:\n\n\nYou lose KoreLumina core\n\n\nYou turn it into just a preview tool\n\n\nEverything you've built (diff, editor, etc.) is gone\n\n\n\n✅ Immediate recovery steps\nRun this:\nBashgit checkout -- app/builder/page.tsx\nrm -rf .next\nnpm run dev\n\nThen (correct next step)\nSay:\n\"inject entry selector into existing builder layout\"\nI’ll modify it without breaking anything.\n\nDone criteria\n\n\nBuilder UI restored → yes\n\n\nPanels visible → yes\n\n\nNo blank page → yes\n\n\n\nRight now your system isn’t broken —\n\nyou just replaced the wrong layer.",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=0"
+    },
+    {
+      "messageId": "fcbfd6fc-8662-4c1b-80e4-d429cafabe25",
+      "role": "user",
+      "order": 1,
+      "content": "Restore from the latest git push",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=1"
+    },
+    {
+      "messageId": "1fbdc3fc-3cf6-4bb5-8a5f-b870946bb6ff",
+      "role": "assistant",
+      "order": 2,
+      "content": "Current task: Restore Builder from latest remote (not local)\nYour last command:\nBashgit checkout -- app/builder/page.tsx\nonly restored from local state, not from your last push.\n\n✅ Correct restore (from GitHub remote)\n1. Reset file from remote main\nBashgit fetch origin\ngit checkout origin/main -- app/builder/page.tsx\n\n2. Clean + restart\nBashrm -rf .next\nnpm run dev\n\n🔥 If you want FULL project rollback (not just one file)\n⚠️ This will discard local changes:\nBashgit fetch origin\ngit reset --hard origin/main\n\n🧠 What just happened\nYou had:\n\n\nlocal broken builder\n\n\nremote still has good version\n\n\nSo:\n\nYou must pull from origin/main, not local working tree\n\n\n✅ Done criteria\n\n\nBuilder layout restored → FileTree / Editor / Preview visible\n\n\nNo blank screen → yes\n\n\nImport system untouched → yes\n\n\n\nNext step (safe this time)\nSay:\ninject entry selector into builder WITHOUT breaking layout\nThis time we’ll modify:\n\n\nONLY preview iframe\n\n\nNOT the whole page",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=2"
+    },
+    {
+      "messageId": "bd999015-8976-4130-a58c-2ddfaa381fcc",
+      "role": "user",
+      "order": 3,
+      "content": "Restore  feature/ preview complete",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=3"
+    },
+    {
+      "messageId": "915a4d9f-570d-43c5-b9c2-95fcd12e2931",
+      "role": "assistant",
+      "order": 4,
+      "content": "Current task: Restore feature/preview-complete branch\n\n✅ Step 1 — fetch latest branches\nBashgit fetch origin\n\n✅ Step 2 — checkout the feature branch\nBashgit checkout feature/preview-complete\n\n✅ Step 3 — make sure it matches remote\nBashgit reset --hard origin/feature/preview-complete\n\n✅ Step 4 — clean + restart\nBashrm -rf .next\nnpm run dev\n\n🔥 If branch does NOT exist locally\nRun:\nBashgit checkout -b feature/preview-complete origin/feature/preview-complete\n\n⚠️ If you get error: branch not found\nList branches:\nBashgit branch -r\nLook for something like:\nBashorigin/feature/preview-complete\nIf name differs → use exact name.\n\n✅ Done criteria\n\n\nBuilder fully restored → yes\n\n\nPreview working (old system) → yes\n\n\nNo blank UI → yes\n\n\n\nNext step (safe path forward)\nSay:\ninject entry selector safely (no builder overwrite)\nThis time:\n\n\nno full file rewrites\n\n\nno UI destruction\n\n\nonly surgical changes",
+      "sourceLocator": "https://chatgpt.com/g/g-p-69cbc56e454481918cd74c08e0998e5c/c/69ce581f-b160-8331-8bf9-02858e8e90e6#browser-turn=4"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "inventoryVersion": "chatgpt-browser-project-inventory:v1",
+  "projectId": "g-p-69cbc6142624819186caca549600467e",
+  "projectTitle": "KoreLumina — Production Hardening",
+  "discoveredAt": 1787629946369,
+  "pageUrl": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227",
+  "currentConversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+  "conversationCount": 2,
+  "conversations": [
+    {
+      "conversationId": "69cc982d-f218-8333-9737-3f780ba0bf25",
+      "title": "Commit Guardrail Rules",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69cc982d-f218-8333-9737-3f780ba0bf25"
+    },
+    {
+      "conversationId": "69ce5790-1740-8333-87e5-3dd85753c227",
+      "title": "KoreLumina Hardening Setup",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc6142624819186caca549600467e/c/69ce5790-1740-8333-87e5-3dd85753c227"
+    }
+  ]
+}

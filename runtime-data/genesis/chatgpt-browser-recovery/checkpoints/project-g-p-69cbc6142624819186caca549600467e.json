@@ -1,0 +1,13 @@
+{
+  "checkpointVersion": "chatgpt-browser-project-capture:v1",
+  "projectId": "g-p-69cbc6142624819186caca549600467e",
+  "projectTitle": "KoreLumina — Production Hardening",
+  "inventoryFile": "/Users/erictouko/dev/korelumina/runtime-data/genesis/chatgpt-browser-recovery/project-inventories/project-g-p-69cbc6142624819186caca549600467e.json",
+  "startedAt": 1787626534767,
+  "updatedAt": 1787626550077,
+  "completedConversationIds": [
+    "69cc982d-f218-8333-9737-3f780ba0bf25",
+    "69ce5790-1740-8333-87e5-3dd85753c227"
+  ],
+  "failures": []
+}

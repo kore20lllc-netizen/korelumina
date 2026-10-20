@@ -1,0 +1,215 @@
+{
+  "inventoryVersion": "chatgpt-browser-project-inventory:v1",
+  "projectId": "g-p-69cbc434281c8191a10f1c7b3ffe11a9",
+  "projectTitle": "KoreLumina — Master OS",
+  "discoveredAt": 1787630337469,
+  "pageUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+  "conversationCount": 41,
+  "conversations": [
+    {
+      "conversationId": "698d1f72-3c20-8329-b7aa-5d540b7d0812",
+      "title": "a",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/698d1f72-3c20-8329-b7aa-5d540b7d0812"
+    },
+    {
+      "conversationId": "6a8bdc01-849c-83ea-a8c3-753b9e97d6cb",
+      "title": "Audit Roadmap Position",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8bdc01-849c-83ea-a8c3-753b9e97d6cb"
+    },
+    {
+      "conversationId": "69d48595-1834-8326-8d0e-4ffe319ec21a",
+      "title": "Builder stability analysis",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d48595-1834-8326-8d0e-4ffe319ec21a"
+    },
+    {
+      "conversationId": "6988c49e-8a10-832d-bd5c-2cb03f04b117",
+      "title": "Code Fix for Client Component-korelumina",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6988c49e-8a10-832d-bd5c-2cb03f04b117"
+    },
+    {
+      "conversationId": "6a5819fd-e390-83ea-a77d-f902ac0405e3",
+      "title": "Driver Intelligence Platform",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5819fd-e390-83ea-a77d-f902ac0405e3"
+    },
+    {
+      "conversationId": "69cbc91d-298c-8328-96a8-24d3288f9638",
+      "title": "Fix projectId Boot",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cbc91d-298c-8328-96a8-24d3288f9638"
+    },
+    {
+      "conversationId": "69f2586f-9e50-83ea-bbad-30c05354fb2e",
+      "title": "Fixing Tailwind Runtime",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69f2586f-9e50-83ea-bbad-30c05354fb2e"
+    },
+    {
+      "conversationId": "6a8839da-3764-83ea-b5c0-680ccbe22f23",
+      "title": "Genesis Governance Audit",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8839da-3764-83ea-b5c0-680ccbe22f23"
+    },
+    {
+      "conversationId": "6a87bb2a-02fc-83ea-b769-ac2cf1abca2c",
+      "title": "Inspect M46 Phase 1",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a87bb2a-02fc-83ea-b769-ac2cf1abca2c"
+    },
+    {
+      "conversationId": "69af18f3-9b08-8327-a8d7-e814dad59944",
+      "title": "Korelu,ina Mster engine",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69af18f3-9b08-8327-a8d7-e814dad59944"
+    },
+    {
+      "conversationId": "69cc9772-05f8-8325-8512-4aabf0ad0551",
+      "title": "KoreLumina Commit Guardrail",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69cc9772-05f8-8325-8512-4aabf0ad0551"
+    },
+    {
+      "conversationId": "6a2f6ed4-4a28-83ea-bdf8-94476c3af07a",
+      "title": "Korelumina Deployment Diagnostics",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2f6ed4-4a28-83ea-bdf8-94476c3af07a"
+    },
+    {
+      "conversationId": "6a3e4e96-14d0-83ea-b77d-c9063e4fd651",
+      "title": "KoreLumina Handoff Implementation",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3e4e96-14d0-83ea-b77d-c9063e4fd651"
+    },
+    {
+      "conversationId": "6a6c78f2-f41c-83ea-a29d-21579b9b298a",
+      "title": "KoreLumina Handoff Inspection",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c78f2-f41c-83ea-a29d-21579b9b298a"
+    },
+    {
+      "conversationId": "6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08",
+      "title": "KoreLumina Knowledge Backend",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7e45a2-6ea8-83ea-bd42-765cd9d4fd08"
+    },
+    {
+      "conversationId": "6a76aba2-1ed0-83ea-9964-24dbce2af4d0",
+      "title": "KoreLumina Knowledge Extraction",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a76aba2-1ed0-83ea-9964-24dbce2af4d0"
+    },
+    {
+      "conversationId": "6a828bec-8f10-83ea-a28e-4c8dfb106355",
+      "title": "KoreLumina Knowledge Operations",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a828bec-8f10-83ea-a28e-4c8dfb106355"
+    },
+    {
+      "conversationId": "6a40f1fd-fa18-83ea-9a79-44ee3b63542c",
+      "title": "KoreLumina Platform Handoff",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a40f1fd-fa18-83ea-9a79-44ee3b63542c"
+    },
+    {
+      "conversationId": "6a322eb4-4cb4-83ea-959f-14189225a129",
+      "title": "KoreLumina Production Handoff",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a322eb4-4cb4-83ea-959f-14189225a129"
+    },
+    {
+      "conversationId": "6a35fe61-d42c-83ea-af5d-5101df5b53db",
+      "title": "KoreLumina Reconstruction Plan",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a35fe61-d42c-83ea-af5d-5101df5b53db"
+    },
+    {
+      "conversationId": "6a3a1f63-dd10-83ea-97b3-ea631103e313",
+      "title": "KoreLumina Reconstruction Plan",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a3a1f63-dd10-83ea-97b3-ea631103e313"
+    },
+    {
+      "conversationId": "6a65e350-1a30-83ea-b88c-ba20cfab26a1",
+      "title": "KoreLumina Reconstruction Plan",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a65e350-1a30-83ea-b88c-ba20cfab26a1"
+    },
+    {
+      "conversationId": "6a4c6288-5ea4-83ea-ae5a-9324e046d278",
+      "title": "KoreLumina Reconstruction Progress",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a4c6288-5ea4-83ea-ae5a-9324e046d278"
+    },
+    {
+      "conversationId": "6a58091a-1650-83ea-9129-6b55b27ac7f3",
+      "title": "KoreLumina Reconstruction Progress",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a58091a-1650-83ea-9129-6b55b27ac7f3"
+    },
+    {
+      "conversationId": "6a41c132-4410-83ea-9451-41b5db5f81c0",
+      "title": "KoreLumina Reconstruction Roadmap",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a41c132-4410-83ea-9451-41b5db5f81c0"
+    },
+    {
+      "conversationId": "6a51b7e5-7d64-83ea-bfcb-d20ae5be588b",
+      "title": "KoreLumina Reconstruction Update",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b7e5-7d64-83ea-bfcb-d20ae5be588b"
+    },
+    {
+      "conversationId": "6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7",
+      "title": "KoreLumina repo status",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a6c24b9-28b0-83ea-a7eb-9f8890f9d3b7"
+    },
+    {
+      "conversationId": "6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e",
+      "title": "KoreLumina Runtime Recovery",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a2943a7-4efc-83ea-86ca-fbd1a2cdeb1e"
+    },
+    {
+      "conversationId": "6a46f72f-ac5c-83ea-8f1a-4ee186204832",
+      "title": "KPP Compiler Registry Implementation",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a46f72f-ac5c-83ea-8f1a-4ee186204832"
+    },
+    {
+      "conversationId": "69e3da37-08d8-83ea-914e-f8d6771339df",
+      "title": "Logs and Compilation",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e3da37-08d8-83ea-914e-f8d6771339df"
+    },
+    {
+      "conversationId": "6a51b868-2cc0-83ea-a58c-a92c0585580f",
+      "title": "Lumina appearance token fix",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a51b868-2cc0-83ea-a58c-a92c0585580f"
+    },
+    {
+      "conversationId": "6a701da5-f8b4-83ea-a850-e15922effa67",
+      "title": "Lumina Design System Extraction",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a701da5-f8b4-83ea-a850-e15922effa67"
+    },
+    {
+      "conversationId": "69b7017a-f53c-8328-bfeb-b2de07d7838c",
+      "title": "Next Diff Engine-korelumina",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69b7017a-f53c-8328-bfeb-b2de07d7838c"
+    },
+    {
+      "conversationId": "69e18fec-788c-83ea-b357-799841a92a79",
+      "title": "Repo Import Debugging",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69e18fec-788c-83ea-b357-799841a92a79"
+    },
+    {
+      "conversationId": "6a8a4f33-4b58-83ea-a343-671d7cf38406",
+      "title": "Repository Contract Audit",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a8a4f33-4b58-83ea-a343-671d7cf38406"
+    },
+    {
+      "conversationId": "6a7aa9b5-8198-83ea-bdbc-f153cd023983",
+      "title": "Repository Engineer Workflow",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a7aa9b5-8198-83ea-bdbc-f153cd023983"
+    },
+    {
+      "conversationId": "6a5c707a-7d9c-83ea-aee3-13f03ab51153",
+      "title": "Runtime Header Refinement",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a5c707a-7d9c-83ea-aee3-13f03ab51153"
+    },
+    {
+      "conversationId": "6a22547c-c19c-83ea-b716-bdf9822d6efb",
+      "title": "Runtime stop investigation",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a22547c-c19c-83ea-b716-bdf9822d6efb"
+    },
+    {
+      "conversationId": "6a732386-b120-83ea-a01d-fdfd0c777e59",
+      "title": "RuntimeHeader Modification Classification",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/6a732386-b120-83ea-a01d-fdfd0c777e59"
+    },
+    {
+      "conversationId": "69ddaf99-f2a8-83ea-bd47-f914922fbfed",
+      "title": "Search History Assistance",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69ddaf99-f2a8-83ea-bd47-f914922fbfed"
+    },
+    {
+      "conversationId": "69d1ae66-6d4c-8327-8f79-d1166505a700",
+      "title": "Site Element Analysis",
+      "conversationUrl": "https://chatgpt.com/g/g-p-69cbc434281c8191a10f1c7b3ffe11a9/c/69d1ae66-6d4c-8327-8f79-d1166505a700"
+    }
+  ]
+}

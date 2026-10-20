@@ -82,9 +82,12 @@ runtime/knowledge/runtime/
 # Chief Agent's activation rests on, which are tracked where Runtime keeps
 # them: every certification and authorization, the records they are derived
 # from, the designated Day-0 replay with its historical correlation, and the
-# acquired conversations Day-0 coverage is re-proved from. A fresh clone
-# re-derives exactly what this machine does. Other replays, correlations,
-# browser recovery and test data stay ignored. scripts/verify-governed-records.mjs
+# conversations Day-0 coverage is re-proved from (the acquisition and the
+# browser recovery it was acquired from). A fresh clone re-derives exactly
+# what this machine does once Runtime's environment sets
+# KORELUMINA_GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT to
+# runtime-data/genesis/chatgpt-browser-recovery. Other replays, correlations
+# and test data stay ignored. scripts/verify-governed-records.mjs
 # (part of npm run build) fails if a governed record is ignored, including a
 # newly designated replay: add its two folders below.
 runtime-data/*
@@ -95,6 +98,7 @@ runtime-data/genesis/*
 !runtime-data/genesis/day-zero-certification/
 !runtime-data/genesis/day-zero-conversation-coverage-certification/
 !runtime-data/genesis/conversation-acquisition/
+!runtime-data/genesis/chatgpt-browser-recovery/
 !runtime-data/genesis/conversation-authoritative-completeness-certification/
 !runtime-data/genesis/conversation-expected-history/
 !runtime-data/genesis/conversation-expected-history-amendments/

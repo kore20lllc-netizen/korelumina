@@ -30,6 +30,8 @@ const GOVERNED = [
   "genesis/day-zero-certification",
   "genesis/day-zero-conversation-coverage-certification",
   "genesis/conversation-acquisition",
+  /* Day-0 coverage is re-proved from the configured browser recovery (KORELUMINA_GENESIS_CHATGPT_BROWSER_RECOVERY_ROOT). */
+  "genesis/chatgpt-browser-recovery",
   "genesis/conversation-authoritative-completeness-certification",
   "genesis/conversation-expected-history",
   "genesis/conversation-expected-history-amendments",
