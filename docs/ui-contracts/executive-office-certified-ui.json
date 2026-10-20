@@ -87,8 +87,8 @@
       "elementCount": 11
     },
     "apps/lumina-builder/src/components/workspaces/executive/shared/ChiefAgentLogo.tsx": {
-      "sha256": "e510cae2972149162ed4bd12aa52040387bf0780f798d1e42c32ff9b3e062d7c",
-      "elementCount": 7
+      "sha256": "dae30048c04ef5becd91a8003d4fea518998ff6f0a0cd34e6cf02a42677cc06a",
+      "elementCount": 5
     },
     "apps/lumina-builder/src/components/workspaces/executive/shared/ExecutiveSection.tsx": {
       "sha256": "4905de56890583bcefddd1beecd949f4a8d3ce8a3e4c2a3331e610c4d4f26d89",

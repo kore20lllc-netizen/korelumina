@@ -1,5 +1,15 @@
 import luminaLogo from "@/assets/optimized/lumina.webp";
 
+import { useEffect, useRef } from "react";
+
+import {
+  drawKeyedFrame,
+  thinkingPoster,
+  thinkingVideo,
+  warmThinkingForm,
+  watchThinkingVideo,
+} from "./thinkingForm";
+
 /*
  * EW-0: the Chief Agent speaks under the KoreLumina logo instead of a name.
  *
@@ -7,11 +17,63 @@ import luminaLogo from "@/assets/optimized/lumina.webp";
  * briefing) the logo becomes the living Lumina form, the owner's chosen
  * motion from the landing page, re-encoded small for the conversation
  * (public/videos/chief-agent-thinking.*, about 100 KB each, from
- * landing-bg.mp4). The whole form shows, uncropped; its black background is
- * blended away. (A circle and a gold ring were tried and removed: the
- * circle cut off the form.) Reduced-motion users see a still frame.
+ * landing-bg.mp4). The whole form shows, uncropped. (A circle and a gold
+ * ring were tried and removed: the circle cut off the form.)
+ *
+ * EW-1h: the form has no background of its own (black is keyed to
+ * transparent, see thinkingForm.ts) and appears as soon as a reply starts,
+ * like the three dots: its video is loaded when the Executive Office opens.
+ * Reduced-motion users see the keyed still frame.
  */
-const THINKING_POSTER = "/videos/chief-agent-thinking-poster.webp";
+warmThinkingForm();
+
+const FORM_PIXELS = 112;
+
+function ThinkingForm() {
+  const canvas = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const context = canvas.current?.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const video = reducedMotion ? null : thinkingVideo();
+    const poster = thinkingPoster();
+    const stopWatching = video ? watchThinkingVideo() : () => {};
+    let frame = 0;
+    let drawnTime = -1;
+    let posterDrawn = false;
+
+    const render = () => {
+      if (video && video.readyState >= 2) {
+        if (video.currentTime !== drawnTime) {
+          drawnTime = video.currentTime;
+          drawKeyedFrame(context, video, video.videoWidth, video.videoHeight);
+        }
+      } else if (!posterDrawn && poster?.complete && poster.naturalWidth) {
+        drawKeyedFrame(context, poster, poster.naturalWidth, poster.naturalHeight);
+        posterDrawn = true;
+      }
+      if (video || !posterDrawn) frame = window.requestAnimationFrame(render);
+    };
+    render();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopWatching();
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvas}
+      width={FORM_PIXELS}
+      height={FORM_PIXELS}
+      aria-hidden="true"
+      className="h-full w-full"
+    />
+  );
+}
 
 export function ChiefAgentLogo({
   replying = false,
@@ -28,25 +90,7 @@ export function ChiefAgentLogo({
         title="Chief Agent is thinking"
         className="relative inline-block h-14 w-14 shrink-0 drop-shadow-[0_0_14px_rgba(124,58,237,.35)]"
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-hidden="true"
-          poster={THINKING_POSTER}
-          className="h-full w-full object-contain mix-blend-screen motion-reduce:hidden"
-        >
-          <source src="/videos/chief-agent-thinking.webm" type="video/webm" />
-          <source src="/videos/chief-agent-thinking.mp4" type="video/mp4" />
-        </video>
-        <img
-          src={THINKING_POSTER}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="hidden h-full w-full object-contain mix-blend-screen motion-reduce:block"
-        />
+        <ThinkingForm />
       </span>
     );
   }
