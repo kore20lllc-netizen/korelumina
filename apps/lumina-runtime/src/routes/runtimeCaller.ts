@@ -1,6 +1,12 @@
 import type {
+  NextFunction,
   Request,
+  Response,
 } from "express";
+
+import type {
+  SupabaseAccessTokenVerifier,
+} from "./supabaseAccessToken.js";
 
 export type RuntimeCallerRole =
   | "user"
@@ -94,11 +100,104 @@ const ANONYMOUS_CALLER: RuntimeCaller = {
   adminTools: false,
 };
 
+function callerFor(
+  role: RuntimeCallerRole,
+  userId?: string,
+  teamId?: string,
+): RuntimeCaller {
+  return {
+    userId,
+    teamId,
+    role,
+    supportAccess:
+      role === "inhouse-dev" ||
+      role === "admin" ||
+      role === "super_admin",
+    adminTools:
+      role === "admin" ||
+      role === "super_admin",
+  };
+}
+
+/*
+ * SEC-1c (ADR-0043 Decision 5): outside production, this machine may act as
+ * a development identity configured in Runtime's environment, for example
+ * KORELUMINA_DEV_IDENTITY=super_admin:usr_owner. It is never chosen by the
+ * browser and production refuses it.
+ */
+export function developmentIdentity(
+  environment: NodeJS.ProcessEnv = process.env,
+): RuntimeCaller | null {
+  if (environment.NODE_ENV === "production") return null;
+  const configured = environment.KORELUMINA_DEV_IDENTITY?.trim();
+  if (!configured) return null;
+  const [role, userId] = configured.split(":");
+  return callerFor(normalizeRole(role), userId?.trim() || undefined);
+}
+
+const VERIFIED_CALLER = Symbol("korelumina.verifiedCaller");
+
+type RequestWithCaller = Request & {
+  [VERIFIED_CALLER]?: RuntimeCaller;
+};
+
+/*
+ * SEC-1c (ADR-0043 Decisions 1, 2, 3): a request that carries a Supabase
+ * access token is identified by that token alone. A valid token makes the
+ * caller its subject, with the role from app_metadata (a plan role such as
+ * "free" is a plain user). A present but invalid token makes the caller
+ * anonymous; it never falls back to headers. Team ids are not accepted
+ * from verified callers until Runtime keeps team membership (Decision 4).
+ */
+export function resolveRuntimeCaller(
+  verifier: SupabaseAccessTokenVerifier,
+) {
+  return async (
+    req: Request,
+    _res: Response,
+    next: NextFunction,
+  ) => {
+    const authorization = req.header("authorization")?.trim();
+
+    if (!authorization || !/^Bearer\s+/i.test(authorization)) {
+      return next();
+    }
+
+    const token = authorization.replace(/^Bearer\s+/i, "").trim();
+
+    try {
+      const verification = await verifier.verify(token);
+      (req as RequestWithCaller)[VERIFIED_CALLER] = verification.ok
+        ? callerFor(normalizeRole(verification.identity.role ?? undefined), verification.identity.userId)
+        : { ...ANONYMOUS_CALLER };
+    } catch {
+      (req as RequestWithCaller)[VERIFIED_CALLER] = { ...ANONYMOUS_CALLER };
+    }
+
+    return next();
+  };
+}
+
 export function getRuntimeCaller(
   req: Request,
 ): RuntimeCaller {
+  const verified = (req as RequestWithCaller)[VERIFIED_CALLER];
+  if (verified) {
+    return { ...verified };
+  }
+
   if (!isTrustedCallerSource(req)) {
     return { ...ANONYMOUS_CALLER };
+  }
+
+  /* SEC-1c: on this machine a configured development identity wins over headers. */
+  const internalToken = process.env.KORELUMINA_RUNTIME_INTERNAL_TOKEN;
+  const usesInternalToken =
+    Boolean(internalToken) &&
+    req.header("x-korelumina-runtime-token") === internalToken;
+  const development = usesInternalToken ? null : developmentIdentity();
+  if (development) {
+    return development;
   }
 
   const role =

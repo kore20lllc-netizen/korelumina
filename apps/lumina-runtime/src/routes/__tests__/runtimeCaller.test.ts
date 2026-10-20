@@ -62,3 +62,20 @@ test("the Runtime internal token makes a caller trusted anywhere", () => {
     false,
   );
 });
+
+/* SEC-1c (ADR-0043 Decision 5): the development identity is configured, never browser-chosen. */
+import { developmentIdentity } from "../runtimeCaller.js";
+
+test("a configured development identity is used outside production", () => {
+  assert.deepEqual(
+    developmentIdentity({ NODE_ENV: "development", KORELUMINA_DEV_IDENTITY: "super_admin:usr_owner" }),
+    { userId: "usr_owner", teamId: undefined, role: "super_admin", supportAccess: true, adminTools: true },
+  );
+});
+
+test("production refuses the development identity", () => {
+  assert.equal(
+    developmentIdentity({ NODE_ENV: "production", KORELUMINA_DEV_IDENTITY: "super_admin:usr_owner" }),
+    null,
+  );
+});

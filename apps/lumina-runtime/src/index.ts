@@ -112,6 +112,11 @@ import { registerOrganizationalMemoryAdaptationRoutes } from "./routes/knowledge
 import { registerKnowledgeProductionLifecycleRoutes } from "./routes/knowledge/registerKnowledgeProductionLifecycleRoutes.js";
 import { registerKnowledgePreservationRoutes } from "./routes/knowledge/registerKnowledgePreservationRoutes.js";
 import { registerExecutiveRoute } from "./routes/executive.js";
+import { resolveRuntimeCaller } from "./routes/runtimeCaller.js";
+import {
+  SupabaseAccessTokenVerifier,
+  supabaseTokenConfigFromEnvironment,
+} from "./routes/supabaseAccessToken.js";
 import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js";
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
@@ -1489,6 +1494,23 @@ app.use(
 );
 app.use(express.json());
 app.use(trackRuntimeMutations);
+
+/*
+ * SEC-1c (ADR-0043): identify callers from a verified Supabase access token.
+ * Requires SUPABASE_URL (and SUPABASE_JWT_SECRET for HS256 projects);
+ * without them a bearer token cannot be verified and the caller is
+ * anonymous.
+ */
+export const runtimeSupabaseAccessTokenVerifier =
+  new SupabaseAccessTokenVerifier(
+    supabaseTokenConfigFromEnvironment(),
+  );
+
+app.use(
+  resolveRuntimeCaller(
+    runtimeSupabaseAccessTokenVerifier,
+  ),
+);
 app.use(
   "/api/executive",
   requireRuntimeAccess,
