@@ -1,0 +1,95 @@
+{
+  "version": "mission-import:v1",
+  "ticket": "MS-6",
+  "decision": "ADR-0044 Decision 7: open tickets are imported once as missions, and the old tracking (ADR task lists, commit subjects and the owner's conversations with Claude) is no longer the source of truth.",
+  "source": "There is no separate board. Open work was found in the repository (ADR Implementation Impact and Related Tickets with no commit naming them) and in the owner's conversations with Claude (Executive Office parts still marked design preview, and findings raised there).",
+  "reviewedAt": "2026-10-20",
+  "notImported": [
+    { "ticket": "KO-3d", "reason": "Done: the Business Charter and Domain Primer are canonical and Day-0 certification passed before activation; no commit named the ticket." },
+    { "ticket": "KO-4a", "reason": "Not a ticket: a scope limitation note that ADR-0042 resolved for Learning Records." },
+    { "ticket": "KO-5, CL-1, SEC-1", "reason": "Parent tickets, done through their sub-tickets (KO-5a to e, CL-1a to e, SEC-1a to e)." }
+  ],
+  "missions": [
+    {
+      "sourceTicket": "BILL-1",
+      "title": "Plan roles assigned only by billing",
+      "objective": "A paid plan grants its role only through the payment provider's verified webhook, never from the browser (ADR-0043 Decision 3).",
+      "type": "security",
+      "priority": "normal",
+      "risks": ["The payment provider is not chosen; nothing else in this mission can start before that decision."],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Billing",
+            "tasks": [
+              { "title": "Choose the payment provider", "acceptanceCriteria": ["The owner records the provider and why"] },
+              { "title": "Webhook route that verifies the provider's signature", "acceptanceCriteria": ["Unsigned or wrongly signed events are refused", "Replayed events change nothing"] },
+              { "title": "Plan role written to app_metadata with an audit record", "acceptanceCriteria": ["pro, business and enterprise are set only by the webhook", "Every change records from, to, event and time"] },
+              { "title": "Retire the simulated checkout from every non-development path", "acceptanceCriteria": ["Production builds cannot grant a plan role client-side"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Runtime suites pass", "A signed test event from the provider grants the plan role"],
+        "requiredDocuments": ["docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"]
+      }
+    },
+    {
+      "sourceTicket": "EW (open parts)",
+      "title": "Executive Office: wire the remaining preview parts",
+      "objective": "No part of the Executive Office shows snapshot data or a control that does nothing.",
+      "type": "engineering",
+      "priority": "normal",
+      "risks": ["Recommendations need a real source; until one is decided they stay marked as preview."],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Dashboard",
+            "tasks": [
+              { "title": "Platform, Runtime and Knowledge health tiles read Runtime", "acceptanceCriteria": ["Each tile shows a live value or says it could not read it"] },
+              { "title": "Decide where recommendations come from, then wire them", "acceptanceCriteria": ["Every recommendation names its source record"] }
+            ]
+          },
+          {
+            "title": "Controls",
+            "tasks": [
+              { "title": "Suspend and resume the Chief Agent from the command deck", "acceptanceCriteria": ["Uses PUT /api/executive/activation with a reason", "The command deck and Agent Center show the new state"] },
+              { "title": "Acknowledge critical notifications", "acceptanceCriteria": ["Acknowledgements are Runtime records with who and when"] }
+            ]
+          },
+          {
+            "title": "Projects",
+            "tasks": [
+              { "title": "The platform card reads Runtime instead of the snapshot", "acceptanceCriteria": ["Projects Center shows Live, not Partly live"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Executive Office UI contract certified after owner visual approval"],
+        "requiredDocuments": []
+      }
+    },
+    {
+      "sourceTicket": "F-33",
+      "title": "Remove the dead InstitutionalMemoryZone file",
+      "objective": "The Builder typechecks clean: the only TypeScript errors come from a Knowledge Operations file nothing imports.",
+      "type": "maintenance",
+      "priority": "low",
+      "risks": ["Deleting a file needs the owner's approval. The file is under neither certified UI contract."],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Cleanup",
+            "tasks": [
+              { "title": "Confirm nothing imports InstitutionalMemoryZone.tsx, then remove it", "acceptanceCriteria": ["No import of the file anywhere in the Builder", "The owner approves the deletion"] },
+              { "title": "Builder typecheck is clean", "acceptanceCriteria": ["tsc -p apps/lumina-builder/tsconfig.app.json --noEmit reports no errors"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Both UI contracts still verify"],
+        "requiredDocuments": []
+      }
+    }
+  ]
+}

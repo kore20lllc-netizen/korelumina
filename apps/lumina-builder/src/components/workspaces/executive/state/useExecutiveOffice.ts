@@ -13,6 +13,7 @@ import {
   getMissions,
   getPendingCanonicalReviews,
   setMissionTaskStatus,
+  takeMissionStep,
   verifyMissionBuild,
   runLearningCycleNow,
   type ChiefAgentActivationStatus,
@@ -22,6 +23,7 @@ import {
   type RuntimeIdentity,
   type RuntimeProject,
   type LearningStatus,
+  type MissionOwnerStep,
   type MissionRecord,
   type MissionTaskRecord,
   type PendingCanonicalReview,
@@ -261,6 +263,20 @@ export function updateMissionTask(
 ): Promise<boolean> {
   return recordMissionEvidence(missionTaskKey(missionId, taskId), status, () =>
     setMissionTaskStatus(missionId, taskId, status, reason),
+  );
+}
+
+export function missionStepKey(missionId: string): string {
+  return `${missionId}:step`;
+}
+
+export function runMissionStep(
+  missionId: string,
+  step: MissionOwnerStep,
+  reason?: string,
+): Promise<boolean> {
+  return recordMissionEvidence(missionStepKey(missionId), step, () =>
+    takeMissionStep(missionId, step, reason),
   );
 }
 

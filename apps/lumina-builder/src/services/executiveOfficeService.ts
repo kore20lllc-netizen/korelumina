@@ -646,3 +646,21 @@ export function verifyMissionBuild(
     { check: "build", sha, result },
   );
 }
+
+/*
+ * MS-5b: the owner's lifecycle steps on a mission. Runtime enforces who
+ * may take each step; a mission with a pending approval is decided through
+ * that approval (MS-3).
+ */
+export type MissionOwnerStep = "submit" | "approve" | "reject" | "unblock" | "cancel" | "archive";
+
+export function takeMissionStep(
+  missionId: string,
+  step: MissionOwnerStep,
+  reason?: string,
+): Promise<MissionRecord> {
+  return missionPost(
+    `/api/executive/missions/${encodeURIComponent(missionId)}/${step}`,
+    reason ? { reason } : {},
+  );
+}
