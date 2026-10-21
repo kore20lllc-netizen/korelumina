@@ -77,6 +77,7 @@ export interface WorkspacePackage {
   dependencies: Record<string, string>;
   devDependencies: Record<string, string>;
   peerDependencies: Record<string, string>;
+  optionalDependencies: Record<string, string>;
   frameworks: DetectedFramework[];
   tooling: string[];
   entryPoints: string[];
@@ -310,6 +311,7 @@ export function takeRepositoryInventory(fullSnapshot: RepositorySnapshot): Repos
     const dependencies = sortedRecord(manifest.dependencies);
     const devDependencies = sortedRecord(manifest.devDependencies);
     const peerDependencies = sortedRecord(manifest.peerDependencies);
+    const optionalDependencies = sortedRecord(manifest.optionalDependencies);
     const all = { ...peerDependencies, ...devDependencies, ...dependencies };
     const prefix = directory === "." ? "" : `${directory}/`;
     const ownFiles = snapshot.files.filter((file) => directory === "." || file.path.startsWith(prefix));
@@ -324,6 +326,7 @@ export function takeRepositoryInventory(fullSnapshot: RepositorySnapshot): Repos
       dependencies,
       devDependencies,
       peerDependencies,
+      optionalDependencies,
       frameworks: FRAMEWORKS.flatMap((framework) => {
         const installed = framework.packages.find((name) => all[name] !== undefined);
         return installed ? [{ id: framework.id, name: framework.name, version: all[installed] ?? null }] : [];
