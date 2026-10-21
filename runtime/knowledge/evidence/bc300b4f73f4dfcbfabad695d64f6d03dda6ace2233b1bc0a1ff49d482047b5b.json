@@ -1,0 +1,125 @@
+{
+  "id": "genesis-evidence:dc62f35fde95905ad4ead7cad3292a6c630edee910075c41c29a7f453402fd0e",
+  "type": "commit",
+  "title": "chore(builder): remove 29 files the app never loads (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792563742363,
+  "observedAt": 1792561940000,
+  "contentRef": "git:commit:02e19c8e782d637a6898cca8a69610879d4c8662",
+  "checksum": "sha256:bfe6e46215afcc6e85917d12d73612f8e5f3c6e09afdc4d17e0526b0004853b7",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8",
+    "genesisManifestId": "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:70d850ff7634ca06f15cddb0cb3861c3646307979c047ea7b1a60eafd0640348",
+    "historicalSourceId": "genesis-source:commit:02e19c8e782d637a6898cca8a69610879d4c8662",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:02e19c8e782d637a6898cca8a69610879d4c8662",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "02e19c8e782d637a6898cca8a69610879d4c8662",
+      "parentShas": [
+        "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792561940000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792561940000
+      },
+      "subject": "chore(builder): remove 29 files the app never loads (MS-2026-0006)",
+      "body": "Traced from the Builder's entry point, these files are never loaded: 21 generated UI components written against packages that were never installed, the old toast chain (the app uses sonner), knowledge leftovers including ProductionNavigator, a reset dialog, an archived mock service and an editor store. They carried 44 of the Builder's type errors, and none is under a UI contract. Only dead leaves were removed: projectRepository (used by the team tests) and AppearancePreview (used by the Appearance workspace) were kept and fixed instead. StoredProject declares the lastEditedAt and runtime it writes, and the preview card renders its title and description instead of passing them as attributes. The knowledge barrels stop re-exporting removed modules. 127 type errors remain; both UI contracts unchanged.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/ui/aspect-ratio.tsx",
+        "apps/lumina-builder/src/components/ui/avatar.tsx",
+        "apps/lumina-builder/src/components/ui/calendar.tsx",
+        "apps/lumina-builder/src/components/ui/chart.tsx",
+        "apps/lumina-builder/src/components/ui/checkbox.tsx",
+        "apps/lumina-builder/src/components/ui/context-menu.tsx",
+        "apps/lumina-builder/src/components/ui/drawer.tsx",
+        "apps/lumina-builder/src/components/ui/form.tsx",
+        "apps/lumina-builder/src/components/ui/input-otp.tsx",
+        "apps/lumina-builder/src/components/ui/menubar.tsx",
+        "apps/lumina-builder/src/components/ui/navigation-menu.tsx",
+        "apps/lumina-builder/src/components/ui/progress.tsx",
+        "apps/lumina-builder/src/components/ui/radio-group.tsx",
+        "apps/lumina-builder/src/components/ui/resizable.tsx",
+        "apps/lumina-builder/src/components/ui/separator.tsx",
+        "apps/lumina-builder/src/components/ui/sidebar.tsx",
+        "apps/lumina-builder/src/components/ui/slider.tsx",
+        "apps/lumina-builder/src/components/ui/toast.tsx",
+        "apps/lumina-builder/src/components/ui/toaster.tsx",
+        "apps/lumina-builder/src/components/ui/toggle-group.tsx",
+        "apps/lumina-builder/src/components/ui/toggle.tsx",
+        "apps/lumina-builder/src/components/ui/use-toast.ts",
+        "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearancePreview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ProductionNavigator.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/layout/KnowledgeWorkspaceInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/workspaces/OverviewWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/workspaces/index.ts",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx",
+        "apps/lumina-builder/src/hooks/use-toast.ts",
+        "apps/lumina-builder/src/services/projectRepository.ts",
+        "apps/lumina-builder/src/services/runtime/archive/MockRuntimeOperationsService.ts",
+        "apps/lumina-builder/src/stores/editorStore.ts"
+      ],
+      "changedPathsByParent": {
+        "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68": [
+          "apps/lumina-builder/src/components/ui/aspect-ratio.tsx",
+          "apps/lumina-builder/src/components/ui/avatar.tsx",
+          "apps/lumina-builder/src/components/ui/calendar.tsx",
+          "apps/lumina-builder/src/components/ui/chart.tsx",
+          "apps/lumina-builder/src/components/ui/checkbox.tsx",
+          "apps/lumina-builder/src/components/ui/context-menu.tsx",
+          "apps/lumina-builder/src/components/ui/drawer.tsx",
+          "apps/lumina-builder/src/components/ui/form.tsx",
+          "apps/lumina-builder/src/components/ui/input-otp.tsx",
+          "apps/lumina-builder/src/components/ui/menubar.tsx",
+          "apps/lumina-builder/src/components/ui/navigation-menu.tsx",
+          "apps/lumina-builder/src/components/ui/progress.tsx",
+          "apps/lumina-builder/src/components/ui/radio-group.tsx",
+          "apps/lumina-builder/src/components/ui/resizable.tsx",
+          "apps/lumina-builder/src/components/ui/separator.tsx",
+          "apps/lumina-builder/src/components/ui/sidebar.tsx",
+          "apps/lumina-builder/src/components/ui/slider.tsx",
+          "apps/lumina-builder/src/components/ui/toast.tsx",
+          "apps/lumina-builder/src/components/ui/toaster.tsx",
+          "apps/lumina-builder/src/components/ui/toggle-group.tsx",
+          "apps/lumina-builder/src/components/ui/toggle.tsx",
+          "apps/lumina-builder/src/components/ui/use-toast.ts",
+          "apps/lumina-builder/src/components/workspaces/appearance/parts/AppearancePreview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ProductionNavigator.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/layout/KnowledgeWorkspaceInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/workspaces/OverviewWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/workspaces/index.ts",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx",
+          "apps/lumina-builder/src/hooks/use-toast.ts",
+          "apps/lumina-builder/src/services/projectRepository.ts",
+          "apps/lumina-builder/src/services/runtime/archive/MockRuntimeOperationsService.ts",
+          "apps/lumina-builder/src/stores/editorStore.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:02e19c8e782d637a6898cca8a69610879d4c8662"
+    ],
+    "genesisReplay": [
+      "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb"
+    ]
+  }
+}

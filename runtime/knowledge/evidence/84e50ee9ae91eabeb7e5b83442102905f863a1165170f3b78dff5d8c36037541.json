@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:d95e8cc19a9baab7cd6a3cf177066f420168bc760735196d1091a8cde8bbc4cd",
+  "type": "commit",
+  "title": "fix(missions): a commit links to its mission once the mission is approved, even if it was learned first (F-36)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792499671267,
+  "observedAt": 1792499553000,
+  "contentRef": "git:commit:39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+  "checksum": "sha256:581876691c564c589397b773a4149a982cbbc066e08ff81731dc9624b726b5e6",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:d4b12bb9141ae8f7650c2f848a60f1edfad5a0d5db06c7a0b4e9debc94c4d542",
+    "genesisManifestId": "genesis-manifest:36aca90a92ff36f61c56b1abd01fbce86a8d29f2788fdd3b320621fec2b35e02",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:7053f4c41daefbcea4b7f0e1e4cbebb2878b7d299a4f314385d24f29c02ba805",
+    "historicalSourceId": "genesis-source:commit:39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "parentShas": [
+        "fb3556db36545c69e4b055c844d282587dd0c115"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792499553000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792499553000
+      },
+      "subject": "fix(missions): a commit links to its mission once the mission is approved, even if it was learned first (F-36)",
+      "body": "ADR-0044 Decision 3 says a commit with a Mission trailer belongs to that mission, but linking only happened in the cycle that learned the commit: F-33 (49af80ff, Mission: MS-2026-0005) was learned while its mission was still planned, was ignored, and could never link, so the mission could not start or complete. After every cycle, commits from earlier captured cycles now link to their mission once it is approved, oldest first, with the cycle they came from and its Learning Record; held or failed windows still link nothing, and nothing links twice. The recovery anchor is now always the newest linked commit, so a late link never moves it back. Checked against the owner's real ledger: only MS-2026-0005 changes, starting from 49af80ff. Runtime suites 1574/1574.\n\nMission: MS-2026-0001\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+        "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+        "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+        "apps/lumina-runtime/src/executive/mission/__tests__/MissionWorkLinking.test.ts",
+        "apps/lumina-runtime/src/index.ts"
+      ],
+      "changedPathsByParent": {
+        "fb3556db36545c69e4b055c844d282587dd0c115": [
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningCycleService.ts",
+          "apps/lumina-runtime/src/continuous-learning/ContinuousLearningLedger.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionService.ts",
+          "apps/lumina-runtime/src/executive/mission/MissionWorkLinker.ts",
+          "apps/lumina-runtime/src/executive/mission/__tests__/MissionWorkLinking.test.ts",
+          "apps/lumina-runtime/src/index.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:39bd41f8fbee8a18e1891021673a045f1a3f99c3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:d4b12bb9141ae8f7650c2f848a60f1edfad5a0d5db06c7a0b4e9debc94c4d542"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:36aca90a92ff36f61c56b1abd01fbce86a8d29f2788fdd3b320621fec2b35e02"
+    ]
+  }
+}

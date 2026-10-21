@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000078",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792501542220,
+  "updatedAt": 1792501542245,
+  "data": {
+    "id": "KP-2026-000078",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0020 — Git-track Chief Agent activation records",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:2d6afaccb46ad6c18879f85ebdf6e5c8f6dbf0d0828aabacf01511504c184349"
+          ],
+          "genesisReplay": [
+            "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8"
+          ]
+        },
+        "extractedAt": 1792501542219,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792501542219,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+          "checksum": "sha256:da85fbbc4d75638a1458811d180a8de5b677c84305f3872ed236d43b23203160",
+          "capturedAt": 1792501542216,
+          "observedAt": 1792499663000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861",
+            "genesisManifestId": "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8",
+            "genesisManifestIndex": 3,
+            "genesisAdmissionIdentity": "genesis-admission:2c5719bed358ac1fcf287580d69252575bcd0cae777c67a2c5202171c8c0b2b7",
+            "historicalSourceId": "genesis-source:document:derived:2d6afaccb46ad6c18879f85ebdf6e5c8f6dbf0d0828aabacf01511504c184349",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0020 — Git-track Chief Agent activation records",
+              "status": "Approved",
+              "approvalDate": "2026-10-20",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792501542220,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792501542220,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792501542219,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792501542220
+      },
+      {
+        "state": "compiled",
+        "at": 1792501542220
+      },
+      {
+        "state": "validated",
+        "at": 1792501542220
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792501542220
+      },
+      {
+        "state": "approved",
+        "at": 1792501542222,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792501542245,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792501542220
+    },
+    "createdAt": 1792501542220,
+    "updatedAt": 1792501542245,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792501542222
+      },
+      "review": {
+        "packageId": "KP-2026-000078",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792501542222,
+        "evidenceConsidered": [
+          "genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000078",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792501542222,
+          "evidenceConsidered": [
+            "genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792501542222,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792501542222,
+          "packageIds": [
+            "KP-2026-000078"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000078",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792501542245,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709"
+        ]
+      }
+    }
+  }
+}

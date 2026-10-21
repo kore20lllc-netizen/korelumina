@@ -1,0 +1,113 @@
+{
+  "id": "genesis-evidence:32d04b7fc630901be876c24cfa2dd0c71d43ee353fa3139c4b892e7732223aa1",
+  "type": "commit",
+  "title": "fix(knowledge): capsule inspector shows validated layers, and Knowledge Operations types (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792564046980,
+  "observedAt": 1792563873000,
+  "contentRef": "git:commit:97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+  "checksum": "sha256:396097e6d3b9e988e2828833a2fa338400522480c88c6484974ee58eb01e7e85",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:1a08d3f0415289615c304e8e386de09b52127b538ea4c2717c5cd5f022a311ed",
+    "genesisManifestId": "genesis-manifest:cedca34e8d4e119b8a9e98822997f7dcd5212a594f5434b41f250077a9e1a9ac",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:b1b1b7430f96490d5a5fad7a9ac8655eddf7c43d354301922a4785297b334a7b",
+    "historicalSourceId": "genesis-source:commit:97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+      "parentShas": [
+        "29ce4db456d2c154cc0507be00ef3784ff3b66ca"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792563873000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792563873000
+      },
+      "subject": "fix(knowledge): capsule inspector shows validated layers, and Knowledge Operations types (MS-2026-0006)",
+      "body": "The capsule inspector tested layer status against validated, but layers are healthy, warning or failed: validation always read partial, every layer counted as an exception, and every layer showed rose. Healthy now counts as validated. Type fixes with no visual change: props the components never used (emphasis on panels, columns on metric grids, as={undefined} on surfaces) and dead appearance references are removed; panels without a title pass title={null}; empty starting summaries carry their newer fields; the tab setter is checked; KnowledgeCapsuleModel is aliased to KnowledgeCapsule; ExecutivePremiumIcon accepts Knowledge Operations' SVG icons; the ribbon imports its metric type; an always-false conversation filter check is removed. Knowledge Operations contract re-certified after owner visual approval: seven files are pixel-identical, the capsule inspector changes as described. Live code typechecks; 15 errors remain in tests and two never-loaded v1 files.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/design-system/executive/ExecutivePremiumIcon.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.metrics.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusCertificationPanel.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/states/EducationalStateSurface.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/lifecycle.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/data/organizationalMemoryProjection.ts",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+        "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+        "docs/ui-contracts/knowledge-operations-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "29ce4db456d2c154cc0507be00ef3784ff3b66ca": [
+          "apps/lumina-builder/src/components/design-system/executive/ExecutivePremiumIcon.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveMetricCard.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveOperationsDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge-v3/layout/ExecutiveRibbon.metrics.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/ActivationReadiness.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/CompetencyPosture.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalArtifactInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusCertificationPanel.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalTimeline.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/GenesisCorpusOverview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/states/EducationalStateSurface.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleFlowEngine.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/lifecycle.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/composition/KnowledgeProductionCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/data/organizationalMemoryProjection.ts",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx",
+          "apps/lumina-builder/src/services/knowledgeOperationsService.ts",
+          "docs/ui-contracts/knowledge-operations-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:97457ee125cc6ed98b4d210ad4e27b042c46bdaf"
+    ],
+    "genesisReplay": [
+      "genesis-replay:1a08d3f0415289615c304e8e386de09b52127b538ea4c2717c5cd5f022a311ed"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:cedca34e8d4e119b8a9e98822997f7dcd5212a594f5434b41f250077a9e1a9ac"
+    ]
+  }
+}

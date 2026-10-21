@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:5c7e7a9590c0c427ec9b053c45083d1f05f9e020b06a6fd9cef5df96eb659166",
+  "type": "commit",
+  "title": "feat(executive): the owner acknowledges Critical notifications (MS-2026-0004)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792558340330,
+  "observedAt": 1792558270000,
+  "contentRef": "git:commit:8bc9049a36676bd11068848a248dc48cc52e89bc",
+  "checksum": "sha256:6718369eb5dd9336ac7f2a895589d219014279c2dee230bafb1b5afb86a14cae",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:c0e6018af2d3539c463e7b56853a7322264c5106ff1d53671541e882540a29b4",
+    "genesisManifestId": "genesis-manifest:fbc967b6ae38c151531d13d56d8d3c8b3f8fe731004a14d071354c718315d6fe",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:a11d8e0ba00a1c169519136c21cee1c806c3b46b9314c37fd94c79464a3c9a83",
+    "historicalSourceId": "genesis-source:commit:8bc9049a36676bd11068848a248dc48cc52e89bc",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8bc9049a36676bd11068848a248dc48cc52e89bc",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8bc9049a36676bd11068848a248dc48cc52e89bc",
+      "parentShas": [
+        "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792558270000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792558270000
+      },
+      "subject": "feat(executive): the owner acknowledges Critical notifications (MS-2026-0004)",
+      "body": "Critical notifications always require acknowledgement, but the button did nothing. An acknowledgement is now a Runtime record of who saw which condition and when (runtime/executive/acknowledgements); the condition stays listed, shown as acknowledged, and a new occurrence needs its own. Each condition carries a stable key naming that occurrence: the Chief Agent not active (with its latest activation decision), a failed learning cycle (its cycle), and now an activation certification that is not valid. Runtime not answering cannot be acknowledged. Only a human actor may acknowledge, enforced at the Runtime boundary and in the service. No control in the Executive Office remains unwired. Notifications presentation certified after owner visual approval. Runtime suites pass.\n\nMission: MS-2026-0004\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecords.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "apps/lumina-runtime/src/executive/acknowledgement/ExecutiveAcknowledgement.ts",
+        "apps/lumina-runtime/src/executive/acknowledgement/__tests__/ExecutiveAcknowledgement.test.ts",
+        "apps/lumina-runtime/src/executive/acknowledgement/index.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/executiveAcknowledgement.ts",
+        "apps/lumina-runtime/src/routes/runtimeBoundary.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944": [
+          "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecords.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "apps/lumina-runtime/src/executive/acknowledgement/ExecutiveAcknowledgement.ts",
+          "apps/lumina-runtime/src/executive/acknowledgement/__tests__/ExecutiveAcknowledgement.test.ts",
+          "apps/lumina-runtime/src/executive/acknowledgement/index.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/executiveAcknowledgement.ts",
+          "apps/lumina-runtime/src/routes/runtimeBoundary.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8bc9049a36676bd11068848a248dc48cc52e89bc"
+    ],
+    "genesisReplay": [
+      "genesis-replay:c0e6018af2d3539c463e7b56853a7322264c5106ff1d53671541e882540a29b4"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:fbc967b6ae38c151531d13d56d8d3c8b3f8fe731004a14d071354c718315d6fe"
+    ]
+  }
+}

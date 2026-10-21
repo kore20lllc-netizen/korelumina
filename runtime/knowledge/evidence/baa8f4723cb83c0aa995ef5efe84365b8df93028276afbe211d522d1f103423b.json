@@ -1,0 +1,77 @@
+{
+  "id": "genesis-evidence:137b891dd61e702376a4e9a869408507075d602a1a411eb5ec3f84530b827cc2",
+  "type": "commit",
+  "title": "feat(executive): recommendations are derived from Runtime records and name their source (MS-2026-0004)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792540429645,
+  "observedAt": 1792540335000,
+  "contentRef": "git:commit:e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+  "checksum": "sha256:dc68b3422317ea89281d5f95b1558a214114ecc1931c1bb9a4cdc16c434f9e65",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:ad7a393e576dad2fe833da8cae731202d678709764dc4203e15be07522fce390",
+    "genesisManifestId": "genesis-manifest:ce5382017484ea34ef75cad0c094ec2b2ac2ab7ee89f6ef923b059ebc68dba88",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:4a7e7fd5186d0f30a195ec7be96262a8c04fd33b49867cf586a047fb32602a6c",
+    "historicalSourceId": "genesis-source:commit:e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "parentShas": [
+        "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792540335000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792540335000
+      },
+      "subject": "feat(executive): recommendations are derived from Runtime records and name their source (MS-2026-0004)",
+      "body": "The dashboard's recommendations were a snapshot. They now come from fixed rules over records Runtime already keeps: pending decisions, invalid activation certifications, missions one step from done, open tasks, approved missions not started, planned owner missions, canonical reviews waiting, learning held or behind, and records that exist only on this machine (the platform route now counts uncommitted Learning Records and Runtime records). Each names the record it comes from, so it can be checked, and nothing is generated or guessed; the dashboard is fully live. The Planning Center names each task with its mission, because identical task ids across missions led to a task being changed on the wrong mission. Dashboard presentation certified after owner visual approval.\n\nMission: MS-2026-0004\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecommendations.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "apps/lumina-runtime/src/routes/__tests__/ExecutivePlatform.test.ts",
+        "apps/lumina-runtime/src/routes/executivePlatform.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8": [
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/executiveRecommendations.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "apps/lumina-runtime/src/routes/__tests__/ExecutivePlatform.test.ts",
+          "apps/lumina-runtime/src/routes/executivePlatform.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944"
+    ],
+    "genesisReplay": [
+      "genesis-replay:ad7a393e576dad2fe833da8cae731202d678709764dc4203e15be07522fce390"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:ce5382017484ea34ef75cad0c094ec2b2ac2ab7ee89f6ef923b059ebc68dba88"
+    ]
+  }
+}

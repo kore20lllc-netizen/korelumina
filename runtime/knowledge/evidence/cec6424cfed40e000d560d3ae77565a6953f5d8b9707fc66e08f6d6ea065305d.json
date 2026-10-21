@@ -1,0 +1,143 @@
+{
+  "id": "genesis-evidence:27e26a59b4badf0b1a646055d624ddaf3207237609e7d1357781f38e05ec04e6",
+  "type": "commit",
+  "title": "chore(knowledge): record Learning Records LR-2026-0017 to 0021, missions MS-2026-0006 and 0007, and their canonical promotions",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792501542291,
+  "observedAt": 1792499663000,
+  "contentRef": "git:commit:5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+  "checksum": "sha256:c1887f89615f18ed113bd488a7ea3f4341b45b4282b3b0a57640ce2c25a41775",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861",
+    "genesisManifestId": "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8",
+    "genesisManifestIndex": 5,
+    "genesisAdmissionIdentity": "genesis-admission:042b615910a8e54121c3397577f230a988cc1c73f9a325ce2d4391a5e3b4c49f",
+    "historicalSourceId": "genesis-source:commit:5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+      "parentShas": [
+        "39bd41f8fbee8a18e1891021673a045f1a3f99c3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792499663000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792499663000
+      },
+      "subject": "chore(knowledge): record Learning Records LR-2026-0017 to 0021, missions MS-2026-0006 and 0007, and their canonical promotions",
+      "body": "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+        "docs/learning/LR-2026-0018-remove-dead-institutionalmemoryzone-component.md",
+        "docs/learning/LR-2026-0019-executive-office-section-height-and-internal-scrolling.md",
+        "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+        "docs/learning/LR-2026-0021-day-0-reproducibility-and-learning-record-admission-fixes.md",
+        "runtime/executive/missions/MS-2026-0001.json",
+        "runtime/executive/missions/MS-2026-0002.json",
+        "runtime/executive/missions/MS-2026-0003.json",
+        "runtime/executive/missions/MS-2026-0004.json",
+        "runtime/executive/missions/MS-2026-0005.json",
+        "runtime/executive/missions/MS-2026-0006.json",
+        "runtime/executive/missions/MS-2026-0007.json",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A72259b9b2328cc7ba5913c15a5be67cb65c5c4d62fd9bf5066c139f04137ef92.json",
+        "runtime/knowledge/evidence/12d0b850e4ee1f482d6c778f3509a63fa67d6f5aec39c094c770021cff02cf15.json",
+        "runtime/knowledge/evidence/52e7613681171ecb173db8ad8cc4f53aa87ba9c271d013281a84deeed0f01353.json",
+        "runtime/knowledge/evidence/5b40474e11c4ce15c466a5cb575984f6085697519aa758691c14480ceda50ffb.json",
+        "runtime/knowledge/evidence/8b64b4cb25a2b5ce58c3dfa6fcfabbd32e3abb53c9ac300339c52d5d0a5c3a6b.json",
+        "runtime/knowledge/evidence/f06102a7f5c3dbfa66b67c2a01564627e518ba8f7d07210327374273ce558527.json",
+        "runtime/knowledge/evidence/f3df9373304a39c7e5726befece2091e3fe49fecb6902251604b06e00895c366.json",
+        "runtime/knowledge/evidence/f44a8f55527e66d388ddd4ec415644808c5a20ce7782681eae98e829be4a0896.json",
+        "runtime/knowledge/manufacturing-runs/KMR-08c956fc0370ac39772a.json",
+        "runtime/knowledge/manufacturing-runs/KMR-18afe480340bcf1554ba.json",
+        "runtime/knowledge/manufacturing-runs/KMR-9bff7f55d627aa7555f9.json",
+        "runtime/knowledge/manufacturing-runs/KMR-d7121c958bc3047ffd1b.json",
+        "runtime/knowledge/manufacturing-runs/KMR-df10187dd2032808cebc.json",
+        "runtime/knowledge/manufacturing-runs/KMR-f0942a25be54a31f9671.json",
+        "runtime/knowledge/packages/.sequence-2026",
+        "runtime/knowledge/packages/KP-2026-000040.json",
+        "runtime/knowledge/packages/KP-2026-000046.json",
+        "runtime/knowledge/packages/KP-2026-000071.json",
+        "runtime/knowledge/packages/KP-2026-000072.json",
+        "runtime/knowledge/packages/KP-2026-000073.json",
+        "runtime/knowledge/packages/KP-2026-000074.json",
+        "runtime/knowledge/review-batches/KRB-2026-000015.json",
+        "runtime/knowledge/review-batches/KRB-2026-000016.json",
+        "runtime/knowledge/review-batches/KRB-2026-000017.json",
+        "runtime/knowledge/review-batches/KRB-2026-000018.json",
+        "runtime/knowledge/review-batches/KRB-2026-000019.json"
+      ],
+      "changedPathsByParent": {
+        "39bd41f8fbee8a18e1891021673a045f1a3f99c3": [
+          "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+          "docs/learning/LR-2026-0018-remove-dead-institutionalmemoryzone-component.md",
+          "docs/learning/LR-2026-0019-executive-office-section-height-and-internal-scrolling.md",
+          "docs/learning/LR-2026-0020-git-track-chief-agent-activation-records.md",
+          "docs/learning/LR-2026-0021-day-0-reproducibility-and-learning-record-admission-fixes.md",
+          "runtime/executive/missions/MS-2026-0001.json",
+          "runtime/executive/missions/MS-2026-0002.json",
+          "runtime/executive/missions/MS-2026-0003.json",
+          "runtime/executive/missions/MS-2026-0004.json",
+          "runtime/executive/missions/MS-2026-0005.json",
+          "runtime/executive/missions/MS-2026-0006.json",
+          "runtime/executive/missions/MS-2026-0007.json",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A3527ab2510d095680a8b5546d80cdd7a096dce8bb4a38eb99e1dc2288223f9e3.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A40b34cbc05cc5c2b4b552a3d0df1ce0a0a2bf04143a3bfbb7f7c132228e7504f.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A72259b9b2328cc7ba5913c15a5be67cb65c5c4d62fd9bf5066c139f04137ef92.json",
+          "runtime/knowledge/evidence/12d0b850e4ee1f482d6c778f3509a63fa67d6f5aec39c094c770021cff02cf15.json",
+          "runtime/knowledge/evidence/52e7613681171ecb173db8ad8cc4f53aa87ba9c271d013281a84deeed0f01353.json",
+          "runtime/knowledge/evidence/5b40474e11c4ce15c466a5cb575984f6085697519aa758691c14480ceda50ffb.json",
+          "runtime/knowledge/evidence/8b64b4cb25a2b5ce58c3dfa6fcfabbd32e3abb53c9ac300339c52d5d0a5c3a6b.json",
+          "runtime/knowledge/evidence/f06102a7f5c3dbfa66b67c2a01564627e518ba8f7d07210327374273ce558527.json",
+          "runtime/knowledge/evidence/f3df9373304a39c7e5726befece2091e3fe49fecb6902251604b06e00895c366.json",
+          "runtime/knowledge/evidence/f44a8f55527e66d388ddd4ec415644808c5a20ce7782681eae98e829be4a0896.json",
+          "runtime/knowledge/manufacturing-runs/KMR-08c956fc0370ac39772a.json",
+          "runtime/knowledge/manufacturing-runs/KMR-18afe480340bcf1554ba.json",
+          "runtime/knowledge/manufacturing-runs/KMR-9bff7f55d627aa7555f9.json",
+          "runtime/knowledge/manufacturing-runs/KMR-d7121c958bc3047ffd1b.json",
+          "runtime/knowledge/manufacturing-runs/KMR-df10187dd2032808cebc.json",
+          "runtime/knowledge/manufacturing-runs/KMR-f0942a25be54a31f9671.json",
+          "runtime/knowledge/packages/.sequence-2026",
+          "runtime/knowledge/packages/KP-2026-000040.json",
+          "runtime/knowledge/packages/KP-2026-000046.json",
+          "runtime/knowledge/packages/KP-2026-000071.json",
+          "runtime/knowledge/packages/KP-2026-000072.json",
+          "runtime/knowledge/packages/KP-2026-000073.json",
+          "runtime/knowledge/packages/KP-2026-000074.json",
+          "runtime/knowledge/review-batches/KRB-2026-000015.json",
+          "runtime/knowledge/review-batches/KRB-2026-000016.json",
+          "runtime/knowledge/review-batches/KRB-2026-000017.json",
+          "runtime/knowledge/review-batches/KRB-2026-000018.json",
+          "runtime/knowledge/review-batches/KRB-2026-000019.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3"
+    ],
+    "genesisReplay": [
+      "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8"
+    ]
+  }
+}

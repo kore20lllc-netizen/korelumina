@@ -1,0 +1,75 @@
+{
+  "id": "genesis-evidence:c7b7a0efc0b9733eecd40d2c9bd3aad2f2070f9b64b8efcbca1ab1efbdada217",
+  "type": "commit",
+  "title": "fix(builder): dropped ZIPs reach the import modal, the top bar's mode and mark-all-read work, and workspace context types (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792563742374,
+  "observedAt": 1792562410000,
+  "contentRef": "git:commit:615eeda647bd96061e1c8feee7b678702c7c3b89",
+  "checksum": "sha256:16168c3e3074096d3db02ffaa460bc3788d6897bebf557d91b528067611b0d47",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8",
+    "genesisManifestId": "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:444d40654dbb8c9df57fbf84b8e3e83a04e2583943aae01459ca7952e1b5b526",
+    "historicalSourceId": "genesis-source:commit:615eeda647bd96061e1c8feee7b678702c7c3b89",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:615eeda647bd96061e1c8feee7b678702c7c3b89",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "615eeda647bd96061e1c8feee7b678702c7c3b89",
+      "parentShas": [
+        "02e19c8e782d637a6898cca8a69610879d4c8662"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792562410000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792562410000
+      },
+      "subject": "fix(builder): dropped ZIPs reach the import modal, the top bar's mode and mark-all-read work, and workspace context types (MS-2026-0006)",
+      "body": "Real bugs: the global drop zone called setImportOpen with the files as a second argument it does not take, so the import modal opened without them; the default mode was dev, which matches none of the top bar's modes, so none showed selected (now developer); the top bar's Mark all read called a context function that did not exist; and a Genesis artifact panel used as=section, which LuminaFlagshipCard renders as a button. Types: the workspace context exports ImportPrefill, SkillMode and Project, which files import from it, and types notifications; Project declares runtime and lastEditedAt, which every project carries; Genesis record types are re-exported where the panels import them; the type library is ES2021 for replaceAll (target unchanged). Exporting the context types surfaced 12 errors their absence had hidden, fixed here. 85 type errors remain; both UI contracts unchanged.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/import/GlobalImportDropZone.tsx",
+        "apps/lumina-builder/src/components/workspaces/ImportsView.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalArtifactExplorer.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalNavigation.ts",
+        "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+        "apps/lumina-builder/src/services/runtime/genesisReplayRead.ts",
+        "apps/lumina-builder/src/types/api.ts",
+        "apps/lumina-builder/tsconfig.app.json"
+      ],
+      "changedPathsByParent": {
+        "02e19c8e782d637a6898cca8a69610879d4c8662": [
+          "apps/lumina-builder/src/components/import/GlobalImportDropZone.tsx",
+          "apps/lumina-builder/src/components/workspaces/ImportsView.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalArtifactExplorer.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalNavigation.ts",
+          "apps/lumina-builder/src/context/WorkspaceContext.tsx",
+          "apps/lumina-builder/src/services/runtime/genesisReplayRead.ts",
+          "apps/lumina-builder/src/types/api.ts",
+          "apps/lumina-builder/tsconfig.app.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:615eeda647bd96061e1c8feee7b678702c7c3b89"
+    ],
+    "genesisReplay": [
+      "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb"
+    ]
+  }
+}

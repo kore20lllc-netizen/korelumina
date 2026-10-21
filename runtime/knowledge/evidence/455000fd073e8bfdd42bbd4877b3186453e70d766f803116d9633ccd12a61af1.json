@@ -1,0 +1,105 @@
+{
+  "id": "genesis-evidence:f9337d015c5f4d123a641a242321e9cefa7f958b5ba4ada3d081d0cdf86bf844",
+  "type": "commit",
+  "title": "fix(builder): settings role switcher, plan display, appearance sliders, destructive buttons, transform hand-off and surface refs (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792563742378,
+  "observedAt": 1792563250000,
+  "contentRef": "git:commit:29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+  "checksum": "sha256:dc3a4d11a30c8e5d1297997b4e5e5935462fff418b86e69fb124b07abeaa875f",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8",
+    "genesisManifestId": "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb",
+    "genesisManifestIndex": 2,
+    "genesisAdmissionIdentity": "genesis-admission:6c8e0c7ce09a3e8df408666faf63f12422af7ca4c979c42bf621bd0d18cacb3e",
+    "historicalSourceId": "genesis-source:commit:29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+      "parentShas": [
+        "615eeda647bd96061e1c8feee7b678702c7c3b89"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792563250000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792563250000
+      },
+      "subject": "fix(builder): settings role switcher, plan display, appearance sliders, destructive buttons, transform hand-off and surface refs (MS-2026-0006)",
+      "body": "Real bugs: RoleSwitcher rendered ResetMockDataDialog without importing it, so development Settings threw (the dialog, removed as never loaded, is restored and imported, and its reset uses adminService.resetAllData; lib/seed has none); Pricing and Settings read a plan the usage snapshot does not have, leaving Current plan blank and Cancel always shown (the plan now comes from the plan role, ADR-0043); the appearance drawer's sliders showed fixed values and could not move (now bound to appearance state); five destructive confirms used a variant LuminaButton does not have (now danger); opening a transform in Designer threw on usageProvider, whose import alias was lost, and skipped activating the project; LuminaSurface dropped refs, so GlowCard's ripple never appeared (now forwardRef); the prompt typewriter's options had the wrong names. Latent: inspector header ignored its children, placeholder controls ignored their model, LuminaInspectorSection was dropped from the Lumina barrel by an export collision, LuminaBackground referenced a renamed variable. 54 type errors remain, all in Knowledge workspaces and tests; both UI contracts unchanged.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/lumina/background/LuminaBackground.tsx",
+        "apps/lumina-builder/src/components/lumina/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/controls/PlaceholderInspectorControl.tsx",
+        "apps/lumina-builder/src/components/lumina/inspector/controls/index.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/registry/controlRegistry.ts",
+        "apps/lumina-builder/src/components/lumina/inspector/renderer/LuminaInspectorRenderer.tsx",
+        "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+        "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+        "apps/lumina-builder/src/components/transform/TransformModal.tsx",
+        "apps/lumina-builder/src/components/workspace-appearance/sections/SliderSection.tsx",
+        "apps/lumina-builder/src/components/workspaces/PricingView.tsx",
+        "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+        "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx",
+        "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx",
+        "apps/lumina-builder/src/components/workspaces/ai/PromptComposer.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalRelationshipInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx",
+        "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx",
+        "apps/lumina-builder/src/services/workspaceAccessService.ts"
+      ],
+      "changedPathsByParent": {
+        "615eeda647bd96061e1c8feee7b678702c7c3b89": [
+          "apps/lumina-builder/src/components/lumina/background/LuminaBackground.tsx",
+          "apps/lumina-builder/src/components/lumina/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/controls/PlaceholderInspectorControl.tsx",
+          "apps/lumina-builder/src/components/lumina/inspector/controls/index.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/registry/controlRegistry.ts",
+          "apps/lumina-builder/src/components/lumina/inspector/renderer/LuminaInspectorRenderer.tsx",
+          "apps/lumina-builder/src/components/lumina/surface/LuminaSurface.tsx",
+          "apps/lumina-builder/src/components/preview/PreviewFrame.tsx",
+          "apps/lumina-builder/src/components/transform/TransformModal.tsx",
+          "apps/lumina-builder/src/components/workspace-appearance/sections/SliderSection.tsx",
+          "apps/lumina-builder/src/components/workspaces/PricingView.tsx",
+          "apps/lumina-builder/src/components/workspaces/SettingsView.tsx",
+          "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminResetDataDialog.tsx",
+          "apps/lumina-builder/src/components/workspaces/admin/dialogs/AdminUserDeleteDialog.tsx",
+          "apps/lumina-builder/src/components/workspaces/ai/PromptComposer.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/GenesisHistoricalRelationshipInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/learning/composition/EducationalCommandCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/RoleSwitcher.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/LeaveWorkspaceDialog.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetAppDataDialog.tsx",
+          "apps/lumina-builder/src/components/workspaces/settings/dialogs/ResetMockDataDialog.tsx",
+          "apps/lumina-builder/src/services/workspaceAccessService.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:29ce4db456d2c154cc0507be00ef3784ff3b66ca"
+    ],
+    "genesisReplay": [
+      "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:c0d271969124add72f501fe2ebd2dcda4d8c5f9f24bf0fac12106fe7e39451fb"
+    ]
+  }
+}

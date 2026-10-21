@@ -1,0 +1,65 @@
+{
+  "id": "genesis-evidence:683dafaecf6ccc5508ea02ba45db2601ea302643fe5dd22559cf86ff06635f8c",
+  "type": "commit",
+  "title": "chore(builder): React type definitions installed and vite-env typed (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792561951075,
+  "observedAt": 1792560327000,
+  "contentRef": "git:commit:d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+  "checksum": "sha256:133b79c3381335050d96138b5650a52f8d94a576e7ab6f4a083275898c63ea76",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:25841302f53ac2823818daabe38992f9a256068aab30a83ee2a70de99ac8c73b",
+    "genesisManifestId": "genesis-manifest:b1017cd1cb74b14c83dc07bb6569fcf2fbf51b070ee81633570270bddf67012e",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:45d8e27d639d9de74b2a87bb4a5f94f0a138ea4b211c8638481f7fce1ee9d6e4",
+    "historicalSourceId": "genesis-source:commit:d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+      "parentShas": [
+        "8bc9049a36676bd11068848a248dc48cc52e89bc"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792560327000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792560327000
+      },
+      "subject": "chore(builder): React type definitions installed and vite-env typed (MS-2026-0006)",
+      "body": "The Builder had never been typechecked: vite build does not check types, and a syntax error in a dead file made tsc skip type checking entirely until F-33 removed it. With it gone, tsc reported 384 errors. Most come from missing React type definitions (@types/react and @types/react-dom for React 18.3, now installed as dev dependencies); 10 came from vite-env.d.ts sitting outside the checked files, now included, which clears every asset-import error. The remaining errors are fixed area by area in this mission, and the build will then enforce the typecheck.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/package.json",
+        "apps/lumina-builder/tsconfig.app.json",
+        "package-lock.json"
+      ],
+      "changedPathsByParent": {
+        "8bc9049a36676bd11068848a248dc48cc52e89bc": [
+          "apps/lumina-builder/package.json",
+          "apps/lumina-builder/tsconfig.app.json",
+          "package-lock.json"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:d0ec4034f8651fb5535cb7d0eb3a30831943aca0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:25841302f53ac2823818daabe38992f9a256068aab30a83ee2a70de99ac8c73b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:b1017cd1cb74b14c83dc07bb6569fcf2fbf51b070ee81633570270bddf67012e"
+    ]
+  }
+}

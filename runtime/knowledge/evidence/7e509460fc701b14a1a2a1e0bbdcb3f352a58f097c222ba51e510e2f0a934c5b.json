@@ -1,0 +1,89 @@
+{
+  "id": "genesis-evidence:8cfa291643c68e20f42436686af6982f2a4b325234cfff02f40ff5f55a2b9399",
+  "type": "commit",
+  "title": "fix(builder): runtime boot, manual stop, file writes and health badge bugs, and runtime workspace types (MS-2026-0006)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792561951083,
+  "observedAt": 1792561358000,
+  "contentRef": "git:commit:e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+  "checksum": "sha256:0b40b00d2e131a50d339e4e1f88aa691e2156d36d51b11a3e6afb615a7a74770",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:25841302f53ac2823818daabe38992f9a256068aab30a83ee2a70de99ac8c73b",
+    "genesisManifestId": "genesis-manifest:b1017cd1cb74b14c83dc07bb6569fcf2fbf51b070ee81633570270bddf67012e",
+    "genesisManifestIndex": 1,
+    "genesisAdmissionIdentity": "genesis-admission:1f2a2f264cfdaa4f1ee558e81d547f7f23377f407df47a89f046abe98bbadb49",
+    "historicalSourceId": "genesis-source:commit:e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+      "parentShas": [
+        "d0ec4034f8651fb5535cb7d0eb3a30831943aca0"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792561358000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792561358000
+      },
+      "subject": "fix(builder): runtime boot, manual stop, file writes and health badge bugs, and runtime workspace types (MS-2026-0006)",
+      "body": "With React's types installed the Builder reports 231 type errors; this fixes 53. Real bugs: three useRuntimeBoot branches for a stopped runtime referenced an undefined projectId and threw instead of showing the stopped message; manualStop.ts imported its own exports, colliding with its declarations; api.writeFile passed positional arguments to writeRuntimeFile, which takes one object, so the request body was only the project id (no caller yet); and the runtime health badge used variants LuminaBadge does not have, so it showed no status colour (now complete, partial, blocked and muted). Type-only fixes: Lucide icon prop types accept strokeWidth as string or number as Lucide declares, RuntimeOverview renamed to RuntimeOverall, a checked log level setter, AUTH_ERROR as an error code, Project imported from its declaration, jsPDF as a type-only import, a typed __PROVIDERS__ window global, and an ignored setView prop removed. 178 remain; both UI contracts unchanged.\n\nMission: MS-2026-0006\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeExecutiveDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx",
+        "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx",
+        "apps/lumina-builder/src/context/TransformContext.tsx",
+        "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+        "apps/lumina-builder/src/lib/errors.ts",
+        "apps/lumina-builder/src/pages/Index.tsx",
+        "apps/lumina-builder/src/services/api.ts",
+        "apps/lumina-builder/src/services/providerConfigService.ts",
+        "apps/lumina-builder/src/services/repoAuditPdfService.ts",
+        "apps/lumina-builder/src/services/runtime/manualStop.ts"
+      ],
+      "changedPathsByParent": {
+        "d0ec4034f8651fb5535cb7d0eb3a30831943aca0": [
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeActionsToolbar.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeExecutiveDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHeader.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeHealthBadge.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeInspector.tsx",
+          "apps/lumina-builder/src/components/workspaces/runtime/parts/RuntimeLogsPanel.tsx",
+          "apps/lumina-builder/src/context/TransformContext.tsx",
+          "apps/lumina-builder/src/hooks/useRuntimeBoot.ts",
+          "apps/lumina-builder/src/lib/errors.ts",
+          "apps/lumina-builder/src/pages/Index.tsx",
+          "apps/lumina-builder/src/services/api.ts",
+          "apps/lumina-builder/src/services/providerConfigService.ts",
+          "apps/lumina-builder/src/services/repoAuditPdfService.ts",
+          "apps/lumina-builder/src/services/runtime/manualStop.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:e0c92b1dea4aa801aa38891c4a31d68c7cea9e68"
+    ],
+    "genesisReplay": [
+      "genesis-replay:25841302f53ac2823818daabe38992f9a256068aab30a83ee2a70de99ac8c73b"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:b1017cd1cb74b14c83dc07bb6569fcf2fbf51b070ee81633570270bddf67012e"
+    ]
+  }
+}

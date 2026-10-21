@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0017 — Mission imports and Mission Center actions (051dce1e5c701587c7816811a5bb4ed1f95ce602)",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e71dbf9c7674801878b55464b7da0fd1419e1aec08c3dfe2154920010661d7ba"
+    ],
+    "genesisReplay": [
+      "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8"
+    ]
+  },
+  "createdAt": 1792501542132,
+  "updatedAt": 1792501542132,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+    "checksum": "sha256:25a96b4aa8b455cdff617938465f2c7948482b839b729c8f9bd27090e7fb4c87",
+    "capturedAt": 1792501542078,
+    "observedAt": 1792499663000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861",
+      "genesisManifestId": "genesis-manifest:eeeccd9f3019d3a02a8141864d7572ac217e87a46e42c64630d04870cf652bb8",
+      "genesisManifestIndex": 0,
+      "genesisAdmissionIdentity": "genesis-admission:3d9a6a152b4b9c9ec4fa032a892abb3d39b8836f681f880babd0b63bc4541c8d",
+      "historicalSourceId": "genesis-source:document:derived:e71dbf9c7674801878b55464b7da0fd1419e1aec08c3dfe2154920010661d7ba",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0017 — Mission imports and Mission Center actions (051dce1e5c701587c7816811a5bb4ed1f95ce602)",
+        "status": "Approved",
+        "approvalDate": "2026-10-20",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792501542089,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000075",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0017-mission-imports-and-mission-center-actions-051dce1e5c701587c.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792501542093,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000075",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792501542093,
+        "evidenceConsidered": [
+          "genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000075",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792501542093,
+          "evidenceConsidered": [
+            "genesis-evidence:fdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792501542090
+        },
+        {
+          "state": "compiled",
+          "at": 1792501542090
+        },
+        {
+          "state": "validated",
+          "at": 1792501542090
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792501542090
+        },
+        {
+          "state": "approved",
+          "at": 1792501542093,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

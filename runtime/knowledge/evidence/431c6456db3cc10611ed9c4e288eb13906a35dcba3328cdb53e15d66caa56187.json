@@ -1,0 +1,79 @@
+{
+  "id": "genesis-evidence:118d83234897272e5d825b5f30ea7425ab8cb2424a3ca93f1d3a30c49b6b544a",
+  "type": "commit",
+  "title": "Builder typechecks clean, and the build enforces it",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792584412916,
+  "observedAt": 1792583574000,
+  "contentRef": "git:commit:c3c582f512370fefb9127a45028d8e013d89eb86",
+  "checksum": "sha256:e07a8af0d584d7ba0335076d03cf4d96d9d5e1e29a4e197aed4ad7f183435fe9",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:3c613877aa89f387af05c8131921a5b6f2c702e570afa7acb84f4ac8066b01c1",
+    "genesisManifestId": "genesis-manifest:e48fae7c551139b49a7415aee6a9a555db2026d324fef00445b6cf47e6859de6",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:808f57b9cc8e08f57029be7ba28e80bd6ff9e688d0af2a216917fc442312c014",
+    "historicalSourceId": "genesis-source:commit:c3c582f512370fefb9127a45028d8e013d89eb86",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:c3c582f512370fefb9127a45028d8e013d89eb86",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "c3c582f512370fefb9127a45028d8e013d89eb86",
+      "parentShas": [
+        "97457ee125cc6ed98b4d210ad4e27b042c46bdaf"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792583574000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792583574000
+      },
+      "subject": "Builder typechecks clean, and the build enforces it",
+      "body": "vite build never ran tsc, so type errors piled up unseen (384 at the\nstart of this mission). The last 13 were stale tests: tests for modules\ndeleted in 0ea2a288, Genesis fixtures that predate newer projection\nfields, and an `as any` reaching a field that no longer exists. The two\nsuperseded v1 Knowledge Operations files, unreachable from main.tsx,\nare removed with owner approval.\n\nnpm run build now runs typecheck:builder before building, so a type\nerror stops the build instead of shipping.\n\nMission: MS-2026-0006\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/__tests__/services.test.ts",
+        "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/__tests__/GenesisHistoricalArtifactExplorer.test.tsx",
+        "apps/lumina-builder/src/components/workspaces/genesis/__tests__/GenesisOperationalProjectionPanel.test.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/layout/KnowledgeWorkspaceRegions.tsx",
+        "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+        "apps/lumina-builder/src/services/runtime/__tests__/genesisOperationalReadController.test.ts",
+        "apps/lumina-builder/src/services/runtime/__tests__/genesisOperationalReadState.test.ts",
+        "package.json"
+      ],
+      "changedPathsByParent": {
+        "97457ee125cc6ed98b4d210ad4e27b042c46bdaf": [
+          "apps/lumina-builder/src/__tests__/services.test.ts",
+          "apps/lumina-builder/src/components/workspaces/KnowledgeOperationsWorkspace.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/__tests__/GenesisHistoricalArtifactExplorer.test.tsx",
+          "apps/lumina-builder/src/components/workspaces/genesis/__tests__/GenesisOperationalProjectionPanel.test.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/layout/KnowledgeWorkspaceRegions.tsx",
+          "apps/lumina-builder/src/components/workspaces/knowledge/layout/index.ts",
+          "apps/lumina-builder/src/services/runtime/__tests__/genesisOperationalReadController.test.ts",
+          "apps/lumina-builder/src/services/runtime/__tests__/genesisOperationalReadState.test.ts",
+          "package.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:c3c582f512370fefb9127a45028d8e013d89eb86"
+    ],
+    "genesisReplay": [
+      "genesis-replay:3c613877aa89f387af05c8131921a5b6f2c702e570afa7acb84f4ac8066b01c1"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e48fae7c551139b49a7415aee6a9a555db2026d324fef00445b6cf47e6859de6"
+    ]
+  }
+}

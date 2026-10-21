@@ -1,0 +1,83 @@
+{
+  "id": "genesis-evidence:18e7431e63bb4ff2521c6569aa5c6d38ec2e3475a801e2f257336a0890bf2a61",
+  "type": "commit",
+  "title": "feat(executive): suspend and resume the Chief Agent, and the dashboard health and platform card read Runtime (MS-2026-0004)",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792503698854,
+  "observedAt": 1792501760000,
+  "contentRef": "git:commit:7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+  "checksum": "sha256:3f2b852a4659bf352ba290f68068f4932bfbe5c80f40a2f6b1217900898a1531",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:065e61ea0cd4a044b0d69c5cf1ed6caa55e4775de6889b8e06166a7c5ec121dd",
+    "genesisManifestId": "genesis-manifest:0e83e7bf616b6db1afe75241b639da5dd851647bfa15520675d5c96b084dd110",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:e3d72391fabc1eb4db9c6cfc87ba147484666a0ad0f183e29065f594946e759d",
+    "historicalSourceId": "genesis-source:commit:7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+      "parentShas": [
+        "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792501760000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792501760000
+      },
+      "subject": "feat(executive): suspend and resume the Chief Agent, and the dashboard health and platform card read Runtime (MS-2026-0004)",
+      "body": "Suspend and resume work from the command deck with a reason; the request carries confirm, because Runtime previews every activation decision otherwise, and anything but a recorded decision shows as not recorded with Runtime's reasons. Resume requires every activation prerequisite valid, which ADR-0045 made true again. The platform health tile shows the activation certifications, refreshed every 5 minutes since they are re-derived on read; Runtime and knowledge health read learning, canonical knowledge and canonical reviews. A new read-only route gives the platform card the repository, branch, latest commit and each workspace's stack; deployments say none recorded. Recommendations stay a marked design preview until their source is decided. Presentation of the command deck, dashboard and projects certified after owner visual approval. Runtime suites pass.\n\nMission: MS-2026-0004\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+        "apps/lumina-builder/src/components/workspaces/executive/state/executiveHealth.ts",
+        "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+        "apps/lumina-builder/src/services/executiveOfficeService.ts",
+        "apps/lumina-runtime/src/index.ts",
+        "apps/lumina-runtime/src/routes/__tests__/ExecutivePlatform.test.ts",
+        "apps/lumina-runtime/src/routes/executivePlatform.ts",
+        "docs/ui-contracts/executive-office-certified-ui.json"
+      ],
+      "changedPathsByParent": {
+        "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3": [
+          "apps/lumina-builder/src/components/workspaces/executive/design/executiveDesignPreview.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/layout/ChiefAgentCommandDeck.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ExecutiveDashboard.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/sections/ProjectsCenter.tsx",
+          "apps/lumina-builder/src/components/workspaces/executive/state/executiveHealth.ts",
+          "apps/lumina-builder/src/components/workspaces/executive/state/useExecutiveOffice.ts",
+          "apps/lumina-builder/src/services/executiveOfficeService.ts",
+          "apps/lumina-runtime/src/index.ts",
+          "apps/lumina-runtime/src/routes/__tests__/ExecutivePlatform.test.ts",
+          "apps/lumina-runtime/src/routes/executivePlatform.ts",
+          "docs/ui-contracts/executive-office-certified-ui.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8"
+    ],
+    "genesisReplay": [
+      "genesis-replay:065e61ea0cd4a044b0d69c5cf1ed6caa55e4775de6889b8e06166a7c5ec121dd"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:0e83e7bf616b6db1afe75241b639da5dd851647bfa15520675d5c96b084dd110"
+    ]
+  }
+}
