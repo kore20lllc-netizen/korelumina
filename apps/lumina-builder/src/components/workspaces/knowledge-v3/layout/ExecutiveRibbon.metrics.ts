@@ -7,4 +7,8 @@ export type {
 } from "./ExecutiveRibbonProvider";
 
 
+import type {
+  ExecutiveRibbonMetric,
+} from "./ExecutiveRibbonProvider";
+
 export type RibbonMetric = ExecutiveRibbonMetric;

@@ -1645,7 +1645,6 @@ export function CanonicalReview({
         }
         metricsRegion={
           <LuminaExecutiveMetricGrid
-            columns={2}
           >
         <LuminaExecutiveCard
           title="Review queue"

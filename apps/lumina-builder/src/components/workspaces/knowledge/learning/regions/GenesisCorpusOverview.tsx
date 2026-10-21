@@ -151,7 +151,6 @@ export function GenesisCorpusOverview({
     <LuminaFlagshipPanel
       title="Genesis Corpus"
       description="Historical educational foundation assembled from governed repository, documentation, decision and conversation sources"
-      emphasis="strong"
       toolbar={
         <LuminaBadge
           variant="complete"

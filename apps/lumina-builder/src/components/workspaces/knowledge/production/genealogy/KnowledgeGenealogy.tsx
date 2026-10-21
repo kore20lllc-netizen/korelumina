@@ -202,7 +202,7 @@ export function KnowledgeGenealogy({
           </LuminaFlagshipPanel>
         }
         metricsRegion={
-          <LuminaExecutiveMetricGrid columns={2}>
+          <LuminaExecutiveMetricGrid>
             <LuminaExecutiveCard
               title="Lineage layers"
               value={String(capsule.layers.length)}

@@ -133,7 +133,7 @@ export function OrganizationalImpact({
           </LuminaFlagshipPanel>
         }
         metricsRegion={
-          <LuminaExecutiveMetricGrid columns={2}>
+          <LuminaExecutiveMetricGrid>
             <LuminaExecutiveCard
               title="Canonical assets measured"
               value={String(canonicalAssetCount)}

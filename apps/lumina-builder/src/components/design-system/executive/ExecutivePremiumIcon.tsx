@@ -1,3 +1,4 @@
+import type { ComponentType, SVGProps } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { ExecutiveIconFrame } from "./ExecutiveIconFrame";
@@ -8,7 +9,8 @@ import {
 } from "./executiveIconTheme";
 
 interface ExecutivePremiumIconProps {
-  icon: LucideIcon;
+  /* Lucide icons, or Knowledge Operations' own SVG icons. */
+  icon: LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
   state: ExecutiveIconState;
 }
 

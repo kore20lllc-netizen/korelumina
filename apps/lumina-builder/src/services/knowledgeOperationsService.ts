@@ -212,6 +212,10 @@ export interface CanonicalReviewPackageView {
       title:
         string;
 
+      /* Canonical items carry their type; the package view shows it. */
+      type?:
+        string;
+
       summary:
         string;
 

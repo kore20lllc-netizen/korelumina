@@ -167,7 +167,6 @@ export function EducationalArtifactInspector({
     <LuminaFlagshipPanel
       title="Educational Artifact Inspector"
       description="Authority • Provenance • Lineage • Educational impact"
-      emphasis="strong"
       className="min-h-[44rem]"
     >
       {artifact === null ? (

@@ -84,7 +84,7 @@
       "elementCount": 89
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalCorpusExplorer.tsx": {
-      "sha256": "4f208e31833d77f2b0bf15189e38e26ce3bf287a67d454c8f4747f5a80c692b1",
+      "sha256": "2e0bb8628d61cc91c4b58a13ca90eded780ce2d622c6de048c3e82d8be5064be",
       "elementCount": 37
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/learning/regions/EducationalProgress.tsx": {
@@ -108,7 +108,7 @@
       "elementCount": 10
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/canonical/CanonicalKnowledge.tsx": {
-      "sha256": "e636fc8bf57eb8a296dce24e99b189f6ebbacb87f4a8d75e153e69d7d0e7c02d",
+      "sha256": "8a4f92e71a46b756d5574cf423da4c3a9fd7147d935a25244a0fd5e9c63e475b",
       "elementCount": 147
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsule.tsx": {
@@ -124,7 +124,7 @@
       "elementCount": 50
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeCapsuleInspector.tsx": {
-      "sha256": "b7793253a6800bd0a747435ac26f6e8e30e60c38f5020c0cb606bd3722e5a8a1",
+      "sha256": "877aa560e796090e5ea87c4963402acbad9d313cdd08cd1004e1676bc8d368d0",
       "elementCount": 160
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/capsules/KnowledgeStationDetail.tsx": {
@@ -140,11 +140,11 @@
       "elementCount": 64
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/genealogy/KnowledgeGenealogy.tsx": {
-      "sha256": "744c9769b5c6caafbc646ca52b10de875f0c4056e289ee43bbc8c039a52dd792",
+      "sha256": "f702808e52d052479a968fb5f091d821b61231504373a083d0729169b54e8b1f",
       "elementCount": 73
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/governance/CanonicalReview.tsx": {
-      "sha256": "bd742d575159951239a20b9f0d0f20a8e7129122a3400c5b46c2e4a9fd760355",
+      "sha256": "640196bbb33c05708abe78245a315b670c50e38f483bb8f098c04107c0ab033d",
       "elementCount": 402
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/graph/ProductionKnowledgeGraph.tsx": {
@@ -152,15 +152,15 @@
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/impact/OrganizationalImpact.tsx": {
-      "sha256": "c3339fc7d13533fd6255a3a0cc4a8c35aa1ba418863364df0ee279e716697281",
+      "sha256": "e66ef1862a7ca0b48612dc8cedb44cd4729a14d887f3deb21ecd75a73614304b",
       "elementCount": 86
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/intelligence/ConsumerIntelligence.tsx": {
-      "sha256": "57544f2b662d3e014adde78fb7ea29ea8643e07d0bf1e8bd9855e30a076a26e4",
+      "sha256": "cefd8f211090c4bee4931238b5cf2c2549b75dd1c1615efd6488ac3d7e5cf211",
       "elementCount": 129
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/memory/OrganizationalMemory.tsx": {
-      "sha256": "2f1c87203af28b7ed9e6a97149343e5250e1a075cbc6e30f17f433b9ac797096",
+      "sha256": "dc45af45310ec1d0a42bc55c84b2306e26b98ef97df0688b8aea3be29e000366",
       "elementCount": 138
     },
     "apps/lumina-builder/src/components/workspaces/knowledge/production/regions/CompilerOperations.tsx": {

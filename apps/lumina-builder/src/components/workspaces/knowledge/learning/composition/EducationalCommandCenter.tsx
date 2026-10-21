@@ -162,7 +162,6 @@ export function EducationalCommandCenter() {
     <LuminaFlagshipPanel
       title="Executive Educational Dashboard"
       description="What has educated the Chief Agent, what is its current educational posture, and what remains before activation?"
-      emphasis="strong"
       className="h-full"
       toolbar={
         <div className="flex w-full flex-col items-stretch gap-2 xl:w-auto">
@@ -321,7 +320,6 @@ export function EducationalCommandCenter() {
               <LuminaFlagshipPanel
               title="Genesis Source Drill-down"
               description={`${visibleGenesisArtifacts.length} modeled sources in the selected corpus category`}
-              emphasis="strong"
             >
               <div
                 className="

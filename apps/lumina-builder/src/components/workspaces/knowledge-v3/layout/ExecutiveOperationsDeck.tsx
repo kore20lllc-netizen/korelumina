@@ -33,10 +33,7 @@ export function ExecutiveOperationsDeck() {
       )}>
       <div
         aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute inset-0",
-          gradients.executiveAmbient,
-        )}
+        className="pointer-events-none absolute inset-0"
       />
 
       <div

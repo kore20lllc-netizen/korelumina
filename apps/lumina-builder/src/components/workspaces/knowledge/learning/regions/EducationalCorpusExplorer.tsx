@@ -96,10 +96,7 @@ function FilterSelect({
         onChange={(event) => {
           onChange(event.target.value);
         }}
-        className={cn(
-          "w-full px-3 text-xs",
-          flagshipAppearance.control,
-        )}
+        className="w-full px-3 text-xs"
       >
         {options.map((option) => (
           <option
@@ -139,7 +136,6 @@ export function EducationalCorpusExplorer({
           Fixture curriculum
         </LuminaBadge>
       }
-      emphasis="strong"
     >
         <div
         className="

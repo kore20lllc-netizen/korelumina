@@ -207,7 +207,7 @@ export function EducationalStateSurface({
 
   return (
     <LuminaFlagshipPanel
-      emphasis="strong"
+      title={null}
       className="overflow-hidden"
     >
       <section

@@ -250,7 +250,7 @@ export function ConsumerIntelligence({
           </LuminaFlagshipPanel>
         }
         metricsRegion={
-          <LuminaExecutiveMetricGrid columns={2}>
+          <LuminaExecutiveMetricGrid>
         <LuminaExecutiveCard
           title="Active consumers"
           value={String(activeConsumers)}

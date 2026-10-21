@@ -217,7 +217,7 @@ export function CanonicalKnowledge({
           </LuminaFlagshipPanel>
         }
         metricsRegion={
-          <LuminaExecutiveMetricGrid columns={2}>
+          <LuminaExecutiveMetricGrid>
         <LuminaExecutiveCard
           title="Published capsules"
           value={projection.metrics.published}

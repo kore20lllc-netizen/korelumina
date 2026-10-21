@@ -190,7 +190,7 @@ export function OrganizationalMemory({
           </LuminaFlagshipPanel>
         }
         metricsRegion={
-          <LuminaExecutiveMetricGrid columns={2}>
+          <LuminaExecutiveMetricGrid>
         <LuminaExecutiveCard
           title="Active projections"
           value={projection.metrics.activeProjections}

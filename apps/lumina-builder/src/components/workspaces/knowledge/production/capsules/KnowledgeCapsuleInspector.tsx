@@ -150,7 +150,7 @@ function getCapsuleLifecycleEvents(
   const validationComplete =
     capsule.layers.every(
       (layer) =>
-        layer.status === "validated",
+        layer.status === "healthy",
     );
 
   const approvalComplete =
@@ -187,7 +187,7 @@ function getCapsuleLifecycleEvents(
       subtitle: `${validationComplete ? "All" : "Partial"} layers validated`,
       detail: validationComplete
         ? "Every governed knowledge layer passed validation."
-        : `${capsule.layers.filter((layer) => layer.status !== "validated").length} layer exception remains active.`,
+        : `${capsule.layers.filter((layer) => layer.status !== "healthy").length} layer exception remains active.`,
       state: validationComplete
         ? "complete"
         : capsule.stage.toLowerCase().includes("validation")
@@ -277,13 +277,13 @@ export function KnowledgeCapsuleInspector({
   const validationLayerCount =
     capsule.layers.filter(
       (layer) =>
-        layer.status === "validated",
+        layer.status === "healthy",
     ).length;
 
   const disputedLayerCount =
     capsule.layers.filter(
       (layer) =>
-        layer.status !== "validated",
+        layer.status !== "healthy",
     ).length;
 
   const lifecycleEvents =
@@ -291,6 +291,7 @@ export function KnowledgeCapsuleInspector({
 
   return (
     <LuminaFlagshipPanel
+      title={null}
       aria-label={`${capsule.identity} executive inspector`}
       className="overflow-hidden"
     >
@@ -375,7 +376,9 @@ export function KnowledgeCapsuleInspector({
           ariaLabel="Knowledge capsule inspector sections"
           tabIdPrefix="knowledge-inspector-tab"
           panelId="knowledge-inspector-tabpanel"
-          onChange={setActiveTab}
+          onChange={(tab) => {
+            if (tabs.some((entry) => entry.id === tab)) setActiveTab(tab as InspectorTab);
+          }}
           className="mt-6 pb-1"
         />
       </header>
@@ -413,7 +416,6 @@ export function KnowledgeCapsuleInspector({
         {activeTab === "lifecycle" ? (
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,.6fr)]">
             <LuminaFlagshipSurface
-              as={undefined}
               className="p-4"
             >
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/62">
@@ -567,7 +569,6 @@ export function KnowledgeCapsuleInspector({
         {activeTab === "provenance" ? (
           <div className="grid gap-4 lg:grid-cols-2">
             <LuminaFlagshipSurface
-              as={undefined}
               className="p-4"
             >
               <div className="flex items-center gap-3">
@@ -715,7 +716,7 @@ export function KnowledgeCapsuleInspector({
                     className={[
                       flagshipAppearance.inspectorDetailCard,
                       "rounded-[18px] p-4",
-                      layer.status === "validated"
+                      layer.status === "healthy"
                         ? "bg-emerald-300/[0.035]"
                         : "bg-rose-300/[0.035]",
                     ].join(" ")}
@@ -734,7 +735,7 @@ export function KnowledgeCapsuleInspector({
                       <div
                         className={[
                           flagshipAppearance.inspectorLayerStatusBadge,
-                          layer.status === "validated"
+                          layer.status === "healthy"
                             ? flagshipAppearance.inspectorLayerStatusTone.validated
                             : flagshipAppearance.inspectorLayerStatusTone.disputed,
                         ].join(" ")}
@@ -790,7 +791,6 @@ export function KnowledgeCapsuleInspector({
         {activeTab === "distribution" ? (
           <div className="grid gap-4 lg:grid-cols-2">
             <LuminaFlagshipSurface
-              as={undefined}
               className="p-4"
             >
               <div className="flex items-center gap-3">
@@ -922,7 +922,6 @@ export function KnowledgeCapsuleInspector({
             </LuminaFlagshipSurface>
 
             <LuminaFlagshipSurface
-              as={undefined}
               className="p-4"
             >
               <div className="flex items-center gap-3">
@@ -964,7 +963,6 @@ export function KnowledgeCapsuleInspector({
         {activeTab === "mission-impact" ? (
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
             <LuminaFlagshipSurface
-              as={undefined}
               className="p-4"
             >
               <div className="flex items-center gap-3">

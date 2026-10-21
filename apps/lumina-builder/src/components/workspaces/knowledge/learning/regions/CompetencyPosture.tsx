@@ -221,7 +221,6 @@ export function CompetencyPosture({
     <LuminaFlagshipPanel
       title="Initial Competency Posture"
       description={description}
-      emphasis="strong"
     >
       <div className="grid gap-3 p-4 md:grid-cols-2">
         {competencies.map((competency) => {

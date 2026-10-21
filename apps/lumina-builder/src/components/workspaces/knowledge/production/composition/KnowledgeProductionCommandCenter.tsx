@@ -305,6 +305,10 @@ export function KnowledgeProductionCommandCenter() {
           approved: 0,
           rejected: 0,
           remediationRequired: 0,
+          individual: 0,
+          batchCandidates: 0,
+          policyCandidates: 0,
+          blocked: 0,
         },
       }),
   );

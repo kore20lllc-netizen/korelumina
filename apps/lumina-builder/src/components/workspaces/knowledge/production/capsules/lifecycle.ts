@@ -1,5 +1,5 @@
 import type {
-  KnowledgeCapsuleModel,
+  KnowledgeCapsule,
 } from "./types";
 
 export const manufacturingStations = [
@@ -25,8 +25,8 @@ export type CapsuleFlowBranch = {
   parentCapsuleId: string;
   kind: "main" | "remediation";
   station: ManufacturingStation;
-  state: KnowledgeCapsuleModel["state"];
-  integrity: KnowledgeCapsuleModel["integrity"];
+  state: KnowledgeCapsule["state"];
+  integrity: KnowledgeCapsule["integrity"];
   layerIds: string[];
   mergeTarget?: ManufacturingStation;
   note?: string;

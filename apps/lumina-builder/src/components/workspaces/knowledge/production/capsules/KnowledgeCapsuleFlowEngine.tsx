@@ -46,7 +46,8 @@ import {
 } from "../../learning/presentation/flagshipAppearance";
 
 import type {
-  KnowledgeCapsuleModel,
+  /* Renamed in ./types; this file has its own KnowledgeCapsule component. */
+  KnowledgeCapsule as KnowledgeCapsuleModel,
 } from "./types";
 
 type KnowledgeCapsuleFlowEngineProps = {
@@ -142,9 +143,9 @@ export function KnowledgeCapsuleFlowEngine({
         (!filters.mission ||
           capsule.title === filters.mission ||
           capsule.mission === filters.mission) &&
+        /* Capsules carry no conversation; the filter matches by title. */
         (!filters.conversation ||
-          capsule.title === filters.conversation ||
-          capsule.conversation === filters.conversation) &&
+          capsule.title === filters.conversation) &&
         (!filters.compiler ||
           capsule.compiler === filters.compiler) &&
         (!filters.owner ||

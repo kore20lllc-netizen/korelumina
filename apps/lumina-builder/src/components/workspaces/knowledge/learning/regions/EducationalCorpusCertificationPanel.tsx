@@ -203,7 +203,6 @@ export function EducationalCorpusCertificationPanel() {
     <LuminaFlagshipPanel
       title="Educational Corpus Certification"
       description="Authoritative corpus preparation, exception review, constitutional coverage, and one human certification decision."
-      emphasis="strong"
       toolbar={
         <div className="flex items-center gap-2">
           {corpus && (

@@ -272,7 +272,6 @@ export function ActivationReadiness() {
           {posture.badge}
         </LuminaBadge>
       }
-      emphasis="strong"
     >
       <div className="grid gap-3 border-b border-cyan-300/14 p-4 sm:grid-cols-3">
         <LuminaFlagshipSurface

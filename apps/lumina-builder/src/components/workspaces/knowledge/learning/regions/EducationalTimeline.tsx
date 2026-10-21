@@ -60,7 +60,6 @@ export function EducationalTimeline({
     <LuminaFlagshipPanel
       title="Educational Timeline"
       description="Historical recovery • Corpus admission • Curriculum approval • Versioning • Supersession • Completion • Dependency resolution • Conversation chronology"
-      emphasis="strong"
       toolbar={
         <label className="block">
           <span className="sr-only">

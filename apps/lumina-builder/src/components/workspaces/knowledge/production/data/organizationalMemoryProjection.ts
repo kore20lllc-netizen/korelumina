@@ -708,6 +708,12 @@ export const emptyOrganizationalMemoryProjection =
     ok:
       true,
 
+    manufacturingRuns:
+      [],
+
+    manufacturingReplay:
+      null,
+
     packages:
       [],
 
@@ -718,6 +724,21 @@ export const emptyOrganizationalMemoryProjection =
       [],
 
     summary: {
+      manufacturingRuns:
+        0,
+
+      activeManufacturingRuns:
+        0,
+
+      blockedManufacturingRuns:
+        0,
+
+      failedManufacturingRuns:
+        0,
+
+      completedManufacturingRuns:
+        0,
+
       packages:
         0,
 
