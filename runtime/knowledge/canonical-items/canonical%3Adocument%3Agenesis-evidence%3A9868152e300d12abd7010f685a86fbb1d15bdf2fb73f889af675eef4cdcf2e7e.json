@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0028 — Knowledge capsule validation and Knowledge Operations type fixes",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:e6272a68c662ce44940b98ae23eb4d7c567b3bb7eaa5038556f697e61b1d44ed"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  },
+  "createdAt": 1792586294265,
+  "updatedAt": 1792586294265,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+    "checksum": "sha256:4e590d45ae5ac130a15fa36c42ee2d0d42ade7b2db07bedcf4ea6be481ba3db1",
+    "capturedAt": 1792586294226,
+    "observedAt": 1792584899000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+      "genesisManifestIndex": 6,
+      "genesisAdmissionIdentity": "genesis-admission:0107d7eecd433dfc3fb08ee748022686be75ea3f46a63e07affd61745a50a8f1",
+      "historicalSourceId": "genesis-source:document:derived:e6272a68c662ce44940b98ae23eb4d7c567b3bb7eaa5038556f697e61b1d44ed",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0028 — Knowledge capsule validation and Knowledge Operations type fixes",
+        "status": "Approved",
+        "approvalDate": "2026-10-21",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792586294231,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000086",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792586294233,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000086",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586294233,
+        "evidenceConsidered": [
+          "genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000086",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586294233,
+          "evidenceConsidered": [
+            "genesis-evidence:9868152e300d12abd7010f685a86fbb1d15bdf2fb73f889af675eef4cdcf2e7e"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792586294231
+        },
+        {
+          "state": "compiled",
+          "at": 1792586294231
+        },
+        {
+          "state": "validated",
+          "at": 1792586294231
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792586294231
+        },
+        {
+          "state": "approved",
+          "at": 1792586294233,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

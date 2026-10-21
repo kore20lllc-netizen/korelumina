@@ -1,0 +1,267 @@
+{
+  "id": "KP-2026-000082",
+  "type": "knowledge-package",
+  "version": 1,
+  "createdAt": 1792586293997,
+  "updatedAt": 1792586294042,
+  "data": {
+    "id": "KP-2026-000082",
+    "state": "canonical",
+    "sourceEvidenceRefs": [
+      "genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+    ],
+    "knowledgeItemIds": [
+      "document:genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+    ],
+    "items": [
+      {
+        "id": "document:genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff",
+        "candidateType": "CandidateArtifact",
+        "title": "LR-2026-0024 — Live executive recommendations from Runtime records",
+        "summary": "Approved documentation evidence.",
+        "confidence": 1,
+        "evidenceRefs": [
+          "genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+        ],
+        "proposedRelationships": {
+          "genesisHistoricalSource": [
+            "genesis-source:document:derived:bfda76219dd4b8dc63c81f25420f6787da5f3ec6508661bcd92180e00259c580"
+          ],
+          "genesisReplay": [
+            "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+          ],
+          "genesisManifest": [
+            "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+          ]
+        },
+        "extractedAt": 1792586293996,
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792586293996,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        },
+        "status": "approved",
+        "metadata": {
+          "source": "genesis-historical-replay",
+          "contentRef": "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+          "checksum": "sha256:5531bab8a6fdf0830dc9a0d5fc92bbee0f97141e7f2a491ef6512fc34f8d4907",
+          "capturedAt": 1792586293986,
+          "observedAt": 1792584899000,
+          "authorityClass": "learning",
+          "approvalState": "Approved",
+          "owner": "Founder, Kore20 LLC",
+          "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+          "version": "1.0",
+          "sourceLocation": "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+          "lineage": [],
+          "dependencies": [],
+          "documentClassification": "learning",
+          "originalMetadata": {
+            "genesisRepository": "kore20lllc-netizen/korelumina",
+            "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+            "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+            "genesisManifestIndex": 2,
+            "genesisAdmissionIdentity": "genesis-admission:08d18f53382cb2a01b4963403f2e8d7990421d6a33ff6289e24ab9bcadd023d9",
+            "historicalSourceId": "genesis-source:document:derived:bfda76219dd4b8dc63c81f25420f6787da5f3ec6508661bcd92180e00259c580",
+            "historicalTimestampSource": "git-last-change-time",
+            "authorityClass": "learning",
+            "approvalState": "Approved",
+            "owner": "Founder, Kore20 LLC",
+            "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+            "version": "1.0",
+            "sourceLocation": "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+            "documentClassification": "learning",
+            "discoveryMethod": "documentation-v1",
+            "sourceMetadata": {
+              "title": "LR-2026-0024 — Live executive recommendations from Runtime records",
+              "status": "Approved",
+              "approvalDate": "2026-10-20",
+              "documentClassification": "learning",
+              "sourceLocation": "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md"
+            }
+          },
+          "validation": {
+            "validator": "documentation-governance-validator",
+            "validatorVersion": "1.0.0",
+            "result": "passed",
+            "checkedAt": 1792586293996,
+            "issues": []
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "evidenceIds": [
+        "genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+      ],
+      "sourceLocations": [
+        "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md"
+      ],
+      "contentRefs": [
+        "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md"
+      ],
+      "sources": [
+        "genesis-historical-replay"
+      ]
+    },
+    "authority": "learning",
+    "approvalState": "approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "confidence": 1,
+    "dependencies": [],
+    "lineage": [],
+    "supersession": {
+      "supersedes": [],
+      "supersededBy": []
+    },
+    "destination": null,
+    "validationResults": [
+      {
+        "itemId": "document:genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff",
+        "status": "approved",
+        "confidence": 1,
+        "blocked": false,
+        "details": {
+          "validator": "documentation-governance-validator",
+          "validatorVersion": "1.0.0",
+          "result": "passed",
+          "checkedAt": 1792586293996,
+          "issues": []
+        }
+      }
+    ],
+    "compilerHistory": [
+      {
+        "itemId": "document:genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff",
+        "compiler": {
+          "compilerName": "documentation-compiler",
+          "compilerVersion": "1.0.0",
+          "evidenceSourceType": "document",
+          "extractedAt": 1792586293996,
+          "extractionMethod": "documentation-compiler",
+          "confidenceBasis": "direct-document-evidence"
+        }
+      }
+    ],
+    "lifecycleHistory": [
+      {
+        "state": "captured",
+        "at": 1792586293997
+      },
+      {
+        "state": "compiled",
+        "at": 1792586293997
+      },
+      {
+        "state": "validated",
+        "at": 1792586293997
+      },
+      {
+        "state": "awaiting_review",
+        "at": 1792586293997
+      },
+      {
+        "state": "approved",
+        "at": 1792586294002,
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      {
+        "state": "canonical",
+        "at": 1792586294042,
+        "reason": "governed_canonical_promotion"
+      }
+    ],
+    "remediation": {
+      "required": false,
+      "status": "not_required",
+      "blockedItemIds": [],
+      "updatedAt": 1792586293997
+    },
+    "createdAt": 1792586293997,
+    "updatedAt": 1792586294042,
+    "metadata": {
+      "sourceApprovalStates": [
+        "Approved"
+      ],
+      "canonicalReviewPolicy": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "authorizedBy": "human:founder",
+        "authorizedAt": 1792390602211,
+        "boundBy": "runtime:autonomous-governance",
+        "boundAt": 1792586294002
+      },
+      "review": {
+        "packageId": "KP-2026-000082",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586294002,
+        "evidenceConsidered": [
+          "genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000082",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586294002,
+          "evidenceConsidered": [
+            "genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "policyExecution": {
+        "policyId": "learning-records",
+        "policyVersion": "1.0",
+        "executedBy": "runtime:autonomous-governance",
+        "executedAt": 1792586294002,
+        "decision": "approved"
+      },
+      "policyExecutionHistory": [
+        {
+          "policyId": "learning-records",
+          "policyVersion": "1.0",
+          "executedBy": "runtime:autonomous-governance",
+          "executedAt": 1792586294002,
+          "packageIds": [
+            "KP-2026-000082"
+          ],
+          "evaluations": [
+            {
+              "packageId": "KP-2026-000082",
+              "eligible": true,
+              "compliant": true,
+              "blocked": false,
+              "exceptions": [],
+              "rules": {
+                "completeGovernanceIdentity": true,
+                "provenance": true,
+                "validationPassed": true,
+                "authorityCompatible": true,
+                "scopeCompatible": true,
+                "authorityExcluded": false
+              }
+            }
+          ],
+          "decision": "approved"
+        }
+      ],
+      "canonicalization": {
+        "canonicalizedAt": 1792586294042,
+        "canonicalItemIds": [
+          "canonical:document:genesis-evidence:d414408ba5b549aaf8791f44a380c222a5fc0d10fd6e7b9a1c2a55b1bbf64cff"
+        ]
+      }
+    }
+  }
+}

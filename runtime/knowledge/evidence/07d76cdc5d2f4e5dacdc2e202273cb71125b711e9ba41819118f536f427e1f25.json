@@ -1,0 +1,67 @@
+{
+  "id": "genesis-evidence:89e3e757619167cb42da45270ee38ff49a925ee0ff7f8b81f3aaeb94bf47478b",
+  "type": "commit",
+  "title": "The build compiles the shared packages from committed source",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792587137601,
+  "observedAt": 1792587012000,
+  "contentRef": "git:commit:08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+  "checksum": "sha256:2f34b499ca21c35cd7b8ffdfa0d3f19ddb27e44d1297fc1a632b05a46f19f627",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:34a1f0234d5c89594ea9d614c161cace2e404520f791378676e08048b630d430",
+    "genesisManifestId": "genesis-manifest:fd04418a47410763fc7343409c3b1afbf9eb27b3464c73c56c06c7017a02fda7",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:576a47a51abf6053ac0fe52954143ce36ee7440b2a3e4e159a90082cc98a2cf4",
+    "historicalSourceId": "genesis-source:commit:08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+      "parentShas": [
+        "8337a125a766ecd85bb76d779baebb09b28d935c"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792587012000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792587012000
+      },
+      "subject": "The build compiles the shared packages from committed source",
+      "body": "packages/platform-sdk/dist is ignored by git and nothing built it, so\nRuntime and Builder typechecked against whatever was on disk. The local\nbuild dated from 2026-08-16 and said healthScore: number | null, a source\nchange that was lost before commit while Runtime (18070a12) relies on it.\nA fresh clone failed with 121 Runtime type errors. The SDK source now\ndeclares the null it already ships, and npm run build runs\nbuild:packages before typechecking or building the apps.\n\nMission: MS-2026-0009\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "package.json",
+        "packages/platform-sdk/src/knowledge-operations/KnowledgeOperationsSnapshot.ts",
+        "packages/platform-sdk/src/knowledge/KnowledgeOperationsSnapshot.ts"
+      ],
+      "changedPathsByParent": {
+        "8337a125a766ecd85bb76d779baebb09b28d935c": [
+          "package.json",
+          "packages/platform-sdk/src/knowledge-operations/KnowledgeOperationsSnapshot.ts",
+          "packages/platform-sdk/src/knowledge/KnowledgeOperationsSnapshot.ts"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:08a1cba9eb6509be88f9fc9d56790a7bbfbf500f"
+    ],
+    "genesisReplay": [
+      "genesis-replay:34a1f0234d5c89594ea9d614c161cace2e404520f791378676e08048b630d430"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:fd04418a47410763fc7343409c3b1afbf9eb27b3464c73c56c06c7017a02fda7"
+    ]
+  }
+}

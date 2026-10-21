@@ -57,7 +57,7 @@
     ],
     "requiredDocuments": []
   },
-  "state": "knowledge_extracted",
+  "state": "archived",
   "blockedFrom": null,
   "linkedCommits": [
     {
@@ -146,10 +146,19 @@
       },
       "at": 1792584835475,
       "reason": "LR-2026-0018 is canonical"
+    },
+    {
+      "from": "knowledge_extracted",
+      "to": "archived",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792585554112
     }
   ],
   "createdAt": 1792473895276,
-  "updatedAt": 1792584835475,
+  "updatedAt": 1792585554112,
   "validation": {
     "evaluatedAt": 1792584835473,
     "checks": [

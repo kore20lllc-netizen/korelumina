@@ -1,0 +1,63 @@
+{
+  "id": "genesis-evidence:8eb1ca562e298e8d0e6f32d4e17ccda900741c4dec665c01da3004a5fd92200e",
+  "type": "commit",
+  "title": "The SDK loads under plain node",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792612524083,
+  "observedAt": 1792607961000,
+  "contentRef": "git:commit:1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+  "checksum": "sha256:1057e66c66c15ba3cbbd23a9984d34baca90843e8bddcc3e48492262d2283efa",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:486bd5cdfee5657c18512711d40908e418768ded5aee8f365c4dd42507ecc385",
+    "genesisManifestId": "genesis-manifest:2d8d063ac2c618a051f39d4e9cbb543785af4577000c8390cdbfeb67607e13cd",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:031a7df8976feb3c71fd56757ce23d019cf8ca46c81a3374cc58343ce1b6e62e",
+    "historicalSourceId": "genesis-source:commit:1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+      "parentShas": [
+        "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792607961000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792607961000
+      },
+      "subject": "The SDK loads under plain node",
+      "body": "Two exports in packages/platform-sdk had no .js extension since\ncad362c3. tsx resolves them, but node's ES module loader refuses\ndirectory and extensionless imports, so npm start (node dist/index.js)\ncould not load the SDK once it was built from source.\n\nMission: MS-2026-0009\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "packages/platform-sdk/src/index.ts",
+        "packages/platform-sdk/src/knowledge-operations/index.ts"
+      ],
+      "changedPathsByParent": {
+        "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f": [
+          "packages/platform-sdk/src/index.ts",
+          "packages/platform-sdk/src/knowledge-operations/index.ts"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:1e3a877c10ce6cb86eb2f1faf5476800c6943fdd"
+    ],
+    "genesisReplay": [
+      "genesis-replay:486bd5cdfee5657c18512711d40908e418768ded5aee8f365c4dd42507ecc385"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2d8d063ac2c618a051f39d4e9cbb543785af4577000c8390cdbfeb67607e13cd"
+    ]
+  }
+}

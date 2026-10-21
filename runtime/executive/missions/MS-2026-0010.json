@@ -1,0 +1,215 @@
+{
+  "id": "MS-2026-0010",
+  "title": "One full correlation copy: learning replays store only what they add",
+  "description": "Found as F-38 (MS-2026-0008). Owner decision 2026-10-21: keep 1. Every Learn now replay starts from the designated Day-0 replay's correlation (priorHistoricalCorrelation), adds its commits, and saves the whole result again: about 11.3 MB per learning window, 52 copies so far, about 440 MB, ignored by git. Old copies cannot simply be deleted: VerifiedGenesisHistoricalCorrelationResolver loads the correlation of the replay that admitted each item, so deleting one breaks verification of everything that replay admitted (verified_genesis_historical_correlation_state_not_found).",
+  "objective": "runtime-data keeps one full historical correlation, the designated replay's, and each learning replay stores only what it adds, while every admitted item still verifies.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Every canonical item admitted by a learning replay must verify the same before and after; this is checked item by item against the current stores before anything is deleted.",
+    "The designated Day-0 correlation is the base for everything; it is never rewritten or deleted.",
+    "Existing full copies are deleted only after the item-by-item check passes, with the owner's approval."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Store the difference",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "A learning replay saves only what it adds over its base replay",
+            "acceptanceCriteria": [
+              "The saved record names its base replay and holds only the sources, events, relationships and episodes it added",
+              "A full replay, Day-0 included, still saves a full correlation"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792612915982
+          },
+          {
+            "id": "E1.T2",
+            "title": "Loading a correlation rebuilds base plus additions",
+            "acceptanceCriteria": [
+              "Verification and the Executive Office read the same correlation as before",
+              "A missing base fails loudly instead of returning a partial correlation"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792612921905
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Migrate",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Existing learning copies are converted, then removed with approval",
+            "acceptanceCriteria": [
+              "Every item those replays admitted verifies before and after, checked one by one",
+              "runtime-data/genesis/historical-correlation keeps one full copy",
+              "The owner approves deleting the old full copies"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792612929995
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "npm run test:runtime passes",
+      "Learn now adds a small correlation record, not an 11 MB one",
+      "Every canonical item from a learning replay still verifies"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "completed",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+      "subject": "Learning replays store only what they add to their base correlation",
+      "committedAt": 1792607961000
+    },
+    {
+      "sha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+      "subject": "Convert existing full correlation copies to revision records",
+      "committedAt": 1792614731000
+    }
+  ],
+  "recoveryAnchor": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+  "producedKnowledge": [
+    "LR-2026-0032",
+    "LR-2026-0033"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792588106307
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792588106307
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792612843978
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792612846875
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615679803,
+      "reason": "First linked commit d7b67c4e: Learning replays store only what they add to their base correlation"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615679806,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615794290,
+      "reason": "All validation checks passed at f2fc156f"
+    }
+  ],
+  "createdAt": 1792588106307,
+  "updatedAt": 1792615794290,
+  "validation": {
+    "evaluatedAt": 1792615794290,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "3 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for f2fc156f, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor f2fc156f."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792615794288
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "genesis-evidence:9615ebcbfbc7bb9f5451619c5bf42e304c6799914af18da1d1b581d522c4929b",
+  "type": "commit",
+  "title": "Convert existing full correlation copies to revision records",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792615619118,
+  "observedAt": 1792614731000,
+  "contentRef": "git:commit:f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+  "checksum": "sha256:8530e11064e94e119fbf8928deaa3b3a4600a2a493b89d99798ed7831288a90c",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:4ecafa0e257570f725999f36b4d2b47bc2638206af844895c355668e73c67553",
+    "genesisManifestId": "genesis-manifest:2d52670d4354d7f7073743d73a84675b6c3255619cbcd85d108cd9de0291a483",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:a4bcd9874de3c35eded6847dfb8f6d4a0e771759ab10b5c10fae45722a7cbffd",
+    "historicalSourceId": "genesis-source:commit:f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+      "parentShas": [
+        "d7b67c4eb973bc6a248dd0e2ccc560314da1936e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792614731000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792614731000
+      },
+      "subject": "Convert existing full correlation copies to revision records",
+      "body": "npm run genesis:compact-correlations previews by default. With --write\nit converts each full copy that an earlier replay, integrated with what\nthe copy's replay materialized, reproduces exactly; the store checks\nthat again, every converted record is loaded back and compared, and the\noriginal is backed up first. The designated replay and copies with no\nreproducing base are never rewritten. Rehearsed on a copy of the owner's\nruntime-data: 41 converted, 496.5 MB to 51.4 MB, all 56 correlations\nload identically, and a second run converts nothing.\n\nMission: MS-2026-0010\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/package.json",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalCorrelationCompaction.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalCorrelationCompaction.test.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/cli/compactHistoricalCorrelations.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+        "package.json"
+      ],
+      "changedPathsByParent": {
+        "d7b67c4eb973bc6a248dd0e2ccc560314da1936e": [
+          "apps/lumina-runtime/package.json",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalCorrelationCompaction.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisHistoricalCorrelationCompaction.test.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/cli/compactHistoricalCorrelations.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/index.ts",
+          "package.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73"
+    ],
+    "genesisReplay": [
+      "genesis-replay:4ecafa0e257570f725999f36b4d2b47bc2638206af844895c355668e73c67553"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:2d52670d4354d7f7073743d73a84675b6c3255619cbcd85d108cd9de0291a483"
+    ]
+  }
+}

@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "c3c582f512370fefb9127a45028d8e013d89eb86",
-    "committedAt": 1792583574000,
-    "establishedAt": 1792584431538,
-    "basis": "Learning cycle learning-cycle:4a05123bc4b4f147"
+    "commit": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+    "committedAt": 1792614731000,
+    "establishedAt": 1792615679798,
+    "basis": "Learning cycle learning-cycle:d847be9ae8c2ac43"
   },
   "cycles": [
     {
@@ -1472,6 +1472,251 @@
         "state": "WRITTEN",
         "reasons": []
       }
+    },
+    {
+      "cycleId": "learning-cycle:71a8b5b53ad53a7d",
+      "trigger": "automatic",
+      "startedAt": 1792586213063,
+      "fromCommit": "c3c582f512370fefb9127a45028d8e013d89eb86",
+      "replayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "admittedSources": 10,
+      "completedAt": 1792586294429,
+      "toCommit": "cdc172bc1418ba62dc756647882d1bfdce22d74e",
+      "commits": [
+        {
+          "sha": "3149a4c787634df311a072be8d1e5f710c6b8e91",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792584899000,
+          "subject": "chore(learning): record learning LR-2026-0022..0028 and mission state"
+        },
+        {
+          "sha": "cdc172bc1418ba62dc756647882d1bfdce22d74e",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792585152000,
+          "subject": "chore(knowledge): record canonical promotions from the LR-2026-0022..0028 learning cycle"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": null,
+        "repositoryPath": null,
+        "keptStatements": null,
+        "removedStatements": null,
+        "model": null,
+        "attemptedAt": 1792586294429,
+        "attempts": 1,
+        "state": "SKIPPED",
+        "reasons": [
+          "only_learning_or_governance_bookkeeping_commits"
+        ]
+      }
+    },
+    {
+      "cycleId": "learning-cycle:b5b391a09e0e45b2",
+      "trigger": "automatic",
+      "startedAt": 1792586787185,
+      "fromCommit": "cdc172bc1418ba62dc756647882d1bfdce22d74e",
+      "replayId": "genesis-replay:17f456e917b9258cad4b7487ef99992e89032c83c72b29a32cf158dc5a87797c",
+      "admittedSources": 1,
+      "completedAt": 1792586852455,
+      "toCommit": "8337a125a766ecd85bb76d779baebb09b28d935c",
+      "commits": [
+        {
+          "sha": "8337a125a766ecd85bb76d779baebb09b28d935c",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792586578000,
+          "subject": "Runtime tests never write to runtime-data, and test:runtime enforces it",
+          "missions": [
+            "MS-2026-0008"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0030",
+        "repositoryPath": "docs/learning/LR-2026-0030-runtime-test-isolation-for-genesis-replay.md",
+        "keptStatements": 12,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792586852455,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0008",
+          "sha": "8337a125a766ecd85bb76d779baebb09b28d935c",
+          "result": "started"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:6de980c9cae114e1",
+      "trigger": "automatic",
+      "startedAt": 1792587074471,
+      "fromCommit": "8337a125a766ecd85bb76d779baebb09b28d935c",
+      "replayId": "genesis-replay:34a1f0234d5c89594ea9d614c161cace2e404520f791378676e08048b630d430",
+      "admittedSources": 1,
+      "completedAt": 1792587137667,
+      "toCommit": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+      "commits": [
+        {
+          "sha": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792587012000,
+          "subject": "The build compiles the shared packages from committed source",
+          "missions": [
+            "MS-2026-0009"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0031",
+        "repositoryPath": "docs/learning/LR-2026-0031-build-shared-packages-from-source.md",
+        "keptStatements": 10,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792587137668,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0009",
+          "sha": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:fc7a0871a1693562",
+      "trigger": "automatic",
+      "startedAt": 1792612462117,
+      "fromCommit": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+      "replayId": "genesis-replay:486bd5cdfee5657c18512711d40908e418768ded5aee8f365c4dd42507ecc385",
+      "admittedSources": 2,
+      "completedAt": 1792612524322,
+      "toCommit": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+      "commits": [
+        {
+          "sha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792607961000,
+          "subject": "The SDK loads under plain node",
+          "missions": [
+            "MS-2026-0009"
+          ]
+        },
+        {
+          "sha": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792607961000,
+          "subject": "Learning replays store only what they add to their base correlation",
+          "missions": [
+            "MS-2026-0010"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0032",
+        "repositoryPath": "docs/learning/LR-2026-0032-sdk-node-esm-fixes-and-compact-learning-replay-revisions.md",
+        "keptStatements": 19,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792612524323,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0009",
+          "sha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+          "result": "ignored",
+          "reason": "mission_planned"
+        },
+        {
+          "missionId": "MS-2026-0010",
+          "sha": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:d847be9ae8c2ac43",
+      "trigger": "automatic",
+      "startedAt": 1792615533387,
+      "fromCommit": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+      "replayId": "genesis-replay:4ecafa0e257570f725999f36b4d2b47bc2638206af844895c355668e73c67553",
+      "admittedSources": 1,
+      "completedAt": 1792615619405,
+      "toCommit": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+      "commits": [
+        {
+          "sha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792614731000,
+          "subject": "Convert existing full correlation copies to revision records",
+          "missions": [
+            "MS-2026-0010"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0033",
+        "repositoryPath": "docs/learning/LR-2026-0033-genesis-correlation-compaction.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792615619406,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0009",
+          "sha": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+          "result": "started",
+          "fromCycleId": "learning-cycle:6de980c9cae114e1"
+        },
+        {
+          "missionId": "MS-2026-0009",
+          "sha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+          "result": "linked",
+          "fromCycleId": "learning-cycle:fc7a0871a1693562"
+        },
+        {
+          "missionId": "MS-2026-0010",
+          "sha": "d7b67c4eb973bc6a248dd0e2ccc560314da1936e",
+          "result": "started",
+          "fromCycleId": "learning-cycle:fc7a0871a1693562"
+        },
+        {
+          "missionId": "MS-2026-0010",
+          "sha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+          "result": "linked"
+        }
+      ]
     }
   ]
 }

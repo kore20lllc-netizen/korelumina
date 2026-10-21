@@ -1,0 +1,71 @@
+{
+  "id": "genesis-evidence:504177839ab9cf89b3e1f37acc7f89a03443c2a229e40566718a2416aac2019d",
+  "type": "commit",
+  "title": "Runtime tests never write to runtime-data, and test:runtime enforces it",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792586852369,
+  "observedAt": 1792586578000,
+  "contentRef": "git:commit:8337a125a766ecd85bb76d779baebb09b28d935c",
+  "checksum": "sha256:26d648a8e938752610c65413cebd6b34281cbd005cc3c6a5b9f92b9450b2f649",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:17f456e917b9258cad4b7487ef99992e89032c83c72b29a32cf158dc5a87797c",
+    "genesisManifestId": "genesis-manifest:17806fd8f0ade24b0bdfa4333ead1e5920775cb9c59739f17c10fe507a49f619",
+    "genesisManifestIndex": 0,
+    "genesisAdmissionIdentity": "genesis-admission:f9e08646de3822d19e9b1676c7aba2c7e983f7f2a15c7edb982968975435fe34",
+    "historicalSourceId": "genesis-source:commit:8337a125a766ecd85bb76d779baebb09b28d935c",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:8337a125a766ecd85bb76d779baebb09b28d935c",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "8337a125a766ecd85bb76d779baebb09b28d935c",
+      "parentShas": [
+        "cdc172bc1418ba62dc756647882d1bfdce22d74e"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792586578000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792586578000
+      },
+      "subject": "Runtime tests never write to runtime-data, and test:runtime enforces it",
+      "body": "In PRODUCTION_ADMISSION the replay orchestrator saved the correlation\nthrough a store built with no root, so it rewrote two fixture\ncorrelations in the real runtime-data on every test run, even when the\ntest injected temporary replay storage. The orchestrator now takes the\ncorrelation store from its input, and a test that configures no root\ngets the F-25 isolated temporary root. All 1,580 Runtime tests were\nchecked: this was the only write outside temporary roots.\n\nnpm run test:runtime runs every Runtime test and fails if runtime-data\nor runtime/ changed during the run, by size and mtime, so a rewrite of\nan existing file is caught too.\n\nMission: MS-2026-0008\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01AHtXdN7VRusNxTFHzk5uFe",
+      "changedPaths": [
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalCorrelationPersistence.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+        "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayOrchestrator.test.ts",
+        "package.json",
+        "scripts/test-runtime.mjs"
+      ],
+      "changedPathsByParent": {
+        "cdc172bc1418ba62dc756647882d1bfdce22d74e": [
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisHistoricalCorrelationPersistence.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/GenesisReplayOrchestrator.ts",
+          "apps/lumina-runtime/src/knowledge-preservation/genesis/__tests__/GenesisReplayOrchestrator.test.ts",
+          "package.json",
+          "scripts/test-runtime.mjs"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:8337a125a766ecd85bb76d779baebb09b28d935c"
+    ],
+    "genesisReplay": [
+      "genesis-replay:17f456e917b9258cad4b7487ef99992e89032c83c72b29a32cf158dc5a87797c"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:17806fd8f0ade24b0bdfa4333ead1e5920775cb9c59739f17c10fe507a49f619"
+    ]
+  }
+}

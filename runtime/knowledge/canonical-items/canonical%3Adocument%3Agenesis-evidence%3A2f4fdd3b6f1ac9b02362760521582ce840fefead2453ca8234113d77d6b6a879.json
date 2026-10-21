@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0029 — Builder build now enforces TypeScript typecheck",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:c3a0a578e4159c94a5755e40b5f47e7f93a67289440a75dde8d6dcc1b221ca9b"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  },
+  "createdAt": 1792586294316,
+  "updatedAt": 1792586294316,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+    "checksum": "sha256:58a35b33476643510e9f0a5fbf33e494b86abe3bd720d7b20fed4dd0ad6dcf62",
+    "capturedAt": 1792586294276,
+    "observedAt": 1792584899000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+      "genesisManifestIndex": 7,
+      "genesisAdmissionIdentity": "genesis-admission:8752a7c66555978063ab2f9928997cfc879e1e42da1ea0aef8d33fd55835274c",
+      "historicalSourceId": "genesis-source:document:derived:c3a0a578e4159c94a5755e40b5f47e7f93a67289440a75dde8d6dcc1b221ca9b",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0029 — Builder build now enforces TypeScript typecheck",
+        "status": "Approved",
+        "approvalDate": "2026-10-21",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792586294281,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000087",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792586294284,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000087",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586294284,
+        "evidenceConsidered": [
+          "genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000087",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586294284,
+          "evidenceConsidered": [
+            "genesis-evidence:2f4fdd3b6f1ac9b02362760521582ce840fefead2453ca8234113d77d6b6a879"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792586294282
+        },
+        {
+          "state": "compiled",
+          "at": 1792586294282
+        },
+        {
+          "state": "validated",
+          "at": 1792586294282
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792586294282
+        },
+        {
+          "state": "approved",
+          "at": 1792586294284,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

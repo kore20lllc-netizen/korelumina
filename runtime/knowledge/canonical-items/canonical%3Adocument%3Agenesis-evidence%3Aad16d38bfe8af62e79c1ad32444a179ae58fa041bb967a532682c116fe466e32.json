@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0026 — Lumina Builder Typecheck Enablement and Runtime Bug Fixes",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:ae895510943e72661ec753e39ed89b508fa5d12c8c8b736b5a39c29f62883f37"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  },
+  "createdAt": 1792586294158,
+  "updatedAt": 1792586294158,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+    "checksum": "sha256:635eedaabea7bff73b497754cec3e45f7f83adcd46bf18203d5908e8d2f6d2a4",
+    "capturedAt": 1792586294114,
+    "observedAt": 1792584899000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+      "genesisManifestIndex": 4,
+      "genesisAdmissionIdentity": "genesis-admission:c063848228c1410f3c6d627b3389d5bf83173e19063581b40b94541fb12a2bc8",
+      "historicalSourceId": "genesis-source:document:derived:ae895510943e72661ec753e39ed89b508fa5d12c8c8b736b5a39c29f62883f37",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0026 — Lumina Builder Typecheck Enablement and Runtime Bug Fixes",
+        "status": "Approved",
+        "approvalDate": "2026-10-21",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792586294120,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000084",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792586294122,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000084",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586294122,
+        "evidenceConsidered": [
+          "genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000084",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586294122,
+          "evidenceConsidered": [
+            "genesis-evidence:ad16d38bfe8af62e79c1ad32444a179ae58fa041bb967a532682c116fe466e32"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792586294121
+        },
+        {
+          "state": "compiled",
+          "at": 1792586294121
+        },
+        {
+          "state": "validated",
+          "at": 1792586294121
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792586294121
+        },
+        {
+          "state": "approved",
+          "at": 1792586294122,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

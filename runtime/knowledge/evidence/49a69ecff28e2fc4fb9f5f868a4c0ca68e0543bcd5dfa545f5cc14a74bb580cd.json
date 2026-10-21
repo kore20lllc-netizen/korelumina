@@ -1,0 +1,115 @@
+{
+  "id": "genesis-evidence:be5c526b2aec574a15d74ef04906809708f018690acae14edf774e35ec926400",
+  "type": "commit",
+  "title": "chore(knowledge): record canonical promotions from the LR-2026-0022..0028 learning cycle",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792586294333,
+  "observedAt": 1792585152000,
+  "contentRef": "git:commit:cdc172bc1418ba62dc756647882d1bfdce22d74e",
+  "checksum": "sha256:b58d373173c96b29f1c10710befd880c51104b101374d3a0d6fdf0d87b7288d4",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+    "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+    "genesisManifestIndex": 9,
+    "genesisAdmissionIdentity": "genesis-admission:deeed6e436963bdd4de2b0bf6fa53266333a4257014a765a730b5b60f6153f2f",
+    "historicalSourceId": "genesis-source:commit:cdc172bc1418ba62dc756647882d1bfdce22d74e",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:cdc172bc1418ba62dc756647882d1bfdce22d74e",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "cdc172bc1418ba62dc756647882d1bfdce22d74e",
+      "parentShas": [
+        "3149a4c787634df311a072be8d1e5f710c6b8e91"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792585152000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792585152000
+      },
+      "subject": "chore(knowledge): record canonical promotions from the LR-2026-0022..0028 learning cycle",
+      "body": "",
+      "changedPaths": [
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A2c6042926169edf0818baec5e5646024a73eff074b00b004a7a97072d3919626.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A72a3e0ade74371cf93b1e78396e12c84a87beba34b6fc4390ade6907b687ce2d.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A994c5dd4b529fa36c29ca5d76b36e40b4d961c8205957d7c85b010a328c290e3.json",
+        "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Afdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece.json",
+        "runtime/knowledge/evidence/431c6456db3cc10611ed9c4e288eb13906a35dcba3328cdb53e15d66caa56187.json",
+        "runtime/knowledge/evidence/455000fd073e8bfdd42bbd4877b3186453e70d766f803116d9633ccd12a61af1.json",
+        "runtime/knowledge/evidence/7e509460fc701b14a1a2a1e0bbdcb3f352a58f097c222ba51e510e2f0a934c5b.json",
+        "runtime/knowledge/evidence/84e50ee9ae91eabeb7e5b83442102905f863a1165170f3b78dff5d8c36037541.json",
+        "runtime/knowledge/evidence/a0e4e8ce852473348157ed4c0d69b64244abe07f4535530124a64a0282c61097.json",
+        "runtime/knowledge/evidence/ba6a2b7d7838e0f5e72c09f00efd1afc973f84faaf131fc1c1677cabb9cb0263.json",
+        "runtime/knowledge/evidence/baa8f4723cb83c0aa995ef5efe84365b8df93028276afbe211d522d1f103423b.json",
+        "runtime/knowledge/evidence/bc300b4f73f4dfcbfabad695d64f6d03dda6ace2233b1bc0a1ff49d482047b5b.json",
+        "runtime/knowledge/evidence/cdf140ced0fd18dd28841cf6a261ca9caa4a16430910fcd848042b6c6addb8bf.json",
+        "runtime/knowledge/evidence/cec6424cfed40e000d560d3ae77565a6953f5d8b9707fc66e08f6d6ea065305d.json",
+        "runtime/knowledge/evidence/d88657ee8e7e2837332ddce35423783182063ff48b3cafe2545889e2f2febd63.json",
+        "runtime/knowledge/evidence/f4017306d7c9ac71968406c82c8bfd9159701a0f56d3bd10afe7b2bfe83e7b5d.json",
+        "runtime/knowledge/manufacturing-runs/KMR-0242a5c6fd48872c6017.json",
+        "runtime/knowledge/manufacturing-runs/KMR-1e450d43aba9df247b94.json",
+        "runtime/knowledge/manufacturing-runs/KMR-2614a98502cbbb8c494c.json",
+        "runtime/knowledge/manufacturing-runs/KMR-3f7c0d0951044a875ef1.json",
+        "runtime/knowledge/manufacturing-runs/KMR-d3b071a219380fecdf65.json",
+        "runtime/knowledge/packages/KP-2026-000075.json",
+        "runtime/knowledge/packages/KP-2026-000076.json",
+        "runtime/knowledge/packages/KP-2026-000077.json",
+        "runtime/knowledge/packages/KP-2026-000078.json",
+        "runtime/knowledge/packages/KP-2026-000079.json"
+      ],
+      "changedPathsByParent": {
+        "3149a4c787634df311a072be8d1e5f710c6b8e91": [
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A2436f51eb0166a8075bbc09113445fd95f6e7df4648f05364d073a2a20070709.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A2c6042926169edf0818baec5e5646024a73eff074b00b004a7a97072d3919626.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A72a3e0ade74371cf93b1e78396e12c84a87beba34b6fc4390ade6907b687ce2d.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3A994c5dd4b529fa36c29ca5d76b36e40b4d961c8205957d7c85b010a328c290e3.json",
+          "runtime/knowledge/canonical-items/canonical%3Adocument%3Agenesis-evidence%3Afdbdafcc04e9204bd36a627508570b380c9078fd8629be81e28eba8fb0154ece.json",
+          "runtime/knowledge/evidence/431c6456db3cc10611ed9c4e288eb13906a35dcba3328cdb53e15d66caa56187.json",
+          "runtime/knowledge/evidence/455000fd073e8bfdd42bbd4877b3186453e70d766f803116d9633ccd12a61af1.json",
+          "runtime/knowledge/evidence/7e509460fc701b14a1a2a1e0bbdcb3f352a58f097c222ba51e510e2f0a934c5b.json",
+          "runtime/knowledge/evidence/84e50ee9ae91eabeb7e5b83442102905f863a1165170f3b78dff5d8c36037541.json",
+          "runtime/knowledge/evidence/a0e4e8ce852473348157ed4c0d69b64244abe07f4535530124a64a0282c61097.json",
+          "runtime/knowledge/evidence/ba6a2b7d7838e0f5e72c09f00efd1afc973f84faaf131fc1c1677cabb9cb0263.json",
+          "runtime/knowledge/evidence/baa8f4723cb83c0aa995ef5efe84365b8df93028276afbe211d522d1f103423b.json",
+          "runtime/knowledge/evidence/bc300b4f73f4dfcbfabad695d64f6d03dda6ace2233b1bc0a1ff49d482047b5b.json",
+          "runtime/knowledge/evidence/cdf140ced0fd18dd28841cf6a261ca9caa4a16430910fcd848042b6c6addb8bf.json",
+          "runtime/knowledge/evidence/cec6424cfed40e000d560d3ae77565a6953f5d8b9707fc66e08f6d6ea065305d.json",
+          "runtime/knowledge/evidence/d88657ee8e7e2837332ddce35423783182063ff48b3cafe2545889e2f2febd63.json",
+          "runtime/knowledge/evidence/f4017306d7c9ac71968406c82c8bfd9159701a0f56d3bd10afe7b2bfe83e7b5d.json",
+          "runtime/knowledge/manufacturing-runs/KMR-0242a5c6fd48872c6017.json",
+          "runtime/knowledge/manufacturing-runs/KMR-1e450d43aba9df247b94.json",
+          "runtime/knowledge/manufacturing-runs/KMR-2614a98502cbbb8c494c.json",
+          "runtime/knowledge/manufacturing-runs/KMR-3f7c0d0951044a875ef1.json",
+          "runtime/knowledge/manufacturing-runs/KMR-d3b071a219380fecdf65.json",
+          "runtime/knowledge/packages/KP-2026-000075.json",
+          "runtime/knowledge/packages/KP-2026-000076.json",
+          "runtime/knowledge/packages/KP-2026-000077.json",
+          "runtime/knowledge/packages/KP-2026-000078.json",
+          "runtime/knowledge/packages/KP-2026-000079.json"
+        ]
+      },
+      "directRefs": [
+        "refs/heads/ko-2a/authority-resolution-history"
+      ],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:cdc172bc1418ba62dc756647882d1bfdce22d74e"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  }
+}

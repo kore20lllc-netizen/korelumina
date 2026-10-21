@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0023 — Chief Agent suspend/resume and Runtime-backed dashboard health",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:fe632a13813ee588fce207c18bb562b4c0f8a93d303faa8edc325e354f99aff0"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  },
+  "createdAt": 1792586293966,
+  "updatedAt": 1792586293966,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+    "checksum": "sha256:e3ed010803aa84a766948f909fe44f333e3c7b1665f472b726670a58895034c5",
+    "capturedAt": 1792586293923,
+    "observedAt": 1792584899000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+      "genesisManifestIndex": 1,
+      "genesisAdmissionIdentity": "genesis-admission:bfcfa1d30596d10510999414b383044a323cd8e364c123dbf96d45062a644a4d",
+      "historicalSourceId": "genesis-source:document:derived:fe632a13813ee588fce207c18bb562b4c0f8a93d303faa8edc325e354f99aff0",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0023 — Chief Agent suspend/resume and Runtime-backed dashboard health",
+        "status": "Approved",
+        "approvalDate": "2026-10-20",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792586293930,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000081",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792586293932,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000081",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586293932,
+        "evidenceConsidered": [
+          "genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000081",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586293932,
+          "evidenceConsidered": [
+            "genesis-evidence:2503391a9a720718d503bf52e17db605aee9455f1e446c1d0f34290bf752aa4d"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792586293930
+        },
+        {
+          "state": "compiled",
+          "at": 1792586293930
+        },
+        {
+          "state": "validated",
+          "at": 1792586293930
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792586293930
+        },
+        {
+          "state": "approved",
+          "at": 1792586293932,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

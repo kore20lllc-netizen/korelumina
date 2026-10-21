@@ -149,7 +149,7 @@
     "validationPlan": [],
     "requiredDocuments": []
   },
-  "state": "cancelled",
+  "state": "archived",
   "blockedFrom": null,
   "linkedCommits": [],
   "recoveryAnchor": null,
@@ -220,8 +220,17 @@
       },
       "at": 1792499892734,
       "reason": "not ready yet"
+    },
+    {
+      "from": "cancelled",
+      "to": "archived",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792586852823
     }
   ],
   "createdAt": 1792465977431,
-  "updatedAt": 1792499892734
+  "updatedAt": 1792586852823
 }

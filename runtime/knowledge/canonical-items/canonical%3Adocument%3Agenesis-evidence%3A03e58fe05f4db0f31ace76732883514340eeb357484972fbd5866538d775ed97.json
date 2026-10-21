@@ -1,0 +1,154 @@
+{
+  "id": "canonical:document:genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97",
+  "type": "CandidateArtifact",
+  "title": "LR-2026-0025 — Executive critical notification acknowledgements",
+  "summary": "Approved documentation evidence.",
+  "confidence": 1,
+  "evidenceRefs": [
+    "genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97"
+  ],
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:document:derived:848e10c75efd40e6902aede8ecebf88603b9f5173647fa027c60ad640a2e6641"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  },
+  "createdAt": 1792586294095,
+  "updatedAt": 1792586294095,
+  "status": "canonical",
+  "metadata": {
+    "source": "genesis-historical-replay",
+    "contentRef": "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+    "checksum": "sha256:dcb3ab705c17a9b73fc1a4a588986ddc3b9771fceb017ece8db82abe364dde5b",
+    "capturedAt": 1792586294053,
+    "observedAt": 1792584899000,
+    "authorityClass": "learning",
+    "approvalState": "Approved",
+    "owner": "Founder, Kore20 LLC",
+    "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+    "version": "1.0",
+    "sourceLocation": "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+    "lineage": [],
+    "dependencies": [],
+    "documentClassification": "learning",
+    "originalMetadata": {
+      "genesisRepository": "kore20lllc-netizen/korelumina",
+      "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+      "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+      "genesisManifestIndex": 3,
+      "genesisAdmissionIdentity": "genesis-admission:4ba612d034efdc8127e5e289650a2b586c2ff17dbcf5f2675a877c6db4bf62f7",
+      "historicalSourceId": "genesis-source:document:derived:848e10c75efd40e6902aede8ecebf88603b9f5173647fa027c60ad640a2e6641",
+      "historicalTimestampSource": "git-last-change-time",
+      "authorityClass": "learning",
+      "approvalState": "Approved",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "version": "1.0",
+      "sourceLocation": "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+      "documentClassification": "learning",
+      "discoveryMethod": "documentation-v1",
+      "sourceMetadata": {
+        "title": "LR-2026-0025 — Executive critical notification acknowledgements",
+        "status": "Approved",
+        "approvalDate": "2026-10-21",
+        "documentClassification": "learning",
+        "sourceLocation": "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md"
+      }
+    },
+    "validation": {
+      "validator": "documentation-governance-validator",
+      "validatorVersion": "1.0.0",
+      "result": "passed",
+      "checkedAt": 1792586294062,
+      "issues": []
+    },
+    "governance": {
+      "packageId": "KP-2026-000083",
+      "packageVersion": "1.0",
+      "authority": "learning",
+      "owner": "Founder, Kore20 LLC",
+      "scope": "What the Chief Agent learned from owner-approved engineering work in this window. Learning authority: subordinate to Canon, Constitution, Blueprint, governance, business, and domain knowledge.",
+      "destination": null,
+      "sourceEvidenceRefs": [
+        "genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97"
+      ],
+      "provenance": {
+        "evidenceIds": [
+          "genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97"
+        ],
+        "sourceLocations": [
+          "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md"
+        ],
+        "contentRefs": [
+          "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md"
+        ],
+        "sources": [
+          "genesis-historical-replay"
+        ]
+      },
+      "lineage": [],
+      "dependencies": [],
+      "reviewDecision": "approved",
+      "reviewerId": "human:founder",
+      "reviewedAt": 1792586294064,
+      "reviewReason": "governed-policy-execution:learning-records@1.0",
+      "approvalState": "approved",
+      "reviewEvidence": {
+        "packageId": "KP-2026-000083",
+        "packageVersion": "1.0",
+        "decision": "approved",
+        "reviewerId": "human:founder",
+        "reviewedAt": 1792586294064,
+        "evidenceConsidered": [
+          "genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97"
+        ],
+        "reason": "governed-policy-execution:learning-records@1.0"
+      },
+      "reviewHistory": [
+        {
+          "packageId": "KP-2026-000083",
+          "packageVersion": "1.0",
+          "decision": "approved",
+          "reviewerId": "human:founder",
+          "reviewedAt": 1792586294064,
+          "evidenceConsidered": [
+            "genesis-evidence:03e58fe05f4db0f31ace76732883514340eeb357484972fbd5866538d775ed97"
+          ],
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "lifecycleHistory": [
+        {
+          "state": "captured",
+          "at": 1792586294062
+        },
+        {
+          "state": "compiled",
+          "at": 1792586294062
+        },
+        {
+          "state": "validated",
+          "at": 1792586294062
+        },
+        {
+          "state": "awaiting_review",
+          "at": 1792586294062
+        },
+        {
+          "state": "approved",
+          "at": 1792586294064,
+          "reason": "governed-policy-execution:learning-records@1.0"
+        }
+      ],
+      "supersession": {
+        "supersedes": [],
+        "supersededBy": []
+      }
+    }
+  }
+}

@@ -87,9 +87,9 @@
             "acceptanceCriteria": [
               "Open tickets become missions"
             ],
-            "status": "todo",
+            "status": "done",
             "updatedBy": "human:founder",
-            "updatedAt": 1792500096037
+            "updatedAt": 1792612902486
           }
         ]
       }
@@ -102,7 +102,7 @@
       "docs/adr/ADR-0044-mission-system-v1.md"
     ]
   },
-  "state": "validating",
+  "state": "knowledge_extracted",
   "blockedFrom": null,
   "linkedCommits": [
     {
@@ -204,18 +204,38 @@
       },
       "at": 1792471839694,
       "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792612902488,
+      "reason": "All validation checks passed at 39bd41f8"
+    },
+    {
+      "from": "completed",
+      "to": "knowledge_extracted",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792612902524,
+      "reason": "LR-2026-0014 is canonical"
     }
   ],
   "createdAt": 1792464087272,
-  "updatedAt": 1792584847283,
+  "updatedAt": 1792612902524,
   "validation": {
-    "evaluatedAt": 1792584847283,
+    "evaluatedAt": 1792612902488,
     "checks": [
       {
         "id": "tasks",
         "label": "Every planned task is done or dropped",
-        "passed": false,
-        "detail": "1 of 6 still to do: E2.T2."
+        "passed": true,
+        "detail": "5 done, 1 dropped."
       },
       {
         "id": "build",
@@ -271,6 +291,20 @@
       "result": "passed",
       "actor": "human:founder",
       "at": 1792584847282
+    },
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792587726377
+    },
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792612785735
     }
   ]
 }

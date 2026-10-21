@@ -1,0 +1,195 @@
+{
+  "id": "MS-2026-0009",
+  "title": "The build compiles the shared packages from committed source",
+  "description": "Found as F-37 (MS-2026-0008). packages/platform-sdk/dist is ignored by git and no script builds it. Runtime and Builder typecheck against whatever dist is on disk. The owner's dist was built on 2026-08-16 from a source that said healthScore: number | null; the source was then put back to number and that was never committed, while Runtime commit 18070a12 sets healthScore: null. So the owner's build passes, and a fresh clone fails with 121 Runtime type errors (the SDK cannot be resolved), and 1 once it is built from committed source. knowledge-platform's dist matches its source.",
+  "objective": "npm run build on a fresh clone builds the shared packages from committed source, and Runtime and Builder typecheck against them.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The rebuilt SDK must produce the same types the owner's build has today, so Runtime and Builder behaviour does not change.",
+    "npm run dev on a fresh clone still needs npm run build:packages first."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Build from source",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "The SDK source says healthScore may be null",
+            "acceptanceCriteria": [
+              "Both KnowledgeOperationsSnapshot sources declare healthScore: number | null",
+              "The rebuilt declarations match the owner's current build"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792612937560
+          },
+          {
+            "id": "E1.T2",
+            "title": "npm run build compiles the shared packages first",
+            "acceptanceCriteria": [
+              "build:packages builds platform-sdk and knowledge-platform before typecheck:builder and build:runtime",
+              "With no dist folders, npm run build succeeds"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792612908880
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "With packages/*/dist removed, npm run build passes",
+      "npm run test:runtime passes"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "completed",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "08a1cba9eb6509be88f9fc9d56790a7bbfbf500f",
+      "subject": "The build compiles the shared packages from committed source",
+      "committedAt": 1792587012000
+    },
+    {
+      "sha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+      "subject": "The SDK loads under plain node",
+      "committedAt": 1792607961000
+    }
+  ],
+  "recoveryAnchor": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+  "producedKnowledge": [
+    "LR-2026-0031",
+    "LR-2026-0032"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792586978744
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792586978744
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792612864438
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792612866204
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615679801,
+      "reason": "First linked commit 08a1cba9: The build compiles the shared packages from committed source"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615679806,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792615792399,
+      "reason": "All validation checks passed at 1e3a877c"
+    }
+  ],
+  "createdAt": 1792586978744,
+  "updatedAt": 1792615792399,
+  "validation": {
+    "evaluatedAt": 1792615792399,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "2 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 1e3a877c, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 1e3a877c."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "1e3a877c10ce6cb86eb2f1faf5476800c6943fdd",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792615792398
+    }
+  ]
+}

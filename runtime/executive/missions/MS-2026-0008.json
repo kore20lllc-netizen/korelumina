@@ -1,0 +1,225 @@
+{
+  "id": "MS-2026-0008",
+  "title": "Tests never write to runtime-data",
+  "description": "Found as F-35. runtime-data/genesis/historical-correlation holds 54 folders (442 MB), 30 of them from the last five days, and runtime-data/genesis/replays grew on the same days. Cause found: in PRODUCTION_ADMISSION, runGovernedGenesisReplay (GenesisReplayOrchestrator.ts, about line 524) saves the correlation through new FileGenesisHistoricalCorrelationPersistenceStore() with no root, so it writes to the real runtime-data even when the caller injected a temporary persistenceStore. Knowledge storage already isolates tests (resolveKnowledgeStorageRoot, isolatedTestStorageRoot); runtime-data/test-knowledge (7.5 MB) is left over from before that and stopped growing on 2026-09-01.",
+  "objective": "Running any Runtime test suite leaves runtime-data unchanged, and the test run fails if it does not.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The designated Day-0 replay (runtime-replay-designation.json) and its correlation are real records; they must survive any cleanup.",
+    "Deleting test leftovers from runtime-data needs the owner's separate approval, listed folder by folder.",
+    "Changing default storage roots must not move where the running Runtime reads or writes."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Isolate",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "The replay's correlation save uses the caller's storage, and a test-isolated default",
+            "acceptanceCriteria": [
+              "runGovernedGenesisReplay takes the correlation store from its input, or derives it from the injected persistence store",
+              "Under tests, FileGenesisHistoricalCorrelationPersistenceStore defaults to an isolated temporary root, as knowledge storage does",
+              "The running Runtime still writes to runtime-data/genesis/historical-correlation"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792587202736
+          },
+          {
+            "id": "E1.T2",
+            "title": "Every other test write to runtime-data is found and isolated",
+            "acceptanceCriteria": [
+              "Each writer that defaults to getRuntimeDataRoot is listed with the tests that reach it",
+              "The writer behind the recent runtime-data/genesis/replays folders is named and isolated"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792587211197
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Guard",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "The Runtime test run fails if runtime-data changes",
+            "acceptanceCriteria": [
+              "A file listing of runtime-data is compared before and after the suites",
+              "A deliberately leaking test makes the run fail"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792587216541
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Clean up",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "List which runtime-data replay and correlation folders are real",
+            "acceptanceCriteria": [
+              "Each folder is matched to a replay record, the designation, or a test run",
+              "The owner approves deletion of the test leftovers, test-knowledge included"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792587226296
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass and leave runtime-data unchanged",
+      "The Day-0 designated replay still loads in the Executive Office"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "completed",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "8337a125a766ecd85bb76d779baebb09b28d935c",
+      "subject": "Runtime tests never write to runtime-data, and test:runtime enforces it",
+      "committedAt": 1792586578000
+    }
+  ],
+  "recoveryAnchor": "8337a125a766ecd85bb76d779baebb09b28d935c",
+  "producedKnowledge": [
+    "LR-2026-0030"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792585369518
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792585369518
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792585529934
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792585533506
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792586869624,
+      "reason": "First linked commit 8337a125: Runtime tests never write to runtime-data, and test:runtime enforces it"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792587226297,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792587721460,
+      "reason": "All validation checks passed at 8337a125"
+    }
+  ],
+  "createdAt": 1792585369518,
+  "updatedAt": 1792587721460,
+  "validation": {
+    "evaluatedAt": 1792587721460,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "4 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 8337a125, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 8337a125."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "8337a125a766ecd85bb76d779baebb09b28d935c",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792587721458
+    }
+  ]
+}

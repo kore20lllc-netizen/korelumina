@@ -1,0 +1,91 @@
+{
+  "id": "genesis-evidence:b3f427a4d91597938bb86e65afb5e632e7c3135732c8e097676a35be548f52c9",
+  "type": "commit",
+  "title": "chore(learning): record learning LR-2026-0022..0028 and mission state",
+  "source": "genesis-historical-replay",
+  "capturedAt": 1792586294327,
+  "observedAt": 1792584899000,
+  "contentRef": "git:commit:3149a4c787634df311a072be8d1e5f710c6b8e91",
+  "checksum": "sha256:dfc4e0f773538e209d67f94bc12d790d46d001e2fc9ef0c2df1ff7d9712d7da2",
+  "metadata": {
+    "genesisRepository": "kore20lllc-netizen/korelumina",
+    "genesisReplayId": "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439",
+    "genesisManifestId": "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5",
+    "genesisManifestIndex": 8,
+    "genesisAdmissionIdentity": "genesis-admission:fda5e8b98160f390611b624c7ee2ccd1ac83cf09eada3dc0b717ed7e7debf246",
+    "historicalSourceId": "genesis-source:commit:3149a4c787634df311a072be8d1e5f710c6b8e91",
+    "historicalTimestampSource": "git-committer-time",
+    "authorityClass": "repository-history",
+    "sourceLocation": "git:commit:3149a4c787634df311a072be8d1e5f710c6b8e91",
+    "discoveryMethod": "git-history-v1",
+    "sourceMetadata": {
+      "commitSha": "3149a4c787634df311a072be8d1e5f710c6b8e91",
+      "parentShas": [
+        "c3c582f512370fefb9127a45028d8e013d89eb86"
+      ],
+      "author": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792584899000
+      },
+      "committer": {
+        "name": "kore20lllc-netizen",
+        "email": "kore20lllc@gmail.com",
+        "timestamp": 1792584899000
+      },
+      "subject": "chore(learning): record learning LR-2026-0022..0028 and mission state",
+      "body": "",
+      "changedPaths": [
+        "docs/learning/LR-2026-0022-backfill-mission-links-after-approval.md",
+        "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+        "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+        "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+        "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+        "docs/learning/LR-2026-0027-builder-type-error-burn-down-and-runtime-bug-fixes-for-ms-20.md",
+        "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+        "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+        "runtime/executive/missions/MS-2026-0001.json",
+        "runtime/executive/missions/MS-2026-0002.json",
+        "runtime/executive/missions/MS-2026-0004.json",
+        "runtime/executive/missions/MS-2026-0005.json",
+        "runtime/executive/missions/MS-2026-0006.json",
+        "runtime/executive/missions/MS-2026-0007.json",
+        "runtime/governance/continuous-learning/checkpoint.json",
+        "runtime/knowledge/packages/.sequence-2026"
+      ],
+      "changedPathsByParent": {
+        "c3c582f512370fefb9127a45028d8e013d89eb86": [
+          "docs/learning/LR-2026-0022-backfill-mission-links-after-approval.md",
+          "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+          "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+          "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+          "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+          "docs/learning/LR-2026-0027-builder-type-error-burn-down-and-runtime-bug-fixes-for-ms-20.md",
+          "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+          "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+          "runtime/executive/missions/MS-2026-0001.json",
+          "runtime/executive/missions/MS-2026-0002.json",
+          "runtime/executive/missions/MS-2026-0004.json",
+          "runtime/executive/missions/MS-2026-0005.json",
+          "runtime/executive/missions/MS-2026-0006.json",
+          "runtime/executive/missions/MS-2026-0007.json",
+          "runtime/governance/continuous-learning/checkpoint.json",
+          "runtime/knowledge/packages/.sequence-2026"
+        ]
+      },
+      "directRefs": [],
+      "topology": "git-parent-graph"
+    }
+  },
+  "relationships": {
+    "genesisHistoricalSource": [
+      "genesis-source:commit:3149a4c787634df311a072be8d1e5f710c6b8e91"
+    ],
+    "genesisReplay": [
+      "genesis-replay:2d946e35cd37fce207c6f5b2f400445c664a8711fedac170683b255041064439"
+    ],
+    "genesisManifest": [
+      "genesis-manifest:e4b2d51f21a7a1be7e538daaa9277f708694b226bb513e395224239fd069b2b5"
+    ]
+  }
+}
