@@ -24,6 +24,9 @@ export interface StoredProject extends Project {
   createdBy?: string;
   createdAt: number;
   updatedAt: number;
+  /* Stored by this repository; the shared Project type does not carry them. */
+  lastEditedAt?: number;
+  runtime?: string;
 }
 
 function all(): StoredProject[] {

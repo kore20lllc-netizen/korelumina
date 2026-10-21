@@ -3,9 +3,6 @@ export {
   type KnowledgeWorkspaceHeroProps,
 } from "./KnowledgeWorkspaceHero";
 
-export {
-  KnowledgeWorkspaceInspector,
-} from "./KnowledgeWorkspaceInspector";
 
 export {
   KnowledgeWorkspaceRegions,

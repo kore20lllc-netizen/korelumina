@@ -1,5 +1,4 @@
 export * from "./types";
-export * from "./OverviewWorkspace";
 export * from "./AcquisitionWorkspace";
 export * from "./EvidenceWorkspace";
 export * from "./GraphWorkspace";
