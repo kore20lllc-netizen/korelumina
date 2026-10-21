@@ -94,19 +94,47 @@ export interface PriorityNotification {
   title: string;
   detail: string;
   tone: PreviewTone;
+  /* MS-2026-0004 (E2.T2): Critical conditions not yet acknowledged. */
+  unacknowledged?: Array<{ key: string; text: string }>;
+}
+
+/*
+ * A Critical condition carries a stable key naming this occurrence, so an
+ * acknowledgement covers exactly it; null when it cannot be recorded
+ * (Runtime not answering).
+ */
+interface CriticalCondition {
+  key: string | null;
+  text: string;
 }
 
 export function composeNotifications(office: ExecutiveOfficeState): PriorityNotification[] {
-  const critical: string[] = [];
+  const conditions: CriticalCondition[] = [];
   if (office.activation.status === "ok" && !office.activation.data.active) {
-    critical.push(`The Chief Agent is not active (${office.activation.data.state}).`);
+    const latest = office.activation.data.history.reduce((newest, record) => Math.max(newest, record.decidedAt), 0);
+    conditions.push({ key: `activation-${office.activation.data.state.toLowerCase()}:${latest}`, text: `The Chief Agent is not active (${office.activation.data.state}).` });
+  }
+  if (office.prerequisites.status === "ok") {
+    for (const prerequisite of office.prerequisites.data.filter((entry) => entry.state !== "VALID")) {
+      conditions.push({
+        key: `prerequisite-${prerequisite.gate}:${prerequisite.state.toLowerCase()}:${prerequisite.id ?? "none"}`,
+        text: `Activation certification ${prerequisite.gate} is ${prerequisite.state.toLowerCase()}.`,
+      });
+    }
   }
   if (office.learning.status === "ok") {
     const latest = [...office.learning.data.cycles].sort((a, b) => b.startedAt - a.startedAt)[0];
-    if (latest?.outcome === "FAILED") critical.push(`The latest learning cycle failed${latest.reasons.length ? `: ${latest.reasons.join("; ")}` : "."}`);
+    if (latest?.outcome === "FAILED") {
+      conditions.push({ key: `learning-cycle-failed:${latest.cycleId}`, text: `The latest learning cycle failed${latest.reasons.length ? `: ${latest.reasons.join("; ")}` : "."}` });
+    }
   }
   const unreadable = [office.operations, office.activation, office.learning].filter((read) => read.status === "error");
-  if (unreadable.length === 3) critical.push("Runtime is not answering.");
+  if (unreadable.length === 3) conditions.push({ key: null, text: "Runtime is not answering." });
+
+  const acknowledged = new Map((office.acknowledgements.status === "ok" ? office.acknowledgements.data : []).map((entry) => [entry.conditionKey, entry]));
+  const open = conditions.filter((condition) => !condition.key || !acknowledged.has(condition.key));
+  const seen = conditions.map((condition) => (condition.key ? acknowledged.get(condition.key) : undefined)).filter(Boolean);
+  const critical = (open.length ? open : conditions).map((condition) => condition.text);
 
   const pending =
     office.operations.status === "ok"
@@ -126,8 +154,13 @@ export function composeNotifications(office: ExecutiveOfficeState): PriorityNoti
     {
       priority: "Critical",
       title: critical.length ? critical[0] : "None",
-      detail: critical.length > 1 ? critical.slice(1).join(" ") : critical.length ? "Requires your acknowledgement." : "Nothing requires acknowledgement.",
-      tone: critical.length ? "error" : "healthy",
+      detail: !critical.length
+        ? "Nothing requires acknowledgement."
+        : open.length
+          ? [critical.slice(1).join(" "), open.some((condition) => condition.key) ? "Requires your acknowledgement." : ""].filter(Boolean).join(" ")
+          : `${critical.slice(1).join(" ")} Acknowledged by ${seen[0]!.acknowledgedBy} ${new Date(seen[0]!.acknowledgedAt).toLocaleString()}.`.trim(),
+      tone: !critical.length ? "healthy" : open.length ? "error" : "warning",
+      unacknowledged: open.filter((condition): condition is { key: string; text: string } => Boolean(condition.key)),
     },
     {
       priority: "High",

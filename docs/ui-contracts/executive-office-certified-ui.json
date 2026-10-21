@@ -75,8 +75,8 @@
       "elementCount": 29
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/NotificationsCenter.tsx": {
-      "sha256": "674e26c13381b73ca5331974c2a7738c07dfe5922aa0b16669796d6a2a99e535",
-      "elementCount": 7
+      "sha256": "df953393c82d0b10da17ec67966e1dbc265d914b8a88d4f5d8ef4b71c9ecb44b",
+      "elementCount": 8
     },
     "apps/lumina-builder/src/components/workspaces/executive/sections/PlanningCenter.tsx": {
       "sha256": "86bf3ed6cf9ebfeafb7bdfd2f3237f5e54b1947f01e4f62ff4ec598271026154",

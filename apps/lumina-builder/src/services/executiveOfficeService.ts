@@ -715,3 +715,28 @@ export async function decideChiefAgentActivation(
     throw new Error(reasons || (typeof body?.error === "string" ? body.error : `Runtime answered ${status}`));
   }
 }
+
+/* MS-2026-0004 (E2.T2): the owner acknowledges Critical notifications. */
+export interface ExecutiveAcknowledgementRecord {
+  id: string;
+  conditionKey: string;
+  title: string;
+  acknowledgedBy: string;
+  acknowledgedAt: number;
+}
+
+export async function getAcknowledgements(): Promise<ExecutiveAcknowledgementRecord[]> {
+  const body = await readJson("/api/executive/acknowledgements");
+  return Array.isArray(body?.acknowledgements) ? body.acknowledgements : [];
+}
+
+export async function acknowledgeCondition(conditionKey: string, title: string): Promise<void> {
+  const { status, body } = await postJson("/api/executive/acknowledgements", {
+    actorId: EXECUTIVE_OWNER_ACTOR_ID,
+    conditionKey,
+    title,
+  });
+  if (status >= 400 || body?.ok === false) {
+    throw new Error(typeof body?.error === "string" ? body.error : `Runtime answered ${status}`);
+  }
+}

@@ -122,6 +122,8 @@ const HUMAN_ONLY_EXECUTIVE_ROUTES:
     /^\/missions\/[^/]+\/(approve|reject|block|unblock|cancel|archive)\/?$/,
     /* MS-4 (ADR-0044 Decision 5): task status and build verification are the owner's evidence. */
     /^\/missions\/[^/]+\/(tasks\/[^/]+|verifications)\/?$/,
+    /* MS-2026-0004: only the owner acknowledges Critical notifications. */
+    /^\/acknowledgements\/?$/,
   ];
 
 export function isHumanOnlyExecutivePath(

@@ -133,6 +133,8 @@ import { registerExecutiveReasoningRoute } from "./routes/executiveReasoning.js"
 import { registerExecutiveOperationsSnapshotRoute } from "./routes/executiveOperationsSnapshot.js";
 import { registerExecutiveOperationalStateRoute } from "./routes/executiveOperationalState.js";
 import { registerExecutivePlatformRoute } from "./routes/executivePlatform.js";
+import { registerExecutiveAcknowledgementRoutes } from "./routes/executiveAcknowledgement.js";
+import { ExecutiveAcknowledgementService } from "./executive/acknowledgement/index.js";
 import { registerExecutiveMissionRoutes } from "./routes/executiveMission.js";
 import {
   MissionProposalService,
@@ -2350,6 +2352,12 @@ registerExecutiveOperationalStateRoute(
 registerExecutivePlatformRoute(
   app,
   resolveRepositoryRoot(),
+);
+
+/* MS-2026-0004 (E2.T2): acknowledgements of Critical notifications. */
+registerExecutiveAcknowledgementRoutes(
+  app,
+  new ExecutiveAcknowledgementService(),
 );
 
 /* MS-1 (ADR-0044): missions as governed Runtime records. */

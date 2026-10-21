@@ -1,9 +1,11 @@
 import { useSyncExternalStore } from "react";
 
 import {
+  acknowledgeCondition,
   askChiefAgent,
   decideChiefAgentActivation,
   decideExecutiveApproval,
+  getAcknowledgements,
   getActivationPrerequisites,
   getPlatformFacts,
   getChiefAgentActivationStatus,
@@ -20,6 +22,7 @@ import {
   verifyMissionBuild,
   runLearningCycleNow,
   type ActivationPrerequisite,
+  type ExecutiveAcknowledgementRecord,
   type ChiefAgentActivationStatus,
   type PlatformFacts,
   type ExecutiveOfficeOperations,
@@ -70,6 +73,9 @@ export interface ExecutiveOfficeState {
   missions: Loaded<MissionRecord[]>;
   platform: Loaded<PlatformFacts>;
   prerequisites: Loaded<ActivationPrerequisite[]>;
+  acknowledgements: Loaded<ExecutiveAcknowledgementRecord[]>;
+  acknowledging: boolean;
+  acknowledgeError: string | null;
   /* MS-2026-0004: a suspend or resume being recorded, and why it failed. */
   activationDeciding: "SUSPEND" | "RESUME" | null;
   activationError: string | null;
@@ -98,6 +104,9 @@ let state: ExecutiveOfficeState = {
   missions: { status: "loading" },
   platform: { status: "loading" },
   prerequisites: { status: "loading" },
+  acknowledgements: { status: "loading" },
+  acknowledging: false,
+  acknowledgeError: null,
   activationDeciding: null,
   activationError: null,
   missionBusy: {},
@@ -125,7 +134,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity" | "missions" | "platform" | "prerequisites">(
+function load<K extends "operations" | "activation" | "learning" | "canonicalReviews" | "knowledge" | "lifecycle" | "projects" | "identity" | "missions" | "platform" | "prerequisites" | "acknowledgements">(
   key: K,
   read: () => Promise<unknown>,
 ) {
@@ -173,6 +182,7 @@ export async function refreshExecutiveOffice() {
       load("identity", getRuntimeIdentity),
       load("missions", getMissions),
       load("platform", getPlatformFacts),
+      load("acknowledgements", getAcknowledgements),
     ]);
   } finally {
     refreshing = false;
@@ -340,6 +350,25 @@ export async function decideActivation(
     await refreshExecutiveOffice();
     refreshPrerequisites(true);
     publish({ activationDeciding: null });
+  }
+  return succeeded;
+}
+
+/* MS-2026-0004 (E2.T2): acknowledges each listed Critical condition. */
+export async function acknowledgeCritical(
+  conditions: ReadonlyArray<{ key: string; text: string }>,
+): Promise<boolean> {
+  if (state.acknowledging || conditions.length === 0) return false;
+  publish({ acknowledging: true, acknowledgeError: null });
+  let succeeded = false;
+  try {
+    for (const condition of conditions) await acknowledgeCondition(condition.key, condition.text);
+    succeeded = true;
+  } catch (error) {
+    publish({ acknowledgeError: errorMessage(error) });
+  } finally {
+    await refreshExecutiveOffice();
+    publish({ acknowledging: false });
   }
   return succeeded;
 }
