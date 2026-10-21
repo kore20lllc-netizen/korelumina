@@ -7,7 +7,8 @@ export type KnowledgeOperationsStatus =
 export interface KnowledgeOperationsSummary {
   totalKnowledgeItems: number;
   totalEvidence: number;
-  healthScore: number;
+  /* No governed health algorithm exists yet: null means not measured. */
+  healthScore: number | null;
   promotionRate: number;
 }
 
