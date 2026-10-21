@@ -3,6 +3,7 @@ import { Check, Minus, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useCurrentRole } from "@/hooks/use-current-role";
+import { ResetMockDataDialog } from "@/components/workspaces/settings/dialogs/ResetMockDataDialog";
 import {
   getCapabilities,
   type WorkspaceCapabilities,
@@ -166,11 +167,12 @@ export function RoleSwitcher() {
               "Resetting…",
             );
 
+            /* The same reset Settings uses; lib/seed has no resetAllData. */
             const mod = await import(
-              "@/lib/seed"
+              "@/services/adminService"
             );
 
-            mod.resetAllData();
+            await mod.resetAllData();
 
             setResetDialogOpen(
               false,

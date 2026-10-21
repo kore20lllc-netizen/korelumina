@@ -49,7 +49,7 @@ export function LeaveWorkspaceDialog({
           </LuminaButton>
 
           <LuminaButton
-            variant="destructive"
+            variant="danger"
             disabled={leaving}
             onClick={onConfirm}
           >

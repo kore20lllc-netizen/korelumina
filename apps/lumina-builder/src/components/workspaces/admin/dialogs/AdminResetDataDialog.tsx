@@ -52,7 +52,7 @@ export function AdminResetDataDialog({
           </LuminaButton>
 
           <LuminaButton
-            variant="destructive"
+            variant="danger"
             disabled={resetting}
             onClick={onConfirm}
           >

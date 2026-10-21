@@ -1,3 +1,5 @@
+import { planForRole } from "@/services/workspaceAccessService";
+import { useCurrentRole } from "@/hooks/use-current-role";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ArrowLeft, Sparkles, Users, X } from "lucide-react";
@@ -22,6 +24,9 @@ const TIER_TO_PRODUCT: Record<string, string | "sales" | null> = {
 
 export function PricingView() {
   const { setView, usage } = useWorkspace();
+  /* The usage snapshot has no plan: it comes from the plan role (ADR-0043). */
+  const [currentRole] = useCurrentRole();
+  const plan = planForRole(currentRole);
   const navigate = useNavigate();
   const [busy, setBusy] = useState<string | null>(null);
   const [prefill, setPrefill] = useState<PricingPrefill | null>(() => getPricingPrefill());
@@ -81,7 +86,7 @@ export function PricingView() {
           <div className="flex items-center justify-between mb-2">
             <div>
               <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Current plan</div>
-              <div className="font-display text-xl capitalize mt-0.5">{usage.plan}</div>
+              <div className="font-display text-xl capitalize mt-0.5">{plan}</div>
             </div>
             <div className="text-right">
               <div className="text-[11px] uppercase tracking-widest text-muted-foreground">AI executions</div>
@@ -120,7 +125,7 @@ export function PricingView() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
           {pricingTiers.map((p) => {
             const tierId = p.name.toLowerCase();
-            const isCurrent = tierId === usage.plan?.toLowerCase();
+            const isCurrent = tierId === plan;
             const isEnterprise = tierId === "enterprise";
             const isRecommended = !!prefill && tierId === prefill.recommendedTier;
             return (

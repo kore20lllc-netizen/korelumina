@@ -159,3 +159,12 @@ export function hasAnyInternalCapability(caps = getCapabilities()): boolean {
   return caps.repoAudit || caps.securityAudit || caps.repairConsole ||
     caps.deploymentDiagnostics || caps.supportAccess || caps.adminTools;
 }
+/*
+ * MS-2026-0006: the subscription plan is the plan role, assigned by billing
+ * (ADR-0043); every other role is on the free plan.
+ */
+export type WorkspacePlan = "free" | "pro" | "business" | "enterprise";
+
+export function planForRole(role: WorkspaceRole): WorkspacePlan {
+  return role === "pro" || role === "business" || role === "enterprise" ? role : "free";
+}

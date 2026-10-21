@@ -64,7 +64,7 @@ export function AdminUserDeleteDialog({
           </LuminaButton>
 
           <LuminaButton
-            variant="destructive"
+            variant="danger"
             onClick={onConfirm}
             disabled={deleting}
           >

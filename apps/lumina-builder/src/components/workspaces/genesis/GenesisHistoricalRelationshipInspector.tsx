@@ -158,7 +158,8 @@ function endpointEpisodeIds(
   return projection.corpus.episodes
     .filter(
       episode =>
-        episode.eventIds.includes(
+        /* An endpoint id is a source reference or an event; compare as strings. */
+        (episode.eventIds as readonly string[]).includes(
           endpoint.id,
         ),
     )

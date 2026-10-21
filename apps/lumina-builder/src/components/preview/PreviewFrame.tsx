@@ -1,3 +1,4 @@
+import type { RuntimeBootPhase } from "@/hooks/useRuntimeBoot";
 import {
   RotateCw,
   ExternalLink,
@@ -57,7 +58,7 @@ type PreviewFrameProps = {
   url?: string;
   children?: React.ReactNode;
   projectId?: string;
-  runtimePhase?: string;
+  runtimePhase?: RuntimeBootPhase;
   runtimeMessage?: string;
   runtimeProgress?: number;
   runtimeError?: string | null;

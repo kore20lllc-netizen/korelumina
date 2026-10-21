@@ -27,9 +27,10 @@ export function PromptComposer({ prompt, onPromptChange, onGenerate, generating,
   const animatedPlaceholder = useTypewriter(
     PROMPT_PHRASES,
     {
-      typingSpeed: 28,
-      deletingSpeed: 16,
-      pauseMs: 2200,
+      /* These were typingSpeed, deletingSpeed and pauseMs, which the hook does not read. */
+      typeMs: 28,
+      deleteMs: 16,
+      holdMs: 2200,
     },
   );
 

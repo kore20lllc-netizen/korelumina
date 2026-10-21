@@ -12,5 +12,11 @@ export * from "./workspace";
 
 export * from "./Blobs";
 export * from "./GlowCard";
+
+/* Two modules export LuminaInspectorSection; the inspector's is the one meant here. */
+export {
+  LuminaInspectorSection,
+  type LuminaInspectorSectionProps,
+} from "./inspector";
 export * from "./LuminaButton";
 export * from "./LuminaSegmentedControl";

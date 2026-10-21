@@ -23,17 +23,22 @@ export function LuminaInspectorRenderer({
 }: LuminaInspectorRendererProps) {
   return (
     <LuminaInspector>
-      <LuminaInspectorHeader>
-        <LuminaInspectorTitle>
-          {model.title}
-        </LuminaInspectorTitle>
+      {/* The header renders its title prop and ignored the children it was given. */}
+      <LuminaInspectorHeader
+        title={
+          <>
+            <LuminaInspectorTitle>
+              {model.title}
+            </LuminaInspectorTitle>
 
-        {model.description && (
-          <LuminaInspectorDescription>
-            {model.description}
-          </LuminaInspectorDescription>
-        )}
-      </LuminaInspectorHeader>
+            {model.description && (
+              <LuminaInspectorDescription>
+                {model.description}
+              </LuminaInspectorDescription>
+            )}
+          </>
+        }
+      />
 
       <LuminaInspectorBody>
         {model.groups.map((group) => (

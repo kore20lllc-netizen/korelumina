@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import type {
   HTMLAttributes,
 } from "react";
@@ -243,14 +244,18 @@ const interactionClasses = cn(
   "focus-visible:ring-offset-background",
 );
 
-export function LuminaSurface({
+/*
+ * MS-2026-0006: forwards its ref. GlowCard measures its surface for the
+ * click ripple, but the ref was dropped, so the ripple never appeared.
+ */
+export const LuminaSurface = forwardRef<HTMLDivElement, LuminaSurfaceProps>(function LuminaSurface({
   className,
   variant = "panel",
   children,
   asChild = false,
   interactive = true,
   ...props
-}: LuminaSurfaceProps) {
+}, ref) {
   const Comp =
     asChild
       ? Slot
@@ -262,6 +267,7 @@ export function LuminaSurface({
 
   return (
     <Comp
+      ref={ref}
       className={cn(
         luminaMotion.surface,
         "will-change-transform",
@@ -280,6 +286,6 @@ export function LuminaSurface({
       {children}
     </Comp>
   );
-}
+});
 
 export default LuminaSurface;

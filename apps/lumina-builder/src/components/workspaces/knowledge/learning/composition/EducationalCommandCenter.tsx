@@ -35,7 +35,6 @@ import {
 } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 
 import {
-  FlagshipPanel,
   flagshipAppearance,
 } from "../presentation";
 

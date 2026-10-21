@@ -42,7 +42,8 @@ import { track } from "@/lib/analytics";
 import { isFeatureEnabled } from "@/lib/featureFlags";
 import { checkEntitlement } from "@/services/entitlements";
 import { auth } from "@/providers/auth-registry";
-import { usage } from "@/providers/usage-registry";
+/* Aliased: the component has its own `usage` snapshot from the workspace. */
+import { usage as usageProvider } from "@/providers/usage-registry";
 import { notificationService } from "@/services/notificationService";
 import { writeRuntimeFile } from "@/services/runtimeService";
 

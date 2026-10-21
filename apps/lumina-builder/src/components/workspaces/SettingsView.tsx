@@ -1,3 +1,5 @@
+import { planForRole } from "@/services/workspaceAccessService";
+import { useCurrentRole } from "@/hooks/use-current-role";
 import { useEffect, useState } from "react";
 import { User, CreditCard, Key, Plug, Shield, Bell, ArrowLeft, Check, Users, Trash2, UserPlus, X, LogOut, Link2, AlertTriangle, Info } from "lucide-react";
 import { useWorkspace } from "@/context/WorkspaceContext";
@@ -49,6 +51,9 @@ function savePrefs(p: NotifPrefs) { writeJSON("settings", "notifPrefs", p); }
 
 export function SettingsView() {
   const { setView, usage } = useWorkspace();
+  /* The usage snapshot has no plan: it comes from the plan role (ADR-0043). */
+  const [currentRole] = useCurrentRole();
+  const plan = planForRole(currentRole);
   const [active, setActive] = useState<Section>("profile");
   const user = useCurrentUser();
   const [name, setName] = useState(user?.name ?? "");
@@ -188,10 +193,10 @@ export function SettingsView() {
                 <div className="flex items-center justify-between p-4 rounded-xl bg-surface-1 border border-border">
                   <div>
                     <div className="text-[12px] uppercase tracking-widest text-muted-foreground">Current plan</div>
-                    <div className="font-display text-lg capitalize mt-0.5">{usage.plan}</div>
+                    <div className="font-display text-lg capitalize mt-0.5">{plan}</div>
                   </div>
                   <div className="flex items-center gap-2">
-                    {usage.plan !== "free" && (<LuminaButton variant="ghost" size="sm" onClick={cancelSubscription}>Cancel</LuminaButton>)}
+                    {plan !== "free" && (<LuminaButton variant="ghost" size="sm" onClick={cancelSubscription}>Cancel</LuminaButton>)}
                     <LuminaButton size="md" onClick={() => setView("pricing")}>Upgrade</LuminaButton>
                   </div>
                 </div>

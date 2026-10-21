@@ -52,7 +52,7 @@ export function ResetAppDataDialog({
           </LuminaButton>
 
           <LuminaButton
-            variant="destructive"
+            variant="danger"
             disabled={resetting}
             onClick={onConfirm}
           >

@@ -1,5 +1,5 @@
 import {
-  PlaceholderControl,
+  PlaceholderInspectorControl,
   SliderControl,
 } from "../controls";
 
@@ -8,12 +8,12 @@ import type {
 } from "./types";
 
 export const luminaInspectorControlRegistry: LuminaInspectorControlRegistry = {
-  custom: PlaceholderControl,
-  toggle: PlaceholderControl,
+  custom: PlaceholderInspectorControl,
+  toggle: PlaceholderInspectorControl,
   slider: SliderControl,
-  select: PlaceholderControl,
-  radio: PlaceholderControl,
-  color: PlaceholderControl,
-  number: PlaceholderControl,
-  text: PlaceholderControl,
+  select: PlaceholderInspectorControl,
+  radio: PlaceholderInspectorControl,
+  color: PlaceholderInspectorControl,
+  number: PlaceholderInspectorControl,
+  text: PlaceholderInspectorControl,
 };
