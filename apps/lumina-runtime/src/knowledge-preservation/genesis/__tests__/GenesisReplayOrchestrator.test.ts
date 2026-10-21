@@ -23,6 +23,7 @@ import type {
 } from "../index.js";
 
 import {
+  FileGenesisHistoricalCorrelationPersistenceStore,
   FileGenesisReplayPersistenceStore,
   createGenesisReplayId,
   createGenesisSourceManifestId,
@@ -414,6 +415,18 @@ test(
     const persistence =
       store();
 
+    /* MS-2026-0008: the correlation goes where the caller says. */
+    const correlationStore =
+      new FileGenesisHistoricalCorrelationPersistenceStore({
+        storageRoot:
+          mkdtempSync(
+            path.join(
+              tmpdir(),
+              "korelumina-genesis-orchestrator-correlation-",
+            ),
+          ),
+      });
+
     const manifestBuild =
       build([
         entry(
@@ -452,11 +465,20 @@ test(
           fixtureBuilder(
             manifestBuild,
           ),
+
+        historicalCorrelationStore:
+          correlationStore,
       });
 
     assert.equal(
       result.mode,
       "PRODUCTION_ADMISSION",
+    );
+
+    assert.ok(
+      correlationStore.load(
+        result.plan.replayId,
+      ),
     );
 
     assert.equal(

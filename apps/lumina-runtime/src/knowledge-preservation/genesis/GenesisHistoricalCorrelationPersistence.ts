@@ -16,6 +16,11 @@ import {
   getRuntimeDataRoot,
 } from "../../projects/workspacePaths.js";
 
+import {
+  isNodeTestProcess,
+  isolatedTestStorageRoot,
+} from "../storage/resolveKnowledgeStorageRoot.js";
+
 import type {
   GenesisReplayId,
 } from "./GenesisReplayIdentity.js";
@@ -253,14 +258,27 @@ export class FileGenesisHistoricalCorrelationPersistenceStore
     options:
       GenesisHistoricalCorrelationPersistenceOptions = {},
   ) {
+    /*
+     * MS-2026-0008: a test that configures no root gets the F-25
+     * isolated temporary root. Before this, the replay orchestrator's
+     * correlation save rewrote fixture correlations in the real
+     * runtime-data on every test run.
+     */
     this.storageRoot =
       path.resolve(
         options.storageRoot ??
-        path.join(
-          getRuntimeDataRoot(),
-          "genesis",
-          "historical-correlation",
-        ),
+        (isNodeTestProcess()
+          ? isolatedTestStorageRoot(
+              path.join(
+                "genesis",
+                "historical-correlation",
+              ),
+            )
+          : path.join(
+              getRuntimeDataRoot(),
+              "genesis",
+              "historical-correlation",
+            )),
       );
   }
 

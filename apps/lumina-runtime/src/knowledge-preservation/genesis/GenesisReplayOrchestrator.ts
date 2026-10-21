@@ -49,6 +49,10 @@ import {
   FileGenesisHistoricalCorrelationPersistenceStore,
 } from "./GenesisHistoricalCorrelationPersistence.js";
 
+import type {
+  GenesisHistoricalCorrelationPersistenceStore,
+} from "./GenesisHistoricalCorrelationPersistence.js";
+
 import {
   materializeGenesisHistoricalCorrelation,
 } from "./GenesisHistoricalCorrelationMaterializer.js";
@@ -197,6 +201,13 @@ export interface RunGovernedGenesisReplayInput {
   priorHistoricalCorrelation?:
     GenesisHistoricalCorrelationState |
     null;
+
+  /*
+   * MS-2026-0008: where PRODUCTION_ADMISSION saves the correlation.
+   * Defaults to the Runtime's governed correlation store.
+   */
+  historicalCorrelationStore?:
+    GenesisHistoricalCorrelationPersistenceStore;
 }
 
 function assertValidTimestamp(
@@ -521,6 +532,7 @@ export async function runGovernedGenesisReplay(
         : materializedCorrelation;
 
     const correlationStore =
+      input.historicalCorrelationStore ??
       new FileGenesisHistoricalCorrelationPersistenceStore();
 
     correlationStore.save(

@@ -13,6 +13,7 @@
     "build:builder": "npm --workspace apps/lumina-builder run build",
     "typecheck:builder": "tsc -p apps/lumina-builder/tsconfig.app.json --noEmit",
     "build:runtime": "npm --workspace apps/lumina-runtime run build",
+    "test:runtime": "node scripts/test-runtime.mjs",
     "preview": "npm run preview:builder",
     "preview:builder": "npm --workspace apps/lumina-builder run preview",
     "verify:knowledge-ui-contract": "node scripts/knowledge-ui-contract.mjs",
