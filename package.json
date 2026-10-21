@@ -23,6 +23,7 @@
     "certify:executive-ui-contract": "node scripts/executive-ui-contract.mjs --write",
     "verify:governed-records": "node scripts/verify-governed-records.mjs",
     "verify:knowledge-doc-governance": "bash scripts/verify-knowledge-operations-doc-governance.sh",
-    "education:resolve-authority": "npm --workspace apps/lumina-runtime run education:resolve-authority --"
+    "education:resolve-authority": "npm --workspace apps/lumina-runtime run education:resolve-authority --",
+    "genesis:compact-correlations": "npm --workspace apps/lumina-runtime run genesis:compact-correlations --"
   }
 }
