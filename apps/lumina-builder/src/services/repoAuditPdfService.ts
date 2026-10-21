@@ -6,6 +6,8 @@ import {
   type Category,
 } from "@/components/workspaces/repo-audit/FindingsFilters";
 import luminaLogo from "@/assets/optimized/lumina.webp";
+/* jsPDF is loaded on demand below; this import is for its type only. */
+import type { jsPDF } from "jspdf";
 
 type RGB = [number, number, number];
 

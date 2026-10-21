@@ -117,7 +117,7 @@ export async function readFile(projectId: string, file: string): Promise<FileRea
 
 export async function writeFile(projectId: string, file: string, content: string): Promise<{ ok: true }> {
   try {
-    await writeRuntimeFile(projectId, file, content);
+    await writeRuntimeFile({ projectId, file, content });
     return { ok: true };
   } catch (e) {
     throw normalizeError(e);

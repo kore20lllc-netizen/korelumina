@@ -270,9 +270,9 @@ export function RuntimeLogsPanel({
           <div className="min-w-0 overflow-x-auto pb-1">
             <LuminaSegmentedControl
               value={level}
-              onValueChange={
-                setLevel
-              }
+              onValueChange={(value) => {
+                if ((LEVELS as string[]).includes(value)) setLevel(value as LogLevel);
+              }}
               aria-label="Minimum log level"
               options={
                 LEVEL_OPTIONS

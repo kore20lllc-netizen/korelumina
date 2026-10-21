@@ -286,9 +286,7 @@ function Router() {
     return (
       <Shell blobs="ambient">
         <Suspense fallback={<LoadingView />}>
-          <KnowledgeOperationsV3Workspace
-            setView={setView}
-          />
+          <KnowledgeOperationsV3Workspace />
         </Suspense>
       </Shell>
     );

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
-import type { Project } from "@/context/WorkspaceContext";
+import type { Project } from "@/types/api";
 import { buildSections, type GeneratedPage } from "@/lib/transformPages";
 
 export type TransformSource = "import-success" | "builder" | "designer" | "command";

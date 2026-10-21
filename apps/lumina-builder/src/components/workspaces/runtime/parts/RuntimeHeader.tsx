@@ -34,7 +34,7 @@ import {
 import type {
   Environment,
   HealthStatus,
-  RuntimeOverview,
+  RuntimeOverall,
 } from "@/services/runtime/types";
 
 import {
@@ -42,7 +42,7 @@ import {
 } from "./RuntimeSearchFilters";
 
 interface RuntimeHeaderProps {
-  overall: RuntimeOverview;
+  overall: RuntimeOverall;
   updatedAt: number;
   query: string;
   onQuery: (value: string) => void;

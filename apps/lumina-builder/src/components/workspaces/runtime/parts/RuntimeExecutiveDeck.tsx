@@ -5,7 +5,7 @@ import {
 import type {
   Environment,
   HealthStatus,
-  RuntimeOverview,
+  RuntimeOverall,
   RuntimeProject,
 } from "@/services/runtime/types";
 
@@ -18,7 +18,7 @@ import {
 } from "./RuntimeHealthOverview";
 
 export interface RuntimeExecutiveDeckProps {
-  overall: RuntimeOverview;
+  overall: RuntimeOverall;
   projects: RuntimeProject[];
   updatedAt: number;
   query: string;

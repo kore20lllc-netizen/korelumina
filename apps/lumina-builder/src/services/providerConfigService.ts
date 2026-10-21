@@ -7,6 +7,13 @@ export type ProviderMode = "mock" | "real";
 
 export type ProviderConfig = Record<ProviderKey, ProviderMode>;
 
+/* The runtime registry hook reads provider modes from this window global. */
+declare global {
+  interface Window {
+    __PROVIDERS__?: Partial<ProviderConfig>;
+  }
+}
+
 const DEFAULT: ProviderConfig = {
   auth: "mock", billing: "mock", ai: "mock", repo: "mock",
   deploy: "mock", storage: "mock", usage: "mock",

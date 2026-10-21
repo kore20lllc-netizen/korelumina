@@ -15,14 +15,18 @@ const LABEL: Record<HealthStatus, string> = {
   offline: "Offline",
 };
 
+/*
+ * LuminaBadge has no success/warning/danger variants, so the health badge
+ * showed no status colour. These are its matching variants.
+ */
 const VARIANT: Record<
   HealthStatus,
-  "default" | "success" | "warning" | "danger" | "info"
+  "complete" | "partial" | "blocked" | "muted"
 > = {
-  healthy: "success",
-  degraded: "warning",
-  critical: "danger",
-  offline: "default",
+  healthy: "complete",
+  degraded: "partial",
+  critical: "blocked",
+  offline: "muted",
 };
 
 export function RuntimeHealthBadge({

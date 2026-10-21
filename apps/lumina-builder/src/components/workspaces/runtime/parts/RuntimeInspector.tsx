@@ -67,7 +67,7 @@ interface ScenarioDefinition {
 
   icon: ComponentType<{
     className?: string;
-    strokeWidth?: number;
+    strokeWidth?: number | string;
   }>;
 }
 
@@ -699,7 +699,7 @@ function DetailGroup({
 interface DetailRowProps {
   icon: ComponentType<{
     className?: string;
-    strokeWidth?: number;
+    strokeWidth?: number | string;
   }>;
   label: string;
   value: string;

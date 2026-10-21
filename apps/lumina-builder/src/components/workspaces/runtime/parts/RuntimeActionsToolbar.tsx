@@ -50,7 +50,7 @@ interface RuntimeActionDefinition {
 
   icon: ComponentType<{
     className?: string;
-    strokeWidth?: number;
+    strokeWidth?: number | string;
   }>;
 
   variant: ButtonVariant;

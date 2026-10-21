@@ -821,7 +821,7 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            isValidProjectId(projectId)
+            isValidProjectId(incomingProjectId)
             ? "Runtime stopped. Use Start to launch preview."
             : "Select a project to start preview.",
           );
@@ -907,7 +907,7 @@ export function useRuntimeBoot(
         setPhase(
           "idle",
           incomingProjectId,
-          isValidProjectId(projectId)
+          isValidProjectId(incomingProjectId)
             ? "Runtime stopped. Use Start to launch preview."
             : "Select a project to start preview.",
         );
@@ -941,7 +941,7 @@ export function useRuntimeBoot(
           setPhase(
             "idle",
             incomingProjectId,
-            isValidProjectId(projectId)
+            isValidProjectId(incomingProjectId)
             ? "Runtime stopped. Use Start to launch preview."
             : "Select a project to start preview.",
           );
