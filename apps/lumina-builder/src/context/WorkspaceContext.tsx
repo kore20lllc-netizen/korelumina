@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -25,6 +26,27 @@ import {
 import type {
   Project,
 } from "@/types/api";
+
+/* What the import modal opens pre-filled with (the drop zone and the modal share it). */
+export type ImportPrefill =
+  | { tab: "github"; url: string }
+  | { tab: "zip"; files: File[] };
+
+/* The top bar's audience modes. */
+export type SkillMode = "ai" | "designer" | "developer";
+
+/* Re-exported for the files that import it from the workspace context. */
+export type { Project };
+
+/* A notification shown in the top bar's notifications panel. */
+export interface WorkspaceNotification {
+  id: string;
+  kind: "info" | "success" | "warn";
+  title: string;
+  body: string;
+  time: string;
+  unread: boolean;
+}
 
 export type BuildIntent =
   | "website"
@@ -106,9 +128,9 @@ interface WorkspaceContextValue {
     view: View,
   ) => void;
 
-  mode: string;
+  mode: SkillMode;
   setMode: (
-    mode: string,
+    mode: SkillMode,
   ) => void;
 
   intent: string;
@@ -161,9 +183,9 @@ interface WorkspaceContextValue {
 
   toggleAppearancePanel: () => void;
 
-  importPrefill?: string;
+  importPrefill?: ImportPrefill;
   setImportPrefill: (
-    value?: string,
+    value?: ImportPrefill,
   ) => void;
 
   deployOpen: boolean;
@@ -176,10 +198,11 @@ interface WorkspaceContextValue {
     value: boolean,
   ) => void;
 
-  notifications: unknown[];
+  notifications: WorkspaceNotification[];
   setNotifications: (
-    value: unknown[],
+    value: WorkspaceNotification[],
   ) => void;
+  markAllNotificationsRead: () => void;
 
   usage: UsageSnapshot;
   usageSnap: UsageSnapshot;
@@ -238,8 +261,9 @@ export function WorkspaceProvider({
   const [view, setView] =
     useState<View>("dashboard");
 
+  /* "dev" matched none of the top bar's modes, so none showed as selected. */
   const [mode, setMode] =
-    useState("dev");
+    useState<SkillMode>("developer");
 
   const [intent, setIntent] =
     useState("");
@@ -296,7 +320,7 @@ export function WorkspaceProvider({
     importPrefill,
     setImportPrefill,
   ] = useState<
-    string | undefined
+    ImportPrefill | undefined
   >();
 
   const [
@@ -313,8 +337,15 @@ export function WorkspaceProvider({
     notifications,
     setNotifications,
   ] = useState<
-    unknown[]
+    WorkspaceNotification[]
   >([]);
+
+  /* The top bar's "Mark all read" called this, but it did not exist. */
+  const markAllNotificationsRead = useCallback(() => {
+    setNotifications((current) =>
+      current.map((notification) => ({ ...notification, unread: false })),
+    );
+  }, []);
 
   const [
     storedProjects,
@@ -466,6 +497,7 @@ export function WorkspaceProvider({
 
         notifications,
         setNotifications,
+        markAllNotificationsRead,
 
         usage,
         usageSnap,
@@ -491,6 +523,7 @@ export function WorkspaceProvider({
         deployOpen,
         notificationsOpen,
         notifications,
+        markAllNotificationsRead,
         usage,
         recentProjectIds,
       ],

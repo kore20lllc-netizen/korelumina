@@ -113,12 +113,13 @@ const sourceFor = (p: Project, override?: SourceOverride): ImportSource => {
 
   const isOverridden = !!(override?.sourceUrl || override?.previewUrl || override?.readmeUrl);
 
-  const kind: SourceKind =
+  const kind = (
     sourceUrl.includes("github.com")
       ? "github"
       : p.sourceUrl
         ? "github"
-        : "folder";
+        : "folder"
+  ) as SourceKind;
 
   const detail = sourceUrl
     ? sourceUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")

@@ -158,8 +158,9 @@ export function resolveGenesisHistoricalArtifactLinks(
           ),
       );
 
+    /* Relationship ends are source references or events; compare as strings. */
     const sourceEventIdSet =
-      new Set(
+      new Set<string>(
         sourceEventIds,
       );
 

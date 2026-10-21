@@ -129,6 +129,10 @@ export {
 
 export type {
   GenesisConversationSourceSupportClassification,
+  GenesisCorpusSourceRecord,
+  GenesisEvolutionEpisodeRecord,
+  GenesisHistoricalEventRecord,
+  GenesisHistoricalRelationshipRecord,
   GenesisOperationalChronologySummary,
   GenesisTemporalChronologyAuthoritySummary,
   GenesisTemporalChronologyEntry,

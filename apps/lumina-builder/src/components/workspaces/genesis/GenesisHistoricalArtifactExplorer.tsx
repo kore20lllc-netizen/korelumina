@@ -354,7 +354,7 @@ function KnowledgeLineageInspector({
 }) {
   return (
     <LuminaFlagshipCard
-      as="section"
+      as="article"
       className="mt-5 min-w-0 p-4"
     >
       <div className="relative z-10 min-w-0">

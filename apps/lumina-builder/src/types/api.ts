@@ -14,6 +14,9 @@ export interface Project {
   packageManager?: string;
   entryFile?: string;
   sourceUrl?: string;
+  /* Set for every project (see runtimeProjectToProject) and read by the imports view. */
+  lastEditedAt?: number;
+  runtime?: string;
 }
 
 export interface RuntimeStatus {

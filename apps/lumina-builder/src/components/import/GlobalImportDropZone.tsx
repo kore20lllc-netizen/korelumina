@@ -44,7 +44,7 @@ const formatBytes = (n: number) => {
  * the Import modal pre-filled. Renders nothing while idle.
  */
 export function GlobalImportDropZone() {
-  const { setImportOpen } = useWorkspace();
+  const { setImportOpen, setImportPrefill } = useWorkspace();
   const [active, setActive] = useState(false);
   const [kind, setKind] = useState<PayloadKind>("unknown");
   const [hover, setHover] = useState<HoverInfo>({ fileCount: 0, fileTypes: [] });
@@ -57,7 +57,9 @@ export function GlobalImportDropZone() {
     setActive(true);
     if (previewTimer.current) window.clearTimeout(previewTimer.current);
     previewTimer.current = window.setTimeout(() => {
-      setImportOpen(true, prefill);
+      /* setImportOpen takes one argument: the prefill was being dropped. */
+      setImportPrefill(prefill);
+      setImportOpen(true);
       setPreview(null);
       setActive(false);
       previewTimer.current = null;
