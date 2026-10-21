@@ -1,1 +1,1 @@
-export * from "./KnowledgeOperationsSnapshot";
+export * from "./KnowledgeOperationsSnapshot.js";
