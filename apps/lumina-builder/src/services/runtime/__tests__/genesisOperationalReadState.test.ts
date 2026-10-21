@@ -44,8 +44,16 @@ function projection(
     chronology: {
       projectionId:
         "genesis-chronology:fixture",
-    } as
+    } as unknown as
       GenesisOperationalProjection["chronology"],
+
+    historicalKnowledgeLineage:
+      { records: [] } as unknown as
+        GenesisOperationalProjection["historicalKnowledgeLineage"],
+
+    historicalAdmissionGovernance:
+      { records: [] } as unknown as
+        GenesisOperationalProjection["historicalAdmissionGovernance"],
 
     documentationGovernance: {
       projectionId:

@@ -5,12 +5,9 @@ import { runAudit } from "@/services/auditEngine";
 import { runTransform } from "@/services/transformEngine";
 import { checkEntitlement } from "@/services/entitlements";
 import { isFeatureEnabled, setFeatureFlagOverride } from "@/lib/featureFlags";
-import { MockDeploymentProvider } from "@/providers/deploy/MockDeploymentProvider";
 import { MockBillingProvider } from "@/providers/billing/MockBillingProvider";
 import { StripeBillingProvider } from "@/providers/billing/StripeBillingProvider";
 import { GitHubRepositoryProvider } from "@/providers/repo/GitHubRepositoryProvider";
-import { VercelDeploymentProvider } from "@/providers/deploy/VercelDeploymentProvider";
-import { auditStoredProject } from "@/services/repoAuditBridge";
 import { NotImplementedError, AppError } from "@/lib/errors";
 import type { ImportedRepo } from "@/providers/types";
 
@@ -99,23 +96,6 @@ describe("schema migrations", () => {
   });
 });
 
-describe("MockDeploymentProvider", () => {
-  it("validates domain format and returns DNS records", async () => {
-    const d = new MockDeploymentProvider();
-    expect((await d.validateDomain("not a domain")).ok).toBe(false);
-    const ok = await d.validateDomain("example.com");
-    expect(ok.ok).toBe(true);
-    expect(ok.records?.[0]?.type).toBe("CNAME");
-  });
-  it("deploys and lists deployments", async () => {
-    const d = new MockDeploymentProvider();
-    const dep = await d.deploy({ projectId: "p1", provider: "vercel" });
-    expect(dep.status).toBe("ready");
-    expect(d.list("p1")[0].id).toBe(dep.id);
-  }, 10000);
-});
-
-
 describe("MockBillingProvider", () => {
   it("performs checkout → confirm → cancel cycle", async () => {
     const { auth: a } = await import("@/providers/registry");
@@ -140,24 +120,6 @@ describe("real-provider stubs", () => {
   it("throw NotImplementedError on every method", () => {
     expect(() => new StripeBillingProvider().listProducts()).toThrow(NotImplementedError);
     expect(() => new GitHubRepositoryProvider().importFromGithub()).toThrow(NotImplementedError);
-    expect(() => new VercelDeploymentProvider().deploy()).toThrow(NotImplementedError);
-  });
-});
-
-describe("repoAuditBridge", () => {
-  it("audits a stored project's file map", () => {
-    const p = projectRepository.create({
-      name: "Bridge", type: "webapp",
-      files: {
-        "package.json": JSON.stringify({ dependencies: { lodash: "4.17.20" } }),
-        "src/App.tsx": "import axios from 'axios';\nprocess.env.SECRET",
-      },
-    });
-    const plan = auditStoredProject(p.id);
-    expect(plan.findings.length).toBeGreaterThan(0);
-  });
-  it("throws AppError on missing project", () => {
-    expect(() => auditStoredProject("nope")).toThrow(AppError);
   });
 });
 

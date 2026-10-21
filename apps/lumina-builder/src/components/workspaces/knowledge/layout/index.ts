@@ -4,10 +4,6 @@ export {
 } from "./KnowledgeWorkspaceHero";
 
 
-export {
-  KnowledgeWorkspaceRegions,
-  type KnowledgeWorkspaceRegionsProps,
-} from "./KnowledgeWorkspaceRegions";
 
 export {
   KnowledgeWorkspaceSidebar,

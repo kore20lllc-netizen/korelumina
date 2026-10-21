@@ -415,7 +415,51 @@ function fixture():
       entries:
         [],
 
+      authority: {
+        historicallyAuthoritative:
+          0,
+
+        historicallyProposed:
+          0,
+
+        historicallyRejected:
+          0,
+
+        historicallyImplemented:
+          0,
+
+        historicallyValidated:
+          0,
+
+        historicallyObserved:
+          0,
+
+        historicalUnknown:
+          0,
+
+        currentlyAuthoritative:
+          0,
+
+        currentlyImplemented:
+          0,
+
+        currentlySuperseded:
+          0,
+
+        currentlyRetired:
+          0,
+
+        currentNotApplicable:
+          0,
+
+        currentUnknown:
+          0,
+      },
+
       coverage: {
+        equalTimestampGroups:
+          [],
+
         totalEvents:
           2,
 
@@ -764,6 +808,18 @@ function fixture():
       conversationEvidenceMayBeSubstitutedByGit:
         false,
     },
+
+    historicalKnowledgeLineage: {
+      records:
+        [],
+    } as unknown as
+      GenesisOperationalProjection["historicalKnowledgeLineage"],
+
+    historicalAdmissionGovernance: {
+      records:
+        [],
+    } as unknown as
+      GenesisOperationalProjection["historicalAdmissionGovernance"],
   };
 }
 

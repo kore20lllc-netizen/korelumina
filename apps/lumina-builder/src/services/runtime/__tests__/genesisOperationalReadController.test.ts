@@ -649,10 +649,7 @@ test(
       controller.getSnapshot();
 
     assert.equal(
-      (
-        snapshot.replay
-          .selection as any
-      ).replayId,
+      snapshot.replay.selectedReplayId,
       replayA,
     );
 
@@ -688,10 +685,7 @@ test(
       controller.getSnapshot();
 
     assert.equal(
-      (
-        snapshot.replay
-          .selection as any
-      ).replayId,
+      snapshot.replay.selectedReplayId,
       replayB,
     );
 
@@ -731,10 +725,7 @@ test(
       controller.getSnapshot();
 
     assert.equal(
-      (
-        snapshot.replay
-          .selection as any
-      ).replayId,
+      snapshot.replay.selectedReplayId,
       null,
     );
 
