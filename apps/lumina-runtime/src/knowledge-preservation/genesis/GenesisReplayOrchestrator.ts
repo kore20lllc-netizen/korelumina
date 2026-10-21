@@ -53,6 +53,10 @@ import type {
   GenesisHistoricalCorrelationPersistenceStore,
 } from "./GenesisHistoricalCorrelationPersistence.js";
 
+import type {
+  GenesisReplayId,
+} from "./GenesisReplayIdentity.js";
+
 import {
   materializeGenesisHistoricalCorrelation,
 } from "./GenesisHistoricalCorrelationMaterializer.js";
@@ -200,6 +204,14 @@ export interface RunGovernedGenesisReplayInput {
 
   priorHistoricalCorrelation?:
     GenesisHistoricalCorrelationState |
+    null;
+
+  /*
+   * MS-2026-0010: the replay priorHistoricalCorrelation was loaded from.
+   * When given, the correlation is saved as a revision of it.
+   */
+  priorHistoricalCorrelationReplayId?:
+    GenesisReplayId |
     null;
 
   /*
@@ -538,6 +550,18 @@ export async function runGovernedGenesisReplay(
     correlationStore.save(
       plan.replayId,
       correlation,
+      input.priorHistoricalCorrelation &&
+      input.priorHistoricalCorrelationReplayId
+        ? {
+            revisionOf: {
+              baseReplayId:
+                input.priorHistoricalCorrelationReplayId,
+
+              additions:
+                materializedCorrelation,
+            },
+          }
+        : {},
     );
   }
 

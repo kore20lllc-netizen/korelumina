@@ -64,6 +64,10 @@ import {
 import {
   runGovernedGenesisReplay,
 } from "./knowledge-preservation/genesis/index.js";
+
+import type {
+  GenesisReplayId,
+} from "./knowledge-preservation/genesis/index.js";
 import {
   classifyCanonicalReview,
   loadCanonicalReviewPolicy,
@@ -1656,6 +1660,32 @@ registerKnowledgeOperationsRoutes(
   },
 );
 
+/* The replay the Runtime currently reads history from, when one is selected. */
+function runtimeSelectedGenesisReplayId():
+  GenesisReplayId |
+  null {
+  const currentSelection =
+    resolveGenesisRuntimeReplaySelection({
+      designationStore:
+        runtimeGenesisReplayDesignationStore,
+
+      inventory:
+        listGenesisReplayInventory({
+          persistence:
+            runtimeGenesisReplayPersistenceStore,
+
+          manufacturingRuns:
+            runtimeKnowledgePreservationPlatform
+              .manufacturingRunService,
+        }),
+    });
+
+  return currentSelection.state ===
+    "SELECTED"
+    ? currentSelection.replayId
+    : null;
+}
+
 const runtimeGenesisReplayExecutionRuntime = {
     persistenceStore:
       runtimeGenesisReplayPersistenceStore,
@@ -1681,39 +1711,21 @@ const runtimeGenesisReplayExecutionRuntime = {
 
     priorHistoricalCorrelation:
       () => {
-        const currentInventory =
-          listGenesisReplayInventory({
-            persistence:
-              runtimeGenesisReplayPersistenceStore,
+        const replayId =
+          runtimeSelectedGenesisReplayId();
 
-            manufacturingRuns:
-              runtimeKnowledgePreservationPlatform
-                .manufacturingRunService,
-          });
-
-        const currentSelection =
-          resolveGenesisRuntimeReplaySelection({
-            designationStore:
-              runtimeGenesisReplayDesignationStore,
-
-            inventory:
-              currentInventory,
-          });
-
-        if (
-          currentSelection.state !==
-            "SELECTED" ||
-          currentSelection.replayId ===
-            null
-        ) {
-          return null;
-        }
-
-        return runtimeGenesisHistoricalCorrelationPersistenceStore
-          .load(
-            currentSelection.replayId,
-          );
+        return replayId
+          ? runtimeGenesisHistoricalCorrelationPersistenceStore
+              .load(
+                replayId,
+              )
+          : null;
       },
+
+    /* MS-2026-0010: learning replays are saved as revisions of it. */
+    priorHistoricalCorrelationReplayId:
+      () =>
+        runtimeSelectedGenesisReplayId(),
   };
 
 registerGenesisReplayExecutionRoute(
@@ -1856,6 +1868,9 @@ export const runtimeContinuousLearningService =
 
           priorHistoricalCorrelation:
             runtime.priorHistoricalCorrelation(),
+
+          priorHistoricalCorrelationReplayId:
+            runtime.priorHistoricalCorrelationReplayId(),
 
           manifestBuilder:
             windowedGenesisManifestBuilder,

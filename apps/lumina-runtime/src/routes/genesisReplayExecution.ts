@@ -21,6 +21,7 @@ import type {
   GenesisHistoricalCorrelationState,
   GenesisProductionReplayReprocessingRequest,
   GenesisReplayOrchestratorMode,
+  GenesisReplayId,
   GenesisReplayOrchestratorResult,
   GenesisReplayScope,
   HistoricalSourceDiscoverer,
@@ -51,6 +52,11 @@ export interface GenesisReplayExecutionRouteRuntime {
 
   priorHistoricalCorrelation?():
     GenesisHistoricalCorrelationState |
+    null;
+
+  /* MS-2026-0010: the replay priorHistoricalCorrelation() reads. */
+  priorHistoricalCorrelationReplayId?():
+    GenesisReplayId |
     null;
 
   execute?:
@@ -549,6 +555,11 @@ export function createGenesisReplayExecutionHandler(
           priorHistoricalCorrelation:
             runtime.priorHistoricalCorrelation
               ? runtime.priorHistoricalCorrelation()
+              : null,
+
+          priorHistoricalCorrelationReplayId:
+            runtime.priorHistoricalCorrelationReplayId
+              ? runtime.priorHistoricalCorrelationReplayId()
               : null,
         });
 
