@@ -32,7 +32,7 @@
             ],
             "status": "done",
             "updatedBy": "human:founder",
-            "updatedAt": 1792466695512
+            "updatedAt": 1792500250472
           },
           {
             "id": "E1.T2",
@@ -40,9 +40,10 @@
             "acceptanceCriteria": [
               "Mission trailers attach owner commits"
             ],
-            "status": "done",
+            "status": "dropped",
             "updatedBy": "human:founder",
-            "updatedAt": 1792466695649
+            "updatedAt": 1792500214228,
+            "dropReason": "“moved to MS-2026-0006”,"
           },
           {
             "id": "E1.T3",
@@ -86,9 +87,9 @@
             "acceptanceCriteria": [
               "Open tickets become missions"
             ],
-            "status": "done",
+            "status": "todo",
             "updatedBy": "human:founder",
-            "updatedAt": 1792471839693
+            "updatedAt": 1792500096037
           }
         ]
       }
@@ -133,13 +134,19 @@
       "sha": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
       "subject": "feat(missions): import the open tickets as missions, and the owner moves missions from the Mission Center (MS-6, MS-5b, ADR-0044)",
       "committedAt": 1792473761000
+    },
+    {
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "subject": "fix(missions): a commit links to its mission once the mission is approved, even if it was learned first (F-36)",
+      "committedAt": 1792499553000
     }
   ],
-  "recoveryAnchor": "051dce1e5c701587c7816811a5bb4ed1f95ce602",
+  "recoveryAnchor": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
   "producedKnowledge": [
     "LR-2026-0014",
     "LR-2026-0015",
-    "LR-2026-0017"
+    "LR-2026-0017",
+    "LR-2026-0022"
   ],
   "history": [
     {
@@ -200,21 +207,21 @@
     }
   ],
   "createdAt": 1792464087272,
-  "updatedAt": 1792498165902,
+  "updatedAt": 1792584847283,
   "validation": {
-    "evaluatedAt": 1792498165902,
+    "evaluatedAt": 1792584847283,
     "checks": [
       {
         "id": "tasks",
         "label": "Every planned task is done or dropped",
-        "passed": true,
-        "detail": "6 done, 0 dropped."
+        "passed": false,
+        "detail": "1 of 6 still to do: E2.T2."
       },
       {
         "id": "build",
         "label": "The last linked commit passed npm run build",
-        "passed": false,
-        "detail": "No build verification for 051dce1e."
+        "passed": true,
+        "detail": "Passed for 39bd41f8, recorded by human:founder."
       },
       {
         "id": "approvals",
@@ -232,8 +239,38 @@
         "id": "recovery-anchor",
         "label": "A recovery anchor is recorded",
         "passed": true,
-        "detail": "Recovery anchor 051dce1e."
+        "detail": "Recovery anchor 39bd41f8."
       }
     ]
-  }
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584838173
+    },
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584842205
+    },
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584845065
+    },
+    {
+      "check": "build",
+      "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584847282
+    }
+  ]
 }

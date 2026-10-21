@@ -32,7 +32,9 @@
             "acceptanceCriteria": [
               "Each tile shows a live value or says it could not read it"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792540686996
           },
           {
             "id": "E1.T2",
@@ -40,7 +42,9 @@
             "acceptanceCriteria": [
               "Every recommendation names its source record"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792558145316
           }
         ]
       },
@@ -55,7 +59,9 @@
               "Uses PUT /api/executive/activation with a reason",
               "The command deck and Agent Center show the new state"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792540725151
           },
           {
             "id": "E2.T2",
@@ -63,7 +69,9 @@
             "acceptanceCriteria": [
               "Acknowledgements are Runtime records with who and when"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792540733853
           }
         ]
       },
@@ -77,7 +85,9 @@
             "acceptanceCriteria": [
               "Projects Center shows Live, not Partly live"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792558226761
           }
         ]
       }
@@ -88,11 +98,25 @@
     ],
     "requiredDocuments": []
   },
-  "state": "approved",
+  "state": "completed",
   "blockedFrom": null,
-  "linkedCommits": [],
-  "recoveryAnchor": null,
-  "producedKnowledge": [],
+  "linkedCommits": [
+    {
+      "sha": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+      "subject": "feat(executive): suspend and resume the Chief Agent, and the dashboard health and platform card read Runtime (MS-2026-0004)",
+      "committedAt": 1792501760000
+    },
+    {
+      "sha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "subject": "feat(executive): recommendations are derived from Runtime records and name their source (MS-2026-0004)",
+      "committedAt": 1792540335000
+    }
+  ],
+  "recoveryAnchor": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+  "producedKnowledge": [
+    "LR-2026-0023",
+    "LR-2026-0024"
+  ],
   "history": [
     {
       "from": null,
@@ -129,8 +153,89 @@
         "type": "human"
       },
       "at": 1792476555845
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792505749282,
+      "reason": "First linked commit 7d3086db: feat(executive): suspend and resume the Chief Agent, and the dashboard health and platform card read Runtime (MS-2026-0004)"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792558226762,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792558226762,
+      "reason": "All validation checks passed at e8ec6182"
     }
   ],
   "createdAt": 1792473895273,
-  "updatedAt": 1792476555845
+  "updatedAt": 1792558226762,
+  "validation": {
+    "evaluatedAt": 1792558226762,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "5 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for e8ec6182, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor e8ec6182."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792541134036
+    },
+    {
+      "check": "build",
+      "sha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792541242586
+    }
+  ]
 }

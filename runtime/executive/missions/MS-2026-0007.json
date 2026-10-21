@@ -79,7 +79,9 @@
               "In a clean clone with no runtime-data, the activation gate reads ACTIVE at PROPOSE_ONLY",
               "Caches rebuild on demand"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792499763878
           }
         ]
       }
@@ -91,7 +93,7 @@
     ],
     "requiredDocuments": []
   },
-  "state": "executing",
+  "state": "knowledge_extracted",
   "blockedFrom": null,
   "linkedCommits": [
     {
@@ -156,24 +158,54 @@
       },
       "at": 1792483112833,
       "reason": "First linked commit 14dab022: feat(governance): the records Chief Agent activation rests on are tracked in git (MS-2026-0007)"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792499763879,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584831550,
+      "reason": "All validation checks passed at e1cdb630"
+    },
+    {
+      "from": "completed",
+      "to": "knowledge_extracted",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584831551,
+      "reason": "LR-2026-0020 is canonical"
     }
   ],
   "createdAt": 1792476299259,
-  "updatedAt": 1792498165917,
+  "updatedAt": 1792584831551,
   "validation": {
-    "evaluatedAt": 1792498165917,
+    "evaluatedAt": 1792584831550,
     "checks": [
       {
         "id": "tasks",
         "label": "Every planned task is done or dropped",
-        "passed": false,
-        "detail": "1 of 4 still to do: E3.T1."
+        "passed": true,
+        "detail": "4 done, 0 dropped."
       },
       {
         "id": "build",
         "label": "The last linked commit passed npm run build",
-        "passed": false,
-        "detail": "No build verification for e1cdb630."
+        "passed": true,
+        "detail": "Passed for e1cdb630, recorded by human:founder."
       },
       {
         "id": "approvals",
@@ -194,5 +226,14 @@
         "detail": "Recovery anchor e1cdb630."
       }
     ]
-  }
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "e1cdb630cff6a653fc319783929a556c93ed09c0",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584831549
+    }
+  ]
 }

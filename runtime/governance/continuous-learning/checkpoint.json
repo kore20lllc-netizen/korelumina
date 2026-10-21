@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "fb3556db36545c69e4b055c844d282587dd0c115",
-    "committedAt": 1792498025000,
-    "establishedAt": 1792498165899,
-    "basis": "Learning cycle learning-cycle:b6478f8eff6e70bb"
+    "commit": "c3c582f512370fefb9127a45028d8e013d89eb86",
+    "committedAt": 1792583574000,
+    "establishedAt": 1792584431538,
+    "basis": "Learning cycle learning-cycle:4a05123bc4b4f147"
   },
   "cycles": [
     {
@@ -1059,6 +1059,419 @@
           "result": "linked"
         }
       ]
+    },
+    {
+      "cycleId": "learning-cycle:6fe5a970c865bf8b",
+      "trigger": "automatic",
+      "startedAt": 1792499600977,
+      "fromCommit": "fb3556db36545c69e4b055c844d282587dd0c115",
+      "replayId": "genesis-replay:d4b12bb9141ae8f7650c2f848a60f1edfad5a0d5db06c7a0b4e9debc94c4d542",
+      "admittedSources": 1,
+      "completedAt": 1792499671354,
+      "toCommit": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "commits": [
+        {
+          "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792499553000,
+          "subject": "fix(missions): a commit links to its mission once the mission is approved, even if it was learned first (F-36)",
+          "missions": [
+            "MS-2026-0001"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0022",
+        "repositoryPath": "docs/learning/LR-2026-0022-backfill-mission-links-after-approval.md",
+        "keptStatements": 14,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792499671354,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0005",
+          "sha": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+          "result": "started",
+          "fromCycleId": "learning-cycle:f2207f49381201c6"
+        },
+        {
+          "missionId": "MS-2026-0001",
+          "sha": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:107634faba1ac4c4",
+      "trigger": "automatic",
+      "startedAt": 1792501479757,
+      "fromCommit": "39bd41f8fbee8a18e1891021673a045f1a3f99c3",
+      "replayId": "genesis-replay:7b46f41c16f5d376d3169031140837dffaf07b2c5287879e9757635741774861",
+      "admittedSources": 6,
+      "completedAt": 1792501542358,
+      "toCommit": "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+      "commits": [
+        {
+          "sha": "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792499663000,
+          "subject": "chore(knowledge): record Learning Records LR-2026-0017 to 0021, missions MS-2026-0006 and 0007, and their canonical promotions"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": null,
+        "repositoryPath": null,
+        "keptStatements": null,
+        "removedStatements": null,
+        "model": null,
+        "attemptedAt": 1792501542359,
+        "attempts": 1,
+        "state": "SKIPPED",
+        "reasons": [
+          "only_learning_or_governance_bookkeeping_commits"
+        ]
+      }
+    },
+    {
+      "cycleId": "learning-cycle:50b1f72b529b5c1f",
+      "trigger": "automatic",
+      "startedAt": 1792503643716,
+      "fromCommit": "5f7732e364f31c6cd8cc55ab9c3ee16b7c8790c3",
+      "replayId": "genesis-replay:065e61ea0cd4a044b0d69c5cf1ed6caa55e4775de6889b8e06166a7c5ec121dd",
+      "admittedSources": 1,
+      "completedAt": 1792503698919,
+      "toCommit": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+      "commits": [
+        {
+          "sha": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792501760000,
+          "subject": "feat(executive): suspend and resume the Chief Agent, and the dashboard health and platform card read Runtime (MS-2026-0004)",
+          "missions": [
+            "MS-2026-0004"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0023",
+        "repositoryPath": "docs/learning/LR-2026-0023-chief-agent-suspend-resume-and-runtime-backed-dashboard-heal.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792507792214,
+        "attempts": 2,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0004",
+          "sha": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+          "result": "ignored",
+          "reason": "already_linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:2217d70b9a7eae1a",
+      "trigger": "automatic",
+      "startedAt": 1792540362827,
+      "fromCommit": "7d3086dbc13afef3fd5ef2c40fc4f5be2ac20ff8",
+      "replayId": "genesis-replay:ad7a393e576dad2fe833da8cae731202d678709764dc4203e15be07522fce390",
+      "admittedSources": 1,
+      "completedAt": 1792540429725,
+      "toCommit": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "commits": [
+        {
+          "sha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792540335000,
+          "subject": "feat(executive): recommendations are derived from Runtime records and name their source (MS-2026-0004)",
+          "missions": [
+            "MS-2026-0004"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0024",
+        "repositoryPath": "docs/learning/LR-2026-0024-live-executive-recommendations-from-runtime-records.md",
+        "keptStatements": 14,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792540429725,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0004",
+          "sha": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:804c2342171a9faa",
+      "trigger": "automatic",
+      "startedAt": 1792558276847,
+      "fromCommit": "e8ec6182a4548e5b81c5d88bdbf05fa1d7b49944",
+      "replayId": "genesis-replay:c0e6018af2d3539c463e7b56853a7322264c5106ff1d53671541e882540a29b4",
+      "admittedSources": 1,
+      "completedAt": 1792558340400,
+      "toCommit": "8bc9049a36676bd11068848a248dc48cc52e89bc",
+      "commits": [
+        {
+          "sha": "8bc9049a36676bd11068848a248dc48cc52e89bc",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792558270000,
+          "subject": "feat(executive): the owner acknowledges Critical notifications (MS-2026-0004)",
+          "missions": [
+            "MS-2026-0004"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0025",
+        "repositoryPath": "docs/learning/LR-2026-0025-executive-critical-notification-acknowledgements.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792558340400,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0004",
+          "sha": "8bc9049a36676bd11068848a248dc48cc52e89bc",
+          "result": "ignored",
+          "reason": "mission_completed"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:7d089e2a8a5798a0",
+      "trigger": "automatic",
+      "startedAt": 1792561876854,
+      "fromCommit": "8bc9049a36676bd11068848a248dc48cc52e89bc",
+      "replayId": "genesis-replay:25841302f53ac2823818daabe38992f9a256068aab30a83ee2a70de99ac8c73b",
+      "admittedSources": 2,
+      "completedAt": 1792561951168,
+      "toCommit": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+      "commits": [
+        {
+          "sha": "d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792560327000,
+          "subject": "chore(builder): React type definitions installed and vite-env typed (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        },
+        {
+          "sha": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792561358000,
+          "subject": "fix(builder): runtime boot, manual stop, file writes and health badge bugs, and runtime workspace types (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0026",
+        "repositoryPath": "docs/learning/LR-2026-0026-lumina-builder-typecheck-enablement-and-runtime-bug-fixes.md",
+        "keptStatements": 20,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792561951168,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+          "result": "started"
+        },
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:8f567bc52f9a8add",
+      "trigger": "automatic",
+      "startedAt": 1792563676861,
+      "fromCommit": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+      "replayId": "genesis-replay:b3f0b6cc22cf87836ef10bc6cb784d99bc3d9c4fad08e2ab56ad412501f0bef8",
+      "admittedSources": 3,
+      "completedAt": 1792563742451,
+      "toCommit": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+      "commits": [
+        {
+          "sha": "02e19c8e782d637a6898cca8a69610879d4c8662",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792561940000,
+          "subject": "chore(builder): remove 29 files the app never loads (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        },
+        {
+          "sha": "615eeda647bd96061e1c8feee7b678702c7c3b89",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792562410000,
+          "subject": "fix(builder): dropped ZIPs reach the import modal, the top bar's mode and mark-all-read work, and workspace context types (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        },
+        {
+          "sha": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792563250000,
+          "subject": "fix(builder): settings role switcher, plan display, appearance sliders, destructive buttons, transform hand-off and surface refs (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0027",
+        "repositoryPath": "docs/learning/LR-2026-0027-builder-type-error-burn-down-and-runtime-bug-fixes-for-ms-20.md",
+        "keptStatements": 35,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792563742451,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "02e19c8e782d637a6898cca8a69610879d4c8662",
+          "result": "linked"
+        },
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "615eeda647bd96061e1c8feee7b678702c7c3b89",
+          "result": "linked"
+        },
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:58d8b9ddf7809e9d",
+      "trigger": "manual",
+      "startedAt": 1792563979645,
+      "fromCommit": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+      "replayId": "genesis-replay:1a08d3f0415289615c304e8e386de09b52127b538ea4c2717c5cd5f022a311ed",
+      "admittedSources": 1,
+      "completedAt": 1792564047058,
+      "toCommit": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+      "commits": [
+        {
+          "sha": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792563873000,
+          "subject": "fix(knowledge): capsule inspector shows validated layers, and Knowledge Operations types (MS-2026-0006)",
+          "missions": [
+            "MS-2026-0006"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0028",
+        "repositoryPath": "docs/learning/LR-2026-0028-knowledge-capsule-validation-and-knowledge-operations-type-f.md",
+        "keptStatements": 18,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792564047058,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0006",
+          "sha": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:4a05123bc4b4f147",
+      "trigger": "manual",
+      "startedAt": 1792584347910,
+      "fromCommit": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+      "replayId": "genesis-replay:3c613877aa89f387af05c8131921a5b6f2c702e570afa7acb84f4ac8066b01c1",
+      "admittedSources": 1,
+      "completedAt": 1792584413001,
+      "toCommit": "c3c582f512370fefb9127a45028d8e013d89eb86",
+      "commits": [
+        {
+          "sha": "c3c582f512370fefb9127a45028d8e013d89eb86",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792583574000,
+          "subject": "Builder typechecks clean, and the build enforces it"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0029",
+        "repositoryPath": "docs/learning/LR-2026-0029-builder-build-now-enforces-typescript-typecheck.md",
+        "keptStatements": 15,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792584413001,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
     }
   ]
 }

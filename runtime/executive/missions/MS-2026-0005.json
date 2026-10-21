@@ -33,7 +33,9 @@
               "No import of the file anywhere in the Builder",
               "The owner approves the deletion"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792500448171
           },
           {
             "id": "E1.T2",
@@ -41,7 +43,10 @@
             "acceptanceCriteria": [
               "tsc -p apps/lumina-builder/tsconfig.app.json --noEmit reports no errors"
             ],
-            "status": "todo"
+            "status": "dropped",
+            "dropReason": "move to 0006",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792500429573
           }
         ]
       }
@@ -52,11 +57,19 @@
     ],
     "requiredDocuments": []
   },
-  "state": "approved",
+  "state": "knowledge_extracted",
   "blockedFrom": null,
-  "linkedCommits": [],
-  "recoveryAnchor": null,
-  "producedKnowledge": [],
+  "linkedCommits": [
+    {
+      "sha": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+      "subject": "chore(builder): remove the dead InstitutionalMemoryZone component (F-33)",
+      "committedAt": 1792474560000
+    }
+  ],
+  "recoveryAnchor": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+  "producedKnowledge": [
+    "LR-2026-0018"
+  ],
   "history": [
     {
       "from": null,
@@ -93,8 +106,92 @@
         "type": "human"
       },
       "at": 1792476544588
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792499690594,
+      "reason": "First linked commit 49af80ff: chore(builder): remove the dead InstitutionalMemoryZone component (F-33)"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792500448171,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584835473,
+      "reason": "All validation checks passed at 49af80ff"
+    },
+    {
+      "from": "completed",
+      "to": "knowledge_extracted",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584835475,
+      "reason": "LR-2026-0018 is canonical"
     }
   ],
   "createdAt": 1792473895276,
-  "updatedAt": 1792476544588
+  "updatedAt": 1792584835475,
+  "validation": {
+    "evaluatedAt": 1792584835473,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "1 done, 1 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 49af80ff, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 49af80ff."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "49af80ffc50ae5f93785b03e626324bb2bba3e70",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584835470
+    }
+  ]
 }

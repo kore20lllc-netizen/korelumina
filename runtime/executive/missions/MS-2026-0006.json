@@ -35,7 +35,9 @@
               "No missing-module errors for image imports",
               "The remaining error count is recorded"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792584765720
           },
           {
             "id": "E1.T2",
@@ -44,7 +46,9 @@
               "tsc -p apps/lumina-builder/tsconfig.app.json --noEmit reports no errors",
               "Each real defect found is named in its commit"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792584760323
           }
         ]
       },
@@ -58,7 +62,9 @@
             "acceptanceCriteria": [
               "A deliberate type error makes npm run build fail"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792584754910
           }
         ]
       }
@@ -69,11 +75,46 @@
     ],
     "requiredDocuments": []
   },
-  "state": "approved",
+  "state": "completed",
   "blockedFrom": null,
-  "linkedCommits": [],
-  "recoveryAnchor": null,
-  "producedKnowledge": [],
+  "linkedCommits": [
+    {
+      "sha": "d0ec4034f8651fb5535cb7d0eb3a30831943aca0",
+      "subject": "chore(builder): React type definitions installed and vite-env typed (MS-2026-0006)",
+      "committedAt": 1792560327000
+    },
+    {
+      "sha": "e0c92b1dea4aa801aa38891c4a31d68c7cea9e68",
+      "subject": "fix(builder): runtime boot, manual stop, file writes and health badge bugs, and runtime workspace types (MS-2026-0006)",
+      "committedAt": 1792561358000
+    },
+    {
+      "sha": "02e19c8e782d637a6898cca8a69610879d4c8662",
+      "subject": "chore(builder): remove 29 files the app never loads (MS-2026-0006)",
+      "committedAt": 1792561940000
+    },
+    {
+      "sha": "615eeda647bd96061e1c8feee7b678702c7c3b89",
+      "subject": "fix(builder): dropped ZIPs reach the import modal, the top bar's mode and mark-all-read work, and workspace context types (MS-2026-0006)",
+      "committedAt": 1792562410000
+    },
+    {
+      "sha": "29ce4db456d2c154cc0507be00ef3784ff3b66ca",
+      "subject": "fix(builder): settings role switcher, plan display, appearance sliders, destructive buttons, transform hand-off and surface refs (MS-2026-0006)",
+      "committedAt": 1792563250000
+    },
+    {
+      "sha": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+      "subject": "fix(knowledge): capsule inspector shows validated layers, and Knowledge Operations types (MS-2026-0006)",
+      "committedAt": 1792563873000
+    }
+  ],
+  "recoveryAnchor": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+  "producedKnowledge": [
+    "LR-2026-0026",
+    "LR-2026-0027",
+    "LR-2026-0028"
+  ],
   "history": [
     {
       "from": null,
@@ -110,8 +151,82 @@
         "type": "human"
       },
       "at": 1792476515234
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792561976503,
+      "reason": "First linked commit d0ec4034: chore(builder): React type definitions installed and vite-env typed (MS-2026-0006)"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584765721,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792584828074,
+      "reason": "All validation checks passed at 97457ee1"
     }
   ],
   "createdAt": 1792474589676,
-  "updatedAt": 1792476515234
+  "updatedAt": 1792584828074,
+  "validation": {
+    "evaluatedAt": 1792584828074,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "3 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 97457ee1, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 97457ee1."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "97457ee125cc6ed98b4d210ad4e27b042c46bdaf",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792584828073
+    }
+  ]
 }
