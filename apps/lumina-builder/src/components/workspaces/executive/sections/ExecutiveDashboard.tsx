@@ -6,7 +6,7 @@ import type { PreviewTone } from "../design/executiveDesignPreview";
 import { deriveRecommendations } from "../state/executiveRecommendations";
 import { knowledgeHealth, platformHealth, runtimeHealth } from "../state/executiveHealth";
 import { DesignPreviewBadge, ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill } from "../shared/ExecutiveSection";
-import { STATE_LABEL, STATE_TONE, currentMission, isOpenMission, missionNextStep, missionProgress } from "../state/missionView";
+import { STATE_LABEL, STATE_TONE, currentMission, isOpenMission, nextPlannedMission, missionNextStep, missionProgress } from "../state/missionView";
 import { useExecutiveOffice } from "../state/useExecutiveOffice";
 
 const DECISION_TONE: Record<string, "healthy" | "warning" | "error" | "active"> = {
@@ -30,6 +30,7 @@ export function ExecutiveDashboard() {
   /* MS-5: mission health and the current mission read Runtime. */
   const missions = office.missions.status === "ok" ? office.missions.data : [];
   const current = currentMission(missions);
+  const next = current ? null : nextPlannedMission(missions);
   const open = missions.filter(isOpenMission).length;
   const awaiting = missions.filter((mission) => mission.state === "awaiting_approval").length;
   const missionTile = {
@@ -37,7 +38,7 @@ export function ExecutiveDashboard() {
     label: "Mission Health",
     value: office.missions.status === "ok" ? `${open} open` : office.missions.status === "loading" ? "Reading…" : "Unavailable",
     detail: office.missions.status === "ok"
-      ? [current ? `${current.id} ${STATE_LABEL[current.state].toLowerCase()}` : "No mission in progress", awaiting ? `${awaiting} awaiting you` : ""].filter(Boolean).join(" · ")
+      ? [current ? `${current.id} ${STATE_LABEL[current.state].toLowerCase()}` : next ? `${next.id} ${STATE_LABEL[next.state].toLowerCase()}, next` : "No mission in progress", awaiting ? `${awaiting} awaiting you` : ""].filter(Boolean).join(" · ")
       : office.missions.status === "error" ? office.missions.message : "",
     tone: (office.missions.status === "error" ? "error" : awaiting ? "warning" : current ? STATE_TONE[current.state] : "healthy") as PreviewTone,
   };

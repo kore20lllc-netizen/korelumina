@@ -32,6 +32,11 @@ function MissionExecution({ mission }: { mission: MissionRecord }) {
   const verifiable = anchor && (mission.state === "executing" || mission.state === "validating");
   const latest = anchor ? [...(mission.verifications ?? [])].reverse().find((verification) => verification.sha === anchor) : undefined;
   const passed = mission.checks?.filter((check) => check.passed).length ?? 0;
+  /*
+   * A pass already recorded for this anchor needs no second one: Passed
+   * says so and stays off, Failed still overrides it.
+   */
+  const verified = latest?.result === "passed";
 
   return (
     <li className="grid gap-3 rounded-[14px] border border-cyan-300/15 bg-slate-950/40 px-4 py-3">
@@ -63,15 +68,16 @@ function MissionExecution({ mission }: { mission: MissionRecord }) {
       {verifiable ? (
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-300/60">
-            npm run build at <span className="font-mono">{shortSha(anchor)}</span>{latest ? ` · recorded ${latest.result}` : ""}
+            npm run build at <span className="font-mono">{shortSha(anchor)}</span>{verified ? " · verified" : latest ? ` · recorded ${latest.result}` : " · not recorded yet"}
           </span>
           <button
             type="button"
-            disabled={Boolean(busy)}
+            disabled={Boolean(busy) || verified}
+            title={verified ? `The build pass for ${shortSha(anchor)} is already recorded` : undefined}
             onClick={() => void recordMissionBuild(mission.id, anchor, "passed")}
             className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] disabled:cursor-not-allowed disabled:opacity-50 ${tonePill.healthy}`}
           >
-            {busy === "passed" ? "Recording…" : "Passed"}
+            {busy === "passed" ? "Recording…" : verified ? "Passed ✓" : "Passed"}
           </button>
           <button
             type="button"

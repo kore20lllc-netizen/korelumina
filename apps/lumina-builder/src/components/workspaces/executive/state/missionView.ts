@@ -91,6 +91,14 @@ export function currentMission(missions: readonly MissionRecord[]): MissionRecor
   return sortMissions(missions.filter((mission) => ["executing", "validating", "approved", "awaiting_approval"].includes(mission.state)))[0] ?? null;
 }
 
+/*
+ * F-41: when nothing is in progress, the planned mission work turns to next,
+ * so the Executive Office never reads "none" while a plan is waiting.
+ */
+export function nextPlannedMission(missions: readonly MissionRecord[]): MissionRecord | null {
+  return sortMissions(missions.filter((mission) => mission.state === "planned" || mission.state === "draft"))[0] ?? null;
+}
+
 /* What the mission is waiting for, in the owner's words. */
 export function missionNextStep(mission: MissionRecord): string {
   switch (mission.state) {

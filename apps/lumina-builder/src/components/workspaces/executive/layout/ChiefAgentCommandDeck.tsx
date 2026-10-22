@@ -25,7 +25,7 @@ import {
   lighting,
 } from "../../knowledge-v3/theme/appearance";
 import type { PreviewTone } from "../design/executiveDesignPreview";
-import { currentMission } from "../state/missionView";
+import { currentMission, nextPlannedMission } from "../state/missionView";
 import {
   DesignPreviewBadge,
   tonePill,
@@ -297,11 +297,15 @@ function Identity({ office }: { office: ExecutiveOfficeState }) {
   const briefing = useExecutiveBriefing();
   const activation = office.activation;
   const deckCurrent = office.missions.status === "ok" ? currentMission(office.missions.data) : null;
+  const deckNext = office.missions.status === "ok" && !deckCurrent ? nextPlannedMission(office.missions.data) : null;
+  const deckLabel = deckNext ? "Next mission" : "Current mission";
   const deckMission =
     office.missions.status === "ok"
       ? deckCurrent
         ? `${deckCurrent.id} · ${deckCurrent.title}`
-        : "None in progress"
+        : deckNext
+          ? `${deckNext.id} · ${deckNext.title} (${deckNext.state === "draft" ? "draft" : "planned"})`
+          : "None in progress"
       : office.missions.status === "error"
         ? "Unreadable"
         : "Reading…";
@@ -353,7 +357,7 @@ function Identity({ office }: { office: ExecutiveOfficeState }) {
           The Chief Agent reasons and proposes. It cannot approve, execute, delegate, or spend (ADR-0041). You decide.
         </p>
         <div className="text-[10px] uppercase tracking-[0.14em] text-sky-300/60">
-          Current mission · <span className="text-amber-200">{deckMission}</span>
+          {deckLabel} · <span className="text-amber-200">{deckMission}</span>
         </div>
         <div className="flex flex-wrap gap-2">
           <ActivationControl office={office} />
