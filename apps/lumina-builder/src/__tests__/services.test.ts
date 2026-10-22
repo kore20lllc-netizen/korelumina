@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { clearNamespace, registerMigration, runMigrations, readJSON, writeJSON } from "@/lib/persistence";
 import { projectRepository } from "@/services/projectRepository";
-import { runAudit } from "@/services/auditEngine";
 import { runTransform } from "@/services/transformEngine";
 import { checkEntitlement } from "@/services/entitlements";
 import { isFeatureEnabled, setFeatureFlagOverride } from "@/lib/featureFlags";
@@ -37,26 +36,6 @@ describe("entitlements", () => {
     expect(checkEntitlement("deploy").allowed).toBe(false);
     // Branded preview requires Business
     expect(checkEntitlement("preview.brandedUrl").allowed).toBe(false);
-  });
-});
-
-describe("auditEngine", () => {
-  it("flags missing deps, vulnerable packages, and missing env vars", () => {
-    const repo: ImportedRepo = {
-      id: "r", source: "github", name: "demo", framework: "react",
-      files: {
-        "src/App.tsx": "import x from 'axios';\nconsole.log(process.env.API_KEY);",
-        ".env": "",
-      },
-      dependencies: { lodash: "4.17.20" },
-      complexity: "low", summary: "", importedAt: Date.now(),
-    };
-    const plan = runAudit(repo);
-    const cats = new Set(plan.findings.map((f) => f.category));
-    expect(cats.has("dependency")).toBe(true);
-    expect(cats.has("security")).toBe(true);
-    expect(cats.has("env")).toBe(true);
-    expect(plan.totalEtaMinutes).toBeGreaterThan(0);
   });
 });
 

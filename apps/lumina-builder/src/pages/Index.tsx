@@ -29,7 +29,7 @@ import {
 } from "@/components/workspace-appearance";
 
 const RepoAuditWorkspace = lazy(() =>
-  import("@/components/workspaces/RepoAuditWorkspace").then((m) => ({
+  import("@/components/workspaces/repo-audit/RepoAuditWorkspace").then((m) => ({
     default: m.RepoAuditWorkspace,
   })),
 );
