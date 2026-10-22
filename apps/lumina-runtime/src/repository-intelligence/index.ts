@@ -9,3 +9,5 @@ export * from "./SecretScan.js";
 export * from "./CodeRiskScan.js";
 export * from "./AdvisoryAudit.js";
 export * from "./BuildHealth.js";
+export * from "./EnvironmentAnalysis.js";
+export * from "./ArchitectureMap.js";
