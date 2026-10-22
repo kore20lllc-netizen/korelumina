@@ -129,6 +129,8 @@ export function ImportModal() {
   const { importOpen, setImportOpen, setView, importPrefill, setImportPrefill } = useWorkspace();
   const [tab, setTab] = useState<Tab>("github");
   const [url, setUrl] = useState("");
+  /* MS-2026-0013: for a private repository; sent with this import only, then cleared. */
+  const [accessToken, setAccessToken] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [folder, setFolder] = useState<{ name: string; entries: { file: File; path: string }[] } | null>(null);
   const [folderHover, setFolderHover] = useState(false);
@@ -209,6 +211,7 @@ export function ImportModal() {
     scanCancelRef.current = true;
     setImportOpen(false);
     setUrl("");
+    setAccessToken("");
     setFiles([]);
     setFolder(null);
     setFolderScan(null);
@@ -385,8 +388,10 @@ export function ImportModal() {
         },
       );
 
+      const token = accessToken;
+      setAccessToken("");
       const imported =
-        await importRepositoryAction(value);
+        await importRepositoryAction(value, { accessToken: token });
 
       setProgress((current) =>
         current && {
@@ -790,7 +795,7 @@ export function ImportModal() {
               {(tab === "github" || tab === "git") && (
                 <div className="space-y-3">
                   <label className="block text-[11px] uppercase tracking-widest text-muted-foreground">
-                    {tab === "github" ? "GitHub URL" : "Public Git URL"}
+                    {tab === "github" ? "GitHub URL" : "Git URL"}
                   </label>
                   <input
                     value={url}
@@ -798,6 +803,21 @@ export function ImportModal() {
                     placeholder={tab === "github" ? "https://github.com/owner/repo" : "https://git.example.com/owner/repo.git"}
                     className="w-full h-10 px-3 rounded-lg bg-surface-1 border border-border text-[13px] outline-none focus:border-violet/50 transition"
                   />
+                  <label className="block text-[11px] uppercase tracking-widest text-muted-foreground">
+                    Access token <span className="normal-case tracking-normal">(private repositories only)</span>
+                  </label>
+                  <input
+                    type="password"
+                    autoComplete="off"
+                    spellCheck={false}
+                    value={accessToken}
+                    onChange={(e) => setAccessToken(e.target.value)}
+                    placeholder="Leave empty for a public repository"
+                    className="w-full h-10 px-3 rounded-lg bg-surface-1 border border-border text-[13px] outline-none focus:border-violet/50 transition"
+                  />
+                  <p className="text-[11px] text-muted-foreground">
+                    Used for this import only and never stored. GitHub, GitLab, Bitbucket, Azure DevOps or any git server over HTTPS.
+                  </p>
                   <div className="flex justify-end pt-3">
                     <LuminaButton size="md" onClick={submitUrl} disabled={!url.trim()}>
                       <Github className="h-3.5 w-3.5" />

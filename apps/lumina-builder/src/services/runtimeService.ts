@@ -231,9 +231,35 @@ export interface RuntimeImportResult {
   };
 }
 
+/* MS-2026-0013: what each import refusal means, for the person importing. */
+const IMPORT_ERRORS: Record<string, string> = {
+  missing_repoUrl: "Enter the repository's URL.",
+  invalid_repoUrl: "That is not a valid URL.",
+  ssh_urls_not_supported_use_https: "Use the repository's HTTPS URL, not its SSH address.",
+  only_https_repo_urls_supported: "Use the repository's HTTPS URL.",
+  credentials_in_url_not_allowed_use_access_token: "Remove the credentials from the URL and put the token in the access token field.",
+  repository_host_not_allowed: "Repositories on this machine's own network cannot be imported.",
+  repository_url_must_name_owner_and_repository: "The URL must name the owner and the repository.",
+  repository_url_must_name_group_and_repository: "The URL must name the group and the repository.",
+  azure_devops_url_must_include__git_and_repository: "Use the repository URL, which contains /_git/ and the repository name.",
+  azure_devops_url_must_name_organization_and_project: "The URL must name the organization and the project.",
+  repository_url_must_name_a_repository: "The URL must name a repository.",
+  repository_not_found_or_private_add_access_token: "Repository not found. If it is private, add an access token.",
+  repository_access_denied_check_url_or_token: "Access denied. Check the URL and that the token can read this repository.",
+  repository_not_found_or_private: "Repository not found, or it is private.",
+  repository_host_unreachable: "The repository's host could not be reached.",
+  repository_clone_timed_out: "The repository took too long to download.",
+  local_copy_has_diverged_from_remote: "The imported copy has changes the repository does not; it was not updated.",
+  target_project_folder_exists_and_is_not_git_repo: "A project with this name already exists and is not from git.",
+  git_not_installed: "git is not installed where Runtime runs.",
+};
+
 export async function importRuntimeProject(input: {
   repoUrl: string;
   projectId?: string;
+  /* Used for this import only; Runtime never stores it. */
+  accessToken?: string;
+  accessUsername?: string;
 }): Promise<RuntimeImportResult> {
   const response = await fetch(
     `${RUNTIME_API}/api/runtime/projects/import`,
@@ -249,7 +275,8 @@ export async function importRuntimeProject(input: {
   const data = await response.json();
 
   if (!response.ok || !data?.ok || !data?.import?.projectId) {
-    throw new Error(data?.error ?? "failed_to_import_runtime_project");
+    const code = data?.error ?? "failed_to_import_runtime_project";
+    throw new Error(IMPORT_ERRORS[code] ?? code);
   }
 
   return data.import as RuntimeImportResult;

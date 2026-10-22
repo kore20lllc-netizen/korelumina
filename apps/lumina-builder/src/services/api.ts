@@ -49,7 +49,7 @@ async function withRetry<T>(fn: () => Promise<T>, opts: { retries?: number; sign
  * providers/registry.ts. All errors are normalized to AppError.
  */
 
-export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise<ImportResponse> {
+export async function importRepo(repoUrl: string, signal?: AbortSignal, access?: { accessToken?: string }): Promise<ImportResponse> {
   try {
     requireEntitlement("project.create");
 
@@ -59,6 +59,7 @@ export async function importRepo(repoUrl: string, signal?: AbortSignal): Promise
 
     const imported = await importRuntimeProject({
       repoUrl,
+      accessToken: access?.accessToken?.trim() || undefined,
     });
 
     const name =

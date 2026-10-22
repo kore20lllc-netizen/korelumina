@@ -12,9 +12,9 @@ export async function startBuilding(prompt: string) {
   return { ok: true, prompt };
 }
 
-export async function importRepo(repoUrl: string) {
+export async function importRepo(repoUrl: string, access?: { accessToken?: string }) {
   try {
-    return await apiImportRepo(repoUrl);
+    return await apiImportRepo(repoUrl, undefined, access);
   } catch (e) {
     toast.error(`Import failed: ${(e as Error).message}`);
     throw e;

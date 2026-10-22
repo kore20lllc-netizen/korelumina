@@ -1,6 +1,7 @@
 import type { Express } from "express";
 
-import { importGithubProject } from "../import/importGithubProject.js";
+import { importRepository } from "../import/importRepository.js";
+import { RepositorySourceError } from "../import/RepositorySource.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
 
 export function registerImportProjectRoute(
@@ -12,9 +13,13 @@ export function registerImportProjectRoute(
     async (req, res) => {
       try {
         const imported =
-          await importGithubProject({
+          await importRepository({
             repoUrl:
               req.body?.repoUrl,
+            accessToken:
+              req.body?.accessToken,
+            accessUsername:
+              req.body?.accessUsername,
             projectId:
               req.body?.projectId,
             ownerId:
@@ -32,7 +37,11 @@ export function registerImportProjectRoute(
           import: imported,
         });
       } catch (error) {
-        return res.status(500).json({
+        /* MS-2026-0013: a bad URL is the caller's mistake, not a failure. */
+        const invalid =
+          error instanceof RepositorySourceError ||
+          (error instanceof Error && /^invalid_access_/.test(error.message));
+        return res.status(invalid ? 400 : 500).json({
           ok: false,
           error:
             error instanceof Error
