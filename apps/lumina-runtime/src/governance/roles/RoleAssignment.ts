@@ -88,6 +88,32 @@ export class SupabaseAdminUserDirectory implements UserDirectory {
     return users;
   }
 
+  /* MS-2026-0003: billing reads one person and writes their plan. */
+  async get(userId: string): Promise<DirectoryUser | null> {
+    if (!this.configured) throw new Error("user_directory_not_configured");
+    const response = await this.fetchImpl(
+      `${this.url}/auth/v1/admin/users/${encodeURIComponent(userId)}`,
+      { headers: this.headers() },
+    );
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error(`user_directory_failed:${response.status}`);
+    return toDirectoryUser(await response.json());
+  }
+
+  async updateAppMetadata(user: DirectoryUser, patch: Record<string, unknown>): Promise<DirectoryUser> {
+    if (!this.configured) throw new Error("user_directory_not_configured");
+    const response = await this.fetchImpl(
+      `${this.url}/auth/v1/admin/users/${encodeURIComponent(user.id)}`,
+      {
+        method: "PUT",
+        headers: this.headers(),
+        body: JSON.stringify({ app_metadata: { ...user.appMetadata, ...patch } }),
+      },
+    );
+    if (!response.ok) throw new Error(`app_metadata_update_failed:${response.status}`);
+    return toDirectoryUser(await response.json());
+  }
+
   async setRole(user: DirectoryUser, role: StaffRole): Promise<DirectoryUser> {
     if (!this.configured) throw new Error("user_directory_not_configured");
     const response = await this.fetchImpl(

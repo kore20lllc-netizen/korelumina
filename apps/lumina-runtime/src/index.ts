@@ -96,6 +96,13 @@ import { registerMetricsRoute } from "./routes/metrics.js";
 import { registerEventsRoute } from "./routes/events.js";
 import { registerFsRoute } from "./routes/fs.js";
 import { registerAuditRoute } from "./routes/audit.js";
+import {
+  FilePlanAssignmentLedger,
+  FileStripeEventStore,
+  StripeBillingService,
+  priceMapFromEnvironment,
+} from "./billing/StripeBilling.js";
+import { registerStripeWebhookRoute } from "./routes/stripeWebhook.js";
 import { registerRepositoryAuditRoutes } from "./routes/repositoryAudit.js";
 import { registerFixPlanRoute } from "./routes/fixPlan.js";
 import { registerGenerateFixesRoute } from "./routes/generateFixes.js";
@@ -1565,6 +1572,29 @@ app.use(
       allowedRuntimeOrigins,
   }),
 );
+/*
+ * MS-2026-0003: Stripe's webhook reads the raw body to verify the signature,
+ * so it is registered before express.json(). Its secret and the price to
+ * plan map live only in Runtime's environment.
+ */
+const stripeWebhookSecret =
+  process.env.STRIPE_WEBHOOK_SECRET?.trim() || undefined;
+
+registerStripeWebhookRoute(app, {
+  secret: stripeWebhookSecret,
+  billing: stripeWebhookSecret
+    ? new StripeBillingService(
+        new SupabaseAdminUserDirectory(
+          supabaseTokenConfigFromEnvironment().url,
+          process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || undefined,
+        ),
+        new FileStripeEventStore(),
+        new FilePlanAssignmentLedger(),
+        priceMapFromEnvironment(),
+      )
+    : null,
+});
+
 app.use(express.json());
 app.use(trackRuntimeMutations);
 
