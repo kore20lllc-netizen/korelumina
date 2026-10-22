@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Repo Audit Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Repo Audit command deck and section placement",
+      "client report dialog",
+      "wiring badge (preview, partly live, live)",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved Repo Audit (2026-10-21)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/repo-audit/RepoAuditWorkspace.tsx": {
+      "sha256": "57a66716252a30025fbe35e433616976749965367e1e9e4ceb5c3656325ac7dc",
+      "elementCount": 17
+    },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/layout/ClientReportDialog.tsx": {
+      "sha256": "467324752ec7530f3f7f20c8f1627fcb68bb9be78c92d70aa1b618ff3f204615",
+      "elementCount": 47
+    },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/layout/RepoAuditCommandDeck.tsx": {
+      "sha256": "cc942ef8a0b0892e56aed58f7354f8a12f8d9aa178ccc85e0e1ae03c52032958",
+      "elementCount": 44
+    },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/sections/RepoAuditSections.tsx": {
+      "sha256": "bc961aea6ddcfa07fee2911a661af659e022acc0cdfed54661c9d920b9b62d41",
+      "elementCount": 84
+    },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/shared/FindingCard.tsx": {
+      "sha256": "fbfd2a2dc07f12f285aab756739175c8e85a553488cb77a19301d45aecdba855",
+      "elementCount": 19
+    },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/shared/ReportGate.tsx": {
+      "sha256": "29f356297f255d900456a7e2e0bcf45e1b934e071ec092dba6cd01296db381ea",
+      "elementCount": 3
+    }
+  }
+}
