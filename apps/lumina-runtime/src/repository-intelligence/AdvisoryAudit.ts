@@ -1,5 +1,7 @@
 import { execFile } from "node:child_process";
 
+import { projectProcessEnvironment } from "../runtime/projectProcessEnvironment.js";
+
 import { createFinding, type FindingSeverity, type RepositoryFinding } from "./RepositoryFinding.js";
 import type { RepositoryInventory } from "./RepositoryInventory.js";
 
@@ -33,7 +35,16 @@ export const runAuditCommand: AuditCommandRunner = (command, args, cwd) =>
     execFile(
       command,
       [...args],
-      { cwd, timeout: 120_000, maxBuffer: 64 * 1024 * 1024, env: { ...process.env, npm_config_fund: "false", npm_config_update_notifier: "false" } },
+      {
+        cwd,
+        timeout: 120_000,
+        maxBuffer: 64 * 1024 * 1024,
+        /*
+         * SEC-1 allowlist: a project's .npmrc can point npm at any registry,
+         * so Runtime's secrets (registry tokens included) are never passed.
+         */
+        env: projectProcessEnvironment({ npm_config_fund: "false", npm_config_update_notifier: "false" }),
+      },
       (error, stdout, stderr) => {
         const failure = error as (NodeJS.ErrnoException & { killed?: boolean; code?: number | string }) | null;
         resolve({

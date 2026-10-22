@@ -8,3 +8,4 @@ export * from "./DependencyAnalysis.js";
 export * from "./SecretScan.js";
 export * from "./CodeRiskScan.js";
 export * from "./AdvisoryAudit.js";
+export * from "./BuildHealth.js";
