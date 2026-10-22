@@ -35,6 +35,12 @@ export interface RepositorySnapshot {
   /* Paths skipped because they are generated, vendored or git-ignored. */
   skippedDirectories: readonly string[];
   read(file: string): string | null;
+  /*
+   * Reads any text file in the snapshot from disk, environment files
+   * included. Only the secret scanner uses it, and it never reports or
+   * keeps what it reads: only where a secret is and what kind it is.
+   */
+  readSensitive(file: string): string | null;
 }
 
 export const SKIPPED_DIRECTORIES = new Set([
@@ -169,5 +175,14 @@ export function takeRepositorySnapshot(root: string): RepositorySnapshot {
     commit: readCommit(absoluteRoot),
     skippedDirectories: [...skipped].sort(),
     read: (file) => texts.get(file) ?? null,
+    readSensitive: (file) => {
+      const entry = files.find((candidate) => candidate.path === file);
+      if (!entry || !entry.text) return null;
+      try {
+        return readFileSync(path.join(absoluteRoot, ...file.split("/")), "utf8");
+      } catch {
+        return null;
+      }
+    },
   };
 }

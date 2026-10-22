@@ -5,3 +5,6 @@ export * from "./RepositoryIntelligenceStore.js";
 export * from "./RepositoryFinding.js";
 export * from "./SourceImports.js";
 export * from "./DependencyAnalysis.js";
+export * from "./SecretScan.js";
+export * from "./CodeRiskScan.js";
+export * from "./AdvisoryAudit.js";
