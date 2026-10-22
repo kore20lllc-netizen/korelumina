@@ -3,6 +3,16 @@ import path from "node:path";
 
 import { getRuntimeDataRoot } from "./workspacePaths.js";
 
+/*
+ * MS-2026-0013: where a project came from. Set by Runtime when it imports
+ * or creates the project, never by the browser. Diagnosis and paid repair
+ * are offered only for imported projects.
+ */
+export type ProjectOrigin =
+  | { kind: "git"; provider: string; host: string; source: string; importedAt: number }
+  | { kind: "archive"; source: string; importedAt: number }
+  | { kind: "built"; createdAt: number };
+
 export interface ProjectMetadata {
   projectId: string;
   ownerId?: string;
@@ -15,6 +25,8 @@ export interface ProjectMetadata {
   sourceUrl?: string;
   repoOwner?: string;
   repoName?: string;
+
+  origin?: ProjectOrigin;
 
   createdAt: number;
   updatedAt: number;

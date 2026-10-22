@@ -4,7 +4,10 @@ import { importRepository } from "../import/importRepository.js";
 import { RepositorySourceError } from "../import/RepositorySource.js";
 import { ArchiveError } from "../import/ArchiveExtract.js";
 import { importArchive, MAX_ARCHIVE_UPLOAD_BYTES } from "../import/importArchive.js";
+import { getProjectMetadata } from "../projects/projectMetadataStore.js";
+import { canManageProject } from "./runtimeAuthorization.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
+import { getRuntimeCaller } from "./runtimeCaller.js";
 
 export function registerImportProjectRoute(
   app: Express,
@@ -14,6 +17,8 @@ export function registerImportProjectRoute(
     requireRuntimeAccess,
     async (req, res) => {
       try {
+        /* MS-2026-0013: the importer owns what they import; the browser does not name an owner. */
+        const caller = getRuntimeCaller(req);
         const imported =
           await importRepository({
             repoUrl:
@@ -25,13 +30,11 @@ export function registerImportProjectRoute(
             projectId:
               req.body?.projectId,
             ownerId:
-              req.body?.ownerId,
-            teamId:
-              req.body?.teamId,
+              caller.userId,
             createdBy:
-              req.body?.createdBy,
-            visibility:
-              req.body?.visibility,
+              caller.userId,
+          }, {
+            mayUpdate: (metadata) => canManageProject(caller, metadata),
           });
 
         return res.json({
@@ -48,6 +51,7 @@ export function registerImportProjectRoute(
         /* MS-2026-0013: a bad URL is the caller's mistake, not a failure. */
         const invalid =
           error instanceof RepositorySourceError ||
+          (error instanceof Error && error.message === "project_belongs_to_someone_else") ||
           (error instanceof Error && /^invalid_access_/.test(error.message));
         return res.status(invalid ? 400 : 500).json({
           ok: false,
@@ -71,10 +75,13 @@ export function registerImportProjectRoute(
     express.raw({ type: () => true, limit: MAX_ARCHIVE_UPLOAD_BYTES }),
     async (req, res) => {
       try {
+        const caller = getRuntimeCaller(req);
         const imported = await importArchive({
           fileName: req.query.name,
           data: Buffer.isBuffer(req.body) ? req.body : Buffer.alloc(0),
           projectId: req.query.projectId,
+          ownerId: caller.userId,
+          createdBy: caller.userId,
         });
         return res.json({ ok: true, import: imported });
       } catch (error) {

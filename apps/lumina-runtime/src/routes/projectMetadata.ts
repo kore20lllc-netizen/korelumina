@@ -1,8 +1,12 @@
 import type { Express } from "express";
 
 import {
+  getProjectMetadata,
   setProjectMetadata,
 } from "../projects/projectMetadataStore.js";
+import { decideProjectOwnership, definedOnly } from "../projects/projectOwnership.js";
+import { projectExists } from "../runtime/projectRegistry.js";
+import { getRuntimeCaller } from "./runtimeCaller.js";
 
 function normalizeString(
   value: unknown,
@@ -38,18 +42,26 @@ export function registerProjectMetadataRoute(
           });
         }
 
+        if (!projectExists(projectId)) {
+          return res.status(404).json({ ok: false, error: "project_not_found" });
+        }
+
+        /* MS-2026-0013: only the owner (or an admin) changes a project; an unowned one is claimed by its signed-in caller. */
+        const caller = getRuntimeCaller(req);
+        const existing = getProjectMetadata(projectId);
+        const decision = decideProjectOwnership(caller, existing, normalizeString(req.body?.ownerId));
+        if (!decision.ok) {
+          return res.status(decision.status).json({ ok: false, error: decision.error });
+        }
+
         const record =
           setProjectMetadata({
             projectId,
-            ownerId: normalizeString(
-              req.body?.ownerId,
-            ),
-            teamId: normalizeString(
-              req.body?.teamId,
-            ),
-            createdBy: normalizeString(
-              req.body?.createdBy,
-            ),
+            ...definedOnly({
+              ownerId: decision.ownerId,
+              teamId: normalizeString(req.body?.teamId),
+              createdBy: existing?.createdBy ?? decision.ownerId,
+            }),
             visibility:
               req.body?.visibility ===
                 "team" ||

@@ -5,7 +5,8 @@ import { resolveProjectPath } from "@korelumina/platform-sdk";
 
 import { detectFramework } from "../detect/detectFramework.js";
 import { recordImportKnowledge } from "../knowledge/index.js";
-import { setProjectMetadata } from "../projects/projectMetadataStore.js";
+import { getProjectMetadata, setProjectMetadata } from "../projects/projectMetadataStore.js";
+import { definedOnly } from "../projects/projectOwnership.js";
 import { getProjectsRoot } from "../projects/workspacePaths.js";
 import { runGit, type GitCredentials, type GitRunner } from "./GitClone.js";
 import { parseRepositoryUrl, type RepositorySource } from "./RepositorySource.js";
@@ -58,7 +59,11 @@ export async function importRepository(
     createdBy?: unknown;
     visibility?: unknown;
   },
-  dependencies: { git?: GitRunner } = {},
+  dependencies: {
+    git?: GitRunner;
+    /* Whether the caller may update an existing copy of this project. */
+    mayUpdate?: (metadata: ReturnType<typeof getProjectMetadata>) => boolean;
+  } = {},
 ): Promise<ImportedRepository> {
   const source = parseRepositoryUrl(input.repoUrl);
   const credentials = credentialsFrom(input);
@@ -75,6 +80,9 @@ export async function importRepository(
 
   const git = { provider: source.provider, credentials, scopeUrl: `https://${source.host}/`, runner: dependencies.git };
   let action: ImportAction = "cloned";
+  if (fs.existsSync(projectPath) && dependencies.mayUpdate && !dependencies.mayUpdate(getProjectMetadata(projectId))) {
+    throw new Error("project_belongs_to_someone_else");
+  }
   if (fs.existsSync(projectPath) && fs.existsSync(path.join(projectPath, ".git"))) {
     await runGit(["pull", "--ff-only"], { cwd: projectPath, ...git });
     action = "pulled";
@@ -86,17 +94,29 @@ export async function importRepository(
   }
 
   const framework = detectFramework(projectPath);
+  const previous = getProjectMetadata(projectId)?.origin;
 
+  /* An update keeps the project's owner, team and visibility; a new import takes the importer's. */
+  const existing = getProjectMetadata(projectId);
   setProjectMetadata({
     projectId,
-    ownerId: typeof input.ownerId === "string" ? input.ownerId : undefined,
-    teamId: typeof input.teamId === "string" ? input.teamId : undefined,
-    createdBy: typeof input.createdBy === "string" ? input.createdBy : undefined,
-    visibility: input.visibility === "team" || input.visibility === "support" ? input.visibility : "private",
+    ...definedOnly({
+      ownerId: existing?.ownerId ?? (typeof input.ownerId === "string" ? input.ownerId : undefined),
+      teamId: existing?.teamId ?? (typeof input.teamId === "string" ? input.teamId : undefined),
+      createdBy: existing?.createdBy ?? (typeof input.createdBy === "string" ? input.createdBy : undefined),
+    }),
+    visibility: existing?.visibility ?? (input.visibility === "team" || input.visibility === "support" ? input.visibility : "private"),
     framework,
     sourceUrl: source.cloneUrl,
     repoOwner: source.owner,
     repoName: source.repo,
+    origin: {
+      kind: "git",
+      provider: source.provider,
+      host: source.host,
+      source: source.cloneUrl,
+      importedAt: previous?.kind === "git" && previous.source === source.cloneUrl ? previous.importedAt : Date.now(),
+    },
   });
 
   try {

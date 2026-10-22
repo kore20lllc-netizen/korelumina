@@ -5,6 +5,7 @@ import {
 } from "@korelumina/platform-sdk";
 
 import { getProjectMetadata } from "./projectMetadataStore.js";
+import { projectOrigin } from "./projectOrigin.js";
 import { getProjectsRoot } from "./workspacePaths.js";
 
 const PROJECTS_ROOT =
@@ -31,6 +32,8 @@ export function listProjects() {
         entry.name,
       ),
     )
+    /* MS-2026-0013: hidden folders (an archive being unpacked) are not projects. */
+    .filter((entry) => !entry.name.startsWith("."))
     .map((entry) => {
       const projectPath = path.join(
         PROJECTS_ROOT,
@@ -45,6 +48,7 @@ export function listProjects() {
       return {
         ...metadata,
         projectId: entry.name,
+        origin: projectOrigin(metadata),
         path: projectPath,
         hasPackageJson:
           fileSystem.exists(

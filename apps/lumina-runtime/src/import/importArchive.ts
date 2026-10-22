@@ -8,6 +8,7 @@ import { detectFramework } from "../detect/detectFramework.js";
 import { recordImportKnowledge } from "../knowledge/index.js";
 import { setProjectMetadata } from "../projects/projectMetadataStore.js";
 import { getProjectsRoot } from "../projects/workspacePaths.js";
+import { definedOnly } from "../projects/projectOwnership.js";
 import { ArchiveError, archiveKindOf, extractArchive, type ArchiveLimits } from "./ArchiveExtract.js";
 
 /*
@@ -82,12 +83,15 @@ export async function importArchive(
   const framework = detectFramework(projectPath);
   setProjectMetadata({
     projectId,
-    ownerId: typeof input.ownerId === "string" ? input.ownerId : undefined,
-    teamId: typeof input.teamId === "string" ? input.teamId : undefined,
-    createdBy: typeof input.createdBy === "string" ? input.createdBy : undefined,
+    ...definedOnly({
+      ownerId: typeof input.ownerId === "string" ? input.ownerId : undefined,
+      teamId: typeof input.teamId === "string" ? input.teamId : undefined,
+      createdBy: typeof input.createdBy === "string" ? input.createdBy : undefined,
+    }),
     visibility: input.visibility === "team" || input.visibility === "support" ? input.visibility : "private",
     framework,
     repoName: projectId,
+    origin: { kind: "archive", source: fileName, importedAt: Date.now() },
   });
 
   try {

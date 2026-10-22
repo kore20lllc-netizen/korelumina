@@ -160,6 +160,13 @@ export interface RuntimeProject {
   repoOwner?: string;
   repoName?: string;
 
+  /* MS-2026-0013: where Runtime says the project came from. */
+  origin?:
+    | { kind: "git"; provider: string; host: string; source: string; importedAt?: number; recorded: boolean }
+    | { kind: "archive"; source: string; importedAt: number; recorded: true }
+    | { kind: "built"; createdAt: number; recorded: true }
+    | { kind: "unknown"; recorded: false };
+
   ownerId?: string;
   teamId?: string;
   createdBy?: string;
@@ -277,6 +284,11 @@ const IMPORT_ERRORS: Record<string, string> = {
   tar_gz_not_readable: "The .tar.gz file could not be read.",
   tar_not_readable: "The .tar.gz file is damaged.",
   tar_entry_too_large: "A file in the .tar.gz is too large.",
+  project_belongs_to_someone_else: "A project with this name already belongs to someone else.",
+  not_project_owner: "Only the project's owner can change it.",
+  owner_cannot_be_transferred: "A project's owner cannot be changed here.",
+  owner_must_be_the_caller: "You can only claim a project for yourself.",
+  sign_in_required: "Sign in to import a project.",
 };
 
 export async function importRuntimeProject(input: {
@@ -352,7 +364,8 @@ export async function syncRuntimeProjectMetadata(input: {
   const data = await response.json();
 
   if (!response.ok || !data?.ok) {
-    throw new Error(data?.error ?? "failed_to_sync_runtime_project_metadata");
+    const code = data?.error ?? "failed_to_sync_runtime_project_metadata";
+    throw new Error(IMPORT_ERRORS[code] ?? code);
   }
 }
 export async function deleteRuntimeProject(
