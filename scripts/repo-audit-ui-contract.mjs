@@ -77,7 +77,8 @@ function presentationFingerprint(relativeFile) {
       for (const property of node.attributes.properties) {
         if (!ts.isJsxAttribute(property)) continue;
         const name = property.name.getText(sourceFile);
-        if (!PRESENTATION_ATTRIBUTES.includes(name)) continue;
+        /* Props like gridColumnsClassName style the element just as className does. */
+        if (!PRESENTATION_ATTRIBUTES.includes(name) && !name.endsWith("ClassName")) continue;
         attributes[name] = property.initializer
           ? property.initializer.getText(sourceFile).replace(/\s+/g, " ").trim()
           : "true";

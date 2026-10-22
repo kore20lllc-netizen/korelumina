@@ -2,7 +2,7 @@
 
 Status: Proposed for certification
 Authority: KoreLumina Architecture
-Reference implementation: Runtime Operations
+Reference implementation: Knowledge Operations (owner decision, 2026-10-21)
 UI authority: Lumina Design System and Lumina Workspace Framework
 
 ---
@@ -47,11 +47,18 @@ Every executive workspace must:
 - Avoid fabricated operational data.
 - Keep business logic separate from presentation.
 
-Runtime Operations remains the canonical visual reference for operational
-workspaces.
+Knowledge Operations is the canonical visual reference for every executive
+workspace, operational and intelligence-centric alike: its materials,
+premium icons, flagship panels and cards, metric cards, and section
+navigator. Each workspace arranges these for its own job; the Executive
+Office's arrangement (command deck, sticky section navigator, flagship
+sections in a grid) is the model for workspaces built after it.
 
-Knowledge Operations may become the canonical reference for
-intelligence-centric workspaces after its production certification.
+Decision (owner, 2026-10-21, MS-2026-0011): Knowledge Operations replaces
+Runtime Operations as the reference. Runtime Operations is rebuilt in the
+Knowledge Operations design, with its data, actions, shortcuts and
+inspector preserved. Every workspace that matches the reference has a
+certified UI contract in docs/ui-contracts, verified by npm run build.
 
 ---
 
@@ -580,7 +587,7 @@ A workspace may request a new framework capability only when:
 - Existing certified primitives cannot express the requirement.
 - The requirement applies to more than one workspace or is a legitimate
   generic framework concern.
-- Runtime Operations or another approved reference implementation validates
+- Knowledge Operations or another approved, certified workspace validates
   the pattern.
 - The extension is documented and certified.
 - Existing workspaces remain visually and behaviorally stable.
@@ -669,7 +676,8 @@ WF-100 is approved when:
 - Executive workspace ownership boundaries are explicit.
 - Shell, framework, workspace, panel, and service responsibilities remain
   separate.
-- Runtime Operations remains the canonical operational reference.
+- Knowledge Operations is the canonical visual reference, and every
+  workspace that follows it has a certified UI contract.
 - Lumina remains the sole visual and interaction foundation.
 - Authoritative services remain the sole operational truth.
 - Generic framework rules no longer need to be redefined by each domain

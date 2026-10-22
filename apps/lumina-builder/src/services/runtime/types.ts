@@ -51,6 +51,26 @@ export interface RuntimeProject {
   uptimeMs: number;
   metrics: RuntimeMetrics;
   scenario?: RuntimeScenario;
+  /*
+   * MS-2026-0011: what Runtime actually reports about the project's
+   * process. Present whenever Runtime has a record of the project.
+   */
+  process?: RuntimeProcessDetails;
+}
+
+export interface RuntimeProcessDetails {
+  framework: string | null;
+  port: number | null;
+  url: string | null;
+  pid: number | null;
+  alive: boolean;
+  lastError: string | null;
+  logLines: number;
+  exitedAt: number | null;
+  /* Automatic restarts in Runtime's current window. */
+  restarts: number;
+  lastRestartAt: number | null;
+  lastFailureReason: string | null;
 }
 
 export interface RuntimeEvent {

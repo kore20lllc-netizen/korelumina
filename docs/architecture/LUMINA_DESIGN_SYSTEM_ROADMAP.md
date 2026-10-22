@@ -288,6 +288,10 @@ They do not define their own visual systems.
 
 # Phase VIII — Workspace Migration
 
+Reference design: Knowledge Operations (owner decision, 2026-10-21; WF-100).
+Each migrated workspace is approved visually by the owner and protected by a
+certified UI contract (docs/ui-contracts). Tracked as MS-2026-0011.
+
 Migration order:
 
 Repo Audit
@@ -377,6 +381,10 @@ Future products consume Lumina instead of inventing their own UI language.
 ---
 
 # Runtime Workspace v2 Reference Implementation
+
+Superseded (owner decision, 2026-10-21): Knowledge Operations is the
+reference design (WF-100), and Runtime Operations is rebuilt in it under
+MS-2026-0011. The section below is kept as the record of the earlier plan.
 
 Runtime Operations is the first full Lumina workspace rebuild.
 

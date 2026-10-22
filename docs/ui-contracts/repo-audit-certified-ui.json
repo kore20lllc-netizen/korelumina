@@ -28,7 +28,7 @@
   "generatedFrom": "owner visually approved Repo Audit (2026-10-21)",
   "fingerprints": {
     "apps/lumina-builder/src/components/workspaces/repo-audit/RepoAuditWorkspace.tsx": {
-      "sha256": "57a66716252a30025fbe35e433616976749965367e1e9e4ceb5c3656325ac7dc",
+      "sha256": "3185f44305d54bffbb49c82fc45bdabea87e25cab13ebea5d20aa3403f9b2fd2",
       "elementCount": 17
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/layout/ClientReportDialog.tsx": {

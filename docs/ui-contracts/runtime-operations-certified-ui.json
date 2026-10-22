@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Runtime Operations Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Runtime Operations command deck and section placement",
+      "action confirmation dialog",
+      "wiring badge (preview, partly live, live)",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved Runtime Operations (2026-10-21)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/runtime/RuntimeOperationsWorkspace.tsx": {
+      "sha256": "081c5b3493b7fc2c9bc75bd6a7be4a38633a1a19b16a2be351e7ade16638cc41",
+      "elementCount": 21
+    },
+    "apps/lumina-builder/src/components/workspaces/runtime/layout/RuntimeOpsCommandDeck.tsx": {
+      "sha256": "fe27a97fdf13dee46ed4a9f9cb50bc0773433fa34dd74f7c3b9ba4488eba0d0b",
+      "elementCount": 40
+    },
+    "apps/lumina-builder/src/components/workspaces/runtime/sections/RuntimeOpsSections.tsx": {
+      "sha256": "35cbff18174b3054d9b0d28ee343bf78f5c424317c1967b98f123624810f7388",
+      "elementCount": 85
+    },
+    "apps/lumina-builder/src/components/workspaces/runtime/shared/Sparkline.tsx": {
+      "sha256": "c63e1cc85eba132006d404b73d0419f7bcce09258665b7e7d9798c638b7a2636",
+      "elementCount": 4
+    }
+  }
+}

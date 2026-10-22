@@ -806,6 +806,24 @@ export class RealRuntimeOperationsService
         runtime?.scenario ??
 
         "normal",
+
+      /* MS-2026-0011: the process facts Runtime reports, unchanged. */
+      process: (() => {
+        const restart = response.restarts?.find((entry) => entry.projectId === project.projectId);
+        return {
+          framework: runtime?.framework ?? project.framework ?? null,
+          port: runtime?.port ?? null,
+          url: runtime?.url ?? null,
+          pid: runtime?.pid ?? null,
+          alive: runtime?.alive ?? false,
+          lastError: runtime?.lastError ?? null,
+          logLines: runtime?.logLines ?? 0,
+          exitedAt: runtime?.exitedAt ?? null,
+          restarts: restart?.count ?? 0,
+          lastRestartAt: restart?.lastRestartAt ?? null,
+          lastFailureReason: restart?.lastFailureReason ?? null,
+        };
+      })(),
     };
   }
 
