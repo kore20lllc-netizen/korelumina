@@ -134,10 +134,10 @@ test("imports resolve through relative paths, .js to .ts, index files, aliases a
 test("broken imports, cycles and unreachable files are reported", () => {
   const { architecture } = analyze(APP);
   const broken = architecture.findings.filter((finding) => finding.rule === "architecture.broken-import");
-  assert.deepEqual(broken.map((finding) => `${finding.severity} ${finding.evidence[0]!.file}:${finding.evidence[0]!.line}`).sort(), [
-    "high src/App.tsx:2",
-    "low archive/old.ts:1",
-  ]);
+  assert.deepEqual(broken.map((finding) => `${finding.severity} ${finding.evidence[0]!.file}:${finding.evidence[0]!.line}`), ["high src/App.tsx:2"]);
+  /* Archived copies are summarized per archived folder. */
+  const archived = architecture.findings.filter((finding) => finding.rule === "architecture.broken-imports-archived");
+  assert.deepEqual(archived.map((finding) => `${finding.severity} ${finding.title}`), ["info 1 broken import in archived code under archive"]);
   assert.deepEqual(architecture.cycles, [["src/cycle/a.ts", "src/cycle/b.ts"]]);
   assert.deepEqual(architecture.unreachable, ["archive/old.ts", "packages/ui/src/unused.ts", "src/types/x.ts", "src/types/y.ts"]);
   const unreachable = architecture.findings.filter((finding) => finding.rule === "architecture.unreachable-files");

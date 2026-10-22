@@ -155,7 +155,23 @@ export function mapArchitecture(snapshot: RepositorySnapshot, inventory: Reposit
     .filter((file) => !file.ignored && file.text && SOURCE_EXTENSIONS.has(path.posix.extname(file.path).toLowerCase()))
     .map((file) => file.path);
   const packagesByName = new Map(inventory.packages.filter((entry) => entry.name).map((entry) => [entry.name!, entry]));
-  const aliases = new Map(inventory.packages.map((entry) => [entry.directory, aliasTargets(snapshot, entry)]));
+  /*
+   * An alias that names a declared package or points into node_modules
+   * (Vite deduping react, for example) is that package, not project code.
+   */
+  const declaredNames = new Set(
+    inventory.packages.flatMap((entry) => Object.keys({ ...entry.dependencies, ...entry.devDependencies, ...entry.peerDependencies, ...entry.optionalDependencies })),
+  );
+  const aliases = new Map(
+    inventory.packages.map((entry) => [
+      entry.directory,
+      new Map(
+        [...aliasTargets(snapshot, entry)].filter(
+          ([prefix, target]) => !declaredNames.has(prefix.replace(/\/$/, "")) && !/(^|\/)node_modules(\/|$)/.test(target),
+        ),
+      ),
+    ]),
+  );
   const rootAliases = aliases.get(".") ?? new Map<string, string>();
 
   const resolveFile = (candidate: string): string | null => {
@@ -268,21 +284,48 @@ export function mapArchitecture(snapshot: RepositorySnapshot, inventory: Reposit
   const findings: RepositoryFinding[] = [];
   const brokenByFile = new Map<string, { file: string; found: SourceImport; text: string }[]>();
   for (const item of broken) brokenByFile.set(`${item.file}\0${item.found.specifier}`, [...(brokenByFile.get(`${item.file}\0${item.found.specifier}`) ?? []), item]);
+  /* Archived copies: one finding per archived folder, not one per import. */
+  const archivedBroken = new Map<string, { count: number; files: Set<string>; evidence: FindingEvidence[] }>();
   for (const [, items] of [...brokenByFile].sort(([left], [right]) => (left < right ? -1 : 1))) {
     const { file, found, text } = items[0]!;
     const archived = ARCHIVED_PATH.test(file);
+    if (archived) {
+      const match = file.match(ARCHIVED_PATH)!;
+      const root = file.slice(0, match.index! + match[0].length).replace(/\/$/, "");
+      const group = archivedBroken.get(root) ?? { count: 0, files: new Set<string>(), evidence: [] };
+      group.count += 1;
+      group.files.add(file);
+      if (group.evidence.length < 10) group.evidence.push({ file, line: found.line });
+      archivedBroken.set(root, group);
+      continue;
+    }
     const reachedFile = reached.has(file);
     findings.push(
       createFinding({
         identity: `${file}\0${found.specifier}`,
         rule: "architecture.broken-import",
         category: "architecture",
-        severity: archived || !reachedFile ? "low" : TEST_FILE.test(file) ? "medium" : "high",
-        title: `${file} imports ${found.specifier}, which does not exist${archived ? " (archived code)" : !reachedFile ? " (unused file)" : ""}`,
-        detail: `No file in the repository matches "${found.specifier}" from ${file}, with any of the extensions or index files a bundler would try. ${reachedFile && !archived ? "Building or running this code fails." : "Nothing loads this file today, so it fails only if it is used again."}`,
+        severity: !reachedFile ? "low" : TEST_FILE.test(file) ? "medium" : "high",
+        title: `${file} imports ${found.specifier}, which does not exist${!reachedFile ? " (unused file)" : ""}`,
+        detail: `No file in the repository matches "${found.specifier}" from ${file}, with any of the extensions or index files a bundler would try. ${reachedFile ? "Building or running this code fails." : "Nothing loads this file today, so it fails only if it is used again."}`,
         packageDirectory: owner(file, inventory.packages).directory,
         evidence: [{ file, line: found.line, excerpt: excerpt(text.split("\n")[found.line - 1] ?? "") }],
         remedy: "Point the import at the file's current location, or remove it.",
+      }),
+    );
+  }
+  for (const [root, group] of [...archivedBroken].sort(([left], [right]) => (left < right ? -1 : 1))) {
+    findings.push(
+      createFinding({
+        identity: root,
+        rule: "architecture.broken-imports-archived",
+        category: "architecture",
+        severity: "info",
+        title: `${group.count} broken import${group.count === 1 ? "" : "s"} in archived code under ${root}`,
+        detail: `${group.files.size} archived or backup file${group.files.size === 1 ? "" : "s"} under ${root} import files that no longer exist. Archived code is not built or run; it would fail if it were.`,
+        packageDirectory: null,
+        evidence: group.evidence,
+        remedy: `Delete ${root} if it is only history: git keeps it.`,
       }),
     );
   }

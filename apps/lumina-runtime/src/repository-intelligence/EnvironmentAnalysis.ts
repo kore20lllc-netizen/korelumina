@@ -76,7 +76,7 @@ export function analyzeEnvironment(snapshot: RepositorySnapshot, inventory: Repo
     if (ARCHIVED_PATH.test(file.path)) continue;
     const text = snapshot.read(file.path);
     if (!text) continue;
-    const { code } = scanSource(text);
+    const { code, inString } = scanSource(text);
     const lineStarts = [0];
     for (let index = 0; index < code.length; index += 1) if (code.charCodeAt(index) === 10) lineStarts.push(index + 1);
     const lineOf = (offset: number) => {
@@ -92,6 +92,8 @@ export function analyzeEnvironment(snapshot: RepositorySnapshot, inventory: Repo
     const directory = owner(file.path, inventory.packages);
     for (const expression of READS) {
       for (const match of code.matchAll(expression)) {
+        /* Text inside a string literal (a fixture, generated code) is not a read. */
+        if (inString[match.index!]) continue;
         const name = match[1]!;
         if (PROVIDED.has(name) && !(name.startsWith("SUPABASE_") && !EDGE_FUNCTION.test(file.path))) continue;
         const key = `${directory}\0${name}`;
