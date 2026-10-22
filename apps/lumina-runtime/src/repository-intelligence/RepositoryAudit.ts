@@ -9,8 +9,8 @@ import { analyzeEnvironment } from "./EnvironmentAnalysis.js";
 import { createRepositoryIntelligenceManifest, type RepositoryIntelligenceManifest } from "./RepositoryIntelligenceManifest.js";
 import { sortFindings, type FindingCategory, type FindingSeverity, type RepositoryFinding } from "./RepositoryFinding.js";
 import { takeRepositoryInventory } from "./RepositoryInventory.js";
-import { takeRepositorySnapshot } from "./RepositorySnapshot.js";
-import { scanSecrets } from "./SecretScan.js";
+import { takeRepositorySnapshotAsync } from "./RepositorySnapshot.js";
+import { scanSecretsAsync } from "./SecretScan.js";
 
 /*
  * MS-2026-0012: one audit run. Every analysis contributes findings; the
@@ -172,26 +172,31 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
   const startedAt = now();
   const progress = (stage: AuditStage, state: AuditProgress["state"], message: string) =>
     input.onProgress?.({ stage, state, message, at: now() });
-  const step = <T>(stage: AuditStage, started: string, work: () => T, done: (result: T) => string): T => {
+  /*
+   * Each stage is synchronous work; yielding before it lets the Runtime
+   * serve other requests and deliver progress while an audit runs.
+   */
+  const step = async <T>(stage: AuditStage, started: string, work: () => T | Promise<T>, done: (result: T) => string): Promise<T> => {
     progress(stage, "started", started);
-    const result = work();
+    await new Promise((resolve) => setImmediate(resolve));
+    const result = await work();
     progress(stage, "completed", done(result));
     return result;
   };
 
-  const snapshot = step("snapshot", "Reading the repository", () => takeRepositorySnapshot(input.root), (result) => `${result.files.filter((file) => !file.ignored).length} files`);
-  const inventory = step(
+  const snapshot = await step("snapshot", "Reading the repository", () => takeRepositorySnapshotAsync(input.root), (result) => `${result.files.filter((file) => !file.ignored).length} files`);
+  const inventory = await step(
     "inventory",
     "Identifying languages, packages and frameworks",
     () => takeRepositoryInventory(snapshot),
     (result) => `${result.packages.length} package${result.packages.length === 1 ? "" : "s"}, ${result.languages.slice(0, 3).map((share) => share.language).join(", ")}`,
   );
   const manifest = createRepositoryIntelligenceManifest({ projectId: input.projectId, snapshot, inventory, analyzedAt: startedAt });
-  const dependencies = step("dependencies", "Checking declared and imported packages", () => analyzeDependencies(snapshot, inventory), (result) => `${result.findings.length} findings`);
-  const secrets = step("secrets", "Looking for committed credentials", () => scanSecrets(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
-  const code = step("code", "Looking for risky code patterns", () => scanCodeRisks(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
-  const environment = step("environment", "Comparing environment variables with their documentation", () => analyzeEnvironment(snapshot, inventory), (result) => `${result.variables.length} variables`);
-  const architecture = step(
+  const dependencies = await step("dependencies", "Checking declared and imported packages", () => analyzeDependencies(snapshot, inventory), (result) => `${result.findings.length} findings`);
+  const secrets = await step("secrets", "Looking for committed credentials", () => scanSecretsAsync(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
+  const code = await step("code", "Looking for risky code patterns", () => scanCodeRisks(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
+  const environment = await step("environment", "Comparing environment variables with their documentation", () => analyzeEnvironment(snapshot, inventory), (result) => `${result.variables.length} variables`);
+  const architecture = await step(
     "architecture",
     "Mapping imports",
     () => mapArchitecture(snapshot, inventory),

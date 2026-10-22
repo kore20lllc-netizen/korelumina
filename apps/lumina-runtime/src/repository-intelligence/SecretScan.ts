@@ -1,4 +1,4 @@
-import type { RepositorySnapshot } from "./RepositorySnapshot.js";
+import { YIELD_EVERY_FILES, type RepositorySnapshot } from "./RepositorySnapshot.js";
 import { createFinding, type FindingSeverity, type RepositoryFinding } from "./RepositoryFinding.js";
 import { ARCHIVED_PATH } from "./DependencyAnalysis.js";
 
@@ -71,6 +71,24 @@ export interface SecretScan {
 }
 
 export function scanSecrets(snapshot: RepositorySnapshot): SecretScan {
+  const steps = secretScanSteps(snapshot);
+  for (;;) {
+    const next = steps.next();
+    if (next.done) return next.value;
+  }
+}
+
+/* Same scan, pausing every YIELD_EVERY_FILES files so the Runtime stays responsive. */
+export async function scanSecretsAsync(snapshot: RepositorySnapshot): Promise<SecretScan> {
+  const steps = secretScanSteps(snapshot);
+  for (;;) {
+    const next = steps.next();
+    if (next.done) return next.value;
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+}
+
+function* secretScanSteps(snapshot: RepositorySnapshot): Generator<void, SecretScan, void> {
   const findings: RepositoryFinding[] = [];
   let filesScanned = 0;
 
@@ -79,6 +97,7 @@ export function scanSecrets(snapshot: RepositorySnapshot): SecretScan {
     const text = snapshot.readSensitive(file.path);
     if (text === null) continue;
     filesScanned += 1;
+    if (filesScanned % YIELD_EVERY_FILES === 0) yield;
     const lineStarts = [0];
     for (let index = 0; index < text.length; index += 1) if (text.charCodeAt(index) === 10) lineStarts.push(index + 1);
     const lineOf = (offset: number) => {

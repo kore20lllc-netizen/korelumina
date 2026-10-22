@@ -12,3 +12,4 @@ export * from "./BuildHealth.js";
 export * from "./EnvironmentAnalysis.js";
 export * from "./ArchitectureMap.js";
 export * from "./RepositoryAudit.js";
+export * from "./RepositoryAuditRuns.js";

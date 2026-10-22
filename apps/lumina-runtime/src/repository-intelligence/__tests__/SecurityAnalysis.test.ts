@@ -6,6 +6,8 @@ import test from "node:test";
 
 import {
   auditAdvisories,
+  scanSecretsAsync,
+  takeRepositorySnapshotAsync,
   parseNpmAudit,
   scanCodeRisks,
   scanSecrets,
@@ -166,4 +168,17 @@ test("advisories are reported unavailable, never clean, when the audit cannot ru
   const ok: AuditCommandRunner = async () => ({ stdout: NPM_AUDIT, stderr: "", exitCode: 1, timedOut: false });
   const checked = await auditAdvisories(npmProject, takeRepositoryInventory(takeRepositorySnapshot(npmProject)), { run: ok });
   assert.deepEqual({ status: checked.status, high: checked.counts.high, medium: checked.counts.medium }, { status: "checked", high: 1, medium: 1 });
+});
+
+test("the yielding snapshot and secret scan give exactly what the synchronous ones give", async () => {
+  const files: Record<string, string> = { ".gitignore": "ignored/\n", "ignored/a.ts": "x" };
+  for (let index = 0; index < 250; index += 1) files[`src/file-${String(index).padStart(3, "0")}.ts`] = `export const value${index} = ${index};\n`;
+  files["src/key.ts"] = `const token = "${fake.github}";\n`;
+  const root = repository(files);
+  const syncSnapshot = takeRepositorySnapshot(root);
+  const asyncSnapshot = await takeRepositorySnapshotAsync(root);
+  assert.deepEqual(asyncSnapshot.files, syncSnapshot.files);
+  assert.equal(asyncSnapshot.fingerprint, syncSnapshot.fingerprint);
+  assert.deepEqual(asyncSnapshot.skippedDirectories, syncSnapshot.skippedDirectories);
+  assert.deepEqual(await scanSecretsAsync(asyncSnapshot), scanSecrets(syncSnapshot));
 });

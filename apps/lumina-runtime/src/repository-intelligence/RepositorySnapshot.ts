@@ -94,7 +94,32 @@ function readCommit(root: string): string | null {
   return null;
 }
 
+/*
+ * The snapshot is built by one generator that pauses every
+ * YIELD_EVERY_FILES files. takeRepositorySnapshot runs it straight
+ * through; takeRepositorySnapshotAsync lets the event loop serve other
+ * work at each pause, so a large repository never stalls the Runtime.
+ */
+export const YIELD_EVERY_FILES = 100;
+
 export function takeRepositorySnapshot(root: string): RepositorySnapshot {
+  const steps = snapshotSteps(root);
+  for (;;) {
+    const next = steps.next();
+    if (next.done) return next.value;
+  }
+}
+
+export async function takeRepositorySnapshotAsync(root: string): Promise<RepositorySnapshot> {
+  const steps = snapshotSteps(root);
+  for (;;) {
+    const next = steps.next();
+    if (next.done) return next.value;
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+}
+
+function* snapshotSteps(root: string): Generator<void, RepositorySnapshot, void> {
   const absoluteRoot = path.resolve(root);
   const files: SnapshotFile[] = [];
   const texts = new Map<string, string>();
@@ -111,7 +136,7 @@ export function takeRepositorySnapshot(root: string): RepositorySnapshot {
     }
   }
 
-  const walk = (directory: string) => {
+  function* walk(directory: string): Generator<void, void, void> {
     const base = path.relative(absoluteRoot, directory).split(path.sep).join("/");
     try {
       ignore.add(base, readFileSync(path.join(directory, ".gitignore"), "utf8"));
@@ -133,7 +158,7 @@ export function takeRepositorySnapshot(root: string): RepositorySnapshot {
           skipped.add(relative);
           continue;
         }
-        walk(full);
+        yield* walk(full);
         continue;
       }
       if (!entry.isFile()) continue;
@@ -153,10 +178,11 @@ export function takeRepositorySnapshot(root: string): RepositorySnapshot {
         ignored: trackedPaths?.has(relative) ? false : ignore.ignoresWithAncestors(relative, false),
         tracked: trackedPaths ? trackedPaths.has(relative) : null,
       });
+      if (files.length % YIELD_EVERY_FILES === 0) yield;
     }
-  };
+  }
 
-  walk(absoluteRoot);
+  yield* walk(absoluteRoot);
 
   /* What the repository contains: ignored local files do not change it. */
   const fingerprint = createHash("sha256")

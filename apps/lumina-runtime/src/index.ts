@@ -96,6 +96,7 @@ import { registerMetricsRoute } from "./routes/metrics.js";
 import { registerEventsRoute } from "./routes/events.js";
 import { registerFsRoute } from "./routes/fs.js";
 import { registerAuditRoute } from "./routes/audit.js";
+import { registerRepositoryAuditRoutes } from "./routes/repositoryAudit.js";
 import { registerFixPlanRoute } from "./routes/fixPlan.js";
 import { registerGenerateFixesRoute } from "./routes/generateFixes.js";
 import { registerDraftsRoute } from "./routes/drafts.js";
@@ -1644,6 +1645,8 @@ registerEventsRoute(app);
 registerFsRoute(app);
 
 registerAuditRoute(app);
+/* MS-2026-0012: the Repository Intelligence audit engine. */
+registerRepositoryAuditRoutes(app);
 registerFixPlanRoute(app);
 registerGenerateFixesRoute(app);
 
