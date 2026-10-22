@@ -1,5 +1,11 @@
 import { spawn } from "node:child_process";
 
+/*
+ * Each child runs in its own process group (detached), so stopping it
+ * stops everything it started. npm, tsx watch and node otherwise survive
+ * Ctrl+C, and an old Runtime keeps port 4100 with its old environment.
+ */
+
 const children = [];
 let shuttingDown = false;
 
@@ -8,6 +14,7 @@ function run(name, command, args, cwd = process.cwd()) {
     cwd,
     shell: true,
     stdio: "inherit",
+    detached: process.platform !== "win32",
     env: {
       ...process.env,
       FORCE_COLOR: "1",
@@ -38,13 +45,34 @@ function shutdown() {
 
   shuttingDown = true;
 
-  for (const child of children) {
-    if (!child.killed && child.exitCode === null) {
-      child.kill("SIGTERM");
+  /* Signal each child's whole process group; true if any is still alive. */
+  const signalAll = (signal) => {
+    let alive = false;
+    for (const child of children) {
+      try {
+        if (process.platform === "win32") child.kill(signal);
+        else process.kill(-child.pid, signal);
+        alive = true;
+      } catch {
+        /* that group is gone */
+      }
     }
-  }
+    return alive;
+  };
 
-  setTimeout(() => process.exit(0), 300);
+  signalAll("SIGTERM");
+  const startedAt = Date.now();
+  const timer = setInterval(() => {
+    if (!signalAll(0)) {
+      clearInterval(timer);
+      process.exit(0);
+    }
+    if (Date.now() - startedAt > 5000) {
+      signalAll("SIGKILL");
+      clearInterval(timer);
+      process.exit(0);
+    }
+  }, 100);
 }
 
 process.on("SIGINT", shutdown);

@@ -12,6 +12,7 @@ import {
   applyRuntimeDraft,
   createRuntimeDraft,
   importRuntimeProject,
+  importRuntimeArchive,
   readRuntimeFile,
   syncRuntimeProjectMetadata,
   writeRuntimeFile,
@@ -49,6 +50,39 @@ async function withRetry<T>(fn: () => Promise<T>, opts: { retries?: number; sign
  * providers/registry.ts. All errors are normalized to AppError.
  */
 
+/* After Runtime has the project: record its owner and team, and tell the person. */
+async function registerImported(imported: Awaited<ReturnType<typeof importRuntimeProject>>): Promise<ImportResponse> {
+  const name =
+    imported.repo?.repo ??
+    imported.projectId;
+
+  const u = auth.getUser();
+
+  if (u) {
+    usage.recordProjectCreated(u.id);
+  }
+
+  await syncRuntimeProjectMetadata({
+    projectId: imported.projectId,
+    ownerId: u?.id,
+    teamId: getActiveTeamId() ?? undefined,
+    createdBy: u?.id,
+    visibility: getActiveTeamId() ? "team" : "private",
+  });
+
+  notificationService.push({
+    title: "Import completed",
+    body: `${name} (${imported.framework ?? "unknown"}) is ready.`,
+    kind: "success",
+  });
+
+  return {
+    projectId: imported.projectId,
+    name,
+    framework: imported.framework ?? "unknown",
+  };
+}
+
 export async function importRepo(repoUrl: string, signal?: AbortSignal, access?: { accessToken?: string }): Promise<ImportResponse> {
   try {
     requireEntitlement("project.create");
@@ -62,45 +96,22 @@ export async function importRepo(repoUrl: string, signal?: AbortSignal, access?:
       accessToken: access?.accessToken?.trim() || undefined,
     });
 
-    const name =
-      imported.repo?.repo ??
-      imported.projectId;
-
-    const u = auth.getUser();
-
-    if (u) {
-      usage.recordProjectCreated(u.id);
-    }
-
-    await syncRuntimeProjectMetadata({
-      projectId: imported.projectId,
-      ownerId: u?.id,
-      teamId: getActiveTeamId() ?? undefined,
-      createdBy: u?.id,
-      visibility: getActiveTeamId() ? "team" : "private",
-    });
-
-    notificationService.push({
-      title: "Import completed",
-      body: `${name} (${imported.framework ?? "unknown"}) is ready.`,
-      kind: "success",
-    });
-
-    return {
-      projectId: imported.projectId,
-      name,
-      framework: imported.framework ?? "unknown",
-    };
+    return await registerImported(imported);
   } catch (e) {
     throw normalizeError(e);
   }
 }
 
-export async function importZip(_file: File, _signal?: AbortSignal): Promise<ImportResponse> {
-  throw new AppError(
-    "VALIDATION",
-    "ZIP import requires a runtime-backed ZIP import endpoint.",
-  );
+export async function importZip(file: File, signal?: AbortSignal): Promise<ImportResponse> {
+  try {
+    requireEntitlement("project.create");
+    if (signal?.aborted) {
+      throw new AppError("INTERNAL", "Canceled.");
+    }
+    return await registerImported(await importRuntimeArchive(file));
+  } catch (e) {
+    throw normalizeError(e);
+  }
 }
 
 export async function readFile(projectId: string, file: string): Promise<FileReadResponse> {

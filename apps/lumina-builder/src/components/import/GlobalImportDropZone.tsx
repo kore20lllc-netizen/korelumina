@@ -175,10 +175,10 @@ export function GlobalImportDropZone() {
   return (
     <div
       aria-hidden
-      className="fixed inset-0 z-[100] grid place-items-center bg-background/70 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/70 backdrop-blur-md animate-fade-in"
     >
-      <div className="pointer-events-none rounded-3xl border-2 border-dashed border-violet/60 bg-surface-1/80 px-10 py-8 shadow-[0_0_60px_-10px_hsl(var(--violet)/0.4)] max-w-lg w-[90%]">
-        <div className="flex items-center justify-center gap-2 mb-3 text-violet">
+      <div className="pointer-events-none rounded-[30px] border-2 border-dashed border-cyan-300/60 bg-slate-950/80 px-10 py-8 shadow-[0_0_60px_-10px_rgba(34,211,238,.35)] max-w-lg w-[90%]">
+        <div className="flex items-center justify-center gap-2 mb-3 text-cyan-200">
           <Upload className="h-5 w-5" />
           <span className="text-[11px] uppercase tracking-[0.22em] font-medium">
             {preview ? "Detected" : "Drop to import"}
@@ -202,7 +202,7 @@ export function GlobalImportDropZone() {
                 active={textActive}
               />
             </div>
-            <div className="mt-4 text-center text-[11px] text-muted-foreground">
+            <div className="mt-4 text-center text-[11px] text-sky-300/70">
               {kind === "files"
                 ? "File names appear after release · Esc to cancel"
                 : "Release to open the Import dialog · Esc to cancel"}
@@ -217,13 +217,13 @@ export function GlobalImportDropZone() {
 function DropPreviewPanel({ preview }: { preview: DropPreview }) {
   if (preview.kind === "url") {
     return (
-      <div className="rounded-2xl border border-violet bg-violet/10 p-4">
-        <div className="flex items-center gap-2 mb-2 text-violet">
+      <div className="rounded-[20px] border border-cyan-300/60 bg-cyan-400/10 p-4">
+        <div className="flex items-center gap-2 mb-2 text-cyan-200">
           <Github className="h-4 w-4" />
           <span className="text-[11px] uppercase tracking-[0.18em] font-medium">Repo URL</span>
         </div>
-        <div className="text-[13px] font-mono break-all text-foreground">{preview.url}</div>
-        <div className="mt-3 text-[11px] text-muted-foreground">Opening import dialog…</div>
+        <div className="text-[13px] font-mono break-all text-sky-50">{preview.url}</div>
+        <div className="mt-3 text-[11px] text-sky-300/70">Opening import dialog…</div>
       </div>
     );
   }
@@ -231,25 +231,25 @@ function DropPreviewPanel({ preview }: { preview: DropPreview }) {
   const shown = preview.names.slice(0, max);
   const extra = preview.names.length - shown.length;
   return (
-    <div className="rounded-2xl border border-violet bg-violet/10 p-4">
-      <div className="flex items-center justify-between mb-2 text-violet">
+    <div className="rounded-[20px] border border-cyan-300/60 bg-cyan-400/10 p-4">
+      <div className="flex items-center justify-between mb-2 text-cyan-200">
         <div className="flex items-center gap-2">
           <FileArchive className="h-4 w-4" />
           <span className="text-[11px] uppercase tracking-[0.18em] font-medium">
             {preview.names.length === 1 ? "ZIP archive" : `${preview.names.length} ZIP archives`}
           </span>
         </div>
-        <span className="text-[11px] text-muted-foreground">{formatBytes(preview.totalBytes)}</span>
+        <span className="text-[11px] text-sky-300/70">{formatBytes(preview.totalBytes)}</span>
       </div>
       <ul className="space-y-1 max-h-40 overflow-hidden">
         {shown.map((n) => (
-          <li key={n} className="text-[12px] font-mono text-foreground truncate">{n}</li>
+          <li key={n} className="text-[12px] font-mono text-sky-50 truncate">{n}</li>
         ))}
         {extra > 0 && (
-          <li className="text-[11px] text-muted-foreground">… +{extra} more</li>
+          <li className="text-[11px] text-sky-300/70">… +{extra} more</li>
         )}
       </ul>
-      <div className="mt-3 text-[11px] text-muted-foreground">Opening import dialog…</div>
+      <div className="mt-3 text-[11px] text-sky-300/70">Opening import dialog…</div>
     </div>
   );
 }
@@ -260,15 +260,15 @@ function Side({
   return (
     <div
       className={cn(
-        "rounded-2xl border p-4 text-center transition",
+        "rounded-[20px] border p-4 text-center transition",
         active
-          ? "border-violet bg-violet/15 text-foreground"
-          : "border-border bg-surface-2/40 text-muted-foreground"
+          ? "border-cyan-300/60 bg-cyan-400/15 text-sky-50"
+          : "border-cyan-300/15 bg-slate-900/70/40 text-sky-300/70"
       )}
     >
-      <Icon className={cn("h-6 w-6 mx-auto mb-2", active ? "text-violet" : "text-muted-foreground")} />
+      <Icon className={cn("h-6 w-6 mx-auto mb-2", active ? "text-cyan-200" : "text-sky-300/70")} />
       <div className="text-[13px] font-medium">{title}</div>
-      <div className="text-[11px] text-muted-foreground mt-0.5">{hint}</div>
+      <div className="text-[11px] text-sky-300/70 mt-0.5">{hint}</div>
     </div>
   );
 }

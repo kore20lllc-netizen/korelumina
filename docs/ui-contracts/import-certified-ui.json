@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Import window Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Import window header, tabs, panels and progress placement",
+      "progress, file list and success panels",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved the Import window (2026-10-22)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/import/GlobalImportDropZone.tsx": {
+      "sha256": "2244943e07e623d2925b51fd8a99ffc695b1316d2d36d29c98687328ac4e4a43",
+      "elementCount": 30
+    },
+    "apps/lumina-builder/src/components/import/ImportButton.tsx": {
+      "sha256": "b60863eb594acddae6b7b99b857637e0c5bcf63fe3a03dad50d2b391dba4d495",
+      "elementCount": 1
+    },
+    "apps/lumina-builder/src/components/import/ImportModal.tsx": {
+      "sha256": "b6802df4c4a465bc3c37f21471a6776398fadb1ea0658f68546c2521d3d96c67",
+      "elementCount": 171
+    },
+    "apps/lumina-builder/src/components/import/ImportSuccessPanel.tsx": {
+      "sha256": "ce31d95b178a150183cb0c51e8a712d87a9e9f4bf4ddbb28d33b31ccc385cb90",
+      "elementCount": 46
+    }
+  }
+}

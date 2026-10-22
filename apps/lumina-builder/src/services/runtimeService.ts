@@ -220,7 +220,7 @@ export async function listRuntimeProjects(): Promise<RuntimeProject[]> {
 
 export interface RuntimeImportResult {
   ok: true;
-  action: "cloned" | "pulled";
+  action: "cloned" | "pulled" | "unpacked";
   projectId: string;
   projectPath: string;
   framework?: string;
@@ -252,6 +252,31 @@ const IMPORT_ERRORS: Record<string, string> = {
   local_copy_has_diverged_from_remote: "The imported copy has changes the repository does not; it was not updated.",
   target_project_folder_exists_and_is_not_git_repo: "A project with this name already exists and is not from git.",
   git_not_installed: "git is not installed where Runtime runs.",
+  missing_archive_name: "The archive has no file name.",
+  archive_type_not_supported_use_zip_or_tar_gz: "Upload a .zip, .tar.gz or .tgz file.",
+  archive_larger_than_50_mb: "The archive is larger than 50 MB.",
+  archive_is_empty: "The archive has no files in it.",
+  project_already_exists_choose_another_name: "A project with this name already exists. Rename the file and upload it again.",
+  archive_entry_path_absolute: "The archive contains a file with an absolute path, so it was refused.",
+  archive_entry_path_escapes: "The archive contains a file that would land outside the project, so it was refused.",
+  archive_entry_name_invalid: "The archive contains an invalid file name.",
+  archive_contains_symbolic_link: "The archive contains a symbolic link, which is not accepted.",
+  archive_contains_hard_link: "The archive contains a hard link, which is not accepted.",
+  archive_contains_special_file: "The archive contains a device or special file, which is not accepted.",
+  archive_has_too_many_entries: "The archive has more than 100,000 entries.",
+  archive_too_large_when_unpacked: "The archive is larger than 1 GB once unpacked.",
+  archive_entry_expands_too_much: "A file in the archive expands far more than real files do, so it was refused.",
+  archive_has_duplicate_entries: "The archive has two files with the same name (ignoring capitals).",
+  archive_has_conflicting_entries: "The archive has a file and a folder with the same name.",
+  zip_not_readable: "The .zip file could not be read.",
+  zip64_not_supported: "Very large (zip64) archives are not supported yet.",
+  zip_entry_encrypted: "The .zip is password-protected. Upload it without a password.",
+  zip_compression_method_not_supported: "The .zip uses a compression method that is not supported.",
+  zip_entry_size_mismatch: "The .zip file is damaged.",
+  zip_entry_corrupt: "The .zip file is damaged.",
+  tar_gz_not_readable: "The .tar.gz file could not be read.",
+  tar_not_readable: "The .tar.gz file is damaged.",
+  tar_entry_too_large: "A file in the .tar.gz is too large.",
 };
 
 export async function importRuntimeProject(input: {
@@ -276,6 +301,33 @@ export async function importRuntimeProject(input: {
 
   if (!response.ok || !data?.ok || !data?.import?.projectId) {
     const code = data?.error ?? "failed_to_import_runtime_project";
+    throw new Error(IMPORT_ERRORS[code] ?? code);
+  }
+
+  return data.import as RuntimeImportResult;
+}
+
+/* MS-2026-0013: upload a .zip, .tar.gz or .tgz; Runtime unpacks it safely. */
+export async function importRuntimeArchive(file: File): Promise<RuntimeImportResult> {
+  const response = await fetch(
+    `${RUNTIME_API}/api/runtime/projects/import-archive?name=${encodeURIComponent(file.name)}`,
+    {
+      method: "POST",
+      headers: getRuntimeCallerHeaders({
+        "Content-Type": "application/octet-stream",
+      }),
+      body: file,
+    },
+  );
+
+  if (response.status === 413) {
+    throw new Error(IMPORT_ERRORS.archive_larger_than_50_mb);
+  }
+
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok || !data?.ok || !data?.import?.projectId) {
+    const code = data?.error ?? "failed_to_import_archive";
     throw new Error(IMPORT_ERRORS[code] ?? code);
   }
 

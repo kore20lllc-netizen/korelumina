@@ -2635,8 +2635,37 @@ Promise<void> {
         console.log(
           `[lumina-runtime] listening on ${RUNTIME_HOST}:${PORT}`,
         );
+        /*
+         * MS-2026-0013: say at startup whether sign-ins can be verified.
+         * Without it every signed-in person is anonymous and sees none of
+         * their projects, which otherwise looks like data loss.
+         */
+        console.log(
+          runtimeSupabaseAccessTokenVerifier.configured
+            ? "[lumina-runtime] sign-ins: verified against Supabase"
+            : "[lumina-runtime] WARNING sign-ins: SUPABASE_URL is not set, so signed-in people are anonymous and see none of their projects",
+        );
+        console.log(
+          stripeWebhookSecret
+            ? "[lumina-runtime] billing: Stripe webhook configured"
+            : "[lumina-runtime] billing: Stripe webhook not configured",
+        );
       },
     );
+
+  /* A Runtime left running from an earlier start keeps the port and its old environment. */
+  server.on(
+    "error",
+    (error: NodeJS.ErrnoException) => {
+      if (error.code === "EADDRINUSE") {
+        console.error(
+          `[lumina-runtime] port ${PORT} is already in use: an earlier Runtime is still running with its old settings. Stop it with: kill $(lsof -ti :${PORT})`,
+        );
+        process.exit(1);
+      }
+      throw error;
+    },
+  );
 
   let shuttingDown =
     false;
