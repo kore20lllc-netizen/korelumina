@@ -3801,7 +3801,15 @@ Human Review Notes
 Access Policy
 -------------------------------------------------------------------------------
 
-The Repo Audit Engine is accessible only to
+Amended by ADR-0046 (customer diagnosis, in-house repair).
+
+Diagnosis is available to
+
+Business and Enterprise customers, for repositories they imported
+(a git import or an uploaded archive), as a scan audit: reports, report
+history, progress and the client report export.
+
+Repair is accessible only to
 
 In-House Engineers
 
@@ -3809,8 +3817,14 @@ Administrators
 
 Super Administrators
 
-Customers interact with the audit process through sales engagements,
-professional services, or managed enterprise offerings.
+Repair is the ordered fix plan, repair drafts and applying them, and the
+deep audit, which runs the project's own typecheck and build.
+
+Customers request repairs through paid repair or an engineering
+engagement. Free and Pro customers have no diagnosis.
+
+Runtime enforces this policy from the verified caller and the project's
+metadata. The Builder only reflects it.
 
 -------------------------------------------------------------------------------
 Engineering Rule
@@ -3818,8 +3832,8 @@ Engineering Rule
 
 Landing pages may describe Repo Audit capabilities.
 
-Execution remains an internal engineering operation unless explicitly released
-as a public product in a future architecture revision.
+Diagnosis is a released customer capability (ADR-0046). Repair execution
+remains an internal engineering operation.
 
 ===============================================================================
 15. REPAIR PLANNER

@@ -80,7 +80,7 @@ Capabilities never marketed directly.
 Examples:
 
 - Capacitor Engine
-- Repo Audit Engine
+- Repo Audit Engine (its diagnosis is a public capability: see Repository Diagnosis)
 - Repair Planner
 - Decision Engine
 - Knowledge Graph
@@ -104,6 +104,25 @@ Required
 
 Landing Promise:
 Import existing repositories into KoreLumina.
+
+---
+
+## Repository Diagnosis
+
+Classification:
+Public Platform (Business and Enterprise)
+
+Owner:
+Repository Intelligence Platform
+
+Status:
+Required
+
+Landing Promise:
+Diagnose an imported repository: dependencies, security, build, environment and architecture, with a score and a client-ready report. Repairs are done by KoreLumina engineers.
+
+Decision:
+ADR-0046
 
 ---
 
