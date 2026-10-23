@@ -6,11 +6,19 @@ import type {
   ProjectMetadata,
 } from "../projects/projectMetadataStore.js";
 
+import { supabaseTokenConfigFromEnvironment } from "./supabaseAccessToken.js";
+
+/*
+ * Projects from before owners were recorded have no owner. They used to be
+ * open to every caller outside production, which let any signed-in
+ * customer see and change them. Now they are open only on a machine with
+ * no identity provider (local development with the mock sign-in), or where
+ * LUMINA_ALLOW_OWNERLESS_PROJECTS=true says so; otherwise only staff reach
+ * them, and an admin assigns their owner.
+ */
 function isLocalDevelopmentRuntime(): boolean {
-  return (
-    process.env.NODE_ENV !== "production" ||
-    process.env.LUMINA_ALLOW_OWNERLESS_PROJECTS === "true"
-  );
+  if (process.env.LUMINA_ALLOW_OWNERLESS_PROJECTS === "true") return true;
+  return process.env.NODE_ENV !== "production" && !supabaseTokenConfigFromEnvironment().url;
 }
 
 function isOwnerlessLegacyProject(

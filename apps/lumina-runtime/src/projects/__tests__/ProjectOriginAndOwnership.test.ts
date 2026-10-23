@@ -47,11 +47,13 @@ test("an owned project is changed only by its owner, who cannot hand it to someo
   assert.deepEqual(decideProjectOwnership(caller({}), owned, undefined), { ok: false, status: 403, error: "not_project_owner" });
 });
 
-test("an unowned project is claimed only by a signed-in caller for themselves; admins may set any owner", () => {
-  assert.deepEqual(decideProjectOwnership(caller({ userId: "alice" }), meta({}), "alice"), { ok: true, ownerId: "alice" });
-  assert.deepEqual(decideProjectOwnership(caller({ userId: "alice" }), null, undefined), { ok: true, ownerId: "alice" });
-  assert.deepEqual(decideProjectOwnership(caller({ userId: "mallory" }), meta({}), "alice"), { ok: false, status: 403, error: "owner_must_be_the_caller" });
-  assert.deepEqual(decideProjectOwnership(caller({}), meta({}), "alice"), { ok: false, status: 403, error: "sign_in_required" });
+test("an unowned project gets its owner only from an admin; nobody else can claim it", () => {
+  const refused = { ok: false, status: 403, error: "project_has_no_owner_ask_an_admin" };
+  assert.deepEqual(decideProjectOwnership(caller({ userId: "alice" }), meta({}), "alice"), refused);
+  assert.deepEqual(decideProjectOwnership(caller({ userId: "alice" }), null, undefined), refused);
+  assert.deepEqual(decideProjectOwnership(caller({ userId: "mallory", role: "business" }), meta({}), "mallory"), refused);
+  assert.deepEqual(decideProjectOwnership(caller({}), meta({}), "alice"), refused);
+  assert.deepEqual(decideProjectOwnership(caller({ userId: "root", adminTools: true, role: "super_admin" }), meta({}), "alice"), { ok: true, ownerId: "alice" });
   assert.deepEqual(decideProjectOwnership(caller({ userId: "root", adminTools: true, role: "super_admin" }), meta({ ownerId: "alice" }), "bob"), { ok: true, ownerId: "bob" });
 });
 

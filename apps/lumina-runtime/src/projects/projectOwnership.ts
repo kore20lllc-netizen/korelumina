@@ -9,8 +9,7 @@ import type { ProjectMetadata } from "./projectMetadataStore.js";
  * - an admin may change anything;
  * - a project with an owner can only be changed by that owner, and its
  *   owner is not transferred here;
- * - a project without an owner can be claimed only by a signed-in caller,
- *   for themselves.
+ * - a project without an owner is assigned one by an admin only.
  */
 
 export type OwnershipDecision =
@@ -32,11 +31,13 @@ export function decideProjectOwnership(
     }
     return { ok: true, ownerId: existing.ownerId };
   }
-  if (!caller.userId) return { ok: false, status: 403, error: "sign_in_required" };
-  if (requestedOwnerId && requestedOwnerId !== caller.userId) {
-    return { ok: false, status: 403, error: "owner_must_be_the_caller" };
-  }
-  return { ok: true, ownerId: caller.userId };
+  /*
+   * A project without an owner was imported before owners were recorded,
+   * or by a signed-out caller. Anyone claiming it could take over someone
+   * else's code, so only an admin assigns its owner. (An import records its
+   * importer as the owner, so a new project never needs claiming.)
+   */
+  return { ok: false, status: 403, error: "project_has_no_owner_ask_an_admin" };
 }
 
 /* Copy only the keys that have values, so a merge never erases a field. */
