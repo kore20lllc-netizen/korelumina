@@ -14,6 +14,7 @@ import {
 } from "@/components/lumina/appearance";
 
 import { cn } from "@/lib/utils";
+import { repoAuditAccess } from "@/services/repoAuditAccess";
 import { getCurrentRole } from "@/services/workspaceAccessService";
 import { auth } from "@/providers/auth-registry";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -56,6 +57,8 @@ export function Sidebar() {
           { icon: LayoutGrid, label: "Projects", active: view === "dashboard" },
           { icon: Sparkles, label: "New Build", active: view === "entry" },
           { icon: FolderGit2, label: "Imports", active: view === "imports" },
+          /* ADR-0046: Business and Enterprise diagnose their imported repositories. */
+          ...(repoAuditAccess(role) === "diagnosis" ? [{ icon: Activity, label: "Repo Audit", active: view === "repo-audit" }] : []),
           { icon: Box, label: "Templates" },
           { icon: Settings, label: "Settings" },
         ]

@@ -10,9 +10,11 @@ import {
   ListChecks,
   Network,
   ShieldCheck,
+  Wrench,
 } from "lucide-react";
 
 import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+import { contactSales } from "@/services/navigationService";
 import type { FindingCategory, FindingSeverity, RepositoryAuditReport } from "@/services/repositoryAuditService";
 
 import { ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill, toneText } from "../../executive/shared/ExecutiveSection";
@@ -176,7 +178,7 @@ export function BuildSection({ state }: { state: RepoAuditState }) {
       <ReportGate report={state.report}>
         {(report) =>
           report.mode !== "deep" ? (
-            <Note tone="warning">This report is a scan. Run a deep audit to typecheck and build the project.</Note>
+            <Note tone="warning">{state.access === "engineer" ? "This report is a scan. Run a deep audit to typecheck and build the project." : "This report is a scan. Building the project runs its own code, so KoreLumina engineers check build health during a repair."}</Note>
           ) : (
             <>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -289,6 +291,42 @@ export function FixPlanSection({ state }: { state: RepoAuditState }) {
             </ol>
           )
         }
+      </ReportGate>
+    </ExecutiveSection>
+  );
+}
+
+/*
+ * ADR-0046: what a Business or Enterprise customer sees instead of the fix
+ * plan. Repairs are done by KoreLumina engineers; paid repair (MS-2026-0015)
+ * will start one from here.
+ */
+export function RepairSection({ state }: { state: RepoAuditState }) {
+  const report = state.report.status === "ok" ? state.report.data : null;
+  const serious = report ? report.summary.counts.critical + report.summary.counts.high : 0;
+  return (
+    <ExecutiveSection id="repo-audit-repair" icon={Wrench} eyebrow="Repair" title="Repairs are done by KoreLumina engineers" description="This audit diagnoses the repository. Planning and making the fixes is an in-house service, reviewed by an engineer before anything changes in your code." wiring="live">
+      <ReportGate report={state.report}>
+        {() => (
+          <div className="grid gap-3">
+            <Note tone={serious > 0 ? "warning" : "healthy"}>
+              {serious > 0
+                ? `${serious} critical or high finding${serious === 1 ? "" : "s"} in this report. Each finding says what would resolve it.`
+                : "Nothing critical or high in this report. Each finding says what would resolve it."}
+            </Note>
+            <LuminaFlagshipCard as="article" className="rounded-[18px] p-4">
+              <div className="relative z-10 grid gap-2">
+                <ExecutiveCardHeading icon={Wrench}>Ask for a repair</ExecutiveCardHeading>
+                <p className="text-xs leading-5 text-sky-100/75">
+                  Share this report with the team: they plan the fixes in order, make them, run the deep audit, and send the changes back for you to review.
+                </p>
+                <button type="button" onClick={contactSales} className={`justify-self-start rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill.active}`}>
+                  Talk to our team
+                </button>
+              </div>
+            </LuminaFlagshipCard>
+          </div>
+        )}
       </ReportGate>
     </ExecutiveSection>
   );

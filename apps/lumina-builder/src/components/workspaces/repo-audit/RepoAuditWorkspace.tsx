@@ -1,4 +1,4 @@
-import { Blocks, Boxes, FileWarning, Hammer, History, KeyRound, LayoutDashboard, Network, ShieldCheck } from "lucide-react";
+import { Blocks, Boxes, FileWarning, Hammer, History, KeyRound, LayoutDashboard, Network, ShieldCheck, Wrench } from "lucide-react";
 
 import { LuminaSectionNavigator } from "@/components/lumina/workspace/primitives/LuminaSectionNavigator";
 
@@ -12,6 +12,7 @@ import {
   FixPlanSection,
   HistorySection,
   OverviewSection,
+  RepairSection,
   SecuritySection,
 } from "./sections/RepoAuditSections";
 import { useRepoAudit } from "./state/useRepoAudit";
@@ -33,7 +34,10 @@ const SECTIONS = [
   { id: "repo-audit-environment", label: "Environment", icon: KeyRound },
   { id: "repo-audit-fix-plan", label: "Fix plan", icon: Blocks },
   { id: "repo-audit-history", label: "History", icon: History },
-] as const;
+];
+
+/* ADR-0046: Business and Enterprise diagnose; the fix plan is in-house, so they see how to get a repair instead. */
+const DIAGNOSIS_SECTIONS = SECTIONS.map((section) => (section.id === "repo-audit-fix-plan" ? { id: "repo-audit-repair", label: "Repair", icon: Wrench } : section));
 
 export function RepoAuditWorkspace() {
   const state = useRepoAudit();
@@ -44,7 +48,7 @@ export function RepoAuditWorkspace() {
         <RepoAuditCommandDeck state={state} />
       </div>
       <div className="sticky top-4 z-40 px-6 pt-5">
-        <LuminaSectionNavigator items={SECTIONS} ariaLabel="Repo Audit sections" topTargetId="repo-audit-top" minWidthClassName="min-w-[960px]" gridColumnsClassName="grid-cols-9" />
+        <LuminaSectionNavigator items={state.access === "engineer" ? SECTIONS : DIAGNOSIS_SECTIONS} ariaLabel="Repo Audit sections" topTargetId="repo-audit-top" minWidthClassName="min-w-[960px]" gridColumnsClassName="grid-cols-9" />
       </div>
       <main aria-label="Repo Audit canvas" className="relative z-10 grid gap-6 px-6 pb-6 pt-5 xl:grid-cols-2">
         <OverviewSection state={state} />
@@ -54,7 +58,7 @@ export function RepoAuditWorkspace() {
         <BuildSection state={state} />
         <ArchitectureSection state={state} />
         <EnvironmentSection state={state} />
-        <FixPlanSection state={state} />
+        {state.access === "engineer" ? <FixPlanSection state={state} /> : <RepairSection state={state} />}
         <div className="xl:col-span-2">
           <HistorySection state={state} />
         </div>

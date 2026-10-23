@@ -28,8 +28,8 @@
   "generatedFrom": "owner visually approved Repo Audit (2026-10-21)",
   "fingerprints": {
     "apps/lumina-builder/src/components/workspaces/repo-audit/RepoAuditWorkspace.tsx": {
-      "sha256": "3185f44305d54bffbb49c82fc45bdabea87e25cab13ebea5d20aa3403f9b2fd2",
-      "elementCount": 17
+      "sha256": "2042f8b89156d45695809b37fd475615386a2e80b294268a78d954245f7edba3",
+      "elementCount": 18
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/layout/ClientReportDialog.tsx": {
       "sha256": "467324752ec7530f3f7f20c8f1627fcb68bb9be78c92d70aa1b618ff3f204615",
@@ -40,8 +40,8 @@
       "elementCount": 44
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/sections/RepoAuditSections.tsx": {
-      "sha256": "bc961aea6ddcfa07fee2911a661af659e022acc0cdfed54661c9d920b9b62d41",
-      "elementCount": 84
+      "sha256": "7b23e760f37df0cabb2024aa9622af364d10d945b966b2c927a14b09163fd7b9",
+      "elementCount": 93
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/shared/FindingCard.tsx": {
       "sha256": "fbfd2a2dc07f12f285aab756739175c8e85a553488cb77a19301d45aecdba855",

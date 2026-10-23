@@ -13,6 +13,7 @@ import {
   type RepositoryAuditReport,
   type ReportSummary,
 } from "@/services/repositoryAuditService";
+import { repoAuditAccess, type RepoAuditAccess } from "@/services/repoAuditAccess";
 import { listRuntimeProjects, type RuntimeProject } from "@/services/runtimeService";
 
 /*
@@ -53,6 +54,8 @@ export interface RepoAuditState {
   report: Loadable<RepositoryAuditReport | null>;
   history: Loadable<ReportSummary[]>;
   fixPlan: Loadable<AuditFixStep[]>;
+  /* ADR-0046: engineers see everything; Business and Enterprise diagnose. */
+  access: RepoAuditAccess;
   running: RunningAudit | null;
   run(mode: AuditMode): void;
   /* The last error from starting or following an audit. */
@@ -71,6 +74,7 @@ function rememberedProject(): string | null {
 }
 
 export function useRepoAudit(): RepoAuditState {
+  const access = repoAuditAccess();
   const [projects, setProjects] = useState<Loadable<RuntimeProject[]>>({ status: "loading" });
   const [projectId, setProjectId] = useState<string | null>(rememberedProject);
   const [report, setReport] = useState<Loadable<RepositoryAuditReport | null>>({ status: "loading" });
@@ -85,7 +89,9 @@ export function useRepoAudit(): RepoAuditState {
     listRuntimeProjects()
       .then((list) => {
         if (cancelled) return;
-        const sorted = [...list].sort((left, right) => left.projectId.localeCompare(right.projectId));
+        /* ADR-0046: customers diagnose imported projects only. */
+        const eligible = access === "engineer" ? list : list.filter((project) => project.origin?.kind === "git" || project.origin?.kind === "archive");
+        const sorted = [...eligible].sort((left, right) => left.projectId.localeCompare(right.projectId));
         setProjects({ status: "ok", data: sorted });
         setProjectId((current) => (current && sorted.some((project) => project.projectId === current) ? current : sorted[0]?.projectId ?? null));
       })
@@ -93,7 +99,7 @@ export function useRepoAudit(): RepoAuditState {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [access]);
 
   const load = useCallback(async (id: string) => {
     setReport({ status: "loading" });
@@ -112,7 +118,10 @@ export function useRepoAudit(): RepoAuditState {
     listAuditReports(id)
       .then((reports) => setHistory({ status: "ok", data: reports }))
       .catch((error) => setHistory({ status: "error", message: message(error) }));
-    if (latest.report) {
+    if (access !== "engineer") {
+      /* The ordered fix plan is in-house (ADR-0046); Runtime would refuse it. */
+      setFixPlan({ status: "ok", data: [] });
+    } else if (latest.report) {
       getFixPlan(id, latest.report.reportId)
         .then((steps) => setFixPlan({ status: "ok", data: steps }))
         .catch((error) => setFixPlan({ status: "error", message: message(error) }));
@@ -120,7 +129,7 @@ export function useRepoAudit(): RepoAuditState {
       setFixPlan({ status: "ok", data: [] });
     }
     return latest.runningRunId;
-  }, []);
+  }, [access]);
 
   const watch = useCallback(
     (id: string, runId: string, mode: AuditMode) => {
@@ -178,6 +187,7 @@ export function useRepoAudit(): RepoAuditState {
   const run = useCallback(
     (mode: AuditMode) => {
       if (!projectId || running) return;
+      if (mode === "deep" && access !== "engineer") return;
       setRunError(null);
       startAudit(projectId, mode)
         .then((runId) => watch(projectId, runId, mode))
@@ -186,5 +196,5 @@ export function useRepoAudit(): RepoAuditState {
     [projectId, running, watch],
   );
 
-  return { projects, projectId, selectProject: setProjectId, report, history, fixPlan, running, run, runError };
+  return { projects, projectId, selectProject: setProjectId, report, history, fixPlan, access, running, run, runError };
 }

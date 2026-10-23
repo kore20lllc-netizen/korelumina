@@ -14,6 +14,7 @@ import { AIWorkspace } from "@/components/workspaces/AIWorkspace";
 import { AuthView } from "@/components/workspaces/AuthView";
 import { SettingsView } from "@/components/workspaces/SettingsView";
 import { PricingView } from "@/components/workspaces/PricingView";
+import { repoAuditAccess } from "@/services/repoAuditAccess";
 import { InHouseDevDashboard } from "@/components/workspaces/InHouseDevDashboard";
 import { AdminWorkspace } from "@/components/workspaces/AdminWorkspace";
 import { ImpersonationBanner } from "@/components/workspaces/admin/ImpersonationBanner";
@@ -133,6 +134,9 @@ function Router() {
   const publicViews: View[] = ["landing", "auth", "pricing", "templates"];
   const isPublic = publicViews.includes(view);
   const isAdmin = getCapabilities(getCurrentRole()).adminTools;
+  /* ADR-0046: Repo Audit for engineers, and diagnosis for Business and Enterprise. */
+  const canOpenRepoAudit = isAdmin || repoAuditAccess() !== null;
+  const blocked = (view === "repo-audit" && !canOpenRepoAudit) || (view === "inhouse-dev" && !isAdmin);
 
   useEffect(() => {
     if (!authed && !isPublic) {
@@ -152,10 +156,10 @@ function Router() {
   }, [authed]);
 
   useEffect(() => {
-    if ((view === "repo-audit" || view === "inhouse-dev") && !isAdmin) {
+    if (blocked) {
       setView("dashboard");
     }
-  }, [view, isAdmin, setView]);
+  }, [blocked, setView]);
 
   useEffect(() => {
     if (!authed || view !== "auth") return;
@@ -187,7 +191,7 @@ function Router() {
     );
   }
 
-  if ((view === "repo-audit" || view === "inhouse-dev") && !isAdmin) {
+  if (blocked) {
     return null;
   }
 

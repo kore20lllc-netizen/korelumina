@@ -99,6 +99,7 @@ function Controls({ state }: { state: RepoAuditState }) {
         >
           {state.running?.mode === "scan" ? "Scanning…" : "Run scan"}
         </button>
+        {state.access === "engineer" ? (
         <button
           type="button"
           disabled={busy}
@@ -108,6 +109,7 @@ function Controls({ state }: { state: RepoAuditState }) {
         >
           {state.running?.mode === "deep" ? "Auditing…" : "Deep audit"}
         </button>
+        ) : null}
         <button
           type="button"
           disabled={!report || exporting === "busy"}
@@ -136,7 +138,9 @@ function Controls({ state }: { state: RepoAuditState }) {
       {report ? <ClientReportDialog report={report} open={clientReport} onOpenChange={setClientReport} /> : null}
       {exporting && exporting !== "busy" ? <p className="text-xs leading-5 text-sky-200/80" aria-live="polite">{exporting}</p> : null}
       <p className="text-xs leading-5 text-sky-300/60">
-        A scan only reads files. The deep audit also runs the project&apos;s typecheck and build, without any of Runtime&apos;s secrets.
+        {state.access === "engineer"
+          ? "A scan only reads files. The deep audit also runs the project's typecheck and build, without any of Runtime's secrets."
+          : "A scan only reads files: it never runs your code. Repairs, and the build checks that run your code, are done by KoreLumina engineers."}
       </p>
       {state.runError ? (
         <p className={`text-xs leading-5 ${toneText.error}`} aria-live="polite">
