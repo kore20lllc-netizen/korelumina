@@ -45,6 +45,8 @@ export interface RunningAudit {
   mode: AuditMode;
   stages: Partial<Record<AuditStage, AuditProgress>>;
   error: string | null;
+  /* When this page started following the run, for the elapsed time. */
+  followedAt: number;
 }
 
 export interface RepoAuditState {
@@ -137,7 +139,7 @@ export function useRepoAudit(): RepoAuditState {
       const controller = new AbortController();
       follow.current = controller;
       setRunError(null);
-      setRunning({ runId, mode, stages: {}, error: null });
+      setRunning({ runId, mode, stages: {}, error: null, followedAt: Date.now() });
       followAudit(
         runId,
         (event) => {

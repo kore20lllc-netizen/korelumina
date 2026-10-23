@@ -35,13 +35,17 @@
       "sha256": "467324752ec7530f3f7f20c8f1627fcb68bb9be78c92d70aa1b618ff3f204615",
       "elementCount": 47
     },
+    "apps/lumina-builder/src/components/workspaces/repo-audit/layout/RepairDialog.tsx": {
+      "sha256": "dab0bb9e23089e92ea60f3c93629631a6c5f3e71a4d2ab56e00ce1084a2df885",
+      "elementCount": 39
+    },
     "apps/lumina-builder/src/components/workspaces/repo-audit/layout/RepoAuditCommandDeck.tsx": {
-      "sha256": "cc942ef8a0b0892e56aed58f7354f8a12f8d9aa178ccc85e0e1ae03c52032958",
-      "elementCount": 44
+      "sha256": "e6298c8da349c4cf75e16be43c6f407a586d88330f1b0038b68c8bbb261303e9",
+      "elementCount": 51
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/sections/RepoAuditSections.tsx": {
-      "sha256": "7b23e760f37df0cabb2024aa9622af364d10d945b966b2c927a14b09163fd7b9",
-      "elementCount": 93
+      "sha256": "53665908db920f1fb33594b8b3344dd8e891ad5e467cb243aafc2a8037d6552b",
+      "elementCount": 115
     },
     "apps/lumina-builder/src/components/workspaces/repo-audit/shared/FindingCard.tsx": {
       "sha256": "fbfd2a2dc07f12f285aab756739175c8e85a553488cb77a19301d45aecdba855",

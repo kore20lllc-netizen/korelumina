@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Blocks,
   Boxes,
@@ -15,11 +15,13 @@ import {
 
 import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
 import { contactSales } from "@/services/navigationService";
+import { ENGAGEMENT_STATUS_LABEL, actOnEngagement, formatMoney, listEngagements, type RepairEngagement } from "@/services/repairService";
 import type { FindingCategory, FindingSeverity, RepositoryAuditReport } from "@/services/repositoryAuditService";
 
 import { ExecutiveCardHeading, ExecutiveSection, ExecutiveTile, tonePill, toneText } from "../../executive/shared/ExecutiveSection";
 import { CATEGORY_LABEL, SEVERITIES, SEVERITY_LABEL, SEVERITY_TONE, categoryTone, formatBytes, relativeTime, scoreTone } from "../shared/auditPresentation";
 import { FindingList } from "../shared/FindingCard";
+import { RepairDialog } from "../layout/RepairDialog";
 import { ReportGate } from "../shared/ReportGate";
 import type { RepoAuditState } from "../state/useRepoAudit";
 
@@ -297,15 +299,41 @@ export function FixPlanSection({ state }: { state: RepoAuditState }) {
 }
 
 /*
- * ADR-0046: what a Business or Enterprise customer sees instead of the fix
- * plan. Repairs are done by KoreLumina engineers; paid repair (MS-2026-0015)
- * will start one from here.
+ * ADR-0046 and MS-2026-0015: what a Business or Enterprise customer sees
+ * instead of the fix plan: their repairs of this project, and a way to ask
+ * KoreLumina engineers for one at the published price.
  */
 export function RepairSection({ state }: { state: RepoAuditState }) {
   const report = state.report.status === "ok" ? state.report.data : null;
   const serious = report ? report.summary.counts.critical + report.summary.counts.high : 0;
+  const [asking, setAsking] = useState(false);
+  const [engagements, setEngagements] = useState<RepairEngagement[] | null>(null);
+  const [listError, setListError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    listEngagements()
+      .then((list) => !cancelled && setEngagements(list.filter((engagement) => engagement.projectId === state.projectId)))
+      .catch((error) => !cancelled && setListError(error instanceof Error ? error.message : String(error)));
+    return () => {
+      cancelled = true;
+    };
+  }, [state.projectId]);
+
+  const [cancelling, setCancelling] = useState<{ id: string; reason: string } | null>(null);
+  const cancel = () => {
+    if (!cancelling?.reason.trim()) return;
+    actOnEngagement(cancelling.id, { type: "cancel", reason: cancelling.reason })
+      .then((updated) => {
+        setEngagements((current) => current?.map((entry) => (entry.id === updated.id ? updated : entry)) ?? null);
+        setCancelling(null);
+      })
+      .catch((error) => setNotice(error instanceof Error ? error.message : String(error)));
+  };
+
   return (
-    <ExecutiveSection id="repo-audit-repair" icon={Wrench} eyebrow="Repair" title="Repairs are done by KoreLumina engineers" description="This audit diagnoses the repository. Planning and making the fixes is an in-house service, reviewed by an engineer before anything changes in your code." wiring="live">
+    <ExecutiveSection id="repo-audit-repair" icon={Wrench} eyebrow="Repair" title="Repairs are done by KoreLumina engineers" description="This audit diagnoses the repository. KoreLumina engineers plan and make the fixes, and verify them before anything reaches your code." wiring="live">
       <ReportGate report={state.report}>
         {() => (
           <div className="grid gap-3">
@@ -318,19 +346,105 @@ export function RepairSection({ state }: { state: RepoAuditState }) {
               <div className="relative z-10 grid gap-2">
                 <ExecutiveCardHeading icon={Wrench}>Ask for a repair</ExecutiveCardHeading>
                 <p className="text-xs leading-5 text-sky-100/75">
-                  Share this report with the team: they plan the fixes in order, make them, run the deep audit, and send the changes back for you to review.
+                  Choose the findings to repair and see the price before you agree. An engineer makes the fixes, runs the deep audit, and sends the changes back for you to review.
                 </p>
-                <button type="button" onClick={contactSales} className={`justify-self-start rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill.active}`}>
-                  Talk to our team
-                </button>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" disabled={!report || !state.projectId} onClick={() => setAsking(true)} className={`rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] disabled:cursor-not-allowed disabled:opacity-50 ${tonePill.healthy}`}>
+                    Request a repair
+                  </button>
+                  <button type="button" onClick={contactSales} className="rounded-full border border-white/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/60 hover:text-white/85">
+                    Talk to our team
+                  </button>
+                </div>
               </div>
             </LuminaFlagshipCard>
+            {notice ? <Note tone="active">{notice}</Note> : null}
+            <div className="grid gap-2">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300/70">Your repairs of this project</div>
+              {listError ? (
+                <Note tone="error">{listError}</Note>
+              ) : engagements === null ? (
+                <Note>Reading your repairs…</Note>
+              ) : engagements.length === 0 ? (
+                <Note>None yet.</Note>
+              ) : (
+                <ul className="grid gap-2">
+                  {engagements.map((engagement) => (
+                    <li key={engagement.id} className="flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-cyan-300/15 bg-slate-950/40 px-4 py-3">
+                      <div className="min-w-0">
+                        <div className="text-sm font-semibold text-sky-50">
+                          {engagement.id} · {formatMoney(engagement.quote.totalCents, engagement.quote.currency)}
+                        </div>
+                        <div className="text-xs leading-5 text-sky-300/60">
+                          {engagement.findingIds.length} finding{engagement.findingIds.length === 1 ? "" : "s"} · asked {relativeTime(Date.parse(engagement.createdAt))}
+                          {engagement.delivery?.url ? (
+                            <>
+                              {" · "}
+                              <a href={engagement.delivery.url} target="_blank" rel="noreferrer" className="text-cyan-200 underline-offset-2 hover:underline">
+                                pull request
+                              </a>
+                            </>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${tonePill[ENGAGEMENT_TONE[engagement.status]]}`}>{ENGAGEMENT_STATUS_LABEL[engagement.status]}</span>
+                        {(engagement.status === "requested" || engagement.status === "held") && cancelling?.id !== engagement.id ? (
+                          <button type="button" onClick={() => setCancelling({ id: engagement.id, reason: "" })} className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/55 hover:text-white/80">
+                            Cancel
+                          </button>
+                        ) : null}
+                      </div>
+                      {cancelling?.id === engagement.id ? (
+                        <div className="flex w-full flex-wrap items-center gap-2">
+                          <input
+                            autoFocus
+                            value={cancelling.reason}
+                            onChange={(event) => setCancelling({ id: engagement.id, reason: event.target.value })}
+                            placeholder="Why are you cancelling?"
+                            aria-label="Why are you cancelling?"
+                            className="min-w-0 flex-1 rounded-[12px] border border-cyan-300/25 bg-slate-950/70 px-3 py-1.5 text-xs text-cyan-50 outline-none placeholder:text-white/30 focus:border-cyan-300/60"
+                          />
+                          <button type="button" disabled={!cancelling.reason.trim()} onClick={cancel} className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] disabled:opacity-50 ${tonePill.error}`}>
+                            Cancel repair
+                          </button>
+                          <button type="button" onClick={() => setCancelling(null)} className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/55">
+                            Keep it
+                          </button>
+                        </div>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            {report && state.projectId ? (
+              <RepairDialog
+                report={report}
+                projectId={state.projectId}
+                open={asking}
+                onOpenChange={setAsking}
+                onRequested={(engagement) => {
+                  setEngagements((current) => [engagement, ...(current ?? [])]);
+                  setNotice(`Repair ${engagement.id} requested. A KoreLumina engineer will take it from here.`);
+                }}
+              />
+            ) : null}
           </div>
         )}
       </ReportGate>
     </ExecutiveSection>
   );
 }
+
+const ENGAGEMENT_TONE: Record<RepairEngagement["status"], "healthy" | "active" | "warning" | "error"> = {
+  requested: "active",
+  held: "active",
+  in_progress: "warning",
+  in_review: "warning",
+  delivered: "healthy",
+  cancelled: "error",
+};
 
 export function HistorySection({ state }: { state: RepoAuditState }) {
   const history = state.history;

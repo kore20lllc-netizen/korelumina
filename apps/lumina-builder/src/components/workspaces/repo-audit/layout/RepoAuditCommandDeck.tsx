@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Clock3, Gauge, Radar, ScanSearch, ShieldAlert, Telescope } from "lucide-react";
 
 import { ExecutivePremiumIcon } from "@/components/design-system/executive/ExecutivePremiumIcon";
@@ -189,11 +189,48 @@ function Stages({ state }: { state: RepoAuditState }) {
           );
         })}
       </ol>
-      {running ? (
-        <p className="mt-3 truncate text-xs text-sky-300/70">
-          {Object.values(running.stages).sort((left, right) => (right?.at ?? 0) - (left?.at ?? 0))[0]?.message ?? "Starting…"}
-        </p>
-      ) : null}
+      {running ? <AuditProgressBar running={running} /> : null}
+    </div>
+  );
+}
+
+/*
+ * The audit's progress, so nobody wonders whether it is stuck: the share of
+ * stages finished (a stage under way counts half), what it is doing now,
+ * and a clock that keeps moving while the run is alive.
+ */
+function AuditProgressBar({ running }: { running: NonNullable<RepoAuditState["running"]> }) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const stages = STAGE_ORDER.map((stage) => running.stages[stage]?.state);
+  const done = stages.filter((state) => state === "completed" || state === "skipped").length;
+  const underway = stages.filter((state) => state === "started").length;
+  const percent = Math.min(99, Math.round(((done + underway * 0.5) / STAGE_ORDER.length) * 100));
+  const latest = Object.values(running.stages).sort((left, right) => (right?.at ?? 0) - (left?.at ?? 0))[0];
+  const seconds = Math.max(0, Math.floor((now - running.followedAt) / 1000));
+  const elapsed = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+  return (
+    <div className="mt-3 grid gap-2" aria-live="polite">
+      <div
+        role="progressbar"
+        aria-label="Audit progress"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={percent}
+        className="relative h-2 overflow-hidden rounded-full bg-slate-900/80 ring-1 ring-inset ring-cyan-300/15"
+      >
+        <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-amber-300 transition-[width] duration-700 ease-out" style={{ width: `${Math.max(4, percent)}%` }} />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/3 animate-pulse bg-gradient-to-r from-transparent via-white/25 to-transparent" style={{ transform: `translateX(${(seconds % 3) * 100}%)`, transition: "transform 1s linear" }} />
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span className="min-w-0 flex-1 truncate text-sky-300/75">{latest?.message ?? "Starting…"}</span>
+        <span className="shrink-0 tabular-nums text-sky-200/80">
+          {percent}% · {done} of {STAGE_ORDER.length} steps · {elapsed}
+        </span>
+      </div>
     </div>
   );
 }
