@@ -62,6 +62,7 @@ const pricingFaq = [
   { q: "Can I use my own API keys?", a: "Yes. Connect OpenAI, Anthropic, or Google AI keys and pay providers directly." },
   { q: "Do I still pay for KoreLumina if I use my own keys?", a: "Yes. Your subscription covers access to the KoreLumina platform and orchestration engine." },
   { q: "What is the In-House Developer Escalation Layer?", a: "A premium service where our engineering team implements complex requirements for you." },
+  { q: "Who can run a Repo Audit?", a: "Business and Enterprise accounts can diagnose any repository they import, from any git host or an uploaded archive, and export a client-ready report. Repairs are done by KoreLumina engineers." },
   { q: "What happens after my 5 free executions?", a: "Upgrade to Pro to unlock unlimited AI building and advanced features." },
   { q: "Can I use my own Supabase and GitHub?", a: "Yes, Pro and above let you connect your own infrastructure." },
   { q: "Can I import an existing app and turn it into a website?", a: "Yes, Pro and above include repository import and Transform App → Website." },

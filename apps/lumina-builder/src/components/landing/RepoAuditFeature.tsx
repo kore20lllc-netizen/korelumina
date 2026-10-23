@@ -1,7 +1,7 @@
 import { useReveal } from "@/hooks/use-reveal";
 import { LuminaButton } from "@/components/lumina/LuminaButton";
 import { goToRepoAudit, contactSales } from "@/services/navigationService";
-import { canAccess } from "@/services/workspaceAccessService";
+import { repoAuditAccess } from "@/services/repoAuditAccess";
 import {
   Tooltip,
   TooltipContent,
@@ -25,24 +25,25 @@ import {
 
 const cards = [
   { icon: PackageSearch, title: "Missing Dependencies Detection", body: "Surface packages the project needs but never installs." },
-  { icon: AlertTriangle, title: "Build & Type Error Analysis", body: "Trace failing builds and TypeScript errors to their root cause." },
+  { icon: AlertTriangle, title: "Build & Type Error Analysis", body: "KoreLumina engineers run the project's own build and typecheck during a repair and trace failures to their root cause." },
   { icon: KeyRound, title: "Environment Variable Discovery", body: "Identify required env vars and flag missing values." },
-  { icon: ShieldCheck, title: "Security & Architecture Review", body: "Detect vulnerable patterns and risky architectural choices." },
-  { icon: Wand2, title: "AI-Generated Repair Plan", body: "Receive a prioritized, step-by-step plan to restore the project." },
-  { icon: Zap, title: "One-Click Fix Application", body: "Apply repairs from the plan without leaving the workspace." },
+  { icon: ShieldCheck, title: "Security & Architecture Review", body: "Detect vulnerable patterns, known advisories in any ecosystem, and risky architectural choices." },
+  { icon: Wand2, title: "Scored, Client-Ready Report", body: "Every finding ranked by severity, with what would resolve it, in a report you can send." },
+  { icon: Zap, title: "Engineer-Led Repair", body: "KoreLumina engineers plan, make and verify the fixes, and send the changes back for you to review." },
 ];
 
 const workflow = [
-  { icon: Github, label: "GitHub Repo" },
+  { icon: Github, label: "Imported Repo" },
   { icon: ScanLine, label: "Automated Audit" },
-  { icon: FileText, label: "Technical Report" },
-  { icon: ListChecks, label: "Repair Plan" },
-  { icon: Wrench, label: "Apply Fixes" },
+  { icon: FileText, label: "Diagnosis Report" },
+  { icon: ListChecks, label: "Engineer Repair" },
+  { icon: Wrench, label: "Changes to Review" },
 ];
 
 export function RepoAuditFeature() {
   const ref = useReveal<HTMLDivElement>();
-  const canRun = canAccess("repoAudit");
+  /* ADR-0046: Business and Enterprise diagnose; engineers repair. */
+  const canRun = repoAuditAccess() !== null;
   return (
     <section id="repo-audit" className="py-24 md:py-32 px-6">
       <div ref={ref} className="max-w-6xl mx-auto opacity-0">
@@ -52,8 +53,8 @@ export function RepoAuditFeature() {
             Import Any Repository. Instantly Understand What's Broken.
           </h2>
           <p className="text-muted-foreground leading-relaxed mt-5">
-            KoreLumina analyzes dependencies, build failures, type errors, environment requirements, and security issues,
-            then generates a step-by-step repair plan.
+            On Business and Enterprise, KoreLumina diagnoses any repository you import: dependencies, security, environment
+            and architecture, scored and ready to share. Repairs are done by KoreLumina engineers.
           </p>
         </div>
 
@@ -136,7 +137,7 @@ export function RepoAuditFeature() {
                       variant="primary"
                       size="lg"
                       disabled
-                      aria-label="Run a Repo Audit (requires repoAudit capability)"
+                      aria-label="Run a Repo Audit (available on Business and Enterprise)"
                       tabIndex={-1}
                     >
                       Run a Repo Audit
@@ -145,22 +146,22 @@ export function RepoAuditFeature() {
                       id="repo-audit-locked-reason"
                       className="text-xs text-muted-foreground"
                     >
-                      Requires the <span className="font-mono text-foreground/80">repoAudit</span> capability.
+                      Available on Business and Enterprise.
                     </p>
                   </span>
                 </TooltipTrigger>
                 <TooltipContent side="top" className="max-w-xs text-xs leading-relaxed">
-                  <p className="font-medium text-foreground mb-1">Repo Audit is unavailable</p>
+                  <p className="font-medium text-foreground mb-1">Repo Audit is on Business and Enterprise</p>
                   <p className="text-muted-foreground">
-                    Your account doesn't include the <span className="font-mono">repoAudit</span> capability.
-                    It's available on Business and Enterprise plans, or with an active in-house developer engagement.
+                    Business and Enterprise accounts diagnose any repository they import. Repairs are done by KoreLumina
+                    engineers, as a paid repair or an engineering engagement.
                   </p>
                   <button
                     type="button"
                     onClick={contactSales}
                     className="mt-2 inline-flex items-center gap-1 text-cyan hover:text-cyan/80 underline-offset-2 hover:underline"
                   >
-                    Contact sales to unlock →
+                    Talk to our team →
                   </button>
                 </TooltipContent>
               </Tooltip>
