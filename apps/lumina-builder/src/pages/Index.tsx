@@ -14,7 +14,7 @@ import { AIWorkspace } from "@/components/workspaces/AIWorkspace";
 import { AuthView } from "@/components/workspaces/AuthView";
 import { SettingsView } from "@/components/workspaces/SettingsView";
 import { PricingView } from "@/components/workspaces/PricingView";
-import { InHouseDevWorkspace } from "@/components/workspaces/inhouse/InHouseDevWorkspace";
+import { InHouseDevDashboard } from "@/components/workspaces/InHouseDevDashboard";
 import { AdminWorkspace } from "@/components/workspaces/AdminWorkspace";
 import { ImpersonationBanner } from "@/components/workspaces/admin/ImpersonationBanner";
 import { ImportModal } from "@/components/import/ImportModal";
@@ -266,7 +266,7 @@ function Router() {
   if (view === "inhouse-dev") {
     return (
       <Shell blobs="ambient">
-        <InHouseDevWorkspace />
+        <InHouseDevDashboard />
       </Shell>
     );
   }
