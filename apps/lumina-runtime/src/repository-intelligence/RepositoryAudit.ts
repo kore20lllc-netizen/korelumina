@@ -3,7 +3,10 @@ import { createHash } from "node:crypto";
 import { auditAdvisories, type AdvisoryAudit, type AuditCommandRunner } from "./AdvisoryAudit.js";
 import { mapArchitecture } from "./ArchitectureMap.js";
 import { checkBuildHealth, type BuildCheck, type ProcessRunner } from "./BuildHealth.js";
+import { scanLanguageRisks, unscannedLanguages } from "./CodeRiskLanguages.js";
 import { scanCodeRisks } from "./CodeRiskScan.js";
+import { checkEcosystemDependencies } from "./EcosystemDependencyChecks.js";
+import { ECOSYSTEM_LABEL } from "./Ecosystems.js";
 import { analyzeDependencies } from "./DependencyAnalysis.js";
 import { analyzeEnvironment } from "./EnvironmentAnalysis.js";
 import { createRepositoryIntelligenceManifest, type RepositoryIntelligenceManifest } from "./RepositoryIntelligenceManifest.js";
@@ -154,6 +157,62 @@ export function summarize(
   return { score, grade: gradeOf(score), counts, categories };
 }
 
+type Coverage = { status: CategoryStatus; notes: string[] };
+const STATUS_RANK: Record<CategoryStatus, number> = { checked: 0, partial: 1, "not-checked": 2 };
+
+/* The weaker of two coverages, with both sets of notes. */
+export function combineStatus(left: Coverage | undefined, right: Coverage | undefined): Coverage | undefined {
+  if (!left) return right;
+  if (!right) return left;
+  return { status: STATUS_RANK[left.status] >= STATUS_RANK[right.status] ? left.status : right.status, notes: [...left.notes, ...right.notes] };
+}
+
+const SCRIPT_LANGUAGES = new Set(["TypeScript", "JavaScript", "Vue", "Svelte", "Astro"]);
+const NOT_CODE = new Set(["JSON", "Markdown", "MDX", "YAML", "TOML", "CSS", "SCSS", "Less", "HTML", "SQL", "Shell"]);
+
+const list = (items: readonly string[]) => (items.length <= 1 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`);
+
+/*
+ * MS-2026-0013: what each category could and could not check, given the
+ * repository's ecosystems and languages. A category that covered only part
+ * of the code is partial, with the reason; one that covered none of it is
+ * not checked. Neither is ever counted as passing.
+ */
+export function ecosystemCoverageNotes(inventory: RepositoryAuditReport["manifest"]["inventory"]): Partial<Record<FindingCategory, Coverage>> {
+  const others = inventory.ecosystemCoverage.recognised.filter((ecosystem) => ecosystem !== "node").map((ecosystem) => ECOSYSTEM_LABEL[ecosystem]);
+  const hasNode = inventory.ecosystemCoverage.recognised.includes("node");
+  const code = inventory.languages.filter((share) => share.files > 0 && !NOT_CODE.has(share.language)).map((share) => share.language);
+  const scripts = code.filter((language) => SCRIPT_LANGUAGES.has(language));
+  const nonScript = code.filter((language) => !SCRIPT_LANGUAGES.has(language));
+  const unscanned = unscannedLanguages(inventory.languages);
+  const result: Partial<Record<FindingCategory, Coverage>> = {};
+
+  const dependencyNotes: string[] = [];
+  if (others.length > 0) dependencyNotes.push(`For ${list(others)}, manifests and lockfiles were checked; unused and undeclared packages are found for Node.js only.`);
+  if (inventory.ecosystemCoverage.languagesWithoutManifest.length > 0) dependencyNotes.push(`${list(inventory.ecosystemCoverage.languagesWithoutManifest)} code has no manifest, so its dependencies are unknown.`);
+  if (inventory.ecosystemCoverage.unsupportedLanguages.length > 0) dependencyNotes.push(`${list(inventory.ecosystemCoverage.unsupportedLanguages)} dependencies are not analyzed yet.`);
+  if (dependencyNotes.length > 0) result.dependency = { status: "partial", notes: dependencyNotes };
+
+  const securityNotes: string[] = [];
+  if (others.length > 0) securityNotes.push(`Dependency advisories cover Node.js only; ${list(others)} dependencies were not checked against an advisory database.`);
+  if (unscanned.length > 0) securityNotes.push(`${list(unscanned)} code was not scanned for risky patterns; committed credentials were still searched for in every text file.`);
+  if (securityNotes.length > 0) result.security = { status: "partial", notes: securityNotes };
+
+  if (others.length > 0) {
+    result.build = {
+      status: hasNode ? "partial" : "not-checked",
+      notes: [`${list(others)} ${others.length === 1 ? "was" : "were"} not built: building runs the project's own build scripts, which the audit does not run yet.`],
+    };
+  }
+
+  if (nonScript.length > 0) {
+    const note = (what: string) => `${what} JavaScript and TypeScript only; ${list(nonScript)} code is not covered.`;
+    result.architecture = scripts.length > 0 ? { status: "partial", notes: [note("The import map covers")] } : { status: "not-checked", notes: [note("The import map covers")] };
+    result.environment = scripts.length > 0 ? { status: "partial", notes: [note("Environment variables are read from")] } : { status: "not-checked", notes: [note("Environment variables are read from")] };
+  }
+  return result;
+}
+
 export interface RunRepositoryAuditInput {
   projectId: string;
   root: string;
@@ -194,7 +253,17 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
   const manifest = createRepositoryIntelligenceManifest({ projectId: input.projectId, snapshot, inventory, analyzedAt: startedAt });
   const dependencies = await step("dependencies", "Checking declared and imported packages", () => analyzeDependencies(snapshot, inventory), (result) => `${result.findings.length} findings`);
   const secrets = await step("secrets", "Looking for committed credentials", () => scanSecretsAsync(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
-  const code = await step("code", "Looking for risky code patterns", () => scanCodeRisks(snapshot), (result) => `${result.filesScanned} files, ${result.findings.length} findings`);
+  const ecosystemFindings = checkEcosystemDependencies(inventory.ecosystems);
+  const code = await step(
+    "code",
+    "Looking for risky code patterns",
+    () => {
+      const script = scanCodeRisks(snapshot);
+      const other = scanLanguageRisks(snapshot);
+      return { findings: [...script.findings, ...other.findings], filesScanned: script.filesScanned + other.filesScanned };
+    },
+    (result) => `${result.filesScanned} files, ${result.findings.length} findings`,
+  );
   const environment = await step("environment", "Comparing environment variables with their documentation", () => analyzeEnvironment(snapshot, inventory), (result) => `${result.variables.length} variables`);
   const architecture = await step(
     "architecture",
@@ -228,6 +297,7 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
   progress("report", "started", "Scoring");
   const findings = sortFindings([
     ...dependencies.findings,
+    ...ecosystemFindings,
     ...secrets.findings,
     ...code.findings,
     ...advisories.findings,
@@ -238,17 +308,25 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
 
   const buildRan = build.filter((check) => check.status === "passed" || check.status === "failed");
   const buildNotes = build.filter((check) => check.status === "unavailable").map((check) => `${check.packageDirectory} ${check.check}: ${check.reason}`);
+  const coverage = ecosystemCoverageNotes(inventory);
   const summary = summarize(findings, {
-    security:
+    dependency: coverage.dependency,
+    architecture: coverage.architecture,
+    environment: coverage.environment,
+    security: combineStatus(
       advisories.status === "checked"
         ? { status: "checked", notes: [] }
         : { status: "partial", notes: [`Dependency advisories were not checked: ${advisories.reason}`] },
-    build:
+      coverage.security,
+    ),
+    build: combineStatus(
       input.mode !== "deep"
         ? { status: "not-checked", notes: ["Build health runs in the deep audit."] }
         : buildRan.length === 0
           ? { status: "not-checked", notes: buildNotes.length > 0 ? buildNotes : ["Nothing to typecheck or build."] }
           : { status: buildNotes.length > 0 ? "partial" : "checked", notes: buildNotes },
+      input.mode === "deep" ? coverage.build : undefined,
+    ),
   });
 
   const ids = new Set(findings.map((finding) => finding.id));

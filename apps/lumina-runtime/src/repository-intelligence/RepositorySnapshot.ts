@@ -58,6 +58,17 @@ export const SKIPPED_DIRECTORIES = new Set([
   ".output",
   "coverage",
   ".parcel-cache",
+  /* MS-2026-0013: installed dependencies and build output of other ecosystems. */
+  ".venv",
+  "venv",
+  "__pycache__",
+  ".mypy_cache",
+  ".pytest_cache",
+  ".tox",
+  ".gradle",
+  ".dart_tool",
+  "Pods",
+  "target",
 ]);
 
 export const ENVIRONMENT_FILE = /^\.env(\..+)?$/;

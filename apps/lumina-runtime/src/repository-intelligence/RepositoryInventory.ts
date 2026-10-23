@@ -1,5 +1,6 @@
 import path from "node:path";
 
+import { detectEcosystems, type EcosystemCoverage, type EcosystemPackage } from "./Ecosystems.js";
 import type { RepositorySnapshot } from "./RepositorySnapshot.js";
 
 /*
@@ -41,6 +42,35 @@ export const LANGUAGE_BY_EXTENSION: Readonly<Record<string, string>> = {
   ".yml": "YAML",
   ".yaml": "YAML",
   ".toml": "TOML",
+  /* MS-2026-0013: the other languages KoreLumina recognises. */
+  ".pyi": "Python",
+  ".kts": "Kotlin",
+  ".scala": "Scala",
+  ".groovy": "Groovy",
+  ".gradle": "Groovy",
+  ".fs": "F#",
+  ".vb": "Visual Basic",
+  ".dart": "Dart",
+  ".m": "Objective-C",
+  ".mm": "Objective-C",
+  ".c": "C",
+  ".h": "C",
+  ".cc": "C++",
+  ".cpp": "C++",
+  ".cxx": "C++",
+  ".hpp": "C++",
+  ".hh": "C++",
+  ".erb": "Ruby",
+  ".ex": "Elixir",
+  ".exs": "Elixir",
+  ".erl": "Erlang",
+  ".hs": "Haskell",
+  ".lua": "Lua",
+  ".r": "R",
+  ".pl": "Perl",
+  ".zig": "Zig",
+  ".clj": "Clojure",
+  ".jl": "Julia",
 };
 
 export interface LanguageShare {
@@ -97,6 +127,9 @@ export interface RepositoryInventory {
   /* Ignored ones are local only; a tracked one is committed to the repository. */
   environmentFiles: { path: string; ignored: boolean; tracked: boolean | null }[];
   documentation: string[];
+  /* MS-2026-0013: every recognised ecosystem's packages, Node included, and what was not recognised. */
+  ecosystems: EcosystemPackage[];
+  ecosystemCoverage: EcosystemCoverage;
 }
 
 const FRAMEWORKS: readonly { id: string; name: string; packages: string[] }[] = [
@@ -341,13 +374,24 @@ export function takeRepositoryInventory(fullSnapshot: RepositorySnapshot): Repos
     };
   });
 
+  const languageShares = [...languages.values()].sort((left, right) => right.bytes - left.bytes || (left.language < right.language ? -1 : 1));
+  const manager = (declaredName && ["npm", "pnpm", "yarn", "bun"].includes(declaredName) ? declaredName : managers[0]) ?? null;
+  const ecosystems = detectEcosystems({
+    paths: snapshot.files.map((file) => file.path),
+    read: snapshot.read,
+    nodePackages: packages,
+    nodeTool: manager,
+    nodeLockfiles: lockfiles,
+    languages: languageShares,
+  });
+
   return {
     totalFiles: snapshot.files.length,
     totalBytes,
     textFiles,
-    languages: [...languages.values()].sort((left, right) => right.bytes - left.bytes || (left.language < right.language ? -1 : 1)),
+    languages: languageShares,
     packageManager: {
-      manager: (declaredName && ["npm", "pnpm", "yarn", "bun"].includes(declaredName) ? declaredName : managers[0]) ?? null,
+      manager,
       lockfiles: lockfiles.sort(),
       conflicting: managers.length > 1,
       declared: declaredManager,
@@ -361,5 +405,7 @@ export function takeRepositoryInventory(fullSnapshot: RepositorySnapshot): Repos
       .filter((file) => ENVIRONMENT_FILE.test(file.path))
       .map((file) => ({ path: file.path, ignored: file.ignored, tracked: file.tracked })),
     documentation: snapshot.files.map((file) => file.path).filter((file) => DOCUMENTATION.test(file)),
+    ecosystems: ecosystems.packages,
+    ecosystemCoverage: ecosystems.coverage,
   };
 }
