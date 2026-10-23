@@ -1,4 +1,6 @@
 import type { Express } from "express";
+import { callerMayViewProject, requireProjectAccess } from "./projectAccess.js";
+import { getRuntimeCaller } from "./runtimeCaller.js";
 
 import {
   getRuntime,
@@ -51,7 +53,7 @@ function runtimeStatusResponse(projectId: string) {
 }
 
 export function registerStatusRoute(app: Express) {
-  app.get("/api/runtime/status", (req, res) => {
+  app.get("/api/runtime/status", requireProjectAccess("view"), (req, res) => {
     try {
       const projectId =
         typeof req.query.projectId === "string"
@@ -59,8 +61,12 @@ export function registerStatusRoute(app: Express) {
           : undefined;
 
       if (!projectId) {
+        /* F-47: only the runtimes of projects the caller may see. */
+        const caller = getRuntimeCaller(req);
         const runtimes =
-          listRuntimes().map(serializeRuntime);
+          listRuntimes()
+            .map(serializeRuntime)
+            .filter((runtime) => callerMayViewProject(caller, runtime.projectId));
 
         return res.json({
           ok: true,
@@ -96,11 +102,12 @@ export function registerStatusRoute(app: Express) {
 
   app.get(
     "/api/runtime/status/:projectId",
+    requireProjectAccess("view"),
     (req, res) => {
       try {
         const result =
           runtimeStatusResponse(
-            req.params.projectId,
+            String(req.params.projectId),
           );
 
         return res

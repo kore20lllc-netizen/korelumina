@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import { requireProjectAccess } from "./projectAccess.js";
 
 import {
   getRuntime,
@@ -16,7 +17,7 @@ function normalizeProjectId(value: unknown) {
 }
 
 export function registerStopRoute(app: Express) {
-  app.post("/api/runtime/stop", async (req, res) => {
+  app.post("/api/runtime/stop", requireProjectAccess("manage"), async (req, res) => {
     try {
       const projectId = normalizeProjectId(
         req.body?.projectId,

@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import { requireProjectAccess } from "./projectAccess.js";
 
 import {
   getRuntime,
@@ -10,7 +11,7 @@ import {
 } from "../runtime/projectRegistry.js";
 
 export function registerLogsRoute(app: Express) {
-  app.get("/api/runtime/logs", (req, res) => {
+  app.get("/api/runtime/logs", requireProjectAccess("view"), (req, res) => {
     try {
       const projectId =
         typeof req.query.projectId === "string"

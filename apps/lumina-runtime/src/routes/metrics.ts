@@ -1,3 +1,4 @@
+import { requireStaff } from "./projectAccess.js";
 import {
   execFile,
 } from "node:child_process";
@@ -350,6 +351,7 @@ export function registerMetricsRoute(
 ) {
   app.get(
     "/api/runtime/metrics",
+    requireStaff,
     async (_req, res) => {
       try {
         const now =

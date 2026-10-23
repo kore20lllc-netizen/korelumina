@@ -60,6 +60,7 @@ export function subscribeRuntimeEvents(
 
 export function attachRuntimeEventStream(
   res: Response,
+  allow: (event: RuntimeEvent) => boolean = () => true,
 ) {
   res.setHeader(
     "Content-Type",
@@ -85,6 +86,7 @@ export function attachRuntimeEventStream(
   const unsubscribe =
     subscribeRuntimeEvents(
       (event) => {
+        if (!allow(event)) return;
         res.write(
           `data: ${JSON.stringify(event)}\n\n`,
         );

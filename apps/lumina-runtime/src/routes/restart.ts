@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import { requireProjectAccess } from "./projectAccess.js";
 
 import { getRuntime } from "../runtime/registry.js";
 import { restartProject } from "../runtime/startProject.js";
@@ -20,6 +21,7 @@ export function registerRestartRoute(
   app.post(
     "/api/runtime/restart",
     requireRuntimeAccess,
+    requireProjectAccess("manage"),
     async (req, res) => {
       try {
         const projectId = normalizeProjectId(

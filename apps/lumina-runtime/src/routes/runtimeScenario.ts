@@ -1,3 +1,4 @@
+import { requireStaff } from "./projectAccess.js";
 import type {
   Express,
   Request,
@@ -33,6 +34,7 @@ export function registerRuntimeScenarioRoute(
 ): void {
   app.post(
     "/api/runtime/scenario",
+    requireStaff,
     (
       req: Request<
         Record<string, never>,

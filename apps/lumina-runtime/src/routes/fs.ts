@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { requireProjectAccess } from "./projectAccess.js";
 import path from "node:path";
 import crypto from "node:crypto";
 import type { Express } from "express";
@@ -72,7 +73,7 @@ function listFiles(
 }
 
 export function registerFsRoute(app: Express) {
-  app.get("/api/runtime/fs/list", (req, res) => {
+  app.get("/api/runtime/fs/list", requireProjectAccess("view"), (req, res) => {
     try {
       const projectId =
         typeof req.query.projectId === "string"
@@ -94,7 +95,7 @@ export function registerFsRoute(app: Express) {
     }
   });
 
-  app.get("/api/runtime/fs/read", (req, res) => {
+  app.get("/api/runtime/fs/read", requireProjectAccess("view"), (req, res) => {
     try {
       const projectId =
         typeof req.query.projectId === "string"
@@ -154,7 +155,7 @@ const { file, targetPath } = resolveProjectFile(
     }
   });
 
-  app.post("/api/runtime/fs/write", (req, res) => {
+  app.post("/api/runtime/fs/write", requireProjectAccess("manage"), (req, res) => {
     try {
       const projectId =
         typeof req.body?.projectId === "string"
