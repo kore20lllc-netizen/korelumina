@@ -9,7 +9,7 @@ import { ActiveTeamProvider } from "@/context/ActiveTeamContext";
 import { useIsAuthenticated } from "@/hooks/use-auth";
 import { GlassTintProvider } from "@/context/GlassTintContext";
 import { EntryView } from "@/components/workspaces/EntryView";
-import { DashboardView } from "@/components/workspaces/DashboardView";
+import { ProjectsWorkspace } from "@/components/workspaces/projects/ProjectsWorkspace";
 import { AIWorkspace } from "@/components/workspaces/AIWorkspace";
 import { AuthView } from "@/components/workspaces/AuthView";
 import { SettingsView } from "@/components/workspaces/SettingsView";
@@ -210,7 +210,7 @@ function Router() {
   if (view === "dashboard") {
     return (
       <Shell blobs="ambient">
-        <DashboardView />
+        <ProjectsWorkspace />
       </Shell>
     );
   }

@@ -170,6 +170,9 @@ export interface RuntimeProject {
   ownerId?: string;
   teamId?: string;
   createdBy?: string;
+  /* From the project's metadata: when Runtime first and last recorded it. */
+  createdAt?: number;
+  updatedAt?: number;
 }
 
 export interface RuntimeSession {

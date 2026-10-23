@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Projects dashboard Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Projects command deck, project cards and filters",
+      "delete confirmation dialog",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved the Projects dashboard (2026-10-23)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/projects/ProjectsWorkspace.tsx": {
+      "sha256": "8b65fb126e8a847b07719b82eaeb4e07d6405875e2b55cca10fcac1ea8309710",
+      "elementCount": 14
+    },
+    "apps/lumina-builder/src/components/workspaces/projects/layout/ProjectsCommandDeck.tsx": {
+      "sha256": "6018fdbe34e7248aa266ec810389ceb7c0d275705c324ab1c53c276f30563781",
+      "elementCount": 24
+    },
+    "apps/lumina-builder/src/components/workspaces/projects/sections/ProjectsSection.tsx": {
+      "sha256": "01623666ae03f7044998bff66f3f3f6eb44c7f36a4def2248618e966b1a661ae",
+      "elementCount": 44
+    }
+  }
+}
