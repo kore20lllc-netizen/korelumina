@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "currency": "usd",
+  "minimumCents": 50000,
+  "perFindingCents": {
+    "critical": 40000,
+    "high": 20000,
+    "medium": 7500,
+    "low": 2500,
+    "info": 0
+  },
+  "categoryMultiplier": {},
+  "approvedBy": "human:founder",
+  "approvedAt": "2026-10-23",
+  "note": "Owner decision 2026-10-23: the starter table from the Pricing page. The minimum is the Quick Fix starting price."
+}

@@ -103,6 +103,7 @@ import {
   priceMapFromEnvironment,
 } from "./billing/StripeBilling.js";
 import { registerStripeWebhookRoute } from "./routes/stripeWebhook.js";
+import { registerRepairRoutes } from "./routes/repairEngagements.js";
 import { registerRepositoryAuditRoutes } from "./routes/repositoryAudit.js";
 import { registerFixPlanRoute } from "./routes/fixPlan.js";
 import { registerGenerateFixesRoute } from "./routes/generateFixes.js";
@@ -1677,6 +1678,8 @@ registerFsRoute(app);
 registerAuditRoute(app);
 /* MS-2026-0012: the Repository Intelligence audit engine. */
 registerRepositoryAuditRoutes(app);
+/* MS-2026-0015: paid repair quotes and engagements. */
+registerRepairRoutes(app);
 registerFixPlanRoute(app);
 registerGenerateFixesRoute(app);
 
