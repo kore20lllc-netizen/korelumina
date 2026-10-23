@@ -1,5 +1,7 @@
 import type { Express } from "express";
 
+import { allowAuditAction } from "./auditPolicy.js";
+
 import { auditProject } from "../audit/auditProject.js";
 import { applyDraft } from "../drafts/applyDraft.js";
 import { getDraft, markDraftApplied } from "../drafts/draftStore.js";
@@ -29,6 +31,9 @@ export function registerApplyDraftRoute(app: Express) {
           error: "draft_not_found",
         });
       }
+
+      /* ADR-0046, F-44: only the project's managers and staff change its files. */
+      if (!allowAuditAction(req, res, draft.projectId, "edit")) return;
 
       if (draft.status !== "draft") {
         return res.status(409).json({

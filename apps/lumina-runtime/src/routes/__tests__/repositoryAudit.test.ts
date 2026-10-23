@@ -21,7 +21,7 @@ function repository(files: Record<string, string>): string {
   return root;
 }
 
-async function server(options: { manage: boolean }) {
+async function server(options: { staff: boolean }) {
   const project = repository({
     "package.json": JSON.stringify({ name: "app", dependencies: { react: "^18" } }),
     "src/main.ts": 'import React from "react";\nimport { z } from "zod";\n',
@@ -34,7 +34,9 @@ async function server(options: { manage: boolean }) {
     store,
     runs,
     projectRoot: (projectId) => (projectId === "app" ? project : null),
-    authorize: (_req, _projectId, level) => level === "view" || options.manage,
+    /* ADR-0046: customers diagnose; the deep audit and the fix plan are for staff. */
+    authorize: (_req, _projectId, action) =>
+      options.staff || action === "diagnose" || action === "read-report" ? { ok: true } : { ok: false, status: 403, error: "repair_is_done_by_korelumina_engineers" },
   });
   const listening = app.listen(0, "127.0.0.1");
   await new Promise((resolve) => listening.once("listening", resolve));
@@ -62,7 +64,7 @@ async function readEvents(url: string): Promise<{ event: string; data: { type: s
 }
 
 test("a scan streams its progress, then its report, history and fix plan can be read", async () => {
-  const api = await server({ manage: false });
+  const api = await server({ staff: false });
   try {
     const started = await api.post({ projectId: "app", mode: "scan", checkAdvisories: false });
     assert.equal(started.status, 202);
@@ -83,7 +85,21 @@ test("a scan streams its progress, then its report, history and fix plan can be 
     const history = (await (await fetch(`${api.base}/app/reports`)).json()) as { reports: { reportId: string }[] };
     assert.deepEqual(history.reports.map((item) => item.reportId), [reportId]);
 
-    const plan = (await (await fetch(`${api.base}/app/reports/${encodeURIComponent(reportId)}/fix-plan`)).json()) as { steps: { rule: string; remedies: string[]; automated: boolean }[] };
+    /* A customer diagnoses; the ordered fix plan is in-house (ADR-0046). */
+    const refusedPlan = await fetch(`${api.base}/app/reports/${encodeURIComponent(reportId)}/fix-plan`);
+    assert.equal(refusedPlan.status, 403);
+    assert.equal(((await refusedPlan.json()) as { error: string }).error, "repair_is_done_by_korelumina_engineers");
+    const staff = await server({ staff: true });
+    const plan = await (async () => {
+      try {
+        const started = (await (await staff.post({ projectId: "app", mode: "scan", checkAdvisories: false })).json()) as { runId: string };
+        const done = await readEvents(`${staff.base}/runs/${encodeURIComponent(started.runId)}/events`);
+        const staffReport = done.at(-1)!.data.reportId!;
+        return (await (await fetch(`${staff.base}/app/reports/${encodeURIComponent(staffReport)}/fix-plan`)).json()) as { steps: { rule: string; remedies: string[]; automated: boolean }[] };
+      } finally {
+        await staff.close();
+      }
+    })();
     const undeclared = plan.steps.find((step) => step.rule === "dependency.undeclared")!;
     assert.deepEqual(undeclared.remedies, ["Add zod to dependencies in package.json."]);
     assert.equal(undeclared.automated, false);
@@ -93,7 +109,7 @@ test("a scan streams its progress, then its report, history and fix plan can be 
 });
 
 test("one audit runs per project at a time", async () => {
-  const api = await server({ manage: false });
+  const api = await server({ staff: false });
   try {
     const first = (await (await api.post({ projectId: "app", checkAdvisories: false })).json()) as { runId: string };
     const second = await api.post({ projectId: "app", checkAdvisories: false });
@@ -105,8 +121,8 @@ test("one audit runs per project at a time", async () => {
   }
 });
 
-test("the deep audit runs project code, so it needs the right to manage the project", async () => {
-  const api = await server({ manage: false });
+test("the deep audit runs project code, so it is for staff only", async () => {
+  const api = await server({ staff: false });
   try {
     const refused = await api.post({ projectId: "app", mode: "deep" });
     assert.equal(refused.status, 403);
@@ -117,7 +133,7 @@ test("the deep audit runs project code, so it needs the right to manage the proj
 });
 
 test("unknown projects, invalid IDs and missing reports are refused", async () => {
-  const api = await server({ manage: true });
+  const api = await server({ staff: true });
   try {
     assert.equal((await api.post({ projectId: "nope" })).status, 404);
     assert.equal((await api.post({ projectId: "../etc" })).status, 400);

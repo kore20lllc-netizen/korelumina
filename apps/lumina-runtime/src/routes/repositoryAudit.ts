@@ -11,14 +11,15 @@ import {
   type AuditMode,
 } from "../repository-intelligence/index.js";
 import { requireRuntimeAccess } from "./runtimeAccess.js";
-import { canManageProject, canViewProject } from "./runtimeAuthorization.js";
+import { decideAuditAccess, type AuditAction, type AuditDecision } from "./auditPolicy.js";
 import { getRuntimeCaller } from "./runtimeCaller.js";
 
 /*
- * MS-2026-0012: the Repo Audit API. Viewing a project lets a caller run a
- * scan (it only reads files) and read its reports; the deep audit runs
- * the project's own typecheck and build, so it needs the right to manage
- * the project. Progress streams as server-sent events.
+ * MS-2026-0012: the Repo Audit API. Progress streams as server-sent events.
+ *
+ * ADR-0046: Business and Enterprise may diagnose their imported projects
+ * (start a scan, read reports and progress); the deep audit, which runs
+ * the project's own typecheck and build, and the fix plan are in-house.
  */
 
 export interface RepositoryAuditRouteDependencies {
@@ -26,7 +27,7 @@ export interface RepositoryAuditRouteDependencies {
   runs: RepositoryAuditRuns;
   /* The project's directory, or null when it does not exist. */
   projectRoot(projectId: string): string | null;
-  authorize(req: Request, projectId: string, level: "view" | "manage"): boolean;
+  authorize(req: Request, projectId: string, action: AuditAction): AuditDecision;
 }
 
 const PROJECT_ID = /^[a-zA-Z0-9._-]{1,128}$/;
@@ -40,11 +41,7 @@ export function defaultRepositoryAuditRouteDependencies(): RepositoryAuditRouteD
       const root = getProjectPath(projectId);
       return existsSync(root) ? root : null;
     },
-    authorize: (req, projectId, level) => {
-      const caller = getRuntimeCaller(req);
-      const metadata = getProjectMetadata(projectId);
-      return level === "manage" ? canManageProject(caller, metadata) : canViewProject(caller, metadata);
-    },
+    authorize: (req, projectId, action) => decideAuditAccess(getRuntimeCaller(req), getProjectMetadata(projectId), action),
   };
 }
 
@@ -52,7 +49,7 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
   const { store, runs } = dependencies;
 
   /* Validates the project ID and access; answers and returns null when refused. */
-  const project = (req: Request, res: Response, projectId: unknown, level: "view" | "manage"): { projectId: string; root: string } | null => {
+  const project = (req: Request, res: Response, projectId: unknown, action: AuditAction): { projectId: string; root: string } | null => {
     if (typeof projectId !== "string" || !PROJECT_ID.test(projectId) || projectId === "." || projectId === "..") {
       res.status(400).json({ ok: false, error: "invalid_projectId" });
       return null;
@@ -62,8 +59,9 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
       res.status(404).json({ ok: false, error: "project_not_found", projectId });
       return null;
     }
-    if (!dependencies.authorize(req, projectId, level)) {
-      res.status(403).json({ ok: false, error: "forbidden", projectId });
+    const decision = dependencies.authorize(req, projectId, action);
+    if (!decision.ok) {
+      res.status(decision.status).json({ ok: false, error: decision.error, projectId });
       return null;
     }
     return { projectId, root };
@@ -71,7 +69,7 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
 
   app.post("/api/runtime/repository-audit/runs", requireRuntimeAccess, (req, res) => {
     const mode: AuditMode = req.body?.mode === "deep" ? "deep" : "scan";
-    const target = project(req, res, req.body?.projectId, mode === "deep" ? "manage" : "view");
+    const target = project(req, res, req.body?.projectId, mode === "deep" ? "deep-audit" : "diagnose");
     if (!target) return;
     const running = runs.runningFor(target.projectId);
     if (running) return res.status(409).json({ ok: false, error: "repository_audit_already_running", runId: running.runId });
@@ -83,14 +81,14 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
   app.get("/api/runtime/repository-audit/runs/:runId", requireRuntimeAccess, (req, res) => {
     const run = runs.get(String(req.params.runId));
     if (!run) return res.status(404).json({ ok: false, error: "repository_audit_run_not_found" });
-    if (!project(req, res, run.projectId, "view")) return;
+    if (!project(req, res, run.projectId, "read-report")) return;
     return res.json({ ok: true, run });
   });
 
   app.get("/api/runtime/repository-audit/runs/:runId/events", requireRuntimeAccess, (req, res) => {
     const run = runs.get(String(req.params.runId));
     if (!run) return res.status(404).json({ ok: false, error: "repository_audit_run_not_found" });
-    if (!project(req, res, run.projectId, "view")) return;
+    if (!project(req, res, run.projectId, "read-report")) return;
     res.writeHead(200, { "Content-Type": "text/event-stream", "Cache-Control": "no-cache, no-transform", Connection: "keep-alive", "X-Accel-Buffering": "no" });
     let closed = false;
     const unsubscribe = runs.subscribe(run.runId, (event) => {
@@ -108,7 +106,7 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
   });
 
   app.get("/api/runtime/repository-audit/:projectId/latest", requireRuntimeAccess, (req, res) => {
-    const target = project(req, res, req.params.projectId, "view");
+    const target = project(req, res, req.params.projectId, "read-report");
     if (!target) return;
     const report = store.latestReport(target.projectId);
     if (!report) return res.status(404).json({ ok: false, error: "repository_audit_report_not_found" });
@@ -116,13 +114,13 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
   });
 
   app.get("/api/runtime/repository-audit/:projectId/reports", requireRuntimeAccess, (req, res) => {
-    const target = project(req, res, req.params.projectId, "view");
+    const target = project(req, res, req.params.projectId, "read-report");
     if (!target) return;
     return res.json({ ok: true, reports: store.listReports(target.projectId) });
   });
 
   app.get("/api/runtime/repository-audit/:projectId/reports/:reportId", requireRuntimeAccess, (req, res) => {
-    const target = project(req, res, req.params.projectId, "view");
+    const target = project(req, res, req.params.projectId, "read-report");
     if (!target) return;
     const report = store.loadReport(target.projectId, String(req.params.reportId));
     if (!report) return res.status(404).json({ ok: false, error: "repository_audit_report_not_found" });
@@ -130,7 +128,7 @@ export function registerRepositoryAuditRoutes(app: Express, dependencies: Reposi
   });
 
   app.get("/api/runtime/repository-audit/:projectId/reports/:reportId/fix-plan", requireRuntimeAccess, (req, res) => {
-    const target = project(req, res, req.params.projectId, "view");
+    const target = project(req, res, req.params.projectId, "repair");
     if (!target) return;
     const report = store.loadReport(target.projectId, String(req.params.reportId));
     if (!report) return res.status(404).json({ ok: false, error: "repository_audit_report_not_found" });

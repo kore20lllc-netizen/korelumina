@@ -3817,8 +3817,11 @@ Administrators
 
 Super Administrators
 
-Repair is the ordered fix plan, repair drafts and applying them, and the
-deep audit, which runs the project's own typecheck and build.
+Repair is the ordered fix plan, turning audit findings into fixes, and
+the deep audit, which runs the project's own typecheck and build.
+
+AI Builder drafts are not repair: the project's managers and staff create,
+apply and revert them, imported projects included.
 
 Customers request repairs through paid repair or an engineering
 engagement. Free and Pro customers have no diagnosis.

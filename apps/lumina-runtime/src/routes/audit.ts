@@ -1,5 +1,7 @@
 import type { Express } from "express";
 
+import { allowAuditAction } from "./auditPolicy.js";
+
 import { auditProject } from "../audit/auditProject.js";
 import { getProjectPath } from "../projects/getProjectPath.js";
 
@@ -43,6 +45,8 @@ async function handleAudit(projectId: string) {
 export function registerAuditRoute(app: Express) {
   app.get("/api/runtime/audit", async (req, res) => {
     try {
+      /* ADR-0046, F-44: the earlier audit engine is an in-house tool. */
+      if (!allowAuditAction(req, res, readProjectId(req.query.projectId), "repair")) return;
       const result = await handleAudit(readProjectId(req.query.projectId));
       return res.status(result.status).json(result.body);
     } catch (error) {
@@ -60,6 +64,7 @@ export function registerAuditRoute(app: Express) {
 
   app.post("/api/runtime/audit", async (req, res) => {
     try {
+      if (!allowAuditAction(req, res, readProjectId(req.body?.projectId), "repair")) return;
       const result = await handleAudit(readProjectId(req.body?.projectId));
       return res.status(result.status).json(result.body);
     } catch (error) {

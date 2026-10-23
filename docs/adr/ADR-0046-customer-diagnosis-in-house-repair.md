@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed
+Accepted (owner, 2026-10-22, with the correction that AI Builder drafts stay with the project's owner)
 
 Version: 1.0
 
@@ -33,9 +33,10 @@ Customers on Business and Enterprise must be able to diagnose a repository they 
 ## Alternatives
 
 1. **Keep the engine internal (the current specification).** Rejected: it contradicts the owner's decision and the landing page, and makes every diagnosis a sales conversation.
-2. **Give customers the whole engine, repair included.** Rejected: repair is the paid in-house service, and applying AI-generated changes to a customer's code needs an engineer's review.
+2. **Give customers the whole engine, repair included.** Rejected: repair is the paid in-house service, and turning audit findings into changes to a customer's code needs an engineer's review.
 3. **Enforce in the Builder only.** Rejected: the Builder is not a security boundary (ADR-0043). A customer could call Runtime directly.
 4. **Separate customer and staff report formats.** Rejected for now: one report, with repair planning withheld, is simpler and the client report export already exists. It can be revisited if the report needs different content.
+5. **Make imported repositories read-only for customers, AI Builder included.** Rejected by the owner: customers keep editing their own projects with the AI Builder; only audit-driven repair is in-house.
 
 ---
 
@@ -49,12 +50,13 @@ Customers on Business and Enterprise must be able to diagnose a repository they 
 2. **Only imported projects are diagnosed.** The project's origin must be a git import or an uploaded archive (`isImportedProject`, MS-2026-0013). A project built in KoreLumina, or of unknown origin, is refused for customers.
 3. **Repair is in-house.** Only `inhouse-dev`, `admin` and `super_admin` may:
    - read the ordered fix plan of a report (`/repository-audit/.../fix-plan`) and the earlier `/api/runtime/fix-plan`;
-   - generate repair drafts (`/api/runtime/generate-fixes`, `/api/runtime/drafts/create`), read them, apply them and revert them;
+   - turn audit findings into fixes (`/api/runtime/generate-fixes`) and run the earlier audit engine (`/api/runtime/audit`);
    - run the **deep** audit, which runs the project's own typecheck and build.
    They may do this for any project (their support access), and every action is attributed to them.
-4. **Free and Pro have no diagnosis.** They are told it is available on Business and Enterprise.
-5. **Runtime enforces it in one place.** A single policy decides every audit and repair route from the verified caller (ADR-0043) and the project's metadata. The earlier audit and repair routes get the same checks; none stays open. The Builder only reflects the policy, so a refusal in Runtime is never shown as an error the customer caused.
-6. **The specification and the landing page say the same.** ENGINEERING_SPEC_V1 chapter 14's access policy and LANDING_CONTRACT are amended with this ADR; the Repo Audit tooltip and FAQ on the landing page say diagnosis on Business and Enterprise, repair by KoreLumina engineers.
+4. **The AI Builder is not repair.** Drafts are how the AI Builder edits code (`/api/runtime/drafts/create`, reading a draft, `/api/runtime/apply-draft`, `/api/runtime/revert-draft`). They stay available to whoever manages the project, imported projects included, and to staff. Nobody else may create, read, apply or revert a project's drafts.
+5. **Free and Pro have no diagnosis.** They are told it is available on Business and Enterprise.
+6. **Runtime enforces it in one place.** A single policy decides every audit and repair route from the verified caller (ADR-0043) and the project's metadata. The earlier audit and repair routes get the same checks; none stays open. The Builder only reflects the policy, so a refusal in Runtime is never shown as an error the customer caused.
+7. **The specification and the landing page say the same.** ENGINEERING_SPEC_V1 chapter 14's access policy and LANDING_CONTRACT are amended with this ADR; the Repo Audit tooltip and FAQ on the landing page say diagnosis on Business and Enterprise, repair by KoreLumina engineers.
 
 ---
 
@@ -63,7 +65,8 @@ Customers on Business and Enterprise must be able to diagnose a repository they 
 Positive:
 
 - Customers can diagnose what they import without a sales call, which is what the landing page already promises.
-- Repair remains the in-house service it is priced as, and no AI-generated change reaches a customer's code without an engineer.
+- Repair remains the in-house service it is priced as: the fix plan and findings turned into fixes are done by engineers.
+- The AI Builder keeps working on every project its owner manages.
 - The earlier audit and repair routes stop being open to anyone who reaches Runtime (F-44).
 
 Negative:
@@ -81,9 +84,10 @@ Trade-offs:
 ## Validation
 
 - Runtime tests cover every audit and repair route for each role: user, pro, business, enterprise, inhouse-dev, admin, super_admin, and an anonymous caller.
-- A business caller is allowed to start a scan and read reports of their own imported project; refused the deep audit, the fix plan and every draft route; refused a project they do not own; and refused a project built in KoreLumina.
+- A business caller is allowed to start a scan and read reports of their own imported project; refused the deep audit, the fix plan, generate-fixes and the earlier audit; refused a project they do not own; and refused a project built in KoreLumina.
+- Drafts can be created, read, applied and reverted only by the project's managers and staff.
 - A free or pro caller is refused diagnosis with the reason.
-- The earlier audit and repair routes refuse an anonymous caller.
+- The earlier audit and repair routes refuse every customer role, and the draft routes refuse anyone who does not manage the project.
 - `npm run build` passes.
 
 ---

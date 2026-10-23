@@ -1,5 +1,7 @@
 import type { Express } from "express";
 
+import { allowAuditAction } from "./auditPolicy.js";
+
 import { generateAIDraft } from "../ai/AIOrchestrator.js";
 import { getProjectPath } from "../projects/getProjectPath.js";
 
@@ -33,6 +35,9 @@ export function registerCreateDraftRoute(app: Express) {
           error: "missing_prompt",
         });
       }
+
+      /* ADR-0046, F-44: the AI Builder edits only projects the caller manages. */
+      if (!allowAuditAction(req, res, projectId, "edit")) return;
 
       const projectPath = getProjectPath(projectId);
 

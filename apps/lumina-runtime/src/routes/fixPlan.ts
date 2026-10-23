@@ -1,5 +1,7 @@
 import type { Express } from "express";
 
+import { allowAuditAction } from "./auditPolicy.js";
+
 import { auditProject } from "../audit/auditProject.js";
 import { generateFixPlan } from "../autofix/generateFixPlan.js";
 import { getProjectPath } from "../projects/getProjectPath.js";
@@ -46,6 +48,8 @@ async function handleFixPlan(projectId: string) {
 export function registerFixPlanRoute(app: Express) {
   app.get("/api/runtime/fix-plan", async (req, res) => {
     try {
+      /* ADR-0046, F-44: repair planning is in-house. */
+      if (!allowAuditAction(req, res, readProjectId(req.query.projectId), "repair")) return;
       const result = await handleFixPlan(readProjectId(req.query.projectId));
       return res.status(result.status).json(result.body);
     } catch (error) {
@@ -63,6 +67,7 @@ export function registerFixPlanRoute(app: Express) {
 
   app.post("/api/runtime/fix-plan", async (req, res) => {
     try {
+      if (!allowAuditAction(req, res, readProjectId(req.body?.projectId), "repair")) return;
       const result = await handleFixPlan(readProjectId(req.body?.projectId));
       return res.status(result.status).json(result.body);
     } catch (error) {

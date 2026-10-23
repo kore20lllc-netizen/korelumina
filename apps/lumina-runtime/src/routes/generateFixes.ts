@@ -1,5 +1,7 @@
 import type { Express } from "express";
 
+import { allowAuditAction } from "./auditPolicy.js";
+
 import { auditProject } from "../audit/auditProject.js";
 import { generateFixPlan } from "../autofix/generateFixPlan.js";
 import { createDraft } from "../drafts/draftStore.js";
@@ -28,6 +30,9 @@ export function registerGenerateFixesRoute(app: Express) {
           error: "invalid_projectId",
         });
       }
+
+      /* ADR-0046, F-44: turning findings into fixes is in-house repair. */
+      if (!allowAuditAction(req, res, projectId, "repair")) return;
 
       const projectPath = getProjectPath(projectId);
       const report = auditProject(projectId, projectPath);
