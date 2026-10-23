@@ -15,7 +15,7 @@ import { AuthView } from "@/components/workspaces/AuthView";
 import { SettingsView } from "@/components/workspaces/SettingsView";
 import { PricingView } from "@/components/workspaces/PricingView";
 import { repoAuditAccess } from "@/services/repoAuditAccess";
-import { InHouseDevDashboard } from "@/components/workspaces/InHouseDevDashboard";
+import { InHouseDevWorkspace } from "@/components/workspaces/inhouse/InHouseDevWorkspace";
 import { AdminWorkspace } from "@/components/workspaces/AdminWorkspace";
 import { ImpersonationBanner } from "@/components/workspaces/admin/ImpersonationBanner";
 import { ImportModal } from "@/components/import/ImportModal";
@@ -136,7 +136,9 @@ function Router() {
   const isAdmin = getCapabilities(getCurrentRole()).adminTools;
   /* ADR-0046: Repo Audit for engineers, and diagnosis for Business and Enterprise. */
   const canOpenRepoAudit = isAdmin || repoAuditAccess() !== null;
-  const blocked = (view === "repo-audit" && !canOpenRepoAudit) || (view === "inhouse-dev" && !isAdmin);
+  /* MS-2026-0015: in-house engineers work the repair queue in In-House Dev. */
+  const canOpenInHouse = getCapabilities(getCurrentRole()).inhouseDevDashboard;
+  const blocked = (view === "repo-audit" && !canOpenRepoAudit) || (view === "inhouse-dev" && !canOpenInHouse);
 
   useEffect(() => {
     if (!authed && !isPublic) {
@@ -270,7 +272,7 @@ function Router() {
   if (view === "inhouse-dev") {
     return (
       <Shell blobs="ambient">
-        <InHouseDevDashboard />
+        <InHouseDevWorkspace />
       </Shell>
     );
   }

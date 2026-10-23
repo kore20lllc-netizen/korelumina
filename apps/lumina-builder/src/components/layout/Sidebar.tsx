@@ -59,6 +59,13 @@ export function Sidebar() {
           { icon: FolderGit2, label: "Imports", active: view === "imports" },
           /* ADR-0046: Business and Enterprise diagnose their imported repositories. */
           ...(repoAuditAccess(role) === "diagnosis" ? [{ icon: Activity, label: "Repo Audit", active: view === "repo-audit" }] : []),
+          /* MS-2026-0015: in-house engineers reach the repair queue and the audit. */
+          ...(role === "inhouse-dev"
+            ? [
+                { icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" },
+                { icon: Activity, label: "Repo Audit", active: view === "repo-audit" },
+              ]
+            : []),
           { icon: Box, label: "Templates" },
           { icon: Settings, label: "Settings" },
         ]

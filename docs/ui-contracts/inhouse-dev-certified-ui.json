@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina In-House Dev Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "In-House Dev command deck, Engagements queue and section placement",
+      "engagement rows, action forms and detail panels",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved In-House Dev (2026-10-23)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/inhouse/InHouseDevWorkspace.tsx": {
+      "sha256": "a350a2f5a31c63e622586d4619dcabbfc98c35e0d9fc5ddae10e32a2b5c316bd",
+      "elementCount": 20
+    },
+    "apps/lumina-builder/src/components/workspaces/inhouse/layout/InHouseCommandDeck.tsx": {
+      "sha256": "16f205acb0d26a96e4cf268946fa9532886fe4fd8757254100705e344daed4ac",
+      "elementCount": 25
+    },
+    "apps/lumina-builder/src/components/workspaces/inhouse/sections/EngagementsSection.tsx": {
+      "sha256": "cdeff147654bb94b15b44c51831a89b4d423dd706355dc9091d6831912865fbc",
+      "elementCount": 50
+    },
+    "apps/lumina-builder/src/components/workspaces/inhouse/sections/InHouseSections.tsx": {
+      "sha256": "46c90421780fad23057b66b743a27cee8f9d4c906f8c5c13d557fc5256054609",
+      "elementCount": 49
+    }
+  }
+}
