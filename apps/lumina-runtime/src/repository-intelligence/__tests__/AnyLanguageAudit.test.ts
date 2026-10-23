@@ -124,7 +124,7 @@ test("an audit of a mixed repository says what it covered and marks the rest par
   assert.match(category("dependency").notes.join(" "), /For Python, manifests and lockfiles were checked/);
   assert.match(category("dependency").notes.join(" "), /Swift code has no manifest/);
   assert.equal(category("security").status, "partial");
-  assert.match(category("security").notes.join(" "), /Python dependencies were not checked against an advisory database/);
+  assert.match(category("security").notes.join(" "), /Python dependencies were not checked against OSV: the advisory check was turned off for this run/);
   assert.match(category("security").notes.join(" "), /Swift code was not scanned for risky patterns/);
   assert.equal(category("architecture").status, "partial");
   assert.match(category("architecture").notes[0], /Python and Swift code is not covered/);

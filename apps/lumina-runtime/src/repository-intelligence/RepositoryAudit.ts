@@ -7,6 +7,8 @@ import { scanLanguageRisks, unscannedLanguages } from "./CodeRiskLanguages.js";
 import { scanCodeRisks } from "./CodeRiskScan.js";
 import { checkEcosystemDependencies } from "./EcosystemDependencyChecks.js";
 import { ECOSYSTEM_LABEL } from "./Ecosystems.js";
+import { resolveVersions, type ResolvedVersions } from "./LockfileVersions.js";
+import { auditOsvAdvisories, osvEnabled, type OsvAdvisoryResult, type OsvFetch } from "./OsvAdvisories.js";
 import { analyzeDependencies } from "./DependencyAnalysis.js";
 import { analyzeEnvironment } from "./EnvironmentAnalysis.js";
 import { createRepositoryIntelligenceManifest, type RepositoryIntelligenceManifest } from "./RepositoryIntelligenceManifest.js";
@@ -77,6 +79,8 @@ export interface RepositoryAuditReport {
     filesScannedForCode: number;
     lockfilesChecked: string[];
     advisories: Omit<AdvisoryAudit, "findings">;
+    /* MS-2026-0013: advisories for the other ecosystems, from OSV. Absent in reports made before it. */
+    osvAdvisories?: Omit<OsvAdvisoryResult, "findings"> & { unresolved: ResolvedVersions["unresolved"] };
     build: BuildCheck[];
   };
   architecture: {
@@ -178,7 +182,10 @@ const list = (items: readonly string[]) => (items.length <= 1 ? items.join("") :
  * of the code is partial, with the reason; one that covered none of it is
  * not checked. Neither is ever counted as passing.
  */
-export function ecosystemCoverageNotes(inventory: RepositoryAuditReport["manifest"]["inventory"]): Partial<Record<FindingCategory, Coverage>> {
+export function ecosystemCoverageNotes(
+  inventory: RepositoryAuditReport["manifest"]["inventory"],
+  advisories: { osv: Pick<OsvAdvisoryResult, "status" | "reason" | "ecosystems">; unresolved: ResolvedVersions["unresolved"] } | null = null,
+): Partial<Record<FindingCategory, Coverage>> {
   const others = inventory.ecosystemCoverage.recognised.filter((ecosystem) => ecosystem !== "node").map((ecosystem) => ECOSYSTEM_LABEL[ecosystem]);
   const hasNode = inventory.ecosystemCoverage.recognised.includes("node");
   const code = inventory.languages.filter((share) => share.files > 0 && !NOT_CODE.has(share.language)).map((share) => share.language);
@@ -194,7 +201,16 @@ export function ecosystemCoverageNotes(inventory: RepositoryAuditReport["manifes
   if (dependencyNotes.length > 0) result.dependency = { status: "partial", notes: dependencyNotes };
 
   const securityNotes: string[] = [];
-  if (others.length > 0) securityNotes.push(`Dependency advisories cover Node.js only; ${list(others)} dependencies were not checked against an advisory database.`);
+  if (others.length > 0) {
+    if (!advisories) {
+      securityNotes.push(`Dependency advisories cover Node.js only; ${list(others)} dependencies were not checked against an advisory database.`);
+    } else if (advisories.osv.status !== "checked") {
+      securityNotes.push(`${list(others)} dependencies were not checked against OSV: ${advisories.osv.reason}.`);
+    } else {
+      const unresolved = advisories.unresolved.map((entry) => `${ECOSYSTEM_LABEL[entry.ecosystem as keyof typeof ECOSYSTEM_LABEL] ?? entry.ecosystem} in ${entry.packageDirectory === "." ? "the root" : entry.packageDirectory} (${entry.reason})`);
+      if (unresolved.length > 0) securityNotes.push(`Advisories were not checked for ${list(unresolved)}.`);
+    }
+  }
   if (unscanned.length > 0) securityNotes.push(`${list(unscanned)} code was not scanned for risky patterns; committed credentials were still searched for in every text file.`);
   if (securityNotes.length > 0) result.security = { status: "partial", notes: securityNotes };
 
@@ -224,6 +240,9 @@ export interface RunRepositoryAuditInput {
   checkAdvisories?: boolean;
   runAudit?: AuditCommandRunner;
   runProcess?: ProcessRunner;
+  /* MS-2026-0013: how OSV is reached (tests), and whether it is used; it is on unless KORELUMINA_OSV_ADVISORIES=off. */
+  osvFetch?: OsvFetch;
+  checkOsv?: boolean;
 }
 
 export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promise<RepositoryAuditReport> {
@@ -282,6 +301,19 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
     progress("advisories", "completed", advisories.status === "checked" ? `${advisories.findings.length} vulnerable packages` : `Not checked: ${advisories.reason}`);
   }
 
+  /* MS-2026-0013: the other ecosystems, by exact version, against OSV. */
+  const resolved = resolveVersions(inventory.ecosystems, snapshot.read);
+  let osv: OsvAdvisoryResult;
+  if (input.checkAdvisories === false) {
+    osv = { status: "off", reason: "the advisory check was turned off for this run", checkedAt: now(), ecosystems: [], packagesChecked: 0, findings: [] };
+  } else if (resolved.versions.length === 0) {
+    osv = await auditOsvAdvisories([], { now });
+  } else {
+    progress("advisories", "started", `Checking ${resolved.versions.length} ${[...new Set(resolved.versions.map((entry) => entry.ecosystem))].join(", ")} packages against OSV`);
+    osv = await auditOsvAdvisories(resolved.versions, { fetch: input.osvFetch, now, enabled: input.checkOsv ?? osvEnabled() });
+    progress("advisories", "completed", osv.status === "checked" ? `${osv.findings.length} vulnerable packages in OSV` : `Not checked: ${osv.reason}`);
+  }
+
   let build: BuildCheck[] = [];
   let buildFindings: RepositoryFinding[] = [];
   if (input.mode === "deep") {
@@ -301,6 +333,7 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
     ...secrets.findings,
     ...code.findings,
     ...advisories.findings,
+    ...osv.findings,
     ...environment.findings,
     ...architecture.findings,
     ...buildFindings,
@@ -308,7 +341,7 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
 
   const buildRan = build.filter((check) => check.status === "passed" || check.status === "failed");
   const buildNotes = build.filter((check) => check.status === "unavailable").map((check) => `${check.packageDirectory} ${check.check}: ${check.reason}`);
-  const coverage = ecosystemCoverageNotes(inventory);
+  const coverage = ecosystemCoverageNotes(inventory, { osv, unresolved: resolved.unresolved });
   const summary = summarize(findings, {
     dependency: coverage.dependency,
     architecture: coverage.architecture,
@@ -349,6 +382,7 @@ export async function runRepositoryAudit(input: RunRepositoryAuditInput): Promis
       filesScannedForCode: code.filesScanned,
       lockfilesChecked: dependencies.lockfilesChecked,
       advisories: { status: advisories.status, source: advisories.source, reason: advisories.reason, checkedAt: advisories.checkedAt, counts: advisories.counts },
+      osvAdvisories: { status: osv.status, reason: osv.reason, checkedAt: osv.checkedAt, ecosystems: osv.ecosystems, packagesChecked: osv.packagesChecked, unresolved: resolved.unresolved },
       build,
     },
     architecture: {
