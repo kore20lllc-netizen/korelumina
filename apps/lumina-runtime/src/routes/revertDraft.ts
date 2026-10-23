@@ -46,6 +46,16 @@ export function registerRevertDraftRoute(app: Express) {
       const projectPath = getProjectPath(draft.projectId);
       const beforeAudit = auditProject(draft.projectId, projectPath);
       const result = revertDraft(projectPath, draft);
+
+      /* MS-2026-0011: never undo over work done after the draft. */
+      if (result.refused) {
+        return res.status(409).json({
+          ok: false,
+          error: "files_changed_since_apply",
+          errors: result.errors,
+        });
+      }
+
       markDraftReverted(draftId);
       const afterAudit = auditProject(draft.projectId, projectPath);
 

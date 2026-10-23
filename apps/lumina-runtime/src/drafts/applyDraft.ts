@@ -1,9 +1,8 @@
-import path from "node:path";
+import fs from "node:fs";
 
-import {
-  fileSystem,
-} from "@korelumina/platform-sdk";
+import { fileSystem } from "@korelumina/platform-sdk";
 
+import { patchProblem, resolveInsideProject } from "./patchSafety.js";
 import type { DraftPatch, DraftSnapshot, FixDraft } from "./types.js";
 
 export type ApplyDraftResult = {
@@ -12,92 +11,35 @@ export type ApplyDraftResult = {
   files: string[];
   errors: string[];
   snapshots: DraftSnapshot[];
+  refused: boolean;
 };
 
-function ensureInsideProject(projectPath: string, file: string): string {
-  const fullPath = path.resolve(path.join(projectPath, file));
-  const relative = path.relative(projectPath, fullPath);
-
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`unsafe_patch_path:${file}`);
-  }
-
-  return fullPath;
-}
-
-function readFileIfExists(fullPath: string): {
-  existedBefore: boolean;
-  content: string;
-} {
-  if (!fileSystem.exists(fullPath)) {
-    return {
-      existedBefore: false,
-      content: "",
-    };
-  }
-
-  const stat = fileSystem.stat(fullPath);
-  if (!stat.isFile()) {
-    throw new Error(`patch_target_not_file:${fullPath}`);
-  }
-
-  return {
-    existedBefore: true,
-    content: fileSystem.readText(fullPath),
-  };
-}
-
-function applyPatch(
-  projectPath: string,
-  patch: DraftPatch,
-): DraftSnapshot | null {
-  const fullPath = ensureInsideProject(projectPath, patch.file);
-  const beforeState = readFileIfExists(fullPath);
-
-  if (patch.type === "delete-file") {
-    if (!beforeState.existedBefore) return null;
-
-    fileSystem.remove(fullPath);
-
-    return {
-      file: patch.file,
-      existedBefore: true,
-      before: beforeState.content,
-      after: "",
-    };
-  }
+/*
+ * MS-2026-0011: a draft is applied whole or not at all. Every patch is
+ * checked against the project as it is now before anything is written;
+ * if one no longer fits (the file changed, the text moved, a link
+ * appeared) nothing is written and the reasons come back.
+ */
+function applyPatch(projectPath: string, patch: DraftPatch): DraftSnapshot {
+  const full = resolveInsideProject(projectPath, patch.file);
 
   if (patch.type === "create-file") {
-    if (beforeState.existedBefore) return null;
-
-    fileSystem.ensureParent(fullPath);
-
-    fileSystem.writeTextAtomic(fullPath, patch.content);
-
-    return {
-      file: patch.file,
-      existedBefore: false,
-      before: "",
-      after: patch.content,
-    };
+    fileSystem.ensureParent(full);
+    fileSystem.writeTextAtomic(full, patch.content);
+    return { file: patch.file, existedBefore: false, before: "", after: patch.content };
   }
 
-  if (!beforeState.existedBefore) return null;
+  const before = fs.readFileSync(full, "utf8");
 
-  if (!beforeState.content.includes(patch.find)) return null;
+  if (patch.type === "delete-file") {
+    fileSystem.remove(full);
+    return { file: patch.file, existedBefore: true, before, after: "" };
+  }
 
-  const after = beforeState.content.split(patch.find).join(patch.replace);
-
-  if (after === beforeState.content) return null;
-
-  fileSystem.writeTextAtomic(fullPath, after);
-
-  return {
-    file: patch.file,
-    existedBefore: true,
-    before: beforeState.content,
-    after,
-  };
+  const index = before.indexOf(patch.find);
+  const after = before.slice(0, index) + patch.replace + before.slice(index + patch.find.length);
+  fileSystem.writeTextAtomic(full, after);
+  return { file: patch.file, existedBefore: true, before, after };
 }
 
 export function applyDraft(projectPath: string, draft: FixDraft): ApplyDraftResult {
@@ -107,29 +49,36 @@ export function applyDraft(projectPath: string, draft: FixDraft): ApplyDraftResu
     files: [],
     errors: [],
     snapshots: [],
+    refused: false,
   };
+
+  const seen = new Set<string>();
+  for (const patch of draft.patches) {
+    if (seen.has(patch.file)) {
+      result.errors.push(`file_patched_twice:${patch.file}`);
+    }
+    seen.add(patch.file);
+    const problem = patchProblem(projectPath, patch);
+    if (problem) result.errors.push(problem);
+  }
+
+  if (result.errors.length > 0 || draft.patches.length === 0) {
+    if (draft.patches.length === 0) result.errors.push("draft_has_no_patches");
+    result.refused = true;
+    result.skipped = draft.patches.length;
+    return result;
+  }
 
   for (const patch of draft.patches) {
     try {
-      const snapshot = applyPatch(projectPath, patch);
-
-      if (!snapshot) {
-        result.skipped += 1;
-        continue;
-      }
-
+      result.snapshots.push(applyPatch(projectPath, patch));
       result.applied += 1;
       result.files.push(patch.file);
-      result.snapshots.push(snapshot);
     } catch (error) {
+      result.errors.push(error instanceof Error ? error.message : String(error));
       result.skipped += 1;
-      result.errors.push(
-        error instanceof Error ? error.message : String(error),
-      );
     }
   }
-
-  result.files = Array.from(new Set(result.files));
 
   return result;
 }

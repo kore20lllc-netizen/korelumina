@@ -1,27 +1,41 @@
-import path from "node:path";
+import fs from "node:fs";
 
-import {
-  fileSystem,
-} from "@korelumina/platform-sdk";
+import { fileSystem } from "@korelumina/platform-sdk";
 
-import type { FixDraft } from "./types.js";
+import { resolveInsideProject } from "./patchSafety.js";
+import type { DraftSnapshot, FixDraft } from "./types.js";
 
 export type RevertDraftResult = {
   reverted: number;
   skipped: number;
   files: string[];
   errors: string[];
+  refused: boolean;
 };
 
-function ensureInsideProject(projectPath: string, file: string): string {
-  const fullPath = path.resolve(path.join(projectPath, file));
-  const relative = path.relative(projectPath, fullPath);
-
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`unsafe_revert_path:${file}`);
+/*
+ * MS-2026-0011: undoing a draft never overwrites work done after it. Each
+ * file must still be exactly as the draft left it; if any changed since,
+ * nothing is reverted and the changed files are named.
+ */
+function currentContent(full: string): string | null {
+  try {
+    return fs.lstatSync(full).isFile() ? fs.readFileSync(full, "utf8") : null;
+  } catch {
+    return null;
   }
+}
 
-  return fullPath;
+function stillAsApplied(projectPath: string, snapshot: DraftSnapshot): string | null {
+  try {
+    const full = resolveInsideProject(projectPath, snapshot.file);
+    const current = currentContent(full);
+    const deletedByDraft = snapshot.existedBefore && snapshot.after === "" && current === null;
+    if (deletedByDraft) return null;
+    return current === snapshot.after ? null : `changed_since_apply:${snapshot.file}`;
+  } catch (error) {
+    return error instanceof Error ? error.message : String(error);
+  }
 }
 
 export function revertDraft(projectPath: string, draft: FixDraft): RevertDraftResult {
@@ -30,40 +44,37 @@ export function revertDraft(projectPath: string, draft: FixDraft): RevertDraftRe
     skipped: 0,
     files: [],
     errors: [],
+    refused: false,
   };
-
   const snapshots = draft.snapshots ?? [];
+
+  for (const snapshot of snapshots) {
+    const problem = stillAsApplied(projectPath, snapshot);
+    if (problem) result.errors.push(problem);
+  }
+
+  if (result.errors.length > 0) {
+    result.refused = true;
+    result.skipped = snapshots.length;
+    return result;
+  }
 
   for (const snapshot of [...snapshots].reverse()) {
     try {
-      const fullPath = ensureInsideProject(projectPath, snapshot.file);
-
+      const full = resolveInsideProject(projectPath, snapshot.file);
       if (!snapshot.existedBefore) {
-        if (fileSystem.exists(fullPath)) {
-          fileSystem.remove(fullPath);
-          result.reverted += 1;
-          result.files.push(snapshot.file);
-        } else {
-          result.skipped += 1;
-        }
-
-        continue;
+        fileSystem.remove(full);
+      } else {
+        fileSystem.ensureParent(full);
+        fileSystem.writeTextAtomic(full, snapshot.before);
       }
-
-      fileSystem.ensureParent(fullPath);
-
-      fileSystem.writeTextAtomic(fullPath, snapshot.before);
       result.reverted += 1;
       result.files.push(snapshot.file);
     } catch (error) {
       result.skipped += 1;
-      result.errors.push(
-        error instanceof Error ? error.message : String(error),
-      );
+      result.errors.push(error instanceof Error ? error.message : String(error));
     }
   }
-
-  result.files = Array.from(new Set(result.files));
 
   return result;
 }

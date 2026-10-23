@@ -1,15 +1,11 @@
-import type {
-  AIProvider,
-  GenerateDraftInput,
-  GenerateDraftResult,
-} from "../AIProvider.js";
+import { AnthropicTextGenerationClient } from "../model/index.js";
+import { TextModelDraftProvider } from "./TextModelDraftProvider.js";
 
-export class AnthropicProvider implements AIProvider {
-  async generateDraft(
-    _input: GenerateDraftInput,
-  ): Promise<GenerateDraftResult> {
-    throw new Error(
-      "anthropic_provider_not_implemented",
-    );
+/* MS-2026-0011: Claude drafts changes for the Developer AI Assist. */
+export class AnthropicProvider extends TextModelDraftProvider {
+  constructor(
+    client = new AnthropicTextGenerationClient({ maxTokens: 16000 }),
+  ) {
+    super("anthropic", client);
   }
 }

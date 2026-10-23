@@ -111,6 +111,7 @@ import { registerDraftsRoute } from "./routes/drafts.js";
 import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
+import { registerAIStatusRoute } from "./routes/aiStatus.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import {
   KnowledgeOperationsService,
@@ -1687,6 +1688,7 @@ registerDraftsRoute(app);
 registerRevertDraftRoute(app);
 registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
+registerAIStatusRoute(app);
 
 registerKnowledgeOperationsRoutes(
   app,

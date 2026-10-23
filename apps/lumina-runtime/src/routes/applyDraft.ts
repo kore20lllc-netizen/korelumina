@@ -46,6 +46,16 @@ export function registerApplyDraftRoute(app: Express) {
       const projectPath = getProjectPath(draft.projectId);
       const beforeAudit = auditProject(draft.projectId, projectPath);
       const result = applyDraft(projectPath, draft);
+
+      /* MS-2026-0011: a draft that no longer fits the project writes nothing. */
+      if (result.refused) {
+        return res.status(409).json({
+          ok: false,
+          error: "draft_no_longer_fits",
+          errors: result.errors,
+        });
+      }
+
       markDraftApplied(draftId, result.snapshots);
       const afterAudit = auditProject(draft.projectId, projectPath);
 

@@ -4,9 +4,30 @@ import { allowAuditAction } from "./auditPolicy.js";
 
 import { generateAIDraft } from "../ai/AIOrchestrator.js";
 import { getProjectPath } from "../projects/getProjectPath.js";
+import type { DraftFocus } from "../ai/AIProvider.js";
+import { normalizePatchPath } from "../drafts/patchSafety.js";
 
 function readString(input: unknown): string {
   return typeof input === "string" ? input.trim() : "";
+}
+
+function readLine(input: unknown): number | undefined {
+  return typeof input === "number" && Number.isInteger(input) && input > 0
+    ? input
+    : undefined;
+}
+
+/* MS-2026-0011: the open file and selected lines the request is about. */
+function readFocus(input: unknown): DraftFocus | undefined {
+  if (!input || typeof input !== "object") return undefined;
+  const focus = input as Record<string, unknown>;
+  const file = normalizePatchPath(focus.file);
+  if (!file) return undefined;
+  const startLine = readLine(focus.startLine);
+  const endLine = readLine(focus.endLine);
+  return startLine !== undefined && endLine !== undefined && endLine >= startLine
+    ? { file, startLine, endLine }
+    : { file };
 }
 
 export function registerCreateDraftRoute(app: Express) {
@@ -45,6 +66,7 @@ export function registerCreateDraftRoute(app: Express) {
         projectId,
         projectPath,
         prompt,
+        focus: readFocus(req.body?.focus),
       });
 
       return res.json({

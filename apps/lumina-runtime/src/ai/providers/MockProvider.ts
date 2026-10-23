@@ -8,33 +8,24 @@ import type {
   GenerateDraftResult,
 } from "../AIProvider.js";
 
+/*
+ * No model: drafts come from the audit's rule-based fixes, whatever was
+ * asked. The result says so, so the interface never presents it as AI.
+ */
 export class MockProvider implements AIProvider {
   async generateDraft(
     input: GenerateDraftInput,
   ): Promise<GenerateDraftResult> {
-    const report = auditProject(
-      input.projectId,
-      input.projectPath,
-    );
-
-    const plan = generateFixPlan(
-      report,
-    );
-
-    const patches = generateDraftPatches(
-      input.projectPath,
-      plan,
-    );
-
-    const draft = createDraft(
-      input.projectId,
-      patches,
-    );
+    const report = auditProject(input.projectId, input.projectPath);
+    const plan = generateFixPlan(report);
+    const patches = generateDraftPatches(input.projectPath, plan);
+    const draft = createDraft(input.projectId, patches);
 
     return {
-      mode: "mock_rule_based_draft",
+      mode: "rule_based_draft",
+      provider: "rule-based",
       note:
-        "Runtime AI provider is still using the safe rule-based provider. Wire LUMINA_AI_PROVIDER=openai after OpenAIProvider is implemented.",
+        "No AI model is configured, so these are the audit's rule-based fixes, not an answer to your request.",
       prompt: input.prompt,
       report,
       plan,
