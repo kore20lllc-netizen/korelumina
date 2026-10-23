@@ -62,6 +62,15 @@ export interface RepoAuditState {
 const message = (error: unknown) => (error instanceof Error ? error.message : String(error));
 const STORAGE_KEY = "korelumina.repoAudit.projectId";
 
+/* The In-House Dev console opens Repo Audit on a chosen project. */
+export function rememberAuditProject(projectId: string): void {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, projectId);
+  } catch {
+    /* storage unavailable: Repo Audit opens on its first project */
+  }
+}
+
 function rememberedProject(): string | null {
   try {
     return window.localStorage.getItem(STORAGE_KEY);

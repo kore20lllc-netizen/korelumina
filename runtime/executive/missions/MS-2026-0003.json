@@ -32,7 +32,9 @@
             "acceptanceCriteria": [
               "The owner records the provider and why"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792649172674
           },
           {
             "id": "E1.T2",
@@ -58,7 +60,9 @@
             "acceptanceCriteria": [
               "Production builds cannot grant a plan role client-side"
             ],
-            "status": "todo"
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792616934824
           }
         ]
       }
@@ -72,11 +76,19 @@
       "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
     ]
   },
-  "state": "approved",
+  "state": "executing",
   "blockedFrom": null,
-  "linkedCommits": [],
-  "recoveryAnchor": null,
-  "producedKnowledge": [],
+  "linkedCommits": [
+    {
+      "sha": "65947100e9d032eb5e82df862ae9096a99b4c163",
+      "subject": "Stripe webhook assigns plan roles",
+      "committedAt": 1792650514000
+    }
+  ],
+  "recoveryAnchor": "65947100e9d032eb5e82df862ae9096a99b4c163",
+  "producedKnowledge": [
+    "LR-2026-0044"
+  ],
   "history": [
     {
       "from": null,
@@ -113,8 +125,53 @@
         "type": "human"
       },
       "at": 1792476573214
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792650653016,
+      "reason": "First linked commit 65947100: Stripe webhook assigns plan roles"
     }
   ],
   "createdAt": 1792473895268,
-  "updatedAt": 1792476573214
+  "updatedAt": 1792690602098,
+  "validation": {
+    "evaluatedAt": 1792690602098,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "2 of 4 still to do: E1.T2, E1.T3."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": false,
+        "detail": "No build verification for 65947100."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 1 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 65947100."
+      }
+    ]
+  }
 }

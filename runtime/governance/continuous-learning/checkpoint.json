@@ -1,10 +1,10 @@
 {
   "version": "continuous-learning-ledger:v1",
   "checkpoint": {
-    "commit": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
-    "committedAt": 1792614731000,
-    "establishedAt": 1792615679798,
-    "basis": "Learning cycle learning-cycle:d847be9ae8c2ac43"
+    "commit": "e8cebedf55d4fba84bfe742076fd0b84d1666575",
+    "committedAt": 1792676287000,
+    "establishedAt": 1792683647505,
+    "basis": "Learning cycle learning-cycle:66554f01af58ada3"
   },
   "cycles": [
     {
@@ -1715,6 +1715,655 @@
           "missionId": "MS-2026-0010",
           "sha": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
           "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:f98c7ee28856bfd4",
+      "trigger": "automatic",
+      "startedAt": 1792617273389,
+      "fromCommit": "f2fc156fd32d2b5d268fe1c0a5d9bd36b021cd73",
+      "replayId": "genesis-replay:051ef1a2f45a1cfb8c7a515319bebfa1ccbb45d129c21df943c9bcd3f74fce57",
+      "admittedSources": 5,
+      "completedAt": 1792617348863,
+      "toCommit": "40fa179489087e3e5ec8b90ba5745186e7eeea7a",
+      "commits": [
+        {
+          "sha": "40fa179489087e3e5ec8b90ba5745186e7eeea7a",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792615924000,
+          "subject": "chore(learning): record the learning cycle for MS-2026-0008..0010 and its canonical promotions"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": null,
+        "repositoryPath": null,
+        "keptStatements": null,
+        "removedStatements": null,
+        "model": null,
+        "attemptedAt": 1792617348863,
+        "attempts": 1,
+        "state": "SKIPPED",
+        "reasons": [
+          "only_learning_or_governance_bookkeeping_commits"
+        ]
+      }
+    },
+    {
+      "cycleId": "learning-cycle:f3e13fb9ad9560c4",
+      "trigger": "automatic",
+      "startedAt": 1792623641366,
+      "fromCommit": "40fa179489087e3e5ec8b90ba5745186e7eeea7a",
+      "replayId": "genesis-replay:f48e779625689bb01d26c57c7ba1b8ee905f3a648cd3f8c69929f41ca57ded9b",
+      "admittedSources": 1,
+      "completedAt": 1792623715131,
+      "toCommit": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+      "commits": [
+        {
+          "sha": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792623604000,
+          "subject": "Repository Intelligence: snapshot, inventory and Repository Manifest",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0034",
+        "repositoryPath": "docs/learning/LR-2026-0034-repository-intelligence-manifest-foundation.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792623715131,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:95e868b749d4ee1e",
+      "trigger": "automatic",
+      "startedAt": 1792626329754,
+      "fromCommit": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+      "replayId": "genesis-replay:6f1b45444b30bd00dd23944297fea9b129126cd20311b146da1f66a275defffc",
+      "admittedSources": 1,
+      "completedAt": 1792626401764,
+      "toCommit": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+      "commits": [
+        {
+          "sha": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792626296000,
+          "subject": "Repository Intelligence: dependency analysis",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0035",
+        "repositoryPath": "docs/learning/LR-2026-0035-repository-dependency-analysis.md",
+        "keptStatements": 24,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792626401765,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:ed7e605e0d09b2b5",
+      "trigger": "automatic",
+      "startedAt": 1792629823219,
+      "fromCommit": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+      "replayId": "genesis-replay:d066d808e52a0d4aaa25a20dba0386e3006ec5ccd08d87a02c48217e887ef7a7",
+      "admittedSources": 1,
+      "completedAt": 1792629889505,
+      "toCommit": "927498fc1a15c52721542ac4018c28e0b1de8091",
+      "commits": [
+        {
+          "sha": "927498fc1a15c52721542ac4018c28e0b1de8091",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792629785000,
+          "subject": "Repository Intelligence: security analysis",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0036",
+        "repositoryPath": "docs/learning/LR-2026-0036-repository-intelligence-security-analysis.md",
+        "keptStatements": 18,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792629889505,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "927498fc1a15c52721542ac4018c28e0b1de8091",
+          "result": "ignored",
+          "reason": "mission_planned"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:825ddc47c7f7f8ec",
+      "trigger": "automatic",
+      "startedAt": 1792631138901,
+      "fromCommit": "927498fc1a15c52721542ac4018c28e0b1de8091",
+      "replayId": "genesis-replay:c18fe582313b1fea0b6b4a914a841478ec9417d30a789325f14c734ff4a46c8f",
+      "admittedSources": 1,
+      "completedAt": 1792631226481,
+      "toCommit": "0f131b2922f8ace492ad3daeb7e21b4b240c5e23",
+      "commits": [
+        {
+          "sha": "0f131b2922f8ace492ad3daeb7e21b4b240c5e23",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792631104000,
+          "subject": "Repository Intelligence: build health, and npm audit without Runtime secrets",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0037",
+        "repositoryPath": "docs/learning/LR-2026-0037-repository-intelligence-build-health-and-audit-isolation.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792631226481,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+          "result": "started",
+          "fromCycleId": "learning-cycle:f3e13fb9ad9560c4"
+        },
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+          "result": "linked",
+          "fromCycleId": "learning-cycle:95e868b749d4ee1e"
+        },
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "927498fc1a15c52721542ac4018c28e0b1de8091",
+          "result": "linked",
+          "fromCycleId": "learning-cycle:ed7e605e0d09b2b5"
+        },
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "0f131b2922f8ace492ad3daeb7e21b4b240c5e23",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:bd672c43d212e06f",
+      "trigger": "automatic",
+      "startedAt": 1792631935474,
+      "fromCommit": "0f131b2922f8ace492ad3daeb7e21b4b240c5e23",
+      "replayId": "genesis-replay:aad8da47754c759bab32b015a367dc522b77c8c07f0fd34bca6d0c82a8443df9",
+      "admittedSources": 1,
+      "completedAt": 1792632006210,
+      "toCommit": "23437b0db440299edf9fe6fcf974cbff4f31e024",
+      "commits": [
+        {
+          "sha": "23437b0db440299edf9fe6fcf974cbff4f31e024",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792631899000,
+          "subject": "Repository Intelligence: environment analysis and architecture map",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0038",
+        "repositoryPath": "docs/learning/LR-2026-0038-repository-intelligence-environment-and-architecture-analysi.md",
+        "keptStatements": 25,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792632006210,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "23437b0db440299edf9fe6fcf974cbff4f31e024",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:80df0c76c07c50bc",
+      "trigger": "automatic",
+      "startedAt": 1792635144711,
+      "fromCommit": "23437b0db440299edf9fe6fcf974cbff4f31e024",
+      "replayId": "genesis-replay:deac634147188ef421373b55328288f20170ef34571c715bba1a0e89bd9c810d",
+      "admittedSources": 1,
+      "completedAt": 1792635223298,
+      "toCommit": "7dde6b32815bc20b874871c1d4bcb16e34e1a023",
+      "commits": [
+        {
+          "sha": "7dde6b32815bc20b874871c1d4bcb16e34e1a023",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792635108000,
+          "subject": "Repository Intelligence: the audit report",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0039",
+        "repositoryPath": "docs/learning/LR-2026-0039-repository-intelligence-audit-report.md",
+        "keptStatements": 21,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792635223298,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "7dde6b32815bc20b874871c1d4bcb16e34e1a023",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:4087d7c12e11b4c2",
+      "trigger": "automatic",
+      "startedAt": 1792637451816,
+      "fromCommit": "7dde6b32815bc20b874871c1d4bcb16e34e1a023",
+      "replayId": "genesis-replay:e3ee46782f4cd3b91f5467aeeb70f85fb3fe0067834dcd94df4779a79712656b",
+      "admittedSources": 1,
+      "completedAt": 1792637518207,
+      "toCommit": "11750d34063cc08fd84001133532e82fbb04b3c3",
+      "commits": [
+        {
+          "sha": "11750d34063cc08fd84001133532e82fbb04b3c3",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792636089000,
+          "subject": "Repository Intelligence: the Repo Audit API",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0040",
+        "repositoryPath": "docs/learning/LR-2026-0040-repository-audit-api.md",
+        "keptStatements": 23,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792637518207,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "11750d34063cc08fd84001133532e82fbb04b3c3",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:f0c26d2a0cb6fefc",
+      "trigger": "automatic",
+      "startedAt": 1792639706921,
+      "fromCommit": "11750d34063cc08fd84001133532e82fbb04b3c3",
+      "replayId": "genesis-replay:da0dce9c9f47e4300f1a7928595c2668ea199a3b22f638f9134fcbe0d3433b4d",
+      "admittedSources": 2,
+      "completedAt": 1792639777862,
+      "toCommit": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+      "commits": [
+        {
+          "sha": "f6b64ddef37a0d6639714442977def04dba40ac8",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792638675000,
+          "subject": "Repo Audit rebuilt on the Repository Intelligence engine, with client reports",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        },
+        {
+          "sha": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792639642000,
+          "subject": "Repo Audit certified UI contract",
+          "missions": [
+            "MS-2026-0012"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0041",
+        "repositoryPath": "docs/learning/LR-2026-0041-repo-audit-runtime-rebuild-and-ui-contract.md",
+        "keptStatements": 23,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792639777862,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "f6b64ddef37a0d6639714442977def04dba40ac8",
+          "result": "linked"
+        },
+        {
+          "missionId": "MS-2026-0012",
+          "sha": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:ba8f0e4306fcc1b4",
+      "trigger": "automatic",
+      "startedAt": 1792641614871,
+      "fromCommit": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+      "replayId": "genesis-replay:ef7c64c0ae824fbeaec498924fc22425a36d1a7ce87e62a0d5a20d5d4a5fc4fd",
+      "admittedSources": 3,
+      "completedAt": 1792641688187,
+      "toCommit": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "commits": [
+        {
+          "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792641573000,
+          "subject": "Runtime Operations in the Knowledge Operations design, certified",
+          "missions": [
+            "MS-2026-0011"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0042",
+        "repositoryPath": "docs/learning/LR-2026-0042-runtime-operations-knowledge-operations-redesign-1766f80bfda.md",
+        "keptStatements": 19,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792641688187,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0011",
+          "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+          "result": "started"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:b487ba40639dc574",
+      "trigger": "automatic",
+      "startedAt": 1792645105469,
+      "fromCommit": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "replayId": "genesis-replay:7f1c68b89338c62dcb634a5f115eb70d278ed7d184c0698918e4634cfbb2a602",
+      "admittedSources": 1,
+      "completedAt": 1792645175755,
+      "toCommit": "8ce13e6b3b8954a60e7791470c225f17b292063d",
+      "commits": [
+        {
+          "sha": "8ce13e6b3b8954a60e7791470c225f17b292063d",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792643547000,
+          "subject": "Executive Office: a recorded build pass shows as verified; planned missions show when none is in progress"
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0043",
+        "repositoryPath": "docs/learning/LR-2026-0043-executive-office-recorded-pass-and-planned-mission-display.md",
+        "keptStatements": 11,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792645175756,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      }
+    },
+    {
+      "cycleId": "learning-cycle:b1e0510abfe1516d",
+      "trigger": "automatic",
+      "startedAt": 1792650551617,
+      "fromCommit": "8ce13e6b3b8954a60e7791470c225f17b292063d",
+      "replayId": "genesis-replay:4f569fdcaa5e78915b149621e6d5e265ccaec5c9c5134e3d85a611b8087d9c16",
+      "admittedSources": 1,
+      "completedAt": 1792650632474,
+      "toCommit": "65947100e9d032eb5e82df862ae9096a99b4c163",
+      "commits": [
+        {
+          "sha": "65947100e9d032eb5e82df862ae9096a99b4c163",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792650514000,
+          "subject": "Stripe webhook assigns plan roles",
+          "missions": [
+            "MS-2026-0003"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0044",
+        "repositoryPath": "docs/learning/LR-2026-0044-stripe-webhook-plan-role-assignment.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792650632475,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0003",
+          "sha": "65947100e9d032eb5e82df862ae9096a99b4c163",
+          "result": "started"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:e7ce802ca40cdbb6",
+      "trigger": "automatic",
+      "startedAt": 1792673903253,
+      "fromCommit": "65947100e9d032eb5e82df862ae9096a99b4c163",
+      "replayId": "genesis-replay:1f790c611a31d3eb9e7bbe4b58c3c28e5555031ca236104364bc13cc3438cc3f",
+      "admittedSources": 1,
+      "completedAt": 1792673976135,
+      "toCommit": "d84e009f70e8b7427d4370d3bbee8c1f8eca93d7",
+      "commits": [
+        {
+          "sha": "d84e009f70e8b7427d4370d3bbee8c1f8eca93d7",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792672956000,
+          "subject": "Import from any git host, public or private",
+          "missions": [
+            "MS-2026-0013"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0045",
+        "repositoryPath": "docs/learning/LR-2026-0045-import-from-any-https-git-host.md",
+        "keptStatements": 14,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792673976135,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0013",
+          "sha": "d84e009f70e8b7427d4370d3bbee8c1f8eca93d7",
+          "result": "started"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:fc941c49e573ab85",
+      "trigger": "automatic",
+      "startedAt": 1792675717783,
+      "fromCommit": "d84e009f70e8b7427d4370d3bbee8c1f8eca93d7",
+      "replayId": "genesis-replay:f99ebe06f6764b31cb330a78579b36ca9658aacc37b564db5742b9848a62619c",
+      "admittedSources": 1,
+      "completedAt": 1792675789959,
+      "toCommit": "71cd5f332418e718311dd92c6d8b18e933b05af9",
+      "commits": [
+        {
+          "sha": "71cd5f332418e718311dd92c6d8b18e933b05af9",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792675685000,
+          "subject": "Import archives and folders for real; Import window in the Knowledge Operations design, certified",
+          "missions": [
+            "MS-2026-0013"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0046",
+        "repositoryPath": "docs/learning/LR-2026-0046-real-archive-import-and-certified-import-ui.md",
+        "keptStatements": 20,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792675789960,
+        "attempts": 1,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0013",
+          "sha": "71cd5f332418e718311dd92c6d8b18e933b05af9",
+          "result": "linked"
+        }
+      ]
+    },
+    {
+      "cycleId": "learning-cycle:66554f01af58ada3",
+      "trigger": "automatic",
+      "startedAt": 1792676546696,
+      "fromCommit": "71cd5f332418e718311dd92c6d8b18e933b05af9",
+      "replayId": "genesis-replay:22128df9086eeaa31abeac4009719646e49c05f52b75d5fcc5763c46af348401",
+      "admittedSources": 1,
+      "completedAt": 1792678092865,
+      "toCommit": "e8cebedf55d4fba84bfe742076fd0b84d1666575",
+      "commits": [
+        {
+          "sha": "e8cebedf55d4fba84bfe742076fd0b84d1666575",
+          "authorName": "kore20lllc-netizen",
+          "authorEmail": "kore20lllc@gmail.com",
+          "committedAt": 1792676287000,
+          "subject": "Every project records its origin; only its owner can change it",
+          "missions": [
+            "MS-2026-0013"
+          ]
+        }
+      ],
+      "outcome": "CAPTURED",
+      "reasons": [],
+      "learning": {
+        "recordId": "LR-2026-0047",
+        "repositoryPath": "docs/learning/LR-2026-0047-project-origin-and-ownership-enforcement.md",
+        "keptStatements": 16,
+        "removedStatements": 0,
+        "model": "gpt-5.5",
+        "attemptedAt": 1792690344375,
+        "attempts": 3,
+        "state": "WRITTEN",
+        "reasons": []
+      },
+      "missionLinks": [
+        {
+          "missionId": "MS-2026-0013",
+          "sha": "e8cebedf55d4fba84bfe742076fd0b84d1666575",
+          "result": "ignored",
+          "reason": "already_linked"
         }
       ]
     }

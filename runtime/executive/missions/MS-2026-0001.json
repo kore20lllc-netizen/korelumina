@@ -102,7 +102,7 @@
       "docs/adr/ADR-0044-mission-system-v1.md"
     ]
   },
-  "state": "knowledge_extracted",
+  "state": "archived",
   "blockedFrom": null,
   "linkedCommits": [
     {
@@ -224,10 +224,19 @@
       },
       "at": 1792612902524,
       "reason": "LR-2026-0014 is canonical"
+    },
+    {
+      "from": "knowledge_extracted",
+      "to": "archived",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630457612
     }
   ],
   "createdAt": 1792464087272,
-  "updatedAt": 1792612902524,
+  "updatedAt": 1792630457612,
   "validation": {
     "evaluatedAt": 1792612902488,
     "checks": [

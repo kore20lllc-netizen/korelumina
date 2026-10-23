@@ -95,7 +95,7 @@
     ],
     "requiredDocuments": []
   },
-  "state": "completed",
+  "state": "archived",
   "blockedFrom": null,
   "linkedCommits": [
     {
@@ -174,10 +174,29 @@
       },
       "at": 1792587721460,
       "reason": "All validation checks passed at 8337a125"
+    },
+    {
+      "from": "completed",
+      "to": "knowledge_extracted",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792617348886,
+      "reason": "LR-2026-0030 is canonical"
+    },
+    {
+      "from": "knowledge_extracted",
+      "to": "archived",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630454021
     }
   ],
   "createdAt": 1792585369518,
-  "updatedAt": 1792587721460,
+  "updatedAt": 1792630454021,
   "validation": {
     "evaluatedAt": 1792587721460,
     "checks": [
