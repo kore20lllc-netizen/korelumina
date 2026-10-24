@@ -29,7 +29,7 @@ warmThinkingForm();
 
 const FORM_PIXELS = 112;
 
-function ThinkingForm() {
+export function ThinkingForm() {
   const canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

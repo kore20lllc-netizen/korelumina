@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Developer workspace Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Developer command deck, explorer, editor and its status bar",
+      "preview, logs and AI Assist panel",
+      "the KoreLumina AI mark (LuminaAIMark)",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved the Developer workspace (2026-10-23)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/workspaces/developer/DeveloperWorkspace.tsx": {
+      "sha256": "53df5f977c7fdb52b007f1eda2aac31c9c217dc88d2aac2dfeb96bed65838fda",
+      "elementCount": 8
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/layout/DeveloperCommandDeck.tsx": {
+      "sha256": "8bd7e6a82bd7abb143481f3ba9047a93857856dc6c25e5dda9c64b2eb281338e",
+      "elementCount": 37
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/AIAssistPane.tsx": {
+      "sha256": "9a0199d0a16d1152f628d684db21ee9f6481d64864240e8736ae7e3ad1b3a9da",
+      "elementCount": 67
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/EditorPanel.tsx": {
+      "sha256": "6b831d13dcc1a3de408e756bfc3604940ce42788240c823f0c4a7f72d2ae6e9d",
+      "elementCount": 30
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/ExplorerPanel.tsx": {
+      "sha256": "da682ea1df13935c964977c7cd1dd91d52871af3d6d7b6cb79191a3b5eeab306",
+      "elementCount": 30
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/LogsPane.tsx": {
+      "sha256": "0f3caa0066d7729089da5afd04a1544547614484fb78eed72993183cb258fd0f",
+      "elementCount": 5
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/PreviewPane.tsx": {
+      "sha256": "0fefd30f65b28ee5e43b95d112b83fe5af37fd8db77490ddd7cd7efeb2f818f5",
+      "elementCount": 17
+    },
+    "apps/lumina-builder/src/components/workspaces/developer/sections/SidePanel.tsx": {
+      "sha256": "97e3b35fa1a0a31022baf93fd24bb52b5324bb3837026ecf8eb17396cc677622",
+      "elementCount": 12
+    },
+    "apps/lumina-builder/src/components/ai/LuminaAIMark.tsx": {
+      "sha256": "8820df4543a3a0b8d92d35faf670d8ab3d0205eeb2eecccf7a401cc8dd2e7709",
+      "elementCount": 4
+    }
+  }
+}

@@ -54,7 +54,7 @@ const DesignerWorkspace = lazy(() =>
 );
 
 const DeveloperWorkspace = lazy(() =>
-  import("@/components/workspaces/DeveloperWorkspace").then((m) => ({
+  import("@/components/workspaces/developer/DeveloperWorkspace").then((m) => ({
     default: m.DeveloperWorkspace,
   })),
 );
