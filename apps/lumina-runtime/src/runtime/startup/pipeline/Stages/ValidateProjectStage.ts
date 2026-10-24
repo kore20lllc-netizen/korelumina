@@ -17,7 +17,7 @@ export const ValidateProjectStage: ExecutionStage<
   async run(context) {
     const projectPath = context.state.projectPath!;
 
-    ensureProjectIsolation(projectPath);
+    await ensureProjectIsolation(projectPath);
     runLayoutSafetyEngine(
       context.input.projectId,
       projectPath,

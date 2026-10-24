@@ -1,10 +1,7 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
-
-import {
-  runCommandSync,
-} from "@korelumina/platform-sdk";
+import { spawn } from "node:child_process";
 
 import {
   projectProcessEnvironment,
@@ -22,34 +19,67 @@ function exists(filePath: string) {
   return fs.existsSync(filePath);
 }
 
-function commandSucceeds(
+/*
+ * F-50: every command here runs asynchronously. Installing dependencies
+ * used to run synchronously, so while a project installed (up to ten
+ * minutes) Runtime answered nothing else: the Executive Office, the
+ * dashboard and every other request froze.
+ */
+function runAsync(
   command: string,
   args: string[],
   projectPath: string,
-) {
-  try {
-    execFileSync(
-      command,
-      args,
-      {
-        cwd: projectPath,
-        stdio: "ignore",
-        /* SEC-1 (F-18): never Runtime's own environment. */
-        env: projectProcessEnvironment({
-          CI: "true",
-          NODE_ENV: "development",
-          BROWSER: "none",
-        }),
-      },
-    );
+  options: { timeoutMs: number; inheritOutput: boolean; env: NodeJS.ProcessEnv },
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd: projectPath,
+      shell: false,
+      stdio: options.inheritOutput ? ["ignore", "inherit", "inherit"] : "ignore",
+      env: options.env,
+    });
+    const timer = setTimeout(() => {
+      child.kill("SIGTERM");
+      setTimeout(() => child.kill("SIGKILL"), 5_000).unref();
+    }, options.timeoutMs);
+    child.on("error", (error) => {
+      clearTimeout(timer);
+      reject(error);
+    });
+    child.on("close", (code, signal) => {
+      clearTimeout(timer);
+      if (signal) reject(new Error(`process_terminated:${signal}`));
+      else if (code !== 0) reject(new Error(`process_exit_code:${code}`));
+      else resolve();
+    });
+  });
+}
 
+const CHECK_TIMEOUT_MS = 60_000;
+
+async function commandSucceeds(
+  command: string,
+  args: string[],
+  projectPath: string,
+): Promise<boolean> {
+  try {
+    await runAsync(command, args, projectPath, {
+      timeoutMs: CHECK_TIMEOUT_MS,
+      inheritOutput: false,
+      /* SEC-1 (F-18): never Runtime's own environment. */
+      env: projectProcessEnvironment({
+        CI: "true",
+        NODE_ENV: "development",
+        BROWSER: "none",
+      }),
+    });
     return true;
   } catch {
     return false;
   }
 }
 
-function swcBindingHealthy(projectPath: string) {
+async function swcBindingHealthy(projectPath: string): Promise<boolean> {
   const packageJsonPath = path.join(
     projectPath,
     "node_modules",
@@ -72,17 +102,56 @@ function swcBindingHealthy(projectPath: string) {
   );
 }
 
-function dependenciesHealthy(projectPath: string) {
+async function dependenciesHealthy(projectPath: string): Promise<boolean> {
   return (
-    commandSucceeds(
+    (await commandSucceeds(
       "npm",
       [
         "ls",
         "--depth=0",
       ],
       projectPath,
-    ) &&
-    swcBindingHealthy(projectPath)
+    )) &&
+    (await swcBindingHealthy(projectPath))
+  );
+}
+
+/*
+ * F-50: a fingerprint of what the dependencies were installed from. After
+ * a validated install Runtime records it in node_modules; while the
+ * manifest and lockfiles are unchanged the dependencies are known good,
+ * so a project whose tree `npm ls` dislikes (bun and pnpm trees often do)
+ * is not deleted and reinstalled on every start.
+ */
+const INSTALL_MARKER = ".korelumina-install.json";
+const DEPENDENCY_FILES = ["package.json", "package-lock.json", "npm-shrinkwrap.json", "yarn.lock", "pnpm-lock.yaml", "bun.lock", "bun.lockb"];
+
+export function dependencyFingerprint(projectPath: string): string {
+  const hash = crypto.createHash("sha256");
+  for (const file of DEPENDENCY_FILES) {
+    const full = path.join(projectPath, file);
+    if (!fs.existsSync(full)) continue;
+    hash.update(file);
+    hash.update("\0");
+    hash.update(fs.readFileSync(full));
+    hash.update("\0");
+  }
+  return hash.digest("hex");
+}
+
+function installMarkerMatches(projectPath: string): boolean {
+  try {
+    const marker = JSON.parse(fs.readFileSync(path.join(projectPath, "node_modules", INSTALL_MARKER), "utf8")) as { fingerprint?: string };
+    return marker.fingerprint === dependencyFingerprint(projectPath);
+  } catch {
+    return false;
+  }
+}
+
+function writeInstallMarker(projectPath: string, packageManager: string) {
+  fs.writeFileSync(
+    path.join(projectPath, "node_modules", INSTALL_MARKER),
+    `${JSON.stringify({ fingerprint: dependencyFingerprint(projectPath), packageManager, installedAt: new Date().toISOString() })}\n`,
   );
 }
 
@@ -96,22 +165,21 @@ function removeNodeModules(nodeModulesPath: string) {
   );
 }
 
-function installDependencies(
+async function installDependencies(
   projectPath: string,
   packageManager: PackageManager,
-) {
+): Promise<void> {
   console.log(
     `[runtime/isolation] installing dependencies using ${packageManager.command} --ignore-scripts`,
   );
 
-  runCommandSync(
+  await runAsync(
     packageManager.command,
     packageManager.installArgs,
+    projectPath,
     {
-      cwd: projectPath,
-      shell: false,
-      stdio: "inherit",
-      timeout: INSTALL_TIMEOUT_MS,
+      inheritOutput: true,
+      timeoutMs: INSTALL_TIMEOUT_MS,
       /* SEC-1 (F-18): never Runtime's own environment. */
       env: projectProcessEnvironment({
         CI: "true",
@@ -313,7 +381,27 @@ function detectPackageManager(projectPath: string): PackageManager {
   };
 }
 
-export function ensureProjectIsolation(projectPath: string) {
+const inFlight = new Map<string, Promise<IsolationResult>>();
+
+type IsolationResult = {
+  isolated: true;
+  dependenciesInstalled: true;
+  installSkipped: boolean;
+  packageManager?: string;
+  projectPath: string;
+};
+
+/* F-50: two starts of the same project share one install instead of racing in one node_modules. */
+export function ensureProjectIsolation(projectPath: string): Promise<IsolationResult> {
+  const key = path.resolve(projectPath);
+  const running = inFlight.get(key);
+  if (running) return running;
+  const work = isolate(projectPath).finally(() => inFlight.delete(key));
+  inFlight.set(key, work);
+  return work;
+}
+
+async function isolate(projectPath: string): Promise<IsolationResult> {
   if (!exists(projectPath)) {
     throw new Error(`project_path_missing:${projectPath}`);
   }
@@ -325,7 +413,7 @@ export function ensureProjectIsolation(projectPath: string) {
 
   if (
     exists(nodeModulesPath) &&
-    dependenciesHealthy(projectPath)
+    (installMarkerMatches(projectPath) || (await dependenciesHealthy(projectPath)))
   ) {
     return {
       isolated: true,
@@ -345,27 +433,29 @@ export function ensureProjectIsolation(projectPath: string) {
 
   const packageManager = detectPackageManager(projectPath);
 
-  installDependencies(projectPath, packageManager);
+  await installDependencies(projectPath, packageManager);
 
   if (
     packageManager.command === "bun" &&
-    !dependenciesHealthy(projectPath)
+    !(await dependenciesHealthy(projectPath))
   ) {
     console.warn(
       "[runtime/isolation] bun install produced invalid dependencies; retrying with npm",
     );
 
     removeNodeModules(nodeModulesPath);
-    installDependencies(projectPath, npmFallbackPackageManager);
+    await installDependencies(projectPath, npmFallbackPackageManager);
   }
 
   if (!exists(nodeModulesPath)) {
     throw new Error("node_modules_missing_after_install");
   }
 
-  if (!dependenciesHealthy(projectPath)) {
+  if (!(await dependenciesHealthy(projectPath))) {
     throw new Error("dependency_validation_failed_after_install");
   }
+
+  writeInstallMarker(projectPath, packageManager.command);
 
   return {
     isolated: true,
