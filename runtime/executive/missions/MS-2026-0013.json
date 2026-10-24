@@ -1,0 +1,233 @@
+{
+  "id": "MS-2026-0013",
+  "title": "Import any repository",
+  "description": "Imported by REPAIR-0 from runtime/executive/mission-imports/2026-10-22-diagnosis-and-paid-repair.json. Source ticket: IMPORT-ANY.",
+  "objective": "KoreLumina imports a repository from any git host or an uploaded archive, in any language, records that it was imported (not built in KoreLumina), and says honestly which analyses apply to it.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Private repositories need an access token; it must live only in Runtime's secret store and never be written to project files, logs or reports.",
+    "Advisory checks for non-JavaScript ecosystems need an outside vulnerability database (for example OSV); running against it needs the owner's approval.",
+    "Archives from customers are untrusted: path traversal, symlinks and size bombs must be refused."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Sources",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Import from any git host over HTTPS",
+            "acceptanceCriteria": [
+              "GitHub, GitLab, Bitbucket, Azure DevOps and self-hosted git URLs import",
+              "A private repository imports with a token the customer provides, and the token is never stored in the project or shown again"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792756424099
+          },
+          {
+            "id": "E1.T2",
+            "title": "Import from an uploaded archive",
+            "acceptanceCriteria": [
+              "zip and tar.gz import",
+              "Entries outside the project folder, symlinks out of it, and archives over the size limit are refused with a reason"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "Every project records its origin",
+            "acceptanceCriteria": [
+              "A project is marked imported (with its source) or built in KoreLumina",
+              "Diagnosis and paid repair are offered only for imported projects"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Any language",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Detect the ecosystem of every package in the repository",
+            "acceptanceCriteria": [
+              "Node, Python, Go, Rust, Java and Kotlin (Maven, Gradle), .NET, PHP, Ruby, Swift, Dart and Flutter, C and C++ (CMake) are recognised from their manifests",
+              "Anything else is reported as unrecognised, never guessed"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Repository Intelligence analyses each recognised ecosystem",
+            "acceptanceCriteria": [
+              "Dependency manifests and lockfiles are read for each recognised ecosystem",
+              "Secret and code risk scans run on every text file whatever the language",
+              "A category the engine cannot check for an ecosystem is reported as not checked and never counted as passing"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass",
+      "One repository per recognised ecosystem imports and audits with no false build failure"
+    ],
+    "requiredDocuments": [
+      "docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md"
+    ]
+  },
+  "state": "executing",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "d84e009f70e8b7427d4370d3bbee8c1f8eca93d7",
+      "subject": "Import from any git host, public or private",
+      "committedAt": 1792672956000
+    },
+    {
+      "sha": "71cd5f332418e718311dd92c6d8b18e933b05af9",
+      "subject": "Import archives and folders for real; Import window in the Knowledge Operations design, certified",
+      "committedAt": 1792675685000
+    },
+    {
+      "sha": "e8cebedf55d4fba84bfe742076fd0b84d1666575",
+      "subject": "Every project records its origin; only its owner can change it",
+      "committedAt": 1792676287000
+    },
+    {
+      "sha": "8078e6339caeb401ade1059490f66660c18b27ca",
+      "subject": "Repository Intelligence recognises every ecosystem's packages",
+      "committedAt": 1792718285000
+    },
+    {
+      "sha": "d42bfa5c607d1da1412809b199243f41efd07d17",
+      "subject": "Repository Intelligence reads and audits every recognised ecosystem",
+      "committedAt": 1792718454000
+    },
+    {
+      "sha": "2601a62fb4bca0b433cd23c8def7092bed7264a2",
+      "subject": "Advisories for every ecosystem from OSV",
+      "committedAt": 1792719870000
+    }
+  ],
+  "recoveryAnchor": "2601a62fb4bca0b433cd23c8def7092bed7264a2",
+  "producedKnowledge": [
+    "LR-2026-0045",
+    "LR-2026-0046",
+    "LR-2026-0047",
+    "LR-2026-0048",
+    "LR-2026-0049"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103872
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103872
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649264823
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649267096
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792673998300,
+      "reason": "First linked commit d84e009f: Import from any git host, public or private"
+    }
+  ],
+  "createdAt": 1792649103872,
+  "updatedAt": 1792810304499,
+  "validation": {
+    "evaluatedAt": 1792810304499,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "4 of 5 still to do: E1.T2, E1.T3, E2.T1, E2.T2."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 2601a62f, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 1 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 2601a62f."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "2601a62fb4bca0b433cd23c8def7092bed7264a2",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792722077865
+    }
+  ]
+}

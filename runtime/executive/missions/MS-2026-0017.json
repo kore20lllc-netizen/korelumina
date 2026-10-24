@@ -1,0 +1,116 @@
+{
+  "id": "MS-2026-0017",
+  "title": "Export: download, a new GitHub repository, or a pull request",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-EXPORT.",
+  "objective": "Whoever manages a project can take it out of KoreLumina with everything KoreLumina changed: as a download, as a new private GitHub repository, or as a pull request on the repository it was imported from.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The customer's GitHub connection is used only for actions they start, through the Connected accounts store; a pasted token is used once and never kept.",
+    "A push must never target the default branch and never force-push.",
+    "The first live push to GitHub happens only on the owner's own test account, with the owner's approval."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Download",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Download the project as a zip",
+            "acceptanceCriteria": [
+              "The zip holds the project as it is now in KoreLumina",
+              "node_modules, build output, .git and every .env file are left out",
+              "Available on every plan to whoever manages the project, enforced in Runtime"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "GitHub",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Export to a new private GitHub repository",
+            "acceptanceCriteria": [
+              "Runtime creates a private repository under the token's account or a chosen organisation and pushes the project as one commit",
+              "The token is used once and never stored, logged or returned",
+              "Pro and above, enforced in Runtime"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Open a pull request on the original repository",
+            "acceptanceCriteria": [
+              "For projects imported from GitHub, the changes since import are pushed to a korelumina/ branch and a pull request is opened",
+              "Never pushes to the default branch, never force-pushes",
+              "The customer sees exactly which files change before approving"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Interface",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Export window in the Knowledge Operations design",
+            "acceptanceCriteria": [
+              "Reachable from Projects and Developer",
+              "Shows real progress and the resulting repository or pull request link",
+              "The owner approves it visually and its UI contract is certified"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786475
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786475
+    }
+  ],
+  "createdAt": 1792805786475,
+  "updatedAt": 1792805786475
+}

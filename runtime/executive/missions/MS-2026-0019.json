@@ -1,0 +1,122 @@
+{
+  "id": "MS-2026-0019",
+  "title": "Bring your own Supabase",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-SUPABASE.",
+  "objective": "A customer moves a project's backend to their own Supabase project: its migrations, edge functions and function secrets are applied there after they read and approve every step, and the app is pointed at it through environment variables.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "SQL cannot be undone like a file: a target whose public schema already has tables is refused, each migration runs in its own transaction, and the run stops at the first failure and says how far it got.",
+    "The Supabase connection is used only for steps the customer starts; function secrets the customer types are passed to Supabase and never kept by KoreLumina; a service-role key is never recorded.",
+    "Data is not moved between projects.",
+    "The first live run happens only on the owner's own test Supabase project, with the owner's approval."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Analyze",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Read what the app needs from Supabase",
+            "acceptanceCriteria": [
+              "Lists the environment variables the app reads for Supabase, the migrations in order, the edge functions, and the secrets the functions read",
+              "Read-only"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Apply",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Create a Supabase project on the customer's account",
+            "acceptanceCriteria": [
+              "Creates a new project in the customer's chosen organisation and region through the Management API, or uses an existing empty project",
+              "A new project's database password is generated, shown once for the customer to save, and never stored, logged or returned again"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Apply migrations, functions and secrets to the customer's project",
+            "acceptanceCriteria": [
+              "Every statement and function is shown before anything runs, and runs only after explicit approval",
+              "Refuses a target with existing public tables",
+              "Stops at the first failure and reports exactly what ran"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T3",
+            "title": "Point the app at the new project",
+            "acceptanceCriteria": [
+              "The project URL and anon key go into .env.example and the deployment's environment, never into source code"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Interface",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Supabase window in the Knowledge Operations design",
+            "acceptanceCriteria": [
+              "Shows the plan, real progress and the result",
+              "The owner approves it visually and its UI contract is certified"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786482
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786482
+    }
+  ],
+  "createdAt": 1792805786482,
+  "updatedAt": 1792805786482
+}

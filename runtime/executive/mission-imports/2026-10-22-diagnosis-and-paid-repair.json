@@ -1,0 +1,110 @@
+{
+  "version": "mission-import:v1",
+  "ticket": "REPAIR-0",
+  "decision": "Owner decisions of 2026-10-22: Stripe is the payment provider. Business and Enterprise accounts may run and read Repo Audit on imported repositories for diagnosis only. Every repair is done in-house: the customer sees the price in a pop-up and, on agreeing, Stripe holds the amount on their card and charges it when the repair is delivered. The price comes from a published rate table applied to the findings the customer picks. A repair is delivered as a pull request to the customer's repository when KoreLumina has write access, otherwise as a download. KoreLumina imports any kind of repository.",
+  "source": "The owner's conversation with Claude on 2026-10-22, after comparing the landing page and docs/architecture/ENGINEERING_SPEC_V1.md chapter 14 with the code.",
+  "reviewedAt": "2026-10-22",
+  "missions": [
+    {
+      "sourceTicket": "IMPORT-ANY",
+      "title": "Import any repository",
+      "objective": "KoreLumina imports a repository from any git host or an uploaded archive, in any language, records that it was imported (not built in KoreLumina), and says honestly which analyses apply to it.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "Private repositories need an access token; it must live only in Runtime's secret store and never be written to project files, logs or reports.",
+        "Advisory checks for non-JavaScript ecosystems need an outside vulnerability database (for example OSV); running against it needs the owner's approval.",
+        "Archives from customers are untrusted: path traversal, symlinks and size bombs must be refused."
+      ],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Sources",
+            "tasks": [
+              { "title": "Import from any git host over HTTPS", "acceptanceCriteria": ["GitHub, GitLab, Bitbucket, Azure DevOps and self-hosted git URLs import", "A private repository imports with a token the customer provides, and the token is never stored in the project or shown again"] },
+              { "title": "Import from an uploaded archive", "acceptanceCriteria": ["zip and tar.gz import", "Entries outside the project folder, symlinks out of it, and archives over the size limit are refused with a reason"] },
+              { "title": "Every project records its origin", "acceptanceCriteria": ["A project is marked imported (with its source) or built in KoreLumina", "Diagnosis and paid repair are offered only for imported projects"] }
+            ]
+          },
+          {
+            "title": "Any language",
+            "tasks": [
+              { "title": "Detect the ecosystem of every package in the repository", "acceptanceCriteria": ["Node, Python, Go, Rust, Java and Kotlin (Maven, Gradle), .NET, PHP, Ruby, Swift, Dart and Flutter, C and C++ (CMake) are recognised from their manifests", "Anything else is reported as unrecognised, never guessed"] },
+              { "title": "Repository Intelligence analyses each recognised ecosystem", "acceptanceCriteria": ["Dependency manifests and lockfiles are read for each recognised ecosystem", "Secret and code risk scans run on every text file whatever the language", "A category the engine cannot check for an ecosystem is reported as not checked and never counted as passing"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Runtime suites pass", "One repository per recognised ecosystem imports and audits with no false build failure"],
+        "requiredDocuments": ["docs/architecture/KORELUMINA_FINAL_IMPLEMENTATION_ROADMAP_V1.md"]
+      }
+    },
+    {
+      "sourceTicket": "DIAG-1",
+      "title": "Diagnosis for Business and Enterprise; repair stays in-house",
+      "objective": "Business and Enterprise customers run and read Repo Audit on their imported repositories to diagnose them. Fix plans, repair drafts and applying changes stay with in-house engineers, enforced by Runtime.",
+      "type": "security",
+      "priority": "high",
+      "risks": [
+        "This changes the access policy in ENGINEERING_SPEC_V1.md chapter 14 (customers never run the engine). It needs an ADR the owner accepts before the code changes.",
+        "Plan roles are trustworthy only once MS-2026-0003 assigns them through Stripe's webhook."
+      ],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Policy",
+            "tasks": [
+              { "title": "ADR: customer diagnosis, in-house repair", "acceptanceCriteria": ["States who may run, read, plan and apply", "The owner accepts it", "ENGINEERING_SPEC_V1.md chapter 14 and LANDING_CONTRACT.md agree with it"] }
+            ]
+          },
+          {
+            "title": "Enforcement",
+            "tasks": [
+              { "title": "Runtime authorises audit by role and project", "acceptanceCriteria": ["business and enterprise may start audits and read reports of their own imported projects only", "Fix plans, repair drafts and apply routes refuse every customer role", "Tests cover each role on each route"] },
+              { "title": "Customer diagnosis view", "acceptanceCriteria": ["A Business or Enterprise customer sees score, grade, categories and findings, and can export the client report", "No fix plan or repair control is shown to them", "Built in the Knowledge Operations design and approved visually"] },
+              { "title": "Landing page says the same", "acceptanceCriteria": ["The Repo Audit tooltip and FAQ say diagnosis on Business and Enterprise, repair by KoreLumina engineers"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Runtime suites pass", "A business caller is refused the fix-plan route and allowed the report route"],
+        "requiredDocuments": ["docs/architecture/ENGINEERING_SPEC_V1.md", "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"]
+      }
+    },
+    {
+      "sourceTicket": "REPAIR-1",
+      "title": "Paid repair: priced, held, repaired in-house, delivered",
+      "objective": "From a diagnosis, the customer picks findings to repair, sees the price, and agrees. Stripe holds the amount, the job lands in the In-House Dev queue, engineers repair it, and delivery as a pull request or download captures the charge.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "Needs MS-2026-0003: a Stripe customer with a saved payment method, and Stripe keys only in Runtime's environment.",
+        "A card hold expires after about 7 days; a job expected to take longer is charged on agreement, and the pop-up says so before they agree.",
+        "Pushing a pull request needs write access the customer grants; without it the repair is delivered as a download."
+      ],
+      "relatedRepositories": ["kore20lllc-netizen/korelumina"],
+      "plan": {
+        "epics": [
+          {
+            "title": "Price and consent",
+            "tasks": [
+              { "title": "The owner publishes the repair rate table", "acceptanceCriteria": ["A price per finding severity and category, and a minimum per job, set by the owner and versioned", "Every quote records the rate table version it used"] },
+              { "title": "Repair pop-up", "acceptanceCriteria": ["Shows the chosen findings, the price from the rate table, when the card is charged, and what is delivered", "Nothing is held or charged until the customer agrees", "Built in the Knowledge Operations design and approved visually"] },
+              { "title": "Stripe hold and capture", "acceptanceCriteria": ["Agreeing creates a manual-capture PaymentIntent on the saved card", "Delivery captures it; cancelling releases it", "Every Stripe event is verified by signature and recorded once"] }
+            ]
+          },
+          {
+            "title": "In-House engagements",
+            "tasks": [
+              { "title": "Engagement record in Runtime", "acceptanceCriteria": ["Holds customer, project, chosen findings, quote, payment state, assignee, status and full history", "Statuses: requested, held, in progress, in review, delivered, cancelled"] },
+              { "title": "In-House Dev Engagements queue", "acceptanceCriteria": ["Engineers see, take and work each engagement, with its audit and fix plan one click away", "The console from MS-2026-0011 (Tools, Projects, Attention) sits beside the queue", "Approved visually and certified"] },
+              { "title": "Delivery", "acceptanceCriteria": ["A pull request to the customer's repository when KoreLumina has write access, otherwise a download of the repaired project", "A re-audit after repair is attached to the delivery", "Delivery captures the held charge"] }
+            ]
+          }
+        ],
+        "validationPlan": ["npm run build passes", "Runtime suites pass", "A Stripe test-mode repair goes from agreement to hold to delivery to capture"],
+        "requiredDocuments": ["docs/architecture/ENGINEERING_PLATFORM_SPECIFICATION_V1.md", "docs/architecture/LANDING_CONTRACT.md"]
+      }
+    }
+  ]
+}

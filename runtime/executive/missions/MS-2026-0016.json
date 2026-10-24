@@ -1,0 +1,130 @@
+{
+  "id": "MS-2026-0016",
+  "title": "Connected accounts: Continue with GitHub, Supabase and Vercel",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-CONNECT.",
+  "objective": "A customer connects their own GitHub, Supabase and Vercel accounts in one click each (creating an account in the same step if they have none), and KoreLumina keeps those permissions safely: encrypted, used only for actions the customer starts, every use recorded, revocable at any time.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Connection tokens give access to customers' code, databases and deployments: they live only in Runtime, encrypted with a key in Runtime's environment, never reach the browser, logs, projects or responses.",
+    "Registering KoreLumina's apps with GitHub, Supabase and Vercel is done by the owner on the providers' sites.",
+    "A revoked or expired connection must show as disconnected and never be retried silently.",
+    "Security review is mandatory before the first live connection (ENGINEERING_SPEC_V1)."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Secure connection store",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Store connection tokens encrypted in Runtime",
+            "acceptanceCriteria": [
+              "Tokens are encrypted at rest with a key from Runtime's environment; without the key Runtime refuses to store any",
+              "Tokens never appear in logs, responses, the browser, project files or metadata",
+              "Refresh tokens are used to renew access; a refusal marks the connection disconnected"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Record every use and allow disconnecting",
+            "acceptanceCriteria": [
+              "Each use records who, which project, which action and when",
+              "Disconnect deletes the stored tokens and asks the provider to revoke them where it can"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Providers",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Continue with GitHub (GitHub App)",
+            "acceptanceCriteria": [
+              "Installed only on the repositories the customer picks, or allowed to create a new private one",
+              "A customer without a GitHub account can create one in the same step"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Continue with Supabase (OAuth app)",
+            "acceptanceCriteria": [
+              "Lists the customer's organisations and projects and can create a project in one of them"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T3",
+            "title": "Continue with Vercel (integration)",
+            "acceptanceCriteria": [
+              "Lists the customer's personal account and teams and can create projects there"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Interface",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Connected accounts in Settings",
+            "acceptanceCriteria": [
+              "Shows each connected account, what KoreLumina may do with it, its recent uses, and Disconnect",
+              "The owner approves it visually and its UI contract is certified"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786467
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786467
+    }
+  ],
+  "createdAt": 1792805786467,
+  "updatedAt": 1792805786467
+}

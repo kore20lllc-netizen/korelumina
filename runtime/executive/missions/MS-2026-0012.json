@@ -1,0 +1,330 @@
+{
+  "id": "MS-2026-0012",
+  "title": "A real Repo Audit engine: Repository Intelligence",
+  "description": "Owner direction 2026-10-21: rebuild a proper, professional repo audit engine. Found: the Builder's Repo Audit calls /api/audit/*, which the Runtime does not serve, so it always falls back to simulated progress (random timers) and a hard-coded sample report (invented advisories for axios and ws), and its fix plan and diffs are mocked helpers. The Runtime has a small real audit (apps/lumina-runtime/src/audit, 435 lines, /api/runtime/audit) and framework detection (63 lines) that the Builder does not use, and a RepositoryManifest type and analyzer under knowledge/repository. This violates the charter's No Mock Production Logic. The workspace's visual rebuild is MS-2026-0011's Repo Audit task and builds on this engine.",
+  "objective": "Repo Audit reports real, evidence-backed, deterministic findings for any imported repository, from a Runtime engine that also produces its Repository Manifest (Release Plan V1 Milestone 2).",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The engine reads imported repositories only inside their project workspace and never sends their code or secrets anywhere.",
+    "Deep mode runs the project's own scripts; it runs only on the owner's request, inside the project's isolated workspace.",
+    "Security advisories need the network; offline, the report must say advisories were not checked rather than show none."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Engine",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Repository inventory and Repository Manifest",
+            "acceptanceCriteria": [
+              "Files, languages, package manager, workspaces, frameworks and entry points are recorded in a Repository Manifest for every audited project",
+              "The same repository at the same commit produces the same manifest",
+              "Manifests are kept per project with history"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640007742
+          },
+          {
+            "id": "E1.T2",
+            "title": "Dependency analysis",
+            "acceptanceCriteria": [
+              "Imported but undeclared, declared but unused, and lockfile mismatches are found from the code itself",
+              "Every finding names the file and line or the package.json entry"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640007747
+          },
+          {
+            "id": "E1.T3",
+            "title": "Security analysis from real sources",
+            "acceptanceCriteria": [
+              "Advisories come from the package manager's own audit; when it cannot run, the report says so instead of inventing any",
+              "Secrets in tracked files are reported by file and line, never by value",
+              "Risky code patterns are reported with file and line"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640007745
+          },
+          {
+            "id": "E1.T4",
+            "title": "Build health",
+            "acceptanceCriteria": [
+              "Deep mode runs the project's typecheck and build in its isolated workspace",
+              "Errors are reported with file, line and message"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640007749
+          },
+          {
+            "id": "E1.T5",
+            "title": "Environment analysis",
+            "acceptanceCriteria": [
+              "Variables the code reads are compared with what the project declares",
+              "Missing and unused variables are listed by name only"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640007752
+          },
+          {
+            "id": "E1.T6",
+            "title": "Architecture map",
+            "acceptanceCriteria": [
+              "Module graph, entry points, import cycles and files no entry point reaches"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640010470
+          },
+          {
+            "id": "E1.T7",
+            "title": "Scoring and report",
+            "acceptanceCriteria": [
+              "Per-category and overall scores derived only from findings",
+              "Every finding has a stable ID and its evidence",
+              "Two runs on the same commit give identical reports"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640023063
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "API",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Runtime audit API with live progress",
+            "acceptanceCriteria": [
+              "Start, stream progress, read the latest report and history per project",
+              "Fix plans are built only from real findings through the existing fix registry"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640030360
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Builder",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Repo Audit reads only the Runtime engine",
+            "acceptanceCriteria": [
+              "Simulated progress, the sample report and the mocked fix helpers are removed",
+              "The PDF export uses the real report",
+              "When Runtime is unreachable, the workspace says so instead of showing sample data"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792640040702
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "npm run test:runtime passes",
+      "Audit of the KoreLumina repository and of a small sample repository: findings checked by hand against the code",
+      "Two runs on the same commit produce identical reports"
+    ],
+    "requiredDocuments": []
+  },
+  "state": "completed",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "60bb546cb246635ac29193d7ffb52b12cf1f666f",
+      "subject": "Repository Intelligence: snapshot, inventory and Repository Manifest",
+      "committedAt": 1792623604000
+    },
+    {
+      "sha": "2f2bc9f7ad51ce2da153da2eac822cf540dceb4f",
+      "subject": "Repository Intelligence: dependency analysis",
+      "committedAt": 1792626296000
+    },
+    {
+      "sha": "927498fc1a15c52721542ac4018c28e0b1de8091",
+      "subject": "Repository Intelligence: security analysis",
+      "committedAt": 1792629785000
+    },
+    {
+      "sha": "0f131b2922f8ace492ad3daeb7e21b4b240c5e23",
+      "subject": "Repository Intelligence: build health, and npm audit without Runtime secrets",
+      "committedAt": 1792631104000
+    },
+    {
+      "sha": "23437b0db440299edf9fe6fcf974cbff4f31e024",
+      "subject": "Repository Intelligence: environment analysis and architecture map",
+      "committedAt": 1792631899000
+    },
+    {
+      "sha": "7dde6b32815bc20b874871c1d4bcb16e34e1a023",
+      "subject": "Repository Intelligence: the audit report",
+      "committedAt": 1792635108000
+    },
+    {
+      "sha": "11750d34063cc08fd84001133532e82fbb04b3c3",
+      "subject": "Repository Intelligence: the Repo Audit API",
+      "committedAt": 1792636089000
+    },
+    {
+      "sha": "f6b64ddef37a0d6639714442977def04dba40ac8",
+      "subject": "Repo Audit rebuilt on the Repository Intelligence engine, with client reports",
+      "committedAt": 1792638675000
+    },
+    {
+      "sha": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+      "subject": "Repo Audit certified UI contract",
+      "committedAt": 1792639642000
+    }
+  ],
+  "recoveryAnchor": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+  "producedKnowledge": [
+    "LR-2026-0034",
+    "LR-2026-0035",
+    "LR-2026-0036",
+    "LR-2026-0037",
+    "LR-2026-0038",
+    "LR-2026-0039",
+    "LR-2026-0040",
+    "LR-2026-0041"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792623570727
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792623570727
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630393359
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630395105
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792631282782,
+      "reason": "First linked commit 60bb546c: Repository Intelligence: snapshot, inventory and Repository Manifest"
+    },
+    {
+      "from": "executing",
+      "to": "validating",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792640040702,
+      "reason": "Every planned task is done or dropped"
+    },
+    {
+      "from": "validating",
+      "to": "completed",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792640086395,
+      "reason": "All validation checks passed at bfbdef41"
+    }
+  ],
+  "createdAt": 1792623570727,
+  "updatedAt": 1792640086395,
+  "validation": {
+    "evaluatedAt": 1792640086395,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": true,
+        "detail": "9 done, 0 dropped."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for bfbdef41, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "The plan requires no documents."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor bfbdef41."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "bfbdef417cf01117d2f4e8502a72eaddfc99aa2c",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792640086393
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "MS-2026-0018",
+  "title": "Desktop-ready screens: an AI-built app as a full website",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-DESKTOP.",
+  "objective": "Transform App -> Website gains a second option: the AI redesigns the layout of the app's own screens for desktop, without changing behaviour, data access or text, each screen as a reviewed draft with undo.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "A layout change must not alter what a screen does; the draft is limited to presentation and reviewed before it is applied.",
+    "Large screens may exceed what one model answer can rewrite; such screens are reported, not half-changed."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Screens",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "List the app's screens",
+            "acceptanceCriteria": [
+              "Runtime lists each route and the file that renders it, for Next.js and React Router",
+              "The customer chooses which screens to make desktop-ready"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Draft desktop layouts",
+            "acceptanceCriteria": [
+              "Each chosen screen gets a draft using the app's own styling system and breakpoints",
+              "Behaviour, data access and text are unchanged; a draft that changes them is refused",
+              "Applied all or nothing, with undo"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "Desktop option in the Transform wizard",
+            "acceptanceCriteria": [
+              "The wizard offers website pages, desktop-ready screens, or both",
+              "The owner approves it visually and the Transform UI contract is recertified"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786479
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786479
+    }
+  ],
+  "createdAt": 1792805786479,
+  "updatedAt": 1792805786479
+}

@@ -1,0 +1,228 @@
+{
+  "id": "MS-2026-0014",
+  "title": "Diagnosis for Business and Enterprise; repair stays in-house",
+  "description": "Imported by REPAIR-0 from runtime/executive/mission-imports/2026-10-22-diagnosis-and-paid-repair.json. Source ticket: DIAG-1.",
+  "objective": "Business and Enterprise customers run and read Repo Audit on their imported repositories to diagnose them. Fix plans, repair drafts and applying changes stay with in-house engineers, enforced by Runtime.",
+  "objectiveId": null,
+  "type": "security",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "This changes the access policy in ENGINEERING_SPEC_V1.md chapter 14 (customers never run the engine). It needs an ADR the owner accepts before the code changes.",
+    "Plan roles are trustworthy only once MS-2026-0003 assigns them through Stripe's webhook."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Policy",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "ADR: customer diagnosis, in-house repair",
+            "acceptanceCriteria": [
+              "States who may run, read, plan and apply",
+              "The owner accepts it",
+              "ENGINEERING_SPEC_V1.md chapter 14 and LANDING_CONTRACT.md agree with it"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792721997919
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Enforcement",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Runtime authorises audit by role and project",
+            "acceptanceCriteria": [
+              "business and enterprise may start audits and read reports of their own imported projects only",
+              "Fix plans, repair drafts and apply routes refuse every customer role",
+              "Tests cover each role on each route"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "Customer diagnosis view",
+            "acceptanceCriteria": [
+              "A Business or Enterprise customer sees score, grade, categories and findings, and can export the client report",
+              "No fix plan or repair control is shown to them",
+              "Built in the Knowledge Operations design and approved visually"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T3",
+            "title": "Landing page says the same",
+            "acceptanceCriteria": [
+              "The Repo Audit tooltip and FAQ say diagnosis on Business and Enterprise, repair by KoreLumina engineers"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792756404503
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass",
+      "A business caller is refused the fix-plan route and allowed the report route"
+    ],
+    "requiredDocuments": [
+      "docs/architecture/ENGINEERING_SPEC_V1.md",
+      "docs/adr/ADR-0043-verified-identity-and-server-assigned-roles.md"
+    ]
+  },
+  "state": "executing",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "0a7c1bff8c891d139e97f3e438759d1961cbaa30",
+      "subject": "ADR-0046: customer diagnosis, in-house repair",
+      "committedAt": 1792720945000
+    },
+    {
+      "sha": "ebde217b5c2260cb1fea0583f51f44effcf87d10",
+      "subject": "Runtime enforces ADR-0046; the open audit and repair routes are closed",
+      "committedAt": 1792721760000
+    },
+    {
+      "sha": "3c939d741394717b5f3a859b3e09772f1c559cac",
+      "subject": "Repo Audit diagnosis view for Business and Enterprise, certified",
+      "committedAt": 1792755970000
+    },
+    {
+      "sha": "85b14433bf82ded94df3176bd69b7fa3f017d8e7",
+      "subject": "Landing page says diagnosis on Business and Enterprise, repairs by engineers",
+      "committedAt": 1792756176000
+    },
+    {
+      "sha": "530e7569de0261773aa42f13bb2cdc0ab0211650",
+      "subject": "Projects without an owner are for staff only once sign-in is real",
+      "committedAt": 1792757076000
+    }
+  ],
+  "recoveryAnchor": "530e7569de0261773aa42f13bb2cdc0ab0211650",
+  "producedKnowledge": [
+    "LR-2026-0050",
+    "LR-2026-0051",
+    "LR-2026-0052",
+    "LR-2026-0053"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103880
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103880
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649239105
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649241295
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792721897845,
+      "reason": "First linked commit 0a7c1bff: ADR-0046: customer diagnosis, in-house repair"
+    }
+  ],
+  "createdAt": 1792649103880,
+  "updatedAt": 1792810304515,
+  "validation": {
+    "evaluatedAt": 1792810304515,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "2 of 4 still to do: E2.T1, E2.T2."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 530e7569, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 2 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 530e7569."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "ebde217b5c2260cb1fea0583f51f44effcf87d10",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792722069999
+    },
+    {
+      "check": "build",
+      "sha": "530e7569de0261773aa42f13bb2cdc0ab0211650",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792808527173
+    }
+  ]
+}

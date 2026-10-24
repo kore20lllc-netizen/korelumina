@@ -1,0 +1,106 @@
+{
+  "id": "MS-2026-0020",
+  "title": "Bring your own deployment: Vercel",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-DEPLOY.",
+  "objective": "A customer deploys a project to their own Vercel account from KoreLumina, with its environment variables set, real build progress and logs, the live URL, and rollback to the previous deployment.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "The Vercel connection is used only for deployments the customer starts; a pasted token is used once and never kept.",
+    "Deployment needs explicit approval every time.",
+    "The first live deployment happens only on the owner's own Vercel account, with the owner's approval."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Deploy",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "Deploy to Vercel",
+            "acceptanceCriteria": [
+              "Creates or reuses a Vercel project, sets its environment variables, uploads the files and deploys",
+              "Shows the build's real progress and logs and the deployment URL",
+              "Pro and above, enforced in Runtime"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "Link the Vercel project to the customer's GitHub repository",
+            "acceptanceCriteria": [
+              "When the project was exported to the customer's GitHub, the Vercel project is linked to it so later pushes redeploy without KoreLumina",
+              "Otherwise files are uploaded directly"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "Roll back",
+            "acceptanceCriteria": [
+              "Promotes the previous deployment on request"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Interface",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Deployment window in the Knowledge Operations design",
+            "acceptanceCriteria": [
+              "Deployment history, progress, logs and rollback",
+              "The owner approves it visually and its UI contract is certified"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786486
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786486
+    }
+  ],
+  "createdAt": 1792805786486,
+  "updatedAt": 1792805786486
+}

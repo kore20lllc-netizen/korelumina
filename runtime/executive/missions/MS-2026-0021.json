@@ -1,0 +1,113 @@
+{
+  "id": "MS-2026-0021",
+  "title": "Put it online: GitHub, Supabase and Vercel set up on the customer's own accounts",
+  "description": "Imported by OWN-0 from runtime/executive/mission-imports/2026-10-23-customer-ownership.json. Source ticket: OWN-TAKE.",
+  "objective": "One guided flow takes an imported project (for example a Lovable app synced to GitHub) to the customer's own private GitHub repository, a new Supabase project and a Vercel project linked to that repository, wired together, so it runs entirely on their accounts and they can leave KoreLumina at any time.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Each step uses the customer's connected account (or a one-use pasted token) and asks for its own explicit approval.",
+    "A step that fails leaves the earlier steps in place and says exactly what was created, so the customer is never left guessing.",
+    "Depends on the Export, Bring your own Supabase and Bring your own deployment missions.",
+    "Depends on the Connected accounts mission."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Flow",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "A plain-language flow for customers who are not technical",
+            "acceptanceCriteria": [
+              "Three steps named Save your code, Create your database, Publish your website, each one Continue with ... button that also creates the account if the customer has none",
+              "States plainly what each provider's free plan allows: Vercel Hobby is non-commercial personal use only; Supabase Free keeps two active projects and pauses after a week of inactivity",
+              "KoreLumina never creates an account for the customer and never hosts anything on its own accounts"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T2",
+            "title": "New or existing, for customers who already have accounts",
+            "acceptanceCriteria": [
+              "Each step offers a new resource or an existing one: repository (or a pull request on the original), Supabase project (existing only if empty), Vercel project",
+              "Connected accounts are remembered, so publishing again is one click"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T3",
+            "title": "Guided Take ownership window",
+            "acceptanceCriteria": [
+              "GitHub, then Supabase, then Vercel, each creating or choosing the customer's own resource",
+              "The Supabase URL and anon key flow into Vercel's environment; Vercel is linked to the GitHub repository",
+              "Each step can be skipped, retried, or done with an existing resource",
+              "Ends with the live URL, the repository link and the Supabase project link"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T4",
+            "title": "Nothing depends on KoreLumina afterwards",
+            "acceptanceCriteria": [
+              "After the flow, pushing to the customer's repository redeploys on Vercel without KoreLumina",
+              "The customer can export or delete KoreLumina's working copy at any time"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E1.T5",
+            "title": "Owner approval",
+            "acceptanceCriteria": [
+              "The owner approves the window visually and its UI contract is certified",
+              "The first end-to-end run happens on the owner's own test accounts, with the owner's approval"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [],
+    "requiredDocuments": []
+  },
+  "state": "planned",
+  "blockedFrom": null,
+  "linkedCommits": [],
+  "recoveryAnchor": null,
+  "producedKnowledge": [],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786490
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792805786490
+    }
+  ],
+  "createdAt": 1792805786490,
+  "updatedAt": 1792805786490
+}

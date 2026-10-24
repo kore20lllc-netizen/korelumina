@@ -1,0 +1,231 @@
+{
+  "id": "MS-2026-0015",
+  "title": "Paid repair: priced, held, repaired in-house, delivered",
+  "description": "Imported by REPAIR-0 from runtime/executive/mission-imports/2026-10-22-diagnosis-and-paid-repair.json. Source ticket: REPAIR-1.",
+  "objective": "From a diagnosis, the customer picks findings to repair, sees the price, and agrees. Stripe holds the amount, the job lands in the In-House Dev queue, engineers repair it, and delivery as a pull request or download captures the charge.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "high",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "Needs MS-2026-0003: a Stripe customer with a saved payment method, and Stripe keys only in Runtime's environment.",
+    "A card hold expires after about 7 days; a job expected to take longer is charged on agreement, and the pop-up says so before they agree.",
+    "Pushing a pull request needs write access the customer grants; without it the repair is delivered as a download."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Price and consent",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "The owner publishes the repair rate table",
+            "acceptanceCriteria": [
+              "A price per finding severity and category, and a minimum per job, set by the owner and versioned",
+              "Every quote records the rate table version it used"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792808338058
+          },
+          {
+            "id": "E1.T2",
+            "title": "Repair pop-up",
+            "acceptanceCriteria": [
+              "Shows the chosen findings, the price from the rate table, when the card is charged, and what is delivered",
+              "Nothing is held or charged until the customer agrees",
+              "Built in the Knowledge Operations design and approved visually"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792808346561
+          },
+          {
+            "id": "E1.T3",
+            "title": "Stripe hold and capture",
+            "acceptanceCriteria": [
+              "Agreeing creates a manual-capture PaymentIntent on the saved card",
+              "Delivery captures it; cancelling releases it",
+              "Every Stripe event is verified by signature and recorded once"
+            ],
+            "status": "todo"
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "In-House engagements",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Engagement record in Runtime",
+            "acceptanceCriteria": [
+              "Holds customer, project, chosen findings, quote, payment state, assignee, status and full history",
+              "Statuses: requested, held, in progress, in review, delivered, cancelled"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T2",
+            "title": "In-House Dev Engagements queue",
+            "acceptanceCriteria": [
+              "Engineers see, take and work each engagement, with its audit and fix plan one click away",
+              "The console from MS-2026-0011 (Tools, Projects, Attention) sits beside the queue",
+              "Approved visually and certified"
+            ],
+            "status": "todo"
+          },
+          {
+            "id": "E2.T3",
+            "title": "Delivery",
+            "acceptanceCriteria": [
+              "A pull request to the customer's repository when KoreLumina has write access, otherwise a download of the repaired project",
+              "A re-audit after repair is attached to the delivery",
+              "Delivery captures the held charge"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes",
+      "Runtime suites pass",
+      "A Stripe test-mode repair goes from agreement to hold to delivery to capture"
+    ],
+    "requiredDocuments": [
+      "docs/architecture/ENGINEERING_PLATFORM_SPECIFICATION_V1.md",
+      "docs/architecture/LANDING_CONTRACT.md"
+    ]
+  },
+  "state": "executing",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "b75c7872f472ae33b297cfb9042e9ff33362f95a",
+      "subject": "Paid repair: the owner's rate table, quotes and engagements",
+      "committedAt": 1792757076000
+    },
+    {
+      "sha": "9baff9e0b46dac2775a361fab124b3c48e1941d0",
+      "subject": "Repair pop-up and audit progress bar in Repo Audit, certified",
+      "committedAt": 1792779187000
+    },
+    {
+      "sha": "632617fd07721f503bf9d8245bc8899924f59e2a",
+      "subject": "In-House Dev: the repair queue and the console, certified",
+      "committedAt": 1792782673000
+    }
+  ],
+  "recoveryAnchor": "632617fd07721f503bf9d8245bc8899924f59e2a",
+  "producedKnowledge": [
+    "LR-2026-0053",
+    "LR-2026-0054",
+    "LR-2026-0055"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103883
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649103883
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649208385
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792649219365
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792758863467,
+      "reason": "First linked commit b75c7872: Paid repair: the owner's rate table, quotes and engagements"
+    }
+  ],
+  "createdAt": 1792649103883,
+  "updatedAt": 1792810304539,
+  "validation": {
+    "evaluatedAt": 1792810304539,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "4 of 6 still to do: E1.T3, E2.T1, E2.T2, E2.T3."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": true,
+        "detail": "Passed for 632617fd, recorded by human:founder."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 2 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor 632617fd."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "632617fd07721f503bf9d8245bc8899924f59e2a",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792808514779
+    }
+  ]
+}

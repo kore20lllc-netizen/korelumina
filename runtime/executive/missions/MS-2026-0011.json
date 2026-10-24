@@ -1,0 +1,378 @@
+{
+  "id": "MS-2026-0011",
+  "title": "Every workspace matches the Knowledge Operations reference design",
+  "description": "Owner direction 2026-10-21: with the Chief Agent active, resume the Lumina Design System Roadmap Phase VIII workspace migration, with Knowledge Operations as the reference design. Measured today: Knowledge Operations uses the shared Lumina workspace primitives 714 times, Genesis 167, the Executive Office 45, Runtime Diagnostics 14; Dashboard, AI, Developer, Designer, Imports, Repo Audit, Settings, Admin, In-House Dev and Pricing use none. The migration follows the roadmap order. WF-100 still names Runtime Operations as the canonical reference; that changes only with owner acceptance.",
+  "objective": "Every workspace is built from the Knowledge Operations structure and primitives, owner-approved and protected by a certified UI contract.",
+  "objectiveId": null,
+  "type": "engineering",
+  "priority": "normal",
+  "owner": "chief-agent",
+  "proposedBy": {
+    "id": "human:founder",
+    "type": "human"
+  },
+  "participants": [],
+  "relatedRepositories": [
+    "kore20lllc-netizen/korelumina"
+  ],
+  "relatedServices": [],
+  "requiredApprovals": [],
+  "risks": [
+    "UI is the contract: no workspace changes on screen without the owner's visual approval, and the Knowledge Operations and Executive Office contracts must stay intact.",
+    "A rebuild must keep every action and data source working; behavior is checked before and after.",
+    "Workspaces are migrated one at a time, each in its own commits, so any one can be reverted."
+  ],
+  "plan": {
+    "epics": [
+      {
+        "id": "E1",
+        "title": "Reference",
+        "tasks": [
+          {
+            "id": "E1.T1",
+            "title": "WF-100 records Knowledge Operations as the reference design",
+            "acceptanceCriteria": [
+              "The owner accepts the change to WF-100",
+              "The Lumina Design System Roadmap Phase VIII names the same reference"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792630475271
+          }
+        ]
+      },
+      {
+        "id": "E2",
+        "title": "Admin workspaces",
+        "tasks": [
+          {
+            "id": "E2.T1",
+            "title": "Repo Audit matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792630479987
+          },
+          {
+            "id": "E2.T2",
+            "title": "Runtime Operations matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "done",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792630494119
+          },
+          {
+            "id": "E2.T3",
+            "title": "In-House Dev matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645575670
+          }
+        ]
+      },
+      {
+        "id": "E3",
+        "title": "Customer workspaces",
+        "tasks": [
+          {
+            "id": "E3.T1",
+            "title": "Dashboard (Projects) matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645583290
+          },
+          {
+            "id": "E3.T2",
+            "title": "Developer Workspace matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645590339
+          },
+          {
+            "id": "E3.T3",
+            "title": "Designer Workspace matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645592497
+          },
+          {
+            "id": "E3.T4",
+            "title": "AI Workspace matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645599297
+          },
+          {
+            "id": "E3.T5",
+            "title": "Admin Workspace matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645606438
+          },
+          {
+            "id": "E3.T6",
+            "title": "Settings matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645613421
+          },
+          {
+            "id": "E3.T7",
+            "title": "Templates matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645619893
+          },
+          {
+            "id": "E3.T8",
+            "title": "Imports matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo",
+            "updatedBy": "human:founder",
+            "updatedAt": 1792645627895
+          },
+          {
+            "id": "E3.T9",
+            "title": "Pricing matches the reference design",
+            "acceptanceCriteria": [
+              "Composed from the Knowledge Operations structure: WorkspaceShell, workspace header, ExecutiveRibbon, LuminaSectionNavigator and flagship panels and cards",
+              "Every existing action and data source still works; nothing is mocked",
+              "The owner approves it visually",
+              "Its UI contract is certified and npm run build verifies it"
+            ],
+            "status": "todo"
+          }
+        ]
+      }
+    ],
+    "validationPlan": [
+      "npm run build passes, with every certified UI contract",
+      "npm run test:runtime passes",
+      "The owner approves each workspace visually"
+    ],
+    "requiredDocuments": [
+      "docs/architecture/workspace-framework/WF-100_EXECUTIVE_WORKSPACE_STANDARD.md",
+      "docs/architecture/LUMINA_DESIGN_SYSTEM_ROADMAP.md"
+    ]
+  },
+  "state": "executing",
+  "blockedFrom": null,
+  "linkedCommits": [
+    {
+      "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "subject": "Runtime Operations in the Knowledge Operations design, certified",
+      "committedAt": 1792641573000
+    },
+    {
+      "sha": "bfeb5684a2e7eef883a13c1db71f74f2ff636503",
+      "subject": "Projects dashboard in the Knowledge Operations design, certified",
+      "committedAt": 1792791116000
+    },
+    {
+      "sha": "8251973b6ba4ed44dc939c9e58200f23ced9582f",
+      "subject": "AI drafts: Claude provider, focused context, all-or-nothing apply, safe revert",
+      "committedAt": 1792792790000
+    },
+    {
+      "sha": "de1828f6d2bdb252a31ac8fe2004cfb105b09fa4",
+      "subject": "F-47: per-project authorization on files, process, logs, status and live events",
+      "committedAt": 1792798922000
+    },
+    {
+      "sha": "24142538205433797706edfc1af4c029bd23bac8",
+      "subject": "Developer workspace in the Knowledge Operations design, with real AI Assist, certified",
+      "committedAt": 1792800797000
+    },
+    {
+      "sha": "fe4ca896900c395e676c33607546795bdd7e43d1",
+      "subject": "Transform App -> Website, real: analysis, AI plan and build, reviewed draft, certified",
+      "committedAt": 1792803260000
+    },
+    {
+      "sha": "fb7b7e18e11a3db26dfb2268ae8d734931b5db38",
+      "subject": "F-50: preparing a project no longer freezes Runtime",
+      "committedAt": 1792809988000
+    }
+  ],
+  "recoveryAnchor": "fb7b7e18e11a3db26dfb2268ae8d734931b5db38",
+  "producedKnowledge": [
+    "LR-2026-0042",
+    "LR-2026-0056",
+    "LR-2026-0057",
+    "LR-2026-0058",
+    "LR-2026-0059",
+    "LR-2026-0060",
+    "LR-2026-0062"
+  ],
+  "history": [
+    {
+      "from": null,
+      "to": "draft",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792620659738
+    },
+    {
+      "from": "draft",
+      "to": "planned",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792620659738
+    },
+    {
+      "from": "planned",
+      "to": "awaiting_approval",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630424363
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "actor": {
+        "id": "human:founder",
+        "type": "human"
+      },
+      "at": 1792630427806
+    },
+    {
+      "from": "approved",
+      "to": "executing",
+      "actor": {
+        "id": "runtime",
+        "type": "system"
+      },
+      "at": 1792641716146,
+      "reason": "First linked commit 1766f80b: Runtime Operations in the Knowledge Operations design, certified"
+    }
+  ],
+  "createdAt": 1792620659738,
+  "updatedAt": 1792810304473,
+  "validation": {
+    "evaluatedAt": 1792810304473,
+    "checks": [
+      {
+        "id": "tasks",
+        "label": "Every planned task is done or dropped",
+        "passed": false,
+        "detail": "10 of 13 still to do: E2.T3, E3.T1, E3.T2, E3.T3, E3.T4, E3.T5, E3.T6, E3.T7, E3.T8, E3.T9."
+      },
+      {
+        "id": "build",
+        "label": "The last linked commit passed npm run build",
+        "passed": false,
+        "detail": "No build verification for fb7b7e18."
+      },
+      {
+        "id": "approvals",
+        "label": "No linked approval is pending",
+        "passed": true,
+        "detail": "None pending."
+      },
+      {
+        "id": "documents",
+        "label": "Required documents are committed",
+        "passed": true,
+        "detail": "All 2 committed."
+      },
+      {
+        "id": "recovery-anchor",
+        "label": "A recovery anchor is recorded",
+        "passed": true,
+        "detail": "Recovery anchor fb7b7e18."
+      }
+    ]
+  },
+  "verifications": [
+    {
+      "check": "build",
+      "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792641853067
+    },
+    {
+      "check": "build",
+      "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792641963441
+    },
+    {
+      "check": "build",
+      "sha": "1766f80bfda1f601775fd82b81104eafe6be89b0",
+      "result": "passed",
+      "actor": "human:founder",
+      "at": 1792641965736
+    }
+  ]
+}
