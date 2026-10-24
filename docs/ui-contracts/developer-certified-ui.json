@@ -32,8 +32,8 @@
       "elementCount": 8
     },
     "apps/lumina-builder/src/components/workspaces/developer/layout/DeveloperCommandDeck.tsx": {
-      "sha256": "8bd7e6a82bd7abb143481f3ba9047a93857856dc6c25e5dda9c64b2eb281338e",
-      "elementCount": 37
+      "sha256": "6a1f0d3c0fca85fd62f282e48f4c57109e5b4dcbea5d3be43c71d28b991f79b0",
+      "elementCount": 39
     },
     "apps/lumina-builder/src/components/workspaces/developer/sections/AIAssistPane.tsx": {
       "sha256": "9a0199d0a16d1152f628d684db21ee9f6481d64864240e8736ae7e3ad1b3a9da",

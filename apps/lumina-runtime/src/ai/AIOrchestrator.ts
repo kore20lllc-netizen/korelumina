@@ -1,6 +1,11 @@
 import { AnthropicProvider } from "./providers/AnthropicProvider.js";
 import { MockProvider } from "./providers/MockProvider.js";
 import { OpenAIProvider } from "./providers/OpenAIProvider.js";
+import {
+  AnthropicTextGenerationClient,
+  OpenAITextGenerationClient,
+  type TextGenerationClient,
+} from "./model/index.js";
 import type {
   AIProvider,
   GenerateDraftInput,
@@ -75,4 +80,22 @@ export async function generateAIDraft(
   input: GenerateDraftInput,
 ): Promise<GenerateDraftResult> {
   return resolveProvider().generateDraft(input);
+}
+
+/*
+ * MS-2026-0011: the configured text model itself, for features that need
+ * more than one draft (Transform App -> Website). Null when only the
+ * rule-based provider is set or the model is not ready, so callers say so
+ * instead of pretending.
+ */
+export function resolveTextModel(
+  env: NodeJS.ProcessEnv = process.env,
+): { client: TextGenerationClient; provider: AIProviderName; model: string | null } | null {
+  const status = aiProviderStatus(env);
+  if (!status.ready || !status.provider || status.provider === "rule-based") return null;
+  const client =
+    status.provider === "anthropic"
+      ? new AnthropicTextGenerationClient({ maxTokens: 16000 })
+      : new OpenAITextGenerationClient();
+  return { client, provider: status.provider, model: status.model };
 }

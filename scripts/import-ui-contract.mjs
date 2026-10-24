@@ -185,7 +185,7 @@ if (WRITE_MODE) {
   }
 
   if (failures.length > 0) {
-    console.error("\nFAIL: CERTIFIED RUNTIME OPERATIONS UI CONTRACT REGRESSION\n");
+    console.error("\nFAIL: CERTIFIED IMPORT WINDOW UI CONTRACT REGRESSION\n");
     for (const failure of failures) console.error(`- ${failure}`);
     console.error(
       [

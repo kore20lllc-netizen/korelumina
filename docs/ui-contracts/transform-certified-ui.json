@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Transform wizard Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Transform wizard dialog, stepper and header",
+      "analysis, plan, build progress, draft review and done screens",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved Transform App -> Website (2026-10-23)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/transform/TransformModal.tsx": {
+      "sha256": "a6d3d5fd879396c8a524def6a7a34f9dd4125d14acd8369a6cac93aa6b436b8d",
+      "elementCount": 26
+    },
+    "apps/lumina-builder/src/components/transform/sections/TransformDraftView.tsx": {
+      "sha256": "c412991ee0a562109cbfe7016131953c3495a1dda0921f7d1aae78a2ce409b38",
+      "elementCount": 15
+    },
+    "apps/lumina-builder/src/components/transform/sections/TransformStages.tsx": {
+      "sha256": "85925ba49b83042be04d82418499ba0a003ba9ccb42be891a8db35d29485f5bc",
+      "elementCount": 93
+    }
+  }
+}

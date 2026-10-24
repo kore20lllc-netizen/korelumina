@@ -151,7 +151,7 @@ export function setProviderConfiguration(patch: Partial<ProviderConfig>) {
  * Feature flags
  * ============================================================ */
 
-const KNOWN_FLAGS: FeatureFlag[] = ["transform_to_website", "transform_to_website.real_engine"];
+const KNOWN_FLAGS: FeatureFlag[] = ["transform_to_website"];
 
 export function listFeatureFlags() {
   return KNOWN_FLAGS.map((f) => ({ flag: f, enabled: isFeatureEnabled(f) }));

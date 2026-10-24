@@ -1,4 +1,4 @@
-import { Code2, RotateCcw, RotateCw, Save, Search } from "lucide-react";
+import { Code2, RotateCcw, RotateCw, Save, Search, Wand2 } from "lucide-react";
 
 import { ExecutivePremiumIcon } from "@/components/design-system/executive/ExecutivePremiumIcon";
 import { LuminaAIMark } from "@/components/ai/LuminaAIMark";
@@ -62,12 +62,14 @@ export function DeveloperCommandDeck({
   ai,
   runtime,
   onCommand,
+  onTransform,
 }: {
   projectName: string | null;
   files: DeveloperFiles;
   ai: AIAssist;
   runtime: RuntimeControl;
   onCommand: () => void;
+  onTransform: (() => void) | null;
 }) {
   const dirty = files.active ? files.isDirty(files.active) : false;
   const aiReading =
@@ -120,6 +122,11 @@ export function DeveloperCommandDeck({
             <button type="button" onClick={() => void runtime.restart()} disabled={!files.projectId || runtime.restarting} className={pillButton("active")}>
               <RotateCw className={cn("h-3 w-3", runtime.restarting && "animate-spin")} /> {runtime.restarting ? "Restarting" : "Restart server"}
             </button>
+            {onTransform ? (
+              <button type="button" onClick={onTransform} disabled={!files.projectId} className={pillButton("warning")}>
+                <Wand2 className="h-3 w-3" /> Transform to website
+              </button>
+            ) : null}
             <button type="button" onClick={onCommand} className={quietButton}>
               <Search className="h-3 w-3" /> Command
             </button>

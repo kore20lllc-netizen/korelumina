@@ -112,6 +112,7 @@ import { registerRevertDraftRoute } from "./routes/revertDraft.js";
 import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerAIStatusRoute } from "./routes/aiStatus.js";
+import { registerWebsiteTransformRoutes } from "./routes/websiteTransform.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import {
   KnowledgeOperationsService,
@@ -1689,6 +1690,8 @@ registerRevertDraftRoute(app);
 registerCreateDraftRoute(app);
 registerApplyDraftRoute(app);
 registerAIStatusRoute(app);
+/* MS-2026-0011: Transform App -> Website. */
+registerWebsiteTransformRoutes(app);
 
 registerKnowledgeOperationsRoutes(
   app,

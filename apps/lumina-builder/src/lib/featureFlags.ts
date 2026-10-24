@@ -7,14 +7,11 @@
  * Or globally via window.__FLAGS__ (e.g. set by a future server bootstrap).
  */
 
-export type FeatureFlag =
-  | "transform_to_website"
-  | "transform_to_website.real_engine";
+export type FeatureFlag = "transform_to_website";
 
+/* MS-2026-0011: Transform runs on Runtime's real engine; the separate "real engine" flag is gone. */
 const DEFAULTS: Record<FeatureFlag, boolean> = {
   transform_to_website: true,
-  // Real planner/diff/apply engine — off until backend lands.
-  "transform_to_website.real_engine": false,
 };
 
 declare global {
