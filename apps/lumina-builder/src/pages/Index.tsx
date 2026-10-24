@@ -12,7 +12,8 @@ import { EntryView } from "@/components/workspaces/EntryView";
 import { ProjectsWorkspace } from "@/components/workspaces/projects/ProjectsWorkspace";
 import { AIWorkspace } from "@/components/workspaces/AIWorkspace";
 import { AuthView } from "@/components/workspaces/AuthView";
-import { SettingsView } from "@/components/workspaces/SettingsView";
+import { SettingsWorkspace } from "@/components/workspaces/settings/SettingsWorkspace";
+import { captureConnectionReturn } from "@/services/runtime/connections";
 import { PricingView } from "@/components/workspaces/PricingView";
 import { repoAuditAccess } from "@/services/repoAuditAccess";
 import { InHouseDevWorkspace } from "@/components/workspaces/inhouse/InHouseDevWorkspace";
@@ -140,6 +141,11 @@ function Router() {
   const canOpenInHouse = getCapabilities(getCurrentRole()).inhouseDevDashboard;
   const blocked = (view === "repo-audit" && !canOpenRepoAudit) || (view === "inhouse-dev" && !canOpenInHouse);
 
+  /* MS-2026-0016: back from GitHub, Supabase or Vercel: open Settings on Connected accounts. */
+  useEffect(() => {
+    if (captureConnectionReturn()) setView("settings");
+  }, [setView]);
+
   useEffect(() => {
     if (!authed && !isPublic) {
       writeIntended(view);
@@ -226,7 +232,7 @@ function Router() {
   if (view === "settings") {
     return (
       <Shell blobs="ambient">
-        <SettingsView />
+        <SettingsWorkspace />
       </Shell>
     );
   }

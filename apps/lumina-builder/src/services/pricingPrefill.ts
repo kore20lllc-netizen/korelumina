@@ -1,4 +1,4 @@
-/** Lightweight session hint so SettingsView can prefill the Pricing screen
+/** Lightweight session hint so Settings can prefill the Pricing screen
  *  with a plan recommendation and seat context. */
 const KEY = "korelumina:pricingPrefill";
 

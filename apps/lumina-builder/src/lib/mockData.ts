@@ -31,19 +31,4 @@ export const mockTemplates: Template[] = [
   { id: "t6", name: "Helix CRM",        category: "Web App",   tags: ["crm", "pipelines"],            description: "Pipeline-first CRM template.",       accent: "violet" },
 ];
 
-export interface Integration {
-  id: string;
-  name: string;
-  description: string;
-  connected: boolean;
-}
-
-export const mockIntegrations: Integration[] = [
-  { id: "github",   name: "GitHub",   description: "Sync repositories and pull requests.", connected: true  },
-  { id: "supabase", name: "Supabase", description: "Database, auth, storage.",              connected: false },
-  { id: "vercel",   name: "Vercel",   description: "Deploy and preview environments.",      connected: true  },
-  { id: "stripe",   name: "Stripe",   description: "Subscriptions and one-time payments.",  connected: false },
-  { id: "openai",   name: "OpenAI",   description: "Models and embeddings.",                 connected: true  },
-];
-
 export const mockUsage = { plan: "free" as const, aiExecutions: 2, aiLimit: 5 };
