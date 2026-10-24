@@ -27,16 +27,16 @@
   "generatedFrom": "owner visually approved the Projects dashboard (2026-10-23)",
   "fingerprints": {
     "apps/lumina-builder/src/components/workspaces/projects/ProjectsWorkspace.tsx": {
-      "sha256": "8b65fb126e8a847b07719b82eaeb4e07d6405875e2b55cca10fcac1ea8309710",
-      "elementCount": 14
+      "sha256": "6d1fa882bfe8d96bcfff309ffed90c6480dca2c124a673aac90517362fc8ea2e",
+      "elementCount": 15
     },
     "apps/lumina-builder/src/components/workspaces/projects/layout/ProjectsCommandDeck.tsx": {
       "sha256": "6018fdbe34e7248aa266ec810389ceb7c0d275705c324ab1c53c276f30563781",
       "elementCount": 24
     },
     "apps/lumina-builder/src/components/workspaces/projects/sections/ProjectsSection.tsx": {
-      "sha256": "01623666ae03f7044998bff66f3f3f6eb44c7f36a4def2248618e966b1a661ae",
-      "elementCount": 44
+      "sha256": "2cf8960b2c3f2df0bb5708081cb7c8eadfbade3e4c334554b2fb642d3075b0f0",
+      "elementCount": 45
     }
   }
 }

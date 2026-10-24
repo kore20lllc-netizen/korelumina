@@ -98,6 +98,9 @@ function ProjectCard({ row, view }: { row: ProjectRow; view: ProjectsView }) {
                 Audit
               </button>
             ) : null}
+            <button type="button" onClick={() => view.setExporting({ id: row.id, name: row.name })} className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${tonePill.warning}`}>
+              Export
+            </button>
             <button type="button" onClick={() => view.setDeleting({ id: row.id, name: row.name })} className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/50 hover:border-rose-300/30 hover:text-rose-200">
               Delete
             </button>

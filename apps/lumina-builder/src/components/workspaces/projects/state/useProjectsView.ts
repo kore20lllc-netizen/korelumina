@@ -45,6 +45,7 @@ export function useProjectsView() {
   const [origin, setOrigin] = useState<OriginFilter>("all");
   const [sort, setSort] = useState<SortOrder>("recent");
   const [deleting, setDeleting] = useState<{ id: string; name: string } | null>(null);
+  const [exporting, setExporting] = useState<{ id: string; name: string } | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -149,6 +150,8 @@ export function useProjectsView() {
     open,
     deleting,
     setDeleting,
+    exporting,
+    setExporting,
     deleteError,
     confirmDelete,
     reload: () => setRound((value) => value + 1),

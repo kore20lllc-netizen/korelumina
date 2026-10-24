@@ -2,7 +2,7 @@
 
 ## Authority
 
-The visually approved Developer workspace is the contract. The owner approved it on 2026-10-23, rebuilt in the Knowledge Operations design (MS-2026-0011): the command deck with its server, open-file and AI readings and its Transform to website action (recertified 2026-10-23); the explorer; the editor with its status bar; and the right-hand panel with the project preview, the server logs and AI Assist. Runtime's files, dev server, logs and AI drafts conform to it; they do not reshape it.
+The visually approved Developer workspace is the contract. The owner approved it on 2026-10-23, rebuilt in the Knowledge Operations design (MS-2026-0011): the command deck with its server, open-file and AI readings its Transform to website and Export actions (recertified 2026-10-23); the explorer; the editor with its status bar; and the right-hand panel with the project preview, the server logs and AI Assist. Runtime's files, dev server, logs and AI drafts conform to it; they do not reshape it.
 
 It shows only what is real. AI Assist drafts changes with the model Runtime is configured for, shows every file as a diff and writes nothing until applied; without a model it says its drafts are rule-based. Build, which only announced a build, is replaced by restarting the dev server. The status bar reports the editor's own syntax findings, never a blanket "no errors".
 

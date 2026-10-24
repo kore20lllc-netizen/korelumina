@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "contract": "KoreLumina Export window Certified UI",
+  "policy": {
+    "uiIsContract": true,
+    "certifiedPresentationImmutable": true,
+    "backendMustConformToUi": true,
+    "allowedWithoutRecertification": [
+      "data expressions",
+      "Runtime reads and writes",
+      "service wiring",
+      "callbacks",
+      "state management that does not change certified presentation topology",
+      "text values supplied by runtime"
+    ],
+    "requiresVisualRecertification": [
+      "JSX hierarchy",
+      "Lumina primitive substitution",
+      "className changes",
+      "layout and grid arrangement",
+      "panel/card geometry",
+      "Take your project window: download section, left-out keys notice, GitHub notice",
+      "conditional mounting of sections"
+    ]
+  },
+  "generatedFrom": "owner visually approved the Export window (2026-10-23)",
+  "fingerprints": {
+    "apps/lumina-builder/src/components/export/ExportDialog.tsx": {
+      "sha256": "5d903a0fa67db87ca5f0a47dac3c793d118b8658b8e465acc40b8180f1f72f04",
+      "elementCount": 28
+    }
+  }
+}

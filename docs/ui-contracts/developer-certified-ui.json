@@ -28,12 +28,12 @@
   "generatedFrom": "owner visually approved the Developer workspace (2026-10-23)",
   "fingerprints": {
     "apps/lumina-builder/src/components/workspaces/developer/DeveloperWorkspace.tsx": {
-      "sha256": "53df5f977c7fdb52b007f1eda2aac31c9c217dc88d2aac2dfeb96bed65838fda",
-      "elementCount": 8
+      "sha256": "e0082af41b5fd7f4b796f5dfe7a2c9903976178f04fb5523841ce6a6ac0c0732",
+      "elementCount": 9
     },
     "apps/lumina-builder/src/components/workspaces/developer/layout/DeveloperCommandDeck.tsx": {
-      "sha256": "6a1f0d3c0fca85fd62f282e48f4c57109e5b4dcbea5d3be43c71d28b991f79b0",
-      "elementCount": 39
+      "sha256": "2819c0efd314d46c03d4d7d834b669eed81f8ba5385918fe511419b84a1fcd9f",
+      "elementCount": 41
     },
     "apps/lumina-builder/src/components/workspaces/developer/sections/AIAssistPane.tsx": {
       "sha256": "9a0199d0a16d1152f628d684db21ee9f6481d64864240e8736ae7e3ad1b3a9da",

@@ -1,4 +1,4 @@
-import { Code2, RotateCcw, RotateCw, Save, Search, Wand2 } from "lucide-react";
+import { Code2, FolderDown, RotateCcw, RotateCw, Save, Search, Wand2 } from "lucide-react";
 
 import { ExecutivePremiumIcon } from "@/components/design-system/executive/ExecutivePremiumIcon";
 import { LuminaAIMark } from "@/components/ai/LuminaAIMark";
@@ -63,6 +63,7 @@ export function DeveloperCommandDeck({
   runtime,
   onCommand,
   onTransform,
+  onExport,
 }: {
   projectName: string | null;
   files: DeveloperFiles;
@@ -70,6 +71,7 @@ export function DeveloperCommandDeck({
   runtime: RuntimeControl;
   onCommand: () => void;
   onTransform: (() => void) | null;
+  onExport: () => void;
 }) {
   const dirty = files.active ? files.isDirty(files.active) : false;
   const aiReading =
@@ -127,6 +129,9 @@ export function DeveloperCommandDeck({
                 <Wand2 className="h-3 w-3" /> Transform to website
               </button>
             ) : null}
+            <button type="button" onClick={onExport} disabled={!files.projectId} className={quietButton}>
+              <FolderDown className="h-3 w-3" /> Export
+            </button>
             <button type="button" onClick={onCommand} className={quietButton}>
               <Search className="h-3 w-3" /> Command
             </button>

@@ -114,6 +114,7 @@ import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerAIStatusRoute } from "./routes/aiStatus.js";
 import { registerWebsiteTransformRoutes } from "./routes/websiteTransform.js";
 import { registerConnectionRoutes } from "./routes/connections.js";
+import { registerProjectExportRoutes } from "./routes/projectExport.js";
 import { connectionKeyFromEnvironment } from "./connections/ConnectionCrypto.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import {
@@ -1696,6 +1697,8 @@ registerAIStatusRoute(app);
 registerWebsiteTransformRoutes(app);
 /* MS-2026-0016 (ADR-0047): the customer's connected GitHub, Supabase and Vercel accounts. */
 registerConnectionRoutes(app);
+/* MS-2026-0017 (ADR-0047): download a project. */
+registerProjectExportRoutes(app);
 
 registerKnowledgeOperationsRoutes(
   app,

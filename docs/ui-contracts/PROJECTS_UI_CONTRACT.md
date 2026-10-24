@@ -2,7 +2,7 @@
 
 ## Authority
 
-The visually approved Projects dashboard is the contract. The owner approved it on 2026-10-23, rebuilt in the Knowledge Operations design (WF-100): the command deck, the project cards with their search, sort and origin filters, and the delete confirmation. Runtime's projects, runtime states, audits and repairs conform to it; they do not reshape it.
+The visually approved Projects dashboard is the contract. The owner approved it on 2026-10-23, rebuilt in the Knowledge Operations design (WF-100): the command deck, the project cards with their search, sort and origin filters, their Export action (recertified 2026-10-23), and the delete confirmation. Runtime's projects, runtime states, audits and repairs conform to it; they do not reshape it.
 
 It shows only what Runtime records. Actions that do not exist yet (duplicate, rename) are not offered.
 

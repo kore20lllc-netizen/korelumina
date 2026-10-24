@@ -9,6 +9,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+import { ExportDialog } from "@/components/export/ExportDialog";
+
 import { tonePill, toneText } from "../executive/shared/ExecutiveSection";
 import { ProjectsCommandDeck } from "./layout/ProjectsCommandDeck";
 import { ProjectsSection } from "./sections/ProjectsSection";
@@ -30,6 +32,8 @@ export function ProjectsWorkspace() {
       <main aria-label="Projects canvas" className="relative z-10 grid gap-6 px-6 pb-6 pt-6">
         <ProjectsSection view={view} />
       </main>
+
+      <ExportDialog project={view.exporting} onClose={() => view.setExporting(null)} />
 
       <AlertDialog open={Boolean(view.deleting)} onOpenChange={(open) => !open && view.setDeleting(null)}>
         <AlertDialogContent className="border border-blue-400/60 bg-slate-950/95 text-white">
