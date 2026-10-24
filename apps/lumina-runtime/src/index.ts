@@ -113,6 +113,8 @@ import { registerCreateDraftRoute } from "./routes/createDraft.js";
 import { registerApplyDraftRoute } from "./routes/applyDraft.js";
 import { registerAIStatusRoute } from "./routes/aiStatus.js";
 import { registerWebsiteTransformRoutes } from "./routes/websiteTransform.js";
+import { registerConnectionRoutes } from "./routes/connections.js";
+import { connectionKeyFromEnvironment } from "./connections/ConnectionCrypto.js";
 import { registerKnowledgeOperationsRoutes } from "./routes/knowledge/registerKnowledgeOperationsRoutes.js";
 import {
   KnowledgeOperationsService,
@@ -1692,6 +1694,8 @@ registerApplyDraftRoute(app);
 registerAIStatusRoute(app);
 /* MS-2026-0011: Transform App -> Website. */
 registerWebsiteTransformRoutes(app);
+/* MS-2026-0016 (ADR-0047): the customer's connected GitHub, Supabase and Vercel accounts. */
+registerConnectionRoutes(app);
 
 registerKnowledgeOperationsRoutes(
   app,
@@ -2657,6 +2661,11 @@ Promise<void> {
           stripeWebhookSecret
             ? "[lumina-runtime] billing: Stripe webhook configured"
             : "[lumina-runtime] billing: Stripe webhook not configured",
+        );
+        console.log(
+          connectionKeyFromEnvironment()
+            ? "[lumina-runtime] connected accounts: store ready"
+            : "[lumina-runtime] connected accounts: off (KORELUMINA_CONNECTIONS_KEY is not set to 32 base64 bytes)",
         );
       },
     );
