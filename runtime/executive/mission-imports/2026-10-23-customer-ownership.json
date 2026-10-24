@@ -1,0 +1,386 @@
+{
+  "version": "mission-import:v1",
+  "ticket": "OWN-0",
+  "decision": "Owner decisions of 2026-10-23 (ADR-0047, accepted): customers take their projects, with everything KoreLumina changed, to accounts they own. Export by download (every plan), a new private GitHub repository, or a pull request on the original (Pro and above). Bring your own Supabase: migrations, edge functions and their secrets applied to the customer's own project, refusing a target that already has tables; data does not move. Bring your own deployment, Vercel first. A customer's provider token is used for one operation and never stored, logged or returned. 'Full website view' means both the added website pages (Transform, delivered) and desktop-ready versions of the app's own screens. Amended the same day: one guided Take ownership flow creates (or reuses) the customer's private GitHub repository, a new Supabase project in their organisation and a Vercel project linked to that repository, wired together, so the customer runs everything on their own accounts and can leave KoreLumina at any time. Amended again the same day: KoreLumina never creates or holds infrastructure on its own accounts. A customer with no accounts is guided to create their own GitHub, Supabase and Vercel accounts and tokens; everything is customer-owned from the first minute, as Lovable does it. Amended a third time the same day, for customers who are not technical: accounts are connected with Continue with GitHub, Supabase and Vercel (OAuth apps registered by KoreLumina), creating the account in the same step if the customer has none; connection tokens are stored encrypted in Runtime, used only for actions the customer starts, logged, and revocable by the customer at any time. Customers who already have accounts sign in and choose new or existing resources. Pasting a one-use token stays as a fallback.",
+  "source": "The owner's conversation with Claude on 2026-10-23, after asking whether an app built in Lovable can be turned into a full website and moved to the owner's own GitHub, Supabase and Vercel.",
+  "reviewedAt": "2026-10-23",
+  "missions": [
+    {
+      "sourceTicket": "OWN-CONNECT",
+      "title": "Connected accounts: Continue with GitHub, Supabase and Vercel",
+      "objective": "A customer connects their own GitHub, Supabase and Vercel accounts in one click each (creating an account in the same step if they have none), and KoreLumina keeps those permissions safely: encrypted, used only for actions the customer starts, every use recorded, revocable at any time.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "Connection tokens give access to customers' code, databases and deployments: they live only in Runtime, encrypted with a key in Runtime's environment, never reach the browser, logs, projects or responses.",
+        "Registering KoreLumina's apps with GitHub, Supabase and Vercel is done by the owner on the providers' sites.",
+        "A revoked or expired connection must show as disconnected and never be retried silently.",
+        "Security review is mandatory before the first live connection (ENGINEERING_SPEC_V1)."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Secure connection store",
+            "tasks": [
+              {
+                "title": "Store connection tokens encrypted in Runtime",
+                "acceptanceCriteria": [
+                  "Tokens are encrypted at rest with a key from Runtime's environment; without the key Runtime refuses to store any",
+                  "Tokens never appear in logs, responses, the browser, project files or metadata",
+                  "Refresh tokens are used to renew access; a refusal marks the connection disconnected"
+                ]
+              },
+              {
+                "title": "Record every use and allow disconnecting",
+                "acceptanceCriteria": [
+                  "Each use records who, which project, which action and when",
+                  "Disconnect deletes the stored tokens and asks the provider to revoke them where it can"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Providers",
+            "tasks": [
+              {
+                "title": "Continue with GitHub (GitHub App)",
+                "acceptanceCriteria": [
+                  "Installed only on the repositories the customer picks, or allowed to create a new private one",
+                  "A customer without a GitHub account can create one in the same step"
+                ]
+              },
+              {
+                "title": "Continue with Supabase (OAuth app)",
+                "acceptanceCriteria": [
+                  "Lists the customer's organisations and projects and can create a project in one of them"
+                ]
+              },
+              {
+                "title": "Continue with Vercel (integration)",
+                "acceptanceCriteria": [
+                  "Lists the customer's personal account and teams and can create projects there"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Interface",
+            "tasks": [
+              {
+                "title": "Connected accounts in Settings",
+                "acceptanceCriteria": [
+                  "Shows each connected account, what KoreLumina may do with it, its recent uses, and Disconnect",
+                  "The owner approves it visually and its UI contract is certified"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sourceTicket": "OWN-EXPORT",
+      "title": "Export: download, a new GitHub repository, or a pull request",
+      "objective": "Whoever manages a project can take it out of KoreLumina with everything KoreLumina changed: as a download, as a new private GitHub repository, or as a pull request on the repository it was imported from.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "The customer's GitHub connection is used only for actions they start, through the Connected accounts store; a pasted token is used once and never kept.",
+        "A push must never target the default branch and never force-push.",
+        "The first live push to GitHub happens only on the owner's own test account, with the owner's approval."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Download",
+            "tasks": [
+              {
+                "title": "Download the project as a zip",
+                "acceptanceCriteria": [
+                  "The zip holds the project as it is now in KoreLumina",
+                  "node_modules, build output, .git and every .env file are left out",
+                  "Available on every plan to whoever manages the project, enforced in Runtime"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "GitHub",
+            "tasks": [
+              {
+                "title": "Export to a new private GitHub repository",
+                "acceptanceCriteria": [
+                  "Runtime creates a private repository under the token's account or a chosen organisation and pushes the project as one commit",
+                  "The token is used once and never stored, logged or returned",
+                  "Pro and above, enforced in Runtime"
+                ]
+              },
+              {
+                "title": "Open a pull request on the original repository",
+                "acceptanceCriteria": [
+                  "For projects imported from GitHub, the changes since import are pushed to a korelumina/ branch and a pull request is opened",
+                  "Never pushes to the default branch, never force-pushes",
+                  "The customer sees exactly which files change before approving"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Interface",
+            "tasks": [
+              {
+                "title": "Export window in the Knowledge Operations design",
+                "acceptanceCriteria": [
+                  "Reachable from Projects and Developer",
+                  "Shows real progress and the resulting repository or pull request link",
+                  "The owner approves it visually and its UI contract is certified"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sourceTicket": "OWN-DESKTOP",
+      "title": "Desktop-ready screens: an AI-built app as a full website",
+      "objective": "Transform App -> Website gains a second option: the AI redesigns the layout of the app's own screens for desktop, without changing behaviour, data access or text, each screen as a reviewed draft with undo.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "A layout change must not alter what a screen does; the draft is limited to presentation and reviewed before it is applied.",
+        "Large screens may exceed what one model answer can rewrite; such screens are reported, not half-changed."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Screens",
+            "tasks": [
+              {
+                "title": "List the app's screens",
+                "acceptanceCriteria": [
+                  "Runtime lists each route and the file that renders it, for Next.js and React Router",
+                  "The customer chooses which screens to make desktop-ready"
+                ]
+              },
+              {
+                "title": "Draft desktop layouts",
+                "acceptanceCriteria": [
+                  "Each chosen screen gets a draft using the app's own styling system and breakpoints",
+                  "Behaviour, data access and text are unchanged; a draft that changes them is refused",
+                  "Applied all or nothing, with undo"
+                ]
+              },
+              {
+                "title": "Desktop option in the Transform wizard",
+                "acceptanceCriteria": [
+                  "The wizard offers website pages, desktop-ready screens, or both",
+                  "The owner approves it visually and the Transform UI contract is recertified"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sourceTicket": "OWN-SUPABASE",
+      "title": "Bring your own Supabase",
+      "objective": "A customer moves a project's backend to their own Supabase project: its migrations, edge functions and function secrets are applied there after they read and approve every step, and the app is pointed at it through environment variables.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "SQL cannot be undone like a file: a target whose public schema already has tables is refused, each migration runs in its own transaction, and the run stops at the first failure and says how far it got.",
+        "The Supabase connection is used only for steps the customer starts; function secrets the customer types are passed to Supabase and never kept by KoreLumina; a service-role key is never recorded.",
+        "Data is not moved between projects.",
+        "The first live run happens only on the owner's own test Supabase project, with the owner's approval."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Analyze",
+            "tasks": [
+              {
+                "title": "Read what the app needs from Supabase",
+                "acceptanceCriteria": [
+                  "Lists the environment variables the app reads for Supabase, the migrations in order, the edge functions, and the secrets the functions read",
+                  "Read-only"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Apply",
+            "tasks": [
+              {
+                "title": "Create a Supabase project on the customer's account",
+                "acceptanceCriteria": [
+                  "Creates a new project in the customer's chosen organisation and region through the Management API, or uses an existing empty project",
+                  "A new project's database password is generated, shown once for the customer to save, and never stored, logged or returned again"
+                ]
+              },
+              {
+                "title": "Apply migrations, functions and secrets to the customer's project",
+                "acceptanceCriteria": [
+                  "Every statement and function is shown before anything runs, and runs only after explicit approval",
+                  "Refuses a target with existing public tables",
+                  "Stops at the first failure and reports exactly what ran"
+                ]
+              },
+              {
+                "title": "Point the app at the new project",
+                "acceptanceCriteria": [
+                  "The project URL and anon key go into .env.example and the deployment's environment, never into source code"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Interface",
+            "tasks": [
+              {
+                "title": "Supabase window in the Knowledge Operations design",
+                "acceptanceCriteria": [
+                  "Shows the plan, real progress and the result",
+                  "The owner approves it visually and its UI contract is certified"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sourceTicket": "OWN-DEPLOY",
+      "title": "Bring your own deployment: Vercel",
+      "objective": "A customer deploys a project to their own Vercel account from KoreLumina, with its environment variables set, real build progress and logs, the live URL, and rollback to the previous deployment.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "The Vercel connection is used only for deployments the customer starts; a pasted token is used once and never kept.",
+        "Deployment needs explicit approval every time.",
+        "The first live deployment happens only on the owner's own Vercel account, with the owner's approval."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Deploy",
+            "tasks": [
+              {
+                "title": "Deploy to Vercel",
+                "acceptanceCriteria": [
+                  "Creates or reuses a Vercel project, sets its environment variables, uploads the files and deploys",
+                  "Shows the build's real progress and logs and the deployment URL",
+                  "Pro and above, enforced in Runtime"
+                ]
+              },
+              {
+                "title": "Link the Vercel project to the customer's GitHub repository",
+                "acceptanceCriteria": [
+                  "When the project was exported to the customer's GitHub, the Vercel project is linked to it so later pushes redeploy without KoreLumina",
+                  "Otherwise files are uploaded directly"
+                ]
+              },
+              {
+                "title": "Roll back",
+                "acceptanceCriteria": [
+                  "Promotes the previous deployment on request"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Interface",
+            "tasks": [
+              {
+                "title": "Deployment window in the Knowledge Operations design",
+                "acceptanceCriteria": [
+                  "Deployment history, progress, logs and rollback",
+                  "The owner approves it visually and its UI contract is certified"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sourceTicket": "OWN-TAKE",
+      "title": "Put it online: GitHub, Supabase and Vercel set up on the customer's own accounts",
+      "objective": "One guided flow takes an imported project (for example a Lovable app synced to GitHub) to the customer's own private GitHub repository, a new Supabase project and a Vercel project linked to that repository, wired together, so it runs entirely on their accounts and they can leave KoreLumina at any time.",
+      "type": "engineering",
+      "priority": "high",
+      "risks": [
+        "Each step uses the customer's connected account (or a one-use pasted token) and asks for its own explicit approval.",
+        "A step that fails leaves the earlier steps in place and says exactly what was created, so the customer is never left guessing.",
+        "Depends on the Export, Bring your own Supabase and Bring your own deployment missions.",
+        "Depends on the Connected accounts mission."
+      ],
+      "relatedRepositories": [
+        "kore20lllc-netizen/korelumina"
+      ],
+      "plan": {
+        "epics": [
+          {
+            "title": "Flow",
+            "tasks": [
+              {
+                "title": "A plain-language flow for customers who are not technical",
+                "acceptanceCriteria": [
+                  "Three steps named Save your code, Create your database, Publish your website, each one Continue with ... button that also creates the account if the customer has none",
+                  "States plainly what each provider's free plan allows: Vercel Hobby is non-commercial personal use only; Supabase Free keeps two active projects and pauses after a week of inactivity",
+                  "KoreLumina never creates an account for the customer and never hosts anything on its own accounts"
+                ]
+              },
+              {
+                "title": "New or existing, for customers who already have accounts",
+                "acceptanceCriteria": [
+                  "Each step offers a new resource or an existing one: repository (or a pull request on the original), Supabase project (existing only if empty), Vercel project",
+                  "Connected accounts are remembered, so publishing again is one click"
+                ]
+              },
+              {
+                "title": "Guided Take ownership window",
+                "acceptanceCriteria": [
+                  "GitHub, then Supabase, then Vercel, each creating or choosing the customer's own resource",
+                  "The Supabase URL and anon key flow into Vercel's environment; Vercel is linked to the GitHub repository",
+                  "Each step can be skipped, retried, or done with an existing resource",
+                  "Ends with the live URL, the repository link and the Supabase project link"
+                ]
+              },
+              {
+                "title": "Nothing depends on KoreLumina afterwards",
+                "acceptanceCriteria": [
+                  "After the flow, pushing to the customer's repository redeploys on Vercel without KoreLumina",
+                  "The customer can export or delete KoreLumina's working copy at any time"
+                ]
+              },
+              {
+                "title": "Owner approval",
+                "acceptanceCriteria": [
+                  "The owner approves the window visually and its UI contract is certified",
+                  "The first end-to-end run happens on the owner's own test accounts, with the owner's approval"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
