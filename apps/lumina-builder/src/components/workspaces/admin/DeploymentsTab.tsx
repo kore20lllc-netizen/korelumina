@@ -1,3 +1,4 @@
+import { LuminaExecutiveCard } from "@/components/design-system/lumina";
 import {
   Table,
   TableBody,
@@ -9,7 +10,8 @@ import {
 
 export function DeploymentsTab() {
   return (
-    <div className="glass rounded-xl overflow-hidden">
+    <LuminaExecutiveCard variant="detail" title="Deployments" className="min-w-0 text-white">
+        <div className="max-h-[600px] overflow-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -31,6 +33,7 @@ export function DeploymentsTab() {
           </TableRow>
         </TableBody>
       </Table>
-    </div>
+        </div>
+    </LuminaExecutiveCard>
   );
 }

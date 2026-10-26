@@ -1,3 +1,4 @@
+import { LuminaExecutiveCard } from "@/components/design-system/lumina";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -10,11 +11,12 @@ const KEYS: ProviderKey[] = ["auth", "billing", "ai", "repo", "deploy", "storage
 export function ProvidersTab() {
   const [cfg, setCfg] = useState<ProviderConfig>(getProviderConfiguration());
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-5 text-white">
       <p className="text-sm text-muted-foreground">Switch each capability between Mock and Real. Real adapters require API keys and a reload to take effect.</p>
-      <div className="glass rounded-xl divide-y divide-border">
+      <LuminaExecutiveCard variant="detail" title="Provider configuration" className="min-w-0">
+        <div className="max-h-[600px] overflow-y-auto divide-y divide-cyan-300/10">
         {KEYS.map((k) => (
-          <div key={k} className="flex items-center justify-between p-4">
+          <div key={k} className="flex flex-wrap items-center justify-between gap-4 py-4">
             <div>
               <div className="font-medium text-sm capitalize">{k}</div>
               <div className="text-xs text-muted-foreground">Currently: {cfg[k]}</div>
@@ -25,7 +27,7 @@ export function ProvidersTab() {
               setProviderConfiguration({ [k]: v as ProviderMode });
               toast.success(`${k} → ${v}`);
             }}>
-              <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
+              <SelectTrigger aria-label={`${k} provider mode`} className="w-32 border-white/15 bg-white/[0.06] text-white"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="mock">Mock</SelectItem>
                 <SelectItem value="real">Real</SelectItem>
@@ -33,7 +35,8 @@ export function ProvidersTab() {
             </Select>
           </div>
         ))}
-      </div>
+        </div>
+      </LuminaExecutiveCard>
       <Button variant="outline" onClick={() => window.location.reload()}>Reload to apply</Button>
     </div>
   );

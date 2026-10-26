@@ -1,3 +1,4 @@
+import { LuminaExecutiveCard, ExecutiveFilterSurface } from "@/components/design-system/lumina";
 import { useEffect, useMemo, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -46,15 +47,20 @@ export function ProjectsTab() {
   const filtered = useMemo(() => projects.filter((p) => !q || p.name.toLowerCase().includes(q.toLowerCase())), [projects, q]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search projects…" className="pl-8" />
-        </div>
-        <div className="text-sm text-muted-foreground">{filtered.length} projects</div>
-      </div>
-      <div className="glass rounded-xl overflow-hidden">
+    <div className="min-w-0 space-y-5 text-white">
+      <ExecutiveFilterSurface
+        ariaLabel="Project filters"
+        summary={<span className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">Projects</span>}
+        primaryControls={(
+          <div className="relative min-w-0 sm:col-span-2 lg:col-span-4">
+            <Search aria-hidden="true" className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
+            <Input value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search projects" placeholder="Search projects…" className="pl-8 border-white/15 bg-white/[0.06] text-white placeholder:text-white/40 focus-visible:ring-cyan-300/40" />
+          </div>
+        )}
+        actions={<span className="text-sm text-white/60" aria-live="polite">{filtered.length} projects</span>}
+      />
+      <LuminaExecutiveCard variant="detail" title="Projects" className="min-w-0 text-white">
+        <div className="max-h-[600px] overflow-auto">
         <Table>
           <TableHeader><TableRow>
             <TableHead>Name</TableHead><TableHead>Owner</TableHead><TableHead>Type</TableHead>
@@ -73,7 +79,7 @@ export function ProjectsTab() {
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-7 w-7"><MoreVertical className="h-4 w-4" /></Button>
+                        <Button variant="ghost" size="icon" aria-label={`Actions for ${p.name}`} className="h-7 w-7"><MoreVertical className="h-4 w-4" /></Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => { setActiveProject(p); setView("workspace"); }}>Open</DropdownMenuItem>
@@ -122,7 +128,8 @@ export function ProjectsTab() {
             })}
           </TableBody>
         </Table>
-      </div>
+        </div>
+      </LuminaExecutiveCard>
       <AdminProjectDeleteDialog
         open={deleteTarget !== null}
         project={deleteTarget}

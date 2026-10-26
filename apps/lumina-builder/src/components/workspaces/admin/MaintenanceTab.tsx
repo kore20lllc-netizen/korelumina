@@ -1,6 +1,6 @@
+import { LuminaExecutiveCard, LuminaExecutiveMetricGrid } from "@/components/design-system/lumina";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { GlowCard } from "@/components/lumina/GlowCard";
 import { toast } from "sonner";
 import { exportSnapshot, importSnapshot } from "@/services/adminService";
 import {
@@ -36,10 +36,9 @@ export function MaintenanceTab() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 space-y-6 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <GlowCard className="p-4 space-y-2">
-          <h3 className="text-sm font-semibold">Data</h3>
+        <LuminaExecutiveCard variant="detail" title="Data" className="min-w-0">
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
@@ -52,26 +51,26 @@ export function MaintenanceTab() {
             <Button variant="outline" onClick={() => fileRef.current?.click()}>Import snapshot</Button>
             <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={onFile} />
           </div>
-        </GlowCard>
-        <GlowCard className="p-4 space-y-2">
-          <h3 className="text-sm font-semibold">Logs &amp; notifications</h3>
+        </LuminaExecutiveCard>
+        <LuminaExecutiveCard variant="detail" title="Logs & notifications" className="min-w-0">
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" onClick={() => { clearAuditLog(); toast.success("Audit logs cleared"); }}>Clear audit logs</Button>
             <Button variant="outline" onClick={() => { clearNotifications(); toast.success("Notifications cleared"); }}>Clear notifications</Button>
             <Button variant="outline" onClick={() => { setHealth(getSystemHealth()); toast.success("Recalculated"); }}>Recalculate analytics</Button>
           </div>
-        </GlowCard>
+        </LuminaExecutiveCard>
       </div>
 
       <section>
         <h3 className="text-sm font-semibold mb-2">System health</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Storage used</div><div className="text-lg font-semibold">{(health.localStorageBytes / 1024).toFixed(1)} KB</div></GlowCard>
-          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Quota est.</div><div className="text-lg font-semibold">{(health.localStorageQuotaEstimate / (1024 * 1024)).toFixed(0)} MB</div></GlowCard>
-          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Users seeded</div><div className="text-lg font-semibold">{health.totalUsers}</div></GlowCard>
-          <GlowCard className="p-3"><div className="text-xs text-muted-foreground">Admin seeded</div><div className="text-lg font-semibold">{health.adminSeeded ? "Yes" : "No"}</div></GlowCard>
-        </div>
-        <div className="glass rounded-xl p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <LuminaExecutiveMetricGrid className="grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mb-4">
+          <LuminaExecutiveCard title="Storage used" value={`${(health.localStorageBytes / 1024).toFixed(1)} KB`} />
+          <LuminaExecutiveCard title="Quota est." value={`${(health.localStorageQuotaEstimate / (1024 * 1024)).toFixed(0)} MB`} />
+          <LuminaExecutiveCard title="Users seeded" value={String(health.totalUsers)} />
+          <LuminaExecutiveCard title="Admin seeded" value={health.adminSeeded ? "Yes" : "No"} />
+        </LuminaExecutiveMetricGrid>
+        <LuminaExecutiveCard variant="detail" title="System details" className="min-w-0">
+          <div className="max-h-[600px] overflow-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div>
             <div className="font-semibold mb-2">Namespaces</div>
             <ul className="space-y-1">
@@ -96,7 +95,8 @@ export function MaintenanceTab() {
               ))}
             </ul>
           </div>
-        </div>
+          </div>
+        </LuminaExecutiveCard>
       </section>
       <AdminResetDataDialog
         open={resetDialogOpen}

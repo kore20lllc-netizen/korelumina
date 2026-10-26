@@ -1,3 +1,4 @@
+import { LuminaExecutiveCard, ExecutiveFilterSurface } from "@/components/design-system/lumina";
 import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -90,20 +91,25 @@ function DirectoryUsersTab() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1 max-w-sm">
+    <div className="min-w-0 space-y-5 text-white">
+      <ExecutiveFilterSurface
+        ariaLabel="User directory filters"
+        summary={<span className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">User directory</span>}
+        primaryControls={(
+        <div className="relative min-w-0 sm:col-span-2 lg:col-span-4">
           <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search email…" className="pl-8" />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search email" placeholder="Search email…" className="border-white/15 bg-white/[0.06] pl-8 text-white placeholder:text-white/40 focus-visible:ring-cyan-300/40" />
         </div>
-        <div className="text-sm text-muted-foreground">{loading ? "Loading…" : `${filtered.length} users`}</div>
-      </div>
+        )}
+        actions={<span className="text-sm text-white/60" aria-live="polite">{loading ? "Loading…" : `${filtered.length} users`}</span>}
+      />
 
       {error ? (
         <div className="rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">{error}</div>
       ) : null}
 
-      <div className="glass rounded-xl overflow-hidden">
+      <LuminaExecutiveCard variant="detail" title="Users" className="min-w-0">
+        <div className="max-h-[65vh] overflow-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -119,7 +125,7 @@ function DirectoryUsersTab() {
               const isPlan = !(STAFF_ROLES as string[]).includes(role);
               return (
                 <TableRow key={u.id}>
-                  <TableCell className="font-medium">{u.email}</TableCell>
+                  <TableCell className="font-medium text-white/90">{u.email}</TableCell>
                   <TableCell>
                     {isPlan ? (
                       <Badge variant="secondary" title="Plans are assigned by billing">{role}</Badge>
@@ -130,7 +136,7 @@ function DirectoryUsersTab() {
                           if (next !== role) setPending({ user: u, role: next as StaffRole });
                         }}
                       >
-                        <SelectTrigger className="h-7 w-36"><SelectValue /></SelectTrigger>
+                        <SelectTrigger className="h-8 w-36 border-white/15 bg-white/[0.06] text-white"><SelectValue /></SelectTrigger>
                         <SelectContent>{STAFF_ROLES.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
                       </Select>
                     )}
@@ -142,11 +148,12 @@ function DirectoryUsersTab() {
             })}
           </TableBody>
         </Table>
-      </div>
+        </div>
+      </LuminaExecutiveCard>
 
       {assignments.length > 0 ? (
-        <div className="glass rounded-xl p-4">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Recent role assignments</div>
+        <LuminaExecutiveCard variant="detail" title="Recent role assignments">
+          <div className="max-h-64 overflow-y-auto">
           <ul className="space-y-1.5 text-sm">
             {assignments.slice(0, 10).map((record) => (
               <li key={record.id} className="text-muted-foreground">
@@ -154,7 +161,8 @@ function DirectoryUsersTab() {
               </li>
             ))}
           </ul>
-        </div>
+          </div>
+        </LuminaExecutiveCard>
       ) : null}
 
       <AlertDialog open={pending !== null} onOpenChange={(open) => { if (!open) { setPending(null); setReason(""); } }}>
@@ -196,15 +204,20 @@ function DemoUsersTab() {
   }, [rows, q]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1 max-w-sm">
+    <div className="min-w-0 space-y-5 text-white">
+      <ExecutiveFilterSurface
+        ariaLabel="User directory filters"
+        summary={<span className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">User directory</span>}
+        primaryControls={(
+        <div className="relative min-w-0 sm:col-span-2 lg:col-span-4">
           <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name or email…" className="pl-8" />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search name or email" placeholder="Search name or email…" className="border-white/15 bg-white/[0.06] pl-8 text-white placeholder:text-white/40 focus-visible:ring-cyan-300/40" />
         </div>
-        <div className="text-sm text-muted-foreground">{filtered.length} users</div>
-      </div>
-      <div className="glass rounded-xl overflow-hidden">
+        )}
+        actions={<span className="text-sm text-white/60" aria-live="polite">{filtered.length} users</span>}
+      />
+      <LuminaExecutiveCard variant="detail" title="Users" className="min-w-0">
+        <div className="max-h-[65vh] overflow-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -220,11 +233,11 @@ function DemoUsersTab() {
           <TableBody>
             {filtered.map((u) => (
               <TableRow key={u.id}>
-                <TableCell className="font-medium">{u.name}</TableCell>
+                <TableCell className="font-medium text-white/90">{u.name}</TableCell>
                 <TableCell className="text-muted-foreground">{u.email}</TableCell>
                 <TableCell>
                   <Select value={u.role} onValueChange={(v) => { updateUserRole(u.id, v as Role); refresh(); toast.success("Role updated"); }}>
-                    <SelectTrigger className="h-7 w-32"><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="h-8 w-32 border-white/15 bg-white/[0.06] text-white"><SelectValue /></SelectTrigger>
                     <SelectContent>{ROLES.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
                   </Select>
                 </TableCell>
@@ -266,7 +279,8 @@ function DemoUsersTab() {
             ))}
           </TableBody>
         </Table>
-      </div>
+        </div>
+      </LuminaExecutiveCard>
     </div>
   );
 }

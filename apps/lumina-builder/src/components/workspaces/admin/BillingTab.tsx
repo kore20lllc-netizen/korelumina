@@ -1,3 +1,4 @@
+import { LuminaExecutiveCard } from "@/components/design-system/lumina";
 import { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -27,18 +28,15 @@ export function BillingTab() {
   const [grantPlanId, setGrantPlanId] = useState<Plan>("pro_monthly");
 
   return (
-    <div className="space-y-6">
-      <section className="glass rounded-xl p-4">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold">Grant plan</h3>
-        </div>
+    <div className="min-w-0 space-y-6 text-white">
+      <LuminaExecutiveCard variant="detail" title="Grant plan" className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
           <Select value={grantUser} onValueChange={setGrantUser}>
-            <SelectTrigger className="w-64"><SelectValue placeholder="Pick user…" /></SelectTrigger>
+            <SelectTrigger aria-label="User to grant plan" className="w-64 max-w-full border-white/15 bg-white/[0.06] text-white"><SelectValue placeholder="Pick user…" /></SelectTrigger>
             <SelectContent>{users.map((u) => <SelectItem key={u.id} value={u.id}>{u.email}</SelectItem>)}</SelectContent>
           </Select>
           <Select value={grantPlanId} onValueChange={(v) => setGrantPlanId(v as Plan)}>
-            <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
+            <SelectTrigger aria-label="Plan to grant" className="w-48 max-w-full border-white/15 bg-white/[0.06] text-white"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="pro_monthly">Pro Monthly</SelectItem>
               <SelectItem value="pro_yearly">Pro Yearly</SelectItem>
@@ -51,11 +49,11 @@ export function BillingTab() {
             refresh(); toast.success("Plan granted");
           }}>Grant</Button>
         </div>
-      </section>
+      </LuminaExecutiveCard>
 
       <section>
-        <h3 className="text-sm font-semibold mb-2">Subscriptions</h3>
-        <div className="glass rounded-xl overflow-hidden">
+        <LuminaExecutiveCard variant="detail" title="Subscriptions" className="min-w-0 text-white">
+        <div className="max-h-[600px] overflow-auto">
           <Table>
             <TableHeader><TableRow>
               <TableHead>User</TableHead><TableHead>Plan</TableHead><TableHead>Status</TableHead>
@@ -82,11 +80,12 @@ export function BillingTab() {
             </TableBody>
           </Table>
         </div>
+        </LuminaExecutiveCard>
       </section>
 
       <section>
-        <h3 className="text-sm font-semibold mb-2">Payments &amp; Invoices</h3>
-        <div className="glass rounded-xl overflow-hidden">
+        <LuminaExecutiveCard variant="detail" title="Payments & Invoices" className="min-w-0 text-white">
+        <div className="max-h-[600px] overflow-auto">
           <Table>
             <TableHeader><TableRow>
               <TableHead>Date</TableHead><TableHead>User</TableHead><TableHead>Product</TableHead>
@@ -115,6 +114,7 @@ export function BillingTab() {
             </TableBody>
           </Table>
         </div>
+        </LuminaExecutiveCard>
       </section>
     </div>
   );

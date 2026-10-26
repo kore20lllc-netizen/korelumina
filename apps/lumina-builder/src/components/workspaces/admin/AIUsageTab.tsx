@@ -1,6 +1,6 @@
+import { LuminaExecutiveCard, LuminaExecutiveMetricGrid } from "@/components/design-system/lumina";
 import { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { GlowCard } from "@/components/lumina/GlowCard";
 import { readJSON } from "@/lib/persistence";
 import { listUsers } from "@/services/adminService";
 import { getAdminAnalytics } from "@/services/adminAnalytics";
@@ -20,13 +20,14 @@ export function AIUsageTab() {
   const estCost = analytics.totalAIExecutions * 0.012;
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Total executions</div><div className="text-2xl font-semibold">{analytics.totalAIExecutions}</div></GlowCard>
-        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Estimated cost</div><div className="text-2xl font-semibold">${estCost.toFixed(2)}</div></GlowCard>
-        <GlowCard className="p-4"><div className="text-xs text-muted-foreground">Days with activity</div><div className="text-2xl font-semibold">{analytics.aiUsageByDay.length}</div></GlowCard>
-      </div>
-      <div className="glass rounded-xl overflow-hidden">
+    <div className="min-w-0 space-y-5 text-white">
+      <LuminaExecutiveMetricGrid className="grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <LuminaExecutiveCard title="Total executions" value={String(analytics.totalAIExecutions)} />
+        <LuminaExecutiveCard title="Estimated cost" value={`$${estCost.toFixed(2)}`} />
+        <LuminaExecutiveCard title="Days with activity" value={String(analytics.aiUsageByDay.length)} />
+      </LuminaExecutiveMetricGrid>
+      <LuminaExecutiveCard variant="detail" title="AI executions by user" className="min-w-0 text-white">
+        <div className="max-h-[600px] overflow-auto">
         <Table>
           <TableHeader><TableRow><TableHead>User</TableHead><TableHead className="text-right">AI Executions</TableHead></TableRow></TableHeader>
           <TableBody>
@@ -38,7 +39,8 @@ export function AIUsageTab() {
             )}
           </TableBody>
         </Table>
-      </div>
+        </div>
+      </LuminaExecutiveCard>
     </div>
   );
 }
