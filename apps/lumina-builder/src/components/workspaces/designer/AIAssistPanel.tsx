@@ -1,3 +1,6 @@
+import { LuminaAIMark } from "@/components/ai/LuminaAIMark";
+import { pillButton } from "../developer/shared/surfaces";
+import { premiumSurfaces, electricContour, premiumSpacing } from "@/components/design-system/lumina";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
@@ -96,7 +99,7 @@ function buildLayoutFromBrief(brief: string): Omit<CanvasElement, "id">[] {
   ];
 }
 
-export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function AIAssistPanel({ open, onClose, docked = false }: { open: boolean; onClose: () => void; docked?: boolean }) {
   const { elements, selected, replaceAll } = useCanvas();
   const [mode, setMode] = useState<Mode>("copy");
   const [input, setInput] = useState("");
@@ -293,33 +296,34 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
   return (
     <>
       {/* Backdrop on mobile */}
-      <div
+      {!docked && <div
         onClick={onClose}
         className={cn(
           "fixed inset-0 z-40 bg-background/40 backdrop-blur-sm lg:hidden transition-opacity",
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         aria-hidden
-      />
+      />}
       <aside
-        role="dialog"
+        role={docked ? "region" : "dialog"}
         aria-label="AI Assist"
         aria-hidden={!open}
         className={cn(
-          "fixed z-50 right-4 bottom-4 w-[min(380px,calc(100vw-2rem))] h-[min(560px,calc(100vh-6rem))]",
-          "glass-panel rounded-2xl border border-white/10 shadow-[0_20px_60px_-20px_hsl(var(--violet)/0.55)]",
-          "flex flex-col overflow-hidden transition-all duration-300 ease-fluid origin-bottom-right",
-          open ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95 pointer-events-none"
+          docked ? "min-h-0 flex-1 text-white" : [
+            "z-50 right-4 bottom-4 w-[min(380px,calc(100vw-2rem))] h-[min(560px,calc(100vh-6rem))]",
+            premiumSurfaces.base.shell, electricContour.strength.flagship, premiumSpacing.radius.shell,
+            "fixed text-white transition-all duration-300 ease-fluid origin-bottom-right",
+          ],
+          "flex flex-col overflow-hidden",
+          docked ? !open && "hidden" : open ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95 pointer-events-none"
         )}
       >
         {/* Header */}
-        <header className="flex items-center gap-2 px-3.5 h-12 border-b border-border bg-surface-1/40">
-          <div className="h-7 w-7 rounded-lg bg-button-lumina grid place-items-center shadow-[0_0_14px_-2px_hsl(var(--violet)/0.7)]">
-            <Sparkles className="h-3.5 w-3.5 text-white" />
-          </div>
+        <header className="flex shrink-0 items-center gap-2 px-3.5 h-14 border-b border-cyan-300/10 bg-slate-950/30">
+          <LuminaAIMark working={busy} className="h-7 w-7" workingClassName="h-7 w-7" />
           <div className="leading-tight">
             <div className="text-sm font-semibold">AI Assist</div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Designer copilot</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Local design suggestions</div>
           </div>
           <div className="flex-1" />
           <div className="flex items-center gap-0.5 mr-1" role="group" aria-label="AI history">
@@ -357,19 +361,20 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
         </header>
 
         {/* Mode tabs */}
-        <div className="grid grid-cols-4 gap-1 p-2 border-b border-border bg-surface-1/20">
+        <div className="grid shrink-0 grid-cols-4 gap-1 p-2 border-b border-cyan-300/10 bg-slate-950/20">
           {modes.map((m) => {
             const Icon = m.Icon;
             const active = mode === m.id;
             return (
               <button
                 key={m.id}
+                aria-pressed={active}
                 onClick={() => setMode(m.id)}
                 title={m.hint}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 h-12 rounded-lg text-[10px] transition",
+                  "flex flex-col items-center justify-center gap-0.5 h-12 rounded-xl border border-transparent text-[10px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/50",
                   active
-                    ? "bg-surface-3 text-foreground ring-1 ring-white/10"
+                    ? cn(premiumSurfaces.emphasis.violet, electricContour.accent.violet, "text-violet-100")
                     : "text-muted-foreground hover:text-foreground hover:bg-surface-2"
                 )}
               >
@@ -388,8 +393,8 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
               className={cn(
                 "max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-relaxed",
                 m.role === "user"
-                  ? "ml-auto bg-button-lumina text-white shadow-[0_4px_12px_-4px_hsl(var(--violet)/0.6)]"
-                  : "bg-surface-1 border border-border text-foreground"
+                  ? "ml-auto border border-cyan-300/20 bg-cyan-400/[0.07] text-sky-50"
+                  : "border border-white/10 bg-white/[0.02] text-sky-100/90"
               )}
             >
               <div dangerouslySetInnerHTML={{ __html: m.content.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") }} />
@@ -482,8 +487,8 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
         )}
 
         {/* Composer */}
-        <div className="p-2.5 border-t border-border bg-surface-1/40">
-          <div className="flex items-end gap-2 rounded-xl bg-surface-1 border border-border focus-within:border-violet/50 transition px-2 py-1.5">
+        <div className="shrink-0 p-3 border-t border-white/10 bg-black/20">
+          <div className="flex items-end gap-2">
             <textarea
               ref={inputRef}
               value={input}
@@ -494,7 +499,7 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
                   submit();
                 }
               }}
-              rows={1}
+              rows={2}
               placeholder={
                 mode === "copy"
                   ? "Optional: tone or angle (Enter to rewrite)"
@@ -504,19 +509,17 @@ export function AIAssistPanel({ open, onClose }: { open: boolean; onClose: () =>
                   ? "Describe the vibe (e.g. moody, energetic)"
                   : "Ask anything about your design…"
               }
-              className="flex-1 bg-transparent resize-none outline-none text-[13px] py-1.5 px-1 max-h-32 placeholder:text-muted-foreground/60"
+              className="min-w-0 min-h-[44px] flex-1 resize-none rounded-2xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-sm text-sky-50 placeholder:text-sky-300/40 focus:border-cyan-300/40 focus:outline-none"
             />
             <button
               onClick={submit}
               disabled={busy || (mode !== "copy" && !input.trim())}
               className={cn(
-                "h-8 w-8 grid place-items-center rounded-lg transition shrink-0",
-                "bg-button-lumina text-white shadow-[0_4px_12px_-4px_hsl(var(--violet)/0.6)]",
-                "hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed"
+                pillButton("active"), "h-10 shrink-0"
               )}
               aria-label="Send"
             >
-              {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+              {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />} Ask
             </button>
           </div>
           <div className="mt-1 px-1 text-[10px] text-muted-foreground/70 flex items-center justify-between">
@@ -540,7 +543,8 @@ export function AIAssistTrigger({ onClick, open }: { onClick: () => void; open: 
       className={cn(
         "fixed z-40 right-4 bottom-4 h-11 px-4 rounded-full",
         "bg-button-lumina text-white text-[13px] font-medium",
-        "shadow-[0_10px_30px_-10px_hsl(var(--violet)/0.7)] hover:brightness-110",
+        electricContour.accent.violet,
+        "border ring-1 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/60",
         "flex items-center gap-2 transition-all duration-300 ease-fluid",
         open ? "opacity-0 pointer-events-none translate-y-2" : "opacity-100"
       )}

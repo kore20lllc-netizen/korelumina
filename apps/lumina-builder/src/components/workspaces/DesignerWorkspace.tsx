@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
-  ChevronRight, ChevronDown, Type, Palette, Move, Maximize2, Plus,
+  Type, Palette, Move, Maximize2, Plus,
   FileText, Layout, Image as ImageIcon, Square, Smartphone, Tablet, Monitor,
   Trash2, Sparkles, MousePointer2, Wand2, X,
 } from "lucide-react";
+import { premiumSurfaces, electricContour, premiumSpacing } from "@/components/design-system/lumina";
+import { ExecutivePremiumIcon } from "@/components/design-system/executive/ExecutivePremiumIcon";
+import { panelSurface, panelReflection, panelEyebrow, pillButton } from "./developer/shared/surfaces";
 import { PreviewFrame } from "@/components/preview/PreviewFrame";
 import { cn } from "@/lib/utils";
 import { CanvasProvider, useCanvas, type CanvasElement, type ElementKind } from "./designer/canvasStore";
 import { DesignerCanvas } from "./designer/DesignerCanvas";
-import { AIAssistPanel, AIAssistTrigger } from "./designer/AIAssistPanel";
-import { TransformButton } from "@/components/transform/TransformButton";
+import { AIAssistPanel } from "./designer/AIAssistPanel";
+import { isFeatureEnabled } from "@/lib/featureFlags";
+import { LuminaAIMark } from "@/components/ai/LuminaAIMark";
 import { useWorkspace } from "@/context/WorkspaceContext";
 import { useTransform } from "@/context/TransformContext";
 import { TEMPLATES } from "@/lib/transformPages";
@@ -42,7 +46,7 @@ function DesignerWorkspaceInner() {
     runtimeProgress,
     runtimeError,
   } = useRuntimeBoot(projectId);
-  const { generatedPages, activePageId, setActivePage, clearGenerated, setPageTemplate } = useTransform();
+  const { openTransform, generatedPages, activePageId, setActivePage, clearGenerated, setPageTemplate } = useTransform();
   const primary: CanvasElement | undefined = elements.find((e) => e.id === selected[0]);
 
   // When generated pages exist (after Transform → Website), load the active page
@@ -62,10 +66,44 @@ function DesignerWorkspaceInner() {
     : ["Home", "Pricing", "About", "Blog"].map((n) => ({ id: n, name: n, route: undefined as string | undefined }));
 
   return (
-    <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4 p-4 md:p-6">
+    <section aria-label="Designer workspace" className="relative flex h-full min-h-0 w-full flex-col gap-4 overflow-x-hidden overflow-y-auto overscroll-contain bg-transparent p-4 text-white md:p-6 lg:overflow-y-hidden">
+      <header className="relative min-w-0 overflow-hidden rounded-[28px] border border-blue-400/70 ring-1 ring-inset ring-cyan-300/20 bg-slate-950/[0.48] backdrop-blur-[44px] backdrop-saturate-[170%] shadow-[0_0_0_1px_rgba(59,130,246,.16),0_0_30px_rgba(37,99,235,.16),0_28px_160px_rgba(0,0,0,.40),inset_0_0_22px_rgba(56,189,248,.05)] shrink-0">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_6%_8%,rgba(217,119,6,.18),transparent_30%),radial-gradient(circle_at_30%_70%,rgba(124,58,237,.20),transparent_34%),radial-gradient(circle_at_95%_90%,rgba(34,211,238,.06),transparent_24%)]" />
+        <div aria-hidden="true" className={panelReflection} />
+        <div className="relative z-10 grid gap-5 px-6 py-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
+          <div className="flex min-w-0 flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <ExecutivePremiumIcon icon={Palette} state="active" />
+              <div className="min-w-0">
+                <span className="inline-flex items-center rounded-full border border-amber-300/20 bg-amber-400/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-amber-100/80">Workspace</span>
+                <h1 className="mt-2 truncate text-3xl font-black tracking-[-0.04em]">
+                  <span className="text-gradient-lumina">Designer</span>{" "}
+                  <span className="bg-gradient-to-r from-[#D9A441] via-[#B97A18] to-[#7A4B05] bg-clip-text text-transparent">{activeProject?.name ?? "No project"}</span>
+                </h1>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {isFeatureEnabled("transform_to_website") && (
+                <button type="button" className={pillButton("warning")} onClick={() => {
+                  track("transform.opened", { source: "designer", project_id: activeProject?.id ?? null, project_type: activeProject?.type ?? null, framework: null });
+                  openTransform({ source: "designer", project: activeProject, detected: null });
+                }}><Wand2 className="h-3 w-3" /> Transform to Website</button>
+              )}
+            </div>
+          </div>
+          <div className="grid min-w-0 content-start gap-3 sm:grid-cols-3">
+            <DesignerReading label="Server" value={runtimePhase === "idle" ? "Stopped" : runtimePhase.replaceAll("-", " ")} detail={runtimeError ?? (runtimeMessage || "Not started")} />
+            <DesignerReading label="Page" value={usingGenerated ? activePage?.name ?? "None" : "Home"} detail={usingGenerated ? `${generatedPages.length} editable pages` : "Design canvas"} />
+            <DesignerReading label="Selection" value={selected.length === 1 ? primary?.label ?? "None" : `${selected.length} selected`} detail={`${elements.length} layers · ${breakpoint}`} />
+          </div>
+        </div>
+      </header>
+      <div className="grid min-h-0 min-w-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[256px_minmax(0,1fr)_420px] xl:grid-cols-[256px_minmax(0,1fr)_480px]">
       {/* Left: pages + layers */}
-      <aside className="w-full lg:w-64 shrink-0 glass-panel p-4 flex flex-col gap-4 max-h-[40vh] lg:max-h-none overflow-y-auto anim-in">
-        <TransformButton source="designer" project={activeProject} className="w-full" />
+      <aside aria-label="Pages, layers and insert tools" className={cn(panelSurface, "h-[40vh] lg:h-auto lg:max-h-none")}>
+        <div aria-hidden="true" className={panelReflection} />
+        <div className="flex shrink-0 items-center gap-2 border-b border-white/10 px-4 py-3"><Layout className="h-3.5 w-3.5 text-cyan-300" /><h2 className={panelEyebrow}>Design navigator</h2></div>
+        <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto [&>*]:shrink-0 p-4">
 
         {usingGenerated && (
           <div className="rounded-xl border border-gold/30 bg-gradient-to-br from-gold/10 to-royal-blue/10 p-3 anim-in">
@@ -98,7 +136,7 @@ function DesignerWorkspaceInner() {
                 <span className="px-1.5 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-gold text-[9px] uppercase tracking-widest">AI</span>
               )}
             </div>
-            <button className="h-6 w-6 grid place-items-center rounded-md hover:bg-surface-2 transition"><Plus className="h-3 w-3" /></button>
+            <button aria-label="Add page" className="h-6 w-6 grid place-items-center rounded-md hover:bg-surface-2 transition"><Plus className="h-3 w-3" /></button>
           </div>
           <div className="space-y-1">
             {pages.map((p, i) => {
@@ -106,6 +144,7 @@ function DesignerWorkspaceInner() {
               return (
                 <button
                   key={p.id}
+                  aria-pressed={isActive}
                   onClick={() => {
                     if (usingGenerated) {
                       setActivePage(p.id);
@@ -113,9 +152,9 @@ function DesignerWorkspaceInner() {
                     }
                   }}
                   className={cn(
-                    "flex items-center gap-2 w-full h-8 px-2 rounded-lg text-sm transition text-left",
+                    "flex items-center gap-2 w-full h-9 px-2 rounded-xl border border-transparent text-sm transition text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40",
                     isActive
-                      ? "bg-surface-2 text-foreground"
+                      ? "bg-cyan-400/10 text-cyan-100 ring-1 ring-inset ring-cyan-300/25"
                       : "text-muted-foreground hover:bg-surface-1 hover:text-foreground"
                   )}
                   title={p.route}
@@ -209,11 +248,12 @@ function DesignerWorkspaceInner() {
               return (
                 <button
                   key={el.id}
+                  aria-pressed={active}
                   onClick={(e) => toggleSelected(el.id, e.shiftKey || e.metaKey)}
                   className={cn(
-                    "flex items-center gap-1.5 w-full h-7 pl-9 pr-2 rounded-md text-xs transition",
+                    "flex items-center gap-1.5 w-full h-8 pl-9 pr-2 rounded-xl border border-transparent text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40",
                     active
-                      ? "bg-surface-3 text-foreground shadow-[inset_0_0_15px_hsl(var(--violet)/0.2)]"
+                      ? "bg-cyan-400/10 text-cyan-100 ring-1 ring-inset ring-cyan-300/25"
                       : "text-muted-foreground hover:text-foreground hover:bg-surface-1"
                   )}
                 >
@@ -251,7 +291,8 @@ function DesignerWorkspaceInner() {
                   add({ kind, label, x: 240, y: 200, w: 200, h: 80, accent: "violet", ...(defaults[kind] || {}) } as Omit<CanvasElement, "id">);
                   toast(`${label} added`);
                 }}
-                className="aspect-square flex flex-col items-center justify-center gap-1 rounded-lg bg-surface-1 border border-border hover:border-violet/40 hover:bg-surface-2 transition"
+                aria-label={`Insert ${kind}`}
+                className={cn("aspect-square flex flex-col items-center justify-center gap-1 hover:border-cyan-300/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40", premiumSpacing.radius.control, premiumSurfaces.base.card, electricContour.strength.subtle, premiumSurfaces.interaction.hoverLift)}
               >
                 <Icon className="h-3.5 w-3.5 text-foreground/80" />
                 <span className="text-[9px] uppercase tracking-wider text-muted-foreground">{label}</span>
@@ -259,10 +300,14 @@ function DesignerWorkspaceInner() {
             ))}
           </div>
         </div>
+        </div>
       </aside>
 
       {/* Center: canvas / preview */}
-      <div className="flex-1 min-h-[360px]">
+      <main aria-label="Designer canvas" className={cn(panelSurface, "min-h-[480px] lg:min-h-0")}>
+        <div aria-hidden="true" className={panelReflection} />
+        <div className="flex shrink-0 items-center gap-2 border-b border-white/10 px-4 py-3"><h2 className={panelEyebrow}>Design canvas</h2></div>
+        <div className="min-h-0 flex-1 p-3">
         <PreviewFrame
           url={runtimeUrl}
           projectId={projectId ?? undefined}
@@ -273,13 +318,24 @@ function DesignerWorkspaceInner() {
         >
           <DesignerCanvas />
         </PreviewFrame>
-      </div>
+        </div>
+      </main>
 
       {/* Right: properties */}
-      <aside className="w-full lg:w-72 shrink-0 glass-panel p-4 max-h-[50vh] lg:max-h-none overflow-y-auto anim-in">
+      <aside aria-label="Design properties" className={cn(panelSurface, "h-[50vh] lg:h-auto lg:max-h-none")}>
+        <div aria-hidden="true" className={panelReflection} />
+        <div role="tablist" aria-label="Designer inspector" className="flex shrink-0 items-center gap-1 border-b border-white/10 px-3 pt-3">
+          {[{ id: "properties", label: "Properties" }, { id: "ai", label: "AI Assist" }].map((tab) => {
+            const active = aiOpen === (tab.id === "ai");
+            return <button key={tab.id} type="button" role="tab" aria-selected={active} onClick={() => setAiOpen(tab.id === "ai")} className={cn("relative inline-flex h-9 items-center gap-2 rounded-t-xl px-3.5 text-xs font-semibold transition", active ? "bg-white/[0.06] text-sky-50" : "text-sky-300/60 hover:text-sky-100")}>
+              {tab.id === "ai" ? <LuminaAIMark className="h-4 w-4" /> : <Palette className="h-3.5 w-3.5" />}{tab.label}
+              {active && <span className="absolute inset-x-2 bottom-0 h-px bg-gradient-to-r from-amber-300/70 via-cyan-300 to-violet-400/70" />}
+            </button>;
+          })}
+        </div>
+        <div className={cn("min-h-0 flex-1 overflow-y-auto p-4", aiOpen && "hidden")}>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Properties</div>
             <div className="font-display font-semibold text-base mt-0.5">
               {selected.length === 0 ? "Nothing selected" : selected.length > 1 ? `${selected.length} elements` : primary?.label}
             </div>
@@ -293,7 +349,7 @@ function DesignerWorkspaceInner() {
 
         <div className="pb-3 mb-1 border-b border-border">
           <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Breakpoint</div>
-          <div className="grid grid-cols-3 p-0.5 rounded-lg bg-surface-1 border border-border">
+          <div className={cn("grid grid-cols-3 p-1", premiumSpacing.radius.control, premiumSurfaces.base.inset, electricContour.strength.subtle)}>
             {([
               { id: "mobile" as const, Icon: Smartphone },
               { id: "tablet" as const, Icon: Tablet },
@@ -301,10 +357,12 @@ function DesignerWorkspaceInner() {
             ]).map(({ id, Icon }) => (
               <button
                 key={id}
+                aria-label={`Edit ${id} breakpoint`}
+                aria-pressed={breakpoint === id}
                 onClick={() => { setBreakpoint(id); toast(`Editing ${id}`); }}
                 className={cn(
                   "h-8 grid place-items-center rounded-md text-xs transition capitalize",
-                  breakpoint === id ? "bg-surface-3 text-foreground" : "text-muted-foreground hover:text-foreground"
+                  breakpoint === id ? "bg-cyan-400/15 text-cyan-100 ring-1 ring-inset ring-cyan-300/40" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -329,17 +387,17 @@ function DesignerWorkspaceInner() {
             <input
               key={primary?.id ?? "none"}
               defaultValue={primary?.text ?? "Build, alive."}
-              className="w-full h-9 px-3 rounded-lg bg-surface-1 border border-border text-sm outline-none focus:border-violet/50 transition"
+              className="w-full h-9 px-3 rounded-lg bg-slate-950/30 border border-blue-400/30 text-sm outline-none focus:border-violet/50 transition"
             />
           </Field>
           <div className="grid grid-cols-2 gap-2">
             <Field label="Family">
-              <select className="w-full h-9 px-2 rounded-lg bg-surface-1 border border-border text-sm outline-none">
+              <select className="w-full h-9 px-2 rounded-lg bg-slate-950/30 border border-blue-400/30 text-sm outline-none">
                 <option>Space Grotesk</option><option>Inter</option><option>Söhne</option>
               </select>
             </Field>
             <Field label="Weight">
-              <select className="w-full h-9 px-2 rounded-lg bg-surface-1 border border-border text-sm outline-none">
+              <select className="w-full h-9 px-2 rounded-lg bg-slate-950/30 border border-blue-400/30 text-sm outline-none">
                 <option>600</option><option>700</option>
               </select>
             </Field>
@@ -350,11 +408,11 @@ function DesignerWorkspaceInner() {
         <Section icon={Palette} label="Color">
           <div className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-lg bg-button-lumina shadow-[0_0_18px_-2px_hsl(var(--violet)/0.7)]" />
-            <input defaultValue="Lumina gradient" className="flex-1 h-9 px-3 rounded-lg bg-surface-1 border border-border text-sm outline-none" />
+            <input defaultValue="Lumina gradient" className="min-w-0 flex-1 h-9 px-3 rounded-lg bg-slate-950/30 border border-blue-400/30 text-sm outline-none" />
           </div>
           <div className="grid grid-cols-6 gap-1.5 mt-3">
             {["magenta", "violet", "electric", "cyan", "gold", "rose"].map((c) => (
-              <button key={c} className="aspect-square rounded-lg border border-border hover:scale-110 transition shadow-md" style={{ background: `hsl(var(--${c}))` }} />
+              <button key={c} aria-label={`${c} color swatch`} className="aspect-square rounded-lg border border-border hover:scale-110 transition shadow-md" style={{ background: `hsl(var(--${c}))` }} />
             ))}
           </div>
         </Section>
@@ -368,7 +426,7 @@ function DesignerWorkspaceInner() {
 
         <Section icon={Maximize2} label="Layout">
           <Field label="Align">
-            <div className="grid grid-cols-3 p-0.5 rounded-lg bg-surface-1 border border-border">
+            <div className={cn("grid grid-cols-3 p-1", premiumSpacing.radius.control, premiumSurfaces.base.inset, electricContour.strength.subtle)}>
               {["Left", "Center", "Right"].map((a, i) => (
                 <button key={a} className={cn("h-7 rounded-md text-xs transition", i === 1 ? "bg-surface-3 text-foreground" : "text-muted-foreground hover:text-foreground")}>{a}</button>
               ))}
@@ -389,17 +447,27 @@ function DesignerWorkspaceInner() {
             </button>
           </div>
         )}
+        </div>
+        <AIAssistPanel docked open={aiOpen} onClose={() => setAiOpen(false)} />
       </aside>
+      </div>
+    </section>
+  );
+}
 
-      <AIAssistTrigger open={aiOpen} onClick={() => setAiOpen(true)} />
-      <AIAssistPanel open={aiOpen} onClose={() => setAiOpen(false)} />
+function DesignerReading({ label, value, detail }: { label: string; value: string; detail: string }) {
+  return (
+    <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-300/60">{label}</div>
+      <div className="mt-1 truncate text-sm font-semibold capitalize text-sky-100" title={value}>{value}</div>
+      <div className="mt-0.5 truncate text-[11px] text-sky-300/60" title={detail}>{detail}</div>
     </div>
   );
 }
 
 function Section({ icon: Icon, label, children }: { icon: any; label: string; children: React.ReactNode }) {
   return (
-    <div className="py-3 border-t border-border first:border-t-0 first:pt-0 space-y-3">
+    <div className={cn("border-t border-cyan-300/10 first:border-t-0 first:pt-0", premiumSpacing.insetY.standard, premiumSpacing.stack.dense)}>
       <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-muted-foreground">
         <Icon className="h-3 w-3" /> {label}
       </div>
@@ -429,7 +497,7 @@ function Slider({ value, suffix }: { value: number; suffix: string }) {
 
 function ReadOut({ value, suffix }: { value: number; suffix: string }) {
   return (
-    <div className="h-9 px-3 rounded-lg bg-surface-1 border border-border text-sm flex items-center justify-between">
+    <div className="h-9 px-3 rounded-lg bg-slate-950/30 border border-blue-400/30 text-sm flex items-center justify-between">
       <span className="tabular-nums">{value}</span>
       <span className="text-muted-foreground text-xs">{suffix}</span>
     </div>
