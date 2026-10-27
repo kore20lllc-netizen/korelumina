@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, Maximize2, Minimize2 } from "lucide-react";
+import { LuminaExecutiveCard } from "@/components/design-system/lumina";
+import { LuminaAIMark } from "@/components/ai/LuminaAIMark";
+import { panelSurface, panelReflection, panelEyebrow, quietButton } from "./developer/shared/surfaces";
 import { PreviewFrame } from "@/components/preview/PreviewFrame";
 import { useWorkspace } from "@/context/WorkspaceContext";
 import { cn } from "@/lib/utils";
@@ -141,7 +144,26 @@ export function AIWorkspace() {
   }, []);
 
   return (
-    <div className="flex-1 min-h-0 overflow-hidden flex flex-col md:flex-row gap-4 p-4 md:p-6">
+    <section aria-label="AI workspace" className="relative flex h-full min-h-0 w-full flex-col gap-4 overflow-x-hidden overflow-y-auto overscroll-contain bg-transparent p-4 text-white md:p-6 lg:overflow-y-hidden">
+      <header className="shrink-0">
+        <LuminaExecutiveCard variant="summary" header={(
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-4">
+              <LuminaAIMark working={generating} className="h-10 w-10" workingClassName="h-10 w-10" />
+              <div className="min-w-0">
+                <p className={panelEyebrow}>Workspace</p>
+                <h1 className="mt-1 text-3xl font-black tracking-[-0.04em]"><span className="text-gradient-lumina">AI</span>{" "}<span className="text-amber-300">Workspace</span></h1>
+                <p className="mt-1 truncate text-xs text-sky-300/60">{activeProject?.name ?? "Describe what you want to build."}</p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-400/[0.07] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-100">
+              <span aria-hidden="true" className={cn("h-1.5 w-1.5 rounded-full", generating ? "animate-pulse bg-violet-300" : "bg-slate-400")} />
+              {generating ? "Generating" : "Idle"}
+            </span>
+          </div>
+        )} />
+      </header>
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 lg:flex-row">
       {/* Live region: announces generation state and new activity items */}
       <div
         role="status"
@@ -152,8 +174,9 @@ export function AIWorkspace() {
         {announcement}
       </div>
       {/* Left column: composer + templates (stacked, scrollable) */}
-      <div className="flex-1 min-w-0 min-h-0 overflow-hidden flex flex-col gap-4">
-        <div className="glass-panel p-6 md:p-8 anim-in shrink-0">
+      <div className="flex min-h-0 min-w-0 shrink-0 flex-col gap-4 lg:flex-1 lg:shrink lg:overflow-y-auto">
+        <section aria-label="Build composer" className={cn(panelSurface, "shrink-0 p-5 md:p-6")}>
+          <div aria-hidden="true" className={panelReflection} />
           <PromptComposer
             prompt={prompt}
             onPromptChange={setPrompt}
@@ -166,14 +189,15 @@ export function AIWorkspace() {
               setAnnouncement("Generation stopped");
             }}
           />
-        </div>
-        <div className="glass-panel p-6 md:p-8 anim-in flex-1 min-h-0 overflow-y-auto">
-          <TemplateGrid />
-        </div>
+        </section>
+        <section aria-label="Build templates" className={cn(panelSurface, "min-h-[220px] lg:flex-1")}>
+          <div aria-hidden="true" className={panelReflection} />
+          <div className="min-h-0 max-h-[45vh] overflow-y-auto p-5 md:p-6 lg:max-h-none"><TemplateGrid /></div>
+        </section>
       </div>
 
       {/* Right column: preview fills the full right side */}
-      <div className="relative flex flex-1 flex-col gap-4 min-w-0 min-h-0">
+      <div className="relative flex min-h-[600px] min-w-0 shrink-0 flex-col gap-4 lg:min-h-0 lg:flex-1 lg:shrink lg:overflow-y-auto">
         {/* Expand/collapse preview toggle */}
         <div className="flex items-center justify-end shrink-0">
           <button
@@ -184,7 +208,7 @@ export function AIWorkspace() {
                 return next;
               });
             }}
-            className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg glass text-[11px] uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition"
+            className={quietButton}
             aria-label={previewExpanded ? "Restore activity panel" : "Expand preview"}
           >
             {previewExpanded ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
@@ -192,7 +216,8 @@ export function AIWorkspace() {
           </button>
         </div>
 
-        <div className="flex-1 min-h-0">
+        <section aria-label="AI preview" className={cn(panelSurface, "min-h-[360px] flex-1 p-3")}>
+          <div aria-hidden="true" className={panelReflection} />
           <PreviewFrame
             url={runtimeUrl}
             projectId={projectId ?? undefined}
@@ -201,7 +226,7 @@ export function AIWorkspace() {
             runtimeProgress={runtimeProgress}
             runtimeError={runtimeError}
           />
-        </div>
+        </section>
 
         {rightPanelOpen && !previewExpanded && (
           <aside
@@ -227,7 +252,7 @@ export function AIWorkspace() {
                 shouldRestoreDrawerToggleRef.current = drawerOpen;
                 setDrawerOpen((v) => !v);
               }}
-              className="w-full h-10 flex items-center justify-center gap-2 rounded-t-2xl glass border-b border-border text-[11px] uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="w-full h-10 flex items-center justify-center gap-2 rounded-t-2xl border border-blue-400/60 bg-slate-950/95 text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-100 transition hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               aria-label={drawerOpen ? "Collapse activity drawer" : "Expand activity drawer"}
               aria-expanded={drawerOpen}
               aria-controls="ai-activity-drawer-content"
@@ -264,6 +289,7 @@ export function AIWorkspace() {
           </section>
         )}
       </div>
-    </div>
+      </div>
+    </section>
   );
 }

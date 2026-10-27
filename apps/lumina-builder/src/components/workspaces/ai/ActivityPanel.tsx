@@ -1,3 +1,4 @@
+import { panelSurface, panelReflection, panelEyebrow, quietButton } from "../developer/shared/surfaces";
 import { cn } from "@/lib/utils";
 import { activityLog, suggestions } from "./data";
 
@@ -7,17 +8,19 @@ type ActivityPanelProps = {
 
 export function ActivityPanel({ generating }: ActivityPanelProps) {
   return (
-    <aside className="w-full md:w-[280px] lg:w-[320px] min-h-0 shrink-0 glass-panel p-5 flex flex-col anim-in">
-      <div className="flex items-center justify-between mb-4">
+    <aside className={cn(panelSurface, "w-full max-h-[40vh] shrink-0")}>
+      <div aria-hidden="true" className={panelReflection} />
+      <div className="flex shrink-0 items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div>
-          <div className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70">Activity</div>
-          <div className="font-display font-semibold text-[14px] mt-0.5">AI generation</div>
+          <div className={panelEyebrow}>Activity</div>
+          <div className="mt-1 text-sm font-semibold text-sky-50">AI generation</div>
         </div>
         <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-violet">
           <span className="h-1.5 w-1.5 rounded-full bg-violet animate-pulse" />
           {generating ? "Running" : "Idle"}
         </span>
       </div>
+      <div className="min-h-0 overflow-y-auto p-4">
       <ol className="space-y-3">
         {activityLog.map((step, i) => (
           <li key={i} className="flex gap-3 items-start">
@@ -45,12 +48,13 @@ export function ActivityPanel({ generating }: ActivityPanelProps) {
           {suggestions.map((s) => (
             <button
               key={s}
-              className="px-2.5 h-7 rounded-full text-[11px] bg-surface-1 border border-border hover:border-white/15 hover:text-foreground text-muted-foreground transition"
+              className={quietButton}
             >
               {s}
             </button>
           ))}
         </div>
+      </div>
       </div>
     </aside>
   );

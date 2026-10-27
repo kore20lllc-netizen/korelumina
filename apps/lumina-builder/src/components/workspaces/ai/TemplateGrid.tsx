@@ -1,29 +1,30 @@
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { luminaTile } from "@/lib/luminaPalette";
+import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+import { ExecutivePremiumIcon } from "@/components/design-system/executive/ExecutivePremiumIcon";
+import { panelEyebrow } from "../developer/shared/surfaces";
 import { templates } from "./data";
 
 export function TemplateGrid() {
   return (
-    <div className="mt-8">
-      <div className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-3">
+    <div className="min-w-0">
+      <div className={cn(panelEyebrow, "mb-4")}>
         Or start from a template
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-        {templates.map((t, i) => {
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 2xl:grid-cols-4 gap-3">
+        {templates.map((t) => {
           const Icon = t.icon;
           return (
-            <button
+            <LuminaFlagshipCard
               key={t.label}
-              className="group relative text-left p-3.5 rounded-xl glass transition-all duration-300 hover:-translate-y-0.5 hover:bg-surface-1 overflow-hidden"
+              interactive
+              className="group min-w-0 text-left p-4"
             >
-              <div className={cn("relative h-8 w-8 rounded-lg grid place-items-center mb-3", luminaTile(i))}>
-                <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
-              </div>
-              <div className="font-medium text-[13px]">{t.label}</div>
-              <div className="text-[11px] text-muted-foreground mt-0.5">{t.desc}</div>
+              <div className="relative mb-3"><ExecutivePremiumIcon icon={Icon} state="active" /></div>
+              <div className="relative text-sm font-semibold text-sky-50">{t.label}</div>
+              <div className="relative mt-1 text-xs leading-5 text-sky-300/60">{t.desc}</div>
               <ArrowUpRight className="absolute top-3 right-3 h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition" />
-            </button>
+            </LuminaFlagshipCard>
           );
         })}
       </div>

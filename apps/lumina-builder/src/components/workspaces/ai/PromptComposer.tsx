@@ -9,7 +9,8 @@ const STATIC_PLACEHOLDER = "Describe what you want to build or paste a repositor
 
 import { useTypewriter, usePrefersReducedMotion } from "@/hooks/useTypewriter";
 import { Sparkles, Send, Wand2, Image as ImageIcon, Layers, Square } from "lucide-react";
-import { LuminaButton } from "@/components/lumina/LuminaButton";
+import { pillButton, quietButton, panelEyebrow } from "../developer/shared/surfaces";
+import { electricContour, premiumSurfaces } from "@/components/design-system/lumina";
 import { cn } from "@/lib/utils";
 
 type PromptComposerProps = {
@@ -36,16 +37,16 @@ export function PromptComposer({ prompt, onPromptChange, onGenerate, generating,
 
   return (
     <>
-      <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-4">
+      <div className={cn(panelEyebrow, "mb-3 flex items-center gap-2")}>
         <Sparkles className="h-3 w-3 text-violet" />
         AI Mode · describe anything
       </div>
-      <h1 className="font-display text-2xl md:text-[34px] font-semibold tracking-[-0.025em] leading-[1.1]">
+      <h2 className="text-2xl font-semibold tracking-[-0.025em] leading-tight text-sky-50">
         What do you want to <span className="text-gradient-lumina">build</span>?
-      </h1>
+      </h2>
 
       <div className="mt-6 relative">
-        <div className="relative glass-strong rounded-2xl p-1.5">
+        <div className={cn("rounded-[20px] p-1.5", premiumSurfaces.base.inset, electricContour.strength.subtle)}>
           <textarea
             value={prompt}
             onChange={(e) => onPromptChange(e.target.value)}
@@ -54,32 +55,33 @@ export function PromptComposer({ prompt, onPromptChange, onGenerate, generating,
                 ? STATIC_PLACEHOLDER
                 : (animatedPlaceholder || " ")
             }
+            aria-label="Build prompt"
             rows={4}
-            className="w-full resize-none bg-transparent outline-none px-4 py-3 text-[14px] leading-relaxed placeholder:text-muted-foreground/60"
+            className="w-full resize-none bg-transparent outline-none px-4 py-3 text-sm leading-relaxed text-sky-50 placeholder:text-sky-300/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 rounded-2xl"
           />
-          <div className="flex items-center justify-between gap-2 px-3 pb-3">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-3 pb-3">
             <div className="flex items-center gap-1.5">
-              <button className="h-8 px-2.5 rounded-lg text-[11px] text-muted-foreground hover:text-foreground hover:bg-surface-2 transition flex items-center gap-1.5">
+              <button className={quietButton}>
                 <ImageIcon className="h-3 w-3" />
                 Attach
               </button>
-              <button className="h-8 px-2.5 rounded-lg text-[11px] text-muted-foreground hover:text-foreground hover:bg-surface-2 transition flex items-center gap-1.5">
+              <button className={quietButton}>
                 <Layers className="h-3 w-3" />
                 Style
               </button>
             </div>
             <div className="flex items-center gap-2">
               {generating && onStop && (
-                <LuminaButton variant="ghost" size="md" onClick={onStop} aria-label="Stop generation">
+                <button type="button" className={pillButton("warning")} onClick={onStop} aria-label="Stop generation">
                   <Square className="h-3 w-3" />
                   Stop
-                </LuminaButton>
+                </button>
               )}
-              <LuminaButton onClick={onGenerate} disabled={!prompt.trim() || generating} size="md">
+              <button type="button" className={pillButton("active")} onClick={onGenerate} disabled={!prompt.trim() || generating}>
                 <Wand2 className={cn("h-3.5 w-3.5", generating && "animate-pulse")} />
                 {generating ? "Generating…" : "Generate"}
                 {!generating && <Send className="h-3 w-3" />}
-              </LuminaButton>
+              </button>
             </div>
           </div>
         </div>
