@@ -9,7 +9,10 @@ import {
 import {
   formatLastEdited,
 } from "@/lib/formatLastEdited";
-import { LuminaButton } from "@/components/lumina/LuminaButton";
+import { LuminaFlagshipCard } from "@/components/lumina/workspace/primitives/LuminaFlagshipCard";
+import { LuminaFlagshipSurface } from "@/components/lumina/workspace/primitives/LuminaFlagshipSurface";
+import { panelSurface, panelReflection, panelEyebrow, pillButton, quietButton } from "./developer/shared/surfaces";
+import { tonePill } from "./executive/shared/ExecutiveSection";
 import { cn } from "@/lib/utils";
 import { luminaFrame } from "@/lib/luminaPalette";
 import {
@@ -39,9 +42,9 @@ import {
 } from "@/services/repoIntelligenceService";
 
 const statusStyle = {
-  live: "bg-cyan/10 text-cyan border-cyan/25",
-  building: "bg-gold/10 text-gold border-gold/25",
-  draft: "bg-surface-2 text-muted-foreground border-border",
+  live: tonePill.healthy,
+  building: tonePill.warning,
+  draft: tonePill.active,
 };
 
 const INTELLIGENCE_TEXT_FILE_RE =
@@ -612,36 +615,39 @@ export function ImportsView() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="max-w-7xl mx-auto px-4 md:px-10 py-10 md:py-14">
+    <section aria-label="Imports Workspace" className="relative flex h-full min-h-0 min-w-0 w-full flex-col overflow-x-hidden overflow-y-auto overscroll-contain bg-transparent text-white">
+      <div className="space-y-5 p-4 md:p-6">
         <button
           onClick={() => setView("dashboard")}
-          className="inline-flex items-center gap-1.5 text-[12px] text-gold/70 hover:text-gold transition mb-6"
+          className={quietButton}
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Back to projects
         </button>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 anim-in">
+        <LuminaFlagshipCard as="article" className="flex min-w-0 flex-col gap-6 p-5 md:p-8">
+          <header className="relative z-10">
           <div>
-            <div className="text-[11px] uppercase tracking-[0.22em] text-gold/60 mb-2">Workspace</div>
-            <h1 className="font-display text-3xl md:text-[44px] font-semibold tracking-[-0.025em] leading-[1.05] text-gold">
+            <div className={panelEyebrow}>Repository Workspace</div>
+            <h1 className="mt-3 text-3xl font-black tracking-[-0.045em] sm:text-4xl lg:text-5xl">
               Imported <span className="text-gradient-lumina">projects</span>
             </h1>
-            <p className="text-gold/80 mt-2 text-[13px]">
+            <p className="mt-3 text-sm leading-6 text-sky-300/75">
               {allImports.length} imported · from GitHub, ZIP, or a folder
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-2 px-3 h-9 rounded-lg bg-background/20 backdrop-blur-md border border-gold/60 w-full md:w-64 focus-within:border-gold/90 shadow-[0_0_12px_-2px_hsl(var(--gold)/0.35)] focus-within:shadow-[0_0_22px_-2px_hsl(var(--gold)/0.65)] transition-all duration-300">
-              <Search className="h-3.5 w-3.5 text-gold/80" />
+          </header>
+          <div role="search" aria-label="Filter imported repositories" className="relative z-10 flex min-w-0 flex-wrap items-center gap-2">
+            <div className="flex h-10 w-full min-w-0 items-center gap-2 rounded-full border border-cyan-300/30 bg-slate-950/60 px-3 focus-within:ring-2 focus-within:ring-cyan-300/50 sm:w-64">
+              <Search className="h-3.5 w-3.5 text-sky-200/80" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
+                aria-label="Search imports"
                 placeholder="Search imports…"
-                className="bg-transparent outline-none text-[13px] flex-1 text-gold placeholder:text-gold/50"
+                className="min-w-0 flex-1 bg-transparent text-[13px] text-sky-100 outline-none placeholder:text-sky-200/50"
               />
               {q && (
-                <button onClick={() => setQ("")} aria-label="Clear search" className="text-gold/70 hover:text-gold">
+                <button onClick={() => setQ("")} aria-label="Clear search" className="text-sky-200/65 hover:text-cyan-100">
                   <X className="h-3 w-3" />
                 </button>
               )}
@@ -665,7 +671,7 @@ export function ImportsView() {
               <option value="month">This month</option>
               <option value="older">Older</option>
             </FilterSelect>
-            <div className="flex items-stretch h-9 rounded-lg bg-surface-1 border border-border overflow-hidden">
+            <div className="flex h-9 max-w-full items-stretch overflow-hidden rounded-full border border-cyan-300/25 bg-slate-950/60">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
@@ -704,7 +710,7 @@ export function ImportsView() {
                 onClick={resetPrefs}
                 aria-label="Reset sort, direction, and time filter to defaults"
                 title="Reset sort, direction, and time filter to defaults"
-                className="h-9 px-2.5 rounded-lg bg-surface-1 border border-border text-[12px] text-muted-foreground hover:text-foreground hover:border-white/15 transition inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet"
+                className={quietButton}
               >
                 <RotateCcw className="h-3 w-3" />
                 Reset
@@ -713,44 +719,45 @@ export function ImportsView() {
             {activeFilterCount > 0 && (
               <button
                 onClick={clearFilters}
-                className="h-9 px-2.5 rounded-lg bg-surface-1 border border-border text-[12px] text-muted-foreground hover:text-foreground hover:border-white/15 transition inline-flex items-center gap-1.5"
+                className={quietButton}
               >
                 <SlidersHorizontal className="h-3 w-3" />
                 Clear ({activeFilterCount})
               </button>
             )}
-            <LuminaButton size="md" onClick={() => setImportOpen(true)}>
+            <button className={pillButton("active")} onClick={() => setImportOpen(true)}>
               <Plus className="h-3.5 w-3.5" />
               Import new
-            </LuminaButton>
+            </button>
           </div>
-        </div>
+        </LuminaFlagshipCard>
 
         {allImports.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-white/10 bg-surface-1/40 p-12 text-center">
+          <LuminaFlagshipSurface dashed className="p-6 text-center sm:p-12">
             <div className="h-14 w-14 mx-auto rounded-xl bg-gradient-to-br from-violet to-magenta grid place-items-center mb-4 shadow-[0_4px_16px_-4px_hsl(var(--magenta)/0.5),inset_0_1px_0_hsl(220_20%_100%/0.18)]">
               <Github className="h-5 w-5 text-white" />
             </div>
-            <div className="font-display font-semibold text-[16px] text-gold">No imported projects yet</div>
-            <p className="text-[13px] text-gold/70 mt-1.5 max-w-sm mx-auto">
+            <div className="font-display font-semibold text-[16px] text-amber-400">No imported projects yet</div>
+            <p className="text-[13px] text-sky-200/65 mt-1.5 max-w-sm mx-auto">
               Bring in code from GitHub, upload a ZIP archive, or pick a local folder.
             </p>
-            <div className="mt-5 flex items-center justify-center gap-2">
-              <LuminaButton size="md" onClick={() => setImportOpen(true)}>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+              <button className={pillButton("active")} onClick={() => setImportOpen(true)}>
                 <Github className="h-3.5 w-3.5" />
                 Import a project
-              </LuminaButton>
-              <LuminaButton variant="ghost" size="md" onClick={() => setImportOpen(true)}>
+              </button>
+              <button className={quietButton} onClick={() => setImportOpen(true)}>
                 <Upload className="h-3.5 w-3.5" />
                 Upload ZIP
-              </LuminaButton>
+              </button>
             </div>
-          </div>
+          </LuminaFlagshipSurface>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            <button
+          <div aria-label="Imported repositories" className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            <LuminaFlagshipCard
               onClick={() => setImportOpen(true)}
-              className="group relative aspect-[4/3] rounded-2xl border border-dashed border-white/10 hover:border-magenta/50 transition-all duration-500 grid place-items-center overflow-hidden bg-surface-1/40"
+              interactive
+              className="group grid aspect-[4/3] min-w-0 place-items-center border-dashed"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet/15 via-transparent to-magenta/15" />
@@ -759,10 +766,10 @@ export function ImportsView() {
                 <div className="h-11 w-11 rounded-xl grid place-items-center mx-auto mb-3 bg-gradient-to-br from-violet to-magenta shadow-[0_4px_16px_-4px_hsl(var(--magenta)/0.5),inset_0_1px_0_hsl(220_20%_100%/0.18)] group-hover:scale-105 transition">
                   <Plus className="h-4 w-4 text-white" />
                 </div>
-                <div className="font-display font-semibold text-[15px] text-gold">Import another</div>
-                <div className="text-[11px] text-gold/70 mt-1">GitHub, ZIP, or folder</div>
+                <div className="font-display font-semibold text-[15px] text-amber-400">Import another</div>
+                <div className="text-[11px] text-sky-200/65 mt-1">GitHub, ZIP, or folder</div>
               </div>
-            </button>
+            </LuminaFlagshipCard>
 
             {imports.map((p, i) => {
               const src = sourceFor(p, overrides[p.id]);
@@ -782,8 +789,9 @@ export function ImportsView() {
                   if (e.key === " ") { e.preventDefault(); selectProject(p); }
                 }}
                 className={cn(
-                  "group relative aspect-[4/3] text-left rounded-2xl glass overflow-hidden transition-all duration-500 ease-fluid hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_hsl(230_80%_2%/0.9),0_0_0_1px_hsl(220_20%_100%/0.1)] anim-in cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet",
-                  isSelected && "ring-2 ring-violet/60 shadow-[0_24px_60px_-24px_hsl(var(--violet)/0.5)]"
+                  panelSurface,
+                  "group aspect-[4/3] min-w-0 cursor-pointer text-left transition hover:border-cyan-200/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60",
+                  isSelected && "border-cyan-100/90 ring-2 ring-cyan-300/40",
                 )}
                 style={{ animationDelay: `${i * 0.05}s` }}
               >
@@ -797,7 +805,7 @@ export function ImportsView() {
                   </div>
                   <span
                     className={cn(
-                      "absolute top-3 right-3 px-2 py-0.5 rounded-md border text-[10px] uppercase tracking-[0.12em] backdrop-blur-md",
+                      "absolute top-3 right-3 px-2 py-0.5 rounded-full border text-[10px] uppercase tracking-[0.12em] backdrop-blur-md",
                       statusStyle[p.status]
                     )}
                   >
@@ -836,7 +844,7 @@ export function ImportsView() {
                         <button
                           onClick={(e) => e.stopPropagation()}
                           aria-label={`Actions for ${p.name}`}
-                          className="h-8 w-8 grid place-items-center rounded-lg hover:bg-surface-2 transition opacity-0 group-hover:opacity-100 data-[state=open]:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet"
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-cyan-300/25 bg-slate-950/60 transition hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-cyan-300"
                         >
                           <MoreHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
                         </button>
@@ -864,7 +872,7 @@ export function ImportsView() {
                 </div>
               </div>
                 </HoverCardTrigger>
-                <HoverCardContent side="top" align="start" className="w-[360px] p-0 glass-strong border-border overflow-hidden">
+                <HoverCardContent side="top" align="start" className={cn(panelSurface, "w-[360px] max-w-[calc(100vw-2rem)] max-h-[calc(100dvh-2rem)] overflow-y-auto p-0")}>
                   {(() => {
                     const rid = runtimeProjectId(p);
                     const logs = runtimeLogs[rid] ?? [];
@@ -897,7 +905,7 @@ export function ImportsView() {
                               type="button"
                               disabled={!!busy}
                               onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "start"); }}
-                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                              className={cn(quietButton, "h-7 justify-center px-1 text-[10px]")}
                             >
                               {busy === "start" ? "..." : "Start"}
                             </button>
@@ -905,7 +913,7 @@ export function ImportsView() {
                               type="button"
                               disabled={!!busy}
                               onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "restart"); }}
-                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                              className={cn(quietButton, "h-7 justify-center px-1 text-[10px]")}
                             >
                               {busy === "restart" ? "..." : "Restart"}
                             </button>
@@ -913,7 +921,7 @@ export function ImportsView() {
                               type="button"
                               disabled={!!busy}
                               onClick={(e) => { e.stopPropagation(); void runRuntimeAction(p, "stop"); }}
-                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                              className={cn(quietButton, "h-7 justify-center px-1 text-[10px]")}
                             >
                               {busy === "stop" ? "..." : "Stop"}
                             </button>
@@ -925,7 +933,7 @@ export function ImportsView() {
                                 if (runtimeUrl) window.open(runtimeUrl, "_blank", "noopener,noreferrer");
                                 else void runRuntimeAction(p, "open");
                               }}
-                              className="h-7 rounded-md bg-surface-1 border border-border text-[11px] hover:bg-surface-2 disabled:opacity-50"
+                              className={cn(quietButton, "h-7 justify-center px-1 text-[10px]")}
                             >
                               Open
                             </button>
@@ -933,7 +941,7 @@ export function ImportsView() {
                         </div>
 
                         <div className="px-3 pb-3">
-                          <div className="text-[10px] uppercase tracking-[0.16em] text-gold/60 mb-1.5">
+                          <div className="text-[10px] uppercase tracking-[0.16em] text-cyan-300/65 mb-1.5">
                             Latest logs
                           </div>
                           <div className="max-h-32 overflow-auto rounded-lg bg-black/35 border border-white/10 p-2 font-mono text-[10px] leading-relaxed text-muted-foreground">
@@ -980,11 +988,12 @@ export function ImportsView() {
             );
           return (
             <aside
-              className="fixed right-4 bottom-4 top-20 w-[340px] z-40 rounded-2xl glass-strong border border-border shadow-[0_30px_80px_-20px_hsl(230_80%_2%/0.9)] flex flex-col overflow-hidden anim-in"
+              className={cn(panelSurface, "fixed inset-x-3 bottom-3 top-20 z-40 sm:left-auto sm:right-4 sm:w-[360px]")}
               role="complementary"
               aria-label={`Details for ${p.name}`}
             >
-              <div className={cn("relative h-28 overflow-hidden", luminaFrame(0))}>
+              <div aria-hidden="true" className={panelReflection} />
+              <div className={cn("relative h-28 shrink-0 overflow-hidden", luminaFrame(0))}>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
                 <button
                   onClick={() => setSelectedId(null)}
@@ -995,21 +1004,21 @@ export function ImportsView() {
                 </button>
                 <span
                   className={cn(
-                    "absolute bottom-3 left-3 px-2 py-0.5 rounded-md border text-[10px] uppercase tracking-[0.12em] backdrop-blur-md",
+                    "absolute bottom-3 left-3 px-2 py-0.5 rounded-full border text-[10px] uppercase tracking-[0.12em] backdrop-blur-md",
                     statusStyle[p.status]
                   )}
                 >
                   {p.status}
                 </span>
               </div>
-              <div className="px-5 py-4 border-b border-border/60">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-gold/60">Project</div>
+              <div className="relative shrink-0 border-b border-cyan-300/20 px-5 py-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-300/65">Project</div>
                 <div className="font-display font-semibold text-[18px] tracking-tight mt-1 truncate flex items-center gap-2">
                   {p.name}
                   {p.runtime && <span className={cn("h-1.5 w-1.5 rounded-full", runtimeDot[p.runtime])} />}
                 </div>
               </div>
-              <div className="p-5 space-y-3 text-[13px] flex-1 overflow-y-auto">
+              <div className="relative min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain p-5 text-[13px]">
                 <DetailRow icon={Activity} label="Status" value={<span className="capitalize">{p.status}</span>} />
                 <DetailRow icon={Clock} label="Last edited" value={
                   <div className="text-right">
@@ -1055,7 +1064,7 @@ export function ImportsView() {
                 {p.runtime && <DetailRow icon={GitBranch} label="Runtime" value={<span className="capitalize">{p.runtime}</span>} />}
 
                 <div className="pt-3 mt-3 border-t border-border/60">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-gold/60 mb-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-300/65 mb-3">
                     Architecture
                   </div>
 
@@ -1100,7 +1109,7 @@ export function ImportsView() {
 
                 <div className="pt-3 mt-3 border-t border-border/60">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-gold/60">Quick links</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-300/65">Quick links</div>
                     <button
                       onClick={() => startEditLinks(p)}
                       className="text-[11px] text-muted-foreground hover:text-foreground inline-flex items-center gap-1 transition"
@@ -1140,10 +1149,10 @@ export function ImportsView() {
                   </div>
                 </div>
               </div>
-              <div className="p-4 border-t border-border/60 flex items-center gap-2">
-                <LuminaButton size="md" className="flex-1" onClick={() => openProject(p)}>
+              <div className="relative flex shrink-0 items-center gap-2 border-t border-cyan-300/20 p-4">
+                <button className={cn(pillButton("active"), "flex-1 justify-center")} onClick={() => openProject(p)}>
                   <ExternalLink className="h-3.5 w-3.5" /> Open project
-                </LuminaButton>
+                </button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button
@@ -1178,7 +1187,7 @@ export function ImportsView() {
         })()}
       </div>
       <Dialog open={!!renameTarget} onOpenChange={(o) => { if (!o) setRenameTarget(null); }}>
-        <DialogContent className="glass-strong border-border max-w-sm">
+        <DialogContent className={cn(panelSurface, "max-h-[calc(100dvh-2rem)] max-w-sm overflow-y-auto")}>
           <DialogHeader>
             <DialogTitle className="font-display">Rename project</DialogTitle>
           </DialogHeader>
@@ -1190,13 +1199,13 @@ export function ImportsView() {
             className="w-full h-10 px-3 rounded-lg bg-surface-1 border border-border text-[13px] outline-none focus:border-violet/50 transition"
           />
           <DialogFooter>
-            <LuminaButton variant="ghost" size="md" onClick={() => setRenameTarget(null)}>Cancel</LuminaButton>
-            <LuminaButton size="md" onClick={commitRename}>Save</LuminaButton>
+            <button className={quietButton} onClick={() => setRenameTarget(null)}>Cancel</button>
+            <button onClick={commitRename} className={pillButton("active")}>Save</button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
       <Dialog open={!!editTarget} onOpenChange={(o) => { if (!o) setEditTarget(null); }}>
-        <DialogContent className="glass-strong border-border max-w-md">
+        <DialogContent className={cn(panelSurface, "max-h-[calc(100dvh-2rem)] max-w-md overflow-y-auto")}>
           <DialogHeader>
             <DialogTitle className="font-display">Edit project links</DialogTitle>
           </DialogHeader>
@@ -1256,12 +1265,12 @@ export function ImportsView() {
             );
           })()}
           <DialogFooter className="flex-row sm:justify-between sm:flex-row gap-2">
-            <LuminaButton variant="ghost" size="md" onClick={resetEditLinks} disabled={!editTarget || !overrides[editTarget.id]}>
+            <button onClick={resetEditLinks} disabled={!editTarget || !overrides[editTarget.id]} className={quietButton}>
               <RotateCcw className="h-3.5 w-3.5" /> Reset
-            </LuminaButton>
+            </button>
             <div className="flex items-center gap-2">
-              <LuminaButton variant="ghost" size="md" onClick={() => setEditTarget(null)}>Cancel</LuminaButton>
-              <LuminaButton size="md" onClick={commitEditLinks}>Save</LuminaButton>
+              <button className={quietButton} onClick={() => setEditTarget(null)}>Cancel</button>
+              <button onClick={commitEditLinks} className={pillButton("active")}>Save</button>
             </div>
           </DialogFooter>
         </DialogContent>
@@ -1285,18 +1294,18 @@ export function ImportsView() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </section>
   );
 }
 
 function DetailRow({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-start justify-between gap-3">
-      <div className="flex items-center gap-2 text-muted-foreground">
+      <div className="flex shrink-0 items-center gap-2 text-sky-200/60">
         <Icon className="h-3.5 w-3.5" />
         <span className="text-[12px]">{label}</span>
       </div>
-      <div className="text-foreground text-[12px] text-right">{value}</div>
+      <div className="min-w-0 break-words text-right text-[12px] text-sky-100">{value}</div>
     </div>
   );
 }
@@ -1351,7 +1360,7 @@ function LinkField({
   const effective = value.trim() || placeholder;
   return (
     <label className="block">
-      <div className="text-[11px] uppercase tracking-widest text-gold/70 mb-1">{label}</div>
+      <div className="text-[11px] uppercase tracking-widest text-sky-200/65 mb-1">{label}</div>
       <div className="flex items-stretch gap-1.5">
         <input
           type="url"
@@ -1384,10 +1393,10 @@ function FilterSelect({
       onChange={(e) => onChange(e.target.value)}
       aria-label={ariaLabel}
       className={cn(
-        "h-9 px-2.5 rounded-lg border text-[12px] outline-none transition",
+        "h-9 min-w-0 max-w-full rounded-full border px-3 text-[12px] outline-none transition focus-visible:ring-2 focus-visible:ring-cyan-300",
         isActive
-          ? "bg-violet/10 border-violet/40 text-foreground"
-          : "bg-background/20 backdrop-blur-md border-gold/60 text-gold hover:border-gold/90 hover:bg-gold/15 shadow-[0_0_12px_-2px_hsl(var(--gold)/0.35)] hover:shadow-[0_0_22px_-2px_hsl(var(--gold)/0.65)]"
+          ? tonePill.active
+          : "border-cyan-300/30 bg-slate-950/60 text-sky-200 hover:border-cyan-200/60"
       )}
     >
       {children}
