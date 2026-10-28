@@ -15,7 +15,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { repoAuditAccess } from "@/services/repoAuditAccess";
-import { getCurrentRole } from "@/services/workspaceAccessService";
+import { getCapabilities, getCurrentRole } from "@/services/workspaceAccessService";
 import { auth } from "@/providers/auth-registry";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useAuth } from "@/context/AuthContext";
@@ -36,10 +36,10 @@ export function Sidebar() {
     appearancePanelOpen,
     toggleAppearancePanel,
   } = useWorkspace();
-  const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [focusIndex, setFocusIndex] = useState(0);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const role = getCurrentRole();
+  const capabilities = getCapabilities(role);
   const [adminOpen, setAdminOpen] = useState<boolean>(() => {
     try { return window.localStorage.getItem("korelumina:sidebarAdminOpen") !== "0"; } catch { return true; }
   });
@@ -60,14 +60,17 @@ export function Sidebar() {
           /* ADR-0046: Business and Enterprise diagnose their imported repositories. */
           ...(repoAuditAccess(role) === "diagnosis" ? [{ icon: Activity, label: "Repo Audit", active: view === "repo-audit" }] : []),
           /* MS-2026-0015: in-house engineers reach the repair queue and the audit. */
-          ...(role === "inhouse-dev"
-            ? [
-                { icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" },
-                { icon: Activity, label: "Repo Audit", active: view === "repo-audit" },
-              ]
+          ...(capabilities.inhouseDevDashboard && !capabilities.adminTools
+            ? [{ icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" }]
             : []),
-          { icon: Box, label: "Templates" },
-          { icon: Settings, label: "Settings" },
+          ...(repoAuditAccess(role) === "engineer" && !capabilities.adminTools
+            ? [{ icon: Activity, label: "Repo Audit", active: view === "repo-audit" }]
+            : []),
+          ...(capabilities.deploymentDiagnostics && !capabilities.adminTools
+            ? [{ icon: Gauge, label: "Deployment Diagnostics", active: view === "deployment-diagnostics" }]
+            : []),
+          { icon: Box, label: "Templates", active: view === "templates" },
+          { icon: Settings, label: "Settings", active: view === "settings" },
         ]
       : mode === "ai"
       ? [
@@ -93,19 +96,17 @@ export function Sidebar() {
           { icon: Settings, label: "Settings" },
         ];
 
-  // Admin-only group (Repo Audit, In-House Dev, Admin) is rendered as a
+  // Internal entries remain in the admin group when adminTools is available;
+  // capability checks decide whether restricted destinations appear.
+  // The admin group is rendered as a
   // separate, labeled section below the main nav — visible only to admins.
   const adminItems: NavItemDef[] =
     (role === "admin" || role === "super_admin") &&
     view !== "workspace"
       ? [
           { icon: Activity, label: "Repo Audit", active: view === "repo-audit" },
-          { icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" },
-          {
-            icon: Gauge,
-            label: "Deployment Diagnostics",
-            active: view === "deployment-diagnostics",
-          },
+          ...(capabilities.inhouseDevDashboard ? [{ icon: ShieldCheck, label: "In-House Dev", active: view === "inhouse-dev" }] : []),
+          ...(capabilities.deploymentDiagnostics ? [{ icon: Gauge, label: "Deployment Diagnostics", active: view === "deployment-diagnostics" }] : []),
           {
             icon: ServerCog,
             label: "Runtime Operations",
@@ -148,6 +149,48 @@ export function Sidebar() {
     setFocusIndex(next);
     itemRefs.current[next]?.focus();
   };
+
+  function focusWorkspacePanel(selector: string) {
+    const panel = document.querySelector<HTMLElement>(selector);
+    if (!panel) return false;
+    panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+    if (!panel.matches("input, textarea, button, [tabindex]")) panel.tabIndex = -1;
+    panel.focus({ preventScroll: true });
+    return true;
+  }
+
+  function openExistingPanel(label: string) {
+    if (view !== "workspace") return false;
+    if (mode === "ai" && label === "Prompt") {
+      return focusWorkspacePanel('[aria-label="AI workspace"] [aria-label="Build prompt"]');
+    }
+    if (mode === "developer" && (label === "Files" || label === "Search")) {
+      return focusWorkspacePanel(label === "Search"
+        ? '[aria-label="Developer"] [aria-label="Find a file"]'
+        : '[aria-label="Developer"] [aria-label="Explorer"]');
+    }
+    if (mode === "developer" && label === "AI Assist") {
+      const tab = Array.from(document.querySelectorAll<HTMLButtonElement>('[aria-label="Developer"] [aria-label="Preview, logs and AI Assist"] [role="tab"]'))
+        .find((button) => button.textContent?.trim() === "AI Assist");
+      if (!tab) return false;
+      tab.click();
+      tab.scrollIntoView({ block: "nearest", inline: "nearest" });
+      tab.focus({ preventScroll: true });
+      return true;
+    }
+    if (mode === "designer" && label === "Layers") {
+      return focusWorkspacePanel('[aria-label="Designer workspace"] [aria-label="Pages, layers and insert tools"]');
+    }
+    if (mode === "designer" && label === "Styles") {
+      const tab = document.querySelector<HTMLButtonElement>('[aria-label="Designer inspector"] [role="tab"]');
+      if (!tab) return false;
+      tab.click();
+      tab.scrollIntoView({ block: "nearest", inline: "nearest" });
+      tab.focus({ preventScroll: true });
+      return true;
+    }
+    return false;
+  }
 
   return (
     <>
@@ -216,7 +259,11 @@ export function Sidebar() {
                   label={item.label}
                   icon={<Icon />}
                   badge={item.badge}
-                  active={activeLabel ? activeLabel === item.label : item.active}
+                  active={item.active}
+                  ref={(node) => { itemRefs.current[index] = node; }}
+                  tabIndex={focusIndex === index ? 0 : -1}
+                  onFocus={() => setFocusIndex(index)}
+                  onKeyDown={(event) => handleKeyDown(event, index)}
                   compact={true}
                   onClick={() => {
                     if (item.label === "Projects") {
@@ -253,10 +300,9 @@ export function Sidebar() {
                       item.label === "Genesis"
                     ) {
                       setView("genesis");
-                    } else {
+                    } else if (!openExistingPanel(item.label)) {
                       toast(item.label, { description: "Panel coming soon" });
                     }
-                    setActiveLabel(item.label);
                     setFocusIndex(index);
                     setSidebarOpen(false);
                   }} />
@@ -281,7 +327,6 @@ export function Sidebar() {
                   compact={true}
                   onClick={() => {
                     setView("admin");
-                    setActiveLabel("Admin");
                     setSidebarOpen(false);
                   }}
                 />
