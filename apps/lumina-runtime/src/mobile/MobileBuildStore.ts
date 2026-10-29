@@ -196,6 +196,21 @@ export class FileMobileBuildStore implements MobileBuildStore {
       try { fs.unlinkSync(temporary); } catch { /* Unpublished crash leftovers are never authoritative. */ }
     }
   }
+  /** Initialization health check; journal parsing remains owned by this persistence layer. */
+  validateStorage(): void {
+    this.#guard(() => {
+      if (!this.#directory(this.storageRoot)) return unavailable();
+      for (const projectId of fs.readdirSync(this.storageRoot)) {
+        if (projectId === ".runtime-owner" || projectId.startsWith(".mobile-probe-")) continue;
+        const project = this.#project(projectId); if (!project) return corrupt();
+        for (const group of fs.readdirSync(project)) {
+          if (!/^[a-f0-9]{64}$/.test(group)) return corrupt();
+          const frames = this.#journal(path.join(project, group));
+          if (frames.some(frame => frame.entry.record.request.projectId !== projectId)) return corrupt();
+        }
+      }
+    });
+  }
   read(projectId: string, requestId: string): MobileBuildEntry | null {
     return this.#guard(() => { const found = this.#find(projectId, requestId); if (!found) return null; this.#durable(found.directory); return freezeMobileBuildValue(found.frames[found.frames.length - 1].entry); });
   }
