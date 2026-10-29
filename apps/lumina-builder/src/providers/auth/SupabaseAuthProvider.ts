@@ -1,3 +1,4 @@
+import type { Session as SupabaseSession } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { AppError } from "@/lib/errors";
 import type {
@@ -40,19 +41,23 @@ function toUser(raw: {
   };
 }
 
-function toSession(raw: {
-  access_token: string;
-  expires_at?: number;
-  user: { id: string };
-}): Session {
-  return {
-    userId: raw.user.id,
-    token: raw.access_token,
-    expiresAt:
-      raw.expires_at
-        ? raw.expires_at * 1000
-        : Date.now() + 3600_000,
-  };
+type ValidSession = SupabaseSession & { expires_at: number };
+
+function isValidSession(value: unknown): value is ValidSession {
+  if (!value || typeof value !== "object") return false;
+  const session = value as Partial<SupabaseSession>;
+  return typeof session.access_token === "string" && session.access_token.trim().length > 0
+    && typeof session.refresh_token === "string" && session.refresh_token.trim().length > 0
+    && typeof session.expires_at === "number" && Number.isFinite(session.expires_at) && Number.isFinite(session.expires_at * 1000)
+    && session.expires_at * 1000 > Date.now()
+    && !!session.user && typeof session.user === "object"
+    && typeof session.user.id === "string" && session.user.id.trim().length > 0
+    && (session.user.email === undefined || typeof session.user.email === "string")
+    && (session.user.created_at === undefined || typeof session.user.created_at === "string");
+}
+
+function toSession(raw: ValidSession): Session {
+  return { userId: raw.user.id, token: raw.access_token, expiresAt: raw.expires_at * 1000 };
 }
 
 function fail(error: { message?: string } | null): never {
@@ -63,61 +68,96 @@ function fail(error: { message?: string } | null): never {
 }
 
 export class SupabaseAuthProvider implements AuthProvider {
-  getSession(): Session | null {
-    if (!supabase) {
-      return null;
+  private snapshot: { session: Session; user: User } | null = null;
+  private listeners = new Set<() => void>();
+  private expiryTimer: ReturnType<typeof setTimeout> | undefined;
+  private pendingRead: Promise<void> | null = null;
+  private revision = 0;
+  private signedOut = false;
+  private unsubscribe: (() => void) | undefined;
+
+  constructor() {
+    if (!supabase) return;
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      // SDK callbacks must stay synchronous: awaiting another auth call here
+      // can deadlock the SDK's session lock.
+      if (event === "SIGNED_OUT") this.signedOut = true;
+      if (event === "SIGNED_IN") this.signedOut = false;
+      this.revision += 1;
+      this.publish(this.signedOut ? null : session);
+    });
+    this.unsubscribe = () => subscription.unsubscribe();
+    void this.readSession();
+  }
+
+  private publish(value: unknown) {
+    if (this.expiryTimer !== undefined) clearTimeout(this.expiryTimer);
+    this.expiryTimer = undefined;
+    this.snapshot = isValidSession(value)
+      ? { session: toSession(value), user: toUser(value.user) }
+      : null;
+    if (this.snapshot) {
+      const delay = Math.min(this.snapshot.session.expiresAt - Date.now(), 2_147_483_647);
+      this.expiryTimer = setTimeout(() => {
+        if (this.snapshot && this.snapshot.session.expiresAt > Date.now()) {
+          this.publish(value);
+          return;
+        }
+        this.publish(null);
+        void this.readSession();
+      }, Math.max(0, delay));
     }
+    this.listeners.forEach((listener) => listener());
+  }
 
-    try {
-      const storageKey = Object.keys(localStorage).find(
-        (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
-      );
-
-      if (!storageKey) return null;
-
-      const raw = JSON.parse(
-        localStorage.getItem(storageKey) || "{}",
-      );
-
-      const session = raw?.currentSession ?? raw;
-
-      if (!session?.access_token || !session?.user?.id) {
-        return null;
+  private readSession(): Promise<void> {
+    if (!supabase || this.signedOut) return Promise.resolve();
+    if (this.pendingRead) return this.pendingRead;
+    const revision = this.revision;
+    const read = async () => {
+      try {
+        // getSession joins the configured project's SDK initialization and
+        // refresh lock. Never read or delete SDK credentials ourselves.
+        const { data, error } = await supabase!.auth.getSession();
+        if (revision === this.revision && !this.signedOut) this.publish(error ? null : data.session);
+      } catch {
+        if (revision === this.revision && !this.signedOut) this.publish(null);
       }
+    };
+    this.pendingRead = read().finally(() => { this.pendingRead = null; });
+    return this.pendingRead;
+  }
 
-      return toSession(session);
-    } catch (error) {
-      console.error("[SupabaseAuthProvider] Failed to get session:", error);
-      return null;
+  private current() {
+    if (this.snapshot && this.snapshot.session.expiresAt <= Date.now()) {
+      // Reads during render fail closed immediately; defer notifications so
+      // subscribers are not updated inside another component's render.
+      this.snapshot = null;
+      const revision = this.revision;
+      queueMicrotask(() => {
+        if (!this.snapshot && revision === this.revision) { this.publish(null); void this.readSession(); }
+      });
     }
+    if (!this.snapshot && !this.signedOut) void this.readSession();
+    return this.snapshot;
+  }
+
+  getSession(): Session | null {
+    return this.current()?.session ?? null;
   }
 
   getUser(): User | null {
-    if (!supabase) {
-      return null;
-    }
+    return this.current()?.user ?? null;
+  }
 
-    try {
-      const storageKey = Object.keys(localStorage).find(
-        (k) => k.startsWith("sb-") && k.endsWith("-auth-token"),
-      );
-
-      if (!storageKey) return null;
-
-      const raw = JSON.parse(
-        localStorage.getItem(storageKey) || "{}",
-      );
-
-      const session = raw?.currentSession ?? raw;
-      const user = session?.user;
-
-      if (!user) return null;
-
-      return toUser(user);
-    } catch (error) {
-      console.error("[SupabaseAuthProvider] Failed to get user:", error);
-      return null;
-    }
+  // Provider owns one SDK subscription and expiry timer; tests/HMR can release it.
+  dispose() {
+    this.signedOut = true;
+    this.revision += 1;
+    this.unsubscribe?.();
+    if (this.expiryTimer !== undefined) clearTimeout(this.expiryTimer);
+    this.listeners.clear();
+    this.snapshot = null;
   }
 
   async signUp({
@@ -147,18 +187,19 @@ export class SupabaseAuthProvider implements AuthProvider {
       },
     });
 
-    if (error || !data.user) fail(error);
+    if (error || !data.user || (data.session && !isValidSession(data.session))) fail(error);
+    if (data.session) {
+      this.signedOut = false;
+      this.revision += 1;
+      this.publish(data.session);
+    }
 
     return {
-  user: toUser(data.user),
-  session: data.session
-    ? toSession(data.session)
-    : {
-        userId: data.user.id,
-        token: "",
-        expiresAt: Date.now() + 3600_000,
-      },
-};
+      user: toUser(data.user),
+      session: isValidSession(data.session)
+        ? toSession(data.session)
+        : { userId: data.user.id, token: "", expiresAt: Date.now() + 3600_000 },
+    };
   }
 
   async signIn({
@@ -181,10 +222,13 @@ export class SupabaseAuthProvider implements AuthProvider {
         password,
       });
 
-    if (error || !data.user || !data.session) {
+    if (error || !data.user || !isValidSession(data.session)) {
       fail(error);
     }
 
+    this.signedOut = false;
+    this.revision += 1;
+    this.publish(data.session);
     return {
       user: toUser(data.user),
       session: toSession(data.session),
@@ -192,29 +236,26 @@ export class SupabaseAuthProvider implements AuthProvider {
   }
 
   async signOut() {
-  if (!supabase) return;
-
-  const { error } = await supabase.auth.signOut({
-    scope: "global",
-  });
-
-  try {
-    Object.keys(localStorage).forEach((k) => {
-      if (
-        k.startsWith("sb-") ||
-        k.startsWith("korelumina:")
-      ) {
-        localStorage.removeItem(k);
-      }
-    });
-
-    sessionStorage.clear();
-  } catch {
-    // noop
+    // Invalidate locally before awaiting network I/O, and reject stale reads
+    // or refresh events until a new explicit sign-in.
+    this.signedOut = true;
+    this.revision += 1;
+    this.publish(null);
+    try {
+      if (!supabase) return;
+      const { error } = await supabase.auth.signOut({ scope: "global" });
+      if (error) fail(error);
+    } finally {
+      try {
+        // Clear only application identity/navigation keys; the SDK handles
+        // its configured project's credentials. Never enumerate auth caches.
+        for (const key of ["korelumina:view", "korelumina:activeTeam", "korelumina:role"]) {
+          localStorage.removeItem(key);
+        }
+        sessionStorage.clear();
+      } catch { /* Storage may be unavailable. SDK owns its own project keys. */ }
+    }
   }
-
-  if (error) fail(error);
-}
 
   async resetPassword(email: string) {
     if (!supabase) {
@@ -284,21 +325,9 @@ export class SupabaseAuthProvider implements AuthProvider {
   }
 
   onChange(callback: () => void) {
-    if (!supabase) {
-      return () => {};
-    }
-
-    try {
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange(() => {
-        callback();
-      });
-
-      return () => subscription.unsubscribe();
-    } catch (error) {
-      console.error("[SupabaseAuthProvider] Failed to setup auth listener:", error);
-      return () => {};
-    }
+    this.listeners.add(callback);
+    // Covers a session resolving between a hook's initial read and effect.
+    callback();
+    return () => { this.listeners.delete(callback); };
   }
 }
