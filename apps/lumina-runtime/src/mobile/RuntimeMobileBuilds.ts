@@ -1,3 +1,4 @@
+import type { MobileWorkerProof } from "./MobileWorkerLease.js";
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -82,11 +83,11 @@ export class RuntimeMobileBuilds {
   #lifecycle: MobileBuildLifecycle;
   #state: MobileBuildReadiness = status("ready", true);
   #closed = false;
-  private constructor(root: string, token: string, rootInfo: Identity, claimInfo: Identity, store: FileMobileBuildStore, verify?: MobileArtifactVerifier) {
+  private constructor(root: string, token: string, rootInfo: Identity, claimInfo: Identity, store: FileMobileBuildStore, verify?: MobileArtifactVerifier, now?: () => number) {
     this.#root = root; this.#token = token; this.#rootIdentity = rootInfo; this.#claimIdentity = claimInfo;
-    this.#lifecycle = new MobileBuildLifecycle(verify, store);
+    this.#lifecycle = new MobileBuildLifecycle(verify, store, { requireWorkerLease: true, now });
   }
-  static initialize(options: { environment?: NodeJS.ProcessEnv; verifyArtifact?: MobileArtifactVerifier } = {}): RuntimeMobileBuildInitialization {
+  static initialize(options: { environment?: NodeJS.ProcessEnv; verifyArtifact?: MobileArtifactVerifier; now?: () => number } = {}): RuntimeMobileBuildInitialization {
     const environment = options.environment ?? process.env;
     const root = environment.KORELUMINA_MOBILE_BUILD_STORAGE_ROOT;
     const mode = environment.KORELUMINA_MOBILE_BUILD_STORAGE_MODE;
@@ -106,7 +107,7 @@ export class RuntimeMobileBuilds {
       if (!sameIdentity(rootInfo, rootIdentity(root))) return deny("storage_ownership_lost");
       const store = new FileMobileBuildStore({ storageRoot: root });
       store.validateStorage();
-      const service = new RuntimeMobileBuilds(root, token, rootInfo, claimInfo, store, options.verifyArtifact);
+      const service = new RuntimeMobileBuilds(root, token, rootInfo, claimInfo, store, options.verifyArtifact, options.now);
       const readiness = service.readiness(); if (!readiness.ready) return deny(readiness.reason);
       return Object.freeze({ ready: true, readiness, service });
     } catch (error) {
@@ -143,7 +144,10 @@ export class RuntimeMobileBuilds {
   }
   create(input: unknown, specification: MobilePackageSpecification, context: MobilePackageValidationContext): MobileBuildRecord { return this.#run(() => this.#lifecycle.create(input, specification, context)); }
   get(requestId: string, context: MobilePackageValidationContext): MobileBuildRecord { return this.#run(() => this.#lifecycle.get(requestId, context)); }
-  transition(requestId: string, command: MobileBuildCommand, context: MobilePackageValidationContext): MobileBuildRecord { return this.#run(() => this.#lifecycle.transition(requestId, command, context)); }
+  transition(requestId: string, command: MobileBuildCommand, context: MobilePackageValidationContext, proof?: MobileWorkerProof): MobileBuildRecord { return this.#run(() => this.#lifecycle.transition(requestId, command, context, proof)); }
+  claim(requestId: string, sequence: number, attemptId: string, workerId: string, context: MobilePackageValidationContext, ttlMs?: number): MobileBuildRecord { return this.#run(() => this.#lifecycle.claim(requestId, sequence, attemptId, workerId, context, ttlMs)); }
+  renew(requestId: string, sequence: number, attemptId: string, proof: MobileWorkerProof, context: MobilePackageValidationContext, ttlMs?: number): MobileBuildRecord { return this.#run(() => this.#lifecycle.renew(requestId, sequence, attemptId, proof, context, ttlMs)); }
+  recover(requestId: string, sequence: number, attemptId: string, context: MobilePackageValidationContext): MobileBuildRecord { return this.#run(() => this.#lifecycle.recover(requestId, sequence, attemptId, context)); }
   retry(requestId: string, expectedSequence: number, context: MobilePackageValidationContext): MobileBuildRecord { return this.#run(() => this.#lifecycle.retry(requestId, expectedSequence, context)); }
   history(requestId: string, context: MobilePackageValidationContext): readonly MobileBuildRecord[] { return this.#run(() => this.#lifecycle.history(requestId, context)); }
   close(): MobileBuildReadiness {

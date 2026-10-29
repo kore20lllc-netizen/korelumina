@@ -1,3 +1,4 @@
+import type { MobileWorkerLease } from "./MobileWorkerLease.js";
 import { createHash } from "node:crypto";
 import { decideProjectAccess } from "../routes/projectAccess.js";
 import { validateMobilePackageSpecification } from "./validateMobilePackageSpecification.js";
@@ -44,6 +45,7 @@ export interface MobileArtifactEvidence {
   readonly signing: "verified" | "unsigned";
 }
 export interface MobileBuildAttempt {
+  readonly workerLease?: MobileWorkerLease;
   readonly attemptId: string;
   readonly number: number;
   readonly state: MobileBuildState;

@@ -1,3 +1,4 @@
+import { MOBILE_WORKER_LEASE_POLICY, validateMobileWorkerLease } from "./MobileWorkerLease.js";
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -67,6 +68,8 @@ function checkEntry(entry: MobileBuildEntry): void {
       !Array.isArray(attempt.diagnosticReferences) || attempt.diagnosticReferences.length > 100 ||
       (index < record.attempts.length - 1 && !["failed", "cancelled"].includes(attempt.state)) ||
       ((attempt.state === "failed") !== (attempt.failure !== null)) || ((attempt.state === "completed") !== (attempt.artifact !== null))) return corrupt();
+    if (attempt.workerLease && (!validateMobileWorkerLease(attempt.workerLease) || attempt.workerLease.fencingToken > record.sequence ||
+      (["failed", "cancelled", "completed"].includes(attempt.state) && attempt.workerLease.status !== "revoked"))) return corrupt();
     if (new Set(attempt.diagnosticReferences).size !== attempt.diagnosticReferences.length || attempt.diagnosticReferences.some((ref: unknown) => !mobileBuildReference(ref)) ||
       (attempt.failure && !same(attempt.failure, classifyMobileBuildFailure(attempt.failure.classification)))) return corrupt();
     if (attempt.artifact) {
@@ -86,13 +89,32 @@ function checkSuccessor(previous: MobileBuildEntry, next: MobileBuildEntry): voi
   if (after.attempts.length === before.attempts.length + 1) {
     const fresh = after.attempts[after.attempts.length - 1];
     if (!(old.state === "cancelled" || (old.state === "failed" && old.failure?.retryable)) || !same(before.attempts, after.attempts.slice(0, -1)) ||
-      fresh.state !== "queued" || fresh.diagnosticReferences.length || fresh.failure || fresh.artifact) return corrupt();
+      fresh.state !== "queued" || fresh.diagnosticReferences.length || fresh.failure || fresh.artifact || fresh.workerLease) return corrupt();
   } else {
     const last = after.attempts[after.attempts.length - 1];
+    const beforeLease = old.workerLease, afterLease = last.workerLease;
+    let renewal = false;
+    if (!same(beforeLease ?? null, afterLease ?? null)) {
+      if (!beforeLease && afterLease) {
+        if (old.state !== "queued" || last.state !== "running" || afterLease.status !== "active" || afterLease.fencingToken !== after.sequence ||
+          afterLease.renewals !== 0 || afterLease.issuedAt !== afterLease.renewedAt || !same(old.diagnosticReferences, last.diagnosticReferences)) return corrupt();
+      } else if (beforeLease && afterLease) {
+        const invariant = (lease: typeof beforeLease) => ({ workerId: lease.workerId, fencingToken: lease.fencingToken, issuedAt: lease.issuedAt, deadline: lease.deadline });
+        if (!same(invariant(beforeLease), invariant(afterLease)) || beforeLease.status !== "active") return corrupt();
+        if (afterLease.status === "revoked") {
+          if (!["failed", "cancelled", "completed"].includes(last.state) || !same({ ...beforeLease, status: "revoked", revokedAt: afterLease.revokedAt }, afterLease)) return corrupt();
+        } else {
+          renewal = true;
+          if (!["running", "verifying"].includes(old.state) || last.state !== old.state || !same(old.diagnosticReferences, last.diagnosticReferences) ||
+            afterLease.renewals !== beforeLease.renewals + 1 || afterLease.renewedAt < beforeLease.renewedAt || afterLease.renewedAt >= beforeLease.expiresAt ||
+            afterLease.expiresAt <= beforeLease.expiresAt || afterLease.renewals > MOBILE_WORKER_LEASE_POLICY.maximumRenewals) return corrupt();
+        }
+      } else return corrupt();
+    }
     const allowed: Record<string, string[]> = { queued: ["queued", "running", "cancelled", "failed"], running: ["running", "verifying", "cancelling", "failed"], verifying: ["verifying", "completed", "cancelling", "failed"], cancelling: ["cancelling", "cancelled", "failed"] };
     if (after.attempts.length !== before.attempts.length || !same(before.attempts.slice(0, -1), after.attempts.slice(0, -1)) || !allowed[old.state]?.includes(last.state) ||
       !same(old.diagnosticReferences, last.diagnosticReferences.slice(0, old.diagnosticReferences.length)) ||
-      (last.state === old.state && last.diagnosticReferences.length !== old.diagnosticReferences.length + 1)) return corrupt();
+      (last.state === old.state && !renewal && last.diagnosticReferences.length !== old.diagnosticReferences.length + 1)) return corrupt();
   }
 }
 

@@ -1,3 +1,4 @@
+import { MOBILE_WORKER_LEASE_POLICY, assertMobileWorker, mobileWorkerTime, mobileWorkerTtl, rejectMobileWorker, type MobileWorkerProof } from "./MobileWorkerLease.js";
 import { MemoryMobileBuildStore, type MobileBuildStore } from "./MobileBuildStore.js";
 import type { MobilePackageSpecification, MobilePackageValidationContext } from "./MobilePackageSpecification.js";
 import {
@@ -17,8 +18,10 @@ const attempt = (request: MobileBuildRequest, number: number): MobileBuildAttemp
  */
 export class MobileBuildLifecycle {
   #store: MobileBuildStore;
+  #workerMode: boolean;
+  #now: () => number;
   #verifyArtifact: MobileArtifactVerifier;
-  constructor(verifyArtifact: MobileArtifactVerifier = () => null, store: MobileBuildStore = new MemoryMobileBuildStore()) { this.#verifyArtifact = verifyArtifact; this.#store = store; }
+  constructor(verifyArtifact: MobileArtifactVerifier = () => null, store: MobileBuildStore = new MemoryMobileBuildStore(), options: { requireWorkerLease?: boolean; now?: () => number } = {}) { this.#verifyArtifact = verifyArtifact; this.#store = store; this.#workerMode = options.requireWorkerLease === true; this.#now = options.now ?? Date.now; }
 
   create(input: unknown, specification: MobilePackageSpecification, context: MobilePackageValidationContext): MobileBuildRecord {
     const request = createMobileBuildRequest(input, specification, context);
@@ -41,7 +44,7 @@ export class MobileBuildLifecycle {
   #commit(expectedSequence: number, record: MobileBuildRecord, specification: MobilePackageSpecification): MobileBuildRecord {
     return this.#store.compareAndSwap(expectedSequence, { record, specification }).record;
   }
-  transition(requestId: string, command: MobileBuildCommand, context: MobilePackageValidationContext): MobileBuildRecord {
+  transition(requestId: string, command: MobileBuildCommand, context: MobilePackageValidationContext, proof?: MobileWorkerProof): MobileBuildRecord {
     const { record, specification } = this.#entry(requestId, context, "manage");
     const keys = ["expectedSequence", "attemptId", "type"];
     const type = command && typeof command === "object" ? Object.getOwnPropertyDescriptor(command, "type")?.value : undefined;
@@ -50,6 +53,7 @@ export class MobileBuildLifecycle {
     const current = record.attempts[record.attempts.length - 1];
     if (!Number.isSafeInteger(command.expectedSequence) || command.expectedSequence !== record.sequence || command.attemptId !== current.attemptId) return fail("stale_transition");
     if (terminal(current)) return fail("invalid_transition");
+    if (command.type !== "cancel" && (this.#workerMode || current.workerLease)) assertMobileWorker(current.workerLease, proof, mobileWorkerTime(this.#now));
     let next: MobileBuildAttempt = { ...current };
     switch (command.type) {
       case "start":
@@ -68,7 +72,7 @@ export class MobileBuildLifecycle {
         next = { ...next, state: "failed", failure }; break;
       }
       case "diagnostic":
-        if (!mobileBuildReference(command.reference) || current.diagnosticReferences.includes(command.reference) || current.diagnosticReferences.length >= 100) return fail("invalid_request");
+        if (!mobileBuildReference(command.reference) || current.diagnosticReferences.includes(command.reference) || current.diagnosticReferences.length >= ((this.#workerMode || current.workerLease) ? 99 : 100)) return fail("invalid_request");
         next = { ...next, diagnosticReferences: [...current.diagnosticReferences, command.reference] }; break;
       case "complete": {
         if (current.state !== "verifying" || !mobileBuildReference(command.artifactReference)) return fail("invalid_transition");
@@ -90,8 +94,53 @@ export class MobileBuildLifecycle {
       }
       default: return fail("invalid_request");
     }
+    if (current.workerLease && command.type !== "cancel") {
+      // Check again after a verifier callback: expiration during verification must not authorize completion.
+      assertMobileWorker(current.workerLease, proof, mobileWorkerTime(this.#now));
+      if (terminal(next)) next = { ...next, workerLease: { ...current.workerLease, status: "revoked", revokedAt: mobileWorkerTime(this.#now) } };
+    }
     // A verifier must not reenter and overwrite another accepted transition.
     if (this.#store.read(record.request.projectId, requestId)?.record.sequence !== record.sequence) return fail("stale_transition");
+    return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] }, specification);
+  }
+  /** Only the durable Runtime integration enables orchestration. No process is launched. */
+  claim(requestId: string, expectedSequence: number, attemptId: string, workerId: string, context: MobilePackageValidationContext, ttlMs: number = MOBILE_WORKER_LEASE_POLICY.defaultTtlMs): MobileBuildRecord {
+    if (!this.#workerMode) return rejectMobileWorker("orchestration_unavailable");
+    const { record, specification } = this.#entry(requestId, context, "manage");
+    const current = record.attempts[record.attempts.length - 1];
+    if (expectedSequence !== record.sequence || attemptId !== current.attemptId) return fail("stale_transition");
+    if (current.workerLease) return rejectMobileWorker("lease_conflict");
+    if (current.state !== "queued" || current.diagnosticReferences.length >= 100) return fail("invalid_transition");
+    if (!mobileBuildReference(workerId)) return rejectMobileWorker("invalid_lease");
+    const ttl = mobileWorkerTtl(ttlMs); const now = mobileWorkerTime(this.#now);
+    revalidateMobileBuildSpecification(specification, context);
+    if (record.request.sourceCommit !== context.snapshot.commit) return fail("invalid_specification");
+    const next: MobileBuildAttempt = { ...current, state: "running", workerLease: { workerId, fencingToken: record.sequence + 1,
+      issuedAt: now, renewedAt: now, expiresAt: now + ttl, deadline: now + MOBILE_WORKER_LEASE_POLICY.maximumExecutionMs, renewals: 0, status: "active", revokedAt: null } };
+    return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] }, specification);
+  }
+  renew(requestId: string, expectedSequence: number, attemptId: string, proof: MobileWorkerProof, context: MobilePackageValidationContext, ttlMs: number = MOBILE_WORKER_LEASE_POLICY.defaultTtlMs): MobileBuildRecord {
+    if (!this.#workerMode) return rejectMobileWorker("orchestration_unavailable");
+    const { record, specification } = this.#entry(requestId, context, "manage"); const current = record.attempts[record.attempts.length - 1];
+    if (expectedSequence !== record.sequence || attemptId !== current.attemptId) return fail("stale_transition");
+    if (!["running", "verifying"].includes(current.state)) return fail("invalid_transition");
+    const now = mobileWorkerTime(this.#now); const lease = assertMobileWorker(current.workerLease, proof, now);
+    const expiresAt = Math.min(now + mobileWorkerTtl(ttlMs), lease.deadline);
+    if (lease.renewals >= MOBILE_WORKER_LEASE_POLICY.maximumRenewals || expiresAt <= lease.expiresAt) return rejectMobileWorker("lease_limit");
+    const next: MobileBuildAttempt = { ...current, workerLease: { ...lease, renewedAt: now, expiresAt, renewals: lease.renewals + 1 } };
+    return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] }, specification);
+  }
+  recover(requestId: string, expectedSequence: number, attemptId: string, context: MobilePackageValidationContext): MobileBuildRecord {
+    if (!this.#workerMode) return rejectMobileWorker("orchestration_unavailable");
+    const { record, specification } = this.#entry(requestId, context, "manage"); const current = record.attempts[record.attempts.length - 1];
+    if (expectedSequence !== record.sequence || attemptId !== current.attemptId) return fail("stale_transition");
+    const lease = current.workerLease; const now = mobileWorkerTime(this.#now);
+    if (terminal(current) || current.state === "queued" || (lease && (lease.status !== "active" || now < lease.expiresAt))) return fail("invalid_transition");
+    // An older active attempt without ownership evidence is never adopted for execution.
+    const reference = lease ? `worker-lease-expired:${lease.fencingToken}` : "worker-ownership-unavailable";
+    const next: MobileBuildAttempt = { ...current, state: "failed", failure: classifyMobileBuildFailure(lease ? "timeout" : "executor_unavailable"),
+      diagnosticReferences: current.diagnosticReferences.length < 100 ? [...current.diagnosticReferences, reference] : current.diagnosticReferences,
+      ...(lease ? { workerLease: { ...lease, status: "revoked" as const, revokedAt: now } } : {}) };
     return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] }, specification);
   }
   retry(requestId: string, expectedSequence: number, context: MobilePackageValidationContext): MobileBuildRecord {
