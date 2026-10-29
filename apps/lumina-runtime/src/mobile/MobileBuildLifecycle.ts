@@ -1,3 +1,4 @@
+import { MemoryMobileBuildStore, type MobileBuildStore } from "./MobileBuildStore.js";
 import type { MobilePackageSpecification, MobilePackageValidationContext } from "./MobilePackageSpecification.js";
 import {
   authorizeMobileBuild, classifyMobileBuildFailure, createMobileBuildRequest, freezeMobileBuildValue,
@@ -9,42 +10,36 @@ const terminal = (attempt: MobileBuildAttempt) => ["completed", "failed", "cance
 const attempt = (request: MobileBuildRequest, number: number): MobileBuildAttempt => freezeMobileBuildValue({
   attemptId: `mobile-attempt:${mobileBuildHash({ requestId: request.requestId, number })}`, number, state: "queued", diagnosticReferences: [], failure: null, artifact: null,
 });
-/** Reference in-memory contract authority, NOT a worker, scheduler or durable job store.
+/** Runtime lifecycle authority with injected storage, NOT a worker or scheduler.
+ * Memory storage preserves the contract-only default; inject FileMobileBuildStore for durability.
  * Future adapters submit observations to Runtime; they never receive mutable state.
- * Durable execution requires atomic persistence/CAS and leases before this can run builds.
+ * Execution still requires worker leases and a real independently verified artifact provider.
  */
 export class MobileBuildLifecycle {
-  #records = new Map<string, { record: MobileBuildRecord; specification: MobilePackageSpecification }>();
-  #keys = new Map<string, string>();
+  #store: MobileBuildStore;
   #verifyArtifact: MobileArtifactVerifier;
-  constructor(verifyArtifact: MobileArtifactVerifier = () => null) { this.#verifyArtifact = verifyArtifact; }
+  constructor(verifyArtifact: MobileArtifactVerifier = () => null, store: MobileBuildStore = new MemoryMobileBuildStore()) { this.#verifyArtifact = verifyArtifact; this.#store = store; }
 
   create(input: unknown, specification: MobilePackageSpecification, context: MobilePackageValidationContext): MobileBuildRecord {
     const request = createMobileBuildRequest(input, specification, context);
-    const key = mobileBuildHash({ projectId: request.projectId, requestedBy: request.requestedBy, key: request.idempotencyKey });
-    const existingId = this.#keys.get(key);
-    if (existingId) {
-      if (existingId !== request.requestId) return fail("idempotency_conflict");
-      return this.#records.get(existingId)!.record;
-    }
-    // Never evict idempotency history silently. Durable admission/storage is a later milestone.
-    if (this.#records.size >= 1000) return fail("capacity_exceeded");
     const record = freezeMobileBuildValue<MobileBuildRecord>({ request, sequence: 0, attempts: [attempt(request, 1)], distributionVerification: "not-performed" });
-    this.#records.set(request.requestId, { record, specification }); this.#keys.set(key, request.requestId);
-    return record;
+    return this.#store.admit({ record, specification }).record;
   }
   get(requestId: string, context: MobilePackageValidationContext): MobileBuildRecord {
     const entry = this.#entry(requestId, context, "view"); return entry.record;
   }
   #entry(requestId: string, context: MobilePackageValidationContext, action: "view" | "manage") {
     authorizeMobileBuild(context, context.projectId, action);
-    const entry = this.#records.get(requestId);
+    const entry = this.#store.read(context.projectId, requestId);
     if (!entry || entry.record.request.projectId !== context.projectId) return fail("request_not_found");
     return entry;
   }
-  #commit(requestId: string, record: MobileBuildRecord): MobileBuildRecord {
-    const entry = this.#records.get(requestId)!;
-    const next = freezeMobileBuildValue(record); this.#records.set(requestId, { ...entry, record: next }); return next;
+  history(requestId: string, context: MobilePackageValidationContext): readonly MobileBuildRecord[] {
+    this.#entry(requestId, context, "view");
+    return this.#store.history(context.projectId, requestId);
+  }
+  #commit(expectedSequence: number, record: MobileBuildRecord, specification: MobilePackageSpecification): MobileBuildRecord {
+    return this.#store.compareAndSwap(expectedSequence, { record, specification }).record;
   }
   transition(requestId: string, command: MobileBuildCommand, context: MobilePackageValidationContext): MobileBuildRecord {
     const { record, specification } = this.#entry(requestId, context, "manage");
@@ -96,8 +91,8 @@ export class MobileBuildLifecycle {
       default: return fail("invalid_request");
     }
     // A verifier must not reenter and overwrite another accepted transition.
-    if (this.#records.get(requestId)!.record !== record) return fail("stale_transition");
-    return this.#commit(requestId, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] });
+    if (this.#store.read(record.request.projectId, requestId)?.record.sequence !== record.sequence) return fail("stale_transition");
+    return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts.slice(0, -1), next] }, specification);
   }
   retry(requestId: string, expectedSequence: number, context: MobilePackageValidationContext): MobileBuildRecord {
     const { record, specification } = this.#entry(requestId, context, "manage");
@@ -106,6 +101,6 @@ export class MobileBuildLifecycle {
     if (!(current.state === "cancelled" || (current.state === "failed" && current.failure?.retryable)) || current.number >= record.request.maxAttempts) return fail("retry_denied");
     revalidateMobileBuildSpecification(specification, context);
     if (context.snapshot.commit !== record.request.sourceCommit) return fail("invalid_specification");
-    return this.#commit(requestId, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts, attempt(record.request, current.number + 1)] });
+    return this.#commit(record.sequence, { ...record, sequence: record.sequence + 1, attempts: [...record.attempts, attempt(record.request, current.number + 1)] }, specification);
   }
 }
