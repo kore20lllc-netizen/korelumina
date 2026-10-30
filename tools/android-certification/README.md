@@ -19,7 +19,12 @@ Independent Ed25519 authorization is also required. The private signing key neve
 enters GitHub or the runner. Protected environment secrets supply:
 KLM_CERTIFICATION_APPROVAL_PUBLIC_KEY (public key),
 KLM_CERTIFICATION_APPROVAL_ENVELOPE (base64 JSON {payload,signature}), and
-KLM_CERTIFICATION_PROVENANCE_B64 (base64 structured provenance JSON).
+KLM_CERTIFICATION_PROVENANCE_B64 (base64 structured provenance JSON), and
+KLM_CERTIFICATION_COMPONENT_MEASUREMENT_B64 (the actual component-measurement.json
+bytes, canonical base64). This additional evidence comes from the same independently
+protected environment, never from project inputs or an arbitrary URL. The verifier
+recalculates SHA-256 and checks the decoded components; missing/changed/malformed
+bytes fail closed even if the provenance hash has the right format.
 These are certification approvals, not production credentials. Each signed payload
 has schemaVersion klm-execution-permit:v1, scope one-debug-apk, exact repository,
 commit, runId, runAttempt, manifestSha256, provenanceSha256, issuedAt/expiresAt
@@ -94,10 +99,29 @@ dependencies, resources, network. Complete native dependency closure, real offli
 verification, strict SHA-256 Maven verification and no unresolved advisories are
 mandatory. Immutable signed provenance ties those measurements to the image. Signer
 must verify actual evidence, not populate assertions merely to pass validation.
-The adapter still generates its native wrapper without replaying a native lock or
-installing Gradle verification metadata into that generated tree. Its exact offline
-resolved graph must be independently demonstrated against the reviewed cache. If
-that cannot be established, stop for a separately governed adapter amendment.
+R1 now replays reviewed native-package.json/native-package-lock.json through npm ci,
+never native npm install. New immutable locks/native-replay.json must have schema
+android-native-replay:v1, exact Capacitor/Gradle/AGP versions, complete closure,
+nativePackageLockSha256, verificationMetadataSha256, scope binding the application
+identifier/version/build number and source/specification fingerprints, generatedControls
+mapping every generated Gradle/property/wrapper control path to its SHA-256, and
+gradleLocks mapping reviewed relative Gradle lockfile paths to their SHA-256.
+All these bytes must also appear in the immutable integrity.json file manifest.
+The signed provenance dependencies.nativeReplayManifestSha256 is mandatory.
+
+Runtime mounts the trusted replay helper and Gradle init policy read-only. It verifies
+seed-cache file contents and completeness, replaces mutable web-build caches, copies
+reviewed npm input bytes, rejects mismatched transitive closures, and checks generated
+post-Capacitor/configuration build controls against the exact reviewed scope. It then
+copies buildscript/project locks and verification-metadata.xml into the generated
+Android tree, pins the official Gradle distribution checksum and runs Gradle offline
+with strict dependency verification plus strict project/buildscript locking.
+Missing artifacts/locks, unexpected Gradle files or substituted AGP/Capacitor fail.
+No genuine replay bundle is available yet. Unit fixtures are synthetic and never
+constitute dependency evidence; no genuine archive checksum or APK was fabricated.
+The isolated VM unit test substitutes a digest only for a tiny Gradle archive stand-in;
+production always verifies the real archive using node:crypto. Real pinned Gradle
+policy execution and npm offline replay remain external certification prerequisites.
 
 ## Licensing
 

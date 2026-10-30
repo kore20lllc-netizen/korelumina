@@ -13,7 +13,7 @@ import { RuntimeMobileBuilds } from '../../apps/lumina-runtime/src/mobile/Runtim
 import { AndroidArtifactStore, androidSha } from '../../apps/lumina-runtime/src/mobile/AndroidPackaging.js';
 import { AndroidPackagingExecutor } from '../../apps/lumina-runtime/src/mobile/AndroidPackagingExecutor.js';
 execFileSync(process.execPath, ['tools/android-certification/verify.mjs', '--execution']);
-delete process.env.CERT_APPROVAL_ENVELOPE; delete process.env.CERT_APPROVAL_PUBLIC_KEY; delete process.env.GH_READ_TOKEN; delete process.env.CERT_PROVENANCE_B64;
+delete process.env.CERT_APPROVAL_ENVELOPE; delete process.env.CERT_APPROVAL_PUBLIC_KEY; delete process.env.GH_READ_TOKEN; delete process.env.CERT_PROVENANCE_B64; delete process.env.CERT_COMPONENT_MEASUREMENT_B64;
 assert.equal(process.platform, 'linux'); assert.equal(process.arch, 'x64');
 assert(process.env.RUNNER_TEMP && path.isAbsolute(process.env.RUNNER_TEMP));
 const temporary = fs.realpathSync(process.env.RUNNER_TEMP);

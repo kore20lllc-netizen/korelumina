@@ -30,7 +30,7 @@ export function validateEnvironment(environment, approvals, runId, actor) {
   assert(approvals.some(a => a.state === 'approved' && a.environments?.some(e => e.name === environment.name) && a.user?.login !== actor && allowed.has(String(a.user?.id))), 'Independent approval history unavailable');
   assert(/^\d+$/.test(runId));
 }
-export function validateProvenance(p, t, expected, now = Date.now()) {
+export function validateProvenance(p, t, expected, now = Date.now(), measurementBytes) {
   assert.equal(p.schemaVersion, 'klm-android-provenance:v2');
   image(p.image); image(p.baseImage);
   same(p.image, t.reviewedImage); same(p.baseImage, t.baseImage);
@@ -42,14 +42,32 @@ export function validateProvenance(p, t, expected, now = Date.now()) {
   assert.equal(p.sdkLicense.id, 'android-sdk-license'); hash(p.sdkLicense.textSha256);
   assert(p.sdkLicense.approver && Number.isSafeInteger(p.sdkLicense.approvedAt) && p.sdkLicense.approvedAt>0 && p.sdkLicense.approvedAt<=now && p.sdkLicense.acceptanceEvidenceSha256); hash(p.sdkLicense.acceptanceEvidenceSha256);
   const d = p.dependencies;
-  for (const name of ['nativeWrapperLockSha256','npmCacheManifestSha256','mavenVerificationMetadataSha256','gradleCacheManifestSha256','resolvedClosureSha256']) hash(d[name]);
+  for (const name of ['nativeReplayManifestSha256','nativeWrapperLockSha256','npmCacheManifestSha256','mavenVerificationMetadataSha256','gradleCacheManifestSha256','resolvedClosureSha256']) hash(d[name]);
   assert.equal(d.closureComplete, true); assert.equal(d.offlineVerified, true);
   assert.equal(d.npmIntegrity, 'sha512'); assert.equal(d.mavenVerification, 'strict-sha256');
   assert(d.reviewedAt <= now && now - d.reviewedAt <= 86400000, 'Dependency review is stale');
   same(d.unresolvedAdvisories, []);
   same(p.actualComponents, p.components, 'Actual image tool measurements differ');
-  hash(p.componentMeasurementSha256);
+  verifyComponentMeasurement(p, measurementBytes);
   return p;
+}
+/** Bytes come only from the independently protected evidence channel. A signature
+ * binds the provenance fingerprint; this independently binds the actual bytes. */
+export function decodeMeasurementEvidence(encoded) {
+  assert(typeof encoded==='string' && encoded.length>0 && encoded.length<=87384 && encoded.length%4===0 && /^[A-Za-z0-9+/]*={0,2}$/.test(encoded),'Malformed protected measurement encoding');
+  const bytes=Buffer.from(encoded,'base64');
+  assert.equal(bytes.toString('base64'),encoded,'Noncanonical measurement encoding');
+  return bytes;
+}
+export function verifyComponentMeasurement(provenance, bytes) {
+  assert(Buffer.isBuffer(bytes) && bytes.length>0 && bytes.length<=65536,'Measurement evidence missing or oversized');
+  hash(provenance.componentMeasurementSha256);
+  same(sha256(bytes),provenance.componentMeasurementSha256,'Component measurement checksum mismatch');
+  const decoded=JSON.parse(bytes.toString('utf8'));
+  assert(decoded && typeof decoded==='object' && !Array.isArray(decoded),'Malformed component measurement');
+  same(decoded,provenance.components,'Measurement bytes do not match reviewed components');
+  same(decoded,provenance.actualComponents,'Measurement bytes do not match actual components');
+  return decoded;
 }
 export function validateResources(r, expected, now = Date.now()) {
   assert.equal(r.schemaVersion, 'klm-resource-measurement:v1');

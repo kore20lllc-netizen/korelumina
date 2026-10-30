@@ -2,14 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { generateKeyPairSync, sign } from 'node:crypto';
-import { LIMITS, sha256, verifyPermit, validateEnvironment, validateProvenance, validateResources, validateNetwork, validateFixtureLock } from './contracts.mjs';
+import { LIMITS, sha256, verifyPermit, validateEnvironment, validateProvenance as validateProvenanceContract, validateResources, validateNetwork, validateFixtureLock } from './contracts.mjs';
 import { resourcePreflight } from './resource-preflight.mjs';
 // Synthetic contract test values ONLY; no image, APK or measured build is claimed.
 const H='a'.repeat(64), IMAGE='test.invalid/builder@sha256:'+H, now=100000000;
 const t=JSON.parse(fs.readFileSync(new URL('./toolchain.json',import.meta.url)));t.reviewedImage=IMAGE;
 const expected={fixtureLockSha256:H,recipeSha256:H};
 const components={node:t.node,npm:t.npm,jdk:t.jdkBuild,capacitor:t.capacitorVersion,gradle:t.gradle,agp:t.androidGradlePlugin,buildTools:t.buildToolsVersion,compileSdk:t.compileSdk,platformRevision:t.sdkPlatformRevision,commandLineTools:t.commandLineTools.revision};
-const provenance=()=>({schemaVersion:'klm-android-provenance:v2',image:IMAGE,baseImage:t.baseImage,platform:'linux/amd64',components:{...components},actualComponents:{...components},...expected,nodeArchiveSha256:t.nodeLinuxX64Sha256,gradleDistributionSha256:t.gradleDistributionSha256,commandLineArchivePublisherSha1:t.commandLineTools.publisherSha1,commandLineArchiveSha256:H,componentMeasurementSha256:H,sdkLicense:{id:'android-sdk-license',textSha256:H,approver:'unit-test',approvedAt:1,acceptanceEvidenceSha256:H},dependencies:{nativeWrapperLockSha256:H,npmCacheManifestSha256:H,mavenVerificationMetadataSha256:H,gradleCacheManifestSha256:H,resolvedClosureSha256:H,closureComplete:true,offlineVerified:true,npmIntegrity:'sha512',mavenVerification:'strict-sha256',reviewedAt:now,unresolvedAdvisories:[]}});
+const validateProvenance=(p,t,e,n)=>validateProvenanceContract(p,t,e,n,Buffer.from(JSON.stringify(components)));
+const provenance=()=>({schemaVersion:'klm-android-provenance:v2',image:IMAGE,baseImage:t.baseImage,platform:'linux/amd64',components:{...components},actualComponents:{...components},...expected,nodeArchiveSha256:t.nodeLinuxX64Sha256,gradleDistributionSha256:t.gradleDistributionSha256,commandLineArchivePublisherSha1:t.commandLineTools.publisherSha1,commandLineArchiveSha256:H,componentMeasurementSha256:sha256(JSON.stringify(components)),sdkLicense:{id:'android-sdk-license',textSha256:H,approver:'unit-test',approvedAt:1,acceptanceEvidenceSha256:H},dependencies:{nativeReplayManifestSha256:H,nativeWrapperLockSha256:H,npmCacheManifestSha256:H,mavenVerificationMetadataSha256:H,gradleCacheManifestSha256:H,resolvedClosureSha256:H,closureComplete:true,offlineVerified:true,npmIntegrity:'sha512',mavenVerification:'strict-sha256',reviewedAt:now,unresolvedAdvisories:[]}});
 const resourceExpected={image:IMAGE,fixtureLockSha256:H,adapterSha256:H};
 const resources=()=>({schemaVersion:'klm-resource-measurement:v1',...resourceExpected,method:'instrumented-offline-packaging',complete:true,measuredAt:Date.now(),samplesSha256:H,limits:{...LIMITS},memoryPeakBytes:1,workPeakBytes:1,tmpPeakBytes:1});
 const bindings={repository:'kore20lllc-netizen/korelumina',commit:H,runId:'123',runAttempt:'1',manifestSha256:H,provenanceSha256:H};
