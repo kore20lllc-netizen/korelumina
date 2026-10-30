@@ -1,0 +1,10 @@
+{
+  "name": "korelumina-native-wrapper",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor/cli": "8.4.3",
+    "@capacitor/core": "8.4.3",
+    "@capacitor/android": "8.4.3"
+  }
+}

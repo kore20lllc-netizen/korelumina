@@ -55,3 +55,17 @@ test('native execution remains disabled in checked-in configuration',()=>assert.
 test('direct dependency version drift rejects',()=>{const l=structuredClone(lock);l.packages['node_modules/vite'].version='0.0.1';assert.throws(()=>validateFixtureLock(pkg,l));});
 test('stale resource measurement rejects',()=>{const r=resources();r.measuredAt=1;assert.throws(()=>resourcePreflight(r,resourceExpected,20*1024**3));});
 test('unsigned provenance mutation changes its permit binding',()=>{const p=provenance();const permitValue={...permit(),provenanceSha256:sha256(JSON.stringify(p))};p.components.node='tampered';assert.throws(()=>verifyPermit(envelope(permitValue),pub,{...bindings,provenanceSha256:sha256(JSON.stringify(p))},now));});
+
+test('reviewed native metadata graph agrees with upgraded toolchain and security evidence',()=>{
+ const read=name=>fs.readFileSync(new URL('./native/'+name,import.meta.url));
+ const pkg=JSON.parse(read('package.json')),lock=JSON.parse(read('package-lock.json')),review=JSON.parse(read('metadata-review.json'));
+ const toolchain=JSON.parse(fs.readFileSync(new URL('./toolchain.json',import.meta.url)));
+ assert.equal(toolchain.capacitorVersion,'8.4.3');assert.equal(toolchain.nativeExecutionEnabled,false);
+ assert.deepEqual(pkg.dependencies,{'@capacitor/cli':'8.4.3','@capacitor/core':'8.4.3','@capacitor/android':'8.4.3'});
+ validateFixtureLock(pkg,lock);assert.deepEqual(lock.packages[''].dependencies,pkg.dependencies);
+ assert.equal(sha256(read('package-lock.json')),review.lockSha256);assert.equal(sha256(read('package.json')),review.packageSha256);
+ assert.deepEqual(review.advisories,{});assert.deepEqual(review.registryHosts,['registry.npmjs.org']);
+ assert.equal(review.tarballRequests,0);assert.equal(review.childProcesses,0);
+ let count=0;for(const [key,item] of Object.entries(lock.packages)){if(key && key.split('node_modules/').at(-1)==='tar'){count++;const [a,b,c]=item.version.split('.').map(Number);assert(a>7||a===7&&(b>5||b===5&&c>=21));}}
+ assert(count>0);
+});

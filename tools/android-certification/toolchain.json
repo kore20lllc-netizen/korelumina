@@ -1,6 +1,6 @@
 {
   "schemaVersion": "android-toolchain:v1",
-  "capacitorVersion": "8.0.0",
+  "capacitorVersion": "8.4.3",
   "buildToolsVersion": "35.0.0",
   "compileSdk": 36,
   "minSdk": 24,
@@ -23,5 +23,6 @@
     "license": "android-sdk-license"
   },
   "sdkPlatformRevision": 2,
-  "gradleDistributionSha256": "ed1a8d686605fd7c23bdf62c7fc7add1c5b23b2bbc3721e661934ef4a4911d7c"
+  "gradleDistributionSha256": "ed1a8d686605fd7c23bdf62c7fc7add1c5b23b2bbc3721e661934ef4a4911d7c",
+  "minimumTarVersion": "7.5.21"
 }

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "klm-native-npm-metadata:v1",
+  "generatedAt": "2026-10-30T12:27:48.669Z",
+  "generator": {
+    "node": "v25.4.0",
+    "npm": "11.7.0",
+    "mechanism": "npm bundled Arborist buildIdealTree + lockfile save; no reify/install"
+  },
+  "lockSha256": "96d13762446cc95ab7baff1751c8e7c1f907eadcb48b26f347724b7b15bbd56c",
+  "directDependencies": 3,
+  "packageInstances": 92,
+  "transitivePackageInstances": 89,
+  "uniquePackageNames": 89,
+  "registryHosts": [
+    "registry.npmjs.org"
+  ],
+  "requests": 93,
+  "responseBytes": 5273153,
+  "tarballRequests": 0,
+  "childProcesses": 0,
+  "advisories": {},
+  "offlineCacheComplete": false,
+  "npm1099Replay": "not-verified",
+  "securityDisposition": "PASS: no advisories returned for the complete locked npm graph at review time; not native build readiness",
+  "packageBytesVerified": false,
+  "npm1099Compatibility": "not-verified",
+  "scope": "native npm registry metadata only; not native build readiness",
+  "packageSha256": "dbf643c9ebd4c81938f6888df0a59eb67fc6d27e3f42eea95c890f233f50cf70",
+  "advisoryCounts": {},
+  "affectedLockedPackages": {},
+  "resolvedTarVersions": {
+    "node_modules/tar": "7.5.22"
+  },
+  "minimumTarVersion": "7.5.21",
+  "reviewedCapacitorVersion": "8.4.3"
+}

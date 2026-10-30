@@ -12,7 +12,7 @@ const integrity=json(root+'/integrity.json');
 function trusted(relative){safe(relative);const bytes=read(root+'/'+relative);assert(/^[a-f0-9]{64}$/.test(integrity.files[relative]));assert.equal(hash(bytes),integrity.files[relative]);return bytes;}
 const replay=JSON.parse(trusted('locks/native-replay.json'));
 assert.equal(replay.schemaVersion,'android-native-replay:v1');
-assert.equal(replay.capacitorVersion,process.argv[3]);assert.equal(replay.capacitorVersion,'8.0.0');
+assert.equal(replay.capacitorVersion,process.argv[3]);assert.equal(replay.capacitorVersion,'8.4.3');
 assert.equal(replay.gradleVersion,'8.14.3');assert.equal(replay.agpVersion,'8.13.0');
 assert.equal(replay.closureComplete,true);
 const plan=json('/input/plan.json');
@@ -26,13 +26,16 @@ const dependencies={'@capacitor/cli':replay.capacitorVersion,'@capacitor/core':r
 assert.deepEqual(pkg.dependencies,dependencies);assert.equal(lock.lockfileVersion,3);
 assert.equal(lock.packages[''].name,pkg.name);assert.equal(lock.packages[''].version,pkg.version);assert.deepEqual(lock.packages[''].dependencies,dependencies);
 for(const name of Object.keys(dependencies))assert.equal(lock.packages['node_modules/'+name]?.version,replay.capacitorVersion);
+let tarSeen=false;
 for(const [name,value] of Object.entries(lock.packages)){
- if(!name)continue;safe(name);assert(!value.link && /^https:\/\/registry\.npmjs\.org\//.test(value.resolved));assert(/^sha512-[A-Za-z0-9+/]+=*$/.test(value.integrity));
+ if(!name)continue;safe(name);
+ if(name.split('node_modules/').at(-1)==='tar'){tarSeen=true;assert(/^\d+\.\d+\.\d+$/.test(value.version));const [major,minor,patch]=value.version.split('.').map(Number);assert(major>7 || major===7 && (minor>5 || minor===5 && patch>=21),'Unreviewed vulnerable tar version');}assert(!value.link && /^https:\/\/registry\.npmjs\.org\//.test(value.resolved));assert(/^sha512-[A-Za-z0-9+/]+=*$/.test(value.integrity));
  for(const dep of Object.keys({...value.dependencies,...value.optionalDependencies})){
   let parent=name,found=false;while(true){if(lock.packages[parent+'/node_modules/'+dep]){found=true;break;}if(parent.includes('/node_modules/'))parent=parent.slice(0,parent.lastIndexOf('/node_modules/'));else if(parent)parent='';else break;}
   assert(found||lock.packages['node_modules/'+dep],'Incomplete native npm closure');
  }
 }
+assert(tarSeen,'Missing reviewed tar dependency');
 const xml=metadata.toString();assert(!/<!DOCTYPE|<!ENTITY|<trusted-artifacts|<ignored-keys/.test(xml));
 assert(xml.includes('<verify-metadata>true</verify-metadata>') && /<sha256 value="[a-f0-9]{64}"/.test(xml));
 assert(integrity.nativeClosureComplete===true && integrity.mavenStrictOfflineVerified===true);

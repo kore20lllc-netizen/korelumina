@@ -28,7 +28,7 @@ function fixture(options: { angular?: boolean; lock?: boolean; camera?: boolean;
     nativeCapabilities: options.camera ? ["camera"] : [], permissions: options.camera ? [{ name: "android.permission.CAMERA", rationale: "Capture a photo only upon user request." }] : [], build: { mode: options.release ? "release" : "debug", webAssetsDirectory: "dist" }, artifact: { format: options.release ? "aab" : "apk", signing: options.release ? "required" : "unsigned" } }, context);
   const input = { projectId: "shop", specificationFingerprint: specification.specificationFingerprint, operation: "package", idempotencyKey: "android-one", maxAttempts: 1 };
   const request = createMobileBuildRequest(input, specification, context);
-  const configuration: AndroidExecutionConfiguration = { dockerExecutable: process.execPath, dockerSocket: path.join(temporary, "engine.sock"), image: `approved/mobile@sha256:${"a".repeat(64)}`, capacitorVersion: "8.0.0", buildToolsVersion: "35.0.0", stagingRoot: staging, isolationPolicy: "dedicated-linux-vm" };
+  const configuration: AndroidExecutionConfiguration = { dockerExecutable: process.execPath, dockerSocket: path.join(temporary, "engine.sock"), image: `approved/mobile@sha256:${"a".repeat(64)}`, capacitorVersion: "8.4.3", buildToolsVersion: "35.0.0", stagingRoot: staging, isolationPolicy: "dedicated-linux-vm" };
   return { temporary, repository, staging, artifactRoot, contents, context, specification, request, input, configuration };
 }
 function rejected(work: () => unknown, code: string) { assert.throws(work, error => (error instanceof AndroidPackagingError || error instanceof MobileBuildContractError) && error.code === code); }
@@ -74,7 +74,7 @@ test("configuration edits apply validated version and permissions to the generat
   assert.match(virtual["/work/native/android/app/build.gradle"], /versionCode 7/); assert.match(virtual["/work/native/android/app/build.gradle"], /versionName "1.2.3"/); assert.ok(!virtual["/work/native/android/app/src/main/AndroidManifest.xml"].includes("INTERNET"));
 }));
 test("build commands are real offline npm, Capacitor and Gradle invocations inside resource limits", () => {
-  const script = androidBuildScript("8.0.0"); for (const command of ["npm ci --offline --ignore-scripts", "npm run build", "cap add android", "cap sync android", "gradlew assembleDebug --offline"]) assert.ok(script.includes(command));
+  const script = androidBuildScript("8.4.3"); for (const command of ["npm ci --offline --ignore-scripts", "npm run build", "cap add android", "cap sync android", "gradlew assembleDebug --offline"]) assert.ok(script.includes(command));
   const flags = androidContainerLimits(); for (const flag of ["--network=none", "--read-only", "--pull=never", "--cap-drop=ALL", "--pids-limit=256", "--memory=3g", "--restart=no"]) assert.ok(flags.includes(flag));
   assert.ok(!flags.some(flag => flag.includes("docker.sock"))); rejected(() => androidBuildScript("latest;evil"), "invalid_configuration");
 });
