@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "klm-fixture-advisory-review:v1",
+  "checkedAt": "2026-10-30T00:37:41.835262+00:00",
+  "source": "https://registry.npmjs.org/-/npm/v1/security/advisories/bulk",
+  "lockSha256": "2de35ae2549959548b55157feff407bb7e6cf6086956ae9379e8dcfa9c36bc06",
+  "advisories": {},
+  "scope": "fixture lockfile only; no native closure, JDK, OS or host dependency certification",
+  "installedPackages": false
+}

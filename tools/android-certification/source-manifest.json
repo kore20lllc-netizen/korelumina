@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "klm-certification-sources:v1",
+  "baseCommit": "12061ae2bb423620f1a497169893f103ac778f8c",
+  "files": {
+    ".github/workflows/android-certification.yml": "aa51d489326f99421e6d489fec37c78aa398f7028a9474690d07fa573c88f218",
+    "apps/lumina-runtime/src/mobile/AndroidPackaging.ts": "2e6d013b35868a753eea254f84dffc5f105898aae85d5f7aedc6ef102a072488",
+    "apps/lumina-runtime/src/mobile/AndroidPackagingExecutor.ts": "02a8ca60e2f240cec6f743b48d9ff2c72e2ce30f3ca42e95c1734babd2a7b8cb",
+    "apps/lumina-runtime/src/mobile/__tests__/AndroidPackaging.test.ts": "246a6ffcb7f10e5593576b993c8842be1fc9e0d732cc60bde66bf0c472be9b54",
+    "tools/android-certification/Dockerfile": "f4f24b30c059011126d7dcd399e4f79b0330cca3c3db25182b3448b6e4989c55",
+    "tools/android-certification/README.md": "18319de88c62d727bd48f447c74bb21cc1411adecb8a642332ad956b55919c97",
+    "tools/android-certification/certify.mts": "3c14903c9c4ab781dbe0ea01457e5528ad5dd0c15303cfe499a992a042540970",
+    "tools/android-certification/cleanup.mjs": "c18d08afe84dec561983c1f4b0ab6639450fb846b70f60a1928e27402f760359",
+    "tools/android-certification/contracts.mjs": "6d9e37cc6d7b2fbff2c9e0659c3914c20f0db3b0e774bcc4afbcc08cc40a60f9",
+    "tools/android-certification/dependency-review.json": "9241e7924f2a73acf2185a2304444bc47f2384c7d9856562218196d1089cbb60",
+    "tools/android-certification/fixture/index.html": "7d333349936c3fc3487bf1047869a4d8d52953854e32fa8e892dba416ba1203c",
+    "tools/android-certification/fixture/main.js": "6bc562cb5ac1480d415e041f7c65b271f9f637b114606e920f8b4a2d64f6a3b7",
+    "tools/android-certification/fixture/package-lock.json": "2de35ae2549959548b55157feff407bb7e6cf6086956ae9379e8dcfa9c36bc06",
+    "tools/android-certification/fixture/package.json": "07c3a24a1af014f325cc2ae01673a73bba613e800c613f560410e745f3abda83",
+    "tools/android-certification/hardening.test.mjs": "72d6514cda967ca60b8c1d19c495da420693ce170883faf205f0c7d3fb556099",
+    "tools/android-certification/image-check.mjs": "dfbfca1a96716a8eb7966baa91592d3f210119459762f90dcc03859f6e22ad8f",
+    "tools/android-certification/resource-preflight.mjs": "6ad8a460289533c17b920d24cc62b5caeb61a3a4965dd3cb5edfd5168bd05216",
+    "tools/android-certification/toolchain.json": "b9ff084218d978493f2438a1fb9eac92e56b6724e025111819d15dc548357da5",
+    "tools/android-certification/verify.mjs": "9da7a2f2c5804c477a2e29ab1971f4faa4051f2d4063b50373daaf5a67e60c8e"
+  }
+}

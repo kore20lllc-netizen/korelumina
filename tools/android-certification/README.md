@@ -1,0 +1,147 @@
+# KLM-MOBILE-001I hardened local certification assets
+
+Status: NATIVE EXECUTION DISABLED. Nothing published or dispatched. No image built.
+This package is a fail-closed consumer of independently provisioned evidence, not a
+provisioner. No Android images, native tools, licenses or cloud resources are created.
+
+## Independently governed execution approval
+
+The sole workflow trigger is workflow_dispatch. One Ubuntu 24.04 AMD64 hosted job,
+60-minute timeout, contents:read/actions:read, immutable action commits, disabled
+persisted checkout credentials. No deployment, PR triggers or automatic release.
+The named android-certification GitHub environment MUST be created/configured under
+separate Founder authorization with explicit human required reviewers, prevention
+of self-review and a deployment branch policy. None exists at this checkpoint.
+The verifier queries its server-side protection and this run's approval history;
+missing permissions, network access, history or protection fail closed.
+
+Independent Ed25519 authorization is also required. The private signing key never
+enters GitHub or the runner. Protected environment secrets supply:
+KLM_CERTIFICATION_APPROVAL_PUBLIC_KEY (public key),
+KLM_CERTIFICATION_APPROVAL_ENVELOPE (base64 JSON {payload,signature}), and
+KLM_CERTIFICATION_PROVENANCE_B64 (base64 structured provenance JSON).
+These are certification approvals, not production credentials. Each signed payload
+has schemaVersion klm-execution-permit:v1, scope one-debug-apk, exact repository,
+commit, runId, runAttempt, manifestSha256, provenanceSha256, issuedAt/expiresAt
+(maximum one hour), and exact LIMITS from contracts.mjs. Signature covers the UTF-8
+payload string, avoiding implicit JSON canonicalization. A run retry requires a new
+permit. The public key must be provisioned independently of editable repository code.
+A workflow flag, branch input or arbitrary self-signed document cannot replace either
+approval boundary. All branch content and the source manifest must still receive
+Founder review; code writable by a malicious administrator is outside that boundary.
+
+NativeExecutionEnabled remains false. Changing it alone does not authorize a build.
+The two checks (workflow and Runtime harness) both require all receipts. Tokens and
+approval environment data are removed before invoking the adapter. Disposable test
+identity uses Runtime's existing internal-token resolver; this is not Supabase or
+production project-authorization certification. No backend authority changed.
+
+## Exact pins and source evidence
+
+Node 22.23.4 / bundled npm 10.9.9 (official Node release index and SHASUMS256.txt);
+Temurin 21.0.13+9 Linux AMD64 base manifest pinned in toolchain.json, from the official
+Docker registry and adoptium/containers source revision
+ a240a79c19afb3da535529e29ab3156d5c08a6e0.
+Capacitor 8.0.0; AGP 8.13.0; Gradle 8.14.3-all with publisher SHA-256;
+Android API 36 platform revision 2; Build Tools 35.0.0;
+cmdline-tools;19.0, archive commandlinetools-linux-13114758_latest.zip,
+164760899 bytes, publisher SHA-1 recorded from Google's repository2-3.xml.
+No stronger publisher SHA-256 is invented; the independently verified archive's
+SHA-256 must additionally be recorded in provenance before execution approval.
+Sources: https://nodejs.org/dist/index.json
+https://nodejs.org/dist/v22.23.4/SHASUMS256.txt
+https://dl.google.com/android/repository/repository2-3.xml
+https://github.com/ionic-team/capacitor/tree/8.0.0/android-template
+https://services.gradle.org/distributions/gradle-8.14.3-all.zip.sha256
+
+The hosted OS label is not an immutable VM image. Host Node/npm MUST already match
+exact pins or execution rejects. No setup-node download, npm installation, docker
+pull/restart/relabel or other provisioning is performed by the workflow. A standard
+fresh hosted runner is therefore NOT automatically ready. The actual Android image
+is still null and requires separately approved preparation and digest publication.
+
+## Patched non-sensitive fixture
+
+Vite 8.3.5 verified in npm metadata; Node >=22.12 is supported. Four files only,
+no credentials, backends, plugins or external assets. com.korelumina.certification,
+version 1.0.0, build 1, project klm-android-certification. Genuine npm v3 lock generated
+using package-lock-only/ignore-scripts with metadata only; no packages installed.
+Generation used local npm 11.7.0 on Node 25.4.0, which produced an expected engines
+warning because execution is pinned to Node 22.23.4/npm 10.9.9. Offline normalization,
+closure/integrity checks and later pinned-host npm ci are separate validation stages.
+dependency-review.json records a live npm bulk-advisory response of zero advisories
+for this lock at its checkedAt timestamp. This does NOT certify OS, native wrappers,
+Capacitor transitive dependencies or JDK security. Refresh reviews before execution.
+
+## Image assembly and structured provenance
+
+Dockerfile performs OFFLINE assembly only. Supply reviewed inputs/node,
+inputs/android-sdk and inputs/mobile. The latter must include archives/node.tar.xz,
+archives/android-tools.zip, archives/gradle-all.zip, cache/npm, cache/gradle, locks,
+tarballs and integrity.json. Provide genuine fixture and native-wrapper package locks,
+Gradle strict verification-metadata.xml, complete resolved dependency graph and cache
+manifests. image-check.mjs checks actual Node/npm/JDK/SDK versions, archive checksums,
+Capacitor versions, every file hash in both caches/locks/tarballs, and every package
+tarball's SRI against BOTH lockfiles. Symlinks, omissions and extra cached files fail.
+The image records actual component-measurement.json; provenance must bind its hash.
+No circular image digest is embedded. Supply the verified custom image's actual
+manifest digest only after independent assembly, SBOM/security review and attestation.
+
+Protected provenance schema is klm-android-provenance:v2, as validated in contracts.mjs:
+image/base/platform, exact components and actualComponents, fixtureLockSha256,
+recipeSha256, Node/Gradle/archive checksums, componentMeasurementSha256, sdkLicense,
+dependencies, resources, network. Complete native dependency closure, real offline
+verification, strict SHA-256 Maven verification and no unresolved advisories are
+mandatory. Immutable signed provenance ties those measurements to the image. Signer
+must verify actual evidence, not populate assertions merely to pass validation.
+The adapter still generates its native wrapper without replaying a native lock or
+installing Gradle verification metadata into that generated tree. Its exact offline
+resolved graph must be independently demonstrated against the reviewed cache. If
+that cannot be established, stop for a separately governed adapter amendment.
+
+## Licensing
+
+cmdline-tools;19.0, platforms;android-36 revision 2 and build-tools;35.0.0 use
+android-sdk-license. Founder must review the exact publisher terms for all selected
+packages, authorize acceptance and retain license text SHA-256 and acceptance-evidence
+SHA-256. Only then may an authorized provisioner use the pinned sdkmanager --licenses
+mechanism. No automatic acceptance, pre-written fake acceptance hash or blanket yes.
+
+## Enforced network and measured resources
+
+No network provisioning is allowed in this workflow. Independently protected,
+signed per-run provenance must include network receipt klm-network-enforcement:v1,
+mode preprovisioned-control-plane-only, runId/runAttempt/commit, SHA-256 of actual
+sudo nft -j list ruleset output, denied metadata/private-network/arbitrary-HTTPS/
+container-egress probe evidence hash, and provisioningDisabled:true. The verifier
+compares live rules. A declaration without authenticated receipts/live matching rules
+fails. Control-plane GitHub approval/runner/artifact traffic alone may be allowlisted.
+A separately governed network controller must qualify policy and probes on the target
+runner; there is NO such deployed controller/evidence at this checkpoint.
+
+Adapter limits unchanged: 2 CPU, 3 GiB memory/no extra swap, 2 GiB /work tmpfs,
+256 MiB /tmp, 256 PIDs and 10-minute build. 10 GiB measured free disk required after
+provisioning. Resource receipt klm-resource-measurement:v1 must bind image, fixture
+lock and exact adapter SHA-256, include authenticated instrumented-offline-packaging
+samples hash, completion, time (<=7 days), exact limits and measured positive peaks
+below each ceiling. No cache-size heuristic remains. Missing/unmeasured/oversized or
+stale capacity fails closed. Such measurements are NOT available at this checkpoint.
+Resource admission now creates ZERO Docker containers or subprocesses; timeout,
+cancellation or validation failure cannot leak a resource-probe container. Native
+executor's existing owned-container cleanup/fencing remains unchanged. Provider
+teardown is still required on runner loss; cleanup never uses global Docker prune.
+
+## Source integrity, evidence and next approval
+
+source-manifest.json covers the three unchanged Android files and every local
+certification asset except itself. Recalculate from only this allowlist after changes,
+and record its SHA-256 in independent Founder approval. Altered/missing/unexpected
+assets fail verification. Checkout must be clean and contain only approved changes
+since baseline commit. Nothing from unrelated dirty working-tree content is exported.
+One-day public artifact retention only for the reviewed fixture APK and sanitized
+provenance/lifecycle results; never raw secrets, full caches, private source or tokens.
+
+Before any execution: separately approve the protected environment/signing authority,
+controlled offline image/dependency preparation, network qualification, measured
+resource qualification, SDK licenses and public evidence policy; publish/dispatch
+only after explicit GREEN. This local hardening does not grant any of those actions.

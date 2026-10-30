@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "android-toolchain:v1",
+  "capacitorVersion": "8.0.0",
+  "buildToolsVersion": "35.0.0",
+  "compileSdk": 36,
+  "minSdk": 24,
+  "androidGradlePlugin": "8.13.0",
+  "gradle": "8.14.3",
+  "node": "22.23.4",
+  "nodeLinuxX64Sha256": "1805bcd35e6815559bd2eb97db438d3fdb0eb3a5e6a977b7c1badca76337e9ce",
+  "jdkMajor": 21,
+  "jdkBuild": "21.0.13+9",
+  "baseImage": "docker.io/library/eclipse-temurin@sha256:d378c0bb8ab3f2a09ce0a22a3876e7c64ef4fcfcefbd9b6d60638f5858ae8985",
+  "reviewedImage": null,
+  "npm": "10.9.9",
+  "nativeExecutionEnabled": false,
+  "commandLineTools": {
+    "package": "cmdline-tools;19.0",
+    "revision": "19.0",
+    "archive": "commandlinetools-linux-13114758_latest.zip",
+    "publisherSha1": "5fdcc763663eefb86a5b8879697aa6088b041e70",
+    "bytes": 164760899,
+    "license": "android-sdk-license"
+  },
+  "sdkPlatformRevision": 2,
+  "gradleDistributionSha256": "ed1a8d686605fd7c23bdf62c7fc7add1c5b23b2bbc3721e661934ef4a4911d7c"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "klm-android-certification",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "8.3.5"
+  },
+  "engines": {
+    "node": "22.23.4",
+    "npm": "10.9.9"
+  }
+}
