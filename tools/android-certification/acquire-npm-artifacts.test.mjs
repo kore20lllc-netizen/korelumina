@@ -5,6 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {compileFunction} from 'node:vm';
 import {isIP} from 'node:net';
+import {createPublicKey,verify,createHmac,timingSafeEqual,generateKeyPairSync,sign} from 'node:crypto';
+import {EventEmitter} from 'node:events';
+import {PassThrough} from 'node:stream';
 import {inventory,verifyOfflineNpm,hash} from './offline-npm.mjs';
 import {prepareNpmCache} from './prepare-npm-cache.mjs';
 import {acquireNpmArtifacts,ACQUISITION_LIMITS} from './acquire-npm-artifacts.mjs';
@@ -57,3 +60,56 @@ test('production exports no test transport hook',async()=>{const api=await impor
 
 test('aggregate limit includes earlier successful transfers',()=>fixture(async f=>{f.lock.packages['node_modules/other']={...f.pkg,resolved:'https://registry.npmjs.org/other/-/other-1.0.0.tgz',integrity:'sha512-'+hash(Buffer.from('second'),'sha512','base64')};await assert.rejects(privateCore.runAcquisition(f.job(),async req=>{const data=req.url.includes('/other/')?Buffer.from('second'):f.data;return f.response(req,{contentLength:data.length,body:(async function*(){yield data;})()});},{...f.policy,totalBytes:f.data.length+1}),/Aggregate/);}));
 test('interrupted quarantine index publication can restart',()=>fixture(async f=>{const original=fs.renameSync;fs.renameSync=(a,b)=>{if(b.includes('/index-v5/'))throw Error('interrupted index');return original(a,b);};try{await assert.rejects(f.run());}finally{fs.renameSync=original;}const r=await f.run();assert(r.complete);}));
+
+// R6D: ephemeral synthetic authority only. No real permit is created or activated.
+function securityCore(overrides={}) {
+ const deps={fs,path,assert,isIP,inventory,verifyOfflineNpm,hash,prepareNpmCache,createPublicKey,verify,createHmac,timingSafeEqual,...overrides};
+ return compileFunction(text.replace(/^import .*;$/gm,'').replace(/export /g,'')+'\nreturn {verifyAcquisitionGrant,AcquisitionBudget,rejectNetworkOverrides,trustedTransport,runAcquisition};',Object.keys(deps))(...Object.values(deps));
+}
+const sec=securityCore();const syntheticKeys=generateKeyPairSync('ed25519');
+function envelope(grant,key=syntheticKeys.privateKey){const payload=JSON.stringify(grant);return Buffer.from(JSON.stringify({payload,signature:sign(null,Buffer.from(payload),key).toString('base64')})).toString('base64');}
+function syntheticGrant(f,patch={}) {const job=f.job(),plan={...inventory(job.locks),lockSetFingerprint:job.expectedLockSetFingerprint};
+ const grant={schemaVersion:'klm-npm-acquisition-permit:v1',scope:'npm-artifact-acquisition',repository:'kore20lllc-netizen/korelumina',lockSetFingerprint:plan.lockSetFingerprint,inventorySha256:hash(JSON.stringify(plan.artifacts)),destination:'https://registry.npmjs.org:443',limits:{...ACQUISITION_LIMITS},deadlines:{connectionMs:5000,responseMs:10000},budgetId:'a'.repeat(64),attemptId:'b'.repeat(64),operation:'create',issuedAt:Date.now()-100,expiresAt:Date.now()+60000,addresses:['104.16.26.34'],...patch};return {grant,plan};}
+const validate=(grant,plan,key=syntheticKeys.privateKey)=>sec.verifyAcquisitionGrant(envelope(grant,key),syntheticKeys.publicKey.export({type:'spki',format:'pem'}),plan);
+function budget(f,grant){return new sec.AcquisitionBudget(f.root,Buffer.alloc(32,7),grant);}
+test('R6D separate signed acquisition authority validates exact binding',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);assert.deepEqual(validate(grant,plan),grant);}));
+test('R6D invalid signature rejects',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);assert.throws(()=>validate(grant,plan,generateKeyPairSync('ed25519').privateKey));}));
+for(const [field,value] of [['scope','one-debug-apk'],['lockSetFingerprint','0'.repeat(64)],['inventorySha256','0'.repeat(64)],['destination','https://evil.invalid:443'],['expiresAt',1],['addresses',['127.0.0.1']]])test('R6D permit rejects '+field,()=>fixture(f=>{const {grant,plan}=syntheticGrant(f,{[field]:value});assert.throws(()=>validate(grant,plan));}));
+test('R6D malformed authorization rejects',()=>assert.throws(()=>sec.verifyAcquisitionGrant('malformed','missing',{})));
+test('R6D byte-limit amendment rejects',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);grant.limits.totalBytes++;assert.throws(()=>validate(grant,plan));}));
+test('R6D deadline amendment rejects',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);grant.deadlines.connectionMs++;assert.throws(()=>validate(grant,plan));}));
+test('R6D completed authorization cannot replay',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.close(true);assert.throws(()=>budget(f,grant).start());}));
+test('R6D resume requires a new signed attempt identity',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.close(false);assert.throws(()=>budget(f,{...grant,operation:'resume'}).start());}));
+test('R6D missing resume budget evidence rejects',()=>fixture(f=>{const {grant}=syntheticGrant(f);assert.throws(()=>budget(f,{...grant,operation:'resume'}).start());}));
+test('R6D failed transfer keeps full conservative debit across resume',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.reserve('unit');a.observe(3);a.close(false);const b=budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)});b.start();assert.equal(b.read().state.charged,ACQUISITION_LIMITS.artifactBytes);b.close(false);}));
+test('R6D interrupted reservations survive reinitialization',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.reserve('unit');const snapshot=JSON.parse(fs.readFileSync(f.root+'/'+grant.budgetId+'.json'));assert.equal(snapshot.at(-1).state.charged,67108864);a.close(false);}));
+test('R6D concurrent budget contention fails closed',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();try{assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)}).start());}finally{a.close(false);}}));
+test('R6D tampered budget evidence rejects',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.close(false);const file=f.root+'/'+grant.budgetId+'.json',r=JSON.parse(fs.readFileSync(file));r.at(-1).state.charged=7;fs.writeFileSync(file,JSON.stringify(r));assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)}).start());}));
+test('R6D removed ledger cannot reset a spent create permit',()=>fixture(f=>{const {grant}=syntheticGrant(f);const a=budget(f,grant);a.start();a.close(false);fs.unlinkSync(f.root+'/'+grant.budgetId+'.json');assert.throws(()=>budget(f,grant).start());}));
+test('R6D repeated failed transfers exhaust cumulative ceiling',()=>fixture(f=>{const {grant}=syntheticGrant(f);let current=grant;for(let i=0;i<4;i++){const b=budget(f,current);b.start();b.reserve('unit');b.close(false);current={...grant,operation:'resume',attemptId:String(i+1).repeat(64)};}const b=budget(f,current);b.start();try{assert.throws(()=>b.reserve('unit'));}finally{b.close(false);}}));
+test('R6D successful settlement charges independently verified bytes',()=>fixture(f=>{const {grant}=syntheticGrant(f);const b=budget(f,grant);b.start();b.reserve('unit');b.observe(23);b.settle(23);assert.equal(b.read().state.charged,23);b.close(true);}));
+test('R6D proxy and insecure TLS overrides reject',()=>{for(const key of ['HTTPS_PROXY','http_proxy','ALL_PROXY','NO_PROXY','NODE_TLS_REJECT_UNAUTHORIZED','NODE_EXTRA_CA_CERTS'])assert.throws(()=>sec.rejectNetworkOverrides({[key]:'set'}));});
+function transportHarness(patch={}) {
+ const response=new PassThrough();response.statusCode=patch.status??200;response.headers={'content-length':'1'};
+ const makeSocket=()=>{const socket=new EventEmitter();Object.assign(socket,{authorized:patch.authorized??true,remoteAddress:patch.remoteAddress??'104.16.26.34',remotePort:443,getPeerCertificate:()=>({}),destroy:()=>{}});queueMicrotask(()=>socket.emit('secureConnect'));return socket;};
+ let requests=0;const tls={rootCertificates:['synthetic'],checkServerIdentity:()=>patch.tlsError,connect:options=>{assert.equal(options.rejectUnauthorized,true);assert.equal(options.servername,'registry.npmjs.org');return makeSocket();}};
+ const https={Agent:class{destroy(){}},request:(url,options,done)=>{requests++;const req=new EventEmitter();req.destroy=error=>queueMicrotask(()=>req.emit('error',error??Error('cancelled')));req.end=()=>{if(!patch.stallResponse)queueMicrotask(()=>done(response));};return req;}};
+ const core=securityCore({lookup:async()=>patch.stallDns?await new Promise(()=>{}):patch.addresses??[{address:'104.16.26.34'}],tls,https});
+ return {core,response,requests:()=>requests};
+}
+async function transportCase(patch,fn){const t=transportHarness(patch),signal=new AbortController();try{await fn(t,{url:'https://registry.npmjs.org/example/-/example-1.0.0.tgz',signal:signal.signal},{expiresAt:Date.now()+60000,addresses:['104.16.26.34'],deadlines:{connectionMs:100,responseMs:100}});}finally{signal.abort();t.response.destroy();}}
+test('R6D trusted connector uses pinned DNS and TLS facts',()=>transportCase({},async(t,r,g)=>{const result=await t.core.trustedTransport(r,g);assert.equal(result.remoteAddress,'104.16.26.34');assert.equal(t.requests(),1);}));
+test('R6D DNS mismatch denies before HTTP',()=>transportCase({addresses:[{address:'104.16.99.99'}]},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,g));assert.equal(t.requests(),0);}));
+test('R6D socket destination mismatch denies before HTTP',()=>transportCase({remoteAddress:'104.16.99.99'},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,g));assert.equal(t.requests(),0);}));
+test('R6D TLS failure denies before HTTP',()=>transportCase({authorized:false},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,g));assert.equal(t.requests(),0);}));
+test('R6D real connector rejects redirect without follow-up',()=>transportCase({status:302},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,g));assert.equal(t.requests(),1);}));
+test('R6D signed authorized simulation integrates durable ledger and R6B',()=>fixture(async f=>{const {grant,plan}=syntheticGrant(f);validate(grant,plan);const b=budget(f,grant);b.start();try{const result=await sec.runAcquisition(f.job(),async req=>f.response(req),f.policy,b);assert(result.complete);assert.equal(b.read().state.charged,f.data.length);b.close(true);}finally{b.close(false);}}));
+
+test('R6D truncated authentic journal is rejected by independent head',()=>fixture(f=>{const {grant}=syntheticGrant(f);const b=budget(f,grant);b.start();b.reserve('unit');b.close(false);const file=f.root+'/'+grant.budgetId+'.json',entries=JSON.parse(fs.readFileSync(file));fs.writeFileSync(file,JSON.stringify(entries.slice(0,1)));assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)}).start());}));
+test('R6D missing authenticated journal head fails closed',()=>fixture(f=>{const {grant}=syntheticGrant(f);const b=budget(f,grant);b.start();b.close(false);fs.unlinkSync(f.root+'/'+grant.budgetId+'.head');assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)}).start());}));
+test('R6D oversized failed reads remain recorded before rejection',()=>fixture(f=>{const {grant}=syntheticGrant(f);const b=budget(f,grant);b.start();b.reserve('unit');assert.throws(()=>b.observe(ACQUISITION_LIMITS.artifactBytes+1));assert.equal(b.read().state.reservation.observed,ACQUISITION_LIMITS.artifactBytes+1);b.close(false);assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64)}).start());}));
+
+test('R6D DNS connection deadline is enforced offline',()=>transportCase({stallDns:true},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,{...g,deadlines:{connectionMs:5,responseMs:10}}),/deadline/);assert.equal(t.requests(),0);}));
+test('R6D HTTP response deadline is enforced offline',()=>transportCase({stallResponse:true},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,{...g,deadlines:{connectionMs:100,responseMs:5}}),/deadline/);}));
+
+test('R6D noncanonical signature encoding rejects',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);const e=JSON.parse(Buffer.from(envelope(grant),'base64'));e.signature+=' ';assert.throws(()=>sec.verifyAcquisitionGrant(Buffer.from(JSON.stringify(e)).toString('base64'),syntheticKeys.publicKey.export({type:'spki',format:'pem'}),plan));}));

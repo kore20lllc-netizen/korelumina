@@ -294,3 +294,60 @@ Remaining acquisition blockers are the scoped approval integration, trusted tran
 DNS/connection enforcement qualification and cumulative-budget recovery contract. No
 network acquisition, package installation, Android build, or execution approval is
 provided by this module. Native execution remains disabled.
+
+## R6D authorization, connector and durable cumulative budget
+
+R6D supersedes R6C's unimplemented-control notes. The existing acquisition module
+now contains a separate raw-payload Ed25519 verifier for
+`klm-npm-acquisition-permit:v1`, scope `npm-artifact-acquisition`. A grant binds the
+repository, full ordered lock-set/inventory fingerprints, exact registry destination,
+reviewed IPv4 destinations, fixed byte/transfer/deadline limits, absolute expiry,
+budgetId, unique attemptId and create/resume operation. APK permits cannot authorize
+acquisition. Resume requires a separately signed fresh attempt against the SAME
+budget identity and absolute expiry; no extension or limit reset is accepted.
+
+Production remains DISABLED: `ACQUISITION_AUTHORITY` is deliberately null. No real
+public key, budget authentication key or storage root has been provisioned. Callers
+cannot supply authority keys, callbacks, environment flags or synthetic transports.
+A separately reviewed activation must provision independent trust configuration and
+private durable storage; this milestone does not generate or activate real grants.
+All signatures in tests use ephemeral fixture-only keys, never production identities.
+
+The private connector resolves registry.npmjs.org with Node DNS, rejects answers
+outside the signed public-IPv4 set, connects to one selected numeric address with
+TLS SNI/hostname verification and bundled trust roots, and checks the connected
+socket BEFORE passing it to the HTTPS agent. Only GET to the exact reviewed HTTPS
+URL on port 443 is permitted; redirects/status deviations, URL credentials,
+proxy settings and insecure TLS/custom-CA overrides reject. No pool reuse, fallback
+host or retry is provided. Connection/response deadlines are 5/10 seconds within
+the fixed 30-second request and 10-minute overall caps and signed absolute expiry.
+Tests replace lexical dependencies with offline DNS/TLS/HTTP fixtures only. No live
+network enforcement or registry connectivity has been certified.
+
+The budget follows Runtime's exclusive-local publication conventions, using a private
+trusted filesystem, exclusive owner files, fsynced atomic publication and no lock
+stealing. A keyed HMAC-SHA256 journal authenticates each revision, hash-linked history,
+identity, cumulative charges, transfer count and consumed attempt IDs. A separately
+stored authenticated head detects truncation; a durable spent marker prevents a
+missing ledger from becoming a fresh create operation. Missing/corrupt/inconsistent
+evidence fails closed. An incomplete journal/head write requires operator recovery,
+not an automatic reset. Production budget authentication keys must remain outside
+the evidence directory and be independently provisioned; none is present here.
+
+BEFORE opening a connection, the full possible artifact allowance (up to 64 MiB,
+limited by remaining aggregate budget) is reserved durably. Successful independently
+verified transfers settle to actual bytes. Failed/interrupted/crashed transfers retain
+the entire reservation conservatively. Ordinary chunks are covered by their already durable full reservation; observed
+failed sizes are recorded at terminalization and successful sizes at settlement.
+Oversized failed reads are journaled immediately; overruns permanently deny resumption.
+Accounting is artifact response payload accounting, not a claim about TLS/IP wire-byte
+billing. The 256 MiB aggregate and 36 transfer counters survive new process instances
+and signed resume attempts. Reservations may exhaust the budget before all 36
+artifacts are available; no retry or larger-budget authorization is implied.
+
+All cooperating processes must use the same authority-owned budget root and key.
+This is single-host trusted-local persistence, not distributed storage. A privileged
+operator who rolls back BOTH authenticated history and its head/spent markers is
+outside this local-store guarantee; independently anchored anti-rollback operational
+controls and filesystem qualification remain prerequisites to production activation.
+Native execution, workflow publishing, SDK licensing and build authority are unchanged.
