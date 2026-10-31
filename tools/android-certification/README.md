@@ -393,3 +393,50 @@ rotation high-water mark is a future protected bootstrap responsibility; this pu
 validator does not claim to resist a privileged rollback of all external authority
 state. All R6E signatures reuse existing ephemeral baseline test fixtures. No new key
 generation code, production trust roots, real permits or network calls are added.
+
+## R6F protected bootstrap and independently anchored rotation
+
+`acquisition-bootstrap.mjs` defines the missing protected adapter boundary. It does
+NOT claim a protected configuration source or independent store already exists.
+`bootstrapAcquisitionTrust()` accepts no request configuration and remains disabled
+because its production adapter descriptor is null. Acquisition calls it before permit
+processing; the separately governed acquisition budget authority also remains null.
+No environment flag, request field, permit payload or synthetic adapter can install
+production trust. Existing APK verification and environment protection are unchanged.
+
+A future operator-installed adapter must provide authenticated `readProtected(domain)`
+returning reviewed trust bytes and independent pin, SHA-256 source revision,
+observedAt, historyRequired and initialization authorization. These are NEW adapter
+requirements, not names of an existing repository service. Configuration must be
+fresh within 60 seconds at entry and after anchoring, match the acquisition domain,
+pass R6E identity/lifetime validation, and reject synthetic trust in production.
+Provider metadata is not itself proof of protected provenance; the provider must
+first be independently qualified and installed outside acquisition request authority.
+
+The local rotation journal uses Runtime's existing fsync + exclusive hard-link
+publication pattern, private canonical directories and an exclusive non-stealable
+owner file. Each append authenticates schema, sequence, previous head, trust identity,
+generation, configuration/key fingerprints and activation interval with HMAC-SHA256.
+The authentication key must be separately provisioned outside the evidence directory.
+Same-generation exact identity is restart-safe; substitutions and older generations
+reject. Higher generations require a new durable revision and independently anchored
+head. Unknown files, incomplete writes, corruption and uncertain commits fail closed.
+
+Admission additionally REQUIRES an independently controlled witness with authenticated
+read and durable atomic compare-and-swap. Its domain/trustId head is checked before
+local admission, updated after durable local publication and read back before success.
+Missing history cannot be recreated when historyRequired is true or the witness says
+initialization already occurred. Concurrent/conflicting CAS cannot both acknowledge
+acceptance. Local publication without a confirmed witness commit is deliberately
+unavailable until separately authorized recovery; no deletion, reset, lock stealing
+or self-healing recovery API is provided.
+
+No such independent witness is deployed or selected. Tests use a synthetic in-memory
+witness ONLY to exercise the interface, with real isolated local journal files.
+Local hashes/HMACs alone cannot prevent a privileged replacement/deletion of all
+local state. Production rollback resistance requires the independent witness to retain
+its head and deny unauthorized reset/deletion, even if local storage is replaced.
+Without that qualified storage authority, production bootstrap fails closed. No new
+infrastructure, keys, real permits, network acquisition or workflow execution is
+introduced. Provisioning, backend qualification and explicit recovery remain separate
+Founder-controlled prerequisites.

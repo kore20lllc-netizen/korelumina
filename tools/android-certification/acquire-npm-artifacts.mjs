@@ -10,6 +10,7 @@ import https from 'node:https';
 import { inventory, verifyOfflineNpm, hash } from './offline-npm.mjs';
 import { prepareNpmCache } from './prepare-npm-cache.mjs';
 import { requireProductionAcquisitionTrust, acquisitionPublicKey, bindAcquisitionPermitTrust } from './acquisition-trust.mjs';
+import { bootstrapAcquisitionTrust } from './acquisition-bootstrap.mjs';
 export const ACQUISITION_LIMITS=Object.freeze({artifactBytes:64*1024**2,totalBytes:256*1024**2,requestMs:30000,overallMs:600000,transfers:36,retries:0});
 function makePlan(locks,expectedLockSetFingerprint,expectedReferences=132) {
  const result=inventory(locks);assert.equal(result.artifacts.length,expectedReferences,'Incomplete reviewed inventory');
@@ -21,12 +22,13 @@ export function planNpmAcquisition({locks,expectedLockSetFingerprint}) {return m
 // Neither caller keys, environment variables nor transport callbacks can supply it.
 const ACQUISITION_AUTHORITY=null;
 export async function acquireNpmArtifacts(options) {
+ const trust=bootstrapAcquisitionTrust();
  assert(ACQUISITION_AUTHORITY,'acquisition_authorization_unavailable');
  assert(Object.keys(options).every(k=>['locks','expectedLockSetFingerprint','root','sourceCache','signal','permit'].includes(k)),'Untrusted acquisition option');
- requireProductionAcquisitionTrust(ACQUISITION_AUTHORITY.trust);
+ requireProductionAcquisitionTrust(trust);
  const plan=makePlan(options.locks,options.expectedLockSetFingerprint);
- const grant=verifyAcquisitionGrant(options.permit,acquisitionPublicKey(ACQUISITION_AUTHORITY.trust),plan);
- bindAcquisitionPermitTrust(grant,ACQUISITION_AUTHORITY.trust);
+ const grant=verifyAcquisitionGrant(options.permit,acquisitionPublicKey(trust),plan);
+ bindAcquisitionPermitTrust(grant,trust);
  const budget=new AcquisitionBudget(ACQUISITION_AUTHORITY.budgetRoot,ACQUISITION_AUTHORITY.budgetKey,grant);
  budget.start();
  try {const result=await runAcquisition(options,request=>trustedTransport(request,grant),ACQUISITION_LIMITS,budget);budget.close(true);return result;}

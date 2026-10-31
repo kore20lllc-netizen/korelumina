@@ -12,6 +12,7 @@ import {inventory,verifyOfflineNpm,hash} from './offline-npm.mjs';
 import {prepareNpmCache} from './prepare-npm-cache.mjs';
 import {loadAcquisitionTrust,requireProductionAcquisitionTrust,acquisitionPublicKey,bindAcquisitionPermitTrust} from './acquisition-trust.mjs';
 import {verifyPermit,LIMITS} from './contracts.mjs';
+import {bootstrapAcquisitionTrust} from './acquisition-bootstrap.mjs';
 import {acquireNpmArtifacts,ACQUISITION_LIMITS} from './acquire-npm-artifacts.mjs';
 // Lexical test instrumentation only. No hook or transport is exported by production.
 const text=fs.readFileSync(new URL('./acquire-npm-artifacts.mjs',import.meta.url),'utf8');
@@ -145,3 +146,41 @@ test('R6E budget identity cannot resume under substituted trust generation',()=>
 test('R6E disabled-by-default boundary remains closed',async()=>assert.rejects(acquireNpmArtifacts(),/authorization_unavailable/));
 
 test('R6E previously unbound permits are not grandfathered into configured trust',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f);const verified=sec.verifyAcquisitionGrant(envelope(grant),acquisitionPublicKey(t),plan);assert.throws(()=>bindAcquisitionPermitTrust(verified,t));}));
+
+// R6F external source/witness are synthetic adapters, not deployed security services.
+const bootstrapText=fs.readFileSync(new URL('./acquisition-bootstrap.mjs',import.meta.url),'utf8');
+const bootstrapCore=compileFunction(bootstrapText.replace(/^import .*;$/gm,'').replace(/export /g,'')+'\nreturn {bootstrapWithAdapters,anchorTrustGeneration};',['fs','path','assert','createHmac','timingSafeEqual','sha256','loadAcquisitionTrust','requireProductionAcquisitionTrust'])(fs,path,assert,createHmac,timingSafeEqual,hash,loadAcquisitionTrust,requireProductionAcquisitionTrust);
+async function bootstrapFixture(fn){return fixture(async f=>{
+ const rotationRoot=f.root+'/rotation';fs.mkdirSync(rotationRoot,{mode:0o700});const initial=trustFixture();
+ let bundle={domain:'npm-artifact-acquisition',bytes:initial.bytes,pin:initial.pin,sourceRevision:hash(initial.bytes),observedAt:Date.now(),historyRequired:false,initializeAuthorized:true};
+ const remote={initialized:false,head:null};const witness={read:(domain,trustId)=>({domain,trustId,...remote}),compareAndSwap:(domain,trustId,expected,next)=>{if(remote.head!==expected)return false;remote.head=next;remote.initialized=true;return true;}};
+ const adapter={source:{readProtected:()=>bundle},witness,rotationRoot,rotationKey:Buffer.alloc(32,8)};
+ const run=(overrides={},options={})=>bootstrapCore.bootstrapWithAdapters({...adapter,...overrides},{mode:'synthetic',...options});
+ const advance=generation=>{const t=trustFixture({...initial.config,generation,notBefore:initial.config.notBefore+generation});bundle={...bundle,bytes:t.bytes,pin:t.pin,sourceRevision:hash(t.bytes),historyRequired:true,initializeAuthorized:false,observedAt:Date.now()};};
+ await fn({...f,rotationRoot,initial,remote,adapter,run,advance,bundle:()=>bundle,setBundle:b=>{bundle=b;}});
+ });}
+test('R6F missing protected bootstrap fails closed',()=>assert.throws(()=>bootstrapAcquisitionTrust(),/protected bootstrap unavailable/));
+test('R6F request-supplied provider cannot configure production bootstrap',()=>assert.throws(()=>bootstrapAcquisitionTrust({source:{readProtected:()=>{throw Error('must not call');}}}),/protected bootstrap unavailable/));
+test('R6F malformed protected bootstrap rejects',()=>bootstrapFixture(f=>assert.throws(()=>f.run({source:{readProtected:()=>({})}}))));
+test('R6F stale protected configuration rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),observedAt:Date.now()-60001});assert.throws(()=>f.run());}));
+test('R6F substituted trust configuration rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),bytes:Buffer.from(JSON.stringify({...f.initial.config,publicKeyPem:'substituted'}))});assert.throws(()=>f.run());}));
+test('R6F incorrect independent trust fingerprint rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),pin:{...f.initial.pin,rootSpkiSha256:'0'.repeat(64)}});assert.throws(()=>f.run());}));
+test('R6F synthetic source cannot bootstrap production',()=>bootstrapFixture(f=>assert.throws(()=>f.run({}, {mode:'production'}))));
+test('R6F authorized initial generation is journaled and anchored',()=>bootstrapFixture(f=>{const r=f.run();assert.equal(r.anchor.generation,1);assert.equal(r.anchor.head,f.remote.head);assert(f.remote.initialized);}));
+test('R6F authorized generation advances durable anchor',()=>bootstrapFixture(f=>{const a=f.run();f.advance(2);const b=f.run();assert.equal(b.anchor.generation,2);assert.notEqual(a.anchor.head,b.anchor.head);}));
+test('R6F older generation rollback rejects',()=>bootstrapFixture(f=>{const old=f.bundle();f.run();f.advance(2);f.run();f.setBundle({...old,historyRequired:true,initializeAuthorized:false});assert.throws(()=>f.run(),/Older/);}));
+test('R6F same generation substitution rejects',()=>bootstrapFixture(f=>{f.run();const changed=trustFixture({...f.initial.config,notAfter:f.initial.config.notAfter+1});f.setBundle({...f.bundle(),bytes:changed.bytes,pin:changed.pin});assert.throws(()=>f.run(),/same-generation/);}));
+test('R6F concurrent local rotation owner cannot be bypassed',()=>bootstrapFixture(f=>{const owner=f.rotationRoot+'/.rotation-owner';fs.writeFileSync(owner,'owned');assert.throws(()=>f.run());assert.equal(fs.readFileSync(owner,'utf8'),'owned');assert(!f.remote.initialized);}));
+test('R6F independent CAS conflict cannot acknowledge rotation',()=>bootstrapFixture(f=>{assert.throws(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:()=>false}}),/commit uncertain/);assert(!f.remote.initialized);assert.throws(()=>f.run(),/head mismatch/);}));
+test('R6F interrupted publication requires explicit recovery',()=>bootstrapFixture(f=>{const original=fs.linkSync;fs.linkSync=()=>{throw Error('synthetic interruption');};try{assert.throws(()=>f.run());}finally{fs.linkSync=original;}assert(fs.existsSync(f.rotationRoot+'/.rotation-pending'));assert.throws(()=>f.run());assert(!f.remote.initialized);}));
+test('R6F corrupt persisted history rejects',()=>bootstrapFixture(f=>{f.run();fs.writeFileSync(f.rotationRoot+'/000000.json','{}');assert.throws(()=>f.run());}));
+test('R6F deleted historical state is detected by independent witness',()=>bootstrapFixture(f=>{f.run();fs.unlinkSync(f.rotationRoot+'/000000.json');assert.throws(()=>f.run(),/Deleted historical/);}));
+test('R6F prior initialization requirement rejects absent history',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),historyRequired:true});assert.throws(()=>f.run(),/Prior rotation history/);}));
+test('R6F unauthorized initialization rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),initializeAuthorized:false});assert.throws(()=>f.run());assert(!f.remote.initialized);}));
+test('R6F restart reads same durable generation and witness',()=>bootstrapFixture(f=>{const a=f.run(),b=f.run({...f.adapter,source:{readProtected:()=>({...f.bundle(),historyRequired:true,initializeAuthorized:false})}});assert.deepEqual(a.anchor,b.anchor);assert.equal(fs.readdirSync(f.rotationRoot).length,1);}));
+test('R6F missing independent witness rejects production-equivalent admission',()=>bootstrapFixture(f=>{assert.throws(()=>f.run({witness:null}),/witness unavailable/);assert.equal(fs.readdirSync(f.rotationRoot).length,0);}));
+test('R6F replacing local state with an old authentic revision is rejected',()=>bootstrapFixture(f=>{f.run();f.advance(2);f.run();fs.unlinkSync(f.rotationRoot+'/000001.json');assert.throws(()=>f.run(),/head mismatch/);}));
+test('R6F unprotected source cannot reuse APK authorization domain',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),domain:'one-debug-apk'});assert.throws(()=>f.run());}));
+test('R6F acquisition remains disabled without installed protected adapters',async()=>assert.rejects(acquireNpmArtifacts(),/authorization_unavailable/));
+
+test('R6F freshness is rechecked after durable anchoring',()=>bootstrapFixture(f=>{const now=f.bundle().observedAt+60000;assert.throws(()=>f.run({}, {now}),/stale during bootstrap/);}));
