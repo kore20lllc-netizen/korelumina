@@ -10,6 +10,8 @@ import {EventEmitter} from 'node:events';
 import {PassThrough} from 'node:stream';
 import {inventory,verifyOfflineNpm,hash} from './offline-npm.mjs';
 import {prepareNpmCache} from './prepare-npm-cache.mjs';
+import {loadAcquisitionTrust,requireProductionAcquisitionTrust,acquisitionPublicKey,bindAcquisitionPermitTrust} from './acquisition-trust.mjs';
+import {verifyPermit,LIMITS} from './contracts.mjs';
 import {acquireNpmArtifacts,ACQUISITION_LIMITS} from './acquire-npm-artifacts.mjs';
 // Lexical test instrumentation only. No hook or transport is exported by production.
 const text=fs.readFileSync(new URL('./acquire-npm-artifacts.mjs',import.meta.url),'utf8');
@@ -113,3 +115,33 @@ test('R6D DNS connection deadline is enforced offline',()=>transportCase({stallD
 test('R6D HTTP response deadline is enforced offline',()=>transportCase({stallResponse:true},async(t,r,g)=>{await assert.rejects(t.core.trustedTransport(r,{...g,deadlines:{connectionMs:100,responseMs:5}}),/deadline/);}));
 
 test('R6D noncanonical signature encoding rejects',()=>fixture(f=>{const {grant,plan}=syntheticGrant(f);const e=JSON.parse(Buffer.from(envelope(grant),'base64'));e.signature+=' ';assert.throws(()=>sec.verifyAcquisitionGrant(Buffer.from(JSON.stringify(e)).toString('base64'),syntheticKeys.publicKey.export({type:'spki',format:'pem'}),plan));}));
+
+// R6E reuses the pre-existing baseline fixture key; no new key generation or real trust.
+function trustFixture(patch={}) {
+ const config={schemaVersion:'klm-npm-acquisition-trust:v1',purpose:'npm-artifact-acquisition',environment:'synthetic',trustId:'unit-acquisition',generation:1,publicKeyPem:syntheticKeys.publicKey.export({format:'pem',type:'spki'}),notBefore:Date.now()-1000,notAfter:Date.now()+3600000,...patch};
+ const bytes=Buffer.from(JSON.stringify(config)),pin={configurationSha256:hash(bytes),rootSpkiSha256:hash(createPublicKey(config.publicKeyPem).export({format:'der',type:'spki'})),trustId:config.trustId,generation:config.generation};
+ return {config,bytes,pin,load:options=>loadAcquisitionTrust(bytes,pin,{mode:'synthetic',...options})};
+}
+function trustFields(t){return {trustId:t.trustId,trustGeneration:t.generation,trustConfigSha256:t.configurationSha256,trustRootSha256:t.rootSpkiSha256};}
+test('R6E absent acquisition trust fails closed',()=>assert.throws(()=>loadAcquisitionTrust(undefined,{})));
+test('R6E malformed trust configuration rejects',()=>{const bytes=Buffer.from('{}');assert.throws(()=>loadAcquisitionTrust(bytes,{configurationSha256:hash(bytes),rootSpkiSha256:'0'.repeat(64),trustId:'unit',generation:1}));});
+test('R6E independently pinned root identity must match',()=>{const f=trustFixture();assert.throws(()=>loadAcquisitionTrust(f.bytes,{...f.pin,rootSpkiSha256:'0'.repeat(64)},{mode:'synthetic'}));});
+test('R6E substituted public key rejects despite updated configuration hash',()=>{const f=trustFixture();const other=createPublicKey({format:'der',type:'spki',key:Buffer.from('302a300506032b6570032100d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a','hex')});const bytes=Buffer.from(JSON.stringify({...f.config,publicKeyPem:other.export({format:'pem',type:'spki'})}));assert.throws(()=>loadAcquisitionTrust(bytes,{...f.pin,configurationSha256:hash(bytes)},{mode:'synthetic'}));});
+test('R6E untrusted request object cannot impersonate loaded trust',()=>{const t=trustFixture().load();assert.throws(()=>requireProductionAcquisitionTrust({...t}));assert.throws(()=>acquisitionPublicKey({...t}));});
+test('R6E request-supplied trust cannot enable acquisition',async()=>{const t=trustFixture().load();await assert.rejects(acquireNpmArtifacts({trust:t,authority:t,enabled:true}),/authorization_unavailable/);});
+test('R6E invalid signature rejects against configured acquisition key',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f,trustFields(t));const e=JSON.parse(Buffer.from(envelope(grant),'base64'));e.signature=Buffer.alloc(64).toString('base64');assert.throws(()=>sec.verifyAcquisitionGrant(Buffer.from(JSON.stringify(e)).toString('base64'),acquisitionPublicKey(t),plan));}));
+test('R6E valid synthetic signature binds exact loaded trust',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f,trustFields(t));const verified=sec.verifyAcquisitionGrant(envelope(grant),acquisitionPublicKey(t),plan);bindAcquisitionPermitTrust(verified,t);assert(Object.isFrozen(t));}));
+test('R6E trust rotation rejects previous-generation permits',()=>fixture(f=>{const first=trustFixture(),old=first.load();const next=trustFixture({...first.config,generation:2,notBefore:first.config.notBefore+1});const rotated=next.load({previous:old});const {grant}=syntheticGrant(f,trustFields(old));assert.throws(()=>bindAcquisitionPermitTrust(grant,rotated));}));
+test('R6E rotation cannot downgrade generation',()=>{const f=trustFixture(),old=f.load();assert.throws(()=>f.load({previous:old}));});
+test('R6E same root under new configuration cannot silently admit old binding',()=>fixture(f=>{const first=trustFixture(),old=first.load();const next=trustFixture({...first.config,generation:2});const t=next.load({previous:old});const {grant}=syntheticGrant(f,{...trustFields(old),trustGeneration:2});assert.throws(()=>bindAcquisitionPermitTrust(grant,t));}));
+test('R6E expired acquisition authorization still rejects',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f,{...trustFields(t),expiresAt:1});assert.throws(()=>sec.verifyAcquisitionGrant(envelope(grant),acquisitionPublicKey(t),plan));}));
+test('R6E APK permit cannot establish acquisition authority',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f,{...trustFields(t),schemaVersion:'klm-execution-permit:v1',scope:'one-debug-apk'});assert.throws(()=>sec.verifyAcquisitionGrant(envelope(grant),acquisitionPublicKey(t),plan));}));
+test('R6E acquisition permit cannot establish APK authority',()=>fixture(f=>{const t=trustFixture().load(),{grant}=syntheticGrant(f,trustFields(t));assert.throws(()=>verifyPermit(envelope({...grant,limits:LIMITS}),acquisitionPublicKey(t),{}));}));
+test('R6E production loader rejects synthetic trust configuration',()=>{const f=trustFixture();assert.throws(()=>loadAcquisitionTrust(f.bytes,f.pin));});
+test('R6E production boundary rejects loaded synthetic trust receipt',()=>assert.throws(()=>requireProductionAcquisitionTrust(trustFixture().load())));
+test('R6E expired trust rejects',()=>{const f=trustFixture({notAfter:1});assert.throws(()=>f.load());});
+test('R6E permit predating trust activation rejects',()=>fixture(f=>{const t=trustFixture().load(),{grant}=syntheticGrant(f,{...trustFields(t),issuedAt:t.notBefore-1});assert.throws(()=>bindAcquisitionPermitTrust(grant,t));}));
+test('R6E budget identity cannot resume under substituted trust generation',()=>fixture(f=>{const t=trustFixture().load(),{grant}=syntheticGrant(f,trustFields(t));const b=budget(f,grant);b.start();b.close(false);assert.throws(()=>budget(f,{...grant,operation:'resume',attemptId:'c'.repeat(64),trustGeneration:2}).start());}));
+test('R6E disabled-by-default boundary remains closed',async()=>assert.rejects(acquireNpmArtifacts(),/authorization_unavailable/));
+
+test('R6E previously unbound permits are not grandfathered into configured trust',()=>fixture(f=>{const t=trustFixture().load(),{grant,plan}=syntheticGrant(f);const verified=sec.verifyAcquisitionGrant(envelope(grant),acquisitionPublicKey(t),plan);assert.throws(()=>bindAcquisitionPermitTrust(verified,t));}));

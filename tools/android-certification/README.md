@@ -351,3 +351,45 @@ operator who rolls back BOTH authenticated history and its head/spent markers is
 outside this local-store guarantee; independently anchored anti-rollback operational
 controls and filesystem qualification remain prerequisites to production activation.
 Native execution, workflow publishing, SDK licensing and build authority are unchanged.
+
+## R6E independent acquisition trust configuration boundary
+
+`acquisition-trust.mjs` validates explicit, independently provisioned trust bytes
+against a separate protected bootstrap pin: configuration SHA-256, Ed25519 SPKI
+SHA-256, trustId and generation. This is validation only, not trust provisioning or
+an existing deployed configuration source. Repository inspection found the APK
+verifier uses protected environment evidence; there is no established acquisition
+trust loader to activate. No filesystem location, environment selection variable,
+production public key or private signing key is introduced here.
+
+The configuration schema is `klm-npm-acquisition-trust:v1`, with exact fields
+purpose (`npm-artifact-acquisition`), environment (`production` or `synthetic`),
+trustId, positive generation, publicKeyPem (PUBLIC KEY only, Ed25519), notBefore,
+and notAfter. Missing bytes, unknown fields, malformed keys, substituted configuration,
+wrong SPKI identity, inactive trust and pin mismatches fail closed. Pin values MUST
+come from independent reviewed authority; computing an expected pin from the same
+untrusted configuration is not evidence of independent trust. An environment label
+alone is also not proof that a key was independently reviewed.
+
+The loader returns a frozen, internally recognized receipt; arbitrary request objects
+cannot impersonate it. Production requires production-mode trust; synthetic receipts
+are rejected even if their contents are copied or request flags claim authorization.
+No trust, key or pin can be supplied in an acquisition request. Production authority
+remains null; wiring a protected bootstrap provider, provisioning its pin/key/budget
+root and activating acquisition still require separate Founder authorization.
+
+The acquisition verifier retains the established raw-payload Ed25519 permit format
+and now requires trustId, trustGeneration, trustConfigSha256 and trustRootSha256 to
+match the configured acquisition receipt. Permit issuance/lifetime must fit the trust
+activation interval. APK and acquisition permit scopes remain separate; the APK
+verifier and protected environment logic are unchanged. Budget identity also binds
+these trust fields, preventing a rotated root from silently inheriting an old budget.
+No legacy unbound permit or fallback key is automatically admitted.
+
+Explicit rotation checks require an increasing generation against the previous
+recognized trust receipt. There is no automatic key refresh, retry of previously
+rejected permits, or environment fallback. Persisting/anchoring the active pin and
+rotation high-water mark is a future protected bootstrap responsibility; this pure
+validator does not claim to resist a privileged rollback of all external authority
+state. All R6E signatures reuse existing ephemeral baseline test fixtures. No new key
+generation code, production trust roots, real permits or network calls are added.

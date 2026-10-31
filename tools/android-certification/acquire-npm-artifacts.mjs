@@ -9,6 +9,7 @@ import tls from 'node:tls';
 import https from 'node:https';
 import { inventory, verifyOfflineNpm, hash } from './offline-npm.mjs';
 import { prepareNpmCache } from './prepare-npm-cache.mjs';
+import { requireProductionAcquisitionTrust, acquisitionPublicKey, bindAcquisitionPermitTrust } from './acquisition-trust.mjs';
 export const ACQUISITION_LIMITS=Object.freeze({artifactBytes:64*1024**2,totalBytes:256*1024**2,requestMs:30000,overallMs:600000,transfers:36,retries:0});
 function makePlan(locks,expectedLockSetFingerprint,expectedReferences=132) {
  const result=inventory(locks);assert.equal(result.artifacts.length,expectedReferences,'Incomplete reviewed inventory');
@@ -22,8 +23,10 @@ const ACQUISITION_AUTHORITY=null;
 export async function acquireNpmArtifacts(options) {
  assert(ACQUISITION_AUTHORITY,'acquisition_authorization_unavailable');
  assert(Object.keys(options).every(k=>['locks','expectedLockSetFingerprint','root','sourceCache','signal','permit'].includes(k)),'Untrusted acquisition option');
+ requireProductionAcquisitionTrust(ACQUISITION_AUTHORITY.trust);
  const plan=makePlan(options.locks,options.expectedLockSetFingerprint);
- const grant=verifyAcquisitionGrant(options.permit,ACQUISITION_AUTHORITY.publicKey,plan);
+ const grant=verifyAcquisitionGrant(options.permit,acquisitionPublicKey(ACQUISITION_AUTHORITY.trust),plan);
+ bindAcquisitionPermitTrust(grant,ACQUISITION_AUTHORITY.trust);
  const budget=new AcquisitionBudget(ACQUISITION_AUTHORITY.budgetRoot,ACQUISITION_AUTHORITY.budgetKey,grant);
  budget.start();
  try {const result=await runAcquisition(options,request=>trustedTransport(request,grant),ACQUISITION_LIMITS,budget);budget.close(true);return result;}
@@ -149,7 +152,7 @@ class AcquisitionBudget {
   assert(Array.isArray(last.attempts)&&new Set(last.attempts).size===last.attempts.length);
   return {ledger,state:last};
  }
- binding(){const g=this.grant;return hash(JSON.stringify({budgetId:g.budgetId,lockSet:g.lockSetFingerprint,inventory:g.inventorySha256,destination:g.destination,addresses:g.addresses,limits:g.limits,deadlines:g.deadlines,expiresAt:g.expiresAt}));}
+ binding(){const g=this.grant;return hash(JSON.stringify({budgetId:g.budgetId,trust:{id:g.trustId,generation:g.trustGeneration,configuration:g.trustConfigSha256,root:g.trustRootSha256},lockSet:g.lockSetFingerprint,inventory:g.inventorySha256,destination:g.destination,addresses:g.addresses,limits:g.limits,deadlines:g.deadlines,expiresAt:g.expiresAt}));}
  save(state,initial=false){
   const file=path.join(this.root,this.grant.budgetId+'.json'),prior=initial?[]:this.read().ledger;
   const entry={sequence:prior.length,previous:prior.length?hash(JSON.stringify(prior.at(-1))):'0'.repeat(64),state};entry.mac=mac(this.key,JSON.stringify(entry));
