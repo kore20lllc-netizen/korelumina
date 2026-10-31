@@ -9,7 +9,7 @@
     "apps/lumina-runtime/src/mobile/__tests__/AndroidNativeDependencyReplay.test.ts": "d8d0cf55e24c684a88ea69615e4e0c606c64c4df6ca41ba3d6f35f5ce2d8f66d",
     "apps/lumina-runtime/src/mobile/__tests__/AndroidPackaging.test.ts": "2b732b027a3e0666d0869e7589048e0918d4d1c3a1eb9c77c2159185f39fe043",
     "tools/android-certification/Dockerfile": "f4f24b30c059011126d7dcd399e4f79b0330cca3c3db25182b3448b6e4989c55",
-    "tools/android-certification/README.md": "2e4105d9f587c2d6661412b358806fb37b97f43a42e5f1d9d23b6bee7629e059",
+    "tools/android-certification/README.md": "e8b2d4e2758c860b213e7859b7e7edef3e26733bcc2a4e2e7a996528512e9149",
     "tools/android-certification/certify.mts": "6416e229f11ff638c3dfacb089e24acbf63b6a5a24f6a4ed928e6701e57ca5cd",
     "tools/android-certification/cleanup.mjs": "c18d08afe84dec561983c1f4b0ab6639450fb846b70f60a1928e27402f760359",
     "tools/android-certification/contracts.mjs": "c8f93214f8cb6e2da0b720f549bc26176cdb79fc2563317e15f7466be31eda3a",
@@ -26,6 +26,8 @@
     "tools/android-certification/native/package.json": "dbf643c9ebd4c81938f6888df0a59eb67fc6d27e3f42eea95c890f233f50cf70",
     "tools/android-certification/offline-npm.mjs": "6af1829a81a0970ae8237a9b6494c23bf65f80be095855c6d6e56963c7e48ad9",
     "tools/android-certification/offline-npm.test.mjs": "e56e6e5bdffc82036970554c70ec12a1ddc05d96fc550517d62aee5cc6f4f4a6",
+    "tools/android-certification/prepare-npm-cache.mjs": "2359c6309c1d2705b7bdd5e48bcc81b67cc195a8b8b90f1e8113da8eb7e15e6b",
+    "tools/android-certification/prepare-npm-cache.test.mjs": "70b8bb50f5d8bb1017e2b769dc344515af700f42ffcdb522ce1c09be8b858de3",
     "tools/android-certification/resource-preflight.mjs": "6ad8a460289533c17b920d24cc62b5caeb61a3a4965dd3cb5edfd5168bd05216",
     "tools/android-certification/toolchain.json": "e35bb9fbf34ae0ad57d5cbab509b68f0d84430ebdb950e6ebba8c18f0403315a",
     "tools/android-certification/verify.mjs": "7e5bbac0aacc9f6d59265820e8a55219f6aa0a4789dcbb41db80ed940ca9ced1"

@@ -214,3 +214,43 @@ strict inventory validation. Shared-cache content must never be published wholes
 Pinned npm 10.9.9 actual offline replay, genuine Gradle/Maven closure, image evidence,
 licenses, resource measurement and execution approval remain separate prerequisites.
 This verifier does not download, install, unpack or execute artifacts.
+
+## R6B local-only dedicated cache preparation
+
+`prepareNpmCache` in `prepare-npm-cache.mjs` reuses the R6A inventory and strict
+verifier, plus existing lock closure validation. Callers supply reviewed lock bytes,
+independent fingerprints, the canonical shared `_cacache` directory, a private
+canonical destination outside it, and explicit positive `maxArtifacts`,
+`maxArtifactBytes` (at most 256 MiB), and `maxTotalBytes` limits. The latter measures
+unique payload bytes, not total filesystem occupancy; copies/indexes need separate
+storage budgeting. Production defaults to exactly 132 artifact URL references;
+explicit smaller expected counts exist only for separately reviewed fixture contracts.
+Optional foreign-platform artifacts remain required.
+
+There is NO network acquisition implementation. Unknown options, including network
+enablement, redirect responses or acquisition callbacks, reject. No credentials,
+HTTP requests, npm installation, scripts or package extraction are involved. Future
+network capability requires a separately authorized implementation and review.
+
+Preparation deduplicates by SHA-512 identity, independently rehashes source bytes,
+and writes only allowlisted blobs and deterministic cache indexes into
+`<destination>/cache/npm/_cacache`. The source cache is read-only. Source sharing
+is diagnostic only; the destination always receives strict verification. Content is
+fsynced and atomically renamed before its index is committed; its directory is
+synced. Each URL keeps its own index even when multiple URLs share content.
+`plan.json` binds lock fingerprints/count/limits; `receipt.json` binds exact verified
+URL/SRI/SHA-256/size records. Missing artifacts produce complete:false, never a
+successful offline-installation assertion. Invalid/inconsistent receipts reject.
+
+An exclusive `.owner-lock` prevents concurrent preparers. Normal exceptions and
+cancellation release ownership and remove only the helper-owned `.pending` file.
+Restart rehashes existing destination bytes before resuming an interrupted content,
+index or receipt publication. A process/host crash may leave an owner lock; an
+operator must independently confirm the old writer is dead before separately
+approving stale-lock recovery. The helper never steals ownership automatically.
+The preparation directory must remain private and must not have untrusted writers.
+No shared cache, download source, signing authority, or Runtime authority is mutated.
+
+This produces npm cache preparation evidence only. Image `integrity.json`/tarball
+export, pinned npm 10.9.9 actual offline replay, missing package acquisition,
+Gradle/Maven closure, licenses and native execution approvals remain separate work.
