@@ -254,3 +254,43 @@ No shared cache, download source, signing authority, or Runtime authority is mut
 This produces npm cache preparation evidence only. Image `integrity.json`/tarball
 export, pinned npm 10.9.9 actual offline replay, missing package acquisition,
 Gradle/Maven closure, licenses and native execution approvals remain separate work.
+
+## R6C disabled acquisition boundary and synthetic transfer core
+
+The public `acquireNpmArtifacts()` always rejects with
+`acquisition_authorization_unavailable`, before inspecting caller callbacks or
+performing I/O. `planNpmAcquisition()` is read-only and binds the 132-reference
+inventory to SHA-256 of the existing verifier's ordered lock fingerprint array.
+Neither environment values, flags nor caller-injected transports enable acquisition.
+The existing signed one-debug-apk permit is not an npm acquisition grant.
+
+There is no real HTTP/DNS/TLS transport in this milestone. Private lexical orchestration
+is tested by compiling only a test-harness copy of the source; no private-core accessor
+or synthetic injection hook is exported. Tests supply local byte streams and connection
+facts. These tests are not evidence of enforced real DNS pinning, certificate validation,
+registry connectivity or network acquisition readiness. A future independently governed
+connector must derive connection facts from DNS/TLS/socket APIs, reject unexpected or
+unsafe destinations before sending, validate the registry certificate and hostname,
+require port 443, reject redirects including same-host redirects, and not trust response
+headers as connection evidence. The current synthetic policy supports IPv4 only.
+
+Synthetic core limits reflect the proposed real execution contract: 64 MiB received
+per artifact, 256 MiB aggregate received (incremented before integrity acceptance),
+30 seconds per request, 10 minutes overall, 36 unique missing integrity identities,
+sequential transfer and zero automatic retries. A failure terminates the invocation;
+future authorization must define durable cumulative budgets across separately resumed
+invocations before any network integration. Scaled limits exist only inside lexical tests.
+
+Streams go to private job-owned temporary files and are checked for length and reviewed
+SHA-512 before entering quarantine. Quarantine publication is atomic; R6B alone publishes
+the final cache and records independent SHA-256/size evidence. The resulting acquisition
+receipt is deterministic and requires strict complete closure. No installation success
+is asserted. Missing or corrupt artifacts fail closed. Restart rehashes quarantine and
+final-cache bytes; normal cancellation removes only job-owned partial files. A crash
+may leave an exclusive owner lock requiring separate operator recovery; locks are never
+stolen automatically. The private preparation root must have no untrusted writers.
+
+Remaining acquisition blockers are the scoped approval integration, trusted transport,
+DNS/connection enforcement qualification and cumulative-budget recovery contract. No
+network acquisition, package installation, Android build, or execution approval is
+provided by this module. Native execution remains disabled.
