@@ -1,0 +1,45 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {inventory,verifyOfflineNpm,hash} from './offline-npm.mjs';
+function fixture(fn) {
+ const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'klm-npm-'));const cache=path.join(root,'cache');fs.mkdirSync(cache);
+ const blob=Buffer.from('synthetic tarball bytes, never installed');
+ const pkg={version:'1.0.0',resolved:'https://registry.npmjs.org/example/-/example-1.0.0.tgz',integrity:'sha512-'+hash(blob,'sha512','base64')};
+ const lock={name:'test-wrapper',version:'1.0.0',lockfileVersion:3,packages:{'':{name:'test-wrapper',version:'1.0.0'},'node_modules/example':pkg}};
+ const locks=()=>{const bytes=Buffer.from(JSON.stringify(lock));return [{id:'native',packageName:'test-wrapper',bytes,expectedSha256:hash(bytes)}];};
+ const write=(rel,bytes)=>{const f=path.join(cache,rel);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,bytes);};
+ const a=inventory(locks()).artifacts[0];
+ const index=(patch={})=>{const data=JSON.stringify({key:a.cacheKey,integrity:a.integrity,size:blob.length,...patch});write(a.indexPath,'\n'+hash(data,'sha1')+'\t'+data);};
+ write(a.contentPath,blob);index();
+ const run=extra=>verifyOfflineNpm({locks:locks(),cacheRoot:cache,...extra});
+ try {return fn({root,cache,blob,pkg,lock,locks,a,write,index,run});}finally{fs.rmSync(root,{recursive:true,force:true});}
+}
+test('complete synthetic artifact inventory hashes actual bytes',()=>fixture(f=>{const r=f.run();assert(r.complete);assert.equal(r.verified[0].sha256,hash(f.blob));assert.equal(r.verified[0].bytes,f.blob.length);assert.equal(r.offlineInstallationVerified,false);}));
+test('missing blob remains missing',()=>fixture(f=>{fs.unlinkSync(path.join(f.cache,f.a.contentPath));assert.deepEqual(f.run().missing[0].reasons,['missing-blob']);}));
+test('missing index cannot verify an existing blob',()=>fixture(f=>{fs.unlinkSync(path.join(f.cache,f.a.indexPath));assert.equal(f.run().verified.length,0);}));
+test('corrupt bytes reject',()=>fixture(f=>{f.write(f.a.contentPath,'corrupt');assert.throws(()=>f.run(),/hash mismatch/);}));
+test('unapproved URL substitution rejects',()=>fixture(f=>{f.pkg.resolved='https://evil.invalid/a.tgz';assert.throws(()=>f.run());}));
+test('credentialed registry URL rejects',()=>fixture(f=>{f.pkg.resolved='https://user@registry.npmjs.org/a.tgz';assert.throws(()=>f.run());}));
+test('unsafe lock package location rejects',()=>fixture(f=>{f.lock.packages['node_modules/../escape']=f.pkg;assert.throws(()=>f.run());}));
+test('symlink leaf rejects',()=>fixture(f=>{const file=path.join(f.cache,f.a.contentPath);fs.unlinkSync(file);fs.symlinkSync('/etc/hosts',file);assert.throws(()=>f.run());}));
+test('symlink ancestor rejects',()=>fixture(f=>{fs.renameSync(path.join(f.cache,'content-v2'),path.join(f.root,'content'));fs.symlinkSync(path.join(f.root,'content'),path.join(f.cache,'content-v2'));assert.throws(()=>f.run());}));
+test('duplicate artifact references are deduplicated deterministically',()=>fixture(f=>{f.lock.packages['node_modules/nested/node_modules/example']={...f.pkg};assert.equal(f.run().requiredArtifacts,1);assert.equal(f.run().verified[0].references.length,2);}));
+test('optional foreign platform dependencies remain required',()=>fixture(f=>{Object.assign(f.pkg,{optional:true,os:['win32'],cpu:['arm64']});fs.unlinkSync(path.join(f.cache,f.a.contentPath));const r=f.run();assert(!r.complete);assert(r.missing[0].references[0].optional);}));
+test('report bytes are deterministic',()=>fixture(f=>assert.equal(JSON.stringify(f.run()),JSON.stringify(f.run()))));
+test('lock fingerprint mismatch rejects',()=>fixture(f=>{const locks=f.locks();locks[0].expectedSha256='0'.repeat(64);assert.throws(()=>f.run({locks}));}));
+test('lock identity mismatch rejects',()=>fixture(f=>{const locks=f.locks();locks[0].packageName='other';assert.throws(()=>f.run({locks}));}));
+test('missing integrity rejects',()=>fixture(f=>{delete f.pkg.integrity;assert.throws(()=>f.run());}));
+test('index checksum mismatch rejects',()=>fixture(f=>{f.write(f.a.indexPath,'0'.repeat(40)+'\t{}');assert.throws(()=>f.run());}));
+test('index content reference substitution rejects',()=>fixture(f=>{f.index({integrity:'sha512-'+hash(Buffer.from('other'),'sha512','base64')});assert.throws(()=>f.run());}));
+test('index key substitution rejects',()=>fixture(f=>{f.index({key:'other'});assert.throws(()=>f.run());}));
+test('index size substitution rejects',()=>fixture(f=>{f.index({size:1});assert.throws(()=>f.run());}));
+test('latest deleted index entry prevents verification',()=>fixture(f=>{f.index({integrity:null});assert(!f.run().complete);}));
+test('unexpected cached artifact rejects',()=>fixture(f=>{f.write('extra','unknown');assert.throws(()=>f.run());}));
+test('conflicting duplicate URL integrity rejects',()=>fixture(f=>{f.lock.packages['node_modules/other']={...f.pkg,integrity:'sha512-'+hash(Buffer.from('other'),'sha512','base64')};assert.throws(()=>f.run());}));
+test('both locks included in one inventory',()=>fixture(f=>{const locks=f.locks();locks.push({...locks[0],id:'fixture'});assert.equal(f.run({locks}).verified[0].references.length,2);}));
+test('tarball file bytes are checked independently',()=>fixture(f=>{fs.mkdirSync(path.join(f.root,'tarballs'));fs.writeFileSync(path.join(f.root,'tarballs/a'),f.blob);assert(f.run({artifactRoot:f.root,tarballs:{[f.a.url]:'tarballs/a'}}).complete);fs.writeFileSync(path.join(f.root,'tarballs/a'),'bad');assert.throws(()=>f.run({artifactRoot:f.root,tarballs:{[f.a.url]:'tarballs/a'}}));}));
+test('tarball path traversal rejects',()=>fixture(f=>assert.throws(()=>f.run({artifactRoot:f.root,tarballs:{[f.a.url]:'tarballs/../escape'}}))));
+test('unexpected tarball mapping rejects',()=>fixture(f=>assert.throws(()=>f.run({artifactRoot:f.root,tarballs:{[f.a.url]:'tarballs/a',extra:'tarballs/b'}}))));

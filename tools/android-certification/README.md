@@ -183,3 +183,34 @@ still do not exist. Existing limits and nativeExecutionEnabled:false are unchang
 Previous R5B security findings describe the superseded 8.0.0 graph; no exception
 or advisory suppression was applied. No package tarball or installed dependency
 was used to generate this lock.
+
+## R6A read-only npm artifact inventory
+
+`offline-npm.mjs` consumes both reviewed v3 lockfile byte streams with independently
+supplied expected SHA-256 fingerprints and package identities. It enumerates every
+locked optional platform dependency too, deduplicates identical artifact URLs, and
+rejects conflicting SRI, unsafe paths, non-registry URLs, symlinks, corrupt bytes,
+unexpected artifacts and cache-index substitutions. Actual SHA-512, SHA-256 and size
+are calculated from bytes. Missing blobs/index entries produce an incomplete report;
+they never become verified artifacts or evidence of a successful offline installation.
+
+Format inspected against installed npm cacache: cache root is npm's `_cacache`,
+with `content-v2/sha512/<2>/<2>/<rest>` and `index-v5/<2>/<2>/<rest>` (SHA-256 of
+`make-fetch-happen:request-cache:<resolved URL>`). Every index line's SHA-1 checksum
+is checked, with the latest matching record authoritative, including deletions.
+SHA-1 here protects npm index framing only; package integrity requires SHA-512.
+
+Image preparation must place this exact reviewed helper at
+`inputs/mobile/offline-npm.mjs` (the existing Dockerfile copies it). Source-manifest
+review and the existing recipe/image provenance remain authoritative. The image
+checker requires a dedicated minimal cache at `cache/npm/_cacache` and complete
+`integrity.json` file and tarball mappings. Missing helper or fingerprints fail closed.
+Only relevant reviewed tarball index records/content belong in that seed cache;
+metadata responses, temporary entries and unrelated packages must not be exported.
+`strictCache:false` supports read-only diagnostic inspection of a shared local cache;
+it does NOT establish a clean certification cache, and image admission always uses
+strict inventory validation. Shared-cache content must never be published wholesale.
+
+Pinned npm 10.9.9 actual offline replay, genuine Gradle/Maven closure, image evidence,
+licenses, resource measurement and execution approval remain separate prerequisites.
+This verifier does not download, install, unpack or execute artifacts.

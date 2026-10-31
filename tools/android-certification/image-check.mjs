@@ -5,6 +5,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { verifyOfflineNpm } from './offline-npm.mjs';
 const read = file => fs.readFileSync(file);
 const json = file => JSON.parse(read(file));
 const t=json('/opt/mobile/versions.json');
@@ -36,14 +37,12 @@ function walk(directory) {
 }
 for(const directory of allowedRoots)walk('/opt/mobile/'+directory);
 assert.deepEqual(files,manifest.files,'Incomplete or modified offline input manifest');
-// Every npm package in BOTH real locks must have its registry tarball verified.
-for(const lock of [native,json('/opt/mobile/locks/fixture-package-lock.json')]) {
- for(const [name,pkg] of Object.entries(lock.packages)) {
-  if(!name)continue;assert(/^sha512-/.test(pkg.integrity));
-  const tar=manifest.npmTarballs[pkg.resolved];assert(tar && tar.startsWith('tarballs/') && !tar.includes('..'));
-  const sri='sha512-'+createHash('sha512').update(read('/opt/mobile/'+tar)).digest('base64');assert.equal(sri,pkg.integrity);
- }
-}
+// Helper is reviewed by the source manifest and copied as inputs/mobile/offline-npm.mjs.
+const npmReport=verifyOfflineNpm({
+ locks:[['native','korelumina-native-wrapper','locks/native-package-lock.json'],['fixture','klm-android-certification','locks/fixture-package-lock.json']].map(([id,packageName,file])=>({id,packageName,bytes:read('/opt/mobile/'+file),expectedSha256:manifest.files[file]})),
+ cacheRoot:'/opt/mobile/cache/npm/_cacache',artifactRoot:'/opt/mobile',tarballs:manifest.npmTarballs
+});
+assert(npmReport.complete,'Missing offline npm artifacts or index entries');
 const xml=read('/opt/mobile/locks/verification-metadata.xml').toString();
 assert(!/<!DOCTYPE|<!ENTITY/.test(xml));assert(xml.includes('<verify-metadata>true</verify-metadata>'));
 assert(!xml.includes('<trusted-artifacts>') && !xml.includes('<ignored-keys>'));
