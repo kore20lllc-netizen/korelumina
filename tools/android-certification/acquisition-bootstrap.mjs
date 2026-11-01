@@ -61,7 +61,7 @@ async function anchorTrustGeneration({root,key,witness,trust,sourceRevision,hist
   // separately authorized recovery may reconcile this marker; workers cannot reset it.
   const uncertain=path.join(root,'.rotation-uncertain'),marker=fs.openSync(uncertain,'wx',0o600);
   try{fs.writeFileSync(marker,head);fs.fsyncSync(marker);}finally{fs.closeSync(marker);}sync(root);
-  assert(await call(signal=>witness.compareAndSwap(DOMAIN,trust.trustId,previous,head,{signal}))===true,'Rotation anchor commit uncertain; explicit recovery required');
+  assert(await call(signal=>witness.compareAndSwap(DOMAIN,trust.trustId,previous,head,{signal,entry}))===true,'Rotation anchor commit uncertain; explicit recovery required');
   const confirmed=await call(signal=>witness.read(DOMAIN,trust.trustId,{signal}));assert(confirmed.initialized&&confirmed.head===head&&confirmed.domain===DOMAIN&&confirmed.trustId===trust.trustId,'Rotation witness confirmation failed');
   check();fs.unlinkSync(uncertain);sync(root);
   return {generation:next.generation,head};

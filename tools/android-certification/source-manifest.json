@@ -9,10 +9,11 @@
     "apps/lumina-runtime/src/mobile/__tests__/AndroidNativeDependencyReplay.test.ts": "d8d0cf55e24c684a88ea69615e4e0c606c64c4df6ca41ba3d6f35f5ce2d8f66d",
     "apps/lumina-runtime/src/mobile/__tests__/AndroidPackaging.test.ts": "2b732b027a3e0666d0869e7589048e0918d4d1c3a1eb9c77c2159185f39fe043",
     "tools/android-certification/Dockerfile": "f4f24b30c059011126d7dcd399e4f79b0330cca3c3db25182b3448b6e4989c55",
-    "tools/android-certification/README.md": "2202f1a7e1342bc38e429ed48d98f827ea4539a537f8452131f0a038e7bd8847",
+    "tools/android-certification/README.md": "b94809167e553a3c402c2bffd786385c064256264cb9a574565333dc9762f361",
     "tools/android-certification/acquire-npm-artifacts.mjs": "b0dfa2807bc4c74a0fe298aae9f760179dac030f7ca744ba74275967834b2771",
     "tools/android-certification/acquire-npm-artifacts.test.mjs": "5d78d4c05db0664f19776a3cc840d86b3c219aa8d28f0d523c5ac8da9cd6f48c",
-    "tools/android-certification/acquisition-bootstrap.mjs": "5789ccb9a1ebb99bc30259e6cebe166905a8f68a434aedb9c70577104cc13bc1",
+    "tools/android-certification/acquisition-authority-service.mjs": "99c4c0882725274afe1ac3a3b4007d8df6717b69cbec9f7076e30bd4b7044314",
+    "tools/android-certification/acquisition-bootstrap.mjs": "c545ce09f53c53eb4c6035573f365b9c864b689a600fd83799d0c885a8af20ab",
     "tools/android-certification/acquisition-trust.mjs": "5d73eb7bd5c5b2622b6a33e7bfbbb603592a04e8278801b0ecb0c0dee11c28ec",
     "tools/android-certification/certify.mts": "6416e229f11ff638c3dfacb089e24acbf63b6a5a24f6a4ed928e6701e57ca5cd",
     "tools/android-certification/cleanup.mjs": "c18d08afe84dec561983c1f4b0ab6639450fb846b70f60a1928e27402f760359",
@@ -33,6 +34,8 @@
     "tools/android-certification/prepare-npm-cache.mjs": "2359c6309c1d2705b7bdd5e48bcc81b67cc195a8b8b90f1e8113da8eb7e15e6b",
     "tools/android-certification/prepare-npm-cache.test.mjs": "70b8bb50f5d8bb1017e2b769dc344515af700f42ffcdb522ce1c09be8b858de3",
     "tools/android-certification/resource-preflight.mjs": "6ad8a460289533c17b920d24cc62b5caeb61a3a4965dd3cb5edfd5168bd05216",
+    "tools/android-certification/supabase-acquisition-authority.mjs": "b7eac2d969bf7a412c7f0977334e9c3e0033ad8ee44cd96809316ed8aa0d974c",
+    "tools/android-certification/supabase-acquisition-authority.test.mjs": "42e841505e38eb41a50496a1d1f909cba11a725f65449d03be17e091cdcbc5cc",
     "tools/android-certification/toolchain.json": "e35bb9fbf34ae0ad57d5cbab509b68f0d84430ebdb950e6ebba8c18f0403315a",
     "tools/android-certification/verify.mjs": "7e5bbac0aacc9f6d59265820e8a55219f6aa0a4789dcbb41db80ed940ca9ced1"
   }

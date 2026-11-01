@@ -494,3 +494,136 @@ unavailability, interrupted publication, timeouts, cancellation and late commits
 These establish integration behavior, not deployed identity isolation or restore
 resistance. Production admission must remain disabled until those external controls
 are implemented and independently qualified.
+
+## R6G production provider — Slice 2 (dormant repository implementation)
+
+Scope: add `supabase-acquisition-authority.mjs`,
+`acquisition-authority-service.mjs` and `supabase-acquisition-authority.test.mjs`;
+pass the existing journal entry alongside `{signal}` to witness CAS in
+`acquisition-bootstrap.mjs`; update this documentation and the source manifest.
+There is no production adapter installation, workflow change, migration, account,
+key, permit, or network activation. `PROTECTED_BOOTSTRAP` and acquisition budget
+authority remain null, and `toolchain.json` retains `nativeExecutionEnabled:false`.
+APK permit verification and the artifact downloader's network policy are unchanged.
+
+Inspection found Runtime's Supabase signature verification and fail-closed identity
+resolution, connection-provider HTTPS patterns, and authenticated local mobile
+journals. None provides a separately controlled acquisition database transaction,
+worker OIDC verifier or independent checkpoint service. Runtime's app-user tokens,
+internal token, local-header identity, OAuth management credentials and local audit
+maps must not be substituted for those authorities. No new SDK or dependency is
+introduced. The adapter uses Node HTTPS and the existing acquisition trust loader,
+SHA-256 helper and raw-payload Ed25519 envelope pattern.
+
+### Installation and wire contract
+
+`createAcquisitionProvider(configuration)` is a dormant deployment factory, not an
+acquisition request option or registration API. Independently reviewed deployment
+code must install a descriptor containing the exact Supabase project reference,
+protected GitHub configuration/checkpoint URLs, independently approved acquisition
+pin, separate checkpoint public key/fingerprint, and scoped credential suppliers
+(`credentials.github` and `credentials.authority`). There are no defaults or
+process-environment discovery. No secrets or production roots are included here.
+The returned object exposes only `source.readProtected` and witness `read`/CAS.
+No trust publishing, history reset, initialization or recovery method is exposed.
+
+Configuration and checkpoint reads are authenticated GETs limited to the GitHub
+Contents API for `kore20lllc-netizen/korelumina`, with an explicit reviewed `ref`.
+The configuration file contains existing `klm-npm-acquisition-trust:v1` bytes;
+its pin comes from the independent deployment descriptor, not that file or the DB.
+Source revision is SHA-256 of those exact bytes. The provider always requires prior
+local history and never grants worker initialization. Initial witness, audit,
+checkpoint and local journal provisioning/reconciliation require separate approval.
+
+The proposed, **not deployed**, service URL is derived exclusively as
+`https://<reviewed-project-ref>.supabase.co/functions/v1/acquisition-authority`.
+All service requests use authenticated POST. Its two operations are:
+
+- `{operation:"read",domain,trustId}`
+- `{operation:"compareAndSwap",domain,trustId,expectedHead,nextHead,entry}`
+
+`entry` is the exact R6F authenticated journal entry. Its SHA-256 must match
+`nextHead`; its previous head must match current state. Service validation binds its
+full state, source revision, generation and activation interval to independently
+read approved trust, requiring a strictly greater generation. The service never
+accepts a worker-selected pin, role, checkpoint, trust root or destination.
+
+Responses contain `{state,audit,observedAt}`. State binds domain, trust identity,
+environment, generation, configuration/root fingerprints and activation interval,
+plus `initialized:true`, head, audit sequence and audit SHA-256. The exact audit
+body binds domain, trust identity, sequence, generation, head, previous head,
+previous audit digest, configuration/root fingerprints, authenticated actor and
+operation (`advance` or previously approved `recovery`). The audit digest covers
+`JSON.stringify(audit)` bytes; the database must preserve that representation.
+An accepted CAS must advance the audit sequence exactly once and link its prior
+head/digest. Missing, stale, malformed or contradictory evidence rejects.
+
+The independently retained checkpoint uses the existing envelope shape
+`{payload,signature}` with a canonical base64 Ed25519 signature over raw payload.
+The parsed payload has schema `klm-acquisition-checkpoint:v1`, every state field,
+and integer `issuedAt`/`expiresAt` with a maximum 60-second validity interval.
+Its key must differ from acquisition trust and match an independently installed
+SPKI fingerprint. This is a purpose-specific receipt using the existing signature
+primitive, not a new permit framework. Each witness read, including restart, and
+each CAS confirmation re-fetches and verifies the checkpoint against database
+head, generation, configuration, audit position/digest and activation interval.
+
+The database commits first. Independent checkpoint authority then finalizes that
+head/audit position. The worker cannot publish that checkpoint. The provider makes
+one verification attempt; lag, mismatch, interruption or unknown network outcome
+rejects instead of acknowledging CAS. Slice 1's durable uncertainty marker then
+requires separately authorized recovery even if checkpoint finalization occurs
+later. There are no retries, redirects, local fallbacks or speculative success.
+Every HTTP operation, including credential retrieval, is bounded by ten seconds
+and cancellation, with verified TLS and a 128-KiB response cap. Bootstrap retains
+its overall sixty-second deadline. These control-plane endpoints do not expand
+the npm artifact acquisition allowlist.
+
+### Service-side authority boundaries and unresolved backend
+
+`createAcquisitionAuthorityService` is an unmounted service policy core. It reuses
+Runtime's `verify(token) -> {ok,identity:{userId,expiresAt}}` verifier interface.
+It requires an independently installed verifier and four disjoint configured
+subjects (worker, curator, recovery, checkpoint). No request may provide identity
+claims; only verified worker identity may call this endpoint. Even authenticated
+curator/recovery/checkpoint identities cannot perform worker operations here.
+Trust mutations and exceptional recovery are denied for everyone at this endpoint;
+their separately authorized management paths are not implemented or enabled.
+
+The service independently reads protected trust/checkpoint evidence and validates
+it inside a required `database.transaction(domain,trustId,callback)` port. The
+transaction supplies `read()` and `compareAndSwapAndAppendAudit(...)`. The latter
+receives expected head, audit sequence/digest, approved entry, next head and verified
+actor. It MUST enforce the CAS and append audit in one isolated durable database
+transaction, rolling back on callback rejection. Resolution must occur only after
+durable commit. Separate REST UPDATE/INSERT calls or worker-local storage do not
+satisfy this contract. The service checks resulting evidence before allowing the
+transaction callback to complete. No database implementation is supplied or claimed;
+tests use a serialized synthetic transaction with rollback. Production concurrency,
+durability, grants and restore behavior remain unqualified.
+
+A production worker verifier must validate GitHub Actions OIDC issuer, audience,
+repository, workflow revision, branch/environment identity and approval evidence.
+The general Runtime Supabase user verifier alone does not establish those claims.
+Service authorization here cannot establish the verifier's correctness, actual
+credential scopes, database isolation or protected GitHub permissions. Those remain
+mandatory external qualification evidence. Worker credentials must have no database
+owner/service-role, trust-write, reset, recovery or checkpoint-publication grants.
+The checkpoint signer and its retention must remain independent of DB restoration;
+restoring or compromising both authorities is outside this protection.
+
+Supabase's [function authentication guidance](https://supabase.com/docs/guides/functions/auth)
+and [database function permissions](https://supabase.com/docs/guides/database/functions)
+reinforce that platform authentication and RLS alone are insufficient for these
+operation-specific authority boundaries. This slice creates no deployment config,
+Supabase function registration, schema or grants. A deployment wrapper, qualified
+OIDC verification, atomic database implementation, protected configuration refs,
+independent checkpoint publication/retention, and explicit recovery procedures
+must be reviewed and qualified before any installation or activation.
+
+Offline fixtures cover all fifteen requested failure categories, direct service-side
+mutation/recovery denials, concurrent CAS, atomic audit rollback, signed checkpoint
+mismatch and database restoration, transport limits, cancellation, ambiguous commits,
+and end-to-end Slice 1 journal/restart integration. Test signatures use published
+RFC 8032 vectors only; no keys are generated or provisioned. These tests establish
+repository contract behavior, not production service-side qualification.
