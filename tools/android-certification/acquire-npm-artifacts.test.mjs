@@ -159,28 +159,143 @@ async function bootstrapFixture(fn){return fixture(async f=>{
  const advance=generation=>{const t=trustFixture({...initial.config,generation,notBefore:initial.config.notBefore+generation});bundle={...bundle,bytes:t.bytes,pin:t.pin,sourceRevision:hash(t.bytes),historyRequired:true,initializeAuthorized:false,observedAt:Date.now()};};
  await fn({...f,rotationRoot,initial,remote,adapter,run,advance,bundle:()=>bundle,setBundle:b=>{bundle=b;}});
  });}
-test('R6F missing protected bootstrap fails closed',()=>assert.throws(()=>bootstrapAcquisitionTrust(),/protected bootstrap unavailable/));
-test('R6F request-supplied provider cannot configure production bootstrap',()=>assert.throws(()=>bootstrapAcquisitionTrust({source:{readProtected:()=>{throw Error('must not call');}}}),/protected bootstrap unavailable/));
-test('R6F malformed protected bootstrap rejects',()=>bootstrapFixture(f=>assert.throws(()=>f.run({source:{readProtected:()=>({})}}))));
-test('R6F stale protected configuration rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),observedAt:Date.now()-60001});assert.throws(()=>f.run());}));
-test('R6F substituted trust configuration rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),bytes:Buffer.from(JSON.stringify({...f.initial.config,publicKeyPem:'substituted'}))});assert.throws(()=>f.run());}));
-test('R6F incorrect independent trust fingerprint rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),pin:{...f.initial.pin,rootSpkiSha256:'0'.repeat(64)}});assert.throws(()=>f.run());}));
-test('R6F synthetic source cannot bootstrap production',()=>bootstrapFixture(f=>assert.throws(()=>f.run({}, {mode:'production'}))));
-test('R6F authorized initial generation is journaled and anchored',()=>bootstrapFixture(f=>{const r=f.run();assert.equal(r.anchor.generation,1);assert.equal(r.anchor.head,f.remote.head);assert(f.remote.initialized);}));
-test('R6F authorized generation advances durable anchor',()=>bootstrapFixture(f=>{const a=f.run();f.advance(2);const b=f.run();assert.equal(b.anchor.generation,2);assert.notEqual(a.anchor.head,b.anchor.head);}));
-test('R6F older generation rollback rejects',()=>bootstrapFixture(f=>{const old=f.bundle();f.run();f.advance(2);f.run();f.setBundle({...old,historyRequired:true,initializeAuthorized:false});assert.throws(()=>f.run(),/Older/);}));
-test('R6F same generation substitution rejects',()=>bootstrapFixture(f=>{f.run();const changed=trustFixture({...f.initial.config,notAfter:f.initial.config.notAfter+1});f.setBundle({...f.bundle(),bytes:changed.bytes,pin:changed.pin});assert.throws(()=>f.run(),/same-generation/);}));
-test('R6F concurrent local rotation owner cannot be bypassed',()=>bootstrapFixture(f=>{const owner=f.rotationRoot+'/.rotation-owner';fs.writeFileSync(owner,'owned');assert.throws(()=>f.run());assert.equal(fs.readFileSync(owner,'utf8'),'owned');assert(!f.remote.initialized);}));
-test('R6F independent CAS conflict cannot acknowledge rotation',()=>bootstrapFixture(f=>{assert.throws(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:()=>false}}),/commit uncertain/);assert(!f.remote.initialized);assert.throws(()=>f.run(),/head mismatch/);}));
-test('R6F interrupted publication requires explicit recovery',()=>bootstrapFixture(f=>{const original=fs.linkSync;fs.linkSync=()=>{throw Error('synthetic interruption');};try{assert.throws(()=>f.run());}finally{fs.linkSync=original;}assert(fs.existsSync(f.rotationRoot+'/.rotation-pending'));assert.throws(()=>f.run());assert(!f.remote.initialized);}));
-test('R6F corrupt persisted history rejects',()=>bootstrapFixture(f=>{f.run();fs.writeFileSync(f.rotationRoot+'/000000.json','{}');assert.throws(()=>f.run());}));
-test('R6F deleted historical state is detected by independent witness',()=>bootstrapFixture(f=>{f.run();fs.unlinkSync(f.rotationRoot+'/000000.json');assert.throws(()=>f.run(),/Deleted historical/);}));
-test('R6F prior initialization requirement rejects absent history',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),historyRequired:true});assert.throws(()=>f.run(),/Prior rotation history/);}));
-test('R6F unauthorized initialization rejects',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),initializeAuthorized:false});assert.throws(()=>f.run());assert(!f.remote.initialized);}));
-test('R6F restart reads same durable generation and witness',()=>bootstrapFixture(f=>{const a=f.run(),b=f.run({...f.adapter,source:{readProtected:()=>({...f.bundle(),historyRequired:true,initializeAuthorized:false})}});assert.deepEqual(a.anchor,b.anchor);assert.equal(fs.readdirSync(f.rotationRoot).length,1);}));
-test('R6F missing independent witness rejects production-equivalent admission',()=>bootstrapFixture(f=>{assert.throws(()=>f.run({witness:null}),/witness unavailable/);assert.equal(fs.readdirSync(f.rotationRoot).length,0);}));
-test('R6F replacing local state with an old authentic revision is rejected',()=>bootstrapFixture(f=>{f.run();f.advance(2);f.run();fs.unlinkSync(f.rotationRoot+'/000001.json');assert.throws(()=>f.run(),/head mismatch/);}));
-test('R6F unprotected source cannot reuse APK authorization domain',()=>bootstrapFixture(f=>{f.setBundle({...f.bundle(),domain:'one-debug-apk'});assert.throws(()=>f.run());}));
+test('R6F missing protected bootstrap fails closed',async()=>assert.rejects(()=>bootstrapAcquisitionTrust(),/protected bootstrap unavailable/));
+test('R6F request-supplied provider cannot configure production bootstrap',async()=>assert.rejects(()=>bootstrapAcquisitionTrust({source:{readProtected:()=>{throw Error('must not call');}}}),/protected bootstrap unavailable/));
+test('R6F malformed protected bootstrap rejects',()=>bootstrapFixture(async f=>await assert.rejects(()=>f.run({source:{readProtected:()=>({})}}))));
+test('R6F stale protected configuration rejects',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),observedAt:Date.now()-60001});await assert.rejects(()=>f.run());}));
+test('R6F substituted trust configuration rejects',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),bytes:Buffer.from(JSON.stringify({...f.initial.config,publicKeyPem:'substituted'}))});await assert.rejects(()=>f.run());}));
+test('R6F incorrect independent trust fingerprint rejects',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),pin:{...f.initial.pin,rootSpkiSha256:'0'.repeat(64)}});await assert.rejects(()=>f.run());}));
+test('R6F synthetic source cannot bootstrap production',()=>bootstrapFixture(async f=>await assert.rejects(()=>f.run({}, {mode:'production'}))));
+test('R6F authorized initial generation is journaled and anchored',()=>bootstrapFixture(async f=>{const r=await f.run();assert.equal(r.anchor.generation,1);assert.equal(r.anchor.head,f.remote.head);assert(f.remote.initialized);}));
+test('R6F authorized generation advances durable anchor',()=>bootstrapFixture(async f=>{const a=await f.run();f.advance(2);const b=await f.run();assert.equal(b.anchor.generation,2);assert.notEqual(a.anchor.head,b.anchor.head);}));
+test('R6F older generation rollback rejects',()=>bootstrapFixture(async f=>{const old=f.bundle();await f.run();f.advance(2);await f.run();f.setBundle({...old,historyRequired:true,initializeAuthorized:false});await assert.rejects(()=>f.run(),/Older/);}));
+test('R6F same generation substitution rejects',()=>bootstrapFixture(async f=>{await f.run();const changed=trustFixture({...f.initial.config,notAfter:f.initial.config.notAfter+1});f.setBundle({...f.bundle(),bytes:changed.bytes,pin:changed.pin});await assert.rejects(()=>f.run(),/same-generation/);}));
+test('R6F concurrent local rotation owner cannot be bypassed',()=>bootstrapFixture(async f=>{const owner=f.rotationRoot+'/.rotation-owner';fs.writeFileSync(owner,'owned');await assert.rejects(()=>f.run());assert.equal(fs.readFileSync(owner,'utf8'),'owned');assert(!f.remote.initialized);}));
+test('R6F independent CAS conflict cannot acknowledge rotation',()=>bootstrapFixture(async f=>{await assert.rejects(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:()=>false}}),/commit uncertain/);assert(!f.remote.initialized);await assert.rejects(()=>f.run(),/explicit recovery/);}));
+test('R6F interrupted publication requires explicit recovery',()=>bootstrapFixture(async f=>{const original=fs.linkSync;fs.linkSync=()=>{throw Error('synthetic interruption');};try{await assert.rejects(()=>f.run());}finally{fs.linkSync=original;}assert(fs.existsSync(f.rotationRoot+'/.rotation-pending'));await assert.rejects(()=>f.run());assert(!f.remote.initialized);}));
+test('R6F corrupt persisted history rejects',()=>bootstrapFixture(async f=>{await f.run();fs.writeFileSync(f.rotationRoot+'/000000.json','{}');await assert.rejects(()=>f.run());}));
+test('R6F deleted historical state is detected by independent witness',()=>bootstrapFixture(async f=>{await f.run();fs.unlinkSync(f.rotationRoot+'/000000.json');await assert.rejects(()=>f.run(),/Deleted historical/);}));
+test('R6F prior initialization requirement rejects absent history',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),historyRequired:true});await assert.rejects(()=>f.run(),/Prior rotation history/);}));
+test('R6F unauthorized initialization rejects',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),initializeAuthorized:false});await assert.rejects(()=>f.run());assert(!f.remote.initialized);}));
+test('R6F restart reads same durable generation and witness',()=>bootstrapFixture(async f=>{const a=await f.run(),b=await f.run({...f.adapter,source:{readProtected:()=>({...f.bundle(),historyRequired:true,initializeAuthorized:false})}});assert.deepEqual(a.anchor,b.anchor);assert.equal(fs.readdirSync(f.rotationRoot).length,1);}));
+test('R6F missing independent witness rejects production-equivalent admission',()=>bootstrapFixture(async f=>{await assert.rejects(()=>f.run({witness:null}),/witness unavailable/);assert.equal(fs.readdirSync(f.rotationRoot).length,0);}));
+test('R6F replacing local state with an old authentic revision is rejected',()=>bootstrapFixture(async f=>{await f.run();f.advance(2);await f.run();fs.unlinkSync(f.rotationRoot+'/000001.json');await assert.rejects(()=>f.run(),/head mismatch/);}));
+test('R6F unprotected source cannot reuse APK authorization domain',()=>bootstrapFixture(async f=>{f.setBundle({...f.bundle(),domain:'one-debug-apk'});await assert.rejects(()=>f.run());}));
 test('R6F acquisition remains disabled without installed protected adapters',async()=>assert.rejects(acquireNpmArtifacts(),/authorization_unavailable/));
 
-test('R6F freshness is rechecked after durable anchoring',()=>bootstrapFixture(f=>{const now=f.bundle().observedAt+60000;assert.throws(()=>f.run({}, {now}),/stale during bootstrap/);}));
+test('R6F freshness is rechecked after durable anchoring',()=>bootstrapFixture(async f=>{
+ const source={readProtected:()=>({...f.bundle(),observedAt:Date.now()-59900})};
+ const witness={...f.adapter.witness,compareAndSwap:async(...args)=>{await new Promise(resolve=>setTimeout(resolve,120));return f.adapter.witness.compareAndSwap(...args);}};
+ await assert.rejects(()=>f.run({source,witness}),/stale during bootstrap/);assert(f.remote.initialized);
+}));
+
+// R6G Slice 1 tests exercise asynchronous contracts with synthetic authorities only.
+const deferred=()=>{let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no;});return {promise,resolve,reject};};
+const asyncAdapters=f=>({source:{readProtected:async()=>f.bundle()},witness:{read:async(...args)=>f.adapter.witness.read(...args),compareAndSwap:async(...args)=>f.adapter.witness.compareAndSwap(...args)}});
+test('R6G asynchronous protected read CAS and confirmation preserve restart',()=>bootstrapFixture(async f=>{
+ const adapter=asyncAdapters(f),first=await f.run(adapter);f.setBundle({...f.bundle(),historyRequired:true,initializeAuthorized:false});
+ const restart=await f.run(adapter);assert.deepEqual(restart.anchor,first.anchor);assert.equal(fs.readdirSync(f.rotationRoot).length,1);
+}));
+test('R6G missing protected configuration rejects before journal creation',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({source:{readProtected:async()=>null}}),/Malformed protected/);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G invalid asynchronous trust fingerprint fails closed',()=>bootstrapFixture(async f=>{
+ f.setBundle({...f.bundle(),pin:{...f.initial.pin,rootSpkiSha256:'0'.repeat(64)}});
+ await assert.rejects(()=>f.run(asyncAdapters(f)));assert(!f.remote.initialized);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G worker options cannot install curator configuration or reset witness',async()=>{
+ let calls=0;await assert.rejects(()=>acquireNpmArtifacts({source:{readProtected:()=>{calls++;}},witness:{reset:()=>{calls++;}},enabled:true}),/authorization_unavailable/);assert.equal(calls,0);
+});
+test('R6G worker recovery option cannot clear uncertain commit',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:async()=>false}}),/commit uncertain/);
+ const before=fs.readdirSync(f.rotationRoot);await assert.rejects(()=>acquireNpmArtifacts({recovery:{authorized:true,rotationRoot:f.rotationRoot}}),/authorization_unavailable/);
+ await assert.rejects(()=>f.run(),/explicit recovery/);assert.deepEqual(fs.readdirSync(f.rotationRoot),before);
+}));
+test('R6G protected authority rejection propagates without local mutation',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({source:{readProtected:async()=>{throw Error('Worker mutation unauthorized');}}}),/Worker mutation unauthorized/);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G unauthorized recovery rejection from authority is not bypassed',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({witness:{read:async()=>{throw Error('Independent recovery authorization required');},compareAndSwap:async()=>assert.fail('CAS reached')}}),/Independent recovery authorization/);assert(!f.remote.initialized);
+}));
+test('R6G conflicting asynchronous transitions have exactly one winner',()=>bootstrapFixture(async f=>{
+ const other=f.root+'/other-rotation';fs.mkdirSync(other,{mode:0o700});const gate=deferred();let reads=0;
+ const witness={read:async(...args)=>{const snapshot=f.adapter.witness.read(...args);if(++reads<=2){if(reads===2)gate.resolve();await gate.promise;}return snapshot;},compareAndSwap:async(...args)=>f.adapter.witness.compareAndSwap(...args)};
+ const results=await Promise.allSettled([f.run({witness}),f.run({witness,rotationRoot:other})]);
+ assert.equal(results.filter(r=>r.status==='fulfilled').length,1);assert.equal(results.filter(r=>r.status==='rejected').length,1);
+ assert.match(String(results.find(r=>r.status==='rejected').reason),/commit uncertain/);
+}));
+test('R6G stale database witness head rejects before generation admission',()=>bootstrapFixture(async f=>{
+ const old=await f.run(asyncAdapters(f));f.advance(2);await f.run(asyncAdapters(f));
+ await assert.rejects(()=>f.run({witness:{...f.adapter.witness,read:async(domain,trustId)=>({domain,trustId,initialized:true,head:old.anchor.head})}}),/head mismatch/);
+}));
+for(const reason of ['Independent checkpoint mismatch','Unverified independent checkpoint','Corrupt witness evidence','Production infrastructure unavailable']){
+ test('R6G verified-provider failure propagates: '+reason,()=>bootstrapFixture(async f=>{
+  await assert.rejects(()=>f.run({witness:{read:async()=>{throw Error(reason);},compareAndSwap:async()=>assert.fail('CAS reached')}}),new RegExp(reason));assert(!f.remote.initialized);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+ }));
+}
+test('R6G malformed asynchronous witness evidence rejects',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({witness:{...f.adapter.witness,read:async()=>({initialized:true,head:'forged'})}}),/Malformed independent witness/);assert(!f.remote.initialized);
+}));
+test('R6G rejected CAS retains durable uncertainty and prohibits automatic recovery',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:async()=>{throw Error('Connection lost during commit');}}}),/Connection lost/);
+ assert(fs.existsSync(f.rotationRoot+'/.rotation-uncertain'));await assert.rejects(()=>f.run(),/explicit recovery/);
+}));
+test('R6G rejected confirmation after remote commit retains uncertainty',()=>bootstrapFixture(async f=>{
+ let reads=0;const witness={...f.adapter.witness,read:async(...args)=>{if(++reads===2)throw Error('Confirmation unavailable');return f.adapter.witness.read(...args);}};
+ await assert.rejects(()=>f.run({witness}),/Confirmation unavailable/);assert(f.remote.initialized);await assert.rejects(()=>f.run(),/explicit recovery/);
+}));
+test('R6G interrupted local publication never calls remote CAS',()=>bootstrapFixture(async f=>{
+ const original=fs.linkSync;let calls=0;fs.linkSync=()=>{throw Error('Interrupted publication');};
+ try{await assert.rejects(()=>f.run({witness:{...f.adapter.witness,compareAndSwap:async()=>{calls++;}}}),/Interrupted publication/);}finally{fs.linkSync=original;}
+ assert.equal(calls,0);assert(fs.existsSync(f.rotationRoot+'/.rotation-pending'));await assert.rejects(()=>f.run());
+}));
+test('R6G hanging protected read times out without writing history',()=>bootstrapFixture(async f=>{
+ let signal;await assert.rejects(()=>f.run({source:{readProtected:(_domain,options)=>{signal=options.signal;return new Promise(()=>{});}}},{timeoutMs:50}),/Bootstrap timeout/);
+ assert(signal.aborted);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G hanging witness read times out and releases local owner',()=>bootstrapFixture(async f=>{
+ await assert.rejects(()=>f.run({witness:{...f.adapter.witness,read:()=>new Promise(()=>{})}},{timeoutMs:50}),/Bootstrap timeout/);assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G late remote CAS completion cannot silently recover timed-out admission',()=>bootstrapFixture(async f=>{
+ const commit=deferred(),entered=deferred();let args;
+ const run=f.run({witness:{...f.adapter.witness,compareAndSwap:(...a)=>{args=a;entered.resolve();return commit.promise;}}},{timeoutMs:50});
+ const rejected=assert.rejects(()=>run,/Bootstrap timeout/);await entered.promise;await rejected;
+ assert(f.adapter.witness.compareAndSwap(...args));commit.resolve(true);await Promise.resolve();
+ await assert.rejects(()=>f.run(),/explicit recovery/);assert(!fs.existsSync(f.rotationRoot+'/.rotation-owner'));
+}));
+test('R6G pre-cancelled bootstrap never invokes protected source',()=>bootstrapFixture(async f=>{
+ const controller=new AbortController();controller.abort();let calls=0;
+ await assert.rejects(()=>f.run({source:{readProtected:async()=>{calls++;return f.bundle();}}},{signal:controller.signal}),/Bootstrap cancelled/);assert.equal(calls,0);
+}));
+test('R6G cancellation while reading source propagates and prevents late publication',()=>bootstrapFixture(async f=>{
+ const controller=new AbortController(),read=deferred(),entered=deferred();
+ const run=f.run({source:{readProtected:()=>{entered.resolve();return read.promise;}}},{signal:controller.signal});const rejected=assert.rejects(()=>run,/Bootstrap cancelled/);
+ await entered.promise;controller.abort();await rejected;read.resolve(f.bundle());await Promise.resolve();assert.deepEqual(fs.readdirSync(f.rotationRoot),[]);
+}));
+test('R6G cancellation during CAS retains uncertain commit',()=>bootstrapFixture(async f=>{
+ const controller=new AbortController(),entered=deferred();
+ const run=f.run({witness:{...f.adapter.witness,compareAndSwap:()=>{entered.resolve();return new Promise(()=>{});}}},{signal:controller.signal});const rejected=assert.rejects(()=>run,/Bootstrap cancelled/);
+ await entered.promise;controller.abort();await rejected;await assert.rejects(()=>f.run(),/explicit recovery/);
+}));
+test('R6G concurrent bootstrap cannot steal owner during awaited read',()=>bootstrapFixture(async f=>{
+ const read=deferred(),entered=deferred();const run=f.run({witness:{...f.adapter.witness,read:async(...args)=>{entered.resolve();await read.promise;return f.adapter.witness.read(...args);}}});
+ await entered.promise;await assert.rejects(()=>f.run(),/EEXIST/);assert(fs.existsSync(f.rotationRoot+'/.rotation-owner'));read.resolve();await run;
+}));
+test('R6G acquisition and native execution remain disabled by default',async()=>{
+ await assert.rejects(()=>acquireNpmArtifacts(),/authorization_unavailable/);
+ const workflow=fs.readFileSync(new URL('../../.github/workflows/android-certification.yml',import.meta.url),'utf8');
+ assert.match(workflow,/if: github.event_name == 'workflow_dispatch'/);assert.match(workflow,/verify.mjs --execution/);assert.match(text,/const ACQUISITION_AUTHORITY=null/);assert.match(bootstrapText,/const PROTECTED_BOOTSTRAP=null/);
+});
+
+test('R6G asynchronous source observation uses read completion time',()=>bootstrapFixture(async f=>{
+ const source={readProtected:async()=>{await new Promise(resolve=>setTimeout(resolve,10));return {...f.bundle(),observedAt:Date.now()};}};
+ const result=await f.run({source});assert.equal(result.anchor.generation,1);
+}));
+test('R6G asynchronous older trust generation cannot replace accepted history',()=>bootstrapFixture(async f=>{
+ const old=f.bundle();await f.run(asyncAdapters(f));f.advance(2);await f.run(asyncAdapters(f));
+ f.setBundle({...old,historyRequired:true,initializeAuthorized:false});await assert.rejects(()=>f.run(asyncAdapters(f)),/Older trust generation/);
+}));
+test('R6G hanging confirmation retains uncertainty after database commit',()=>bootstrapFixture(async f=>{
+ let reads=0;const witness={...f.adapter.witness,read:async(...args)=>++reads===1?f.adapter.witness.read(...args):new Promise(()=>{})};
+ await assert.rejects(()=>f.run({witness},{timeoutMs:50}),/Bootstrap timeout/);assert(f.remote.initialized);await assert.rejects(()=>f.run(),/explicit recovery/);
+}));

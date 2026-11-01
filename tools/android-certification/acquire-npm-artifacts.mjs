@@ -22,7 +22,7 @@ export function planNpmAcquisition({locks,expectedLockSetFingerprint}) {return m
 // Neither caller keys, environment variables nor transport callbacks can supply it.
 const ACQUISITION_AUTHORITY=null;
 export async function acquireNpmArtifacts(options) {
- const trust=bootstrapAcquisitionTrust();
+ const trust=await bootstrapAcquisitionTrust(options?.signal);
  assert(ACQUISITION_AUTHORITY,'acquisition_authorization_unavailable');
  assert(Object.keys(options).every(k=>['locks','expectedLockSetFingerprint','root','sourceCache','signal','permit'].includes(k)),'Untrusted acquisition option');
  requireProductionAcquisitionTrust(trust);

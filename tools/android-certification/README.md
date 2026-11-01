@@ -440,3 +440,57 @@ Without that qualified storage authority, production bootstrap fails closed. No 
 infrastructure, keys, real permits, network acquisition or workflow execution is
 introduced. Provisioning, backend qualification and explicit recovery remain separate
 Founder-controlled prerequisites.
+
+## R6G production trust integration — Slice 1
+
+The approved repository boundary is these five existing files only:
+`acquisition-bootstrap.mjs`, `acquire-npm-artifacts.mjs`,
+`acquire-npm-artifacts.test.mjs`, `README.md`, and `source-manifest.json`.
+The completed R6G architecture report defines this slice as asynchronous adapter
+integration. The provider, authority service/schema, protected identities and
+checkpoint implementation are subsequent slices, requiring separate review.
+
+Bootstrap now awaits protected configuration, witness reads, atomic CAS and the
+confirmation read. Acquisition awaits the completed trust receipt before permit
+verification. Both synchronous R6F adapters and asynchronous future adapters use
+the existing contracts. Providers receive an additional final `{signal}` argument
+for cancellation; public bootstrap accepts only an optional AbortSignal, never
+request-supplied providers, endpoints, trust bytes or recovery authority.
+
+One 60-second deadline bounds the entire bootstrap, including all remote waits.
+Cancellation and rejected promises fail closed. The private lexical test harness
+can shorten the deadline; acquisition callers cannot override it. Providers must
+honor cancellation and bound their own I/O. Racing a deadline does not retract a
+remote operation that has already reached its authority. Freshness is checked
+against elapsed time at protected read completion and again after anchoring.
+
+The exclusive journal owner remains held across asynchronous witness operations.
+Before CAS, a private fsynced `.rotation-uncertain` marker records the proposed
+head. Only confirmed successful CAS and readback clear that marker. Rejection,
+timeout, cancellation or ambiguous confirmation leaves admission blocked across
+restarts, including when a late CAS ultimately commits. Incomplete publication,
+corrupt authenticated evidence, stale trust and conflicting transitions also
+reject. There is no worker reset, trust publishing or recovery operation. Any
+reconciliation requires separately authorized recovery outside this slice.
+
+`PROTECTED_BOOTSTRAP` and `ACQUISITION_AUTHORITY` remain null. Acquisition remains
+disabled. APK authorization, native execution gates, workflow protections and the
+artifact network allowlist are unchanged; no infrastructure is contacted by these
+new tests and no production key or permit is created.
+
+Production integration still requires independently authenticated protected GitHub
+configuration, a database authority with transactional CAS/audit retention, distinct
+worker/curator/recovery identities, and independently protected finalized checkpoints.
+The qualified provider must reject an unverified checkpoint or a database/checkpoint
+mismatch before returning witness evidence, including after database restoration.
+This slice propagates such rejections; it does not implement checkpoint verification,
+OIDC validation, database access grants or recovery authorization. Worker credentials
+must never acquire curator, recovery, database-owner or service-role powers.
+
+Synthetic offline tests exercise asynchronous success/restart, missing configuration,
+invalid fingerprints, rejected worker/recovery requests, one-winner CAS conflicts,
+stale trust/witness heads, provider checkpoint/evidence rejection, infrastructure
+unavailability, interrupted publication, timeouts, cancellation and late commits.
+These establish integration behavior, not deployed identity isolation or restore
+resistance. Production admission must remain disabled until those external controls
+are implemented and independently qualified.
