@@ -627,3 +627,127 @@ mismatch and database restoration, transport limits, cancellation, ambiguous com
 and end-to-end Slice 1 journal/restart integration. Test signatures use published
 RFC 8032 vectors only; no keys are generated or provisioned. These tests establish
 repository contract behavior, not production service-side qualification.
+
+## R6G Slice 3 — transactional witness source (not installed or certified)
+
+Repository inspection found no KoreLumina SQL migration directory, schema source,
+RLS policies or acquisition RPCs to extend. Generated Supabase types declare no
+application tables/functions; that is not proof of an empty live database. The
+customer-project migration paths mentioned in ADR-0047 belong to exported/imported
+apps and are not a KoreLumina authority installation convention. This slice does
+not guess existing table/RPC/role names or introduce a migration layout.
+
+The five-file source boundary is new `acquisition-witness-schema.sql`,
+`postgres-acquisition-witness.mjs`, `postgres-acquisition-witness.test.mjs`, this
+README and `source-manifest.json`. The SQL is a newly defined reviewed installation
+source under the existing certification boundary, not an applied migration. No
+SQL, migrations, accounts, grants, login bindings or infrastructure are executed
+or provisioned by this milestone. The existing Supabase PostgreSQL architecture
+can supply these transaction/locking primitives without another database system;
+actual project privileges, supported deployment and pooler behavior still require
+qualification. Neither Supabase generated application types nor customer schemas
+are modified.
+
+### Newly defined database objects
+
+Private schema `klm_acquisition_witness` contains:
+
+- `principals`: separately provisioned database-login/verified-subject bindings for
+  each authority's worker, curator, recovery and checkpoint capabilities. Login and
+  subject bindings are unique across capabilities within that authority.
+- `approved_generations`: append-only curator-approved state and source revision.
+  The service independently verifies those same values against protected GitHub
+  configuration; database approval cannot replace that independent source.
+- `history`: immutable accepted generations, previous-generation foreign keys,
+  witness/configuration digests, unique transaction identity, `committed` state,
+  exact journal/audit text, linked audit positions/digests, actor and commit time.
+- `heads`: the current generation pointer, referencing accepted history.
+
+New wrappers are `approve_generation(text,jsonb,text)`, `initialize(text,text,text,text)`,
+`read_snapshot(text)`, `compare_and_swap(text,bigint,text,bigint,text,text,text,text)`
+and `confirm_transition(text,text)`. Private helpers validate state, bind authenticated
+principals, build snapshots, hash exact bytes and atomically write transitions.
+Immutable UPDATE/DELETE/TRUNCATE triggers protect history and approvals. These are
+new source definitions, not claims about existing deployed Supabase objects.
+
+CAS locks the current head with `FOR UPDATE`, checks expected generation, head,
+audit position/digest, strictly increasing generation/activation, exact independently
+curator-approved state and source revision, entry digest and verified actor. It
+inserts history/audit and advances the pointer in the same transaction. Unique
+constraints cover generation, audit sequence, witness digest and transaction ID.
+An initial creation requires curator identity and absent head/history; it cannot
+reset an existing sequence. Curator approval does not itself update witness state.
+No recovery/reset/delete or checkpoint-publication function is defined.
+
+Transaction identity is SHA-256 of `klm-acquisition-transition:v1`, authority ID
+and new head joined with newlines. Duplicate requests cannot append duplicate
+history; no ambiguous operation is automatically retried or reported as idempotent
+success. Audit bytes are retained as text. Snapshot functions return PostgreSQL
+`json`, preserving the audit member order required by Slice 2's raw-byte digest;
+casting the response to `jsonb` would lose that order and must not be introduced.
+
+### Authorization and independent authority
+
+Tables have RLS enabled with no permissive policies, and PUBLIC has no schema,
+table or function rights. No runtime role is assumed or created. A separate
+installation review must bind actual dedicated PostgreSQL service logins, verified
+subjects and exact function EXECUTE grants. The acquisition worker must never
+receive those database credentials. The narrow service wrappers use a private
+SECURITY DEFINER boundary with fixed search paths and qualified objects; they
+check `session_user`, not a caller GUC, request role, `SET ROLE` result or unverified
+JWT claim. Superuser/BYPASSRLS runtime sessions are rejected.
+
+The function owner must be a restricted NOLOGIN owner with no runtime membership.
+RLS owner bypass is deliberate for these function-only writes; runtime gets no
+helper EXECUTE, schema CREATE, table DML, ownership or inherited elevated rights.
+An owner/administrator can still disable protections or restore the database;
+these controls do not turn the database into an independent restore anchor.
+Transaction-pooler connections sharing an authenticator login do not satisfy the
+`session_user` contract. Dedicated authenticated sessions and actual grants must
+be qualified. SQL privilege behavior has not been executed here.
+
+The existing service verifies worker identity before reaching the adapter and
+re-verifies signed independent checkpoints against locked database state before
+CAS. Curator approval and initialization are privileged SQL provisioning paths,
+not new worker endpoint operations; qualified authenticated curator management
+and genesis checkpoint/journal reconciliation remain separately authorized work.
+Recovery and checkpoint identities have no mutation function in this source.
+A database row, local file or transaction receipt cannot replace the independent
+signed checkpoint. Restore mismatch, missing evidence or checkpoint lag continues
+to block admission. The backend alone is not an admission or recovery API.
+
+### Adapter and certification limits
+
+`createPostgresAcquisitionWitness` implements the existing Slice 2 transaction
+port using an explicitly installed authenticated `pool.connect()/query()/release()`
+connection contract. It installs no driver and reads no connection environment.
+One connection spans BEGIN, bounded local timeouts, synchronous COMMIT, callback
+read/CAS and post-commit immutable transaction confirmation. Queries are fixed and
+parameterized. Callback errors roll back; late/failed writes, lost COMMIT responses,
+failed readback or rollback, and timeouts are explicit rejected/unavailable/uncertain
+outcomes. Expired connections are destroyed, late pool acquisitions discarded,
+and closed transaction callbacks cannot regain access. No success is returned
+before commit acknowledgement and write confirmation. The driver must provide real
+connection destruction on `release(true)` and verified TLS; pool/driver deployment
+configuration remains unqualified. `synchronous_commit=on` is not proof of WAL,
+fsync, storage, replication or disaster-recovery guarantees.
+
+Offline driver fixtures exercise parameterization, outcome handling, audit binding,
+rollback dispatch, restart re-verification, service identity/checkpoint rejection,
+restore simulation and disabled acquisition/native execution. Their persisted file
+is an isolated synthetic driver fixture, never a production fallback or independent
+checkpoint. SQL source inspection is not execution or database certification.
+The test suite explicitly skips and labels UNVERIFIED: real initialization, SQL
+transitions/stale exclusion, concurrent CAS, duplicate IDs, rollback/interruption,
+audit atomicity/immutability, grants/RLS, curator-only privileges and WAL/restart
+durability. No local PostgreSQL tools were available and no database was contacted.
+
+Before production, require approved migration packaging and object-name collision
+review, restricted owner/service identities and grants, an installed driver/pool,
+OIDC verification and endpoint integration, curator/genesis procedures, independently
+protected checkpoint publication/retention and recovery, plus real isolated database
+concurrency, privilege, crash and restore qualification. Relevant primitives are
+[PostgreSQL row locks](https://www.postgresql.org/docs/current/explicit-locking.html)
+and [safe function privileges/search paths](https://www.postgresql.org/docs/current/sql-createfunction.html).
+Acquisition authority and native execution remain disabled. APK authorization,
+workflow dispatch gates and existing downloader policy are unchanged.
